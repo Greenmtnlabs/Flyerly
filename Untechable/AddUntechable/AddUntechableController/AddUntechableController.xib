@@ -7,13 +7,13 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddUntechableController">
             <connections>
                 <outlet property="btnEndTime" destination="xaU-k5-wf6" id="Gfn-Li-3YO"/>
+                <outlet property="btnLblEndTime" destination="iGK-8W-DFi" id="Hck-Mw-fYn"/>
+                <outlet property="btnLblStartTime" destination="F5f-DN-o70" id="M8p-IO-DV9"/>
+                <outlet property="btnLblWwud" destination="qhh-ZG-3hy" id="afY-tc-vTi"/>
                 <outlet property="btnStartTime" destination="6s9-eT-a00" id="JeB-Er-xxi"/>
                 <outlet property="cbNoEndDate" destination="5Rm-Y1-pCF" id="BSR-En-NzI"/>
                 <outlet property="inputSpendingTimeTxt" destination="5px-ll-ckm" id="UvK-LK-lCx"/>
-                <outlet property="lbl1S1" destination="8VT-9e-WmU" id="BN1-XT-Djc"/>
-                <outlet property="lbl5S1" destination="O1D-ef-E0V" id="qok-k2-9Yj"/>
-                <outlet property="lblEndTime" destination="LDA-GJ-JIr" id="N8A-Ga-Lwh"/>
-                <outlet property="lblStartTime" destination="BaG-0e-FFp" id="KVd-8m-scr"/>
+                <outlet property="lblNoEndDate" destination="O1D-ef-E0V" id="2If-Ch-IkZ"/>
                 <outlet property="picker" destination="UgT-lF-nUB" id="0Lu-c7-Rgo"/>
                 <outlet property="pickerCloseBtn" destination="4WI-fT-DHK" id="dsW-4t-w1M"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -24,31 +24,41 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What will you do" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8VT-9e-WmU" userLabel="Label - lbl1S1">
-                    <rect key="frame" x="0.0" y="75" width="320" height="25"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qhh-ZG-3hy" userLabel="Button - btnLblWwud">
+                    <rect key="frame" x="0.0" y="84" width="320" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
-                    <color key="textColor" red="0.72156862749999995" green="0.72156862749999995" blue="0.72156862749999995" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                    <state key="normal" title="What will you do">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="btnClic:" destination="-1" eventType="touchUpInside" id="34h-Kr-mPv"/>
+                    </connections>
+                </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Spending time with my family." textAlignment="center" minimumFontSize="17" background="inputBottomBg2.png" id="5px-ll-ckm" userLabel="input - inputSpendingTimeTxt">
-                    <rect key="frame" x="0.0" y="100" width="320" height="25"/>
+                    <rect key="frame" x="0.0" y="113" width="320" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="textColor" red="0.25882352939999997" green="0.96862745100000003" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textField>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BaG-0e-FFp" userLabel="Label - lblStartTime">
-                    <rect key="frame" x="0.0" y="175" width="320" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="F5f-DN-o70" userLabel="Button - btnLblStartTime">
+                    <rect key="frame" x="0.0" y="182" width="320" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                    <state key="normal" title="Start">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="changeDate:" destination="-1" eventType="touchUpInside" id="nWW-Nb-LiA"/>
+                    </connections>
+                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6s9-eT-a00" userLabel="Button - btnStartTime">
-                    <rect key="frame" x="0.0" y="205" width="320" height="30"/>
+                    <rect key="frame" x="0.0" y="212" width="320" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                     <state key="normal" title="startTime">
                         <color key="titleColor" red="0.25882352941176467" green="0.96862745098039216" blue="0.80784313725490198" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -57,17 +67,22 @@
                         <action selector="changeDate:" destination="-1" eventType="touchUpInside" id="zSp-Jx-C2z"/>
                     </connections>
                 </button>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LDA-GJ-JIr" userLabel="Label - lblEndTime">
-                    <rect key="frame" x="0.0" y="285" width="320" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iGK-8W-DFi" userLabel="Button - btnLblEndTime">
+                    <rect key="frame" x="0.0" y="284" width="320" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
-                    <color key="textColor" red="0.72156862745098038" green="0.72156862745098038" blue="0.72156862745098038" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                    <state key="normal" title="End">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="changeDate:" destination="-1" eventType="touchUpInside" id="ELN-ID-h1W"/>
+                    </connections>
+                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xaU-k5-wf6" userLabel="Button - btnEndTime">
-                    <rect key="frame" x="0.0" y="315" width="320" height="30"/>
+                    <rect key="frame" x="0.0" y="314" width="320" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                     <state key="normal" title="endTime">
                         <color key="titleColor" red="0.25882352941176467" green="0.96862745098039216" blue="0.80784313725490198" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -76,15 +91,15 @@
                         <action selector="changeDate:" destination="-1" eventType="touchUpInside" id="572-My-XbY"/>
                     </connections>
                 </button>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No End Date" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="O1D-ef-E0V" userLabel="Label - lbl5S1">
-                    <rect key="frame" x="95" y="345" width="100" height="30"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No End Date" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="O1D-ef-E0V" userLabel="Label - lblNoEndDate">
+                    <rect key="frame" x="95" y="344" width="100" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                     <color key="textColor" red="0.72156862749999995" green="0.72156862749999995" blue="0.72156862749999995" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="5Rm-Y1-pCF" userLabel="Button - cbNoEndDate">
-                    <rect key="frame" x="190" y="346" width="24" height="24"/>
+                    <rect key="frame" x="190" y="345" width="24" height="24"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" backgroundImage="CHECKBOX_EMPTY.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -129,7 +144,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4WI-fT-DHK" userLabel="Button - pickerCloseBtn">
                     <rect key="frame" x="245" y="382" width="76" height="33"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                     <state key="normal" title="Close">
                         <color key="titleColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>

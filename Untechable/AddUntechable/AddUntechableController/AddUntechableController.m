@@ -16,34 +16,28 @@
 }
 
 
-@property (strong, nonatomic) IBOutlet UILabel *lbl1S1;
-@property (strong, nonatomic) IBOutlet UILabel *lbl2S1;
-@property (strong, nonatomic) IBOutlet UILabel *lbl3S1;
-@property (strong, nonatomic) IBOutlet UILabel *lbl4S1;
-@property (strong, nonatomic) IBOutlet UILabel *lbl5S1;
-
-
+@property (strong, nonatomic) IBOutlet UIButton *btnLblWwud;
 @property (strong, nonatomic) IBOutlet UITextField *inputSpendingTimeTxt;
 
-@property (strong, nonatomic) IBOutlet UILabel *lblStartTime;
+@property (strong, nonatomic) IBOutlet UIButton *btnLblStartTime;
+@property (strong, nonatomic) IBOutlet UIButton *btnStartTime;
 
+@property (strong, nonatomic) IBOutlet UIButton *btnLblEndTime;
+@property (strong, nonatomic) IBOutlet UIButton *btnEndTime;
 
-
-
-@property (strong, nonatomic) IBOutlet UILabel *lblEndTime;
-
+@property (strong, nonatomic) IBOutlet UILabel *lblNoEndDate;
 @property (strong, nonatomic) IBOutlet UIButton *cbNoEndDate;
 
+@property (strong, nonatomic) IBOutlet UIDatePicker *picker;
 @property (strong, nonatomic) IBOutlet UIButton *pickerCloseBtn;
+
+
 
 @property (nonatomic, strong) BSKeyboardControls *keyboardControls;
 
 @end
 
 @implementation AddUntechableController
-
-
-@synthesize btnEndTime,btnStartTime,picker;
 
 
 #pragma mark -  Default functions
@@ -71,16 +65,35 @@
     [self showHideDateTimePicker:NO];
     
     self.picker.datePickerMode = UIDatePickerModeDateAndTime;
+    //WHEN any of the date is similer to current date time, the show NOW in date's area
+    [self pickerSetAcTo:@"_btnStartTime"];
+    [self pickerSetAcTo:@"_btnEndTime"];
     self.picker.minimumDate = now1;
     [self.picker setDate:now1 animated:YES];
     
-    pickerOpenFor = @"";
     
     NSArray *fields = @[ _inputSpendingTimeTxt ];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
     [self.keyboardControls setDelegate:self];
     
 }
+
+- (void)pickerSetAcTo:(NSString *)callFor
+{
+    if( [callFor isEqualToString:@"_btnStartTime"] ) {
+        pickerOpenFor = @"_btnStartTime";
+        [self.picker setDate:[untechable.commonFunctions timestampStrToNsDate:untechable.startDate] animated:YES];
+        [self dateChanged];
+    }
+    else if( [callFor isEqualToString:@"_btnEndTime"] ) {
+        pickerOpenFor = @"_btnEndTime";
+        [self.picker setDate:[untechable.commonFunctions timestampStrToNsDate:untechable.endDate] animated:YES];
+        [self dateChanged];
+    }
+}
+
+
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -243,14 +256,53 @@
     [self showHideDateTimePicker:YES];
     
     UIButton *clickedBtn = sender;
-    if( clickedBtn == self.btnStartTime ){
-        pickerOpenFor = @"self.btnStartTime";
+    if( clickedBtn == _btnStartTime ){
+        pickerOpenFor = @"_btnStartTime";
+        _picker.date = [untechable.commonFunctions timestampStrToNsDate:untechable.startDate];
     }
-    else if( clickedBtn == self.btnEndTime ){
-        pickerOpenFor = @"self.btnEndTime";
+    else if( clickedBtn == _btnEndTime ){
+        pickerOpenFor = @"_btnEndTime";
+        _picker.date = [untechable.commonFunctions timestampStrToNsDate:untechable.endDate];
     }
     
 }
+//when user select the date from datepicker
+-(IBAction)onDateChange:(id)sender {
+    [self dateChanged];
+}
+
+-(void)dateChanged
+{
+    NSString *dateStr, *pickerTimeStampStr;
+    pickerTimeStampStr   = [untechable.commonFunctions nsDateToTimeStampStr:[_picker date]];
+	dateStr = [untechable.dateFormatter stringFromDate:[_picker date]];
+    //NSLog(@"date str dateStr %@", dateStr); //    "startTime": "Oct 24, 2014 03:04 PM",
+    
+
+    NSString *nowDateStr = [untechable.dateFormatter stringFromDate:[NSDate date]];
+    if( [nowDateStr isEqualToString:dateStr] ){
+        dateStr = @"NOW";
+    }
+    
+    
+    //NSLog(@"time stamp dateStr %@", timeStampStr); //1414329211
+    //NSLog(@"newDateStr: %@", [untechable.commonFunctions timestampStrToAppDate:dateStr]); // "startTime": "Oct 24, 2014 03:04 PM",
+    
+    
+	if( [pickerOpenFor isEqualToString:@"_btnStartTime"] ){
+        untechable.startDate = pickerTimeStampStr;
+        [_btnStartTime setTitle:dateStr forState:UIControlStateNormal];
+    }
+    else if( [pickerOpenFor isEqualToString:@"_btnEndTime"] ){
+        untechable.endDate = pickerTimeStampStr;
+        
+        if( [_cbNoEndDate isSelected] )
+        dateStr = @"Never";
+        
+        [_btnEndTime setTitle:dateStr forState:UIControlStateNormal];
+    }
+}
+
 
 - (IBAction)closeDateTimePicker:(id)sender {
    [self showHideDateTimePicker:NO];
@@ -265,35 +317,7 @@
     
 }
 
-//when user select the date from datepicker
--(IBAction)onDateChange:(id)sender {
-    
-    NSString *dateStr, *timeStampStr;
-    
-	dateStr = [untechable.dateFormatter stringFromDate:[picker date]];
-    //NSLog(@"date str dateStr %@", dateStr); //    "startTime": "Oct 24, 2014 03:04 PM",
-    
-    timeStampStr = [untechable.commonFunctions nsDateToTimeStampStr:[picker date]];
-    NSString *nowDateStr = [untechable.dateFormatter stringFromDate:[NSDate date]];
-    
-    if( [nowDateStr isEqualToString:dateStr] ){
-        dateStr = @"NOW";
-    }
-    
-    
-    //NSLog(@"time stamp dateStr %@", timeStampStr); //1414329211
-    //NSLog(@"newDateStr: %@", [untechable.commonFunctions timestampStrToAppDate:dateStr]); // "startTime": "Oct 24, 2014 03:04 PM",
-    
-    
-	if( [pickerOpenFor isEqualToString:@"self.btnStartTime"] ){
-      untechable.startDate = timeStampStr;
-      [self.btnStartTime setTitle:dateStr forState:UIControlStateNormal];
-    }
-    else if( [pickerOpenFor isEqualToString:@"self.btnEndTime"] ){
-      untechable.endDate = timeStampStr;
-      [self.btnEndTime setTitle:dateStr forState:UIControlStateNormal];
-    }
-}
+
 
 #pragma mark -  Model funcs
 // set default vaules in model
@@ -345,7 +369,7 @@
     
     [untechable initUntechableDirectory];
     
-    now1 = [[NSDate date] dateByAddingTimeInterval:(60)]; //current time
+    now1 = [NSDate date]; //current date
     
 }
 
@@ -363,47 +387,30 @@
 -(void)updateUI
 {
     
+    [_btnLblWwud setTitleColor:defGray forState:UIControlStateNormal];
+    _btnLblWwud.titleLabel.font = [UIFont fontWithName:APP_FONT size:25];
+
     _inputSpendingTimeTxt.text = untechable.spendingTimeTxt;
+    _inputSpendingTimeTxt.font = [UIFont fontWithName:APP_FONT size:18];
     
-    [_lbl1S1 setTextColor:defGray];
-    _lbl1S1.font = [UIFont fontWithName:APP_FONT size:25];
+    [_btnLblStartTime setTitleColor:defGray forState:UIControlStateNormal];
+    _btnLblStartTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:25];
     
-    [_inputSpendingTimeTxt setTextColor:defGreen];
-    _inputSpendingTimeTxt.font = [UIFont fontWithName:APP_FONT size:14];
-    
-    [_lbl2S1 setTextColor:defGray];
-    _lbl2S1.font = [UIFont fontWithName:APP_FONT size:14];
-    
-    
-    //---------
-    
-    [_lblStartTime setTextColor:defGray];
-    _lblStartTime.font = [UIFont fontWithName:APP_FONT size:25];
-    
-    [self.btnStartTime setTitleColor:defGreen forState:UIControlStateNormal];
-    self.btnStartTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
-    [self.btnStartTime setTitle:[untechable.commonFunctions timestampStrToAppDate:untechable.startDate] forState:UIControlStateNormal];
-    
-    [_lbl3S1 setTextColor:defGray];
-    _lbl3S1.font = [UIFont fontWithName:APP_FONT size:14];
+    [_btnStartTime setTitleColor:defGreen forState:UIControlStateNormal];
+    _btnStartTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
+    [_btnStartTime setTitle:[untechable.commonFunctions timestampStrToAppDate:untechable.startDate] forState:UIControlStateNormal];
     
     
-    //----------
+    [_btnLblEndTime setTitleColor:defGray forState:UIControlStateNormal];
+    _btnLblEndTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:25];
     
+    [_btnEndTime setTitleColor:defGreen forState:UIControlStateNormal];
+    _btnEndTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
+    [_btnEndTime setTitle:[untechable.commonFunctions timestampStrToAppDate:untechable.startDate] forState:UIControlStateNormal];
     
-    [_lblEndTime setTextColor:defGray];
-    _lblEndTime.font   = [UIFont fontWithName:APP_FONT size:25];
-    
-    [self.btnEndTime setTitleColor:defGreen forState:UIControlStateNormal];
-    self.btnEndTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
-    [self.btnEndTime setTitle:[untechable.commonFunctions timestampStrToAppDate:untechable.endDate] forState:UIControlStateNormal];
-    
-    [_lbl4S1 setTextColor:defGray];
-    _lbl4S1.font = [UIFont fontWithName:APP_FONT size:14];
-    
-    [_lbl5S1 setTextColor:defGray];
-    _lbl5S1.font = [UIFont fontWithName:APP_FONT size:14];
-    
+    [_lblNoEndDate setTextColor:defGray];
+    _lblNoEndDate.font = [UIFont fontWithName:APP_FONT size:14];
+
     [_cbNoEndDate setSelected:!(untechable.hasEndDate)];
     
     [_pickerCloseBtn setTitleColor:defGray forState:UIControlStateNormal];
@@ -414,7 +421,23 @@
 - (IBAction)noEndDate:(id)sender {
     untechable.hasEndDate = [_cbNoEndDate isSelected];
     [_cbNoEndDate setSelected:!(untechable.hasEndDate)];
+    
+
+    [self showHideDateTimePicker:NO];
+    //[self showHideDateTimePicker:!([_cbNoEndDate isSelected])];
+    
+    if( !([_cbNoEndDate isSelected]) ){
+        untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*120)] ]; //current time +2hr
+    }
+    [self pickerSetAcTo:@"_btnEndTime"];
+    
+    
+
 }
 
-
+- (IBAction)btnClic:(id)sender {
+    if( sender == _btnLblWwud ){
+        [_inputSpendingTimeTxt becomeFirstResponder];
+    }
+}
 @end

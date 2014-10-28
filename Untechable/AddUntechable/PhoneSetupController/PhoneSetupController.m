@@ -47,10 +47,11 @@
 @property (strong, nonatomic) IBOutlet UITextField *inputLocation;
 
 
-@property (strong, nonatomic) IBOutlet UILabel *lblEmergencyNumber;
+@property (strong, nonatomic) IBOutlet UIButton *btnLblEmergencyNumber;
 @property (strong, nonatomic) IBOutlet UITextField *inputEmergencyNumber;
 
 @property (strong, nonatomic) IBOutlet UIButton *btnImport;
+@property (strong, nonatomic) IBOutlet UIButton *btnImportArrow;
 
 @property (strong, nonatomic) IBOutlet UITableView *contactsTableView;
 @property (strong, nonatomic) IBOutlet UILabel *lblCanContactTxt;
@@ -92,7 +93,7 @@
     
     [self tableViewSR:@"start" callFor:@"contactsTableView"];
     
-    NSArray *fields = @[ self.inputEmergencyNumber ];
+    NSArray *fields = @[ _inputEmergencyNumber ];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
     [self.keyboardControls setDelegate:self];
     
@@ -253,8 +254,6 @@
     
     [self setNextHighlighted:NO];
     
-    BOOL goToNext = YES;
-    
     if( [untechable.twillioNumber isEqualToString:@""] ){
         UIAlertView *temAlert = [[UIAlertView alloc ]
                                  initWithTitle:@""
@@ -264,11 +263,16 @@
                                  otherButtonTitles:nil];
         [temAlert show];
     }
-    else if( goToNext ) {
-        RecordController *recordController;
-        recordController = [[RecordController alloc]initWithNibName:@"RecordController" bundle:nil];
-        recordController.untechable = untechable;
-        [self.navigationController pushViewController:recordController animated:YES];
+    else {
+        
+        BOOL goToNext = YES;
+        
+        if( goToNext ) {
+            RecordController *recordController;
+            recordController = [[RecordController alloc]initWithNibName:@"RecordController" bundle:nil];
+            recordController.untechable = untechable;
+            [self.navigationController pushViewController:recordController animated:YES];
+        }
     }
 }
 
@@ -302,18 +306,24 @@
     [_lblRecTime setTextColor:defGray];
     _lblRecTime.font = [UIFont fontWithName:APP_FONT size:20];
     
-    [_lblEmergencyNumber setTextColor:defGray];
-    _lblEmergencyNumber.font = [UIFont fontWithName:APP_FONT size:20];
     
-    [self.inputEmergencyNumber setTextColor:defGreen];
-    self.inputEmergencyNumber.font = [UIFont fontWithName:APP_FONT size:16];
-    self.inputEmergencyNumber.delegate = self;
-    [self.inputEmergencyNumber setText:untechable.emergencyNumber];
+    [_btnLblEmergencyNumber setTitleColor:defGray forState:UIControlStateNormal];
+    _btnLblEmergencyNumber.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
+    
+    
+    [_inputEmergencyNumber setTextColor:defGreen];
+    _inputEmergencyNumber.font = [UIFont fontWithName:APP_FONT size:16];
+    _inputEmergencyNumber.delegate = self;
+    [_inputEmergencyNumber setText:untechable.emergencyNumber];
 
-    [self tableViewSR:@"reStart" callFor:@"contactsTableView"];
+    [_btnImport setTitleColor:defGray forState:UIControlStateNormal];
+    _btnImport.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
     
-    [self.btnImport setTitleColor:defGray forState:UIControlStateNormal];
-    self.btnImport.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
+    [_btnImportArrow setTitleColor:defGray forState:UIControlStateNormal];
+    _btnImportArrow.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
+    
+    
+    [self tableViewSR:@"reStart" callFor:@"contactsTableView"];    
     
     [_lblCanContactTxt setTextColor:defGray];
     _lblCanContactTxt.font = [UIFont fontWithName:APP_FONT size:15];
@@ -688,6 +698,7 @@
 
 - (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
     [self stopPlay];
+    progressBar.progress = 1.0;    
 }
 
 
@@ -760,5 +771,11 @@
     [btnPointer setBackgroundColor:defGreen];
     else
     [btnPointer setBackgroundColor:[UIColor clearColor]];
+}
+
+- (IBAction)btnClic:(id)sender {
+    if( sender == _btnLblEmergencyNumber ){
+        [_inputEmergencyNumber becomeFirstResponder];
+    }
 }
 @end

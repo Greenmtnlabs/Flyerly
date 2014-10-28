@@ -6,7 +6,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhoneSetupController">
             <connections>
-                <outlet property="btnImport" destination="ouo-3c-bkT" id="yRJ-7i-glL"/>
+                <outlet property="btnImport" destination="ouo-3c-bkT" id="NEJ-it-5qR"/>
+                <outlet property="btnImportArrow" destination="DYd-Ko-JqR" id="gy0-QW-1l6"/>
+                <outlet property="btnLblEmergencyNumber" destination="zu2-7x-4Pp" id="xrv-hh-h8j"/>
                 <outlet property="btnPlay" destination="ibc-Ej-P2A" id="axP-CP-bba"/>
                 <outlet property="btnRec" destination="4e3-ty-dB8" id="4Kk-wE-709"/>
                 <outlet property="contactsTableView" destination="nng-nJ-ySq" id="afL-0M-PJL"/>
@@ -15,7 +17,6 @@
                 <outlet property="lbl2" destination="6YL-2V-h1V" id="hJG-Uy-ZJt"/>
                 <outlet property="lbl3" destination="oat-fO-iy7" id="bJc-0Z-AfZ"/>
                 <outlet property="lblCanContactTxt" destination="Syb-pS-fgL" id="5xu-KJ-peZ"/>
-                <outlet property="lblEmergencyNumber" destination="uhh-NK-obc" id="lni-A6-qJA"/>
                 <outlet property="lblRecTime" destination="GtK-DB-vTA" id="QbQ-Rh-4ub"/>
                 <outlet property="progressBar" destination="vBa-qK-C1g" id="m7t-je-sSc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -91,13 +92,18 @@
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Emergency Number" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uhh-NK-obc" userLabel="Label - lblEmergencyNumber">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="zu2-7x-4Pp" userLabel="Button - btnLblEmergencyNumber">
                     <rect key="frame" x="0.0" y="239" width="320" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
+                    <state key="normal" title="Emergency Number">
+                        <color key="titleColor" red="0.72156862749999995" green="0.72156862749999995" blue="0.72156862749999995" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="btnClic:" destination="-1" eventType="touchUpInside" id="k7F-wt-QCO"/>
+                    </connections>
+                </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="802-448-0686" textAlignment="center" minimumFontSize="17" background="inputBottomBg2.png" id="Yll-9t-w8M" userLabel="input - inputEmergencyNumber">
                     <rect key="frame" x="0.0" y="273" width="320" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -115,6 +121,18 @@
                     </state>
                     <connections>
                         <action selector="importContacts:" destination="-1" eventType="touchUpInside" id="31M-hW-Yf2"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DYd-Ko-JqR" userLabel="Button - btnImportArrow">
+                    <rect key="frame" x="0.0" y="358" width="317" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="35"/>
+                    <state key="normal" title=">">
+                        <color key="titleColor" red="0.72156862749999995" green="0.72156862749999995" blue="0.72156862749999995" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="importContacts:" destination="-1" eventType="touchUpInside" id="ByU-GQ-Gs8"/>
                     </connections>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="left" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="nng-nJ-ySq" userLabel="Table View - contactsTableView">

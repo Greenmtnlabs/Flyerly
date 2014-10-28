@@ -26,13 +26,4 @@
 }
 
 -(void)setDefaultModel;
-
-@property (strong, nonatomic) IBOutlet UIButton *btnStartTime;
-@property (strong, nonatomic) IBOutlet UIButton *btnEndTime;
-@property (strong, nonatomic) IBOutlet UIDatePicker *picker;
-
-
-
-
-
 @end
