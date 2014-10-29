@@ -19,89 +19,140 @@ Events.setup = function(app) {
     var logger = require(__dirname + '/../logger');
 
 	
-	// Get the request
+	// Save event using following steps
+	//1-If recording exist then upload file, 2-then save event, 3-then work for twilio number, 4- return response.
     app.all('/event/save', function(req, res) {
+		// Our logger for logging to file and console
+        var logger = require(__dirname + '/../logger');
+
+        // Construct response JSON
+        var responseJSON = {};
+		var recordingFileName = "";		
+		var file1 = req.files.recording;
+		var eventId = req.body.eventId;		
+        var params = req.body;
+
+		if( params.emergencyContacts ) {
+			params.emergencyContacts	= JSON.parse( params.emergencyContacts );
+		}
+		params = {
+			userId: params.userId,
+			paid:  params.paid,
+			
+			timezoneOffset: params.timezoneOffset,
+			spendingTimeTxt: params.spendingTimeTxt,
+		    startTime: params.startDate,
+		    endTime: params.endDate,
+			hasEndDate: params.hasEndDate,
+
+			twillioNumber: params.twillioNumber,
+			location: params.location,
+		    emergencyNumber: params.emergencyNumber,
+			emergencyContacts: params.emergencyContacts,
+			hasRecording: params.hasRecording,
+			recording: recordingFileName,
+	
+			socialStatus: params.socialStatus,
+			fbAuth: params.fbAuth,
+			twitterAuth: params.twitterAuth,
+			linkedinAuth: params.linkedinAuth,
+	
+			email: params.email,
+			password: params.password,
+			respondingEmail: params.respondingEmail
+		};
 		
-		function retError1( res, error, lineNum ) {
-			var responseJSON = {};
+		print( ["in events65- params"+__line+": ", params] );
+		
+		function retError1( res, eventId, error, lineNum, message ) {
+			responseJSON = {};
 			responseJSON.status = 'FAIL';
-			responseJSON.message = JSON.stringify(error);
-			responseJSON.message4Dev = "Error: Twillio.js, twillio.save line#: "+lineNum+", error: " + responseJSON.message;
+			responseJSON.eventId = eventId;			
+			responseJSON.message = message;
+			responseJSON.message4Dev = "Error: Event.js, line#: "+lineNum+", error: " + JSON.stringify(error);
 
 			//Log event
 	        logger.error( responseJSON.message4Dev );
+			print( responseJSON );
+			
 	    	// Response to request.
 	        res.jsonp(200, responseJSON);
 		}
 	
-		function retSuccess1( res ) {
-			var responseJSON = {};
+		function retSuccess1( res, eventId, twillioNumber , line ) {
+			responseJSON = {};
 			responseJSON.status = 'OK';
-	        responseJSON.message = 'Event updated successfully.';
+			responseJSON.eventId = eventId;
+	        responseJSON.twillioNumber = twillioNumber;			
+	        responseJSON.message = 'Succesfully saved';
 			
+
+			print( responseJSON  );
+			
+
 	    	// Response to request.
 			res.jsonp(200, responseJSON);
+
 		}
 		
 		function print( msg ){
 			console.log( msg );
 		}
 		
-		print( "req.body: ", req.body );
 		
-        // Our logger for logging to file and console
-        var logger = require(__dirname + '/../logger');
-
-        // Construct response JSON
-        var responseJSON = {};
-
-        var eventId = req.body.eventId;
+		//3-then work for twilio number, 4- return response.
+		function checkTwilioNumberAndReturn() {
 		
-        if ( eventId ) {
+			if( params.twillioNumber != "" ){
+				retSuccess1( res, params.eventId, params.twillioNumber , __line);
+			} else
+			{
 			
-			//1-If recording exist then upload file, 2-then update event, 3-then return response.
-			var recordingFileName = "";
-			
-			//2-then update event, 3-then return response.
-			function updateEventAndRetResponse() {
+				// Var for Twilio models
+		        var Twillio = require(__dirname + '/../models/Twillio');		
+
+		        // Check the number in the Database
+		        Twillio.findOne({
+		            status: 'FREE'
+		        }, function(error, obj) {
+
+		            if ( error ) {
+		                retError1( res, params.eventId, error, __line, "Forwarding numbers not available. Please contact abdul.rauf@riksof.com");
+		            }						
+		            else if( obj != null ) {
 				
-		        // Var for Events models
-		        var Events = require(__dirname + '/../models/Events');
+						logger.info('Twillio number found in Db');
+                
+						// Set the property of object
+		                obj.status = 'IN_USE';
+		                obj.assignedTo = params.eventId;
+
+		                // save Twillio event
+		                obj.save(function(error, t) {
+
+		                    if (error) {
+								retError1( res, params.eventId,  error, __line, "Error in updating status of forwarding number. Please contact abdul.rauf@riksof.com");
+		                    } else {
+								retSuccess1( res, params.eventId, obj.number , __line);
+							}
+		                });
+		            }
+					else {								
+						retError1( res, params.eventId,  "number_unavailable" , __line, 'No Twillio number found. Please contact abdul.rauf@riksof.com');
+		            } // end of else
+						
+			
+		        });
+			}
+		}
 		
-		        var params = req.body;
-
-				if( params.emergencyContacts ){
-					params.emergencyContacts	= JSON.parse( params.emergencyContacts );
-				}
-				params = {
-					userId: params.userId,
-					
-					timezoneOffset: params.timezoneOffset,
-					spendingTimeTxt: params.spendingTimeTxt,
-				    startTime: params.startDate,
-				    endTime: params.endDate,
-					hasEndDate: params.hasEndDate,
-		    
-
-					twillioNumber: params.twillioNumber,
-					location: params.location,
-				    emergencyNumber: params.emergencyNumber,
-					emergencyContacts: params.emergencyContacts,
-					hasRecording: params.hasRecording,
-					recording: recordingFileName,
-			
-					socialStatus: params.socialStatus,
-					fbAuth: params.fbAuth,
-					twitterAuth: params.twitterAuth,
-					linkedinAuth: params.linkedinAuth,
-			
-					email: params.email,
-					password: params.password,
-					respondingEmail: params.respondingEmail
-				};
-				
-				print( ["params"+__line+": ", params] );
-				
+		//2-then update event, 
+		function saveEvent() {
+		
+	        // Var for Events models
+	        var Events = require(__dirname + '/../models/Events');
+		
+			if ( eventId ) {
 	            // update for the given event 
 	            Events.update({
 	                    _id: eventId
@@ -113,49 +164,69 @@ Events.setup = function(app) {
 	                    upsert: true
 	                },
 	             	function(err, model) {
-						
+				
 	                    if (err) {
-							retError1( res, err, __line );
+							retError1( res, "0", err, __line, "Error in event update." );
 	                    }
 						else{
-	                    	retSuccess1( res );
+							params.eventId	= eventId;
+	                    	checkTwilioNumberAndReturn();
 						}
 					}
 				);
-				
-			} //End functions
-			
-			
-			
-			var file1 = req.files.recording;
-			//var profileImageDir  = __dirname+'/../../recordings/'; //config.dir.recordingsPath
-			
-			if( file1 != undefined ) {
-				fs = require("fs");
-				recordingFileName  = file1.name;
+			}
+			else {
+		        var event = new Events( params );
+				event.save(function (error) {
+					params.eventId	= event._id;
+	            	checkTwilioNumberAndReturn();
+				});
+			}
 		
-				//Upload file
-		        fs.rename(
-				  file1.path, 
-				  (config.dir.recordingsPath + recordingFileName), 
-				  function (error) {
-
-					 if (error) {
-						retError1( res, error, __line );
-		             } else {            	
-						updateEventAndRetResponse();
-		             }				 
-		        });
-			}
-			else{
-				updateEventAndRetResponse();
-			}
-        }
+		} //End functions
+		
+		//1-If recording exist then upload file
+		if( file1 == undefined ) {
+			saveEvent();
+		}
 		else{
-			retError1( res, "eventId not found.", __line );
+			//Upload file
+			fs = require("fs");
+			recordingFileName  = file1.name;
+			
+	        fs.rename(
+			  file1.path, 
+			  (config.dir.recordingsPath + recordingFileName), 
+			  function (error) {
+
+				 if (error) {
+					retError1( res, "0", error,  __line, "Error in saving recording file." );
+	             } else {            	
+					saveEvent();
+	             }				 
+	        });
 		}
 
     }); // end post
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// TESTING CODE  ----------------{-------
 	
 	app.all('/test-CommonFunctions', function(req, res) {		
 		var CommonFunctions = require( __dirname + '/CommonFunctions' );
@@ -164,7 +235,7 @@ Events.setup = function(app) {
 				
 	});
 	
-	/*
+	
 	function save(req,res){
 		console.log('/save1');
 
@@ -225,7 +296,8 @@ Events.setup = function(app) {
 	app.all('/save1', function(req, res) {
 		save(req,res);
 	});
-	*/
+
+	// TESTING CODE  ----------------}-------		
 	
 
 }
