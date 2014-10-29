@@ -61,18 +61,18 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="1" userLabel="View - Full App view">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view clipsSubviews="YES" contentMode="scaleToFill" id="Foo-mb-HJb">
-                    <rect key="frame" x="7" y="65" width="306" height="306"/>
-                    <autoresizingMask key="autoresizingMask"/>
+                    <rect key="frame" x="35" y="90" width="306" height="306"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                 </view>
                 <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Xaq-YE-kc7" customClass="FlyerImageView">
-                    <rect key="frame" x="5" y="65" width="310" height="310"/>
-                    <autoresizingMask key="autoresizingMask"/>
+                    <rect key="frame" x="33" y="90" width="310" height="310"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                     <connections>
@@ -80,12 +80,12 @@
                     </connections>
                 </imageView>
                 <view contentMode="scaleToFill" id="rbq-e2-wbO">
-                    <rect key="frame" x="0.0" y="376" width="320" height="146"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <rect key="frame" x="0.0" y="442" width="376" height="171"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TAKE OR ADD PHOTO &amp; RESIZE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8pC-ir-3f6">
-                            <rect key="frame" x="0.0" y="5" width="310" height="43"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <rect key="frame" x="0.0" y="6" width="310" height="43"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <color key="textColor" white="0.4997148723" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -105,40 +105,38 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingGlass.png" id="e7R-ga-ZuC" userLabel="Image View - MagnifyingGlassImg">
-                            <rect key="frame" x="110" y="41" width="64" height="64"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <rect key="frame" x="134" y="54" width="64" height="64"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="koI-LW-qvU" userLabel="UiimageView - ScreenShotForZoom">
-                            <rect key="frame" x="80" y="7" width="130" height="130"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <rect key="frame" x="103" y="18" width="130" height="130"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <view contentMode="scaleToFill" id="dmD-o8-JwS">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="146"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.96862751250000001" green="0.0039215688589999999" blue="0.09803922474" alpha="1" colorSpace="deviceRGB"/>
+                            <rect key="frame" x="28" y="13" width="320" height="146"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" red="0.96078431369999995" green="0.94509803920000002" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="0.0"/>
                 </view>
                 <view contentMode="scaleToFill" id="hm4-bV-Hep">
-                    <rect key="frame" x="0.0" y="523" width="320" height="45"/>
+                    <rect key="frame" x="0.0" y="622" width="375" height="45"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <color key="backgroundColor" red="0.3575665864" green="0.76047690010000002" blue="0.97315449620000005" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="a9C-ON-Lpo" userLabel="zoomScreenShotForVideo">
-                    <rect key="frame" x="5" y="65" width="310" height="310"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <rect key="frame" x="33" y="90" width="310" height="310"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" id="OgZ-hl-Uai" userLabel="Scroll View - ZOOM">
-                    <rect key="frame" x="5" y="65" width="310" height="310"/>
-                    <autoresizingMask key="autoresizingMask"/>
+                    <rect key="frame" x="33" y="90" width="310" height="310"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <inset key="contentInset" minX="0.0" minY="5" maxX="0.0" maxY="65"/>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" red="0.96078431372549022" green="0.94509803921568625" blue="0.87058823529411766" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="342" y="316"/>
         </view>
         <view contentMode="scaleToFill" id="P8i-Fw-Gci" userLabel="View - Main menu buttons">
@@ -224,7 +222,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="disabled" image="addbg_library_selected.png"/>
-                    <state key="selected" image="addbg_library_selected.png"/>
+                    <state key="selected" backgroundImage="addbg_library_selected.png"/>
                     <connections>
                         <action selector="setlibBackgroundTabAction:" destination="-1" eventType="touchUpInside" id="9Ej-0F-waq"/>
                     </connections>
@@ -236,7 +234,7 @@
                     <state key="normal" backgroundImage="07_camera.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="addbg_takephoto_selected.png"/>
+                    <state key="selected" backgroundImage="addbg_takephoto_selected.png"/>
                     <connections>
                         <action selector="setlibBackgroundTabAction:" destination="-1" eventType="touchUpInside" id="C5c-5U-w3S"/>
                     </connections>
@@ -248,7 +246,7 @@
                     <state key="normal" backgroundImage="07_roll.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="addbg_cameraroll_selected.png"/>
+                    <state key="selected" backgroundImage="addbg_cameraroll_selected.png"/>
                     <connections>
                         <action selector="setlibBackgroundTabAction:" destination="-1" eventType="touchUpInside" id="523-Qy-Wyn"/>
                     </connections>
@@ -260,7 +258,7 @@
                     <state key="normal" backgroundImage="addbg_border.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="addbg_border_selected.png"/>
+                    <state key="selected" backgroundImage="addbg_border_selected.png"/>
                     <connections>
                         <action selector="setlibBackgroundTabAction:" destination="-1" eventType="touchUpInside" id="fcs-Ef-1pq"/>
                     </connections>
@@ -282,7 +280,7 @@
                     <state key="normal" backgroundImage="font_button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="font_button_selected.png"/>
+                    <state key="selected" backgroundImage="font_button_selected.png"/>
                     <connections>
                         <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="noa-Nb-ksd"/>
                     </connections>
@@ -294,7 +292,7 @@
                     <state key="normal" backgroundImage="color_button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="color_button_selected.png"/>
+                    <state key="selected" backgroundImage="color_button_selected.png"/>
                     <connections>
                         <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="hQh-kx-2nZ"/>
                     </connections>
@@ -306,7 +304,7 @@
                     <state key="normal" backgroundImage="size_button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="size_button_selected.png"/>
+                    <state key="selected" backgroundImage="size_button_selected.png"/>
                     <connections>
                         <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="ns9-VQ-jo0"/>
                     </connections>
@@ -318,7 +316,7 @@
                     <state key="normal" backgroundImage="outline_button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="outline_button_selected.png"/>
+                    <state key="selected" backgroundImage="outline_button_selected.png"/>
                     <connections>
                         <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="CcZ-Vh-DvB"/>
                     </connections>
@@ -330,7 +328,7 @@
                     <state key="normal" backgroundImage="text_edit.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="text_edit_selected.png"/>
+                    <state key="selected" backgroundImage="text_edit_selected.png"/>
                     <connections>
                         <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="u7X-nm-VDF"/>
                     </connections>
@@ -355,7 +353,7 @@
                     <state key="normal" backgroundImage="drawing_tab_pencil.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="drawing_tab_pencil_selected.png"/>
+                    <state key="selected" backgroundImage="drawing_tab_pencil_selected.png"/>
                     <connections>
                         <action selector="drawingSetStyleTabAction:" destination="-1" eventType="touchUpInside" id="ARj-EH-E7W"/>
                     </connections>
@@ -367,7 +365,7 @@
                     <state key="normal" backgroundImage="drawing_tab_color.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="drawing_tab_color_selected.png"/>
+                    <state key="selected" backgroundImage="drawing_tab_color_selected.png"/>
                     <connections>
                         <action selector="drawingSetStyleTabAction:" destination="-1" eventType="touchUpInside" id="iXd-eQ-G0s"/>
                     </connections>
@@ -379,7 +377,7 @@
                     <state key="normal" backgroundImage="drawing_tab_size.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="drawing_tab_size_selected.png"/>
+                    <state key="selected" backgroundImage="drawing_tab_size_selected.png"/>
                     <connections>
                         <action selector="drawingSetStyleTabAction:" destination="-1" eventType="touchUpInside" id="Llr-z7-SsT"/>
                     </connections>
@@ -391,7 +389,7 @@
                     <state key="normal" backgroundImage="drawing_tab_eraser.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="drawing_tab_eraser_selected.png"/>
+                    <state key="selected" backgroundImage="drawing_tab_eraser_selected.png"/>
                     <connections>
                         <action selector="drawingSetStyleTabAction:" destination="-1" eventType="touchUpInside" id="w4r-vx-AML"/>
                     </connections>
@@ -409,18 +407,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button opaque="NO" tag="10001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="iEv-dA-2If">
-                    <rect key="frame" x="0.0" y="0.0" width="80" height="45"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="Camera"/>
-                    <state key="normal" backgroundImage="07_camera.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="selected" image="07_camera_selected.png"/>
-                    <connections>
-                        <action selector="setlibPhotoTabAction:" destination="-1" eventType="touchUpInside" id="HPR-Jd-rgw"/>
-                    </connections>
-                </button>
                 <button opaque="NO" tag="10002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="O6L-IG-J9j">
                     <rect key="frame" x="80" y="0.0" width="80" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -428,7 +414,7 @@
                     <state key="normal" backgroundImage="07_roll.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="07_roll_selected.png"/>
+                    <state key="selected" backgroundImage="07_roll_selected.png"/>
                     <connections>
                         <action selector="setlibPhotoTabAction:" destination="-1" eventType="touchUpInside" id="UDA-7G-dAh"/>
                     </connections>
@@ -440,7 +426,7 @@
                     <state key="normal" backgroundImage="07_width.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="07_width_selected.png"/>
+                    <state key="selected" backgroundImage="07_width_selected.png"/>
                     <connections>
                         <action selector="setlibPhotoTabAction:" destination="-1" eventType="touchUpInside" id="nWu-Zc-LaM"/>
                     </connections>
@@ -452,9 +438,21 @@
                     <state key="normal" backgroundImage="07_height.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="07_height_selected.png"/>
+                    <state key="selected" backgroundImage="07_height_selected.png"/>
                     <connections>
                         <action selector="setlibPhotoTabAction:" destination="-1" eventType="touchUpInside" id="yDo-rU-RqL"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="10001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="iEv-dA-2If">
+                    <rect key="frame" x="0.0" y="0.0" width="80" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="Camera"/>
+                    <state key="normal" backgroundImage="07_camera.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" backgroundImage="07_camera_selected.png"/>
+                    <connections>
+                        <action selector="setlibPhotoTabAction:" destination="-1" eventType="touchUpInside" id="HPR-Jd-rgw"/>
                     </connections>
                 </button>
             </subviews>
@@ -543,7 +541,7 @@
                     <state key="normal" backgroundImage="clipart_tab.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="clipart_tab_selected.png"/>
+                    <state key="selected" backgroundImage="clipart_tab_selected.png"/>
                     <connections>
                         <action selector="setArtsTabAction:" destination="-1" eventType="touchUpInside" id="L5P-AP-wZ3"/>
                     </connections>
@@ -555,7 +553,7 @@
                     <state key="normal" backgroundImage="drawing_tab.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="drawing_tab_selected.png"/>
+                    <state key="selected" backgroundImage="drawing_tab_selected.png"/>
                     <connections>
                         <action selector="addDrawingLayer:" destination="-1" eventType="touchUpInside" id="H0h-ii-zYp"/>
                     </connections>
@@ -567,7 +565,7 @@
                     <state key="normal" backgroundImage="emoticons_tab.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="emoticons_tab_selected.png"/>
+                    <state key="selected" backgroundImage="emoticons_tab_selected.png"/>
                     <connections>
                         <action selector="setArtsTabAction:" destination="-1" eventType="touchUpInside" id="Ln7-Ue-WMS"/>
                     </connections>
@@ -579,7 +577,7 @@
                     <state key="normal" backgroundImage="size_tab.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="size_tab_selected.png"/>
+                    <state key="selected" backgroundImage="size_tab_selected.png"/>
                     <connections>
                         <action selector="setArtsTabAction:" destination="-1" eventType="touchUpInside" id="td5-d2-L8u"/>
                     </connections>
@@ -591,7 +589,7 @@
                     <state key="normal" backgroundImage="color_tab.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="color_tab_selected.png"/>
+                    <state key="selected" backgroundImage="color_tab_selected.png"/>
                     <connections>
                         <action selector="setArtsTabAction:" destination="-1" eventType="touchUpInside" id="MhW-Ul-AsD"/>
                     </connections>
