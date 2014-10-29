@@ -11,6 +11,11 @@
 
 @interface ThankyouController : UIViewController
 {
+    UILabel *titleLabel;
+    //UIButton *helpButton;
+    UIButton *backButton;
+    UIButton *nextButton;
+    
     UIColor *defGreen;//GREEN
     UIColor *defGray;//GRAY
 }

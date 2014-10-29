@@ -24,7 +24,7 @@
     UILabel *titleLabel;
     //UIButton *helpButton;
     UIButton *backButton;
-    //UIButton *nextButton;
+    UIButton *nextButton;
     
     UIColor *defGreen;//GREEN
     UIColor *defGray;//GRAY

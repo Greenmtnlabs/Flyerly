@@ -7,8 +7,8 @@
 //
 
 #import "SocialnetworkController.h"
-#import "EmailSettingController.h"
 #import "Common.h"
+#import "EmailSettingController.h"
 
 
 @interface SocialnetworkController ()
@@ -162,15 +162,7 @@
         
         
         // Center title ________________________________________
-        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-        titleLabel.backgroundColor = [UIColor clearColor];
-        titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_FONT_SIZE];
-        titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.textColor = defGreen;
-        titleLabel.text = APP_NAME;
-        
-        
-        self.navigationItem.titleView = titleLabel; //Center title ___________
+        self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
         
         // Right Navigation ________________________________________
@@ -221,14 +213,12 @@
 }
 
 -(void)onNext{
-    
     [self setNextHighlighted:NO];
-    
     BOOL goToNext = YES;
-    
+
     if( goToNext ) {
         [self storeSceenVarsInDic];
-        
+
         EmailSettingController *emailSettingController;
         emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
         emailSettingController.untechable = untechable;

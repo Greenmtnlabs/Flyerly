@@ -115,7 +115,7 @@
 {
     
     [_lbl1 setTextColor:defGray];
-    _lbl1.font = [UIFont fontWithName:APP_FONT size:17];
+    _lbl1.font = [UIFont fontWithName:APP_FONT size:20];
     
     [self.inputEmail setTextColor:defGreen];
     self.inputEmail.font = [UIFont fontWithName:APP_FONT size:16];
@@ -170,16 +170,7 @@
         
         
         // Center title ________________________________________
-        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-        titleLabel.backgroundColor = [UIColor clearColor];
-        titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_FONT_SIZE];
-        titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.textColor = defGreen;
-        titleLabel.text = APP_NAME;
-        
-        
-        self.navigationItem.titleView = titleLabel; //Center title ___________
-        
+        self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];        
         
         // Right Navigation ________________________________________
         
@@ -230,8 +221,10 @@
 
 -(void)onFinish {
     [self storeSceenVarsInDic];
+
+    [self next:@"GO_TO_THANKYOU"];
     
-    [self sendToApi];
+    //[self sendToApi];
         
 }
 -(void)storeSceenVarsInDic
@@ -243,11 +236,9 @@
 }
 
 -(void) sendToApi{
-    //ui work , priorty
-    //dispatch_async( dispatch_get_main_queue(), ^{
-       [self changeNavigation:@"ON_FINISH"];
-    //});
-    
+
+    [self changeNavigation:@"ON_FINISH"];
+
     //Background work
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         [self sendToApiAfterTask];
@@ -409,6 +400,7 @@
         // Remember the right bar button item.
         //nextButton = self.navigationItem.rightBarButtonItem;
         nextButton.enabled = NO;
+        backButton.enabled = NO;
         
         UIActivityIndicatorView *uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
         [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
@@ -420,9 +412,11 @@
     }
     else{
         nextButton.enabled = YES;
+        backButton.enabled = YES;
         [self setNavigation:@"viewDidLoad"];
     }
 }
+
 
 
 

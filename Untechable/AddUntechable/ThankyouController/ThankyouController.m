@@ -17,7 +17,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblEndDateTime;
 @property (strong, nonatomic) IBOutlet UILabel *lblTwillioNumber;
 @property (strong, nonatomic) IBOutlet UILabel *lblForwadingNumber;
-@property (strong, nonatomic) IBOutlet UIButton *btnEdit;
 @property (strong, nonatomic) IBOutlet UIButton *btnNew;
 
 @end
@@ -40,9 +39,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    
-    defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
-    defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
+
+    [self setNavigationDefaults];
+    [self setNavigation:@"viewDidLoad"];
     
 }
 
@@ -94,12 +93,33 @@
     _lblTwillioNumber.text = untechable.twillioNumber;
     
     
-    [_btnEdit setTitleColor:defGray forState:UIControlStateNormal];
-    _btnEdit.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
-    
     [_btnNew setTitleColor:defGray forState:UIControlStateNormal];
     _btnNew.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
 }
 
+#pragma mark -  Navigation functions
+
+- (void)setNavigationDefaults{
+    
+    defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
+    defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
+    
+    
+    [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+}
+
+-(void)setNavigation:(NSString *)callFrom
+{
+    if([callFrom isEqualToString:@"viewDidLoad"])
+    {
+        
+        self.navigationItem.hidesBackButton = YES;
+        
+        // Center title ________________________________________
+        self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
+        
+    }
+}
 
 @end

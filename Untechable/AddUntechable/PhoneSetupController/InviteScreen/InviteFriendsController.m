@@ -79,6 +79,7 @@
     if([callFrom isEqualToString:@"viewDidLoad"])
     {
 
+        /*
         // Left Navigation ___________________________________________________________
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
@@ -93,16 +94,27 @@
         NSMutableArray  *leftNavItems  = [NSMutableArray arrayWithObjects:leftBarButton,nil];
         
         [self.navigationItem setLeftBarButtonItems:leftNavItems]; //Left button ___________
+        */
         
         // Center title ________________________________________
-        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-        titleLabel.backgroundColor = [UIColor clearColor];
-        titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_FONT_SIZE];
-        titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.textColor = defGreen;
-        titleLabel.text = APP_NAME;
+        self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
-        self.navigationItem.titleView = titleLabel; //Center title ___________
+        // Right Navigation ______________________________________________
+        nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [nextButton setTitle:TITLE_DONE_TXT forState:normal];
+        [nextButton setTitleColor:defGray forState:UIControlStateNormal];
+        [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
+        [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        nextButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
+        
+        [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
+        
+        
     }
 }
 
@@ -118,6 +130,18 @@
 - (BOOL)ckeckExistdb:(NSString *)identifier{
     return NO;
 }
+
+-(void)btnNextTouchStart{
+    [self setNextHighlighted:YES];
+}
+-(void)btnNextTouchEnd{
+    [self setNextHighlighted:NO];
+    [self goBack];
+}
+- (void)setNextHighlighted:(BOOL)highlighted {
+    (highlighted) ? [nextButton setBackgroundColor:defGreen] : [nextButton setBackgroundColor:[UIColor clearColor]];
+}
+
 
 -(IBAction)goBack{
     

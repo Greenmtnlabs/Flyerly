@@ -18,6 +18,7 @@
 
 #define TITLE_NEXT_TXT @"NEXT"
 #define TITLE_BACK_TXT @"BACK"
+#define TITLE_DONE_TXT @"DONE"
 #define TITLE_FONT @"Pigiarniq-Bold"
 #define TITLE_FONT_SIZE 18
 #define TITLE_LEFT_SIZE 12

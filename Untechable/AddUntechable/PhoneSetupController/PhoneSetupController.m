@@ -189,8 +189,8 @@
         [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(btnBackTouchEnd) forControlEvents:UIControlEventTouchUpInside];
         
-        
         backButton.showsTouchWhenHighlighted = YES;
+        
         UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         NSMutableArray  *leftNavItems  = [NSMutableArray arrayWithObjects:leftBarButton,nil];
         
@@ -202,7 +202,7 @@
         
         
         // Right Navigation ______________________________________________
-        nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 33, 42)];
         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
@@ -210,11 +210,24 @@
         [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
         [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
         
-        
-        
+        //[nextButton setBackgroundColor:[UIColor redColor]];
         nextButton.showsTouchWhenHighlighted = YES;
+        
+        skipButton = [[UIButton alloc] initWithFrame:CGRectMake(33, 0, 33, 42)];
+        skipButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
+        [skipButton setTitle:@"SKIP" forState:normal];
+        [skipButton setTitleColor:defGray forState:UIControlStateNormal];
+        [skipButton addTarget:self action:@selector(btnSkipTouchStart) forControlEvents:UIControlEventTouchDown];
+        [skipButton addTarget:self action:@selector(btnSkipTouchEnd) forControlEvents:UIControlEventTouchUpInside];
+        
+        //[skipButton setBackgroundColor:[UIColor redColor]];
+        skipButton.showsTouchWhenHighlighted = YES;
+
+
+        
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
-        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
+        UIBarButtonItem *skipButtonBarButton = [[UIBarButtonItem alloc] initWithCustomView:skipButton];
+        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,skipButtonBarButton,nil];
         
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
         
@@ -222,14 +235,8 @@
     }
 }
 
--(void)btnNextTouchStart{
-    [self setNextHighlighted:YES];
-}
--(void)btnNextTouchEnd{
-    [self setNextHighlighted:NO];
-}
-- (void)setNextHighlighted:(BOOL)highlighted {
-    (highlighted) ? [nextButton setBackgroundColor:defGreen] : [nextButton setBackgroundColor:[UIColor clearColor]];
+- (void)setBackHighlighted:(BOOL)highlighted {
+    (highlighted) ? [backButton setBackgroundColor:defGreen] : [backButton setBackgroundColor:[UIColor clearColor]];
 }
 
 -(void)btnBackTouchStart{
@@ -239,21 +246,52 @@
     [self setBackHighlighted:NO];
     [self onBack];
 }
-- (void)setBackHighlighted:(BOOL)highlighted {
-    (highlighted) ? [backButton setBackgroundColor:defGreen] : [backButton setBackgroundColor:[UIColor clearColor]];
+-(void)onBack{
+    [untechable goBack:self.navigationController];
 }
 
--(void)onBack{
-    [untechable goBack:self.navigationController];    
+
+- (void)setSkipHighlighted:(BOOL)highlighted {
+    (highlighted) ? [skipButton setBackgroundColor:defGreen] : [skipButton setBackgroundColor:[UIColor clearColor]];
+}
+
+-(void)btnSkipTouchStart{
+    [self setSkipHighlighted:YES];
+}
+
+-(void)btnSkipTouchEnd{
+    [self setSkipHighlighted:NO];
+    [self onSkip];
+}
+-(void)onSkip{
+    
+    [self setNextHighlighted:NO];
+    
+    [self storeSceenVarsInDic];
+    [self stopAllTask];
+    
+    [self next:@"ON_SKIP"];
+    
+}
+
+
+- (void)setNextHighlighted:(BOOL)highlighted {
+    (highlighted) ? [nextButton setBackgroundColor:defGreen] : [nextButton setBackgroundColor:[UIColor clearColor]];
+}
+-(void)btnNextTouchStart{
+    [self setNextHighlighted:YES];
+}
+-(void)btnNextTouchEnd{
+    [self setNextHighlighted:NO];
 }
 
 -(void)onNext{
 
-
+    [self setNextHighlighted:NO];
+    
     [self storeSceenVarsInDic];
     [self stopAllTask];
     
-    [self setNextHighlighted:NO];
     
     BOOL goToNext = NO;
     
@@ -262,6 +300,7 @@
     }
     
     if( goToNext == NO ){
+        /*
         //When user didn't perform any task on Premium feature $1.99 screen
         if( untechable.hasRecording == NO
             && [untechable.emergencyNumber isEqualToString:@""]
@@ -269,12 +308,15 @@
         ){
             goToNext = YES;
         }
+        */
     }
     
     if( goToNext == YES ) {
         [self next:@"GO_TO_NEXT"];
     }
     else if( goToNext == NO ) {
+        [self next:@"GO_FOR_BUY"];
+        /*
         _buyAlert = [[UIAlertView alloc ]
                                  initWithTitle:@""
                                  message:@"Would you like to buy"
@@ -284,6 +326,7 @@
         
         
         [_buyAlert show];
+         */
     }
 }
 
@@ -298,6 +341,8 @@
         
     }
     else if( [after isEqualToString:@"GO_FOR_BUY"] ) {
+        
+        [self showHidLoadingIndicator:YES];
         
         //Check For Crash Maintain
         cancelRequest = NO;
@@ -318,7 +363,9 @@
             //Open payment dialogue
             [[RMStore defaultStore] addPayment:PRODUCT_UntechableMessage
                 success:^(SKPaymentTransaction *transaction) {
-                
+                    
+                    [self showInAppError:NO transaction:transaction error:nil];
+                    
                     //NSLog(@"Successfully purchased product: %@", PRODUCT_UntechableMessage);
                      untechable.paid = YES;
                     [untechable setOrSaveVars:SAVE];
@@ -327,20 +374,55 @@
                 } failure:^(SKPaymentTransaction *transaction, NSError *error) {
                 
                     //NSLog(@"Something went wrong, error: %@", error);
-                
+                    [self showInAppError:NO transaction:transaction error:error];
                 }
             ];
         
         
         } failure:^(NSError *error) {
             NSLog(@"Something went wrong, in loading products");
+            [self showInAppError:NO transaction:nil error:error];
         }];
     
     }
     
 }
 
+-(void)showInAppError:(BOOL)hasError transaction:(SKPaymentTransaction *)transaction error:(NSError *)error
+{
+    [self showHidLoadingIndicator:NO];
+}
 
+/**
+ * Show / hide, a loding indicator in the right bar button.
+ */
+- (void)showHidLoadingIndicator:(BOOL)show {
+    
+    if( show ) {
+        
+        [self enableAllNavigations:NO];
+        
+        UIActivityIndicatorView *uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
+        uiBusy.hidesWhenStopped = YES;
+        [uiBusy startAnimating];
+        
+        UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithCustomView:uiBusy];
+        [self.navigationItem setRightBarButtonItem:btn animated:NO];
+    }
+    else {
+        [self enableAllNavigations:YES];
+        
+        [self setNavigation:@"viewDidLoad"];
+    }
+    
+}
+
+-(void)enableAllNavigations:(BOOL)enable{
+    nextButton.enabled = enable;
+    backButton.enabled = enable;
+    skipButton.enabled = enable;
+}
 
 -(void)storeSceenVarsInDic{
     //untechable.twillioNumber = _inputForwadingNumber.text;
@@ -813,6 +895,11 @@
 {
     BOOL configured = NO;
     NSError *error;
+    
+    // Setup audio session
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+    
     player = [[AVAudioPlayer alloc]
               initWithContentsOfURL:outputFileURL
               error:&error];
@@ -824,6 +911,7 @@
         [self setEnable:btnPlay enable:NO];
     } else {
         player.delegate = self;
+        [player setVolume: 1.0];
         [player prepareToPlay];
         
         configured = YES;
