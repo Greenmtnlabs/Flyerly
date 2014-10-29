@@ -45,3 +45,7 @@
 #define TEST_EID @""
 #define TEST_TWILLIO_NUM @""
 //#define TEST_TWILLIO_NUM @"+16464551382"
+
+//PAID PRODUCTS
+#define PRODUCT_UntechableMessage @"com.greenmtnlabs.UntechableMessage"
+

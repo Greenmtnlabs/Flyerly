@@ -12,6 +12,7 @@
 #import <AddressBook/AddressBook.h>
 #import "BSKeyboardControls.h"
 #import <AVFoundation/AVFoundation.h>
+#import "RMStore.h"
 
 @interface PhoneSetupController : UIViewController < UITableViewDataSource, UITextFieldDelegate , BSKeyboardControlsDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 {
@@ -22,6 +23,13 @@
     
     UIColor *defGreen;//GREEN
     UIColor *defGray;//GRAY
+    
+    //In app vars
+    NSArray *requestedProducts;
+    BOOL cancelRequest;
+    
+    NSMutableArray *productArray;
+    NSArray *freeFeaturesArray;
 
 }
 

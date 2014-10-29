@@ -255,10 +255,26 @@
     
     [self setNextHighlighted:NO];
     
+    BOOL goToNext = NO;
+    
     if( untechable.paid == YES ) {
+        goToNext = YES;
+    }
+    
+    if( goToNext == NO ){
+        //When user didn't perform any task on Premium feature $1.99 screen
+        if( untechable.hasRecording == NO
+            && [untechable.emergencyNumber isEqualToString:@""]
+            && [[untechable.emergencyContacts allKeys] count] < 1
+        ){
+            goToNext = YES;
+        }
+    }
+    
+    if( goToNext == YES ) {
         [self next:@"GO_TO_NEXT"];
     }
-    else {
+    else if( goToNext == NO ) {
         _buyAlert = [[UIAlertView alloc ]
                                  initWithTitle:@""
                                  message:@"Would you like to buy"
@@ -269,18 +285,56 @@
         
         [_buyAlert show];
     }
-    
 }
+
 -(void)next:(NSString *)after{
-    
+
     if( [after isEqualToString:@"GO_TO_NEXT"] || [after isEqualToString:@"ON_SKIP"] ) {
         
         SocialnetworkController *socialnetwork;
         socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
         socialnetwork.untechable = untechable;
         [self.navigationController pushViewController:socialnetwork animated:YES];
+        
     }
     else if( [after isEqualToString:@"GO_FOR_BUY"] ) {
+        
+        //Check For Crash Maintain
+        cancelRequest = NO;
+        
+        //These are over Products on App Store
+        NSSet *productIdentifiers = [NSSet setWithArray:@[PRODUCT_UntechableMessage]];
+        
+        [[RMStore defaultStore] requestProducts:productIdentifiers success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
+            
+            if (cancelRequest) return ;
+            
+            NSLog(@"Products loaded");
+
+            //Get details of product
+            //SKProduct* untechableProduct = [[RMStore defaultStore] productForIdentifier:PRODUCT_UntechableMessage];
+            
+
+            //Open payment dialogue
+            [[RMStore defaultStore] addPayment:PRODUCT_UntechableMessage
+                success:^(SKPaymentTransaction *transaction) {
+                
+                    //NSLog(@"Successfully purchased product: %@", PRODUCT_UntechableMessage);
+                     untechable.paid = YES;
+                    [untechable setOrSaveVars:SAVE];
+                    [self next:@"GO_TO_NEXT"];
+                
+                } failure:^(SKPaymentTransaction *transaction, NSError *error) {
+                
+                    //NSLog(@"Something went wrong, error: %@", error);
+                
+                }
+            ];
+        
+        
+        } failure:^(NSError *error) {
+            NSLog(@"Something went wrong, in loading products");
+        }];
     
     }
     
@@ -444,10 +498,12 @@
 
 #pragma mark - UIAlertView delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-   if(alertView == _importContacts && buttonIndex == 1) {
+   /*
+    if(alertView == _importContacts && buttonIndex == 1) {
         [self importContactsAfterAllow];
    }
-   else if(alertView == _buyAlert) {
+   else
+    */ if(alertView == _buyAlert) {
        //BUY
        if( buttonIndex == 0 ){
            [self next:@"GO_FOR_BUY"];
@@ -464,12 +520,16 @@
 #pragma mark -  Import Contacts
 //Show select contacts screen
 - (IBAction)importContacts:(id)sender {
+
+    [self storeSceenVarsInDic];
+    [self stopAllTask];
+    
     InviteFriendsController *ifc;
     ifc = [[InviteFriendsController alloc]initWithNibName:@"InviteFriendsController" bundle:nil];
     ifc.untechable = untechable;
     [self.navigationController pushViewController:ifc animated:YES];
 }
-
+/*
 - (IBAction)importContacts2:(id)sender {
     _importContacts = [[UIAlertView alloc ]
                                        initWithTitle:@""
@@ -481,11 +541,12 @@
     [_importContacts show];
     
 }
+
 -(void)importContactsAfterAllow {
     [self getAllContacts];
     [self tableViewSR:@"reStart" callFor:@"contactsTableView"];
 }
-
+*/
 
 -(void)getAllContacts{
     CFErrorRef *error = NULL;

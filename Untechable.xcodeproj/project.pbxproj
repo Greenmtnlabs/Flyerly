@@ -41,6 +41,8 @@
 		36A370B819F53E6D005A7AFE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36A370B719F53E6D005A7AFE /* AVFoundation.framework */; };
 		36B036A619DAF44D00E8CD21 /* EmailSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B036A419DAF44D00E8CD21 /* EmailSettingController.m */; };
 		36B036A719DAF44D00E8CD21 /* EmailSettingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36B036A519DAF44D00E8CD21 /* EmailSettingController.xib */; };
+		36B275D41A00CD6000ED58AD /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36B275D31A00CD6000ED58AD /* StoreKit.framework */; };
+		36B275D71A00D36400ED58AD /* RMStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B275D61A00D36400ED58AD /* RMStore.m */; };
 		36BB7B5919FFBD9A00562069 /* CHECKBOX_EMPTY.png in Resources */ = {isa = PBXBuildFile; fileRef = 36BB7B2E19FFBD9A00562069 /* CHECKBOX_EMPTY.png */; };
 		36BB7B5A19FFBD9A00562069 /* CHECKBOX_EMPTY@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36BB7B2F19FFBD9A00562069 /* CHECKBOX_EMPTY@2x.png */; };
 		36BB7B5B19FFBD9A00562069 /* CHECKBOX_FILLED.png in Resources */ = {isa = PBXBuildFile; fileRef = 36BB7B3019FFBD9A00562069 /* CHECKBOX_FILLED.png */; };
@@ -148,6 +150,9 @@
 		36B036A319DAF44D00E8CD21 /* EmailSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmailSettingController.h; path = AddUntechable/EmailSettingController/EmailSettingController.h; sourceTree = "<group>"; };
 		36B036A419DAF44D00E8CD21 /* EmailSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmailSettingController.m; path = AddUntechable/EmailSettingController/EmailSettingController.m; sourceTree = "<group>"; };
 		36B036A519DAF44D00E8CD21 /* EmailSettingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EmailSettingController.xib; path = AddUntechable/EmailSettingController/EmailSettingController.xib; sourceTree = "<group>"; };
+		36B275D31A00CD6000ED58AD /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		36B275D51A00D36400ED58AD /* RMStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMStore.h; path = AddUntechable/RMStore/RMStore.h; sourceTree = "<group>"; };
+		36B275D61A00D36400ED58AD /* RMStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMStore.m; path = AddUntechable/RMStore/RMStore.m; sourceTree = "<group>"; };
 		36BB7B2E19FFBD9A00562069 /* CHECKBOX_EMPTY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CHECKBOX_EMPTY.png; sourceTree = "<group>"; };
 		36BB7B2F19FFBD9A00562069 /* CHECKBOX_EMPTY@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CHECKBOX_EMPTY@2x.png"; sourceTree = "<group>"; };
 		36BB7B3019FFBD9A00562069 /* CHECKBOX_FILLED.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CHECKBOX_FILLED.png; sourceTree = "<group>"; };
@@ -209,6 +214,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36B275D41A00CD6000ED58AD /* StoreKit.framework in Frameworks */,
 				36A370B819F53E6D005A7AFE /* AVFoundation.framework in Frameworks */,
 				36561D6E19D2C8A40069D897 /* CoreGraphics.framework in Frameworks */,
 				36561D7019D2C8A40069D897 /* UIKit.framework in Frameworks */,
@@ -275,6 +281,7 @@
 		36561D6A19D2C8A40069D897 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				36B275D31A00CD6000ED58AD /* StoreKit.framework */,
 				36A370B719F53E6D005A7AFE /* AVFoundation.framework */,
 				36561D6B19D2C8A40069D897 /* Foundation.framework */,
 				36561D6D19D2C8A40069D897 /* CoreGraphics.framework */,
@@ -341,6 +348,7 @@
 			isa = PBXGroup;
 			children = (
 				366ECD7B19D312BE00F71A11 /* Models */,
+				36B275CF1A00CC9400ED58AD /* RMStore */,
 				366ECD8619D322D700F71A11 /* AddUntechableController */,
 				366ECD8719D322F800F71A11 /* PhoneSetupController */,
 				36524AED19D9409C006DCAAF /* SocialnetworkController */,
@@ -444,6 +452,15 @@
 				36B036A519DAF44D00E8CD21 /* EmailSettingController.xib */,
 			);
 			name = EmailSettingController;
+			sourceTree = "<group>";
+		};
+		36B275CF1A00CC9400ED58AD /* RMStore */ = {
+			isa = PBXGroup;
+			children = (
+				36B275D51A00D36400ED58AD /* RMStore.h */,
+				36B275D61A00D36400ED58AD /* RMStore.m */,
+			);
+			name = RMStore;
 			sourceTree = "<group>";
 		};
 		36BB7B3219FFBD9A00562069 /* icons */ = {
@@ -665,6 +682,7 @@
 			files = (
 				36BB7B8919FFD98C00562069 /* ThankyouController.m in Sources */,
 				366ECD9619D323DA00F71A11 /* AddUntechableController.m in Sources */,
+				36B275D71A00D36400ED58AD /* RMStore.m in Sources */,
 				3681603C19E6B81E00B9B64C /* ContactsModel.m in Sources */,
 				366ECD9B19D323E200F71A11 /* PhoneSetupController.m in Sources */,
 				3681603F19E6B81E00B9B64C /* InviteFriendsController.m in Sources */,
