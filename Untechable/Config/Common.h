@@ -35,8 +35,8 @@
 #define SAVE @"SAVE"
 #define SET @"SET"
 
-//#define SERVER_URL @"http://192.168.0.116:3001"
-#define SERVER_URL @"http://riksof.com:8000"
+#define SERVER_URL @"http://192.168.0.113:3001"
+//#define SERVER_URL @"http://riksof.com:8000"
 
 #define API_GET_NUMBER SERVER_URL@"/get-forwading-number"
 #define API_SAVE SERVER_URL@"/event/save"
@@ -49,4 +49,13 @@
 
 //PAID PRODUCTS
 #define PRODUCT_UntechableMessage @"com.greenmtnlabs.UntechableMessage"
+
+#define TESTING @"TESTING"
+#define DEVELOPMENT @"DEVELOPMENT"
+#define PRODUCTION @"PRODUCTION"
+
+#define APP_IN_MODE PRODUCTION
+
+
+
 

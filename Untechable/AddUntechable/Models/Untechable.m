@@ -344,4 +344,36 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     return retDic;
 }
+
+- (BOOL)isUntechableStarted
+{
+    BOOL started = NO;
+    
+    NSDate* date1 = [commonFunctions timestampStrToNsDate:startDate];
+    if( [commonFunctions date1IsSmallerThenDate2:date1 date2:[NSDate date]]){
+        started = YES;
+    }
+    
+    return started;
+}
+
+- (BOOL)isUntechableExpired
+{
+    BOOL expired = NO;
+    
+    
+    if( hasEndDate == NO ){
+        //expired = YES;
+    }
+    
+    if( expired == NO ){
+        NSDate* date1 = [commonFunctions timestampStrToNsDate:endDate];
+        if( [commonFunctions date1IsSmallerThenDate2:date1 date2:[NSDate date]]){
+            expired = YES;
+        }
+    }
+    
+    return expired;
+}
+
 @end

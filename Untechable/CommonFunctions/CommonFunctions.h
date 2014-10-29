@@ -23,6 +23,7 @@
 -(NSString *)nsDateToTimeStampStr:(NSDate *)inpDate;
 -(NSDate *)timestampStrToNsDate:(NSString *)timeStamp;
 -(NSString *)timestampStrToAppDate:(NSString *)timeStamp;
+- (BOOL)date1IsSmallerThenDate2:(NSDate *)date1 date2:(NSDate *)date2;
 
 -(UIImageView *) navigationGetTitleView;
 @end

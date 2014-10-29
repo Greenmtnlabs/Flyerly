@@ -220,12 +220,17 @@
 }
 
 -(void)onFinish {
-    [self storeSceenVarsInDic];
 
-    [self next:@"GO_TO_THANKYOU"];
+    [self storeSceenVarsInDic];
+    NSLog(@"onFinish dic = %@ ",untechable.dic);
     
-    //[self sendToApi];
-        
+    
+    if( [APP_IN_MODE isEqualToString:TESTING] ){
+        [self next:@"GO_TO_THANKYOU"];
+    } else {
+        [self sendToApi];
+    }
+    
 }
 -(void)storeSceenVarsInDic
 {
@@ -241,14 +246,14 @@
 
     //Background work
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        
         [self sendToApiAfterTask];
+        
     });
 }
                    
--(void) sendToApiAfterTask{
-    
-    NSLog(@"dic = %@ ",untechable.dic);
-    
+-(void) sendToApiAfterTask
+{
     //NSLog(@"API_SAVE = %@ ",API_SAVE);
     //NSLog(@"[untechable getRecFilePath]: %@",[untechable getRecFilePath]);
     //NSLog(@"[untechable getRecFileName]: %@",[untechable getRecFileName]);
@@ -262,7 +267,6 @@
     
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
     [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
-    
     
     // -------------------- ---- Audio Upload Status ---------------------------\\
     //pass MediaType file
@@ -318,8 +322,10 @@
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     // NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
 
-    BOOL errorOnFinish = NO;
     [self setNextHighlighted:NO];
+    
+    BOOL errorOnFinish = NO;
+    
     if( returnData != nil ){
         
         NSDictionary *dict=[NSJSONSerialization JSONObjectWithData:returnData options:NSJSONReadingMutableLeaves error:nil];
@@ -329,8 +335,18 @@
         
         if( [[dict valueForKey:@"status"] isEqualToString:@"OK"] ) {
             message = @"Untechable saved successfully";
+            
+            untechable.twillioNumber = [dict valueForKey:@"twillioNumber"];
+            untechable.eventId = [dict valueForKey:@"eventId"];
+            [untechable setOrSaveVars:SAVE];
+            
         } else{
             message = [dict valueForKey:@"message"];
+            if( !([[dict valueForKey:@"eventId"] isEqualToString:@"0"]) ) {
+                untechable.eventId = [dict valueForKey:@"eventId"];
+                [untechable setOrSaveVars:SAVE];
+            }
+            
             errorOnFinish = YES;
         }
         
@@ -346,6 +362,12 @@
     if( errorOnFinish ){
         dispatch_async( dispatch_get_main_queue(), ^{
             [self changeNavigation:@"ERROR_ON_FINISH"];
+        });
+    }
+    else{
+        dispatch_async( dispatch_get_main_queue(), ^{
+            [self changeNavigation:@"ON_FINISH"];
+            [self next:@"GO_TO_THANKYOU"];
         });
     }
     
@@ -397,8 +419,6 @@
  */
 - (void)showHidLoadingIndicator:(BOOL)show {
     if( show ){
-        // Remember the right bar button item.
-        //nextButton = self.navigationItem.rightBarButtonItem;
         nextButton.enabled = NO;
         backButton.enabled = NO;
         

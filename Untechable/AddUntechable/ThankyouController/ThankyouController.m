@@ -7,6 +7,7 @@
 //
 
 #import "ThankyouController.h"
+#import "AddUntechableController.h"
 #import "Common.h"
 
 @interface ThankyouController ()
@@ -39,7 +40,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-
+    _btnNew.alpha = 0.0;
+    
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
     
@@ -57,16 +59,25 @@
 
 
 - (IBAction)onNew:(id)sender {
+    [self goToAddUntechableScreen];
+}
+
+-(void)goToAddUntechableScreen{
+    
+    AddUntechableController *addUntechableController;
+    addUntechableController = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
+    [self.navigationController pushViewController:addUntechableController animated:YES];    
     
 }
 
-- (IBAction)onEdit:(id)sender {
-    
-}
 
 #pragma mark -  UI functions
 -(void)updateUI
 {
+    if([untechable isUntechableExpired] ){
+        _btnNew.alpha = 1.0;
+    }
+    
     [_lblStartsFrom setTextColor:defGray];
     _lblStartsFrom.font = [UIFont fontWithName:APP_FONT size:20];
     

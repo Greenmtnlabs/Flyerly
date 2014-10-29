@@ -103,4 +103,18 @@
     return  [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
 }
 
+- (BOOL)date1IsSmallerThenDate2:(NSDate *)date1 date2:(NSDate *)date2
+{
+    NSTimeInterval distanceBetweenDates = [date1 timeIntervalSinceDate:date2];
+    double secondsInMinute = 60;
+    NSInteger secondsBetweenDates = distanceBetweenDates / secondsInMinute;
+    
+    if (secondsBetweenDates == 0)
+        return YES;
+    else if (secondsBetweenDates < 0)
+        return YES;
+    else
+        return NO;
+}
+
 @end

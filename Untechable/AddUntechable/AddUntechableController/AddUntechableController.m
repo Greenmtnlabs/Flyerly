@@ -8,8 +8,10 @@
 
 #import "AddUntechableController.h"
 #import "PhoneSetupController.h"
+#import "ThankyouController.h"
 #import "Common.h"
 #import "BSKeyboardControls.h"
+
 
 @interface AddUntechableController (){
     
@@ -340,6 +342,8 @@
     
 
     BOOL isNew = YES;
+    BOOL goToThankyouScreen = NO;
+    
     int showThisUntechable = 0;
     
     NSMutableDictionary *sUntechable; //Selected Untechable
@@ -356,7 +360,7 @@
             untechable.untechablePath = sUntechable[@"untechablePath"];
         }
     }
-
+    
     //New, set the vars
     if( isNew ){
         
@@ -366,23 +370,26 @@
             [self configureTestData];
         //For testing -------- } --
     }
-    
-    [untechable initUntechableDirectory];
-    
-    now1 = [NSDate date]; //current date
-    
-
-    if( isNew ) {
-        //if this is old event, user trying to re-open, then directly go to thankyou screen
-        if( !([untechable.eventId isEqualToString:@""]) ){
-            
+    else{
+        if( [untechable isUntechableStarted] && !([untechable isUntechableExpired]) ){
+            goToThankyouScreen = YES;
         }
     }
     
-    untechable.twillioNumber = @"123";
-    
-    
-    
+    if( goToThankyouScreen ) {
+        
+        [self goToThankyou];
+    }
+    else {
+        [untechable initUntechableDirectory];
+        now1 = [NSDate date]; //current date
+    }
+}
+-(void)goToThankyou{
+    ThankyouController *thankyouController;
+    thankyouController = [[ThankyouController alloc]initWithNibName:@"ThankyouController" bundle:nil];
+    thankyouController.untechable = untechable;
+    [self.navigationController pushViewController:thankyouController animated:YES];
 }
 
 /*
@@ -393,6 +400,7 @@
     untechable.userId   = TEST_UID;
     //untechable.eventId = TEST_EID;
     //untechable.twillioNumber = TEST_TWILLIO_NUM;
+    //untechable.twillioNumber = @"123";
 }
 
 #pragma mark -  UI functions
