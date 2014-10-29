@@ -338,7 +338,7 @@
 
 -(IBAction)onSignUp{
     
-    if (IS_IPHONE_5) {
+    if (IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS) {
         registerController = [[RegisterController alloc]initWithNibName:@"RegisterViewController_iPhone5" bundle:nil];
     }else{
         registerController = [[RegisterController alloc]initWithNibName:@"RegisterController" bundle:nil];
