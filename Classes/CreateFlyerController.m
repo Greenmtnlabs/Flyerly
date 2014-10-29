@@ -141,20 +141,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     return request;
 }
 
-- (GADRequest *)request_ {
-    GADRequest *request = [GADRequest request];
-    
-    // Make the request for a test ad. Put in an identifier for the simulator as well as any devices
-    // you want to receive test ads.
-    request.testDevices = @[
-                            // TODO: Add your device/simulator test identifiers here. Your device identifier is printed to
-                            // the console when the app is launched.
-                            //NSString *udid = [UIDevice currentDevice].uniqueIdentifier;
-                            GAD_SIMULATOR_ID
-                            ];
-    return request;
-}
-
 - (void)showTopBanner:(UIView *)banner{
     
     [UIView beginAnimations:@"bannerOn" context:NULL];
@@ -173,11 +159,28 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     /*UserPurchases *userPurchases_ = [UserPurchases getInstance];
     if ( bannerAddClosed == NO && ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){*/
-        
-        self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 473, 320, 50)];
-        
-        UIButton *bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(296, 5, 23, 23)];
-        
+
+        UIButton *bannerAdDismissBtn;
+    
+        // Device Check Maintain Size of ScrollView Because Scroll Indicator will show.
+        if ( IS_IPHONE_5 ) {
+            self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 473, 320, 50)];
+            
+            bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(296, 5, 23, 23)];
+        } else if ( IS_IPHONE_6 ){
+            
+            self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 573, 620, 50)];
+            
+            bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(350, 0, 23, 23)];
+        }else if ( IS_IPHONE_6_PLUS ){
+            
+            self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 640, 620, 50)];
+            
+            bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(395, 0, 23, 23)];
+        }else {
+            layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,60)];
+        }
+    
         [bannerAdDismissBtn addTarget:self action:@selector(dissmisBannerAddOnTap) forControlEvents:UIControlEventTouchUpInside];
         
         [bannerAdDismissBtn setImage:[UIImage imageNamed:@"closeAd.png"] forState:UIControlStateNormal];
@@ -264,7 +267,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     // Device Check Maintain Size of ScrollView Because Scroll Indicator will show.
     if ( IS_IPHONE_5 ) {
         layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,150)];
-    } else {
+    } else if ( IS_IPHONE_6 ){
+        layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,420,350)];
+    }else if ( IS_IPHONE_6_PLUS ){
+        layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,150)];
+    }else {
         layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,60)];
     }
     
@@ -448,14 +455,24 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 }
             }
             
-            if(IS_IPHONE_5){
+            if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
                 
                 // Initialize the banner at the bottom of the screen.
                 CGPoint origin;
                 origin = CGPointMake(0.0,0.0);
                 
+                GADAdSize customAdSize;
+                if ( IS_IPHONE_5 ) {
+                    customAdSize = GADAdSizeFromCGSize(CGSizeMake(320, 50));
+                }else if ( IS_IPHONE_6 ){
+                    customAdSize = GADAdSizeFromCGSize(CGSizeMake(420, 50));
+                }else if ( IS_IPHONE_6_PLUS ){
+                    customAdSize = GADAdSizeFromCGSize(CGSizeMake(520, 50));
+                }
+                
+                
                 // Use predefined GADAdSize constants to define the GADBannerView.
-                self.bannerAdd = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner origin:origin];
+                self.bannerAdd = [[GADBannerView alloc] initWithAdSize:customAdSize origin:origin];
                 
                 // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID before compiling.
                 self.bannerAdd.adUnitID = [flyerConfigurator bannerAdID];
