@@ -214,13 +214,13 @@
         </view>
         <view contentMode="scaleToFill" id="wtn-Zi-MKo" userLabel="View - libBackground - FlyerBackground">
             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="WvZ-dV-5Fn">
                     <rect key="frame" x="0.0" y="0.0" width="80" height="45"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Library"/>
-                    <state key="normal" image="addbg_library.png">
+                    <state key="normal" backgroundImage="addbg_library.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="disabled" image="addbg_library_selected.png"/>
@@ -231,9 +231,9 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="TUU-ew-jcU">
                     <rect key="frame" x="80" y="0.0" width="80" height="45"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="TakePhoto"/>
-                    <state key="normal" image="07_camera.png">
+                    <state key="normal" backgroundImage="07_camera.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected" image="addbg_takephoto_selected.png"/>
@@ -243,9 +243,9 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="t0N-7F-yOw">
                     <rect key="frame" x="160" y="0.0" width="80" height="45"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="CameraRoll"/>
-                    <state key="normal" image="07_roll.png">
+                    <state key="normal" backgroundImage="07_roll.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected" image="addbg_cameraroll_selected.png"/>
@@ -255,9 +255,9 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="rR0-dC-sak">
                     <rect key="frame" x="240" y="0.0" width="80" height="45"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Border"/>
-                    <state key="normal" image="addbg_border.png">
+                    <state key="normal" backgroundImage="addbg_border.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected" image="addbg_border_selected.png"/>
@@ -269,6 +269,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="342" y="1159.5"/>
         </view>
         <view contentMode="scaleToFill" id="8Ew-aX-Xah" userLabel="View - Font sub menu">
             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
@@ -412,7 +413,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="80" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Camera"/>
-                    <state key="normal" image="07_camera.png">
+                    <state key="normal" backgroundImage="07_camera.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected" image="07_camera_selected.png"/>
@@ -424,7 +425,7 @@
                     <rect key="frame" x="80" y="0.0" width="80" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Gallery"/>
-                    <state key="normal" image="07_roll.png">
+                    <state key="normal" backgroundImage="07_roll.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected" image="07_roll_selected.png"/>
@@ -436,7 +437,7 @@
                     <rect key="frame" x="160" y="0.0" width="80" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Width"/>
-                    <state key="normal" image="07_width.png">
+                    <state key="normal" backgroundImage="07_width.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected" image="07_width_selected.png"/>
@@ -448,7 +449,7 @@
                     <rect key="frame" x="240" y="0.0" width="80" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Height"/>
-                    <state key="normal" image="07_height.png">
+                    <state key="normal" backgroundImage="07_height.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected" image="07_height_selected.png"/>
