@@ -63,6 +63,8 @@
 - (IBAction)onNew:(id)sender {
     untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*2)] ]; //current time +2MIN
     untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*120)] ]; //current time +2hr
+
+    untechable.paid = NO;
     
     [self goToAddUntechableScreen];
 }
