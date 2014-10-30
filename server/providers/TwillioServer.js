@@ -43,7 +43,7 @@ TwillioServer.setup = function(app) {
 
             Twillio.findOne({
                 number: callTo,
-				status:'IN_USE'
+				status : { $in: ["IN_USE", "N_USE_DEFAULT1"] }
             }, function(error, twillio) {
 
                 if (error) {
