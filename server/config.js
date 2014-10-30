@@ -9,10 +9,10 @@ config.app.mode = {}
 
 config.app.errorUrl   = '/error';
 
-config.app.mode.LOCALHOST = 'localhost'; //Port: 3000
-config.app.mode.PRODUCTION = 'production';   //Port: 80
-config.app.mode.DEVELOPMENT = 'development'; //Port: 3000
-config.app.mode.current = config.app.mode.DEVELOPMENT; //LOCALHOST
+config.app.mode.LOCALHOST = 'localhost'; //Port: 3001
+config.app.mode.DEVELOPMENT = 'development'; //Port: 8000
+config.app.mode.PRODUCTION = 'production';   //Port: 3010
+config.app.mode.current = config.app.mode.PRODUCTION;//DEVELOPMENT; //LOCALHOST
  
 // HTTP server configuration
 config.http = {}
@@ -49,18 +49,19 @@ if( config.app.mode.current == config.app.mode.LOCALHOST  ) {
 	config.http.host	=	'http://localhost:'+config.http.port ;
 	
 }
-else if( config.app.mode.current == config.app.mode.PRODUCTION  ) {
-	config.http.port = 80;
-	// 1-Database setting
-	config.db.host =  'mongodb://admin:untechable@ds047930.mongolab.com:47930/untechable';
-	config.http.host	=	'http://untechable.com';
-} 
 else if( config.app.mode.current == config.app.mode.DEVELOPMENT  ) {
 	config.http.port = 8000;
 	// 1-Database setting
 	config.db.host =  'mongodb://admin:untechable@ds047930.mongolab.com:47930/untechable';
 	config.http.host	=	'http://www.riksof.com:'+config.http.port;
 }
+else if( config.app.mode.current == config.app.mode.PRODUCTION  ) {
+	config.http.port = 3010;
+	// 1-Database setting
+	config.db.host =  'mongodb://admin:untechable@ds047930.mongolab.com:47930/untechable';
+	config.http.host	=	'http://54.86.179.252:'+config.http.port;
+} 
+
 
 // ACCOUNT TYPES
 config.acType = {};
