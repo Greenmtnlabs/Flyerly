@@ -43,7 +43,7 @@ TwillioServer.setup = function(app) {
 
             Twillio.findOne({
                 number: callTo,
-				status : { $in: ["IN_USE", "N_USE_DEFAULT1"] }
+				status : { $in: ["IN_USE", "IN_USE_DEFAULT1"] }
             }, function(error, twillio) {
 
                 if (error) {
@@ -57,6 +57,7 @@ TwillioServer.setup = function(app) {
                     res.end(response);
                     return;
                 }
+
 
                 // if twillio object is found for this number
                 if (twillio != null) {
