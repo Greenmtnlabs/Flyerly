@@ -169,12 +169,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(296, 5, 23, 23)];
         } else if ( IS_IPHONE_6 ){
             
-            self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 573, 620, 50)];
+            self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 566, 620, 50)];
             
             bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(350, 0, 23, 23)];
         }else if ( IS_IPHONE_6_PLUS ){
             
-            self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 640, 620, 50)];
+            self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 635, 620, 50)];
             
             bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(395, 0, 23, 23)];
         }else {
@@ -4103,7 +4103,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [UIView setAnimationDuration:0.4f];
         [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height - 505, 320,505 )];
         if ( IS_IPHONE_6) {
-            [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height-350, 375,350 )];
+            [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height - 550, 375,550 )];
         }else if ( IS_IPHONE_6_PLUS){
             [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height-550, 420,550 )];
         }
