@@ -12,7 +12,7 @@ config.app.errorUrl   = '/error';
 config.app.mode.LOCALHOST = 'localhost'; //Port: 3000
 config.app.mode.PRODUCTION = 'production';   //Port: 80
 config.app.mode.DEVELOPMENT = 'development'; //Port: 3000
-config.app.mode.current = config.app.mode.LOCALHOST;//DEVELOPMENT;
+config.app.mode.current = config.app.mode.DEVELOPMENT; //LOCALHOST
  
 // HTTP server configuration
 config.http = {}
@@ -53,7 +53,7 @@ else if( config.app.mode.current == config.app.mode.PRODUCTION  ) {
 	config.http.port = 80;
 	// 1-Database setting
 	config.db.host =  'mongodb://admin:untechable@ds047930.mongolab.com:47930/untechable';
-	config.http.host	=	'http://api.typepath.com';
+	config.http.host	=	'http://untechable.com';
 } 
 else if( config.app.mode.current == config.app.mode.DEVELOPMENT  ) {
 	config.http.port = 8000;
@@ -73,6 +73,7 @@ config.twilio = {};
 config.twilio.accountSid = 'ACe43ba6281588bd243d893ce5326049d7';
 config.twilio.authToken = '7c952d7f820c26088e8f7ba2d6f39c2b';
 config.twilio.tokenExpiry = 604800;
+config.twilio.default1TwilioNumber = "+16467590005";
 
 //Urls of apis
 config.urls = {};
@@ -81,6 +82,7 @@ config.urls.TWILLIO_CALL_URL = config.http.host + "/ut-handle-call";
 //Directory paths
 config.dir = {};
 config.dir.recordingsPath = __dirname+'/../recordings/';
+
 
 console.log("config.http.host",config.http.host);
 
