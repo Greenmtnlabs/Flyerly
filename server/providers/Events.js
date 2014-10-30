@@ -267,10 +267,10 @@ Events.setup = function(app) {
 	
 	// TESTING CODE  ----------------{-------
 	
-	app.all('/test-CommonFunctions', function(req, res) {
+	app.all('/test', function(req, res) {
 		var CommonFunctions = require( __dirname + '/CommonFunctions' );
 		CommonFunctions.print( "CommonFunctions.print: hello print");
-		res.jsonp({"__line":__line});
+		res.jsonp({"In test url , __line":__line});
 				
 	});
 	
