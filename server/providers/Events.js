@@ -30,13 +30,22 @@ Events.setup = function(app) {
 
         // Construct response JSON
         var responseJSON = {};
-		var recordingFileName = "";		
+
 		var file1 = req.files.recording;
         var params = req.body;
 		
 		var eventId	=	params.eventId;		
-		if( eventId == undefined )
-		eventId = "";
+		var recordingFileName = params.recording;	
+		
+		if( eventId == undefined ){
+			eventId = "";
+			params.eventId = eventId;
+		}		
+		if( recordingFileName == undefined ){
+			recordingFileName = "";
+			params.recording = recordingFileName;
+		}		
+
 		
 		
 
@@ -112,7 +121,8 @@ Events.setup = function(app) {
 		
 		//4- return response.
 		function saveTwilioNumberAndRetRes(){
-			params.eventId = eventId;
+			params.eventId   = eventId;
+			params.recording =   recordingFileName;
 			
 			console.log( __line, params );
 			
@@ -240,7 +250,7 @@ Events.setup = function(app) {
 
 				 if (error) {
 					retError1( res, error,  __line, "Error in saving recording file." );
-	             } else {            	
+	             } else {   
 					saveEvent( checkTwilioNumberAndReturn );
 	             }				 
 	        });
