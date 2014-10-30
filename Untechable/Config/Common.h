@@ -43,8 +43,8 @@
 
 
 //#define SERVER_URL @"http://192.168.0.118:3001" //LOCALHOST
-#define SERVER_URL @"http://riksof.com:8000" //DEVELOPMENT
-//#define SERVER_URL @"http://untechable.com" //PRODUCTION
+//#define SERVER_URL @"http://riksof.com:8000"    //DEVELOPMENT
+#define SERVER_URL @"http://54.86.179.252:3010"   //PRODUCTION
 
 #define API_GET_NUMBER SERVER_URL@"/get-forwading-number"
 #define API_SAVE SERVER_URL@"/event/save"
