@@ -313,8 +313,17 @@
     
     [cell setAccessoryType:UITableViewCellAccessoryNone];
     if (cell == nil) {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell" owner:self options:nil];
-        cell = (SaveFlyerCell *)[nib objectAtIndex:0];
+        if( IS_IPHONE_5 ){
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell" owner:self options:nil];
+            cell = (SaveFlyerCell *)[nib objectAtIndex:0];
+        } else if ( IS_IPHONE_6 ){
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell-iPhone6" owner:self options:nil];
+            cell = (SaveFlyerCell *)[nib objectAtIndex:0];
+        } else if ( IS_IPHONE_6_PLUS ) {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell-iPhone6-Plus" owner:self options:nil];
+            cell = (SaveFlyerCell *)[nib objectAtIndex:0];
+        }
+        
     }
     
     if( searching ){
