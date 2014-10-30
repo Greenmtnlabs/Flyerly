@@ -708,12 +708,33 @@ const int CONTACTS_TAB = 0;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
+    CGRect newFrame = CGRectMake( 0, 0,
+                                 tableView.frame.size.width,
+                                 100);
+    
+    
+    
     static NSString *cellId = @"InviteCell";
     InviteFriendsCell *cell = (InviteFriendsCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
     
     if ( cell == nil ) {
+        
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InviteFriendsCell" owner:self options:nil];
         cell = (InviteFriendsCell *)[nib objectAtIndex:0];
+        
+        //cell.contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+        //[cell setFrame:newFrame];
+        
+        if( IS_IPHONE_5 ){
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InviteFriendsCell" owner:self options:nil];
+        cell = (InviteFriendsCell *)[nib objectAtIndex:0];
+        } else if ( IS_IPHONE_6 ){
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InviteFreindsCell-iPhone6" owner:self options:nil];
+            cell = (InviteFriendsCell *)[nib objectAtIndex:0];
+        } else if ( IS_IPHONE_6_PLUS ) {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InviteFreindsCell-iPhone6-Plus" owner:self options:nil];
+            cell = (InviteFriendsCell *)[nib objectAtIndex:0];
+        }
     }
         
     
