@@ -61,10 +61,16 @@
 
 
 - (IBAction)onNew:(id)sender {
+    untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*2)] ]; //current time +2MIN
+    untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*120)] ]; //current time +2hr
+    
     [self goToAddUntechableScreen];
 }
 
 -(void)goToAddUntechableScreen{
+    
+    untechable.savedOnServer    = NO;
+    [untechable setOrSaveVars:SAVE];
     
     AddUntechableController *addUntechableController;
     addUntechableController = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
@@ -80,14 +86,11 @@
 #pragma mark -  UI functions
 -(void)updateUI
 {
-    if([untechable isUntechableExpired] ){
+    if( [untechable isUntechableStarted] || [untechable isUntechableExpired] ){
         _btnNew.alpha = 1.0;
+    } else{
+       _btnEdit.alpha = 1.0;
     }
-
-    if(untechable.paid == NO ){
-        _btnEdit.alpha = 1.0;
-    }
-    
     
     [_lblStartsFrom setTextColor:defGray];
     _lblStartsFrom.font = [UIFont fontWithName:APP_FONT size:20];

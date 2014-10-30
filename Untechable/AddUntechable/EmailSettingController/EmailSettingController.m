@@ -338,6 +338,7 @@
             
             untechable.twillioNumber = [dict valueForKey:@"twillioNumber"];
             untechable.eventId = [dict valueForKey:@"eventId"];
+            untechable.savedOnServer    = YES;
             [untechable setOrSaveVars:SAVE];
             
         } else{

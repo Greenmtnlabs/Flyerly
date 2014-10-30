@@ -14,7 +14,7 @@
 @implementation Untechable
 
 //Settings
-@synthesize commonFunctions, dic, piecesFile, paid, userId, uniqueId, eventId, untechablePath, dateFormatter;
+@synthesize commonFunctions, dic, piecesFile, paid, userId, uniqueId, eventId, untechablePath, dateFormatter, savedOnServer;
 
 //1-vars for screen1
 @synthesize timezoneOffset, spendingTimeTxt, startDate, endDate, hasEndDate;
@@ -171,6 +171,8 @@
         dic[@"userId"]          = userId;
         dic[@"uniqueId"]        = uniqueId;
         dic[@"untechablePath"]  = untechablePath;
+        dic[@"savedOnServer"]   = savedOnServer ? @"YES" : @"NO";
+        
 
         //Screen1 vars
         dic[@"timezoneOffset"]  = timezoneOffset;
@@ -213,7 +215,7 @@
         userId         = ( dic[@"userId"] ) ? dic[@"userId"] : @"";
         uniqueId       = ( dic[@"uniqueId"] ) ? dic[@"uniqueId"] : [self getUniqueId];
         untechablePath = ( dic[@"untechablePath"] ) ? dic[@"untechablePath"] : [self getNewUntechablePath];
-        
+        savedOnServer  = ([dic[@"savedOnServer"] isEqualToString:@"YES"]) ? YES : NO;
         
         //Screen1 vars
         timezoneOffset  = ( dic[@"timezoneOffset"] ) ? dic[@"timezoneOffset"] : [commonFunctions getTimeZoneOffset];
@@ -256,6 +258,7 @@
     paid     = NO;
     uniqueId = [self getUniqueId];
     untechablePath = [self getNewUntechablePath];
+    savedOnServer = NO;
 
     
     //Screen1

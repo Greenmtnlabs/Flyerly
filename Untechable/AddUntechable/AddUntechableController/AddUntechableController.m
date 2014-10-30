@@ -381,16 +381,11 @@
         [untechable initUntechableDirectory];
         
         
-        if( [untechable isUntechableStarted] && !([untechable isUntechableExpired]) ){
+        if( [untechable isUntechableStarted] && untechable.savedOnServer == YES){
             goToThankyouScreen = YES;
-        }
-        //Allow edit, we have a chance he will pay us
-        if( goToThankyouScreen && untechable.paid == NO ){
-            goToThankyouScreen = NO;
         }
         
         if( goToThankyouScreen ) {
-            
             [self goToThankyou];
         }
     }

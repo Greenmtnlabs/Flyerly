@@ -26,6 +26,7 @@
 @property (strong, nonatomic) NSString *eventId;
 @property (strong, nonatomic) NSString *untechablePath;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
+@property (nonatomic, assign) BOOL savedOnServer;
 
 //Screen1
 @property (strong, nonatomic) NSString *timezoneOffset, *spendingTimeTxt, *startDate, *endDate;
