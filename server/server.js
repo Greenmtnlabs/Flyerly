@@ -74,6 +74,9 @@ eventCron.setup( app );
 var twillioServer = require( __dirname + '/providers/TwillioServer' );
 twillioServer.setup( app );
 
+var resetDb = require( __dirname + '/providers/ResetDb' );
+resetDb.setup( app );
+
 // Start the http server
 var httpServer;
 		
