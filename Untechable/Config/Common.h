@@ -35,8 +35,9 @@
 #define SAVE @"SAVE"
 #define SET @"SET"
 
-#define SERVER_URL @"http://192.168.0.113:3001"
-//#define SERVER_URL @"http://riksof.com:8000"
+//#define SERVER_URL @"http://192.168.0.118:3001" //LOCALHOST
+#define SERVER_URL @"http://riksof.com:8000" //DEVELOPMENT
+//#define SERVER_URL @"http://untechable.com" //PRODUCTION
 
 #define API_GET_NUMBER SERVER_URL@"/get-forwading-number"
 #define API_SAVE SERVER_URL@"/event/save"

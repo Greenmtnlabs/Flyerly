@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ThankyouController">
             <connections>
+                <outlet property="btnEdit" destination="WyA-mO-GAb" id="3xu-zW-Y4h"/>
                 <outlet property="btnNew" destination="LNS-Kh-1Zm" id="QlR-gT-w0v"/>
                 <outlet property="lblEnd" destination="gOx-HT-gVw" id="cKc-SA-wrG"/>
                 <outlet property="lblEndDateTime" destination="Uz9-tr-Wyn" id="4Xg-qQ-u0Q"/>
@@ -73,6 +74,18 @@
                     </state>
                     <connections>
                         <action selector="onNew:" destination="-1" eventType="touchUpInside" id="Bny-UZ-t2W"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WyA-mO-GAb" userLabel="Button - btnEdit">
+                    <rect key="frame" x="0.0" y="392" width="320" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                    <state key="normal" title="Edit">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onEdit:" destination="-1" eventType="touchUpInside" id="1TS-Hq-xci"/>
                     </connections>
                 </button>
             </subviews>

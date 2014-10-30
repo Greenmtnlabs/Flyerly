@@ -170,6 +170,7 @@
 {
     if([callFrom isEqualToString:@"viewDidLoad"])
     {
+        self.navigationItem.hidesBackButton = YES;
         
         // Center title __________________________________________________
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
@@ -324,6 +325,8 @@
 #pragma mark -  Model funcs
 // set default vaules in model
 -(void)setDefaultModel{
+
+    now1 = [NSDate date]; //current date
     
     //init object
     untechable  = [[Untechable alloc] init];
@@ -369,21 +372,29 @@
         //For testing -------- { --
             [self configureTestData];
         //For testing -------- } --
+        
+        [untechable initUntechableDirectory];
+        
     }
     else{
+        
+        [untechable initUntechableDirectory];
+        
+        
         if( [untechable isUntechableStarted] && !([untechable isUntechableExpired]) ){
             goToThankyouScreen = YES;
         }
+        //Allow edit, we have a chance he will pay us
+        if( goToThankyouScreen && untechable.paid == NO ){
+            goToThankyouScreen = NO;
+        }
+        
+        if( goToThankyouScreen ) {
+            
+            [self goToThankyou];
+        }
     }
     
-    if( goToThankyouScreen ) {
-        
-        [self goToThankyou];
-    }
-    else {
-        [untechable initUntechableDirectory];
-        now1 = [NSDate date]; //current date
-    }
 }
 -(void)goToThankyou{
     ThankyouController *thankyouController;

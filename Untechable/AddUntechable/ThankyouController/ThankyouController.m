@@ -19,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblTwillioNumber;
 @property (strong, nonatomic) IBOutlet UILabel *lblForwadingNumber;
 @property (strong, nonatomic) IBOutlet UIButton *btnNew;
+@property (strong, nonatomic) IBOutlet UIButton *btnEdit;
 
 @end
 
@@ -41,6 +42,7 @@
     // Do any additional setup after loading the view from its nib.
     
     _btnNew.alpha = 0.0;
+    _btnEdit.alpha = 0.0;
     
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
@@ -70,6 +72,10 @@
     
 }
 
+- (IBAction)onEdit:(id)sender {
+    [self goToAddUntechableScreen];
+}
+
 
 #pragma mark -  UI functions
 -(void)updateUI
@@ -77,6 +83,11 @@
     if([untechable isUntechableExpired] ){
         _btnNew.alpha = 1.0;
     }
+
+    if(untechable.paid == NO ){
+        _btnEdit.alpha = 1.0;
+    }
+    
     
     [_lblStartsFrom setTextColor:defGray];
     _lblStartsFrom.font = [UIFont fontWithName:APP_FONT size:20];
@@ -106,6 +117,9 @@
     
     [_btnNew setTitleColor:defGray forState:UIControlStateNormal];
     _btnNew.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
+    
+    [_btnEdit setTitleColor:defGray forState:UIControlStateNormal];
+    _btnEdit.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
 }
 
 #pragma mark -  Navigation functions
