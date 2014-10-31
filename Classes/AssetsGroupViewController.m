@@ -171,7 +171,17 @@
                 self.loading = YES;
                 
                 //Background Thread
-                CropVideoViewController *cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
+                CropVideoViewController *cropVideo;
+                
+                if ( IS_IPHONE_5) {
+                    cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
+                }else if ( IS_IPHONE_6){
+                    cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController-iPhone6" bundle:nil];
+                }else if ( IS_IPHONE_6_PLUS){
+                    cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController-iPhone6-Plus" bundle:nil];
+                }
+                
+                
                 cropVideo.desiredVideoSize = _desiredVideoSize;
                 cropVideo.url = asset.ALAsset.defaultRepresentation.url;
                 cropVideo.onVideoFinished = _onVideoFinished;

@@ -1047,6 +1047,7 @@
 		24CF67AC1A026C75003A5623 /* CropViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24CF67AB1A026C75003A5623 /* CropViewController.xib */; };
 		24CF67AE1A026D88003A5623 /* CropViewController-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24CF67AD1A026D88003A5623 /* CropViewController-iPhone6.xib */; };
 		24D2543619F009E000590782 /* AnjelikaRose.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24D2543519F009E000590782 /* AnjelikaRose.ttf */; };
+		24E31FDE1A03B398004E3ABD /* CropVideoViewController-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24E31FDD1A03B398004E3ABD /* CropVideoViewController-iPhone6.xib */; };
 		24F9928119AF78FB005C478B /* post@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24F9928019AF78FB005C478B /* post@2x.png */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		30D58CFF10FB1BF800E0C7E8 /* icon0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30D58C7810FB1BF800E0C7E8 /* icon0.jpg */; };
@@ -2606,6 +2607,7 @@
 		24CF67AB1A026C75003A5623 /* CropViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CropViewController.xib; sourceTree = "<group>"; };
 		24CF67AD1A026D88003A5623 /* CropViewController-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CropViewController-iPhone6.xib"; sourceTree = "<group>"; };
 		24D2543519F009E000590782 /* AnjelikaRose.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AnjelikaRose.ttf; path = Data/fonts/AnjelikaRose.ttf; sourceTree = "<group>"; };
+		24E31FDD1A03B398004E3ABD /* CropVideoViewController-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CropVideoViewController-iPhone6.xib"; sourceTree = "<group>"; };
 		24F9928019AF78FB005C478B /* post@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "post@2x.png"; sourceTree = "<group>"; };
 		26D73E02307543D994C6C8BE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -5125,6 +5127,7 @@
 				49F109CE192C7926002B0CD4 /* CropVideoViewController.h */,
 				49F109CF192C7926002B0CD4 /* CropVideoViewController.m */,
 				49F109D0192C7926002B0CD4 /* CropVideoViewController.xib */,
+				24E31FDD1A03B398004E3ABD /* CropVideoViewController-iPhone6.xib */,
 				49F5CA01192E11C200681C6E /* CropView.h */,
 				49F5CA02192E11C200681C6E /* CropView.m */,
 			);
@@ -5390,6 +5393,7 @@
 				24861F1719F9147100670F6D /* invite_facebook_selected@3x.png in Resources */,
 				249F1FD0193F55E90072835E /* fb_Like@2x.png in Resources */,
 				30D58D1010FB1BF800E0C7E8 /* icon24.jpg in Resources */,
+				24E31FDE1A03B398004E3ABD /* CropVideoViewController-iPhone6.xib in Resources */,
 				242184AB194B4AEC00FDDA97 /* emoticon157@2x.png in Resources */,
 				246EF547193C515D004539B2 /* emoticon9@2x.png in Resources */,
 				30D58D1110FB1BF800E0C7E8 /* icon25.jpg in Resources */,
@@ -6688,7 +6692,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "46dc2fdc-52cb-47a6-8136-858d8b332879";
@@ -6734,7 +6738,7 @@
 					"$(PROJECT_DIR)/ExternalFrameworks/GoogleMobileAdsSdkiOS-6.12.0",
 					"$(PROJECT_DIR)/ExternalFrameworks/Flurry",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-lc++",
@@ -6744,7 +6748,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "46dc2fdc-52cb-47a6-8136-858d8b332879";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 i386 x86_64 armv7s";
+				VALID_ARCHS = "armv7 i386 x86_64 armv7s armv8";
 			};
 			name = "Ad Hoc";
 		};
@@ -6788,7 +6792,7 @@
 					"$(PROJECT_DIR)/ExternalFrameworks/GoogleMobileAdsSdkiOS-6.12.0",
 					"$(PROJECT_DIR)/ExternalFrameworks/Flurry",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-lc++",
@@ -6797,7 +6801,7 @@
 				PROVISIONING_PROFILE = "ee03a121-2436-487a-851c-58aab8d60a87";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 i386 x86_64 armv7s";
+				VALID_ARCHS = "armv7 i386 x86_64 armv7s armv8";
 			};
 			name = Debug;
 		};
@@ -6837,7 +6841,7 @@
 					"$(PROJECT_DIR)/ExternalFrameworks/GoogleMobileAdsSdkiOS-6.12.0",
 					"$(PROJECT_DIR)/ExternalFrameworks/Flurry",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-lc++",
@@ -6847,7 +6851,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 i386 x86_64 armv7s";
+				VALID_ARCHS = "armv7 i386 x86_64 armv7s armv8";
 			};
 			name = Release;
 		};
@@ -6864,7 +6868,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "ee03a121-2436-487a-851c-58aab8d60a87";
@@ -6886,7 +6890,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "46dc2fdc-52cb-47a6-8136-858d8b332879";

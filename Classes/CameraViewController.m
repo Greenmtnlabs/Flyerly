@@ -158,7 +158,16 @@
 -(void) cropVideo:(NSURL *)movieUrl {
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     
-    CropVideoViewController *cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
+    //Background Thread
+    CropVideoViewController *cropVideo;
+    
+    if ( IS_IPHONE_5) {
+        cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
+    }else if ( IS_IPHONE_6){
+        cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController-iPhone6" bundle:nil];
+    }else if ( IS_IPHONE_6_PLUS){
+        cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController-iPhone6-Plus" bundle:nil];
+    }
     cropVideo.desiredVideoSize = _desiredVideoSize;
     cropVideo.url = movieUrl;
     cropVideo.onVideoFinished = _onVideoFinished;

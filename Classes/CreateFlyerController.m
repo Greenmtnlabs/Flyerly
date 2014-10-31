@@ -268,9 +268,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     if ( IS_IPHONE_5 ) {
         layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,150)];
     } else if ( IS_IPHONE_6 ){
-        layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,420,350)];
+        layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,420,150)];
     }else if ( IS_IPHONE_6_PLUS ){
-        layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,150)];
+        layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,420,150)];
     }else {
         layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,60)];
     }
