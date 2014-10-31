@@ -18,22 +18,27 @@ EventCron.setup = function(app) {
 
     // Our logger for logging to file and console
     var logger = require(__dirname + '/../logger');
-console.log('EventCron');
+
+    var fs = require('fs');
+
     // Check if the event is expire
     function checkEvent() {
-            var Events = require(__dirname + '/../models/Events');
-console.log('checkEvent');
+            
+			logger.info('================= Event cron start ================');
+
+			var Events = require(__dirname + '/../models/Events');
+
             // Get today date
             var today = new Date();
 
             // Current timestamp
             var currentDate = today.getTime();
 
-            Events.find({}, function(err, expire) {
+            Events.find({hasEndDate:'YES'}, function(err, expire) {
 
                 if (expire != null) {
 
-                    console.log('inside if condition');
+                    logger.info('Total ' + expire.length + ' Events found');
 
                     // Loop through all record
                     for (var i = 0; i < expire.length; i++) {
@@ -44,7 +49,6 @@ console.log('checkEvent');
                             // Set the number as free when event is deleted
                             // Var for Twilio models
                             var Twillio = require(__dirname + '/../models/Twillio');
-			    console.log(expire[i].forwadingNumber);
 
                             Twillio.update({
                                     assignedTo: expire[i]._id
@@ -61,38 +65,48 @@ console.log('checkEvent');
                                         logger.error(JSON.stringify(err));
                                         return;
                                     }
-				    console.log(model);
 
                                     // add message to log
                                     logger.info('Number updated successfully');
 
                                 }); // end update
+							
+							// delete recording file
+							fs.unlinkSync(__dirname + '/../../recordings/' + expire[i].recording);
+							logger.info('File ' + expire[i].recording + ' removed successfully.');
 
-                            console.log('value of ', expire[i]);
-                            // Remove the Event after updating
-                            console.log(expire[i]._id);
+                            // Remove Event
                             Events.remove({
                                     "_id": expire[i]._id
                                 },
                                 function(err, removed) {
-                                    console.log(removed);
+									if (err) {
+                                        logger.error(JSON.stringify(err));
+                                        return;
+                                    }
+
+                                   logger.info('Event removed successfully');
                                 });
 
 
 
                         } else {
-                            console.log('Else condition');
+                            logger.info('This event ' + expire[i]._id + ' is not expired yet');
                         } // end if-else
 
                     } //end of for loop
-                }
+
+                } else {
+					logger.info('No Events found');
+				}
 
             });
 
 
-
+			
         } // end checkevent() function
-    checkEvent();
+    
+		//checkEvent();
     /*
     // Setup the Cron job after 30 min
     var minutes = 2;
