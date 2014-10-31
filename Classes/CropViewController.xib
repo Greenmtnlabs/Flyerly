@@ -77,6 +77,7 @@
                 <outlet property="scrollView" destination="15" id="16"/>
                 <outlet property="viewToCrop" destination="23" id="24"/>
             </connections>
+            <point key="canvasLocation" x="46" y="332"/>
         </view>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
     </objects>

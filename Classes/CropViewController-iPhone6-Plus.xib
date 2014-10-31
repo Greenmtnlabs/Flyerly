@@ -7,52 +7,52 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CropViewController">
             <connections>
-                <outlet property="cropView" destination="9tG-WK-WQS" id="gQl-e2-Qdj"/>
-                <outlet property="filterView" destination="XLk-Z8-TRH" id="iw6-U2-TxJ"/>
-                <outlet property="view" destination="9tG-WK-WQS" id="8s1-VQ-Sr5"/>
+                <outlet property="cropView" destination="m2E-Td-7OS" id="XoV-3u-qsa"/>
+                <outlet property="filterView" destination="4aF-td-dLF" id="Ee6-IL-NUC"/>
+                <outlet property="view" destination="m2E-Td-7OS" id="Tf3-3u-M05"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="9tG-WK-WQS" customClass="NBUCropView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="585"/>
+        <view contentMode="scaleToFill" id="m2E-Td-7OS" customClass="NBUCropView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crop_and_resize.png" id="7Bu-hw-Kt4">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crop_and_resize.png" id="ReY-UO-TOV">
                     <rect key="frame" x="8" y="2" width="129" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="filter.png" id="ba5-mL-qJB">
-                    <rect key="frame" x="8" y="400" width="58" height="25"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="filter.png" id="hCp-hL-86D">
+                    <rect key="frame" x="8" y="473" width="58" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="rh8-Bx-1dx">
-                    <rect key="frame" x="0.0" y="29" width="320" height="320"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="qcY-TH-gqT">
+                    <rect key="frame" x="28" y="41" width="320" height="320"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="rva-lD-xwn">
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="lVM-Ja-b2z">
                             <rect key="frame" x="140" y="142" width="37" height="37"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </activityIndicatorView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="04T-YL-Mhg">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="IWW-k0-adt">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         </imageView>
                     </subviews>
                     <connections>
-                        <outlet property="delegate" destination="9tG-WK-WQS" id="Aaf-mH-pLK"/>
+                        <outlet property="delegate" destination="m2E-Td-7OS" id="eET-b2-DRb"/>
                     </connections>
                 </scrollView>
-                <view contentMode="scaleToFill" id="XLk-Z8-TRH" customClass="NBUPresetFilterView">
-                    <rect key="frame" x="0.0" y="450" width="320" height="83"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                <view contentMode="scaleToFill" id="4aF-td-dLF" customClass="NBUPresetFilterView">
+                    <rect key="frame" x="0.0" y="528" width="375" height="97"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <view contentMode="scaleToFill" id="DOY-vE-GNX" customClass="ObjectSlideView">
+                        <view contentMode="scaleToFill" id="MmO-yi-oVR" customClass="ObjectSlideView">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="83"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="No filters were set" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="YCK-ve-3EE">
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="No filters were set" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="wdx-4K-GKt">
                                     <rect key="frame" x="91" y="31" width="138" height="21"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
@@ -60,25 +60,25 @@
                             </subviews>
                             <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                             <connections>
-                                <outlet property="noContentsView" destination="YCK-ve-3EE" id="Q0u-Dx-uOQ"/>
+                                <outlet property="noContentsView" destination="wdx-4K-GKt" id="ccQ-0Z-4Xq"/>
                             </connections>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
-                        <outlet property="activityView" destination="rva-lD-xwn" id="5JR-3J-KKL"/>
-                        <outlet property="editingImageView" destination="04T-YL-Mhg" id="Go8-a4-XyQ"/>
-                        <outlet property="filterSlideView" destination="DOY-vE-GNX" id="lZr-SE-fsp"/>
+                        <outlet property="activityView" destination="lVM-Ja-b2z" id="RfD-Hd-07B"/>
+                        <outlet property="editingImageView" destination="IWW-k0-adt" id="Llf-Fv-EOA"/>
+                        <outlet property="filterSlideView" destination="MmO-yi-oVR" id="iMF-U1-UzP"/>
                     </connections>
                 </view>
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="scrollView" destination="rh8-Bx-1dx" id="qNG-dI-ttr"/>
-                <outlet property="viewToCrop" destination="04T-YL-Mhg" id="nqf-b7-BZh"/>
+                <outlet property="scrollView" destination="qcY-TH-gqT" id="emC-2K-M76"/>
+                <outlet property="viewToCrop" destination="IWW-k0-adt" id="lh9-ta-GsF"/>
             </connections>
-            <point key="canvasLocation" x="-170" y="-12.5"/>
+            <point key="canvasLocation" x="399" y="272"/>
         </view>
     </objects>
     <resources>
