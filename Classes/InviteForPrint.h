@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ParentViewController.h>
 #import "PayPalMobile.h"
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
