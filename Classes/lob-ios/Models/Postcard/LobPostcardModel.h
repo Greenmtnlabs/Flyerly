@@ -34,5 +34,4 @@
                              backUrl:(NSString*)backUrl
                            fullBleed:(BOOL)fullBleed;
 
-- (instancetype) initWithDictionary:(NSDictionary *)dict;
 @end

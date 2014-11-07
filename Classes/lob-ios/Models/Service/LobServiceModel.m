@@ -22,7 +22,6 @@
         
         self.serviceId = dict[@"id"];
         self.name = dict[@"name"];
-        self.description = dict[@"description"];
     }
     return self;
 }
@@ -33,10 +32,8 @@
 }
 
 - (instancetype)initServiceWithName:(NSString*)name
-                        description:(NSString*)description
 {
-    return [self initWithDictionary:@{@"name" : name,
-                                      @"description" : description}];
+    return [self initWithDictionary:@{@"name" : name}];
 }
 
 #pragma mark -

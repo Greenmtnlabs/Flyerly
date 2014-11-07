@@ -22,7 +22,6 @@
         
         self.settingId = dict[@"id"];
         self.type = dict[@"type"];
-        self.description = dict[@"description"];
         self.paper = dict[@"paper"];
         self.width = dict[@"width"];
         self.length = dict[@"length"];
@@ -38,7 +37,6 @@
 }
 
 - (instancetype)initSettingWithType:(NSString*)type
-                        description:(NSString*)description
                               paper:(NSString*)paper
                               witdh:(NSString*)width
                              length:(NSString*)length
@@ -46,7 +44,6 @@
                               notes:(NSString*)notes
 {
     NSDictionary *dict = @{@"type" : type,
-                           @"description" : description,
                            @"paper" : paper,
                            @"width" : width,
                            @"length" : length,
@@ -54,15 +51,6 @@
                            @"notes" : notes};
 
     return [self initWithDictionary:dict];
-}
-
-#pragma mark -
-#pragma mark Description
-
-- (NSString *)description
-{
-    NSString *format = @"(%@) %@, %@ - %@, %@, %@ - %@, %@";
-    return [NSString stringWithFormat:format,self.settingId,self.type,self.description,self.paper,self.width,self.length,self.color,self.notes];
 }
 
 @end

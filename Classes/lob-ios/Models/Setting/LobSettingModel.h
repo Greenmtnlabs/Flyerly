@@ -12,7 +12,6 @@
 @interface LobSettingModel : LobAbstractModel
 @property(nonatomic, strong) NSString *settingId;
 @property(nonatomic, strong) NSString *type;
-@property(nonatomic, strong, getter=settingDescription) NSString *description;
 @property(nonatomic, strong) NSString *paper;
 @property(nonatomic, strong) NSString *width;
 @property(nonatomic, strong) NSString *length;
@@ -22,7 +21,6 @@
 - (instancetype)initSettingWithId:(NSString*)settingId;
 
 - (instancetype)initSettingWithType:(NSString*)type
-                        description:(NSString*)description
                               paper:(NSString*)paper
                               witdh:(NSString*)width
                              length:(NSString*)length

@@ -19,7 +19,7 @@
 #import "SendingPrintViewController.h"
 #import "LobPostcardModel.h"
 #import "LobAddressModel.h"
-#import "Lob/LobRequest.h"
+#import "LobRequest.h"
 #import "LobObjectModel.h"
 #import "PayPalPaymentViewController.h"
 

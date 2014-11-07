@@ -12,11 +12,9 @@
 @interface LobServiceModel : LobAbstractModel
 @property(nonatomic, strong) NSString *serviceId;
 @property(nonatomic, strong) NSString *name;
-@property(nonatomic, strong, getter=serviceDescription) NSString *description;
 
 - (instancetype)initServiceWithId:(NSString*)serviceId;
 
-- (instancetype)initServiceWithName:(NSString*)name
-                        description:(NSString*)description;
+- (instancetype)initServiceWithName:(NSString*)name;
 
 @end

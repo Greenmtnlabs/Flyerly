@@ -12,11 +12,8 @@
 @interface LobPackagingModel : LobAbstractModel
 @property(nonatomic, strong) NSString *packagingId;
 @property(nonatomic, strong) NSString *name;
-@property(nonatomic, strong,getter=packageDescription) NSString *description;
-
 - (instancetype)initPackagingWithId:(NSString*)packagingId;
 
-- (instancetype)initPackagingWithName:(NSString*)name
-                          description:(NSString*)description;
+- (instancetype)initPackagingWithName:(NSString*)name;
 
 @end

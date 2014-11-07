@@ -23,8 +23,6 @@
 #import "LobSettingModel.h"
 #import "LobStateModel.h"
 #import "LobVerifyModel.h"
-#import "LobProjectConstants.h"
-
 
 @implementation LobRequest
 
@@ -317,7 +315,6 @@
             [formData appendPartWithFormData:[object.name dataUsingEncoding:NSUTF8StringEncoding] name:@"name"];
             [formData appendPartWithFormData:[object.setting.settingId dataUsingEncoding:NSUTF8StringEncoding] name:@"setting_id"];
         }
-        
         success:^(AFHTTPRequestOperation *operation, id responseObject)
         {
             NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
@@ -329,7 +326,6 @@
             self.statusCode = operation.response.statusCode;
             response(NULL,error);
         }];
-        
     }
     else
     {
@@ -527,7 +523,7 @@
     andResponse:^(NSData *data, NSError *error)
     {
         NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-
+        
         response([NSClassFromString(classStr) initWithDictionary:responseDict],error);
     }];
 }

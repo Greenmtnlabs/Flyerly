@@ -22,7 +22,6 @@
         
         self.packagingId = dict[@"id"];
         self.name = dict[@"name"];
-        self.description = dict[@"description"];
     }
     return self;
 }
@@ -33,19 +32,8 @@
 }
 
 - (instancetype)initPackagingWithName:(NSString*)name
-                          description:(NSString*)description
 {
-    return [self initWithDictionary:@{@"name" : name,
-                                      @"description" : description}];
-}
-
-#pragma mark -
-#pragma mark Description
-
-- (NSString *)description
-{
-    NSString *format = @"(%@) %@, %@";
-    return [NSString stringWithFormat:format,self.packagingId,self.name,self.description];
+    return [self initWithDictionary:@{@"name" : name}];
 }
 
 @end

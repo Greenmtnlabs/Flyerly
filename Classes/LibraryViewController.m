@@ -43,7 +43,14 @@
     [super viewDidLoad];
 
     // Configure grid view
-    self.objectTableView.nibNameForViews = @"CustomAssetsGroupView";
+    
+    if ( IS_IPHONE_5) {
+        self.objectTableView.nibNameForViews = @"CustomAssetsGroupView";
+    }else if ( IS_IPHONE_6){
+        self.objectTableView.nibNameForViews = @"CustomAssetsGroupView-iPhone6";
+    }else if ( IS_IPHONE_6_PLUS){
+        self.objectTableView.nibNameForViews = @"CustomAssetsGroupView-iPhone6-Plus";
+    }
     
     // Customization
     self.customBackButtonTitle = @"Albums";

@@ -346,7 +346,7 @@ UIButton *backButton;
              [toAddress setObject:model.zip forKey:@"address_zip"];
              [toAddress setObject:model.country forKey:@"address_country"];
              
-             NSString *frontUrl = [NSString stringWithFormat:@"http://assets.lob.com/%@",object.objectId];
+             NSString *frontUrl = [NSString stringWithFormat:@"https://assets.lob.com/%@",object.objectId];
              NSDictionary *postcardDict = @{@"name" : @"Flyer Postcard",
                                             @"front" : frontUrl,
                                             @"back" : @"https://www.lob.com/postcardback.pdf",
@@ -359,10 +359,14 @@ UIButton *backButton;
                 
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"PostCard Send" message:@"Your postcard hase been send to print"  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 
-                if (error != nil){
+                if (error == nil){
                     [alert show];
                 }else {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"PostCard could not send" message:@"Please send again"  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    
+                    NSString *failedError = [NSString stringWithFormat:@"PostCard could not send,Failed with error %@", error];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:failedError  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    
+                    [alert show];
                 }
                 
                 NSLog(@"%@",postcard);
