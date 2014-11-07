@@ -268,12 +268,16 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     if ( IS_IPHONE_5 ) {
         layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,150)];
     } else if ( IS_IPHONE_6 ){
-        layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,420,150)];
+        layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,420,180)];
     }else if ( IS_IPHONE_6_PLUS ){
         layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,420,150)];
     }else {
         layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,60)];
     }
+    
+    layerScrollView.autoresizesSubviews = YES;
+    layerScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    layerScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     
     // Configure its scroll view.
     [layerScrollView setCanCancelContentTouches:NO];
@@ -455,7 +459,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 }
             }
             
-            if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+            if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
                 
                 // Initialize the banner at the bottom of the screen.
                 CGPoint origin;
@@ -481,30 +485,78 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
                 [self.bannerAdd loadRequest:[self request]];
                 
-                
-                NSArray *flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds" owner:self options:nil];
+                NSArray *flyerbackgroundsViewArray;
+                if ( IS_IPHONE_5 || IS_IPHONE_4) {
+                     flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds" owner:self options:nil];
+                }else if ( IS_IPHONE_6){
+                    flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds-iPhone6" owner:self options:nil];
+                }else if ( IS_IPHONE_6_PLUS){
+                    flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds-iPhone6" owner:self options:nil];
+                }
                 backgroundsView = [flyerbackgroundsViewArray objectAtIndex:0];
                 
-                NSArray *flyerBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders" owner:self options:nil];
+                NSArray *flyerBordersViewArray;
+                if ( IS_IPHONE_5 || IS_IPHONE_4) {
+                    flyerBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders" owner:self options:nil];
+                }else if ( IS_IPHONE_6){
+                    flyerBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders-iPhone6" owner:self options:nil];
+                }else if ( IS_IPHONE_6_PLUS){
+                    flyerBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders-iPhone6" owner:self options:nil];
+                }
                 flyerBordersView = [flyerBordersViewArray objectAtIndex:0];
                 
                 [self addFontsInSubView];
                 
-                NSArray *fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours" owner:self options:nil];
+                NSArray *fontColorsViewArray;
+                if ( IS_IPHONE_5 || IS_IPHONE_4) {
+                     fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours" owner:self options:nil];
+                }else if ( IS_IPHONE_6){
+                    fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours-iPhone6" owner:self options:nil];
+                }else if ( IS_IPHONE_6_PLUS){
+                    fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours-iPhone6" owner:self options:nil];
+                }
                 colorsView = [fontColorsViewArray objectAtIndex:0];
                 
-                NSArray *drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns" owner:self options:nil];
+                
+                NSArray *drawingPatternsViewArray;
+                if ( IS_IPHONE_5 || IS_IPHONE_4) {
+                   drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns" owner:self options:nil];
+                }else if ( IS_IPHONE_6){
+                    drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns-iPhone6" owner:self options:nil];
+                }else if ( IS_IPHONE_6_PLUS){
+                    drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns-iPhone6" owner:self options:nil];
+                }
                 drawingPatternsView = [drawingPatternsViewArray objectAtIndex:0];
                 
-                NSArray *drawingEraserMsgViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingEraserMsg" owner:self options:nil];
-                
+                NSArray *drawingEraserMsgViewArray;
+                if ( IS_IPHONE_5 || IS_IPHONE_4) {
+                    drawingEraserMsgViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingEraserMsg" owner:self options:nil];
+                }else if ( IS_IPHONE_6){
+                    drawingEraserMsgViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingEraserMsg-iPhone6" owner:self options:nil];
+                }else if ( IS_IPHONE_6_PLUS){
+                    drawingEraserMsgViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingEraserMsg-iPhone6" owner:self options:nil];
+                }
                 drawingEraserMsgView = [drawingEraserMsgViewArray objectAtIndex:0];
                 [self setLabelsAfterXibsLoad];
                 
-                NSArray *fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes" owner:self options:nil];
+                NSArray *fontSizesViewArray;
+                if ( IS_IPHONE_5 || IS_IPHONE_4) {
+                     fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes" owner:self options:nil];
+                }else if ( IS_IPHONE_6){
+                    fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes-iPhone6" owner:self options:nil];
+                }else if ( IS_IPHONE_6_PLUS){
+                    fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes-iPhone6" owner:self options:nil];
+                }
                 sizesView = [fontSizesViewArray objectAtIndex:0];
                 
-                NSArray *textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders" owner:self options:nil];
+                NSArray *textBordersViewArray;
+                if ( IS_IPHONE_5 || IS_IPHONE_4) {
+                     textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders" owner:self options:nil];
+                }else if ( IS_IPHONE_6){
+                    textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders-iPhone6" owner:self options:nil];
+                }else if ( IS_IPHONE_6_PLUS){
+                    textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders-iPhone6" owner:self options:nil];
+                }
                 textBordersView = [textBordersViewArray objectAtIndex:0];
                 
                 [self addClipArtsInSubView];
@@ -715,7 +767,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
             
             [layerScrollView addSubview:backgroundsView];
-            [layerScrollView setContentSize:CGSizeMake(320, backgroundsView.frame.size.height)];
+            
+            [layerScrollView setContentSize:CGSizeMake(backgroundsView.frame.size.width, backgroundsView.frame.size.height)];
             
         } else {
             
@@ -1251,13 +1304,27 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 font.frame = frame;
                 curXLoc += (widthValue)+increment;
         
-                if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+                if(IS_IPHONE_5){
                     if(curXLoc >= 300){
                         curXLoc = 13;
                         curYLoc = curYLoc + widthValue + 7;
                     }
                 }
                 
+                if(IS_IPHONE_6){
+                    if(curXLoc >= 350){
+                        curXLoc = 13;
+                        curYLoc = curYLoc + widthValue + 7;
+                    }
+                }
+                
+                if(IS_IPHONE_6_PLUS){
+                    if(curXLoc >= 300){
+                        curXLoc = 13;
+                        curYLoc = curYLoc + widthValue + 7;
+                    }
+                }
+                   
                 [clipartsView addSubview:font];
             }
             
@@ -1278,9 +1345,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 ![userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
                 
                 UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
-                if ( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ) {
+                if ( IS_IPHONE_5 ) {
                     font.frame = CGRectMake(0, 0, 300, heightValue);
-                } else {
+                } else if ( IS_IPHONE_6 ){
+                    font.frame = CGRectMake(0, 0, 300, heightValue);
+                }else if ( IS_IPHONE_6_PLUS ){
+                    font.frame = CGRectMake(0, 0, 300, heightValue);
+                }else {
                     font.frame = CGRectMake(0, 0, 150, heightValue);
                 }
                 [font addTarget:self action:@selector(openPanel:) forControlEvents:UIControlEventTouchUpInside];
@@ -1294,15 +1365,24 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
                 //SET BUTTON POSITION ON SCROLLVIEW
                 CGRect frame = font.frame;
-                frame.origin = CGPointMake(curXLoc, curYLoc);
+                frame.origin = CGPointMake(curXLoc, curYLoc + 30);
+                if ( IS_IPHONE_6 ){
+                    frame.origin = CGPointMake(curXLoc - 50, curYLoc + 40);
+                }
                 font.frame = frame;
                 
                 [clipartsView addSubview:font];
                 
-                if ( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ) {
+                if ( IS_IPHONE_5 ) {
                     clipartsView.size = CGSizeMake(320, curYLoc + heightValue + 5);
                     [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
-                } else {
+                } else if ( IS_IPHONE_6 ) {
+                    clipartsView.size = CGSizeMake(320, curYLoc + heightValue + 5 + 50);
+                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue + 50)];
+                }else if ( IS_IPHONE_6_PLUS ) {
+                    clipartsView.size = CGSizeMake(320, curYLoc + heightValue + 5);
+                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+                }else {
                     clipartsView.size = CGSizeMake(curXLoc + 155 , heightValue + 5);
                     [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , heightValue)];
                 }
@@ -1357,7 +1437,17 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 symbolButton.frame = frame;
                 curXLoc += (symbolScrollWidth)+5;
             
-                if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+                if(IS_IPHONE_5){
+                    if(curXLoc >= 320){
+                        curXLoc = 0;
+                        curYLoc = curYLoc + symbolScrollHeight + 7;
+                    }
+                }else if(IS_IPHONE_6){
+                    if(curXLoc >= 400){
+                        curXLoc = 0;
+                        curYLoc = curYLoc + symbolScrollHeight + 7;
+                    }
+                }else if (IS_IPHONE_6_PLUS){
                     if(curXLoc >= 320){
                         curXLoc = 0;
                         curYLoc = curYLoc + symbolScrollHeight + 7;
@@ -1386,9 +1476,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                  ![userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
                 
                 UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
-                if ( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ) {
+                if ( IS_IPHONE_5 ) {
                     font.frame = CGRectMake(0, 0, 300, heightValue);
-                } else {
+                } else if ( IS_IPHONE_6 ) {
+                    font.frame = CGRectMake(0, 0, 350, heightValue);
+                }else if ( IS_IPHONE_6_PLUS ) {
+                    font.frame = CGRectMake(0, 0, 300, heightValue);
+                }else {
                     font.frame = CGRectMake(0, 0, 150, heightValue);
                 }
                 [font addTarget:self action:@selector(openPanel:) forControlEvents:UIControlEventTouchUpInside];
@@ -1402,12 +1496,17 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
                 //SET BUTTON POSITION ON SCROLLVIEW
                 CGRect frame = font.frame;
-                if ( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ) {
+                if ( IS_IPHONE_5 ) {
                     frame.origin = CGPointMake(10, curYLoc + 70);
-                } else {
+                } else if ( IS_IPHONE_6 ) {
+                    frame.origin = CGPointMake(10, curYLoc + 10);
+                } else if ( IS_IPHONE_6_PLUS ) {
+                    frame.origin = CGPointMake(10, curYLoc + 70);
+                }else {
                     frame.origin = CGPointMake(curXLoc, curYLoc + 10);
                 }
 
+                
                 
                 font.frame = frame;
                 

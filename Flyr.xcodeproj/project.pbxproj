@@ -913,6 +913,7 @@
 		248A3635193F231D0005FCAD /* size_tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 248A3633193F231D0005FCAD /* size_tab@2x.png */; };
 		248A3638193F26280005FCAD /* bg_tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 248A3636193F26280005FCAD /* bg_tab@2x.png */; };
 		248A3639193F26280005FCAD /* image_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 248A3637193F26280005FCAD /* image_icon@2x.png */; };
+		249464DF1A0CFEFE00C1247D /* Backgrounds-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 249464DE1A0CFEFE00C1247D /* Backgrounds-iPhone6.xib */; };
 		249F1F8A193F55D50072835E /* 07_camera_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 249F1F5F193F55D50072835E /* 07_camera_selected@2x.png */; };
 		249F1F8B193F55D50072835E /* 07_camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 249F1F60193F55D50072835E /* 07_camera@2x.png */; };
 		249F1F8C193F55D50072835E /* 07_height_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 249F1F61193F55D50072835E /* 07_height_selected@2x.png */; };
@@ -1053,6 +1054,15 @@
 		24CF67AE1A026D88003A5623 /* CropViewController-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24CF67AD1A026D88003A5623 /* CropViewController-iPhone6.xib */; };
 		24D2543619F009E000590782 /* AnjelikaRose.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24D2543519F009E000590782 /* AnjelikaRose.ttf */; };
 		24E31FDE1A03B398004E3ABD /* CropVideoViewController-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24E31FDD1A03B398004E3ABD /* CropVideoViewController-iPhone6.xib */; };
+		24F130BB1A0D0AF700464587 /* Borders-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F130BA1A0D0AF700464587 /* Borders-iPhone6.xib */; };
+		24F130BD1A0D0BF200464587 /* Colours-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F130BC1A0D0BF200464587 /* Colours-iPhone6.xib */; };
+		24F130BF1A0D0CA500464587 /* Sizes-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F130BE1A0D0CA500464587 /* Sizes-iPhone6.xib */; };
+		24F130C11A0D118200464587 /* Cliparts-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F130C01A0D118200464587 /* Cliparts-iPhone6.xib */; };
+		24F130C31A0D127C00464587 /* Emoticons-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F130C21A0D127C00464587 /* Emoticons-iPhone6.xib */; };
+		24F130C51A0D143F00464587 /* TextBorders-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F130C41A0D143F00464587 /* TextBorders-iPhone6.xib */; };
+		24F130C71A0D154900464587 /* DrawingEraserMsg-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F130C61A0D154900464587 /* DrawingEraserMsg-iPhone6.xib */; };
+		24F130C91A0D159600464587 /* DrawingPatterns-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F130C81A0D159600464587 /* DrawingPatterns-iPhone6.xib */; };
+		24F130CB1A0D163800464587 /* Fonts-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F130CA1A0D163800464587 /* Fonts-iPhone6.xib */; };
 		24F9928119AF78FB005C478B /* post@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24F9928019AF78FB005C478B /* post@2x.png */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		30D58CFF10FB1BF800E0C7E8 /* icon0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30D58C7810FB1BF800E0C7E8 /* icon0.jpg */; };
@@ -2368,6 +2378,7 @@
 		248A3633193F231D0005FCAD /* size_tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "size_tab@2x.png"; sourceTree = "<group>"; };
 		248A3636193F26280005FCAD /* bg_tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_tab@2x.png"; sourceTree = "<group>"; };
 		248A3637193F26280005FCAD /* image_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image_icon@2x.png"; sourceTree = "<group>"; };
+		249464DE1A0CFEFE00C1247D /* Backgrounds-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Backgrounds-iPhone6.xib"; sourceTree = "<group>"; };
 		249F1F5F193F55D50072835E /* 07_camera_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07_camera_selected@2x.png"; sourceTree = "<group>"; };
 		249F1F60193F55D50072835E /* 07_camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07_camera@2x.png"; sourceTree = "<group>"; };
 		249F1F61193F55D50072835E /* 07_height_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07_height_selected@2x.png"; sourceTree = "<group>"; };
@@ -2619,6 +2630,15 @@
 		24CF67AD1A026D88003A5623 /* CropViewController-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CropViewController-iPhone6.xib"; sourceTree = "<group>"; };
 		24D2543519F009E000590782 /* AnjelikaRose.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AnjelikaRose.ttf; path = Data/fonts/AnjelikaRose.ttf; sourceTree = "<group>"; };
 		24E31FDD1A03B398004E3ABD /* CropVideoViewController-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CropVideoViewController-iPhone6.xib"; sourceTree = "<group>"; };
+		24F130BA1A0D0AF700464587 /* Borders-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Borders-iPhone6.xib"; sourceTree = "<group>"; };
+		24F130BC1A0D0BF200464587 /* Colours-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Colours-iPhone6.xib"; sourceTree = "<group>"; };
+		24F130BE1A0D0CA500464587 /* Sizes-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Sizes-iPhone6.xib"; sourceTree = "<group>"; };
+		24F130C01A0D118200464587 /* Cliparts-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Cliparts-iPhone6.xib"; sourceTree = "<group>"; };
+		24F130C21A0D127C00464587 /* Emoticons-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Emoticons-iPhone6.xib"; sourceTree = "<group>"; };
+		24F130C41A0D143F00464587 /* TextBorders-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "TextBorders-iPhone6.xib"; sourceTree = "<group>"; };
+		24F130C61A0D154900464587 /* DrawingEraserMsg-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DrawingEraserMsg-iPhone6.xib"; sourceTree = "<group>"; };
+		24F130C81A0D159600464587 /* DrawingPatterns-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DrawingPatterns-iPhone6.xib"; sourceTree = "<group>"; };
+		24F130CA1A0D163800464587 /* Fonts-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Fonts-iPhone6.xib"; sourceTree = "<group>"; };
 		24F9928019AF78FB005C478B /* post@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "post@2x.png"; sourceTree = "<group>"; };
 		26D73E02307543D994C6C8BE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -4033,26 +4053,36 @@
 				0DF3A2C4108DF1D200D6C887 /* CreateFlyerController.m */,
 				0DFC531A109576AB00B18478 /* CreateFlyerController.xib */,
 				2060689A1924CC6100AB5230 /* Backgrounds.xib */,
+				249464DE1A0CFEFE00C1247D /* Backgrounds-iPhone6.xib */,
 				2060689C1924CCE400AB5230 /* Backgrounds-iPhone4.xib */,
 				206068A01924EE7500AB5230 /* Borders.xib */,
+				24F130BA1A0D0AF700464587 /* Borders-iPhone6.xib */,
 				206068A21924F68400AB5230 /* Borders-iPhone4.xib */,
 				2479BC661941FB9400FF5FF5 /* TextBorders.xib */,
+				24F130C41A0D143F00464587 /* TextBorders-iPhone6.xib */,
 				2479BC631941FB8400FF5FF5 /* TextBorders-iPhone4.xib */,
 				368ADADA19B6FD0700EAB305 /* DrawingEraserMsg.xib */,
+				24F130C61A0D154900464587 /* DrawingEraserMsg-iPhone6.xib */,
 				368ADADC19B6FF0400EAB305 /* DrawingEraserMsg-iPhone4.xib */,
 				36A93F2319AE067000D0A810 /* DrawingPatterns.xib */,
+				24F130C81A0D159600464587 /* DrawingPatterns-iPhone6.xib */,
 				36A93F2519AE0B5400D0A810 /* DrawingPatterns-iPhone4.xib */,
 				206068A41924FFD300AB5230 /* Fonts.xib */,
+				24F130CA1A0D163800464587 /* Fonts-iPhone6.xib */,
 				206068A61924FFEB00AB5230 /* Fonts-iPhone4.xib */,
 				2012ECAC1926077800D5EA58 /* Sizes.xib */,
+				24F130BE1A0D0CA500464587 /* Sizes-iPhone6.xib */,
 				2012ECAE1926078E00D5EA58 /* Sizes-iPhone4.xib */,
 				2012ECB219261B0F00D5EA58 /* Colours.xib */,
+				24F130BC1A0D0BF200464587 /* Colours-iPhone6.xib */,
 				2012ECBA19261D0B00D5EA58 /* Colours-iPhone4s.xib */,
 				243DD520192B24B500391786 /* FlyerIcons.xib */,
 				243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */,
 				246EF475193C506B004539B2 /* Emoticons.xib */,
+				24F130C21A0D127C00464587 /* Emoticons-iPhone6.xib */,
 				246EF548193C5AE0004539B2 /* Emoticons-iPhone4.xib */,
 				24B7511F193DA06D007B6B85 /* Cliparts.xib */,
+				24F130C01A0D118200464587 /* Cliparts-iPhone6.xib */,
 				24B75121193DA07C007B6B85 /* Cliparts-iPhone4.xib */,
 				24B7511D193DA02F007B6B85 /* Cliparts.plist */,
 				246264DE1947416A00933A69 /* Cliparts-paid.plist */,
@@ -5369,6 +5399,7 @@
 				249F203C193F562C0072835E /* private_off_button@2x.png in Resources */,
 				249F202E193F562C0072835E /* login_email_icon@2x.png in Resources */,
 				247858CD1948764D0062F1E4 /* Montserrat-Regular.ttf in Resources */,
+				24F130CB1A0D163800464587 /* Fonts-iPhone6.xib in Resources */,
 				24556D8519EE7E65005FCDFE /* more@2x.png in Resources */,
 				30D58CFF10FB1BF800E0C7E8 /* icon0.jpg in Resources */,
 				30D58D0010FB1BF800E0C7E8 /* icon1.jpg in Resources */,
@@ -5467,6 +5498,7 @@
 				24218463194B4AEC00FDDA97 /* basketball-icon.png in Resources */,
 				30D58D1D10FB1BF800E0C7E8 /* icon36.jpg in Resources */,
 				30D58D1E10FB1BF800E0C7E8 /* icon37.jpg in Resources */,
+				24F130BF1A0D0CA500464587 /* Sizes-iPhone6.xib in Resources */,
 				247858D8194878080062F1E4 /* PaihuenMapuche-Regular.ttf in Resources */,
 				30D58D1F10FB1BF800E0C7E8 /* icon38.jpg in Resources */,
 				24861F2F19F9147100670F6D /* password_box@3x.png in Resources */,
@@ -5547,6 +5579,7 @@
 				2435952E1A0CA85F00DD3C39 /* CustomAssetsGroupView-iPhone6-Plus.xib in Resources */,
 				248A3639193F26280005FCAD /* image_icon@2x.png in Resources */,
 				242184CD194B4AEC00FDDA97 /* firecracker-icon.png in Resources */,
+				24F130C11A0D118200464587 /* Cliparts-iPhone6.xib in Resources */,
 				30D58D3E10FB1BF800E0C7E8 /* icon66.jpg in Resources */,
 				30D58D3F10FB1BF800E0C7E8 /* icon7.jpg in Resources */,
 				30D58D4010FB1BF800E0C7E8 /* icon8.jpg in Resources */,
@@ -5606,6 +5639,7 @@
 				248A3631193F22CE0005FCAD /* color_tab_selected@2x.png in Resources */,
 				30D58D5510FB1BF800E0C7E8 /* Template26.jpg in Resources */,
 				36AF4CAD19BF21D4003C9FE3 /* magnifyingGlass2.png in Resources */,
+				24F130C31A0D127C00464587 /* Emoticons-iPhone6.xib in Resources */,
 				30D58D5610FB1BF800E0C7E8 /* Template27.jpg in Resources */,
 				20563E151962D64200C206FD /* Lora-Italic.ttf in Resources */,
 				242184DC194B4AEC00FDDA97 /* gymnastics-rhythmic-icon.png in Resources */,
@@ -5760,6 +5794,7 @@
 				654B255017202B1C0047C8F6 /* AfterUpdateController.xib in Resources */,
 				242184C5194B4AEC00FDDA97 /* emoticon183@2x.png in Resources */,
 				242184CA194B4AEC00FDDA97 /* fencing-icon.png in Resources */,
+				249464DF1A0CFEFE00C1247D /* Backgrounds-iPhone6.xib in Resources */,
 				246EF50E193C515D004539B2 /* emoticon48@2x.png in Resources */,
 				24861F4C19F9147100670F6D /* sms_share@3x.png in Resources */,
 				2421850C194B4AEC00FDDA97 /* turtle-icon.png in Resources */,
@@ -5773,6 +5808,7 @@
 				246EF476193C506B004539B2 /* Emoticons.xib in Resources */,
 				36EBCFDE19C6CA1000ECDD8B /* Template74.jpg in Resources */,
 				2471593E19408E5F00B30301 /* tumblr_share_saved@2x.png in Resources */,
+				24F130BB1A0D0AF700464587 /* Borders-iPhone6.xib in Resources */,
 				246EF4F7193C515D004539B2 /* emoticon27@2x.png in Resources */,
 				2421845F194B4AEC00FDDA97 /* ball-trophy-icon.png in Resources */,
 				246EF502193C515D004539B2 /* emoticon37@2x.png in Resources */,
@@ -5994,8 +6030,10 @@
 				249F2045193F562C0072835E /* separator@2x.png in Resources */,
 				247159411940907800B30301 /* premium_features@2x.png in Resources */,
 				65C1A43B1742516D00947D5E /* Template35@2x.jpg in Resources */,
+				24F130C51A0D143F00464587 /* TextBorders-iPhone6.xib in Resources */,
 				365A9D1519AF697300E284B5 /* drawing_tab_eraser@2x.png in Resources */,
 				65C1A43C1742516D00947D5E /* Template36@2x.jpg in Resources */,
+				24F130BD1A0D0BF200464587 /* Colours-iPhone6.xib in Resources */,
 				24861ED219F9147100670F6D /* checkDouble@3x.png in Resources */,
 				20F7371C195D985E00B24C1D /* Kankin.ttf in Resources */,
 				65C1A43D1742516D00947D5E /* Template37@2x.jpg in Resources */,
@@ -6043,6 +6081,7 @@
 				242184CE194B4AEC00FDDA97 /* fish-icon (1).png in Resources */,
 				65C1A44E1742516D00947D5E /* Template54@2x.jpg in Resources */,
 				65C1A44F1742516D00947D5E /* Template55@2x.jpg in Resources */,
+				24F130C91A0D159600464587 /* DrawingPatterns-iPhone6.xib in Resources */,
 				242184B8194B4AEC00FDDA97 /* emoticon170@2x.png in Resources */,
 				249F2020193F562C0072835E /* font_button_selected@2x.png in Resources */,
 				24218490194B4AEC00FDDA97 /* emoticon129@2x.png in Resources */,
@@ -6225,6 +6264,7 @@
 				246EF4FF193C515D004539B2 /* emoticon34@2x.png in Resources */,
 				0FD887061786C3810059BC54 /* current_location@2x.png in Resources */,
 				0FD2C406178FFCDE00257E33 /* undo@2x.png in Resources */,
+				24F130C71A0D154900464587 /* DrawingEraserMsg-iPhone6.xib in Resources */,
 				4986857818B50657002113E4 /* CustomAssetThumbnailView.xib in Resources */,
 				20F93DD417B2262200F6F88C /* MainSettingViewController.xib in Resources */,
 				242184F8194B4AEC00FDDA97 /* shell-icon.png in Resources */,

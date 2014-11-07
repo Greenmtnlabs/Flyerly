@@ -248,7 +248,7 @@
 
                 if (launchController == nil) {
                     launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
-                    [navigationController pushViewController: launchController animated:YES];
+                    //[navigationController pushViewController: launchController animated:YES];
                 }
 
             }
