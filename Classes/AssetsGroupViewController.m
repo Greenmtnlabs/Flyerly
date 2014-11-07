@@ -39,8 +39,16 @@
     
     // Configure the grid view
     self.gridView.margin = CGSizeMake(5.0, 5.0);
-    self.gridView.sizeToFit;
-    self.gridView.nibNameForViews = @"CustomAssetThumbnailView";
+    //self.gridView.sizeToFit;
+    
+    if ( IS_IPHONE_5) {
+        self.gridView.nibNameForViews = @"CustomAssetThumbnailView";
+    }else if ( IS_IPHONE_6){
+        self.gridView.nibNameForViews = @"CustomAssetThumbnailView-iPhone6";
+    }else if ( IS_IPHONE_6_PLUS){
+        self.gridView.nibNameForViews = @"CustomAssetThumbnailView-iPhone6-Plus";
+    }
+    
     
     // Configure the selection behaviour
     self.selectionCountLimit = 1;
