@@ -529,7 +529,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 }else if ( IS_IPHONE_6){
                     flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds-iPhone6" owner:self options:nil];
                 }else if ( IS_IPHONE_6_PLUS){
-                    flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds-iPhone6" owner:self options:nil];
+                    flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds-iPhone6-Plus" owner:self options:nil];
                 }
                 backgroundsView = [flyerbackgroundsViewArray objectAtIndex:0];
                 
@@ -539,7 +539,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 }else if ( IS_IPHONE_6){
                     flyerBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders-iPhone6" owner:self options:nil];
                 }else if ( IS_IPHONE_6_PLUS){
-                    flyerBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders-iPhone6" owner:self options:nil];
+                    flyerBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders-iPhone6-Plus" owner:self options:nil];
                 }
                 flyerBordersView = [flyerBordersViewArray objectAtIndex:0];
                 
@@ -551,7 +551,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 }else if ( IS_IPHONE_6){
                     fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours-iPhone6" owner:self options:nil];
                 }else if ( IS_IPHONE_6_PLUS){
-                    fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours-iPhone6" owner:self options:nil];
+                    fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours-iPhone6-Plus" owner:self options:nil];
                 }
                 colorsView = [fontColorsViewArray objectAtIndex:0];
                 
@@ -562,7 +562,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 }else if ( IS_IPHONE_6){
                     drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns-iPhone6" owner:self options:nil];
                 }else if ( IS_IPHONE_6_PLUS){
-                    drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns-iPhone6" owner:self options:nil];
+                    drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns-iPhone6-Plus" owner:self options:nil];
                 }
                 drawingPatternsView = [drawingPatternsViewArray objectAtIndex:0];
                 
@@ -583,7 +583,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 }else if ( IS_IPHONE_6){
                     fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes-iPhone6" owner:self options:nil];
                 }else if ( IS_IPHONE_6_PLUS){
-                    fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes-iPhone6" owner:self options:nil];
+                    fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes-iPhone6-Plus" owner:self options:nil];
                 }
                 sizesView = [fontSizesViewArray objectAtIndex:0];
                 
@@ -593,7 +593,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 }else if ( IS_IPHONE_6){
                     textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders-iPhone6" owner:self options:nil];
                 }else if ( IS_IPHONE_6_PLUS){
-                    textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders-iPhone6" owner:self options:nil];
+                    textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders-iPhone6-Plus" owner:self options:nil];
                 }
                 textBordersView = [textBordersViewArray objectAtIndex:0];
                 

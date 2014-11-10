@@ -199,11 +199,18 @@
 		2036661C188DB67300C71EAA /* FlyerUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2036661B188DB67300C71EAA /* FlyerUser.m */; };
 		203E0B7617DDDD720039C3A7 /* InputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 203E0B7417DDDD720039C3A7 /* InputViewController.m */; };
 		203E0B7717DDDD720039C3A7 /* InputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 203E0B7517DDDD720039C3A7 /* InputViewController.xib */; };
+		204231601A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2042315F1A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib */; };
+		204231621A10D5AC002F93D7 /* Borders-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204231611A10D5AC002F93D7 /* Borders-iPhone6-Plus.xib */; };
+		204231641A10E1A1002F93D7 /* TextBorders-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204231631A10E1A1002F93D7 /* TextBorders-iPhone6-Plus.xib */; };
 		20449F93196181A6007BE4BF /* discount.png in Resources */ = {isa = PBXBuildFile; fileRef = 20449F92196181A6007BE4BF /* discount.png */; };
 		2044FF96185088ED00A26B42 /* MainSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2044FF94185088ED00A26B42 /* MainSettingCell.m */; };
 		2044FF97185088ED00A26B42 /* MainSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2044FF95185088ED00A26B42 /* MainSettingCell.xib */; };
 		204635621895E4AF00A94C42 /* Flyer.m in Sources */ = {isa = PBXBuildFile; fileRef = 204635611895E4AF00A94C42 /* Flyer.m */; };
 		204635651895F90000A94C42 /* FlyerImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 204635641895F90000A94C42 /* FlyerImageView.m */; };
+		204BC2DE1A10E67700FEB946 /* DrawingPatterns-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204BC2DD1A10E67700FEB946 /* DrawingPatterns-iPhone6-Plus.xib */; };
+		204BC2E01A10E87700FEB946 /* Fonts-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204BC2DF1A10E87700FEB946 /* Fonts-iPhone6-Plus.xib */; };
+		204BC2E21A10E99800FEB946 /* Sizes-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204BC2E11A10E99800FEB946 /* Sizes-iPhone6-Plus.xib */; };
+		204BC2E41A10ED3000FEB946 /* Colours-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204BC2E31A10ED3000FEB946 /* Colours-iPhone6-Plus.xib */; };
 		20563E131962D64200C206FD /* CutiveMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20563E0B1962D64200C206FD /* CutiveMono-Regular.ttf */; };
 		20563E151962D64200C206FD /* Lora-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20563E0D1962D64200C206FD /* Lora-Italic.ttf */; };
 		20563E161962D64200C206FD /* Monoton-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20563E0E1962D64200C206FD /* Monoton-Regular.ttf */; };
@@ -1586,6 +1593,9 @@
 		203E0B7317DDDD720039C3A7 /* InputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputViewController.h; sourceTree = "<group>"; };
 		203E0B7417DDDD720039C3A7 /* InputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputViewController.m; sourceTree = "<group>"; };
 		203E0B7517DDDD720039C3A7 /* InputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputViewController.xib; sourceTree = "<group>"; };
+		2042315F1A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Backgrounds-iPhone6-Plus.xib"; sourceTree = "<group>"; };
+		204231611A10D5AC002F93D7 /* Borders-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Borders-iPhone6-Plus.xib"; sourceTree = "<group>"; };
+		204231631A10E1A1002F93D7 /* TextBorders-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "TextBorders-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		20449F92196181A6007BE4BF /* discount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discount.png; sourceTree = "<group>"; };
 		2044FF93185088ED00A26B42 /* MainSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainSettingCell.h; sourceTree = "<group>"; };
 		2044FF94185088ED00A26B42 /* MainSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainSettingCell.m; sourceTree = "<group>"; };
@@ -1594,6 +1604,10 @@
 		204635611895E4AF00A94C42 /* Flyer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Flyer.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		204635631895F90000A94C42 /* FlyerImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyerImageView.h; sourceTree = "<group>"; };
 		204635641895F90000A94C42 /* FlyerImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyerImageView.m; sourceTree = "<group>"; };
+		204BC2DD1A10E67700FEB946 /* DrawingPatterns-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DrawingPatterns-iPhone6-Plus.xib"; sourceTree = "<group>"; };
+		204BC2DF1A10E87700FEB946 /* Fonts-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Fonts-iPhone6-Plus.xib"; sourceTree = "<group>"; };
+		204BC2E11A10E99800FEB946 /* Sizes-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Sizes-iPhone6-Plus.xib"; sourceTree = "<group>"; };
+		204BC2E31A10ED3000FEB946 /* Colours-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Colours-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		20563E0B1962D64200C206FD /* CutiveMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CutiveMono-Regular.ttf"; path = "Data/fonts/CutiveMono-Regular.ttf"; sourceTree = "<group>"; };
 		20563E0D1962D64200C206FD /* Lora-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lora-Italic.ttf"; path = "Data/fonts/Lora-Italic.ttf"; sourceTree = "<group>"; };
 		20563E0E1962D64200C206FD /* Monoton-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Monoton-Regular.ttf"; path = "Data/fonts/Monoton-Regular.ttf"; sourceTree = "<group>"; };
@@ -4054,27 +4068,34 @@
 				0DFC531A109576AB00B18478 /* CreateFlyerController.xib */,
 				2060689A1924CC6100AB5230 /* Backgrounds.xib */,
 				249464DE1A0CFEFE00C1247D /* Backgrounds-iPhone6.xib */,
+				2042315F1A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib */,
 				2060689C1924CCE400AB5230 /* Backgrounds-iPhone4.xib */,
 				206068A01924EE7500AB5230 /* Borders.xib */,
 				24F130BA1A0D0AF700464587 /* Borders-iPhone6.xib */,
+				204231611A10D5AC002F93D7 /* Borders-iPhone6-Plus.xib */,
 				206068A21924F68400AB5230 /* Borders-iPhone4.xib */,
 				2479BC661941FB9400FF5FF5 /* TextBorders.xib */,
 				24F130C41A0D143F00464587 /* TextBorders-iPhone6.xib */,
+				204231631A10E1A1002F93D7 /* TextBorders-iPhone6-Plus.xib */,
 				2479BC631941FB8400FF5FF5 /* TextBorders-iPhone4.xib */,
 				368ADADA19B6FD0700EAB305 /* DrawingEraserMsg.xib */,
 				24F130C61A0D154900464587 /* DrawingEraserMsg-iPhone6.xib */,
 				368ADADC19B6FF0400EAB305 /* DrawingEraserMsg-iPhone4.xib */,
 				36A93F2319AE067000D0A810 /* DrawingPatterns.xib */,
 				24F130C81A0D159600464587 /* DrawingPatterns-iPhone6.xib */,
+				204BC2DD1A10E67700FEB946 /* DrawingPatterns-iPhone6-Plus.xib */,
 				36A93F2519AE0B5400D0A810 /* DrawingPatterns-iPhone4.xib */,
 				206068A41924FFD300AB5230 /* Fonts.xib */,
 				24F130CA1A0D163800464587 /* Fonts-iPhone6.xib */,
+				204BC2DF1A10E87700FEB946 /* Fonts-iPhone6-Plus.xib */,
 				206068A61924FFEB00AB5230 /* Fonts-iPhone4.xib */,
 				2012ECAC1926077800D5EA58 /* Sizes.xib */,
 				24F130BE1A0D0CA500464587 /* Sizes-iPhone6.xib */,
+				204BC2E11A10E99800FEB946 /* Sizes-iPhone6-Plus.xib */,
 				2012ECAE1926078E00D5EA58 /* Sizes-iPhone4.xib */,
 				2012ECB219261B0F00D5EA58 /* Colours.xib */,
 				24F130BC1A0D0BF200464587 /* Colours-iPhone6.xib */,
+				204BC2E31A10ED3000FEB946 /* Colours-iPhone6-Plus.xib */,
 				2012ECBA19261D0B00D5EA58 /* Colours-iPhone4s.xib */,
 				243DD520192B24B500391786 /* FlyerIcons.xib */,
 				243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */,
@@ -5399,6 +5420,7 @@
 				249F203C193F562C0072835E /* private_off_button@2x.png in Resources */,
 				249F202E193F562C0072835E /* login_email_icon@2x.png in Resources */,
 				247858CD1948764D0062F1E4 /* Montserrat-Regular.ttf in Resources */,
+				204231641A10E1A1002F93D7 /* TextBorders-iPhone6-Plus.xib in Resources */,
 				24F130CB1A0D163800464587 /* Fonts-iPhone6.xib in Resources */,
 				24556D8519EE7E65005FCDFE /* more@2x.png in Resources */,
 				30D58CFF10FB1BF800E0C7E8 /* icon0.jpg in Resources */,
@@ -5711,6 +5733,7 @@
 				247858C81948764D0062F1E4 /* LinLibertine-Regular.ttf in Resources */,
 				24861ECD19F9147100670F6D /* camera_change@3x.png in Resources */,
 				20E4638D197E688600473921 /* pdf_Bg.png in Resources */,
+				204BC2E41A10ED3000FEB946 /* Colours-iPhone6-Plus.xib in Resources */,
 				30D58D7410FB1BF800E0C7E8 /* Template54.jpg in Resources */,
 				30D58D7510FB1BF800E0C7E8 /* Template55.jpg in Resources */,
 				246EF50C193C515D004539B2 /* emoticon46@2x.png in Resources */,
@@ -5812,6 +5835,7 @@
 				246EF4F7193C515D004539B2 /* emoticon27@2x.png in Resources */,
 				2421845F194B4AEC00FDDA97 /* ball-trophy-icon.png in Resources */,
 				246EF502193C515D004539B2 /* emoticon37@2x.png in Resources */,
+				204BC2E01A10E87700FEB946 /* Fonts-iPhone6-Plus.xib in Resources */,
 				246EF52A193C515D004539B2 /* emoticon73@2x.png in Resources */,
 				242184AD194B4AEC00FDDA97 /* emoticon159@2x.png in Resources */,
 				65A464E41726CBA2002C32FB /* ALGER.TTF in Resources */,
@@ -5832,6 +5856,7 @@
 				65A464EA1726CBA2002C32FB /* GrandHotel-Regular.otf in Resources */,
 				24861F1A19F9147100670F6D /* invite_sms_selected@3x.png in Resources */,
 				249F205F193F562C0072835E /* twt_follow@2x.png in Resources */,
+				204231621A10D5AC002F93D7 /* Borders-iPhone6-Plus.xib in Resources */,
 				65A464EB1726CBA2002C32FB /* Helvetica Inserat Cyrillic Upright.ttf in Resources */,
 				249F1FA3193F55D50072835E /* camera_button@2x.png in Resources */,
 				249F2021193F562C0072835E /* font_button@2x.png in Resources */,
@@ -6042,6 +6067,7 @@
 				24861F2B19F9147100670F6D /* next_button@3x.png in Resources */,
 				249F1F90193F55D50072835E /* 07_width_selected@2x.png in Resources */,
 				65C1A43F1742516D00947D5E /* Template39@2x.jpg in Resources */,
+				204231601A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib in Resources */,
 				242184FA194B4AEC00FDDA97 /* Skating-icon.png in Resources */,
 				24861EE519F9147100670F6D /* delete_button@3x.png in Resources */,
 				65C1A4401742516D00947D5E /* Template40@2x.jpg in Resources */,
@@ -6145,6 +6171,7 @@
 				2478E5EE192C8C0A0081B31B /* FreeFeatureCell.xib in Resources */,
 				242184ED194B4AEC00FDDA97 /* Pictures-icon.png in Resources */,
 				365A9D1319AF697300E284B5 /* drawing_tab_color@2x.png in Resources */,
+				204BC2DE1A10E67700FEB946 /* DrawingPatterns-iPhone6-Plus.xib in Resources */,
 				24785893194873E60062F1E4 /* Canter Light.otf in Resources */,
 				24861EF419F9147100670F6D /* email_setting@3x.png in Resources */,
 				206068A71924FFEB00AB5230 /* Fonts-iPhone4.xib in Resources */,
@@ -6568,6 +6595,7 @@
 				24861F4F19F9147100670F6D /* star@3x.png in Resources */,
 				24861F1419F9147100670F6D /* instagram_share_selected@3x.png in Resources */,
 				24861F3F19F9147100670F6D /* save_gallery@3x.png in Resources */,
+				204BC2E21A10E99800FEB946 /* Sizes-iPhone6-Plus.xib in Resources */,
 				24861F6D19F9147100670F6D /* Zmain_screenbg@3x.png in Resources */,
 				2026992E18CF200F00945218 /* blue_arrow.png in Resources */,
 				24861F0E19F9147100670F6D /* home_button@3x.png in Resources */,
