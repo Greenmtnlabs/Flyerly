@@ -491,7 +491,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 }else if ( IS_IPHONE_6){
                     flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds-iPhone6" owner:self options:nil];
                 }else if ( IS_IPHONE_6_PLUS){
-                    flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds-iPhone6" owner:self options:nil];
+                    flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds-iPhone6-Plus" owner:self options:nil];
                 }
                 backgroundsView = [flyerbackgroundsViewArray objectAtIndex:0];
                 
