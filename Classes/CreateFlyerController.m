@@ -897,8 +897,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             CGFloat curYLoc = 5;
             int increment = 5;
     
-            if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+            if(IS_IPHONE_5 || IS_IPHONE_6_PLUS){
                 curXLoc = 13;
+                curYLoc = 10;
+                increment = 8;
+            }else if ( IS_IPHONE_6) {
+                curXLoc = 18;
                 curYLoc = 10;
                 increment = 8;
             }
@@ -929,11 +933,19 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 font.frame = frame;
                 curXLoc += (widthValue)+increment;
         
-                if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+                if(IS_IPHONE_5 || IS_IPHONE_6_PLUS){
                     if(curXLoc >= 300){
                         curXLoc = 13;
                         curYLoc = curYLoc + widthValue + 7;
                     }
+                }else if ( IS_IPHONE_6 ) {
+                    if(curXLoc >= 350){
+                        
+                        curXLoc = 18;
+                       
+                        curYLoc = curYLoc + widthValue + 7;
+                    }
+
                 }
         
                 [fontsView addSubview:font];
@@ -965,13 +977,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                  ![userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
                 
                 UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
-                if ( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ) {
+                if ( IS_IPHONE_5 || IS_IPHONE_6_PLUS ) {
                     font.frame = CGRectMake(0, 0, 300, heightValue);
-                } else {
-                    font.frame = CGRectMake(0, 0, 150, heightValue);
+                } else if ( IS_IPHONE_6 ) {
+                    font.frame = CGRectMake(0, 0, 345, heightValue);
                 }
-                
                 [font addTarget:self action:@selector(openPanel:) forControlEvents:UIControlEventTouchUpInside];
+                
                 [font setTitle:@"More" forState:UIControlStateNormal];
                 
                 UIFont *fontname = [UIFont fontWithName:@"Helvetica" size:15.0];
@@ -983,14 +995,22 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 //SET BUTTON POSITION ON SCROLLVIEW
                 CGRect frame = font.frame;
                 frame.origin = CGPointMake(curXLoc, curYLoc);
+                if ( IS_IPHONE_6 ){
+                    frame.origin = CGPointMake(13, curYLoc + 40);
+                }
                 font.frame = frame;
 
                 [fontsView addSubview:font];
                 
-                if ( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ) {
+                if ( IS_IPHONE_5 || IS_IPHONE_6_PLUS ) {
                     fontsView.size = CGSizeMake(320, curYLoc + heightValue + 5);
                     [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
-                } else {
+                } else if ( IS_IPHONE_6 ) {
+                    
+                    fontsView.size = CGSizeMake(320, curYLoc + heightValue + 50);
+                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue + 50)];
+                
+                }else {
                     fontsView.size = CGSizeMake(curXLoc + 155 , heightValue + 5);
                     [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , heightValue)];
                 }
@@ -1348,7 +1368,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 if ( IS_IPHONE_5 ) {
                     font.frame = CGRectMake(0, 0, 300, heightValue);
                 } else if ( IS_IPHONE_6 ){
-                    font.frame = CGRectMake(0, 0, 300, heightValue);
+                    font.frame = CGRectMake(0, 0, 345, heightValue);
                 }else if ( IS_IPHONE_6_PLUS ){
                     font.frame = CGRectMake(0, 0, 300, heightValue);
                 }else {
@@ -1367,7 +1387,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 CGRect frame = font.frame;
                 frame.origin = CGPointMake(curXLoc, curYLoc + 30);
                 if ( IS_IPHONE_6 ){
-                    frame.origin = CGPointMake(curXLoc - 50, curYLoc + 40);
+                    frame.origin = CGPointMake(13, curYLoc + 40);
                 }
                 font.frame = frame;
                 
@@ -1423,8 +1443,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
             [symbolArray addObject:symbolImg];
             
-            
-            
                 UIButton *symbolButton = [UIButton buttonWithType:UIButtonTypeCustom];
                 symbolButton.frame =CGRectMake(0, 0, symbolScrollWidth, symbolScrollHeight);
                 [symbolButton setImage:symbolImg forState:UIControlStateNormal];
@@ -1436,6 +1454,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 frame.origin = CGPointMake(curXLoc, curYLoc);
                 symbolButton.frame = frame;
                 curXLoc += (symbolScrollWidth)+5;
+                if( IS_IPHONE_6 ){
+                    curXLoc +=  - 2;
+                }
+            
             
                 if(IS_IPHONE_5){
                     if(curXLoc >= 320){
@@ -1706,8 +1728,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             layerButton.frame = frame;
             curXLoc += (layerScrollWidth)+5;
             
-            if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+            if(IS_IPHONE_5 || IS_IPHONE_6_PLUS){
                 if(curXLoc >= 300){
+                    curXLoc = 10;
+                    curYLoc = curYLoc + layerScrollHeight + 7;
+                }
+            }else if ( IS_IPHONE_6 ) {
+                if(curXLoc >= 350){
                     curXLoc = 10;
                     curYLoc = curYLoc + layerScrollHeight + 7;
                 }
