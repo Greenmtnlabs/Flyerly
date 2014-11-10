@@ -501,7 +501,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 }else if ( IS_IPHONE_6){
                     flyerBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders-iPhone6" owner:self options:nil];
                 }else if ( IS_IPHONE_6_PLUS){
-                    flyerBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders-iPhone6" owner:self options:nil];
+                    flyerBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders-iPhone6-Plus" owner:self options:nil];
                 }
                 flyerBordersView = [flyerBordersViewArray objectAtIndex:0];
                 
