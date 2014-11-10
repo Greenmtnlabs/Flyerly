@@ -26,4 +26,6 @@
 - (BOOL)date1IsSmallerThenDate2:(NSDate *)date1 date2:(NSDate *)date2;
 
 -(UIImageView *) navigationGetTitleView;
+-(NSDate *)getDate:(NSString *)callFor;
+//fb988650031150166
 @end

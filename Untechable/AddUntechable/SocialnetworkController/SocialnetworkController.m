@@ -9,6 +9,7 @@
 #import "SocialnetworkController.h"
 #import "Common.h"
 #import "EmailSettingController.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 
 @interface SocialnetworkController ()
@@ -233,22 +234,84 @@
     [untechable setOrSaveVars:SAVE];
 }
 
+-(void)requestPublishPermissions{
+    
+}
+-(void)publishStory{
+    
+}
+
+-(void)makeRequestForUserData{
+    
+}
 
 
 - (IBAction)shareOn:(id)sender {
     if(sender == self.btnFacebook){
-        [self activateBtn:self.btnFacebook];
+        
+        if( [self fbBtnStatus] ) {
+            [untechable fbFlushFbData];
+            [self btnActivate:self.btnFacebook active:[self fbBtnStatus]];
+        }
+        else{
+            
+            // If the session state is any of the two "open" states when the button is clicked
+            if (FBSession.activeSession.state == FBSessionStateOpen
+                || FBSession.activeSession.state == FBSessionStateOpenTokenExtended) {
+                
+                // Close the session and remove the access token from the cache
+                // The session state handler (in the app delegate) will be called automatically
+                [FBSession.activeSession closeAndClearTokenInformation];
+                
+                [self btnActivate:self.btnFacebook active:NO];
+                
+                // If the session state is not any of the two "open" states when the button is clicked
+            }
+            else {
+                // Open a session showing the user the login UI
+                // You must ALWAYS ask for public_profile permissions when opening a session
+                [FBSession openActiveSessionWithReadPermissions:@[@"public_profile", @"offline_access", @"publish_actions"]
+                                                   allowLoginUI:YES
+                                              completionHandler:
+                 ^(FBSession *session, FBSessionState state, NSError *error) {
+                     
+                     // Call the app delegate's sessionStateChanged:state:error method to handle session state changes
+                     [untechable fbSessionStateChanged:session state:state error:error];
+                     
+                     
+                     [self btnActivate:self.btnFacebook active:[self fbBtnStatus]];
+                 }];
+            }
+        }
     }
     else if(sender == self.btnTwitter){
-        [self activateBtn:self.btnTwitter];
+        [self btnActivate:self.btnTwitter active:YES];
     }
     else if(sender == self.btnLinkedin){
-        [self activateBtn:self.btnLinkedin];
+        [self btnActivate:self.btnLinkedin active:YES];
     }
 }
 
--(void)activateBtn:btnPointer {
+- (void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user {
+    NSLog(@"%@", user);
+}
+
+
+//Active fb button when fb toke expiry date is greater then current date.
+-(BOOL)fbBtnStatus
+{
+    NSDate* date1 = [NSDate date];
+    NSDate* date2 = [untechable.commonFunctions timestampStrToNsDate:untechable.fbAuthExpiryTs];
+    BOOL active   = [untechable.commonFunctions date1IsSmallerThenDate2:date1 date2:date2];
+    return active;
+}
+
+// Button green (active) and gray ( inActive ) case
+-(void)btnActivate:(UIButton *)btnPointer active:(BOOL)active {
+   if( active == YES )
    [btnPointer setTitleColor:defGreen forState:UIControlStateNormal];
+   else
+   [btnPointer setTitleColor:defGray forState:UIControlStateNormal];
 }
 
 @end

@@ -10,6 +10,7 @@
 #import "Untechable.h"
 #import "UIPlaceHolderTextView.h"
 #import "BSKeyboardControls.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface SocialnetworkController : UIViewController < UITextFieldDelegate , BSKeyboardControlsDelegate >
 {

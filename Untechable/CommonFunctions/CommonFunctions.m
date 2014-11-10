@@ -117,4 +117,21 @@
         return NO;
 }
 
+-(NSDate *)getDate:(NSString *)callFor
+{
+    NSDate *today = [NSDate date];
+    
+    if( [callFor isEqual:@"PAST_1_DAY"]){
+        today = [today dateByAddingTimeInterval: -86400.0];
+    }
+    else if( [callFor isEqual:@"PAST_1_WEEK"]){
+        today = [today dateByAddingTimeInterval: -1209600.0];
+    }
+    else if( [callFor isEqual:@"PAST_1_MONTH"]){
+        today = [today dateByAddingTimeInterval: -5259487.66];
+    }
+    
+    return today;
+}
+
 @end

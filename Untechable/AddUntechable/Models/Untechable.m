@@ -11,6 +11,7 @@
 #import "Common.h"
 
 
+
 @implementation Untechable
 
 //Settings
@@ -23,7 +24,7 @@
 @synthesize twillioNumber, location, emergencyContacts, emergencyNumber, hasRecording;
 
 //3-vars for screen3
-@synthesize socialStatus, fbAuth, twitterAuth, linkedinAuth;
+@synthesize socialStatus, fbAuth, fbAuthExpiryTs, twitterAuth, linkedinAuth;
 
 //4-vars for screen4
 @synthesize email, password, respondingEmail;
@@ -143,7 +144,7 @@
     }
     else {
         NSLog(@"Directory Already Exist");
-       [self setOrSaveVars:SET];
+       [self setOrSaveVars:RESET];
         hasInit = YES;
     }
     
@@ -191,6 +192,8 @@
         //Screen3 vars
         dic[@"socialStatus"] = socialStatus;
         dic[@"fbAuth"] = fbAuth;
+        dic[@"fbAuthExpiryTs"] = fbAuthExpiryTs;
+        
         dic[@"twitterAuth"] = twitterAuth;
         dic[@"linkedinAuth"] = linkedinAuth;
         
@@ -203,7 +206,7 @@
         [dic writeToFile:piecesFile atomically:YES];
 
     }
-    else if( [setOrSAve isEqualToString:SET] ) {
+    else if( [setOrSAve isEqualToString:RESET] ) {
         
         piecesFile = [untechablePath stringByAppendingString:[NSString stringWithFormat:@"/%@", PIECES_FILE]];
         dic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
@@ -234,6 +237,7 @@
         //Screen3 vars
         socialStatus = ( dic[@"socialStatus"] ) ? dic[@"socialStatus"] : @"";
         fbAuth       = ( dic[@"fbAuth"] ) ? dic[@"fbAuth"] : @"";
+        fbAuthExpiryTs = ( dic[@"fbAuthExpiryTs"] ) ? dic[@"fbAuthExpiryTs"] : [commonFunctions nsDateToTimeStampStr:[commonFunctions getDate:@"PAST_1_MONTH"] ];
         twitterAuth  = ( dic[@"twitterAuth"] ) ? dic[@"twitterAuth"] : @"";
         linkedinAuth = ( dic[@"linkedinAuth"] ) ? dic[@"linkedinAuth"] : @"";
 
@@ -278,6 +282,7 @@
     //Screen3
     socialStatus = @"";
     fbAuth       = @"";
+    fbAuthExpiryTs = [commonFunctions nsDateToTimeStampStr:[commonFunctions getDate:@"PAST_1_MONTH"] ];
     twitterAuth  = @"";
     linkedinAuth = @"";
     
@@ -379,4 +384,134 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     return expired;
 }
 
+
+#pragma mark -  Facebook functions
+// This method will handle ALL the session state changes in the app
+- (void)fbSessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error
+{
+    // If the session was opened successfully
+    if (!error && state == FBSessionStateOpen){
+        NSLog(@"Session opened");
+        
+        // Show the user the logged-in UI
+        [self fbUserLoggedIn];
+        return;
+    }
+    if (state == FBSessionStateClosed || state == FBSessionStateClosedLoginFailed){
+        // If the session is closed
+        NSLog(@"Session closed");
+        // Show the user the logged-out UI
+        [self fbUserLoggedOut];
+    }
+    
+    // Handle errors
+    if (error){
+        NSLog(@"Error");
+        NSString *alertText;
+        NSString *alertTitle;
+        // If the error requires people using an app to make an action outside of the app in order to recover
+        if ([FBErrorUtility shouldNotifyUserForError:error] == YES){
+            alertTitle = @"Something went wrong";
+            alertText = [FBErrorUtility userMessageForError:error];
+            [self fbShowMessage:alertText withTitle:alertTitle];
+        } else {
+            
+            // If the user cancelled login, do nothing
+            if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryUserCancelled) {
+                NSLog(@"User cancelled login");
+                
+                // Handle session closures that happen outside of the app
+            } else if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryAuthenticationReopenSession){
+                alertTitle = @"Session Error";
+                alertText = @"Your current session is no longer valid. Please log in again.";
+                [self fbShowMessage:alertText withTitle:alertTitle];
+                
+                // For simplicity, here we just show a generic message for all other errors
+                // You can learn how to handle other errors using our guide: https://developers.facebook.com/docs/ios/errors
+            } else {
+                //Get more error information from the error
+                NSDictionary *errorInformation = [[[error.userInfo objectForKey:@"com.facebook.sdk:ParsedJSONResponseKey"] objectForKey:@"body"] objectForKey:@"error"];
+                
+                // Show the user an error message
+                alertTitle = @"Something went wrong";
+                alertText = [NSString stringWithFormat:@"Please retry. \n\n If the problem persists contact us and mention this error code: %@", [errorInformation objectForKey:@"message"]];
+                [self fbShowMessage:alertText withTitle:alertTitle];
+            }
+        }
+        
+        // Clear this token
+        [FBSession.activeSession closeAndClearTokenInformation];
+        
+        // Show the user the logged-out UI
+        [self fbUserLoggedOut];
+    }
+}
+
+// Show the user the logged-out UI
+- (void)fbUserLoggedOut
+{
+    // Set the button title as "Log in with Facebook"
+    //----//UIButton *loginButton = [self.customLoginViewController loginButton];
+    //----//[loginButton setTitle:@"Log in with Facebook" forState:UIControlStateNormal];
+    
+    // Confirm logout message
+    //----// [self fbShowMessage:@"You're now logged out" withTitle:@""];
+
+    [self fbFlushFbData];
+}
+
+
+// Show the user the logged-in UI
+- (void)fbUserLoggedIn
+{
+    
+    NSString *fbAccessToken = [[[FBSession activeSession] accessTokenData] accessToken];
+
+    NSDate *expirationDate = [[[FBSession activeSession] accessTokenData] expirationDate];
+
+    [self fbUpdateFbData:fbAccessToken fbAuthExpD:expirationDate];
+    
+    // Set the button title as "Log out"
+    //----// UIButton *loginButton = self.customLoginViewController.loginButton;
+    //----// [loginButton setTitle:@"Log out" forState:UIControlStateNormal];
+    
+    // Welcome message
+    //----// [self fbShowMessage:@"You're now logged in" withTitle:@"Welcome!"];
+    
+}
+
+// Show an alert message
+- (void)fbShowMessage:(NSString *)text withTitle:(NSString *)title
+{
+    NSLog(@"in fbShowMessage: title=%@, text=%@", title, text);
+    
+  /*
+    [[[UIAlertView alloc] initWithTitle:title
+                                message:text
+                               delegate:self
+                      cancelButtonTitle:@"OK!"
+                      otherButtonTitles:nil] show];
+   */
+}
+
+//Update data base for fb data
+-(void)fbFlushFbData
+{
+    [self fbUpdateFbData:@"" fbAuthExpD:[commonFunctions getDate:@"PAST_1_MONTH"] ];
+}
+
+//Update data base for fb data
+-(void)fbUpdateFbData:(NSString *)fbA fbAuthExpD:(NSDate * )fbAuthExpD
+{
+    
+    NSLog(@"fbAccessToken=%@",fbA);
+    NSLog(@"expirationDate=%@",fbAuthExpD);
+    
+    fbAuth = fbA;
+    fbAuthExpiryTs = [commonFunctions nsDateToTimeStampStr:fbAuthExpD ];
+    
+    [self setOrSaveVars:SAVE];
+}
+
+#pragma mark -  Twitter functions
 @end

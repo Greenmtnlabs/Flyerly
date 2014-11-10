@@ -10,8 +10,9 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 #import "CommonFunctions.h"
+#import <FacebookSDK/FacebookSDK.h>
 
-@interface Untechable : NSObject{
+@interface Untechable : NSObject {
     
 }
 
@@ -40,7 +41,7 @@
 @property (nonatomic, assign) BOOL hasRecording;
 
 //Screen3
-@property (strong, nonatomic) NSString *socialStatus, *fbAuth, *twitterAuth, *linkedinAuth;
+@property (strong, nonatomic) NSString *socialStatus, *fbAuth, *fbAuthExpiryTs, *twitterAuth, *linkedinAuth;
 
 //Screen4
 @property (strong, nonatomic) NSString *email, *password, *respondingEmail;
@@ -62,6 +63,11 @@
 -(void)initWithDefValues;
 -(NSString *)timestampStrToAppDate:(NSString *)timeStamp;
 
-- (BOOL)isUntechableStarted;
+-(BOOL)isUntechableStarted;
 -(BOOL)isUntechableExpired;
+
+#pragma mark -  Facebook functions
+- (void)fbSessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error;
+-(void)fbFlushFbData;
+
 @end
