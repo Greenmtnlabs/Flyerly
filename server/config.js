@@ -6,13 +6,9 @@ var config = {}
 // Application Information
 config.app = {}
 config.app.mode = {}
-
 config.app.errorUrl   = '/error';
 
-config.app.mode.LOCALHOST = 'localhost'; //Port: 3001
-config.app.mode.DEVELOPMENT = 'development'; //Port: 8000
-config.app.mode.PRODUCTION = 'production';   //Port: 3010
-config.app.mode.current = config.app.mode.PRODUCTION;//DEVELOPMENT; //LOCALHOST
+
  
 // HTTP server configuration
 config.http = {}
@@ -40,6 +36,11 @@ config.db = {}
 //config.db.host =  'mongodb://admin:untechable@ds043180.mongolab.com:43180/untechable';//M.Zeshan A/c
 config.db.modelVersion = 1.0;
 
+config.app.mode.LOCALHOST = 'localhost'; //Port: 3001
+config.app.mode.DEVELOPMENT = 'development'; //Port: 8000
+config.app.mode.PRODUCTION = 'production';   //Port: 3010
+
+config.app.mode.current = config.app.mode.LOCALHOST;//DEVELOPMENT; //LOCALHOST
 
 // Check if we are on local host
 if( config.app.mode.current == config.app.mode.LOCALHOST  ) {
