@@ -149,7 +149,7 @@
                             <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="16">
-                            <rect key="frame" x="125" y="500.00000625074142" width="71" height="69"/>
+                            <rect key="frame" x="125" y="500.00000076411197" width="71" height="69"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Settings"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -198,20 +198,22 @@
                         </imageView>
                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" id="Ivy-k7-Sij">
                             <rect key="frame" x="73" y="231" width="20" height="20"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <color key="color" red="0.0" green="0.56470588235294117" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                         </activityIndicatorView>
                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" id="dz9-uK-AEr">
                             <rect key="frame" x="227" y="231" width="20" height="20"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <color key="color" red="0.0" green="0.56470588239999997" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
                         </activityIndicatorView>
                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" id="dWW-0E-DdE">
                             <rect key="frame" x="73" y="402" width="20" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <color key="color" red="0.0" green="0.56470588239999997" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
                         </activityIndicatorView>
                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" id="gvF-Is-tFo">
                             <rect key="frame" x="227" y="402" width="20" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <color key="color" red="0.0" green="0.56470588239999997" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
                         </activityIndicatorView>
                     </subviews>
