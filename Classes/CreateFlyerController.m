@@ -545,7 +545,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 }else if ( IS_IPHONE_6){
                     fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes-iPhone6" owner:self options:nil];
                 }else if ( IS_IPHONE_6_PLUS){
-                    fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes-iPhone6" owner:self options:nil];
+                    fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes-iPhone6-Plus" owner:self options:nil];
                 }
                 sizesView = [fontSizesViewArray objectAtIndex:0];
                 
