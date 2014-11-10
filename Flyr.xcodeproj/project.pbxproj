@@ -201,6 +201,7 @@
 		203E0B7717DDDD720039C3A7 /* InputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 203E0B7517DDDD720039C3A7 /* InputViewController.xib */; };
 		204231601A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2042315F1A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib */; };
 		204231621A10D5AC002F93D7 /* Borders-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204231611A10D5AC002F93D7 /* Borders-iPhone6-Plus.xib */; };
+		204231641A10E1A1002F93D7 /* TextBorders-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204231631A10E1A1002F93D7 /* TextBorders-iPhone6-Plus.xib */; };
 		20449F93196181A6007BE4BF /* discount.png in Resources */ = {isa = PBXBuildFile; fileRef = 20449F92196181A6007BE4BF /* discount.png */; };
 		2044FF96185088ED00A26B42 /* MainSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2044FF94185088ED00A26B42 /* MainSettingCell.m */; };
 		2044FF97185088ED00A26B42 /* MainSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2044FF95185088ED00A26B42 /* MainSettingCell.xib */; };
@@ -1590,6 +1591,7 @@
 		203E0B7517DDDD720039C3A7 /* InputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputViewController.xib; sourceTree = "<group>"; };
 		2042315F1A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Backgrounds-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		204231611A10D5AC002F93D7 /* Borders-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Borders-iPhone6-Plus.xib"; sourceTree = "<group>"; };
+		204231631A10E1A1002F93D7 /* TextBorders-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "TextBorders-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		20449F92196181A6007BE4BF /* discount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discount.png; sourceTree = "<group>"; };
 		2044FF93185088ED00A26B42 /* MainSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainSettingCell.h; sourceTree = "<group>"; };
 		2044FF94185088ED00A26B42 /* MainSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainSettingCell.m; sourceTree = "<group>"; };
@@ -4066,6 +4068,7 @@
 				206068A21924F68400AB5230 /* Borders-iPhone4.xib */,
 				2479BC661941FB9400FF5FF5 /* TextBorders.xib */,
 				24F130C41A0D143F00464587 /* TextBorders-iPhone6.xib */,
+				204231631A10E1A1002F93D7 /* TextBorders-iPhone6-Plus.xib */,
 				2479BC631941FB8400FF5FF5 /* TextBorders-iPhone4.xib */,
 				368ADADA19B6FD0700EAB305 /* DrawingEraserMsg.xib */,
 				24F130C61A0D154900464587 /* DrawingEraserMsg-iPhone6.xib */,
@@ -5405,6 +5408,7 @@
 				249F203C193F562C0072835E /* private_off_button@2x.png in Resources */,
 				249F202E193F562C0072835E /* login_email_icon@2x.png in Resources */,
 				247858CD1948764D0062F1E4 /* Montserrat-Regular.ttf in Resources */,
+				204231641A10E1A1002F93D7 /* TextBorders-iPhone6-Plus.xib in Resources */,
 				24F130CB1A0D163800464587 /* Fonts-iPhone6.xib in Resources */,
 				24556D8519EE7E65005FCDFE /* more@2x.png in Resources */,
 				30D58CFF10FB1BF800E0C7E8 /* icon0.jpg in Resources */,

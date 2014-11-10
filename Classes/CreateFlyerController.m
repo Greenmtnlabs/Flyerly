@@ -555,7 +555,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 }else if ( IS_IPHONE_6){
                     textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders-iPhone6" owner:self options:nil];
                 }else if ( IS_IPHONE_6_PLUS){
-                    textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders-iPhone6" owner:self options:nil];
+                    textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders-iPhone6-Plus" owner:self options:nil];
                 }
                 textBordersView = [textBordersViewArray objectAtIndex:0];
                 
