@@ -503,9 +503,8 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 //Update data base for fb data
 -(void)fbUpdateFbData:(NSString *)fbA fbAuthExpD:(NSDate * )fbAuthExpD
 {
-    
-    NSLog(@"fbAccessToken=%@",fbA);
     NSLog(@"expirationDate=%@",fbAuthExpD);
+    NSLog(@"fbAccessToken=%@",fbA);
     
     fbAuth = fbA;
     fbAuthExpiryTs = [commonFunctions nsDateToTimeStampStr:fbAuthExpD ];

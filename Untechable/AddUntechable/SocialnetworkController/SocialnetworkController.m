@@ -270,7 +270,7 @@
             else {
                 // Open a session showing the user the login UI
                 // You must ALWAYS ask for public_profile permissions when opening a session
-                [FBSession openActiveSessionWithReadPermissions:@[@"public_profile", @"offline_access", @"publish_actions"]
+                [FBSession openActiveSessionWithReadPermissions:@[@"publish_actions"]
                                                    allowLoginUI:YES
                                               completionHandler:
                  ^(FBSession *session, FBSessionState state, NSError *error) {
