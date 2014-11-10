@@ -97,6 +97,7 @@ BOOL adLoaded = false;
     }];
     
     
+    
 	[self.navigationController pushViewController:createFlyer animated:YES];
     
     // Start animations and disable buttons

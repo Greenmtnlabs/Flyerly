@@ -32,6 +32,8 @@
             <string>10</string>
             <key>y</key>
             <string>10</string>
+            <key>flyerOpenTime</key>
+            <string>0</string>
         </dict>
         <key>Template</key>
         <dict>

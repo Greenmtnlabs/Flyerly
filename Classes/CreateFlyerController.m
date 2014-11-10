@@ -80,6 +80,38 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 }
 
 /**
+ * Set position of WaterMark according to Device.
+ */
+-(void)setWaterMarkLayerPosition {
+    
+    if ( IS_IPHONE_6 ){
+        NSArray *sortedLayers = [flyer allKeys];
+        if ( sortedLayers.count == 2 ){
+            
+            NSMutableDictionary *dic = [flyer getLayerFromMaster:sortedLayers[1]];
+            
+            if( [[dic objectForKey:@"type"] isEqualToString:FLYER_LAYER_WATER_MARK] ){
+                
+                if ( [[dic objectForKey:@"flyerOpenTime"] isEqualToString:@"0"] ) {
+                    [dic setObject:@"280.0" forKey:@"tx"];
+                    [dic setObject:@"330.0" forKey:@"ty"];
+                    
+                    [dic setObject:@"1" forKey:@"flyerOpenTime"];
+                }
+                
+                
+            }
+
+            //if iphone6
+            //1 - cont layer, if layer count == 1
+            // get thay layer dic,
+            //if check thay layer is water mark lay
+            // then check flyerOpenTime is nil, or 1 update cordinates (x,y ) and increase flyerOpenTime counter
+        }
+    }
+}
+
+/**
  * Update the view once it appears.
  */
 -(void)viewDidAppear:(BOOL)animated {
@@ -88,8 +120,14 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     
+   
+    [self setWaterMarkLayerPosition];
+
+    
+    
     //Render Flyer
     [self renderFlyer];
+    
     self.flyimgView.addUiImgForDrawingLayer = NO;//must set:NO after renderFlyer all layers first time
     
     //Set Context View
@@ -1594,6 +1632,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         
         zoomScreenShot.frame = CGRectMake(80, 10, zoomScreenShot.size.width, zoomScreenShot.size.height);
+        if ( IS_IPHONE_6 ) {
+            zoomScreenShot.frame = CGRectMake(80, 10, zoomScreenShot.size.width, zoomScreenShot.size.height);
+        }
         [layerScrollView addSubview:zoomScreenShot];
         
         zoomMagnifyingGlass.frame = CGRectMake(50, 50, zoomMagnifyingGlass.size.width, zoomMagnifyingGlass.size.height);
@@ -1647,7 +1688,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     
     NSArray *sortedLayers = [flyer allKeys];
-    NSMutableDictionary *layers = self.flyimgView.layers ;
+    NSMutableDictionary *layers = self.flyimgView.layers;
     int cnt = 0;
     for (NSString* uid in sortedLayers) {
         
@@ -5049,7 +5090,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         if ([currentLayer isEqualToString:@""]) {
             currentLayer = [flyer addImage];
             
-            CGRect imageFrame  = CGRectMake(100,10,200,200);
+            CGRect imageFrame  = CGRectMake(300,10,200,200);
             [flyer setImageFrame:currentLayer :imageFrame];
             NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
             [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
@@ -6124,6 +6165,13 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     if( self.flyimgView.zoomedIn ){
         CGFloat width = flyerlyWidth/2;
         CGFloat height = flyerlyHeight/2;
+        
+        if ( IS_IPHONE_6 ){
+            width +=40;
+            height += 60;
+        }
+        
+        
         CGSize size = CGSizeMake(width,height);
         
         if ( [flyer isVideoFlyer] ){
