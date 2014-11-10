@@ -207,6 +207,7 @@
 		2044FF97185088ED00A26B42 /* MainSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2044FF95185088ED00A26B42 /* MainSettingCell.xib */; };
 		204635621895E4AF00A94C42 /* Flyer.m in Sources */ = {isa = PBXBuildFile; fileRef = 204635611895E4AF00A94C42 /* Flyer.m */; };
 		204635651895F90000A94C42 /* FlyerImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 204635641895F90000A94C42 /* FlyerImageView.m */; };
+		204BC2DE1A10E67700FEB946 /* DrawingPatterns-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204BC2DD1A10E67700FEB946 /* DrawingPatterns-iPhone6-Plus.xib */; };
 		20563E131962D64200C206FD /* CutiveMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20563E0B1962D64200C206FD /* CutiveMono-Regular.ttf */; };
 		20563E151962D64200C206FD /* Lora-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20563E0D1962D64200C206FD /* Lora-Italic.ttf */; };
 		20563E161962D64200C206FD /* Monoton-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20563E0E1962D64200C206FD /* Monoton-Regular.ttf */; };
@@ -1600,6 +1601,7 @@
 		204635611895E4AF00A94C42 /* Flyer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Flyer.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		204635631895F90000A94C42 /* FlyerImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyerImageView.h; sourceTree = "<group>"; };
 		204635641895F90000A94C42 /* FlyerImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyerImageView.m; sourceTree = "<group>"; };
+		204BC2DD1A10E67700FEB946 /* DrawingPatterns-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DrawingPatterns-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		20563E0B1962D64200C206FD /* CutiveMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CutiveMono-Regular.ttf"; path = "Data/fonts/CutiveMono-Regular.ttf"; sourceTree = "<group>"; };
 		20563E0D1962D64200C206FD /* Lora-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lora-Italic.ttf"; path = "Data/fonts/Lora-Italic.ttf"; sourceTree = "<group>"; };
 		20563E0E1962D64200C206FD /* Monoton-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Monoton-Regular.ttf"; path = "Data/fonts/Monoton-Regular.ttf"; sourceTree = "<group>"; };
@@ -4075,6 +4077,7 @@
 				368ADADC19B6FF0400EAB305 /* DrawingEraserMsg-iPhone4.xib */,
 				36A93F2319AE067000D0A810 /* DrawingPatterns.xib */,
 				24F130C81A0D159600464587 /* DrawingPatterns-iPhone6.xib */,
+				204BC2DD1A10E67700FEB946 /* DrawingPatterns-iPhone6-Plus.xib */,
 				36A93F2519AE0B5400D0A810 /* DrawingPatterns-iPhone4.xib */,
 				206068A41924FFD300AB5230 /* Fonts.xib */,
 				24F130CA1A0D163800464587 /* Fonts-iPhone6.xib */,
@@ -6157,6 +6160,7 @@
 				2478E5EE192C8C0A0081B31B /* FreeFeatureCell.xib in Resources */,
 				242184ED194B4AEC00FDDA97 /* Pictures-icon.png in Resources */,
 				365A9D1319AF697300E284B5 /* drawing_tab_color@2x.png in Resources */,
+				204BC2DE1A10E67700FEB946 /* DrawingPatterns-iPhone6-Plus.xib in Resources */,
 				24785893194873E60062F1E4 /* Canter Light.otf in Resources */,
 				24861EF419F9147100670F6D /* email_setting@3x.png in Resources */,
 				206068A71924FFEB00AB5230 /* Fonts-iPhone4.xib in Resources */,

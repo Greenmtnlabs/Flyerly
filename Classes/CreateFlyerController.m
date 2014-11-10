@@ -524,7 +524,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 }else if ( IS_IPHONE_6){
                     drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns-iPhone6" owner:self options:nil];
                 }else if ( IS_IPHONE_6_PLUS){
-                    drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns-iPhone6" owner:self options:nil];
+                    drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns-iPhone6-Plus" owner:self options:nil];
                 }
                 drawingPatternsView = [drawingPatternsViewArray objectAtIndex:0];
                 
