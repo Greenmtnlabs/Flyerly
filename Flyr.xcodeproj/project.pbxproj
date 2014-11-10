@@ -199,6 +199,7 @@
 		2036661C188DB67300C71EAA /* FlyerUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2036661B188DB67300C71EAA /* FlyerUser.m */; };
 		203E0B7617DDDD720039C3A7 /* InputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 203E0B7417DDDD720039C3A7 /* InputViewController.m */; };
 		203E0B7717DDDD720039C3A7 /* InputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 203E0B7517DDDD720039C3A7 /* InputViewController.xib */; };
+		204231601A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2042315F1A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib */; };
 		20449F93196181A6007BE4BF /* discount.png in Resources */ = {isa = PBXBuildFile; fileRef = 20449F92196181A6007BE4BF /* discount.png */; };
 		2044FF96185088ED00A26B42 /* MainSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2044FF94185088ED00A26B42 /* MainSettingCell.m */; };
 		2044FF97185088ED00A26B42 /* MainSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2044FF95185088ED00A26B42 /* MainSettingCell.xib */; };
@@ -1586,6 +1587,7 @@
 		203E0B7317DDDD720039C3A7 /* InputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputViewController.h; sourceTree = "<group>"; };
 		203E0B7417DDDD720039C3A7 /* InputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputViewController.m; sourceTree = "<group>"; };
 		203E0B7517DDDD720039C3A7 /* InputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputViewController.xib; sourceTree = "<group>"; };
+		2042315F1A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Backgrounds-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		20449F92196181A6007BE4BF /* discount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discount.png; sourceTree = "<group>"; };
 		2044FF93185088ED00A26B42 /* MainSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainSettingCell.h; sourceTree = "<group>"; };
 		2044FF94185088ED00A26B42 /* MainSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainSettingCell.m; sourceTree = "<group>"; };
@@ -4054,6 +4056,7 @@
 				0DFC531A109576AB00B18478 /* CreateFlyerController.xib */,
 				2060689A1924CC6100AB5230 /* Backgrounds.xib */,
 				249464DE1A0CFEFE00C1247D /* Backgrounds-iPhone6.xib */,
+				2042315F1A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib */,
 				2060689C1924CCE400AB5230 /* Backgrounds-iPhone4.xib */,
 				206068A01924EE7500AB5230 /* Borders.xib */,
 				24F130BA1A0D0AF700464587 /* Borders-iPhone6.xib */,
@@ -6042,6 +6045,7 @@
 				24861F2B19F9147100670F6D /* next_button@3x.png in Resources */,
 				249F1F90193F55D50072835E /* 07_width_selected@2x.png in Resources */,
 				65C1A43F1742516D00947D5E /* Template39@2x.jpg in Resources */,
+				204231601A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib in Resources */,
 				242184FA194B4AEC00FDDA97 /* Skating-icon.png in Resources */,
 				24861EE519F9147100670F6D /* delete_button@3x.png in Resources */,
 				65C1A4401742516D00947D5E /* Template40@2x.jpg in Resources */,
