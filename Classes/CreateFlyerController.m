@@ -1443,8 +1443,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
             [symbolArray addObject:symbolImg];
             
-            
-            
                 UIButton *symbolButton = [UIButton buttonWithType:UIButtonTypeCustom];
                 symbolButton.frame =CGRectMake(0, 0, symbolScrollWidth, symbolScrollHeight);
                 [symbolButton setImage:symbolImg forState:UIControlStateNormal];
@@ -1456,6 +1454,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 frame.origin = CGPointMake(curXLoc, curYLoc);
                 symbolButton.frame = frame;
                 curXLoc += (symbolScrollWidth)+5;
+                if( IS_IPHONE_6 ){
+                    curXLoc +=  - 2;
+                }
+            
             
                 if(IS_IPHONE_5){
                     if(curXLoc >= 320){
