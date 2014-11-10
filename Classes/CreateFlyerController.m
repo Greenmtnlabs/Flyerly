@@ -1728,8 +1728,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             layerButton.frame = frame;
             curXLoc += (layerScrollWidth)+5;
             
-            if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+            if(IS_IPHONE_5 || IS_IPHONE_6_PLUS){
                 if(curXLoc >= 300){
+                    curXLoc = 10;
+                    curYLoc = curYLoc + layerScrollHeight + 7;
+                }
+            }else if ( IS_IPHONE_6 ) {
+                if(curXLoc >= 350){
                     curXLoc = 10;
                     curYLoc = curYLoc + layerScrollHeight + 7;
                 }
