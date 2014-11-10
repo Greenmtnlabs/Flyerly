@@ -16,12 +16,10 @@ NSString * const TEXTCOLOR = @"0.000000, 0.000000, 0.000000";
 NSString * const TEXTWHITECOLOR = @"0.000000, 1.000000";
 NSString * const TEXTBORDERWHITE = @"0.000000, 0.000000";
 NSString * const TEXTBORDERCOLOR = @"0.000000, 0.000000, 0.000000";
-NSString * const TEXTxPOS = @"15.000000";
-NSString * const TEXTyPOS = @"15.000000";
 
-#ifdef IS_IPHONE_6
-//TEXTxPOS = @"50.000000";
-#endif
+// We change these values later for iPhone6 and iPhone 6 plus
+NSString * TEXTxPOS = @"15.000000";
+NSString * TEXTyPOS = @"15.000000";
 
 NSString * const TEXTWIDTH = @"280.000000";
 NSString * const TEXTHEIGHT = @"280.000000";
@@ -47,7 +45,13 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
  */
 -(id)initWithPath:(NSString *)flyPath setDirectory:(BOOL)setDirectory {
     
-      self = [super init];
+    if (IS_IPHONE_6) {
+        TEXTxPOS = @"45.000000";
+    } else if (IS_IPHONE_6_PLUS) {
+        TEXTxPOS = @"50.000000";
+    }
+    
+    self = [super init];
     
     if ( ![[NSFileManager defaultManager] fileExistsAtPath:flyPath isDirectory:NULL] ) {
         
