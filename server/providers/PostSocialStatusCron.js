@@ -96,44 +96,114 @@ SocialStatusCron.setup = function(app) {
     function linkedInPost(){
         logger.info('Inside linkedin post.');
     }
-    
+	
+	
+	// TESTING CODE  ----------------{-------	
+	app.all('/fbshare1', function(req, res) {
+		
+		var FB = require('fb');
+		FB.setAccessToken(req.query.t);
+
+		var body = 'My first post using facebook-node-sdk';
+		FB.api('me/feed', 'post', { message: body}, function (res2) {
+			
+		  if(!res2 || res2.error) {
+			  var msg = (!res2) ? 'error occurred' : res2.error;			  
+		  }
+		  else{
+			  var msg = 'Post Id: ' + res2.id;
+		  }
+		  
+		  console.log( msg );	  
+		  res.jsonp({"In test url , __line":__line, "msg":msg});
+
+		});
+		
+		/*
+		function postToFacebook(str, facebookToken) {
+			
+			
+			
+			 //var resEndMsg = 'message='+encodeURIComponent(str)+'&access_token='+encodeURIComponent(facebookToken);
+			 
+			 var resEndMsg = 'message='+encodeURIComponent(str)+'&access_token='+encodeURIComponent(facebookToken);
+			 
+			 var https = require('https');
+			  var req = https.request({
+			    host: 'graph.facebook.com',
+			    path: '/me/feed?'+resEndMsg,
+			    method: 'GET'
+			  }, function(res) {
+			    res.setEncoding('utf8');
+			    var i=0;
+				res.on("data", function(chunk) {
+			      console.log('got chunk in data('+i+'): '+chunk);
+			    });
+			
+			    res.on("end", function() {
+			      console.log('response end with status: '+res.status);
+			    });
+			
+			  });
+
+		  	  
+			  //req.end( resEndMsg );
+			  
+			  req.end( );
+			  
+			  
+		};
+
+
+		var facebookToken = "CAACEdEose0cBAGSN54EJxiQ1Wk91n0a5f7nRDe4OlDzZBt8G6LOnqmOMjxKnZBy18gXLBLxZAmiqR72YEhpyDWMA58pcK7G98D3edlyZC6BBg0IB51HlDM2GkAwKjiC8Hor7qO8ADQqq5F0ChHe7pelOSMaQASlPLmMTv4putDs9aP3RPOHNJ8vfHvSr638S6sjbpRrpKtRkjEl8DZBRM";
+		postToFacebook('testStatus1', facebookToken);
+		*/
+				
+	});
+
     app.all('/twshare1', function(req, res) {
     	
-        var twitter = require('ntwitter');
-        var twit = new twitter({
-          consumer_key: config.twitter.consumer_key,
-          consumer_secret: config.twitter.consumer_secret,
-		  
-          access_token_key: access_token_key,
-          access_token_secret: access_token_secret
-        });
+		var twitter = require('ntwitter');
 
-        function postToTwitter(access_token_key, access_token_secret, str, callBack) {
-          
-          twit.verifyCredentials(function (err, data) {
-          
-                if (err) {
-                  callBack("Error verifying credentials: " + err);
-                  
-                } else {
-                  twit.updateStatus(str, function (err, data) {
-                  
-                        if (err) {
-                          callBack('Tweeting failed: ' + err);
-                        } else {
-                          callBack('Success!')
-                        }
-                  });
-                }
-          });
-        }
-        
-        var access_token_key = "2237419165-WQ1iTAKkVElCskn3yy9BQ5w9QncUhRcgFFFlsOB";
-        var access_token_secret = "zFdFt5RE5xJ4p8oE6PlC0ZP3pDU3nFiYbKWVVP5kAwBQh";
-		var twittText =	'Untechable Test1';
+
+		function postToTwitter(access_token_key, access_token_secret, str, callBack) {
+
+			var twit = new twitter({
+			  consumer_key: config.twitter.consumer_key,
+			  consumer_secret: config.twitter.consumer_secret,
+
+			  access_token_key: access_token_key,
+			  access_token_secret: access_token_secret
+			});
+  
+		  	twit.verifyCredentials(function (err, data) {
+  
+		        if (err) {
+		          callBack("Error verifying credentials: " + err);
+      
+		        } else {
+		          twit.updateStatus(str, function (err, data) {
+      
+		                if (err) {
+		                  callBack('Tweeting failed: ' + err);
+		                } else {
+		                  callBack('Success!')
+		                }
+		          });
+		        }
+			
+			});
 		
-        postToTwitter(access_token_key, access_token_secret, twittText, function( retStatusStr ) {
-          console.log( retStatusStr );
-        });
+		}//end fn
+
+		var atKey = "2237419165-WQ1iTAKkVElCskn3yy9BQ5w9QncUhRcgFFFlsOB";
+		var atSecret = "zFdFt5RE5xJ4p8oE6PlC0ZP3pDU3nFiYbKWVVP5kAwBQh";
+		var twittText =	'Untechable Test-'+(new Date());
+
+		postToTwitter(atKey, atSecret, twittText, function( retStatusStr ) {
+		  console.log( retStatusStr );
+		});
     });
+	// TESTING CODE  ----------------}-------    
+    
 }

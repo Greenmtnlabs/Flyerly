@@ -28,7 +28,11 @@ var eventsSchema = db.Schema({
 	
 	socialStatus: String ,
 	fbAuth: String ,
+	fbAuthExpiryTs: String,
+	
 	twitterAuth: String ,
+	twOAuthTokenSecret: String,
+		
 	linkedinAuth: String ,
 	
 	email: String ,
