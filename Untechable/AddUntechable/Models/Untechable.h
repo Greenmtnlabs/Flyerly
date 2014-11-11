@@ -41,7 +41,7 @@
 @property (nonatomic, assign) BOOL hasRecording;
 
 //Screen3
-@property (strong, nonatomic) NSString *socialStatus, *fbAuth, *fbAuthExpiryTs, *twitterAuth, *linkedinAuth;
+@property (strong, nonatomic) NSString *socialStatus, *fbAuth, *fbAuthExpiryTs, *twitterAuth, *twOAuthTokenSecret, *linkedinAuth;
 
 //Screen4
 @property (strong, nonatomic) NSString *email, *password, *respondingEmail;
@@ -69,5 +69,9 @@
 #pragma mark -  Facebook functions
 - (void)fbSessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error;
 -(void)fbFlushFbData;
+
+#pragma mark -  Twitter functions
+-(void)twFlushData;
+-(void)twUpdateData:(NSString *)oAuthToken oAuthTokenSecret:(NSString * )oAuthTokenSecret;
 
 @end

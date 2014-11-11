@@ -24,7 +24,7 @@
 @synthesize twillioNumber, location, emergencyContacts, emergencyNumber, hasRecording;
 
 //3-vars for screen3
-@synthesize socialStatus, fbAuth, fbAuthExpiryTs, twitterAuth, linkedinAuth;
+@synthesize socialStatus, fbAuth, fbAuthExpiryTs, twitterAuth, twOAuthTokenSecret, linkedinAuth;
 
 //4-vars for screen4
 @synthesize email, password, respondingEmail;
@@ -195,6 +195,8 @@
         dic[@"fbAuthExpiryTs"] = fbAuthExpiryTs;
         
         dic[@"twitterAuth"] = twitterAuth;
+        dic[@"twOAuthTokenSecret"] = twOAuthTokenSecret;
+        
         dic[@"linkedinAuth"] = linkedinAuth;
         
         //Screen4 vars
@@ -238,7 +240,9 @@
         socialStatus = ( dic[@"socialStatus"] ) ? dic[@"socialStatus"] : @"";
         fbAuth       = ( dic[@"fbAuth"] ) ? dic[@"fbAuth"] : @"";
         fbAuthExpiryTs = ( dic[@"fbAuthExpiryTs"] ) ? dic[@"fbAuthExpiryTs"] : [commonFunctions nsDateToTimeStampStr:[commonFunctions getDate:@"PAST_1_MONTH"] ];
+        
         twitterAuth  = ( dic[@"twitterAuth"] ) ? dic[@"twitterAuth"] : @"";
+        twOAuthTokenSecret = ( dic[@"twOAuthTokenSecret"] ) ? dic[@"twOAuthTokenSecret"] : @"";
         linkedinAuth = ( dic[@"linkedinAuth"] ) ? dic[@"linkedinAuth"] : @"";
 
         
@@ -284,6 +288,7 @@
     fbAuth       = @"";
     fbAuthExpiryTs = [commonFunctions nsDateToTimeStampStr:[commonFunctions getDate:@"PAST_1_MONTH"] ];
     twitterAuth  = @"";
+    twOAuthTokenSecret = @"";
     linkedinAuth = @"";
     
     //Screen4
@@ -513,4 +518,21 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 }
 
 #pragma mark -  Twitter functions
+//Update data base for fb data
+-(void)twFlushData
+{
+    [self twUpdateData:@"" oAuthTokenSecret:@"" ];
+}
+
+//Update data base for fb data
+-(void)twUpdateData:(NSString *)oAuthToken oAuthTokenSecret:(NSString * )oAuthTokenSecret
+{
+    NSLog(@"oAuthToken=%@",oAuthToken);
+    NSLog(@"oAuthTokenSecret=%@",oAuthTokenSecret);
+    
+    twitterAuth =   oAuthToken;
+    twOAuthTokenSecret =   oAuthTokenSecret;
+
+    [self setOrSaveVars:SAVE];
+}
 @end

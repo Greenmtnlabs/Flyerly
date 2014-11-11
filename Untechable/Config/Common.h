@@ -63,5 +63,8 @@
 #define APP_IN_MODE PRODUCTION
 
 
+#define TW_CONSUMER_KEY @"GxQAvzs4YXBl2o39TN5nr4ogj"
+#define TW_CONSUMER_SECRET @"IRO1i1pqUdKorBg1fwn4SEzniAeG1GrzpUVXd9mooG4GkpIlNA"
+
 
 

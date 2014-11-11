@@ -33,6 +33,8 @@
 		366ECD9719D323DA00F71A11 /* AddUntechableController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 366ECD9519D323DA00F71A11 /* AddUntechableController.xib */; };
 		366ECD9B19D323E200F71A11 /* PhoneSetupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 366ECD9919D323E200F71A11 /* PhoneSetupController.m */; };
 		366ECD9C19D323E200F71A11 /* PhoneSetupController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 366ECD9A19D323E200F71A11 /* PhoneSetupController.xib */; };
+		366F9DAA1A124FC7006602E1 /* FHSStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 366F9DA71A124FC7006602E1 /* FHSStream.m */; };
+		366F9DAB1A124FC7006602E1 /* FHSTwitterEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 366F9DA91A124FC7006602E1 /* FHSTwitterEngine.m */; };
 		3681603C19E6B81E00B9B64C /* ContactsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3681603519E6B81E00B9B64C /* ContactsModel.m */; };
 		3681603D19E6B81E00B9B64C /* InviteFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3681603719E6B81E00B9B64C /* InviteFriendsCell.m */; };
 		3681603E19E6B81E00B9B64C /* InviteFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3681603819E6B81E00B9B64C /* InviteFriendsCell.xib */; };
@@ -141,6 +143,10 @@
 		366ECD9819D323E200F71A11 /* PhoneSetupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhoneSetupController.h; path = AddUntechable/PhoneSetupController/PhoneSetupController.h; sourceTree = "<group>"; };
 		366ECD9919D323E200F71A11 /* PhoneSetupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneSetupController.m; path = AddUntechable/PhoneSetupController/PhoneSetupController.m; sourceTree = "<group>"; };
 		366ECD9A19D323E200F71A11 /* PhoneSetupController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhoneSetupController.xib; path = AddUntechable/PhoneSetupController/PhoneSetupController.xib; sourceTree = "<group>"; };
+		366F9DA61A124FC7006602E1 /* FHSStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FHSStream.h; sourceTree = "<group>"; };
+		366F9DA71A124FC7006602E1 /* FHSStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FHSStream.m; sourceTree = "<group>"; };
+		366F9DA81A124FC7006602E1 /* FHSTwitterEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FHSTwitterEngine.h; sourceTree = "<group>"; };
+		366F9DA91A124FC7006602E1 /* FHSTwitterEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FHSTwitterEngine.m; sourceTree = "<group>"; };
 		3681603419E6B81E00B9B64C /* ContactsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsModel.h; sourceTree = "<group>"; };
 		3681603519E6B81E00B9B64C /* ContactsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsModel.m; sourceTree = "<group>"; };
 		3681603619E6B81E00B9B64C /* InviteFriendsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendsCell.h; sourceTree = "<group>"; };
@@ -384,6 +390,7 @@
 		366ECD7F19D317E200F71A11 /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				366F9DA51A124FC7006602E1 /* FHSTwitterEngine */,
 				36FD974919E694AC00427507 /* BSKeyboardControls */,
 				366ECD8019D3181000F71A11 /* Common.h */,
 			);
@@ -409,6 +416,17 @@
 				366ECD9A19D323E200F71A11 /* PhoneSetupController.xib */,
 			);
 			name = PhoneSetupController;
+			sourceTree = "<group>";
+		};
+		366F9DA51A124FC7006602E1 /* FHSTwitterEngine */ = {
+			isa = PBXGroup;
+			children = (
+				366F9DA61A124FC7006602E1 /* FHSStream.h */,
+				366F9DA71A124FC7006602E1 /* FHSStream.m */,
+				366F9DA81A124FC7006602E1 /* FHSTwitterEngine.h */,
+				366F9DA91A124FC7006602E1 /* FHSTwitterEngine.m */,
+			);
+			path = FHSTwitterEngine;
 			sourceTree = "<group>";
 		};
 		3681603319E6B81E00B9B64C /* InviteScreen */ = {
@@ -742,7 +760,9 @@
 				36BB7B8919FFD98C00562069 /* ThankyouController.m in Sources */,
 				366ECD9619D323DA00F71A11 /* AddUntechableController.m in Sources */,
 				36B275D71A00D36400ED58AD /* RMStore.m in Sources */,
+				366F9DAA1A124FC7006602E1 /* FHSStream.m in Sources */,
 				3681603C19E6B81E00B9B64C /* ContactsModel.m in Sources */,
+				366F9DAB1A124FC7006602E1 /* FHSTwitterEngine.m in Sources */,
 				366ECD9B19D323E200F71A11 /* PhoneSetupController.m in Sources */,
 				3681603F19E6B81E00B9B64C /* InviteFriendsController.m in Sources */,
 				3663932519D6A0A700512965 /* CommonFunctions.m in Sources */,

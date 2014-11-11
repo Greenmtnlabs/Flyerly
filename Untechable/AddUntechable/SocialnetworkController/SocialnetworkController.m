@@ -10,9 +10,10 @@
 #import "Common.h"
 #import "EmailSettingController.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "FHSTwitterEngine.h"
 
 
-@interface SocialnetworkController ()
+@interface SocialnetworkController () <FHSTwitterEngineAccessTokenDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextField *inputSetSocialStatus;
 
@@ -245,15 +246,18 @@
     
 }
 
+#pragma mark -  Get Sharing permissions functions
 
 - (IBAction)shareOn:(id)sender {
     if(sender == self.btnFacebook){
         
         if( [self fbBtnStatus] ) {
+            //When button was green , the delete permissions
             [untechable fbFlushFbData];
             [self btnActivate:self.btnFacebook active:[self fbBtnStatus]];
         }
         else{
+            //When button was gray , take permissions
             
             // If the session state is any of the two "open" states when the button is clicked
             if (FBSession.activeSession.state == FBSessionStateOpen
@@ -285,17 +289,51 @@
         }
     }
     else if(sender == self.btnTwitter){
-        [self btnActivate:self.btnTwitter active:YES];
+        
+        if( [self twitterBtnStatus] ) {
+            //When button was green , the delete permissions
+            [self twLogout];
+            [self btnActivate:self.btnTwitter active:[self twitterBtnStatus]];
+        }
+        else {
+            //When button was gray , take permissions
+            
+            //https://github.com/fhsjaagshs/FHSTwitterEngine
+            
+            [[FHSTwitterEngine sharedEngine]permanentlySetConsumerKey:TW_CONSUMER_KEY andSecret:TW_CONSUMER_SECRET];
+            [[FHSTwitterEngine sharedEngine]setDelegate:self];
+            [[FHSTwitterEngine sharedEngine]loadAccessToken];
+            
+            //GO TO TWITTER AUTH LOGIN SCREEN
+            UIViewController *loginController = [[FHSTwitterEngine sharedEngine]loginControllerWithCompletionHandler:^(BOOL success) {
+                NSLog( success ? @"Twitter, success login on twitter" : @"Twitter login failure.");
+            }];
+            [self presentViewController:loginController animated:YES completion:nil];
+
+            
+        }
     }
     else if(sender == self.btnLinkedin){
-        [self btnActivate:self.btnLinkedin active:YES];
+        //[self btnActivate:self.btnLinkedin active:YES];
     }
 }
 
+// Button green (active) and gray ( inActive ) case
+-(void)btnActivate:(UIButton *)btnPointer active:(BOOL)active {
+    if( active == YES )
+        [btnPointer setTitleColor:defGreen forState:UIControlStateNormal];
+    else
+        [btnPointer setTitleColor:defGray forState:UIControlStateNormal];
+}
+
+
+
+#pragma mark -  Facebook functions
+
+//Fb user info [Note: Do not change the name of this functions, it will called from facebook libraries]
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user {
     NSLog(@"%@", user);
 }
-
 
 //Active fb button when fb toke expiry date is greater then current date.
 -(BOOL)fbBtnStatus
@@ -306,12 +344,74 @@
     return active;
 }
 
-// Button green (active) and gray ( inActive ) case
--(void)btnActivate:(UIButton *)btnPointer active:(BOOL)active {
-   if( active == YES )
-   [btnPointer setTitleColor:defGreen forState:UIControlStateNormal];
-   else
-   [btnPointer setTitleColor:defGray forState:UIControlStateNormal];
+
+
+
+#pragma mark -  Twitter functions
+
+-(BOOL)twitterBtnStatus
+{
+    return !([untechable.twitterAuth isEqualToString:@""]);
 }
+
+//LOGOUT FROM TWITTER
+- (void)twLogout {
+    [[FHSTwitterEngine sharedEngine]clearAccessToken];
+    [untechable twUpdateData:@"" oAuthTokenSecret:@""];
+}
+
+//STORE TWITTER TOKEN [Note: Do not change the name of this functions, it will called from twitter libraries]
+- (void)twStoreAccessToken:(NSString *)accessTokenZ {
+
+    [[NSUserDefaults standardUserDefaults]setObject:accessTokenZ forKey:@"SavedAccessHTTPBody"];
+    
+    NSString *authenticatedUsername = [self extractValueForKey:@"screen_name" fromHTTPBody:accessTokenZ];
+    NSString *authenticatedID = [self extractValueForKey:@"user_id" fromHTTPBody:accessTokenZ];
+    
+    NSString *oauth_token = [self extractValueForKey:@"oauth_token" fromHTTPBody:accessTokenZ];
+    NSString *oauth_token_secret = [self extractValueForKey:@"oauth_token_secret" fromHTTPBody:accessTokenZ];
+    
+    NSLog(@"B- twitter : oauth_token: %@, oauth_token_secret: %@, self.authenticatedUsername: %@, self.authenticatedID: %@, ", oauth_token, oauth_token_secret, authenticatedUsername, authenticatedID);
+    
+   [untechable twUpdateData:oauth_token oAuthTokenSecret:oauth_token_secret];
+
+}
+//RETURN TWITTER TOKEN [Note: Do not change the name of this functions, it will called from twitter libraries]
+- (NSString *)twLoadAccessToken {
+    return [[NSUserDefaults standardUserDefaults]objectForKey:@"SavedAccessHTTPBody"];
+}
+
+//This functions return parmaeter value from url parmeter string
+//http:abc.com?a=1&b=c in this url a is target and body is the full url
+- (NSString *)extractValueForKey:(NSString *)target fromHTTPBody:(NSString *)body {
+    if (body.length == 0) {
+        return nil;
+    }
+    
+    if (target.length == 0) {
+        return nil;
+    }
+	
+	NSArray *tuples = [body componentsSeparatedByString:@"&"];
+	if (tuples.count < 1) {
+        return nil;
+    }
+	
+	for (NSString *tuple in tuples) {
+		NSArray *keyValueArray = [tuple componentsSeparatedByString:@"="];
+		
+		if (keyValueArray.count >= 2) {
+			NSString *key = [keyValueArray objectAtIndex:0];
+			NSString *value = [keyValueArray objectAtIndex:1];
+			
+			if ([key isEqualToString:target]) {
+                return value;
+            }
+		}
+	}
+	
+	return nil;
+}
+
 
 @end
