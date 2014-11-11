@@ -33,13 +33,11 @@ SocialStatusCron.setup = function(app) {
             var timestamp = today.getTime();
 
             Events.find({
-                hasEndDate: 'YES',
                 startTime: {
                    $lte: timestamp
                 },
-                endTime:{
-                    $lt: timestamp
-                }
+                postSocialStatus: { $ne : true }
+                
             }, function(err, events) {
                 console.log(events);
                 if (err) {
