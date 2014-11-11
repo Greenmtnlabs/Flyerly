@@ -12,6 +12,7 @@
 	"mail-notifier" : "0.2.3",
 	"twilio" : "1.7.0",
 	"request": "2.45.0",
-	"fb": "0.7.0"
+	"fb": "0.7.0",
+	"ntwitter": "0.5.0"
   }
 }

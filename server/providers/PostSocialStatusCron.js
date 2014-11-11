@@ -97,40 +97,43 @@ SocialStatusCron.setup = function(app) {
         logger.info('Inside linkedin post.');
     }
     
-    app.all('/twshare1',function(){
-    
+    app.all('/twshare1', function(req, res) {
+    	
         var twitter = require('ntwitter');
-
         var twit = new twitter({
-          consumer_key: "GxQAvzs4YXBl2o39TN5nr4ogj",
-          consumer_secret: "IRO1i1pqUdKorBg1fwn4SEzniAeG1GrzpUVXd9mooG4GkpIlNA",
-          access_token_key: "2237419165-7aaUTjRV3AbsDwyWM5wnouqlCrQVFT2VIPyFYfh",
-          access_token_secret: "NHNvlzij0SFixA7dCnCBb7KBsGPqpq1nJOMRZ5ncqM0g8"
+          consumer_key: config.twitter.consumer_key,
+          consumer_secret: config.twitter.consumer_secret,
+		  
+          access_token_key: access_token_key,
+          access_token_secret: access_token_secret
         });
 
-        function postToTwitter(str, cb) {
+        function postToTwitter(access_token_key, access_token_secret, str, callBack) {
           
           twit.verifyCredentials(function (err, data) {
           
                 if (err) {
-                  cb("Error verifying credentials: " + err);
+                  callBack("Error verifying credentials: " + err);
                   
                 } else {
                   twit.updateStatus(str, function (err, data) {
                   
                         if (err) {
-                          cb('Tweeting failed: ' + err);
+                          callBack('Tweeting failed: ' + err);
                         } else {
-                          cb('Success!')
+                          callBack('Success!')
                         }
                   });
                 }
           });
         }
         
-        postToTwitter('Untechable Test', function(result) {
-          console.log(result);
+        var access_token_key = "2237419165-WQ1iTAKkVElCskn3yy9BQ5w9QncUhRcgFFFlsOB";
+        var access_token_secret = "zFdFt5RE5xJ4p8oE6PlC0ZP3pDU3nFiYbKWVVP5kAwBQh";
+		var twittText =	'Untechable Test1';
+		
+        postToTwitter(access_token_key, access_token_secret, twittText, function( retStatusStr ) {
+          console.log( retStatusStr );
         });
-    
     });
 }

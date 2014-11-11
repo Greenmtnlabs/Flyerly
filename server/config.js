@@ -30,6 +30,10 @@ config.logger.maxFiles = 1;
 config.crons = {}
 config.crons.cron1 = 1;
 
+config.twitter = {}
+config.twitter.consumer_key	=	"GxQAvzs4YXBl2o39TN5nr4ogj";
+config.twitter.consumer_secret	=	"IRO1i1pqUdKorBg1fwn4SEzniAeG1GrzpUVXd9mooG4GkpIlNA";
+
 
 // Db Configuration
 config.db = {}
