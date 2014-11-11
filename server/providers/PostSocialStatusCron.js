@@ -77,7 +77,7 @@ SocialStatusCron.setup = function(app) {
 
         } // end postStatusEvent() function
 
-    postStatusEvent();
+    //postStatusEvent();
     
     // Offline facebook posting
     function facebookPost(){
@@ -88,10 +88,49 @@ SocialStatusCron.setup = function(app) {
     // Offline facebook posting
     function twitterPost(){ 
         logger.info('Inside twitter post.');
+        
+        
     }
     
     // Offline facebook posting
     function linkedInPost(){
         logger.info('Inside linkedin post.');
     }
+    
+    app.all('/twshare1',function(){
+    
+        var twitter = require('ntwitter');
+
+        var twit = new twitter({
+          consumer_key: "GxQAvzs4YXBl2o39TN5nr4ogj",
+          consumer_secret: "IRO1i1pqUdKorBg1fwn4SEzniAeG1GrzpUVXd9mooG4GkpIlNA",
+          access_token_key: "2237419165-7aaUTjRV3AbsDwyWM5wnouqlCrQVFT2VIPyFYfh",
+          access_token_secret: "NHNvlzij0SFixA7dCnCBb7KBsGPqpq1nJOMRZ5ncqM0g8"
+        });
+
+        function postToTwitter(str, cb) {
+          
+          twit.verifyCredentials(function (err, data) {
+          
+                if (err) {
+                  cb("Error verifying credentials: " + err);
+                  
+                } else {
+                  twit.updateStatus(str, function (err, data) {
+                  
+                        if (err) {
+                          cb('Tweeting failed: ' + err);
+                        } else {
+                          cb('Success!')
+                        }
+                  });
+                }
+          });
+        }
+        
+        postToTwitter('Untechable Test', function(result) {
+          console.log(result);
+        });
+    
+    });
 }
