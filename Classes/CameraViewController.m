@@ -142,6 +142,10 @@
     }
     
     nbuCrop.desiredImageSize = _desiredImageSize;
+    if ( IS_IPHONE_6 ){
+        nbuCrop.desiredImageSize =  CGSizeMake( 350,
+               380);
+    }
     nbuCrop.image = [image imageWithOrientationUp];
     nbuCrop.onImageTaken = _onImageTaken;
 
