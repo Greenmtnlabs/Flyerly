@@ -26,7 +26,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <view contentMode="scaleToFill" id="XLk-Z8-TRH" customClass="NBUPresetFilterView">
-                    <rect key="frame" x="28" y="450" width="320" height="83"/>
+                    <rect key="frame" x="-5" y="450" width="320" height="83"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <view contentMode="scaleToFill" id="DOY-vE-GNX" customClass="ObjectSlideView">
@@ -47,7 +47,6 @@
                             </connections>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="activityView" destination="rva-lD-xwn" id="5JR-3J-KKL"/>
                         <outlet property="editingImageView" destination="04T-YL-Mhg" id="Go8-a4-XyQ"/>
