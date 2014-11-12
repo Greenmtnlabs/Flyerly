@@ -18,8 +18,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblEndDateTime;
 @property (strong, nonatomic) IBOutlet UILabel *lblTwillioNumber;
 @property (strong, nonatomic) IBOutlet UILabel *lblForwadingNumber;
-@property (strong, nonatomic) IBOutlet UIButton *btnNew;
-@property (strong, nonatomic) IBOutlet UIButton *btnEdit;
 
 @end
 
@@ -40,9 +38,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    _btnNew.alpha = 0.0;
-    _btnEdit.alpha = 0.0;
     
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
@@ -88,12 +83,6 @@
 #pragma mark -  UI functions
 -(void)updateUI
 {
-    if( [untechable isUntechableStarted] || [untechable isUntechableExpired] ){
-        _btnNew.alpha = 1.0;
-    } else{
-       _btnEdit.alpha = 1.0;
-    }
-    
     [_lblStartsFrom setTextColor:defGray];
     _lblStartsFrom.font = [UIFont fontWithName:APP_FONT size:20];
     
@@ -118,13 +107,7 @@
     [_lblTwillioNumber setTextColor:defGreen];
     _lblTwillioNumber.font = [UIFont fontWithName:APP_FONT size:20];
     _lblTwillioNumber.text = untechable.twillioNumber;
-    
-    
-    [_btnNew setTitleColor:defGray forState:UIControlStateNormal];
-    _btnNew.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
-    
-    [_btnEdit setTitleColor:defGray forState:UIControlStateNormal];
-    _btnEdit.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
+
 }
 
 #pragma mark -  Navigation functions
@@ -139,6 +122,18 @@
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
 }
 
+
+-(BOOL) canEdit
+{
+    BOOL canEditUntechable;
+    if( [untechable isUntechableStarted] || [untechable isUntechableExpired] ){
+        canEditUntechable = NO;//start's new
+    } else{
+        canEditUntechable = YES;
+    }
+   return canEditUntechable;
+}
+
 -(void)setNavigation:(NSString *)callFrom
 {
     if([callFrom isEqualToString:@"viewDidLoad"])
@@ -148,6 +143,40 @@
         
         // Center title ________________________________________
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
+        
+        
+        // Right Navigation ________________________________________
+
+        NSMutableArray  *rightNavItems;
+        if( [self canEdit] ) {
+            
+            editUntechable = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+            [editUntechable addTarget:self action:@selector(onEdit:) forControlEvents:UIControlEventTouchUpInside];
+            editUntechable.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
+            [editUntechable setTitle:@"EDIT" forState:normal];
+            [editUntechable setTitleColor:defGray forState:UIControlStateNormal];
+            editUntechable.showsTouchWhenHighlighted = YES;
+            
+            UIBarButtonItem *editUntechableBarBtn = [[UIBarButtonItem alloc] initWithCustomView:editUntechable];
+            rightNavItems  = [NSMutableArray arrayWithObjects:editUntechableBarBtn,nil];
+            
+        }
+        else{
+            startNewUntechable = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+            [startNewUntechable addTarget:self action:@selector(onNew:) forControlEvents:UIControlEventTouchUpInside];
+            startNewUntechable.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+            [startNewUntechable setTitle:@"NEW" forState:normal];
+            [startNewUntechable setTitleColor:defGray forState:UIControlStateNormal];
+            startNewUntechable.showsTouchWhenHighlighted = YES;
+            
+            UIBarButtonItem *startNewUntechableBarBtn = [[UIBarButtonItem alloc] initWithCustomView:startNewUntechable];
+            rightNavItems  = [NSMutableArray arrayWithObjects:startNewUntechableBarBtn,nil];
+        }
+        
+        
+        [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
+        
+        
         
     }
 }

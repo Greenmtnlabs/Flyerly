@@ -331,10 +331,10 @@
         NSDictionary *dict=[NSJSONSerialization JSONObjectWithData:returnData options:NSJSONReadingMutableLeaves error:nil];
         NSLog(@"In response of save api: %@",dict);
         
-        NSString *message;
+        NSString *message = @"";
         
         if( [[dict valueForKey:@"status"] isEqualToString:@"OK"] ) {
-            message = @"Untechable saved successfully";
+            //message = @"Untechable saved successfully";
             
             untechable.twillioNumber = [dict valueForKey:@"twillioNumber"];
             untechable.eventId = [dict valueForKey:@"eventId"];
@@ -351,9 +351,11 @@
             errorOnFinish = YES;
         }
         
-        dispatch_async( dispatch_get_main_queue(), ^{
-            [self showMsgOnApiResponse:message];
-        });
+        if( !([message isEqualToString:@""]) ) {
+            dispatch_async( dispatch_get_main_queue(), ^{
+                [self showMsgOnApiResponse:message];
+            });
+        }
     }
     else{
         errorOnFinish = YES;

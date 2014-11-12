@@ -13,8 +13,9 @@
 {
     UILabel *titleLabel;
     //UIButton *helpButton;
-    UIButton *backButton;
-    UIButton *nextButton;
+
+    UIButton *startNewUntechable;
+    UIButton *editUntechable;
     
     UIColor *defGreen;//GREEN
     UIColor *defGray;//GRAY

@@ -265,7 +265,7 @@
 }
 -(void)onSkip{
     
-    [self setNextHighlighted:NO];
+    [self setSkipHighlighted:NO];
     
     [self storeSceenVarsInDic];
     [self stopAllTask];
@@ -300,7 +300,7 @@
     }
     
     if( goToNext == NO ){
-        /*
+        
         //When user didn't perform any task on Premium feature $1.99 screen
         if( untechable.hasRecording == NO
             && [untechable.emergencyNumber isEqualToString:@""]
@@ -308,7 +308,7 @@
         ){
             goToNext = YES;
         }
-        */
+        
     }
     
     if( goToNext == YES ) {

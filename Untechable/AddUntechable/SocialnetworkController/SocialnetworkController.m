@@ -169,7 +169,7 @@
         
         // Right Navigation ________________________________________
         
-        nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 33, 42)];
         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [nextButton setTitle:@"NEXT" forState:normal];
@@ -179,13 +179,21 @@
         
         
         
-        nextButton.showsTouchWhenHighlighted = YES;
+        skipButton = [[UIButton alloc] initWithFrame:CGRectMake(33, 0, 33, 42)];
+        skipButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
+        [skipButton setTitle:@"SKIP" forState:normal];
+        [skipButton setTitleColor:defGray forState:UIControlStateNormal];
+        [skipButton addTarget:self action:@selector(btnSkipTouchStart) forControlEvents:UIControlEventTouchDown];
+        [skipButton addTarget:self action:@selector(btnSkipTouchEnd) forControlEvents:UIControlEventTouchUpInside];
+        
+        //[skipButton setBackgroundColor:[UIColor redColor]];
+        skipButton.showsTouchWhenHighlighted = YES;
+        
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
-        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
+        UIBarButtonItem *skipButtonBarButton = [[UIBarButtonItem alloc] initWithCustomView:skipButton];
+        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,skipButtonBarButton,nil];
         
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
-        
-        
     }
 }
 
@@ -220,13 +228,44 @@
 
     if( goToNext ) {
         [self storeSceenVarsInDic];
+        [self next:@"GO_TO_NEXT"];
+        
+    }
+}
 
+- (void)setSkipHighlighted:(BOOL)highlighted {
+    (highlighted) ? [skipButton setBackgroundColor:defGreen] : [skipButton setBackgroundColor:[UIColor clearColor]];
+}
+
+-(void)btnSkipTouchStart{
+    [self setSkipHighlighted:YES];
+}
+
+-(void)btnSkipTouchEnd{
+    [self setSkipHighlighted:NO];
+    [self onSkip];
+}
+-(void)onSkip{
+    
+    [self setSkipHighlighted:NO];
+    [self storeSceenVarsInDic];
+    
+    [self next:@"ON_SKIP"];
+}
+
+-(void)next:(NSString *)after{
+    
+    if( [after isEqualToString:@"GO_TO_NEXT"] || [after isEqualToString:@"ON_SKIP"] ) {
         EmailSettingController *emailSettingController;
         emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
         emailSettingController.untechable = untechable;
         [self.navigationController pushViewController:emailSettingController animated:YES];
     }
+    
 }
+
+
+
 
 -(void)storeSceenVarsInDic
 {
