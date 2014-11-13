@@ -41,11 +41,11 @@
 		3681603F19E6B81E00B9B64C /* InviteFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3681603A19E6B81E00B9B64C /* InviteFriendsController.m */; };
 		3681604019E6B81E00B9B64C /* InviteFriendsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3681603B19E6B81E00B9B64C /* InviteFriendsController.xib */; };
 		36A370B819F53E6D005A7AFE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36A370B719F53E6D005A7AFE /* AVFoundation.framework */; };
+		36A62AD91A13B53200757A69 /* playBtnThankyouScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 36A62AD81A13B53200757A69 /* playBtnThankyouScreen.png */; };
 		36B036A619DAF44D00E8CD21 /* EmailSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B036A419DAF44D00E8CD21 /* EmailSettingController.m */; };
 		36B036A719DAF44D00E8CD21 /* EmailSettingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36B036A519DAF44D00E8CD21 /* EmailSettingController.xib */; };
 		36B275D41A00CD6000ED58AD /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36B275D31A00CD6000ED58AD /* StoreKit.framework */; };
 		36B275D71A00D36400ED58AD /* RMStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B275D61A00D36400ED58AD /* RMStore.m */; };
-		36B2765C1A0124E800ED58AD /* CHECKBOX_EMPTY.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B276301A0124E800ED58AD /* CHECKBOX_EMPTY.png */; };
 		36B2765D1A0124E800ED58AD /* CHECKBOX_EMPTY@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B276311A0124E800ED58AD /* CHECKBOX_EMPTY@2x.png */; };
 		36B2765E1A0124E800ED58AD /* CHECKBOX_FILLED.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B276321A0124E800ED58AD /* CHECKBOX_FILLED.png */; };
 		36B2765F1A0124E800ED58AD /* CHECKBOX_FILLED@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B276331A0124E800ED58AD /* CHECKBOX_FILLED@2x.png */; };
@@ -156,13 +156,13 @@
 		3681603A19E6B81E00B9B64C /* InviteFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsController.m; sourceTree = "<group>"; };
 		3681603B19E6B81E00B9B64C /* InviteFriendsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendsController.xib; sourceTree = "<group>"; };
 		36A370B719F53E6D005A7AFE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		36A62AD81A13B53200757A69 /* playBtnThankyouScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playBtnThankyouScreen.png; sourceTree = "<group>"; };
 		36B036A319DAF44D00E8CD21 /* EmailSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmailSettingController.h; path = AddUntechable/EmailSettingController/EmailSettingController.h; sourceTree = "<group>"; };
 		36B036A419DAF44D00E8CD21 /* EmailSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmailSettingController.m; path = AddUntechable/EmailSettingController/EmailSettingController.m; sourceTree = "<group>"; };
 		36B036A519DAF44D00E8CD21 /* EmailSettingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EmailSettingController.xib; path = AddUntechable/EmailSettingController/EmailSettingController.xib; sourceTree = "<group>"; };
 		36B275D31A00CD6000ED58AD /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		36B275D51A00D36400ED58AD /* RMStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMStore.h; path = AddUntechable/RMStore/RMStore.h; sourceTree = "<group>"; };
 		36B275D61A00D36400ED58AD /* RMStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMStore.m; path = AddUntechable/RMStore/RMStore.m; sourceTree = "<group>"; };
-		36B276301A0124E800ED58AD /* CHECKBOX_EMPTY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CHECKBOX_EMPTY.png; sourceTree = "<group>"; };
 		36B276311A0124E800ED58AD /* CHECKBOX_EMPTY@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CHECKBOX_EMPTY@2x.png"; sourceTree = "<group>"; };
 		36B276321A0124E800ED58AD /* CHECKBOX_FILLED.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CHECKBOX_FILLED.png; sourceTree = "<group>"; };
 		36B276331A0124E800ED58AD /* CHECKBOX_FILLED@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CHECKBOX_FILLED@2x.png"; sourceTree = "<group>"; };
@@ -449,6 +449,8 @@
 			isa = PBXGroup;
 			children = (
 				36B276301A0124E800ED58AD /* CHECKBOX_EMPTY.png */,
+				36A62AD81A13B53200757A69 /* playBtnThankyouScreen.png */,
+				36B276341A0124E800ED58AD /* icons */,
 				36B276311A0124E800ED58AD /* CHECKBOX_EMPTY@2x.png */,
 				36B276321A0124E800ED58AD /* CHECKBOX_FILLED.png */,
 				36B276331A0124E800ED58AD /* CHECKBOX_FILLED@2x.png */,
@@ -691,7 +693,6 @@
 				36B2765E1A0124E800ED58AD /* CHECKBOX_FILLED.png in Resources */,
 				36B276631A0124E800ED58AD /* icon-50@2x.png in Resources */,
 				36B2766F1A0124E800ED58AD /* inputBottomBg2@2x.png in Resources */,
-				36B2765C1A0124E800ED58AD /* CHECKBOX_EMPTY.png in Resources */,
 				36B2765D1A0124E800ED58AD /* CHECKBOX_EMPTY@2x.png in Resources */,
 				366ECD9719D323DA00F71A11 /* AddUntechableController.xib in Resources */,
 				3681603E19E6B81E00B9B64C /* InviteFriendsCell.xib in Resources */,
