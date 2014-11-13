@@ -19,6 +19,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblTwillioNumber;
 @property (strong, nonatomic) IBOutlet UILabel *lblForwadingNumber;
 
+@property (strong, nonatomic) IBOutlet UILabel *lblPlay1;
+@property (strong, nonatomic) IBOutlet UIButton *playVideoBtn;
+@property (strong, nonatomic) IBOutlet UIButton *btnCopy;
+
 @end
 
 @implementation ThankyouController
@@ -107,6 +111,15 @@
     [_lblTwillioNumber setTextColor:defGreen];
     _lblTwillioNumber.font = [UIFont fontWithName:APP_FONT size:20];
     _lblTwillioNumber.text = untechable.twillioNumber;
+    
+    [_lblPlay1 setTextColor:defGray];
+    _lblPlay1.font = [UIFont fontWithName:APP_FONT size:19];
+    
+    [_btnCopy setTitleColor:defGray forState:UIControlStateNormal];
+    _btnCopy.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
+    
+    [[_playVideoBtn layer] setBorderWidth:2.0f];
+    [[_playVideoBtn layer] setBorderColor:defGreen.CGColor];
 
 }
 
@@ -179,6 +192,26 @@
         
         
     }
+}
+
+-(IBAction)playVideo:(id)sender{
+    /*
+    NSString *path = [[NSBundle mainBundle]pathForResource:
+                      @"HowToSetForwadingNumber" ofType:@"mov"];
+    moviePlayer = [[MPMoviePlayerViewController
+                    alloc]initWithContentURL:[NSURL fileURLWithPath:path]];
+    //[self presentModalViewController:moviePlayer animated:NO];
+    [self presentViewController:moviePlayer animated:YES completion:nil];
+    */
+}
+
+
+- (IBAction)copyNumer:(id)sender {
+    
+    UIPasteboard *pb = [UIPasteboard generalPasteboard];
+    // This code assumes that you have created the outlet for UITextField as 'textField1'. // Update the below code, if you have given different name
+    [pb setString:_lblTwillioNumber.text];
+    
 }
 
 @end
