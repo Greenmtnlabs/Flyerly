@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Untechable.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface ThankyouController : UIViewController
 {
@@ -19,7 +20,11 @@
     
     UIColor *defGreen;//GREEN
     UIColor *defGray;//GRAY
+    
+    MPMoviePlayerViewController *moviePlayer;
 }
 //Properties
 @property (nonatomic,strong)  Untechable *untechable;
+
+-(IBAction)playVideo:(id)sender;
 @end

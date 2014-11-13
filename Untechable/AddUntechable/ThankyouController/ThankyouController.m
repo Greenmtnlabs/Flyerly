@@ -195,18 +195,19 @@
 }
 
 -(IBAction)playVideo:(id)sender{
-    /*
+    
     NSString *path = [[NSBundle mainBundle]pathForResource:
-                      @"HowToSetForwadingNumber" ofType:@"mov"];
+                      @"untechable" ofType:@"mov"];
     moviePlayer = [[MPMoviePlayerViewController
                     alloc]initWithContentURL:[NSURL fileURLWithPath:path]];
     //[self presentModalViewController:moviePlayer animated:NO];
     [self presentViewController:moviePlayer animated:YES completion:nil];
-    */
 }
 
 
 - (IBAction)copyNumer:(id)sender {
+    
+    [_btnCopy setSelected:YES];
     
     UIPasteboard *pb = [UIPasteboard generalPasteboard];
     // This code assumes that you have created the outlet for UITextField as 'textField1'. // Update the below code, if you have given different name

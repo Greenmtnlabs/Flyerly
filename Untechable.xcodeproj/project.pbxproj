@@ -52,6 +52,13 @@
 		366EAFA51A14C3530011D6C6 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAF8D1A14C3530011D6C6 /* logo@2x.png */; };
 		366EAFA61A14C3530011D6C6 /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAF8E1A14C3530011D6C6 /* logo@3x.png */; };
 		366EAFA71A14C3530011D6C6 /* CHECKBOX_EMPTY.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAF8F1A14C3530011D6C6 /* CHECKBOX_EMPTY.png */; };
+		366EAFAA1A14E5370011D6C6 /* playvideo.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAFA81A14E5370011D6C6 /* playvideo.png */; };
+		366EAFAB1A14E5370011D6C6 /* playvideo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAFA91A14E5370011D6C6 /* playvideo@2x.png */; };
+		366EAFB01A14E6990011D6C6 /* untechable.mov in Resources */ = {isa = PBXBuildFile; fileRef = 366EAFAF1A14E6990011D6C6 /* untechable.mov */; };
+		366EAFB51A14EDA30011D6C6 /* copy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAFB11A14EDA30011D6C6 /* copy@2x.png */; };
+		366EAFB61A14EDA30011D6C6 /* copy_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAFB21A14EDA30011D6C6 /* copy_selected@2x.png */; };
+		366EAFB71A14EDA30011D6C6 /* copy_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAFB31A14EDA30011D6C6 /* copy_selected.png */; };
+		366EAFB81A14EDA30011D6C6 /* copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAFB41A14EDA30011D6C6 /* copy.png */; };
 		366ECD7E19D3135200F71A11 /* Untechable.m in Sources */ = {isa = PBXBuildFile; fileRef = 366ECD7D19D3135200F71A11 /* Untechable.m */; };
 		366ECD9619D323DA00F71A11 /* AddUntechableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 366ECD9419D323DA00F71A11 /* AddUntechableController.m */; };
 		366ECD9719D323DA00F71A11 /* AddUntechableController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 366ECD9519D323DA00F71A11 /* AddUntechableController.xib */; };
@@ -158,6 +165,13 @@
 		366EAF8D1A14C3530011D6C6 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		366EAF8E1A14C3530011D6C6 /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
 		366EAF8F1A14C3530011D6C6 /* CHECKBOX_EMPTY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CHECKBOX_EMPTY.png; sourceTree = "<group>"; };
+		366EAFA81A14E5370011D6C6 /* playvideo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playvideo.png; sourceTree = "<group>"; };
+		366EAFA91A14E5370011D6C6 /* playvideo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playvideo@2x.png"; sourceTree = "<group>"; };
+		366EAFAF1A14E6990011D6C6 /* untechable.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = untechable.mov; sourceTree = "<group>"; };
+		366EAFB11A14EDA30011D6C6 /* copy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "copy@2x.png"; sourceTree = "<group>"; };
+		366EAFB21A14EDA30011D6C6 /* copy_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "copy_selected@2x.png"; sourceTree = "<group>"; };
+		366EAFB31A14EDA30011D6C6 /* copy_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = copy_selected.png; sourceTree = "<group>"; };
+		366EAFB41A14EDA30011D6C6 /* copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = copy.png; sourceTree = "<group>"; };
 		366ECD7C19D3135200F71A11 /* Untechable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Untechable.h; path = AddUntechable/Models/Untechable.h; sourceTree = "<group>"; };
 		366ECD7D19D3135200F71A11 /* Untechable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Untechable.m; path = AddUntechable/Models/Untechable.m; sourceTree = "<group>"; };
 		366ECD8019D3181000F71A11 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Common.h; path = Config/Common.h; sourceTree = "<group>"; };
@@ -399,6 +413,14 @@
 			path = untechablesplashscreensandlogotext;
 			sourceTree = "<group>";
 		};
+		366EAFAE1A14E6990011D6C6 /* videos */ = {
+			isa = PBXGroup;
+			children = (
+				366EAFAF1A14E6990011D6C6 /* untechable.mov */,
+			);
+			path = videos;
+			sourceTree = "<group>";
+		};
 		366ECD7519D2D24600F71A11 /* AddUntechable */ = {
 			isa = PBXGroup;
 			children = (
@@ -485,9 +507,16 @@
 		36B0369A19DAD2AB00E8CD21 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				366EAFAE1A14E6990011D6C6 /* videos */,
 				366EAF761A14C3530011D6C6 /* icons */,
 				366EAF861A14C3530011D6C6 /* untechablesplashscreensandlogotext */,
 				366EAF8F1A14C3530011D6C6 /* CHECKBOX_EMPTY.png */,
+				366EAFA81A14E5370011D6C6 /* playvideo.png */,
+				366EAFB11A14EDA30011D6C6 /* copy@2x.png */,
+				366EAFB21A14EDA30011D6C6 /* copy_selected@2x.png */,
+				366EAFB31A14EDA30011D6C6 /* copy_selected.png */,
+				366EAFB41A14EDA30011D6C6 /* copy.png */,
+				366EAFA91A14E5370011D6C6 /* playvideo@2x.png */,
 				36B276311A0124E800ED58AD /* CHECKBOX_EMPTY@2x.png */,
 				36B276321A0124E800ED58AD /* CHECKBOX_FILLED.png */,
 				36B276331A0124E800ED58AD /* CHECKBOX_FILLED@2x.png */,
@@ -662,6 +691,7 @@
 				36B2765F1A0124E800ED58AD /* CHECKBOX_FILLED@2x.png in Resources */,
 				36474F2219D9780100084F34 /* Pigiarniq Bold.ttf in Resources */,
 				366EAF921A14C3530011D6C6 /* icon-50.png in Resources */,
+				366EAFAB1A14E5370011D6C6 /* playvideo@2x.png in Resources */,
 				36474F2419D9780100084F34 /* Pigiarniq Italic.ttf in Resources */,
 				36B276741A0124E800ED58AD /* play_gray@2x.png in Resources */,
 				36B276761A0124E800ED58AD /* play@2x.png in Resources */,
@@ -676,14 +706,17 @@
 				366EAFA21A14C3530011D6C6 /* Default-Portrait-736h@3x.png in Resources */,
 				3681604019E6B81E00B9B64C /* InviteFriendsController.xib in Resources */,
 				366EAFA11A14C3530011D6C6 /* Default-Landscape-736h@3x.png in Resources */,
+				366EAFB51A14EDA30011D6C6 /* copy@2x.png in Resources */,
 				366EAFA61A14C3530011D6C6 /* logo@3x.png in Resources */,
 				36524AF219D940F4006DCAAF /* SocialnetworkController.xib in Resources */,
 				36FD975619E694AC00427507 /* BSKeyboardControls.strings in Resources */,
 				36B276771A0124E800ED58AD /* record_gray.png in Resources */,
 				366EAF991A14C3530011D6C6 /* icon-76@2x.png in Resources */,
 				366EAFA71A14C3530011D6C6 /* CHECKBOX_EMPTY.png in Resources */,
+				366EAFAA1A14E5370011D6C6 /* playvideo.png in Resources */,
 				36B2765E1A0124E800ED58AD /* CHECKBOX_FILLED.png in Resources */,
 				36B2766F1A0124E800ED58AD /* inputBottomBg2@2x.png in Resources */,
+				366EAFB71A14EDA30011D6C6 /* copy_selected.png in Resources */,
 				366EAF9F1A14C3530011D6C6 /* Default-568h@2x.png in Resources */,
 				366EAF971A14C3530011D6C6 /* icon-72@2x.png in Resources */,
 				36B2765D1A0124E800ED58AD /* CHECKBOX_EMPTY@2x.png in Resources */,
@@ -695,8 +728,11 @@
 				36B276701A0124E800ED58AD /* invite_Bg@2x.png in Resources */,
 				36561D7619D2C8A40069D897 /* InfoPlist.strings in Resources */,
 				366EAF931A14C3530011D6C6 /* icon-50@2x.png in Resources */,
+				366EAFB81A14EDA30011D6C6 /* copy.png in Resources */,
 				366EAF951A14C3530011D6C6 /* icon-60@2x.png in Resources */,
 				366EAFA01A14C3530011D6C6 /* Default-667h@2x.png in Resources */,
+				366EAFB01A14E6990011D6C6 /* untechable.mov in Resources */,
+				366EAFB61A14EDA30011D6C6 /* copy_selected@2x.png in Resources */,
 				366EAF9A1A14C3530011D6C6 /* icon-small.png in Resources */,
 				366EAF9E1A14C3530011D6C6 /* icon@2x.png in Resources */,
 				366EAF901A14C3530011D6C6 /* icon-40.png in Resources */,
