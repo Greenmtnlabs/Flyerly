@@ -7,7 +7,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ThankyouController">
             <connections>
                 <outlet property="btnCopy" destination="VmM-5O-dx9" id="qmN-Rw-sQ3"/>
-                <outlet property="lblCopy" destination="VmM-5O-dx9" id="WSY-6L-BES"/>
                 <outlet property="lblEnd" destination="gOx-HT-gVw" id="cKc-SA-wrG"/>
                 <outlet property="lblEndDateTime" destination="Uz9-tr-Wyn" id="4Xg-qQ-u0Q"/>
                 <outlet property="lblForwadingNumber" destination="fQV-ed-iEd" id="vZC-RT-oba"/>
@@ -58,7 +57,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" id="taH-6p-FG3">
-                    <rect key="frame" x="0.0" y="280" width="320" height="30"/>
+                    <rect key="frame" x="0.0" y="290" width="320" height="30"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="twillioNumber" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pKA-FK-D0F" userLabel="Label - lblTwillioNumber">
@@ -69,7 +68,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="VmM-5O-dx9" userLabel="Button - btnCopy">
-                            <rect key="frame" x="246" y="0.0" width="55" height="30"/>
+                            <rect key="frame" x="245" y="0.0" width="55" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                             <state key="normal" title="Copy">
@@ -91,9 +90,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="w0g-nC-E9J" userLabel="Button - playViewBtn">
-                    <rect key="frame" x="110" y="375" width="100" height="100"/>
+                    <rect key="frame" x="116" y="375" width="100" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" backgroundImage="playBtnThankyouScreen.png">
+                    <state key="normal" backgroundImage="play.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -106,4 +105,7 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
+    <resources>
+        <image name="play.png" width="22" height="24"/>
+    </resources>
 </document>
