@@ -74,4 +74,8 @@
 -(void)twFlushData;
 -(void)twUpdateData:(NSString *)oAuthToken oAuthTokenSecret:(NSString * )oAuthTokenSecret;
 
+#pragma mark -  LinkedIn functions
+-(void)linkedInFlushData;
+-(void)linkedInUpdateData:(NSString *)linkedInAccessToken;
+
 @end

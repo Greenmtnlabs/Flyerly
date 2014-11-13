@@ -66,5 +66,10 @@
 #define TW_CONSUMER_KEY @"GxQAvzs4YXBl2o39TN5nr4ogj"
 #define TW_CONSUMER_SECRET @"IRO1i1pqUdKorBg1fwn4SEzniAeG1GrzpUVXd9mooG4GkpIlNA"
 
+#define LINKEDIN_CLIENT_ID @"77xbm1nay7fgm7" //API KEY
+#define LINKEDIN_CLIENT_SECRET @"egcM3osyJiBj1QHF" //SECRET
+#define LINKEDIN_REDIRECT_URL @"http://app.untechable.com"
+#define LINKEDIN_STATE @"Untechable53sBCDef424"
+
 
 

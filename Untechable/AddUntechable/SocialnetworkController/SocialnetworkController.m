@@ -11,9 +11,12 @@
 #import "EmailSettingController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "FHSTwitterEngine.h"
+#import "LIALinkedInHttpClient.h"
+#import "LIALinkedInApplication.h"
 
 
 @interface SocialnetworkController () <FHSTwitterEngineAccessTokenDelegate>
+
 
 @property (strong, nonatomic) IBOutlet UITextField *inputSetSocialStatus;
 
@@ -28,6 +31,9 @@
 @end
 
 @implementation SocialnetworkController
+{
+  LIALinkedInHttpClient *_linkedInclient;
+}
 
 @synthesize untechable;
 
@@ -44,6 +50,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+ 
+    _linkedInclient = [self linkedInclient];
     
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
@@ -353,7 +361,17 @@
         }
     }
     else if(sender == self.btnLinkedin){
-        //[self btnActivate:self.btnLinkedin active:YES];
+        
+        if( [self linkedInBtnStatus] ) {
+            //When button was green , the delete permissions
+            [self linkedInLogout];
+            [self btnActivate:self.btnLinkedin active:[self linkedInBtnStatus]];
+        }
+        else {
+            [self getLinkedInAuth];
+        }
+        
+        
     }
 }
 
@@ -450,6 +468,86 @@
 	}
 	
 	return nil;
+}
+
+
+
+#pragma mark -  LinkedIn functions
+//Init linkedin client
+- (LIALinkedInHttpClient *)linkedInclient {
+    LIALinkedInApplication *application = [LIALinkedInApplication applicationWithRedirectURL:LINKEDIN_REDIRECT_URL
+                                                                                    clientId:LINKEDIN_CLIENT_ID
+                                                                                clientSecret:LINKEDIN_CLIENT_SECRET
+                                                                                       state:LINKEDIN_STATE
+                                                                               grantedAccess:@[@"r_basicprofile", @"rw_nus"]
+                                           ];
+    
+    return [LIALinkedInHttpClient clientForApplication:application presentingViewController:nil];
+}
+
+
+-(BOOL)linkedInBtnStatus
+{
+    return !([untechable.linkedinAuth isEqualToString:@""]);
+}
+
+- (void)linkedInLogout {
+    [untechable linkedInUpdateData:@""];
+}
+
+- (void)getLinkedInAuth{
+    //1-st async call
+    [self.linkedInclient getAuthorizationCode:^(NSString *code) {
+ 
+        //2-st async call for getting access token
+        [self.linkedInclient getAccessToken:code
+        success:^(NSDictionary *accessTokenData) {
+            
+            untechable.linkedinAuth = [accessTokenData objectForKey:@"access_token"];
+            
+            NSLog(@"linked1 in accessToken %@",untechable.linkedinAuth);
+            
+            [untechable linkedInUpdateData:untechable.linkedinAuth];
+            [self btnActivate:self.btnLinkedin active:YES];
+            
+            //[self requestMeWithToken:untechable.linkedinAuth];
+            
+        }
+        failure:^(NSError *error) {
+            NSLog(@"Quering accessToken failed %@", error);
+        }];
+    }
+    cancel:^{
+        NSLog(@"Authorization was cancelled by user");
+    }
+    failure:^(NSError *error) {
+        NSLog(@"Authorization failed %@", error);
+    }];
+}
+
+//Get linkedin User profile details using accessToken
+- (void)requestMeWithToken:(NSString *)linkedInAccessToken {
+
+    NSLog(@"linked2 in accessToken %@",linkedInAccessToken);
+    //Async call
+    [self.linkedInclient GET:[NSString stringWithFormat:@"https://api.linkedin.com/v1/people/~?oauth2_access_token=%@&format=json", linkedInAccessToken] parameters:nil
+    success:^(AFHTTPRequestOperation *operation, NSDictionary *result) {
+ 
+        NSLog(@"current user %@", result);
+        /* //SAMPLE DATA
+         current user {
+         firstName = rufi;
+         headline = "Sr. Software Engineer at RIKSOF";
+         lastName = untechable;
+         siteStandardProfileRequest =     {
+         url = "https://www.linkedin.com/profile/view?id=384207301&authType=name&authToken=I9FC&trk=api*a3572303*s3643513*";
+         };
+         */
+        
+    }
+    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"failed to fetch current user %@", error);
+    }];
 }
 
 

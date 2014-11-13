@@ -535,4 +535,21 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
     [self setOrSaveVars:SAVE];
 }
+
+#pragma mark -  LinkedIn functions
+//Update data base for fb data
+-(void)linkedInFlushData
+{
+    [self linkedInUpdateData:@""];
+}
+
+//Update data base for fb data
+-(void)linkedInUpdateData:(NSString *)linkedInAccessToken
+{
+    NSLog(@"linkedInAccessToken=%@",linkedInAccessToken);
+    linkedinAuth = linkedInAccessToken;
+    
+    [self setOrSaveVars:SAVE];
+}
+
 @end
