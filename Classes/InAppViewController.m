@@ -227,8 +227,13 @@
         InAppPurchaseCell *inAppCell = (InAppPurchaseCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
         
         [inAppCell setAccessoryType:UITableViewCellAccessoryNone];
+        NSArray *nib;
         if (inAppCell == nil) {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InAppPurchaseCell" owner:self options:nil];
+            if ( IS_IPHONE_5 || IS_IPHONE_4) {
+             nib = [[NSBundle mainBundle] loadNibNamed:@"InAppPurchaseCell" owner:self options:nil];
+            }else if ( IS_IPHONE_6 ) {
+                nib = [[NSBundle mainBundle] loadNibNamed:@"InAppPurchaseCell-iPhone6" owner:self options:nil];
+            }
             inAppCell = (InAppPurchaseCell *)[nib objectAtIndex:0];
         }
         
@@ -251,8 +256,13 @@
         static NSString *cellId = @"FreeFeatureCell";
         FreeFeatureCell *freeFeatureCell = (FreeFeatureCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
         [freeFeatureCell setAccessoryType:UITableViewCellAccessoryNone];
+        NSArray *nib;
         if (freeFeatureCell == nil) {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"FreeFeatureCell" owner:self options:nil];
+            if (IS_IPHONE_5 || IS_IPHONE_4){
+                nib = [[NSBundle mainBundle] loadNibNamed:@"FreeFeatureCell" owner:self options:nil];
+            }else if ( IS_IPHONE_6 ) {
+                nib = [[NSBundle mainBundle] loadNibNamed:@"FreeFeatureCell-iPhone6" owner:self options:nil];
+            }
             freeFeatureCell = (FreeFeatureCell *)[nib objectAtIndex:0];
         }
         
