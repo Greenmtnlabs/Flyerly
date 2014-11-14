@@ -18,93 +18,87 @@ SocialStatusCron.setup = function(app) {
 
     // Our logger for logging to file and console
     var logger = require(__dirname + '/../logger');
-
+	var FB = require('fb');
+	var twitter = require('ntwitter');
+	
+	function logMsg( msg ) {
+		logger.info( msg );
+		console.log( msg );				
+	}
+	
     // Check if the event is expire
     function postStatusEvent() {
 
-            logger.info('================= PostSocialStatus cron start ================');
+        logMsg('================= PostSocialStatus cron start ================');
 
-            var Events = require(__dirname + '/../models/Events');
+        var Events = require(__dirname + '/../models/Events');
 
-            // Get today's date
-            var today = new Date();
+        // Get today's date
+        var today = new Date();
 
-            // Current timestamp
-            var timestamp = today.getTime();
+        // Current timestamp
+        var timestamp = today.getTime();
 
-            Events.find({
-                startTime: {
-                   $lte: timestamp
-                },
-                postSocialStatus: { $ne : true }
-                
-            }, function(err, events) {
-                console.log(events);
-                if (err) {
-                    JSON.stringify(err);
-                    return;
-                }
-                if (events != null) {
+        Events.find({
+            startTime: {
+               $lte: timestamp
+            },
+            postSocialStatus: { $ne : true }
+            
+        }, function(err, events) {
+            
+			if (err) {
+                logMsg( JSON.stringify(err) );
+                return;
+            }
+            if (events != null) {
 
-                    logger.info('Total ' + events.length + ' Events found');
+                logMsg('Total ' + events.length + ' Events found');
 
-                    // Loop through all record
-                    for (var i = 0; i < events.length; i++) {
+                // Loop through all record
+                for (var i = 0; i < events.length; i++) {
 
-                        logger.info('Start time : ' + new Date( Number(events[i].startTime) *1000 ));
-                        logger.info('End time   : ' + new Date( Number(events[i].endTime) *1000));
-                        
-                        if ( events[i].postSocialStatus != true ) {
-                        
-                            // Check if fbAuth is set
-                            if (events[i].fbAuth != "") {
-                            
-                                facebookPost();
-                            } else {
-                                logger.info('This event does not have fbAuth.');
+                    logMsg('Start time : ' + new Date( Number(events[i].startTime) *1000 ));
+                    logMsg('End time   : ' + new Date( Number(events[i].endTime) *1000));
+                    
+                    if ( events[i].postSocialStatus != true && socialStatus != "") {
+
+                            if (events[i].fbAuth != "" && events[i].fbAuthExpiryTs != "") {                            
+                                postOnFacebook( events[i].socialStatus, events[i].fbAuth, events[i].fbAuthExpiryTs );
                             } 
-                        }
+							
+                            if (events[i].twitterAuth != "" && events[i].twOAuthTokenSecret != "") {                            
+								postOnTwitter(events[i].socialStatus, events[i].twitterAuth, events[i].twOAuthTokenSecret, function( ret ) {
+									logMsg( ret );
+								});
+                            } 
+															
+                            if ( events[i].linkedinAuth != "" ) {
+                                postOnlinkedIn( events[i].socialStatus, events[i].linkedinAuth );
+                            } 
+                    }
+					
+					events[i].postSocialStatus = true;
+                } //end of for loop
+				
+				//mass update all events( becuae we have updated postSocialStatus to true )
+				
+				
 
-                    } //end of for loop
+            } else {
+                logMsg('No Events found');
+            }
 
-                } else {
-                    logger.info('No Events found');
-                }
+        });
 
-            });
-
-
-
-        } // end postStatusEvent() function
-
-    //postStatusEvent();
+    } // end postStatusEvent() function
     
     // Offline facebook posting
-    function facebookPost(){
-    
-        logger.info('Inside facebook post.');
-    }
-    
-    // Offline facebook posting
-    function twitterPost(){ 
-        logger.info('Inside twitter post.');
-        
-        
-    }
-    
-    // Offline facebook posting
-    function linkedInPost(){
-        logger.info('Inside linkedin post.');
-    }
-	
-	
-	// TESTING CODE  ----------------{-------	
-	app.all('/fbshare1', function(req, res) {
-		
-		var FB = require('fb');
-		FB.setAccessToken(req.query.t);
+    function postOnFacebook( socialStatus, fbAuth, fbAuthExpiryTs ) {
+        logMsg('Inside facebook post.');
+		FB.setAccessToken(fbAuth);
 
-		var body = 'My first post using facebook-node-sdk';
+		var body = socialStatus;//'My first post using facebook-node-sdk';
 		FB.api('me/feed', 'post', { message: body}, function (res2) {
 			
 		  if(!res2 || res2.error) {
@@ -112,98 +106,62 @@ SocialStatusCron.setup = function(app) {
 		  }
 		  else{
 			  var msg = 'Post Id: ' + res2.id;
-		  }
-		  
-		  console.log( msg );	  
-		  res.jsonp({"In test url , __line":__line, "msg":msg});
+		  }		  
+		  logMsg( msg );
+		});		
+    }
+    
+    // Offline twitter posting
+	function postOnTwitter(str, access_token_key, access_token_secret, callBack) {
 
+		var twit = new twitter({
+		  consumer_key: config.twitter.consumer_key,
+		  consumer_secret: config.twitter.consumer_secret,
+
+		  access_token_key: access_token_key,
+		  access_token_secret: access_token_secret
 		});
+
+	  	twit.verifyCredentials(function (err, data) {
+
+	        if (err) {
+	          callBack("Error verifying credentials: " + err);
+  
+	        } else {
+	          twit.updateStatus(str, function (err, data) {
+  
+	                if (err) {
+	                  callBack('Tweeting failed: ' + err);
+	                } else {
+	                  callBack('Success!')
+	                }
+	          });
+	        }
 		
-		/*
-		function postToFacebook(str, facebookToken) {
-			
-			
-			
-			 //var resEndMsg = 'message='+encodeURIComponent(str)+'&access_token='+encodeURIComponent(facebookToken);
-			 
-			 var resEndMsg = 'message='+encodeURIComponent(str)+'&access_token='+encodeURIComponent(facebookToken);
-			 
-			 var https = require('https');
-			  var req = https.request({
-			    host: 'graph.facebook.com',
-			    path: '/me/feed?'+resEndMsg,
-			    method: 'GET'
-			  }, function(res) {
-			    res.setEncoding('utf8');
-			    var i=0;
-				res.on("data", function(chunk) {
-			      console.log('got chunk in data('+i+'): '+chunk);
-			    });
-			
-			    res.on("end", function() {
-			      console.log('response end with status: '+res.status);
-			    });
-			
-			  });
-
-		  	  
-			  //req.end( resEndMsg );
-			  
-			  req.end( );
-			  
-			  
-		};
-
-
-		var facebookToken = "CAACEdEose0cBAGSN54EJxiQ1Wk91n0a5f7nRDe4OlDzZBt8G6LOnqmOMjxKnZBy18gXLBLxZAmiqR72YEhpyDWMA58pcK7G98D3edlyZC6BBg0IB51HlDM2GkAwKjiC8Hor7qO8ADQqq5F0ChHe7pelOSMaQASlPLmMTv4putDs9aP3RPOHNJ8vfHvSr638S6sjbpRrpKtRkjEl8DZBRM";
-		postToFacebook('testStatus1', facebookToken);
-		*/
-				
+		});
+	
+	}//end fn
+	
+	// Offline linkedin posting
+    function postOnlinkedIn(str, linkedinAccessToken ){
+        logMsg('Inside linkedin post.');
+    }
+	
+	//postStatusEvent();
+	
+	// TESTING CODE  ----------------{-------	
+	/*
+	app.all('/fbshare1', function(req, res) {		
+		facebookPost();		
 	});
 
     app.all('/twshare1', function(req, res) {
-    	
-		var twitter = require('ntwitter');
-
-
-		function postToTwitter(access_token_key, access_token_secret, str, callBack) {
-
-			var twit = new twitter({
-			  consumer_key: config.twitter.consumer_key,
-			  consumer_secret: config.twitter.consumer_secret,
-
-			  access_token_key: access_token_key,
-			  access_token_secret: access_token_secret
-			});
-  
-		  	twit.verifyCredentials(function (err, data) {
-  
-		        if (err) {
-		          callBack("Error verifying credentials: " + err);
-      
-		        } else {
-		          twit.updateStatus(str, function (err, data) {
-      
-		                if (err) {
-		                  callBack('Tweeting failed: ' + err);
-		                } else {
-		                  callBack('Success!')
-		                }
-		          });
-		        }
-			
-			});
-		
-		}//end fn
-
-		var atKey = "2237419165-WQ1iTAKkVElCskn3yy9BQ5w9QncUhRcgFFFlsOB";
-		var atSecret = "zFdFt5RE5xJ4p8oE6PlC0ZP3pDU3nFiYbKWVVP5kAwBQh";
-		var twittText =	'Untechable Test-'+(new Date());
-
-		postToTwitter(atKey, atSecret, twittText, function( retStatusStr ) {
-		  console.log( retStatusStr );
-		});
-    });
+    	twitterPost();
+    });	
+	
+	app.all('/linkedinshare1', function(req, res) {
+		//https://api.linkedin.com/v1/people/~/shares		
+	});
+	*/
 	// TESTING CODE  ----------------}-------    
-    
 }
