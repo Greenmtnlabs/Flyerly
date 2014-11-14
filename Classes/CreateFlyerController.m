@@ -37,6 +37,7 @@
     int selectedAddMoreLayerTab;
     FlyerlyConfigurator *flyerConfigurator;
     UserPurchases *userPurchases;
+    UIButton *bannerAdDismissBtn;
 }
 
 @end
@@ -198,7 +199,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     /*UserPurchases *userPurchases_ = [UserPurchases getInstance];
     if ( bannerAddClosed == NO && ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){*/
 
-        UIButton *bannerAdDismissBtn;
+    
     
         // Device Check Maintain Size of ScrollView Because Scroll Indicator will show.
         if ( IS_IPHONE_5 ) {
@@ -245,6 +246,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 // Dismiss action for banner ad
 -(void)dissmisBannerAdd:(BOOL)valForBannerClose{
     
+    [bannerAdDismissBtn removeFromSuperview];
     [self.bannerAddView removeFromSuperview];
      self.bannerAddView = nil;
 
@@ -450,8 +452,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }
         
         // Setup the share panel.
-        sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
-        shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
+        sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,200 )];
+        
+        if ( IS_IPHONE_5 || IS_IPHONE_4) {
+            shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
+        }else if ( IS_IPHONE_6 ){
+            shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController-iPhone6" bundle:nil];
+        }
         
         sharePanel = shareviewcontroller.view;
         sharePanel.hidden = YES;
@@ -4204,7 +4211,13 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareVideoViewController" bundle:nil];
             
         } else {
-            shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
+            
+            if ( IS_IPHONE_5 || IS_IPHONE_4) {
+                shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
+            }else if ( IS_IPHONE_6) {
+                shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController-iPhone6" bundle:nil];
+            }
+            
         }
         
         shareviewcontroller.cfController = self;
@@ -4289,9 +4302,9 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         }
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.4f];
-        [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height - 505, 320,505 )];
+        [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height - 450, 320,505 )];
         if ( IS_IPHONE_6) {
-            [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height - 550, 375,550 )];
+            [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height - 450, 375,450 )];
         }else if ( IS_IPHONE_6_PLUS){
             [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height-550, 420,550 )];
         }

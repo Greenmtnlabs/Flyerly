@@ -1,112 +1,103 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment version="768" identifier="iOS"/>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShareViewController">
             <connections>
-                <outlet property="clipboardButton" destination="18" id="40"/>
-                <outlet property="emailButton" destination="12" id="24"/>
-                <outlet property="facebookButton" destination="11" id="23"/>
-                <outlet property="flyerShareType" destination="02X-0M-pgw" id="RRD-OV-hAp"/>
-                <outlet property="instagramButton" destination="17" id="30"/>
-                <outlet property="printFlyerButton" destination="13" id="fF7-tu-6hI"/>
-                <outlet property="smsButton" destination="14" id="26"/>
-                <outlet property="star1" destination="D0f-Ce-0gF" id="Qb0-gF-RHV"/>
-                <outlet property="star2" destination="mVn-Rd-jbl" id="CSS-K6-EAK"/>
-                <outlet property="star3" destination="yuC-Xa-KrZ" id="PgV-Ec-1x0"/>
-                <outlet property="star4" destination="iQw-qn-Bq4" id="ctm-Um-nI7"/>
-                <outlet property="star5" destination="N5u-za-btZ" id="eEZ-aC-WkI"/>
-                <outlet property="titleView" destination="7" id="21"/>
-                <outlet property="tumblrButton" destination="16" id="29"/>
-                <outlet property="twitterButton" destination="15" id="31"/>
-                <outlet property="view" destination="1" id="3"/>
+                <outlet property="clipboardButton" destination="NHU-kF-sWG" id="SFk-Zm-XDi"/>
+                <outlet property="emailButton" destination="LHy-XR-kx9" id="Pa5-yf-F3M"/>
+                <outlet property="facebookButton" destination="4M1-ak-6j0" id="ZBu-bv-D4E"/>
+                <outlet property="flyerShareType" destination="ZTU-GJ-gaF" id="ymp-mG-nee"/>
+                <outlet property="instagramButton" destination="58R-ta-gfl" id="O0P-nl-Pii"/>
+                <outlet property="printFlyerButton" destination="0u6-sQ-5iI" id="Se0-Sg-LxF"/>
+                <outlet property="smsButton" destination="gec-4E-QfO" id="w1u-6t-OmV"/>
+                <outlet property="star1" destination="ACd-J2-Cu0" id="gyb-17-7ya"/>
+                <outlet property="star2" destination="IzV-mT-isS" id="lsJ-ms-x4V"/>
+                <outlet property="star3" destination="bEr-sd-axU" id="fck-3I-aGA"/>
+                <outlet property="star4" destination="qN3-yo-o2e" id="jBB-lZ-iuJ"/>
+                <outlet property="star5" destination="NFm-q5-r7R" id="R5a-IE-Ko5"/>
+                <outlet property="titleView" destination="9II-6f-o3X" id="HWQ-Am-5h4"/>
+                <outlet property="tumblrButton" destination="GPb-8k-ff5" id="C6j-SP-cc6"/>
+                <outlet property="twitterButton" destination="iNa-cQ-zi8" id="zAg-o0-qVP"/>
+                <outlet property="view" destination="UJI-Q1-CfS" id="GGI-GT-5At"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="1">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+        <view contentMode="scaleToFill" id="UJI-Q1-CfS">
+            <rect key="frame" x="0.0" y="0.0" width="380" height="410"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view alpha="0.92000000000000004" contentMode="scaleToFill" id="zpF-rw-gHy">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <view alpha="0.92000001668930054" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xb1-MB-NSP">
+                    <rect key="frame" x="0.0" y="0.0" width="380" height="568"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="02X-0M-pgw">
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZTU-GJ-gaF">
                             <rect key="frame" x="24" y="202" width="93" height="31"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="public_on.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="selected" image="private_off_button.png"/>
                             <connections>
-                                <action selector="clickOnFlyerType:" destination="-1" eventType="touchUpInside" id="FLx-Iu-VQG"/>
+                                <action selector="clickOnFlyerType:" destination="-1" eventType="touchUpInside" id="cfJ-Hb-GJE"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="D0f-Ce-0gF">
-                            <rect key="frame" x="165" y="215" width="25" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ACd-J2-Cu0">
+                            <rect key="frame" x="196" y="215" width="25" height="24"/>
                             <state key="normal" image="star.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="selected" image="star_selected.png"/>
                             <connections>
-                                <action selector="clickOnStarRate:" destination="-1" eventType="touchUpInside" id="T5b-Nc-aFV"/>
+                                <action selector="clickOnStarRate:" destination="-1" eventType="touchUpInside" id="fqr-8E-rZA"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mVn-Rd-jbl">
-                            <rect key="frame" x="192" y="215" width="25" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IzV-mT-isS">
+                            <rect key="frame" x="223" y="215" width="25" height="24"/>
                             <state key="normal" image="star.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="selected" image="star_selected.png"/>
                             <connections>
-                                <action selector="clickOnStarRate:" destination="-1" eventType="touchUpInside" id="5qy-be-4Wq"/>
+                                <action selector="clickOnStarRate:" destination="-1" eventType="touchUpInside" id="Z8f-ki-opW"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yuC-Xa-KrZ">
-                            <rect key="frame" x="217" y="215" width="25" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bEr-sd-axU">
+                            <rect key="frame" x="248" y="215" width="25" height="24"/>
                             <state key="normal" image="star.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="selected" image="star_selected.png"/>
                             <connections>
-                                <action selector="clickOnStarRate:" destination="-1" eventType="touchUpInside" id="tFB-nx-G5h"/>
+                                <action selector="clickOnStarRate:" destination="-1" eventType="touchUpInside" id="qLh-8W-JWh"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iQw-qn-Bq4">
-                            <rect key="frame" x="243" y="215" width="25" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qN3-yo-o2e">
+                            <rect key="frame" x="274" y="215" width="25" height="24"/>
                             <state key="normal" image="star.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="selected" image="star_selected.png"/>
                             <connections>
-                                <action selector="clickOnStarRate:" destination="-1" eventType="touchUpInside" id="rQd-Cx-dzB"/>
+                                <action selector="clickOnStarRate:" destination="-1" eventType="touchUpInside" id="GSC-wd-3uX"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="N5u-za-btZ">
-                            <rect key="frame" x="268" y="215" width="25" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NFm-q5-r7R">
+                            <rect key="frame" x="299" y="215" width="25" height="24"/>
                             <state key="normal" image="star.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="selected" image="star_selected.png"/>
                             <connections>
-                                <action selector="clickOnStarRate:" destination="-1" eventType="touchUpInside" id="pdA-pa-q4Y"/>
+                                <action selector="clickOnStarRate:" destination="-1" eventType="touchUpInside" id="vFH-GI-H5E"/>
                             </connections>
                         </button>
-                        <view contentMode="scaleToFill" id="59">
-                            <rect key="frame" x="0.0" y="273" width="320" height="141"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zXI-xH-l1I">
+                            <rect key="frame" x="0.0" y="273" width="380" height="141"/>
                             <subviews>
-                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="11">
-                                    <rect key="frame" x="12" y="7" width="58" height="60"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4M1-ak-6j0">
+                                    <rect key="frame" x="38" y="7" width="63" height="65"/>
                                     <accessibility key="accessibilityConfiguration" label="Facebook"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
                                     <state key="normal" backgroundImage="facebook_share.png">
@@ -122,12 +113,11 @@
                                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="onClickFacebookButton" destination="-1" eventType="touchUpInside" id="32"/>
+                                        <action selector="onClickFacebookButton" destination="-1" eventType="touchUpInside" id="Ef8-4K-F5E"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="12">
-                                    <rect key="frame" x="92" y="74" width="61" height="60"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LHy-XR-kx9">
+                                    <rect key="frame" x="118" y="74" width="66" height="65"/>
                                     <accessibility key="accessibilityConfiguration" label="Email"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
                                     <state key="normal" backgroundImage="email_share.png">
@@ -140,12 +130,11 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="onClickEmailButton" destination="-1" eventType="touchUpInside" id="35"/>
+                                        <action selector="onClickEmailButton" destination="-1" eventType="touchUpInside" id="pAQ-M4-Gg5"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="13">
-                                    <rect key="frame" x="12" y="74" width="58" height="60"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0u6-sQ-5iI">
+                                    <rect key="frame" x="38" y="74" width="63" height="65"/>
                                     <accessibility key="accessibilityConfiguration" label="Flicker"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
                                     <state key="normal" backgroundImage="printer_sharing.png">
@@ -158,12 +147,11 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="onPrintFlyerButton" destination="-1" eventType="touchUpInside" id="CVe-OA-cwM"/>
+                                        <action selector="onPrintFlyerButton" destination="-1" eventType="touchUpInside" id="YJS-4z-XE5"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="14">
-                                    <rect key="frame" x="169" y="74" width="61" height="60"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gec-4E-QfO">
+                                    <rect key="frame" x="195" y="74" width="66" height="65"/>
                                     <accessibility key="accessibilityConfiguration" label="SMS"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
                                     <state key="normal" backgroundImage="sms_share.png">
@@ -176,12 +164,11 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="onClickSMSButton" destination="-1" eventType="touchUpInside" id="37"/>
+                                        <action selector="onClickSMSButton" destination="-1" eventType="touchUpInside" id="98z-kq-oUx"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="15">
-                                    <rect key="frame" x="92" y="7" width="61" height="60"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iNa-cQ-zi8">
+                                    <rect key="frame" x="118" y="7" width="66" height="65"/>
                                     <accessibility key="accessibilityConfiguration" label="Twitter"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
                                     <state key="normal" backgroundImage="twitter_share.png">
@@ -194,12 +181,11 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="onClickTwitterButton" destination="-1" eventType="touchUpInside" id="33"/>
+                                        <action selector="onClickTwitterButton" destination="-1" eventType="touchUpInside" id="Hmc-4j-cOe"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="16">
-                                    <rect key="frame" x="169" y="7" width="61" height="60"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GPb-8k-ff5">
+                                    <rect key="frame" x="195" y="7" width="66" height="65"/>
                                     <accessibility key="accessibilityConfiguration" label="Tumblr"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
                                     <state key="normal" backgroundImage="tumblr_share.png">
@@ -212,12 +198,11 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="onClickTumblrButton" destination="-1" eventType="touchUpInside" id="38"/>
+                                        <action selector="onClickTumblrButton" destination="-1" eventType="touchUpInside" id="6Zo-Bf-eqw"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="17">
-                                    <rect key="frame" x="248" y="7" width="61" height="60"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="58R-ta-gfl">
+                                    <rect key="frame" x="274" y="7" width="66" height="65"/>
                                     <accessibility key="accessibilityConfiguration" label="Instagram"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
                                     <state key="normal" backgroundImage="instagram_share.png">
@@ -230,12 +215,11 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="onClickInstagramButton" destination="-1" eventType="touchUpInside" id="34"/>
+                                        <action selector="onClickInstagramButton" destination="-1" eventType="touchUpInside" id="eJZ-WF-ATy"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" id="18">
-                                    <rect key="frame" x="248" y="74" width="61" height="60"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="NHU-kF-sWG">
+                                    <rect key="frame" x="274" y="74" width="66" height="65"/>
                                     <accessibility key="accessibilityConfiguration" label="Copy"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
                                     <state key="normal" backgroundImage="cp_share.png">
@@ -248,7 +232,7 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="onClickClipboardButton" destination="-1" eventType="touchUpInside" id="39"/>
+                                        <action selector="onClickClipboardButton" destination="-1" eventType="touchUpInside" id="Sfw-AT-1eB"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -256,49 +240,38 @@
                     </subviews>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="flat_text_box.png" id="69">
-                    <rect key="frame" x="10" y="45" width="298" height="33"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="flat_text_box.png" translatesAutoresizingMaskIntoConstraints="NO" id="nnz-o7-oNh">
+                    <rect key="frame" x="10" y="45" width="360" height="33"/>
                 </imageView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Flyerly Title (e.g. &quot;Parker's Party&quot;)" minimumFontSize="17" id="7">
-                    <rect key="frame" x="16" y="47" width="292" height="28"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Flyerly Title (e.g. &quot;Parker's Party&quot;)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9II-6f-o3X">
+                    <rect key="frame" x="16" y="47" width="360" height="28"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="54"/>
-                    </connections>
                 </textField>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="flat_text_box.png" id="cXJ-PV-xl2">
-                    <rect key="frame" x="10" y="79" width="298" height="83"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="flat_text_box.png" translatesAutoresizingMaskIntoConstraints="NO" id="e5n-bk-Zg0">
+                    <rect key="frame" x="10" y="79" width="360" height="83"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="daL-dE-hOn">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="37"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="92F-gO-AJD">
+                    <rect key="frame" x="0.0" y="0.0" width="380" height="37"/>
                     <state key="normal" image="panel_close_button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="hideMe" destination="-1" eventType="touchUpInside" id="ADD-C5-6sZ"/>
+                        <action selector="hideMe" destination="-1" eventType="touchUpInside" id="hj1-qX-dKp"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separator.png" id="Ze1-Bq-tyX">
-                    <rect key="frame" x="0.0" y="263" width="320" height="2"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="separator.png" translatesAutoresizingMaskIntoConstraints="NO" id="pWW-WK-tYK">
+                    <rect key="frame" x="0.0" y="263" width="380" height="2"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separator.png" id="deo-pP-dDm">
-                    <rect key="frame" x="140" y="173" width="1" height="90"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                <imageView userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="separator.png" translatesAutoresizingMaskIntoConstraints="NO" id="Bzl-Cg-DjL">
+                    <rect key="frame" x="160" y="173" width="1" height="90"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separator.png" id="miG-oA-Na9">
-                    <rect key="frame" x="0.0" y="173" width="320" height="2"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="separator.png" translatesAutoresizingMaskIntoConstraints="NO" id="JgS-vA-QVY">
+                    <rect key="frame" x="0.0" y="173" width="380" height="2"/>
                 </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show us some love" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NKl-xx-2vK">
-                    <rect key="frame" x="140" y="180" width="180" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Show us some love" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKB-Aw-Ik0">
+                    <rect key="frame" x="140" y="180" width="240" height="30"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -306,8 +279,8 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="-207" y="274"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-1615" y="333"/>
         </view>
     </objects>
     <resources>
@@ -335,9 +308,4 @@
         <image name="twitter_share.png" width="60" height="60"/>
         <image name="twitter_share_selected.png" width="60" height="60"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

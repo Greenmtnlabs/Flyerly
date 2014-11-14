@@ -39,7 +39,7 @@
     titleView.placeholder = @"Flyerly Title (e.g. \"Parker's Party\")";
 
     if ( IS_IPHONE_5 ) {
-        descriptionView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(12, 79, 296, 83)];
+        descriptionView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(12, 70, 296, 67)];
     } else if ( IS_IPHONE_6 ){
         
         descriptionView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(12, 79, 345, 78)];
