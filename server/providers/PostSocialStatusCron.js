@@ -37,11 +37,11 @@ SocialStatusCron.setup = function(app) {
         var today = new Date();
 
         // Current timestamp
-        var timestamp = today.getTime();
+        var curTimestamp = today.getTime();
 
         Events.find({
             startTime: {
-               $lte: timestamp
+               $lte: curTimestamp
             },
             postSocialStatus: { $ne : true }
             
@@ -63,11 +63,16 @@ SocialStatusCron.setup = function(app) {
                     
                     if ( events[i].postSocialStatus != true && socialStatus != "") {
 
-                            if (events[i].fbAuth != "" && events[i].fbAuthExpiryTs != "") {                            
+                            if ( events[i].fbAuth != ""  &&  events[i].fbAuthExpiryTs != "" ) {
+
+								if( events[i].fbAuthExpiryTs > curTimestamp )
                                 postOnFacebook( events[i].socialStatus, events[i].fbAuth, events[i].fbAuthExpiryTs );
+								else 
+								logMsg( "Fb Token expired: "+ events[i].fbAuthExpiryTs + " > " + curTimestamp);
+								
                             } 
 							
-                            if (events[i].twitterAuth != "" && events[i].twOAuthTokenSecret != "") {                            
+                            if ( events[i].twitterAuth != "" && events[i].twOAuthTokenSecret != "" ) {                            
 								postOnTwitter(events[i].socialStatus, events[i].twitterAuth, events[i].twOAuthTokenSecret, function( ret ) {
 									logMsg( ret );
 								});
@@ -79,6 +84,7 @@ SocialStatusCron.setup = function(app) {
                     }
 					
 					events[i].postSocialStatus = true;
+					
                 } //end of for loop
 				
 				//mass update all events( becuae we have updated postSocialStatus to true )
