@@ -134,4 +134,88 @@
     return today;
 }
 
+#pragma mark -  Set number formating functions
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    
+    int length = [self getLength:textField.text];
+    //NSLog(@"Length  =  %d ",length);
+    
+    if(length == 10)
+    {
+        if(range.length == 0)
+            return NO;
+    }
+    
+    if(length == 3)
+    {
+        NSString *num = [self formatNumber:textField.text];
+        textField.text = [NSString stringWithFormat:@"(%@) ",num];
+        if(range.length > 0)
+            textField.text = [NSString stringWithFormat:@"%@",[num substringToIndex:3]];
+    }
+    else if(length == 6)
+    {
+        NSString *num = [self formatNumber:textField.text];
+        //NSLog(@"%@",[num  substringToIndex:3]);
+        //NSLog(@"%@",[num substringFromIndex:3]);
+        textField.text = [NSString stringWithFormat:@"(%@) %@-",[num  substringToIndex:3],[num substringFromIndex:3]];
+        if(range.length > 0)
+            textField.text = [NSString stringWithFormat:@"(%@) %@",[num substringToIndex:3],[num substringFromIndex:3]];
+    }
+    
+    return YES;
+}
+
+-(NSString*)formatNumber:(NSString*)mobileNumber
+{
+    
+    mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@"(" withString:@""];
+    mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@")" withString:@""];
+    mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
+    mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@"+" withString:@""];
+    
+    NSLog(@"%@", mobileNumber);
+    
+    int length = [mobileNumber length];
+    if(length > 10)
+    {
+        mobileNumber = [mobileNumber substringFromIndex: length-10];
+        NSLog(@"%@", mobileNumber);
+        
+    }
+    
+    
+    return mobileNumber;
+}
+
+
+-(int)getLength:(NSString*)mobileNumber
+{
+    
+    mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@"(" withString:@""];
+    mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@")" withString:@""];
+    mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
+    mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@"+" withString:@""];
+    
+    int length = [mobileNumber length];
+    
+    return length;
+}
+
+-(NSString *)formateStringIntoPhoneNumber:(NSString *)unformatted
+{
+    
+    NSArray *stringComponents = [NSArray arrayWithObjects:[unformatted substringWithRange:NSMakeRange(0, 2)],
+                                 [unformatted substringWithRange:NSMakeRange(2, 3)],
+                                 [unformatted substringWithRange:NSMakeRange(5, 3)],
+                                 [unformatted substringWithRange:NSMakeRange(8, [unformatted length]-8)], nil];
+    
+    NSString *formattedString = [NSString stringWithFormat:@"%@ (%@) %@-%@", [stringComponents objectAtIndex:0], [stringComponents objectAtIndex:1], [stringComponents objectAtIndex:2],[stringComponents objectAtIndex:3]];
+    NSLog(@"Formatted Phone Number: %@", formattedString);
+    
+    return formattedString;
+}
 @end

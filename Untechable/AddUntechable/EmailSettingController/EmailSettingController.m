@@ -132,8 +132,6 @@
     self.inputMsg.delegate = self;
     self.inputMsg.text = untechable.respondingEmail;
     
-    
-    
 }
 #pragma mark -  Navigation functions
 

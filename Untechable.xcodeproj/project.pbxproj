@@ -54,7 +54,6 @@
 		366EAFA71A14C3530011D6C6 /* CHECKBOX_EMPTY.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAF8F1A14C3530011D6C6 /* CHECKBOX_EMPTY.png */; };
 		366EAFAA1A14E5370011D6C6 /* playvideo.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAFA81A14E5370011D6C6 /* playvideo.png */; };
 		366EAFAB1A14E5370011D6C6 /* playvideo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAFA91A14E5370011D6C6 /* playvideo@2x.png */; };
-		366EAFB01A14E6990011D6C6 /* untechable.mov in Resources */ = {isa = PBXBuildFile; fileRef = 366EAFAF1A14E6990011D6C6 /* untechable.mov */; };
 		366EAFB51A14EDA30011D6C6 /* copy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAFB11A14EDA30011D6C6 /* copy@2x.png */; };
 		366EAFB61A14EDA30011D6C6 /* copy_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAFB21A14EDA30011D6C6 /* copy_selected@2x.png */; };
 		366EAFB71A14EDA30011D6C6 /* copy_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAFB31A14EDA30011D6C6 /* copy_selected.png */; };
@@ -72,6 +71,7 @@
 		3681603F19E6B81E00B9B64C /* InviteFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3681603A19E6B81E00B9B64C /* InviteFriendsController.m */; };
 		3681604019E6B81E00B9B64C /* InviteFriendsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3681603B19E6B81E00B9B64C /* InviteFriendsController.xib */; };
 		36A370B819F53E6D005A7AFE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36A370B719F53E6D005A7AFE /* AVFoundation.framework */; };
+		36B006461A15E825005C3791 /* untechable.mov in Resources */ = {isa = PBXBuildFile; fileRef = 36B006451A15E825005C3791 /* untechable.mov */; };
 		36B036A619DAF44D00E8CD21 /* EmailSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B036A419DAF44D00E8CD21 /* EmailSettingController.m */; };
 		36B036A719DAF44D00E8CD21 /* EmailSettingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36B036A519DAF44D00E8CD21 /* EmailSettingController.xib */; };
 		36B275D41A00CD6000ED58AD /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36B275D31A00CD6000ED58AD /* StoreKit.framework */; };
@@ -167,7 +167,6 @@
 		366EAF8F1A14C3530011D6C6 /* CHECKBOX_EMPTY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CHECKBOX_EMPTY.png; sourceTree = "<group>"; };
 		366EAFA81A14E5370011D6C6 /* playvideo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playvideo.png; sourceTree = "<group>"; };
 		366EAFA91A14E5370011D6C6 /* playvideo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playvideo@2x.png"; sourceTree = "<group>"; };
-		366EAFAF1A14E6990011D6C6 /* untechable.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = untechable.mov; sourceTree = "<group>"; };
 		366EAFB11A14EDA30011D6C6 /* copy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "copy@2x.png"; sourceTree = "<group>"; };
 		366EAFB21A14EDA30011D6C6 /* copy_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "copy_selected@2x.png"; sourceTree = "<group>"; };
 		366EAFB31A14EDA30011D6C6 /* copy_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = copy_selected.png; sourceTree = "<group>"; };
@@ -194,6 +193,7 @@
 		3681603A19E6B81E00B9B64C /* InviteFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsController.m; sourceTree = "<group>"; };
 		3681603B19E6B81E00B9B64C /* InviteFriendsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendsController.xib; sourceTree = "<group>"; };
 		36A370B719F53E6D005A7AFE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		36B006451A15E825005C3791 /* untechable.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = untechable.mov; sourceTree = "<group>"; };
 		36B036A319DAF44D00E8CD21 /* EmailSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmailSettingController.h; path = AddUntechable/EmailSettingController/EmailSettingController.h; sourceTree = "<group>"; };
 		36B036A419DAF44D00E8CD21 /* EmailSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmailSettingController.m; path = AddUntechable/EmailSettingController/EmailSettingController.m; sourceTree = "<group>"; };
 		36B036A519DAF44D00E8CD21 /* EmailSettingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EmailSettingController.xib; path = AddUntechable/EmailSettingController/EmailSettingController.xib; sourceTree = "<group>"; };
@@ -416,7 +416,7 @@
 		366EAFAE1A14E6990011D6C6 /* videos */ = {
 			isa = PBXGroup;
 			children = (
-				366EAFAF1A14E6990011D6C6 /* untechable.mov */,
+				36B006451A15E825005C3791 /* untechable.mov */,
 			);
 			path = videos;
 			sourceTree = "<group>";
@@ -716,6 +716,7 @@
 				366EAFAA1A14E5370011D6C6 /* playvideo.png in Resources */,
 				36B2765E1A0124E800ED58AD /* CHECKBOX_FILLED.png in Resources */,
 				36B2766F1A0124E800ED58AD /* inputBottomBg2@2x.png in Resources */,
+				36B006461A15E825005C3791 /* untechable.mov in Resources */,
 				366EAFB71A14EDA30011D6C6 /* copy_selected.png in Resources */,
 				366EAF9F1A14C3530011D6C6 /* Default-568h@2x.png in Resources */,
 				366EAF971A14C3530011D6C6 /* icon-72@2x.png in Resources */,
@@ -731,7 +732,6 @@
 				366EAFB81A14EDA30011D6C6 /* copy.png in Resources */,
 				366EAF951A14C3530011D6C6 /* icon-60@2x.png in Resources */,
 				366EAFA01A14C3530011D6C6 /* Default-667h@2x.png in Resources */,
-				366EAFB01A14E6990011D6C6 /* untechable.mov in Resources */,
 				366EAFB61A14EDA30011D6C6 /* copy_selected@2x.png in Resources */,
 				366EAF9A1A14C3530011D6C6 /* icon-small.png in Resources */,
 				366EAF9E1A14C3530011D6C6 /* icon@2x.png in Resources */,

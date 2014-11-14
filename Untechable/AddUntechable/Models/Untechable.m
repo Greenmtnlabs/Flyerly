@@ -551,5 +551,4 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     [self setOrSaveVars:SAVE];
 }
-
 @end

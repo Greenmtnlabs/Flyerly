@@ -136,6 +136,7 @@
     
     [self.btnLinkedin setTitleColor:( [untechable.linkedinAuth isEqualToString:@""] ? defGray : defGreen ) forState:UIControlStateNormal];
     self.btnLinkedin.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
+    
 }
 #pragma mark -  Navigation functions
 

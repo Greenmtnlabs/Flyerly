@@ -77,5 +77,4 @@
 #pragma mark -  LinkedIn functions
 -(void)linkedInFlushData;
 -(void)linkedInUpdateData:(NSString *)linkedInAccessToken;
-
 @end

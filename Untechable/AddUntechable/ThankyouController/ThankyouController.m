@@ -108,9 +108,16 @@
     _lblForwadingNumber.font = [UIFont fontWithName:APP_FONT size:20];
     
     
+    NSString *twillioNumber = untechable.twillioNumber;
     [_lblTwillioNumber setTextColor:defGreen];
     _lblTwillioNumber.font = [UIFont fontWithName:APP_FONT size:20];
-    _lblTwillioNumber.text = untechable.twillioNumber;
+    _lblTwillioNumber.text = twillioNumber;
+    NSLog(@"twillioNumber1: %@", twillioNumber);
+    twillioNumber   =   [untechable.commonFunctions formateStringIntoPhoneNumber:twillioNumber];
+    NSLog(@"twillioNumber2: %@", twillioNumber);
+    _lblTwillioNumber.text = twillioNumber;
+    
+    
     
     [_lblPlay1 setTextColor:defGray];
     _lblPlay1.font = [UIFont fontWithName:APP_FONT size:19];

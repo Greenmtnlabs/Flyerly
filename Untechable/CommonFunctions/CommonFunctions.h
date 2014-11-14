@@ -28,4 +28,11 @@
 -(UIImageView *) navigationGetTitleView;
 -(NSDate *)getDate:(NSString *)callFor;
 //fb988650031150166
+
+#pragma mark -  Set number formating functions
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
+-(NSString*)formatNumber:(NSString*)mobileNumber;
+-(int)getLength:(NSString*)mobileNumber;
+
+-(NSString *)formateStringIntoPhoneNumber:(NSString *)unformatted;
 @end
