@@ -213,27 +213,37 @@
 
 
 -(void)onNext{
-    /* WILL WORK FOR IT
-    BOOL goToNext = NO;
-    NSDate *d1 = [untechable stringToDate:DATE_FORMATE_1 dateString:untechable.startDate];
-    NSDate *d2 = [untechable stringToDate:DATE_FORMATE_1 dateString:untechable.endDate];
-    if( d2 > d1 ) {
-        goToNext = YES;
+    
+    [self storeSceenVarsInDic];
+    
+    [self hideAllControlls];
+    
+    BOOL goToNext = untechable.hasEndDate ? NO : YES;
+    
+    //When we have end date, must check end date is greater then start date
+    if( untechable.hasEndDate == YES )
+    {
+        NSDate *d1 = [untechable.commonFunctions timestampStrToNsDate:untechable.startDate];
+        NSDate *d2 = [untechable.commonFunctions timestampStrToNsDate:untechable.endDate];
+        
+        
+        goToNext = [untechable.commonFunctions date1IsSmallerThenDate2:d1 date2:d2];
+        
+        if( goToNext == NO ) {
+            
+            [untechable.commonFunctions showAlert:@"Invalid Dates" message:@"End date should be greater then start date."];
+        }
+        
     }
     
-    
     NSLog(goToNext ? @"goToNext- YES" : @"goToNext- NO");
-    */
+
     
-    if( YES ) {
-        [self storeSceenVarsInDic];
-        
+    if( goToNext ) {
         PhoneSetupController *phoneSetup;
         phoneSetup = [[PhoneSetupController alloc]initWithNibName:@"PhoneSetupController" bundle:nil];
         phoneSetup.untechable = untechable;
         [self.navigationController pushViewController:phoneSetup animated:YES];
-        
-        [self hideAllControlls];
     }
 }
 -(void)storeSceenVarsInDic
