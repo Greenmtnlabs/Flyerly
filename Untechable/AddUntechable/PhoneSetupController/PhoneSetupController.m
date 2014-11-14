@@ -553,6 +553,8 @@
     return cell;
 }
 
+
+ //Allow cell editing(swip to delete)
 // Override to support editing the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return YES if you want the specified item to be editable.
@@ -568,6 +570,8 @@
         if( [tableViewFor isEqualToString:@"contactsTableView"] ) {
 
             [untechable.commonFunctions deleteKeyFromDic:untechable.emergencyContacts delKeyAtIndex:indexPath.row];
+            
+            [untechable setOrSaveVars:SAVE];
             
             [self tableViewSR:@"reStart" callFor:@"contactsTableView"];
         }
