@@ -415,14 +415,15 @@
 //LOGOUT FROM TWITTER
 - (void)twLogout {
     [[FHSTwitterEngine sharedEngine]clearAccessToken];
+    
+    //Bello code will auto call insdie above function
     [untechable twUpdateData:@"" oAuthTokenSecret:@""];
 }
 
 //STORE TWITTER TOKEN [Note: Do not change the name of this functions, it will called from twitter libraries]
 - (void)twStoreAccessToken:(NSString *)accessTokenZ {
-
-    [[NSUserDefaults standardUserDefaults]setObject:accessTokenZ forKey:@"SavedAccessHTTPBody"];
     
+    [[NSUserDefaults standardUserDefaults]setObject:accessTokenZ forKey:@"SavedAccessHTTPBody"];
     NSString *authenticatedUsername = [self extractValueForKey:@"screen_name" fromHTTPBody:accessTokenZ];
     NSString *authenticatedID = [self extractValueForKey:@"user_id" fromHTTPBody:accessTokenZ];
     
@@ -430,6 +431,10 @@
     NSString *oauth_token_secret = [self extractValueForKey:@"oauth_token_secret" fromHTTPBody:accessTokenZ];
     
     NSLog(@"B- twitter : oauth_token: %@, oauth_token_secret: %@, self.authenticatedUsername: %@, self.authenticatedID: %@, ", oauth_token, oauth_token_secret, authenticatedUsername, authenticatedID);
+    
+    if(oauth_token == nil || oauth_token_secret == nil){
+        oauth_token = oauth_token_secret =  @"";
+    }
     
    [untechable twUpdateData:oauth_token oAuthTokenSecret:oauth_token_secret];
 
