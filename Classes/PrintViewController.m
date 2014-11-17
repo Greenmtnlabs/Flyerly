@@ -72,9 +72,16 @@
         static NSString *cellId = @"FreeFeatureCell";
         FreeFeatureCell *freeFeatureCell = (FreeFeatureCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
         
+        NSArray *nib;
         [freeFeatureCell setAccessoryType:UITableViewCellAccessoryNone];
         if (freeFeatureCell == nil) {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"FreeFeatureCell" owner:self options:nil];
+            if (IS_IPHONE_5 || IS_IPHONE_4){
+            nib = [[NSBundle mainBundle] loadNibNamed:@"FreeFeatureCell" owner:self options:nil];
+            }
+            
+            if ( IS_IPHONE_6 ){
+                nib = [[NSBundle mainBundle] loadNibNamed:@"FreeFeatureCell-iPhone6" owner:self options:nil];
+            }
             freeFeatureCell = (FreeFeatureCell *)[nib objectAtIndex:0];
         }
         
@@ -92,9 +99,17 @@
         static NSString *cellId = @"FreeFeatureCell";
         FreeFeatureCell *freeFeatureCell = (FreeFeatureCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
         [freeFeatureCell setAccessoryType:UITableViewCellAccessoryNone];
+        NSArray *nib;
         if (freeFeatureCell == nil) {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"FreeFeatureCell" owner:self options:nil];
+            if (IS_IPHONE_5 || IS_IPHONE_4){
+                nib = [[NSBundle mainBundle] loadNibNamed:@"FreeFeatureCell" owner:self options:nil];
+            }
+            
+            if ( IS_IPHONE_6 ){
+                nib = [[NSBundle mainBundle] loadNibNamed:@"FreeFeatureCell-iPhone6" owner:self options:nil];
+            }
             freeFeatureCell = (FreeFeatureCell *)[nib objectAtIndex:0];
+
         }
         
         NSString *text = [senPostCardAreaArray objectAtIndex:indexPath.row];
