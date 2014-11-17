@@ -1003,7 +1003,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
             } else if ( IS_IPHONE_6 ){
                 
-                fontsView.size = CGSizeMake(320, curYLoc + heightValue + 5);
+                fontsView.size = CGSizeMake(380, curYLoc + heightValue + 5);
                 [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
                 
             } else if ( IS_IPHONE_6_PLUS ){
