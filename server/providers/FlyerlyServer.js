@@ -75,6 +75,10 @@ FlyerlyServer.setup = function( app ) {
 			closeBrowser("msg", "inviterObjectId not found in session");
 		}
 	});
+	
+	app.get("/test", function( req, res ) {	
+		res.jsonp({"In test url of flyerlyApis, FlyerlyServer.js , __line":__line});
+	});
 
 
 }//.setup class end

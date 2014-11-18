@@ -13,7 +13,7 @@ config.app.errorUrl   = '/error';
 config.app.mode.LOCALHOST = 'localhost'; //Port: 3000
 config.app.mode.PRODUCTION = 'production';   //Port: 80
 config.app.mode.DEVELOPMENT = 'development'; //Port: 3000
-config.app.mode.current = config.app.mode.LOCALHOST;
+config.app.mode.current = config.app.mode.PRODUCTION;
 
 // HTTP server configuration
 config.http = {}
@@ -52,20 +52,20 @@ if( config.app.mode.current == config.app.mode.LOCALHOST  ) {
 	config.http.port = 3000;
  	// 1-Database setting
  	config.db.host =  '';	
-	config.http.host	=	'http://localhost:3001';
+	config.http.host	=	'http://localhost:'+config.http.port;
 	
 }
 else if( config.app.mode.current == config.app.mode.PRODUCTION  ) {
 	config.http.port = 80;
 	// 1-Database setting
 	config.db.host =  '';	
-	config.http.host	=	'http://api.typepath.com';
+	config.http.host	=	'http://app.flyerly.com:'+config.http.port;
 } 
 else if( config.app.mode.current == config.app.mode.DEVELOPMENT  ) {
-	config.http.port = 3000;
+	config.http.port = 80;
 	// 1-Database setting
 	config.db.host =  '';	
-	config.http.host	=	'http://api.typepath.com:3000';
+	config.http.host	=	'http://app.flyerly.com:'+config.http.port;
 }
 
 // ACCOUNT TYPES
