@@ -280,7 +280,7 @@ Events.setup = function(app) {
 	app.all('/test', function(req, res) {
 		var CommonFunctions = require( __dirname + '/CommonFunctions' );
 		CommonFunctions.print( "CommonFunctions.print: hello print");
-		res.jsonp({"In test url , __line":__line});
+		res.jsonp({"In test url of UntechableApi, Events.js , __line":__line});
 				
 	});
 	
