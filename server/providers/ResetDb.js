@@ -19,6 +19,14 @@ ResetDb.setup = function(app) {
     var logger = require(__dirname + '/../logger');
 
     app.get('/reset-db', function(req, res) {
+		
+		function error_rdb( line, error ){
+            logger.error(JSON.stringify(error));
+            res.json(200, {
+                status: "Error on line:"+line+"("+error+")"
+            });			
+		}
+		
         var Twillio = require(__dirname + '/../models/Twillio');
         var Events = require(__dirname + '/../models/Events');
 
@@ -30,55 +38,59 @@ ResetDb.setup = function(app) {
             },
             function(err, events) {
                 if (err) {
-                    logger.error(JSON.stringify(err));
-                    return;
+                    error_rdb( __line, err );					
                 }
+				else{
+				
+	                var fs = require('fs');
 
-                var fs = require('fs');
+	                for (var i = 0; i < events.length; i++) {
+						try{
+							// remove recording files
+		                    fs.unlinkSync(__dirname + '/../../recordings/' + events[i].recording);
+							logger.info('File ' + events[i].recording + ' removed successfully.');
+						} catch( e ){
+							logger.info('Problem found in file delete: error:', e);							
+						}
+	                }
 
-                for (var i = 0; i < events.length; i++) {
-					// remove recording files
-                    fs.unlinkSync(__dirname + '/../../recordings/' + events[i].recording);
-					logger.info('File ' + events[i].recording + ' removed successfully.');
-                }
+					// remove events
+	                Events.remove({
+	                        recording: {
+	                            $ne: "DEFAULT1.wav"
+	                        }
+	                    },
+	                    function(err, count) {
+	                        if (err) {
+	                            error_rdb( __line, err );
+	                        }
+							else {
+		                        logger.info('Total ' + count + ' Events removed successfully.');
 
-				// remove events
-                Events.remove({
-                        recording: {
-                            $ne: "DEFAULT1.wav"
-                        }
-                    },
-                    function(err, count) {
-                        if (err) {
-                            logger.error(JSON.stringify(err));
-                            return;
-                        }
+		                        // update twillio objects
+		                        Twillio.update({
+		                                status: "IN_USE"
+		                            }, {
+		                                status: "FREE"
+		                            }, {
+		                                safe: true
+		                            },
+		                            function(err, count) {
 
-                        logger.info('Total ' + count + ' Events removed successfully.');
+		                                if (err) {
+		                                    error_rdb( __line, err );
+		                                }
+										else{
+			                                logger.info('Total ' + count + ' twillio updated successfully.');
+			                                res.json(200, {
+			                                    status: "OK"
+			                                });
+										}
+		                        }); // twillio updated end
+							}
 
-                        // update twillio objects
-                        Twillio.update({
-                                status: "IN_USE"
-                            }, {
-                                status: "FREE"
-                            }, {
-                                safe: true
-                            },
-                            function(err, count) {
-
-                                if (err) {
-                                    logger.error(JSON.stringify(err));
-                                    return;
-                                }
-
-                                logger.info('Total ' + count + ' twillio updated successfully.');
-                                res.json(200, {
-                                    status: "OK"
-                                });
-
-                            }); // updated end
-
-                    }); // remove end
+	                }); // remove end
+				}
 
             }); // find end
 
