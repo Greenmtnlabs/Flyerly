@@ -111,7 +111,7 @@
 
 #else
 
-    return @"live_889eeb7a75372e642ceaece3aa9d2ac0dfc Authorized";
+    return @"live_889eeb7a75372e642ceaece3aa9d2ac0dfc";
 
 #endif
 
