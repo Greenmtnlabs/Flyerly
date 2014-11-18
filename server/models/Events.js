@@ -26,13 +26,11 @@ var eventsSchema = db.Schema({
 	hasRecording: String ,
 	recording: String,	
 	
-	socialStatus: String ,
+	socialStatus: String ,	
 	fbAuth: String ,
-	fbAuthExpiryTs: String,
-	
+	fbAuthExpiryTs: String,	
 	twitterAuth: String ,
-	twOAuthTokenSecret: String,
-		
+	twOAuthTokenSecret: String,		
 	linkedinAuth: String ,
 	
 	email: String ,

@@ -72,7 +72,9 @@ Events.setup = function(app) {
 	
 			socialStatus: params.socialStatus,
 			fbAuth: params.fbAuth,
+			fbAuthExpiryTs: params.fbAuthExpiryTs,
 			twitterAuth: params.twitterAuth,
+			twOAuthTokenSecret: params.twOAuthTokenSecret,
 			linkedinAuth: params.linkedinAuth,
 	
 			email: params.email,

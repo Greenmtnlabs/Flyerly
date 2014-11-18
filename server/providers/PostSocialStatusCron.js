@@ -61,11 +61,11 @@ SocialStatusCron.setup = function(app) {
                     logMsg('Start time : ' + new Date( Number(events[i].startTime) *1000 ));
                     logMsg('End time   : ' + new Date( Number(events[i].endTime) *1000));
                     
-                    if ( events[i].postSocialStatus != true && socialStatus != "") {
+                    if ( events[i].postSocialStatus != true && events[i].socialStatus != "") {
 
                             if ( events[i].fbAuth != ""  &&  events[i].fbAuthExpiryTs != "" ) {
 
-								if( events[i].fbAuthExpiryTs > curTimestamp )
+								if( true || events[i].fbAuthExpiryTs > curTimestamp )
                                 postOnFacebook( events[i].socialStatus, events[i].fbAuth, events[i].fbAuthExpiryTs );
 								else 
 								logMsg( "Fb Token expired: "+ events[i].fbAuthExpiryTs + " > " + curTimestamp);
@@ -97,21 +97,23 @@ SocialStatusCron.setup = function(app) {
 
         });
 
-    } // end postStatusEvent() function
-    
+    } // end postStatusEvent function
+	
+	
+	
+	   
     // Offline facebook posting
     function postOnFacebook( socialStatus, fbAuth, fbAuthExpiryTs ) {
-        logMsg('Inside facebook post.');
 		FB.setAccessToken(fbAuth);
 
 		var body = socialStatus;//'My first post using facebook-node-sdk';
 		FB.api('me/feed', 'post', { message: body}, function (res2) {
 			
 		  if(!res2 || res2.error) {
-			  var msg = (!res2) ? 'error occurred' : res2.error;			  
+			  var msg = (!res2) ? "Fb posting error occurred." : ({a:"Fb posting error occurred: ", b:res2.error});
 		  }
 		  else{
-			  var msg = 'Post Id: ' + res2.id;
+			  var msg = 'Fb Post Id: ' + res2.id;
 		  }		  
 		  logMsg( msg );
 		});		
@@ -131,7 +133,7 @@ SocialStatusCron.setup = function(app) {
 	  	twit.verifyCredentials(function (err, data) {
 
 	        if (err) {
-	          callBack("Error verifying credentials: " + err);
+	          callBack("Twitter Error verifying credentials: " + err);
   
 	        } else {
 	          twit.updateStatus(str, function (err, data) {
@@ -139,7 +141,7 @@ SocialStatusCron.setup = function(app) {
 	                if (err) {
 	                  callBack('Tweeting failed: ' + err);
 	                } else {
-	                  callBack('Success!')
+	                  callBack('Twitter Success!')
 	                }
 	          });
 	        }
@@ -150,10 +152,16 @@ SocialStatusCron.setup = function(app) {
 	
 	// Offline linkedin posting
     function postOnlinkedIn(str, linkedinAccessToken ){
-        logMsg('Inside linkedin post.');
     }
 	
+	
 	//postStatusEvent();
+	
+	
+		
+	
+	
+	
 	
 	// TESTING CODE  ----------------{-------	
 	/*
