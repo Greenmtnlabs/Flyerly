@@ -26,7 +26,7 @@
 }
 
 - (NSString*)referralURL{
-    return @"http://riksof.com/cs?i=";
+    return @"http://app.flyerly.com/cs?i=";
 }
 
 
