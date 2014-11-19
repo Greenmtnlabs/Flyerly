@@ -281,10 +281,10 @@
     [body appendData:audioData];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
 
-    NSArray *stringVarsAry = [[NSArray alloc] initWithObjects:@"eventId", @"paid", @"userId",
+    NSArray *stringVarsAry = [[NSArray alloc] initWithObjects:@"eventId", @"userId", @"paid",
                               @"timezoneOffset", @"spendingTimeTxt", @"startDate", @"endDate", @"hasEndDate"
                              ,@"twillioNumber", @"location", @"emergencyNumber", @"hasRecording"
-                             ,@"socialStatus", @"fbAuth", @"twitterAuth", @"linkedinAuth"
+                             ,@"socialStatus", @"fbAuth", @"fbAuthExpiryTs" , @"twitterAuth",@"twOAuthTokenSecret",   @"linkedinAuth"
                              ,@"email", @"password", @"respondingEmail"
                              ,nil];
     

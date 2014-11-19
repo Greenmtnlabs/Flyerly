@@ -44,7 +44,7 @@
 
 //#define SERVER_URL @"http://192.168.0.118:3001" //LOCALHOST
 //#define SERVER_URL @"http://riksof.com:8000"    //DEVELOPMENT
-#define SERVER_URL @"http://54.86.179.252:3010"   //PRODUCTION
+#define SERVER_URL @"http://app.untechable.com:3010"   //PRODUCTION
 
 #define API_GET_NUMBER SERVER_URL@"/get-forwading-number"
 #define API_SAVE SERVER_URL@"/event/save"
@@ -68,7 +68,7 @@
 
 #define LINKEDIN_CLIENT_ID @"77xbm1nay7fgm7" //API KEY
 #define LINKEDIN_CLIENT_SECRET @"egcM3osyJiBj1QHF" //SECRET
-#define LINKEDIN_REDIRECT_URL @"http://app.untechable.com"
+#define LINKEDIN_REDIRECT_URL SERVER_URL
 #define LINKEDIN_STATE @"Untechable53sBCDef424"
 
 
