@@ -21,23 +21,35 @@ SocialStatusCron.setup = function(app) {
 	var FB = require('fb');
 	var twitter = require('ntwitter');
 	
+	var https = require('https');
+	var request = require('request');
+	
+    // Get today's date
+    var today = new Date();
+    // Current timestamp
+    var curTimestamp = today.getTime();	
+	
+    function setTimeInGlobalVars() {
+	    today = new Date();
+
+	    // Current timestamp
+	    curTimestamp = today.getTime();	
+	}
+	
 	function logMsg( msg ) {
 		logger.info( msg );
 		console.log( msg );				
 	}
 	
     // Check if the event is expire
-    function postStatusEvent() {
+    function postStatusEvent() {		
+		
+	    setTimeInGlobalVars();
+		
 
         logMsg('================= PostSocialStatus cron start ================');
 
         var Events = require(__dirname + '/../models/Events');
-
-        // Get today's date
-        var today = new Date();
-
-        // Current timestamp
-        var curTimestamp = today.getTime();
 
         Events.find({
             startTime: {
@@ -62,14 +74,9 @@ SocialStatusCron.setup = function(app) {
                     logMsg('End time   : ' + new Date( Number(events[i].endTime) *1000));
                     
                     if ( events[i].postSocialStatus != true && events[i].socialStatus != "") {
-
+						
                             if ( events[i].fbAuth != ""  &&  events[i].fbAuthExpiryTs != "" ) {
-
-								if( true || events[i].fbAuthExpiryTs > curTimestamp )
                                 postOnFacebook( events[i].socialStatus, events[i].fbAuth, events[i].fbAuthExpiryTs );
-								else 
-								logMsg( "Fb Token expired: "+ events[i].fbAuthExpiryTs + " > " + curTimestamp);
-								
                             } 
 							
                             if ( events[i].twitterAuth != "" && events[i].twOAuthTokenSecret != "" ) {                            
@@ -77,6 +84,7 @@ SocialStatusCron.setup = function(app) {
 									logMsg( ret );
 								});
                             } 
+						
 															
                             if ( events[i].linkedinAuth != "" ) {
                                 postOnlinkedIn( events[i].socialStatus, events[i].linkedinAuth );
@@ -104,20 +112,26 @@ SocialStatusCron.setup = function(app) {
 	   
     // Offline facebook posting
     function postOnFacebook( socialStatus, fbAuth, fbAuthExpiryTs ) {
-		FB.setAccessToken(fbAuth);
+		
+		if( fbAuthExpiryTs > curTimestamp ){
+			logMsg( "Fb Token expired: "+ events[i].fbAuthExpiryTs + " > " + curTimestamp);
+		}
+		else{
+			FB.setAccessToken(fbAuth);
 
-		var body = socialStatus;//'My first post using facebook-node-sdk';
-		FB.api('me/feed', 'post', { message: body}, function (res2) {
+			var body = socialStatus;//'My first post using facebook-node-sdk';
+			FB.api('me/feed', 'post', { message: body}, function (res2) {
 			
-		  if(!res2 || res2.error) {
-			  var msg = (!res2) ? "Fb posting error occurred." : ({a:"Fb posting error occurred: ", b:res2.error});
-		  }
-		  else{
-			  var msg = 'Fb Post Id: ' + res2.id;
-		  }		  
-		  logMsg( msg );
-		});		
-    }
+			  if(!res2 || res2.error) {
+				  var msg = (!res2) ? "Fb posting error occurred." : ({a:"Fb posting error occurred: ", b:res2.error});
+			  }
+			  else{
+				  var msg = 'Fb Post Id: ' + res2.id;
+			  }		  
+			  logMsg( msg );
+			});
+		}
+    }//fb post function end
     
     // Offline twitter posting
 	function postOnTwitter(str, access_token_key, access_token_secret, callBack) {
@@ -148,14 +162,65 @@ SocialStatusCron.setup = function(app) {
 		
 		});
 	
-	}//end fn
+	}//twitter post fn end
 	
 	// Offline linkedin posting
     function postOnlinkedIn(str, linkedinAccessToken ){
-    }
+		logMsg( "In postOnlinkedIn");
+		
+		var post1 = {
+		host: 'api.linkedin.com',
+		port: 443,
+		path: '/v1/people/~/shares?oauth2_access_token=' + linkedinAccessToken,
+		method: 'post',
+		headers: {'Content-Type': 'application/xml',
+		' x-li-format ': 'xml'}
+		};
+
+		var body = '<share>' +
+		'<comment> '+str+' </comment>' +
+		'<content>' +
+		'<title></title>' +
+		'<description></description>' +
+		'<submitted-url></submitted-url>' +
+		'<submitted-image-url></submitted-image-url>' +
+		'</content>' +
+		'<visibility>' +
+		'<code>anyone</code>' +
+		'</visibility>' +
+		'</share>'
+			
+			
+			body = '<share>\
+  <comment>Check out the LinkedIn Share API!</comment>\
+  <visibility>\
+    <code>anyone</code>\
+  </visibility>';
+			
+		// var buffer = "";
+		var req = https.request(post1, function (res) {
+			logMsg( "LinkedIn"+__line+", res.statusCode: "+res.statusCode);
+			
+			var buffer = "";
+			res.on("data", function (data) {
+				buffer = buffer + data;
+			});
+			res.on("end", function (data) {
+				logMsg( "LinkedIn"+__line+", buffer :"+buffer);
+			});
+		});
+		req.write(body);
+		req.end();
+		
+    }//linkedin post function end
 	
 	
+	
+	//Call post social status function after every 5 minuts
 	//postStatusEvent();
+	
+	
+	//postOnlinkedIn("Test123", "AQUyRer11RBwK8mE2nqFWl2sYZq5NhgPTn1-J56C-lntwuRHvVBWPZWYrbroRfnUTuyAVPSlqWB2W-NEeYib6W-U8XT70UF2LQ7npgObhha8sylwUH7sfeduWhCMyTM9yR7zc5I-upOfhiwHnN03ECGD3YLSi8wW4qbgneOl3omfz8jhFI8" );
 	
 	
 		
