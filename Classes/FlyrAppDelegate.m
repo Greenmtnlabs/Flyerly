@@ -9,7 +9,7 @@
 #import "FlyrAppDelegate.h"
 #import "PaypalMobile.h"
 #import "LobRequest.h"
-
+#import <ParseFacebookUtils/PFFacebookUtils.h>
 
 NSString *kCheckTokenStep1 = @"kCheckTokenStep";
 NSString *FlickrSharingSuccessNotification = @"FlickrSharingSuccessNotification";
@@ -137,6 +137,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
+    
+    return [PFFacebookUtils handleOpenURL:url];
     
     if ([[url absoluteString] hasPrefix:[NSString stringWithFormat:@"fb%@", SHKCONFIG(facebookAppId)]]) {
         [SHKFacebook handleOpenURL:url];

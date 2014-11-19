@@ -12,7 +12,7 @@
 #import "FlyrAppDelegate.h"
 #import "FlyerlySingleton.h"
 #import "ProfileViewController.h"
-#import <Parse/PFLogInViewController.h>
+#import <ParseUI/PFLoginViewController.h>
 #import <Parse/PFQuery.h>
 #import "ParentViewController.h"
 

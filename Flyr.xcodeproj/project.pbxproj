@@ -11,7 +11,6 @@
 		0D33511D109ABB6A0082810A /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D33511C109ABB6A0082810A /* AddressBookUI.framework */; };
 		0D33511F109ABB6A0082810A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D33511E109ABB6A0082810A /* CFNetwork.framework */; };
 		0D335121109ABB6A0082810A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D335120109ABB6A0082810A /* libxml2.dylib */; };
-		0D335123109ABB6A0082810A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D335122109ABB6A0082810A /* libz.dylib */; };
 		0D4903BB1091893B00855C30 /* FlyrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4903B91091893B00855C30 /* FlyrViewController.m */; };
 		0D4903BC1091893B00855C30 /* FlyrViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D4903BA1091893B00855C30 /* FlyrViewController.xib */; };
 		0DE0243110959098005F699B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DE0243010959098005F699B /* MessageUI.framework */; };
@@ -485,6 +484,7 @@
 		2435952A1A0CA43100DD3C39 /* CustomAssetThumbnailView-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243595291A0CA43100DD3C39 /* CustomAssetThumbnailView-iPhone6-Plus.xib */; };
 		2435952C1A0CA84800DD3C39 /* CustomAssetsGroupView-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2435952B1A0CA84800DD3C39 /* CustomAssetsGroupView-iPhone6.xib */; };
 		2435952E1A0CA85F00DD3C39 /* CustomAssetsGroupView-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2435952D1A0CA85F00DD3C39 /* CustomAssetsGroupView-iPhone6-Plus.xib */; };
+		2438040B1A15E76600C8FBF6 /* ShareViewController-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2438040A1A15E76600C8FBF6 /* ShareViewController-iPhone6.xib */; };
 		243AA72019DE8136004A5613 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 243AA71E19DE8136004A5613 /* README.txt */; };
 		243AA72219DE8302004A5613 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 243AA72119DE8302004A5613 /* AdSupport.framework */; };
 		243AA72419DE8428004A5613 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 243AA72319DE8428004A5613 /* EventKit.framework */; };
@@ -502,6 +502,8 @@
 		24556D8119EE7E2E005FCDFE /* more.png in Resources */ = {isa = PBXBuildFile; fileRef = 24556D7E19EE7E2E005FCDFE /* more.png */; };
 		24556D8319EE7E2E005FCDFE /* more@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24556D8019EE7E2E005FCDFE /* more@3x.png */; };
 		24556D8519EE7E65005FCDFE /* more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24556D8419EE7E65005FCDFE /* more@2x.png */; };
+		24597CDE1A120E5B00CE1061 /* FreeFeatureCell-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24597CDD1A120E5B00CE1061 /* FreeFeatureCell-iPhone6.xib */; };
+		24597CE01A1213B000CE1061 /* InAppPurchaseCell-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24597CDF1A1213B000CE1061 /* InAppPurchaseCell-iPhone6.xib */; };
 		2459E8B0196130810072A56C /* greenButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2459E8AF196130810072A56C /* greenButton.png */; };
 		245A016F19A74E3C005A414A /* AssetGroupViewControllerWithSearchFeild.xib in Resources */ = {isa = PBXBuildFile; fileRef = 245A016E19A74E3C005A414A /* AssetGroupViewControllerWithSearchFeild.xib */; };
 		245C0FA51933081200B5B31C /* free-features.plist in Resources */ = {isa = PBXBuildFile; fileRef = 245C0FA41933081200B5B31C /* free-features.plist */; };
@@ -921,6 +923,8 @@
 		248A3638193F26280005FCAD /* bg_tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 248A3636193F26280005FCAD /* bg_tab@2x.png */; };
 		248A3639193F26280005FCAD /* image_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 248A3637193F26280005FCAD /* image_icon@2x.png */; };
 		249464DF1A0CFEFE00C1247D /* Backgrounds-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 249464DE1A0CFEFE00C1247D /* Backgrounds-iPhone6.xib */; };
+		2498965E1A1B773A0001BF81 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2498965D1A1B773A0001BF81 /* ParseFacebookUtils.framework */; };
+		249896601A1B77580001BF81 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2498965F1A1B77580001BF81 /* ParseUI.framework */; };
 		249F1F8A193F55D50072835E /* 07_camera_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 249F1F5F193F55D50072835E /* 07_camera_selected@2x.png */; };
 		249F1F8B193F55D50072835E /* 07_camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 249F1F60193F55D50072835E /* 07_camera@2x.png */; };
 		249F1F8C193F55D50072835E /* 07_height_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 249F1F61193F55D50072835E /* 07_height_selected@2x.png */; };
@@ -1907,6 +1911,7 @@
 		243595291A0CA43100DD3C39 /* CustomAssetThumbnailView-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CustomAssetThumbnailView-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		2435952B1A0CA84800DD3C39 /* CustomAssetsGroupView-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CustomAssetsGroupView-iPhone6.xib"; sourceTree = "<group>"; };
 		2435952D1A0CA85F00DD3C39 /* CustomAssetsGroupView-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CustomAssetsGroupView-iPhone6-Plus.xib"; sourceTree = "<group>"; };
+		2438040A1A15E76600C8FBF6 /* ShareViewController-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ShareViewController-iPhone6.xib"; sourceTree = "<group>"; };
 		243AA70019DE8136004A5613 /* DFPBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPBannerView.h; sourceTree = "<group>"; };
 		243AA70119DE8136004A5613 /* DFPExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPExtras.h; sourceTree = "<group>"; };
 		243AA70219DE8136004A5613 /* DFPInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPInterstitial.h; sourceTree = "<group>"; };
@@ -1954,6 +1959,8 @@
 		24556D7E19EE7E2E005FCDFE /* more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more.png; sourceTree = "<group>"; };
 		24556D8019EE7E2E005FCDFE /* more@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more@3x.png"; sourceTree = "<group>"; };
 		24556D8419EE7E65005FCDFE /* more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more@2x.png"; sourceTree = "<group>"; };
+		24597CDD1A120E5B00CE1061 /* FreeFeatureCell-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FreeFeatureCell-iPhone6.xib"; sourceTree = "<group>"; };
+		24597CDF1A1213B000CE1061 /* InAppPurchaseCell-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "InAppPurchaseCell-iPhone6.xib"; sourceTree = "<group>"; };
 		2459E8AF196130810072A56C /* greenButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenButton.png; sourceTree = "<group>"; };
 		245A016E19A74E3C005A414A /* AssetGroupViewControllerWithSearchFeild.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssetGroupViewControllerWithSearchFeild.xib; sourceTree = "<group>"; };
 		245C0FA41933081200B5B31C /* free-features.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "free-features.plist"; sourceTree = "<group>"; };
@@ -2393,6 +2400,8 @@
 		248A3636193F26280005FCAD /* bg_tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_tab@2x.png"; sourceTree = "<group>"; };
 		248A3637193F26280005FCAD /* image_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image_icon@2x.png"; sourceTree = "<group>"; };
 		249464DE1A0CFEFE00C1247D /* Backgrounds-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Backgrounds-iPhone6.xib"; sourceTree = "<group>"; };
+		2498965D1A1B773A0001BF81 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = ExternalFrameworks/Parse/ParseFacebookUtils.framework; sourceTree = "<group>"; };
+		2498965F1A1B77580001BF81 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = ExternalFrameworks/Parse/ParseUI.framework; sourceTree = "<group>"; };
 		249F1F5F193F55D50072835E /* 07_camera_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07_camera_selected@2x.png"; sourceTree = "<group>"; };
 		249F1F60193F55D50072835E /* 07_camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07_camera@2x.png"; sourceTree = "<group>"; };
 		249F1F61193F55D50072835E /* 07_height_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07_height_selected@2x.png"; sourceTree = "<group>"; };
@@ -2979,6 +2988,7 @@
 				0FD78050177B398800DF5060 /* AudioToolbox.framework in Frameworks */,
 				243AA72219DE8302004A5613 /* AdSupport.framework in Frameworks */,
 				2025FAB9186074F300CC9188 /* CoreMotion.framework in Frameworks */,
+				249896601A1B77580001BF81 /* ParseUI.framework in Frameworks */,
 				2025FAB7186074D100CC9188 /* CoreText.framework in Frameworks */,
 				2025FAB51860742700CC9188 /* CoreMedia.framework in Frameworks */,
 				0DEE01A2108ED97400967DA5 /* Security.framework in Frameworks */,
@@ -2991,6 +3001,7 @@
 				0D335121109ABB6A0082810A /* libxml2.dylib in Frameworks */,
 				65A21268172981A000ED0B9A /* ImageIO.framework in Frameworks */,
 				65A212461729496F00ED0B9A /* AssetsLibrary.framework in Frameworks */,
+				2498965E1A1B773A0001BF81 /* ParseFacebookUtils.framework in Frameworks */,
 				65A2CFC117257480005C03B7 /* Social.framework in Frameworks */,
 				65C7A50517216E71003F1A84 /* MobileCoreServices.framework in Frameworks */,
 				0D33511D109ABB6A0082810A /* AddressBookUI.framework in Frameworks */,
@@ -3001,7 +3012,6 @@
 				0DEE01A0108ED97400967DA5 /* QuartzCore.framework in Frameworks */,
 				0D33511F109ABB6A0082810A /* CFNetwork.framework in Frameworks */,
 				498BAB6C1885B21800221DFB /* Parse.framework in Frameworks */,
-				0D335123109ABB6A0082810A /* libz.dylib in Frameworks */,
 				30D58E3510FB260200E0C7E8 /* MediaPlayer.framework in Frameworks */,
 				E8E424ACA7CB4913890F4F3B /* libPods.a in Frameworks */,
 			);
@@ -3624,6 +3634,7 @@
 				E8A7347A1092CFF300661AAD /* ShareViewController.h */,
 				E8A7347B1092CFF300661AAD /* ShareViewController.m */,
 				E8A7347C1092CFF300661AAD /* ShareViewController.xib */,
+				2438040A1A15E76600C8FBF6 /* ShareViewController-iPhone6.xib */,
 				20A1CD6418EF0B0400484391 /* ShareVideoViewController.xib */,
 				20ECF9A718D6E1AD0035E3DE /* UIPlaceHolderTextView.h */,
 				20ECF9A818D6E1AD0035E3DE /* UIPlaceHolderTextView.m */,
@@ -3696,9 +3707,11 @@
 				2004C8431913AE8200E4BBFB /* InAppPurchaseCell.h */,
 				2004C8441913AE8200E4BBFB /* InAppPurchaseCell.m */,
 				2004C83E1913AA5F00E4BBFB /* InAppPurchaseCell.xib */,
+				24597CDF1A1213B000CE1061 /* InAppPurchaseCell-iPhone6.xib */,
 				2478E5EA192C8C0A0081B31B /* FreeFeatureCell.h */,
 				2478E5EB192C8C0A0081B31B /* FreeFeatureCell.m */,
 				2478E5EC192C8C0A0081B31B /* FreeFeatureCell.xib */,
+				24597CDD1A120E5B00CE1061 /* FreeFeatureCell-iPhone6.xib */,
 				245C0FA41933081200B5B31C /* free-features.plist */,
 			);
 			name = Purchase;
@@ -4903,6 +4916,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2498965F1A1B77580001BF81 /* ParseUI.framework */,
+				2498965D1A1B773A0001BF81 /* ParseFacebookUtils.framework */,
 				243AA72519DE842F004A5613 /* EventKitUI.framework */,
 				243AA72319DE8428004A5613 /* EventKit.framework */,
 				243AA72119DE8302004A5613 /* AdSupport.framework */,
@@ -5479,6 +5494,7 @@
 				246EF547193C515D004539B2 /* emoticon9@2x.png in Resources */,
 				30D58D1110FB1BF800E0C7E8 /* icon25.jpg in Resources */,
 				247858D9194878080062F1E4 /* Pinstripe Limo-Regular.ttf in Resources */,
+				24597CE01A1213B000CE1061 /* InAppPurchaseCell-iPhone6.xib in Resources */,
 				24861F1F19F9147100670F6D /* line_dotted@3x.png in Resources */,
 				30D58D1210FB1BF800E0C7E8 /* icon26.jpg in Resources */,
 				2421849D194B4AEC00FDDA97 /* emoticon142@2x.png in Resources */,
@@ -6197,6 +6213,7 @@
 				246EF538193C515D004539B2 /* emoticon86@2x.png in Resources */,
 				24218496194B4AEC00FDDA97 /* emoticon135@2x.png in Resources */,
 				249F1F8B193F55D50072835E /* 07_camera@2x.png in Resources */,
+				2438040B1A15E76600C8FBF6 /* ShareViewController-iPhone6.xib in Resources */,
 				249F1FC5193F55E90072835E /* email_box@2x.png in Resources */,
 				20E38AA5197FB39200D1CFA9 /* SendingPrintViewController.xib in Resources */,
 				247858DF1948788C0062F1E4 /* QuattrocentoSans-Regular.otf in Resources */,
@@ -6206,6 +6223,7 @@
 				2478589A194874B70062F1E4 /* circula-medium.otf in Resources */,
 				49F109D2192C7926002B0CD4 /* CropVideoViewController.xib in Resources */,
 				2479BC671941FB9400FF5FF5 /* TextBorders.xib in Resources */,
+				24597CDE1A120E5B00CE1061 /* FreeFeatureCell-iPhone6.xib in Resources */,
 				249F201E193F562C0072835E /* flickr_share_selected@2x.png in Resources */,
 				249F2147193F5FAB0072835E /* password_email_icon@2x.png in Resources */,
 				249F201D193F562C0072835E /* fb_setting@2x.png in Resources */,
@@ -6817,6 +6835,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/ExternalFrameworks/Parse/",
+					"$(PROJECT_DIR)/ExternalFrameworks/Parse",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Flyr_Prefix.pch;
@@ -6835,9 +6854,9 @@
 					"$(SRCROOT)/ExternalFrameworks/Bitly/",
 					"$(PROJECT_DIR)/ExternalFrameworks/Crittercism",
 					"$(PROJECT_DIR)/ExternalFrameworks/UserVoiceSDK-3.0.0",
-					"$(PROJECT_DIR)/ExternalFrameworks/PayPal-iOS-SDK-master/PayPalMobile",
 					"$(PROJECT_DIR)/ExternalFrameworks/GoogleMobileAdsSdkiOS-6.12.0",
 					"$(PROJECT_DIR)/ExternalFrameworks/Flurry",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -6868,6 +6887,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/ExternalFrameworks/Parse/",
+					"$(PROJECT_DIR)/ExternalFrameworks/Parse",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -6889,9 +6909,9 @@
 					"$(SRCROOT)/ExternalFrameworks/Bitly/",
 					"$(PROJECT_DIR)/ExternalFrameworks/Crittercism",
 					"$(PROJECT_DIR)/ExternalFrameworks/UserVoiceSDK-3.0.0",
-					"$(PROJECT_DIR)/ExternalFrameworks/PayPal-iOS-SDK-master/PayPalMobile",
 					"$(PROJECT_DIR)/ExternalFrameworks/GoogleMobileAdsSdkiOS-6.12.0",
 					"$(PROJECT_DIR)/ExternalFrameworks/Flurry",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -6920,6 +6940,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/ExternalFrameworks/Parse/",
+					"$(PROJECT_DIR)/ExternalFrameworks/Parse",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Flyr_Prefix.pch;
@@ -6938,9 +6959,9 @@
 					"$(SRCROOT)/ExternalFrameworks/Bitly/",
 					"$(PROJECT_DIR)/ExternalFrameworks/Crittercism",
 					"$(PROJECT_DIR)/ExternalFrameworks/UserVoiceSDK-3.0.0",
-					"$(PROJECT_DIR)/ExternalFrameworks/PayPal-iOS-SDK-master/PayPalMobile",
 					"$(PROJECT_DIR)/ExternalFrameworks/GoogleMobileAdsSdkiOS-6.12.0",
 					"$(PROJECT_DIR)/ExternalFrameworks/Flurry",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (

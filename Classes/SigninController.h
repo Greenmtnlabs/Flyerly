@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "FlyerlyMainScreen.h"
 #import "RegisterController.h"
-#import <Parse/Parse.h>
+#import <ParseUI/PFLogInViewController.h>
+#import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "FlyerlySingleton.h"
 #import "ResetPWViewController.h"
 #import "ParentViewController.h"
@@ -18,7 +19,7 @@
 
 @class FlyerlySingleton,RegisterController,ResetPWViewController,FlyerlyMainScreen;
 
-@interface SigninController : ParentViewController <PFLogInViewControllerDelegate,FBLoginViewDelegate> {
+@interface SigninController : ParentViewController <PFLogInViewControllerDelegate, FBLoginViewDelegate> {
 
     RegisterController *registerController;
     FlyerlySingleton *globle;

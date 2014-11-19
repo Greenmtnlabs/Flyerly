@@ -31,7 +31,6 @@
 
 @end
 
-LobRequest *request;
 UIButton *backButton;
 
 @implementation SendingPrintViewController
@@ -305,7 +304,7 @@ UIButton *backButton;
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     FlyerlyConfigurator *flyerConfigurator = appDelegate.flyerConfigurator;
     
-    request = [LobRequest initWithAPIKey:[flyerConfigurator lobAppId]];
+    LobRequest *request = [LobRequest initWithAPIKey:[flyerConfigurator lobAppId]];
     
     NSMutableDictionary *fromAddress = [[NSMutableDictionary alloc] init];
     [fromAddress setObject:messageFeild.text forKey:@"name"];
@@ -330,49 +329,68 @@ UIButton *backButton;
      {
          NSLog(@"*** Object Create Local Response ***");
          NSLog(@"%u", request.statusCode);
-
-         for ( int i = 0;i<contactsArray.count;i++) {
+         
+         if ( error == nil && request.statusCode == 200){
              
-             ContactsModel *model = [self getArrayOfSelectedTab][i];
+             for ( int i = 0;i<contactsArray.count;i++) {
+                 
+                 ContactsModel *model = [self getArrayOfSelectedTab][i];
+                 
+                 toAddress = [[NSMutableDictionary alloc] init];
+                 [toAddress setObject:model.name forKey:@"name"];
+                 [toAddress setObject:@"" forKey:@"email"];
+                 [toAddress setObject:@"" forKey:@"phone"];
+                 [toAddress setObject:model.streetAddress forKey:@"address_line1"];
+                 [toAddress setObject:@"" forKey:@"address_line2"];
+                 [toAddress setObject:model.city forKey:@"address_city"];
+                 [toAddress setObject:@"FL" forKey:@"address_state"];
+                 [toAddress setObject:model.zip forKey:@"address_zip"];
+                 [toAddress setObject:@"US" forKey:@"address_country"];
+                 
+                 NSString *frontUrl = [NSString stringWithFormat:@"http://assets.lob.com/%@",object.objectId];
             
-             toAddress = [[NSMutableDictionary alloc] init];
-             [toAddress setObject:model.name forKey:@"name"];
-             [toAddress setObject:@"" forKey:@"email"];
-             [toAddress setObject:@"" forKey:@"phone"];
-             [toAddress setObject:model.streetAddress forKey:@"address_line1"];
-             [toAddress setObject:@"" forKey:@"address_line2"];
-             [toAddress setObject:model.city forKey:@"address_city"];
-             [toAddress setObject:@"FL" forKey:@"address_state"];
-             [toAddress setObject:model.zip forKey:@"address_zip"];
-             [toAddress setObject:model.country forKey:@"address_country"];
+                 NSDictionary *postcardDict = @{@"name" : @"Flyer Postcard",
+                                                @"front" : frontUrl,
+                                                @"back" : @"https://www.lob.com/postcardback.pdf",
+                                                @"to" : toAddress,
+                                                @"from" : fromAddress};
+                 
+                 
+                 LobRequest *postcardRequest = [LobRequest initWithAPIKey:[flyerConfigurator lobAppId]];
+                 LobPostcardModel *flyerPostCard = [[LobPostcardModel alloc] initWithDictionary:postcardDict];
+                 
+                 [postcardRequest createPostcardWithModel:flyerPostCard withResponse:^(LobPostcardModel *postcard, NSError *error){
+                     
+                     if (error == nil && postcardRequest.statusCode == 200) {
+                         
+                         UIAlertView *alertSuccess = [[UIAlertView alloc] initWithTitle:@"PostCard Send" message:@"Your postcard hase been send to print"  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                         
+                         [alertSuccess show];
+                         
+                     } else {
+                         
+                         NSString *failedError = [NSString stringWithFormat:@"PostCard could not be sent. Failed with error %@", error];
+                         
+                         if( error == nil ) {
+                             failedError = [NSString stringWithFormat:@"PostCard could not be sent. Failed with status code %d", postcardRequest.statusCode ];
+                         }
+                         
+                         UIAlertView *alertFailure = [[UIAlertView alloc] initWithTitle:@"" message:failedError  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                         
+                         [alertFailure show];
+                     }
+                     
+                     NSLog(@"%@",postcard);
+                     NSLog(@"%@",error);
+                     
+                 }];
+             }
+         
+         } else {
              
-             NSString *frontUrl = [NSString stringWithFormat:@"https://assets.lob.com/%@",object.objectId];
-             NSDictionary *postcardDict = @{@"name" : @"Flyer Postcard",
-                                            @"front" : frontUrl,
-                                            @"back" : @"https://www.lob.com/postcardback.pdf",
-                                            @"to" : toAddress,
-                                            @"from" : fromAddress};
+              UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failed to upload postcard" message:@"Your postcard could not be uploaded for print"  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
              
-             LobPostcardModel *flyerPostCard = [[LobPostcardModel alloc] initWithDictionary:postcardDict];
-              
-            [request createPostcardWithModel:flyerPostCard withResponse:^(LobPostcardModel *postcard, NSError *error){
-                
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"PostCard Send" message:@"Your postcard hase been send to print"  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                
-                if (error == nil){
-                    [alert show];
-                }else {
-                    
-                    NSString *failedError = [NSString stringWithFormat:@"PostCard could not send,Failed with error %@", error];
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:failedError  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                    
-                    [alert show];
-                }
-                
-                NSLog(@"%@",postcard);
-                NSLog(@"%@",error);
-                  
-            }];
+             [alert show];
          }
          
          [self hideLoadingIndicator];

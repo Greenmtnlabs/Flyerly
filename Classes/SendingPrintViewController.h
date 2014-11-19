@@ -15,7 +15,7 @@
 #import <MessageUI/MessageUI.h>
 #import "ParentViewController.h"
 #import "Flyer.h"
-#import <AFNetworking/AFNetworking.h>
+#import "AFNetworking.h"
 #import "AbstractBlockRequest.h"
 
 @class AbstractBlockRequest;
