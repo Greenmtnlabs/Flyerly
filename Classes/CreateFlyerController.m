@@ -5124,7 +5124,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         if ([currentLayer isEqualToString:@""]) {
             currentLayer = [flyer addImage];
             
-            CGRect imageFrame  = CGRectMake(300,10,200,200);
+            CGRect imageFrame  = CGRectMake(150,10,200,200);
             [flyer setImageFrame:currentLayer :imageFrame];
             NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
             [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
