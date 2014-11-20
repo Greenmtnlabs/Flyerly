@@ -15,7 +15,7 @@
 @implementation Untechable
 
 //Settings
-@synthesize commonFunctions, dic, piecesFile, paid, userId, uniqueId, eventId, untechablePath, dateFormatter, savedOnServer;
+@synthesize commonFunctions, dic, piecesFile, paid, userId, uniqueId, eventId, untechablePath, dateFormatter, savedOnServer, hasFinished;
 
 //1-vars for screen1
 @synthesize timezoneOffset, spendingTimeTxt, startDate, endDate, hasEndDate;
@@ -203,6 +203,7 @@
         dic[@"email"] = email;
         dic[@"password"] = password;
         dic[@"respondingEmail"] = respondingEmail;
+        dic[@"hasFinished"] = hasFinished ? @"YES" : @"NO";
         
         //Here we write the dictionary of .peices files
         [dic writeToFile:piecesFile atomically:YES];
@@ -250,6 +251,7 @@
         email           = ( dic[@"email"] ) ? dic[@"email"] : @"";
         password        = ( dic[@"password"] ) ? dic[@"password"] : @"";
         respondingEmail = ( dic[@"respondingEmail"] ) ? dic[@"respondingEmail"] : @"";
+        hasFinished     = ([dic[@"hasFinished"] isEqualToString:@"YES"]) ? YES : NO;
         
     }
     
@@ -295,6 +297,7 @@
     email           = @"";
     password        = @"";
     respondingEmail = @"";
+    hasFinished     = NO;
     
 }
 
@@ -344,6 +347,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
             if ([[NSScanner scannerWithString:uniqueId_temp] scanInt:nil]) {
                 NSString *piecesF =[untechablePath_temp stringByAppendingString:[NSString stringWithFormat:@"/%@", PIECES_FILE]];
                 retDic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesF];
+                BOOL isFinished = [retDic objectForKey:@"hasFinished"];
                 [retDic setValue:uniqueId_temp forKey:@"uniqueId"];
                 [retDic setValue:untechablePath_temp forKey:@"untechablePath"];
                 //[retDic setValue:[NSString stringWithFormat:@"%@/%@%@", untechablePath_temp,uniqueId_temp,REC_FORMATE] forKey:@"recFileURL"];

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2402BB831A1DBF6A00255A73 /* UntechablesList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402BB811A1DBF6A00255A73 /* UntechablesList.m */; };
+		2402BB841A1DBF6A00255A73 /* UntechablesList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2402BB821A1DBF6A00255A73 /* UntechablesList.xib */; };
+		2402BB881A1DC3A200255A73 /* UntechableTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402BB861A1DC3A200255A73 /* UntechableTableCell.m */; };
+		2402BB891A1DC3A200255A73 /* UntechableTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2402BB871A1DC3A200255A73 /* UntechableTableCell.xib */; };
 		36474F2219D9780100084F34 /* Pigiarniq Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36474F1D19D9780100084F34 /* Pigiarniq Bold.ttf */; };
 		36474F2319D9780100084F34 /* Pigiarniq Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36474F1E19D9780100084F34 /* Pigiarniq Heavy.ttf */; };
 		36474F2419D9780100084F34 /* Pigiarniq Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36474F1F19D9780100084F34 /* Pigiarniq Italic.ttf */; };
@@ -113,6 +117,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2402BB801A1DBF6A00255A73 /* UntechablesList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UntechablesList.h; path = UntechableListController/UntechablesList.h; sourceTree = "<group>"; };
+		2402BB811A1DBF6A00255A73 /* UntechablesList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UntechablesList.m; path = UntechableListController/UntechablesList.m; sourceTree = "<group>"; };
+		2402BB821A1DBF6A00255A73 /* UntechablesList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UntechablesList.xib; path = UntechableListController/UntechablesList.xib; sourceTree = "<group>"; };
+		2402BB851A1DC3A200255A73 /* UntechableTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UntechableTableCell.h; path = UntechableListController/UntechableTableCell.h; sourceTree = "<group>"; };
+		2402BB861A1DC3A200255A73 /* UntechableTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UntechableTableCell.m; path = UntechableListController/UntechableTableCell.m; sourceTree = "<group>"; };
+		2402BB871A1DC3A200255A73 /* UntechableTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UntechableTableCell.xib; path = UntechableListController/UntechableTableCell.xib; sourceTree = "<group>"; };
 		36474F1D19D9780100084F34 /* Pigiarniq Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pigiarniq Bold.ttf"; sourceTree = "<group>"; };
 		36474F1E19D9780100084F34 /* Pigiarniq Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pigiarniq Heavy.ttf"; sourceTree = "<group>"; };
 		36474F1F19D9780100084F34 /* Pigiarniq Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pigiarniq Italic.ttf"; sourceTree = "<group>"; };
@@ -264,6 +274,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2402BB7F1A1DBEF800255A73 /* UntechableListController */ = {
+			isa = PBXGroup;
+			children = (
+				2402BB801A1DBF6A00255A73 /* UntechablesList.h */,
+				2402BB811A1DBF6A00255A73 /* UntechablesList.m */,
+				2402BB821A1DBF6A00255A73 /* UntechablesList.xib */,
+				2402BB851A1DC3A200255A73 /* UntechableTableCell.h */,
+				2402BB861A1DC3A200255A73 /* UntechableTableCell.m */,
+				2402BB871A1DC3A200255A73 /* UntechableTableCell.xib */,
+			);
+			name = UntechableListController;
+			sourceTree = "<group>";
+		};
 		36474F0719D96E9800084F34 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -426,6 +449,7 @@
 			children = (
 				366ECD7B19D312BE00F71A11 /* Models */,
 				36B275CF1A00CC9400ED58AD /* RMStore */,
+				2402BB7F1A1DBEF800255A73 /* UntechableListController */,
 				366ECD8619D322D700F71A11 /* AddUntechableController */,
 				366ECD8719D322F800F71A11 /* PhoneSetupController */,
 				36524AED19D9409C006DCAAF /* SocialnetworkController */,
@@ -678,6 +702,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				36B2767B1A0124E800ED58AD /* right_arrow.png in Resources */,
+				2402BB891A1DC3A200255A73 /* UntechableTableCell.xib in Resources */,
 				36B276781A0124E800ED58AD /* record_gray@2x.png in Resources */,
 				366ECD9C19D323E200F71A11 /* PhoneSetupController.xib in Resources */,
 				36B2767D1A0124E800ED58AD /* searchicon@2x.png in Resources */,
@@ -695,6 +720,7 @@
 				36474F2419D9780100084F34 /* Pigiarniq Italic.ttf in Resources */,
 				36B276741A0124E800ED58AD /* play_gray@2x.png in Resources */,
 				36B276761A0124E800ED58AD /* play@2x.png in Resources */,
+				2402BB841A1DBF6A00255A73 /* UntechablesList.xib in Resources */,
 				36474F2319D9780100084F34 /* Pigiarniq Heavy.ttf in Resources */,
 				36C734481A0CF2490066C544 /* Podfile in Resources */,
 				366EAF911A14C3530011D6C6 /* icon-40@2x.png in Resources */,
@@ -799,6 +825,8 @@
 				366F9DAA1A124FC7006602E1 /* FHSStream.m in Sources */,
 				3681603C19E6B81E00B9B64C /* ContactsModel.m in Sources */,
 				366F9DAB1A124FC7006602E1 /* FHSTwitterEngine.m in Sources */,
+				2402BB831A1DBF6A00255A73 /* UntechablesList.m in Sources */,
+				2402BB881A1DC3A200255A73 /* UntechableTableCell.m in Sources */,
 				366ECD9B19D323E200F71A11 /* PhoneSetupController.m in Sources */,
 				3681603F19E6B81E00B9B64C /* InviteFriendsController.m in Sources */,
 				3663932519D6A0A700512965 /* CommonFunctions.m in Sources */,

@@ -175,9 +175,22 @@
         // Center title __________________________________________________
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
 
+        // Back Navigation button
+        
+        backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        backButton.titleLabel.shadowColor = [UIColor clearColor];
+        backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitleColor:defGray forState:UIControlStateNormal];
+        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
+        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+        backButton.showsTouchWhenHighlighted = YES;
+        
+        UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        
+        [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+        
         // Right Navigation ______________________________________________
-        
-        
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         //[nextButton setBackgroundColor:[UIColor redColor]];//for testing
 
@@ -200,6 +213,9 @@
         
         
     }
+}
+-(void) goBack {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)btnNextTouchStart{
     [self setNextHighlighted:YES];
@@ -362,7 +378,7 @@
     
     NSMutableDictionary *sUntechable; //Selected Untechable
     
-    if( showThisUntechable > -1 ) {
+    if( NO && showThisUntechable > -1 ) {
         sUntechable = [untechable getUntechable: showThisUntechable ];
 
         //Old Untechable going to edit, set the vars

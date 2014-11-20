@@ -17,6 +17,7 @@
 
 
 #define TITLE_NEXT_TXT @"NEXT"
+#define TITLE_NEW_TXT @"NEW"
 #define TITLE_BACK_TXT @"BACK"
 #define TITLE_DONE_TXT @"DONE"
 #define TITLE_FONT @"Pigiarniq-Bold"

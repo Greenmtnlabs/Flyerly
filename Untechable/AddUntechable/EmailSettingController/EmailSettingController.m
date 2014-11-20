@@ -337,6 +337,7 @@
             untechable.twillioNumber = [dict valueForKey:@"twillioNumber"];
             untechable.eventId = [dict valueForKey:@"eventId"];
             untechable.savedOnServer    = YES;
+            untechable.hasFinished = YES;
             [untechable setOrSaveVars:SAVE];
             
         } else{
@@ -399,7 +400,7 @@
     
     // ON DATA SAVED TO API SUCCESSFULLY
     else if([option isEqualToString:@"GO_TO_THANKYOU"] ){
-        
+    
         [self next:@"GO_TO_THANKYOU"];
     }
 }
