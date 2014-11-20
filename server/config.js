@@ -34,6 +34,11 @@ config.twitter = {}
 config.twitter.consumer_key	=	"GxQAvzs4YXBl2o39TN5nr4ogj";
 config.twitter.consumer_secret	=	"IRO1i1pqUdKorBg1fwn4SEzniAeG1GrzpUVXd9mooG4GkpIlNA";
 
+config.linkedIn = {}
+config.linkedIn.APIKey	  =	"77xbm1nay7fgm7";
+config.linkedIn.SecretKey =	"egcM3osyJiBj1QHF";
+
+
 
 // Db Configuration
 config.db = {}
@@ -44,7 +49,7 @@ config.app.mode.LOCALHOST = 'localhost'; //Port: 3001
 config.app.mode.DEVELOPMENT = 'development'; //Port: 8000
 config.app.mode.PRODUCTION = 'production';   //Port: 3010
 
-config.app.mode.current = config.app.mode.PRODUCTION;//DEVELOPMENT; //LOCALHOST
+config.app.mode.current = config.app.mode.LOCALHOST;//DEVELOPMENT; //LOCALHOST
 
 // Check if we are on local host
 if( config.app.mode.current == config.app.mode.LOCALHOST  ) {

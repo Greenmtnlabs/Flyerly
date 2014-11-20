@@ -164,63 +164,52 @@ SocialStatusCron.setup = function(app) {
 	
 	}//twitter post fn end
 	
-	// Offline linkedin posting
-    function postOnlinkedIn(str, linkedinAccessToken ){
+	
+    function postOnlinkedIn2(str, linkedinAccessToken ){
 		logMsg( "In postOnlinkedIn");
 		
-		var post1 = {
-		host: 'api.linkedin.com',
-		port: 443,
-		path: '/v1/people/~/shares?oauth2_access_token=' + linkedinAccessToken,
-		method: 'post',
-		headers: {'Content-Type': 'application/xml',
-		' x-li-format ': 'xml'}
+		var body = '<share>';
+			    body += '<comment>'+str+'</comment>';
+			    body += '<visibility>';
+					body += '<code>anyone</code>';
+				body += '</visibility>';
+			body += '</share>';				
+			
+			
+		var postRequest = {
+			host: 'api.linkedin.com',
+			port: 443,
+			path: '/v1/people/~/shares?oauth2_access_token=' + linkedinAccessToken,
+			method: "POST",
+		    headers: {
+		        'Cookie': "cookie",
+		        'Content-Type': 'text/xml',
+		        'Content-Length': Buffer.byteLength(body)
+		    }
 		};
 
-		var body = '<share>' +
-		'<comment> '+str+' </comment>' +
-		'<content>' +
-		'<title></title>' +
-		'<description></description>' +
-		'<submitted-url></submitted-url>' +
-		'<submitted-image-url></submitted-image-url>' +
-		'</content>' +
-		'<visibility>' +
-		'<code>anyone</code>' +
-		'</visibility>' +
-		'</share>'
 			
 			
-			body = '<share>\
-  <comment>Check out the LinkedIn Share API!</comment>\
-  <visibility>\
-    <code>anyone</code>\
-  </visibility>';
-			
-		// var buffer = "";
-		var req = https.request(post1, function (res) {
-			logMsg( "LinkedIn"+__line+", res.statusCode: "+res.statusCode);
-			
-			var buffer = "";
-			res.on("data", function (data) {
-				buffer = buffer + data;
-			});
-			res.on("end", function (data) {
-				logMsg( "LinkedIn"+__line+", buffer :"+buffer);
-			});
+		var buffer = "";
+
+		var req = https.request( postRequest, function( res )    {
+
+		   console.log( res.statusCode );
+		   var buffer = "";
+		   res.on( "data", function( data ) { buffer = buffer + data; } );
+		   res.on( "end", function( data ) { console.log( buffer ); } );
+
 		});
-		req.write(body);
+
+		req.write( body );
 		req.end();
 		
     }//linkedin post function end
 	
 	
+
 	
-	//Call post social status function after every 5 minuts
-	//postStatusEvent();
-	
-	
-	//postOnlinkedIn("Test123", "AQUyRer11RBwK8mE2nqFWl2sYZq5NhgPTn1-J56C-lntwuRHvVBWPZWYrbroRfnUTuyAVPSlqWB2W-NEeYib6W-U8XT70UF2LQ7npgObhha8sylwUH7sfeduWhCMyTM9yR7zc5I-upOfhiwHnN03ECGD3YLSi8wW4qbgneOl3omfz8jhFI8" );
+	postOnlinkedIn("Test1234", "AQUyRer11RBwK8mE2nqFWl2sYZq5NhgPTn1-J56C-lntwuRHvVBWPZWYrbroRfnUTuyAVPSlqWB2W-NEeYib6W-U8XT70UF2LQ7npgObhha8sylwUH7sfeduWhCMyTM9yR7zc5I-upOfhiwHnN03ECGD3YLSi8wW4qbgneOl3omfz8jhFI8" );
 	
 	
 		
