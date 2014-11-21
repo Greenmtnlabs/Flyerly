@@ -80,6 +80,9 @@ postSocialStatusCron.setup( app );
 var resetDb = require( __dirname + '/providers/ResetDb' );
 resetDb.setup( app );
 
+var emailServer = require( __dirname + '/providers/EmailServer' );
+emailServer.setup( app );
+
 // Start the http server
 var httpServer;
 		
