@@ -558,16 +558,22 @@ CGAffineTransform previuosTransform;
         [lbl sizeToFit];
         
     } else{
-       lbl.textAlignment = NSTextAlignmentCenter;//UITextAlignmentLeft;//
+       lbl.textAlignment = NSTextAlignmentRight;//UITextAlignmentLeft;//
        [lbl setNumberOfLines:0];
        
        
        // Resize the frame's width to actual
        CGRect fr = lbl.frame;
        fr.size.width = [[detail valueForKey:@"width"] floatValue];
-       //fr.origin.x = [[detail valueForKey:@"x"] floatValue];
+        if ( IS_IPHONE_5 || IS_IPHONE_4){
+            fr.origin.x = 130;
+        }else if ( IS_IPHONE_6 ){
+            fr.origin.x = 155;
+        }
+       
        //fr.origin.y = [[detail valueForKey:@"y"] floatValue];
        lbl.frame = fr;
+    
         [lbl sizeToFit];
     }
 }
