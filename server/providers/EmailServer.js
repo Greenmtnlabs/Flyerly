@@ -26,11 +26,14 @@ EmailServer.setup = function( app ) {
 	
 		var acType = config.acType.GMAIL;
 		var allowedAcType = false;
-
-	
+		var imap	=	{};
+		
+		var d = new Date();
+		console.log( { getDate:d.getDate(),getYear:d.getYear(),getTime:d.getTime() } );				
+		
 		if( acType == config.acType.GMAIL ){
 			allowedAcType = true;
-			var imap = {
+			imap = {
 			  user: user,
 			  password: password,
 			  host: "imap.gmail.com",
@@ -41,7 +44,7 @@ EmailServer.setup = function( app ) {
 		}
 		else if( acType == config.acType.HOTMAIL ){
 			allowedAcType = true;
-			var imap = {
+			imap = {
 			  user: user,
 			  password: password,
 			  host: "imap-mail.outlook.com",
@@ -52,7 +55,7 @@ EmailServer.setup = function( app ) {
 		}
 		else if( acType == config.acType.YAHOO ){
 			allowedAcType = true;
-			var imap = {
+			imap = {
 			  user: user,
 			  password: password,
 			  host: "imap.mail.yahoo.com",
@@ -60,31 +63,46 @@ EmailServer.setup = function( app ) {
 			  tls: true,// use secure connection
 			  tlsOptions: { rejectUnauthorized: false }
 			};
-		}	
-
+		}
 		
-	
 		if( allowedAcType == true){
 			var counter = 0;
 			notifier(imap)
-			.on('mail',function(mail){
-				console.log(('aray baba mail('+(++counter)+') ai='));			
-		
-				// mail : mail is complete bundle of email						
-				console.log( mail );				
+			.on('mail',function( res ) {
+				++counter;				
 				
-				console.log( "mail.from:", mail.from);
-				console.log( "mail.to:", mail.to );			
-		
+			    console.log( "mail.from:", res.from);
+                console.log( "mail.to:", res.to );
+			    console.log( "mail.date:", res.date);
+				
+				d = new Date(res.date);
+			    console.log( { getDate:d.getDate(),getYear:d.getYear(),getTime:d.getTime() } );				
+				
+
+				
+				console.log( {msg:"on mail, counter:"+counter} );		
 			})
-			.start();		
+			.on('error',function( res ) {
+				console.log( {msg:"on error",  res: res} );
+			})
+			.on('end',function( res ) {
+				console.log( {msg:"on end",  res: res} );
+			})
+			.start();
+			
+			setTimeout(function(){
+				console.log("Stop listing after time");
+				notifier(imap).stop();
+			}, (5 * 1 * 1000) );	
+			
 		}
 	}
 	
    	app.get('/read-inbox', function( req, res ) {		
-		readInbox( "rufi.untechable@gmail.com", "abc123RUFI" );
+		res.end("Nothing to do :)");
 	});
 	
 	
 	readInbox( "rufi.untechable@gmail.com", "abc123RUFI" );
+	//readInbox( "abdul.rauf@riksof.com", "intel123" );
 }
