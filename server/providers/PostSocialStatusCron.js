@@ -74,44 +74,46 @@ SocialStatusCron.setup = function(app) {
 					
                 // Loop through all record
                 for (var i = 0; i < events.length; i++) {
+						
+					//logMsg( "line:"+__line+ ", events[i]._id"+events[i]._id+", postSocialStatus= "+ events[i].postSocialStatus );
 					
-                    if ( events[i].postSocialStatus != true ) {
-						
-						logMsg( "line:"+__line+ ", postSocialStatus= "+ events[i].postSocialStatus );
-						
-						startedEventIds[ startedEventIdsCounter ] = {_id: events[i]._id};
-						startedEventIdsCounter++;
-						
-						events[i].socialStatus+", curTimestamp="+curTimestamp;
-						/*
-						postOnFacebook( events[i], events[i].socialStatus, events[i].fbAuth, events[i].fbAuthExpiryTs );						
-						postOnTwitter( events[i], events[i].socialStatus, events[i].twitterAuth, events[i].twOAuthTokenSecret, logMsg);						
-						postOnlinkedIn( events[i], events[i].socialStatus, events[i].linkedinAuth );
-						*/
-						
-                    	Events.findByIdAndUpdate(events[i]._id, { postSocialStatus:true }, {}, function(err, numberAffected, rawResponse) {
-							logMsg( {line: __line, err:err });
-						}) // executes
-					}					
+					startedEventIds[ startedEventIdsCounter ] = {_id: events[i]._id};
+					startedEventIdsCounter++;
+					
+					postOnFacebook( events[i], events[i].socialStatus, events[i].fbAuth, events[i].fbAuthExpiryTs );						
+					postOnTwitter( events[i], events[i].socialStatus, events[i].twitterAuth, events[i].twOAuthTokenSecret, logMsg);						
+					postOnlinkedIn( events[i], events[i].socialStatus, events[i].linkedinAuth );
+					
 					
                 } //end of for loop
 
 				//mass update all events( becuae we have updated postSocialStatus to true )
-				if( startedEventIdsCounter > 0 && 0 ) {
-					logMsg( {line: __line, startedEventIdsCounter: startedEventIdsCounter, startedEventIds: startedEventIds} );
-					//{$or: startedEventIds },
+				if( startedEventIdsCounter > 0  ) {
+					logMsg( {line: __line, msg: "Going ot update the status of these ids", startedEventIdsCounter: startedEventIdsCounter, startedEventIds: startedEventIds} );
+
+					//For updating any field, keep in mind, that field must have in Model
 					Events
-					.update({$or: startedEventIds },
-						{$set:{postSocialStatus:true} },
+					.update(
+						{$or:  startedEventIds },
+						{$set: { postSocialStatus:true } },
 						{ multi: true },
 						function(err, numberAffected, rawResponse) {
-							logMsg( {line: __line, err:err, numberAffected: numberAffected, rawResponse:rawResponse });
+							console.log(__line, "Response of update postSocialStatus call", err, numberAffected, rawResponse );
+							//logMsg( {line: __line, err:err, numberAffected: numberAffected, rawResponse:rawResponse });
 						}
-					);//event update					
+					);
+					
+					/*
+                	Events.findByIdAndUpdate({_id:events[i]._id}, { postSocialStatus:true }, {}, 
+						function(err, numberAffected ) {
+							console.log(  __line, err, numberAffected);
+						//logMsg( {line: __line, err:err, numberAffected: numberAffected });
+					}) // executes
+					*/
 				}
 				
             } else {
-                logMsg("line:"+__line+", No Events found");
+                logMsg("line:"+__line+", No Events found for posting social status.");
             }
         });
     } // end postStatusEvent function
@@ -121,26 +123,27 @@ SocialStatusCron.setup = function(app) {
     function postOnFacebook( curEvent, socialStatus, fbAuth, fbAuthExpiryTs ) {
 		var eIdTxt = " (EventId: " + curEvent._id + ") ";
 		
-        if ( fbAuth == ""  ||  fbAuthExpiryTs != "" ) {
+        if ( fbAuth == ""  ||  fbAuthExpiryTs == "" ) {
             logMsg({line:__line,eIdTxt: eIdTxt, msg: "fbAuth and fbAuthExpiryTs shouldnot be empty!", fbAuth:fbAuth, fbAuthExpiryTs:fbAuthExpiryTs} );
         }
 		else if( fbAuthExpiryTs > curTimestamp ){
 			logMsg("line:"+__line+", "+ eIdTxt+"Fb Token expired:"+events[i].fbAuthExpiryTs + " > " + curTimestamp);
 		}
 		else{
-			FB.setAccessToken(fbAuth);
+			FB.setAccessToken( fbAuth );
 
 			var body = socialStatus;//'My first post using facebook-node-sdk';
 			FB.api('me/feed', 'post', { message: body}, function (res2) {
 			
 			  if(!res2 || res2.error) {
-				  var msg = (!res2) ? ({a:"Fb posting error occurred."}) : ({a:"Fb posting error occurred: ", b:res2.error});
+				  var msg = (!res2) ? ( {a:"Fb posting error occurred."} ) : ( {a:"Fb posting error occurred: ", b:res2.error} );
 				  msg.eidTxt = eIdTxt;
 			  }
 			  else{
 				  var msg = 'Fb Post Id: ' + res2.id;
-			  }		  
-			  logMsg("line:"+__line+ msg );
+			  }
+			  
+			  logMsg( {line:__line, msg: msg} );
 			});
 		}
     }//fb post function end
@@ -163,15 +166,15 @@ SocialStatusCron.setup = function(app) {
 		  	twit.verifyCredentials(function (err, data) {
 
 		        if ( err ) {
-		          callBack(eIdTxt+"Twitter Error verifying credentials: " + err);
+		          callBack(__line+"=line"+eIdTxt+" ,Twitter Error verifying credentials: " + err);
   
 		        } else {
 		          twit.updateStatus(str, function (err, data) {
   
 		                if (err) {
-		                  callBack(eIdTxt+"Tweeting failed:"+ err);
+		                  callBack(__line+"=line"+eIdTxt+" ,Tweeting failed:"+ err);
 		                } else {
-						  callBack("Twitter Success!");
+						  callBack(__line+"=line"+eIdTxt+" ,Twitter Success!");
 		                }
 		          });
 		        }
@@ -223,7 +226,7 @@ SocialStatusCron.setup = function(app) {
 		}
     }//linkedin post function end
 
-	postStatusEvent();
+	//postStatusEvent();
 	
 	// TESTING CODE  ----------------{-------	
 	/*

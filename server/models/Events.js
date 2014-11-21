@@ -37,7 +37,8 @@ var eventsSchema = db.Schema({
 	password: String ,
 	respondingEmail: String ,
 	
-	updatedOn: String
+	updatedOn: String,
+	postSocialStatus: Boolean
 	
 });
 module.exports = db.model( 'Events', eventsSchema );
