@@ -226,7 +226,15 @@ SocialStatusCron.setup = function(app) {
 		}
     }//linkedin post function end
 
-	//postStatusEvent();
+	//Check event is started, then post social status and update flag.
+	//Cron will run after every 5 minute // milli seconds in 5 mint (1000*60*5)
+	function cronPostStatusStart() {
+		console.log("cronPostStatusStarted"+__line);
+		setInterval(function(){	  
+		  postStatusEvent();
+		}, (5 * 60 * 1000) );	
+	}
+	cronPostStatusStart();
 	
 	// TESTING CODE  ----------------{-------	
 	/*
