@@ -748,6 +748,14 @@
 {
     
     [[SHKActivityIndicator currentIndicator] hideForSharer:sharer];
+    UIAlertView *sharingFailedAlert = [[UIAlertView alloc] initWithTitle:@"Sharing Failed"
+                                             message:@"Failed to share Flyer. Please check internet connection and try again."
+                                            delegate:self
+                                   cancelButtonTitle:@"Ok"
+                                   otherButtonTitles:nil];
+    
+    [sharingFailedAlert show];
+    
     iosSharer.shareDelegate = nil;
 	NSLog(@"Sharing Error");
     [self.cfController enableHome:YES];
