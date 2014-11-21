@@ -4208,7 +4208,11 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [sharePanel removeFromSuperview];
         
         if ([flyer isVideoFlyer]) {
+            if ( IS_IPHONE_5 || IS_IPHONE_4) {
             shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareVideoViewController" bundle:nil];
+            }else if ( IS_IPHONE_6) {
+                shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareVideoViewController-iPhone6" bundle:nil];
+            }
             
         } else {
             

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShareViewController">
+            <connections>
+                <outlet property="clipboardButton" destination="aR2-h9-f1Z" id="dzT-fz-HSz"/>
+                <outlet property="emailButton" destination="99N-id-PIK" id="y20-Na-AiM"/>
+                <outlet property="facebookButton" destination="FdQ-7T-iT1" id="RVl-wO-WaY"/>
+                <outlet property="flickrButton" destination="GVr-7i-SKr" id="8iN-g4-nuk"/>
+                <outlet property="flyerShareType" destination="cNj-7M-s9Z" id="p6l-Kw-XDg"/>
+                <outlet property="lblFirstShareOnYoutube" destination="PFt-pA-WMe" id="BUg-Sb-c6G"/>
+                <outlet property="smsButton" destination="vnx-CM-GUx" id="cKm-PL-KB1"/>
+                <outlet property="star1" destination="7OZ-LA-8cx" id="t9I-Dw-vVA"/>
+                <outlet property="star2" destination="m9Y-2i-uBl" id="PId-rw-KaN"/>
+                <outlet property="star3" destination="igI-Dk-dS1" id="ruK-2g-fb7"/>
+                <outlet property="star4" destination="2Is-eV-oD6" id="4dS-zU-iUO"/>
+                <outlet property="star5" destination="d8g-xw-Ps9" id="yNS-Pm-WKU"/>
+                <outlet property="titleView" destination="Lbf-me-lnl" id="fkM-xu-Hin"/>
+                <outlet property="twitterButton" destination="UYY-Pn-ieB" id="pZF-PY-pHC"/>
+                <outlet property="view" destination="45R-9H-nBs" id="oux-h8-cjY"/>
+                <outlet property="youTubeButton" destination="BfR-GT-dR9" id="0Ea-Ls-yLg"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="45R-9H-nBs">
+            <rect key="frame" x="0.0" y="0.0" width="380" height="480"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view alpha="0.92000001668930054" contentMode="scaleToFill" id="P4K-nF-L2b">
+                    <rect key="frame" x="0.0" y="0.0" width="380" height="568"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cNj-7M-s9Z">
+                            <rect key="frame" x="29" y="202" width="110" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="public_on.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="private_off_button.png"/>
+                            <connections>
+                                <action selector="clickOnFlyerType:" destination="-1" eventType="touchUpInside" id="YhD-lW-r1h"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7OZ-LA-8cx">
+                            <rect key="frame" x="199" y="205" width="25" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="star.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="star_selected.png"/>
+                            <connections>
+                                <action selector="clickOnStarRate:" destination="-1" eventType="touchUpInside" id="X8a-f7-BiU"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="m9Y-2i-uBl">
+                            <rect key="frame" x="231" y="205" width="25" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="star.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="star_selected.png"/>
+                            <connections>
+                                <action selector="clickOnStarRate:" destination="-1" eventType="touchUpInside" id="m7L-Mq-ZDU"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="igI-Dk-dS1">
+                            <rect key="frame" x="261" y="205" width="25" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="star.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="star_selected.png"/>
+                            <connections>
+                                <action selector="clickOnStarRate:" destination="-1" eventType="touchUpInside" id="Hfc-bs-Y8R"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2Is-eV-oD6">
+                            <rect key="frame" x="292" y="205" width="25" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="star.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="star_selected.png"/>
+                            <connections>
+                                <action selector="clickOnStarRate:" destination="-1" eventType="touchUpInside" id="feh-BF-aOe"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="d8g-xw-Ps9">
+                            <rect key="frame" x="323" y="205" width="25" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="star.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="star_selected.png"/>
+                            <connections>
+                                <action selector="clickOnStarRate:" destination="-1" eventType="touchUpInside" id="rDS-lc-bya"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="flat_text_box.png" id="lyp-YI-Iv8">
+                    <rect key="frame" x="10" y="45" width="358" height="33"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Flyerly Title (e.g. &quot;Parker's Party&quot;)" minimumFontSize="17" id="Lbf-me-lnl">
+                    <rect key="frame" x="16" y="47" width="352" height="28"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="tRe-5d-7m7"/>
+                    </connections>
+                </textField>
+                <view contentMode="scaleToFill" id="Izt-kg-ptm">
+                    <rect key="frame" x="30" y="273" width="320" height="135"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="FdQ-7T-iT1">
+                            <rect key="frame" x="245" y="6" width="60" height="60"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="Facebook"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
+                            <state key="normal" image="facebook_share.png">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="disabled">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" backgroundImage="facebook_share_selected.png">
+                                <color key="titleColor" red="0.3575665864" green="0.76047690010000002" blue="0.97315449620000005" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <state key="highlighted">
+                                <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onClickFacebookButton" destination="-1" eventType="touchUpInside" id="k3h-nr-GcJ"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="3" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="99N-id-PIK">
+                            <rect key="frame" x="88" y="74" width="60" height="60"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="Email"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
+                            <state key="normal" image="email_share.png">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" backgroundImage="email_share_selected.png">
+                                <color key="titleColor" red="0.3575665864" green="0.76047690010000002" blue="0.97315449620000005" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <state key="highlighted">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onClickEmailButton" destination="-1" eventType="touchUpInside" id="Wht-zE-gdU"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="GVr-7i-SKr">
+                            <rect key="frame" x="167" y="6" width="60" height="60"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="Flicker"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
+                            <state key="normal" backgroundImage="flickr_share.png">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" backgroundImage="flickr_share_selected.png">
+                                <color key="titleColor" red="0.3575665864" green="0.76047690010000002" blue="0.97315449620000005" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <state key="highlighted">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onClickFlickrButton" destination="-1" eventType="touchUpInside" id="dVu-PT-Ziq"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vnx-CM-GUx">
+                            <rect key="frame" x="167" y="74" width="60" height="60"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="SMS"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
+                            <state key="normal" image="sms_share.png">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" backgroundImage="sms_share_selected.png">
+                                <color key="titleColor" red="0.3575665864" green="0.76047690010000002" blue="0.97315449620000005" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <state key="highlighted">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onClickSMSButton" destination="-1" eventType="touchUpInside" id="eMd-CI-3hW"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="UYY-Pn-ieB">
+                            <rect key="frame" x="9" y="75" width="60" height="60"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="Twitter"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
+                            <state key="normal" image="twitter_share.png">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" backgroundImage="twitter_share_selected.png">
+                                <color key="titleColor" red="0.3575665864" green="0.76047690010000002" blue="0.97315449620000005" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <state key="highlighted">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onClickTwitterButton" destination="-1" eventType="touchUpInside" id="IhN-ct-NoJ"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" id="aR2-h9-f1Z">
+                            <rect key="frame" x="245" y="74" width="60" height="60"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="Copy"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                            <state key="normal" image="cp_share.png">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" backgroundImage="cp_share_selected.png">
+                                <color key="titleColor" red="0.3575665864" green="0.76047690010000002" blue="0.97315449620000005" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <state key="highlighted">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onClickClipboardButton" destination="-1" eventType="touchUpInside" id="z9D-Gp-Akc"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First upload your video flyer to YouTube then select other sharing options." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PFt-pA-WMe">
+                            <rect key="frame" x="77" y="6" width="82" height="60"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="BfR-GT-dR9">
+                            <rect key="frame" x="9" y="6" width="60" height="60"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="youtube_share.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="youtube_share_selected.png"/>
+                            <connections>
+                                <action selector="uploadOnYoutube:" destination="-1" eventType="touchUpInside" id="tl9-fQ-OaE"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="flat_text_box.png" id="ceQ-71-3qA">
+                    <rect key="frame" x="12" y="79" width="347" height="60"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SOS-TL-Fdh">
+                    <rect key="frame" x="0.0" y="0.0" width="380" height="37"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="panel_close_button.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="hideMe" destination="-1" eventType="touchUpInside" id="gjp-Eg-Tcl"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separator.png" id="cKd-Z8-gJL">
+                    <rect key="frame" x="0.0" y="263" width="380" height="2"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separator.png" id="Gsn-La-aZV">
+                    <rect key="frame" x="166" y="173" width="1" height="90"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separator.png" id="SxW-Ic-mUU">
+                    <rect key="frame" x="0.0" y="173" width="380" height="2"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate Us" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HW5-r5-P5W">
+                    <rect key="frame" x="166" y="241" width="214" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-263" y="281"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="cp_share.png" width="60" height="60"/>
+        <image name="cp_share_selected.png" width="60" height="60"/>
+        <image name="email_share.png" width="60" height="60"/>
+        <image name="email_share_selected.png" width="60" height="60"/>
+        <image name="facebook_share.png" width="60" height="60"/>
+        <image name="facebook_share_selected.png" width="60" height="60"/>
+        <image name="flat_text_box.png" width="251" height="34"/>
+        <image name="flickr_share.png" width="60" height="60"/>
+        <image name="flickr_share_selected.png" width="60" height="60"/>
+        <image name="panel_close_button.png" width="320" height="37"/>
+        <image name="private_off_button.png" width="92" height="31"/>
+        <image name="public_on.png" width="92" height="31"/>
+        <image name="separator.png" width="320" height="1"/>
+        <image name="sms_share.png" width="60" height="60"/>
+        <image name="sms_share_selected.png" width="60" height="60"/>
+        <image name="star.png" width="25" height="24"/>
+        <image name="star_selected.png" width="25" height="24"/>
+        <image name="twitter_share.png" width="60" height="60"/>
+        <image name="twitter_share_selected.png" width="60" height="60"/>
+        <image name="youtube_share.png" width="60" height="60"/>
+        <image name="youtube_share_selected.png" width="60" height="60"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
