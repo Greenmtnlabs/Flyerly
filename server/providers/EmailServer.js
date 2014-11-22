@@ -17,9 +17,14 @@ EmailServer.setup = function( app ) {
     // Our logger for logging to file and console
     var logger = require(__dirname + '/../logger');
 
-	function readInbox( user, password ){
+	function logMsg( msg ) {
+		logger.info( msg );
+		//console.log( msg );				
+	}
 
-		console.log( {"msg:":"In read inbox", user:user, password:password} );
+	function readInbox( user, password, respondingEmail, stopListiningStrTime ) {
+
+		console.log( { msg:"In read inbox", user:user, password:password} );
 		
 		//https://www.npmjs.org/package/mail-notifier
 		var notifier = require('mail-notifier');
@@ -29,7 +34,7 @@ EmailServer.setup = function( app ) {
 		var imap	=	{};
 		
 		var d = new Date();
-		console.log( { getDate:d.getDate(),getYear:d.getYear(),getTime:d.getTime() } );				
+		console.log( {getDate:d.getDate(), getYear:d.getYear(), getTime:d.getTime()} );
 		
 		if( acType == config.acType.GMAIL ){
 			allowedAcType = true;
@@ -65,7 +70,7 @@ EmailServer.setup = function( app ) {
 			};
 		}
 		
-		if( allowedAcType == true){
+		if( allowedAcType == true) {
 			var counter = 0;
 			inboxReader = notifier(imap);
 			inboxReader.on('mail',function( res ) {
@@ -96,16 +101,58 @@ EmailServer.setup = function( app ) {
 			setTimeout(function(){
 				console.log("Stop listing after time");
 				inboxReader.stop();
-			}, (5 * 1 * 1000) );	
+			}, stopListiningStrTime );
 			
 		}
-	}
+	}//end fn//
 	
-   	app.get('/read-inbox', function( req, res ) {		
-		res.end("Nothing to do :)");
-	});
+	/*
+	Cron job will run after every 1 hour.
+    1- Listner will listen inbox till 50 minutes, then stop listing for 10 minutes.
+		if event will expire before 50 mints, then send that minutes of expire.
 	
+		var stopListiningStrTime = (1 * 60 * 1000);
+		readInbox( "rufi.untechable@gmail.com", "abc123RUFI", stopListiningStrTime );
+		readInbox( "abdul.rauf@riksof.com", "intel123", stopListiningStrTime );		
+	*/
+	function cronReadInboxStart() {
+        logMsg("line:"+__line+", EmailServer.js, cronReadInboxStart");
+		
+	    // Get today's date
+	    var today = new Date();
+	    // Current timestamp
+	    var curTimestamp = today.getTime();	
 	
-	readInbox( "rufi.untechable@gmail.com", "abc123RUFI" );
-	//readInbox( "abdul.rauf@riksof.com", "intel123" );
+	    var Events = require(__dirname + '/../models/Events');
+	    Events.find({			
+			email: { $ne : "" },
+			password: { $ne : "" },
+			respondingEmail: { $ne : "" },					
+	        startTime: { $lte: curTimestamp },
+            $or: [
+		        {endTime: { $gte: curTimestamp } },
+				{ hasEndDate: "NO" }
+			]
+	    }, function(err, events) {
+			
+			if (err) {
+	            logMsg("line:"+__line+", EmailServer.js err: "+err);
+	        }
+	        else{
+	            logMsg( {line:__line, eventsLength:events.length} );
+				console.log("events: ",events);
+				
+				for (var i = 0; i < events.length; i++) {
+					if( events[i].email.trim() != "" && events[i].password.trim() != "" && events[i].respondingEmail.trim() != "" ) {
+						var stopListiningStrTime = (50 * 60 * 1000); //50minutes
+						readInbox( events[i].email, events[i].password, events[i].respondingEmail, stopListiningStrTime );
+					}
+				}
+	        }
+	    });
+		
+	}//end fn//
+	
+	cronReadInboxStart();
+	    
 }
