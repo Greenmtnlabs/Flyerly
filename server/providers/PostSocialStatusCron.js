@@ -41,8 +41,8 @@ SocialStatusCron.setup = function(app) {
 		//console.log( msg );				
 	}
 	
-    // Check if the event is expire
-    function postStatusEvent() {		
+    // Check if the event is started, then post socialStatus on social forums
+    function postSocialStatus() {
 		
 	    setTimeInGlobalVars();
 		
@@ -116,10 +116,10 @@ SocialStatusCron.setup = function(app) {
                 logMsg("line:"+__line+", No Events found for posting social status.");
             }
         });
-    } // end postStatusEvent function
+    } // end postSocialStatus function
 	
 	   
-    // Offline facebook posting
+    // Post on facebook
     function postOnFacebook( curEvent, socialStatus, fbAuth, fbAuthExpiryTs ) {
 		var eIdTxt = " (EventId: " + curEvent._id + ") ";
 		
@@ -148,7 +148,7 @@ SocialStatusCron.setup = function(app) {
 		}
     }//fb post function end
     
-    // Offline twitter posting
+    // Post on twitter
 	function postOnTwitter( curEvent, str, access_token_key, access_token_secret, callBack) {
 		var eIdTxt = " (EventId: "+curEvent._id+") ";
         if ( access_token_key == "" || access_token_secret == "" ) {                            
@@ -183,7 +183,7 @@ SocialStatusCron.setup = function(app) {
 		}	
 	}//twitter post fn end
 	
-	
+    // Post on linkedIn
     function postOnlinkedIn( curEvent, str, linkedinAccessToken ) {
 		var eIdTxt = " (EventId: "+curEvent._id+") ";
         if ( linkedinAccessToken == "" ) {
@@ -226,15 +226,13 @@ SocialStatusCron.setup = function(app) {
 		}
     }//linkedin post function end
 
-	//Check event is started, then post social status and update flag.
+
 	//Cron will run after every 5 minute // milli seconds in 5 mint (1000*60*5)
-	function cronPostStatusStart() {
-		console.log("cronPostStatusStarted"+__line);
-		setInterval(function(){	  
-		  postStatusEvent();
-		}, (5 * 60 * 1000) );	
-	}
-	cronPostStatusStart();
+	postSocialStatus();
+	setInterval(function(){	  
+		postSocialStatus();
+	}, (5 * 60 * 1000) );	
+
 	
 	// TESTING CODE  ----------------{-------	
 	/*

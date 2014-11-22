@@ -21,8 +21,13 @@ EmailServer.setup = function( app ) {
 		logger.info( msg );
 		//console.log( msg );				
 	}
-
-	function readInbox( user, password, respondingEmail, stopListiningStrTime ) {
+	
+	
+	/*
+	Hook inbox reader event till @stopListiningStrTime	
+	*/
+	
+	function hookInboxReader( user, password, respondingEmail, stopListiningStrTime ) {
 
 		console.log( { msg:"In read inbox", user:user, password:password} );
 		
@@ -107,15 +112,18 @@ EmailServer.setup = function( app ) {
 	}//end fn//
 	
 	/*
-	Cron job will run after every 1 hour.
-    1- Listner will listen inbox till 50 minutes, then stop listing for 10 minutes.
-		if event will expire before 50 mints, then send that minutes of expire.
-	
-		var stopListiningStrTime = (1 * 60 * 1000);
-		readInbox( "rufi.untechable@gmail.com", "abc123RUFI", stopListiningStrTime );
-		readInbox( "abdul.rauf@riksof.com", "intel123", stopListiningStrTime );		
+	var stopListiningStrTime = (1 * 60 * 1000);
+	hookInboxReader( "rufi.untechable@gmail.com", "abc123RUFI", stopListiningStrTime );
+	hookInboxReader( "abdul.rauf@riksof.com", "intel123", stopListiningStrTime );		
 	*/
-	function cronReadInboxStart() {
+	
+	
+	
+	/*	
+    1- Listner will listen inbox till 50 minutes(max), then stop listing for 10 minutes, cron will restart after 1 hour(60min)
+		if event will expire before 50 mints, then send that minutes of expire.
+	*/    
+	function startInboxReaderCronjob() {
         logMsg("line:"+__line+", EmailServer.js, cronReadInboxStart");
 		
 	    // Get today's date
@@ -144,8 +152,8 @@ EmailServer.setup = function( app ) {
 				
 				for (var i = 0; i < events.length; i++) {
 					if( events[i].email.trim() != "" && events[i].password.trim() != "" && events[i].respondingEmail.trim() != "" ) {
-						var stopListiningStrTime = (50 * 60 * 1000); //50minutes
-						readInbox( events[i].email, events[i].password, events[i].respondingEmail, stopListiningStrTime );
+						var stopListiningStrTime = (50 * 60 * 1000); //50 minutes
+						hookInboxReader( events[i].email, events[i].password, events[i].respondingEmail, stopListiningStrTime );
 					}
 				}
 	        }
@@ -153,6 +161,12 @@ EmailServer.setup = function( app ) {
 		
 	}//end fn//
 	
-	cronReadInboxStart();
+	startInboxReaderCronjob();
+	//Cron job will restart after every 1 hour( 60min )
+	setInterval(function(){	  
+		startInboxReaderCronjob();
+	}, (60 * 60 * 1000) );	
+	
+	
 	    
 }
