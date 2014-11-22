@@ -16,7 +16,9 @@ EmailServer.setup = function( app ) {
 
     // Our logger for logging to file and console
     var logger = require(__dirname + '/../logger');
-
+	var G_EVENTS = [];
+	var G_EMAILS = [];
+	
 	function logMsg( msg ) {
 		logger.info( msg );
 		//console.log( msg );				
@@ -38,8 +40,8 @@ EmailServer.setup = function( app ) {
 		var allowedAcType = false;
 		var imap	=	{};
 		
-		var d = new Date();
-		console.log( {getDate:d.getDate(), getYear:d.getYear(), getTime:d.getTime()} );
+		var inboxReaderStartedDate = new Date();
+		console.log( {getDate:inboxReaderStartedDate.getDate(), getYear:inboxReaderStartedDate.getYear(), getTime:inboxReaderStartedDate.getTime()} );
 		
 		if( acType == config.acType.GMAIL ){
 			allowedAcType = true;
@@ -79,18 +81,20 @@ EmailServer.setup = function( app ) {
 			var counter = 0;
 			inboxReader = notifier(imap);
 			inboxReader.on('mail',function( res ) {
-				++counter;				
+				++counter;
 				
-			    console.log( "mail.from:", res.from);
-                console.log( "mail.to:", res.to );
-			    console.log( "mail.date:", res.date);
-				
-				d = new Date(res.date);
-			    console.log( { getDate:d.getDate(),getYear:d.getYear(),getTime:d.getTime() } );				
-				
+				var emailDate = new Date(res.date);
+			    console.log( { emailDate_getDate:emailDate.getDate(),emailDate_getYear:emailDate.getYear(),emailDate_getTime:emailDate.getTime() } );
+				console.log( {msg:"on new  mail receive, counter:"+counter, from:res.from, to:res.to, date:res.date} );
 
+				if( res.from.length > 0 && inboxReaderStartedDate.getTime() < emailDate.getTime() ){
+					var emailRecFrom = res.from[0].address;
+					//Check send is not also untechable[ other wise reply will come in a loop ]
+					if( G_EMAILS.indexOf( emailRecFrom ) < 0 ) {
+						console.log("Send him["+emailRecFrom+"] i am untechable");
+					}
+				}
 				
-				console.log( {msg:"on mail, counter:"+counter} );		
 			});
 			
 			inboxReader.on('error',function( res ) {
@@ -124,7 +128,7 @@ EmailServer.setup = function( app ) {
 		if event will expire before 50 mints, then send that minutes of expire.
 	*/    
 	function startInboxReaderCronjob() {
-        logMsg("line:"+__line+", EmailServer.js, cronReadInboxStart");
+        logMsg("line:"+__line+", EmailServer.js, startInboxReaderCronjob");
 		
 	    // Get today's date
 	    var today = new Date();
@@ -138,24 +142,41 @@ EmailServer.setup = function( app ) {
 			respondingEmail: { $ne : "" },					
 	        startTime: { $lte: curTimestamp },
             $or: [
-		        {endTime: { $gte: curTimestamp } },
+		        { endTime: { $gte: curTimestamp } },
 				{ hasEndDate: "NO" }
 			]
 	    }, function(err, events) {
-			
+					
 			if (err) {
 	            logMsg("line:"+__line+", EmailServer.js err: "+err);
 	        }
 	        else{
 	            logMsg( {line:__line, eventsLength:events.length} );
-				console.log("events: ",events);
+				
+				G_EVENTS = [];
+				G_EMAILS = [];
 				
 				for (var i = 0; i < events.length; i++) {
-					if( events[i].email.trim() != "" && events[i].password.trim() != "" && events[i].respondingEmail.trim() != "" ) {
-						var stopListiningStrTime = (50 * 60 * 1000); //50 minutes
-						hookInboxReader( events[i].email, events[i].password, events[i].respondingEmail, stopListiningStrTime );
+					
+					events[i].email = events[i].email.trim();
+					events[i].password = events[i].password.trim();
+					events[i].respondingEmail = events[i].respondingEmail.trim();
+
+					if( events[i].email != "" && events[i].password != "" && events[i].respondingEmail != "" ) {
+						//Prevent for multiple entries
+						if( G_EMAILS.indexOf( events[i].email ) < 0 ) {
+							G_EMAILS.push( events[i].email );
+							G_EVENTS.push( events[i] );
+						}
 					}
 				}
+				
+				for (var i = 0; i < G_EVENTS.length; i++) {				
+					var stopListiningStrTime = (50 * 60 * 1000); //50 minutes
+					hookInboxReader( G_EVENTS[i].email, G_EVENTS[i].password, G_EVENTS[i].respondingEmail, stopListiningStrTime );
+				}
+				
+				
 	        }
 	    });
 		
