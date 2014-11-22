@@ -6,12 +6,15 @@ CommonFunctions.print = function( msg ){
 }
 
 /*
+params required
+------------------
 @params config [ node config]
 @params nodemailer [ node module ]
-@params required
-data.email
-data.emailerName
+data.fromEmail
+data.fromName
 data.respondingEmail
+data.toEmail
+data.toName
 */
 CommonFunctions.sendEmail = function( config, nodemailer, data ){
 	// create reusable transport method (opens pool of SMTP connections)
@@ -25,9 +28,9 @@ CommonFunctions.sendEmail = function( config, nodemailer, data ){
 	
 	// setup e-mail data with unicode symbols
 	var mailOptions = {
-	    from: "Untechable <"+config.email.emailAddress+">", // sender address
-	    to: data.email, // list of receivers "email1,email2,email3"
-	    subject: data.emailerName+" is Untechable", // Subject line
+	    from: data.toName+" <"+config.email.emailAddress+">", // sender address
+	    to: data.fromEmail, // list of receivers "email1,email2,email3"
+	    subject: data.toName+" is Untechable", // Subject line
 	    text: data.respondingEmail, // plaintext body
 	    html: data.respondingEmail // html body
 	}

@@ -90,16 +90,21 @@ EmailServer.setup = function( app ) {
 				console.log( {msg:"on new  mail receive, counter:"+counter, from:res.from, to:res.to, date:res.date} );
 
 				if( res.from.length > 0 && inboxReaderStartedDate.getTime() < emailDate.getTime() ){
-					var emailRecFrom = res.from[0].address;
-					var emailerName = res.from[0].name;
+					var fromEmail = res.from[0].address;
+					var fromName = res.from[0].name;
+					
+					var toEmail = res.to[0].address;
+					var toName = res.to[0].name;					
 
 					//Check send is not also untechable[ other wise reply will come in a loop ]
-					if( G_EMAIL_ADDRESSES.indexOf( emailRecFrom ) < 0 ) {
-						console.log("Send him["+emailRecFrom+"] i am untechable");
+					if( G_EMAIL_ADDRESSES.indexOf( fromEmail ) < 0 ) {
+						console.log("Send him["+fromEmail+"] i am untechable");
 						CommonFunctions.sendEmail( config, nodemailer, {
-							email: emailRecFrom,
-							emailerName: emailerName,
-							respondingEmail: respondingEmail
+							fromEmail: fromEmail,
+							fromName: fromName,
+							respondingEmail: respondingEmail,														
+							toEmail: toEmail,
+							toName: toName
 						});
 					}
 				}

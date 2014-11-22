@@ -49,7 +49,7 @@ config.app.mode.LOCALHOST = 'localhost'; //Port: 3001
 config.app.mode.DEVELOPMENT = 'development'; //Port: 8000
 config.app.mode.PRODUCTION = 'production';   //Port: 3010
 
-config.app.mode.current = config.app.mode.LOCALHOST;//DEVELOPMENT; //LOCALHOST
+config.app.mode.current = config.app.mode.PRODUCTION;//DEVELOPMENT; //LOCALHOST
 
 // Check if we are on local host
 if( config.app.mode.current == config.app.mode.LOCALHOST  ) {
@@ -95,8 +95,8 @@ config.dir = {};
 config.dir.recordingsPath = __dirname+'/../recordings/';
 
 config.email = {}
-config.email.emailAddress = "no.reply.typepath@gmail.com";
-config.email.password = "Typep@th";
+config.email.emailAddress = "no.reply.untechable@gmail.com";
+config.email.password = "abc123RUFI";
 
 
 console.log("config.http.host",config.http.host);
