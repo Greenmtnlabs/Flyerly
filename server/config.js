@@ -94,6 +94,10 @@ config.urls.TWILLIO_CALL_URL = config.http.host + "/ut-handle-call";
 config.dir = {};
 config.dir.recordingsPath = __dirname+'/../recordings/';
 
+config.email = {}
+config.email.emailAddress = "no.reply.typepath@gmail.com";
+config.email.password = "Typep@th";
+
 
 console.log("config.http.host",config.http.host);
 

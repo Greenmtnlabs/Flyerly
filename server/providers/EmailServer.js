@@ -13,11 +13,13 @@ EmailServer.setup = function( app ) {
 	
     // Get the configurations
     var config = require(__dirname + '/../config');
-
+	var CommonFunctions = require( __dirname + '/CommonFunctions' );	
+	var nodemailer = require("nodemailer");
+	
     // Our logger for logging to file and console
     var logger = require(__dirname + '/../logger');
 	var G_EVENTS = [];
-	var G_EMAILS = [];
+	var G_EMAIL_ADDRESSES = [];
 	
 	function logMsg( msg ) {
 		logger.info( msg );
@@ -89,9 +91,16 @@ EmailServer.setup = function( app ) {
 
 				if( res.from.length > 0 && inboxReaderStartedDate.getTime() < emailDate.getTime() ){
 					var emailRecFrom = res.from[0].address;
+					var emailerName = res.from[0].name;
+
 					//Check send is not also untechable[ other wise reply will come in a loop ]
-					if( G_EMAILS.indexOf( emailRecFrom ) < 0 ) {
+					if( G_EMAIL_ADDRESSES.indexOf( emailRecFrom ) < 0 ) {
 						console.log("Send him["+emailRecFrom+"] i am untechable");
+						CommonFunctions.sendEmail( config, nodemailer, {
+							email: emailRecFrom,
+							emailerName: emailerName,
+							respondingEmail: respondingEmail
+						});
 					}
 				}
 				
@@ -154,7 +163,7 @@ EmailServer.setup = function( app ) {
 	            logMsg( {line:__line, eventsLength:events.length} );
 				
 				G_EVENTS = [];
-				G_EMAILS = [];
+				G_EMAIL_ADDRESSES = [];
 				
 				for (var i = 0; i < events.length; i++) {
 					
@@ -164,8 +173,8 @@ EmailServer.setup = function( app ) {
 
 					if( events[i].email != "" && events[i].password != "" && events[i].respondingEmail != "" ) {
 						//Prevent for multiple entries
-						if( G_EMAILS.indexOf( events[i].email ) < 0 ) {
-							G_EMAILS.push( events[i].email );
+						if( G_EMAIL_ADDRESSES.indexOf( events[i].email ) < 0 ) {
+							G_EMAIL_ADDRESSES.push( events[i].email );
 							G_EVENTS.push( events[i] );
 						}
 					}
