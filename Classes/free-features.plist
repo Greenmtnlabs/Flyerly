@@ -26,5 +26,9 @@
 		<key>Edit</key>
 		<string>Access and edit four most recently saved flyers shown on main screen.</string>
 	</dict>
+	<dict>
+		<key>Unlock Feature</key>
+		<string>Invite 20 people to flyerly and unlock saved flyers feature for FREE!</string>
+	</dict>
 </array>
 </plist>

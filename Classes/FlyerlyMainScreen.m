@@ -257,7 +257,7 @@ BOOL adLoaded = false;
                                 NSMutableDictionary *counterDictionary = [object valueForKey:@"estimatedData"];
                                 int refrelCounter = [[counterDictionary objectForKey:@"inviteCounter"] intValue];
                            
-                                if ( refrelCounter >= 25 && !congratulated ) {
+                                if ( refrelCounter >= 20 && !congratulated ) {
                                     
                                     NSString *pid  = @"com.flyerly.UnlockCreateVideoFlyerOption";
                                     

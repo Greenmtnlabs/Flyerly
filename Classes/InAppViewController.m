@@ -13,6 +13,7 @@
 @interface InAppViewController () {
     NSMutableArray *productArray;
     NSArray *freeFeaturesArray;
+    NSString *cellDescriptionForRefrelFeature;
 }
 
 @end
@@ -41,6 +42,7 @@
     loginButton.layer.borderWidth=1.0f;
     [loginButton.layer setCornerRadius:3.0];
     loginButton.layer.borderColor=[[UIColor whiteColor] CGColor];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -53,10 +55,62 @@
     }else {
         [loginButton setTitle:(@"Sign In")];
     }
+    
+    if ([[PFUser currentUser] sessionToken].length != 0) {
+        
+    PFQuery *query = [PFUser query];
+    [query whereKey:@"username" equalTo:[[PFUser currentUser] objectForKey:@"username"]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+     {
+         if (!error)
+         {
+             if (objects.count)
+             {
+                 for (PFObject *object in objects)
+                 {
+                     NSLog(@"ParseUser unique object ID: %@", object.objectId);
+                     
+                     PFQuery *query = [PFUser  query];
+                     [query whereKey:@"objectId" equalTo:object.objectId];
+                     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error)
+                      {
+                          if (!error)
+                          {
+                              NSMutableDictionary *counterDictionary = [object valueForKey:@"estimatedData"];
+                              int refrelCounter = [[counterDictionary objectForKey:@"inviteCounter"] intValue];
+                              
+                              if ( refrelCounter == 20 )
+                              {
+                                  //Setting the feature name,feature description values for cell view using plist
+                                  cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"You have sucessfully unlocked saved flyers feature by refreing friends.Enjoy!"];
+                                  
+                                  
+                              }else if ( refrelCounter <= 0 ){
+                                  cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to flyerly and unlock saved flyers feature for FREE!"];
+                              }
+                              else if ( refrelCounter > 0 && refrelCounter < 20 )
+                              {
+                                  int moreToInvite = 20 - refrelCounter;
+                                  //Setting the feature name,feature description values for cell view using plist
+                                  cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite %d more people to flyerly and unlock saved flyers feature for FREE!",moreToInvite];
+                                  
+                              }
+                              
+                              [freeFeaturesTview reloadData];
+                          }
+                      }];
+                 }
+             }
+         }
+     }];
+    }else {
+        
+        cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to flyerly and unlock saved flyers feature for FREE!"];
+    }
 }
 
 
-/* 
+/*
  * Here we hide the InAppViewController
  */
 -(IBAction)hideMe {
@@ -230,7 +284,7 @@
         NSArray *nib;
         if (inAppCell == nil) {
             if ( IS_IPHONE_5 || IS_IPHONE_4) {
-             nib = [[NSBundle mainBundle] loadNibNamed:@"InAppPurchaseCell" owner:self options:nil];
+                nib = [[NSBundle mainBundle] loadNibNamed:@"InAppPurchaseCell" owner:self options:nil];
             }else if ( IS_IPHONE_6 ) {
                 nib = [[NSBundle mainBundle] loadNibNamed:@"InAppPurchaseCell-iPhone6" owner:self options:nil];
             }
@@ -244,12 +298,10 @@
             [completeDesignBundleButton setTitle:@"Help us grow Flyerly!"];
             [completeDesignBundleButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
         }
-        
         //Setting the packagename,packageprice,packagedesciption values for cell view
         [inAppCell setCellValueswithProductTitle:[product objectForKey:@"packagename"] ProductPrice:[product objectForKey:@"packageprice"] ProductDescription:[product objectForKey:@"packagedesciption"]];
         
         [loadingIndicator stopAnimating];
-        
         return inAppCell;
     }else {
         
@@ -257,23 +309,34 @@
         FreeFeatureCell *freeFeatureCell = (FreeFeatureCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
         [freeFeatureCell setAccessoryType:UITableViewCellAccessoryNone];
         NSArray *nib;
-        if (freeFeatureCell == nil) {
-            if (IS_IPHONE_5 || IS_IPHONE_4){
+        if (freeFeatureCell == nil)
+        {
+            if (IS_IPHONE_5 || IS_IPHONE_4)
+            {
                 nib = [[NSBundle mainBundle] loadNibNamed:@"FreeFeatureCell" owner:self options:nil];
             }else if ( IS_IPHONE_6 ) {
                 nib = [[NSBundle mainBundle] loadNibNamed:@"FreeFeatureCell-iPhone6" owner:self options:nil];
             }
             freeFeatureCell = (FreeFeatureCell *)[nib objectAtIndex:0];
+            if ( indexPath.row == 6 )
+            {
+                NSDictionary *freeFeatuersDictionary = [freeFeaturesArray objectAtIndex:indexPath.row];
+                NSArray* freeFeatures = [freeFeatuersDictionary allKeys];
+                
+                [freeFeatureCell setCellValueswithProductTitle:freeFeatures[0] ProductDescription:cellDescriptionForRefrelFeature];
+            }else {
+                
+                NSDictionary *freeFeatuersDictionary = [freeFeaturesArray objectAtIndex:indexPath.row];
+                NSArray* freeFeatures = [freeFeatuersDictionary allKeys];
+                //Setting the feature name,feature description values for cell view using plist
+                [freeFeatureCell setCellValueswithProductTitle:freeFeatures[0] ProductDescription:[freeFeatuersDictionary objectForKey:freeFeatures[0]]];
+            }
+            
         }
-        
-        NSDictionary *freeFeatuersDictionary = [freeFeaturesArray objectAtIndex:indexPath.row];
-        NSArray* freeFeatures = [freeFeatuersDictionary allKeys];
-        //Setting the feature name,feature description values for cell view using plist
-        [freeFeatureCell setCellValueswithProductTitle:freeFeatures[0] ProductDescription:[freeFeatuersDictionary objectForKey:freeFeatures[0]]];
-        
         return freeFeatureCell;
     }
 }
+
 
 #pragma mark  PURCHASE PRODUCT
 
