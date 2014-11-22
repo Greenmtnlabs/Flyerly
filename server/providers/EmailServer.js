@@ -23,7 +23,7 @@ EmailServer.setup = function( app ) {
 		
 		//https://www.npmjs.org/package/mail-notifier
 		var notifier = require('mail-notifier');
-	
+		var inboxReader = null;
 		var acType = config.acType.GMAIL;
 		var allowedAcType = false;
 		var imap	=	{};
@@ -67,8 +67,8 @@ EmailServer.setup = function( app ) {
 		
 		if( allowedAcType == true){
 			var counter = 0;
-			notifier(imap)
-			.on('mail',function( res ) {
+			inboxReader = notifier(imap);
+			inboxReader.on('mail',function( res ) {
 				++counter;				
 				
 			    console.log( "mail.from:", res.from);
@@ -81,18 +81,21 @@ EmailServer.setup = function( app ) {
 
 				
 				console.log( {msg:"on mail, counter:"+counter} );		
-			})
-			.on('error',function( res ) {
+			});
+			
+			inboxReader.on('error',function( res ) {
 				console.log( {msg:"on error",  res: res} );
-			})
-			.on('end',function( res ) {
+			});
+			
+			inboxReader.on('end',function( res ) {
 				console.log( {msg:"on end",  res: res} );
-			})
-			.start();
+			});
+			
+			inboxReader.start();
 			
 			setTimeout(function(){
 				console.log("Stop listing after time");
-				notifier(imap).stop();
+				inboxReader.stop();
 			}, (5 * 1 * 1000) );	
 			
 		}
