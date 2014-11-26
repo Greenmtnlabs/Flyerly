@@ -60,6 +60,7 @@
 -(NSString *)getUniqueId;
 -(BOOL)initUntechableDirectory;
 -(NSMutableDictionary *)getUntechable:(int)count;
+-(BOOL)getAnyInCompleteUntechable;
 -(void)setOrSaveVars:(NSString *)setOrSAve;
 -(void)initWithDefValues;
 -(NSString *)timestampStrToAppDate:(NSString *)timeStamp;

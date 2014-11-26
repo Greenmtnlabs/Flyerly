@@ -378,7 +378,9 @@
     
     NSMutableDictionary *sUntechable; //Selected Untechable
     
-    if( NO && showThisUntechable > -1 ) {
+    BOOL anyIncompleteUntechable = [untechable getAnyInCompleteUntechable];
+    
+    if( anyIncompleteUntechable && showThisUntechable > -1 ) {
         sUntechable = [untechable getUntechable: showThisUntechable ];
 
         //Old Untechable going to edit, set the vars
