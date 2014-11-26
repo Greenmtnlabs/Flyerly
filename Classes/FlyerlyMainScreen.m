@@ -488,7 +488,7 @@ BOOL adLoaded = false;
 - (void)inAppPanelDismissed {
     
     //ios code for open this url in safari
-    NSURL *url = [NSURL URLWithString:@"http://riksof.com/es"];
+    NSURL *url = [NSURL URLWithString:@"http://app.flyerly.com/es"];
     [[UIApplication sharedApplication] openURL:url];
     
 }
