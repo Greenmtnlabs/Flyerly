@@ -346,7 +346,16 @@
     
 }
 
-
+/*
+ Variable we must need in model, for testing we can use these vars
+ */
+-(void) configureTestData
+{
+    untechable.userId   = TEST_UID;
+    //untechable.eventId = TEST_EID;
+    //untechable.twillioNumber = TEST_TWILLIO_NUM;
+    //untechable.twillioNumber = @"123";
+}
 
 #pragma mark -  Model funcs
 // set default vaules in model
@@ -369,30 +378,21 @@
         [self configureTestData];
     //For testing -------- } --
     
-    
-
     BOOL isNew = YES;
     BOOL goToThankyouScreen = NO;
     
     int showThisUntechable = 0;
     
-    NSMutableDictionary *sUntechable; //Selected Untechable
+    NSMutableDictionary *sUntechable = [untechable getAnyInCompleteUntechable]; //Selected Untechable
     
-    BOOL anyIncompleteUntechable = [untechable getAnyInCompleteUntechable];
-    
-    if( anyIncompleteUntechable && showThisUntechable > -1 ) {
-        sUntechable = [untechable getUntechable: showThisUntechable ];
-
-        //Old Untechable going to edit, set the vars
-        if( sUntechable != nil ){
-            isNew = NO;
-            
-            //Settings
-            untechable.uniqueId = sUntechable[@"uniqueId"];
-            untechable.untechablePath = sUntechable[@"untechablePath"];
-        }
+    //Old Untechable going to edit, set the vars
+    if( sUntechable != nil ){
+        isNew = NO;
+        
+        //Settings
+        untechable.uniqueId = sUntechable[@"uniqueId"];
+        untechable.untechablePath = sUntechable[@"untechablePath"];
     }
-    
     
     //New, set the vars
     if( isNew ){
@@ -426,17 +426,6 @@
     thankyouController = [[ThankyouController alloc]initWithNibName:@"ThankyouController" bundle:nil];
     thankyouController.untechable = untechable;
     [self.navigationController pushViewController:thankyouController animated:YES];
-}
-
-/*
- Variable we must need in model, for testing we can use these vars
- */
--(void) configureTestData
-{
-    untechable.userId   = TEST_UID;
-    //untechable.eventId = TEST_EID;
-    //untechable.twillioNumber = TEST_TWILLIO_NUM;
-    //untechable.twillioNumber = @"123";
 }
 
 #pragma mark -  UI functions

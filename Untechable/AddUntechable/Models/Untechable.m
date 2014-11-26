@@ -320,9 +320,47 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 }
 
 /*
+ * Here we get the dictionary of dictionaries of saved untechable
+ */
+- ( NSMutableArray * )getAllUntechables
+{
+
+    NSMutableArray *totalUntechables = [[NSMutableArray alloc] init];
+    NSMutableDictionary *retDic;
+    NSString *userPath = [self getUserPath];
+    
+    //List of folder names create for this userid
+    NSArray *UntechablesList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:userPath error:nil];
+    //sort list
+    NSArray *sortedList = [UntechablesList sortedArrayUsingFunction:compareDesc context:NULL];
+    
+    NSString *uniqueId_temp,*untechablePath_temp;
+    
+    for(int i = 0 ; i < sortedList.count ;i++)
+    {
+        uniqueId_temp = sortedList[i];
+        untechablePath_temp = [NSString stringWithFormat:@"%@/%@",userPath,uniqueId_temp];
+        
+        retDic =   [[NSMutableDictionary alloc] init];
+        
+        //Checking For Integer Dir Names Only
+        if ([[NSScanner scannerWithString:uniqueId_temp] scanInt:nil]) {
+            NSString *piecesF =[untechablePath_temp stringByAppendingString:[NSString stringWithFormat:@"/%@", PIECES_FILE]];
+            retDic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesF];
+            [retDic setValue:uniqueId_temp forKey:@"uniqueId"];
+            [retDic setValue:untechablePath_temp forKey:@"untechablePath"];
+        }
+        
+        [totalUntechables addObject:retDic];
+    }
+    return totalUntechables;
+}
+
+
+/*
  * Here we get the dictionary of saved untechable
  */
-- ( BOOL )getAnyInCompleteUntechable
+- ( NSMutableDictionary * )getAnyInCompleteUntechable
 {
     NSMutableDictionary *retDic;
     NSString *userPath = [self getUserPath];
@@ -339,29 +377,23 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         uniqueId_temp = sortedList[i];
         untechablePath_temp = [NSString stringWithFormat:@"%@/%@",userPath,uniqueId_temp];
         
+        retDic =   [[NSMutableDictionary alloc] init];
         
-            retDic =   [[NSMutableDictionary alloc] init];
+        //Checking For Integer Dir Names Only
+        if ([[NSScanner scannerWithString:uniqueId_temp] scanInt:nil]) {
+            NSString *piecesF =[untechablePath_temp stringByAppendingString:[NSString stringWithFormat:@"/%@", PIECES_FILE]];
+            retDic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesF];
+            BOOL isFinished = [[retDic objectForKey:@"hasFinished"] boolValue];
+            [retDic setValue:uniqueId_temp forKey:@"uniqueId"];
+            [retDic setValue:untechablePath_temp forKey:@"untechablePath"];
             
-            //Checking For Integer Dir Names Only
-            if ([[NSScanner scannerWithString:uniqueId_temp] scanInt:nil]) {
-                NSString *piecesF =[untechablePath_temp stringByAppendingString:[NSString stringWithFormat:@"/%@", PIECES_FILE]];
-                retDic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesF];
-                BOOL isFinished = [retDic objectForKey:@"hasFinished"];
-                [retDic setValue:uniqueId_temp forKey:@"uniqueId"];
-                [retDic setValue:untechablePath_temp forKey:@"untechablePath"];
-                
-                if ( isFinished == NO ){
-                    return NO;
-                }
-                //[retDic setValue:[NSString stringWithFormat:@"%@/%@%@", untechablePath_temp,uniqueId_temp,REC_FORMATE] forKey:@"recFileURL"];
-                
+            if ( isFinished == NO ){
+                return retDic;
             }
-            
-       
+            //[retDic setValue:[NSString stringWithFormat:@"%@/%@%@", untechablePath_temp,uniqueId_temp,REC_FORMATE] forKey:@"recFileURL"];
+        }
     }
-    
-        
-    return NO;
+    return nil;
 }
 
 

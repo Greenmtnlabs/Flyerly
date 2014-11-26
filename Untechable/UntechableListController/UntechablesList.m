@@ -11,7 +11,10 @@
 #import "AddUntechableController.h"
 #import "Common.h"
 
-@interface UntechablesList ()
+@interface UntechablesList () {
+    
+    NSMutableArray *allUntechables;
+}
 
 @end
 
@@ -97,13 +100,45 @@
     [self.navigationController pushViewController:addUntechable animated:YES];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+/*
+ Variable we must need in model, for testing we can use these vars
+ */
+-(void) configureTestData
+{
+    untechable.userId   = TEST_UID;
+    //untechable.eventId = TEST_EID;
+    //untechable.twillioNumber = TEST_TWILLIO_NUM;
+    //untechable.twillioNumber = @"123";
+}
+
+#pragma mark -  Model funcs
+// set default vaules in model
+-(void)setDefaultModel{
     
     //init object
     untechable  = [[Untechable alloc] init];
     untechable.commonFunctions = [[CommonFunctions alloc] init];
+    
+    //For testing -------- { --
+    [self configureTestData];
+    //For testing -------- } --
+    
+    allUntechables = untechable.getAllUntechables;
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [self setDefaultModel];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+    
+   
+    
+    
     
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
@@ -137,7 +172,7 @@
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return  10;
+    return  allUntechables.count;
 }
 /*
 #pragma mark - Navigation
