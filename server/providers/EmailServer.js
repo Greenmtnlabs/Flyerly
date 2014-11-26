@@ -29,6 +29,7 @@ EmailServer.setup = function( app ) {
 	
 	/*
 	Hook inbox reader event till @stopListiningStrTime	
+	@param user == email address
 	*/
 	
 	function hookInboxReader( user, password, respondingEmail, stopListiningStrTime ) {
@@ -38,7 +39,7 @@ EmailServer.setup = function( app ) {
 		//https://www.npmjs.org/package/mail-notifier
 		var notifier = require('mail-notifier');
 		var inboxReader = null;
-		var acType = config.acType.GMAIL;
+		var acType = getEmailAcType( user ); //config.acType.GMAIL;
 		var allowedAcType = false;
 		var imap	=	{};
 		
@@ -127,7 +128,27 @@ EmailServer.setup = function( app ) {
 			}, stopListiningStrTime );
 			
 		}
+		
 	}//end fn//
+	
+	/*
+	return a/c type
+	*/
+	function getEmailAcType( email ) {
+		var acType = "";
+		
+		if( email.indexOf("@gmail.com") > -1 ) {
+			acType = config.acType.GMAIL;
+		}
+		else if( email.indexOf("@hotmail.com") > -1 ) {
+			acType = config.acType.HOTMAIL;			
+		}
+		else if( email.indexOf("@yahoo.com") > -1 ) {
+			acType = config.acType.YAHOO;			
+		}
+		
+		return acType;
+	}
 	
 	/*
 	var stopListiningStrTime = (1 * 60 * 1000);
@@ -164,7 +185,7 @@ EmailServer.setup = function( app ) {
 			if (err) {
 	            logMsg("line:"+__line+", EmailServer.js err: "+err);
 	        }
-	        else{
+	        else {
 	            logMsg( {line:__line, eventsLength:events.length} );
 				
 				G_EVENTS = [];
@@ -189,12 +210,11 @@ EmailServer.setup = function( app ) {
 					var stopListiningStrTime = (50 * 60 * 1000); //50 minutes
 					hookInboxReader( G_EVENTS[i].email, G_EVENTS[i].password, G_EVENTS[i].respondingEmail, stopListiningStrTime );
 				}
-				
-				
 	        }
 	    });
 		
 	}//end fn//
+	
 	
 	startInboxReaderCronjob();
 	//Cron job will restart after every 1 hour( 60min )
@@ -203,5 +223,9 @@ EmailServer.setup = function( app ) {
 	}, (60 * 60 * 1000) );	
 	
 	
+	/*
+	var emailTest = "abdul.rauf@hotmail.com";
+	console.log( "Email("+emailTest+") = " + getEmailAcType( emailTest ) );
+	*/
 	    
 }
