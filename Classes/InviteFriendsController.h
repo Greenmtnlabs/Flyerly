@@ -45,6 +45,8 @@
     SHKSharer *iosSharer;
 }
 
+@property(nonatomic,strong) IBOutlet UILabel *refrelText;
+
 @property(nonatomic,strong) IBOutlet UIButton *contactsButton;
 @property(nonatomic,strong) IBOutlet UIButton *facebookButton;
 @property(nonatomic,strong) IBOutlet UIButton *twitterButton;

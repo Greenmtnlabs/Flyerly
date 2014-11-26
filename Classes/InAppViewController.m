@@ -79,7 +79,7 @@
                               NSMutableDictionary *counterDictionary = [object valueForKey:@"estimatedData"];
                               int refrelCounter = [[counterDictionary objectForKey:@"inviteCounter"] intValue];
                               
-                              if ( refrelCounter == 20 )
+                              if ( refrelCounter >= 20 )
                               {
                                   //Setting the feature name,feature description values for cell view using plist
                                   cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"You have sucessfully unlocked saved flyers feature by refreing friends.Enjoy!"];

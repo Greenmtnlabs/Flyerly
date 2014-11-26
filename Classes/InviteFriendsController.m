@@ -20,9 +20,10 @@
 
     NSString *userUniqueObjectId;
     FlyerlyConfigurator *flyerConfigurator;
+    NSString *cellDescriptionForRefrelFeature;
 }
 @synthesize uiTableView, contactsArray, selectedIdentifiers,contactsButton, facebookButton, twitterButton,  searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited;
-@synthesize contactBackupArray, facebookBackupArray, twitterBackupArray;
+@synthesize contactBackupArray, facebookBackupArray, twitterBackupArray,refrelText;
 @synthesize fbText;
 
 const int TWITTER_TAB = 2;
@@ -86,6 +87,58 @@ const int CONTACTS_TAB = 0;
     
     [self.uiTableView  setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
     [searchTextField setReturnKeyType:UIReturnKeyDone];
+    
+    if ([[PFUser currentUser] sessionToken].length != 0) {
+        
+        PFQuery *query = [PFUser query];
+        [query whereKey:@"username" equalTo:[[PFUser currentUser] objectForKey:@"username"]];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+         {
+             if (!error)
+             {
+                 if (objects.count)
+                 {
+                     for (PFObject *object in objects)
+                     {
+                         NSLog(@"ParseUser unique object ID: %@", object.objectId);
+                         
+                         PFQuery *query = [PFUser  query];
+                         [query whereKey:@"objectId" equalTo:object.objectId];
+                         [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error)
+                          {
+                              if (!error)
+                              {
+                                  NSMutableDictionary *counterDictionary = [object valueForKey:@"estimatedData"];
+                                  int refrelCounter = [[counterDictionary objectForKey:@"inviteCounter"] intValue];
+                                  
+                                  if ( refrelCounter >= 20 )
+                                  {
+                                      //Setting the feature name,feature description values for cell view using plist
+                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"You have sucessfully unlocked saved flyers feature by refreing friends.Enjoy!"];
+                                      
+                                  }else if ( refrelCounter <= 0 ){
+                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to flyerly and unlock saved flyers feature for FREE!"];
+                                  }
+                                  else if ( refrelCounter > 0 && refrelCounter < 20 )
+                                  {
+                                      int moreToInvite = 20 - refrelCounter;
+                                      //Setting the feature name,feature description values for cell view using plist
+                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite %d more people to flyerly and unlock saved flyers feature for FREE!",moreToInvite];
+                                      
+                                  }
+                                  
+                                  [refrelText setText:cellDescriptionForRefrelFeature];
+                            }
+                          }];
+                     }
+                 }
+             }
+         }];
+    }else {
+        
+        cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to flyerly and unlock saved flyers feature for FREE!"];
+    }
+    
     
     
     if ( [[PFUser currentUser] sessionToken].length != 0 )
