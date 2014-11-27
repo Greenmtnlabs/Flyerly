@@ -15,6 +15,8 @@
 
 @interface AddUntechableController (){
     
+    
+    
 }
 
 
@@ -381,9 +383,7 @@
     BOOL isNew = YES;
     BOOL goToThankyouScreen = NO;
     
-    int showThisUntechable = 0;
-    
-    NSMutableDictionary *sUntechable = [untechable getAnyInCompleteUntechable]; //Selected Untechable
+    NSMutableDictionary *sUntechable = [untechable.commonFunctions getAnyInCompleteUntechable:untechable.userId];
     
     //Old Untechable going to edit, set the vars
     if( sUntechable != nil ){

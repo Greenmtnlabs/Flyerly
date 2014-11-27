@@ -52,15 +52,15 @@
      NSLog(@"\n\n  DATE: %@ \n\n\n", date);
      */
     
-    defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
-    defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
-    
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
 }
 
 -(void)setNavigation:(NSString *)callFrom
 {
+    defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
+    defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
+    
     if([callFrom isEqualToString:@"viewDidLoad"])
     {
         self.navigationItem.hidesBackButton = YES;
@@ -123,22 +123,21 @@
     [self configureTestData];
     //For testing -------- } --
     
-    allUntechables = untechable.getAllUntechables;
+    allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
     
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     
-    [self setDefaultModel];
+    
+    untechablesTable.separatorInset = UIEdgeInsetsZero;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-   
-    
-    
+    [self setDefaultModel];
     
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
@@ -159,6 +158,13 @@
         
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"UntechableTableCell" owner:self options:nil];
         cell = (UntechableTableCell *)[nib objectAtIndex:0];
+        NSMutableDictionary *tempDict = [allUntechables objectAtIndex:indexPath.row];
+        
+        //Setting the packagename,packageprice,packagedesciption values for cell view
+        [cell setCellValueswithUntechableTitle:[tempDict objectForKey:@"spendingTimeTxt"]
+                                  StartDate:[tempDict objectForKey:@"startDate"]
+                                  EndDate:[tempDict objectForKey:@"endDate"]];
+        
     }
     
     return cell;

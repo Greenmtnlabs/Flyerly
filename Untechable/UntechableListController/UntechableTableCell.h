@@ -10,7 +10,10 @@
 
 @interface UntechableTableCell : UITableViewCell
 
-@property (nonatomic,strong)IBOutlet UILabel *title;
-@property (nonatomic,strong)IBOutlet UILabel *description;
+@property (nonatomic,strong)IBOutlet UILabel *untechableTitle;
+@property (nonatomic,strong)IBOutlet UILabel *untechableStartDate;
+@property (nonatomic,strong)IBOutlet UILabel *untechableEndDate;
+
+-(void)setCellValueswithUntechableTitle :(NSString *)title StartDate:(NSString *)startDate EndDate: (NSString *)endDate;
 
 @end
