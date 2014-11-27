@@ -24,7 +24,7 @@
 -(NSDate *)timestampStrToNsDate:(NSString *)timeStamp;
 -(NSString *)timestampStrToAppDate:(NSString *)timeStamp;
 - (BOOL)date1IsSmallerThenDate2:(NSDate *)date1 date2:(NSDate *)date2;
-
+- ( NSMutableDictionary * )getAnyInCompleteUntechable;
 -(UIImageView *) navigationGetTitleView;
 -(NSDate *)getDate:(NSString *)callFor;
 //fb988650031150166

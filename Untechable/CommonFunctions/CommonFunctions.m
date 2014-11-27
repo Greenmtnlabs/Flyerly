@@ -104,6 +104,45 @@
     return  [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
 }
 
+/*
+ * Here we get the dictionary of saved untechable
+ */
+- ( NSMutableDictionary * )getAnyInCompleteUntechable
+{
+    NSMutableDictionary *retDic;
+    NSString *userPath = [self getUserPath];
+    
+    //List of folder names create for this userid
+    NSArray *UntechablesList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:userPath error:nil];
+    //sort list
+    NSArray *sortedList = [UntechablesList sortedArrayUsingFunction:compareDesc context:NULL];
+    
+    NSString *uniqueId_temp,*untechablePath_temp;
+    
+    for(int i = 0 ; i < sortedList.count ;i++)
+    {
+        uniqueId_temp = sortedList[i];
+        untechablePath_temp = [NSString stringWithFormat:@"%@/%@",userPath,uniqueId_temp];
+        
+        retDic =   [[NSMutableDictionary alloc] init];
+        
+        //Checking For Integer Dir Names Only
+        if ([[NSScanner scannerWithString:uniqueId_temp] scanInt:nil]) {
+            NSString *piecesF =[untechablePath_temp stringByAppendingString:[NSString stringWithFormat:@"/%@", PIECES_FILE]];
+            retDic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesF];
+            BOOL isFinished = [[retDic objectForKey:@"hasFinished"] boolValue];
+            [retDic setValue:uniqueId_temp forKey:@"uniqueId"];
+            [retDic setValue:untechablePath_temp forKey:@"untechablePath"];
+            
+            if ( isFinished == NO ){
+                return retDic;
+            }
+            //[retDic setValue:[NSString stringWithFormat:@"%@/%@%@", untechablePath_temp,uniqueId_temp,REC_FORMATE] forKey:@"recFileURL"];
+        }
+    }
+    return nil;
+}
+
 - (BOOL)date1IsSmallerThenDate2:(NSDate *)date1 date2:(NSDate *)date2
 {
     NSTimeInterval distanceBetweenDates = [date1 timeIntervalSinceDate:date2];
