@@ -10,8 +10,6 @@
 #import "CommonFunctions.h"
 #import "Common.h"
 
-
-
 @implementation CommonFunctions
 
 
@@ -105,17 +103,80 @@
 }
 
 /*
- * Here we get the dictionary of saved untechable
+ *Here we sort Array in Desending order for Exact Render of Flyer
+ * as last saved.
  */
-- ( NSMutableDictionary * )getAnyInCompleteUntechable
+NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
+    
+    // Convert both strings to integers
+    long long intLeft = [stringLeft longLongValue];
+    long long intRight = [stringRight longLongValue];
+    
+    if (intLeft < intRight)
+        return NSOrderedDescending;
+    else if (intLeft > intRight)
+        return NSOrderedAscending;
+    else
+        return NSOrderedSame;
+}
+
+/*
+ * Here we get the dictionary of dictionaries of saved untechable
+ */
+- ( NSMutableArray * )getAllUntechables :(NSString *)userId
 {
+    
+    NSMutableArray *totalUntechables = [[NSMutableArray alloc] init];
     NSMutableDictionary *retDic;
-    NSString *userPath = [self getUserPath];
+    NSString *userPath = [self getUserPath:userId];
     
     //List of folder names create for this userid
     NSArray *UntechablesList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:userPath error:nil];
     //sort list
-    NSArray *sortedList = [UntechablesList sortedArrayUsingFunction:compareDesc context:NULL];
+    NSArray *sortedList = [UntechablesList sortedArrayUsingFunction:compareDesc_ context:NULL];
+    
+    NSString *uniqueId_temp,*untechablePath_temp;
+    
+    for(int i = 0 ; i < sortedList.count ;i++)
+    {
+        uniqueId_temp = sortedList[i];
+        untechablePath_temp = [NSString stringWithFormat:@"%@/%@",userPath,uniqueId_temp];
+        
+        retDic =   [[NSMutableDictionary alloc] init];
+        
+        //Checking For Integer Dir Names Only
+        if ([[NSScanner scannerWithString:uniqueId_temp] scanInt:nil]) {
+            NSString *piecesF =[untechablePath_temp stringByAppendingString:[NSString stringWithFormat:@"/%@", PIECES_FILE]];
+            retDic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesF];
+            [retDic setValue:uniqueId_temp forKey:@"uniqueId"];
+            [retDic setValue:untechablePath_temp forKey:@"untechablePath"];
+        }
+        
+        [totalUntechables addObject:retDic];
+    }
+    return totalUntechables;
+}
+
+-(NSString *)getUserPath :userId
+{
+    //Getting Home Directory
+    NSString *homeDirectoryPath = NSHomeDirectory();
+    return [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Untechable",userId]];
+}
+
+
+/*
+ * Here we get the dictionary of saved untechable
+ */
+- ( NSMutableDictionary * )getAnyInCompleteUntechable :(NSString *)userId
+{
+    NSMutableDictionary *retDic;
+    NSString *userPath = [self getUserPath:userId];
+    
+    //List of folder names create for this userid
+    NSArray *UntechablesList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:userPath error:nil];
+    //sort list
+    NSArray *sortedList = [UntechablesList sortedArrayUsingFunction:compareDesc_ context:NULL];
     
     NSString *uniqueId_temp,*untechablePath_temp;
     

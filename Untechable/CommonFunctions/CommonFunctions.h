@@ -23,8 +23,10 @@
 -(NSString *)nsDateToTimeStampStr:(NSDate *)inpDate;
 -(NSDate *)timestampStrToNsDate:(NSString *)timeStamp;
 -(NSString *)timestampStrToAppDate:(NSString *)timeStamp;
+-( NSMutableArray * )getAllUntechables :(NSString *)userId;
 - (BOOL)date1IsSmallerThenDate2:(NSDate *)date1 date2:(NSDate *)date2;
-- ( NSMutableDictionary * )getAnyInCompleteUntechable;
+- ( NSMutableDictionary * )getAnyInCompleteUntechable :(NSString *)userId;
+-(NSString *)getUserPath :(NSString *)userId;
 -(UIImageView *) navigationGetTitleView;
 -(NSDate *)getDate:(NSString *)callFor;
 //fb988650031150166
