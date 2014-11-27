@@ -17,6 +17,8 @@
  
 }
 
+@property (strong, nonatomic) IBOutlet UIView *emailSetting1;
+@property (strong, nonatomic) IBOutlet UIView *emailSetting2;
 
 @property (strong, nonatomic) IBOutlet UILabel *lbl1;
 @property (strong, nonatomic) IBOutlet UITextField *inputEmail;
@@ -464,6 +466,34 @@
          */
     }
 
+}
+
+- (IBAction)showEmailSettings1:(id)sender {
+    
+    [UIView transitionWithView:self.view duration:0.5
+                       options:UIViewAnimationOptionTransitionCurlUp //change to whatever animation you like
+                    animations:^ { [self.view addSubview:_emailSetting1]; }
+                    completion:^(BOOL finished){
+                        [self hideAllViewExcept:_emailSetting1];
+                    }];
+    
+}
+
+- (IBAction)showEmailSettings2:(id)sender {
+    [UIView transitionWithView:self.view duration:0.5
+                       options:UIViewAnimationOptionTransitionCurlUp //change to whatever animation you like
+                    animations:^ { [self.view addSubview:_emailSetting2]; }
+                    completion:^(BOOL finished){
+                        [self hideAllViewExcept:_emailSetting2];
+                    }];
+    
+}
+
+
+-(void)hideAllViewExcept:(UIView *)viewName{
+    //_emailSetting1.alpha = 0.0;
+    _emailSetting2.alpha = 0.0;
+     viewName.alpha = 1.0;
 }
 
 @end
