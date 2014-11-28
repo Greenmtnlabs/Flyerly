@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Untechable.h"
 #import "BSKeyboardControls.h"
-@interface EmailSettingController : UIViewController < UITextFieldDelegate , BSKeyboardControlsDelegate >
+@interface EmailSettingController :UIViewController <UITableViewDelegate,UITableViewDataSource, UITextFieldDelegate , BSKeyboardControlsDelegate >
 {
     UILabel *titleLabel;
     UIButton *helpButton;

@@ -17,8 +17,12 @@
  
 }
 
+@property (strong, nonatomic) IBOutlet UIView *emailSetting;
 @property (strong, nonatomic) IBOutlet UIView *emailSetting1;
 @property (strong, nonatomic) IBOutlet UIView *emailSetting2;
+
+@property (strong, nonatomic) IBOutlet UITableView *tableView0;
+
 
 @property (strong, nonatomic) IBOutlet UILabel *lbl1;
 @property (strong, nonatomic) IBOutlet UITextField *inputEmail;
@@ -27,6 +31,10 @@
 @property (strong, nonatomic) IBOutlet UITextField *inputMsg;
 
 @property (nonatomic, strong) BSKeyboardControls *keyboardControls;
+
+
+@property (strong, nonatomic) NSMutableArray *table01Data;
+
 @end
 
 @implementation EmailSettingController
@@ -50,7 +58,9 @@
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
     
-    //[self setDefaultModel];
+    [self setDefaultModel];
+    
+    //[self.view addSubview:_emailSetting1];
     
     NSArray *fields = @[ self.inputEmail, self.inputPassword, self.inputMsg ];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
@@ -85,6 +95,16 @@
     return NO;
 }
 // ________________________     Custom functions    ___________________________
+
+- (void)setDefaultModel {
+    _table01Data = [[NSMutableArray alloc] init];
+    [_table01Data addObject:@{@"type":@"image", @"imgPath":@"playvideo.png", @"text":@""}];
+    [_table01Data addObject:@{@"type":@"image", @"imgPath":@"copy@2x.png", @"text":@""}];
+    [_table01Data addObject:@{@"type":@"image", @"imgPath":@"copy_selected@2x.png", @"text":@""}];
+    [_table01Data addObject:@{@"type":@"image", @"imgPath":@"pause.png", @"text":@""}];
+    [_table01Data addObject:@{@"type":@"font", @"imgPath":@"player.png", @"text":@"Other"}];
+}
+
 
 #pragma mark - Text Field Delegate
 
@@ -469,31 +489,91 @@
 }
 
 - (IBAction)showEmailSettings1:(id)sender {
-    
+    [self hideAllViews];
     [UIView transitionWithView:self.view duration:0.5
                        options:UIViewAnimationOptionTransitionCurlUp //change to whatever animation you like
                     animations:^ { [self.view addSubview:_emailSetting1]; }
                     completion:^(BOOL finished){
-                        [self hideAllViewExcept:_emailSetting1];
+                        
                     }];
     
 }
 
 - (IBAction)showEmailSettings2:(id)sender {
+    [self hideAllViews];
     [UIView transitionWithView:self.view duration:0.5
                        options:UIViewAnimationOptionTransitionCurlUp //change to whatever animation you like
                     animations:^ { [self.view addSubview:_emailSetting2]; }
                     completion:^(BOOL finished){
-                        [self hideAllViewExcept:_emailSetting2];
+                        
                     }];
     
 }
 
 
--(void)hideAllViewExcept:(UIView *)viewName{
-    //_emailSetting1.alpha = 0.0;
-    _emailSetting2.alpha = 0.0;
-     viewName.alpha = 1.0;
+-(void)hideAllViews {
+    [_emailSetting1 removeFromSuperview];
+    [_emailSetting2 removeFromSuperview];
 }
 
+
+//3
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    int count = 0;
+    
+    if( tableView == _tableView0 )
+    count = _table01Data.count;
+    
+    return count;
+}
+//4
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    UITableViewCell *cell = nil;
+    
+    if( tableView == _tableView0 ){
+
+        //5
+        static NSString *cellIdentifier = @"SettingsCell";
+        
+        //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        
+
+        //5.1 you do not need this if you have set SettingsCell as identifier in the storyboard (else you can remove the comments on this code)
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+        }
+        //    [_table01Data addObject:@{@"type":@"font", @"imgPath":@"player.png", @"text":@"Other"}];
+        //6
+        NSString *name = [[_table01Data objectAtIndex:0] objectForKey:@"imgPath"];
+        NSString *number = [[_table01Data objectAtIndex:0] objectForKey:@"type"];
+        //7
+        [cell.textLabel setText:name];
+        cell.textLabel.textColor = defGreen;
+
+        [cell.detailTextLabel setText:number];
+        cell.detailTextLabel.textColor = defGray;
+    }
+    return cell;
+}
+
+
+//Allow cell editing(swip to delete)
+// Override to support editing the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return YES if you want the specified item to be editable.
+    return YES;
+}
+
+/*
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    //add code here for when you hit delete
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+    }
+}
+*/
 @end

@@ -6,15 +6,34 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EmailSettingController">
             <connections>
+                <outlet property="emailSetting" destination="OA0-Wl-vT8" id="U7a-pk-EJs"/>
                 <outlet property="emailSetting1" destination="4BN-QU-EB1" id="nbF-x3-gIJ"/>
                 <outlet property="emailSetting2" destination="i5M-Pr-FkT" id="4HB-jF-784"/>
                 <outlet property="inputEmail" destination="4Nx-Wa-ZGM" id="JNJ-Io-ehW"/>
                 <outlet property="inputMsg" destination="nxd-oi-JaX" id="jFG-FP-FSa"/>
                 <outlet property="inputPassword" destination="ZpQ-vi-fsS" id="hYH-et-j6q"/>
                 <outlet property="lbl1" destination="N8V-KY-mds" id="vWD-l9-CsJ"/>
-                <outlet property="view" destination="4BN-QU-EB1" id="6Xu-oR-g7C"/>
+                <outlet property="tableView0" destination="pKm-lx-afA" id="lQI-5a-PEb"/>
+                <outlet property="view" destination="OA0-Wl-vT8" id="m35-bH-ptT"/>
             </connections>
         </placeholder>
+        <view contentMode="scaleToFill" id="OA0-Wl-vT8" userLabel="View - emailSetting">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="pKm-lx-afA">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Y3d-3b-z9K"/>
+                        <outlet property="delegate" destination="-1" id="hsR-pC-f5D"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+        </view>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="4BN-QU-EB1" userLabel="View - emailSetting1">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -68,6 +87,9 @@
                     <state key="normal" title="Button">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="showEmailSettings1:" destination="-1" eventType="touchUpInside" id="cFt-eb-I0W"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
