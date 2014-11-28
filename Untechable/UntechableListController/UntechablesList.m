@@ -160,10 +160,23 @@
         cell = (UntechableTableCell *)[nib objectAtIndex:0];
         NSMutableDictionary *tempDict = [allUntechables objectAtIndex:indexPath.row];
         
+        NSDate *startDate = [untechable.commonFunctions timestampStrToNsDate:[tempDict objectForKey:@"startDate"]];
+        NSDateFormatter *_formatter=[[NSDateFormatter alloc]init];
+        [_formatter setLocale:[NSLocale currentLocale]];
+        [_formatter setDateFormat:@"dd.MM.yyyy"];
+        NSString *startDateAsString = [_formatter stringFromDate:startDate];
+        
+
+        NSDate *endDate = [untechable.commonFunctions timestampStrToNsDate:[tempDict objectForKey:@"endDate"]];
+        NSDateFormatter *__formatter=[[NSDateFormatter alloc]init];
+        [__formatter setLocale:[NSLocale currentLocale]];
+        [__formatter setDateFormat:@"dd.MM.yyyy"];
+        NSString *endDateAsString = [_formatter stringFromDate:endDate];
+        
         //Setting the packagename,packageprice,packagedesciption values for cell view
         [cell setCellValueswithUntechableTitle:[tempDict objectForKey:@"spendingTimeTxt"]
-                                  StartDate:[tempDict objectForKey:@"startDate"]
-                                  EndDate:[tempDict objectForKey:@"endDate"]];
+                                  StartDate:startDateAsString
+                                  EndDate:endDateAsString];
         
     }
     

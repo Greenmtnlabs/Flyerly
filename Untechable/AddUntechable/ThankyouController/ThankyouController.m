@@ -9,6 +9,7 @@
 #import "ThankyouController.h"
 #import "AddUntechableController.h"
 #import "Common.h"
+#import "UntechablesList.h"
 
 @interface ThankyouController ()
 
@@ -60,27 +61,27 @@
 
 
 - (IBAction)onNew:(id)sender {
-    untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*2)] ]; //current time +2MIN
+    /*untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*2)] ]; //current time +2MIN
     untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*120)] ]; //current time +2hr
 
-    untechable.paid = NO;
+    untechable.paid = NO;*/
     
-    [self goToAddUntechableScreen];
+    [self goToUntechablesTableScreen];
 }
 
--(void)goToAddUntechableScreen{
+-(void)goToUntechablesTableScreen{
     
-    untechable.savedOnServer    = NO;
-    [untechable setOrSaveVars:SAVE];
+    /*untechable.savedOnServer    = NO;
+    [untechable setOrSaveVars:SAVE];*/
     
-    AddUntechableController *addUntechableController;
-    addUntechableController = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
-    [self.navigationController pushViewController:addUntechableController animated:YES];    
+    UntechablesList *untechableTableController;
+    untechableTableController = [[UntechablesList alloc]initWithNibName:@"UntechablesList" bundle:nil];
+    [self.navigationController pushViewController:untechableTableController animated:YES];
     
 }
 
 - (IBAction)onEdit:(id)sender {
-    [self goToAddUntechableScreen];
+    [self goToUntechablesTableScreen];
 }
 
 
@@ -185,7 +186,7 @@
             startNewUntechable = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
             [startNewUntechable addTarget:self action:@selector(onNew:) forControlEvents:UIControlEventTouchUpInside];
             startNewUntechable.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-            [startNewUntechable setTitle:@"NEW" forState:normal];
+            [startNewUntechable setTitle:@"HOME" forState:normal];
             [startNewUntechable setTitleColor:defGray forState:UIControlStateNormal];
             startNewUntechable.showsTouchWhenHighlighted = YES;
             
