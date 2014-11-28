@@ -25,10 +25,11 @@
     UIColor *defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
     UIColor *defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
     
-    
-    
+    untechableTitle.font = [UIFont fontWithName:APP_FONT size:22];
     untechableTitle.text = title;
+    untechableStartDate.font = [UIFont fontWithName:APP_FONT size:14];
     untechableStartDate.text = startDate;
+    untechableEndDate.font = [UIFont fontWithName:APP_FONT size:14];
     untechableEndDate.text = endDate;
 }
 
