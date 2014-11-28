@@ -10,10 +10,12 @@
 #import "UntechableTableCell.h"
 #import "AddUntechableController.h"
 #import "Common.h"
+#import "Untechable.h"
 
 @interface UntechablesList () {
     
     NSMutableArray *allUntechables;
+    
 }
 
 @end

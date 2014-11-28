@@ -177,20 +177,21 @@
         // Center title __________________________________________________
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
 
-        // Back Navigation button
-        
-        backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-        backButton.titleLabel.shadowColor = [UIColor clearColor];
-        backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [backButton setTitle:TITLE_BACK_TXT forState:normal];
-        [backButton setTitleColor:defGray forState:UIControlStateNormal];
-        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
-        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-        backButton.showsTouchWhenHighlighted = YES;
-        
-        UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-        
-        [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+        if ( [untechable.commonFunctions getAllUntechables:untechable.userId].count > 0 ) {
+            // Back Navigation button
+            backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+            backButton.titleLabel.shadowColor = [UIColor clearColor];
+            backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+            [backButton setTitle:TITLE_BACK_TXT forState:normal];
+            [backButton setTitleColor:defGray forState:UIControlStateNormal];
+            [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
+            [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+            backButton.showsTouchWhenHighlighted = YES;
+            
+            UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+            
+            [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+        }
         
         // Right Navigation ______________________________________________
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
