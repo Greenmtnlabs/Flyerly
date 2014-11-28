@@ -40,7 +40,14 @@ FlyerlyServer.setup = function( app ) {
 			//req.session.invitee = parseInt(Math.random()*9999999); //current user dummy id
 			req.session.inviterObjectId = ""+req.query.i+""; //User id who has invited this current user
 			
-			res.redirect( config.url.download );
+			//res.redirect( config.url.download );
+			
+			res.jsonp({"Chk session1 , __line":__line, "session":req.session});
+	});
+	
+	
+	app.get('/chks', function( req, res ) {
+		res.jsonp({"Chk session , __line":__line, "session":req.session});
 	});
 
 
