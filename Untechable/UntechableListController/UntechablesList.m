@@ -10,10 +10,12 @@
 #import "UntechableTableCell.h"
 #import "AddUntechableController.h"
 #import "Common.h"
+#import "Untechable.h"
 
 @interface UntechablesList () {
     
     NSMutableArray *allUntechables;
+    
 }
 
 @end
@@ -162,8 +164,8 @@
         
         //Setting the packagename,packageprice,packagedesciption values for cell view
         [cell setCellValueswithUntechableTitle:[tempDict objectForKey:@"spendingTimeTxt"]
-                                  StartDate:[tempDict objectForKey:@"startDate"]
-                                  EndDate:[tempDict objectForKey:@"endDate"]];
+                                  StartDate:[untechable.commonFunctions timestampStrToAppDate:[tempDict objectForKey:@"startDate"]]
+                                  EndDate:[untechable.commonFunctions timestampStrToAppDate:[tempDict objectForKey:@"endDate"]]];
         
     }
     
@@ -172,14 +174,58 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    if ( indexPath.section == 0 ){
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        [alert show];
+    }
 
 }
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return  allUntechables.count;
+    NSDate *currDate = [NSDate date];
+    int upcomingUntechable = 0;
+    int archiveUntechable = 0;
+    
+    for (int i=0 ; i < allUntechables.count ; i++){
+        NSMutableDictionary *tempDict = [allUntechables objectAtIndex:i];
+        
+        NSDate *startDate = [untechable.commonFunctions timestampStrToNsDate:[tempDict objectForKey:@"startDate"]];
+        if ( [untechable.commonFunctions date1IsSmallerThenDate2:startDate date2:currDate] ){
+            upcomingUntechable++;
+        }else{
+            archiveUntechable++;
+        }
+    }
+    int count;
+    if ( section == 0 ){
+        count = upcomingUntechable;
+    }else if ( section == 1 ){
+        count = archiveUntechable;
+    }
+    //return sectionHeader;
+    return  count;
 }
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString *sectionHeader;
+    if ( section == 0 ){
+        sectionHeader = @"Upcoming Untechables";
+    }else if ( section == 1 ){
+        sectionHeader = @"Archives Untechables";
+    }
+    return sectionHeader;
+}
+
 /*
 #pragma mark - Navigation
 

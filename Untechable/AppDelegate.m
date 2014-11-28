@@ -9,8 +9,12 @@
 #import "AppDelegate.h"
 #import "UntechableListController/UntechablesList.h"
 #import "AddUntechableController.h"
+#import "Common.h"
 
 @implementation AppDelegate
+
+Untechable *untechable;
+NSMutableArray *allUntechables;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -18,15 +22,53 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     
-    /*AddUntechableController *mainViewController = [[AddUntechableController alloc] initWithNibName:@"AddUntechableController" bundle:nil];*/
-    UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
-    self.window.rootViewController = navigationController;
-    
+    [self setDefaultModel];
     
     [self.window makeKeyAndVisible];
     return YES;
 
+}
+
+/*
+ Variable we must need in model, for testing we can use these vars
+ */
+-(void) configureTestData
+{
+    untechable.userId   = TEST_UID;
+    //untechable.eventId = TEST_EID;
+    //untechable.twillioNumber = TEST_TWILLIO_NUM;
+    //untechable.twillioNumber = @"123";
+}
+
+#pragma mark -  Model funcs
+// set default vaules in model
+-(void)setDefaultModel{
+    
+    //init object
+    untechable  = [[Untechable alloc] init];
+    untechable.commonFunctions = [[CommonFunctions alloc] init];
+    
+    //For testing -------- { --
+    [self configureTestData];
+    //For testing -------- } --
+    
+    allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
+    
+    UINavigationController *navigationController;
+    
+    if ( allUntechables.count > 0 ){
+        
+        UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
+        navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+        
+    } else {
+        
+        AddUntechableController *mainViewController = [[AddUntechableController alloc] initWithNibName:@"AddUntechableController" bundle:nil];
+        navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+    }
+    
+    self.window.rootViewController = navigationController;
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
