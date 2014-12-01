@@ -15,7 +15,11 @@
 @interface UntechablesList () {
     
     NSMutableArray *allUntechables;
+    int sectionOneCount;
+    int sectionTwoCount;
     
+    NSMutableArray *sectionOneArray;
+    NSMutableArray *sectionTwoArray;
 }
 
 @end
@@ -143,6 +147,7 @@
     
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
+    [self setNumberOfRowsInSection];
     
 }
 
@@ -160,7 +165,14 @@
         
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"UntechableTableCell" owner:self options:nil];
         cell = (UntechableTableCell *)[nib objectAtIndex:0];
-        NSMutableDictionary *tempDict = [allUntechables objectAtIndex:indexPath.row];
+        
+        NSMutableDictionary *tempDict;
+        
+        if ( indexPath.section == 0 ){
+             tempDict = [sectionOneArray objectAtIndex:indexPath.row];
+        }else if ( indexPath.section == 1 ){
+             tempDict = [sectionTwoArray objectAtIndex:indexPath.row];
+        }
         
         //Setting the packagename,packageprice,packagedesciption values for cell view
         [cell setCellValueswithUntechableTitle:[tempDict objectForKey:@"spendingTimeTxt"]
@@ -176,6 +188,18 @@
     
     if ( indexPath.section == 0 ){
         
+        NSLog(@"%ld",indexPath.row );
+        NSMutableDictionary *tempDict = [sectionOneArray objectAtIndex:indexPath.row];
+
+        AddUntechableController *addUntechable;
+        addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
+        
+        addUntechable.indexOfUntechableInEditMode = [[tempDict objectForKey:@"index"] intValue];
+        
+        [self.navigationController pushViewController:addUntechable animated:YES];
+        
+    }else if ( indexPath.section == 1 ){
+        
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         
         [alert show];
@@ -183,31 +207,41 @@
 
 }
 
-// Customize the number of rows in the table view.
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (void) setNumberOfRowsInSection {
     
-    NSDate *currDate = [NSDate date];
-    int upcomingUntechable = 0;
-    int archiveUntechable = 0;
+    NSDate *currentDate = [NSDate date];
+    
+    sectionOneArray = [[NSMutableArray alloc] init];
+    sectionTwoArray = [[NSMutableArray alloc] init];
+    sectionOneCount = 0;
+    sectionTwoCount = 0;
     
     for (int i=0 ; i < allUntechables.count ; i++){
         NSMutableDictionary *tempDict = [allUntechables objectAtIndex:i];
+        [tempDict setObject:[NSNumber numberWithInt:i] forKey:@"index"];
         
         NSDate *startDate = [untechable.commonFunctions timestampStrToNsDate:[tempDict objectForKey:@"startDate"]];
-        if ( [untechable.commonFunctions date1IsSmallerThenDate2:startDate date2:currDate] ){
-            upcomingUntechable++;
+        if ( ![untechable.commonFunctions date1IsSmallerThenDate2:startDate date2:currentDate] ){
+            sectionOneCount++;
+            [sectionOneArray addObject:tempDict];
         }else{
-            archiveUntechable++;
+            sectionTwoCount++;
+            [sectionTwoArray addObject:tempDict];
         }
     }
-    int count;
+}
+
+// Customize the number of rows in the table view.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    int numberOfRowsInSection;
     if ( section == 0 ){
-        count = upcomingUntechable;
+        numberOfRowsInSection = sectionOneCount;
     }else if ( section == 1 ){
-        count = archiveUntechable;
+        numberOfRowsInSection = sectionTwoCount;
     }
     //return sectionHeader;
-    return  count;
+    return  numberOfRowsInSection;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

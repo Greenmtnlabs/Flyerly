@@ -169,7 +169,7 @@
         // Right Navigation ________________________________________
 
         NSMutableArray  *rightNavItems;
-        if( [self canEdit] ) {
+        /*if( [self canEdit] ) {
             
             editUntechable = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
             [editUntechable addTarget:self action:@selector(onEdit:) forControlEvents:UIControlEventTouchUpInside];
@@ -192,7 +192,17 @@
             
             UIBarButtonItem *startNewUntechableBarBtn = [[UIBarButtonItem alloc] initWithCustomView:startNewUntechable];
             rightNavItems  = [NSMutableArray arrayWithObjects:startNewUntechableBarBtn,nil];
-        }
+        }*/
+        
+        startNewUntechable = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        [startNewUntechable addTarget:self action:@selector(onNew:) forControlEvents:UIControlEventTouchUpInside];
+        startNewUntechable.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [startNewUntechable setTitle:@"HOME" forState:normal];
+        [startNewUntechable setTitleColor:defGray forState:UIControlStateNormal];
+        startNewUntechable.showsTouchWhenHighlighted = YES;
+        
+        UIBarButtonItem *startNewUntechableBarBtn = [[UIBarButtonItem alloc] initWithCustomView:startNewUntechable];
+        rightNavItems  = [NSMutableArray arrayWithObjects:startNewUntechableBarBtn,nil];
         
         
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
