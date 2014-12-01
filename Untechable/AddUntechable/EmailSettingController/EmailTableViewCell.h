@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EmailTableViewCell.h"
 
-@interface EmailTableViewCell : UIViewController
 
-@property (strong, nonatomic) IBOutlet UIImageView *image1;
-@property (strong, nonatomic) IBOutlet UIButton *button1;
+
+@interface EmailTableViewCell : UITableViewCell
+
+
+@property(nonatomic, strong)IBOutlet UIButton *button1;
 
 
 @end

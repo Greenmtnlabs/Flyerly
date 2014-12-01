@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "Untechable.h"
 #import "BSKeyboardControls.h"
+#import "EmailTableViewCell.h"
+
+@class EmailTableViewCell;
+
+
 @interface EmailSettingController :UIViewController <UITableViewDelegate,UITableViewDataSource, UITextFieldDelegate , BSKeyboardControlsDelegate >
 {
     UILabel *titleLabel;

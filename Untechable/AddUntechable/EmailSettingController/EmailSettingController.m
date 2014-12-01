@@ -12,6 +12,7 @@
 #import "BSKeyboardControls.h"
 
 
+@class EmailTableViewCell;
 
 @interface EmailSettingController (){
  
@@ -98,11 +99,15 @@
 
 - (void)setDefaultModel {
     _table01Data = [[NSMutableArray alloc] init];
-    [_table01Data addObject:@{@"type":@"image", @"imgPath":@"playvideo.png", @"text":@""}];
-    [_table01Data addObject:@{@"type":@"image", @"imgPath":@"copy@2x.png", @"text":@""}];
-    [_table01Data addObject:@{@"type":@"image", @"imgPath":@"copy_selected@2x.png", @"text":@""}];
-    [_table01Data addObject:@{@"type":@"image", @"imgPath":@"pause.png", @"text":@""}];
-    [_table01Data addObject:@{@"type":@"font", @"imgPath":@"player.png", @"text":@"Other"}];
+    [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-icloud.jpg", @"text":@""}];
+    /*
+    [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-Exchange.jpg", @"text":@""}];
+    [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-Google.jpg", @"text":@""}];
+    [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-Yahoo.jpg", @"text":@""}];
+    [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-Aol.jpg", @"text":@""}];
+    [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-outlook.jpg", @"text":@""}];
+    [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-Other.jpg", @"text":@""}];
+     */
 }
 
 
@@ -528,34 +533,30 @@
 }
 //4
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
     UITableViewCell *cell = nil;
     
-    if( tableView == _tableView0 ){
-
-        //5
-        static NSString *cellIdentifier = @"SettingsCell";
+    if( tableView == _tableView0 ) {
+        static NSString *cellId = @"EmailTableViewCell";
+        EmailTableViewCell *cell = (EmailTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
         
-        //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
         
-
-        //5.1 you do not need this if you have set SettingsCell as identifier in the storyboard (else you can remove the comments on this code)
         if (cell == nil)
         {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmailTableViewCell" owner:self options:nil];
+            cell = (EmailTableViewCell *)[nib objectAtIndex:0];
         }
-        //    [_table01Data addObject:@{@"type":@"font", @"imgPath":@"player.png", @"text":@"Other"}];
-        //6
-        NSString *name = [[_table01Data objectAtIndex:0] objectForKey:@"imgPath"];
-        NSString *number = [[_table01Data objectAtIndex:0] objectForKey:@"type"];
-        //7
-        [cell.textLabel setText:name];
-        cell.textLabel.textColor = defGreen;
+        
+        NSString *imgPath = [[_table01Data objectAtIndex:indexPath.row] objectForKey:@"imgPath"];
+        //cell.button1.tag = indexPath.row;
+        [cell.button1 setBackgroundImage:[UIImage imageNamed:imgPath] forState:UIControlStateNormal];
+        [cell.button1 addTarget:self action:@selector(clickedOnEmailOption:) forControlEvents:UIControlEventTouchUpInside];
 
-        [cell.detailTextLabel setText:number];
-        cell.detailTextLabel.textColor = defGray;
+        return cell;
     }
-    return cell;
+    else {
+        return cell;
+    }
 }
 
 
@@ -566,14 +567,11 @@
     return YES;
 }
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    //add code here for when you hit delete
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        
-    }
+
+-(IBAction)clickedOnEmailOption:(id)sender
+{
+    //UIButton *btn = sender;
+    //NSLog(@"btn tag %i", btn.tag);
 }
-*/
+
 @end
