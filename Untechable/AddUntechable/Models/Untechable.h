@@ -59,7 +59,6 @@
 -(NSString *)getRecFileName;
 -(NSString *)getUniqueId;
 -(BOOL)initUntechableDirectory;
--(NSMutableDictionary *)getUntechable:(int)count;
 -(void)setOrSaveVars:(NSString *)setOrSAve;
 -(void)initWithDefValues;
 -(NSString *)timestampStrToAppDate:(NSString *)timeStamp;
