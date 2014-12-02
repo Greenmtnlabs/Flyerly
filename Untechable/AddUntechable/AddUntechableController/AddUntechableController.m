@@ -392,10 +392,6 @@
         sUntechable = [untechable.commonFunctions getUntechable:indexOfUntechableInEditMode UserId:untechable.userId];
         
         isNew = NO;
-        
-        if( ![callReset isEqualToString:@""] ){
-            [self resetUntechable];
-        }
     }
     
     if( isNew == YES )
@@ -428,13 +424,18 @@
         [untechable initUntechableDirectory];
         
         
-        if( [untechable isUntechableStarted] && untechable.savedOnServer == YES){
+        /*if( [untechable isUntechableStarted] && untechable.savedOnServer == YES){
             goToThankyouScreen = YES;
         }
         
         if( goToThankyouScreen ) {
             [self goToThankyou];
+        }*/
+        
+        if( ![callReset isEqualToString:@""] ){
+            [self resetUntechable];
         }
+        
     }
     
 }
