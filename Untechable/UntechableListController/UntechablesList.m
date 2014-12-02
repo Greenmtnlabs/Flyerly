@@ -145,12 +145,72 @@
     
     [untechablesTable reloadData];
     
+    // During startup (-viewDidLoad or in storyboard) do:
+    self.untechablesTable.allowsMultipleSelectionDuringEditing = NO;
+    
     [self setDefaultModel];
     
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
     [self setNumberOfRowsInSection];
     
+}
+
+// Override to support conditional editing of the table view.
+// This only needs to be implemented if you are going to be returning NO
+// for some items. By default, all items are editable.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return YES if you want the specified item to be editable.
+    return YES;
+}
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    //[tableView beginUpdates];
+    //[tableView setEditing:YES animated:YES];
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        if ( indexPath.section == 0 ){
+            
+            
+            /*[tableView deleteRowsAtIndexPaths:
+             @[[NSIndexPath indexPathForRow:indexPath.row  inSection:0]]
+                             withRowAnimation:UITableViewRowAnimationLeft];*/
+            [sectionOneArray removeObjectAtIndex:indexPath.row];
+            //add code here for when you hit delete
+            NSMutableDictionary *tempDict = [sectionOneArray objectAtIndex:indexPath.row];
+            NSString *untechablePath = [tempDict objectForKey:@"untechablePath"];
+            [[NSFileManager defaultManager] removeItemAtPath:untechablePath error:nil];
+            [sectionOneArray removeObjectAtIndex:indexPath.row];
+            
+            
+        }else if ( indexPath.section == 1 ){
+    
+            /*
+            [tableView deleteRowsAtIndexPaths:
+             @[[NSIndexPath indexPathForRow:indexPath.row  inSection:1]]
+                             withRowAnimation:UITableViewRowAnimationLeft];*/
+            
+            
+            //add code here for when you hit delete
+            NSMutableDictionary *tempDict = [sectionTwoArray objectAtIndex:indexPath.row];
+            NSString *untechablePath = [tempDict objectForKey:@"untechablePath"];
+            [[NSFileManager defaultManager] removeItemAtPath:untechablePath error:nil];
+            [sectionTwoArray removeObjectAtIndex:indexPath.row];
+            
+        }
+    }
+    
+    // Request table view to reload
+    [tableView reloadData];
+    
+    //[untechablesTable reloadData];
+    
+    //[tableView setEditing:NO animated:YES];
+    //[tableView endUpdates];
+    //[tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
