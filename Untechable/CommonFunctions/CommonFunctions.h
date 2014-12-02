@@ -24,6 +24,7 @@
 -(NSDate *)timestampStrToNsDate:(NSString *)timeStamp;
 -(NSString *)timestampStrToAppDate:(NSString *)timeStamp;
 -( NSMutableArray * )getAllUntechables :(NSString *)userId;
+-(NSMutableDictionary *)getUntechable:(int)count UserId:(NSString *)userId;
 - (BOOL)date1IsSmallerThenDate2:(NSDate *)date1 date2:(NSDate *)date2;
 - ( NSMutableDictionary * )getAnyInCompleteUntechable :(NSString *)userId;
 -(NSString *)getUserPath :(NSString *)userId;

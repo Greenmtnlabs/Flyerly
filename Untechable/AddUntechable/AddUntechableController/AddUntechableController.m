@@ -43,6 +43,7 @@
 
 @implementation AddUntechableController
 
+@synthesize indexOfUntechableInEditMode;
 
 #pragma mark -  Default functions
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -369,7 +370,7 @@
     //init object
     untechable  = [[Untechable alloc] init];
     untechable.commonFunctions = [[CommonFunctions alloc] init];
-    
+
     //Set Date formate
     untechable.dateFormatter = [[NSDateFormatter alloc] init];
     [untechable.dateFormatter setDateFormat:DATE_FORMATE_1];
@@ -384,7 +385,18 @@
     BOOL isNew = YES;
     BOOL goToThankyouScreen = NO;
     
-    NSMutableDictionary *sUntechable = [untechable.commonFunctions getAnyInCompleteUntechable:untechable.userId];
+    NSMutableDictionary *sUntechable = nil;
+
+    if ( indexOfUntechableInEditMode != 0 && [untechable.commonFunctions getAllUntechables:untechable.userId].count > 0){
+        
+        sUntechable = [untechable.commonFunctions getUntechable:indexOfUntechableInEditMode UserId:untechable.userId];
+        
+        isNew = NO;
+    }
+    
+    if( isNew == YES )
+    sUntechable = [untechable.commonFunctions getAnyInCompleteUntechable:untechable.userId];
+    
     
     //Old Untechable going to edit, set the vars
     if( sUntechable != nil ){

@@ -26,4 +26,7 @@
 }
 
 -(void)setDefaultModel;
+
+@property int indexOfUntechableInEditMode;
+
 @end
