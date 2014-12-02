@@ -100,14 +100,14 @@
 - (void)setDefaultModel {
     _table01Data = [[NSMutableArray alloc] init];
     [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-icloud.jpg", @"text":@""}];
-    /*
+    
     [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-Exchange.jpg", @"text":@""}];
     [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-Google.jpg", @"text":@""}];
     [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-Yahoo.jpg", @"text":@""}];
     [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-Aol.jpg", @"text":@""}];
     [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-outlook.jpg", @"text":@""}];
     [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-Other.jpg", @"text":@""}];
-     */
+    
 }
 
 
