@@ -100,14 +100,12 @@
 - (void)setDefaultModel {
     _table01Data = [[NSMutableArray alloc] init];
     [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-icloud.jpg", @"text":@""}];
-    
     [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-Exchange.jpg", @"text":@""}];
     [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-Google.jpg", @"text":@""}];
     [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-Yahoo.jpg", @"text":@""}];
     [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-Aol.jpg", @"text":@""}];
     [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-outlook.jpg", @"text":@""}];
     [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-Other.jpg", @"text":@""}];
-    
 }
 
 
@@ -548,7 +546,7 @@
         }
         
         NSString *imgPath = [[_table01Data objectAtIndex:indexPath.row] objectForKey:@"imgPath"];
-        //cell.button1.tag = indexPath.row;
+        cell.button1.tag = indexPath.row;
         [cell.button1 setBackgroundImage:[UIImage imageNamed:imgPath] forState:UIControlStateNormal];
         [cell.button1 addTarget:self action:@selector(clickedOnEmailOption:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -570,8 +568,9 @@
 
 -(IBAction)clickedOnEmailOption:(id)sender
 {
-    //UIButton *btn = sender;
-    //NSLog(@"btn tag %i", btn.tag);
+    UIButton *btn = sender;
+    NSLog(@"btn tag %i", btn.tag);
+    [self showEmailSettings2:nil];
 }
 
 @end
