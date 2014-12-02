@@ -195,6 +195,7 @@
         addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
         
         addUntechable.indexOfUntechableInEditMode = [[tempDict objectForKey:@"index"] intValue];
+        addUntechable.callReset = @"RESET1";
         
         [self.navigationController pushViewController:addUntechable animated:YES];
         
