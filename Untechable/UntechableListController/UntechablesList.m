@@ -143,6 +143,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [untechablesTable reloadData];
+    
     [self setDefaultModel];
     
     [self setNavigationDefaults];
@@ -176,12 +178,46 @@
         
         //Setting the packagename,packageprice,packagedesciption values for cell view
         [cell setCellValueswithUntechableTitle:[tempDict objectForKey:@"spendingTimeTxt"]
-                                  StartDate:[untechable.commonFunctions timestampStrToAppDate:[tempDict objectForKey:@"startDate"]]
-                                  EndDate:[untechable.commonFunctions timestampStrToAppDate:[tempDict objectForKey:@"endDate"]]];
+                                    StartDate:[untechable.commonFunctions timestampStringToAppDate:[tempDict objectForKey:@"startDate"]]
+                                     StartTime:[untechable.commonFunctions timestampStringToAppDateTime:[tempDict objectForKey:@"startDate"]]
+                                       EndDate:[untechable.commonFunctions timestampStringToAppDate:[tempDict objectForKey:@"endDate"]]
+                                       EndTime:[untechable.commonFunctions timestampStringToAppDateTime:[tempDict objectForKey:@"endDate"]]];
         
     }
     
     return cell;
+}
+
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
+    defGray = [UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:150.0/255.0 alpha:1.0];//GRAY
+    
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 20)];
+    UILabel *label;
+    if (section == 0){
+        
+        label = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, tableView.bounds.size.width - 10, 18)];
+        label.text = @"Upcoming Untachables";
+        label.textColor = defGray;
+        [label setFont:[UIFont fontWithName:APP_FONT size:16]];
+        label.backgroundColor = [UIColor clearColor];
+        
+
+        
+    }else {
+        
+        label = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, tableView.bounds.size.width - 10, 18)];
+        label.text = @"Previous Untachables";
+        label.textColor = defGray;
+        [label setFont:[UIFont fontWithName:APP_FONT size:16]];
+        label.backgroundColor = [UIColor clearColor];
+        
+    }
+
+    [headerView addSubview:label];
+    
+    return headerView;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -209,8 +245,10 @@
         addUntechable.indexOfUntechableInEditMode = [[tempDict objectForKey:@"index"] intValue];
         addUntechable.callReset = @"RESET1";
         
-        [self.navigationController pushViewController:addUntechable animated:YES];    }
+        [self.navigationController pushViewController:addUntechable animated:YES];
+    }
 
+    [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
 }
 
 - (void) setNumberOfRowsInSection {
