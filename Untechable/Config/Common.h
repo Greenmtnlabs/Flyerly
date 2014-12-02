@@ -11,6 +11,9 @@
 
 
 // http://iosdevelopertips.com/cocoa/date-formatters-examples-take-2.html
+#define DATE_FORMATE_DATE @"MMM dd, YYYY"
+#define DATE_FORMATE_TIME @"hh:mm a"
+
 #define DATE_FORMATE_1 @"MMM dd, YYYY hh:mm a"
 #define DATE_FORMATE_2 @""
 #define APP_FONT @"Pigiarniq"
