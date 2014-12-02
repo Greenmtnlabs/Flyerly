@@ -195,16 +195,21 @@
         addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
         
         addUntechable.indexOfUntechableInEditMode = [[tempDict objectForKey:@"index"] intValue];
-        addUntechable.callReset = @"RESET1";
+        addUntechable.callReset = @"";
         
         [self.navigationController pushViewController:addUntechable animated:YES];
         
     }else if ( indexPath.section == 1 ){
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        NSMutableDictionary *tempDict = [sectionOneArray objectAtIndex:indexPath.row];
         
-        [alert show];
-    }
+        AddUntechableController *addUntechable;
+        addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
+        
+        addUntechable.indexOfUntechableInEditMode = [[tempDict objectForKey:@"index"] intValue];
+        addUntechable.callReset = @"RESET1";
+        
+        [self.navigationController pushViewController:addUntechable animated:YES];    }
 
 }
 
