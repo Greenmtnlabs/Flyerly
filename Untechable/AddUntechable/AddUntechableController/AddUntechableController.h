@@ -28,5 +28,6 @@
 -(void)setDefaultModel;
 
 @property int indexOfUntechableInEditMode;
+@property NSString *callReset;
 
 @end

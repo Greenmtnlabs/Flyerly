@@ -43,7 +43,7 @@
 
 @implementation AddUntechableController
 
-@synthesize indexOfUntechableInEditMode;
+@synthesize indexOfUntechableInEditMode,callReset;
 
 #pragma mark -  Default functions
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -392,6 +392,10 @@
         sUntechable = [untechable.commonFunctions getUntechable:indexOfUntechableInEditMode UserId:untechable.userId];
         
         isNew = NO;
+        
+        if( ![callReset isEqualToString:@""] ){
+            [self resetUntechable];
+        }
     }
     
     if( isNew == YES )
@@ -434,6 +438,17 @@
     }
     
 }
+
+-(void)resetUntechable{
+    
+    untechable.hasFinished = NO;
+    untechable.savedOnServer = NO;
+    untechable.twillioNumber = @"";
+    untechable.paid = NO;
+    
+    [untechable setOrSaveVars:SAVE];
+}
+
 -(void)goToThankyou{
     ThankyouController *thankyouController;
     thankyouController = [[ThankyouController alloc]initWithNibName:@"ThankyouController" bundle:nil];
