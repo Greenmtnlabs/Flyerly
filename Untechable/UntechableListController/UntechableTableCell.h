@@ -13,7 +13,12 @@
 @property (nonatomic,strong)IBOutlet UILabel *untechableTitle;
 @property (nonatomic,strong)IBOutlet UILabel *untechableStartDate;
 @property (nonatomic,strong)IBOutlet UILabel *untechableEndDate;
+@property (nonatomic,strong)IBOutlet UILabel *untechableStartTime;
+@property (nonatomic,strong)IBOutlet UILabel *untechableEndTime;
 
--(void)setCellValueswithUntechableTitle :(NSString *)title StartDate:(NSString *)startDate EndDate: (NSString *)endDate;
+@property (nonatomic,strong)IBOutlet UILabel *startHeaderLabel;
+@property (nonatomic,strong)IBOutlet UILabel *endHeaderLabel;
+
+-(void)setCellValueswithUntechableTitle :(NSString *)title StartDate:(NSString *)startDate StartTime:(NSString *)startTime EndDate: (NSString *)endDate EndTime:(NSString *)endTime ;
 
 @end
