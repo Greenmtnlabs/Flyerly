@@ -98,6 +98,8 @@
 		36B2767B1A0124E800ED58AD /* right_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B276501A0124E800ED58AD /* right_arrow.png */; };
 		36B2767C1A0124E800ED58AD /* right_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B276511A0124E800ED58AD /* right_arrow@2x.png */; };
 		36B2767D1A0124E800ED58AD /* searchicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B276521A0124E800ED58AD /* searchicon@2x.png */; };
+		36B4E53E1A28BBD400CC18B0 /* EmailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B4E53C1A28BBD400CC18B0 /* EmailTableViewCell.m */; };
+		36B4E53F1A28BBD400CC18B0 /* EmailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36B4E53D1A28BBD400CC18B0 /* EmailTableViewCell.xib */; };
 		36BB7B8919FFD98C00562069 /* ThankyouController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BB7B8719FFD98C00562069 /* ThankyouController.m */; };
 		36BB7B8A19FFD98C00562069 /* ThankyouController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36BB7B8819FFD98C00562069 /* ThankyouController.xib */; };
 		36C734481A0CF2490066C544 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 36C734471A0CF2490066C544 /* Podfile */; };
@@ -228,6 +230,9 @@
 		36B276501A0124E800ED58AD /* right_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right_arrow.png; sourceTree = "<group>"; };
 		36B276511A0124E800ED58AD /* right_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right_arrow@2x.png"; sourceTree = "<group>"; };
 		36B276521A0124E800ED58AD /* searchicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchicon@2x.png"; sourceTree = "<group>"; };
+		36B4E53B1A28BBD400CC18B0 /* EmailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmailTableViewCell.h; path = AddUntechable/EmailSettingController/EmailTableViewCell.h; sourceTree = "<group>"; };
+		36B4E53C1A28BBD400CC18B0 /* EmailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmailTableViewCell.m; path = AddUntechable/EmailSettingController/EmailTableViewCell.m; sourceTree = "<group>"; };
+		36B4E53D1A28BBD400CC18B0 /* EmailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EmailTableViewCell.xib; path = AddUntechable/EmailSettingController/EmailTableViewCell.xib; sourceTree = "<group>"; };
 		36BB7B8619FFD98C00562069 /* ThankyouController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThankyouController.h; sourceTree = "<group>"; };
 		36BB7B8719FFD98C00562069 /* ThankyouController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThankyouController.m; sourceTree = "<group>"; };
 		36BB7B8819FFD98C00562069 /* ThankyouController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThankyouController.xib; sourceTree = "<group>"; };
@@ -570,6 +575,9 @@
 				36B036A319DAF44D00E8CD21 /* EmailSettingController.h */,
 				36B036A419DAF44D00E8CD21 /* EmailSettingController.m */,
 				36B036A519DAF44D00E8CD21 /* EmailSettingController.xib */,
+				36B4E53B1A28BBD400CC18B0 /* EmailTableViewCell.h */,
+				36B4E53C1A28BBD400CC18B0 /* EmailTableViewCell.m */,
+				36B4E53D1A28BBD400CC18B0 /* EmailTableViewCell.xib */,
 			);
 			name = EmailSettingController;
 			sourceTree = "<group>";
@@ -711,6 +719,7 @@
 				36474F2619D9780100084F34 /* Pigiarniq Regular.ttf in Resources */,
 				36B276791A0124E800ED58AD /* record.png in Resources */,
 				366EAF961A14C3530011D6C6 /* icon-72.png in Resources */,
+				36B4E53F1A28BBD400CC18B0 /* EmailTableViewCell.xib in Resources */,
 				36B2767A1A0124E800ED58AD /* record@2x.png in Resources */,
 				366EAFA41A14C3530011D6C6 /* logo.png in Resources */,
 				36B2765F1A0124E800ED58AD /* CHECKBOX_FILLED@2x.png in Resources */,
@@ -821,6 +830,7 @@
 			files = (
 				36BB7B8919FFD98C00562069 /* ThankyouController.m in Sources */,
 				366ECD9619D323DA00F71A11 /* AddUntechableController.m in Sources */,
+				36B4E53E1A28BBD400CC18B0 /* EmailTableViewCell.m in Sources */,
 				36B275D71A00D36400ED58AD /* RMStore.m in Sources */,
 				366F9DAA1A124FC7006602E1 /* FHSStream.m in Sources */,
 				3681603C19E6B81E00B9B64C /* ContactsModel.m in Sources */,
