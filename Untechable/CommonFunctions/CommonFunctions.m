@@ -116,6 +116,31 @@
     return [NSDate dateWithTimeIntervalSince1970:[timeStamp floatValue]];
 }
 
+- (NSString *)timestampStringToAppDate:(NSString *)timeStamp
+{
+    
+    NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
+    [dateFormatter1 setDateFormat:DATE_FORMATE_DATE];
+    
+    NSDate *newDate  =   [self timestampStrToNsDate:timeStamp];
+    NSString *newDateStr    =   [dateFormatter1 stringFromDate:newDate];
+    NSLog(@"newDateStr: %@", newDateStr);
+    return newDateStr;
+}
+
+- (NSString *)timestampStringToAppDateTime:(NSString *)timeStamp
+{
+    
+    NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
+    [dateFormatter1 setDateFormat:DATE_FORMATE_TIME];
+    
+    NSDate *newDate  =   [self timestampStrToNsDate:timeStamp];
+    NSString *newDateStr    =   [dateFormatter1 stringFromDate:newDate];
+    NSLog(@"newDateStr: %@", newDateStr);
+    return newDateStr;
+}
+
+
 - (NSString *)timestampStrToAppDate:(NSString *)timeStamp
 {
     

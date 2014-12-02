@@ -23,6 +23,9 @@
 -(NSString *)nsDateToTimeStampStr:(NSDate *)inpDate;
 -(NSDate *)timestampStrToNsDate:(NSString *)timeStamp;
 -(NSString *)timestampStrToAppDate:(NSString *)timeStamp;
+
+- (NSString *)timestampStringToAppDateTime:(NSString *)timeStam;
+- (NSString *)timestampStringToAppDate:(NSString *)timeStam;
 -( NSMutableArray * )getAllUntechables :(NSString *)userId;
 -(NSMutableDictionary *)getUntechable:(int)count UserId:(NSString *)userId;
 - (BOOL)date1IsSmallerThenDate2:(NSDate *)date1 date2:(NSDate *)date2;
