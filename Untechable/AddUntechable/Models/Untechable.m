@@ -269,7 +269,7 @@
     uniqueId = [self getUniqueId];
     untechablePath = [self getNewUntechablePath];
     savedOnServer = NO;
-
+    hasFinished   = NO;
     
     //Screen1
     timezoneOffset  = [commonFunctions getTimeZoneOffset];
@@ -297,7 +297,7 @@
     email           = @"";
     password        = @"";
     respondingEmail = @"";
-    hasFinished     = NO;
+    
     
 }
 

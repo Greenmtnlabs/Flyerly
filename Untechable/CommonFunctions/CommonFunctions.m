@@ -44,7 +44,7 @@
  */
 - (NSMutableDictionary *)getUntechable:(int)count UserId:(NSString *)userId
 {
-    NSMutableDictionary *retDic;
+    NSMutableDictionary *retDic = nil;
     NSString *userPath = [self getUserPath:userId];
     
     //List of folder names create for this userid
