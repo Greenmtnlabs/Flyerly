@@ -94,8 +94,7 @@
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
         
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
-        
-        
+
     }
 }
 
@@ -131,7 +130,6 @@
     //For testing -------- } --
     
     allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -268,7 +266,8 @@
         
     }else {
         
-        label = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, tableView.bounds.size.width - 10, 18)];
+        
+        label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.bounds.size.width - 10, 30)];
         label.text = @"Previous Untachables";
         label.textColor = defGray;
         [label setFont:[UIFont fontWithName:APP_FONT size:16]];
