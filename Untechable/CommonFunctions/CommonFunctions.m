@@ -217,8 +217,9 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
             [retDic setValue:untechablePath_temp forKey:@"untechablePath"];
         }
         
-        if ( [[retDic objectForKey:@"hasFinished"] boolValue] )
+        if ( [[retDic objectForKey:@"hasFinished"] boolValue] ){
             [totalUntechables addObject:retDic];
+        }
     }
     return totalUntechables;
 }

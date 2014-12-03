@@ -374,16 +374,12 @@
     //Set Date formate
     untechable.dateFormatter = [[NSDateFormatter alloc] init];
     [untechable.dateFormatter setDateFormat:DATE_FORMATE_1];
-    //[untechable.dateFormatter setDateStyle:NSDateFormatterShortStyle];    // show short-style date format
-    //[untechable.dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-
     
     //For testing -------- { --
         [self configureTestData];
     //For testing -------- } --
     
     BOOL isNew = YES;
-    BOOL goToThankyouScreen = NO;
     
     NSMutableDictionary *sUntechable = nil;
 
@@ -394,8 +390,10 @@
         isNew = NO;
     }
     
-    if( isNew == YES )
-    sUntechable = [untechable.commonFunctions getAnyInCompleteUntechable:untechable.userId];
+    if( isNew == YES ){
+        sUntechable = [untechable.commonFunctions getAnyInCompleteUntechable:untechable.userId];
+        callReset = @"RESET_DEFAULTS";
+    }
     
     
     //Old Untechable going to edit, set the vars
@@ -420,34 +418,28 @@
         
     }
     else{
-        
         [untechable initUntechableDirectory];
-        
-        
-        /*if( [untechable isUntechableStarted] && untechable.savedOnServer == YES){
-            goToThankyouScreen = YES;
-        }
-        
-        if( goToThankyouScreen ) {
-            [self goToThankyou];
-        }*/
-        
-        if( ![callReset isEqualToString:@""] ){
-            [self resetUntechable];
-        }
-        
+    }
+    
+    if( ![callReset isEqualToString:@""] ){
+        [self resetUntechable:callReset];
     }
     
 }
 
--(void)resetUntechable{
-    
-    untechable.hasFinished = NO;
-    untechable.savedOnServer = NO;
-    untechable.twillioNumber = @"";
-    untechable.paid = NO;
-    
-    [untechable setOrSaveVars:SAVE];
+-(void)resetUntechable:(NSString *)callResetFor{
+
+    if( [callResetFor isEqualToString:@"RESET_DEFAULTS"] ){
+        [untechable initWithDefValues];
+    }
+    else if( [callResetFor isEqualToString:@"RESET1"] ){
+        //untechable.hasFinished = NO;
+        untechable.savedOnServer = NO;
+        //untechable.twillioNumber = @"";
+        untechable.paid = NO;
+        
+        [untechable setOrSaveVars:SAVE];
+    }
 }
 
 -(void)goToThankyou{
