@@ -15,8 +15,6 @@
 @interface UntechablesList () {
     
     NSMutableArray *allUntechables;
-    int sectionOneCount;
-    int sectionTwoCount;
     
     NSMutableArray *sectionOneArray;
     NSMutableArray *sectionTwoArray;
@@ -204,6 +202,7 @@
         }
     }
     
+    tableView.allowsMultipleSelectionDuringEditing = NO;
     // Request table view to reload
     [tableView reloadData];
     
@@ -221,15 +220,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *cellId = @"UntechableTableCell";
-    UntechableTableCell *cell = (UntechableTableCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
     
-    if ( cell == nil ) {
+    
+    //if ( cell == nil ) {
+    
         
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"UntechableTableCell" owner:self options:nil];
-        cell = (UntechableTableCell *)[nib objectAtIndex:0];
-        
-        NSMutableDictionary *tempDict;
+        NSMutableDictionary *tempDict = nil;
         
         if ( indexPath.section == 0 ){
              tempDict = [sectionOneArray objectAtIndex:indexPath.row];
@@ -238,15 +234,28 @@
         }
         
         //Setting the packagename,packageprice,packagedesciption values for cell view
-        [cell setCellValueswithUntechableTitle:[tempDict objectForKey:@"spendingTimeTxt"]
-                                    StartDate:[untechable.commonFunctions timestampStringToAppDate:[tempDict objectForKey:@"startDate"]]
-                                     StartTime:[untechable.commonFunctions timestampStringToAppDateTime:[tempDict objectForKey:@"startDate"]]
-                                       EndDate:[untechable.commonFunctions timestampStringToAppDate:[tempDict objectForKey:@"endDate"]]
-                                       EndTime:[untechable.commonFunctions timestampStringToAppDateTime:[tempDict objectForKey:@"endDate"]]];
+        if( tempDict != nil ){
+            static NSString *cellId = @"UntechableTableCell";
+            UntechableTableCell *cell = (UntechableTableCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
+            
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"UntechableTableCell" owner:self options:nil];
+            cell = (UntechableTableCell *)[nib objectAtIndex:0];
+            
+            [cell setCellValueswithUntechableTitle:[tempDict objectForKey:@"spendingTimeTxt"]
+                                        StartDate:[untechable.commonFunctions timestampStringToAppDate:[tempDict objectForKey:@"startDate"]]
+                                         StartTime:[untechable.commonFunctions timestampStringToAppDateTime:[tempDict objectForKey:@"startDate"]]
+                                           EndDate:[untechable.commonFunctions timestampStringToAppDate:[tempDict objectForKey:@"endDate"]]
+                                           EndTime:[untechable.commonFunctions timestampStringToAppDateTime:[tempDict objectForKey:@"endDate"]]];
+            return cell;
+        }
+        else{
+            UITableViewCell *cell = nil;
+            return cell;
+        }
         
-    }
+    //}
     
-    return cell;
+
 }
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -317,8 +326,6 @@
     
     sectionOneArray = [[NSMutableArray alloc] init];
     sectionTwoArray = [[NSMutableArray alloc] init];
-    sectionOneCount = 0;
-    sectionTwoCount = 0;
     
     for (int i=0 ; i < allUntechables.count ; i++){
         NSMutableDictionary *tempDict = [allUntechables objectAtIndex:i];
@@ -326,10 +333,8 @@
         
         NSDate *startDate = [untechable.commonFunctions timestampStrToNsDate:[tempDict objectForKey:@"startDate"]];
         if ( ![untechable.commonFunctions date1IsSmallerThenDate2:startDate date2:currentDate] ){
-            sectionOneCount++;
             [sectionOneArray addObject:tempDict];
         }else{
-            sectionTwoCount++;
             [sectionTwoArray addObject:tempDict];
         }
     }
@@ -340,9 +345,9 @@
     
     int numberOfRowsInSection;
     if ( section == 0 ){
-        numberOfRowsInSection = sectionOneCount;
+        numberOfRowsInSection = sectionOneArray.count;
     }else if ( section == 1 ){
-        numberOfRowsInSection = sectionTwoCount;
+        numberOfRowsInSection = sectionTwoArray.count;
     }
     //return sectionHeader;
     return  numberOfRowsInSection;
