@@ -315,21 +315,48 @@ Events.setup = function(app) {
 		if( eventId == undefined ) {
 			retError1( res, "eventId is undefined.", __line, "Please send eventId to delete the event." );
 		}
-		else {		
-			// remove events
-	        Events.remove({
-	                _id : eventId
+		else {	
+	        // remove all events except admin default event
+	        Events.find({
+	                 _id : eventId
 	            },
-	            function(err, count) {
+	            function(err, events) {
 	                if (err) {
-						logger.info("Events.js: "+__line+", Error occured while delete, please try latter.");
-	                    retError1( res, err , __line, "Error occured while delete, please try latter." );
+	                    retError1( res, err , __line, "Event not found." );			
 	                }
-					else {	
-	                    retSuccess1( res, __line )
+					else{
+				
+		                var fs = require('fs');
+
+		                for (var i = 0; i < events.length; i++) {
+							try{
+								// remove recording files
+			                    fs.unlinkSync(__dirname + '/../../recordings/' + events[i].recording);
+								logger.info('File ' + events[i].recording + ' removed successfully.');
+							} catch( e ){
+								logger.info('Problem found in file delete: error:', e);							
+							}
+		                }	
+						// remove events
+				        Events.remove({
+				                _id : eventId
+				            },
+				            function(err, count) {
+				                if (err) {
+									logger.info("Events.js: "+__line+", Error occured while delete, please try latter.");
+				                    retError1( res, err , __line, "Error occured while delete, please try latter." );
+				                }
+								else {	
+				                    retSuccess1( res, __line )
+								}
+
+				        }); // remove end
 					}
 
-	        }); // remove end
+	            }); // find end
+				
+				
+			
 		}
 		
 	});

@@ -71,7 +71,8 @@ ResetDb.setup = function(app) {
 		                        Twillio.update({
 		                                status: "IN_USE"
 		                            }, {
-		                                status: "FREE"
+		                                assignedTo:"",
+										status: "FREE"
 		                            }, {
 		                                safe: true
 		                            },
