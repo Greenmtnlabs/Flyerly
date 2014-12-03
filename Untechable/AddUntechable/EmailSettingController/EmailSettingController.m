@@ -23,6 +23,8 @@
 @property (strong, nonatomic) IBOutlet UIView *emailSetting2;
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView0;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *serverType;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *ssl;
 
 
 @property (strong, nonatomic) IBOutlet UILabel *lbl1;
@@ -40,7 +42,7 @@
 
 @implementation EmailSettingController
 
-@synthesize untechable;
+@synthesize untechable,ssl;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -66,6 +68,25 @@
     NSArray *fields = @[ self.inputEmail, self.inputPassword, self.inputMsg ];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
     [self.keyboardControls setDelegate:self];
+}
+
+-(IBAction)serverType:(UISegmentedControl *)sender
+{
+    
+    if ( sender == _serverType ) {
+        NSLog(@"asdf");
+    }
+    if ( sender.selectedSegmentIndex==0 ) {
+        
+        NSLog(@"asdf");
+    }
+    
+    else if ( sender.selectedSegmentIndex==1 ) {
+        
+        NSLog(@"asdf");
+        
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -105,7 +126,7 @@
     [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-Yahoo.jpg", @"text":@""}];
     [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-Aol.jpg", @"text":@""}];
     [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-outlook.jpg", @"text":@""}];
-    [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-Other.jpg", @"text":@""}];
+    [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-other.png", @"text":@""}];
 }
 
 
@@ -570,7 +591,18 @@
 {
     UIButton *btn = sender;
     NSLog(@"btn tag %i", btn.tag);
-    [self showEmailSettings2:nil];
+    if ( btn.tag == 6 ){
+        
+        [self hideAllViews];
+        [UIView transitionWithView:self.view duration:0.5
+                           options:UIViewAnimationOptionTransitionCurlUp //change to whatever animation you like
+                        animations:^ { [self.view addSubview:_emailSetting1]; }
+                        completion:^(BOOL finished){
+                            
+                        }];
+        
+    }
+    //[self showEmailSettings2:nil];
 }
 
 @end

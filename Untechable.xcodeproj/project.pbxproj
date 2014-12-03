@@ -13,6 +13,7 @@
 		2402BB891A1DC3A200255A73 /* UntechableTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2402BB871A1DC3A200255A73 /* UntechableTableCell.xib */; };
 		24BAB1841A2F0DF900855B77 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BAB1831A2F0DF900855B77 /* SystemConfiguration.framework */; };
 		24BAB1881A2F0E8C00855B77 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BAB1871A2F0E8C00855B77 /* Reachability.m */; };
+		24BAB18A1A2F340200855B77 /* logo-other.png in Resources */ = {isa = PBXBuildFile; fileRef = 24BAB1891A2F340200855B77 /* logo-other.png */; };
 		363DEAF81A2C6D9B0035FF1F /* logo-outlook.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 363DEAF21A2C6D9B0035FF1F /* logo-outlook.jpg */; };
 		363DEAF91A2C6D9B0035FF1F /* logo-Aol.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 363DEAF31A2C6D9B0035FF1F /* logo-Aol.jpg */; };
 		363DEAFA1A2C6D9B0035FF1F /* logo-Yahoo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 363DEAF41A2C6D9B0035FF1F /* logo-Yahoo.jpg */; };
@@ -137,6 +138,7 @@
 		24BAB1831A2F0DF900855B77 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		24BAB1861A2F0E6A00855B77 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		24BAB1871A2F0E8C00855B77 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		24BAB1891A2F340200855B77 /* logo-other.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-other.png"; sourceTree = "<group>"; };
 		363DEAF21A2C6D9B0035FF1F /* logo-outlook.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "logo-outlook.jpg"; sourceTree = "<group>"; };
 		363DEAF31A2C6D9B0035FF1F /* logo-Aol.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "logo-Aol.jpg"; sourceTree = "<group>"; };
 		363DEAF41A2C6D9B0035FF1F /* logo-Yahoo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "logo-Yahoo.jpg"; sourceTree = "<group>"; };
@@ -567,6 +569,7 @@
 		36B0369A19DAD2AB00E8CD21 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				24BAB1891A2F340200855B77 /* logo-other.png */,
 				363DEAFE1A2C73E90035FF1F /* logo-Other.jpg */,
 				363DEAF21A2C6D9B0035FF1F /* logo-outlook.jpg */,
 				363DEAF31A2C6D9B0035FF1F /* logo-Aol.jpg */,
@@ -812,6 +815,7 @@
 				366EAFB81A14EDA30011D6C6 /* copy.png in Resources */,
 				366EAF951A14C3530011D6C6 /* icon-60@2x.png in Resources */,
 				366EAFA01A14C3530011D6C6 /* Default-667h@2x.png in Resources */,
+				24BAB18A1A2F340200855B77 /* logo-other.png in Resources */,
 				366EAFB61A14EDA30011D6C6 /* copy_selected@2x.png in Resources */,
 				366EAF9A1A14C3530011D6C6 /* icon-small.png in Resources */,
 				366EAF9E1A14C3530011D6C6 /* icon@2x.png in Resources */,

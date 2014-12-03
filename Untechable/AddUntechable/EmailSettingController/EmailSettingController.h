@@ -24,5 +24,8 @@
     UIColor *defGray;//GRAY
     
 }
+
 @property (nonatomic,strong)  Untechable *untechable;
+@property(nonatomic,strong) IBOutlet UISegmentedControl *serverSegment;
+
 @end
