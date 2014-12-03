@@ -33,24 +33,25 @@ var eventsSchema = db.Schema({
 	twOAuthTokenSecret: String,		
 	linkedinAuth: String ,
 	
-
-	acType:String, //< GMAIL / HOTMAIL / YAHOO / OTHERS >
-	name:String,
-	email: String ,
-	password: String ,
-	respondingEmail: String , 
-
-	serverType:String,	
-	//INCOMING MAIL SERVER
-	imsHostName:String,
-	imsUserName:String,	
-	imsPassword:String,	
-	//OUTGOING MAIL SERVER
-	omsHostName:String,
-	omsUserName:String,	
-	omsPassword:String,	
-	
-	
+	//Field will show on screen2
+    acType: String,
+    name: String,
+    email: String ,
+    password: String ,
+    respondingEmail: String ,
+    //Field will show on screen1
+    serverType: String,    
+    //INCOMING MAIL SERVER
+    imsHostName: String,
+    imsUserName: String,    
+    imsPassword: String,    
+    imsPort: String,
+    //OUTGOING MAIL SERVER
+    omsHostName: String,
+    omsUserName: String,    
+    omsPassword: String,
+    omsPort: String,
+		
 	updatedOn: String,
 	postSocialStatus: Boolean
 	
