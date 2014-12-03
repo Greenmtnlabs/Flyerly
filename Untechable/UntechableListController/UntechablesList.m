@@ -199,6 +199,8 @@
             
         }
     }
+
+    [self setNumberOfRowsInSection];
     
     tableView.allowsMultipleSelectionDuringEditing = NO;
     // Request table view to reload
