@@ -52,6 +52,7 @@
 
 #define API_GET_NUMBER SERVER_URL@"/get-forwading-number"
 #define API_SAVE SERVER_URL@"/event/save"
+#define API_DELETE SERVER_URL@"/event/delete" // must pass parmeters{ eventId: 123 }
 
 
 #define TEST_UID @"0"

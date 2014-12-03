@@ -11,6 +11,8 @@
 		2402BB841A1DBF6A00255A73 /* UntechablesList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2402BB821A1DBF6A00255A73 /* UntechablesList.xib */; };
 		2402BB881A1DC3A200255A73 /* UntechableTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402BB861A1DC3A200255A73 /* UntechableTableCell.m */; };
 		2402BB891A1DC3A200255A73 /* UntechableTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2402BB871A1DC3A200255A73 /* UntechableTableCell.xib */; };
+		24BAB1841A2F0DF900855B77 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BAB1831A2F0DF900855B77 /* SystemConfiguration.framework */; };
+		24BAB1881A2F0E8C00855B77 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BAB1871A2F0E8C00855B77 /* Reachability.m */; };
 		363DEAF81A2C6D9B0035FF1F /* logo-outlook.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 363DEAF21A2C6D9B0035FF1F /* logo-outlook.jpg */; };
 		363DEAF91A2C6D9B0035FF1F /* logo-Aol.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 363DEAF31A2C6D9B0035FF1F /* logo-Aol.jpg */; };
 		363DEAFA1A2C6D9B0035FF1F /* logo-Yahoo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 363DEAF41A2C6D9B0035FF1F /* logo-Yahoo.jpg */; };
@@ -132,6 +134,9 @@
 		2402BB851A1DC3A200255A73 /* UntechableTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UntechableTableCell.h; path = UntechableListController/UntechableTableCell.h; sourceTree = "<group>"; };
 		2402BB861A1DC3A200255A73 /* UntechableTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UntechableTableCell.m; path = UntechableListController/UntechableTableCell.m; sourceTree = "<group>"; };
 		2402BB871A1DC3A200255A73 /* UntechableTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UntechableTableCell.xib; path = UntechableListController/UntechableTableCell.xib; sourceTree = "<group>"; };
+		24BAB1831A2F0DF900855B77 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		24BAB1861A2F0E6A00855B77 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		24BAB1871A2F0E8C00855B77 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		363DEAF21A2C6D9B0035FF1F /* logo-outlook.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "logo-outlook.jpg"; sourceTree = "<group>"; };
 		363DEAF31A2C6D9B0035FF1F /* logo-Aol.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "logo-Aol.jpg"; sourceTree = "<group>"; };
 		363DEAF41A2C6D9B0035FF1F /* logo-Yahoo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "logo-Yahoo.jpg"; sourceTree = "<group>"; };
@@ -271,6 +276,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24BAB1841A2F0DF900855B77 /* SystemConfiguration.framework in Frameworks */,
 				36B275D41A00CD6000ED58AD /* StoreKit.framework in Frameworks */,
 				36A370B819F53E6D005A7AFE /* AVFoundation.framework in Frameworks */,
 				36561D6E19D2C8A40069D897 /* CoreGraphics.framework in Frameworks */,
@@ -304,6 +310,15 @@
 				2402BB871A1DC3A200255A73 /* UntechableTableCell.xib */,
 			);
 			name = UntechableListController;
+			sourceTree = "<group>";
+		};
+		24BAB1851A2F0E2600855B77 /* InternetReachibility */ = {
+			isa = PBXGroup;
+			children = (
+				24BAB1861A2F0E6A00855B77 /* Reachability.h */,
+				24BAB1871A2F0E8C00855B77 /* Reachability.m */,
+			);
+			name = InternetReachibility;
 			sourceTree = "<group>";
 		};
 		36474F0719D96E9800084F34 /* Fonts */ = {
@@ -354,6 +369,7 @@
 		36561D6A19D2C8A40069D897 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				24BAB1831A2F0DF900855B77 /* SystemConfiguration.framework */,
 				36B275D31A00CD6000ED58AD /* StoreKit.framework */,
 				36A370B719F53E6D005A7AFE /* AVFoundation.framework */,
 				36561D6B19D2C8A40069D897 /* Foundation.framework */,
@@ -492,6 +508,7 @@
 		366ECD7F19D317E200F71A11 /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				24BAB1851A2F0E2600855B77 /* InternetReachibility */,
 				366F9DA51A124FC7006602E1 /* FHSTwitterEngine */,
 				36FD974919E694AC00427507 /* BSKeyboardControls */,
 				366ECD8019D3181000F71A11 /* Common.h */,
@@ -862,6 +879,7 @@
 				36B275D71A00D36400ED58AD /* RMStore.m in Sources */,
 				366F9DAA1A124FC7006602E1 /* FHSStream.m in Sources */,
 				3681603C19E6B81E00B9B64C /* ContactsModel.m in Sources */,
+				24BAB1881A2F0E8C00855B77 /* Reachability.m in Sources */,
 				366F9DAB1A124FC7006602E1 /* FHSTwitterEngine.m in Sources */,
 				2402BB831A1DBF6A00255A73 /* UntechablesList.m in Sources */,
 				2402BB881A1DC3A200255A73 /* UntechableTableCell.m in Sources */,

@@ -73,22 +73,22 @@
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
         // Right Navigation ______________________________________________
-        nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-        //[nextButton setBackgroundColor:[UIColor redColor]];//for testing
+        newUntachableButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        //[newUntachableButton setBackgroundColor:[UIColor redColor]];//for testing
         
-        nextButton.titleLabel.shadowColor = [UIColor clearColor];
-        //nextButton.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
-        
-        
-        //[nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
-        nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [nextButton setTitle:TITLE_NEW_TXT forState:normal];
-        [nextButton setTitleColor:defGray forState:UIControlStateNormal];
-        [nextButton addTarget:self action:@selector(addUntechable) forControlEvents:UIControlEventTouchUpInside];
+        newUntachableButton.titleLabel.shadowColor = [UIColor clearColor];
+        //newUntachableButton.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
         
         
-        nextButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+        //[newUntachableButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
+        newUntachableButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [newUntachableButton setTitle:TITLE_NEW_TXT forState:normal];
+        [newUntachableButton setTitleColor:defGray forState:UIControlStateNormal];
+        [newUntachableButton addTarget:self action:@selector(addUntechable) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        newUntachableButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:newUntachableButton];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
         
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
@@ -128,6 +128,8 @@
     //For testing -------- } --
     
     allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
+    
+    [self testInternetConnection];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -161,42 +163,174 @@
     return YES;
 }
 
+/**
+ * Show / hide, a loding indicator in the right bar button.
+ */
+- (void)showHidLoadingIndicator:(BOOL)show {
+    if( show ){
+        newUntachableButton.enabled = NO;
+        
+        UIActivityIndicatorView *uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
+        uiBusy.hidesWhenStopped = YES;
+        [uiBusy startAnimating];
+        
+        UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithCustomView:uiBusy];
+        [self.navigationItem setRightBarButtonItem:btn animated:NO];
+    }
+    else{
+        newUntachableButton.enabled = YES;
+        [self setNavigation:@"viewDidLoad"];
+    }
+}
+
+-(void)changeNavigation:(NSString *)option
+{
+    // DISABLE NAVIGATION ON SEND DATA TO API
+    if([option isEqualToString:@"ON_FINISH"] ){
+        
+        newUntachableButton.userInteractionEnabled = NO;
+        [self showHidLoadingIndicator:YES];
+        
+    }
+    
+    // RE-ENABLE NAVIGATION WHEN ANY ERROR OCCURED
+    else if([option isEqualToString:@"ERROR_ON_FINISH"] ){
+        
+        newUntachableButton.userInteractionEnabled = YES;
+        
+        [self showHidLoadingIndicator:NO];
+    }
+    
+    else if ( [option isEqualToString:@"ON_FINISH_SUCCESS"] ){
+        
+        newUntachableButton.userInteractionEnabled = YES;
+        
+        [self showHidLoadingIndicator:NO];
+    }
+}
+
+- (void)sendDeleteRequestToApi:(int)indexToremoveOnSucess Section:(int)section {
+    
+    BOOL errorOnFinish = NO;
+    
+    [self changeNavigation:@"ON_FINISH"];
+    
+    NSMutableDictionary *tempDict;
+    
+    NSString *apiDelete;
+    if ( section == 0 ){
+        tempDict = [sectionOneArray objectAtIndex:indexToremoveOnSucess];
+        apiDelete = [NSString stringWithFormat:@"%@?eventId=%@",API_DELETE,[tempDict valueForKey:@"eventId"]];
+    }else if ( section == 1 ){
+        tempDict = [sectionTwoArray objectAtIndex:indexToremoveOnSucess];
+        apiDelete = [NSString stringWithFormat:@"%@?eventId=%@",API_DELETE,[tempDict valueForKey:@"eventId"]];
+    }
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:apiDelete]];
+    [request setHTTPMethod:@"POST"];
+    
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    // NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    
+    if( returnData != nil ){
+        
+        NSDictionary *dict=[NSJSONSerialization JSONObjectWithData:returnData options:NSJSONReadingMutableLeaves error:nil];
+        NSLog(@"In response of save api: %@",dict);
+        
+        NSString *message = @"";
+        
+        if( [[dict valueForKey:@"status"] isEqualToString:@"OK"] ) {
+            //message = @"Untechable saved successfully";
+            
+            if ( section == 0 ){
+                NSString *untechablePath = [tempDict objectForKey:@"untechablePath"];
+                [[NSFileManager defaultManager] removeItemAtPath:untechablePath error:nil];
+                [sectionOneArray removeObjectAtIndex:indexToremoveOnSucess];
+            }else if ( section == 1 ){
+                NSString *untechablePath = [tempDict objectForKey:@"untechablePath"];
+                [[NSFileManager defaultManager] removeItemAtPath:untechablePath error:nil];
+                [sectionTwoArray removeObjectAtIndex:indexToremoveOnSucess];
+            }
+            
+        } else{
+            message = [dict valueForKey:@"message"];
+            if( !([[dict valueForKey:@"eventId"] isEqualToString:@"0"]) ) {
+
+            }
+            
+            errorOnFinish = YES;
+        }
+        
+        if( !([message isEqualToString:@""]) ) {
+            dispatch_async( dispatch_get_main_queue(), ^{
+                //[self showMsgOnApiResponse:message];
+            });
+        }
+    }
+    else{
+        errorOnFinish = YES;
+    }
+    
+    
+    if( errorOnFinish ){
+        dispatch_async( dispatch_get_main_queue(), ^{
+            [self changeNavigation:@"ERROR_ON_FINISH"];
+        });
+    }
+    else{
+        dispatch_async( dispatch_get_main_queue(), ^{
+            [self changeNavigation:@"ON_FINISH_SUCCESS"];
+        });
+    }
+
+    
+}
+
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     //[tableView beginUpdates];
     //[tableView setEditing:YES animated:YES];
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
+    if( !internetReachable.isReachable ){
+        //show alert
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection"
+                                                        message:@"You must be connected to the internet to use this app."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
         
-        if ( indexPath.section == 0 ){
+    }
+    else {
+        if (editingStyle == UITableViewCellEditingStyleDelete) {
             
-            
-            /*[tableView deleteRowsAtIndexPaths:
-             @[[NSIndexPath indexPathForRow:indexPath.row  inSection:0]]
-                             withRowAnimation:UITableViewRowAnimationLeft];*/
-            //[sectionOneArray removeObjectAtIndex:indexPath.row];
-            //add code here for when you hit delete
-            NSMutableDictionary *tempDict = [sectionOneArray objectAtIndex:indexPath.row];
-            NSString *untechablePath = [tempDict objectForKey:@"untechablePath"];
-            [[NSFileManager defaultManager] removeItemAtPath:untechablePath error:nil];
-            [sectionOneArray removeObjectAtIndex:indexPath.row];
-            
-            
-        }else if ( indexPath.section == 1 ){
-    
-            /*
-            [tableView deleteRowsAtIndexPaths:
-             @[[NSIndexPath indexPathForRow:indexPath.row  inSection:1]]
-                             withRowAnimation:UITableViewRowAnimationLeft];*/
-            
-            
-            //add code here for when you hit delete
-            NSMutableDictionary *tempDict = [sectionTwoArray objectAtIndex:indexPath.row];
-            NSString *untechablePath = [tempDict objectForKey:@"untechablePath"];
-            [[NSFileManager defaultManager] removeItemAtPath:untechablePath error:nil];
-            [sectionTwoArray removeObjectAtIndex:indexPath.row];
-            
+            if ( indexPath.section == 0 ){
+                
+                /*[tableView deleteRowsAtIndexPaths:
+                 @[[NSIndexPath indexPathForRow:indexPath.row  inSection:0]]
+                 withRowAnimation:UITableViewRowAnimationLeft];*/
+                //[sectionOneArray removeObjectAtIndex:indexPath.row];
+                //add code here for when you hit delete
+               
+                [self sendDeleteRequestToApi:indexPath.row Section:indexPath.section];
+                
+                
+                
+            }else if ( indexPath.section == 1 ){
+                
+                /*
+                 [tableView deleteRowsAtIndexPaths:
+                 @[[NSIndexPath indexPathForRow:indexPath.row  inSection:1]]
+                 withRowAnimation:UITableViewRowAnimationLeft];*/
+                
+                
+                
+                [self sendDeleteRequestToApi:indexPath.row Section:indexPath.section];
+                
+            }
         }
     }
 
@@ -272,18 +406,14 @@
         label.textColor = defGray;
         [label setFont:[UIFont fontWithName:APP_FONT size:16]];
         label.backgroundColor = [UIColor clearColor];
-        
-
-        
+    
     }else {
-        
-        
+    
         label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.bounds.size.width - 10, 30)];
         label.text = @"Previous Untachables";
         label.textColor = defGray;
         [label setFont:[UIFont fontWithName:APP_FONT size:16]];
         label.backgroundColor = [UIColor clearColor];
-        
     }
 
     [headerView addSubview:label];
@@ -328,6 +458,8 @@
     sectionOneArray = [[NSMutableArray alloc] init];
     sectionTwoArray = [[NSMutableArray alloc] init];
     
+    allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
+    
     for (int i=0 ; i < allUntechables.count ; i++){
         NSMutableDictionary *tempDict = [allUntechables objectAtIndex:i];
         [tempDict setObject:[NSNumber numberWithInt:i] forKey:@"index"];
@@ -368,6 +500,32 @@
         sectionHeader = @"Archives Untechables";
     }
     return sectionHeader;
+}
+
+// Checks if we have an internet connection or not
+- (void)testInternetConnection
+{
+    internetReachable = [Reachability reachabilityWithHostname:@"www.google.com"];
+    
+    // Internet is reachable
+    internetReachable.reachableBlock = ^(Reachability*reach)
+    {
+        // Update the UI on the main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"Yayyy, we have the interwebs!");
+        });
+    };
+    
+    // Internet is not reachable
+    internetReachable.unreachableBlock = ^(Reachability*reach)
+    {
+        // Update the UI on the main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"Someone broke the internet :(");
+        });
+    };
+    
+    [internetReachable startNotifier];
 }
 
 /*
