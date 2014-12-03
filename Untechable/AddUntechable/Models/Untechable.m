@@ -173,6 +173,7 @@
         dic[@"uniqueId"]        = uniqueId;
         dic[@"untechablePath"]  = untechablePath;
         dic[@"savedOnServer"]   = savedOnServer ? @"YES" : @"NO";
+        dic[@"hasFinished"]     = hasFinished ? @"YES" : @"NO";        
         
 
         //Screen1 vars
@@ -203,7 +204,7 @@
         dic[@"email"] = email;
         dic[@"password"] = password;
         dic[@"respondingEmail"] = respondingEmail;
-        dic[@"hasFinished"] = hasFinished ? @"YES" : @"NO";
+
         
         //Here we write the dictionary of .peices files
         [dic writeToFile:piecesFile atomically:YES];
@@ -222,6 +223,7 @@
         uniqueId       = ( dic[@"uniqueId"] ) ? dic[@"uniqueId"] : [self getUniqueId];
         untechablePath = ( dic[@"untechablePath"] ) ? dic[@"untechablePath"] : [self getNewUntechablePath];
         savedOnServer  = ([dic[@"savedOnServer"] isEqualToString:@"YES"]) ? YES : NO;
+        hasFinished     = ([dic[@"hasFinished"] isEqualToString:@"YES"]) ? YES : NO;
         
         //Screen1 vars
         timezoneOffset  = ( dic[@"timezoneOffset"] ) ? dic[@"timezoneOffset"] : [commonFunctions getTimeZoneOffset];
@@ -251,7 +253,6 @@
         email           = ( dic[@"email"] ) ? dic[@"email"] : @"";
         password        = ( dic[@"password"] ) ? dic[@"password"] : @"";
         respondingEmail = ( dic[@"respondingEmail"] ) ? dic[@"respondingEmail"] : @"";
-        hasFinished     = ([dic[@"hasFinished"] isEqualToString:@"YES"]) ? YES : NO;
         
     }
     
