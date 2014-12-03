@@ -102,6 +102,7 @@
 -(void)addUntechable{
     AddUntechableController *addUntechable;
     addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
+    addUntechable.indexOfUntechableInEditMode = -1;
     //addUntechable.untechable = untechable;
     [self.navigationController pushViewController:addUntechable animated:YES];
 }
