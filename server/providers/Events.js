@@ -261,13 +261,78 @@ Events.setup = function(app) {
     }); // end post
 	
 	
+	/*
+		Delete event
+	*/
+	app.all('/event/delete', function(req, res) {
+		// Our logger for logging to file and console
+        var logger = require(__dirname + '/../logger');
+		
+        // Var for Events models
+        var Events = require(__dirname + '/../models/Events');
+
+        // Construct response JSON
+        var responseJSON = {};
+
+        var params = req.body;		
+		var eventId	=	params.eventId;		
+		if( eventId == undefined ) {
+			eventId	=	req.query.eventId;
+		}
+		
+		function print( msg ) {
+			console.log( msg );
+		}
+		
+		function retError1( res, error, lineNum, message ) {
+			responseJSON = {};
+			responseJSON.status = 'FAIL';
+			responseJSON.eventId = eventId;			
+			responseJSON.message = message;
+			responseJSON.message4Dev = "Error: Event.js, line#: "+lineNum+", error: " + JSON.stringify(error);
+
+			//Log event
+	        logger.error( responseJSON.message4Dev );
+			print( responseJSON );
+			
+	    	// Response to request.
+	        res.jsonp(200, responseJSON);
+		}
 	
-	
-	
-	
-	
-	
-	
+		function retSuccess1( res, line ) {
+			responseJSON = {};
+			responseJSON.status = 'OK';
+			responseJSON.eventId = eventId;
+	        responseJSON.message = 'Succesfully deleted';			
+
+			print( responseJSON  );			
+
+	    	// Response to request.
+			res.jsonp(200, responseJSON);
+		}	
+		
+		
+		if( eventId == undefined ) {
+			retError1( res, "eventId is undefined.", __line, "Please send eventId to delete the event." );
+		}
+		else {		
+			// remove events
+	        Events.remove({
+	                _id : eventId
+	            },
+	            function(err, count) {
+	                if (err) {
+						logger.info("Events.js: "+__line+", Error occured while delete, please try latter.");
+	                    retError1( res, err , __line, "Error occured while delete, please try latter." );
+	                }
+					else {	
+	                    retSuccess1( res, __line )
+					}
+
+	        }); // remove end
+		}
+		
+	});
 	
 	
 	
@@ -284,8 +349,7 @@ Events.setup = function(app) {
 		CommonFunctions.print( "CommonFunctions.print: hello print");
 		res.jsonp({"In test url of UntechableApi, Events.js , __line":__line});
 				
-	});
-	
+	});	
 	
 	function save(req,res){
 		console.log('/save1');
@@ -346,8 +410,7 @@ Events.setup = function(app) {
 	}
 	app.all('/save1', function(req, res) {
 		save(req,res);
-	});
-	
+	});	
 	
 	// TESTING CODE  ----------------}-------		
 	
