@@ -387,7 +387,7 @@
     
     NSMutableDictionary *sUntechable = nil;
 
-    if ( indexOfUntechableInEditMode != 0 && [untechable.commonFunctions getAllUntechables:untechable.userId].count > 0){
+    if ( indexOfUntechableInEditMode > -1 && [untechable.commonFunctions getAllUntechables:untechable.userId].count > 0){
         
         sUntechable = [untechable.commonFunctions getUntechable:indexOfUntechableInEditMode UserId:untechable.userId];
         

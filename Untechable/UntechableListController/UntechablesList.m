@@ -143,7 +143,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [untechablesTable reloadData];
+    //[untechablesTable reloadData];
     
     // During startup (-viewDidLoad or in storyboard) do:
     self.untechablesTable.allowsMultipleSelectionDuringEditing = NO;
@@ -178,7 +178,7 @@
             /*[tableView deleteRowsAtIndexPaths:
              @[[NSIndexPath indexPathForRow:indexPath.row  inSection:0]]
                              withRowAnimation:UITableViewRowAnimationLeft];*/
-            [sectionOneArray removeObjectAtIndex:indexPath.row];
+            //[sectionOneArray removeObjectAtIndex:indexPath.row];
             //add code here for when you hit delete
             NSMutableDictionary *tempDict = [sectionOneArray objectAtIndex:indexPath.row];
             NSString *untechablePath = [tempDict objectForKey:@"untechablePath"];
@@ -284,7 +284,6 @@
     
     if ( indexPath.section == 0 ){
         
-        NSLog(@"%ld",indexPath.row );
         NSMutableDictionary *tempDict = [sectionOneArray objectAtIndex:indexPath.row];
 
         AddUntechableController *addUntechable;
@@ -297,7 +296,7 @@
         
     }else if ( indexPath.section == 1 ){
         
-        NSMutableDictionary *tempDict = [sectionOneArray objectAtIndex:indexPath.row];
+        NSMutableDictionary *tempDict = [sectionTwoArray objectAtIndex:indexPath.row];
         
         AddUntechableController *addUntechable;
         addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];

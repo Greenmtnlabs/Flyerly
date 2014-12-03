@@ -54,7 +54,7 @@
     
     NSString *uniqueId_temp,*untechablePath_temp;
     
-    for(int i = 1 ; i < sortedList.count ;i++)
+    for(int i = 0 ; i < sortedList.count ;i++)
     {
         uniqueId_temp = sortedList[i];
         untechablePath_temp = [NSString stringWithFormat:@"%@/%@",userPath,uniqueId_temp];
