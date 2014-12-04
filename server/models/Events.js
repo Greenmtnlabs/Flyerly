@@ -33,24 +33,21 @@ var eventsSchema = db.Schema({
 	twOAuthTokenSecret: String,		
 	linkedinAuth: String ,
 	
-	//Field will show on screen2
-    acType: String,
+	//Field will show on screen2    
+	acType: String,  //< ICLOUD / EXCHANGE / GOOGLE / YAHOO / AOL / OUTLOOK / OTHER > 	
     name: String,
     email: String ,
     password: String ,
     respondingEmail: String ,
     //Field will show on screen1
-    serverType: String,    
+    serverType: String, //< IMAP >
+    ssl: String, //< YES / NO >
     //INCOMING MAIL SERVER
-    imsHostName: String,
-    imsUserName: String,    
-    imsPassword: String,    
-    imsPort: String,
+    imsHostName: String, // < mail.thecreativeblink.com >
+    imsPort: String, // 143
     //OUTGOING MAIL SERVER
-    omsHostName: String,
-    omsUserName: String,    
-    omsPassword: String,
-    omsPort: String,
+    omsHostName: String,  // < mail.thecreativeblink.com >
+    omsPort: String, // 25
 		
 	updatedOn: String,
 	postSocialStatus: Boolean

@@ -74,10 +74,16 @@ else if( config.app.mode.current == config.app.mode.PRODUCTION  ) {
 
 
 // ACCOUNT TYPES
+//acType: String,  //< ICLOUD / EXCHANGE / GOOGLE / YAHOO / AOL / OUTLOOK / OTHER > 
 config.acType = {};
+config.acType.ICLOUD = 'ICLOUD';
+config.acType.EXCHANGE = 'EXCHANGE';
 config.acType.GMAIL = 'GMAIL';
-config.acType.HOTMAIL = 'HOTMAIL';
 config.acType.YAHOO = 'YAHOO';
+config.acType.AOL = 'AOL';
+config.acType.OUTLOOK = 'OUTLOOK';
+config.acType.OTHER = 'OTHER';
+
 
 // Twilio Account 
 config.twilio = {};

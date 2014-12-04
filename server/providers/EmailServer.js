@@ -32,101 +32,164 @@ EmailServer.setup = function( app ) {
 	@param user == email address
 	*/
 	
-	function hookInboxReader( user, password, respondingEmail, stopListiningStrTime ) {
+	function hookInboxReader( eventObj, stopListiningStrTime ) {
 
-		console.log( { msg:"In read inbox", user:user, password:password} );
+		var user			=	(eventObj.email != undefined ) ? eventObj.email.trim() : "";
+		var password		=	(eventObj.password != undefined ) ? eventObj.password.trim() : "";
+		var respondingEmail	=	(eventObj.respondingEmail != undefined ) ? eventObj.respondingEmail.trim() : "";				
+		var acType			=	(eventObj.acType != undefined ) ? eventObj.acType.trim() : "";
+		//acType: String,  //< ICLOUD / EXCHANGE / GOOGLE / YAHOO / AOL / OUTLOOK / OTHER > 				
+		//acType = getEmailAcType( user ); //config.acType.GMAIL;
 		
-		//https://www.npmjs.org/package/mail-notifier
-		var notifier = require('mail-notifier');
-		var inboxReader = null;
-		var acType = getEmailAcType( user ); //config.acType.GMAIL;
-		var allowedAcType = false;
-		var imap	=	{};
+		if( acType !=  "" && user !=  "" && password !=  "" && respondingEmail !=  "" ) {			
+			console.log( { msg:"In read inbox", user:user, password:password} );
 		
-		var inboxReaderStartedDate = new Date();
-		console.log( {getDate:inboxReaderStartedDate.getDate(), getYear:inboxReaderStartedDate.getYear(), getTime:inboxReaderStartedDate.getTime()} );
+			//https://www.npmjs.org/package/mail-notifier
+			var notifier = require('mail-notifier');
+			var inboxReader = null;			
+			var allowedAcType = false;
+			var imap	=	{};
 		
-		if( acType == config.acType.GMAIL ){
-			allowedAcType = true;
-			imap = {
-			  user: user,
-			  password: password,
-			  host: "imap.gmail.com",
-			  port: 993, // imap port
-			  tls: true,// use secure connection
-			  tlsOptions: { rejectUnauthorized: false }
-			};
-		}
-		else if( acType == config.acType.HOTMAIL ){
-			allowedAcType = true;
-			imap = {
-			  user: user,
-			  password: password,
-			  host: "imap-mail.outlook.com",
-			  port: 993, // imap port
-			  tls: true,// use secure connection
-			  tlsOptions: { rejectUnauthorized: false }
-			};
-		}
-		else if( acType == config.acType.YAHOO ){
-			allowedAcType = true;
-			imap = {
-			  user: user,
-			  password: password,
-			  host: "imap.mail.yahoo.com",
-			  port: 993, // imap port
-			  tls: true,// use secure connection
-			  tlsOptions: { rejectUnauthorized: false }
-			};
-		}
+			var inboxReaderStartedDate = new Date();
+			console.log( {getDate:inboxReaderStartedDate.getDate(), getYear:inboxReaderStartedDate.getYear(), getTime:inboxReaderStartedDate.getTime()} );
 		
-		if( allowedAcType == true) {
-			var counter = 0;
-			inboxReader = notifier(imap);
-			inboxReader.on('mail',function( res ) {
-				++counter;
+
+			if( acType == config.acType.ICLOUD ){
+				allowedAcType = true;
+				imap = {
+				  user: user,
+				  password: password,
+				  host: "imap.gmail.com",
+				  port: 993, // imap port
+				  tls: true,// use secure connection
+				  tlsOptions: { rejectUnauthorized: false }
+				};
+			}
+			else if( acType == config.acType.EXCHANGE ){
+				allowedAcType = true;
+				imap = {
+				  user: user,
+				  password: password,
+				  host: "imap.gmail.com",
+				  port: 993, // imap port
+				  tls: true,// use secure connection
+				  tlsOptions: { rejectUnauthorized: false }
+				};
+			}
+			else if( acType == config.acType.GOOGLE ){
+				allowedAcType = true;
+				imap = {
+				  user: user,
+				  password: password,
+				  host: "imap.gmail.com",
+				  port: 993, // imap port
+				  tls: true,// use secure connection
+				  tlsOptions: { rejectUnauthorized: false }
+				};
+			}
+			else if( acType == config.acType.YAHOO ){
+				allowedAcType = true;
+				imap = {
+				  user: user,
+				  password: password,
+				  host: "imap.mail.yahoo.com",
+				  port: 993, // imap port
+				  tls: true,// use secure connection
+				  tlsOptions: { rejectUnauthorized: false }
+				};
+			}		
+			else if( acType == config.acType.AOL ){
+				allowedAcType = true;
+				imap = {
+				  user: user,
+				  password: password,
+				  host: "imap.gmail.com",
+				  port: 993, // imap port
+				  tls: true,// use secure connection
+				  tlsOptions: { rejectUnauthorized: false }
+				};
+			}
+			else if( acType == config.acType.OUTLOOK ){
+				allowedAcType = true;
+				imap = {
+				  user: user,
+				  password: password,
+				  host: "imap-mail.outlook.com",
+				  port: 993, // imap port
+				  tls: true,// use secure connection
+				  tlsOptions: { rejectUnauthorized: false }
+				};
+			}
+			else if( acType == config.acType.OTHER ){
 				
-				var emailDate = new Date(res.date);
-			    console.log( { emailDate_getDate:emailDate.getDate(),emailDate_getYear:emailDate.getYear(),emailDate_getTime:emailDate.getTime() } );
-				console.log( {msg:"on new  mail receive, counter:"+counter, from:res.from, to:res.to, date:res.date} );
-
-				if( res.from.length > 0 && inboxReaderStartedDate.getTime() < emailDate.getTime() ){
-					var fromEmail = res.from[0].address;
-					var fromName = res.from[0].name;
-					
-					var toEmail = res.to[0].address;
-					var toName = res.to[0].name;					
-
-					//Check send is not also untechable[ other wise reply will come in a loop ]
-					if( G_EMAIL_ADDRESSES.indexOf( fromEmail ) < 0 ) {
-						console.log("Send him["+fromEmail+"] i am untechable");
-						CommonFunctions.sendEmail( config, nodemailer, {
-							fromEmail: fromEmail,
-							fromName: fromName,
-							respondingEmail: respondingEmail,														
-							toEmail: toEmail,
-							toName: toName
-						});
-					}
+				var imsHostName	= (eventObj.imsHostName != undefined ) ? eventObj.imsHostName.trim() : "";
+				var imsPort		= (eventObj.imsPort != undefined ) ? eventObj.imsPort.trim() : "";
+				var ssl			= (eventObj.ssl != undefined ) ? eventObj.ssl.trim() : "";
+								
+				if( imsHostName !=  "" && imsPort !=  "" && ssl !=  "" ) {
+					allowedAcType = true;									
+					imap = {
+					  user: user,
+					  password: password,
+					  host: imsHostName,
+					  port: imsPort, // imap port
+					  tls: ssl,// use secure connection
+					  tlsOptions: { rejectUnauthorized: false }
+					};
 				}
+			}	
+		
+		
+		
+		
+			if( allowedAcType == true) {
+				var counter = 0;
+				inboxReader = notifier(imap);
+				inboxReader.on('mail',function( res ) {
+					++counter;
 				
-			});
+					var emailDate = new Date(res.date);
+				    console.log( { emailDate_getDate:emailDate.getDate(),emailDate_getYear:emailDate.getYear(),emailDate_getTime:emailDate.getTime() } );
+					console.log( {msg:"on new  mail receive, counter:"+counter, from:res.from, to:res.to, date:res.date} );
+
+					if( res.from.length > 0 && inboxReaderStartedDate.getTime() < emailDate.getTime() ){
+						var fromEmail = res.from[0].address;
+						var fromName = res.from[0].name;
+					
+						var toEmail = res.to[0].address;
+						var toName = res.to[0].name;					
+
+						//Check send is not also untechable[ other wise reply will come in a loop ]
+						if( toEmail == user && G_EMAIL_ADDRESSES.indexOf( fromEmail ) < 0 ) {
+							console.log("Send him["+fromEmail+"] i am untechable");
+							CommonFunctions.sendEmail2( eventObj, {
+								fromEmail: fromEmail,
+								fromName: fromName,
+								respondingEmail: respondingEmail,														
+								toEmail: toEmail,
+								toName: toName
+							});
+						}
+					}
+				
+				});
 			
-			inboxReader.on('error',function( res ) {
-				console.log( {msg:"on error",  res: res} );
-			});
+				inboxReader.on('error',function( res ) {
+					console.log( {msg:"on error",  res: res} );
+				});
 			
-			inboxReader.on('end',function( res ) {
-				console.log( {msg:"on end",  res: res} );
-			});
+				inboxReader.on('end',function( res ) {
+					console.log( {msg:"on end",  res: res} );
+				});
 			
-			inboxReader.start();
+				inboxReader.start();
 			
-			setTimeout(function(){
-				console.log("Stop listing after time");
-				inboxReader.stop();
-			}, stopListiningStrTime );
+				setTimeout(function(){
+					console.log("Stop listing after time");
+					inboxReader.stop();
+				}, stopListiningStrTime );
 			
+			}
 		}
 		
 	}//end fn//
@@ -149,14 +212,6 @@ EmailServer.setup = function( app ) {
 		
 		return acType;
 	}
-	
-	/*
-	var stopListiningStrTime = (1 * 60 * 1000);
-	hookInboxReader( "rufi.untechable@gmail.com", "abc123RUFI", stopListiningStrTime );
-	hookInboxReader( "abdul.rauf@riksof.com", "intel123", stopListiningStrTime );		
-	*/
-	
-	
 	
 	/*	
     1- Listner will listen inbox till 50 minutes(max), then stop listing for 10 minutes, cron will restart after 1 hour(60min)
@@ -208,7 +263,7 @@ EmailServer.setup = function( app ) {
 				
 				for (var i = 0; i < G_EVENTS.length; i++) {				
 					var stopListiningStrTime = (50 * 60 * 1000); //50 minutes
-					hookInboxReader( G_EVENTS[i].email, G_EVENTS[i].password, G_EVENTS[i].respondingEmail, stopListiningStrTime );
+					hookInboxReader( G_EVENTS[i], stopListiningStrTime );
 				}
 	        }
 	    });
