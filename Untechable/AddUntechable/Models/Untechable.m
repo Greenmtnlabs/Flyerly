@@ -27,7 +27,7 @@
 @synthesize socialStatus, fbAuth, fbAuthExpiryTs, twitterAuth, twOAuthTokenSecret, linkedinAuth;
 
 //4-vars for screen4
-@synthesize email, password, respondingEmail;
+@synthesize email, password, respondingEmail,acType, ssl, imsHostName, imsPort, omsHostName, omsPort;
 
 
 -(NSDate *)stringToDate:(NSString *)inputStrFormate dateString:(NSString *)dateString{
@@ -204,7 +204,13 @@
         dic[@"email"] = email;
         dic[@"password"] = password;
         dic[@"respondingEmail"] = respondingEmail;
-
+        dic[@"acType"] = acType;
+        
+        dic[@"ssl"] = ssl;
+        dic[@"imsHostName"] = imsHostName;
+        dic[@"imsPort"] = imsPort;
+        dic[@"omsHostName"] = omsHostName;
+        dic[@"omsPort"] = omsPort;
         
         //Here we write the dictionary of .peices files
         [dic writeToFile:piecesFile atomically:YES];
@@ -253,6 +259,14 @@
         email           = ( dic[@"email"] ) ? dic[@"email"] : @"";
         password        = ( dic[@"password"] ) ? dic[@"password"] : @"";
         respondingEmail = ( dic[@"respondingEmail"] ) ? dic[@"respondingEmail"] : @"";
+        acType          = ( dic[@"acType"] ) ? dic[@"acType"] : @"";
+        ssl             = ( dic[@"ssl"] ) ? dic[@"ssl"] : @"";
+        imsHostName     = ( dic[@"imsHostName"] ) ? dic[@"imsHostName"] : @"";
+        imsPort         = ( dic[@"imsPort"] ) ? dic[@"imsPort"] : @"";
+        omsHostName     = ( dic[@"omsHostName"] ) ? dic[@"omsHostName"] : @"";
+        omsPort         = ( dic[@"omsPort"] ) ? dic[@"omsPort"] : @"";
+       
+        
         
     }
     
@@ -298,6 +312,7 @@
     email           = @"";
     password        = @"";
     respondingEmail = @"";
+    acType = ssl= imsHostName = imsPort = omsHostName = omsPort= @"";
     
     
 }

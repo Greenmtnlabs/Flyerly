@@ -45,9 +45,8 @@
 @property (strong, nonatomic) NSString *socialStatus, *fbAuth, *fbAuthExpiryTs, *twitterAuth, *twOAuthTokenSecret, *linkedinAuth;
 
 //Screen4
-@property (strong, nonatomic) NSString *email, *password, *respondingEmail;
-
-
+@property (strong, nonatomic) NSString *email, *password, *respondingEmail, *acType, *ssl, *imsHostName, *imsPort,
+                                       *omsHostName, *omsPort;
 
 -(NSDate *)stringToDate:(NSString *)inputStrFormate dateString:(NSString *)dateString;
 -(void)printNavigation:navigationControllerPointer;
