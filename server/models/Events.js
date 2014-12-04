@@ -35,7 +35,6 @@ var eventsSchema = db.Schema({
 	
 	//Field will show on screen2    
 	acType: String,  //< ICLOUD / EXCHANGE / GOOGLE / YAHOO / AOL / OUTLOOK / OTHER > 	
-    name: String,
     email: String ,
     password: String ,
     respondingEmail: String ,

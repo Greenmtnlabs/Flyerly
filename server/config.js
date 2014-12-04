@@ -78,7 +78,7 @@ else if( config.app.mode.current == config.app.mode.PRODUCTION  ) {
 config.acType = {};
 config.acType.ICLOUD = 'ICLOUD';
 config.acType.EXCHANGE = 'EXCHANGE';
-config.acType.GMAIL = 'GMAIL';
+config.acType.GOOGLE = 'GOOGLE';
 config.acType.YAHOO = 'YAHOO';
 config.acType.AOL = 'AOL';
 config.acType.OUTLOOK = 'OUTLOOK';

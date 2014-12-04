@@ -1,8 +1,13 @@
 // Our logger for logging to file and console
 var logger = require(__dirname + '/../logger');
 
-var CommonFunctions = {};
+var nodemailer = require("nodemailer");
 
+// Get the configurations
+var config = require(__dirname + '/../config');
+
+
+var CommonFunctions = {};
 
 CommonFunctions.print = function( msg ){
 	console.log( msg );
@@ -54,40 +59,37 @@ CommonFunctions.sendEmail = function( config, nodemailer, data ){
 	}
 }
 
-CommonFunctions.sendEmail2 = function( event, data ){
+CommonFunctions.sendEmail2 = function( eventObj, mailOptions ){
 	
 	console.log("G bhai iam in CommonFunctions.sendEmail2");
 	
-	var nodemailer = require("nodemailer");
-    // Get the configurations
-    var config = require(__dirname + '/../config');
+	var smtpOptions = {
+		host: eventObj.omsHostName, // hostname
+	    secureConnection: (eventObj.ssl == "YES"), // use SSL
+	    port: eventObj.omsPort, // port for secure SMTP
+	    auth: {
+	        user: eventObj.email,
+	        pass: eventObj.password
+	    }
+	};
+	
+	if( eventObj.acType == config.acType.GOOGLE ){
+		smtpOptions	=	{
+		    service: "Gmail",
+		    auth: smtpOptions.auth
+		};
+	}
 	
 	
 	// create reusable transport method (opens pool of SMTP connections)
-	var smtpTransport = nodemailer.createTransport("SMTP",{
-		host: "mail.thecreativeblink.com", // hostname
-	    secureConnection: false, // use SSL
-	    port: 25, // port for secure SMTP
-	    auth: {
-	        user: "rufi@thecreativeblink.com",
-	        pass: "Testing123**"
-	    }
-	});
-	
-	// setup e-mail data with unicode symbols
-	var mailOptions = {
-	    from: "Rufi < rufi@thecreativeblink.com >", // sender address
-	    to: "abdul.rauf@riksof.com", // list of receivers "email1,email2,email3"
-	    subject: "rufi is Untechable0", // Subject line
-	    text: "rufi is untechable1", // plaintext body
-	    html: "rufi is untechable2" // html body
-	}
+	var smtpTransport = nodemailer.createTransport("SMTP", smtpOptions );
 
 	try{
 		// send mail with defined transport object
 		smtpTransport.sendMail(mailOptions, function(error, response){
 		    if(error){
-		        console.log("line: "+__line+" ,Error occured while send email");   logger.info(error);			
+		        console.log("line: "+__line+" ,Error occured while send email");
+				logger.info(error);			
 		    }else{
 				console.log("line: "+__line+" ,email sent successfully");
 		    }
@@ -99,5 +101,46 @@ CommonFunctions.sendEmail2 = function( event, data ){
 	}
 }
 
+/*
+	Set events object a/c to the Event model
+*/
+CommonFunctions.getValidEventObj = function( eventObj ) {
+	
+	
+	eventObj.email			=	(eventObj.email != undefined ) ? eventObj.email.trim() : "";
+	eventObj.password		=	(eventObj.password != undefined ) ? eventObj.password.trim() : "";
+	eventObj.respondingEmail=	(eventObj.respondingEmail != undefined ) ? eventObj.respondingEmail.trim() : "";				
+	eventObj.acType			=	(eventObj.acType != undefined ) ? eventObj.acType.trim() : "";
+	//acType: String,  //< ICLOUD / EXCHANGE / GOOGLE / YAHOO / AOL / OUTLOOK / OTHER > 				
+	//acType = getEmailAcType( user ); //config.acType.GMAIL;
+	eventObj.imsHostName	= (eventObj.imsHostName != undefined ) ? eventObj.imsHostName.trim() : "";
+	eventObj.imsPort		= (eventObj.imsPort != undefined ) ? eventObj.imsPort.trim() : "";
+	eventObj.ssl			= (eventObj.ssl != undefined ) ? eventObj.ssl.trim() : "";
+
+	eventObj.omsHostName	= (eventObj.omsHostName != undefined ) ? eventObj.omsHostName.trim() : "";
+	eventObj.omsPort		= (eventObj.omsPort != undefined ) ? eventObj.omsPort.trim() : "";
+	
+	return eventObj;		
+}
+
+/*
+return a/c type
+*/
+CommonFunctions.getEmailAcType = function( email ) {	
+	var acType = "";
+	email	=	( typeof email == "string" ) ? email : "";
+	
+	if( email.indexOf("@gmail.com") > -1 ) {
+		acType = config.acType.GMAIL;
+	}
+	else if( email.indexOf("@hotmail.com") > -1 ) {
+		acType = config.acType.HOTMAIL;			
+	}
+	else if( email.indexOf("@yahoo.com") > -1 ) {
+		acType = config.acType.YAHOO;			
+	}
+	
+	return acType;
+}
 
 module.exports = CommonFunctions;
