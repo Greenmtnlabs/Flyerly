@@ -25,7 +25,15 @@
     
 }
 
+//INCOMING MAIL SERVER
+@property (weak, nonatomic) IBOutlet UITextField *imsHostName;// <  mail.thecreativeblink.com >
+@property (weak, nonatomic) IBOutlet UITextField *imsPort;// 143
+//OUTGOING MAIL SERVER
+@property (weak, nonatomic) IBOutlet UITextField *omsHostName;// <  mail.thecreativeblink.com >
+@property (weak, nonatomic) IBOutlet UITextField *omsPort;// 25
+@property (weak, nonatomic) IBOutlet UITableView *serverAccountTable;
+
 @property (nonatomic,strong)  Untechable *untechable;
-@property(nonatomic,strong) IBOutlet UISegmentedControl *serverSegment;
+@property (weak, nonatomic) IBOutlet UISwitch *sslSwitch;
 
 @end

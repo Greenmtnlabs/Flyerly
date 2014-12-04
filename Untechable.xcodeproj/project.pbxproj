@@ -11,6 +11,10 @@
 		2402BB841A1DBF6A00255A73 /* UntechablesList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2402BB821A1DBF6A00255A73 /* UntechablesList.xib */; };
 		2402BB881A1DC3A200255A73 /* UntechableTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402BB861A1DC3A200255A73 /* UntechableTableCell.m */; };
 		2402BB891A1DC3A200255A73 /* UntechableTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2402BB871A1DC3A200255A73 /* UntechableTableCell.xib */; };
+		24848FE71A30403600BF1138 /* ServerAccountDetailsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24848FE51A30403600BF1138 /* ServerAccountDetailsViewCell.m */; };
+		24848FE81A30403600BF1138 /* ServerAccountDetailsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24848FE61A30403600BF1138 /* ServerAccountDetailsViewCell.xib */; };
+		24A65BEC1A30451E00BE83C6 /* SSLCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A65BEA1A30451E00BE83C6 /* SSLCell.m */; };
+		24A65BED1A30451E00BE83C6 /* SSLCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A65BEB1A30451E00BE83C6 /* SSLCell.xib */; };
 		24BAB1841A2F0DF900855B77 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BAB1831A2F0DF900855B77 /* SystemConfiguration.framework */; };
 		24BAB1881A2F0E8C00855B77 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BAB1871A2F0E8C00855B77 /* Reachability.m */; };
 		24BAB18A1A2F340200855B77 /* logo-other.png in Resources */ = {isa = PBXBuildFile; fileRef = 24BAB1891A2F340200855B77 /* logo-other.png */; };
@@ -135,6 +139,12 @@
 		2402BB851A1DC3A200255A73 /* UntechableTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UntechableTableCell.h; path = UntechableListController/UntechableTableCell.h; sourceTree = "<group>"; };
 		2402BB861A1DC3A200255A73 /* UntechableTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UntechableTableCell.m; path = UntechableListController/UntechableTableCell.m; sourceTree = "<group>"; };
 		2402BB871A1DC3A200255A73 /* UntechableTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UntechableTableCell.xib; path = UntechableListController/UntechableTableCell.xib; sourceTree = "<group>"; };
+		24848FE41A30403600BF1138 /* ServerAccountDetailsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerAccountDetailsViewCell.h; sourceTree = "<group>"; };
+		24848FE51A30403600BF1138 /* ServerAccountDetailsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerAccountDetailsViewCell.m; sourceTree = "<group>"; };
+		24848FE61A30403600BF1138 /* ServerAccountDetailsViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServerAccountDetailsViewCell.xib; sourceTree = "<group>"; };
+		24A65BE91A30451E00BE83C6 /* SSLCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSLCell.h; sourceTree = "<group>"; };
+		24A65BEA1A30451E00BE83C6 /* SSLCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSLCell.m; sourceTree = "<group>"; };
+		24A65BEB1A30451E00BE83C6 /* SSLCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSLCell.xib; sourceTree = "<group>"; };
 		24BAB1831A2F0DF900855B77 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		24BAB1861A2F0E6A00855B77 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		24BAB1871A2F0E8C00855B77 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -619,6 +629,12 @@
 				36B4E53B1A28BBD400CC18B0 /* EmailTableViewCell.h */,
 				36B4E53C1A28BBD400CC18B0 /* EmailTableViewCell.m */,
 				36B4E53D1A28BBD400CC18B0 /* EmailTableViewCell.xib */,
+				24848FE41A30403600BF1138 /* ServerAccountDetailsViewCell.h */,
+				24848FE51A30403600BF1138 /* ServerAccountDetailsViewCell.m */,
+				24848FE61A30403600BF1138 /* ServerAccountDetailsViewCell.xib */,
+				24A65BE91A30451E00BE83C6 /* SSLCell.h */,
+				24A65BEA1A30451E00BE83C6 /* SSLCell.m */,
+				24A65BEB1A30451E00BE83C6 /* SSLCell.xib */,
 			);
 			name = EmailSettingController;
 			sourceTree = "<group>";
@@ -769,6 +785,7 @@
 				366EAF921A14C3530011D6C6 /* icon-50.png in Resources */,
 				366EAFAB1A14E5370011D6C6 /* playvideo@2x.png in Resources */,
 				363DEAFB1A2C6D9B0035FF1F /* logo-Google.jpg in Resources */,
+				24848FE81A30403600BF1138 /* ServerAccountDetailsViewCell.xib in Resources */,
 				36474F2419D9780100084F34 /* Pigiarniq Italic.ttf in Resources */,
 				36B276741A0124E800ED58AD /* play_gray@2x.png in Resources */,
 				36B276761A0124E800ED58AD /* play@2x.png in Resources */,
@@ -813,6 +830,7 @@
 				36561D7619D2C8A40069D897 /* InfoPlist.strings in Resources */,
 				366EAF931A14C3530011D6C6 /* icon-50@2x.png in Resources */,
 				366EAFB81A14EDA30011D6C6 /* copy.png in Resources */,
+				24A65BED1A30451E00BE83C6 /* SSLCell.xib in Resources */,
 				366EAF951A14C3530011D6C6 /* icon-60@2x.png in Resources */,
 				366EAFA01A14C3530011D6C6 /* Default-667h@2x.png in Resources */,
 				24BAB18A1A2F340200855B77 /* logo-other.png in Resources */,
@@ -895,8 +913,10 @@
 				36B036A619DAF44D00E8CD21 /* EmailSettingController.m in Sources */,
 				36561D7C19D2C8A40069D897 /* AppDelegate.m in Sources */,
 				366ECD7E19D3135200F71A11 /* Untechable.m in Sources */,
+				24848FE71A30403600BF1138 /* ServerAccountDetailsViewCell.m in Sources */,
 				36FD975519E694AC00427507 /* BSKeyboardControls.m in Sources */,
 				36524AF119D940F4006DCAAF /* SocialnetworkController.m in Sources */,
+				24A65BEC1A30451E00BE83C6 /* SSLCell.m in Sources */,
 				36561D7819D2C8A40069D897 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

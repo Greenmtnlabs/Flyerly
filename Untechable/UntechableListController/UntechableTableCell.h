@@ -19,6 +19,6 @@
 @property (nonatomic,strong)IBOutlet UILabel *startHeaderLabel;
 @property (nonatomic,strong)IBOutlet UILabel *endHeaderLabel;
 
--(void)setCellValueswithUntechableTitle :(NSString *)title StartDate:(NSString *)startDate StartTime:(NSString *)startTime EndDate: (NSString *)endDate EndTime:(NSString *)endTime ;
+-(void)setCellValueswithUntechableTitle :(NSString *)title StartDate:(NSString *)startDate StartTime:(NSString *)startTime EndDate: (NSString *)endDate EndTime:(NSString *)endTime;
 
 @end

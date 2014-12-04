@@ -10,12 +10,15 @@
 #import "ThankyouController.h"
 #import "Common.h"
 #import "BSKeyboardControls.h"
+#import "ServerAccountDetailsViewCell.h"
+#import "SSLCell.h"
 
 
 @class EmailTableViewCell;
 
 @interface EmailSettingController (){
  
+    NSString *ssl;
 }
 
 @property (strong, nonatomic) IBOutlet UIView *emailSetting;
@@ -24,7 +27,6 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView0;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *serverType;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *ssl;
 
 
 @property (strong, nonatomic) IBOutlet UILabel *lbl1;
@@ -42,7 +44,7 @@
 
 @implementation EmailSettingController
 
-@synthesize untechable,ssl;
+@synthesize untechable,sslSwitch,serverAccountTable;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -64,10 +66,19 @@
     [self setDefaultModel];
     
     //[self.view addSubview:_emailSetting1];
-    
+
     NSArray *fields = @[ self.inputEmail, self.inputPassword, self.inputMsg ];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
     [self.keyboardControls setDelegate:self];
+}
+
+- (void)sslStateChanged:(UISwitch *)switchState
+{
+    if ([switchState isOn]) {
+        ssl = @"YES";
+    } else {
+        ssl = @"NO";
+    }
 }
 
 -(IBAction)serverType:(UISegmentedControl *)sender
@@ -191,8 +202,117 @@
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
 }
 
+-(void)btnBackToAccountType{
+
+    [self hideAllViews];
+    [UIView transitionWithView:self.view duration:0.5
+                       options:UIViewAnimationOptionTransitionCurlUp //change to whatever animation you like
+                    animations:^ { self.view; }
+                    completion:^(BOOL finished){
+                        [self setNavigation:@"viewDidLoad"];
+                    }];
+}
+
+-(void)btnNextTouchEndToServerAccount{
+    
+    [self hideAllViews];
+    [UIView transitionWithView:self.view duration:0.5
+                       options:UIViewAnimationOptionTransitionCurlUp //change to whatever animation you like
+                    animations:^ { [self.view addSubview:_emailSetting2]; }
+                    completion:^(BOOL finished){
+                        [self setNavigation:@"emailSetting2"];
+                    }];
+}
+
 -(void)setNavigation:(NSString *)callFrom
 {
+    if( [callFrom isEqualToString:@"emailSetting1"] ){
+        
+        // Left Navigation ________________________________________________________________________________________________________
+        backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
+        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitleColor:defGray forState:UIControlStateNormal];
+        [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
+        [backButton addTarget:self action:@selector(btnNextTouchEndToServerAccount) forControlEvents:UIControlEventTouchUpInside];
+        
+        backButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        NSMutableArray  *leftNavItems  = [NSMutableArray arrayWithObjects:leftBarButton,nil];
+        
+        [self.navigationItem setLeftBarButtonItems:leftNavItems]; //Left button ___________
+        
+        
+        // Center title ________________________________________
+        self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
+        
+        
+        // Right Navigation ________________________________________
+        
+        nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        [nextButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
+        nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [nextButton setTitle:@"FINISH" forState:normal];
+        [nextButton setTitleColor:defGray forState:UIControlStateNormal];
+        //[nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
+        //[nextButton addTarget:self action:@selector(btnNextTouchEndToServerAccount) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        
+        nextButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
+        
+        [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
+        
+    }
+    
+    
+    
+    if( [callFrom isEqualToString:@"emailSetting2"] )
+    {
+        // Left Navigation ________________________________________________________________________________________________________
+        backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
+        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitleColor:defGray forState:UIControlStateNormal];
+        [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
+        [backButton addTarget:self action:@selector(btnBackToAccountType) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        backButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        NSMutableArray  *leftNavItems  = [NSMutableArray arrayWithObjects:leftBarButton,nil];
+        
+        [self.navigationItem setLeftBarButtonItems:leftNavItems]; //Left button ___________
+        
+        
+        // Center title ________________________________________
+        self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
+        
+        
+         // Right Navigation ________________________________________
+         
+         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
+         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+         [nextButton setTitle:@"NEXT" forState:normal];
+         [nextButton setTitleColor:defGray forState:UIControlStateNormal];
+         //[nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
+         //[nextButton addTarget:self action:@selector(btnNextTouchEndToServerAccount) forControlEvents:UIControlEventTouchUpInside];
+         
+         
+         
+         nextButton.showsTouchWhenHighlighted = YES;
+         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
+         
+         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
+         
+         
+    }
+    
+    
     if([callFrom isEqualToString:@"viewDidLoad"])
     {
         
@@ -216,7 +336,8 @@
         // Center title ________________________________________
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];        
         
-        // Right Navigation ________________________________________
+        
+        /*// Right Navigation ________________________________________
         
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         [nextButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
@@ -226,15 +347,11 @@
         [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
         [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
         
-        
-        
         nextButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
-        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
+        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];*/
         
-        [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
-        
-        
+        [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
     }
 }
 
@@ -264,18 +381,31 @@
 }
 
 -(void)onFinish {
-
+    
     [self storeSceenVarsInDic];
-    NSLog(@"onFinish dic = %@ ",untechable.dic);
-    
-    
-    if( [APP_IN_MODE isEqualToString:TESTING] ){
-        [self next:@"GO_TO_THANKYOU"];
-    } else {
-        [self sendToApi];
-    }
+     NSLog(@"onFinish dic = %@ ",untechable.dic);
+     
+     
+     if( [APP_IN_MODE isEqualToString:TESTING] ){
+     [self next:@"GO_TO_THANKYOU"];
+     } else {
+     [self sendToApi];
+     }
     
 }
+
+-(void)onNext {
+
+    [self hideAllViews];
+    [UIView transitionWithView:self.view duration:0.5
+                       options:UIViewAnimationOptionTransitionCurlUp //change to whatever animation you like
+                    animations:^ { [self.view addSubview:_emailSetting1]; }
+                    completion:^(BOOL finished){
+                        [self setNavigation:@"emailSetting1"];
+                    }];
+    
+}
+
 -(void)storeSceenVarsInDic
 {
     untechable.email = _inputEmail.text;
@@ -540,19 +670,95 @@
     [_emailSetting2 removeFromSuperview];
 }
 
-
-//3
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    int count = 0;
-    
-    if( tableView == _tableView0 )
-    count = _table01Data.count;
-    
-    return count;
+//Allow cell editing(swip to delete)
+// Override to support editing the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return YES if you want the specified item to be editable.
+    return YES;
 }
+
+
+-(IBAction)clickedOnEmailOption:(id)sender
+{
+    UIButton *btn = sender;
+    NSLog(@"btn tag %i", btn.tag);
+    NSArray *acTypesAry = [[NSMutableArray arrayWithObjects:@"ICLOUD", @"EXCHANGE", @"GOOGLE", @"YAHOO", @"AOL", @"OUTLOOK", @"OTHER", nil] init];
+    untechable.acType = acTypesAry[ btn.tag ];
+
+    [self hideAllViews];
+    [UIView transitionWithView:self.view duration:0.5
+                       options:UIViewAnimationOptionTransitionCurlUp //change to whatever animation you like
+                    animations:^ { [self.view addSubview:_emailSetting2]; }
+                    completion:^(BOOL finished){
+                        [self setNavigation:@"emailSetting2"];
+                    }];
+}
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    int countOfSection = 0;
+    if ( tableView == serverAccountTable ){
+        countOfSection =  3;
+    }else if ( tableView == _tableView0 ){
+        countOfSection =  1;
+    }
+    
+    return countOfSection;
+}
+
 //4
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     UITableViewCell *cell = nil;
+    
+    if ( tableView == serverAccountTable ){
+        
+        if ( indexPath.section == 1 || indexPath.section == 2 ){
+            
+            if ( indexPath.section == 1 ){
+                NSMutableArray *inputLabel = [[NSMutableArray arrayWithObjects:@"HostName",@"IMAP Port",nil] init];
+                NSMutableArray *inputFeildPlaceHolder = [[NSMutableArray arrayWithObjects:@"HostName",@"Port",nil] init];
+                
+                static NSString *cellId = @"ServerAccountDetailsViewCell";
+                ServerAccountDetailsViewCell *cell = (ServerAccountDetailsViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
+                
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ServerAccountDetailsViewCell" owner:self options:nil];
+                cell = (ServerAccountDetailsViewCell *)[nib objectAtIndex:0];
+                
+                [cell setCellValueswithInputLabel:[inputLabel objectAtIndex:indexPath.row] FeildPlaceholder:[inputFeildPlaceHolder objectAtIndex:indexPath.row]];
+                
+                return cell;
+            }else if ( indexPath.section == 2){
+                NSMutableArray *inputLabel = [[NSMutableArray arrayWithObjects:@"HostName",@"IMAP Port",nil] init];
+                NSMutableArray *inputFeildPlaceHolder = [[NSMutableArray arrayWithObjects:@"HostName",@"Port",nil] init];
+                
+                static NSString *cellId = @"ServerAccountDetailsViewCell";
+                ServerAccountDetailsViewCell *cell = (ServerAccountDetailsViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
+                
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ServerAccountDetailsViewCell" owner:self options:nil];
+                cell = (ServerAccountDetailsViewCell *)[nib objectAtIndex:0];
+                
+                [cell setCellValueswithInputLabel:[inputLabel objectAtIndex:indexPath.row] FeildPlaceholder:[inputFeildPlaceHolder objectAtIndex:indexPath.row]];
+                
+                return cell;
+            }
+            
+            
+        }else if ( indexPath.section == 0 ){
+            
+            static NSString *cellId = @"SSLCell";
+            SSLCell *cell = (SSLCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
+            
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SSLCell" owner:self options:nil];
+            cell = (SSLCell *)[nib objectAtIndex:0];
+            
+            [cell.sslSwitch addTarget:self
+                               action:@selector(sslStateChanged:) forControlEvents:UIControlEventValueChanged];
+            
+            return cell;
+        }
+    }
     
     if( tableView == _tableView0 ) {
         static NSString *cellId = @"EmailTableViewCell";
@@ -570,39 +776,48 @@
         cell.button1.tag = indexPath.row;
         [cell.button1 setBackgroundImage:[UIImage imageNamed:imgPath] forState:UIControlStateNormal];
         [cell.button1 addTarget:self action:@selector(clickedOnEmailOption:) forControlEvents:UIControlEventTouchUpInside];
-
+        
         return cell;
     }
-    else {
-        return cell;
+    
+    return cell;
+}
+
+//3
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    int count = 0;
+    
+    if ( tableView == serverAccountTable ){
+        
+        if ( section == 0 ){
+            count = 1;
+        }else if ( section == 1 ){
+            count = 2;
+        }else if ( section == 2 ){
+            count = 2;
+        }
+        
+    } else if ( tableView == _tableView0 ) {
+        
+        if( tableView == _tableView0 )
+            count = _table01Data.count;
+    
     }
+
+    return count;
 }
 
-
-//Allow cell editing(swip to delete)
-// Override to support editing the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return YES if you want the specified item to be editable.
-    return YES;
-}
-
-
--(IBAction)clickedOnEmailOption:(id)sender
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    UIButton *btn = sender;
-    NSLog(@"btn tag %i", btn.tag);
-    if ( btn.tag == 6 ){
-        
-        [self hideAllViews];
-        [UIView transitionWithView:self.view duration:0.5
-                           options:UIViewAnimationOptionTransitionCurlUp //change to whatever animation you like
-                        animations:^ { [self.view addSubview:_emailSetting1]; }
-                        completion:^(BOOL finished){
-                            
-                        }];
-        
+    NSString *sectionHeader;
+    if ( section == 0 ){
+        sectionHeader = @"";
+    }else if ( section == 1 ){
+        sectionHeader = @"Incoming Mail Server";
+    }else if ( section == 2 ){
+        sectionHeader = @"OutGoing Mail Server";
     }
-    //[self showEmailSettings2:nil];
+    return sectionHeader;
 }
 
 @end
