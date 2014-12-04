@@ -79,6 +79,18 @@ CommonFunctions.sendEmail2 = function( eventObj, mailOptions ){
 		    auth: smtpOptions.auth
 		};
 	}
+	else if( eventObj.acType == config.acType.OUTLOOK ){
+		smtpOptions	=	{
+		    service: "Hotmail",
+		    auth: smtpOptions.auth
+		};		
+	}
+	else if( eventObj.acType == config.acType.YAHOO ){
+		smtpOptions	=	{
+		    service: "Yahoo",
+		    auth: smtpOptions.auth
+		};		
+	}	
 	
 	
 	// create reusable transport method (opens pool of SMTP connections)

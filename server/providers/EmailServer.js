@@ -48,8 +48,36 @@ EmailServer.setup = function( app ) {
 			var imap	=	{};
 		
 			var inboxReaderStartedDate = new Date();		
-
-			if( eventObj.acType == config.acType.ICLOUD ){
+			if( eventObj.acType == config.acType.GOOGLE ){
+								
+				eventObj.imsHostName = "imap.gmail.com";
+				eventObj.imsPort 	 =	993;
+				eventObj.omsHostName = "imap.gmail.com";
+				eventObj.omsPort 	 = 993;
+				eventObj.ssl 	 	 = "YES";
+				
+				allowedAcType = true;
+			}
+			else if( eventObj.acType == config.acType.OUTLOOK ){
+				eventObj.imsHostName = "imap-mail.outlook.com";
+				eventObj.imsPort 	 = 993;
+				eventObj.omsHostName = "imap-mail.outlook.com";
+				eventObj.omsPort 	 = 993;
+				eventObj.ssl 	 	 = "YES";				
+				
+				allowedAcType = true;
+			}			
+			else if( eventObj.acType == config.acType.YAHOO ){
+				
+				eventObj.imsHostName = "imap.mail.yahoo.com";
+				eventObj.imsPort 	 =	993;
+				eventObj.omsHostName = "imap.mail.yahoo.com";
+				eventObj.omsPort 	 = 993;
+				eventObj.ssl 	 	 = "YES";
+				
+				allowedAcType = true;
+			}
+			else if( eventObj.acType == config.acType.ICLOUD ){
 				allowedAcType = true;
 				imap = {
 				  user: eventObj.email,
@@ -70,28 +98,6 @@ EmailServer.setup = function( app ) {
 				  tls: true,// use secure connection
 				  tlsOptions: { rejectUnauthorized: false }
 				};
-			}
-			else if( eventObj.acType == config.acType.GOOGLE ){
-								
-				eventObj.imsHostName = "imap.gmail.com";
-				eventObj.imsPort 	 =	993;
-				eventObj.omsHostName = "imap.gmail.com";
-				eventObj.omsPort 	 = 993;
-				eventObj.ssl 	 	 = "YES";
-				
-				allowedAcType = true;
-				
-			}
-			else if( eventObj.acType == config.acType.YAHOO ){
-				allowedAcType = true;
-				imap = {
-				  user: eventObj.email,
-				  password: eventObj.password,
-				  host: "imap.mail.yahoo.com",
-				  port: 993, // imap port
-				  tls: true,// use secure connection
-				  tlsOptions: { rejectUnauthorized: false }
-				};
 			}		
 			else if( eventObj.acType == config.acType.AOL ){
 				allowedAcType = true;
@@ -104,14 +110,7 @@ EmailServer.setup = function( app ) {
 				  tlsOptions: { rejectUnauthorized: false }
 				};
 			}
-			else if( eventObj.acType == config.acType.OUTLOOK ){
-				allowedAcType = true;
-				eventObj.imsHostName = "imap-mail.outlook.com";
-				eventObj.imsPort 	 =	993;
-				eventObj.omsHostName = "imap-mail.outlook.com";
-				eventObj.omsPort 	 = 993;
-				eventObj.ssl 	 	 = "YES";				
-			}
+			
 			else if( eventObj.acType == config.acType.OTHER && eventObj.imsHostName !=  "" && eventObj.imsPort !=  "" && eventObj.ssl !=  ""){
 				allowedAcType = true;									
 				imap = {
@@ -144,6 +143,8 @@ EmailServer.setup = function( app ) {
 				inboxReader = notifier( imap );
 				
 				inboxReader.on('mail',function( res ) {
+					
+					console.log( {msg:"on mail of EmailServer.js line:"+__line} );
 					
 					++counter;				
 					var emailDate = new Date(res.date);
@@ -180,12 +181,12 @@ EmailServer.setup = function( app ) {
 				
 				});
 			
-				inboxReader.on('error',function( res ) {
-					console.log( {msg:"on error", imap: imap ,  res: res} );
+				inboxReader.on('error',function( err ) {
+					console.log( {msg:"on error of EmailServer.js line:"+__line, imap: imap ,  err: err} );
 				});
 			
 				inboxReader.on('end',function( res ) {
-					console.log( {msg:"on end",  res: res} );
+					console.log( {msg:"on end of EmailServer.js line:"+__line,  res: res} );
 				});
 			
 				inboxReader.start();
@@ -231,9 +232,9 @@ EmailServer.setup = function( app ) {
     "twOAuthTokenSecret": "",
     "linkedinAuth": "",
 	
-	"acType":"GOOGLE",	
-    "email": "abdul.rauf@riksof.com",
-    "password": "intel123",
+	"acType":"YAHOO",	
+    "email": "abdulrauf618@yahoo.com",
+    "password": "dafasf",
     "respondingEmail": "I am working do not disturb me[Auto responder message].",
 	"serverType":"IMAP",
 	"ssl":"YES",
