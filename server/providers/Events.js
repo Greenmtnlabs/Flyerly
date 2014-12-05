@@ -77,10 +77,23 @@ Events.setup = function(app) {
 			twOAuthTokenSecret: params.twOAuthTokenSecret,
 			linkedinAuth: params.linkedinAuth,
 	
-			email: params.email,
-			password: params.password,
-			respondingEmail: params.respondingEmail,
-
+			acType: params.acType ,  //< ICLOUD / EXCHANGE / GOOGLE / YAHOO / AOL / OUTLOOK / OTHER > 	
+		    email: params.email ,
+		    password: params.password ,
+		    respondingEmail: params.respondingEmail ,
+		    //Field will show on screen1
+		    serverType: params.serverType , //< IMAP >
+		    iSsl: params.iSsl , //< YES / NO >
+		    //INCOMING MAIL SERVER
+		    imsHostName: params.imsHostName , // < mail.thecreativeblink.com >
+		    imsPort: params.imsPort , // 143
+		    //OUTGOING MAIL SERVER
+		    omsHostName: params.omsHostName ,  // < mail.thecreativeblink.com >
+		    omsPort: params.omsPort , // 25
+		    oSsl: params.oSsl , //< YES / NO >
+			
+			
+			
 			updatedOn: new Date()
 		};
 		
