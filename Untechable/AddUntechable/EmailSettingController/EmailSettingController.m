@@ -79,8 +79,6 @@
     
     [self setDefaultModel];
     
-    //[self.view addSubview:_emailSetting1];
-
     NSArray *fields = @[ self.inputEmail, self.inputPassword, self.inputMsg ];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
     [self.keyboardControls setDelegate:self];
@@ -100,6 +98,8 @@
     [untechable printNavigation:[self navigationController]];
     
     [untechable setOrSaveVars:SAVE];
+    
+   [self hideAllViews];
     
 }
 -(void)viewWillAppear:(BOOL)animated {
@@ -285,13 +285,22 @@
         
         
          // Right Navigation ________________________________________
-         
-         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
-         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-         [nextButton setTitle:@"NEXT" forState:normal];
-         [nextButton setTitleColor:defGray forState:UIControlStateNormal];
-
+        
+        nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        [nextButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
+        nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [nextButton setTitle:@"FINISH" forState:normal];
+        [nextButton setTitleColor:defGray forState:UIControlStateNormal];
+        
+        if ( [untechable.acType isEqualToString:@"OTHER"] ){
+            
+            nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+            [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
+            nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+            [nextButton setTitle:@"NEXT" forState:normal];
+            [nextButton setTitleColor:defGray forState:UIControlStateNormal];
+            
+        }
          nextButton.showsTouchWhenHighlighted = YES;
          UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
          NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
@@ -402,12 +411,22 @@
     untechable.password = _inputPassword.text;
     untechable.respondingEmail = _inputMsg.text;
     
-    untechable.iSsl          = iSsl;
-    untechable.oSsl          = oSsl;
-    untechable.imsHostName  = _inputImsHostName.text;
-    untechable.imsPort      = _inputImsPort.text;
-    untechable.omsHostName  = _inputOmsHostName.text;
-    untechable.omsPort      = _inputOmsPort.text;
+    if ( [untechable.acType isEqualToString:@"OTHER"] ) {
+        untechable.iSsl          = iSsl;
+        untechable.oSsl          = oSsl;
+        untechable.imsHostName  = _inputImsHostName.text;
+        untechable.imsPort      = _inputImsPort.text;
+        untechable.omsHostName  = _inputOmsHostName.text;
+        untechable.omsPort      = _inputOmsPort.text;
+    }else {
+        
+        untechable.iSsl          = @"";
+        untechable.oSsl          = @"";
+        untechable.imsHostName   = @"";
+        untechable.imsPort       = @"";
+        untechable.omsHostName   = @"";
+        untechable.omsPort       = @"";
+    }
     
     
     [untechable setOrSaveVars:SAVE];
@@ -460,7 +479,7 @@
                               @"timezoneOffset", @"spendingTimeTxt", @"startDate", @"endDate", @"hasEndDate"
                              ,@"twillioNumber", @"location", @"emergencyNumber", @"hasRecording"
                              ,@"socialStatus", @"fbAuth", @"fbAuthExpiryTs" , @"twitterAuth",@"twOAuthTokenSecret",   @"linkedinAuth"
-                             ,@"email", @"password", @"respondingEmail"
+                             ,@"email", @"password", @"respondingEmail", @"iSsl", @"imsHostName", @"imsHostName", @"oSsl", @"omsHostName", @"omsPort"
                              ,nil];
     
     for (NSString* key in untechable.dic) {
@@ -730,7 +749,7 @@
         else if ( indexPath.section == 0 || indexPath.section == 1 ){
             
             if ( indexPath.section == 0 ){
-                NSMutableArray *inputLabel = [[NSMutableArray arrayWithObjects:@"HostName",@"IMAP Port",nil] init];
+                NSMutableArray *inputLabel = [[NSMutableArray arrayWithObjects:@"Host Name",@"IMAP Port",nil] init];
                 NSMutableArray *inputFeildPlaceHolder = [[NSMutableArray arrayWithObjects:@"HostName",@"Port",nil] init];
                 
                 static NSString *cellId = @"ServerAccountDetailsViewCell";
@@ -754,7 +773,7 @@
                 
                 return cell;
             }else if ( indexPath.section == 1 ){
-                NSMutableArray *inputLabel = [[NSMutableArray arrayWithObjects:@"HostName",@"IMAP Port",nil] init];
+                NSMutableArray *inputLabel = [[NSMutableArray arrayWithObjects:@"Host Name",@"IMAP Port",nil] init];
                 NSMutableArray *inputFeildPlaceHolder = [[NSMutableArray arrayWithObjects:@"HostName",@"Port",nil] init];
                 
                 static NSString *cellId = @"ServerAccountDetailsViewCell";
@@ -812,16 +831,9 @@
 -(IBAction)inputBegin:(id) sender
 {
     UITextField *feild = (UITextField *) sender;
-    
-    NSLog(@"%ld",feild.tag);
-    
-    
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
-    
-    
-    
     
     return  YES;
 }
@@ -848,7 +860,6 @@
         
         if( tableView == _tableView0 )
             count = _table01Data.count;
-    
     }
 
     return count;
@@ -877,10 +888,12 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     NSString *sectionHeader;
-    if ( section == 0 ){
-        sectionHeader = @"Incoming Mail Server";
-    }else if ( section == 1 ){
-        sectionHeader = @"OutGoing Mail Server";
+    if ( tableView != _tableView0 ){
+        if ( section == 0 ){
+            sectionHeader = @"Incoming Mail Server";
+        }else if ( section == 1 ){
+            sectionHeader = @"OutGoing Mail Server";
+        }
     }
     return sectionHeader;
 }
