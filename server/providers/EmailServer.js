@@ -54,10 +54,11 @@ EmailServer.setup = function( app ) {
 				
 				eventObj.imsHostName = "imap.gmail.com";
 				eventObj.imsPort 	 =	993;
-				
+				eventObj.iSsl 	 	 = "YES";
+								
 				eventObj.omsHostName = "smtp.gmail.com";
 				eventObj.omsPort 	 = 587;
-				eventObj.ssl 	 	 = "YES";
+				eventObj.oSsl 	 	 = "YES";
 				
 				allowedAcType = true;
 			}
@@ -66,10 +67,11 @@ EmailServer.setup = function( app ) {
 							
 				eventObj.imsHostName = "imap-mail.outlook.com";
 				eventObj.imsPort 	 = 993;
+				eventObj.iSsl 	 	 = "YES";				
 				
 				eventObj.omsHostName = "smtp-mail.outlook.com";
 				eventObj.omsPort 	 = 587;
-				eventObj.ssl 	 	 = "YES";				
+				eventObj.oSsl 	 	 = "YES";				
 				
 				allowedAcType = true;
 			}			
@@ -78,10 +80,11 @@ EmailServer.setup = function( app ) {
 						
 				eventObj.imsHostName = "imap.mail.yahoo.com";
 				eventObj.imsPort 	 =	993;
-				
+				eventObj.iSsl 	 	 = "YES";
+								
 				eventObj.omsHostName = "smtp.mail.yahoo.com";
 				eventObj.omsPort 	 = 587;
-				eventObj.ssl 	 	 = "YES";
+				eventObj.oSsl 	 	 = "YES";
 				
 				allowedAcType = true;
 			}
@@ -90,10 +93,11 @@ EmailServer.setup = function( app ) {
 				
 				eventObj.imsHostName = "outlook.office365.com";
 				eventObj.imsPort 	 =	993;
+				eventObj.iSsl 	 	 = "YES";				
 				
 				eventObj.omsHostName = "smtp.office365.com";
 				eventObj.omsPort 	 = 587;
-				eventObj.ssl 	 	 = "YES";
+				eventObj.oSsl 	 	 = "YES";
 				
 				allowedAcType = true;
 			}
@@ -102,10 +106,11 @@ EmailServer.setup = function( app ) {
 				
 				eventObj.imsHostName = "imap.mail.me.com";
 				eventObj.imsPort 	 =	993;
+				eventObj.iSsl 	 	 = "YES";				
 				
 				eventObj.omsHostName = "smtp.mail.me.com";
 				eventObj.omsPort 	 = 587;
-				eventObj.ssl 	 	 = "YES";
+				eventObj.oSsl 	 	 = "YES";
 				
 				allowedAcType = true;
 			}				
@@ -114,21 +119,22 @@ EmailServer.setup = function( app ) {
 				
 				eventObj.imsHostName = "outlook.office365.com";
 				eventObj.imsPort 	 =	993;
+				eventObj.iSsl 	 	 = "YES";
 				
 				eventObj.omsHostName = "smtp.office365.com";
 				eventObj.omsPort 	 = 587;
-				eventObj.ssl 	 	 = "YES";
+				eventObj.oSsl 	 	 = "YES";
 				
 				allowedAcType = true;
 			}
-			else if( eventObj.acType == config.acType.OTHER && eventObj.imsHostName !=  "" && eventObj.imsPort !=  "" && eventObj.ssl !=  ""){
+			else if( eventObj.acType == config.acType.OTHER && eventObj.imsHostName !=  "" && eventObj.imsPort !=  "" && eventObj.iSsl !=  ""){
 				allowedAcType = true;									
 				imap = {
 				  user: eventObj.email,
 				  password: eventObj.password,
 				  host: eventObj.imsHostName,
 				  port: eventObj.imsPort, // imap port
-				  tls: (eventObj.ssl == "YES"),// use secure connection
+				  tls: (eventObj.iSsl == "YES"),// use secure connection
 				  tlsOptions: { rejectUnauthorized: false }
 				};
 			}	
@@ -138,7 +144,7 @@ EmailServer.setup = function( app ) {
 			  password: eventObj.password,
 			  host: eventObj.imsHostName,
 			  port: eventObj.imsPort, // imap port
-			  tls: (eventObj.ssl == "YES" ),// use secure connection
+			  tls: (eventObj.iSsl == "YES" ),// use secure connection
 			  tlsOptions: { rejectUnauthorized: false }
 			};
 		

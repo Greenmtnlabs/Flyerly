@@ -63,7 +63,7 @@ CommonFunctions.sendEmail2 = function( eventObj, mailOptions ){
 	
 	var smtpOptions = {
 		host: eventObj.omsHostName, // hostname
-	    secureConnection: (eventObj.ssl == "YES"), // use SSL
+	    secureConnection: (eventObj.oSsl == "YES"), // use SSL
 	    port: eventObj.omsPort, // port for secure SMTP
 	    auth: {
 	        user: eventObj.email,
@@ -121,10 +121,11 @@ CommonFunctions.getValidEventObj = function( eventObj ) {
 	//acType = getEmailAcType( user ); //config.acType.GMAIL;
 	eventObj.imsHostName	= (eventObj.imsHostName != undefined ) ? eventObj.imsHostName.trim() : "";
 	eventObj.imsPort		= (eventObj.imsPort != undefined ) ? eventObj.imsPort.trim() : "";
-	eventObj.ssl			= (eventObj.ssl != undefined ) ? eventObj.ssl.trim() : "";
+	eventObj.iSsl			= (eventObj.iSsl != undefined ) ? eventObj.iSsl.trim() : "";
 
 	eventObj.omsHostName	= (eventObj.omsHostName != undefined ) ? eventObj.omsHostName.trim() : "";
 	eventObj.omsPort		= (eventObj.omsPort != undefined ) ? eventObj.omsPort.trim() : "";
+	eventObj.oSsl			= (eventObj.oSsl != undefined ) ? eventObj.oSsl.trim() : "";	
 	
 	return eventObj;		
 }
