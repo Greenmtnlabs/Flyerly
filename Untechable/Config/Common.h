@@ -46,7 +46,7 @@
 #define PRODUCTION @"PRODUCTION"
 
 
-//#define SERVER_URL @"http://192.168.0.118:3001" //LOCALHOST
+//#define SERVER_URL @"http://192.168.0.102:3010" //LOCALHOST
 //#define SERVER_URL @"http://riksof.com:8000"    //DEVELOPMENT
 #define SERVER_URL @"http://app.untechable.com:3010"   //PRODUCTION
 
