@@ -34,6 +34,9 @@ Events.setup = function(app) {
 		var file1 = req.files.recording;
         var params = req.body;
 		
+		//print({reqBody:req.body});
+		
+		
 		var eventId	=	params.eventId;		
 		var recordingFileName = params.recording;	
 		
@@ -82,7 +85,7 @@ Events.setup = function(app) {
 		    password: params.password ,
 		    respondingEmail: params.respondingEmail ,
 		    //Field will show on screen1
-		    serverType: params.serverType , //< IMAP >
+		    serverType: "IMAP",
 		    iSsl: params.iSsl , //< YES / NO >
 		    //INCOMING MAIL SERVER
 		    imsHostName: params.imsHostName , // < mail.thecreativeblink.com >
@@ -97,7 +100,9 @@ Events.setup = function(app) {
 			updatedOn: new Date()
 		};
 		
-		print( ["in events65- eventId: "+eventId+", params "+__line+": ", params] );
+		
+		
+		//print( ["in events65- eventId: "+eventId+", params "+__line+": ", params] );
 		
 		function retError1( res, error, lineNum, message ) {
 			responseJSON = {};
