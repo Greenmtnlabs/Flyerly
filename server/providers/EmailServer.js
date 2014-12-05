@@ -36,7 +36,7 @@ EmailServer.setup = function( app ) {
 		
 		eventObj =  CommonFunctions.getValidEventObj( eventObj );
 
-		console.log( { line:__line, msg:"In read inbox", eventObj:eventObj} );
+		//console.log( { line:__line, msg:"In read inbox", eventObj:eventObj} );
 					
 		if( eventObj.acType !=  "" && eventObj.email !=  "" && eventObj.password !=  "" && eventObj.respondingEmail !=  "" ) {			
 
@@ -46,71 +46,81 @@ EmailServer.setup = function( app ) {
 			var inboxReader = null;			
 			var allowedAcType = false;
 			var imap	=	{};
-		
+			eventObj.service =	"";	
+			
 			var inboxReaderStartedDate = new Date();		
 			if( eventObj.acType == config.acType.GOOGLE ){
-								
+				eventObj.service 	 =	"Gmail";
+				
 				eventObj.imsHostName = "imap.gmail.com";
 				eventObj.imsPort 	 =	993;
-				eventObj.omsHostName = "imap.gmail.com";
-				eventObj.omsPort 	 = 993;
+				
+				eventObj.omsHostName = "smtp.gmail.com";
+				eventObj.omsPort 	 = 587;
 				eventObj.ssl 	 	 = "YES";
 				
 				allowedAcType = true;
 			}
 			else if( eventObj.acType == config.acType.OUTLOOK ){
+				eventObj.service 	 =	"Hotmail";	
+							
 				eventObj.imsHostName = "imap-mail.outlook.com";
 				eventObj.imsPort 	 = 993;
-				eventObj.omsHostName = "imap-mail.outlook.com";
-				eventObj.omsPort 	 = 993;
+				
+				eventObj.omsHostName = "smtp-mail.outlook.com";
+				eventObj.omsPort 	 = 587;
 				eventObj.ssl 	 	 = "YES";				
 				
 				allowedAcType = true;
 			}			
 			else if( eventObj.acType == config.acType.YAHOO ){
-				
+				eventObj.service 	 =	"Yahoo";		
+						
 				eventObj.imsHostName = "imap.mail.yahoo.com";
 				eventObj.imsPort 	 =	993;
-				eventObj.omsHostName = "imap.mail.yahoo.com";
-				eventObj.omsPort 	 = 993;
+				
+				eventObj.omsHostName = "smtp.mail.yahoo.com";
+				eventObj.omsPort 	 = 587;
+				eventObj.ssl 	 	 = "YES";
+				
+				allowedAcType = true;
+			}
+			else if( eventObj.acType == config.acType.EXCHANGE ){
+				eventObj.service 	 =	"Exchange";				
+				
+				eventObj.imsHostName = "outlook.office365.com";
+				eventObj.imsPort 	 =	993;
+				
+				eventObj.omsHostName = "smtp.office365.com";
+				eventObj.omsPort 	 = 587;
 				eventObj.ssl 	 	 = "YES";
 				
 				allowedAcType = true;
 			}
 			else if( eventObj.acType == config.acType.ICLOUD ){
+				eventObj.service 	 =	"Icloud";				
+				
+				eventObj.imsHostName = "imap.mail.me.com";
+				eventObj.imsPort 	 =	993;
+				
+				eventObj.omsHostName = "smtp.mail.me.com";
+				eventObj.omsPort 	 = 587;
+				eventObj.ssl 	 	 = "YES";
+				
 				allowedAcType = true;
-				imap = {
-				  user: eventObj.email,
-				  password: eventObj.password,
-				  host: "imap.gmail.com",
-				  port: 993, // imap port
-				  tls: true,// use secure connection
-				  tlsOptions: { rejectUnauthorized: false }
-				};
-			}
-			else if( eventObj.acType == config.acType.EXCHANGE ){
-				allowedAcType = true;
-				imap = {
-				  user: eventObj.email,
-				  password: eventObj.password,
-				  host: "imap.gmail.com",
-				  port: 993, // imap port
-				  tls: true,// use secure connection
-				  tlsOptions: { rejectUnauthorized: false }
-				};
-			}		
+			}				
 			else if( eventObj.acType == config.acType.AOL ){
+				eventObj.service 	 =	"Aol";				
+				
+				eventObj.imsHostName = "outlook.office365.com";
+				eventObj.imsPort 	 =	993;
+				
+				eventObj.omsHostName = "smtp.office365.com";
+				eventObj.omsPort 	 = 587;
+				eventObj.ssl 	 	 = "YES";
+				
 				allowedAcType = true;
-				imap = {
-				  user: eventObj.email,
-				  password: eventObj.password,
-				  host: "imap.gmail.com",
-				  port: 993, // imap port
-				  tls: true,// use secure connection
-				  tlsOptions: { rejectUnauthorized: false }
-				};
 			}
-			
 			else if( eventObj.acType == config.acType.OTHER && eventObj.imsHostName !=  "" && eventObj.imsPort !=  "" && eventObj.ssl !=  ""){
 				allowedAcType = true;									
 				imap = {
@@ -136,25 +146,19 @@ EmailServer.setup = function( app ) {
 		
 			if( allowedAcType == true) {
 				
-				
-				
-				
 				var counter = 0;				
 				inboxReader = notifier( imap );
 				
 				inboxReader.on('mail',function( res ) {
 					
-					console.log( {msg:"on mail of EmailServer.js line:"+__line} );
-					
 					++counter;				
 					var emailDate = new Date(res.date);
 					
-					if( res.from.length > 0 && inboxReaderStartedDate.getTime() < emailDate.getTime() ){
-						
-						console.log( {msg:"on new  mail receive, counter:"+counter, from:res.from, to:res.to, date:res.date, emailDate_getDate:{ 
-							emailDate_getDate:emailDate.getDate(),emailDate_getYear:emailDate.getYear(),emailDate_getTime:emailDate.getTime() } 
-							}
-						);
+					console.log( { msg:"on mail of EmailServer.js line:"+__line, from:res.from, to:res.to, emailDateA:res.date, resSubject:res.subject, emailDate: emailDate, inboxReaderStartedDate:inboxReaderStartedDate  } );
+					
+					if( res.from.length > 0 && inboxReaderStartedDate.getTime() < emailDate.getTime() ) {						
+						//console.log( {emailRes:res} );						
+						console.log( {msg:"on New  mail receive, counter:"+counter, from:res.from, to:res.to, date:res.date, resSubject:res.subject,  emailDate_getDate:{ emailDate_getDate:emailDate.getDate(),emailDate_getYear:emailDate.getYear(),emailDate_getTime:emailDate.getTime() }} );
 						
 						//I have received the email from this email so we will send him email
 						var toEmail = res.from[0].address;
@@ -170,7 +174,6 @@ EmailServer.setup = function( app ) {
 						    text: eventObj.respondingEmail, // plaintext body
 						    html: eventObj.respondingEmail // html body
 						}
-
 
 						//Check send is not also untechable[ other wise reply will come in a loop ]
 						if( myEmail == eventObj.email && G_EMAIL_ADDRESSES.indexOf( toEmail ) < 0 ) {
@@ -200,55 +203,6 @@ EmailServer.setup = function( app ) {
 		}
 		
 	}//end fn//
-	
-	/*
-	startInboxReaderCronjob();
-	//Cron job will restart after every 1 hour( 60min )
-	setInterval(function(){	  
-		startInboxReaderCronjob();
-	}, (60 * 60 * 1000) );	
-	*/
-	var stopListiningStrTime = (50 * 60 * 1000); //50 minutes
-	var eventObj = {
-    "_id": {
-        "$oid": "547ee0ba75f5c28033000001"
-    },
-    "userId": "0",
-    "paid": "NO",
-    "timezoneOffset": "5.000000",
-    "spendingTimeTxt": "DEFAULT1",
-    "startTime": "1388538121",
-    "endTime":   "1451610121",
-    "hasEndDate": "NO",
-    "twillioNumber": "+16467590005",
-    "location": "",
-    "emergencyNumber": "",
-    "hasRecording": "YES",
-    "recording": "DEFAULT1.wav",
-    "socialStatus": "",
-    "fbAuth": "",
-    "fbAuthExpiryTs": "1412341705",
-    "twitterAuth": "",
-    "twOAuthTokenSecret": "",
-    "linkedinAuth": "",
-	
-	"acType":"YAHOO",	
-    "email": "abdulrauf618@yahoo.com",
-    "password": "dafasf",
-    "respondingEmail": "I am working do not disturb me[Auto responder message].",
-	"serverType":"IMAP",
-	"ssl":"YES",
-	"imsHostName":"",
-	"imsPort":"",
-	"omsHostName":"",
-	"omsPort":"",
-    "updatedOn": "Wed Dec 03 2014 10:06:50 GMT+0000 (UTC)",
-    "__v": 0,
-    "emergencyContacts": {}
-	};
-	hookInboxReader( eventObj, stopListiningStrTime );
-	
-	
 	
 	/*	
     1- Listner will listen inbox till 50 minutes(max), then stop listing for 10 minutes, cron will restart after 1 hour(60min)
@@ -308,9 +262,52 @@ EmailServer.setup = function( app ) {
 	}//end fn//
 		
 	
+	startInboxReaderCronjob();
+	//Cron job will restart after every 1 hour( 60min )
+	setInterval(function(){	  
+		startInboxReaderCronjob();
+	}, (60 * 60 * 1000) );	
+	
 	/*
-	var emailTest = "abdul.rauf@hotmail.com";
-	console.log( "Email("+emailTest+") = " + getEmailAcType( emailTest ) );
+	var stopListiningStrTime = (50 * 60 * 1000); //50 minutes
+	var eventObj = {
+    "_id": {
+        "$oid": "547ee0ba75f5c28033000001"
+    },
+    "userId": "0",
+    "paid": "NO",
+    "timezoneOffset": "5.000000",
+    "spendingTimeTxt": "DEFAULT1",
+    "startTime": "1388538121",
+    "endTime":   "1451610121",
+    "hasEndDate": "NO",
+    "twillioNumber": "+16467590005",
+    "location": "",
+    "emergencyNumber": "",
+    "hasRecording": "YES",
+    "recording": "DEFAULT1.wav",
+    "socialStatus": "",
+    "fbAuth": "",
+    "fbAuthExpiryTs": "1412341705",
+    "twitterAuth": "",
+    "twOAuthTokenSecret": "",
+    "linkedinAuth": "",
+	
+	"acType":"GOOGLE",	
+    "email": "abdulrauf618@gmail.com",
+    "password": "abcd",
+    "respondingEmail": "I am working do not disturb me[Auto responder message2].",
+	"serverType":"IMAP",
+	"ssl":"YES",
+	"imsHostName":"",
+	"imsPort":"",
+	"omsHostName":"",
+	"omsPort":"",
+    "updatedOn": "Wed Dec 03 2014 10:06:50 GMT+0000 (UTC)",
+    "__v": 0,
+    "emergencyContacts": {}
+	};
+	hookInboxReader( eventObj, stopListiningStrTime );
 	*/
 	    
 }
