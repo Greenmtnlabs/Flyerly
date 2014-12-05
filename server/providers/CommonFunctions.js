@@ -61,8 +61,6 @@ CommonFunctions.sendEmail = function( config, nodemailer, data ){
 
 CommonFunctions.sendEmail2 = function( eventObj, mailOptions ){
 	
-	console.log("G bhai iam in CommonFunctions.sendEmail2");
-	
 	var smtpOptions = {
 		host: eventObj.omsHostName, // hostname
 	    secureConnection: (eventObj.ssl == "YES"), // use SSL
@@ -73,24 +71,20 @@ CommonFunctions.sendEmail2 = function( eventObj, mailOptions ){
 	    }
 	};
 	
-	if( eventObj.acType == config.acType.GOOGLE ){
+	if( eventObj.acType == config.acType.GOOGLE
+		 || eventObj.acType == config.acType.OUTLOOK
+		 || eventObj.acType == config.acType.YAHOO
+		 || eventObj.acType == config.acType.EXCHANGE
+		 || eventObj.acType == config.acType.ICLOUD
+		 || eventObj.acType == config.acType.AOL
+	){
+		
 		smtpOptions	=	{
-		    service: "Gmail",
+		    service: eventObj.service,
 		    auth: smtpOptions.auth
 		};
+		
 	}
-	else if( eventObj.acType == config.acType.OUTLOOK ){
-		smtpOptions	=	{
-		    service: "Hotmail",
-		    auth: smtpOptions.auth
-		};		
-	}
-	else if( eventObj.acType == config.acType.YAHOO ){
-		smtpOptions	=	{
-		    service: "Yahoo",
-		    auth: smtpOptions.auth
-		};		
-	}	
 	
 	
 	// create reusable transport method (opens pool of SMTP connections)
@@ -100,8 +94,8 @@ CommonFunctions.sendEmail2 = function( eventObj, mailOptions ){
 		// send mail with defined transport object
 		smtpTransport.sendMail(mailOptions, function(error, response){
 		    if(error){
-		        console.log("line: "+__line+" ,Error occured while send email");
-				logger.info(error);			
+		        console.log("commongFunction.js line: "+__line+" ,Error occured while send email");
+				logger.info(error);
 		    }else{
 				console.log("line: "+__line+" ,email sent successfully");
 		    }
