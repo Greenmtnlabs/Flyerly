@@ -325,6 +325,20 @@
 	if( [pickerOpenFor isEqualToString:@"_btnStartTime"] ){
         untechable.startDate = pickerTimeStampStr;
         [_btnStartTime setTitle:dateStr forState:UIControlStateNormal];
+        
+        NSDate *endD = [untechable.commonFunctions timestampStrToNsDate:untechable.endDate];
+        NSDate *statD = [untechable.commonFunctions timestampStrToNsDate:untechable.startDate];
+
+        
+        if( [untechable.commonFunctions date1IsSmallerThenDate2:endD date2:statD] ){
+            endD = [statD dateByAddingTimeInterval:(60*120)];
+            untechable.endDate = [untechable.commonFunctions nsDateToTimeStampStr:endD]; //current time +2hr
+            NSString *dateStrUpdated = [untechable.dateFormatter stringFromDate:endD];
+            [_btnEndTime setTitle:dateStrUpdated forState:UIControlStateNormal];
+        }
+        
+        
+        
     }
     else if( [pickerOpenFor isEqualToString:@"_btnEndTime"] ){
         untechable.endDate = pickerTimeStampStr;
