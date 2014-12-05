@@ -769,6 +769,7 @@
                     _inputImsHostName   =   cell.inputFeild;
                 }else if( cell.inputFeild.tag == 1 ){
                     _inputImsPort   =   cell.inputFeild;
+                    [cell.inputFeild setKeyboardType:UIKeyboardTypeNumberPad];
                 }
                 
                 return cell;
@@ -793,6 +794,7 @@
                     _inputOmsHostName   =   cell.inputFeild;
                 }else if( cell.inputFeild.tag == 2 ){
                     _inputOmsPort   =   cell.inputFeild;
+                    [cell.inputFeild setKeyboardType:UIKeyboardTypeNumberPad];
                 }
                 
                 return cell;
