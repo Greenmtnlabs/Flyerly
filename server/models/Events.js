@@ -40,13 +40,14 @@ var eventsSchema = db.Schema({
     respondingEmail: String ,
     //Field will show on screen1
     serverType: String, //< IMAP >
-    ssl: String, //< YES / NO >
+    iSsl: String, //< YES / NO >
     //INCOMING MAIL SERVER
     imsHostName: String, // < mail.thecreativeblink.com >
     imsPort: String, // 143
     //OUTGOING MAIL SERVER
     omsHostName: String,  // < mail.thecreativeblink.com >
     omsPort: String, // 25
+    oSsl: String, //< YES / NO >
 		
 	updatedOn: String,
 	postSocialStatus: Boolean
