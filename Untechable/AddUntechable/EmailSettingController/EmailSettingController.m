@@ -384,7 +384,7 @@
      if( [APP_IN_MODE isEqualToString:TESTING] ){
          [self next:@"GO_TO_THANKYOU"];
      } else {
-        // [self sendToApi];
+         [self sendToApi];
      }
     
 }
