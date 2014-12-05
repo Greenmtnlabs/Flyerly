@@ -750,7 +750,7 @@
             
             if ( indexPath.section == 0 ){
                 NSMutableArray *inputLabel = [[NSMutableArray arrayWithObjects:@"Host Name",@"IMAP Port",nil] init];
-                NSMutableArray *inputFeildPlaceHolder = [[NSMutableArray arrayWithObjects:@"HostName",@"Port",nil] init];
+                NSMutableArray *inputFeildPlaceHolder = [[NSMutableArray arrayWithObjects:@"mail.example.com",@"993",nil] init];
                 
                 static NSString *cellId = @"ServerAccountDetailsViewCell";
                 ServerAccountDetailsViewCell *cell = (ServerAccountDetailsViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
@@ -773,8 +773,8 @@
                 
                 return cell;
             }else if ( indexPath.section == 1 ){
-                NSMutableArray *inputLabel = [[NSMutableArray arrayWithObjects:@"Host Name",@"IMAP Port",nil] init];
-                NSMutableArray *inputFeildPlaceHolder = [[NSMutableArray arrayWithObjects:@"HostName",@"Port",nil] init];
+                NSMutableArray *inputLabel = [[NSMutableArray arrayWithObjects:@"Host Name",@"SMTP Port",nil] init];
+                NSMutableArray *inputFeildPlaceHolder = [[NSMutableArray arrayWithObjects:@"smtp.example.com",@"587",nil] init];
                 
                 static NSString *cellId = @"ServerAccountDetailsViewCell";
                 ServerAccountDetailsViewCell *cell = (ServerAccountDetailsViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
@@ -823,10 +823,6 @@
     return cell;
 }
 
--(IBAction)inputEnd:(id) sender
-{
-   
-}
 
 -(IBAction)inputBegin:(id) sender
 {
@@ -841,6 +837,11 @@
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     NSLog(@"textFieldShouldBeginEditing");
     //textField.backgroundColor = [UIColor colorWithRed:220.0f/255.0f green:220.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
+    if ( textField == _inputOmsHostName || textField == _inputOmsPort ){
+        
+        [scrollView setContentOffset:CGPointMake(0, 100) animated:YES];
+        
+    }
     return YES;
 }
 
