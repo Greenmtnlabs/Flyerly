@@ -32,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *omsHostName;// <  mail.thecreativeblink.com >
 @property (weak, nonatomic) IBOutlet UITextField *omsPort;// 25
 @property (weak, nonatomic) IBOutlet UITableView *serverAccountTable;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (nonatomic,strong)  Untechable *untechable;
 @property (weak, nonatomic) IBOutlet UISwitch *sslSwitch;

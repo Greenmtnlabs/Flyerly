@@ -9,12 +9,11 @@
 #import "SSLCell.h"
 
 @implementation SSLCell
+@synthesize sslSwitch;
 
 - (void)awakeFromNib {
-    // Initialization code
-    
-    [self.sslSwitch addTarget:self
-                       action:@selector(sslStateChanged:) forControlEvents:UIControlEventValueChanged];
+    // Initialization code    
+   // [sslSwitch addTarget:self action:@selector(sslStateChanged:) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

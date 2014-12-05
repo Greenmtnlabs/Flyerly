@@ -14,6 +14,7 @@
                 <outlet property="inputMsg" destination="nxd-oi-JaX" id="jFG-FP-FSa"/>
                 <outlet property="inputPassword" destination="ZpQ-vi-fsS" id="hYH-et-j6q"/>
                 <outlet property="lbl1" destination="N8V-KY-mds" id="vWD-l9-CsJ"/>
+                <outlet property="scrollView" destination="l6w-6I-Axr" id="vtH-vB-OzL"/>
                 <outlet property="serverAccountTable" destination="W5W-AD-pMj" id="RlA-2W-ksX"/>
                 <outlet property="tableView0" destination="pKm-lx-afA" id="lQI-5a-PEb"/>
                 <outlet property="view" destination="OA0-Wl-vT8" id="abx-ZP-Bj1"/>
@@ -41,14 +42,19 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="590"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="55" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="W5W-AD-pMj">
-                    <rect key="frame" x="0.0" y="50" width="320" height="550"/>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="f5a-Qp-IAc"/>
-                        <outlet property="delegate" destination="-1" id="wpL-NB-8xx"/>
-                    </connections>
-                </tableView>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l6w-6I-Axr">
+                    <rect key="frame" x="0.0" y="70" width="320" height="590"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="55" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="W5W-AD-pMj">
+                            <rect key="frame" x="0.0" y="2" width="320" height="587"/>
+                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="f5a-Qp-IAc"/>
+                                <outlet property="delegate" destination="-1" id="wpL-NB-8xx"/>
+                            </connections>
+                        </tableView>
+                    </subviews>
+                </scrollView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>

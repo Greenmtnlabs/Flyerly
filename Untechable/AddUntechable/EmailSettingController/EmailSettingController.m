@@ -1,4 +1,4 @@
-//
+ //
 //  EmailSettingController.m
 //  Untechable
 //
@@ -18,7 +18,7 @@
 
 @interface EmailSettingController (){
  
-    NSString *ssl;
+    NSString *iSsl,*oSsl;
 }
 
 @property (strong, nonatomic) IBOutlet UIView *emailSetting;
@@ -35,6 +35,15 @@
 @property (strong, nonatomic) IBOutlet UITextField *inputPassword;
 @property (strong, nonatomic) IBOutlet UITextField *inputMsg;
 
+
+@property (strong, nonatomic) IBOutlet UITextField *inputImsHostName;
+@property (strong, nonatomic) IBOutlet UITextField *inputImsPort;
+@property (strong, nonatomic) IBOutlet UITextField *inputOmsHostName;
+@property (strong, nonatomic) IBOutlet UITextField *inputOmsPort;
+
+@property (strong, nonatomic) IBOutlet UISwitch *iSslSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *oSslSwitch;
+
 @property (nonatomic, strong) BSKeyboardControls *keyboardControls;
 
 
@@ -44,7 +53,7 @@
 
 @implementation EmailSettingController
 
-@synthesize untechable,sslSwitch,serverAccountTable;
+@synthesize untechable,sslSwitch,serverAccountTable,scrollView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -60,6 +69,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    //Setting up the Scroll size
+    [scrollView setContentSize:CGSizeMake(320, 730)];
+    //Setting the initial position for scroll view
+    scrollView.contentOffset = CGPointMake(0,0);
+    
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
     
@@ -70,34 +84,6 @@
     NSArray *fields = @[ self.inputEmail, self.inputPassword, self.inputMsg ];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
     [self.keyboardControls setDelegate:self];
-}
-
-- (void)sslStateChanged:(UISwitch *)switchState
-{
-    if ([switchState isOn]) {
-        ssl = @"YES";
-    } else {
-        ssl = @"NO";
-    }
-}
-
--(IBAction)serverType:(UISegmentedControl *)sender
-{
-    
-    if ( sender == _serverType ) {
-        NSLog(@"asdf");
-    }
-    if ( sender.selectedSegmentIndex==0 ) {
-        
-        NSLog(@"asdf");
-    }
-    
-    else if ( sender.selectedSegmentIndex==1 ) {
-        
-        NSLog(@"asdf");
-        
-    }
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -124,12 +110,19 @@
  Hide keyboard on done button of keyboard press
  */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    
     [textField resignFirstResponder];
     return NO;
 }
 // ________________________     Custom functions    ___________________________
 
 - (void)setDefaultModel {
+    
+    iSsl = @"YES";
+    oSsl = @"YES";
+    
     _table01Data = [[NSMutableArray alloc] init];
     [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-icloud.jpg", @"text":@""}];
     [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-Exchange.jpg", @"text":@""}];
@@ -207,7 +200,7 @@
     [self hideAllViews];
     [UIView transitionWithView:self.view duration:0.5
                        options:UIViewAnimationOptionTransitionCurlUp //change to whatever animation you like
-                    animations:^ { self.view; }
+                    animations:^ {  }
                     completion:^(BOOL finished){
                         [self setNavigation:@"viewDidLoad"];
                     }];
@@ -298,20 +291,13 @@
          nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
          [nextButton setTitle:@"NEXT" forState:normal];
          [nextButton setTitleColor:defGray forState:UIControlStateNormal];
-         //[nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
-         //[nextButton addTarget:self action:@selector(btnNextTouchEndToServerAccount) forControlEvents:UIControlEventTouchUpInside];
-         
-         
-         
+
          nextButton.showsTouchWhenHighlighted = YES;
          UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
          NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
          
          [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
-         
-         
     }
-    
     
     if([callFrom isEqualToString:@"viewDidLoad"])
     {
@@ -387,15 +373,19 @@
      
      
      if( [APP_IN_MODE isEqualToString:TESTING] ){
-     [self next:@"GO_TO_THANKYOU"];
+         [self next:@"GO_TO_THANKYOU"];
      } else {
-     [self sendToApi];
+        // [self sendToApi];
      }
     
 }
 
 -(void)onNext {
 
+    untechable.email = self.inputEmail.text;
+    untechable.password = self.inputPassword.text;
+    untechable.respondingEmail = self.inputMsg.text;
+    
     [self hideAllViews];
     [UIView transitionWithView:self.view duration:0.5
                        options:UIViewAnimationOptionTransitionCurlUp //change to whatever animation you like
@@ -411,6 +401,15 @@
     untechable.email = _inputEmail.text;
     untechable.password = _inputPassword.text;
     untechable.respondingEmail = _inputMsg.text;
+    
+    untechable.iSsl          = iSsl;
+    untechable.oSsl          = oSsl;
+    untechable.imsHostName  = _inputImsHostName.text;
+    untechable.imsPort      = _inputImsPort.text;
+    untechable.omsHostName  = _inputOmsHostName.text;
+    untechable.omsPort      = _inputOmsPort.text;
+    
+    
     [untechable setOrSaveVars:SAVE];
 }
 
@@ -615,11 +614,6 @@
     }
 }
 
-
-
-
-
-
 -(void)showMsgOnApiResponse:(NSString *)message
 {
     UIAlertView *temAlert = [[UIAlertView alloc ]
@@ -639,10 +633,10 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self];
          */
     }
-
 }
 
 - (IBAction)showEmailSettings1:(id)sender {
+    
     [self hideAllViews];
     [UIView transitionWithView:self.view duration:0.5
                        options:UIViewAnimationOptionTransitionCurlUp //change to whatever animation you like
@@ -654,6 +648,7 @@
 }
 
 - (IBAction)showEmailSettings2:(id)sender {
+    
     [self hideAllViews];
     [UIView transitionWithView:self.view duration:0.5
                        options:UIViewAnimationOptionTransitionCurlUp //change to whatever animation you like
@@ -681,9 +676,9 @@
 -(IBAction)clickedOnEmailOption:(id)sender
 {
     UIButton *btn = sender;
-    NSLog(@"btn tag %i", btn.tag);
+    //NSLog(@"btn tag %@", btn.tag);
     NSArray *acTypesAry = [[NSMutableArray arrayWithObjects:@"ICLOUD", @"EXCHANGE", @"GOOGLE", @"YAHOO", @"AOL", @"OUTLOOK", @"OTHER", nil] init];
-    untechable.acType = acTypesAry[ btn.tag ];
+    untechable.acType = [acTypesAry objectAtIndex:btn.tag];
 
     [self hideAllViews];
     [UIView transitionWithView:self.view duration:0.5
@@ -713,39 +708,7 @@
     UITableViewCell *cell = nil;
     
     if ( tableView == serverAccountTable ){
-        
-        if ( indexPath.section == 1 || indexPath.section == 2 ){
-            
-            if ( indexPath.section == 1 ){
-                NSMutableArray *inputLabel = [[NSMutableArray arrayWithObjects:@"HostName",@"IMAP Port",nil] init];
-                NSMutableArray *inputFeildPlaceHolder = [[NSMutableArray arrayWithObjects:@"HostName",@"Port",nil] init];
-                
-                static NSString *cellId = @"ServerAccountDetailsViewCell";
-                ServerAccountDetailsViewCell *cell = (ServerAccountDetailsViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
-                
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ServerAccountDetailsViewCell" owner:self options:nil];
-                cell = (ServerAccountDetailsViewCell *)[nib objectAtIndex:0];
-                
-                [cell setCellValueswithInputLabel:[inputLabel objectAtIndex:indexPath.row] FeildPlaceholder:[inputFeildPlaceHolder objectAtIndex:indexPath.row]];
-                
-                return cell;
-            }else if ( indexPath.section == 2){
-                NSMutableArray *inputLabel = [[NSMutableArray arrayWithObjects:@"HostName",@"IMAP Port",nil] init];
-                NSMutableArray *inputFeildPlaceHolder = [[NSMutableArray arrayWithObjects:@"HostName",@"Port",nil] init];
-                
-                static NSString *cellId = @"ServerAccountDetailsViewCell";
-                ServerAccountDetailsViewCell *cell = (ServerAccountDetailsViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
-                
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ServerAccountDetailsViewCell" owner:self options:nil];
-                cell = (ServerAccountDetailsViewCell *)[nib objectAtIndex:0];
-                
-                [cell setCellValueswithInputLabel:[inputLabel objectAtIndex:indexPath.row] FeildPlaceholder:[inputFeildPlaceHolder objectAtIndex:indexPath.row]];
-                
-                return cell;
-            }
-            
-            
-        }else if ( indexPath.section == 0 ){
+        if ( indexPath.row == 2 ){
             
             static NSString *cellId = @"SSLCell";
             SSLCell *cell = (SSLCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
@@ -753,10 +716,68 @@
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SSLCell" owner:self options:nil];
             cell = (SSLCell *)[nib objectAtIndex:0];
             
+            cell.sslSwitch.tag = indexPath.section;
             [cell.sslSwitch addTarget:self
                                action:@selector(sslStateChanged:) forControlEvents:UIControlEventValueChanged];
             
+            if ( cell.sslSwitch.tag == 0 ){
+                _iSslSwitch = cell.sslSwitch;
+            }else if ( cell.sslSwitch.tag == 1 ){
+                _oSslSwitch = cell.sslSwitch;
+            }
             return cell;
+        }
+        else if ( indexPath.section == 0 || indexPath.section == 1 ){
+            
+            if ( indexPath.section == 0 ){
+                NSMutableArray *inputLabel = [[NSMutableArray arrayWithObjects:@"HostName",@"IMAP Port",nil] init];
+                NSMutableArray *inputFeildPlaceHolder = [[NSMutableArray arrayWithObjects:@"HostName",@"Port",nil] init];
+                
+                static NSString *cellId = @"ServerAccountDetailsViewCell";
+                ServerAccountDetailsViewCell *cell = (ServerAccountDetailsViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
+                
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ServerAccountDetailsViewCell" owner:self options:nil];
+                cell = (ServerAccountDetailsViewCell *)[nib objectAtIndex:0];
+                
+                [cell setCellValueswithInputLabel:[inputLabel objectAtIndex:indexPath.row] FeildPlaceholder:[inputFeildPlaceHolder objectAtIndex:indexPath.row]];
+                
+                cell.inputFeild.delegate = self;
+                cell.inputFeild.tag = indexPath.row + indexPath.section;
+                [cell.inputFeild addTarget:self action:@selector(inputBegin:) forControlEvents:UIControlEventEditingDidBegin];
+                [cell.inputFeild addTarget:self action:@selector(inputEnd:) forControlEvents:UIControlEventValueChanged];
+                
+                if( cell.inputFeild.tag == 0 ){
+                    _inputImsHostName   =   cell.inputFeild;
+                }else if( cell.inputFeild.tag == 1 ){
+                    _inputImsPort   =   cell.inputFeild;
+                }
+                
+                return cell;
+            }else if ( indexPath.section == 1 ){
+                NSMutableArray *inputLabel = [[NSMutableArray arrayWithObjects:@"HostName",@"IMAP Port",nil] init];
+                NSMutableArray *inputFeildPlaceHolder = [[NSMutableArray arrayWithObjects:@"HostName",@"Port",nil] init];
+                
+                static NSString *cellId = @"ServerAccountDetailsViewCell";
+                ServerAccountDetailsViewCell *cell = (ServerAccountDetailsViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
+                
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ServerAccountDetailsViewCell" owner:self options:nil];
+                cell = (ServerAccountDetailsViewCell *)[nib objectAtIndex:0];
+                
+                [cell setCellValueswithInputLabel:[inputLabel objectAtIndex:indexPath.row] FeildPlaceholder:[inputFeildPlaceHolder objectAtIndex:indexPath.row]];
+                
+                cell.inputFeild.delegate = self;
+                cell.inputFeild.tag = indexPath.row + indexPath.section;
+                [cell.inputFeild addTarget:self action:@selector(inputBegin:) forControlEvents:UIControlEventEditingDidBegin];
+                [cell.inputFeild addTarget:self action:@selector(inputEnd:) forControlEvents:UIControlEventValueChanged];
+                
+                if( cell.inputFeild.tag == 1 ){
+                    _inputOmsHostName   =   cell.inputFeild;
+                }else if( cell.inputFeild.tag == 2 ){
+                    _inputOmsPort   =   cell.inputFeild;
+                }
+                
+                return cell;
+            }
         }
     }
     
@@ -783,6 +804,34 @@
     return cell;
 }
 
+-(IBAction)inputEnd:(id) sender
+{
+   
+}
+
+-(IBAction)inputBegin:(id) sender
+{
+    UITextField *feild = (UITextField *) sender;
+    
+    NSLog(@"%ld",feild.tag);
+    
+    
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+    
+    
+    
+    
+    return  YES;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    NSLog(@"textFieldShouldBeginEditing");
+    //textField.backgroundColor = [UIColor colorWithRed:220.0f/255.0f green:220.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
+    return YES;
+}
+
 //3
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     int count = 0;
@@ -790,11 +839,9 @@
     if ( tableView == serverAccountTable ){
         
         if ( section == 0 ){
-            count = 1;
+            count = 3;
         }else if ( section == 1 ){
-            count = 2;
-        }else if ( section == 2 ){
-            count = 2;
+            count = 3;
         }
         
     } else if ( tableView == _tableView0 ) {
@@ -807,14 +854,32 @@
     return count;
 }
 
+-(IBAction)sslStateChanged:(id) sender
+{
+    UISwitch *my_switch = (UISwitch *) sender;
+    
+    if ( my_switch == _iSslSwitch ){
+        if ( [_iSslSwitch isOn] ) {
+            iSsl = @"YES";
+        } else {
+            iSsl = @"NO";
+        }
+    }else if ( my_switch == _oSslSwitch ){
+        if ([_oSslSwitch isOn]) {
+            oSsl = @"YES";
+        } else {
+            oSsl = @"NO";
+        }
+    }
+}
+
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     NSString *sectionHeader;
     if ( section == 0 ){
-        sectionHeader = @"";
-    }else if ( section == 1 ){
         sectionHeader = @"Incoming Mail Server";
-    }else if ( section == 2 ){
+    }else if ( section == 1 ){
         sectionHeader = @"OutGoing Mail Server";
     }
     return sectionHeader;
