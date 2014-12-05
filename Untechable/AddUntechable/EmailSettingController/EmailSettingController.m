@@ -70,7 +70,7 @@
     // Do any additional setup after loading the view from its nib.
     
     //Setting up the Scroll size
-    [scrollView setContentSize:CGSizeMake(320, 730)];
+    [scrollView setContentSize:CGSizeMake(320, 750)];
     //Setting the initial position for scroll view
     scrollView.contentOffset = CGPointMake(0,0);
     
