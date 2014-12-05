@@ -289,11 +289,11 @@
     [self showHideDateTimePicker:YES];
     
     UIButton *clickedBtn = sender;
-    if( clickedBtn == _btnStartTime ){
+    if( clickedBtn == _btnStartTime || clickedBtn == _btnLblStartTime ){
         pickerOpenFor = @"_btnStartTime";
         _picker.date = [untechable.commonFunctions timestampStrToNsDate:untechable.startDate];
     }
-    else if( clickedBtn == _btnEndTime ){
+    else if( clickedBtn == _btnEndTime || clickedBtn == _btnLblEndTime ){
         pickerOpenFor = @"_btnEndTime";
         _picker.date = [untechable.commonFunctions timestampStrToNsDate:untechable.endDate];
     }
