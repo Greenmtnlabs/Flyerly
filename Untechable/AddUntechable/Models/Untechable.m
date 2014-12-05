@@ -27,7 +27,7 @@
 @synthesize socialStatus, fbAuth, fbAuthExpiryTs, twitterAuth, twOAuthTokenSecret, linkedinAuth;
 
 //4-vars for screen4
-@synthesize email, password, respondingEmail,acType, ssl, imsHostName, imsPort, omsHostName, omsPort;
+@synthesize email, password, respondingEmail,acType, iSsl, oSsl, imsHostName, imsPort, omsHostName, omsPort;
 
 
 -(NSDate *)stringToDate:(NSString *)inputStrFormate dateString:(NSString *)dateString{
@@ -206,7 +206,8 @@
         dic[@"respondingEmail"] = respondingEmail;
         dic[@"acType"] = acType;
         
-        dic[@"ssl"] = ssl;
+        dic[@"iSsl"] = iSsl;
+        dic[@"oSsl"] = oSsl;
         dic[@"imsHostName"] = imsHostName;
         dic[@"imsPort"] = imsPort;
         dic[@"omsHostName"] = omsHostName;
@@ -260,7 +261,8 @@
         password        = ( dic[@"password"] ) ? dic[@"password"] : @"";
         respondingEmail = ( dic[@"respondingEmail"] ) ? dic[@"respondingEmail"] : @"";
         acType          = ( dic[@"acType"] ) ? dic[@"acType"] : @"";
-        ssl             = ( dic[@"ssl"] ) ? dic[@"ssl"] : @"";
+        iSsl            = ( dic[@"iSsl"] ) ? dic[@"iSsl"] : @"";
+        oSsl            = ( dic[@"oSsl"] ) ? dic[@"oSsl"] : @"";
         imsHostName     = ( dic[@"imsHostName"] ) ? dic[@"imsHostName"] : @"";
         imsPort         = ( dic[@"imsPort"] ) ? dic[@"imsPort"] : @"";
         omsHostName     = ( dic[@"omsHostName"] ) ? dic[@"omsHostName"] : @"";
@@ -312,7 +314,7 @@
     email           = @"";
     password        = @"";
     respondingEmail = @"";
-    acType = ssl= imsHostName = imsPort = omsHostName = omsPort= @"";
+    acType = iSsl = oSsl = imsHostName = imsPort = omsHostName = omsPort= @"";
     
     
 }
