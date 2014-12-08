@@ -25,6 +25,10 @@ FlyerlyServer.setup = function( app ) {
 
     // Our logger for logging to file and console
     var logger = require(__dirname + '/../logger');	
+	
+	var Parse = require('parse-cloud').Parse;
+	
+	Parse.initialize( config.parse.appId, config.parse.jsKey );	
 
 	function cl( msg ) {
 		console.log( msg );
@@ -37,10 +41,29 @@ FlyerlyServer.setup = function( app ) {
 	//http://localhost:3000/cs?i=u0DFkKnZNG
 	*/
 	app.get('/cs', function( req, res ) {
-			//req.session.invitee = parseInt(Math.random()*9999999); //current user dummy id
-			req.session.inviterObjectId = ""+req.query.i+""; //User id who has invited this current user
+		//req.session.invitee = parseInt(Math.random()*9999999); //current user dummy id
+		req.session.inviterObjectId = ""+req.query.i+""; //User id who has invited this current user
+
+
+		function redirectToDownloadAppUrl( dataOf, data ) {
+			//console.log( {inFn:"closeBrowser", dataOf:dataOf, data: data} );
+			//res.jsonp({dataOf : data});
 			
 			res.redirect( config.url.download );
+		}
+		
+			
+		 //Actual body of this function is in parse cloud, this will increase the inviteSessions on parse
+		 Parse.Cloud.run('parseCloudeCodeIncreaseInviteSessions', {"objectId": req.session.inviterObjectId }, {
+		   success: function(result) {
+				redirectToDownloadAppUrl("result", result);
+		   },
+		   error: function(error) {
+				redirectToDownloadAppUrl("error", error);
+		   }
+		 });
+			
+			
 	});
 	
 	
@@ -58,23 +81,24 @@ FlyerlyServer.setup = function( app ) {
 	app.get("/es", function( req, res ) {	
 		
 		function closeBrowser(dataOf, data){
+			//console.log( {inFn:"closeBrowser", dataOf:dataOf, data: data} );			
 			req.session.inviterObjectId = null;
+			
 			//res.jsonp({dataOf : data});
 			res.redirect( config.url.close );
 		}
 		
-		if( req.session.inviterObjectId ) {
-			 var Parse = require('parse-cloud').Parse;
-			 Parse.initialize( config.parse.appId, config.parse.jsKey );
-			 
-			 Parse.Cloud.run('increaseInviteCounter', {"objectId": req.session.inviterObjectId }, {
+		if( req.session.inviterObjectId ) {			 
+
+			 //Actual body of this function is in parse cloud, this will increase the inviteCounter on parse
+			 Parse.Cloud.run('parseCloudeCodeIncreaseInviteCounter', {"objectId": req.session.inviterObjectId }, {
 			   success: function(result) {
 					closeBrowser("result", result);
 			   },
 			   error: function(error) {
 					closeBrowser("error", error);
 			   }
-			 });			
+			 });
 		}
 		else {
 			closeBrowser("msg", "inviterObjectId not found in session");

@@ -13,7 +13,7 @@ config.app.errorUrl   = '/error';
 config.app.mode.LOCALHOST = 'localhost'; //Port: 3000
 config.app.mode.PRODUCTION = 'production';   //Port: 80
 config.app.mode.DEVELOPMENT = 'development'; //Port: 3000
-config.app.mode.current = config.app.mode.PRODUCTION;
+config.app.mode.current = config.app.mode.LOCALHOST;
 
 // HTTP server configuration
 config.http = {}
