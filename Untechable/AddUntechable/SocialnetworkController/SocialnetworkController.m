@@ -299,6 +299,7 @@
 - (IBAction)shareOn:(id)sender {
     if(sender == self.btnFacebook){
         
+        untechable.socialStatus = _inputSetSocialStatus.text;
         if( [self fbBtnStatus] ) {
             //When button was green , the delete permissions
             [untechable fbFlushFbData];
