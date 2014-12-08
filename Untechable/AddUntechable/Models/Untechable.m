@@ -314,7 +314,9 @@
     email           = @"";
     password        = @"";
     respondingEmail = @"";
-    acType = iSsl = oSsl = imsHostName = imsPort = omsHostName = omsPort= @"";
+    iSsl = @"YES";
+    oSsl = @"YES";
+    acType = imsHostName = imsPort = omsHostName = omsPort= @"";
     
     
 }

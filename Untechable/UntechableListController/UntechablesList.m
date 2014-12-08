@@ -478,9 +478,9 @@
     
     int numberOfRowsInSection;
     if ( section == 0 ){
-        numberOfRowsInSection = sectionOneArray.count;
+        numberOfRowsInSection = (int)sectionOneArray.count;
     }else if ( section == 1 ){
-        numberOfRowsInSection = sectionTwoArray.count;
+        numberOfRowsInSection = (int)sectionTwoArray.count;
     }
     //return sectionHeader;
     return  numberOfRowsInSection;

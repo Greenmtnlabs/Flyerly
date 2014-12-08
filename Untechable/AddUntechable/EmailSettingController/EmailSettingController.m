@@ -119,10 +119,7 @@
 // ________________________     Custom functions    ___________________________
 
 - (void)setDefaultModel {
-    
-    iSsl = @"YES";
-    oSsl = @"YES";
-    
+
     _table01Data = [[NSMutableArray alloc] init];
     [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-icloud.jpg", @"text":@""}];
     [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-Exchange.jpg", @"text":@""}];
@@ -741,8 +738,18 @@
             
             if ( cell.sslSwitch.tag == 0 ){
                 _iSslSwitch = cell.sslSwitch;
+                if ( [untechable.iSsl isEqualToString:@"YES"] ){
+                    [_iSslSwitch setOn:YES];
+                }else if ( [untechable.iSsl isEqualToString:@"NO"] ){
+                    [_iSslSwitch setOn:NO];
+                }
             }else if ( cell.sslSwitch.tag == 1 ){
                 _oSslSwitch = cell.sslSwitch;
+                if ( [untechable.oSsl isEqualToString:@"YES"] ){
+                    [_oSslSwitch setOn:YES];
+                }else if ( [untechable.oSsl isEqualToString:@"NO"] ){
+                    [_oSslSwitch setOn:NO];
+                }
             }
             return cell;
         }
@@ -767,9 +774,11 @@
                 
                 if( cell.inputFeild.tag == 0 ){
                     _inputImsHostName   =   cell.inputFeild;
+                    _inputImsHostName.text = untechable.imsHostName;
                 }else if( cell.inputFeild.tag == 1 ){
                     _inputImsPort   =   cell.inputFeild;
                     [cell.inputFeild setKeyboardType:UIKeyboardTypeNumberPad];
+                    _inputImsPort.text = untechable.imsPort;
                 }
                 
                 return cell;
@@ -792,9 +801,11 @@
                 
                 if( cell.inputFeild.tag == 1 ){
                     _inputOmsHostName   =   cell.inputFeild;
+                    _inputOmsHostName.text = untechable.omsHostName;
                 }else if( cell.inputFeild.tag == 2 ){
                     _inputOmsPort   =   cell.inputFeild;
                     [cell.inputFeild setKeyboardType:UIKeyboardTypeNumberPad];
+                    _inputOmsPort.text = untechable.omsPort;
                 }
                 
                 return cell;
