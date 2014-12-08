@@ -69,6 +69,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    iSsl = @"YES";
+    oSsl = @"YES";
+    
     //Setting up the Scroll size
     [scrollView setContentSize:CGSizeMake(320, 750)];
     //Setting the initial position for scroll view
@@ -374,10 +377,17 @@
 
 -(void)onFinish {
     
+    if ( iSsl == nil ){
+        untechable.iSsl = @"YES";
+    }
+    
+    if ( oSsl == nil ){
+        untechable.oSsl = @"YES";
+    }
+    
     [self storeSceenVarsInDic];
      NSLog(@"onFinish dic = %@ ",untechable.dic);
-     
-     
+
      if( [APP_IN_MODE isEqualToString:TESTING] ){
          [self next:@"GO_TO_THANKYOU"];
      } else {
