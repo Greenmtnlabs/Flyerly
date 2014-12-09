@@ -19,6 +19,7 @@ FlyerlyServer.setup = function( app ) {
 	https://parse.com/questions/users-editing-other-users-in-javascript-sdk
 	*/
 	
+	var testApi = false;
 	
     // Get the configurations
     var config = require(__dirname + '/../config');
@@ -41,27 +42,34 @@ FlyerlyServer.setup = function( app ) {
 	//http://localhost:3000/cs?i=u0DFkKnZNG
 	*/
 	app.get('/cs', function( req, res ) {
-		//req.session.invitee = parseInt(Math.random()*9999999); //current user dummy id
-		req.session.inviterObjectId = ""+req.query.i+""; //User id who has invited this current user
-
-
 		function redirectToDownloadAppUrl( dataOf, data ) {
-			//console.log( {inFn:"closeBrowser", dataOf:dataOf, data: data} );
-			//res.jsonp({dataOf : dataOf, data:data});
-			
-			res.redirect( config.url.download );
+			var resObj = {dataOf : dataOf, data:data, reqSessionInviterObjectId:req.session.inviterObjectId};
+			if( testApi ){
+				console.log( resObj ) ;
+				res.jsonp( resObj ) ;
+			}else{
+				res.redirect( config.url.download );
+			}
 		}
 		
+		if( req.query.i == undefined ){
+			redirectToDownloadAppUrl("error", "Inviter Id not found");
+		}
+		else {
+			//req.session.invitee = parseInt(Math.random()*9999999); //current user dummy id
+			req.session.inviterObjectId = ""+req.query.i+""; //User id who has invited this current user
+
 			
-		 //Actual body of this function is in parse cloud, this will increase the inviteSessions on parse
-		 Parse.Cloud.run('parseCloudeCodeIncreaseInviteSessions', {"objectId": req.session.inviterObjectId }, {
-		   success: function(result) {
-				redirectToDownloadAppUrl("result", result);
-		   },
-		   error: function(error) {
-				redirectToDownloadAppUrl("error", error);
-		   }
-		 });
+			 //Actual body of this function is in parse cloud, this will increase the inviteSessions on parse
+			 Parse.Cloud.run('parseCloudeCodeIncreaseInviteSessions', {"objectId": req.session.inviterObjectId }, {
+			   success: function(result) {
+					redirectToDownloadAppUrl("result", result);
+			   },
+			   error: function(error) {
+					redirectToDownloadAppUrl("error", error);
+			   }
+			 });
+		}
 			
 			
 	});
@@ -80,13 +88,16 @@ FlyerlyServer.setup = function( app ) {
 	*/
 	app.get("/es", function( req, res ) {	
 		
-		function closeBrowser(dataOf, data){
+		function closeBrowser(dataOf, data) {
 			req.session.inviterObjectId = null;
-			
-			//console.log( {inFn:"closeBrowser", dataOf:dataOf, data: data} );			
-			//res.jsonp({dataOf : dataOf, data:data});
-			
-			res.redirect( config.url.close );
+			if( testApi ) {
+				var resObj = {dataOf : dataOf, data:data, reqSessionInviterObjectId:req.session.inviterObjectId};			
+				console.log( resObj ) ;
+				res.jsonp( resObj ) ;				
+			}else {				
+				res.redirect( config.url.close );				
+			}
+
 		}
 		
 		if( req.session.inviterObjectId ) {			 
