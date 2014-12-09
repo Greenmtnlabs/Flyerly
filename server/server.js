@@ -84,7 +84,7 @@ if ( config.http.enableSSL ) {
 
 // Make the server listen
 httpServer.listen( config.http.port );
-logger.info( 'Listening on port ' + config.http.port + ' with SSL ' + config.http.enableSSL );
+logger.info( ' SSL: ' + config.http.enableSSL + " , server url: "+config.http.host);
 
 
 
