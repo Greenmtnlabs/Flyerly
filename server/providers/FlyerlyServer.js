@@ -47,7 +47,7 @@ FlyerlyServer.setup = function( app ) {
 
 		function redirectToDownloadAppUrl( dataOf, data ) {
 			//console.log( {inFn:"closeBrowser", dataOf:dataOf, data: data} );
-			//res.jsonp({dataOf : data});
+			//res.jsonp({dataOf : dataOf, data:data});
 			
 			res.redirect( config.url.download );
 		}
@@ -81,10 +81,11 @@ FlyerlyServer.setup = function( app ) {
 	app.get("/es", function( req, res ) {	
 		
 		function closeBrowser(dataOf, data){
-			//console.log( {inFn:"closeBrowser", dataOf:dataOf, data: data} );			
 			req.session.inviterObjectId = null;
 			
-			//res.jsonp({dataOf : data});
+			//console.log( {inFn:"closeBrowser", dataOf:dataOf, data: data} );			
+			//res.jsonp({dataOf : dataOf, data:data});
+			
 			res.redirect( config.url.close );
 		}
 		
