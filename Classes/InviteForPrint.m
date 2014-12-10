@@ -81,9 +81,9 @@
     // INVITE BAR BUTTON
     UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
 	
-    //[inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
+    [inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
     //Skip paypal payment for testing
-    [inviteButton addTarget:self action:@selector(sendPdfFlyer) forControlEvents:UIControlEventTouchUpInside];
+    //[inviteButton addTarget:self action:@selector(sendPdfFlyer) forControlEvents:UIControlEventTouchUpInside];
     
     
     
