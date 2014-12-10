@@ -27,12 +27,16 @@
 #import "LobProjectConstants.h"
 #import "AbstractBlockRequest.h"
 
+
 @interface SendingPrintViewController (){
     LobRequest *request;
     LobRequest *postcardRequest;
     dispatch_semaphore_t sem;
     
     BOOL testing;
+    NSDictionary *toAddressTest;
+    NSDictionary *fromAddressTest;
+
 }
 
 @end
@@ -59,7 +63,32 @@ UIButton *backButton;
     
     sem = dispatch_semaphore_create(0);
     
-    testing = YES;
+    testing = NO;
+    
+    fromAddressTest = @{  @"name" : @"rufi name in from", \
+                                        @"email" : [NSNull null], \
+                                        @"phone" : [NSNull null], \
+                                        @"address_line1" : @"1600 AMPHITHEATRE PKWY UNIT 199 ", \
+                                        @"address_line2" : [NSNull null], \
+                                        @"address_city" : @"MOUNTAIN VIEW", \
+                                        @"address_state" : @"CA", \
+                                        @"address_zip" : @"94085", \
+                                        @"address_country" : @"US"};
+    
+    toAddressTest =  @{   @"name" : @"rufi name in to", \
+                                        @"email" : [NSNull null], \
+                                        @"phone" : [NSNull null], \
+                                        @"address_line1" : @"1600 AMPHITHEATRE PKWY UNIT 199 ", \
+                                        @"address_line2" : [NSNull null], \
+                                        @"address_city" : @"MOUNTAIN VIEW", \
+                                        @"address_state" : @"CA", \
+                                        @"address_zip" : @"94085", \
+                                        @"address_country" : @"US"};
+    
+    
+    
+    
+    
     
     messageFeild.delegate = self;
     
@@ -269,17 +298,44 @@ UIButton *backButton;
 
 
 /**
- * Prepare the flyer in PDF format.
+ * Prepare the flyer.
+ https://lob.com/docs
+ Create an object w/local file
+ 
+ Creates an new object using a local file.
+ 
+ ARGUMENTS
+ 
+ name:
+ optional
+ file:
+ required
+ This can be a URL or local file. If local file use -F and remember the @ before the name. Supported file types are PDF, PNG, and JPEG
+ 
+ setting_id:
+ required
+ Must be an ID supported in the SPS page
+ 
+ quantity:
+ optional
+ Default is 1
+ 
+ double_sided:
+ optional
+ Boolean, use 1 for double-sided
+ 
+ template:
+ optional
+ Boolean, only applicable with letters (setting 100 and 101). Defaults to 0 which adds a blank page with only the address printed on it. Use 1 to denote that your object adheres to this template and that the extra address page is not necessary.
+ 
+ RETURNS
+ 
+ Returns an object object upon successful creation.
  */
-- (NSString *) exportFlyerToPDF {
+- (NSString *) exportFlyer {
     NSString *destinationOfFlyerImg =   [self adjustFlyerImg];
     
-    NSString *currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-    NSString *destination = [NSString stringWithFormat:@"%@/flyer.pdf",currentpath];
-    
-    //destination = @"https://www.lob.com/postcardfront.pdf";
-    
-    return destination;
+    return destinationOfFlyerImg;
 }
 
 
@@ -335,9 +391,10 @@ UIButton *backButton;
  */
 -(void)sendrequestOnLob {
     if( testing ) {
-        [self sendPostCard: @"https://www.lob.com/postcardfront.pdf"
-                   backUrl: @"https://www.lob.com/postcardback.pdf"
-         ];
+        //[self sendPostCard: @"https://www.lob.com/postcardfront.pdf"  backUrl: @"https://www.lob.com/postcardback.pdf"         ];
+        
+        [self sendPostCard: @"http://assets.lob.com/obj_dd21e6a7ec0fdf3a.pdf"  backUrl: @"https://www.lob.com/postcardback.pdf"];
+        
     }
     else{
         [self uploadPdfAndSendCard];
@@ -346,20 +403,30 @@ UIButton *backButton;
 
 -(void)uploadPdfAndSendCard
 {
+    NSDictionary *objectDict;
+    NSString *filePath = @"";
     
-    /*
-    NSDictionary *objectDict = @{
-                                   @"name" : @"Flyer Postcard",
-                                   @"setting" : @{@"id" : @"200"},
-                                   @"file" : [self exportFlyerToPDF]
-                                 };
-*/
-    
-    NSDictionary *objectDict = @{@"name" : @"Go Blue",
-                                 @"setting" : @{@"id" : @"100"},
-                                 @"file" : @"https://www.lob.com/goblue.pdf"};
+    if( testing ){
+        objectDict = @{
+                       @"name" : @"Go Blue",
+                       @"setting" : @{@"id" : @"200"},
+                       @"file" : @"https://www.lob.com/goblue.pdf"};
+    }
+    else{
+        filePath  =   [self exportFlyer];
+        objectDict = @{
+                       @"name" : @"Flyer Postcard",
+                       @"setting" : @{@"id" : @"200"},
+                       @"file" : filePath
+                     };
+    }
     
     LobObjectModel *objectModel = [LobObjectModel initWithDictionary:objectDict];
+    
+    if( !([filePath isEqualToString:@""]) ) {
+        objectModel.localFilePath = YES;
+    }
+    
     [request createObjectWithModel:objectModel
                       withResponse:^(LobObjectModel *object, NSError *error)
      {
@@ -367,7 +434,6 @@ UIButton *backButton;
          
          if ( error == nil && request.statusCode == 200){
              
-             NSLog(@"object: %@ ", object);
              
              if( testing ){
                  [self sendPostCard: @"https://www.lob.com/postcardfront.pdf"
@@ -375,7 +441,7 @@ UIButton *backButton;
                   ];
              }
              else {
-                 NSString *frontUrl = [NSString stringWithFormat:@"http://assets.lob.com/%@",object.objectId];
+                 NSString *frontUrl = [NSString stringWithFormat:@"http://assets.lob.com/%@.pdf",object.objectId];
                  [self sendPostCard : frontUrl
                              backUrl: @"https://www.lob.com/postcardback.pdf"
                   ];
@@ -398,35 +464,24 @@ UIButton *backButton;
 
 -(void)sendPostCard:(NSString *)frontUrl backUrl:(NSString *)backUrl
 {
-    /*
-    NSMutableDictionary *fromAddress = [[NSMutableDictionary alloc] init];
-    [fromAddress setObject:name.text forKey:@"name"];
-    [fromAddress setObject:[NSNull null] forKey:@"email"];
-    [fromAddress setObject:[NSNull null] forKey:@"phone"];
-    [fromAddress setObject:streetAddress.text forKey:@"address_line1"];
-    [fromAddress setObject:[NSNull null] forKey:@"address_line2"];
-    [fromAddress setObject:city.text forKey:@"address_city"];
-    [fromAddress setObject:state.text forKey:@"address_state"];
-    [fromAddress setObject:zip.text forKey:@"address_zip"];
-    [fromAddress setObject:@"US" forKey:@"address_country"]; */
     
     NSDictionary *fromAddress = @{
-                  @"name" : @"rufi name in from", \
-                  @"email" : [NSNull null], \
-                  @"phone" : [NSNull null], \
-                  @"address_line1" : @"1600 AMPHITHEATRE PKWY UNIT 199 ", \
-                  @"address_line2" : [NSNull null], \
-                  @"address_city" : @"MOUNTAIN VIEW", \
-                  @"address_state" : @"CA", \
-                  @"address_zip" : @"94085", \
-                  @"address_country" : @"US"};
-    
+                                  @"name" : name.text, \
+                                  @"email" : [NSNull null], \
+                                  @"phone" : [NSNull null], \
+                                  @"address_line1" : streetAddress.text , \
+                                  @"address_line2" : [NSNull null], \
+                                  @"address_city" : city.text, \
+                                  @"address_state" : state.text, \
+                                  @"address_zip" : zip.text, \
+                                  @"address_country" : @"US"};
     
 
     for ( int i = 0;i<contactsArray.count;i++) {
+        
         //Contact Details
         ContactsModel *model = [self getArrayOfSelectedTab][i];
-        NSDictionary *toAddress2 = @{
+        NSDictionary *toAddress = @{
                                     @"name" : model.name, \
                                     @"email" : [NSNull null], \
                                     @"phone" : [NSNull null], \
@@ -437,18 +492,6 @@ UIButton *backButton;
                                     @"address_zip" : model.zip, \
                                     @"address_country" : @"US"
                                     };
-        
-        
-        NSDictionary *toAddress = @{
-                                      @"name" : @"rufi name in to", \
-                                      @"email" : [NSNull null], \
-                                      @"phone" : [NSNull null], \
-                                      @"address_line1" : @"1600 AMPHITHEATRE PKWY UNIT 199 ", \
-                                      @"address_line2" : [NSNull null], \
-                                      @"address_city" : @"MOUNTAIN VIEW", \
-                                      @"address_state" : @"CA", \
-                                      @"address_zip" : @"94085", \
-                                      @"address_country" : @"US"};
 
         
         
@@ -458,43 +501,50 @@ UIButton *backButton;
                                        @"to" : toAddress,
                                        @"from" : fromAddress};
         
+        [self sendPostCard:postcardDict];
         
-        
-        LobPostcardModel *flyerPostCardModel = [[LobPostcardModel alloc] initWithDictionary:postcardDict];
-        
-        [postcardRequest createPostcardWithModel:flyerPostCardModel
-                                    withResponse:^(LobPostcardModel *postcard, NSError *error)
-         {
+    }
+}
+
+
+//Send After Address Verification
+-(void)sendPostCard: (NSDictionary *)postcardDict
+{
+    LobPostcardModel *flyerPostCardModel = [[LobPostcardModel alloc] initWithDictionary:postcardDict];
+    
+    
+    [postcardRequest createPostcardWithModel:flyerPostCardModel
+                                withResponse:^(LobPostcardModel *postcard, NSError *error)
+     {
+         
+         if (error == nil && postcardRequest.statusCode == 200) {
              
-             if (error == nil && postcardRequest.statusCode == 200) {
-                 
-                 NSLog(@"postcard: %@",postcard);
-                 
-                 UIAlertView *alertSuccess = [[UIAlertView alloc] initWithTitle:@"PostCard Send" message:@"Your postcard hase been send to print"  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                 
-                 [alertSuccess show];
-                 
-                 
-             } else {
-                 
-                 NSString *failedError = [NSString stringWithFormat:@"PostCard could not be sent. Failed with error %@", error];
-                 
-                 if( error == nil ) {
-                     failedError = [NSString stringWithFormat:@"PostCard could not be sent. Failed with status code %ld", (long)postcardRequest.statusCode ];
-                 }
-                 
-                 UIAlertView *alertFailure = [[UIAlertView alloc] initWithTitle:@"" message:failedError  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                 
-                 [alertFailure show];
+             NSLog(@"postcard: %@",postcard);
+             
+             UIAlertView *alertSuccess = [[UIAlertView alloc] initWithTitle:@"PostCard Send" message:@"Your postcard hase been send to print"  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+             
+             [alertSuccess show];
+             
+             
+         } else {
+             
+             NSString *failedError = [NSString stringWithFormat:@"PostCard could not be sent. Failed with error %@", error];
+             
+             if( error == nil ) {
+                 failedError = [NSString stringWithFormat:@"PostCard could not be sent. Failed with status code %ld", (long)postcardRequest.statusCode ];
              }
              
-             [self showLoadingIndicator:NO];
-             NSLog(@"%@",postcard);
-             NSLog(@"%@",error);
+             UIAlertView *alertFailure = [[UIAlertView alloc] initWithTitle:@"" message:failedError  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
              
-             dispatch_semaphore_signal(sem);
-         }];
-    }
+             [alertFailure show];
+         }
+         
+         [self showLoadingIndicator:NO];
+         NSLog(@"%@",postcard);
+         NSLog(@"%@",error);
+         
+         dispatch_semaphore_signal(sem);
+     }];
 }
 
 -(void)showLoadingIndicator:(BOOL)show
@@ -506,5 +556,36 @@ UIButton *backButton;
         backButton.enabled = YES;
     }
 }
+
+
+/*
+ -(void)verifyAddressThenSend:(NSDictionary *)postcardDict
+ {
+ LobAddressModel *fromLobAdd = [[LobAddressModel alloc] initWithDictionary:[postcardDict objectForKey:@"from"]];
+ 
+ [request verifyAddressModel:fromLobAdd
+ withResponse:^(LobVerifyModel *validation, NSError *error)
+ {
+ NSLog(@"*** Verify Address Response *** request.statusCode: %@",request.statusCode);
+ 
+ dispatch_semaphore_signal(sem);
+ 
+ //[self sendPostCard:postcardDict];
+ }];
+ }
+ 
+ -(void)sendPostCardAfterAddressOfToVerification: (LobAddressModel *)lobAddressModel postcardDict:(NSDictionary *)postcardDict
+ {
+ [request verifyAddressModel:lobAddressModel
+ withResponse:^(LobVerifyModel *validation, NSError *error)
+ {
+ NSLog(@"*** Verify Address Response *** request.statusCode: %@",request.statusCode);
+ 
+ dispatch_semaphore_signal(sem);
+ 
+ //[self sendPostCard:postcardDict];
+ }];
+ }
+ */
 
 @end
