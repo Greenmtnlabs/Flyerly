@@ -193,9 +193,9 @@ UIButton *backButton;
 
 
 /**
- * Prepare the flyer in PDF format.
+ * Merge flyer image in flyer bg background
  */
-- (NSString *) exportFlyerToPDF {
+- (NSString *) adjustFlyerImg {
     
     // Create the PDF context using the required size of 6" x 4" at 300 dpi.
     CGSize pageSize = CGSizeMake( 1800, 1200);
@@ -243,6 +243,23 @@ UIButton *backButton;
     [postCardPng writeToFile:destination atomically:YES];
     
     //NSURL* URL = [NSURL fileURLWithPath:destination];
+    return destination;
+}
+
+
+
+
+/**
+ * Prepare the flyer in PDF format.
+ */
+- (NSString *) exportFlyerToPDF {
+    NSString *destinationOfFlyerImg =   [self adjustFlyerImg];
+    
+    NSString *currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    NSString *destination = [NSString stringWithFormat:@"%@/flyer.pdf",currentpath];
+    
+    //destination = @"https://www.lob.com/postcardfront.pdf";
+    
     return destination;
 }
 
@@ -305,7 +322,7 @@ UIButton *backButton;
     
     NSString *apiKey = [flyerConfigurator lobAppId];
     
-    BOOL testing = NO;
+    BOOL testing = YES;
     
     if(testing) {
         [self sendPostCard:apiKey
@@ -320,25 +337,48 @@ UIButton *backButton;
 
 -(void)uploadPdfAndSendCard:(NSString *)apiKey
 {
-     NSDictionary *objectDict = @{
+    LobRequest *request = [LobRequest initWithAPIKey:apiKey];
+    
+    /*
+    NSDictionary *objectDict = @{
                                    @"name" : @"Flyer Postcard",
                                    @"setting" : @{@"id" : @"200"},
                                    @"file" : [self exportFlyerToPDF]
                                  };
+*/
+    /*
+            NSString *path = [bundle pathForResource:@"zalogo" ofType:@"pdf"];
+            if (path)
+            {
+                zaPDFPath = path;
+            }
+        }
+     */
+
+
+
+
     
-     LobObjectModel *objectModel = [LobObjectModel initWithDictionary:objectDict];
-     objectModel.localFilePath = YES;
-     
-     LobRequest *request = [LobRequest initWithAPIKey:apiKey];
+    NSDictionary *objectDict = @{@"name" : @"Go Blue",
+                                 @"setting" : @{@"id" : @"100"},
+                                 @"file" : @"https://www.lob.com/goblue.pdf"};
     
-     [request createObjectWithModel:objectModel withResponse:^(LobObjectModel *object, NSError *error)
+    LobObjectModel *objectModel = [LobObjectModel initWithDictionary:objectDict];
+    [request createObjectWithModel:objectModel
+                      withResponse:^(LobObjectModel *object, NSError *error)
      {
+    
+    
+    
+    
+    
          NSLog(@"*** Object Create Local Response ***");
          NSLog(@"%ld", (long)request.statusCode);
          
          if ( error == nil && request.statusCode == 200){
+             
+             NSString *frontUrl = [NSString stringWithFormat:@"http://assets.lob.com/%@",object.objectId];
              /*
-             NSString *frontUrl = [NSString stringWithFormat:@"http://assets.lob.com/%@",object.objectId];              
              [self sendPostCard:apiKey
                                 frontUrl:frontUrl
                                 backUrl: @"https://www.lob.com/postcardback.pdf"
@@ -348,12 +388,15 @@ UIButton *backButton;
                        frontUrl:@"https://www.lob.com/postcardfront.pdf"
                         backUrl: @"https://www.lob.com/postcardback.pdf"
               ];
+             
 
          }
          else {
              UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failed to upload postcard" message:@"Your postcard could not be uploaded for print"  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
              
              [alert show];
+             
+             [self showLoadingIndicator:NO];
          }
      }];
         //----//
@@ -363,7 +406,7 @@ UIButton *backButton;
 -(void)sendPostCard:(NSString *)apiKey frontUrl:(NSString *)frontUrl backUrl:(NSString *)backUrl
 {
     LobRequest *postcardRequest = [LobRequest initWithAPIKey:apiKey];
-    
+    /*
     NSMutableDictionary *fromAddress = [[NSMutableDictionary alloc] init];
     [fromAddress setObject:name.text forKey:@"name"];
     [fromAddress setObject:[NSNull null] forKey:@"email"];
@@ -373,7 +416,19 @@ UIButton *backButton;
     [fromAddress setObject:city.text forKey:@"address_city"];
     [fromAddress setObject:state.text forKey:@"address_state"];
     [fromAddress setObject:zip.text forKey:@"address_zip"];
-    [fromAddress setObject:@"US" forKey:@"address_country"];
+    [fromAddress setObject:@"US" forKey:@"address_country"]; */
+    
+    NSDictionary *fromAddress = @{@"name" : @"rufi to addrs -HARRY ZHANG", \
+                  @"email" : [NSNull null], \
+                  @"phone" : [NSNull null], \
+                  @"address_line1" : @"1600 AMPHITHEATRE PKWY", \
+                  @"address_line2" : @"UNIT 199", \
+                  @"address_city" : @"MOUNTAIN VIEW", \
+                  @"address_state" : @"CA", \
+                  @"address_zip" : @"94085", \
+                  @"address_country" : @"US"};
+    
+    
 
     for ( int i = 0;i<contactsArray.count;i++) {
         //Contact Details
@@ -389,6 +444,7 @@ UIButton *backButton;
                                     @"address_zip" : model.zip, \
                                     @"address_country" : @"US"
                                     };
+        
         
         NSDictionary *postcardDict = @{@"name" : @"Flyer Postcard",
                                        @"front" : frontUrl,
@@ -422,18 +478,21 @@ UIButton *backButton;
                  [alertFailure show];
              }
              
+             [self showLoadingIndicator:NO];
              NSLog(@"%@",postcard);
              NSLog(@"%@",error);
              
-             //---{---
-             [self hideLoadingIndicator];
-             backButton.enabled = YES;
-             //---}---
-             
-             
-             
-             
          }];
+    }
+}
+
+-(void)showLoadingIndicator:(BOOL)show
+{
+    if( show ){
+    
+    }else{
+        [self hideLoadingIndicator];
+        backButton.enabled = YES;
     }
 }
 
