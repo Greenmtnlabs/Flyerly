@@ -65,7 +65,9 @@
             //Checking For Integer Dir Names Only
             if ([[NSScanner scannerWithString:uniqueId_temp] scanInt:nil]) {
                 NSString *piecesF =[untechablePath_temp stringByAppendingString:[NSString stringWithFormat:@"/%@", PIECES_FILE]];
-                retDic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesF];
+                NSData *data = [NSData dataWithContentsOfFile:piecesF];
+                retDic = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+                //retDic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesF];
                 [retDic setValue:uniqueId_temp forKey:@"uniqueId"];
                 [retDic setValue:untechablePath_temp forKey:@"untechablePath"];
                 //[retDic setValue:[NSString stringWithFormat:@"%@/%@%@", untechablePath_temp,uniqueId_temp,REC_FORMATE] forKey:@"recFileURL"];
@@ -212,7 +214,9 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
         //Checking For Integer Dir Names Only
         if ([[NSScanner scannerWithString:uniqueId_temp] scanInt:nil]) {
             NSString *piecesF =[untechablePath_temp stringByAppendingString:[NSString stringWithFormat:@"/%@", PIECES_FILE]];
-            retDic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesF];
+            NSData *data = [NSData dataWithContentsOfFile:piecesF];
+            retDic = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            //retDic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesF];
             [retDic setValue:uniqueId_temp forKey:@"uniqueId"];
             [retDic setValue:untechablePath_temp forKey:@"untechablePath"];
         }
@@ -257,12 +261,13 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
         //Checking For Integer Dir Names Only
         if ([[NSScanner scannerWithString:uniqueId_temp] scanInt:nil]) {
             NSString *piecesF =[untechablePath_temp stringByAppendingString:[NSString stringWithFormat:@"/%@", PIECES_FILE]];
-            retDic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesF];
-            BOOL isFinished = [[retDic objectForKey:@"hasFinished"] boolValue];
+            NSData *data = [NSData dataWithContentsOfFile:piecesF];
+            retDic = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            //retDic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesF];
             [retDic setValue:uniqueId_temp forKey:@"uniqueId"];
             [retDic setValue:untechablePath_temp forKey:@"untechablePath"];
             
-            if ( isFinished == NO ){
+            if ( ![[retDic objectForKey:@"hasFinished"] boolValue] ){
                 return retDic;
             }
             //[retDic setValue:[NSString stringWithFormat:@"%@/%@%@", untechablePath_temp,uniqueId_temp,REC_FORMATE] forKey:@"recFileURL"];

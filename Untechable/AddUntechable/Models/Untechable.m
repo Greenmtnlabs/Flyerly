@@ -213,14 +213,18 @@
         dic[@"omsHostName"] = omsHostName;
         dic[@"omsPort"] = omsPort;
         
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dic];
+        [data writeToFile:piecesFile atomically:YES];
         //Here we write the dictionary of .peices files
-        [dic writeToFile:piecesFile atomically:YES];
+        //[dic writeToFile:piecesFile atomically:YES];
 
     }
     else if( [setOrSAve isEqualToString:RESET] ) {
         
         piecesFile = [untechablePath stringByAppendingString:[NSString stringWithFormat:@"/%@", PIECES_FILE]];
-        dic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
+        NSData *data = [NSData dataWithContentsOfFile:piecesFile];
+        dic = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        //dic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
         
         
         //Settings

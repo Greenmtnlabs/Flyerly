@@ -732,6 +732,7 @@
 						DevelopmentTeam = F988S9J47K;
 					};
 					36561D8219D2C8A40069D897 = {
+						DevelopmentTeam = F988S9J47K;
 						TestTargetID = 36561D6719D2C8A40069D897;
 					};
 				};
@@ -1085,6 +1086,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Untechable.app/Untechable";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1098,6 +1101,7 @@
 				);
 				INFOPLIST_FILE = "UntechableTests/UntechableTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -1107,6 +1111,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Untechable.app/Untechable";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1116,6 +1122,7 @@
 				GCC_PREFIX_HEADER = "Untechable/Untechable-Prefix.pch";
 				INFOPLIST_FILE = "UntechableTests/UntechableTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};

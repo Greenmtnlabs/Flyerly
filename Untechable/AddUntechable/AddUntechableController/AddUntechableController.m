@@ -411,7 +411,7 @@
         
         if( sUntechable != nil ){
             isNew = NO;
-            callReset = @"RESET_DEFAULTS";
+            callReset = @"RESET1";
         }
     }
     
