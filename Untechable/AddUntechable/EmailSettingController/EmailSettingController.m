@@ -124,13 +124,28 @@
 - (void)setDefaultModel {
 
     _table01Data = [[NSMutableArray alloc] init];
-    [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-icloud.jpg", @"text":@""}];
-    [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-Exchange.jpg", @"text":@""}];
-    [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-Google.jpg", @"text":@""}];
-    [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-Yahoo.jpg", @"text":@""}];
-    [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-Aol.jpg", @"text":@""}];
-    [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-outlook.jpg", @"text":@""}];
-    [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-other.png", @"text":@""}];
+
+    if( IS_IPHONE_5 ){
+        NSLog(@"iPhone 5/5s");
+        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"icloudIcon.png", @"text":@""}];
+        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"exchangeIcon.png", @"text":@""}];
+        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"GoogleIcon.png", @"text":@""}];
+        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"YahooIcon.png", @"text":@""}];
+        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"aolIcon.png", @"text":@""}];
+        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"outlookIcon.png", @"text":@""}];
+        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-other.png", @"text":@""}];
+    }
+    
+    if ( IS_IPHONE_6 ){
+        NSLog(@"iPhone 6");
+        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"icloudIcon@2x.png", @"text":@""}];
+        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"exchangeIcon@2x.png", @"text":@""}];
+        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"GoogleIcon@2x.png", @"text":@""}];
+        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"YahooIcon@2x.png", @"text":@""}];
+        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"aolIcon@2x.png", @"text":@""}];
+        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"outlookIcon@2x.png", @"text":@""}];
+        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-other@2x.png", @"text":@""}];
+    }
 }
 
 

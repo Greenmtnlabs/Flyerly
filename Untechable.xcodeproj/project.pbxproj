@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		200ACE241A3874B200DC7047 /* aolIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE121A3874B200DC7047 /* aolIcon.png */; };
+		200ACE251A3874B200DC7047 /* aolIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE131A3874B200DC7047 /* aolIcon@2x.png */; };
+		200ACE261A3874B200DC7047 /* aolIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE141A3874B200DC7047 /* aolIcon@3x.png */; };
+		200ACE271A3874B200DC7047 /* exchangeIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE151A3874B200DC7047 /* exchangeIcon.png */; };
+		200ACE281A3874B200DC7047 /* exchangeIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE161A3874B200DC7047 /* exchangeIcon@2x.png */; };
+		200ACE291A3874B200DC7047 /* exchangeIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE171A3874B200DC7047 /* exchangeIcon@3x.png */; };
+		200ACE2A1A3874B200DC7047 /* GoogleIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE181A3874B200DC7047 /* GoogleIcon.png */; };
+		200ACE2B1A3874B200DC7047 /* GoogleIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE191A3874B200DC7047 /* GoogleIcon@2x.png */; };
+		200ACE2C1A3874B200DC7047 /* GoogleIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE1A1A3874B200DC7047 /* GoogleIcon@3x.png */; };
+		200ACE2D1A3874B200DC7047 /* icloudIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE1B1A3874B200DC7047 /* icloudIcon.png */; };
+		200ACE2E1A3874B200DC7047 /* icloudIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE1C1A3874B200DC7047 /* icloudIcon@2x.png */; };
+		200ACE2F1A3874B200DC7047 /* icloudIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE1D1A3874B200DC7047 /* icloudIcon@3x.png */; };
+		200ACE301A3874B200DC7047 /* outlookIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE1E1A3874B200DC7047 /* outlookIcon.png */; };
+		200ACE311A3874B200DC7047 /* outlookIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE1F1A3874B200DC7047 /* outlookIcon@2x.png */; };
+		200ACE321A3874B200DC7047 /* outlookIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE201A3874B200DC7047 /* outlookIcon@3x.png */; };
+		200ACE331A3874B200DC7047 /* YahooIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE211A3874B200DC7047 /* YahooIcon.png */; };
+		200ACE341A3874B200DC7047 /* YahooIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE221A3874B200DC7047 /* YahooIcon@2x.png */; };
+		200ACE351A3874B200DC7047 /* YahooIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE231A3874B200DC7047 /* YahooIcon@3x.png */; };
 		2402BB831A1DBF6A00255A73 /* UntechablesList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402BB811A1DBF6A00255A73 /* UntechablesList.m */; };
 		2402BB841A1DBF6A00255A73 /* UntechablesList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2402BB821A1DBF6A00255A73 /* UntechablesList.xib */; };
 		2402BB881A1DC3A200255A73 /* UntechableTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402BB861A1DC3A200255A73 /* UntechableTableCell.m */; };
@@ -133,6 +151,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		200ACE121A3874B200DC7047 /* aolIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aolIcon.png; sourceTree = "<group>"; };
+		200ACE131A3874B200DC7047 /* aolIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aolIcon@2x.png"; sourceTree = "<group>"; };
+		200ACE141A3874B200DC7047 /* aolIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aolIcon@3x.png"; sourceTree = "<group>"; };
+		200ACE151A3874B200DC7047 /* exchangeIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exchangeIcon.png; sourceTree = "<group>"; };
+		200ACE161A3874B200DC7047 /* exchangeIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exchangeIcon@2x.png"; sourceTree = "<group>"; };
+		200ACE171A3874B200DC7047 /* exchangeIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exchangeIcon@3x.png"; sourceTree = "<group>"; };
+		200ACE181A3874B200DC7047 /* GoogleIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GoogleIcon.png; sourceTree = "<group>"; };
+		200ACE191A3874B200DC7047 /* GoogleIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GoogleIcon@2x.png"; sourceTree = "<group>"; };
+		200ACE1A1A3874B200DC7047 /* GoogleIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GoogleIcon@3x.png"; sourceTree = "<group>"; };
+		200ACE1B1A3874B200DC7047 /* icloudIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icloudIcon.png; sourceTree = "<group>"; };
+		200ACE1C1A3874B200DC7047 /* icloudIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icloudIcon@2x.png"; sourceTree = "<group>"; };
+		200ACE1D1A3874B200DC7047 /* icloudIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icloudIcon@3x.png"; sourceTree = "<group>"; };
+		200ACE1E1A3874B200DC7047 /* outlookIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = outlookIcon.png; sourceTree = "<group>"; };
+		200ACE1F1A3874B200DC7047 /* outlookIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "outlookIcon@2x.png"; sourceTree = "<group>"; };
+		200ACE201A3874B200DC7047 /* outlookIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "outlookIcon@3x.png"; sourceTree = "<group>"; };
+		200ACE211A3874B200DC7047 /* YahooIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YahooIcon.png; sourceTree = "<group>"; };
+		200ACE221A3874B200DC7047 /* YahooIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YahooIcon@2x.png"; sourceTree = "<group>"; };
+		200ACE231A3874B200DC7047 /* YahooIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YahooIcon@3x.png"; sourceTree = "<group>"; };
 		2402BB801A1DBF6A00255A73 /* UntechablesList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UntechablesList.h; path = UntechableListController/UntechablesList.h; sourceTree = "<group>"; };
 		2402BB811A1DBF6A00255A73 /* UntechablesList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UntechablesList.m; path = UntechableListController/UntechablesList.m; sourceTree = "<group>"; };
 		2402BB821A1DBF6A00255A73 /* UntechablesList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UntechablesList.xib; path = UntechableListController/UntechablesList.xib; sourceTree = "<group>"; };
@@ -579,6 +615,24 @@
 		36B0369A19DAD2AB00E8CD21 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				200ACE121A3874B200DC7047 /* aolIcon.png */,
+				200ACE131A3874B200DC7047 /* aolIcon@2x.png */,
+				200ACE141A3874B200DC7047 /* aolIcon@3x.png */,
+				200ACE151A3874B200DC7047 /* exchangeIcon.png */,
+				200ACE161A3874B200DC7047 /* exchangeIcon@2x.png */,
+				200ACE171A3874B200DC7047 /* exchangeIcon@3x.png */,
+				200ACE181A3874B200DC7047 /* GoogleIcon.png */,
+				200ACE191A3874B200DC7047 /* GoogleIcon@2x.png */,
+				200ACE1A1A3874B200DC7047 /* GoogleIcon@3x.png */,
+				200ACE1B1A3874B200DC7047 /* icloudIcon.png */,
+				200ACE1C1A3874B200DC7047 /* icloudIcon@2x.png */,
+				200ACE1D1A3874B200DC7047 /* icloudIcon@3x.png */,
+				200ACE1E1A3874B200DC7047 /* outlookIcon.png */,
+				200ACE1F1A3874B200DC7047 /* outlookIcon@2x.png */,
+				200ACE201A3874B200DC7047 /* outlookIcon@3x.png */,
+				200ACE211A3874B200DC7047 /* YahooIcon.png */,
+				200ACE221A3874B200DC7047 /* YahooIcon@2x.png */,
+				200ACE231A3874B200DC7047 /* YahooIcon@3x.png */,
 				24BAB1891A2F340200855B77 /* logo-other.png */,
 				363DEAFE1A2C73E90035FF1F /* logo-Other.jpg */,
 				363DEAF21A2C6D9B0035FF1F /* logo-outlook.jpg */,
@@ -767,7 +821,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				200ACE2B1A3874B200DC7047 /* GoogleIcon@2x.png in Resources */,
 				36B2767B1A0124E800ED58AD /* right_arrow.png in Resources */,
+				200ACE2D1A3874B200DC7047 /* icloudIcon.png in Resources */,
 				2402BB891A1DC3A200255A73 /* UntechableTableCell.xib in Resources */,
 				36B276781A0124E800ED58AD /* record_gray@2x.png in Resources */,
 				366ECD9C19D323E200F71A11 /* PhoneSetupController.xib in Resources */,
@@ -786,11 +842,14 @@
 				366EAF921A14C3530011D6C6 /* icon-50.png in Resources */,
 				366EAFAB1A14E5370011D6C6 /* playvideo@2x.png in Resources */,
 				363DEAFB1A2C6D9B0035FF1F /* logo-Google.jpg in Resources */,
+				200ACE321A3874B200DC7047 /* outlookIcon@3x.png in Resources */,
+				200ACE2A1A3874B200DC7047 /* GoogleIcon.png in Resources */,
 				24848FE81A30403600BF1138 /* ServerAccountDetailsViewCell.xib in Resources */,
 				36474F2419D9780100084F34 /* Pigiarniq Italic.ttf in Resources */,
 				36B276741A0124E800ED58AD /* play_gray@2x.png in Resources */,
 				36B276761A0124E800ED58AD /* play@2x.png in Resources */,
 				2402BB841A1DBF6A00255A73 /* UntechablesList.xib in Resources */,
+				200ACE281A3874B200DC7047 /* exchangeIcon@2x.png in Resources */,
 				36474F2319D9780100084F34 /* Pigiarniq Heavy.ttf in Resources */,
 				36C734481A0CF2490066C544 /* Podfile in Resources */,
 				366EAF911A14C3530011D6C6 /* icon-40@2x.png in Resources */,
@@ -799,11 +858,14 @@
 				366EAFA51A14C3530011D6C6 /* logo@2x.png in Resources */,
 				366EAF9D1A14C3530011D6C6 /* icon@1024.png in Resources */,
 				36B2767C1A0124E800ED58AD /* right_arrow@2x.png in Resources */,
+				200ACE331A3874B200DC7047 /* YahooIcon.png in Resources */,
 				363DEAFD1A2C6D9B0035FF1F /* logo-icloud.jpg in Resources */,
 				36474F2519D9780100084F34 /* Pigiarniq Light.ttf in Resources */,
 				366EAFA21A14C3530011D6C6 /* Default-Portrait-736h@3x.png in Resources */,
 				3681604019E6B81E00B9B64C /* InviteFriendsController.xib in Resources */,
+				200ACE291A3874B200DC7047 /* exchangeIcon@3x.png in Resources */,
 				363DEAF91A2C6D9B0035FF1F /* logo-Aol.jpg in Resources */,
+				200ACE261A3874B200DC7047 /* aolIcon@3x.png in Resources */,
 				366EAFA11A14C3530011D6C6 /* Default-Landscape-736h@3x.png in Resources */,
 				366EAFB51A14EDA30011D6C6 /* copy@2x.png in Resources */,
 				366EAFA61A14C3530011D6C6 /* logo@3x.png in Resources */,
@@ -811,17 +873,23 @@
 				36FD975619E694AC00427507 /* BSKeyboardControls.strings in Resources */,
 				36B276771A0124E800ED58AD /* record_gray.png in Resources */,
 				366EAF991A14C3530011D6C6 /* icon-76@2x.png in Resources */,
+				200ACE241A3874B200DC7047 /* aolIcon.png in Resources */,
 				366EAFA71A14C3530011D6C6 /* CHECKBOX_EMPTY.png in Resources */,
+				200ACE301A3874B200DC7047 /* outlookIcon.png in Resources */,
 				366EAFAA1A14E5370011D6C6 /* playvideo.png in Resources */,
 				36B2765E1A0124E800ED58AD /* CHECKBOX_FILLED.png in Resources */,
+				200ACE251A3874B200DC7047 /* aolIcon@2x.png in Resources */,
 				363DEAFA1A2C6D9B0035FF1F /* logo-Yahoo.jpg in Resources */,
+				200ACE341A3874B200DC7047 /* YahooIcon@2x.png in Resources */,
 				36B2766F1A0124E800ED58AD /* inputBottomBg2@2x.png in Resources */,
 				36B006481A161B92005C3791 /* untechable.mov in Resources */,
+				200ACE2F1A3874B200DC7047 /* icloudIcon@3x.png in Resources */,
 				366EAFB71A14EDA30011D6C6 /* copy_selected.png in Resources */,
 				366EAF9F1A14C3530011D6C6 /* Default-568h@2x.png in Resources */,
 				366EAF971A14C3530011D6C6 /* icon-72@2x.png in Resources */,
 				36B2765D1A0124E800ED58AD /* CHECKBOX_EMPTY@2x.png in Resources */,
 				366ECD9719D323DA00F71A11 /* AddUntechableController.xib in Resources */,
+				200ACE2E1A3874B200DC7047 /* icloudIcon@2x.png in Resources */,
 				366EAF981A14C3530011D6C6 /* icon-76.png in Resources */,
 				363DEAF81A2C6D9B0035FF1F /* logo-outlook.jpg in Resources */,
 				3681603E19E6B81E00B9B64C /* InviteFriendsCell.xib in Resources */,
@@ -829,15 +897,18 @@
 				366EAFA31A14C3530011D6C6 /* Default@2x.png in Resources */,
 				36B276701A0124E800ED58AD /* invite_Bg@2x.png in Resources */,
 				36561D7619D2C8A40069D897 /* InfoPlist.strings in Resources */,
+				200ACE311A3874B200DC7047 /* outlookIcon@2x.png in Resources */,
 				366EAF931A14C3530011D6C6 /* icon-50@2x.png in Resources */,
 				366EAFB81A14EDA30011D6C6 /* copy.png in Resources */,
 				24A65BED1A30451E00BE83C6 /* SSLCell.xib in Resources */,
 				366EAF951A14C3530011D6C6 /* icon-60@2x.png in Resources */,
 				366EAFA01A14C3530011D6C6 /* Default-667h@2x.png in Resources */,
 				24BAB18A1A2F340200855B77 /* logo-other.png in Resources */,
+				200ACE2C1A3874B200DC7047 /* GoogleIcon@3x.png in Resources */,
 				366EAFB61A14EDA30011D6C6 /* copy_selected@2x.png in Resources */,
 				366EAF9A1A14C3530011D6C6 /* icon-small.png in Resources */,
 				366EAF9E1A14C3530011D6C6 /* icon@2x.png in Resources */,
+				200ACE351A3874B200DC7047 /* YahooIcon@3x.png in Resources */,
 				366EAF901A14C3530011D6C6 /* icon-40.png in Resources */,
 				36B276731A0124E800ED58AD /* play_gray.png in Resources */,
 				36B276751A0124E800ED58AD /* play.png in Resources */,
@@ -845,6 +916,7 @@
 				366EAF9B1A14C3530011D6C6 /* icon-small@2x.png in Resources */,
 				36B276721A0124E800ED58AD /* pause@2x.png in Resources */,
 				366EAF941A14C3530011D6C6 /* icon-60.png in Resources */,
+				200ACE271A3874B200DC7047 /* exchangeIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
