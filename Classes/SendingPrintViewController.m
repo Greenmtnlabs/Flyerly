@@ -27,7 +27,13 @@
 #import "LobProjectConstants.h"
 #import "AbstractBlockRequest.h"
 
-@interface SendingPrintViewController ()
+@interface SendingPrintViewController (){
+    LobRequest *request;
+    LobRequest *postcardRequest;
+    dispatch_semaphore_t sem;
+    
+    BOOL testing;
+}
 
 @end
 
@@ -41,6 +47,19 @@ UIButton *backButton;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    FlyerlyConfigurator *flyerConfigurator = appDelegate.flyerConfigurator;
+    
+    
+    NSString *apiKey = [flyerConfigurator lobAppId];
+    
+    request = [LobRequest initWithAPIKey:apiKey];
+    postcardRequest = [LobRequest initWithAPIKey:apiKey];
+    
+    sem = dispatch_semaphore_create(0);
+    
+    testing = YES;
     
     messageFeild.delegate = self;
     
@@ -315,29 +334,18 @@ UIButton *backButton;
  * Sending the request on Lob,with total coantacts details and flyer as PDF file that needs to printed
  */
 -(void)sendrequestOnLob {
-    
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    FlyerlyConfigurator *flyerConfigurator = appDelegate.flyerConfigurator;
-    
-    
-    NSString *apiKey = [flyerConfigurator lobAppId];
-    
-    BOOL testing = YES;
-    
-    if(testing) {
-        [self sendPostCard:apiKey
-                  frontUrl:@"https://www.lob.com/postcardfront.pdf"
+    if( testing ) {
+        [self sendPostCard: @"https://www.lob.com/postcardfront.pdf"
                    backUrl: @"https://www.lob.com/postcardback.pdf"
          ];
     }
     else{
-        [self uploadPdfAndSendCard:apiKey];
+        [self uploadPdfAndSendCard];
     }
 }
 
--(void)uploadPdfAndSendCard:(NSString *)apiKey
+-(void)uploadPdfAndSendCard
 {
-    LobRequest *request = [LobRequest initWithAPIKey:apiKey];
     
     /*
     NSDictionary *objectDict = @{
@@ -346,18 +354,6 @@ UIButton *backButton;
                                    @"file" : [self exportFlyerToPDF]
                                  };
 */
-    /*
-            NSString *path = [bundle pathForResource:@"zalogo" ofType:@"pdf"];
-            if (path)
-            {
-                zaPDFPath = path;
-            }
-        }
-     */
-
-
-
-
     
     NSDictionary *objectDict = @{@"name" : @"Go Blue",
                                  @"setting" : @{@"id" : @"100"},
@@ -367,28 +363,23 @@ UIButton *backButton;
     [request createObjectWithModel:objectModel
                       withResponse:^(LobObjectModel *object, NSError *error)
      {
-    
-    
-    
-    
-    
-         NSLog(@"*** Object Create Local Response ***");
-         NSLog(@"%ld", (long)request.statusCode);
+         NSLog(@"*** Object Create Local Response *** %ld", (long)request.statusCode);
          
          if ( error == nil && request.statusCode == 200){
              
-             NSString *frontUrl = [NSString stringWithFormat:@"http://assets.lob.com/%@",object.objectId];
-             /*
-             [self sendPostCard:apiKey
-                                frontUrl:frontUrl
-                                backUrl: @"https://www.lob.com/postcardback.pdf"
-              ];
-             */
-             [self sendPostCard:apiKey
-                       frontUrl:@"https://www.lob.com/postcardfront.pdf"
-                        backUrl: @"https://www.lob.com/postcardback.pdf"
-              ];
+             NSLog(@"object: %@ ", object);
              
+             if( testing ){
+                 [self sendPostCard: @"https://www.lob.com/postcardfront.pdf"
+                            backUrl: @"https://www.lob.com/postcardback.pdf"
+                  ];
+             }
+             else {
+                 NSString *frontUrl = [NSString stringWithFormat:@"http://assets.lob.com/%@",object.objectId];
+                 [self sendPostCard : frontUrl
+                             backUrl: @"https://www.lob.com/postcardback.pdf"
+                  ];
+             }
 
          }
          else {
@@ -398,14 +389,15 @@ UIButton *backButton;
              
              [self showLoadingIndicator:NO];
          }
+         
+         dispatch_semaphore_signal(sem);
      }];
         //----//
 
 }
 
--(void)sendPostCard:(NSString *)apiKey frontUrl:(NSString *)frontUrl backUrl:(NSString *)backUrl
+-(void)sendPostCard:(NSString *)frontUrl backUrl:(NSString *)backUrl
 {
-    LobRequest *postcardRequest = [LobRequest initWithAPIKey:apiKey];
     /*
     NSMutableDictionary *fromAddress = [[NSMutableDictionary alloc] init];
     [fromAddress setObject:name.text forKey:@"name"];
@@ -418,11 +410,12 @@ UIButton *backButton;
     [fromAddress setObject:zip.text forKey:@"address_zip"];
     [fromAddress setObject:@"US" forKey:@"address_country"]; */
     
-    NSDictionary *fromAddress = @{@"name" : @"rufi to addrs -HARRY ZHANG", \
+    NSDictionary *fromAddress = @{
+                  @"name" : @"rufi name in from", \
                   @"email" : [NSNull null], \
                   @"phone" : [NSNull null], \
-                  @"address_line1" : @"1600 AMPHITHEATRE PKWY", \
-                  @"address_line2" : @"UNIT 199", \
+                  @"address_line1" : @"1600 AMPHITHEATRE PKWY UNIT 199 ", \
+                  @"address_line2" : [NSNull null], \
                   @"address_city" : @"MOUNTAIN VIEW", \
                   @"address_state" : @"CA", \
                   @"address_zip" : @"94085", \
@@ -433,7 +426,7 @@ UIButton *backButton;
     for ( int i = 0;i<contactsArray.count;i++) {
         //Contact Details
         ContactsModel *model = [self getArrayOfSelectedTab][i];
-        NSDictionary *toAddress = @{
+        NSDictionary *toAddress2 = @{
                                     @"name" : model.name, \
                                     @"email" : [NSNull null], \
                                     @"phone" : [NSNull null], \
@@ -446,6 +439,19 @@ UIButton *backButton;
                                     };
         
         
+        NSDictionary *toAddress = @{
+                                      @"name" : @"rufi name in to", \
+                                      @"email" : [NSNull null], \
+                                      @"phone" : [NSNull null], \
+                                      @"address_line1" : @"1600 AMPHITHEATRE PKWY UNIT 199 ", \
+                                      @"address_line2" : [NSNull null], \
+                                      @"address_city" : @"MOUNTAIN VIEW", \
+                                      @"address_state" : @"CA", \
+                                      @"address_zip" : @"94085", \
+                                      @"address_country" : @"US"};
+
+        
+        
         NSDictionary *postcardDict = @{@"name" : @"Flyer Postcard",
                                        @"front" : frontUrl,
                                        @"back" : backUrl,
@@ -456,14 +462,18 @@ UIButton *backButton;
         
         LobPostcardModel *flyerPostCardModel = [[LobPostcardModel alloc] initWithDictionary:postcardDict];
         
-        [postcardRequest createPostcardWithModel:flyerPostCardModel withResponse:^(LobPostcardModel *postcard, NSError *error)
+        [postcardRequest createPostcardWithModel:flyerPostCardModel
+                                    withResponse:^(LobPostcardModel *postcard, NSError *error)
          {
              
              if (error == nil && postcardRequest.statusCode == 200) {
                  
+                 NSLog(@"postcard: %@",postcard);
+                 
                  UIAlertView *alertSuccess = [[UIAlertView alloc] initWithTitle:@"PostCard Send" message:@"Your postcard hase been send to print"  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                  
                  [alertSuccess show];
+                 
                  
              } else {
                  
@@ -482,6 +492,7 @@ UIButton *backButton;
              NSLog(@"%@",postcard);
              NSLog(@"%@",error);
              
+             dispatch_semaphore_signal(sem);
          }];
     }
 }
