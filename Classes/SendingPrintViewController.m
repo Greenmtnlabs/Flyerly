@@ -320,12 +320,12 @@ UIButton *backButton;
 
 -(void)uploadPdfAndSendCard:(NSString *)apiKey
 {
+     NSDictionary *objectDict = @{
+                                   @"name" : @"Flyer Postcard",
+                                   @"setting" : @{@"id" : @"200"},
+                                   @"file" : [self exportFlyerToPDF]
+                                 };
     
-       //----//
-     NSDictionary *objectDict = @{@"name" : @"Flyer Postcard",
-     @"setting" : @{@"id" : @"200"},
-     @"file" : [self exportFlyerToPDF]};
-     
      LobObjectModel *objectModel = [LobObjectModel initWithDictionary:objectDict];
      objectModel.localFilePath = YES;
      
@@ -337,8 +337,8 @@ UIButton *backButton;
          NSLog(@"%ld", (long)request.statusCode);
          
          if ( error == nil && request.statusCode == 200){
-             NSString *frontUrl = [NSString stringWithFormat:@"http://assets.lob.com/%@",object.objectId];
              /*
+             NSString *frontUrl = [NSString stringWithFormat:@"http://assets.lob.com/%@",object.objectId];              
              [self sendPostCard:apiKey
                                 frontUrl:frontUrl
                                 backUrl: @"https://www.lob.com/postcardback.pdf"
@@ -376,21 +376,8 @@ UIButton *backButton;
     [fromAddress setObject:@"US" forKey:@"address_country"];
 
     for ( int i = 0;i<contactsArray.count;i++) {
-        
+        //Contact Details
         ContactsModel *model = [self getArrayOfSelectedTab][i];
-        
-        /*
-         NSDictionary *toAddress2 = @{@"name" : @"TEST - To name -Rehan", \
-         @"email" : [NSNull null], \
-         @"phone" : [NSNull null], \
-         @"address_line1" : @"Millennium at Midtown 10th Street NE Suite 600", \
-         @"address_line2" : @"", \
-         @"address_city" : @"Atlanta", \
-         @"address_state" : @"GA", \
-         @"address_zip" : @"30309", \
-         @"address_country" : @"US"};
-         
-         */
         NSDictionary *toAddress = @{
                                     @"name" : model.name, \
                                     @"email" : [NSNull null], \
@@ -402,11 +389,6 @@ UIButton *backButton;
                                     @"address_zip" : model.zip, \
                                     @"address_country" : @"US"
                                     };
-        
-        
-        
-        
-        
         
         NSDictionary *postcardDict = @{@"name" : @"Flyer Postcard",
                                        @"front" : frontUrl,
