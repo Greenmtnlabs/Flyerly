@@ -357,6 +357,12 @@ https://lob.com/docs#postcards
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void) goHomeScreen
+{
+    int viewsToPop = 2;
+    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex: self.navigationController.viewControllers.count-viewsToPop-1] animated:YES];
+}
+
 /**
  * Sending the request on Lob,with total coantacts details and flyer as PDF file that needs to printed
  */
@@ -521,6 +527,7 @@ https://lob.com/docs#postcards
                  
                  if( [cardHasBeenSentTo count] == [sendCardTo count] ){
                      NSLog(@"Back to create flyer screen.");
+                     [self goHomeScreen];
                  }
                  
              } else {
