@@ -81,9 +81,11 @@
     // INVITE BAR BUTTON
     UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
 	
+    //if YES then Skip paypal payment for testing
+    if( YES )
+    [inviteButton addTarget:self action:@selector(sendPdfFlyer) forControlEvents:UIControlEventTouchUpInside];
+    else
     [inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
-    //Skip paypal payment for testing
-    //[inviteButton addTarget:self action:@selector(sendPdfFlyer) forControlEvents:UIControlEventTouchUpInside];
     
     
     
