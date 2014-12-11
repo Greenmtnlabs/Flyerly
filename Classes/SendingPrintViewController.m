@@ -179,7 +179,7 @@ UIButton *backButton;
     
     
     
-    [self showLoadingIndicator];
+    
     
     if ( [messageFeild.text isEqualToString:@""] ) {
     
@@ -209,7 +209,7 @@ UIButton *backButton;
         
         [self sendrequestOnLob];
         
-        backButton.enabled = NO;
+        [self showLoading:YES];
     }
     
     
@@ -425,7 +425,7 @@ https://lob.com/docs#postcards
              
              [alert show];
              
-             [self showLoadingIndicator:NO];
+             [self showLoading:NO];
          }
          
          dispatch_semaphore_signal(sem);
@@ -507,7 +507,7 @@ https://lob.com/docs#postcards
              [alertFailure show];
          }
          
-         [self showLoadingIndicator:NO];
+         [self showLoading:NO];
          NSLog(@"%@",postcard);
          NSLog(@"%@",error);
          
@@ -515,13 +515,15 @@ https://lob.com/docs#postcards
      }];
 }
 
--(void)showLoadingIndicator:(BOOL)show
+-(void)showLoading:(BOOL)show
 {
     if( show ){
-    
+        [self showLoadingIndicator];
+        backButton.enabled = NO;
     }else{
         [self hideLoadingIndicator];
         backButton.enabled = YES;
     }
 }
+
 @end
