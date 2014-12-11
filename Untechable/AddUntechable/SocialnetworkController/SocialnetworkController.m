@@ -126,7 +126,8 @@
     [self.inputSetSocialStatus setTextColor:defGreen];
     self.inputSetSocialStatus.font = [UIFont fontWithName:APP_FONT size:16];
     self.inputSetSocialStatus.delegate = self;
-    [self.inputSetSocialStatus setText:untechable.socialStatus];
+    //[self.inputSetSocialStatus setText:untechable.socialStatus];
+    [self.inputSetSocialStatus setText:untechable.spendingTimeTxt];
     
     [self.btnFacebook setTitleColor:( [untechable.fbAuth isEqualToString:@""] ? defGray : defGreen ) forState:UIControlStateNormal];
     self.btnFacebook.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
