@@ -66,7 +66,7 @@ UIButton *backButton;
     
     sem = dispatch_semaphore_create(0);
     
-    testing = YES;
+    testing = NO;
     urlFrontStr = @"";
     
     sendCardTo = [[NSMutableArray alloc] init];
