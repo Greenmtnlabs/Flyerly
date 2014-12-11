@@ -6923,7 +6923,7 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = Flyr;
-				PROVISIONING_PROFILE = "ee03a121-2436-487a-851c-58aab8d60a87";
+				PROVISIONING_PROFILE = "5058ceaf-7b38-47d9-b9b2-13238d2c43f4";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 i386 x86_64 armv7s armv8";
@@ -6973,8 +6973,8 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = Flyr;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "46dc2fdc-52cb-47a6-8136-858d8b332879";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "46dc2fdc-52cb-47a6-8136-858d8b332879";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 i386 x86_64 armv7s armv8";
@@ -6997,8 +6997,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "ee03a121-2436-487a-851c-58aab8d60a87";
-				"PROVISIONING_PROFILE[sdk=iphoneos7.0]" = "ee03a121-2436-487a-851c-58aab8d60a87";
+				PROVISIONING_PROFILE = "5058ceaf-7b38-47d9-b9b2-13238d2c43f4";
+				"PROVISIONING_PROFILE[sdk=iphoneos7.0]" = "5058ceaf-7b38-47d9-b9b2-13238d2c43f4";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
