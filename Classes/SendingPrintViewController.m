@@ -238,13 +238,28 @@ UIButton *backButton;
     NSLog(@"%s %@", __PRETTY_FUNCTION__, message);
 }
 
-
-
 /**
- * Merge flyer image in flyer bg background
+ * Prepare the flyer.
+https://lob.com/docs#postcards
+   
+1- @Return local image path ( Lob Supported file types are PDF, PNG, and JPEG)
+2 - Enter a curl command in terminal,
+ curl https://api.lob.com/v1/settings  -u test_13fb536c2d9e23b0e25657d9f923261b03b:
+ We are using 200 setting of lob
+ {
+     "id": "200",
+     "type": "cards",
+     "description": "4x6 color card",
+     "paper": "120lb gloss cover",
+     "width": "6.000",
+     "length": "4.000",
+     "color": "color",
+     "notes": "includes envelope",
+     "object": "setting"
+ }
+ A/c to this image size must be 4x6
  */
-- (NSString *) adjustFlyerImg {
-    
+- (NSString *) exportFlyer {
     // Create the PDF context using the required size of 6" x 4" at 300 dpi.
     CGSize pageSize = CGSizeMake( 1800, 1200);
     //NSMutableData *pdfData = [NSMutableData data];
@@ -292,50 +307,6 @@ UIButton *backButton;
     
     //NSURL* URL = [NSURL fileURLWithPath:destination];
     return destination;
-}
-
-
-
-
-/**
- * Prepare the flyer.
- https://lob.com/docs
- Create an object w/local file
- 
- Creates an new object using a local file.
- 
- ARGUMENTS
- 
- name:
- optional
- file:
- required
- This can be a URL or local file. If local file use -F and remember the @ before the name. Supported file types are PDF, PNG, and JPEG
- 
- setting_id:
- required
- Must be an ID supported in the SPS page
- 
- quantity:
- optional
- Default is 1
- 
- double_sided:
- optional
- Boolean, use 1 for double-sided
- 
- template:
- optional
- Boolean, only applicable with letters (setting 100 and 101). Defaults to 0 which adds a blank page with only the address printed on it. Use 1 to denote that your object adheres to this template and that the extra address page is not necessary.
- 
- RETURNS
- 
- Returns an object object upon successful creation.
- */
-- (NSString *) exportFlyer {
-    NSString *destinationOfFlyerImg =   [self adjustFlyerImg];
-    
-    return destinationOfFlyerImg;
 }
 
 
@@ -391,9 +362,9 @@ UIButton *backButton;
  */
 -(void)sendrequestOnLob {
     if( testing ) {
-        //[self sendPostCard: @"https://www.lob.com/postcardfront.pdf"  backUrl: @"https://www.lob.com/postcardback.pdf"         ];
+        //[self sendPostCard: @"https://www.lob.com/postcardfront.pdf"];
         
-        [self sendPostCard: @"http://assets.lob.com/obj_dd21e6a7ec0fdf3a.pdf"  backUrl: @"https://www.lob.com/postcardback.pdf"];
+        [self sendPostCard: @"http://assets.lob.com/obj_dd21e6a7ec0fdf3a.pdf"];
         
     }
     else{
@@ -436,15 +407,11 @@ UIButton *backButton;
              
              
              if( testing ){
-                 [self sendPostCard: @"https://www.lob.com/postcardfront.pdf"
-                            backUrl: @"https://www.lob.com/postcardback.pdf"
-                  ];
+                 [self sendPostCard: @"https://www.lob.com/postcardfront.pdf"];
              }
              else {
                  NSString *frontUrl = [NSString stringWithFormat:@"http://assets.lob.com/%@.pdf",object.objectId];
-                 [self sendPostCard : frontUrl
-                             backUrl: @"https://www.lob.com/postcardback.pdf"
-                  ];
+                 [self sendPostCard : frontUrl];
              }
 
          }
@@ -462,7 +429,7 @@ UIButton *backButton;
 
 }
 
--(void)sendPostCard:(NSString *)frontUrl backUrl:(NSString *)backUrl
+-(void)sendPostCard:(NSString *)frontUrl
 {
     
     NSDictionary *fromAddress = @{
@@ -497,7 +464,7 @@ UIButton *backButton;
         
         NSDictionary *postcardDict = @{@"name" : @"Flyer Postcard",
                                        @"front" : frontUrl,
-                                       @"back" : backUrl,
+                                       @"message" : messageFeild.text,
                                        @"to" : toAddress,
                                        @"from" : fromAddress};
         
@@ -556,36 +523,4 @@ UIButton *backButton;
         backButton.enabled = YES;
     }
 }
-
-
-/*
- -(void)verifyAddressThenSend:(NSDictionary *)postcardDict
- {
- LobAddressModel *fromLobAdd = [[LobAddressModel alloc] initWithDictionary:[postcardDict objectForKey:@"from"]];
- 
- [request verifyAddressModel:fromLobAdd
- withResponse:^(LobVerifyModel *validation, NSError *error)
- {
- NSLog(@"*** Verify Address Response *** request.statusCode: %@",request.statusCode);
- 
- dispatch_semaphore_signal(sem);
- 
- //[self sendPostCard:postcardDict];
- }];
- }
- 
- -(void)sendPostCardAfterAddressOfToVerification: (LobAddressModel *)lobAddressModel postcardDict:(NSDictionary *)postcardDict
- {
- [request verifyAddressModel:lobAddressModel
- withResponse:^(LobVerifyModel *validation, NSError *error)
- {
- NSLog(@"*** Verify Address Response *** request.statusCode: %@",request.statusCode);
- 
- dispatch_semaphore_signal(sem);
- 
- //[self sendPostCard:postcardDict];
- }];
- }
- */
-
 @end
