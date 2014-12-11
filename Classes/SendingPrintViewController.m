@@ -37,6 +37,9 @@
     NSString *urlFrontStr;
     NSDictionary *toAddressTest;
     NSDictionary *fromAddressTest;
+    
+    NSMutableArray *sendCardTo,*cardHasBeenSentTo;
+    int postReqTry;
 }
 
 @end
@@ -63,8 +66,13 @@ UIButton *backButton;
     
     sem = dispatch_semaphore_create(0);
     
-    testing = NO;
+    testing = YES;
     urlFrontStr = @"";
+    
+    sendCardTo = [[NSMutableArray alloc] init];
+    cardHasBeenSentTo = [[NSMutableArray alloc] init];
+    postReqTry = 0;
+    
     fromAddressTest = @{  @"name" : @"rufi name in from", \
                                         @"email" : [NSNull null], \
                                         @"phone" : [NSNull null], \
@@ -439,11 +447,12 @@ https://lob.com/docs#postcards
                                   @"address_zip" : zip.text, \
                                   @"address_country" : @"US"};
     
-
+    ++postReqTry;
     for ( int i = 0;i<contactsArray.count;i++) {
         
         //Contact Details
         ContactsModel *model = [self getArrayOfSelectedTab][i];
+
         NSDictionary *toAddress = @{
                                     @"name" : model.name, \
                                     @"email" : [NSNull null], \
@@ -464,46 +473,76 @@ https://lob.com/docs#postcards
                                        @"to" : toAddress,
                                        @"from" : fromAddress};
         
+
+        if( postReqTry == 1 ){
+            [sendCardTo addObject:[self getSendCardToName1:postcardDict]];
+        }
+        
         [self sendPostCardToLob:postcardDict];
     }
 }
 
-
 //Send After Address Verification
 -(void)sendPostCardToLob: (NSDictionary *)postcardDict
 {
-    LobPostcardModel *pCardModel = [[LobPostcardModel alloc] initWithDictionary:postcardDict];
+    
+    NSString *sendCardToName = [self getSendCardToName1:postcardDict];
+    NSUInteger index = [cardHasBeenSentTo indexOfObject:sendCardToName];
+    
+    NSLog(@"getSendCardToName1: %@",sendCardToName);
     
     
-    [postcardRequest createPostcardWithModel:pCardModel withResponse:^(LobPostcardModel *postcard, NSError *error) {
-         
-         if (error == nil && postcardRequest.statusCode == 200) {
-             
-             NSLog(@"postcard: %@",postcard);
-             
-             UIAlertView *alertSuccess = [[UIAlertView alloc] initWithTitle:@"PostCard Send" message:@"Your postcard hase been send to print"  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-             
-             [alertSuccess show];
-             
-         } else {
-             
-             NSString *failedError = [NSString stringWithFormat:@"PostCard could not be sent. Failed with error %@", error];
-             
-             if( error == nil ) {
-                 failedError = [NSString stringWithFormat:@"PostCard could not be sent. Failed with status code %ld", (long)postcardRequest.statusCode ];
+    if (index == NSNotFound ) {
+    
+        LobPostcardModel *pCardModel = [[LobPostcardModel alloc] initWithDictionary:postcardDict];
+        
+        [postcardRequest createPostcardWithModel:pCardModel withResponse:^(LobPostcardModel *postcard, NSError *error) {
+            
+            NSLog(@"postcard: %@",postcard);
+            NSLog(@"error %@",error);
+            
+            NSLog(@"getSendCardToName2 %@",[self getSendCardToName2:pCardModel]);
+
+            
+
+            NSString *message = @"";
+
+             if (error == nil && postcardRequest.statusCode == 200) {
+
+                  NSString *tempNameTo   =   [self getSendCardToName2:postcard];
+                 [cardHasBeenSentTo addObject:tempNameTo];
+                 
+                 
+                 message = [NSString stringWithFormat:@"Your postcard [for: %@ ] has been send to print.", tempNameTo];
+                 
+                 UIAlertView *alertSuccess = [[UIAlertView alloc] initWithTitle:@"PostCard Send" message:message  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                 
+                 [alertSuccess show];
+                 
+                 if( [cardHasBeenSentTo count] == [sendCardTo count] ){
+                     NSLog(@"Back to create flyer screen.");
+                 }
+                 
+             } else {
+                message = [NSString stringWithFormat:@"One of the Postcard not sent. Error message: %@", error];
+                 
+                 if( error == nil ) {
+                     message = [NSString stringWithFormat:@"One of the Postcard not sent.. Error status code: %ld", (long)postcardRequest.statusCode];
+                     
+                     if( postcardRequest.statusCode == 422 ){
+                         message = [NSString stringWithFormat:@"One of the Postcard not sent. Due to invalid address."];
+                     }
+                 }
+                 
+                 UIAlertView *alertFailure = [[UIAlertView alloc] initWithTitle:@"" message:message  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                 
+                 [alertFailure show];
              }
              
-             UIAlertView *alertFailure = [[UIAlertView alloc] initWithTitle:@"" message:failedError  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-             
-             [alertFailure show];
-         }
-         
-         [self showLoading:NO];
-         NSLog(@"%@",postcard);
-         NSLog(@"%@",error);
-         
-         dispatch_semaphore_signal(sem);
-     }];
+             [self showLoading:NO];
+             dispatch_semaphore_signal(sem);
+         }];
+    }
 }
 
 //Show hide loading indicator
@@ -523,4 +562,27 @@ https://lob.com/docs#postcards
     str = [str stringByReplacingOccurrencesOfString:@"," withString:@" "];
     return str;
 }
+
+-(NSString *)getSendCardToName1:(NSDictionary *)postcardDict
+{
+    
+    NSDictionary *toDic = [postcardDict valueForKey:@"to"];
+    NSString *toAddressName = [toDic valueForKey:@"name"];
+    NSString *addressLine1 = [toDic valueForKey:@"address_line1"];
+    
+    NSString *sendCardToName = [ NSString stringWithFormat:@"%@-%@",toAddressName,addressLine1];
+    
+    return sendCardToName;
+    
+}
+-(NSString *)getSendCardToName2:(LobPostcardModel *)pCardModel
+{
+    NSString *toAddressName = pCardModel.toAddress.name;
+    NSString *addressLine1 = pCardModel.toAddress.addressLine1;
+    
+    NSString *sendCardToName = [ NSString stringWithFormat:@"%@-%@",toAddressName,addressLine1];
+    
+    return sendCardToName;
+}
+
 @end
