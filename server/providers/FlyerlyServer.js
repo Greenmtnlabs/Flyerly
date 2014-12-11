@@ -56,19 +56,25 @@ FlyerlyServer.setup = function( app ) {
 			redirectToDownloadAppUrl("error", "Inviter Id not found");
 		}
 		else {
-			//req.session.invitee = parseInt(Math.random()*9999999); //current user dummy id
-			req.session.inviterObjectId = ""+req.query.i+""; //User id who has invited this current user
-
 			
-			 //Actual body of this function is in parse cloud, this will increase the inviteSessions on parse
-			 Parse.Cloud.run('parseCloudeCodeIncreaseInviteSessions', {"objectId": req.session.inviterObjectId }, {
-			   success: function(result) {
-					redirectToDownloadAppUrl("result", result);
-			   },
-			   error: function(error) {
-					redirectToDownloadAppUrl("error", error);
-			   }
-			 });
+			if( req.session.inviterObjectId ) {	
+				//don not do any thing till user has session
+			}
+			else {
+				 //Actual body of this function is in parse cloud, this will increase the inviteSessions on parse
+				 Parse.Cloud.run('parseCloudeCodeIncreaseInviteCounter', {"objectId": req.session.inviterObjectId }, {
+				   success: function(result) {
+						redirectToDownloadAppUrl("result", result);
+				   },
+				   error: function(error) {
+						redirectToDownloadAppUrl("error", error);
+				   }
+				 });
+		    }
+			 
+ 			//req.session.invitee = parseInt(Math.random()*9999999); //current user dummy id
+ 			req.session.inviterObjectId = ""+req.query.i+""; //User id who has invited this current user
+			 
 		}
 			
 			
@@ -103,7 +109,7 @@ FlyerlyServer.setup = function( app ) {
 		if( req.session.inviterObjectId ) {			 
 
 			 //Actual body of this function is in parse cloud, this will increase the inviteCounter on parse
-			 Parse.Cloud.run('parseCloudeCodeIncreaseInviteCounter', {"objectId": req.session.inviterObjectId }, {
+			 Parse.Cloud.run('parseCloudeCodeIncreaseInviteSessions', {"objectId": req.session.inviterObjectId }, {
 			   success: function(result) {
 					closeBrowser("result", result);
 			   },
