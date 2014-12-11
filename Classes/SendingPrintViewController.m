@@ -37,7 +37,6 @@
     NSString *urlFrontStr;
     NSDictionary *toAddressTest;
     NSDictionary *fromAddressTest;
-
 }
 
 @end
@@ -177,10 +176,6 @@ UIButton *backButton;
 
 - (void)sendFlyer{
     
-    
-    
-    
-    
     if ( [messageFeild.text isEqualToString:@""] ) {
     
         [self showAlert:@"Please enter message."];
@@ -208,7 +203,6 @@ UIButton *backButton;
     }else {
         [self sendrequestOnLob];
     }
-    
     
 }
 
@@ -434,33 +428,33 @@ https://lob.com/docs#postcards
 -(void)sendPostCard:(NSString *)frontUrl
 {
     
-    NSDictionary *fromAddress = [self formateAddressDic:@{
+    NSDictionary *fromAddress = @{
                                   @"name" : name.text, \
                                   @"email" : [NSNull null], \
                                   @"phone" : [NSNull null], \
-                                  @"address_line1" : streetAddress.text , \
+                                  @"address_line1" : [self setAddressStr:streetAddress.text] , \
                                   @"address_line2" : [NSNull null], \
                                   @"address_city" : city.text, \
                                   @"address_state" : state.text, \
                                   @"address_zip" : zip.text, \
-                                  @"address_country" : @"US"}];
+                                  @"address_country" : @"US"};
     
 
     for ( int i = 0;i<contactsArray.count;i++) {
         
         //Contact Details
         ContactsModel *model = [self getArrayOfSelectedTab][i];
-        NSDictionary *toAddress = [self formateAddressDic:@{
+        NSDictionary *toAddress = @{
                                     @"name" : model.name, \
                                     @"email" : [NSNull null], \
                                     @"phone" : [NSNull null], \
-                                    @"address_line1" : model.streetAddress, \
+                                    @"address_line1" : [self setAddressStr:model.streetAddress], \
                                     @"address_line2" : [NSNull null], \
                                     @"address_city" : model.city, \
                                     @"address_state" : model.state, \
                                     @"address_zip" : model.zip, \
                                     @"address_country" : @"US"
-                                    }];
+                                    };
 
         
         
@@ -524,30 +518,9 @@ https://lob.com/docs#postcards
     }
 }
 
-
-//Set formatting of the dictionary for Lob
-//To and From
-/*
- NSDictionary *fromAddress = [self formateAddressDic:@{
- @"name" : name.text, \
- @"email" : [NSNull null], \
- @"phone" : [NSNull null], \
- @"address_line1" : streetAddress.text , \
- @"address_line2" : [NSNull null], \
- @"address_city" : city.text, \
- @"address_state" : state.text, \
- @"address_zip" : zip.text, \
- @"address_country" : @"US"}];
- 
- */
--(NSDictionary *)formateAddressDic:(NSDictionary *) dic
+-(NSString *)setAddressStr:(NSString *)str
 {
-    dic[@"address_line1"] = [dic[@"address_line1"] stringByReplacingOccurrencesOfString:@"," withString:@" "];
-    dic[@"address_line2"] = [dic[@"address_line2"] stringByReplacingOccurrencesOfString:@"," withString:@" "];
-    dic[@"address_city"] = [dic[@"address_city"] stringByReplacingOccurrencesOfString:@"," withString:@" "];
-    
-    return dic;
+    str = [str stringByReplacingOccurrencesOfString:@"," withString:@" "];
+    return str;
 }
-
-
 @end
