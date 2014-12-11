@@ -21,7 +21,8 @@
 
 
 @property (strong, nonatomic) IBOutlet UIButton *btnLblWwud;
-@property (strong, nonatomic) IBOutlet UITextField *inputSpendingTimeTxt;
+@property (strong, nonatomic) IBOutlet UITextView *inputSpendingTimeText;
+@property (strong, nonatomic) IBOutlet UILabel *char_Limit;
 
 @property (strong, nonatomic) IBOutlet UIButton *btnLblStartTime;
 @property (strong, nonatomic) IBOutlet UIButton *btnStartTime;
@@ -59,7 +60,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+
     [self setDefaultModel];
     
     [self setNavigationDefaults];
@@ -76,8 +77,10 @@
     self.picker.minimumDate = now1;
     [self.picker setDate:now1 animated:YES];
     
+    _inputSpendingTimeText.delegate = self;
+   
     
-    NSArray *fields = @[ _inputSpendingTimeTxt ];
+    NSArray *fields = @[ _inputSpendingTimeText ];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
     [self.keyboardControls setDelegate:self];
     
@@ -120,6 +123,7 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    
     [self.keyboardControls setActiveField:textField];
 }
 
@@ -127,6 +131,17 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
+    if ( [textView.text isEqualToString:@"e.g Spending time with family."] ){
+        textView.text = @"";
+    }
+    if ( textView == _inputSpendingTimeText ){
+        if ([textView.text isEqualToString:@"e.g Spending time with family."]) {
+            textView.text = @"";
+            textView.font = [UIFont fontWithName:TITLE_FONT size:12.0];
+            textView.textColor = [UIColor blackColor]; //optional
+        }
+        [textView becomeFirstResponder];
+    }
     [self.keyboardControls setActiveField:textView];
 }
 
@@ -268,7 +283,7 @@
 }
 -(void)storeSceenVarsInDic
 {
-    untechable.spendingTimeTxt = _inputSpendingTimeTxt.text;
+    untechable.spendingTimeTxt = _inputSpendingTimeText.text;
     untechable.hasEndDate = !([_cbNoEndDate isSelected]);
     
     [untechable setOrSaveVars:SAVE];
@@ -276,7 +291,7 @@
 
 -(void) hideAllControlls {
     [self showHideDateTimePicker:NO];
-    [_inputSpendingTimeTxt resignFirstResponder];
+    [_inputSpendingTimeText resignFirstResponder];
 }
 
 
@@ -465,8 +480,11 @@
     [_btnLblWwud setTitleColor:defGray forState:UIControlStateNormal];
     _btnLblWwud.titleLabel.font = [UIFont fontWithName:APP_FONT size:25];
 
-    _inputSpendingTimeTxt.text = untechable.spendingTimeTxt;
-    _inputSpendingTimeTxt.font = [UIFont fontWithName:APP_FONT size:18];
+    _inputSpendingTimeText.text = untechable.spendingTimeTxt;
+    if ( [untechable.spendingTimeTxt isEqualToString:@""] ){
+        _inputSpendingTimeText.text = @"e.g Spending time with family.";
+    }
+    _inputSpendingTimeText.font = [UIFont fontWithName:APP_FONT size:18];
     
     [_btnLblStartTime setTitleColor:defGray forState:UIControlStateNormal];
     _btnLblStartTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:25];
@@ -505,14 +523,55 @@
         untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*120)] ]; //current time +2hr
     }
     [self pickerSetAcTo:@"_btnEndTime"];
-    
-    
-
 }
 
 - (IBAction)btnClic:(id)sender {
     if( sender == _btnLblWwud ){
-        [_inputSpendingTimeTxt becomeFirstResponder];
+        [_inputSpendingTimeText becomeFirstResponder];
     }
 }
+
+-(void)textViewDidChange:(UITextView *)textView
+{
+    int len = textView.text.length;
+    _char_Limit.text=[NSString stringWithFormat:@"%i",140-len];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if([text length] == 0)
+    {
+        if([textView.text length] != 0)
+        {
+            return YES;
+        }
+    }
+    else if([[textView text] length] > 139)
+    {
+        return NO;
+    }
+    return YES;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    if ([textView.text isEqualToString:@""]) {
+        textView.text = @"e.g Spending time with family.";
+    }
+    [textView resignFirstResponder];
+}
+
+/*
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    // Prevent crashing undo bug – see note below.
+    if(range.length + range.location > textView.text.length)
+    {
+        return NO;
+    }
+    
+    NSUInteger newLength = [textView.text length] + [text length] - range.length;
+    return (newLength > 140) ? NO : YES;
+}
+*/
+
 @end
