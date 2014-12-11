@@ -113,7 +113,7 @@
 
 #else
     
-    return @"live_889eeb7a75372e642ceaece3aa9d2ac0dfc"; //preston a/c live details
+    return @"live_889eeb7a75372e642ceaece3aa9d2ac0dfc"; //greenmtnlabs@gmail.com a/c live details
 
 #endif
 
@@ -155,10 +155,13 @@
     return PayPalEnvironmentSandbox;
     
 #else
+    /*
     //    return PayPalEnvironmentProduction;
     //only for rehan's testing MUST enable after RELEASING on app store, other wise preston a/c will be sucked...
     return PayPalEnvironmentSandbox;
+    */
     
+    return PayPalEnvironmentProduction;
 
     
 #endif
