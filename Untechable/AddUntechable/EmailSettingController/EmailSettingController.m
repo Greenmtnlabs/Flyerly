@@ -347,21 +347,20 @@
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];        
         
         
-        /*// Right Navigation ________________________________________
+        // Right Navigation ________________________________________
         
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         [nextButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [nextButton setTitle:@"FINISH" forState:normal];
         [nextButton setTitleColor:defGray forState:UIControlStateNormal];
-        [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
-        [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
+        
         
         nextButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
-        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];*/
+        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
         
-        [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
+        [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
     }
 }
 
