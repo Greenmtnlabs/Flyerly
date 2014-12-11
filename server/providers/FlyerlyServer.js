@@ -57,10 +57,16 @@ FlyerlyServer.setup = function( app ) {
 		}
 		else {
 			
-			if( req.session.inviterObjectId ) {	
+			if( req.session.inviterObjectId != undefined ) {	
 				//don not do any thing till user has session
+								//console.log("not increae , req.session.inviterObjectId :",req.session.inviterObjectId );
+								redirectToDownloadAppUrl("error", "Session already created.");
 			}
 			else {
+	 			//req.session.invitee = parseInt(Math.random()*9999999); //current user dummy id
+	 			req.session.inviterObjectId = ""+req.query.i+""; //User id who has invited this current user
+				
+				//console.log("Increaes");
 				 //Actual body of this function is in parse cloud, this will increase the inviteSessions on parse
 				 Parse.Cloud.run('parseCloudeCodeIncreaseInviteCounter', {"objectId": req.session.inviterObjectId }, {
 				   success: function(result) {
@@ -72,8 +78,7 @@ FlyerlyServer.setup = function( app ) {
 				 });
 		    }
 			 
- 			//req.session.invitee = parseInt(Math.random()*9999999); //current user dummy id
- 			req.session.inviterObjectId = ""+req.query.i+""; //User id who has invited this current user
+
 			 
 		}
 			
