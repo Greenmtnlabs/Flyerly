@@ -34,6 +34,7 @@
     dispatch_semaphore_t sem;
     
     BOOL testing;
+    NSString *urlFrontStr;
     NSDictionary *toAddressTest;
     NSDictionary *fromAddressTest;
 
@@ -64,7 +65,7 @@ UIButton *backButton;
     sem = dispatch_semaphore_create(0);
     
     testing = NO;
-    
+    urlFrontStr = @"";
     fromAddressTest = @{  @"name" : @"rufi name in from", \
                                         @"email" : [NSNull null], \
                                         @"phone" : [NSNull null], \
@@ -368,7 +369,11 @@ https://lob.com/docs#postcards
         
     }
     else{
-        [self uploadPdfAndSendCard];
+        if( [urlFrontStr isEqualToString:@""]){
+            [self uploadPdfAndSendCard];
+        } else{
+            [self sendPostCard : urlFrontStr];
+        }
     }
 }
 
@@ -410,8 +415,8 @@ https://lob.com/docs#postcards
                  [self sendPostCard: @"https://www.lob.com/postcardfront.pdf"];
              }
              else {
-                 NSString *frontUrl = [NSString stringWithFormat:@"http://assets.lob.com/%@.pdf",object.objectId];
-                 [self sendPostCard : frontUrl];
+                 urlFrontStr = [NSString stringWithFormat:@"http://assets.lob.com/%@.pdf",object.objectId];
+                 [self sendPostCard : urlFrontStr];
              }
 
          }
@@ -468,21 +473,18 @@ https://lob.com/docs#postcards
                                        @"to" : toAddress,
                                        @"from" : fromAddress};
         
-        [self sendPostCard:postcardDict];
-        
+        [self sendPostCardToLob:postcardDict];
     }
 }
 
 
 //Send After Address Verification
--(void)sendPostCard: (NSDictionary *)postcardDict
+-(void)sendPostCardToLob: (NSDictionary *)postcardDict
 {
-    LobPostcardModel *flyerPostCardModel = [[LobPostcardModel alloc] initWithDictionary:postcardDict];
+    LobPostcardModel *pCardModel = [[LobPostcardModel alloc] initWithDictionary:postcardDict];
     
     
-    [postcardRequest createPostcardWithModel:flyerPostCardModel
-                                withResponse:^(LobPostcardModel *postcard, NSError *error)
-     {
+    [postcardRequest createPostcardWithModel:pCardModel withResponse:^(LobPostcardModel *postcard, NSError *error) {
          
          if (error == nil && postcardRequest.statusCode == 200) {
              
@@ -491,7 +493,6 @@ https://lob.com/docs#postcards
              UIAlertView *alertSuccess = [[UIAlertView alloc] initWithTitle:@"PostCard Send" message:@"Your postcard hase been send to print"  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
              
              [alertSuccess show];
-             
              
          } else {
              
