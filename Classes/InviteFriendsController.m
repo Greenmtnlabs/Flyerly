@@ -114,7 +114,7 @@ const int CONTACTS_TAB = 0;
                                   if ( refrelCounter >= 20 )
                                   {
                                       //Setting the feature name,feature description values for cell view using plist
-                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"You have sucessfully unlocked saved flyers feature by refreing friends.Enjoy!"];
+                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"You have sucessfully unlocked saved flyers feature by referring friends.Enjoy!"];
                                       
                                   }else if ( refrelCounter <= 0 ){
                                       cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to flyerly and unlock saved flyers feature for FREE!"];
@@ -254,7 +254,7 @@ const int CONTACTS_TAB = 0;
     identifiers = selectedIdentifiers;
     NSLog(@"%@",identifiers);
 
-    NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
+    NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
     
     if([identifiers count] > 0){
         

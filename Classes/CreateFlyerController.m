@@ -205,17 +205,23 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         if ( IS_IPHONE_5 ) {
             self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 473, 320, 50)];
             
+            if ( bannerAdDismissBtn == nil ){
             bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(296, 5, 23, 23)];
+            }
         } else if ( IS_IPHONE_6 ){
             
             self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 566, 620, 50)];
             
+            if ( bannerAdDismissBtn == nil ){
             bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(350, 0, 23, 23)];
+            }
         }else if ( IS_IPHONE_6_PLUS ){
             
             self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 635, 620, 50)];
             
+            if ( bannerAdDismissBtn == nil ){
             bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(395, 0, 23, 23)];
+            }
         }else {
             layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,60)];
         }
@@ -231,11 +237,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         //Adding ad in custom view
         [self.bannerAddView addSubview:adView];
         //Making dismiss button visible,and bring it to front
-        bannerAdDismissBtn.alpha = 1.0;
+        //bannerAdDismissBtn.alpha = 1.0;
         [self.bannerAddView bringSubviewToFront:bannerAdDismissBtn];
     
-        if (sharePanel.hidden)
+        if (sharePanel.hidden){
+            
         [self.view addSubview:self.bannerAddView];
+        }
     
         return;
     //}
