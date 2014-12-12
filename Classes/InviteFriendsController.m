@@ -254,7 +254,7 @@ const int CONTACTS_TAB = 0;
     identifiers = selectedIdentifiers;
     NSLog(@"%@",identifiers);
 
-    NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
+    NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
     
     if([identifiers count] > 0){
         
