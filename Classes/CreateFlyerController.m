@@ -223,7 +223,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         [bannerAdDismissBtn addTarget:self action:@selector(dissmisBannerAddOnTap) forControlEvents:UIControlEventTouchUpInside];
         
         [bannerAdDismissBtn setImage:[UIImage imageNamed:@"closeAd.png"] forState:UIControlStateNormal];
-        
+    
+        bannerAdDismissBtn.tag = 999;
+    
         [self.bannerAddView addSubview:bannerAdDismissBtn];
         
         //Adding ad in custom view
@@ -246,9 +248,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 // Dismiss action for banner ad
 -(void)dissmisBannerAdd:(BOOL)valForBannerClose{
     
+    UIView *viewToRemove = [bannerAddView viewWithTag:999];
+    [viewToRemove removeFromSuperview];
     [bannerAdDismissBtn removeFromSuperview];
     [self.bannerAddView removeFromSuperview];
-     self.bannerAddView = nil;
+    bannerAdDismissBtn = nil;
+    self.bannerAddView = nil;
 
      bannerAddClosed = valForBannerClose;
 }
@@ -3178,6 +3183,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [self logPhotoAddedEvent];
 
     [self bringNotEditableLayersToFront:@"call from donePhoto"];
+    
+    self.flyimgView.widthIsSelected = NO;
+    self.flyimgView.heightIsSelected = NO;
 }
 
 -(void)deSelectPreviousLayer {
@@ -5128,7 +5136,14 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         if ([currentLayer isEqualToString:@""]) {
             currentLayer = [flyer addImage];
             
-            CGRect imageFrame  = CGRectMake(150,10,200,200);
+            CGRect imageFrame;
+            if ( IS_IPHONE_5) {
+                imageFrame = CGRectMake(55,10,200,200);
+            }else if ( IS_IPHONE_6){
+                imageFrame = CGRectMake(90,10,200,200);
+            }else if ( IS_IPHONE_6_PLUS){
+                imageFrame = CGRectMake(100,10,200,200);
+            }
             [flyer setImageFrame:currentLayer :imageFrame];
             NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
             [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
