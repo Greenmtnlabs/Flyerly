@@ -285,7 +285,7 @@ BOOL adLoaded = false;
                                     [userPurchases setUserPurcahsesFromParse];
                                     [purchseController.buttondelegate productSuccesfullyPurchased:pid];
                                     
-                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Congratulations." message:@"You just unlocked the Saved Flyer Feature by refering freinds" delegate:self cancelButtonTitle:@"Owsum!" otherButtonTitles:nil, nil];
+                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Congratulations." message:@"You just unlocked the Saved Flyer Feature by Referring freinds" delegate:self cancelButtonTitle:@"Owsum!" otherButtonTitles:nil, nil];
                                     
                                     [alert show];
                                     
