@@ -259,7 +259,7 @@ BOOL adLoaded = false;
                            
                                 if ( refrelCounter >= 20 && !congratulated ) {
                                     
-                                    NSString *pid  = @"com.flyerly.UnlockCreateVideoFlyerOption";
+                                    NSString *pid  = @"com.flyerly.com.flyerly.UnlockSavedFlyers";
                                     
                                     NSString *strWithOutDot = [pid stringByReplacingOccurrencesOfString:@"." withString:@""];
                                     
@@ -285,7 +285,7 @@ BOOL adLoaded = false;
                                     [userPurchases setUserPurcahsesFromParse];
                                     [purchseController.buttondelegate productSuccesfullyPurchased:pid];
                                     
-                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Congratulations ." message:@"You just unlocked the Video flyer feature by refering freinds" delegate:self cancelButtonTitle:@"Owsum!" otherButtonTitles:nil, nil];
+                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Congratulations." message:@"You just unlocked the Saved Flyer Feature by refering freinds" delegate:self cancelButtonTitle:@"Owsum!" otherButtonTitles:nil, nil];
                                     
                                     [alert show];
                                     
