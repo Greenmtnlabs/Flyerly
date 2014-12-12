@@ -77,7 +77,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [libDrawing setFrame:newFrame];
     
     //Set Context Tabs
-    [self addBottomTabs:libFlyer];
+    //[self addBottomTabs:libFlyer];
 }
 
 /**
@@ -243,19 +243,23 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     //[self dissmisBannerAdd:bannerAddClosed];
 }
 -(void)dissmisBannerAddOnTap{
-    [self dissmisBannerAdd:YES];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self dissmisBannerAdd:YES];
+    });
+    
 }
 // Dismiss action for banner ad
 -(void)dissmisBannerAdd:(BOOL)valForBannerClose{
     
     UIView *viewToRemove = [bannerAddView viewWithTag:999];
     [viewToRemove removeFromSuperview];
-    [bannerAdDismissBtn removeFromSuperview];
+    //[bannerAdDismissBtn removeFromSuperview];
     [self.bannerAddView removeFromSuperview];
     bannerAdDismissBtn = nil;
     self.bannerAddView = nil;
 
-     bannerAddClosed = valForBannerClose;
+    bannerAddClosed = valForBannerClose;
 }
 
 /**
@@ -2895,9 +2899,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             [navigationController popViewControllerAnimated:NO];
             [userPurchases_ setUserPurcahsesFromParse];
             
-            //[weakSelf openPanel];
+            [weakSelf openPanel];
             
-            //[weakSelf hideLoadingIndicator];
+            [weakSelf hideLoadingIndicator];
         };
         
         [self.navigationController pushViewController:signInController animated:YES];
