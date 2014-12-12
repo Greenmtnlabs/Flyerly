@@ -652,7 +652,7 @@ CGAffineTransform previuosTransform;
     if ( view != nil ) {
         CALayer * l = view.layer;
         [l setMasksToBounds:YES];
-        [l setBorderWidth:0.5];
+        [l setBorderWidth:1.0];
         [l setBorderColor:[[UIColor grayColor] CGColor]];
     }
 }
