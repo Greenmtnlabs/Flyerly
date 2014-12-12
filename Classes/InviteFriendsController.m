@@ -903,7 +903,7 @@ const int CONTACTS_TAB = 0;
         
         ContactsModel *model = [self getArrayOfSelectedTab][(indexPath.row)];
         
-        NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
+        NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go!%@%@", flyerConfigurator.referralURL, userUniqueObjectId];
         
         //CHECK FOR ALREADY SELECTED
         if (model.status == 0) {
