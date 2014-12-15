@@ -257,9 +257,9 @@ BOOL adLoaded = false;
                                 NSMutableDictionary *counterDictionary = [object valueForKey:@"estimatedData"];
                                 int refrelCounter = [[counterDictionary objectForKey:@"inviteCounter"] intValue];
                            
-                                if ( refrelCounter >= 20 && !congratulated ) {
+                                if ( refrelCounter >= 20 && ![congratulated isEqualToString:@"congratulated"] ) {
                                     
-                                    NSString *pid  = @"com.flyerly.com.flyerly.UnlockSavedFlyers";
+                                    NSString *pid  = @"com.flyerly.UnlockSavedFlyers";
                                     
                                     NSString *strWithOutDot = [pid stringByReplacingOccurrencesOfString:@"." withString:@""];
                                     
