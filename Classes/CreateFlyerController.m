@@ -2449,8 +2449,40 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     if ( imgPickerFlag == IMAGEPICKER_PHOTO ) {
         NSDictionary *dict = [flyer getLayerFromMaster:currentLayer];
-        nbuGallary.desiredImageSize = CGSizeMake( [[dict valueForKey:@"width"] floatValue],
-                                                 [[dict valueForKey:@"height"] floatValue]);
+        
+        UIImageView *currentImage = [self.flyimgView.layers objectForKey:currentLayer];
+        
+        CGRect imgRect = currentImage.frame;
+        
+        if ( IS_IPHONE_5 ){
+            if( imgRect.size.width > 320.0 ){
+                imgRect.size.width = 320;
+            }
+            if ( imgRect.size.height > 320.0 ){
+                imgRect.size.height = 320;
+            }
+        }else if ( IS_IPHONE_6 ){
+            if( imgRect.size.width > 320.0 ){
+                imgRect.size.width = 320.0;
+            }
+            if ( imgRect.size.height > 320.0 ){
+                imgRect.size.height = 320.0;
+            }
+        }
+        
+        CGSize imageSize = CGSizeMake( imgRect.size.width,
+                                        imgRect.size.height );
+        
+        nbuGallary.desiredImageSize = imageSize;
+        /*if(imageSize.width == 0 && imageSize.height == 0){
+        
+            nbuGallary.desiredImageSize = imageSize;
+            
+        }else {
+        
+            nbuGallary.desiredImageSize = imageSize;
+        }*/
+        
     } else {
         nbuGallary.desiredImageSize = self.flyimgView.size;
         nbuGallary.desiredVideoSize = CGSizeMake( flyerlyWidth, flyerlyHeight );
