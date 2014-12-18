@@ -2628,11 +2628,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 imgRect.size.height = 320;
             }
         }else if ( IS_IPHONE_6 ){
-            if( imgRect.size.width > 320.0 ){
-                imgRect.size.width = 320.0;
+            if( imgRect.size.width > 380.0 ){
+                imgRect.size.width = 380.0;
             }
-            if ( imgRect.size.height > 320.0 ){
-                imgRect.size.height = 320.0;
+            if ( imgRect.size.height > 380.0 ){
+                imgRect.size.height = 380.0;
             }
         }
         
@@ -3397,14 +3397,16 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     __block UIImage *snapshotImage;
     
+    CGContextRef context = UIGraphicsGetCurrentContext();
     dispatch_sync(dispatch_get_main_queue(), ^{
         
-        CGContextRef context = UIGraphicsGetCurrentContext();
+        
         [self.flyimgView.layer renderInContext:context];
-        snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
+        
         
     });
     
+    snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
     
     UIGraphicsEndImageContext();
 
