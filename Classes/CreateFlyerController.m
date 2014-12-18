@@ -2615,8 +2615,32 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     if ( imgPickerFlag == IMAGEPICKER_PHOTO ) {
         NSDictionary *dict = [flyer getLayerFromMaster:currentLayer];
-        nbuCamera.desiredImageSize = CGSizeMake( [[dict valueForKey:@"width"] floatValue],
-                                                [[dict valueForKey:@"height"] floatValue]);
+        
+        UIImageView *currentImage = [self.flyimgView.layers objectForKey:currentLayer];
+        
+        CGRect imgRect = currentImage.frame;
+        
+        if ( IS_IPHONE_5 ){
+            if( imgRect.size.width > 320.0 ){
+                imgRect.size.width = 320;
+            }
+            if ( imgRect.size.height > 320.0 ){
+                imgRect.size.height = 320;
+            }
+        }else if ( IS_IPHONE_6 ){
+            if( imgRect.size.width > 320.0 ){
+                imgRect.size.width = 320.0;
+            }
+            if ( imgRect.size.height > 320.0 ){
+                imgRect.size.height = 320.0;
+            }
+        }
+        
+        CGSize imageSize = CGSizeMake( imgRect.size.width,
+                                      imgRect.size.height );
+        
+        nbuCamera.desiredImageSize = imageSize;
+        
     } else {
         nbuCamera.desiredImageSize = self.flyimgView.size;
         nbuCamera.desiredVideoSize = CGSizeMake( flyerlyWidth, flyerlyHeight );
@@ -3371,9 +3395,16 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     //Here we take Snap shot of Flyer
     UIGraphicsBeginImageContextWithOptions( size, NO, 0);
     
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    [self.flyimgView.layer renderInContext:context];
-    UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
+    __block UIImage *snapshotImage;
+    
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        [self.flyimgView.layer renderInContext:context];
+        snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
+        
+    });
+    
     
     UIGraphicsEndImageContext();
 
