@@ -2519,7 +2519,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [weakSelf.flyimgView layerStoppedEditing:weakSelf.currentLayer];
                 
                 weakSelf.imgPickerFlag = IMAGEPICKER_TEMPLATE;
-                
+            
                 //Render Flyer
                 //[self renderFlyer];
             }else{
@@ -3383,7 +3383,21 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 #pragma mark - Screenshot funcs
 //Here we Getting Snap Shot of Flyer Image View Context
 -(UIImage *)getFlyerSnapShot {
-    return [self getFlyerSnapshotWithSize:self.flyimgView.size];
+    
+    
+    dispatch_queue_t concurrentQueue =
+    dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    
+    // Declare your local data outside the block.
+    // `__block` specifies that the variable can be modified from within the block.
+    __block UIImage *uiImage = nil;
+    
+    dispatch_sync(concurrentQueue, ^{
+        // Do something with `localData`...
+        uiImage = [self getFlyerSnapshotWithSize:self.flyimgView.size];
+    });
+    
+    return uiImage;
 }
 
 //Here we Getting Snap Shot of Flyer Image View Context for desired size
@@ -3395,21 +3409,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     //Here we take Snap shot of Flyer
     UIGraphicsBeginImageContextWithOptions( size, NO, 0);
     
-    __block UIImage *snapshotImage;
+    UIImage *snapshotImage;
     
     CGContextRef context = UIGraphicsGetCurrentContext();
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        
-        
-        [self.flyimgView.layer renderInContext:context];
-        
-        
-    });
-    
+    [self.flyimgView.layer renderInContext:context];
     snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
-    
     UIGraphicsEndImageContext();
-
+    
     [zoomScreenShotForVideo setAlpha:alphaOfZoomScreenShotForVideo];
     
     return snapshotImage;
@@ -6315,6 +6321,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             zoomScreenShotForVideo.frame = CGRectMake(0, 0, width, height);
         }
         else{
+            
             UIImage *flyerSnapshot = [self getFlyerSnapshotWithSize:size];
             zoomScreenShot.image = flyerSnapshot;
         }
