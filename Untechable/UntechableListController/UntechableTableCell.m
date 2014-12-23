@@ -34,7 +34,7 @@
     [untechableEndTime setFont:[UIFont fontWithName:APP_FONT size:14]];
     untechableEndTime.text = endTime;
     
-    untechableTitle.font = [UIFont fontWithName:APP_FONT size:22];
+    untechableTitle.font = [UIFont fontWithName:APP_FONT size:19];
     untechableTitle.text = title;
     untechableStartDate.font = [UIFont fontWithName:APP_FONT size:14];
     untechableStartDate.text = startDate;
