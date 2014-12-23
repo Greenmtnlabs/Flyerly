@@ -6924,6 +6924,7 @@
 				);
 				PRODUCT_NAME = Flyr;
 				PROVISIONING_PROFILE = "5058ceaf-7b38-47d9-b9b2-13238d2c43f4";
+				"PROVISIONING_PROFILE[sdk=iphoneos7.0]" = "5058ceaf-7b38-47d9-b9b2-13238d2c43f4";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 i386 x86_64 armv7s armv8";
