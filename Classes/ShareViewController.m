@@ -37,16 +37,19 @@
     [titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
     [titleView addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
     titleView.placeholder = @"Flyerly Title (e.g. \"Parker's Party\")";
-
+    
+    //Default iPhon4
+    CGRect sizeForDesc = CGRectMake((titleView.frame.origin.x-6), (titleView.frame.origin.y+titleView.frame.size.height+4), (titleView.frame.size.width+6), 67);
+    
     if ( IS_IPHONE_5 ) {
-        descriptionView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(12, 70, 296, 67)];
-    } else if ( IS_IPHONE_6 ){
-        
-        descriptionView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(12, 79, 345, 78)];
-    } else if( IS_IPHONE_6_PLUS ){
-        
-        descriptionView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(13, 79, 391, 83)];
+        sizeForDesc = CGRectMake(10, 100, 296, 67);
+    } else if ( IS_IPHONE_6 ) {
+        sizeForDesc = CGRectMake(12, 79, 345, 78);
+    } else if( IS_IPHONE_6_PLUS ) {
+        sizeForDesc = CGRectMake(13, 79, 391, 83);
     }
+    
+    descriptionView = [[UIPlaceHolderTextView alloc] initWithFrame:sizeForDesc];
     
     descriptionView.placeholder = @"Add a comment (example: \"Show this flyer for a free drink at the bar from 4pm-7pm\")";
     /*
