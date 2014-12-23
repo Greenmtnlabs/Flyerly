@@ -29,6 +29,10 @@
 		2402BB841A1DBF6A00255A73 /* UntechablesList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2402BB821A1DBF6A00255A73 /* UntechablesList.xib */; };
 		2402BB881A1DC3A200255A73 /* UntechableTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402BB861A1DC3A200255A73 /* UntechableTableCell.m */; };
 		2402BB891A1DC3A200255A73 /* UntechableTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2402BB871A1DC3A200255A73 /* UntechableTableCell.xib */; };
+		24354D6B1A499EC5000EC781 /* ContactsListControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24354D691A499EC5000EC781 /* ContactsListControllerViewController.m */; };
+		24354D6C1A499EC5000EC781 /* ContactsListControllerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24354D6A1A499EC5000EC781 /* ContactsListControllerViewController.xib */; };
+		24354D701A499F4F000EC781 /* ContactListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24354D6E1A499F4F000EC781 /* ContactListCell.m */; };
+		24354D711A499F4F000EC781 /* ContactListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24354D6F1A499F4F000EC781 /* ContactListCell.xib */; };
 		24848FE71A30403600BF1138 /* ServerAccountDetailsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24848FE51A30403600BF1138 /* ServerAccountDetailsViewCell.m */; };
 		24848FE81A30403600BF1138 /* ServerAccountDetailsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24848FE61A30403600BF1138 /* ServerAccountDetailsViewCell.xib */; };
 		24A65BEC1A30451E00BE83C6 /* SSLCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A65BEA1A30451E00BE83C6 /* SSLCell.m */; };
@@ -175,6 +179,12 @@
 		2402BB851A1DC3A200255A73 /* UntechableTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UntechableTableCell.h; path = UntechableListController/UntechableTableCell.h; sourceTree = "<group>"; };
 		2402BB861A1DC3A200255A73 /* UntechableTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UntechableTableCell.m; path = UntechableListController/UntechableTableCell.m; sourceTree = "<group>"; };
 		2402BB871A1DC3A200255A73 /* UntechableTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UntechableTableCell.xib; path = UntechableListController/UntechableTableCell.xib; sourceTree = "<group>"; };
+		24354D681A499EC5000EC781 /* ContactsListControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsListControllerViewController.h; sourceTree = "<group>"; };
+		24354D691A499EC5000EC781 /* ContactsListControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsListControllerViewController.m; sourceTree = "<group>"; };
+		24354D6A1A499EC5000EC781 /* ContactsListControllerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactsListControllerViewController.xib; sourceTree = "<group>"; };
+		24354D6D1A499F4F000EC781 /* ContactListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactListCell.h; sourceTree = "<group>"; };
+		24354D6E1A499F4F000EC781 /* ContactListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactListCell.m; sourceTree = "<group>"; };
+		24354D6F1A499F4F000EC781 /* ContactListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactListCell.xib; sourceTree = "<group>"; };
 		24848FE41A30403600BF1138 /* ServerAccountDetailsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerAccountDetailsViewCell.h; sourceTree = "<group>"; };
 		24848FE51A30403600BF1138 /* ServerAccountDetailsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerAccountDetailsViewCell.m; sourceTree = "<group>"; };
 		24848FE61A30403600BF1138 /* ServerAccountDetailsViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServerAccountDetailsViewCell.xib; sourceTree = "<group>"; };
@@ -360,6 +370,19 @@
 			name = UntechableListController;
 			sourceTree = "<group>";
 		};
+		24354D671A499D93000EC781 /* ContactsListController */ = {
+			isa = PBXGroup;
+			children = (
+				24354D681A499EC5000EC781 /* ContactsListControllerViewController.h */,
+				24354D691A499EC5000EC781 /* ContactsListControllerViewController.m */,
+				24354D6A1A499EC5000EC781 /* ContactsListControllerViewController.xib */,
+				24354D6D1A499F4F000EC781 /* ContactListCell.h */,
+				24354D6E1A499F4F000EC781 /* ContactListCell.m */,
+				24354D6F1A499F4F000EC781 /* ContactListCell.xib */,
+			);
+			name = ContactsListController;
+			sourceTree = "<group>";
+		};
 		24BAB1851A2F0E2600855B77 /* InternetReachibility */ = {
 			isa = PBXGroup;
 			children = (
@@ -534,6 +557,7 @@
 				36B275CF1A00CC9400ED58AD /* RMStore */,
 				2402BB7F1A1DBEF800255A73 /* UntechableListController */,
 				366ECD8619D322D700F71A11 /* AddUntechableController */,
+				24354D671A499D93000EC781 /* ContactsListController */,
 				366ECD8719D322F800F71A11 /* PhoneSetupController */,
 				36524AED19D9409C006DCAAF /* SocialnetworkController */,
 				36B0369F19DAF3E400E8CD21 /* EmailSettingController */,
@@ -836,6 +860,7 @@
 				36B4E53F1A28BBD400CC18B0 /* EmailTableViewCell.xib in Resources */,
 				363DEAFC1A2C6D9B0035FF1F /* logo-Exchange.jpg in Resources */,
 				36B2767A1A0124E800ED58AD /* record@2x.png in Resources */,
+				24354D6C1A499EC5000EC781 /* ContactsListControllerViewController.xib in Resources */,
 				366EAFA41A14C3530011D6C6 /* logo.png in Resources */,
 				36B2765F1A0124E800ED58AD /* CHECKBOX_FILLED@2x.png in Resources */,
 				36474F2219D9780100084F34 /* Pigiarniq Bold.ttf in Resources */,
@@ -902,6 +927,7 @@
 				366EAFB81A14EDA30011D6C6 /* copy.png in Resources */,
 				24A65BED1A30451E00BE83C6 /* SSLCell.xib in Resources */,
 				366EAF951A14C3530011D6C6 /* icon-60@2x.png in Resources */,
+				24354D711A499F4F000EC781 /* ContactListCell.xib in Resources */,
 				366EAFA01A14C3530011D6C6 /* Default-667h@2x.png in Resources */,
 				24BAB18A1A2F340200855B77 /* logo-other.png in Resources */,
 				200ACE2C1A3874B200DC7047 /* GoogleIcon@3x.png in Resources */,
@@ -990,7 +1016,9 @@
 				36FD975519E694AC00427507 /* BSKeyboardControls.m in Sources */,
 				36524AF119D940F4006DCAAF /* SocialnetworkController.m in Sources */,
 				24A65BEC1A30451E00BE83C6 /* SSLCell.m in Sources */,
+				24354D701A499F4F000EC781 /* ContactListCell.m in Sources */,
 				36561D7819D2C8A40069D897 /* main.m in Sources */,
+				24354D6B1A499EC5000EC781 /* ContactsListControllerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
