@@ -12,7 +12,7 @@
 #import "BSKeyboardControls.h"
 #import <FacebookSDK/FacebookSDK.h>
 
-@interface SocialnetworkController : UIViewController < UITextFieldDelegate , BSKeyboardControlsDelegate >
+@interface SocialnetworkController : UIViewController < UITextViewDelegate , BSKeyboardControlsDelegate >
 {
     UILabel *titleLabel;
     UIButton *helpButton;

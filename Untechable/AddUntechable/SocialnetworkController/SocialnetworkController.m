@@ -17,8 +17,9 @@
 
 @interface SocialnetworkController () <FHSTwitterEngineAccessTokenDelegate>
 
+@property (strong, nonatomic) IBOutlet UILabel *char_Limit;
 
-@property (strong, nonatomic) IBOutlet UITextField *inputSetSocialStatus;
+@property (strong, nonatomic) IBOutlet UITextView *inputSetSocialStatus;
 
 @property (strong, nonatomic) IBOutlet UIButton *btnFacebook;
 
@@ -58,7 +59,7 @@
     
     //[self setDefaultModel];
     
-    NSArray *fields = @[ self.inputSetSocialStatus ];
+    NSArray *fields = @[ _inputSetSocialStatus ];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
     [self.keyboardControls setDelegate:self];
 }
@@ -92,17 +93,22 @@
 }
 // ________________________     Custom functions    ___________________________
 
-#pragma mark - Text Field Delegate
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    [self.keyboardControls setActiveField:textField];
-}
-
 #pragma mark - Text View Delegate
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
+    
+    if ( [textView.text isEqualToString:@"e.g Spending time with family."] ){
+        textView.text = @"";
+    }
+    if ( textView == _inputSetSocialStatus ){
+        if ([textView.text isEqualToString:@"e.g Spending time with family."]) {
+            textView.text = @"";
+            textView.font = [UIFont fontWithName:TITLE_FONT size:12.0];
+            textView.textColor = [UIColor blackColor]; //optional
+        }
+        [textView becomeFirstResponder];
+    }
     [self.keyboardControls setActiveField:textView];
 }
 
@@ -123,11 +129,25 @@
 -(void)updateUI
 {
 
-    [self.inputSetSocialStatus setTextColor:defGreen];
-    self.inputSetSocialStatus.font = [UIFont fontWithName:APP_FONT size:16];
-    self.inputSetSocialStatus.delegate = self;
+    [_inputSetSocialStatus setTextColor:defGreen];
+    _inputSetSocialStatus.font = [UIFont fontWithName:APP_FONT size:16];
+    _inputSetSocialStatus.delegate = self;
+    
+    if ( [untechable.socialStatus isEqualToString:@""] ){
+        _inputSetSocialStatus.text = @"e.g Spending time with family.";
+    }
+    
+    
     //[self.inputSetSocialStatus setText:untechable.socialStatus];
-    [self.inputSetSocialStatus setText:untechable.spendingTimeTxt];
+    if ( [untechable.socialStatus isEqualToString:@""] && [_inputSetSocialStatus.text isEqualToString:@"e.g Spending time with family."] ){
+        
+        [_inputSetSocialStatus setText:untechable.spendingTimeTxt];
+    
+    }else {
+        
+        [_inputSetSocialStatus setText:untechable.socialStatus];
+    }
+    
     
     [self.btnFacebook setTitleColor:( [untechable.fbAuth isEqualToString:@""] ? defGray : defGreen ) forState:UIControlStateNormal];
     self.btnFacebook.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
@@ -532,6 +552,13 @@
         NSLog(@"Authorization failed %@", error);
     }];
 }
+
+-(void)textViewDidChange:(UITextView *)textView
+{
+    int len = textView.text.length;
+    _char_Limit.text=[NSString stringWithFormat:@"%i",140-len];
+}
+
 
 //Get linkedin User profile details using accessToken
 - (void)requestMeWithToken:(NSString *)linkedInAccessToken {
