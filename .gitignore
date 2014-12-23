@@ -168,3 +168,8 @@ xcuserdata
 # Pods
 Pods/
 
+
+
+# Ignore parse directory
+ExternalFrameworks/Parse/
+
