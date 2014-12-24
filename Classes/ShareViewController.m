@@ -42,7 +42,7 @@
     CGRect sizeForDesc = CGRectMake((titleView.frame.origin.x-6), (titleView.frame.origin.y+titleView.frame.size.height+4), (titleView.frame.size.width+6), 67);
     
     if ( IS_IPHONE_5 ) {
-        sizeForDesc = CGRectMake(10, 100, 296, 67);
+        sizeForDesc = CGRectMake(10, 100, 298, 67);
     } else if ( IS_IPHONE_6 ) {
         sizeForDesc = CGRectMake(12, 79, 345, 78);
     } else if( IS_IPHONE_6_PLUS ) {
