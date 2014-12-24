@@ -7,17 +7,40 @@
 //
 
 #import "ContactListCell.h"
+#import "ContactsCustomizedModal.h"
 
 @implementation ContactListCell
 
-- (void)awakeFromNib {
-    // Initialization code
+@synthesize contactName;
+
+/*
+ * Set CellObjects
+ */
+-(void)setCellObjects :(ContactsCustomizedModal *)model :(int)status :(NSString*) tableName {
+    
+    // Set Values
+    [contactName setText:model.name];
+    
+    /*if ([model.others isEqualToString:@""]){
+        [description setText:model.description];
+    }else {
+        [description setText:model.others];
+    }
+    [imgview setImage:model.img];*/
+    model.delegate = self;
+    if ( [tableName isEqualToString:@"InviteFriends"] ){
+        [model setInvitedStatus:status];
+    }else if ( [tableName isEqualToString:@"PrintInvites"] ){
+        [model setInvitedStatus:0];
+    }
+    
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
+#pragma mark Contacts  Delegate
+
+-(void)contactInvited :(ContactsCustomizedModal *)model{
+    
+    //[checkBtn setImage:[UIImage imageNamed:model.checkImageName]];
 }
-
 @end

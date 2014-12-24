@@ -11,6 +11,7 @@
 #import "ThankyouController.h"
 #import "Common.h"
 #import "BSKeyboardControls.h"
+#import "ContactsListControllerViewController.h"
 
 
 @interface AddUntechableController (){
@@ -275,10 +276,15 @@
 
     
     if( goToNext ) {
-        PhoneSetupController *phoneSetup;
+        
+        ContactsListControllerViewController *listController = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
+        //listController.untechable = untechable;
+        [self.navigationController pushViewController:listController animated:YES];
+        
+        /*PhoneSetupController *phoneSetup;
         phoneSetup = [[PhoneSetupController alloc]initWithNibName:@"PhoneSetupController" bundle:nil];
         phoneSetup.untechable = untechable;
-        [self.navigationController pushViewController:phoneSetup animated:YES];
+        [self.navigationController pushViewController:phoneSetup animated:YES];*/
     }
 }
 -(void)storeSceenVarsInDic

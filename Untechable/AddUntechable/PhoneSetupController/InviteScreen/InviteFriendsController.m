@@ -169,7 +169,7 @@
 /*
  * This method is used to load device contact details
  */
-- (IBAction)loadLocalContacts:(UIButton *)sender{
+- (IBAction)loadLocalContacts:(UIButton *)sender {
     
     
     // HERE WE HIGHLIGHT BUTTON SELECT AND

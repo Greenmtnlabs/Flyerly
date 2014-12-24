@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AddressBookUI/AddressBookUI.h>
 #import "Untechable.h"
 #import "BSKeyboardControls.h"
 
-@interface AddUntechableController : UIViewController < UITextViewDelegate, BSKeyboardControlsDelegate >
+@interface AddUntechableController : UIViewController < UITextViewDelegate, BSKeyboardControlsDelegate, ABPeoplePickerNavigationControllerDelegate >
 {
     UILabel *titleLabel;
     UIButton *helpButton;

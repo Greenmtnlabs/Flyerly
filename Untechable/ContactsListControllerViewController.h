@@ -7,7 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AddressBookUI/AddressBookUI.h>
+#import <AddressBook/AddressBook.h>
 
-@interface ContactsListControllerViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+
+@interface ContactsListControllerViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+
+}
+
+@property(nonatomic,strong) NSMutableArray *contactsArray;
+@property(nonatomic,strong) NSMutableArray *contactBackupArray;
+@property(nonatomic,strong) NSMutableArray *selectedIdentifiers;
+
+@property(nonatomic,strong) IBOutlet UITextField *searchTextField;
 
 @end
