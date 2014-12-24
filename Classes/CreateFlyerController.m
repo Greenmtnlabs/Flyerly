@@ -1879,7 +1879,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 //Update Ui -------}---
                 
                 //Rufi code
-                [flyimgView configureLabelFontRufi:currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
+                [flyimgView setLabelAfterFontChange:currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
             }
             i++;
         }// uiImageView Found

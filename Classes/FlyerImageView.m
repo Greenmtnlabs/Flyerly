@@ -470,7 +470,7 @@ CGAffineTransform previuosTransform;
 /*
  *Here we set font of UILabel
  */
--(void)configureLabelFontRufi :(NSString *)uid labelDictionary:(NSMutableDictionary *)detail {
+-(void)setLabelAfterFontChange:(NSString *)uid labelDictionary:(NSMutableDictionary *)detail {
     
     CustomLabel *lble = [layers objectForKey:uid];
 
