@@ -93,7 +93,7 @@ CGAffineTransform previuosTransform;
         return;
     }
     
-    // Checking for Label or ImageView
+    // Checking for Label(text) or ImageView
     if ([layDic objectForKey:@"image"] == nil) {
         
         id lastControl = [layers objectForKey:uid];

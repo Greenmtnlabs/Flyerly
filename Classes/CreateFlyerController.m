@@ -1873,6 +1873,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
                 //Handling Select Unselect
                 [self setSelectedItem:FLYER_LAYER_TEXT inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
+                
+                //Rufi code
+                //[self callStyle];
             }
             i++;
         }// uiImageView Found
@@ -3195,16 +3198,20 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         [self callAddMoreLayers];
         return;
     }
+
     
-    [flyer setLayerType:currentLayer type:FLYER_LAYER_TEXT];
+    //Update Dictionaries------------------{--
+        //Will only update the layer dictionary
+        [flyer setLayerType:currentLayer type:FLYER_LAYER_TEXT];
+        //Will update layer type in masterLayers
+        [flyer setFlyerText:currentLayer text:lastTextView.text ];
+    //Update Dictionaries-----------------}---
     
-    //Set Text of Layer
-    [flyer setFlyerText:currentLayer text:lastTextView.text ];
     
     //Here we call Render Layer on View
     [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
     
-    //Here we Highlight The ImageView
+    //Here we Highlight The TextView [ show borders arround it ]
     [self.flyimgView layerIsBeingEdited:currentLayer];
     
     userPurchases = [UserPurchases getInstance];
