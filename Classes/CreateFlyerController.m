@@ -1864,24 +1864,29 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 selectedFont = fontsArray[i-1];
                 selectedFont = [selectedFont fontWithSize:selectedSize];
                 
+                //Update Dictionaries------------------{--
                 //Here we set Font
                 [flyer setFlyerTextFont:currentLayer FontName:[NSString stringWithFormat:@"%@",[selectedFont familyName]]];
+                //Update Dictionaries-----------------}---
                 
+                
+
+                //Update Ui------{----
                 [flyimgView configureLabelFont :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
-                //Here we call Render Layer on View
-                //[flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
-                
-                //Handling Select Unselect
+
+                //Handling Select Unselect ( Highlight selected resource )
                 [self setSelectedItem:FLYER_LAYER_TEXT inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
+                //Update Ui -------}---
                 
                 //Rufi code
-                //[self callStyle];
+                [flyimgView configureLabelFontRufi:currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
             }
             i++;
         }// uiImageView Found
         
 	}// Loop
 }
+
 
 /*
  * When any color is selected

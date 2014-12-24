@@ -98,8 +98,7 @@ CGAffineTransform previuosTransform;
         
         id lastControl = [layers objectForKey:uid];
         
-        // If we have switched from an image to a text view, then we need to
-        // make a new label.
+        // If we have switched from an image to a text view, then we need to make a new label.
         if ( lastControl != nil && [layDic objectForKey:@"text"] != nil &&
             ![lastControl isKindOfClass:[CustomLabel class]] ) {
             [lastControl removeFromSuperview];
@@ -466,6 +465,43 @@ CGAffineTransform previuosTransform;
     lble.font = [UIFont fontWithName:[detail valueForKey:@"fontname"] size:[[detail valueForKey:@"fontsize"] floatValue]];
     
     [lble setText:[detail valueForKey:@"text"]];
+}
+
+/*
+ *Here we set font of UILabel
+ */
+-(void)configureLabelFontRufi :(NSString *)uid labelDictionary:(NSMutableDictionary *)detail {
+    
+    CustomLabel *lble = [layers objectForKey:uid];
+
+    //----
+    lble.tag = layers.count;
+    lble.backgroundColor = [UIColor clearColor];
+    lble.textAlignment = NSTextAlignmentCenter;//    UITextAlignmentCenter;
+
+    lble.adjustsFontSizeToFitWidth = YES;
+    lble.lineBreakMode = NSLineBreakByWordWrapping;
+    lble.numberOfLines = 80;
+//------------{-----
+ 
+    CGRect fr = lble.frame;
+    fr.size.width = [[detail valueForKey:@"width"] floatValue];
+    if ( ([detail objectForKey:@"tx"] != nil ) && ([detail objectForKey:@"ty"] != nil) ) {
+        fr.origin.x = [[detail objectForKey:@"tx"] floatValue];
+        fr.origin.y = [[detail objectForKey:@"ty"] floatValue];
+    } else {
+        fr.origin.x = [[detail objectForKey:@"x"] floatValue];
+        fr.origin.y = [[detail objectForKey:@"y"] floatValue];
+    }
+    lble.frame = fr;
+    
+    [lble sizeToFit];
+//------------}-----
+    [self applyTransformOnLabel:lble CustomLableDictionary:detail];
+    
+    [self addSubview:lble];
+    [layers setValue:lble forKey:uid];
+    
 }
 
 /*
