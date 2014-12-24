@@ -485,19 +485,19 @@ CGAffineTransform previuosTransform;
 //------------{-----
  
     CGRect fr = lble.frame;
-    fr.size.width = [[detail valueForKey:@"width"] floatValue];
+
     if ( ([detail objectForKey:@"tx"] != nil ) && ([detail objectForKey:@"ty"] != nil) ) {
-        fr.origin.x = [[detail objectForKey:@"tx"] floatValue];
-        fr.origin.y = [[detail objectForKey:@"ty"] floatValue];
+        [self applyTransformOnLabel:lble CustomLableDictionary:detail];
     } else {
         fr.origin.x = [[detail objectForKey:@"x"] floatValue];
         fr.origin.y = [[detail objectForKey:@"y"] floatValue];
+        fr.size.width = [[detail valueForKey:@"width"] floatValue];
     }
     lble.frame = fr;
     
     [lble sizeToFit];
 //------------}-----
-    [self applyTransformOnLabel:lble CustomLableDictionary:detail];
+
     
     [self addSubview:lble];
     [layers setValue:lble forKey:uid];
