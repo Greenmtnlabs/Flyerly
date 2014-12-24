@@ -471,7 +471,6 @@ CGAffineTransform previuosTransform;
  *Here we set font of UILabel
  */
 -(void)setLabelAfterFontChange:(NSString *)uid labelDictionary:(NSMutableDictionary *)detail {
-    
     CustomLabel *lble = [layers objectForKey:uid];
 
     //----
@@ -483,25 +482,22 @@ CGAffineTransform previuosTransform;
     lble.lineBreakMode = NSLineBreakByWordWrapping;
     lble.numberOfLines = 80;
 //------------{-----
- 
+    //Configure the label
     CGRect fr = lble.frame;
-
-    if ( ([detail objectForKey:@"tx"] != nil ) && ([detail objectForKey:@"ty"] != nil) ) {
-        [self applyTransformOnLabel:lble CustomLableDictionary:detail];
-    } else {
-        fr.origin.x = [[detail objectForKey:@"x"] floatValue];
-        fr.origin.y = [[detail objectForKey:@"y"] floatValue];
-        fr.size.width = [[detail valueForKey:@"width"] floatValue];
-    }
+    fr.origin.x = [[detail objectForKey:@"x"] floatValue];
+    fr.origin.y = [[detail objectForKey:@"y"] floatValue];
+    fr.size.width = [[detail valueForKey:@"width"] floatValue];
+    fr.size.height = [[detail valueForKey:@"height"] floatValue];
     lble.frame = fr;
+    
+    //Transform the label
+    [self applyTransformOnLabel:lble CustomLableDictionary:detail];
     
     [lble sizeToFit];
 //------------}-----
-
     
     [self addSubview:lble];
     [layers setValue:lble forKey:uid];
-    
 }
 
 /*
@@ -595,7 +591,7 @@ CGAffineTransform previuosTransform;
         
     } else{
        //lbl.textAlignment = NSTextAlignmentCenter;//UITextAlignmentLeft;//
-       [lbl setNumberOfLines:0];
+       [lbl setNumberOfLines:80];
        
        
        // Resize the frame's width to actual
