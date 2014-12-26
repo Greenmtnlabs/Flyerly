@@ -24,6 +24,14 @@
 @property (nonatomic,weak) id <ContactsCustomizedModalDelegate>delegate;
 
 @property (nonatomic,strong)NSString *name;
+
+@property (nonatomic,strong)NSString *mobileNumber;
+@property (nonatomic,strong)NSString *iPhoneNumber;
+@property (nonatomic,strong)NSString *homeNumber;
+@property (nonatomic,strong)NSString *workNumber;
+
+@property (nonatomic,strong)NSMutableArray *allEmails;
+
 @property (nonatomic,strong)NSString *description;
 @property (nonatomic,strong)NSString *others;
 @property (nonatomic,strong)UIImage *img;

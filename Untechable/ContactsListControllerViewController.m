@@ -10,6 +10,7 @@
 #import "ContactsListControllerViewController.h"
 #import "ContactListCell.h"
 #import "ContactsCustomizedModal.h"
+#import "ContactCustomizeDetailsControlelrViewController.h"
 #import "Common.h"
 
 @interface ContactsListControllerViewController ()
@@ -20,7 +21,7 @@
 
 @implementation ContactsListControllerViewController
 
-@synthesize contactsArray,contactBackupArray,searchTextField,selectedIdentifiers;
+@synthesize contactModalsArray,contactsArray,contactBackupArray,searchTextField,selectedIdentifiers;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -54,11 +55,6 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
-    CGRect newFrame = CGRectMake( 0, 0,
-                                 tableView.frame.size.width,
-                                 100);
     
     static NSString *cellId = @"InviteCell";
     ContactListCell *cell = (ContactListCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
@@ -160,13 +156,13 @@
     for(int contactIndex=0; contactIndex<[[self getBackupArrayOfSelectedTab] count]; contactIndex++){
         // Get left contact data
         
-        ContactsCustomizedModal *model = [self getBackupArrayOfSelectedTab][contactIndex];
+        ContactsCustomizedModal *contactModal = [self getBackupArrayOfSelectedTab][contactIndex];
         
-        NSString *name = model.name;
+        NSString *name = contactModal.name;
         
         if([[name lowercaseString] rangeOfString:[newString lowercaseString]].location == NSNotFound){
         } else {
-            [filteredArray addObject:model];
+            [filteredArray addObject:contactModal];
         }
     }
     
@@ -255,14 +251,15 @@
     CFIndex nPeople = ABAddressBookGetPersonCount(m_addressbook);
     
     for (int i=0;i < nPeople;i++) {
-        ContactsCustomizedModal *model = [[ContactsCustomizedModal alloc] init];
+        ContactsCustomizedModal *contactModal = [[ContactsCustomizedModal alloc] init];
         
-        model.others = @"";
+        contactModal.others = @"";
         
         ABRecordRef ref = CFArrayGetValueAtIndex(allPeople,i);
         
         //For username and surname
         ABMultiValueRef phones =(__bridge ABMultiValueRef)((NSString*)CFBridgingRelease(ABRecordCopyValue(ref, kABPersonPhoneProperty)));
+        ABMultiValueRef emails =(__bridge ABMultiValueRef)((NSString*)CFBridgingRelease(ABRecordCopyValue(ref, kABPersonEmailProperty)));
         CFStringRef firstName, lastName;
         firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
         lastName  = ABRecordCopyValue(ref, kABPersonLastNameProperty);
@@ -273,7 +270,7 @@
         if(!lastName)
             lastName = (CFStringRef) @"";
         
-        model.name = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+        contactModal.name = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
         
         // For contact picture
         UIImage *contactPicture;
@@ -282,15 +279,26 @@
             if ( &ABPersonCopyImageDataWithFormat != nil ) {
                 // iOS >= 4.1
                 contactPicture = [UIImage imageWithData:(NSData *)CFBridgingRelease(ABPersonCopyImageDataWithFormat(ref, kABPersonImageFormatThumbnail))];
-                model.img = contactPicture;
+                contactModal.img = contactPicture;
             } else {
                 // iOS < 4.1
                 contactPicture = [UIImage imageWithData:(NSData *)CFBridgingRelease(ABPersonCopyImageData(ref))];
-                model.img = contactPicture;
+                contactModal.img = contactPicture;
             }
         }
         
+        //For all emails
+        NSMutableArray *allEmails = [[NSMutableArray alloc] initWithCapacity:CFArrayGetCount(allPeople)];
         
+        NSString *emailLabel;
+        for (CFIndex j=0; j < ABMultiValueGetCount(emails); j++) {
+            
+            emailLabel = (NSString*)CFBridgingRelease(ABMultiValueCopyLabelAtIndex(emails, i));
+            NSString* email = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(emails, j));
+            [allEmails addObject:email];
+            
+        }
+        contactModal.allEmails = allEmails;
         
         //For Phone number
         NSString* mobileLabel;
@@ -300,26 +308,30 @@
             mobileLabel = (NSString*)CFBridgingRelease(ABMultiValueCopyLabelAtIndex(phones, i));
             if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
             {
-                model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                [contactsArray addObject:model];
-                break ;
+                contactModal.mobileNumber = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
+                
             }
-            else if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel])
+            
+            
+            if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel])
             {
-                model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                [contactsArray addObject:model];
-                break ;
-            }else if ([mobileLabel isEqualToString:(NSString*)kABHomeLabel])
-            {
-                model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                [contactsArray addObject:model];
-                break ;
-            }else if ([mobileLabel isEqualToString:(NSString*)kABWorkLabel])
-            {
-                model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                [contactsArray addObject:model];
-                break ;
+                contactModal.iPhoneNumber = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
+                
             }
+            
+            if ([mobileLabel isEqualToString:(NSString*)kABHomeLabel])
+            {
+                contactModal.homeNumber = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
+               
+            }
+            
+            if ([mobileLabel isEqualToString:(NSString*)kABWorkLabel])
+            {
+                contactModal.workNumber = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
+                
+            }
+            
+            [contactsArray addObject:contactModal];
         }
         
     }
@@ -331,14 +343,13 @@
 
 }
 
-/*
-#pragma mark - Navigation
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    ContactCustomizeDetailsControlelrViewController *detailsController = [[ContactCustomizeDetailsControlelrViewController alloc] init];
+    
+    detailsController.contactModal = [contactsArray objectAtIndex:indexPath.row];
+    
+    [self.navigationController pushViewController:detailsController animated:YES];
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
 }
-*/
-
 @end

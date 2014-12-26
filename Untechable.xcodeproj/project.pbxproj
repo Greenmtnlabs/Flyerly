@@ -33,6 +33,14 @@
 		24354D6C1A499EC5000EC781 /* ContactsListControllerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24354D6A1A499EC5000EC781 /* ContactsListControllerViewController.xib */; };
 		24354D701A499F4F000EC781 /* ContactListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24354D6E1A499F4F000EC781 /* ContactListCell.m */; };
 		24354D711A499F4F000EC781 /* ContactListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24354D6F1A499F4F000EC781 /* ContactListCell.xib */; };
+		243C59E01A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 243C59DE1A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.m */; };
+		243C59E11A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243C59DF1A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.xib */; };
+		243C59F41A4D753C0020350C /* FirstTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 243C59F21A4D753C0020350C /* FirstTableViewCell.m */; };
+		243C59F51A4D753C0020350C /* FirstTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243C59F31A4D753C0020350C /* FirstTableViewCell.xib */; };
+		243C59F91A4D984B0020350C /* PhoneNumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 243C59F71A4D984B0020350C /* PhoneNumberCell.m */; };
+		243C59FA1A4D984B0020350C /* PhoneNumberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243C59F81A4D984B0020350C /* PhoneNumberCell.xib */; };
+		243C59FE1A4DA17C0020350C /* EmailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 243C59FC1A4DA17C0020350C /* EmailCell.m */; };
+		243C59FF1A4DA17C0020350C /* EmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243C59FD1A4DA17C0020350C /* EmailCell.xib */; };
 		24848FE71A30403600BF1138 /* ServerAccountDetailsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24848FE51A30403600BF1138 /* ServerAccountDetailsViewCell.m */; };
 		24848FE81A30403600BF1138 /* ServerAccountDetailsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24848FE61A30403600BF1138 /* ServerAccountDetailsViewCell.xib */; };
 		248E06B71A4ACD6E0099846A /* ContactsCustomizedModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 248E06B61A4ACD6E0099846A /* ContactsCustomizedModal.m */; };
@@ -188,6 +196,18 @@
 		24354D6D1A499F4F000EC781 /* ContactListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactListCell.h; sourceTree = "<group>"; };
 		24354D6E1A499F4F000EC781 /* ContactListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactListCell.m; sourceTree = "<group>"; };
 		24354D6F1A499F4F000EC781 /* ContactListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactListCell.xib; sourceTree = "<group>"; };
+		243C59DD1A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactCustomizeDetailsControlelrViewController.h; sourceTree = "<group>"; };
+		243C59DE1A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactCustomizeDetailsControlelrViewController.m; sourceTree = "<group>"; };
+		243C59DF1A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactCustomizeDetailsControlelrViewController.xib; sourceTree = "<group>"; };
+		243C59F11A4D753C0020350C /* FirstTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstTableViewCell.h; sourceTree = "<group>"; };
+		243C59F21A4D753C0020350C /* FirstTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstTableViewCell.m; sourceTree = "<group>"; };
+		243C59F31A4D753C0020350C /* FirstTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstTableViewCell.xib; sourceTree = "<group>"; };
+		243C59F61A4D984B0020350C /* PhoneNumberCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneNumberCell.h; sourceTree = "<group>"; };
+		243C59F71A4D984B0020350C /* PhoneNumberCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneNumberCell.m; sourceTree = "<group>"; };
+		243C59F81A4D984B0020350C /* PhoneNumberCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhoneNumberCell.xib; sourceTree = "<group>"; };
+		243C59FB1A4DA17C0020350C /* EmailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailCell.h; sourceTree = "<group>"; };
+		243C59FC1A4DA17C0020350C /* EmailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailCell.m; sourceTree = "<group>"; };
+		243C59FD1A4DA17C0020350C /* EmailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmailCell.xib; sourceTree = "<group>"; };
 		24848FE41A30403600BF1138 /* ServerAccountDetailsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerAccountDetailsViewCell.h; sourceTree = "<group>"; };
 		24848FE51A30403600BF1138 /* ServerAccountDetailsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerAccountDetailsViewCell.m; sourceTree = "<group>"; };
 		24848FE61A30403600BF1138 /* ServerAccountDetailsViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServerAccountDetailsViewCell.xib; sourceTree = "<group>"; };
@@ -380,6 +400,7 @@
 		24354D671A499D93000EC781 /* ContactsListController */ = {
 			isa = PBXGroup;
 			children = (
+				243C59DC1A4D3A530020350C /* ContactCustomizeDetailsControlelr */,
 				248E06B41A4ACD350099846A /* ContactsCustomizedModal */,
 				24354D681A499EC5000EC781 /* ContactsListControllerViewController.h */,
 				24354D691A499EC5000EC781 /* ContactsListControllerViewController.m */,
@@ -391,6 +412,25 @@
 				248E06BC1A4AD9180099846A /* ContactListCell-iPhone6-Plus.xib */,
 			);
 			name = ContactsListController;
+			sourceTree = "<group>";
+		};
+		243C59DC1A4D3A530020350C /* ContactCustomizeDetailsControlelr */ = {
+			isa = PBXGroup;
+			children = (
+				243C59DD1A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.h */,
+				243C59DE1A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.m */,
+				243C59DF1A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.xib */,
+				243C59F11A4D753C0020350C /* FirstTableViewCell.h */,
+				243C59F21A4D753C0020350C /* FirstTableViewCell.m */,
+				243C59F31A4D753C0020350C /* FirstTableViewCell.xib */,
+				243C59F61A4D984B0020350C /* PhoneNumberCell.h */,
+				243C59F71A4D984B0020350C /* PhoneNumberCell.m */,
+				243C59F81A4D984B0020350C /* PhoneNumberCell.xib */,
+				243C59FB1A4DA17C0020350C /* EmailCell.h */,
+				243C59FC1A4DA17C0020350C /* EmailCell.m */,
+				243C59FD1A4DA17C0020350C /* EmailCell.xib */,
+			);
+			name = ContactCustomizeDetailsControlelr;
 			sourceTree = "<group>";
 		};
 		248E06B41A4ACD350099846A /* ContactsCustomizedModal */ = {
@@ -872,6 +912,7 @@
 				366ECD9C19D323E200F71A11 /* PhoneSetupController.xib in Resources */,
 				36B2767D1A0124E800ED58AD /* searchicon@2x.png in Resources */,
 				36B276711A0124E800ED58AD /* pause.png in Resources */,
+				243C59FA1A4D984B0020350C /* PhoneNumberCell.xib in Resources */,
 				366EAF9C1A14C3530011D6C6 /* icon.png in Resources */,
 				36474F2619D9780100084F34 /* Pigiarniq Regular.ttf in Resources */,
 				36B276791A0124E800ED58AD /* record.png in Resources */,
@@ -913,6 +954,7 @@
 				200ACE261A3874B200DC7047 /* aolIcon@3x.png in Resources */,
 				366EAFA11A14C3530011D6C6 /* Default-Landscape-736h@3x.png in Resources */,
 				366EAFB51A14EDA30011D6C6 /* copy@2x.png in Resources */,
+				243C59E11A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.xib in Resources */,
 				366EAFA61A14C3530011D6C6 /* logo@3x.png in Resources */,
 				36524AF219D940F4006DCAAF /* SocialnetworkController.xib in Resources */,
 				36FD975619E694AC00427507 /* BSKeyboardControls.strings in Resources */,
@@ -944,6 +986,7 @@
 				36561D7619D2C8A40069D897 /* InfoPlist.strings in Resources */,
 				200ACE311A3874B200DC7047 /* outlookIcon@2x.png in Resources */,
 				366EAF931A14C3530011D6C6 /* icon-50@2x.png in Resources */,
+				243C59F51A4D753C0020350C /* FirstTableViewCell.xib in Resources */,
 				366EAFB81A14EDA30011D6C6 /* copy.png in Resources */,
 				24A65BED1A30451E00BE83C6 /* SSLCell.xib in Resources */,
 				366EAF951A14C3530011D6C6 /* icon-60@2x.png in Resources */,
@@ -955,6 +998,7 @@
 				366EAFB61A14EDA30011D6C6 /* copy_selected@2x.png in Resources */,
 				366EAF9A1A14C3530011D6C6 /* icon-small.png in Resources */,
 				366EAF9E1A14C3530011D6C6 /* icon@2x.png in Resources */,
+				243C59FF1A4DA17C0020350C /* EmailCell.xib in Resources */,
 				200ACE351A3874B200DC7047 /* YahooIcon@3x.png in Resources */,
 				366EAF901A14C3530011D6C6 /* icon-40.png in Resources */,
 				36B276731A0124E800ED58AD /* play_gray.png in Resources */,
@@ -1016,11 +1060,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				36BB7B8919FFD98C00562069 /* ThankyouController.m in Sources */,
+				243C59F41A4D753C0020350C /* FirstTableViewCell.m in Sources */,
 				366ECD9619D323DA00F71A11 /* AddUntechableController.m in Sources */,
 				36B4E53E1A28BBD400CC18B0 /* EmailTableViewCell.m in Sources */,
 				36B275D71A00D36400ED58AD /* RMStore.m in Sources */,
 				366F9DAA1A124FC7006602E1 /* FHSStream.m in Sources */,
+				243C59F91A4D984B0020350C /* PhoneNumberCell.m in Sources */,
 				3681603C19E6B81E00B9B64C /* ContactsModel.m in Sources */,
+				243C59FE1A4DA17C0020350C /* EmailCell.m in Sources */,
 				24BAB1881A2F0E8C00855B77 /* Reachability.m in Sources */,
 				366F9DAB1A124FC7006602E1 /* FHSTwitterEngine.m in Sources */,
 				2402BB831A1DBF6A00255A73 /* UntechablesList.m in Sources */,
@@ -1034,6 +1081,7 @@
 				36561D7C19D2C8A40069D897 /* AppDelegate.m in Sources */,
 				366ECD7E19D3135200F71A11 /* Untechable.m in Sources */,
 				24848FE71A30403600BF1138 /* ServerAccountDetailsViewCell.m in Sources */,
+				243C59E01A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.m in Sources */,
 				36FD975519E694AC00427507 /* BSKeyboardControls.m in Sources */,
 				248E06B71A4ACD6E0099846A /* ContactsCustomizedModal.m in Sources */,
 				36524AF119D940F4006DCAAF /* SocialnetworkController.m in Sources */,

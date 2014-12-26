@@ -15,6 +15,7 @@
 
 }
 
+@property(nonatomic,strong) NSMutableArray *contactModalsArray;
 @property(nonatomic,strong) NSMutableArray *contactsArray;
 @property(nonatomic,strong) NSMutableArray *contactBackupArray;
 @property(nonatomic,strong) NSMutableArray *selectedIdentifiers;
