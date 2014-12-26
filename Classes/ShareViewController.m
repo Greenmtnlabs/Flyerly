@@ -69,10 +69,18 @@
     [self setSocialStatus];
 
     titleView.text = [flyer getFlyerTitle];
+
     descriptionView.text = [flyer getFlyerDescription];
-    selectedFlyerDescription = descriptionView.text;
     
+    [self updateDescription];
 }
+
+//Set user input value in class level variable.
+-(void)updateDescription
+{
+    selectedFlyerDescription = descriptionView.text;
+}
+
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
@@ -561,6 +569,8 @@
  */
 -(IBAction)onClickFacebookButton{
     
+    [self updateDescription];
+    
     // Current Item For Sharing
     SHKItem *item;
     
@@ -573,7 +583,8 @@
         iosSharer = [SHKFacebook shareItem:item];
         iosSharer.shareDelegate = self;
         
-    }else {
+    }
+    else {        
         item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly ", selectedFlyerDescription ]];
         item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
         iosSharer = [SHKFacebook shareItem:item];
