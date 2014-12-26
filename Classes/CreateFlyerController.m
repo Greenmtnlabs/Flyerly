@@ -82,10 +82,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 /**
  * Set position of WaterMark according to Device.
+ * Note: This function will only run when flyer is opening first time
  */
 -(void)setWaterMarkLayerPosition {
     
-    if ( IS_IPHONE_6 ){
+    if ( IS_IPHONE_6 || IS_IPHONE_4 ){
         NSArray *sortedLayers = [flyer allKeys];
         if ( sortedLayers.count == 2 ){
             
@@ -94,20 +95,18 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             if( [[dic objectForKey:@"type"] isEqualToString:FLYER_LAYER_WATER_MARK] ){
                 
                 if ( [[dic objectForKey:@"flyerOpenTime"] isEqualToString:@"0"] ) {
-                    [dic setObject:@"280.0" forKey:@"tx"];
-                    [dic setObject:@"330.0" forKey:@"ty"];
+                    if( IS_IPHONE_4 ) {
+                        [dic setObject:@"230" forKey:@"tx"];
+                        [dic setObject:@"215" forKey:@"ty"];
+                    }
+                    else if( IS_IPHONE_6 ) {
+                        [dic setObject:@"280.0" forKey:@"tx"];
+                        [dic setObject:@"330.0" forKey:@"ty"];
+                    }
                     
                     [dic setObject:@"1" forKey:@"flyerOpenTime"];
                 }
-                
-                
             }
-
-            //if iphone6
-            //1 - cont layer, if layer count == 1
-            // get thay layer dic,
-            //if check thay layer is water mark lay
-            // then check flyerOpenTime is nil, or 1 update cordinates (x,y ) and increase flyerOpenTime counter
         }
     }
 }
