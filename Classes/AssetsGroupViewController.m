@@ -41,12 +41,17 @@
     self.gridView.margin = CGSizeMake(5.0, 5.0);
     //self.gridView.sizeToFit;
     
-    if ( IS_IPHONE_5) {
+    if( IS_IPHONE_4){
+        self.gridView.nibNameForViews = @"CustomAssetThumbnailView";
+    }
+    else if ( IS_IPHONE_5) {
         self.gridView.nibNameForViews = @"CustomAssetThumbnailView";
     }else if ( IS_IPHONE_6){
         self.gridView.nibNameForViews = @"CustomAssetThumbnailView-iPhone6";
     }else if ( IS_IPHONE_6_PLUS){
         self.gridView.nibNameForViews = @"CustomAssetThumbnailView-iPhone6-Plus";
+    } else{
+        self.gridView.nibNameForViews = @"CustomAssetThumbnailView";
     }
     
     
@@ -180,13 +185,17 @@
                 
                 //Background Thread
                 CropVideoViewController *cropVideo;
-                
-                if ( IS_IPHONE_5) {
+                if( IS_IPHONE_4){
+                    cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
+                }
+                else if ( IS_IPHONE_5) {
                     cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
                 }else if ( IS_IPHONE_6){
                     cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController-iPhone6" bundle:nil];
                 }else if ( IS_IPHONE_6_PLUS){
                     cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController-iPhone6-Plus" bundle:nil];
+                } else {
+                    cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
                 }
                 
                 
@@ -216,12 +225,17 @@
         
         CropViewController *nbuCrop;
         
-        if ( IS_IPHONE_5) {
+        if( IS_IPHONE_4){
+            nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
+        }
+        else if ( IS_IPHONE_5) {
             nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
         }else if ( IS_IPHONE_6){
             nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController-iPhone6" bundle:nil];
         }else if ( IS_IPHONE_6_PLUS){
             nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController-iPhone6-Plus" bundle:nil];
+        } else {
+            nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
         }
         
         nbuCrop.desiredImageSize = self.desiredImageSize;
