@@ -44,12 +44,14 @@
 
     // Configure grid view
     
-    if ( IS_IPHONE_5) {
+    if ( IS_IPHONE_5|| IS_IPHONE_4) {
         self.objectTableView.nibNameForViews = @"CustomAssetsGroupView";
     }else if ( IS_IPHONE_6){
         self.objectTableView.nibNameForViews = @"CustomAssetsGroupView-iPhone6";
     }else if ( IS_IPHONE_6_PLUS){
         self.objectTableView.nibNameForViews = @"CustomAssetsGroupView-iPhone6-Plus";
+    } else {
+        self.objectTableView.nibNameForViews = @"CustomAssetsGroupView";
     }
     
     // Customization

@@ -313,7 +313,7 @@
     
     [cell setAccessoryType:UITableViewCellAccessoryNone];
     if (cell == nil) {
-        if( IS_IPHONE_5 ){
+        if( IS_IPHONE_5 || IS_IPHONE_4){
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell" owner:self options:nil];
             cell = (SaveFlyerCell *)[nib objectAtIndex:0];
         } else if ( IS_IPHONE_6 ){
@@ -322,7 +322,11 @@
         } else if ( IS_IPHONE_6_PLUS ) {
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell-iPhone6-Plus" owner:self options:nil];
             cell = (SaveFlyerCell *)[nib objectAtIndex:0];
+        } else {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell" owner:self options:nil];
+            cell = (SaveFlyerCell *)[nib objectAtIndex:0];
         }
+        
         
     }
     
@@ -450,7 +454,7 @@
     
     if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
         inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
-    }else {
+    } else {
         inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
     }
     

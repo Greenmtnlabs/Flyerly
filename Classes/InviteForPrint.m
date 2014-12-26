@@ -428,7 +428,7 @@
     static NSString *cellId = @"InviteCell";
     InviteFriendsCell *cell = (InviteFriendsCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
     
-    if( IS_IPHONE_5 ){
+    if( IS_IPHONE_5 || IS_IPHONE_4){
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InviteFriendsCell" owner:self options:nil];
         cell = (InviteFriendsCell *)[nib objectAtIndex:0];
     } else if ( IS_IPHONE_6 ){
@@ -436,6 +436,9 @@
         cell = (InviteFriendsCell *)[nib objectAtIndex:0];
     } else if ( IS_IPHONE_6_PLUS ) {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InviteFreindsCell-iPhone6-Plus" owner:self options:nil];
+        cell = (InviteFriendsCell *)[nib objectAtIndex:0];
+    } else {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InviteFriendsCell" owner:self options:nil];
         cell = (InviteFriendsCell *)[nib objectAtIndex:0];
     }
     

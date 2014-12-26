@@ -43,8 +43,7 @@
     
     if( IS_IPHONE_4){
         self.gridView.nibNameForViews = @"CustomAssetThumbnailView";
-    }
-    else if ( IS_IPHONE_5) {
+    } else if ( IS_IPHONE_5) {
         self.gridView.nibNameForViews = @"CustomAssetThumbnailView";
     }else if ( IS_IPHONE_6){
         self.gridView.nibNameForViews = @"CustomAssetThumbnailView-iPhone6";
@@ -187,8 +186,7 @@
                 CropVideoViewController *cropVideo;
                 if( IS_IPHONE_4){
                     cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
-                }
-                else if ( IS_IPHONE_5) {
+                } else if ( IS_IPHONE_5) {
                     cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
                 }else if ( IS_IPHONE_6){
                     cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController-iPhone6" bundle:nil];
@@ -227,8 +225,7 @@
         
         if( IS_IPHONE_4){
             nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
-        }
-        else if ( IS_IPHONE_5) {
+        } else if ( IS_IPHONE_5) {
             nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
         }else if ( IS_IPHONE_6){
             nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController-iPhone6" bundle:nil];

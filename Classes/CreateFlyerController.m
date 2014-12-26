@@ -202,7 +202,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 473, 320, 50)];
             
             if ( bannerAdDismissBtn == nil ){
-            bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(296, 5, 23, 23)];
+                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(296, 5, 23, 23)];
             }
         } else if ( IS_IPHONE_6 ){
             
@@ -220,6 +220,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             }
         }else {
             layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,60)];
+            if ( bannerAdDismissBtn == nil ){
+                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(296, 5, 23, 23)];
+            }
         }
     
         [bannerAdDismissBtn addTarget:self action:@selector(dissmisBannerAddOnTap) forControlEvents:UIControlEventTouchUpInside];
@@ -530,6 +533,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     customAdSize = GADAdSizeFromCGSize(CGSizeMake(420, 50));
                 }else if ( IS_IPHONE_6_PLUS ){
                     customAdSize = GADAdSizeFromCGSize(CGSizeMake(520, 50));
+                } else{
+                    customAdSize = GADAdSizeFromCGSize(CGSizeMake(320, 50));
                 }
                 
                 
@@ -550,6 +555,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds-iPhone6" owner:self options:nil];
                 }else if ( IS_IPHONE_6_PLUS){
                     flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds-iPhone6-Plus" owner:self options:nil];
+                } else {
+                    flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds" owner:self options:nil];
                 }
                 backgroundsView = [flyerbackgroundsViewArray objectAtIndex:0];
                 
@@ -560,7 +567,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     flyerBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders-iPhone6" owner:self options:nil];
                 }else if ( IS_IPHONE_6_PLUS){
                     flyerBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders-iPhone6-Plus" owner:self options:nil];
+                } else {
+                    flyerBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders" owner:self options:nil];
                 }
+                
                 flyerBordersView = [flyerBordersViewArray objectAtIndex:0];
                 
                 [self addFontsInSubView];
@@ -572,6 +582,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours-iPhone6" owner:self options:nil];
                 }else if ( IS_IPHONE_6_PLUS){
                     fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours-iPhone6-Plus" owner:self options:nil];
+                } else {
+                    fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours" owner:self options:nil];
                 }
                 colorsView = [fontColorsViewArray objectAtIndex:0];
                 
@@ -583,6 +595,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns-iPhone6" owner:self options:nil];
                 }else if ( IS_IPHONE_6_PLUS){
                     drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns-iPhone6-Plus" owner:self options:nil];
+                } else {
+                    drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns" owner:self options:nil];
                 }
                 drawingPatternsView = [drawingPatternsViewArray objectAtIndex:0];
                 
@@ -593,7 +607,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     drawingEraserMsgViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingEraserMsg-iPhone6" owner:self options:nil];
                 }else if ( IS_IPHONE_6_PLUS){
                     drawingEraserMsgViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingEraserMsg-iPhone6" owner:self options:nil];
+                } else {
+                    drawingEraserMsgViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingEraserMsg" owner:self options:nil];
                 }
+                
                 drawingEraserMsgView = [drawingEraserMsgViewArray objectAtIndex:0];
                 [self setLabelsAfterXibsLoad];
                 
@@ -604,7 +621,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes-iPhone6" owner:self options:nil];
                 }else if ( IS_IPHONE_6_PLUS){
                     fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes-iPhone6-Plus" owner:self options:nil];
+                } else {
+                    fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes" owner:self options:nil];
                 }
+                
                 sizesView = [fontSizesViewArray objectAtIndex:0];
                 
                 NSArray *textBordersViewArray;
@@ -614,7 +634,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders-iPhone6" owner:self options:nil];
                 }else if ( IS_IPHONE_6_PLUS){
                     textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders-iPhone6-Plus" owner:self options:nil];
+                } else {
+                    textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders" owner:self options:nil];
                 }
+                
                 textBordersView = [textBordersViewArray objectAtIndex:0];
                 
                 [self addClipArtsInSubView];
@@ -623,7 +646,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [self addDrawingInSubView];
                 
                 
-            } else {
+            }
+            else {
                 
                 [self dissmisBannerAdd:NO];
                 
@@ -5228,7 +5252,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             currentLayer = [flyer addImage];
             
             CGRect imageFrame;
-            if ( IS_IPHONE_5) {
+            if ( IS_IPHONE_5 || IS_IPHONE_4) {
                 imageFrame = CGRectMake(55,10,200,200);
             }else if ( IS_IPHONE_6){
                 imageFrame = CGRectMake(90,10,200,200);
