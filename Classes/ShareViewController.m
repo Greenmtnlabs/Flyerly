@@ -344,7 +344,7 @@
     
     //Here we Update Flyer Discription in .txt File
     [flyer setFlyerDescription:descriptionView.text];
-    selectedFlyerDescription = descriptionView.text;
+    [self updateDescription];
  }
 
 - (void)textFieldFinished:(id)sender {
@@ -386,6 +386,8 @@
  */
 -(IBAction)uploadOnYoutube:(id)sender {
     
+    [self updateDescription];
+    
     if ([FlyerlySingleton connected]) {
         SHKItem *item = [SHKItem filePath:[self.flyer getSharingVideoPath] title:titleView.text];
         
@@ -406,7 +408,8 @@
  * Called when twitter button is pressed
  */
 -(IBAction)onClickTwitterButton{
-    
+
+    [self updateDescription];
     
     SHKItem *item;
     if ([self.flyer isVideoFlyer]) {
@@ -442,6 +445,8 @@
  */
 -(IBAction)onClickTumblrButton{
     
+    [self updateDescription];
+    
     // Current Item For Sharing
     SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@", selectedFlyerDescription ]];
     
@@ -470,6 +475,7 @@
  */
 -(IBAction)onClickFlickrButton{
     
+    [self updateDescription];
     
     //UIViewController* parent = (UIViewController*)[self presentedViewController];
     //[parent someMethod:YES];
