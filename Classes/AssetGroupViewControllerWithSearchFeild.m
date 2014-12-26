@@ -642,12 +642,14 @@ shouldReloadTableForSearchString:(NSString *)searchString
                 
                 CropViewController *nbuCrop;
                 
-                if ( IS_IPHONE_5) {
+                if ( IS_IPHONE_5 || IS_IPHONE_4) {
                     nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
                 }else if ( IS_IPHONE_6){
                     nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController-iPhone6" bundle:nil];
                 }else if ( IS_IPHONE_6_PLUS){
                     nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController-iPhone6-Plus" bundle:nil];
+                }else { 
+                    nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
                 }
                 
                 nbuCrop.desiredImageSize = self.desiredImageSize;
