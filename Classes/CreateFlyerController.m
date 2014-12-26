@@ -129,7 +129,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     self.flyimgView.addUiImgForDrawingLayer = NO;//must set:NO after renderFlyer all layers first time
     
     //Set Context View
-    //[self addAllLayersIntoScrollView];
+    [self addAllLayersIntoScrollView];
     
     NSString *title = [flyer getFlyerTitle];
     
