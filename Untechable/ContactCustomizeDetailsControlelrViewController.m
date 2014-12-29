@@ -10,11 +10,13 @@
 #import "FirstTableViewCell.h"
 #import "PhoneNumberCell.h"
 #import "EmailCell.h"
+#import "CustomTextTableViewCell.h"
 #import "Common.h"
 
 @interface ContactCustomizeDetailsControlelrViewController (){
 
     int rowsInFirstSection,rowsInSecondSection;
+    NSArray *phoneNumberTypes;
 }
 @property (weak, nonatomic) IBOutlet UITableView *contactDetailsTable;
 
@@ -22,10 +24,15 @@
 
 @implementation ContactCustomizeDetailsControlelrViewController
 
-@synthesize contactModal;
+@synthesize contactModal,untechable;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setNavigationDefaults];
+    [self setNavigation:@"viewDidLoad"];
+
+    phoneNumberTypes = [contactModal.allPhoneNumbers allKeys];
     
     _contactDetailsTable.delegate = self;
     _contactDetailsTable.dataSource = self;
@@ -37,6 +44,84 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark -  Navigation functions
+- (void)setNavigationDefaults{
+    
+    /*
+     NSDateFormatter *df = [[NSDateFormatter alloc] init];
+     [df setDateFormat:@"EEEE, dd MMMM yyyy HH:mm"];
+     NSDate *date = [df dateFromString:@"Sep 25, 2014 05:27 PM"];
+     NSLog(@"\n\n  DATE: %@ \n\n\n", date);
+     */
+    
+    defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
+    defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
+    
+    [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+}
+
+-(void)setNavigation:(NSString *)callFrom
+{
+    if([callFrom isEqualToString:@"viewDidLoad"])
+    {
+        self.navigationItem.hidesBackButton = YES;
+        
+        // Center title __________________________________________________
+        self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
+        
+        // Back Navigation button
+        backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        backButton.titleLabel.shadowColor = [UIColor clearColor];
+        backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitleColor:defGray forState:UIControlStateNormal];
+        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
+        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+        backButton.showsTouchWhenHighlighted = YES;
+        
+        UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        
+        [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+        
+        // Right Navigation ______________________________________________
+        nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        //[nextButton setBackgroundColor:[UIColor redColor]];//for testing
+        
+        nextButton.titleLabel.shadowColor = [UIColor clearColor];
+        //nextButton.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
+        
+        [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
+        //[nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
+        nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
+        [nextButton setTitleColor:defGray forState:UIControlStateNormal];
+        [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
+        [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
+        
+        nextButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
+        
+        [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
+    }
+}
+
+-(void) goBack {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)btnNextTouchStart{
+    [self setNextHighlighted:YES];
+}
+-(void)btnNextTouchEnd{
+    [self setNextHighlighted:NO];
+}
+- (void)setNextHighlighted:(BOOL)highlighted {
+    (highlighted) ? [nextButton setBackgroundColor:defGreen] : [nextButton setBackgroundColor:[UIColor clearColor]];
+}
+
+
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
@@ -44,11 +129,11 @@
     if ( section == 0 ){
         numberOfRowsInSection = 1;
     }else if ( section == 1 ){
-        numberOfRowsInSection = 1;
+        numberOfRowsInSection = (int)contactModal.allPhoneNumbers.count;
     }else if ( section == 2 ){
         numberOfRowsInSection = (int)contactModal.allEmails.count;
     }else if ( section == 3 ){
-        numberOfRowsInSection = 0;
+        numberOfRowsInSection = 1;
     }
     //return sectionHeader;
     return  numberOfRowsInSection;
@@ -65,7 +150,7 @@
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"FirstTableViewCell" owner:self options:nil];
         cell = (FirstTableViewCell *)[nib objectAtIndex:0];
         
-        [cell setCellValues:contactModal.name];
+        [cell setCellValues:contactModal.name ContactModal:contactModal];
         
         return cell;
     }else if ( indexPath.section == 1 ){
@@ -75,28 +160,15 @@
         
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PhoneNumberCell" owner:self options:nil];
         cell = (PhoneNumberCell *)[nib objectAtIndex:0];
+
+        [cell setCellValues:[phoneNumberTypes objectAtIndex:indexPath.row] Number:[contactModal.allPhoneNumbers objectForKey:[phoneNumberTypes objectAtIndex:indexPath.row]]];
         
-        if ( contactModal.mobileNumber != nil ){
-            
-            [cell setCellValues:@"Mobile" Number:contactModal.mobileNumber];
-        }
+        cell.untechable = untechable;
         
-        if( contactModal.iPhoneNumber != nil ){
-            
-            [cell setCellValues:@"iPhoneNumber" Number:contactModal.iPhoneNumber];
-        }
-        
-        if( contactModal.homeNumber != nil ){
-            
-            [cell setCellValues:@"homeNumber" Number:contactModal.homeNumber];
-        }
-        
-        if( contactModal.workNumber != nil ){
-            
-            [cell setCellValues:@"workNumber" Number:contactModal.workNumber];
-        }
+        [cell setCellModal:contactModal];
         
         return cell;
+        
     }else if ( indexPath.section == 2 ){
         
         static NSString *cellId = @"EmailCell";
@@ -109,10 +181,24 @@
         
         [cell setCellValues: [aar objectAtIndex:indexPath.row]];
         
+        cell.untechable = untechable;
+        
+        [cell setCellModal:contactModal];
+        
         return cell;
+        
     }else if ( indexPath.section == 3 ){
         
-        UITableViewCell *cell = nil;
+        static NSString *cellId = @"CustomText";
+        CustomTextTableViewCell *cell = (CustomTextTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
+        
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CustomTextTableViewCell" owner:self options:nil];
+        cell = (CustomTextTableViewCell *)[nib objectAtIndex:0];
+        
+        [cell setCellValues: untechable.spendingTimeTxt];
+        
+        [cell setCellModal:contactModal];
+        
         return cell;
     }
     
@@ -121,7 +207,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 4;
 }
 
 

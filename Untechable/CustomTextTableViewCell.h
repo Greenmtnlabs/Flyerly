@@ -1,8 +1,8 @@
 //
-//  EmailCell.h
+//  CustomTextTableViewCell.h
 //  Untechable
 //
-//  Created by RIKSOF Developer on 12/26/14.
+//  Created by RIKSOF Developer on 12/29/14.
 //  Copyright (c) 2014 Green MTN Labs Inc. All rights reserved.
 //
 
@@ -10,15 +10,13 @@
 #import "Untechable.h"
 #import "ContactsCustomizedModal.h"
 
-@interface EmailCell : UITableViewCell
-
-@property (nonatomic,strong)IBOutlet UILabel *email;
+@interface CustomTextTableViewCell : UITableViewCell
 
 @property (nonatomic,strong)  Untechable *untechable;
 
--(void)setCellValues :(NSString *)email;
+@property (nonatomic,strong)IBOutlet UITextView *customText;
 
--(void)setCellValues :(ContactsCustomizedModal *) contactModal Number:(int)phoneNumber;
+-(void)setCellValues :(NSString *)message;
 
 -(void)setCellModal :(ContactsCustomizedModal *)contactModal;
 

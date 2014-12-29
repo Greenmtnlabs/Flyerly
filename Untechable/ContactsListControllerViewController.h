@@ -8,12 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import <AddressBookUI/AddressBookUI.h>
+#import "Untechable.h"
 #import <AddressBook/AddressBook.h>
 
 
 @interface ContactsListControllerViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
 
+    UIButton *backButton;
+    UIButton *nextButton;
+    UIColor *defGreen;//GREEN
+    UIColor *defGray;//GRAY
+    
 }
+
+@property (nonatomic,strong)  Untechable *untechable;
 
 @property(nonatomic,strong) NSMutableArray *contactModalsArray;
 @property(nonatomic,strong) NSMutableArray *contactsArray;

@@ -46,6 +46,8 @@
 		248E06B71A4ACD6E0099846A /* ContactsCustomizedModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 248E06B61A4ACD6E0099846A /* ContactsCustomizedModal.m */; };
 		248E06BB1A4AD8BA0099846A /* ContactListCell-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 248E06BA1A4AD8BA0099846A /* ContactListCell-iPhone6.xib */; };
 		248E06BD1A4AD9180099846A /* ContactListCell-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 248E06BC1A4AD9180099846A /* ContactListCell-iPhone6-Plus.xib */; };
+		24A4B7A71A5126410029C8DF /* CustomTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A4B7A51A5126410029C8DF /* CustomTextTableViewCell.m */; };
+		24A4B7A81A5126410029C8DF /* CustomTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A4B7A61A5126410029C8DF /* CustomTextTableViewCell.xib */; };
 		24A65BEC1A30451E00BE83C6 /* SSLCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A65BEA1A30451E00BE83C6 /* SSLCell.m */; };
 		24A65BED1A30451E00BE83C6 /* SSLCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A65BEB1A30451E00BE83C6 /* SSLCell.xib */; };
 		24BAB1841A2F0DF900855B77 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BAB1831A2F0DF900855B77 /* SystemConfiguration.framework */; };
@@ -215,6 +217,9 @@
 		248E06B61A4ACD6E0099846A /* ContactsCustomizedModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsCustomizedModal.m; sourceTree = "<group>"; };
 		248E06BA1A4AD8BA0099846A /* ContactListCell-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ContactListCell-iPhone6.xib"; sourceTree = "<group>"; };
 		248E06BC1A4AD9180099846A /* ContactListCell-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ContactListCell-iPhone6-Plus.xib"; sourceTree = "<group>"; };
+		24A4B7A41A5126410029C8DF /* CustomTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTextTableViewCell.h; sourceTree = "<group>"; };
+		24A4B7A51A5126410029C8DF /* CustomTextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTextTableViewCell.m; sourceTree = "<group>"; };
+		24A4B7A61A5126410029C8DF /* CustomTextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTextTableViewCell.xib; sourceTree = "<group>"; };
 		24A65BE91A30451E00BE83C6 /* SSLCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSLCell.h; sourceTree = "<group>"; };
 		24A65BEA1A30451E00BE83C6 /* SSLCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSLCell.m; sourceTree = "<group>"; };
 		24A65BEB1A30451E00BE83C6 /* SSLCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSLCell.xib; sourceTree = "<group>"; };
@@ -429,6 +434,9 @@
 				243C59FB1A4DA17C0020350C /* EmailCell.h */,
 				243C59FC1A4DA17C0020350C /* EmailCell.m */,
 				243C59FD1A4DA17C0020350C /* EmailCell.xib */,
+				24A4B7A41A5126410029C8DF /* CustomTextTableViewCell.h */,
+				24A4B7A51A5126410029C8DF /* CustomTextTableViewCell.m */,
+				24A4B7A61A5126410029C8DF /* CustomTextTableViewCell.xib */,
 			);
 			name = ContactCustomizeDetailsControlelr;
 			sourceTree = "<group>";
@@ -923,6 +931,7 @@
 				24354D6C1A499EC5000EC781 /* ContactsListControllerViewController.xib in Resources */,
 				366EAFA41A14C3530011D6C6 /* logo.png in Resources */,
 				36B2765F1A0124E800ED58AD /* CHECKBOX_FILLED@2x.png in Resources */,
+				24A4B7A81A5126410029C8DF /* CustomTextTableViewCell.xib in Resources */,
 				36474F2219D9780100084F34 /* Pigiarniq Bold.ttf in Resources */,
 				366EAF921A14C3530011D6C6 /* icon-50.png in Resources */,
 				248E06BD1A4AD9180099846A /* ContactListCell-iPhone6-Plus.xib in Resources */,
@@ -1064,6 +1073,7 @@
 				366ECD9619D323DA00F71A11 /* AddUntechableController.m in Sources */,
 				36B4E53E1A28BBD400CC18B0 /* EmailTableViewCell.m in Sources */,
 				36B275D71A00D36400ED58AD /* RMStore.m in Sources */,
+				24A4B7A71A5126410029C8DF /* CustomTextTableViewCell.m in Sources */,
 				366F9DAA1A124FC7006602E1 /* FHSStream.m in Sources */,
 				243C59F91A4D984B0020350C /* PhoneNumberCell.m in Sources */,
 				3681603C19E6B81E00B9B64C /* ContactsModel.m in Sources */,

@@ -7,11 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Untechable.h"
 #import "ContactsCustomizedModal.h"
 
 @interface ContactCustomizeDetailsControlelrViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>{
     
+    UIButton *backButton;
+    UIButton *nextButton;
+    UIColor *defGreen;//GREEN
+    UIColor *defGray;//GRAY
+    
 }
+
+@property (nonatomic,strong)  Untechable *untechable;
 
 @property (nonatomic,strong)  ContactsCustomizedModal *contactModal;
 

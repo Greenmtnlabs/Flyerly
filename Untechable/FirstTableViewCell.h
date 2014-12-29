@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Untechable.h"
+#import "ContactsCustomizedModal.h"
 
 @interface FirstTableViewCell : UITableViewCell
+
+@property (nonatomic,strong)  Untechable *untechable;
 
 @property (nonatomic,strong)IBOutlet UILabel *contactName;
 @property (nonatomic,strong)IBOutlet UIImageView *contactImage;
 
--(void)setCellValues :(NSString *)contactName;
+-(void)setCellValues :(NSString *)contactName ContactModal:(ContactsCustomizedModal *) contactModal;
 
 @end

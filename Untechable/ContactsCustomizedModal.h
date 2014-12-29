@@ -26,17 +26,20 @@
 @property (nonatomic,strong)NSString *name;
 
 @property (nonatomic,strong)NSString *mobileNumber;
+@property (nonatomic,strong)NSString *mainNumber;
 @property (nonatomic,strong)NSString *iPhoneNumber;
 @property (nonatomic,strong)NSString *homeNumber;
 @property (nonatomic,strong)NSString *workNumber;
 
 @property (nonatomic,strong)NSMutableArray *allEmails;
+@property (nonatomic,strong)NSMutableDictionary *allPhoneNumbers;
+@property (nonatomic,strong)NSMutableArray *phoneNumbersStatus;
 
 @property (nonatomic,strong)NSString *description;
 @property (nonatomic,strong)NSString *others;
 @property (nonatomic,strong)UIImage *img;
 @property (nonatomic,strong)NSString *imageUrl;
-@property (nonatomic,strong) NSString *checkImageName;
+@property (nonatomic,strong)NSString *checkImageName;
 @property (nonatomic,assign)int status;
 //--- Address
 @property (nonatomic,strong)NSString *streetAddress;

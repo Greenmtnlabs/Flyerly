@@ -21,7 +21,7 @@
 @synthesize timezoneOffset, spendingTimeTxt, startDate, endDate, hasEndDate;
 
 //2-vars for screen2
-@synthesize twillioNumber, location, emergencyContacts, emergencyNumber, hasRecording;
+@synthesize customizedContacts,twillioNumber, location, emergencyContacts, emergencyNumber, hasRecording;
 
 //3-vars for screen3
 @synthesize socialStatus, fbAuth, fbAuthExpiryTs, twitterAuth, twOAuthTokenSecret, linkedinAuth;

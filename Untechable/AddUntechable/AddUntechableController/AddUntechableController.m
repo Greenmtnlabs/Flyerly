@@ -234,9 +234,11 @@
         
     }
 }
+
 -(void) goBack {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 -(void)btnNextTouchStart{
     [self setNextHighlighted:YES];
 }
@@ -278,7 +280,7 @@
     if( goToNext ) {
         
         ContactsListControllerViewController *listController = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
-        //listController.untechable = untechable;
+        listController.untechable = untechable;
         [self.navigationController pushViewController:listController animated:YES];
         
         /*PhoneSetupController *phoneSetup;

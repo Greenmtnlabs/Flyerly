@@ -21,11 +21,14 @@
 
 @implementation ContactsListControllerViewController
 
-@synthesize contactModalsArray,contactsArray,contactBackupArray,searchTextField,selectedIdentifiers;
+@synthesize contactModalsArray,contactsArray,contactBackupArray,searchTextField,selectedIdentifiers,untechable;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    [self setNavigationDefaults];
+    [self setNavigation:@"viewDidLoad"];
     
     _contactsTable.delegate = self;
     _contactsTable.dataSource = self;
@@ -35,6 +38,83 @@
     
     // Load device contacts
     [self loadLocalContacts];
+}
+
+#pragma mark -  Navigation functions
+- (void)setNavigationDefaults{
+    
+    /*
+     NSDateFormatter *df = [[NSDateFormatter alloc] init];
+     [df setDateFormat:@"EEEE, dd MMMM yyyy HH:mm"];
+     NSDate *date = [df dateFromString:@"Sep 25, 2014 05:27 PM"];
+     NSLog(@"\n\n  DATE: %@ \n\n\n", date);
+     */
+    
+    defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
+    defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
+    
+    [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+}
+
+-(void)setNavigation:(NSString *)callFrom
+{
+    if([callFrom isEqualToString:@"viewDidLoad"])
+    {
+        self.navigationItem.hidesBackButton = YES;
+        
+        // Center title __________________________________________________
+        self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
+        
+        // Back Navigation button
+        backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        backButton.titleLabel.shadowColor = [UIColor clearColor];
+        backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitleColor:defGray forState:UIControlStateNormal];
+        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
+        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+        backButton.showsTouchWhenHighlighted = YES;
+        
+        UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        
+        [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+        
+        // Right Navigation ______________________________________________
+        nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        //[nextButton setBackgroundColor:[UIColor redColor]];//for testing
+        
+        nextButton.titleLabel.shadowColor = [UIColor clearColor];
+        //nextButton.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
+        
+        [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
+        //[nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
+        nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
+        [nextButton setTitleColor:defGray forState:UIControlStateNormal];
+        [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
+        [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
+        
+        nextButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
+        
+        [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
+    }
+}
+
+-(void) goBack {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)btnNextTouchStart{
+    [self setNextHighlighted:YES];
+}
+-(void)btnNextTouchEnd{
+    [self setNextHighlighted:NO];
+}
+- (void)setNextHighlighted:(BOOL)highlighted {
+    (highlighted) ? [nextButton setBackgroundColor:defGreen] : [nextButton setBackgroundColor:[UIColor clearColor]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -301,35 +381,39 @@
         contactModal.allEmails = allEmails;
         
         //For Phone number
+         NSMutableDictionary *allNumbers = [[NSMutableDictionary alloc] initWithCapacity:CFArrayGetCount(allPeople)];
         NSString* mobileLabel;
         
         for(CFIndex i = 0; i < ABMultiValueGetCount(phones); i++) {
             
             mobileLabel = (NSString*)CFBridgingRelease(ABMultiValueCopyLabelAtIndex(phones, i));
-            if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
+            
+            if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMainLabel])
             {
-                contactModal.mobileNumber = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                
+                [allNumbers setObject:(NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i)) forKey:@"Main"];
             }
             
+            if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
+            {
+                [allNumbers setObject:(NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i)) forKey:@"Mobile"];
+            }
             
             if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel])
             {
-                contactModal.iPhoneNumber = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                
+                [allNumbers setObject:(NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i)) forKey:@"iPhoneNumber"];
             }
             
             if ([mobileLabel isEqualToString:(NSString*)kABHomeLabel])
             {
-                contactModal.homeNumber = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-               
+                [allNumbers setObject:(NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i)) forKey:@"Home"];
             }
             
             if ([mobileLabel isEqualToString:(NSString*)kABWorkLabel])
             {
-                contactModal.workNumber = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                
+                [allNumbers setObject:(NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i)) forKey:@"Work"];
             }
+            
+            contactModal.allPhoneNumbers = allNumbers;
             
             [contactsArray addObject:contactModal];
         }
@@ -347,6 +431,7 @@
     
     ContactCustomizeDetailsControlelrViewController *detailsController = [[ContactCustomizeDetailsControlelrViewController alloc] init];
     
+    detailsController.untechable = untechable;
     detailsController.contactModal = [contactsArray objectAtIndex:indexPath.row];
     
     [self.navigationController pushViewController:detailsController animated:YES];

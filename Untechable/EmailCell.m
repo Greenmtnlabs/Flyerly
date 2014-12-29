@@ -8,13 +8,22 @@
 
 #import "EmailCell.h"
 
+ContactsCustomizedModal *contactModal_;
+
 @implementation EmailCell
+
+@synthesize untechable;
 
 -(void)setCellValues :(NSString *)email {
     
     //NSMutableArray *alLEmails = [[NSMutableArray alloc] initWithArray:allEmail];
     self.email.text = email;
     
+}
+
+-(void)setCellModal :(ContactsCustomizedModal *)contactModal{
+
+    contactModal_ = contactModal;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
