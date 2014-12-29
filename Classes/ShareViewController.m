@@ -55,9 +55,9 @@
         }
     } else { //Photo
         if ( IS_IPHONE_4 ) {
-            sizeForDesc = CGRectMake(10, 73, 298, 67);
+            sizeForDesc = CGRectMake(10, 69, 298, 67);
         } else if ( IS_IPHONE_5 ) {
-            sizeForDesc = CGRectMake(10, 73, 298, 67);
+            sizeForDesc = CGRectMake(10, 69, 298, 67);
         } else if ( IS_IPHONE_6 ) {
             sizeForDesc = CGRectMake(12, 79, 345, 78);
         } else if( IS_IPHONE_6_PLUS ) {
