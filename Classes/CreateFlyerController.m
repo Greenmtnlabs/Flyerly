@@ -475,6 +475,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }else if ( IS_IPHONE_6 ){
             shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController-iPhone6" bundle:nil];
         }
+        shareviewcontroller.cfController = self;
         
         sharePanel = shareviewcontroller.view;
         sharePanel.hidden = YES;
@@ -4346,7 +4347,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             }
             
         }
-        
         shareviewcontroller.cfController = self;
         
         sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];

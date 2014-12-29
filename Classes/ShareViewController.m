@@ -40,17 +40,31 @@
     
     //Default iPhon4
     CGRect sizeForDesc = CGRectMake((titleView.frame.origin.x-6), (titleView.frame.origin.y+titleView.frame.size.height+4), (titleView.frame.size.width+6), 67);
-    
-    if ( IS_IPHONE_4 ) {
-        sizeForDesc = CGRectMake(10, 100, 298, 67);
-    } else if ( IS_IPHONE_5 ) {
-        sizeForDesc = CGRectMake(10, 100, 298, 67);
-    } else if ( IS_IPHONE_6 ) {
-        sizeForDesc = CGRectMake(12, 79, 345, 78);
-    } else if( IS_IPHONE_6_PLUS ) {
-        sizeForDesc = CGRectMake(13, 79, 391, 83);
-    } else {
-        sizeForDesc = CGRectMake(10, 100, 298, 67);
+
+    if ( [[self.cfController.flyer getFlyerTypeVideo] isEqualToString:@"video"] ){
+        if ( IS_IPHONE_4 ) {
+            sizeForDesc = CGRectMake(10, 70, 298, 67);
+        } else if ( IS_IPHONE_5 ) {
+            sizeForDesc = CGRectMake(10, 70, 298, 67);
+        } else if ( IS_IPHONE_6 ) {
+            sizeForDesc = CGRectMake(12, 79, 345, 78);
+        } else if( IS_IPHONE_6_PLUS ) {
+            sizeForDesc = CGRectMake(13, 79, 391, 83);
+        } else {
+            sizeForDesc = CGRectMake(10, 70, 298, 67);
+        }
+    } else { //Photo
+        if ( IS_IPHONE_4 ) {
+            sizeForDesc = CGRectMake(10, 73, 298, 67);
+        } else if ( IS_IPHONE_5 ) {
+            sizeForDesc = CGRectMake(10, 73, 298, 67);
+        } else if ( IS_IPHONE_6 ) {
+            sizeForDesc = CGRectMake(12, 79, 345, 78);
+        } else if( IS_IPHONE_6_PLUS ) {
+            sizeForDesc = CGRectMake(13, 79, 391, 83);
+        } else {
+            sizeForDesc = CGRectMake(10, 70, 298, 67);
+        }
     }
     
     descriptionView = [[UIPlaceHolderTextView alloc] initWithFrame:sizeForDesc];
