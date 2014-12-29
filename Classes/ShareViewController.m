@@ -56,11 +56,13 @@
     descriptionView = [[UIPlaceHolderTextView alloc] initWithFrame:sizeForDesc];
     
     descriptionView.placeholder = @"Add a comment (example: \"Show this flyer for a free drink at the bar from 4pm-7pm\")";
-    /*
-    descriptionView.placeholderColor = [UIColor colorWithWhite: 0.80 alpha:1];
-    descriptionView.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
-    descriptionView.textColor = [UIColor darkGrayColor];
-     */
+    
+    if ( IS_IPHONE_4 ) {
+        descriptionView.placeholderColor = [UIColor colorWithWhite: 0.80 alpha:1];
+        descriptionView.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
+        descriptionView.textColor = [UIColor darkGrayColor];
+    }
+    
        [descriptionView awakeFromNib];
     descriptionView.delegate = self;
     
