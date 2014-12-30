@@ -11,7 +11,7 @@
 
 @implementation ShareViewController
 
-@synthesize Yvalue,rightUndoBarButton,shareButton,helpButton,selectedFlyerImage,fvController,titleView,cfController,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,printFlyerButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,lblFirstShareOnYoutube;
+@synthesize Yvalue,rightUndoBarButton,shareButton,helpButton,selectedFlyerImage,fvController,titleView,cfController,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,printFlyerButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,lblFirstShareOnYoutube,tempTxtArea;
 
 @synthesize flyerShareType,star1,star2,star3,star4,star5;
 
@@ -47,11 +47,11 @@
         } else if ( IS_IPHONE_5 ) {
             sizeForDesc = CGRectMake(10, 96, 298, 67);
         } else if ( IS_IPHONE_6 ) {
-            sizeForDesc = CGRectMake(12, 79, 345, 78);
+            sizeForDesc = CGRectMake(9, 76, 350, 60);
         } else if( IS_IPHONE_6_PLUS ) {
             sizeForDesc = CGRectMake(13, 79, 391, 83);
         } else {
-            sizeForDesc = CGRectMake(10, 70, 298, 67);
+            sizeForDesc = CGRectMake(10, 96, 298, 67);
         }
     } else { //Photo
         if ( IS_IPHONE_4 ) {
@@ -59,12 +59,12 @@
         } else if ( IS_IPHONE_5 ) {
             sizeForDesc = CGRectMake(10, 96, 298, 67);
         } else if ( IS_IPHONE_6 ) {
-            sizeForDesc = CGRectMake(12, 79, 345, 78);
+            sizeForDesc = CGRectMake(10, 82, 350, 60);
         } else if( IS_IPHONE_6_PLUS ) {
-            sizeForDesc = CGRectMake(13, 79, 391, 83);
+            sizeForDesc = CGRectMake(13, 79, 391, 67);
         } else {
             
-            sizeForDesc = CGRectMake(10, 70, 298, 67);
+            sizeForDesc = CGRectMake(10, 96, 298, 67);
         }
     }
     

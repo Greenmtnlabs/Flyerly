@@ -86,7 +86,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  */
 -(void)setWaterMarkLayerPosition {
     
-    if ( IS_IPHONE_6 || IS_IPHONE_4 ){
+    if ( IS_IPHONE_4 ||  IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
         NSArray *sortedLayers = [flyer allKeys];
         if ( sortedLayers.count == 2 ){
             
@@ -102,6 +102,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     else if( IS_IPHONE_6 ) {
                         [dic setObject:@"280.0" forKey:@"tx"];
                         [dic setObject:@"330.0" forKey:@"ty"];
+                    }
+                    else if( IS_IPHONE_6_PLUS ) {
+                        [dic setObject:@"310.0" forKey:@"tx"];
+                        [dic setObject:@"360.0" forKey:@"ty"];
                     }
                     
                     [dic setObject:@"1" forKey:@"flyerOpenTime"];
@@ -4334,7 +4338,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         if ([flyer isVideoFlyer]) {
             if ( IS_IPHONE_5 || IS_IPHONE_4) {
             shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareVideoViewController" bundle:nil];
-            }else if ( IS_IPHONE_6) {
+            }else if ( IS_IPHONE_6 || IS_IPHONE_6_PLUS ) {
                 shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareVideoViewController-iPhone6" bundle:nil];
             }
             
@@ -4342,7 +4346,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             
             if ( IS_IPHONE_5 || IS_IPHONE_4) {
                 shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
-            }else if ( IS_IPHONE_6) {
+            }else if ( IS_IPHONE_6  || IS_IPHONE_6_PLUS ) {
                 shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController-iPhone6" bundle:nil];
             }
             

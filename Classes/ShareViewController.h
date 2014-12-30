@@ -86,6 +86,8 @@
 @property (weak, nonatomic) id<SHKSharerDelegate> delegate;
 
 @property (strong, nonatomic) NSTimer *timer;
+@property (strong, nonatomic) IBOutlet UITextView *tempTxtArea;
+
 
 -(IBAction)onClickFacebookButton;
 -(IBAction)onClickTwitterButton;
