@@ -47,7 +47,7 @@
         } else if ( IS_IPHONE_5 ) {
             sizeForDesc = CGRectMake(10, 96, 298, 67);
         } else if ( IS_IPHONE_6 ) {
-            sizeForDesc = CGRectMake(9, 76, 350, 60);
+            sizeForDesc = CGRectMake(10, 75, 353, 67);
         } else if( IS_IPHONE_6_PLUS ) {
             sizeForDesc = CGRectMake(10, 79, 420, 85);
         } else {
@@ -59,7 +59,7 @@
         } else if ( IS_IPHONE_5 ) {
             sizeForDesc = CGRectMake(10, 96, 298, 67);
         } else if ( IS_IPHONE_6 ) {
-            sizeForDesc = CGRectMake(10, 82, 350, 60);
+            sizeForDesc = CGRectMake(10, 79, 355, 72);
         } else if( IS_IPHONE_6_PLUS ) {
             sizeForDesc = CGRectMake(10, 79, 420, 85);
         } else {
@@ -76,8 +76,8 @@
     descriptionView.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
     descriptionView.textColor = [UIColor darkGrayColor];
 
-    
-       [descriptionView awakeFromNib];
+    descriptionView.backgroundColor= [UIColor redColor];
+    [descriptionView awakeFromNib];
     descriptionView.delegate = self;
     
     [self.view addSubview:descriptionView];

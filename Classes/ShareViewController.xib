@@ -266,7 +266,7 @@
                     </subviews>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="26953F34-1F71-4770-BB92-07517F27874A" id="cXJ-PV-xl2" userLabel="tempTxtArea">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="AE3AC475-1F1F-4183-BA2D-72D8B97137F9" id="cXJ-PV-xl2" userLabel="tempTxtArea">
                     <rect key="frame" x="10" y="96" width="298" height="69"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -311,7 +311,7 @@
         </view>
     </objects>
     <resources>
-        <image name="26953F34-1F71-4770-BB92-07517F27874A" width="251" height="34">
+        <image name="AE3AC475-1F1F-4183-BA2D-72D8B97137F9" width="251" height="34">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
