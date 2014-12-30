@@ -75,8 +75,10 @@
     descriptionView.placeholderColor = [UIColor colorWithWhite: 0.80 alpha:1];
     descriptionView.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
     descriptionView.textColor = [UIColor darkGrayColor];
-
-    descriptionView.backgroundColor= [UIColor redColor];
+    
+    //BG color for easy testing
+    //descriptionView.backgroundColor= [UIColor redColor];
+    
     [descriptionView awakeFromNib];
     descriptionView.delegate = self;
     
