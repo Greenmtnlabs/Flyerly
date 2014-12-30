@@ -47,7 +47,7 @@
         } else if ( IS_IPHONE_5 ) {
             sizeForDesc = CGRectMake(10, 96, 298, 67);
         } else if ( IS_IPHONE_6 ) {
-            sizeForDesc = CGRectMake(10, 75, 353, 67);
+            sizeForDesc = CGRectMake(10, 79, 353, 67);
         } else if( IS_IPHONE_6_PLUS ) {
             sizeForDesc = CGRectMake(10, 79, 420, 85);
         } else {
@@ -59,7 +59,7 @@
         } else if ( IS_IPHONE_5 ) {
             sizeForDesc = CGRectMake(10, 96, 298, 67);
         } else if ( IS_IPHONE_6 ) {
-            sizeForDesc = CGRectMake(10, 79, 355, 72);
+            sizeForDesc = CGRectMake(10, 79, 353, 67);
         } else if( IS_IPHONE_6_PLUS ) {
             sizeForDesc = CGRectMake(10, 79, 420, 85);
         } else {
