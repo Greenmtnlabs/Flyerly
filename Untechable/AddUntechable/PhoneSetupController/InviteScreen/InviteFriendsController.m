@@ -147,7 +147,7 @@
     
     NSLog(@"selectedContacts %@",selectedContacts);
     untechable.emergencyContacts = selectedContacts;
-
+    
     [untechable goBack:self.navigationController];
 }
 

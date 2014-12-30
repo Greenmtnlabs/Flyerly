@@ -84,6 +84,7 @@
         
         [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
         
+        /*
         // Right Navigation ______________________________________________
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         //[nextButton setBackgroundColor:[UIColor redColor]];//for testing
@@ -103,11 +104,12 @@
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
         
-        [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
+        [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________*/
     }
 }
 
 -(void) goBack {
+    [untechable setOrSaveVars:SAVE];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -167,6 +169,12 @@
         
         [cell setCellModal:contactModal];
         
+        [cell.smsButton addTarget:self
+                   action:@selector(smsButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+
+        [cell.callButton addTarget:self
+                           action:@selector(callButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+
         return cell;
         
     }else if ( indexPath.section == 2 ){
@@ -210,6 +218,86 @@
     return 4;
 }
 
+-(IBAction)smsButtonTapped:(id) sender
+{
+    PhoneNumberCell *cell = (PhoneNumberCell *)[[sender superview] superview];
+    
+    NSLog(@"%@", cell.nubmerType.text);
+    
+    BOOL alreadyExist = NO;
+    
+    for ( int i = 0; i < untechable.customizedContacts.count; i++ ){
+        ContactsCustomizedModal *tempModal = [[ContactsCustomizedModal alloc] init];
+        
+        tempModal = [untechable.customizedContacts objectAtIndex:i];
+        
+        if ( [tempModal.name isEqualToString:contactModal.name] ){
+            
+            alreadyExist = YES;
+        }
+    }
+    
+    if ( alreadyExist ){
+        
+    }else {
+        
+        NSMutableArray *numberWithStatus = [[NSMutableArray alloc] initWithCapacity:3];
+        
+        // Phone Number at index 0 of this array
+        [numberWithStatus setObject:cell.nubmer.text atIndexedSubscript:0];
+        
+        // SMS status at index 1 of this array
+        [numberWithStatus setObject:@"1" atIndexedSubscript:1];
+        
+        NSMutableArray *phoneNumbersArray = [[NSMutableArray alloc] init];
+        
+        [phoneNumbersArray addObject:numberWithStatus];
+        
+        [contactModal.allPhoneNumbers setValue:phoneNumbersArray forKey:@"phoneNumbers"];
+        
+        NSMutableArray *customizedContactsModals = [[NSMutableArray alloc] init];
+        
+        [customizedContactsModals addObject:contactModal];
+        
+        untechable.customizedContacts = customizedContactsModals;
+        
+        //-(NSArray *)convertJsonStringIntoArray:(NSString *)value
+        
+        //[untechable.customizedContacts addObject:contactDict];
+        /*
+        
+        NSMutableArray *temp = [[NSMutableArray alloc] init];
+    
+        NSMutableArray *contactArray = [[NSMutableArray alloc] init];
+        
+        NSMutableDictionary *contactDict = [[NSMutableDictionary alloc] init];
+        
+        [contactDict setObject:contactModal forKey:contactModal.name];
+        
+        NSMutableDictionary *status = [[NSMutableDictionary alloc] init];
+        
+        NSMutableArray *allStatus = [[ NSMutableArray alloc] initWithCapacity:2];
+        
+        [allStatus insertObject:@"YES" atIndex:0];
+        
+        [status setObject:allStatus forKey:cell.nubmerType.text];
+        
+        [temp addObject:status];
+        
+        [temp_ addObject:contactModal];
+        
+        contactModal.phoneNumbersStatus  = temp;
+        
+        //-(NSArray *)convertJsonStringIntoArray:(NSString *)value
+        untechable.customizedContacts = [untechable.commonFunctions convertArrayIntoJsonString:temp_];
+        //[untechable.customizedContacts addObject:contactDict];*/
+    }
+}
+
+-(IBAction)callButtonTapped:(id) sender
+{
+    
+}
 
 
 @end

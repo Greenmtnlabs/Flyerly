@@ -34,9 +34,6 @@
                         <state key="normal" backgroundImage="CHECKBOX_EMPTY.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
-                        <connections>
-                            <action selector="btnClic:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="H9a-BA-SBp"/>
-                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yUV-uZ-85o" userLabel="SMS">
                         <rect key="frame" x="220" y="9" width="40" height="40"/>
@@ -44,9 +41,6 @@
                         <state key="normal" backgroundImage="CHECKBOX_EMPTY.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
-                        <connections>
-                            <action selector="btnClic:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="6TI-Me-bqu"/>
-                        </connections>
                     </button>
                 </subviews>
             </tableViewCellContentView>
@@ -56,7 +50,7 @@
                 <outlet property="nubmerType" destination="a2O-xM-2ec" id="7tV-A3-bVv"/>
                 <outlet property="smsButton" destination="yUV-uZ-85o" id="ZjO-oD-lP9"/>
             </connections>
-            <point key="canvasLocation" x="345" y="243.5"/>
+            <point key="canvasLocation" x="138" y="231"/>
         </tableViewCell>
     </objects>
     <resources>

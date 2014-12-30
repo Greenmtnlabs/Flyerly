@@ -18,8 +18,8 @@
 @property (nonatomic,strong)  Untechable *untechable;
 @property (nonatomic,strong)  ContactsCustomizedModal *contactModal;
 
-@property (nonatomic,strong)IBOutlet UILabel *nubmerType;
-@property (nonatomic,strong)IBOutlet UILabel *nubmer;
+@property (strong,nonatomic)IBOutlet UILabel *nubmerType;
+@property (strong,nonatomic)IBOutlet UILabel *nubmer;
 
 -(void)setCellValues :(NSString *)nubmerType Number:(NSString *)phoneNumber;
 

@@ -512,6 +512,11 @@
             sendIt = YES;
         }
         
+        /*if([key isEqualToString:@"customizedContacts"] ){
+            value = [untechable.commonFunctions convertArrayIntoJsonString:value];
+            sendIt = YES;
+        }*/
+        
         if( sendIt || [stringVarsAry containsObject:key]){
             
             [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];

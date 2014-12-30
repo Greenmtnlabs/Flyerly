@@ -9,6 +9,7 @@
 
 #import "CommonFunctions.h"
 #import "Common.h"
+#import "ContactsCustomizedModal.h"
 
 @implementation CommonFunctions
 
@@ -99,6 +100,35 @@
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     NSLog(@"JSON Output: %@", jsonString);
     return jsonString;
+}
+
+
+-(NSString *)convertCCMArrayIntoJsonString:(NSMutableArray *)value_
+{
+    NSMutableDictionary *customizedContactArray = [[NSMutableDictionary alloc] init];
+    for(int i=0;i<[value_ count]; i++) {
+        NSMutableDictionary *curContactDetails = [[NSMutableDictionary alloc] init];
+        ContactsCustomizedModal *curObj =  [value_ objectAtIndex:i];
+        [curContactDetails setValue:curObj.name forKey:@"contactName"];
+        [curContactDetails setValue:curObj.allPhoneNumbers forKey:@"phoneNumbers"];
+        [curContactDetails setValue:curObj.allEmails forKey:@"emailAddresses"];
+        //[curContactDetails setValue:curObj.customizedTxt forKey:@"customizedTxt"];
+
+        
+        [customizedContactArray setValue:curContactDetails forKey:[NSString stringWithFormat:@"%i",i]];
+        
+    }
+    
+    return [self convertDicIntoJsonString:customizedContactArray];
+}
+-(NSArray *)convertJsonStringIntoArray:(NSString *)value
+{
+    if ( [value isEqualToString:@""] ){
+        return nil;
+    }
+    return [value componentsSeparatedByCharactersInSet:
+            [NSCharacterSet characterSetWithCharactersInString:DEF_ARAY_SPLITER]
+            ];
 }
 
 -(NSString *)getTimeZoneOffset
