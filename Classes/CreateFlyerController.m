@@ -105,7 +105,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     }
                     else if( IS_IPHONE_6_PLUS ) {
                         [dic setObject:@"310.0" forKey:@"tx"];
-                        [dic setObject:@"360.0" forKey:@"ty"];
+                        [dic setObject:@"375.0" forKey:@"ty"];
                     }
                     
                     [dic setObject:@"1" forKey:@"flyerOpenTime"];

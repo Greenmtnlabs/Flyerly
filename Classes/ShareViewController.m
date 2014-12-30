@@ -49,7 +49,7 @@
         } else if ( IS_IPHONE_6 ) {
             sizeForDesc = CGRectMake(9, 76, 350, 60);
         } else if( IS_IPHONE_6_PLUS ) {
-            sizeForDesc = CGRectMake(13, 79, 391, 83);
+            sizeForDesc = CGRectMake(10, 79, 420, 85);
         } else {
             sizeForDesc = CGRectMake(10, 96, 298, 67);
         }
@@ -61,9 +61,8 @@
         } else if ( IS_IPHONE_6 ) {
             sizeForDesc = CGRectMake(10, 82, 350, 60);
         } else if( IS_IPHONE_6_PLUS ) {
-            sizeForDesc = CGRectMake(13, 79, 391, 67);
+            sizeForDesc = CGRectMake(10, 79, 420, 85);
         } else {
-            
             sizeForDesc = CGRectMake(10, 96, 298, 67);
         }
     }
