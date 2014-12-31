@@ -243,9 +243,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         //bannerAdDismissBtn.alpha = 1.0;
         [self.bannerAddView bringSubviewToFront:bannerAdDismissBtn];
     
-        if (sharePanel.hidden){
-            
-        [self.view addSubview:self.bannerAddView];
+        if ( sharePanel.hidden ){
+            [self.view addSubview:self.bannerAddView];
         }
     
         return;
@@ -475,20 +474,21 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         if(![[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyAlbum"]){
             [flyer createFlyerlyAlbum];
         }
-        
+
         // Setup the share panel.
         sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,200 )];
-        
+        /* //No need to pree load ShareViewController
         if ( IS_IPHONE_5 || IS_IPHONE_4) {
             shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
         }else if ( IS_IPHONE_6 ){
             shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController-iPhone6" bundle:nil];
         }
         shareviewcontroller.cfController = self;
-        
         sharePanel = shareviewcontroller.view;
+         */
         sharePanel.hidden = YES;
         [self.view addSubview:sharePanel];
+
         
         //Set Undo Bar Status
         [self setUndoStatus];
