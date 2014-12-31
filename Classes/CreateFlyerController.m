@@ -97,7 +97,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 if ( [[dic objectForKey:@"flyerOpenTime"] isEqualToString:@"0"] ) {
                     if( IS_IPHONE_4 ) {
                         [dic setObject:@"230" forKey:@"tx"];
-                        [dic setObject:@"215" forKey:@"ty"];
+                        [dic setObject:@"270" forKey:@"ty"];
                     }
                     else if( IS_IPHONE_6 ) {
                         [dic setObject:@"280.0" forKey:@"tx"];
