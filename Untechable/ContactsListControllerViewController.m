@@ -390,27 +390,57 @@
             
             if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMainLabel])
             {
-                [allNumbers setObject:(NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i)) forKey:@"Main"];
+                NSMutableArray *numberWithStatus = [[NSMutableArray alloc] initWithCapacity:3];
+                
+                [numberWithStatus setObject:(NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i)) atIndexedSubscript:0];
+                [numberWithStatus setObject:@"0" atIndexedSubscript:1];
+                [numberWithStatus setObject:@"0" atIndexedSubscript:2];
+                
+                [allNumbers setObject:numberWithStatus forKey:@"Main"];
             }
             
             if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
             {
-                [allNumbers setObject:(NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i)) forKey:@"Mobile"];
+                NSMutableArray *numberWithStatus = [[NSMutableArray alloc] initWithCapacity:3];
+                
+                [numberWithStatus setObject:(NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i))atIndexedSubscript:0];
+                [numberWithStatus setObject:@"0" atIndexedSubscript:1];
+                [numberWithStatus setObject:@"0" atIndexedSubscript:2];
+                
+                [allNumbers setObject:numberWithStatus forKey:@"Mobile"];
             }
             
             if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel])
             {
-                [allNumbers setObject:(NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i)) forKey:@"iPhoneNumber"];
+                NSMutableArray *numberWithStatus = [[NSMutableArray alloc] initWithCapacity:3];
+                
+                [numberWithStatus setObject:(NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i)) atIndexedSubscript:0];
+                [numberWithStatus setObject:@"0" atIndexedSubscript:1];
+                [numberWithStatus setObject:@"0" atIndexedSubscript:2];
+                
+                [allNumbers setObject:numberWithStatus forKey:@"iPhoneNumber"];
             }
             
             if ([mobileLabel isEqualToString:(NSString*)kABHomeLabel])
             {
-                [allNumbers setObject:(NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i)) forKey:@"Home"];
+                NSMutableArray *numberWithStatus = [[NSMutableArray alloc] initWithCapacity:3];
+                
+                [numberWithStatus setObject:(NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i)) atIndexedSubscript:0];
+                [numberWithStatus setObject:@"0" atIndexedSubscript:1];
+                [numberWithStatus setObject:@"0" atIndexedSubscript:2];
+                
+                [allNumbers setObject:numberWithStatus forKey:@"Home"];
             }
             
             if ([mobileLabel isEqualToString:(NSString*)kABWorkLabel])
             {
-                [allNumbers setObject:(NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i)) forKey:@"Work"];
+                NSMutableArray *numberWithStatus = [[NSMutableArray alloc] initWithCapacity:3];
+                
+                [numberWithStatus setObject:(NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i)) atIndexedSubscript:0];
+                [numberWithStatus setObject:@"0" atIndexedSubscript:1];
+                [numberWithStatus setObject:@"0" atIndexedSubscript:2];
+                
+                [allNumbers setObject:numberWithStatus forKey:@"Work"];
             }
             
             contactModal.allPhoneNumbers = allNumbers;

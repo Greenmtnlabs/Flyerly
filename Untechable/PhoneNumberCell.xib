@@ -34,6 +34,7 @@
                         <state key="normal" backgroundImage="CHECKBOX_EMPTY.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <state key="selected" backgroundImage="GoogleIcon.png"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yUV-uZ-85o" userLabel="SMS">
                         <rect key="frame" x="220" y="9" width="40" height="40"/>
@@ -41,6 +42,7 @@
                         <state key="normal" backgroundImage="CHECKBOX_EMPTY.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <state key="selected" backgroundImage="GoogleIcon.png"/>
                     </button>
                 </subviews>
             </tableViewCellContentView>
@@ -50,11 +52,12 @@
                 <outlet property="nubmerType" destination="a2O-xM-2ec" id="7tV-A3-bVv"/>
                 <outlet property="smsButton" destination="yUV-uZ-85o" id="ZjO-oD-lP9"/>
             </connections>
-            <point key="canvasLocation" x="138" y="231"/>
+            <point key="canvasLocation" x="-157" y="223"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="CHECKBOX_EMPTY.png" width="18" height="18"/>
+        <image name="GoogleIcon.png" width="162" height="55"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

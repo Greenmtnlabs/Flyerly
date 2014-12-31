@@ -17,6 +17,10 @@
 
     int rowsInFirstSection,rowsInSecondSection;
     NSArray *phoneNumberTypes;
+    //NSMutableDictionary *currContactNumbers;
+    //NSMutableArray *customizedContactNumbers;
+    NSMutableDictionary *curContactDetails;
+    BOOL alreadyExist;
 }
 @property (weak, nonatomic) IBOutlet UITableView *contactDetailsTable;
 
@@ -33,6 +37,48 @@
     [self setNavigation:@"viewDidLoad"];
 
     phoneNumberTypes = [contactModal.allPhoneNumbers allKeys];
+    
+    NSString *customizedContactsString = untechable.customizedContacts;
+    
+    NSError *writeError = nil;
+    
+    NSMutableDictionary *customizedContactsDictionary =
+    [NSJSONSerialization JSONObjectWithData: [customizedContactsString dataUsingEncoding:NSUTF8StringEncoding]
+                                    options: NSJSONReadingMutableContainers
+                                      error: &writeError];
+    
+    if ( ![customizedContactsString isEqualToString:@""] ){
+        
+        for ( int i = 0; i < customizedContactsDictionary.count; i++ ){
+            
+            curContactDetails =  [customizedContactsDictionary objectForKey:[NSString stringWithFormat:@"%i",i]];
+            
+            if ( [[curContactDetails objectForKey:@"contactName"] isEqualToString:contactModal.name] ){
+                
+                alreadyExist = YES;
+            }
+        }
+    }
+    
+    
+    /*if ( [contactModal.allPhoneNumbers objectForKey:@"phoneNumbers"] != nil ){
+       
+        phoneNumberTypes = (NSMutableArray *)[contactModal.allPhoneNumbers allKeys];
+        
+        [phoneNumberTypes removeObjectAtIndex:0];
+        
+        for ( int i = 0; i<contactModal.allPhoneNumbers.count; i++){
+            
+            if ( i != 0 ){
+                
+                phoneNumberTypes = [contactModal.allPhoneNumbers 
+            }
+        }
+        numberOfRowsInSection = (int)contactModal.allPhoneNumbers.count - 1;
+    }else{
+        phoneNumberTypes = [contactModal.allPhoneNumbers allKeys];
+    }*/
+    
     
     _contactDetailsTable.delegate = self;
     _contactDetailsTable.dataSource = self;
@@ -131,7 +177,15 @@
     if ( section == 0 ){
         numberOfRowsInSection = 1;
     }else if ( section == 1 ){
+    
         numberOfRowsInSection = (int)contactModal.allPhoneNumbers.count;
+        
+        /*if ( [contactModal.allPhoneNumbers objectForKey:@"phoneNumbers"] != nil ){
+            numberOfRowsInSection = (int)contactModal.allPhoneNumbers.count - 1;
+        }else{
+            numberOfRowsInSection = (int)contactModal.allPhoneNumbers.count;
+        }*/
+        
     }else if ( section == 2 ){
         numberOfRowsInSection = (int)contactModal.allEmails.count;
     }else if ( section == 3 ){
@@ -163,7 +217,17 @@
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PhoneNumberCell" owner:self options:nil];
         cell = (PhoneNumberCell *)[nib objectAtIndex:0];
 
-        [cell setCellValues:[phoneNumberTypes objectAtIndex:indexPath.row] Number:[contactModal.allPhoneNumbers objectForKey:[phoneNumberTypes objectAtIndex:indexPath.row]]];
+        NSMutableArray *numberWithStatus = [contactModal.allPhoneNumbers objectForKey:[phoneNumberTypes objectAtIndex:indexPath.row]];
+                                            
+        [cell setCellValues:[phoneNumberTypes objectAtIndex:indexPath.row] Number:[numberWithStatus objectAtIndex:0]];
+        
+        /*if ( [contactModal.allPhoneNumbers objectForKey:@"phoneNumbers"] != nil ){
+            [cell setCellValues:[phoneNumberTypes objectAtIndex:indexPath.row + 1] Number:[contactModal.allPhoneNumbers objectForKey:[phoneNumberTypes objectAtIndex:indexPath.row + 1]]];
+        }else{
+            [cell setCellValues:[phoneNumberTypes objectAtIndex:indexPath.row] Number:[contactModal.allPhoneNumbers objectForKey:[phoneNumberTypes objectAtIndex:indexPath.row]]];
+        }*/
+        
+        
         
         cell.untechable = untechable;
         
@@ -222,26 +286,110 @@
 {
     PhoneNumberCell *cell = (PhoneNumberCell *)[[sender superview] superview];
     
-    NSLog(@"%@", cell.nubmerType.text);
-    
     BOOL alreadyExist = NO;
     
-    for ( int i = 0; i < untechable.customizedContacts.count; i++ ){
-        ContactsCustomizedModal *tempModal = [[ContactsCustomizedModal alloc] init];
+    NSString *customizedContactsString = untechable.customizedContacts;
+    
+    NSError *writeError = nil;
+    
+    NSMutableDictionary *customizedContactsDictionary =
+    [NSJSONSerialization JSONObjectWithData: [customizedContactsString dataUsingEncoding:NSUTF8StringEncoding]
+                                    options: NSJSONReadingMutableContainers
+                                      error: &writeError];
+    
+    if ( ![customizedContactsString isEqualToString:@""] ){
         
-        tempModal = [untechable.customizedContacts objectAtIndex:i];
-        
-        if ( [tempModal.name isEqualToString:contactModal.name] ){
+        for ( int i = 0; i < customizedContactsDictionary.count; i++ ){
             
-            alreadyExist = YES;
+            curContactDetails =  [customizedContactsDictionary objectForKey:[NSString stringWithFormat:@"%i",i]];
+            
+            if ( [[curContactDetails objectForKey:@"contactName"] isEqualToString:contactModal.name] ){
+                
+                alreadyExist = YES;
+            }
+            
+            /*NSMutableDictionary *curContactDetails = [[NSMutableDictionary alloc] init];
+             
+             curContactDetails = [JSON objectForKey:[@"%i",i]];
+             
+             ContactsCustomizedModal *curObj =  [value_ objectAtIndex:i];
+             [curContactDetails setValue:curObj.name forKey:@"contactName"];
+             [curContactDetails setValue:curObj.allPhoneNumbers forKey:@"phoneNumbers"];
+             [curContactDetails setValue:curObj.allEmails forKey:@"emailAddresses"];
+             
+             
+             //tempModal = [untechable.customizedContacts objectAtIndex:i];
+             
+             if ( [tempModal.name isEqualToString:contactModal.name] ){
+             
+             alreadyExist = YES;
+             }*/
         }
     }
     
     if ( alreadyExist ){
         
+        NSMutableDictionary *currContactNumbers = [curContactDetails objectForKey:@"phoneNumbers"];
+        
+        NSMutableArray *numberWithStatus =  [contactModal.allPhoneNumbers objectForKey:cell.nubmerType.text];
+        
+        NSMutableArray *customizedContactNumbers = [currContactNumbers objectForKey:@"phoneNumbers"];
+        
+        if ( [customizedContactNumbers containsObject:cell.nubmer.text] ){
+            
+            if ( [[numberWithStatus objectAtIndex:1] isEqualToString:@"1"] ) {
+                
+                [numberWithStatus setObject:@"0" atIndexedSubscript:1];
+                
+            }else if ( [[numberWithStatus objectAtIndex:1] isEqualToString:@"0"] ) {
+                
+                [numberWithStatus setObject:@"1" atIndexedSubscript:1];
+            }
+            
+            /*for ( int k = 0; k<customizedContactNumbers.count; k++ ){
+                NSMutableArray *customizedContactNumbersDetails = [customizedContactNumbers objectAtIndex:k];
+                
+                if ( [[customizedContactNumbersDetails objectAtIndex:1] isEqualToString:@"1"] ) {
+                    
+                    [customizedContactNumbersDetails setObject:@"0" atIndexedSubscript:1];
+                    
+                }else if ( [[customizedContactNumbersDetails objectAtIndex:1] isEqualToString:@"0"] ) {
+                    
+                    [customizedContactNumbersDetails setObject:@"1" atIndexedSubscript:1];
+                }
+            }*/
+        }else if ( ![customizedContactNumbers containsObject:cell.nubmer.text] ){
+            
+            NSMutableArray *numberWithStatus =  [contactModal.allPhoneNumbers objectForKey:cell.nubmerType.text];
+            
+            /*NSMutableArray *numberWithStatus = [[NSMutableArray alloc] initWithCapacity:3];
+            
+            // Phone Number at index 0 of this array
+            [numberWithStatus setObject:cell.nubmer.text atIndexedSubscript:0];
+            
+            // SMS status at index 1 of this array
+            [numberWithStatus setObject:@"1" atIndexedSubscript:1];*/
+            
+            [numberWithStatus setObject:@"1" atIndexedSubscript:1];
+            
+            [cell.smsButton setSelected:YES];
+            
+            [customizedContactNumbers addObject:numberWithStatus];
+         
+            [contactModal.allPhoneNumbers setValue:customizedContactNumbers forKey:@"phoneNumbers"];
+            
+            [cell.smsButton setSelected:YES];
+            
+            NSMutableArray *customizedContactsModals = [[NSMutableArray alloc] init];
+            
+            [customizedContactsModals addObject:contactModal];
+            
+            untechable.customizedContacts = [untechable.commonFunctions convertCCMArrayIntoJsonString:customizedContactsModals];
+        }
+    
     }else {
         
-        NSMutableArray *numberWithStatus = [[NSMutableArray alloc] initWithCapacity:3];
+        /*NSMutableArray *numberWithStatus = [[NSMutableArray alloc] initWithCapacity:3];
         
         // Phone Number at index 0 of this array
         [numberWithStatus setObject:cell.nubmer.text atIndexedSubscript:0];
@@ -249,17 +397,24 @@
         // SMS status at index 1 of this array
         [numberWithStatus setObject:@"1" atIndexedSubscript:1];
         
-        NSMutableArray *phoneNumbersArray = [[NSMutableArray alloc] init];
+        NSMutableArray *customizedContactNumbers = [[NSMutableArray alloc] init];
         
-        [phoneNumbersArray addObject:numberWithStatus];
+        [customizedContactNumbers addObject:numberWithStatus];
         
-        [contactModal.allPhoneNumbers setValue:phoneNumbersArray forKey:@"phoneNumbers"];
+        [contactModal.allPhoneNumbers setValue:customizedContactNumbers forKey:cell.nubmerType.text];*/
+        
+        
+        NSMutableArray *numberWithStatus =  [contactModal.allPhoneNumbers objectForKey:cell.nubmerType.text];
+        
+        [numberWithStatus setObject:@"1" atIndexedSubscript:1];
+        
+        [cell.smsButton setSelected:YES];
         
         NSMutableArray *customizedContactsModals = [[NSMutableArray alloc] init];
         
         [customizedContactsModals addObject:contactModal];
         
-        untechable.customizedContacts = customizedContactsModals;
+        untechable.customizedContacts = [untechable.commonFunctions convertCCMArrayIntoJsonString:customizedContactsModals];
         
         //-(NSArray *)convertJsonStringIntoArray:(NSString *)value
         

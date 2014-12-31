@@ -107,6 +107,7 @@
 {
     NSMutableDictionary *customizedContactArray = [[NSMutableDictionary alloc] init];
     for(int i=0;i<[value_ count]; i++) {
+        
         NSMutableDictionary *curContactDetails = [[NSMutableDictionary alloc] init];
         ContactsCustomizedModal *curObj =  [value_ objectAtIndex:i];
         [curContactDetails setValue:curObj.name forKey:@"contactName"];

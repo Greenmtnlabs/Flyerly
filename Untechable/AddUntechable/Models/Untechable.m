@@ -190,7 +190,8 @@
         dic[@"emergencyContacts"] = emergencyContacts;
         dic[@"hasRecording"] = hasRecording ? @"YES" : @"NO";
         
-        dic[@"customizedContacts"] = [commonFunctions convertArrayIntoJsonString:customizedContacts];
+        //dic[@"customizedContacts"] = [commonFunctions convertCCMArrayIntoJsonString:customizedContacts];
+        dic[@"customizedContacts"] = customizedContacts;
 
         //Screen3 vars
         dic[@"socialStatus"] = socialStatus;
@@ -252,7 +253,8 @@
         emergencyContacts = ( dic[@"emergencyContacts"] ) ? dic[@"emergencyContacts"] : @"";
         hasRecording      = ([dic[@"hasRecording"] isEqualToString:@"YES"]) ? YES : NO;
         
-        customizedContacts = ( dic[@"customizedContacts"] ) ? dic[@"customizedContacts"] : [[NSMutableArray alloc]init];
+        //customizedContacts = ( dic[@"customizedContacts"] ) ? dic[@"customizedContacts"] : [[NSMutableArray alloc]init];
+        customizedContacts = ( dic[@"customizedContacts"] ) ? dic[@"customizedContacts"] : @"";
         
         //Screen3 vars
         socialStatus = ( dic[@"socialStatus"] ) ? dic[@"socialStatus"] : @"";
@@ -310,7 +312,7 @@
     emergencyContacts = [[NSMutableDictionary alloc] init];
     hasRecording = NO;
     
-    customizedContacts = [[NSMutableArray alloc] init];
+    customizedContacts = @"";
     
     //Screen3
     socialStatus = @"";

@@ -37,7 +37,8 @@
 
 
 //Screen2
-@property (strong, nonatomic) NSMutableArray *customizedContacts;
+//@property (strong, nonatomic) NSMutableArray *customizedContacts;
+@property (strong, nonatomic) NSString *customizedContacts;
 @property (strong, nonatomic) NSString *twillioNumber, *emergencyNumber, *location;
 @property (strong, nonatomic) NSMutableDictionary *emergencyContacts;
 @property (nonatomic, assign) BOOL hasRecording;

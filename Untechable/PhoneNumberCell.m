@@ -28,6 +28,7 @@ ContactsCustomizedModal *contactModal_;
 
 -(void)setCellModal :(ContactsCustomizedModal *)contactModal{
 
+    //if ( contactModal.)
     contactModal_ = contactModal;
 }
 
