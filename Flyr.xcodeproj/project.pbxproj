@@ -1222,6 +1222,7 @@
 		365A9D1919AF697300E284B5 /* drawing_tab_size@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365A9D1019AF697300E284B5 /* drawing_tab_size@2x.png */; };
 		368ADADB19B6FD0700EAB305 /* DrawingEraserMsg.xib in Resources */ = {isa = PBXBuildFile; fileRef = 368ADADA19B6FD0700EAB305 /* DrawingEraserMsg.xib */; };
 		368ADADD19B6FF0400EAB305 /* DrawingEraserMsg-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 368ADADC19B6FF0400EAB305 /* DrawingEraserMsg-iPhone4.xib */; };
+		36A443761A54205A00914D39 /* CreateFlyerController-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36A443751A54205A00914D39 /* CreateFlyerController-iPhone4.xib */; };
 		36A93F2419AE067000D0A810 /* DrawingPatterns.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36A93F2319AE067000D0A810 /* DrawingPatterns.xib */; };
 		36A93F2619AE0B5400D0A810 /* DrawingPatterns-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36A93F2519AE0B5400D0A810 /* DrawingPatterns-iPhone4.xib */; };
 		36A93F3619AE243D00D0A810 /* line_dashed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36A93F3319AE243D00D0A810 /* line_dashed@2x.png */; };
@@ -2815,6 +2816,7 @@
 		365A9D1019AF697300E284B5 /* drawing_tab_size@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drawing_tab_size@2x.png"; sourceTree = "<group>"; };
 		368ADADA19B6FD0700EAB305 /* DrawingEraserMsg.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrawingEraserMsg.xib; sourceTree = "<group>"; };
 		368ADADC19B6FF0400EAB305 /* DrawingEraserMsg-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DrawingEraserMsg-iPhone4.xib"; sourceTree = "<group>"; };
+		36A443751A54205A00914D39 /* CreateFlyerController-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CreateFlyerController-iPhone4.xib"; sourceTree = "<group>"; };
 		36A93F2319AE067000D0A810 /* DrawingPatterns.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrawingPatterns.xib; sourceTree = "<group>"; };
 		36A93F2519AE0B5400D0A810 /* DrawingPatterns-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DrawingPatterns-iPhone4.xib"; sourceTree = "<group>"; };
 		36A93F3319AE243D00D0A810 /* line_dashed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "line_dashed@2x.png"; sourceTree = "<group>"; };
@@ -4082,6 +4084,7 @@
 				0DF3A2C3108DF1D200D6C887 /* CreateFlyerController.h */,
 				0DF3A2C4108DF1D200D6C887 /* CreateFlyerController.m */,
 				0DFC531A109576AB00B18478 /* CreateFlyerController.xib */,
+				36A443751A54205A00914D39 /* CreateFlyerController-iPhone4.xib */,
 				2060689A1924CC6100AB5230 /* Backgrounds.xib */,
 				249464DE1A0CFEFE00C1247D /* Backgrounds-iPhone6.xib */,
 				2042315F1A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib */,
@@ -6409,6 +6412,7 @@
 				249F2035193F562C0072835E /* outline_button_selected@2x.png in Resources */,
 				202C639817EA06E800CB9A75 /* ricon32.png in Resources */,
 				247858EB194878CE0062F1E4 /* Sintony-Regular.otf in Resources */,
+				36A443761A54205A00914D39 /* CreateFlyerController-iPhone4.xib in Resources */,
 				2421845D194B4AEC00FDDA97 /* ball-icon (1).png in Resources */,
 				202C639A17EA06E800CB9A75 /* ricon33.png in Resources */,
 				249F1FCD193F55E90072835E /* facebook_login@2x.png in Resources */,
