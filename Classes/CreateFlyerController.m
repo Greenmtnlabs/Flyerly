@@ -6265,36 +6265,43 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 #pragma mark - ZOOM FUNCTIONS
 //set values at viewWillAppear
 -(void)zoomInit{
-    
-    zoomScrollView.backgroundColor = [UIColor clearColor];
-    
-    //on load time zooming is disabled
-    flyimgView.zoomedIn = NO;
-    
-    //inject zoomScreenShotForVideo as a first layer in flyer
-    [zoomScreenShotForVideo setFrame:flyimgView.frame];
-    [flyimgView addSubview:zoomScreenShotForVideo];
-    
-    //disable scrolling in scrollView
-    [zoomScrollView setScrollEnabled:NO];
-    
-    //hide zoom elements on init
-    [self zoomElementsSetAlpha:0.0];
-    
-    //HOOK MOVE GESTURE ON SCREEN SHOT IMAGE
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(zoomMagnifyerMove:)];
-    [zoomScreenShot addGestureRecognizer:panGesture];
-    UITapGestureRecognizer *tapGesture =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(zoomMagnifyerMoveOnTap:)];
-    [zoomScreenShot addGestureRecognizer:tapGesture];
-    
-    zoomScrollView.minimumZoomScale = FLYER_ZOOM_MIN_SCALE;
-	zoomScrollView.maximumZoomScale = FLYER_ZOOM_SET_SCALE;//FLYER_ZOOM_MAX_SCALE;
-    
-    // Gesture for resizing zommScrollView
-    UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(zoomScrollViewOnPinch:)];
-    [zoomScrollView addGestureRecognizer:pinchGesture];
-    
-    [zoomScrollView setContentSize:CGSizeMake(zoomScrollView.contentSize.width, zoomScrollView.frame.size.height)];
+    if( IS_IPHONE_4 ){
+        [zoomScrollView removeFromSuperview];
+        [zoomScreenShot removeFromSuperview];
+        [zoomMagnifyingGlass removeFromSuperview];
+        [zoomScreenShotForVideo removeFromSuperview];
+    }
+    else {
+        zoomScrollView.backgroundColor = [UIColor clearColor];
+        
+        //on load time zooming is disabled
+        flyimgView.zoomedIn = NO;
+        
+        //inject zoomScreenShotForVideo as a first layer in flyer
+        [zoomScreenShotForVideo setFrame:flyimgView.frame];
+        [flyimgView addSubview:zoomScreenShotForVideo];
+        
+        //disable scrolling in scrollView
+        [zoomScrollView setScrollEnabled:NO];
+        
+        //hide zoom elements on init
+        [self zoomElementsSetAlpha:0.0];
+        
+        //HOOK MOVE GESTURE ON SCREEN SHOT IMAGE
+        UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(zoomMagnifyerMove:)];
+        [zoomScreenShot addGestureRecognizer:panGesture];
+        UITapGestureRecognizer *tapGesture =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(zoomMagnifyerMoveOnTap:)];
+        [zoomScreenShot addGestureRecognizer:tapGesture];
+        
+        zoomScrollView.minimumZoomScale = FLYER_ZOOM_MIN_SCALE;
+        zoomScrollView.maximumZoomScale = FLYER_ZOOM_SET_SCALE;//FLYER_ZOOM_MAX_SCALE;
+        
+        // Gesture for resizing zommScrollView
+        UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(zoomScrollViewOnPinch:)];
+        [zoomScrollView addGestureRecognizer:pinchGesture];
+        
+        [zoomScrollView setContentSize:CGSizeMake(zoomScrollView.contentSize.width, zoomScrollView.frame.size.height)];
+    }
 }
 
 //when ever user try to pin the main scrollview then reset it with it zomm value
