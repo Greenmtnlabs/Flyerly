@@ -278,6 +278,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  */
 -(void)viewDidLoad{
     
+    if( IS_IPHONE_4 ){
+        [[NSBundle mainBundle] loadNibNamed:@"CreateFlyerController-iPhone4" owner:self options:nil];
+    }
+    
+    
     bannerAddClosed = NO;
     
     selectedAddMoreLayerTab = -1;
