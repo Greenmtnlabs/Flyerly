@@ -3,7 +3,7 @@
 //  main.m
 //  Flyr
 //
-//  Created by Nilesh on 20/10/09.
+//  Update by Abdul Rauf on 20/10/09.
 //  Copyright Riksof Pvt. 2009. All rights reserved.
 //
 
