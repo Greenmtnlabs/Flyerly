@@ -163,6 +163,8 @@
 +(NSMutableArray *)recentFlyerPreview:(NSInteger)flyCount;
 +(BOOL) compareColor:(UIColor*)color1 withColor:(UIColor*)color2;
 
+-(CGFloat)getTvDefPosX;
+-(CGFloat)getTvDefPosY;
 
 @property (strong, readonly) NSMutableDictionary *masterLayers;
 @property (strong, nonatomic) NSMutableArray *socialArray;

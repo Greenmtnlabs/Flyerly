@@ -2120,6 +2120,10 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     return uniqueId;
 }
 
+-(CGFloat)getTvDefPosX { return [TEXTxPOS floatValue]; }
+-(CGFloat)getTvDefPosY { return [TEXTyPOS floatValue]; }
+
+
 @end
 
 	

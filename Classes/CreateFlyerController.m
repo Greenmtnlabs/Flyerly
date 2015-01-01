@@ -3057,7 +3057,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     NSDictionary *detail = [flyer getLayerFromMaster:currentLayer];
     
     // Prepare a new text layer for view
-    lastTextView = [[UITextView alloc] initWithFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
+    lastTextView = [[UITextView alloc] initWithFrame:CGRectMake([flyer getTvDefPosX], [flyer getTvDefPosY], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
     lastTextView.accessibilityLabel = @"TextInput";
     lastTextView.text = [detail valueForKey:@"text"];
     
