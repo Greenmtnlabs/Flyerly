@@ -38,6 +38,8 @@
     FlyerlyConfigurator *flyerConfigurator;
     UserPurchases *userPurchases;
     UIButton *bannerAdDismissBtn;
+    
+    BOOL isNewText;
 }
 
 @end
@@ -281,7 +283,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         [[NSBundle mainBundle] loadNibNamed:@"CreateFlyerController-iPhone4" owner:self options:nil];
     }
     
-    
+    isNewText   =   NO;
     bannerAddClosed = NO;
     
     selectedAddMoreLayerTab = -1;
@@ -3028,7 +3030,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  * and Set Menu for Text Layer
  */
 -(void)callWrite{
-    
+   
+    //--- Set navigation ----------- { --
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
@@ -3045,18 +3048,17 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     backButtonTemp.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItem:backBarButton];
-    
+    //--- Set navigation ----------- } --
     
     //Add Context Library
     [self addBottomTabs:libText];
     
-    // Get current layer properties.
+    // Get current layer dictionary
     NSDictionary *detail = [flyer getLayerFromMaster:currentLayer];
     
-    // Prepare a new text layer.
+    // Prepare a new text layer for view
     lastTextView = [[UITextView alloc] initWithFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
     lastTextView.accessibilityLabel = @"TextInput";
-    // Set the text.
     lastTextView.text = [detail valueForKey:@"text"];
     
     
@@ -3234,20 +3236,61 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         lastTextView = nil;
         
         [self callAddMoreLayers];
-        return;
+        return; //Do not run the bello code
+    }
+    
+    NSMutableDictionary *textDetailDictionary = [flyer getLayerFromMaster:currentLayer];
+    
+//    NSMutableDictionary *tempTextDetailDictionary = [[NSMutableDictionary alloc] init];
+//    tempTextDetailDictionary[@"x"]  =   textDetailDictionary[@"x"];
+//    tempTextDetailDictionary[@"y"]  =   textDetailDictionary[@"y"];
+//    NSLog(@"textDetailDictionary1 before update:%@ ",textDetailDictionary);
+    
+    if( isNewText == YES ) {
+        float newX = 0.0, newY = 0.0;
+        CGSize txtSize = [lastTextView.text sizeWithAttributes: @{NSFontAttributeName:lastTextView.font}];
+        
+        if( txtSize.width < lastTextView.size.width ){
+            newX = lastTextView.frame.origin.x + ( lastTextView.size.width / 2 ) - ( txtSize.width / 2);
+            newY = lastTextView.frame.origin.y+3;
+            textDetailDictionary[@"x"]  =    [NSString stringWithFormat:@"%f",newX];
+            textDetailDictionary[@"y"]  =    [NSString stringWithFormat:@"%f",newY];
+
+//            UIView *tempView = [[UIView alloc] initWithFrame:CGRectMake(newX, newY, [textDetailDictionary[@"width"] floatValue], [textDetailDictionary[@"height"] floatValue])];
+//            tempView.transform = CGAffineTransformMakeScale( newX, newY );
+//            
+//            textDetailDictionary[@"a"] = [NSString stringWithFormat:@"%f",tempView.transform.a];
+//            textDetailDictionary[@"b"] = [NSString stringWithFormat:@"%f",tempView.transform.b];
+//            textDetailDictionary[@"c"] = [NSString stringWithFormat:@"%f",tempView.transform.c];
+//            textDetailDictionary[@"d"] = [NSString stringWithFormat:@"%f",tempView.transform.d];
+//            textDetailDictionary[@"tx"] = [NSString stringWithFormat:@"%f",tempView.transform.tx];
+//            textDetailDictionary[@"ty"] = [NSString stringWithFormat:@"%f",tempView.transform.ty];
+
+        }
+//        NSLog(@"txtSize:(w:%f,h:%f), lastTxtViewSize.frame.origin(x:%f,y:%f,w:%f,h:%f)",txtSize.width,txtSize.height, lastTextView.frame.origin.x,lastTextView.frame.origin.y,lastTextView.size.width,lastTextView.size.height);
+        
     }
 
-    
+
     //Update Dictionaries------------------{--
         //Will only update the layer dictionary
-        [flyer setLayerType:currentLayer type:FLYER_LAYER_TEXT];
+        //[flyer setLayerType:currentLayer type:FLYER_LAYER_TEXT];
         //Will update layer type in masterLayers
-        [flyer setFlyerText:currentLayer text:lastTextView.text ];
+        //[flyer setFlyerText:currentLayer text:lastTextView.text ];
+    
+        textDetailDictionary[@"type"] = FLYER_LAYER_TEXT;
+        [textDetailDictionary setValue:lastTextView.text forKey:@"text"];
+    
+        [flyer.masterLayers setValue:textDetailDictionary forKey:currentLayer];
     //Update Dictionaries-----------------}---
+
+    
+    
+    NSLog(@"textDetailDictionary2 after update:%@ ",textDetailDictionary);
     
     
     //Here we call Render Layer on View
-    [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+    [flyimgView renderLayer:currentLayer layerDictionary:textDetailDictionary];
     
     //Here we Highlight The TextView [ show borders arround it ]
     [self.flyimgView layerIsBeingEdited:currentLayer];
@@ -3280,6 +3323,24 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     // SET BOTTOM BAR
     [self setStyleTabAction:fontTabButton];
+    
+    if( isNewText == YES ) {
+            isNewText = NO;
+        
+//            UILabel *curLabelView = [self.flyimgView.layers objectForKey:currentLayer];
+//            CGAffineTransform newTransForm = curLabelView.transform;
+//            [self layerTransformedforKey:currentLayer :&newTransForm];
+//        
+//            textDetailDictionary[@"x"]      = tempTextDetailDictionary[@"x"];
+//            textDetailDictionary[@"y"]      = tempTextDetailDictionary[@"y"];
+//            //textDetailDictionary[@"width"]  =  tempTextDetailDictionary[@"width"];
+//            //textDetailDictionary[@"height"] = tempTextDetailDictionary[@"height"];
+//            [flyer.masterLayers setValue:textDetailDictionary forKey:currentLayer];
+//
+//            NSLog(@"textDetailDictionary3 after update:%@ ",textDetailDictionary);
+        
+    }
+
     
 	[lastTextView resignFirstResponder];
 	[lastTextView removeFromSuperview];
@@ -5247,10 +5308,12 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [addMoreFontTabButton setSelected:YES];
         
         if ([currentLayer isEqualToString:@""]) {
+            isNewText = YES;
             currentLayer = [flyer addText];
             editButtonGlobal.uid = currentLayer;
         }
         [self callWrite];
+
 	}
     else if(selectedButton == addMorePhotoTabButton)
 	{
