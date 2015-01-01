@@ -3039,10 +3039,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     [self addButtonsInRightNavigation:@"callWrite"];
     
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-	[backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
-    backButton.showsTouchWhenHighlighted = YES;
+    UIButton *backButtonTemp = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+	[backButtonTemp addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [backButtonTemp setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+    backButtonTemp.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItem:backBarButton];
     
@@ -3109,7 +3109,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     NSMutableArray  *barItems   =   [NSMutableArray arrayWithObjects:nil];
     if( [callFrom isEqualToString:@"callWrite"] ){
         UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-        [nextButton addTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
+        [nextButton addTarget:self action:@selector(nextForFont) forControlEvents:UIControlEventTouchUpInside];
         [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
         nextButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
@@ -3150,7 +3150,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
         barItems  = [NSMutableArray arrayWithObjects:doneBarButton,delBarButton,nil];
     }
-    else if( [callFrom isEqualToString:@"callStyle"] ){
+    else if( [callFrom isEqualToString:@"nextForFont"] ){
         // Done Bar Button
         UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
         [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
@@ -3222,9 +3222,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  * Here we Set ScrollView and Bottom Tabs
  * after getting Text
  */
--(void)callStyle
+-(void)nextForFont
 {
-    [self addButtonsInRightNavigation:@"callStyle"];
+    [self addButtonsInRightNavigation:@"nextForFont"];
     
     //Checking Empty String
     if ([lastTextView.text isEqualToString:@""] ) {
@@ -3792,7 +3792,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         lastTextView.accessibilityLabel = @"TextInput";
         
         // For Immediate Showing Delete button
-        [self callStyle];
+        [self nextForFont];
     }
     else if ( [type isEqualToString:FLYER_LAYER_WATER_MARK] ) {
         if( [self wmCanPerformAction:currentLayer] ) {
