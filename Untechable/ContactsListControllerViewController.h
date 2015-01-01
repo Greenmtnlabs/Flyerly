@@ -16,6 +16,7 @@
 
     UIButton *backButton;
     UIButton *nextButton;
+    UIButton *skipButton;
     UIColor *defGreen;//GREEN
     UIColor *defGray;//GRAY
     

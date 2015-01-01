@@ -11,6 +11,7 @@
 #import "ContactListCell.h"
 #import "ContactsCustomizedModal.h"
 #import "ContactCustomizeDetailsControlelrViewController.h"
+#import "SocialnetworkController.h"
 #import "Common.h"
 
 @interface ContactsListControllerViewController ()
@@ -96,8 +97,20 @@
         [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
         
         nextButton.showsTouchWhenHighlighted = YES;
+        
+        skipButton = [[UIButton alloc] initWithFrame:CGRectMake(33, 0, 33, 42)];
+        skipButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
+        [skipButton setTitle:@"SKIP" forState:normal];
+        [skipButton setTitleColor:defGray forState:UIControlStateNormal];
+        [skipButton addTarget:self action:@selector(btnSkipTouchStart) forControlEvents:UIControlEventTouchDown];
+        [skipButton addTarget:self action:@selector(btnSkipTouchEnd) forControlEvents:UIControlEventTouchUpInside];
+        
+        //[skipButton setBackgroundColor:[UIColor redColor]];
+        skipButton.showsTouchWhenHighlighted = YES;
+        
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
-        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
+        UIBarButtonItem *skipButtonBarButton = [[UIBarButtonItem alloc] initWithCustomView:skipButton];
+        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:skipButtonBarButton,nil];
         
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
     }
@@ -105,6 +118,87 @@
 
 -(void) goBack {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)storeSceenVarsInDic
+{
+    //untechable.spendingTimeTxt = _inputSpendingTimeText.text;
+    //untechable.hasEndDate = !([_cbNoEndDate isSelected]);
+    
+    [untechable setOrSaveVars:SAVE];
+}
+
+- (void)setSkipHighlighted:(BOOL)highlighted {
+    (highlighted) ? [skipButton setBackgroundColor:defGreen] : [skipButton setBackgroundColor:[UIColor clearColor]];
+}
+
+-(void)next:(NSString *)after{
+    
+    if( [after isEqualToString:@"GO_TO_NEXT"] || [after isEqualToString:@"ON_SKIP"] ) {
+        
+        SocialnetworkController *socialnetwork;
+        socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
+        socialnetwork.untechable = untechable;
+        [self.navigationController pushViewController:socialnetwork animated:YES];
+        
+    }
+}
+-(void)btnSkipTouchStart{
+    [self setSkipHighlighted:YES];
+}
+-(void)btnSkipTouchEnd{
+    [self setSkipHighlighted:NO];
+    [self onSkip];
+}
+
+-(void)onSkip{
+    
+    [self setSkipHighlighted:NO];
+    
+    [self storeSceenVarsInDic];
+    //[self stopAllTask];
+    
+    [self next:@"ON_SKIP"];
+    
+}
+-(void)onNext{
+    
+    [self storeSceenVarsInDic];
+    
+    //[self hideAllControlls];
+    
+    BOOL goToNext = untechable.hasEndDate ? NO : YES;
+    
+    //When we have end date, must check end date is greater then start date
+    if( untechable.hasEndDate == YES )
+    {
+        NSDate *d1 = [untechable.commonFunctions timestampStrToNsDate:untechable.startDate];
+        NSDate *d2 = [untechable.commonFunctions timestampStrToNsDate:untechable.endDate];
+        
+        
+        goToNext = [untechable.commonFunctions date1IsSmallerThenDate2:d1 date2:d2];
+        
+        if( goToNext == NO ) {
+            
+            [untechable.commonFunctions showAlert:@"Invalid Dates" message:@"End date should be greater then start date."];
+        }
+        
+    }
+    
+    NSLog(goToNext ? @"goToNext- YES" : @"goToNext- NO");
+    
+    
+    if( goToNext ) {
+        
+        ContactsListControllerViewController *listController = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
+        listController.untechable = untechable;
+        [self.navigationController pushViewController:listController animated:YES];
+        
+        /*PhoneSetupController *phoneSetup;
+         phoneSetup = [[PhoneSetupController alloc]initWithNibName:@"PhoneSetupController" bundle:nil];
+         phoneSetup.untechable = untechable;
+         [self.navigationController pushViewController:phoneSetup animated:YES];*/
+    }
 }
 
 -(void)btnNextTouchStart{
@@ -444,6 +538,8 @@
             }
             
             contactModal.allPhoneNumbers = allNumbers;
+            
+            contactModal.customTextForContact = untechable.spendingTimeTxt;
             
             [contactsArray addObject:contactModal];
         }

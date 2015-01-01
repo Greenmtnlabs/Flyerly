@@ -12,7 +12,7 @@ ContactsCustomizedModal *contactModal_;
 
 @implementation CustomTextTableViewCell
 
-@synthesize untechable;
+@synthesize untechable,customText;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

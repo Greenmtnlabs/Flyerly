@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "Untechable.h"
 #import "ContactsCustomizedModal.h"
+#import "BSKeyboardControls.h"
 
-@interface ContactCustomizeDetailsControlelrViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>{
+@interface ContactCustomizeDetailsControlelrViewController : UIViewController <UITableViewDelegate, BSKeyboardControlsDelegate, UITableViewDataSource,UITextViewDelegate>
+{
     
     UIButton *backButton;
     UIButton *nextButton;

@@ -53,11 +53,26 @@
             
             curContactDetails =  [customizedContactsDictionary objectForKey:[NSString stringWithFormat:@"%i",i]];
             
+            
+            
             if ( [[curContactDetails objectForKey:@"contactName"] isEqualToString:contactModal.name] ){
                 
+                [curContactDetails setObject:contactModal.customTextForContact forKey:@"customTextForContact"];
+                NSString *customText = [curContactDetails objectForKey:@"customTextForContact"];
+                [contactModal.customTextForContact isEqualToString:customText];
+                
                 alreadyExist = YES;
+            }else {
+                [curContactDetails setObject:contactModal.customTextForContact forKey:@"customTextForContact"];
+                [curContactDetails setObject:contactModal.allPhoneNumbers forKey:@"phoneNumbers"];
+                [curContactDetails setObject:contactModal.allEmails forKey:@"emailAddresses"];
+                [curContactDetails setObject:contactModal.name forKey:@"contactName"];
             }
         }
+    }else {
+        
+        curContactDetails = [[NSMutableDictionary alloc] init];
+       
     }
     
     
@@ -155,6 +170,13 @@
 }
 
 -(void) goBack {
+    
+    NSMutableArray *customizedContactsModals = [[NSMutableArray alloc] init];
+    
+    [customizedContactsModals addObject:contactModal];
+    
+    untechable.customizedContacts = [untechable.commonFunctions convertCCMArrayIntoJsonString:customizedContactsModals];
+    
     [untechable setOrSaveVars:SAVE];
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -267,7 +289,26 @@
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CustomTextTableViewCell" owner:self options:nil];
         cell = (CustomTextTableViewCell *)[nib objectAtIndex:0];
         
-        [cell setCellValues: untechable.spendingTimeTxt];
+        [cell.customText setDelegate:self];
+        
+        [cell.customText setReturnKeyType:UIReturnKeyDone];
+        
+        if ( [curContactDetails objectForKey:@"customTextForContact"] != nil )
+        {
+            if ( ![[curContactDetails objectForKey:@"customTextForContact"] isEqualToString:untechable.spendingTimeTxt] ){
+                
+                cell.customText.text = [curContactDetails objectForKey:@"customTextForContact"];
+                
+            }else{
+                
+                [cell setCellValues: untechable.spendingTimeTxt];
+                
+            }
+        }else{
+            
+            [cell setCellValues: untechable.spendingTimeTxt];
+            
+        }
         
         [cell setCellModal:contactModal];
         
@@ -304,6 +345,7 @@
             curContactDetails =  [customizedContactsDictionary objectForKey:[NSString stringWithFormat:@"%i",i]];
             
             if ( [[curContactDetails objectForKey:@"contactName"] isEqualToString:contactModal.name] ){
+                
                 
                 alreadyExist = YES;
             }
@@ -380,11 +422,6 @@
             
             [cell.smsButton setSelected:YES];
             
-            NSMutableArray *customizedContactsModals = [[NSMutableArray alloc] init];
-            
-            [customizedContactsModals addObject:contactModal];
-            
-            untechable.customizedContacts = [untechable.commonFunctions convertCCMArrayIntoJsonString:customizedContactsModals];
         }
     
     }else {
@@ -448,6 +485,50 @@
         //[untechable.customizedContacts addObject:contactDict];*/
     }
 }
+
+- (BOOL) textViewShouldBeginEditing:(UITextView *)textView {
+    
+    CustomTextTableViewCell *cell = (CustomTextTableViewCell *)[[textView superview] superview];
+    
+    NSIndexPath *indexPath = [_contactDetailsTable indexPathForCell:cell];
+    
+    _contactDetailsTable.frame= CGRectMake(_contactDetailsTable.frame.origin.x, _contactDetailsTable.frame.origin.y, _contactDetailsTable.frame.size.width, _contactDetailsTable.frame.size.height - 190);
+    [_contactDetailsTable scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    
+    return YES;
+}
+
+- (BOOL)textView:(UITextView *)textView
+shouldChangeTextInRange:(NSRange)range
+ replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"])
+    {
+        CustomTextTableViewCell *cell = (CustomTextTableViewCell *)[[textView superview] superview];
+        
+        //contactModal.customTextForContact = cell.customText.text;
+        
+        [curContactDetails setObject:cell.customText.text forKey:@"customTextForContact"];
+        contactModal.customTextForContact = [curContactDetails objectForKey:@"customTextForContact"];
+        
+        [textView resignFirstResponder];
+        NSIndexPath *myIP = [NSIndexPath indexPathForRow:0 inSection:0] ;
+        _contactDetailsTable.frame= CGRectMake(_contactDetailsTable.frame.origin.x, _contactDetailsTable.frame.origin.y, _contactDetailsTable.frame.size.width, _contactDetailsTable.frame.size.height + 190);
+        [_contactDetailsTable scrollToRowAtIndexPath:myIP atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
+    return YES;
+}
+
+
+
+- (IBAction)dismissKeyboard:(id)sender;
+{
+    NSLog(@"asdfasfda");
+    //[textField becomeFirstResponder];
+    //[textField resignFirstResponder];
+}
+
+
 
 -(IBAction)callButtonTapped:(id) sender
 {

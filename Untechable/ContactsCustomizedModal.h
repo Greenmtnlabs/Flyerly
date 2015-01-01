@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "Untechable.h"
 
 @class ContactsCustomizedModal;
 
@@ -25,6 +25,8 @@
 
 @property (nonatomic,strong)NSString *name;
 
+@property (nonatomic,strong)  Untechable *untechable;
+
 @property (nonatomic,strong)NSString *mobileNumber;
 @property (nonatomic,strong)NSString *mainNumber;
 @property (nonatomic,strong)NSString *iPhoneNumber;
@@ -34,6 +36,7 @@
 @property (nonatomic,strong)NSMutableArray *allEmails;
 @property (nonatomic,strong)NSMutableDictionary *allPhoneNumbers;
 @property (nonatomic,strong)NSMutableArray *phoneNumbersStatus;
+@property (nonatomic,strong)NSString *customTextForContact;
 
 @property (nonatomic,strong)NSString *description;
 @property (nonatomic,strong)NSString *others;
