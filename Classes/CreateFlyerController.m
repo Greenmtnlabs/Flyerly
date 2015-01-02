@@ -1911,10 +1911,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
                 //Handling Select Unselect ( Highlight selected resource )
                 [self setSelectedItem:FLYER_LAYER_TEXT inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
-                //Update Ui -------}---
                 
                 //Rufi code
                 [flyimgView setLabelAfterFontChange:currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
+                
+                //Update Ui -------}---
             }
             i++;
         }// uiImageView Found

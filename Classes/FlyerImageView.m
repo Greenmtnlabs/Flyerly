@@ -323,7 +323,7 @@ CGAffineTransform previuosTransform;
 
 - (void) applyTransformOnLabel:(CustomLabel *)lbl CustomLableDictionary:(NSMutableDictionary *)detail {
 
-    if ( ([detail objectForKey:@"a"] != nil) && ([detail objectForKey:@"b"] != nil) && ([detail objectForKey:@"c"] != nil) && ([detail objectForKey:@"d"] != nil) && ([detail objectForKey:@"tx"] != nil ) && ([detail objectForKey:@"ty"] != nil) ) {
+    if ( [self hasTransformation:&detail] ) {
         
         CGAffineTransform ttransform = CGAffineTransformMake([[detail valueForKey:@"a"] floatValue], [[detail valueForKey:@"b"] floatValue], [[detail valueForKey:@"c"] floatValue], [[detail valueForKey:@"d"] floatValue], [[detail valueForKey:@"tx"] floatValue], [[detail valueForKey:@"ty"] floatValue]);
         
@@ -331,6 +331,9 @@ CGAffineTransform previuosTransform;
         lbl.layer.anchorPoint = CGPointMake( 0.5, 0.5 );
         lbl.transform = ttransform;
     }
+}
+-(BOOL)hasTransformation:(NSMutableDictionary **)detail {
+    return ( ([*detail objectForKey:@"a"] != nil) && ([*detail objectForKey:@"b"] != nil) && ([*detail objectForKey:@"c"] != nil) && ([*detail objectForKey:@"d"] != nil) && ([*detail objectForKey:@"tx"] != nil ) && ([*detail objectForKey:@"ty"] != nil) ) ? YES : NO;
 }
 
 /*
@@ -483,17 +486,44 @@ CGAffineTransform previuosTransform;
     lble.numberOfLines = 80;
 //------------{-----
     //Configure the label
+    CGRect dicRec = CGRectMake([[detail objectForKey:@"x"] floatValue], [[detail objectForKey:@"y"] floatValue], [[detail objectForKey:@"x"] floatValue], [[detail objectForKey:@"height"] floatValue] );
+    
     CGRect fr = lble.frame;
-    fr.origin.x = [[detail objectForKey:@"x"] floatValue];
-    fr.origin.y = [[detail objectForKey:@"y"] floatValue];
-    fr.size.width = [[detail valueForKey:@"width"] floatValue];
-    fr.size.height = [[detail valueForKey:@"height"] floatValue];
+    
+    NSLog(@"dicRec(x:%f,y:%f,w:%f,h:%f,)",dicRec.origin.x,dicRec.origin.y,dicRec.size.width,dicRec.size.height);
+    NSLog(@"fr(x:%f,y:%f,w:%f,h:%f,)",fr.origin.x,fr.origin.y,fr.size.width,fr.size.height);
+    
+    BOOL thisTxtHasTransformation = [self hasTransformation:&detail];
+    //if ( thisTxtHasTransformation ) {
+        fr.origin.x = dicRec.origin.x;
+        fr.origin.y = dicRec.origin.y;
+    //}
+    
+    fr.size.width = (dicRec.size.width > fr.size.width ) ? dicRec.size.width : fr.size.width;
+    fr.size.height = (dicRec.size.height > fr.size.height ) ? dicRec.size.height : fr.size.height;
     lble.frame = fr;
     
-    //Transform the label
-    [self applyTransformOnLabel:lble CustomLableDictionary:detail];
+    if ( thisTxtHasTransformation ) {
+        [self applyTransformOnLabel:lble CustomLableDictionary:detail];
+    }
+    
+    NSLog(@"lble-After-Transofrom(x:%f,y:%f,w:%f,h:%f,)",lble.frame.origin.x,lble.frame.origin.y,lble.frame.size.width,lble.frame.size.height);
+    NSLog(@"fr-After-Transofrom(x:%f,y:%f,w:%f,h:%f,)",fr.origin.x,fr.origin.y,fr.size.width,fr.size.height);
     
     [lble sizeToFit];
+    
+    if ( thisTxtHasTransformation == NO ) {
+
+        
+        NSLog(@"lble-After-sizeToFit(x:%f,y:%f,w:%f,h:%f,)",lble.frame.origin.x,lble.frame.origin.y,lble.frame.size.width,lble.frame.size.height);
+        NSLog(@"fr-After-sizeToFit(x:%f,y:%f,w:%f,h:%f,)",fr.origin.x,fr.origin.y,fr.size.width,fr.size.height);
+
+        
+        lble.frame = CGRectMake(fr.origin.x,fr.origin.y,lble.frame.size.width,lble.frame.size.height);
+        NSLog(@"lble-sizeToFit(x:%f,y:%f,w:%f,h:%f,)",lble.frame.origin.x,lble.frame.origin.y,lble.frame.size.width,lble.frame.size.height);
+    }
+    
+    
 //------------}-----
     
     [self addSubview:lble];
