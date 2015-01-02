@@ -1904,18 +1904,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [flyer setFlyerTextFont:currentLayer FontName:[NSString stringWithFormat:@"%@",[selectedFont familyName]]];
                 //Update Dictionaries-----------------}---
                 
-                
-
                 //Update Ui------{----
-                //[flyimgView configureLabelFont :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
-
-                //Handling Select Unselect ( Highlight selected resource )
-                //[self setSelectedItem:FLYER_LAYER_TEXT inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
-                
-                //Rufi code
-                [self setFontRufi:[flyer getLayerFromMaster:currentLayer]];
-                //[flyimgView setLabelAfterFontChange:currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
-                
+                [self reRenderLabelAfterFontTypeChange:[flyer getLayerFromMaster:currentLayer]]; //Rufi code
                 //Update Ui -------}---
             }
             i++;
@@ -1924,27 +1914,14 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 	}// Loop
 }
 
--(void)setFontRufi:(NSMutableDictionary *)labelDictionary
+-(void)reRenderLabelAfterFontTypeChange:(NSMutableDictionary *)labelDictionary
 {
-    /*
-    //[flyimgView setLabelAfterFontChange:currentLayer labelDictionary:labelDictionary];
-    CustomLabel *lble = [flyimgView.layers objectForKey:currentLayer];
-    
-    //set Label Font
-    lble.font = [UIFont fontWithName:[labelDictionary valueForKey:@"fontname"] size:[[labelDictionary valueForKey:@"fontsize"] floatValue]];
-    
-    [lble setText:[labelDictionary valueForKey:@"text"]];
-    */
-    
     [self.flyimgView deleteLayer:currentLayer];
 
     [flyimgView renderLayer:currentLayer layerDictionary:labelDictionary];
     
-    
     //Here we Highlight The TextView [ show borders arround it ]
     [flyimgView layerIsBeingEdited:currentLayer];
-    
-    
 }
 
 
