@@ -1907,13 +1907,14 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
 
                 //Update Ui------{----
-                [flyimgView configureLabelFont :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
+                //[flyimgView configureLabelFont :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
 
                 //Handling Select Unselect ( Highlight selected resource )
-                [self setSelectedItem:FLYER_LAYER_TEXT inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
+                //[self setSelectedItem:FLYER_LAYER_TEXT inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
                 
                 //Rufi code
-                [flyimgView setLabelAfterFontChange:currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
+                [self setFontRufi:[flyer getLayerFromMaster:currentLayer]];
+                //[flyimgView setLabelAfterFontChange:currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
                 
                 //Update Ui -------}---
             }
@@ -1921,6 +1922,29 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }// uiImageView Found
         
 	}// Loop
+}
+
+-(void)setFontRufi:(NSMutableDictionary *)labelDictionary
+{
+    /*
+    //[flyimgView setLabelAfterFontChange:currentLayer labelDictionary:labelDictionary];
+    CustomLabel *lble = [flyimgView.layers objectForKey:currentLayer];
+    
+    //set Label Font
+    lble.font = [UIFont fontWithName:[labelDictionary valueForKey:@"fontname"] size:[[labelDictionary valueForKey:@"fontsize"] floatValue]];
+    
+    [lble setText:[labelDictionary valueForKey:@"text"]];
+    */
+    
+    [self.flyimgView deleteLayer:currentLayer];
+
+    [flyimgView renderLayer:currentLayer layerDictionary:labelDictionary];
+    
+    
+    //Here we Highlight The TextView [ show borders arround it ]
+    [flyimgView layerIsBeingEdited:currentLayer];
+    
+    
 }
 
 
@@ -3237,7 +3261,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         lastTextView = nil;
         
         [self callAddMoreLayers];
-        return; //Do not run the bello code
+        return; // Do not run the bellow code
     }
     
     NSMutableDictionary *textDetailDictionary = [flyer getLayerFromMaster:currentLayer];
@@ -3962,6 +3986,9 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 }
 
 #pragma mark - Delegate for Flyerly ImageView
+-(void)setLayerDicXY :(NSString *)layerId :(CGRect)rect {
+    [flyer setLayerDicXYInModel :layerId :rect];
+}
 
 /**
  *  Transformation changed for layer, let the model know.

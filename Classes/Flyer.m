@@ -868,6 +868,16 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     [masterLayers setValue:imageDetailDictionary forKey:uid];
 }
+-(void)setLayerDicXYInModel :(NSString *)layerId :(CGRect)rect
+{
+    NSMutableDictionary *imageDetailDictionary = [self getLayerFromMaster:layerId];
+    imageDetailDictionary[@"x"] = [NSString stringWithFormat:@"%f",rect.origin.x];
+    imageDetailDictionary[@"y"] = [NSString stringWithFormat:@"%f",rect.origin.y];
+    [masterLayers setValue:imageDetailDictionary forKey:layerId];
+}
+
+
+
 
 -(void)setImageTransform :(NSString *)uid :(CGAffineTransform *) transform {
     

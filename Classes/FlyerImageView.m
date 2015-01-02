@@ -502,15 +502,17 @@ CGAffineTransform previuosTransform;
     fr.size.width = (dicRec.size.width > fr.size.width ) ? dicRec.size.width : fr.size.width;
     fr.size.height = (dicRec.size.height > fr.size.height ) ? dicRec.size.height : fr.size.height;
     lble.frame = fr;
+    [lble sizeToFit];
     
     if ( thisTxtHasTransformation ) {
-        [self applyTransformOnLabel:lble CustomLableDictionary:detail];
+        //[self applyTransformOnLabel:lble CustomLableDictionary:detail];
+        //[lble sizeToFit];
     }
     
     NSLog(@"lble-After-Transofrom(x:%f,y:%f,w:%f,h:%f,)",lble.frame.origin.x,lble.frame.origin.y,lble.frame.size.width,lble.frame.size.height);
     NSLog(@"fr-After-Transofrom(x:%f,y:%f,w:%f,h:%f,)",fr.origin.x,fr.origin.y,fr.size.width,fr.size.height);
     
-    [lble sizeToFit];
+    
     
     if ( thisTxtHasTransformation == NO ) {
 
@@ -767,6 +769,7 @@ CGAffineTransform previuosTransform;
         else if (recognizer.state == UIGestureRecognizerStateEnded) {
             
             CGAffineTransform newTransForm = recognizer.view.transform;
+            //CGRect newRect = recognizer.view.frame;
             // Get all layer keys for this flyer
             NSArray *keys = [layers allKeysForObject:recognizer.view];
             // Find key for rotated layer
@@ -775,6 +778,7 @@ CGAffineTransform previuosTransform;
                 
                 // Save rotation angle for layer
                 [self.delegate layerTransformedforKey:key :&newTransForm];
+                //[self.delegate setLayerDicXY :key  :newRect];
                 
                 //[self.delegate frameChangedForLayer:key frame:recognizer.view.frame];
             }

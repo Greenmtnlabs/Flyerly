@@ -59,6 +59,8 @@
 
 -(void)setImageFrame :(NSString *)uid :(CGRect )photoFrame;
 
+-(void)setLayerDicXYInModel :(NSString *)layerId :(CGRect)rect;
+
 -(void)setImageTransform :(NSString *)uid :(CGAffineTransform *) transform;
 
 -(void)addImageRotationAngle:(NSString *)uid :(CGFloat )rotationAngle;
