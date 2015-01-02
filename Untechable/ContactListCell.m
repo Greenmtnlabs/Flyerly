@@ -11,7 +11,7 @@
 
 @implementation ContactListCell
 
-@synthesize contactName;
+@synthesize contactName,contactImage;
 
 /*
  * Set CellObjects
@@ -21,6 +21,9 @@
     // Set Values
     [contactName setText:model.name];
     
+    self.contactImage.image = model.img;
+    self.contactImage.layer.cornerRadius = self.contactImage.frame.size.width / 2;
+    self.contactImage.clipsToBounds = YES;
     /*if ([model.others isEqualToString:@""]){
         [description setText:model.description];
     }else {
@@ -33,10 +36,7 @@
     }else if ( [tableName isEqualToString:@"PrintInvites"] ){
         [model setInvitedStatus:0];
     }
-    
 }
-
-
 #pragma mark Contacts  Delegate
 
 -(void)contactInvited :(ContactsCustomizedModal *)model{

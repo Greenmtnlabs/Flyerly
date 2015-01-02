@@ -20,8 +20,11 @@
 
 -(void)setCellValues :(NSString *)contactName ContactModal:(ContactsCustomizedModal *) contactModal;
 {
-    contactImage.layer.cornerRadius = 25;
+    
     self.contactName.text = contactName;
+    self.contactImage.image = contactModal.img;
+    self.contactImage.layer.cornerRadius = self.contactImage.frame.size.width / 2;
+    self.contactImage.clipsToBounds = YES;
 }
 
 @end

@@ -43,6 +43,8 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Entypo-Social.otf</string>
+		<string>Entypo.otf</string>
 		<string>Pigiarniq Bold.ttf</string>
 		<string>Pigiarniq Heavy.ttf</string>
 		<string>Pigiarniq Italic.ttf</string>

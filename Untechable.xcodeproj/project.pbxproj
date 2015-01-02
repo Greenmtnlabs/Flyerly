@@ -46,6 +46,11 @@
 		248E06B71A4ACD6E0099846A /* ContactsCustomizedModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 248E06B61A4ACD6E0099846A /* ContactsCustomizedModal.m */; };
 		248E06BB1A4AD8BA0099846A /* ContactListCell-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 248E06BA1A4AD8BA0099846A /* ContactListCell-iPhone6.xib */; };
 		248E06BD1A4AD9180099846A /* ContactListCell-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 248E06BC1A4AD9180099846A /* ContactListCell-iPhone6-Plus.xib */; };
+		249952161A56C8A1001AEB84 /* Cliparts.plist in Resources */ = {isa = PBXBuildFile; fileRef = 249952151A56C8A1001AEB84 /* Cliparts.plist */; };
+		249952191A56C905001AEB84 /* Entypo-Social.otf in Resources */ = {isa = PBXBuildFile; fileRef = 249952171A56C905001AEB84 /* Entypo-Social.otf */; };
+		2499521A1A56C905001AEB84 /* Entypo.otf in Resources */ = {isa = PBXBuildFile; fileRef = 249952181A56C905001AEB84 /* Entypo.otf */; };
+		2499521D1A56F260001AEB84 /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = 2499521B1A56F260001AEB84 /* email.png */; };
+		2499521E1A56F260001AEB84 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 2499521C1A56F260001AEB84 /* phone.png */; };
 		24A4B7A71A5126410029C8DF /* CustomTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A4B7A51A5126410029C8DF /* CustomTextTableViewCell.m */; };
 		24A4B7A81A5126410029C8DF /* CustomTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A4B7A61A5126410029C8DF /* CustomTextTableViewCell.xib */; };
 		24A65BEC1A30451E00BE83C6 /* SSLCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A65BEA1A30451E00BE83C6 /* SSLCell.m */; };
@@ -217,6 +222,11 @@
 		248E06B61A4ACD6E0099846A /* ContactsCustomizedModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsCustomizedModal.m; sourceTree = "<group>"; };
 		248E06BA1A4AD8BA0099846A /* ContactListCell-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ContactListCell-iPhone6.xib"; sourceTree = "<group>"; };
 		248E06BC1A4AD9180099846A /* ContactListCell-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ContactListCell-iPhone6-Plus.xib"; sourceTree = "<group>"; };
+		249952151A56C8A1001AEB84 /* Cliparts.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Cliparts.plist; sourceTree = "<group>"; };
+		249952171A56C905001AEB84 /* Entypo-Social.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Entypo-Social.otf"; sourceTree = "<group>"; };
+		249952181A56C905001AEB84 /* Entypo.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.otf; sourceTree = "<group>"; };
+		2499521B1A56F260001AEB84 /* email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email.png; sourceTree = "<group>"; };
+		2499521C1A56F260001AEB84 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
 		24A4B7A41A5126410029C8DF /* CustomTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTextTableViewCell.h; sourceTree = "<group>"; };
 		24A4B7A51A5126410029C8DF /* CustomTextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTextTableViewCell.m; sourceTree = "<group>"; };
 		24A4B7A61A5126410029C8DF /* CustomTextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTextTableViewCell.xib; sourceTree = "<group>"; };
@@ -437,6 +447,7 @@
 				24A4B7A41A5126410029C8DF /* CustomTextTableViewCell.h */,
 				24A4B7A51A5126410029C8DF /* CustomTextTableViewCell.m */,
 				24A4B7A61A5126410029C8DF /* CustomTextTableViewCell.xib */,
+				249952151A56C8A1001AEB84 /* Cliparts.plist */,
 			);
 			name = ContactCustomizeDetailsControlelr;
 			sourceTree = "<group>";
@@ -462,6 +473,8 @@
 		36474F0719D96E9800084F34 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				249952171A56C905001AEB84 /* Entypo-Social.otf */,
+				249952181A56C905001AEB84 /* Entypo.otf */,
 				36474F1D19D9780100084F34 /* Pigiarniq Bold.ttf */,
 				36474F1E19D9780100084F34 /* Pigiarniq Heavy.ttf */,
 				36474F1F19D9780100084F34 /* Pigiarniq Italic.ttf */,
@@ -706,6 +719,8 @@
 		36B0369A19DAD2AB00E8CD21 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				2499521B1A56F260001AEB84 /* email.png */,
+				2499521C1A56F260001AEB84 /* phone.png */,
 				200ACE121A3874B200DC7047 /* aolIcon.png */,
 				200ACE131A3874B200DC7047 /* aolIcon@2x.png */,
 				200ACE141A3874B200DC7047 /* aolIcon@3x.png */,
@@ -922,7 +937,9 @@
 				36B276711A0124E800ED58AD /* pause.png in Resources */,
 				243C59FA1A4D984B0020350C /* PhoneNumberCell.xib in Resources */,
 				366EAF9C1A14C3530011D6C6 /* icon.png in Resources */,
+				249952191A56C905001AEB84 /* Entypo-Social.otf in Resources */,
 				36474F2619D9780100084F34 /* Pigiarniq Regular.ttf in Resources */,
+				2499521E1A56F260001AEB84 /* phone.png in Resources */,
 				36B276791A0124E800ED58AD /* record.png in Resources */,
 				366EAF961A14C3530011D6C6 /* icon-72.png in Resources */,
 				36B4E53F1A28BBD400CC18B0 /* EmailTableViewCell.xib in Resources */,
@@ -942,6 +959,7 @@
 				24848FE81A30403600BF1138 /* ServerAccountDetailsViewCell.xib in Resources */,
 				36474F2419D9780100084F34 /* Pigiarniq Italic.ttf in Resources */,
 				36B276741A0124E800ED58AD /* play_gray@2x.png in Resources */,
+				249952161A56C8A1001AEB84 /* Cliparts.plist in Resources */,
 				36B276761A0124E800ED58AD /* play@2x.png in Resources */,
 				2402BB841A1DBF6A00255A73 /* UntechablesList.xib in Resources */,
 				200ACE281A3874B200DC7047 /* exchangeIcon@2x.png in Resources */,
@@ -970,6 +988,7 @@
 				36B276771A0124E800ED58AD /* record_gray.png in Resources */,
 				366EAF991A14C3530011D6C6 /* icon-76@2x.png in Resources */,
 				200ACE241A3874B200DC7047 /* aolIcon.png in Resources */,
+				2499521A1A56C905001AEB84 /* Entypo.otf in Resources */,
 				366EAFA71A14C3530011D6C6 /* CHECKBOX_EMPTY.png in Resources */,
 				200ACE301A3874B200DC7047 /* outlookIcon.png in Resources */,
 				366EAFAA1A14E5370011D6C6 /* playvideo.png in Resources */,
@@ -1000,6 +1019,7 @@
 				24A65BED1A30451E00BE83C6 /* SSLCell.xib in Resources */,
 				366EAF951A14C3530011D6C6 /* icon-60@2x.png in Resources */,
 				24354D711A499F4F000EC781 /* ContactListCell.xib in Resources */,
+				2499521D1A56F260001AEB84 /* email.png in Resources */,
 				366EAFA01A14C3530011D6C6 /* Default-667h@2x.png in Resources */,
 				248E06BB1A4AD8BA0099846A /* ContactListCell-iPhone6.xib in Resources */,
 				24BAB18A1A2F340200855B77 /* logo-other.png in Resources */,

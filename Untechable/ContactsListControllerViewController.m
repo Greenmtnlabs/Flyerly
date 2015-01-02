@@ -558,9 +558,39 @@
     ContactCustomizeDetailsControlelrViewController *detailsController = [[ContactCustomizeDetailsControlelrViewController alloc] init];
     
     detailsController.untechable = untechable;
+    
     detailsController.contactModal = [contactsArray objectAtIndex:indexPath.row];
     
+    NSString *customizedContactsString = untechable.customizedContacts;
+    
+    NSError *writeError = nil;
+    
+    NSMutableDictionary *customizedContactsDictionary =
+    [NSJSONSerialization JSONObjectWithData: [customizedContactsString dataUsingEncoding:NSUTF8StringEncoding]
+                                    options: NSJSONReadingMutableContainers
+                                      error: &writeError];
+    
+    NSMutableDictionary *curContactDetails;
+    
+    if ( ![customizedContactsString isEqualToString:@""] ){
+        
+        for ( int i = 0; i < customizedContactsDictionary.count; i++ ){
+            
+            curContactDetails =  [customizedContactsDictionary objectForKey:[NSString stringWithFormat:@"%i",i]];
+            
+            NSMutableDictionary *tempPhoneDict = [curContactDetails objectForKey:@"phoneNumbers"];
+            
+            if ( [[curContactDetails objectForKey:@"contactName"] isEqualToString:detailsController.contactModal.name] &&
+                [detailsController.contactModal.allPhoneNumbers allKeys].count == [tempPhoneDict allKeys].count )
+            {
+                
+                
+            }else {
+            
+            }
+        }
+    }
+    
     [self.navigationController pushViewController:detailsController animated:YES];
-
 }
 @end
