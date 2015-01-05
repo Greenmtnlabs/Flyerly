@@ -1502,7 +1502,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [clipartsView addSubview:font];
             }
             
-            clipartsView.backgroundColor = [UIColor redColor];
+            //clipartsView.backgroundColor = [UIColor redColor];
+            //layerScrollView.backgroundColor = [UIColor greenColor];
             
             if( IS_IPHONE_5 ){
                 clipartsView.size = CGSizeMake(320, curYLoc + 85 );//(heightValue + 7) );
@@ -1648,8 +1649,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
         } // Loop
             
-            emoticonsView.backgroundColor = [UIColor redColor];
-            layerScrollView.backgroundColor = [UIColor greenColor];
+            //emoticonsView.backgroundColor = [UIColor redColor];
+            //layerScrollView.backgroundColor = [UIColor greenColor];
             
             if(IS_IPHONE_5 ){
                 emoticonsView.size = CGSizeMake(320, curYLoc + symbolScrollHeight + 75);
@@ -1658,7 +1659,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 emoticonsView.size = CGSizeMake(380, curYLoc + symbolScrollHeight + 75);
                 [layerScrollView setContentSize:CGSizeMake(320, curYLoc + symbolScrollHeight)];
             } else if( IS_IPHONE_6_PLUS ){
-                emoticonsView.frame = CGRectMake(emoticonsView.frame.origin.x, emoticonsView.frame.origin.y, layerScrollView.size.width, layerScrollView.size.height);
+                emoticonsView.frame = CGRectMake(layerScrollView.frame.origin.x+15, emoticonsView.frame.origin.y, layerScrollView.size.width, layerScrollView.size.height);
                 emoticonsView.size = CGSizeMake(584, curYLoc + symbolScrollHeight + 75);
                 [layerScrollView setContentSize:CGSizeMake(584, curYLoc + symbolScrollHeight)];
             } else {
