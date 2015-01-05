@@ -78,7 +78,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
                 
                 //Here we take Snap shot of Flyer and
                 //Flyer Add to Gallery if user allow to Access there photos
-                [createView.flyer setUpdatedSnapshotWithImage:[createView getFlyerSnapShot]];
+                //[createView.flyer setUpdatedSnapshotWithImage:[createView getFlyerSnapShot]];
                 
             });
             
