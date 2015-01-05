@@ -924,6 +924,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
             
+            if( IS_IPHONE_6_PLUS ){
+                flyerBordersView.frame = CGRectMake((layerScrollView.frame.origin.x+10), flyerBordersView.frame.origin.y, flyerBordersView.frame.size.width, flyerBordersView.frame.size.height);
+            }
             [layerScrollView addSubview:flyerBordersView];
             [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
             
@@ -1365,7 +1368,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
             
         } else if( IS_IPHONE_6_PLUS ){
-            textBordersView.frame = CGRectMake((textBordersView.frame.origin.x+17), textBordersView.frame.origin.y, textBordersView.frame.size.width, textBordersView.frame.size.height);
+            textBordersView.frame = CGRectMake((layerScrollView.frame.origin.x+17), textBordersView.frame.origin.y, textBordersView.frame.size.width, textBordersView.frame.size.height);
             
             [layerScrollView addSubview:textBordersView];
             [layerScrollView setContentSize:textBordersView.size];
@@ -1675,7 +1678,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     font.frame = CGRectMake(0, 0, 300, heightValue);
                 } else if ( IS_IPHONE_6 ) {
                     font.frame = CGRectMake(0, 0, 350, heightValue);
-                }else if ( IS_IPHONE_6_PLUS ) {                    
+                }else if ( IS_IPHONE_6_PLUS ) {
                     font.frame = CGRectMake(0, 0, 380, heightValue);
                 }else {
                     font.frame = CGRectMake(0, 0, 150, heightValue);
