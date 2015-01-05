@@ -31,16 +31,18 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1i9-B9-Ple" userLabel="Call">
                         <rect key="frame" x="268" y="8" width="42" height="42"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal">
+                        <state key="normal" backgroundImage="phone.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <state key="selected" backgroundImage="phone_selected.png"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yUV-uZ-85o" userLabel="SMS">
                         <rect key="frame" x="220" y="9" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal">
+                        <state key="normal" backgroundImage="sms.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <state key="selected" backgroundImage="sms_selected.png"/>
                     </button>
                 </subviews>
             </tableViewCellContentView>
@@ -53,6 +55,12 @@
             <point key="canvasLocation" x="-314" y="47"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="phone.png" width="21" height="21"/>
+        <image name="phone_selected.png" width="21" height="21"/>
+        <image name="sms.png" width="21" height="21"/>
+        <image name="sms_selected.png" width="21" height="21"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

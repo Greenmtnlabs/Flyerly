@@ -31,16 +31,19 @@
                         <state key="normal" backgroundImage="email.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <state key="selected" backgroundImage="email_selected.png"/>
                     </button>
                 </subviews>
             </tableViewCellContentView>
             <connections>
-                <outlet property="email" destination="0j1-5R-zrP" id="Qaw-Xb-wkf"/>
+                <outlet property="contactEmail" destination="0j1-5R-zrP" id="QcQ-Gq-D5Q"/>
+                <outlet property="emailButton" destination="7Ga-Vn-3GB" id="qhp-YD-YQz"/>
             </connections>
-            <point key="canvasLocation" x="345" y="244.5"/>
+            <point key="canvasLocation" x="-73" y="235.5"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="email.png" width="128" height="128"/>
+        <image name="email.png" width="21" height="21"/>
+        <image name="email_selected.png" width="21" height="21"/>
     </resources>
 </document>

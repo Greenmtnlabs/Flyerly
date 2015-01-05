@@ -469,7 +469,12 @@
             
             emailLabel = (NSString*)CFBridgingRelease(ABMultiValueCopyLabelAtIndex(emails, i));
             NSString* email = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(emails, j));
-            [allEmails addObject:email];
+            NSMutableArray *emailWithStatus = [[NSMutableArray alloc] init];
+            
+            [emailWithStatus setObject:email atIndexedSubscript:0];
+            [emailWithStatus setObject:@"0" atIndexedSubscript:1];
+            
+            [allEmails addObject:emailWithStatus];
             
         }
         contactModal.allEmails = allEmails;

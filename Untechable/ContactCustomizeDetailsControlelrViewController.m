@@ -41,7 +41,7 @@
     clipartsArray  = [[NSMutableArray alloc] initWithContentsOfFile:clipartsViewResourcePath];
     
     phoneNumberTypes = [contactModal.allPhoneNumbers allKeys];
-    
+
     NSString *customizedContactsString = untechable.customizedContacts;
     
     NSError *writeError = nil;
@@ -193,7 +193,6 @@
     (highlighted) ? [nextButton setBackgroundColor:defGreen] : [nextButton setBackgroundColor:[UIColor clearColor]];
 }
 
-
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
@@ -306,21 +305,10 @@
                 
                 if ( [smsStatus isEqualToString:@"1"] ){
                     [cell.smsButton setSelected:YES];
-                    UIFont *fontType = [UIFont fontWithName:[clipartsArray[1] objectForKey:@"fontType"] size:33.0f];
-                    [cell.smsButton.titleLabel setFont: fontType];
                     
-                    [cell.smsButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
                 }else if ( [smsStatus isEqualToString:@"0"] ){
                     
-                    UIFont *fontType = [UIFont fontWithName:[clipartsArray[1] objectForKey:@"fontType"] size:33.0f];
                     
-                    [cell.smsButton setTitle:[clipartsArray[0] objectForKey:@"character"] forState:UIControlStateNormal];
-                    
-                    UIColor *untachableGreen = [UIColor colorWithRed:(66/255.0) green:(247/255.0) blue:(206/255.0) alpha:1];
-                    
-                    [cell.smsButton setTitleColor:untachableGreen forState:UIControlStateNormal];
-                    
-                    [cell.smsButton.titleLabel setFont:fontType];
                     
                     [cell.smsButton setSelected:NO];
                 }
@@ -349,20 +337,23 @@
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmailCell" owner:self options:nil];
         cell = (EmailCell *)[nib objectAtIndex:0];
         
-        NSMutableArray *aar = [[NSMutableArray alloc] initWithArray:contactModal.allEmails];
+        [cell.emailButton addTarget:self
+                            action:@selector(emailButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+        NSMutableArray *allEmails = contactModal.allEmails;
         
-        [cell setCellValues: [aar objectAtIndex:indexPath.row]];
+        NSMutableArray *emailWithStatus = [allEmails objectAtIndex:indexPath.row];
+        
+        if ( [[emailWithStatus objectAtIndex:1] isEqualToString:@"1"] ){
+            [cell.emailButton setSelected:YES];
+        }
+        [cell setCellValues: [emailWithStatus objectAtIndex:0]];
         
         cell.untechable = untechable;
         
         [cell setCellModal:contactModal];
         
         return cell;
-        
-        
-        
     }
-    
     return cell;
 }
 
@@ -371,16 +362,56 @@
     return 4;
 }
 
+-(IBAction)emailButtonTapped:(id) sender
+{
+    EmailCell *emailCell;
+    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.contactDetailsTable];
+    NSIndexPath *indexPath = [self.contactDetailsTable indexPathForRowAtPoint:buttonPosition];
+    if (indexPath != nil)
+    {
+        emailCell = (EmailCell*)[_contactDetailsTable cellForRowAtIndexPath:indexPath];
+    }
+    
+    NSMutableArray *emailWithStatus =  [contactModal.allEmails objectAtIndex:indexPath.row];
+    
+    if ( [[emailWithStatus objectAtIndex:1] isEqualToString:@"1"] ){
+        [emailWithStatus setObject:@"0" atIndexedSubscript:1];
+        [emailCell.emailButton setSelected:NO];
+    }else if ( [[emailWithStatus objectAtIndex:1] isEqualToString:@"0"] ){
+        [emailWithStatus setObject:@"1" atIndexedSubscript:1];
+        [emailCell.emailButton setSelected:YES];
+    }
+    
+    [contactModal.allEmails  replaceObjectAtIndex:indexPath.row withObject:emailWithStatus];
+}
+
 -(IBAction)callButtonTapped:(id) sender
 {
-    PhoneNumberCell *cell = (PhoneNumberCell *)[[sender superview] superview];
+    PhoneNumberCell *phoneCell;
+    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.contactDetailsTable];
+    NSIndexPath *indexPath = [self.contactDetailsTable indexPathForRowAtPoint:buttonPosition];
+    if (indexPath != nil)
+    {
+        phoneCell = (PhoneNumberCell*)[_contactDetailsTable cellForRowAtIndexPath:indexPath];
+    }
+    
+    //NSMutableArray *phoneWithStatus =  [contactModal.allPhoneNumbers objectForKey:@"phoneNumbers"];
+    
+    /*if ( [[emailWithStatus objectAtIndex:1] isEqualToString:@"1"] ){
+        [emailWithStatus setObject:@"0" atIndexedSubscript:1];
+        [emailCell.emailButton setSelected:NO];
+    }else if ( [[emailWithStatus objectAtIndex:1] isEqualToString:@"0"] ){
+        [emailWithStatus setObject:@"1" atIndexedSubscript:1];
+        [emailCell.emailButton setSelected:YES];
+    }
+    
+    [contactModal.allEmails  replaceObjectAtIndex:indexPath.row withObject:emailWithStatus];*/
     
     BOOL alreadyExist = NO;
     
     NSString *customizedContactsString = untechable.customizedContacts;
     
     NSError *writeError = nil;
-    
     NSMutableDictionary *customizedContactsDictionary =
     [NSJSONSerialization JSONObjectWithData: [customizedContactsString dataUsingEncoding:NSUTF8StringEncoding]
                                     options: NSJSONReadingMutableContainers
@@ -405,7 +436,7 @@
         
         NSArray *numberTypes = [currContactNumbers allKeys];
         
-        if ( [numberTypes containsObject:cell.nubmerType.text] ){
+        if ( [numberTypes containsObject:phoneCell.nubmerType.text] ){
             
             //----
             NSArray *allAvailableNumberTypes = [contactModal.allPhoneNumbers allKeys];
@@ -415,19 +446,19 @@
                 
                 if ( [currContactNumbers objectForKey:[allAvailableNumberTypes objectAtIndex:i]] != nil ){
                     
-                    NSMutableArray *customizedNumArray = [currContactNumbers objectForKey:cell.nubmerType.text];
+                    NSMutableArray *customizedNumArray = [currContactNumbers objectForKey:phoneCell.nubmerType.text];
                     
                     NSString *callStatus = [customizedNumArray objectAtIndex:2];
                     
                     if ( [callStatus isEqualToString:@"1"] ){
                         [customizedNumArray setObject:@"0" atIndexedSubscript:2];
-                        [cell.callButton setSelected:NO];
+                        [phoneCell.callButton setSelected:NO];
                     }else if ( [callStatus isEqualToString:@"0"] ){
                         [customizedNumArray setObject:@"1" atIndexedSubscript:2];
-                        [cell.callButton setSelected:YES];
+                        [phoneCell.callButton setSelected:YES];
                     }
                     
-                    [currContactNumbers setObject:customizedNumArray forKey:cell.nubmerType.text];
+                    [currContactNumbers setObject:customizedNumArray forKey:phoneCell.nubmerType.text];
                     
                     [curContactDetails setObject:currContactNumbers forKey:@"phoneNumbers"];
                     
@@ -440,12 +471,12 @@
         }else {
             NSMutableArray *customizedNumArray = [[NSMutableArray alloc] initWithCapacity:3];
             
-            [customizedNumArray setObject:cell.nubmer.text atIndexedSubscript:0];
+            [customizedNumArray setObject:phoneCell.nubmer.text atIndexedSubscript:0];
             [customizedNumArray setObject:@"0" atIndexedSubscript:1];
             [customizedNumArray setObject:@"1" atIndexedSubscript:2];
-            [cell.callButton setSelected:YES];
+            [phoneCell.callButton setSelected:YES];
             
-            [currContactNumbers setObject:customizedNumArray forKey:cell.nubmerType.text];
+            [currContactNumbers setObject:customizedNumArray forKey:phoneCell.nubmerType.text];
             
             [curContactDetails setObject:currContactNumbers forKey:@"phoneNumbers"];
             
@@ -487,12 +518,12 @@
         NSMutableDictionary *phoneNumbers = [[NSMutableDictionary alloc] init];
         
         NSMutableArray *numberWithStatus = [[NSMutableArray alloc] initWithCapacity:3];
-        [numberWithStatus setObject:cell.nubmer.text atIndexedSubscript:0];
+        [numberWithStatus setObject:phoneCell.nubmer.text atIndexedSubscript:0];
         [numberWithStatus setObject:@"0" atIndexedSubscript:1];
         [numberWithStatus setObject:@"1" atIndexedSubscript:2];
-        [cell.callButton setSelected:YES];
+        [phoneCell.callButton setSelected:YES];
         
-        [phoneNumbers setObject:numberWithStatus forKey:cell.nubmerType.text];
+        [phoneNumbers setObject:numberWithStatus forKey:phoneCell.nubmerType.text];
         
         contactModal.allPhoneNumbers = phoneNumbers;
         
@@ -861,8 +892,7 @@ shouldChangeTextInRange:(NSRange)range
 {
     if ([text isEqualToString:@"\n"])
     {
-        CustomTextTableViewCell *cell = (CustomTextTableViewCell *)[[textView superview] superview];
-        
+        CustomTextTableViewCell *cell =(CustomTextTableViewCell*)textView.superview.superview.superview;
         //contactModal.customTextForContact = cell.customText.text;
         
         [curContactDetails setObject:cell.customText.text forKey:@"customTextForContact"];

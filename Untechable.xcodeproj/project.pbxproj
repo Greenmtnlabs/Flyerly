@@ -43,6 +43,16 @@
 		243C59FF1A4DA17C0020350C /* EmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243C59FD1A4DA17C0020350C /* EmailCell.xib */; };
 		24848FE71A30403600BF1138 /* ServerAccountDetailsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24848FE51A30403600BF1138 /* ServerAccountDetailsViewCell.m */; };
 		24848FE81A30403600BF1138 /* ServerAccountDetailsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24848FE61A30403600BF1138 /* ServerAccountDetailsViewCell.xib */; };
+		2486CBA31A5A79AC00AC125E /* sms_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 2486CB9F1A5A79AC00AC125E /* sms_selected.png */; };
+		2486CBA41A5A79AC00AC125E /* sms_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2486CBA01A5A79AC00AC125E /* sms_selected@2x.png */; };
+		2486CBA51A5A79AC00AC125E /* sms.png in Resources */ = {isa = PBXBuildFile; fileRef = 2486CBA11A5A79AC00AC125E /* sms.png */; };
+		2486CBA61A5A79AC00AC125E /* sms@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2486CBA21A5A79AC00AC125E /* sms@2x.png */; };
+		2486CBAA1A5A79F500AC125E /* email_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 2486CBA71A5A79F500AC125E /* email_selected.png */; };
+		2486CBAB1A5A79F500AC125E /* email_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2486CBA81A5A79F500AC125E /* email_selected@2x.png */; };
+		2486CBAC1A5A79F500AC125E /* email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2486CBA91A5A79F500AC125E /* email@2x.png */; };
+		2486CBB01A5A7B1000AC125E /* phone_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 2486CBAD1A5A7B1000AC125E /* phone_selected.png */; };
+		2486CBB11A5A7B1000AC125E /* phone_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2486CBAE1A5A7B1000AC125E /* phone_selected@2x.png */; };
+		2486CBB21A5A7B1000AC125E /* phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2486CBAF1A5A7B1000AC125E /* phone@2x.png */; };
 		248E06B71A4ACD6E0099846A /* ContactsCustomizedModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 248E06B61A4ACD6E0099846A /* ContactsCustomizedModal.m */; };
 		248E06BB1A4AD8BA0099846A /* ContactListCell-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 248E06BA1A4AD8BA0099846A /* ContactListCell-iPhone6.xib */; };
 		248E06BD1A4AD9180099846A /* ContactListCell-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 248E06BC1A4AD9180099846A /* ContactListCell-iPhone6-Plus.xib */; };
@@ -218,6 +228,16 @@
 		24848FE41A30403600BF1138 /* ServerAccountDetailsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerAccountDetailsViewCell.h; sourceTree = "<group>"; };
 		24848FE51A30403600BF1138 /* ServerAccountDetailsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerAccountDetailsViewCell.m; sourceTree = "<group>"; };
 		24848FE61A30403600BF1138 /* ServerAccountDetailsViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServerAccountDetailsViewCell.xib; sourceTree = "<group>"; };
+		2486CB9F1A5A79AC00AC125E /* sms_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sms_selected.png; sourceTree = "<group>"; };
+		2486CBA01A5A79AC00AC125E /* sms_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sms_selected@2x.png"; sourceTree = "<group>"; };
+		2486CBA11A5A79AC00AC125E /* sms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sms.png; sourceTree = "<group>"; };
+		2486CBA21A5A79AC00AC125E /* sms@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sms@2x.png"; sourceTree = "<group>"; };
+		2486CBA71A5A79F500AC125E /* email_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email_selected.png; sourceTree = "<group>"; };
+		2486CBA81A5A79F500AC125E /* email_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "email_selected@2x.png"; sourceTree = "<group>"; };
+		2486CBA91A5A79F500AC125E /* email@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "email@2x.png"; sourceTree = "<group>"; };
+		2486CBAD1A5A7B1000AC125E /* phone_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone_selected.png; sourceTree = "<group>"; };
+		2486CBAE1A5A7B1000AC125E /* phone_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone_selected@2x.png"; sourceTree = "<group>"; };
+		2486CBAF1A5A7B1000AC125E /* phone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone@2x.png"; sourceTree = "<group>"; };
 		248E06B51A4ACD6E0099846A /* ContactsCustomizedModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsCustomizedModal.h; sourceTree = "<group>"; };
 		248E06B61A4ACD6E0099846A /* ContactsCustomizedModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsCustomizedModal.m; sourceTree = "<group>"; };
 		248E06BA1A4AD8BA0099846A /* ContactListCell-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ContactListCell-iPhone6.xib"; sourceTree = "<group>"; };
@@ -719,6 +739,16 @@
 		36B0369A19DAD2AB00E8CD21 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				2486CBAD1A5A7B1000AC125E /* phone_selected.png */,
+				2486CBAE1A5A7B1000AC125E /* phone_selected@2x.png */,
+				2486CBAF1A5A7B1000AC125E /* phone@2x.png */,
+				2486CBA71A5A79F500AC125E /* email_selected.png */,
+				2486CBA81A5A79F500AC125E /* email_selected@2x.png */,
+				2486CBA91A5A79F500AC125E /* email@2x.png */,
+				2486CB9F1A5A79AC00AC125E /* sms_selected.png */,
+				2486CBA01A5A79AC00AC125E /* sms_selected@2x.png */,
+				2486CBA11A5A79AC00AC125E /* sms.png */,
+				2486CBA21A5A79AC00AC125E /* sms@2x.png */,
 				2499521B1A56F260001AEB84 /* email.png */,
 				2499521C1A56F260001AEB84 /* phone.png */,
 				200ACE121A3874B200DC7047 /* aolIcon.png */,
@@ -933,6 +963,7 @@
 				2402BB891A1DC3A200255A73 /* UntechableTableCell.xib in Resources */,
 				36B276781A0124E800ED58AD /* record_gray@2x.png in Resources */,
 				366ECD9C19D323E200F71A11 /* PhoneSetupController.xib in Resources */,
+				2486CBA51A5A79AC00AC125E /* sms.png in Resources */,
 				36B2767D1A0124E800ED58AD /* searchicon@2x.png in Resources */,
 				36B276711A0124E800ED58AD /* pause.png in Resources */,
 				243C59FA1A4D984B0020350C /* PhoneNumberCell.xib in Resources */,
@@ -964,6 +995,7 @@
 				2402BB841A1DBF6A00255A73 /* UntechablesList.xib in Resources */,
 				200ACE281A3874B200DC7047 /* exchangeIcon@2x.png in Resources */,
 				36474F2319D9780100084F34 /* Pigiarniq Heavy.ttf in Resources */,
+				2486CBAC1A5A79F500AC125E /* email@2x.png in Resources */,
 				36C734481A0CF2490066C544 /* Podfile in Resources */,
 				366EAF911A14C3530011D6C6 /* icon-40@2x.png in Resources */,
 				36BB7B8A19FFD98C00562069 /* ThankyouController.xib in Resources */,
@@ -975,6 +1007,7 @@
 				363DEAFD1A2C6D9B0035FF1F /* logo-icloud.jpg in Resources */,
 				36474F2519D9780100084F34 /* Pigiarniq Light.ttf in Resources */,
 				366EAFA21A14C3530011D6C6 /* Default-Portrait-736h@3x.png in Resources */,
+				2486CBAA1A5A79F500AC125E /* email_selected.png in Resources */,
 				3681604019E6B81E00B9B64C /* InviteFriendsController.xib in Resources */,
 				200ACE291A3874B200DC7047 /* exchangeIcon@3x.png in Resources */,
 				363DEAF91A2C6D9B0035FF1F /* logo-Aol.jpg in Resources */,
@@ -982,6 +1015,7 @@
 				366EAFA11A14C3530011D6C6 /* Default-Landscape-736h@3x.png in Resources */,
 				366EAFB51A14EDA30011D6C6 /* copy@2x.png in Resources */,
 				243C59E11A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.xib in Resources */,
+				2486CBA61A5A79AC00AC125E /* sms@2x.png in Resources */,
 				366EAFA61A14C3530011D6C6 /* logo@3x.png in Resources */,
 				36524AF219D940F4006DCAAF /* SocialnetworkController.xib in Resources */,
 				36FD975619E694AC00427507 /* BSKeyboardControls.strings in Resources */,
@@ -999,12 +1033,14 @@
 				36B2766F1A0124E800ED58AD /* inputBottomBg2@2x.png in Resources */,
 				36B006481A161B92005C3791 /* untechable.mov in Resources */,
 				200ACE2F1A3874B200DC7047 /* icloudIcon@3x.png in Resources */,
+				2486CBA31A5A79AC00AC125E /* sms_selected.png in Resources */,
 				366EAFB71A14EDA30011D6C6 /* copy_selected.png in Resources */,
 				366EAF9F1A14C3530011D6C6 /* Default-568h@2x.png in Resources */,
 				366EAF971A14C3530011D6C6 /* icon-72@2x.png in Resources */,
 				36B2765D1A0124E800ED58AD /* CHECKBOX_EMPTY@2x.png in Resources */,
 				366ECD9719D323DA00F71A11 /* AddUntechableController.xib in Resources */,
 				200ACE2E1A3874B200DC7047 /* icloudIcon@2x.png in Resources */,
+				2486CBAB1A5A79F500AC125E /* email_selected@2x.png in Resources */,
 				366EAF981A14C3530011D6C6 /* icon-76.png in Resources */,
 				363DEAF81A2C6D9B0035FF1F /* logo-outlook.jpg in Resources */,
 				3681603E19E6B81E00B9B64C /* InviteFriendsCell.xib in Resources */,
@@ -1025,18 +1061,22 @@
 				24BAB18A1A2F340200855B77 /* logo-other.png in Resources */,
 				200ACE2C1A3874B200DC7047 /* GoogleIcon@3x.png in Resources */,
 				366EAFB61A14EDA30011D6C6 /* copy_selected@2x.png in Resources */,
+				2486CBB11A5A7B1000AC125E /* phone_selected@2x.png in Resources */,
 				366EAF9A1A14C3530011D6C6 /* icon-small.png in Resources */,
 				366EAF9E1A14C3530011D6C6 /* icon@2x.png in Resources */,
+				2486CBB21A5A7B1000AC125E /* phone@2x.png in Resources */,
 				243C59FF1A4DA17C0020350C /* EmailCell.xib in Resources */,
 				200ACE351A3874B200DC7047 /* YahooIcon@3x.png in Resources */,
 				366EAF901A14C3530011D6C6 /* icon-40.png in Resources */,
 				36B276731A0124E800ED58AD /* play_gray.png in Resources */,
 				36B276751A0124E800ED58AD /* play.png in Resources */,
 				36561D7E19D2C8A40069D897 /* Images.xcassets in Resources */,
+				2486CBA41A5A79AC00AC125E /* sms_selected@2x.png in Resources */,
 				366EAF9B1A14C3530011D6C6 /* icon-small@2x.png in Resources */,
 				36B276721A0124E800ED58AD /* pause@2x.png in Resources */,
 				366EAF941A14C3530011D6C6 /* icon-60.png in Resources */,
 				200ACE271A3874B200DC7047 /* exchangeIcon.png in Resources */,
+				2486CBB01A5A7B1000AC125E /* phone_selected.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

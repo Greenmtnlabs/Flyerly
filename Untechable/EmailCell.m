@@ -12,12 +12,12 @@ ContactsCustomizedModal *contactModal_;
 
 @implementation EmailCell
 
-@synthesize untechable;
+@synthesize untechable,emailButton,contactEmail;
 
 -(void)setCellValues :(NSString *)email {
     
     //NSMutableArray *alLEmails = [[NSMutableArray alloc] initWithArray:allEmail];
-    self.email.text = email;
+    self.contactEmail.text = email;
     
 }
 

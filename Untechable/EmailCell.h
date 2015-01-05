@@ -12,7 +12,8 @@
 
 @interface EmailCell : UITableViewCell
 
-@property (nonatomic,strong)IBOutlet UILabel *email;
+@property (nonatomic,strong)IBOutlet UILabel *contactEmail;
+@property (strong, nonatomic) IBOutlet UIButton *emailButton;
 
 @property (nonatomic,strong)  Untechable *untechable;
 
