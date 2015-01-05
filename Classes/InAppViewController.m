@@ -131,7 +131,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if (tableView == paidFeaturesTview)
-        return  productArray.count;
+        return  (productArray == nil) ? 0 : productArray.count;
     else {
         // Find out the path of recipes.plist
         NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"free-features" ofType:@"plist"];
@@ -285,7 +285,7 @@
         if (inAppCell == nil) {
             if ( IS_IPHONE_5 || IS_IPHONE_4) {
                 nib = [[NSBundle mainBundle] loadNibNamed:@"InAppPurchaseCell" owner:self options:nil];
-            }else if ( IS_IPHONE_6 ) {
+            }else if ( IS_IPHONE_6 || IS_IPHONE_6_PLUS ) {
                 nib = [[NSBundle mainBundle] loadNibNamed:@"InAppPurchaseCell-iPhone6" owner:self options:nil];
             }
             inAppCell = (InAppPurchaseCell *)[nib objectAtIndex:0];
@@ -314,7 +314,7 @@
             if (IS_IPHONE_5 || IS_IPHONE_4)
             {
                 nib = [[NSBundle mainBundle] loadNibNamed:@"FreeFeatureCell" owner:self options:nil];
-            }else if ( IS_IPHONE_6 ) {
+            }else if ( IS_IPHONE_6 || IS_IPHONE_6_PLUS ) {
                 nib = [[NSBundle mainBundle] loadNibNamed:@"FreeFeatureCell-iPhone6" owner:self options:nil];
             }
             freeFeatureCell = (FreeFeatureCell *)[nib objectAtIndex:0];
