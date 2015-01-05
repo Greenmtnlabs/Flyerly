@@ -1548,6 +1548,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 frame.origin = CGPointMake(curXLoc, curYLoc + 30);
                 if ( IS_IPHONE_6 ){
                     frame.origin = CGPointMake(18, curYLoc + 40);
+                } else if ( IS_IPHONE_6_PLUS ) {
+                    frame.origin = CGPointMake(13, curYLoc + 40);
                 }
                 font.frame = frame;
                 
@@ -1557,12 +1559,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     clipartsView.size = CGSizeMake(320, curYLoc + heightValue + 5);
                     [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
                 } else if ( IS_IPHONE_6 ) {
-                    clipartsView.size = CGSizeMake(380, curYLoc + heightValue + 5 + 50);
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue + 50)];
+                    clipartsView.size = CGSizeMake(380, curYLoc + heightValue + 55);
+                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue + 55)];
                     
                 }else if ( IS_IPHONE_6_PLUS ) {
-                    clipartsView.size = CGSizeMake(320, curYLoc + heightValue + 5);
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+                    clipartsView.size = CGSizeMake(320, curYLoc + heightValue + 50);
+                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue+50)];
                 }else {
                     clipartsView.size = CGSizeMake(curXLoc + 155 , heightValue + 5);
                     [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , heightValue)];
@@ -1673,8 +1675,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     font.frame = CGRectMake(0, 0, 300, heightValue);
                 } else if ( IS_IPHONE_6 ) {
                     font.frame = CGRectMake(0, 0, 350, heightValue);
-                }else if ( IS_IPHONE_6_PLUS ) {
-                    font.frame = CGRectMake(0, 0, 300, heightValue);
+                }else if ( IS_IPHONE_6_PLUS ) {                    
+                    font.frame = CGRectMake(0, 0, 380, heightValue);
                 }else {
                     font.frame = CGRectMake(0, 0, 150, heightValue);
                 }
