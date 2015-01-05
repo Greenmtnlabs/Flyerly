@@ -1906,6 +1906,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
                 //Update Ui------{----
                 [self reRenderLabelAfterFontTypeChange:[flyer getLayerFromMaster:currentLayer]]; //Rufi code
+                //Handling Select Unselect
+                [self setSelectedItem:FLYER_LAYER_TEXT inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
                 //Update Ui -------}---
             }
             i++;
