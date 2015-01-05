@@ -18,6 +18,4 @@
 
 -(void)setCellValues :(NSString *)message;
 
--(void)setCellModal :(ContactsCustomizedModal *)contactModal;
-
 @end

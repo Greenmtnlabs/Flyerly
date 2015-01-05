@@ -19,8 +19,6 @@
 
 @interface ContactsCustomizedModal : NSObject
 
--(void)setInvitedStatus :(int)status;
-
 @property (nonatomic,weak) id <ContactsCustomizedModalDelegate>delegate;
 
 @property (nonatomic,strong)NSString *name;
@@ -33,8 +31,18 @@
 @property (nonatomic,strong)NSString *homeNumber;
 @property (nonatomic,strong)NSString *workNumber;
 
+@property (strong, nonatomic) NSMutableArray *cutomizingStatusArray;
+
+-(void)setPhoneStatus :(int)status;
+-(void)setEmailStatus :(int)status;
+-(void)setSmsStatus :(int)status;
+
+-(NSString *)getEmailStatus;
+-(NSString *)getSmsStatus;
+-(NSString *)getPhoneStatus;
+
 @property (nonatomic,strong)NSMutableArray *allEmails;
-@property (nonatomic,strong)NSMutableDictionary *allPhoneNumbers;
+@property (nonatomic,strong)NSMutableArray *allPhoneNumbers;
 @property (nonatomic,strong)NSMutableArray *phoneNumbersStatus;
 @property (nonatomic,strong)NSString *customTextForContact;
 

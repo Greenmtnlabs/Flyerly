@@ -28,8 +28,8 @@
                 </subviews>
             </tableViewCellContentView>
             <connections>
-                <outlet property="contactImage" destination="jHO-Nk-ENM" id="rnz-Dg-2y7"/>
-                <outlet property="contactName" destination="ZY9-lc-nrN" id="kwG-6R-4Da"/>
+                <outlet property="contact_Image" destination="jHO-Nk-ENM" id="SIt-mh-Wcm"/>
+                <outlet property="contact_Name" destination="ZY9-lc-nrN" id="yKd-E8-LiH"/>
             </connections>
             <point key="canvasLocation" x="149" y="158.5"/>
         </tableViewCell>

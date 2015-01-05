@@ -13,8 +13,13 @@
 #import "ContactCustomizeDetailsControlelrViewController.h"
 #import "SocialnetworkController.h"
 #import "Common.h"
+#import "ContactsCustomizedModal.h"
 
-@interface ContactsListControllerViewController ()
+@interface ContactsListControllerViewController () {
+    
+    NSMutableDictionary *customizedContactsDictionary;
+    NSString *customizedContactsString;
+}
 
 @property (strong, nonatomic) IBOutlet UITableView *contactsTable;
 
@@ -36,6 +41,14 @@
     
     [_contactsTable  setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
     [searchTextField setReturnKeyType:UIReturnKeyDone];
+    
+    customizedContactsString = untechable.customizedContacts;
+    
+    NSError *writeError = nil;
+    customizedContactsDictionary =
+    [NSJSONSerialization JSONObjectWithData: [customizedContactsString dataUsingEncoding:NSUTF8StringEncoding]
+                                    options: NSJSONReadingMutableContainers
+                                      error: &writeError];
     
     // Load device contacts
     [self loadLocalContacts];
@@ -287,7 +300,6 @@
         }
     }*/
     
-    
     // HERE WE PASS DATA TO CELL CLASS
     [cell setCellObjects:receivedDic :1 :@"InviteFriends"];
     
@@ -480,66 +492,82 @@
         contactModal.allEmails = allEmails;
         
         //For Phone number
-         NSMutableDictionary *allNumbers = [[NSMutableDictionary alloc] initWithCapacity:CFArrayGetCount(allPeople)];
+        NSMutableArray *allNumbers = [[NSMutableArray alloc] initWithCapacity:CFArrayGetCount(allPeople)];
         NSString* mobileLabel;
         
         for(CFIndex i = 0; i < ABMultiValueGetCount(phones); i++) {
             
             mobileLabel = (NSString*)CFBridgingRelease(ABMultiValueCopyLabelAtIndex(phones, i));
             
+            NSString *numberType;
+            
             if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMainLabel])
             {
-                NSMutableArray *numberWithStatus = [[NSMutableArray alloc] initWithCapacity:3];
-                
-                [numberWithStatus setObject:(NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i)) atIndexedSubscript:0];
-                [numberWithStatus setObject:@"0" atIndexedSubscript:1];
-                [numberWithStatus setObject:@"0" atIndexedSubscript:2];
-                
-                [allNumbers setObject:numberWithStatus forKey:@"Main"];
+                numberType = @"Main";
             }
             
             if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
             {
-                NSMutableArray *numberWithStatus = [[NSMutableArray alloc] initWithCapacity:3];
-                
-                [numberWithStatus setObject:(NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i))atIndexedSubscript:0];
-                [numberWithStatus setObject:@"0" atIndexedSubscript:1];
-                [numberWithStatus setObject:@"0" atIndexedSubscript:2];
-                
-                [allNumbers setObject:numberWithStatus forKey:@"Mobile"];
+                numberType = @"Mobile";
             }
             
             if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel])
             {
-                NSMutableArray *numberWithStatus = [[NSMutableArray alloc] initWithCapacity:3];
-                
-                [numberWithStatus setObject:(NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i)) atIndexedSubscript:0];
-                [numberWithStatus setObject:@"0" atIndexedSubscript:1];
-                [numberWithStatus setObject:@"0" atIndexedSubscript:2];
-                
-                [allNumbers setObject:numberWithStatus forKey:@"iPhoneNumber"];
+                numberType = @"iPhoneNumber";
             }
             
             if ([mobileLabel isEqualToString:(NSString*)kABHomeLabel])
             {
-                NSMutableArray *numberWithStatus = [[NSMutableArray alloc] initWithCapacity:3];
-                
-                [numberWithStatus setObject:(NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i)) atIndexedSubscript:0];
-                [numberWithStatus setObject:@"0" atIndexedSubscript:1];
-                [numberWithStatus setObject:@"0" atIndexedSubscript:2];
-                
-                [allNumbers setObject:numberWithStatus forKey:@"Home"];
+                numberType = @"Home";
             }
             
             if ([mobileLabel isEqualToString:(NSString*)kABWorkLabel])
             {
-                NSMutableArray *numberWithStatus = [[NSMutableArray alloc] initWithCapacity:3];
-                
-                [numberWithStatus setObject:(NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i)) atIndexedSubscript:0];
-                [numberWithStatus setObject:@"0" atIndexedSubscript:1];
+                numberType = @"Work";
+            }
+            
+            if ( numberType != nil ){
+                NSMutableArray *numberWithStatus = [[NSMutableArray alloc] init];
+                // Phone Number type at index 0
+                [numberWithStatus setObject:numberType atIndexedSubscript:0];
+                // Phone Number at index 1
+                [numberWithStatus setObject:(NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i)) atIndexedSubscript:1];
+                // Phone Number SMS status at index 2
                 [numberWithStatus setObject:@"0" atIndexedSubscript:2];
+                // Phone Number CALL status at index 3
+                [numberWithStatus setObject:@"0" atIndexedSubscript:3];
                 
-                [allNumbers setObject:numberWithStatus forKey:@"Work"];
+                [allNumbers addObject:numberWithStatus];
+            }
+            
+            if ( ![customizedContactsString isEqualToString:@""] ){
+                
+                for ( int i = 0; i < customizedContactsDictionary.count; i++ ){
+                    
+                    NSMutableDictionary *curContactDetails =  [customizedContactsDictionary objectForKey:[NSString stringWithFormat:@"%i",i]];
+                    
+                    NSMutableArray *tempPhonesNumbers = [curContactDetails objectForKey:@"phoneNumbers"];
+                    
+                    if ( [[curContactDetails objectForKey:@"contactName"] isEqualToString:contactModal.name]
+                        &&
+                        contactModal.allPhoneNumbers.count == tempPhonesNumbers.count) {
+                        
+                        contactModal.name = [curContactDetails objectForKey:@"contactName"];
+                        contactModal.allPhoneNumbers = [curContactDetails objectForKey:@"phoneNumbers"];
+                        contactModal.allEmails = [curContactDetails objectForKey:@"emailAddresses"];
+                        contactModal.customTextForContact = [curContactDetails objectForKey:@"customTextForContact"];
+                        contactModal.cutomizingStatusArray = [curContactDetails objectForKey:@"cutomizingStatusArray"];
+                        
+                        
+                        
+                    }else {
+                        
+                        
+                    }
+                }
+            }else{
+                
+                
             }
             
             contactModal.allPhoneNumbers = allNumbers;
@@ -548,14 +576,11 @@
             
             [contactsArray addObject:contactModal];
         }
-        
     }
-    
     // Reload table data after all the contacts get loaded
     contactBackupArray = nil;
     contactBackupArray = contactsArray;
     [_contactsTable performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -564,18 +589,9 @@
     
     detailsController.untechable = untechable;
     
-    detailsController.contactModal = [contactsArray objectAtIndex:indexPath.row];
-    
-    NSString *customizedContactsString = untechable.customizedContacts;
-    
-    NSError *writeError = nil;
-    
-    NSMutableDictionary *customizedContactsDictionary =
-    [NSJSONSerialization JSONObjectWithData: [customizedContactsString dataUsingEncoding:NSUTF8StringEncoding]
-                                    options: NSJSONReadingMutableContainers
-                                      error: &writeError];
-    
     NSMutableDictionary *curContactDetails;
+    
+    ContactsCustomizedModal *tempModal = [contactsArray objectAtIndex:indexPath.row];
     
     if ( ![customizedContactsString isEqualToString:@""] ){
         
@@ -583,17 +599,27 @@
             
             curContactDetails =  [customizedContactsDictionary objectForKey:[NSString stringWithFormat:@"%i",i]];
             
-            NSMutableDictionary *tempPhoneDict = [curContactDetails objectForKey:@"phoneNumbers"];
+            NSMutableArray *tempPhonesNumbers = [curContactDetails objectForKey:@"phoneNumbers"];
             
-            if ( [[curContactDetails objectForKey:@"contactName"] isEqualToString:detailsController.contactModal.name] &&
-                [detailsController.contactModal.allPhoneNumbers allKeys].count == [tempPhoneDict allKeys].count )
-            {
+            if ( [[curContactDetails objectForKey:@"contactName"] isEqualToString:detailsController.contactModal.name]
+                &&
+                tempModal.allPhoneNumbers.count == tempPhonesNumbers.count) {
                 
+                tempModal.name = [curContactDetails objectForKey:@"contactName"];
+                tempModal.allPhoneNumbers = [curContactDetails objectForKey:@"phoneNumbers"];
+                tempModal.allEmails = [curContactDetails objectForKey:@"emailAddresses"];
+                tempModal.customTextForContact = [curContactDetails objectForKey:@"customTextForContact"];
+            
+                detailsController.contactModal = tempModal;
                 
             }else {
-            
+                
+                detailsController.contactModal = tempModal;
             }
         }
+    }else{
+        
+        detailsController.contactModal = tempModal;
     }
     
     [self.navigationController pushViewController:detailsController animated:YES];

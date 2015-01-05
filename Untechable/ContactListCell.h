@@ -13,10 +13,9 @@
 
 @property (nonatomic,strong)IBOutlet UILabel *contactName;
 @property (nonatomic,strong)IBOutlet UIImageView *contactImage;
-@property (nonatomic,strong)IBOutlet UIButton *phone;
-@property (nonatomic,strong)IBOutlet UIButton *sms;
-@property (nonatomic,strong)IBOutlet UIButton *email;
 
 -(void)setCellObjects :(ContactsCustomizedModal *)model :(int)status :(NSString *)tableName;
+
+@property ( nonatomic, strong ) IBOutletCollection(UIImageView) NSArray *customizationStatus;
 
 @end

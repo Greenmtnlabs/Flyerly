@@ -114,6 +114,7 @@
         [curContactDetails setValue:curObj.allPhoneNumbers forKey:@"phoneNumbers"];
         [curContactDetails setValue:curObj.allEmails forKey:@"emailAddresses"];
         [curContactDetails setValue:curObj.customTextForContact forKey:@"customTextForContact"];
+        [curContactDetails setValue:curObj.cutomizingStatusArray forKey:@"cutomizingStatusArray"];
         [customizedContactArray setValue:curContactDetails forKey:[NSString stringWithFormat:@"%i",i]];
         
     }

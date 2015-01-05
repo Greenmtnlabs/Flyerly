@@ -23,13 +23,5 @@ ContactsCustomizedModal *contactModal_;
 -(void)setCellValues :(NSString *)message {
     
     self.customText.text = message;
-    
 }
-
--(void)setCellModal :(ContactsCustomizedModal *)contactModal{
-
-    contactModal_ = contactModal;
-    
-}
-
 @end

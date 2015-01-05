@@ -21,8 +21,12 @@
     
 }
 
-@property (nonatomic,strong)  Untechable *untechable;
+@property (nonatomic,strong)NSMutableArray *allEmails;
+@property (nonatomic,strong)NSMutableArray *allPhoneNumbers;
+@property (nonatomic,strong)NSMutableArray *phoneNumbersStatus;
+@property (nonatomic,strong)NSString *customTextForContact;
 
+@property (nonatomic,strong)  Untechable *untechable;
 @property (nonatomic,strong)  ContactsCustomizedModal *contactModal;
 
 @end

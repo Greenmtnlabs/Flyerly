@@ -10,7 +10,7 @@
 
 @implementation FirstTableViewCell
 
-@synthesize contactName,contactImage,untechable;
+@synthesize contact_Name,contact_Image,untechable;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
@@ -18,13 +18,13 @@
     // Configure the view for the selected state
 }
 
--(void)setCellValues :(NSString *)contactName ContactModal:(ContactsCustomizedModal *) contactModal;
+-(void)setCellValues :(NSString *)contactName ContactImage:(UIImage *) contactImage;
 {
     
-    self.contactName.text = contactName;
-    self.contactImage.image = contactModal.img;
-    self.contactImage.layer.cornerRadius = self.contactImage.frame.size.width / 2;
-    self.contactImage.clipsToBounds = YES;
+    self.contact_Name.text = contactName;
+    self.contact_Image.image = contactImage;
+    self.contact_Image.layer.cornerRadius = self.contact_Image.frame.size.width / 2;
+    self.contact_Image.clipsToBounds = YES;
 }
 
 @end

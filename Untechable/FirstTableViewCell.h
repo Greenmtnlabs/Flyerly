@@ -14,9 +14,9 @@
 
 @property (nonatomic,strong)  Untechable *untechable;
 
-@property (nonatomic,strong)IBOutlet UILabel *contactName;
-@property (nonatomic,strong)IBOutlet UIImageView *contactImage;
+@property (nonatomic,strong)IBOutlet UILabel *contact_Name;
+@property (nonatomic,strong)IBOutlet UIImageView *contact_Image;
 
--(void)setCellValues :(NSString *)contactName ContactModal:(ContactsCustomizedModal *) contactModal;
+-(void)setCellValues :(NSString *)contactName ContactImage:(UIImage *) contactImage;
 
 @end
