@@ -1194,7 +1194,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
             
         } else if( IS_IPHONE_6_PLUS ){
-            colorsView.frame = CGRectMake((colorsView.frame.origin.x+17), colorsView.frame.origin.y, colorsView.frame.size.width, colorsView.frame.size.height);
+            colorsView.frame = CGRectMake((layerScrollView.frame.origin.x+17), colorsView.frame.origin.y, colorsView.frame.size.width, colorsView.frame.size.height);
             
             [layerScrollView addSubview:colorsView];
             [layerScrollView setContentSize:colorsView.size];
@@ -1280,7 +1280,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
         }
         else if( IS_IPHONE_6_PLUS ){
-            sizesView.frame = CGRectMake((sizesView.frame.origin.x+17), sizesView.frame.origin.y, sizesView.frame.size.width, sizesView.frame.size.height);
+            sizesView.frame = CGRectMake((layerScrollView.frame.origin.x+17), sizesView.frame.origin.y, sizesView.frame.size.width, sizesView.frame.size.height);
             
             [layerScrollView addSubview:sizesView];
             [layerScrollView setContentSize:sizesView.size];
@@ -1489,24 +1489,29 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     }
                 }
                 
-                if(IS_IPHONE_6_PLUS){
-                    if(curXLoc >= 300){
+                if(IS_IPHONE_6_PLUS && i%9==0){
+                    //if(curXLoc >= 300){
                         curXLoc = 13;
                         curYLoc = curYLoc + widthValue + 7;
-                    }
+                    //}
                 }
                    
                 [clipartsView addSubview:font];
             }
             
-            if(IS_IPHONE_5 || IS_IPHONE_6_PLUS){
+            clipartsView.backgroundColor = [UIColor redColor];
+            
+            if( IS_IPHONE_5 ){
                 clipartsView.size = CGSizeMake(320, curYLoc + 85 );//(heightValue + 7) );
                 [layerScrollView setContentSize:CGSizeMake(320, curYLoc + 50)];//  heightValue)];
                 
             }else if ( IS_IPHONE_6 ){
                 clipartsView.size = CGSizeMake(380, curYLoc + 85 );//(heightValue + 7) );
                 [layerScrollView setContentSize:CGSizeMake(320, curYLoc + 50)];//  heightValue)];
-            }else {
+            } else if ( IS_IPHONE_6_PLUS ){
+                clipartsView.size = CGSizeMake(584, curYLoc + 85 );//(heightValue + 7) );
+                [layerScrollView setContentSize:CGSizeMake(584, curYLoc + 50)];//  heightValue)];
+            } else {
                 clipartsView.size = CGSizeMake(curXLoc + heightValue + 5 , heightValue + 5);
                 [layerScrollView setContentSize:CGSizeMake(clipartsView.size.width , heightValue)];
             }
@@ -1517,14 +1522,15 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             //Checking if user valid purchases
             if ( ![userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
                 ![userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
-                
+
+                //More button
                 UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
                 if ( IS_IPHONE_5 ) {
                     font.frame = CGRectMake(0, 0, 300, heightValue);
                 } else if ( IS_IPHONE_6 ){
                     font.frame = CGRectMake(0, 0, 335, heightValue);
                 }else if ( IS_IPHONE_6_PLUS ){
-                    font.frame = CGRectMake(0, 0, 300, heightValue);
+                    font.frame = CGRectMake(0, 0, 380, heightValue);
                 }else {
                     font.frame = CGRectMake(0, 0, 150, heightValue);
                 }
@@ -1624,11 +1630,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                         curXLoc = 0;
                         curYLoc = curYLoc + symbolScrollHeight + 7;
                     }
-                }else if (IS_IPHONE_6_PLUS){
-                    if(curXLoc >= 320){
+                }else if (IS_IPHONE_6_PLUS && i%6 == 0 ){
+                    //if(curXLoc >= 320){
                         curXLoc = 0;
                         curYLoc = curYLoc + symbolScrollHeight + 7;
-                    }
+                    //}
                 }
                 
                 [emoticonsView addSubview:symbolButton];
@@ -1637,13 +1643,20 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
         } // Loop
             
-            if(IS_IPHONE_5 || IS_IPHONE_6_PLUS){
+            emoticonsView.backgroundColor = [UIColor redColor];
+            layerScrollView.backgroundColor = [UIColor greenColor];
+            
+            if(IS_IPHONE_5 ){
                 emoticonsView.size = CGSizeMake(320, curYLoc + symbolScrollHeight + 75);
                 [layerScrollView setContentSize:CGSizeMake(320, curYLoc + symbolScrollHeight)];
             } else if ( IS_IPHONE_6 ){
                 emoticonsView.size = CGSizeMake(380, curYLoc + symbolScrollHeight + 75);
                 [layerScrollView setContentSize:CGSizeMake(320, curYLoc + symbolScrollHeight)];
-            }else {
+            } else if( IS_IPHONE_6_PLUS ){
+                emoticonsView.frame = CGRectMake(emoticonsView.frame.origin.x, emoticonsView.frame.origin.y, layerScrollView.size.width, layerScrollView.size.height);
+                emoticonsView.size = CGSizeMake(584, curYLoc + symbolScrollHeight + 75);
+                [layerScrollView setContentSize:CGSizeMake(584, curYLoc + symbolScrollHeight)];
+            } else {
                 emoticonsView.size = CGSizeMake(curXLoc + symbolScrollWidth + 5 , symbolScrollHeight + 5);
                 [layerScrollView setContentSize:CGSizeMake(emoticonsView.size.width , symbolScrollHeight)];
             }
@@ -4956,6 +4969,10 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                              //Create ScrollView
                              if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
                                  
+                                 if( IS_IPHONE_6_PLUS ){
+                                    clipartsView.frame = CGRectMake(clipartsView.frame.origin.x, clipartsView.frame.origin.y, layerScrollView.size.width, clipartsView.size.height);
+                                 }
+                                 
                                  // Delete SubViews from ScrollView and add Emoticons view
                                  [self deleteSubviewsFromScrollView];
                                  [layerScrollView addSubview:clipartsView];
@@ -4992,7 +5009,9 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                          animations:^{
                              
                              if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
-                                 
+                                 if( IS_IPHONE_6_PLUS ){
+                                     emoticonsView.frame = CGRectMake(layerScrollView.frame.origin.x+5, emoticonsView.frame.origin.y, layerScrollView.size.width, emoticonsView.size.height);
+                                 }
                                  // Delete SubViews from ScrollView and add Emoticons view
                                  [self deleteSubviewsFromScrollView];
                                  [layerScrollView addSubview:emoticonsView];
