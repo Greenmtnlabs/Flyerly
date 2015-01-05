@@ -274,10 +274,18 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     bannerAddClosed = valForBannerClose;
 }
 
+-(void)testingFn{
+    NSLog(@"layerScrollView(%f,%f,%f,%f)",layerScrollView.frame.origin.x,layerScrollView.frame.origin.y,layerScrollView.frame.size.width,layerScrollView.frame.size.height);
+    NSLog(@"self.contextView(%f,%f,%f,%f)",self.contextView.frame.origin.x,self.contextView.frame.origin.y,self.contextView.frame.size.width,self.contextView.frame.size.height);
+    
+}
+
 /**
  * View setup. This is done once per instance.
  */
 -(void)viewDidLoad{
+    
+    [self testingFn];
     
     if( IS_IPHONE_4 ){
         [[NSBundle mainBundle] loadNibNamed:@"CreateFlyerController-iPhone4" owner:self options:nil];
@@ -336,7 +344,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     } else if ( IS_IPHONE_6 ){
         layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,420,180)];
     }else if ( IS_IPHONE_6_PLUS ){
-        layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,420,150)];
+        layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,420,189)];
     }else {
         layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,60)];
     }
@@ -991,12 +999,17 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             CGFloat curYLoc = 5;
             int increment = 5;
     
-            if(IS_IPHONE_5 || IS_IPHONE_6_PLUS){
+            if(IS_IPHONE_5 ){
                 curXLoc = 13;
                 curYLoc = 10;
                 increment = 8;
             }else if ( IS_IPHONE_6) {
-                curXLoc = 18;
+                curXLoc = 13;
+                curYLoc = 10;
+                increment = 8;
+            }
+            else if ( IS_IPHONE_6_PLUS ) {
+                curXLoc = 13;
                 curYLoc = 10;
                 increment = 8;
             }
@@ -1025,59 +1038,47 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 CGRect frame = font.frame;
                 frame.origin = CGPointMake(curXLoc, curYLoc);
                 font.frame = frame;
-                curXLoc += (widthValue)+increment;
-        
-                if(IS_IPHONE_5 || IS_IPHONE_6_PLUS){
-                    if(curXLoc >= 300){
+                curXLoc = curXLoc + widthValue + increment ;
+                
+                if( i != 0 ) {
+                    if(IS_IPHONE_5 && curXLoc >= 300 ){
                         curXLoc = 13;
-                        curYLoc = curYLoc + widthValue + 7;
+                        curYLoc = curYLoc + heightValue + 7;
+                    } else if ( IS_IPHONE_6 && curXLoc >= 350 ){
+                        curXLoc = 13;
+                        curYLoc = curYLoc + heightValue + 7;
+                    } else if( IS_IPHONE_6_PLUS && ( i%9 == 0 ) ){ //iphon6+ screen can show 8 font type icons
+                        curXLoc = 13;
+                        curYLoc = curYLoc + heightValue + 7;
                     }
-                }else if ( IS_IPHONE_6 ) {
-                    if(curXLoc >= 350){
-                        
-                        curXLoc = 18;
-                       
-                        curYLoc = curYLoc + widthValue + 7;
-                    }
-
                 }
         
                 [fontsView addSubview:font];
-            }
-    
-            if ( IS_IPHONE_5 || IS_IPHONE_6_PLUS ) {
-                
-                fontsView.size = CGSizeMake(320, curYLoc + heightValue + 5);
-                [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
-                
-            } else if ( IS_IPHONE_6 ){
-                
-                fontsView.size = CGSizeMake(380, curYLoc + heightValue + 5);
-                [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
-                
-            } else if ( IS_IPHONE_6_PLUS ){
-                
-                [layerScrollView addSubview:backgroundsView];
-                [layerScrollView setContentSize:CGSizeMake(520, backgroundsView.frame.size.height)];
-                
-            } else {
-                fontsView.size = CGSizeMake(curXLoc , heightValue + 5);
-                [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , heightValue)];
             }
             
             userPurchases = [UserPurchases getInstance];
             userPurchases.delegate = self;
             
+    
+            fontsView.backgroundColor = [UIColor yellowColor];
+            layerScrollView.backgroundColor= [UIColor purpleColor];
+            
             //Checking if user valid purchases
             if ( ![userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
                  ![userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
                 
+                //More button---{--
                 UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
-                if ( IS_IPHONE_5 || IS_IPHONE_6_PLUS ) {
+                
+                if ( IS_IPHONE_5 ) {
                     font.frame = CGRectMake(0, 0, 300, heightValue);
                 } else if ( IS_IPHONE_6 ) {
                     font.frame = CGRectMake(0, 0, 335, heightValue);
+                } else if( IS_IPHONE_6_PLUS ){
+                   font.frame = CGRectMake(0, 0, 380, heightValue);
                 }
+                //font.backgroundColor = [UIColor blueColor];
+                
                 [font addTarget:self action:@selector(openPanel:) forControlEvents:UIControlEventTouchUpInside];
                 
                 [font setTitle:@"More" forState:UIControlStateNormal];
@@ -1091,14 +1092,17 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 //SET BUTTON POSITION ON SCROLLVIEW
                 CGRect frame = font.frame;
                 frame.origin = CGPointMake(curXLoc, curYLoc);
-                if ( IS_IPHONE_6 ){
-                    frame.origin = CGPointMake(18, curYLoc + 40);
+                if ( IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
+                    frame.origin = CGPointMake(13, curYLoc + 40);
                 }
+                
                 font.frame = frame;
 
                 [fontsView addSubview:font];
+                //More button---}--
                 
-                if ( IS_IPHONE_5 || IS_IPHONE_6_PLUS ) {
+                if ( IS_IPHONE_5 ) {
+                    
                     fontsView.size = CGSizeMake(320, curYLoc + heightValue + 5);
                     [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
                 } else if ( IS_IPHONE_6 ) {
@@ -1106,14 +1110,38 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     fontsView.size = CGSizeMake(380, curYLoc + heightValue + 50);
                     [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue + 50)];
                 
-                }else {
+                } else if ( IS_IPHONE_6_PLUS ) {
+                    fontsView.size = CGSizeMake(584, (curYLoc + heightValue + 200) );
+                    [layerScrollView setContentSize:CGSizeMake(584, (curYLoc + heightValue + 300))];
+                }
+                else {
                     fontsView.size = CGSizeMake(curXLoc + 155 , heightValue + 5);
                     [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , heightValue)];
                 }
             }
-            
-            
-            
+            else {
+                if ( IS_IPHONE_5 ) {
+                    
+                    fontsView.size = CGSizeMake(320, curYLoc + heightValue + 5);
+                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+                    
+                } else if ( IS_IPHONE_6 ){
+                    
+                    fontsView.size = CGSizeMake(380, curYLoc + heightValue + 5);
+                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+                    
+                } else if ( IS_IPHONE_6_PLUS ){
+                    
+                    fontsView.size = CGSizeMake(584, curYLoc + heightValue + 5);
+                    [layerScrollView setContentSize:CGSizeMake(584, curYLoc + heightValue)];
+                    
+                } else {
+                    
+                    fontsView.size = CGSizeMake(curXLoc , heightValue + 5);
+                    [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , heightValue)];
+                    
+                }
+            }
             
             //Handling Select Unselect
             [self setSelectedItem:[flyer getLayerType:currentLayer] inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
@@ -1236,17 +1264,24 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     // Load sizes xib asynchronously
     dispatch_async( dispatch_get_main_queue(), ^{
         
-        if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+        sizesView.backgroundColor = [UIColor greenColor];
+        
+        if(IS_IPHONE_5 || IS_IPHONE_6 ){
             
             [layerScrollView addSubview:sizesView];
             [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
-            
-        }  else {
+        }
+        else if( IS_IPHONE_6_PLUS ){
+            sizesView.frame = CGRectMake((sizesView.frame.origin.x+5), sizesView.frame.origin.y, sizesView.frame.size.width, sizesView.frame.size.height);
             
             [layerScrollView addSubview:sizesView];
-            [layerScrollView setContentSize:CGSizeMake(sizesView.frame.size.width, [layerScrollView bounds].size.height)];
-            
+            [layerScrollView setContentSize:CGSizeMake(484, curYLoc + heightValue)];
         }
+        else {
+            [layerScrollView addSubview:sizesView];
+            [layerScrollView setContentSize:CGSizeMake(sizesView.frame.size.width, [layerScrollView bounds].size.height)];
+        }
+        
         NSMutableDictionary *layerDic = [flyer getLayerFromMaster:currentLayer];
         
         // Get the type of layer
@@ -1862,11 +1897,16 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
     }//Loop
     
-    if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+    if(IS_IPHONE_5 || IS_IPHONE_6){
         [layerScrollView setContentSize:CGSizeMake(300, curYLoc + layerScrollHeight)];
-    } else {
+    }
+    else if( IS_IPHONE_6_PLUS ){
+        [layerScrollView setContentSize:CGSizeMake(300, curYLoc + layerScrollHeight)];
+    }
+    else {
         [layerScrollView setContentSize:CGSizeMake(([layers count]*(layerScrollWidth+5)), [layerScrollView bounds].size.height)];
     }
+    
     
     [self addScrollView:layerScrollView];
 }
@@ -3299,6 +3339,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     //Here we Highlight The TextView [ show borders arround it ]
     [self.flyimgView layerIsBeingEdited:currentLayer];
     
+    /*
+    
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
     
@@ -3323,6 +3365,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         [self addFontsInSubView];
         
     }
+     */
     
     
     // SET BOTTOM BAR
@@ -3448,6 +3491,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 -(void)addScrollView:(id)obj{
     // Remove previously added scrollviews.
     [self removeAllScrolviews];
+    
+    [self testingFn];
     
     //Add ScrollViews
     [self.contextView addSubview:obj];
