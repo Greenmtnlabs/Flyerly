@@ -1500,7 +1500,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 }
                    
                 [clipartsView addSubview:font];
-            }
+            }//end for loop
             
             //clipartsView.backgroundColor = [UIColor redColor];
             //layerScrollView.backgroundColor = [UIColor greenColor];
@@ -1513,6 +1513,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 clipartsView.size = CGSizeMake(380, curYLoc + 85 );//(heightValue + 7) );
                 [layerScrollView setContentSize:CGSizeMake(320, curYLoc + 50)];//  heightValue)];
             } else if ( IS_IPHONE_6_PLUS ){
+                clipartsView.frame = CGRectMake((layerScrollView.frame.origin.x+4), clipartsView.frame.origin.y, layerScrollView.size.width, clipartsView.size.height);
                 clipartsView.size = CGSizeMake(584, curYLoc + 85 );//(heightValue + 7) );
                 [layerScrollView setContentSize:CGSizeMake(584, curYLoc + 50)];//  heightValue)];
             } else {
@@ -1659,7 +1660,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 emoticonsView.size = CGSizeMake(380, curYLoc + symbolScrollHeight + 75);
                 [layerScrollView setContentSize:CGSizeMake(320, curYLoc + symbolScrollHeight)];
             } else if( IS_IPHONE_6_PLUS ){
-                emoticonsView.frame = CGRectMake(layerScrollView.frame.origin.x+15, emoticonsView.frame.origin.y, layerScrollView.size.width, layerScrollView.size.height);
+                emoticonsView.frame = CGRectMake((layerScrollView.frame.origin.x+15), emoticonsView.frame.origin.y, layerScrollView.size.width, layerScrollView.size.height);
                 emoticonsView.size = CGSizeMake(584, curYLoc + symbolScrollHeight + 75);
                 [layerScrollView setContentSize:CGSizeMake(584, curYLoc + symbolScrollHeight)];
             } else {
@@ -4975,10 +4976,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                              //Create ScrollView
                              if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
                                  
-                                 if( IS_IPHONE_6_PLUS ){
-                                    clipartsView.frame = CGRectMake(clipartsView.frame.origin.x, clipartsView.frame.origin.y, layerScrollView.size.width, clipartsView.size.height);
-                                 }
-                                 
                                  // Delete SubViews from ScrollView and add Emoticons view
                                  [self deleteSubviewsFromScrollView];
                                  [layerScrollView addSubview:clipartsView];
@@ -5015,9 +5012,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                          animations:^{
                              
                              if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
-                                 if( IS_IPHONE_6_PLUS ){
-                                     emoticonsView.frame = CGRectMake(layerScrollView.frame.origin.x+5, emoticonsView.frame.origin.y, layerScrollView.size.width, emoticonsView.size.height);
-                                 }
                                  // Delete SubViews from ScrollView and add Emoticons view
                                  [self deleteSubviewsFromScrollView];
                                  [layerScrollView addSubview:emoticonsView];
@@ -6048,7 +6042,9 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     dispatch_async( dispatch_get_main_queue(), ^{
         
         if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
-            
+            if( IS_IPHONE_6_PLUS ){
+                drawingView.frame = CGRectMake((layerScrollView.frame.origin.x+18), layerScrollView.frame.origin.y, drawingView.size.width, drawingView.size.height);
+            }
             [layerScrollView addSubview:drawingView];
             [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
             
