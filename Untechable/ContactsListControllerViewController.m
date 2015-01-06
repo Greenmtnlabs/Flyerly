@@ -39,6 +39,8 @@
     _contactsTable.delegate = self;
     _contactsTable.dataSource = self;
     
+    _contactsTable.contentInset = UIEdgeInsetsMake(-63.0f, 0.0f, 0.0f, 0.0f);
+    
     [_contactsTable  setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
     [searchTextField setReturnKeyType:UIReturnKeyDone];
     
@@ -266,23 +268,40 @@
         }
     }
     
-    
     if(!self.selectedIdentifiers){
         self.selectedIdentifiers = [[NSMutableArray alloc] init];
     }
     
-    ContactsCustomizedModal *receivedDic;
+    ContactsCustomizedModal *_contactModal;
     
     if ( [[ self getArrayOfSelectedTab ] count ] >= 1 ){
         
         // GETTING DATA FROM RECEIVED DICTIONARY
         // SET OVER MODEL FROM DATA
         
-        receivedDic = [self getArrayOfSelectedTab ][(indexPath.row)];
+        _contactModal = [self getArrayOfSelectedTab ][(indexPath.row)];
     }
     
-    if (receivedDic.img == nil) {
-        receivedDic.img =[[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"dfcontact" ofType:@"jpg"]];
+    if (_contactModal.img == nil) {
+        _contactModal.img =[[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"dfcontact" ofType:@"jpg"]];
+    }
+    
+    
+    if ( ![customizedContactsString isEqualToString:@""] ){
+        
+        for ( int i = 0; i < customizedContactsDictionary.count; i++ ){
+            
+            NSMutableDictionary *curContactDetails =  [customizedContactsDictionary objectForKey:[NSString stringWithFormat:@"%i",i]];
+            
+            NSMutableArray *tempPhonesNumbers = [curContactDetails objectForKey:@"phoneNumbers"];
+            
+            if ( [[curContactDetails objectForKey:@"contactName"] isEqualToString:_contactModal.name]
+                &&
+                _contactModal.allPhoneNumbers.count == tempPhonesNumbers.count) {
+                
+                _contactModal.cutomizingStatusArray = [curContactDetails objectForKey:@"cutomizingStatusArray"];
+            }
+        }
     }
     
     // HERE WE CHECK STATUS OF FRIEND INVITE
@@ -301,7 +320,7 @@
     }*/
     
     // HERE WE PASS DATA TO CELL CLASS
-    [cell setCellObjects:receivedDic :1 :@"InviteFriends"];
+    [cell setCellObjects:_contactModal :1 :@"InviteFriends"];
     
     return cell;
 }
@@ -539,6 +558,10 @@
                 
                 [allNumbers addObject:numberWithStatus];
             }
+            
+            [contactModal.cutomizingStatusArray setObject:@"0" atIndexedSubscript:0];
+            [contactModal.cutomizingStatusArray setObject:@"0" atIndexedSubscript:1];
+            [contactModal.cutomizingStatusArray setObject:@"0" atIndexedSubscript:2];
             
             if ( ![customizedContactsString isEqualToString:@""] ){
                 

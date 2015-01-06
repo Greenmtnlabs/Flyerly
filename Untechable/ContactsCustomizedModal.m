@@ -18,6 +18,7 @@
     
     self = [super init];
     customTextForContact = untechable.spendingTimeTxt;
+    cutomizingStatusArray = [[NSMutableArray alloc] init];
     return self;
 }
 

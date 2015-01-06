@@ -36,6 +36,7 @@
     _contactDetailsTable.delegate = self;
     _contactDetailsTable.dataSource = self;
     
+    self.contactDetailsTable.contentInset = UIEdgeInsetsMake(-32.0f, 0.0f, 0.0f, 0.0f);
     /*NSString *customizedContactsString = untechable.customizedContacts;
     
     NSError *writeError = nil;
