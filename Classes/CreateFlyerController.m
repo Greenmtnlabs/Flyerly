@@ -1197,7 +1197,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
             
         } else if( IS_IPHONE_6_PLUS ){
-            colorsView.frame = CGRectMake((layerScrollView.frame.origin.x+19), (layerScrollView.frame.origin.y+5), colorsView.frame.size.width, colorsView.frame.size.height);
+            colorsView.frame = CGRectMake((layerScrollView.frame.origin.x+20), (layerScrollView.frame.origin.y+5), colorsView.frame.size.width, colorsView.frame.size.height);
             
             [layerScrollView addSubview:colorsView];
             [layerScrollView setContentSize:colorsView.size];
@@ -1283,7 +1283,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
         }
         else if( IS_IPHONE_6_PLUS ){
-            sizesView.frame = CGRectMake((layerScrollView.frame.origin.x+17), sizesView.frame.origin.y, sizesView.frame.size.width, sizesView.frame.size.height);
+            sizesView.frame = CGRectMake((layerScrollView.frame.origin.x+19), (layerScrollView.frame.origin.y+5), sizesView.frame.size.width, sizesView.frame.size.height);
             
             [layerScrollView addSubview:sizesView];
             [layerScrollView setContentSize:sizesView.size];
@@ -1368,7 +1368,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
             
         } else if( IS_IPHONE_6_PLUS ){
-            textBordersView.frame = CGRectMake((layerScrollView.frame.origin.x+17), textBordersView.frame.origin.y, textBordersView.frame.size.width, textBordersView.frame.size.height);
+            textBordersView.frame = CGRectMake((layerScrollView.frame.origin.x+20), layerScrollView.frame.origin.y, textBordersView.frame.size.width, textBordersView.frame.size.height);
             
             [layerScrollView addSubview:textBordersView];
             [layerScrollView setContentSize:textBordersView.size];
@@ -5122,6 +5122,10 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                          animations:^{
                              //Create ScrollView
                              if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+                                 
+                                 if( IS_IPHONE_6_PLUS ){
+                                     fontsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), layerScrollView.frame.origin.y, fontsView.frame.size.width, fontsView.frame.size.height);
+                                 }
                                  
                                  //Delete SubViews from ScrollView
                                  [self deleteSubviewsFromScrollView];
