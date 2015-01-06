@@ -1197,7 +1197,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
             
         } else if( IS_IPHONE_6_PLUS ){
-            colorsView.frame = CGRectMake((layerScrollView.frame.origin.x+17), colorsView.frame.origin.y, colorsView.frame.size.width, colorsView.frame.size.height);
+            colorsView.frame = CGRectMake((layerScrollView.frame.origin.x+19), (layerScrollView.frame.origin.y+5), colorsView.frame.size.width, colorsView.frame.size.height);
             
             [layerScrollView addSubview:colorsView];
             [layerScrollView setContentSize:colorsView.size];
