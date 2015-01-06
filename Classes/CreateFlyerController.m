@@ -219,7 +219,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             }
         }else if ( IS_IPHONE_6_PLUS ){
             
-            self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 635, 620, 50)];
+            self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 626, 620, 50)];
             
             if ( bannerAdDismissBtn == nil ){
             bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(395, 0, 23, 23)];
