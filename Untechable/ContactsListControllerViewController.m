@@ -44,6 +44,12 @@
     [_contactsTable  setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
     [searchTextField setReturnKeyType:UIReturnKeyDone];
     
+    // Load device contacts
+    [self loadLocalContacts];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     customizedContactsString = untechable.customizedContacts;
     
     NSError *writeError = nil;
@@ -52,9 +58,9 @@
                                     options: NSJSONReadingMutableContainers
                                       error: &writeError];
     
-    // Load device contacts
-    [self loadLocalContacts];
+    [_contactsTable reloadData];
 }
+
 
 #pragma mark -  Navigation functions
 - (void)setNavigationDefaults{
@@ -286,7 +292,21 @@
         _contactModal.img =[[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"dfcontact" ofType:@"jpg"]];
     }
     
-    
+    if ( untechable.customizedContactsForCurrentSession.count > 0 ){
+        
+        for (int i = 0;i<untechable.customizedContactsForCurrentSession.count; i++){
+            ContactsCustomizedModal *previousModal = [untechable.customizedContactsForCurrentSession objectAtIndex:i];
+            
+            if ( [previousModal.name isEqualToString:_contactModal.name] &&
+                 previousModal.allPhoneNumbers.count == _contactModal.allPhoneNumbers.count )
+            {
+                _contactModal.cutomizingStatusArray = previousModal.cutomizingStatusArray;
+                if ( previousModal.IsCustomized ) {
+                    _contactModal.IsCustomized = YES;
+                }
+            }
+        }
+    }
     if ( ![customizedContactsString isEqualToString:@""] ){
         
         for ( int i = 0; i < customizedContactsDictionary.count; i++ ){
@@ -300,6 +320,11 @@
                 _contactModal.allPhoneNumbers.count == tempPhonesNumbers.count) {
                 
                 _contactModal.cutomizingStatusArray = [curContactDetails objectForKey:@"cutomizingStatusArray"];
+                
+                NSNumber *IsCustomizedBoolValue = [curContactDetails objectForKey:@"IsCustomized"];
+                if ( [IsCustomizedBoolValue boolValue] ) {
+                    _contactModal.IsCustomized = YES;
+                }
             }
         }
     }
@@ -454,9 +479,10 @@
     
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(m_addressbook);
     CFIndex nPeople = ABAddressBookGetPersonCount(m_addressbook);
+    ContactsCustomizedModal *contactModal;
     
     for (int i=0;i < nPeople;i++) {
-        ContactsCustomizedModal *contactModal = [[ContactsCustomizedModal alloc] init];
+        contactModal = [[ContactsCustomizedModal alloc] init];
         
         contactModal.others = @"";
         
@@ -644,7 +670,7 @@
         
         detailsController.contactModal = tempModal;
     }
-    
+    detailsController.customizedContactsDictionary =  customizedContactsDictionary;
     [self.navigationController pushViewController:detailsController animated:YES];
 }
 @end

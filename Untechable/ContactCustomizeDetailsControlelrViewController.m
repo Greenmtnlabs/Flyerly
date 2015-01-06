@@ -18,6 +18,7 @@
     int rowsInFirstSection,rowsInSecondSection;
     NSArray *phoneNumberTypes;
     NSMutableDictionary *curContactDetails;
+    BOOL IsCustomized;
 }
 @property (weak, nonatomic) IBOutlet UITableView *contactDetailsTable;
 
@@ -25,7 +26,7 @@
 
 @implementation ContactCustomizeDetailsControlelrViewController
 
-@synthesize contactModal,untechable,allEmails,allPhoneNumbers,customTextForContact;
+@synthesize contactModal,untechable,allEmails,allPhoneNumbers,customTextForContact,customizedContactsDictionary;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,57 +38,10 @@
     _contactDetailsTable.dataSource = self;
     
     self.contactDetailsTable.contentInset = UIEdgeInsetsMake(-32.0f, 0.0f, 0.0f, 0.0f);
-    /*NSString *customizedContactsString = untechable.customizedContacts;
     
-    NSError *writeError = nil;
-    NSMutableDictionary *customizedContactsDictionary =
-    [NSJSONSerialization JSONObjectWithData: [customizedContactsString dataUsingEncoding:NSUTF8StringEncoding]
-                                    options: NSJSONReadingMutableContainers
-                                      error: &writeError];
-    
-    if ( ![customizedContactsString isEqualToString:@""] ){
-        
-        for ( int i = 0; i < customizedContactsDictionary.count; i++ ){
-            
-            curContactDetails =  [customizedContactsDictionary objectForKey:[NSString stringWithFormat:@"%i",i]];
-            
-            if ( [[curContactDetails objectForKey:@"contactName"] isEqualToString:contactModal.name] ){
-                
-                [curContactDetails setObject:contactModal.customTextForContact forKey:@"customTextForContact"];
-                NSString *customText = [curContactDetails objectForKey:@"customTextForContact"];
-                [contactModal.customTextForContact isEqualToString:customText];
-                
-                //alreadyExist = YES;
-            }else {
-                [curContactDetails setObject:contactModal.customTextForContact forKey:@"customTextForContact"];
-                [curContactDetails setObject:contactModal.allPhoneNumbers forKey:@"phoneNumbers"];
-                [curContactDetails setObject:contactModal.allEmails forKey:@"emailAddresses"];
-                [curContactDetails setObject:contactModal.name forKey:@"contactName"];
-            }
-        }
-    }else {
-        
-        curContactDetails = [[NSMutableDictionary alloc] init];
+    if( contactModal.IsCustomized ){
+        IsCustomized = YES;
     }
-    
-    
-    if ( [contactModal.allPhoneNumbers objectForKey:@"phoneNumbers"] != nil ){
-       
-        phoneNumberTypes = (NSMutableArray *)[contactModal.allPhoneNumbers allKeys];
-        
-        [phoneNumberTypes removeObjectAtIndex:0];
-        
-        for ( int i = 0; i<contactModal.allPhoneNumbers.count; i++){
-            
-            if ( i != 0 ){
-                
-                phoneNumberTypes = [contactModal.allPhoneNumbers 
-            }
-        }
-        numberOfRowsInSection = (int)contactModal.allPhoneNumbers.count - 1;
-    }else{
-        phoneNumberTypes = [contactModal.allPhoneNumbers allKeys];
-    }*/
 }
 
 - (void)didReceiveMemoryWarning {
@@ -120,7 +74,7 @@
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [backButton setTitle:TITLE_BACK_TXT forState:normal];
         [backButton setTitleColor:defGray forState:UIControlStateNormal];
-        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
+        
         [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
         backButton.showsTouchWhenHighlighted = YES;
         
@@ -154,13 +108,39 @@
 
 -(void) goBack {
     
-    NSMutableArray *customizedContactsModals = [[NSMutableArray alloc] init];
+    NSMutableArray *customizedContactsModals;
     
-    [customizedContactsModals addObject:contactModal];
+    /*if ( IsCustomized ){
     
-    untechable.customizedContacts = [untechable.commonFunctions convertCCMArrayIntoJsonString:customizedContactsModals];
+        [customizedContactsModals addObject:contactModal ];
+    }*/
+
+    //untechable.customizedContacts = [untechable.commonFunctions convertCCMArrayIntoJsonString:customizedContactsModals];
     
-    [untechable setOrSaveVars:SAVE];
+    //[untechable setOrSaveVars:SAVE];
+    if ( IsCustomized ){
+        if ( [untechable.customizedContactsForCurrentSession containsObject:contactModal] ){
+            
+            if ( [contactModal.customTextForContact isEqualToString:untechable.spendingTimeTxt ]
+                 &&
+                 [contactModal.cutomizingStatusArray objectAtIndex:0] == 0
+                &&
+                [contactModal.cutomizingStatusArray objectAtIndex:1] == 0
+                &&
+                [contactModal.cutomizingStatusArray objectAtIndex:2] == 0)
+            {
+                [untechable.customizedContactsForCurrentSession removeObject:contactModal];
+            
+            }else {
+                
+             [untechable.customizedContactsForCurrentSession replaceObjectAtIndex:[untechable.customizedContactsForCurrentSession indexOfObject:contactModal] withObject:contactModal];
+                
+            }
+        }else {
+            [untechable.customizedContactsForCurrentSession addObject:contactModal];
+        }
+    }
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -343,6 +323,7 @@
 
 -(IBAction)emailButtonTapped:(id) sender
 {
+    IsCustomized = YES;
     EmailCell *emailCell;
     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.contactDetailsTable];
     NSIndexPath *indexPath = [self.contactDetailsTable indexPathForRowAtPoint:buttonPosition];
@@ -355,6 +336,7 @@
     if ( [[emailWithStatus objectAtIndex:1] isEqualToString:@"1"] ){
         [emailWithStatus setObject:@"0" atIndexedSubscript:1];
         [emailCell.emailButton setSelected:NO];
+        [contactModal setEmailStatus:0];
     }else if ( [[emailWithStatus objectAtIndex:1] isEqualToString:@"0"] ){
         [emailWithStatus setObject:@"1" atIndexedSubscript:1];
         [emailCell.emailButton setSelected:YES];
@@ -366,6 +348,7 @@
 
 -(IBAction)callButtonTapped:(id) sender
 {
+    IsCustomized = YES;
     PhoneNumberCell *phoneCell;
     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.contactDetailsTable];
     NSIndexPath *indexPath = [self.contactDetailsTable indexPathForRowAtPoint:buttonPosition];
@@ -379,6 +362,7 @@
     if ( [[phoneWithStatus objectAtIndex:3] isEqualToString:@"1"] ){
         [phoneWithStatus setObject:@"0" atIndexedSubscript:3];
         [phoneCell.callButton setSelected:NO];
+        [contactModal setPhoneStatus:0];
     }else if ( [[phoneWithStatus objectAtIndex:3] isEqualToString:@"0"] ){
         [phoneWithStatus setObject:@"1" atIndexedSubscript:3];
         [phoneCell.callButton setSelected:YES];
@@ -526,6 +510,7 @@
 
 -(IBAction)smsButtonTapped:(id) sender
 {
+    IsCustomized = YES;
     PhoneNumberCell *phoneCell;
     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.contactDetailsTable];
     NSIndexPath *indexPath = [self.contactDetailsTable indexPathForRowAtPoint:buttonPosition];
@@ -539,6 +524,7 @@
     if ( [[phoneWithStatus objectAtIndex:2] isEqualToString:@"1"] ){
         [phoneWithStatus setObject:@"0" atIndexedSubscript:2];
         [phoneCell.smsButton setSelected:NO];
+        [contactModal setSmsStatus:0];
     }else if ( [[phoneWithStatus objectAtIndex:2] isEqualToString:@"0"] ){
         [phoneWithStatus setObject:@"1" atIndexedSubscript:2];
         [phoneCell.smsButton setSelected:YES];
@@ -879,12 +865,13 @@
 
 - (BOOL) textViewShouldBeginEditing:(UITextView *)textView {
     
+    IsCustomized = YES;
     CustomTextTableViewCell *cell = (CustomTextTableViewCell *)[[textView superview] superview];
     
     NSIndexPath *indexPath = [_contactDetailsTable indexPathForCell:cell];
     
-    _contactDetailsTable.frame= CGRectMake(_contactDetailsTable.frame.origin.x, _contactDetailsTable.frame.origin.y, _contactDetailsTable.frame.size.width, _contactDetailsTable.frame.size.height - 190);
-    [_contactDetailsTable scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    _contactDetailsTable.frame = CGRectMake(_contactDetailsTable.frame.origin.x, _contactDetailsTable.frame.origin.y, _contactDetailsTable.frame.size.width, _contactDetailsTable.frame.size.height - 190);
+    //[_contactDetailsTable scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
     
     return YES;
 }

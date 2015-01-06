@@ -22,7 +22,9 @@
 {
     
     self.contact_Name.text = contactName;
-    self.contact_Image.image = contactImage;
+    if ( contactImage != nil ){
+        self.contact_Image.image = contactImage;
+    }
     self.contact_Image.layer.cornerRadius = self.contact_Image.frame.size.width / 2;
     self.contact_Image.clipsToBounds = YES;
 }

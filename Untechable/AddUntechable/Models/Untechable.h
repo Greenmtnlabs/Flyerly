@@ -42,6 +42,7 @@
 @property (strong, nonatomic) NSString *twillioNumber, *emergencyNumber, *location;
 @property (strong, nonatomic) NSMutableDictionary *emergencyContacts;
 @property (nonatomic, assign) BOOL hasRecording;
+@property (strong, nonatomic) NSMutableArray *customizedContactsForCurrentSession;
 
 //Screen3
 @property (strong, nonatomic) NSString *socialStatus, *fbAuth, *fbAuthExpiryTs, *twitterAuth, *twOAuthTokenSecret, *linkedinAuth;

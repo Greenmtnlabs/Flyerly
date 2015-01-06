@@ -21,7 +21,7 @@
 @synthesize timezoneOffset, spendingTimeTxt, startDate, endDate, hasEndDate;
 
 //2-vars for screen2
-@synthesize customizedContacts,twillioNumber, location, emergencyContacts, emergencyNumber, hasRecording;
+@synthesize customizedContacts,twillioNumber, location, emergencyContacts, emergencyNumber, hasRecording,customizedContactsForCurrentSession;
 
 //3-vars for screen3
 @synthesize socialStatus, fbAuth, fbAuthExpiryTs, twitterAuth, twOAuthTokenSecret, linkedinAuth;
@@ -311,7 +311,7 @@
     emergencyNumber  = @"";
     emergencyContacts = [[NSMutableDictionary alloc] init];
     hasRecording = NO;
-    
+    customizedContactsForCurrentSession = [[NSMutableArray alloc] init];
     customizedContacts = @"";
     
     //Screen3

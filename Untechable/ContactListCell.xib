@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="-1" width="314" height="100"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="O6K-Ml-Hay">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_img.png" id="O6K-Ml-Hay">
                         <rect key="frame" x="6" y="14" width="72" height="72"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
@@ -60,6 +60,7 @@
     <resources>
         <image name="invite_Bg.png" width="311" height="100"/>
         <image name="right_arrow.png" width="24" height="24"/>
+        <image name="user_img.png" width="65" height="65"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

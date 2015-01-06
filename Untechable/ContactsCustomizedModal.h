@@ -33,6 +33,8 @@
 
 @property (strong, nonatomic) NSMutableArray *cutomizingStatusArray;
 
+@property (nonatomic, assign) BOOL IsCustomized;
+
 -(void)setPhoneStatus :(int)status;
 -(void)setEmailStatus :(int)status;
 -(void)setSmsStatus :(int)status;

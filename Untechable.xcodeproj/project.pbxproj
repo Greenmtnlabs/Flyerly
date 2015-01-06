@@ -41,6 +41,9 @@
 		243C59FA1A4D984B0020350C /* PhoneNumberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243C59F81A4D984B0020350C /* PhoneNumberCell.xib */; };
 		243C59FE1A4DA17C0020350C /* EmailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 243C59FC1A4DA17C0020350C /* EmailCell.m */; };
 		243C59FF1A4DA17C0020350C /* EmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243C59FD1A4DA17C0020350C /* EmailCell.xib */; };
+		247C72D31A5C0968005C9693 /* user_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 247C72D01A5C0968005C9693 /* user_img.png */; };
+		247C72D41A5C0968005C9693 /* user_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 247C72D11A5C0968005C9693 /* user_img@2x.png */; };
+		247C72D51A5C0968005C9693 /* user_img@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 247C72D21A5C0968005C9693 /* user_img@3x.png */; };
 		24848FE71A30403600BF1138 /* ServerAccountDetailsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24848FE51A30403600BF1138 /* ServerAccountDetailsViewCell.m */; };
 		24848FE81A30403600BF1138 /* ServerAccountDetailsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24848FE61A30403600BF1138 /* ServerAccountDetailsViewCell.xib */; };
 		2486CBA31A5A79AC00AC125E /* sms_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 2486CB9F1A5A79AC00AC125E /* sms_selected.png */; };
@@ -225,6 +228,9 @@
 		243C59FB1A4DA17C0020350C /* EmailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailCell.h; sourceTree = "<group>"; };
 		243C59FC1A4DA17C0020350C /* EmailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailCell.m; sourceTree = "<group>"; };
 		243C59FD1A4DA17C0020350C /* EmailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmailCell.xib; sourceTree = "<group>"; };
+		247C72D01A5C0968005C9693 /* user_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_img.png; sourceTree = "<group>"; };
+		247C72D11A5C0968005C9693 /* user_img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_img@2x.png"; sourceTree = "<group>"; };
+		247C72D21A5C0968005C9693 /* user_img@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_img@3x.png"; sourceTree = "<group>"; };
 		24848FE41A30403600BF1138 /* ServerAccountDetailsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerAccountDetailsViewCell.h; sourceTree = "<group>"; };
 		24848FE51A30403600BF1138 /* ServerAccountDetailsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerAccountDetailsViewCell.m; sourceTree = "<group>"; };
 		24848FE61A30403600BF1138 /* ServerAccountDetailsViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServerAccountDetailsViewCell.xib; sourceTree = "<group>"; };
@@ -739,6 +745,9 @@
 		36B0369A19DAD2AB00E8CD21 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				247C72D01A5C0968005C9693 /* user_img.png */,
+				247C72D11A5C0968005C9693 /* user_img@2x.png */,
+				247C72D21A5C0968005C9693 /* user_img@3x.png */,
 				2486CBAD1A5A7B1000AC125E /* phone_selected.png */,
 				2486CBAE1A5A7B1000AC125E /* phone_selected@2x.png */,
 				2486CBAF1A5A7B1000AC125E /* phone@2x.png */,
@@ -980,6 +989,7 @@
 				366EAFA41A14C3530011D6C6 /* logo.png in Resources */,
 				36B2765F1A0124E800ED58AD /* CHECKBOX_FILLED@2x.png in Resources */,
 				24A4B7A81A5126410029C8DF /* CustomTextTableViewCell.xib in Resources */,
+				247C72D51A5C0968005C9693 /* user_img@3x.png in Resources */,
 				36474F2219D9780100084F34 /* Pigiarniq Bold.ttf in Resources */,
 				366EAF921A14C3530011D6C6 /* icon-50.png in Resources */,
 				248E06BD1A4AD9180099846A /* ContactListCell-iPhone6-Plus.xib in Resources */,
@@ -994,6 +1004,7 @@
 				36B276761A0124E800ED58AD /* play@2x.png in Resources */,
 				2402BB841A1DBF6A00255A73 /* UntechablesList.xib in Resources */,
 				200ACE281A3874B200DC7047 /* exchangeIcon@2x.png in Resources */,
+				247C72D31A5C0968005C9693 /* user_img.png in Resources */,
 				36474F2319D9780100084F34 /* Pigiarniq Heavy.ttf in Resources */,
 				2486CBAC1A5A79F500AC125E /* email@2x.png in Resources */,
 				36C734481A0CF2490066C544 /* Podfile in Resources */,
@@ -1019,6 +1030,7 @@
 				366EAFA61A14C3530011D6C6 /* logo@3x.png in Resources */,
 				36524AF219D940F4006DCAAF /* SocialnetworkController.xib in Resources */,
 				36FD975619E694AC00427507 /* BSKeyboardControls.strings in Resources */,
+				247C72D41A5C0968005C9693 /* user_img@2x.png in Resources */,
 				36B276771A0124E800ED58AD /* record_gray.png in Resources */,
 				366EAF991A14C3530011D6C6 /* icon-76@2x.png in Resources */,
 				200ACE241A3874B200DC7047 /* aolIcon.png in Resources */,

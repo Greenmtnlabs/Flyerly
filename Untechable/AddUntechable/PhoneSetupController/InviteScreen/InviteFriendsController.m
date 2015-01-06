@@ -279,8 +279,6 @@
             }
         }
         
-        
-        
         //For Phone number
         NSString* mobileLabel;
         

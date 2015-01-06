@@ -21,7 +21,9 @@
     // Set Values
     [contactName setText:model.name];
     
-    self.contactImage.image = model.img;
+    if ( model.img != nil ){
+        self.contactImage.image = model.img;
+    }
     self.contactImage.layer.cornerRadius = self.contactImage.frame.size.width / 2;
     self.contactImage.clipsToBounds = YES;
     
@@ -36,13 +38,13 @@
     }
     
     iconImage = [_customizationStatus objectAtIndex:statusCount];
-    if ( [[model getSmsStatus] isEqualToString:@"1"] ) {
+    if ( [[model getPhoneStatus] isEqualToString:@"1"] ) {
         iconImage.image = [UIImage imageNamed:@"sms_selected"];
         statusCount++;
     }
     
     iconImage = [_customizationStatus objectAtIndex:statusCount];
-    if ( [[model getPhoneStatus] isEqualToString:@"1"] ) {
+    if ( [[model getSmsStatus] isEqualToString:@"1"] ) {
         iconImage.image = [UIImage imageNamed:@"phone_selected"];
         statusCount++;
     }

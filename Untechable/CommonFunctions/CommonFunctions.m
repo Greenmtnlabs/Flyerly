@@ -105,7 +105,7 @@
 
 -(NSString *)convertCCMArrayIntoJsonString:(NSMutableArray *)value_
 {
-    NSMutableDictionary *customizedContactArray = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *customizedContactsArray = [[NSMutableDictionary alloc] init];
     for(int i=0;i<[value_ count]; i++) {
         
         NSMutableDictionary *curContactDetails = [[NSMutableDictionary alloc] init];
@@ -115,11 +115,12 @@
         [curContactDetails setValue:curObj.allEmails forKey:@"emailAddresses"];
         [curContactDetails setValue:curObj.customTextForContact forKey:@"customTextForContact"];
         [curContactDetails setValue:curObj.cutomizingStatusArray forKey:@"cutomizingStatusArray"];
-        [customizedContactArray setValue:curContactDetails forKey:[NSString stringWithFormat:@"%i",i]];
+        [curContactDetails setObject:[NSNumber numberWithBool:curObj.IsCustomized] forKey:@"IsCustomized"];
+        [customizedContactsArray setValue:curContactDetails forKey:[NSString stringWithFormat:@"%i",i]];
         
     }
     
-    return [self convertDicIntoJsonString:customizedContactArray];
+    return [self convertDicIntoJsonString:customizedContactsArray];
 }
 -(NSArray *)convertJsonStringIntoArray:(NSString *)value
 {
