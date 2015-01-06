@@ -37,7 +37,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="02X-0M-pgw">
-                            <rect key="frame" x="24" y="178" width="93" height="27"/>
+                            <rect key="frame" x="24" y="178" width="93" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="public_on.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -282,7 +282,7 @@
                         <outlet property="delegate" destination="-1" id="54"/>
                     </connections>
                 </textField>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="945881F5-54E1-4017-A5D2-A7A7F0FC0933" id="cXJ-PV-xl2" userLabel="descTextAreaImg">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="495CFD0A-0D0A-4F3D-AB25-CD82EB69B76A" id="cXJ-PV-xl2" userLabel="descTextAreaImg">
                     <rect key="frame" x="10" y="96" width="298" height="69"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -309,11 +309,11 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-207" y="274"/>
+            <point key="canvasLocation" x="-256" y="218"/>
         </view>
     </objects>
     <resources>
-        <image name="945881F5-54E1-4017-A5D2-A7A7F0FC0933" width="251" height="34">
+        <image name="495CFD0A-0D0A-4F3D-AB25-CD82EB69B76A" width="251" height="34">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
