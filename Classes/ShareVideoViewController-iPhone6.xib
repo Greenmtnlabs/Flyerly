@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShareViewController">
             <connections>
                 <outlet property="clipboardButton" destination="aR2-h9-f1Z" id="dzT-fz-HSz"/>
+                <outlet property="descTextAreaImg" destination="ceQ-71-3qA" id="pmP-jB-x8d"/>
                 <outlet property="emailButton" destination="99N-id-PIK" id="y20-Na-AiM"/>
                 <outlet property="facebookButton" destination="FdQ-7T-iT1" id="RVl-wO-WaY"/>
                 <outlet property="flickrButton" destination="GVr-7i-SKr" id="8iN-g4-nuk"/>
@@ -19,6 +20,7 @@
                 <outlet property="star3" destination="igI-Dk-dS1" id="ruK-2g-fb7"/>
                 <outlet property="star4" destination="2Is-eV-oD6" id="4dS-zU-iUO"/>
                 <outlet property="star5" destination="d8g-xw-Ps9" id="yNS-Pm-WKU"/>
+                <outlet property="titlePlaceHolderImg" destination="lyp-YI-Iv8" id="zFO-v3-z3q"/>
                 <outlet property="titleView" destination="Lbf-me-lnl" id="fkM-xu-Hin"/>
                 <outlet property="twitterButton" destination="UYY-Pn-ieB" id="pZF-PY-pHC"/>
                 <outlet property="view" destination="45R-9H-nBs" id="oux-h8-cjY"/>
@@ -103,11 +105,11 @@
                     </subviews>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="flat_text_box.png" id="lyp-YI-Iv8">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="flat_text_box.png" id="lyp-YI-Iv8" userLabel="titlePlaceHolderImg">
                     <rect key="frame" x="10" y="45" width="358" height="33"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Flyerly Title (e.g. &quot;Parker's Party&quot;)" minimumFontSize="17" id="Lbf-me-lnl">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Flyerly Title (e.g. &quot;Parker's Party&quot;)" minimumFontSize="17" id="Lbf-me-lnl" userLabel="titleView">
                     <rect key="frame" x="16" y="47" width="352" height="28"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -117,6 +119,10 @@
                         <outlet property="delegate" destination="-1" id="tRe-5d-7m7"/>
                     </connections>
                 </textField>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="flat_text_box.png" id="ceQ-71-3qA" userLabel="descTextAreaImg">
+                    <rect key="frame" x="10" y="79" width="358" height="67"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
                 <view contentMode="scaleToFill" id="Izt-kg-ptm">
                     <rect key="frame" x="30" y="273" width="320" height="135"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -252,10 +258,6 @@
                         </button>
                     </subviews>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="flat_text_box.png" id="ceQ-71-3qA">
-                    <rect key="frame" x="10" y="79" width="358" height="67"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
                 <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SOS-TL-Fdh">
                     <rect key="frame" x="0.0" y="0.0" width="380" height="37"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>

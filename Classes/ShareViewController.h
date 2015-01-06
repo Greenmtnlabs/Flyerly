@@ -47,7 +47,10 @@
 
 
 @property(nonatomic,strong) IBOutlet UIPlaceHolderTextView *descriptionView;
+@property (strong, nonatomic) IBOutlet UIImageView *titlePlaceHolderImg;
 @property(nonatomic,strong) IBOutlet UITextField *titleView;
+@property (strong, nonatomic) IBOutlet UIImageView *descTextAreaImg;
+
 
 @property(nonatomic,strong) IBOutlet UIButton *facebookButton;
 @property(nonatomic,strong) IBOutlet UIButton *twitterButton;
@@ -87,6 +90,10 @@
 
 @property (strong, nonatomic) NSTimer *timer;
 @property (strong, nonatomic) IBOutlet UITextView *tempTxtArea;
+
+
+
+
 
 
 -(IBAction)onClickFacebookButton;

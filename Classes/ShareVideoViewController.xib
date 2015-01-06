@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShareViewController">
             <connections>
                 <outlet property="clipboardButton" destination="18" id="40"/>
+                <outlet property="descTextAreaImg" destination="cXJ-PV-xl2" id="D6e-RQ-QMI"/>
                 <outlet property="emailButton" destination="12" id="24"/>
                 <outlet property="facebookButton" destination="11" id="23"/>
                 <outlet property="flickrButton" destination="13" id="25"/>
@@ -19,6 +20,7 @@
                 <outlet property="star3" destination="yuC-Xa-KrZ" id="PgV-Ec-1x0"/>
                 <outlet property="star4" destination="iQw-qn-Bq4" id="ctm-Um-nI7"/>
                 <outlet property="star5" destination="N5u-za-btZ" id="eEZ-aC-WkI"/>
+                <outlet property="titlePlaceHolderImg" destination="69" id="uQf-1G-W5N"/>
                 <outlet property="titleView" destination="7" id="21"/>
                 <outlet property="twitterButton" destination="15" id="31"/>
                 <outlet property="view" destination="1" id="3"/>
@@ -103,11 +105,11 @@
                     </subviews>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="flat_text_box.png" id="69">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="flat_text_box.png" id="69" userLabel="titlePlaceHolderImg">
                     <rect key="frame" x="10" y="68" width="298" height="27"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Flyerly Title (e.g. &quot;Parker's Party&quot;)" minimumFontSize="17" id="7">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Flyerly Title (e.g. &quot;Parker's Party&quot;)" minimumFontSize="17" id="7" userLabel="titleView">
                     <rect key="frame" x="16" y="71" width="292" height="24"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -117,6 +119,10 @@
                         <outlet property="delegate" destination="-1" id="54"/>
                     </connections>
                 </textField>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="flat_text_box.png" id="cXJ-PV-xl2" userLabel="descTextAreaImg">
+                    <rect key="frame" x="10" y="96" width="298" height="69"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                </imageView>
                 <view contentMode="scaleToFill" id="59">
                     <rect key="frame" x="0.0" y="256" width="320" height="142"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -252,10 +258,6 @@
                         </label>
                     </subviews>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="flat_text_box.png" id="cXJ-PV-xl2" userLabel="txtArea">
-                    <rect key="frame" x="10" y="96" width="298" height="69"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                </imageView>
                 <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="daL-dE-hOn">
                     <rect key="frame" x="0.0" y="30" width="320" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>

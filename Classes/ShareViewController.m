@@ -11,10 +11,11 @@
 
 @implementation ShareViewController
 
-@synthesize Yvalue,rightUndoBarButton,shareButton,helpButton,selectedFlyerImage,fvController,titleView,cfController,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,printFlyerButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,lblFirstShareOnYoutube,tempTxtArea;
+@synthesize Yvalue,rightUndoBarButton,shareButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,flickrButton,printFlyerButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,lblFirstShareOnYoutube,tempTxtArea;
 
 @synthesize flyerShareType,star1,star2,star3,star4,star5;
 
+@synthesize descriptionView, titlePlaceHolderImg, titleView, descTextAreaImg;
 
 #pragma mark  View Appear Methods
 
@@ -59,9 +60,9 @@
         } else if ( IS_IPHONE_5 ) {
             sizeForDesc = CGRectMake(10, 96, 298, 67);
         } else if ( IS_IPHONE_6 ) {
-            sizeForDesc = CGRectMake(10, 79, 353, 67);
+            sizeForDesc = CGRectMake(10, 79, 354, 67);
         } else if( IS_IPHONE_6_PLUS ) {
-            sizeForDesc = CGRectMake(10, 79, 420, 85);
+            sizeForDesc = descTextAreaImg.frame;//CGRectMake(10, 79, 393, 67);
         } else {
             sizeForDesc = CGRectMake(10, 96, 298, 67);
         }
@@ -83,6 +84,21 @@
     descriptionView.delegate = self;
     
     [self.view addSubview:descriptionView];
+    
+    [self testPrintFrameSize];
+    
+    descTextAreaImg.frame = descriptionView.frame;
+    
+}
+
+-(void)printFrame:(NSString *)frameName frame:(CGRect)frame{
+    NSLog(@"%@:(%f,%f,%f,%f)",frameName, frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
+}
+-(void)testPrintFrameSize {
+    [self printFrame:@"titlePlaceHolderImg.frame" frame:titlePlaceHolderImg.frame];
+    [self printFrame:@"titleView.frame" frame:titleView.frame];
+    [self printFrame:@"descTextAreaImg.frame" frame:descTextAreaImg.frame];
+    [self printFrame:@"descriptionView.frame" frame:descriptionView.frame];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
