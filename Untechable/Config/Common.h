@@ -19,6 +19,7 @@
 #define APP_FONT @"Pigiarniq"
 
 
+#define TITLE_SAVE_TXT @"SAVE"
 #define TITLE_NEXT_TXT @"NEXT"
 #define TITLE_NEW_TXT @"NEW"
 #define TITLE_BACK_TXT @"BACK"

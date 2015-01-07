@@ -190,8 +190,8 @@
         dic[@"emergencyContacts"] = emergencyContacts;
         dic[@"hasRecording"] = hasRecording ? @"YES" : @"NO";
         
-        //dic[@"customizedContacts"] = [commonFunctions convertCCMArrayIntoJsonString:customizedContacts];
-        dic[@"customizedContacts"] = customizedContacts;
+        dic[@"customizedContacts"] = [commonFunctions convertCCMArrayIntoJsonString:customizedContactsForCurrentSession];
+        //dic[@"customizedContacts"] = customizedContacts;
 
         //Screen3 vars
         dic[@"socialStatus"] = socialStatus;

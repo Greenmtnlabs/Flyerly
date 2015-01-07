@@ -15,7 +15,7 @@
 {
     
     UIButton *backButton;
-    UIButton *nextButton;
+    UIButton *saveButton;
     UIColor *defGreen;//GREEN
     UIColor *defGray;//GRAY
     
@@ -25,6 +25,7 @@
 @property (nonatomic,strong)NSMutableArray *allPhoneNumbers;
 @property (nonatomic,strong)NSMutableArray *phoneNumbersStatus;
 @property (nonatomic,strong)NSString *customTextForContact;
+@property (nonatomic,strong)NSMutableDictionary *editingEmailsWithStatus;
 
 @property (nonatomic,strong)NSMutableDictionary *customizedContactsDictionary;
 @property (nonatomic,strong)  Untechable *untechable;

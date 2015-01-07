@@ -19,6 +19,7 @@
     
     NSMutableDictionary *customizedContactsDictionary;
     NSString *customizedContactsString;
+    ContactCustomizeDetailsControlelrViewController *detailsController;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *contactsTable;
@@ -109,8 +110,9 @@
         nextButton.titleLabel.shadowColor = [UIColor clearColor];
         //nextButton.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
         
+        nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 33, 42)];
         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
-        //[nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
+        [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
         [nextButton setTitleColor:defGray forState:UIControlStateNormal];
@@ -131,7 +133,7 @@
         
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
         UIBarButtonItem *skipButtonBarButton = [[UIBarButtonItem alloc] initWithCustomView:skipButton];
-        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:skipButtonBarButton,nil];
+        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,skipButtonBarButton,nil];
         
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
     }
@@ -184,14 +186,45 @@
 }
 -(void)onNext{
     
+    /*NSMutableDictionary *tempEmailDict = detailsController.editingEmailsWithStatus;
+    if ( tempEmailDict.count > 0 ) {
+        
+        for( int j=0; j < tempEmailDict.count; j++){
+            NSArray *allKeys = [tempEmailDict allKeys];
+            NSArray *allObjects = [tempEmailDict allValues];
+            NSIndexPath *indexPath =  [allKeys objectAtIndex:j];
+            
+            [detailsController.contactModal.allEmails  replaceObjectAtIndex:indexPath.row withObject:[allObjects objectAtIndex:j]];
+            
+            /*NSMutableArray *tempArray = [editingEmailsWithStatus objectForKey:[allKeys objectAtIndex:j]];
+             if ( [[tempArray objectAtIndex:1] isEqualToString:@"0"] ){
+             [contactModal.allEmails removeObject:[allObjects objectAtIndex:j]];
+             }else {
+             
+             }
+        }
+    }*/
+    /*NSMutableArray *tempArray = [editingEmailsWithStatus objectForKey:[allKeys objectAtIndex:j]];
+     if ( [[tempArray objectAtIndex:1] isEqualToString:@"0"] ){
+     [contactModal.allEmails removeObject:[allObjects objectAtIndex:j]];
+     }else {
+     
+     }*/
+    
+    
     [self storeSceenVarsInDic];
+    
+    SocialnetworkController *socialnetwork;
+    socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
+    socialnetwork.untechable = untechable;
+    [self.navigationController pushViewController:socialnetwork animated:YES];
     
     //[self hideAllControlls];
     
     BOOL goToNext = untechable.hasEndDate ? NO : YES;
     
     //When we have end date, must check end date is greater then start date
-    if( untechable.hasEndDate == YES )
+    /*if( untechable.hasEndDate == YES )
     {
         NSDate *d1 = [untechable.commonFunctions timestampStrToNsDate:untechable.startDate];
         NSDate *d2 = [untechable.commonFunctions timestampStrToNsDate:untechable.endDate];
@@ -206,14 +239,12 @@
         
     }
     
-    NSLog(goToNext ? @"goToNext- YES" : @"goToNext- NO");
+    NSLog(goToNext ? @"goToNext- YES" : @"goToNext- NO");*/
     
     
     if( goToNext ) {
         
-        ContactsListControllerViewController *listController = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
-        listController.untechable = untechable;
-        [self.navigationController pushViewController:listController animated:YES];
+        
         
         /*PhoneSetupController *phoneSetup;
          phoneSetup = [[PhoneSetupController alloc]initWithNibName:@"PhoneSetupController" bundle:nil];
@@ -606,25 +637,16 @@
                         contactModal.allEmails = [curContactDetails objectForKey:@"emailAddresses"];
                         contactModal.customTextForContact = [curContactDetails objectForKey:@"customTextForContact"];
                         contactModal.cutomizingStatusArray = [curContactDetails objectForKey:@"cutomizingStatusArray"];
-                        
-                        
-                        
-                    }else {
-                        
-                        
                     }
                 }
-            }else{
-                
-                
             }
-            
-            contactModal.allPhoneNumbers = allNumbers;
-            
-            contactModal.customTextForContact = untechable.spendingTimeTxt;
-            
-            [contactsArray addObject:contactModal];
         }
+        
+        contactModal.allPhoneNumbers = allNumbers;
+        
+        contactModal.customTextForContact = untechable.spendingTimeTxt;
+        
+        [contactsArray addObject:contactModal];
     }
     // Reload table data after all the contacts get loaded
     contactBackupArray = nil;
@@ -634,7 +656,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    ContactCustomizeDetailsControlelrViewController *detailsController = [[ContactCustomizeDetailsControlelrViewController alloc] init];
+    detailsController = [[ContactCustomizeDetailsControlelrViewController alloc] init];
     
     detailsController.untechable = untechable;
     

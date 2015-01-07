@@ -7,42 +7,42 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="right" selectionStyle="default" indentationWidth="10" rowHeight="100" id="NMA-iD-eUO" userLabel="Contact List Cell" customClass="ContactListCell">
-            <rect key="frame" x="0.0" y="0.0" width="314" height="100"/>
+        <tableViewCell contentMode="right" selectionStyle="default" indentationWidth="10" rowHeight="76" id="NMA-iD-eUO" userLabel="Contact List Cell" customClass="ContactListCell">
+            <rect key="frame" x="0.0" y="0.0" width="314" height="76"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NMA-iD-eUO" id="wtL-hq-e3v">
                 <rect key="frame" x="0.0" y="0.0" width="314" height="99"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="invite_Bg.png" id="n6w-MF-fzl">
-                        <rect key="frame" x="0.0" y="-1" width="314" height="100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="314" height="78"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_img.png" id="O6K-Ml-Hay">
-                        <rect key="frame" x="6" y="14" width="72" height="72"/>
+                        <rect key="frame" x="6" y="10" width="72" height="62"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dvL-ov-u2w">
-                        <rect key="frame" x="86" y="13" width="199" height="21"/>
+                        <rect key="frame" x="86" y="9" width="199" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                         <color key="textColor" red="0.25882352939999997" green="0.96862745100000003" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="right_arrow.png" id="Osm-U7-sg4">
-                        <rect key="frame" x="293" y="37" width="19" height="23"/>
+                        <rect key="frame" x="293" y="29" width="19" height="24"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="aAB-2n-rkb">
-                        <rect key="frame" x="152" y="48" width="40" height="40"/>
+                        <rect key="frame" x="86" y="38" width="30" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="p1N-lN-k7y">
-                        <rect key="frame" x="200" y="48" width="40" height="40"/>
+                        <rect key="frame" x="123" y="38" width="30" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="22a-1u-Ibq">
-                        <rect key="frame" x="248" y="48" width="40" height="40"/>
+                        <rect key="frame" x="161" y="38" width="30" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                 </subviews>

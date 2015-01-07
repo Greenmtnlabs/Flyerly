@@ -41,6 +41,12 @@
 		243C59FA1A4D984B0020350C /* PhoneNumberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243C59F81A4D984B0020350C /* PhoneNumberCell.xib */; };
 		243C59FE1A4DA17C0020350C /* EmailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 243C59FC1A4DA17C0020350C /* EmailCell.m */; };
 		243C59FF1A4DA17C0020350C /* EmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243C59FD1A4DA17C0020350C /* EmailCell.xib */; };
+		244834371A5D76F800E6F173 /* email@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 244834351A5D76F800E6F173 /* email@3x.png */; };
+		244834381A5D76F800E6F173 /* phone@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 244834361A5D76F800E6F173 /* phone@3x.png */; };
+		2448343C1A5D776200E6F173 /* email_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 244834391A5D776200E6F173 /* email_selected@3x.png */; };
+		2448343D1A5D776200E6F173 /* phone_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2448343A1A5D776200E6F173 /* phone_selected@3x.png */; };
+		2448343E1A5D776200E6F173 /* sms_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2448343B1A5D776200E6F173 /* sms_selected@3x.png */; };
+		244834401A5D915D00E6F173 /* sms@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2448343F1A5D915D00E6F173 /* sms@3x.png */; };
 		247C72D31A5C0968005C9693 /* user_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 247C72D01A5C0968005C9693 /* user_img.png */; };
 		247C72D41A5C0968005C9693 /* user_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 247C72D11A5C0968005C9693 /* user_img@2x.png */; };
 		247C72D51A5C0968005C9693 /* user_img@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 247C72D21A5C0968005C9693 /* user_img@3x.png */; };
@@ -228,6 +234,12 @@
 		243C59FB1A4DA17C0020350C /* EmailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailCell.h; sourceTree = "<group>"; };
 		243C59FC1A4DA17C0020350C /* EmailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailCell.m; sourceTree = "<group>"; };
 		243C59FD1A4DA17C0020350C /* EmailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmailCell.xib; sourceTree = "<group>"; };
+		244834351A5D76F800E6F173 /* email@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "email@3x.png"; sourceTree = "<group>"; };
+		244834361A5D76F800E6F173 /* phone@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone@3x.png"; sourceTree = "<group>"; };
+		244834391A5D776200E6F173 /* email_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "email_selected@3x.png"; sourceTree = "<group>"; };
+		2448343A1A5D776200E6F173 /* phone_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone_selected@3x.png"; sourceTree = "<group>"; };
+		2448343B1A5D776200E6F173 /* sms_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sms_selected@3x.png"; sourceTree = "<group>"; };
+		2448343F1A5D915D00E6F173 /* sms@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sms@3x.png"; sourceTree = "<group>"; };
 		247C72D01A5C0968005C9693 /* user_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_img.png; sourceTree = "<group>"; };
 		247C72D11A5C0968005C9693 /* user_img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_img@2x.png"; sourceTree = "<group>"; };
 		247C72D21A5C0968005C9693 /* user_img@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_img@3x.png"; sourceTree = "<group>"; };
@@ -745,6 +757,12 @@
 		36B0369A19DAD2AB00E8CD21 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				2448343F1A5D915D00E6F173 /* sms@3x.png */,
+				244834391A5D776200E6F173 /* email_selected@3x.png */,
+				2448343A1A5D776200E6F173 /* phone_selected@3x.png */,
+				2448343B1A5D776200E6F173 /* sms_selected@3x.png */,
+				244834351A5D76F800E6F173 /* email@3x.png */,
+				244834361A5D76F800E6F173 /* phone@3x.png */,
 				247C72D01A5C0968005C9693 /* user_img.png */,
 				247C72D11A5C0968005C9693 /* user_img@2x.png */,
 				247C72D21A5C0968005C9693 /* user_img@3x.png */,
@@ -976,6 +994,7 @@
 				36B2767D1A0124E800ED58AD /* searchicon@2x.png in Resources */,
 				36B276711A0124E800ED58AD /* pause.png in Resources */,
 				243C59FA1A4D984B0020350C /* PhoneNumberCell.xib in Resources */,
+				244834371A5D76F800E6F173 /* email@3x.png in Resources */,
 				366EAF9C1A14C3530011D6C6 /* icon.png in Resources */,
 				249952191A56C905001AEB84 /* Entypo-Social.otf in Resources */,
 				36474F2619D9780100084F34 /* Pigiarniq Regular.ttf in Resources */,
@@ -1010,6 +1029,7 @@
 				36C734481A0CF2490066C544 /* Podfile in Resources */,
 				366EAF911A14C3530011D6C6 /* icon-40@2x.png in Resources */,
 				36BB7B8A19FFD98C00562069 /* ThankyouController.xib in Resources */,
+				2448343C1A5D776200E6F173 /* email_selected@3x.png in Resources */,
 				363DEAFF1A2C73E90035FF1F /* logo-Other.jpg in Resources */,
 				366EAFA51A14C3530011D6C6 /* logo@2x.png in Resources */,
 				366EAF9D1A14C3530011D6C6 /* icon@1024.png in Resources */,
@@ -1047,6 +1067,7 @@
 				200ACE2F1A3874B200DC7047 /* icloudIcon@3x.png in Resources */,
 				2486CBA31A5A79AC00AC125E /* sms_selected.png in Resources */,
 				366EAFB71A14EDA30011D6C6 /* copy_selected.png in Resources */,
+				244834381A5D76F800E6F173 /* phone@3x.png in Resources */,
 				366EAF9F1A14C3530011D6C6 /* Default-568h@2x.png in Resources */,
 				366EAF971A14C3530011D6C6 /* icon-72@2x.png in Resources */,
 				36B2765D1A0124E800ED58AD /* CHECKBOX_EMPTY@2x.png in Resources */,
@@ -1068,9 +1089,11 @@
 				366EAF951A14C3530011D6C6 /* icon-60@2x.png in Resources */,
 				24354D711A499F4F000EC781 /* ContactListCell.xib in Resources */,
 				2499521D1A56F260001AEB84 /* email.png in Resources */,
+				244834401A5D915D00E6F173 /* sms@3x.png in Resources */,
 				366EAFA01A14C3530011D6C6 /* Default-667h@2x.png in Resources */,
 				248E06BB1A4AD8BA0099846A /* ContactListCell-iPhone6.xib in Resources */,
 				24BAB18A1A2F340200855B77 /* logo-other.png in Resources */,
+				2448343E1A5D776200E6F173 /* sms_selected@3x.png in Resources */,
 				200ACE2C1A3874B200DC7047 /* GoogleIcon@3x.png in Resources */,
 				366EAFB61A14EDA30011D6C6 /* copy_selected@2x.png in Resources */,
 				2486CBB11A5A7B1000AC125E /* phone_selected@2x.png in Resources */,
@@ -1087,6 +1110,7 @@
 				366EAF9B1A14C3530011D6C6 /* icon-small@2x.png in Resources */,
 				36B276721A0124E800ED58AD /* pause@2x.png in Resources */,
 				366EAF941A14C3530011D6C6 /* icon-60.png in Resources */,
+				2448343D1A5D776200E6F173 /* phone_selected@3x.png in Resources */,
 				200ACE271A3874B200DC7047 /* exchangeIcon.png in Resources */,
 				2486CBB01A5A7B1000AC125E /* phone_selected.png in Resources */,
 			);
@@ -1283,7 +1307,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1295,7 +1319,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				PROVISIONING_PROFILE = "96ac2a17-0059-4b29-8e9f-81904f1bc5e2";
+				PROVISIONING_PROFILE = "b3760800-5560-4387-84c6-17beafaa1dc7";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1325,15 +1349,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
-				CODE_SIGN_IDENTITY = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Untechable/Untechable-Prefix.pch";
 				INFOPLIST_FILE = "Untechable/Untechable-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4a049120-934b-4bbe-9dd9-3bb676f62a8c";
+				PROVISIONING_PROFILE = "b3760800-5560-4387-84c6-17beafaa1dc7";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
