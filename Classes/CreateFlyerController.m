@@ -6501,16 +6501,10 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 
 -(void)zoomUpdateScreenshot{
     if( self.flyimgView.zoomedIn ){
-        CGFloat width = flyerlyWidth/2;
-        CGFloat height = flyerlyHeight/2;
         
-        if ( IS_IPHONE_6 ){
-            width +=40;
-            height += 60;
-        }
-        
-        
-        CGSize size = CGSizeMake(width,height);
+        CGSize size = [self getFlyerSizeOnScreen];
+        CGFloat width = size.width;
+        CGFloat height = size.height;
         
         if ( [flyer isVideoFlyer] ){
             [self hidePlayerControlls:YES];
@@ -6701,5 +6695,33 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     }
     
     return canPerformAct;
+}
+
+/**
+ * Get Visible size of flyer
+ */
+-(CGSize)getFlyerSizeOnScreen
+{
+    CGFloat width = flyerlyWidth/2;
+    CGFloat height = flyerlyHeight/2;
+    
+    if ( IS_IPHONE_4 ){
+        width = 310;
+        height = 256;
+    }
+    else if ( IS_IPHONE_5 ){
+        width = 310;
+        height = 310;
+    }
+    else if ( IS_IPHONE_6 ){
+        width = 363;
+        height = 371;
+    } else if ( IS_IPHONE_6_PLUS ){
+        width = 401;
+        height = 414;
+    }
+    
+    CGSize size = CGSizeMake(width,height);
+    return size;
 }
 @end
