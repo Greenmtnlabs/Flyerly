@@ -339,7 +339,7 @@
 
 
 #pragma mark  PURCHASE PRODUCT
-
+/* Open in app panel with request product details */
 -(void)requestProduct {
     
     if ([FlyerlySingleton connected]) {
