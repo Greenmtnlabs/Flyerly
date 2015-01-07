@@ -6707,7 +6707,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     if ( IS_IPHONE_4 ){
         width = 310;
-        height = 256;
+        height = 310;
     }
     else if ( IS_IPHONE_5 ){
         width = 310;

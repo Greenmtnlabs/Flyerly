@@ -42,6 +42,24 @@
     
     self.nibNameForThumbnails = @"CustomThumbnailView";
     CGSize thumbSize = CGSizeMake(100.0,120.0);
+    
+    // Configure the grid view
+    if( IS_IPHONE_4){
+        
+    } else if ( IS_IPHONE_5) {
+        
+    }else if ( IS_IPHONE_6){
+        thumbSize = CGSizeMake(119.0,120.0);
+    }else if ( IS_IPHONE_6_PLUS){
+        thumbSize = CGSizeMake(132,120.0);
+    }
+    
+    
+    
+    
+    
+    
+    
     self.thumbnailSize = thumbSize;
     
     // Configure the selection behaviour

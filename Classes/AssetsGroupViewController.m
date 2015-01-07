@@ -48,10 +48,12 @@
     }else if ( IS_IPHONE_6){
         self.gridView.nibNameForViews = @"CustomAssetThumbnailView-iPhone6";
     }else if ( IS_IPHONE_6_PLUS){
-        self.gridView.nibNameForViews = @"CustomAssetThumbnailView-iPhone6-Plus";
+        self.gridView.nibNameForViews = @"CustomAssetThumbnailView-iPhone6-Plus"; //Files are in NBU/Gallery/
     } else{
         self.gridView.nibNameForViews = @"CustomAssetThumbnailView";
     }
+    
+    NSLog(@"self.gridView(w:%f,h%f):", self.gridView.size.width, self.gridView.size.height );
     
     
     // Configure the selection behaviour
