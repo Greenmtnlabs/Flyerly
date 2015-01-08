@@ -210,7 +210,9 @@
 }
 
 
-/* HERE WE PURCHASE PRODUCT FROM APP STORE
+/* 
+ HERE WE PURCHASE PRODUCT FROM APP STORE
+ When user tap on product for purchase
  */
 -(void)purchaseProductID:(NSString *)pid{
     

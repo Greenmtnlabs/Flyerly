@@ -198,8 +198,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 // We've received an Banner ad successfully.
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
     
-    /*UserPurchases *userPurchases_ = [UserPurchases getInstance];
-    if ( bannerAddClosed == NO && ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){*/
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
+    if ( bannerAddClosed == NO && ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
 
     
     
@@ -260,7 +260,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }
     
         return;
-    //}
+    }
     
     //[self dissmisBannerAdd:bannerAddClosed];
 }
@@ -273,6 +273,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 }
 // Dismiss action for banner ad
 -(void)dissmisBannerAdd:(BOOL)valForBannerClose{
+    
+    self.bannerAddView.backgroundColor = [UIColor clearColor];
     
     UIView *viewToRemove = [bannerAddView viewWithTag:999];
     [viewToRemove removeFromSuperview];
