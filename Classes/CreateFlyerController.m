@@ -527,32 +527,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             //HERE WE GET USER PURCHASES INFO FROM PARSE
             if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
                 
-                userPurchases = [UserPurchases getInstance];
-                userPurchases.delegate = self;
+                [self loadXibsAfterInAppCheck:NO againAddInSubViews:NO];
                 
-                //Checking if user valid purchases
-                if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-                    [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"]    ) {
-                    
-                    //Unloking features
-                    UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
-                    [addVideoTabButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
-                }
-                
-                //Checking if user valid purchases
-                if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-                    [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
-                    
-                    fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts-paid" ofType:@"plist"];
-                    clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts-paid" ofType:@"plist"];
-                    emoticonsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Emoticons-paid" ofType:@"plist"];
-                    
-                } else {
-                    
-                    fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts" ofType:@"plist"];
-                    clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts" ofType:@"plist"];
-                    emoticonsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Emoticons" ofType:@"plist"];
-                }
             }
             
             if( IS_IPHONE_4 || IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
@@ -1080,13 +1056,16 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             userPurchases.delegate = self;
             
     
-            //fontsView.backgroundColor = [UIColor yellowColor];
-            //layerScrollView.backgroundColor= [UIColor purpleColor];
+            fontsView.backgroundColor = [UIColor yellowColor];
+            layerScrollView.backgroundColor= [UIColor purpleColor];
             
-            //Checking if user valid purchases
-            if ( ![userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-                 ![userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
-                
+            BOOL comflyerlyAllDesignBundle =  [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"];
+            BOOL comflyerlyIconsBundle =  [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"];
+            
+            
+              //Checking if user valid purchases
+            if (  !(comflyerlyAllDesignBundle || comflyerlyIconsBundle)  ) {
+            
                 //More button---{--
                 UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
                 
@@ -1121,33 +1100,36 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [fontsView addSubview:font];
                 //More button---}--
                 
+                
                 if ( IS_IPHONE_5 ) {
                     
-                    fontsView.size = CGSizeMake(320, curYLoc + heightValue + 5);
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
-                } else if ( IS_IPHONE_6 ) {
+                    fontsView.size = CGSizeMake(320, curYLoc + heightValue + 50);
+                    [layerScrollView setContentSize:CGSizeMake(fontsView.frame.size.width, fontsView.frame.size.height)];
+                }
+                else if ( IS_IPHONE_6 ) {
                     
                     fontsView.size = CGSizeMake(380, curYLoc + heightValue + 50);
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue + 50)];
+                    [layerScrollView setContentSize:CGSizeMake(fontsView.frame.size.width, fontsView.frame.size.height)];
                 
                 } else if ( IS_IPHONE_6_PLUS ) {
                     fontsView.size = CGSizeMake(584, (curYLoc + heightValue + 50) );
-                    [layerScrollView setContentSize:CGSizeMake(584, (curYLoc + heightValue + 50))];
+                    [layerScrollView setContentSize:CGSizeMake(fontsView.frame.size.width, fontsView.frame.size.height)];
                 }
                 else {
-                    fontsView.size = CGSizeMake(curXLoc + 155 , heightValue + 5);
-                    [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , heightValue)];
+                    fontsView.size = CGSizeMake(curXLoc + 155 , heightValue);
+                    [layerScrollView setContentSize:CGSizeMake(fontsView.frame.size.width, fontsView.frame.size.height)];
                 }
             }
             else {
+                
                 if ( IS_IPHONE_5 ) {
                     
-                    fontsView.size = CGSizeMake(320, curYLoc + heightValue + 5);
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+                    fontsView.size = CGSizeMake(320, curYLoc + heightValue + 50);
+                    [layerScrollView setContentSize:CGSizeMake(fontsView.frame.size.width, fontsView.frame.size.height)];
                     
                 } else if ( IS_IPHONE_6 ){
                     
-                    fontsView.size = CGSizeMake(380, curYLoc + heightValue + 5);
+                    fontsView.size = CGSizeMake(380, curYLoc + heightValue + 30);
                     [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
                     
                 } else if ( IS_IPHONE_6_PLUS ){
@@ -1157,11 +1139,14 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     
                 } else {
                     
-                    fontsView.size = CGSizeMake(curXLoc , heightValue + 5);
+                    fontsView.size = CGSizeMake(curXLoc , heightValue);
                     [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , heightValue)];
                     
                 }
             }
+            
+            
+            
             
             //Handling Select Unselect
             [self setSelectedItem:[flyer getLayerType:currentLayer] inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
@@ -3334,11 +3319,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     NSMutableDictionary *textDetailDictionary = [flyer getLayerFromMaster:currentLayer];
     
-//    NSMutableDictionary *tempTextDetailDictionary = [[NSMutableDictionary alloc] init];
-//    tempTextDetailDictionary[@"x"]  =   textDetailDictionary[@"x"];
-//    tempTextDetailDictionary[@"y"]  =   textDetailDictionary[@"y"];
-//    NSLog(@"textDetailDictionary1 before update:%@ ",textDetailDictionary);
-    
     if( isNewText == YES ) {
         float newX = 0.0, newY = 0.0;
         CGSize txtSize = [lastTextView.text sizeWithAttributes: @{NSFontAttributeName:lastTextView.font}];
@@ -3348,17 +3328,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             newY = lastTextView.frame.origin.y+3;
             textDetailDictionary[@"x"]  =    [NSString stringWithFormat:@"%f",newX];
             textDetailDictionary[@"y"]  =    [NSString stringWithFormat:@"%f",newY];
-
-//            UIView *tempView = [[UIView alloc] initWithFrame:CGRectMake(newX, newY, [textDetailDictionary[@"width"] floatValue], [textDetailDictionary[@"height"] floatValue])];
-//            tempView.transform = CGAffineTransformMakeScale( newX, newY );
-//            
-//            textDetailDictionary[@"a"] = [NSString stringWithFormat:@"%f",tempView.transform.a];
-//            textDetailDictionary[@"b"] = [NSString stringWithFormat:@"%f",tempView.transform.b];
-//            textDetailDictionary[@"c"] = [NSString stringWithFormat:@"%f",tempView.transform.c];
-//            textDetailDictionary[@"d"] = [NSString stringWithFormat:@"%f",tempView.transform.d];
-//            textDetailDictionary[@"tx"] = [NSString stringWithFormat:@"%f",tempView.transform.tx];
-//            textDetailDictionary[@"ty"] = [NSString stringWithFormat:@"%f",tempView.transform.ty];
-
         }
 //        NSLog(@"txtSize:(w:%f,h:%f), lastTxtViewSize.frame.origin(x:%f,y:%f,w:%f,h:%f)",txtSize.width,txtSize.height, lastTextView.frame.origin.x,lastTextView.frame.origin.y,lastTextView.size.width,lastTextView.size.height);
         
@@ -3366,11 +3335,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 
     //Update Dictionaries------------------{--
-        //Will only update the layer dictionary
-        //[flyer setLayerType:currentLayer type:FLYER_LAYER_TEXT];
-        //Will update layer type in masterLayers
-        //[flyer setFlyerText:currentLayer text:lastTextView.text ];
-    
         textDetailDictionary[@"type"] = FLYER_LAYER_TEXT;
         [textDetailDictionary setValue:lastTextView.text forKey:@"text"];
     
@@ -3388,53 +3352,16 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     //Here we Highlight The TextView [ show borders arround it ]
     [self.flyimgView layerIsBeingEdited:currentLayer];
     
-    /*
-    
-    userPurchases = [UserPurchases getInstance];
-    userPurchases.delegate = self;
-    
-    //Checking if user valid purchases
-    if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-         [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
-        
-        fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts-paid" ofType:@"plist"];
-        clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts-paid" ofType:@"plist"];
-        emoticonsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Emoticons-paid" ofType:@"plist"];
-        [self addEmoticonsInSubView];
-        [self addClipArtsInSubView];
-        [self addFontsInSubView];
-        
-    } else {
-        
-        fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts" ofType:@"plist"];
-        clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts" ofType:@"plist"];
-        emoticonsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Emoticons" ofType:@"plist"];
-        [self addEmoticonsInSubView];
-        [self addClipArtsInSubView];
-        [self addFontsInSubView];
-        
-    }
-     */
+
+//    [self loadXibsAfterInAppCheck:NO againAddInSubViews:YES];
+
     
     
     // SET BOTTOM BAR
     [self setStyleTabAction:fontTabButton];
     
     if( isNewText == YES ) {
-            isNewText = NO;
-        
-//            UILabel *curLabelView = [self.flyimgView.layers objectForKey:currentLayer];
-//            CGAffineTransform newTransForm = curLabelView.transform;
-//            [self layerTransformedforKey:currentLayer :&newTransForm];
-//        
-//            textDetailDictionary[@"x"]      = tempTextDetailDictionary[@"x"];
-//            textDetailDictionary[@"y"]      = tempTextDetailDictionary[@"y"];
-//            //textDetailDictionary[@"width"]  =  tempTextDetailDictionary[@"width"];
-//            //textDetailDictionary[@"height"] = tempTextDetailDictionary[@"height"];
-//            [flyer.masterLayers setValue:textDetailDictionary forKey:currentLayer];
-//
-//            NSLog(@"textDetailDictionary3 after update:%@ ",textDetailDictionary);
-        
+         isNewText = NO;
     }
 
     
@@ -5784,40 +5711,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 }
 
 - ( void )productSuccesfullyPurchased: (NSString *)productId {
-    
-    userPurchases = [UserPurchases getInstance];
-    userPurchases.delegate = self;
-    
-    if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-        [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
-        
-        UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
-        [addVideoTabButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
-        [inappviewcontroller.paidFeaturesTview reloadData];
-        [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    }
-    
-    //Checking if user valid purchases
-    if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-        [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
-        
-        fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts-paid" ofType:@"plist"];
-        clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts-paid" ofType:@"plist"];
-        emoticonsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Emoticons-paid" ofType:@"plist"];
-        [self addEmoticonsInSubView];
-        [self addClipArtsInSubView];
-        [self addFontsInSubView];
-        
-        [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-        
-    } else {
-        
-        fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts" ofType:@"plist"];
-        clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts" ofType:@"plist"];
-        emoticonsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Emoticons" ofType:@"plist"];
-        
-    }
-    
+    [self loadXibsAfterInAppCheck:YES againAddInSubViews:YES];
 }
 
 - ( void )inAppPurchasePanelContent {
@@ -6738,5 +6632,59 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     CGSize size = CGSizeMake(width,height);
     return size;
+}
+
+
+
+/*
+ LOAD XIB'S AFTER CHECKING USER HAS PAID USING IN-APP 
+ CODITIONAL XIBS ARE
+ 1- FONT TYPES
+ 2- CLIP ART
+ 3- EMOTICONS
+ 4- VIDEO
+ */
+-(void)loadXibsAfterInAppCheck:(BOOL)checkAndCloseInAppPanel againAddInSubViews:(BOOL)againAddInSubViews{
+    userPurchases = [UserPurchases getInstance];
+    userPurchases.delegate = self;
+    
+    if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
+        [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+        
+        UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
+        [addVideoTabButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
+        
+        if( checkAndCloseInAppPanel ){
+            [inappviewcontroller.paidFeaturesTview reloadData];
+            [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        }
+    }
+    
+    //Checking if user valid purchases
+    if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
+        [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
+        
+        fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts-paid" ofType:@"plist"];
+        clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts-paid" ofType:@"plist"];
+        emoticonsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Emoticons-paid" ofType:@"plist"];
+        
+        if( checkAndCloseInAppPanel ) {
+            [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        }
+        
+    } else {
+        
+        fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts" ofType:@"plist"];
+        clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts" ofType:@"plist"];
+        emoticonsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Emoticons" ofType:@"plist"];
+        
+    }
+    
+    if( againAddInSubViews ) {
+        [self addEmoticonsInSubView];
+        [self addClipArtsInSubView];
+        [self addFontsInSubView];
+    }
+
 }
 @end
