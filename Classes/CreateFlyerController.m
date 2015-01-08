@@ -562,8 +562,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [self.bannerAdd loadRequest:[self request]];
                 
                 NSArray *flyerbackgroundsViewArray;
-                if ( IS_IPHONE_5 || IS_IPHONE_4) {
-                     flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds" owner:self options:nil];
+                if ( IS_IPHONE_4) {
+                     flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds-iPhone4" owner:self options:nil];
+                }else if ( IS_IPHONE_5 ) {
+                    flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds" owner:self options:nil];
                 }else if ( IS_IPHONE_6){
                     flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds-iPhone6" owner:self options:nil];
                 }else if ( IS_IPHONE_6_PLUS){
@@ -574,7 +576,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 backgroundsView = [flyerbackgroundsViewArray objectAtIndex:0];
                 
                 NSArray *flyerBordersViewArray;
-                if ( IS_IPHONE_5 || IS_IPHONE_4) {
+                if (  IS_IPHONE_4) {
+                    flyerBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders-iPhone4" owner:self options:nil];
+                }else if ( IS_IPHONE_5 ) {
                     flyerBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders" owner:self options:nil];
                 }else if ( IS_IPHONE_6){
                     flyerBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders-iPhone6" owner:self options:nil];
@@ -589,7 +593,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [self addFontsInSubView];
                 
                 NSArray *fontColorsViewArray;
-                if ( IS_IPHONE_5 || IS_IPHONE_4) {
+                if (  IS_IPHONE_4) {
+                    fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours-iPhone4s" owner:self options:nil];
+                }else if ( IS_IPHONE_5 ) {
                      fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours" owner:self options:nil];
                 }else if ( IS_IPHONE_6){
                     fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours-iPhone6" owner:self options:nil];
@@ -602,7 +608,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
                 
                 NSArray *drawingPatternsViewArray;
-                if ( IS_IPHONE_5 || IS_IPHONE_4) {
+                if (  IS_IPHONE_4) {
+                    drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns-iPhone4" owner:self options:nil];
+                }else if ( IS_IPHONE_5 ) {
                    drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns" owner:self options:nil];
                 }else if ( IS_IPHONE_6){
                     drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns-iPhone6" owner:self options:nil];
@@ -614,7 +622,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 drawingPatternsView = [drawingPatternsViewArray objectAtIndex:0];
                 
                 NSArray *drawingEraserMsgViewArray;
-                if ( IS_IPHONE_5 || IS_IPHONE_4) {
+                if ( IS_IPHONE_4) {
+                    drawingEraserMsgViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingEraserMsg-iPhone4" owner:self options:nil];
+                } else if ( IS_IPHONE_5 ) {
                     drawingEraserMsgViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingEraserMsg" owner:self options:nil];
                 }else if ( IS_IPHONE_6){
                     drawingEraserMsgViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingEraserMsg-iPhone6" owner:self options:nil];
@@ -628,20 +638,24 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [self setLabelsAfterXibsLoad];
                 
                 NSArray *fontSizesViewArray;
-                if ( IS_IPHONE_5 || IS_IPHONE_4) {
+                if ( IS_IPHONE_4) {
+                    fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes-iPhone4" owner:self options:nil];
+                } else if ( IS_IPHONE_5 ) {
                      fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes" owner:self options:nil];
                 }else if ( IS_IPHONE_6){
                     fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes-iPhone6" owner:self options:nil];
                 }else if ( IS_IPHONE_6_PLUS){
                     fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes-iPhone6-Plus" owner:self options:nil];
                 } else {
-                    fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes" owner:self options:nil];
+                    fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes-iPhone4" owner:self options:nil];
                 }
                 
                 sizesView = [fontSizesViewArray objectAtIndex:0];
                 
                 NSArray *textBordersViewArray;
-                if ( IS_IPHONE_5 || IS_IPHONE_4) {
+                if ( IS_IPHONE_4) {
+                    textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders-iPhone4" owner:self options:nil];
+                }else if ( IS_IPHONE_5 ) {
                      textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders" owner:self options:nil];
                 }else if ( IS_IPHONE_6){
                     textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders-iPhone6" owner:self options:nil];
