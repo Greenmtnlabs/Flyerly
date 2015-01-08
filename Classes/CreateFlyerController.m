@@ -1534,7 +1534,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 //More button
                 UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
                 if ( IS_IPHONE_5 ) {
-                    font.frame = CGRectMake(curXLoc, curYLoc + 30, 300, heightValue);
+                    font.frame = CGRectMake(curXLoc, curYLoc , 300, heightValue);
                 } else if ( IS_IPHONE_6 ){
                     font.frame = CGRectMake(18, curYLoc + 40, 335, heightValue);
                 }else if ( IS_IPHONE_6_PLUS ){
@@ -1557,7 +1557,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [clipartsView addSubview:font];
                 
                 if ( IS_IPHONE_5 ) {
-                    clipartsView.size = CGSizeMake(320, curYLoc + heightValue + 5);
+                    clipartsView.size = CGSizeMake(320, curYLoc + heightValue + 55);
                     [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
                 } else if ( IS_IPHONE_6 ) {
                     clipartsView.size = CGSizeMake(380, curYLoc + heightValue + 55);
@@ -1703,13 +1703,16 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
                 [emoticonsView addSubview:font];
                 
-                if ( IS_IPHONE_5 || IS_IPHONE_6_PLUS ) {
-                    emoticonsView.size = CGSizeMake(320, curYLoc + heightValue + 75);
+                if ( IS_IPHONE_5  ) {
+                    emoticonsView.size = CGSizeMake(320, curYLoc + heightValue + 125);
                     [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
                 } else if ( IS_IPHONE_6 ){
                     emoticonsView.size = CGSizeMake(380, curYLoc + heightValue + 75);
                     [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
-                }else {
+                } else if ( IS_IPHONE_6_PLUS ) {
+                    emoticonsView.size = CGSizeMake(320, curYLoc + heightValue + 75);
+                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+                } else {
                     emoticonsView.size = CGSizeMake(curXLoc + 155 , heightValue + 5);
                     [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , heightValue)];
                     
