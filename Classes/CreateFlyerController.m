@@ -204,7 +204,14 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     
         // Device Check Maintain Size of ScrollView Because Scroll Indicator will show.
-        if ( IS_IPHONE_5 ) {
+        if ( IS_IPHONE_4 ) {
+            self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 384.3, 310, 50)];
+            
+            if ( bannerAdDismissBtn == nil ){
+                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(296, 5, 23, 23)];
+            }
+        }
+        else if ( IS_IPHONE_5 ) {
             self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 473, 320, 50)];
             
             if ( bannerAdDismissBtn == nil ){
@@ -212,23 +219,27 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             }
         } else if ( IS_IPHONE_6 ){
             
-            self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 566, 620, 50)];
+            self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 564, 620, 50)];
             
             if ( bannerAdDismissBtn == nil ){
             bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(350, 0, 23, 23)];
             }
         }else if ( IS_IPHONE_6_PLUS ){
             
-            self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 626, 620, 50)];
+            self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 628, 620, 50)];
             
             if ( bannerAdDismissBtn == nil ){
             bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(395, 0, 23, 23)];
             }
         }else {
+            self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 310, 320, 50)];
+            
             if ( bannerAdDismissBtn == nil ){
                 bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(296, 5, 23, 23)];
             }
         }
+    
+        self.bannerAddView.backgroundColor = [UIColor whiteColor];
     
         [bannerAdDismissBtn addTarget:self action:@selector(dissmisBannerAddOnTap) forControlEvents:UIControlEventTouchUpInside];
         
@@ -542,14 +553,16 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 }
             }
             
-            if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
+            if( IS_IPHONE_4 || IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
                 
                 // Initialize the banner at the bottom of the screen.
                 CGPoint origin;
                 origin = CGPointMake(0.0,0.0);
                 
                 GADAdSize customAdSize;
-                if ( IS_IPHONE_5 ) {
+                if ( IS_IPHONE_4 ) {
+                    customAdSize = GADAdSizeFromCGSize(CGSizeMake(320, 50));
+                } else if ( IS_IPHONE_5 ) {
                     customAdSize = GADAdSizeFromCGSize(CGSizeMake(320, 50));
                 }else if ( IS_IPHONE_6 ){
                     customAdSize = GADAdSizeFromCGSize(CGSizeMake(420, 50));
