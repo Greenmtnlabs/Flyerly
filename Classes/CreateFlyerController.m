@@ -1687,7 +1687,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 } else if ( IS_IPHONE_6 ){
                     font.frame = CGRectMake(10, curYLoc + 10, 335, heightValue);
                 }else if ( IS_IPHONE_6_PLUS ){
-                    font.frame = CGRectMake(10, curYLoc + 10, 380, heightValue);
+                    font.frame = CGRectMake(10, curYLoc + symbolScrollHeight+7, 380, heightValue);
                 }else {
                     font.frame = CGRectMake(curXLoc, curYLoc+10, 100, heightValue);
                 }
@@ -1710,8 +1710,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     emoticonsView.size = CGSizeMake(380, curYLoc + heightValue + 75);
                     [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
                 } else if ( IS_IPHONE_6_PLUS ) {
-                    emoticonsView.size = CGSizeMake(320, curYLoc + heightValue + 75);
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+                    emoticonsView.size = CGSizeMake(320, curYLoc + symbolScrollHeight + 55);
+                    [layerScrollView setContentSize:CGSizeMake(emoticonsView.size.width, emoticonsView.size.height)];
                 } else {
                     emoticonsView.size = CGSizeMake(curXLoc + 155 , heightValue + 5);
                     [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , heightValue)];
