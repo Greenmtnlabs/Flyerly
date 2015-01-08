@@ -1056,8 +1056,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             userPurchases.delegate = self;
             
     
-            fontsView.backgroundColor = [UIColor yellowColor];
-            layerScrollView.backgroundColor= [UIColor purpleColor];
+            //fontsView.backgroundColor = [UIColor yellowColor];
+            //layerScrollView.backgroundColor= [UIColor purpleColor];
             
             BOOL comflyerlyAllDesignBundle =  [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"];
             BOOL comflyerlyIconsBundle =  [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"];
@@ -1075,7 +1075,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     font.frame = CGRectMake(0, 0, 335, heightValue);
                 } else if( IS_IPHONE_6_PLUS ){
                    font.frame = CGRectMake(0, 0, 380, heightValue);
+                }else {
+                    font.frame = CGRectMake(0, 0, 150, heightValue);
                 }
+
                 //font.backgroundColor = [UIColor blueColor];
                 
                 [font addTarget:self action:@selector(openPanel:) forControlEvents:UIControlEventTouchUpInside];
@@ -1114,10 +1117,15 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 } else if ( IS_IPHONE_6_PLUS ) {
                     fontsView.size = CGSizeMake(584, (curYLoc + heightValue + 50) );
                     [layerScrollView setContentSize:CGSizeMake(fontsView.frame.size.width, fontsView.frame.size.height)];
+                    
+                     fontsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), layerScrollView.frame.origin.y, fontsView.frame.size.width, fontsView.frame.size.height);
                 }
                 else {
-                    fontsView.size = CGSizeMake(curXLoc + 155 , heightValue);
+                    fontsView.size = CGSizeMake(curXLoc + 200 , heightValue);
                     [layerScrollView setContentSize:CGSizeMake(fontsView.frame.size.width, fontsView.frame.size.height)];
+                    
+                    fontsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), fontsView.frame.origin.y, fontsView.frame.size.width, fontsView.frame.size.height);
+
                 }
             }
             else {
@@ -1133,14 +1141,16 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
                     
                 } else if ( IS_IPHONE_6_PLUS ){
-                    
                     fontsView.size = CGSizeMake(584, curYLoc + heightValue + 5);
                     [layerScrollView setContentSize:CGSizeMake(584, curYLoc + heightValue)];
                     
-                } else {
+                    fontsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), layerScrollView.frame.origin.y, fontsView.frame.size.width, fontsView.frame.size.height);
                     
-                    fontsView.size = CGSizeMake(curXLoc , heightValue);
+                } else {
+                    fontsView.size = CGSizeMake((curXLoc+10) , heightValue);
                     [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , heightValue)];
+                    
+                    fontsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), fontsView.frame.origin.y, fontsView.frame.size.width, fontsView.frame.size.height);
                     
                 }
             }
@@ -5059,10 +5069,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                              //Create ScrollView
                              if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
                                  
-                                 if( IS_IPHONE_6_PLUS ){
-                                     fontsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), layerScrollView.frame.origin.y, fontsView.frame.size.width, fontsView.frame.size.height);
-                                 }
-                                 
                                  //Delete SubViews from ScrollView
                                  [self deleteSubviewsFromScrollView];
                                  [layerScrollView addSubview:fontsView];
@@ -6661,8 +6667,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     }
     
     //Checking if user valid purchases
-    if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-        [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
+    if ( ([userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
+        [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"])    ) {
         
         fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts-paid" ofType:@"plist"];
         clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts-paid" ofType:@"plist"];
