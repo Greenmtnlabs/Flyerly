@@ -2599,7 +2599,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     nbuGallary.videoAllow = videoAllow;
     
     if ( imgPickerFlag == IMAGEPICKER_PHOTO ) {
-        NSDictionary *dict = [flyer getLayerFromMaster:currentLayer];
+        //NSDictionary *dict = [flyer getLayerFromMaster:currentLayer];
         
         UIImageView *currentImage = [self.flyimgView.layers objectForKey:currentLayer];
         
@@ -2619,24 +2619,34 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             if ( imgRect.size.height > 320.0 ){
                 imgRect.size.height = 320.0;
             }
+        } else if ( IS_IPHONE_6_PLUS ){
+            if( imgRect.size.width > 320.0 ){
+                imgRect.size.width = 320.0;
+            }
+            if ( imgRect.size.height > 320.0 ){
+                imgRect.size.height = 320.0;
+            }
         }
         
         CGSize imageSize = CGSizeMake( imgRect.size.width,
                                         imgRect.size.height );
         
         nbuGallary.desiredImageSize = imageSize;
-        /*if(imageSize.width == 0 && imageSize.height == 0){
-        
-            nbuGallary.desiredImageSize = imageSize;
-            
-        }else {
-        
-            nbuGallary.desiredImageSize = imageSize;
-        }*/
         
     } else {
-        nbuGallary.desiredImageSize = self.flyimgView.size;
         nbuGallary.desiredVideoSize = CGSizeMake( flyerlyWidth, flyerlyHeight );
+        
+        if ( IS_IPHONE_6_PLUS ){
+            CGSize imageSize = nbuGallary.desiredVideoSize;
+            if( imageSize.width > 320.0 ){
+                imageSize.width = 320.0;
+            }
+            if ( imageSize.height > 320.0 ){
+                imageSize.height = 320.0;
+            }
+            nbuGallary.desiredImageSize = imageSize;
+        }
+        
     }
     
     __weak CreateFlyerController *weakSelf = self;
