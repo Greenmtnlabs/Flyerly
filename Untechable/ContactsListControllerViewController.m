@@ -190,8 +190,38 @@
 }
 -(void)onNext{
 
-    if ( currentlyEditingContacts.count > 0)
-    untechable.customizedContactsForCurrentSession = currentlyEditingContacts;
+    if ( currentlyEditingContacts.count > 0){
+        
+        for ( int i=0; i<currentlyEditingContacts.count; i++){
+            ContactsCustomizedModal *tempModal = [currentlyEditingContacts objectAtIndex:i];
+            
+            NSMutableArray *phoneNumbersWithStatus  = tempModal.allPhoneNumbers;
+            for ( int j = 0; j<phoneNumbersWithStatus.count; j++){
+                NSMutableArray *numberWithStatus = [phoneNumbersWithStatus objectAtIndex:j];
+                if ( [[numberWithStatus objectAtIndex:2] isEqualToString:@"0"] &&
+                    [[numberWithStatus objectAtIndex:3] isEqualToString:@"0"]  )
+                {
+                    [phoneNumbersWithStatus removeObject:numberWithStatus];
+                }
+            }
+            
+            NSMutableArray *emailOnly  = [[NSMutableArray alloc] init];
+            NSMutableArray *emailsWithStatus  = tempModal.allEmails;
+            for ( int k = 0; k<emailsWithStatus.count; k++){
+                NSMutableArray *emailWithStatus = [emailsWithStatus objectAtIndex:k];
+                if ( [[emailWithStatus objectAtIndex:1] isEqualToString:@"0"] )
+                {
+                    [emailsWithStatus removeObject:emailWithStatus];
+                }else {
+                    [emailOnly addObject:[emailWithStatus objectAtIndex:0]];
+                }
+            }
+            
+            tempModal.allEmails = emailOnly;
+        }
+        untechable.customizedContactsForCurrentSession = currentlyEditingContacts;
+    }
+    
     
     [self storeSceenVarsInDic];
     
@@ -278,6 +308,7 @@
             if ( [previousModal.name isEqualToString:_contactModal.name] &&
                  previousModal.allPhoneNumbers.count == _contactModal.allPhoneNumbers.count )
             {
+                //_contactModal.cutomizingStatusArray = [[NSMutableArray alloc] initWithArray:previousModal.cutomizingStatusArray];
                 _contactModal.cutomizingStatusArray = previousModal.cutomizingStatusArray;
                 if ( previousModal.IsCustomized ) {
                     _contactModal.IsCustomized = YES;

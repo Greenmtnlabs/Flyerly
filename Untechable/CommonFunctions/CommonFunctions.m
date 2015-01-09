@@ -121,7 +121,7 @@
         [curContactDetails setValue:curObj.allPhoneNumbers forKey:@"phoneNumbers"];
         [curContactDetails setValue:curObj.allEmails forKey:@"emailAddresses"];
         [curContactDetails setValue:curObj.customTextForContact forKey:@"customTextForContact"];
-        [curContactDetails setValue:curObj.cutomizingStatusArray forKey:@"cutomizingStatusArray"];
+        //[curContactDetails setValue:curObj.cutomizingStatusArray forKey:@"cutomizingStatusArray"];
         [curContactDetails setObject:[NSNumber numberWithBool:curObj.IsCustomized] forKey:@"IsCustomized"];
         [customizedContactsArray setValue:curContactDetails forKey:[NSString stringWithFormat:@"%i",i]];
         

@@ -351,6 +351,7 @@
                 [contactListController.currentlyEditingContacts replaceObjectAtIndex:[contactListController.currentlyEditingContacts indexOfObject:contactModal] withObject:contactModal];
             }
         }else {
+            contactModal.IsCustomized = YES;
             [contactListController.currentlyEditingContacts addObject:contactModal];
             //[untechable.customizedContactsForCurrentSession addObject:contactModal];
         }
