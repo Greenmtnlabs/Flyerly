@@ -930,7 +930,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
             
             if( IS_IPHONE_6_PLUS ){
-                flyerBordersView.frame = CGRectMake((layerScrollView.frame.origin.x+10), flyerBordersView.frame.origin.y, flyerBordersView.frame.size.width, flyerBordersView.frame.size.height);
+                flyerBordersView.frame = CGRectMake((layerScrollView.frame.origin.x+22), (layerScrollView.frame.origin.y+7), flyerBordersView.frame.size.width, flyerBordersView.frame.size.height);
             }
             [layerScrollView addSubview:flyerBordersView];
             [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
@@ -1182,11 +1182,16 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     CGFloat curYLoc = 5;
     int increment = 5;
     
-    if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+    if( IS_IPHONE_5 ){
         curXLoc = 13;
         curYLoc = 10;
         increment = 8;
+    } else if( IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+        curXLoc = 13;
+        curYLoc = 13;
+        increment = 13;
     }
+    
     
     NSMutableDictionary *textLayer,*drawingLayer;
     NSString *textColor;
@@ -1357,10 +1362,14 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     CGFloat curYLoc = 5;
     int increment = 5;
     
-    if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+    if(IS_IPHONE_5 ){
         curXLoc = 13;
         curYLoc = 10;
         increment = 8;
+    } else if( IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+        curXLoc = 13;
+        curYLoc = 13;
+        increment = 13;
     }
     
     NSMutableDictionary *textLayer;
@@ -1376,14 +1385,15 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     // Load sizes xib asynchronously
     dispatch_async( dispatch_get_main_queue(), ^{
-        
+         //textBordersView.backgroundColor = [UIColor redColor];
         if(IS_IPHONE_5 || IS_IPHONE_6 ){
             
             [layerScrollView addSubview:textBordersView];
             [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
             
         } else if( IS_IPHONE_6_PLUS ){
-            textBordersView.frame = CGRectMake((layerScrollView.frame.origin.x+20), layerScrollView.frame.origin.y, textBordersView.frame.size.width, textBordersView.frame.size.height);
+
+            textBordersView.frame = CGRectMake((layerScrollView.frame.origin.x+20), (layerScrollView.frame.origin.y+5), textBordersView.frame.size.width, textBordersView.frame.size.height);
             
             [layerScrollView addSubview:textBordersView];
             [layerScrollView setContentSize:textBordersView.size];
