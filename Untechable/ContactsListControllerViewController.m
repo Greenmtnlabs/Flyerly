@@ -19,7 +19,7 @@
     
     NSMutableDictionary *customizedContactsDictionary;
     NSString *customizedContactsString;
-    ContactCustomizeDetailsControlelrViewController *detailsController;
+    //ContactCustomizeDetailsControlelrViewController *detailsController;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *contactsTable;
@@ -526,7 +526,6 @@
         firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
         lastName  = ABRecordCopyValue(ref, kABPersonLastNameProperty);
         
-        
         if(!firstName)
             firstName = (CFStringRef) @"";
         if(!lastName)
@@ -548,14 +547,14 @@
                 contactModal.img = contactPicture;
             }
         }
-        
+    
         //For all emails
         NSMutableArray *allEmails = [[NSMutableArray alloc] initWithCapacity:CFArrayGetCount(allPeople)];
         
         NSString *emailLabel;
         for (CFIndex j=0; j < ABMultiValueGetCount(emails); j++) {
             
-            emailLabel = (NSString*)CFBridgingRelease(ABMultiValueCopyLabelAtIndex(emails, i));
+            emailLabel = (NSString*)CFBridgingRelease(ABMultiValueCopyLabelAtIndex(emails, j));
             NSString* email = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(emails, j));
             NSMutableArray *emailWithStatus = [[NSMutableArray alloc] init];
             
@@ -656,7 +655,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    detailsController = [[ContactCustomizeDetailsControlelrViewController alloc] init];
+    ContactCustomizeDetailsControlelrViewController *detailsController = [[ContactCustomizeDetailsControlelrViewController alloc] init];
     
     detailsController.untechable = untechable;
     

@@ -25,7 +25,6 @@
 @property (nonatomic,strong)NSMutableArray *allPhoneNumbers;
 @property (nonatomic,strong)NSMutableArray *phoneNumbersStatus;
 @property (nonatomic,strong)NSString *customTextForContact;
-@property (nonatomic,strong)NSMutableDictionary *editingEmailsWithStatus;
 
 @property (nonatomic,strong)NSMutableDictionary *customizedContactsDictionary;
 @property (nonatomic,strong)  Untechable *untechable;
