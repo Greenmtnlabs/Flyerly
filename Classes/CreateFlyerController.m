@@ -2579,6 +2579,32 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [self hideLoadingIndicator];
 }
 
+-(CGSize)setSizeForCropView: (CGSize)imageSize
+{
+    if ( IS_IPHONE_5 ){
+        if( imageSize.width > 320.0 ){
+            imageSize.width = 320;
+        }
+        if ( imageSize.height > 320.0 ){
+            imageSize.height = 320;
+        }
+    }else if ( IS_IPHONE_6 ){
+        if( imageSize.width > 320.0 ){
+            imageSize.width = 320.0;
+        }
+        if ( imageSize.height > 320.0 ){
+            imageSize.height = 320.0;
+        }
+    } else if ( IS_IPHONE_6_PLUS ){
+        if( imageSize.width > 320.0 ){
+            imageSize.width = 320.0;
+        }
+        if ( imageSize.height > 320.0 ){
+            imageSize.height = 320.0;
+        }
+    }
+    return imageSize;
+}
 #pragma mark -  NBUKIT
 
 /*
@@ -2603,50 +2629,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         UIImageView *currentImage = [self.flyimgView.layers objectForKey:currentLayer];
         
-        CGRect imgRect = currentImage.frame;
-        
-        if ( IS_IPHONE_5 ){
-            if( imgRect.size.width > 320.0 ){
-                imgRect.size.width = 320;
-            }
-            if ( imgRect.size.height > 320.0 ){
-                imgRect.size.height = 320;
-            }
-        }else if ( IS_IPHONE_6 ){
-            if( imgRect.size.width > 320.0 ){
-                imgRect.size.width = 320.0;
-            }
-            if ( imgRect.size.height > 320.0 ){
-                imgRect.size.height = 320.0;
-            }
-        } else if ( IS_IPHONE_6_PLUS ){
-            if( imgRect.size.width > 320.0 ){
-                imgRect.size.width = 320.0;
-            }
-            if ( imgRect.size.height > 320.0 ){
-                imgRect.size.height = 320.0;
-            }
-        }
-        
-        CGSize imageSize = CGSizeMake( imgRect.size.width,
-                                        imgRect.size.height );
-        
-        nbuGallary.desiredImageSize = imageSize;
+        nbuGallary.desiredImageSize = [self setSizeForCropView:currentImage.frame.size];
         
     } else {
-        nbuGallary.desiredVideoSize = CGSizeMake( flyerlyWidth, flyerlyHeight );
-        
-        if ( IS_IPHONE_6_PLUS ){
-            CGSize imageSize = nbuGallary.desiredVideoSize;
-            if( imageSize.width > 320.0 ){
-                imageSize.width = 320.0;
-            }
-            if ( imageSize.height > 320.0 ){
-                imageSize.height = 320.0;
-            }
-            nbuGallary.desiredImageSize = imageSize;
-        }
-        
+        nbuGallary.desiredImageSize = [self setSizeForCropView:CGSizeMake( flyerlyWidth, flyerlyHeight )];
     }
     
     __weak CreateFlyerController *weakSelf = self;
