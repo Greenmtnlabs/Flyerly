@@ -19,7 +19,6 @@
     
     NSMutableDictionary *customizedContactsDictionary;
     NSString *customizedContactsString;
-    //ContactCustomizeDetailsControlelrViewController *detailsController;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *contactsTable;
@@ -28,7 +27,7 @@
 
 @implementation ContactsListControllerViewController
 
-@synthesize contactModalsArray,contactsArray,contactBackupArray,searchTextField,selectedIdentifiers,untechable;
+@synthesize contactModalsArray,contactsArray,contactBackupArray,searchTextField,selectedIdentifiers,untechable,currentlyEditingContacts;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -44,6 +43,8 @@
     
     [_contactsTable  setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
     [searchTextField setReturnKeyType:UIReturnKeyDone];
+
+    currentlyEditingContacts = [[NSMutableArray alloc] init];
     
     // Load device contacts
     [self loadLocalContacts];
@@ -159,6 +160,9 @@
     
     if( [after isEqualToString:@"GO_TO_NEXT"] || [after isEqualToString:@"ON_SKIP"] ) {
         
+        currentlyEditingContacts = [[NSMutableArray alloc] init];
+        [_contactsTable reloadData];
+        
         SocialnetworkController *socialnetwork;
         socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
         socialnetwork.untechable = untechable;
@@ -185,32 +189,9 @@
     
 }
 -(void)onNext{
-    
-    /*NSMutableDictionary *tempEmailDict = detailsController.editingEmailsWithStatus;
-    if ( tempEmailDict.count > 0 ) {
-        
-        for( int j=0; j < tempEmailDict.count; j++){
-            NSArray *allKeys = [tempEmailDict allKeys];
-            NSArray *allObjects = [tempEmailDict allValues];
-            NSIndexPath *indexPath =  [allKeys objectAtIndex:j];
-            
-            [detailsController.contactModal.allEmails  replaceObjectAtIndex:indexPath.row withObject:[allObjects objectAtIndex:j]];
-            
-            /*NSMutableArray *tempArray = [editingEmailsWithStatus objectForKey:[allKeys objectAtIndex:j]];
-             if ( [[tempArray objectAtIndex:1] isEqualToString:@"0"] ){
-             [contactModal.allEmails removeObject:[allObjects objectAtIndex:j]];
-             }else {
-             
-             }
-        }
-    }*/
-    /*NSMutableArray *tempArray = [editingEmailsWithStatus objectForKey:[allKeys objectAtIndex:j]];
-     if ( [[tempArray objectAtIndex:1] isEqualToString:@"0"] ){
-     [contactModal.allEmails removeObject:[allObjects objectAtIndex:j]];
-     }else {
-     
-     }*/
-    
+
+    if ( currentlyEditingContacts.count > 0)
+    untechable.customizedContactsForCurrentSession = currentlyEditingContacts;
     
     [self storeSceenVarsInDic];
     
@@ -218,39 +199,6 @@
     socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
     socialnetwork.untechable = untechable;
     [self.navigationController pushViewController:socialnetwork animated:YES];
-    
-    //[self hideAllControlls];
-    
-    BOOL goToNext = untechable.hasEndDate ? NO : YES;
-    
-    //When we have end date, must check end date is greater then start date
-    /*if( untechable.hasEndDate == YES )
-    {
-        NSDate *d1 = [untechable.commonFunctions timestampStrToNsDate:untechable.startDate];
-        NSDate *d2 = [untechable.commonFunctions timestampStrToNsDate:untechable.endDate];
-        
-        
-        goToNext = [untechable.commonFunctions date1IsSmallerThenDate2:d1 date2:d2];
-        
-        if( goToNext == NO ) {
-            
-            [untechable.commonFunctions showAlert:@"Invalid Dates" message:@"End date should be greater then start date."];
-        }
-        
-    }
-    
-    NSLog(goToNext ? @"goToNext- YES" : @"goToNext- NO");*/
-    
-    
-    if( goToNext ) {
-        
-        
-        
-        /*PhoneSetupController *phoneSetup;
-         phoneSetup = [[PhoneSetupController alloc]initWithNibName:@"PhoneSetupController" bundle:nil];
-         phoneSetup.untechable = untechable;
-         [self.navigationController pushViewController:phoneSetup animated:YES];*/
-    }
 }
 
 -(void)btnNextTouchStart{
@@ -271,7 +219,6 @@
 -(NSArray *) getArrayOfSelectedTab{
     
         return contactsArray;
-
 }
 
 // Customize the number of rows in the table view.
@@ -323,10 +270,10 @@
         _contactModal.img =[[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"dfcontact" ofType:@"jpg"]];
     }
     
-    if ( untechable.customizedContactsForCurrentSession.count > 0 ){
+    if ( currentlyEditingContacts.count > 0 ){
         
-        for (int i = 0;i<untechable.customizedContactsForCurrentSession.count; i++){
-            ContactsCustomizedModal *previousModal = [untechable.customizedContactsForCurrentSession objectAtIndex:i];
+        for (int i = 0;i<currentlyEditingContacts.count; i++){
+            ContactsCustomizedModal *previousModal = [currentlyEditingContacts objectAtIndex:i];
             
             if ( [previousModal.name isEqualToString:_contactModal.name] &&
                  previousModal.allPhoneNumbers.count == _contactModal.allPhoneNumbers.count )
@@ -338,6 +285,8 @@
             }
         }
     }
+    
+    
     if ( ![customizedContactsString isEqualToString:@""] ){
         
         for ( int i = 0; i < customizedContactsDictionary.count; i++ ){
@@ -658,6 +607,7 @@
     ContactCustomizeDetailsControlelrViewController *detailsController = [[ContactCustomizeDetailsControlelrViewController alloc] init];
     
     detailsController.untechable = untechable;
+    detailsController.contactListController = self;
     
     NSMutableDictionary *curContactDetails;
     

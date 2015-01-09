@@ -28,6 +28,7 @@
 @property(nonatomic,strong) NSMutableArray *contactsArray;
 @property(nonatomic,strong) NSMutableArray *contactBackupArray;
 @property(nonatomic,strong) NSMutableArray *selectedIdentifiers;
+@property(nonatomic,strong) NSMutableArray *currentlyEditingContacts;
 
 @property(nonatomic,strong) IBOutlet UITextField *searchTextField;
 

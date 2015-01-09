@@ -30,7 +30,7 @@
 
 @implementation ContactCustomizeDetailsControlelrViewController
 
-@synthesize contactModal,untechable,allEmails,allPhoneNumbers,customTextForContact,customizedContactsDictionary;
+@synthesize contactModal,untechable,allEmails,allPhoneNumbers,customTextForContact,customizedContactsDictionary,contactListController;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -328,24 +328,31 @@
     }
     
     if ( IsCustomized ){
-        if ( [untechable.customizedContactsForCurrentSession containsObject:contactModal] ){
+        if (    [contactListController.currentlyEditingContacts containsObject:contactModal]
+                //[untechable.customizedContactsForCurrentSession containsObject:contactModal] ){
+            ){
             
-            if ( [contactModal.customTextForContact isEqualToString:untechable.spendingTimeTxt ]
+            ContactsCustomizedModal *tempModal = contactModal;
+            
+            NSMutableArray  *tempStatusArray = contactModal.cutomizingStatusArray;
+            
+            if ( [contactModal.customTextForContact isEqualToString:untechable.spendingTimeTxt]
                 &&
-                [contactModal.cutomizingStatusArray objectAtIndex:0] == 0
+                [[tempStatusArray objectAtIndex:0] isEqualToString:@"0"]
                 &&
-                [contactModal.cutomizingStatusArray objectAtIndex:1] == 0
+                [[tempStatusArray objectAtIndex:1] isEqualToString:@"0"]
                 &&
-                [contactModal.cutomizingStatusArray objectAtIndex:2] == 0)
+                [[tempStatusArray objectAtIndex:2] isEqualToString:@"0"] )
             {
-                [untechable.customizedContactsForCurrentSession removeObject:contactModal];
+                [contactListController.currentlyEditingContacts removeObject:contactModal];
                 
             }else {
                 
-                [untechable.customizedContactsForCurrentSession replaceObjectAtIndex:[untechable.customizedContactsForCurrentSession indexOfObject:contactModal] withObject:contactModal];
+                [contactListController.currentlyEditingContacts replaceObjectAtIndex:[contactListController.currentlyEditingContacts indexOfObject:contactModal] withObject:contactModal];
             }
         }else {
-            [untechable.customizedContactsForCurrentSession addObject:contactModal];
+            [contactListController.currentlyEditingContacts addObject:contactModal];
+            //[untechable.customizedContactsForCurrentSession addObject:contactModal];
         }
     }
  

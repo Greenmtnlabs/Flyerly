@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Untechable.h"
+#import "ContactsListControllerViewController.h"
 #import "ContactsCustomizedModal.h"
 #import "BSKeyboardControls.h"
 
@@ -28,6 +29,7 @@
 
 @property (nonatomic,strong)NSMutableDictionary *customizedContactsDictionary;
 @property (nonatomic,strong)  Untechable *untechable;
+@property (nonatomic,strong)  ContactsListControllerViewController *contactListController;
 @property (nonatomic,strong)  ContactsCustomizedModal *contactModal;
 
 @end
