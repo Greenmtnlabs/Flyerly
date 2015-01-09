@@ -301,7 +301,8 @@
             [untechable.customizedContactsForCurrentSession addObject:contactModal];
         }
     }
-    
+ 
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(IBAction)emailButtonTapped:(id) sender
