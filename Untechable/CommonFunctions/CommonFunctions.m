@@ -96,9 +96,16 @@
 -(NSString *)convertDicIntoJsonString:(NSMutableDictionary *)value
 {
     NSError *writeError = nil;
+    NSString *jsonString;
+    if (value.count > 0) {
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:value options:NSJSONWritingPrettyPrinted error:&writeError];
-    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     NSLog(@"JSON Output: %@", jsonString);
+    
+    }else {
+        jsonString = @"";
+    }
+    
     return jsonString;
 }
 

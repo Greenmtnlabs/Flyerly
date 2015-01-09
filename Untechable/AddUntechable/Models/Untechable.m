@@ -191,6 +191,7 @@
         dic[@"hasRecording"] = hasRecording ? @"YES" : @"NO";
         
         dic[@"customizedContacts"] = [commonFunctions convertCCMArrayIntoJsonString:customizedContactsForCurrentSession];
+        customizedContacts = dic[@"customizedContacts"];
         //dic[@"customizedContacts"] = customizedContacts;
 
         //Screen3 vars
@@ -277,9 +278,6 @@
         imsPort         = ( dic[@"imsPort"] ) ? dic[@"imsPort"] : @"";
         omsHostName     = ( dic[@"omsHostName"] ) ? dic[@"omsHostName"] : @"";
         omsPort         = ( dic[@"omsPort"] ) ? dic[@"omsPort"] : @"";
-       
-        
-        
     }
     
     //NSLog(@"dic: %@", dic);
