@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2057" systemVersion="12C60" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="ESBoard" representedClassName="ESBoard" syncable="YES">
+        <attribute name="index" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="isAvailable" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
+        <attribute name="isCustom" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="thumbnailPath" attributeType="String" syncable="YES"/>
+        <attribute name="title" attributeType="String" syncable="YES"/>
+        <relationship name="associatedGames" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ESGameInfo" inverseName="board" inverseEntity="ESGameInfo" syncable="YES"/>
+        <relationship name="tiles" optional="YES" toMany="YES" maxCount="15" deletionRule="Cascade" ordered="YES" destinationEntity="ESTile" inverseName="board" inverseEntity="ESTile" syncable="YES"/>
+    </entity>
+    <entity name="ESGameInfo" representedClassName="ESGameInfo" syncable="YES">
+        <attribute name="wonDate" attributeType="Date" syncable="YES"/>
+        <relationship name="board" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ESBoard" inverseName="associatedGames" inverseEntity="ESBoard" syncable="YES"/>
+        <relationship name="selectedTrophy" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ESTrophy" inverseName="associatedGames" inverseEntity="ESTrophy" syncable="YES"/>
+    </entity>
+    <entity name="ESTile" representedClassName="ESTile" syncable="YES">
+        <attribute name="imagePath" attributeType="String" syncable="YES"/>
+        <attribute name="index" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="isChecked" transient="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <relationship name="board" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ESBoard" inverseName="tiles" inverseEntity="ESBoard" syncable="YES"/>
+    </entity>
+    <entity name="ESTrophy" representedClassName="ESTrophy" syncable="YES">
+        <attribute name="imageURL" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="index" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="associatedGames" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ESGameInfo" inverseName="selectedTrophy" inverseEntity="ESGameInfo" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="ESBoard" positionX="160" positionY="192" width="128" height="150"/>
+        <element name="ESGameInfo" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="ESTile" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="ESTrophy" positionX="160" positionY="192" width="128" height="90"/>
+    </elements>
+</model>

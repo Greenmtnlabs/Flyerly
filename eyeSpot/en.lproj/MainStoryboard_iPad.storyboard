@@ -1,0 +1,1077 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="KuD-JQ-U8I">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+    </dependencies>
+    <scenes>
+        <!--Main View Controller-->
+        <scene sceneID="4">
+            <objects>
+                <viewController id="2" customClass="ESMainViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5">
+                        <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="BackgroundImage@2x~ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="pH5-FY-JnU" userLabel="Background">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="768" id="uLJ-V8-8It"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y4z-yb-reI" userLabel="Play Button">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="PlayButton~ipad.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="PlayButton_Selected~ipad.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="9Zb-2p-Xnc" kind="push" id="ohA-vG-54v"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Srh-L5-xk8" userLabel="Help Button">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="Help~ipad.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="Help_Selected~ipad.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="P8f-TS-6kR" kind="modal" modalTransitionStyle="crossDissolve" id="HAs-7s-sR8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l06-ri-Mln" userLabel="Settings Button">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="125" id="uvk-yU-swM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-13"/>
+                                <state key="normal" image="Settings~ipad.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="Settings_Selected~ipad.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="xoB-P7-pdd" kind="modal" modalTransitionStyle="flipHorizontal" id="xdb-jq-tB2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xBj-q0-dPq" userLabel="Trophy Room Button">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="121" id="JdO-7C-8VL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="4"/>
+                                <state key="normal" image="TrohpyRoom_icon~ipad.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="TrohpyRoom_icon_Selected~ipad.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="GVl-q9-DnK" kind="modal" modalTransitionStyle="crossDissolve" id="RIm-VA-end"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Srh-L5-xk8" secondAttribute="bottom" constant="20" symbolic="YES" type="user" id="5lv-Pq-1cg"/>
+                            <constraint firstItem="pH5-FY-JnU" firstAttribute="bottom" secondItem="5" secondAttribute="bottom" type="default" id="Dzh-E0-HG2"/>
+                            <constraint firstItem="Srh-L5-xk8" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="8" type="user" id="GS2-7f-Edk"/>
+                            <constraint firstItem="y4z-yb-reI" firstAttribute="top" secondItem="5" secondAttribute="top" constant="140" id="GYp-Hi-cq5"/>
+                            <constraint firstItem="l06-ri-Mln" firstAttribute="baseline" secondItem="Srh-L5-xk8" secondAttribute="baseline" type="user" id="LP1-PT-pZE"/>
+                            <constraint firstAttribute="trailing" secondItem="xBj-q0-dPq" secondAttribute="trailing" constant="10" type="user" id="Qtw-UN-VVW"/>
+                            <constraint firstAttribute="centerX" secondItem="y4z-yb-reI" secondAttribute="centerX" type="user" id="U84-Fg-r8F"/>
+                            <constraint firstItem="pH5-FY-JnU" firstAttribute="leading" secondItem="5" secondAttribute="leading" type="user" id="UUr-cL-dMn"/>
+                            <constraint firstItem="pH5-FY-JnU" firstAttribute="trailing" secondItem="5" secondAttribute="trailing" type="user" id="c7z-59-EDS"/>
+                            <constraint firstItem="xBj-q0-dPq" firstAttribute="bottom" secondItem="5" secondAttribute="bottom" type="user" id="ccY-sH-KKA"/>
+                            <constraint firstAttribute="bottom" secondItem="l06-ri-Mln" secondAttribute="bottom" constant="20" symbolic="YES" type="user" id="gbB-k2-avX"/>
+                            <constraint firstItem="l06-ri-Mln" firstAttribute="leading" secondItem="Srh-L5-xk8" secondAttribute="trailing" constant="-13" type="user" id="zhe-gS-f2Q"/>
+                        </constraints>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="VpP-8S-g4E"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="739" y="-78"/>
+        </scene>
+        <!--Help View Controller-->
+        <scene sceneID="yoH-uF-GtJ">
+            <objects>
+                <viewController id="P8f-TS-6kR" customClass="ESHelpViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="53k-m3-Vsc">
+                        <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="BackgroundImage@2x~ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="x54-09-5Zy" userLabel="Background">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="768" id="0lU-A0-noJ"/>
+                                    <constraint firstAttribute="width" constant="1024" type="user" id="Rh4-ah-R7W"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rcP-vc-leu" userLabel="Back Button">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="202" type="user" id="bmG-OJ-Flq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="Back_Arrow~ipad.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="Back_Arrow_Selected~ipad.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="back:" destination="P8f-TS-6kR" eventType="touchUpInside" id="75P-et-inP"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="TutorialText~ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="w1b-bj-XKw">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="917" id="hAR-ba-WZ0"/>
+                                    <constraint firstAttribute="height" constant="284" id="yk8-Ij-nGV"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="JumpingKid_HowTO~ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="pri-7O-Kbx"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ImageSwipe_HowTo~ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="F8Y-AQ-u7f"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="HappySpoting_text_Icon~ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="hqL-ML-TgV"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="HowToPlay_text_icon~ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="B2K-0O-vFq"/>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pri-7O-Kbx" firstAttribute="leading" secondItem="53k-m3-Vsc" secondAttribute="leading" constant="419" id="5xx-s0-MmI"/>
+                            <constraint firstItem="F8Y-AQ-u7f" firstAttribute="top" secondItem="53k-m3-Vsc" secondAttribute="top" constant="515" id="9eE-VL-UtN"/>
+                            <constraint firstItem="F8Y-AQ-u7f" firstAttribute="leading" secondItem="53k-m3-Vsc" secondAttribute="leading" constant="603" id="Fhz-gr-35x"/>
+                            <constraint firstItem="rcP-vc-leu" firstAttribute="top" secondItem="53k-m3-Vsc" secondAttribute="top" constant="600" id="Fjr-Ih-8ec"/>
+                            <constraint firstItem="hqL-ML-TgV" firstAttribute="leading" secondItem="53k-m3-Vsc" secondAttribute="leading" constant="98" id="GsS-wf-JQA"/>
+                            <constraint firstItem="B2K-0O-vFq" firstAttribute="top" secondItem="53k-m3-Vsc" secondAttribute="top" constant="117" id="GyM-Ou-k5X"/>
+                            <constraint firstItem="w1b-bj-XKw" firstAttribute="leading" secondItem="53k-m3-Vsc" secondAttribute="leading" constant="42" id="K09-pk-89N"/>
+                            <constraint firstItem="B2K-0O-vFq" firstAttribute="centerX" secondItem="x54-09-5Zy" secondAttribute="centerX" type="default" id="TKj-wv-H7P"/>
+                            <constraint firstItem="pri-7O-Kbx" firstAttribute="top" secondItem="F8Y-AQ-u7f" secondAttribute="top" type="default" id="cir-LB-vcv"/>
+                            <constraint firstItem="x54-09-5Zy" firstAttribute="leading" secondItem="53k-m3-Vsc" secondAttribute="leading" type="default" id="fz4-gt-Vew"/>
+                            <constraint firstItem="pri-7O-Kbx" firstAttribute="centerY" secondItem="hqL-ML-TgV" secondAttribute="centerY" type="default" id="mk0-5X-g5b"/>
+                            <constraint firstItem="rcP-vc-leu" firstAttribute="leading" secondItem="53k-m3-Vsc" secondAttribute="leading" constant="9" id="pfe-3g-2wu"/>
+                            <constraint firstItem="w1b-bj-XKw" firstAttribute="top" secondItem="53k-m3-Vsc" secondAttribute="top" constant="197" id="tXl-Te-lOz"/>
+                            <constraint firstItem="x54-09-5Zy" firstAttribute="bottom" secondItem="53k-m3-Vsc" secondAttribute="bottom" type="default" id="zRv-rn-LO4"/>
+                        </constraints>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="rII-h8-2ro"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8cB-KP-I5r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="265" y="938"/>
+        </scene>
+        <!--Board Selection View Controller-->
+        <scene sceneID="Tfh-gv-80C">
+            <objects>
+                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="9Zb-2p-Xnc" customClass="ESBoardSelectionViewController" sceneMemberID="viewController">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" pagingEnabled="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="fPt-f8-bJ4">
+                        <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="25" minimumInteritemSpacing="50" id="IJT-Xt-MMY">
+                            <size key="itemSize" width="136" height="160"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="128"/>
+                            <inset key="sectionInset" minX="50" minY="100" maxX="50" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ESBoardCellAlpha" id="eLO-tM-Bl2">
+                                <rect key="frame" x="50" y="100" width="136" height="160"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="136" height="160"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fEj-0s-g2U">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="136" type="user" id="Sdx-9J-Oed"/>
+                                                <constraint firstAttribute="width" constant="132" id="VDx-uY-qb2"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" text="Road Trip" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4YI-2D-dq2">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="24" id="Sre-yV-93l"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="4YI-2D-dq2" secondAttribute="centerX" type="user" id="EAg-XJ-E64"/>
+                                    <constraint firstItem="fEj-0s-g2U" firstAttribute="top" secondItem="eLO-tM-Bl2" secondAttribute="top" type="user" id="QfV-ux-xum"/>
+                                    <constraint firstItem="4YI-2D-dq2" firstAttribute="bottom" secondItem="eLO-tM-Bl2" secondAttribute="bottom" type="default" id="dBo-32-Rbn"/>
+                                    <constraint firstAttribute="centerX" secondItem="fEj-0s-g2U" secondAttribute="centerX" type="user" id="oiK-y4-hS5"/>
+                                    <constraint firstItem="4YI-2D-dq2" firstAttribute="leading" secondItem="fEj-0s-g2U" secondAttribute="leading" type="default" id="yTd-8T-VEb"/>
+                                </constraints>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ESBoardCellCustom" id="VyH-Ke-y7Q">
+                                <rect key="frame" x="247" y="100" width="136" height="160"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="136" height="160"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" text="Road Trip" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xqW-gd-mwA">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="24" id="lZM-Ts-Cvj"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ztQ-hc-rmg" userLabel="Thumbnail Image View">
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="85" id="Mlg-b8-LOb"/>
+                                                <constraint firstAttribute="height" constant="85" id="NK6-DZ-l8C"/>
+                                            </constraints>
+                                        </imageView>
+                                        <imageView opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" image="BoardSelectionBackground~ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="HPk-Dg-zoF" userLabel="Border Image View">
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="132" id="eA5-8y-iHD"/>
+                                                <constraint firstAttribute="height" constant="136" type="user" id="uLG-h9-nDt"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="HPk-Dg-zoF" firstAttribute="top" secondItem="VyH-Ke-y7Q" secondAttribute="top" constant="-1" id="4ng-Wb-bde"/>
+                                    <constraint firstItem="HPk-Dg-zoF" firstAttribute="centerY" secondItem="ztQ-hc-rmg" secondAttribute="centerY" type="default" id="FcP-b1-k4B"/>
+                                    <constraint firstAttribute="centerX" secondItem="HPk-Dg-zoF" secondAttribute="centerX" type="user" id="LWf-Ed-jRN"/>
+                                    <constraint firstItem="ztQ-hc-rmg" firstAttribute="centerX" secondItem="xqW-gd-mwA" secondAttribute="centerX" type="default" id="VnR-pp-KB2"/>
+                                    <constraint firstAttribute="centerX" secondItem="xqW-gd-mwA" secondAttribute="centerX" type="user" id="cew-r8-2mE"/>
+                                    <constraint firstItem="xqW-gd-mwA" firstAttribute="bottom" secondItem="VyH-Ke-y7Q" secondAttribute="bottom" type="default" id="jdn-19-Ysi"/>
+                                    <constraint firstItem="xqW-gd-mwA" firstAttribute="leading" secondItem="HPk-Dg-zoF" secondAttribute="leading" type="default" id="xgx-cQ-nHf"/>
+                                </constraints>
+                            </collectionViewCell>
+                        </cells>
+                        <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ESBoardSelectionFooterView" id="Kp2-eX-43E">
+                            <rect key="frame" x="0.0" y="260" width="1024" height="128"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RD8-72-wHB" userLabel="Trophy Room Button">
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="121" id="Agw-kA-jfx"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                    <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="4"/>
+                                    <state key="normal" image="TrohpyRoom_icon~ipad.png">
+                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="highlighted" image="TrohpyRoom_icon_Selected~ipad.png">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <segue destination="GVl-q9-DnK" kind="modal" modalTransitionStyle="crossDissolve" id="82y-O4-40c"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QSb-Rs-6ss" userLabel="Back Button">
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="202" type="user" id="Mbx-AZ-epc"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                    <state key="normal" image="Back_Arrow~ipad.png">
+                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="highlighted" image="Back_Arrow_Selected~ipad.png">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="back:" destination="9Zb-2p-Xnc" eventType="touchUpInside" id="sG5-hG-qfR"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="RD8-72-wHB" firstAttribute="centerY" secondItem="Kp2-eX-43E" secondAttribute="centerY" type="default" id="YLh-y4-feo"/>
+                                <constraint firstItem="QSb-Rs-6ss" firstAttribute="centerY" secondItem="RD8-72-wHB" secondAttribute="centerY" type="default" id="mqW-jG-dxw"/>
+                                <constraint firstAttribute="trailing" secondItem="RD8-72-wHB" secondAttribute="trailing" constant="10" type="user" id="rxL-sb-Fg4"/>
+                                <constraint firstItem="QSb-Rs-6ss" firstAttribute="leading" secondItem="Kp2-eX-43E" secondAttribute="leading" type="default" id="sMT-kW-rfR"/>
+                            </constraints>
+                        </collectionReusableView>
+                        <connections>
+                            <outlet property="dataSource" destination="9Zb-2p-Xnc" id="MFF-hc-nCs"/>
+                            <outlet property="delegate" destination="9Zb-2p-Xnc" id="ina-ze-qOn"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="LaF-A2-tU9"/>
+                    <connections>
+                        <segue destination="8Nc-rz-Uwi" kind="modal" identifier="ESBoardBuilderSegue" modalTransitionStyle="coverVertical" id="4hm-ps-4i1"/>
+                        <segue destination="Jnq-58-hPQ" kind="push" identifier="ESBoardSelectionSegue" id="9Jt-m5-Sdu"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B99-7J-RgM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2419" y="37"/>
+        </scene>
+        <!--Board View Controller-->
+        <scene sceneID="j64-qB-sHS">
+            <objects>
+                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="Jnq-58-hPQ" customClass="ESBoardViewController" sceneMemberID="viewController">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="8tJ-kk-LIe">
+                        <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="30" minimumInteritemSpacing="15" id="dwy-Mg-j6c">
+                            <size key="itemSize" width="150" height="150"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="128"/>
+                            <inset key="sectionInset" minX="50" minY="125" maxX="50" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <imageView key="backgroundView" opaque="NO" alpha="0.0" tag="200" contentMode="scaleToFill" image="GoodJobOverlay@2x~ipad.png" id="oKl-cX-Buo" userLabel="Good Job Overlay">
+                            <rect key="frame" x="0.0" y="0.0" width="1024" height="748"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <gestureRecognizers/>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="QoP-7x-P5r" appends="YES" id="3eW-ej-B8U"/>
+                            </connections>
+                        </imageView>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ESTileCell" id="q8E-gK-vWW">
+                                <rect key="frame" x="50" y="125" width="150" height="150"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KpL-qi-iED" userLabel="Tile Image View"/>
+                                        <view opaque="NO" alpha="0.0" tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fzK-9o-3kT" userLabel="Completion Mask View">
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <imageView opaque="NO" userInteractionEnabled="NO" alpha="0.0" tag="2" contentMode="scaleToFill" image="tile-checkmark@2x~ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="Kau-4A-oNj" userLabel="Check Image View">
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="KpL-qi-iED" firstAttribute="bottom" secondItem="q8E-gK-vWW" secondAttribute="bottom" type="default" id="0AK-36-NGv"/>
+                                    <constraint firstItem="KpL-qi-iED" firstAttribute="trailing" secondItem="q8E-gK-vWW" secondAttribute="trailing" type="default" id="0wd-kM-4uw"/>
+                                    <constraint firstItem="Kau-4A-oNj" firstAttribute="top" secondItem="q8E-gK-vWW" secondAttribute="top" type="default" id="Ke6-RY-cYS"/>
+                                    <constraint firstItem="Kau-4A-oNj" firstAttribute="bottom" secondItem="q8E-gK-vWW" secondAttribute="bottom" type="default" id="KiK-vR-6TE"/>
+                                    <constraint firstItem="fzK-9o-3kT" firstAttribute="top" secondItem="q8E-gK-vWW" secondAttribute="top" type="default" id="NqZ-GX-1qq"/>
+                                    <constraint firstItem="KpL-qi-iED" firstAttribute="leading" secondItem="q8E-gK-vWW" secondAttribute="leading" type="default" id="T5v-BP-9mK"/>
+                                    <constraint firstItem="fzK-9o-3kT" firstAttribute="leading" secondItem="q8E-gK-vWW" secondAttribute="leading" type="default" id="Y8A-Fd-l5T"/>
+                                    <constraint firstItem="fzK-9o-3kT" firstAttribute="bottom" secondItem="q8E-gK-vWW" secondAttribute="bottom" type="default" id="Yeh-ib-wFr"/>
+                                    <constraint firstItem="Kau-4A-oNj" firstAttribute="trailing" secondItem="q8E-gK-vWW" secondAttribute="trailing" type="default" id="Zaf-pI-Alx"/>
+                                    <constraint firstItem="Kau-4A-oNj" firstAttribute="leading" secondItem="q8E-gK-vWW" secondAttribute="leading" type="default" id="eLP-9Y-8Ce"/>
+                                    <constraint firstItem="fzK-9o-3kT" firstAttribute="trailing" secondItem="q8E-gK-vWW" secondAttribute="trailing" type="default" id="jKy-Mq-NCU"/>
+                                    <constraint firstItem="KpL-qi-iED" firstAttribute="top" secondItem="q8E-gK-vWW" secondAttribute="top" type="default" id="m0p-WQ-fKY"/>
+                                </constraints>
+                            </collectionViewCell>
+                        </cells>
+                        <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ESBoardFooterView" id="hrs-bw-y8E">
+                            <rect key="frame" x="0.0" y="275" width="1024" height="128"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I7O-4l-PCR" userLabel="Back Button">
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="202" type="user" id="ZgM-gY-JbA"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                    <state key="normal" image="Back_Arrow~ipad.png">
+                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="highlighted" image="Back_Arrow_Selected~ipad.png">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="back:" destination="Jnq-58-hPQ" eventType="touchUpInside" id="QaY-Ie-fyI"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="I7O-4l-PCR" firstAttribute="leading" secondItem="hrs-bw-y8E" secondAttribute="leading" constant="20" symbolic="YES" type="user" id="2RN-Zd-M2Y"/>
+                                <constraint firstItem="I7O-4l-PCR" firstAttribute="centerY" secondItem="hrs-bw-y8E" secondAttribute="centerY" type="default" id="k7r-Vn-27x"/>
+                            </constraints>
+                        </collectionReusableView>
+                        <connections>
+                            <outlet property="dataSource" destination="Jnq-58-hPQ" id="MXn-T2-lP9"/>
+                            <outlet property="delegate" destination="Jnq-58-hPQ" id="Czf-ak-ZMf"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="Tk3-XS-u0Z"/>
+                    <connections>
+                        <outlet property="goodJobOverlayImageView" destination="oKl-cX-Buo" id="B2y-Mm-Xnx"/>
+                        <segue destination="GVl-q9-DnK" kind="push" identifier="GameCompleteSegue" id="z51-Fx-gq1"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1P5-aG-Qds" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="QoP-7x-P5r">
+                    <connections>
+                        <action selector="goodJobOverlayTapped:" destination="Jnq-58-hPQ" id="mMj-wE-nsO"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="4143" y="30"/>
+        </scene>
+        <!--Trophy View Controller-->
+        <scene sceneID="7Zi-su-qid">
+            <objects>
+                <viewController id="GVl-q9-DnK" customClass="ESTrophyViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pqP-Sz-STZ" userLabel="Container View">
+                        <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="BackgroundImage@2x~ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="EFo-zN-khx" userLabel="Background">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="768" type="user" id="fCG-L3-Pob"/>
+                                </constraints>
+                            </imageView>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MXQ-W2-F2Y" userLabel="Board Collection View">
+                                <color key="backgroundColor" red="0.70979999999999999" green="0.83530000000000004" blue="1" alpha="0.51000000000000001" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="108" type="user" id="O6X-bN-bgg"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="8" minimumInteritemSpacing="0.0" id="tR5-ri-uDv">
+                                    <size key="itemSize" width="100" height="100"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ESTrophyViewControllerBoardCell" id="DmS-ND-sIO">
+                                        <rect key="frame" x="8" y="4" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" tag="300" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vDQ-OC-rLJ"/>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" tag="301" contentMode="scaleToFill" image="board_has_trophy.png" translatesAutoresizingMaskIntoConstraints="NO" id="Jgl-Tr-ey9">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="32" type="user" id="9pv-BL-x4F"/>
+                                                        <constraint firstAttribute="height" constant="32" type="user" id="DQR-f4-gtg"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="vDQ-OC-rLJ" firstAttribute="trailing" secondItem="DmS-ND-sIO" secondAttribute="trailing" type="default" id="Sjn-Tc-3bu"/>
+                                            <constraint firstItem="vDQ-OC-rLJ" firstAttribute="leading" secondItem="DmS-ND-sIO" secondAttribute="leading" type="default" id="V2p-Qi-UQY"/>
+                                            <constraint firstItem="vDQ-OC-rLJ" firstAttribute="top" secondItem="DmS-ND-sIO" secondAttribute="top" type="user" id="h0X-cq-3Zl"/>
+                                            <constraint firstItem="Jgl-Tr-ey9" firstAttribute="top" secondItem="DmS-ND-sIO" secondAttribute="top" type="user" id="nFz-2j-UaY"/>
+                                            <constraint firstItem="vDQ-OC-rLJ" firstAttribute="bottom" secondItem="DmS-ND-sIO" secondAttribute="bottom" type="user" id="ooV-zm-rR6"/>
+                                            <constraint firstAttribute="trailing" secondItem="Jgl-Tr-ey9" secondAttribute="trailing" type="user" id="tno-DS-p2n"/>
+                                        </constraints>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ESTrophyViewControllerBoardCellCustom" id="eFA-X1-Rm4">
+                                        <rect key="frame" x="116" y="4" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" tag="300" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wIG-Lj-cwS" userLabel="Thumbnail">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="65" id="Mlq-hh-Yi1"/>
+                                                        <constraint firstAttribute="height" constant="65" id="QAk-in-ZYY"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="TrophySelectionBackground~ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="9gy-p6-ESN" userLabel="Border">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="100" id="mgV-OE-KkC"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" tag="301" contentMode="scaleToFill" image="StarForBoardCompletion@2x~ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="cku-4g-9C4">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="agH-ib-Ccq"/>
+                                                        <constraint firstAttribute="height" constant="30" id="phy-mk-d6f"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="9gy-p6-ESN" firstAttribute="top" secondItem="eFA-X1-Rm4" secondAttribute="top" constant="-1" id="1g5-ta-wc5"/>
+                                            <constraint firstItem="9gy-p6-ESN" firstAttribute="leading" secondItem="eFA-X1-Rm4" secondAttribute="leading" type="default" id="KlS-b7-qm4"/>
+                                            <constraint firstItem="9gy-p6-ESN" firstAttribute="trailing" secondItem="eFA-X1-Rm4" secondAttribute="trailing" type="default" id="XXX-jg-EaX"/>
+                                            <constraint firstItem="wIG-Lj-cwS" firstAttribute="leading" secondItem="eFA-X1-Rm4" secondAttribute="leading" constant="17" id="k0Y-fD-VKr"/>
+                                            <constraint firstItem="9gy-p6-ESN" firstAttribute="centerY" secondItem="wIG-Lj-cwS" secondAttribute="centerY" type="default" id="nV1-RX-7Zi"/>
+                                            <constraint firstItem="cku-4g-9C4" firstAttribute="trailing" secondItem="eFA-X1-Rm4" secondAttribute="trailing" type="default" id="oMV-SS-YcF"/>
+                                            <constraint firstItem="cku-4g-9C4" firstAttribute="top" secondItem="eFA-X1-Rm4" secondAttribute="top" type="user" id="pLc-4O-AiE"/>
+                                        </constraints>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="GVl-q9-DnK" id="1YH-bp-pzK"/>
+                                    <outlet property="delegate" destination="GVl-q9-DnK" id="09U-Vw-dbz"/>
+                                </connections>
+                            </collectionView>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hdb-HH-ymz" userLabel="Trophy Collection View">
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="355" type="user" id="Mxb-Ug-HtC"/>
+                                    <constraint firstAttribute="width" constant="481" id="krm-pv-pqP"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="32" minimumInteritemSpacing="10" id="KGw-Lv-rIP">
+                                    <size key="itemSize" width="125" height="80"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="25" minY="25" maxX="10" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <imageView key="backgroundView" userInteractionEnabled="NO" contentMode="scaleToFill" image="TrophyShelf@2x~ipad.png" id="94X-2L-AGQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="481" height="355"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ESTrophyViewControllerTrophyCell" id="vmY-69-ubx">
+                                        <rect key="frame" x="25" y="25" width="125" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="125" height="80"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" tag="200" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uvx-kR-lyn">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="68" id="3PR-I4-Uuh"/>
+                                                        <constraint firstAttribute="height" constant="80" id="HQe-gR-gi7"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="Uvx-kR-lyn" firstAttribute="leading" secondItem="vmY-69-ubx" secondAttribute="leading" type="default" id="WLN-PW-aW1"/>
+                                            <constraint firstItem="Uvx-kR-lyn" firstAttribute="top" secondItem="vmY-69-ubx" secondAttribute="top" type="default" id="uRW-O1-qiT"/>
+                                        </constraints>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="GVl-q9-DnK" id="I8t-6f-Jmz"/>
+                                    <outlet property="delegate" destination="GVl-q9-DnK" id="EmF-iL-NqX"/>
+                                </connections>
+                            </collectionView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4s2-N5-SFh">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="169" type="user" id="2nt-Sj-VKR"/>
+                                    <constraint firstAttribute="width" constant="128" type="user" id="gXQ-DE-Grl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="TR_PlayButton@2x~ipad.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="TR_PlayButtonSelected@2x~ipad.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="back:" destination="GVl-q9-DnK" eventType="touchUpInside" id="cNv-Qo-HU4"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="02Z-9Q-Aus">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="78" type="user" id="WO1-Df-fnf"/>
+                                    <constraint firstAttribute="height" constant="78" type="user" id="tBz-BE-Za5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="Twitter@2x~ipad.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="Twitter_Selected@2x~ipad.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="share:" destination="GVl-q9-DnK" eventType="touchUpInside" id="W45-77-qG4"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Lm-GN-Hi1">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" type="user" id="FK4-8A-HnJ"/>
+                                    <constraint firstAttribute="width" constant="90" type="user" id="dMM-DJ-EOW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="Facebook@2x~ipad.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="Facebook_Selected@2x~ipad.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="share:" destination="GVl-q9-DnK" eventType="touchUpInside" id="VXy-fF-ZfH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mOW-pP-mPy" userLabel="Back Button">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="202" type="user" id="N67-Rb-ONq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="Back_Arrow~ipad.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="Back_Arrow_Selected~ipad.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="back:" destination="GVl-q9-DnK" eventType="touchUpInside" id="S51-5F-1yz"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="TrophyRoomText_icon@2x~ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="l4Z-vT-aDU">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="81" id="l6q-xF-gXe"/>
+                                    <constraint firstAttribute="width" constant="405" id="rVN-Zs-IKe"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Select_awardText_Icon@2x~ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="os6-ao-0O0">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="171" id="amo-15-eRI"/>
+                                    <constraint firstAttribute="height" constant="41" id="f0h-FB-JCx"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Collect a sticker for each board you complete!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8vv-Rx-Qsi">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="MXQ-W2-F2Y" firstAttribute="centerX" secondItem="8vv-Rx-Qsi" secondAttribute="centerX" type="default" id="0iV-oe-z4X"/>
+                            <constraint firstItem="MXQ-W2-F2Y" firstAttribute="centerX" secondItem="pqP-Sz-STZ" secondAttribute="centerX" type="default" id="1X3-I8-mr5"/>
+                            <constraint firstItem="l4Z-vT-aDU" firstAttribute="top" secondItem="pqP-Sz-STZ" secondAttribute="top" constant="101" id="2In-fZ-KmP"/>
+                            <constraint firstAttribute="trailing" secondItem="4s2-N5-SFh" secondAttribute="trailing" constant="33" id="58m-Cx-kxn"/>
+                            <constraint firstItem="EFo-zN-khx" firstAttribute="trailing" secondItem="MXQ-W2-F2Y" secondAttribute="trailing" type="default" id="9te-vH-ugZ"/>
+                            <constraint firstItem="4s2-N5-SFh" firstAttribute="top" secondItem="pqP-Sz-STZ" secondAttribute="top" constant="173" id="BFM-eh-FVV"/>
+                            <constraint firstItem="os6-ao-0O0" firstAttribute="top" secondItem="pqP-Sz-STZ" secondAttribute="top" constant="148" id="EGp-Lj-F9o"/>
+                            <constraint firstItem="mOW-pP-mPy" firstAttribute="leading" secondItem="pqP-Sz-STZ" secondAttribute="leading" constant="35" id="IQ1-mj-hSb"/>
+                            <constraint firstItem="hdb-HH-ymz" firstAttribute="top" secondItem="l4Z-vT-aDU" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="OTi-n2-3Jf"/>
+                            <constraint firstItem="EFo-zN-khx" firstAttribute="leading" secondItem="pqP-Sz-STZ" secondAttribute="leading" type="default" id="WBw-FW-Axy"/>
+                            <constraint firstItem="EFo-zN-khx" firstAttribute="bottom" secondItem="pqP-Sz-STZ" secondAttribute="bottom" type="default" id="XGn-P3-t5u"/>
+                            <constraint firstItem="MXQ-W2-F2Y" firstAttribute="centerX" secondItem="hdb-HH-ymz" secondAttribute="centerX" type="default" id="Xyy-EY-oPM"/>
+                            <constraint firstItem="02Z-9Q-Aus" firstAttribute="centerX" secondItem="8Lm-GN-Hi1" secondAttribute="centerX" type="default" id="a4X-Vs-a5x"/>
+                            <constraint firstItem="mOW-pP-mPy" firstAttribute="top" secondItem="pqP-Sz-STZ" secondAttribute="top" constant="68" id="av3-nF-fy1"/>
+                            <constraint firstAttribute="bottom" secondItem="MXQ-W2-F2Y" secondAttribute="bottom" type="user" id="dxP-j5-3uO"/>
+                            <constraint firstItem="MXQ-W2-F2Y" firstAttribute="leading" secondItem="pqP-Sz-STZ" secondAttribute="leading" type="user" id="eAu-77-oCi"/>
+                            <constraint firstItem="02Z-9Q-Aus" firstAttribute="top" secondItem="8Lm-GN-Hi1" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="fuj-pl-so4"/>
+                            <constraint firstItem="MXQ-W2-F2Y" firstAttribute="centerX" secondItem="l4Z-vT-aDU" secondAttribute="centerX" type="default" id="mMS-ON-Df8"/>
+                            <constraint firstItem="02Z-9Q-Aus" firstAttribute="bottom" secondItem="hdb-HH-ymz" secondAttribute="bottom" type="default" id="qJX-tz-mJ6"/>
+                            <constraint firstItem="8Lm-GN-Hi1" firstAttribute="centerX" secondItem="4s2-N5-SFh" secondAttribute="centerX" type="default" id="qna-gN-SOD"/>
+                            <constraint firstItem="8vv-Rx-Qsi" firstAttribute="top" secondItem="hdb-HH-ymz" secondAttribute="bottom" constant="20" type="user" id="vrm-fd-3PM"/>
+                            <constraint firstItem="mOW-pP-mPy" firstAttribute="centerX" secondItem="os6-ao-0O0" secondAttribute="centerX" type="default" id="wZN-un-39u"/>
+                        </constraints>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="qey-F2-FVU"/>
+                    <connections>
+                        <outlet property="backButton" destination="mOW-pP-mPy" id="Eyh-TW-2iM"/>
+                        <outlet property="boardCollectionView" destination="MXQ-W2-F2Y" id="drm-WZ-s4v"/>
+                        <outlet property="facebookButton" destination="8Lm-GN-Hi1" id="TcW-vq-hXE"/>
+                        <outlet property="homeButton" destination="4s2-N5-SFh" id="q7z-1X-gYg"/>
+                        <outlet property="selectAnAwardImageView" destination="os6-ao-0O0" id="9gb-uw-OIs"/>
+                        <outlet property="trophyCollectionView" destination="hdb-HH-ymz" id="vRn-Ws-w9y"/>
+                        <outlet property="twitterButton" destination="02Z-9Q-Aus" id="j6a-bz-yA8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qd8-oV-N46" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5799" y="47"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="5TL-dC-O17">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="KuD-JQ-U8I" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="SLA-GL-E0B">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="2" kind="relationship" relationship="rootViewController" id="h6H-ek-LIf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9vR-AI-mD4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-678" y="-226"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="0uN-By-LDu">
+            <objects>
+                <viewController id="xoB-P7-pdd" customClass="ESSettingsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eLn-BP-zQo">
+                        <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="BackgroundImage@2x~ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="gdd-mn-J1j" userLabel="Background">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="768" id="yYN-Ww-6l0"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tWP-Dd-r6T" userLabel="Back Button">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="Back_Arrow~ipad.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="Back_Arrow_Selected~ipad.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="back:" destination="xoB-P7-pdd" eventType="touchUpInside" id="GQx-DF-zZ6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGB-ie-c4e" userLabel="Sound On Button">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="158" id="7NH-mt-3yr"/>
+                                    <constraint firstAttribute="height" constant="158" id="bo5-2g-6yt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="SoundOnButton@2x.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="SoundOnButtonSelected@2x.png"/>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="toggleSound:" destination="xoB-P7-pdd" eventType="touchUpInside" id="RuY-v4-Hiu"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pvc-V8-bBb" userLabel="Sound Off Button">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="158" id="lOA-cQ-lhi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="SoundOffButton@2x.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="SoundOffButtonSelected@2x.png"/>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="toggleSound:" destination="xoB-P7-pdd" eventType="touchUpInside" id="VMg-yd-eVI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X7I-rW-kNz" userLabel="Clear Trophy Room Button">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="158" type="user" id="cRW-ha-dxZ"/>
+                                    <constraint firstAttribute="width" constant="158" id="rnu-48-qhk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="CleanTrophyRoomButton@2x.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="CleanTrophyRoomButtonSelected@2x.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clearTrophyRoom:" destination="xoB-P7-pdd" eventType="touchUpInside" id="1Rb-k3-4zB"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="SettingsHeader@2x~ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="STq-zs-coQ">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="d51-LF-Pxd"/>
+                                    <constraint firstAttribute="width" constant="220" id="iVR-du-nB6"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ClearTrophyRoom_Text~ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="Z7w-LG-gql"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dNf-kf-cjw" userLabel="Clear Trophy Room Button">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="158" type="user" id="BhU-Pl-U2R"/>
+                                    <constraint firstAttribute="width" constant="158" id="j07-TP-P7z"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="RestorePurchasesButton@2x.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="restorePurchases:" destination="xoB-P7-pdd" eventType="touchUpInside" id="I4l-jB-COJ"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="RestorePurchasesText@2x.png" translatesAutoresizingMaskIntoConstraints="NO" id="5WU-rx-GRo">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="Ghg-Ko-tjn"/>
+                                    <constraint firstAttribute="width" constant="305" id="otf-6M-ljq"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="SoundsHeader@2x~ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="APS-wT-eGv">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="CEV-my-py7"/>
+                                    <constraint firstAttribute="width" constant="129" id="KME-ql-TK5"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Z7w-LG-gql" secondAttribute="trailing" constant="115" id="0VU-SJ-zfk"/>
+                            <constraint firstItem="gdd-mn-J1j" firstAttribute="leading" secondItem="eLn-BP-zQo" secondAttribute="leading" type="default" id="3BH-pX-bdn"/>
+                            <constraint firstAttribute="trailing" secondItem="Pvc-V8-bBb" secondAttribute="trailing" constant="337" id="9eT-ms-jKq"/>
+                            <constraint firstAttribute="bottom" secondItem="dNf-kf-cjw" secondAttribute="bottom" constant="117" type="user" id="EhP-ku-oU5"/>
+                            <constraint firstItem="XGB-ie-c4e" firstAttribute="leading" secondItem="eLn-BP-zQo" secondAttribute="leading" constant="338" id="Ekc-RY-569"/>
+                            <constraint firstItem="XGB-ie-c4e" firstAttribute="top" secondItem="eLn-BP-zQo" secondAttribute="top" constant="244" id="ExD-MH-KDJ"/>
+                            <constraint firstItem="STq-zs-coQ" firstAttribute="centerX" secondItem="gdd-mn-J1j" secondAttribute="centerX" type="default" id="HGJ-eA-BS7"/>
+                            <constraint firstItem="gdd-mn-J1j" firstAttribute="bottom" secondItem="eLn-BP-zQo" secondAttribute="bottom" type="default" id="SWe-ah-CfY"/>
+                            <constraint firstItem="X7I-rW-kNz" firstAttribute="centerX" secondItem="Z7w-LG-gql" secondAttribute="centerX" type="default" id="Vii-oG-s7c"/>
+                            <constraint firstItem="STq-zs-coQ" firstAttribute="top" secondItem="eLn-BP-zQo" secondAttribute="top" constant="121" id="VoU-9J-hap"/>
+                            <constraint firstItem="Pvc-V8-bBb" firstAttribute="top" secondItem="XGB-ie-c4e" secondAttribute="top" type="user" id="XvA-Te-EPL"/>
+                            <constraint firstItem="dNf-kf-cjw" firstAttribute="top" secondItem="5WU-rx-GRo" secondAttribute="bottom" constant="10" type="user" id="ZQl-fZ-ogY"/>
+                            <constraint firstItem="dNf-kf-cjw" firstAttribute="centerY" secondItem="X7I-rW-kNz" secondAttribute="centerY" type="user" id="b0T-pq-XsH"/>
+                            <constraint firstItem="APS-wT-eGv" firstAttribute="centerX" secondItem="STq-zs-coQ" secondAttribute="centerX" type="default" id="bG1-LK-rst"/>
+                            <constraint firstItem="XGB-ie-c4e" firstAttribute="bottom" secondItem="Pvc-V8-bBb" secondAttribute="bottom" type="default" id="gU2-Dw-xRo"/>
+                            <constraint firstItem="tWP-Dd-r6T" firstAttribute="top" secondItem="eLn-BP-zQo" secondAttribute="top" constant="589" id="pUv-NA-QQh"/>
+                            <constraint firstItem="tWP-Dd-r6T" firstAttribute="leading" secondItem="eLn-BP-zQo" secondAttribute="leading" type="default" id="paP-Kx-r7N"/>
+                            <constraint firstItem="5WU-rx-GRo" firstAttribute="leading" secondItem="eLn-BP-zQo" secondAttribute="leading" constant="135" id="qtl-ES-Q2v"/>
+                            <constraint firstItem="APS-wT-eGv" firstAttribute="top" secondItem="STq-zs-coQ" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="uBp-IW-vYW"/>
+                            <constraint firstItem="X7I-rW-kNz" firstAttribute="top" secondItem="Z7w-LG-gql" secondAttribute="bottom" constant="-4" type="user" id="uP7-d7-fuT"/>
+                            <constraint firstAttribute="centerX" secondItem="STq-zs-coQ" secondAttribute="centerX" type="user" id="xmF-2i-Cff"/>
+                            <constraint firstItem="dNf-kf-cjw" firstAttribute="centerX" secondItem="5WU-rx-GRo" secondAttribute="centerX" type="default" id="zRj-7l-ktD"/>
+                        </constraints>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Q2Z-sW-jk9"/>
+                    <connections>
+                        <outlet property="soundOffButton" destination="Pvc-V8-bBb" id="KiD-zt-SIb"/>
+                        <outlet property="soundOnButton" destination="XGB-ie-c4e" id="cFU-lV-VMC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ak5-yJ-qc1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1617" y="1099"/>
+        </scene>
+        <!--Board Builder View Controller-->
+        <scene sceneID="ZGd-1T-0xZ">
+            <objects>
+                <collectionViewController storyboardIdentifier="ESBoardBuilderViewController" autoresizesArchivedViewToFullSize="NO" id="8Nc-rz-Uwi" customClass="ESBoardBuilderViewController" sceneMemberID="viewController">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="0pW-Yc-zfQ">
+                        <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="30" minimumInteritemSpacing="15" id="kAK-bU-8Pr">
+                            <size key="itemSize" width="150" height="150"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="128"/>
+                            <inset key="sectionInset" minX="50" minY="125" maxX="50" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="center" reuseIdentifier="ESTileCell" id="SdZ-pD-ptc">
+                                <rect key="frame" x="50" y="125" width="150" height="150"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XMm-yt-xoa" userLabel="Tile Image View"/>
+                                        <view opaque="NO" alpha="0.0" tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h9N-XU-ay5" userLabel="Completion Mask View">
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <imageView opaque="NO" userInteractionEnabled="NO" alpha="0.0" tag="2" contentMode="scaleToFill" image="tile-checkmark@2x~ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="09V-HW-cTb" userLabel="Check Image View">
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="150" id="1Zj-ts-eNp"/>
+                                                <constraint firstAttribute="width" constant="150" id="tn1-wD-fYK"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="09V-HW-cTb" firstAttribute="bottom" secondItem="h9N-XU-ay5" secondAttribute="bottom" type="default" id="0bF-ub-Lwn"/>
+                                    <constraint firstItem="XMm-yt-xoa" firstAttribute="centerY" secondItem="SdZ-pD-ptc" secondAttribute="centerY" type="default" id="6PI-9e-EGR"/>
+                                    <constraint firstItem="09V-HW-cTb" firstAttribute="leading" secondItem="SdZ-pD-ptc" secondAttribute="leading" type="default" id="94w-03-Ofz"/>
+                                    <constraint firstItem="XMm-yt-xoa" firstAttribute="bottom" secondItem="09V-HW-cTb" secondAttribute="bottom" type="default" id="PmV-UG-ygs"/>
+                                    <constraint firstItem="XMm-yt-xoa" firstAttribute="top" secondItem="h9N-XU-ay5" secondAttribute="top" type="default" id="TDM-cQ-ieJ"/>
+                                    <constraint firstItem="XMm-yt-xoa" firstAttribute="leading" secondItem="SdZ-pD-ptc" secondAttribute="leading" type="default" id="dvL-yB-mU3"/>
+                                    <constraint firstItem="h9N-XU-ay5" firstAttribute="top" secondItem="09V-HW-cTb" secondAttribute="top" type="default" id="eoF-Ik-Rl0"/>
+                                    <constraint firstItem="h9N-XU-ay5" firstAttribute="leading" secondItem="SdZ-pD-ptc" secondAttribute="leading" type="default" id="rhD-8j-p4i"/>
+                                    <constraint firstItem="XMm-yt-xoa" firstAttribute="trailing" secondItem="09V-HW-cTb" secondAttribute="trailing" type="default" id="wAj-7B-tUt"/>
+                                    <constraint firstItem="h9N-XU-ay5" firstAttribute="trailing" secondItem="09V-HW-cTb" secondAttribute="trailing" type="default" id="ycd-WB-91e"/>
+                                </constraints>
+                            </collectionViewCell>
+                        </cells>
+                        <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ESBoardFooterView" id="84l-Ee-r4n">
+                            <rect key="frame" x="0.0" y="275" width="1024" height="128"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Save-Name_icon@2x~ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="W4n-nR-aCJ" userLabel="Save Button Background">
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="286" id="IR0-k9-cDc"/>
+                                    </constraints>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TBg-if-qkP" userLabel="Save Button">
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="49" id="E6C-ZG-wU2"/>
+                                        <constraint firstAttribute="height" constant="60" id="yOt-T0-buv"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                    <state key="normal">
+                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="highlighted">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="saveBoard:" destination="8Nc-rz-Uwi" eventType="touchUpInside" id="V2l-5f-zph"/>
+                                    </connections>
+                                </button>
+                                <textField opaque="NO" clipsSubviews="YES" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name your board" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NkC-jK-Ydj" userLabel="Title Text Field">
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" id="mY4-Uf-m3E"/>
+                                        <constraint firstAttribute="width" constant="203" id="nRF-cp-D9t"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="8Nc-rz-Uwi" id="QmW-Ew-XR1"/>
+                                    </connections>
+                                </textField>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NFa-Ey-M8L" userLabel="Change Cover Button">
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="242" type="user" id="ajq-5v-A3O"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                    <state key="normal" image="ChangeCover~ipad.png">
+                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="highlighted" image="ChangeCoverSelected~ipad.png">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="editThumbnail:" destination="8Nc-rz-Uwi" eventType="touchUpInside" id="yWN-U3-FRJ"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0qf-w2-MgO" userLabel="Back Button">
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="202" type="user" id="jfs-k5-gJv"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                    <state key="normal" image="Back_Arrow~ipad.png">
+                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="highlighted" image="Back_Arrow_Selected~ipad.png">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="back:" destination="8Nc-rz-Uwi" eventType="touchUpInside" id="Vky-9c-ujm"/>
+                                    </connections>
+                                </button>
+                                <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1QB-4J-I9x" userLabel="Thumbnail">
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="85" id="dxk-gH-3eV"/>
+                                        <constraint firstAttribute="width" constant="85" id="eim-gy-pkK"/>
+                                    </constraints>
+                                </imageView>
+                                <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" image="BoardSelectionBackground~ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="fa9-I3-fHT" userLabel="Thumbnail Border">
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="120" id="1RH-63-6IE"/>
+                                        <constraint firstAttribute="height" constant="120" id="FYJ-rh-97l"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="W4n-nR-aCJ" firstAttribute="leading" secondItem="84l-Ee-r4n" secondAttribute="leading" constant="270" id="07J-3m-d20"/>
+                                <constraint firstItem="0qf-w2-MgO" firstAttribute="top" secondItem="84l-Ee-r4n" secondAttribute="top" constant="-29" id="27R-cI-9Vd"/>
+                                <constraint firstItem="0qf-w2-MgO" firstAttribute="leading" secondItem="84l-Ee-r4n" secondAttribute="leading" constant="-9" id="7zb-c3-h7R"/>
+                                <constraint firstItem="NFa-Ey-M8L" firstAttribute="centerY" secondItem="TBg-if-qkP" secondAttribute="centerY" type="default" id="9JE-UK-OQ8"/>
+                                <constraint firstItem="W4n-nR-aCJ" firstAttribute="centerY" secondItem="84l-Ee-r4n" secondAttribute="centerY" type="default" id="BhT-nY-inb"/>
+                                <constraint firstItem="TBg-if-qkP" firstAttribute="leading" secondItem="NkC-jK-Ydj" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="EG1-7E-umD"/>
+                                <constraint firstItem="NkC-jK-Ydj" firstAttribute="centerY" secondItem="TBg-if-qkP" secondAttribute="centerY" type="default" id="HtO-dy-2C6"/>
+                                <constraint firstItem="W4n-nR-aCJ" firstAttribute="trailing" secondItem="TBg-if-qkP" secondAttribute="trailing" type="default" id="Ifm-ax-Tyb"/>
+                                <constraint firstAttribute="trailing" secondItem="NFa-Ey-M8L" secondAttribute="trailing" constant="239" id="SEI-d5-XQp"/>
+                                <constraint firstItem="W4n-nR-aCJ" firstAttribute="bottom" secondItem="TBg-if-qkP" secondAttribute="bottom" type="default" id="SOa-Xd-dNY"/>
+                                <constraint firstItem="1QB-4J-I9x" firstAttribute="centerY" secondItem="NFa-Ey-M8L" secondAttribute="centerY" type="default" id="YjZ-ur-nd0"/>
+                                <constraint firstAttribute="trailing" secondItem="fa9-I3-fHT" secondAttribute="trailing" constant="121" id="hgI-be-Y5P"/>
+                                <constraint firstItem="1QB-4J-I9x" firstAttribute="centerX" secondItem="fa9-I3-fHT" secondAttribute="centerX" type="default" id="plP-GC-bix"/>
+                                <constraint firstItem="W4n-nR-aCJ" firstAttribute="top" secondItem="TBg-if-qkP" secondAttribute="top" type="default" id="zAf-y4-nM9"/>
+                                <constraint firstItem="1QB-4J-I9x" firstAttribute="centerY" secondItem="fa9-I3-fHT" secondAttribute="centerY" type="default" id="zYu-eE-k16"/>
+                            </constraints>
+                        </collectionReusableView>
+                        <connections>
+                            <outlet property="dataSource" destination="8Nc-rz-Uwi" id="PEz-p5-hTQ"/>
+                            <outlet property="delegate" destination="8Nc-rz-Uwi" id="3A8-7R-lUm"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="dSU-F0-HFa"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yb8-vx-UGc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3607" y="1342"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Back_Arrow_Selected~ipad.png" width="202" height="202"/>
+        <image name="Back_Arrow~ipad.png" width="202" height="202"/>
+        <image name="BackgroundImage@2x~ipad.png" width="2048" height="1536"/>
+        <image name="BoardSelectionBackground~ipad.png" width="136" height="136"/>
+        <image name="ChangeCoverSelected~ipad.png" width="242" height="78"/>
+        <image name="ChangeCover~ipad.png" width="242" height="78"/>
+        <image name="CleanTrophyRoomButton@2x.png" width="316" height="316"/>
+        <image name="CleanTrophyRoomButtonSelected@2x.png" width="316" height="316"/>
+        <image name="ClearTrophyRoom_Text~ipad.png" width="333" height="77"/>
+        <image name="Facebook@2x~ipad.png" width="180" height="180"/>
+        <image name="Facebook_Selected@2x~ipad.png" width="180" height="180"/>
+        <image name="GoodJobOverlay@2x~ipad.png" width="2048" height="1536"/>
+        <image name="HappySpoting_text_Icon~ipad.png" width="326" height="66"/>
+        <image name="Help_Selected~ipad.png" width="122" height="122"/>
+        <image name="Help~ipad.png" width="122" height="122"/>
+        <image name="HowToPlay_text_icon~ipad.png" width="248" height="62"/>
+        <image name="ImageSwipe_HowTo~ipad.png" width="315" height="315"/>
+        <image name="JumpingKid_HowTO~ipad.png" width="155" height="166"/>
+        <image name="PlayButton_Selected~ipad.png" width="522" height="522"/>
+        <image name="PlayButton~ipad.png" width="522" height="522"/>
+        <image name="RestorePurchasesButton@2x.png" width="316" height="316"/>
+        <image name="RestorePurchasesText@2x.png" width="610" height="90"/>
+        <image name="Save-Name_icon@2x~ipad.png" width="572" height="120"/>
+        <image name="Select_awardText_Icon@2x~ipad.png" width="343" height="83"/>
+        <image name="SettingsHeader@2x~ipad.png" width="440" height="100"/>
+        <image name="Settings_Selected~ipad.png" width="125" height="125"/>
+        <image name="Settings~ipad.png" width="125" height="125"/>
+        <image name="SoundOffButton@2x.png" width="316" height="316"/>
+        <image name="SoundOffButtonSelected@2x.png" width="316" height="316"/>
+        <image name="SoundOnButton@2x.png" width="316" height="316"/>
+        <image name="SoundOnButtonSelected@2x.png" width="316" height="316"/>
+        <image name="SoundsHeader@2x~ipad.png" width="258" height="86"/>
+        <image name="StarForBoardCompletion@2x~ipad.png" width="60" height="60"/>
+        <image name="TR_PlayButton@2x~ipad.png" width="257" height="337"/>
+        <image name="TR_PlayButtonSelected@2x~ipad.png" width="257" height="337"/>
+        <image name="TrohpyRoom_icon_Selected~ipad.png" width="121" height="121"/>
+        <image name="TrohpyRoom_icon~ipad.png" width="121" height="121"/>
+        <image name="TrophyRoomText_icon@2x~ipad.png" width="809" height="162"/>
+        <image name="TrophySelectionBackground~ipad.png" width="125" height="125"/>
+        <image name="TrophyShelf@2x~ipad.png" width="962" height="710"/>
+        <image name="TutorialText~ipad.png" width="918" height="285"/>
+        <image name="Twitter@2x~ipad.png" width="157" height="157"/>
+        <image name="Twitter_Selected@2x~ipad.png" width="157" height="157"/>
+        <image name="board_has_trophy.png" width="32" height="32"/>
+        <image name="tile-checkmark@2x~ipad.png" width="294" height="294"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="82y-O4-40c"/>
+    </inferredMetricsTieBreakers>
+</document>
