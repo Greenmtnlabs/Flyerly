@@ -252,41 +252,50 @@
 
 -(void)onNext{
     
-    [self storeSceenVarsInDic];
-    
-    [self hideAllControlls];
-    
-    BOOL goToNext = untechable.hasEndDate ? NO : YES;
-    
-    //When we have end date, must check end date is greater then start date
-    if( untechable.hasEndDate == YES )
-    {
-        NSDate *d1 = [untechable.commonFunctions timestampStrToNsDate:untechable.startDate];
-        NSDate *d2 = [untechable.commonFunctions timestampStrToNsDate:untechable.endDate];
+    if ( ![_inputSpendingTimeText.text isEqualToString:@"e.g Spending time with family."] ){
+        [self storeSceenVarsInDic];
         
+        [self hideAllControlls];
         
-        goToNext = [untechable.commonFunctions date1IsSmallerThenDate2:d1 date2:d2];
+        BOOL goToNext = untechable.hasEndDate ? NO : YES;
         
-        if( goToNext == NO ) {
+        //When we have end date, must check end date is greater then start date
+        if( untechable.hasEndDate == YES )
+        {
+            NSDate *d1 = [untechable.commonFunctions timestampStrToNsDate:untechable.startDate];
+            NSDate *d2 = [untechable.commonFunctions timestampStrToNsDate:untechable.endDate];
             
-            [untechable.commonFunctions showAlert:@"Invalid Dates" message:@"End date should be greater then start date."];
+            
+            goToNext = [untechable.commonFunctions date1IsSmallerThenDate2:d1 date2:d2];
+            
+            if( goToNext == NO ) {
+                
+                [untechable.commonFunctions showAlert:@"Invalid Dates" message:@"End date should be greater then start date."];
+            }
+            
         }
         
-    }
-    
-    NSLog(goToNext ? @"goToNext- YES" : @"goToNext- NO");
-
-    
-    if( goToNext ) {
+        NSLog(goToNext ? @"goToNext- YES" : @"goToNext- NO");
         
-        ContactsListControllerViewController *listController = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
-        listController.untechable = untechable;
-        [self.navigationController pushViewController:listController animated:YES];
         
-        /*PhoneSetupController *phoneSetup;
-        phoneSetup = [[PhoneSetupController alloc]initWithNibName:@"PhoneSetupController" bundle:nil];
-        phoneSetup.untechable = untechable;
-        [self.navigationController pushViewController:phoneSetup animated:YES];*/
+        if( goToNext ) {
+            
+            ContactsListControllerViewController *listController = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
+            listController.untechable = untechable;
+            [self.navigationController pushViewController:listController animated:YES];
+            
+            /*PhoneSetupController *phoneSetup;
+             phoneSetup = [[PhoneSetupController alloc]initWithNibName:@"PhoneSetupController" bundle:nil];
+             phoneSetup.untechable = untechable;
+             [self.navigationController pushViewController:phoneSetup animated:YES];*/
+        }
+    }else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Why getting untachable?"
+                                                        message:@"You must need to specify why are you getting untachable.."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
     }
 }
 -(void)storeSceenVarsInDic

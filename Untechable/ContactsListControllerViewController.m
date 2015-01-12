@@ -228,6 +228,7 @@
     SocialnetworkController *socialnetwork;
     socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
     socialnetwork.untechable = untechable;
+    currentlyEditingContacts = [[NSMutableArray alloc] init];
     [self.navigationController pushViewController:socialnetwork animated:YES];
 }
 
@@ -317,6 +318,11 @@
         }
     }
     
+    if ( currentlyEditingContacts.count <= 0 && [customizedContactsString isEqualToString:@""] ){
+        
+        [self resetContactModal:_contactModal];
+    }
+    
     
     if ( ![customizedContactsString isEqualToString:@""] ){
         
@@ -330,13 +336,55 @@
                 &&
                 _contactModal.allPhoneNumbers.count == tempPhonesNumbers.count) {
                 
-                _contactModal.cutomizingStatusArray = [curContactDetails objectForKey:@"cutomizingStatusArray"];
+                NSMutableArray *tempCutomizingStatusArray = [[NSMutableArray alloc] initWithObjects:@"0",@"0",@"0", nil];
+                
+                for ( int j=0 ;j<tempPhonesNumbers.count; j++ ){
+                    
+                    NSMutableArray *phoneNumberDetails = [tempPhonesNumbers objectAtIndex:i];
+                    
+                    if ( [[phoneNumberDetails objectAtIndex:2] isEqualToString:@"1"] ) {
+                        [tempCutomizingStatusArray setObject:@"1" atIndexedSubscript:1];
+                    }
+                    
+                    if ( [[phoneNumberDetails objectAtIndex:3] isEqualToString:@"1"] ) {
+                        [tempCutomizingStatusArray setObject:@"1" atIndexedSubscript:2];
+                    }
+                
+                }
+                
+                NSMutableArray *tempEmails = [curContactDetails objectForKey:@"emailAddresses"];
+                if ( tempEmails.count > 0 ){
+                    [tempCutomizingStatusArray setObject:@"1" atIndexedSubscript:0];
+                }else {
+                    [tempCutomizingStatusArray setObject:@"0" atIndexedSubscript:0];
+                }
+                /*for ( int j=0 ;j<tempEmails.count; j++ ){
+                    
+                    NSMutableArray *phoneNumberDetails = [tempPhonesNumbers objectAtIndex:i];
+                    
+                    if ( [[phoneNumberDetails objectAtIndex:2] isEqualToString:@"1"] ) {
+                        [tempCutomizingStatusArray setObject:@"1" atIndexedSubscript:1];
+                        break;
+                    }
+                    
+                    if ( [[phoneNumberDetails objectAtIndex:3] isEqualToString:@"1"] ) {
+                        [tempCutomizingStatusArray setObject:@"1" atIndexedSubscript:2];
+                        break;
+                    }
+                    
+                }*/
+                
+                //_contactModal.cutomizingStatusArray = [curContactDetails objectForKey:@"cutomizingStatusArray"];
+                //_contactModal.cutomizingStatusArray = tempCutomizingStatusArray;
                 
                 NSNumber *IsCustomizedBoolValue = [curContactDetails objectForKey:@"IsCustomized"];
                 if ( [IsCustomizedBoolValue boolValue] ) {
                     _contactModal.IsCustomized = YES;
                 }
             }
+            
+            // HERE WE PASS DATA TO CELL CLASS
+            [cell setCellObjects:_contactModal :1 :@"InviteFriends"];
         }
     }
     
@@ -360,6 +408,24 @@
     
     return cell;
 }
+- (void)resetContactModal:(ContactsCustomizedModal *)contactModal{
+    
+    contactModal.cutomizingStatusArray = [[NSMutableArray alloc] initWithObjects:@"0",@"0",@"0", nil];
+    
+    for ( int i=0;i<contactModal.allPhoneNumbers.count;i++){
+        NSMutableArray *tempPhoneArray = [contactModal.allPhoneNumbers objectAtIndex:i];
+        [tempPhoneArray setObject:@"0" atIndexedSubscript:2];
+        [tempPhoneArray setObject:@"0" atIndexedSubscript:3];
+    }
+    
+    for (int j=0;j<contactModal.allEmails.count;j++){
+        NSMutableArray *tempEmailArray = [contactModal.allEmails objectAtIndex:j];
+        [tempEmailArray setObject:@"0" atIndexedSubscript:1];
+    }
+    
+    contactModal.customTextForContact = untechable.spendingTimeTxt;
+}
+
 
 - (IBAction)onSearchClick:(UIButton *)sender{
     
@@ -629,7 +695,7 @@
     }
     // Reload table data after all the contacts get loaded
     contactBackupArray = nil;
-    contactBackupArray = contactsArray;
+    contactBackupArray = [[NSMutableArray alloc] initWithArray:contactsArray];
     [_contactsTable performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
 }
 
@@ -642,7 +708,8 @@
     
     NSMutableDictionary *curContactDetails;
     
-    ContactsCustomizedModal *tempModal = [contactsArray objectAtIndex:indexPath.row];
+    contactBackupArray = [[NSMutableArray alloc] initWithArray:contactsArray];
+    ContactsCustomizedModal *tempModal = [contactBackupArray objectAtIndex:indexPath.row];
     
     if ( ![customizedContactsString isEqualToString:@""] ){
         
@@ -662,15 +729,19 @@
                 tempModal.customTextForContact = [curContactDetails objectForKey:@"customTextForContact"];
             
                 detailsController.contactModal = tempModal;
+                break;
                 
             }else {
                 
                 detailsController.contactModal = tempModal;
+                break;
             }
         }
     }else{
         
         detailsController.contactModal = tempModal;
+        
+        
     }
     detailsController.customizedContactsDictionary =  customizedContactsDictionary;
     [self.navigationController pushViewController:detailsController animated:YES];
