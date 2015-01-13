@@ -256,10 +256,11 @@ BOOL adLoaded = false;
                             if (!error) {
                                 NSMutableDictionary *counterDictionary = [object valueForKey:@"estimatedData"];
                                 int refrelCounter = [[counterDictionary objectForKey:@"inviteCounter"] intValue];
-                           
+
+                                //When user invited more then 20 peoples
                                 if ( refrelCounter >= 20 && ![congratulated isEqualToString:@"congratulated"] ) {
-                                    
-                                    NSString *pid  = @"com.flyerly.UnlockSavedFlyers";
+                                    //bundel changed on preston request, see git issue #417
+                                    NSString *pid  = @"com.flyerly.AllDesignBundle";//@"com.flyerly.UnlockSavedFlyers";
                                     
                                     NSString *strWithOutDot = [pid stringByReplacingOccurrencesOfString:@"." withString:@""];
                                     
