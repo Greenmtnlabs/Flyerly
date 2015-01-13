@@ -4493,7 +4493,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
         
         //Here we Pass Param to Share Screen Which use for Sharing
-        [shareviewcontroller.titleView becomeFirstResponder];
+        //[shareviewcontroller.titleView becomeFirstResponder];
         shareviewcontroller.selectedFlyerImage = shareImage;
         shareviewcontroller.flyer = self.flyer;
         shareviewcontroller.imageFileName = shareImagePath;
