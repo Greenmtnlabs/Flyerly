@@ -90,7 +90,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     if ( IS_IPHONE_4 ||  IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
         NSArray *sortedLayers = [flyer allKeys];
-        if ( sortedLayers.count == 2 ){
+        if ( sortedLayers.count >= 2 ){
             
             NSMutableDictionary *dic = [flyer getLayerFromMaster:sortedLayers[1]];
             
@@ -111,6 +111,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     }
                     
                     [dic setObject:@"1" forKey:@"flyerOpenTime"];
+                    
+                    //[flyer saveDic];
+                    // Save flyer to disk
+                    [flyer saveFlyer];
+                    
+                    // Make a history entry if needed.
+                    [flyer addToHistory];
                 }
             }
         }
@@ -125,8 +132,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [super viewDidAppear:animated];
     
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    
-    [self setWaterMarkLayerPosition];
     
     //Render Flyer
     [self renderFlyer];
@@ -297,7 +302,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  */
 -(void)viewDidLoad{
     
-
+    [self setWaterMarkLayerPosition];
     
     if( IS_IPHONE_4 ){
         [[NSBundle mainBundle] loadNibNamed:@"CreateFlyerController-iPhone4" owner:self options:nil];
@@ -4245,12 +4250,13 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
         self.flyer = [[Flyer alloc]initWithPath:currentPath setDirectory:YES];
 
-
-        
         // Remove all sub views
         [self.flyimgView removeAllLayers];
         
         self.flyimgView.addUiImgForDrawingLayer = YES; //AFTER removing all layer set it yes for drawing layers
+        
+        [self setWaterMarkLayerPosition];
+        
         //Here we Render Flyer
         [self renderFlyer];
         self.flyimgView.addUiImgForDrawingLayer = NO; // After rendering all layers set it no
@@ -4276,7 +4282,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     NSArray *fileList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:historyDestinationpath error:nil];
     
-    if (fileList.count >= 1) {
+    if ( fileList.count >= 2 ) {
         
         [rightUndoBarButton setEnabled:YES];
         
