@@ -4365,37 +4365,39 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     helpButton.enabled = NO;
     
     [self showLoadingIndicator];
+
+
     
     //Here we Merge Video for Sharing
     if ([flyer isVideoFlyer]) {
         
         //Here Compare Current Flyer with history Flyer
         if ([self.flyer isVideoMergeProcessRequired]) {
-            
-            userPurchases = [UserPurchases getInstance];
-            userPurchases.delegate = self;
-            
-            //if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ) {
-                if ( [self.interstitialAdd isReady]  && ![self.interstitialAdd hasBeenUsed] ) {
-                    [self.interstitialAdd presentFromRootViewController:self];
-                }
-            //}
-        
-            
             //Background Thread
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-                
-                //panelWillOpen = YES;
-                
                 //Here we Merge All Layers in Video File
                 [self videoMergeProcess];
-                
             });
-        }else {
-            
-            //Here we Open Share Panel for Share Flyer
-            [self openPanel];
         }
+        
+        BOOL canOpenPanel = YES;
+        userPurchases = [UserPurchases getInstance];
+        userPurchases.delegate = self;
+        
+        //if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ) {
+        if ( [self.interstitialAdd isReady]  && ![self.interstitialAdd hasBeenUsed] ) {
+            [self.interstitialAdd presentFromRootViewController:self];
+            canOpenPanel = NO;
+        }
+        //}
+
+        
+        
+        if( canOpenPanel ) {
+            [self openPanel];
+            canOpenPanel = NO;
+        }
+        
     }else {
         
         //Background Thread
