@@ -8,15 +8,15 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clipsSubviews="YES" contentMode="scaleToFill" id="LJY-TL-ETn" customClass="CustomAssets">
-            <rect key="frame" x="0.0" y="0.0" width="217" height="120"/>
+            <rect key="frame" x="0.0" y="0.0" width="118" height="120"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" image="NBUImagePicker.bundle/image_notloaded.png" id="iK6-1m-QTT">
-                    <rect key="frame" x="1" y="1" width="215" height="118"/>
+                    <rect key="frame" x="1" y="1" width="116" height="118"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="NBUImagePicker.bundle/checkmark.png" id="ceQ-L0-lUD">
-                    <rect key="frame" x="86" y="90" width="28" height="28"/>
+                    <rect key="frame" x="82" y="90" width="28" height="28"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ModeVideowithLock.png" id="BWR-F6-zYa">
