@@ -203,10 +203,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 // We've received an Banner ad successfully.
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
     
-    UserPurchases *userPurchases_ = [UserPurchases getInstance];
-    if ( bannerAddClosed == NO && ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
-
+//    UserPurchases *userPurchases_ = [UserPurchases getInstance];
+//    if ( bannerAddClosed == NO && ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"])
     
+    if ( bannerAddClosed == NO && bannerShowed == NO ) {
+        bannerShowed = YES;//keep bolean we have rendered banner or not ?
     
         // Device Check Maintain Size of ScrollView Because Scroll Indicator will show.
         if ( IS_IPHONE_4 ) {
@@ -310,6 +311,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     isNewText   =   NO;
     bannerAddClosed = NO;
+    bannerShowed = NO;
     
     selectedAddMoreLayerTab = -1;
     

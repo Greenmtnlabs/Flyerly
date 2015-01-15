@@ -99,6 +99,7 @@
     BOOL dw_isOldLayer;
     
     BOOL bannerAddClosed;
+    BOOL bannerShowed; //keep bolean we have rendered banner or not ?
 }
 
 @property(nonatomic, strong) GADInterstitial *interstitialAdd;
