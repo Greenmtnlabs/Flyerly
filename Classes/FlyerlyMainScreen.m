@@ -237,12 +237,15 @@ BOOL adLoaded = false;
         
         //Checking if the user is valid or anonymus
         if ([[PFUser currentUser] sessionToken].length != 0) {
-     
+        
+        NSString *username = [[PFUser currentUser] objectForKey:@"username"];
+        //Save congratulation message a/c to username
+        NSString *congratulatedVal  =   [NSString stringWithFormat:@"%@-%@",username, @"congratulated"];
         // Determin if the user has been congratulated?
         NSString *congratulated = [[NSUserDefaults standardUserDefaults] stringForKey:@"congratulated"];
-        
+
         PFQuery *query = [PFUser query];
-        [query whereKey:@"username" equalTo:[[PFUser currentUser] objectForKey:@"username"]];
+        [query whereKey:@"username" equalTo:username];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
                 if (objects.count) {
@@ -258,7 +261,7 @@ BOOL adLoaded = false;
                                 int refrelCounter = [[counterDictionary objectForKey:@"inviteCounter"] intValue];
 
                                 //When user invited more then 20 peoples
-                                if ( refrelCounter >= 20 && ![congratulated isEqualToString:@"congratulated"] ) {
+                                if ( refrelCounter >= 20 && ![congratulated isEqualToString:congratulatedVal] ) {
                                     //bundel changed on preston request, see git issue #417
                                     NSString *pid  = @"com.flyerly.AllDesignBundle";//@"com.flyerly.UnlockSavedFlyers";
                                     
@@ -286,12 +289,12 @@ BOOL adLoaded = false;
                                     [userPurchases setUserPurcahsesFromParse];
                                     [purchseController.buttondelegate productSuccesfullyPurchased:pid];
                                     
-                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Congratulations." message:@"You just unlocked the Saved Flyer Feature by Referring freinds" delegate:self cancelButtonTitle:@"Owsum!" otherButtonTitles:nil, nil];
+                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Congratulations." message:@"You just unlocked the Design Bundle Feature by Referring freinds" delegate:self cancelButtonTitle:@"Owsum!" otherButtonTitles:nil, nil];
                                     
                                     [alert show];
                                     
                                     // Show the greeting before going to the main app.
-                                    [[NSUserDefaults standardUserDefaults] setObject:@"congratulated" forKey:@"congratulated"];
+                                    [[NSUserDefaults standardUserDefaults] setObject:congratulatedVal forKey:@"congratulated"];
                                     
                                 }
                             }

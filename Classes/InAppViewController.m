@@ -86,13 +86,13 @@
                                   
                                   
                               }else if ( refrelCounter <= 0 ){
-                                  cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to flyerly and unlock saved flyers feature for FREE!"];
+                                  cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to flyerly and unlock Design Bundle feature for FREE!"];
                               }
                               else if ( refrelCounter > 0 && refrelCounter < 20 )
                               {
                                   int moreToInvite = 20 - refrelCounter;
                                   //Setting the feature name,feature description values for cell view using plist
-                                  cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite %d more people to flyerly and unlock saved flyers feature for FREE!",moreToInvite];
+                                  cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite %d more people to flyerly and unlock Design Bundle feature for FREE!",moreToInvite];
                                   
                               }
                               
@@ -105,7 +105,7 @@
      }];
     }else {
         
-        cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to flyerly and unlock saved flyers feature for FREE!"];
+        cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to flyerly and unlock Design Bundle feature for FREE!"];
     }
 }
 

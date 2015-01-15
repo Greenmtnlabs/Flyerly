@@ -117,7 +117,7 @@ const int CONTACTS_TAB = 0;
                                       cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"You have sucessfully unlocked saved flyers feature by referring friends.Enjoy!"];
                                       
                                   }else if ( refrelCounter <= 0 ){
-                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to flyerly and unlock saved flyers feature for FREE!"];
+                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to flyerly and unlock Design Bundle feature for FREE!"];
                                   }
                                   else if ( refrelCounter > 0 && refrelCounter < 20 )
                                   {
@@ -136,7 +136,7 @@ const int CONTACTS_TAB = 0;
          }];
     }else {
         
-        cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to flyerly and unlock saved flyers feature for FREE!"];
+        cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to flyerly and unlock Design Bundle feature for FREE!"];
     }
     
     
