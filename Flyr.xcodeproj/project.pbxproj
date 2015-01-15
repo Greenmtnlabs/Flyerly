@@ -1358,6 +1358,7 @@
 		65E2615D171C2FA800C485B5 /* InviteFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E2615C171C2FA800C485B5 /* InviteFriendsController.m */; };
 		65F1BEAE173AA13400EE6F9F /* twitter_share_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE8B173AA13400EE6F9F /* twitter_share_saved@2x.png */; };
 		65F41C8B173BDC03000BA8CB /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F41C8A173BDC02000BA8CB /* libxml2.2.dylib */; };
+		C32139D61A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32139D51A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib */; };
 		E8A7347D1092CFF300661AAD /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A7347B1092CFF300661AAD /* ShareViewController.m */; };
 		E8A7347E1092CFF300661AAD /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8A7347C1092CFF300661AAD /* ShareViewController.xib */; };
 		E8E424ACA7CB4913890F4F3B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26D73E02307543D994C6C8BE /* libPods.a */; };
@@ -2970,6 +2971,7 @@
 		65F41C8A173BDC02000BA8CB /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		803DE6526A023A0BC5462D37 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Flyr-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Flyr-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		C32139D51A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CropVideoViewController-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		E8A7347A1092CFF300661AAD /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		E8A7347B1092CFF300661AAD /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		E8A7347C1092CFF300661AAD /* ShareViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
@@ -5224,6 +5226,7 @@
 		49F109CD192C78F6002B0CD4 /* CropVideo */ = {
 			isa = PBXGroup;
 			children = (
+				C32139D51A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib */,
 				49F109CE192C7926002B0CD4 /* CropVideoViewController.h */,
 				49F109CF192C7926002B0CD4 /* CropVideoViewController.m */,
 				49F109D0192C7926002B0CD4 /* CropVideoViewController.xib */,
@@ -5989,6 +5992,7 @@
 				246EF509193C515D004539B2 /* emoticon43@2x.png in Resources */,
 				65C1A41B1742516D00947D5E /* Template3@2x.jpg in Resources */,
 				246EF51F193C515D004539B2 /* emoticon63@2x.png in Resources */,
+				C32139D61A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib in Resources */,
 				2421849A194B4AEC00FDDA97 /* emoticon139@2x.png in Resources */,
 				249F1FA7193F55D50072835E /* cell_bg_first@2x.png in Resources */,
 				65C1A41C1742516D00947D5E /* Template4@2x.jpg in Resources */,
