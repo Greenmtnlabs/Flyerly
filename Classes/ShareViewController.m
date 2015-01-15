@@ -790,6 +790,7 @@
         
     }
     
+    //Here we set the set selected state of buttons.
     [self setSocialStatus];
     
     
