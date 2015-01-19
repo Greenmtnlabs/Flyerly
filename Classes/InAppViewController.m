@@ -82,7 +82,7 @@
                               if ( refrelCounter >= 20 )
                               {
                                   //Setting the feature name,feature description values for cell view using plist
-                                  cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"You have sucessfully unlocked saved flyers feature by refreing friends.Enjoy!"];
+                                  cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"You have sucessfully unlocked Design Bundle feature by refreing friends.Enjoy!"];
                                   
                                   
                               }else if ( refrelCounter <= 0 ){
