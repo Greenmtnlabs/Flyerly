@@ -4388,58 +4388,40 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             });
         }
         
-        BOOL canOpenPanel = YES;
-        userPurchases = [UserPurchases getInstance];
-        userPurchases.delegate = self;
-        
-        //if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ) {
-        if ( [self.interstitialAdd isReady]  && ![self.interstitialAdd hasBeenUsed] ) {
-            [self.interstitialAdd presentFromRootViewController:self];
-            canOpenPanel = NO;
-        }
-        //}
-
-        
-        
-        if( canOpenPanel ) {
-            [self openPanel];
-            canOpenPanel = NO;
-        }
-        
-    }else {
-        
-        //Background Thread
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            
-            if ( [[PFUser currentUser] sessionToken] ) {
-                //UserPurchases *userPurchases_ = [UserPurchases getInstance];
-                
-                //if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ) {
-                    if ( [self.interstitialAdd isReady]  && ![self.interstitialAdd hasBeenUsed] ) {
-                        
-                        dispatch_async( dispatch_get_main_queue(), ^{
-                            [self.interstitialAdd presentFromRootViewController:self];
-                        });
-                        return;
-                    }
-                
-                //}
-            }
-            
-            //Here we remove Borders from layer if user touch any layer
-            [self.flyimgView layerStoppedEditing:currentLayer];
-            
-            //Here we take Snap shot of Flyer and
-            //Flyer Add to Gallery if user allow to Access there photos
-            [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
-            
-            dispatch_async( dispatch_get_main_queue(), ^{
-                //Here we Open Share Panel for Share Flyer
-                [self openPanel];
-            });
-            
-        });
     }
+    
+    //Here we remove Borders from layer if user touch any layer
+    [self.flyimgView layerStoppedEditing:currentLayer];
+    
+    //Here we take Snap shot of Flyer and
+    //Flyer Add to Gallery if user allow to Access there photos
+    [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
+
+    //Background Thread
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        
+        if ( [[PFUser currentUser] sessionToken] ) {
+            //UserPurchases *userPurchases_ = [UserPurchases getInstance];
+            
+            //if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ) {
+                if ( [self.interstitialAdd isReady]  && ![self.interstitialAdd hasBeenUsed] ) {
+                    
+                    dispatch_async( dispatch_get_main_queue(), ^{
+                        [self.interstitialAdd presentFromRootViewController:self];
+                    });
+                    return;
+                }
+            
+            //}
+        }
+        
+        //If pennel didn't open [ and return-ed ] then open the sharing pannel
+        dispatch_async( dispatch_get_main_queue(), ^{
+            //Here we Open Share Panel for Share Flyer
+            [self openPanel];
+        });
+    });
+    
 }
 
 /*
