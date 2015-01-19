@@ -4374,7 +4374,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     [self showLoadingIndicator];
 
-
+    //Here we remove Borders from layer if user touch any layer
+    [self.flyimgView layerStoppedEditing:currentLayer];
     
     //Here we Merge Video for Sharing
     if ([flyer isVideoFlyer]) {
@@ -4385,17 +4386,18 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
                 //Here we Merge All Layers in Video File
                 [self videoMergeProcess];
+                
+                //Here we take Snap shot of Flyer and
+                //Flyer Add to Gallery if user allow to Access there photos
+                [flyer setUpdatedSnapshotWithImage:[flyer getSharingVideoCover]];
             });
         }
-        
+    } else{
+        //Here we take Snap shot of Flyer and
+        //Flyer Add to Gallery if user allow to Access there photos
+        [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
     }
     
-    //Here we remove Borders from layer if user touch any layer
-    [self.flyimgView layerStoppedEditing:currentLayer];
-    
-    //Here we take Snap shot of Flyer and
-    //Flyer Add to Gallery if user allow to Access there photos
-    [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
 
     //Background Thread
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
