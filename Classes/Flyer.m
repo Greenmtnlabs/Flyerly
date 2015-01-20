@@ -21,8 +21,8 @@ NSString * const TEXTBORDERCOLOR = @"0.000000, 0.000000, 0.000000";
 NSString * TEXTxPOS = @"15.000000";
 NSString * TEXTyPOS = @"15.000000";
 
-NSString * const TEXTWIDTH = @"280.000000";
-NSString * const TEXTHEIGHT = @"280.000000";
+NSString * TEXTWIDTH = @"280.000000";
+NSString * TEXTHEIGHT = @"280.000000";
 
 NSString * const CLIPARTFONTSIZE = @"60.000000";
 NSString * const CLIPARTxPOS = @"5.000000";
@@ -45,10 +45,16 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
  */
 -(id)initWithPath:(NSString *)flyPath setDirectory:(BOOL)setDirectory {
     
-    if (IS_IPHONE_6) {
-        TEXTxPOS = @"45.000000";
-    } else if (IS_IPHONE_6_PLUS) {
-        TEXTxPOS = @"50.000000";
+    //Change size and position of textview
+    if ( IS_IPHONE_6 ){
+        TEXTxPOS = @"25.000000";
+        TEXTWIDTH = @"315.000000";
+        TEXTHEIGHT = @"315.000000";
+        
+    } else if ( IS_IPHONE_6_PLUS ){
+        TEXTxPOS = @"15.000000";
+        TEXTWIDTH = @"370.000000";
+        TEXTHEIGHT = @"360.000000";
     }
     
     self = [super init];
