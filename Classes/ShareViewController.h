@@ -68,7 +68,7 @@
 @property(nonatomic,strong) NSString *Yvalue;
 @property(nonatomic,strong) UIBarButtonItem *rightUndoBarButton;
 @property(nonatomic,strong) UIButton *shareButton;
-@property(nonatomic,strong) UIButton *helpButton;
+@property(nonatomic,strong) UIButton *backButton, *helpButton;
 
 @property(nonatomic,strong) IBOutlet UIButton *flyerShareType;
 @property(nonatomic,strong) IBOutlet UIButton *star1;

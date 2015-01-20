@@ -66,6 +66,8 @@
     LayerTileButton *editButtonGlobal;
     UIBarButtonItem *rightUndoBarButton;
     UIButton *shareButton;
+
+    UIButton *backButton;
     UIButton *helpButton;
     
     UITextView *lastTextView;

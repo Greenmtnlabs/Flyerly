@@ -29,7 +29,6 @@
 
 @interface CreateFlyerController () {
     CameraViewController *nbuCamera;
-    UIButton *backButton;
     ResourcesView *emoticonsView,*clipartsView,*fontsView,*textBordersView,*drawingView;
     NSString *fontsViewResourcePath,*clipartsViewResourcePath,*emoticonsViewResourcePath,*drawingViewResourcePath;
     NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
@@ -767,6 +766,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         rightUndoBarButton.enabled = YES;
         shareButton.enabled = YES;
+        
+        backButton.enabled = YES;
         helpButton.enabled = YES;
         return;
     }
@@ -836,6 +837,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     self.onFlyerBack( @"" );
                 });
             }
+
+            //Always update flyer screenshot for video flyer [ I did this due to Git# 430 ]
+            [flyer setUpdatedSnapshotWithImage:[flyer getSharingVideoCover]];
             
         } else {
             // Here we take Snap shot of Flyer and
@@ -3087,9 +3091,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     else if(alertView == signInAlert && buttonIndex == 0) {
         
         // Enable  Buttons
+        backButton.enabled = YES;
+        helpButton.enabled = YES;
+        
         rightUndoBarButton.enabled = YES;
         shareButton.enabled = YES;
-        helpButton.enabled = YES;
         
         [self hideLoadingIndicator];
         
@@ -4370,7 +4376,11 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     // Disable  Buttons
     rightUndoBarButton.enabled = NO;
     shareButton.enabled = NO;
+    
+    
+    backButton.enabled = NO;
     helpButton.enabled = NO;
+
     
     [self showLoadingIndicator];
 
@@ -4494,6 +4504,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         shareviewcontroller.rightUndoBarButton = rightUndoBarButton;
         shareviewcontroller.shareButton = shareButton;
         shareviewcontroller.helpButton = helpButton;
+        shareviewcontroller.backButton = backButton;
         if( [shareviewcontroller.titleView.text isEqualToString:@"Flyer"] ) {
             shareviewcontroller.titleView.text = [flyer getFlyerTitle];
         }
