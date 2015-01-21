@@ -44,7 +44,7 @@
     
     
     FBRequest *request = [[FBRequest alloc] initWithSession:[FBSession activeSession]
-                                                   graphPath:@"me/friends"
+                                                   graphPath:@"me/taggable_friends"
                             parameters:@{@"fields":@"name,gender,picture.height(72).width(72).type(small)"}
                                                   HTTPMethod:nil];
     
@@ -70,9 +70,13 @@
 	[self.pendingConnections removeObject:connection];
     
 	if (error) {
-        
+        /*
         if ([self.shareDelegate respondsToSelector:@selector(sharer:failedWithError:shouldRelogin:)])
             [self.shareDelegate sharer:self failedWithError:error shouldRelogin:NO];
+        else
+            */
+            self.friendsList = result;
+       		[self sendDidFinishWithResponse:result];
         
 	}else{
         
