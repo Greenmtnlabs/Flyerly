@@ -27,19 +27,32 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 
 #pragma mark Application lifecycle
-
-
+/* 
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    // Start the long-running task and return immediately.
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self goingToBg];
+    });
+}
+ */
 
 - (void)applicationWillResignActive:(UIApplication *)application {
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        [self goingToBg];
+    });
+}
 
+-(void)goingToBg
+{
     if ([[self.navigationController topViewController] isKindOfClass:[CreateFlyerController class]]) {
         
         //Here we Save Data for Future Error Handling
         NSArray *views = [self.navigationController viewControllers];
         CreateFlyerController *createView;
-
+        
         for (int i =0 ; i <views.count; i++) {
-
+            
             if ([[views objectAtIndex:i] isKindOfClass:[CreateFlyerController class]]) {
                 createView = [views objectAtIndex:i];
             }
@@ -57,36 +70,20 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
             
             //Here Compare Current Flyer with history Flyer
             if ([createView.flyer isVideoMergeProcessRequired]) {
-                
-                // Main Thread
-                dispatch_async( dispatch_get_main_queue(), ^{
-                    
                     //Here we Merge All Layers in Video File
                     [createView videoMergeProcess];
-                    
-                });
-                
             }
             
         }else {
-            
-            //Background Thread
-            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-                
                 //Here we remove Borders from layer if user touch any layer
                 [createView.flyimgView layerStoppedEditing:createView.currentLayer];
                 
                 //Here we take Snap shot of Flyer and
                 //Flyer Add to Gallery if user allow to Access there photos
-                //[createView.flyer setUpdatedSnapshotWithImage:[createView getFlyerSnapShot]];
-                
-            });
-            
+                [createView.flyer setUpdatedSnapshotWithImage:[createView getFlyerSnapShot]];
         }
-
-        
     }
-    
+
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
