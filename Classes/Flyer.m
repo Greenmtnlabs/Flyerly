@@ -47,13 +47,13 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     
     //Change size and position of textview
     if ( IS_IPHONE_6 ){
-        TEXTxPOS = @"25.000000";
-        TEXTWIDTH = @"315.000000";
+        TEXTxPOS = @"10.000000";
+        TEXTWIDTH = @"345.000000";
         TEXTHEIGHT = @"315.000000";
         
     } else if ( IS_IPHONE_6_PLUS ){
-        TEXTxPOS = @"15.000000";
-        TEXTWIDTH = @"370.000000";
+        TEXTxPOS = @"5.000000";
+        TEXTWIDTH = @"390.000000";
         TEXTHEIGHT = @"360.000000";
     }
     
