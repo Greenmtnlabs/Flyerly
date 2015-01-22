@@ -3361,7 +3361,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     NSMutableDictionary *textDetailDictionary = [flyer getLayerFromMaster:currentLayer];
     
-    if( isNewText == YES ) {
+    if( isNewText == YES || textDetailDictionary[@"tx"] == nil ) {
         float newX = 0.0, newY = 0.0;
         CGSize txtSize = [lastTextView.text sizeWithAttributes: @{NSFontAttributeName:lastTextView.font}];
         
