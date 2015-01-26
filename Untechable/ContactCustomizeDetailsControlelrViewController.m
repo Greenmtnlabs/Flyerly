@@ -168,8 +168,20 @@
         static NSString *cellId = @"FirstTableViewCell";
         FirstTableViewCell *cell = (FirstTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
         
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"FirstTableViewCell" owner:self options:nil];
-        cell = (FirstTableViewCell *)[nib objectAtIndex:0];
+        if ( cell == nil ) {
+            
+            if( IS_IPHONE_5 ){
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"FirstTableViewCell" owner:self options:nil];
+                cell = (FirstTableViewCell *)[nib objectAtIndex:0];
+            } else if ( IS_IPHONE_6 ){
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"FirstTableViewCell-iPhone6" owner:self options:nil];
+                cell = (FirstTableViewCell *)[nib objectAtIndex:0];
+            } else if ( IS_IPHONE_6_PLUS ) {
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"FirstTableViewCell-iPhone6-Plus" owner:self options:nil];
+                cell = (FirstTableViewCell *)[nib objectAtIndex:0];
+            }
+        }
+        
         
         [cell setCellValues:contactModal.name ContactImage:contactModal.img];
         
@@ -178,9 +190,20 @@
         
         static NSString *cellId = @"CustomText";
         CustomTextTableViewCell *cell = (CustomTextTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
-        
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CustomTextTableViewCell" owner:self options:nil];
-        cell = (CustomTextTableViewCell *)[nib objectAtIndex:0];
+    
+        if ( cell == nil ) {
+            
+            if( IS_IPHONE_5 ){
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CustomTextTableViewCell" owner:self options:nil];
+                cell = (CustomTextTableViewCell *)[nib objectAtIndex:0];
+            } else if ( IS_IPHONE_6 ){
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CustomTextTableViewCell-iPhone6" owner:self options:nil];
+                cell = (CustomTextTableViewCell *)[nib objectAtIndex:0];
+            } else if ( IS_IPHONE_6_PLUS ) {
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CustomTextTableViewCell-iPhone6-Plus" owner:self options:nil];
+                cell = (CustomTextTableViewCell *)[nib objectAtIndex:0];
+            }
+        }
         
         [cell.customText setDelegate:self];
         
@@ -199,9 +222,19 @@
         static NSString *cellId = @"PhoneNumberCell";
         PhoneNumberCell *cell = (PhoneNumberCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
         
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PhoneNumberCell" owner:self options:nil];
-        
-        cell = (PhoneNumberCell *)[nib objectAtIndex:0];
+        if ( cell == nil ) {
+            
+            if( IS_IPHONE_5 ){
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PhoneNumberCell" owner:self options:nil];
+                cell = (PhoneNumberCell *)[nib objectAtIndex:0];
+            } else if ( IS_IPHONE_6 ){
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PhoneNumberCell-iPhone6" owner:self options:nil];
+                cell = (PhoneNumberCell *)[nib objectAtIndex:0];
+            } else if ( IS_IPHONE_6_PLUS ) {
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PhoneNumberCell-iPhone6-Plus" owner:self options:nil];
+                cell = (PhoneNumberCell *)[nib objectAtIndex:0];
+            }
+        }
         
         NSMutableArray *numberWithStatus = [editingPhonesWithStatus objectForKey:indexPath];
         
@@ -236,8 +269,19 @@
         static NSString *cellId = @"EmailCell";
         EmailCell *cell = (EmailCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
         
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmailCell" owner:self options:nil];
-        cell = (EmailCell *)[nib objectAtIndex:0];
+        if ( cell == nil ) {
+            
+            if( IS_IPHONE_5 ){
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmailCell" owner:self options:nil];
+                cell = (EmailCell *)[nib objectAtIndex:0];
+            } else if ( IS_IPHONE_6 ){
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmailCell-iPhone6" owner:self options:nil];
+                cell = (EmailCell *)[nib objectAtIndex:0];
+            } else if ( IS_IPHONE_6_PLUS ) {
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmailCell-iPhone6-Plus" owner:self options:nil];
+                cell = (EmailCell *)[nib objectAtIndex:0];
+            }
+        }
         
         [cell.emailButton addTarget:self
                             action:@selector(emailButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
@@ -470,9 +514,9 @@ shouldChangeTextInRange:(NSRange)range
     
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 0)];
     
-    UIColor *untachableGreen = [UIColor colorWithRed:(66/255.0) green:(247/255.0) blue:(206/255.0) alpha:1];
+    UIColor *untechableGreen = [UIColor colorWithRed:(66/255.0) green:(247/255.0) blue:(206/255.0) alpha:1];
     
-    headerView.backgroundColor = untachableGreen;
+    headerView.backgroundColor = untechableGreen;
     
     return headerView;
 }

@@ -290,8 +290,8 @@
              [self.navigationController pushViewController:phoneSetup animated:YES];*/
         }
     }else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Why getting untachable?"
-                                                        message:@"You must need to specify why are you getting untachable.."
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Why getting Untechable?"
+                                                        message:@"You must need to specify why are you getting Untechable..."
                                                        delegate:nil
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];

@@ -125,7 +125,7 @@
 
     _table01Data = [[NSMutableArray alloc] init];
 
-    if( IS_IPHONE_5 ){
+    if( IS_IPHONE_5 || IS_IPHONE_4){
         NSLog(@"iPhone 5/5s");
         [_table01Data addObject:@{@"type":@"image", @"imgPath":@"icloudIcon.png", @"text":@""}];
         [_table01Data addObject:@{@"type":@"image", @"imgPath":@"exchangeIcon.png", @"text":@""}];
@@ -145,6 +145,17 @@
         [_table01Data addObject:@{@"type":@"image", @"imgPath":@"aolIcon@2x.png", @"text":@""}];
         [_table01Data addObject:@{@"type":@"image", @"imgPath":@"outlookIcon@2x.png", @"text":@""}];
         [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-other@2x.png", @"text":@""}];
+    }
+    
+    if ( IS_IPHONE_6_PLUS ){
+        NSLog(@"iPhone 6");
+        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"icloudIcon@3x.png", @"text":@""}];
+        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"exchangeIcon@3x.png", @"text":@""}];
+        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"GoogleIcon@3x.png", @"text":@""}];
+        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"YahooIcon@3x.png", @"text":@""}];
+        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"aolIcon@3x.png", @"text":@""}];
+        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"outlookIcon@3x.png", @"text":@""}];
+        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-other@3x.png", @"text":@""}];
     }
 }
 
@@ -758,8 +769,23 @@
             static NSString *cellId = @"SSLCell";
             SSLCell *cell = (SSLCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
             
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SSLCell" owner:self options:nil];
-            cell = (SSLCell *)[nib objectAtIndex:0];
+            if (cell == nil)
+            {
+                if( IS_IPHONE_5 ){
+                    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SSLCell" owner:self options:nil];
+                    cell = (SSLCell *)[nib objectAtIndex:0];
+                } else if ( IS_IPHONE_6 ){
+                    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SSLCell-iPhone6" owner:self options:nil];
+                    cell = (SSLCell *)[nib objectAtIndex:0];
+                } else if ( IS_IPHONE_6_PLUS ) {
+                    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SSLCell-iPhone6-Plus" owner:self options:nil];
+                    cell = (SSLCell *)[nib objectAtIndex:0];
+                } else {
+                    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SSLCell" owner:self options:nil];
+                    cell = (SSLCell *)[nib objectAtIndex:0];
+                }
+                
+            }
             
             cell.sslSwitch.tag = indexPath.section;
             [cell.sslSwitch addTarget:self
@@ -791,8 +817,22 @@
                 static NSString *cellId = @"ServerAccountDetailsViewCell";
                 ServerAccountDetailsViewCell *cell = (ServerAccountDetailsViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
                 
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ServerAccountDetailsViewCell" owner:self options:nil];
-                cell = (ServerAccountDetailsViewCell *)[nib objectAtIndex:0];
+                if (cell == nil)
+                {
+                    if( IS_IPHONE_5 ){
+                        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ServerAccountDetailsViewCell" owner:self options:nil];
+                        cell = (ServerAccountDetailsViewCell *)[nib objectAtIndex:0];
+                    } else if ( IS_IPHONE_6 ){
+                        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ServerAccountDetailsViewCell-iPhone6" owner:self options:nil];
+                        cell = (ServerAccountDetailsViewCell *)[nib objectAtIndex:0];
+                    } else if ( IS_IPHONE_6_PLUS ) {
+                        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ServerAccountDetailsViewCell-iPhone6-Plus" owner:self options:nil];
+                        cell = (ServerAccountDetailsViewCell *)[nib objectAtIndex:0];
+                    } else {
+                        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ServerAccountDetailsViewCell" owner:self options:nil];
+                        cell = (ServerAccountDetailsViewCell *)[nib objectAtIndex:0];
+                    }
+                }
                 
                 [cell setCellValueswithInputLabel:[inputLabel objectAtIndex:indexPath.row] FeildPlaceholder:[inputFeildPlaceHolder objectAtIndex:indexPath.row]];
                 
@@ -818,9 +858,23 @@
                 static NSString *cellId = @"ServerAccountDetailsViewCell";
                 ServerAccountDetailsViewCell *cell = (ServerAccountDetailsViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
                 
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ServerAccountDetailsViewCell" owner:self options:nil];
-                cell = (ServerAccountDetailsViewCell *)[nib objectAtIndex:0];
-                
+                if (cell == nil)
+                {
+                    if( IS_IPHONE_5 ){
+                        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ServerAccountDetailsViewCell" owner:self options:nil];
+                        cell = (ServerAccountDetailsViewCell *)[nib objectAtIndex:0];
+                    } else if ( IS_IPHONE_6 ){
+                        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ServerAccountDetailsViewCell-iPhone6" owner:self options:nil];
+                        cell = (ServerAccountDetailsViewCell *)[nib objectAtIndex:0];
+                    } else if ( IS_IPHONE_6_PLUS ) {
+                        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ServerAccountDetailsViewCell-iPhone6-Plus" owner:self options:nil];
+                        cell = (ServerAccountDetailsViewCell *)[nib objectAtIndex:0];
+                    } else {
+                        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ServerAccountDetailsViewCell" owner:self options:nil];
+                        cell = (ServerAccountDetailsViewCell *)[nib objectAtIndex:0];
+                    }
+                }
+            
                 [cell setCellValueswithInputLabel:[inputLabel objectAtIndex:indexPath.row] FeildPlaceholder:[inputFeildPlaceHolder objectAtIndex:indexPath.row]];
                 
                 cell.inputFeild.delegate = self;
@@ -850,13 +904,26 @@
         
         if (cell == nil)
         {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmailTableViewCell" owner:self options:nil];
-            cell = (EmailTableViewCell *)[nib objectAtIndex:0];
+            if( IS_IPHONE_5 ){
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmailTableViewCell" owner:self options:nil];
+                cell = (EmailTableViewCell *)[nib objectAtIndex:0];
+            } else if ( IS_IPHONE_6 ){
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmailTableViewCell-iPhone6" owner:self options:nil];
+                cell = (EmailTableViewCell *)[nib objectAtIndex:0];
+            } else if ( IS_IPHONE_6_PLUS ) {
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmailTableViewCell-iPhone6-Plus" owner:self options:nil];
+                cell = (EmailTableViewCell *)[nib objectAtIndex:0];
+            } else {
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmailTableViewCell" owner:self options:nil];
+                cell = (EmailTableViewCell *)[nib objectAtIndex:0];
+            }
+            
         }
         
         NSString *imgPath = [[_table01Data objectAtIndex:indexPath.row] objectForKey:@"imgPath"];
         cell.button1.tag = indexPath.row;
-        [cell.button1 setBackgroundImage:[UIImage imageNamed:imgPath] forState:UIControlStateNormal];
+        [cell.button1 setImage:[UIImage imageNamed:imgPath] forState:UIControlStateNormal];
+        //[cell.button1 setBackgroundImage:[UIImage imageNamed:imgPath] forState:UIControlStateNormal];
         [cell.button1 addTarget:self action:@selector(clickedOnEmailOption:) forControlEvents:UIControlEventTouchUpInside];
         
         return cell;

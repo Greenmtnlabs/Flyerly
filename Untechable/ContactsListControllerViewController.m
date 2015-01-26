@@ -267,10 +267,7 @@
         
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ContactListCell" owner:self options:nil];
         cell = (ContactListCell *)[nib objectAtIndex:0];
-        
-        //cell.contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-        //[cell setFrame:newFrame];
-        
+    
         if( IS_IPHONE_5 ){
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ContactListCell" owner:self options:nil];
             cell = (ContactListCell *)[nib objectAtIndex:0];
