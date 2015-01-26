@@ -11,12 +11,15 @@
 #import "Untechable.h"
 #import "BSKeyboardControls.h"
 
-@interface AddUntechableController : UIViewController < UITextViewDelegate, BSKeyboardControlsDelegate, ABPeoplePickerNavigationControllerDelegate >
+@interface AddUntechableController : UIViewController < UITextViewDelegate, BSKeyboardControlsDelegate, ABPeoplePickerNavigationControllerDelegate , UIPickerViewDataSource , UIPickerViewDelegate>
 {
     UILabel *titleLabel;
     UIButton *helpButton;
     UIButton *backButton;
     UIButton *nextButton;
+    
+    UIButton *openPickerButton;
+    
     UIColor *defGreen;//GREEN
     UIColor *defGray;//GRAY
     NSString *pickerOpenFor;

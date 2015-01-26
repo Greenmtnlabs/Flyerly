@@ -16,7 +16,7 @@
 
 @interface AddUntechableController (){
     
-    
+    NSArray *_pickerData;
     
 }
 
@@ -37,7 +37,9 @@
 @property (strong, nonatomic) IBOutlet UIDatePicker *picker;
 @property (strong, nonatomic) IBOutlet UIButton *pickerCloseBtn;
 
+@property (strong, nonatomic) IBOutlet UIPickerView *spendingTimeTextPicker;
 
+@property (strong, nonatomic) IBOutlet UIButton *openPickerButton;
 
 @property (nonatomic, strong) BSKeyboardControls *keyboardControls;
 
@@ -70,6 +72,15 @@
     [self updateUI];
     
     [self showHideDateTimePicker:NO];
+    
+    [self showHideTextPicker:NO];
+    
+    // Initialize Data
+    _pickerData = @[@"Spending time with family.", @"Driving.", @"Spending time outdoors.", @"At the beach.", @"Enjoying the holidays.", @"Just needed a break.", @"Running.", @"On vacation.", @"Running.", @"Finding my inner peace.", @"Removing myself from technology."];
+    
+    // Connect data
+    _spendingTimeTextPicker.dataSource = self;
+    _spendingTimeTextPicker.delegate = self;
     
     self.picker.datePickerMode = UIDatePickerModeDateAndTime;
     //WHEN any of the date is similer to current date time, the show NOW in date's area
@@ -308,9 +319,18 @@
 
 -(void) hideAllControlls {
     [self showHideDateTimePicker:NO];
+    [self showHideTextPicker:NO];
     [_inputSpendingTimeText resignFirstResponder];
 }
 
+#pragma mark- Select text
+//when user tapes on select text
+-(IBAction)selectText:(id)sender{
+    
+    [self hideAllControlls];
+    
+    [self showHideTextPicker:YES];
+}
 
 #pragma mark -  Select Date
 //when user tap on dates
@@ -385,10 +405,36 @@
 
 - (IBAction)closeDateTimePicker:(id)sender {
    [self showHideDateTimePicker:NO];
+    [self showHideTextPicker:NO];
 }
+
+-(void)showHideTextPicker:(BOOL)showHide{
+    
+    if ( IS_IPHONE_4 || IS_IPHONE_5 ){
+        [_pickerCloseBtn setFrame:CGRectMake(280, 80, 120, 120)];
+    }else if ( IS_IPHONE_6 ){
+        [_pickerCloseBtn setFrame:CGRectMake(290, 130, 120, 120)];
+    }else if (IS_IPHONE_6_PLUS){
+        [_pickerCloseBtn setFrame:CGRectMake(330, 150, 120, 120)];
+    }
+    
+    float alpha = (showHide) ? 1.0 : 0.0;
+    
+    _spendingTimeTextPicker.alpha = alpha;
+    _pickerCloseBtn.alpha = alpha;
+}
+
 
 -(void)showHideDateTimePicker:(BOOL)showHide{
 
+    if ( IS_IPHONE_4 || IS_IPHONE_5 ){
+        [_pickerCloseBtn setFrame:CGRectMake(245, 382, 76, 33)];
+    }else if ( IS_IPHONE_6 ){
+        [_pickerCloseBtn setFrame:CGRectMake(300, 382, 76, 33)];
+    }else if (IS_IPHONE_6_PLUS){
+        [_pickerCloseBtn setFrame:CGRectMake(330, 382, 76, 33)];
+    }
+    
     float alpha = (showHide) ? 1.0 : 0.0;
     
     self.picker.alpha = alpha;
@@ -550,7 +596,7 @@
 
 -(void)textViewDidChange:(UITextView *)textView
 {
-    int len = textView.text.length;
+    int len = (int)textView.text.length;
     _char_Limit.text=[NSString stringWithFormat:@"%i",140-len];
 }
 
@@ -578,6 +624,31 @@
     [textView resignFirstResponder];
 }
 
+// The number of columns of data
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+// The number of rows of data
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return _pickerData.count;
+}
+
+// The data to return for the row and component (column) that's being passed in
+- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return _pickerData[row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    
+    _inputSpendingTimeText.text = [_pickerData objectAtIndex:row];
+    
+    int len = (int)_inputSpendingTimeText.text.length;
+    _char_Limit.text=[NSString stringWithFormat:@"%i",140-len];
+}
 /*
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
     // Prevent crashing undo bug – see note below.
@@ -591,4 +662,8 @@
 }
 */
 
+- (IBAction)openPicker:(id)sender {
+    
+    [self.view addSubview:_spendingTimeTextPicker];
+}
 @end
