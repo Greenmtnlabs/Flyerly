@@ -77,6 +77,8 @@
     //Setting the initial position for scroll view
     scrollView.contentOffset = CGPointMake(0,0);
     
+    _tableView0.contentInset = UIEdgeInsetsMake(-65.0f, 0.0f, 0.0f, 0.0f);
+    
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
     
@@ -125,18 +127,9 @@
 
     _table01Data = [[NSMutableArray alloc] init];
 
-    if( IS_IPHONE_5 || IS_IPHONE_4){
-        NSLog(@"iPhone 5/5s");
-        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"icloudIcon.png", @"text":@""}];
-        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"exchangeIcon.png", @"text":@""}];
-        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"GoogleIcon.png", @"text":@""}];
-        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"YahooIcon.png", @"text":@""}];
-        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"aolIcon.png", @"text":@""}];
-        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"outlookIcon.png", @"text":@""}];
-        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-other.png", @"text":@""}];
-    }
     
-    if ( IS_IPHONE_6 ){
+    
+    if ( IS_IPHONE_4 || IS_IPHONE_5 || IS_IPHONE_6 ){
         NSLog(@"iPhone 6");
         [_table01Data addObject:@{@"type":@"image", @"imgPath":@"icloudIcon@2x.png", @"text":@""}];
         [_table01Data addObject:@{@"type":@"image", @"imgPath":@"exchangeIcon@2x.png", @"text":@""}];
@@ -917,9 +910,7 @@
                 NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmailTableViewCell" owner:self options:nil];
                 cell = (EmailTableViewCell *)[nib objectAtIndex:0];
             }
-            
         }
-        
         NSString *imgPath = [[_table01Data objectAtIndex:indexPath.row] objectForKey:@"imgPath"];
         cell.button1.tag = indexPath.row;
         [cell.button1 setImage:[UIImage imageNamed:imgPath] forState:UIControlStateNormal];
@@ -994,6 +985,38 @@
     }
 }
 
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    // 1. The view for the header
+    UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, -2, tableView.frame.size.width, 60)];
+
+    // 2. Set a custom background color and a border
+    headerView.backgroundColor = [UIColor whiteColor];
+
+    // 3. Add a label
+    UILabel* headerLabel = [[UILabel alloc] init];
+    
+    headerLabel.frame = CGRectMake(10, 0, tableView.frame.size.width - 10, 60);
+    headerLabel.textColor = [UIColor lightGrayColor];
+    headerLabel.font = [UIFont fontWithName:APP_FONT size:18];
+    headerLabel.numberOfLines = 3;
+    headerLabel.text = @"Select your email service to let your contacts know you will be untechable.";
+    
+    NSString *labelText = @"Select your email service to let your contacts know you will be untechable.";
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:labelText];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:8];
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [labelText length])];
+    headerLabel.attributedText = attributedString ;
+    
+    headerLabel.textAlignment = NSTextAlignmentCenter;
+    
+    // 4. Add the label to the header view
+    [headerView addSubview:headerLabel];
+    
+    // 5. Finally return
+    return headerView;
+}
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
