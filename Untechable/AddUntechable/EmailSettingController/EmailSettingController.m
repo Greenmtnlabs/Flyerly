@@ -987,32 +987,37 @@
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    // 1. The view for the header
-    UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, -2, tableView.frame.size.width, 60)];
-
-    // 2. Set a custom background color and a border
-    headerView.backgroundColor = [UIColor whiteColor];
-
-    // 3. Add a label
-    UILabel* headerLabel = [[UILabel alloc] init];
+    UIView* headerView;
     
-    headerLabel.frame = CGRectMake(10, 0, tableView.frame.size.width - 10, 60);
-    headerLabel.textColor = [UIColor lightGrayColor];
-    headerLabel.font = [UIFont fontWithName:APP_FONT size:18];
-    headerLabel.numberOfLines = 3;
-    headerLabel.text = @"Select your email service to let your contacts know you will be untechable.";
+    if ( tableView == _tableView0 ){
     
-    NSString *labelText = @"Select your email service to let your contacts know you will be untechable.";
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:labelText];
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    [paragraphStyle setLineSpacing:8];
-    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [labelText length])];
-    headerLabel.attributedText = attributedString ;
-    
-    headerLabel.textAlignment = NSTextAlignmentCenter;
-    
-    // 4. Add the label to the header view
-    [headerView addSubview:headerLabel];
+        // 1. The view for the header
+        headerView = [[UIView alloc] initWithFrame:CGRectMake(0, -2, tableView.frame.size.width, 60)];
+        
+        // 2. Set a custom background color and a border
+        headerView.backgroundColor = [UIColor whiteColor];
+        
+        // 3. Add a label
+        UILabel* headerLabel = [[UILabel alloc] init];
+        
+        headerLabel.frame = CGRectMake(10, 0, tableView.frame.size.width - 10, 60);
+        headerLabel.textColor = [UIColor lightGrayColor];
+        headerLabel.font = [UIFont fontWithName:APP_FONT size:18];
+        headerLabel.numberOfLines = 3;
+        headerLabel.text = @"Select your email service to let your contacts know you will be untechable.";
+        
+        NSString *labelText = @"Select your email service to let your contacts know you will be untechable.";
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:labelText];
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        [paragraphStyle setLineSpacing:8];
+        [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [labelText length])];
+        headerLabel.attributedText = attributedString ;
+        
+        headerLabel.textAlignment = NSTextAlignmentCenter;
+        
+        // 4. Add the label to the header view
+        [headerView addSubview:headerLabel];
+    }
     
     // 5. Finally return
     return headerView;
