@@ -142,10 +142,14 @@
     if ( [untechable.socialStatus isEqualToString:@""] && [_inputSetSocialStatus.text isEqualToString:@"e.g Spending time with family."] ){
         
         [_inputSetSocialStatus setText:untechable.spendingTimeTxt];
+        int len = (int)_inputSetSocialStatus.text.length;
+        _char_Limit.text=[NSString stringWithFormat:@"%i",140-len];
     
     }else {
         
         [_inputSetSocialStatus setText:untechable.socialStatus];
+        int len = (int)_inputSetSocialStatus.text.length;
+        _char_Limit.text=[NSString stringWithFormat:@"%i",140-len];
     }
     
     
