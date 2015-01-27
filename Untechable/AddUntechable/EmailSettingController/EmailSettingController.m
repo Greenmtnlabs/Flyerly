@@ -137,7 +137,7 @@
         [_table01Data addObject:@{@"type":@"image", @"imgPath":@"YahooIcon@2x.png", @"text":@""}];
         [_table01Data addObject:@{@"type":@"image", @"imgPath":@"aolIcon@2x.png", @"text":@""}];
         [_table01Data addObject:@{@"type":@"image", @"imgPath":@"outlookIcon@2x.png", @"text":@""}];
-        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-other@2x.png", @"text":@""}];
+        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-Other@2x.png", @"text":@""}];
     }
     
     if ( IS_IPHONE_6_PLUS ){
@@ -148,7 +148,7 @@
         [_table01Data addObject:@{@"type":@"image", @"imgPath":@"YahooIcon@3x.png", @"text":@""}];
         [_table01Data addObject:@{@"type":@"image", @"imgPath":@"aolIcon@3x.png", @"text":@""}];
         [_table01Data addObject:@{@"type":@"image", @"imgPath":@"outlookIcon@3x.png", @"text":@""}];
-        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-other@3x.png", @"text":@""}];
+        [_table01Data addObject:@{@"type":@"image", @"imgPath":@"logo-Other@3x.png", @"text":@""}];
     }
 }
 
