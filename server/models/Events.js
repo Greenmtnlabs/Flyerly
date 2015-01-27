@@ -23,6 +23,7 @@ var eventsSchema = db.Schema({
 	location: String ,
     emergencyNumber: String ,
 	emergencyContacts: Object ,
+	customizedContacts: Object,
 	hasRecording: String ,
 	recording: String,	
 	
