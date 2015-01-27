@@ -76,7 +76,7 @@
 
 -(void)setPhoneStatus :(int)status {
     
-    [cutomizingStatusArray replaceObjectAtIndex:2 withObject:[NSString stringWithFormat:@"%d",status]];
+    [cutomizingStatusArray replaceObjectAtIndex:1 withObject:[NSString stringWithFormat:@"%d",status]];
     
     //Here we write the Array of Text files .txt
     //[cutomizingStatusArray writeToFile:socialFile atomically:YES];
@@ -86,7 +86,7 @@
 
 -(void)setSmsStatus :(int)status {
     
-    [cutomizingStatusArray replaceObjectAtIndex:1 withObject:[NSString stringWithFormat:@"%d",status]];
+    [cutomizingStatusArray replaceObjectAtIndex:2 withObject:[NSString stringWithFormat:@"%d",status]];
     
     //Here we write the Array of Text files .txt
     //[cutomizingStatusArray writeToFile:socialFile atomically:YES];
