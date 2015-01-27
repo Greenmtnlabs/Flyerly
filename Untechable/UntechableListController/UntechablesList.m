@@ -210,7 +210,7 @@
     }
 }
 
-- (void)sendDeleteRequestToApi:(int)indexToremoveOnSucess Section:(int)section {
+- (void)sendDeleteRequestToApi:(NSInteger)indexToremoveOnSucess Section:(NSInteger)section {
     
     BOOL errorOnFinish = NO;
     
@@ -273,7 +273,6 @@
         errorOnFinish = YES;
     }
     
-    
     if( errorOnFinish ){
         dispatch_async( dispatch_get_main_queue(), ^{
             [self changeNavigation:@"ERROR_ON_FINISH"];
@@ -282,10 +281,14 @@
     else{
         dispatch_async( dispatch_get_main_queue(), ^{
             [self changeNavigation:@"ON_FINISH_SUCCESS"];
+            
+            //Setting the new number of rows for each section
+            [self setNumberOfRowsInSection];
+            
+            // Request table view to reload
+            [untechablesTable reloadData];
         });
     }
-
-    
 }
 
 
@@ -309,42 +312,14 @@
             
             if ( indexPath.section == 0 ){
                 
-                /*[tableView deleteRowsAtIndexPaths:
-                 @[[NSIndexPath indexPathForRow:indexPath.row  inSection:0]]
-                 withRowAnimation:UITableViewRowAnimationLeft];*/
-                //[sectionOneArray removeObjectAtIndex:indexPath.row];
-                //add code here for when you hit delete
-               
                 [self sendDeleteRequestToApi:indexPath.row Section:indexPath.section];
-                
-                
-                
+        
             }else if ( indexPath.section == 1 ){
-                
-                /*
-                 [tableView deleteRowsAtIndexPaths:
-                 @[[NSIndexPath indexPathForRow:indexPath.row  inSection:1]]
-                 withRowAnimation:UITableViewRowAnimationLeft];*/
-                
-                
-                
+            
                 [self sendDeleteRequestToApi:indexPath.row Section:indexPath.section];
-                
             }
         }
     }
-
-    [self setNumberOfRowsInSection];
-    
-    tableView.allowsMultipleSelectionDuringEditing = NO;
-    // Request table view to reload
-    [tableView reloadData];
-    
-    //[untechablesTable reloadData];
-    
-    //[tableView setEditing:NO animated:YES];
-    //[tableView endUpdates];
-    //[tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -471,7 +446,7 @@
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    int numberOfRowsInSection;
+    int numberOfRowsInSection = 0;
     if ( section == 0 ){
         numberOfRowsInSection = (int)sectionOneArray.count;
     }else if ( section == 1 ){
