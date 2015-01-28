@@ -597,7 +597,7 @@
 -(void)textViewDidChange:(UITextView *)textView
 {
     int len = (int)textView.text.length;
-    _char_Limit.text=[NSString stringWithFormat:@"%i",140-len];
+    _char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
@@ -647,7 +647,7 @@
     _inputSpendingTimeText.text = [_pickerData objectAtIndex:row];
     
     int len = (int)_inputSpendingTimeText.text.length;
-    _char_Limit.text=[NSString stringWithFormat:@"%i",140-len];
+    _char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
 }
 /*
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
