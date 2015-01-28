@@ -411,11 +411,11 @@
 -(void)showHideTextPicker:(BOOL)showHide{
     
     if ( IS_IPHONE_4 || IS_IPHONE_5 ){
-        [_pickerCloseBtn setFrame:CGRectMake(280, 80, 120, 120)];
+        [_pickerCloseBtn setFrame:CGRectMake(245, 160, 76, 33)];
     }else if ( IS_IPHONE_6 ){
-        [_pickerCloseBtn setFrame:CGRectMake(290, 130, 120, 120)];
+        [_pickerCloseBtn setFrame:CGRectMake(290, 170, 76, 33)];
     }else if (IS_IPHONE_6_PLUS){
-        [_pickerCloseBtn setFrame:CGRectMake(330, 150, 120, 120)];
+        [_pickerCloseBtn setFrame:CGRectMake(330, 170, 76, 33)];
     }
     
     float alpha = (showHide) ? 1.0 : 0.0;
