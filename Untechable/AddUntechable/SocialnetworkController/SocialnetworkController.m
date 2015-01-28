@@ -141,15 +141,18 @@
     //[self.inputSetSocialStatus setText:untechable.socialStatus];
     if ( [untechable.socialStatus isEqualToString:@""] && [_inputSetSocialStatus.text isEqualToString:@"e.g Spending time with family."] ){
         
-        [_inputSetSocialStatus setText:untechable.spendingTimeTxt];
+        NSString *url = [NSString stringWithFormat:@"%@",untechable.spendingTimeTxt];
+        url = [url stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSString *socialStatus = [NSString stringWithFormat:@"I am #Untechable & %@ untechable.com/away/%@", untechable.spendingTimeTxt,url];
+        [_inputSetSocialStatus setText:socialStatus];
         int len = (int)_inputSetSocialStatus.text.length;
-        _char_Limit.text=[NSString stringWithFormat:@"%i",140-len];
+        _char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
     
     }else {
         
         [_inputSetSocialStatus setText:untechable.socialStatus];
         int len = (int)_inputSetSocialStatus.text.length;
-        _char_Limit.text=[NSString stringWithFormat:@"%i",140-len];
+        _char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
     }
     
     
@@ -560,7 +563,7 @@
 -(void)textViewDidChange:(UITextView *)textView
 {
     int len = textView.text.length;
-    _char_Limit.text=[NSString stringWithFormat:@"%i",140-len];
+    _char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
 }
 
 
