@@ -227,6 +227,14 @@
 
 -(void)btnNextTouchEndToServerAccount{
     
+    if( IS_IPHONE_5 ){
+        [_emailSetting2 setFrame:CGRectMake(0,0,320,568)];
+    } else if ( IS_IPHONE_6 ){
+        [_emailSetting2 setFrame:CGRectMake(0,0,375,667)];
+    } else if ( IS_IPHONE_6_PLUS ) {
+        [_emailSetting2 setFrame:CGRectMake(0,0,414,736)];
+    }
+    
     [self hideAllViews];
     [UIView transitionWithView:self.view duration:0.5
                        options:UIViewAnimationOptionTransitionCurlUp //change to whatever animation you like
@@ -247,20 +255,16 @@
         [backButton setTitleColor:defGray forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(btnNextTouchEndToServerAccount) forControlEvents:UIControlEventTouchUpInside];
-        
         backButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         NSMutableArray  *leftNavItems  = [NSMutableArray arrayWithObjects:leftBarButton,nil];
         
         [self.navigationItem setLeftBarButtonItems:leftNavItems]; //Left button ___________
         
-        
         // Center title ________________________________________
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
-        
         // Right Navigation ________________________________________
-        
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         [nextButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
@@ -269,17 +273,12 @@
         //[nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
         //[nextButton addTarget:self action:@selector(btnNextTouchEndToServerAccount) forControlEvents:UIControlEventTouchUpInside];
         
-        
-        
         nextButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
         
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
-        
     }
-    
-    
     
     if( [callFrom isEqualToString:@"emailSetting2"] )
     {
@@ -291,20 +290,16 @@
         [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(btnBackToAccountType) forControlEvents:UIControlEventTouchUpInside];
         
-        
         backButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         NSMutableArray  *leftNavItems  = [NSMutableArray arrayWithObjects:leftBarButton,nil];
         
         [self.navigationItem setLeftBarButtonItems:leftNavItems]; //Left button ___________
         
-        
         // Center title ________________________________________
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
-        
          // Right Navigation ________________________________________
-        
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         [nextButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
@@ -329,8 +324,6 @@
     
     if([callFrom isEqualToString:@"viewDidLoad"])
     {
-        
-        
         // Left Navigation ________________________________________________________________________________________________________
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
@@ -338,27 +331,21 @@
         [backButton setTitleColor:defGray forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(btnBackTouchEnd) forControlEvents:UIControlEventTouchUpInside];
-        
-        
         backButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         NSMutableArray  *leftNavItems  = [NSMutableArray arrayWithObjects:leftBarButton,nil];
         
         [self.navigationItem setLeftBarButtonItems:leftNavItems]; //Left button ___________
         
-        
         // Center title ________________________________________
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];        
         
-        
         // Right Navigation ________________________________________
-        
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         [nextButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [nextButton setTitle:@"FINISH" forState:normal];
         [nextButton setTitleColor:defGray forState:UIControlStateNormal];
-        
         
         nextButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
@@ -421,6 +408,15 @@
     untechable.respondingEmail = self.inputMsg.text;
     
     [self hideAllViews];
+    
+    if( IS_IPHONE_5 ){
+        [_emailSetting1 setFrame:CGRectMake(0,0,320,568)];
+    } else if ( IS_IPHONE_6 ){
+        [_emailSetting1 setFrame:CGRectMake(0,0,375,667)];
+    } else if ( IS_IPHONE_6_PLUS ) {
+        [_emailSetting1 setFrame:CGRectMake(0,0,414,736)];
+    }
+    
     [UIView transitionWithView:self.view duration:0.5
                        options:UIViewAnimationOptionTransitionCurlUp //change to whatever animation you like
                     animations:^ { [self.view addSubview:_emailSetting1]; }
@@ -687,6 +683,7 @@
 - (IBAction)showEmailSettings1:(id)sender {
     
     [self hideAllViews];
+    
     [UIView transitionWithView:self.view duration:0.5
                        options:UIViewAnimationOptionTransitionCurlUp //change to whatever animation you like
                     animations:^ { [self.view addSubview:_emailSetting1]; }
@@ -730,6 +727,15 @@
     untechable.acType = [acTypesAry objectAtIndex:btn.tag];
 
     [self hideAllViews];
+    
+    if( IS_IPHONE_5 ){
+        [_emailSetting2 setFrame:CGRectMake(0,0,320,568)];
+    } else if ( IS_IPHONE_6 ){
+        [_emailSetting2 setFrame:CGRectMake(0,0,375,667)];
+    } else if ( IS_IPHONE_6_PLUS ) {
+        [_emailSetting2 setFrame:CGRectMake(0,0,414,736)];
+    }
+    
     [UIView transitionWithView:self.view duration:0.5
                        options:UIViewAnimationOptionTransitionCurlUp //change to whatever animation you like
                     animations:^ { [self.view addSubview:_emailSetting2]; }
