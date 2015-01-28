@@ -188,6 +188,7 @@
 		C33C1EF11A7278870064DBE8 /* ServerAccountDetailsViewCell-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33C1EF01A7278870064DBE8 /* ServerAccountDetailsViewCell-iPhone6-Plus.xib */; };
 		C33C1EF31A727A690064DBE8 /* SSLCell-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33C1EF21A727A690064DBE8 /* SSLCell-iPhone6.xib */; };
 		C33C1EF51A727A7B0064DBE8 /* SSLCell-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33C1EF41A727A7B0064DBE8 /* SSLCell-iPhone6-Plus.xib */; };
+		C39C31A51A77D6D0003CE153 /* downArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C39C31A41A77D6D0003CE153 /* downArrow@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -424,6 +425,7 @@
 		C33C1EF01A7278870064DBE8 /* ServerAccountDetailsViewCell-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ServerAccountDetailsViewCell-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		C33C1EF21A727A690064DBE8 /* SSLCell-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SSLCell-iPhone6.xib"; sourceTree = "<group>"; };
 		C33C1EF41A727A7B0064DBE8 /* SSLCell-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SSLCell-iPhone6-Plus.xib"; sourceTree = "<group>"; };
+		C39C31A41A77D6D0003CE153 /* downArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "downArrow@2x.png"; sourceTree = "<group>"; };
 		FC11B82CE184AE8B063B3995 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -783,6 +785,7 @@
 		36B0369A19DAD2AB00E8CD21 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C39C31A41A77D6D0003CE153 /* downArrow@2x.png */,
 				2448343F1A5D915D00E6F173 /* sms@3x.png */,
 				244834391A5D776200E6F173 /* email_selected@3x.png */,
 				2448343A1A5D776200E6F173 /* phone_selected@3x.png */,
@@ -1106,6 +1109,7 @@
 				366EAF971A14C3530011D6C6 /* icon-72@2x.png in Resources */,
 				36B2765D1A0124E800ED58AD /* CHECKBOX_EMPTY@2x.png in Resources */,
 				366ECD9719D323DA00F71A11 /* AddUntechableController.xib in Resources */,
+				C39C31A51A77D6D0003CE153 /* downArrow@2x.png in Resources */,
 				200ACE2E1A3874B200DC7047 /* icloudIcon@2x.png in Resources */,
 				2486CBAB1A5A79F500AC125E /* email_selected@2x.png in Resources */,
 				366EAF981A14C3530011D6C6 /* icon-76.png in Resources */,
