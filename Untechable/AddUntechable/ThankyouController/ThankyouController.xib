@@ -10,7 +10,6 @@
                 <outlet property="btnCopy" destination="VmM-5O-dx9" id="qmN-Rw-sQ3"/>
                 <outlet property="lblEnd" destination="gOx-HT-gVw" id="cKc-SA-wrG"/>
                 <outlet property="lblEndDateTime" destination="Uz9-tr-Wyn" id="4Xg-qQ-u0Q"/>
-                <outlet property="lblForwadingNumber" destination="fQV-ed-iEd" id="vZC-RT-oba"/>
                 <outlet property="lblStartDateTime" destination="a5W-Jn-QfT" id="P6c-sj-W2S"/>
                 <outlet property="lblStartsFrom" destination="RYX-ce-j5a" id="Pmb-D3-6YV"/>
                 <outlet property="lblTwillioNumber" destination="pKA-FK-D0F" id="gb8-Lf-WpT"/>
@@ -30,30 +29,22 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="startDateTime" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a5W-Jn-QfT" userLabel="Label - lblStartDateTime">
-                    <rect key="frame" x="0.0" y="105" width="320" height="30"/>
+                    <rect key="frame" x="0.0" y="115" width="320" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                     <color key="textColor" red="0.25882352939999997" green="0.96862745100000003" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gOx-HT-gVw" userLabel="Label - lblEnd">
-                    <rect key="frame" x="0.0" y="131" width="320" height="30"/>
+                    <rect key="frame" x="0.0" y="150" width="320" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fQV-ed-iEd" userLabel="Label - lblForwadingNumber">
-                    <rect key="frame" x="5" y="185" width="310" height="100"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <string key="text">Want to Forward your calls? Watch video &amp; forward calls to the 'Untechable Line,' an automated message that lets people know you're unplugged.</string>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <view contentMode="scaleToFill" id="taH-6p-FG3">
-                    <rect key="frame" x="0.0" y="286" width="320" height="33"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <rect key="frame" x="0.0" y="465" width="320" height="33"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="twillioNumber" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pKA-FK-D0F" userLabel="Label - lblTwillioNumber">
                             <rect key="frame" x="60" y="-2" width="200" height="30"/>
@@ -79,14 +70,14 @@
                     </subviews>
                 </view>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="v9u-5O-eY5" userLabel="Label - lblPlay1">
-                    <rect key="frame" x="0.0" y="340" width="332" height="25"/>
+                    <rect key="frame" x="0.0" y="252" width="332" height="25"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="w0g-nC-E9J" userLabel="Button - playViewBtn">
-                    <rect key="frame" x="20" y="332" width="280" height="200"/>
+                    <rect key="frame" x="20" y="222" width="280" height="200"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <state key="normal" backgroundImage="playvideo.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -96,7 +87,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="endDateTime" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Uz9-tr-Wyn" userLabel="Label - lblEndDateTime">
-                    <rect key="frame" x="0.0" y="156" width="320" height="30"/>
+                    <rect key="frame" x="0.0" y="180" width="320" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                     <color key="textColor" red="0.25882352939999997" green="0.96862745100000003" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
