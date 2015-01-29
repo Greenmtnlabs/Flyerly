@@ -505,6 +505,8 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     fbAuth = fbA;
     fbAuthExpiryTs = [commonFunctions nsDateToTimeStampStr:fbAuthExpD ];
     
+    [[NSUserDefaults standardUserDefaults] setObject:fbAuth forKey:@"fbAuth"];
+    
     [self setOrSaveVars:SAVE];
 }
 
@@ -524,6 +526,9 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     twitterAuth =   oAuthToken;
     twOAuthTokenSecret =   oAuthTokenSecret;
 
+    [[NSUserDefaults standardUserDefaults] setObject:twitterAuth forKey:@"twitterAuth"];
+    [[NSUserDefaults standardUserDefaults] setObject:twOAuthTokenSecret forKey:@"twOAuthTokenSecret"];
+    
     [self setOrSaveVars:SAVE];
 }
 
@@ -539,6 +544,8 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 {
     NSLog(@"linkedInAccessToken=%@",linkedInAccessToken);
     linkedinAuth = linkedInAccessToken;
+    
+    [[NSUserDefaults standardUserDefaults] setObject:linkedinAuth forKey:@"linkedinAuth"];
     
     [self setOrSaveVars:SAVE];
 }

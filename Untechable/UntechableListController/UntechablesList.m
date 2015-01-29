@@ -113,9 +113,9 @@
 - (IBAction)goToPreferences {
     
     NSLog(@"Go To p[refrences screen");
-    PreferencesViewController *listController = [[PreferencesViewController alloc] initWithNibName:@"PreferencesViewController" bundle:nil];
-    //listController.untechable = untechable;
-    [self.navigationController pushViewController:listController animated:YES];
+    PreferencesViewController *prefController = [[PreferencesViewController alloc] initWithNibName:@"PreferencesViewController" bundle:nil];
+    prefController.untechable = untechable;
+    [self.navigationController pushViewController:prefController animated:YES];
 }
 
 -(void)addUntechable{

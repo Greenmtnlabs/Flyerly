@@ -10,6 +10,7 @@
 #import "AddUntechableController.h"
 #import "Common.h"
 #import "UntechablesList.h"
+#import "PreferencesViewController.h"
 
 @interface ThankyouController ()
 
@@ -59,9 +60,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)goToPreferences:(id)sender {
+- (IBAction)goToPreferences {
     
     NSLog(@"Go To p[refrences screen");
+    PreferencesViewController *prefController = [[PreferencesViewController alloc] initWithNibName:@"PreferencesViewController" bundle:nil];
+    prefController.untechable = untechable;
+    [self.navigationController pushViewController:prefController animated:YES];
 }
 
 - (IBAction)onNew:(id)sender {
@@ -203,7 +207,7 @@
         preferencesButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [preferencesButton setTitle:TITLE_PREFERENCES_TXT forState:normal];
         [preferencesButton setTitleColor:defGray forState:UIControlStateNormal];
-        [preferencesButton addTarget:self action:@selector(goToPreferences) forControlEvents:UIControlEventTouchDown];
+        
         [preferencesButton addTarget:self action:@selector(goToPreferences) forControlEvents:UIControlEventTouchUpInside];
         preferencesButton.showsTouchWhenHighlighted = YES;
         

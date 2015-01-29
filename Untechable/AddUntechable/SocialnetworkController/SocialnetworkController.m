@@ -323,7 +323,6 @@
 }
 
 #pragma mark -  Get Sharing permissions functions
-
 - (IBAction)shareOn:(id)sender {
     if(sender == self.btnFacebook){
         
@@ -386,8 +385,6 @@
                 NSLog( success ? @"Twitter, success login on twitter" : @"Twitter login failure.");
             }];
             [self presentViewController:loginController animated:YES completion:nil];
-
-            
         }
     }
     else if(sender == self.btnLinkedin){
@@ -400,8 +397,6 @@
         else {
             [self getLinkedInAuth];
         }
-        
-        
     }
 }
 

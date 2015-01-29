@@ -14,7 +14,9 @@
     UIColor *defGreen;//GREEN
     UIColor *defGray;//GRAY
     UIButton *backButton;
-    Untechable *untechable;
 }
+
+//Properties
+@property (nonatomic,strong)  Untechable *untechable;
 
 @end

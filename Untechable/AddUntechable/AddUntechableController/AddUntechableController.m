@@ -11,6 +11,7 @@
 #import "ThankyouController.h"
 #import "Common.h"
 #import "BSKeyboardControls.h"
+#import "PreferencesViewController.h"
 #import "ContactsListControllerViewController.h"
 
 
@@ -227,7 +228,6 @@
             preferencesButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
             [preferencesButton setTitle:TITLE_PREFERENCES_TXT forState:normal];
             [preferencesButton setTitleColor:defGray forState:UIControlStateNormal];
-            [preferencesButton addTarget:self action:@selector(goToPreferences) forControlEvents:UIControlEventTouchDown];
             [preferencesButton addTarget:self action:@selector(goToPreferences) forControlEvents:UIControlEventTouchUpInside];
             preferencesButton.showsTouchWhenHighlighted = YES;
             
@@ -264,6 +264,9 @@
 -(IBAction)goToPreferences{
     
     NSLog(@"Go To p[refrences screen");
+    PreferencesViewController *prefController = [[PreferencesViewController alloc] initWithNibName:@"PreferencesViewController" bundle:nil];
+    prefController.untechable = untechable;
+    [self.navigationController pushViewController:prefController animated:YES];
 }
 
 -(void) goBack {

@@ -15,7 +15,8 @@
 }
 
 @property (nonatomic,strong)IBOutlet UILabel *socialNetworkName;
+@property (nonatomic,strong)IBOutlet UIButton *socialNetworkButton;
 
--(void)setCellValueswithSocialNetworkNake :(NSString *)networkName;
+-(void)setCellValueswithSocialNetworkNake :(NSString *)networkName LoginStatus:(BOOL)LoginStatus;
 
 @end
