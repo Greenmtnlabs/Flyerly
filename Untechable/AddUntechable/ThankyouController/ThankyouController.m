@@ -59,6 +59,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)goToPreferences:(id)sender {
+    
+    NSLog(@"Go To p[refrences screen");
+}
 
 - (IBAction)onNew:(id)sender {
     /*untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*2)] ]; //current time +2MIN
@@ -167,7 +171,6 @@
         
         
         // Right Navigation ________________________________________
-
         NSMutableArray  *rightNavItems;
         /*if( [self canEdit] ) {
             
@@ -194,6 +197,20 @@
             rightNavItems  = [NSMutableArray arrayWithObjects:startNewUntechableBarBtn,nil];
         }*/
         
+        // Setting left Navigation button "Preferences"
+        preferencesButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 86, 42)];
+        preferencesButton.titleLabel.shadowColor = [UIColor clearColor];
+        preferencesButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [preferencesButton setTitle:TITLE_PREFERENCES_TXT forState:normal];
+        [preferencesButton setTitleColor:defGray forState:UIControlStateNormal];
+        [preferencesButton addTarget:self action:@selector(goToPreferences) forControlEvents:UIControlEventTouchDown];
+        [preferencesButton addTarget:self action:@selector(goToPreferences) forControlEvents:UIControlEventTouchUpInside];
+        preferencesButton.showsTouchWhenHighlighted = YES;
+        
+        UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:preferencesButton];
+        
+        [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+        
         startNewUntechable = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         [startNewUntechable addTarget:self action:@selector(onNew:) forControlEvents:UIControlEventTouchUpInside];
         startNewUntechable.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
@@ -204,11 +221,7 @@
         UIBarButtonItem *startNewUntechableBarBtn = [[UIBarButtonItem alloc] initWithCustomView:startNewUntechable];
         rightNavItems  = [NSMutableArray arrayWithObjects:startNewUntechableBarBtn,nil];
         
-        
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
-        
-        
-        
     }
 }
 

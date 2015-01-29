@@ -15,6 +15,7 @@
     UIColor *defGreen;//GREEN
     UIColor *defGray;//GRAY
     UIButton *newUntechableButton;
+    UIButton *preferencesButton;
     Untechable *untechable;
     
     Reachability *internetReachable;

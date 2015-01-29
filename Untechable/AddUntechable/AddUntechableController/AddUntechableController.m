@@ -219,6 +219,21 @@
             UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
             
             [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+        }else {
+            
+            // Setting left Navigation button "Preferences"
+            preferencesButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 86, 42)];
+            preferencesButton.titleLabel.shadowColor = [UIColor clearColor];
+            preferencesButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+            [preferencesButton setTitle:TITLE_PREFERENCES_TXT forState:normal];
+            [preferencesButton setTitleColor:defGray forState:UIControlStateNormal];
+            [preferencesButton addTarget:self action:@selector(goToPreferences) forControlEvents:UIControlEventTouchDown];
+            [preferencesButton addTarget:self action:@selector(goToPreferences) forControlEvents:UIControlEventTouchUpInside];
+            preferencesButton.showsTouchWhenHighlighted = YES;
+            
+            UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:preferencesButton];
+            
+            [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
         }
         
         // Right Navigation ______________________________________________
@@ -244,6 +259,11 @@
         
         
     }
+}
+
+-(IBAction)goToPreferences{
+    
+    NSLog(@"Go To p[refrences screen");
 }
 
 -(void) goBack {

@@ -9,13 +9,13 @@
 #import "UntechablesList.h"
 #import "UntechableTableCell.h"
 #import "AddUntechableController.h"
+#import "PreferencesViewController.h"
 #import "Common.h"
 #import "Untechable.h"
 
 @interface UntechablesList () {
     
     NSMutableArray *allUntechables;
-    
     NSMutableArray *sectionOneArray;
     NSMutableArray *sectionTwoArray;
 }
@@ -69,6 +69,20 @@
     {
         self.navigationItem.hidesBackButton = YES;
         
+        // Setting left Navigation button "Preferences"
+        preferencesButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 86, 42)];
+        preferencesButton.titleLabel.shadowColor = [UIColor clearColor];
+        preferencesButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [preferencesButton setTitle:TITLE_PREFERENCES_TXT forState:normal];
+        [preferencesButton setTitleColor:defGray forState:UIControlStateNormal];
+        //[preferencesButton addTarget:self action:@selector(goToPreferences) forControlEvents:UIControlEventTouchDown];
+        [preferencesButton addTarget:self action:@selector(goToPreferences) forControlEvents:UIControlEventTouchUpInside];
+        preferencesButton.showsTouchWhenHighlighted = YES;
+        
+        UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:preferencesButton];
+        
+        [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+        
         // Center title __________________________________________________
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
@@ -94,6 +108,14 @@
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
 
     }
+}
+
+- (IBAction)goToPreferences {
+    
+    NSLog(@"Go To p[refrences screen");
+    PreferencesViewController *listController = [[PreferencesViewController alloc] initWithNibName:@"PreferencesViewController" bundle:nil];
+    //listController.untechable = untechable;
+    [self.navigationController pushViewController:listController animated:YES];
 }
 
 -(void)addUntechable{
@@ -356,10 +378,6 @@
             UITableViewCell *cell = nil;
             return cell;
         }
-        
-    //}
-    
-
 }
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
