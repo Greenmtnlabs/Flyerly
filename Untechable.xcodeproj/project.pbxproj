@@ -188,6 +188,12 @@
 		C33C1EF11A7278870064DBE8 /* ServerAccountDetailsViewCell-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33C1EF01A7278870064DBE8 /* ServerAccountDetailsViewCell-iPhone6-Plus.xib */; };
 		C33C1EF31A727A690064DBE8 /* SSLCell-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33C1EF21A727A690064DBE8 /* SSLCell-iPhone6.xib */; };
 		C33C1EF51A727A7B0064DBE8 /* SSLCell-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33C1EF41A727A7B0064DBE8 /* SSLCell-iPhone6-Plus.xib */; };
+		C36D2E581A7919C2000537C5 /* PreferencesCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = C36D2E561A7919C2000537C5 /* PreferencesCellView.m */; };
+		C36D2E591A7919C2000537C5 /* PreferencesCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C36D2E571A7919C2000537C5 /* PreferencesCellView.xib */; };
+		C36D2E5D1A7919DC000537C5 /* PreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C36D2E5B1A7919DC000537C5 /* PreferencesViewController.m */; };
+		C36D2E5E1A7919DC000537C5 /* PreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C36D2E5C1A7919DC000537C5 /* PreferencesViewController.xib */; };
+		C36D2E601A791ADA000537C5 /* PreferencesCellView-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = C36D2E5F1A791ADA000537C5 /* PreferencesCellView-iPhone6.xib */; };
+		C36D2E621A791AEA000537C5 /* PreferencesCellView-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = C36D2E611A791AEA000537C5 /* PreferencesCellView-iPhone6-Plus.xib */; };
 		C39C31A51A77D6D0003CE153 /* downArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C39C31A41A77D6D0003CE153 /* downArrow@2x.png */; };
 /* End PBXBuildFile section */
 
@@ -425,6 +431,14 @@
 		C33C1EF01A7278870064DBE8 /* ServerAccountDetailsViewCell-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ServerAccountDetailsViewCell-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		C33C1EF21A727A690064DBE8 /* SSLCell-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SSLCell-iPhone6.xib"; sourceTree = "<group>"; };
 		C33C1EF41A727A7B0064DBE8 /* SSLCell-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SSLCell-iPhone6-Plus.xib"; sourceTree = "<group>"; };
+		C36D2E551A7919C2000537C5 /* PreferencesCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesCellView.h; sourceTree = "<group>"; };
+		C36D2E561A7919C2000537C5 /* PreferencesCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesCellView.m; sourceTree = "<group>"; };
+		C36D2E571A7919C2000537C5 /* PreferencesCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesCellView.xib; sourceTree = "<group>"; };
+		C36D2E5A1A7919DC000537C5 /* PreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesViewController.h; sourceTree = "<group>"; };
+		C36D2E5B1A7919DC000537C5 /* PreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesViewController.m; sourceTree = "<group>"; };
+		C36D2E5C1A7919DC000537C5 /* PreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesViewController.xib; sourceTree = "<group>"; };
+		C36D2E5F1A791ADA000537C5 /* PreferencesCellView-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "PreferencesCellView-iPhone6.xib"; sourceTree = "<group>"; };
+		C36D2E611A791AEA000537C5 /* PreferencesCellView-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "PreferencesCellView-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		C39C31A41A77D6D0003CE153 /* downArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "downArrow@2x.png"; sourceTree = "<group>"; };
 		FC11B82CE184AE8B063B3995 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -699,6 +713,7 @@
 		366ECD7519D2D24600F71A11 /* AddUntechable */ = {
 			isa = PBXGroup;
 			children = (
+				C36D2E4F1A79196E000537C5 /* PreferencesController */,
 				366ECD7B19D312BE00F71A11 /* Models */,
 				36B275CF1A00CC9400ED58AD /* RMStore */,
 				2402BB7F1A1DBEF800255A73 /* UntechableListController */,
@@ -926,6 +941,21 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		C36D2E4F1A79196E000537C5 /* PreferencesController */ = {
+			isa = PBXGroup;
+			children = (
+				C36D2E551A7919C2000537C5 /* PreferencesCellView.h */,
+				C36D2E561A7919C2000537C5 /* PreferencesCellView.m */,
+				C36D2E571A7919C2000537C5 /* PreferencesCellView.xib */,
+				C36D2E5F1A791ADA000537C5 /* PreferencesCellView-iPhone6.xib */,
+				C36D2E611A791AEA000537C5 /* PreferencesCellView-iPhone6-Plus.xib */,
+				C36D2E5A1A7919DC000537C5 /* PreferencesViewController.h */,
+				C36D2E5B1A7919DC000537C5 /* PreferencesViewController.m */,
+				C36D2E5C1A7919DC000537C5 /* PreferencesViewController.xib */,
+			);
+			name = PreferencesController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1041,6 +1071,7 @@
 				247C72D51A5C0968005C9693 /* user_img@3x.png in Resources */,
 				36474F2219D9780100084F34 /* Pigiarniq Bold.ttf in Resources */,
 				366EAF921A14C3530011D6C6 /* icon-50.png in Resources */,
+				C36D2E621A791AEA000537C5 /* PreferencesCellView-iPhone6-Plus.xib in Resources */,
 				248E06BD1A4AD9180099846A /* ContactListCell-iPhone6-Plus.xib in Resources */,
 				C33C1EE71A724A0E0064DBE8 /* EmailCell-iPhone6.xib in Resources */,
 				366EAFAB1A14E5370011D6C6 /* playvideo@2x.png in Resources */,
@@ -1050,6 +1081,7 @@
 				36474F2419D9780100084F34 /* Pigiarniq Italic.ttf in Resources */,
 				36B276741A0124E800ED58AD /* play_gray@2x.png in Resources */,
 				249952161A56C8A1001AEB84 /* Cliparts.plist in Resources */,
+				C36D2E591A7919C2000537C5 /* PreferencesCellView.xib in Resources */,
 				36B276761A0124E800ED58AD /* play@2x.png in Resources */,
 				2402BB841A1DBF6A00255A73 /* UntechablesList.xib in Resources */,
 				C33C1EE91A724A1E0064DBE8 /* EmailCell-iPhone6-Plus.xib in Resources */,
@@ -1114,6 +1146,8 @@
 				2486CBAB1A5A79F500AC125E /* email_selected@2x.png in Resources */,
 				366EAF981A14C3530011D6C6 /* icon-76.png in Resources */,
 				3681603E19E6B81E00B9B64C /* InviteFriendsCell.xib in Resources */,
+				C36D2E601A791ADA000537C5 /* PreferencesCellView-iPhone6.xib in Resources */,
+				C36D2E5E1A7919DC000537C5 /* PreferencesViewController.xib in Resources */,
 				36B036A719DAF44D00E8CD21 /* EmailSettingController.xib in Resources */,
 				366EAFA31A14C3530011D6C6 /* Default@2x.png in Resources */,
 				36B276701A0124E800ED58AD /* invite_Bg@2x.png in Resources */,
@@ -1204,6 +1238,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C36D2E5D1A7919DC000537C5 /* PreferencesViewController.m in Sources */,
 				36BB7B8919FFD98C00562069 /* ThankyouController.m in Sources */,
 				243C59F41A4D753C0020350C /* FirstTableViewCell.m in Sources */,
 				366ECD9619D323DA00F71A11 /* AddUntechableController.m in Sources */,
@@ -1227,6 +1262,7 @@
 				36561D7C19D2C8A40069D897 /* AppDelegate.m in Sources */,
 				366ECD7E19D3135200F71A11 /* Untechable.m in Sources */,
 				24848FE71A30403600BF1138 /* ServerAccountDetailsViewCell.m in Sources */,
+				C36D2E581A7919C2000537C5 /* PreferencesCellView.m in Sources */,
 				243C59E01A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.m in Sources */,
 				36FD975519E694AC00427507 /* BSKeyboardControls.m in Sources */,
 				248E06B71A4ACD6E0099846A /* ContactsCustomizedModal.m in Sources */,
