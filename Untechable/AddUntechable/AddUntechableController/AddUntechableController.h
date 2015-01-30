@@ -16,7 +16,7 @@
     UILabel *titleLabel;
     UIButton *helpButton;
     UIButton *backButton;
-    UIButton *preferencesButton;
+    UIButton *settingsButton;
     UIButton *nextButton;
     
     UIButton *openPickerButton;

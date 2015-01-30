@@ -16,7 +16,7 @@
     //UIButton *helpButton;
 
     UIButton *startNewUntechable;
-    UIButton *preferencesButton;
+    UIButton *settingsButton;
     UIButton *editUntechable;
     
     UIColor *defGreen;//GREEN

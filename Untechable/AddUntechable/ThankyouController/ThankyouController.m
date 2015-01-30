@@ -10,7 +10,7 @@
 #import "AddUntechableController.h"
 #import "Common.h"
 #import "UntechablesList.h"
-#import "PreferencesViewController.h"
+#import "SettingsViewController.h"
 
 @interface ThankyouController ()
 
@@ -60,12 +60,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)goToPreferences {
+- (IBAction)goToSettings {
     
-    NSLog(@"Go To p[refrences screen");
-    PreferencesViewController *prefController = [[PreferencesViewController alloc] initWithNibName:@"PreferencesViewController" bundle:nil];
-    prefController.untechable = untechable;
-    [self.navigationController pushViewController:prefController animated:YES];
+    NSLog(@"Go To settings screen");
+    SettingsViewController *settingsController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil];
+    settingsController.untechable = untechable;
+    [self.navigationController pushViewController:settingsController animated:YES];
 }
 
 - (IBAction)onNew:(id)sender {
@@ -201,17 +201,17 @@
             rightNavItems  = [NSMutableArray arrayWithObjects:startNewUntechableBarBtn,nil];
         }*/
         
-        // Setting left Navigation button "Preferences"
-        preferencesButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 86, 42)];
-        preferencesButton.titleLabel.shadowColor = [UIColor clearColor];
-        preferencesButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [preferencesButton setTitle:TITLE_PREFERENCES_TXT forState:normal];
-        [preferencesButton setTitleColor:defGray forState:UIControlStateNormal];
+        // Setting left Navigation button "Settings"
+        settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 86, 42)];
+        settingsButton.titleLabel.shadowColor = [UIColor clearColor];
+        settingsButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [settingsButton setTitle:TITLE_SETTINGS_TXT forState:normal];
+        [settingsButton setTitleColor:defGray forState:UIControlStateNormal];
         
-        [preferencesButton addTarget:self action:@selector(goToPreferences) forControlEvents:UIControlEventTouchUpInside];
-        preferencesButton.showsTouchWhenHighlighted = YES;
+        [settingsButton addTarget:self action:@selector(goToSettings) forControlEvents:UIControlEventTouchUpInside];
+        settingsButton.showsTouchWhenHighlighted = YES;
         
-        UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:preferencesButton];
+        UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
         
         [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
         

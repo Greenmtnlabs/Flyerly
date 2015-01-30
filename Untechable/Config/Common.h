@@ -23,7 +23,7 @@
 #define TITLE_NEXT_TXT @"NEXT"
 #define TITLE_NEW_TXT @"NEW"
 #define TITLE_BACK_TXT @"BACK"
-#define TITLE_PREFERENCES_TXT @"PREFERENCES"
+#define TITLE_SETTINGS_TXT @"SETTINGS"
 #define TITLE_DONE_TXT @"DONE"
 #define TITLE_FONT @"Pigiarniq-Bold"
 #define TITLE_FONT_SIZE 18

@@ -1,13 +1,13 @@
 //
-//  PreferencesViewController.m
+//  SettingsViewController.m
 //  Untechable
 //
 //  Created by Abdul Rauf on 28/01/2015.
 //  Copyright (c) 2015 Green MTN Labs Inc. All rights reserved.
 //
 
-#import "PreferencesViewController.h"
-#import "PreferencesCellView.h"
+#import "SettingsViewController.h"
+#import "SettingsCellView.h"
 #import "Common.h"
 #import "SocialnetworkController.h"
 #import "EmailSettingController.h"
@@ -16,7 +16,7 @@
 #import "LIALinkedInHttpClient.h"
 #import "LIALinkedInApplication.h"
 
-@interface PreferencesViewController () {
+@interface SettingsViewController () {
     
     NSMutableArray *socialIcons;
     NSMutableArray *socialNetworksName;
@@ -25,7 +25,7 @@
 
 @end
 
-@implementation PreferencesViewController
+@implementation SettingsViewController
 
 @synthesize untechable;
 
@@ -34,7 +34,7 @@
     // Do any additional setup after loading the view from its nib.
     
     [self setNavigation:@"viewDidLoad"];
-    
+
     socialNetworksName = [[NSMutableArray alloc] initWithObjects:@"Facebook",@"Twitter",@"LinkedIn",@"Email", nil];
     
     socialIcons = [[NSMutableArray alloc] init];
@@ -94,29 +94,34 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [_socialNetworksTable reloadData];
+}
+
 -(void) goBack {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *cellId = @"PreferencesCellView";
-    PreferencesCellView *cell = (PreferencesCellView *)[tableView dequeueReusableCellWithIdentifier:cellId];
+    static NSString *cellId = @"SettingsCellView";
+    SettingsCellView *cell = (SettingsCellView *)[tableView dequeueReusableCellWithIdentifier:cellId];
     
     if (cell == nil)
     {
         if( IS_IPHONE_5 ){
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PreferencesCellView" owner:self options:nil];
-            cell = (PreferencesCellView *)[nib objectAtIndex:0];
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SettingsCellView" owner:self options:nil];
+            cell = (SettingsCellView *)[nib objectAtIndex:0];
         } else if ( IS_IPHONE_6 ){
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PreferencesCellView-iPhone6" owner:self options:nil];
-            cell = (PreferencesCellView *)[nib objectAtIndex:0];
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SettingsCellView-iPhone6" owner:self options:nil];
+            cell = (SettingsCellView *)[nib objectAtIndex:0];
         } else if ( IS_IPHONE_6_PLUS ) {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PreferencesCellView-iPhone6-Plus" owner:self options:nil];
-            cell = (PreferencesCellView *)[nib objectAtIndex:0];
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SettingsCellView-iPhone6-Plus" owner:self options:nil];
+            cell = (SettingsCellView *)[nib objectAtIndex:0];
         } else {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PreferencesCellView" owner:self options:nil];
-            cell = (PreferencesCellView *)[nib objectAtIndex:0];
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SettingsCellView" owner:self options:nil];
+            cell = (SettingsCellView *)[nib objectAtIndex:0];
         }
     }
     
@@ -126,45 +131,77 @@
     
     if ( indexPath.row == 0 ){
     
-        if ( [[[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuth"] isEqualToString:@""] )
+        if ( ![keys containsObject:@"fbAuth"] || [[[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuth"] isEqualToString:@""] )
         {
-            [cell setCellValueswithSocialNetworkNake :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0];
-        }else {
-            [cell setCellValueswithSocialNetworkNake :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:1];
+            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0];
+            
+        }else if ( [keys containsObject:@"fbAuth"] && ![[[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuth"] isEqualToString:@""] )
+        {
+            
+            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:1];
+            
         }
         
         [cell.socialNetworkButton addTarget:self action:@selector(loginFacebook:) forControlEvents:UIControlEventTouchUpInside];
+        
     }else if ( indexPath.row == 1 ){
         
-        if ( [[[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuth"] isEqualToString:@""] ){
+        if ( ![keys containsObject:@"twitterAuth"] || [[[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuth"] isEqualToString:@""] ){
             
-            [cell setCellValueswithSocialNetworkNake :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0];
-        }else {
+            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0];
             
-             [cell setCellValueswithSocialNetworkNake :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:1];
+        }else if ( [keys containsObject:@"twitterAuth"] && ![[[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuth"] isEqualToString:@""] )
+        {
+            
+             [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:1];
         }
         
         [cell.socialNetworkButton addTarget:self action:@selector(loginTwitter:) forControlEvents:UIControlEventTouchUpInside];
+        
     }else if ( indexPath.row == 2 ){
         
-        if ( [[[NSUserDefaults standardUserDefaults] objectForKey:@"linkedinAuth"] isEqualToString:@""] )
+        if ( ![keys containsObject:@"linkedinAuth"] || [[[NSUserDefaults standardUserDefaults] objectForKey:@"linkedinAuth"] isEqualToString:@""] )
         {
-            [cell setCellValueswithSocialNetworkNake :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0];
-        }else {
-             [cell setCellValueswithSocialNetworkNake :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:1];
+            
+            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0];
+            
+        }else if ( [keys containsObject:@"linkedinAuth"] && ![[[NSUserDefaults standardUserDefaults] objectForKey:@"linkedinAuth"] isEqualToString:@""] )
+        {
+            
+             [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:1];
+            
         }
         
         [cell.socialNetworkButton addTarget:self action:@selector(loginLinkedIn:) forControlEvents:UIControlEventTouchUpInside];
     }
     else if ( indexPath.row == 3 ){
         
-        if ( ![[[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuth"] isEqualToString:@""] ){
-            [cell setCellValueswithSocialNetworkNake :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:1];
+        if (  [untechable.email isEqualToString:@""] || [untechable.password isEqualToString:@""] ){
+            
+            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0];
+            
         }else {
-            [cell setCellValueswithSocialNetworkNake :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0];
+            
+            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:1];
+            
         }
+        
+        [cell.socialNetworkButton addTarget:self action:@selector(emailLogin:) forControlEvents:UIControlEventTouchUpInside];
     }
     return cell;
+}
+
+-(IBAction)emailLogin:(id)sender {
+    
+    if ( [untechable.email isEqualToString:@""] || [untechable.password isEqualToString:@""] ){
+        
+        EmailSettingController *emailSettingController;
+        emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
+        emailSettingController.untechable = untechable;
+        emailSettingController.comingFromSettingsScreen = YES;
+        emailSettingController.comingFromChangeEmailScreen = NO;
+        [self.navigationController pushViewController:emailSettingController animated:YES];
+    }
 }
 
 //Active fb button when fb toke expiry date is greater then current date.
@@ -195,9 +232,11 @@
     if( [self linkedInBtnStatus] ) {
         //When button was green , the delete permissions
         [self linkedInLogout];
+        UIButton *linkedInButton = (UIButton *) sender;
+        [linkedInButton setTitle:@"Log In" forState:UIControlStateNormal];
     }
     else {
-        [self getLinkedInAuth];
+        [self getLinkedInAuth:sender];
     }
 }
 
@@ -208,9 +247,10 @@
 
 - (void)linkedInLogout {
     [untechable linkedInUpdateData:@""];
+    
 }
 
-- (void)getLinkedInAuth{
+- (void)getLinkedInAuth :(id) sender {
     //1-st async call
     [self.linkedInclient getAuthorizationCode:^(NSString *code) {
         
@@ -223,7 +263,10 @@
                                         NSLog(@"linked1 in accessToken %@",untechable.linkedinAuth);
                                         
                                         [untechable linkedInUpdateData:untechable.linkedinAuth];
-                                        //[self requestMeWithToken:untechable.linkedinAuth];
+                                        
+                                       
+                                        
+                                        [self setLoggedInStatusOnCell:sender];
                                         
                                     }
                                     failure:^(NSError *error) {
@@ -242,6 +285,9 @@
     
     if( [self twitterBtnStatus] ) {
         //When button was green , the delete permissions
+        
+        UIButton *twitterButton = (UIButton *) sender;
+        [twitterButton setTitle:@"Log In" forState:UIControlStateNormal];
         [self twLogout];
     }
     else {
@@ -256,6 +302,10 @@
         //GO TO TWITTER AUTH LOGIN SCREEN
         UIViewController *loginController = [[FHSTwitterEngine sharedEngine]loginControllerWithCompletionHandler:^(BOOL success) {
             NSLog( success ? @"Twitter, success login on twitter" : @"Twitter login failure.");
+            if ( success ){
+                
+                [self setLoggedInStatusOnCell:sender];
+            }
         }];
         [self presentViewController:loginController animated:YES completion:nil];
     }
@@ -276,11 +326,70 @@
     [untechable twUpdateData:@"" oAuthTokenSecret:@""];
 }
 
+//STORE TWITTER TOKEN [Note: Do not change the name of this functions, it will called from twitter libraries]
+- (void)twStoreAccessToken:(NSString *)accessTokenZ {
+    
+    [[NSUserDefaults standardUserDefaults]setObject:accessTokenZ forKey:@"SavedAccessHTTPBody"];
+    NSString *authenticatedUsername = [self extractValueForKey:@"screen_name" fromHTTPBody:accessTokenZ];
+    NSString *authenticatedID = [self extractValueForKey:@"user_id" fromHTTPBody:accessTokenZ];
+    
+    NSString *oauth_token = [self extractValueForKey:@"oauth_token" fromHTTPBody:accessTokenZ];
+    NSString *oauth_token_secret = [self extractValueForKey:@"oauth_token_secret" fromHTTPBody:accessTokenZ];
+    
+    NSLog(@"B- twitter : oauth_token: %@, oauth_token_secret: %@, self.authenticatedUsername: %@, self.authenticatedID: %@, ", oauth_token, oauth_token_secret, authenticatedUsername, authenticatedID);
+    
+    if(oauth_token == nil || oauth_token_secret == nil){
+        oauth_token = oauth_token_secret =  @"";
+    }
+    
+    [untechable twUpdateData:oauth_token oAuthTokenSecret:oauth_token_secret];
+    
+}
+//RETURN TWITTER TOKEN [Note: Do not change the name of this functions, it will called from twitter libraries]
+- (NSString *)twLoadAccessToken {
+    return [[NSUserDefaults standardUserDefaults]objectForKey:@"SavedAccessHTTPBody"];
+}
+
+//This functions return parmaeter value from url parmeter string
+//http:abc.com?a=1&b=c in this url a is target and body is the full url
+- (NSString *)extractValueForKey:(NSString *)target fromHTTPBody:(NSString *)body {
+    if (body.length == 0) {
+        return nil;
+    }
+    
+    if (target.length == 0) {
+        return nil;
+    }
+    
+    NSArray *tuples = [body componentsSeparatedByString:@"&"];
+    if (tuples.count < 1) {
+        return nil;
+    }
+    
+    for (NSString *tuple in tuples) {
+        NSArray *keyValueArray = [tuple componentsSeparatedByString:@"="];
+        
+        if (keyValueArray.count >= 2) {
+            NSString *key = [keyValueArray objectAtIndex:0];
+            NSString *value = [keyValueArray objectAtIndex:1];
+            
+            if ([key isEqualToString:target]) {
+                return value;
+            }
+        }
+    }
+    
+    return nil;
+}
+
+
 -(IBAction)loginFacebook:(id) sender {
     
     if( [self fbBtnStatus] ) {
         //When button was green , the delete permissions
         [untechable fbFlushFbData];
+        UIButton *facebookButton = (UIButton *) sender;
+        [facebookButton setTitle:@"Log In" forState:UIControlStateNormal];
     }
     else{
         //When button was gray , take permissions
@@ -304,6 +413,8 @@
                  
                  // Call the app delegate's sessionStateChanged:state:error method to handle session state changes
                  [untechable fbSessionStateChanged:session state:state error:error];
+                 
+                 [self setLoggedInStatusOnCell:sender];
              }];
         }
     }
@@ -314,6 +425,22 @@
     
     //return number of rows;
     return  4;
+}
+
+-(void) setLoggedInStatusOnCell : (id) sender {
+
+    UIButton *socialButton = (UIButton *) sender;
+    [socialButton setTitle:@"Log out" forState:UIControlStateNormal];
+    
+    SettingsCellView *settingCell;
+    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.socialNetworksTable];
+    NSIndexPath *indexPath = [self.socialNetworksTable indexPathForRowAtPoint:buttonPosition];
+    if (indexPath != nil)
+    {
+        settingCell = (SettingsCellView*)[_socialNetworksTable cellForRowAtIndexPath:indexPath];
+    }
+    
+    [settingCell.loginStatus setText:@"Logged In"];
 }
 /*
 #pragma mark - Navigation

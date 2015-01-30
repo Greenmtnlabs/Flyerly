@@ -1,5 +1,5 @@
 //
-//  PreferencesViewController.h
+//  SettingsViewController.h
 //  Untechable
 //
 //  Created by Abdul Rauf on 28/01/2015.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Untechable.h"
 
-@interface PreferencesViewController : UIViewController <UITableViewDelegate,UITableViewDataSource>{
+@interface SettingsViewController : UIViewController <UITableViewDelegate,UITableViewDataSource>{
     
     UIColor *defGreen;//GREEN
     UIColor *defGray;//GRAY

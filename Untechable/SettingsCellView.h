@@ -1,5 +1,5 @@
 //
-//  PreferencesCellView.h
+//  SettingsCellView.h
 //  Untechable
 //
 //  Created by Abdul Rauf on 28/01/2015.
@@ -9,14 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "Untechable.h"
 
-@interface PreferencesCellView : UITableViewCell {
+@interface SettingsCellView : UITableViewCell {
     
     
 }
 
 @property (nonatomic,strong)IBOutlet UILabel *socialNetworkName;
+@property (nonatomic,strong)IBOutlet UILabel *loginStatus;
 @property (nonatomic,strong)IBOutlet UIButton *socialNetworkButton;
 
--(void)setCellValueswithSocialNetworkNake :(NSString *)networkName LoginStatus:(BOOL)LoginStatus;
+-(void)setCellValueswithSocialNetworkName :(NSString *)networkName LoginStatus:(BOOL)LoginStatus;
 
 @end
