@@ -133,12 +133,12 @@
     
         if ( ![keys containsObject:@"fbAuth"] || [[[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuth"] isEqualToString:@""] )
         {
-            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0 NetworkImage:@"fb_Like@2x.png"];
+            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0 NetworkImage:@"facebook@2x.png"];
             
         }else if ( [keys containsObject:@"fbAuth"] && ![[[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuth"] isEqualToString:@""] )
         {
             
-            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:1 NetworkImage:@"fb_Like@2x.png"];
+            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:1 NetworkImage:@"facebook@2x.png"];
             
         }
         
@@ -148,12 +148,12 @@
         
         if ( ![keys containsObject:@"twitterAuth"] || [[[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuth"] isEqualToString:@""] ){
             
-            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0 NetworkImage:@"twt_follow@2x.png"];
+            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0 NetworkImage:@"twitter@2x.png"];
             
         }else if ( [keys containsObject:@"twitterAuth"] && ![[[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuth"] isEqualToString:@""] )
         {
             
-             [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:1 NetworkImage:@"twt_follow@2x.png"];
+             [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:1 NetworkImage:@"twitter@2x.png"];
         }
         
         [cell.socialNetworkButton addTarget:self action:@selector(loginTwitter:) forControlEvents:UIControlEventTouchUpInside];
@@ -163,12 +163,12 @@
         if ( ![keys containsObject:@"linkedinAuth"] || [[[NSUserDefaults standardUserDefaults] objectForKey:@"linkedinAuth"] isEqualToString:@""] )
         {
             
-            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0 NetworkImage:@"twt_follow@2x.png"];
+            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0 NetworkImage:@"linkedin@2x.png"];
             
         }else if ( [keys containsObject:@"linkedinAuth"] && ![[[NSUserDefaults standardUserDefaults] objectForKey:@"linkedinAuth"] isEqualToString:@""] )
         {
             
-             [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:1 NetworkImage:@"twt_follow@2x.png"];
+             [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:1 NetworkImage:@"linkedin@2x.png"];
             
         }
         
@@ -181,11 +181,11 @@
               [[[NSUserDefaults standardUserDefaults] objectForKey:@"email_address"] isEqualToString:@""] ||
               [[[NSUserDefaults standardUserDefaults] objectForKey:@"email_password"] isEqualToString:@""] ){
             
-            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0 NetworkImage:@"twt_follow@2x.png"];
+            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0 NetworkImage:@"emailic@2x.png"];
             
         }else {
             
-            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:1 NetworkImage:@"twt_follow@2x.png"];
+            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:1 NetworkImage:@"emailic@2x.png"];
             
         }
         

@@ -190,6 +190,25 @@
 		C33C1EF11A7278870064DBE8 /* ServerAccountDetailsViewCell-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33C1EF01A7278870064DBE8 /* ServerAccountDetailsViewCell-iPhone6-Plus.xib */; };
 		C33C1EF31A727A690064DBE8 /* SSLCell-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33C1EF21A727A690064DBE8 /* SSLCell-iPhone6.xib */; };
 		C33C1EF51A727A7B0064DBE8 /* SSLCell-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33C1EF41A727A7B0064DBE8 /* SSLCell-iPhone6-Plus.xib */; };
+		C346D1751A7FD13B00856A58 /* playvideo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C346D1621A7FD13B00856A58 /* playvideo@3x.png */; };
+		C346D1761A7FD13B00856A58 /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = C346D1631A7FD13B00856A58 /* logout.png */; };
+		C346D1771A7FD13B00856A58 /* logout@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C346D1641A7FD13B00856A58 /* logout@3x.png */; };
+		C346D1781A7FD13B00856A58 /* logout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C346D1651A7FD13B00856A58 /* logout@2x.png */; };
+		C346D1791A7FD13B00856A58 /* login@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C346D1661A7FD13B00856A58 /* login@3x.png */; };
+		C346D17A1A7FD13B00856A58 /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = C346D1671A7FD13B00856A58 /* login.png */; };
+		C346D17B1A7FD13B00856A58 /* login@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C346D1681A7FD13B00856A58 /* login@2x.png */; };
+		C346D17C1A7FD13B00856A58 /* emailic@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C346D1691A7FD13B00856A58 /* emailic@3x.png */; };
+		C346D17D1A7FD13B00856A58 /* emailic.png in Resources */ = {isa = PBXBuildFile; fileRef = C346D16A1A7FD13B00856A58 /* emailic.png */; };
+		C346D17E1A7FD13B00856A58 /* emailic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C346D16B1A7FD13B00856A58 /* emailic@2x.png */; };
+		C346D17F1A7FD13B00856A58 /* twitter@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C346D16C1A7FD13B00856A58 /* twitter@3x.png */; };
+		C346D1801A7FD13B00856A58 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = C346D16D1A7FD13B00856A58 /* twitter.png */; };
+		C346D1811A7FD13B00856A58 /* twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C346D16E1A7FD13B00856A58 /* twitter@2x.png */; };
+		C346D1821A7FD13B00856A58 /* facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C346D16F1A7FD13B00856A58 /* facebook@2x.png */; };
+		C346D1831A7FD13B00856A58 /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = C346D1701A7FD13B00856A58 /* facebook.png */; };
+		C346D1841A7FD13B00856A58 /* facebook@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C346D1711A7FD13B00856A58 /* facebook@3x.png */; };
+		C346D1851A7FD13B00856A58 /* linkedin.png in Resources */ = {isa = PBXBuildFile; fileRef = C346D1721A7FD13B00856A58 /* linkedin.png */; };
+		C346D1861A7FD13B00856A58 /* linkedin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C346D1731A7FD13B00856A58 /* linkedin@2x.png */; };
+		C346D1871A7FD13B00856A58 /* linkedin@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C346D1741A7FD13B00856A58 /* linkedin@3x.png */; };
 		C36D2E581A7919C2000537C5 /* SettingsCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = C36D2E561A7919C2000537C5 /* SettingsCellView.m */; };
 		C36D2E591A7919C2000537C5 /* SettingsCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C36D2E571A7919C2000537C5 /* SettingsCellView.xib */; };
 		C36D2E5D1A7919DC000537C5 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C36D2E5B1A7919DC000537C5 /* SettingsViewController.m */; };
@@ -440,6 +459,25 @@
 		C33C1EF01A7278870064DBE8 /* ServerAccountDetailsViewCell-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ServerAccountDetailsViewCell-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		C33C1EF21A727A690064DBE8 /* SSLCell-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SSLCell-iPhone6.xib"; sourceTree = "<group>"; };
 		C33C1EF41A727A7B0064DBE8 /* SSLCell-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SSLCell-iPhone6-Plus.xib"; sourceTree = "<group>"; };
+		C346D1621A7FD13B00856A58 /* playvideo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playvideo@3x.png"; sourceTree = "<group>"; };
+		C346D1631A7FD13B00856A58 /* logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout.png; sourceTree = "<group>"; };
+		C346D1641A7FD13B00856A58 /* logout@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logout@3x.png"; sourceTree = "<group>"; };
+		C346D1651A7FD13B00856A58 /* logout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logout@2x.png"; sourceTree = "<group>"; };
+		C346D1661A7FD13B00856A58 /* login@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login@3x.png"; sourceTree = "<group>"; };
+		C346D1671A7FD13B00856A58 /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login.png; sourceTree = "<group>"; };
+		C346D1681A7FD13B00856A58 /* login@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login@2x.png"; sourceTree = "<group>"; };
+		C346D1691A7FD13B00856A58 /* emailic@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emailic@3x.png"; sourceTree = "<group>"; };
+		C346D16A1A7FD13B00856A58 /* emailic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emailic.png; sourceTree = "<group>"; };
+		C346D16B1A7FD13B00856A58 /* emailic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emailic@2x.png"; sourceTree = "<group>"; };
+		C346D16C1A7FD13B00856A58 /* twitter@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter@3x.png"; sourceTree = "<group>"; };
+		C346D16D1A7FD13B00856A58 /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
+		C346D16E1A7FD13B00856A58 /* twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter@2x.png"; sourceTree = "<group>"; };
+		C346D16F1A7FD13B00856A58 /* facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook@2x.png"; sourceTree = "<group>"; };
+		C346D1701A7FD13B00856A58 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
+		C346D1711A7FD13B00856A58 /* facebook@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook@3x.png"; sourceTree = "<group>"; };
+		C346D1721A7FD13B00856A58 /* linkedin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = linkedin.png; sourceTree = "<group>"; };
+		C346D1731A7FD13B00856A58 /* linkedin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "linkedin@2x.png"; sourceTree = "<group>"; };
+		C346D1741A7FD13B00856A58 /* linkedin@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "linkedin@3x.png"; sourceTree = "<group>"; };
 		C36D2E551A7919C2000537C5 /* SettingsCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsCellView.h; sourceTree = "<group>"; };
 		C36D2E561A7919C2000537C5 /* SettingsCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsCellView.m; sourceTree = "<group>"; };
 		C36D2E571A7919C2000537C5 /* SettingsCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsCellView.xib; sourceTree = "<group>"; };
@@ -814,6 +852,25 @@
 		36B0369A19DAD2AB00E8CD21 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C346D1621A7FD13B00856A58 /* playvideo@3x.png */,
+				C346D1631A7FD13B00856A58 /* logout.png */,
+				C346D1641A7FD13B00856A58 /* logout@3x.png */,
+				C346D1651A7FD13B00856A58 /* logout@2x.png */,
+				C346D1661A7FD13B00856A58 /* login@3x.png */,
+				C346D1671A7FD13B00856A58 /* login.png */,
+				C346D1681A7FD13B00856A58 /* login@2x.png */,
+				C346D1691A7FD13B00856A58 /* emailic@3x.png */,
+				C346D16A1A7FD13B00856A58 /* emailic.png */,
+				C346D16B1A7FD13B00856A58 /* emailic@2x.png */,
+				C346D16C1A7FD13B00856A58 /* twitter@3x.png */,
+				C346D16D1A7FD13B00856A58 /* twitter.png */,
+				C346D16E1A7FD13B00856A58 /* twitter@2x.png */,
+				C346D16F1A7FD13B00856A58 /* facebook@2x.png */,
+				C346D1701A7FD13B00856A58 /* facebook.png */,
+				C346D1711A7FD13B00856A58 /* facebook@3x.png */,
+				C346D1721A7FD13B00856A58 /* linkedin.png */,
+				C346D1731A7FD13B00856A58 /* linkedin@2x.png */,
+				C346D1741A7FD13B00856A58 /* linkedin@3x.png */,
 				C37F75571A7F50D100B5AC71 /* twt_follow@2x.png */,
 				C37F75581A7F50D100B5AC71 /* twt_follow@3x.png */,
 				C37F75591A7F50D100B5AC71 /* fb_Like@2x.png */,
@@ -1075,6 +1132,7 @@
 				200ACE2B1A3874B200DC7047 /* GoogleIcon@2x.png in Resources */,
 				36B2767B1A0124E800ED58AD /* right_arrow.png in Resources */,
 				C37F755B1A7F50D100B5AC71 /* twt_follow@2x.png in Resources */,
+				C346D1751A7FD13B00856A58 /* playvideo@3x.png in Resources */,
 				200ACE2D1A3874B200DC7047 /* icloudIcon.png in Resources */,
 				2402BB891A1DC3A200255A73 /* UntechableTableCell.xib in Resources */,
 				36B276781A0124E800ED58AD /* record_gray@2x.png in Resources */,
@@ -1085,9 +1143,11 @@
 				243C59FA1A4D984B0020350C /* PhoneNumberCell.xib in Resources */,
 				244834371A5D76F800E6F173 /* email@3x.png in Resources */,
 				366EAF9C1A14C3530011D6C6 /* icon.png in Resources */,
+				C346D1871A7FD13B00856A58 /* linkedin@3x.png in Resources */,
 				249952191A56C905001AEB84 /* Entypo-Social.otf in Resources */,
 				36474F2619D9780100084F34 /* Pigiarniq Regular.ttf in Resources */,
 				C33C1EF31A727A690064DBE8 /* SSLCell-iPhone6.xib in Resources */,
+				C346D1801A7FD13B00856A58 /* twitter.png in Resources */,
 				2499521E1A56F260001AEB84 /* phone.png in Resources */,
 				36B276791A0124E800ED58AD /* record.png in Resources */,
 				366EAF961A14C3530011D6C6 /* icon-72.png in Resources */,
@@ -1103,6 +1163,7 @@
 				C36D2E621A791AEA000537C5 /* SettingsCellView-iPhone6-Plus.xib in Resources */,
 				248E06BD1A4AD9180099846A /* ContactListCell-iPhone6-Plus.xib in Resources */,
 				C33C1EE71A724A0E0064DBE8 /* EmailCell-iPhone6.xib in Resources */,
+				C346D17C1A7FD13B00856A58 /* emailic@3x.png in Resources */,
 				366EAFAB1A14E5370011D6C6 /* playvideo@2x.png in Resources */,
 				200ACE321A3874B200DC7047 /* outlookIcon@3x.png in Resources */,
 				200ACE2A1A3874B200DC7047 /* GoogleIcon.png in Resources */,
@@ -1117,13 +1178,16 @@
 				200ACE281A3874B200DC7047 /* exchangeIcon@2x.png in Resources */,
 				247C72D31A5C0968005C9693 /* user_img.png in Resources */,
 				C37F755D1A7F50D100B5AC71 /* fb_Like@2x.png in Resources */,
+				C346D17E1A7FD13B00856A58 /* emailic@2x.png in Resources */,
 				36474F2319D9780100084F34 /* Pigiarniq Heavy.ttf in Resources */,
 				2486CBAC1A5A79F500AC125E /* email@2x.png in Resources */,
 				C33C1EE51A7247500064DBE8 /* PhoneNumberCell-iPhone6-Plus.xib in Resources */,
 				36C734481A0CF2490066C544 /* Podfile in Resources */,
 				366EAF911A14C3530011D6C6 /* icon-40@2x.png in Resources */,
 				36BB7B8A19FFD98C00562069 /* ThankyouController.xib in Resources */,
+				C346D1841A7FD13B00856A58 /* facebook@3x.png in Resources */,
 				2448343C1A5D776200E6F173 /* email_selected@3x.png in Resources */,
+				C346D1791A7FD13B00856A58 /* login@3x.png in Resources */,
 				366EAFA51A14C3530011D6C6 /* logo@2x.png in Resources */,
 				366EAF9D1A14C3530011D6C6 /* icon@1024.png in Resources */,
 				36B2767C1A0124E800ED58AD /* right_arrow@2x.png in Resources */,
@@ -1136,9 +1200,11 @@
 				2486CBAA1A5A79F500AC125E /* email_selected.png in Resources */,
 				3681604019E6B81E00B9B64C /* InviteFriendsController.xib in Resources */,
 				C334E60D1A777472005539B4 /* logo-Other@2x.png in Resources */,
+				C346D1811A7FD13B00856A58 /* twitter@2x.png in Resources */,
 				200ACE291A3874B200DC7047 /* exchangeIcon@3x.png in Resources */,
 				200ACE261A3874B200DC7047 /* aolIcon@3x.png in Resources */,
 				C33C1EEF1A7278730064DBE8 /* ServerAccountDetailsViewCell-iPhone6.xib in Resources */,
+				C346D1781A7FD13B00856A58 /* logout@2x.png in Resources */,
 				366EAFA11A14C3530011D6C6 /* Default-Landscape-736h@3x.png in Resources */,
 				366EAFB51A14EDA30011D6C6 /* copy@2x.png in Resources */,
 				C33C1EE11A7242970064DBE8 /* FirstTableViewCell-iPhone6-Plus.xib in Resources */,
@@ -1149,14 +1215,18 @@
 				C33C1EEB1A724CFE0064DBE8 /* CustomTextTableViewCell-iPhone6.xib in Resources */,
 				36FD975619E694AC00427507 /* BSKeyboardControls.strings in Resources */,
 				247C72D41A5C0968005C9693 /* user_img@2x.png in Resources */,
+				C346D17D1A7FD13B00856A58 /* emailic.png in Resources */,
 				36B276771A0124E800ED58AD /* record_gray.png in Resources */,
 				366EAF991A14C3530011D6C6 /* icon-76@2x.png in Resources */,
 				200ACE241A3874B200DC7047 /* aolIcon.png in Resources */,
+				C346D17A1A7FD13B00856A58 /* login.png in Resources */,
 				2499521A1A56C905001AEB84 /* Entypo.otf in Resources */,
 				366EAFA71A14C3530011D6C6 /* CHECKBOX_EMPTY.png in Resources */,
 				200ACE301A3874B200DC7047 /* outlookIcon.png in Resources */,
 				366EAFAA1A14E5370011D6C6 /* playvideo.png in Resources */,
+				C346D1861A7FD13B00856A58 /* linkedin@2x.png in Resources */,
 				36B2765E1A0124E800ED58AD /* CHECKBOX_FILLED.png in Resources */,
+				C346D1821A7FD13B00856A58 /* facebook@2x.png in Resources */,
 				200ACE251A3874B200DC7047 /* aolIcon@2x.png in Resources */,
 				200ACE341A3874B200DC7047 /* YahooIcon@2x.png in Resources */,
 				36B2766F1A0124E800ED58AD /* inputBottomBg2@2x.png in Resources */,
@@ -1169,15 +1239,18 @@
 				366EAF9F1A14C3530011D6C6 /* Default-568h@2x.png in Resources */,
 				C334E60C1A777472005539B4 /* logo-Other.png in Resources */,
 				C33C1EF11A7278870064DBE8 /* ServerAccountDetailsViewCell-iPhone6-Plus.xib in Resources */,
+				C346D17B1A7FD13B00856A58 /* login@2x.png in Resources */,
 				366EAF971A14C3530011D6C6 /* icon-72@2x.png in Resources */,
 				36B2765D1A0124E800ED58AD /* CHECKBOX_EMPTY@2x.png in Resources */,
 				366ECD9719D323DA00F71A11 /* AddUntechableController.xib in Resources */,
 				C39C31A51A77D6D0003CE153 /* downArrow@2x.png in Resources */,
 				200ACE2E1A3874B200DC7047 /* icloudIcon@2x.png in Resources */,
 				2486CBAB1A5A79F500AC125E /* email_selected@2x.png in Resources */,
+				C346D1771A7FD13B00856A58 /* logout@3x.png in Resources */,
 				366EAF981A14C3530011D6C6 /* icon-76.png in Resources */,
 				3681603E19E6B81E00B9B64C /* InviteFriendsCell.xib in Resources */,
 				C36D2E601A791ADA000537C5 /* SettingsCellView-iPhone6.xib in Resources */,
+				C346D1761A7FD13B00856A58 /* logout.png in Resources */,
 				C33A87B41A7BCDB4000B9DAE /* EmailChangingController.xib in Resources */,
 				C36D2E5E1A7919DC000537C5 /* SettingsViewController.xib in Resources */,
 				36B036A719DAF44D00E8CD21 /* EmailSettingController.xib in Resources */,
@@ -1188,7 +1261,9 @@
 				366EAF931A14C3530011D6C6 /* icon-50@2x.png in Resources */,
 				243C59F51A4D753C0020350C /* FirstTableViewCell.xib in Resources */,
 				366EAFB81A14EDA30011D6C6 /* copy.png in Resources */,
+				C346D17F1A7FD13B00856A58 /* twitter@3x.png in Resources */,
 				24A65BED1A30451E00BE83C6 /* SSLCell.xib in Resources */,
+				C346D1851A7FD13B00856A58 /* linkedin.png in Resources */,
 				366EAF951A14C3530011D6C6 /* icon-60@2x.png in Resources */,
 				24354D711A499F4F000EC781 /* ContactListCell.xib in Resources */,
 				2499521D1A56F260001AEB84 /* email.png in Resources */,
@@ -1216,6 +1291,7 @@
 				366EAF9B1A14C3530011D6C6 /* icon-small@2x.png in Resources */,
 				36B276721A0124E800ED58AD /* pause@2x.png in Resources */,
 				366EAF941A14C3530011D6C6 /* icon-60.png in Resources */,
+				C346D1831A7FD13B00856A58 /* facebook.png in Resources */,
 				C33C1EDB1A72274F0064DBE8 /* EmailTableViewCell-iPhone6.xib in Resources */,
 				2448343D1A5D776200E6F173 /* phone_selected@3x.png in Resources */,
 				200ACE271A3874B200DC7047 /* exchangeIcon.png in Resources */,
