@@ -11,13 +11,13 @@
 
 @implementation SettingsCellView
 
-@synthesize socialNetworkName,socialNetworkButton,loginStatus;
+@synthesize socialNetworkName,socialNetworkButton,loginStatus,socialNetworkImage;
 
 - (void)awakeFromNib {
     // Initialization code
 }
 
--(void)setCellValueswithSocialNetworkName :(NSString *)networkName LoginStatus:(BOOL)LoginStatus{
+-(void)setCellValueswithSocialNetworkName :(NSString *)networkName LoginStatus:(BOOL)LoginStatus NetworkImage:(NSString *)ImageName{
     
     UIColor *defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
     UIColor *defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
@@ -30,6 +30,9 @@
         [loginStatus setText:@"Logged In"];
         NSLog(@"set button logout");
     }
+    
+    UIImage *socialIocn = [UIImage imageNamed:ImageName];
+    [socialNetworkImage setImage:socialIocn];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

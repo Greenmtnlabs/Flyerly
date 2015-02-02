@@ -14,6 +14,7 @@
 #import "ServerAccountDetailsViewCell.h"
 #import "SSLCell.h"
 #import "SettingsViewController.h"
+#import "SocialnetworkController.h"
 
 
 @class EmailTableViewCell;
@@ -35,7 +36,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *inputEmail;
 
 @property (strong, nonatomic) IBOutlet UITextField *inputPassword;
-@property (strong, nonatomic) IBOutlet UITextField *inputMsg;
+//@property (strong, nonatomic) IBOutlet UITextField *inputMsg;
 
 
 @property (strong, nonatomic) IBOutlet UITextField *inputImsHostName;
@@ -55,7 +56,7 @@
 
 @implementation EmailSettingController
 
-@synthesize untechable,sslSwitch,serverAccountTable,scrollView,comingFromSettingsScreen,comingFromChangeEmailScreen;
+@synthesize untechable,sslSwitch,serverAccountTable,scrollView,comingFromSettingsScreen,comingFromChangeEmailScreen,comingFromContactsListScreen;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -86,7 +87,8 @@
     
     [self setDefaultModel];
     
-    NSArray *fields = @[ self.inputEmail, self.inputPassword, self.inputMsg ];
+    //NSArray *fields = @[ self.inputEmail, self.inputPassword, self.inputMsg ];
+    NSArray *fields = @[ self.inputEmail, self.inputPassword ];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
     [self.keyboardControls setDelegate:self];
 }
@@ -189,17 +191,29 @@
     [self.inputEmail setTextColor:defGreen];
     self.inputEmail.font = [UIFont fontWithName:APP_FONT size:16];
     self.inputEmail.delegate = self;
-    self.inputEmail.text = untechable.email;
+    
     
     [self.inputPassword setTextColor:defGreen];
     self.inputPassword.font = [UIFont fontWithName:APP_FONT size:16];
     self.inputPassword.delegate = self;
-    self.inputPassword.text = untechable.password;
     
-    [self.inputMsg setTextColor:defGreen];
+    
+    if ( [untechable.email isEqualToString:@""] ){
+        
+        if ( ![[[NSUserDefaults standardUserDefaults] objectForKey:@"email_address"] isEqualToString:@""] ||
+            ![[[NSUserDefaults standardUserDefaults] objectForKey:@"email_password"] isEqualToString:@""] ){
+            
+            self.inputEmail.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"email_address"];
+            self.inputPassword.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"email_password"];
+        }
+    }else {
+        self.inputEmail.text = untechable.email;
+    }
+    
+    /*[self.inputMsg setTextColor:defGreen];
     self.inputMsg.font = [UIFont fontWithName:APP_FONT size:16];
     self.inputMsg.delegate = self;
-    self.inputMsg.text = untechable.respondingEmail;
+    self.inputMsg.text = untechable.respondingEmail;*/
     
 }
 #pragma mark -  Navigation functions
@@ -268,7 +282,24 @@
         rightBarButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         [rightBarButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
         rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [rightBarButton setTitle:@"FINISH" forState:normal];
+        
+        if ( comingFromSettingsScreen ){
+            
+            [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
+            
+        }else if ( comingFromChangeEmailScreen ) {
+            
+            [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
+            
+        }else if ( comingFromContactsListScreen ){
+            
+            [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
+            
+        }else {
+            
+            [rightBarButton setTitle:TITLE_FINISH_TXT forState:normal];
+        }
+        
         [rightBarButton setTitleColor:defGray forState:UIControlStateNormal];
         //[nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
         //[nextButton addTarget:self action:@selector(btnNextTouchEndToServerAccount) forControlEvents:UIControlEventTouchUpInside];
@@ -310,7 +341,23 @@
         rightBarButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         [rightBarButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
         rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [rightBarButton setTitle:@"FINISH" forState:normal];
+        if ( comingFromSettingsScreen ){
+            
+            [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
+            
+        }else if ( comingFromChangeEmailScreen ) {
+            
+            [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
+            
+        }else if ( comingFromContactsListScreen ){
+            
+            [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
+            
+        }else {
+            
+            [rightBarButton setTitle:TITLE_FINISH_TXT forState:normal];
+        }
+        
         [rightBarButton setTitleColor:defGray forState:UIControlStateNormal];
         
         if ( [untechable.acType isEqualToString:@"OTHER"] ){
@@ -363,6 +410,10 @@
             [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
             
         }else if ( comingFromChangeEmailScreen ) {
+            
+            [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
+            
+        }else if ( comingFromContactsListScreen ){
             
             [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
             
@@ -432,7 +483,16 @@
             }
         }
         
-    } else {
+    } else if ( comingFromContactsListScreen ){
+    
+        [self storeSceenVarsInDic];
+        
+        SocialnetworkController *socialnetwork;
+        socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
+        socialnetwork.untechable = untechable;
+        [self.navigationController pushViewController:socialnetwork animated:YES];
+        
+    }else {
         
         if ( iSsl == nil ){
             untechable.iSsl = @"YES";
@@ -457,7 +517,7 @@
 
     untechable.email = self.inputEmail.text;
     untechable.password = self.inputPassword.text;
-    untechable.respondingEmail = self.inputMsg.text;
+    //untechable.respondingEmail = self.inputMsg.text;
     
     [self hideAllViews];
     
@@ -480,9 +540,12 @@
 
 -(void)storeSceenVarsInDic
 {
+    [[NSUserDefaults standardUserDefaults] setObject:_inputEmail.text forKey:@"email_address"];
+    [[NSUserDefaults standardUserDefaults] setObject:_inputPassword.text forKey:@"email_password"];
+    
     untechable.email = _inputEmail.text;
     untechable.password = _inputPassword.text;
-    untechable.respondingEmail = _inputMsg.text;
+    //untechable.respondingEmail = _inputMsg.text;
     
     if ( [untechable.acType isEqualToString:@"OTHER"] ) {
         untechable.iSsl          = iSsl;

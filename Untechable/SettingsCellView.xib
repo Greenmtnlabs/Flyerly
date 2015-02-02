@@ -15,18 +15,18 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="ihx-7m-lLZ">
-                        <rect key="frame" x="8" y="11" width="30" height="45"/>
+                        <rect key="frame" x="8" y="16" width="30" height="68"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="A1Z-DM-7Sj">
-                        <rect key="frame" x="258" y="11" width="55" height="45"/>
+                        <rect key="frame" x="258" y="16" width="55" height="68"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <state key="normal" title="Log In">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Social Netwrok Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vDw-aj-Z4D">
-                        <rect key="frame" x="46" y="17" width="185" height="32"/>
+                        <rect key="frame" x="46" y="25" width="185" height="49"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                         <color key="textColor" red="0.25882352939999997" green="0.96862745100000003" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -36,6 +36,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="socialNetworkButton" destination="A1Z-DM-7Sj" id="2rl-4G-2rA"/>
+                <outlet property="socialNetworkImage" destination="ihx-7m-lLZ" id="9es-bs-eSz"/>
                 <outlet property="socialNetworkName" destination="vDw-aj-Z4D" id="5Ne-aD-ji4"/>
             </connections>
             <point key="canvasLocation" x="460" y="327"/>

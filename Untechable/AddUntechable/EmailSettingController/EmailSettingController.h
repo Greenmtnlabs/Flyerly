@@ -43,4 +43,7 @@
 //Check if coming from change email screen
 @property (nonatomic, assign) BOOL comingFromChangeEmailScreen;
 
+//Check if coming from contacstListScreen screen
+@property (nonatomic, assign) BOOL comingFromContactsListScreen;
+
 @end

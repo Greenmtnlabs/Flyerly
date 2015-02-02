@@ -14,7 +14,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CHECKBOX_EMPTY.png" id="v0s-4V-4yg">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fb_Like.png" id="v0s-4V-4yg">
                         <rect key="frame" x="8" y="18" width="30" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
@@ -44,13 +44,14 @@
             <connections>
                 <outlet property="loginStatus" destination="VW3-m3-t8d" id="5cT-i5-cZV"/>
                 <outlet property="socialNetworkButton" destination="wlt-MX-cXf" id="dft-uI-O67"/>
+                <outlet property="socialNetworkImage" destination="v0s-4V-4yg" id="80N-Vk-R3J"/>
                 <outlet property="socialNetworkName" destination="HhY-Os-Ipd" id="YF6-Iq-8mh"/>
             </connections>
             <point key="canvasLocation" x="165" y="133"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="CHECKBOX_EMPTY.png" width="18" height="18"/>
+        <image name="fb_Like.png" width="25" height="25"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

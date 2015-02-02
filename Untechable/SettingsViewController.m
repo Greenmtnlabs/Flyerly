@@ -133,12 +133,12 @@
     
         if ( ![keys containsObject:@"fbAuth"] || [[[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuth"] isEqualToString:@""] )
         {
-            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0];
+            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0 NetworkImage:@"fb_Like@2x.png"];
             
         }else if ( [keys containsObject:@"fbAuth"] && ![[[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuth"] isEqualToString:@""] )
         {
             
-            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:1];
+            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:1 NetworkImage:@"fb_Like@2x.png"];
             
         }
         
@@ -148,12 +148,12 @@
         
         if ( ![keys containsObject:@"twitterAuth"] || [[[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuth"] isEqualToString:@""] ){
             
-            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0];
+            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0 NetworkImage:@"twt_follow@2x.png"];
             
         }else if ( [keys containsObject:@"twitterAuth"] && ![[[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuth"] isEqualToString:@""] )
         {
             
-             [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:1];
+             [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:1 NetworkImage:@"twt_follow@2x.png"];
         }
         
         [cell.socialNetworkButton addTarget:self action:@selector(loginTwitter:) forControlEvents:UIControlEventTouchUpInside];
@@ -163,12 +163,12 @@
         if ( ![keys containsObject:@"linkedinAuth"] || [[[NSUserDefaults standardUserDefaults] objectForKey:@"linkedinAuth"] isEqualToString:@""] )
         {
             
-            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0];
+            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0 NetworkImage:@"twt_follow@2x.png"];
             
         }else if ( [keys containsObject:@"linkedinAuth"] && ![[[NSUserDefaults standardUserDefaults] objectForKey:@"linkedinAuth"] isEqualToString:@""] )
         {
             
-             [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:1];
+             [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:1 NetworkImage:@"twt_follow@2x.png"];
             
         }
         
@@ -176,31 +176,55 @@
     }
     else if ( indexPath.row == 3 ){
         
-        if (  [untechable.email isEqualToString:@""] || [untechable.password isEqualToString:@""] ){
+        if (  ![keys containsObject:@"email_address"]   ||
+              ![keys containsObject:@"email_password"]  ||
+              [[[NSUserDefaults standardUserDefaults] objectForKey:@"email_address"] isEqualToString:@""] ||
+              [[[NSUserDefaults standardUserDefaults] objectForKey:@"email_password"] isEqualToString:@""] ){
             
-            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0];
+            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0 NetworkImage:@"twt_follow@2x.png"];
             
         }else {
             
-            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:1];
+            [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:1 NetworkImage:@"twt_follow@2x.png"];
             
         }
         
         [cell.socialNetworkButton addTarget:self action:@selector(emailLogin:) forControlEvents:UIControlEventTouchUpInside];
     }
+    
     return cell;
 }
 
 -(IBAction)emailLogin:(id)sender {
     
-    if ( [untechable.email isEqualToString:@""] || [untechable.password isEqualToString:@""] ){
+    UIButton *emailButton = (UIButton *) sender;
+    
+    if ( [emailButton.titleLabel.text isEqualToString:@"Log Out"] ){
         
-        EmailSettingController *emailSettingController;
-        emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
-        emailSettingController.untechable = untechable;
-        emailSettingController.comingFromSettingsScreen = YES;
-        emailSettingController.comingFromChangeEmailScreen = NO;
-        [self.navigationController pushViewController:emailSettingController animated:YES];
+        if ( ![[[NSUserDefaults standardUserDefaults] objectForKey:@"email_address"] isEqualToString:@""] ||
+            ![[[NSUserDefaults standardUserDefaults] objectForKey:@"email_password"] isEqualToString:@""] ){
+            
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"email_address"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"email_password"];
+            
+            untechable.email = @"";
+            untechable.password = @"";
+        }
+        
+        [emailButton setTitle:@"Log In" forState:UIControlStateNormal];
+    }
+    
+    if ( [emailButton.titleLabel.text isEqualToString:@"Log In"]  ){
+        
+        if ( [untechable.email isEqualToString:@""] || [untechable.password isEqualToString:@""] ){
+            
+            EmailSettingController *emailSettingController;
+            emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
+            emailSettingController.untechable = untechable;
+            emailSettingController.comingFromSettingsScreen = YES;
+            emailSettingController.comingFromChangeEmailScreen = NO;
+            [self.navigationController pushViewController:emailSettingController animated:YES];
+        }
     }
 }
 
@@ -246,8 +270,10 @@
 }
 
 - (void)linkedInLogout {
-    [untechable linkedInUpdateData:@""];
     
+    [untechable linkedInUpdateData:@""];
+    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"linkedinAuth"];
+
 }
 
 - (void)getLinkedInAuth :(id) sender {
@@ -324,6 +350,7 @@
     
     //Bello code will auto call insdie above function
     [untechable twUpdateData:@"" oAuthTokenSecret:@""];
+    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"twitterAuth"];
 }
 
 //STORE TWITTER TOKEN [Note: Do not change the name of this functions, it will called from twitter libraries]
@@ -388,6 +415,7 @@
     if( [self fbBtnStatus] ) {
         //When button was green , the delete permissions
         [untechable fbFlushFbData];
+        [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"fbAuth"];
         UIButton *facebookButton = (UIButton *) sender;
         [facebookButton setTitle:@"Log In" forState:UIControlStateNormal];
     }
@@ -430,15 +458,17 @@
 -(void) setLoggedInStatusOnCell : (id) sender {
 
     UIButton *socialButton = (UIButton *) sender;
-    [socialButton setTitle:@"Log out" forState:UIControlStateNormal];
+    
     
     SettingsCellView *settingCell;
-    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.socialNetworksTable];
+    CGPoint buttonPosition = [socialButton convertPoint:CGPointZero toView:self.socialNetworksTable];
     NSIndexPath *indexPath = [self.socialNetworksTable indexPathForRowAtPoint:buttonPosition];
     if (indexPath != nil)
     {
         settingCell = (SettingsCellView*)[_socialNetworksTable cellForRowAtIndexPath:indexPath];
     }
+    
+    [socialButton setTitle:@"Log out" forState:UIControlStateNormal];
     
     [settingCell.loginStatus setText:@"Logged In"];
 }

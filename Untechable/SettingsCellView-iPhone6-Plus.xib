@@ -35,6 +35,7 @@
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="socialNetworkImage" destination="AZh-B1-joA" id="5RD-a0-456"/>
                 <outlet property="socialNetworkName" destination="p1w-Cs-Xlq" id="i7c-Xb-gV9"/>
             </connections>
             <point key="canvasLocation" x="280" y="282"/>

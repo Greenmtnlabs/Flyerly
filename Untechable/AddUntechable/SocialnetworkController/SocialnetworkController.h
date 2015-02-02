@@ -17,8 +17,9 @@
     UILabel *titleLabel;
     UIButton *helpButton;
     UIButton *backButton;
-    UIButton *nextButton;
-    UIButton *skipButton;
+    UIButton *finishButton;
+    //UIButton *nextButton;
+    //UIButton *skipButton;
     
     UIColor *defGreen;//GREEN
     UIColor *defGray;//GRAY
@@ -30,5 +31,7 @@
 
 - (IBAction)shareOn:(id)sender;
 
+//Check if coming from contacstListScreen screen
+@property (nonatomic, assign) BOOL comingFromContactsListScreen;
 
 @end

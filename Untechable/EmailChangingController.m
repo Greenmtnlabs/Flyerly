@@ -28,7 +28,17 @@
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
     
-    [_emailAddress setText:untechable.email];
+    if ( [untechable.email isEqualToString:@""] ){
+        
+        if ( ![[[NSUserDefaults standardUserDefaults] objectForKey:@"email_address"] isEqualToString:@""] ||
+            ![[[NSUserDefaults standardUserDefaults] objectForKey:@"email_password"] isEqualToString:@""] ){
+            
+            [_emailAddress setText:[[NSUserDefaults standardUserDefaults] objectForKey:@"email_address"]];
+        }
+    }else {
+        
+        [_emailAddress setText:untechable.email];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

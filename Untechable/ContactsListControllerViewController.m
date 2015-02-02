@@ -227,28 +227,52 @@
     
     if ( selectedAnyEmail  ){
         
-        if ( [untechable.email isEqualToString:@""] || [untechable.password isEqualToString:@""] ){
+        NSLog(@"%@", [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allValues]);
+        
+        NSArray *keys = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys];
+        
+        if (  [keys containsObject:@"email_address"] || [keys containsObject:@"email_password"]  ){
+            
+            if ( [[[NSUserDefaults standardUserDefaults] objectForKey:@"email_address"] isEqualToString:@""] ||
+                [[[NSUserDefaults standardUserDefaults] objectForKey:@"email_password"] isEqualToString:@""] ){
+                
+                EmailSettingController *emailSettingController;
+                emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
+                emailSettingController.untechable = untechable;
+                emailSettingController.comingFromSettingsScreen = NO;
+                emailSettingController.comingFromChangeEmailScreen = NO;
+                emailSettingController.comingFromContactsListScreen = YES;
+                [self.navigationController pushViewController:emailSettingController animated:YES];
+                
+            }else {
+                
+                EmailChangingController *emailChangeController;
+                emailChangeController = [[EmailChangingController alloc]initWithNibName:@"EmailChangingController" bundle:nil];
+                emailChangeController.untechable = untechable;
+                [self.navigationController pushViewController:emailChangeController animated:YES];
+            }
+        }else {
             
             EmailSettingController *emailSettingController;
             emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
             emailSettingController.untechable = untechable;
             emailSettingController.comingFromSettingsScreen = NO;
+            emailSettingController.comingFromChangeEmailScreen = NO;
+            emailSettingController.comingFromContactsListScreen = YES;
             [self.navigationController pushViewController:emailSettingController animated:YES];
-
-        }else {
-            
-            EmailChangingController *emailChangeController;
-            emailChangeController = [[EmailChangingController alloc]initWithNibName:@"EmailChangingController" bundle:nil];
-            emailChangeController.untechable = untechable;
-            [self.navigationController pushViewController:emailChangeController animated:YES];
         }
     }else {
         
-        EmailSettingController *emailSettingController;
+        SocialnetworkController *socialnetwork;
+        socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
+        socialnetwork.untechable = untechable;
+        [self.navigationController pushViewController:socialnetwork animated:YES];
+        
+        /*EmailSettingController *emailSettingController;
         emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
         emailSettingController.untechable = untechable;
         emailSettingController.comingFromSettingsScreen = NO;
-        [self.navigationController pushViewController:emailSettingController animated:YES];
+        [self.navigationController pushViewController:emailSettingController animated:YES];*/
         
     }
 }
@@ -486,6 +510,7 @@
         NSString *name = contactModal.name;
         
         if([[name lowercaseString] rangeOfString:[newString lowercaseString]].location == NSNotFound){
+            
         } else {
             [filteredArray addObject:contactModal];
         }
