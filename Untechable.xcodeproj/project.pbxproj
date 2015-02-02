@@ -196,6 +196,10 @@
 		C36D2E5E1A7919DC000537C5 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C36D2E5C1A7919DC000537C5 /* SettingsViewController.xib */; };
 		C36D2E601A791ADA000537C5 /* SettingsCellView-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = C36D2E5F1A791ADA000537C5 /* SettingsCellView-iPhone6.xib */; };
 		C36D2E621A791AEA000537C5 /* SettingsCellView-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = C36D2E611A791AEA000537C5 /* SettingsCellView-iPhone6-Plus.xib */; };
+		C37F755B1A7F50D100B5AC71 /* twt_follow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C37F75571A7F50D100B5AC71 /* twt_follow@2x.png */; };
+		C37F755C1A7F50D100B5AC71 /* twt_follow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C37F75581A7F50D100B5AC71 /* twt_follow@3x.png */; };
+		C37F755D1A7F50D100B5AC71 /* fb_Like@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C37F75591A7F50D100B5AC71 /* fb_Like@2x.png */; };
+		C37F755E1A7F50D100B5AC71 /* fb_Like@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C37F755A1A7F50D100B5AC71 /* fb_Like@3x.png */; };
 		C39C31A51A77D6D0003CE153 /* downArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C39C31A41A77D6D0003CE153 /* downArrow@2x.png */; };
 /* End PBXBuildFile section */
 
@@ -444,6 +448,10 @@
 		C36D2E5C1A7919DC000537C5 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		C36D2E5F1A791ADA000537C5 /* SettingsCellView-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SettingsCellView-iPhone6.xib"; sourceTree = "<group>"; };
 		C36D2E611A791AEA000537C5 /* SettingsCellView-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SettingsCellView-iPhone6-Plus.xib"; sourceTree = "<group>"; };
+		C37F75571A7F50D100B5AC71 /* twt_follow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twt_follow@2x.png"; sourceTree = "<group>"; };
+		C37F75581A7F50D100B5AC71 /* twt_follow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twt_follow@3x.png"; sourceTree = "<group>"; };
+		C37F75591A7F50D100B5AC71 /* fb_Like@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb_Like@2x.png"; sourceTree = "<group>"; };
+		C37F755A1A7F50D100B5AC71 /* fb_Like@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb_Like@3x.png"; sourceTree = "<group>"; };
 		C39C31A41A77D6D0003CE153 /* downArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "downArrow@2x.png"; sourceTree = "<group>"; };
 		FC11B82CE184AE8B063B3995 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -806,6 +814,10 @@
 		36B0369A19DAD2AB00E8CD21 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C37F75571A7F50D100B5AC71 /* twt_follow@2x.png */,
+				C37F75581A7F50D100B5AC71 /* twt_follow@3x.png */,
+				C37F75591A7F50D100B5AC71 /* fb_Like@2x.png */,
+				C37F755A1A7F50D100B5AC71 /* fb_Like@3x.png */,
 				C39C31A41A77D6D0003CE153 /* downArrow@2x.png */,
 				2448343F1A5D915D00E6F173 /* sms@3x.png */,
 				244834391A5D776200E6F173 /* email_selected@3x.png */,
@@ -1062,6 +1074,7 @@
 			files = (
 				200ACE2B1A3874B200DC7047 /* GoogleIcon@2x.png in Resources */,
 				36B2767B1A0124E800ED58AD /* right_arrow.png in Resources */,
+				C37F755B1A7F50D100B5AC71 /* twt_follow@2x.png in Resources */,
 				200ACE2D1A3874B200DC7047 /* icloudIcon.png in Resources */,
 				2402BB891A1DC3A200255A73 /* UntechableTableCell.xib in Resources */,
 				36B276781A0124E800ED58AD /* record_gray@2x.png in Resources */,
@@ -1103,6 +1116,7 @@
 				C33C1EE91A724A1E0064DBE8 /* EmailCell-iPhone6-Plus.xib in Resources */,
 				200ACE281A3874B200DC7047 /* exchangeIcon@2x.png in Resources */,
 				247C72D31A5C0968005C9693 /* user_img.png in Resources */,
+				C37F755D1A7F50D100B5AC71 /* fb_Like@2x.png in Resources */,
 				36474F2319D9780100084F34 /* Pigiarniq Heavy.ttf in Resources */,
 				2486CBAC1A5A79F500AC125E /* email@2x.png in Resources */,
 				C33C1EE51A7247500064DBE8 /* PhoneNumberCell-iPhone6-Plus.xib in Resources */,
@@ -1118,6 +1132,7 @@
 				36474F2519D9780100084F34 /* Pigiarniq Light.ttf in Resources */,
 				366EAFA21A14C3530011D6C6 /* Default-Portrait-736h@3x.png in Resources */,
 				C33C1EE31A72473E0064DBE8 /* PhoneNumberCell-iPhone6.xib in Resources */,
+				C37F755E1A7F50D100B5AC71 /* fb_Like@3x.png in Resources */,
 				2486CBAA1A5A79F500AC125E /* email_selected.png in Resources */,
 				3681604019E6B81E00B9B64C /* InviteFriendsController.xib in Resources */,
 				C334E60D1A777472005539B4 /* logo-Other@2x.png in Resources */,
@@ -1197,6 +1212,7 @@
 				36561D7E19D2C8A40069D897 /* Images.xcassets in Resources */,
 				C334E60B1A777472005539B4 /* logo-Other@3x.png in Resources */,
 				2486CBA41A5A79AC00AC125E /* sms_selected@2x.png in Resources */,
+				C37F755C1A7F50D100B5AC71 /* twt_follow@3x.png in Resources */,
 				366EAF9B1A14C3530011D6C6 /* icon-small@2x.png in Resources */,
 				36B276721A0124E800ED58AD /* pause@2x.png in Resources */,
 				366EAF941A14C3530011D6C6 /* icon-60.png in Resources */,
