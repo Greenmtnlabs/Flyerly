@@ -14,30 +14,15 @@
 #import "LIALinkedInHttpClient.h"
 #import "LIALinkedInApplication.h"
 #import "ThankyouController.h"
+#import "SocialNetworksStatusModal.h"
 
-
-@interface SocialnetworkController () <FHSTwitterEngineAccessTokenDelegate>
-
-@property (strong, nonatomic) IBOutlet UILabel *char_Limit;
-
-@property (strong, nonatomic) IBOutlet UITextView *inputSetSocialStatus;
-
-@property (strong, nonatomic) IBOutlet UIButton *btnFacebook;
-
-@property (strong, nonatomic) IBOutlet UIButton *btnTwitter;
-
-@property (strong, nonatomic) IBOutlet UIButton *btnLinkedin;
-
-@property (nonatomic, strong) BSKeyboardControls *keyboardControls;
-
-@end
 
 @implementation SocialnetworkController
 {
   LIALinkedInHttpClient *_linkedInclient;
 }
 
-@synthesize untechable,comingFromContactsListScreen;
+@synthesize untechable,comingFromContactsListScreen,char_Limit,inputSetSocialStatus,btnFacebook,btnTwitter,btnLinkedin,keyboardControls;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -57,10 +42,11 @@
     
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
+    [self updateUI];
     
     //[self setDefaultModel];
     
-    NSArray *fields = @[ _inputSetSocialStatus ];
+    NSArray *fields = @[ inputSetSocialStatus ];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
     [self.keyboardControls setDelegate:self];
 }
@@ -75,6 +61,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 /**
  * Update the view once it appears.
  */
@@ -95,14 +82,13 @@
 // ________________________     Custom functions    ___________________________
 
 #pragma mark - Text View Delegate
-
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
     
     if ( [textView.text isEqualToString:@"e.g Spending time with family."] ){
         textView.text = @"";
     }
-    if ( textView == _inputSetSocialStatus ){
+    if ( textView == inputSetSocialStatus ){
         if ([textView.text isEqualToString:@"e.g Spending time with family."]) {
             textView.text = @"";
             textView.font = [UIFont fontWithName:TITLE_FONT size:12.0];
@@ -130,30 +116,30 @@
 -(void)updateUI
 {
 
-    [_inputSetSocialStatus setTextColor:defGreen];
-    _inputSetSocialStatus.font = [UIFont fontWithName:APP_FONT size:16];
-    _inputSetSocialStatus.delegate = self;
+    [inputSetSocialStatus setTextColor:defGreen];
+    inputSetSocialStatus.font = [UIFont fontWithName:APP_FONT size:16];
+    inputSetSocialStatus.delegate = self;
     
     if ( [untechable.socialStatus isEqualToString:@""] ){
-        _inputSetSocialStatus.text = @"e.g Spending time with family.";
+        inputSetSocialStatus.text = @"e.g Spending time with family.";
     }
     
     
     //[self.inputSetSocialStatus setText:untechable.socialStatus];
-    if ( [untechable.socialStatus isEqualToString:@""] && [_inputSetSocialStatus.text isEqualToString:@"e.g Spending time with family."] ){
+    if ( [untechable.socialStatus isEqualToString:@""] && [inputSetSocialStatus.text isEqualToString:@"e.g Spending time with family."] ){
         
         NSString *url = [NSString stringWithFormat:@"%@",untechable.spendingTimeTxt];
         url = [url stringByReplacingOccurrencesOfString:@" " withString:@""];
         NSString *socialStatus = [NSString stringWithFormat:@"I am #Untechable & %@ untechable.com/away/%@", untechable.spendingTimeTxt,url];
-        [_inputSetSocialStatus setText:socialStatus];
-        int len = (int)_inputSetSocialStatus.text.length;
-        _char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
+        [inputSetSocialStatus setText:socialStatus];
+        int len = (int)inputSetSocialStatus.text.length;
+        char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
     
     }else {
         
-        [_inputSetSocialStatus setText:untechable.socialStatus];
-        int len = (int)_inputSetSocialStatus.text.length;
-        _char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
+        [inputSetSocialStatus setText:untechable.socialStatus];
+        int len = (int)inputSetSocialStatus.text.length;
+        char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
     }
     
     
@@ -190,14 +176,11 @@
         [backButton setTitleColor:defGray forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(btnBackTouchEnd) forControlEvents:UIControlEventTouchUpInside];
-        
-        
         backButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         NSMutableArray  *leftNavItems  = [NSMutableArray arrayWithObjects:leftBarButton,nil];
         
         [self.navigationItem setLeftBarButtonItems:leftNavItems]; //Left button ___________
-        
         
         // Center title ________________________________________
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
@@ -261,7 +244,6 @@
 -(void)onBack{
     [untechable goBack:self.navigationController];
 }
-
 
 -(void)onNext{
     
@@ -537,13 +519,10 @@
     
 }
 
-
-
-
 -(void)storeSceenVarsInDic
 {
     //untechable.socialStatus = [NSString stringWithFormat:@"%@",_inputSetSocialStatus.text];
-    untechable.socialStatus = _inputSetSocialStatus.text;
+    untechable.socialStatus = inputSetSocialStatus.text;
     [untechable setOrSaveVars:SAVE];
 }
 
@@ -560,75 +539,58 @@
 
 #pragma mark -  Get Sharing permissions functions
 - (IBAction)shareOn:(id)sender {
+    
     if(sender == self.btnFacebook){
         
-        untechable.socialStatus = _inputSetSocialStatus.text;
-        if( [self fbBtnStatus] ) {
-            //When button was green , the delete permissions
-            [untechable fbFlushFbData];
-            [self btnActivate:self.btnFacebook active:[self fbBtnStatus]];
-        }
-        else{
-            //When button was gray , take permissions
-            
-            // If the session state is any of the two "open" states when the button is clicked
-            if (FBSession.activeSession.state == FBSessionStateOpen
-                || FBSession.activeSession.state == FBSessionStateOpenTokenExtended) {
-                
-                // Close the session and remove the access token from the cache
-                // The session state handler (in the app delegate) will be called automatically
-                [FBSession.activeSession closeAndClearTokenInformation];
-                
-                [self btnActivate:self.btnFacebook active:NO];
-                
-                // If the session state is not any of the two "open" states when the button is clicked
-            }
-            else {
-                // Open a session showing the user the login UI
-                // You must ALWAYS ask for public_profile permissions when opening a session
-                [FBSession openActiveSessionWithReadPermissions:@[@"publish_actions"]
-                                                   allowLoginUI:YES
-                                              completionHandler:
-                 ^(FBSession *session, FBSessionState state, NSError *error) {
-                     
-                     // Call the app delegate's sessionStateChanged:state:error method to handle session state changes
-                     [untechable fbSessionStateChanged:session state:state error:error];
-                     
-                     
-                     [self btnActivate:self.btnFacebook active:[self fbBtnStatus]];
-                 }];
-            }
-        }
-    }
-    else if(sender == self.btnTwitter){
+        untechable.socialStatus = inputSetSocialStatus.text;
         
-        if( [self twitterBtnStatus] ) {
-            //When button was green , the delete permissions
-            [self twLogout];
-            [self btnActivate:self.btnTwitter active:[self twitterBtnStatus]];
+        NSString *savedFbAuth = @"";
+        NSString *savedFbAuthExpiryTs = @"";
+        if ( [untechable.fbAuth isEqualToString:@""] || [untechable.fbAuthExpiryTs isEqualToString:@""] ){
+            
+             savedFbAuth = [[SocialNetworksStatusModal sharedInstance] getFbAuth];
+             savedFbAuthExpiryTs = [[SocialNetworksStatusModal sharedInstance] getFbAuthExpiryTs];
+            
+            if ( [savedFbAuth isEqualToString:@""] || [savedFbAuthExpiryTs isEqualToString:@""] )
+            {
+                
+                [[SocialNetworksStatusModal sharedInstance] loginFacebook:sender Controller:self];
+                
+            }else {
+                
+                untechable.fbAuth = savedFbAuth;
+                untechable.fbAuthExpiryTs = savedFbAuthExpiryTs;
+                [self btnActivate:self.btnFacebook active:YES];
+            }
         }
-        else {
-            //When button was gray , take permissions
+    }else if(sender == self.btnTwitter){
+        
+        
+        NSString *savedTwitterAuth = @"";
+        NSString *savedTwitterAuthTokkenSecerate = @"";
+        if ( [untechable.twitterAuth isEqualToString:@""] || [untechable.twOAuthTokenSecret isEqualToString:@""] ){
             
-            //https://github.com/fhsjaagshs/FHSTwitterEngine
+            savedTwitterAuth = [[SocialNetworksStatusModal sharedInstance] getTwitterAuth];
+            savedTwitterAuthTokkenSecerate = [[SocialNetworksStatusModal sharedInstance] getTwitterAuthTokkenSecerate];
             
-            [[FHSTwitterEngine sharedEngine]permanentlySetConsumerKey:TW_CONSUMER_KEY andSecret:TW_CONSUMER_SECRET];
-            [[FHSTwitterEngine sharedEngine]setDelegate:self];
-            [[FHSTwitterEngine sharedEngine]loadAccessToken];
-            
-            //GO TO TWITTER AUTH LOGIN SCREEN
-            UIViewController *loginController = [[FHSTwitterEngine sharedEngine]loginControllerWithCompletionHandler:^(BOOL success) {
-                NSLog( success ? @"Twitter, success login on twitter" : @"Twitter login failure.");
-            }];
-            [self presentViewController:loginController animated:YES completion:nil];
+            if ( [savedTwitterAuth isEqualToString:@""] || [savedTwitterAuthTokkenSecerate isEqualToString:@""] )
+            {
+                
+                [[SocialNetworksStatusModal sharedInstance] loginTwitter:sender Controller:self];
+                
+            }else {
+                
+                untechable.twitterAuth = savedTwitterAuth;
+                untechable.twOAuthTokenSecret = savedTwitterAuthTokkenSecerate;
+                [self btnActivate:self.btnTwitter active:YES];
+            }
         }
-    }
-    else if(sender == self.btnLinkedin){
+    }else if(sender == self.btnLinkedin){
         
         if( [self linkedInBtnStatus] ) {
             //When button was green , the delete permissions
             [self linkedInLogout];
-            [self btnActivate:self.btnLinkedin active:[self linkedInBtnStatus]];
+            //[self btnActivate:self.btnLinkedin active:[self linkedInBtnStatus]];
         }
         else {
             [self getLinkedInAuth];
@@ -643,8 +605,6 @@
     else
         [btnPointer setTitleColor:defGray forState:UIControlStateNormal];
 }
-
-
 
 #pragma mark -  Facebook functions
 
@@ -669,6 +629,7 @@
 
 -(BOOL)twitterBtnStatus
 {
+    
     return !([untechable.twitterAuth isEqualToString:@""]);
 }
 
@@ -680,65 +641,10 @@
     [untechable twUpdateData:@"" oAuthTokenSecret:@""];
 }
 
-//STORE TWITTER TOKEN [Note: Do not change the name of this functions, it will called from twitter libraries]
-- (void)twStoreAccessToken:(NSString *)accessTokenZ {
-    
-    [[NSUserDefaults standardUserDefaults]setObject:accessTokenZ forKey:@"SavedAccessHTTPBody"];
-    NSString *authenticatedUsername = [self extractValueForKey:@"screen_name" fromHTTPBody:accessTokenZ];
-    NSString *authenticatedID = [self extractValueForKey:@"user_id" fromHTTPBody:accessTokenZ];
-    
-    NSString *oauth_token = [self extractValueForKey:@"oauth_token" fromHTTPBody:accessTokenZ];
-    NSString *oauth_token_secret = [self extractValueForKey:@"oauth_token_secret" fromHTTPBody:accessTokenZ];
-    
-    NSLog(@"B- twitter : oauth_token: %@, oauth_token_secret: %@, self.authenticatedUsername: %@, self.authenticatedID: %@, ", oauth_token, oauth_token_secret, authenticatedUsername, authenticatedID);
-    
-    if(oauth_token == nil || oauth_token_secret == nil){
-        oauth_token = oauth_token_secret =  @"";
-    }
-    
-   [untechable twUpdateData:oauth_token oAuthTokenSecret:oauth_token_secret];
-
-}
-
-
 //RETURN TWITTER TOKEN [Note: Do not change the name of this functions, it will called from twitter libraries]
 - (NSString *)twLoadAccessToken {
     return [[NSUserDefaults standardUserDefaults]objectForKey:@"SavedAccessHTTPBody"];
 }
-
-//This functions return parmaeter value from url parmeter string
-//http:abc.com?a=1&b=c in this url a is target and body is the full url
-- (NSString *)extractValueForKey:(NSString *)target fromHTTPBody:(NSString *)body {
-    if (body.length == 0) {
-        return nil;
-    }
-    
-    if (target.length == 0) {
-        return nil;
-    }
-	
-	NSArray *tuples = [body componentsSeparatedByString:@"&"];
-	if (tuples.count < 1) {
-        return nil;
-    }
-	
-	for (NSString *tuple in tuples) {
-		NSArray *keyValueArray = [tuple componentsSeparatedByString:@"="];
-		
-		if (keyValueArray.count >= 2) {
-			NSString *key = [keyValueArray objectAtIndex:0];
-			NSString *value = [keyValueArray objectAtIndex:1];
-			
-			if ([key isEqualToString:target]) {
-                return value;
-            }
-		}
-	}
-	
-	return nil;
-}
-
-
 
 #pragma mark -  LinkedIn functions
 //Init linkedin client
@@ -776,7 +682,7 @@
             NSLog(@"linked1 in accessToken %@",untechable.linkedinAuth);
             
             [untechable linkedInUpdateData:untechable.linkedinAuth];
-            [self btnActivate:self.btnLinkedin active:YES];
+            //[self btnActivate:self.btnLinkedin active:YES];
             
             //[self requestMeWithToken:untechable.linkedinAuth];
             
@@ -796,7 +702,7 @@
 -(void)textViewDidChange:(UITextView *)textView
 {
     int len = textView.text.length;
-    _char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
+    char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
 }
 
 

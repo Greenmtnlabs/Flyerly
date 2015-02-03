@@ -19,4 +19,6 @@
 //Properties
 @property (nonatomic,strong)  Untechable *untechable;
 
+@property (strong, nonatomic) IBOutlet UITableView *socialNetworksTable;
+
 @end

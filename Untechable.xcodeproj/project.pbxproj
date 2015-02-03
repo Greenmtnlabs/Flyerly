@@ -220,6 +220,7 @@
 		C37F755D1A7F50D100B5AC71 /* fb_Like@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C37F75591A7F50D100B5AC71 /* fb_Like@2x.png */; };
 		C37F755E1A7F50D100B5AC71 /* fb_Like@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C37F755A1A7F50D100B5AC71 /* fb_Like@3x.png */; };
 		C39C31A51A77D6D0003CE153 /* downArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C39C31A41A77D6D0003CE153 /* downArrow@2x.png */; };
+		C3CA4DD51A80CE0700B03A23 /* SocialNetworksStatusModal.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA4DD41A80CE0700B03A23 /* SocialNetworksStatusModal.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -491,6 +492,8 @@
 		C37F75591A7F50D100B5AC71 /* fb_Like@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb_Like@2x.png"; sourceTree = "<group>"; };
 		C37F755A1A7F50D100B5AC71 /* fb_Like@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb_Like@3x.png"; sourceTree = "<group>"; };
 		C39C31A41A77D6D0003CE153 /* downArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "downArrow@2x.png"; sourceTree = "<group>"; };
+		C3CA4DD31A80CE0700B03A23 /* SocialNetworksStatusModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialNetworksStatusModal.h; sourceTree = "<group>"; };
+		C3CA4DD41A80CE0700B03A23 /* SocialNetworksStatusModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialNetworksStatusModal.m; sourceTree = "<group>"; };
 		FC11B82CE184AE8B063B3995 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1029,6 +1032,7 @@
 		C36D2E4F1A79196E000537C5 /* PreferencesController */ = {
 			isa = PBXGroup;
 			children = (
+				C3CA4DD21A80CDCF00B03A23 /* SocialNetworksModal */,
 				C36D2E5A1A7919DC000537C5 /* SettingsViewController.h */,
 				C36D2E5B1A7919DC000537C5 /* SettingsViewController.m */,
 				C36D2E5C1A7919DC000537C5 /* SettingsViewController.xib */,
@@ -1039,6 +1043,15 @@
 				C36D2E611A791AEA000537C5 /* SettingsCellView-iPhone6-Plus.xib */,
 			);
 			name = PreferencesController;
+			sourceTree = "<group>";
+		};
+		C3CA4DD21A80CDCF00B03A23 /* SocialNetworksModal */ = {
+			isa = PBXGroup;
+			children = (
+				C3CA4DD31A80CE0700B03A23 /* SocialNetworksStatusModal.h */,
+				C3CA4DD41A80CE0700B03A23 /* SocialNetworksStatusModal.m */,
+			);
+			name = SocialNetworksModal;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1374,6 +1387,7 @@
 				C36D2E581A7919C2000537C5 /* SettingsCellView.m in Sources */,
 				243C59E01A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.m in Sources */,
 				36FD975519E694AC00427507 /* BSKeyboardControls.m in Sources */,
+				C3CA4DD51A80CE0700B03A23 /* SocialNetworksStatusModal.m in Sources */,
 				248E06B71A4ACD6E0099846A /* ContactsCustomizedModal.m in Sources */,
 				36524AF119D940F4006DCAAF /* SocialnetworkController.m in Sources */,
 				24A65BEC1A30451E00BE83C6 /* SSLCell.m in Sources */,
