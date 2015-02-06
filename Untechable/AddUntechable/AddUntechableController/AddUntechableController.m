@@ -11,6 +11,7 @@
 #import "ThankyouController.h"
 #import "Common.h"
 #import "BSKeyboardControls.h"
+#import "SettingsViewController.h"
 #import "ContactsListControllerViewController.h"
 
 
@@ -219,6 +220,20 @@
             UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
             
             [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+        }else {
+            
+            // Setting left Navigation button "Settings"
+            settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 86, 42)];
+            settingsButton.titleLabel.shadowColor = [UIColor clearColor];
+            settingsButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+            [settingsButton setTitle:TITLE_SETTINGS_TXT forState:normal];
+            [settingsButton setTitleColor:defGray forState:UIControlStateNormal];
+            [settingsButton addTarget:self action:@selector(goToSettings) forControlEvents:UIControlEventTouchUpInside];
+            settingsButton.showsTouchWhenHighlighted = YES;
+            
+            UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
+            
+            [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
         }
         
         // Right Navigation ______________________________________________
@@ -244,6 +259,14 @@
         
         
     }
+}
+
+-(IBAction)goToSettings{
+    
+    NSLog(@"Go To settings screen");
+    SettingsViewController *settingsController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil];
+    settingsController.untechable = untechable;
+    [self.navigationController pushViewController:settingsController animated:YES];
 }
 
 -(void) goBack {
@@ -411,11 +434,11 @@
 -(void)showHideTextPicker:(BOOL)showHide{
     
     if ( IS_IPHONE_4 || IS_IPHONE_5 ){
-        [_pickerCloseBtn setFrame:CGRectMake(280, 80, 120, 120)];
+        [_pickerCloseBtn setFrame:CGRectMake(245, 160, 76, 33)];
     }else if ( IS_IPHONE_6 ){
-        [_pickerCloseBtn setFrame:CGRectMake(290, 130, 120, 120)];
+        [_pickerCloseBtn setFrame:CGRectMake(290, 170, 76, 33)];
     }else if (IS_IPHONE_6_PLUS){
-        [_pickerCloseBtn setFrame:CGRectMake(330, 150, 120, 120)];
+        [_pickerCloseBtn setFrame:CGRectMake(330, 170, 76, 33)];
     }
     
     float alpha = (showHide) ? 1.0 : 0.0;
@@ -597,7 +620,7 @@
 -(void)textViewDidChange:(UITextView *)textView
 {
     int len = (int)textView.text.length;
-    _char_Limit.text=[NSString stringWithFormat:@"%i",140-len];
+    _char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
@@ -647,7 +670,7 @@
     _inputSpendingTimeText.text = [_pickerData objectAtIndex:row];
     
     int len = (int)_inputSpendingTimeText.text.length;
-    _char_Limit.text=[NSString stringWithFormat:@"%i",140-len];
+    _char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
 }
 /*
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{

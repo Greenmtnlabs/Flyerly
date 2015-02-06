@@ -10,8 +10,11 @@
 #import "ThankyouController.h"
 #import "Common.h"
 #import "BSKeyboardControls.h"
+#import "EmailChangingController.h"
 #import "ServerAccountDetailsViewCell.h"
 #import "SSLCell.h"
+#import "SettingsViewController.h"
+#import "SocialnetworkController.h"
 
 
 @class EmailTableViewCell;
@@ -33,7 +36,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *inputEmail;
 
 @property (strong, nonatomic) IBOutlet UITextField *inputPassword;
-@property (strong, nonatomic) IBOutlet UITextField *inputMsg;
+//@property (strong, nonatomic) IBOutlet UITextField *inputMsg;
 
 
 @property (strong, nonatomic) IBOutlet UITextField *inputImsHostName;
@@ -53,7 +56,7 @@
 
 @implementation EmailSettingController
 
-@synthesize untechable,sslSwitch,serverAccountTable,scrollView;
+@synthesize untechable,sslSwitch,serverAccountTable,scrollView,comingFromSettingsScreen,comingFromChangeEmailScreen,comingFromContactsListScreen;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -84,7 +87,8 @@
     
     [self setDefaultModel];
     
-    NSArray *fields = @[ self.inputEmail, self.inputPassword, self.inputMsg ];
+    //NSArray *fields = @[ self.inputEmail, self.inputPassword, self.inputMsg ];
+    NSArray *fields = @[ self.inputEmail, self.inputPassword ];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
     [self.keyboardControls setDelegate:self];
 }
@@ -127,8 +131,6 @@
 
     _table01Data = [[NSMutableArray alloc] init];
 
-    
-    
     if ( IS_IPHONE_4 || IS_IPHONE_5 || IS_IPHONE_6 ){
         NSLog(@"iPhone 6");
         [_table01Data addObject:@{@"type":@"image", @"imgPath":@"icloudIcon@2x.png", @"text":@""}];
@@ -189,17 +191,29 @@
     [self.inputEmail setTextColor:defGreen];
     self.inputEmail.font = [UIFont fontWithName:APP_FONT size:16];
     self.inputEmail.delegate = self;
-    self.inputEmail.text = untechable.email;
+    
     
     [self.inputPassword setTextColor:defGreen];
     self.inputPassword.font = [UIFont fontWithName:APP_FONT size:16];
     self.inputPassword.delegate = self;
-    self.inputPassword.text = untechable.password;
     
-    [self.inputMsg setTextColor:defGreen];
+    
+    if ( [untechable.email isEqualToString:@""] ){
+        
+        if ( ![[[NSUserDefaults standardUserDefaults] objectForKey:@"email_address"] isEqualToString:@""] ||
+            ![[[NSUserDefaults standardUserDefaults] objectForKey:@"email_password"] isEqualToString:@""] ){
+            
+            self.inputEmail.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"email_address"];
+            self.inputPassword.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"email_password"];
+        }
+    }else {
+        self.inputEmail.text = untechable.email;
+    }
+    
+    /*[self.inputMsg setTextColor:defGreen];
     self.inputMsg.font = [UIFont fontWithName:APP_FONT size:16];
     self.inputMsg.delegate = self;
-    self.inputMsg.text = untechable.respondingEmail;
+    self.inputMsg.text = untechable.respondingEmail;*/
     
 }
 #pragma mark -  Navigation functions
@@ -227,6 +241,14 @@
 
 -(void)btnNextTouchEndToServerAccount{
     
+    if( IS_IPHONE_5 ){
+        [_emailSetting2 setFrame:CGRectMake(0,0,320,568)];
+    } else if ( IS_IPHONE_6 ){
+        [_emailSetting2 setFrame:CGRectMake(0,0,375,667)];
+    } else if ( IS_IPHONE_6_PLUS ) {
+        [_emailSetting2 setFrame:CGRectMake(0,0,414,736)];
+    }
+    
     [self hideAllViews];
     [UIView transitionWithView:self.view duration:0.5
                        options:UIViewAnimationOptionTransitionCurlUp //change to whatever animation you like
@@ -247,39 +269,54 @@
         [backButton setTitleColor:defGray forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(btnNextTouchEndToServerAccount) forControlEvents:UIControlEventTouchUpInside];
-        
         backButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         NSMutableArray  *leftNavItems  = [NSMutableArray arrayWithObjects:leftBarButton,nil];
         
         [self.navigationItem setLeftBarButtonItems:leftNavItems]; //Left button ___________
         
-        
         // Center title ________________________________________
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
-        
         // Right Navigation ________________________________________
+        rightBarButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        [rightBarButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
+        rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         
-        nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-        [nextButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
-        nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [nextButton setTitle:@"FINISH" forState:normal];
-        [nextButton setTitleColor:defGray forState:UIControlStateNormal];
+        if ( comingFromSettingsScreen ){
+            
+            [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
+            
+        }else if ( comingFromChangeEmailScreen ) {
+            
+            [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
+            
+        }else if ( comingFromContactsListScreen ){
+            
+            [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
+            
+        }else {
+            
+            [rightBarButton setTitle:TITLE_FINISH_TXT forState:normal];
+        }
+        
+        [rightBarButton setTitleColor:defGray forState:UIControlStateNormal];
         //[nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
         //[nextButton addTarget:self action:@selector(btnNextTouchEndToServerAccount) forControlEvents:UIControlEventTouchUpInside];
         
+        rightBarButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *rightBarButton_ = [[UIBarButtonItem alloc] initWithCustomView:rightBarButton];
+        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton_,nil];
         
-        
-        nextButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
-        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
-        
-        [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
-        
+        if ( comingFromSettingsScreen && ![untechable.acType isEqualToString:@"OTHER"] ){
+            
+            [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
+            
+        }else {
+            
+            [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
+        }
     }
-    
-    
     
     if( [callFrom isEqualToString:@"emailSetting2"] )
     {
@@ -291,46 +328,56 @@
         [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(btnBackToAccountType) forControlEvents:UIControlEventTouchUpInside];
         
-        
         backButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         NSMutableArray  *leftNavItems  = [NSMutableArray arrayWithObjects:leftBarButton,nil];
         
         [self.navigationItem setLeftBarButtonItems:leftNavItems]; //Left button ___________
         
-        
         // Center title ________________________________________
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
-        
          // Right Navigation ________________________________________
+        rightBarButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        [rightBarButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
+        rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        if ( comingFromSettingsScreen ){
+            
+            [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
+            
+        }else if ( comingFromChangeEmailScreen ) {
+            
+            [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
+            
+        }else if ( comingFromContactsListScreen ){
+            
+            [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
+            
+        }else {
+            
+            [rightBarButton setTitle:TITLE_FINISH_TXT forState:normal];
+        }
         
-        nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-        [nextButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
-        nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [nextButton setTitle:@"FINISH" forState:normal];
-        [nextButton setTitleColor:defGray forState:UIControlStateNormal];
+        [rightBarButton setTitleColor:defGray forState:UIControlStateNormal];
         
         if ( [untechable.acType isEqualToString:@"OTHER"] ){
             
-            nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-            [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
-            nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-            [nextButton setTitle:@"NEXT" forState:normal];
-            [nextButton setTitleColor:defGray forState:UIControlStateNormal];
+            rightBarButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+            [rightBarButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
+            rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+            [rightBarButton setTitle:@"NEXT" forState:normal];
+            [rightBarButton setTitleColor:defGray forState:UIControlStateNormal];
             
         }
-         nextButton.showsTouchWhenHighlighted = YES;
-         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
-         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
-         
-         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
+         rightBarButton.showsTouchWhenHighlighted = YES;
+         UIBarButtonItem *rightBarButton_ = [[UIBarButtonItem alloc] initWithCustomView:rightBarButton];
+         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton_,nil];
+        
+        [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
     }
     
     if([callFrom isEqualToString:@"viewDidLoad"])
     {
-        
-        
         // Left Navigation ________________________________________________________________________________________________________
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
@@ -338,33 +385,42 @@
         [backButton setTitleColor:defGray forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(btnBackTouchEnd) forControlEvents:UIControlEventTouchUpInside];
-        
-        
         backButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         NSMutableArray  *leftNavItems  = [NSMutableArray arrayWithObjects:leftBarButton,nil];
         
         [self.navigationItem setLeftBarButtonItems:leftNavItems]; //Left button ___________
         
-        
         // Center title ________________________________________
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];        
         
-        
         // Right Navigation ________________________________________
+        rightBarButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        [rightBarButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
+        rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [rightBarButton setTitle:@"FINISH" forState:normal];
+        [rightBarButton setTitleColor:defGray forState:UIControlStateNormal];
         
-        nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-        [nextButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
-        nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [nextButton setTitle:@"FINISH" forState:normal];
-        [nextButton setTitleColor:defGray forState:UIControlStateNormal];
+        rightBarButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *rightBarButton_ = [[UIBarButtonItem alloc] initWithCustomView:rightBarButton];
+        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton_,nil];
         
-        
-        nextButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
-        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
-        
-        [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
+        if ( comingFromSettingsScreen ){
+            
+            [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
+            
+        }else if ( comingFromChangeEmailScreen ) {
+            
+            [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
+            
+        }else if ( comingFromContactsListScreen ){
+            
+            [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
+            
+        }else {
+            
+            [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
+        }
     }
 }
 
@@ -375,7 +431,7 @@
     [self setNextHighlighted:NO];
 }
 - (void)setNextHighlighted:(BOOL)highlighted {
-    (highlighted) ? [nextButton setBackgroundColor:defGreen] : [nextButton setBackgroundColor:[UIColor clearColor]];
+    (highlighted) ? [rightBarButton setBackgroundColor:defGreen] : [rightBarButton setBackgroundColor:[UIColor clearColor]];
 }
 
 -(void)btnBackTouchStart{
@@ -395,32 +451,84 @@
 
 -(void)onFinish {
     
-    if ( iSsl == nil ){
-        untechable.iSsl = @"YES";
+    if ( comingFromSettingsScreen ){
+    
+        [self storeSceenVarsInDic];
+        
+        NSLog(@"Go To settings screen");
+        
+        for (UIViewController *controller in self.navigationController.viewControllers) {
+            if ([controller isKindOfClass:[SettingsViewController class]]) {
+                //Do not forget to import AnOldViewController.h
+                
+                [self.navigationController popToViewController:controller
+                                                      animated:YES];
+                break;
+            }
+        }
+        
+    }else if ( comingFromChangeEmailScreen ){
+        
+        [self storeSceenVarsInDic];
+        
+        NSLog(@"Go To settings screen");
+        
+        for (UIViewController *controller in self.navigationController.viewControllers) {
+            if ([controller isKindOfClass:[EmailChangingController class]]) {
+                //Do not forget to import AnOldViewController.h
+                
+                [self.navigationController popToViewController:controller
+                                                      animated:YES];
+                break;
+            }
+        }
+        
+    } else if ( comingFromContactsListScreen ){
+    
+        [self storeSceenVarsInDic];
+        
+        SocialnetworkController *socialnetwork;
+        socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
+        socialnetwork.untechable = untechable;
+        [self.navigationController pushViewController:socialnetwork animated:YES];
+        
+    }else {
+        
+        if ( iSsl == nil ){
+            untechable.iSsl = @"YES";
+        }
+        
+        if ( oSsl == nil ){
+            untechable.oSsl = @"YES";
+        }
+        
+        [self storeSceenVarsInDic];
+        NSLog(@"onFinish dic = %@ ",untechable.dic);
+        
+        if( [APP_IN_MODE isEqualToString:TESTING] ){
+            [self next:@"GO_TO_THANKYOU"];
+        } else {
+            [self sendToApi];
+        }
     }
-    
-    if ( oSsl == nil ){
-        untechable.oSsl = @"YES";
-    }
-    
-    [self storeSceenVarsInDic];
-     NSLog(@"onFinish dic = %@ ",untechable.dic);
-
-     if( [APP_IN_MODE isEqualToString:TESTING] ){
-         [self next:@"GO_TO_THANKYOU"];
-     } else {
-         [self sendToApi];
-     }
-    
 }
 
 -(void)onNext {
 
     untechable.email = self.inputEmail.text;
     untechable.password = self.inputPassword.text;
-    untechable.respondingEmail = self.inputMsg.text;
+    //untechable.respondingEmail = self.inputMsg.text;
     
     [self hideAllViews];
+    
+    if( IS_IPHONE_5 ){
+        [_emailSetting1 setFrame:CGRectMake(0,0,320,568)];
+    } else if ( IS_IPHONE_6 ){
+        [_emailSetting1 setFrame:CGRectMake(0,0,375,667)];
+    } else if ( IS_IPHONE_6_PLUS ) {
+        [_emailSetting1 setFrame:CGRectMake(0,0,414,736)];
+    }
+    
     [UIView transitionWithView:self.view duration:0.5
                        options:UIViewAnimationOptionTransitionCurlUp //change to whatever animation you like
                     animations:^ { [self.view addSubview:_emailSetting1]; }
@@ -432,9 +540,12 @@
 
 -(void)storeSceenVarsInDic
 {
+    [[NSUserDefaults standardUserDefaults] setObject:_inputEmail.text forKey:@"email_address"];
+    [[NSUserDefaults standardUserDefaults] setObject:_inputPassword.text forKey:@"email_password"];
+    
     untechable.email = _inputEmail.text;
     untechable.password = _inputPassword.text;
-    untechable.respondingEmail = _inputMsg.text;
+    //untechable.respondingEmail = _inputMsg.text;
     
     if ( [untechable.acType isEqualToString:@"OTHER"] ) {
         untechable.iSsl          = iSsl;
@@ -604,7 +715,7 @@
     // DISABLE NAVIGATION ON SEND DATA TO API
     if([option isEqualToString:@"ON_FINISH"] ){
     
-        nextButton.userInteractionEnabled = NO;
+        rightBarButton.userInteractionEnabled = NO;
         backButton.userInteractionEnabled = NO;
         
         [self showHidLoadingIndicator:YES];
@@ -614,7 +725,7 @@
     // RE-ENABLE NAVIGATION WHEN ANY ERROR OCCURED
     else if([option isEqualToString:@"ERROR_ON_FINISH"] ){
         
-        nextButton.userInteractionEnabled = YES;
+        rightBarButton.userInteractionEnabled = YES;
         backButton.userInteractionEnabled = YES;
         
         [self showHidLoadingIndicator:NO];
@@ -645,7 +756,7 @@
  */
 - (void)showHidLoadingIndicator:(BOOL)show {
     if( show ){
-        nextButton.enabled = NO;
+        rightBarButton.enabled = NO;
         backButton.enabled = NO;
         
         UIActivityIndicatorView *uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
@@ -657,7 +768,7 @@
         [self.navigationItem setRightBarButtonItem:btn animated:NO];
     }
     else{
-        nextButton.enabled = YES;
+        rightBarButton.enabled = YES;
         backButton.enabled = YES;
         [self setNavigation:@"viewDidLoad"];
     }
@@ -687,6 +798,7 @@
 - (IBAction)showEmailSettings1:(id)sender {
     
     [self hideAllViews];
+    
     [UIView transitionWithView:self.view duration:0.5
                        options:UIViewAnimationOptionTransitionCurlUp //change to whatever animation you like
                     animations:^ { [self.view addSubview:_emailSetting1]; }
@@ -725,11 +837,19 @@
 -(IBAction)clickedOnEmailOption:(id)sender
 {
     UIButton *btn = sender;
-    //NSLog(@"btn tag %@", btn.tag);
     NSArray *acTypesAry = [[NSMutableArray arrayWithObjects:@"ICLOUD", @"EXCHANGE", @"GOOGLE", @"YAHOO", @"AOL", @"OUTLOOK", @"OTHER", nil] init];
     untechable.acType = [acTypesAry objectAtIndex:btn.tag];
 
     [self hideAllViews];
+    
+    if( IS_IPHONE_5 ){
+        [_emailSetting2 setFrame:CGRectMake(0,0,320,568)];
+    } else if ( IS_IPHONE_6 ){
+        [_emailSetting2 setFrame:CGRectMake(0,0,375,667)];
+    } else if ( IS_IPHONE_6_PLUS ) {
+        [_emailSetting2 setFrame:CGRectMake(0,0,414,736)];
+    }
+    
     [UIView transitionWithView:self.view duration:0.5
                        options:UIViewAnimationOptionTransitionCurlUp //change to whatever animation you like
                     animations:^ { [self.view addSubview:_emailSetting2]; }

@@ -10,6 +10,7 @@
 #import "AddUntechableController.h"
 #import "Common.h"
 #import "UntechablesList.h"
+#import "SettingsViewController.h"
 
 @interface ThankyouController ()
 
@@ -59,6 +60,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)goToSettings {
+    
+    NSLog(@"Go To settings screen");
+    SettingsViewController *settingsController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil];
+    settingsController.untechable = untechable;
+    [self.navigationController pushViewController:settingsController animated:YES];
+}
 
 - (IBAction)onNew:(id)sender {
     /*untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*2)] ]; //current time +2MIN
@@ -167,7 +175,6 @@
         
         
         // Right Navigation ________________________________________
-
         NSMutableArray  *rightNavItems;
         /*if( [self canEdit] ) {
             
@@ -194,6 +201,20 @@
             rightNavItems  = [NSMutableArray arrayWithObjects:startNewUntechableBarBtn,nil];
         }*/
         
+        // Setting left Navigation button "Settings"
+        settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 86, 42)];
+        settingsButton.titleLabel.shadowColor = [UIColor clearColor];
+        settingsButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [settingsButton setTitle:TITLE_SETTINGS_TXT forState:normal];
+        [settingsButton setTitleColor:defGray forState:UIControlStateNormal];
+        
+        [settingsButton addTarget:self action:@selector(goToSettings) forControlEvents:UIControlEventTouchUpInside];
+        settingsButton.showsTouchWhenHighlighted = YES;
+        
+        UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
+        
+        [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+        
         startNewUntechable = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         [startNewUntechable addTarget:self action:@selector(onNew:) forControlEvents:UIControlEventTouchUpInside];
         startNewUntechable.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
@@ -204,11 +225,7 @@
         UIBarButtonItem *startNewUntechableBarBtn = [[UIBarButtonItem alloc] initWithCustomView:startNewUntechable];
         rightNavItems  = [NSMutableArray arrayWithObjects:startNewUntechableBarBtn,nil];
         
-        
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
-        
-        
-        
     }
 }
 

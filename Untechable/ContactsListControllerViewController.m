@@ -14,6 +14,8 @@
 #import "SocialnetworkController.h"
 #import "Common.h"
 #import "ContactsCustomizedModal.h"
+#import "EmailSettingController.h"
+#import "EmailChangingController.h"
 
 @interface ContactsListControllerViewController () {
     
@@ -66,14 +68,7 @@
 
 #pragma mark -  Navigation functions
 - (void)setNavigationDefaults{
-    
-    /*
-     NSDateFormatter *df = [[NSDateFormatter alloc] init];
-     [df setDateFormat:@"EEEE, dd MMMM yyyy HH:mm"];
-     NSDate *date = [df dateFromString:@"Sep 25, 2014 05:27 PM"];
-     NSLog(@"\n\n  DATE: %@ \n\n\n", date);
-     */
-    
+
     defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
     defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
     
@@ -190,13 +185,15 @@
 }
 -(void)onNext{
 
+    BOOL selectedAnyEmail;
+    
     if ( currentlyEditingContacts.count > 0){
         
         for ( int i=0; i<currentlyEditingContacts.count; i++){
             ContactsCustomizedModal *tempModal = [currentlyEditingContacts objectAtIndex:i];
             
             NSMutableArray *phoneNumbersWithStatus  = tempModal.allPhoneNumbers;
-            for ( int j = 0; j<phoneNumbersWithStatus.count; j++){
+            for ( int j = 0; j < phoneNumbersWithStatus.count; j++){
                 NSMutableArray *numberWithStatus = [phoneNumbersWithStatus objectAtIndex:j];
                 if ( [[numberWithStatus objectAtIndex:2] isEqualToString:@"0"] &&
                     [[numberWithStatus objectAtIndex:3] isEqualToString:@"0"]  )
@@ -207,7 +204,7 @@
             
             NSMutableArray *emailOnly  = [[NSMutableArray alloc] init];
             NSMutableArray *emailsWithStatus  = tempModal.allEmails;
-            for ( int k = 0; k<emailsWithStatus.count; k++){
+            for ( int k = 0; k < emailsWithStatus.count; k++){
                 NSMutableArray *emailWithStatus = [emailsWithStatus objectAtIndex:k];
                 if ( [[emailWithStatus objectAtIndex:1] isEqualToString:@"0"] )
                 {
@@ -218,18 +215,66 @@
             }
             
             tempModal.allEmails = emailOnly;
+            if ( tempModal.allEmails.count > 0 ){
+                
+                selectedAnyEmail = YES;
+            }
         }
         untechable.customizedContactsForCurrentSession = currentlyEditingContacts;
     }
     
-    
     [self storeSceenVarsInDic];
     
-    SocialnetworkController *socialnetwork;
-    socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
-    socialnetwork.untechable = untechable;
-    currentlyEditingContacts = [[NSMutableArray alloc] init];
-    [self.navigationController pushViewController:socialnetwork animated:YES];
+    if ( selectedAnyEmail  ){
+        
+        NSLog(@"%@", [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allValues]);
+        
+        NSArray *keys = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys];
+        
+        if (  [keys containsObject:@"email_address"] || [keys containsObject:@"email_password"]  ){
+            
+            if ( [[[NSUserDefaults standardUserDefaults] objectForKey:@"email_address"] isEqualToString:@""] ||
+                [[[NSUserDefaults standardUserDefaults] objectForKey:@"email_password"] isEqualToString:@""] ){
+                
+                EmailSettingController *emailSettingController;
+                emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
+                emailSettingController.untechable = untechable;
+                emailSettingController.comingFromSettingsScreen = NO;
+                emailSettingController.comingFromChangeEmailScreen = NO;
+                emailSettingController.comingFromContactsListScreen = YES;
+                [self.navigationController pushViewController:emailSettingController animated:YES];
+                
+            }else {
+                
+                EmailChangingController *emailChangeController;
+                emailChangeController = [[EmailChangingController alloc]initWithNibName:@"EmailChangingController" bundle:nil];
+                emailChangeController.untechable = untechable;
+                [self.navigationController pushViewController:emailChangeController animated:YES];
+            }
+        }else {
+            
+            EmailSettingController *emailSettingController;
+            emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
+            emailSettingController.untechable = untechable;
+            emailSettingController.comingFromSettingsScreen = NO;
+            emailSettingController.comingFromChangeEmailScreen = NO;
+            emailSettingController.comingFromContactsListScreen = YES;
+            [self.navigationController pushViewController:emailSettingController animated:YES];
+        }
+    }else {
+        
+        SocialnetworkController *socialnetwork;
+        socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
+        socialnetwork.untechable = untechable;
+        [self.navigationController pushViewController:socialnetwork animated:YES];
+        
+        /*EmailSettingController *emailSettingController;
+        emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
+        emailSettingController.untechable = untechable;
+        emailSettingController.comingFromSettingsScreen = NO;
+        [self.navigationController pushViewController:emailSettingController animated:YES];*/
+        
+    }
 }
 
 -(void)btnNextTouchStart{
@@ -465,6 +510,7 @@
         NSString *name = contactModal.name;
         
         if([[name lowercaseString] rangeOfString:[newString lowercaseString]].location == NSNotFound){
+            
         } else {
             [filteredArray addObject:contactModal];
         }

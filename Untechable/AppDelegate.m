@@ -10,6 +10,7 @@
 #import "UntechableListController/UntechablesList.h"
 #import "AddUntechableController.h"
 #import "Common.h"
+#import "Crittercism.h"
 
 @implementation AppDelegate
 
@@ -18,6 +19,8 @@ NSMutableArray *allUntechables;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [Crittercism enableWithAppID: CRITTERCISM_APP_ID];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];

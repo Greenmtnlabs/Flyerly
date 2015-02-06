@@ -19,7 +19,7 @@
     UILabel *titleLabel;
     UIButton *helpButton;
     UIButton *backButton;
-    UIButton *nextButton;
+    UIButton *rightBarButton;
     UIColor *defGreen;//GREEN
     UIColor *defGray;//GRAY
     
@@ -36,5 +36,14 @@
 
 @property (nonatomic,strong)  Untechable *untechable;
 @property (weak, nonatomic) IBOutlet UISwitch *sslSwitch;
+
+//Check if coming from settings screen
+@property (nonatomic, assign) BOOL comingFromSettingsScreen;
+
+//Check if coming from change email screen
+@property (nonatomic, assign) BOOL comingFromChangeEmailScreen;
+
+//Check if coming from contacstListScreen screen
+@property (nonatomic, assign) BOOL comingFromContactsListScreen;
 
 @end

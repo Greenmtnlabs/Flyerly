@@ -9,13 +9,13 @@
 #import "UntechablesList.h"
 #import "UntechableTableCell.h"
 #import "AddUntechableController.h"
+#import "SettingsViewController.h"
 #import "Common.h"
 #import "Untechable.h"
 
 @interface UntechablesList () {
     
     NSMutableArray *allUntechables;
-    
     NSMutableArray *sectionOneArray;
     NSMutableArray *sectionTwoArray;
 }
@@ -69,6 +69,19 @@
     {
         self.navigationItem.hidesBackButton = YES;
         
+        // Setting left Navigation button "Settings"
+        settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 86, 42)];
+        settingsButton.titleLabel.shadowColor = [UIColor clearColor];
+        settingsButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [settingsButton setTitle:TITLE_SETTINGS_TXT forState:normal];
+        [settingsButton setTitleColor:defGray forState:UIControlStateNormal];
+        [settingsButton addTarget:self action:@selector(goToSettings) forControlEvents:UIControlEventTouchUpInside];
+        settingsButton.showsTouchWhenHighlighted = YES;
+        
+        UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
+        
+        [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+        
         // Center title __________________________________________________
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
@@ -94,6 +107,14 @@
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
 
     }
+}
+
+- (IBAction)goToSettings {
+    
+    NSLog(@"Go To p[refrences screen");
+    SettingsViewController *settingsController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil];
+    settingsController.untechable = untechable;
+    [self.navigationController pushViewController:settingsController animated:YES];
 }
 
 -(void)addUntechable{
@@ -356,10 +377,6 @@
             UITableViewCell *cell = nil;
             return cell;
         }
-        
-    //}
-    
-
 }
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
