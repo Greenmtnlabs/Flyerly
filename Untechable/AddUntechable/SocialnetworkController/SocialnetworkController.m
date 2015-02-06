@@ -18,9 +18,6 @@
 
 
 @implementation SocialnetworkController
-{
-  LIALinkedInHttpClient *_linkedInclient;
-}
 
 @synthesize untechable,comingFromContactsListScreen,char_Limit,inputSetSocialStatus,btnFacebook,btnTwitter,btnLinkedin,keyboardControls;
 
@@ -38,8 +35,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
  
-    _linkedInclient = [self linkedInclient];
-    
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
     [self updateUI];
@@ -554,7 +549,7 @@
             if ( [savedFbAuth isEqualToString:@""] || [savedFbAuthExpiryTs isEqualToString:@""] )
             {
                 
-                [[SocialNetworksStatusModal sharedInstance] loginFacebook:sender Controller:self];
+                [[SocialNetworksStatusModal sharedInstance] loginFacebook:sender Controller:self Untechable:untechable];
                 
             }else {
                 
@@ -562,6 +557,11 @@
                 untechable.fbAuthExpiryTs = savedFbAuthExpiryTs;
                 [self btnActivate:self.btnFacebook active:YES];
             }
+        }else {
+            
+            untechable.fbAuth = @"";
+            untechable.fbAuthExpiryTs = @"";
+            [self btnActivate:self.btnFacebook active:NO];
         }
     }else if(sender == self.btnTwitter){
         
@@ -576,7 +576,7 @@
             if ( [savedTwitterAuth isEqualToString:@""] || [savedTwitterAuthTokkenSecerate isEqualToString:@""] )
             {
                 
-                [[SocialNetworksStatusModal sharedInstance] loginTwitter:sender Controller:self];
+                [[SocialNetworksStatusModal sharedInstance] loginTwitter:sender Controller:self Untechable:untechable];
                 
             }else {
                 
@@ -584,16 +584,35 @@
                 untechable.twOAuthTokenSecret = savedTwitterAuthTokkenSecerate;
                 [self btnActivate:self.btnTwitter active:YES];
             }
+        }else {
+            
+            untechable.twitterAuth = @"";
+            untechable.twOAuthTokenSecret = @"";
+            [self btnActivate:self.btnTwitter active:NO];
         }
+
     }else if(sender == self.btnLinkedin){
         
-        if( [self linkedInBtnStatus] ) {
-            //When button was green , the delete permissions
-            [self linkedInLogout];
-            //[self btnActivate:self.btnLinkedin active:[self linkedInBtnStatus]];
-        }
-        else {
-            [self getLinkedInAuth];
+        NSString *savedLinkedInAuth = @"";
+
+        if ( [untechable.linkedinAuth isEqualToString:@""] ){
+            
+            savedLinkedInAuth = [[SocialNetworksStatusModal sharedInstance] getLinkedInAuth];
+            
+            if ( [savedLinkedInAuth isEqualToString:@""] )
+            {
+                
+                [[SocialNetworksStatusModal sharedInstance] loginLinkedIn:sender Controller:self Untechable:untechable ];
+                
+            }else {
+                
+                untechable.linkedinAuth = savedLinkedInAuth;
+                [self btnActivate:self.btnLinkedin active:YES];
+            }
+        }else {
+            
+            untechable.linkedinAuth = @"";
+            [self btnActivate:self.btnLinkedin active:NO];
         }
     }
 }
@@ -622,11 +641,7 @@
     return active;
 }
 
-
-
-
 #pragma mark -  Twitter functions
-
 -(BOOL)twitterBtnStatus
 {
     
@@ -646,90 +661,11 @@
     return [[NSUserDefaults standardUserDefaults]objectForKey:@"SavedAccessHTTPBody"];
 }
 
-#pragma mark -  LinkedIn functions
-//Init linkedin client
-- (LIALinkedInHttpClient *)linkedInclient {
-    LIALinkedInApplication *application = [LIALinkedInApplication applicationWithRedirectURL:LINKEDIN_REDIRECT_URL
-                                                                                    clientId:LINKEDIN_CLIENT_ID
-                                                                                clientSecret:LINKEDIN_CLIENT_SECRET
-                                                                                       state:LINKEDIN_STATE
-                                                                               grantedAccess:@[@"r_basicprofile", @"rw_nus"]
-                                           ];
-    
-    return [LIALinkedInHttpClient clientForApplication:application presentingViewController:nil];
-}
-
-
--(BOOL)linkedInBtnStatus
-{
-    return !([untechable.linkedinAuth isEqualToString:@""]);
-}
-
-- (void)linkedInLogout {
-    [untechable linkedInUpdateData:@""];
-}
-
-- (void)getLinkedInAuth{
-    //1-st async call
-    [self.linkedInclient getAuthorizationCode:^(NSString *code) {
- 
-        //2-st async call for getting access token
-        [self.linkedInclient getAccessToken:code
-        success:^(NSDictionary *accessTokenData) {
-            
-            untechable.linkedinAuth = [accessTokenData objectForKey:@"access_token"];
-            
-            NSLog(@"linked1 in accessToken %@",untechable.linkedinAuth);
-            
-            [untechable linkedInUpdateData:untechable.linkedinAuth];
-            //[self btnActivate:self.btnLinkedin active:YES];
-            
-            //[self requestMeWithToken:untechable.linkedinAuth];
-            
-        }
-        failure:^(NSError *error) {
-            NSLog(@"Quering accessToken failed %@", error);
-        }];
-    }
-    cancel:^{
-        NSLog(@"Authorization was cancelled by user");
-    }
-    failure:^(NSError *error) {
-        NSLog(@"Authorization failed %@", error);
-    }];
-}
 
 -(void)textViewDidChange:(UITextView *)textView
 {
     int len = textView.text.length;
     char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
 }
-
-
-//Get linkedin User profile details using accessToken
-- (void)requestMeWithToken:(NSString *)linkedInAccessToken {
-
-    NSLog(@"linked2 in accessToken %@",linkedInAccessToken);
-    //Async call
-    [self.linkedInclient GET:[NSString stringWithFormat:@"https://api.linkedin.com/v1/people/~?oauth2_access_token=%@&format=json", linkedInAccessToken] parameters:nil
-    success:^(AFHTTPRequestOperation *operation, NSDictionary *result) {
- 
-        NSLog(@"current user %@", result);
-        /* //SAMPLE DATA
-         current user {
-         firstName = rufi;
-         headline = "Sr. Software Engineer at RIKSOF";
-         lastName = untechable;
-         siteStandardProfileRequest =     {
-         url = "https://www.linkedin.com/profile/view?id=384207301&authType=name&authToken=I9FC&trk=api*a3572303*s3643513*";
-         };
-         */
-        
-    }
-    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"failed to fetch current user %@", error);
-    }];
-}
-
 
 @end

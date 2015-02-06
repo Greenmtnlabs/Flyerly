@@ -380,9 +380,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     return expired;
 }
 
-
-
-
 #pragma mark -  Twitter functions
 //Update data base for fb data
 -(void)twFlushData
@@ -390,21 +387,4 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [self twUpdateData:@"" oAuthTokenSecret:@"" ];
 }
 
-#pragma mark -  LinkedIn functions
-//Update data base for fb data
--(void)linkedInFlushData
-{
-    [self linkedInUpdateData:@""];
-}
-
-//Update data base for fb data
--(void)linkedInUpdateData:(NSString *)linkedInAccessToken
-{
-    NSLog(@"linkedInAccessToken=%@",linkedInAccessToken);
-    linkedinAuth = linkedInAccessToken;
-    
-    [[NSUserDefaults standardUserDefaults] setObject:linkedinAuth forKey:@"linkedinAuth"];
-    
-    [self setOrSaveVars:SAVE];
-}
 @end

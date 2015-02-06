@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CommonFunctions.h"
+#import "Untechable.h"
 
 @interface SocialNetworksStatusModal : NSObject {
     
@@ -18,17 +19,20 @@
 
 - (void)setFbAuth:(NSString *)fbAuthString;
 - (void)setFbAuthExpiryTs:(NSString *)setFbAuthExpiryTsString;
+- (NSString *)getFbAuth;
+- (NSString *)getFbAuthExpiryTs;
 
 - (void)setTwitterAuth:(NSString *)twitterAuthString;
 - (void)setTwitterAuthTokkenSecerate:(NSString *)twitterAuthTokkenSecerate;
 - (NSString *)getTwitterAuth;
 - (NSString *)getTwitterAuthTokkenSecerate;
 
-- (NSString *)getFbAuth;
-- (NSString *)getFbAuthExpiryTs;
+- (void)setLinkedInAuth:(NSString *)linkedInAuthString;
+- (NSString *)getLinkedInAuth;
 
-- (void)loginFacebook:(id)sender Controller:(UIViewController *) Controller;
-- (void)loginTwitter:(id)sender Controller:(UIViewController *) Controller;
+- (void)loginFacebook:(id)sender Controller:(UIViewController *) Controller Untechable:(Untechable *)untechable;
+- (void)loginTwitter:(id)sender Controller:(UIViewController *)Controller Untechable:(Untechable *)untechable;
+- (void)loginLinkedIn:(id)sender Controller:(UIViewController *) Controller Untechable:(Untechable *)untechable;
 
 
 

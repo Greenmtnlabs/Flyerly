@@ -164,12 +164,14 @@
         
     }else if ( indexPath.row == 2 ){
         
-        if ( ![keys containsObject:@"linkedinAuth"] || [[[NSUserDefaults standardUserDefaults] objectForKey:@"linkedinAuth"] isEqualToString:@""] )
+        NSString *savedLinkedInAuth = [[SocialNetworksStatusModal sharedInstance] getLinkedInAuth];
+        
+        if ( [savedLinkedInAuth isEqualToString:@""] )
         {
             
             [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0 NetworkImage:@"linkedin@2x.png"];
             
-        }else if ( [keys containsObject:@"linkedinAuth"] && ![[[NSUserDefaults standardUserDefaults] objectForKey:@"linkedinAuth"] isEqualToString:@""] )
+        }else
         {
             
              [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:1 NetworkImage:@"linkedin@2x.png"];
@@ -232,16 +234,19 @@
     }
 }
 
-
+-(IBAction)loginLinkedIn:(id) sender {
+    
+    [[SocialNetworksStatusModal sharedInstance] loginLinkedIn:sender Controller:self Untechable:untechable];
+}
 
 -(IBAction)loginTwitter:(id) sender {
 
-    [[SocialNetworksStatusModal sharedInstance] loginTwitter:sender Controller:self];
+    [[SocialNetworksStatusModal sharedInstance] loginTwitter:sender Controller:self Untechable:untechable];
 }
 
 -(IBAction)loginFacebook:(id) sender {
     
-    [[SocialNetworksStatusModal sharedInstance] loginFacebook:sender Controller:self];
+    [[SocialNetworksStatusModal sharedInstance] loginFacebook:sender Controller:self Untechable:untechable];
 }
 
 // Customize the number of rows in the table view.
