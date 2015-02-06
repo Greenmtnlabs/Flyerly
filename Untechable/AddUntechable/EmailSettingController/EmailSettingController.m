@@ -15,6 +15,7 @@
 #import "SSLCell.h"
 #import "SettingsViewController.h"
 #import "SocialnetworkController.h"
+#import "SocialNetworksStatusModal.h"
 
 
 @class EmailTableViewCell;
@@ -111,6 +112,7 @@
    [self hideAllViews];
     
 }
+
 -(void)viewWillAppear:(BOOL)animated {
     [self updateUI];
 }
@@ -450,6 +452,10 @@
 }
 
 -(void)onFinish {
+    
+    [[SocialNetworksStatusModal sharedInstance] setEmailAddress:self.inputEmail.text];
+    
+    [[SocialNetworksStatusModal sharedInstance] setEmailPassword:self.inputPassword.text];
     
     if ( comingFromSettingsScreen ){
     

@@ -30,6 +30,11 @@
 - (void)setLinkedInAuth:(NSString *)linkedInAuthString;
 - (NSString *)getLinkedInAuth;
 
+- (void)setEmailAddress:(NSString *)emailAddressString;
+- (void)setEmailPassword:(NSString *)emailPasswordString;
+- (NSString *)getEmailAddress;
+- (NSString *)getEmailPassword;
+
 - (void)loginFacebook:(id)sender Controller:(UIViewController *) Controller Untechable:(Untechable *)untechable;
 - (void)loginTwitter:(id)sender Controller:(UIViewController *)Controller Untechable:(Untechable *)untechable;
 - (void)loginLinkedIn:(id)sender Controller:(UIViewController *) Controller Untechable:(Untechable *)untechable;

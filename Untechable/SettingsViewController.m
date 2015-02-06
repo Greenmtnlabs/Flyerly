@@ -134,10 +134,8 @@
     
     if ( indexPath.row == 0 ){
     
-        NSString *savedFbAuth = [[SocialNetworksStatusModal sharedInstance] getFbAuth];
-        NSString *savedFbAuthExpiryTs = [[SocialNetworksStatusModal sharedInstance] getFbAuthExpiryTs];
-        
-        if ( [savedFbAuth isEqualToString:@""] || [savedFbAuthExpiryTs isEqualToString:@""] )
+        if ( [[[SocialNetworksStatusModal sharedInstance] getFbAuth] isEqualToString:@""] ||
+             [[[SocialNetworksStatusModal sharedInstance] getFbAuthExpiryTs] isEqualToString:@""] )
         {
             [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0 NetworkImage:@"facebook@2x.png"];
         }else
@@ -149,10 +147,8 @@
         
     }else if ( indexPath.row == 1 ){
         
-        NSString *savedTwitterAuth = [[SocialNetworksStatusModal sharedInstance] getTwitterAuth];
-        NSString *savedTwitterAuthTokkenSecerate = [[SocialNetworksStatusModal sharedInstance] getTwitterAuthTokkenSecerate];
-        
-        if ( [savedTwitterAuth isEqualToString:@""] || [savedTwitterAuthTokkenSecerate isEqualToString:@""]  )
+       if ( [[[SocialNetworksStatusModal sharedInstance] getTwitterAuth] isEqualToString:@""] ||
+            [[[SocialNetworksStatusModal sharedInstance] getTwitterAuthTokkenSecerate] isEqualToString:@""]  )
         {
             [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0 NetworkImage:@"twitter@2x.png"];
         }else
@@ -164,9 +160,7 @@
         
     }else if ( indexPath.row == 2 ){
         
-        NSString *savedLinkedInAuth = [[SocialNetworksStatusModal sharedInstance] getLinkedInAuth];
-        
-        if ( [savedLinkedInAuth isEqualToString:@""] )
+        if ( [[[SocialNetworksStatusModal sharedInstance] getLinkedInAuth] isEqualToString:@""] )
         {
             
             [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0 NetworkImage:@"linkedin@2x.png"];
@@ -182,10 +176,7 @@
     }
     else if ( indexPath.row == 3 ){
         
-        if (  ![keys containsObject:@"email_address"]   ||
-              ![keys containsObject:@"email_password"]  ||
-              [[[NSUserDefaults standardUserDefaults] objectForKey:@"email_address"] isEqualToString:@""] ||
-              [[[NSUserDefaults standardUserDefaults] objectForKey:@"email_password"] isEqualToString:@""] ){
+        if (  [[[SocialNetworksStatusModal sharedInstance] getEmailAddress] isEqualToString:@""]  ||                                         [[[SocialNetworksStatusModal sharedInstance] getEmailPassword] isEqualToString:@""] ){
             
             [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0 NetworkImage:@"emailic@2x.png"];
             
@@ -207,15 +198,19 @@
     
     if ( [emailButton.titleLabel.text isEqualToString:@"Log Out"] ){
         
-        if ( ![[[NSUserDefaults standardUserDefaults] objectForKey:@"email_address"] isEqualToString:@""] ||
-            ![[[NSUserDefaults standardUserDefaults] objectForKey:@"email_password"] isEqualToString:@""] ){
+        [[SocialNetworksStatusModal sharedInstance] setEmailAddress:@""];
+        
+        [[SocialNetworksStatusModal sharedInstance] setEmailPassword:@""];
+        
+        /*if ( ![[[NSUserDefaults standardUserDefaults] objectForKey:@"email_address"] isEqualToString:@""] ||
+             ![[[NSUserDefaults standardUserDefaults] objectForKey:@"email_password"] isEqualToString:@""] ){
             
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"email_address"];
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"email_password"];
             
-            untechable.email = @"";
-            untechable.password = @"";
-        }
+            //untechable.email = @"";
+            //untechable.password = @"";
+        }*/
         
         [emailButton setTitle:@"Log In" forState:UIControlStateNormal];
     }
