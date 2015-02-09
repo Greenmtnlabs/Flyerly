@@ -11,16 +11,17 @@
 #import "Common.h"
 #import "EmailSettingController.h"
 #import "SocialNetworksStatusModal.h"
+#import "SocialNetworksStatusModal.h"
 
 @interface EmailChangingController ()
-@property (strong, nonatomic) IBOutlet UILabel *emailAddress;
+
 @property (strong, nonatomic) IBOutlet UIButton *changeEmailAddress;
 
 @end
 
 @implementation EmailChangingController
 
-@synthesize untechable;
+@synthesize untechable,emailAddress,emailAddresstext;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -36,22 +37,16 @@
     
     if ( [untechable.email isEqualToString:@""] ){
         
-        if ( [[[SocialNetworksStatusModal sharedInstance] getEmailAddress] isEqualToString:@""] ||
-            [[[SocialNetworksStatusModal sharedInstance] getEmailPassword] isEqualToString:@""] ){
+        if ( ![[[SocialNetworksStatusModal sharedInstance] getEmailAddress] isEqualToString:@""] &&
+            ![[[SocialNetworksStatusModal sharedInstance] getEmailPassword] isEqualToString:@""] ){
             
-            [_emailAddress setText:[[SocialNetworksStatusModal sharedInstance] getEmailAddress]];
+            [emailAddress setText:[[SocialNetworksStatusModal sharedInstance] getEmailAddress]];
+            
+            [emailAddress setText:emailAddresstext];
         }
-        
-        
-        
-        /*if ( ![[[NSUserDefaults standardUserDefaults] objectForKey:@"email_address"] isEqualToString:@""] ||
-         ![[[NSUserDefaults standardUserDefaults] objectForKey:@"email_password"] isEqualToString:@""] ){
-         
-         [_emailAddress setText:[[NSUserDefaults standardUserDefaults] objectForKey:@"email_address"]];
-         }*/
     }else {
         
-        [_emailAddress setText:untechable.email];
+        [emailAddress setText:untechable.email];
     }
 }
 
@@ -127,6 +122,8 @@
 
 -(void)onNext{
     
+    untechable.email = emailAddress.text;
+    untechable.password = [[SocialNetworksStatusModal sharedInstance] getEmailPassword];
     SocialnetworkController *socialnetwork;
     socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
     socialnetwork.untechable = untechable;

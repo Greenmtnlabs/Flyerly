@@ -16,6 +16,7 @@
 #import "ContactsCustomizedModal.h"
 #import "EmailSettingController.h"
 #import "EmailChangingController.h"
+#import "SocialNetworksStatusModal.h"
 
 @interface ContactsListControllerViewController () {
     
@@ -249,6 +250,7 @@
                 EmailChangingController *emailChangeController;
                 emailChangeController = [[EmailChangingController alloc]initWithNibName:@"EmailChangingController" bundle:nil];
                 emailChangeController.untechable = untechable;
+                emailChangeController.emailAddresstext = [[SocialNetworksStatusModal sharedInstance] getEmailAddress];
                 [self.navigationController pushViewController:emailChangeController animated:YES];
             }
         }else {
