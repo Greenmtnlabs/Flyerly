@@ -10,6 +10,7 @@
 #import "SocialnetworkController.h"
 #import "Common.h"
 #import "EmailSettingController.h"
+#import "SocialNetworksStatusModal.h"
 
 @interface EmailChangingController ()
 @property (strong, nonatomic) IBOutlet UILabel *emailAddress;
@@ -27,14 +28,27 @@
     
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
+
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated {
     
     if ( [untechable.email isEqualToString:@""] ){
         
-        if ( ![[[NSUserDefaults standardUserDefaults] objectForKey:@"email_address"] isEqualToString:@""] ||
-            ![[[NSUserDefaults standardUserDefaults] objectForKey:@"email_password"] isEqualToString:@""] ){
+        if ( [[[SocialNetworksStatusModal sharedInstance] getEmailAddress] isEqualToString:@""] ||
+            [[[SocialNetworksStatusModal sharedInstance] getEmailPassword] isEqualToString:@""] ){
             
-            [_emailAddress setText:[[NSUserDefaults standardUserDefaults] objectForKey:@"email_address"]];
+            [_emailAddress setText:[[SocialNetworksStatusModal sharedInstance] getEmailAddress]];
         }
+        
+        
+        
+        /*if ( ![[[NSUserDefaults standardUserDefaults] objectForKey:@"email_address"] isEqualToString:@""] ||
+         ![[[NSUserDefaults standardUserDefaults] objectForKey:@"email_password"] isEqualToString:@""] ){
+         
+         [_emailAddress setText:[[NSUserDefaults standardUserDefaults] objectForKey:@"email_address"]];
+         }*/
     }else {
         
         [_emailAddress setText:untechable.email];

@@ -131,6 +131,41 @@
     return savedLinkedInAuth;
 }
 
+- (void)setEmailAddress:(NSString *)emailAddressString{
+    
+    [[NSUserDefaults standardUserDefaults] setObject:emailAddressString forKey:@"emailAddress"];
+}
+
+- (void)setEmailPassword:(NSString *)emailPasswordString{
+    
+    [[NSUserDefaults standardUserDefaults] setObject:emailPasswordString forKey:@"emailPassword"];
+}
+
+- (NSString *)getEmailAddress{
+    
+    NSString *savedEmailAddress = @"";
+    NSArray *keys = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys];
+    if ( [keys containsObject:@"emailAddress"] ){
+        
+        savedEmailAddress = [[NSUserDefaults standardUserDefaults] objectForKey:@"emailAddress"];
+    }
+    
+    return savedEmailAddress;
+
+}
+
+- (NSString *)getEmailPassword{
+    
+    NSString *savedEmailPassword = @"";
+    NSArray *keys = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys];
+    if ( [keys containsObject:@"emailPassword"] ){
+        
+        savedEmailPassword = [[NSUserDefaults standardUserDefaults] objectForKey:@"emailPassword"];
+    }
+    
+    return savedEmailPassword;
+}
+
 - (void)loginLinkedIn:(id)sender Controller:(UIViewController *)Controller Untechable:(Untechable *)untechable{
     
     if( [self linkedInBtnStatus] ) {
@@ -201,7 +236,7 @@
 
 -(BOOL)linkedInBtnStatus
 {
-    return !( [[self getTwitterAuth] isEqualToString:@""] );
+    return !( [[self getLinkedInAuth] isEqualToString:@""] );
 }
 
 - (void)linkedInLogout {
@@ -289,7 +324,7 @@
         //https://github.com/fhsjaagshs/FHSTwitterEngine
         
         [[FHSTwitterEngine sharedEngine]permanentlySetConsumerKey:TW_CONSUMER_KEY andSecret:TW_CONSUMER_SECRET];
-        [[FHSTwitterEngine sharedEngine]setDelegate:Controller];
+        [[FHSTwitterEngine sharedEngine]setDelegate:self];
         [[FHSTwitterEngine sharedEngine]loadAccessToken];
         
         //GO TO TWITTER AUTH LOGIN SCREEN
@@ -335,7 +370,7 @@
     twOAuthTokenSecret =   oAuthTokenSecret;
     
     [[SocialNetworksStatusModal sharedInstance] setTwitterAuth:twitterAuth];
-    [[SocialNetworksStatusModal sharedInstance] setTwOAuthTokenSecret:twOAuthTokenSecret];
+    [[SocialNetworksStatusModal sharedInstance] setTwitterAuthTokkenSecerate:twOAuthTokenSecret];
 }
 
 //This functions return parmaeter value from url parmeter string
