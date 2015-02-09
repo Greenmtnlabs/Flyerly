@@ -217,7 +217,8 @@
     
     if ( [emailButton.titleLabel.text isEqualToString:@"Log In"]  ){
         
-        if ( [untechable.email isEqualToString:@""] || [untechable.password isEqualToString:@""] ){
+        if ( [[[SocialNetworksStatusModal sharedInstance] getEmailAddress] isEqualToString:@""] ||
+             [[[SocialNetworksStatusModal sharedInstance] getEmailPassword] isEqualToString:@""] ){
             
             EmailSettingController *emailSettingController;
             emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
