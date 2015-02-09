@@ -595,13 +595,18 @@
     if( [Controller isKindOfClass:[SettingsViewController class]] ){
         
         UIButton *socialButton = (UIButton *) sender;
-        SettingsViewController *controller = (SettingsViewController *) Controller;
+        SettingsViewController *settingsViewController = (SettingsViewController *) Controller;
         SettingsCellView *settingCell;
-        CGPoint buttonPosition = [socialButton convertPoint:CGPointZero toView:controller.socialNetworksTable];
-        NSIndexPath *indexPath = [controller.socialNetworksTable indexPathForRowAtPoint:buttonPosition];
+        CGPoint buttonPosition = [socialButton convertPoint:CGPointZero toView:settingsViewController.socialNetworksTable];
+        NSIndexPath *indexPath = [settingsViewController.socialNetworksTable indexPathForRowAtPoint:buttonPosition];
         if (indexPath != nil)
         {
-            settingCell = (SettingsCellView*)[controller.socialNetworksTable cellForRowAtIndexPath:indexPath];
+            settingCell = (SettingsCellView*)[settingsViewController.socialNetworksTable cellForRowAtIndexPath:indexPath];
+        }else {
+            
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+            settingCell = (SettingsCellView*)[settingsViewController.socialNetworksTable cellForRowAtIndexPath:indexPath];
+            [settingCell.socialNetworkButton setTitle:@"Log out" forState:UIControlStateNormal];
         }
         
         [socialButton setTitle:@"Log out" forState:UIControlStateNormal];
