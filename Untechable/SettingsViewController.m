@@ -202,17 +202,17 @@
         
         [[SocialNetworksStatusModal sharedInstance] setEmailPassword:@""];
         
-        /*if ( ![[[NSUserDefaults standardUserDefaults] objectForKey:@"email_address"] isEqualToString:@""] ||
-             ![[[NSUserDefaults standardUserDefaults] objectForKey:@"email_password"] isEqualToString:@""] ){
-            
-            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"email_address"];
-            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"email_password"];
-            
-            //untechable.email = @"";
-            //untechable.password = @"";
-        }*/
+        SettingsCellView *settingCell;
+        CGPoint buttonPosition = [emailButton convertPoint:CGPointZero toView:self.socialNetworksTable];
+        NSIndexPath *indexPath = [self.socialNetworksTable indexPathForRowAtPoint:buttonPosition];
+        if (indexPath != nil)
+        {
+            settingCell = (SettingsCellView*)[self.socialNetworksTable cellForRowAtIndexPath:indexPath];
+        }
         
         [emailButton setTitle:@"Log In" forState:UIControlStateNormal];
+        
+        [settingCell.loginStatus setText:@"Logged Out"];
     }
     
     if ( [emailButton.titleLabel.text isEqualToString:@"Log In"]  ){

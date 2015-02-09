@@ -171,6 +171,7 @@
     if( [self linkedInBtnStatus] ) {
         //When button was green , the delete permissions
         [self linkedInLogout];
+        [self setLoggedInStatusOnCell:sender Controller:Controller Untechable:untechable LoggedIn:NO];
         //[self btnActivate:self.btnLinkedin active:[self linkedInBtnStatus]];
     }
     else {
@@ -254,7 +255,7 @@
                                     success:^(NSDictionary *accessTokenData) {
                                         
                                         [self linkedInUpdateData:[accessTokenData objectForKey:@"access_token"]];
-                                        [self setLoggedInStatusOnCell:sender Controller:Controller Untechable:untechable];
+                                        [self setLoggedInStatusOnCell:sender Controller:Controller Untechable:untechable LoggedIn:YES];
                                         
                                     }
                                     failure:^(NSError *error) {
@@ -314,9 +315,8 @@
     if( [self twitterBtnStatus] ) {
         //When button was green , the delete permissions
         
-        UIButton *twitterButton = (UIButton *) sender;
-        [twitterButton setTitle:@"Log In" forState:UIControlStateNormal];
         [self twLogout];
+        [self setLoggedInStatusOnCell:sender Controller:Controller Untechable:untechable LoggedIn:NO];
     }
     else {
         //When button was gray , take permissions
@@ -332,7 +332,7 @@
             NSLog( success ? @"Twitter, success login on twitter" : @"Twitter login failure.");
             if ( success ){
                 
-                [self setLoggedInStatusOnCell:sender Controller:Controller Untechable:untechable];
+                [self setLoggedInStatusOnCell:sender Controller:Controller Untechable:untechable LoggedIn:YES];
             }
         }];
         
@@ -549,8 +549,7 @@
     if( [self fbBtnStatus] ) {
         //When button was green , the delete permissions
         [self fbFlushFbData];
-        UIButton *facebookButton = (UIButton *) sender;
-        [facebookButton setTitle:@"Log In" forState:UIControlStateNormal];
+        [self setLoggedInStatusOnCell:sender Controller:Controller Untechable:untechable LoggedIn:NO];
     }
     else{
         //When button was gray , take permissions
@@ -575,7 +574,7 @@
                  // Call the app delegate's sessionStateChanged:state:error method to handle session state changes
                  [self fbSessionStateChanged:session state:state error:error];
                  
-                 [self setLoggedInStatusOnCell:sender Controller:Controller Untechable:untechable];
+                 [self setLoggedInStatusOnCell:sender Controller:Controller Untechable:untechable LoggedIn:YES];
              }];
         }
     }
@@ -590,7 +589,7 @@
     return active;
 }
 
--(void) setLoggedInStatusOnCell:(id)sender Controller:(UIViewController *)Controller Untechable:(Untechable *)untechable{
+-(void) setLoggedOutStatusOnCell:(id)sender Controller:(UIViewController *)Controller Untechable:(Untechable *)untechable{
     
     if( [Controller isKindOfClass:[SettingsViewController class]] ){
         
@@ -606,11 +605,11 @@
             
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
             settingCell = (SettingsCellView*)[settingsViewController.socialNetworksTable cellForRowAtIndexPath:indexPath];
-            [settingCell.socialNetworkButton setTitle:@"Log out" forState:UIControlStateNormal];
+            [settingCell.socialNetworkButton setTitle:@"Log In" forState:UIControlStateNormal];
         }
         
-        [socialButton setTitle:@"Log out" forState:UIControlStateNormal];
-        [settingCell.loginStatus setText:@"Logged In"];
+        [socialButton setTitle:@"Log In" forState:UIControlStateNormal];
+        [settingCell.loginStatus setText:@"Logged Out"];
         indexPath = nil;
         
     }else if ( [Controller isKindOfClass:[SocialnetworkController class]] ){
@@ -627,10 +626,61 @@
             untechable.linkedinAuth = [self getLinkedInAuth];
         }
         
-        [self btnActivate:socialButton active:YES];
+        [self btnActivate:socialButton active:NO];
+    }
+}
+
+-(void) setLoggedInStatusOnCell:(id)sender Controller:(UIViewController *)Controller Untechable:(Untechable *)untechable LoggedIn:(BOOL)LoggedIn{
+    
+    if( [Controller isKindOfClass:[SettingsViewController class]] ){
         
-        //[socialButton setTitle:@"Log out" forState:UIControlStateNormal];
-        //[settingCell.loginStatus setText:@"Logged In"];
+        UIButton *socialButton = (UIButton *) sender;
+        SettingsViewController *settingsViewController = (SettingsViewController *) Controller;
+        SettingsCellView *settingCell;
+        CGPoint buttonPosition = [socialButton convertPoint:CGPointZero toView:settingsViewController.socialNetworksTable];
+        NSIndexPath *indexPath = [settingsViewController.socialNetworksTable indexPathForRowAtPoint:buttonPosition];
+        if (indexPath != nil)
+        {
+            settingCell = (SettingsCellView*)[settingsViewController.socialNetworksTable cellForRowAtIndexPath:indexPath];
+        }else {
+            
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+            settingCell = (SettingsCellView*)[settingsViewController.socialNetworksTable cellForRowAtIndexPath:indexPath];
+            if ( LoggedIn ){
+                [settingCell.socialNetworkButton setTitle:@"Log Out" forState:UIControlStateNormal];
+            }else {
+                [settingCell.socialNetworkButton setTitle:@"Log In" forState:UIControlStateNormal];
+            }
+        }
+        
+        if ( LoggedIn ){
+            [socialButton setTitle:@"Log Out" forState:UIControlStateNormal];
+            [settingCell.loginStatus setText:@"Logged In"];
+        }else {
+            [socialButton setTitle:@"Log In" forState:UIControlStateNormal];
+            [settingCell.loginStatus setText:@"Logged Out"];
+        }
+        indexPath = nil;
+        
+    }else if ( [Controller isKindOfClass:[SocialnetworkController class]] ){
+        
+        UIButton *socialButton = (UIButton *) sender;
+        
+        if ( [socialButton.titleLabel.text isEqualToString:@"Facebook"] ){
+            untechable.fbAuth = [self getFbAuth];
+            untechable.fbAuthExpiryTs = [self fbAuthExpiryTs];
+        }else if ( [socialButton.titleLabel.text isEqualToString:@"Twitter"] ){
+            untechable.twitterAuth = [self getTwitterAuth];
+            untechable.twOAuthTokenSecret = [self getTwitterAuthTokkenSecerate];
+        }else if ( [socialButton.titleLabel.text isEqualToString:@"LinkedIn"] ){
+            untechable.linkedinAuth = [self getLinkedInAuth];
+        }
+        
+        if (LoggedIn ){
+            [self btnActivate:socialButton active:YES];
+        }else {
+            [self btnActivate:socialButton active:NO];
+        }
     }
 }
 
