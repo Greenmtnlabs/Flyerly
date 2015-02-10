@@ -222,7 +222,7 @@
             
             EmailSettingController *emailSettingController;
             emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
-            emailSettingController.untechable = untechable;
+            emailSettingController.untechable = nil;
             emailSettingController.comingFromSettingsScreen = YES;
             emailSettingController.comingFromChangeEmailScreen = NO;
             [self.navigationController pushViewController:emailSettingController animated:YES];
