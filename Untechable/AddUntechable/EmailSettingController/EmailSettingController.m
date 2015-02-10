@@ -107,7 +107,9 @@
     [super viewDidAppear:animated];
     [untechable printNavigation:[self navigationController]];
     
-    [untechable setOrSaveVars:SAVE];
+    if ( untechable != nil ){
+        [untechable setOrSaveVars:SAVE];
+    }
     
    [self hideAllViews];
     
