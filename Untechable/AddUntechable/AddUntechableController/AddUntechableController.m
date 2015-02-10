@@ -77,7 +77,7 @@
     [self showHideTextPicker:NO];
     
     // Initialize Data
-    _pickerData = @[@"Spending time with family.", @"Driving.", @"Spending time outdoors.", @"At the beach.", @"Enjoying the holidays.", @"Just needed a break.", @"Running.", @"On vacation.", @"Running.", @"Finding my inner peace.", @"Removing myself from technology."];
+    _pickerData = @[@"Spending time with family.", @"Driving.", @"Spending time outdoors.", @"At the beach.", @"Enjoying the holidays.", @"Just needed a break.", @"Running.", @"On vacation.", @"Finding my inner peace.", @"Removing myself from technology."];
     
     // Connect data
     _spendingTimeTextPicker.dataSource = self;
