@@ -27,10 +27,12 @@
     
     NSDate *now1; //current time +60mint
     
-    Untechable *untechable;
+    //Untechable *untechable;
 }
 
 -(void)setDefaultModel;
+
+@property (nonatomic,strong)  Untechable *untechable;
 
 @property int indexOfUntechableInEditMode;
 @property NSString *callReset;
