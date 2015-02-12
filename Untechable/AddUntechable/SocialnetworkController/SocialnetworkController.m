@@ -304,10 +304,10 @@
 - (void) removeRedundentDataForContacts {
     
     if ( untechable.customizedContactsForCurrentSession.count > 0){
-        
-        for ( int i=0; i<untechable.customizedContactsForCurrentSession.count; i++){
+    
+        for ( int i=0; i<untechable.finalCustomizedContactsArray.count; i++){
             
-            ContactsCustomizedModal *tempModal = [untechable.customizedContactsForCurrentSession objectAtIndex:i];
+            ContactsCustomizedModal *tempModal = [untechable.finalCustomizedContactsArray objectAtIndex:i];
             
             NSMutableArray *phoneNumbersWithStatus  = tempModal.allPhoneNumbers;
             for ( int j = 0; j < phoneNumbersWithStatus.count; j++){
@@ -333,7 +333,95 @@
             
             tempModal.allEmails = emailOnly;
         }
-        untechable.customizedContactsForCurrentSession = untechable.customizedContactsForCurrentSession;
+        
+        
+        NSString  *customizedContactsString = untechable.customizedContacts;
+        
+        NSError *writeError = nil;
+        
+        NSMutableDictionary *customizedContactsDictionary = [NSJSONSerialization JSONObjectWithData: [customizedContactsString dataUsingEncoding:NSUTF8StringEncoding]
+                                        options: NSJSONReadingMutableContainers
+                                          error: &writeError];
+        
+        if ( ![customizedContactsString isEqualToString:@""] ){
+            
+            for ( int i = 0; i < customizedContactsDictionary.count; i++ ){
+                
+                NSMutableDictionary *curContactDetails =  [customizedContactsDictionary objectForKey:[NSString stringWithFormat:@"%i",i]];
+                
+                NSMutableArray *phoneNumbersWithStatus  = [curContactDetails objectForKey:@"phoneNumbers"];
+                for ( int j = 0; j < phoneNumbersWithStatus.count; j++){
+                    NSMutableArray *numberWithStatus = [phoneNumbersWithStatus objectAtIndex:j];
+                    if ( [[numberWithStatus objectAtIndex:2] isEqualToString:@"0"] &&
+                        [[numberWithStatus objectAtIndex:3] isEqualToString:@"0"]  )
+                    {
+                        [phoneNumbersWithStatus removeObject:numberWithStatus];
+                    }
+                }
+                
+                NSMutableArray *emailOnly  = [[NSMutableArray alloc] init];
+                NSMutableArray *emailsWithStatus  = [curContactDetails objectForKey:@"emailAddresses"];
+                for ( int k = 0; k < emailsWithStatus.count; k++){
+                    NSMutableArray *emailWithStatus = [emailsWithStatus objectAtIndex:k];
+                    if ( [[emailWithStatus objectAtIndex:1] isEqualToString:@"0"] )
+                    {
+                        [emailsWithStatus removeObject:emailWithStatus];
+                    }else {
+                        [emailOnly addObject:[emailWithStatus objectAtIndex:0]];
+                    }
+                }
+                
+                [curContactDetails setObject:emailOnly forKey:@"emailAddresses"];
+                
+                [untechable.finalCustomizedContactsArray addObject:curContactDetails];
+            }
+        }
+        
+        //Deep copy
+        //untechable.finalCustomizedContactsArray = [[NSMutableArray alloc] initWithArray:untechable.customizedContactsForCurrentSession copyItems:YES];
+       
+        //NSMutableArray* finalizedCustomizedContacts = [[NSMutableArray alloc] initWithArray:untechable.finalCustomizedContactsArray];
+        /*for ( int k = 0; k<untechable.finalCustomizedContactsArray.count; k++ ){
+            
+            [finalizedCustomizedContacts addObject:[untechable.customizedContactsForCurrentSession objectAtIndex:k]];
+        }*/
+        
+        //NSMutableArray* finalizedCustomizedContacts = [NSKeyedUnarchiver unarchiveObjectWithData:                                             [NSKeyedArchiver archivedDataWithRootObject:untechable.customizedContactsForCurrentSession]];
+        
+        //NSMutableArray *finalizedCustomizedContacts = [[NSMutableArray alloc] initWithArray:untechable.customizedContactsForCurrentSession copyItems:YES];
+        
+        /*for ( int i=0; i<finalizedCustomizedContacts.count; i++){
+            
+            ContactsCustomizedModal *tempModal = [finalizedCustomizedContacts objectAtIndex:i];
+            
+            NSMutableArray *phoneNumbersWithStatus  = tempModal.allPhoneNumbers;
+            for ( int j = 0; j < phoneNumbersWithStatus.count; j++){
+                NSMutableArray *numberWithStatus = [phoneNumbersWithStatus objectAtIndex:j];
+                if ( [[numberWithStatus objectAtIndex:2] isEqualToString:@"0"] &&
+                    [[numberWithStatus objectAtIndex:3] isEqualToString:@"0"]  )
+                {
+                    [phoneNumbersWithStatus removeObject:numberWithStatus];
+                }
+            }
+            
+            NSMutableArray *emailOnly  = [[NSMutableArray alloc] init];
+            NSMutableArray *emailsWithStatus  = tempModal.allEmails;
+            for ( int k = 0; k < emailsWithStatus.count; k++){
+                NSMutableArray *emailWithStatus = [emailsWithStatus objectAtIndex:k];
+                if ( [[emailWithStatus objectAtIndex:1] isEqualToString:@"0"] )
+                {
+                    [emailsWithStatus removeObject:emailWithStatus];
+                }else {
+                    [emailOnly addObject:[emailWithStatus objectAtIndex:0]];
+                }
+            }
+            
+            tempModal.allEmails = emailOnly;
+        }
+        
+        untechable.finalCustomizedContactsArray = finalizedCustomizedContacts;*/
+        
+        //untechable.customizedContactsForCurrentSession = untechable.customizedContactsForCurrentSession;
     }
     
     [self storeSceenVarsInDic];
@@ -376,7 +464,7 @@
                               @"timezoneOffset", @"spendingTimeTxt", @"startDate", @"endDate", @"hasEndDate"
                               ,@"twillioNumber", @"location", @"emergencyNumber", @"hasRecording"
                               ,@"socialStatus", @"fbAuth", @"fbAuthExpiryTs" , @"twitterAuth",@"twOAuthTokenSecret",   @"linkedinAuth"
-                              ,@"acType", @"email", @"password", @"respondingEmail", @"iSsl", @"imsHostName", @"imsPort", @"oSsl", @"omsHostName", @"omsPort",@"customizedContacts"
+                              ,@"acType", @"email", @"password", @"respondingEmail", @"iSsl", @"imsHostName", @"imsPort", @"oSsl", @"omsHostName", @"omsPort",@"finalCustomizedContacts"
                               ,nil];
     
     for (NSString* key in untechable.dic) {
