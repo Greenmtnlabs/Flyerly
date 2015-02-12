@@ -22,7 +22,7 @@
     BOOL IsCustomized;
     NSMutableDictionary *editingEmailsWithStatus;
     NSMutableDictionary *editingPhonesWithStatus;
-    NSString *editingCustomText;
+    
 }
 @property (weak, nonatomic) IBOutlet UITableView *contactDetailsTable;
 
@@ -57,7 +57,7 @@
         [editingEmailsWithStatus setObject:emailWithStatus forKey:indexPath];
     }
     
-    editingCustomText = contactModal.customTextForContact;
+    
     
     if( contactModal.IsCustomized ){
         IsCustomized = YES;
@@ -213,7 +213,7 @@
         
         if ( contactModal.customTextForContact != nil ){
             
-            cell.customText.text = editingCustomText;
+            cell.customText.text = contactModal.customTextForContact;
         }
         return cell;
         
@@ -321,8 +321,7 @@
     {
         customeTextCell = (CustomTextTableViewCell*)[_contactDetailsTable cellForRowAtIndexPath:indexPath];
     }
-    editingCustomText  = customeTextCell.customText.text;
-    contactModal.customTextForContact = editingCustomText;
+    contactModal.customTextForContact = customeTextCell.customText.text;
     
     if ( editingPhonesWithStatus.count > 0 ) {
         
@@ -371,13 +370,24 @@
         [contactModal setEmailStatus:setEmailStatus];
     }
     
+    BOOL alreadyExist = NO;
+    int indexToBeChanged = 0;
+    
+    for ( int i = 0 ;i<contactListController.currentlyEditingContacts.count;i++){
+        
+        ContactsCustomizedModal *tempModal = [contactListController.currentlyEditingContacts objectAtIndex:i];
+        
+        if ( [tempModal.name isEqualToString:contactModal.name] && tempModal.allPhoneNumbers.count == contactModal.allPhoneNumbers.count && tempModal.allEmails.count == contactModal.allEmails.count )
+        {
+            alreadyExist = YES;
+            indexToBeChanged = i;
+        }
+    }
+    
     if ( IsCustomized ){
-        if (    [contactListController.currentlyEditingContacts containsObject:contactModal]
-                //[untechable.customizedContactsForCurrentSession containsObject:contactModal] ){
-            ){
-            
-            ContactsCustomizedModal *tempModal = contactModal;
-            
+        
+        if ( alreadyExist ) {
+        
             NSMutableArray  *tempStatusArray = contactModal.cutomizingStatusArray;
             
             if ( [contactModal.customTextForContact isEqualToString:untechable.spendingTimeTxt]
@@ -388,16 +398,15 @@
                 &&
                 [[tempStatusArray objectAtIndex:2] isEqualToString:@"0"] )
             {
-                [contactListController.currentlyEditingContacts removeObject:contactModal];
+                [contactListController.currentlyEditingContacts removeObjectAtIndex:indexToBeChanged];
                 
             }else {
                 
-                [contactListController.currentlyEditingContacts replaceObjectAtIndex:[contactListController.currentlyEditingContacts indexOfObject:contactModal] withObject:contactModal];
+                [contactListController.currentlyEditingContacts replaceObjectAtIndex:indexToBeChanged withObject:contactModal];
             }
         }else {
             contactModal.IsCustomized = YES;
             [contactListController.currentlyEditingContacts addObject:contactModal];
-            //[untechable.customizedContactsForCurrentSession addObject:contactModal];
         }
     }
  
@@ -520,13 +529,5 @@ shouldChangeTextInRange:(NSRange)range
     
     return headerView;
 }
-
-- (IBAction)dismissKeyboard:(id)sender;
-{
-    NSLog(@"asdfasfda");
-    //[textField becomeFirstResponder];
-    //[textField resignFirstResponder];
-}
-
 
 @end

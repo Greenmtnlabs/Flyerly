@@ -48,7 +48,7 @@
 
 @implementation AddUntechableController
 
-@synthesize indexOfUntechableInEditMode,callReset;
+@synthesize indexOfUntechableInEditMode,callReset,untechable;
 
 #pragma mark -  Default functions
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
