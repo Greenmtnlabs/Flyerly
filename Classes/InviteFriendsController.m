@@ -501,7 +501,16 @@ const int CONTACTS_TAB = 0;
  */
 - (IBAction)loadFacebookContacts:(UIButton *)sender{
     
-    if ([FlyerlySingleton connected]) {
+    SHKItem *item;
+
+    NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
+    
+    item = [SHKItem image:nil title:[NSString stringWithFormat:@"%@ #flyerly ", sharingText ]];
+    item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
+    iosSharer = [SHKFacebook shareItem:item];
+    iosSharer.shareDelegate = self;
+    
+    /*if ([FlyerlySingleton connected]) {
         
         selectedTab = FACEBOOK_TAB;
         [self.uiTableView reloadData];
@@ -548,7 +557,7 @@ const int CONTACTS_TAB = 0;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         
         [alert show];
-    }
+    }*/
 }
 
 
