@@ -743,7 +743,9 @@
             }
         }
         
-        [contactsArray addObject:contactModal];
+        if ( contactModal.allEmails.count > 0 || contactModal.allPhoneNumbers.count > 0 ){
+            [contactsArray addObject:contactModal];
+        }
     }
     // Reload table data after all the contacts get loaded
     contactBackupArray = nil;
