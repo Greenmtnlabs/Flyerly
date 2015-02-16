@@ -39,7 +39,6 @@
     // Do any additional setup after loading the view from its nib.
     
     [self setNavigationDefaults];
-    [self setNavigation:@"viewDidLoad"];
     
     _contactsTable.delegate = self;
     _contactsTable.dataSource = self;
@@ -49,9 +48,14 @@
     [_contactsTable  setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
     [searchTextField setReturnKeyType:UIReturnKeyDone];
 
-    if ( untechable.customizedContactsForCurrentSession.count > 0 ){
-        self.currentlyEditingContacts = untechable.customizedContactsForCurrentSession;
+    if ( untechable.hasFinished ){
+    
+    }else {
+        if ( untechable.customizedContactsForCurrentSession.count > 0 ){
+            self.currentlyEditingContacts = untechable.customizedContactsForCurrentSession;
+        }
     }
+    
     
     if ( currentlyEditingContacts == nil ){
         self.currentlyEditingContacts = [[NSMutableArray alloc] init];
@@ -64,6 +68,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
+    
+    [self setNavigation:@"viewDidLoad"];
     
     customizedContactsString = untechable.customizedContacts;
     
@@ -360,7 +366,7 @@
     }
     
     
-    if ( ![customizedContactsString isEqualToString:@""] ){
+    if ( ![customizedContactsString isEqualToString:@""] && self.currentlyEditingContacts.count <= 0 ){
         
         for ( int i = 0; i < customizedContactsDictionary.count; i++ ){
             
@@ -368,7 +374,47 @@
             
             NSMutableArray *tempPhonesNumbers = [curContactDetails objectForKey:@"phoneNumbers"];
             
-            if ( [[curContactDetails objectForKey:@"contactName"] isEqualToString:_contactModal.name]
+            for ( int i=0; i < tempPhonesNumbers.count; i++ ){
+                
+                NSMutableArray *phoneNumberDetails = [tempPhonesNumbers objectAtIndex:i];
+                
+                NSString *customizedNumber = [phoneNumberDetails objectAtIndex:1];
+                
+                for ( int j=0; j < _contactModal.allPhoneNumbers.count; j++ ){
+                    
+                    NSMutableArray *currentContactNumberDetails = [_contactModal.allPhoneNumbers objectAtIndex:j];
+                    
+                    if ( [[currentContactNumberDetails objectAtIndex:1] isEqualToString:customizedNumber] ){
+                        
+                        [_contactModal.allPhoneNumbers replaceObjectAtIndex:j withObject:phoneNumberDetails];
+                        
+                        _contactModal.IsCustomized = YES;
+                    }
+                }
+            }
+            
+            NSMutableArray *tempEmails = [curContactDetails objectForKey:@"emailAddresses"];
+            
+            for ( int i=0; i < tempEmails.count; i++ ){
+                
+                NSString *emailDetails = [tempEmails objectAtIndex:0];
+                
+                for ( int j=0; j < _contactModal.allEmails.count; j++ ){
+                    
+                    NSMutableArray *currentContactEmailDetails = [_contactModal.allEmails objectAtIndex:j];
+                    
+                    if ( [[currentContactEmailDetails objectAtIndex:0] isEqualToString:emailDetails] ){
+                        
+                        [currentContactEmailDetails setObject:@"1" atIndexedSubscript:1];
+                        
+                        _contactModal.IsCustomized = YES;
+                    }
+                }
+            }
+            
+            _contactModal.cutomizingStatusArray = [curContactDetails objectForKey:@"cutomizingStatusArray"];
+            
+            /*if ( [[curContactDetails objectForKey:@"contactName"] isEqualToString:_contactModal.name]
                 &&
                 _contactModal.allPhoneNumbers.count == tempPhonesNumbers.count) {
                 
@@ -394,51 +440,17 @@
                 }else {
                     [tempCutomizingStatusArray setObject:@"0" atIndexedSubscript:0];
                 }
-                /*for ( int j=0 ;j<tempEmails.count; j++ ){
-                    
-                    NSMutableArray *phoneNumberDetails = [tempPhonesNumbers objectAtIndex:i];
-                    
-                    if ( [[phoneNumberDetails objectAtIndex:2] isEqualToString:@"1"] ) {
-                        [tempCutomizingStatusArray setObject:@"1" atIndexedSubscript:1];
-                        break;
-                    }
-                    
-                    if ( [[phoneNumberDetails objectAtIndex:3] isEqualToString:@"1"] ) {
-                        [tempCutomizingStatusArray setObject:@"1" atIndexedSubscript:2];
-                        break;
-                    }
-                    
-                }*/
-                
-                //_contactModal.cutomizingStatusArray = [curContactDetails objectForKey:@"cutomizingStatusArray"];
-                //_contactModal.cutomizingStatusArray = tempCutomizingStatusArray;
                 
                 NSNumber *IsCustomizedBoolValue = [curContactDetails objectForKey:@"IsCustomized"];
                 if ( [IsCustomizedBoolValue boolValue] ) {
                     _contactModal.IsCustomized = YES;
                 }
-            }
+            }*/
             
             // HERE WE PASS DATA TO CELL CLASS
-            [cell setCellObjects:_contactModal :1 :@"InviteFriends"];
+            //[cell setCellObjects:_contactModal :1 :@"InviteFriends"];
         }
     }
-    
-    // HERE WE CHECK STATUS OF FRIEND INVITE
-    /*int status = 0;
-    
-    if ([self ckeckExistdb:receivedDic.description]) {
-        status = 2;
-    }else{
-        if ([self ckeckExistContact:receivedDic.description]) {
-            status = 1;
-            
-        }else{
-            status = 0;
-            
-        }
-    }*/
-    
     // HERE WE PASS DATA TO CELL CLASS
     [cell setCellObjects:_contactModal :1 :@"InviteFriends"];
     
@@ -794,8 +806,6 @@
     }else{
         
         detailsController.contactModal = tempModal;
-        
-        
     }
     detailsController.customizedContactsDictionary =  customizedContactsDictionary;
     [self.navigationController pushViewController:detailsController animated:YES];
