@@ -109,6 +109,30 @@
     return jsonString;
 }
 
+-(NSMutableArray *)convertJsonStringIntoCCMArray:(NSString *)customizedContactsString
+{
+    NSMutableArray *savedCustomContacts = [[NSMutableArray alloc] init];
+    
+    NSMutableDictionary *customizedContactsModals =  [self convertJsonStringIntoDictinoary:customizedContactsString];
+    
+    for(int i=0; i<[customizedContactsModals count]; i++) {
+        
+        NSMutableDictionary *curContactDetails = [[NSMutableDictionary alloc] init];
+        curContactDetails = [customizedContactsModals objectForKey:[NSString stringWithFormat:@"%d",i]];
+       
+        ContactsCustomizedModal *curObj =  [[ContactsCustomizedModal alloc] init];
+        curObj.name = [curContactDetails objectForKey:@"contactName"];
+        curObj.allPhoneNumbers = [curContactDetails objectForKey:@"phoneNumbers"];
+        curObj.allEmails = [curContactDetails objectForKey:@"emailAddresses"];
+        curObj.customTextForContact = [curContactDetails objectForKey:@"customTextForContact"];
+        curObj.IsCustomized = [curContactDetails objectForKey:@"IsCustomized"];
+        curObj.cutomizingStatusArray = [curContactDetails objectForKey:@"cutomizingStatusArray"];
+        
+        [savedCustomContacts addObject:curObj];
+    }
+    
+    return savedCustomContacts;
+}
 
 -(NSString *)convertCCMArrayIntoJsonString:(NSMutableArray *)value_
 {
@@ -121,7 +145,7 @@
         [curContactDetails setValue:curObj.allPhoneNumbers forKey:@"phoneNumbers"];
         [curContactDetails setValue:curObj.allEmails forKey:@"emailAddresses"];
         [curContactDetails setValue:curObj.customTextForContact forKey:@"customTextForContact"];
-        //[curContactDetails setValue:curObj.cutomizingStatusArray forKey:@"cutomizingStatusArray"];
+        [curContactDetails setValue:curObj.cutomizingStatusArray forKey:@"cutomizingStatusArray"];
         [curContactDetails setObject:[NSNumber numberWithBool:curObj.IsCustomized] forKey:@"IsCustomized"];
         [customizedContactsArray setValue:curContactDetails forKey:[NSString stringWithFormat:@"%i",i]];
         
@@ -129,14 +153,31 @@
     
     return [self convertDicIntoJsonString:customizedContactsArray];
 }
--(NSArray *)convertJsonStringIntoArray:(NSString *)value
+
+-(NSMutableDictionary *)convertJsonStringIntoDictinoary:(NSString *)value
 {
-    if ( [value isEqualToString:@""] ){
+
+    NSData* data = [value dataUsingEncoding:NSUTF8StringEncoding];
+
+    NSError *e = nil;
+    NSMutableDictionary *jsonArray = [NSJSONSerialization JSONObjectWithData: data options: NSJSONReadingMutableContainers error: &e];
+    
+    if (!jsonArray) {
+        NSLog(@"Error parsing JSON: %@", e);
+    } else {
+        for(NSDictionary *item in jsonArray) {
+            NSLog(@"Item: %@", item);
+        }
+    }
+    
+    return jsonArray;
+    
+    /*if ( [value isEqualToString:@""] ){
         return nil;
     }
     return [value componentsSeparatedByCharactersInSet:
             [NSCharacterSet characterSetWithCharactersInString:DEF_ARAY_SPLITER]
-            ];
+            ];*/
 }
 
 -(NSString *)getTimeZoneOffset

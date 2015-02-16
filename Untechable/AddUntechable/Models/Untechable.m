@@ -192,8 +192,8 @@
         
         dic[@"customizedContacts"] = [commonFunctions convertCCMArrayIntoJsonString:customizedContactsForCurrentSession];
         customizedContacts = dic[@"customizedContacts"];
-        //dic[@"customizedContacts"] = customizedContacts;
-
+        customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:dic[@"customizedContacts"]];
+        
         //Screen3 vars
         dic[@"socialStatus"] = socialStatus;
         dic[@"fbAuth"] = fbAuth;
@@ -253,10 +253,10 @@
         emergencyNumber   = ( dic[@"emergencyNumber"] ) ? dic[@"emergencyNumber"] : @"";
         emergencyContacts = ( dic[@"emergencyContacts"] ) ? dic[@"emergencyContacts"] : @"";
         hasRecording      = ([dic[@"hasRecording"] isEqualToString:@"YES"]) ? YES : NO;
-        
-        //customizedContacts = ( dic[@"customizedContacts"] ) ? dic[@"customizedContacts"] : [[NSMutableArray alloc]init];
+    
         customizedContacts = ( dic[@"customizedContacts"] ) ? dic[@"customizedContacts"] : @"";
-        
+        customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:customizedContacts];
+    
         //Screen3 vars
         socialStatus = ( dic[@"socialStatus"] ) ? dic[@"socialStatus"] : @"";
         fbAuth       = ( dic[@"fbAuth"] ) ? dic[@"fbAuth"] : @"";
@@ -311,7 +311,7 @@
     hasRecording = NO;
     customizedContactsForCurrentSession = [[NSMutableArray alloc] init];
     customizedContacts = @"";
-    
+
     //Screen3
     socialStatus = @"";
     fbAuth       = @"";
@@ -327,8 +327,6 @@
     iSsl = @"";
     oSsl = @"";
     acType = imsHostName = imsPort = omsHostName = omsPort= @"";
-    
-    
 }
 
 /*

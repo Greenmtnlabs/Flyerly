@@ -20,7 +20,8 @@
 -(void)showAlert:(NSString *)title message:(NSString *)message;
 -(NSString *)convertDicIntoJsonString:(NSMutableDictionary *)value;
 -(NSString *)convertCCMArrayIntoJsonString:(NSMutableArray *)value;
-//-(NSArray *)convertJsonStringIntoArray:(NSString *)value;
+-(NSMutableArray *)convertJsonStringIntoCCMArray:(NSString *)customizedContactsString;
+-(NSMutableDictionary *)convertJsonStringIntoDictinoary:(NSString *)value;
 -(NSString *)getTimeZoneOffset;
 -(NSString *)nsDateToTimeStampStr:(NSDate *)inpDate;
 -(NSDate *)timestampStrToNsDate:(NSString *)timeStamp;
