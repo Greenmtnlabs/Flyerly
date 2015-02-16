@@ -21,7 +21,7 @@
 @synthesize timezoneOffset, spendingTimeTxt, startDate, endDate, hasEndDate;
 
 //2-vars for screen2
-@synthesize customizedContacts,twillioNumber, location, emergencyContacts, emergencyNumber, hasRecording,customizedContactsForCurrentSession,finalCustomizedContactsArray,finalCustomizedContactsString;
+@synthesize customizedContacts,twillioNumber, location, emergencyContacts, emergencyNumber, hasRecording,customizedContactsForCurrentSession;
 
 //3-vars for screen3
 @synthesize socialStatus, fbAuth, fbAuthExpiryTs, twitterAuth, twOAuthTokenSecret, linkedinAuth;
@@ -194,11 +194,6 @@
         customizedContacts = dic[@"customizedContacts"];
         customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:dic[@"customizedContacts"]];
         
-        dic[@"finalCustomizedContacts"] = [commonFunctions convertCCMArrayIntoJsonString:finalCustomizedContactsArray];
-        finalCustomizedContactsString = dic[@"finalCustomizedContacts"];
-        finalCustomizedContactsArray = [commonFunctions convertJsonStringIntoCCMArray:dic[@"customizedContacts"]];
-        //dic[@"customizedContacts"] = customizedContacts;
-
         //Screen3 vars
         dic[@"socialStatus"] = socialStatus;
         dic[@"fbAuth"] = fbAuth;
@@ -260,8 +255,8 @@
         hasRecording      = ([dic[@"hasRecording"] isEqualToString:@"YES"]) ? YES : NO;
     
         customizedContacts = ( dic[@"customizedContacts"] ) ? dic[@"customizedContacts"] : @"";
-        finalCustomizedContactsString = ( dic[@"finalCustomizedContacts"] ) ? dic[@"finalCustomizedContacts"] : @"";
-        
+        customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:customizedContacts];
+    
         //Screen3 vars
         socialStatus = ( dic[@"socialStatus"] ) ? dic[@"socialStatus"] : @"";
         fbAuth       = ( dic[@"fbAuth"] ) ? dic[@"fbAuth"] : @"";
@@ -316,10 +311,7 @@
     hasRecording = NO;
     customizedContactsForCurrentSession = [[NSMutableArray alloc] init];
     customizedContacts = @"";
-    finalCustomizedContactsArray = [[NSMutableArray alloc] init];
-    finalCustomizedContactsString = @"";
-    
-    
+
     //Screen3
     socialStatus = @"";
     fbAuth       = @"";
@@ -335,8 +327,6 @@
     iSsl = @"";
     oSsl = @"";
     acType = imsHostName = imsPort = omsHostName = omsPort= @"";
-    
-    
 }
 
 /*
