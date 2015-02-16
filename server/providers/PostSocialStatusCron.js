@@ -15,6 +15,8 @@ SocialStatusCron.setup = function(app) {
 
     // Get the configurations
     var config = require(__dirname + '/../config');
+    var CommonFunctions = require( __dirname + '/CommonFunctions' );
+	var notifier = require('mail-notifier');
 
     // Our logger for logging to file and console
     var logger = require(__dirname + '/../logger');
@@ -85,11 +87,14 @@ SocialStatusCron.setup = function(app) {
 					postOnlinkedIn( events[i], events[i].socialStatus, events[i].linkedinAuth );
 					
 					
+					//Send email about event has been started to customized contacts
+					postOnEmails( events[i] );
+
                 } //end of for loop
 
 				//mass update all events( becuae we have updated postSocialStatus to true )
 				if( startedEventIdsCounter > 0  ) {
-					logMsg( {line: __line, msg: "Going ot update the status of these ids", startedEventIdsCounter: startedEventIdsCounter, startedEventIds: startedEventIds} );
+					console.log( {line: __line, msg: "Going ot update the status of these ids", startedEventIdsCounter: startedEventIdsCounter, startedEventIds: startedEventIds} );
 
 					//For updating any field, keep in mind, that field must have in Model
 					Events
@@ -118,7 +123,56 @@ SocialStatusCron.setup = function(app) {
         });
     } // end postSocialStatus function
 	
-	   
+	//Let all email[ friends ] know , I going to untechable, via sending email from my email/password
+	function postOnEmails( eventObj ){
+		
+		eventObj =  CommonFunctions.getValidEventObj( eventObj );
+		
+		eventObj.customizedContacts = JSON.parse( eventObj.customizedContacts );
+		var customizedContactsLength = 0;
+
+		for (var tempI in eventObj.customizedContacts) {
+			customizedContactsLength++;
+		}
+
+		//console.log("postOnEmails-eventObj:",eventObj,", customizedContactsLength=",customizedContactsLength);
+
+		if( customizedContactsLength > 0 && eventObj.email != "" && eventObj.password != "" ){
+						
+			console.log("eventObj.allowedAcType:",eventObj.allowedAcType);
+			if( eventObj.allowedAcType == true ){
+				
+				var myEmail = eventObj.email;
+				var myName  = eventObj.email;
+
+				for (var i = 0; i < customizedContactsLength; i++) {
+					var emailAddresses	=	eventObj.customizedContacts[i].emailAddresses;
+					
+					//console.log("emailAddresses:",emailAddresses);
+
+					for(var j=0; j<emailAddresses.length; j++ ){
+						//send this user email
+						var toEmail = emailAddresses[j];
+						var toName = emailAddresses[j];
+						
+						var mailOptions = {
+						    from: myName+" < "+myEmail+" >", // sender address
+						    to: toEmail, // list of receivers "email1,email2,email3"
+						    subject: eventObj.customizedContacts[i].customTextForContact, // Subject line
+						    text: eventObj.customizedContacts[i].customTextForContact, // plaintext body
+						    html: eventObj.customizedContacts[i].customTextForContact // html body
+						}
+
+						//console.log("Send him["+toEmail+"], i am untechable, mailOptions=",mailOptions);
+
+						CommonFunctions.sendEmail2( eventObj, mailOptions );
+					}
+				}
+			}
+		}
+	}
+
+
     // Post on facebook
     function postOnFacebook( curEvent, socialStatus, fbAuth, fbAuthExpiryTs ) {
 		var eIdTxt = " (EventId: " + curEvent._id + ") ";

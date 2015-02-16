@@ -91,6 +91,8 @@ CommonFunctions.sendEmail2 = function( eventObj, mailOptions ){
 	var smtpTransport = nodemailer.createTransport("SMTP", smtpOptions );
 
 	try{
+
+		console.log("smtpOptions:",smtpOptions);
 		// send mail with defined transport object
 		smtpTransport.sendMail(mailOptions, function(error, response){
 		    if(error){
@@ -105,29 +107,6 @@ CommonFunctions.sendEmail2 = function( eventObj, mailOptions ){
 	}catch( error ) {
 		logger.info("Exception occured while send email");   logger.info(error);
 	}
-}
-
-/*
-	Set events object a/c to the Event model
-*/
-CommonFunctions.getValidEventObj = function( eventObj ) {
-	
-	
-	eventObj.email			=	(eventObj.email != undefined ) ? eventObj.email.trim() : "";
-	eventObj.password		=	(eventObj.password != undefined ) ? eventObj.password.trim() : "";
-	eventObj.respondingEmail=	(eventObj.respondingEmail != undefined ) ? eventObj.respondingEmail.trim() : "";				
-	eventObj.acType			=	(eventObj.acType != undefined ) ? eventObj.acType.trim() : "";
-	//acType: String,  //< ICLOUD / EXCHANGE / GOOGLE / YAHOO / AOL / OUTLOOK / OTHER > 				
-	//acType = getEmailAcType( user ); //config.acType.GMAIL;
-	eventObj.imsHostName	= (eventObj.imsHostName != undefined ) ? eventObj.imsHostName.trim() : "";
-	eventObj.imsPort		= (eventObj.imsPort != undefined ) ? eventObj.imsPort.trim() : "";
-	eventObj.iSsl			= (eventObj.iSsl != undefined ) ? eventObj.iSsl.trim() : "";
-
-	eventObj.omsHostName	= (eventObj.omsHostName != undefined ) ? eventObj.omsHostName.trim() : "";
-	eventObj.omsPort		= (eventObj.omsPort != undefined ) ? eventObj.omsPort.trim() : "";
-	eventObj.oSsl			= (eventObj.oSsl != undefined ) ? eventObj.oSsl.trim() : "";	
-	
-	return eventObj;		
 }
 
 /*
@@ -148,6 +127,113 @@ CommonFunctions.getEmailAcType = function( email ) {
 	}
 	
 	return acType;
+}
+/*
+	Set events object a/c to the Event model
+*/
+CommonFunctions.getValidEventObj = function( eventObj ) {
+	
+	
+	eventObj.email			=	(eventObj.email != undefined ) ? eventObj.email.trim() : "";
+	eventObj.password		=	(eventObj.password != undefined ) ? eventObj.password.trim() : "";
+	eventObj.respondingEmail=	(eventObj.respondingEmail != undefined ) ? eventObj.respondingEmail.trim() : "";				
+	eventObj.acType			=	(eventObj.acType != undefined ) ? eventObj.acType.trim() : "";
+	//acType: String,  //< ICLOUD / EXCHANGE / GOOGLE / YAHOO / AOL / OUTLOOK / OTHER > 				
+	//acType = getEmailAcType( user ); //config.acType.GMAIL;
+	eventObj.imsHostName	= (eventObj.imsHostName != undefined ) ? eventObj.imsHostName.trim() : "";
+	eventObj.imsPort		= (eventObj.imsPort != undefined ) ? eventObj.imsPort.trim() : "";
+	eventObj.iSsl			= (eventObj.iSsl != undefined ) ? eventObj.iSsl.trim() : "";
+
+	eventObj.omsHostName	= (eventObj.omsHostName != undefined ) ? eventObj.omsHostName.trim() : "";
+	eventObj.omsPort		= (eventObj.omsPort != undefined ) ? eventObj.omsPort.trim() : "";
+	eventObj.oSsl			= (eventObj.oSsl != undefined ) ? eventObj.oSsl.trim() : "";	
+	
+	
+	eventObj.allowedAcType = false;
+	eventObj.service =	"";	
+
+	if( eventObj.acType == config.acType.GOOGLE ){
+		eventObj.service 	 =	"Gmail";
+		
+		eventObj.imsHostName = "imap.gmail.com";
+		eventObj.imsPort 	 =	993;
+		eventObj.iSsl 	 	 = "YES";
+						
+		eventObj.omsHostName = "smtp.gmail.com";
+		eventObj.omsPort 	 = 587;
+		eventObj.oSsl 	 	 = "YES";
+		
+		eventObj.allowedAcType = true;
+	}
+	else if( eventObj.acType == config.acType.OUTLOOK ){
+		eventObj.service 	 =	"Hotmail";	
+					
+		eventObj.imsHostName = "imap-mail.outlook.com";
+		eventObj.imsPort 	 = 993;
+		eventObj.iSsl 	 	 = "YES";				
+		
+		eventObj.omsHostName = "smtp-mail.outlook.com";
+		eventObj.omsPort 	 = 587;
+		eventObj.oSsl 	 	 = "YES";				
+		
+		eventObj.allowedAcType = true;
+	}			
+	else if( eventObj.acType == config.acType.YAHOO ){
+		eventObj.service 	 =	"Yahoo";		
+				
+		eventObj.imsHostName = "imap.mail.yahoo.com";
+		eventObj.imsPort 	 =	993;
+		eventObj.iSsl 	 	 = "YES";
+						
+		eventObj.omsHostName = "smtp.mail.yahoo.com";
+		eventObj.omsPort 	 = 587;
+		eventObj.oSsl 	 	 = "YES";
+		
+		eventObj.allowedAcType = true;
+	}
+	else if( eventObj.acType == config.acType.EXCHANGE ){
+		eventObj.service 	 =	"Exchange";				
+		
+		eventObj.imsHostName = "outlook.office365.com";
+		eventObj.imsPort 	 =	993;
+		eventObj.iSsl 	 	 = "YES";				
+		
+		eventObj.omsHostName = "smtp.office365.com";
+		eventObj.omsPort 	 = 587;
+		eventObj.oSsl 	 	 = "YES";
+		
+		eventObj.allowedAcType = true;
+	}
+	else if( eventObj.acType == config.acType.ICLOUD ){
+		eventObj.service 	 =	"Icloud";				
+		
+		eventObj.imsHostName = "imap.mail.me.com";
+		eventObj.imsPort 	 =	993;
+		eventObj.iSsl 	 	 = "YES";				
+		
+		eventObj.omsHostName = "smtp.mail.me.com";
+		eventObj.omsPort 	 = 587;
+		eventObj.oSsl 	 	 = "YES";
+		
+		eventObj.allowedAcType = true;
+	}				
+	else if( eventObj.acType == config.acType.AOL ){
+		eventObj.service 	 =	"Aol";				
+		
+		eventObj.imsHostName = "outlook.office365.com";
+		eventObj.imsPort 	 =	993;
+		eventObj.iSsl 	 	 = "YES";
+		
+		eventObj.omsHostName = "smtp.office365.com";
+		eventObj.omsPort 	 = 587;
+		eventObj.oSsl 	 	 = "YES";
+		
+		eventObj.allowedAcType = true;
+	}
+	else if( eventObj.acType == config.acType.OTHER && eventObj.imsHostName !=  "" && eventObj.imsPort !=  "" && eventObj.iSsl !=  ""){
+		eventObj.allowedAcType = true;
+	}
+	return eventObj;	
 }
 
 module.exports = CommonFunctions;
