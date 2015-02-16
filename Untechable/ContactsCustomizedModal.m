@@ -64,32 +64,20 @@
     
 }
 
--(void)setEmailStatus :(int)status {
+-(void)setEmailStatus :(int)status_ {
     
-    [cutomizingStatusArray replaceObjectAtIndex:0 withObject:[NSString stringWithFormat:@"%d",status]];
-    
-    //Here we write the Array of Text files .txt
-    //[cutomizingStatusArray writeToFile:socialFile atomically:YES];
-    
+    [cutomizingStatusArray replaceObjectAtIndex:0 withObject:[NSString stringWithFormat:@"%d",status_]];
 }
 
 
--(void)setPhoneStatus :(int)status {
+-(void)setPhoneStatus :(int)status_ {
     
-    [cutomizingStatusArray replaceObjectAtIndex:1 withObject:[NSString stringWithFormat:@"%d",status]];
-    
-    //Here we write the Array of Text files .txt
-    //[cutomizingStatusArray writeToFile:socialFile atomically:YES];
-    
+    [cutomizingStatusArray replaceObjectAtIndex:1 withObject:[NSString stringWithFormat:@"%d",status_]];
 }
 
 
--(void)setSmsStatus :(int)status {
+-(void)setSmsStatus :(int)status_ {
     
-    [cutomizingStatusArray replaceObjectAtIndex:2 withObject:[NSString stringWithFormat:@"%d",status]];
-    
-    //Here we write the Array of Text files .txt
-    //[cutomizingStatusArray writeToFile:socialFile atomically:YES];
-    
+    [cutomizingStatusArray replaceObjectAtIndex:2 withObject:[NSString stringWithFormat:@"%d",status_]];
 }
 @end
