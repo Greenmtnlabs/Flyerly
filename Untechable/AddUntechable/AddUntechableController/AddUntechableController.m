@@ -13,6 +13,7 @@
 #import "BSKeyboardControls.h"
 #import "SettingsViewController.h"
 #import "ContactsListControllerViewController.h"
+#import "UntechablesList.h"
 
 
 @interface AddUntechableController (){
@@ -68,7 +69,6 @@
     [self setDefaultModel];
     
     [self setNavigationDefaults];
-    [self setNavigation:@"viewDidLoad"];
     
     [self updateUI];
     
@@ -129,6 +129,7 @@
     
     [super viewDidAppear:animated];
     [untechable printNavigation:[self navigationController]];
+    [self setNavigation:@"viewDidLoad"];
 
 }
 // ________________________     Custom functions    ___________________________
@@ -270,7 +271,15 @@
 }
 
 -(void) goBack {
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[UntechablesList class]]) {
+            
+            UntechablesList *untechableListController = (UntechablesList *)controller;
+            [self.navigationController popToViewController:untechableListController animated:YES];
+            break;
+        }
+    }
 }
 
 -(void)btnNextTouchStart{
