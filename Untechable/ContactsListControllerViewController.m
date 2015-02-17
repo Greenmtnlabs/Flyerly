@@ -48,17 +48,21 @@
     [_contactsTable  setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
     [searchTextField setReturnKeyType:UIReturnKeyDone];
 
-    if ( untechable.hasFinished ){
+    if ( untechable.customizedContactsForCurrentSession.count > 0 ){
+        currentlyEditingContacts = untechable.customizedContactsForCurrentSession;
+    }
+    
+    /*if ( untechable.hasFinished ){
     
     }else {
         if ( untechable.customizedContactsForCurrentSession.count > 0 ){
-            self.currentlyEditingContacts = untechable.customizedContactsForCurrentSession;
+            currentlyEditingContacts = untechable.customizedContactsForCurrentSession;
         }
-    }
+    }*/
     
     
     if ( currentlyEditingContacts == nil ){
-        self.currentlyEditingContacts = [[NSMutableArray alloc] init];
+        currentlyEditingContacts = [[NSMutableArray alloc] init];
     }
     
     // Load device contacts
@@ -159,7 +163,7 @@
     for (UIViewController *controller in self.navigationController.viewControllers) {
         if ([controller isKindOfClass:[AddUntechableController class]]) {
             
-            untechable.customizedContactsForCurrentSession = self.currentlyEditingContacts;
+            untechable.customizedContactsForCurrentSession = currentlyEditingContacts;
             AddUntechableController *addViewController = (AddUntechableController *)controller;
             addViewController.untechable = untechable;
             [self.navigationController popToViewController:addViewController animated:YES];
@@ -184,7 +188,7 @@
     
     if( [after isEqualToString:@"GO_TO_NEXT"] || [after isEqualToString:@"ON_SKIP"] ) {
         
-        self.currentlyEditingContacts = [[NSMutableArray alloc] init];
+        currentlyEditingContacts = [[NSMutableArray alloc] init];
         [_contactsTable reloadData];
         
         SocialnetworkController *socialnetwork;
@@ -214,10 +218,10 @@
 }
 -(void)onNext{
 
-    if ( self.currentlyEditingContacts.count > 0 ){
+    if ( currentlyEditingContacts.count > 0 ){
         
-        for (int i = 0;i<self.currentlyEditingContacts.count; i++){
-            ContactsCustomizedModal *previousModal = [self.currentlyEditingContacts objectAtIndex:i];
+        for (int i = 0;i<currentlyEditingContacts.count; i++){
+            ContactsCustomizedModal *previousModal = [currentlyEditingContacts objectAtIndex:i];
             
             if ( [[previousModal.cutomizingStatusArray objectAtIndex:0] isEqualToString:@"1"] ){
                 
@@ -227,7 +231,7 @@
         }
     }
     
-    untechable.customizedContactsForCurrentSession = self.currentlyEditingContacts;
+    untechable.customizedContactsForCurrentSession = currentlyEditingContacts;
     
     if ( selectedAnyEmail  ){
         
@@ -341,10 +345,11 @@
         _contactModal.img =[[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"dfcontact" ofType:@"jpg"]];
     }
     
-    if ( self.currentlyEditingContacts.count > 0 ){
+    if ( currentlyEditingContacts.count > 0 ){
         
-        for (int i = 0;i<self.currentlyEditingContacts.count; i++){
-            ContactsCustomizedModal *previousModal = [self.currentlyEditingContacts objectAtIndex:i];
+        for (int i = 0;i<currentlyEditingContacts.count; i++){
+            
+            ContactsCustomizedModal *previousModal = [currentlyEditingContacts objectAtIndex:i];
             
             if ( [previousModal.name isEqualToString:_contactModal.name] &&
                  previousModal.allPhoneNumbers.count == _contactModal.allPhoneNumbers.count )
@@ -360,13 +365,12 @@
         }
     }
     
-    if ( self.currentlyEditingContacts.count <= 0 && [customizedContactsString isEqualToString:@""] ){
+    if ( currentlyEditingContacts.count <= 0 && [customizedContactsString isEqualToString:@""] ){
         
         [self resetContactModal:_contactModal];
     }
     
-    
-    if ( ![customizedContactsString isEqualToString:@""] && self.currentlyEditingContacts.count <= 0 ){
+    /*if ( ![customizedContactsString isEqualToString:@""] && currentlyEditingContacts.count <= 0 ){
         
         for ( int i = 0; i < customizedContactsDictionary.count; i++ ){
             
@@ -388,6 +392,15 @@
                         
                         [_contactModal.allPhoneNumbers replaceObjectAtIndex:j withObject:phoneNumberDetails];
                         
+                        if ( [[phoneNumberDetails objectAtIndex:2] isEqualToString:@"1"] ){
+                            
+                            [_contactModal.cutomizingStatusArray setObject:@"1" atIndexedSubscript:2];
+                        }
+                        
+                        if ( [[phoneNumberDetails objectAtIndex:3] isEqualToString:@"1"] ){
+                            
+                            [_contactModal.cutomizingStatusArray setObject:@"1" atIndexedSubscript:1];
+                        }
                         _contactModal.IsCustomized = YES;
                     }
                 }
@@ -407,50 +420,14 @@
                         
                         [currentContactEmailDetails setObject:@"1" atIndexedSubscript:1];
                         
+                        [_contactModal.cutomizingStatusArray setObject:@"1" atIndexedSubscript:0];
+                        
                         _contactModal.IsCustomized = YES;
                     }
                 }
             }
-            
-            _contactModal.cutomizingStatusArray = [curContactDetails objectForKey:@"cutomizingStatusArray"];
-            
-            /*if ( [[curContactDetails objectForKey:@"contactName"] isEqualToString:_contactModal.name]
-                &&
-                _contactModal.allPhoneNumbers.count == tempPhonesNumbers.count) {
-                
-                NSMutableArray *tempCutomizingStatusArray = [[NSMutableArray alloc] initWithObjects:@"0",@"0",@"0", nil];
-                
-                for ( int j=0 ;j<tempPhonesNumbers.count; j++ ){
-                    
-                    NSMutableArray *phoneNumberDetails = [tempPhonesNumbers objectAtIndex:j];
-                    
-                    if ( [[phoneNumberDetails objectAtIndex:2] isEqualToString:@"1"] ) {
-                        [tempCutomizingStatusArray setObject:@"1" atIndexedSubscript:1];
-                    }
-                    
-                    if ( [[phoneNumberDetails objectAtIndex:3] isEqualToString:@"1"] ) {
-                        [tempCutomizingStatusArray setObject:@"1" atIndexedSubscript:2];
-                    }
-                
-                }
-                
-                NSMutableArray *tempEmails = [curContactDetails objectForKey:@"emailAddresses"];
-                if ( tempEmails.count > 0 ){
-                    [tempCutomizingStatusArray setObject:@"1" atIndexedSubscript:0];
-                }else {
-                    [tempCutomizingStatusArray setObject:@"0" atIndexedSubscript:0];
-                }
-                
-                NSNumber *IsCustomizedBoolValue = [curContactDetails objectForKey:@"IsCustomized"];
-                if ( [IsCustomizedBoolValue boolValue] ) {
-                    _contactModal.IsCustomized = YES;
-                }
-            }*/
-            
-            // HERE WE PASS DATA TO CELL CLASS
-            //[cell setCellObjects:_contactModal :1 :@"InviteFriends"];
         }
-    }
+    }*/
     // HERE WE PASS DATA TO CELL CLASS
     [cell setCellObjects:_contactModal :1 :@"InviteFriends"];
     
@@ -714,7 +691,7 @@
             [contactModal.cutomizingStatusArray setObject:@"0" atIndexedSubscript:1];
             [contactModal.cutomizingStatusArray setObject:@"0" atIndexedSubscript:2];
             
-            if ( ![customizedContactsString isEqualToString:@""] ){
+            /*if ( ![customizedContactsString isEqualToString:@""] ){
                 
                 for ( int i = 0; i < customizedContactsDictionary.count; i++ ){
                     
@@ -733,26 +710,93 @@
                         contactModal.cutomizingStatusArray = [curContactDetails objectForKey:@"cutomizingStatusArray"];
                     }
                 }
-            }
+            }*/
         }
         
         contactModal.allPhoneNumbers = allNumbers;
         
         contactModal.customTextForContact = untechable.spendingTimeTxt;
         
-        for ( int p = 0;p<self.currentlyEditingContacts.count;p++){
+        for ( int p = 0; p < currentlyEditingContacts.count; p++ ){
             
             ContactsCustomizedModal *contact_Modal = [[ContactsCustomizedModal alloc] init];
             
-            contact_Modal = [self.currentlyEditingContacts objectAtIndex:p];
+            contact_Modal = [currentlyEditingContacts objectAtIndex:p];
             
-            if ( [contactModal.name isEqualToString:contact_Modal.name]  && contactModal.phoneNumbersStatus.count == contact_Modal.phoneNumbersStatus.count )
-            {
-                contactModal.allPhoneNumbers = contact_Modal.allPhoneNumbers;
-                contactModal.allEmails = contact_Modal.allEmails;
-                contactModal.cutomizingStatusArray = contact_Modal.cutomizingStatusArray;
-                contactModal.IsCustomized = contact_Modal.IsCustomized;
+            NSMutableArray *tempPhonesNumbers = contact_Modal.allPhoneNumbers;
+            
+            for ( int i=0; i < tempPhonesNumbers.count; i++ ){
+                
+                NSMutableArray *phoneNumberDetails = [tempPhonesNumbers objectAtIndex:i];
+                
+                NSString *customizedNumber = [phoneNumberDetails objectAtIndex:1];
+                
+                for ( int j=0; j < contactModal.allPhoneNumbers.count; j++ ){
+                    
+                    NSMutableArray *currentContactNumberDetails = [contactModal.allPhoneNumbers objectAtIndex:j];
+                    
+                    if ( [[currentContactNumberDetails objectAtIndex:1] isEqualToString:customizedNumber] ){
+                        
+                        [contactModal.allPhoneNumbers replaceObjectAtIndex:j withObject:phoneNumberDetails];
+                        
+                        if ( [[phoneNumberDetails objectAtIndex:2] isEqualToString:@"1"] ){
+                            
+                            [contactModal.cutomizingStatusArray setObject:@"1" atIndexedSubscript:2];
+                        }
+                        
+                        if ( [[phoneNumberDetails objectAtIndex:3] isEqualToString:@"1"] ){
+                            
+                            [contactModal.cutomizingStatusArray setObject:@"1" atIndexedSubscript:1];
+                        }
+                        
+                        contact_Modal.allPhoneNumbers = contactModal.allPhoneNumbers;
+                        
+                        contact_Modal.cutomizingStatusArray = contactModal.cutomizingStatusArray;
+                        
+                        contactModal.IsCustomized = YES;
+                        
+                        contact_Modal.IsCustomized = contactModal.IsCustomized;
+                    }
+                }
             }
+            
+            NSMutableArray *tempEmails = contact_Modal.allEmails;
+            
+            for ( int i=0; i < tempEmails.count; i++ ){
+                
+                NSString *emailDetails = [tempEmails objectAtIndex:i];
+                
+                for ( int j=0; j < contactModal.allEmails.count; j++ ){
+                    
+                    NSMutableArray *currentContactEmailDetails = [contactModal.allEmails objectAtIndex:j];
+                    
+                    if ( [[currentContactEmailDetails objectAtIndex:0] isEqualToString:emailDetails] ){
+                        
+                        [currentContactEmailDetails setObject:@"1" atIndexedSubscript:1];
+                        
+                        [contactModal.cutomizingStatusArray setObject:@"1" atIndexedSubscript:0];
+                        
+                        [contactModal.allEmails replaceObjectAtIndex:j withObject:currentContactEmailDetails];
+                        
+                        contactModal.IsCustomized = YES;
+                        
+                        contact_Modal.cutomizingStatusArray = contactModal.cutomizingStatusArray;
+                        
+                        contact_Modal.allEmails = contactModal.allEmails;
+                        
+                        contact_Modal.IsCustomized = contactModal.IsCustomized;
+                        
+                        break;
+                    }
+                }
+            }
+        
+            /*if ( [contactModal.name isEqualToString:contact_Modal.name]  && contactModal.phoneNumbersStatus.count == contact_Modal.phoneNumbersStatus.count )
+            {
+             
+             
+             
+                           }*/
         }
         
         if ( contactModal.allEmails.count > 0 || contactModal.allPhoneNumbers.count > 0 ){

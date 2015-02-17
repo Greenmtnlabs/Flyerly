@@ -377,10 +377,45 @@
         
         ContactsCustomizedModal *tempModal = [contactListController.currentlyEditingContacts objectAtIndex:i];
         
-        if ( [tempModal.name isEqualToString:contactModal.name] && tempModal.allPhoneNumbers.count == contactModal.allPhoneNumbers.count && tempModal.allEmails.count == contactModal.allEmails.count )
-        {
-            alreadyExist = YES;
-            indexToBeChanged = i;
+        BOOL phoneNumberFound = NO;
+        
+        for ( int j = 0; j<tempModal.allPhoneNumbers.count; j++ ){
+            
+            NSMutableArray *phoneDetails = [tempModal.allPhoneNumbers objectAtIndex:j];
+            NSString *anyNumber = [phoneDetails objectAtIndex:1];
+            
+            for ( int k=0; k<contactModal.allPhoneNumbers.count; k++){
+                 NSMutableArray *otherPhoneDetails = [contactModal.allPhoneNumbers objectAtIndex:k];
+                
+                if ( [anyNumber isEqualToString:[otherPhoneDetails objectAtIndex:1]] ){
+                    phoneNumberFound = YES;
+                }
+            }
+        }
+        
+        BOOL emailAddressFound = NO;
+        
+        for ( int l = 0; l<tempModal.allEmails.count; l++ ){
+            
+           NSMutableArray *emailDetails = [tempModal.allEmails objectAtIndex:l];
+            
+            NSString *anyEmail = [emailDetails objectAtIndex:1];
+            
+            for ( int m = 0; m<contactModal.allEmails.count; m++ ){
+                NSMutableArray *otherEmailDetails = [contactModal.allEmails objectAtIndex:m];
+                
+                if ( [anyEmail isEqualToString:[otherEmailDetails objectAtIndex:0]] ){
+                    emailAddressFound = YES;
+                }
+            }
+        }
+        
+        if ( [tempModal.name isEqualToString:contactModal.name] ){
+            
+            if ( emailAddressFound || phoneNumberFound ){
+                alreadyExist = YES;
+                indexToBeChanged = i;
+            }
         }
     }
     

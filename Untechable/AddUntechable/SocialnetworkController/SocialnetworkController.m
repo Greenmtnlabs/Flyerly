@@ -309,13 +309,14 @@
             
             ContactsCustomizedModal *tempModal = [untechable.customizedContactsForCurrentSession objectAtIndex:i];
             
-            NSMutableArray *phoneNumbersWithStatus  = tempModal.allPhoneNumbers;
+            NSMutableArray *phoneNumbersWithStatus  = [[NSMutableArray alloc] initWithArray:tempModal.allPhoneNumbers copyItems:YES];
+            
             for ( int j = 0; j < phoneNumbersWithStatus.count; j++){
                 NSMutableArray *numberWithStatus = [phoneNumbersWithStatus objectAtIndex:j];
                 if ( [[numberWithStatus objectAtIndex:2] isEqualToString:@"0"] &&
                     [[numberWithStatus objectAtIndex:3] isEqualToString:@"0"]  )
                 {
-                    [phoneNumbersWithStatus removeObject:numberWithStatus];
+                    [tempModal.allPhoneNumbers removeObject:numberWithStatus];
                 }
             }
             
