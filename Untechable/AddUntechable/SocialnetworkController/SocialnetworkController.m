@@ -243,12 +243,23 @@
 
 -(void)onNext{
     
-    if( [APP_IN_MODE isEqualToString:TESTING] ){
-        [self next:@"GO_TO_THANKYOU"];
-    } else {
-        [self sendToApi];
+    if( !internetReachable.isReachable ){
+        //show alert
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection"
+                                                        message:@"You must be connected to the internet to sync your untechable on server."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        
+    }else {
+        if( [APP_IN_MODE isEqualToString:TESTING] ){
+            [self next:@"GO_TO_THANKYOU"];
+        } else {
+            [self sendToApi];
+        }
+
     }
-    
     /*[self setNextHighlighted:NO];
     BOOL goToNext = YES;
 
@@ -257,6 +268,32 @@
         [self next:@"GO_TO_NEXT"];
         
     }*/
+}
+
+// Checks if we have an internet connection or not
+- (void)testInternetConnection
+{
+    internetReachable = [Reachability reachabilityWithHostname:@"www.google.com"];
+    
+    // Internet is reachable
+    internetReachable.reachableBlock = ^(Reachability*reach)
+    {
+        // Update the UI on the main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"Yayyy, we have the interwebs!");
+        });
+    };
+    
+    // Internet is not reachable
+    internetReachable.unreachableBlock = ^(Reachability*reach)
+    {
+        // Update the UI on the main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"Someone broke the internet :(");
+        });
+    };
+    
+    [internetReachable startNotifier];
 }
 
 -(void) sendToApi{
@@ -334,55 +371,6 @@
             
             tempModal.allEmails = emailOnly;
         }
-        
-        
-        
-        
-        //Deep copy
-        //untechable.finalCustomizedContactsArray = [[NSMutableArray alloc] initWithArray:untechable.customizedContactsForCurrentSession copyItems:YES];
-       
-        //NSMutableArray* finalizedCustomizedContacts = [[NSMutableArray alloc] initWithArray:untechable.finalCustomizedContactsArray];
-        /*for ( int k = 0; k<untechable.finalCustomizedContactsArray.count; k++ ){
-            
-            [finalizedCustomizedContacts addObject:[untechable.customizedContactsForCurrentSession objectAtIndex:k]];
-        }*/
-        
-        //NSMutableArray* finalizedCustomizedContacts = [NSKeyedUnarchiver unarchiveObjectWithData:                                             [NSKeyedArchiver archivedDataWithRootObject:untechable.customizedContactsForCurrentSession]];
-        
-        //NSMutableArray *finalizedCustomizedContacts = [[NSMutableArray alloc] initWithArray:untechable.customizedContactsForCurrentSession copyItems:YES];
-        
-        /*for ( int i=0; i<finalizedCustomizedContacts.count; i++){
-            
-            ContactsCustomizedModal *tempModal = [finalizedCustomizedContacts objectAtIndex:i];
-            
-            NSMutableArray *phoneNumbersWithStatus  = tempModal.allPhoneNumbers;
-            for ( int j = 0; j < phoneNumbersWithStatus.count; j++){
-                NSMutableArray *numberWithStatus = [phoneNumbersWithStatus objectAtIndex:j];
-                if ( [[numberWithStatus objectAtIndex:2] isEqualToString:@"0"] &&
-                    [[numberWithStatus objectAtIndex:3] isEqualToString:@"0"]  )
-                {
-                    [phoneNumbersWithStatus removeObject:numberWithStatus];
-                }
-            }
-            
-            NSMutableArray *emailOnly  = [[NSMutableArray alloc] init];
-            NSMutableArray *emailsWithStatus  = tempModal.allEmails;
-            for ( int k = 0; k < emailsWithStatus.count; k++){
-                NSMutableArray *emailWithStatus = [emailsWithStatus objectAtIndex:k];
-                if ( [[emailWithStatus objectAtIndex:1] isEqualToString:@"0"] )
-                {
-                    [emailsWithStatus removeObject:emailWithStatus];
-                }else {
-                    [emailOnly addObject:[emailWithStatus objectAtIndex:0]];
-                }
-            }
-            
-            tempModal.allEmails = emailOnly;
-        }
-        
-        untechable.finalCustomizedContactsArray = finalizedCustomizedContacts;*/
-        
-        //untechable.customizedContactsForCurrentSession = untechable.customizedContactsForCurrentSession;
     }
     
     [self storeSceenVarsInDic];
@@ -390,10 +378,6 @@
 
 -(void) sendToApiAfterTask
 {
-    //NSLog(@"API_SAVE = %@ ",API_SAVE);
-    //NSLog(@"[untechable getRecFilePath]: %@",[untechable getRecFilePath]);
-    //NSLog(@"[untechable getRecFileName]: %@",[untechable getRecFileName]);
-    
     [self removeRedundentDataForContacts];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
