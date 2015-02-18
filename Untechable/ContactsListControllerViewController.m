@@ -369,70 +369,13 @@
         
         [self resetContactModal:_contactModal];
     }
-    
-    /*if ( ![customizedContactsString isEqualToString:@""] && currentlyEditingContacts.count <= 0 ){
-        
-        for ( int i = 0; i < customizedContactsDictionary.count; i++ ){
-            
-            NSMutableDictionary *curContactDetails =  [customizedContactsDictionary objectForKey:[NSString stringWithFormat:@"%i",i]];
-            
-            NSMutableArray *tempPhonesNumbers = [curContactDetails objectForKey:@"phoneNumbers"];
-            
-            for ( int i=0; i < tempPhonesNumbers.count; i++ ){
-                
-                NSMutableArray *phoneNumberDetails = [tempPhonesNumbers objectAtIndex:i];
-                
-                NSString *customizedNumber = [phoneNumberDetails objectAtIndex:1];
-                
-                for ( int j=0; j < _contactModal.allPhoneNumbers.count; j++ ){
-                    
-                    NSMutableArray *currentContactNumberDetails = [_contactModal.allPhoneNumbers objectAtIndex:j];
-                    
-                    if ( [[currentContactNumberDetails objectAtIndex:1] isEqualToString:customizedNumber] ){
-                        
-                        [_contactModal.allPhoneNumbers replaceObjectAtIndex:j withObject:phoneNumberDetails];
-                        
-                        if ( [[phoneNumberDetails objectAtIndex:2] isEqualToString:@"1"] ){
-                            
-                            [_contactModal.cutomizingStatusArray setObject:@"1" atIndexedSubscript:2];
-                        }
-                        
-                        if ( [[phoneNumberDetails objectAtIndex:3] isEqualToString:@"1"] ){
-                            
-                            [_contactModal.cutomizingStatusArray setObject:@"1" atIndexedSubscript:1];
-                        }
-                        _contactModal.IsCustomized = YES;
-                    }
-                }
-            }
-            
-            NSMutableArray *tempEmails = [curContactDetails objectForKey:@"emailAddresses"];
-            
-            for ( int i=0; i < tempEmails.count; i++ ){
-                
-                NSString *emailDetails = [tempEmails objectAtIndex:0];
-                
-                for ( int j=0; j < _contactModal.allEmails.count; j++ ){
-                    
-                    NSMutableArray *currentContactEmailDetails = [_contactModal.allEmails objectAtIndex:j];
-                    
-                    if ( [[currentContactEmailDetails objectAtIndex:0] isEqualToString:emailDetails] ){
-                        
-                        [currentContactEmailDetails setObject:@"1" atIndexedSubscript:1];
-                        
-                        [_contactModal.cutomizingStatusArray setObject:@"1" atIndexedSubscript:0];
-                        
-                        _contactModal.IsCustomized = YES;
-                    }
-                }
-            }
-        }
-    }*/
+
     // HERE WE PASS DATA TO CELL CLASS
     [cell setCellObjects:_contactModal :1 :@"InviteFriends"];
     
     return cell;
 }
+
 - (void)resetContactModal:(ContactsCustomizedModal *)contactModal{
     
     contactModal.cutomizingStatusArray = [[NSMutableArray alloc] initWithObjects:@"0",@"0",@"0", nil];
@@ -570,7 +513,6 @@
     }
 }
 
-
 /*
  * Mehod called to get contacts
  */
@@ -638,6 +580,10 @@
         }
         contactModal.allEmails = allEmails;
         
+        [contactModal.cutomizingStatusArray setObject:@"0" atIndexedSubscript:0];
+        [contactModal.cutomizingStatusArray setObject:@"0" atIndexedSubscript:1];
+        [contactModal.cutomizingStatusArray setObject:@"0" atIndexedSubscript:2];
+        
         //For Phone number
         NSMutableArray *allNumbers = [[NSMutableArray alloc] initWithCapacity:CFArrayGetCount(allPeople)];
         NSString* mobileLabel;
@@ -686,31 +632,6 @@
                 
                 [allNumbers addObject:numberWithStatus];
             }
-            
-            [contactModal.cutomizingStatusArray setObject:@"0" atIndexedSubscript:0];
-            [contactModal.cutomizingStatusArray setObject:@"0" atIndexedSubscript:1];
-            [contactModal.cutomizingStatusArray setObject:@"0" atIndexedSubscript:2];
-            
-            /*if ( ![customizedContactsString isEqualToString:@""] ){
-                
-                for ( int i = 0; i < customizedContactsDictionary.count; i++ ){
-                    
-                    NSMutableDictionary *curContactDetails =  [customizedContactsDictionary objectForKey:[NSString stringWithFormat:@"%i",i]];
-                    
-                    NSMutableArray *tempPhonesNumbers = [curContactDetails objectForKey:@"phoneNumbers"];
-                    
-                    if ( [[curContactDetails objectForKey:@"contactName"] isEqualToString:contactModal.name]
-                        &&
-                        contactModal.allPhoneNumbers.count == tempPhonesNumbers.count) {
-                        
-                        contactModal.name = [curContactDetails objectForKey:@"contactName"];
-                        contactModal.allPhoneNumbers = [curContactDetails objectForKey:@"phoneNumbers"];
-                        contactModal.allEmails = [curContactDetails objectForKey:@"emailAddresses"];
-                        contactModal.customTextForContact = [curContactDetails objectForKey:@"customTextForContact"];
-                        contactModal.cutomizingStatusArray = [curContactDetails objectForKey:@"cutomizingStatusArray"];
-                    }
-                }
-            }*/
         }
         
         contactModal.allPhoneNumbers = allNumbers;
@@ -742,16 +663,18 @@
                         if ( [[phoneNumberDetails objectAtIndex:2] isEqualToString:@"1"] ){
                             
                             [contactModal.cutomizingStatusArray setObject:@"1" atIndexedSubscript:2];
+                        }else {
+                            [contactModal.cutomizingStatusArray setObject:@"0" atIndexedSubscript:2];
                         }
                         
                         if ( [[phoneNumberDetails objectAtIndex:3] isEqualToString:@"1"] ){
                             
                             [contactModal.cutomizingStatusArray setObject:@"1" atIndexedSubscript:1];
+                        }else {
+                            [contactModal.cutomizingStatusArray setObject:@"0" atIndexedSubscript:1];
                         }
                         
                         contact_Modal.allPhoneNumbers = contactModal.allPhoneNumbers;
-                        
-                        contact_Modal.cutomizingStatusArray = contactModal.cutomizingStatusArray;
                         
                         contactModal.IsCustomized = YES;
                         
@@ -764,23 +687,44 @@
             
             for ( int i=0; i < tempEmails.count; i++ ){
                 
-                NSString *emailDetails = [tempEmails objectAtIndex:i];
+                NSString *exactEmailAddress;
+                NSMutableArray *emailDetails;
+                
+                if ( [[tempEmails objectAtIndex:i] isKindOfClass:[NSString class]] ){
+                    
+                    exactEmailAddress = [tempEmails objectAtIndex:i];
+                    
+                }else if ( [[tempEmails objectAtIndex:i] isKindOfClass:[NSArray class]] ){
+                    
+                    emailDetails = [tempEmails objectAtIndex:i];
+                    exactEmailAddress = [emailDetails objectAtIndex:0];
+                    
+                }
                 
                 for ( int j=0; j < contactModal.allEmails.count; j++ ){
                     
                     NSMutableArray *currentContactEmailDetails = [contactModal.allEmails objectAtIndex:j];
                     
-                    if ( [[currentContactEmailDetails objectAtIndex:0] isEqualToString:emailDetails] ){
+                    if ( [[currentContactEmailDetails objectAtIndex:0] isEqualToString:exactEmailAddress] ){
                         
-                        [currentContactEmailDetails setObject:@"1" atIndexedSubscript:1];
-                        
-                        [contactModal.cutomizingStatusArray setObject:@"1" atIndexedSubscript:0];
-                        
+                        if ( emailDetails.count > 0 ){
+                            NSString *emailStatus = [emailDetails objectAtIndex:1];
+                            if ( [emailStatus isEqualToString:@"1"] ){
+                                [currentContactEmailDetails setObject:@"1" atIndexedSubscript:1];
+                                [contactModal.cutomizingStatusArray setObject:@"1" atIndexedSubscript:0];
+                            }else {
+                                [currentContactEmailDetails setObject:@"0" atIndexedSubscript:1];
+                                [contactModal.cutomizingStatusArray setObject:@"0" atIndexedSubscript:0];
+                            }
+                        }else {
+                            [currentContactEmailDetails setObject:@"1" atIndexedSubscript:1];
+                            [contactModal.cutomizingStatusArray setObject:@"1" atIndexedSubscript:0];
+                        }
                         [contactModal.allEmails replaceObjectAtIndex:j withObject:currentContactEmailDetails];
                         
                         contactModal.IsCustomized = YES;
                         
-                        contact_Modal.cutomizingStatusArray = contactModal.cutomizingStatusArray;
+                        //contact_Modal.cutomizingStatusArray = contactModal.cutomizingStatusArray;
                         
                         contact_Modal.allEmails = contactModal.allEmails;
                         
@@ -790,13 +734,6 @@
                     }
                 }
             }
-        
-            /*if ( [contactModal.name isEqualToString:contact_Modal.name]  && contactModal.phoneNumbersStatus.count == contact_Modal.phoneNumbersStatus.count )
-            {
-             
-             
-             
-                           }*/
         }
         
         if ( contactModal.allEmails.count > 0 || contactModal.allPhoneNumbers.count > 0 ){

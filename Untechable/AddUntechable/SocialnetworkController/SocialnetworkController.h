@@ -11,6 +11,7 @@
 #import "UIPlaceHolderTextView.h"
 #import "BSKeyboardControls.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "Reachability.h"
 
 @interface SocialnetworkController : UIViewController < UITextViewDelegate , BSKeyboardControlsDelegate >
 {
@@ -24,6 +25,7 @@
     UIColor *defGreen;//GREEN
     UIColor *defGray;//GRAY
     
+    Reachability *internetReachable;
 }
 
 //Properties

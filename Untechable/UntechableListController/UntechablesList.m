@@ -118,10 +118,10 @@
 }
 
 -(void)addUntechable{
-    AddUntechableController *addUntechable;
-    addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
+    
+    NSLog(@"Go To add untechable screen");
+    AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
     addUntechable.indexOfUntechableInEditMode = -1;
-    //addUntechable.untechable = untechable;
     [self.navigationController pushViewController:addUntechable animated:YES];
 }
 
@@ -155,6 +155,15 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     
+    allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
+    
+    if ( allUntechables.count <= 0 ){
+        
+        AddUntechableController *mainViewController = [[AddUntechableController alloc] initWithNibName:@"AddUntechableController" bundle:nil];
+        mainViewController.untechable = untechable;
+        [self.navigationController pushViewController:mainViewController animated:YES];
+        
+    }
     
     untechablesTable.separatorInset = UIEdgeInsetsZero;
 }
