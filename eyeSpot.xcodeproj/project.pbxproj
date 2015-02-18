@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		16FF8380005D489184D50AFB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DDE203A6ED742A4B97C59D6 /* libPods.a */; };
+		204BE3D61A92108800F65C98 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 204BE3D51A92108800F65C98 /* Fabric.framework */; };
 		3F1F0DD21756F63E0076BC85 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F1F0DCF1756F63E0076BC85 /* Default.png */; };
 		3F1F0DD31756F63E0076BC85 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F1F0DD01756F63E0076BC85 /* Default-568h@2x.png */; };
 		3F1F0DD41756F63E0076BC85 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F1F0DD11756F63E0076BC85 /* Default@2x.png */; };
@@ -533,10 +534,10 @@
 		B5DD2DAC16E6F7B800CD5A0B /* RightArrow@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = B5DD2DA816E6F7B800CD5A0B /* RightArrow@2x~ipad.png */; };
 		B5DD2DAD16E6F7B800CD5A0B /* LeftArrow_Selected@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = B5DD2DA916E6F7B800CD5A0B /* LeftArrow_Selected@2x~ipad.png */; };
 		B5DD2DAE16E6F7B800CD5A0B /* LeftArrow@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = B5DD2DAA16E6F7B800CD5A0B /* LeftArrow@2x~ipad.png */; };
-		B5E811C216E0473700F174ED /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5E811C116E0473700F174ED /* Crashlytics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		204BE3D51A92108800F65C98 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		3F1F0DCF1756F63E0076BC85 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		3F1F0DD01756F63E0076BC85 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3F1F0DD11756F63E0076BC85 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -1106,13 +1107,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B564439816E2BE11007067C1 /* StoreKit.framework in Frameworks */,
+				204BE3D61A92108800F65C98 /* Fabric.framework in Frameworks */,
 				B5733FD516E028B100FDFC0C /* Social.framework in Frameworks */,
 				B5BD990816DD93D30054082E /* AudioToolbox.framework in Frameworks */,
 				B579858A16D5D726001D628C /* CoreData.framework in Frameworks */,
 				B599C91316D55E5C0036229D /* UIKit.framework in Frameworks */,
 				B599C91516D55E5C0036229D /* Foundation.framework in Frameworks */,
 				B599C91716D55E5C0036229D /* CoreGraphics.framework in Frameworks */,
-				B5E811C216E0473700F174ED /* Crashlytics.framework in Frameworks */,
 				16FF8380005D489184D50AFB /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1853,6 +1854,7 @@
 		B599C91116D55E5C0036229D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				204BE3D51A92108800F65C98 /* Fabric.framework */,
 				B564439716E2BE11007067C1 /* StoreKit.framework */,
 				B5E811C116E0473700F174ED /* Crashlytics.framework */,
 				B5733FD416E028B100FDFC0C /* Social.framework */,
@@ -2022,6 +2024,7 @@
 				B593559A16D9A37200B97FEF /* ShellScript */,
 				B599C90D16D55E5C0036229D /* Resources */,
 				1D9A2429EE764D9F99625F7A /* Copy Pods Resources */,
+				204BE3D41A920FF800F65C98 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2575,6 +2578,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 		};
+		204BE3D41A920FF800F65C98 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 840d54f8ffa6c55271142f80766fded7b63ae580 10782913f934ef550e6d319fdf0d9eaa5aab6731cf87a88c79e7c2765e2f72ba";
+		};
 		B593559A16D9A37200B97FEF /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2706,7 +2722,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "eyeSpot/eyeSpot-Prefix.pch";
@@ -2791,7 +2808,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "eyeSpot/eyeSpot-Prefix.pch";
@@ -2812,7 +2830,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "eyeSpot/eyeSpot-Prefix.pch";
