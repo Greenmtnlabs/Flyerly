@@ -55,23 +55,11 @@ NSMutableArray *allUntechables;
     [self configureTestData];
     //For testing -------- } --
     
-    allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
-    
     UINavigationController *navigationController;
     
-    if ( allUntechables.count > 0 ){
-        
-        UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
-        navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
-        
-    } else {
-        
-        AddUntechableController *mainViewController = [[AddUntechableController alloc] initWithNibName:@"AddUntechableController" bundle:nil];
-        navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
-    }
-    
+    UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
+    navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
     self.window.rootViewController = navigationController;
-    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
