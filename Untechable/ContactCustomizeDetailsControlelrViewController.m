@@ -397,9 +397,9 @@
         
         for ( int l = 0; l<tempModal.allEmails.count; l++ ){
             
-           NSMutableArray *emailDetails = [tempModal.allEmails objectAtIndex:l];
+            NSMutableArray *emailDetails = [tempModal.allEmails objectAtIndex:l];
             
-            NSString *anyEmail = [emailDetails objectAtIndex:1];
+            NSString *anyEmail = [emailDetails objectAtIndex:0];
             
             for ( int m = 0; m<contactModal.allEmails.count; m++ ){
                 NSMutableArray *otherEmailDetails = [contactModal.allEmails objectAtIndex:m];
