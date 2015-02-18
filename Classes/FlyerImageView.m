@@ -210,8 +210,10 @@ CGAffineTransform previuosTransform;
         UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(layerMoved:)];
         [view addGestureRecognizer:panGesture];
         
+        BOOL isClipArtLayer = ([layDic objectForKey:@"type"] != nil && [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_CLIP_ART]);
+        
         // We are only going to allow pinch gesture on non text/clipart layers
-        if ( [layDic valueForKey:@"image"] ) {
+        if ( [layDic valueForKey:@"image"] || isClipArtLayer ) {
             // Gesture for resizing layers
             UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(layerResized:)];
             [view addGestureRecognizer:pinchGesture];
@@ -229,6 +231,7 @@ CGAffineTransform previuosTransform;
         //[rotationRecognizer setDelegate:self];
         [view addGestureRecognizer:rotationRecognizer];        
     }
+    
 }
 
 -(void)configureImageViewSize :(NSString *)uid {
@@ -429,7 +432,8 @@ CGAffineTransform previuosTransform;
         // Now apply the previous transform again
         lbl.transform = tempTransform;
         
-    } else{
+    }
+    else{ //Text
        
         
         // Keep existing layer's transform
