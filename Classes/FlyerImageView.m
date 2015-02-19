@@ -205,11 +205,6 @@ CGAffineTransform previuosTransform;
         }
     }
     
-    if ([layDic objectForKey:@"type"] != nil && [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_CLIP_ART]){
-        [self configureLabelSize:uid labelDictionary:layDic];
-        [self configureLabelSize:uid labelDictionary:layDic];
-    }
-    
     
     //Apply Gestures[move/resize...etc]
     if ([layDic objectForKey:@"type"] != nil && [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_DRAWING]) {

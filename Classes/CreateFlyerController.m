@@ -2484,12 +2484,18 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [flyer setFlyerTextFont:currentLayer FontName:[clipartsArray[index] objectForKey:@"fontType"]];
                 [flyer setFlyerTextSize:currentLayer Size:selectedFont];
                 
+                NSMutableDictionary *layDic = [flyer getLayerFromMaster:currentLayer];
+                
                 //Here we call Render Layer on View
-                [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+                [flyimgView renderLayer:currentLayer layerDictionary:layDic];
                 //[flyimgView configureClipartFont :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
                 //[flyimgView configureClipartDimensions :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
                 
                 
+                if ([layDic objectForKey:@"type"] != nil && [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_CLIP_ART]){
+                    [flyimgView configureLabelSize:currentLayer labelDictionary:layDic];
+                    [flyimgView configureLabelSize:currentLayer labelDictionary:layDic];
+                }
                 
                 [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:clipartsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
             }
@@ -2497,6 +2503,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }
         
     }// Loop
+    
+    
     
     [self bringNotEditableLayersToFront:@"call from selectIcon"];
 }
