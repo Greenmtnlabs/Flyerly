@@ -409,12 +409,6 @@ CGAffineTransform previuosTransform;
     
     CustomLabel *lbl = [layers objectForKey:uid];
     
-    //SetFrame
-    //[lbl setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
-    
-    // Remember originalsize
-    //lbl.originalSize = lbl.frame.size;
-    
     //set Label Text
     [lbl setText:[detail valueForKey:@"text"]];
     
@@ -423,13 +417,7 @@ CGAffineTransform previuosTransform;
     
     // Make sure we are vertically aligned to the top and centerally aligned.
     if( [[detail valueForKey:@"type"] isEqualToString:FLYER_LAYER_CLIP_ART] ){
-        
-        
-        
-        
-        
-        
-        
+     
         // Because emoticons are always sized squarely, we are just considering width here, assuming height is the same
         CGFloat currentSize = [lbl newSize].width; //lbl.frame.size.width;
         
@@ -449,9 +437,6 @@ CGAffineTransform previuosTransform;
                                 currentTransform);
         
         lbl.transform = tr;
-        
-        
-       
 
          // Keep existing layer's transform
          CGAffineTransform tempTransform = lbl.transform;
@@ -470,21 +455,17 @@ CGAffineTransform previuosTransform;
          
          // Now apply the previous transform again
          lbl.transform = tempTransform;
-        
+
+        //update dictionary
         [self.delegate layerTransformedforKey:uid :&tempTransform];
         
-        
-        
-        currentSize = [lbl newSize].width; //lbl.frame.size.width;
-        
-        newSize = [[detail valueForKey:@"fontsize"] floatValue];
-        
-        NSLog(@"b-- newSize:%f, currentSize:%f", newSize/3, currentSize/3);
-
-        
+        /*
+            currentSize = [lbl newSize].width; //lbl.frame.size.width;
+            newSize = [[detail valueForKey:@"fontsize"] floatValue];
+            NSLog(@"b-- newSize:%f, currentSize:%f", newSize/3, currentSize/3);
+        */
     }
     else{ //Text
-       
         
         // Keep existing layer's transform
         CGAffineTransform tempTransform = lbl.transform;
@@ -509,7 +490,6 @@ CGAffineTransform previuosTransform;
         lbl.transform = tempTransform;
     }
 }
-
 
 /*
  *Here we set font of UILabel
