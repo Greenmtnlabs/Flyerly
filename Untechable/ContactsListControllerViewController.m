@@ -641,9 +641,11 @@
         
         contactModal.customTextForContact = untechable.spendingTimeTxt;
         
+        ContactsCustomizedModal *contact_Modal;
+        
         for ( int p = 0; p < currentlyEditingContacts.count; p++ ){
             
-            ContactsCustomizedModal *contact_Modal = [[ContactsCustomizedModal alloc] init];
+            contact_Modal = [[ContactsCustomizedModal alloc] init];
             
             contact_Modal = [currentlyEditingContacts objectAtIndex:p];
             
@@ -738,6 +740,8 @@
                 }
             }
         }
+        
+        contactModal.customTextForContact = contact_Modal.customTextForContact;
         
         if ( contactModal.allEmails.count > 0 || contactModal.allPhoneNumbers.count > 0 ){
             [contactsArray addObject:contactModal];
