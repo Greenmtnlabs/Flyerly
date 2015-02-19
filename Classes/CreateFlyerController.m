@@ -4828,7 +4828,9 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     if( [layerType isEqualToString:FLYER_LAYER_CLIP_ART] ){
         
-        textSize = [NSString stringWithFormat:@"%f", ([textSize floatValue]/3.0)];
+        //textSize = [NSString stringWithFormat:@"%f", ([textSize floatValue]/3.0)];
+        CustomLabel *lbl = [flyimgView.layers objectForKey:currentLayer];
+        textSize = [NSString stringWithFormat:@"%f", roundf(([lbl newSize].width)/3.0)];
         
     } else if ( [layerType isEqualToString:FLYER_LAYER_EMOTICON] ) {
         
