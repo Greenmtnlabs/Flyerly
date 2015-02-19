@@ -133,21 +133,21 @@
 
 - (void)setEmailAddress:(NSString *)emailAddressString{
     
-    [[NSUserDefaults standardUserDefaults] setObject:emailAddressString forKey:@"emailAddress"];
+    [[NSUserDefaults standardUserDefaults] setObject:emailAddressString forKey:EMAIL_KEY];
 }
 
 - (void)setEmailPassword:(NSString *)emailPasswordString{
     
-    [[NSUserDefaults standardUserDefaults] setObject:emailPasswordString forKey:@"emailPassword"];
+    [[NSUserDefaults standardUserDefaults] setObject:emailPasswordString forKey:PASSWORD_KEY];
 }
 
 - (NSString *)getEmailAddress{
     
     NSString *savedEmailAddress = @"";
     NSArray *keys = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys];
-    if ( [keys containsObject:@"emailAddress"] ){
+    if ( [keys containsObject:EMAIL_KEY] ){
         
-        savedEmailAddress = [[NSUserDefaults standardUserDefaults] objectForKey:@"emailAddress"];
+        savedEmailAddress = [[NSUserDefaults standardUserDefaults] objectForKey:EMAIL_KEY];
     }
     
     return savedEmailAddress;
@@ -158,9 +158,9 @@
     
     NSString *savedEmailPassword = @"";
     NSArray *keys = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys];
-    if ( [keys containsObject:@"emailPassword"] ){
+    if ( [keys containsObject:PASSWORD_KEY] ){
         
-        savedEmailPassword = [[NSUserDefaults standardUserDefaults] objectForKey:@"emailPassword"];
+        savedEmailPassword = [[NSUserDefaults standardUserDefaults] objectForKey:PASSWORD_KEY];
     }
     
     return savedEmailPassword;

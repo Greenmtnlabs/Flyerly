@@ -18,6 +18,9 @@
 #define DATE_FORMATE_2 @""
 #define APP_FONT @"Pigiarniq"
 
+// Keys for Email Address and Email password for setting screen
+#define EMAIL_KEY @"emailAddress"
+#define PASSWORD_KEY @"emailPassword"
 
 #define TITLE_SAVE_TXT @"SAVE"
 #define TITLE_NEXT_TXT @"NEXT"

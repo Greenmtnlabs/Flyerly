@@ -165,7 +165,11 @@
         
     }
     
+    [self setNumberOfRowsInSection];
+    
     untechablesTable.separatorInset = UIEdgeInsetsZero;
+    
+    [untechablesTable reloadData];
 }
 
 - (void)viewDidLoad {
@@ -181,8 +185,6 @@
     
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
-    [self setNumberOfRowsInSection];
-    
 }
 
 // Override to support conditional editing of the table view.
