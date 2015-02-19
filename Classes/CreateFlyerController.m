@@ -2122,7 +2122,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 NSString *flyerImg = [flyer getImageName:currentLayer];
                 NSString *type = [flyer getLayerType:currentLayer];
                 
-                if ( flyerImg == nil ) {
+                if ( flyerImg == nil ) { //Label[text]/clipart
                     
                     NSString *sizeStr = SIZE_ARRAY[i-1];
                     selectedSize = [sizeStr intValue];
@@ -2133,9 +2133,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     }
                     
                     selectedFont = [selectedFont fontWithSize:selectedSize];
-                    
+
+                    //Set size in dictionary
                     [flyer setFlyerTextSize:currentLayer Size:selectedFont];
                     
+                    
+                    //Rendering related task  ------- starts ------
                     //Here we call Render Layer on View
                     [flyimgView configureLabelSize:currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
                     
@@ -2160,7 +2163,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     //Handling Select Unselect
                     [self setSelectedItem:FLYER_LAYER_DRAWING inView:sizesView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
                 }
-                else {
+                else { //image,emoticon...etc
     
                     NSString *sizeStr = SIZE_ARRAY[i-1];
                     
@@ -4902,6 +4905,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     return tag;
 }
 
+//show selected blue border around select size/border/color....etc
 -(void) setSelectedItem:(NSString*)layerType inView:(ResourcesView*)view ofLayerAttribute:(NSString *)layerAttribute {
     
     NSString* tag = [self getCurrentLayerTag:layerAttribute inView:view];

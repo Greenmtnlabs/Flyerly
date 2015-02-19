@@ -140,11 +140,12 @@ CGAffineTransform previuosTransform;
                 if( [[layDic valueForKey:@"type"] isEqualToString:FLYER_LAYER_CLIP_ART] ){
                     NSLog(@"its clipart");
                     [self configureLabelFont:uid labelDictionary:layDic];
-                    [self applyTransformOnLabel2:lble CustomLableDictionary:layDic];
+                    [self applyTransformOnLabel:lble CustomLableDictionary:layDic];
                 }
                 else{
                     [self applyTransformOnLabel:lble CustomLableDictionary:layDic];
                 }
+                
                 [layers setValue:lble forKey:uid];
             
             } else {
@@ -376,19 +377,6 @@ CGAffineTransform previuosTransform;
     fr.size.width = 150;
     lbl.frame = fr;
 }
-
-- (void) applyTransformOnLabel2:(CustomLabel *)lbl CustomLableDictionary:(NSMutableDictionary *)detail {
-    
-    if ( [self hasTransformation:&detail] ) {
-        
-        CGAffineTransform ttransform = CGAffineTransformMake([[detail valueForKey:@"a"] floatValue], [[detail valueForKey:@"b"] floatValue], [[detail valueForKey:@"c"] floatValue], [[detail valueForKey:@"d"] floatValue], [[detail valueForKey:@"tx"] floatValue], [[detail valueForKey:@"ty"] floatValue]);
-        
-        
-        lbl.layer.anchorPoint = CGPointMake( 0.5, 0.5 );
-        lbl.transform = ttransform;
-    }
-}
-
 
 /*
  *Here we set color Properties of uiLabel
