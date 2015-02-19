@@ -93,7 +93,7 @@ CGAffineTransform previuosTransform;
         return;
     }
     
-    // Checking for Label(text) or ImageView
+    // Checking for Label(text) or clipArt or ImageView
     if ([layDic objectForKey:@"image"] == nil) {
         
         id lastControl = [layers objectForKey:uid];
@@ -106,23 +106,23 @@ CGAffineTransform previuosTransform;
         }
         
         //Check Layer Exist in Master Layers
-        if ( lastControl == nil) {
+        if ( lastControl == nil) { //its lable[text]
             //----
             CustomLabel *lble = [[CustomLabel alloc] init];
             lble.tag = layers.count;
             lble.backgroundColor = [UIColor clearColor];
-            // Get the type of layer
-            //NSString *type = [flyer getLayerType:currentLayer];
-            //if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
-
-            lble.textAlignment = NSTextAlignmentCenter;//    UITextAlignmentCenter;
-            //}
+            lble.textAlignment = NSTextAlignmentCenter;
             lble.adjustsFontSizeToFitWidth = YES;
             lble.lineBreakMode = NSLineBreakByWordWrapping;
             lble.numberOfLines = 80;
+            
+            //Apply view related tasks
             [self configureLabel:lble labelDictionary:layDic ];
             [self applyTransformOnLabel:lble CustomLableDictionary:layDic];
+            
+            //Add into view
             [self addSubview:lble];
+            
             [layers setValue:lble forKey:uid];
             
             view = lble;
@@ -134,11 +134,14 @@ CGAffineTransform previuosTransform;
                 
                 //here we Update Label
                 CustomLabel *lble = [layers objectForKey:uid];
+                
                 //[self configureLabel:lble labelDictionary:layDic ];
+                
                 if( [[layDic valueForKey:@"type"] isEqualToString:FLYER_LAYER_CLIP_ART] ){
                     NSLog(@"its clipart");
                     [self configureLabelFont:uid labelDictionary:layDic];
                 }
+                
                 [self applyTransformOnLabel:lble CustomLableDictionary:layDic];
                 [layers setValue:lble forKey:uid];
             
@@ -196,6 +199,8 @@ CGAffineTransform previuosTransform;
         }
     }
     
+    
+    //Apply Gestures[move/resize...etc]
     if ([layDic objectForKey:@"type"] != nil && [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_DRAWING]) {
         //we hooked the events(Gesture) of drawing in createFlyerController.h in function: drawingLayerMoved
         if( self.addUiImgForDrawingLayer ){
