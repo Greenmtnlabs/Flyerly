@@ -93,7 +93,8 @@ CGAffineTransform previuosTransform;
         return;
     }
     
-    // Checking for Label(text) or clipArt or ImageView
+    
+    // Checking for Label(text) or ImageView
     if ([layDic objectForKey:@"image"] == nil) {
         
         id lastControl = [layers objectForKey:uid];
@@ -128,7 +129,8 @@ CGAffineTransform previuosTransform;
             view = lble;
             
             //----
-        } else { //this else works when we try to edit old one
+        }
+        else { //this else works when we try to edit old one
 
             if ([lastControl isKindOfClass:[CustomLabel class]]) {
                 
@@ -156,10 +158,10 @@ CGAffineTransform previuosTransform;
                 [layers setValue:img forKey:uid];
             }
         }
-    }
-    else if ([layDic objectForKey:@"type"] != nil && [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_DRAWING]) {
         
-        if( self.addUiImgForDrawingLayer ){
+    }
+    else if ([layDic objectForKey:@"type"] != nil) {
+        if([[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_DRAWING]&& self.addUiImgForDrawingLayer ){
             //keep in mind call this code for drawing layer only once(render flyer time, add drawing layer[not for edit/reRenderings layers])
             UIImageView *img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DRAWING_LAYER_W, DRAWING_LAYER_H)];
             
@@ -200,6 +202,11 @@ CGAffineTransform previuosTransform;
             [layers setValue:img forKey:uid];
         
         }
+    }
+    
+    if ([layDic objectForKey:@"type"] != nil && [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_CLIP_ART]){
+        [self configureLabelSize:uid labelDictionary:layDic];
+        [self configureLabelSize:uid labelDictionary:layDic];
     }
     
     
@@ -421,23 +428,63 @@ CGAffineTransform previuosTransform;
     // Make sure we are vertically aligned to the top and centerally aligned.
     if( [[detail valueForKey:@"type"] isEqualToString:FLYER_LAYER_CLIP_ART] ){
         
-        // Keep existing layer's transform
-        CGAffineTransform tempTransform = lbl.transform;
         
-        // Now apply the identity transform
-        lbl.transform = CGAffineTransformIdentity;
         
-        lbl.textAlignment = NSTextAlignmentCenter;
-        [lbl setNumberOfLines:0];
-    
-        CGRect fr = lbl.frame;
-        fr.size.width = 150;
-        lbl.frame = fr;
+        
+        
+        
+        
+        // Because emoticons are always sized squarely, we are just considering width here, assuming height is the same
+        CGFloat currentSize = [lbl newSize].width; //lbl.frame.size.width;
+        
+        CGFloat newSize = [[detail valueForKey:@"fontsize"] floatValue];
+        
+        NSLog(@"newSize:%f, currentSize:%f",newSize/3,currentSize/3);
+        
+        CGFloat scale = newSize / currentSize;
+        
+        CGAffineTransform currentTransform = lbl.transform;
+        
+        lbl.layer.anchorPoint = CGPointMake( 0.5, 0.5 );
+        
+        CGAffineTransform tr =
+        CGAffineTransformConcat(
+                                CGAffineTransformMakeScale(scale, scale),
+                                currentTransform);
+        
+        lbl.transform = tr;
+        
+        
+       
 
-        [lbl sizeToFit];
+         // Keep existing layer's transform
+         CGAffineTransform tempTransform = lbl.transform;
+         
+         // Now apply the identity transform
+         lbl.transform = CGAffineTransformIdentity;
+         
+         lbl.textAlignment = NSTextAlignmentCenter;
+         [lbl setNumberOfLines:0];
+         
+         CGRect fr = lbl.frame;
+         fr.size.width = 150;
+         lbl.frame = fr;
+         
+         [lbl sizeToFit];
+         
+         // Now apply the previous transform again
+         lbl.transform = tempTransform;
         
-        // Now apply the previous transform again
-        lbl.transform = tempTransform;
+        [self.delegate layerTransformedforKey:uid :&tempTransform];
+        
+        
+        
+        currentSize = [lbl newSize].width; //lbl.frame.size.width;
+        
+        newSize = [[detail valueForKey:@"fontsize"] floatValue];
+        
+        NSLog(@"b-- newSize:%f, currentSize:%f", newSize/3, currentSize/3);
+
         
     }
     else{ //Text

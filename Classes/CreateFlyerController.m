@@ -2141,14 +2141,14 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     //Rendering related task  ------- starts ------
                     //Here we call Render Layer on View
                     NSMutableDictionary *layerDic =  [flyer getLayerFromMaster:currentLayer];
+                    //i call this function 2 time due to a reason.
                     [flyimgView configureLabelSize:currentLayer labelDictionary:layerDic];
-                    
+                    [flyimgView configureLabelSize:currentLayer labelDictionary:layerDic];
+
                     if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
-                        
                         //Handling Select Unselect
                         [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:sizesView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
-                    }
-                    else {
+                    } else {
                         //Handling Select Unselect
                         [self setSelectedItem:FLYER_LAYER_TEXT inView:sizesView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
                     }
