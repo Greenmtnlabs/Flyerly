@@ -239,10 +239,13 @@
         
         NSArray *keys = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys];
         
-        if (  [keys containsObject:@"email_address"] || [keys containsObject:@"email_password"]  ){
+        if (  [keys containsObject:EMAIL_KEY] || [keys containsObject:PASSWORD_KEY]  ){
             
-            if ( [[[NSUserDefaults standardUserDefaults] objectForKey:@"email_address"] isEqualToString:@""] ||
-                [[[NSUserDefaults standardUserDefaults] objectForKey:@"email_password"] isEqualToString:@""] ){
+            NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:EMAIL_KEY]);
+            NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:PASSWORD_KEY]);
+                         
+            if ( [[[NSUserDefaults standardUserDefaults] objectForKey:EMAIL_KEY] isEqualToString:@""] ||
+                [[[NSUserDefaults standardUserDefaults] objectForKey:PASSWORD_KEY] isEqualToString:@""] ){
                 
                 EmailSettingController *emailSettingController;
                 emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];

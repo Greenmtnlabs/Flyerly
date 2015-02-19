@@ -205,11 +205,11 @@
     
     if ( [untechable.email isEqualToString:@""] ){
         
-        if ( ![[[NSUserDefaults standardUserDefaults] objectForKey:@"email_address"] isEqualToString:@""] ||
-            ![[[NSUserDefaults standardUserDefaults] objectForKey:@"email_password"] isEqualToString:@""] ){
+        if ( ![[[NSUserDefaults standardUserDefaults] objectForKey:EMAIL_KEY] isEqualToString:@""] ||
+            ![[[NSUserDefaults standardUserDefaults] objectForKey:PASSWORD_KEY] isEqualToString:@""] ){
             
-            self.inputEmail.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"email_address"];
-            self.inputPassword.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"email_password"];
+            self.inputEmail.text = [[NSUserDefaults standardUserDefaults] objectForKey:EMAIL_KEY];
+            self.inputPassword.text = [[NSUserDefaults standardUserDefaults] objectForKey:PASSWORD_KEY];
         }
     }else {
         self.inputEmail.text = untechable.email;
@@ -587,8 +587,8 @@
 
 -(void)storeSceenVarsInDic
 {
-    [[NSUserDefaults standardUserDefaults] setObject:_inputEmail.text forKey:@"email_address"];
-    [[NSUserDefaults standardUserDefaults] setObject:_inputPassword.text forKey:@"email_password"];
+    [[NSUserDefaults standardUserDefaults] setObject:_inputEmail.text forKey:EMAIL_KEY];
+    [[NSUserDefaults standardUserDefaults] setObject:_inputPassword.text forKey:PASSWORD_KEY];
     
     untechable.email = _inputEmail.text;
     untechable.password = _inputPassword.text;
