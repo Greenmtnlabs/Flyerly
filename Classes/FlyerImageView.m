@@ -160,8 +160,9 @@ CGAffineTransform previuosTransform;
         }
         
     }
-    else if ([layDic objectForKey:@"type"] != nil) {
-        if([[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_DRAWING]&& self.addUiImgForDrawingLayer ){
+    else if ([layDic objectForKey:@"type"] != nil && [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_DRAWING]) {
+        
+        if( self.addUiImgForDrawingLayer ){
             //keep in mind call this code for drawing layer only once(render flyer time, add drawing layer[not for edit/reRenderings layers])
             UIImageView *img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DRAWING_LAYER_W, DRAWING_LAYER_H)];
             
