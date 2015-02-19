@@ -106,7 +106,7 @@ CGAffineTransform previuosTransform;
         }
         
         //Check Layer Exist in Master Layers
-        if ( lastControl == nil) { //its lable[text]
+        if ( lastControl == nil) { //this work when we created new one
             //----
             CustomLabel *lble = [[CustomLabel alloc] init];
             lble.tag = layers.count;
@@ -128,7 +128,7 @@ CGAffineTransform previuosTransform;
             view = lble;
             
             //----
-        } else {
+        } else { //this else works when we try to edit old one
 
             if ([lastControl isKindOfClass:[CustomLabel class]]) {
                 
@@ -140,9 +140,11 @@ CGAffineTransform previuosTransform;
                 if( [[layDic valueForKey:@"type"] isEqualToString:FLYER_LAYER_CLIP_ART] ){
                     NSLog(@"its clipart");
                     [self configureLabelFont:uid labelDictionary:layDic];
+                    [self applyTransformOnLabel2:lble CustomLableDictionary:layDic];
                 }
-                
-                [self applyTransformOnLabel:lble CustomLableDictionary:layDic];
+                else{
+                    [self applyTransformOnLabel:lble CustomLableDictionary:layDic];
+                }
                 [layers setValue:lble forKey:uid];
             
             } else {
@@ -373,6 +375,18 @@ CGAffineTransform previuosTransform;
     CGRect fr = lbl.frame;
     fr.size.width = 150;
     lbl.frame = fr;
+}
+
+- (void) applyTransformOnLabel2:(CustomLabel *)lbl CustomLableDictionary:(NSMutableDictionary *)detail {
+    
+    if ( [self hasTransformation:&detail] ) {
+        
+        CGAffineTransform ttransform = CGAffineTransformMake([[detail valueForKey:@"a"] floatValue], [[detail valueForKey:@"b"] floatValue], [[detail valueForKey:@"c"] floatValue], [[detail valueForKey:@"d"] floatValue], [[detail valueForKey:@"tx"] floatValue], [[detail valueForKey:@"ty"] floatValue]);
+        
+        
+        lbl.layer.anchorPoint = CGPointMake( 0.5, 0.5 );
+        lbl.transform = ttransform;
+    }
 }
 
 
