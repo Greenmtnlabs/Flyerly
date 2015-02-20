@@ -25,7 +25,7 @@ var eventsSchema = db.Schema({
 //	emergencyContacts: Object ,
 	customizedContacts: Object,
 //	hasRecording: String ,
-	recording: String,	
+//	recording: String,	
 	
 	socialStatus: String ,	
 	fbAuth: String ,
