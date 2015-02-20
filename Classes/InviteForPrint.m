@@ -21,12 +21,12 @@
 #import "LobAddressModel.h"
 #import "LobRequest.h"
 #import "LobObjectModel.h"
-#import "PayPalPaymentViewController.h"
+
 
 
 @interface InviteForPrint ()
 
-@property (nonatomic, strong, readwrite) PayPalConfiguration *payPalConfiguration;
+
 
 @end
 
@@ -84,7 +84,7 @@
    
     
     
-    [inviteButton setBackgroundImage:[UIImage imageNamed:@"post"] forState:UIControlStateNormal];
+    [inviteButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
     inviteButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
@@ -675,58 +675,6 @@
 
 -(void) friendsInvited {
     [Flurry logEvent:@"Friends Invited"];
-}
-
-
-/*
- * Here we Open Buy Panel
- */
--(void)openBuyPanel : (int) totalContactsToSendPrint {
-    // Create a PayPalPayment
-    PayPalPayment *payment = [[PayPalPayment alloc] init];
-    
-    // Amount, currency, and description
-    NSDecimalNumber *totalAmount = [[NSDecimalNumber alloc] initWithInt:(2 * totalContactsToSendPrint)];
-    payment.amount = totalAmount;
-    payment.currencyCode = @"USD";
-    payment.shortDescription = @"Printing Flyer PostCard";
-    
-    // Use the intent property to indicate that this is a "sale" payment,
-    // meaning combined Authorization + Capture. To perform Authorization only,
-    // and defer Capture to your server, use PayPalPaymentIntentAuthorize.
-    payment.intent = PayPalPaymentIntentSale;
-    
-    // Check whether payment is processable.
-    if ( payment.processable ) {
-        // If, for example, the amount was negative or the shortDescription was empty, then
-        // this payment would not be processable. You would want to handle that here.
-        PayPalPaymentViewController *paymentViewController;
-        paymentViewController = [[PayPalPaymentViewController alloc] initWithPayment:payment
-                                                                       configuration:self.payPalConfiguration
-                                                                            delegate:self];
-        
-        // Present the PayPalPaymentViewController.
-        [self presentViewController:paymentViewController animated:YES completion:nil];
-    }
-}
-
-#pragma mark - Paypal delegate
-
-- (void)payPalPaymentViewController:(PayPalPaymentViewController *)paymentViewController
-                 didCompletePayment:(PayPalPayment *)completedPayment {
-    
-
-    // Dismiss the PayPalPaymentViewController.
-    [self dismissViewControllerAnimated:YES completion:^{
-        NSLog(@"Successfully logged in.");
-        [self goToSendPV];
-    }];
-    
-}
-
-- (void)payPalPaymentDidCancel:(PayPalPaymentViewController *)paymentViewController {
-    // The payment was canceled; dismiss the PayPalPaymentViewController.
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

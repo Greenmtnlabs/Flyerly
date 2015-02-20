@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PayPalMobile.h"
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 #import "ParentViewController.h"
@@ -16,7 +15,7 @@
 
 @class FlyerlySingleton;
 
-@interface InviteForPrint : ParentViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,PayPalPaymentDelegate,MFMailComposeViewControllerDelegate>{
+@interface InviteForPrint : ParentViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,MFMailComposeViewControllerDelegate>{
     
     FlyerlySingleton *globle;
 }

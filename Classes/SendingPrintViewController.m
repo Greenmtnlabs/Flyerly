@@ -26,6 +26,7 @@
 #import "PayPalPaymentViewController.h"
 #import "LobProjectConstants.h"
 #import "AbstractBlockRequest.h"
+#import "PayPalPaymentViewController.h"
 
 
 @interface SendingPrintViewController (){
@@ -40,13 +41,18 @@
     
     NSMutableArray *sendCardTo,*cardHasBeenSentTo;
     int postReqTry;
+    BOOL hasPaidForPostCard;
 }
+
+@property (nonatomic, strong, readwrite) PayPalConfiguration *payPalConfiguration;
 
 @end
 
 UIButton *backButton;
 
 @implementation SendingPrintViewController
+
+
 
 @synthesize messageFeild,streetAddress,state,city,zip,country,name,flyerImage,flyer,contactsArray,scrollView;
 
@@ -69,33 +75,31 @@ UIButton *backButton;
     testing = NO;
     urlFrontStr = @"";
     
+    hasPaidForPostCard = NO;
+    
     sendCardTo = [[NSMutableArray alloc] init];
     cardHasBeenSentTo = [[NSMutableArray alloc] init];
     postReqTry = 0;
     
-    fromAddressTest = @{  @"name" : @"rufi name in from", \
-                                        @"email" : [NSNull null], \
-                                        @"phone" : [NSNull null], \
-                                        @"address_line1" : @"1600 AMPHITHEATRE PKWY UNIT 199 ", \
-                                        @"address_line2" : [NSNull null], \
-                                        @"address_city" : @"MOUNTAIN VIEW", \
-                                        @"address_state" : @"CA", \
-                                        @"address_zip" : @"94085", \
-                                        @"address_country" : @"US"};
+    fromAddressTest = @{    @"name" : @"rufi name in from", \
+                            @"email" : [NSNull null], \
+                            @"phone" : [NSNull null], \
+                            @"address_line1" : @"1600 AMPHITHEATRE PKWY UNIT 199 ", \
+                            @"address_line2" : [NSNull null], \
+                            @"address_city" : @"MOUNTAIN VIEW", \
+                            @"address_state" : @"CA", \
+                            @"address_zip" : @"94085", \
+                            @"address_country" : @"US"};
     
-    toAddressTest =  @{   @"name" : @"rufi name in to", \
-                                        @"email" : [NSNull null], \
-                                        @"phone" : [NSNull null], \
-                                        @"address_line1" : @"1600 AMPHITHEATRE PKWY UNIT 199 ", \
-                                        @"address_line2" : [NSNull null], \
-                                        @"address_city" : @"MOUNTAIN VIEW", \
-                                        @"address_state" : @"CA", \
-                                        @"address_zip" : @"94085", \
-                                        @"address_country" : @"US"};
-    
-    
-    
-    
+    toAddressTest =  @{ @"name" : @"rufi name in to", \
+                        @"email" : [NSNull null], \
+                        @"phone" : [NSNull null], \
+                        @"address_line1" : @"522 Hudson Street 3", \
+                        @"address_line2" : [NSNull null], \
+                        @"address_city" : @"Hoboken", \
+                        @"address_state" : @"NJ", \
+                        @"address_zip" : @"07030", \
+                        @"address_country" : @"US"};
     
     
     messageFeild.delegate = self;
@@ -368,16 +372,21 @@ https://lob.com/docs#postcards
  */
 -(void)sendrequestOnLob {
     
-    [self showLoading:YES];
-    
-    if( testing ) {
-        [self sendPostCard: @"https://www.lob.com/postcardfront.pdf"];
+    if( hasPaidForPostCard == NO ) {
+        [self openBuyPanel:1];
     }
-    else{
-        if( [urlFrontStr isEqualToString:@""]){
-            [self uploadPdfAndSendCard];
-        } else{
-            [self sendPostCard : urlFrontStr];
+    else {
+        [self showLoading:YES];
+        
+        if( testing ) {
+            [self sendPostCard: @"https://www.lob.com/postcardfront.pdf"];
+        }
+        else{
+            if( [urlFrontStr isEqualToString:@""]){
+                [self uploadPdfAndSendCard];
+            } else{
+                [self sendPostCard : urlFrontStr];
+            }
         }
     }
 }
@@ -471,6 +480,11 @@ https://lob.com/docs#postcards
                                     @"address_country" : @"US"
                                     };
 
+        
+        if( testing ){
+            toAddress = toAddressTest;
+            fromAddress = fromAddressTest;
+        }
         
         
         NSDictionary *postcardDict = @{@"name" : @"Flyer Postcard",
@@ -590,6 +604,59 @@ https://lob.com/docs#postcards
     NSString *sendCardToName = [ NSString stringWithFormat:@"%@-%@",toAddressName,addressLine1];
     
     return sendCardToName;
+}
+
+
+#pragma mark - Paypal delegate
+
+- (void)payPalPaymentViewController:(PayPalPaymentViewController *)paymentViewController
+                 didCompletePayment:(PayPalPayment *)completedPayment {
+    
+    
+    // Dismiss the PayPalPaymentViewController.
+    [self dismissViewControllerAnimated:YES completion:^{
+        NSLog(@"Successfully payed.");
+        hasPaidForPostCard = YES;
+        [self sendrequestOnLob];
+    }];
+    
+}
+
+- (void)payPalPaymentDidCancel:(PayPalPaymentViewController *)paymentViewController {
+    // The payment was canceled; dismiss the PayPalPaymentViewController.
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+/*
+ * Here we Open Buy Panel
+ */
+-(void)openBuyPanel : (int) totalContactsToSendPrint {
+    // Create a PayPalPayment
+    PayPalPayment *payment = [[PayPalPayment alloc] init];
+    
+    // Amount, currency, and description
+    NSDecimalNumber *totalAmount = [[NSDecimalNumber alloc] initWithInt:(2 * totalContactsToSendPrint)];
+    payment.amount = totalAmount;
+    payment.currencyCode = @"USD";
+    payment.shortDescription = @"Printing Flyer PostCard";
+    
+    // Use the intent property to indicate that this is a "sale" payment,
+    // meaning combined Authorization + Capture. To perform Authorization only,
+    // and defer Capture to your server, use PayPalPaymentIntentAuthorize.
+    payment.intent = PayPalPaymentIntentSale;
+    
+    // Check whether payment is processable.
+    if ( payment.processable ) {
+        // If, for example, the amount was negative or the shortDescription was empty, then
+        // this payment would not be processable. You would want to handle that here.
+        PayPalPaymentViewController *paymentViewController;
+        paymentViewController = [[PayPalPaymentViewController alloc] initWithPayment:payment
+                                                                       configuration:self.payPalConfiguration
+                                                                            delegate:self];
+        
+        // Present the PayPalPaymentViewController.
+        [self presentViewController:paymentViewController animated:YES completion:nil];
+    }
 }
 
 @end
