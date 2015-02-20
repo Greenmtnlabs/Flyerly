@@ -154,10 +154,24 @@
 //Go to screen where user enters his address
 - (void) goToSendPV {
     
-    SendingPrintViewController *sendingControoler = [[SendingPrintViewController alloc]initWithNibName:@"SendingPrintViewController" bundle:nil];
-    sendingControoler.flyer = self.flyer;
-    sendingControoler.contactsArray = self.selectedIdentifiers;
-    [self.navigationController pushViewController:sendingControoler animated:YES];
+    NSMutableArray *identifiers = [[NSMutableArray alloc] init];
+    identifiers = selectedIdentifiers;
+    
+    NSLog(@"%@",identifiers);
+    NSLog(@"%lu",(unsigned long)contactsArray.count);
+    
+    if([identifiers count] > 0) {
+        
+        [Flurry logEvent:@"Friends Invited"];
+        
+        SendingPrintViewController *sendingControoler = [[SendingPrintViewController alloc]initWithNibName:@"SendingPrintViewController" bundle:nil];
+        sendingControoler.flyer = self.flyer;
+        sendingControoler.contactsArray = self.selectedIdentifiers;
+        [self.navigationController pushViewController:sendingControoler animated:YES];
+        
+    } else {
+        [self showAlert:@"Please select any contact to invite !" message:@""];
+    }
     
 }
 
