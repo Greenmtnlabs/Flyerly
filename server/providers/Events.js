@@ -34,7 +34,7 @@ Events.setup = function(app) {
 				// Construct response JSON
 				var responseJSON = {};
 
-				var file1 = req.files.recording;
+//				var file1 = req.files.recording;
 				var params = req.body;
 
 
@@ -46,16 +46,16 @@ Events.setup = function(app) {
 				console.log(      'Inside /event/save');
 				//turn;
 				var eventId	=	params.eventId;		
-				var recordingFileName = params.recording;	
+//				var recordingFileName = params.recording;	
 
 				if( eventId == undefined ){
 					eventId = "";
 					params.eventId = eventId;
 				}		
-				if( recordingFileName == undefined ){   
-					recordingFileName = "";
-					params.recording = recordingFileName;
-				}
+				// if( recordingFileName == undefined ){   
+				// 	recordingFileName = "";
+				// 	params.recording = recordingFileName;
+				// }
 /*
 				var testOp = {customizedContacts: JSON.parse( params.customizedContacts ) };
 				console.log("===================================================");
@@ -70,9 +70,9 @@ Events.setup = function(app) {
 */
 
 
-				if( params.emergencyContacts ) {
-					params.emergencyContacts	= JSON.parse( params.emergencyContacts );
-				}
+				// if( params.emergencyContacts ) {
+				// 	params.emergencyContacts	= JSON.parse( params.emergencyContacts );
+				// }
 				params = {
 					eventId: eventId,
 					userId: params.userId,
@@ -86,11 +86,11 @@ Events.setup = function(app) {
 
 					twillioNumber: params.twillioNumber,
 					location: params.location,
-					emergencyNumber: params.emergencyNumber,
-					emergencyContacts: params.emergencyContacts,
+//					emergencyNumber: params.emergencyNumber,
+//					emergencyContacts: params.emergencyContacts,
 					customizedContacts: params.customizedContacts,
-					hasRecording: params.hasRecording,
-					recording: recordingFileName,
+//					hasRecording: params.hasRecording,
+//					recording: recordingFileName,
 
 					socialStatus: params.socialStatus,
 					fbAuth: params.fbAuth,
@@ -161,7 +161,7 @@ Events.setup = function(app) {
 				//4- return response.
 				function saveTwilioNumberAndRetRes(){
 					params.eventId   = eventId;
-					params.recording =   recordingFileName;
+//					params.recording =   recordingFileName;
 
 					console.log( __line, params );
 
@@ -244,6 +244,7 @@ Events.setup = function(app) {
 						function(err, model) {
 
 							if (err) {
+								console.log(res,  err, __line, "Error in event update.");
 								retError1( res,  err, __line, "Error in event update." );
 							}
 							else{
@@ -274,26 +275,28 @@ Events.setup = function(app) {
 
 
 				//1-If recording exist then upload file
-				if( file1 == undefined ) {
+				// if( file1 == undefined ) {
+				// 	saveEvent( checkTwilioNumberAndReturn );
+				// }
+				// else{
+				// 	//Upload file
+				// 	fs = require("fs");
+				// 	recordingFileName  = file1.name;
+
+				// 	fs.rename(
+				// 		file1.path, 
+				// 		(config.dir.recordingsPath + recordingFileName), 
+				// 		function (error) {
+
+				// 			if (error) {
+				// 				retError1( res, error,  __line, "Error in saving recording file." );
+				// 			} else {   
+				// 				saveEvent( checkTwilioNumberAndReturn );
+				// 			}				 
+				// 		});
+				// 	}
+
 					saveEvent( checkTwilioNumberAndReturn );
-				}
-				else{
-					//Upload file
-					fs = require("fs");
-					recordingFileName  = file1.name;
-
-					fs.rename(
-						file1.path, 
-						(config.dir.recordingsPath + recordingFileName), 
-						function (error) {
-
-							if (error) {
-								retError1( res, error,  __line, "Error in saving recording file." );
-							} else {   
-								saveEvent( checkTwilioNumberAndReturn );
-							}				 
-						});
-					}
 
 					}); // end post
 
@@ -418,8 +421,8 @@ Events.setup = function(app) {
 								function save(req,res){
 									console.log('/save1');
 
-									if( req.body.emergencyContacts )
-									req.body.emergencyContacts	= JSON.parse( req.body.emergencyContacts );
+									// if( req.body.emergencyContacts )
+									// req.body.emergencyContacts	= JSON.parse( req.body.emergencyContacts );
 
 									//for(var attributename in emergencyContacts){
 										//  console.log(attributename+": "+emergencyContacts[attributename]);
