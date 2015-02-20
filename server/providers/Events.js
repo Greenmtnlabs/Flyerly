@@ -70,9 +70,9 @@ Events.setup = function(app) {
 */
 
 
-				if( params.emergencyContacts ) {
-					params.emergencyContacts	= JSON.parse( params.emergencyContacts );
-				}
+				// if( params.emergencyContacts ) {
+				// 	params.emergencyContacts	= JSON.parse( params.emergencyContacts );
+				// }
 				params = {
 					eventId: eventId,
 					userId: params.userId,
@@ -86,10 +86,10 @@ Events.setup = function(app) {
 
 					twillioNumber: params.twillioNumber,
 					location: params.location,
-					emergencyNumber: params.emergencyNumber,
-					emergencyContacts: params.emergencyContacts,
+//					emergencyNumber: params.emergencyNumber,
+//					emergencyContacts: params.emergencyContacts,
 					customizedContacts: params.customizedContacts,
-					hasRecording: params.hasRecording,
+//					hasRecording: params.hasRecording,
 					recording: recordingFileName,
 
 					socialStatus: params.socialStatus,
@@ -418,8 +418,8 @@ Events.setup = function(app) {
 								function save(req,res){
 									console.log('/save1');
 
-									if( req.body.emergencyContacts )
-									req.body.emergencyContacts	= JSON.parse( req.body.emergencyContacts );
+									// if( req.body.emergencyContacts )
+									// req.body.emergencyContacts	= JSON.parse( req.body.emergencyContacts );
 
 									//for(var attributename in emergencyContacts){
 										//  console.log(attributename+": "+emergencyContacts[attributename]);

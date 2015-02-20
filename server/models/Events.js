@@ -21,10 +21,10 @@ var eventsSchema = db.Schema({
     
 	twillioNumber: String ,
 	location: String ,
-    emergencyNumber: String ,
-	emergencyContacts: Object ,
+//    emergencyNumber: String ,
+//	emergencyContacts: Object ,
 	customizedContacts: Object,
-	hasRecording: String ,
+//	hasRecording: String ,
 	recording: String,	
 	
 	socialStatus: String ,	
