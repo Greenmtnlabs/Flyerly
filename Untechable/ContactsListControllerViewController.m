@@ -52,15 +52,6 @@
         currentlyEditingContacts = untechable.customizedContactsForCurrentSession;
     }
     
-    /*if ( untechable.hasFinished ){
-    
-    }else {
-        if ( untechable.customizedContactsForCurrentSession.count > 0 ){
-            currentlyEditingContacts = untechable.customizedContactsForCurrentSession;
-        }
-    }*/
-    
-    
     if ( currentlyEditingContacts == nil ){
         currentlyEditingContacts = [[NSMutableArray alloc] init];
     }
@@ -147,7 +138,6 @@
         [skipButton addTarget:self action:@selector(btnSkipTouchStart) forControlEvents:UIControlEventTouchDown];
         [skipButton addTarget:self action:@selector(btnSkipTouchEnd) forControlEvents:UIControlEventTouchUpInside];
         
-        //[skipButton setBackgroundColor:[UIColor redColor]];
         skipButton.showsTouchWhenHighlighted = YES;
         
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
@@ -684,6 +674,8 @@
                         contactModal.IsCustomized = YES;
                         
                         contact_Modal.IsCustomized = contactModal.IsCustomized;
+                        
+                        contactModal.customTextForContact = contact_Modal.customTextForContact;
                     }
                 }
             }
@@ -729,11 +721,11 @@
                         
                         contactModal.IsCustomized = YES;
                         
-                        //contact_Modal.cutomizingStatusArray = contactModal.cutomizingStatusArray;
-                        
                         contact_Modal.allEmails = contactModal.allEmails;
                         
                         contact_Modal.IsCustomized = contactModal.IsCustomized;
+                        
+                        contactModal.customTextForContact = contact_Modal.customTextForContact;
                         
                         break;
                     }
@@ -741,7 +733,7 @@
             }
         }
         
-        contactModal.customTextForContact = contact_Modal.customTextForContact;
+        
         
         if ( contactModal.allEmails.count > 0 || contactModal.allPhoneNumbers.count > 0 ){
             [contactsArray addObject:contactModal];
