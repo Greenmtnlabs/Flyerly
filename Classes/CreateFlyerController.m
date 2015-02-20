@@ -2122,7 +2122,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 NSString *flyerImg = [flyer getImageName:currentLayer];
                 NSString *type = [flyer getLayerType:currentLayer];
                 
-                if ( flyerImg == nil ) {
+                if ( flyerImg == nil ) { //Label[text]/clipart
                     
                     NSString *sizeStr = SIZE_ARRAY[i-1];
                     selectedSize = [sizeStr intValue];
@@ -2133,19 +2133,22 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     }
                     
                     selectedFont = [selectedFont fontWithSize:selectedSize];
-                    
+
+                    //Set size in dictionary
                     [flyer setFlyerTextSize:currentLayer Size:selectedFont];
                     
-                    //Here we call Render Layer on View
-                    [flyimgView configureLabelSize:currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
                     
+                    //Rendering related task  ------- starts ------
+                    //Here we call Render Layer on View
+                    NSMutableDictionary *layerDic =  [flyer getLayerFromMaster:currentLayer];
+                    //i call this function 2 time due to a reason.
+                    [flyimgView configureLabelSize:currentLayer labelDictionary:layerDic];
+                    [flyimgView configureLabelSize:currentLayer labelDictionary:layerDic];
+
                     if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
-                        
                         //Handling Select Unselect
                         [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:sizesView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
-                    }
-                    else {
-                        
+                    } else {
                         //Handling Select Unselect
                         [self setSelectedItem:FLYER_LAYER_TEXT inView:sizesView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
                     }
@@ -2160,7 +2163,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     //Handling Select Unselect
                     [self setSelectedItem:FLYER_LAYER_DRAWING inView:sizesView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
                 }
-                else {
+                else { //image,emoticon...etc
     
                     NSString *sizeStr = SIZE_ARRAY[i-1];
                     
@@ -2481,12 +2484,18 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [flyer setFlyerTextFont:currentLayer FontName:[clipartsArray[index] objectForKey:@"fontType"]];
                 [flyer setFlyerTextSize:currentLayer Size:selectedFont];
                 
+                NSMutableDictionary *layDic = [flyer getLayerFromMaster:currentLayer];
+                
                 //Here we call Render Layer on View
-                [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+                [flyimgView renderLayer:currentLayer layerDictionary:layDic];
                 //[flyimgView configureClipartFont :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
                 //[flyimgView configureClipartDimensions :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
                 
                 
+                if ([layDic objectForKey:@"type"] != nil && [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_CLIP_ART]){
+                    [flyimgView configureLabelSize:currentLayer labelDictionary:layDic];
+                    [flyimgView configureLabelSize:currentLayer labelDictionary:layDic];
+                }
                 
                 [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:clipartsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
             }
@@ -2494,6 +2503,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }
         
     }// Loop
+    
+    
     
     [self bringNotEditableLayersToFront:@"call from selectIcon"];
 }
@@ -4817,7 +4828,9 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     if( [layerType isEqualToString:FLYER_LAYER_CLIP_ART] ){
         
-        textSize = [NSString stringWithFormat:@"%f", ([textSize floatValue]/3.0)];
+        //textSize = [NSString stringWithFormat:@"%f", ([textSize floatValue]/3.0)];
+        CustomLabel *lbl = [flyimgView.layers objectForKey:currentLayer];
+        textSize = [NSString stringWithFormat:@"%f", roundf(([lbl newSize].width)/3.0)];
         
     } else if ( [layerType isEqualToString:FLYER_LAYER_EMOTICON] ) {
         
@@ -4902,6 +4915,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     return tag;
 }
 
+//show selected blue border around select size/border/color....etc
 -(void) setSelectedItem:(NSString*)layerType inView:(ResourcesView*)view ofLayerAttribute:(NSString *)layerAttribute {
     
     NSString* tag = [self getCurrentLayerTag:layerAttribute inView:view];

@@ -93,6 +93,7 @@ CGAffineTransform previuosTransform;
         return;
     }
     
+    
     // Checking for Label(text) or ImageView
     if ([layDic objectForKey:@"image"] == nil) {
         
@@ -106,40 +107,47 @@ CGAffineTransform previuosTransform;
         }
         
         //Check Layer Exist in Master Layers
-        if ( lastControl == nil) {
+        if ( lastControl == nil) { //this work when we created new one
             //----
             CustomLabel *lble = [[CustomLabel alloc] init];
             lble.tag = layers.count;
             lble.backgroundColor = [UIColor clearColor];
-            // Get the type of layer
-            //NSString *type = [flyer getLayerType:currentLayer];
-            //if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
-
-            lble.textAlignment = NSTextAlignmentCenter;//    UITextAlignmentCenter;
-            //}
+            lble.textAlignment = NSTextAlignmentCenter;
             lble.adjustsFontSizeToFitWidth = YES;
             lble.lineBreakMode = NSLineBreakByWordWrapping;
             lble.numberOfLines = 80;
+            
+            //Apply view related tasks
             [self configureLabel:lble labelDictionary:layDic ];
             [self applyTransformOnLabel:lble CustomLableDictionary:layDic];
+            
+            //Add into view
             [self addSubview:lble];
+            
             [layers setValue:lble forKey:uid];
             
             view = lble;
             
             //----
-        } else {
+        }
+        else { //this else works when we try to edit old one
 
             if ([lastControl isKindOfClass:[CustomLabel class]]) {
                 
                 //here we Update Label
                 CustomLabel *lble = [layers objectForKey:uid];
+                
                 //[self configureLabel:lble labelDictionary:layDic ];
+                
                 if( [[layDic valueForKey:@"type"] isEqualToString:FLYER_LAYER_CLIP_ART] ){
                     NSLog(@"its clipart");
                     [self configureLabelFont:uid labelDictionary:layDic];
+                    [self applyTransformOnLabel:lble CustomLableDictionary:layDic];
                 }
-                [self applyTransformOnLabel:lble CustomLableDictionary:layDic];
+                else{
+                    [self applyTransformOnLabel:lble CustomLableDictionary:layDic];
+                }
+                
                 [layers setValue:lble forKey:uid];
             
             } else {
@@ -150,6 +158,7 @@ CGAffineTransform previuosTransform;
                 [layers setValue:img forKey:uid];
             }
         }
+        
     }
     else if ([layDic objectForKey:@"type"] != nil && [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_DRAWING]) {
         
@@ -196,6 +205,8 @@ CGAffineTransform previuosTransform;
         }
     }
     
+    
+    //Apply Gestures[move/resize...etc]
     if ([layDic objectForKey:@"type"] != nil && [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_DRAWING]) {
         //we hooked the events(Gesture) of drawing in createFlyerController.h in function: drawingLayerMoved
         if( self.addUiImgForDrawingLayer ){
@@ -210,8 +221,10 @@ CGAffineTransform previuosTransform;
         UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(layerMoved:)];
         [view addGestureRecognizer:panGesture];
         
+        BOOL isClipArtLayer = ([layDic objectForKey:@"type"] != nil && [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_CLIP_ART]);
+        
         // We are only going to allow pinch gesture on non text/clipart layers
-        if ( [layDic valueForKey:@"image"] ) {
+        if ( [layDic valueForKey:@"image"] || isClipArtLayer ) {
             // Gesture for resizing layers
             UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(layerResized:)];
             [view addGestureRecognizer:pinchGesture];
@@ -229,6 +242,7 @@ CGAffineTransform previuosTransform;
         //[rotationRecognizer setDelegate:self];
         [view addGestureRecognizer:rotationRecognizer];        
     }
+    
 }
 
 -(void)configureImageViewSize :(NSString *)uid {
@@ -367,7 +381,6 @@ CGAffineTransform previuosTransform;
     lbl.frame = fr;
 }
 
-
 /*
  *Here we set color Properties of uiLabel
  */
@@ -396,12 +409,6 @@ CGAffineTransform previuosTransform;
     
     CustomLabel *lbl = [layers objectForKey:uid];
     
-    //SetFrame
-    //[lbl setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
-    
-    // Remember originalsize
-    //lbl.originalSize = lbl.frame.size;
-    
     //set Label Text
     [lbl setText:[detail valueForKey:@"text"]];
     
@@ -410,27 +417,55 @@ CGAffineTransform previuosTransform;
     
     // Make sure we are vertically aligned to the top and centerally aligned.
     if( [[detail valueForKey:@"type"] isEqualToString:FLYER_LAYER_CLIP_ART] ){
+     
+        // Because emoticons are always sized squarely, we are just considering width here, assuming height is the same
+        CGFloat currentSize = [lbl newSize].width; //lbl.frame.size.width;
         
-        // Keep existing layer's transform
-        CGAffineTransform tempTransform = lbl.transform;
+        CGFloat newSize = [[detail valueForKey:@"fontsize"] floatValue];
         
-        // Now apply the identity transform
-        lbl.transform = CGAffineTransformIdentity;
+        NSLog(@"newSize:%f, currentSize:%f",newSize/3,currentSize/3);
         
-        lbl.textAlignment = NSTextAlignmentCenter;
-        [lbl setNumberOfLines:0];
-    
-        CGRect fr = lbl.frame;
-        fr.size.width = 150;
-        lbl.frame = fr;
+        CGFloat scale = newSize / currentSize;
+        
+        CGAffineTransform currentTransform = lbl.transform;
+        
+        lbl.layer.anchorPoint = CGPointMake( 0.5, 0.5 );
+        
+        CGAffineTransform tr =
+        CGAffineTransformConcat(
+                                CGAffineTransformMakeScale(scale, scale),
+                                currentTransform);
+        
+        lbl.transform = tr;
 
-        [lbl sizeToFit];
+         // Keep existing layer's transform
+         CGAffineTransform tempTransform = lbl.transform;
+         
+         // Now apply the identity transform
+         lbl.transform = CGAffineTransformIdentity;
+         
+         lbl.textAlignment = NSTextAlignmentCenter;
+         [lbl setNumberOfLines:0];
+         
+         CGRect fr = lbl.frame;
+         fr.size.width = 150;
+         lbl.frame = fr;
+         
+         [lbl sizeToFit];
+         
+         // Now apply the previous transform again
+         lbl.transform = tempTransform;
+
+        //update dictionary
+        [self.delegate layerTransformedforKey:uid :&tempTransform];
         
-        // Now apply the previous transform again
-        lbl.transform = tempTransform;
-        
-    } else{
-       
+        /*
+            currentSize = [lbl newSize].width; //lbl.frame.size.width;
+            newSize = [[detail valueForKey:@"fontsize"] floatValue];
+            NSLog(@"b-- newSize:%f, currentSize:%f", newSize/3, currentSize/3);
+        */
+    }
+    else{ //Text
         
         // Keep existing layer's transform
         CGAffineTransform tempTransform = lbl.transform;
@@ -455,7 +490,6 @@ CGAffineTransform previuosTransform;
         lbl.transform = tempTransform;
     }
 }
-
 
 /*
  *Here we set font of UILabel

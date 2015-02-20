@@ -1333,7 +1333,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 }
 
 /*
- * Here we Set Text Size
+ * Here we Set Text Sizein dictionary
  */
 -(void)setFlyerTextSize :(NSString *)uid Size:(UIFont *)sz{
     
