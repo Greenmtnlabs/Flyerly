@@ -302,10 +302,17 @@
             
             ContactsCustomizedModal *tempModal = [untechable.customizedContactsForCurrentSession objectAtIndex:i];
             
-            NSMutableArray *phoneNumbersWithStatus  = [[NSMutableArray alloc] initWithArray:tempModal.allPhoneNumbers copyItems:YES];
+            NSMutableArray *phoneNumbersWithStatus  = [[NSMutableArray alloc] initWithArray:tempModal.allPhoneNumbers copyItems:NO];
             
             for ( int j = 0; j < phoneNumbersWithStatus.count; j++){
-                NSMutableArray *numberWithStatus = [phoneNumbersWithStatus objectAtIndex:j];
+                NSMutableArray *numberWithStatus = [[NSMutableArray alloc] init];
+                
+                numberWithStatus = [phoneNumbersWithStatus objectAtIndex:j];
+                
+                NSString *phoneNumDecimalsOnly = [[[numberWithStatus objectAtIndex:1] componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
+                
+                [numberWithStatus replaceObjectAtIndex:1 withObject:phoneNumDecimalsOnly];
+                
                 if ( [[numberWithStatus objectAtIndex:2] isEqualToString:@"0"] &&
                     [[numberWithStatus objectAtIndex:3] isEqualToString:@"0"]  )
                 {
@@ -346,6 +353,7 @@
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
     [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
     
+    /*
     // -------------------- ---- Audio Upload Status ---------------------------\\
     //pass MediaType file
     
@@ -360,10 +368,11 @@
     // add it to body
     [body appendData:audioData];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+*/
     
     NSArray *stringVarsAry = [[NSArray alloc] initWithObjects:@"eventId", @"userId", @"paid",
                               @"timezoneOffset", @"spendingTimeTxt", @"startDate", @"endDate", @"hasEndDate"
-                              ,@"twillioNumber", @"location", @"emergencyNumber", @"hasRecording"
+                              , @"location"
                               ,@"socialStatus", @"fbAuth", @"fbAuthExpiryTs" , @"twitterAuth",@"twOAuthTokenSecret",   @"linkedinAuth"
                               ,@"acType", @"email", @"password", @"respondingEmail", @"iSsl", @"imsHostName", @"imsPort", @"oSsl", @"omsHostName", @"omsPort",@"customizedContacts"
                               ,nil];
@@ -372,10 +381,11 @@
         BOOL sendIt =   NO;
         id value    =   [untechable.dic objectForKey:key];
         
+        /*
         if([key isEqualToString:@"emergencyContacts"] ){
             value = [untechable.commonFunctions convertDicIntoJsonString:value];
             sendIt = YES;
-        }
+        }*/
     
         if( sendIt || [stringVarsAry containsObject:key]){
             
@@ -449,8 +459,6 @@
             [self next:@"GO_TO_THANKYOU"];
         });
     }
-    
-    
 }
 
 -(void)showMsgOnApiResponse:(NSString *)message
