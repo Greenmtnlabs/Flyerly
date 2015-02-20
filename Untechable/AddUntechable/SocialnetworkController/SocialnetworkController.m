@@ -372,7 +372,7 @@
     
     NSArray *stringVarsAry = [[NSArray alloc] initWithObjects:@"eventId", @"userId", @"paid",
                               @"timezoneOffset", @"spendingTimeTxt", @"startDate", @"endDate", @"hasEndDate"
-                              , @"location"
+                              , @"location",@"twillioNumber"
                               ,@"socialStatus", @"fbAuth", @"fbAuthExpiryTs" , @"twitterAuth",@"twOAuthTokenSecret",   @"linkedinAuth"
                               ,@"acType", @"email", @"password", @"respondingEmail", @"iSsl", @"imsHostName", @"imsPort", @"oSsl", @"omsHostName", @"omsPort",@"customizedContacts"
                               ,nil];

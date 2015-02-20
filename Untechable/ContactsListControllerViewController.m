@@ -656,7 +656,11 @@
                     
                     NSMutableArray *currentContactNumberDetails = [currentltRenderingContactModal.allPhoneNumbers objectAtIndex:j];
                     
-                    if ( [[currentContactNumberDetails objectAtIndex:1] isEqualToString:customizedNumber] ){
+                    NSString *currentContactCustomizedNumber  = [currentContactNumberDetails objectAtIndex:1];
+                    
+                    currentContactCustomizedNumber = [self NumberToFormatIntoUSstandard:currentContactCustomizedNumber];
+                    
+                    if ( [currentContactCustomizedNumber isEqualToString:customizedNumber] ){
                         
                         [currentltRenderingContactModal.allPhoneNumbers replaceObjectAtIndex:j withObject:phoneNumberDetails];
                         
