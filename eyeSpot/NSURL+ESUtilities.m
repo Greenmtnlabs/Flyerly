@@ -44,17 +44,22 @@
     NSAssert(![originalURLString hasPrefix:NSHomeDirectory()],
              @"+[ESBoard pathRelativeToHomeDirectory:] home directory is not antecedent to url");
     
-    NSURL *homeURL = [NSURL fileURLWithPath:NSHomeDirectory() isDirectory:YES];
+    //NSURL *homeURL = [NSURL fileURLWithPath:NSHomeDirectory() isDirectory:YES];
     NSURL *url = originalURL;
+    
+    // Add by raheel for ios8
+    NSURL *aUrl = [originalURL URLByDeletingLastPathComponent];
+    NSURL *urlDirectory = [aUrl URLByDeletingLastPathComponent];
+    
     NSMutableArray *pathComponents = [NSMutableArray array];
-    while (![homeURL es_isEqualToFileURL:url]) {
+    while (![urlDirectory es_isEqualToFileURL:url]) {
         NSString *component = [url lastPathComponent];
         component = [component stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [pathComponents insertObject:component atIndex:0];
         url = [url URLByDeletingLastPathComponent];
     }
     NSString *path = [pathComponents componentsJoinedByString:@"/"];
-    NSURL *reconstructedURL = [NSURL URLWithString:path relativeToURL:homeURL];
+    NSURL *reconstructedURL = [NSURL URLWithString:path relativeToURL:urlDirectory];
     NSAssert([originalURL es_isEqualToFileURL:reconstructedURL],
              @"+[ESBoard pathRelativeToHomeDirectory:] logic error");
     
