@@ -29,7 +29,7 @@
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
     
-    [self initContactsDic];
+    //[self initContactsDic];
     
     self.iPhoneinvited = [[NSMutableArray alloc] init];
 
@@ -54,9 +54,9 @@
 
 #pragma mark  Custom Methods
 
--(void)initContactsDic{
+/*-(void)initContactsDic{
     self.selectedContacts   =   untechable.emergencyContacts;
-}
+}*/
 - (void)setNavigationDefaults{
     
     defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
@@ -146,7 +146,7 @@
 -(IBAction)goBack{
     
     NSLog(@"selectedContacts %@",selectedContacts);
-    untechable.emergencyContacts = selectedContacts;
+    //untechable.emergencyContacts = selectedContacts;
     
     [untechable goBack:self.navigationController];
 }
@@ -177,7 +177,7 @@
     [contactsButton setSelected:YES];
 
 
-    [self initContactsDic];
+    //[self initContactsDic];
     
     
     [self.uiTableView reloadData];
@@ -357,9 +357,9 @@
     }
         
     
-    if(!self.selectedContacts){
+    /*if(!self.selectedContacts){
         [self initContactsDic];
-    }
+    }*/
     
     ContactsModel *receivedDic;
     

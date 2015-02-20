@@ -120,8 +120,6 @@
         inputSetSocialStatus.text = @"e.g Spending time with family.";
     }
     
-    
-    //[self.inputSetSocialStatus setText:untechable.socialStatus];
     if ( [untechable.socialStatus isEqualToString:@""] && [inputSetSocialStatus.text isEqualToString:@"e.g Spending time with family."] ){
         
         NSString *url = [NSString stringWithFormat:@"%@",untechable.spendingTimeTxt];
@@ -182,50 +180,19 @@
         // Center title ________________________________________
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
+        // Right Navigation ________________________________________
         finishButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         [finishButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
         finishButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [finishButton setTitle:TITLE_FINISH_TXT forState:normal];
         [finishButton setTitleColor:defGray forState:UIControlStateNormal];
         
-        // Right Navigation ________________________________________
-        /*nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 33, 42)];
-        [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
-        nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [nextButton setTitle:@"NEXT" forState:normal];
-        [nextButton setTitleColor:defGray forState:UIControlStateNormal];
-        [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
-        [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];*/
-        
-        /*skipButton = [[UIButton alloc] initWithFrame:CGRectMake(33, 0, 33, 42)];
-        skipButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
-        [skipButton setTitle:@"SKIP" forState:normal];
-        [skipButton setTitleColor:defGray forState:UIControlStateNormal];
-        [skipButton addTarget:self action:@selector(btnSkipTouchStart) forControlEvents:UIControlEventTouchDown];
-        [skipButton addTarget:self action:@selector(btnSkipTouchEnd) forControlEvents:UIControlEventTouchUpInside];
-        
-        //[skipButton setBackgroundColor:[UIColor redColor]];
-        skipButton.showsTouchWhenHighlighted = YES;*/
-        
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:finishButton];
-        //UIBarButtonItem *skipButtonBarButton = [[UIBarButtonItem alloc] initWithCustomView:skipButton];
-        //NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,skipButtonBarButton,nil];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
         
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
     }
 }
-
-/*
--(void)btnNextTouchStart{
-    [self setNextHighlighted:YES];
-}
--(void)btnNextTouchEnd{
-    [self setNextHighlighted:NO];
-}
-- (void)setNextHighlighted:(BOOL)highlighted {
-    (highlighted) ? [nextButton setBackgroundColor:defGreen] : [nextButton setBackgroundColor:[UIColor clearColor]];
-}*/
 
 -(void)btnBackTouchStart{
     [self setBackHighlighted:YES];
@@ -245,7 +212,7 @@
 -(void)onNext{
     
     if( !internetReachable.isReachable ){
-        //show alert
+        //Show alert if internet is not avaialble...
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection"
                                                         message:@"You must be connected to the internet to sync your untechable on server."
                                                        delegate:nil
@@ -259,16 +226,7 @@
         } else {
             [self sendToApi];
         }
-
     }
-    /*[self setNextHighlighted:NO];
-    BOOL goToNext = YES;
-
-    if( goToNext ) {
-        [self storeSceenVarsInDic];
-        [self next:@"GO_TO_NEXT"];
-        
-    }*/
 }
 
 // Checks if we have an internet connection or not
@@ -318,7 +276,6 @@
         backButton.userInteractionEnabled = NO;
         
         [self showHidLoadingIndicator:YES];
-        
     }
     
     // RE-ENABLE NAVIGATION WHEN ANY ERROR OCCURED
@@ -328,8 +285,6 @@
         backButton.userInteractionEnabled = YES;
         
         [self showHidLoadingIndicator:NO];
-        
-        
     }
     
     // ON DATA SAVED TO API SUCCESSFULLY
@@ -347,10 +302,17 @@
             
             ContactsCustomizedModal *tempModal = [untechable.customizedContactsForCurrentSession objectAtIndex:i];
             
-            NSMutableArray *phoneNumbersWithStatus  = [[NSMutableArray alloc] initWithArray:tempModal.allPhoneNumbers copyItems:YES];
+            NSMutableArray *phoneNumbersWithStatus  = [[NSMutableArray alloc] initWithArray:tempModal.allPhoneNumbers copyItems:NO];
             
             for ( int j = 0; j < phoneNumbersWithStatus.count; j++){
-                NSMutableArray *numberWithStatus = [phoneNumbersWithStatus objectAtIndex:j];
+                NSMutableArray *numberWithStatus = [[NSMutableArray alloc] init];
+                
+                numberWithStatus = [phoneNumbersWithStatus objectAtIndex:j];
+                
+                NSString *phoneNumDecimalsOnly = [[[numberWithStatus objectAtIndex:1] componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
+                
+                [numberWithStatus replaceObjectAtIndex:1 withObject:phoneNumDecimalsOnly];
+                
                 if ( [[numberWithStatus objectAtIndex:2] isEqualToString:@"0"] &&
                     [[numberWithStatus objectAtIndex:3] isEqualToString:@"0"]  )
                 {
@@ -391,6 +353,7 @@
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
     [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
     
+    /*
     // -------------------- ---- Audio Upload Status ---------------------------\\
     //pass MediaType file
     
@@ -405,10 +368,11 @@
     // add it to body
     [body appendData:audioData];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+*/
     
     NSArray *stringVarsAry = [[NSArray alloc] initWithObjects:@"eventId", @"userId", @"paid",
                               @"timezoneOffset", @"spendingTimeTxt", @"startDate", @"endDate", @"hasEndDate"
-                              ,@"twillioNumber", @"location", @"emergencyNumber", @"hasRecording"
+                              , @"location",@"twillioNumber"
                               ,@"socialStatus", @"fbAuth", @"fbAuthExpiryTs" , @"twitterAuth",@"twOAuthTokenSecret",   @"linkedinAuth"
                               ,@"acType", @"email", @"password", @"respondingEmail", @"iSsl", @"imsHostName", @"imsPort", @"oSsl", @"omsHostName", @"omsPort",@"customizedContacts"
                               ,nil];
@@ -417,16 +381,12 @@
         BOOL sendIt =   NO;
         id value    =   [untechable.dic objectForKey:key];
         
+        /*
         if([key isEqualToString:@"emergencyContacts"] ){
             value = [untechable.commonFunctions convertDicIntoJsonString:value];
             sendIt = YES;
-        }
-        
-        /*if([key isEqualToString:@"customizedContacts"] ){
-         value = [untechable.commonFunctions convertArrayIntoJsonString:value];
-         sendIt = YES;
-         }*/
-        
+        }*/
+    
         if( sendIt || [stringVarsAry containsObject:key]){
             
             [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -442,10 +402,8 @@
     // close form
     [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     
-    
     // setting the body of the post to the reqeust
     [request setHTTPBody:body];
-    
     
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     // NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
@@ -462,7 +420,6 @@
         NSString *message = @"";
         
         if( [[dict valueForKey:@"status"] isEqualToString:@"OK"] ) {
-            //message = @"Untechable saved successfully";
             
             untechable.twillioNumber = [dict valueForKey:@"twillioNumber"];
             untechable.eventId = [dict valueForKey:@"eventId"];
@@ -502,8 +459,6 @@
             [self next:@"GO_TO_THANKYOU"];
         });
     }
-    
-    
 }
 
 -(void)showMsgOnApiResponse:(NSString *)message
@@ -554,29 +509,6 @@
     }
 }
 
-/*
-
-- (void)setSkipHighlighted:(BOOL)highlighted {
-    (highlighted) ? [skipButton setBackgroundColor:defGreen] : [skipButton setBackgroundColor:[UIColor clearColor]];
-}
-
--(void)btnSkipTouchStart{
-    [self setSkipHighlighted:YES];
-}
-
--(void)btnSkipTouchEnd{
-    [self setSkipHighlighted:NO];
-    [self onSkip];
-}
-
--(void)onSkip{
-    
-    [self setSkipHighlighted:NO];
-    [self storeSceenVarsInDic];
-    
-    [self next:@"ON_SKIP"];
-}*/
-
 -(void)next:(NSString *)after{
     
     if( [after isEqualToString:@"GO_TO_THANKYOU"] ) {
@@ -584,9 +516,7 @@
         thankyouController = [[ThankyouController alloc]initWithNibName:@"ThankyouController" bundle:nil];
         thankyouController.untechable = untechable;
         [self.navigationController pushViewController:thankyouController animated:YES];
-        
     }
-    
 }
 
 -(void)storeSceenVarsInDic
@@ -739,7 +669,7 @@
 
 -(void)textViewDidChange:(UITextView *)textView
 {
-    int len = textView.text.length;
+    int len = (int)textView.text.length;
     char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
 }
 

@@ -373,13 +373,13 @@
     if( goToNext == NO ){
         
         //When user didn't perform any task on Premium feature $1.99 screen
-        if( untechable.hasRecording == NO
+        /*if( untechable.hasRecording == NO
             && [untechable.emergencyNumber isEqualToString:@""]
             && [[untechable.emergencyContacts allKeys] count] < 1
         ){
             goToNext = YES;
-        }
-        
+        }*/
+        goToNext = YES;
     }
     
     if( goToNext == YES ) {
@@ -498,7 +498,7 @@
 -(void)storeSceenVarsInDic{
     //untechable.twillioNumber = _inputForwadingNumber.text;
     //untechable.location = _inputLocation.text;
-    untechable.emergencyNumber = _inputEmergencyNumber.text;
+    //untechable.emergencyNumber = _inputEmergencyNumber.text;
     //untechable.emergencyContacts = untechable.emergencyContacts; //no need
     
     [untechable setOrSaveVars:SAVE];
@@ -533,7 +533,7 @@
     [_inputEmergencyNumber setTextColor:defGreen];
     _inputEmergencyNumber.font = [UIFont fontWithName:APP_FONT size:16];
     _inputEmergencyNumber.delegate = self;
-    [_inputEmergencyNumber setText:untechable.emergencyNumber];
+    //[_inputEmergencyNumber setText:untechable.emergencyNumber];
 
     [_btnImport setTitleColor:defGray forState:UIControlStateNormal];
     _btnImport.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
@@ -575,8 +575,8 @@
     NSInteger count = 0;
 
     if([contOf isEqualToString:@"contactsTableView"]) {
-        NSArray * allKeys = [untechable.emergencyContacts allKeys];
-        count   =   [allKeys count];
+        //NSArray * allKeys = [untechable.emergencyContacts allKeys];
+        //count   =   [allKeys count];
     }
     
     
@@ -605,20 +605,20 @@
     if([tableViewFor isEqualToString:@"contactsTableView"]) {
         
          //get sorted keys
-         NSArray *arrayOfKeys = [[untechable.emergencyContacts allKeys] sortedArrayUsingSelector: @selector(compare:)];
+         //NSArray *arrayOfKeys = [[untechable.emergencyContacts allKeys] sortedArrayUsingSelector: @selector(compare:)];
         //NSLog(@"Keys: %@", arrayOfKeys);
         //NSArray *arrayOfValues = [untechable.emergencyContacts allValues];
         //NSLog(@"Values: %@", arrayOfValues);
         
         
         //6
-        NSString *name = [arrayOfKeys objectAtIndex:indexPath.row];
-        NSString *number = [untechable.emergencyContacts objectForKey:name];
+        //NSString *name = [arrayOfKeys objectAtIndex:indexPath.row];
+        //NSString *number = [untechable.emergencyContacts objectForKey:name];
         
         //7
-        [cell.textLabel setText:name];
+        //[cell.textLabel setText:name];
         cell.textLabel.textColor = defGreen;
-        [cell.detailTextLabel setText:number];
+        //[cell.detailTextLabel setText:number];
         cell.detailTextLabel.textColor = defGray;
     }
     return cell;
@@ -640,7 +640,7 @@
 
         if( [tableViewFor isEqualToString:@"contactsTableView"] ) {
 
-            [untechable.commonFunctions deleteKeyFromDic:untechable.emergencyContacts delKeyAtIndex:indexPath.row];
+            //[untechable.commonFunctions deleteKeyFromDic:untechable.emergencyContacts delKeyAtIndex:indexPath.row];
             
             [untechable setOrSaveVars:SAVE];
             
@@ -766,7 +766,7 @@
         AVAudioSession *audioSession = [AVAudioSession sharedInstance];
         [audioSession setActive:NO error:nil];
         
-        untechable.hasRecording = YES;
+        //untechable.hasRecording = YES;
         [self timerInit:NO callFor:1];
         
         [self configuredPlayerFn];
