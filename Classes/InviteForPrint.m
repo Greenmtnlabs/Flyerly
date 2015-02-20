@@ -80,13 +80,8 @@
     
     // INVITE BAR BUTTON
     UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-	
-    //if YES then Skip paypal payment for testing
-    if( NO )
-    [inviteButton addTarget:self action:@selector(sendPdfFlyer) forControlEvents:UIControlEventTouchUpInside];
-    else
-    [inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
-    
+    [inviteButton addTarget:self action:@selector(goToSendPV) forControlEvents:UIControlEventTouchUpInside];
+   
     
     
     [inviteButton setBackgroundImage:[UIImage imageNamed:@"post"] forState:UIControlStateNormal];
@@ -156,25 +151,15 @@
     return NO;
 }
 
-
--(IBAction)invite{
+//Go to screen where user enters his address
+- (void) goToSendPV {
     
-    NSMutableArray *identifiers = [[NSMutableArray alloc] init];
-    identifiers = selectedIdentifiers;
-    NSLog(@"%@",identifiers);
+    SendingPrintViewController *sendingControoler = [[SendingPrintViewController alloc]initWithNibName:@"SendingPrintViewController" bundle:nil];
+    sendingControoler.flyer = self.flyer;
+    sendingControoler.contactsArray = self.selectedIdentifiers;
+    [self.navigationController pushViewController:sendingControoler animated:YES];
     
-    NSLog(@"%lu",(unsigned long)contactsArray.count);
-    if([identifiers count] > 0) {
-    
-        [self openBuyPanel:selectedIdentifiers.count];
-
-    } else {
-        [self showAlert:@"Please select any contact to invite !" message:@""];
-    }
-    
-    [Flurry logEvent:@"Friends Invited"];
 }
-
 
 
 #pragma mark  Device Contact List
@@ -720,7 +705,7 @@
     // Dismiss the PayPalPaymentViewController.
     [self dismissViewControllerAnimated:YES completion:^{
         NSLog(@"Successfully logged in.");
-        [self sendPdfFlyer];
+        [self goToSendPV];
     }];
     
 }
@@ -730,14 +715,6 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void) sendPdfFlyer {
-    
-    SendingPrintViewController *sendingControoler = [[SendingPrintViewController alloc]initWithNibName:@"SendingPrintViewController" bundle:nil];
-    sendingControoler.flyer = self.flyer;
-    sendingControoler.contactsArray = self.selectedIdentifiers;
-	[self.navigationController pushViewController:sendingControoler animated:YES];
-
-}
 
 #pragma mark - Message UI Delegate
 
