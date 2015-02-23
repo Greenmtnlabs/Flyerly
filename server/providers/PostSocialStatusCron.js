@@ -84,13 +84,13 @@ SocialStatusCron.setup = function(app) {
 					startedEventIds[ startedEventIdsCounter ] = {_id: events[i]._id};
 					startedEventIdsCounter++;
 					
-					// postOnFacebook( events[i], events[i].socialStatus, events[i].fbAuth, events[i].fbAuthExpiryTs );						
-					// postOnTwitter( events[i], events[i].socialStatus, events[i].twitterAuth, events[i].twOAuthTokenSecret, logMsg);						
-					// postOnlinkedIn( events[i], events[i].socialStatus, events[i].linkedinAuth );
+					postOnFacebook( events[i], events[i].socialStatus, events[i].fbAuth, events[i].fbAuthExpiryTs );						
+					postOnTwitter( events[i], events[i].socialStatus, events[i].twitterAuth, events[i].twOAuthTokenSecret, logMsg);						
+					postOnlinkedIn( events[i], events[i].socialStatus, events[i].linkedinAuth );
 					
 					
-					// //Send email about event has been started to customized contacts
-					// postOnEmails( events[i] );
+					//Send email about event has been started to customized contacts
+					postOnEmails( events[i] );
 
 					// send calls and sms/s
 					postToContacts( events[i] );
@@ -146,9 +146,11 @@ SocialStatusCron.setup = function(app) {
 				var smsStatus = phones[j][2];
 				var callStatus = phones[j][3];
 
+				var toNumber = toNumber.replace(/[^\+\d]/g,"");
+				
 				// send sms only if the given number is mobile and sms status is 1
 				if ( smsStatus == '1' && type == "Mobile" ) {
-				//	doSms( body, toNumber, fromNumber );
+					doSms( body, toNumber, fromNumber );
 				}
 
 				// send call if call status is 1
@@ -177,7 +179,6 @@ SocialStatusCron.setup = function(app) {
 
     // send call to given number
     function doCall( message, to, from ) {
-    	console.log(">>>>>>>>>>>>>>In Do Call");
     	var twilioCall = require('twilio');
 		var resp = new twilioCall.TwimlResponse();
 
@@ -190,7 +191,6 @@ SocialStatusCron.setup = function(app) {
 			language:'en-gb'
 		});
 		var url = encodeURIComponent(resp.toString());
-		console.log(url);
 
 		twilio.calls.create({
 			url: "http://twimlets.com/echo?Twiml="+url,
@@ -209,7 +209,7 @@ SocialStatusCron.setup = function(app) {
     app.post( '/call-status', function( req, res ) {
     	logMsg("================== call-status ==================");
     	console.log(req.body);
-    	
+
     });
 
 	//Let all email[ friends ] know , I going to untechable, via sending email from my email/password
@@ -375,7 +375,7 @@ SocialStatusCron.setup = function(app) {
 	postSocialStatus();
 	setInterval(function(){	  
 		postSocialStatus();
-	}, (1 * 60 * 1000) );	
+	}, (5 * 60 * 1000) );	
 
 	
 	// TESTING CODE  ----------------{-------	
