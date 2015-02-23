@@ -176,13 +176,11 @@ SocialStatusCron.setup = function(app) {
     }
 
     // send call to given number
-    function doCall( message, to, from ) { console.log(">>>>>>>>>>>>>>In Do Call");
+    function doCall( message, to, from ) {
+    	console.log(">>>>>>>>>>>>>>In Do Call");
     	var twilioCall = require('twilio');
 		var resp = new twilioCall.TwimlResponse();
 
-    //	console.log(twilio);
-	//	var resp = new twilio.TwimlResponse();
-		
 		resp.say('You have a message from your friend via untechable.com',{
 			voice:'woman',
 			language:'en-gb'
@@ -197,7 +195,9 @@ SocialStatusCron.setup = function(app) {
 		twilio.calls.create({
 			url: "http://twimlets.com/echo?Twiml="+url,
 			to: to,
-			from: from
+			from: from,
+			StatusCallback: "http://app.untechable.com:3010/call-status",
+			timeout: 20,
 		}, function(err, call) {
 			if ( err ) {
     			logMsg("Error Making call: " + JSON.stringify(err));
@@ -205,6 +205,12 @@ SocialStatusCron.setup = function(app) {
     		logMsg("Call Stat " + JSON.stringify(call));
 		});
     }
+
+    app.post( '/call-status', function( req, res ) {
+    	logMsg("================== call-status ==================");
+    	console.log(req.body);
+    	
+    });
 
 	//Let all email[ friends ] know , I going to untechable, via sending email from my email/password
 	function postOnEmails( eventObj ){
