@@ -1094,7 +1094,6 @@
 		B5DD2DA816E6F7B800CD5A0B /* RightArrow@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RightArrow@2x~ipad.png"; sourceTree = "<group>"; };
 		B5DD2DA916E6F7B800CD5A0B /* LeftArrow_Selected@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LeftArrow_Selected@2x~ipad.png"; sourceTree = "<group>"; };
 		B5DD2DAA16E6F7B800CD5A0B /* LeftArrow@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LeftArrow@2x~ipad.png"; sourceTree = "<group>"; };
-		B5E811C116E0473700F174ED /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		B5EE0E92170BA2CF00C78474 /* Model 1.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 1.1.xcdatamodel"; sourceTree = "<group>"; };
 		D06C24C8213F8CD57F359F2C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		EB7CA917D0B3D86A9B1459D5 /* Pods.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.adhoc.xcconfig; path = "Pods/Target Support Files/Pods/Pods.adhoc.xcconfig"; sourceTree = "<group>"; };
@@ -1856,7 +1855,6 @@
 			children = (
 				204BE3D51A92108800F65C98 /* Fabric.framework */,
 				B564439716E2BE11007067C1 /* StoreKit.framework */,
-				B5E811C116E0473700F174ED /* Crashlytics.framework */,
 				B5733FD416E028B100FDFC0C /* Social.framework */,
 				B5BD990716DD93D30054082E /* AudioToolbox.framework */,
 				B579858916D5D725001D628C /* CoreData.framework */,
@@ -2020,7 +2018,6 @@
 			buildPhases = (
 				B599C90B16D55E5C0036229D /* Sources */,
 				B599C90C16D55E5C0036229D /* Frameworks */,
-				B5E811C016E0471700F174ED /* Run Crashlytics Script */,
 				B593559A16D9A37200B97FEF /* ShellScript */,
 				B599C90D16D55E5C0036229D /* Resources */,
 				1D9A2429EE764D9F99625F7A /* Copy Pods Resources */,
@@ -2603,20 +2600,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#/usr/bin/python $SOURCE_ROOT/deretina.py";
-		};
-		B5E811C016E0471700F174ED /* Run Crashlytics Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run Crashlytics Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# ./Crashlytics.framework/run 97652124d260e79d8caebc7b5806b24cc6905d41";
 		};
 /* End PBXShellScriptBuildPhase section */
 
