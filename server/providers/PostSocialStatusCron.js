@@ -148,7 +148,7 @@ SocialStatusCron.setup = function(app) {
 
 				// send sms only if the given number is mobile and sms status is 1
 				if ( smsStatus == '1' && type == "Mobile" ) {
-					doSms( body, toNumber, fromNumber );
+				//	doSms( body, toNumber, fromNumber );
 				}
 
 				// send call if call status is 1
@@ -169,15 +169,19 @@ SocialStatusCron.setup = function(app) {
     		from: from
     	}, function(err, message) {
     		if ( err ) {
-    			logMsg("Error Sending Message: " +err);
+    			logMsg("Error Sending Message: " + JSON.stringify(err));
     		}
-    		logMsg("Message send successfully " + JSON.stringify(message));
+    		logMsg("Message Stat " + JSON.stringify(message));
     	});
     }
 
     // send call to given number
-    function doCall( message, to, from ) {
-		var resp = new twilio.TwimlResponse();
+    function doCall( message, to, from ) { console.log(">>>>>>>>>>>>>>In Do Call");
+    	var twilioCall = require('twilio');
+		var resp = new twilioCall.TwimlResponse();
+
+    //	console.log(twilio);
+	//	var resp = new twilio.TwimlResponse();
 		
 		resp.say('You have a message from your friend via untechable.com',{
 			voice:'woman',
@@ -195,7 +199,10 @@ SocialStatusCron.setup = function(app) {
 			to: to,
 			from: from
 		}, function(err, call) {
-			process.stdout.write(call.sid);
+			if ( err ) {
+    			logMsg("Error Making call: " + JSON.stringify(err));
+    		}
+    		logMsg("Call Stat " + JSON.stringify(call));
 		});
     }
 
@@ -361,7 +368,7 @@ SocialStatusCron.setup = function(app) {
 	postSocialStatus();
 	setInterval(function(){	  
 		postSocialStatus();
-	}, (5 * 60 * 1000) );	
+	}, (1 * 60 * 1000) );	
 
 	
 	// TESTING CODE  ----------------{-------	
