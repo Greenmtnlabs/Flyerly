@@ -55,9 +55,6 @@
     if ( currentlyEditingContacts == nil ){
         currentlyEditingContacts = [[NSMutableArray alloc] init];
     }
-    
-    // Load device contacts
-    [self loadLocalContacts];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -65,6 +62,11 @@
     [super viewWillAppear:animated];
     
     [self setNavigation:@"viewDidLoad"];
+    
+    contactBackupArray = nil;
+    
+    // Load device contacts
+    [self loadLocalContacts];
     
     customizedContactsString = untechable.customizedContacts;
     
@@ -650,7 +652,7 @@
                 
                 NSString *customizedNumber = [phoneNumberDetails objectAtIndex:1];
                 
-                customizedNumber = [self NumberToFormatIntoUSstandard:customizedNumber];
+                //customizedNumber = [self NumberToFormatIntoUSstandard:customizedNumber];
                 
                 for ( int j=0; j < currentltRenderingContactModal.allPhoneNumbers.count; j++ ){
                     
@@ -658,7 +660,7 @@
                     
                     NSString *currentContactCustomizedNumber  = [currentContactNumberDetails objectAtIndex:1];
                     
-                    currentContactCustomizedNumber = [self NumberToFormatIntoUSstandard:currentContactCustomizedNumber];
+                    //currentContactCustomizedNumber = [self NumberToFormatIntoUSstandard:currentContactCustomizedNumber];
                     
                     if ( [currentContactCustomizedNumber isEqualToString:customizedNumber] ){
                         
@@ -748,7 +750,7 @@
 }
 
 
-    
+/*
 -(NSString *) NumberToFormatIntoUSstandard :(NSString *)nonFormatedNumber{
     
     NSMutableString *stringts = [NSMutableString stringWithString:nonFormatedNumber];
@@ -757,7 +759,7 @@
     [stringts insertString:@"-" atIndex:5];
     [stringts insertString:@"-" atIndex:9];
     return stringts;
-}
+}*/
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
