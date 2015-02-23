@@ -18,7 +18,10 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 #define TIME 10
 
-@implementation FlyrAppDelegate
+@implementation FlyrAppDelegate {
+    UIApplication *app;
+    UIBackgroundTaskIdentifier bgTask;
+}
 
 @synthesize window;
 @synthesize navigationController;
@@ -27,24 +30,81 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 
 #pragma mark Application lifecycle
-/* 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Start the long-running task and return immediately.
+    if (bgTask != UIBackgroundTaskInvalid) {
+        // if we are in here, that means the background task is already running.
+        // don't restart it.
+        return;
+    }
+    NSLog(@"Attempting to extend background running time");
+    
+    __block Boolean self_terminate = YES;
+    
+    bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithName:@"MyTask" expirationHandler:^{
+        NSLog(@"Background task expired by iOS");
+        // Clean up any unfinished task business by marking where you
+        // stopped or ending the task outright.
+        if (self_terminate) {
+            [[UIApplication sharedApplication] endBackgroundTask:bgTask];
+            bgTask = UIBackgroundTaskInvalid;
+         
+            NSLog(@"background Task expired");
+        }
+    }];
+    
+     // Start the long-running task and return immediately.
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+         // Do the work associated with the task, preferably in chunks.
+        NSLog(@"Background task started");
+        
         [self goingToBg];
+        
+        [application endBackgroundTask:bgTask];
+        bgTask = UIBackgroundTaskInvalid;
+        
+        /*
+        while (true) {
+            NSLog(@"background time remaining: %8.2f", [UIApplication sharedApplication].backgroundTimeRemaining);
+            [NSThread sleepForTimeInterval:1];
+        }
+        */
     });
+    
+    NSLog(@"backgroundTimeRemaining: %f", [[UIApplication sharedApplication] backgroundTimeRemaining]);
 }
- */
+
+
+
+
+/*
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         [self goingToBg];
     });
 }
+*/
+- (UIImage *)imageWithColor:(UIColor *)color
+{
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
 
 -(void)goingToBg
 {
+    
+    
     if ([[self.navigationController topViewController] isKindOfClass:[CreateFlyerController class]]) {
         
         //Here we Save Data for Future Error Handling
@@ -67,12 +127,18 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         
         //Here we Merge Video for Sharing
         if ([createView.flyer isVideoFlyer]) {
-            
+           
             //Here Compare Current Flyer with history Flyer
             if ([createView.flyer isVideoMergeProcessRequired]) {
                     //Here we Merge All Layers in Video File
                     [createView videoMergeProcess];
+                    NSLog(@"videoFlyer-Merge done ");
             }
+            else{
+                NSLog(@"videoFlyer-mergeNotRequired ");
+            }
+            
+            
             
         }else {
                 //Here we remove Borders from layer if user touch any layer
