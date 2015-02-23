@@ -102,22 +102,6 @@
     
 }
 
-//Lob ApiKey
-- (NSString*)lobAppId {
-
-#ifdef DEBUG
-
-	//return @"test_b5d690f19a73468edc528b5a4c63f9875c8"; //preston a/c test details
-    //Key extracted from [https://dashboard.lob.com/account] using [ ozair.nazir@riksof.com] a/c test details
-    return @"test_13fb536c2d9e23b0e25657d9f923261b03b";
-
-#else
-    
-    return @"live_889eeb7a75372e642ceaece3aa9d2ac0dfc"; //greenmtnlabs@gmail.com a/c live details
-
-#endif
-
-}
 
 - (NSString*)bigstockAccountId {
 
@@ -152,7 +136,7 @@
     
 #ifdef DEBUG
     
-    return PayPalEnvironmentSandbox;
+    return PayPalEnvironmentSandbox;//testing send box
     
 #else
     /*
@@ -160,13 +144,29 @@
     //only for rehan's testing MUST enable after RELEASING on app store, other wise preston a/c will be sucked...
     return PayPalEnvironmentSandbox;
     */
-    
-    return PayPalEnvironmentProduction;
-
+    return PayPalEnvironmentProduction; //live paypal a/c
     
 #endif
     
 }
+
+
+//Lob ApiKey
+- (NSString*)lobAppId {
+    
+#ifdef DEBUG
+    
+    //return @"test_b5d690f19a73468edc528b5a4c63f9875c8"; //preston a/c test details
+    //Key extracted from [https://dashboard.lob.com/account] using [ ozair.nazir@riksof.com] a/c test details
+    return @"test_13fb536c2d9e23b0e25657d9f923261b03b";//test a/c
+    
+#else
+    return @"live_889eeb7a75372e642ceaece3aa9d2ac0dfc"; //greenmtnlabs@gmail.com a/c live details
+    
+#endif
+    
+}
+
 
 - (NSString*)paypalEnvironmentId {
     

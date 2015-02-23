@@ -21,12 +21,12 @@
 #import "LobAddressModel.h"
 #import "LobRequest.h"
 #import "LobObjectModel.h"
-#import "PayPalPaymentViewController.h"
+
 
 
 @interface InviteForPrint ()
 
-@property (nonatomic, strong, readwrite) PayPalConfiguration *payPalConfiguration;
+
 
 @end
 
@@ -80,16 +80,11 @@
     
     // INVITE BAR BUTTON
     UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-	
-    //if YES then Skip paypal payment for testing
-    if( NO )
-    [inviteButton addTarget:self action:@selector(sendPdfFlyer) forControlEvents:UIControlEventTouchUpInside];
-    else
-    [inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
+    [inviteButton addTarget:self action:@selector(goToSendPV) forControlEvents:UIControlEventTouchUpInside];
+   
     
     
-    
-    [inviteButton setBackgroundImage:[UIImage imageNamed:@"post"] forState:UIControlStateNormal];
+    [inviteButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
     inviteButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
@@ -156,25 +151,29 @@
     return NO;
 }
 
-
--(IBAction)invite{
+//Go to screen where user enters his address
+- (void) goToSendPV {
     
     NSMutableArray *identifiers = [[NSMutableArray alloc] init];
     identifiers = selectedIdentifiers;
+    
     NSLog(@"%@",identifiers);
-    
     NSLog(@"%lu",(unsigned long)contactsArray.count);
-    if([identifiers count] > 0) {
     
-        [self openBuyPanel:selectedIdentifiers.count];
-
+    if([identifiers count] > 0) {
+        
+        [Flurry logEvent:@"Friends Invited"];
+        
+        SendingPrintViewController *sendingControoler = [[SendingPrintViewController alloc]initWithNibName:@"SendingPrintViewController" bundle:nil];
+        sendingControoler.flyer = self.flyer;
+        sendingControoler.contactsArray = self.selectedIdentifiers;
+        [self.navigationController pushViewController:sendingControoler animated:YES];
+        
     } else {
         [self showAlert:@"Please select any contact to invite !" message:@""];
     }
     
-    [Flurry logEvent:@"Friends Invited"];
 }
-
 
 
 #pragma mark  Device Contact List
@@ -678,66 +677,6 @@
     [Flurry logEvent:@"Friends Invited"];
 }
 
-
-/*
- * Here we Open Buy Panel
- */
--(void)openBuyPanel : (int) totalContactsToSendPrint {
-    // Create a PayPalPayment
-    PayPalPayment *payment = [[PayPalPayment alloc] init];
-    
-    // Amount, currency, and description
-    NSDecimalNumber *totalAmount = [[NSDecimalNumber alloc] initWithInt:(2 * totalContactsToSendPrint)];
-    payment.amount = totalAmount;
-    payment.currencyCode = @"USD";
-    payment.shortDescription = @"Printing Flyer PostCard";
-    
-    // Use the intent property to indicate that this is a "sale" payment,
-    // meaning combined Authorization + Capture. To perform Authorization only,
-    // and defer Capture to your server, use PayPalPaymentIntentAuthorize.
-    payment.intent = PayPalPaymentIntentSale;
-    
-    // Check whether payment is processable.
-    if ( payment.processable ) {
-        // If, for example, the amount was negative or the shortDescription was empty, then
-        // this payment would not be processable. You would want to handle that here.
-        PayPalPaymentViewController *paymentViewController;
-        paymentViewController = [[PayPalPaymentViewController alloc] initWithPayment:payment
-                                                                       configuration:self.payPalConfiguration
-                                                                            delegate:self];
-        
-        // Present the PayPalPaymentViewController.
-        [self presentViewController:paymentViewController animated:YES completion:nil];
-    }
-}
-
-#pragma mark - Paypal delegate
-
-- (void)payPalPaymentViewController:(PayPalPaymentViewController *)paymentViewController
-                 didCompletePayment:(PayPalPayment *)completedPayment {
-    
-
-    // Dismiss the PayPalPaymentViewController.
-    [self dismissViewControllerAnimated:YES completion:^{
-        NSLog(@"Successfully logged in.");
-        [self sendPdfFlyer];
-    }];
-    
-}
-
-- (void)payPalPaymentDidCancel:(PayPalPaymentViewController *)paymentViewController {
-    // The payment was canceled; dismiss the PayPalPaymentViewController.
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void) sendPdfFlyer {
-    
-    SendingPrintViewController *sendingControoler = [[SendingPrintViewController alloc]initWithNibName:@"SendingPrintViewController" bundle:nil];
-    sendingControoler.flyer = self.flyer;
-    sendingControoler.contactsArray = self.selectedIdentifiers;
-	[self.navigationController pushViewController:sendingControoler animated:YES];
-
-}
 
 #pragma mark - Message UI Delegate
 
