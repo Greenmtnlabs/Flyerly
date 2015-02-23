@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ESCollectionViewController.h"
-#import "GADInterstitialDelegate.h"
-#import "GADInterstitial.h"
+#import <GoogleMobileAds/GADInterstitialDelegate.h>
 
 @class ESBoard;
 

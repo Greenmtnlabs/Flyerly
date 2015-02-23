@@ -15,9 +15,8 @@
 #import "ESSoundManager.h"
 #import "UICollectionViewController+ESBackgroundView.h"
 #import "ESPagination.h"
-#import "GADInterstitial.h"
-#import "GADInterstitialDelegate.h"
-
+#import <GoogleMobileAds/GADInterstitial.h>
+#import <GoogleMobileAds/GADInterstitialDelegate.h>
 
 static const NSInteger ESTileCellTagForTileImageView = 3;
 static const NSInteger ESTileCellTagForCheckmarkImageView = 2;
@@ -36,15 +35,6 @@ static const NSTimeInterval gotoTrophyScreenTimerDuration = 6.0;
 
 - (GADRequest *)request {
     GADRequest *request = [GADRequest request];
-    
-    // Make the request for a test ad. Put in an identifier for the simulator as well as any devices
-    // you want to receive test ads.
-    request.testDevices = @[
-                            // TODO: Add your device/simulator test identifiers here. Your device identifier is printed to
-                            // the console when the app is launched.
-                            //NSString *udid = [UIDevice currentDevice].uniqueIdentifier;
-                            GAD_SIMULATOR_ID
-                            ];
     return request;
 }
 
@@ -77,6 +67,9 @@ static const NSTimeInterval gotoTrophyScreenTimerDuration = 6.0;
     self.interstitialAdd.adUnitID = [self interstitialAdID];
     self.interstitialAdd.delegate = self;
     [self.interstitialAdd loadRequest:[self request]];
+    
+    // Call the method to check if the game is over
+    [self isGameOver:self.isGameOver];
 }
 
 - (void)viewDidLoad
@@ -178,7 +171,18 @@ static const NSTimeInterval gotoTrophyScreenTimerDuration = 6.0;
 
     isGameOver = (isGameOver || DBG_ONE_SWIPE_WIN);
     self.isGameOver = isGameOver;
-    if (isGameOver) {
+    
+    if( isGameOver ) {
+        // Add screen
+        if ( [self.interstitialAdd isReady]  && ![self.interstitialAdd hasBeenUsed] ) {
+            [self.interstitialAdd presentFromRootViewController:self];
+        }
+    }
+    
+}
+
+- (void)isGameOver:(BOOL)gameOver{
+    
         [[ESSoundManager sharedInstance] playSound:ESSoundBoardComplete];
         self.gotoTrophyScreenTimer = [NSTimer scheduledTimerWithTimeInterval:gotoTrophyScreenTimerDuration
                                                                       target:self
@@ -186,20 +190,15 @@ static const NSTimeInterval gotoTrophyScreenTimerDuration = 6.0;
                                                                     userInfo:nil
                                                                      repeats:NO];
         
-        // Add screen
-        if ( [self.interstitialAdd isReady]  && ![self.interstitialAdd hasBeenUsed] ) {
-            [self.interstitialAdd presentFromRootViewController:self];
-        }
-        
         [UIView animateWithDuration:0.5
                          animations:^{
                              self.shouldHideFirstSection = YES;
                              [self.collectionView deleteSections:[NSIndexSet indexSetWithIndex:0]];
                              self.goodJobOverlayImageView.alpha = 1.0;
                              self.leftPagingButton.hidden = self.rightPagingButton.hidden = YES;
-
+                             
                          }];
-    }
+    
 }
 
 - (void)goToTrophyScreen:(NSTimer*)theTimer
