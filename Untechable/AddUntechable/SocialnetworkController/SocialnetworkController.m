@@ -120,7 +120,14 @@
         inputSetSocialStatus.text = @"e.g Spending time with family.";
     }
     
-    if ( [untechable.socialStatus isEqualToString:@""] && [inputSetSocialStatus.text isEqualToString:@"e.g Spending time with family."] ){
+    NSString *url = [NSString stringWithFormat:@"%@",untechable.spendingTimeTxt];
+    url = [url stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *socialStatus = [NSString stringWithFormat:@"I am #Untechable & %@ untechable.com/away/%@", untechable.spendingTimeTxt,url];
+    [inputSetSocialStatus setText:socialStatus];
+    int len = (int)inputSetSocialStatus.text.length;
+    char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
+    
+    /*if ( [untechable.socialStatus isEqualToString:@""] && [inputSetSocialStatus.text isEqualToString:@"e.g Spending time with family."] ){
         
         NSString *url = [NSString stringWithFormat:@"%@",untechable.spendingTimeTxt];
         url = [url stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -134,7 +141,7 @@
         [inputSetSocialStatus setText:untechable.socialStatus];
         int len = (int)inputSetSocialStatus.text.length;
         char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
-    }
+    }*/
     
     
     [self.btnFacebook setTitleColor:( [untechable.fbAuth isEqualToString:@""] ? defGray : defGreen ) forState:UIControlStateNormal];
@@ -309,9 +316,9 @@
                 
                 numberWithStatus = [phoneNumbersWithStatus objectAtIndex:j];
                 
-                NSString *phoneNumDecimalsOnly = [[[numberWithStatus objectAtIndex:1] componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
+                //NSString *phoneNumDecimalsOnly = [[[numberWithStatus objectAtIndex:1] componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
                 
-                [numberWithStatus replaceObjectAtIndex:1 withObject:phoneNumDecimalsOnly];
+                //[numberWithStatus replaceObjectAtIndex:1 withObject:phoneNumDecimalsOnly];
                 
                 if ( [[numberWithStatus objectAtIndex:2] isEqualToString:@"0"] &&
                     [[numberWithStatus objectAtIndex:3] isEqualToString:@"0"]  )
