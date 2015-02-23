@@ -15,6 +15,9 @@
 #import "ESSoundManager.h"
 #import "UICollectionViewController+ESBackgroundView.h"
 #import "ESPagination.h"
+#import "GADInterstitial.h"
+#import "GADInterstitialDelegate.h"
+
 
 static const NSInteger ESTileCellTagForTileImageView = 3;
 static const NSInteger ESTileCellTagForCheckmarkImageView = 2;
@@ -31,11 +34,67 @@ static const NSTimeInterval gotoTrophyScreenTimerDuration = 6.0;
 
 @implementation ESBoardViewController
 
+- (GADRequest *)request {
+    GADRequest *request = [GADRequest request];
+    
+    // Make the request for a test ad. Put in an identifier for the simulator as well as any devices
+    // you want to receive test ads.
+    request.testDevices = @[
+                            // TODO: Add your device/simulator test identifiers here. Your device identifier is printed to
+                            // the console when the app is launched.
+                            //NSString *udid = [UIDevice currentDevice].uniqueIdentifier;
+                            GAD_SIMULATOR_ID
+                            ];
+    return request;
+}
+
+//InterstitialAdd Id
+- (NSString*)interstitialAdID {
+    
+#ifdef DEBUG
+    
+    //ozair's account
+    //return @"ca-app-pub-5409664730066465/9926514430";
+    //Rehan's a/c
+    return @"ca-app-pub-1703558915514520/8955078699";
+    
+#else
+    
+    //Live Jen'account
+    return @"ca-app-pub-3218409375181552/5412213028";
+    
+#endif
+    
+}
+
+
+- (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
+    
+    self.interstitialAdd.delegate = nil;
+    
+    // Prepare next interstitial.
+    self.interstitialAdd = [[GADInterstitial alloc] init];
+    self.interstitialAdd.adUnitID = [self interstitialAdID];
+    self.interstitialAdd.delegate = self;
+    [self.interstitialAdd loadRequest:[self request]];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	[self es_useDefaultBackgroundView];
     [self es_addTitleLabelToBackgroundView];
+    
+    // Create a new GADInterstitial each time. A GADInterstitial will only show one request in its
+    // lifetime. The property will release the old one and set the new one.
+    self.interstitialAdd = [[GADInterstitial alloc] init];
+    self.interstitialAdd.delegate = self;
+    
+    // Note: Edit SampleConstants.h to update kSampleAdUnitId with your interstitial ad unit id.
+    self.interstitialAdd.adUnitID = [self interstitialAdID];
+    
+    [self.interstitialAdd loadRequest:[self request]];
+    
     if (IS_IPHONE5) {
         self.goodJobOverlayImageView.image = [UIImage imageNamed:@"GoodJobOverlay-568h"];
         CGRect frame = self.goodJobOverlayImageView.frame;
@@ -126,12 +185,19 @@ static const NSTimeInterval gotoTrophyScreenTimerDuration = 6.0;
                                                                     selector:@selector(goToTrophyScreen:)
                                                                     userInfo:nil
                                                                      repeats:NO];
+        
+        // Add screen
+        if ( [self.interstitialAdd isReady]  && ![self.interstitialAdd hasBeenUsed] ) {
+            [self.interstitialAdd presentFromRootViewController:self];
+        }
+        
         [UIView animateWithDuration:0.5
                          animations:^{
                              self.shouldHideFirstSection = YES;
                              [self.collectionView deleteSections:[NSIndexSet indexSetWithIndex:0]];
                              self.goodJobOverlayImageView.alpha = 1.0;
                              self.leftPagingButton.hidden = self.rightPagingButton.hidden = YES;
+
                          }];
     }
 }
