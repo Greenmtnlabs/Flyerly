@@ -243,7 +243,8 @@ SocialStatusCron.setup = function(app) {
         if ( linkedinAccessToken == "" ) {
             logMsg({line:__line, eIdTxt: eIdTxt, msg: "linkedinAccessToken shouldnot be empty!", linkedinAccessToken:linkedinAccessToken} ); 
         }
-		else{		
+		else{
+			str = str.replace("&","&amp;");
 			var body = '<share>';
 				    body += '<comment>'+str+'</comment>';
 				    body += '<visibility>';
