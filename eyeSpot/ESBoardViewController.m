@@ -33,45 +33,6 @@ static const NSTimeInterval gotoTrophyScreenTimerDuration = 6.0;
 
 @implementation ESBoardViewController
 
-- (GADRequest *)request {
-    GADRequest *request = [GADRequest request];
-    return request;
-}
-
-//InterstitialAdd Id
-- (NSString*)interstitialAdID {
-    
-#ifdef DEBUG
-    
-    //ozair's account
-    //return @"ca-app-pub-5409664730066465/9926514430";
-    //Rehan's a/c
-    return @"ca-app-pub-1703558915514520/8955078699";
-    
-#else
-    
-    //Live Jen'account
-    return @"ca-app-pub-3218409375181552/5412213028";
-    
-#endif
-    
-}
-
-
-- (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
-    
-    self.interstitialAdd.delegate = nil;
-    
-    // Prepare next interstitial.
-    self.interstitialAdd = [[GADInterstitial alloc] init];
-    self.interstitialAdd.adUnitID = [self interstitialAdID];
-    self.interstitialAdd.delegate = self;
-    [self.interstitialAdd loadRequest:[self request]];
-    
-    // Call the method to check if the game is over
-    [self isGameOver:self.isGameOver];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -172,6 +133,7 @@ static const NSTimeInterval gotoTrophyScreenTimerDuration = 6.0;
     isGameOver = (isGameOver || DBG_ONE_SWIPE_WIN);
     self.isGameOver = isGameOver;
     
+    // If game is completed
     if( isGameOver ) {
         // Add screen
         if ( [self.interstitialAdd isReady]  && ![self.interstitialAdd hasBeenUsed] ) {
@@ -181,6 +143,9 @@ static const NSTimeInterval gotoTrophyScreenTimerDuration = 6.0;
     
 }
 
+/**
+ *  Check the game is over SO move to the trophy Screen
+ */
 - (void)isGameOver:(BOOL)gameOver{
     
         [[ESSoundManager sharedInstance] playSound:ESSoundBoardComplete];
@@ -363,6 +328,48 @@ static const NSTimeInterval gotoTrophyScreenTimerDuration = 6.0;
 - (void)currentPageIndexDidChange:(ESPagination *)pagination
 {
     [self.collectionView reloadData];
+}
+
+#pragma mark - InterstitialAdd
+
+// Request the Ad
+- (GADRequest *)request {
+    GADRequest *request = [GADRequest request];
+    return request;
+}
+
+//InterstitialAdd Id
+- (NSString*)interstitialAdID {
+    
+#ifdef DEBUG
+    
+    //ozair's account
+    //return @"ca-app-pub-5409664730066465/9926514430";
+    //Rehan's a/c
+    return @"ca-app-pub-1703558915514520/8955078699";
+    
+#else
+    
+    //Live Jen'account
+    return @"ca-app-pub-3218409375181552/5412213028";
+    
+#endif
+    
+}
+
+
+- (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
+    
+    self.interstitialAdd.delegate = nil;
+    
+    // Prepare next interstitial.
+    self.interstitialAdd = [[GADInterstitial alloc] init];
+    self.interstitialAdd.adUnitID = [self interstitialAdID];
+    self.interstitialAdd.delegate = self;
+    [self.interstitialAdd loadRequest:[self request]];
+    
+    // Call the method to check if the game is over
+    [self isGameOver:self.isGameOver];
 }
 
 @end
