@@ -32,11 +32,13 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 #pragma mark Application lifecycle
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    bgTask = [application beginBackgroundTaskWithName:@"MyTask" expirationHandler:^{
+    app = application;
+    bgTask = [app beginBackgroundTaskWithName:@"MyTask" expirationHandler:^{
         // Clean up any unfinished task business by marking where you
         // stopped or ending the task outright.
-        [application endBackgroundTask:bgTask];
-        bgTask = UIBackgroundTaskInvalid;
+        
+        //[application endBackgroundTask:bgTask];
+        //bgTask = UIBackgroundTaskInvalid;
     }];
     
     // Start the long-running task and return immediately.
@@ -45,15 +47,16 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         // Do the work associated with the task, preferably in chunks.
          [self goingToBg];
         
-        [application endBackgroundTask:bgTask];
-        bgTask = UIBackgroundTaskInvalid;
     });
     
     NSLog(@"backgroundTimeRemaining: %f", [[UIApplication sharedApplication] backgroundTimeRemaining]);
 }
 
-
-
+-(void)endAppBgTask
+{
+    [app endBackgroundTask:bgTask];
+    bgTask = UIBackgroundTaskInvalid;
+}
 
 /*
 

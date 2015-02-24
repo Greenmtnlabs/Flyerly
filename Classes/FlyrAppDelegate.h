@@ -50,5 +50,7 @@ extern NSString *FacebookDidLoginNotification;
 -(void)twitterChangeforNewVersion:(NSString *)olduser;
 -(void)copyUsersDataForTesting;
 
+-(void)endAppBgTask;
+
 @end
 
