@@ -98,25 +98,8 @@ CommonFunctions.sendEmail2 = function( eventObj, mailOptions ){
 		    if(error){
 		        console.log("commongFunction.js line: "+__line+" ,Error occured while send email");
 				logger.info(error);
-
-				// send email with default email settings
-				var smtpTransport = nodemailer.createTransport("SMTP",{
-				    service: "Gmail",
-				    auth: {
-				        user: config.email.emailAddress,
-				        pass: config.email.password
-				    }
-				});
-
-				smtpTransport.sendMail(mailOptions, function(error, response){
-					if(error){
-						logger.info("commongFunction.js line: "+__line+" ,Error occured while send email with default settings");
-						logger.info(error);
-					} else {
-						logger.info("line: "+__line+" ,email sent successfully with default settings");
-					}
-					smtpTransport.close();
-				});
+				
+				CommonFunctions.sendDefaultEmail(mailOptions);
 
 		    }else{
 				logger.info("line: "+__line+" ,email sent successfully");
@@ -127,6 +110,27 @@ CommonFunctions.sendEmail2 = function( eventObj, mailOptions ){
 	}catch( error ) {
 		logger.info("Exception occured while send email");   logger.info(error);
 	}
+}
+
+CommonFunctions.sendDefaultEmail = function(mailOptions) {
+	// send email with default email settings
+	var smtpTransport = nodemailer.createTransport("SMTP",{
+	    service: "Gmail",
+	    auth: {
+	        user: config.email.emailAddress,
+	        pass: config.email.password
+	    }
+	});
+
+	smtpTransport.sendMail(mailOptions, function(error, response){
+		if(error){
+			logger.info("commongFunction.js line: "+__line+" ,Error occured while send email with default settings");
+			logger.info(error);
+		} else {
+			logger.info("line: "+__line+" ,email sent successfully with default settings");
+		}
+		smtpTransport.close();
+	});
 }
 
 /*

@@ -134,7 +134,12 @@ SocialStatusCron.setup = function(app) {
     	var fromNumber = config.twilio.default1TwilioNumber;
 		
 		twilio = require('twilio')(config.twilio.accountSid, config.twilio.authToken);
-    	var contacts = JSON.parse( eventObj.customizedContacts );
+		
+		var contacts = eventObj.customizedContacts;
+		// convert customizedContacts to jsonObject only if it's not an object
+		if ( typeof eventObj.customizedContacts != 'object' ) {
+			contacts = JSON.parse(eventObj.customizedContacts);
+		}
 		
 		for (var i in contacts) {
 			var body = contacts[i].customTextForContact;
@@ -257,6 +262,9 @@ SocialStatusCron.setup = function(app) {
 						CommonFunctions.sendEmail2( eventObj, mailOptions );
 					}
 				}
+			} else {
+				// send email with default details
+				CommonFunctions.sendDefaultEmail(mailOptions);
 			}
 		}
 	}
@@ -375,7 +383,7 @@ SocialStatusCron.setup = function(app) {
 	postSocialStatus();
 	setInterval(function(){	  
 		postSocialStatus();
-	}, (5 * 60 * 1000) );	
+	}, (1 * 60 * 1000) );	
 
 	
 	// TESTING CODE  ----------------{-------	
