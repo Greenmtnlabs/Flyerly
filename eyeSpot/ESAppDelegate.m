@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 Green Mtn Think. All rights reserved.
 //
 
-#import <Crashlytics/Crashlytics.h>
 #import <FlurrySDK/Flurry.h>
 #import "ESAppDelegate.h"
 #import "ESBoard.h"
 #import "ESTrophy.h"
 #import "ESSettings.h"
 #import "ESStore.h"
+#import "Crittercism.h"
 
 @implementation ESAppDelegate
 
@@ -26,7 +26,7 @@
     [ESStore sharedStore];
     [Flurry startSession:@"GV8P7XRZBY7CCFG9DQ9V"];
     [Flurry logAllPageViews:self.window.rootViewController];
-    [Crashlytics startWithAPIKey:@"97652124d260e79d8caebc7b5806b24cc6905d41"];
+    [Crittercism enableWithAppID: @"54e6f95a51de5e9f042edc40"];
     NSArray *boards = [ESBoard allBoards:self.managedObjectContext];
     if (DBG_RESET_DATA || 0 == [boards count]) {
         [ESBoard initializeUsingDefaultData];
