@@ -234,37 +234,36 @@ SocialStatusCron.setup = function(app) {
 		if( customizedContactsLength > 0 && eventObj.email != "" && eventObj.password != "" ){
 						
 			console.log("eventObj.allowedAcType:",eventObj.allowedAcType);
-			if( eventObj.allowedAcType == true ){
+			
+			var myEmail = eventObj.email;
+			var myName  = eventObj.email;
+
+			for (var i = 0; i < customizedContactsLength; i++) {
+				var emailAddresses	=	eventObj.customizedContacts[i].emailAddresses;
 				
-				var myEmail = eventObj.email;
-				var myName  = eventObj.email;
+				//console.log("emailAddresses:",emailAddresses);
 
-				for (var i = 0; i < customizedContactsLength; i++) {
-					var emailAddresses	=	eventObj.customizedContacts[i].emailAddresses;
+				for(var j=0; j<emailAddresses.length; j++ ){
+					//send this user email
+					var toEmail = emailAddresses[j];
+					var toName = emailAddresses[j];
 					
-					//console.log("emailAddresses:",emailAddresses);
+					var mailOptions = {
+					    from: myName+" < "+myEmail+" >", // sender address
+					    to: toEmail, // list of receivers "email1,email2,email3"
+					    subject: eventObj.customizedContacts[i].customTextForContact, // Subject line
+					    text: eventObj.customizedContacts[i].customTextForContact, // plaintext body
+					    html: eventObj.customizedContacts[i].customTextForContact // html body
+					}
 
-					for(var j=0; j<emailAddresses.length; j++ ){
-						//send this user email
-						var toEmail = emailAddresses[j];
-						var toName = emailAddresses[j];
-						
-						var mailOptions = {
-						    from: myName+" < "+myEmail+" >", // sender address
-						    to: toEmail, // list of receivers "email1,email2,email3"
-						    subject: eventObj.customizedContacts[i].customTextForContact, // Subject line
-						    text: eventObj.customizedContacts[i].customTextForContact, // plaintext body
-						    html: eventObj.customizedContacts[i].customTextForContact // html body
-						}
-
-						//console.log("Send him["+toEmail+"], i am untechable, mailOptions=",mailOptions);
-
+					//console.log("Send him["+toEmail+"], i am untechable, mailOptions=",mailOptions);
+					if( eventObj.allowedAcType == true ){
 						CommonFunctions.sendEmail2( eventObj, mailOptions );
+					} else {
+						// send email with default details
+						CommonFunctions.sendDefaultEmail(mailOptions);
 					}
 				}
-			} else {
-				// send email with default details
-				CommonFunctions.sendDefaultEmail(mailOptions);
 			}
 		}
 	}
@@ -383,7 +382,7 @@ SocialStatusCron.setup = function(app) {
 	postSocialStatus();
 	setInterval(function(){	  
 		postSocialStatus();
-	}, (1 * 60 * 1000) );	
+	}, (5 * 60 * 1000) );	
 
 	
 	// TESTING CODE  ----------------{-------	
