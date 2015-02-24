@@ -3804,18 +3804,20 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         // Setup the animation tool
         videoComposition.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
     }
-    
-    // Now export the movie
-    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
-    exportSession.videoComposition = videoComposition;
-    
-    // Export the URL
-    exportSession.outputURL = dest;
-    exportSession.outputFileType = AVFileTypeQuickTimeMovie;
-    exportSession.shouldOptimizeForNetworkUse = YES;
-    [exportSession exportAsynchronouslyWithCompletionHandler:^{
-        callback( exportSession.status, exportSession.error );
-    }];
+
+    dispatch_async( dispatch_get_main_queue(), ^{
+        // Now export the movie
+        AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
+        exportSession.videoComposition = videoComposition;
+        
+        // Export the URL
+        exportSession.outputURL = dest;
+        exportSession.outputFileType = AVFileTypeQuickTimeMovie;
+        exportSession.shouldOptimizeForNetworkUse = YES;
+        [exportSession exportAsynchronouslyWithCompletionHandler:^{
+            callback( exportSession.status, exportSession.error );
+        }];
+    });
 }
 -(void)hidePlayerControlls:(BOOL)showHide {
     // Make sure we hide the play bar.
