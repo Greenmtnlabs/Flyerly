@@ -138,6 +138,9 @@ static const NSTimeInterval gotoTrophyScreenTimerDuration = 6.0;
         // Add screen
         if ( [self.interstitialAdd isReady]  && ![self.interstitialAdd hasBeenUsed] ) {
             [self.interstitialAdd presentFromRootViewController:self];
+        } else {
+            
+            [self gameOver];
         }
     }
     
@@ -146,7 +149,7 @@ static const NSTimeInterval gotoTrophyScreenTimerDuration = 6.0;
 /**
  *  Check the game is over SO move to the trophy Screen
  */
-- (void)isGameOver:(BOOL)gameOver{
+- (void)gameOver{
     
         [[ESSoundManager sharedInstance] playSound:ESSoundBoardComplete];
         self.gotoTrophyScreenTimer = [NSTimer scheduledTimerWithTimeInterval:gotoTrophyScreenTimerDuration
@@ -360,6 +363,9 @@ static const NSTimeInterval gotoTrophyScreenTimerDuration = 6.0;
 
 - (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
     
+    // Call the method to check if the game is over
+    [self gameOver];
+    
     self.interstitialAdd.delegate = nil;
     
     // Prepare next interstitial.
@@ -367,9 +373,6 @@ static const NSTimeInterval gotoTrophyScreenTimerDuration = 6.0;
     self.interstitialAdd.adUnitID = [self interstitialAdID];
     self.interstitialAdd.delegate = self;
     [self.interstitialAdd loadRequest:[self request]];
-    
-    // Call the method to check if the game is over
-    [self isGameOver:self.isGameOver];
 }
 
 @end
