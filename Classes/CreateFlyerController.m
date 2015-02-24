@@ -3726,6 +3726,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     // Audio track
     AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
     
+    
     // Image video is always 30 seconds. So we use that unless the background video is smaller.
     CMTime inTime = CMTimeMake( MAX_VIDEO_LENGTH * VIDEOFRAME, VIDEOFRAME );
     if ( CMTimeCompare( firstAsset.duration, inTime ) < 0 ) {
@@ -3804,20 +3805,18 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         // Setup the animation tool
         videoComposition.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
     }
-
-    dispatch_async( dispatch_get_main_queue(), ^{
-        // Now export the movie
-        AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
-        exportSession.videoComposition = videoComposition;
-        
-        // Export the URL
-        exportSession.outputURL = dest;
-        exportSession.outputFileType = AVFileTypeQuickTimeMovie;
-        exportSession.shouldOptimizeForNetworkUse = YES;
-        [exportSession exportAsynchronouslyWithCompletionHandler:^{
-            callback( exportSession.status, exportSession.error );
-        }];
-    });
+    
+    // Now export the movie
+    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
+    exportSession.videoComposition = videoComposition;
+    
+    // Export the URL
+    exportSession.outputURL = dest;
+    exportSession.outputFileType = AVFileTypeQuickTimeMovie;
+    exportSession.shouldOptimizeForNetworkUse = YES;
+    [exportSession exportAsynchronouslyWithCompletionHandler:^{
+        callback( exportSession.status, exportSession.error );
+    }];
 }
 -(void)hidePlayerControlls:(BOOL)showHide {
     // Make sure we hide the play bar.
