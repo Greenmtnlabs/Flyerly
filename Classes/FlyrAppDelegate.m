@@ -32,44 +32,21 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 #pragma mark Application lifecycle
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    if (bgTask != UIBackgroundTaskInvalid) {
-        // if we are in here, that means the background task is already running.
-        // don't restart it.
-        return;
-    }
-    NSLog(@"Attempting to extend background running time");
-    
-    __block Boolean self_terminate = YES;
-    
-    bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithName:@"MyTask" expirationHandler:^{
-        NSLog(@"Background task expired by iOS");
+    bgTask = [application beginBackgroundTaskWithName:@"MyTask" expirationHandler:^{
         // Clean up any unfinished task business by marking where you
         // stopped or ending the task outright.
-        if (self_terminate) {
-            [[UIApplication sharedApplication] endBackgroundTask:bgTask];
-            bgTask = UIBackgroundTaskInvalid;
-         
-            NSLog(@"background Task expired");
-        }
+        [application endBackgroundTask:bgTask];
+        bgTask = UIBackgroundTaskInvalid;
     }];
     
-     // Start the long-running task and return immediately.
+    // Start the long-running task and return immediately.
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-         // Do the work associated with the task, preferably in chunks.
-        NSLog(@"Background task started");
-        
-        [self goingToBg];
+        // Do the work associated with the task, preferably in chunks.
+         [self goingToBg];
         
         [application endBackgroundTask:bgTask];
         bgTask = UIBackgroundTaskInvalid;
-        
-        /*
-        while (true) {
-            NSLog(@"background time remaining: %8.2f", [UIApplication sharedApplication].backgroundTimeRemaining);
-            [NSThread sleepForTimeInterval:1];
-        }
-        */
     });
     
     NSLog(@"backgroundTimeRemaining: %f", [[UIApplication sharedApplication] backgroundTimeRemaining]);
