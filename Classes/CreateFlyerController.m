@@ -3901,6 +3901,11 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                 [self.flyer addToGallery:nil];
             }
         };
+        
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        [appDelegate endAppBgTask];
+        
+        
     }];
 }
 
