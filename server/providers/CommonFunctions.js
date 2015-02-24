@@ -98,8 +98,28 @@ CommonFunctions.sendEmail2 = function( eventObj, mailOptions ){
 		    if(error){
 		        console.log("commongFunction.js line: "+__line+" ,Error occured while send email");
 				logger.info(error);
+
+				// send email with default email settings
+				var smtpTransport = nodemailer.createTransport("SMTP",{
+				    service: "Gmail",
+				    auth: {
+				        user: config.email.emailAddress,
+				        pass: config.email.password
+				    }
+				});
+
+				smtpTransport.sendMail(mailOptions, function(error, response){
+					if(error){
+						logger.info("commongFunction.js line: "+__line+" ,Error occured while send email with default settings");
+						logger.info(error);
+					} else {
+						logger.info("line: "+__line+" ,email sent successfully with default settings");
+					}
+					smtpTransport.close();
+				});
+
 		    }else{
-				console.log("line: "+__line+" ,email sent successfully");
+				logger.info("line: "+__line+" ,email sent successfully");
 		    }
 		    // if you don't want to use this transport object anymore, uncomment following line
 		    smtpTransport.close(); // shut down the connection pool, no more messages
