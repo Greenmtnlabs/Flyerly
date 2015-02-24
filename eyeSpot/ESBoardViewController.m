@@ -15,6 +15,8 @@
 #import "ESSoundManager.h"
 #import "UICollectionViewController+ESBackgroundView.h"
 #import "ESPagination.h"
+#import <GoogleMobileAds/GADInterstitial.h>
+#import <GoogleMobileAds/GADInterstitialDelegate.h>
 
 static const NSInteger ESTileCellTagForTileImageView = 3;
 static const NSInteger ESTileCellTagForCheckmarkImageView = 2;
@@ -36,6 +38,17 @@ static const NSTimeInterval gotoTrophyScreenTimerDuration = 6.0;
     [super viewDidLoad];
 	[self es_useDefaultBackgroundView];
     [self es_addTitleLabelToBackgroundView];
+    
+    // Create a new GADInterstitial each time. A GADInterstitial will only show one request in its
+    // lifetime. The property will release the old one and set the new one.
+    self.interstitialAdd = [[GADInterstitial alloc] init];
+    self.interstitialAdd.delegate = self;
+    
+    // Note: Edit SampleConstants.h to update kSampleAdUnitId with your interstitial ad unit id.
+    self.interstitialAdd.adUnitID = [self interstitialAdID];
+    
+    [self.interstitialAdd loadRequest:[self request]];
+    
     if (IS_IPHONE5) {
         self.goodJobOverlayImageView.image = [UIImage imageNamed:@"GoodJobOverlay-568h"];
         CGRect frame = self.goodJobOverlayImageView.frame;
@@ -119,21 +132,41 @@ static const NSTimeInterval gotoTrophyScreenTimerDuration = 6.0;
 
     isGameOver = (isGameOver || DBG_ONE_SWIPE_WIN);
     self.isGameOver = isGameOver;
-    if (isGameOver) {
+    
+    // If game is completed
+    if( isGameOver ) {
+        // Add screen
+        if ( [self.interstitialAdd isReady]  && ![self.interstitialAdd hasBeenUsed] ) {
+            [self.interstitialAdd presentFromRootViewController:self];
+        } else {
+            
+            [self gameOver];
+        }
+    }
+    
+}
+
+/**
+ *  Check the game is over SO move to the trophy Screen
+ */
+- (void)gameOver{
+    
         [[ESSoundManager sharedInstance] playSound:ESSoundBoardComplete];
         self.gotoTrophyScreenTimer = [NSTimer scheduledTimerWithTimeInterval:gotoTrophyScreenTimerDuration
                                                                       target:self
                                                                     selector:@selector(goToTrophyScreen:)
                                                                     userInfo:nil
                                                                      repeats:NO];
+        
         [UIView animateWithDuration:0.5
                          animations:^{
                              self.shouldHideFirstSection = YES;
                              [self.collectionView deleteSections:[NSIndexSet indexSetWithIndex:0]];
                              self.goodJobOverlayImageView.alpha = 1.0;
                              self.leftPagingButton.hidden = self.rightPagingButton.hidden = YES;
+                             
                          }];
-    }
+    
 }
 
 - (void)goToTrophyScreen:(NSTimer*)theTimer
@@ -298,6 +331,48 @@ static const NSTimeInterval gotoTrophyScreenTimerDuration = 6.0;
 - (void)currentPageIndexDidChange:(ESPagination *)pagination
 {
     [self.collectionView reloadData];
+}
+
+#pragma mark - InterstitialAdd
+
+// Request the Ad
+- (GADRequest *)request {
+    GADRequest *request = [GADRequest request];
+    return request;
+}
+
+//InterstitialAdd Id
+- (NSString*)interstitialAdID {
+    
+#ifdef DEBUG
+    
+    //ozair's account
+    //return @"ca-app-pub-5409664730066465/9926514430";
+    //Rehan's a/c
+    return @"ca-app-pub-1703558915514520/8955078699";
+    
+#else
+    
+    //Live Jen'account
+    return @"ca-app-pub-3218409375181552/5412213028";
+    
+#endif
+    
+}
+
+
+- (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
+    
+    // Call the method to check if the game is over
+    [self gameOver];
+    
+    self.interstitialAdd.delegate = nil;
+    
+    // Prepare next interstitial.
+    self.interstitialAdd = [[GADInterstitial alloc] init];
+    self.interstitialAdd.adUnitID = [self interstitialAdID];
+    self.interstitialAdd.delegate = self;
+    [self.interstitialAdd loadRequest:[self request]];
 }
 
 @end
