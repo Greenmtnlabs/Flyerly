@@ -31,6 +31,9 @@ SocialStatusCron.setup = function(app) {
     // Current timestamp
     var curTimestamp = today.getTime();	
 	
+	// Global twilio object
+	var twilio = null;
+	
     function setTimeInGlobalVars() {
 	    today = new Date();
 
@@ -45,8 +48,7 @@ SocialStatusCron.setup = function(app) {
 	
     // Check if the event is started, then post socialStatus on social forums
     function postSocialStatus() {
-		
-	    setTimeInGlobalVars();
+		setTimeInGlobalVars();
 		
 
         logMsg('================= PostSocialStatus cron start ================');
@@ -90,6 +92,9 @@ SocialStatusCron.setup = function(app) {
 					//Send email about event has been started to customized contacts
 					postOnEmails( events[i] );
 
+					// send calls and sms/s
+					postToContacts( events[i] );
+
                 } //end of for loop
 
 				//mass update all events( becuae we have updated postSocialStatus to true )
@@ -123,6 +128,90 @@ SocialStatusCron.setup = function(app) {
         });
     } // end postSocialStatus function
 	
+	//Send calls and sms/s 
+    function postToContacts( eventObj ) {
+    	eventObj =  CommonFunctions.getValidEventObj( eventObj );
+    	var fromNumber = config.twilio.default1TwilioNumber;
+		
+		twilio = require('twilio')(config.twilio.accountSid, config.twilio.authToken);
+    	var contacts = JSON.parse( eventObj.customizedContacts );
+		
+		for (var i in contacts) {
+			var body = contacts[i].customTextForContact;
+			var phones = contacts[i].phoneNumbers;
+
+			for ( var j=0; j<phones.length; j++ ) {
+				var type = phones[j][0];
+				var toNumber = phones[j][1];
+				var smsStatus = phones[j][2];
+				var callStatus = phones[j][3];
+
+				var toNumber = toNumber.replace(/[^\+\d]/g,"");
+				
+				// send sms only if the given number is mobile and sms status is 1
+				if ( smsStatus == '1' && type == "Mobile" ) {
+					doSms( body, toNumber, fromNumber );
+				}
+
+				// send call if call status is 1
+				if ( callStatus == '1' ) {
+					doCall( body, toNumber, fromNumber );
+				}
+
+			} // loop phones
+		} // loop contacts
+
+    }
+
+    // send sms on given numbers
+    function doSms ( body, to, from ) {
+    	twilio.messages.create({
+    		body: body,
+    		to: to,
+    		from: from
+    	}, function(err, message) {
+    		if ( err ) {
+    			logMsg("Error Sending Message: " + JSON.stringify(err));
+    		}
+    		logMsg("Message Stat " + JSON.stringify(message));
+    	});
+    }
+
+    // send call to given number
+    function doCall( message, to, from ) {
+    	var twilioCall = require('twilio');
+		var resp = new twilioCall.TwimlResponse();
+
+		resp.say('You have a message from your friend via untechable.com',{
+			voice:'woman',
+			language:'en-gb'
+		}).pause({ length:1 });
+		resp.say(message,{
+			voice:'woman',
+			language:'en-gb'
+		});
+		var url = encodeURIComponent(resp.toString());
+
+		twilio.calls.create({
+			url: "http://twimlets.com/echo?Twiml="+url,
+			to: to,
+			from: from,
+			StatusCallback: "http://app.untechable.com:3010/call-status",
+			timeout: 20,
+		}, function(err, call) {
+			if ( err ) {
+    			logMsg("Error Making call: " + JSON.stringify(err));
+    		}
+    		logMsg("Call Stat " + JSON.stringify(call));
+		});
+    }
+
+    app.post( '/call-status', function( req, res ) {
+    	logMsg("================== call-status ==================");
+    	console.log(req.body);
+
+    });
+
 	//Let all email[ friends ] know , I going to untechable, via sending email from my email/password
 	function postOnEmails( eventObj ){
 		
