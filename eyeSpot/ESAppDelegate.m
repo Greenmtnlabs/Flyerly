@@ -13,6 +13,7 @@
 #import "ESSettings.h"
 #import "ESStore.h"
 #import "Crittercism.h"
+#import <GoogleMobileAds/GoogleMobileAds.h>
 
 @implementation ESAppDelegate
 

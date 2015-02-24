@@ -7,8 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		16FF8380005D489184D50AFB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DDE203A6ED742A4B97C59D6 /* libPods.a */; };
 		204BE3D61A92108800F65C98 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 204BE3D51A92108800F65C98 /* Fabric.framework */; };
+		2055C9D31A9B60EF00778F1F /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2055C9D21A9B60EF00778F1F /* GoogleMobileAds.framework */; };
+		2055C9D51A9B60FE00778F1F /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2055C9D41A9B60FE00778F1F /* AdSupport.framework */; };
+		2055C9D71A9B610E00778F1F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2055C9D61A9B610E00778F1F /* AVFoundation.framework */; };
+		2055C9D91A9B612400778F1F /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2055C9D81A9B612400778F1F /* CoreTelephony.framework */; };
+		2055C9DC1A9B613000778F1F /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2055C9DA1A9B613000778F1F /* EventKit.framework */; };
+		2055C9DD1A9B613000778F1F /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2055C9DB1A9B613000778F1F /* EventKitUI.framework */; };
+		2055C9DF1A9B613900778F1F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2055C9DE1A9B613900778F1F /* MessageUI.framework */; };
+		2055C9E11A9B615100778F1F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2055C9E01A9B615100778F1F /* SystemConfiguration.framework */; };
 		3F1F0DD21756F63E0076BC85 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F1F0DCF1756F63E0076BC85 /* Default.png */; };
 		3F1F0DD31756F63E0076BC85 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F1F0DD01756F63E0076BC85 /* Default-568h@2x.png */; };
 		3F1F0DD41756F63E0076BC85 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F1F0DD11756F63E0076BC85 /* Default@2x.png */; };
@@ -131,6 +138,7 @@
 		3F96D46317496E050059562E /* Trophy_Incomplete-Soccer@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F96D45417496E050059562E /* Trophy_Incomplete-Soccer@2x~iphone.png */; };
 		3F96D46417496E050059562E /* Trophy_Incomplete-Zoo@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F96D45517496E050059562E /* Trophy_Incomplete-Zoo@2x~iphone.png */; };
 		3FDAB5E0175190BF00A04CB4 /* BackgroundImage-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FDAB5DF175190BF00A04CB4 /* BackgroundImage-568h@2x~iphone.png */; };
+		9A047F4808949852C1A6A222 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA3158C07944BFE2127E1375 /* libPods.a */; };
 		B526702916DD7B760074FE2E /* board_has_trophy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B526702716DD7B760074FE2E /* board_has_trophy@2x.png */; };
 		B526702A16DD7B760074FE2E /* board_has_trophy.png in Resources */ = {isa = PBXBuildFile; fileRef = B526702816DD7B760074FE2E /* board_has_trophy.png */; };
 		B526702D16DD8DC40074FE2E /* ESSoundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B526702C16DD8DC40074FE2E /* ESSoundManager.m */; };
@@ -538,6 +546,14 @@
 
 /* Begin PBXFileReference section */
 		204BE3D51A92108800F65C98 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		2055C9D21A9B60EF00778F1F /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
+		2055C9D41A9B60FE00778F1F /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		2055C9D61A9B610E00778F1F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		2055C9D81A9B612400778F1F /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		2055C9DA1A9B613000778F1F /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		2055C9DB1A9B613000778F1F /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		2055C9DE1A9B613900778F1F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		2055C9E01A9B615100778F1F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3F1F0DCF1756F63E0076BC85 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		3F1F0DD01756F63E0076BC85 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3F1F0DD11756F63E0076BC85 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -660,7 +676,6 @@
 		3F96D45417496E050059562E /* Trophy_Incomplete-Soccer@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Trophy_Incomplete-Soccer@2x~iphone.png"; sourceTree = "<group>"; };
 		3F96D45517496E050059562E /* Trophy_Incomplete-Zoo@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Trophy_Incomplete-Zoo@2x~iphone.png"; sourceTree = "<group>"; };
 		3FDAB5DF175190BF00A04CB4 /* BackgroundImage-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BackgroundImage-568h@2x~iphone.png"; sourceTree = "<group>"; };
-		9DDE203A6ED742A4B97C59D6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B526702716DD7B760074FE2E /* board_has_trophy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "board_has_trophy@2x.png"; sourceTree = "<group>"; };
 		B526702816DD7B760074FE2E /* board_has_trophy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = board_has_trophy.png; sourceTree = "<group>"; };
 		B526702B16DD8DC30074FE2E /* ESSoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESSoundManager.h; sourceTree = "<group>"; };
@@ -1095,6 +1110,7 @@
 		B5DD2DA916E6F7B800CD5A0B /* LeftArrow_Selected@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LeftArrow_Selected@2x~ipad.png"; sourceTree = "<group>"; };
 		B5DD2DAA16E6F7B800CD5A0B /* LeftArrow@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LeftArrow@2x~ipad.png"; sourceTree = "<group>"; };
 		B5EE0E92170BA2CF00C78474 /* Model 1.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 1.1.xcdatamodel"; sourceTree = "<group>"; };
+		CA3158C07944BFE2127E1375 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D06C24C8213F8CD57F359F2C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		EB7CA917D0B3D86A9B1459D5 /* Pods.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.adhoc.xcconfig; path = "Pods/Target Support Files/Pods/Pods.adhoc.xcconfig"; sourceTree = "<group>"; };
 		FEEFF80B8641C4513A722249 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1105,15 +1121,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2055C9E11A9B615100778F1F /* SystemConfiguration.framework in Frameworks */,
 				B564439816E2BE11007067C1 /* StoreKit.framework in Frameworks */,
-				204BE3D61A92108800F65C98 /* Fabric.framework in Frameworks */,
-				B5733FD516E028B100FDFC0C /* Social.framework in Frameworks */,
+				2055C9DF1A9B613900778F1F /* MessageUI.framework in Frameworks */,
+				2055C9DC1A9B613000778F1F /* EventKit.framework in Frameworks */,
+				2055C9DD1A9B613000778F1F /* EventKitUI.framework in Frameworks */,
+				2055C9D91A9B612400778F1F /* CoreTelephony.framework in Frameworks */,
+				B599C91716D55E5C0036229D /* CoreGraphics.framework in Frameworks */,
+				2055C9D71A9B610E00778F1F /* AVFoundation.framework in Frameworks */,
 				B5BD990816DD93D30054082E /* AudioToolbox.framework in Frameworks */,
+				2055C9D51A9B60FE00778F1F /* AdSupport.framework in Frameworks */,
+				204BE3D61A92108800F65C98 /* Fabric.framework in Frameworks */,
+				2055C9D31A9B60EF00778F1F /* GoogleMobileAds.framework in Frameworks */,
+				B5733FD516E028B100FDFC0C /* Social.framework in Frameworks */,
 				B579858A16D5D726001D628C /* CoreData.framework in Frameworks */,
 				B599C91316D55E5C0036229D /* UIKit.framework in Frameworks */,
 				B599C91516D55E5C0036229D /* Foundation.framework in Frameworks */,
-				B599C91716D55E5C0036229D /* CoreGraphics.framework in Frameworks */,
-				16FF8380005D489184D50AFB /* libPods.a in Frameworks */,
+				9A047F4808949852C1A6A222 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1853,6 +1877,14 @@
 		B599C91116D55E5C0036229D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2055C9E01A9B615100778F1F /* SystemConfiguration.framework */,
+				2055C9DE1A9B613900778F1F /* MessageUI.framework */,
+				2055C9DA1A9B613000778F1F /* EventKit.framework */,
+				2055C9DB1A9B613000778F1F /* EventKitUI.framework */,
+				2055C9D81A9B612400778F1F /* CoreTelephony.framework */,
+				2055C9D61A9B610E00778F1F /* AVFoundation.framework */,
+				2055C9D41A9B60FE00778F1F /* AdSupport.framework */,
+				2055C9D21A9B60EF00778F1F /* GoogleMobileAds.framework */,
 				204BE3D51A92108800F65C98 /* Fabric.framework */,
 				B564439716E2BE11007067C1 /* StoreKit.framework */,
 				B5733FD416E028B100FDFC0C /* Social.framework */,
@@ -1861,7 +1893,7 @@
 				B599C91216D55E5C0036229D /* UIKit.framework */,
 				B599C91416D55E5C0036229D /* Foundation.framework */,
 				B599C91616D55E5C0036229D /* CoreGraphics.framework */,
-				9DDE203A6ED742A4B97C59D6 /* libPods.a */,
+				CA3158C07944BFE2127E1375 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2016,6 +2048,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B599C93516D55E5C0036229D /* Build configuration list for PBXNativeTarget "eyeSPOT" */;
 			buildPhases = (
+				FA15E8FD09219CBFA9DEFC47 /* Check Pods Manifest.lock */,
 				B599C90B16D55E5C0036229D /* Sources */,
 				B599C90C16D55E5C0036229D /* Frameworks */,
 				B593559A16D9A37200B97FEF /* ShellScript */,
@@ -2574,6 +2607,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		204BE3D41A920FF800F65C98 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2600,6 +2634,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#/usr/bin/python $SOURCE_ROOT/deretina.py";
+		};
+		FA15E8FD09219CBFA9DEFC47 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2707,11 +2756,16 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"$(PROJECT_DIR)",
+					"/Users/khurram/Downloads/GoogleMobileAdsSdkiOS-7.0.0",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "eyeSpot/eyeSpot-Prefix.pch";
 				INFOPLIST_FILE = "eyeSpot/eyeSpot-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2793,11 +2847,16 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"$(PROJECT_DIR)",
+					"/Users/khurram/Downloads/GoogleMobileAdsSdkiOS-7.0.0",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "eyeSpot/eyeSpot-Prefix.pch";
 				INFOPLIST_FILE = "eyeSpot/eyeSpot-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2815,11 +2874,16 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"$(PROJECT_DIR)",
+					"/Users/khurram/Downloads/GoogleMobileAdsSdkiOS-7.0.0",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "eyeSpot/eyeSpot-Prefix.pch";
 				INFOPLIST_FILE = "eyeSpot/eyeSpot-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
