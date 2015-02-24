@@ -95,9 +95,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
             if ([createView.flyer isVideoMergeProcessRequired]) {
                     //Here we Merge All Layers in Video File
                     [createView videoMergeProcess];
-                
-                    [createView.flyer setUpdatedSnapshotWithImage:[createView.flyer getSharingVideoCover]];
-                    NSLog(@"videoFlyer-Merge done ");
             }
             else{
                 NSLog(@"videoFlyer-mergeNotRequired ");
