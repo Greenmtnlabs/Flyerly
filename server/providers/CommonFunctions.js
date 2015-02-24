@@ -110,16 +110,16 @@ CommonFunctions.sendEmail2 = function( eventObj, mailOptions ){
 
 				smtpTransport.sendMail(mailOptions, function(error, response){
 					if(error){
-						console.log("commongFunction.js line: "+__line+" ,Error occured while send email with default settings");
+						logger.info("commongFunction.js line: "+__line+" ,Error occured while send email with default settings");
 						logger.info(error);
 					} else {
-						console.log("line: "+__line+" ,email sent successfully with default settings");
+						logger.info("line: "+__line+" ,email sent successfully with default settings");
 					}
 					smtpTransport.close();
 				});
 
 		    }else{
-				console.log("line: "+__line+" ,email sent successfully");
+				logger.info("line: "+__line+" ,email sent successfully");
 		    }
 		    // if you don't want to use this transport object anymore, uncomment following line
 		    smtpTransport.close(); // shut down the connection pool, no more messages
