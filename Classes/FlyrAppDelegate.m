@@ -37,8 +37,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         // Clean up any unfinished task business by marking where you
         // stopped or ending the task outright.
         
-        //[application endBackgroundTask:bgTask];
-        //bgTask = UIBackgroundTaskInvalid;
+        [application endBackgroundTask:bgTask];
+        bgTask = UIBackgroundTaskInvalid;
     }];
     
     // Start the long-running task and return immediately.
