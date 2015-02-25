@@ -22,6 +22,7 @@ static const NSInteger ESTileCellTagForTileImageView = 3;
 static const NSInteger ESTileCellTagForCheckmarkImageView = 2;
 static const NSInteger ESTileCellTagForCompletionMaskView = 4;
 static const NSTimeInterval gotoTrophyScreenTimerDuration = 6.0;
+UIImageView *imgview;
 
 @interface ESBoardViewController () <ESPaginationDelegate>
 
@@ -49,12 +50,39 @@ static const NSTimeInterval gotoTrophyScreenTimerDuration = 6.0;
     
     [self.interstitialAdd loadRequest:[self request]];
     
-    if (IS_IPHONE5) {
-        self.goodJobOverlayImageView.image = [UIImage imageNamed:@"GoodJobOverlay-568h"];
+    if ( IS_IPHONE5 ) {
         CGRect frame = self.goodJobOverlayImageView.frame;
-        frame = CGRectMake(frame.origin.x, frame.origin.y, 568.0f, frame.size.height);
-        self.goodJobOverlayImageView.frame = frame;
+        imgview = [[UIImageView alloc]
+                                initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, 568.0f, frame.size.height)];
+        [imgview setImage:[UIImage imageNamed:@"GoodJobOverlay-568h"]];
+        [imgview setContentMode:UIViewContentModeScaleAspectFit];
+        [self.view addSubview:imgview];
+        imgview.alpha = 0.0;
+    } else if ( IS_IPHONE6 ) {
+        
+        CGRect frame = self.goodJobOverlayImageView.frame;
+        imgview = [[UIImageView alloc]
+                   initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, 667.0f, frame.size.height)];
+        [imgview setImage:[UIImage imageNamed:@"GoodJobOverlay-568h"]];
+        [imgview setContentMode:UIViewContentModeScaleAspectFit];
+        [self.view addSubview:imgview];
+        imgview.alpha = 0.0;
+    } else if( IS_IPAD ) {
+        imgview = [[UIImageView alloc]
+                   initWithFrame:CGRectMake(0, 0, 1024, 748)];
+        [imgview setImage:[UIImage imageNamed:@"GoodJobOverlay"]];
+        [imgview setContentMode:UIViewContentModeScaleAspectFit];
+        [self.view addSubview:imgview];
+        imgview.alpha = 0.0;
+    } else if ( IS_IPHONE ) {
+        imgview = [[UIImageView alloc]
+                   initWithFrame:CGRectMake(0, 0, 480, 300)];
+        [imgview setImage:[UIImage imageNamed:@"GoodJobOverlay"]];
+        [imgview setContentMode:UIViewContentModeScaleAspectFit];
+        [self.view addSubview:imgview];
+        imgview.alpha = 0.0;
     }
+    
     [self setupPagingButtons];
     NSArray *pagingButtons = @[self.leftPagingButton, self.rightPagingButton];
     self.paginationHelper = [[ESPagination alloc] initWithPagingButtons:pagingButtons
@@ -69,7 +97,7 @@ static const NSTimeInterval gotoTrophyScreenTimerDuration = 6.0;
     [super viewWillAppear:animated];
     self.isGameOver = NO;
     self.shouldHideFirstSection = NO;
-    self.goodJobOverlayImageView.alpha = 0.0;
+    imgview.alpha = 0.0;
     self.leftPagingButton.hidden = self.rightPagingButton.hidden = NO;
     self.paginationHelper.currentPageIndex = 0;
     [[self es_titleLabel] setText:self.board.title];
@@ -162,7 +190,7 @@ static const NSTimeInterval gotoTrophyScreenTimerDuration = 6.0;
                          animations:^{
                              self.shouldHideFirstSection = YES;
                              [self.collectionView deleteSections:[NSIndexSet indexSetWithIndex:0]];
-                             self.goodJobOverlayImageView.alpha = 1.0;
+                             imgview.alpha = 1.0;
                              self.leftPagingButton.hidden = self.rightPagingButton.hidden = YES;
                              
                          }];
