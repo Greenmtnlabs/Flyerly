@@ -25,7 +25,6 @@
     //NSURL *homeURL = [NSURL fileURLWithPath:NSHomeDirectory() isDirectory:YES];
     NSURL *aUrl = [defaultBoardsURL URLByDeletingLastPathComponent];
     NSURL *url = [aUrl URLByDeletingLastPathComponent];
-    NSLog(@"%@", url);
 
     //NSURL *homeURL = [NSURL fileURLWithPath:NSHomeDirectory() isDirectory:YES];
     return [NSURL URLWithString:self.imagePath relativeToURL:url];
