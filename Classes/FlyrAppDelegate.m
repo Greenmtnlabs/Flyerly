@@ -18,7 +18,10 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 #define TIME 10
 
-@implementation FlyrAppDelegate
+@implementation FlyrAppDelegate {
+    UIApplication *app;
+    UIBackgroundTaskIdentifier bgTask;
+}
 
 @synthesize window;
 @synthesize navigationController;
@@ -27,24 +30,47 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 
 #pragma mark Application lifecycle
-/* 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    app = application;
+    bgTask = [app beginBackgroundTaskWithName:@"MyTask" expirationHandler:^{
+        // Clean up any unfinished task business by marking where you
+        // stopped or ending the task outright.
+        
+        [application endBackgroundTask:bgTask];
+        bgTask = UIBackgroundTaskInvalid;
+    }];
+    
     // Start the long-running task and return immediately.
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self goingToBg];
+        
+        // Do the work associated with the task, preferably in chunks.
+         [self goingToBg];
+        
     });
+    
+    NSLog(@"backgroundTimeRemaining: %f", [[UIApplication sharedApplication] backgroundTimeRemaining]);
 }
- */
+
+-(void)endAppBgTask
+{
+    [app endBackgroundTask:bgTask];
+    bgTask = UIBackgroundTaskInvalid;
+}
+
+/*
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         [self goingToBg];
     });
 }
+*/
 
 -(void)goingToBg
 {
+    
+    
     if ([[self.navigationController topViewController] isKindOfClass:[CreateFlyerController class]]) {
         
         //Here we Save Data for Future Error Handling
@@ -67,12 +93,17 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         
         //Here we Merge Video for Sharing
         if ([createView.flyer isVideoFlyer]) {
-            
+           
             //Here Compare Current Flyer with history Flyer
             if ([createView.flyer isVideoMergeProcessRequired]) {
                     //Here we Merge All Layers in Video File
                     [createView videoMergeProcess];
             }
+            else{
+                NSLog(@"videoFlyer-mergeNotRequired ");
+            }
+            
+            
             
         }else {
                 //Here we remove Borders from layer if user touch any layer

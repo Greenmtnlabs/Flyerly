@@ -3726,6 +3726,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     // Audio track
     AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
     
+    
     // Image video is always 30 seconds. So we use that unless the background video is smaller.
     CMTime inTime = CMTimeMake( MAX_VIDEO_LENGTH * VIDEOFRAME, VIDEOFRAME );
     if ( CMTimeCompare( firstAsset.duration, inTime ) < 0 ) {
@@ -3901,6 +3902,11 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                 [self.flyer addToGallery:nil];
             }
         };
+        
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        [appDelegate endAppBgTask];
+        
+        
     }];
 }
 
