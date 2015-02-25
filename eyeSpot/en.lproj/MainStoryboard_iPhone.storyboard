@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="KuD-JQ-U8I">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES" promptedForUpgradeToXcode5="NO" initialViewController="KuD-JQ-U8I">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+        <deployment identifier="iOS"/>
+        <development version="4600" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--Main View Controller-->
@@ -12,22 +14,24 @@
                         <rect key="frame" x="0.0" y="20" width="480" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" tag="50" contentMode="scaleToFill" image="BackgroundImage@2x~iphone.png" translatesAutoresizingMaskIntoConstraints="NO" id="pH5-FY-JnU" userLabel="Background">
+                            <imageView userInteractionEnabled="NO" tag="50" contentMode="scaleToFill" image="BackgroundImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="pH5-FY-JnU" userLabel="Background">
+                                <rect key="frame" x="0.0" y="-20" width="480" height="320"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="320" id="uLJ-V8-8It"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y4z-yb-reI" userLabel="Play Button">
+                                <rect key="frame" x="188" y="68" width="105" height="184"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="105" id="Ieq-cY-HXc"/>
                                     <constraint firstAttribute="height" constant="184" id="xYz-al-C9M"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="PlayButton_NonSelected@2x~iphone.png">
+                                <state key="normal" image="PlayButton_NonSelected.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" image="PlayButton_Selected@2x~iphone.png">
+                                <state key="highlighted" image="PlayButton_Selected.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -35,16 +39,17 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Srh-L5-xk8" userLabel="Help Button">
+                                <rect key="frame" x="9" y="229" width="40" height="71"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="71" id="9Fr-1t-zea"/>
                                     <constraint firstAttribute="width" constant="40" id="oPd-ds-ddI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="Help@2x~iphone.png">
+                                <state key="normal" image="Help.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" image="Help_Selected@2x~iphone.png">
+                                <state key="highlighted" image="Help_Selected.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -52,17 +57,18 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xBj-q0-dPq" userLabel="Trophy Room Button">
+                                <rect key="frame" x="401" y="236" width="73" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="Scb-ya-glq"/>
                                     <constraint firstAttribute="width" constant="73" id="Ubd-yH-YXT"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="4"/>
-                                <state key="normal" image="TrohpyRoom_icon@2x~iphone.png">
+                                <state key="normal" image="TrohpyRoom_icon.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" image="TrohpyRoomSelected_icon@2x~iphone.png">
+                                <state key="highlighted" image="TrohpyRoomSelected_icon.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -70,16 +76,17 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YLn-yF-BfU" userLabel="Settings Button">
+                                <rect key="frame" x="57" y="233" width="62" height="67"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="67" id="bUm-ZB-P1E"/>
                                     <constraint firstAttribute="width" constant="62" id="otT-b6-UX0"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="Settings@2x~iphone.png">
+                                <state key="normal" image="Settings.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" image="Settings_Selected@2x~iphone.png">
+                                <state key="highlighted" image="Settings_Selected.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -101,7 +108,6 @@
                             <constraint firstItem="Srh-L5-xk8" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="9" id="cmQ-EJ-sTm"/>
                             <constraint firstItem="YLn-yF-BfU" firstAttribute="bottom" secondItem="5" secondAttribute="bottom" type="default" id="dXX-ek-fqC"/>
                         </constraints>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" id="VpP-8S-g4E"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -118,53 +124,60 @@
                         <rect key="frame" x="0.0" y="20" width="480" height="300"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" tag="50" contentMode="scaleToFill" image="BackgroundImage@2x~iphone.png" translatesAutoresizingMaskIntoConstraints="NO" id="x54-09-5Zy" userLabel="Background">
+                            <imageView userInteractionEnabled="NO" tag="50" contentMode="scaleToFill" image="BackgroundImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="x54-09-5Zy" userLabel="Background">
+                                <rect key="frame" x="0.0" y="-20" width="480" height="320"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="320" id="0lU-A0-noJ"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rcP-vc-leu" userLabel="Back Button">
+                                <rect key="frame" x="9" y="250" width="81" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="81" id="DWp-kf-hQt"/>
                                     <constraint firstAttribute="height" constant="44" id="Zk4-pY-g0v"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="Back_Arrow@2x~iphone.png">
+                                <state key="normal" image="Back_Arrow.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" image="Back_Arrow_Selected@2x~iphone.png">
+                                <state key="highlighted" image="Back_Arrow_Selected.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="back:" destination="P8f-TS-6kR" eventType="touchUpInside" id="75P-et-inP"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="HowToPlaytext@2x~iphone.png" translatesAutoresizingMaskIntoConstraints="NO" id="w1b-bj-XKw">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="HowToPlaytext.png" translatesAutoresizingMaskIntoConstraints="NO" id="w1b-bj-XKw">
+                                <rect key="frame" x="30" y="81" width="421" height="134"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="421" id="cT0-Q8-NEk"/>
                                     <constraint firstAttribute="height" constant="134" id="ycl-RS-qVU"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="JumpingBoy@2x~iphone.png" translatesAutoresizingMaskIntoConstraints="NO" id="pri-7O-Kbx">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="JumpingBoy.png" translatesAutoresizingMaskIntoConstraints="NO" id="pri-7O-Kbx">
+                                <rect key="frame" x="194" y="229" width="43" height="49"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" id="oMZ-SE-NSR"/>
                                     <constraint firstAttribute="width" constant="43" id="sYD-EX-c4G"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ImageSwipe_HowTo@2x~iphone.png" translatesAutoresizingMaskIntoConstraints="NO" id="F8Y-AQ-u7f">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ImageSwipe_HowTo.png" translatesAutoresizingMaskIntoConstraints="NO" id="F8Y-AQ-u7f">
+                                <rect key="frame" x="269" y="202" width="110" height="103"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="103" type="user" id="4Uc-nn-zPv"/>
                                     <constraint firstAttribute="width" constant="110" type="user" id="SVL-s1-ruk"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="HappySpotting_text_icon@2x~iphone.png" translatesAutoresizingMaskIntoConstraints="NO" id="hqL-ML-TgV">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="HappySpotting_text_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="hqL-ML-TgV">
+                                <rect key="frame" x="30" y="235" width="120" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="gYe-pQ-UA8"/>
                                     <constraint firstAttribute="height" constant="26" id="hqS-Qa-BHY"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="HowToPlay_text_icon@2x~iphone.png" translatesAutoresizingMaskIntoConstraints="NO" id="B2K-0O-vFq">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="HowToPlay_text_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="B2K-0O-vFq">
+                                <rect key="frame" x="194" y="55" width="93" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="41c-W7-cZB"/>
                                     <constraint firstAttribute="width" constant="93" id="jVM-Mk-fLT"/>
@@ -189,7 +202,6 @@
                             <constraint firstItem="x54-09-5Zy" firstAttribute="leading" secondItem="53k-m3-Vsc" secondAttribute="leading" type="default" id="yOI-EJ-idE"/>
                             <constraint firstItem="pri-7O-Kbx" firstAttribute="leading" secondItem="B2K-0O-vFq" secondAttribute="leading" type="default" id="yRT-Os-M71"/>
                         </constraints>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" id="rII-h8-2ro"/>
                 </viewController>
@@ -205,7 +217,6 @@
                         <rect key="frame" x="0.0" y="20" width="480" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="IJT-Xt-MMY">
                             <size key="itemSize" width="83" height="99"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -221,12 +232,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fEj-0s-g2U">
+                                            <rect key="frame" x="2" y="0.0" width="79" height="83"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="83" type="user" id="Sdx-9J-Oed"/>
                                                 <constraint firstAttribute="width" constant="79" type="user" id="zWG-FN-3wQ"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" text="Design a Board" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4YI-2D-dq2">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" text="Design a Board" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsLetterSpacingToFitWidth="YES" useAutomaticPreferredMaxLayoutWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4YI-2D-dq2">
+                                            <rect key="frame" x="2" y="83" width="79" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="16" id="jdu-cF-fLw"/>
                                             </constraints>
@@ -252,7 +265,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="83" height="99"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" text="Road Trip" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xqW-gd-mwA">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" text="Road Trip" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsLetterSpacingToFitWidth="YES" useAutomaticPreferredMaxLayoutWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xqW-gd-mwA">
+                                            <rect key="frame" x="2" y="83" width="79" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="16" id="SBw-gw-bws"/>
                                             </constraints>
@@ -261,12 +275,14 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ztQ-hc-rmg" userLabel="Thumbnail Image View">
+                                            <rect key="frame" x="17" y="17" width="50" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="WsV-HF-uKu"/>
                                                 <constraint firstAttribute="width" constant="50" id="sjc-qm-dGq"/>
                                             </constraints>
                                         </imageView>
-                                        <imageView opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" image="BoardSelectionBackground~ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="HPk-Dg-zoF" userLabel="Border Image View">
+                                        <imageView opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" image="BoardSelectionBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="HPk-Dg-zoF" userLabel="Border Image View">
+                                            <rect key="frame" x="2" y="0.0" width="79" height="83"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="79" id="54Q-dW-sWX"/>
                                                 <constraint firstAttribute="height" constant="83" id="MLV-nQ-tai"/>
@@ -291,16 +307,17 @@
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FsX-Lm-vHf" userLabel="Back Button">
+                                    <rect key="frame" x="20" y="0.0" width="81" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="81" id="K3s-Kk-YOn"/>
                                         <constraint firstAttribute="height" constant="44" type="user" id="fQM-zY-b8A"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                    <state key="normal" image="Back_Arrow@2x~iphone.png">
+                                    <state key="normal" image="Back_Arrow.png">
                                         <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
-                                    <state key="highlighted" image="Back_Arrow_Selected@2x~iphone.png">
+                                    <state key="highlighted" image="Back_Arrow_Selected.png">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
@@ -336,14 +353,13 @@
                         <rect key="frame" x="0.0" y="20" width="480" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="15" minimumInteritemSpacing="5" id="dwy-Mg-j6c">
                             <size key="itemSize" width="80" height="80"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="64"/>
                             <inset key="sectionInset" minX="50" minY="60" maxX="50" maxY="0.0"/>
                         </collectionViewFlowLayout>
-                        <imageView key="backgroundView" opaque="NO" alpha="0.0" tag="200" contentMode="scaleToFill" image="GoodJobOverlay@2x~iphone.png" id="oKl-cX-Buo" userLabel="Good Job Overlay">
+                        <imageView key="backgroundView" opaque="NO" alpha="0.0" tag="200" contentMode="scaleToFill" image="GoodJobOverlay.png" id="oKl-cX-Buo" userLabel="Good Job Overlay">
                             <rect key="frame" x="0.0" y="0.0" width="480" height="300"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -360,11 +376,15 @@
                                     <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KpL-qi-iED" userLabel="Tile Image View"/>
+                                        <imageView userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KpL-qi-iED" userLabel="Tile Image View">
+                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                        </imageView>
                                         <view opaque="NO" alpha="0.0" tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fzK-9o-3kT" userLabel="Completion Mask View">
+                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <imageView opaque="NO" userInteractionEnabled="NO" alpha="0.0" tag="2" contentMode="scaleToFill" image="tile-checkmark@2x~iphone.png" translatesAutoresizingMaskIntoConstraints="NO" id="Kau-4A-oNj" userLabel="Check Image View">
+                                        <imageView opaque="NO" userInteractionEnabled="NO" alpha="0.0" tag="2" contentMode="scaleToFill" image="tile-checkmark.png" translatesAutoresizingMaskIntoConstraints="NO" id="Kau-4A-oNj" userLabel="Check Image View">
+                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </imageView>
                                     </subviews>
@@ -391,16 +411,17 @@
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I7O-4l-PCR" userLabel="Back Button">
+                                    <rect key="frame" x="20" y="22" width="81" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="PQl-NU-H6V"/>
                                         <constraint firstAttribute="width" constant="81" id="fBl-sh-ySH"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                    <state key="normal" image="Back_Arrow@2x~iphone.png">
+                                    <state key="normal" image="Back_Arrow.png">
                                         <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
-                                    <state key="highlighted" image="Back_Arrow_Selected@2x~iphone.png">
+                                    <state key="highlighted" image="Back_Arrow_Selected.png">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
@@ -441,12 +462,14 @@
                         <rect key="frame" x="0.0" y="20" width="480" height="300"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" tag="50" contentMode="scaleToFill" image="BackgroundImage@2x~iphone.png" translatesAutoresizingMaskIntoConstraints="NO" id="EFo-zN-khx" userLabel="Background">
+                            <imageView userInteractionEnabled="NO" tag="50" contentMode="scaleToFill" image="BackgroundImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="EFo-zN-khx" userLabel="Background">
+                                <rect key="frame" x="0.0" y="-40" width="480" height="320"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="320" type="user" id="fCG-L3-Pob"/>
                                 </constraints>
                             </imageView>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MXQ-W2-F2Y" userLabel="Board Collection View">
+                                <rect key="frame" x="0.0" y="246" width="480" height="54"/>
                                 <color key="backgroundColor" red="0.70979999999999999" green="0.83530000000000004" blue="1" alpha="0.51000000000000001" colorSpace="deviceRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="54" id="KgJ-jh-FEC"/>
@@ -465,8 +488,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="300" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vDQ-OC-rLJ"/>
+                                                <imageView userInteractionEnabled="NO" tag="300" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vDQ-OC-rLJ">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                </imageView>
                                                 <imageView hidden="YES" userInteractionEnabled="NO" tag="301" contentMode="scaleToFill" image="board_has_trophy.png" translatesAutoresizingMaskIntoConstraints="NO" id="Jgl-Tr-ey9">
+                                                    <rect key="frame" x="34" y="0.0" width="16" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="16" id="YaJ-ok-cs1"/>
                                                         <constraint firstAttribute="height" constant="16" id="mSg-zG-FPO"/>
@@ -492,13 +518,17 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="300" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wIG-Lj-cwS" userLabel="Thumbnail">
+                                                    <rect key="frame" x="10" y="10" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="gRM-PJ-zkG"/>
                                                         <constraint firstAttribute="height" constant="30" id="wXv-Vh-coc"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="TrophySelectionBackground~ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="9gy-p6-ESN" userLabel="Border"/>
-                                                <imageView hidden="YES" userInteractionEnabled="NO" tag="301" contentMode="scaleToFill" image="StarForBoardCompletion@2x~ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="cku-4g-9C4">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="TrophySelectionBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="9gy-p6-ESN" userLabel="Border">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                </imageView>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" tag="301" contentMode="scaleToFill" image="StarForBoardCompletion.png" translatesAutoresizingMaskIntoConstraints="NO" id="cku-4g-9C4">
+                                                    <rect key="frame" x="34" y="0.0" width="16" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="16" id="MMC-BA-3LX"/>
                                                         <constraint firstAttribute="height" constant="16" id="urW-1Y-Cle"/>
@@ -525,6 +555,7 @@
                                 </connections>
                             </collectionView>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hdb-HH-ymz" userLabel="Trophy Collection View">
+                                <rect key="frame" x="131" y="80" width="218" height="163"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="163" type="user" id="Mxb-Ug-HtC"/>
@@ -535,8 +566,8 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="15" minY="15" maxX="10" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <imageView key="backgroundView" userInteractionEnabled="NO" contentMode="scaleToFill" image="Shelf@2x~iphone.png" id="94X-2L-AGQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="221" height="163"/>
+                                <imageView key="backgroundView" userInteractionEnabled="NO" contentMode="scaleToFill" image="Shelf.png" id="94X-2L-AGQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="218" height="163"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
                                 <cells>
@@ -548,6 +579,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="200" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Uvx-kR-lyn">
+                                                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="40" id="BvA-rJ-lfk"/>
                                                     </constraints>
@@ -568,16 +600,13 @@
                                 </connections>
                             </collectionView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4s2-N5-SFh" userLabel="Play Button">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="58" id="MEv-jm-7yk"/>
-                                    <constraint firstAttribute="height" constant="69" id="W95-Yv-opm"/>
-                                </constraints>
+                                <rect key="frame" x="402" y="92" width="58" height="69"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="Playbtn_trophyroom@2x~iphone.png">
+                                <state key="normal" image="Playbtn_trophyroom.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" image="Playbtn_Selected_trophyroom@2x~iphone.png">
+                                <state key="highlighted" image="Playbtn_Selected_trophyroom.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -585,16 +614,17 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="02Z-9Q-Aus" userLabel="Twitter Button">
+                                <rect key="frame" x="410" y="204" width="42" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="42" id="Fze-3d-zZq"/>
                                     <constraint firstAttribute="height" constant="46" id="JsP-Cf-loL"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="Twitter@2x~iphone.png">
+                                <state key="normal" image="Twitter.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" image="TwitterSelected@2x~iphone.png">
+                                <state key="highlighted" image="TwitterSelected.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -602,16 +632,13 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Lm-GN-Hi1" userLabel="Facebook Button">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="46" id="PnG-nd-tcI"/>
-                                    <constraint firstAttribute="width" constant="37" id="qNA-6h-NRD"/>
-                                </constraints>
+                                <rect key="frame" x="413" y="175" width="37" height="46"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="Facebook@2x~iphone.png">
+                                <state key="normal" image="Facebook.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" image="FacebookSelected@2x~iphone.png">
+                                <state key="highlighted" image="FacebookSelected.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -619,55 +646,50 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mOW-pP-mPy" userLabel="Back Button">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="81" id="Rb6-FN-s8i"/>
-                                    <constraint firstAttribute="height" constant="44" id="xqh-UP-Wd7"/>
-                                </constraints>
+                                <rect key="frame" x="20" y="51" width="81" height="44"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="Back_Arrow@2x~iphone.png">
+                                <state key="normal" image="Back_Arrow.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" image="Back_Arrow_Selected@2x~iphone.png">
+                                <state key="highlighted" image="Back_Arrow_Selected.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="back:" destination="GVl-q9-DnK" eventType="touchUpInside" id="S51-5F-1yz"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="TrophyRoom_text_icon@2x~iphone.png" translatesAutoresizingMaskIntoConstraints="NO" id="l4Z-vT-aDU">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="TrophyRoom_text_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="l4Z-vT-aDU">
+                                <rect key="frame" x="157" y="42" width="167" height="22"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="9Un-28-7Gk"/>
                                     <constraint firstAttribute="width" constant="167" id="GAu-pJ-0aV"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Collect a sticker for each board you complete!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MPD-Vl-Qhp">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Collect a sticker for each board you complete!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" useAutomaticPreferredMaxLayoutWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MPD-Vl-Qhp">
+                                <rect key="frame" x="131" y="65" width="218" height="12"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="SelectanAward_text_icon@2x~iphone.png" translatesAutoresizingMaskIntoConstraints="NO" id="os6-ao-0O0">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="13" id="MvW-bo-U7N"/>
-                                    <constraint firstAttribute="width" constant="86" id="nds-2c-Mzn"/>
-                                </constraints>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="SelectanAward_text_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="os6-ao-0O0">
+                                <rect key="frame" x="23" y="66" width="86" height="13"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="EFo-zN-khx" firstAttribute="leading" secondItem="MXQ-W2-F2Y" secondAttribute="leading" type="default" id="3av-eM-AOK"/>
                             <constraint firstAttribute="bottom" secondItem="8Lm-GN-Hi1" secondAttribute="bottom" constant="79" id="4sO-tt-z7C"/>
                             <constraint firstAttribute="trailing" secondItem="4s2-N5-SFh" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="5Nh-LE-Rg3"/>
                             <constraint firstItem="MPD-Vl-Qhp" firstAttribute="centerX" secondItem="l4Z-vT-aDU" secondAttribute="centerX" type="default" id="6gN-ie-Oqk"/>
                             <constraint firstItem="02Z-9Q-Aus" firstAttribute="centerX" secondItem="8Lm-GN-Hi1" secondAttribute="centerX" type="default" id="GRG-Jp-P5b"/>
                             <constraint firstItem="8Lm-GN-Hi1" firstAttribute="centerX" secondItem="4s2-N5-SFh" secondAttribute="centerX" type="default" id="Man-eF-eho"/>
+                            <constraint firstItem="EFo-zN-khx" firstAttribute="trailing" secondItem="MXQ-W2-F2Y" secondAttribute="trailing" type="default" id="Nl2-p6-Y3c"/>
                             <constraint firstItem="os6-ao-0O0" firstAttribute="leading" secondItem="pqP-Sz-STZ" secondAttribute="leading" constant="23" id="Pjo-ih-vhZ"/>
                             <constraint firstItem="4s2-N5-SFh" firstAttribute="top" secondItem="pqP-Sz-STZ" secondAttribute="top" constant="92" id="Roj-I9-6wS"/>
-                            <constraint firstItem="EFo-zN-khx" firstAttribute="leading" secondItem="pqP-Sz-STZ" secondAttribute="leading" type="default" id="WBw-FW-Axy"/>
                             <constraint firstItem="mOW-pP-mPy" firstAttribute="leading" secondItem="pqP-Sz-STZ" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="WH0-cx-Wvf"/>
-                            <constraint firstItem="EFo-zN-khx" firstAttribute="bottom" secondItem="pqP-Sz-STZ" secondAttribute="bottom" type="default" id="XGn-P3-t5u"/>
                             <constraint firstItem="MPD-Vl-Qhp" firstAttribute="leading" secondItem="hdb-HH-ymz" secondAttribute="leading" type="default" id="a8e-xN-czg"/>
-                            <constraint firstItem="MXQ-W2-F2Y" firstAttribute="trailing" secondItem="pqP-Sz-STZ" secondAttribute="trailing" type="default" id="bN9-u7-1kc"/>
                             <constraint firstItem="l4Z-vT-aDU" firstAttribute="top" secondItem="pqP-Sz-STZ" secondAttribute="top" constant="42" id="c73-TO-0aK"/>
+                            <constraint firstAttribute="bottom" secondItem="EFo-zN-khx" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="cMj-Z2-ree"/>
                             <constraint firstItem="MXQ-W2-F2Y" firstAttribute="leading" secondItem="pqP-Sz-STZ" secondAttribute="leading" type="user" id="eAu-77-oCi"/>
                             <constraint firstItem="l4Z-vT-aDU" firstAttribute="centerX" secondItem="hdb-HH-ymz" secondAttribute="centerX" type="user" id="eu6-kf-G4V"/>
                             <constraint firstAttribute="bottom" secondItem="02Z-9Q-Aus" secondAttribute="bottom" constant="50" id="iB6-b2-fQY"/>
@@ -675,11 +697,9 @@
                             <constraint firstItem="MXQ-W2-F2Y" firstAttribute="bottom" secondItem="pqP-Sz-STZ" secondAttribute="bottom" type="default" id="nd1-Mc-2gt"/>
                             <constraint firstItem="os6-ao-0O0" firstAttribute="top" secondItem="pqP-Sz-STZ" secondAttribute="top" constant="66" id="qzV-9h-Ckd"/>
                             <constraint firstItem="MPD-Vl-Qhp" firstAttribute="top" secondItem="pqP-Sz-STZ" secondAttribute="top" constant="65" id="rby-QZ-OVk"/>
-                            <constraint firstItem="EFo-zN-khx" firstAttribute="trailing" secondItem="pqP-Sz-STZ" secondAttribute="trailing" type="default" id="wWN-VJ-aaI"/>
                             <constraint firstItem="mOW-pP-mPy" firstAttribute="top" secondItem="pqP-Sz-STZ" secondAttribute="top" constant="51" id="x5I-Dz-x6R"/>
                             <constraint firstItem="hdb-HH-ymz" firstAttribute="top" secondItem="pqP-Sz-STZ" secondAttribute="top" constant="80" id="xP5-eB-VTX"/>
                         </constraints>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" id="qey-F2-FVU"/>
                     <connections>
@@ -722,22 +742,24 @@
                         <rect key="frame" x="0.0" y="20" width="480" height="300"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" tag="50" contentMode="scaleToFill" image="BackgroundImage@2x~iphone.png" translatesAutoresizingMaskIntoConstraints="NO" id="gdd-mn-J1j" userLabel="Background">
+                            <imageView userInteractionEnabled="NO" tag="50" contentMode="scaleToFill" image="BackgroundImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="gdd-mn-J1j" userLabel="Background">
+                                <rect key="frame" x="0.0" y="-20" width="480" height="320"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="320" id="yYN-Ww-6l0"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tWP-Dd-r6T" userLabel="Back Button">
+                                <rect key="frame" x="0.0" y="260" width="81" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="81" id="0kV-zF-RhV"/>
                                     <constraint firstAttribute="height" constant="44" id="oJB-qs-yUp"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="Back_Arrow@2x~iphone.png">
+                                <state key="normal" image="Back_Arrow.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" image="Back_ArrowSelected@2x~iphone.png">
+                                <state key="highlighted" image="Back_ArrowSelected.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -745,16 +767,17 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGB-ie-c4e" userLabel="Sound On Button">
+                                <rect key="frame" x="230" y="94" width="92" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="92" type="user" id="5uc-Ad-GQj"/>
                                     <constraint firstAttribute="height" constant="100" type="user" id="xqH-Q2-McK"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="SoundOn_NonSelected@2x~iphone.png">
+                                <state key="normal" image="SoundOn_NonSelected.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="selected" image="SoundOn_Selected@2x~iphone.png"/>
+                                <state key="selected" image="SoundOn_Selected.png"/>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -763,16 +786,17 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pvc-V8-bBb" userLabel="Sound Off Button">
+                                <rect key="frame" x="159" y="96" width="89" height="96"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="89" type="user" id="77I-yN-21d"/>
                                     <constraint firstAttribute="height" constant="96" type="user" id="P7c-bD-NAg"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="SoundOff_NonSelected@2x~iphone.png">
+                                <state key="normal" image="SoundOff_NonSelected.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="selected" image="SoundOff_Selected@2x~iphone.png"/>
+                                <state key="selected" image="SoundOff_Selected.png"/>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -781,39 +805,43 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X7I-rW-kNz" userLabel="Clear Trophy Room Button">
+                                <rect key="frame" x="285" y="200" width="89" height="96"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="89" id="7pc-N9-PTr"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="ClearTrophyRoom@2x~iphone.png">
+                                <state key="normal" image="ClearTrophyRoom.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" image="ClearTrophyRoomSelected@2x~iphone.png">
+                                <state key="highlighted" image="ClearTrophyRoomSelected.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="clearTrophyRoom:" destination="xoB-P7-pdd" eventType="touchUpInside" id="1Rb-k3-4zB"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Settings_text@2x~iphone.png" translatesAutoresizingMaskIntoConstraints="NO" id="STq-zs-coQ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Settings_text.png" translatesAutoresizingMaskIntoConstraints="NO" id="STq-zs-coQ">
+                                <rect key="frame" x="178" y="49" width="124" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" type="user" id="Spc-O6-3Yg"/>
                                     <constraint firstAttribute="width" constant="124" type="user" id="sva-p8-IYx"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ClearTrophyRoom_text@2x~iphone.png" translatesAutoresizingMaskIntoConstraints="NO" id="Z7w-LG-gql">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ClearTrophyRoom_text.png" translatesAutoresizingMaskIntoConstraints="NO" id="Z7w-LG-gql">
+                                <rect key="frame" x="261" y="187" width="136" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="136" id="Pjp-nx-OYA"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dNf-kf-cjw" userLabel="Restore Purchases Button">
+                                <rect key="frame" x="93" y="200" width="89" height="96"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="89" id="WjR-3p-UqZ"/>
                                     <constraint firstAttribute="height" constant="96" id="jU5-c9-yZP"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="RestorePurchases@2x~iphone.png">
+                                <state key="normal" image="RestorePurchases.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -824,13 +852,15 @@
                                     <action selector="restorePurchases:" destination="xoB-P7-pdd" eventType="touchUpInside" id="I4l-jB-COJ"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="RestorePurchases_text@2x~iphone.png" translatesAutoresizingMaskIntoConstraints="NO" id="5WU-rx-GRo">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="RestorePurchases_text.png" translatesAutoresizingMaskIntoConstraints="NO" id="5WU-rx-GRo">
+                                <rect key="frame" x="73" y="187" width="129" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="129" id="N75-Yb-TpD"/>
                                     <constraint firstAttribute="height" constant="22" id="ZSc-pa-w6j"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Sounds_text@2x~iphone.png" translatesAutoresizingMaskIntoConstraints="NO" id="APS-wT-eGv">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Sounds_text.png" translatesAutoresizingMaskIntoConstraints="NO" id="APS-wT-eGv">
+                                <rect key="frame" x="212" y="82" width="57" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="57" type="user" id="kQw-gy-LxL"/>
                                     <constraint firstAttribute="height" constant="21" type="user" id="qA0-Wn-cXC"/>
@@ -866,7 +896,6 @@
                             <constraint firstItem="tWP-Dd-r6T" firstAttribute="leading" secondItem="eLn-BP-zQo" secondAttribute="leading" type="default" id="paP-Kx-r7N"/>
                             <constraint firstItem="Pvc-V8-bBb" firstAttribute="leading" secondItem="eLn-BP-zQo" secondAttribute="leading" priority="998" constant="159" type="user" id="x9D-hR-wc5"/>
                         </constraints>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" id="Q2Z-sW-jk9"/>
                     <connections>
@@ -887,7 +916,6 @@
                         <rect key="frame" x="0.0" y="20" width="480" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="15" minimumInteritemSpacing="5" id="kAK-bU-8Pr">
                             <size key="itemSize" width="80" height="80"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -902,11 +930,15 @@
                                     <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XMm-yt-xoa" userLabel="Tile Image View"/>
+                                        <imageView userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XMm-yt-xoa" userLabel="Tile Image View">
+                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                        </imageView>
                                         <view opaque="NO" alpha="0.0" tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h9N-XU-ay5" userLabel="Completion Mask View">
+                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <imageView opaque="NO" userInteractionEnabled="NO" alpha="0.0" tag="2" contentMode="scaleToFill" image="tile-checkmark@2x~ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="09V-HW-cTb" userLabel="Check Image View">
+                                        <imageView opaque="NO" userInteractionEnabled="NO" alpha="0.0" tag="2" contentMode="scaleToFill" image="tile-checkmark.png" translatesAutoresizingMaskIntoConstraints="NO" id="09V-HW-cTb" userLabel="Check Image View">
+                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </imageView>
                                     </subviews>
@@ -933,29 +965,32 @@
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0qf-w2-MgO" userLabel="Back Button">
+                                    <rect key="frame" x="20" y="11" width="81" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" type="user" id="66D-Q6-rxo"/>
                                         <constraint firstAttribute="width" constant="81" type="user" id="rIq-FG-p0b"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                    <state key="normal" image="Back_Arrow@2x~iphone.png">
+                                    <state key="normal" image="Back_Arrow.png">
                                         <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
-                                    <state key="highlighted" image="Back_Arrow_Selected@2x~iphone.png">
+                                    <state key="highlighted" image="Back_Arrow_Selected.png">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
                                         <action selector="back:" destination="8Nc-rz-Uwi" eventType="touchUpInside" id="Vky-9c-ujm"/>
                                     </connections>
                                 </button>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Save-Name_icon@2x~iphone.png" translatesAutoresizingMaskIntoConstraints="NO" id="W4n-nR-aCJ" userLabel="Save Button Background">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Save-Name_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="W4n-nR-aCJ" userLabel="Save Button Background">
+                                    <rect key="frame" x="118" y="16" width="138" height="33"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="138" type="user" id="S6R-oB-KB8"/>
                                         <constraint firstAttribute="height" constant="33" type="user" id="uK2-bJ-ccy"/>
                                     </constraints>
                                 </imageView>
                                 <textField opaque="NO" clipsSubviews="YES" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name your board" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NkC-jK-Ydj" userLabel="Title Text Field">
+                                    <rect key="frame" x="133" y="17" width="90" height="27"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="90" type="user" id="rN9-dS-fhX"/>
                                         <constraint firstAttribute="height" constant="27" type="user" id="uJr-Zu-DSi"/>
@@ -967,6 +1002,7 @@
                                     </connections>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z3v-W7-EkQ" userLabel="Save Button">
+                                    <rect key="frame" x="231" y="20" width="20" height="31"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="31" type="user" id="NNM-E4-93W"/>
                                         <constraint firstAttribute="width" constant="20" type="user" id="QQN-TS-O5z"/>
@@ -984,16 +1020,17 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NFa-Ey-M8L" userLabel="Change Cover Button">
+                                    <rect key="frame" x="253" y="15" width="101" height="35"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="35" id="Cda-TL-0xl"/>
                                         <constraint firstAttribute="width" constant="101" type="user" id="ePV-dR-WW6"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                    <state key="normal" image="ChangeCover_NonSelected@2x~iphone.png">
+                                    <state key="normal" image="ChangeCover_NonSelected.png">
                                         <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
-                                    <state key="highlighted" image="ChangeCover_Selected@2x~iphone.png">
+                                    <state key="highlighted" image="ChangeCover_Selected.png">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
@@ -1001,12 +1038,14 @@
                                     </connections>
                                 </button>
                                 <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1QB-4J-I9x" userLabel="Thumbnail">
+                                    <rect key="frame" x="379" y="12" width="42" height="42"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="42" type="user" id="6Jd-Et-gah"/>
                                         <constraint firstAttribute="height" constant="42" type="user" id="vZO-aX-VYZ"/>
                                     </constraints>
                                 </imageView>
-                                <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" image="TrophySelectionBackground@2x~iphone.png" translatesAutoresizingMaskIntoConstraints="NO" id="fa9-I3-fHT" userLabel="Thumbnail Border">
+                                <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" image="TrophySelectionBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="fa9-I3-fHT" userLabel="Thumbnail Border">
+                                    <rect key="frame" x="370" y="3" width="60" height="60"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="60" type="user" id="A6Z-1u-Tmz"/>
                                         <constraint firstAttribute="width" constant="60" type="user" id="oPN-QP-Tmq"/>
@@ -1044,146 +1083,53 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Back_Arrow@2x~iphone.png" width="162" height="88"/>
-        <image name="Back_ArrowSelected@2x~iphone.png" width="16" height="16"/>
-        <image name="Back_Arrow_Selected@2x~iphone.png" width="162" height="88"/>
-        <image name="BackgroundImage@2x~iphone.png" width="960" height="640"/>
-        <image name="BoardSelectionBackground~ipad.png" width="136" height="136"/>
-        <image name="ChangeCover_NonSelected@2x~iphone.png" width="202" height="65"/>
-        <image name="ChangeCover_Selected@2x~iphone.png" width="203" height="67"/>
-        <image name="ClearTrophyRoom@2x~iphone.png" width="178" height="192"/>
-        <image name="ClearTrophyRoomSelected@2x~iphone.png" width="178" height="192"/>
-        <image name="ClearTrophyRoom_text@2x~iphone.png" width="272" height="44"/>
-        <image name="Facebook@2x~iphone.png" width="74" height="93"/>
-        <image name="FacebookSelected@2x~iphone.png" width="74" height="93"/>
-        <image name="GoodJobOverlay@2x~iphone.png" width="960" height="640"/>
-        <image name="HappySpotting_text_icon@2x~iphone.png" width="239" height="52"/>
-        <image name="Help@2x~iphone.png" width="80" height="142"/>
-        <image name="Help_Selected@2x~iphone.png" width="80" height="142"/>
-        <image name="HowToPlay_text_icon@2x~iphone.png" width="186" height="49"/>
-        <image name="HowToPlaytext@2x~iphone.png" width="843" height="268"/>
-        <image name="ImageSwipe_HowTo@2x~iphone.png" width="219" height="205"/>
-        <image name="JumpingBoy@2x~iphone.png" width="86" height="98"/>
-        <image name="PlayButton_NonSelected@2x~iphone.png" width="210" height="368"/>
-        <image name="PlayButton_Selected@2x~iphone.png" width="210" height="368"/>
-        <image name="Playbtn_Selected_trophyroom@2x~iphone.png" width="117" height="138"/>
-        <image name="Playbtn_trophyroom@2x~iphone.png" width="117" height="138"/>
-        <image name="RestorePurchases@2x~iphone.png" width="178" height="192"/>
-        <image name="RestorePurchases_text@2x~iphone.png" width="258" height="44"/>
-        <image name="Save-Name_icon@2x~iphone.png" width="276" height="65"/>
-        <image name="SelectanAward_text_icon@2x~iphone.png" width="172" height="26"/>
-        <image name="Settings@2x~iphone.png" width="125" height="134"/>
-        <image name="Settings_Selected@2x~iphone.png" width="125" height="134"/>
-        <image name="Settings_text@2x~iphone.png" width="247" height="73"/>
-        <image name="Shelf@2x~iphone.png" width="443" height="326"/>
-        <image name="SoundOff_NonSelected@2x~iphone.png" width="178" height="192"/>
-        <image name="SoundOff_Selected@2x~iphone.png" width="178" height="192"/>
-        <image name="SoundOn_NonSelected@2x~iphone.png" width="185" height="201"/>
-        <image name="SoundOn_Selected@2x~iphone.png" width="185" height="201"/>
-        <image name="Sounds_text@2x~iphone.png" width="114" height="43"/>
-        <image name="StarForBoardCompletion@2x~ipad.png" width="60" height="60"/>
-        <image name="TrohpyRoomSelected_icon@2x~iphone.png" width="146" height="128"/>
-        <image name="TrohpyRoom_icon@2x~iphone.png" width="146" height="128"/>
-        <image name="TrophyRoom_text_icon@2x~iphone.png" width="333" height="44"/>
-        <image name="TrophySelectionBackground@2x~iphone.png" width="146" height="146"/>
-        <image name="TrophySelectionBackground~ipad.png" width="125" height="125"/>
-        <image name="Twitter@2x~iphone.png" width="83" height="84"/>
-        <image name="TwitterSelected@2x~iphone.png" width="83" height="84"/>
+        <image name="Back_Arrow.png" width="81" height="44"/>
+        <image name="Back_ArrowSelected.png" width="16" height="16"/>
+        <image name="Back_Arrow_Selected.png" width="81" height="44"/>
+        <image name="BackgroundImage.png" width="480" height="320"/>
+        <image name="BoardSelectionBackground.png" width="136" height="136"/>
+        <image name="ChangeCover_NonSelected.png" width="101" height="32"/>
+        <image name="ChangeCover_Selected.png" width="101" height="33"/>
+        <image name="ClearTrophyRoom.png" width="89" height="96"/>
+        <image name="ClearTrophyRoomSelected.png" width="89" height="96"/>
+        <image name="ClearTrophyRoom_text.png" width="136" height="22"/>
+        <image name="Facebook.png" width="37" height="46"/>
+        <image name="FacebookSelected.png" width="37" height="46"/>
+        <image name="GoodJobOverlay.png" width="480" height="320"/>
+        <image name="HappySpotting_text_icon.png" width="119" height="26"/>
+        <image name="Help.png" width="40" height="71"/>
+        <image name="Help_Selected.png" width="40" height="71"/>
+        <image name="HowToPlay_text_icon.png" width="93" height="24"/>
+        <image name="HowToPlaytext.png" width="421" height="134"/>
+        <image name="ImageSwipe_HowTo.png" width="109" height="102"/>
+        <image name="JumpingBoy.png" width="43" height="49"/>
+        <image name="PlayButton_NonSelected.png" width="105" height="184"/>
+        <image name="PlayButton_Selected.png" width="105" height="184"/>
+        <image name="Playbtn_Selected_trophyroom.png" width="58" height="69"/>
+        <image name="Playbtn_trophyroom.png" width="58" height="69"/>
+        <image name="RestorePurchases.png" width="89" height="96"/>
+        <image name="RestorePurchases_text.png" width="129" height="22"/>
+        <image name="Save-Name_icon.png" width="138" height="32"/>
+        <image name="SelectanAward_text_icon.png" width="86" height="13"/>
+        <image name="Settings.png" width="62" height="67"/>
+        <image name="Settings_Selected.png" width="62" height="67"/>
+        <image name="Settings_text.png" width="123" height="36"/>
+        <image name="Shelf.png" width="221" height="163"/>
+        <image name="SoundOff_NonSelected.png" width="89" height="96"/>
+        <image name="SoundOff_Selected.png" width="89" height="96"/>
+        <image name="SoundOn_NonSelected.png" width="92" height="100"/>
+        <image name="SoundOn_Selected.png" width="92" height="100"/>
+        <image name="Sounds_text.png" width="57" height="21"/>
+        <image name="StarForBoardCompletion.png" width="60" height="60"/>
+        <image name="TrohpyRoomSelected_icon.png" width="73" height="64"/>
+        <image name="TrohpyRoom_icon.png" width="73" height="64"/>
+        <image name="TrophyRoom_text_icon.png" width="166" height="22"/>
+        <image name="TrophySelectionBackground.png" width="73" height="73"/>
+        <image name="Twitter.png" width="41" height="42"/>
+        <image name="TwitterSelected.png" width="41" height="42"/>
         <image name="board_has_trophy.png" width="32" height="32"/>
-        <image name="tile-checkmark@2x~ipad.png" width="294" height="294"/>
-        <image name="tile-checkmark@2x~iphone.png" width="129" height="139"/>
+        <image name="tile-checkmark.png" width="64" height="69"/>
     </resources>
-    <classes>
-        <class className="ESBoardBuilderViewController" superclassName="ESCollectionViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ESBoardBuilderViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="back:"/>
-                <relationship kind="action" name="editThumbnail:"/>
-                <relationship kind="action" name="editTitle:"/>
-                <relationship kind="action" name="saveBoard:"/>
-            </relationships>
-        </class>
-        <class className="ESBoardSelectionViewController" superclassName="ESCollectionViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ESBoardSelectionViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="back:"/>
-            </relationships>
-        </class>
-        <class className="ESBoardViewController" superclassName="ESCollectionViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ESBoardViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="back:"/>
-                <relationship kind="action" name="goodJobOverlayTapped:" candidateClass="UITapGestureRecognizer"/>
-                <relationship kind="action" name="handleTap:" candidateClass="UITapGestureRecognizer"/>
-                <relationship kind="outlet" name="goodJobOverlayImageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="ESCollectionViewController" superclassName="UICollectionViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ESCollectionViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="leftPagingButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="rightPagingButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="ESHelpViewController" superclassName="ESViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ESHelpViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="back:"/>
-            </relationships>
-        </class>
-        <class className="ESMainViewController" superclassName="ESViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ESMainViewController.h"/>
-        </class>
-        <class className="ESSettingsViewController" superclassName="ESViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ESSettingsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="back:"/>
-                <relationship kind="action" name="clearTrophyRoom:"/>
-                <relationship kind="action" name="restorePurchases:"/>
-                <relationship kind="action" name="toggleSound:"/>
-                <relationship kind="outlet" name="soundOffButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="soundOnButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="unnecessaryLayoutConstraint1" candidateClass="NSLayoutConstraint"/>
-                <relationship kind="outlet" name="unnecessaryLayoutConstraint2" candidateClass="NSLayoutConstraint"/>
-            </relationships>
-        </class>
-        <class className="ESTrophyViewController" superclassName="ESViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ESTrophyViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="back:"/>
-                <relationship kind="action" name="handleTrophyDrag:" candidateClass="UIPanGestureRecognizer"/>
-                <relationship kind="action" name="share:"/>
-                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="boardCollectionView" candidateClass="UICollectionView"/>
-                <relationship kind="outlet" name="facebookButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="homeButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="selectAnAwardImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="trophyCollectionView" candidateClass="UICollectionView"/>
-                <relationship kind="outlet" name="twitterButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="ESViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ESViewController.h"/>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="UICollectionReusableView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
-        </class>
-        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
-        </class>
-        <class className="UICollectionViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewController.h"/>
-        </class>
-        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-        <class className="UICollectionViewLayout" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
