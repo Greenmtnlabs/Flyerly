@@ -74,7 +74,7 @@ SocialStatusCron.setup = function(app) {
 				//Those event id's , which has been started.
 				var startedEventIds = [];
 				var startedEventIdsCounter = 0;
-					
+				console.log( 'Event Fetched from the database',events );
 					
                 // Loop through all record
                 for (var i = 0; i < events.length; i++) {
@@ -137,7 +137,8 @@ SocialStatusCron.setup = function(app) {
 		
 		var contacts = eventObj.customizedContacts;
 		// convert customizedContacts to jsonObject only if it's not an object
-		if ( typeof eventObj.customizedContacts != 'object' ) {
+		if(eventObj.customizedContacts.length != 0){
+		if ( typeof eventObj.customizedContacts != 'object'  ) {
 			contacts = JSON.parse(eventObj.customizedContacts);
 		}
 		
@@ -165,6 +166,7 @@ SocialStatusCron.setup = function(app) {
 
 			} // loop phones
 		} // loop contacts
+	 }
 
     }
 
@@ -219,9 +221,12 @@ SocialStatusCron.setup = function(app) {
 
 	//Let all email[ friends ] know , I going to untechable, via sending email from my email/password
 	function postOnEmails( eventObj ){
-		
+		console.log('Step1',eventObj );
 		eventObj =  CommonFunctions.getValidEventObj( eventObj );
-		
+		console.log('Step2',eventObj );
+		console.log('Step3',eventObj.customizedContacts );
+		if(eventObj.customizedContacts.length != 0)
+		{
 		eventObj.customizedContacts = JSON.parse( eventObj.customizedContacts );
 		var customizedContactsLength = 0;
 
@@ -266,6 +271,8 @@ SocialStatusCron.setup = function(app) {
 				}
 			}
 		}
+	  }
+	  else{console.log("Fields are empty");}
 	}
 
 
@@ -380,9 +387,9 @@ SocialStatusCron.setup = function(app) {
 
 	//Cron will run after every 5 minute // milli seconds in 5 mint (1000*60*5)
 	postSocialStatus();
-	setInterval(function(){	  
+	/*setInterval(function(){	  
 		postSocialStatus();
-	}, (5 * 60 * 1000) );	
+	}, (5 * 60 * 1000) );*/	
 
 	
 	// TESTING CODE  ----------------{-------	

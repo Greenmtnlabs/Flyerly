@@ -33,6 +33,7 @@ CommonFunctions.sendEmail = function( config, nodemailer, data ){
 	        pass: config.email.password
 	    }
 	});
+	console.log(data.fromEmail);
 	
 	// setup e-mail data with unicode symbols
 	var mailOptions = {
