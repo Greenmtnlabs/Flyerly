@@ -2858,7 +2858,7 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9e8b16a6-c220-4801-b7f4-605063e868dc";
+				PROVISIONING_PROFILE = "70f27a9f-86be-4e0f-9d58-d26ef4b682a8";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
