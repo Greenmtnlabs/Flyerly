@@ -53,4 +53,6 @@ static NSString * const kESEventTagForApplicationError = @"Application Error";
 
 #define IS_IPHONE5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)
 #define IS_IPHONE6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
+#define IS_IPHONE6_PLUS (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
+
 #endif
