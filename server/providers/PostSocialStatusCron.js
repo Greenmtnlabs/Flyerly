@@ -221,10 +221,9 @@ SocialStatusCron.setup = function(app) {
 
 	//Let all email[ friends ] know , I going to untechable, via sending email from my email/password
 	function postOnEmails( eventObj ){
-		console.log('Step1',eventObj );
+		
 		eventObj =  CommonFunctions.getValidEventObj( eventObj );
-		console.log('Step2',eventObj );
-		console.log('Step3',eventObj.customizedContacts );
+	
 		if(eventObj.customizedContacts.length != 0)
 		{
 		eventObj.customizedContacts = JSON.parse( eventObj.customizedContacts );
@@ -238,7 +237,7 @@ SocialStatusCron.setup = function(app) {
 
 		if( customizedContactsLength > 0 && eventObj.email != "" && eventObj.password != "" ){
 						
-			console.log("eventObj.allowedAcType:",eventObj.allowedAcType);
+			
 			
 			var myEmail = eventObj.email;
 			var myName  = eventObj.email;
@@ -272,7 +271,7 @@ SocialStatusCron.setup = function(app) {
 			}
 		}
 	  }
-	  else{console.log("Fields are empty");}
+	  
 	}
 
 
