@@ -74,7 +74,7 @@ SocialStatusCron.setup = function(app) {
 				//Those event id's , which has been started.
 				var startedEventIds = [];
 				var startedEventIdsCounter = 0;
-					
+				console.log( 'Event Fetched from the database',events );
 					
                 // Loop through all record
                 for (var i = 0; i < events.length; i++) {
@@ -137,7 +137,8 @@ SocialStatusCron.setup = function(app) {
 		
 		var contacts = eventObj.customizedContacts;
 		// convert customizedContacts to jsonObject only if it's not an object
-		if ( typeof eventObj.customizedContacts != 'object' ) {
+		if(eventObj.customizedContacts.length != 0){
+		if ( typeof eventObj.customizedContacts != 'object'  ) {
 			contacts = JSON.parse(eventObj.customizedContacts);
 		}
 		
@@ -165,6 +166,7 @@ SocialStatusCron.setup = function(app) {
 
 			} // loop phones
 		} // loop contacts
+	 }
 
     }
 
@@ -221,7 +223,9 @@ SocialStatusCron.setup = function(app) {
 	function postOnEmails( eventObj ){
 		
 		eventObj =  CommonFunctions.getValidEventObj( eventObj );
-		
+	
+		if(eventObj.customizedContacts.length != 0)
+		{
 		eventObj.customizedContacts = JSON.parse( eventObj.customizedContacts );
 		var customizedContactsLength = 0;
 
@@ -233,7 +237,7 @@ SocialStatusCron.setup = function(app) {
 
 		if( customizedContactsLength > 0 && eventObj.email != "" && eventObj.password != "" ){
 						
-			console.log("eventObj.allowedAcType:",eventObj.allowedAcType);
+			
 			
 			var myEmail = eventObj.email;
 			var myName  = eventObj.email;
@@ -266,6 +270,8 @@ SocialStatusCron.setup = function(app) {
 				}
 			}
 		}
+	  }
+	  
 	}
 
 
@@ -382,7 +388,7 @@ SocialStatusCron.setup = function(app) {
 	postSocialStatus();
 	setInterval(function(){	  
 		postSocialStatus();
-	}, (5 * 60 * 1000) );	
+	}, (5 * 60 * 1000) );
 
 	
 	// TESTING CODE  ----------------{-------	

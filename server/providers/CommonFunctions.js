@@ -33,6 +33,7 @@ CommonFunctions.sendEmail = function( config, nodemailer, data ){
 	        pass: config.email.password
 	    }
 	});
+			
 	
 	// setup e-mail data with unicode symbols
 	var mailOptions = {
@@ -92,7 +93,7 @@ CommonFunctions.sendEmail2 = function( eventObj, mailOptions ){
 
 	try{
 
-		console.log("smtpOptions:",smtpOptions);
+	
 		// send mail with defined transport object
 		smtpTransport.sendMail(mailOptions, function(error, response){
 		    if(error){
@@ -114,15 +115,18 @@ CommonFunctions.sendEmail2 = function( eventObj, mailOptions ){
 
 CommonFunctions.sendDefaultEmail = function(mailOptions) {
 	// send email with default email settings
+	    
 	var smtpTransport = nodemailer.createTransport("SMTP",{
 	    service: "Gmail",
 	    auth: {
 	        user: config.email.emailAddress,
 	        pass: config.email.password
 	    }
+
 	});
 
 	smtpTransport.sendMail(mailOptions, function(error, response){
+		
 		if(error){
 			logger.info("commongFunction.js line: "+__line+" ,Error occured while send email with default settings");
 			logger.info(error);
