@@ -194,7 +194,7 @@
 }
 - (NSDate *)timestampStrToNsDate:(NSString *)timeStamp
 {
-    return [NSDate dateWithTimeIntervalSince1970:[timeStamp floatValue]];
+    return [NSDate dateWithTimeIntervalSince1970:[timeStamp integerValue]];
 }
 
 - (NSString *)timestampStringToAppDate:(NSString *)timeStamp
