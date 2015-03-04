@@ -2074,6 +2074,11 @@
 				CLASSPREFIX = ES;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Green Mtn Think";
+				TargetAttributes = {
+					B599C90E16D55E5C0036229D = {
+						DevelopmentTeam = 4MGKP9P5WH;
+					};
+				};
 			};
 			buildConfigurationList = B599C90A16D55E5C0036229D /* Build configuration list for PBXProject "eyeSpot" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -2738,8 +2743,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "638E5BB4-6E07-4927-8CD2-F12A29E9307C";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "638E5BB4-6E07-4927-8CD2-F12A29E9307C";
+				PROVISIONING_PROFILE = "7d31a347-a62d-4017-89cc-3d73a7c9bc06";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7d31a347-a62d-4017-89cc-3d73a7c9bc06";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -2750,8 +2755,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EB7CA917D0B3D86A9B1459D5 /* Pods.adhoc.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -2761,13 +2766,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "eyeSpot/eyeSpot-Prefix.pch";
 				INFOPLIST_FILE = "eyeSpot/eyeSpot-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "7d31a347-a62d-4017-89cc-3d73a7c9bc06";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2785,8 +2790,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Vladimir Fleurima (3B5KCCT8BZ)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Vladimir Fleurima (3B5KCCT8BZ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2801,8 +2806,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "6C7FC62A-4F3C-4EA2-8769-27E91B59F8E6";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6C7FC62A-4F3C-4EA2-8769-27E91B59F8E6";
+				PROVISIONING_PROFILE = "a159e3d2-f120-47f9-a559-a7aae098c51e";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "a159e3d2-f120-47f9-a559-a7aae098c51e";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2829,8 +2834,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "638E5BB4-6E07-4927-8CD2-F12A29E9307C";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "638E5BB4-6E07-4927-8CD2-F12A29E9307C";
+				PROVISIONING_PROFILE = "5dd76fa6-e87e-4309-b62a-68dce63b5501";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5dd76fa6-e87e-4309-b62a-68dce63b5501";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -2841,8 +2846,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FEEFF80B8641C4513A722249 /* Pods.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -2852,13 +2857,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "eyeSpot/eyeSpot-Prefix.pch";
 				INFOPLIST_FILE = "eyeSpot/eyeSpot-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "a159e3d2-f120-47f9-a559-a7aae098c51e";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2868,8 +2873,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D06C24C8213F8CD57F359F2C /* Pods.release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -2879,13 +2884,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "eyeSpot/eyeSpot-Prefix.pch";
 				INFOPLIST_FILE = "eyeSpot/eyeSpot-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5dd76fa6-e87e-4309-b62a-68dce63b5501";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
