@@ -372,11 +372,8 @@ UIImageView *imgViewGoodJob;
     
 #else
     
-    //Rehan's a/c
-    return @"ca-app-pub-1703558915514520/8955078699";
-    
     //Live Jen'account
-    //return @"ca-app-pub-3218409375181552/5412213028";
+    return @"ca-app-pub-3218409375181552/6317481025";
     
 #endif
     

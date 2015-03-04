@@ -16,6 +16,7 @@
 		2055C9DD1A9B613000778F1F /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2055C9DB1A9B613000778F1F /* EventKitUI.framework */; };
 		2055C9DF1A9B613900778F1F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2055C9DE1A9B613900778F1F /* MessageUI.framework */; };
 		2055C9E11A9B615100778F1F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2055C9E01A9B615100778F1F /* SystemConfiguration.framework */; };
+		206C45291AA73952004210BA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 206C45281AA73952004210BA /* Images.xcassets */; };
 		3F1F0DD21756F63E0076BC85 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F1F0DCF1756F63E0076BC85 /* Default.png */; };
 		3F1F0DD31756F63E0076BC85 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F1F0DD01756F63E0076BC85 /* Default-568h@2x.png */; };
 		3F1F0DD41756F63E0076BC85 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F1F0DD11756F63E0076BC85 /* Default@2x.png */; };
@@ -554,6 +555,7 @@
 		2055C9DB1A9B613000778F1F /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
 		2055C9DE1A9B613900778F1F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		2055C9E01A9B615100778F1F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		206C45281AA73952004210BA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = eyeSPOT/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		3F1F0DCF1756F63E0076BC85 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		3F1F0DD01756F63E0076BC85 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3F1F0DD11756F63E0076BC85 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -1910,6 +1912,7 @@
 				B599C92A16D55E5C0036229D /* MainStoryboard_iPhone.storyboard */,
 				B599C92D16D55E5C0036229D /* MainStoryboard_iPad.storyboard */,
 				B579855D16D5B3D9001D628C /* Resources */,
+				206C45281AA73952004210BA /* Images.xcassets */,
 				B599C91916D55E5C0036229D /* Supporting Files */,
 			);
 			name = eyeSPOT;
@@ -2130,6 +2133,7 @@
 				B56443CD16E54F65007067C1 /* Help~ipad.png in Resources */,
 				B56443CE16E54F65007067C1 /* PlayButton_Selected~ipad.png in Resources */,
 				B56443CF16E54F65007067C1 /* PlayButton~ipad.png in Resources */,
+				206C45291AA73952004210BA /* Images.xcassets in Resources */,
 				B56443D016E54F65007067C1 /* Settings_Selected~ipad.png in Resources */,
 				B56443D116E54F65007067C1 /* Settings~ipad.png in Resources */,
 				B56443D216E54F65007067C1 /* TrohpyRoom_icon_Selected~ipad.png in Resources */,
@@ -2750,6 +2754,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EB7CA917D0B3D86A9B1459D5 /* Pods.adhoc.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2841,6 +2847,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FEEFF80B8641C4513A722249 /* Pods.debug.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2868,6 +2876,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D06C24C8213F8CD57F359F2C /* Pods.release.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
