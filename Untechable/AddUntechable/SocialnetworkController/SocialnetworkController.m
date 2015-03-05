@@ -329,13 +329,14 @@
             
             NSMutableArray *emailOnly  = [[NSMutableArray alloc] init];
             NSMutableArray *emailsWithStatus  = tempModal.allEmails;
-            for ( int k = 0; k < emailsWithStatus.count; k++){
+    
+            for ( int k = 0; k < emailsWithStatus.count; k++) {
+                
                 NSMutableArray *emailWithStatus = [emailsWithStatus objectAtIndex:k];
-                if ( [[emailWithStatus objectAtIndex:1] isEqualToString:@"0"] )
-                {
-                    [emailsWithStatus removeObject:emailWithStatus];
-                }else {
-                    [emailOnly addObject:[emailWithStatus objectAtIndex:0]];
+                
+                if ( [[emailWithStatus objectAtIndex:1] isEqualToString:@"1"] ) {
+                    
+                    [emailOnly addObject:emailWithStatus];
                 }
             }
             

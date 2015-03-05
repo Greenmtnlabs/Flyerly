@@ -548,7 +548,7 @@
                 {
                     [emailsWithStatus removeObject:emailWithStatus];
                 }else {
-                    [emailOnly addObject:[emailWithStatus objectAtIndex:0]];
+                    [emailOnly addObject:emailWithStatus];
                 }
             }
             
