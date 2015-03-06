@@ -434,6 +434,8 @@ invalidboard:
 //                             interpolationQuality:kCGInterpolationHigh];
     
     /* First we make the image square by cropping it around the center. */
+    NSLog(@"%f" , image.size.width);
+    NSLog(@"%f" , image.size.height);
     CGFloat largeImageSize = MIN(image.size.width, image.size.height);
     CGRect cropRect = CGRectMake(round((image.size.width - largeImageSize) / 2),
                                  round((image.size.height - largeImageSize) / 2),
@@ -608,6 +610,10 @@ invalidboard:
 - (void)currentPageIndexDidChange:(ESPagination *)pagination
 {
     [self.collectionView reloadData];
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskLandscape;
 }
 
 @end
