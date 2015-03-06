@@ -15,6 +15,15 @@
 #import "Crittercism.h"
 #import <GoogleMobileAds/GoogleMobileAds.h>
 
+@implementation UINavigationController (Rotation_IOS6)
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskLandscape;
+}
+
+@end
+
 @implementation ESAppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -150,4 +159,9 @@
 {
     return (ESAppDelegate *)[[UIApplication sharedApplication] delegate];
 }
+
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+    return UIInterfaceOrientationMaskLandscape | UIInterfaceOrientationMaskPortrait;
+}
+
 @end
