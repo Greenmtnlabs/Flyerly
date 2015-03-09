@@ -42,7 +42,7 @@
 
 
 @class FlyerlySingleton, Flyer, FlyerImageView, ShareViewController, SigninController,InAppViewController,PrintViewController;
-@interface CreateFlyerController :ParentViewController<UIScrollViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate,UIGestureRecognizerDelegate,InAppPurchasePanelButtonProtocol, UserPurchasesDelegate, GADInterstitialDelegate, GADBannerViewDelegate>
+@interface CreateFlyerController :ParentViewController<UITextFieldDelegate,UIScrollViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate,UIGestureRecognizerDelegate,InAppPurchasePanelButtonProtocol, UserPurchasesDelegate, GADInterstitialDelegate, GADBannerViewDelegate>
 
 {
     PrintViewController *printViewController;
@@ -282,4 +282,5 @@
 
 
 -(void)tasksOnCreateNewFlyer;
+
 @end

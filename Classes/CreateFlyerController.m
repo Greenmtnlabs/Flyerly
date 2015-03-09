@@ -6738,4 +6738,12 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+
+
 @end

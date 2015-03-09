@@ -169,7 +169,10 @@ UIButton *backButton;
 {
     [textField resignFirstResponder];
     // Reseting the scrollview position
-    [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    //[scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    
+    [textField resignFirstResponder];
+    
     return YES;
 }
 
@@ -535,7 +538,7 @@ https://lob.com/docs#postcards
                  
                  message = [NSString stringWithFormat:@"Your postcard [for: %@ ] has been send to print.", tempNameTo];
                  
-                 UIAlertView *alertSuccess = [[UIAlertView alloc] initWithTitle:@"PostCard Send" message:message  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                 UIAlertView *alertSuccess = [[UIAlertView alloc] initWithTitle:@"Postcard Sent." message:message  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                  
                  [alertSuccess show];
                  
@@ -638,7 +641,7 @@ https://lob.com/docs#postcards
     NSDecimalNumber *totalAmount = [[NSDecimalNumber alloc] initWithInt:(2 * totalContactsToSendPrint)];
     payment.amount = totalAmount;
     payment.currencyCode = @"USD";
-    payment.shortDescription = @"Printing Flyer PostCard";
+    payment.shortDescription = @"Print & Mail Flyerly Postcard.";
     
     // Use the intent property to indicate that this is a "sale" payment,
     // meaning combined Authorization + Capture. To perform Authorization only,
@@ -658,5 +661,6 @@ https://lob.com/docs#postcards
         [self presentViewController:paymentViewController animated:YES completion:nil];
     }
 }
+
 
 @end

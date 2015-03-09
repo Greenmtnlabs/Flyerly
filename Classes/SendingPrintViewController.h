@@ -19,7 +19,7 @@
 #import "AbstractBlockRequest.h"
 
 @class AbstractBlockRequest;
-@interface SendingPrintViewController : ParentViewController< MFMailComposeViewControllerDelegate, PayPalPaymentDelegate > {
+@interface SendingPrintViewController : ParentViewController< UITextFieldDelegate, MFMailComposeViewControllerDelegate, PayPalPaymentDelegate > {
     
     AbstractBlockRequest *requestClass;
 }
