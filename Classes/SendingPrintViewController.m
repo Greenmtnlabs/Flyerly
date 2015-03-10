@@ -54,7 +54,7 @@ UIButton *backButton;
 
 
 
-@synthesize messageFeild,streetAddress,state,city,zip,country,name,flyerImage,flyer,contactsArray,scrollView;
+@synthesize messageFeild,streetAddress,state,city,zip,country,name,flyerImage,flyer,contactsArray,scrollView, toName,toCity,toCountry,toState,toStreetAddress,toZip;
 
 - (void)viewDidLoad
 {
@@ -113,6 +113,11 @@ UIButton *backButton;
     self.state.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
     self.city.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
     self.country.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+    self.toState.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+    self.toCountry.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+    self.toCity.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+    self.toName.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+    self.toStreetAddress.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-28, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
@@ -186,7 +191,7 @@ UIButton *backButton;
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid Address." message:error delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     
     [alert show];
-    [self hideLoadingIndicator];
+    //[self hideLoadingIndicator];
 }
 
 - (void)sendFlyer{
@@ -216,11 +221,61 @@ UIButton *backButton;
         [self showAlert:@"Please enter state."];
         
     }else {
-        [self sendrequestOnLob];
+        [self checkTocount];
     }
     
 }
+- (void)checkTocount{
+    
+    if(contactsArray.count <1){
+        
+        if ( [toName.text isEqualToString:@""] && [toStreetAddress.text isEqualToString:@""] && [toZip.text isEqualToString:@""] && [toCity.text isEqualToString:@""] && [toState.text isEqualToString:@""]){
+            
+            [self showAlert:@"Please enter reciever credentials."];
+            
+        } else {
+            
+            [self validateMandatoryToFlyerField];
+        }
+    } else {
+        [self validateMandatoryToFlyerField];
+    }
 
+}
+//Validating the madatory of optional To Filyer fields
+- (void)validateMandatoryToFlyerField{
+
+    if ( [toName.text isEqualToString:@""] && [toStreetAddress.text isEqualToString:@""] && [toZip.text isEqualToString:@""] && [toCity.text isEqualToString:@""] && [toState.text isEqualToString:@""]){
+        
+        [self sendrequestOnLob];
+        
+    } else if ( [toName.text isEqualToString:@""] ){
+        
+        [self showAlert:@"Please enter reciever name."];
+        
+    } else if ( [toStreetAddress.text isEqualToString:@""] ){
+        
+        [self showAlert:@"Please enter reciever street address."];
+        
+    }else if ( [toZip.text isEqualToString:@""] ){
+        
+        [self showAlert:@"Please enter reciever zip code."];
+        
+    }else if ( [toCity.text isEqualToString:@""] ){
+        
+        [self showAlert:@"Please enter reciever city."];
+        
+    }else if ( [toState.text isEqualToString:@""] ){
+        
+        [self showAlert:@"Please enter  reciever state."];
+        
+    }else {
+        
+        [self sendrequestOnLob];
+    }
+    
+    
+}
 
 #pragma mark - Message UI Delegate
 
@@ -489,21 +544,49 @@ https://lob.com/docs#postcards
             fromAddress = fromAddressTest;
         }
         
-        
-        NSDictionary *postcardDict = @{@"name" : @"Flyer Postcard",
-                                       @"front" : frontUrl,
-                                       @"message" : messageFeild.text,
-                                       @"to" : toAddress,
-                                       @"from" : fromAddress};
-        
-
-        if( postReqTry == 1 ){
-            [sendCardTo addObject:[self getSendCardToName1:postcardDict]];
-        }
-        
-        [self sendPostCardToLob:postcardDict];
+        [self sendPostcardTo:frontUrl toAddress:toAddress fromAddress:fromAddress];
     }
+    
+    //When to is exist
+    if ( !([toName.text isEqualToString:@""]) && !([toStreetAddress.text isEqualToString:@""]) && !([toZip.text isEqualToString:@""]) && !([toCity.text isEqualToString:@""]) && !([toState.text isEqualToString:@""])){
+        NSDictionary *toAddress = @{
+                                    @"name" : toName.text, \
+                                    @"email" : [NSNull null], \
+                                    @"phone" : [NSNull null], \
+                                    @"address_line1" : toStreetAddress.text, \
+                                    @"address_line2" : [NSNull null], \
+                                    @"address_city" : toCity.text, \
+                                    @"address_state" : toState.text, \
+                                    @"address_zip" : toZip.text, \
+                                    @"address_country" : @"US"
+                                    };
+        [self sendPostcardTo:frontUrl toAddress:toAddress fromAddress:fromAddress];
+
+    }
+    
+
+    
+    
 }
+
+-(void)sendPostcardTo:(NSString *)frontUrl toAddress:(NSDictionary *)toAddress fromAddress:(NSDictionary *)fromAddress
+{
+
+    NSDictionary *postcardDict = @{@"name" : @"Flyer Postcard",
+                                   @"front" : frontUrl,
+                                   @"message" : messageFeild.text,
+                                   @"to" : toAddress,
+                                   @"from" : fromAddress};
+    
+    
+    if( postReqTry == 1 ){
+        [sendCardTo addObject:[self getSendCardToName1:postcardDict]];
+    }
+    
+    [self sendPostCardToLob:postcardDict];
+}
+
+
 
 //Send After Address Verification
 -(void)sendPostCardToLob: (NSDictionary *)postcardDict
