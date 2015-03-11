@@ -535,8 +535,7 @@ https://lob.com/docs#postcards
                                     @"address_city" : model.city, \
                                     @"address_state" : model.state, \
                                     @"address_zip" : model.zip, \
-                                    @"address_country" : @"US"
-                                    };
+                                    @"address_country" : @"US"};
 
         
         if( testing ){
@@ -553,7 +552,7 @@ https://lob.com/docs#postcards
                                     @"name" : toName.text, \
                                     @"email" : [NSNull null], \
                                     @"phone" : [NSNull null], \
-                                    @"address_line1" : toStreetAddress.text, \
+                                    @"address_line1" : [self setAddressStr:toStreetAddress.text], \
                                     @"address_line2" : [NSNull null], \
                                     @"address_city" : toCity.text, \
                                     @"address_state" : toState.text, \
