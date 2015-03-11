@@ -38,4 +38,11 @@
 @property (nonatomic, strong) IBOutlet UITextField *city;
 @property (nonatomic, strong) IBOutlet UITextField *country;
 
+@property (weak, nonatomic) IBOutlet UITextField *toName;
+@property (weak, nonatomic) IBOutlet UITextField *toStreetAddress;
+@property (weak, nonatomic) IBOutlet UITextField *toZip;
+@property (weak, nonatomic) IBOutlet UITextField *toCity;
+@property (weak, nonatomic) IBOutlet UITextField *toCountry;
+@property (weak, nonatomic) IBOutlet UITextField *toState;
+
 @end

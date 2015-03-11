@@ -160,7 +160,7 @@
     NSLog(@"%@",identifiers);
     NSLog(@"%lu",(unsigned long)contactsArray.count);
     
-    if([identifiers count] > 0) {
+    //if([identifiers count] > 0) {
         
         [Flurry logEvent:@"Friends Invited"];
         
@@ -169,9 +169,9 @@
         sendingControoler.contactsArray = self.selectedIdentifiers;
         [self.navigationController pushViewController:sendingControoler animated:YES];
         
-    } else {
-        [self showAlert:@"Please select any contact to invite !" message:@""];
-    }
+   // } else {
+   //     [self showAlert:@"Please select any contact to invite !" message:@""];
+//    }
     
 }
 
