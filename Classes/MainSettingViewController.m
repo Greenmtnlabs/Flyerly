@@ -368,7 +368,17 @@
             // Push sign in controller on the stack
             [navigationController pushViewController:signInController animated:YES];
             
+        }else if (indexPath.row == 6){
+            //terms of service
+            termOfServiceView = [[TermsOfServiceViewController alloc]initWithNibName:@"TermsOfServiceViewController" bundle:nil];
+            [self.navigationController pushViewController:termOfServiceView animated:YES];
+            
+        } else if (indexPath.row == 7){
+            //privicy policy
+            privicyPolicyView = [[PrivicyPolicyViewController alloc]initWithNibName:@"PrivicyPolicyViewController" bundle:nil];
+            [self.navigationController pushViewController:privicyPolicyView animated:YES];
         }
+
     }
     
     
