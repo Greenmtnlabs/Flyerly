@@ -21,10 +21,12 @@
 #import <ShareKit.h>
 #import "FlyerlyTwitterLike.h"
 #import "RMStoreKeychainPersistence.h"
+#import "PrivicyPolicyViewController.h"
+#import "TermsOfServiceViewController.h"
 
 
 @class InputViewController,FlyerlySingleton ;
-@class LaunchController,HelpController,ProfileViewController,InAppViewController;
+@class LaunchController,HelpController,ProfileViewController,TermsOfServiceViewController,PrivicyPolicyViewController,InAppViewController;
 @interface MainSettingViewController : UIViewController <UITableViewDelegate, MFMailComposeViewControllerDelegate,InAppPurchasePanelButtonProtocol,UserPurchasesDelegate,SHKSharerDelegate>{
 
     NSMutableArray *category;
@@ -35,6 +37,8 @@
     RegisterController *registerController;
     FlyerlySingleton *globle;
     InAppViewController *inappviewcontroller;
+    PrivicyPolicyViewController * privicyPolicyView;
+    TermsOfServiceViewController * termOfServiceView;
 
 }
 @property (strong, nonatomic)IBOutlet UITableView *tableView;

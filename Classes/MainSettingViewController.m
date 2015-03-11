@@ -95,16 +95,22 @@
     [category addObject:@"Like us on Facebook"];
     [category addObject:@"Follow us on Twitter"];
     
+    
     //Checking if the user is valid or anonymus
     if ([[PFUser currentUser] sessionToken].length != 0) {
         [category addObject:@"Sign Out"];
+        [category addObject:@"Terms of Service"];
+        [category addObject:@"Privicy Policy"];
         // will remove in production build
         if ( [flyerConfigurator currentDebugMood] ){
             [category addObject:@"Clear Purchases"];
         }
     } else {
         [category addObject:@"Sign In"];
+        [category addObject:@"Terms of Service"];
+        [category addObject:@"Privicy Policy"];
     }
+   
 }
 
 #pragma TableView Events
@@ -197,11 +203,14 @@
         if (indexPath.row == 4)imgname = @"fb_Like";
         if (indexPath.row == 5)imgname = @"twt_follow";
         if (indexPath.row == 6)imgname = @"signout";
+        
     } else {
         if (indexPath.row == 3)imgname = @"fb_Like";
         if (indexPath.row == 4)imgname = @"twt_follow";
         if (indexPath.row == 5)imgname = @"signin";
     }
+    
+    
    
     
     
@@ -299,7 +308,7 @@
          
         //------
         //This code will not called in Production,as this row is not adding in view
-        }else if(indexPath.row == 7){
+        }else if(indexPath.row == 9){
         
             _persistence = [[RMStoreKeychainPersistence alloc] init];
             [RMStore defaultStore].transactionPersistor = _persistence;
@@ -307,6 +316,15 @@
              //Uncomment this line if you want to remove transactions from the phone.
              [_persistence removeTransactions];
             
+        }else if (indexPath.row == 7){
+            //terms of service
+            termOfServiceView = [[TermsOfServiceViewController alloc]initWithNibName:@"TermsOfServiceViewController" bundle:nil];
+            [self.navigationController pushViewController:termOfServiceView animated:YES];
+            
+        } else if (indexPath.row == 8){
+            //privicy policy
+            privicyPolicyView = [[PrivicyPolicyViewController alloc]initWithNibName:@"PrivicyPolicyViewController" bundle:nil];
+            [self.navigationController pushViewController:privicyPolicyView animated:YES];
         }
         //-------
         [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
