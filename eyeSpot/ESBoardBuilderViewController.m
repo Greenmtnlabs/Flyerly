@@ -116,7 +116,9 @@ static NSInteger kESBoardBuilderChangeCoverImageIndex = -1;
 //    BOOL isLandscape = UIInterfaceOrientationIsLandscape([[UIDevice currentDevice] orientation]);
     BOOL isLandscape = UIDeviceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation);
     BOOL keyboardIsShowing = [notification.name isEqualToString:UIKeyboardWillShowNotification];
-    CGFloat yDelta = (isLandscape) ? keyboardFrame.size.width : keyboardFrame.size.height;
+    
+    CGFloat  yDelta = (keyboardFrame.size.width == 568) ? keyboardFrame.size.height : keyboardFrame.size.width;
+    
     yDelta *= (keyboardIsShowing) ? -1 : 1;
     myFrame.origin.y += yDelta;
     
@@ -130,6 +132,8 @@ static NSInteger kESBoardBuilderChangeCoverImageIndex = -1;
                          self.collectionView.frame = myFrame;
                      }
                      completion:nil];
+    
+   
 }
 
 - (void)didReceiveMemoryWarning
