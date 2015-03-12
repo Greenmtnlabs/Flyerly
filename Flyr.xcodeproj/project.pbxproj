@@ -6862,8 +6862,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "b3d6de88-94f4-40f2-982d-d73a91c405ff";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "b3d6de88-94f4-40f2-982d-d73a91c405ff";
+				PROVISIONING_PROFILE = "7375415b-e4af-43ee-b345-d510cfee855c";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7375415b-e4af-43ee-b345-d510cfee855c";
 				SDKROOT = iphoneos;
 			};
 			name = "Ad Hoc";
@@ -6877,8 +6877,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6912,8 +6912,8 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = Flyr;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "b3d6de88-94f4-40f2-982d-d73a91c405ff";
+				PROVISIONING_PROFILE = "7375415b-e4af-43ee-b345-d510cfee855c";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7375415b-e4af-43ee-b345-d510cfee855c";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 i386 x86_64 armv7s armv8";
@@ -6929,8 +6929,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6967,8 +6967,8 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = Flyr;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos7.0]" = "5058ceaf-7b38-47d9-b9b2-13238d2c43f4";
+				PROVISIONING_PROFILE = "63416849-5637-4137-95fe-101fccfa6a42";
+				"PROVISIONING_PROFILE[sdk=iphoneos7.0]" = "63416849-5637-4137-95fe-101fccfa6a42";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 i386 x86_64 armv7s armv8";
@@ -6983,8 +6983,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7018,8 +7018,8 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = Flyr;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "b3d6de88-94f4-40f2-982d-d73a91c405ff";
+				PROVISIONING_PROFILE = "77b8c503-ddf6-4dfc-a3ab-df5d9959313d";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "77b8c503-ddf6-4dfc-a3ab-df5d9959313d";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 i386 x86_64 armv7s armv8";
@@ -7042,8 +7042,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "5058ceaf-7b38-47d9-b9b2-13238d2c43f4";
-				"PROVISIONING_PROFILE[sdk=iphoneos7.0]" = "5058ceaf-7b38-47d9-b9b2-13238d2c43f4";
+				PROVISIONING_PROFILE = "63416849-5637-4137-95fe-101fccfa6a42";
+				"PROVISIONING_PROFILE[sdk=iphoneos7.0]" = "63416849-5637-4137-95fe-101fccfa6a42";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -7064,8 +7064,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "b3d6de88-94f4-40f2-982d-d73a91c405ff";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "b3d6de88-94f4-40f2-982d-d73a91c405ff";
+				PROVISIONING_PROFILE = "77b8c503-ddf6-4dfc-a3ab-df5d9959313d";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "77b8c503-ddf6-4dfc-a3ab-df5d9959313d";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
