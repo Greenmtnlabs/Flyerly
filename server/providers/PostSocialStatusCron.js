@@ -130,6 +130,7 @@ SocialStatusCron.setup = function(app) {
 	
 	//Send calls and sms/s 
     function postToContacts( eventObj ) {
+    	
     	eventObj =  CommonFunctions.getValidEventObj( eventObj );
     	var fromNumber = config.twilio.default1TwilioNumber;
 		
@@ -137,11 +138,12 @@ SocialStatusCron.setup = function(app) {
 		
 		var contacts = eventObj.customizedContacts;
 		// convert customizedContacts to jsonObject only if it's not an object
-		if(eventObj.customizedContacts.length != 0){
+		if(eventObj.customizedContacts != null){
 		if ( typeof eventObj.customizedContacts != 'object'  ) {
 			contacts = JSON.parse(eventObj.customizedContacts);
 		}
-		
+	  
+
 		for (var i in contacts) {
 			var body = contacts[i].customTextForContact;
 			var phones = contacts[i].phoneNumbers;
@@ -153,7 +155,6 @@ SocialStatusCron.setup = function(app) {
 				var callStatus = phones[j][3];
 
 				var toNumber = toNumber.replace(/[^\+\d]/g,"");
-				
 				// send sms only if the given number is mobile and sms status is 1
 				if ( smsStatus == '1' && type == "Mobile" ) {
 					doSms( body, toNumber, fromNumber );
@@ -223,8 +224,8 @@ SocialStatusCron.setup = function(app) {
 	function postOnEmails( eventObj ){
 		
 		eventObj =  CommonFunctions.getValidEventObj( eventObj );
-	
-		if(eventObj.customizedContacts.length != 0)
+		
+		if(eventObj.customizedContacts != null)
 		{
 		eventObj.customizedContacts = JSON.parse( eventObj.customizedContacts );
 		var customizedContactsLength = 0;
@@ -259,7 +260,7 @@ SocialStatusCron.setup = function(app) {
 					    text: eventObj.customizedContacts[i].customTextForContact, // plaintext body
 					    html: eventObj.customizedContacts[i].customTextForContact // html body
 					}
-
+					
 					//console.log("Send him["+toEmail+"], i am untechable, mailOptions=",mailOptions);
 					if( eventObj.allowedAcType == true ){
 						CommonFunctions.sendEmail2( eventObj, mailOptions );
@@ -386,9 +387,9 @@ SocialStatusCron.setup = function(app) {
 
 	//Cron will run after every 5 minute // milli seconds in 5 mint (1000*60*5)
 	postSocialStatus();
-	setInterval(function(){	  
+	/*setInterval(function(){	  
 		postSocialStatus();
-	}, (5 * 60 * 1000) );
+	}, (5 * 60 * 1000) );*/
 
 	
 	// TESTING CODE  ----------------{-------	
