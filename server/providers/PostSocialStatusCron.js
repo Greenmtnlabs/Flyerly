@@ -387,9 +387,9 @@ SocialStatusCron.setup = function(app) {
 
 	//Cron will run after every 5 minute // milli seconds in 5 mint (1000*60*5)
 	postSocialStatus();
-	/*setInterval(function(){	  
+	setInterval(function(){	  
 		postSocialStatus();
-	}, (5 * 60 * 1000) );*/
+	}, (5 * 60 * 1000) );
 
 	
 	// TESTING CODE  ----------------{-------	
