@@ -49,7 +49,7 @@ config.app.mode.LOCALHOST = 'localhost'; //Port: 3001
 config.app.mode.DEVELOPMENT = 'development'; //Port: 8000
 config.app.mode.PRODUCTION = 'production';   //Port: 3010
 
-config.app.mode.current = config.app.mode.DEVELOPMENT;//DEVELOPMENT; //LOCALHOST
+config.app.mode.current = config.app.mode.PRODUCTION;//DEVELOPMENT; //LOCALHOST
 
 // Check if we are on local host
 if( config.app.mode.current == config.app.mode.LOCALHOST  ) {

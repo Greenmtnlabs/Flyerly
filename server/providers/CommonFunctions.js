@@ -191,7 +191,7 @@ CommonFunctions.getValidEventObj = function( eventObj ) {
 		eventObj.acType = config.acType.YAHOO;			
 		}
 	}
-    console.log("CommonFunctions");
+    
 	if( eventObj.acType == config.acType.GOOGLE ){
 		
 		eventObj.service 	 =	"Gmail";
