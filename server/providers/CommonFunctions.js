@@ -145,7 +145,7 @@ CommonFunctions.getEmailAcType = function( email ) {
 	email	=	( typeof email == "string" ) ? email : "";
 	
 	if( email.indexOf("@gmail.com") > -1 ) {
-		acType = config.acType.GMAIL;
+		acType = config.acType.GOOGLE;
 	}
 	else if( email.indexOf("@hotmail.com") > -1 ) {
 		acType = config.acType.HOTMAIL;			
@@ -180,7 +180,20 @@ CommonFunctions.getValidEventObj = function( eventObj ) {
 	eventObj.allowedAcType = false;
 	eventObj.service =	"";	
 
+	if(eventObj.acType == '' && eventObj.email != '' ){
+		if( eventObj.email.indexOf("@gmail.com") > -1 ) {
+		eventObj.acType = config.acType.GOOGLE;
+		}
+		else if( eventObj.email.indexOf("@hotmail.com") > -1 ) {
+		eventObj.acType = config.acType.HOTMAIL;			
+		}
+		else if( eventObj.email.indexOf("@yahoo.com") > -1 ) {
+		eventObj.acType = config.acType.YAHOO;			
+		}
+	}
+    
 	if( eventObj.acType == config.acType.GOOGLE ){
+		
 		eventObj.service 	 =	"Gmail";
 		
 		eventObj.imsHostName = "imap.gmail.com";
@@ -194,6 +207,7 @@ CommonFunctions.getValidEventObj = function( eventObj ) {
 		eventObj.allowedAcType = true;
 	}
 	else if( eventObj.acType == config.acType.OUTLOOK ){
+		
 		eventObj.service 	 =	"Hotmail";	
 					
 		eventObj.imsHostName = "imap-mail.outlook.com";
@@ -207,6 +221,7 @@ CommonFunctions.getValidEventObj = function( eventObj ) {
 		eventObj.allowedAcType = true;
 	}			
 	else if( eventObj.acType == config.acType.YAHOO ){
+		
 		eventObj.service 	 =	"Yahoo";		
 				
 		eventObj.imsHostName = "imap.mail.yahoo.com";
