@@ -134,7 +134,7 @@
     NSString *imgname =@"";
 
     if (indexPath.row == 0){
-        imgname = @" ";
+        imgname = @"premium_features";
     }
     else if (indexPath.row == 1){
             
