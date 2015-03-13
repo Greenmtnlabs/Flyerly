@@ -247,6 +247,10 @@
 		2095C90E18C5E89900E244A8 /* FlyerlyTwitterFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 2095C90D18C5E89900E244A8 /* FlyerlyTwitterFriends.m */; };
 		2095C91118C5F92700E244A8 /* FlyerlyFacebookInvite.m in Sources */ = {isa = PBXBuildFile; fileRef = 2095C91018C5F92700E244A8 /* FlyerlyFacebookInvite.m */; };
 		20967D9818C8973200B273FC /* FlyerlyTwitterLike.m in Sources */ = {isa = PBXBuildFile; fileRef = 20967D9718C8973200B273FC /* FlyerlyTwitterLike.m */; };
+		2098BDBA1AB2FEC300CDE1A4 /* tnc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2098BDB91AB2FEC300CDE1A4 /* tnc@2x.png */; };
+		2098BDBC1AB2FEDB00CDE1A4 /* tnc@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2098BDBB1AB2FEDB00CDE1A4 /* tnc@3x.png */; };
+		2098BDBF1AB2FEF800CDE1A4 /* privacy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2098BDBD1AB2FEF800CDE1A4 /* privacy@2x.png */; };
+		2098BDC01AB2FEF800CDE1A4 /* privacy@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2098BDBE1AB2FEF800CDE1A4 /* privacy@3x.png */; };
 		2099301118BF0C5000A177A4 /* ContactsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2099301018BF0C5000A177A4 /* ContactsModel.m */; };
 		2099498D196E78DB0081B1BD /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2099498C196E78DB0081B1BD /* CoreTelephony.framework */; };
 		209BCFA81975433D006EC811 /* PrintViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 209BCFA61975433D006EC811 /* PrintViewController.m */; };
@@ -1664,6 +1668,10 @@
 		2095C91018C5F92700E244A8 /* FlyerlyFacebookInvite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyerlyFacebookInvite.m; sourceTree = "<group>"; };
 		20967D9618C8973200B273FC /* FlyerlyTwitterLike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyerlyTwitterLike.h; sourceTree = "<group>"; };
 		20967D9718C8973200B273FC /* FlyerlyTwitterLike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyerlyTwitterLike.m; sourceTree = "<group>"; };
+		2098BDB91AB2FEC300CDE1A4 /* tnc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tnc@2x.png"; sourceTree = "<group>"; };
+		2098BDBB1AB2FEDB00CDE1A4 /* tnc@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tnc@3x.png"; sourceTree = "<group>"; };
+		2098BDBD1AB2FEF800CDE1A4 /* privacy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "privacy@2x.png"; sourceTree = "<group>"; };
+		2098BDBE1AB2FEF800CDE1A4 /* privacy@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "privacy@3x.png"; sourceTree = "<group>"; };
 		2099300F18BF0C5000A177A4 /* ContactsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsModel.h; sourceTree = "<group>"; };
 		2099301018BF0C5000A177A4 /* ContactsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsModel.m; sourceTree = "<group>"; };
 		2099498C196E78DB0081B1BD /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -3082,6 +3090,10 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				2098BDBD1AB2FEF800CDE1A4 /* privacy@2x.png */,
+				2098BDBE1AB2FEF800CDE1A4 /* privacy@3x.png */,
+				2098BDBB1AB2FEDB00CDE1A4 /* tnc@3x.png */,
+				2098BDB91AB2FEC300CDE1A4 /* tnc@2x.png */,
 				24861DE719F9146E00670F6D /* 07_camera_selected@3x.png */,
 				24861DE819F9146E00670F6D /* 07_camera@3x.png */,
 				24861DE919F9146E00670F6D /* 07_height_selected@3x.png */,
@@ -5539,6 +5551,7 @@
 				24861F1F19F9147100670F6D /* line_dotted@3x.png in Resources */,
 				30D58D1210FB1BF800E0C7E8 /* icon26.jpg in Resources */,
 				2421849D194B4AEC00FDDA97 /* emoticon142@2x.png in Resources */,
+				2098BDBC1AB2FEDB00CDE1A4 /* tnc@3x.png in Resources */,
 				30D58D1310FB1BF800E0C7E8 /* icon27.jpg in Resources */,
 				30D58D1410FB1BF800E0C7E8 /* icon28.jpg in Resources */,
 				30D58D1510FB1BF800E0C7E8 /* icon29.jpg in Resources */,
@@ -5771,6 +5784,7 @@
 				24861F2219F9147100670F6D /* login_email_icon@3x.png in Resources */,
 				30D58D6C10FB1BF800E0C7E8 /* Template47.jpg in Resources */,
 				30D58D6D10FB1BF800E0C7E8 /* Template48.jpg in Resources */,
+				2098BDBF1AB2FEF800CDE1A4 /* privacy@2x.png in Resources */,
 				30D58D6E10FB1BF800E0C7E8 /* Template49.jpg in Resources */,
 				249F2031193F562C0072835E /* ModeVideo@2x.png in Resources */,
 				30D58D6F10FB1BF800E0C7E8 /* Template5.jpg in Resources */,
@@ -6092,6 +6106,7 @@
 				65C1A4371742516D00947D5E /* Template31@2x.jpg in Resources */,
 				24861F1519F9147100670F6D /* instagram_share@3x.png in Resources */,
 				242184DD194B4AEC00FDDA97 /* gymnastics-trampoline-icon.png in Resources */,
+				2098BDBA1AB2FEC300CDE1A4 /* tnc@2x.png in Resources */,
 				24861EB119F9147100670F6D /* 07_roll_selected@3x.png in Resources */,
 				246EF51C193C515D004539B2 /* emoticon60@2x.png in Resources */,
 				65C1A4381742516D00947D5E /* Template32@2x.jpg in Resources */,
@@ -6145,6 +6160,7 @@
 				2435952C1A0CA84800DD3C39 /* CustomAssetsGroupView-iPhone6.xib in Resources */,
 				65C1A4451742516D00947D5E /* Template45@2x.jpg in Resources */,
 				24861EDD19F9147100670F6D /* color_tab@3x.png in Resources */,
+				2098BDC01AB2FEF800CDE1A4 /* privacy@3x.png in Resources */,
 				249F2057193F562C0072835E /* text_edit@2x.png in Resources */,
 				24861F2E19F9147100670F6D /* panel_close_button@3x.png in Resources */,
 				65C1A4461742516D00947D5E /* Template46@2x.jpg in Resources */,

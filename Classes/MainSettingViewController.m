@@ -134,7 +134,7 @@
     NSString *imgname =@"";
 
     if (indexPath.row == 0){
-        imgname = @"premium_features";
+        imgname = @" ";
     }
     else if (indexPath.row == 1){
             
@@ -203,11 +203,16 @@
         if (indexPath.row == 4)imgname = @"fb_Like";
         if (indexPath.row == 5)imgname = @"twt_follow";
         if (indexPath.row == 6)imgname = @"signout";
+        if (indexPath.row == 7)imgname = @"tnc";
+        if (indexPath.row == 8)imgname = @"privacy";
+        
         
     } else {
         if (indexPath.row == 3)imgname = @"fb_Like";
         if (indexPath.row == 4)imgname = @"twt_follow";
         if (indexPath.row == 5)imgname = @"signin";
+        if (indexPath.row == 6)imgname = @"tnc";
+        if (indexPath.row == 7)imgname = @"privacy";
     }
     
     
