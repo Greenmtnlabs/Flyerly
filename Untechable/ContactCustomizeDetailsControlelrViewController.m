@@ -170,6 +170,7 @@
         
         if ( cell == nil ) {
             
+            
             if( IS_IPHONE_5 ){
                 NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"FirstTableViewCell" owner:self options:nil];
                 cell = (FirstTableViewCell *)[nib objectAtIndex:0];
@@ -178,6 +179,9 @@
                 cell = (FirstTableViewCell *)[nib objectAtIndex:0];
             } else if ( IS_IPHONE_6_PLUS ) {
                 NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"FirstTableViewCell-iPhone6-Plus" owner:self options:nil];
+                cell = (FirstTableViewCell *)[nib objectAtIndex:0];
+            } else if (IS_IPHONE_4){
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"FirstTableViewCell" owner:self options:nil];
                 cell = (FirstTableViewCell *)[nib objectAtIndex:0];
             }
         }
@@ -201,6 +205,9 @@
                 cell = (CustomTextTableViewCell *)[nib objectAtIndex:0];
             } else if ( IS_IPHONE_6_PLUS ) {
                 NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CustomTextTableViewCell-iPhone6-Plus" owner:self options:nil];
+                cell = (CustomTextTableViewCell *)[nib objectAtIndex:0];
+            } else if (IS_IPHONE_4){
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CustomTextTableViewCell" owner:self options:nil];
                 cell = (CustomTextTableViewCell *)[nib objectAtIndex:0];
             }
         }
@@ -233,6 +240,10 @@
             } else if ( IS_IPHONE_6_PLUS ) {
                 NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PhoneNumberCell-iPhone6-Plus" owner:self options:nil];
                 cell = (PhoneNumberCell *)[nib objectAtIndex:0];
+            } else if (IS_IPHONE_4) {
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PhoneNumberCell" owner:self options:nil];
+                cell = (PhoneNumberCell *)[nib objectAtIndex:0];
+
             }
         }
         
@@ -279,6 +290,9 @@
                 cell = (EmailCell *)[nib objectAtIndex:0];
             } else if ( IS_IPHONE_6_PLUS ) {
                 NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmailCell-iPhone6-Plus" owner:self options:nil];
+                cell = (EmailCell *)[nib objectAtIndex:0];
+            } else if (IS_IPHONE_4){
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmailCell" owner:self options:nil];
                 cell = (EmailCell *)[nib objectAtIndex:0];
             }
         }
