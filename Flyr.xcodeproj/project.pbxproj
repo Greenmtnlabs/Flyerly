@@ -1371,6 +1371,13 @@
 			remoteGlobalIDString = CE9F680E18773086006590CC;
 			remoteInfo = "lob-iosTests";
 		};
+		C300439B1AB6F61E00866385 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C30043241AB6ED9300866385 /* lob-ios.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = CE9F67FD18773086006590CC;
+			remoteInfo = "lob-ios";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -5184,6 +5191,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				C300439C1AB6F61E00866385 /* PBXTargetDependency */,
 			);
 			name = Flyr;
 			productName = Flyr;
@@ -6637,6 +6645,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C300439C1AB6F61E00866385 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "lob-ios";
+			targetProxy = C300439B1AB6F61E00866385 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		65CC0AB9171803FB003D0BE7 /* Localizable.strings */ = {
