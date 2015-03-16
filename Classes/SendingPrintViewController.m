@@ -18,11 +18,13 @@
 #import "UIImagePDF.h"
 #import "UserVoice.h"
 #import "SendingPrintViewController.h"
+/*
 #import "LobPostcardModel.h"
 #import "LobAddressModel.h"
 #import "LobRequest.h"
 #import "LobObjectModel.h"
 #import "LobSettingModel.h"
+ */
 #import "PayPalPaymentViewController.h"
 #import "LobProjectConstants.h"
 #import "AbstractBlockRequest.h"
@@ -30,8 +32,9 @@
 
 
 @interface SendingPrintViewController (){
-    LobRequest *request;
+    /*LobRequest *request;
     LobRequest *postcardRequest;
+     */
     dispatch_semaphore_t sem;
     
     BOOL testing;
@@ -66,9 +69,10 @@ UIButton *backButton;
     
     
     NSString *apiKey = [flyerConfigurator lobAppId];
-    
+    /*
     request = [LobRequest initWithAPIKey:apiKey];
     postcardRequest = [LobRequest initWithAPIKey:apiKey];
+    */
     
     sem = dispatch_semaphore_create(0);
     
@@ -575,6 +579,7 @@ https://lob.com/docs#postcards
                      };
     }
     
+    /*
     LobObjectModel *objectModel = [LobObjectModel initWithDictionary:objectDict];
     
     if( !([filePath isEqualToString:@""]) ) {
@@ -609,6 +614,7 @@ https://lob.com/docs#postcards
          dispatch_semaphore_signal(sem);
      }];
         //----//
+    */
 
 }
 
@@ -704,7 +710,7 @@ https://lob.com/docs#postcards
     
     
     if (index == NSNotFound ) {
-    
+        /*
         LobPostcardModel *pCardModel = [[LobPostcardModel alloc] initWithDictionary:postcardDict];
         
         [postcardRequest createPostcardWithModel:pCardModel withResponse:^(LobPostcardModel *postcard, NSError *error) {
@@ -754,6 +760,7 @@ https://lob.com/docs#postcards
              [self showLoading:NO];
              dispatch_semaphore_signal(sem);
          }];
+        */
     }
 }
 
@@ -787,6 +794,7 @@ https://lob.com/docs#postcards
     return sendCardToName;
     
 }
+/*
 -(NSString *)getSendCardToName2:(LobPostcardModel *)pCardModel
 {
     NSString *toAddressName = pCardModel.toAddress.name;
@@ -795,7 +803,7 @@ https://lob.com/docs#postcards
     NSString *sendCardToName = [ NSString stringWithFormat:@"%@-%@",toAddressName,addressLine1];
     
     return sendCardToName;
-}
+}*/
 
 
 #pragma mark - Paypal delegate
