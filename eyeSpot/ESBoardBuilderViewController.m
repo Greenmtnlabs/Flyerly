@@ -472,7 +472,7 @@ invalidboard:
                 }
                 if (kESBoardBuilderChangeCoverImageIndex != self.selectedTileIndex) {
                     ESTile *tile = self.board.tiles[self.selectedTileIndex];
-                    tile.imagePath = [imageURL es_pathRelativeToHomeDirectory];
+                    tile.imagePath = [imageURL absoluteString];
                     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:self.selectedTileIndex inSection:0];
                     if (IS_IPHONE) {
                         NSInteger item = (self.selectedTileIndex % self.paginationHelper.itemsPerPage);
@@ -480,7 +480,7 @@ invalidboard:
                     }
                     [self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
                 } else {
-                    self.board.thumbnailPath = [imageURL es_pathRelativeToHomeDirectory];
+                    self.board.thumbnailPath = [imageURL absoluteString];
                     [self refreshThumbnail];
                 }
             } else {
