@@ -199,7 +199,24 @@ UIButton *backButton;
         if (self.view.frame.origin.y >= 0){
             [self setViewMovedUp:YES];
         }
+    }else if ([sender isEqual:zip])
+    {
+        if(IS_IPHONE_4 || IS_IPHONE_5){
+            
+            if (self.view.frame.origin.y >= 0){
+                [self setViewMovedUp:YES];
+            }
+        }
+    }else if ([sender isEqual:city])
+    {
+        if(IS_IPHONE_4 || IS_IPHONE_5){
+            
+            if (self.view.frame.origin.y >= 0){
+                [self setViewMovedUp:YES];
+            }
+        }
     }
+
 
     
 
@@ -208,6 +225,7 @@ UIButton *backButton;
 -(void)textFieldDidEndEditing:(UITextField *)sender{
     if ([sender isEqual:toName])
     {
+        
         if (self.view.frame.origin.y < 0){
             [self setViewMovedUp:NO];
         }
@@ -239,6 +257,24 @@ UIButton *backButton;
             [self setViewMovedUp:NO];
         }
     }
+    else if ([sender isEqual:zip])
+    {
+        if(IS_IPHONE_4 || IS_IPHONE_5){
+            
+            if (self.view.frame.origin.y < 0){
+                [self setViewMovedUp:NO];
+            }
+        }
+    }
+    else if ([sender isEqual:city])
+    {
+        if(IS_IPHONE_4 || IS_IPHONE_5){
+            
+            if (self.view.frame.origin.y < 0){
+                [self setViewMovedUp:NO];
+            }
+        }
+    }
 }
 
 //method to move the view up/down whenever the keyboard is shown/dismissed
@@ -252,12 +288,24 @@ UIButton *backButton;
     if (movedUp)
     {
         // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
-        rect.origin.y -= 280;
+        if(IS_IPHONE_5 || IS_IPHONE_4){
+            rect.origin.y -= 200;
+        }else{
+            rect.origin.y -= 280;
+        }
+        
           }
     else
     {
         // revert back to the normal state.
-        rect.origin.y += 280;
+        if(IS_IPHONE_5 || IS_IPHONE_4){
+            
+            rect.origin.y += 200;
+
+        }else{
+            rect.origin.y += 280;
+        }
+        
        
     }
     self.view.frame = rect;
