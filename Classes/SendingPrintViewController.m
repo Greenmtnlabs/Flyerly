@@ -38,7 +38,10 @@
 
     dispatch_semaphore_t sem;
     
-    BOOL testing;
+    BOOL testingNotUploadFile;
+    BOOL testingAddressUse;
+    BOOL testingSkipPaypal;
+    BOOL testingSkipAddressValidations;
     NSString *urlFrontStr;
     NSDictionary *toAddressTest;
     NSDictionary *fromAddressTest;
@@ -77,7 +80,12 @@ UIButton *backButton;
     
     sem = dispatch_semaphore_create(0);
     
-    testing = NO;
+    testingNotUploadFile = NO;
+    testingSkipAddressValidations = YES;
+    testingAddressUse = YES;
+    testingSkipPaypal = YES;
+
+    
     urlFrontStr = @"";
     
     hasPaidForPostCard = NO;
@@ -307,7 +315,10 @@ UIButton *backButton;
 
 - (void)sendFlyer{
     
-    if ( [messageFeild.text isEqualToString:@""] ) {
+    if( testingSkipAddressValidations ){
+        [self sendrequestOnLob];
+    }
+    else if ( [messageFeild.text isEqualToString:@""] ) {
     
         [self showAlert:@"Please enter message."];
         
@@ -541,13 +552,13 @@ https://lob.com/docs#postcards
  */
 -(void)sendrequestOnLob {
     
-    if( hasPaidForPostCard == NO ) {
+    if( testingSkipPaypal == NO && hasPaidForPostCard == NO ) {
         [self openBuyPanel:1];
     }
     else {
         [self showLoading:YES];
         
-        if( testing ) {
+        if( testingNotUploadFile ) {
             [self sendPostCard: @"https://www.lob.com/postcardfront.pdf"];
         }
         else{
@@ -565,7 +576,7 @@ https://lob.com/docs#postcards
     NSDictionary *objectDict;
     NSString *filePath = @"";
     
-    if( testing ){
+    if( testingNotUploadFile ){
         objectDict = @{
                        @"name" : @"Go Blue",
                        @"setting" : @{@"id" : @"200"},
@@ -595,7 +606,7 @@ https://lob.com/docs#postcards
          if ( error == nil && request.statusCode == 200){
              
              
-             if( testing ){
+             if( testingNotUploadFile ){
                  [self sendPostCard: @"https://www.lob.com/postcardfront.pdf"];
              }
              else {
@@ -651,7 +662,7 @@ https://lob.com/docs#postcards
                                     @"address_country" : @"US"};
 
         
-        if( YES || testing ){
+        if( testingAddressUse ){
             toAddress = toAddressTest;
             fromAddress = fromAddressTest;
         }
