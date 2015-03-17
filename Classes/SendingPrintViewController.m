@@ -18,23 +18,21 @@
 #import "UIImagePDF.h"
 #import "UserVoice.h"
 #import "SendingPrintViewController.h"
-#import "LobPostcardModel.h"
-#import "LobAddressModel.h"
-#import "LobRequest.h"
-#import "LobObjectModel.h"
-#import "LobSettingModel.h"
 #import "PayPalPaymentViewController.h"
-#import "LobProjectConstants.h"
-#import "AbstractBlockRequest.h"
 #import "PayPalPaymentViewController.h"
+
 
 
 @interface SendingPrintViewController (){
     LobRequest *request;
     LobRequest *postcardRequest;
+
     dispatch_semaphore_t sem;
     
-    BOOL testing;
+    BOOL testingNotUploadFile;
+    BOOL testingAddressUse;
+    BOOL testingSkipPaypal;
+    BOOL testingSkipAddressValidations;
     NSString *urlFrontStr;
     NSDictionary *toAddressTest;
     NSDictionary *fromAddressTest;
@@ -70,9 +68,15 @@ UIButton *backButton;
     request = [LobRequest initWithAPIKey:apiKey];
     postcardRequest = [LobRequest initWithAPIKey:apiKey];
     
+    
     sem = dispatch_semaphore_create(0);
     
-    testing = NO;
+    testingNotUploadFile = NO;
+    testingSkipAddressValidations = NO;
+    testingAddressUse = NO;
+    testingSkipPaypal = NO;
+
+    
     urlFrontStr = @"";
     
     hasPaidForPostCard = NO;
@@ -302,7 +306,10 @@ UIButton *backButton;
 
 - (void)sendFlyer{
     
-    if ( [messageFeild.text isEqualToString:@""] ) {
+    if( testingSkipAddressValidations ){
+        [self sendrequestOnLob];
+    }
+    else if ( [messageFeild.text isEqualToString:@""] ) {
     
         [self showAlert:@"Please enter message."];
         
@@ -536,13 +543,13 @@ https://lob.com/docs#postcards
  */
 -(void)sendrequestOnLob {
     
-    if( hasPaidForPostCard == NO ) {
+    if( testingSkipPaypal == NO && hasPaidForPostCard == NO ) {
         [self openBuyPanel:1];
     }
     else {
         [self showLoading:YES];
         
-        if( testing ) {
+        if( testingNotUploadFile ) {
             [self sendPostCard: @"https://www.lob.com/postcardfront.pdf"];
         }
         else{
@@ -560,7 +567,7 @@ https://lob.com/docs#postcards
     NSDictionary *objectDict;
     NSString *filePath = @"";
     
-    if( testing ){
+    if( testingNotUploadFile ){
         objectDict = @{
                        @"name" : @"Go Blue",
                        @"setting" : @{@"id" : @"200"},
@@ -574,6 +581,7 @@ https://lob.com/docs#postcards
                        @"file" : filePath
                      };
     }
+    
     
     LobObjectModel *objectModel = [LobObjectModel initWithDictionary:objectDict];
     
@@ -589,7 +597,7 @@ https://lob.com/docs#postcards
          if ( error == nil && request.statusCode == 200){
              
              
-             if( testing ){
+             if( testingNotUploadFile ){
                  [self sendPostCard: @"https://www.lob.com/postcardfront.pdf"];
              }
              else {
@@ -609,6 +617,7 @@ https://lob.com/docs#postcards
          dispatch_semaphore_signal(sem);
      }];
         //----//
+    
 
 }
 
@@ -644,7 +653,7 @@ https://lob.com/docs#postcards
                                     @"address_country" : @"US"};
 
         
-        if( testing ){
+        if( testingAddressUse ){
             toAddress = toAddressTest;
             fromAddress = fromAddressTest;
         }
@@ -704,7 +713,7 @@ https://lob.com/docs#postcards
     
     
     if (index == NSNotFound ) {
-    
+        
         LobPostcardModel *pCardModel = [[LobPostcardModel alloc] initWithDictionary:postcardDict];
         
         [postcardRequest createPostcardWithModel:pCardModel withResponse:^(LobPostcardModel *postcard, NSError *error) {
@@ -754,6 +763,7 @@ https://lob.com/docs#postcards
              [self showLoading:NO];
              dispatch_semaphore_signal(sem);
          }];
+        
     }
 }
 
@@ -787,6 +797,7 @@ https://lob.com/docs#postcards
     return sendCardToName;
     
 }
+
 -(NSString *)getSendCardToName2:(LobPostcardModel *)pCardModel
 {
     NSString *toAddressName = pCardModel.toAddress.name;

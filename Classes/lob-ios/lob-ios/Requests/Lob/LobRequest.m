@@ -11,6 +11,10 @@
 
 #import "AFNetworking.h"
 
+
+
+
+
 #import "LobAddressModel.h"
 #import "LobBankAccountModel.h"
 #import "LobCheckModel.h"
@@ -301,7 +305,7 @@
         
         NSMutableDictionary *paramDict = [NSMutableDictionary dictionary];
         if(object.name) paramDict[@"name"] = object.name;
-        paramDict[@"setting_id"] = object.setting.settingId;
+        paramDict[@"setting"] = object.setting.settingId;
         if(object.quantity) paramDict[@"quantity"] = object.quantity;
         paramDict[@"double_sided"] = object.doubleSided ? @"1" : @"0";
         
@@ -313,7 +317,7 @@
             NSData *data = [NSData dataWithContentsOfFile:object.file];
             [formData appendPartWithFileData:data name:@"file" fileName:@"file" mimeType:@"application/pdf"];;
             [formData appendPartWithFormData:[object.name dataUsingEncoding:NSUTF8StringEncoding] name:@"name"];
-            [formData appendPartWithFormData:[object.setting.settingId dataUsingEncoding:NSUTF8StringEncoding] name:@"setting_id"];
+            [formData appendPartWithFormData:[object.setting.settingId dataUsingEncoding:NSUTF8StringEncoding] name:@"setting"];
         }
         success:^(AFHTTPRequestOperation *operation, id responseObject)
         {

@@ -519,22 +519,6 @@
 		245D48E2193DEF9000E670E6 /* Entypo-Social.otf in Resources */ = {isa = PBXBuildFile; fileRef = 245D48E1193DEF9000E670E6 /* Entypo-Social.otf */; };
 		245FED0519DE8966009140B4 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 243AA71D19DE8136004A5613 /* libGoogleAdMobAds.a */; };
 		246264DF1947416A00933A69 /* Cliparts-paid.plist in Resources */ = {isa = PBXBuildFile; fileRef = 246264DE1947416A00933A69 /* Cliparts-paid.plist */; };
-		2469DD391A0B532A00001EED /* LobAbstractModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2469DCF61A0B532A00001EED /* LobAbstractModel.m */; };
-		2469DD3A1A0B532A00001EED /* LobAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2469DCF91A0B532A00001EED /* LobAddressModel.m */; };
-		2469DD3B1A0B532A00001EED /* LobBankAccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2469DCFC1A0B532A00001EED /* LobBankAccountModel.m */; };
-		2469DD3C1A0B532A00001EED /* LobCheckModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2469DCFF1A0B532A00001EED /* LobCheckModel.m */; };
-		2469DD3D1A0B532A00001EED /* LobCountryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2469DD021A0B532A00001EED /* LobCountryModel.m */; };
-		2469DD3E1A0B532A00001EED /* LobErrorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2469DD051A0B532A00001EED /* LobErrorModel.m */; };
-		2469DD3F1A0B532A00001EED /* LobJobModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2469DD081A0B532A00001EED /* LobJobModel.m */; };
-		2469DD401A0B532A00001EED /* LobObjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2469DD0B1A0B532A00001EED /* LobObjectModel.m */; };
-		2469DD411A0B532A00001EED /* LobPackagingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2469DD0E1A0B532A00001EED /* LobPackagingModel.m */; };
-		2469DD421A0B532A00001EED /* LobPostcardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2469DD111A0B532A00001EED /* LobPostcardModel.m */; };
-		2469DD431A0B532A00001EED /* LobServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2469DD141A0B532A00001EED /* LobServiceModel.m */; };
-		2469DD441A0B532A00001EED /* LobSettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2469DD171A0B532A00001EED /* LobSettingModel.m */; };
-		2469DD451A0B532A00001EED /* LobStateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2469DD1A1A0B532A00001EED /* LobStateModel.m */; };
-		2469DD461A0B532A00001EED /* LobVerifyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2469DD1D1A0B532A00001EED /* LobVerifyModel.m */; };
-		2469DD471A0B532A00001EED /* AbstractBlockRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2469DD211A0B532A00001EED /* AbstractBlockRequest.m */; };
-		2469DD511A0B532A00001EED /* LobRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2469DD381A0B532A00001EED /* LobRequest.m */; };
 		246EF476193C506B004539B2 /* Emoticons.xib in Resources */ = {isa = PBXBuildFile; fileRef = 246EF475193C506B004539B2 /* Emoticons.xib */; };
 		246EF4E0193C515D004539B2 /* emoticon100@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 246EF478193C515D004539B2 /* emoticon100@2x.png */; };
 		246EF4E1193C515D004539B2 /* emoticon101@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 246EF479193C515D004539B2 /* emoticon101@2x.png */; };
@@ -1367,10 +1351,35 @@
 		65F1BEAE173AA13400EE6F9F /* twitter_share_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE8B173AA13400EE6F9F /* twitter_share_saved@2x.png */; };
 		65F41C8B173BDC03000BA8CB /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F41C8A173BDC02000BA8CB /* libxml2.2.dylib */; };
 		C32139D61A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32139D51A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib */; };
+		C3A30DA61AB7F8BD00B0F1CF /* liblob-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C300432A1AB6ED9300866385 /* liblob-ios.a */; };
 		E8A7347D1092CFF300661AAD /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A7347B1092CFF300661AAD /* ShareViewController.m */; };
 		E8A7347E1092CFF300661AAD /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8A7347C1092CFF300661AAD /* ShareViewController.xib */; };
 		E8E424ACA7CB4913890F4F3B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26D73E02307543D994C6C8BE /* libPods.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C30043291AB6ED9300866385 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C30043241AB6ED9300866385 /* lob-ios.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CE9F67FE18773086006590CC;
+			remoteInfo = "lob-ios";
+		};
+		C300432B1AB6ED9300866385 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C30043241AB6ED9300866385 /* lob-ios.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CE9F680E18773086006590CC;
+			remoteInfo = "lob-iosTests";
+		};
+		C300439B1AB6F61E00866385 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C30043241AB6ED9300866385 /* lob-ios.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = CE9F67FD18773086006590CC;
+			remoteInfo = "lob-ios";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0D33511A109ABB6A0082810A /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -1988,40 +1997,6 @@
 		245C0FA41933081200B5B31C /* free-features.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "free-features.plist"; sourceTree = "<group>"; };
 		245D48E1193DEF9000E670E6 /* Entypo-Social.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Entypo-Social.otf"; path = "Data/fonts/Entypo-Social.otf"; sourceTree = "<group>"; };
 		246264DE1947416A00933A69 /* Cliparts-paid.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Cliparts-paid.plist"; sourceTree = "<group>"; };
-		2469DCF01A0B532A00001EED /* LobLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobLibrary.h; sourceTree = "<group>"; };
-		2469DCF11A0B532A00001EED /* LobProjectConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobProjectConstants.h; sourceTree = "<group>"; };
-		2469DCF51A0B532A00001EED /* LobAbstractModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobAbstractModel.h; sourceTree = "<group>"; };
-		2469DCF61A0B532A00001EED /* LobAbstractModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobAbstractModel.m; sourceTree = "<group>"; };
-		2469DCF81A0B532A00001EED /* LobAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobAddressModel.h; sourceTree = "<group>"; };
-		2469DCF91A0B532A00001EED /* LobAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobAddressModel.m; sourceTree = "<group>"; };
-		2469DCFB1A0B532A00001EED /* LobBankAccountModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobBankAccountModel.h; sourceTree = "<group>"; };
-		2469DCFC1A0B532A00001EED /* LobBankAccountModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobBankAccountModel.m; sourceTree = "<group>"; };
-		2469DCFE1A0B532A00001EED /* LobCheckModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobCheckModel.h; sourceTree = "<group>"; };
-		2469DCFF1A0B532A00001EED /* LobCheckModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobCheckModel.m; sourceTree = "<group>"; };
-		2469DD011A0B532A00001EED /* LobCountryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobCountryModel.h; sourceTree = "<group>"; };
-		2469DD021A0B532A00001EED /* LobCountryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobCountryModel.m; sourceTree = "<group>"; };
-		2469DD041A0B532A00001EED /* LobErrorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobErrorModel.h; sourceTree = "<group>"; };
-		2469DD051A0B532A00001EED /* LobErrorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobErrorModel.m; sourceTree = "<group>"; };
-		2469DD071A0B532A00001EED /* LobJobModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobJobModel.h; sourceTree = "<group>"; };
-		2469DD081A0B532A00001EED /* LobJobModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobJobModel.m; sourceTree = "<group>"; };
-		2469DD0A1A0B532A00001EED /* LobObjectModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobObjectModel.h; sourceTree = "<group>"; };
-		2469DD0B1A0B532A00001EED /* LobObjectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobObjectModel.m; sourceTree = "<group>"; };
-		2469DD0D1A0B532A00001EED /* LobPackagingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobPackagingModel.h; sourceTree = "<group>"; };
-		2469DD0E1A0B532A00001EED /* LobPackagingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobPackagingModel.m; sourceTree = "<group>"; };
-		2469DD101A0B532A00001EED /* LobPostcardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobPostcardModel.h; sourceTree = "<group>"; };
-		2469DD111A0B532A00001EED /* LobPostcardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobPostcardModel.m; sourceTree = "<group>"; };
-		2469DD131A0B532A00001EED /* LobServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobServiceModel.h; sourceTree = "<group>"; };
-		2469DD141A0B532A00001EED /* LobServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobServiceModel.m; sourceTree = "<group>"; };
-		2469DD161A0B532A00001EED /* LobSettingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobSettingModel.h; sourceTree = "<group>"; };
-		2469DD171A0B532A00001EED /* LobSettingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobSettingModel.m; sourceTree = "<group>"; };
-		2469DD191A0B532A00001EED /* LobStateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobStateModel.h; sourceTree = "<group>"; };
-		2469DD1A1A0B532A00001EED /* LobStateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobStateModel.m; sourceTree = "<group>"; };
-		2469DD1C1A0B532A00001EED /* LobVerifyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobVerifyModel.h; sourceTree = "<group>"; };
-		2469DD1D1A0B532A00001EED /* LobVerifyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobVerifyModel.m; sourceTree = "<group>"; };
-		2469DD201A0B532A00001EED /* AbstractBlockRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractBlockRequest.h; sourceTree = "<group>"; };
-		2469DD211A0B532A00001EED /* AbstractBlockRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractBlockRequest.m; sourceTree = "<group>"; };
-		2469DD371A0B532A00001EED /* LobRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobRequest.h; sourceTree = "<group>"; };
-		2469DD381A0B532A00001EED /* LobRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobRequest.m; sourceTree = "<group>"; };
 		246EF475193C506B004539B2 /* Emoticons.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Emoticons.xib; sourceTree = "<group>"; };
 		246EF478193C515D004539B2 /* emoticon100@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon100@2x.png"; sourceTree = "<group>"; };
 		246EF479193C515D004539B2 /* emoticon101@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon101@2x.png"; sourceTree = "<group>"; };
@@ -2989,6 +2964,7 @@
 		65F41C8A173BDC02000BA8CB /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		803DE6526A023A0BC5462D37 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Flyr-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Flyr-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		C30043241AB6ED9300866385 /* lob-ios.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "lob-ios.xcodeproj"; path = "Classes/lob-ios/lob-ios.xcodeproj"; sourceTree = "<group>"; };
 		C32139D51A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CropVideoViewController-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		E8A7347A1092CFF300661AAD /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		E8A7347B1092CFF300661AAD /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
@@ -3000,6 +2976,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3A30DA61AB7F8BD00B0F1CF /* liblob-ios.a in Frameworks */,
 				245FED0519DE8966009140B4 /* libGoogleAdMobAds.a in Frameworks */,
 				0DF3A540108E0E5C00D6C887 /* SystemConfiguration.framework in Frameworks */,
 				0FE0BDD61758C07D00C4D78D /* StoreKit.framework in Frameworks */,
@@ -3956,7 +3933,6 @@
 		209BCFAA1975434C006EC811 /* Print Screen */ = {
 			isa = PBXGroup;
 			children = (
-				2469DCEE1A0B530600001EED /* Lob */,
 				20E46386197E3F9900473921 /* PDF Views */,
 				200D1933197CF4BA00CFE04B /* PayPal */,
 				2094609F1977AC7D0050B5DE /* InviteForPrint */,
@@ -4292,202 +4268,6 @@
 				243AA71019DE8136004A5613 /* GADSearchRequest.h */,
 			);
 			path = Search;
-			sourceTree = "<group>";
-		};
-		2469DCEE1A0B530600001EED /* Lob */ = {
-			isa = PBXGroup;
-			children = (
-				2469DCEF1A0B532A00001EED /* Constants */,
-				2469DCF31A0B532A00001EED /* Models */,
-				2469DD1E1A0B532A00001EED /* Requests */,
-			);
-			name = Lob;
-			sourceTree = "<group>";
-		};
-		2469DCEF1A0B532A00001EED /* Constants */ = {
-			isa = PBXGroup;
-			children = (
-				2469DCF01A0B532A00001EED /* LobLibrary.h */,
-				2469DCF11A0B532A00001EED /* LobProjectConstants.h */,
-			);
-			name = Constants;
-			path = "lob-ios/Constants";
-			sourceTree = "<group>";
-		};
-		2469DCF31A0B532A00001EED /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				2469DCF41A0B532A00001EED /* Abstract */,
-				2469DCF71A0B532A00001EED /* Address */,
-				2469DCFA1A0B532A00001EED /* BankAccount */,
-				2469DCFD1A0B532A00001EED /* Check */,
-				2469DD001A0B532A00001EED /* Country */,
-				2469DD031A0B532A00001EED /* Error */,
-				2469DD061A0B532A00001EED /* Job */,
-				2469DD091A0B532A00001EED /* Object */,
-				2469DD0C1A0B532A00001EED /* Packaging */,
-				2469DD0F1A0B532A00001EED /* Postcard */,
-				2469DD121A0B532A00001EED /* Service */,
-				2469DD151A0B532A00001EED /* Setting */,
-				2469DD181A0B532A00001EED /* State */,
-				2469DD1B1A0B532A00001EED /* Verify */,
-			);
-			name = Models;
-			path = "lob-ios/Models";
-			sourceTree = "<group>";
-		};
-		2469DCF41A0B532A00001EED /* Abstract */ = {
-			isa = PBXGroup;
-			children = (
-				2469DCF51A0B532A00001EED /* LobAbstractModel.h */,
-				2469DCF61A0B532A00001EED /* LobAbstractModel.m */,
-			);
-			path = Abstract;
-			sourceTree = "<group>";
-		};
-		2469DCF71A0B532A00001EED /* Address */ = {
-			isa = PBXGroup;
-			children = (
-				2469DCF81A0B532A00001EED /* LobAddressModel.h */,
-				2469DCF91A0B532A00001EED /* LobAddressModel.m */,
-			);
-			path = Address;
-			sourceTree = "<group>";
-		};
-		2469DCFA1A0B532A00001EED /* BankAccount */ = {
-			isa = PBXGroup;
-			children = (
-				2469DCFB1A0B532A00001EED /* LobBankAccountModel.h */,
-				2469DCFC1A0B532A00001EED /* LobBankAccountModel.m */,
-			);
-			path = BankAccount;
-			sourceTree = "<group>";
-		};
-		2469DCFD1A0B532A00001EED /* Check */ = {
-			isa = PBXGroup;
-			children = (
-				2469DCFE1A0B532A00001EED /* LobCheckModel.h */,
-				2469DCFF1A0B532A00001EED /* LobCheckModel.m */,
-			);
-			path = Check;
-			sourceTree = "<group>";
-		};
-		2469DD001A0B532A00001EED /* Country */ = {
-			isa = PBXGroup;
-			children = (
-				2469DD011A0B532A00001EED /* LobCountryModel.h */,
-				2469DD021A0B532A00001EED /* LobCountryModel.m */,
-			);
-			path = Country;
-			sourceTree = "<group>";
-		};
-		2469DD031A0B532A00001EED /* Error */ = {
-			isa = PBXGroup;
-			children = (
-				2469DD041A0B532A00001EED /* LobErrorModel.h */,
-				2469DD051A0B532A00001EED /* LobErrorModel.m */,
-			);
-			path = Error;
-			sourceTree = "<group>";
-		};
-		2469DD061A0B532A00001EED /* Job */ = {
-			isa = PBXGroup;
-			children = (
-				2469DD071A0B532A00001EED /* LobJobModel.h */,
-				2469DD081A0B532A00001EED /* LobJobModel.m */,
-			);
-			path = Job;
-			sourceTree = "<group>";
-		};
-		2469DD091A0B532A00001EED /* Object */ = {
-			isa = PBXGroup;
-			children = (
-				2469DD0A1A0B532A00001EED /* LobObjectModel.h */,
-				2469DD0B1A0B532A00001EED /* LobObjectModel.m */,
-			);
-			path = Object;
-			sourceTree = "<group>";
-		};
-		2469DD0C1A0B532A00001EED /* Packaging */ = {
-			isa = PBXGroup;
-			children = (
-				2469DD0D1A0B532A00001EED /* LobPackagingModel.h */,
-				2469DD0E1A0B532A00001EED /* LobPackagingModel.m */,
-			);
-			path = Packaging;
-			sourceTree = "<group>";
-		};
-		2469DD0F1A0B532A00001EED /* Postcard */ = {
-			isa = PBXGroup;
-			children = (
-				2469DD101A0B532A00001EED /* LobPostcardModel.h */,
-				2469DD111A0B532A00001EED /* LobPostcardModel.m */,
-			);
-			path = Postcard;
-			sourceTree = "<group>";
-		};
-		2469DD121A0B532A00001EED /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				2469DD131A0B532A00001EED /* LobServiceModel.h */,
-				2469DD141A0B532A00001EED /* LobServiceModel.m */,
-			);
-			path = Service;
-			sourceTree = "<group>";
-		};
-		2469DD151A0B532A00001EED /* Setting */ = {
-			isa = PBXGroup;
-			children = (
-				2469DD161A0B532A00001EED /* LobSettingModel.h */,
-				2469DD171A0B532A00001EED /* LobSettingModel.m */,
-			);
-			path = Setting;
-			sourceTree = "<group>";
-		};
-		2469DD181A0B532A00001EED /* State */ = {
-			isa = PBXGroup;
-			children = (
-				2469DD191A0B532A00001EED /* LobStateModel.h */,
-				2469DD1A1A0B532A00001EED /* LobStateModel.m */,
-			);
-			path = State;
-			sourceTree = "<group>";
-		};
-		2469DD1B1A0B532A00001EED /* Verify */ = {
-			isa = PBXGroup;
-			children = (
-				2469DD1C1A0B532A00001EED /* LobVerifyModel.h */,
-				2469DD1D1A0B532A00001EED /* LobVerifyModel.m */,
-			);
-			path = Verify;
-			sourceTree = "<group>";
-		};
-		2469DD1E1A0B532A00001EED /* Requests */ = {
-			isa = PBXGroup;
-			children = (
-				2469DD1F1A0B532A00001EED /* AbstractRequest */,
-				2469DD361A0B532A00001EED /* Lob */,
-			);
-			name = Requests;
-			path = "lob-ios/Requests";
-			sourceTree = "<group>";
-		};
-		2469DD1F1A0B532A00001EED /* AbstractRequest */ = {
-			isa = PBXGroup;
-			children = (
-				2469DD201A0B532A00001EED /* AbstractBlockRequest.h */,
-				2469DD211A0B532A00001EED /* AbstractBlockRequest.m */,
-			);
-			path = AbstractRequest;
-			sourceTree = "<group>";
-		};
-		2469DD361A0B532A00001EED /* Lob */ = {
-			isa = PBXGroup;
-			children = (
-				2469DD371A0B532A00001EED /* LobRequest.h */,
-				2469DD381A0B532A00001EED /* LobRequest.m */,
-			);
-			path = Lob;
 			sourceTree = "<group>";
 		};
 		246EF477193C515D004539B2 /* Emoticons */ = {
@@ -4921,6 +4701,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				C30043241AB6ED9300866385 /* lob-ios.xcodeproj */,
 				20B996D2180450CC007B616D /* iTunesArtwork */,
 				2061ED8B17FF212100E9BECA /* icon.png */,
 				2061ED8917FF210300E9BECA /* icon@2x.png */,
@@ -5387,6 +5168,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		C30043251AB6ED9300866385 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C300432A1AB6ED9300866385 /* liblob-ios.a */,
+				C300432C1AB6ED9300866385 /* lob-iosTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -5403,6 +5193,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				C300439C1AB6F61E00866385 /* PBXTargetDependency */,
 			);
 			name = Flyr;
 			productName = Flyr;
@@ -5466,12 +5257,35 @@
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C30043251AB6ED9300866385 /* Products */;
+					ProjectRef = C30043241AB6ED9300866385 /* lob-ios.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* Flyr */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		C300432A1AB6ED9300866385 /* liblob-ios.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "liblob-ios.a";
+			remoteRef = C30043291AB6ED9300866385 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C300432C1AB6ED9300866385 /* lob-iosTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "lob-iosTests.xctest";
+			remoteRef = C300432B1AB6ED9300866385 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1D60588D0D05DD3D006BFB54 /* Resources */ = {
@@ -6749,26 +6563,21 @@
 				20A1CD6318EEF63200484391 /* SubNBUCamera.m in Sources */,
 				2095C90E18C5E89900E244A8 /* FlyerlyTwitterFriends.m in Sources */,
 				202F48BB18F28A60000B62DB /* CustomAssets.m in Sources */,
-				2469DD431A0B532A00001EED /* LobServiceModel.m in Sources */,
 				49F5CA03192E11C200681C6E /* CropView.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				202C47FA187D6E4B00FE0975 /* BitlyDebug.m in Sources */,
-				2469DD441A0B532A00001EED /* LobSettingModel.m in Sources */,
 				200D196818998BEB00EAD645 /* LayerTileButton.m in Sources */,
 				204635651895F90000A94C42 /* FlyerImageView.m in Sources */,
 				1D3623260D0F684500981E51 /* FlyrAppDelegate.m in Sources */,
 				209460A31977AD1A0050B5DE /* InviteForPrint.m in Sources */,
 				0DF3A2C5108DF1D200D6C887 /* FlyerlyMainScreen.m in Sources */,
-				2469DD471A0B532A00001EED /* AbstractBlockRequest.m in Sources */,
 				0DF3A2C6108DF1D200D6C887 /* CreateFlyerController.m in Sources */,
 				49B88989188652A2003766AD /* FacebookLikeView.m in Sources */,
-				2469DD3C1A0B532A00001EED /* LobCheckModel.m in Sources */,
 				202C47FE187D6E4B00FE0975 /* BitlyTweetSheet.m in Sources */,
 				0D4903BB1091893B00855C30 /* FlyrViewController.m in Sources */,
 				202C47FC187D6E4B00FE0975 /* BitlyRequest.m in Sources */,
 				E8A7347D1092CFF300661AAD /* ShareViewController.m in Sources */,
 				20E4638A197E3FB600473921 /* UIImagePDF.m in Sources */,
-				2469DD401A0B532A00001EED /* LobObjectModel.m in Sources */,
 				208C684F186DAA59004A74F2 /* FlyerlyConfigurator.m in Sources */,
 				2032DCD01871BDFF007036B2 /* CropViewController.m in Sources */,
 				49B8898A188652A2003766AD /* NSData+Extras.m in Sources */,
@@ -6789,12 +6598,10 @@
 				202C4827187D7A6B00FE0975 /* CJSONDeserializer.m in Sources */,
 				2004C8451913AE8200E4BBFB /* InAppPurchaseCell.m in Sources */,
 				65BDB2DF17341D290084E032 /* CustomLabel.m in Sources */,
-				2469DD411A0B532A00001EED /* LobPackagingModel.m in Sources */,
 				0FEF2DA9174E66FC00FDD8C9 /* HelpController.m in Sources */,
 				209BCFA81975433D006EC811 /* PrintViewController.m in Sources */,
 				20A1CD6F18EF19B400484391 /* YouTubeSubClass.m in Sources */,
 				0F7FC386175CE26B009DEB08 /* AsyncImageView.m in Sources */,
-				2469DD511A0B532A00001EED /* LobRequest.m in Sources */,
 				200D1937197CF4CC00CFE04B /* PaypalViewController.m in Sources */,
 				202C482A187D7A6B00FE0975 /* NSDictionary_JSONExtensions.m in Sources */,
 				202C4829187D7A6B00FE0975 /* CJSONSerializer.m in Sources */,
@@ -6803,36 +6610,28 @@
 				202C4826187D7A6B00FE0975 /* CDataScanner_Extensions.m in Sources */,
 				0F80C386178561C200D36795 /* LaunchController.m in Sources */,
 				243EA07119BF4ABB0047D0E1 /* ImageLayer.m in Sources */,
-				2469DD391A0B532A00001EED /* LobAbstractModel.m in Sources */,
-				2469DD451A0B532A00001EED /* LobStateModel.m in Sources */,
-				2469DD3F1A0B532A00001EED /* LobJobModel.m in Sources */,
 				0F80C38B178578CB00D36795 /* RegisterController.m in Sources */,
 				0F80C3901785813E00D36795 /* SigninController.m in Sources */,
 				2099301118BF0C5000A177A4 /* ContactsModel.m in Sources */,
 				49F109D1192C7926002B0CD4 /* CropVideoViewController.m in Sources */,
 				200E6764191B6318003849D4 /* UserPurchases.m in Sources */,
-				2469DD421A0B532A00001EED /* LobPostcardModel.m in Sources */,
 				20F93DD317B2262200F6F88C /* MainSettingViewController.m in Sources */,
 				20F4D8E017BA3D0A007B2DF5 /* ProfileViewController.m in Sources */,
-				2469DD3B1A0B532A00001EED /* LobBankAccountModel.m in Sources */,
 				20F4D8E517BA40EA007B2DF5 /* FlyerlySingleton.m in Sources */,
 				202C4828187D7A6B00FE0975 /* CJSONScanner.m in Sources */,
 				202C47FD187D6E4B00FE0975 /* BitlyTextView.m in Sources */,
 				2087B6C017C73B40007A6A90 /* ResetPWViewController.m in Sources */,
-				2469DD3E1A0B532A00001EED /* LobErrorModel.m in Sources */,
 				209F8E4119A47A4E00323559 /* DrawingViewController.m in Sources */,
 				24803523192F3207009403F7 /* CameraViewController.m in Sources */,
 				202C4802187D6E4B00FE0975 /* BitlyTwitterOAuthViewController.m in Sources */,
 				2095C91118C5F92700E244A8 /* FlyerlyFacebookInvite.m in Sources */,
 				203E0B7617DDDD720039C3A7 /* InputViewController.m in Sources */,
-				2469DD3D1A0B532A00001EED /* LobCountryModel.m in Sources */,
 				20967D9818C8973200B273FC /* FlyerlyTwitterLike.m in Sources */,
 				2026992B18CED6B000945218 /* RMStore.m in Sources */,
 				204635621895E4AF00A94C42 /* Flyer.m in Sources */,
 				20E38AA4197FB39200D1CFA9 /* SendingPrintViewController.m in Sources */,
 				2044FF96185088ED00A26B42 /* MainSettingCell.m in Sources */,
 				2478E5E3192C7A6E0081B31B /* InAppViewController.m in Sources */,
-				2469DD461A0B532A00001EED /* LobVerifyModel.m in Sources */,
 				2022C63518D1BAF000BCD5F7 /* RMStoreKeychainPersistence.m in Sources */,
 				20B4AF411AB038FD00360B3C /* PrivicyPolicyViewController.m in Sources */,
 				202C4825187D7A6B00FE0975 /* CDataScanner.m in Sources */,
@@ -6844,11 +6643,18 @@
 				4986857018B4FFC7002113E4 /* LibraryViewController.m in Sources */,
 				49997FFB17E07FA100CF1038 /* SKProduct+LocalPrice.m in Sources */,
 				202C47FB187D6E4B00FE0975 /* BitlyLibUtil.m in Sources */,
-				2469DD3A1A0B532A00001EED /* LobAddressModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C300439C1AB6F61E00866385 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "lob-ios";
+			targetProxy = C300439B1AB6F61E00866385 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		65CC0AB9171803FB003D0BE7 /* Localizable.strings */ = {
@@ -6881,6 +6687,7 @@
 				PROVISIONING_PROFILE = "7375415b-e4af-43ee-b345-d510cfee855c";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7375415b-e4af-43ee-b345-d510cfee855c";
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "arm64 armv7 armv7s i386";
 			};
 			name = "Ad Hoc";
 		};
@@ -6926,13 +6733,15 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-lc++",
+					"-ObjC",
+					"-all_load",
 				);
 				PRODUCT_NAME = Flyr;
 				PROVISIONING_PROFILE = "7375415b-e4af-43ee-b345-d510cfee855c";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7375415b-e4af-43ee-b345-d510cfee855c";
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 i386 x86_64 armv7s armv8";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/**";
+				VALID_ARCHS = "armv7 armv7s armv8 x86_64";
 			};
 			name = "Ad Hoc";
 		};
@@ -6981,13 +6790,15 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-lc++",
+					"-ObjC",
+					"-all_load",
 				);
 				PRODUCT_NAME = Flyr;
 				PROVISIONING_PROFILE = "63416849-5637-4137-95fe-101fccfa6a42";
 				"PROVISIONING_PROFILE[sdk=iphoneos7.0]" = "63416849-5637-4137-95fe-101fccfa6a42";
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 i386 x86_64 armv7s armv8";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/**";
+				VALID_ARCHS = "armv7 armv7s armv8 x86_64";
 			};
 			name = Debug;
 		};
@@ -7032,13 +6843,15 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-lc++",
+					"-ObjC",
+					"-all_load",
 				);
 				PRODUCT_NAME = Flyr;
 				PROVISIONING_PROFILE = "77b8c503-ddf6-4dfc-a3ab-df5d9959313d";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "77b8c503-ddf6-4dfc-a3ab-df5d9959313d";
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 i386 x86_64 armv7s armv8";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/**";
+				VALID_ARCHS = "armv7 armv7s armv8 x86_64";
 			};
 			name = Release;
 		};
@@ -7061,6 +6874,7 @@
 				PROVISIONING_PROFILE = "63416849-5637-4137-95fe-101fccfa6a42";
 				"PROVISIONING_PROFILE[sdk=iphoneos7.0]" = "63416849-5637-4137-95fe-101fccfa6a42";
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "arm64 armv7 armv7s i386";
 			};
 			name = Debug;
 		};
@@ -7083,6 +6897,7 @@
 				PROVISIONING_PROFILE = "77b8c503-ddf6-4dfc-a3ab-df5d9959313d";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "77b8c503-ddf6-4dfc-a3ab-df5d9959313d";
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "arm64 armv7 armv7s i386";
 			};
 			name = Release;
 		};

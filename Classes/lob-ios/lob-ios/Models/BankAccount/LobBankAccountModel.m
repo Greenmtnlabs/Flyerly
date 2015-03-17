@@ -20,6 +20,7 @@
         self.routingNumber = dict[@"routing_number"];
         self.accountNumber = dict[@"account_number"];
         self.bankCode = dict[@"bank_code"];
+        self.signatory = dict[@"signatory"];
         self.bankAddress = [LobAddressModel initWithDictionary:dict[@"bank_address"]];
         self.accountAddress = [LobAddressModel initWithDictionary:dict[@"account_address"]];
     }
@@ -34,6 +35,7 @@
 - (instancetype)initBankAccountWithRoutingNumber:(NSString *)routingNumber
                                    accountNumber:(NSString *)accountNumber
                                         bankCode:(NSString *)bankCode
+                                        signatory:(NSString *)signatory
                                      bankAddress:(LobAddressModel *)bankAddress
                                   accountAddress:(LobAddressModel *)accountAddress
 {
@@ -66,6 +68,7 @@
     
     NSArray *nameValues = @[@[@"routing_number",@"routingNumber"],
                             @[@"account_number",@"accountNumber"],
+                            @[@"signatory",@"signatory"],
                             @[@"bank_code",@"bankCode"]];
     
     [LobAbstractModel populateItems:items

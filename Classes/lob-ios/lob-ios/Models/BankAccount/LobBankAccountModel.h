@@ -15,6 +15,7 @@
 @property(nonatomic, strong) NSString *routingNumber;
 @property(nonatomic, strong) NSString *accountNumber;
 @property(nonatomic, strong) NSString *bankCode;
+@property(nonatomic, strong) NSString *signatory;
 @property(nonatomic, strong) LobAddressModel *bankAddress;
 @property(nonatomic, strong) LobAddressModel *accountAddress;
 
@@ -23,6 +24,7 @@
 - (instancetype)initBankAccountWithRoutingNumber:(NSString *)routingNumber
                                    accountNumber:(NSString *)accountNumber
                                         bankCode:(NSString *)bankCode
+                                       signatory:(NSString *)signatory
                                      bankAddress:(LobAddressModel *)bankAddress
                                   accountAddress:(LobAddressModel *)accountAddress;
 

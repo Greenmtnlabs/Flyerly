@@ -8,7 +8,6 @@
 
 #import "FlyrAppDelegate.h"
 #import "PaypalMobile.h"
-#import "LobRequest.h"
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 
 NSString *kCheckTokenStep1 = @"kCheckTokenStep";
@@ -210,7 +209,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     
     [PayPalMobile preconnectWithEnvironment:[flyerConfigurator paypalEnvironment]];
     
-    [LobRequest initWithAPIKey:[flyerConfigurator lobAppId]];
+    //[LobRequest initWithAPIKey:[flyerConfigurator lobAppId]];
     
     //-- Set Notification
     if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)])

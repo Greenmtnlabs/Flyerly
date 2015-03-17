@@ -88,9 +88,9 @@
                              prefix:prefix];
     
     if([prefix isEqualToString:@""])
-        [items addObject:[NSString stringWithFormat:@"setting_id=%@",self.setting.settingId]];
+        [items addObject:[NSString stringWithFormat:@"setting=%@",self.setting.settingId]];
     else
-        [items addObject:[NSString stringWithFormat:@"%@[setting_id]=%@",prefix,self.setting.settingId]];
+        [items addObject:[NSString stringWithFormat:@"%@[setting]=%@",prefix,self.setting.settingId]];
     
     if(self.file)
     {
