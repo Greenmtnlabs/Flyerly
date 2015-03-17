@@ -72,9 +72,9 @@ UIButton *backButton;
     sem = dispatch_semaphore_create(0);
     
     testingNotUploadFile = NO;
-    testingSkipAddressValidations = YES;
-    testingAddressUse = YES;
-    testingSkipPaypal = YES;
+    testingSkipAddressValidations = NO;
+    testingAddressUse = NO;
+    testingSkipPaypal = NO;
 
     
     urlFrontStr = @"";
