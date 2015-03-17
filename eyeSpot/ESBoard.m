@@ -75,30 +75,23 @@
         board.index = index++;
         
         // Get list of tiles
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"lastPathComponent beginswith[cd] %@", [board tilePrefix]];
+        
+        NSPredicate *predicate = (IS_IPHONE6) ? [NSPredicate predicateWithFormat:@"lastPathComponent BEGINSWITH[cd] %@ AND lastPathComponent ENDSWITH[cd] %@", [board tilePrefix],@"3x.jpg"] : [NSPredicate predicateWithFormat:@"lastPathComponent BEGINSWITH[cd] %@ AND lastPathComponent ENDSWITH[cd] %@", [board tilePrefix],@"2x.jpg"];
         NSArray *tileURLs = [possibleTileURLs filteredArrayUsingPredicate:predicate];
 
         NSUInteger tileIndex = 0;
         for (int i = 0, n = [tileURLs count], maxTiles = [board maximumNumberOfTiles];
-             i < n ;
+             i < n && i<maxTiles;
              i++) {
             
             NSURL *tileURL = tileURLs[i];
-           
-            NSString * myst = [tileURL es_pathRelativeToHomeDirectory];
-           if ( ( IS_IPHONE6  && [myst rangeOfString:@"@2x"].location == NSNotFound) || ( [myst rangeOfString:@"@3x"].location == NSNotFound) ) {
-               
-                ESTile *tile = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ESTile class])
+            ESTile *tile = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ESTile class])
                                                              inManagedObjectContext:managedObjectContext];
                 tile.imagePath = [tileURL es_pathRelativeToHomeDirectory];
                 tile.index = tileIndex++;
                 NSMutableOrderedSet *set = [board mutableOrderedSetValueForKey:@"tiles"];
                 [set addObject:tile];
-
-            }
-            
-
-                   }
+        }
         
 //        for (NSNumber *tileIndex in boardDict[@"tiles"]) {
 //            NSDictionary *tileDict = defaultTiles[[tileIndex intValue]];
