@@ -80,17 +80,25 @@
 
         NSUInteger tileIndex = 0;
         for (int i = 0, n = [tileURLs count], maxTiles = [board maximumNumberOfTiles];
-             i < n && i < maxTiles;
+             i < n ;
              i++) {
-            NSURL *tileURL = tileURLs[i];
-            ESTile *tile = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ESTile class])
-                                                         inManagedObjectContext:managedObjectContext];
-            tile.imagePath = [tileURL es_pathRelativeToHomeDirectory];
-            tile.index = tileIndex++;
             
-            NSMutableOrderedSet *set = [board mutableOrderedSetValueForKey:@"tiles"];
-            [set addObject:tile];
-        }
+            NSURL *tileURL = tileURLs[i];
+           
+            NSString * myst = [tileURL es_pathRelativeToHomeDirectory];
+           if ( ( IS_IPHONE6  && [myst rangeOfString:@"@2x"].location == NSNotFound) || ( [myst rangeOfString:@"@3x"].location == NSNotFound) ) {
+               
+                ESTile *tile = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ESTile class])
+                                                             inManagedObjectContext:managedObjectContext];
+                tile.imagePath = [tileURL es_pathRelativeToHomeDirectory];
+                tile.index = tileIndex++;
+                NSMutableOrderedSet *set = [board mutableOrderedSetValueForKey:@"tiles"];
+                [set addObject:tile];
+
+            }
+            
+
+                   }
         
 //        for (NSNumber *tileIndex in boardDict[@"tiles"]) {
 //            NSDictionary *tileDict = defaultTiles[[tileIndex intValue]];
