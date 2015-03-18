@@ -40,6 +40,7 @@
     NSMutableArray *sendCardTo,*cardHasBeenSentTo;
     int postReqTry;
     BOOL hasPaidForPostCard;
+    BOOL toContactVal;
 }
 
 @property (nonatomic, strong, readwrite) PayPalConfiguration *payPalConfiguration;
@@ -75,6 +76,8 @@ UIButton *backButton;
     testingSkipAddressValidations = NO;
     testingAddressUse = NO;
     testingSkipPaypal = NO;
+    
+    toContactVal = NO;
 
     
     urlFrontStr = @"";
@@ -387,8 +390,9 @@ UIButton *backButton;
     
 }
 - (void)checkTocount{
+    toContactVal =  NO;
     
-    if(contactsArray.count <1){
+    if(contactsArray.count < 1 ){
         
         if ( [toName.text isEqualToString:@""] && [toStreetAddress.text isEqualToString:@""] && [toZip.text isEqualToString:@""] && [toCity.text isEqualToString:@""] && [toState.text isEqualToString:@""]){
             
@@ -431,7 +435,7 @@ UIButton *backButton;
         [self showAlert:@"Please enter  reciever state."];
         
     }else {
-        
+        toContactVal = YES;
         [self sendrequestOnLob];
     }
     
@@ -585,6 +589,15 @@ https://lob.com/docs#postcards
     int viewsToPop = 2;
     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex: self.navigationController.viewControllers.count-viewsToPop-1] animated:YES];
 }
+-(int)getCountOfContacts{
+    int numberOfSelectContacts  = contactsArray.count;
+    int toContactsCount = 0;
+    if( toContactVal == YES ){
+        toContactsCount = 1;
+    }
+    
+    return numberOfSelectContacts + toContactsCount;
+}
 
 /**
  * Sending the request on Lob,with total coantacts details and flyer as PDF file that needs to printed
@@ -592,7 +605,7 @@ https://lob.com/docs#postcards
 -(void)sendrequestOnLob {
     
     if( testingSkipPaypal == NO && hasPaidForPostCard == NO ) {
-        [self openBuyPanel:1];
+        [self openBuyPanel:[self getCountOfContacts]];
     }
     else {
         [self showLoading:YES];
@@ -753,65 +766,70 @@ https://lob.com/docs#postcards
 //Send After Address Verification
 -(void)sendPostCardToLob: (NSDictionary *)postcardDict
 {
-    
-    NSString *sendCardToName = [self getSendCardToName1:postcardDict];
-    NSUInteger index = [cardHasBeenSentTo indexOfObject:sendCardToName];
-    
-    NSLog(@"getSendCardToName1: %@",sendCardToName);
-    
-    
-    if (index == NSNotFound ) {
+    if( [cardHasBeenSentTo count] >= [sendCardTo count] ) {
+        NSLog(@"Back to create flyer screen.");
+        [self goHomeScreen];
+    }
+    else {
+        NSString *sendCardToName = [self getSendCardToName1:postcardDict];
+        NSUInteger index = [cardHasBeenSentTo indexOfObject:sendCardToName];
         
-        LobPostcardModel *pCardModel = [[LobPostcardModel alloc] initWithDictionary:postcardDict];
+        NSLog(@"getSendCardToName1: %@",sendCardToName);
         
-        [postcardRequest createPostcardWithModel:pCardModel withResponse:^(LobPostcardModel *postcard, NSError *error) {
+        
+        if (index == NSNotFound ) {
             
-            NSLog(@"postcard: %@",postcard);
-            NSLog(@"error %@",error);
+            LobPostcardModel *pCardModel = [[LobPostcardModel alloc] initWithDictionary:postcardDict];
             
-            NSLog(@"getSendCardToName2 %@",[self getSendCardToName2:pCardModel]);
+            [postcardRequest createPostcardWithModel:pCardModel withResponse:^(LobPostcardModel *postcard, NSError *error) {
+                
+                NSLog(@"postcard: %@",postcard);
+                NSLog(@"error %@",error);
+                
+                NSLog(@"getSendCardToName2 %@",[self getSendCardToName2:pCardModel]);
 
-            
+                
 
-            NSString *message = @"";
+                NSString *message = @"";
 
-             if (error == nil && postcardRequest.statusCode == 200) {
+                 if (error == nil && postcardRequest.statusCode == 200) {
 
-                  NSString *tempNameTo   =   [self getSendCardToName2:postcard];
-                 [cardHasBeenSentTo addObject:tempNameTo];
-                 
-                 
-                 message = [NSString stringWithFormat:@"Your postcard [for: %@ ] has been send to print.", tempNameTo];
-                 
-                 UIAlertView *alertSuccess = [[UIAlertView alloc] initWithTitle:@"Postcard Sent." message:message  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                 
-                 [alertSuccess show];
-                 
-                 if( [cardHasBeenSentTo count] == [sendCardTo count] ){
-                     NSLog(@"Back to create flyer screen.");
-                     [self goHomeScreen];
-                 }
-                 
-             } else {
-                message = [NSString stringWithFormat:@"One of the Postcard not sent. Error message: %@", error];
-                 
-                 if( error == nil ) {
-                     message = [NSString stringWithFormat:@"One of the Postcard not sent.. Error status code: %ld", (long)postcardRequest.statusCode];
+                      NSString *tempNameTo   =   [self getSendCardToName2:postcard];
+                     [cardHasBeenSentTo addObject:tempNameTo];
                      
-                     if( postcardRequest.statusCode == 422 ){
-                         message = [NSString stringWithFormat:@"One of the Postcard not sent. Due to invalid address."];
+                     
+                     message = [NSString stringWithFormat:@"Your postcard [for: %@ ] has been send to print.", tempNameTo];
+                     
+                     UIAlertView *alertSuccess = [[UIAlertView alloc] initWithTitle:@"Postcard Sent." message:message  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                     
+                     [alertSuccess show];
+                     
+                     if( [cardHasBeenSentTo count] >= [sendCardTo count] ){
+                         NSLog(@"Back to create flyer screen.");
+                         [self goHomeScreen];
                      }
+                     
+                 } else {
+                    message = [NSString stringWithFormat:@"One of the Postcard not sent. Error message: %@", error];
+                     
+                     if( error == nil ) {
+                         message = [NSString stringWithFormat:@"One of the Postcard not sent.. Error status code: %ld", (long)postcardRequest.statusCode];
+                         
+                         if( postcardRequest.statusCode == 422 ){
+                             message = [NSString stringWithFormat:@"One of the Postcard not sent. Due to invalid address."];
+                         }
+                     }
+                     
+                     UIAlertView *alertFailure = [[UIAlertView alloc] initWithTitle:@"" message:message  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                     
+                     [alertFailure show];
                  }
                  
-                 UIAlertView *alertFailure = [[UIAlertView alloc] initWithTitle:@"" message:message  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                 
-                 [alertFailure show];
-             }
-             
-             [self showLoading:NO];
-             dispatch_semaphore_signal(sem);
-         }];
-        
+                 [self showLoading:NO];
+                 dispatch_semaphore_signal(sem);
+             }];
+            
+        }
     }
 }
 
