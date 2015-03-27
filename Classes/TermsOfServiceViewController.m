@@ -13,7 +13,7 @@
 @end
 
 @implementation TermsOfServiceViewController
-@synthesize terms;- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+@synthesize terms,scrollViewTerms,textViewTerms;- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -42,6 +42,13 @@
     backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
+    
+    scrollViewTerms.contentSize=CGSizeMake(300, 9800);
+    CGFloat fixedWidth = textViewTerms.frame.size.width;
+    CGSize newSize = [textViewTerms sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
+    CGRect newFrame = textViewTerms.frame;
+    newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
+    textViewTerms.frame = newFrame;
 }
 
 -(void)goBack{
