@@ -260,6 +260,8 @@
 		20A1CD6318EEF63200484391 /* SubNBUCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A1CD6218EEF63200484391 /* SubNBUCamera.m */; };
 		20A1CD6518EF0B0400484391 /* ShareVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20A1CD6418EF0B0400484391 /* ShareVideoViewController.xib */; };
 		20A1CD6F18EF19B400484391 /* YouTubeSubClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A1CD6E18EF19B400484391 /* YouTubeSubClass.m */; };
+		20B099351AC58D1900F19836 /* send@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B099341AC58D1900F19836 /* send@2x.png */; };
+		20B099371AC58D2900F19836 /* send@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B099361AC58D2800F19836 /* send@3x.png */; };
 		20B4AF411AB038FD00360B3C /* PrivicyPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20B4AF3F1AB038FD00360B3C /* PrivicyPolicyViewController.m */; };
 		20B4AF421AB038FD00360B3C /* PrivicyPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20B4AF401AB038FD00360B3C /* PrivicyPolicyViewController.xib */; };
 		20B4AF471AB0499100360B3C /* TermsOfServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20B4AF451AB0499100360B3C /* TermsOfServiceViewController.m */; };
@@ -1696,6 +1698,8 @@
 		20A1CD6418EF0B0400484391 /* ShareVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareVideoViewController.xib; sourceTree = "<group>"; };
 		20A1CD6D18EF19B400484391 /* YouTubeSubClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouTubeSubClass.h; sourceTree = "<group>"; };
 		20A1CD6E18EF19B400484391 /* YouTubeSubClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouTubeSubClass.m; sourceTree = "<group>"; };
+		20B099341AC58D1900F19836 /* send@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send@2x.png"; sourceTree = "<group>"; };
+		20B099361AC58D2800F19836 /* send@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send@3x.png"; sourceTree = "<group>"; };
 		20B4AF3E1AB038FD00360B3C /* PrivicyPolicyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivicyPolicyViewController.h; sourceTree = "<group>"; };
 		20B4AF3F1AB038FD00360B3C /* PrivicyPolicyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivicyPolicyViewController.m; sourceTree = "<group>"; };
 		20B4AF401AB038FD00360B3C /* PrivicyPolicyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivicyPolicyViewController.xib; sourceTree = "<group>"; };
@@ -3067,6 +3071,8 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				20B099361AC58D2800F19836 /* send@3x.png */,
+				20B099341AC58D1900F19836 /* send@2x.png */,
 				2098BDBD1AB2FEF800CDE1A4 /* privacy@2x.png */,
 				2098BDBE1AB2FEF800CDE1A4 /* privacy@3x.png */,
 				2098BDBB1AB2FEDB00CDE1A4 /* tnc@3x.png */,
@@ -5446,6 +5452,7 @@
 				24861F5D19F9147100670F6D /* tumblr_share@3x.png in Resources */,
 				20F1FB061976526600D40E60 /* closeAd@2x.png in Resources */,
 				30D58D2E10FB1BF800E0C7E8 /* icon51.jpg in Resources */,
+				20B099351AC58D1900F19836 /* send@2x.png in Resources */,
 				24861F3019F9147100670F6D /* password_email_icon@3x.png in Resources */,
 				24861F3E19F9147100670F6D /* save_bg@3x.png in Resources */,
 				30D58D2F10FB1BF800E0C7E8 /* icon52.jpg in Resources */,
@@ -6056,6 +6063,7 @@
 				24861EED19F9147100670F6D /* drawing_tab_pencil@3x.png in Resources */,
 				246EF511193C515D004539B2 /* emoticon50@2x.png in Resources */,
 				247858E11948788C0062F1E4 /* Raleway-Regular.otf in Resources */,
+				20B099371AC58D2900F19836 /* send@3x.png in Resources */,
 				2478E5EE192C8C0A0081B31B /* FreeFeatureCell.xib in Resources */,
 				242184ED194B4AEC00FDDA97 /* Pictures-icon.png in Resources */,
 				365A9D1319AF697300E284B5 /* drawing_tab_color@2x.png in Resources */,
