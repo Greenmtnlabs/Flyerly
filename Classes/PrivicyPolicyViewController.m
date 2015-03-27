@@ -13,7 +13,7 @@
 @end
 
 @implementation PrivicyPolicyViewController
-@synthesize mylabel;
+@synthesize mylabel,textViewPrivicy,scrollViewPrivicy;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -42,6 +42,14 @@
     backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
+
+    scrollViewPrivicy.contentSize=CGSizeMake(300, 3500);
+    CGFloat fixedWidth = textViewPrivicy.frame.size.width;
+    CGSize newSize = [textViewPrivicy sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
+    CGRect newFrame = textViewPrivicy.frame;
+    newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
+    textViewPrivicy.frame = newFrame;
+
 }
 
 - (void)didReceiveMemoryWarning {
