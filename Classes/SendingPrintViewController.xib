@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SendingPrintViewController">
             <connections>
                 <outlet property="city" destination="Tvh-Qk-doC" id="iLY-jQ-8zS"/>
+                <outlet property="contactlistTextView" destination="TpD-gF-FGx" id="DUH-Gg-byY"/>
                 <outlet property="country" destination="8Wc-wF-dcr" id="X0c-5i-OZZ"/>
                 <outlet property="flyerImage" destination="mpt-BP-emQ" id="TJf-Mk-bVB"/>
                 <outlet property="messageFeild" destination="ePj-GR-F20" id="XUp-z6-22W"/>
@@ -17,10 +18,17 @@
                 <outlet property="streetAddress" destination="Kfp-a8-9Kr" id="zln-DT-zgi"/>
                 <outlet property="toCity" destination="Inm-vC-dTx" id="L2Y-YG-O6u"/>
                 <outlet property="toCountry" destination="E6n-Mx-2Jk" id="aXi-LH-4sD"/>
+                <outlet property="toLabel" destination="ZoR-dx-iUP" id="RYi-CR-Pq8"/>
                 <outlet property="toName" destination="MS4-yk-4Gu" id="6Db-Qk-oLk"/>
                 <outlet property="toState" destination="Mue-Vw-zFA" id="n6T-5K-Xi7"/>
                 <outlet property="toStreetAddress" destination="SSG-TW-LTx" id="NDo-li-7Fg"/>
                 <outlet property="toZip" destination="liT-0z-KcE" id="fPb-XJ-Pb7"/>
+                <outlet property="toimageText" destination="o0C-FB-qIw" id="AdM-PU-5OL"/>
+                <outlet property="toimageText1" destination="Zte-aE-qR4" id="DFs-6F-ugU"/>
+                <outlet property="toimageText2" destination="dvc-Fl-75D" id="6Bh-Hw-gGA"/>
+                <outlet property="toimageText3" destination="YjD-ab-0kA" id="cf7-jE-Oxh"/>
+                <outlet property="toimageText4" destination="tQv-aq-4vW" id="uDp-Vc-w4M"/>
+                <outlet property="toimageText5" destination="MJK-zh-3wx" id="RhI-52-bVS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="mhH-6r-sW5"/>
                 <outlet property="zip" destination="WRG-kB-eeS" id="8ha-Rr-2VK"/>
             </connections>
@@ -217,6 +225,16 @@
                             <rect key="frame" x="160" y="494" width="144" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         </imageView>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" id="TpD-gF-FGx">
+                            <rect key="frame" x="15" y="380" width="293" height="159"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="pvP-qW-kFa"/>
+                            </connections>
+                        </textView>
                         <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="United States" minimumFontSize="17" id="E6n-Mx-2Jk" userLabel="To_United_States">
                             <rect key="frame" x="166" y="494" width="140" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>

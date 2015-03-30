@@ -26,7 +26,7 @@
 @end
 
 @implementation InviteForPrint
-@synthesize uiTableView, contactsArray, selectedIdentifiers, searchTextField, iPhoneinvited,flyer;
+@synthesize uiTableView, contactsArray, selectedIdentifiers, searchTextField, iPhoneinvited,flyer, msgTextView;
 @synthesize contactBackupArray;
 
 
@@ -38,7 +38,7 @@
     
     UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
     [UserVoice initialize:config];
-    
+    msgTextView.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
     self.selectedIdentifiers = [[NSMutableArray alloc] init];
     globle = [FlyerlySingleton RetrieveSingleton];
     self.navigationItem.hidesBackButton = YES;

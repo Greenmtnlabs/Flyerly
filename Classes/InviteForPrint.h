@@ -23,7 +23,7 @@
 @property (nonatomic,strong) Flyer *flyer;
 
 @property(nonatomic,strong) IBOutlet UITextField *searchTextField;
-
+@property(nonatomic,strong) IBOutlet UITextView *msgTextView;
 @property(nonatomic,strong) IBOutlet UITableView *uiTableView;
 @property(nonatomic,strong) NSMutableArray *contactsArray;
 @property(nonatomic,strong) NSMutableArray *contactBackupArray;
