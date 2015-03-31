@@ -53,7 +53,7 @@ UIButton *backButton;
 
 
 
-@synthesize messageFeild,streetAddress,state,city,zip,country,name,flyerImage,flyer,contactsArray,scrollView, toName,toCity,toCountry,toState,toStreetAddress,toZip;
+@synthesize messageFeild,streetAddress,state,city,zip,country,name,flyerImage,flyer,contactsArray,scrollView, toName,toCity,toCountry,toState,toStreetAddress,toZip, toimageText,toLabel,toimageText1,toimageText2,toimageText3,toimageText4,toimageText5, contactlistTextView;
 
 - (void)viewDidLoad
 {
@@ -163,9 +163,43 @@ UIButton *backButton;
     flyerImage.image = [UIImage imageWithContentsOfFile:flyer.getFlyerImage];
     
     
+    //Hide the To text field if contact is selected
+    if(contactsArray.count > 0 ){
+        [toName setHidden: YES];
+        [toState setHidden: YES];
+        [toStreetAddress setHidden: YES];
+        [toZip setHidden: YES];
+        [toCity setHidden: YES];
+        [toCountry setHidden: YES];
+        [toLabel setHidden: YES];
+        [toimageText setHidden:YES];
+        [toimageText1 setHidden:YES];
+        [toimageText2 setHidden:YES];
+        [toimageText3 setHidden:YES];
+        [toimageText4 setHidden:YES];
+        [toimageText5 setHidden:YES];
+        NSMutableString* nameList = [NSMutableString string];
+        for(int i = 0;i<contactsArray.count;i++){
+            //Selected contac name
+            ContactsModel *model = [self getArrayOfSelectedTab][i];
+             //nameList = [NSString stringWithFormat:@"%@ \n", model.name];
+            if(i==0){
+                [nameList appendString:[NSString stringWithFormat:@"Flyerly printed flyer sent to:\n%@\n",model.name]];
+            }else{
+                [nameList appendString:[NSString stringWithFormat:@"%@\n",model.name]];
+            }
+            
+        }
+        
+        contactlistTextView.text = nameList;
+         contactlistTextView.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
+        [contactlistTextView setFont:[UIFont systemFontOfSize:15]];
+        [contactlistTextView setHidden:NO];
+        
+    }else{
+        [contactlistTextView setHidden:YES];
+    }
     
-    
-
 }
 
 -(void)textFieldDidBeginEditing:(UITextField *)sender
@@ -403,6 +437,7 @@ UIButton *backButton;
             [self validateMandatoryToFlyerField];
         }
     } else {
+        
         [self validateMandatoryToFlyerField];
     }
 

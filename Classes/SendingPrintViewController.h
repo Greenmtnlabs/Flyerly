@@ -44,5 +44,13 @@
 @property (weak, nonatomic) IBOutlet UITextField *toCity;
 @property (weak, nonatomic) IBOutlet UITextField *toCountry;
 @property (weak, nonatomic) IBOutlet UITextField *toState;
+@property (weak, nonatomic) IBOutlet UIImageView *toimageText;
+@property (weak, nonatomic) IBOutlet UIImageView *toimageText1;
+@property (weak, nonatomic) IBOutlet UIImageView *toimageText2;
+@property (weak, nonatomic) IBOutlet UIImageView *toimageText3;
+@property (weak, nonatomic) IBOutlet UIImageView *toimageText4;
+@property (weak, nonatomic) IBOutlet UIImageView *toimageText5;
+@property (weak, nonatomic) IBOutlet UILabel * toLabel;
 
+@property (nonatomic, strong) IBOutlet UITextView *contactlistTextView;
 @end
