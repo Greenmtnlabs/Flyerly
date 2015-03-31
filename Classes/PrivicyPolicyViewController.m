@@ -44,6 +44,8 @@
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
     if(IS_IPHONE_5){
         scrollViewPrivicy.contentSize=CGSizeMake(300, 4000);
+    }else if(IS_IPHONE_6_PLUS){
+        scrollViewPrivicy.contentSize=CGSizeMake(300, 3300);
     }else{
         scrollViewPrivicy.contentSize=CGSizeMake(300, 3600);
     }
