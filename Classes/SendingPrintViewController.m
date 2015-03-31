@@ -112,7 +112,12 @@ UIButton *backButton;
     messageFeild.delegate = self;
     
     //Setting up the Scroll size
-    [scrollView setContentSize:CGSizeMake(320, 660)];
+    if(IS_IPHONE_6_PLUS){
+        [scrollView setContentSize:CGSizeMake(320, 720)];
+    }else{
+        [scrollView setContentSize:CGSizeMake(320, 660)];
+    }
+    
     //Setting the initial position for scroll view
     scrollView.contentOffset = CGPointMake(0,0);
     
