@@ -53,7 +53,7 @@ UIButton *backButton;
 
 
 
-@synthesize messageFeild,streetAddress,state,city,zip,country,name,flyerImage,flyer,contactsArray,scrollView, toName,toCity,toCountry,toState,toStreetAddress,toZip, toimageText,toLabel,toimageText1,toimageText2,toimageText3,toimageText4,toimageText5, contactlistTextView;
+@synthesize messageFeild,streetAddress,state,city,zip,country,name,flyerImage,flyer,contactsArray,scrollView, toName,toCity,toCountry,toState,toStreetAddress,toZip, toimageText,toLabel,toimageText1,toimageText2,toimageText3,toimageText4,toimageText5, contactlistTextView, characterCountLabel;
 
 - (void)viewDidLoad
 {
@@ -363,6 +363,28 @@ UIButton *backButton;
     NSLog(@"textViewDidBeginEditing:");
 }
 
+// function to handle character count for message text view
+-(void)textViewDidChange:(UITextView *)textView
+{
+    int len = textView.text.length;
+    characterCountLabel.text=[NSString stringWithFormat:@"%i",350-len];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if([text length] == 0)
+    {
+        if([textView.text length] != 0)
+        {
+            return YES;
+        }
+    }
+    else if([[textView text] length] > 349)
+    {
+        return NO;
+    }
+    return YES;
+}
 
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

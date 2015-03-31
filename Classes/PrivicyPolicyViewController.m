@@ -7,7 +7,7 @@
 //
 
 #import "PrivicyPolicyViewController.h"
-
+#import "Common.h"
 @interface PrivicyPolicyViewController ()
 
 @end
@@ -42,8 +42,11 @@
     backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
-
-    scrollViewPrivicy.contentSize=CGSizeMake(300, 3500);
+    if(IS_IPHONE_5){
+        scrollViewPrivicy.contentSize=CGSizeMake(300, 4000);
+    }else{
+        scrollViewPrivicy.contentSize=CGSizeMake(300, 3600);
+    }
     CGFloat fixedWidth = textViewPrivicy.frame.size.width;
     CGSize newSize = [textViewPrivicy sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
     CGRect newFrame = textViewPrivicy.frame;

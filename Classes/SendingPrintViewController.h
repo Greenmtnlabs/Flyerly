@@ -51,6 +51,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *toimageText4;
 @property (weak, nonatomic) IBOutlet UIImageView *toimageText5;
 @property (weak, nonatomic) IBOutlet UILabel * toLabel;
+@property (weak, nonatomic) IBOutlet UILabel * characterCountLabel;
+
 
 @property (nonatomic, strong) IBOutlet UITextView *contactlistTextView;
 @end

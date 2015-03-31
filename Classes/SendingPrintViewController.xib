@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SendingPrintViewController">
             <connections>
+                <outlet property="characterCountLabel" destination="cLJ-Sx-MJS" id="RND-rS-J3Z"/>
                 <outlet property="city" destination="Tvh-Qk-doC" id="iLY-jQ-8zS"/>
                 <outlet property="contactlistTextView" destination="TpD-gF-FGx" id="DUH-Gg-byY"/>
                 <outlet property="country" destination="8Wc-wF-dcr" id="X0c-5i-OZZ"/>
@@ -254,6 +255,13 @@
                                 <outlet property="delegate" destination="-1" id="8NX-Ri-8S1"/>
                             </connections>
                         </textField>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cLJ-Sx-MJS" userLabel="Character Limit:">
+                            <rect key="frame" x="181" y="148" width="23" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                 </scrollView>
             </subviews>

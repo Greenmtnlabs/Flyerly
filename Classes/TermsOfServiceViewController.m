@@ -7,7 +7,7 @@
 //
 
 #import "TermsOfServiceViewController.h"
-
+#import "Common.h"
 @interface TermsOfServiceViewController ()
 
 @end
@@ -42,8 +42,14 @@
     backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
+    if(IS_IPHONE_6_PLUS){
+        scrollViewTerms.contentSize=CGSizeMake(300, 9100);
+    }else if(IS_IPHONE_5){
+        scrollViewTerms.contentSize=CGSizeMake(300, 11100);
+    }else{
+        scrollViewTerms.contentSize=CGSizeMake(300, 9800);
+    }
     
-    scrollViewTerms.contentSize=CGSizeMake(300, 9800);
     CGFloat fixedWidth = textViewTerms.frame.size.width;
     CGSize newSize = [textViewTerms sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
     CGRect newFrame = textViewTerms.frame;
