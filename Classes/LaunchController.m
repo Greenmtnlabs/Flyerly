@@ -44,7 +44,7 @@
     
     globle.twitterUser = nil;
     
-      if( IS_IPHONE_5 || IS_IPHONE_6 ){
+      if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
           
        registerController = [[RegisterController alloc] initWithNibName:@"RegisterViewController_iPhone5" bundle:nil];
           
