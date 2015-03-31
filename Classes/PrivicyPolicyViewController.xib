@@ -30,9 +30,8 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" id="YjE-wT-nqr">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="13073"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="10000"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <attributedString key="attributedText">
                                 <fragment>
                                     <string key="content">Thanks for taking the time to read this. We care deeply about protecting your privacy and are committed to making Flyerly a product that people love and trust. This document outlines how we use and disclose the personally identifiable information (which we call "Personal Information") and other information that we collect. If you have any questions that aren't answered here, please feel free to contact us anytime at </string>
@@ -126,6 +125,7 @@ Cg
                                 <fragment content="">
                                     <attributes>
                                         <font key="NSFont" size="10" name="LastResort"/>
+                                        <font key="NSOriginalFont" size="10" name="LastResort"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" firstLineHeadIndent="18" headIndent="36" tailIndent="481.89999999999998" defaultTabInterval="36">
                                             <tabStops/>
                                         </paragraphStyle>
@@ -165,6 +165,7 @@ Cg
                                 <fragment content="">
                                     <attributes>
                                         <font key="NSFont" size="10" name="LastResort"/>
+                                        <font key="NSOriginalFont" size="10" name="LastResort"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" firstLineHeadIndent="18" headIndent="36" tailIndent="481.89999999999998" defaultTabInterval="36">
                                             <tabStops/>
                                         </paragraphStyle>
@@ -204,6 +205,7 @@ Cg
                                 <fragment content="">
                                     <attributes>
                                         <font key="NSFont" size="10" name="LastResort"/>
+                                        <font key="NSOriginalFont" size="10" name="LastResort"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" firstLineHeadIndent="18" headIndent="36" tailIndent="481.89999999999998" defaultTabInterval="36">
                                             <tabStops/>
                                         </paragraphStyle>
@@ -282,6 +284,7 @@ Cg
                                 <fragment content="">
                                     <attributes>
                                         <font key="NSFont" size="10" name="LastResort"/>
+                                        <font key="NSOriginalFont" size="10" name="LastResort"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" firstLineHeadIndent="18" headIndent="36" tailIndent="481.89999999999998" defaultTabInterval="36">
                                             <tabStops/>
                                         </paragraphStyle>
@@ -321,6 +324,7 @@ Cg
                                 <fragment content="">
                                     <attributes>
                                         <font key="NSFont" size="10" name="LastResort"/>
+                                        <font key="NSOriginalFont" size="10" name="LastResort"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" firstLineHeadIndent="18" headIndent="36" tailIndent="481.89999999999998" defaultTabInterval="36">
                                             <tabStops/>
                                         </paragraphStyle>
@@ -359,6 +363,7 @@ Cg
                                 <fragment content="">
                                     <attributes>
                                         <font key="NSFont" size="10" name="LastResort"/>
+                                        <font key="NSOriginalFont" size="10" name="LastResort"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" firstLineHeadIndent="18" headIndent="36" tailIndent="481.89999999999998" defaultTabInterval="36">
                                             <tabStops/>
                                         </paragraphStyle>
@@ -397,6 +402,7 @@ Cg
                                 <fragment content="">
                                     <attributes>
                                         <font key="NSFont" size="10" name="LastResort"/>
+                                        <font key="NSOriginalFont" size="10" name="LastResort"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" firstLineHeadIndent="18" headIndent="36" tailIndent="481.89999999999998" defaultTabInterval="36">
                                             <tabStops/>
                                         </paragraphStyle>
@@ -435,6 +441,7 @@ Cg
                                 <fragment content="">
                                     <attributes>
                                         <font key="NSFont" size="10" name="LastResort"/>
+                                        <font key="NSOriginalFont" size="10" name="LastResort"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" firstLineHeadIndent="18" headIndent="36" tailIndent="481.89999999999998" defaultTabInterval="36">
                                             <tabStops/>
                                         </paragraphStyle>
