@@ -289,7 +289,7 @@ BOOL adLoaded = false;
                                     [userPurchases setUserPurcahsesFromParse];
                                     [purchseController.buttondelegate productSuccesfullyPurchased:pid];
                                     
-                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Congratulations." message:@"You just unlocked the Design Bundle Feature by Referring freinds" delegate:self cancelButtonTitle:@"Owsum!" otherButtonTitles:nil, nil];
+                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Design Bundle Unlocked!" message:@"Thank you for helping us grow!  You just earned the Design Bundle for inviting others to join Flyerly." delegate:self cancelButtonTitle:@"Awesome!" otherButtonTitles:nil, nil];
                                     
                                     [alert show];
                                     

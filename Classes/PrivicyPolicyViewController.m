@@ -29,10 +29,10 @@
     //set title
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-35, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
-    //label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
-    label.text = @"Privicy Policy";
+    label.text = @"PRIVICY POLICY";
     self.navigationItem.titleView = label;
     
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
@@ -43,11 +43,11 @@
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
     if(IS_IPHONE_5){
-        scrollViewPrivicy.contentSize=CGSizeMake(300, 4000);
-    }else if(IS_IPHONE_6_PLUS){
-        scrollViewPrivicy.contentSize=CGSizeMake(300, 3300);
-    }else{
         scrollViewPrivicy.contentSize=CGSizeMake(300, 3600);
+    }else if(IS_IPHONE_6_PLUS){
+        scrollViewPrivicy.contentSize=CGSizeMake(300, 2900);
+    }else{
+        scrollViewPrivicy.contentSize=CGSizeMake(300, 3200);
     }
     CGFloat fixedWidth = textViewPrivicy.frame.size.width;
     CGSize newSize = [textViewPrivicy sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
