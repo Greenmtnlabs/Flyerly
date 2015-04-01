@@ -28,11 +28,10 @@
     //set title
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-35, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
-    //label.font = [UIFont fontWithName:TITLE_FONT size:18];
-  //  label.font = [UIFont fontWithName: size:<#(CGFloat)#>];
+    label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
-    label.text = @"Terms of Service";
+    label.text = @"TERMS OF SERVICE";
     self.navigationItem.titleView = label;
     
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
@@ -43,11 +42,11 @@
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
     if(IS_IPHONE_6_PLUS){
-        scrollViewTerms.contentSize=CGSizeMake(300, 9100);
+        scrollViewTerms.contentSize=CGSizeMake(300, 8300);
     }else if(IS_IPHONE_5){
-        scrollViewTerms.contentSize=CGSizeMake(300, 11100);
+        scrollViewTerms.contentSize=CGSizeMake(300, 10200);
     }else{
-        scrollViewTerms.contentSize=CGSizeMake(300, 9800);
+        scrollViewTerms.contentSize=CGSizeMake(300, 9050);
     }
     
     CGFloat fixedWidth = textViewTerms.frame.size.width;

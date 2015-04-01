@@ -7,7 +7,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PrivicyPolicyViewController">
             <connections>
-                <outlet property="mylabel" destination="7nU-Wl-Uz0" id="QWn-Zx-cMI"/>
                 <outlet property="scrollViewPrivicy" destination="BOV-8r-ntB" id="Smb-nY-jwJ"/>
                 <outlet property="textViewPrivicy" destination="YjE-wT-nqr" id="eHn-Aq-Pc8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -18,20 +17,13 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privicy Policy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7nU-Wl-Uz0">
-                    <rect key="frame" x="106" y="17" width="108" height="34"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="BOV-8r-ntB">
-                    <rect key="frame" x="0.0" y="67" width="320" height="501"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" id="YjE-wT-nqr">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="10000"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <attributedString key="attributedText">
                                 <fragment>
                                     <string key="content">Thanks for taking the time to read this. We care deeply about protecting your privacy and are committed to making Flyerly a product that people love and trust. This document outlines how we use and disclose the personally identifiable information (which we call "Personal Information") and other information that we collect. If you have any questions that aren't answered here, please feel free to contact us anytime at </string>
@@ -92,10 +84,7 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment>
-                                    <string key="content" base64-UTF8="YES">
-Cg
-</string>
+                                <fragment content=" ">
                                     <attributes>
                                         <font key="NSFont" size="12" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -250,10 +239,7 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment>
-                                    <string key="content" base64-UTF8="YES">
-Cg
-</string>
+                                <fragment content=" ">
                                     <attributes>
                                         <font key="NSFont" size="12" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -485,10 +471,7 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment>
-                                    <string key="content" base64-UTF8="YES">
-Cg
-</string>
+                                <fragment content=" ">
                                     <attributes>
                                         <font key="NSFont" size="12" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -524,10 +507,7 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment>
-                                    <string key="content" base64-UTF8="YES">
-Cg
-</string>
+                                <fragment content=" ">
                                     <attributes>
                                         <font key="NSFont" size="12" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -563,10 +543,7 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment>
-                                    <string key="content" base64-UTF8="YES">
-Cg
-</string>
+                                <fragment content=" ">
                                     <attributes>
                                         <font key="NSFont" size="12" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -602,10 +579,7 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment>
-                                    <string key="content" base64-UTF8="YES">
-Cg
-</string>
+                                <fragment content=" ">
                                     <attributes>
                                         <font key="NSFont" size="12" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -641,10 +615,7 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment>
-                                    <string key="content" base64-UTF8="YES">
-Cg
-</string>
+                                <fragment content=" ">
                                     <attributes>
                                         <font key="NSFont" size="12" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -680,10 +651,7 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment>
-                                    <string key="content" base64-UTF8="YES">
-Cg
-</string>
+                                <fragment content=" ">
                                     <attributes>
                                         <font key="NSFont" size="12" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -700,10 +668,7 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment>
-                                    <string key="content" base64-UTF8="YES">
-Cg
-</string>
+                                <fragment content=" ">
                                     <attributes>
                                         <font key="NSFont" size="12" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -720,10 +685,7 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment>
-                                    <string key="content" base64-UTF8="YES">
-Cg
-</string>
+                                <fragment content=" ">
                                     <attributes>
                                         <font key="NSFont" size="12" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -759,10 +721,7 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment>
-                                    <string key="content" base64-UTF8="YES">
-Cg
-</string>
+                                <fragment content=" ">
                                     <attributes>
                                         <font key="NSFont" size="12" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -798,10 +757,7 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment>
-                                    <string key="content" base64-UTF8="YES">
-Cg
-</string>
+                                <fragment content=" ">
                                     <attributes>
                                         <font key="NSFont" size="12" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -837,10 +793,7 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment>
-                                    <string key="content" base64-UTF8="YES">
-Cg
-</string>
+                                <fragment content=" ">
                                     <attributes>
                                         <font key="NSFont" size="12" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">

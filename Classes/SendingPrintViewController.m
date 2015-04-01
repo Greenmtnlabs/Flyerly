@@ -176,7 +176,6 @@ UIButton *backButton;
         [toZip setHidden: YES];
         [toCity setHidden: YES];
         [toCountry setHidden: YES];
-        [toLabel setHidden: YES];
         [toimageText setHidden:YES];
         [toimageText1 setHidden:YES];
         [toimageText2 setHidden:YES];
@@ -187,17 +186,11 @@ UIButton *backButton;
         for(int i = 0;i<contactsArray.count;i++){
             //Selected contac name
             ContactsModel *model = [self getArrayOfSelectedTab][i];
-             //nameList = [NSString stringWithFormat:@"%@ \n", model.name];
-            if(i==0){
-                [nameList appendString:[NSString stringWithFormat:@"Flyerly printed flyer sent to:\n%@\n",model.name]];
-            }else{
                 [nameList appendString:[NSString stringWithFormat:@"%@\n",model.name]];
-            }
             
         }
-        
+        toLabel.text = @"Flyerly printed flyer sent to:";
         contactlistTextView.text = nameList;
-         contactlistTextView.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
         [contactlistTextView setFont:[UIFont systemFontOfSize:15]];
         [contactlistTextView setHidden:NO];
         
@@ -372,7 +365,7 @@ UIButton *backButton;
 -(void)textViewDidChange:(UITextView *)textView
 {
     int len = textView.text.length;
-    characterCountLabel.text=[NSString stringWithFormat:@"%i",350-len];
+    characterCountLabel.text=[NSString stringWithFormat:@"Remaining characters: %i",350-len];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text

@@ -505,7 +505,8 @@
             [model setInvitedStatus:0];
             
             //REMOVE FROM SENDING LIST
-            [selectedIdentifiers removeObject:model.streetAddress];
+            
+            [selectedIdentifiers removeObject:model];
             
         }
 }
