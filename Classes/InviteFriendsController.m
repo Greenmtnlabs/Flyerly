@@ -114,7 +114,7 @@ const int CONTACTS_TAB = 0;
                                   if ( refrelCounter >= 20 )
                                   {
                                       //Setting the feature name,feature description values for cell view using plist
-                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"You have sucessfully unlocked Design Bundle feature by referring friends.Enjoy!"];
+                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"You have sucessfully unlocked Design Bundle feature by referring friends. Enjoy!"];
                                       
                                   }else if ( refrelCounter <= 0 ){
                                       cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to flyerly and unlock Design Bundle feature for FREE!"];

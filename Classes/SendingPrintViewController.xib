@@ -44,7 +44,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="text_box.png" id="I0V-md-Y1r">
-                            <rect key="frame" x="18" y="42" width="181" height="103"/>
+                            <rect key="frame" x="18" y="42" width="185" height="110"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                         </imageView>
@@ -104,17 +104,6 @@
                                 <outlet property="delegate" destination="-1" id="eoZ-oK-A98"/>
                             </connections>
                         </textField>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="ePj-GR-F20">
-                            <rect key="frame" x="23" y="47" width="170" height="95"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <string key="text">f jkdfnvdfjkbvdjkf vd kldlldfdf lkdbvkh sblksbd kljbsdkljvb skldfvb sdlkjfb vklsjdbfklj bsdklfvb dlkjfbv lksdbf vlks fvlksb flksbfdvlksd bkljsdbflk vsdlkf skldfsd</string>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            <connections>
-                                <outlet property="delegate" destination="-1" id="62Q-eH-Qs8"/>
-                            </connections>
-                        </textView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZoR-dx-iUP">
                             <rect key="frame" x="14" y="351" width="300" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -262,6 +251,17 @@
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="ePj-GR-F20">
+                            <rect key="frame" x="25" y="51" width="165" height="89"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <string key="text">f jkdfnvdfjkbvdjkf vd kldlldfdf lkdbvkh sblksbd kljbsdkljvb skldfvb sdlkjfb vklsjdbfklj bsdklfvb dlkjfbv lksdbf vlks fvlksb flksbfdvlksd bkljsdbflk vsdlkf skldfsd</string>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="62Q-eH-Qs8"/>
+                            </connections>
+                        </textView>
                     </subviews>
                 </scrollView>
             </subviews>
