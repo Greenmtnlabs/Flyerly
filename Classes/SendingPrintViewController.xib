@@ -253,7 +253,7 @@
                         </label>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="ePj-GR-F20">
                             <rect key="frame" x="25" y="51" width="165" height="89"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <string key="text">f jkdfnvdfjkbvdjkf vd kldlldfdf lkdbvkh sblksbd kljbsdkljvb skldfvb sdlkjfb vklsjdbfklj bsdklfvb dlkjfbv lksdbf vlks fvlksb flksbfdvlksd bkljsdbflk vsdlkf skldfsd</string>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
