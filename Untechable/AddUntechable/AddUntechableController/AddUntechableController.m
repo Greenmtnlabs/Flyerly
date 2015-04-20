@@ -443,7 +443,7 @@
 -(void)showHideTextPicker:(BOOL)showHide{
     
     if ( IS_IPHONE_4 ){
-        [_pickerCloseBtn setFrame:CGRectMake(255, 280, 50, 100)];
+        [_pickerCloseBtn setFrame:CGRectMake(-2, 315, 580, 25)];
         [_spendingTimeTextPicker setFrame:CGRectMake(0, 320, 0, 150)];
     }else if( IS_IPHONE_5 ){
         [_pickerCloseBtn setFrame:CGRectMake(-10, 370, 580, 25)];
@@ -466,7 +466,7 @@
 -(void)showHideDateTimePicker:(BOOL)showHide{
 
     if ( IS_IPHONE_4 ){
-        [_pickerCloseBtn setFrame:CGRectMake(255, 280, 50, 100)];
+        [_pickerCloseBtn setFrame:CGRectMake(-2, 315, 580, 25)];
         [_picker setFrame:CGRectMake(0, 320, 0, 150)];
     }else if( IS_IPHONE_5 ){
         [_pickerCloseBtn setFrame:CGRectMake(-10, 370, 580, 25)];
