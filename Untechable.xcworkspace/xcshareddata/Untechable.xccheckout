@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>72A80D2E-3AA1-4AD8-9E26-6D2D4FEC92DE</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Untechable</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>0F2A0A55E48C04CD988A0DB1722F6950ADCAD1AD</key>
+		<string>https://github.com/RIKSOF/flyer.ly.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Untechable.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>0F2A0A55E48C04CD988A0DB1722F6950ADCAD1AD</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/RIKSOF/flyer.ly.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>0F2A0A55E48C04CD988A0DB1722F6950ADCAD1AD</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>0F2A0A55E48C04CD988A0DB1722F6950ADCAD1AD</string>
+			<key>IDESourceControlWCCName</key>
+			<string>untechable</string>
+		</dict>
+	</array>
+</dict>
+</plist>
