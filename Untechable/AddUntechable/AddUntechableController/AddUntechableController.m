@@ -486,8 +486,10 @@
 }
 
 /**
+ Hex Color Converter
+ @params NSString
+ retunrs UIColor
  */
-// Assumes input like "#00FF00" (#RRGGBB).
 - (UIColor *)colorFromHexString:(NSString *)hexString {
     unsigned rgbValue = 0;
     NSScanner *scanner = [NSScanner scannerWithString:hexString];
