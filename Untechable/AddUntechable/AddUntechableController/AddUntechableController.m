@@ -466,8 +466,8 @@
 -(void)showHideDateTimePicker:(BOOL)showHide{
 
     if ( IS_IPHONE_4 ){
-        [_pickerCloseBtn setFrame:CGRectMake(255, 280, 50, 100)];
-        [_picker setFrame:CGRectMake(0, 320, 0, 150)];
+        [_pickerCloseBtn setFrame:CGRectMake(-10, 320, 580, 25)];
+        [_picker setFrame:CGRectMake(0, 340, 0, 260)];
     }else if( IS_IPHONE_5 ){
         [_pickerCloseBtn setFrame:CGRectMake(-10, 370, 580, 25)];
         [_picker setFrame:CGRectMake(0, 370, 0, 260)];
