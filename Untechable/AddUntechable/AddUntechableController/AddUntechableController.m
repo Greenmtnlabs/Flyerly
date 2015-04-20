@@ -442,10 +442,14 @@
 
 -(void)showHideTextPicker:(BOOL)showHide{
     
-    if ( IS_IPHONE_4 || IS_IPHONE_5 ){
-        [_pickerCloseBtn setFrame:CGRectMake(245, 160, 110, 530)];
+    if ( IS_IPHONE_4 ){
+        [_pickerCloseBtn setFrame:CGRectMake(255, 280, 50, 100)];
+        [_spendingTimeTextPicker setFrame:CGRectMake(0, 320, 0, 150)];
+    }else if( IS_IPHONE_5 ){
+        [_pickerCloseBtn setFrame:CGRectMake(-10, 370, 580, 25)];
+        [_spendingTimeTextPicker setFrame:CGRectMake(0, 370, 0, 260)];
     }else if ( IS_IPHONE_6 ){
-        [_pickerCloseBtn setFrame:CGRectMake(290, 170, 110, 530)];
+        [_pickerCloseBtn setFrame:CGRectMake(290, 170, 96, 500)];
     }else if (IS_IPHONE_6_PLUS){
         [_pickerCloseBtn setFrame:CGRectMake(330, 170, 110, 530)];
     }
@@ -454,24 +458,42 @@
     
     _spendingTimeTextPicker.alpha = alpha;
     _pickerCloseBtn.alpha = alpha;
+    self.pickerCloseBtn.backgroundColor = [self colorFromHexString:@"#f7f7f7"];
+    self.spendingTimeTextPicker.backgroundColor = [self colorFromHexString:@"#fafafa"];
 }
 
 
 -(void)showHideDateTimePicker:(BOOL)showHide{
 
-    if ( IS_IPHONE_4 || IS_IPHONE_5 ){
-        [_pickerCloseBtn setFrame:CGRectMake(245, 382, 76, 33)];
+    if ( IS_IPHONE_4 ){
+        [_pickerCloseBtn setFrame:CGRectMake(255, 280, 50, 100)];
+        [_picker setFrame:CGRectMake(0, 320, 0, 150)];
+    }else if( IS_IPHONE_5 ){
+        [_pickerCloseBtn setFrame:CGRectMake(-10, 370, 580, 25)];
+        [_picker setFrame:CGRectMake(0, 370, 0, 260)];
     }else if ( IS_IPHONE_6 ){
-        [_pickerCloseBtn setFrame:CGRectMake(300, 382, 76, 33)];
+        [_pickerCloseBtn setFrame:CGRectMake(290, 170, 96, 500)];
     }else if (IS_IPHONE_6_PLUS){
-        [_pickerCloseBtn setFrame:CGRectMake(330, 382, 76, 33)];
+        [_picker setFrame:CGRectMake(330, 170, 110, 530)];
     }
     
     float alpha = (showHide) ? 1.0 : 0.0;
     
-    self.picker.alpha = alpha;
+    _picker.alpha = alpha;
     _pickerCloseBtn.alpha = alpha;
-    
+    self.pickerCloseBtn.backgroundColor = [self colorFromHexString:@"#f7f7f7"];
+    self.picker.backgroundColor = [self colorFromHexString:@"#fafafa"];
+}
+
+/**
+ */
+// Assumes input like "#00FF00" (#RRGGBB).
+- (UIColor *)colorFromHexString:(NSString *)hexString {
+    unsigned rgbValue = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:hexString];
+    [scanner setScanLocation:1]; // bypass '#' character
+    [scanner scanHexInt:&rgbValue];
+    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
 }
 
 /*
