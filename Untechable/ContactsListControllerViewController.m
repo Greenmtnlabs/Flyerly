@@ -43,7 +43,7 @@
     _contactsTable.delegate = self;
     _contactsTable.dataSource = self;
     
-    _contactsTable.contentInset = UIEdgeInsetsMake(-63.0f, 0.0f, 0.0f, 0.0f);
+    _contactsTable.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, 100.0f, 0.0f);
     
     [_contactsTable  setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
     [searchTextField setReturnKeyType:UIReturnKeyDone];
