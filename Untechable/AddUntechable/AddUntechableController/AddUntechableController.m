@@ -458,8 +458,13 @@
     
     _spendingTimeTextPicker.alpha = alpha;
     _pickerCloseBtn.alpha = alpha;
+    
     self.pickerCloseBtn.backgroundColor = [self colorFromHexString:@"#f7f7f7"];
     self.spendingTimeTextPicker.backgroundColor = [self colorFromHexString:@"#fafafa"];
+    
+    //changing the "CLOSE"button text color to black
+    [_pickerCloseBtn setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
+   
 }
 
 
@@ -483,6 +488,9 @@
     _pickerCloseBtn.alpha = alpha;
     self.pickerCloseBtn.backgroundColor = [self colorFromHexString:@"#f7f7f7"];
     self.picker.backgroundColor = [self colorFromHexString:@"#fafafa"];
+    
+    //changing the "CLOSE"button text color to black
+    [_pickerCloseBtn setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
 }
 
 /**
