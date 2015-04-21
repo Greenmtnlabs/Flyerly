@@ -442,36 +442,73 @@
 
 -(void)showHideTextPicker:(BOOL)showHide{
     
-    if ( IS_IPHONE_4 || IS_IPHONE_5 ){
-        [_pickerCloseBtn setFrame:CGRectMake(245, 160, 76, 33)];
+    if ( IS_IPHONE_4 ){
+        [_pickerCloseBtn setFrame:CGRectMake(-2, 290, 580, 20)];
+        [_spendingTimeTextPicker setFrame:CGRectMake(0, 300, 0, 140)];
+    }else if( IS_IPHONE_5 ){
+        [_pickerCloseBtn setFrame:CGRectMake(-10, 320, 580, 25)];
+        [_spendingTimeTextPicker setFrame:CGRectMake(0, 340, 0, 260)];
     }else if ( IS_IPHONE_6 ){
-        [_pickerCloseBtn setFrame:CGRectMake(290, 170, 76, 33)];
+        [_pickerCloseBtn setFrame:CGRectMake(0, 430, 650, 25)];
+        [_spendingTimeTextPicker setFrame:CGRectMake(0, 440, 0, 260)];
     }else if (IS_IPHONE_6_PLUS){
-        [_pickerCloseBtn setFrame:CGRectMake(330, 170, 76, 33)];
+        [_pickerCloseBtn setFrame:CGRectMake(0, 500, 750, 30)];
+        [_spendingTimeTextPicker setFrame:CGRectMake(0, 510, 0, 500)];
+
     }
     
     float alpha = (showHide) ? 1.0 : 0.0;
     
     _spendingTimeTextPicker.alpha = alpha;
     _pickerCloseBtn.alpha = alpha;
+    
+    self.pickerCloseBtn.backgroundColor = [self colorFromHexString:@"#f7f7f7"];
+    self.spendingTimeTextPicker.backgroundColor = [self colorFromHexString:@"#fafafa"];
+    
+    //changing the "CLOSE"button text color to black
+    [_pickerCloseBtn setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
+   
 }
 
 
 -(void)showHideDateTimePicker:(BOOL)showHide{
 
-    if ( IS_IPHONE_4 || IS_IPHONE_5 ){
-        [_pickerCloseBtn setFrame:CGRectMake(245, 382, 76, 33)];
+    if ( IS_IPHONE_4 ){
+        [_pickerCloseBtn setFrame:CGRectMake(-10, 320, 580, 25)];
+        [_picker setFrame:CGRectMake(0, 340, 0, 260)];
+    }else if( IS_IPHONE_5 ){
+        [_pickerCloseBtn setFrame:CGRectMake(-10, 370, 580, 25)];
+        [_picker setFrame:CGRectMake(0, 370, 0, 260)];
     }else if ( IS_IPHONE_6 ){
-        [_pickerCloseBtn setFrame:CGRectMake(300, 382, 76, 33)];
+        [_pickerCloseBtn setFrame:CGRectMake(0, 430, 650, 25)];
+        [_picker setFrame:CGRectMake(0, 440, 0, 260)];
     }else if (IS_IPHONE_6_PLUS){
-        [_pickerCloseBtn setFrame:CGRectMake(330, 382, 76, 33)];
+        [_pickerCloseBtn setFrame:CGRectMake(0, 500, 750, 30)];
+        [_picker setFrame:CGRectMake(0, 510, 0, 500)];
     }
     
     float alpha = (showHide) ? 1.0 : 0.0;
     
-    self.picker.alpha = alpha;
+    _picker.alpha = alpha;
     _pickerCloseBtn.alpha = alpha;
+    self.pickerCloseBtn.backgroundColor = [self colorFromHexString:@"#f7f7f7"];
+    self.picker.backgroundColor = [self colorFromHexString:@"#fafafa"];
     
+    //changing the "CLOSE"button text color to black
+    [_pickerCloseBtn setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
+}
+
+/**
+ Hex Color Converter
+ @params NSString
+ retunrs UIColor
+ */
+- (UIColor *)colorFromHexString:(NSString *)hexString {
+    unsigned rgbValue = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:hexString];
+    [scanner setScanLocation:1]; // bypass '#' character
+    [scanner scanHexInt:&rgbValue];
+    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
 }
 
 /*
