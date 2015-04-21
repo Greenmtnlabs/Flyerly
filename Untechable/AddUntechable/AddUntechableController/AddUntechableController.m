@@ -452,7 +452,9 @@
         [_pickerCloseBtn setFrame:CGRectMake(0, 430, 650, 25)];
         [_spendingTimeTextPicker setFrame:CGRectMake(0, 440, 0, 260)];
     }else if (IS_IPHONE_6_PLUS){
-        [_pickerCloseBtn setFrame:CGRectMake(-10, 320, 580, 25)];
+        [_pickerCloseBtn setFrame:CGRectMake(0, 500, 750, 30)];
+        [_spendingTimeTextPicker setFrame:CGRectMake(0, 510, 0, 500)];
+
     }
     
     float alpha = (showHide) ? 1.0 : 0.0;
@@ -481,7 +483,8 @@
         [_pickerCloseBtn setFrame:CGRectMake(0, 430, 650, 25)];
         [_picker setFrame:CGRectMake(0, 440, 0, 260)];
     }else if (IS_IPHONE_6_PLUS){
-        [_picker setFrame:CGRectMake(330, 170, 110, 530)];
+        [_pickerCloseBtn setFrame:CGRectMake(0, 500, 750, 30)];
+        [_picker setFrame:CGRectMake(0, 510, 0, 500)];
     }
     
     float alpha = (showHide) ? 1.0 : 0.0;
