@@ -443,8 +443,8 @@
 -(void)showHideTextPicker:(BOOL)showHide{
     
     if ( IS_IPHONE_4 ){
-        [_pickerCloseBtn setFrame:CGRectMake(-2, 315, 580, 25)];
-        [_spendingTimeTextPicker setFrame:CGRectMake(0, 320, 0, 150)];
+        [_pickerCloseBtn setFrame:CGRectMake(-2, 290, 580, 20)];
+        [_spendingTimeTextPicker setFrame:CGRectMake(0, 300, 0, 140)];
     }else if( IS_IPHONE_5 ){
         [_pickerCloseBtn setFrame:CGRectMake(-10, 320, 580, 25)];
         [_spendingTimeTextPicker setFrame:CGRectMake(0, 340, 0, 260)];
