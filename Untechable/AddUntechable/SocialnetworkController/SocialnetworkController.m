@@ -16,6 +16,7 @@
 #import "ThankyouController.h"
 #import "SocialNetworksStatusModal.h"
 #import "ContactsCustomizedModal.h"
+#import "CommonFunctions.h"
 
 
 @implementation SocialnetworkController
@@ -122,7 +123,16 @@
     
     NSString *url = [NSString stringWithFormat:@"%@",untechable.spendingTimeTxt];
     url = [url stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString *socialStatus = [NSString stringWithFormat:@"I am #Untechable & %@ untechable.com/away/%@", untechable.spendingTimeTxt,url];
+    
+    NSDate *startDate  =   [untechable.commonFunctions timestampStrToNsDate:untechable.startDate];
+    NSString *newDateStr    =   [untechable.dateFormatter stringFromDate:startDate];
+    
+    NSDate *endDate  =   [untechable.commonFunctions timestampStrToNsDate:untechable.endDate];
+    NSString *endDateStr    =   [untechable.dateFormatter stringFromDate:endDate];
+    
+    
+//    NSString *socialStatus = [NSString stringWithFormat:@"I am #Untechable & %@ untechable.com/away/%@\nfrom %@ to %@", untechable.spendingTimeTxt,url, newDateStr, endDateStr];
+     NSString *socialStatus = [NSString stringWithFormat:@"I am #Untechable %@ \nFrom: %@\nTo: %@", untechable.spendingTimeTxt, newDateStr, endDateStr];
     [inputSetSocialStatus setText:socialStatus];
     int len = (int)inputSetSocialStatus.text.length;
     char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
