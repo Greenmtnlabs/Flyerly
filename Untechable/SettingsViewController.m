@@ -52,6 +52,16 @@
         [socialIcons addObject:@{@"type":@"image", @"imgPath":@"linkedIn@3x.png", @"text":@""}];
         [socialIcons addObject:@{@"type":@"image", @"imgPath":@"email@3x.png", @"text":@""}];
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector (keyboardDidShow:)
+                                                 name: UIKeyboardDidShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector (keyboardDidHide:)
+                                                 name: UIKeyboardDidHideNotification
+                                               object:nil];
 }
 
 - (void) updateUI {
@@ -103,6 +113,16 @@
 }
 
 -(void) goBack {
+    CGRect rect = self.view.frame;
+    //Move up
+    
+    rect.origin.y += 100;
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3]; // if you want to slide up the view
+    
+    self.view.frame = rect;
+    
+    [UIView commitAnimations];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -265,6 +285,36 @@
     
     //return number of rows;
     return  5;
+}
+
+/**
+ On Showing keyboard we need to move up the view
+ **/
+-(void) keyboardDidShow: (NSNotification *)notif
+{
+    CGRect rect = self.view.frame;
+    
+        //Move up
+                rect.origin.y -= 100;
+                [UIView beginAnimations:nil context:NULL];
+                [UIView setAnimationDuration:0.3]; // if you want to slide up the view
+            
+                self.view.frame = rect;
+            
+                [UIView commitAnimations];
+}
+-(void) keyboardDidHide: (NSNotification *)notif
+{
+    CGRect rect = self.view.frame;
+    //Move Down
+    rect.origin.y += 100;
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3]; // if you want to slide up the view
+    
+    self.view.frame = rect;
+    
+    [UIView commitAnimations];
+
 }
 
 @end
