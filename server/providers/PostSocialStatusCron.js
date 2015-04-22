@@ -74,7 +74,7 @@ SocialStatusCron.setup = function(app) {
 				//Those event id's , which has been started.
 				var startedEventIds = [];
 				var startedEventIdsCounter = 0;
-				console.log( 'Event Fetched from the database',events );
+				//console.log( 'Event Fetched from the database',events );
 					
                 // Loop through all record
                 for (var i = 0; i < events.length; i++) {
@@ -143,9 +143,16 @@ SocialStatusCron.setup = function(app) {
 			contacts = JSON.parse(eventObj.customizedContacts);
 		}
 	  
+		//SMS body
+		var smsBody = "Name: " + eventObj.userName + "\n From: " + eventObj.phoneNumber + "\n"; 
+
+		//Call body
+		var callBody = "This is " + eventObj.userName + " here, my contact number is " + eventObj.phoneNumber + " and " ; 
+
 
 		for (var i in contacts) {
-			var body = contacts[i].customTextForContact;
+			 smsBody = "" + smsBody + " " + contacts[i].customTextForContact;
+			 callBody = "" + callBody + " " + contacts[i].customTextForContact;
 			var phones = contacts[i].phoneNumbers;
 
 			for ( var j=0; j<phones.length; j++ ) {
@@ -157,12 +164,12 @@ SocialStatusCron.setup = function(app) {
 				var toNumber = toNumber.replace(/[^\+\d]/g,"");
 				// send sms only if the given number is mobile and sms status is 1
 				if ( smsStatus == '1' && type == "Mobile" ) {
-					doSms( body, toNumber, fromNumber );
+					doSms( smsBody, toNumber, fromNumber );
 				}
 
 				// send call if call status is 1
 				if ( callStatus == '1' ) {
-					doCall( body, toNumber, fromNumber );
+					doCall( callBody, toNumber, fromNumber );
 				}
 
 			} // loop phones
