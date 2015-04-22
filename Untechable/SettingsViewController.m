@@ -187,6 +187,20 @@
         }
         
         [cell.socialNetworkButton addTarget:self action:@selector(emailLogin:) forControlEvents:UIControlEventTouchUpInside];
+    } else if( indexPath.row == 4 ){
+        
+        cellId = @"NameAndPhoneCellView";
+        cell = (SettingsCellView *)[tableView dequeueReusableCellWithIdentifier:cellId];
+        
+        if (cell == nil)
+        {
+            
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"NameAndPhoneCellView" owner:self options:nil];
+            cell = (SettingsCellView *)[nib objectAtIndex:0];
+            
+        }
+        return cell;
+
     }
     
     return cell;
@@ -249,7 +263,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     //return number of rows;
-    return  4;
+    return  5;
 }
 
 @end
