@@ -109,14 +109,12 @@ NSMutableArray *allUntechables;
         //getting text from the text fields
         NSString *name = [alertView textFieldAtIndex:0].text;
         NSString *phoneNumber = [alertView textFieldAtIndex:1].text;
-    
-        NameAndPhoneCellView *nameAndPhoneObj = [[ NameAndPhoneCellView alloc] init];
-    
+        
         //setting the name in model
-        [nameAndPhoneObj setUserName:name];
+        [untechable.commonFunctions setUserName:name];
     
         //setting the phone number in model
-        [nameAndPhoneObj setPhoneNumber:phoneNumber];
+        [untechable.commonFunctions setPhoneNumber:phoneNumber];
     
         self.window.rootViewController = navigationController;
 }

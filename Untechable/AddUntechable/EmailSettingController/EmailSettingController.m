@@ -634,6 +634,11 @@
     //NSLog(@"[untechable getRecFileName]: %@",[untechable getRecFileName]);
     
     [self removeRedundentDataForContacts];
+
+    // getting the username and phone number to be send
+    NSString *userName = [untechable.commonFunctions getUserName];
+    NSString *phoneNumber = [untechable.commonFunctions getPhoneNumber];
+    
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:API_SAVE]];

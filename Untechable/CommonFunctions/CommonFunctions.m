@@ -13,6 +13,8 @@
 
 @implementation CommonFunctions
 
+NSString *currentEnteredUserName;
+NSString *currentEnteredPhoneNumber;
 
 -(void)sortDic:inputDic {
     NSMutableDictionary *sortedDic = [[NSMutableDictionary alloc] init];
@@ -470,4 +472,34 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
     
     return formattedString;
 }
+
+#pragma mark - UserName and Phone Number setter getter
+/**
+ setting up user name got from the edit text
+ */
+- ( void ) setUserName:(NSString *)userName {
+    currentEnteredUserName = userName;
+}
+
+/**
+ get the current user name
+ */
+-( NSString *)getUserName{
+    return currentEnteredUserName;
+}
+
+/**
+ setting up user name got from the edit text
+ */
+- ( void ) setPhoneNumber:(NSString *)phoneNumber {
+    currentEnteredPhoneNumber = phoneNumber;
+}
+
+/**
+ get the current user name
+ */
+-( NSString *)getPhoneNumber{
+    return currentEnteredPhoneNumber;
+}
+
 @end

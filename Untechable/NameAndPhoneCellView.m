@@ -7,16 +7,16 @@
 //
 
 #import "NameAndPhoneCellView.h"
+#import "CommonFunctions.h"
 
 @implementation NameAndPhoneCellView
 
-NSString *currentEnteredUserName;
-NSString *currentEnteredPhoneNumber;
-
+CommonFunctions *commonFunc;
 - (void)awakeFromNib {
     // get the setted value of name and number and
     // set it in the fields by default
-    NSString *name = [self getUserName];
+    commonFunc = [[CommonFunctions alloc] init];
+    NSString *name = [ commonFunc getUserName ];
     
     NSString *userNameInDb = [[NSUserDefaults standardUserDefaults]
                   stringForKey:@"userName"];
@@ -29,7 +29,7 @@ NSString *currentEnteredPhoneNumber;
     
     // get the value from local db or model
     //if model has no value then get from db
-    NSString *phoneNumber = [self getPhoneNumber];
+    NSString *phoneNumber = [commonFunc getPhoneNumber];
     
     NSString *phoneNumberInDb = [[NSUserDefaults standardUserDefaults]
                                  stringForKey:@"phoneNumber"];
@@ -59,37 +59,10 @@ NSString *currentEnteredPhoneNumber;
     if( [ self.textLabel.text isEqual:@""]){
         
     } else {
-        [ self setPhoneNumber:self.textLabel.text];
+        [ commonFunc setPhoneNumber:self.textLabel.text];
     }
 }
 
-/**
- setting up user name got from the edit text
- */
-- ( void ) setUserName:(NSString *)userName {
-    currentEnteredUserName = userName;
-}
-
-/**
- get the current user name
- */
--( NSString *)getUserName{
-    return currentEnteredUserName;
-}
-
-/**
- setting up user name got from the edit text
- */
-- ( void ) setPhoneNumber:(NSString *)phoneNumber {
-    currentEnteredPhoneNumber = phoneNumber;
-}
-
-/**
- get the current user name
- */
--( NSString *)getPhoneNumber{
-    return currentEnteredPhoneNumber;
-}
 
 - (IBAction)nameChange:(id)sender {
     NSString *currentName = _nameEditField.text;
@@ -98,7 +71,7 @@ NSString *currentEnteredPhoneNumber;
     [[NSUserDefaults standardUserDefaults] setObject:valueToSave forKey:@"userName"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    [self setUserName:valueToSave];
+    [commonFunc setUserName:valueToSave];
 }
 
 - (IBAction)phoneNumberChange:(id)sender {
@@ -108,7 +81,7 @@ NSString *currentEnteredPhoneNumber;
     [[NSUserDefaults standardUserDefaults] setObject:valueToSave forKey:@"phoneNumber"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
-    [self setPhoneNumber:valueToSave];
+    [commonFunc setPhoneNumber:valueToSave];
 }
 
 
