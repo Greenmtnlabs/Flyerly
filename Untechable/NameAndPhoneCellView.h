@@ -12,15 +12,18 @@
 
 @property (strong, nonatomic) NSString *userName;
 @property (strong, nonatomic) NSString *phoneNumber;
+@property (weak, nonatomic) IBOutlet UITextField *nameEditField;
+@property (weak, nonatomic) IBOutlet UITextField *phoneEditField;
 
 //setter getter for username
-+ ( void ) setUserName:(NSString *)userName;
-+ ( NSString *) getUserName;
+- ( void ) setUserName:(NSString *)userName;
+- ( NSString *) getUserName;
 //setter getter for phoneNumber
-+ ( void ) setPhoneNumber:( NSString *)phoneNumber;
-+ ( NSString *)getPhoneNumber;
+- ( void ) setPhoneNumber:( NSString *)phoneNumber;
+- ( NSString *)getPhoneNumber;
 
-- (IBAction)nameEditField:(id)sender;
-- (IBAction)phoneEditField:(id)sender;
+- (IBAction)nameChange:(id)sender;
+- (IBAction)phoneNumberChange:(id)sender;
+
 
 @end

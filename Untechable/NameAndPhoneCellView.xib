@@ -21,7 +21,7 @@
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                         <connections>
-                            <action selector="nameEditField:" destination="KGk-i7-Jjw" eventType="editingChanged" id="dty-4p-irU"/>
+                            <action selector="nameChange:" destination="KGk-i7-Jjw" eventType="editingDidEnd" id="jeR-BE-u6q"/>
                         </connections>
                     </textField>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Your Number" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OAG-lv-yKj">
@@ -31,11 +31,15 @@
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                         <connections>
-                            <action selector="phoneEditField:" destination="KGk-i7-Jjw" eventType="editingChanged" id="lef-rN-TLL"/>
+                            <action selector="phoneNumberChange:" destination="KGk-i7-Jjw" eventType="editingDidEnd" id="sci-ln-ib2"/>
                         </connections>
                     </textField>
                 </subviews>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="nameEditField" destination="UPT-D6-XdR" id="hf7-0T-hPw"/>
+                <outlet property="phoneEditField" destination="OAG-lv-yKj" id="MCC-BO-TyH"/>
+            </connections>
             <point key="canvasLocation" x="377" y="226"/>
         </tableViewCell>
     </objects>

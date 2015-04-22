@@ -14,7 +14,14 @@ NSString *currentEnteredUserName;
 NSString *currentEnteredPhoneNumber;
 
 - (void)awakeFromNib {
-    // Initialization code
+    // get the setted value of name and number and
+    // set it in the fields by default
+    NSString *name = [self getUserName];
+    _nameEditField.text = name;
+    
+    NSString *phoneNumber = [self getPhoneNumber];
+    _phoneEditField.text = phoneNumber;
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -25,11 +32,6 @@ NSString *currentEnteredPhoneNumber;
 
 - (IBAction)nameEditField:(id)sender {
     
-    if( [self.textLabel.text  isEqual: @""] ){
-        
-    } else {
-        [ self setUserName:self.textLabel.text];
-    }
     
 }
 
@@ -45,29 +47,39 @@ NSString *currentEnteredPhoneNumber;
 /**
  setting up user name got from the edit text
  */
-+ ( void ) setUserName:(NSString *)userName {
+- ( void ) setUserName:(NSString *)userName {
     currentEnteredUserName = userName;
 }
 
 /**
  get the current user name
  */
-+( NSString *)getUserName{
+-( NSString *)getUserName{
     return currentEnteredUserName;
 }
 
 /**
  setting up user name got from the edit text
  */
-+ ( void ) setPhoneNumber:(NSString *)phoneNumber {
+- ( void ) setPhoneNumber:(NSString *)phoneNumber {
     currentEnteredPhoneNumber = phoneNumber;
 }
 
 /**
  get the current user name
  */
-+( NSString *)getPhoneNumber{
+-( NSString *)getPhoneNumber{
     return currentEnteredPhoneNumber;
+}
+
+- (IBAction)nameChange:(id)sender {
+    NSString *currentName = _nameEditField.text;
+    [self setUserName:currentName];
+}
+
+- (IBAction)phoneNumberChange:(id)sender {
+    NSString *currentPhoneNumber = _phoneEditField.text;
+    [self setPhoneNumber:currentPhoneNumber];
 }
 
 

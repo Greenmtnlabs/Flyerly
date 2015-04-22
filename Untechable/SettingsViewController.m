@@ -196,6 +196,7 @@
         {
             
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"NameAndPhoneCellView" owner:self options:nil];
+            
             cell = (SettingsCellView *)[nib objectAtIndex:0];
             
         }
