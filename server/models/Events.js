@@ -19,6 +19,9 @@ var eventsSchema = db.Schema({
     endTime: String ,
 	hasEndDate: String ,
     
+    userName: String,
+    phoneNumber: String,
+    
 	twillioNumber: String ,
 	location: String ,
 //    emergencyNumber: String ,
