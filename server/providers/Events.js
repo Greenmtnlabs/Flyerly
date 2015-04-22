@@ -234,12 +234,7 @@ Events.setup = function(app) {
 					Delete event
 					*/
     app.all('/event/delete', function(req, res) {
-        // Our logger for logging to file and console
-        var logger = require(__dirname + '/../logger');
-
-        // Var for Events models
-        var Events = require(__dirname + '/../models/Events');
-
+       
         // Construct response JSON
         var responseJSON = {};
 
