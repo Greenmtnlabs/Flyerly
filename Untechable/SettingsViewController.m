@@ -113,6 +113,11 @@
 }
 
 -(void) goBack {
+    
+    
+     //Before going to other view
+    //we need to move down the view
+    
     CGRect rect = self.view.frame;
     //Move up
     
@@ -303,6 +308,9 @@
             
                 [UIView commitAnimations];
 }
+/**
+ On Hiding keyboard we need to move down the view
+ **/
 -(void) keyboardDidHide: (NSNotification *)notif
 {
     CGRect rect = self.view.frame;
