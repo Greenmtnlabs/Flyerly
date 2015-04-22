@@ -176,7 +176,7 @@
     }
     else if ( indexPath.row == 3 ){
         
-        if (  [[[SocialNetworksStatusModal sharedInstance] getEmailAddress] isEqualToString:@""]  ||                                         [[[SocialNetworksStatusModal sharedInstance] getEmailPassword] isEqualToString:@""] ){
+        if (  [[[SocialNetworksStatusModal sharedInstance] getEmailAddress] isEqualToString:@""]  || [[[SocialNetworksStatusModal sharedInstance] getEmailPassword] isEqualToString:@""] ){
             
             [cell setCellValueswithSocialNetworkName :[socialNetworksName objectAtIndex:indexPath.row] LoginStatus:0 NetworkImage:@"emailic@2x.png"];
             
