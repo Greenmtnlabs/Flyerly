@@ -392,7 +392,7 @@
                               @"timezoneOffset", @"spendingTimeTxt", @"startDate", @"endDate", @"hasEndDate"
                               , @"location",@"twillioNumber"
                               ,@"socialStatus", @"fbAuth", @"fbAuthExpiryTs" , @"twitterAuth",@"twOAuthTokenSecret",   @"linkedinAuth"
-                              ,@"acType", @"email", @"password", @"respondingEmail", @"iSsl", @"imsHostName", @"imsPort", @"oSsl", @"omsHostName", @"omsPort",@"customizedContacts"
+                              ,@"acType", @"email", @"password", @"respondingEmail", @"iSsl", @"imsHostName", @"imsPort", @"oSsl", @"omsHostName", @"omsPort",@"customizedContacts",@"userName", @"phoneNumber"
                               ,nil];
     
     
@@ -400,6 +400,7 @@
    
     NSString *userNameInDb = [[NSUserDefaults standardUserDefaults]
                               stringForKey:@"userName"];
+    
     [untechable.dic setValue:userNameInDb forKey:@"userName"];
     
     NSString *phoneNumber = [[NSUserDefaults standardUserDefaults]
@@ -433,6 +434,7 @@
     [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     
     // setting the body of the post to the reqeust
+    NSLog(@" body Value %@", body);
     [request setHTTPBody:body];
     
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
