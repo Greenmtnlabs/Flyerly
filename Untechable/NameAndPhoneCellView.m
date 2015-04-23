@@ -30,9 +30,7 @@ CommonFunctions *commonFunc;
     
     NSString *nameAndNumberToBeShown = [NSString stringWithFormat:@"%@  %@", userNameInDb, phoneNumberInDb];
     _onTouchLabel.text = nameAndNumberToBeShown;
-    
-    _nameAndPhoneCellHeader.text = @"Name and Phone Number";
-    
+        
     if( IS_IPHONE_4 || IS_IPHONE_5 || IS_IPHONE_6 ){
         
         UIImage *image = [UIImage imageNamed:@"facebook.png"];
