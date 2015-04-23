@@ -411,7 +411,6 @@
     for (NSString* key in untechable.dic) {
         BOOL sendIt =   NO;
         id value    =   [untechable.dic objectForKey:key];
-        NSLog(@" value is: %@, for the key is: %@", value, key );
         /*
         if([key isEqualToString:@"emergencyContacts"] ){
             value = [untechable.commonFunctions convertDicIntoJsonString:value];
@@ -434,7 +433,6 @@
     [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     
     // setting the body of the post to the reqeust
-    NSLog(@" body Value %@", body);
     [request setHTTPBody:body];
     
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
