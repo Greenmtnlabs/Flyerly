@@ -53,16 +53,7 @@
         [socialIcons addObject:@{@"type":@"image", @"imgPath":@"email@3x.png", @"text":@""}];
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector (keyboardDidShow:)
-                                                 name: UIKeyboardDidShowNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector (keyboardDidHide:)
-                                                 name: UIKeyboardDidHideNotification
-                                               object:nil];
-}
+ }
 
 - (void) updateUI {
     

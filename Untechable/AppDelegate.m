@@ -109,7 +109,10 @@ NSMutableArray *allUntechables;
         //getting text from the text fields
         NSString *name = [alertView textFieldAtIndex:0].text;
         NSString *phoneNumber = [alertView textFieldAtIndex:1].text;
-        
+    
+        [[NSUserDefaults standardUserDefaults] setObject:name forKey:@"userName"];
+        [[NSUserDefaults standardUserDefaults] setObject:phoneNumber forKey:@"phoneNumber"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         //setting the name in model
         [untechable.commonFunctions setUserName:name];
     
