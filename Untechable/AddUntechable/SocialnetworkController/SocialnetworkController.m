@@ -371,23 +371,6 @@
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
     [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
     
-    /*
-    // -------------------- ---- Audio Upload Status ---------------------------\\
-    //pass MediaType file
-    
-    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"recording\"; filename=\"%@\"\r\n",[untechable getRecFileName]] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[@"Content-Type: audio/caf\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[@"Content-Transfer-Encoding: binary\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    // get the audio data from main bundle directly into NSData object
-    NSData *audioData;
-    audioData = [[NSData alloc] initWithContentsOfFile:[NSURL URLWithString:[untechable getRecFilePath]]];
-    // add it to body
-    [body appendData:audioData];
-    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-*/
-    
     NSArray *stringVarsAry = [[NSArray alloc] initWithObjects:@"eventId", @"userId", @"paid",
                               @"timezoneOffset", @"spendingTimeTxt", @"startDate", @"endDate", @"hasEndDate"
                               , @"location",@"twillioNumber"
@@ -411,11 +394,6 @@
     for (NSString* key in untechable.dic) {
         BOOL sendIt =   NO;
         id value    =   [untechable.dic objectForKey:key];
-        /*
-        if([key isEqualToString:@"emergencyContacts"] ){
-            value = [untechable.commonFunctions convertDicIntoJsonString:value];
-            sendIt = YES;
-        }*/
     
         if( sendIt || [stringVarsAry containsObject:key]){
             
