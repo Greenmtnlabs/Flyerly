@@ -16,6 +16,8 @@
 
 - (IBAction)nameChange:(id)sender;
 - (IBAction)phoneNumberChange:(id)sender;
-
+@property (weak, nonatomic) IBOutlet UILabel *onTouchLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nameAndPhoneCellHeader;
+- (IBAction)onEditButtonTouch:(id)sender;
 
 @end

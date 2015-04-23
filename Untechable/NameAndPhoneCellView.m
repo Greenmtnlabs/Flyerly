@@ -11,35 +11,26 @@
 
 @implementation NameAndPhoneCellView
 
+NSString *userNameInDb;
+NSString *phoneNumberInDb;
+
 CommonFunctions *commonFunc;
 - (void)awakeFromNib {
     // get the setted value of name and number and
     // set it in the fields by default
     commonFunc = [[CommonFunctions alloc] init];
-    NSString *name = [ commonFunc getUserName ];
     
-    NSString *userNameInDb = [[NSUserDefaults standardUserDefaults]
+    userNameInDb = [[NSUserDefaults standardUserDefaults]
                   stringForKey:@"userName"];
     
-    if( name == NULL || [name isEqual:@""]){
-        _nameEditField.text = userNameInDb;
-    } else {
-        _nameEditField.text = name;
-    }
-    
-    // get the value from local db or model
-    //if model has no value then get from db
-    NSString *phoneNumber = [commonFunc getPhoneNumber];
-    
-    NSString *phoneNumberInDb = [[NSUserDefaults standardUserDefaults]
+    // get the value from the local db
+    phoneNumberInDb = [[NSUserDefaults standardUserDefaults]
                                  stringForKey:@"phoneNumber"];
-    if( phoneNumber == NULL || [phoneNumber isEqual:@""]){
-        _phoneEditField.text = phoneNumberInDb;
-    } else {
-        _phoneEditField.text = phoneNumber;
-    }
     
+    NSString *nameAndNumberToBeShown = [NSString stringWithFormat:@"%@  %@", userNameInDb, phoneNumberInDb];
+    _onTouchLabel.text = nameAndNumberToBeShown;
     
+    _nameAndPhoneCellHeader.text = @"Name and Phone Number";
 
 }
 
@@ -49,43 +40,69 @@ CommonFunctions *commonFunc;
     // Configure the view for the selected state
 }
 
-- (IBAction)nameEditField:(id)sender {
+/**
+ On tapping the edit button
+ Show an AlerView
+ So user can enter new name and password
+ */
+- (IBAction)onEditButtonTouch:(id)sender {
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@""
+                                                     message:@"Enter Your Name and Number"
+                                                    delegate:self
+                                           cancelButtonTitle:@"Done"
+                                           otherButtonTitles:nil, nil];
     
     
+    
+    alert.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
+    UITextField * alertTextField1 = [alert textFieldAtIndex:0];
+    alertTextField1.text = userNameInDb;
+    alertTextField1.keyboardType = UIKeyboardTypeTwitter;
+    alertTextField1.placeholder = @"Name";
+    
+    UITextField * alertTextField2 = [alert textFieldAtIndex:1];
+    alertTextField2.text = phoneNumberInDb;
+    alertTextField2.secureTextEntry=NO;
+    alertTextField2.keyboardType = UIKeyboardTypeNumberPad;
+    alertTextField2.placeholder = @"Phone Number";
+    
+    [alert show];
+
 }
 
-- (IBAction)phoneEditField:(id)sender {
+/**
+ Action catch for the uiAlertview buttons
+ we have to save name and phone number on button press
+ */
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    //For testing -------- } --
+   
     
-    if( [ self.textLabel.text isEqual:@""]){
-        
-    } else {
-        [ commonFunc setPhoneNumber:self.textLabel.text];
-    }
-}
-
-
-- (IBAction)nameChange:(id)sender {
-    NSString *currentName = _nameEditField.text;
+    //getting text from the text fields
+    NSString *name = [alertView textFieldAtIndex:0].text;
+    NSString *phoneNumber = [alertView textFieldAtIndex:1].text;
     
-    NSString *valueToSave = currentName;
-    [[NSUserDefaults standardUserDefaults] setObject:valueToSave forKey:@"userName"];
+    //setting the name in model
+    NSString *nameToSave = name;
+    [[NSUserDefaults standardUserDefaults] setObject:nameToSave forKey:@"userName"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    userNameInDb = name;
+    [commonFunc setUserName:nameToSave];
     
-    [commonFunc setUserName:valueToSave];
-}
-
-- (IBAction)phoneNumberChange:(id)sender {
-    NSString *currentPhoneNumber = _phoneEditField.text;
     
-    NSString *valueToSave = currentPhoneNumber;
-    [[NSUserDefaults standardUserDefaults] setObject:valueToSave forKey:@"phoneNumber"];
+    //setting the phone number in model
+    NSString *phoneNumberTobeSave = phoneNumber;
+    [[NSUserDefaults standardUserDefaults] setObject:phoneNumberTobeSave forKey:@"phoneNumber"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    phoneNumberInDb = phoneNumber;
+    
+    [commonFunc setPhoneNumber:phoneNumberTobeSave];
+    
+    // now show the updated username and number 
+    NSString *nameAndNumberToBeShown = [NSString stringWithFormat:@"%@  %@", name, phoneNumber];
+    _onTouchLabel.text = nameAndNumberToBeShown;
 
-    [commonFunc setPhoneNumber:valueToSave];
 }
-
-
-
 
 
 @end
