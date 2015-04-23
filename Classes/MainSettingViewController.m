@@ -100,7 +100,7 @@
     if ([[PFUser currentUser] sessionToken].length != 0) {
         [category addObject:@"Sign Out"];
         [category addObject:@"Terms of Service"];
-        [category addObject:@"Privicy Policy"];
+        [category addObject:@"Privacy Policy"];
         // will remove in production build
         if ( [flyerConfigurator currentDebugMood] ){
             [category addObject:@"Clear Purchases"];
@@ -108,7 +108,7 @@
     } else {
         [category addObject:@"Sign In"];
         [category addObject:@"Terms of Service"];
-        [category addObject:@"Privicy Policy"];
+        [category addObject:@"Privacy Policy"];
     }
    
 }
