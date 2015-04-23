@@ -43,7 +43,7 @@ CommonFunctions *commonFunc;
         
     } else {
         
-        UIImage *image = [UIImage imageNamed:@"facebook.png"];
+        UIImage *image = [UIImage imageNamed:@"telephone_2x.png"];
         [_nameAndPhoneImage setImage:image];
         
     }
