@@ -33,15 +33,20 @@ CommonFunctions *commonFunc;
     
     _nameAndPhoneCellHeader.text = @"Name and Phone Number";
     
-    if( IS_IPHONE_4 || IS_IPHONE_5 ){
+    if( IS_IPHONE_4 || IS_IPHONE_5 || IS_IPHONE_6 ){
         
         UIImage *image = [UIImage imageNamed:@"facebook.png"];
         [_nameAndPhoneImage setImage:image];
         
-    } else if( IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
+    } else if( IS_IPHONE_6_PLUS) {
+        
         UIImage *image = [UIImage imageNamed:@"facebook@3x.png"];
         [_nameAndPhoneImage setImage:image];
+        
     } else {
+        
+        UIImage *image = [UIImage imageNamed:@"facebook.png"];
+        [_nameAndPhoneImage setImage:image];
         
     }
 

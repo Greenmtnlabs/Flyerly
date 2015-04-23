@@ -113,21 +113,7 @@
 }
 
 -(void) goBack {
-    
-    
-     //Before going to other view
-    //we need to move down the view
-    
-    CGRect rect = self.view.frame;
-    //Move up
-    
-    rect.origin.y += 100;
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.3]; // if you want to slide up the view
-    
-    self.view.frame = rect;
-    
-    [UIView commitAnimations];
+  
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -283,41 +269,6 @@
 -(IBAction)loginFacebook:(id) sender {
     
     [[SocialNetworksStatusModal sharedInstance] loginFacebook:sender Controller:self Untechable:untechable];
-}
-
-
-
-/**
- On Showing keyboard we need to move up the view
- **/
--(void) keyboardDidShow: (NSNotification *)notif
-{
-    CGRect rect = self.view.frame;
-    
-        //Move up
-                rect.origin.y -= 100;
-                [UIView beginAnimations:nil context:NULL];
-                [UIView setAnimationDuration:0.3]; // if you want to slide up the view
-            
-                self.view.frame = rect;
-            
-                [UIView commitAnimations];
-}
-/**
- On Hiding keyboard we need to move down the view
- **/
--(void) keyboardDidHide: (NSNotification *)notif
-{
-    CGRect rect = self.view.frame;
-    //Move Down
-    rect.origin.y += 100;
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.3]; // if you want to slide up the view
-    
-    self.view.frame = rect;
-    
-    [UIView commitAnimations];
-
 }
 
 @end
