@@ -3565,19 +3565,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 //Here we Getting Snap Shot of Flyer Image View Context
 -(UIImage *)getFlyerSnapShot {
     
-    
-    dispatch_queue_t concurrentQueue =
-    dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    
     // Declare your local data outside the block.
     // `__block` specifies that the variable can be modified from within the block.
-    __block UIImage *uiImage = nil;
-    
-    dispatch_sync(concurrentQueue, ^{
-        // Do something with `localData`...
-        uiImage = [self getFlyerSnapshotWithSize:self.flyimgView.size];
-    });
-    
+    __block UIImage *uiImage = [self getFlyerSnapshotWithSize:self.flyimgView.size];
     return uiImage;
 }
 
