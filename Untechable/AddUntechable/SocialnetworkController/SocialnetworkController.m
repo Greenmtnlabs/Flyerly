@@ -392,13 +392,25 @@
                               @"timezoneOffset", @"spendingTimeTxt", @"startDate", @"endDate", @"hasEndDate"
                               , @"location",@"twillioNumber"
                               ,@"socialStatus", @"fbAuth", @"fbAuthExpiryTs" , @"twitterAuth",@"twOAuthTokenSecret",   @"linkedinAuth"
-                              ,@"acType", @"email", @"password", @"respondingEmail", @"iSsl", @"imsHostName", @"imsPort", @"oSsl", @"omsHostName", @"omsPort",@"customizedContacts"
+                              ,@"acType", @"email", @"password", @"respondingEmail", @"iSsl", @"imsHostName", @"imsPort", @"oSsl", @"omsHostName", @"omsPort",@"customizedContacts",@"userName", @"phoneNumber"
                               ,nil];
+    
+    
+    // getting the username and phone number to be send
+   
+    NSString *userNameInDb = [[NSUserDefaults standardUserDefaults]
+                              stringForKey:@"userName"];
+    
+    [untechable.dic setValue:userNameInDb forKey:@"userName"];
+    
+    NSString *phoneNumber = [[NSUserDefaults standardUserDefaults]
+                              stringForKey:@"phoneNumber"];
+    [untechable.dic setValue:phoneNumber forKey:@"phoneNumber"];
+    
     
     for (NSString* key in untechable.dic) {
         BOOL sendIt =   NO;
         id value    =   [untechable.dic objectForKey:key];
-        
         /*
         if([key isEqualToString:@"emergencyContacts"] ){
             value = [untechable.commonFunctions convertDicIntoJsonString:value];

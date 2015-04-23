@@ -11,6 +11,7 @@
 #import "AddUntechableController.h"
 #import "Common.h"
 #import "Crittercism.h"
+#import "NameAndPhoneCellView.h"
 
 @implementation AppDelegate
 
@@ -61,10 +62,25 @@ NSMutableArray *allUntechables;
     //check wheter untechables are already added, if not then go to add untechable screen
     // else show untechable list..
     if ( allUntechables.count <= 0 ){
+
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@""
+                                                         message:@"Enter Your Name and Number"
+                                                        delegate:self
+                                               cancelButtonTitle:@"Done"
+                                               otherButtonTitles:nil, nil];
         
-        AddUntechableController *mainViewController = [[AddUntechableController alloc] initWithNibName:@"AddUntechableController" bundle:nil];
-        mainViewController.untechable = untechable;
-        navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+        
+        alert.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
+        UITextField * alertTextField1 = [alert textFieldAtIndex:0];
+        alertTextField1.keyboardType = UIKeyboardTypeTwitter;
+        alertTextField1.placeholder = @"Name";
+        
+        UITextField * alertTextField2 = [alert textFieldAtIndex:1];
+        alertTextField2.secureTextEntry=NO;
+        alertTextField2.keyboardType = UIKeyboardTypeNumberPad;
+        alertTextField2.placeholder = @"Phone Number";
+        
+        [alert show];
         
     } else {
         
@@ -73,6 +89,37 @@ NSMutableArray *allUntechables;
         
     }
     self.window.rootViewController = navigationController;
+}
+
+/**
+ Action catch for the uiAlertview buttons
+ we have to save name and phone number on button press
+ */
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    untechable  = [[Untechable alloc] init];
+    untechable.commonFunctions = [[CommonFunctions alloc] init];
+     UINavigationController *navigationController;
+    //For testing -------- { --
+    [self configureTestData];
+    //For testing -------- } --
+    AddUntechableController *mainViewController = [[AddUntechableController alloc] initWithNibName:@"AddUntechableController" bundle:nil];
+        mainViewController.untechable = untechable;
+        navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+    
+        //getting text from the text fields
+        NSString *name = [alertView textFieldAtIndex:0].text;
+        NSString *phoneNumber = [alertView textFieldAtIndex:1].text;
+    
+        [[NSUserDefaults standardUserDefaults] setObject:name forKey:@"userName"];
+        [[NSUserDefaults standardUserDefaults] setObject:phoneNumber forKey:@"phoneNumber"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        //setting the name in model
+        [untechable.commonFunctions setUserName:name];
+    
+        //setting the phone number in model
+        [untechable.commonFunctions setPhoneNumber:phoneNumber];
+    
+        self.window.rootViewController = navigationController;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
