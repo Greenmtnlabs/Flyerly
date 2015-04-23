@@ -10,10 +10,6 @@
 
 @interface NameAndPhoneCellView : UITableViewCell
 
-
-@property (weak, nonatomic) IBOutlet UITextField *nameEditField;
-@property (weak, nonatomic) IBOutlet UITextField *phoneEditField;
-
 @property (weak, nonatomic) IBOutlet UILabel *onTouchLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nameAndPhoneCellHeader;
 - (IBAction)onEditButtonTouch:(id)sender;

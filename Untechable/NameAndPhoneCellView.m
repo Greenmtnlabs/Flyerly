@@ -52,19 +52,19 @@ CommonFunctions *commonFunc;
                                            cancelButtonTitle:@"Done"
                                            otherButtonTitles:nil, nil];
     
-    
-    
     alert.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
-    UITextField * alertTextField1 = [alert textFieldAtIndex:0];
-    alertTextField1.text = userNameInDb;
-    alertTextField1.keyboardType = UIKeyboardTypeTwitter;
-    alertTextField1.placeholder = @"Name";
+    //Name field
+    UITextField * nameField = [alert textFieldAtIndex:0];
+    nameField.text = userNameInDb;
+    nameField.keyboardType = UIKeyboardTypeTwitter;
+    nameField.placeholder = @"Name";
     
-    UITextField * alertTextField2 = [alert textFieldAtIndex:1];
-    alertTextField2.text = phoneNumberInDb;
-    alertTextField2.secureTextEntry=NO;
-    alertTextField2.keyboardType = UIKeyboardTypeNumberPad;
-    alertTextField2.placeholder = @"Phone Number";
+    //phone number field
+    UITextField * phoneNumberField = [alert textFieldAtIndex:1];
+    phoneNumberField.text = phoneNumberInDb;
+    phoneNumberField.secureTextEntry=NO;
+    phoneNumberField.keyboardType = UIKeyboardTypeNumberPad;
+    phoneNumberField.placeholder = @"Phone Number";
     
     [alert show];
 
@@ -75,8 +75,6 @@ CommonFunctions *commonFunc;
  we have to save name and phone number on button press
  */
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    //For testing -------- } --
-   
     
     //getting text from the text fields
     NSString *name = [alertView textFieldAtIndex:0].text;
@@ -88,7 +86,6 @@ CommonFunctions *commonFunc;
     [[NSUserDefaults standardUserDefaults] synchronize];
     userNameInDb = name;
     [commonFunc setUserName:nameToSave];
-    
     
     //setting the phone number in model
     NSString *phoneNumberTobeSave = phoneNumber;
