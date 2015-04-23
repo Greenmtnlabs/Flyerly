@@ -78,6 +78,8 @@
 		24A65BED1A30451E00BE83C6 /* SSLCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A65BEB1A30451E00BE83C6 /* SSLCell.xib */; };
 		24BAB1841A2F0DF900855B77 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BAB1831A2F0DF900855B77 /* SystemConfiguration.framework */; };
 		24BAB1881A2F0E8C00855B77 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BAB1871A2F0E8C00855B77 /* Reachability.m */; };
+		24BD8CEA1AE92E6F002628EB /* telephone_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24BD8CE81AE92E6F002628EB /* telephone_2x.png */; };
+		24BD8CEB1AE92E6F002628EB /* telephone_3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24BD8CE91AE92E6F002628EB /* telephone_3x.png */; };
 		36474F2219D9780100084F34 /* Pigiarniq Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36474F1D19D9780100084F34 /* Pigiarniq Bold.ttf */; };
 		36474F2319D9780100084F34 /* Pigiarniq Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36474F1E19D9780100084F34 /* Pigiarniq Heavy.ttf */; };
 		36474F2419D9780100084F34 /* Pigiarniq Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36474F1F19D9780100084F34 /* Pigiarniq Italic.ttf */; };
@@ -321,6 +323,8 @@
 		24BAB1831A2F0DF900855B77 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		24BAB1861A2F0E6A00855B77 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		24BAB1871A2F0E8C00855B77 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		24BD8CE81AE92E6F002628EB /* telephone_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = telephone_2x.png; path = ../../../../Desktop/telephone_2x.png; sourceTree = "<group>"; };
+		24BD8CE91AE92E6F002628EB /* telephone_3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = telephone_3x.png; path = ../../../../Desktop/telephone_3x.png; sourceTree = "<group>"; };
 		36474F1D19D9780100084F34 /* Pigiarniq Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pigiarniq Bold.ttf"; sourceTree = "<group>"; };
 		36474F1E19D9780100084F34 /* Pigiarniq Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pigiarniq Heavy.ttf"; sourceTree = "<group>"; };
 		36474F1F19D9780100084F34 /* Pigiarniq Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pigiarniq Italic.ttf"; sourceTree = "<group>"; };
@@ -860,6 +864,8 @@
 		36B0369A19DAD2AB00E8CD21 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				24BD8CE81AE92E6F002628EB /* telephone_2x.png */,
+				24BD8CE91AE92E6F002628EB /* telephone_3x.png */,
 				C346D1621A7FD13B00856A58 /* playvideo@3x.png */,
 				C346D1631A7FD13B00856A58 /* logout.png */,
 				C346D1641A7FD13B00856A58 /* logout@3x.png */,
@@ -1249,6 +1255,7 @@
 				C346D1861A7FD13B00856A58 /* linkedin@2x.png in Resources */,
 				36B2765E1A0124E800ED58AD /* CHECKBOX_FILLED.png in Resources */,
 				C346D1821A7FD13B00856A58 /* facebook@2x.png in Resources */,
+				24BD8CEA1AE92E6F002628EB /* telephone_2x.png in Resources */,
 				200ACE251A3874B200DC7047 /* aolIcon@2x.png in Resources */,
 				200ACE341A3874B200DC7047 /* YahooIcon@2x.png in Resources */,
 				36B2766F1A0124E800ED58AD /* inputBottomBg2@2x.png in Resources */,
@@ -1262,6 +1269,7 @@
 				C334E60C1A777472005539B4 /* logo-Other.png in Resources */,
 				C33C1EF11A7278870064DBE8 /* ServerAccountDetailsViewCell-iPhone6-Plus.xib in Resources */,
 				C346D17B1A7FD13B00856A58 /* login@2x.png in Resources */,
+				24BD8CEB1AE92E6F002628EB /* telephone_3x.png in Resources */,
 				366EAF971A14C3530011D6C6 /* icon-72@2x.png in Resources */,
 				36B2765D1A0124E800ED58AD /* CHECKBOX_EMPTY@2x.png in Resources */,
 				366ECD9719D323DA00F71A11 /* AddUntechableController.xib in Resources */,

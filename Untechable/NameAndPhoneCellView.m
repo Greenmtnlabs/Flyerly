@@ -33,12 +33,12 @@ CommonFunctions *commonFunc;
         
     if( IS_IPHONE_4 || IS_IPHONE_5 || IS_IPHONE_6 ){
         
-        UIImage *image = [UIImage imageNamed:@"facebook.png"];
+        UIImage *image = [UIImage imageNamed:@"telephone_2x.png"];
         [_nameAndPhoneImage setImage:image];
         
     } else if( IS_IPHONE_6_PLUS) {
         
-        UIImage *image = [UIImage imageNamed:@"facebook@3x.png"];
+        UIImage *image = [UIImage imageNamed:@"telephone_3x.png"];
         [_nameAndPhoneImage setImage:image];
         
     } else {
