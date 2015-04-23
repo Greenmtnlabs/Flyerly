@@ -144,19 +144,8 @@
     
     if (cell == nil)
     {
-        if( IS_IPHONE_5 ){
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SettingsCellView" owner:self options:nil];
             cell = (SettingsCellView *)[nib objectAtIndex:0];
-        } else if ( IS_IPHONE_6 ){
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SettingsCellView-iPhone6" owner:self options:nil];
-            cell = (SettingsCellView *)[nib objectAtIndex:0];
-        } else if ( IS_IPHONE_6_PLUS ) {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SettingsCellView-iPhone6-Plus" owner:self options:nil];
-            cell = (SettingsCellView *)[nib objectAtIndex:0];
-        } else {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SettingsCellView" owner:self options:nil];
-            cell = (SettingsCellView *)[nib objectAtIndex:0];
-        }
     }
     
     NSLog(@"%@", [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allValues]);
