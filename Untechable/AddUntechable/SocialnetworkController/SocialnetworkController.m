@@ -275,6 +275,7 @@
     NSString *name = [alertView textFieldAtIndex:0].text;
     
     [[NSUserDefaults standardUserDefaults] setObject:name forKey:@"userName"];
+
     [[NSUserDefaults standardUserDefaults] synchronize];
     //setting the name in model
     [untechable.commonFunctions setUserName:name];
