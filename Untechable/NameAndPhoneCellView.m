@@ -13,7 +13,6 @@
 @implementation NameAndPhoneCellView
 
 NSString *userNameInDb;
-NSString *phoneNumberInDb;
 
 CommonFunctions *commonFunc;
 - (void)awakeFromNib {
@@ -25,10 +24,8 @@ CommonFunctions *commonFunc;
                   stringForKey:@"userName"];
     
     // get the value from the local db
-    phoneNumberInDb = [[NSUserDefaults standardUserDefaults]
-                                 stringForKey:@"phoneNumber"];
     
-    NSString *nameAndNumberToBeShown = [NSString stringWithFormat:@"%@  %@", userNameInDb, phoneNumberInDb];
+    NSString *nameAndNumberToBeShown = [NSString stringWithFormat:@"%@", userNameInDb];
     _onTouchLabel.text = nameAndNumberToBeShown;
         
     if( IS_IPHONE_4 || IS_IPHONE_5 || IS_IPHONE_6 ){
@@ -62,25 +59,18 @@ CommonFunctions *commonFunc;
  So user can enter new name and password
  */
 - (IBAction)onEditButtonTouch:(id)sender {
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@""
-                                                     message:@"Enter Your Name and Number"
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Put in your name below. This will be used to identify yourself to friends."
+                                                     message:@""
                                                     delegate:self
                                            cancelButtonTitle:@"Done"
                                            otherButtonTitles:nil, nil];
     
-    alert.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     //Name field
     UITextField * nameField = [alert textFieldAtIndex:0];
     nameField.text = userNameInDb;
     nameField.keyboardType = UIKeyboardTypeTwitter;
-    nameField.placeholder = @"Name";
-    
-    //phone number field
-    UITextField * phoneNumberField = [alert textFieldAtIndex:1];
-    phoneNumberField.text = phoneNumberInDb;
-    phoneNumberField.secureTextEntry=NO;
-    phoneNumberField.keyboardType = UIKeyboardTypeNumberPad;
-    phoneNumberField.placeholder = @"Phone Number";
+    nameField.placeholder = @"Enter Name";
     
     [alert show];
 
@@ -94,25 +84,16 @@ CommonFunctions *commonFunc;
     
     //getting text from the text fields
     NSString *name = [alertView textFieldAtIndex:0].text;
-    NSString *phoneNumber = [alertView textFieldAtIndex:1].text;
     
-    //setting the name in model
+    //setting the name in model and in local app data
     NSString *nameToSave = name;
     [[NSUserDefaults standardUserDefaults] setObject:nameToSave forKey:@"userName"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
     userNameInDb = name;
     [commonFunc setUserName:nameToSave];
-    
-    //setting the phone number in model
-    NSString *phoneNumberTobeSave = phoneNumber;
-    [[NSUserDefaults standardUserDefaults] setObject:phoneNumberTobeSave forKey:@"phoneNumber"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    phoneNumberInDb = phoneNumber;
-    
-    [commonFunc setPhoneNumber:phoneNumberTobeSave];
     
     // now show the updated username and number 
-    NSString *nameAndNumberToBeShown = [NSString stringWithFormat:@"%@  %@", name, phoneNumber];
+    NSString *nameAndNumberToBeShown = [NSString stringWithFormat:@"%@", name];
     _onTouchLabel.text = nameAndNumberToBeShown;
 
 }

@@ -47,11 +47,7 @@
 
 #pragma mark - Setter Getter for UserName and Phone Number
 @property (strong, nonatomic) NSString *userName;
-@property (strong, nonatomic) NSString *phoneNumber;
 //setter getter for username
 - ( void ) setUserName:(NSString *)userName;
 - ( NSString *) getUserName;
-//setter getter for phoneNumber
-- ( void ) setPhoneNumber:( NSString *)phoneNumber;
-- ( NSString *)getPhoneNumber;
 @end

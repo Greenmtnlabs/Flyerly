@@ -230,11 +230,7 @@
     NSString *userNameInDb = [[NSUserDefaults standardUserDefaults]
                     stringForKey:@"userName"];
     
-    // get the value from the local db
-    NSString *phoneNumberInDb = [[NSUserDefaults standardUserDefaults]
-                       stringForKey:@"phoneNumber"];
-    
-    if( ![userNameInDb isEqual:@""] && ![phoneNumberInDb isEqual:@""] ){
+    if( ![userNameInDb isEqual:@""]){
 
     if( !internetReachable.isReachable ){
         //Show alert if internet is not avaialble...
@@ -253,22 +249,17 @@
         }
     }
     } else {
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Sorry! You cannot finish untechable without your name and number"
-                                                         message:@"Enter Your Name and Number"
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Put in your name below. This will be used to help identify yourself to friends."
+                                                         message:@""
                                                         delegate:self
                                                cancelButtonTitle:@"Done"
                                                otherButtonTitles:nil, nil];
         
         
-        alert.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
+        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
         UITextField * nameField = [alert textFieldAtIndex:0];
         nameField.keyboardType = UIKeyboardTypeTwitter;
         nameField.placeholder = @"Name";
-        
-        UITextField * phoneNumberField = [alert textFieldAtIndex:1];
-        phoneNumberField.secureTextEntry=NO;
-        phoneNumberField.keyboardType = UIKeyboardTypeNumberPad;
-        phoneNumberField.placeholder = @"Phone Number";
         
         [alert show];
 
@@ -282,16 +273,12 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     //getting text from the text fields
     NSString *name = [alertView textFieldAtIndex:0].text;
-    NSString *phoneNumber = [alertView textFieldAtIndex:1].text;
     
     [[NSUserDefaults standardUserDefaults] setObject:name forKey:@"userName"];
-    [[NSUserDefaults standardUserDefaults] setObject:phoneNumber forKey:@"phoneNumber"];
+
     [[NSUserDefaults standardUserDefaults] synchronize];
     //setting the name in model
     [untechable.commonFunctions setUserName:name];
-    
-    //setting the phone number in model
-    [untechable.commonFunctions setPhoneNumber:phoneNumber];
     
 }
 
@@ -426,7 +413,7 @@
                               @"timezoneOffset", @"spendingTimeTxt", @"startDate", @"endDate", @"hasEndDate"
                               , @"location",@"twillioNumber"
                               ,@"socialStatus", @"fbAuth", @"fbAuthExpiryTs" , @"twitterAuth",@"twOAuthTokenSecret",   @"linkedinAuth"
-                              ,@"acType", @"email", @"password", @"respondingEmail", @"iSsl", @"imsHostName", @"imsPort", @"oSsl", @"omsHostName", @"omsPort",@"customizedContacts",@"userName", @"phoneNumber"
+                              ,@"acType", @"email", @"password", @"respondingEmail", @"iSsl", @"imsHostName", @"imsPort", @"oSsl", @"omsHostName", @"omsPort",@"customizedContacts",@"userName"
                               ,nil];
     
     
@@ -436,11 +423,7 @@
                               stringForKey:@"userName"];
     
     [untechable.dic setValue:userNameInDb forKey:@"userName"];
-    
-    NSString *phoneNumber = [[NSUserDefaults standardUserDefaults]
-                              stringForKey:@"phoneNumber"];
-    [untechable.dic setValue:phoneNumber forKey:@"phoneNumber"];
-    
+        
     
     for (NSString* key in untechable.dic) {
         BOOL sendIt =   NO;

@@ -488,18 +488,5 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
     return currentEnteredUserName;
 }
 
-/**
- setting up user name got from the edit text
- */
-- ( void ) setPhoneNumber:(NSString *)phoneNumber {
-    currentEnteredPhoneNumber = phoneNumber;
-}
-
-/**
- get the current user name
- */
--( NSString *)getPhoneNumber{
-    return currentEnteredPhoneNumber;
-}
 
 @end
