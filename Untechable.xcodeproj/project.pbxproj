@@ -80,6 +80,7 @@
 		24BAB1881A2F0E8C00855B77 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BAB1871A2F0E8C00855B77 /* Reachability.m */; };
 		24BD8CF21AE9334B002628EB /* telephone_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24BD8CF01AE9334B002628EB /* telephone_2x.png */; };
 		24BD8CF31AE9334B002628EB /* telephone_3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24BD8CF11AE9334B002628EB /* telephone_3x.png */; };
+		24CB24071AEA489F00251759 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24CB24061AEA489F00251759 /* StoreKit.framework */; };
 		36474F2219D9780100084F34 /* Pigiarniq Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36474F1D19D9780100084F34 /* Pigiarniq Bold.ttf */; };
 		36474F2319D9780100084F34 /* Pigiarniq Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36474F1E19D9780100084F34 /* Pigiarniq Heavy.ttf */; };
 		36474F2419D9780100084F34 /* Pigiarniq Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36474F1F19D9780100084F34 /* Pigiarniq Italic.ttf */; };
@@ -147,7 +148,6 @@
 		36B006481A161B92005C3791 /* untechable.mov in Resources */ = {isa = PBXBuildFile; fileRef = 36B006471A161B92005C3791 /* untechable.mov */; };
 		36B036A619DAF44D00E8CD21 /* EmailSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B036A419DAF44D00E8CD21 /* EmailSettingController.m */; };
 		36B036A719DAF44D00E8CD21 /* EmailSettingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36B036A519DAF44D00E8CD21 /* EmailSettingController.xib */; };
-		36B275D41A00CD6000ED58AD /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36B275D31A00CD6000ED58AD /* StoreKit.framework */; };
 		36B275D71A00D36400ED58AD /* RMStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B275D61A00D36400ED58AD /* RMStore.m */; };
 		36B2765D1A0124E800ED58AD /* CHECKBOX_EMPTY@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B276311A0124E800ED58AD /* CHECKBOX_EMPTY@2x.png */; };
 		36B2765E1A0124E800ED58AD /* CHECKBOX_FILLED.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B276321A0124E800ED58AD /* CHECKBOX_FILLED.png */; };
@@ -325,6 +325,7 @@
 		24BAB1871A2F0E8C00855B77 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		24BD8CF01AE9334B002628EB /* telephone_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = telephone_2x.png; sourceTree = "<group>"; };
 		24BD8CF11AE9334B002628EB /* telephone_3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = telephone_3x.png; sourceTree = "<group>"; };
+		24CB24061AEA489F00251759 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		36474F1D19D9780100084F34 /* Pigiarniq Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pigiarniq Bold.ttf"; sourceTree = "<group>"; };
 		36474F1E19D9780100084F34 /* Pigiarniq Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pigiarniq Heavy.ttf"; sourceTree = "<group>"; };
 		36474F1F19D9780100084F34 /* Pigiarniq Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pigiarniq Italic.ttf"; sourceTree = "<group>"; };
@@ -409,7 +410,6 @@
 		36B036A319DAF44D00E8CD21 /* EmailSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmailSettingController.h; path = AddUntechable/EmailSettingController/EmailSettingController.h; sourceTree = "<group>"; };
 		36B036A419DAF44D00E8CD21 /* EmailSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmailSettingController.m; path = AddUntechable/EmailSettingController/EmailSettingController.m; sourceTree = "<group>"; };
 		36B036A519DAF44D00E8CD21 /* EmailSettingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EmailSettingController.xib; path = AddUntechable/EmailSettingController/EmailSettingController.xib; sourceTree = "<group>"; };
-		36B275D31A00CD6000ED58AD /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		36B275D51A00D36400ED58AD /* RMStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMStore.h; path = AddUntechable/RMStore/RMStore.h; sourceTree = "<group>"; };
 		36B275D61A00D36400ED58AD /* RMStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMStore.m; path = AddUntechable/RMStore/RMStore.m; sourceTree = "<group>"; };
 		36B276311A0124E800ED58AD /* CHECKBOX_EMPTY@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CHECKBOX_EMPTY@2x.png"; sourceTree = "<group>"; };
@@ -512,7 +512,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				24BAB1841A2F0DF900855B77 /* SystemConfiguration.framework in Frameworks */,
-				36B275D41A00CD6000ED58AD /* StoreKit.framework in Frameworks */,
+				24CB24071AEA489F00251759 /* StoreKit.framework in Frameworks */,
 				36A370B819F53E6D005A7AFE /* AVFoundation.framework in Frameworks */,
 				36561D6E19D2C8A40069D897 /* CoreGraphics.framework in Frameworks */,
 				36561D7019D2C8A40069D897 /* UIKit.framework in Frameworks */,
@@ -663,8 +663,8 @@
 		36561D6A19D2C8A40069D897 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				24CB24061AEA489F00251759 /* StoreKit.framework */,
 				24BAB1831A2F0DF900855B77 /* SystemConfiguration.framework */,
-				36B275D31A00CD6000ED58AD /* StoreKit.framework */,
 				36A370B719F53E6D005A7AFE /* AVFoundation.framework */,
 				36561D6B19D2C8A40069D897 /* Foundation.framework */,
 				36561D6D19D2C8A40069D897 /* CoreGraphics.framework */,
@@ -1119,6 +1119,11 @@
 				TargetAttributes = {
 					36561D6719D2C8A40069D897 = {
 						DevelopmentTeam = 4MGKP9P5WH;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 					36561D8219D2C8A40069D897 = {
 						DevelopmentTeam = F988S9J47K;
@@ -1549,14 +1554,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Untechable/Untechable-Prefix.pch";
 				INFOPLIST_FILE = "Untechable/Untechable-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8574bbea-baf8-46b5-bbbd-daa3f60313c7";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1567,15 +1572,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Untechable/Untechable-Prefix.pch";
 				INFOPLIST_FILE = "Untechable/Untechable-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1f1193c6-118a-4539-89cf-c55a96575909";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
