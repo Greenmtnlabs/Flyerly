@@ -313,7 +313,7 @@
             
             if( goToNext == NO ) {
                 
-                [untechable.commonFunctions showAlert:@"Invalid Dates" message:@"End date should be greater then start date."];
+                [untechable.commonFunctions showAlert:@"Invalid Dates" message:@"End date should be greater than start date."];
             }
             
         }
