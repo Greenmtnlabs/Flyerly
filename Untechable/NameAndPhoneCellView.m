@@ -13,7 +13,6 @@
 @implementation NameAndPhoneCellView
 
 NSString *userNameInDb;
-NSString *phoneNumberInDb;
 
 CommonFunctions *commonFunc;
 - (void)awakeFromNib {
@@ -25,10 +24,8 @@ CommonFunctions *commonFunc;
                   stringForKey:@"userName"];
     
     // get the value from the local db
-    phoneNumberInDb = [[NSUserDefaults standardUserDefaults]
-                                 stringForKey:@"phoneNumber"];
     
-    NSString *nameAndNumberToBeShown = [NSString stringWithFormat:@"%@  %@", userNameInDb, phoneNumberInDb];
+    NSString *nameAndNumberToBeShown = [NSString stringWithFormat:@"%@", userNameInDb];
     _onTouchLabel.text = nameAndNumberToBeShown;
         
     if( IS_IPHONE_4 || IS_IPHONE_5 || IS_IPHONE_6 ){
