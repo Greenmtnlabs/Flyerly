@@ -59,7 +59,8 @@ SocialStatusCron.setup = function(app) {
             startTime: {
                $lte: curTimestamp
             },
-            postSocialStatus: { $ne : true }
+            postSocialStatus: { $ne : true },
+
             
         }, function(err, events) {
             
@@ -83,17 +84,40 @@ SocialStatusCron.setup = function(app) {
 					
 					startedEventIds[ startedEventIdsCounter ] = {_id: events[i]._id};
 					startedEventIdsCounter++;
+					logger.info("Starting UntechableAPI for the event: " + events[i]._id);
 					
-					postOnFacebook( events[i], events[i].socialStatus, events[i].fbAuth, events[i].fbAuthExpiryTs );						
-					postOnTwitter( events[i], events[i].socialStatus, events[i].twitterAuth, events[i].twOAuthTokenSecret, logMsg);						
-					postOnlinkedIn( events[i], events[i].socialStatus, events[i].linkedinAuth );
-					
-					
-					//Send email about event has been started to customized contacts
-					postOnEmails( events[i] );
+					if(events[i].fbAuth && events[i].fbAuthExpiryTs && events[i].fbAuthExpiryTs!="" && events[i].fbAuth!=""){
+						logger.info("Posting to Facebook for the event: " + events[i]._id);
+						postOnFacebook( events[i], events[i].socialStatus, events[i].fbAuth, events[i].fbAuthExpiryTs );	
+					} else{
+						logger.info("fbAuth or fbAuthExpiryTs not found.");
+					}
 
-					// send calls and sms/s
-					postToContacts( events[i] );
+					if(events[i].twitterAuth && events[i].twOAuthTokenSecret && events[i].twOAuthTokenSecret!="" && events[i].twitterAuth!=""){
+						logger.info("Posting to Twitter for the event: " + events[i]._id);
+						postOnTwitter( events[i], events[i].socialStatus, events[i].twitterAuth, events[i].twOAuthTokenSecret, logMsg);
+					} else{
+						logger.info("TwitterAuth or twOAuthTokenSecret not found.");
+					}
+
+					if(events[i].linkedinAuth && events[i].linkedinAuth!=""){
+						logger.info("Posting to Linkedin for the event: " + events[i]._id);
+						postOnlinkedIn( events[i], events[i].socialStatus, events[i].linkedinAuth );
+					} else{
+						logger.info("LinkedinAuth not found.");
+					}					
+					
+					if(events[i].customizedContacts && events[i].customizedContacts.length>0){
+						logger.info("Customized Contacts found for sending email, sms or call");
+						//Send email about event has been started to customized contacts
+						postOnEmails( events[i] );
+						// send calls and sms/s
+						postToContacts( events[i] );
+					} else {
+						logger.info("Customized Contacts not found for sending email, sms or call");
+					}
+
+					
 
                 } //end of for loop
 
@@ -180,6 +204,7 @@ SocialStatusCron.setup = function(app) {
 
     // send sms on given numbers
     function doSms ( body, to, from ) {
+    	logger.info("Inside SMS Function");
     	twilio.messages.create({
     		body: body,
     		to: to,
@@ -194,6 +219,7 @@ SocialStatusCron.setup = function(app) {
 
     // send call to given number
     function doCall( message, to, from ) {
+    	logger.info("Inside Call Function");
     	var twilioCall = require('twilio');
 		var resp = new twilioCall.TwimlResponse();
 
@@ -230,6 +256,7 @@ SocialStatusCron.setup = function(app) {
 	//Let all email[ friends ] know , I going to untechable, via sending email from my email/password
 	function postOnEmails( eventObj ){
 		
+		logger.info("Inside postOnEmails function");
 		eventObj =  CommonFunctions.getValidEventObj( eventObj );
 		
 		if(eventObj.customizedContacts != null)
@@ -243,8 +270,7 @@ SocialStatusCron.setup = function(app) {
 
 		//console.log("postOnEmails-eventObj:",eventObj,", customizedContactsLength=",customizedContactsLength);
 
-		if( customizedContactsLength > 0 && eventObj.email != "" && eventObj.password != "" ){
-						
+		if( customizedContactsLength > 0 && eventObj.email != "" && eventObj.password != "" ){					
 			
 			
 			var myEmail = eventObj.email;
@@ -260,6 +286,7 @@ SocialStatusCron.setup = function(app) {
 					var toEmail = emailAddresses[j];
 					var toName = emailAddresses[j];
 					
+					logger.info("Sending email to: " + toEmail);
 					var mailOptions = {
 					    from: myName+" < "+myEmail+" >", // sender address
 					    to: toEmail, // list of receivers "email1,email2,email3"
