@@ -87,7 +87,6 @@ CommonFunctions *commonFunc;
     
     //getting text from the text fields
     NSString *name = [alertView textFieldAtIndex:0].text;
-    NSString *phoneNumber = [alertView textFieldAtIndex:1].text;
     
     //setting the name in model and in local app data
     NSString *nameToSave = name;
@@ -95,7 +94,6 @@ CommonFunctions *commonFunc;
     userNameInDb = name;
     [commonFunc setUserName:nameToSave];
     [[NSUserDefaults standardUserDefaults] synchronize];
-
     
     // now show the updated username and number 
     NSString *nameAndNumberToBeShown = [NSString stringWithFormat:@"%@", name];
