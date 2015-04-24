@@ -65,7 +65,7 @@ CommonFunctions *commonFunc;
                                            cancelButtonTitle:@"Done"
                                            otherButtonTitles:nil, nil];
     
-    alert.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     //Name field
     UITextField * nameField = [alert textFieldAtIndex:0];
     nameField.text = userNameInDb;

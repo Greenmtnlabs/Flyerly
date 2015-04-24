@@ -256,7 +256,7 @@
                                                otherButtonTitles:nil, nil];
         
         
-        alert.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
+        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
         UITextField * nameField = [alert textFieldAtIndex:0];
         nameField.keyboardType = UIKeyboardTypeTwitter;
         nameField.placeholder = @"Name";
