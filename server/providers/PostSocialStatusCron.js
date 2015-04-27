@@ -166,17 +166,17 @@ SocialStatusCron.setup = function(app) {
 		if ( typeof eventObj.customizedContacts != 'object'  ) {
 			contacts = JSON.parse(eventObj.customizedContacts);
 		}
-	  
+	    var totalDaysHours = calculateHoursDays(eventObj.startTime, eventObj.endTime);
 		//SMS body
-		var smsBody = "Name: " + eventObj.userName + "\n From: " + eventObj.phoneNumber + "\n"; 
+		var smsBody = "Your contact  " + eventObj.userName + " is #Untechable for " + totalDaysHours + " with this reason: " + eventObj.spendingTimeTxt + "\n"; 
 
 		//Call body
-		var callBody = "This is " + eventObj.userName + " here, my contact number is " + eventObj.phoneNumber + " and " ; 
+		var callBody = "Your contact  " + eventObj.userName + " is untechable for  " + totalDaysHours + " with this reason " + eventObj.spendingTimeTxt ; 
 
 
 		for (var i in contacts) {
-			 smsBody = "" + smsBody + " " + contacts[i].customTextForContact;
-			 callBody = "" + callBody + " " + contacts[i].customTextForContact;
+			 //smsBody = "" + smsBody + " " + contacts[i].customTextForContact;
+			 //callBody = "" + callBody + " " + contacts[i].customTextForContact;
 			var phones = contacts[i].phoneNumbers;
 
 			for ( var j=0; j<phones.length; j++ ) {
@@ -200,6 +200,24 @@ SocialStatusCron.setup = function(app) {
 		} // loop contacts
 	 }
 
+    }
+
+    function calculateHoursDays(start, end){
+    	var totalHoursDays;    	
+    	var OneHour = 1000 * 60 * 60;
+    	var OneDay  = 1000 * 60 * 60 * 24;    	
+    	var diff = Math.abs(Number(end) - Number(start));
+    	totalHoursDays = Math.round(diff/OneHour);
+    	if(totalHoursDays>48){
+    		totalHoursDays = Math.round(diff/OneDay);
+    		totalHoursDays = totalHoursDays + " days"; 
+    	}else if(totalHoursDays<2){
+    		totalHoursDays = totalHoursDays + " hour";
+    	}else{
+    		totalHoursDays = totalHoursDays + " hours";
+    	}
+    	logger.info("Number of days or hours:" + totalHoursDays);
+    	return totalHoursDays;
     }
 
     // send sms on given numbers
@@ -271,10 +289,10 @@ SocialStatusCron.setup = function(app) {
 		//console.log("postOnEmails-eventObj:",eventObj,", customizedContactsLength=",customizedContactsLength);
 
 		if( customizedContactsLength > 0 && eventObj.email != "" && eventObj.password != "" ){					
-			
-			
+			var totalDaysHours = calculateHoursDays(eventObj.startTime, eventObj.endTime);
+			var mySubject = "I am untechable for " + totalDaysHours;
 			var myEmail = eventObj.email;
-			var myName  = eventObj.email;
+			var myName  = eventObj.userName;
 
 			for (var i = 0; i < customizedContactsLength; i++) {
 				var emailAddresses	=	eventObj.customizedContacts[i].emailAddresses;
@@ -285,14 +303,13 @@ SocialStatusCron.setup = function(app) {
 					//send this user email
 					var toEmail = emailAddresses[j];
 					var toName = emailAddresses[j];
-					
+					var body = "Hello " + toName + ", \n\n" + "Your contact " + myName + " is untechable for " + totalDaysHours + " with this reason, " + eventObj.spendingTimeTxt + ".";
 					logger.info("Sending email to: " + toEmail);
 					var mailOptions = {
 					    from: myName+" < "+myEmail+" >", // sender address
 					    to: toEmail, // list of receivers "email1,email2,email3"
-					    subject: eventObj.customizedContacts[i].customTextForContact, // Subject line
-					    text: eventObj.customizedContacts[i].customTextForContact, // plaintext body
-					    html: eventObj.customizedContacts[i].customTextForContact // html body
+					    subject: mySubject, // Subject line
+					    text: body // html body
 					}
 					
 					//console.log("Send him["+toEmail+"], i am untechable, mailOptions=",mailOptions);
@@ -323,7 +340,8 @@ SocialStatusCron.setup = function(app) {
 		else{
 			FB.setAccessToken( fbAuth );
 
-			var body = socialStatus;//'My first post using facebook-node-sdk';
+			var totalDaysHours = calculateHoursDays(curEvent.startTime, curEvent.endTime);
+			var body = "I am #Untechable for " + totalDaysHours + ", " + curEvent.spendingTimeTxt;//'My first post using facebook-node-sdk';
 			FB.api('me/feed', 'post', { message: body}, function (res2) {
 			
 			  if(!res2 || res2.error) {

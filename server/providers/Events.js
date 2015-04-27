@@ -55,7 +55,6 @@ Events.setup = function(app) {
             hasEndDate: params.hasEndDate,
 
             userName: params.userName,
-            phoneNumber: params.phoneNumber,
 
             twillioNumber: params.twillioNumber,
             location: params.location,

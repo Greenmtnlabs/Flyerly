@@ -20,7 +20,6 @@ var eventsSchema = db.Schema({
     hasEndDate: String,
 
     userName: String,
-    phoneNumber: String,
 
     twillioNumber: String,
     location: String,
