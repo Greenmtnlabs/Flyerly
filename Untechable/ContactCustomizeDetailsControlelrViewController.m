@@ -186,7 +186,8 @@
             }
         }
         
-        
+        cell.contact_Name.numberOfLines = 0;
+        [cell.contact_Name sizeToFit];
         [cell setCellValues:contactModal.name ContactImage:contactModal.img];
         
         return cell;

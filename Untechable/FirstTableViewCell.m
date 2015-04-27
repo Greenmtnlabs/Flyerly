@@ -27,6 +27,9 @@
     }
     self.contact_Image.layer.cornerRadius = self.contact_Image.frame.size.width / 2;
     self.contact_Image.clipsToBounds = YES;
+    
+    contact_Name.numberOfLines = 0;
+    [contact_Name sizeToFit];
 }
 
 @end
