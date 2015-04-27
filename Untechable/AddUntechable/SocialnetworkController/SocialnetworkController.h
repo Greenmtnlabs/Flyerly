@@ -44,7 +44,7 @@
 
 @property (nonatomic,strong)  Untechable *untechable;
 @property(nonatomic,strong) IBOutlet UIPlaceHolderTextView *descriptionView;
-
+@property (strong, nonatomic) IBOutlet UILabel *showMessageBeforeSending;
 - (IBAction)shareOn:(id)sender;
 
 //Check if coming from contacstListScreen screen

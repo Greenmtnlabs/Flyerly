@@ -43,6 +43,14 @@
     
     //[self setDefaultModel];
     
+    //showing start date on fields
+    NSDate *startDate  =   [untechable.commonFunctions timestampStrToNsDate:untechable.startDate];
+    NSString *newDateStr    =   [untechable.dateFormatter stringFromDate:startDate];
+    NSString *showMsgToUser = [NSString stringWithFormat:@"The above message will be posted on %@ to the networks you selected below", newDateStr];
+    
+    _showMessageBeforeSending.text = showMsgToUser;
+    _showMessageBeforeSending.textColor = defGray;
+    
     NSArray *fields = @[ inputSetSocialStatus ];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
     [self.keyboardControls setDelegate:self];
@@ -124,15 +132,8 @@
     NSString *url = [NSString stringWithFormat:@"%@",untechable.spendingTimeTxt];
     url = [url stringByReplacingOccurrencesOfString:@" " withString:@""];
     
-    NSDate *startDate  =   [untechable.commonFunctions timestampStrToNsDate:untechable.startDate];
-    NSString *newDateStr    =   [untechable.dateFormatter stringFromDate:startDate];
-    
-    NSDate *endDate  =   [untechable.commonFunctions timestampStrToNsDate:untechable.endDate];
-    NSString *endDateStr    =   [untechable.dateFormatter stringFromDate:endDate];
-    
-    
 //    NSString *socialStatus = [NSString stringWithFormat:@"I am #Untechable & %@ untechable.com/away/%@\nfrom %@ to %@", untechable.spendingTimeTxt,url, newDateStr, endDateStr];
-     NSString *socialStatus = [NSString stringWithFormat:@"I am #Untechable %@ \nFrom: %@\nTo: %@", untechable.spendingTimeTxt, newDateStr, endDateStr];
+     NSString *socialStatus = [NSString stringWithFormat:@"I am #Untechable %@ ", untechable.spendingTimeTxt];
     [inputSetSocialStatus setText:socialStatus];
     int len = (int)inputSetSocialStatus.text.length;
     char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
