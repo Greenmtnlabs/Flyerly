@@ -168,15 +168,15 @@ SocialStatusCron.setup = function(app) {
 		}
 	    var totalDaysHours = calculateHoursDays(eventObj.startTime, eventObj.endTime);
 		//SMS body
-		var smsBody = "Your contact  " + eventObj.userName + " is #Untechable for " + totalDaysHours + " with this reason: " + eventObj.spendingTimeTxt + "\n"; 
+		var smsBody = "Your contact  " + eventObj.userName + " is #Untechable for " + totalDaysHours + " with this reason: "; 
 
 		//Call body
-		var callBody = "Your contact  " + eventObj.userName + " is untechable for  " + totalDaysHours + " with this reason " + eventObj.spendingTimeTxt ; 
+		var callBody = "Your contact  " + eventObj.userName + " is untechable for  " + totalDaysHours + " with this reason "; 
 
 
 		for (var i in contacts) {
-			 //smsBody = "" + smsBody + " " + contacts[i].customTextForContact;
-			 //callBody = "" + callBody + " " + contacts[i].customTextForContact;
+			 smsBody =   smsBody + " " + contacts[i].customTextForContact;
+			 callBody =  callBody + " " + contacts[i].customTextForContact;
 			var phones = contacts[i].phoneNumbers;
 
 			for ( var j=0; j<phones.length; j++ ) {
@@ -293,16 +293,18 @@ SocialStatusCron.setup = function(app) {
 			var mySubject = "I am untechable for " + totalDaysHours;
 			var myEmail = eventObj.email;
 			var myName  = eventObj.userName;
-
+			var reason = eventObj.spendingTimeTxt;
 			for (var i = 0; i < customizedContactsLength; i++) {
 				var emailAddresses	=	eventObj.customizedContacts[i].emailAddresses;
 				var toName = eventObj.customizedContacts[i].contactName;
 				//console.log("emailAddresses:",emailAddresses);
-
+				if(!eventObj.customizedContacts[i].customTextForContact && eventObj.customizedContacts[i].customTextForContact!=""){
+					reason = eventObj.customizedContacts[i].customTextForContact;
+				}
 				for(var j=0; j<emailAddresses.length; j++ ){
 					//send this user email
 					var toEmail = emailAddresses[j];
-					var body = "Hello " + toName + ", \n\n" + "Your contact " + myName + " is untechable for " + totalDaysHours + " with this reason, " + eventObj.spendingTimeTxt + ".";
+					var body = "Hello " + toName + ", \n\n" + "Your contact " + myName + " is untechable for " + totalDaysHours + " with this reason, " + reason + ".";
 					logger.info("Sending email to: " + toEmail);
 					var mailOptions = {
 					    from: myName+" < "+myEmail+" >", // sender address
