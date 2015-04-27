@@ -296,13 +296,12 @@ SocialStatusCron.setup = function(app) {
 
 			for (var i = 0; i < customizedContactsLength; i++) {
 				var emailAddresses	=	eventObj.customizedContacts[i].emailAddresses;
-				
+				var toName = eventObj.customizedContacts[i].contactName;
 				//console.log("emailAddresses:",emailAddresses);
 
 				for(var j=0; j<emailAddresses.length; j++ ){
 					//send this user email
 					var toEmail = emailAddresses[j];
-					var toName = emailAddresses[j];
 					var body = "Hello " + toName + ", \n\n" + "Your contact " + myName + " is untechable for " + totalDaysHours + " with this reason, " + eventObj.spendingTimeTxt + ".";
 					logger.info("Sending email to: " + toEmail);
 					var mailOptions = {
