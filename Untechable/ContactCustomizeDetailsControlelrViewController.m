@@ -213,7 +213,7 @@
         }
         
         [cell.customText setDelegate:self];
-        
+        cell.customText.textColor = defGreen;
         textView = cell.customText;
         
         [cell.customText setReturnKeyType:UIReturnKeyDone];

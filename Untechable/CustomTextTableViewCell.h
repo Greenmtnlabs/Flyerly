@@ -13,9 +13,9 @@
 @interface CustomTextTableViewCell : UITableViewCell
 
 @property (nonatomic,strong)  Untechable *untechable;
-
 @property (nonatomic,strong)IBOutlet UITextView *customText;
 
 -(void)setCellValues :(NSString *)message;
+@property (strong, nonatomic) IBOutlet UILabel *char_limit;
 
 @end

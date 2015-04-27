@@ -446,7 +446,7 @@
         [_spendingTimeTextPicker setFrame:CGRectMake(0, 300, 0, 140)];
     }else if( IS_IPHONE_5 ){
         [_pickerCloseBtn setFrame:CGRectMake(-10, 340, 580, 35)];
-        [_spendingTimeTextPicker setFrame:CGRectMake(0, 360, 0, 260)];
+        [_spendingTimeTextPicker setFrame:CGRectMake(0, 375, 0, 240)];
     }else if ( IS_IPHONE_6 ){
         [_pickerCloseBtn setFrame:CGRectMake(0, 430, 650, 40)];
         [_spendingTimeTextPicker setFrame:CGRectMake(0, 440, 0, 260)];
