@@ -22,11 +22,14 @@ CommonFunctions *commonFunc;
     
     userNameInDb = [[NSUserDefaults standardUserDefaults]
                   stringForKey:@"userName"];
-    
-    // get the value from the local db
-    
-    NSString *nameAndNumberToBeShown = [NSString stringWithFormat:@"%@", userNameInDb];
-    _onTouchLabel.text = nameAndNumberToBeShown;
+    if( userNameInDb == NULL ){
+         _onTouchLabel.text = @" ";
+    } else {
+        // get the value from the local db
+        
+        NSString *nameAndNumberToBeShown = [NSString stringWithFormat:@"%@", userNameInDb];
+        _onTouchLabel.text = nameAndNumberToBeShown;
+    }
         
     if( IS_IPHONE_4 || IS_IPHONE_5 || IS_IPHONE_6 ){
         

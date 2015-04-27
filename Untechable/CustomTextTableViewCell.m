@@ -10,6 +10,7 @@
 
 ContactsCustomizedModal *contactModal_;
 
+
 @implementation CustomTextTableViewCell
 
 @synthesize untechable,customText;
@@ -21,7 +22,38 @@ ContactsCustomizedModal *contactModal_;
 }
 
 -(void)setCellValues :(NSString *)message {
-    
     self.customText.text = message;
+    self.customText.delegate = self;
+    [self updateChrCounter:message];
 }
+
+-(void)updateChrCounter:(NSString *)message {
+   
+    int len = (int)message.length;
+    _char_limit.text=[NSString stringWithFormat:@"%i",124-len];
+    
+}
+
+#pragma mark - Delegate Methods
+- (void)textViewDidChange:(UITextView *)textView{
+    [self updateChrCounter:textView.text];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if([text length] == 0)
+    {
+        if([textView.text length] != 0)
+        {
+            return YES;
+        }
+    }
+    else if([[textView text] length] > 124)
+    {
+        return NO;
+    }
+    return YES;
+}
+
+
 @end
