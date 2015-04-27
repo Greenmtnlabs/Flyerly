@@ -210,11 +210,13 @@ SocialStatusCron.setup = function(app) {
     	totalHoursDays = Math.round(diff/OneHour);
     	if(totalHoursDays>48){
     		totalHoursDays = Math.round(diff/OneDay);
-    		totalHoursDays = " " + totalHoursDays + " days"; 
+    		totalHoursDays = totalHoursDays + " days"; 
+    	}else if(totalHoursDays<2){
+    		totalHoursDays = totalHoursDays + " hour";
     	}else{
-    		totalHoursDays = " " + totalHoursDays + " hours";
+    		totalHoursDays = totalHoursDays + " hours";
     	}
-    	logger.info(totalHoursDays);
+    	logger.info("Number of days or hours:" + totalHoursDays);
     	return totalHoursDays;
     }
 
@@ -290,7 +292,7 @@ SocialStatusCron.setup = function(app) {
 			var totalDaysHours = calculateHoursDays(eventObj.startTime, eventObj.endTime);
 			var mySubject = "I am untechable for " + totalDaysHours;
 			var myEmail = eventObj.email;
-			var myName  = eventObj.email;
+			var myName  = eventObj.userName;
 
 			for (var i = 0; i < customizedContactsLength; i++) {
 				var emailAddresses	=	eventObj.customizedContacts[i].emailAddresses;
@@ -301,14 +303,13 @@ SocialStatusCron.setup = function(app) {
 					//send this user email
 					var toEmail = emailAddresses[j];
 					var toName = emailAddresses[j];
-					var body = "Hello " + toName + ", \n\n" + "Your contact " + myName + " is #Untechable for " + totalDaysHours + " with this reason, " + eventObj.spendingTimeTxt + " .";
+					var body = "Hello " + toName + ", \n\n" + "Your contact " + myName + " is untechable for " + totalDaysHours + " with this reason, " + eventObj.spendingTimeTxt + ".";
 					logger.info("Sending email to: " + toEmail);
 					var mailOptions = {
 					    from: myName+" < "+myEmail+" >", // sender address
 					    to: toEmail, // list of receivers "email1,email2,email3"
 					    subject: mySubject, // Subject line
-					    text: body, // plaintext body
-					    html: body // html body
+					    text: body // html body
 					}
 					
 					//console.log("Send him["+toEmail+"], i am untechable, mailOptions=",mailOptions);
