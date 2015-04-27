@@ -206,7 +206,7 @@ SocialStatusCron.setup = function(app) {
     	var totalHoursDays;    	
     	var OneHour = 1000 * 60 * 60;
     	var OneDay  = 1000 * 60 * 60 * 24;    	
-    	var diff = Math.abs(end - start);
+    	var diff = Math.abs(Number(end) - Number(start));
     	totalHoursDays = Math.round(diff/OneHour);
     	if(totalHoursDays>48){
     		totalHoursDays = Math.round(diff/OneDay);
