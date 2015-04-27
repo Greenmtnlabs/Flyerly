@@ -231,7 +231,7 @@
     NSString *userNameInDb = [[NSUserDefaults standardUserDefaults]
                     stringForKey:@"userName"];
     
-    if( ![userNameInDb isEqual:@""]){
+    if( ! ([userNameInDb isEqual:@""] || [userNameInDb length] ==0 || userNameInDb == nil) ){
 
     if( !internetReachable.isReachable ){
         //Show alert if internet is not avaialble...
