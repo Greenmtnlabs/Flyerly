@@ -23,11 +23,20 @@ ContactsCustomizedModal *contactModal_;
 
 -(void)setCellValues :(NSString *)message {
     self.customText.text = message;
+    self.customText.delegate = self;
+    [self updateChrCounter:message];
+}
+
+-(void)updateChrCounter:(NSString *)message {
+   
     int len = message.length;
     _char_limit.text=[NSString stringWithFormat:@"%i",124-len];
-
     
 }
 
+#pragma mark - Delegate Methods
+- (void)textViewDidChange:(UITextView *)textView{
+    [self updateChrCounter:textView.text];
+}
 
 @end

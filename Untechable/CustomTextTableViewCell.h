@@ -10,7 +10,7 @@
 #import "Untechable.h"
 #import "ContactsCustomizedModal.h"
 
-@interface CustomTextTableViewCell : UITableViewCell
+@interface CustomTextTableViewCell : UITableViewCell < UITextViewDelegate >
 
 @property (nonatomic,strong)  Untechable *untechable;
 @property (nonatomic,strong)IBOutlet UITextView *customText;
