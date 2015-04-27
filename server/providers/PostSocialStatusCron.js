@@ -301,7 +301,7 @@ SocialStatusCron.setup = function(app) {
 					//send this user email
 					var toEmail = emailAddresses[j];
 					var toName = emailAddresses[j];
-					var body = "Hello " + toName + ", \n\n" + "Your contact " + myName + " is #Untechable for " + totalDaysHours + " with the reason, " + eventObj.spendingTimeTxt + " .";
+					var body = "Hello " + toName + ", \n\n" + "Your contact " + myName + " is #Untechable for " + totalDaysHours + " with this reason, " + eventObj.spendingTimeTxt + " .";
 					logger.info("Sending email to: " + toEmail);
 					var mailOptions = {
 					    from: myName+" < "+myEmail+" >", // sender address
