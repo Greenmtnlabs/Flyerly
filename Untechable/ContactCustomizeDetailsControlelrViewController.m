@@ -222,6 +222,13 @@
             
             cell.customText.text = contactModal.customTextForContact;
         }
+        
+//        int len = contactModal_.customTextForContact.length;
+//        _char_limit.text=[NSString stringWithFormat:@"%i",124-len];
+
+        
+        [cell setCellValues:contactModal.customTextForContact];
+        
         return cell;
         
     }else if ( indexPath.section == 2 ){

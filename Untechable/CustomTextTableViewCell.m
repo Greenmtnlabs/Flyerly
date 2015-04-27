@@ -20,22 +20,14 @@ ContactsCustomizedModal *contactModal_;
 
     // Configure the view for the selected state
 }
-int a;
+
 -(void)setCellValues :(NSString *)message {
-    a = message.length;
     self.customText.text = message;
+    int len = message.length;
+    _char_limit.text=[NSString stringWithFormat:@"%i",124-len];
+
     
 }
 
--(void)awakeFromNib{
-    int len = contactModal_.customTextForContact.length;
-    _char_limit.text=[NSString stringWithFormat:@"%i",124-len];
-}
-
--(void)textViewDidChange:(UITextView *)_customText
-{
-    int len = [untechable spendingTimeTxt].length;
-    _char_limit.text=[NSString stringWithFormat:@"%i",124-len];
-}
 
 @end
