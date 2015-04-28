@@ -709,6 +709,27 @@
     return _pickerData[row];
 }
 
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
+{
+    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, [pickerView rowSizeForComponent:component].width, [pickerView rowSizeForComponent:component].height)];
+    lbl.text = [_pickerData objectAtIndex:row];
+    lbl.adjustsFontSizeToFitWidth = YES;
+    lbl.textAlignment=UITextAlignmentCenter;
+    
+    //change the text size of pickers array accordingly
+    if( IS_IPHONE_4 ){
+        lbl.font=[UIFont systemFontOfSize:19];
+    } if( IS_IPHONE_5 ){
+        lbl.font=[UIFont systemFontOfSize:20];
+    } if( IS_IPHONE_6 ){
+        lbl.font=[UIFont systemFontOfSize:23];
+    } if( IS_IPHONE_6_PLUS ){
+        lbl.font=[UIFont systemFontOfSize:24];
+    }
+    return lbl;
+}
+
+
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     
     _inputSpendingTimeText.text = [_pickerData objectAtIndex:row];
