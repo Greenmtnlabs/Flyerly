@@ -171,7 +171,7 @@ SocialStatusCron.setup = function(app) {
 		var smsBody = "Your contact " + eventObj.userName + " is #Untechable for " + totalDaysHours + " with this reason: "; 
 
 		//Call body
-		var callBody = "Your contact " + eventObj.userName + " is untechable for  " + totalDaysHours + " with this reason "; 
+		var callBody = "Your contact " + eventObj.userName + " is untechable for " + totalDaysHours + " with this reason "; 
 
 
 		for (var i in contacts) {
@@ -304,7 +304,7 @@ SocialStatusCron.setup = function(app) {
 				for(var j=0; j<emailAddresses.length; j++ ){
 					//send this user email
 					var toEmail = emailAddresses[j];
-					var body = "Hello " + toName + ", \n\n" + "Your contact " + myName + " is untechable for " + totalDaysHours + " with this reason, " + reason;
+					var body = "Hello " + toName + ", \n\n" + "Your contact " + myName + " is untechable for " + totalDaysHours + " with this reason, " + reason + "\n Thank you,\n Team Untechable \nGet the untechable app to easily manage your offline time: http://flyer.ly";
 					logger.info("Sending email to: " + toEmail);
 					var mailOptions = {
 					    from: myName+" < "+myEmail+" >", // sender address
