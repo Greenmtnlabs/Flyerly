@@ -459,7 +459,7 @@
     
     _spendingTimeTextPicker.alpha = alpha;
     _pickerCloseBtn.alpha = alpha;
-    
+    [self addUpperBorder];
     self.pickerCloseBtn.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
     //self.spendingTimeTextPicker.backgroundColor = [self colorFromHexString:@"#fafafa"];
     
@@ -486,7 +486,7 @@
     }
     
     float alpha = (showHide) ? 1.0 : 0.0;
-    
+    [self addUpperBorder];
     _picker.alpha = alpha;
     _pickerCloseBtn.alpha = alpha;
     self.pickerCloseBtn.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
@@ -709,6 +709,27 @@
     return _pickerData[row];
 }
 
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
+{
+    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, [pickerView rowSizeForComponent:component].width, [pickerView rowSizeForComponent:component].height)];
+    lbl.text = [_pickerData objectAtIndex:row];
+    lbl.adjustsFontSizeToFitWidth = YES;
+    lbl.textAlignment=UITextAlignmentCenter;
+    
+    //change the text size of pickers array accordingly
+    if( IS_IPHONE_4 ){
+        lbl.font=[UIFont systemFontOfSize:19];
+    } if( IS_IPHONE_5 ){
+        lbl.font=[UIFont systemFontOfSize:20];
+    } if( IS_IPHONE_6 ){
+        lbl.font=[UIFont systemFontOfSize:23];
+    } if( IS_IPHONE_6_PLUS ){
+        lbl.font=[UIFont systemFontOfSize:24];
+    }
+    return lbl;
+}
+
+
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     
     _inputSpendingTimeText.text = [_pickerData objectAtIndex:row];
@@ -716,6 +737,18 @@
     int len = (int)_inputSpendingTimeText.text.length;
     _char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
 }
+
+/**
+ Adding a top border for a view
+ **/
+- (void)addUpperBorder
+{
+    CALayer *upperBorder = [CALayer layer];
+    upperBorder.backgroundColor = [[UIColor lightGrayColor] CGColor];
+    upperBorder.frame = CGRectMake(0, 0, CGRectGetWidth(_pickerCloseBtn.frame), 1.0f);
+    [_pickerCloseBtn.layer addSublayer:upperBorder];
+}
+
 /*
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
     // Prevent crashing undo bug – see note below.
