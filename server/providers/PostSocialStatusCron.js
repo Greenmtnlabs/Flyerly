@@ -175,8 +175,8 @@ SocialStatusCron.setup = function(app) {
 
 
 		for (var i in contacts) {
-			 smsBody =   smsBody + " " + contacts[i].customTextForContact;
-			 callBody =  callBody + " " + contacts[i].customTextForContact;
+			var smsText =   smsBody + " " + contacts[i].customTextForContact;
+			var callText =  callBody + " " + contacts[i].customTextForContact;
 			var phones = contacts[i].phoneNumbers;
 
 			for ( var j=0; j<phones.length; j++ ) {
@@ -188,12 +188,12 @@ SocialStatusCron.setup = function(app) {
 				var toNumber = toNumber.replace(/[^\+\d]/g,"");
 				// send sms only if the given number is mobile and sms status is 1
 				if ( smsStatus == '1' && type == "Mobile" ) {
-					doSms( smsBody, toNumber, fromNumber );
+					doSms( smsText, toNumber, fromNumber );
 				}
 
 				// send call if call status is 1
 				if ( callStatus == '1' ) {
-					doCall( callBody, toNumber, fromNumber );
+					doCall( callText, toNumber, fromNumber );
 				}
 
 			} // loop phones
