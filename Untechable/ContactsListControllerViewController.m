@@ -162,9 +162,7 @@
             break;
         }
     }
-    if([searchTextField isFirstResponder]){
-        [searchTextField resignFirstResponder];
-    }
+ 
 }
 
 -(void)storeSceenVarsInDic
@@ -274,10 +272,6 @@
         socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
         socialnetwork.untechable = untechable;
         [self.navigationController pushViewController:socialnetwork animated:YES];
-    }
-    
-    if([searchTextField isFirstResponder]){
-        [searchTextField resignFirstResponder];
     }
 
 }
