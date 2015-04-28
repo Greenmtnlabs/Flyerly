@@ -459,7 +459,7 @@
     
     _spendingTimeTextPicker.alpha = alpha;
     _pickerCloseBtn.alpha = alpha;
-    
+    [self addUpperBorder];
     self.pickerCloseBtn.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
     //self.spendingTimeTextPicker.backgroundColor = [self colorFromHexString:@"#fafafa"];
     
@@ -486,7 +486,7 @@
     }
     
     float alpha = (showHide) ? 1.0 : 0.0;
-    
+    [self addUpperBorder];
     _picker.alpha = alpha;
     _pickerCloseBtn.alpha = alpha;
     self.pickerCloseBtn.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
@@ -737,6 +737,18 @@
     int len = (int)_inputSpendingTimeText.text.length;
     _char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
 }
+
+/**
+ Adding a top border for a view
+ **/
+- (void)addUpperBorder
+{
+    CALayer *upperBorder = [CALayer layer];
+    upperBorder.backgroundColor = [[UIColor grayColor] CGColor];
+    upperBorder.frame = CGRectMake(0, 0, CGRectGetWidth(_pickerCloseBtn.frame), 1.0f);
+    [_pickerCloseBtn.layer addSublayer:upperBorder];
+}
+
 /*
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
     // Prevent crashing undo bug – see note below.
