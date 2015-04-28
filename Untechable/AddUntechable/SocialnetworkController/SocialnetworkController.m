@@ -17,6 +17,7 @@
 #import "SocialNetworksStatusModal.h"
 #import "ContactsCustomizedModal.h"
 #import "CommonFunctions.h"
+#import <math.h>
 
 
 @implementation SocialnetworkController
@@ -132,28 +133,15 @@
     NSString *url = [NSString stringWithFormat:@"%@",untechable.spendingTimeTxt];
     url = [url stringByReplacingOccurrencesOfString:@" " withString:@""];
     
-//    NSString *socialStatus = [NSString stringWithFormat:@"I am #Untechable & %@ untechable.com/away/%@\nfrom %@ to %@", untechable.spendingTimeTxt,url, newDateStr, endDateStr];
-     NSString *socialStatus = [NSString stringWithFormat:@"I am #Untechable %@ ", untechable.spendingTimeTxt];
+    NSString *startTimeStamp = [ untechable startDate];
+    NSString *endTimeStamp = [ untechable endDate];
+    NSString *getDaysOrHours = [ self calculateHoursDays:startTimeStamp  endTime: endTimeStamp];
+    NSString *socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", getDaysOrHours,untechable.spendingTimeTxt];
     [inputSetSocialStatus setText:socialStatus];
     int len = (int)inputSetSocialStatus.text.length;
     char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
     
-    /*if ( [untechable.socialStatus isEqualToString:@""] && [inputSetSocialStatus.text isEqualToString:@"e.g Spending time with family."] ){
-        
-        NSString *url = [NSString stringWithFormat:@"%@",untechable.spendingTimeTxt];
-        url = [url stringByReplacingOccurrencesOfString:@" " withString:@""];
-        NSString *socialStatus = [NSString stringWithFormat:@"I am #Untechable & %@ untechable.com/away/%@", untechable.spendingTimeTxt,url];
-        [inputSetSocialStatus setText:socialStatus];
-        int len = (int)inputSetSocialStatus.text.length;
-        char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
-    
-    }else {
-        
-        [inputSetSocialStatus setText:untechable.socialStatus];
-        int len = (int)inputSetSocialStatus.text.length;
-        char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
-    }*/
-    
+
     
     [self.btnFacebook setTitleColor:( [untechable.fbAuth isEqualToString:@""] ? defGray : defGreen ) forState:UIControlStateNormal];
     self.btnFacebook.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
@@ -165,6 +153,34 @@
     self.btnLinkedin.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
     
 }
+#pragma mark - timeStamp to days or hours coverter
+-(NSString *) calculateHoursDays:(NSString *) startTime endTime:(NSString *)endTime {
+    int totalHoursDays;
+    long start = [startTime longLongValue];
+    long end = [endTime longLongValue];
+    
+    NSString *daysOrHoursToBeShown;
+    int OneHour =  60 * 60;
+    int OneDay  =  60 * 60 * 24;
+    long diff = labs(end  - start);
+    totalHoursDays = round(diff/OneHour);
+    if(totalHoursDays>48){
+        
+        totalHoursDays = round(diff/OneDay);
+        daysOrHoursToBeShown = [NSString stringWithFormat:@"%i days", totalHoursDays];
+        
+    }else if(totalHoursDays<2){
+        
+        daysOrHoursToBeShown = [NSString stringWithFormat:@"%i hour", totalHoursDays];
+    
+    }else{
+        daysOrHoursToBeShown = [NSString stringWithFormat:@"%i hours", totalHoursDays];
+    }
+    
+    NSLog(@"Number of days or hours: %@", daysOrHoursToBeShown);
+    return daysOrHoursToBeShown;
+}
+
 #pragma mark -  Navigation functions
 
 - (void)setNavigationDefaults{
