@@ -744,7 +744,7 @@
 - (void)addUpperBorder
 {
     CALayer *upperBorder = [CALayer layer];
-    upperBorder.backgroundColor = [[UIColor grayColor] CGColor];
+    upperBorder.backgroundColor = [[UIColor lightGrayColor] CGColor];
     upperBorder.frame = CGRectMake(0, 0, CGRectGetWidth(_pickerCloseBtn.frame), 1.0f);
     [_pickerCloseBtn.layer addSublayer:upperBorder];
 }
