@@ -162,6 +162,9 @@
             break;
         }
     }
+    if([searchTextField isFirstResponder]){
+        [searchTextField resignFirstResponder];
+    }
 }
 
 -(void)storeSceenVarsInDic
@@ -272,6 +275,11 @@
         socialnetwork.untechable = untechable;
         [self.navigationController pushViewController:socialnetwork animated:YES];
     }
+    
+    if([searchTextField isFirstResponder]){
+        [searchTextField resignFirstResponder];
+    }
+
 }
 
 -(void)btnNextTouchStart{
