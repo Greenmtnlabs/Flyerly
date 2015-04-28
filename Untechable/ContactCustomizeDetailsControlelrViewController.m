@@ -587,4 +587,17 @@ shouldChangeTextInRange:(NSRange)range
     return headerView;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1)
+    {
+            return 120.f;
+    }
+    else
+    {
+        return 80.f;
+    }
+    return 0;
+}
+
 @end
