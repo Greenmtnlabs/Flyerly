@@ -178,7 +178,8 @@ SocialStatusCron.setup = function(app) {
 			var smsText =   smsBody + " " + contacts[i].customTextForContact;
 			var callText =  callBody + " " + contacts[i].customTextForContact;
 			var phones = contacts[i].phoneNumbers;
-
+				logger.info("SMS TEXT: " + smsText);
+				logger.info("Call Text: " + callText);
 			for ( var j=0; j<phones.length; j++ ) {
 				var type = phones[j][0];
 				var toNumber = phones[j][1];
