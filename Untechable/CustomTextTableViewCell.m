@@ -52,6 +52,12 @@ ContactsCustomizedModal *contactModal_;
     {
         return NO;
     }
+
+    if([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+
     return YES;
 }
 
