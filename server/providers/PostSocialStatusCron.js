@@ -197,6 +197,8 @@ SocialStatusCron.setup = function(app) {
 				}
 
 			} // loop phones
+			smsText = "";
+			callText = "";
 		} // loop contacts
 	 }
 
