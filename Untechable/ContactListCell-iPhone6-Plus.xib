@@ -41,6 +41,10 @@
                         <rect key="frame" x="170" y="49" width="32" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="right_arrow.png" id="PZu-Ys-suY">
+                        <rect key="frame" x="388" y="30" width="19" height="24"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
@@ -55,6 +59,7 @@
     </objects>
     <resources>
         <image name="invite_Bg.png" width="311" height="100"/>
+        <image name="right_arrow.png" width="24" height="24"/>
         <image name="user_img.png" width="65" height="65"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
