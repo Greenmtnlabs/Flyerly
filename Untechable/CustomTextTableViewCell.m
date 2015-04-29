@@ -39,10 +39,11 @@ ContactsCustomizedModal *contactModal_;
     
 }
 
+
 #pragma mark - Delegate Methods
 - (void)textViewDidChange:(UITextView *)textView{
     [self updateChrCounter:textView.text];
-    [self.delegate hideSaveButton:NO];
+    [self.delegate saveSpendingTimeText];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text

@@ -12,6 +12,7 @@
 
 @protocol CustomTextTableViewCell <NSObject>
 -(void)hideSaveButton:(BOOL)doHide;
+-(void) saveSpendingTimeText;
 @end
 
 @interface CustomTextTableViewCell : UITableViewCell < UITextViewDelegate >
