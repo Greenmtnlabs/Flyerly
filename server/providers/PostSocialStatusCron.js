@@ -344,9 +344,7 @@ SocialStatusCron.setup = function(app) {
 		else{
 			FB.setAccessToken( fbAuth );
 
-			var totalDaysHours = calculateHoursDays(curEvent.startTime, curEvent.endTime);
-			var body = "I am #Untechable for " + totalDaysHours + ", " + curEvent.spendingTimeTxt;//'My first post using facebook-node-sdk';
-			FB.api('me/feed', 'post', { message: body}, function (res2) {
+			FB.api('me/feed', 'post', { message: socialStatus}, function (res2) {
 			
 			  if(!res2 || res2.error) {
 				  var msg = (!res2) ? ( {a:"Fb posting error occurred."} ) : ( {a:"Fb posting error occurred: ", b:res2.error} );
