@@ -186,9 +186,13 @@
             }
         }
         
+        //cell.contact_Name.frame = CGRectMake(20,20,200,800);
+
+        NSString *valueToBeShown =[ NSString stringWithFormat:@"Message to %@\n",contactModal.name];
+        [cell setCellValues:valueToBeShown ContactImage:contactModal.img];
+        
         cell.contact_Name.numberOfLines = 0;
         [cell.contact_Name sizeToFit];
-        [cell setCellValues:contactModal.name ContactImage:contactModal.img];
         
         return cell;
     }else if ( indexPath.section == 1 ){

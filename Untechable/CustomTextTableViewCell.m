@@ -48,7 +48,7 @@ ContactsCustomizedModal *contactModal_;
             return YES;
         }
     }
-    else if([[textView text] length] > 124)
+    else if([[textView text] length] > 123)
     {
         return NO;
     }

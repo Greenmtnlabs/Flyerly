@@ -55,6 +55,9 @@
     if ( currentlyEditingContacts == nil ){
         currentlyEditingContacts = [[NSMutableArray alloc] init];
     }
+    
+    [searchTextField resignFirstResponder];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -79,6 +82,16 @@
                                       error: &writeError];
     
     [_contactsTable reloadData];
+    
+    //hides the keyboard when navigating between views
+    [searchTextField resignFirstResponder];
+}
+
+/**
+ dismiss keyboard when view will off the screen
+ **/
+- (void)viewWillDisappear:(BOOL)animated{
+    [searchTextField resignFirstResponder];
 }
 
 
@@ -162,6 +175,8 @@
             break;
         }
     }
+    //hide keyboard when going back to view
+    [searchTextField resignFirstResponder];
 }
 
 -(void)storeSceenVarsInDic
@@ -272,6 +287,9 @@
         socialnetwork.untechable = untechable;
         [self.navigationController pushViewController:socialnetwork animated:YES];
     }
+
+     //hides the keyboard when navigating to the next views
+     [searchTextField resignFirstResponder];
 }
 
 -(void)btnNextTouchStart{
