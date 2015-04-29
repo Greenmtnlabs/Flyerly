@@ -14,6 +14,7 @@ ContactsCustomizedModal *contactModal_;
 @implementation CustomTextTableViewCell
 
 @synthesize untechable,customText;
+@synthesize delegate;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
@@ -21,10 +22,14 @@ ContactsCustomizedModal *contactModal_;
     // Configure the view for the selected state
 }
 
--(void)setCellValues :(NSString *)message {
+-(void)setCellValuesWithDeleg :(NSString *)message deleg:(id)deleg {
     self.customText.text = message;
     self.customText.delegate = self;
     [self updateChrCounter:message];
+    
+    if( deleg != nil )
+    self.delegate = deleg;
+        
 }
 
 -(void)updateChrCounter:(NSString *)message {
@@ -34,9 +39,11 @@ ContactsCustomizedModal *contactModal_;
     
 }
 
+
 #pragma mark - Delegate Methods
 - (void)textViewDidChange:(UITextView *)textView{
     [self updateChrCounter:textView.text];
+    [self.delegate saveSpendingTimeText];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text

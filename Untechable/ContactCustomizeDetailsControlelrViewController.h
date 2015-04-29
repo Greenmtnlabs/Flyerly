@@ -32,4 +32,5 @@
 @property (nonatomic,strong)  ContactsListControllerViewController *contactListController;
 @property (nonatomic,strong)  ContactsCustomizedModal *contactModal;
 
+- (void) saveSpendingTimeText;
 @end

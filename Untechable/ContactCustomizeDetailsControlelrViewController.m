@@ -232,7 +232,7 @@
 //        _char_limit.text=[NSString stringWithFormat:@"%i",124-len];
 
         
-        [cell setCellValues:contactModal.customTextForContact];
+        [cell setCellValuesWithDeleg:contactModal.customTextForContact deleg:self];
         
         return cell;
         
@@ -498,6 +498,7 @@
     [editingEmailsWithStatus setObject:tempEmailWithStatus forKey:indexPath];
 }
 
+
 -(IBAction)callButtonTapped:(id) sender
 {
     IsCustomized = YES;
@@ -549,18 +550,14 @@
     [editingPhonesWithStatus setObject:tempPhoneWithStatus forKey:indexPath];
 }
 
-- (BOOL) textViewShouldBeginEditing:(UITextView *)textView {
+- (void) saveSpendingTimeText {
     
     IsCustomized = YES;
     saveButton.hidden = NO;
-    CustomTextTableViewCell *cell = (CustomTextTableViewCell *)[[textView superview] superview];
-    
-    NSIndexPath *indexPath = [_contactDetailsTable indexPathForCell:cell];
-    
-    _contactDetailsTable.frame = CGRectMake(_contactDetailsTable.frame.origin.x, _contactDetailsTable.frame.origin.y, _contactDetailsTable.frame.size.width, _contactDetailsTable.frame.size.height - 190);
-    //[_contactDetailsTable scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    
-    return YES;
+
+    contactModal.customTextForContact = textView.text;
+        //[_contactDetailsTable scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    //return YES;
 }
 
 - (BOOL)textView:(UITextView *)textView

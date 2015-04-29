@@ -157,17 +157,17 @@
 #pragma mark - timeStamp to days or hours coverter
 -(NSString *) calculateHoursDays:(NSString *) startTime endTime:(NSString *)endTime {
     int totalHoursDays;
-    long start = [startTime longLongValue];
-    long end = [endTime longLongValue];
+    double start = [startTime doubleValue];
+    double end = [endTime doubleValue];
     
     NSString *daysOrHoursToBeShown;
     int OneHour =  60 * 60;
     int OneDay  =  60 * 60 * 24;
-    long diff = labs(end  - start);
+    double diff = fabs(end  - start);
     totalHoursDays = round(diff/OneHour);
     if(totalHoursDays>48){
         
-        totalHoursDays = round(diff/OneDay);
+        totalHoursDays = round(diff/OneDay + 0.1);
         daysOrHoursToBeShown = [NSString stringWithFormat:@"%i days", totalHoursDays];
         
     }else if(totalHoursDays<2){
