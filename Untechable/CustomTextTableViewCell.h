@@ -10,12 +10,20 @@
 #import "Untechable.h"
 #import "ContactsCustomizedModal.h"
 
+@protocol CustomTextTableViewCell <NSObject>
+-(void)hideSaveButton:(BOOL)doHide;
+@end
+
 @interface CustomTextTableViewCell : UITableViewCell < UITextViewDelegate >
 
 @property (nonatomic,strong)  Untechable *untechable;
 @property (nonatomic,strong)IBOutlet UITextView *customText;
 
--(void)setCellValues :(NSString *)message;
+-(void)setCellValuesWithDeleg :(NSString *)message deleg:(id)deleg;
 @property (strong, nonatomic) IBOutlet UILabel *char_limit;
+
+
+@property (weak, nonatomic) id deleg;
+@property (weak, nonatomic) id<CustomTextTableViewCell> delegate;
 
 @end

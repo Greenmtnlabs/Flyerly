@@ -32,4 +32,6 @@
 @property (nonatomic,strong)  ContactsListControllerViewController *contactListController;
 @property (nonatomic,strong)  ContactsCustomizedModal *contactModal;
 
+-(void)hideSaveButton:(BOOL)doHide;
+
 @end

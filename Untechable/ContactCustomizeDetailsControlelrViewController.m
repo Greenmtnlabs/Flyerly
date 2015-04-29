@@ -232,7 +232,7 @@
 //        _char_limit.text=[NSString stringWithFormat:@"%i",124-len];
 
         
-        [cell setCellValues:contactModal.customTextForContact];
+        [cell setCellValuesWithDeleg:contactModal.customTextForContact deleg:self];
         
         return cell;
         
@@ -477,7 +477,7 @@
 -(IBAction)emailButtonTapped:(id) sender
 {
     IsCustomized = YES;
-    saveButton.hidden = NO;
+    [self hideSaveButton:NO];
     EmailCell *emailCell;
     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.contactDetailsTable];
     NSIndexPath *indexPath = [self.contactDetailsTable indexPathForRowAtPoint:buttonPosition];
@@ -496,6 +496,11 @@
     }
     
     [editingEmailsWithStatus setObject:tempEmailWithStatus forKey:indexPath];
+}
+
+-(void)hideSaveButton:(BOOL)doHide
+{
+    saveButton.hidden = doHide;
 }
 
 -(IBAction)callButtonTapped:(id) sender
@@ -549,7 +554,7 @@
     [editingPhonesWithStatus setObject:tempPhoneWithStatus forKey:indexPath];
 }
 
-- (BOOL) textViewShouldBeginEditing:(UITextView *)textView {
+- (void) textViewShouldBeginEditing:(UITextView *)textView {
     
     IsCustomized = YES;
     saveButton.hidden = NO;
@@ -559,8 +564,6 @@
     
     _contactDetailsTable.frame = CGRectMake(_contactDetailsTable.frame.origin.x, _contactDetailsTable.frame.origin.y, _contactDetailsTable.frame.size.width, _contactDetailsTable.frame.size.height - 190);
     //[_contactDetailsTable scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    
-    return YES;
 }
 
 - (BOOL)textView:(UITextView *)textView
