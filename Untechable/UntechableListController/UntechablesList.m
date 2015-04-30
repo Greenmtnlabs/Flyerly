@@ -500,7 +500,7 @@ int indexArrayS2[];
     // now sort it out on the time stamp
     for( int i = 0; i < timeStampArray.count; i++ ){
         for( int j = 0; j<timeStampArray.count-1; j++ ){
-            if( sortedTimeStamps[j] > sortedTimeStamps [i] ){
+            if( sortedTimeStamps[j] < sortedTimeStamps [i] ){
                 tempVal = sortedTimeStamps[j];
                 sortedTimeStamps[j] = sortedTimeStamps[i];
                 sortedTimeStamps[i] = tempVal;
