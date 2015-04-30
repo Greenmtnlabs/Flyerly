@@ -491,12 +491,16 @@ int indexArrayS2[];
     
     // get all the values from mutable array and change it into integer array
     for( int i = 0; i < timeStampArray.count; i++){
+        //will be used as unsorted array to compare
         timeStamps[i] = [timeStampArray[i] integerValue];
-        //for sorted array
+        
+        // will be used as sorted array to compare
         sortedTimeStamps[i] = [timeStampArray[i] integerValue];
     }
     
+    // temprary variable that will hold down the values when sorting being done
     int tempVal;
+    
     // now sort it out on the time stamp
     for( int i = 0; i < timeStampArray.count; i++ ){
         for( int j = 0; j<timeStampArray.count-1; j++ ){
@@ -507,13 +511,8 @@ int indexArrayS2[];
             }
         }
     }
-    
-    // testing
-    //print out the sorted array
-    for( int i = 0; i < timeStampArray.count; i++ ){
-        NSLog(@" UnSorted Array is %i and Sorted %i", timeStamps[i], sortedTimeStamps[i] );
-    }
-    
+
+    // temporary array that will hold indexes of values
     int indexArray [timeStampArray.count];
     if( [sortFor isEqual:@"sec1"]){
         indexArrayS1 [timeStampArray.count];
@@ -522,7 +521,7 @@ int indexArrayS2[];
     }
     
     
-    //now getting the index of arrays
+    //now getting the indexes of array and save it.
     for( int i = 0; i<timeStampArray.count; i++){
         for( int j = 0; j<timeStampArray.count; j++){
             
@@ -542,9 +541,9 @@ int indexArrayS2[];
     }
     
     // testing
-    //print out the sorted array
+    //print out all the arrays
     for( int i = 0; i < timeStampArray.count; i++ ){
-        NSLog(@" Index array is %i", indexArray[i] );
+        NSLog(@" Index array is %i, sorted array %i, unsorted array %i", indexArray[i], sortedTimeStamps[i], timeStamps[i] );
     }
     
 
