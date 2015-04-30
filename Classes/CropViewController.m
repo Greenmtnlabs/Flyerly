@@ -83,7 +83,7 @@
 
     // Configure crop view. We may get big pixels with this factor!
     self.maximumScaleFactor = 10.0;
-    self.cropView.allowAspectFit = YES;
+    self.cropView.allowAspectFit = NO;
     
     // Use the image from filters for cropping.
     [self.filterView setImage:self.image];
