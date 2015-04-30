@@ -25,6 +25,8 @@
 @implementation UntechablesList
 
 @synthesize untechablesTable;
+int indexArrayS1[];
+int indexArrayS2[];
 
 #pragma mark -  Default functions
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -364,9 +366,11 @@
         NSMutableDictionary *tempDict = nil;
         
         if ( indexPath.section == 0 ){
-             tempDict = [sectionOneArray objectAtIndex:indexPath.row];
+             tempDict = [sectionOneArray objectAtIndex:indexArrayS1[indexPath.row]];
         }else if ( indexPath.section == 1 ){
-             tempDict = [sectionTwoArray objectAtIndex:indexPath.row];
+            int r = (int)indexPath.row;
+            NSLog(@"r %i",r);
+             tempDict = [sectionTwoArray objectAtIndex:indexArrayS2[r]];
         }
         
         //Setting the packagename,packageprice,packagedesciption values for cell view
@@ -455,6 +459,8 @@
     
     sectionOneArray = [[NSMutableArray alloc] init];
     sectionTwoArray = [[NSMutableArray alloc] init];
+    NSMutableArray *currentTimeStamps1 = [[NSMutableArray alloc] init];
+    NSMutableArray *currentTimeStamps2 = [[NSMutableArray alloc] init];
     
     allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
     
@@ -465,10 +471,85 @@
         NSDate *startDate = [untechable.commonFunctions timestampStrToNsDate:[tempDict objectForKey:@"startDate"]];
         if ( ![untechable.commonFunctions date1IsSmallerThenDate2:startDate date2:currentDate] ){
             [sectionOneArray addObject:tempDict];
+            [currentTimeStamps1 addObject:[tempDict valueForKey:@"startDate"]];
         }else{
             [sectionTwoArray addObject:tempDict];
+            [currentTimeStamps2 addObject:[tempDict valueForKey:@"startDate"]];
+        }
+        
+    }
+    
+    [self sortOutTheTimeStamp:currentTimeStamps1 sortFor:@"sec1"];
+    [self sortOutTheTimeStamp:currentTimeStamps2 sortFor:@"sec2"];
+    
+}
+
+//getting the time stamps from the array and sorting it out!
+-(void)sortOutTheTimeStamp:(NSMutableArray *)timeStampArray sortFor:(NSString *)sortFor{
+    int timeStamps [timeStampArray.count];
+    int sortedTimeStamps [timeStampArray.count];
+    
+    // get all the values from mutable array and change it into integer array
+    for( int i = 0; i < timeStampArray.count; i++){
+        timeStamps[i] = [timeStampArray[i] integerValue];
+        //for sorted array
+        sortedTimeStamps[i] = [timeStampArray[i] integerValue];
+    }
+    
+    int tempVal;
+    // now sort it out on the time stamp
+    for( int i = 0; i < timeStampArray.count; i++ ){
+        for( int j = 0; j<timeStampArray.count-1; j++ ){
+            if( sortedTimeStamps[j] > sortedTimeStamps [i] ){
+                tempVal = sortedTimeStamps[j];
+                sortedTimeStamps[j] = sortedTimeStamps[i];
+                sortedTimeStamps[i] = tempVal;
+            }
         }
     }
+    
+    // testing
+    //print out the sorted array
+    for( int i = 0; i < timeStampArray.count; i++ ){
+        NSLog(@" UnSorted Array is %i and Sorted %i", timeStamps[i], sortedTimeStamps[i] );
+    }
+    
+    int indexArray [timeStampArray.count];
+    if( [sortFor isEqual:@"sec1"]){
+        indexArrayS1 [timeStampArray.count];
+    }else{
+        indexArrayS2 [timeStampArray.count];
+    }
+    
+    
+    //now getting the index of arrays
+    for( int i = 0; i<timeStampArray.count; i++){
+        for( int j = 0; j<timeStampArray.count; j++){
+            
+            if( sortedTimeStamps[i] == timeStamps[j] ){
+                indexArray[i] = j;
+                
+                if( [sortFor isEqual:@"sec1"]){
+                    indexArrayS1[i] = j;
+                }else{
+                    indexArrayS2[i] = j;
+                }
+                
+                
+                break;
+            }
+        }
+    }
+    
+    // testing
+    //print out the sorted array
+    for( int i = 0; i < timeStampArray.count; i++ ){
+        NSLog(@" Index array is %i", indexArray[i] );
+    }
+    
+
+    
+    
 }
 
 // Customize the number of rows in the table view.
