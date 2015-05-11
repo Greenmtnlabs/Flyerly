@@ -427,7 +427,8 @@ int indexArrayS2[];
     
     if ( indexPath.section == 0 ){
         
-        NSMutableDictionary *tempDict = [sectionOneArray objectAtIndex:indexPath.row];
+        NSMutableDictionary *tempDict = [sectionOneArray  objectAtIndex:indexArrayS1[indexPath.row]];
+       
 
         AddUntechableController *addUntechable;
         addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
@@ -439,7 +440,7 @@ int indexArrayS2[];
         
     }else if ( indexPath.section == 1 ){
         
-        NSMutableDictionary *tempDict = [sectionTwoArray objectAtIndex:indexPath.row];
+        NSMutableDictionary *tempDict = [sectionTwoArray  objectAtIndex:indexArrayS2[indexPath.row]];
         
         AddUntechableController *addUntechable;
         addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
