@@ -8,8 +8,6 @@
 	<string>${PRODUCT_NAME}</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleIcons</key>
-	<dict/>
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>icon-40.png</string>
@@ -22,6 +20,8 @@
 		<string>icon@1024.png</string>
 		<string>icon-60@2x.png</string>
 	</array>
+	<key>CFBundleIcons</key>
+	<dict/>
 	<key>CFBundleIcons~ipad</key>
 	<dict/>
 	<key>CFBundleIdentifier</key>
@@ -46,7 +46,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>23</string>
+	<string>25</string>
 	<key>FacebookAppID</key>
 	<string>988650031150166</string>
 	<key>FacebookDisplayName</key>
