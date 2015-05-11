@@ -333,8 +333,8 @@
              [self.navigationController pushViewController:phoneSetup animated:YES];*/
         }
     }else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Why getting Untechable?"
-                                                        message:@"You must need to specify why are you getting Untechable..."
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"What are you going untechable for?"
+                                                        message:@"You must specify what you'll be doing with your time away from technology before proceeding."
                                                        delegate:nil
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
