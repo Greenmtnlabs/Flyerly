@@ -415,7 +415,7 @@
 
         
         if( [untechable.commonFunctions date1IsSmallerThenDate2:endD date2:statD] ){
-            endD = [statD dateByAddingTimeInterval:(60*120)];
+            endD = [statD dateByAddingTimeInterval:(60*60*24)];
             untechable.endDate = [untechable.commonFunctions nsDateToTimeStampStr:endD]; //current time +2hr
             NSString *dateStrUpdated = [untechable.dateFormatter stringFromDate:endD];
             [_btnEndTime setTitle:dateStrUpdated forState:UIControlStateNormal];
@@ -650,7 +650,7 @@
     //[self showHideDateTimePicker:!([_cbNoEndDate isSelected])];
     
     if( !([_cbNoEndDate isSelected]) ){
-        untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*120)] ]; //current time +2hr
+        untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*60*24)] ]; //current time +2hr
     }
     [self pickerSetAcTo:@"_btnEndTime"];
 }
