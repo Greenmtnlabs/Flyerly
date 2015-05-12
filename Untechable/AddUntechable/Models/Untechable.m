@@ -246,7 +246,7 @@
         timezoneOffset  = ( dic[@"timezoneOffset"] ) ? dic[@"timezoneOffset"] : [commonFunctions getTimeZoneOffset];
         spendingTimeTxt = ( dic[@"spendingTimeTxt"] ) ? dic[@"spendingTimeTxt"] : @"";
         startDate       = ( dic[@"startDate"] ) ? dic[@"startDate"] : [commonFunctions nsDateToTimeStampStr: [NSDate date] ]; //start now
-        endDate         = ( dic[@"endDate"] ) ? dic[@"endDate"] : [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*60*120)] ]; //current time +1 day
+        endDate         = ( dic[@"endDate"] ) ? dic[@"endDate"] : [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*60*24)] ]; //current time +1 day
         hasEndDate      = ([dic[@"hasEndDate"] isEqualToString:@"NO"]) ? NO : YES;
         
         //Screen2 vars

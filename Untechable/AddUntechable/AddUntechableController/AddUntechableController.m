@@ -629,7 +629,7 @@
     
     [_btnEndTime setTitleColor:defGreen forState:UIControlStateNormal];
     _btnEndTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
-    [_btnEndTime setTitle:[untechable.commonFunctions timestampStrToAppDate:untechable.endDate] forState:UIControlStateNormal];
+    [_btnEndTime setTitle:[untechable.commonFunctions timestampStrToAppDate:untechable.startDate] forState:UIControlStateNormal];
     
     [_lblNoEndDate setTextColor:defGray];
     _lblNoEndDate.font = [UIFont fontWithName:APP_FONT size:14];
