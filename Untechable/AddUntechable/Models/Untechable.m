@@ -285,6 +285,17 @@
     //NSLog(@"dic: %@", dic);
 }
 
+-(NSDate *)getCurrentDate{
+    NSString *timestamp = [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970]];
+    
+    NSDateFormatter *dformat = [[NSDateFormatter alloc]init];
+    [dformat setDateFormat:DATE_FORMATE_1];
+    
+    NSDate *today = [dformat dateFromString:timestamp];
+
+    return today;
+}
+
 /*
  Set default values for new event
  */
