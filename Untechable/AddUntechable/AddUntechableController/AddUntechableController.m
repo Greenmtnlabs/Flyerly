@@ -103,7 +103,7 @@
 {
     if( [callFor isEqualToString:@"_btnStartTime"] ) {
         pickerOpenFor = @"_btnStartTime";
-        [self.picker setDate:[untechable getCurrentDate] animated:YES];
+        [self.picker setDate:[untechable.commonFunctions timestampStrToNsDate:untechable.startDate] animated:YES];
         [self dateChanged];
     }
     else if( [callFor isEqualToString:@"_btnEndTime"] ) {
