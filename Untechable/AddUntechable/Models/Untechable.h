@@ -80,4 +80,7 @@
 #pragma mark -  LinkedIn functions
 -(void)linkedInFlushData;
 -(void)linkedInUpdateData:(NSString *)linkedInAccessToken;
+
+#pragma mark - current Date method
+-(NSDate *)getCurrentDate;
 @end
