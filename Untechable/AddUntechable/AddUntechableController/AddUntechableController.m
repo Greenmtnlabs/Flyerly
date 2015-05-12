@@ -103,7 +103,7 @@
 {
     if( [callFor isEqualToString:@"_btnStartTime"] ) {
         pickerOpenFor = @"_btnStartTime";
-        [self.picker setDate:[untechable.commonFunctions timestampStrToNsDate:untechable.startDate] animated:YES];
+        [self.picker setDate:[untechable getCurrentDate] animated:YES];
         [self dateChanged];
     }
     else if( [callFor isEqualToString:@"_btnEndTime"] ) {
@@ -629,7 +629,7 @@
     
     [_btnEndTime setTitleColor:defGreen forState:UIControlStateNormal];
     _btnEndTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
-    [_btnEndTime setTitle:[untechable.commonFunctions timestampStrToAppDate:untechable.startDate] forState:UIControlStateNormal];
+    [_btnEndTime setTitle:[untechable.commonFunctions timestampStrToAppDate:untechable.endDate] forState:UIControlStateNormal];
     
     [_lblNoEndDate setTextColor:defGray];
     _lblNoEndDate.font = [UIFont fontWithName:APP_FONT size:14];

@@ -285,15 +285,12 @@
     //NSLog(@"dic: %@", dic);
 }
 
+/**
+ Get the current date of device
+ **/
 -(NSDate *)getCurrentDate{
-    NSString *timestamp = [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970]];
-    
-    NSDateFormatter *dformat = [[NSDateFormatter alloc]init];
-    [dformat setDateFormat:DATE_FORMATE_1];
-    
-    NSDate *today = [dformat dateFromString:timestamp];
-
-    return today;
+    NSDate *date = [NSDate date];
+    return date;
 }
 
 /*
