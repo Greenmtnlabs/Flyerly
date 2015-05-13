@@ -307,7 +307,7 @@ SocialStatusCron.setup = function(app) {
 				for(var j=0; j<emailAddresses.length; j++ ){
 					//send this user email
 					var toEmail = emailAddresses[j];
-					var body = "Hello " + toName + ", \n\n" + "Your contact " + myName + " is untechable for " + totalDaysHours + " with this reason:\n\n" + reason + "\n\nThank you,\nTeam Untechable \n\nGet the untechable app to easily manage your offline time: http://flyer.ly";
+					var body = "Hello " + toName + ", \n\n" + "Your contact " + myName + " is untechable for " + totalDaysHours + " with this reason:\n\n" + reason + "\n\nThank you,\nTeam Untechable \n\nGet the untechable app to easily manage your offline time: hhttp://Unte.ch";
 					logger.info("Sending email to: " + toEmail);
 					var mailOptions = {
 					    from: myName+" < "+myEmail+" >", // sender address
