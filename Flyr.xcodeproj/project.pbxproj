@@ -918,8 +918,6 @@
 		248A3638193F26280005FCAD /* bg_tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 248A3636193F26280005FCAD /* bg_tab@2x.png */; };
 		248A3639193F26280005FCAD /* image_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 248A3637193F26280005FCAD /* image_icon@2x.png */; };
 		249464DF1A0CFEFE00C1247D /* Backgrounds-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 249464DE1A0CFEFE00C1247D /* Backgrounds-iPhone6.xib */; };
-		2498965E1A1B773A0001BF81 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2498965D1A1B773A0001BF81 /* ParseFacebookUtils.framework */; };
-		249896601A1B77580001BF81 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2498965F1A1B77580001BF81 /* ParseUI.framework */; };
 		249F1F8A193F55D50072835E /* 07_camera_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 249F1F5F193F55D50072835E /* 07_camera_selected@2x.png */; };
 		249F1F8B193F55D50072835E /* 07_camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 249F1F60193F55D50072835E /* 07_camera@2x.png */; };
 		249F1F8C193F55D50072835E /* 07_height_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 249F1F61193F55D50072835E /* 07_height_selected@2x.png */; };
@@ -1236,7 +1234,6 @@
 		4986857418B500BB002113E4 /* AssetsGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4986857318B500BB002113E4 /* AssetsGroupViewController.m */; };
 		4986857718B50657002113E4 /* CustomAssetsGroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4986857518B50657002113E4 /* CustomAssetsGroupView.xib */; };
 		4986857818B50657002113E4 /* CustomAssetThumbnailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4986857618B50657002113E4 /* CustomAssetThumbnailView.xib */; };
-		498BAB6C1885B21800221DFB /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498BAB6B1885B21800221DFB /* Parse.framework */; };
 		49997FF717DF786400CF1038 /* ParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49997FF617DF786400CF1038 /* ParentViewController.m */; };
 		49997FFB17E07FA100CF1038 /* SKProduct+LocalPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = 49997FFA17E07FA100CF1038 /* SKProduct+LocalPrice.m */; };
 		49B8897D1886524D003766AD /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B8897C1886524D003766AD /* LoadingView.m */; };
@@ -2993,7 +2990,6 @@
 				0FD78050177B398800DF5060 /* AudioToolbox.framework in Frameworks */,
 				243AA72219DE8302004A5613 /* AdSupport.framework in Frameworks */,
 				2025FAB9186074F300CC9188 /* CoreMotion.framework in Frameworks */,
-				249896601A1B77580001BF81 /* ParseUI.framework in Frameworks */,
 				2025FAB7186074D100CC9188 /* CoreText.framework in Frameworks */,
 				2025FAB51860742700CC9188 /* CoreMedia.framework in Frameworks */,
 				0DEE01A2108ED97400967DA5 /* Security.framework in Frameworks */,
@@ -3006,7 +3002,6 @@
 				0D335121109ABB6A0082810A /* libxml2.dylib in Frameworks */,
 				65A21268172981A000ED0B9A /* ImageIO.framework in Frameworks */,
 				65A212461729496F00ED0B9A /* AssetsLibrary.framework in Frameworks */,
-				2498965E1A1B773A0001BF81 /* ParseFacebookUtils.framework in Frameworks */,
 				65A2CFC117257480005C03B7 /* Social.framework in Frameworks */,
 				65C7A50517216E71003F1A84 /* MobileCoreServices.framework in Frameworks */,
 				0D33511D109ABB6A0082810A /* AddressBookUI.framework in Frameworks */,
@@ -3016,7 +3011,6 @@
 				0DF3A542108E0E5C00D6C887 /* libsqlite3.0.dylib in Frameworks */,
 				0DEE01A0108ED97400967DA5 /* QuartzCore.framework in Frameworks */,
 				0D33511F109ABB6A0082810A /* CFNetwork.framework in Frameworks */,
-				498BAB6C1885B21800221DFB /* Parse.framework in Frameworks */,
 				30D58E3510FB260200E0C7E8 /* MediaPlayer.framework in Frameworks */,
 				E8E424ACA7CB4913890F4F3B /* libPods.a in Frameworks */,
 			);
@@ -6689,13 +6683,13 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "bd30fa69-8d52-46f4-88da-12b5088d397c";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "bd30fa69-8d52-46f4-88da-12b5088d397c";
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "arm64 armv7 armv7s i386";
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = "Ad Hoc";
 		};
@@ -6749,7 +6743,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "bd30fa69-8d52-46f4-88da-12b5088d397c";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/**";
-				VALID_ARCHS = "armv7 armv7s armv8 x86_64 arm64";
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = "Ad Hoc";
 		};
@@ -6794,7 +6788,7 @@
 					"$(PROJECT_DIR)/ExternalFrameworks/Flurry",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-lc++",
@@ -6806,7 +6800,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos7.0]" = "0fa3dff2-ecfb-4d91-bbaf-ec80632f2898";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/**";
-				VALID_ARCHS = "armv7 armv7s armv8 x86_64 arm64";
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -6859,7 +6853,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "bd30fa69-8d52-46f4-88da-12b5088d397c";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/**";
-				VALID_ARCHS = "armv7 armv7s armv8 x86_64 arm64";
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Release;
 		};
@@ -6882,7 +6876,7 @@
 				PROVISIONING_PROFILE = "0fa3dff2-ecfb-4d91-bbaf-ec80632f2898";
 				"PROVISIONING_PROFILE[sdk=iphoneos7.0]" = "0fa3dff2-ecfb-4d91-bbaf-ec80632f2898";
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "arm64 armv7 armv7s i386";
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -6905,7 +6899,7 @@
 				PROVISIONING_PROFILE = "bd30fa69-8d52-46f4-88da-12b5088d397c";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "bd30fa69-8d52-46f4-88da-12b5088d397c";
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "arm64 armv7 armv7s i386";
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Release;
 		};
