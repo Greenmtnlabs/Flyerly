@@ -1,1 +1,0 @@
-../../../NBUImagePicker/Source/MediaInfo/NBUMediaInfo.h

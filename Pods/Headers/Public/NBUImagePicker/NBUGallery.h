@@ -1,1 +1,0 @@
-../../../NBUImagePicker/Source/Gallery/NBUGallery.h

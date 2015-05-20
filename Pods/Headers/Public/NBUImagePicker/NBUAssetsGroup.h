@@ -1,1 +1,0 @@
-../../../NBUImagePicker/Source/Assets/NBUAssetsGroup.h
