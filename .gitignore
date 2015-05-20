@@ -166,7 +166,7 @@ xcuserdata
 # ...none. Everything is now explained.
 
 # Pods. Now adding the pod folder for jenkins auto build
-#Pods/
+Pods/
 
 
 
