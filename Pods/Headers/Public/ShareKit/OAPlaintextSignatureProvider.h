@@ -1,1 +1,1 @@
-../../../ShareKit/Classes/ShareKit/Core/Helpers/OAuth/OAPlaintextSignatureProvider.h
+../../../ShareKit/Classes/ShareKit/Core NoARC/Helpers/OAuth/OAPlaintextSignatureProvider.h

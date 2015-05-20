@@ -497,6 +497,25 @@ BOOL SHKinit;
     return result;
 }
 
++ (NSMutableArray *)sharersToShowInActionSheetForItem:(SHKItem *)item {
+    
+    NSMutableArray *result = [NSMutableArray arrayWithCapacity:0];
+    NSArray *favoriteSharers = [SHK favoriteSharersForItem:item];
+    
+    // Add buttons for each favorite sharer
+    id class;
+    for(NSString *sharerId in favoriteSharers)
+    {
+        //Do not add buttons for sharers, which are not able to share item
+        class = NSClassFromString(sharerId);
+        if ([class canShare] && [class canShareItem:item])
+        {
+            [result addObject:sharerId];
+        }
+    }
+    return result;    
+}
+
 #pragma mark -
 #pragma mark Credentials
 
@@ -504,45 +523,25 @@ BOOL SHKinit;
 
 + (NSString *)getAuthValueForKey:(NSString *)key forSharer:(NSString *)sharerId
 {
-#if TARGET_IPHONE_SIMULATOR
-	// Using NSUserDefaults for storage is very insecure, but because Keychain only exists on a device
-	// we use NSUserDefaults when running on the simulator to store objects.  This allows you to still test
-	// in the simulator.  You should NOT modify in a way that does not use keychain when actually deployed to a device.
-	return [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@%@%@",SHKCONFIG(authPrefix),sharerId,key]];
-#else
-	return [SSKeychain passwordForService:[NSString stringWithFormat:@"%@%@",SHKCONFIG(authPrefix),sharerId] 
-								  account:key 
-									error:nil ];
-#endif
+
+    return [SSKeychain passwordForService:[NSString stringWithFormat:@"%@%@",SHKCONFIG(authPrefix),sharerId]
+                                  account:key
+                                    error:nil ];
 }
 
 + (void)setAuthValue:(NSString *)value forKey:(NSString *)key forSharer:(NSString *)sharerId
 {
-#if TARGET_IPHONE_SIMULATOR
-	// Using NSUserDefaults for storage is very insecure, but because Keychain only exists on a device
-	// we use NSUserDefaults when running on the simulator to store objects.  This allows you to still test
-	// in the simulator.  You should NOT modify in a way that does not use keychain when actually deployed to a device.
-	[[NSUserDefaults standardUserDefaults] setObject:value forKey:[NSString stringWithFormat:@"%@%@%@",SHKCONFIG(authPrefix),sharerId,key]];
-#else
-	[SSKeychain setPassword:value 
-				 forService:[NSString stringWithFormat:@"%@%@",SHKCONFIG(authPrefix),sharerId] 
-					account:key 
-					  error:nil];
-#endif
+    [SSKeychain setPassword:value
+                 forService:[NSString stringWithFormat:@"%@%@",SHKCONFIG(authPrefix),sharerId]
+                    account:key
+                      error:nil];
 }
 
 + (void)removeAuthValueForKey:(NSString *)key forSharer:(NSString *)sharerId
 {
-#if TARGET_IPHONE_SIMULATOR
-	// Using NSUserDefaults for storage is very insecure, but because Keychain only exists on a device
-	// we use NSUserDefaults when running on the simulator to store objects.  This allows you to still test
-	// in the simulator.  You should NOT modify in a way that does not use keychain when actually deployed to a device.
-	[[NSUserDefaults standardUserDefaults] removeObjectForKey:[NSString stringWithFormat:@"%@%@%@",SHKCONFIG(authPrefix),sharerId,key]];
-#else
-	[SSKeychain deletePasswordForService:[NSString stringWithFormat:@"%@%@",SHKCONFIG(authPrefix),sharerId] 
-								 account:key 
-								   error:nil];
-#endif
+    [SSKeychain deletePasswordForService:[NSString stringWithFormat:@"%@%@",SHKCONFIG(authPrefix),sharerId]
+                                 account:key
+                                   error:nil];
 }
 
 + (void)logoutOfAll

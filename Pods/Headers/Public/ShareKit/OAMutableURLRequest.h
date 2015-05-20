@@ -1,1 +1,1 @@
-../../../ShareKit/Classes/ShareKit/Core/Helpers/OAuth/OAMutableURLRequest.h
+../../../ShareKit/Classes/ShareKit/Core NoARC/Helpers/OAuth/OAMutableURLRequest.h

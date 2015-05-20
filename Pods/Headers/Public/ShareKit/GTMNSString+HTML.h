@@ -1,1 +1,1 @@
-../../../ShareKit/Classes/ShareKit/Core/Categories/GTMNSString+HTML.h
+../../../ShareKit/Classes/ShareKit/Core NoARC/Categories/GTMNSString+HTML.h

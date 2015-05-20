@@ -399,7 +399,10 @@ static CGSize _thumbnailSize;
 
 + (void)initialize
 {
-    _thumbnailSize = CGSizeMake(100.0, 100.0);
+    if (self == [NBUDirectoryAssetsGroup class])
+    {
+        _thumbnailSize = CGSizeMake(100.0, 100.0);
+    }
 }
 
 @synthesize name = _name;
@@ -470,7 +473,7 @@ static CGSize _thumbnailSize;
     }
     
     // Async create assets
-    dispatch_async(dispatch_get_current_queue(), ^
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
     {
         [self assetsWithFileURLs:contents
              incrementalLoadSize:loadSize

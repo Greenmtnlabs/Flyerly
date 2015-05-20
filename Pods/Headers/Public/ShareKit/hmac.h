@@ -1,1 +1,1 @@
-../../../ShareKit/Classes/ShareKit/Core/Helpers/OAuth/Crypto/hmac.h
+../../../ShareKit/Classes/ShareKit/Core NoARC/Helpers/OAuth/Crypto/hmac.h

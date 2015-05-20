@@ -139,6 +139,8 @@ static CGSize g_buttonSize;
     [_session release];
     [_user release];
     [_permissions release];
+    [_readPermissions release];
+    [_publishPermissions release];
 
     [super dealloc];
 }
@@ -202,15 +204,9 @@ static CGSize g_buttonSize;
     [self initializeBlocks];
 
     if ([FBSession activeSessionIfOpen] == nil) {
-        
-        NSArray *permissions = [[NSArray alloc] initWithObjects:
-                                @"user_birthday",@"friends_hometown",
-                                @"friends_birthday",@"friends_location",
-                                nil];
-        
         // if our session has a cached token ready, we open it; note that it is important
         // that we open the session before notification wiring is in place
-        [FBSession openActiveSessionWithReadPermissions:permissions
+        [FBSession openActiveSessionWithReadPermissions:nil
                                            allowLoginUI:NO
                                       completionHandler:self.sessionStateHandler];
     }

@@ -1,1 +1,1 @@
-../../../ShareKit/Classes/ShareKit/Core/Helpers/OAuth/OAServiceTicket.h
+../../../ShareKit/Classes/ShareKit/Core NoARC/Helpers/OAuth/OAServiceTicket.h

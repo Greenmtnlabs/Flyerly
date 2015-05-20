@@ -1,1 +1,1 @@
-../../../ShareKit/Classes/ShareKit/Core/Helpers/OAuth/Crypto/Base64Transcoder.h
+../../../ShareKit/Classes/ShareKit/Core NoARC/Helpers/OAuth/Crypto/Base64Transcoder.h

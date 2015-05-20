@@ -5,6 +5,17 @@ The PayPal iOS SDK makes it easy to add PayPal and credit card payments to mobil
 
 ![SDK screenshots](docs/sdk-screens.png)
 
+*This documentation is available in Japanese: [日本語のドキュメント](docs/ja/README.md).*
+
+>### Note
+> Version 2.10.0 of the PayPal iOS SDK was built using Xcode 6.3.
+>
+>If you are still using Xcode 6.2, you may experience link errors (duplicate symbols) when using version **2.10.0** of the PayPal iOS SDK.
+>
+> However, version **2.10.1** was built using Xcode 6.2, and should therefore avoid this problem.
+>
+> We are working with Apple to try to resolve this issue going forward.
+
 ## Contents
 
 - [Use Cases](#use-cases)
@@ -41,8 +52,8 @@ Your customer logs in to PayPal just one time and consents to future payments:
 
 Later, when that customer initiates a payment:
 
-1. [Obtain an Application Correlation ID](docs/future_payments_mobile.md#obtain-an-application-correlation-id) that you'll pass to your server.
-2. On your server, [Create a Payment](docs/future_payments_server.md#create-a-payment) using your OAuth2 tokens, the Application Correlation ID, and PayPal's API.
+1. [Obtain a Client Metadata ID](docs/future_payments_mobile.md#obtain-an-application-correlation-id) that you'll pass to your server.
+2. On your server, [Create a Payment](docs/future_payments_server.md#create-a-payment) using your OAuth2 tokens, the Client Metadata ID, and PayPal's API.
 
 
 ### Profile Sharing
@@ -56,13 +67,22 @@ Your customer logs in to PayPal and consents to PayPal sharing information with 
 
 ## Requirements
 
-* Xcode 5 and iOS SDK 7
+* Xcode 6 and iOS SDK 8
 * iOS 6.0+ target deployment
 * armv7, armv7s, and arm64 devices, and the simulator (not armv6)
 * iPhone and iPad of all sizes and resolutions
 
 
 ## Add the SDK to Your Project
+
+### If you use [CocoaPods](http://cocoapods.org), then add these lines to your podfile:
+
+```ruby
+platform :ios, '6.0'
+pod 'PayPal-iOS-SDK'
+```
+
+### If you don't use CocoaPods, then:
 
 1. Clone or download the SDK, which consists of header files, license acknowledgements, release notes, and a static library. It also includes a sample app.
     * **As of version 2.4.0, the SDK requires Xcode 6 and iOS 8 SDK. If you are still using Xcode 5, please use [version 2.3.2](https://github.com/paypal/PayPal-iOS-SDK/releases) of this SDK.**
@@ -72,6 +92,7 @@ Your customer logs in to PayPal and consents to PayPal sharing information with 
   * enable `Enable Modules (C and Objective-C)`
   * enable `Link Frameworks Automatically`
 4. In your project's **Build Phases**, link your project with these libraries. Weak linking for iOS versions back to 6.0 is supported.
+  * `Accelerate.framework`
   * `AudioToolbox.framework`
   * `AVFoundation.framework`
   * `CoreLocation.framework`
@@ -79,7 +100,10 @@ Your customer logs in to PayPal and consents to PayPal sharing information with 
   * `MessageUI.framework`
   * `MobileCoreServices.framework`
   * `SystemConfiguration.framework`
-5. Add the open source license acknowledgments from acknowledgments.md to [your app's acknowledgments](http://stackoverflow.com/questions/3966116/where-to-put-open-source-credit-information-for-an-iphone-app).
+
+### With or without CocoaPods:
+
+1. Add the open source license acknowledgments from acknowledgments.md to [your app's acknowledgments](http://stackoverflow.com/questions/3966116/where-to-put-open-source-credit-information-for-an-iphone-app).
 
 ## Credentials
 

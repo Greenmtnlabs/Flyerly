@@ -1,1 +1,1 @@
-../../../ShareKit/Classes/ShareKit/Core/Helpers/OAuth/OAConsumer.h
+../../../ShareKit/Classes/ShareKit/Core NoARC/Helpers/OAuth/OAConsumer.h
