@@ -622,18 +622,21 @@
     if ([flyer isVideoFlyer]) {
         
         item = [SHKItem text:[NSString stringWithFormat:@"%@ #flyerly %@", selectedFlyerDescription , [self.flyer getYoutubeLink]]];
-        //item = [SHKItem filePath:[self.flyer getSharingVideoPath] title:titleView.text];
-        
         item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
-        iosSharer = [SHKFacebook shareItem:item];
+        iosSharer = [[SHKiOSFacebook alloc] init];
+        [iosSharer loadItem:item];
         iosSharer.shareDelegate = self;
+        [iosSharer share];
         
     }
-    else {        
+    else {
+        
         item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly ", selectedFlyerDescription ]];
         item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
-        iosSharer = [SHKFacebook shareItem:item];
+        iosSharer = [[SHKiOSFacebook alloc] init];
+        [iosSharer loadItem:item];
         iosSharer.shareDelegate = self;
+        [iosSharer share];
     }
     
     
@@ -737,7 +740,7 @@
     
     // Here we Check Sharer for
     // Update Flyer Share Info in Social File
-    if ( [sharer isKindOfClass:[SHKFacebook class]] == YES ) {
+    if ( [sharer isKindOfClass:[SHKiOSFacebook class]] == YES ) {
         
         facebookButton.enabled = YES;
         [self.flyer setFacebookStatus:1];
