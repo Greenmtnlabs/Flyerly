@@ -40,9 +40,9 @@
 			<string>com.flyerly.greenmtnlabs</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>fb136691489852349</string>
 				<string>oatransdemo</string>
 				<string>Flyerly</string>
-				<string>fb136691489852349</string>
 				<string>fsqapi</string>
 				<string>flyerlyapp</string>
 			</array>
