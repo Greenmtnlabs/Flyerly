@@ -796,14 +796,6 @@
     //Here we set the set selected state of buttons.
     [self setSocialStatus];
     
-    
-//    if(  ){
-//        NSLog(@" Send Button");
-//    } else {
-//        NSLog(@" Cancel Button");
-//    }
-    
-    
     if (!sharer.quiet)
 		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Flyer Posted!") forSharer:sharer];
     
