@@ -7,7 +7,9 @@ platform :ios, '7.0'
 	#pod 'Google-API-Client', '~> 1.0.422'
 
 
-	pod 'ShareKit', '~> 4.0.4'
+	#pod 'ShareKit', '~> 4.0.4'
+	pod 'ShareKit', :podspec => "Podspecs/ShareKit.podspec"
+	
 	pod 'Facebook-iOS-SDK', '~> 3.23.2'
 	
 	# Pre-release versions:
