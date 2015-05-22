@@ -637,12 +637,9 @@
         [iosSharer loadItem:item];
         iosSharer.shareDelegate = self;
         [iosSharer share];
+        
+           }
     }
-    
-    
-    
-    
-}
 
 /*
  * Called when clipboard button is pressed
@@ -737,7 +734,6 @@
 
 - (void)sharerFinishedSending:(SHKSharer *)sharer
 {
-    
     // Here we Check Sharer for
     // Update Flyer Share Info in Social File
     if ( [sharer isKindOfClass:[SHKiOSFacebook class]] == YES ) {
@@ -798,6 +794,13 @@
     [self setSocialStatus];
     
     
+//    if(  ){
+//        NSLog(@" Send Button");
+//    } else {
+//        NSLog(@" Cancel Button");
+//    }
+    
+    
     if (!sharer.quiet)
 		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Flyer Posted!") forSharer:sharer];
     
@@ -823,6 +826,8 @@
 	NSLog(@"Sharing Error");
     [self.cfController enableHome:YES];
 }
+
+
 
 - (void)sharerCancelledSending:(SHKSharer *)sharer
 {

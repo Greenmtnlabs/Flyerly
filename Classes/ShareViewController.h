@@ -38,7 +38,7 @@
 @class SHKSharer;
 @class SHKActivityIndicator;
 
-@interface ShareViewController : UIViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,UITextViewDelegate,UITextFieldDelegate, SHKSharerDelegate,MFMailComposeViewControllerDelegate> {
+@interface ShareViewController : UIViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,UITextViewDelegate,UITextFieldDelegate, SHKSharerDelegate,MFMailComposeViewControllerDelegate, UIAlertViewDelegate> {
 
     FlyerlySingleton *globle;
     NSArray *arrayOfAccounts;
