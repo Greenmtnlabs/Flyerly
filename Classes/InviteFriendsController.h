@@ -21,14 +21,11 @@
 #import "AsyncImageView.h"
 #import "FlyerlySingleton.h"
 #import "InviteFriendsCell.h"
-#import "FlyerlyFacebookFriends.h"
 #import "ParentViewController.h"
 #import "SHKSharer.h"
 #import <SHKFormController.h>
 #import "SHKFacebookCommon.h"
 #import "ContactsModel.h"
-#import "FlyerlyFacebookFriends.h"
-#import "FlyerlyFacebookInvite.h"
 #import "FlyerlyTwitterFriends.h"
 #import "Flurry.h"
 
