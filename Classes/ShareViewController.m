@@ -687,6 +687,14 @@
     return YES;
 }
 
+-(void)facebookViewControllerCancelWasPressed:(id)sender {
+    
+}
+
+-(void)facebookViewControllerDoneWasPressed:(id)sender{
+    
+}
+
 
 #pragma mark - All Shared Response
 
@@ -696,7 +704,7 @@
     [self.cfController enableHome:NO];
     
     // Update Flyer Share Info in Social File
-    if ( [sharer isKindOfClass:[SHKFacebook class]] == YES ) {
+    if ( [sharer isKindOfClass:[SHKiOSFacebook class]] == YES ) {
         
         facebookButton.enabled = NO;
         
