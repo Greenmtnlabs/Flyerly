@@ -55,7 +55,7 @@
         
     }];
    
-    [self.pendingConnections addObject:con];
+   // [self.pendingConnections addObject:con];
     
 }
 
@@ -63,11 +63,11 @@
                                  result:(id) result
                                   error:(NSError *)error
 {
-	if(![self.pendingConnections containsObject:connection]){
-		NSLog(@"SHKFacebook - received a callback for a connection not in the pending requests.");
-	}
-    
-	[self.pendingConnections removeObject:connection];
+//	if(![self.pendingConnections containsObject:connection]){
+//		NSLog(@"SHKFacebook - received a callback for a connection not in the pending requests.");
+//	}
+//    
+//	[self.pendingConnections removeObject:connection];
     
 	if (error) {
         /*

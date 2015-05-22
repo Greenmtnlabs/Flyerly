@@ -52,7 +52,7 @@
             [self.shareDelegate performSelector:@selector(sharerFinishedSending:) withObject:self];
     }];
     
-    [self.pendingConnections addObject:con];
+   // [self.pendingConnections addObject:con];
   
     
 }
