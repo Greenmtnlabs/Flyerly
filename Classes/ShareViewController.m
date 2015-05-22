@@ -687,14 +687,6 @@
     return YES;
 }
 
--(void)facebookViewControllerCancelWasPressed:(id)sender {
-    
-}
-
--(void)facebookViewControllerDoneWasPressed:(id)sender{
-    
-}
-
 
 #pragma mark - All Shared Response
 
