@@ -620,26 +620,29 @@
     SHKItem *item;
     
     if ([flyer isVideoFlyer]) {
+        // getting youtube link from flyer and sharing on facebook via url
+        NSString *getYouTubeLink = [self.flyer getYoutubeLink];
+        NSURL *videoURL = [NSURL URLWithString:getYouTubeLink];
         
-        item = [SHKItem text:[NSString stringWithFormat:@"%@ #flyerly %@", selectedFlyerDescription , [self.flyer getYoutubeLink]]];
-        //item = [SHKItem filePath:[self.flyer getSharingVideoPath] title:titleView.text];
-        
-        item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
-        iosSharer = [SHKFacebook shareItem:item];
+        item = [SHKItem URL:videoURL title:@"Share On Youtube" contentType:SHKURLContentTypeVideo];
+        //item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
+        iosSharer = [[SHKiOSFacebook alloc] init];
+        [iosSharer loadItem:item];
         iosSharer.shareDelegate = self;
+        [iosSharer share];
         
     }
-    else {        
+    else {
+        
         item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly ", selectedFlyerDescription ]];
         item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
-        iosSharer = [SHKFacebook shareItem:item];
+        iosSharer = [[SHKiOSFacebook alloc] init];
+        [iosSharer loadItem:item];
         iosSharer.shareDelegate = self;
+        [iosSharer share];
+        
+          }
     }
-    
-    
-    
-    
-}
 
 /*
  * Called when clipboard button is pressed
@@ -693,7 +696,7 @@
     [self.cfController enableHome:NO];
     
     // Update Flyer Share Info in Social File
-    if ( [sharer isKindOfClass:[SHKFacebook class]] == YES ) {
+    if ( [sharer isKindOfClass:[SHKiOSFacebook class]] == YES ) {
         
         facebookButton.enabled = NO;
         
@@ -734,10 +737,9 @@
 
 - (void)sharerFinishedSending:(SHKSharer *)sharer
 {
-    
     // Here we Check Sharer for
     // Update Flyer Share Info in Social File
-    if ( [sharer isKindOfClass:[SHKFacebook class]] == YES ) {
+    if ( [sharer isKindOfClass:[SHKiOSFacebook class]] == YES ) {
         
         facebookButton.enabled = YES;
         [self.flyer setFacebookStatus:1];
@@ -794,7 +796,6 @@
     //Here we set the set selected state of buttons.
     [self setSocialStatus];
     
-    
     if (!sharer.quiet)
 		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Flyer Posted!") forSharer:sharer];
     
@@ -820,6 +821,8 @@
 	NSLog(@"Sharing Error");
     [self.cfController enableHome:YES];
 }
+
+
 
 - (void)sharerCancelledSending:(SHKSharer *)sharer
 {

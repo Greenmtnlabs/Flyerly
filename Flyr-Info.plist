@@ -40,16 +40,16 @@
 			<string>com.flyerly.greenmtnlabs</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>fb136691489852349</string>
 				<string>oatransdemo</string>
 				<string>Flyerly</string>
-				<string>fb136691489852349</string>
 				<string>fsqapi</string>
 				<string>flyerlyapp</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>520</string>
+	<string>521</string>
 	<key>FacebookAppID</key>
 	<string>136691489852349</string>
 	<key>FacebookDisplayName</key>

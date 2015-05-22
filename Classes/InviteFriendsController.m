@@ -505,10 +505,13 @@ const int CONTACTS_TAB = 0;
 
     NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
     
-    item = [SHKItem image:nil title:[NSString stringWithFormat:@"%@ #flyerly ", sharingText ]];
-    item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
-    iosSharer = [SHKFacebook shareItem:item];
+    item = [SHKItem URL:[NSURL URLWithString:@"http://flyer.ly"] title:sharingText contentType:SHKShareTypeURL];
+//    item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
+    iosSharer = [[SHKiOSFacebook alloc] init];
+    [iosSharer loadItem:item];
     iosSharer.shareDelegate = self;
+    [iosSharer share];
+    
     
     /*if ([FlyerlySingleton connected]) {
         
@@ -634,7 +637,7 @@ const int CONTACTS_TAB = 0;
     
     //Calling ShareKit for Sharing
     iosSharer = [[SHKSharer alloc] init];
-    iosSharer = [FlyerlyFacebookInvite shareItem:item];
+    iosSharer = [SHKiOSFacebook shareItem:item];
     iosSharer.shareDelegate = self;
     
     
@@ -1025,20 +1028,6 @@ const int CONTACTS_TAB = 0;
 {
     
     // Here we Get Friend List which sended from FlyerlyFacbookFriends
-    if ( [sharer isKindOfClass:[FlyerlyFacebookFriends class]] == YES ) {
-        
-        FlyerlyFacebookFriends *facebook = (FlyerlyFacebookFriends*) sharer;
-        
-        // HERE WE MAKE ARRAY FOR SHOW DATA IN TABLEVIEW
-        [self makeFacebookArray:facebook.friendsList ];
-        [self.uiTableView reloadData];
-        
-
-
-        return;
-    }
-    
-    // Here we Get Friend List which sended from FlyerlyFacbookFriends
     if ( [sharer isKindOfClass:[FlyerlyTwitterFriends class]] == YES ) {
         
         FlyerlyTwitterFriends *twitter = (FlyerlyTwitterFriends*) sharer;
@@ -1072,15 +1061,8 @@ const int CONTACTS_TAB = 0;
         user[@"iphoneinvited"] = iPhoneinvited;
         [self friendsInvited];
 
-        
-    } else  if ( [sharer isKindOfClass:[FlyerlyFacebookInvite class]] == YES ) {
-    
-        // HERE WE GET AND SET SELECTED Facebook LIST
-        [fbinvited  addObjectsFromArray:selectedIdentifiers];
-        user[@"fbinvited"] = fbinvited;
-        [self friendsInvited];
-
     }
+
 
     // HERE WE UPDATE PARSE ACCOUNT FOR REMEMBER INVITED FRIENDS LIST
     [user saveInBackground];

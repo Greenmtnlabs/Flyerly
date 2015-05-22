@@ -184,7 +184,6 @@
 		202D2ABA190155DA00E86C98 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		202D78141962BAAE00D54F3B /* facebook_share_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202D78131962BAAE00D54F3B /* facebook_share_saved@2x.png */; };
 		202F48BB18F28A60000B62DB /* CustomAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 202F48BA18F28A60000B62DB /* CustomAssets.m */; };
-		202F992718BCAD1B002A25D9 /* FlyerlyFacebookFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 202F992618BCAD1B002A25D9 /* FlyerlyFacebookFriends.m */; };
 		202FF12B17C3ABDE003C6245 /* bkg_register-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202FF12817C3ABDE003C6245 /* bkg_register-568h@2x.png */; };
 		2030B1C3196BEC99004DE050 /* black_dollar.png in Resources */ = {isa = PBXBuildFile; fileRef = 2030B1BB196BEC99004DE050 /* black_dollar.png */; };
 		2030B1C4196BEC99004DE050 /* black_euro.png in Resources */ = {isa = PBXBuildFile; fileRef = 2030B1BC196BEC99004DE050 /* black_euro.png */; };
@@ -245,7 +244,6 @@
 		209460A31977AD1A0050B5DE /* InviteForPrint.m in Sources */ = {isa = PBXBuildFile; fileRef = 209460A11977AD1A0050B5DE /* InviteForPrint.m */; };
 		209460A41977AD1A0050B5DE /* InviteForPrint.xib in Resources */ = {isa = PBXBuildFile; fileRef = 209460A21977AD1A0050B5DE /* InviteForPrint.xib */; };
 		2095C90E18C5E89900E244A8 /* FlyerlyTwitterFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 2095C90D18C5E89900E244A8 /* FlyerlyTwitterFriends.m */; };
-		2095C91118C5F92700E244A8 /* FlyerlyFacebookInvite.m in Sources */ = {isa = PBXBuildFile; fileRef = 2095C91018C5F92700E244A8 /* FlyerlyFacebookInvite.m */; };
 		20967D9818C8973200B273FC /* FlyerlyTwitterLike.m in Sources */ = {isa = PBXBuildFile; fileRef = 20967D9718C8973200B273FC /* FlyerlyTwitterLike.m */; };
 		2098BDBA1AB2FEC300CDE1A4 /* tnc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2098BDB91AB2FEC300CDE1A4 /* tnc@2x.png */; };
 		2098BDBC1AB2FEDB00CDE1A4 /* tnc@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2098BDBB1AB2FEDB00CDE1A4 /* tnc@3x.png */; };
@@ -918,8 +916,6 @@
 		248A3638193F26280005FCAD /* bg_tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 248A3636193F26280005FCAD /* bg_tab@2x.png */; };
 		248A3639193F26280005FCAD /* image_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 248A3637193F26280005FCAD /* image_icon@2x.png */; };
 		249464DF1A0CFEFE00C1247D /* Backgrounds-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 249464DE1A0CFEFE00C1247D /* Backgrounds-iPhone6.xib */; };
-		2498965E1A1B773A0001BF81 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2498965D1A1B773A0001BF81 /* ParseFacebookUtils.framework */; };
-		249896601A1B77580001BF81 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2498965F1A1B77580001BF81 /* ParseUI.framework */; };
 		249F1F8A193F55D50072835E /* 07_camera_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 249F1F5F193F55D50072835E /* 07_camera_selected@2x.png */; };
 		249F1F8B193F55D50072835E /* 07_camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 249F1F60193F55D50072835E /* 07_camera@2x.png */; };
 		249F1F8C193F55D50072835E /* 07_height_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 249F1F61193F55D50072835E /* 07_height_selected@2x.png */; };
@@ -1236,7 +1232,6 @@
 		4986857418B500BB002113E4 /* AssetsGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4986857318B500BB002113E4 /* AssetsGroupViewController.m */; };
 		4986857718B50657002113E4 /* CustomAssetsGroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4986857518B50657002113E4 /* CustomAssetsGroupView.xib */; };
 		4986857818B50657002113E4 /* CustomAssetThumbnailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4986857618B50657002113E4 /* CustomAssetThumbnailView.xib */; };
-		498BAB6C1885B21800221DFB /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498BAB6B1885B21800221DFB /* Parse.framework */; };
 		49997FF717DF786400CF1038 /* ParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49997FF617DF786400CF1038 /* ParentViewController.m */; };
 		49997FFB17E07FA100CF1038 /* SKProduct+LocalPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = 49997FFA17E07FA100CF1038 /* SKProduct+LocalPrice.m */; };
 		49B8897D1886524D003766AD /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B8897C1886524D003766AD /* LoadingView.m */; };
@@ -1601,8 +1596,6 @@
 		202D78131962BAAE00D54F3B /* facebook_share_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook_share_saved@2x.png"; sourceTree = "<group>"; };
 		202F48B918F28A60000B62DB /* CustomAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAssets.h; sourceTree = "<group>"; };
 		202F48BA18F28A60000B62DB /* CustomAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAssets.m; sourceTree = "<group>"; };
-		202F992518BCAD1B002A25D9 /* FlyerlyFacebookFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyerlyFacebookFriends.h; sourceTree = "<group>"; };
-		202F992618BCAD1B002A25D9 /* FlyerlyFacebookFriends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyerlyFacebookFriends.m; sourceTree = "<group>"; };
 		202FF12817C3ABDE003C6245 /* bkg_register-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bkg_register-568h@2x.png"; sourceTree = "<group>"; };
 		2030B1BB196BEC99004DE050 /* black_dollar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black_dollar.png; sourceTree = "<group>"; };
 		2030B1BC196BEC99004DE050 /* black_euro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black_euro.png; sourceTree = "<group>"; };
@@ -1675,8 +1668,6 @@
 		209460A21977AD1A0050B5DE /* InviteForPrint.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteForPrint.xib; sourceTree = "<group>"; };
 		2095C90C18C5E89900E244A8 /* FlyerlyTwitterFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyerlyTwitterFriends.h; sourceTree = "<group>"; };
 		2095C90D18C5E89900E244A8 /* FlyerlyTwitterFriends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyerlyTwitterFriends.m; sourceTree = "<group>"; };
-		2095C90F18C5F92700E244A8 /* FlyerlyFacebookInvite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyerlyFacebookInvite.h; sourceTree = "<group>"; };
-		2095C91018C5F92700E244A8 /* FlyerlyFacebookInvite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyerlyFacebookInvite.m; sourceTree = "<group>"; };
 		20967D9618C8973200B273FC /* FlyerlyTwitterLike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyerlyTwitterLike.h; sourceTree = "<group>"; };
 		20967D9718C8973200B273FC /* FlyerlyTwitterLike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyerlyTwitterLike.m; sourceTree = "<group>"; };
 		2098BDB91AB2FEC300CDE1A4 /* tnc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tnc@2x.png"; sourceTree = "<group>"; };
@@ -2993,7 +2984,6 @@
 				0FD78050177B398800DF5060 /* AudioToolbox.framework in Frameworks */,
 				243AA72219DE8302004A5613 /* AdSupport.framework in Frameworks */,
 				2025FAB9186074F300CC9188 /* CoreMotion.framework in Frameworks */,
-				249896601A1B77580001BF81 /* ParseUI.framework in Frameworks */,
 				2025FAB7186074D100CC9188 /* CoreText.framework in Frameworks */,
 				2025FAB51860742700CC9188 /* CoreMedia.framework in Frameworks */,
 				0DEE01A2108ED97400967DA5 /* Security.framework in Frameworks */,
@@ -3006,7 +2996,6 @@
 				0D335121109ABB6A0082810A /* libxml2.dylib in Frameworks */,
 				65A21268172981A000ED0B9A /* ImageIO.framework in Frameworks */,
 				65A212461729496F00ED0B9A /* AssetsLibrary.framework in Frameworks */,
-				2498965E1A1B773A0001BF81 /* ParseFacebookUtils.framework in Frameworks */,
 				65A2CFC117257480005C03B7 /* Social.framework in Frameworks */,
 				65C7A50517216E71003F1A84 /* MobileCoreServices.framework in Frameworks */,
 				0D33511D109ABB6A0082810A /* AddressBookUI.framework in Frameworks */,
@@ -3016,7 +3005,6 @@
 				0DF3A542108E0E5C00D6C887 /* libsqlite3.0.dylib in Frameworks */,
 				0DEE01A0108ED97400967DA5 /* QuartzCore.framework in Frameworks */,
 				0D33511F109ABB6A0082810A /* CFNetwork.framework in Frameworks */,
-				498BAB6C1885B21800221DFB /* Parse.framework in Frameworks */,
 				30D58E3510FB260200E0C7E8 /* MediaPlayer.framework in Frameworks */,
 				E8E424ACA7CB4913890F4F3B /* libPods.a in Frameworks */,
 			);
@@ -3791,10 +3779,6 @@
 		202F992818BCAD20002A25D9 /* CustomClasses */ = {
 			isa = PBXGroup;
 			children = (
-				202F992518BCAD1B002A25D9 /* FlyerlyFacebookFriends.h */,
-				202F992618BCAD1B002A25D9 /* FlyerlyFacebookFriends.m */,
-				2095C90F18C5F92700E244A8 /* FlyerlyFacebookInvite.h */,
-				2095C91018C5F92700E244A8 /* FlyerlyFacebookInvite.m */,
 				2095C90C18C5E89900E244A8 /* FlyerlyTwitterFriends.h */,
 				2095C90D18C5E89900E244A8 /* FlyerlyTwitterFriends.m */,
 			);
@@ -6614,7 +6598,6 @@
 				202C482A187D7A6B00FE0975 /* NSDictionary_JSONExtensions.m in Sources */,
 				202C4829187D7A6B00FE0975 /* CJSONSerializer.m in Sources */,
 				202C4800187D6E4B00FE0975 /* BitlyTwitterOAuthAccount.m in Sources */,
-				202F992718BCAD1B002A25D9 /* FlyerlyFacebookFriends.m in Sources */,
 				202C4826187D7A6B00FE0975 /* CDataScanner_Extensions.m in Sources */,
 				0F80C386178561C200D36795 /* LaunchController.m in Sources */,
 				243EA07119BF4ABB0047D0E1 /* ImageLayer.m in Sources */,
@@ -6632,7 +6615,6 @@
 				209F8E4119A47A4E00323559 /* DrawingViewController.m in Sources */,
 				24803523192F3207009403F7 /* CameraViewController.m in Sources */,
 				202C4802187D6E4B00FE0975 /* BitlyTwitterOAuthViewController.m in Sources */,
-				2095C91118C5F92700E244A8 /* FlyerlyFacebookInvite.m in Sources */,
 				203E0B7617DDDD720039C3A7 /* InputViewController.m in Sources */,
 				20967D9818C8973200B273FC /* FlyerlyTwitterLike.m in Sources */,
 				2026992B18CED6B000945218 /* RMStore.m in Sources */,
@@ -6695,7 +6677,7 @@
 				PROVISIONING_PROFILE = "bd30fa69-8d52-46f4-88da-12b5088d397c";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "bd30fa69-8d52-46f4-88da-12b5088d397c";
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "arm64 armv7 armv7s i386";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = "Ad Hoc";
 		};
@@ -6749,7 +6731,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "bd30fa69-8d52-46f4-88da-12b5088d397c";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/**";
-				VALID_ARCHS = "armv7 armv7s armv8 x86_64 arm64";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = "Ad Hoc";
 		};
@@ -6794,7 +6776,7 @@
 					"$(PROJECT_DIR)/ExternalFrameworks/Flurry",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-lc++",
@@ -6806,7 +6788,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos7.0]" = "0fa3dff2-ecfb-4d91-bbaf-ec80632f2898";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/**";
-				VALID_ARCHS = "armv7 armv7s armv8 x86_64 arm64";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
 		};
@@ -6859,7 +6841,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "bd30fa69-8d52-46f4-88da-12b5088d397c";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/**";
-				VALID_ARCHS = "armv7 armv7s armv8 x86_64 arm64";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
 		};
@@ -6876,13 +6858,13 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "0fa3dff2-ecfb-4d91-bbaf-ec80632f2898";
 				"PROVISIONING_PROFILE[sdk=iphoneos7.0]" = "0fa3dff2-ecfb-4d91-bbaf-ec80632f2898";
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "arm64 armv7 armv7s i386";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
 		};
@@ -6905,7 +6887,7 @@
 				PROVISIONING_PROFILE = "bd30fa69-8d52-46f4-88da-12b5088d397c";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "bd30fa69-8d52-46f4-88da-12b5088d397c";
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "arm64 armv7 armv7s i386";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
 		};
