@@ -9,6 +9,7 @@
 #import "FlyerlyConfigurator.h"
 #import "SHKFile.h"
 #import "PaypalMobile.h"
+#import <Social/Social.h>
 
 @implementation FlyerlyConfigurator
 
@@ -254,7 +255,14 @@
  on the auth path. It will try to use native auth if availible.
  */
 - (NSNumber*)forcePreIOS6FacebookPosting {
-	return [NSNumber numberWithBool:false];
+    
+    BOOL result = NO;
+    //if they have an account on their device, then use it, but don't force a device level login
+    if (NSClassFromString(@"SLComposeViewController")) {
+        result = ![SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook];
+    }
+    return [NSNumber numberWithBool:result];
+
 }
 
 /*
