@@ -505,10 +505,13 @@ const int CONTACTS_TAB = 0;
 
     NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
     
-    item = [SHKItem image:nil title:[NSString stringWithFormat:@"%@ #flyerly ", sharingText ]];
-    item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
-    iosSharer = [SHKFacebook shareItem:item];
+    item = [SHKItem URL:[NSURL URLWithString:@"http://flyer.ly"] title:sharingText contentType:SHKShareTypeURL];
+//    item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
+    iosSharer = [[SHKiOSFacebook alloc] init];
+    [iosSharer loadItem:item];
     iosSharer.shareDelegate = self;
+    [iosSharer share];
+    
     
     /*if ([FlyerlySingleton connected]) {
         
