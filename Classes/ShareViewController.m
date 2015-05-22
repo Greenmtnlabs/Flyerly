@@ -620,9 +620,12 @@
     SHKItem *item;
     
     if ([flyer isVideoFlyer]) {
+        // getting youtube link from flyer and sharing on facebook via url
+        NSString *getYouTubeLink = [self.flyer getYoutubeLink];
+        NSURL *videoURL = [NSURL URLWithString:getYouTubeLink];
         
-        item = [SHKItem text:[NSString stringWithFormat:@"%@ #flyerly %@", selectedFlyerDescription , [self.flyer getYoutubeLink]]];
-        item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
+        item = [SHKItem URL:videoURL title:@"Share On Youtube" contentType:SHKURLContentTypeVideo];
+        //item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
         iosSharer = [[SHKiOSFacebook alloc] init];
         [iosSharer loadItem:item];
         iosSharer.shareDelegate = self;
@@ -638,7 +641,7 @@
         iosSharer.shareDelegate = self;
         [iosSharer share];
         
-           }
+          }
     }
 
 /*
