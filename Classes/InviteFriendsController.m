@@ -929,11 +929,13 @@ const int CONTACTS_TAB = 0;
             [selectedIdentifiers addObject:model.description];
             
             //Calling ShareKit for Sharing
-            iosSharer = [[ SHKSharer alloc] init];
+            iosSharer = [[ SHKiOSTwitter alloc] init];
             NSString *tweet = [NSString stringWithFormat:@"%@ @%@ #flyerly",sharingText,model.description];
+            SHKItem *item;
+            item = [SHKItem text:tweet];
             
             [selectedIdentifiers addObject:model.description];
-            iosSharer = [SHKTwitter shareText:tweet];
+            iosSharer = [SHKiOSTwitter shareItem:item];
             iosSharer.shareDelegate = self;
         
         }else if (model.status == 1) {
