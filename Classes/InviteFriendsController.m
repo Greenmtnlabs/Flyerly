@@ -505,7 +505,9 @@ const int CONTACTS_TAB = 0;
 
     NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
     
-    item = [SHKItem URL:[NSURL URLWithString:@"http://flyer.ly"] title:sharingText contentType:SHKShareTypeURL];
+    NSString *urlToShare = [NSString stringWithFormat:@"%@%@", flyerConfigurator.referralURL, userUniqueObjectId];    
+    
+    item = [SHKItem URL:[NSURL URLWithString:urlToShare] title:sharingText contentType:SHKShareTypeURL];
 //    item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
     iosSharer = [[SHKiOSFacebook alloc] init];
     [iosSharer loadItem:item];
