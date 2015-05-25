@@ -243,7 +243,6 @@
 		20930D7C19AB5F22004B9F93 /* drawing_tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20930D7A19AB5F22004B9F93 /* drawing_tab@2x.png */; };
 		209460A31977AD1A0050B5DE /* InviteForPrint.m in Sources */ = {isa = PBXBuildFile; fileRef = 209460A11977AD1A0050B5DE /* InviteForPrint.m */; };
 		209460A41977AD1A0050B5DE /* InviteForPrint.xib in Resources */ = {isa = PBXBuildFile; fileRef = 209460A21977AD1A0050B5DE /* InviteForPrint.xib */; };
-		2095C90E18C5E89900E244A8 /* FlyerlyTwitterFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 2095C90D18C5E89900E244A8 /* FlyerlyTwitterFriends.m */; };
 		20967D9818C8973200B273FC /* FlyerlyTwitterLike.m in Sources */ = {isa = PBXBuildFile; fileRef = 20967D9718C8973200B273FC /* FlyerlyTwitterLike.m */; };
 		2098BDBA1AB2FEC300CDE1A4 /* tnc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2098BDB91AB2FEC300CDE1A4 /* tnc@2x.png */; };
 		2098BDBC1AB2FEDB00CDE1A4 /* tnc@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2098BDBB1AB2FEDB00CDE1A4 /* tnc@3x.png */; };
@@ -519,6 +518,7 @@
 		245D48E2193DEF9000E670E6 /* Entypo-Social.otf in Resources */ = {isa = PBXBuildFile; fileRef = 245D48E1193DEF9000E670E6 /* Entypo-Social.otf */; };
 		245FED0519DE8966009140B4 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 243AA71D19DE8136004A5613 /* libGoogleAdMobAds.a */; };
 		246264DF1947416A00933A69 /* Cliparts-paid.plist in Resources */ = {isa = PBXBuildFile; fileRef = 246264DE1947416A00933A69 /* Cliparts-paid.plist */; };
+		2466983D1B1331F100715784 /* FlyerlyTwitterFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 2095C90D18C5E89900E244A8 /* FlyerlyTwitterFriends.m */; };
 		246EF476193C506B004539B2 /* Emoticons.xib in Resources */ = {isa = PBXBuildFile; fileRef = 246EF475193C506B004539B2 /* Emoticons.xib */; };
 		246EF4E0193C515D004539B2 /* emoticon100@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 246EF478193C515D004539B2 /* emoticon100@2x.png */; };
 		246EF4E1193C515D004539B2 /* emoticon101@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 246EF479193C515D004539B2 /* emoticon101@2x.png */; };
@@ -6553,7 +6553,6 @@
 				2404CDD819AF506600139E52 /* BigStockThumbnailView.m in Sources */,
 				202C47F9187D6E4B00FE0975 /* BitlyConfig.m in Sources */,
 				20A1CD6318EEF63200484391 /* SubNBUCamera.m in Sources */,
-				2095C90E18C5E89900E244A8 /* FlyerlyTwitterFriends.m in Sources */,
 				202F48BB18F28A60000B62DB /* CustomAssets.m in Sources */,
 				49F5CA03192E11C200681C6E /* CropView.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
@@ -6593,6 +6592,7 @@
 				0FEF2DA9174E66FC00FDD8C9 /* HelpController.m in Sources */,
 				209BCFA81975433D006EC811 /* PrintViewController.m in Sources */,
 				20A1CD6F18EF19B400484391 /* YouTubeSubClass.m in Sources */,
+				2466983D1B1331F100715784 /* FlyerlyTwitterFriends.m in Sources */,
 				0F7FC386175CE26B009DEB08 /* AsyncImageView.m in Sources */,
 				200D1937197CF4CC00CFE04B /* PaypalViewController.m in Sources */,
 				202C482A187D7A6B00FE0975 /* NSDictionary_JSONExtensions.m in Sources */,
