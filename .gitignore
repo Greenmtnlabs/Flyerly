@@ -173,3 +173,6 @@ Pods/
 # Ignore parse directory
 ExternalFrameworks/Parse/
 
+# ignore xcShareData
+Flyr.xcworkspace/xcshareddata/
+
