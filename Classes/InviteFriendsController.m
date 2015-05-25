@@ -15,6 +15,7 @@
 #import "HelpController.h"
 #import "Flurry.h"
 #import "UserVoice.h"
+#import "SHKSharer.h"
 
 @implementation InviteFriendsController {
 
@@ -1093,7 +1094,11 @@ const int CONTACTS_TAB = 0;
     if ( [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
         [selectedIdentifiers   removeAllObjects];
     }
+
     [self.uiTableView reloadData ];
+    if (!sharer.quiet)
+        [[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Cancelled!") forSharer:sharer];
+    
 }
 
 - (void)sharerShowBadCredentialsAlert:(SHKSharer *)sharer

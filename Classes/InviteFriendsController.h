@@ -28,6 +28,7 @@
 #import "ContactsModel.h"
 #import "FlyerlyTwitterFriends.h"
 #import "Flurry.h"
+#import "SHKSharerDelegate.h"
 
 @class FlyerlySingleton,SHKSharer;
 
