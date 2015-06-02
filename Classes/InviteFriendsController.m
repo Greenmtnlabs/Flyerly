@@ -1052,7 +1052,7 @@ const int CONTACTS_TAB = 0;
     
     // Here we Check Sharer for
     // Update PARSE
-    if ( [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
+    if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ) {
         
         // HERE WE GET AND SET SELECTED FOLLOWER
         [twitterInvited  addObjectsFromArray:selectedIdentifiers];
