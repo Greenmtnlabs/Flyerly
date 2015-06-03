@@ -30,7 +30,8 @@
 const int TWITTER_TAB = 2;
 const int FACEBOOK_TAB = 1;
 const int CONTACTS_TAB = 0;
-
+NSMutableArray *usernames;
+NSString *selectedAccount;
 
 #pragma mark  View Appear Methods
 
@@ -656,6 +657,7 @@ const int CONTACTS_TAB = 0;
 }
 
 
+
 #pragma mark  TWITTER CONTACTS
 
 /*
@@ -663,6 +665,34 @@ const int CONTACTS_TAB = 0;
  */
 - (IBAction)loadTwitterContacts:(UIButton *)sender{
     
+    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+    ACAccountType *twitterAccountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    NSArray *availableAccounts = [accountStore accountsWithAccountType:twitterAccountType];
+    
+    
+   
+    if ([availableAccounts count] > 1) {
+    
+        usernames = [NSMutableArray arrayWithCapacity:0];
+        for (ACAccount *account in availableAccounts) {
+            [usernames addObject:account.username];
+        }
+    }
+    
+    UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"Choose Twitter Account" message:nil delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:nil];
+    
+    for(NSString* number in usernames)
+        [view addButtonWithTitle:number];
+    
+    [view show];
+    
+   
+}
+
+/**
+ After one of twitter account is selected
+ **/
+-(void)afterTwitterSelected:(NSString *)selectedAccount{
     if ([FlyerlySingleton connected]) {
         
         // HERE WE HIGHLIGHT BUTTON SELECT AND
@@ -676,32 +706,33 @@ const int CONTACTS_TAB = 0;
         
         selectedTab = TWITTER_TAB;
         [self.uiTableView reloadData];
-
-
+        
+        
         if (twitterBackupArray == nil || twitterBackupArray.count == 0) {
             searchTextField.text = @"";
             self.twitterBackupArray = [[NSMutableArray alloc] init];
-        
+            
             // Current Item For Sharing
             //here we are not set Any Share Type for Override sendStatus Method of SHKTwitter
             SHKItem *item = [[SHKItem alloc] init];
-            
+            [item setCustomValue:selectedAccount forKey:@"account"];
             // Create controller and set share options
             iosSharer = [FlyerlyTwitterFriends shareItem:item];
             iosSharer.shareDelegate = self;
             
         }else {
-        
+            
             [self onSearchClick:nil];
             
             [self.uiTableView reloadData];
         }
-    
+        
     }else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    
+        
         [alert show];
     }
+
 }
 
 /* HERE WE CREATE ARRAY LIST FOR UITABLEVIEW WHICH RECIVED FROM TWITTER REQUEST
@@ -735,8 +766,6 @@ const int CONTACTS_TAB = 0;
     
     [uiTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
     [self hideLoadingIndicator];
-    
-    
 }
 
 
@@ -768,19 +797,12 @@ const int CONTACTS_TAB = 0;
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    int count = ([[self getArrayOfSelectedTab] count]);
+    int count = ((int)[[self getArrayOfSelectedTab] count]);
     return  count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
-    CGRect newFrame = CGRectMake( 0, 0,
-                                 tableView.frame.size.width,
-                                 100);
-    
-    
     
     static NSString *cellId = @"InviteCell";
     InviteFriendsCell *cell = (InviteFriendsCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
@@ -930,13 +952,16 @@ const int CONTACTS_TAB = 0;
             [selectedIdentifiers addObject:model.description];
             
             //Calling ShareKit for Sharing
-            iosSharer = [[ SHKiOSTwitter alloc] init];
+            iosSharer = [[ SHKTwitter alloc] init];
             NSString *tweet = [NSString stringWithFormat:@"%@ @%@ #flyerly",sharingText,model.description];
             SHKItem *item;
-            item = [SHKItem text:tweet];
             
+            item = [[SHKItem alloc]init];
+            [item setCustomValue:selectedAccount forKey:@"account"];
+            
+            item = [SHKItem text:tweet];
             [selectedIdentifiers addObject:model.description];
-            iosSharer = [SHKiOSTwitter shareItem:item];
+            iosSharer = [SHKTwitter shareItem:item];
             iosSharer.shareDelegate = self;
         
         }else if (model.status == 1) {
@@ -1145,6 +1170,25 @@ const int CONTACTS_TAB = 0;
     
     if (sharer.quiet) return;
     [[SHKActivityIndicator currentIndicator]  showProgress:progress forSharer:sharer];
+}
+
+#pragma mark - UI Alert View Delegate Methods
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if ( buttonIndex != 0 ) {
+        
+        //reload the table data(i.e followers list)
+        self.twitterBackupArray = [[NSMutableArray alloc] init];
+        [self.uiTableView reloadData];
+        
+        selectedAccount = usernames[buttonIndex-1];
+        [self afterTwitterSelected:selectedAccount];
+        
+        NSLog( @"currently selected user for twitter is %@ : ", selectedAccount );
+    
+    } else {
+        //Do nothing then, because cancel is pressed.
+    }
 }
 
 #pragma mark Flurry Methods
