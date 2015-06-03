@@ -952,14 +952,16 @@ NSString *selectedAccount;
             [selectedIdentifiers addObject:model.description];
             
             //Calling ShareKit for Sharing
-            iosSharer = [[ SHKiOSTwitter alloc] init];
+            iosSharer = [[ SHKTwitter alloc] init];
             NSString *tweet = [NSString stringWithFormat:@"%@ @%@ #flyerly",sharingText,model.description];
             SHKItem *item;
-            item = [SHKItem text:tweet];
             
+            item = [[SHKItem alloc]init];
             [item setCustomValue:selectedAccount forKey:@"account"];
+            
+            item = [SHKItem text:tweet];
             [selectedIdentifiers addObject:model.description];
-            iosSharer = [SHKiOSTwitter shareItem:item];
+            iosSharer = [SHKTwitter shareItem:item];
             iosSharer.shareDelegate = self;
         
         }else if (model.status == 1) {
@@ -1175,14 +1177,17 @@ NSString *selectedAccount;
     
     if ( buttonIndex != 0 ) {
         
+        //reload the table data(i.e followers list)
         self.twitterBackupArray = [[NSMutableArray alloc] init];
         [self.uiTableView reloadData];
         
         selectedAccount = usernames[buttonIndex-1];
         [self afterTwitterSelected:selectedAccount];
+        
+        NSLog( @"currently selected user for twitter is %@ : ", selectedAccount );
     
     } else {
-        //Do nothing then, because cancel is pressed
+        //Do nothing then, because cancel is pressed.
     }
 }
 
