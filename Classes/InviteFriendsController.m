@@ -22,7 +22,11 @@
     NSString *userUniqueObjectId;
     FlyerlyConfigurator *flyerConfigurator;
     NSString *cellDescriptionForRefrelFeature;
+    NSMutableArray *usernames;
+    NSMutableArray *tokens;
+    NSString *selectedAccount;
 }
+
 @synthesize uiTableView, contactsArray, selectedIdentifiers,contactsButton, facebookButton, twitterButton,  searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited;
 @synthesize contactBackupArray, facebookBackupArray, twitterBackupArray,refrelText;
 @synthesize fbText;
@@ -30,8 +34,6 @@
 const int TWITTER_TAB = 2;
 const int FACEBOOK_TAB = 1;
 const int CONTACTS_TAB = 0;
-NSMutableArray *usernames;
-NSString *selectedAccount;
 
 #pragma mark  View Appear Methods
 
@@ -667,26 +669,41 @@ NSString *selectedAccount;
     
     ACAccountStore *accountStore = [[ACAccountStore alloc] init];
     ACAccountType *twitterAccountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-    NSArray *availableAccounts = [accountStore accountsWithAccountType:twitterAccountType];
     
-    
-   
-    if ([availableAccounts count] > 1) {
-    
-        usernames = [NSMutableArray arrayWithCapacity:0];
-        for (ACAccount *account in availableAccounts) {
-            [usernames addObject:account.username];
-        }
+    [accountStore requestAccessToAccountsWithType:twitterAccountType
+                                          options:nil
+                                       completion:^(BOOL granted, NSError *error) {
+    if ( granted ) {
+        NSArray *availableAccounts = [accountStore accountsWithAccountType:twitterAccountType];
+        
+        
+        
+        if ([availableAccounts count] > 1) {
+            
+            usernames = [NSMutableArray arrayWithCapacity:[availableAccounts count]];
+            tokens = [NSMutableArray arrayWithCapacity:[availableAccounts count]];
+            
+            for (ACAccount *acc in availableAccounts) {
+                [usernames addObject:acc.username];
+                
+                // Get the access token, could be used in other scenarios
+                ACAccountCredential *credential = [acc credential];
+                NSString *accessToken = [credential oauthToken];
+                [tokens addObject:accessToken];
+            }
+            
+            UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"Choose Twitter Account" message:nil delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:nil];
+            
+            for(NSString* number in usernames)
+                [view addButtonWithTitle:number];
+            
+            [view show];        }
+        
+    } else {
+        NSLog(@"Access not granted");
     }
+}];
     
-    UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"Choose Twitter Account" message:nil delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:nil];
-    
-    for(NSString* number in usernames)
-        [view addButtonWithTitle:number];
-    
-    [view show];
-    
-   
 }
 
 /**
