@@ -952,7 +952,7 @@ NSString *selectedAccount;
             [selectedIdentifiers addObject:model.description];
             
             //Calling ShareKit for Sharing
-            iosSharer = [[ SHKTwitter alloc] init];
+            iosSharer = [[ SHKiOSTwitter alloc] init];
             NSString *tweet = [NSString stringWithFormat:@"%@ @%@ #flyerly",sharingText,model.description];
             SHKItem *item;
             
@@ -961,7 +961,7 @@ NSString *selectedAccount;
             
             item = [SHKItem text:tweet];
             [selectedIdentifiers addObject:model.description];
-            iosSharer = [SHKTwitter shareItem:item];
+            iosSharer = [SHKiOSTwitter shareItem:item];
             iosSharer.shareDelegate = self;
         
         }else if (model.status == 1) {
@@ -1116,7 +1116,7 @@ NSString *selectedAccount;
 - (void)sharerCancelledSending:(SHKSharer *)sharer
 {
     
-    if ( [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
+    if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ) {
         [selectedIdentifiers   removeAllObjects];
     }
 
