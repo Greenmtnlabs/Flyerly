@@ -23,8 +23,8 @@
     FlyerlyConfigurator *flyerConfigurator;
     NSString *cellDescriptionForRefrelFeature;
     NSMutableArray *usernames;
-    NSMutableArray *tokens;
-    NSString *selectedAccount;
+    NSArray *availableAccounts;
+    ACAccount *selectedAccount;
 }
 
 @synthesize uiTableView, contactsArray, selectedIdentifiers,contactsButton, facebookButton, twitterButton,  searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited;
@@ -674,30 +674,38 @@ const int CONTACTS_TAB = 0;
                                           options:nil
                                        completion:^(BOOL granted, NSError *error) {
     if ( granted ) {
-        NSArray *availableAccounts = [accountStore accountsWithAccountType:twitterAccountType];
-        
-        
+        availableAccounts = [accountStore accountsWithAccountType:twitterAccountType];
         
         if ([availableAccounts count] > 1) {
             
             usernames = [NSMutableArray arrayWithCapacity:[availableAccounts count]];
-            tokens = [NSMutableArray arrayWithCapacity:[availableAccounts count]];
             
             for (ACAccount *acc in availableAccounts) {
                 [usernames addObject:acc.username];
-                
-                // Get the access token, could be used in other scenarios
-                ACAccountCredential *credential = [acc credential];
-                NSString *accessToken = [credential oauthToken];
-                [tokens addObject:accessToken];
             }
             
-            UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"Choose Twitter Account" message:nil delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:nil];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"Choose Twitter Account" message:nil delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:nil];
+                
+                for( NSString* number in usernames )
+                    [view addButtonWithTitle:number];
+                
+                [view show];
+            });
             
-            for(NSString* number in usernames)
-                [view addButtonWithTitle:number];
+        } else if ([availableAccounts count] > 0 ) {
             
-            [view show];        }
+             dispatch_async(dispatch_get_main_queue(), ^{
+                // Just use the single account.
+                selectedAccount = [availableAccounts objectAtIndex:0];
+                [self afterTwitterSelected:selectedAccount];
+             });
+        } else {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self afterTwitterSelected:nil];
+            });
+        }
         
     } else {
         NSLog(@"Access not granted");
@@ -709,7 +717,7 @@ const int CONTACTS_TAB = 0;
 /**
  After one of twitter account is selected
  **/
--(void)afterTwitterSelected:(NSString *)selectedAccount{
+-(void)afterTwitterSelected:(ACAccount *)sAccount{
     if ([FlyerlySingleton connected]) {
         
         // HERE WE HIGHLIGHT BUTTON SELECT AND
@@ -732,9 +740,14 @@ const int CONTACTS_TAB = 0;
             // Current Item For Sharing
             //here we are not set Any Share Type for Override sendStatus Method of SHKTwitter
             SHKItem *item = [[SHKItem alloc] init];
-            [item setCustomValue:selectedAccount forKey:@"account"];
+            
+            if( sAccount ) {
+                [item setCustomValue:sAccount forKey:@"selectedAccount"];
+            }
+            
             // Create controller and set share options
             iosSharer = [FlyerlyTwitterFriends shareItem:item];
+            
             iosSharer.shareDelegate = self;
             
         }else {
@@ -778,11 +791,12 @@ const int CONTACTS_TAB = 0;
         [self.twitterBackupArray addObject:model];
     }
     
-    twitterArray = nil;
     twitterArray = twitterBackupArray;
     
-    [uiTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-    [self hideLoadingIndicator];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [uiTableView reloadData];
+        [self hideLoadingIndicator];
+    });
 }
 
 
@@ -974,11 +988,16 @@ const int CONTACTS_TAB = 0;
             SHKItem *item;
             
             item = [[SHKItem alloc]init];
-            [item setCustomValue:selectedAccount forKey:@"account"];
             
             item = [SHKItem text:tweet];
             [selectedIdentifiers addObject:model.description];
-            iosSharer = [SHKiOSTwitter shareItem:item];
+            
+            if ( availableAccounts.count > 0 ) {
+                iosSharer = [SHKiOSTwitter shareItem:item];
+            } else {
+                iosSharer = [SHKTwitter shareItem:item];
+            }
+            
             iosSharer.shareDelegate = self;
         
         }else if (model.status == 1) {
@@ -1081,9 +1100,10 @@ const int CONTACTS_TAB = 0;
         
         // HERE WE MAKE ARRAY FOR SHOW DATA IN TABLEVIEW
         [self makeTwitterArray:twitter.friendsList ];
-        [self.uiTableView reloadData];
         
-        
+        dispatch_async(dispatch_get_main_queue(), ^{
+           [self.uiTableView reloadData]; 
+        });
         
         return;
     }
@@ -1198,7 +1218,7 @@ const int CONTACTS_TAB = 0;
         self.twitterBackupArray = [[NSMutableArray alloc] init];
         [self.uiTableView reloadData];
         
-        selectedAccount = usernames[buttonIndex-1];
+        selectedAccount = availableAccounts[buttonIndex-1];
         [self afterTwitterSelected:selectedAccount];
         
         NSLog( @"currently selected user for twitter is %@ : ", selectedAccount );
