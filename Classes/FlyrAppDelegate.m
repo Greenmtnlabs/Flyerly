@@ -165,11 +165,11 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
     
-    return [PFFacebookUtils handleOpenURL:url];
+    
     
     if ([[url absoluteString] hasPrefix:[NSString stringWithFormat:@"fb%@", SHKCONFIG(facebookAppId)]]) {
         [SHKFacebook handleOpenURL:url sourceApplication:sourceApplication];
-        [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+       // [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
         return YES;
     }
     
@@ -177,7 +177,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         return YES;
     } else {
   
-        return nil;
+        return [PFFacebookUtils handleOpenURL:url];
         
     }
 }

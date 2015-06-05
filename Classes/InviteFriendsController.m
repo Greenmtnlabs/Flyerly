@@ -505,70 +505,62 @@ const int CONTACTS_TAB = 0;
  */
 - (IBAction)loadFacebookContacts:(UIButton *)sender{
     
-    SHKItem *item;
-
-    NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
+    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+    ACAccountType *facebookAccountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
     
-    NSString *urlToShare = [NSString stringWithFormat:@"%@%@", flyerConfigurator.referralURL, userUniqueObjectId];    
-    
-    item = [SHKItem URL:[NSURL URLWithString:urlToShare] title:sharingText contentType:SHKShareTypeURL];
-//    item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
-    iosSharer = [[SHKiOSFacebook alloc] init];
-    [iosSharer loadItem:item];
-    iosSharer.shareDelegate = self;
-    [iosSharer share];
-    
-    
-    /*if ([FlyerlySingleton connected]) {
-        
-        selectedTab = FACEBOOK_TAB;
-        [self.uiTableView reloadData];
-
-        // HERE WE HIGHLIGHT BUTTON ON TOUCH
-        // AND OTHERS SET UNSELECTED
-        [contactsButton setSelected:NO];
-        [twitterButton setSelected:NO];
-        [facebookButton setSelected:YES];
-        
-        [self showLoadingIndicator];
-        
-        self.selectedIdentifiers = nil;
-        self.selectedIdentifiers = [[NSMutableArray alloc] init];
-        
-        
-        if (facebookBackupArray == nil || facebookBackupArray.count == 0) {
-            searchTextField.text = @"";
-            facebookBackupArray = [[NSMutableArray alloc] init];
-            
-            // Current Item For Sharing
-            SHKItem *item = [[SHKItem alloc] init];
-            item.shareType = SHKShareTypeUserInfo;
-            
-            // Create controller and set share options
-            iosSharer = [FlyerlyFacebookFriends shareItem:item];
-            iosSharer.shareDelegate = self;
-        }else {
-
-            // INVITE BAR BUTTON
-            UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-            [inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
-            [inviteButton setBackgroundImage:[UIImage imageNamed:@"invite_friend"] forState:UIControlStateNormal];
-            inviteButton.showsTouchWhenHighlighted = YES;
-            UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
-            [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
-
-            [self onSearchClick:nil];
-            //Update Table View
-            [self.uiTableView reloadData];
-        
-        }
-    }else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        
-        [alert show];
-    }*/
+    [accountStore requestAccessToAccountsWithType:facebookAccountType
+                                       options:@{ACFacebookAppIdKey:flyerConfigurator.facebookAppId, ACFacebookPermissionsKey: @[flyerConfigurator.facebookWritePermissions]}
+                                       completion:^(BOOL granted, NSError *error) {
+                                           
+           if ( granted ) {
+               availableAccounts = [accountStore accountsWithAccountType:facebookAccountType];
+               
+               if ([availableAccounts count] > 0 ) {
+                   
+                   [self shareViaIOSFacebook:YES];
+                 
+               } else {
+                   
+                   [self shareViaIOSFacebook:NO];
+                  
+                }
+           } else {
+               
+               [self shareViaIOSFacebook:NO];
+           
+           }
+       }
+     ];
 }
 
+-(void) shareViaIOSFacebook:( BOOL ) withAccount {
+    SHKItem *item;
+    
+    NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
+    
+    NSString *urlToShare = [NSString stringWithFormat:@"%@%@", flyerConfigurator.referralURL, userUniqueObjectId];
+    
+    item = [SHKItem URL:[NSURL URLWithString:urlToShare] title:sharingText contentType:SHKShareTypeURL];
+    
+    if( withAccount ) {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            iosSharer = [SHKiOSFacebook shareItem:item];
+            iosSharer.shareDelegate = self;
+            [iosSharer share];
+
+        });
+        
+    } else {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            iosSharer = [SHKFacebook shareItem:item];
+            iosSharer.shareDelegate = self;
+            [iosSharer share];
+        });
+    }
+}
 
 /* HERE WE CREATE ARRAY LIST FOR UITABLEVIEW WHICH RECIVED FROM FACEBOOK REQUEST
  *@PARAM
@@ -631,35 +623,6 @@ const int CONTACTS_TAB = 0;
 }
 
 
-/*
- * Here we Send Request to facebook for tags Friends
- */
-- (void)fbSend{
-    
-    
-    // Current Item For Sharing
-    SHKItem *item = [SHKItem text:fbText];
-    item.tags = selectedIdentifiers;
-    
-    //Calling ShareKit for Sharing
-    iosSharer = [[SHKSharer alloc] init];
-    iosSharer = [SHKiOSFacebook shareItem:item];
-    iosSharer.shareDelegate = self;
-    
-    
-}
-
-/*
- * Here we Hide our facebook post View
- */
-- (void)fbCancel {
-    [selectedIdentifiers removeAllObjects];
-    [uiTableView reloadData];
-    
-}
-
-
-
 #pragma mark  TWITTER CONTACTS
 
 /*
@@ -708,7 +671,9 @@ const int CONTACTS_TAB = 0;
         }
         
     } else {
-        NSLog(@"Access not granted");
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self afterTwitterSelected:nil];
+        });
     }
 }];
     
@@ -986,8 +951,6 @@ const int CONTACTS_TAB = 0;
             iosSharer = [[ SHKiOSTwitter alloc] init];
             NSString *tweet = [NSString stringWithFormat:@"%@ @%@ #flyerly",sharingText,model.description];
             SHKItem *item;
-            
-            item = [[SHKItem alloc]init];
             
             item = [SHKItem text:tweet];
             [selectedIdentifiers addObject:model.description];
