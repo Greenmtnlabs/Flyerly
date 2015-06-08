@@ -282,7 +282,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     }
 
     // If the Documents folder has only one directory named anonymous then this is an anonymous user (hasn't signed up yet)
-    if(contentOfDirectory.count  > 0 && [[contentOfDirectory objectAtIndex:0] isEqual:@"anonymous"]){
+    if( [self isAnonUser:contentOfDirectory] == YES ){
         
         // This is an anonymous user
         [PFUser currentUser].username = @"anonymous";
@@ -336,6 +336,27 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 	[window makeKeyAndVisible];
     
     return YES;
+}
+
+/**
+ Check Whether we have anonymous user or regular user
+ **/
+-(BOOL)isAnonUser:(NSArray *)contentOfDirectory{
+    
+    BOOL *result = NO;
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7 && [[[UIDevice currentDevice] systemVersion] floatValue] < 8) {
+        if(contentOfDirectory.count  > 0 && [[contentOfDirectory objectAtIndex:0] isEqual:@"anonymous"]){
+            result = YES;
+        }
+        
+    } else if( [[[UIDevice currentDevice] systemVersion] floatValue] >= 8 ) {
+        if(contentOfDirectory.count  > 0 && [[contentOfDirectory objectAtIndex:1] isEqual:@"anonymous"]){
+            result = YES;
+        }
+    }
+    
+    return result;
 }
 
 /*
