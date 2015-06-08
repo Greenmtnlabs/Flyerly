@@ -274,7 +274,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     NSArray *contentOfDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:anonymousUserPath error:NULL];
     
     NSError *error;
-    if ( contentOfDirectory.count == 0 ) {
+    if ( contentOfDirectory.count > 0 ) {
         [[NSFileManager defaultManager] createDirectoryAtPath:[anonymousUserPath stringByAppendingString:@"/anonymous"] withIntermediateDirectories:YES attributes:nil error:&error];
         
         // Now check contents of document directory again
