@@ -483,6 +483,9 @@
                    dispatch_async(dispatch_get_main_queue(), ^{
                        //Calling ShareKit for Sharing via SHKiOSTwitter
                        iosSharer = [SHKiOSTwitter shareItem:item];
+                       // after sharing we have to call sharing delegates
+                       iosSharer.shareDelegate = self;
+                       [iosSharer share];
                    });
                    
                    
@@ -491,6 +494,9 @@
                    dispatch_async(dispatch_get_main_queue(), ^{
                        //Calling ShareKit for Sharing via SHKTWitter
                        iosSharer = [SHKTwitter shareItem:item];
+                       // after sharing we have to call sharing delegates
+                       iosSharer.shareDelegate = self;
+                       [iosSharer share];
                    });
                    
                }
@@ -499,12 +505,12 @@
                
                //Calling ShareKit for Sharing via SHKTWitter
                iosSharer = [SHKTwitter shareItem:item];
+               // after sharing we have to call sharing delegates
+               iosSharer.shareDelegate = self;
+               [iosSharer share];
            }
     }];
-    
-    // after sharing we have to call sharing delegates
-    iosSharer.shareDelegate = self;
-    
+
 }
 
 
