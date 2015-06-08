@@ -177,9 +177,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         return YES;
     } else {
   
-        return [FBAppCall handleOpenURL:url
-                      sourceApplication:sourceApplication
-                            withSession:[PFFacebookUtils session]];
+        return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
         
     }
 }
