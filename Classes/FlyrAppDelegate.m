@@ -343,20 +343,18 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
  **/
 -(BOOL)isAnonUser:(NSArray *)contentOfDirectory{
     
-    BOOL *result = NO;
-    
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7 && [[[UIDevice currentDevice] systemVersion] floatValue] < 8) {
-        if(contentOfDirectory.count  > 0 && [[contentOfDirectory objectAtIndex:0] isEqual:@"anonymous"]){
-            result = YES;
-        }
-        
-    } else if( [[[UIDevice currentDevice] systemVersion] floatValue] >= 8 ) {
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7 ) {
         if(contentOfDirectory.count  > 0 && [[contentOfDirectory objectAtIndex:1] isEqual:@"anonymous"]){
-            result = YES;
+            return YES;
+        }
+    } else {
+        
+        if(contentOfDirectory.count  > 0 && [[contentOfDirectory objectAtIndex:0] isEqual:@"anonymous"]){
+            return YES;
         }
     }
     
-    return result;
+    return NO;
 }
 
 /*
