@@ -164,20 +164,20 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
-    
-    return [PFFacebookUtils handleOpenURL:url];
-    
+        
     if ([[url absoluteString] hasPrefix:[NSString stringWithFormat:@"fb%@", SHKCONFIG(facebookAppId)]]) {
-        [SHKFacebook handleOpenURL:url sourceApplication:sourceApplication];
-        [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
-        return YES;
+        
+       //return One of the handled URL
+        return [FBAppCall handleOpenURL:url
+                      sourceApplication:sourceApplication
+                            withSession:[PFFacebookUtils session]] || [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
     }
     
     if([[url absoluteString] hasPrefix:kCallbackURLBaseStringPrefix]){
         return YES;
     } else {
   
-        return nil;
+        return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
         
     }
 }
@@ -274,7 +274,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     NSArray *contentOfDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:anonymousUserPath error:NULL];
     
     NSError *error;
-    if ( contentOfDirectory.count == 0 ) {
+    if ( contentOfDirectory.count < 3 ) {
         [[NSFileManager defaultManager] createDirectoryAtPath:[anonymousUserPath stringByAppendingString:@"/anonymous"] withIntermediateDirectories:YES attributes:nil error:&error];
         
         // Now check contents of document directory again
@@ -282,7 +282,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     }
 
     // If the Documents folder has only one directory named anonymous then this is an anonymous user (hasn't signed up yet)
-    if(contentOfDirectory.count  > 0 && [[contentOfDirectory objectAtIndex:0] isEqual:@"anonymous"]){
+    if( [self isAnonUser:contentOfDirectory] == YES ){
         
         // This is an anonymous user
         [PFUser currentUser].username = @"anonymous";
@@ -336,6 +336,25 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 	[window makeKeyAndVisible];
     
     return YES;
+}
+
+/**
+ Check Whether we have anonymous user or regular user
+ **/
+-(BOOL)isAnonUser:(NSArray *)contentOfDirectory{
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7 ) {
+        if(contentOfDirectory.count  > 0 && [[contentOfDirectory objectAtIndex:1] isEqual:@"anonymous"]){
+            return YES;
+        }
+    } else {
+        
+        if(contentOfDirectory.count  > 0 && [[contentOfDirectory objectAtIndex:0] isEqual:@"anonymous"]){
+            return YES;
+        }
+    }
+    
+    return NO;
 }
 
 /*

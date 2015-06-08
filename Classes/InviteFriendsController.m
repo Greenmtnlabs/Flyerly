@@ -22,7 +22,11 @@
     NSString *userUniqueObjectId;
     FlyerlyConfigurator *flyerConfigurator;
     NSString *cellDescriptionForRefrelFeature;
+    NSMutableArray *usernames;
+    NSArray *availableAccounts;
+    ACAccount *selectedAccount;
 }
+
 @synthesize uiTableView, contactsArray, selectedIdentifiers,contactsButton, facebookButton, twitterButton,  searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited;
 @synthesize contactBackupArray, facebookBackupArray, twitterBackupArray,refrelText;
 @synthesize fbText;
@@ -30,8 +34,6 @@
 const int TWITTER_TAB = 2;
 const int FACEBOOK_TAB = 1;
 const int CONTACTS_TAB = 0;
-NSMutableArray *usernames;
-NSString *selectedAccount;
 
 #pragma mark  View Appear Methods
 
@@ -503,70 +505,63 @@ NSString *selectedAccount;
  */
 - (IBAction)loadFacebookContacts:(UIButton *)sender{
     
-    SHKItem *item;
-
-    NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
+    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+    ACAccountType *facebookAccountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
     
-    NSString *urlToShare = [NSString stringWithFormat:@"%@%@", flyerConfigurator.referralURL, userUniqueObjectId];    
-    
-    item = [SHKItem URL:[NSURL URLWithString:urlToShare] title:sharingText contentType:SHKShareTypeURL];
-//    item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
-    iosSharer = [[SHKiOSFacebook alloc] init];
-    [iosSharer loadItem:item];
-    iosSharer.shareDelegate = self;
-    [iosSharer share];
-    
-    
-    /*if ([FlyerlySingleton connected]) {
-        
-        selectedTab = FACEBOOK_TAB;
-        [self.uiTableView reloadData];
-
-        // HERE WE HIGHLIGHT BUTTON ON TOUCH
-        // AND OTHERS SET UNSELECTED
-        [contactsButton setSelected:NO];
-        [twitterButton setSelected:NO];
-        [facebookButton setSelected:YES];
-        
-        [self showLoadingIndicator];
-        
-        self.selectedIdentifiers = nil;
-        self.selectedIdentifiers = [[NSMutableArray alloc] init];
-        
-        
-        if (facebookBackupArray == nil || facebookBackupArray.count == 0) {
-            searchTextField.text = @"";
-            facebookBackupArray = [[NSMutableArray alloc] init];
-            
-            // Current Item For Sharing
-            SHKItem *item = [[SHKItem alloc] init];
-            item.shareType = SHKShareTypeUserInfo;
-            
-            // Create controller and set share options
-            iosSharer = [FlyerlyFacebookFriends shareItem:item];
-            iosSharer.shareDelegate = self;
-        }else {
-
-            // INVITE BAR BUTTON
-            UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-            [inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
-            [inviteButton setBackgroundImage:[UIImage imageNamed:@"invite_friend"] forState:UIControlStateNormal];
-            inviteButton.showsTouchWhenHighlighted = YES;
-            UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
-            [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
-
-            [self onSearchClick:nil];
-            //Update Table View
-            [self.uiTableView reloadData];
-        
-        }
-    }else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        
-        [alert show];
-    }*/
+    [accountStore requestAccessToAccountsWithType:facebookAccountType
+                                       options:@{ACFacebookAppIdKey:flyerConfigurator.facebookAppId, ACFacebookPermissionsKey: @[flyerConfigurator.facebookWritePermissions]}
+                                       completion:^(BOOL granted, NSError *error) {
+                                           
+           if ( granted ) {
+               availableAccounts = [accountStore accountsWithAccountType:facebookAccountType];
+               
+               if ([availableAccounts count] > 0 ) {
+                   
+                   [self shareViaIOSFacebook:YES];
+                 
+               } else {
+                   
+                   [self shareViaIOSFacebook:NO];
+                  
+                }
+           } else {
+               
+               [self shareViaIOSFacebook:NO];
+           
+           }
+       }
+     ];
 }
 
+-(void) shareViaIOSFacebook:( BOOL ) withAccount {
+    SHKItem *item;
+    
+    NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
+    
+    NSString *urlToShare = [NSString stringWithFormat:@"%@%@", flyerConfigurator.referralURL, userUniqueObjectId];
+    
+    item = [SHKItem URL:[NSURL URLWithString:urlToShare] title:sharingText contentType:SHKShareTypeURL];
+    
+    if( withAccount ) {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            iosSharer = [[SHKiOSFacebook alloc] init];
+            [iosSharer loadItem:item];
+            iosSharer.shareDelegate = self;
+            [iosSharer share];
+
+        });
+        
+    } else {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            iosSharer = [SHKFacebook shareItem:item];
+            iosSharer.shareDelegate = self;
+            [iosSharer share];
+        });
+    }
+}
 
 /* HERE WE CREATE ARRAY LIST FOR UITABLEVIEW WHICH RECIVED FROM FACEBOOK REQUEST
  *@PARAM
@@ -629,35 +624,6 @@ NSString *selectedAccount;
 }
 
 
-/*
- * Here we Send Request to facebook for tags Friends
- */
-- (void)fbSend{
-    
-    
-    // Current Item For Sharing
-    SHKItem *item = [SHKItem text:fbText];
-    item.tags = selectedIdentifiers;
-    
-    //Calling ShareKit for Sharing
-    iosSharer = [[SHKSharer alloc] init];
-    iosSharer = [SHKiOSFacebook shareItem:item];
-    iosSharer.shareDelegate = self;
-    
-    
-}
-
-/*
- * Here we Hide our facebook post View
- */
-- (void)fbCancel {
-    [selectedIdentifiers removeAllObjects];
-    [uiTableView reloadData];
-    
-}
-
-
-
 #pragma mark  TWITTER CONTACTS
 
 /*
@@ -667,32 +633,57 @@ NSString *selectedAccount;
     
     ACAccountStore *accountStore = [[ACAccountStore alloc] init];
     ACAccountType *twitterAccountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-    NSArray *availableAccounts = [accountStore accountsWithAccountType:twitterAccountType];
     
-    
-   
-    if ([availableAccounts count] > 1) {
-    
-        usernames = [NSMutableArray arrayWithCapacity:0];
-        for (ACAccount *account in availableAccounts) {
-            [usernames addObject:account.username];
+    [accountStore requestAccessToAccountsWithType:twitterAccountType
+                                          options:nil
+                                       completion:^(BOOL granted, NSError *error) {
+    if ( granted ) {
+        availableAccounts = [accountStore accountsWithAccountType:twitterAccountType];
+        
+        if ([availableAccounts count] > 1) {
+            
+            usernames = [NSMutableArray arrayWithCapacity:[availableAccounts count]];
+            
+            for (ACAccount *acc in availableAccounts) {
+                [usernames addObject:acc.username];
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"Choose Twitter Account" message:nil delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:nil];
+                
+                for( NSString* number in usernames )
+                    [view addButtonWithTitle:number];
+                
+                [view show];
+            });
+            
+        } else if ([availableAccounts count] > 0 ) {
+            
+             dispatch_async(dispatch_get_main_queue(), ^{
+                // Just use the single account.
+                selectedAccount = [availableAccounts objectAtIndex:0];
+                [self afterTwitterSelected:selectedAccount];
+             });
+        } else {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self afterTwitterSelected:nil];
+            });
         }
+        
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self afterTwitterSelected:nil];
+        });
     }
+}];
     
-    UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"Choose Twitter Account" message:nil delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:nil];
-    
-    for(NSString* number in usernames)
-        [view addButtonWithTitle:number];
-    
-    [view show];
-    
-   
 }
 
 /**
  After one of twitter account is selected
  **/
--(void)afterTwitterSelected:(NSString *)selectedAccount{
+-(void)afterTwitterSelected:(ACAccount *)sAccount{
     if ([FlyerlySingleton connected]) {
         
         // HERE WE HIGHLIGHT BUTTON SELECT AND
@@ -715,9 +706,14 @@ NSString *selectedAccount;
             // Current Item For Sharing
             //here we are not set Any Share Type for Override sendStatus Method of SHKTwitter
             SHKItem *item = [[SHKItem alloc] init];
-            [item setCustomValue:selectedAccount forKey:@"account"];
+            
+            if( sAccount ) {
+                [item setCustomValue:sAccount forKey:@"selectedAccount"];
+            }
+            
             // Create controller and set share options
             iosSharer = [FlyerlyTwitterFriends shareItem:item];
+            
             iosSharer.shareDelegate = self;
             
         }else {
@@ -761,11 +757,12 @@ NSString *selectedAccount;
         [self.twitterBackupArray addObject:model];
     }
     
-    twitterArray = nil;
     twitterArray = twitterBackupArray;
     
-    [uiTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-    [self hideLoadingIndicator];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [uiTableView reloadData];
+        [self hideLoadingIndicator];
+    });
 }
 
 
@@ -952,16 +949,19 @@ NSString *selectedAccount;
             [selectedIdentifiers addObject:model.description];
             
             //Calling ShareKit for Sharing
-            iosSharer = [[ SHKTwitter alloc] init];
+            iosSharer = [[ SHKiOSTwitter alloc] init];
             NSString *tweet = [NSString stringWithFormat:@"%@ @%@ #flyerly",sharingText,model.description];
             SHKItem *item;
             
-            item = [[SHKItem alloc]init];
-            [item setCustomValue:selectedAccount forKey:@"account"];
-            
             item = [SHKItem text:tweet];
             [selectedIdentifiers addObject:model.description];
-            iosSharer = [SHKTwitter shareItem:item];
+            
+            if ( availableAccounts.count > 0 ) {
+                iosSharer = [SHKiOSTwitter shareItem:item];
+            } else {
+                iosSharer = [SHKTwitter shareItem:item];
+            }
+            
             iosSharer.shareDelegate = self;
         
         }else if (model.status == 1) {
@@ -1064,9 +1064,10 @@ NSString *selectedAccount;
         
         // HERE WE MAKE ARRAY FOR SHOW DATA IN TABLEVIEW
         [self makeTwitterArray:twitter.friendsList ];
-        [self.uiTableView reloadData];
         
-        
+        dispatch_async(dispatch_get_main_queue(), ^{
+           [self.uiTableView reloadData]; 
+        });
         
         return;
     }
@@ -1116,7 +1117,7 @@ NSString *selectedAccount;
 - (void)sharerCancelledSending:(SHKSharer *)sharer
 {
     
-    if ( [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
+    if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ) {
         [selectedIdentifiers   removeAllObjects];
     }
 
@@ -1181,7 +1182,7 @@ NSString *selectedAccount;
         self.twitterBackupArray = [[NSMutableArray alloc] init];
         [self.uiTableView reloadData];
         
-        selectedAccount = usernames[buttonIndex-1];
+        selectedAccount = availableAccounts[buttonIndex-1];
         [self afterTwitterSelected:selectedAccount];
         
         NSLog( @"currently selected user for twitter is %@ : ", selectedAccount );
