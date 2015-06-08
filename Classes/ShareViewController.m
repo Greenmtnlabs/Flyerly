@@ -483,6 +483,9 @@
                    dispatch_async(dispatch_get_main_queue(), ^{
                        //Calling ShareKit for Sharing via SHKiOSTwitter
                        iosSharer = [SHKiOSTwitter shareItem:item];
+                       // after sharing we have to call sharing delegates
+                       iosSharer.shareDelegate = self;
+                       [iosSharer share];
                    });
                    
                    
@@ -491,6 +494,9 @@
                    dispatch_async(dispatch_get_main_queue(), ^{
                        //Calling ShareKit for Sharing via SHKTWitter
                        iosSharer = [SHKTwitter shareItem:item];
+                       // after sharing we have to call sharing delegates
+                       iosSharer.shareDelegate = self;
+                       [iosSharer share];
                    });
                    
                }
@@ -499,12 +505,12 @@
                
                //Calling ShareKit for Sharing via SHKTWitter
                iosSharer = [SHKTwitter shareItem:item];
+               // after sharing we have to call sharing delegates
+               iosSharer.shareDelegate = self;
+               [iosSharer share];
            }
     }];
-    
-    // after sharing we have to call sharing delegates
-    iosSharer.shareDelegate = self;
-    
+
 }
 
 
@@ -659,6 +665,7 @@
     ACAccountType *facebookAccountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
     NSArray *availableAccounts = [accountStore accountsWithAccountType:facebookAccountType];
     
+    
    if ([availableAccounts count] > 0 ) {
        
        dispatch_async(dispatch_get_main_queue(), ^{
@@ -672,12 +679,14 @@
        });
        
    }
+    
+    [self updateDescription];
 
 }
 
 -(void)shareOnFacebook:(BOOL )hasAccount{
     
-    [self updateDescription];
+    
     
     // Current Item For Sharing
     SHKItem *item;
@@ -779,11 +788,13 @@
     [self.cfController enableHome:NO];
     
     // Update Flyer Share Info in Social File
-    if ( [sharer isKindOfClass:[SHKiOSFacebook class]] == YES ) {
+    if ( [sharer isKindOfClass:[SHKiOSFacebook class]] == YES  ||
+        [sharer isKindOfClass:[SHKFacebook class]] == YES ) {
         
         facebookButton.enabled = NO;
         
-    } else if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ) {
+    } else if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ||
+               [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
         
         twitterButton.enabled = NO;
         
@@ -822,14 +833,16 @@
 {
     // Here we Check Sharer for
     // Update Flyer Share Info in Social File
-    if ( [sharer isKindOfClass:[SHKiOSFacebook class]] == YES ) {
+    if ( [sharer isKindOfClass:[SHKiOSFacebook class]] == YES ||
+        [sharer isKindOfClass:[SHKFacebook class]] == YES) {
         
         facebookButton.enabled = YES;
         [self.flyer setFacebookStatus:1];
         [Flurry logEvent:@"Shared Facebook"];
 
         
-    } else if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ) {
+    } else if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ||
+               [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
         
         twitterButton.enabled = YES;
         [self.flyer setTwitterStatus:1];
