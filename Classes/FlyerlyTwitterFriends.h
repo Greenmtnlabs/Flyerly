@@ -15,6 +15,5 @@
     NSDecimalNumber  *nextCursor;
 }
 
-
 @property (nonatomic,strong)NSMutableDictionary *friendsList;
 @end

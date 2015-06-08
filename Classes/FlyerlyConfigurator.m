@@ -235,7 +235,7 @@
 }
 
 - (NSString*)facebookLocalAppId {
-	return @"fb136691489852349";
+	return nil;
 }
 
 //Change if your app needs some special Facebook permissions only. In most cases you can leave it as it is.
