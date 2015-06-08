@@ -677,12 +677,12 @@
 
 -(void)shareOnFacebook:(BOOL )hasAccount{
     
+    [self updateDescription];
+    
+    // Current Item For Sharing
+    SHKItem *item;
+    
     if( hasAccount ){
-        
-        [self updateDescription];
-        
-        // Current Item For Sharing
-        SHKItem *item;
         
         if ([flyer isVideoFlyer]) {
             // getting youtube link from flyer and sharing on facebook via url
@@ -692,23 +692,18 @@
             item = [SHKItem URL:videoURL title:@"Share On Youtube" contentType:SHKURLContentTypeVideo];
             //item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
             iosSharer = [[SHKiOSFacebook alloc] init];
-            [iosSharer loadItem:item];
             
         } else {
             
             item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly ", selectedFlyerDescription ]];
             item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
             iosSharer = [[SHKiOSFacebook alloc] init];
-            [iosSharer loadItem:item];
+            
         }
-
+          // in the end we need to load item for share
+         [iosSharer loadItem:item];
         
     } else {
-        
-        [self updateDescription];
-        
-        // Current Item For Sharing
-        SHKItem *item;
         
         if ([flyer isVideoFlyer]) {
             // getting youtube link from flyer and sharing on facebook via url
@@ -717,7 +712,6 @@
             
             item = [SHKItem URL:videoURL title:@"Share On Youtube" contentType:SHKURLContentTypeVideo];
             iosSharer = [SHKFacebook shareItem:item];
-
             
         }
         else {
@@ -727,6 +721,7 @@
             
         }
     }
+    // at last we need to call delegates of sharing and start sharing.
     iosSharer.shareDelegate = self;
     [iosSharer share];
    

@@ -545,7 +545,8 @@ const int CONTACTS_TAB = 0;
     if( withAccount ) {
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            iosSharer = [SHKiOSFacebook shareItem:item];
+            iosSharer = [[SHKiOSFacebook alloc] init];
+            [iosSharer loadItem:item];
             iosSharer.shareDelegate = self;
             [iosSharer share];
 
