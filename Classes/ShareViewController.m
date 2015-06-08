@@ -447,10 +447,14 @@
  * Called when twitter button is pressed
  */
 -(IBAction)onClickTwitterButton{
-
+    
+    // update description on onClick Twitter Sharing Button
     [self updateDescription];
     
+    // Declare Item to be share
     SHKItem *item;
+    
+    //check whether item is video or just an image
     if ([self.flyer isVideoFlyer]) {
         
         // Current Video Link For Sharing
@@ -459,15 +463,48 @@
     }else {
         
         // Current Image For Sharing
-         item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly", selectedFlyerDescription ]];
+        item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly", selectedFlyerDescription ]];
     }
-    
-    //Calling ShareKit for Sharing
-    iosSharer = [[ SHKSharer alloc] init];
-    iosSharer = [SHKiOSTwitter shareItem:item];
-    iosSharer.shareDelegate = self;
-    iosSharer = nil;
 
+    // get the twitter accounts from the phone
+    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+    ACAccountType *twitterAccountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    
+    [accountStore requestAccessToAccountsWithType:twitterAccountType
+                                       options:nil
+                                       completion:^(BOOL granted, NSError *error) {
+           if ( granted ) {
+                NSArray *availableAccounts = [accountStore accountsWithAccountType:twitterAccountType];
+               
+               //if we have any account of twitter on phone then we'll call SHKiOSTwitter for sharing
+               // else there will be a simple dialog to share on Twitter
+               if ([availableAccounts count] > 0) {
+                   
+                   dispatch_async(dispatch_get_main_queue(), ^{
+                       //Calling ShareKit for Sharing via SHKiOSTwitter
+                       iosSharer = [SHKiOSTwitter shareItem:item];
+                   });
+                   
+                   
+               } else {
+                   
+                   dispatch_async(dispatch_get_main_queue(), ^{
+                       //Calling ShareKit for Sharing via SHKTWitter
+                       iosSharer = [SHKTwitter shareItem:item];
+                   });
+                   
+               }
+               
+           } else {
+               
+               //Calling ShareKit for Sharing via SHKTWitter
+               iosSharer = [SHKTwitter shareItem:item];
+           }
+    }];
+    
+    // after sharing we have to call sharing delegates
+    iosSharer.shareDelegate = self;
+    
 }
 
 
@@ -614,35 +651,86 @@
  */
 -(IBAction)onClickFacebookButton{
     
-    [self updateDescription];
+    //We just need to check if device has account or not.
+    // If it has, then share directly via iOSfacebook, else we need to share
+    // via browser authentication service.
     
-    // Current Item For Sharing
-    SHKItem *item;
+    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+    ACAccountType *facebookAccountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
+    NSArray *availableAccounts = [accountStore accountsWithAccountType:facebookAccountType];
     
-    if ([flyer isVideoFlyer]) {
-        // getting youtube link from flyer and sharing on facebook via url
-        NSString *getYouTubeLink = [self.flyer getYoutubeLink];
-        NSURL *videoURL = [NSURL URLWithString:getYouTubeLink];
+   if ([availableAccounts count] > 0 ) {
+       
+       dispatch_async(dispatch_get_main_queue(), ^{
+           [self shareOnFacebook:YES];
+       });
+       
+   } else {
+       
+       dispatch_async(dispatch_get_main_queue(), ^{
+           [self shareOnFacebook:NO];
+       });
+       
+   }
+
+}
+
+-(void)shareOnFacebook:(BOOL )hasAccount{
+    
+    if( hasAccount ){
         
-        item = [SHKItem URL:videoURL title:@"Share On Youtube" contentType:SHKURLContentTypeVideo];
-        //item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
-        iosSharer = [[SHKiOSFacebook alloc] init];
-        [iosSharer loadItem:item];
-        iosSharer.shareDelegate = self;
-        [iosSharer share];
+        [self updateDescription];
         
+        // Current Item For Sharing
+        SHKItem *item;
+        
+        if ([flyer isVideoFlyer]) {
+            // getting youtube link from flyer and sharing on facebook via url
+            NSString *getYouTubeLink = [self.flyer getYoutubeLink];
+            NSURL *videoURL = [NSURL URLWithString:getYouTubeLink];
+            
+            item = [SHKItem URL:videoURL title:@"Share On Youtube" contentType:SHKURLContentTypeVideo];
+            //item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
+            iosSharer = [[SHKiOSFacebook alloc] init];
+            [iosSharer loadItem:item];
+            
+        } else {
+            
+            item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly ", selectedFlyerDescription ]];
+            item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
+            iosSharer = [[SHKiOSFacebook alloc] init];
+            [iosSharer loadItem:item];
+        }
+
+        
+    } else {
+        
+        [self updateDescription];
+        
+        // Current Item For Sharing
+        SHKItem *item;
+        
+        if ([flyer isVideoFlyer]) {
+            // getting youtube link from flyer and sharing on facebook via url
+            NSString *getYouTubeLink = [self.flyer getYoutubeLink];
+            NSURL *videoURL = [NSURL URLWithString:getYouTubeLink];
+            
+            item = [SHKItem URL:videoURL title:@"Share On Youtube" contentType:SHKURLContentTypeVideo];
+            iosSharer = [SHKFacebook shareItem:item];
+
+            
+        }
+        else {
+            
+            item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly ", selectedFlyerDescription ]];
+            iosSharer = [SHKFacebook shareItem:item];
+            
+        }
     }
-    else {
-        
-        item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly ", selectedFlyerDescription ]];
-        item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
-        iosSharer = [[SHKiOSFacebook alloc] init];
-        [iosSharer loadItem:item];
-        iosSharer.shareDelegate = self;
-        [iosSharer share];
-        
-          }
-    }
+    iosSharer.shareDelegate = self;
+    [iosSharer share];
+   
+}
 
 /*
  * Called when clipboard button is pressed
