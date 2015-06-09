@@ -270,7 +270,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     
     // Then we create a directory for anonymous users data
     NSString *homeDirectoryPath = NSHomeDirectory();
-    NSString *anonymousUserPath = [homeDirectoryPath stringByAppendingString:@"/Documents"];
+    NSString *anonymousUserPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents"]];
     NSArray *contentOfDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:anonymousUserPath error:NULL];
     
     // get the number of folders in current directory.
