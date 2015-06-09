@@ -277,7 +277,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     int numberOfFolders = [self checkNumberOfFolders:contentOfDirectory path:anonymousUserPath];
     
     NSError *error;
-    // if there is no directory then create one for anonymous. 
+    // if there is no directory then create one for anonymous.
     if ( numberOfFolders == 0 ) {
         [[NSFileManager defaultManager] createDirectoryAtPath:[anonymousUserPath stringByAppendingString:@"/anonymous"] withIntermediateDirectories:YES attributes:nil error:&error];
         
@@ -348,14 +348,15 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     
     filemgr = [NSFileManager defaultManager];
     
-
-    
+    // initializing count
     int count = 0;
-    for( int i = 0; i < contentOfFolders.count; i++ ){
+    for( int i = 0; i < contentOfFolders.count; i++ ) {
+        
         NSString *thisFilePath = [NSString stringWithFormat:@"%@/%@",path,contentOfFolders[i]];
         attribs = [filemgr attributesOfItemAtPath:thisFilePath error: NULL];
         if( [[attribs objectForKey: @"NSFileType"] isEqualToString:NSFileTypeDirectory]  ){
             count++;
+            
         }
     }
     
