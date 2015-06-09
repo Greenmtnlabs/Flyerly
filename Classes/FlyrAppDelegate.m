@@ -273,8 +273,12 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     NSString *anonymousUserPath = [homeDirectoryPath stringByAppendingString:@"/Documents"];
     NSArray *contentOfDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:anonymousUserPath error:NULL];
     
+    // get the number of folders in current directory.
+    int numberOfFolders = [self checkNumberOfFolders:contentOfDirectory path:anonymousUserPath];
+    
     NSError *error;
-    if ( contentOfDirectory.count == 0 ) {
+    // if there is no directory then create one for anonymous. 
+    if ( numberOfFolders == 0 ) {
         [[NSFileManager defaultManager] createDirectoryAtPath:[anonymousUserPath stringByAppendingString:@"/anonymous"] withIntermediateDirectories:YES attributes:nil error:&error];
         
         // Now check contents of document directory again
@@ -335,6 +339,27 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 	[window makeKeyAndVisible];
     
     return YES;
+}
+
+-(int)checkNumberOfFolders:(NSArray * )contentOfFolders path:(NSString *) path {
+
+    NSFileManager *filemgr;
+    NSDictionary *attribs;
+    
+    filemgr = [NSFileManager defaultManager];
+    
+
+    
+    int count = 0;
+    for( int i = 0; i < contentOfFolders.count; i++ ){
+        NSString *thisFilePath = [NSString stringWithFormat:@"%@/%@",path,contentOfFolders[i]];
+        attribs = [filemgr attributesOfItemAtPath:thisFilePath error: NULL];
+        if( [[attribs objectForKey: @"NSFileType"] isEqualToString:NSFileTypeDirectory]  ){
+            count++;
+        }
+    }
+    
+    return count;
 }
 
 /*
