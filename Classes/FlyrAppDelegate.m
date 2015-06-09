@@ -270,20 +270,19 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     
     // Then we create a directory for anonymous users data
     NSString *homeDirectoryPath = NSHomeDirectory();
-    NSString *anonymousUserPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents"]];
+    NSString *anonymousUserPath = [homeDirectoryPath stringByAppendingString:@"/Documents"];
     NSArray *contentOfDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:anonymousUserPath error:NULL];
     
     NSError *error;
-    if ( contentOfDirectory.count < 3 ) {
+    if ( contentOfDirectory.count == 0 ) {
         [[NSFileManager defaultManager] createDirectoryAtPath:[anonymousUserPath stringByAppendingString:@"/anonymous"] withIntermediateDirectories:YES attributes:nil error:&error];
         
         // Now check contents of document directory again
         contentOfDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:anonymousUserPath error:NULL];
     }
-
+    
     // If the Documents folder has only one directory named anonymous then this is an anonymous user (hasn't signed up yet)
-    if( [self isAnonUser:contentOfDirectory] == YES ){
-        
+    if(contentOfDirectory.count  > 0 && [[contentOfDirectory objectAtIndex:0] isEqual:@"anonymous"]){
         // This is an anonymous user
         [PFUser currentUser].username = @"anonymous";
         [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"UpdatedVersion"];
@@ -336,25 +335,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 	[window makeKeyAndVisible];
     
     return YES;
-}
-
-/**
- Check Whether we have anonymous user or regular user
- **/
--(BOOL)isAnonUser:(NSArray *)contentOfDirectory{
-    
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7 ) {
-        if(contentOfDirectory.count  > 0 && [[contentOfDirectory objectAtIndex:1] isEqual:@"anonymous"]){
-            return YES;
-        }
-    } else {
-        
-        if(contentOfDirectory.count  > 0 && [[contentOfDirectory objectAtIndex:0] isEqual:@"anonymous"]){
-            return YES;
-        }
-    }
-    
-    return NO;
 }
 
 /*
