@@ -341,6 +341,10 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     return YES;
 }
 
+/**
+ A method that will check the number of folders at specified given path,
+ will return the count of folders.
+ **/
 -(int)checkNumberOfFolders:(NSArray * )contentOfFolders path:(NSString *) path {
 
     NSFileManager *filemgr;
