@@ -273,17 +273,20 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     NSString *anonymousUserPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents"]];
     NSArray *contentOfDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:anonymousUserPath error:NULL];
     
+    // get the number of folders in current directory.
+    int numberOfFolders = [self checkNumberOfFolders:contentOfDirectory path:anonymousUserPath];
+    
     NSError *error;
-    if ( contentOfDirectory.count < 3 ) {
+    // if there is no directory then create one for anonymous.
+    if ( numberOfFolders == 0 ) {
         [[NSFileManager defaultManager] createDirectoryAtPath:[anonymousUserPath stringByAppendingString:@"/anonymous"] withIntermediateDirectories:YES attributes:nil error:&error];
         
         // Now check contents of document directory again
         contentOfDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:anonymousUserPath error:NULL];
     }
-
+    
     // If the Documents folder has only one directory named anonymous then this is an anonymous user (hasn't signed up yet)
-    if( [self isAnonUser:contentOfDirectory] == YES ){
-        
+    if(contentOfDirectory.count  > 0 && [[contentOfDirectory objectAtIndex:0] isEqual:@"anonymous"]){
         // This is an anonymous user
         [PFUser currentUser].username = @"anonymous";
         [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"UpdatedVersion"];
@@ -339,22 +342,29 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 }
 
 /**
- Check Whether we have anonymous user or regular user
+ A method that will check the number of folders at specified given path,
+ will return the count of folders.
  **/
--(BOOL)isAnonUser:(NSArray *)contentOfDirectory{
+-(int)checkNumberOfFolders:(NSArray * )contentOfFolders path:(NSString *) path {
+
+    NSFileManager *filemgr;
+    NSDictionary *attribs;
     
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7 ) {
-        if(contentOfDirectory.count  > 0 && [[contentOfDirectory objectAtIndex:1] isEqual:@"anonymous"]){
-            return YES;
-        }
-    } else {
+    filemgr = [NSFileManager defaultManager];
+    
+    // initializing count
+    int count = 0;
+    for( int i = 0; i < contentOfFolders.count; i++ ) {
         
-        if(contentOfDirectory.count  > 0 && [[contentOfDirectory objectAtIndex:0] isEqual:@"anonymous"]){
-            return YES;
+        NSString *thisFilePath = [NSString stringWithFormat:@"%@/%@",path,contentOfFolders[i]];
+        attribs = [filemgr attributesOfItemAtPath:thisFilePath error: NULL];
+        if( [[attribs objectForKey: @"NSFileType"] isEqualToString:NSFileTypeDirectory]  ){
+            count++;
+            
         }
     }
     
-    return NO;
+    return count;
 }
 
 /*
