@@ -275,12 +275,12 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     
     // get the number of folders in current directory.
     NSArray *arrayOfValues = [self checkNumberOfFolders:contentOfDirectory path:anonymousUserPath];
-    int retCount = [[arrayOfValues objectAtIndex:0] intValue];
+    int numberOfFolders = [[arrayOfValues objectAtIndex:0] intValue];
     int indexForAnon  = [[arrayOfValues objectAtIndex:1] intValue];
     
     NSError *error;
     // if there is no directory then create one for anonymous.
-    if ( retCount == 0 ) {
+    if ( numberOfFolders == 0 ) {
         [[NSFileManager defaultManager] createDirectoryAtPath:[anonymousUserPath stringByAppendingString:@"/anonymous"] withIntermediateDirectories:YES attributes:nil error:&error];
         
         // Now check contents of document directory again
