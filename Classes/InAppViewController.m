@@ -153,7 +153,7 @@
     int rowIndex = (int) indexPath.row;
     
     //if not cancel and Restore button presses
-    if(rowIndex == 0 || rowIndex == 1 || rowIndex == 2 || rowIndex == 3) {
+    if(rowIndex == 0 || rowIndex == 1 || rowIndex == 2 || rowIndex == 3 || rowIndex == 4) {
         
         //Checking if the user is valid or anonymus
         if ([[PFUser currentUser] sessionToken].length != 0) {
