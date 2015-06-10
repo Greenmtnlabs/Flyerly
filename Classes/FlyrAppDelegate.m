@@ -274,7 +274,9 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     NSArray *contentOfDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:anonymousUserPath error:NULL];
     
     // get the number of folders in current directory.
-    int numberOfFolders = [self checkNumberOfFolders:contentOfDirectory path:anonymousUserPath];
+    NSArray *arrayOfValues = [self checkNumberOfFolders:contentOfDirectory path:anonymousUserPath];
+    int numberOfFolders = [[arrayOfValues objectAtIndex:0] intValue];
+    int indexForAnon  = [[arrayOfValues objectAtIndex:1] intValue];
     
     NSError *error;
     // if there is no directory then create one for anonymous.
@@ -286,7 +288,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     }
     
     // If the Documents folder has only one directory named anonymous then this is an anonymous user (hasn't signed up yet)
-    if(contentOfDirectory.count  > 0 && [[contentOfDirectory objectAtIndex:0] isEqual:@"anonymous"]){
+    if(contentOfDirectory.count  > 0 && [[contentOfDirectory objectAtIndex:indexForAnon] isEqual:@"anonymous"]){
         // This is an anonymous user
         [PFUser currentUser].username = @"anonymous";
         [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"UpdatedVersion"];
@@ -345,7 +347,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
  A method that will check the number of folders at specified given path,
  will return the count of folders.
  **/
--(int)checkNumberOfFolders:(NSArray * )contentOfFolders path:(NSString *) path {
+-(NSArray *)checkNumberOfFolders:(NSArray * )contentOfFolders path:(NSString *) path {
 
     NSFileManager *filemgr;
     NSDictionary *attribs;
@@ -354,6 +356,10 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     
     // initializing count
     int count = 0;
+    
+    //remember the index of the anon user
+    int indexForAnon = 0;
+    
     for( int i = 0; i < contentOfFolders.count; i++ ) {
         
         NSString *thisFilePath = [NSString stringWithFormat:@"%@/%@",path,contentOfFolders[i]];
@@ -362,9 +368,16 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
             count++;
             
         }
+        // check where anonymous folder index is
+        if( [thisFilePath containsString:@"anonymous"] ) {
+            indexForAnon = i;
+        }
     }
     
-    return count;
+    // array that holds count of number of directories at path and the index where aonymous folder lies.
+    // at 0th index we'll save count of directories and at 1st index we'll save index of anonymous folder
+    NSArray *returnArray = [NSArray arrayWithObjects:[NSNumber numberWithInt:count], [NSNumber numberWithInt:indexForAnon], nil];
+    return returnArray;
 }
 
 /*
