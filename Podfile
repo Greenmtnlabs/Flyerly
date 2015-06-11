@@ -18,3 +18,6 @@ platform :ios, '7.0'
 	pod 'NBUImagePicker', '~> 1.5.3'
 	pod 'Parse', '~> 1.7.3'
 	pod 'ParseFacebookUtils', '~> 1.7.4'
+
+	# Open SSL
+	pod 'OpenSSL', '~> 1.0.201' 
