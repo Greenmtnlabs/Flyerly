@@ -306,8 +306,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
         }
         
     } else{
-        NSLog(@"Json parsin may error aya hy, error=%@", error);
-        //lbl_status.text = @"Json parsin may error aya hy";
+        NSLog(@"Error while trying to parse JSON. Error : %@", error);
     }
     
 }

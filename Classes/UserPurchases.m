@@ -8,6 +8,7 @@
 
 #import "UserPurchases.h"
 #import "FlyerUser.h"
+#import "RMAppReceipt.h"
 
 @implementation UserPurchases
 
@@ -34,19 +35,20 @@ static UserPurchases *sharedSingleton = nil;
 }
 
 - (BOOL) checkKeyExistsInPurchases : (NSString *)productId {
-
-    if ( [oldPurchases objectForKey:@"comflyerlyAllDesignBundle"] ) {
-        return true;
-    }else {
+    
+    if ( [oldPurchases objectForKey:@"comflyerlyAllDesignBundle"] || [self isSubscriptionValid] ) {
+        
+        return YES;
+        
+    } else {
     
         NSString *productId_ = [productId stringByReplacingOccurrencesOfString:@"." withString:@""];
-        if ([oldPurchases objectForKey:productId_]) {
-            return true;
-        }else {
-            return false;
+        
+        if ( ![productId_ isEqualToString:@"comflyerlyMonthlySubscription"] && [oldPurchases objectForKey:productId_] ) {
+            return YES;
         }
     }
-
+    return NO;
 }
 
 /*
@@ -110,6 +112,23 @@ static UserPurchases *sharedSingleton = nil;
         oldPurchases = nil;
     }
     
+}
+
+/**
+ Check if monthly subscription is valid or not
+**/
+-(BOOL)isSubscriptionValid{
+    
+    RMAppReceipt* appReceipt = [RMAppReceipt bundleReceipt];
+    
+    NSLog(@"Is subscription is valid?, Valid: %d", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:@"com.flyerly.MonthlySubscription" forDate:[NSDate date]]);
+    
+    NSString *isValid =[NSString stringWithFormat:@"%hhd", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:@"com.flyerly.MonthlySubscription" forDate:[NSDate date]]];
+    if( [isValid isEqual:@"0"] ){
+        return NO;
+    } else {
+        return YES;
+    }
 }
 
 @end

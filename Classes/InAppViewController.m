@@ -153,7 +153,7 @@
     int rowIndex = (int) indexPath.row;
     
     //if not cancel and Restore button presses
-    if(rowIndex == 0 || rowIndex == 1 || rowIndex == 2 || rowIndex == 3) {
+    if(rowIndex == 0 || rowIndex == 1 || rowIndex == 2 || rowIndex == 3 || rowIndex == 4) {
         
         //Checking if the user is valid or anonymus
         if ([[PFUser currentUser] sessionToken].length != 0) {
@@ -162,17 +162,20 @@
             NSDictionary *product = [productArray objectAtIndex:rowIndex];
             NSString* productIdentifier= product[@"productidentifier"];
             
-            if ( [userPurchases checkKeyExistsInPurchases:productIdentifier] ) {
+            if ( ![productIdentifier isEqualToString:@"com.flyerly.MonthlySubscription" ] && [userPurchases checkKeyExistsInPurchases:productIdentifier] )  {
                 
-                UIAlertView *alradyPurchasedAlert = [[UIAlertView alloc] initWithTitle: @"Product already purchased"
-                                                                    message: @"You have already purchased this item."
-                                                                   delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
+                // show alert that item has already been purchased
+                [self showAlreadyPurchasedAlert];
                 
-                [alradyPurchasedAlert show];
+            }else if( [productIdentifier isEqualToString:@"com.flyerly.MonthlySubscription" ] && [ userPurchases isSubscriptionValid ]) {
                 
-            }else {
+                // show alert that item has already been purchased
+                [self showAlreadyPurchasedAlert];
+                
+            } else {
                 
                 [self purchaseProductAtIndex:rowIndex];
+            
             }
             
         }else {
@@ -350,7 +353,7 @@
         cancelRequest = NO;
         
         //These are over Products on App Store
-        NSSet *productIdentifiers = [NSSet setWithArray:@[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.IconsBundle"]];
+        NSSet *productIdentifiers = [NSSet setWithArray:@[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.IconsBundle", @"com.flyerly.MonthlySubscription"]];
         
         [[RMStore defaultStore] requestProducts:productIdentifiers success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
             
@@ -405,7 +408,7 @@
         
         //HERE WE GET SHARED INTANCE OF _persistence WHICH WE LINKED IN FlyrAppDelegate
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        NSArray *productIdentifiers = @[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption",@"ccom.flyerly.IconsBundle"];
+        NSArray *productIdentifiers = @[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.IconsBundle", @"com.flyerly.MonthlySubscription"];
         
         if (productIdentifiers.count >= 1) {
             
@@ -450,6 +453,15 @@
     
     [self.paidFeaturesTview flashScrollIndicators];
     [self.freeFeaturesTview flashScrollIndicators];
+}
+
+-(void)showAlreadyPurchasedAlert{
+    UIAlertView *alradyPurchasedAlert = [[UIAlertView alloc] initWithTitle: @"Product already purchased"
+                                                                   message: @"You have already purchased this item."
+                                                                  delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
+    
+    [alradyPurchasedAlert show];
+
 }
 
 @end
