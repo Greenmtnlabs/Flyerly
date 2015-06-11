@@ -6689,7 +6689,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     userPurchases.delegate = self;
     
     if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-        [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+        [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ||
+        [userPurchases isSubscriptionValid] ) {
         
         UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
         [addVideoTabButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
@@ -6702,7 +6703,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     //Checking if user valid purchases
     if ( ([userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-        [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"])    ) {
+        [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"])        ||
+        [userPurchases isSubscriptionValid ] ) {
         
         fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts-paid" ofType:@"plist"];
         clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts-paid" ofType:@"plist"];

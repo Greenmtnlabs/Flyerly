@@ -23,6 +23,6 @@
 + (id) getInstance;
 - (void) setUserPurcahsesFromParse;
 - (BOOL) checkKeyExistsInPurchases : (NSString *)productId;
-
+- (BOOL) isSubscriptionValid;
 @end
 

@@ -482,6 +482,11 @@
 		24218512194B4AEC00FDDA97 /* wrestling-freestyle-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 24218453194B4AEC00FDDA97 /* wrestling-freestyle-icon.png */; };
 		24218513194B4AEC00FDDA97 /* wrestling-greco-roman-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 24218454194B4AEC00FDDA97 /* wrestling-greco-roman-icon.png */; };
 		24218514194B4AEC00FDDA97 /* Wrestling-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 24218455194B4AEC00FDDA97 /* Wrestling-icon.png */; };
+		242BFA7A1B29711800EF370B /* RMAppReceipt.m in Sources */ = {isa = PBXBuildFile; fileRef = 242BFA6E1B29711800EF370B /* RMAppReceipt.m */; };
+		242BFA7B1B29711800EF370B /* RMStoreAppReceiptVerificator.m in Sources */ = {isa = PBXBuildFile; fileRef = 242BFA701B29711800EF370B /* RMStoreAppReceiptVerificator.m */; };
+		242BFA7C1B29711800EF370B /* RMStoreTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 242BFA721B29711800EF370B /* RMStoreTransaction.m */; };
+		242BFA7D1B29711800EF370B /* RMStoreTransactionReceiptVerificator.m in Sources */ = {isa = PBXBuildFile; fileRef = 242BFA741B29711800EF370B /* RMStoreTransactionReceiptVerificator.m */; };
+		242BFA7E1B29711800EF370B /* RMStoreUserDefaultsPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = 242BFA761B29711800EF370B /* RMStoreUserDefaultsPersistence.m */; };
 		2431D46319C2ED750008A301 /* PrintViewController-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2431D46219C2ED750008A301 /* PrintViewController-iPhone4.xib */; };
 		2433AC3F1A020E7200F7CF42 /* InviteFreindsCell-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2433AC3D1A020E7200F7CF42 /* InviteFreindsCell-iPhone6.xib */; };
 		2433AC401A020E7200F7CF42 /* InviteFreindsCell-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2433AC3E1A020E7200F7CF42 /* InviteFreindsCell-iPhone6-Plus.xib */; };
@@ -1927,6 +1932,16 @@
 		24218453194B4AEC00FDDA97 /* wrestling-freestyle-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wrestling-freestyle-icon.png"; sourceTree = "<group>"; };
 		24218454194B4AEC00FDDA97 /* wrestling-greco-roman-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wrestling-greco-roman-icon.png"; sourceTree = "<group>"; };
 		24218455194B4AEC00FDDA97 /* Wrestling-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Wrestling-icon.png"; sourceTree = "<group>"; };
+		242BFA6D1B29711800EF370B /* RMAppReceipt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAppReceipt.h; sourceTree = "<group>"; };
+		242BFA6E1B29711800EF370B /* RMAppReceipt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAppReceipt.m; sourceTree = "<group>"; };
+		242BFA6F1B29711800EF370B /* RMStoreAppReceiptVerificator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStoreAppReceiptVerificator.h; sourceTree = "<group>"; };
+		242BFA701B29711800EF370B /* RMStoreAppReceiptVerificator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStoreAppReceiptVerificator.m; sourceTree = "<group>"; };
+		242BFA711B29711800EF370B /* RMStoreTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStoreTransaction.h; sourceTree = "<group>"; };
+		242BFA721B29711800EF370B /* RMStoreTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStoreTransaction.m; sourceTree = "<group>"; };
+		242BFA731B29711800EF370B /* RMStoreTransactionReceiptVerificator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStoreTransactionReceiptVerificator.h; sourceTree = "<group>"; };
+		242BFA741B29711800EF370B /* RMStoreTransactionReceiptVerificator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStoreTransactionReceiptVerificator.m; sourceTree = "<group>"; };
+		242BFA751B29711800EF370B /* RMStoreUserDefaultsPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStoreUserDefaultsPersistence.h; sourceTree = "<group>"; };
+		242BFA761B29711800EF370B /* RMStoreUserDefaultsPersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStoreUserDefaultsPersistence.m; sourceTree = "<group>"; };
 		2431D46219C2ED750008A301 /* PrintViewController-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "PrintViewController-iPhone4.xib"; sourceTree = "<group>"; };
 		2433AC3D1A020E7200F7CF42 /* InviteFreindsCell-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "InviteFreindsCell-iPhone6.xib"; sourceTree = "<group>"; };
 		2433AC3E1A020E7200F7CF42 /* InviteFreindsCell-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "InviteFreindsCell-iPhone6-Plus.xib"; sourceTree = "<group>"; };
@@ -3694,6 +3709,16 @@
 		2026992818CED69600945218 /* Purchase */ = {
 			isa = PBXGroup;
 			children = (
+				242BFA6D1B29711800EF370B /* RMAppReceipt.h */,
+				242BFA6E1B29711800EF370B /* RMAppReceipt.m */,
+				242BFA6F1B29711800EF370B /* RMStoreAppReceiptVerificator.h */,
+				242BFA701B29711800EF370B /* RMStoreAppReceiptVerificator.m */,
+				242BFA711B29711800EF370B /* RMStoreTransaction.h */,
+				242BFA721B29711800EF370B /* RMStoreTransaction.m */,
+				242BFA731B29711800EF370B /* RMStoreTransactionReceiptVerificator.h */,
+				242BFA741B29711800EF370B /* RMStoreTransactionReceiptVerificator.m */,
+				242BFA751B29711800EF370B /* RMStoreUserDefaultsPersistence.h */,
+				242BFA761B29711800EF370B /* RMStoreUserDefaultsPersistence.m */,
 				2022C63318D1BAF000BCD5F7 /* RMStoreKeychainPersistence.h */,
 				2022C63418D1BAF000BCD5F7 /* RMStoreKeychainPersistence.m */,
 				2026992918CED6B000945218 /* RMStore.h */,
@@ -6566,11 +6591,13 @@
 				49B88989188652A2003766AD /* FacebookLikeView.m in Sources */,
 				202C47FE187D6E4B00FE0975 /* BitlyTweetSheet.m in Sources */,
 				0D4903BB1091893B00855C30 /* FlyrViewController.m in Sources */,
+				242BFA7B1B29711800EF370B /* RMStoreAppReceiptVerificator.m in Sources */,
 				202C47FC187D6E4B00FE0975 /* BitlyRequest.m in Sources */,
 				E8A7347D1092CFF300661AAD /* ShareViewController.m in Sources */,
 				20E4638A197E3FB600473921 /* UIImagePDF.m in Sources */,
 				208C684F186DAA59004A74F2 /* FlyerlyConfigurator.m in Sources */,
 				2032DCD01871BDFF007036B2 /* CropViewController.m in Sources */,
+				242BFA7D1B29711800EF370B /* RMStoreTransactionReceiptVerificator.m in Sources */,
 				49B8898A188652A2003766AD /* NSData+Extras.m in Sources */,
 				202C4803187D6E4B00FE0975 /* BitlyURLShortener.m in Sources */,
 				2002C89618888CD4005B18C9 /* SaveFlyerCell.m in Sources */,
@@ -6586,11 +6613,13 @@
 				654B255317202B360047C8F6 /* AfterUpdateController.m in Sources */,
 				20920015184F40330034C4F6 /* InviteFriendsCell.m in Sources */,
 				49B8898118865273003766AD /* Reachability.m in Sources */,
+				242BFA7C1B29711800EF370B /* RMStoreTransaction.m in Sources */,
 				202C4827187D7A6B00FE0975 /* CJSONDeserializer.m in Sources */,
 				2004C8451913AE8200E4BBFB /* InAppPurchaseCell.m in Sources */,
 				65BDB2DF17341D290084E032 /* CustomLabel.m in Sources */,
 				0FEF2DA9174E66FC00FDD8C9 /* HelpController.m in Sources */,
 				209BCFA81975433D006EC811 /* PrintViewController.m in Sources */,
+				242BFA7A1B29711800EF370B /* RMAppReceipt.m in Sources */,
 				20A1CD6F18EF19B400484391 /* YouTubeSubClass.m in Sources */,
 				2466983D1B1331F100715784 /* FlyerlyTwitterFriends.m in Sources */,
 				0F7FC386175CE26B009DEB08 /* AsyncImageView.m in Sources */,
@@ -6600,6 +6629,7 @@
 				202C4800187D6E4B00FE0975 /* BitlyTwitterOAuthAccount.m in Sources */,
 				202C4826187D7A6B00FE0975 /* CDataScanner_Extensions.m in Sources */,
 				0F80C386178561C200D36795 /* LaunchController.m in Sources */,
+				242BFA7E1B29711800EF370B /* RMStoreUserDefaultsPersistence.m in Sources */,
 				243EA07119BF4ABB0047D0E1 /* ImageLayer.m in Sources */,
 				0F80C38B178578CB00D36795 /* RegisterController.m in Sources */,
 				0F80C3901785813E00D36795 /* SigninController.m in Sources */,
@@ -6718,6 +6748,7 @@
 					"$(PROJECT_DIR)/ExternalFrameworks/GoogleMobileAdsSdkiOS-6.12.0",
 					"$(PROJECT_DIR)/ExternalFrameworks/Flurry",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Classes/openssl-1.0.1e/lib",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -6775,6 +6806,7 @@
 					"$(PROJECT_DIR)/ExternalFrameworks/GoogleMobileAdsSdkiOS-6.12.0",
 					"$(PROJECT_DIR)/ExternalFrameworks/Flurry",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Classes/openssl-1.0.1e/lib",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -6828,6 +6860,7 @@
 					"$(PROJECT_DIR)/ExternalFrameworks/GoogleMobileAdsSdkiOS-6.12.0",
 					"$(PROJECT_DIR)/ExternalFrameworks/Flurry",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Classes/openssl-1.0.1e/lib",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (

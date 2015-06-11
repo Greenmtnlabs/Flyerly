@@ -162,17 +162,20 @@
             NSDictionary *product = [productArray objectAtIndex:rowIndex];
             NSString* productIdentifier= product[@"productidentifier"];
             
-            if ( [userPurchases checkKeyExistsInPurchases:productIdentifier] ) {
+            if ( ![productIdentifier isEqualToString:@"com.flyerly.MonthlySubscription" ] && [userPurchases checkKeyExistsInPurchases:productIdentifier] )  {
                 
-                UIAlertView *alradyPurchasedAlert = [[UIAlertView alloc] initWithTitle: @"Product already purchased"
-                                                                    message: @"You have already purchased this item."
-                                                                   delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
+                // show alert that item has already been purchased
+                [self showAlreadyPurchasedAlert];
                 
-                [alradyPurchasedAlert show];
+            }else if( [productIdentifier isEqualToString:@"com.flyerly.MonthlySubscription" ] && [ userPurchases isSubscriptionValid ]) {
                 
-            }else {
+                // show alert that item has already been purchased
+                [self showAlreadyPurchasedAlert];
+                
+            } else {
                 
                 [self purchaseProductAtIndex:rowIndex];
+            
             }
             
         }else {
@@ -450,6 +453,15 @@
     
     [self.paidFeaturesTview flashScrollIndicators];
     [self.freeFeaturesTview flashScrollIndicators];
+}
+
+-(void)showAlreadyPurchasedAlert{
+    UIAlertView *alradyPurchasedAlert = [[UIAlertView alloc] initWithTitle: @"Product already purchased"
+                                                                   message: @"You have already purchased this item."
+                                                                  delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
+    
+    [alradyPurchasedAlert show];
+
 }
 
 @end
