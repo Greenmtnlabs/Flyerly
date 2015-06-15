@@ -188,7 +188,7 @@
                                                                                     clientId:LINKEDIN_CLIENT_ID
                                                                                 clientSecret:LINKEDIN_CLIENT_SECRET
                                                                                        state:LINKEDIN_STATE
-                                                                               grantedAccess:@[@"r_basicprofile", @"rw_nus"]
+                                                                               grantedAccess:@[@"r_basicprofile", @"w_share"]
                                            ];
     
     return [LIALinkedInHttpClient clientForApplication:application presentingViewController:nil];
