@@ -123,7 +123,7 @@ static UserPurchases *sharedSingleton = nil;
     
     NSLog(@"Is subscription is valid?, Valid: %d", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:@"com.flyerly.MonthlySubscription" forDate:[NSDate date]]);
     
-    NSString *isValid =[NSString stringWithFormat:@"%hhd", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:@"com.flyerly.MonthlySubscription" forDate:[NSDate date]]];
+    NSString *isValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:@"com.flyerly.MonthlySubscription" forDate:[NSDate date]]];
     if( [isValid isEqual:@"0"] ){
         return NO;
     } else {
