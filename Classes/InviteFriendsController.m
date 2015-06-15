@@ -508,43 +508,36 @@ const int CONTACTS_TAB = 0;
     ACAccountStore *accountStore = [[ACAccountStore alloc] init];
     ACAccountType *facebookAccountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
     
-    [accountStore requestAccessToAccountsWithType:facebookAccountType
-                                       options:@{ACFacebookAppIdKey:flyerConfigurator.facebookAppId, ACFacebookPermissionsKey: @[flyerConfigurator.facebookWritePermissions]}
-                                       completion:^(BOOL granted, NSError *error) {
-                                           
-           if ( granted ) {
-               availableAccounts = [accountStore accountsWithAccountType:facebookAccountType];
-               
-               if ([availableAccounts count] > 0 ) {
-                   
-                   [self shareViaIOSFacebook:YES];
-                 
-               } else {
-                   
-                   [self shareViaIOSFacebook:NO];
-                  
-                }
-           } else {
-               
-               [self shareViaIOSFacebook:NO];
+    availableAccounts = [accountStore accountsWithAccountType:facebookAccountType];
+    
+       if ([availableAccounts count] > 0 ) {
            
-           }
-       }
-     ];
+           [self shareViaIOSFacebook:YES];
+         
+       } else {
+
+           [self shareViaIOSFacebook:NO];
+          
+        }
 }
 
 -(void) shareViaIOSFacebook:( BOOL ) withAccount {
     SHKItem *item;
     
+    // text to be share.
     NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
     
+    // app URL with user id.
     NSString *urlToShare = [NSString stringWithFormat:@"%@%@", flyerConfigurator.referralURL, userUniqueObjectId];
     
+    //item to be share
     item = [SHKItem URL:[NSURL URLWithString:urlToShare] title:sharingText contentType:SHKShareTypeURL];
     
     if( withAccount ) {
+        // we got a facebook account, share it via shkiOSFacebook
         
         dispatch_async(dispatch_get_main_queue(), ^{
+            
             iosSharer = [[SHKiOSFacebook alloc] init];
             [iosSharer loadItem:item];
             iosSharer.shareDelegate = self;
@@ -553,10 +546,12 @@ const int CONTACTS_TAB = 0;
         });
         
     } else {
+        //we didn't have facebook app or account, then we have to use legendary SHKFacebook sharer.
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            iosSharer = [SHKFacebook shareItem:item];
+            iosSharer = [[SHKFacebook alloc] init];
+            [iosSharer loadItem:item];
             iosSharer.shareDelegate = self;
             [iosSharer share];
         });

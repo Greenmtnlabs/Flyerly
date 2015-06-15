@@ -684,52 +684,50 @@
 
 }
 
--(void)shareOnFacebook:(BOOL )hasAccount{
-    
-    
+-(void)shareOnFacebook:(BOOL )hasAccount{    
     
     // Current Item For Sharing
     SHKItem *item;
     
     if( hasAccount ){
         
+        // if we got an account of facebook, then it's good to share it via shkIosFacebook, which is newer sharer.
+        iosSharer = [[SHKiOSFacebook alloc] init];
+        
         if ([flyer isVideoFlyer]) {
             // getting youtube link from flyer and sharing on facebook via url
             NSString *getYouTubeLink = [self.flyer getYoutubeLink];
             NSURL *videoURL = [NSURL URLWithString:getYouTubeLink];
-            
+
             item = [SHKItem URL:videoURL title:@"Share On Youtube" contentType:SHKURLContentTypeVideo];
             //item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
-            iosSharer = [[SHKiOSFacebook alloc] init];
             
         } else {
             
             item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly ", selectedFlyerDescription ]];
             item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
-            iosSharer = [[SHKiOSFacebook alloc] init];
             
         }
-          // in the end we need to load item for share
-         [iosSharer loadItem:item];
         
     } else {
+        // if we haven't any accounts of facebook, we'll have to share item via shkFacebook
+        iosSharer = [[SHKFacebook alloc] init];
         
         if ([flyer isVideoFlyer]) {
             // getting youtube link from flyer and sharing on facebook via url
             NSString *getYouTubeLink = [self.flyer getYoutubeLink];
             NSURL *videoURL = [NSURL URLWithString:getYouTubeLink];
-            
             item = [SHKItem URL:videoURL title:@"Share On Youtube" contentType:SHKURLContentTypeVideo];
-            iosSharer = [SHKFacebook shareItem:item];
-            
+    
         }
         else {
-            
             item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly ", selectedFlyerDescription ]];
-            iosSharer = [SHKFacebook shareItem:item];
-            
         }
     }
+    
+    // load item that is ready to share.
+    [iosSharer loadItem:item];
+    
     // at last we need to call delegates of sharing and start sharing.
     iosSharer.shareDelegate = self;
     [iosSharer share];
