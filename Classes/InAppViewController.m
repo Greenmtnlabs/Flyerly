@@ -169,7 +169,7 @@
                 // show alert that item has already been purchased
                 [self showAlreadyPurchasedAlert];
                 
-            }else if( ([productIdentifier isEqualToString:@"com.flyerly.MonthlySubscription" ] ||
+            } else if( ([productIdentifier isEqualToString:@"com.flyerly.MonthlySubscription" ] ||
                        [productIdentifier isEqualToString:@"com.flyerly.YearlySubscription1"] ) &&
                        [userPurchases isSubscriptionValid]) {
                 
