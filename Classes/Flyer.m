@@ -8,6 +8,7 @@
 
 #import "Flyer.h"
 #import "Common.h"
+#import <Photos/Photos.h>
 
 NSString * const TEXT = @"";
 NSString * const TEXTFONTNAME = @".HelveticaNeueInterface-M3";
@@ -229,7 +230,7 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     
     // HERE WE GET FLYERLY ALBUM URL
      NSURL *groupUrl  = [[NSURL alloc] initWithString:[[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyAlbum"]];
-
+    
     
     // HERE WE GET GROUP OF IMAGE IN GALLERY
     [_library groupForURL:groupUrl resultBlock:^(ALAssetsGroup *group) {
@@ -262,7 +263,7 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
                 }
             
             } else { // URL FOUND WE USE EXISTING URL FOR REPLACE IMAGE
-
+                
                 // CONVERT STRING TO URL
                 NSURL *imageUrl = [[NSURL alloc] initWithString:currentUrl];
             
@@ -283,22 +284,47 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
                             [self createImageToFlyerlyAlbum:groupUrl ImageData:imgData];
                         }
                     } else {
+                        
+                        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.3 ) {
+                            
+                            [self deleteAssetWithURL:currentUrl];
+                            
+                            if ( [self isVideoFlyer] ){
+                                
+                                //For Video
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    [self createVideoToFlyerlyAlbum:groupUrl VideoData:[NSURL fileURLWithPath:[self getSharingVideoPath]]];
+                                });
+                                
+                            }else {
+                                
+                                //For Image
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    [self createImageToFlyerlyAlbum:groupUrl ImageData:imgData];
+                                });
+                                
+                            }
 
+                        } else {
+                            
+                            if ( [self isVideoFlyer] ){
+                                
+                                //Update Video
+                                [asset setVideoAtPath:[NSURL fileURLWithPath:[self getSharingVideoPath]] completionBlock:^(NSURL *assetURL, NSError *error) {
+                                }];
+                                
+                            }else {
+                                
+                                //Update Image
+                                [asset setImageData:imgData metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {
+                                }];
+                            }
+
+                        }
+                        
                         // URL Exist and Image Found
                         //HERE WE UPDATE Content WITH LATEST UPDATE
-                        
-                      if ( [self isVideoFlyer] ){
-                          
-                            //Update Video
-                            [asset setVideoAtPath:[NSURL fileURLWithPath:[self getSharingVideoPath]] completionBlock:^(NSURL *assetURL, NSError *error) {
-                            }];
-                      }else {
-                          
-                          //Update Image
-                            [asset setImageData:imgData metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {
-                            }];
-                      }
-                    }
+                                            }
                 
                 } failureBlock:^(NSError *error) {
                 }];
@@ -310,11 +336,38 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     }
     failureBlock:^(NSError *error) {
     }];
-    
-    
-    
+}
 
-
+/**
+ Delete Previous Flyer From the Photos
+**/
+-(void)deleteAssetWithURL:(NSString*)assetURLString
+{
+    NSURL *assetURL = [NSURL URLWithString:assetURLString];
+    if (assetURL == nil)
+    {
+        return;
+    }
+    
+    PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[assetURL] options:nil];
+    if (result.count > 0)
+    {
+        PHAsset *phAsset = result.firstObject;
+        if ((phAsset != nil) && ([phAsset canPerformEditOperation:PHAssetEditOperationDelete]))
+        {
+            [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^
+             {
+                 [PHAssetChangeRequest deleteAssets:@[phAsset]];
+             }
+                                              completionHandler:^(BOOL success, NSError *error)
+             {
+                 if ((!success) && (error != nil))
+                 {
+                     NSLog(@"Error deleting asset: %@", [error description]);
+                 }
+             }];
+        }
+    }
 }
 
 
