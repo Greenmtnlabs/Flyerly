@@ -558,41 +558,9 @@
 -(IBAction)onClickFlickrButton{
     
     [self updateDescription];
+    UIAlertView *saveCurrentFlyerAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"The current Flyer has been saved successfully" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     
-    //UIViewController* parent = (UIViewController*)[self presentedViewController];
-    //[parent someMethod:YES];
-    
-    /*
-    
-    [self dismissModalViewControllerAnimated: NO];*/
-    
-    //[self.view.window.rootViewController.presentedViewController dismissViewControllerAnimated:NO completion:nil];
-    
-    //[inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    
-    //[self.view.window.rootViewController presentViewController:printViewController animated:YES completion:nil];
-    //
-    
-    SHKItem *item;
-    if ([self.flyer isVideoFlyer]) {
-        
-        // Current Video Link For Sharing
-        item = [SHKItem filePath:[self.flyer getSharingVideoPath] title:titleView.text];
-        //item = [SHKItem text: [NSString stringWithFormat:@"%@",[self.flyer getYoutubeLink] ]];
-    }else {
-        // Current Item For Sharing
-        item = [SHKItem image:selectedFlyerImage title:titleView.text];
-    }
-    
-    item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
-    item.text = selectedFlyerDescription;
-    
-    //Calling ShareKit for Sharing
-    iosSharer = [[ SHKSharer alloc] init];
-    iosSharer = [SHKFlickr shareItem:item];
-    iosSharer.shareDelegate = self;
-    
-    iosSharer = nil;
+    [saveCurrentFlyerAlert show];
     
 }
 

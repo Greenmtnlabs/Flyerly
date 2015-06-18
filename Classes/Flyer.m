@@ -285,32 +285,46 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
                         }
                     } else {
                         
+                        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.3 ) {
+                            
+                            [self deleteAssetWithURL:currentUrl];
+                            
+                            if ( [self isVideoFlyer] ){
+                                
+                                //For Video
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    [self createVideoToFlyerlyAlbum:groupUrl VideoData:[NSURL fileURLWithPath:[self getSharingVideoPath]]];
+                                });
+                                
+                            }else {
+                                
+                                //For Image
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    [self createImageToFlyerlyAlbum:groupUrl ImageData:imgData];
+                                });
+                                
+                            }
+
+                        } else {
+                            
+                            if ( [self isVideoFlyer] ){
+                                
+                                //Update Video
+                                [asset setVideoAtPath:[NSURL fileURLWithPath:[self getSharingVideoPath]] completionBlock:^(NSURL *assetURL, NSError *error) {
+                                }];
+                                
+                            }else {
+                                
+                                //Update Image
+                                [asset setImageData:imgData metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {
+                                }];
+                            }
+
+                        }
+                        
                         // URL Exist and Image Found
                         //HERE WE UPDATE Content WITH LATEST UPDATE
-                        [self deleteAssetWithURL:currentUrl];
-                        
-                      if ( [self isVideoFlyer] ){
-                          
-                            //Update Video
-                            //[asset setVideoAtPath:[NSURL fileURLWithPath:[self getSharingVideoPath]] completionBlock:^(NSURL *assetURL, NSError *error) {
-                            //}];
-                          
-                          //For Video
-                          dispatch_async(dispatch_get_main_queue(), ^{
-                          [self createVideoToFlyerlyAlbum:groupUrl VideoData:[NSURL fileURLWithPath:[self getSharingVideoPath]]];
-                              });
-                          
-                      }else {
-                          
-                          //Update Image
-                            //[asset setImageData:imgData metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {
-                            //}];
-                          dispatch_async(dispatch_get_main_queue(), ^{
-                              [self createImageToFlyerlyAlbum:groupUrl ImageData:imgData];
-                          });
-                          
-                      }
-                    }
+                                            }
                 
                 } failureBlock:^(NSError *error) {
                 }];
