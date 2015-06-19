@@ -8,6 +8,7 @@
 
 #import "SetupGuideViewController.h"
 #import "Common.h"
+#import "SetupGuideSecondViewController.h"
 
 @interface SetupGuideViewController () {
     NSString *userName;
@@ -38,6 +39,7 @@
 -(void)viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
+    _currentPage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"navigation1.png"]];
     [untechable printNavigation:[self navigationController]];
     [self setNavigation:@"viewDidLoad"];
     
@@ -146,6 +148,8 @@
 #pragma - mark setting navigation bar related stuff
 -(void) setNavigationBarItems {
     
+   
+    
     defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
     defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
     
@@ -216,8 +220,10 @@
     
     if ( !( userName == NULL || [userName isEqualToString:@"" ] ) && !( userphoneNumber == NULL || [userphoneNumber isEqualToString:@""]) ) {
         
-        // navigate to second screen
-        
+        SetupGuideSecondViewController *secondSetupScreen = [[SetupGuideSecondViewController alloc] initWithNibName:@"SetupGuideSecondViewController" bundle:nil];
+        secondSetupScreen.untechable = untechable;
+        [self.navigationController pushViewController:secondSetupScreen animated:YES];
+
         
     } else {
         
