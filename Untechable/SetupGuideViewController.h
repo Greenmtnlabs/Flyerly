@@ -9,8 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "Untechable.h"
 
-@interface SetupGuideViewController : UIViewController < UITextViewDelegate >
-
+@interface SetupGuideViewController : UIViewController < UITextViewDelegate, UINavigationControllerDelegate, UINavigationBarDelegate > {
+    
+    UILabel *titleLabel;
+    UIButton *backButton;
+    UIButton *nextButton;
+    UIColor *defGreen;//GREEN
+    UIColor *defGray;//GRAY
+}
 
 //Properties
 @property (nonatomic,strong)  Untechable *untechable;

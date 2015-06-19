@@ -7,6 +7,7 @@
 //
 
 #import "SetupGuideViewController.h"
+#import "Common.h"
 
 @interface SetupGuideViewController () {
     NSString *userName;
@@ -23,11 +24,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initializeTextViews];
+    [self setNavigationBarItems];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+/**
+ * Update the view once it appears.
+ */
+-(void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    [untechable printNavigation:[self navigationController]];
+    [self setNavigation:@"viewDidLoad"];
+    
 }
 
 #pragma - mark Initializing Views
@@ -129,5 +142,94 @@
 {
     [self.view endEditing:YES];
 }
+
+#pragma - mark setting navigation bar related stuff
+-(void) setNavigationBarItems {
+    
+    defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
+    defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
+    
+    [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    
+}
+
+-(void)setNavigation:(NSString *)callFrom {
+    
+    if([callFrom isEqualToString:@"viewDidLoad"])
+    {
+        self.navigationItem.hidesBackButton = YES;
+        
+        // Center title __________________________________________________
+        self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
+        
+        if ( [untechable.commonFunctions getAllUntechables:untechable.userId].count > 0 ) {
+            // Back Navigation button
+            backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+            backButton.titleLabel.shadowColor = [UIColor clearColor];
+            backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+            [backButton setTitle:TITLE_BACK_TXT forState:normal];
+            [backButton setTitleColor:defGray forState:UIControlStateNormal];
+            [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
+            [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+            backButton.showsTouchWhenHighlighted = YES;
+            
+            UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+            
+            [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+        }
+        // Right Navigation ______________________________________________
+        nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        //[nextButton setBackgroundColor:[UIColor redColor]];//for testing
+        
+        nextButton.titleLabel.shadowColor = [UIColor clearColor];
+        //nextButton.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
+        
+        [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
+        //[nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
+        nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
+        [nextButton setTitleColor:defGray forState:UIControlStateNormal];
+        [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
+        [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
+        
+        nextButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
+        
+        [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
+        
+    }
+}
+
+-(void)btnNextTouchStart{
+    [self setNextHighlighted:YES];
+}
+-(void)btnNextTouchEnd{
+    [self setNextHighlighted:NO];
+}
+- (void)setNextHighlighted:(BOOL)highlighted {
+    (highlighted) ? [nextButton setBackgroundColor:defGreen] : [nextButton setBackgroundColor:[UIColor clearColor]];
+}
+
+-(void)onNext{
+    
+    if ( !( userName == NULL || [userName isEqualToString:@"" ] ) && !( userphoneNumber == NULL || [userphoneNumber isEqualToString:@""]) ) {
+        
+        // navigate to second screen
+        
+        
+    } else {
+        
+        UIAlertView *alert  = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                         message:@"Please Enter Your Name and Number"
+                                                        delegate:nil
+                                               cancelButtonTitle:@"Done"
+                                               otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    
+}
+
 
 @end
