@@ -7,11 +7,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SetupGuideSecondViewController">
             <connections>
-                <outlet property="view" destination="6FI-eE-0SA" id="Fse-eD-xVD"/>
+                <outlet property="view" destination="79C-fk-0Vv" id="zTg-NE-HuQ"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view opaque="NO" contentMode="scaleToFill" id="79C-fk-0Vv">
+        <view contentMode="scaleToFill" id="79C-fk-0Vv">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
@@ -23,6 +23,10 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigation2.png" id="UNA-AN-XXL">
+                    <rect key="frame" x="93" y="77" width="126" height="28"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
@@ -30,6 +34,9 @@
             <point key="canvasLocation" x="665" y="235"/>
         </view>
     </objects>
+    <resources>
+        <image name="navigation2.png" width="140" height="30"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
