@@ -644,6 +644,7 @@
 		2471593E19408E5F00B30301 /* tumblr_share_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2471593019408E5F00B30301 /* tumblr_share_saved@2x.png */; };
 		2471593F19408E5F00B30301 /* Zpassword_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2471593119408E5F00B30301 /* Zpassword_box@2x.png */; };
 		247159411940907800B30301 /* premium_features@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 247159401940907800B30301 /* premium_features@2x.png */; };
+		247402371B33C2A900459759 /* save_share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 247402361B33C2A900459759 /* save_share@3x.png */; };
 		24751A641938A1F600DF03B2 /* color_tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24751A611938A1F600DF03B2 /* color_tab@2x.png */; };
 		24751A651938A1F600DF03B2 /* emoticons_tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24751A621938A1F600DF03B2 /* emoticons_tab@2x.png */; };
 		24751A6A1938A3B300DF03B2 /* clipart_tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24751A691938A3B300DF03B2 /* clipart_tab@2x.png */; };
@@ -2131,6 +2132,7 @@
 		2471593019408E5F00B30301 /* tumblr_share_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tumblr_share_saved@2x.png"; sourceTree = "<group>"; };
 		2471593119408E5F00B30301 /* Zpassword_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zpassword_box@2x.png"; sourceTree = "<group>"; };
 		247159401940907800B30301 /* premium_features@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "premium_features@2x.png"; sourceTree = "<group>"; };
+		247402361B33C2A900459759 /* save_share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save_share@3x.png"; sourceTree = "<group>"; };
 		24751A611938A1F600DF03B2 /* color_tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "color_tab@2x.png"; sourceTree = "<group>"; };
 		24751A621938A1F600DF03B2 /* emoticons_tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticons_tab@2x.png"; sourceTree = "<group>"; };
 		24751A691938A3B300DF03B2 /* clipart_tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clipart_tab@2x.png"; sourceTree = "<group>"; };
@@ -3081,6 +3083,7 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				247402361B33C2A900459759 /* save_share@3x.png */,
 				24A81AC11B32D8AC00B6328D /* save_share.png */,
 				24A81AC21B32D8AC00B6328D /* save_share@2x.png */,
 				20B099361AC58D2800F19836 /* send@3x.png */,
@@ -5914,6 +5917,7 @@
 				246EF503193C515D004539B2 /* emoticon38@2x.png in Resources */,
 				65C1A42B1742516D00947D5E /* Template19@2x.jpg in Resources */,
 				2421848F194B4AEC00FDDA97 /* emoticon128@2x.png in Resources */,
+				247402371B33C2A900459759 /* save_share@3x.png in Resources */,
 				24A81AC51B32D8AC00B6328D /* save_share@2x.png in Resources */,
 				242184F1194B4AEC00FDDA97 /* red-envelope-icon.png in Resources */,
 				65C1A42C1742516D00947D5E /* Template20@2x.jpg in Resources */,
