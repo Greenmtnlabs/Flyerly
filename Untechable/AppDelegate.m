@@ -12,6 +12,7 @@
 #import "Common.h"
 #import "Crittercism.h"
 #import "NameAndPhoneCellView.h"
+#import "SetupGuideViewController.h"
 
 @implementation AppDelegate
 
@@ -64,7 +65,7 @@ NSMutableArray *allUntechables;
     if ( allUntechables.count <= 0 ){
 
         //For testing -------- } --
-        AddUntechableController *mainViewController = [[AddUntechableController alloc] initWithNibName:@"AddUntechableController" bundle:nil];
+        SetupGuideViewController *mainViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
         
         mainViewController.untechable = untechable;
         navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];

@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Untechable.h"
 
-@interface SetupGuideViewController : UIViewController
+@interface SetupGuideViewController : UIViewController < UITextViewDelegate >
+
+
+//Properties
+@property (nonatomic,strong)  Untechable *untechable;
+
+@property (weak, nonatomic) IBOutlet UITextView *userNameTextView;
+@property (weak, nonatomic) IBOutlet UITextView *userPhoneNumber;
+@property (weak, nonatomic) IBOutlet UILabel *usernameHintText;
+@property (weak, nonatomic) IBOutlet UILabel *phoneNumberHintText;
 
 @end

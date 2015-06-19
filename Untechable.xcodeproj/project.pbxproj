@@ -49,6 +49,8 @@
 		2448343D1A5D776200E6F173 /* phone_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2448343A1A5D776200E6F173 /* phone_selected@3x.png */; };
 		2448343E1A5D776200E6F173 /* sms_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2448343B1A5D776200E6F173 /* sms_selected@3x.png */; };
 		244834401A5D915D00E6F173 /* sms@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2448343F1A5D915D00E6F173 /* sms@3x.png */; };
+		247402421B33CBD700459759 /* SetupGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 247402401B33CBD700459759 /* SetupGuideViewController.m */; };
+		247402431B33CBD700459759 /* SetupGuideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 247402411B33CBD700459759 /* SetupGuideViewController.xib */; };
 		247C72D31A5C0968005C9693 /* user_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 247C72D01A5C0968005C9693 /* user_img.png */; };
 		247C72D41A5C0968005C9693 /* user_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 247C72D11A5C0968005C9693 /* user_img@2x.png */; };
 		247C72D51A5C0968005C9693 /* user_img@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 247C72D21A5C0968005C9693 /* user_img@3x.png */; };
@@ -287,6 +289,9 @@
 		2448343A1A5D776200E6F173 /* phone_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone_selected@3x.png"; sourceTree = "<group>"; };
 		2448343B1A5D776200E6F173 /* sms_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sms_selected@3x.png"; sourceTree = "<group>"; };
 		2448343F1A5D915D00E6F173 /* sms@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sms@3x.png"; sourceTree = "<group>"; };
+		2474023F1B33CBD700459759 /* SetupGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupGuideViewController.h; sourceTree = "<group>"; };
+		247402401B33CBD700459759 /* SetupGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupGuideViewController.m; sourceTree = "<group>"; };
+		247402411B33CBD700459759 /* SetupGuideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetupGuideViewController.xib; sourceTree = "<group>"; };
 		247C72D01A5C0968005C9693 /* user_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_img.png; sourceTree = "<group>"; };
 		247C72D11A5C0968005C9693 /* user_img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_img@2x.png"; sourceTree = "<group>"; };
 		247C72D21A5C0968005C9693 /* user_img@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_img@3x.png"; sourceTree = "<group>"; };
@@ -591,6 +596,16 @@
 			name = ContactCustomizeDetailsControlelr;
 			sourceTree = "<group>";
 		};
+		2474023E1B33CB7900459759 /* SetupGuide */ = {
+			isa = PBXGroup;
+			children = (
+				2474023F1B33CBD700459759 /* SetupGuideViewController.h */,
+				247402401B33CBD700459759 /* SetupGuideViewController.m */,
+				247402411B33CBD700459759 /* SetupGuideViewController.xib */,
+			);
+			name = SetupGuide;
+			sourceTree = "<group>";
+		};
 		248E06B41A4ACD350099846A /* ContactsCustomizedModal */ = {
 			isa = PBXGroup;
 			children = (
@@ -772,6 +787,7 @@
 		366ECD7519D2D24600F71A11 /* AddUntechable */ = {
 			isa = PBXGroup;
 			children = (
+				2474023E1B33CB7900459759 /* SetupGuide */,
 				C33A87AF1A7BCD76000B9DAE /* EmailSettingsChangingController */,
 				C36D2E4F1A79196E000537C5 /* PreferencesController */,
 				366ECD7B19D312BE00F71A11 /* Models */,
@@ -1226,6 +1242,7 @@
 				2486CBAA1A5A79F500AC125E /* email_selected.png in Resources */,
 				3681604019E6B81E00B9B64C /* InviteFriendsController.xib in Resources */,
 				C334E60D1A777472005539B4 /* logo-Other@2x.png in Resources */,
+				247402431B33CBD700459759 /* SetupGuideViewController.xib in Resources */,
 				C346D1811A7FD13B00856A58 /* twitter@2x.png in Resources */,
 				200ACE291A3874B200DC7047 /* exchangeIcon@3x.png in Resources */,
 				200ACE261A3874B200DC7047 /* aolIcon@3x.png in Resources */,
@@ -1408,6 +1425,7 @@
 				24A65BEC1A30451E00BE83C6 /* SSLCell.m in Sources */,
 				24354D701A499F4F000EC781 /* ContactListCell.m in Sources */,
 				36561D7819D2C8A40069D897 /* main.m in Sources */,
+				247402421B33CBD700459759 /* SetupGuideViewController.m in Sources */,
 				24354D6B1A499EC5000EC781 /* ContactsListControllerViewController.m in Sources */,
 				C33A87B31A7BCDB4000B9DAE /* EmailChangingController.m in Sources */,
 			);
