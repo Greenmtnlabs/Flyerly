@@ -88,8 +88,8 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigation1.png" id="T9E-3g-ZuA">
-                    <rect key="frame" x="43" y="76" width="223" height="26"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigation2.png" id="ZrQ-4z-A1y">
+                    <rect key="frame" x="32" y="45" width="240" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
             </subviews>
@@ -100,7 +100,7 @@
         </view>
     </objects>
     <resources>
-        <image name="navigation1.png" width="140" height="30"/>
+        <image name="navigation2.png" width="140" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

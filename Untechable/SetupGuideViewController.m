@@ -39,7 +39,6 @@
 -(void)viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
-    _currentPage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"navigation1.png"]];
     [untechable printNavigation:[self navigationController]];
     [self setNavigation:@"viewDidLoad"];
     

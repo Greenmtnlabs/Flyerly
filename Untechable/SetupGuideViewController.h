@@ -17,7 +17,6 @@
     UIColor *defGreen;//GREEN
     UIColor *defGray;//GRAY
 }
-@property (weak, nonatomic) IBOutlet UILabel *currentPage;
 
 //Properties
 @property (nonatomic,strong)  Untechable *untechable;
