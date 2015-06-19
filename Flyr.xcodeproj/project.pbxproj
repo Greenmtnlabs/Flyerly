@@ -1057,7 +1057,6 @@
 		24A81AC41B32D8AC00B6328D /* save_share.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A81AC11B32D8AC00B6328D /* save_share.png */; };
 		24A81AC51B32D8AC00B6328D /* save_share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A81AC21B32D8AC00B6328D /* save_share@2x.png */; };
 		24A81AC81B32D92E00B6328D /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A81AC71B32D92E00B6328D /* Photos.framework */; };
-		24A81ACA1B32E37600B6328D /* save_share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A81AC91B32E37600B6328D /* save_share@3x.png */; };
 		24B7511E193DA02F007B6B85 /* Cliparts.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24B7511D193DA02F007B6B85 /* Cliparts.plist */; };
 		24B75120193DA06D007B6B85 /* Cliparts.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24B7511F193DA06D007B6B85 /* Cliparts.xib */; };
 		24B75122193DA07C007B6B85 /* Cliparts-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24B75121193DA07C007B6B85 /* Cliparts-iPhone4.xib */; };
@@ -2660,7 +2659,6 @@
 		24A81AC11B32D8AC00B6328D /* save_share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save_share.png; sourceTree = "<group>"; };
 		24A81AC21B32D8AC00B6328D /* save_share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save_share@2x.png"; sourceTree = "<group>"; };
 		24A81AC71B32D92E00B6328D /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
-		24A81AC91B32E37600B6328D /* save_share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "save_share@3x.png"; path = "../../../Desktop/save_share@3x.png"; sourceTree = "<group>"; };
 		24B7511D193DA02F007B6B85 /* Cliparts.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Cliparts.plist; sourceTree = "<group>"; };
 		24B7511F193DA06D007B6B85 /* Cliparts.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cliparts.xib; sourceTree = "<group>"; };
 		24B75121193DA07C007B6B85 /* Cliparts-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Cliparts-iPhone4.xib"; sourceTree = "<group>"; };
@@ -3083,7 +3081,6 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				24A81AC91B32E37600B6328D /* save_share@3x.png */,
 				24A81AC11B32D8AC00B6328D /* save_share.png */,
 				24A81AC21B32D8AC00B6328D /* save_share@2x.png */,
 				20B099361AC58D2800F19836 /* send@3x.png */,
@@ -5650,7 +5647,6 @@
 				204BC2E41A10ED3000FEB946 /* Colours-iPhone6-Plus.xib in Resources */,
 				30D58D7410FB1BF800E0C7E8 /* Template54.jpg in Resources */,
 				30D58D7510FB1BF800E0C7E8 /* Template55.jpg in Resources */,
-				24A81ACA1B32E37600B6328D /* save_share@3x.png in Resources */,
 				246EF50C193C515D004539B2 /* emoticon46@2x.png in Resources */,
 				30D58D7610FB1BF800E0C7E8 /* Template56.jpg in Resources */,
 				30D58D7710FB1BF800E0C7E8 /* Template57.jpg in Resources */,
