@@ -253,6 +253,12 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
                 currentUrl = [self getFlyerURL];
             }
             
+            if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.3 ) {
+                // delete any previous saved flyer
+                [self deleteAssetWithURL:currentUrl];
+            }
+
+            
             // CHECKING CRITERIA CREATE OR MODIFY
             if ( [currentUrl isEqualToString:@""]) {
             
@@ -287,7 +293,6 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
                         
                         if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.3 ) {
                             
-                            [self deleteAssetWithURL:currentUrl];
                             
                             if ( [self isVideoFlyer] ){
                                 
