@@ -253,8 +253,10 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
                 currentUrl = [self getFlyerURL];
             }
             
-            // delete any previous saved flyer
-            [self deleteAssetWithURL:currentUrl];
+            if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.3 ) {
+                // delete any previous saved flyer
+                [self deleteAssetWithURL:currentUrl];
+            }
 
             
             // CHECKING CRITERIA CREATE OR MODIFY
