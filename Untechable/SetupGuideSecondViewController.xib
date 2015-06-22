@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SetupGuideSecondViewController">
             <connections>
+                <outlet property="doctorsResearchLabel" destination="Oza-5Y-MF3" id="OY5-KY-M0R"/>
                 <outlet property="setupSpendingTimeText" destination="XGp-dh-10q" id="ykm-Xm-SgO"/>
                 <outlet property="view" destination="79C-fk-0Vv" id="zTg-NE-HuQ"/>
             </connections>
@@ -22,9 +23,17 @@
                 </imageView>
                 <pickerView contentMode="scaleToFill" id="XGp-dh-10q">
                     <rect key="frame" x="0.0" y="150" width="320" height="162"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </pickerView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Oza-5Y-MF3">
+                    <rect key="frame" x="8" y="346" width="304" height="145"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <string key="text">Did you know that based on a study, people who remove themselves from technology have better relationships, better quality of sleep and in general are more emotionally balanced.</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.25882352939999997" green="0.96862745100000003" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>

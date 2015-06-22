@@ -8,13 +8,21 @@
 
 #import <UIKit/UIKit.h>
 #import "Untechable.h"
+#import "Common.h"
 
-@interface SetupGuideSecondViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UIAlertViewDelegate>
+@interface SetupGuideSecondViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UIAlertViewDelegate> {
+    UILabel *titleLabel;
+    UIButton *backButton;
+    UIButton *nextButton;
+    UIColor *defGreen;//GREEN
+    UIColor *defGray;//GRAY
+}
 
 
 //Properties
 @property (nonatomic,strong)  Untechable *untechable;
 
 @property (weak, nonatomic) IBOutlet UIPickerView *setupSpendingTimeText;
+@property (weak, nonatomic) IBOutlet UILabel *doctorsResearchLabel;
 
 @end
