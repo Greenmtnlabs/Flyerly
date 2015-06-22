@@ -89,6 +89,8 @@
 		24A4B7A81A5126410029C8DF /* CustomTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A4B7A61A5126410029C8DF /* CustomTextTableViewCell.xib */; };
 		24A65BEC1A30451E00BE83C6 /* SSLCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A65BEA1A30451E00BE83C6 /* SSLCell.m */; };
 		24A65BED1A30451E00BE83C6 /* SSLCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A65BEB1A30451E00BE83C6 /* SSLCell.xib */; };
+		24AFE79B1B38086A00CC8230 /* SetupGuideThirdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFE7991B38086A00CC8230 /* SetupGuideThirdView.m */; };
+		24AFE79C1B38086A00CC8230 /* SetupGuideThirdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24AFE79A1B38086A00CC8230 /* SetupGuideThirdView.xib */; };
 		24BAB1841A2F0DF900855B77 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BAB1831A2F0DF900855B77 /* SystemConfiguration.framework */; };
 		24BAB1881A2F0E8C00855B77 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BAB1871A2F0E8C00855B77 /* Reachability.m */; };
 		24CB24071AEA489F00251759 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24CB24061AEA489F00251759 /* StoreKit.framework */; };
@@ -346,6 +348,9 @@
 		24A65BE91A30451E00BE83C6 /* SSLCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSLCell.h; sourceTree = "<group>"; };
 		24A65BEA1A30451E00BE83C6 /* SSLCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSLCell.m; sourceTree = "<group>"; };
 		24A65BEB1A30451E00BE83C6 /* SSLCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSLCell.xib; sourceTree = "<group>"; };
+		24AFE7981B38086A00CC8230 /* SetupGuideThirdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupGuideThirdView.h; sourceTree = "<group>"; };
+		24AFE7991B38086A00CC8230 /* SetupGuideThirdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupGuideThirdView.m; sourceTree = "<group>"; };
+		24AFE79A1B38086A00CC8230 /* SetupGuideThirdView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetupGuideThirdView.xib; sourceTree = "<group>"; };
 		24BAB1831A2F0DF900855B77 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		24BAB1861A2F0E6A00855B77 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		24BAB1871A2F0E8C00855B77 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -628,6 +633,9 @@
 				247402471B34198400459759 /* SetupGuideSecondViewController.h */,
 				247402481B34198400459759 /* SetupGuideSecondViewController.m */,
 				247402491B34198400459759 /* SetupGuideSecondViewController.xib */,
+				24AFE7981B38086A00CC8230 /* SetupGuideThirdView.h */,
+				24AFE7991B38086A00CC8230 /* SetupGuideThirdView.m */,
+				24AFE79A1B38086A00CC8230 /* SetupGuideThirdView.xib */,
 			);
 			name = SetupGuide;
 			sourceTree = "<group>";
@@ -1299,6 +1307,7 @@
 				247C72D41A5C0968005C9693 /* user_img@2x.png in Resources */,
 				C346D17D1A7FD13B00856A58 /* emailic.png in Resources */,
 				36B276771A0124E800ED58AD /* record_gray.png in Resources */,
+				24AFE79C1B38086A00CC8230 /* SetupGuideThirdView.xib in Resources */,
 				366EAF991A14C3530011D6C6 /* icon-76@2x.png in Resources */,
 				200ACE241A3874B200DC7047 /* aolIcon.png in Resources */,
 				241AC0021AE68AE000F1C8C9 /* NameAndPhoneCellView.xib in Resources */,
@@ -1457,6 +1466,7 @@
 				3681603D19E6B81E00B9B64C /* InviteFriendsCell.m in Sources */,
 				36474F2919D9AC3800084F34 /* UIPlaceHolderTextView.m in Sources */,
 				36B036A619DAF44D00E8CD21 /* EmailSettingController.m in Sources */,
+				24AFE79B1B38086A00CC8230 /* SetupGuideThirdView.m in Sources */,
 				36561D7C19D2C8A40069D897 /* AppDelegate.m in Sources */,
 				2474024A1B34198400459759 /* SetupGuideSecondViewController.m in Sources */,
 				366ECD7E19D3135200F71A11 /* Untechable.m in Sources */,
