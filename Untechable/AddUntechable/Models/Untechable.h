@@ -30,6 +30,10 @@
 @property (nonatomic, assign) BOOL savedOnServer;
 @property (nonatomic, assign) BOOL hasFinished;
 
+//SetupGuide Screen 1
+@property (strong, nonatomic) NSString *userName;
+@property (strong, nonatomic) NSString *userPhoneNumber;
+
 //Screen1
 @property (strong, nonatomic) NSString *timezoneOffset, *spendingTimeTxt, *startDate, *endDate;
 @property (nonatomic, assign) BOOL hasEndDate;

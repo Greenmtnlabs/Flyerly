@@ -16,6 +16,9 @@
 //Settings
 @synthesize commonFunctions, dic, piecesFile, paid, userId, uniqueId, eventId, untechablePath, dateFormatter, savedOnServer, hasFinished;
 
+//SetupGuide Screen 1 Data
+@synthesize userName, userPhoneNumber;
+
 //1-vars for screen1
 @synthesize timezoneOffset, spendingTimeTxt, startDate, endDate, hasEndDate;
 
