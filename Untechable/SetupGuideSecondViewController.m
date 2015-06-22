@@ -8,6 +8,7 @@
 
 #import "SetupGuideSecondViewController.h"
 #import "SetupGuideViewController.h"
+#import "SetupGuideThirdView.h"
 #import "Common.h"
 
 @interface SetupGuideSecondViewController () {
@@ -239,14 +240,17 @@
 
 -(void)onNext{
     
+    SetupGuideThirdView *thirdSetupScreen = [[SetupGuideThirdView alloc] initWithNibName:@"SetupGuideThirdView" bundle:nil];
+    //secondSetupScreen.untechable = untechable;
+    [self.navigationController pushViewController:thirdSetupScreen animated:YES];
 }
 
 -(void) goBack {
     
     for (UIViewController *controller in self.navigationController.viewControllers) {
         
-        SetupGuideViewController *untechableListController = (SetupGuideViewController *)controller;
-        [self.navigationController popToViewController:untechableListController animated:YES];
+        SetupGuideViewController *previousview = (SetupGuideViewController *)controller;
+        [self.navigationController popToViewController:previousview animated:YES];
         break;
         
     }
