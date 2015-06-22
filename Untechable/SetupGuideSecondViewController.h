@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "Untechable.h"
 
-@interface SetupGuideSecondViewController : UIViewController
+@interface SetupGuideSecondViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UIAlertViewDelegate>
 
 
 //Properties
 @property (nonatomic,strong)  Untechable *untechable;
+
+@property (weak, nonatomic) IBOutlet UIPickerView *setupSpendingTimeText;
 
 @end
