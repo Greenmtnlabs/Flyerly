@@ -9,7 +9,6 @@
 #import "SetupGuideSecondViewController.h"
 #import "SetupGuideViewController.h"
 #import "SetupGuideThirdView.h"
-#import "Common.h"
 
 @interface SetupGuideSecondViewController () {
     NSMutableArray *customSpendingText;
