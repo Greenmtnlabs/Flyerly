@@ -147,8 +147,11 @@ xcuserdata
 #         (private scheme).xcscheme
 #         xcschememanagement.plist
 #
-#
-
+#################################
+#	Workspace related stuff #
+#	Should be ignored	#
+#################################
+Untechable.xcworkspace/*/
 project.xcworkspace/
 
 ####
