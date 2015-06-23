@@ -162,10 +162,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     //Here we remove Borders from layer if user touch any layer
     [self.flyimgView layerStoppedEditing:currentLayer];
     
-    //Here we take Snap shot of Flyer and
-    //Flyer Add to Gallery if user allow to Access there photos
-    [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
-    
     dispatch_async( dispatch_get_main_queue(), ^{
         //Here we Open Share Panel for Share Flyer
         [self openPanel];
