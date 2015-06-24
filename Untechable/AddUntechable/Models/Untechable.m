@@ -179,6 +179,9 @@
         dic[@"savedOnServer"]   = savedOnServer ? @"YES" : @"NO";
         dic[@"hasFinished"]     = hasFinished ? @"YES" : @"NO";        
         
+        //SetupGuide First Screen
+        dic[@"userName"]        = userName;
+        dic[@"userPhoneNumber"] = userPhoneNumber;
 
         //Screen1 vars
         dic[@"timezoneOffset"]  = timezoneOffset;
@@ -244,6 +247,10 @@
         savedOnServer  = ([dic[@"savedOnServer"] isEqualToString:@"YES"]) ? YES : NO;
         hasFinished     = ([dic[@"hasFinished"] isEqualToString:@"YES"]) ? YES : NO;
         
+        //SetupGuide First Screen
+        userName        = ( dic[@"userName"] ) ? dic[@"userName"] : @"";
+        userPhoneNumber        = ( dic[@"userPhoneNumber"] ) ? dic[@"userPhoneNumber"] : @"";
+        
         //Screen1 vars
         timezoneOffset  = ( dic[@"timezoneOffset"] ) ? dic[@"timezoneOffset"] : [commonFunctions getTimeZoneOffset];
         spendingTimeTxt = ( dic[@"spendingTimeTxt"] ) ? dic[@"spendingTimeTxt"] : @"";
@@ -307,6 +314,10 @@
     untechablePath = [self getNewUntechablePath];
     savedOnServer = NO;
     hasFinished   = NO;
+    
+    //Setup Guide First Screen
+    userName = @"";
+    userPhoneNumber = @"";
     
     //Screen1
     timezoneOffset  = [commonFunctions getTimeZoneOffset];

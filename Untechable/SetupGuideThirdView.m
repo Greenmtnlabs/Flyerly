@@ -106,7 +106,7 @@
         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
         //[nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
+        [nextButton setTitle:TITLE_DONE_TXT forState:normal];
         [nextButton setTitleColor:defGray forState:UIControlStateNormal];
         [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
         [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
@@ -131,10 +131,9 @@
 }
 
 -(void)onNext{
-
-    AddUntechableController *untechScreen = [[AddUntechableController alloc] initWithNibName:@"AddUntechableController" bundle:nil];
-    untechScreen.untechable = untechable;
-    [self.navigationController pushViewController:untechScreen animated:YES];
+    
+    UIAlertView *congratesAlert = [[UIAlertView alloc]initWithTitle:@"Congrates" message:@"Thank you for setting up your Untech settings. Now you can easily become Untechable whenever you need a break from technology in order to spend more time with the people & experiencing the things that are most important." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [congratesAlert show];
     
 }
 
@@ -143,6 +142,15 @@
     UINavigationController *navigationController = self.navigationController;
     [navigationController popViewControllerAnimated:YES];
     
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+   
+    //we're assuming cancel as done because there is only one button on the alert
+    if( buttonIndex == [alertView cancelButtonIndex] ) {
+        AddUntechableController *untechScreen = [[AddUntechableController alloc] initWithNibName:@"AddUntechableController" bundle:nil];
+        untechScreen.untechable = untechable;
+        [self.navigationController pushViewController:untechScreen animated:YES];
+    }
 }
 
 @end

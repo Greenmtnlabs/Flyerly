@@ -206,7 +206,11 @@
     
     if ( !( userName == NULL || [userName isEqualToString:@"" ] ) && !( userphoneNumber == NULL || [userphoneNumber isEqualToString:@""]) ) {
         
+        untechable.userName = userName;
+        untechable.userPhoneNumber = userphoneNumber;
+        
         SetupGuideSecondViewController *secondSetupScreen = [[SetupGuideSecondViewController alloc] initWithNibName:@"SetupGuideSecondViewController" bundle:nil];
+        untechable.customizedContacts = @"";
         secondSetupScreen.untechable = untechable;
         [self.navigationController pushViewController:secondSetupScreen animated:YES];
 

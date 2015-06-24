@@ -77,7 +77,14 @@
     [self showHideTextPicker:NO];
     
     // Initialize Data
-    _pickerData = @[@"Spending time with family.", @"Driving.", @"Spending time outdoors.", @"At the beach.", @"Enjoying the holidays.", @"Just needed a break.", @"Running.", @"On vacation.", @"Finding my inner peace.", @"Removing myself from technology."];
+    NSMutableArray *customSpendingTextArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"spendingTimeText"];
+    
+    //removing custom text from showing
+    int customTextPosition = ( int )[customSpendingTextArray indexOfObject:@"Custom"];
+    
+    [customSpendingTextArray removeObjectAtIndex:customTextPosition];
+    
+    _pickerData = customSpendingTextArray;
     
     // Connect data
     _spendingTimeTextPicker.dataSource = self;
@@ -131,6 +138,13 @@
     [untechable printNavigation:[self navigationController]];
     [self setNavigation:@"viewDidLoad"];
 
+}
+/**
+ before appearing view
+ we need to set some ui fields
+ **/
+-(void)viewWillAppear:(BOOL)animated {
+    [self setPickerValue];
 }
 // ________________________     Custom functions    ___________________________
 #pragma mark - Text Field Delegate
@@ -765,5 +779,19 @@
 - (IBAction)openPicker:(id)sender {
     
     [self.view addSubview:_spendingTimeTextPicker];
+}
+
+/**
+ Setting Picker Value Got From Setting Screen
+ **/
+-(void)setPickerValue {
+    // Initialize Data
+    NSInteger positionToRemember = [[NSUserDefaults standardUserDefaults]
+                            integerForKey:@"positionToRemember"];
+
+    [_spendingTimeTextPicker selectRow:positionToRemember inComponent:0 animated:YES];
+    [_spendingTimeTextPicker reloadAllComponents];
+    _inputSpendingTimeText.text = [_pickerData objectAtIndex:positionToRemember];
+    
 }
 @end

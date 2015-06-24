@@ -10,7 +10,7 @@
 #import "Untechable.h"
 #import "Common.h"
 
-@interface SetupGuideThirdView : UIViewController {
+@interface SetupGuideThirdView : UIViewController <UIAlertViewDelegate>{
     UILabel *titleLabel;
     UIButton *backButton;
     UIButton *nextButton;

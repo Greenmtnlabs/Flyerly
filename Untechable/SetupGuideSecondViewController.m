@@ -110,13 +110,19 @@
 // Catpure the picker view selection
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     
+    NSInteger positionToRemember = 0;
+
+    
     if( [[customSpendingText objectAtIndex:row] isEqualToString:@"Custom"] ) {
         [self showAddFieldPopUp];
     } else  {
         [self setupDoctorsResearchLabel:[customSpendingText objectAtIndex:row]];
+        untechable.spendingTimeTxt = [customSpendingText objectAtIndex:row];
+        positionToRemember = (NSInteger)row;
     }
     
-
+    [[NSUserDefaults standardUserDefaults] setInteger:positionToRemember forKey:@"positionToRemember"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 /**
@@ -237,7 +243,6 @@
 -(void)onNext{
     
     SetupGuideThirdView *thirdSetupScreen = [[SetupGuideThirdView alloc] initWithNibName:@"SetupGuideThirdView" bundle:nil];
-    untechable.customizedContacts = @"";
     thirdSetupScreen.untechable = untechable;
     [self.navigationController pushViewController:thirdSetupScreen animated:YES];
 }
