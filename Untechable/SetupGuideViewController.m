@@ -223,9 +223,13 @@
     
 }
 
+/**
+ Initializing Untech Model
+ **/
 -(void)setupDefaultModel {
-    AddUntechableController *addUntech = [[AddUntechableController alloc]init];
-    [addUntech setDefaultModel];
+    
+        untechable  = [[Untechable alloc] init];
+        untechable.commonFunctions = [[CommonFunctions alloc] init];
 }
 
 

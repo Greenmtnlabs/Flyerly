@@ -527,9 +527,9 @@
     now1 = [NSDate date]; //current date
     
     //init object
-    untechable  = [[Untechable alloc] init];
-    untechable.commonFunctions = [[CommonFunctions alloc] init];
-
+//    untechable  = [[Untechable alloc] init];
+//    untechable.commonFunctions = [[CommonFunctions alloc] init];
+//
     //Set Date formate
     untechable.dateFormatter = [[NSDateFormatter alloc] init];
     [untechable.dateFormatter setDateFormat:DATE_FORMATE_1];
