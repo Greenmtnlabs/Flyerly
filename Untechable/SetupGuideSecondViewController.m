@@ -9,6 +9,8 @@
 #import "SetupGuideSecondViewController.h"
 #import "SetupGuideViewController.h"
 #import "SetupGuideThirdView.h"
+#import "AddUntechableController.h"
+#import "UntechOptionsViewController.h"
 
 @interface SetupGuideSecondViewController () {
     NSMutableArray *customSpendingText;
@@ -239,8 +241,11 @@
 
 -(void)onNext{
     
-    SetupGuideThirdView *thirdSetupScreen = [[SetupGuideThirdView alloc] initWithNibName:@"SetupGuideThirdView" bundle:nil];
-    //secondSetupScreen.untechable = untechable;
+    //AddUntechableController *thirdSetupScreen = [[AddUntechableController alloc] initWithNibName:@"AddUntechableController" bundle:nil];
+    
+    UntechOptionsViewController *thirdSetupScreen = [[UntechOptionsViewController alloc] initWithNibName:@"UntechOptionsViewController" bundle:nil];
+    
+    thirdSetupScreen.untechable = untechable;
     [self.navigationController pushViewController:thirdSetupScreen animated:YES];
 }
 
