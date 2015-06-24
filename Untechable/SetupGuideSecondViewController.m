@@ -237,7 +237,8 @@
 -(void)onNext{
     
     SetupGuideThirdView *thirdSetupScreen = [[SetupGuideThirdView alloc] initWithNibName:@"SetupGuideThirdView" bundle:nil];
-    //secondSetupScreen.untechable = untechable;
+    untechable.customizedContacts = @"";
+    thirdSetupScreen.untechable = untechable;
     [self.navigationController pushViewController:thirdSetupScreen animated:YES];
 }
 

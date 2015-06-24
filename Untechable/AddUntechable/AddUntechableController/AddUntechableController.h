@@ -36,5 +36,6 @@
 
 @property int indexOfUntechableInEditMode;
 @property NSString *callReset;
+-(void)setDefaultModel;
 
 @end

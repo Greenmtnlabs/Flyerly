@@ -89,7 +89,7 @@
                     </state>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigation1.png" id="ZrQ-4z-A1y">
-                    <rect key="frame" x="93" y="77" width="126" height="28"/>
+                    <rect key="frame" x="93" y="65" width="126" height="28"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                 </imageView>
             </subviews>

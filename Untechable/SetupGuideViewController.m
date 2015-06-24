@@ -9,6 +9,7 @@
 #import "SetupGuideViewController.h"
 #import "Common.h"
 #import "SetupGuideSecondViewController.h"
+#import "AddUntechableController.h"
 
 @interface SetupGuideViewController () {
     NSString *userName;
@@ -26,6 +27,7 @@
     [super viewDidLoad];
     [self initializeTextViews];
     [self setNavigationBarItems];
+    [self setupDefaultModel];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -219,6 +221,11 @@
         [alert show];
     }
     
+}
+
+-(void)setupDefaultModel {
+    AddUntechableController *addUntech = [[AddUntechableController alloc]init];
+    [addUntech setDefaultModel];
 }
 
 

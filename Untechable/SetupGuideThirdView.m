@@ -9,6 +9,7 @@
 #import "SetupGuideThirdView.h"
 #import "SetupGuideSecondViewController.h"
 #import "ContactsListControllerViewController.h"
+#import "AddUntechableController.h"
 
 @interface SetupGuideThirdView ()
 
@@ -27,6 +28,7 @@
     
     //setting up a view and showing contact list in it
     [self setupContactView];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,15 +51,16 @@
     
      ContactsListControllerViewController *viewControllerToAdd = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
     
-    viewControllerToAdd.untechable.customizedContacts = @"";
+    viewControllerToAdd.untechable = untechable;
     
     [viewControllerToAdd willMoveToParentViewController:self];
     [self.viewForContacts addSubview:viewControllerToAdd.view];
     [self addChildViewController:viewControllerToAdd];
-    
-    [viewControllerToAdd didMoveToParentViewController:self];
-}
+    //self.view.bounds = viewControllerToAdd.view.bounds;
 
+    [viewControllerToAdd didMoveToParentViewController:self];
+    
+}
 
 #pragma - mark setting navigation bar related stuff
 -(void) setNavigationBarItems {
@@ -128,9 +131,11 @@
 }
 
 -(void)onNext{
+
+    AddUntechableController *untechScreen = [[AddUntechableController alloc] initWithNibName:@"AddUntechableController" bundle:nil];
+    untechScreen.untechable = untechable;
+    [self.navigationController pushViewController:untechScreen animated:YES];
     
-    UIAlertView *temp = [[UIAlertView alloc]initWithTitle:@"Now Show New Untech Screen" message:nil delegate:nil cancelButtonTitle:@"YES, I'll." otherButtonTitles:nil, nil];
-    [temp show];
 }
 
 -(void) goBack {
