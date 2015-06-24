@@ -556,7 +556,8 @@
  * Called when flickr button is pressed
  */
 -(IBAction)onClickFlickrButton{
-    
+
+    [flickrButton setSelected:YES];
     [self updateDescription];
     UIAlertView *saveCurrentFlyerAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"The current Flyer has been saved successfully" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     

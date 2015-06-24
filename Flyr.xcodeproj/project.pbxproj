@@ -1357,6 +1357,9 @@
 		65F1BEAE173AA13400EE6F9F /* twitter_share_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE8B173AA13400EE6F9F /* twitter_share_saved@2x.png */; };
 		65F41C8B173BDC03000BA8CB /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F41C8A173BDC02000BA8CB /* libxml2.2.dylib */; };
 		C32139D61A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32139D51A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib */; };
+		C35D49241B3A75370021A0E9 /* save_share_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = C35D49211B3A75370021A0E9 /* save_share_selected.png */; };
+		C35D49251B3A75370021A0E9 /* save_share_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C35D49221B3A75370021A0E9 /* save_share_selected@2x.png */; };
+		C35D49261B3A75370021A0E9 /* save_share_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C35D49231B3A75370021A0E9 /* save_share_selected@3x.png */; };
 		C3A30DA61AB7F8BD00B0F1CF /* liblob-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C300432A1AB6ED9300866385 /* liblob-ios.a */; };
 		E8A7347D1092CFF300661AAD /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A7347B1092CFF300661AAD /* ShareViewController.m */; };
 		E8A7347E1092CFF300661AAD /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8A7347C1092CFF300661AAD /* ShareViewController.xib */; };
@@ -2984,6 +2987,9 @@
 		8D1107310486CEB800E47090 /* Flyr-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Flyr-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		C30043241AB6ED9300866385 /* lob-ios.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "lob-ios.xcodeproj"; path = "Classes/lob-ios/lob-ios.xcodeproj"; sourceTree = "<group>"; };
 		C32139D51A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CropVideoViewController-iPhone6-Plus.xib"; sourceTree = "<group>"; };
+		C35D49211B3A75370021A0E9 /* save_share_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save_share_selected.png; sourceTree = "<group>"; };
+		C35D49221B3A75370021A0E9 /* save_share_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save_share_selected@2x.png"; sourceTree = "<group>"; };
+		C35D49231B3A75370021A0E9 /* save_share_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save_share_selected@3x.png"; sourceTree = "<group>"; };
 		E8A7347A1092CFF300661AAD /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		E8A7347B1092CFF300661AAD /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		E8A7347C1092CFF300661AAD /* ShareViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
@@ -3083,6 +3089,9 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				C35D49211B3A75370021A0E9 /* save_share_selected.png */,
+				C35D49221B3A75370021A0E9 /* save_share_selected@2x.png */,
+				C35D49231B3A75370021A0E9 /* save_share_selected@3x.png */,
 				247402361B33C2A900459759 /* save_share@3x.png */,
 				24A81AC11B32D8AC00B6328D /* save_share.png */,
 				24A81AC21B32D8AC00B6328D /* save_share@2x.png */,
@@ -5465,6 +5474,7 @@
 				24861F2619F9147100670F6D /* main_area_bg@3x.png in Resources */,
 				30D58D2B10FB1BF800E0C7E8 /* icon49.jpg in Resources */,
 				24861F4719F9147100670F6D /* size_button_selected@3x.png in Resources */,
+				C35D49261B3A75370021A0E9 /* save_share_selected@3x.png in Resources */,
 				30D58D2C10FB1BF800E0C7E8 /* icon5.jpg in Resources */,
 				242184E7194B4AEC00FDDA97 /* miga-icon.png in Resources */,
 				246EF4FC193C515D004539B2 /* emoticon31@2x.png in Resources */,
@@ -6269,6 +6279,7 @@
 				202C638417EA06E800CB9A75 /* ricon22.png in Resources */,
 				242184BD194B4AEC00FDDA97 /* emoticon175@2x.png in Resources */,
 				2092FFCC184E00BF0034C4F6 /* flyerlylogo@2x.png in Resources */,
+				C35D49251B3A75370021A0E9 /* save_share_selected@2x.png in Resources */,
 				202C638617EA06E800CB9A75 /* ricon23.png in Resources */,
 				249F204E193F562C0072835E /* splash_bg@2x.png in Resources */,
 				202C638817EA06E800CB9A75 /* ricon24.png in Resources */,
@@ -6381,6 +6392,7 @@
 				202C63D617EA06E800CB9A75 /* ricon63.png in Resources */,
 				202C63D817EA06E800CB9A75 /* ricon64.png in Resources */,
 				202C63DA17EA06E800CB9A75 /* ricon65.png in Resources */,
+				C35D49241B3A75370021A0E9 /* save_share_selected.png in Resources */,
 				24861F0119F9147100670F6D /* fb_setting@3x.png in Resources */,
 				249F1F8F193F55D50072835E /* 07_roll@2x.png in Resources */,
 				249F1FC7193F55E90072835E /* email_setting_selected@2x.png in Resources */,
