@@ -210,7 +210,6 @@
         untechable.userPhoneNumber = userphoneNumber;
         
         SetupGuideSecondViewController *secondSetupScreen = [[SetupGuideSecondViewController alloc] initWithNibName:@"SetupGuideSecondViewController" bundle:nil];
-        untechable.customizedContacts = @"";
         secondSetupScreen.untechable = untechable;
         [self.navigationController pushViewController:secondSetupScreen animated:YES];
 
@@ -232,8 +231,9 @@
  **/
 -(void)setupDefaultModel {
     
-        untechable  = [[Untechable alloc] init];
-        untechable.commonFunctions = [[CommonFunctions alloc] init];
+    untechable  = [[Untechable alloc] init];
+    untechable.commonFunctions = [[CommonFunctions alloc] init];
+    [untechable setOrSaveVars:@"RESET"];
 }
 
 

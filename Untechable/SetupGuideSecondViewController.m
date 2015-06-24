@@ -245,12 +245,16 @@
     SetupGuideThirdView *thirdSetupScreen = [[SetupGuideThirdView alloc] initWithNibName:@"SetupGuideThirdView" bundle:nil];
     thirdSetupScreen.untechable = untechable;
     [self.navigationController pushViewController:thirdSetupScreen animated:YES];
+    [self saveBeforeGoing];
 }
 
 -(void) goBack {
     
     UINavigationController *navigationController = self.navigationController;
     [navigationController popViewControllerAnimated:YES];
+}
+-(void)saveBeforeGoing {
+    [untechable setOrSaveVars:SAVE];
 }
 
 @end

@@ -11,7 +11,10 @@
 #import "ContactsListControllerViewController.h"
 #import "AddUntechableController.h"
 
-@interface SetupGuideThirdView ()
+@interface SetupGuideThirdView () {
+    
+    ContactsListControllerViewController *viewControllerToAdd;
+}
 
 @end
 
@@ -49,7 +52,7 @@
 
 -(void)setupContactView {
     
-     ContactsListControllerViewController *viewControllerToAdd = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
+     viewControllerToAdd = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
     
     viewControllerToAdd.untechable = untechable;
     
@@ -131,7 +134,7 @@
 }
 
 -(void)onNext{
-    
+    [self saveBeforeGoing];
     UIAlertView *congratesAlert = [[UIAlertView alloc]initWithTitle:@"Congrates" message:@"Thank you for setting up your Untech settings. Now you can easily become Untechable whenever you need a break from technology in order to spend more time with the people & experiencing the things that are most important." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [congratesAlert show];
     
@@ -141,6 +144,7 @@
     
     UINavigationController *navigationController = self.navigationController;
     [navigationController popViewControllerAnimated:YES];
+    [self saveBeforeGoing];
     
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -152,5 +156,29 @@
         [self.navigationController pushViewController:untechScreen animated:YES];
     }
 }
+
+-(void)saveBeforeGoing {
+    
+    NSMutableArray *customizedContactsFromSetup = [viewControllerToAdd currentlyEditingContacts];
+    untechable.customizedContactsForCurrentSession = customizedContactsFromSetup;
+    
+//    NSDictionary *s = [self indexKeyedDictionaryFromArray:customizedContactsFromSetup];
+//    
+//    NSMutableDictionary *mutableRetrievedDictionary = [[[NSUserDefaults standardUserDefaults] objectForKey:@"DicKey"] mutableCopy];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSMutableDictionary *) indexKeyedDictionaryFromArray:(NSArray *)array
+{
+    id objectInstance;
+    int indexKey = 0;
+    
+    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] init];
+    for (objectInstance in array)
+        [mutableDictionary setObject:objectInstance forKey:[NSNumber numberWithUnsignedInt:indexKey++]];
+    
+    return mutableDictionary;
+}
+
 
 @end
