@@ -485,6 +485,9 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     return imagePath;
 }
 
+/*
+ * Here we check, we need to save flyer in history or not
+ */
 -(BOOL)isSaveRequired {
     NSMutableDictionary *oldMasterLayers = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
     return ( [oldMasterLayers isEqualToDictionary:masterLayers]) ? NO : YES;
