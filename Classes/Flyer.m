@@ -485,6 +485,10 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     return imagePath;
 }
 
+-(BOOL)isSaveRequired {
+    NSMutableDictionary *oldMasterLayers = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
+    return ( [oldMasterLayers isEqualToDictionary:masterLayers]) ? NO : YES;
+}
 
 /*
  * Here we Matching Current Layers File with Last history Layers File

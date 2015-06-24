@@ -805,26 +805,45 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         isPlaying = NO;
         [player pause];
         
-        // Save flyer to disk
-        [flyer saveFlyer];
-        
-        // Make a history entry if needed.
-        [flyer addToHistory];
-        
-        // If this is a video flyer, then merge the video.
-        if ( [flyer isVideoFlyer] ) {
+        if( [flyer isSaveRequired] == YES ) {
+            // Save flyer to disk
+            [flyer saveFlyer];
             
-            // Here Compare Current Flyer with history Flyer
-            if ( [self.flyer isVideoMergeProcessRequired] ) {
+            // Make a history entry if needed.
+            [flyer addToHistory];
+        
+        
+            // If this is a video flyer, then merge the video.
+            if ( [flyer isVideoFlyer] ) {
                 
-                self.shouldShowAdd ( @"" );
-                
-                panelWillOpen = NO;
-                
-                // Here we Merge All Layers in Video File
-                [self videoMergeProcess];
+                // Here Compare Current Flyer with history Flyer
+                if ( [self.flyer isVideoMergeProcessRequired] ) {
+                    
+                    self.shouldShowAdd ( @"" );
+                    
+                    panelWillOpen = NO;
+                    
+                    // Here we Merge All Layers in Video File
+                    [self videoMergeProcess];
+                    
+                } else {
+                    // Go to the main thread and let the home screen know that flyer is
+                    // updated.
+                    dispatch_async( dispatch_get_main_queue(), ^{
+                        
+                        // Here we call Block for update Main UI
+                        self.onFlyerBack( @"" );
+                    });
+                }
+
+                //Always update flyer screenshot for video flyer [ I did this due to Git# 430 ]
+                [flyer setUpdatedSnapshotWithImage:[flyer getSharingVideoCover]];
                 
             } else {
+                // Here we take Snap shot of Flyer and
+                // Flyer Add to Gallery if user allow to Access there photos
+                [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
+                
                 // Go to the main thread and let the home screen know that flyer is
                 // updated.
                 dispatch_async( dispatch_get_main_queue(), ^{
@@ -833,26 +852,17 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     self.onFlyerBack( @"" );
                 });
             }
-
-            //Always update flyer screenshot for video flyer [ I did this due to Git# 430 ]
-            [flyer setUpdatedSnapshotWithImage:[flyer getSharingVideoCover]];
+            
+            
+            [Flurry logEvent:@"Saved Flyer"];
             
         } else {
-            // Here we take Snap shot of Flyer and
-            // Flyer Add to Gallery if user allow to Access there photos
-            [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
-            
-            // Go to the main thread and let the home screen know that flyer is
-            // updated.
             dispatch_async( dispatch_get_main_queue(), ^{
                 
                 // Here we call Block for update Main UI
                 self.onFlyerBack( @"" );
             });
         }
-        
-        
-        [Flurry logEvent:@"Saved Flyer"];
     });
     
     [self.navigationController popViewControllerAnimated:YES];
