@@ -90,7 +90,7 @@
         // Center title __________________________________________________
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
-        //        if ( [untechable.commonFunctions getAllUntechables:untechable.userId].count > 0 ) {
+        
         // Back Navigation button
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.shadowColor = [UIColor clearColor];
