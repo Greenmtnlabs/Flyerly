@@ -490,7 +490,11 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
  */
 -(BOOL)isSaveRequired {
     NSMutableDictionary *oldMasterLayers = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
-    return ( [oldMasterLayers isEqualToDictionary:masterLayers]) ? NO : YES;
+    BOOL canSave = ( [oldMasterLayers isEqualToDictionary:masterLayers]) ? NO : YES;
+    if( canSave == NO ){
+        canSave = [self isVideoMergeProcessRequired];
+    }
+    return  canSave;
 }
 
 /*

@@ -812,29 +812,15 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             // Make a history entry if needed.
             [flyer addToHistory];
         
-        
             // If this is a video flyer, then merge the video.
             if ( [flyer isVideoFlyer] ) {
                 
-                // Here Compare Current Flyer with history Flyer
-                if ( [self.flyer isVideoMergeProcessRequired] ) {
-                    
-                    self.shouldShowAdd ( @"" );
-                    
-                    panelWillOpen = NO;
-                    
-                    // Here we Merge All Layers in Video File
-                    [self videoMergeProcess];
-                    
-                } else {
-                    // Go to the main thread and let the home screen know that flyer is
-                    // updated.
-                    dispatch_async( dispatch_get_main_queue(), ^{
-                        
-                        // Here we call Block for update Main UI
-                        self.onFlyerBack( @"" );
-                    });
-                }
+                self.shouldShowAdd ( @"" );
+                
+                panelWillOpen = NO;
+                
+                // Here we Merge All Layers in Video File
+                [self videoMergeProcess];
 
                 //Always update flyer screenshot for video flyer [ I did this due to Git# 430 ]
                 [flyer setUpdatedSnapshotWithImage:[flyer getSharingVideoCover]];
@@ -852,7 +838,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     self.onFlyerBack( @"" );
                 });
             }
-            
             
             [Flurry logEvent:@"Saved Flyer"];
             
@@ -4400,11 +4385,17 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     //Here we remove Borders from layer if user touch any layer
     [self.flyimgView layerStoppedEditing:currentLayer];
     
-    //Here we Merge Video for Sharing
-    if ([flyer isVideoFlyer]) {
+    if( [flyer isSaveRequired] == YES ) {
         
-        //Here Compare Current Flyer with history Flyer
-        if ([self.flyer isVideoMergeProcessRequired]) {
+        // Save flyer to disk
+        [flyer saveFlyer];
+        
+        // Make a history entry if needed.
+        [flyer addToHistory];
+        
+        //Here we Merge Video for Sharing
+        if ([flyer isVideoFlyer]) {
+            
             //Background Thread
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
                 //Here we Merge All Layers in Video File
@@ -4414,11 +4405,12 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                 //Flyer Add to Gallery if user allow to Access there photos
                 [flyer setUpdatedSnapshotWithImage:[flyer getSharingVideoCover]];
             });
+
+        } else{
+            //Here we take Snap shot of Flyer and
+            //Flyer Add to Gallery if user allow to Access there photos
+            [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
         }
-    } else{
-        //Here we take Snap shot of Flyer and
-        //Flyer Add to Gallery if user allow to Access there photos
-        [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
     }
     
 
