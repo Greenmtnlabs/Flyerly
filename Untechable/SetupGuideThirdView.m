@@ -7,6 +7,8 @@
 //
 
 #import "SetupGuideThirdView.h"
+#import "SetupGuideSecondViewController.h"
+#import "ContactsListControllerViewController.h"
 
 @interface SetupGuideThirdView ()
 
@@ -14,9 +16,17 @@
 
 @implementation SetupGuideThirdView
 
+@synthesize untechable;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    //navigation related Stuff
+    [self setNavigationBarItems];
+    
+    //setting up a view and showing contact list in it
+    [self setupContactView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,14 +34,110 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    [untechable printNavigation:[self navigationController]];
+    
 }
-*/
+
+-(void)viewWillAppear:(BOOL)animated {
+    [self setNavigation:@"viewDidLoad"];
+}
+
+-(void)setupContactView {
+    
+     ContactsListControllerViewController *viewControllerToAdd = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
+    
+    viewControllerToAdd.untechable.customizedContacts = @"";
+    
+    [viewControllerToAdd willMoveToParentViewController:self];
+    [self.viewForContacts addSubview:viewControllerToAdd.view];
+    [self addChildViewController:viewControllerToAdd];
+    
+    [viewControllerToAdd didMoveToParentViewController:self];
+}
+
+
+#pragma - mark setting navigation bar related stuff
+-(void) setNavigationBarItems {
+    
+    defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
+    defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
+    
+    [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    
+}
+
+-(void)setNavigation:(NSString *)callFrom {
+    
+    if([callFrom isEqualToString:@"viewDidLoad"])
+    {
+        self.navigationItem.hidesBackButton = YES;
+        
+        // Center title __________________________________________________
+        self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
+        
+        // Back Navigation button
+        backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        backButton.titleLabel.shadowColor = [UIColor clearColor];
+        backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitleColor:defGray forState:UIControlStateNormal];
+        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
+        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+        backButton.showsTouchWhenHighlighted = YES;
+        
+        UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        
+        [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+        // }
+        // Right Navigation ______________________________________________
+        nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        //[nextButton setBackgroundColor:[UIColor redColor]];//for testing
+        
+        nextButton.titleLabel.shadowColor = [UIColor clearColor];
+        //nextButton.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
+        
+        [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
+        //[nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
+        nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
+        [nextButton setTitleColor:defGray forState:UIControlStateNormal];
+        [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
+        [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
+        
+        nextButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
+        
+        [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
+        
+    }
+}
+
+-(void)btnNextTouchStart{
+    [self setNextHighlighted:YES];
+}
+-(void)btnNextTouchEnd{
+    [self setNextHighlighted:NO];
+}
+- (void)setNextHighlighted:(BOOL)highlighted {
+    (highlighted) ? [nextButton setBackgroundColor:defGreen] : [nextButton setBackgroundColor:[UIColor clearColor]];
+}
+
+-(void)onNext{
+    
+    UIAlertView *temp = [[UIAlertView alloc]initWithTitle:@"Now Show New Untech Screen" message:nil delegate:nil cancelButtonTitle:@"YES, I'll." otherButtonTitles:nil, nil];
+    [temp show];
+}
+
+-(void) goBack {
+    
+    UINavigationController *navigationController = self.navigationController;
+    [navigationController popViewControllerAnimated:YES];
+    
+}
 
 @end

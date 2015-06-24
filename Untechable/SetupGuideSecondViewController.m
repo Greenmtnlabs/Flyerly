@@ -169,8 +169,6 @@
 #pragma - mark setting navigation bar related stuff
 -(void) setNavigationBarItems {
     
-    
-    
     defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
     defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
     
@@ -188,21 +186,20 @@
         // Center title __________________________________________________
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
-//        if ( [untechable.commonFunctions getAllUntechables:untechable.userId].count > 0 ) {
-            // Back Navigation button
-            backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-            backButton.titleLabel.shadowColor = [UIColor clearColor];
-            backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-            [backButton setTitle:TITLE_BACK_TXT forState:normal];
-            [backButton setTitleColor:defGray forState:UIControlStateNormal];
-            [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
-            [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-            backButton.showsTouchWhenHighlighted = YES;
-            
-            UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-            
-            [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
-       // }
+        // Back Navigation button
+        backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        backButton.titleLabel.shadowColor = [UIColor clearColor];
+        backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitleColor:defGray forState:UIControlStateNormal];
+        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
+        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+        backButton.showsTouchWhenHighlighted = YES;
+        
+        UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        
+        [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+
         // Right Navigation ______________________________________________
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         //[nextButton setBackgroundColor:[UIColor redColor]];//for testing
@@ -246,13 +243,8 @@
 
 -(void) goBack {
     
-    for (UIViewController *controller in self.navigationController.viewControllers) {
-        
-        SetupGuideViewController *previousview = (SetupGuideViewController *)controller;
-        [self.navigationController popToViewController:previousview animated:YES];
-        break;
-        
-    }
+    UINavigationController *navigationController = self.navigationController;
+    [navigationController popViewControllerAnimated:YES];
 }
 
 @end
