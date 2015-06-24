@@ -158,6 +158,7 @@
 -(float)getWidth :(NSString *)uid;
 -(float)getHight :(NSString *)uid;
 -(NSString *)getFlyerImage;
+-(BOOL)isSaveRequired;
 -(BOOL)isVideoMergeProcessRequired;
 +(NSString *)getUniqueId;
 
