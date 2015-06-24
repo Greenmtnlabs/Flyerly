@@ -2717,6 +2717,7 @@
 		C35D4EAB1B3AAF480021A0E9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D33511E109ABB6A0082810A /* CFNetwork.framework */; };
 		C35D4EAC1B3AAF480021A0E9 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30D58E3410FB260200E0C7E8 /* MediaPlayer.framework */; };
 		C35D4EAD1B3AAF480021A0E9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26D73E02307543D994C6C8BE /* libPods.a */; };
+		C39E5ADA1B3AB30200776786 /* FlyrAdHoc.plist in Resources */ = {isa = PBXBuildFile; fileRef = C39E5AD91B3AB30200776786 /* FlyrAdHoc.plist */; };
 		C3A30DA61AB7F8BD00B0F1CF /* liblob-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C300432A1AB6ED9300866385 /* liblob-ios.a */; };
 		E8A7347D1092CFF300661AAD /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A7347B1092CFF300661AAD /* ShareViewController.m */; };
 		E8A7347E1092CFF300661AAD /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8A7347C1092CFF300661AAD /* ShareViewController.xib */; };
@@ -4355,7 +4356,7 @@
 		C35D49221B3A75370021A0E9 /* save_share_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save_share_selected@2x.png"; sourceTree = "<group>"; };
 		C35D49231B3A75370021A0E9 /* save_share_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save_share_selected@3x.png"; sourceTree = "<group>"; };
 		C35D4EB31B3AAF480021A0E9 /* Flyr copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Flyr copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C35D4EB41B3AAF480021A0E9 /* Flyr copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Flyr copy-Info.plist"; path = "/Users/rauf/Documents/flyerly/Flyr copy-Info.plist"; sourceTree = "<absolute>"; };
+		C39E5AD91B3AB30200776786 /* FlyrAdHoc.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FlyrAdHoc.plist; sourceTree = "<group>"; };
 		E8A7347A1092CFF300661AAD /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		E8A7347B1092CFF300661AAD /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		E8A7347C1092CFF300661AAD /* ShareViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
@@ -6162,7 +6163,7 @@
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				207AB32918ED471100945924 /* Podspecs */,
 				AC2AC46EC9D2E4BC8915F4F4 /* Pods */,
-				C35D4EB41B3AAF480021A0E9 /* Flyr copy-Info.plist */,
+				C39E5AD91B3AB30200776786 /* FlyrAdHoc.plist */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -7417,6 +7418,7 @@
 				242184A6194B4AEC00FDDA97 /* emoticon152@2x.png in Resources */,
 				249F1F8C193F55D50072835E /* 07_height_selected@2x.png in Resources */,
 				249F2045193F562C0072835E /* separator@2x.png in Resources */,
+				C39E5ADA1B3AB30200776786 /* FlyrAdHoc.plist in Resources */,
 				247159411940907800B30301 /* premium_features@2x.png in Resources */,
 				65C1A43B1742516D00947D5E /* Template35@2x.jpg in Resources */,
 				24F130C51A0D143F00464587 /* TextBorders-iPhone6.xib in Resources */,
@@ -9784,7 +9786,7 @@
 					"COCOAPODS_POD_AVAILABLE_NBUImagePicker_Filters=1",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Flyr copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/FlyrAdHoc.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9838,7 +9840,7 @@
 					"COCOAPODS_POD_AVAILABLE_NBUImagePicker_Filters=1",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Flyr copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/FlyrAdHoc.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9893,7 +9895,7 @@
 					"COCOAPODS_POD_AVAILABLE_NBUImagePicker_Filters=1",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Flyr copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/FlyrAdHoc.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
