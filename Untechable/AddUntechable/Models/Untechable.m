@@ -320,6 +320,8 @@
     } else {
         customizedContactsFromSetup = @"";
     }
+    
+    NSMutableArray *customizeContacts1 = [commonFunctions convertJsonStringIntoCCMArray:customizedContactsFromSetup];
 
     //Settings
     eventId  = @"";
@@ -346,7 +348,7 @@
     //emergencyNumber  = @"";
     //emergencyContacts = [[NSMutableDictionary alloc] init];
     //hasRecording = NO;
-    customizedContactsForCurrentSession = [[NSMutableArray alloc] init];
+    customizedContactsForCurrentSession = [[NSMutableArray alloc] initWithArray:customizeContacts1];
     customizedContacts = customizedContactsFromSetup;
 
     //Screen3

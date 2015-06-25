@@ -233,7 +233,8 @@
     
     untechable  = [[Untechable alloc] init];
     untechable.commonFunctions = [[CommonFunctions alloc] init];
-    [untechable initWithDefValues];
+    [untechable setOrSaveVars:@"RESET"];
+    [untechable initUntechableDirectory];
 }
 
 

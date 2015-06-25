@@ -69,16 +69,8 @@
     
     // Load device contacts
     [self loadLocalContacts];
-    
-    NSString *customizedContactsFromSetup = [[NSUserDefaults standardUserDefaults]
-                            stringForKey:@"customizedContactsFromSetup"];
-    
-    if( customizedContactsFromSetup ) {
-        //customizedContactsString = customizedContactsFromSetup;
-        customizedContactsString = customizedContactsFromSetup;
-    } else {
-        customizedContactsString = untechable.customizedContacts;
-    }
+        
+    customizedContactsString = untechable.customizedContacts;
     
     selectedAnyEmail = NO;
     
