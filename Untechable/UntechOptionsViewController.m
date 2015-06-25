@@ -20,7 +20,6 @@
 
 @property (strong, nonatomic) IBOutlet UIDatePicker *picker;
 
-@property (strong, nonatomic) IBOutlet UIButton *pickerCloseBtn;
 
 @end
 
@@ -176,29 +175,29 @@
 
 -(void)showHidePicker:(BOOL)showHide{
     if ( IS_IPHONE_4 ){
-        [_pickerCloseBtn setFrame:CGRectMake(-2, 300, 580, 30)];
+        [btnClose setFrame:CGRectMake(-2, 300, 580, 30)];
         [_untechNowPicker setFrame:CGRectMake(0, 300, 0, 140)];
     }else if( IS_IPHONE_5 ){
-        [_pickerCloseBtn setFrame:CGRectMake(-10, 340, 580, 35)];
+        [btnClose setFrame:CGRectMake(-10, 340, 580, 35)];
         [_untechNowPicker setFrame:CGRectMake(0, 375, 0, 240)];
     }else if ( IS_IPHONE_6 ){
-        [_pickerCloseBtn setFrame:CGRectMake(0, 400, 650, 40)];
+        [btnClose setFrame:CGRectMake(0, 400, 650, 40)];
         [_untechNowPicker setFrame:CGRectMake(0, 440, 0, 260)];
     }else if (IS_IPHONE_6_PLUS){
-        [_pickerCloseBtn setFrame:CGRectMake(0, 500, 750, 50)];
+        [btnClose setFrame:CGRectMake(0, 500, 750, 50)];
         [_untechNowPicker setFrame:CGRectMake(0, 540, 0, 500)];
     }
     
     float alpha = (showHide) ? 1.0 : 0.0;
     
     _untechNowPicker.alpha = alpha;
-    _pickerCloseBtn.alpha = alpha;
+    btnClose.alpha = alpha;
     [self addUpperBorder];
-    self.pickerCloseBtn.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
-    //self.spendingTimeTextPicker.backgroundColor = [self colorFromHexString:@"#fafafa"];
+    btnClose.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
+    self.picker.backgroundColor = [self colorFromHexString:@"#fafafa"];
     
     //changing the "CLOSE"button text color to black
-    [_pickerCloseBtn setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
+    [btnClose setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
     
 }
 
@@ -209,8 +208,8 @@
 {
     CALayer *upperBorder = [CALayer layer];
     upperBorder.backgroundColor = [[UIColor lightGrayColor] CGColor];
-    upperBorder.frame = CGRectMake(0, 0, CGRectGetWidth(_pickerCloseBtn.frame), 1.0f);
-    [_pickerCloseBtn.layer addSublayer:upperBorder];
+    upperBorder.frame = CGRectMake(0, 0, CGRectGetWidth(btnClose.frame), 1.0f);
+    [btnClose.layer addSublayer:upperBorder];
 }
 
 /**
@@ -263,5 +262,9 @@
     AddUntechableController *customUntechScreen = [[AddUntechableController alloc] initWithNibName:@"AddUntechableController" bundle:nil];
     customUntechScreen.untechable = untechable;
     [self.navigationController pushViewController:customUntechScreen animated:YES];
+}
+
+- (IBAction)btnClosePicker:(id)sender {
+    [self showHidePicker:NO];
 }
 @end

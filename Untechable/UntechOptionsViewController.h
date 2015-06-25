@@ -36,6 +36,8 @@
 
 - (IBAction)untechButton:(id)sender;
 - (IBAction)untechCustomButton:(id)sender;
+- (IBAction)btnClosePicker:(id)sender;
+
 
 @end
 
