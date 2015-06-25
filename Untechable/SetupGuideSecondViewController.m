@@ -52,9 +52,9 @@
     
     NSArray *arrayToBeAdded =  @[@"Spending time with family.", @"Driving.", @"Spending time outdoors.", @"At the beach.", @"Enjoying the holidays.", @"Just needed a break.", @"Running.", @"On vacation.", @"Finding my inner peace.", @"Removing myself from technology.", @"Custom"];
     
-    NSMutableOrderedSet * set = [NSMutableOrderedSet orderedSetWithArray:arrayToBeAdded ];
-    
     NSArray *customSpendingTextArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"spendingTimeText"];
+    
+    NSMutableOrderedSet * set = [NSMutableOrderedSet orderedSetWithArray:arrayToBeAdded ];
     
     [set unionSet:[NSSet setWithArray:customSpendingTextArray]];
 
@@ -227,6 +227,13 @@
         
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
         
+    }
+    //checking whether array is empty or not
+     NSArray *customSpendingTextArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"spendingTimeText"];
+    if( customSpendingTextArray == nil ) {
+        // inserting values in our pickerview's data source.
+        [[NSUserDefaults standardUserDefaults] setObject:customSpendingText forKey:@"spendingTimeText"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 
