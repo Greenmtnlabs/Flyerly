@@ -74,13 +74,11 @@
     NSString *customizedContactsFromSetup = [[NSUserDefaults standardUserDefaults]
                             stringForKey:@"customizedContactsFromSetup"];
     
-    if( [customizedContactsFromSetup isEqualToString:@""] || customizedContactsFromSetup == nil ){
-
-        customizedContactsString = untechable.customizedContacts;
-
+    if( customizedContactsFromSetup ) {
+        //customizedContactsString = customizedContactsFromSetup;
+        customizedContactsString = [NSString stringWithFormat:@"%@ %@", customizedContactsFromSetup, untechable.customizedContacts];
     } else {
-        
-        customizedContactsString = [NSString stringWithFormat:@"%@%@",untechable.customizedContacts,customizedContactsFromSetup];
+        customizedContactsString = untechable.customizedContacts;
     }
     
     selectedAnyEmail = NO;
@@ -90,7 +88,7 @@
     [NSJSONSerialization JSONObjectWithData: [customizedContactsString dataUsingEncoding:NSUTF8StringEncoding]
                                     options: NSJSONReadingMutableContainers
                                       error: &writeError];
-    
+    NSLog(@" Contact Dic %@", customizedContactsDictionary );
     [_contactsTable reloadData];
     
     //hides the keyboard when navigating between views

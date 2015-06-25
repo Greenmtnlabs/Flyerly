@@ -165,6 +165,7 @@
     NSString *customizeContactsForCurrentSession = [untechable.commonFunctions convertCCMArrayIntoJsonString:customizedContactsFromSetup];
     
     if( customizeContactsForCurrentSession != nil ) {
+        untechable.customizedContacts = customizeContactsForCurrentSession;
         [[NSUserDefaults standardUserDefaults] setObject:customizeContactsForCurrentSession forKey:@"customizedContactsFromSetup"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else {

@@ -31,5 +31,6 @@
 @property(nonatomic,strong) NSMutableArray *currentlyEditingContacts;
 
 @property(nonatomic,strong) IBOutlet UITextField *searchTextField;
+- (void) onNext;
 
 @end
