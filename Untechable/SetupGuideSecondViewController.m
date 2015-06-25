@@ -112,7 +112,6 @@
     
     NSInteger positionToRemember = 0;
 
-    
     if( [[customSpendingText objectAtIndex:row] isEqualToString:@"Custom"] ) {
         [self showAddFieldPopUp];
     } else  {
@@ -261,6 +260,11 @@
     [navigationController popViewControllerAnimated:YES];
 }
 -(void)saveBeforeGoing {
+    
+    if( untechable.spendingTimeTxt == nil || [untechable.spendingTimeTxt isEqualToString:@""] ) {
+        untechable.spendingTimeTxt = [customSpendingText objectAtIndex:0];
+    }
+    
     [untechable setOrSaveVars:SAVE];
 }
 

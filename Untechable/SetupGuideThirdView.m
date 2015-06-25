@@ -162,22 +162,6 @@
     NSMutableArray *customizedContactsFromSetup = [viewControllerToAdd currentlyEditingContacts];
     untechable.customizedContactsForCurrentSession = customizedContactsFromSetup;
     
-//    NSDictionary *s = [self indexKeyedDictionaryFromArray:customizedContactsFromSetup];
-//    
-//    NSMutableDictionary *mutableRetrievedDictionary = [[[NSUserDefaults standardUserDefaults] objectForKey:@"DicKey"] mutableCopy];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-- (NSMutableDictionary *) indexKeyedDictionaryFromArray:(NSArray *)array
-{
-    id objectInstance;
-    int indexKey = 0;
-    
-    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] init];
-    for (objectInstance in array)
-        [mutableDictionary setObject:objectInstance forKey:[NSNumber numberWithUnsignedInt:indexKey++]];
-    
-    return mutableDictionary;
 }
 
 
