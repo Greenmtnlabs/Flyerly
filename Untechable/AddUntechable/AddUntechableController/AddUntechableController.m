@@ -14,6 +14,7 @@
 #import "SettingsViewController.h"
 #import "ContactsListControllerViewController.h"
 #import "UntechablesList.h"
+#import "SetupGuideThirdView.h"
 
 
 @interface AddUntechableController (){
@@ -552,45 +553,56 @@
         [self configureTestData];
     //For testing -------- } --
     
-    BOOL isNew = YES;
-    
     NSMutableDictionary *sUntechable = nil;
     
-    //When we are going to edit event
-    if ( indexOfUntechableInEditMode > -1 ){ //&& [untechable.commonFunctions getAllUntechables:untechable.userId].count > 0){
-        sUntechable = [untechable.commonFunctions getUntechable:indexOfUntechableInEditMode UserId:untechable.userId];
-        if( sUntechable != nil ){
-            isNew = NO;
-        }
-    }
-    
-    //Check is there any incomplete untechable exist ?
-    if( isNew == YES ){
-        sUntechable = [untechable.commonFunctions getAnyInCompleteUntechable:untechable.userId];
+    BOOL calledFromSetupScreen = SetupGuideThirdView.calledFromSetup;
+    if( !calledFromSetupScreen ) {
         
-        if( sUntechable != nil ){
-            isNew = NO;
-            callReset = @"RESET1";
+        BOOL isNew = YES;
+        
+        
+        
+        //When we are going to edit event
+        if ( indexOfUntechableInEditMode > -1 ){ //&& [untechable.commonFunctions getAllUntechables:untechable.userId].count > 0){
+            sUntechable = [untechable.commonFunctions getUntechable:indexOfUntechableInEditMode UserId:untechable.userId];
+            if( sUntechable != nil ){
+                isNew = NO;
+            }
         }
-    }
-    
-    
-    //Old Untechable going to edit, set the vars
-    if( sUntechable != nil ){
-        //Settings required for calling initUntechableDirectory
+        
+        //Check is there any incomplete untechable exist ?
+        if( isNew == YES ){
+            sUntechable = [untechable.commonFunctions getAnyInCompleteUntechable:untechable.userId];
+            
+            if( sUntechable != nil ){
+                isNew = NO;
+                callReset = @"RESET1";
+            }
+        }
+        
+        
+        //Old Untechable going to edit, set the vars
+        if( sUntechable != nil ){
+            //Settings required for calling initUntechableDirectory
+            untechable.uniqueId = sUntechable[@"uniqueId"];
+            untechable.untechablePath = sUntechable[@"untechablePath"];
+            [untechable initUntechableDirectory];
+        }
+        else if( isNew ) {
+            [untechable initWithDefValues];
+            [untechable initUntechableDirectory];
+            callReset = @"";
+        }
+        
+        
+        if( ![callReset isEqualToString:@""] ){
+            [self resetUntechable:callReset];
+        }
+    } else  {
+        sUntechable = [untechable.commonFunctions getUntechable:indexOfUntechableInEditMode UserId:untechable.userId];
         untechable.uniqueId = sUntechable[@"uniqueId"];
         untechable.untechablePath = sUntechable[@"untechablePath"];
-        [untechable initUntechableDirectory];
-    }
-    else if( isNew ) {
-        [untechable initWithDefValues];
-        [untechable initUntechableDirectory];
-        callReset = @"";
-    }
-    
-    
-    if( ![callReset isEqualToString:@""] ){
-        [self resetUntechable:callReset];
+        
     }
     
 }

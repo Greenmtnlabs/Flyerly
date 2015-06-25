@@ -16,12 +16,12 @@
     
     ContactsListControllerViewController *viewControllerToAdd;
 }
-
 @end
 
 @implementation SetupGuideThirdView
 
 @synthesize untechable;
+BOOL setupCalledNewUntech;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -32,6 +32,8 @@
     
     //setting up a view and showing contact list in it
     [self setupContactView];
+    
+    setupCalledNewUntech = NO;
     
 }
 
@@ -164,14 +166,16 @@
     untechable.customizedContactsForCurrentSession = customizedContactsFromSetup;
     NSString *customizeContactsForCurrentSession = [untechable.commonFunctions convertCCMArrayIntoJsonString:customizedContactsFromSetup];
     
-    if( customizeContactsForCurrentSession != nil ) {
-        untechable.customizedContacts = customizeContactsForCurrentSession;
-        [[NSUserDefaults standardUserDefaults] setObject:customizeContactsForCurrentSession forKey:@"customizedContactsFromSetup"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    } else {
-        customizeContactsForCurrentSession = @"";
-    }
+    viewControllerToAdd.currentlyEditingContacts = customizedContactsFromSetup;
+    untechable.customizedContacts = customizeContactsForCurrentSession;
+    [[NSUserDefaults standardUserDefaults] setObject:customizeContactsForCurrentSession forKey:@"customizedContactsFromSetup"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    setupCalledNewUntech = YES;
+
 }
 
++(BOOL)calledFromSetup{
+    return setupCalledNewUntech;
+}
 
 @end

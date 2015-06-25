@@ -9,7 +9,6 @@
 
 #import "ContactsListControllerViewController.h"
 #import "ContactListCell.h"
-#import "ContactsCustomizedModal.h"
 #import "ContactCustomizeDetailsControlelrViewController.h"
 #import "SocialnetworkController.h"
 #import "Common.h"
@@ -76,7 +75,7 @@
     
     if( customizedContactsFromSetup ) {
         //customizedContactsString = customizedContactsFromSetup;
-        customizedContactsString = [NSString stringWithFormat:@"%@ %@", customizedContactsFromSetup, untechable.customizedContacts];
+        customizedContactsString = customizedContactsFromSetup;
     } else {
         customizedContactsString = untechable.customizedContacts;
     }

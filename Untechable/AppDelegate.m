@@ -65,7 +65,7 @@ NSMutableArray *allUntechables;
     if ( allUntechables.count <= 0 ){
 
         //For testing -------- } --
-        SetupGuideViewController *mainViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
+        AddUntechableController *mainViewController = [[AddUntechableController alloc] initWithNibName:@"AddUntechableController" bundle:nil];
         
         mainViewController.untechable = untechable;
         navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];

@@ -22,4 +22,6 @@
 @property (nonatomic,strong)  Untechable *untechable;
 @property (weak, nonatomic) IBOutlet UIView *viewForContacts;
 
++(BOOL)calledFromSetup;
+
 @end
