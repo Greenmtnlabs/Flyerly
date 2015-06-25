@@ -807,13 +807,16 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         if( [flyer isSaveRequired] == YES ) {
             // Save flyer to disk
-            [flyer saveFlyer];
+            [flyer saveFlyer]; //
             
             // Make a history entry if needed.
-            [flyer addToHistory];
+            [flyer addToHistory]; //
         
             // If this is a video flyer, then merge the video.
             if ( [flyer isVideoFlyer] ) {
+
+                //here we keep the merging vido path
+                [flyer isVideoMergeProcessRequired];
                 
                 self.shouldShowAdd ( @"" );
                 
@@ -821,9 +824,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
                 // Here we Merge All Layers in Video File
                 [self videoMergeProcess];
-
-                //Always update flyer screenshot for video flyer [ I did this due to Git# 430 ]
-                [flyer setUpdatedSnapshotWithImage:[flyer getSharingVideoCover]];
                 
             } else {
                 // Here we take Snap shot of Flyer and
@@ -4387,8 +4387,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     if( [flyer isSaveRequired] == YES ) {
         
-        // Save flyer to disk
-        [flyer saveFlyer];
+        // Save flyer to disk //
+        [flyer saveFlyer]; //
         
         // Make a history entry if needed.
         [flyer addToHistory];
@@ -4398,12 +4398,12 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             
             //Background Thread
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+                
+                //here we keep the merging vido path
+                [flyer isVideoMergeProcessRequired];
+                
                 //Here we Merge All Layers in Video File
                 [self videoMergeProcess];
-                
-                //Here we take Snap shot of Flyer and
-                //Flyer Add to Gallery if user allow to Access there photos
-                [flyer setUpdatedSnapshotWithImage:[flyer getSharingVideoCover]];
             });
 
         } else{
