@@ -10,6 +10,7 @@
 #import "SetupGuideSecondViewController.h"
 #import "ContactsListControllerViewController.h"
 #import "AddUntechableController.h"
+#import "ContactsCustomizedModal.h"
 
 @interface SetupGuideThirdView () {
     
@@ -161,7 +162,14 @@
     
     NSMutableArray *customizedContactsFromSetup = [viewControllerToAdd currentlyEditingContacts];
     untechable.customizedContactsForCurrentSession = customizedContactsFromSetup;
+    NSString *customizeContactsForCurrentSession = [untechable.commonFunctions convertCCMArrayIntoJsonString:customizedContactsFromSetup];
     
+    if( customizeContactsForCurrentSession != nil ) {
+        [[NSUserDefaults standardUserDefaults] setObject:customizeContactsForCurrentSession forKey:@"customizedContactsFromSetup"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        customizeContactsForCurrentSession = @"";
+    }
 }
 
 

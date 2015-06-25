@@ -71,7 +71,17 @@
     // Load device contacts
     [self loadLocalContacts];
     
-    customizedContactsString = untechable.customizedContacts;
+    NSString *customizedContactsFromSetup = [[NSUserDefaults standardUserDefaults]
+                            stringForKey:@"customizedContactsFromSetup"];
+    
+    if( [customizedContactsFromSetup isEqualToString:@""] || customizedContactsFromSetup == nil ){
+
+        customizedContactsString = untechable.customizedContacts;
+
+    } else {
+        
+        customizedContactsString = [NSString stringWithFormat:@"%@%@",untechable.customizedContacts,customizedContactsFromSetup];
+    }
     
     selectedAnyEmail = NO;
     
