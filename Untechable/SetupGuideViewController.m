@@ -219,7 +219,7 @@
         UIAlertView *alert  = [[UIAlertView alloc] initWithTitle:@"Error"
                                                          message:@"Please Enter Your Name and Number"
                                                         delegate:nil
-                                               cancelButtonTitle:@"Done"
+                                               cancelButtonTitle:@"OK"
                                                otherButtonTitles:nil, nil];
         [alert show];
     }
@@ -233,7 +233,7 @@
     
     untechable  = [[Untechable alloc] init];
     untechable.commonFunctions = [[CommonFunctions alloc] init];
-    [untechable initWithDefValues];
+    [untechable setOrSaveVars:@"RESET"];
 }
 
 
