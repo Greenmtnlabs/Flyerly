@@ -179,6 +179,9 @@
         dic[@"savedOnServer"]   = savedOnServer ? @"YES" : @"NO";
         dic[@"hasFinished"]     = hasFinished ? @"YES" : @"NO";        
         
+        //SetupGuide First Screen
+        dic[@"userName"]        = userName;
+        dic[@"userPhoneNumber"] = userPhoneNumber;
 
         //Screen1 vars
         dic[@"timezoneOffset"]  = timezoneOffset;
@@ -233,6 +236,13 @@
         NSData *data = [NSData dataWithContentsOfFile:piecesFile];
         dic = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         //dic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
+        NSString *customizedContactsFromSetup = [[NSUserDefaults standardUserDefaults]
+                                                 stringForKey:@"customizedContactsFromSetup"];
+        if(customizedContactsFromSetup){
+            
+        } else {
+            customizedContactsFromSetup = @"";
+        }
         
         
         //Settings
@@ -243,6 +253,10 @@
         untechablePath = ( dic[@"untechablePath"] ) ? dic[@"untechablePath"] : [self getNewUntechablePath];
         savedOnServer  = ([dic[@"savedOnServer"] isEqualToString:@"YES"]) ? YES : NO;
         hasFinished     = ([dic[@"hasFinished"] isEqualToString:@"YES"]) ? YES : NO;
+        
+        //SetupGuide First Screen
+        userName        = ( dic[@"userName"] ) ? dic[@"userName"] : @"";
+        userPhoneNumber        = ( dic[@"userPhoneNumber"] ) ? dic[@"userPhoneNumber"] : @"";
         
         //Screen1 vars
         timezoneOffset  = ( dic[@"timezoneOffset"] ) ? dic[@"timezoneOffset"] : [commonFunctions getTimeZoneOffset];
@@ -258,7 +272,7 @@
         //emergencyContacts = ( dic[@"emergencyContacts"] ) ? dic[@"emergencyContacts"] : @"";
         //hasRecording      = ([dic[@"hasRecording"] isEqualToString:@"YES"]) ? YES : NO;
     
-        customizedContacts = ( dic[@"customizedContacts"] ) ? dic[@"customizedContacts"] : @"";
+        customizedContacts = ( customizedContactsFromSetup ) ? customizedContactsFromSetup :dic[@"customizedContacts"];
         customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:customizedContacts];
     
         //Screen3 vars
@@ -298,8 +312,17 @@
 /*
  Set default values for new event
  */
--(void)initWithDefValues
-{
+-(void)initWithDefValues {
+    NSString *customizedContactsFromSetup = [[NSUserDefaults standardUserDefaults]
+                                             stringForKey:@"customizedContactsFromSetup"];
+    if(customizedContactsFromSetup){
+        
+    } else {
+        customizedContactsFromSetup = @"";
+    }
+    
+    NSMutableArray *customizeContacts1 = [commonFunctions convertJsonStringIntoCCMArray:customizedContactsFromSetup];
+
     //Settings
     eventId  = @"";
     paid     = NO;
@@ -307,6 +330,10 @@
     untechablePath = [self getNewUntechablePath];
     savedOnServer = NO;
     hasFinished   = NO;
+    
+    //Setup Guide First Screen
+    userName = @"";
+    userPhoneNumber = @"";
     
     //Screen1
     timezoneOffset  = [commonFunctions getTimeZoneOffset];
@@ -321,8 +348,8 @@
     //emergencyNumber  = @"";
     //emergencyContacts = [[NSMutableDictionary alloc] init];
     //hasRecording = NO;
-    customizedContactsForCurrentSession = [[NSMutableArray alloc] init];
-    customizedContacts = @"";
+    customizedContactsForCurrentSession = [[NSMutableArray alloc] initWithArray:customizeContacts1];
+    customizedContacts = customizedContactsFromSetup;
 
     //Screen3
     socialStatus = @"";
