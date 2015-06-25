@@ -236,6 +236,13 @@
         NSData *data = [NSData dataWithContentsOfFile:piecesFile];
         dic = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         //dic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
+        NSString *customizedContactsFromSetup = [[NSUserDefaults standardUserDefaults]
+                                                 stringForKey:@"customizedContactsFromSetup"];
+        if(customizedContactsFromSetup){
+            
+        } else {
+            customizedContactsFromSetup = @"";
+        }
         
         
         //Settings
@@ -265,7 +272,7 @@
         //emergencyContacts = ( dic[@"emergencyContacts"] ) ? dic[@"emergencyContacts"] : @"";
         //hasRecording      = ([dic[@"hasRecording"] isEqualToString:@"YES"]) ? YES : NO;
     
-        customizedContacts = ( dic[@"customizedContacts"] ) ? dic[@"customizedContacts"] : @"";
+        customizedContacts = ( customizedContactsFromSetup ) ? customizedContactsFromSetup :dic[@"customizedContacts"];
         customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:customizedContacts];
     
         //Screen3 vars
@@ -305,8 +312,15 @@
 /*
  Set default values for new event
  */
--(void)initWithDefValues
-{
+-(void)initWithDefValues {
+    NSString *customizedContactsFromSetup = [[NSUserDefaults standardUserDefaults]
+                                             stringForKey:@"customizedContactsFromSetup"];
+    if(customizedContactsFromSetup){
+        
+    } else {
+        customizedContactsFromSetup = @"";
+    }
+
     //Settings
     eventId  = @"";
     paid     = NO;
@@ -333,7 +347,7 @@
     //emergencyContacts = [[NSMutableDictionary alloc] init];
     //hasRecording = NO;
     customizedContactsForCurrentSession = [[NSMutableArray alloc] init];
-    customizedContacts = @"";
+    customizedContacts = customizedContactsFromSetup;
 
     //Screen3
     socialStatus = @"";

@@ -59,12 +59,12 @@ NSMutableArray *allUntechables;
     //For testing -------- } --
     
     UINavigationController *navigationController;
-    allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
     {
         //check wheter untechables are already added, if not then go to add untechable screen
         // else show untechable list..
+        allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
         if ( allUntechables.count <= 0 ){
             
             //For testing -------- } --
