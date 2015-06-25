@@ -9,6 +9,8 @@
 #import "SetupGuideSecondViewController.h"
 #import "SetupGuideViewController.h"
 #import "SetupGuideThirdView.h"
+#import "AddUntechableController.h"
+#import "UntechOptionsViewController.h"
 
 @interface SetupGuideSecondViewController () {
     NSMutableArray *customSpendingText;
@@ -265,7 +267,6 @@
         untechable.spendingTimeTxt = [customSpendingText objectAtIndex:0];
     }
     
-    //[untechable setOrSaveVars:SAVE];
 }
 
 @end

@@ -1,52 +1,38 @@
 //
-//  SetupGuideThirdView.m
+//  UntechOptionsViewController.m
 //  Untechable
 //
-//  Created by RIKSOF Developer on 6/22/15.
+//  Created by rufi on 24/06/2015.
 //  Copyright (c) 2015 Green MTN Labs Inc. All rights reserved.
 //
 
-#import "SetupGuideThirdView.h"
-#import "SetupGuideSecondViewController.h"
-#import "ContactsListControllerViewController.h"
-#import "AddUntechableController.h"
-#import "ContactsCustomizedModal.h"
 #import "UntechOptionsViewController.h"
+#import "SetupGuideSecondViewController.h"
+#import "AddUntechableController.h"
+#import "Common.h"
 
-@interface SetupGuideThirdView () {
-    
-    ContactsListControllerViewController *viewControllerToAdd;
+
+@interface UntechOptionsViewController (){
 }
+@property (strong, nonatomic) IBOutlet UIButton *btnUntechCustom;
 @end
 
-@implementation SetupGuideThirdView
+@implementation UntechOptionsViewController
 
 @synthesize untechable;
-BOOL setupCalledNewUntech;
 
-- (void)viewDidLoad {
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [untechable printNavigation:[self navigationController]];
+}
+
+-(void) viewDidLoad{
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
     //navigation related Stuff
     [self setNavigationBarItems];
     
-    //setting up a view and showing contact list in it
-    [self setupContactView];
+    [self updateUI];
     
-    setupCalledNewUntech = NO;
-    
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
--(void)viewDidAppear:(BOOL)animated {
-    
-    [super viewDidAppear:animated];
-    [untechable printNavigation:[self navigationController]];
     
 }
 
@@ -54,20 +40,35 @@ BOOL setupCalledNewUntech;
     [self setNavigation:@"viewDidLoad"];
 }
 
--(void)setupContactView {
-    
-     viewControllerToAdd = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
-    
-    viewControllerToAdd.untechable = untechable;
-    
-    [viewControllerToAdd willMoveToParentViewController:self];
-    [self.viewForContacts addSubview:viewControllerToAdd.view];
-    [self addChildViewController:viewControllerToAdd];
-    //self.view.bounds = viewControllerToAdd.view.bounds;
-
-    [viewControllerToAdd didMoveToParentViewController:self];
-    
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
+
+
+
+#pragma mark -  UI functions
+-(void)updateUI{
+    
+    [UntechCustom setTitleColor:defGray forState:UIControlStateNormal];
+    UntechCustom.titleLabel.font = [UIFont fontWithName:APP_FONT size:22];
+    UntechCustom.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
+    
+    [Untech setTitleColor:defGray forState:UIControlStateNormal];
+    Untech.titleLabel.font = [UIFont fontWithName:APP_FONT size:22];
+    Untech.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
+    
+   }
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 #pragma - mark setting navigation bar related stuff
 -(void) setNavigationBarItems {
@@ -88,6 +89,7 @@ BOOL setupCalledNewUntech;
         
         // Center title __________________________________________________
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
+        
         
         // Back Navigation button
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
@@ -113,7 +115,7 @@ BOOL setupCalledNewUntech;
         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
         //[nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [nextButton setTitle:TITLE_DONE_TXT forState:normal];
+        [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
         [nextButton setTitleColor:defGray forState:UIControlStateNormal];
         [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
         [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
@@ -138,51 +140,28 @@ BOOL setupCalledNewUntech;
 }
 
 -(void)onNext{
-    [self saveBeforeGoing];
-    
-    UIAlertView *congratesAlert = [[UIAlertView alloc]initWithTitle:@"Congrates" message:@"Thank you for setting up your Untech settings. Now you can easily become Untechable whenever you need a break from technology in order to spend more time with the people & experiencing the things that are most important." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    [congratesAlert show];
     
 }
 
 -(void) goBack {
-    
     UINavigationController *navigationController = self.navigationController;
     [navigationController popViewControllerAnimated:YES];
-    [self saveBeforeGoing];
-    
-}
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-   
-    //we're assuming cancel as done because there is only one button on the alert
-    if( buttonIndex == [alertView cancelButtonIndex] ) {
-        
-        UntechOptionsViewController *untechScreen = [[UntechOptionsViewController alloc] initWithNibName:@"UntechOptionsViewController" bundle:nil];
-        untechScreen.untechable = untechable;
-        [self.navigationController pushViewController:untechScreen animated:YES];
-    
-    }
 }
 
--(void)saveBeforeGoing {
-    
-    NSMutableArray *customizedContactsFromSetup = [viewControllerToAdd currentlyEditingContacts];
-    untechable.customizedContactsForCurrentSession = customizedContactsFromSetup;
-    NSString *customizeContactsForCurrentSession = [untechable.commonFunctions convertCCMArrayIntoJsonString:customizedContactsFromSetup];
-    
-    viewControllerToAdd.currentlyEditingContacts = customizedContactsFromSetup;
-    untechable.customizedContacts = customizeContactsForCurrentSession;
-    [[NSUserDefaults standardUserDefaults] setObject:customizeContactsForCurrentSession forKey:@"customizedContactsFromSetup"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    setupCalledNewUntech = YES;
 
-}
-
-+(BOOL)calledFromSetup{
-    return setupCalledNewUntech;
+-(UIImageView *) navigationGetTitleView
+{
+    return  [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
 }
 
 
 
+- (IBAction)untechButton:(id)sender {
+}
 
+- (IBAction)untechCustomButton:(id)sender {
+    AddUntechableController *customUntechScreen = [[AddUntechableController alloc] initWithNibName:@"AddUntechableController" bundle:nil];
+    customUntechScreen.untechable = untechable;
+    [self.navigationController pushViewController:customUntechScreen animated:YES];
+}
 @end
