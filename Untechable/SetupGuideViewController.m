@@ -9,6 +9,7 @@
 #import "SetupGuideViewController.h"
 #import "Common.h"
 #import "SetupGuideSecondViewController.h"
+#import "AddUntechableController.h"
 
 @interface SetupGuideViewController () {
     NSString *userName;
@@ -26,6 +27,7 @@
     [super viewDidLoad];
     [self initializeTextViews];
     [self setNavigationBarItems];
+    [self setupDefaultModel];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -204,6 +206,9 @@
     
     if ( !( userName == NULL || [userName isEqualToString:@"" ] ) && !( userphoneNumber == NULL || [userphoneNumber isEqualToString:@""]) ) {
         
+        untechable.userName = userName;
+        untechable.userPhoneNumber = userphoneNumber;
+        
         SetupGuideSecondViewController *secondSetupScreen = [[SetupGuideSecondViewController alloc] initWithNibName:@"SetupGuideSecondViewController" bundle:nil];
         secondSetupScreen.untechable = untechable;
         [self.navigationController pushViewController:secondSetupScreen animated:YES];
@@ -214,11 +219,21 @@
         UIAlertView *alert  = [[UIAlertView alloc] initWithTitle:@"Error"
                                                          message:@"Please Enter Your Name and Number"
                                                         delegate:nil
-                                               cancelButtonTitle:@"Done"
+                                               cancelButtonTitle:@"OK"
                                                otherButtonTitles:nil, nil];
         [alert show];
     }
     
+}
+
+/**
+ Initializing Untech Model
+ **/
+-(void)setupDefaultModel {
+    
+    untechable  = [[Untechable alloc] init];
+    untechable.commonFunctions = [[CommonFunctions alloc] init];
+    [untechable initWithDefValues];
 }
 
 

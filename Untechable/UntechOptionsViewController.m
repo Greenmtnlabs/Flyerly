@@ -161,7 +161,7 @@
 
 - (IBAction)untechCustomButton:(id)sender {
     AddUntechableController *customUntechScreen = [[AddUntechableController alloc] initWithNibName:@"AddUntechableController" bundle:nil];
-    
+    customUntechScreen.untechable = untechable;
     [self.navigationController pushViewController:customUntechScreen animated:YES];
 }
 @end

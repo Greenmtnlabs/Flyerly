@@ -13,6 +13,7 @@
 #import "Crittercism.h"
 #import "NameAndPhoneCellView.h"
 #import "SetupGuideViewController.h"
+#import "UntechOptionsViewController.h"
 
 @implementation AppDelegate
 
@@ -59,23 +60,35 @@ NSMutableArray *allUntechables;
     
     UINavigationController *navigationController;
     
-    allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
-    //check wheter untechables are already added, if not then go to add untechable screen
-    // else show untechable list..
-    if ( allUntechables.count <= 0 ){
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
+    {
+        //check wheter untechables are already added, if not then go to add untechable screen
+        // else show untechable list..
+        allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
+        if ( allUntechables.count <= 0 ){
+            
+            //For testing -------- } --
+            UntechOptionsViewController *mainViewController = [[UntechOptionsViewController alloc] initWithNibName:@"UntechOptionsViewController" bundle:nil];
+            
+            mainViewController.untechable = untechable;
+            navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+            
+        } else {
+            
+            UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
+            navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+            
+        }
 
-        //For testing -------- } --
+    }
+    else
+    {        
         SetupGuideViewController *mainViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
         
         mainViewController.untechable = untechable;
         navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
-        
-    } else {
-        
-    UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
-    navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
-        
     }
+    
     self.window.rootViewController = navigationController;
 }
 

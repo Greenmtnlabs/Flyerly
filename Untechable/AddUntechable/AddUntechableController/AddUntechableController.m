@@ -14,6 +14,7 @@
 #import "SettingsViewController.h"
 #import "ContactsListControllerViewController.h"
 #import "UntechablesList.h"
+#import "SetupGuideThirdView.h"
 
 
 @interface AddUntechableController (){
@@ -77,7 +78,14 @@
     [self showHideTextPicker:NO];
     
     // Initialize Data
-    _pickerData = @[@"Spending time with family.", @"Driving.", @"Spending time outdoors.", @"At the beach.", @"Enjoying the holidays.", @"Just needed a break.", @"Running.", @"On vacation.", @"Finding my inner peace.", @"Removing myself from technology."];
+    NSMutableArray *customSpendingTextArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"spendingTimeText"];
+    
+    //removing custom text from showing
+    int customTextPosition = ( int )[customSpendingTextArray indexOfObject:@"Custom"];
+    
+    [customSpendingTextArray removeObjectAtIndex:customTextPosition];
+    
+    _pickerData = customSpendingTextArray;
     
     // Connect data
     _spendingTimeTextPicker.dataSource = self;
@@ -131,6 +139,13 @@
     [untechable printNavigation:[self navigationController]];
     [self setNavigation:@"viewDidLoad"];
 
+}
+/**
+ before appearing view
+ we need to set some ui fields
+ **/
+-(void)viewWillAppear:(BOOL)animated {
+    [self setPickerValue];
 }
 // ________________________     Custom functions    ___________________________
 #pragma mark - Text Field Delegate
@@ -527,9 +542,9 @@
     now1 = [NSDate date]; //current date
     
     //init object
-    untechable  = [[Untechable alloc] init];
-    untechable.commonFunctions = [[CommonFunctions alloc] init];
-
+//    untechable  = [[Untechable alloc] init];
+//    untechable.commonFunctions = [[CommonFunctions alloc] init];
+//
     //Set Date formate
     untechable.dateFormatter = [[NSDateFormatter alloc] init];
     [untechable.dateFormatter setDateFormat:DATE_FORMATE_1];
@@ -538,47 +553,52 @@
         [self configureTestData];
     //For testing -------- } --
     
-    BOOL isNew = YES;
-    
     NSMutableDictionary *sUntechable = nil;
     
-    //When we are going to edit event
-    if ( indexOfUntechableInEditMode > -1 ){ //&& [untechable.commonFunctions getAllUntechables:untechable.userId].count > 0){
-        sUntechable = [untechable.commonFunctions getUntechable:indexOfUntechableInEditMode UserId:untechable.userId];
-        if( sUntechable != nil ){
-            isNew = NO;
-        }
-    }
-    
-    //Check is there any incomplete untechable exist ?
-    if( isNew == YES ){
-        sUntechable = [untechable.commonFunctions getAnyInCompleteUntechable:untechable.userId];
+    BOOL calledFromSetupScreen = SetupGuideThirdView.calledFromSetup;
+    if( !calledFromSetupScreen ) {
         
-        if( sUntechable != nil ){
-            isNew = NO;
-            callReset = @"RESET1";
+        BOOL isNew = YES;
+        
+        
+        
+        //When we are going to edit event
+        if ( indexOfUntechableInEditMode > -1 ){ //&& [untechable.commonFunctions getAllUntechables:untechable.userId].count > 0){
+            sUntechable = [untechable.commonFunctions getUntechable:indexOfUntechableInEditMode UserId:untechable.userId];
+            if( sUntechable != nil ){
+                isNew = NO;
+            }
         }
-    }
-    
-    
-    //Old Untechable going to edit, set the vars
-    if( sUntechable != nil ){
-        //Settings required for calling initUntechableDirectory
-        untechable.uniqueId = sUntechable[@"uniqueId"];
-        untechable.untechablePath = sUntechable[@"untechablePath"];
-        [untechable initUntechableDirectory];
-    }
-    else if( isNew ) {
-        [untechable initWithDefValues];
-        [untechable initUntechableDirectory];
-        callReset = @"";
-    }
-    
-    
-    if( ![callReset isEqualToString:@""] ){
-        [self resetUntechable:callReset];
-    }
-    
+        
+        //Check is there any incomplete untechable exist ?
+        if( isNew == YES ){
+            sUntechable = [untechable.commonFunctions getAnyInCompleteUntechable:untechable.userId];
+            
+            if( sUntechable != nil ){
+                isNew = NO;
+                callReset = @"RESET1";
+            }
+        }
+        
+        
+        //Old Untechable going to edit, set the vars
+        if( sUntechable != nil ){
+            //Settings required for calling initUntechableDirectory
+            untechable.uniqueId = sUntechable[@"uniqueId"];
+            untechable.untechablePath = sUntechable[@"untechablePath"];
+            [untechable initUntechableDirectory];
+        }
+        else if( isNew ) {
+            [untechable initWithDefValues];
+            [untechable initUntechableDirectory];
+            callReset = @"";
+        }
+        
+        
+        if( ![callReset isEqualToString:@""] ){
+            [self resetUntechable:callReset];
+        }
+    }    
 }
 
 -(void)resetUntechable:(NSString *)callResetFor{
@@ -765,5 +785,19 @@
 - (IBAction)openPicker:(id)sender {
     
     [self.view addSubview:_spendingTimeTextPicker];
+}
+
+/**
+ Setting Picker Value Got From Setting Screen
+ **/
+-(void)setPickerValue {
+    // Initialize Data
+    NSInteger positionToRemember = [[NSUserDefaults standardUserDefaults]
+                            integerForKey:@"positionToRemember"];
+
+    [_spendingTimeTextPicker selectRow:positionToRemember inComponent:0 animated:YES];
+    [_spendingTimeTextPicker reloadAllComponents];
+    _inputSpendingTimeText.text = [_pickerData objectAtIndex:positionToRemember];
+    
 }
 @end

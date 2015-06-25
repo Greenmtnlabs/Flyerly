@@ -9,7 +9,6 @@
 
 #import "ContactsListControllerViewController.h"
 #import "ContactListCell.h"
-#import "ContactsCustomizedModal.h"
 #import "ContactCustomizeDetailsControlelrViewController.h"
 #import "SocialnetworkController.h"
 #import "Common.h"
@@ -71,7 +70,15 @@
     // Load device contacts
     [self loadLocalContacts];
     
-    customizedContactsString = untechable.customizedContacts;
+    NSString *customizedContactsFromSetup = [[NSUserDefaults standardUserDefaults]
+                            stringForKey:@"customizedContactsFromSetup"];
+    
+    if( customizedContactsFromSetup ) {
+        //customizedContactsString = customizedContactsFromSetup;
+        customizedContactsString = customizedContactsFromSetup;
+    } else {
+        customizedContactsString = untechable.customizedContacts;
+    }
     
     selectedAnyEmail = NO;
     
@@ -80,7 +87,7 @@
     [NSJSONSerialization JSONObjectWithData: [customizedContactsString dataUsingEncoding:NSUTF8StringEncoding]
                                     options: NSJSONReadingMutableContainers
                                       error: &writeError];
-    
+    NSLog(@" Contact Dic %@", customizedContactsDictionary );
     [_contactsTable reloadData];
     
     //hides the keyboard when navigating between views

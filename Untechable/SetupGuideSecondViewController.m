@@ -54,9 +54,9 @@
     
     NSArray *arrayToBeAdded =  @[@"Spending time with family.", @"Driving.", @"Spending time outdoors.", @"At the beach.", @"Enjoying the holidays.", @"Just needed a break.", @"Running.", @"On vacation.", @"Finding my inner peace.", @"Removing myself from technology.", @"Custom"];
     
-    NSMutableOrderedSet * set = [NSMutableOrderedSet orderedSetWithArray:arrayToBeAdded ];
-    
     NSArray *customSpendingTextArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"spendingTimeText"];
+    
+    NSMutableOrderedSet * set = [NSMutableOrderedSet orderedSetWithArray:arrayToBeAdded ];
     
     [set unionSet:[NSSet setWithArray:customSpendingTextArray]];
 
@@ -112,13 +112,18 @@
 // Catpure the picker view selection
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     
+    NSInteger positionToRemember = 0;
+
     if( [[customSpendingText objectAtIndex:row] isEqualToString:@"Custom"] ) {
         [self showAddFieldPopUp];
     } else  {
         [self setupDoctorsResearchLabel:[customSpendingText objectAtIndex:row]];
+        untechable.spendingTimeTxt = [customSpendingText objectAtIndex:row];
+        positionToRemember = (NSInteger)row;
     }
     
-
+    [[NSUserDefaults standardUserDefaults] setInteger:positionToRemember forKey:@"positionToRemember"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 /**
@@ -171,8 +176,6 @@
 #pragma - mark setting navigation bar related stuff
 -(void) setNavigationBarItems {
     
-    
-    
     defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
     defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
     
@@ -190,21 +193,20 @@
         // Center title __________________________________________________
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
-//        if ( [untechable.commonFunctions getAllUntechables:untechable.userId].count > 0 ) {
-            // Back Navigation button
-            backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-            backButton.titleLabel.shadowColor = [UIColor clearColor];
-            backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-            [backButton setTitle:TITLE_BACK_TXT forState:normal];
-            [backButton setTitleColor:defGray forState:UIControlStateNormal];
-            [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
-            [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-            backButton.showsTouchWhenHighlighted = YES;
-            
-            UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-            
-            [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
-       // }
+        // Back Navigation button
+        backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        backButton.titleLabel.shadowColor = [UIColor clearColor];
+        backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitleColor:defGray forState:UIControlStateNormal];
+        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
+        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+        backButton.showsTouchWhenHighlighted = YES;
+        
+        UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        
+        [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+
         // Right Navigation ______________________________________________
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         //[nextButton setBackgroundColor:[UIColor redColor]];//for testing
@@ -227,6 +229,13 @@
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
         
     }
+    //checking whether array is empty or not
+     NSArray *customSpendingTextArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"spendingTimeText"];
+    if( customSpendingTextArray == nil ) {
+        // inserting values in our pickerview's data source.
+        [[NSUserDefaults standardUserDefaults] setObject:customSpendingText forKey:@"spendingTimeText"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
 }
 
 -(void)btnNextTouchStart{
@@ -241,23 +250,24 @@
 
 -(void)onNext{
     
-    //AddUntechableController *thirdSetupScreen = [[AddUntechableController alloc] initWithNibName:@"AddUntechableController" bundle:nil];
-    
-    UntechOptionsViewController *thirdSetupScreen = [[UntechOptionsViewController alloc] initWithNibName:@"UntechOptionsViewController" bundle:nil];
-    
+    SetupGuideThirdView *thirdSetupScreen = [[SetupGuideThirdView alloc] initWithNibName:@"SetupGuideThirdView" bundle:nil];
     thirdSetupScreen.untechable = untechable;
     [self.navigationController pushViewController:thirdSetupScreen animated:YES];
+    [self saveBeforeGoing];
 }
 
 -(void) goBack {
     
-    for (UIViewController *controller in self.navigationController.viewControllers) {
-        
-        SetupGuideViewController *previousview = (SetupGuideViewController *)controller;
-        [self.navigationController popToViewController:previousview animated:YES];
-        break;
-        
+    UINavigationController *navigationController = self.navigationController;
+    [navigationController popViewControllerAnimated:YES];
+}
+-(void)saveBeforeGoing {
+    
+    if( untechable.spendingTimeTxt == nil || [untechable.spendingTimeTxt isEqualToString:@""] ) {
+        untechable.spendingTimeTxt = [customSpendingText objectAtIndex:0];
     }
+    
+    //[untechable setOrSaveVars:@"SAVE"];
 }
 
 @end
