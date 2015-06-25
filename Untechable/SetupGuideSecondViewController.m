@@ -267,6 +267,7 @@
         untechable.spendingTimeTxt = [customSpendingText objectAtIndex:0];
     }
     
+    [untechable setOrSaveVars:@"SAVE"];
 }
 
 @end

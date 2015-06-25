@@ -9,8 +9,6 @@
 #import "SetupGuideThirdView.h"
 #import "SetupGuideSecondViewController.h"
 #import "ContactsListControllerViewController.h"
-#import "AddUntechableController.h"
-#import "ContactsCustomizedModal.h"
 #import "UntechOptionsViewController.h"
 
 @interface SetupGuideThirdView () {
@@ -22,9 +20,11 @@
 @implementation SetupGuideThirdView
 
 @synthesize untechable;
+
 BOOL setupCalledNewUntech;
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
@@ -35,7 +35,7 @@ BOOL setupCalledNewUntech;
     [self setupContactView];
     
     setupCalledNewUntech = NO;
-    
+       
 }
 
 - (void)didReceiveMemoryWarning {
@@ -138,11 +138,11 @@ BOOL setupCalledNewUntech;
 }
 
 -(void)onNext{
-    [self saveBeforeGoing];
     
     UIAlertView *congratesAlert = [[UIAlertView alloc]initWithTitle:@"Congrates" message:@"Thank you for setting up your Untech settings. Now you can easily become Untechable whenever you need a break from technology in order to spend more time with the people & experiencing the things that are most important." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [congratesAlert show];
     
+    [self saveBeforeGoing];    
 }
 
 -(void) goBack {
@@ -169,12 +169,13 @@ BOOL setupCalledNewUntech;
     NSMutableArray *customizedContactsFromSetup = [viewControllerToAdd currentlyEditingContacts];
     untechable.customizedContactsForCurrentSession = customizedContactsFromSetup;
     NSString *customizeContactsForCurrentSession = [untechable.commonFunctions convertCCMArrayIntoJsonString:customizedContactsFromSetup];
-    
-    viewControllerToAdd.currentlyEditingContacts = customizedContactsFromSetup;
-    untechable.customizedContacts = customizeContactsForCurrentSession;
+
     [[NSUserDefaults standardUserDefaults] setObject:customizeContactsForCurrentSession forKey:@"customizedContactsFromSetup"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     setupCalledNewUntech = YES;
+    
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 
 }
 
