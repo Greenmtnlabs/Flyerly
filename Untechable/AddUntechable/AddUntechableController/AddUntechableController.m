@@ -598,13 +598,7 @@
         if( ![callReset isEqualToString:@""] ){
             [self resetUntechable:callReset];
         }
-    } else  {
-        //sUntechable = [untechable.commonFunctions getUntechable:indexOfUntechableInEditMode UserId:untechable.userId];
-        //untechable.uniqueId = sUntechable[@"uniqueId"];
-       // untechable.untechablePath = sUntechable[@"untechablePath"];
-        
-    }
-    
+    }    
 }
 
 -(void)resetUntechable:(NSString *)callResetFor{
