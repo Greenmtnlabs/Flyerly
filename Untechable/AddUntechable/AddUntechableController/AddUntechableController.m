@@ -560,8 +560,6 @@
         
         BOOL isNew = YES;
         
-        
-        
         //When we are going to edit event
         if ( indexOfUntechableInEditMode > -1 ){ //&& [untechable.commonFunctions getAllUntechables:untechable.userId].count > 0){
             sUntechable = [untechable.commonFunctions getUntechable:indexOfUntechableInEditMode UserId:untechable.userId];

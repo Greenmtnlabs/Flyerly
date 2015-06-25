@@ -73,12 +73,12 @@
     NSString *customizedContactsFromSetup = [[NSUserDefaults standardUserDefaults]
                             stringForKey:@"customizedContactsFromSetup"];
     
-    if( customizedContactsFromSetup ) {
+    //if( customizedContactsFromSetup ) {
         //customizedContactsString = customizedContactsFromSetup;
-        customizedContactsString = customizedContactsFromSetup;
-    } else {
+        //customizedContactsString = customizedContactsFromSetup;
+   // } else {
         customizedContactsString = untechable.customizedContacts;
-    }
+    //}
     
     selectedAnyEmail = NO;
     
