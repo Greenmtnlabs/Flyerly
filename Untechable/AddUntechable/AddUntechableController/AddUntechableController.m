@@ -114,8 +114,6 @@
 }
 
 
-
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -137,7 +135,6 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    
     [self.keyboardControls setActiveField:textField];
 }
 

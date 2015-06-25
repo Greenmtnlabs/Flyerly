@@ -10,17 +10,14 @@
 #import "Untechable.h"
 #import "Common.h"
 
-@interface UntechOptionsViewController : UIViewController  {
+@interface UntechOptionsViewController : UIViewController <UIPickerViewDataSource , UIPickerViewDelegate> {
     
     UILabel *titleLabel;
     
-    
-   
-    
-    
-    
     IBOutlet UIButton *Untech;
     IBOutlet UIButton *UntechCustom;
+    
+    IBOutlet UIButton *btnClose;
     
     UIButton *backButton;
     UIButton *nextButton;
@@ -28,10 +25,14 @@
     UIColor *defGreen;//GREEN
     UIColor *defGray;//GRAY
     
+    UIPickerView *picker;
 }
 
 //Properties
+
 @property (nonatomic,strong)  Untechable *untechable;
+
+@property (strong, nonatomic) IBOutlet UIPickerView *untechNowPicker;
 
 - (IBAction)untechButton:(id)sender;
 - (IBAction)untechCustomButton:(id)sender;

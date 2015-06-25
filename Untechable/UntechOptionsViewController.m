@@ -13,8 +13,15 @@
 
 
 @interface UntechOptionsViewController (){
+    NSMutableArray *data;
 }
+
 @property (strong, nonatomic) IBOutlet UIButton *btnUntechCustom;
+
+@property (strong, nonatomic) IBOutlet UIDatePicker *picker;
+
+@property (strong, nonatomic) IBOutlet UIButton *pickerCloseBtn;
+
 @end
 
 @implementation UntechOptionsViewController
@@ -31,8 +38,8 @@
     //navigation related Stuff
     [self setNavigationBarItems];
     
+    [self showHidePicker:NO];
     [self updateUI];
-    
     
 }
 
@@ -44,7 +51,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 
 #pragma mark -  UI functions
@@ -129,6 +135,96 @@
     }
 }
 
+#pragma - Mark UI PICKER VIEW Delegate Methods
+// The number of columns of data
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+// The number of rows of data
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return data.count;
+}
+
+// The data to return for the row and component (column) that's being passed in
+- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return data[row];
+}
+
+// Catpure the picker view selection
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    
+    
+    
+    
+}
+
+-(void)initializePickerData {
+    
+    NSArray *arrayToBeAdded =  @[@"30 min", @"1 hr", @"1 day", @"2 days"];
+   
+    NSMutableOrderedSet * set = [NSMutableOrderedSet orderedSetWithArray:arrayToBeAdded ];
+    
+    [set unionSet:[NSSet setWithArray:arrayToBeAdded]];
+    
+    data = [NSMutableArray arrayWithArray:[set array]];
+    
+    
+    self.untechNowPicker.dataSource = self;
+    self.untechNowPicker.delegate = self;
+}
+
+-(void)showHidePicker:(BOOL)showHide{
+    if ( IS_IPHONE_4 ){
+        [_pickerCloseBtn setFrame:CGRectMake(-2, 300, 580, 30)];
+        [_untechNowPicker setFrame:CGRectMake(0, 300, 0, 140)];
+    }else if( IS_IPHONE_5 ){
+        [_pickerCloseBtn setFrame:CGRectMake(-10, 340, 580, 35)];
+        [_untechNowPicker setFrame:CGRectMake(0, 375, 0, 240)];
+    }else if ( IS_IPHONE_6 ){
+        [_pickerCloseBtn setFrame:CGRectMake(0, 400, 650, 40)];
+        [_untechNowPicker setFrame:CGRectMake(0, 440, 0, 260)];
+    }else if (IS_IPHONE_6_PLUS){
+        [_pickerCloseBtn setFrame:CGRectMake(0, 500, 750, 50)];
+        [_untechNowPicker setFrame:CGRectMake(0, 540, 0, 500)];
+    }
+    
+    float alpha = (showHide) ? 1.0 : 0.0;
+    
+    _untechNowPicker.alpha = alpha;
+    _pickerCloseBtn.alpha = alpha;
+    [self addUpperBorder];
+    self.pickerCloseBtn.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
+    //self.spendingTimeTextPicker.backgroundColor = [self colorFromHexString:@"#fafafa"];
+    
+    //changing the "CLOSE"button text color to black
+    [_pickerCloseBtn setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
+    
+}
+
+/**
+ Adding a top border for a view
+ **/
+- (void)addUpperBorder
+{
+    CALayer *upperBorder = [CALayer layer];
+    upperBorder.backgroundColor = [[UIColor lightGrayColor] CGColor];
+    upperBorder.frame = CGRectMake(0, 0, CGRectGetWidth(_pickerCloseBtn.frame), 1.0f);
+    [_pickerCloseBtn.layer addSublayer:upperBorder];
+}
+
+/**
+ Hex Color Converter
+ @params NSString
+ retunrs UIColor
+ */
+- (UIColor *)colorFromHexString:(NSString *)hexString {
+    unsigned rgbValue = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:hexString];
+    [scanner setScanLocation:1]; // bypass '#' character
+    [scanner scanHexInt:&rgbValue];
+    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
+}
 -(void)btnNextTouchStart{
     [self setNextHighlighted:YES];
 }
@@ -157,6 +253,10 @@
 
 
 - (IBAction)untechButton:(id)sender {
+    
+    [self showHidePicker:YES];
+    [self initializePickerData];
+    
 }
 
 - (IBAction)untechCustomButton:(id)sender {
