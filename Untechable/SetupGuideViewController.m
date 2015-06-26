@@ -130,10 +130,12 @@
     
     // TODO - find out why the size of the string is smaller than the actual width, so that you get extra, wrapped characters unless you take something off
     CGSize tallerSize = CGSizeMake(aTextView.frame.size.width-15,aTextView.frame.size.height*2); // pretend there's more vertical space to get that extra line to check on
-    CGSize newSize = [newText sizeWithFont:aTextView.font constrainedToSize:tallerSize lineBreakMode:UILineBreakModeWordWrap];
+    CGSize newSize = [newText sizeWithFont:aTextView.font constrainedToSize:tallerSize lineBreakMode:NSLineBreakByWordWrapping];
     
     if (newSize.height > aTextView.frame.size.height || [aTextView.text isEqualToString:@"\n"])
     {
+        // if next button is pressed then take user to next textfield which is in this case is userphone number field
+        [_userPhoneNumber becomeFirstResponder];
         return NO;
     }
     else
