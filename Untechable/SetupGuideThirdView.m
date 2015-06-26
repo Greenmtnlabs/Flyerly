@@ -52,6 +52,7 @@ BOOL setupCalledNewUntech;
 
 -(void)viewWillAppear:(BOOL)animated {
     [self setNavigation:@"viewDidLoad"];
+    [untechable.commonFunctions setNavigationTopBarViewForScreens:_navBarTopView];
 }
 
 -(void)setupContactView {

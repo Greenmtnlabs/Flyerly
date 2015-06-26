@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SetupGuideSecondViewController">
             <connections>
                 <outlet property="doctorsResearchLabel" destination="Oza-5Y-MF3" id="OY5-KY-M0R"/>
+                <outlet property="navBarTopView" destination="UNA-AN-XXL" id="jUG-C4-2KW"/>
                 <outlet property="setupSpendingTimeText" destination="XGp-dh-10q" id="ykm-Xm-SgO"/>
                 <outlet property="view" destination="79C-fk-0Vv" id="zTg-NE-HuQ"/>
             </connections>
