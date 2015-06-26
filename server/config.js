@@ -44,6 +44,7 @@ config.parse.jsKey = "Q87FRu5s8QFvCbN1rwFXUj19somLIU0aqh9SavHH";
 
 config.url = {};
 config.url.download = "https://itunes.apple.com/us/app/id344130515?mt=8";
+config.url.greenMtnlabsUrl = "http://greenmtnlabs.com/flyerly/";
 config.url.close = "flyerlyapp://";
 
 

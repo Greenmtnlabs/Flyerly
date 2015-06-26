@@ -50,8 +50,18 @@ FlyerlyServer.setup = function( app ) {
 			}else{
 
 				var request = require('request');
-				request(config.url.download, function (error, response, body) {
+				request(config.url.greenMtnlabsUrl, function (error, response, body) {
 				  if ( !error && response.statusCode == 200 ) {
+				  	//GreenMtnlabs website html have relative paths, so replace it into absolutes
+				  	body = body.replace(new RegExp('href="../img/', 'g'),('href="'+config.url.greenMtnlabsUrl+'../img/')  );
+					body = body.replace(new RegExp('href="../img/', 'g'),('href="'+config.url.greenMtnlabsUrl+'../img/')  );
+				  	body = body.replace(new RegExp('src="images/', 'g'),('src="'+config.url.greenMtnlabsUrl+'images/')  );
+				  	body = body.replace(new RegExp('href="../css/', 'g'),('href="'+config.url.greenMtnlabsUrl+'../css/')  );
+					body = body.replace(new RegExp('href="flyerlystyles.css"', 'g'),('href="'+config.url.greenMtnlabsUrl+'flyerlystyles.css"')  );
+					body = body.replace(new RegExp('src="js/', 'g'),('src="'+config.url.greenMtnlabsUrl+'js/')  );
+					body = body.replace(new RegExp('src=../js/"', 'g'),('src="'+config.url.greenMtnlabsUrl+'../js/')  );
+					body = body.replace(new RegExp('href="../index.html"', 'g'),('href="'+config.url.greenMtnlabsUrl+'../index.html"')  );
+
 				    res.end( body ) ;
 				  } else{
 					res.redirect( config.url.download );
