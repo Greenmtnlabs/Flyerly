@@ -25,5 +25,6 @@
 @property (weak, nonatomic) IBOutlet UITextView *userPhoneNumber;
 @property (weak, nonatomic) IBOutlet UILabel *usernameHintText;
 @property (weak, nonatomic) IBOutlet UILabel *phoneNumberHintText;
+@property (weak, nonatomic) IBOutlet UIImageView *topNavBarView;
 
 @end

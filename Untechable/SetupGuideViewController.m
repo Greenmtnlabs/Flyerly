@@ -46,6 +46,12 @@
     
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    // the navigation at the top bar wont move according to screen sizes
+    //so here we just move that on the basis of screen sizes
+    [untechable.commonFunctions setNavigationTopBarViewForScreens:_topNavBarView];
+}
+
 #pragma - mark Initializing Views
 -(void) initializeTextViews{
     
@@ -86,10 +92,14 @@
 #pragma - mark TextView Delegate Methods
 -(void)textViewDidEndEditing:(UITextView *)textView{
     
-   }
+    [self animateTextField: textView up: NO];
+    
+}
 
 -(void) textViewDidBeginEditing:(UITextView *)textView {
     
+    [self animateTextField: textView up: YES];
+
     //using labels as placeholder, because textview doesn't have 'em.
     if( textView.tag == 101 ){
          _usernameHintText.hidden = YES;
@@ -130,10 +140,12 @@
     
     // TODO - find out why the size of the string is smaller than the actual width, so that you get extra, wrapped characters unless you take something off
     CGSize tallerSize = CGSizeMake(aTextView.frame.size.width-15,aTextView.frame.size.height*2); // pretend there's more vertical space to get that extra line to check on
-    CGSize newSize = [newText sizeWithFont:aTextView.font constrainedToSize:tallerSize lineBreakMode:UILineBreakModeWordWrap];
+    CGSize newSize = [newText sizeWithFont:aTextView.font constrainedToSize:tallerSize lineBreakMode:NSLineBreakByWordWrapping];
     
     if (newSize.height > aTextView.frame.size.height || [aTextView.text isEqualToString:@"\n"])
     {
+        // if next button is pressed then take user to next textfield which is in this case is userphone number field
+        [_userPhoneNumber becomeFirstResponder];
         return NO;
     }
     else
@@ -237,5 +249,26 @@
     [untechable initUntechableDirectory];
 }
 
+/**
+ Moving up view if the keyboard hides a view.
+ **/
+- (void) animateTextField: (UITextView *) textField up: (BOOL) up {
+    
+    //only move up the screen if we had smaller screen size like iphone 4 and 5
+    if( IS_IPHONE_4 || IS_IPHONE_5 ) {
+        
+        const int movementDistance = 80;
+        const float movementDuration = 0.3f;
+        
+        int movement = (up ? -movementDistance : movementDistance);
+        
+        [UIView beginAnimations: @"anim" context: nil];
+        [UIView setAnimationBeginsFromCurrentState: YES];
+        [UIView setAnimationDuration: movementDuration];
+        self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+        [UIView commitAnimations];
+        
+    }
+}
 
 @end
