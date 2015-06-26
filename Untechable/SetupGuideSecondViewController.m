@@ -68,6 +68,8 @@
     
     self.setupSpendingTimeText.dataSource = self;
     self.setupSpendingTimeText.delegate = self;
+    
+    //[_setupSpendingTimeText setFont:[UIFont boldSystemFontOfSize:15]];
 }
 
 /**
@@ -124,6 +126,28 @@
     
     [[NSUserDefaults standardUserDefaults] setInteger:positionToRemember forKey:@"positionToRemember"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+//the size of the fonts in picker view was big for iphone 5 and small for iphone 6
+// so again need to handle it programitacally
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
+{
+    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, [pickerView rowSizeForComponent:component].width, [pickerView rowSizeForComponent:component].height)];
+    lbl.text = [customSpendingText objectAtIndex:row];
+    lbl.adjustsFontSizeToFitWidth = YES;
+    lbl.textAlignment = NSTextAlignmentCenter;
+    
+    //change the text size of pickers array accordingly
+    if( IS_IPHONE_4 ){
+        lbl.font=[UIFont systemFontOfSize:19];
+    } else if( IS_IPHONE_5 ){
+        lbl.font=[UIFont systemFontOfSize:20];
+    } else if( IS_IPHONE_6 ){
+        lbl.font=[UIFont systemFontOfSize:23];
+    } else if( IS_IPHONE_6_PLUS ){
+        lbl.font=[UIFont systemFontOfSize:24];
+    }
+    return lbl;
 }
 
 /**
