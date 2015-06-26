@@ -52,7 +52,6 @@ BOOL setupCalledNewUntech;
 
 -(void)viewWillAppear:(BOOL)animated {
     [self setNavigation:@"viewDidLoad"];
-    [untechable.commonFunctions setNavigationTopBarViewForScreens:_navBarTopView];
 }
 
 -(void)setupContactView {
@@ -110,6 +109,9 @@ BOOL setupCalledNewUntech;
 }
 
 -(void)setNavigation:(NSString *)callFrom {
+
+    // setting up top bar with (1,2,3) number for different screen sizes
+    [untechable.commonFunctions setNavigationTopBarViewForScreens:_navBarTopView];
     
     if([callFrom isEqualToString:@"viewDidLoad"])
     {
