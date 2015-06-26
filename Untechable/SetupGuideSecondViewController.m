@@ -136,16 +136,7 @@
     lbl.adjustsFontSizeToFitWidth = YES;
     lbl.textAlignment = NSTextAlignmentCenter;
     
-    //change the text size of pickers array accordingly
-    if( IS_IPHONE_4 ){
-        lbl.font=[UIFont systemFontOfSize:19];
-    } else if( IS_IPHONE_5 ){
-        lbl.font=[UIFont systemFontOfSize:20];
-    } else if( IS_IPHONE_6 ){
-        lbl.font=[UIFont systemFontOfSize:23];
-    } else if( IS_IPHONE_6_PLUS ){
-        lbl.font=[UIFont systemFontOfSize:24];
-    }
+    [lbl sizeToFit];
     return lbl;
 }
 
@@ -208,10 +199,7 @@
 }
 
 -(void)setNavigation:(NSString *)callFrom {
-    
-    // setting up top bar with (1,2,3) number for different screen sizes
-    [untechable.commonFunctions setNavigationTopBarViewForScreens:_navBarTopView];
-    
+        
     if([callFrom isEqualToString:@"viewDidLoad"])
     {
         self.navigationItem.hidesBackButton = YES;
