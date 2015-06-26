@@ -92,10 +92,14 @@
 #pragma - mark TextView Delegate Methods
 -(void)textViewDidEndEditing:(UITextView *)textView{
     
-   }
+    [self animateTextField: textView up: NO];
+    
+}
 
 -(void) textViewDidBeginEditing:(UITextView *)textView {
     
+    [self animateTextField: textView up: YES];
+
     //using labels as placeholder, because textview doesn't have 'em.
     if( textView.tag == 101 ){
          _usernameHintText.hidden = YES;
@@ -245,5 +249,21 @@
     [untechable initUntechableDirectory];
 }
 
+/**
+ Moving up view if the keyboard hides a view.
+ **/
+- (void) animateTextField: (UITextView *) textField up: (BOOL) up
+{
+    const int movementDistance = 80; // tweak as needed
+    const float movementDuration = 0.3f; // tweak as needed
+    
+    int movement = (up ? -movementDistance : movementDistance);
+    
+    [UIView beginAnimations: @"anim" context: nil];
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    [UIView setAnimationDuration: movementDuration];
+    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+    [UIView commitAnimations];
+}
 
 @end
