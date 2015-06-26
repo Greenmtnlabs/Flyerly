@@ -69,7 +69,6 @@
     self.setupSpendingTimeText.dataSource = self;
     self.setupSpendingTimeText.delegate = self;
     
-    //[_setupSpendingTimeText setFont:[UIFont boldSystemFontOfSize:15]];
 }
 
 /**
