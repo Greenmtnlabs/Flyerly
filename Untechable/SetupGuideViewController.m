@@ -46,12 +46,6 @@
     
 }
 
--(void)viewWillAppear:(BOOL)animated {
-    // the navigation at the top bar wont move according to screen sizes
-    //so here we just move that on the basis of screen sizes
-    [untechable.commonFunctions setNavigationTopBarViewForScreens:_topNavBarView];
-}
-
 #pragma - mark Initializing Views
 -(void) initializeTextViews{
     

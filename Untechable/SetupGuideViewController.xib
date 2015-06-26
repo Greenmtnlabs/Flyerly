@@ -8,7 +8,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SetupGuideViewController">
             <connections>
                 <outlet property="phoneNumberHintText" destination="fN1-Ji-IMy" id="hJx-bl-6wV"/>
-                <outlet property="topNavBarView" destination="ZrQ-4z-A1y" id="cJx-xE-l4d"/>
                 <outlet property="userNameTextView" destination="ZZU-eQ-ydF" id="ym2-QP-gsG"/>
                 <outlet property="userPhoneNumber" destination="YmA-Gd-Mzy" id="5dC-z8-buj"/>
                 <outlet property="usernameHintText" destination="RK5-oC-JgK" id="LfD-3d-FwE"/>
