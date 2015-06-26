@@ -81,19 +81,19 @@ BOOL setupCalledNewUntech;
     
     if( IS_IPHONE_4 ) {
         
-         viewControllerToAdd.view.frame = CGRectMake( 0, 20, self.view.frame.size.width, 420 );
+         viewControllerToAdd.view.frame = CGRectMake( 0, 0, self.view.frame.size.width, 470 );
         
     } else if ( IS_IPHONE_5 ) {
         
-         viewControllerToAdd.view.frame = CGRectMake( 0, 20, self.view.frame.size.width, 420 );
+         viewControllerToAdd.view.frame = CGRectMake( 0, 0, self.view.frame.size.width, 470 );
         
     } else if ( IS_IPHONE_6 ) {
         
-        viewControllerToAdd.view.frame = CGRectMake( 0, 20, self.view.frame.size.width, 540 );
+        viewControllerToAdd.view.frame = CGRectMake( 0, 0, self.view.frame.size.width, 540 );
         
     } else if ( IS_IPHONE_6_PLUS ) {
         
-        viewControllerToAdd.view.frame = CGRectMake( 0, 20, self.view.frame.size.width, 620 );
+        viewControllerToAdd.view.frame = CGRectMake( 0, 0, self.view.frame.size.width, 620 );
         
     }
 }
