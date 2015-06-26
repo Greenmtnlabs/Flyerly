@@ -247,22 +247,18 @@
  Moving up view if the keyboard hides a view.
  **/
 - (void) animateTextField: (UITextView *) textField up: (BOOL) up {
-//    
-//    //only move up the screen if we had smaller screen size like iphone 4 and 5
-//    if( IS_IPHONE_4 || IS_IPHONE_5 ) {
-//        
-//        const int movementDistance = 80;
-//        const float movementDuration = 0.3f;
-//        
-//        int movement = (up ? -movementDistance : movementDistance);
-//        
-//        [UIView beginAnimations: @"anim" context: nil];
-//        [UIView setAnimationBeginsFromCurrentState: YES];
-//        [UIView setAnimationDuration: movementDuration];
-//        self.view.frame = CGRectOffset(self.view.frame, 0, movement);
-//        [UIView commitAnimations];
     
-   // }
+        const int movementDistance = 80;
+        const float movementDuration = 0.3f;
+        
+        int movement = (up ? -movementDistance : movementDistance);
+        
+        [UIView beginAnimations: @"anim" context: nil];
+        [UIView setAnimationBeginsFromCurrentState: YES];
+        [UIView setAnimationDuration: movementDuration];
+        self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+        [UIView commitAnimations];
+    
 }
 
 @end

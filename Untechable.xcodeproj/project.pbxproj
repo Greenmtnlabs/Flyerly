@@ -45,6 +45,7 @@
 		243C59FA1A4D984B0020350C /* PhoneNumberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243C59F81A4D984B0020350C /* PhoneNumberCell.xib */; };
 		243C59FE1A4DA17C0020350C /* EmailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 243C59FC1A4DA17C0020350C /* EmailCell.m */; };
 		243C59FF1A4DA17C0020350C /* EmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243C59FD1A4DA17C0020350C /* EmailCell.xib */; };
+		244211F51B3D5B4400A4EE71 /* SetupGuideThirdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24AFE79A1B38086A00CC8230 /* SetupGuideThirdView.xib */; };
 		244834371A5D76F800E6F173 /* email@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 244834351A5D76F800E6F173 /* email@3x.png */; };
 		244834381A5D76F800E6F173 /* phone@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 244834361A5D76F800E6F173 /* phone@3x.png */; };
 		2448343C1A5D776200E6F173 /* email_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 244834391A5D776200E6F173 /* email_selected@3x.png */; };
@@ -92,7 +93,6 @@
 		24A65BEC1A30451E00BE83C6 /* SSLCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A65BEA1A30451E00BE83C6 /* SSLCell.m */; };
 		24A65BED1A30451E00BE83C6 /* SSLCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A65BEB1A30451E00BE83C6 /* SSLCell.xib */; };
 		24AFE79B1B38086A00CC8230 /* SetupGuideThirdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFE7991B38086A00CC8230 /* SetupGuideThirdView.m */; };
-		24AFE79C1B38086A00CC8230 /* SetupGuideThirdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24AFE79A1B38086A00CC8230 /* SetupGuideThirdView.xib */; };
 		24BAB1841A2F0DF900855B77 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BAB1831A2F0DF900855B77 /* SystemConfiguration.framework */; };
 		24BAB1881A2F0E8C00855B77 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BAB1871A2F0E8C00855B77 /* Reachability.m */; };
 		24CB24071AEA489F00251759 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24CB24061AEA489F00251759 /* StoreKit.framework */; };
@@ -1315,7 +1315,6 @@
 				247C72D41A5C0968005C9693 /* user_img@2x.png in Resources */,
 				C346D17D1A7FD13B00856A58 /* emailic.png in Resources */,
 				36B276771A0124E800ED58AD /* record_gray.png in Resources */,
-				24AFE79C1B38086A00CC8230 /* SetupGuideThirdView.xib in Resources */,
 				366EAF991A14C3530011D6C6 /* icon-76@2x.png in Resources */,
 				200ACE241A3874B200DC7047 /* aolIcon.png in Resources */,
 				241AC0021AE68AE000F1C8C9 /* NameAndPhoneCellView.xib in Resources */,
@@ -1372,6 +1371,7 @@
 				366EAF951A14C3530011D6C6 /* icon-60@2x.png in Resources */,
 				24354D711A499F4F000EC781 /* ContactListCell.xib in Resources */,
 				2499521D1A56F260001AEB84 /* email.png in Resources */,
+				244211F51B3D5B4400A4EE71 /* SetupGuideThirdView.xib in Resources */,
 				244834401A5D915D00E6F173 /* sms@3x.png in Resources */,
 				366EAFA01A14C3530011D6C6 /* Default-667h@2x.png in Resources */,
 				248E06BB1A4AD8BA0099846A /* ContactListCell-iPhone6.xib in Resources */,

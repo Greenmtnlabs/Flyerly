@@ -21,7 +21,6 @@
 //Properties
 @property (nonatomic,strong)  Untechable *untechable;
 @property (weak, nonatomic) IBOutlet UIView *viewForContacts;
-@property (weak, nonatomic) IBOutlet UIImageView *navBarTopView;
 
 +(BOOL)calledFromSetup;
 

@@ -63,38 +63,10 @@ BOOL setupCalledNewUntech;
     [viewControllerToAdd willMoveToParentViewController:self];
     [self.viewForContacts addSubview:viewControllerToAdd.view];
     [self addChildViewController:viewControllerToAdd];
-    
-    //fit to the screen whatever size we have
-    [self setupForDifferentScreenSizesProgramtically];
 
-    _viewForContacts.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    //_viewForContacts.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [viewControllerToAdd didMoveToParentViewController:self];
     
-}
-
-/**
- //imageview loading a xib file in it which was not fitting for all screen sizes
- //had to do it manually
- **/
--(void) setupForDifferentScreenSizesProgramtically {
-    
-    if( IS_IPHONE_4 ) {
-        
-         viewControllerToAdd.view.frame = CGRectMake( 0, 0, self.view.frame.size.width, 470 );
-        
-    } else if ( IS_IPHONE_5 ) {
-        
-         viewControllerToAdd.view.frame = CGRectMake( 0, 0, self.view.frame.size.width, 470 );
-        
-    } else if ( IS_IPHONE_6 ) {
-        
-        viewControllerToAdd.view.frame = CGRectMake( 0, 0, self.view.frame.size.width, 540 );
-        
-    } else if ( IS_IPHONE_6_PLUS ) {
-        
-        viewControllerToAdd.view.frame = CGRectMake( 0, 0, self.view.frame.size.width, 620 );
-        
-    }
 }
 
 #pragma - mark setting navigation bar related stuff
@@ -109,9 +81,6 @@ BOOL setupCalledNewUntech;
 }
 
 -(void)setNavigation:(NSString *)callFrom {
-
-    // setting up top bar with (1,2,3) number for different screen sizes
-    [untechable.commonFunctions setNavigationTopBarViewForScreens:_navBarTopView];
     
     if([callFrom isEqualToString:@"viewDidLoad"])
     {
