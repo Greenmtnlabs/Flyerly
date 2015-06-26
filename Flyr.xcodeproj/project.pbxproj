@@ -9538,8 +9538,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "bd30fa69-8d52-46f4-88da-12b5088d397c";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "bd30fa69-8d52-46f4-88da-12b5088d397c";
+				PROVISIONING_PROFILE = "64a661da-126d-4bf0-85b9-fee9abf3aa65";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "64a661da-126d-4bf0-85b9-fee9abf3aa65";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -9592,8 +9592,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = Flyr;
-				PROVISIONING_PROFILE = "bd30fa69-8d52-46f4-88da-12b5088d397c";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "bd30fa69-8d52-46f4-88da-12b5088d397c";
+				PROVISIONING_PROFILE = "64a661da-126d-4bf0-85b9-fee9abf3aa65";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "64a661da-126d-4bf0-85b9-fee9abf3aa65";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/**";
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -9704,8 +9704,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = Flyr;
-				PROVISIONING_PROFILE = "805ffb6f-b922-411b-a3ff-a1810ba6d1d5";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "805ffb6f-b922-411b-a3ff-a1810ba6d1d5";
+				PROVISIONING_PROFILE = "af994bda-e57f-4401-bc9a-9ef492f592ca";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "af994bda-e57f-4401-bc9a-9ef492f592ca";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/**";
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -9751,8 +9751,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "bd30fa69-8d52-46f4-88da-12b5088d397c";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "bd30fa69-8d52-46f4-88da-12b5088d397c";
+				PROVISIONING_PROFILE = "af994bda-e57f-4401-bc9a-9ef492f592ca";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "af994bda-e57f-4401-bc9a-9ef492f592ca";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
