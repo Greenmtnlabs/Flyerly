@@ -49,22 +49,13 @@ FlyerlyServer.setup = function( app ) {
 				res.jsonp( resObj ) ;
 			}else{
 
-				//console.log("redirect to: ", config.url.download);
-
 				var request = require('request');
 				request(config.url.download, function (error, response, body) {
-				  if (!error && response.statusCode == 200) {
-
-				    //console.log(body) // Show the HTML for the Google homepage. 
-				    //body = body.replace('</body>','Rufi</body>');
+				  if ( !error && response.statusCode == 200 ) {
 				    res.end( body ) ;
-
 				  } else{
-
-				  	//console.log('response.statusCode:',response.statusCode,error);
 					res.redirect( config.url.download );
-					
-				  }
+				  }				  
 				})
 			}
 		}
