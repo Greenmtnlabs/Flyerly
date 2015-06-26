@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SetupGuideViewController">
             <connections>
                 <outlet property="phoneNumberHintText" destination="fN1-Ji-IMy" id="hJx-bl-6wV"/>
+                <outlet property="topNavBarView" destination="ZrQ-4z-A1y" id="cJx-xE-l4d"/>
                 <outlet property="userNameTextView" destination="ZZU-eQ-ydF" id="ym2-QP-gsG"/>
                 <outlet property="userPhoneNumber" destination="YmA-Gd-Mzy" id="5dC-z8-buj"/>
                 <outlet property="usernameHintText" destination="RK5-oC-JgK" id="LfD-3d-FwE"/>
@@ -19,6 +20,10 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigation1.png" id="ZrQ-4z-A1y">
+                    <rect key="frame" x="93" y="65" width="126" height="28"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FSA-BZ-uNp">
                     <rect key="frame" x="7" y="258" width="304" height="1"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -88,10 +93,6 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigation1.png" id="ZrQ-4z-A1y">
-                    <rect key="frame" x="93" y="65" width="126" height="28"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>

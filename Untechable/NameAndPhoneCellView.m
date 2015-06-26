@@ -92,7 +92,6 @@ CommonFunctions *commonFunc;
     NSString *nameToSave = name;
     [[NSUserDefaults standardUserDefaults] setObject:nameToSave forKey:@"userName"];
     userNameInDb = name;
-    [commonFunc setUserName:nameToSave];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     // now show the updated username and number 

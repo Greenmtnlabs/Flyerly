@@ -45,9 +45,6 @@
 
 -(NSString *)formateStringIntoPhoneNumber:(NSString *)unformatted;
 
-#pragma mark - Setter Getter for UserName and Phone Number
-@property (strong, nonatomic) NSString *userName;
-//setter getter for username
-- ( void ) setUserName:(NSString *)userName;
-- ( NSString *) getUserName;
+#pragma mark Navigation Top Bar View
+-(void)setNavigationTopBarViewForScreens:(UIImageView *) topNavigationView;
 @end

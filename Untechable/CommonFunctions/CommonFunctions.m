@@ -473,20 +473,13 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
     return formattedString;
 }
 
-#pragma mark - UserName and Phone Number setter getter
-/**
- setting up user name got from the edit text
- */
-- ( void ) setUserName:(NSString *)userName {
-    currentEnteredUserName = userName;
+#pragma mark UIView Changes base on Iphone Screen Sizes
+-(void)setNavigationTopBarViewForScreens:(UIImageView *) topNavigationView {
+    
+    if( IS_IPHONE_4 || IS_IPHONE_5 ) {
+        
+        topNavigationView.frame = CGRectMake( 93, 77, 126, 28 );
+    }
 }
-
-/**
- get the current user name
- */
--( NSString *)getUserName{
-    return currentEnteredUserName;
-}
-
 
 @end
