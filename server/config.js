@@ -43,7 +43,7 @@ config.parse.restApiKey = "CUXUQEZ7O9Nu4FGFiNxQdvHcxE9VAi2lWNi3Y2V5";
 config.parse.jsKey = "Q87FRu5s8QFvCbN1rwFXUj19somLIU0aqh9SavHH";
 
 config.url = {};
-config.url.download = "https://itunes.apple.com/us/app/flyerly-create-share-flyers/id344130515";
+config.url.download = "https://itunes.apple.com/us/app/id344130515?mt=8";
 config.url.close = "flyerlyapp://";
 
 
