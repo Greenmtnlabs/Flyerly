@@ -64,7 +64,6 @@ BOOL setupCalledNewUntech;
     [self.viewForContacts addSubview:viewControllerToAdd.view];
     [self addChildViewController:viewControllerToAdd];
 
-    //_viewForContacts.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [viewControllerToAdd didMoveToParentViewController:self];
     
 }
@@ -105,13 +104,11 @@ BOOL setupCalledNewUntech;
         // }
         // Right Navigation ______________________________________________
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-        //[nextButton setBackgroundColor:[UIColor redColor]];//for testing
         
         nextButton.titleLabel.shadowColor = [UIColor clearColor];
-        //nextButton.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
         
         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
-        //[nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
+
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [nextButton setTitle:TITLE_DONE_TXT forState:normal];
         [nextButton setTitleColor:defGray forState:UIControlStateNormal];
