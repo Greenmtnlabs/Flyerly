@@ -10,7 +10,7 @@
 
 @implementation InAppPurchaseCell
 
-@synthesize packageName,packagePrice,packageDescription,discount;
+@synthesize packageName,packagePrice,packageDescription,discount,start;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
@@ -22,8 +22,15 @@
 -(void)setCellValueswithProductTitle :(NSString *)title ProductPrice:(NSString *)price ProductDescription: (NSString *)description{
     
     if ( ![title isEqualToString:@"Complete Bundle"] ){
-        discount.alpha = 0;
+        //discount.alpha = 0;
+        [discount removeFromSuperview];
     }
+    
+    if ( ![title isEqualToString:@"Monthly Subscription"] ){
+        //start.alpha = 0;
+        [start removeFromSuperview];
+    }
+
     
     packageName.text = title;
     packagePrice.text = price;

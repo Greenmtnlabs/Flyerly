@@ -15,6 +15,7 @@
 @property(nonatomic, retain)IBOutlet UILabel *packageDescription;
 
 @property(nonatomic, retain)IBOutlet UIImageView *discount;
+@property(nonatomic, retain)IBOutlet UIImageView *start;
 
 
 -(void)setCellValueswithProductTitle :(NSString *)title ProductPrice:(NSString *)price ProductDescription: (NSString *)description;
