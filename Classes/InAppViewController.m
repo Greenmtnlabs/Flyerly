@@ -355,9 +355,9 @@
         
         //Check For Crash Maintain
         cancelRequest = NO;
-        
+        NSArray *productIdentifiersAry = @[@"com.flyerly.MonthlySubscription", @"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.YearlySubscription1"];
         //These are over Products on App Store
-        NSSet *productIdentifiers = [NSSet setWithArray:@[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.IconsBundle", @"com.flyerly.MonthlySubscription", @"com.flyerly.YearlySubscription1"]];
+        NSSet *productIdentifiers = [NSSet setWithArray:productIdentifiersAry];
         
         [[RMStore defaultStore] requestProducts:productIdentifiers success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
             
@@ -375,17 +375,23 @@
             }
             
             productArray = [[NSMutableArray alloc] init];
-            for(SKProduct *product in products)
-            {
-                
-                NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                      product.localizedTitle,@"packagename",
-                                      product.priceAsString,@"packageprice" ,
-                                      product.localizedDescription,@"packagedesciption",
-                                      product.productIdentifier,@"productidentifier" , nil];
-                
-                
-                [productArray addObject:dict];
+            
+            for(NSString *identifier in productIdentifiersAry){
+                    for(SKProduct *product in products)
+                    {
+                        if( [identifier isEqualToString:product.productIdentifier]){
+                            NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                  product.localizedTitle,@"packagename",
+                                                  product.priceAsString,@"packageprice" ,
+                                                  product.localizedDescription,@"packagedesciption",
+                                                  product.productIdentifier,@"productidentifier" , nil];
+                            
+                            
+                            
+                            [productArray addObject:dict];
+                            break;
+                        }
+                    }
             }
             
             [self.buttondelegate inAppPurchasePanelContent];
@@ -412,7 +418,7 @@
         
         //HERE WE GET SHARED INTANCE OF _persistence WHICH WE LINKED IN FlyrAppDelegate
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        NSArray *productIdentifiers = @[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.IconsBundle", @"com.flyerly.MonthlySubscription", @"com.flyerly.YearlySubscription1"];
+        NSArray *productIdentifiers = @[@"com.flyerly.MonthlySubscription", @"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.IconsBundle",  @"com.flyerly.YearlySubscription1"];
         
         if (productIdentifiers.count >= 1) {
             
