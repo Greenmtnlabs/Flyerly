@@ -54,7 +54,7 @@
                 <outlet property="packageDescription" destination="Q8Q-3k-q49" id="cXP-g4-UgZ"/>
                 <outlet property="packageName" destination="Dqv-fn-2O0" id="8Cy-mg-2tK"/>
                 <outlet property="packagePrice" destination="eS8-qp-BVQ" id="9Tq-Ok-RUj"/>
-                <outlet property="start" destination="Onl-yh-mYU" id="Xa3-du-Mbs"/>
+                <outlet property="star" destination="Onl-yh-mYU" id="Gk2-Zp-2YG"/>
             </connections>
             <point key="canvasLocation" x="321" y="-166"/>
         </tableViewCell>

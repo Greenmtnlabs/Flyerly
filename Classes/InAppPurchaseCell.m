@@ -10,7 +10,7 @@
 
 @implementation InAppPurchaseCell
 
-@synthesize packageName,packagePrice,packageDescription,discount,start;
+@synthesize packageName,packagePrice,packageDescription,discount,star;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
@@ -26,7 +26,7 @@
     }
     
     if ( ![title isEqualToString:@"Monthly Subscription"] ){
-        [start removeFromSuperview];
+        [star removeFromSuperview];
     }
 
     

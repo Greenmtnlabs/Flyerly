@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InAppPurchaseCell">
             <connections>
-                <outlet property="start" destination="zBs-qa-l77" id="EMI-Oe-vlA"/>
+                <outlet property="star" destination="zBs-qa-l77" id="n6l-yk-T0X"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
