@@ -7,6 +7,7 @@
 //
 
 #import "RegisterController.h"
+#import "InviteFriendsController.h"
 
 @interface RegisterController ()
 
@@ -403,7 +404,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     }];
 }
 
--(void) onRegistrationSuccess {
+-(void)onRegistrationSuccess {
 
     [FlyerUser mergeAnonymousUser];
     
@@ -419,7 +420,10 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
     if( appDelegate.lauchController != nil ) {
         launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
-        [navigationController pushViewController:launchController animated:YES];
+        [navigationController setRootViewController:launchController];
+        
+        InviteFriendsController *inviteFriendsController = [[InviteFriendsController alloc]initWithNibName:@"InviteFriendsController" bundle:nil];
+        [navigationController pushViewController:inviteFriendsController animated:YES];
     }
     
 }
