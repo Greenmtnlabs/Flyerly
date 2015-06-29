@@ -20,6 +20,10 @@
     NSMutableArray *sectionTwoArray;
 }
 
+@property (strong, nonatomic) IBOutlet UIButton *pickerCloseBtn;
+@property (strong, nonatomic) IBOutlet UIPickerView *spendingTimeTextPicker;
+
+
 @end
 
 @implementation UntechablesList
@@ -123,8 +127,17 @@ int indexArrayS2[];
     
     NSLog(@"Go To add untechable screen");
     AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
+    
+    addUntechable.untechable = untechable;
     addUntechable.indexOfUntechableInEditMode = -1;
     [self.navigationController pushViewController:addUntechable animated:YES];
+    
+    /*
+    NSLog(@"Go To add untechable screen");
+    AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
+    addUntechable.indexOfUntechableInEditMode = -1;
+    [self.navigationController pushViewController:addUntechable animated:YES];
+     */
 }
 
 /*
@@ -184,9 +197,11 @@ int indexArrayS2[];
     self.untechablesTable.allowsMultipleSelectionDuringEditing = NO;
     
     [self setDefaultModel];
-    
+    [self showHideTextPicker:NO];
+
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
+    [self updateUI];
 }
 
 // Override to support conditional editing of the table view.
@@ -325,6 +340,17 @@ int indexArrayS2[];
     }
 }
 
+-(void)updateUI{
+    
+    [btnUntechCustom setTitleColor:defGray forState:UIControlStateNormal];
+    btnUntechCustom.titleLabel.font = [UIFont fontWithName:APP_FONT size:16];
+    btnUntechCustom.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
+    
+    [btnUntechNow setTitleColor:defGray forState:UIControlStateNormal];
+    btnUntechNow.titleLabel.font = [UIFont fontWithName:APP_FONT size:16];
+    btnUntechNow.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
+    
+}
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -607,4 +633,72 @@ int indexArrayS2[];
     [internetReachable startNotifier];
 }
 
+-(void)showHideTextPicker:(BOOL)showHide{
+    if ( IS_IPHONE_4 ){
+        [_pickerCloseBtn setFrame:CGRectMake(-2, 300, 580, 30)];
+        [_spendingTimeTextPicker setFrame:CGRectMake(0, 300, 0, 140)];
+    }else if( IS_IPHONE_5 ){
+        [_pickerCloseBtn setFrame:CGRectMake(-10, 340, 580, 35)];
+        [_spendingTimeTextPicker setFrame:CGRectMake(0, 375, 0, 240)];
+    }else if ( IS_IPHONE_6 ){
+        [_pickerCloseBtn setFrame:CGRectMake(0, 400, 650, 40)];
+        [_spendingTimeTextPicker setFrame:CGRectMake(0, 440, 0, 260)];
+    }else if (IS_IPHONE_6_PLUS){
+        [_pickerCloseBtn setFrame:CGRectMake(0, 500, 750, 50)];
+        [_spendingTimeTextPicker setFrame:CGRectMake(0, 540, 0, 500)];
+    }
+    
+    float alpha = (showHide) ? 1.0 : 0.0;
+    
+    _spendingTimeTextPicker.alpha = alpha;
+    _pickerCloseBtn.alpha = alpha;
+    [self addUpperBorder];
+    self.pickerCloseBtn.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
+    //self.spendingTimeTextPicker.backgroundColor = [self colorFromHexString:@"#fafafa"];
+    
+    //changing the "CLOSE"button text color to black
+    [_pickerCloseBtn setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
+    
+}
+
+/**
+ Hex Color Converter
+ @params NSString
+ retunrs UIColor
+ */
+- (UIColor *)colorFromHexString:(NSString *)hexString {
+    unsigned rgbValue = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:hexString];
+    [scanner setScanLocation:1]; // bypass '#' character
+    [scanner scanHexInt:&rgbValue];
+    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
+}
+
+/**
+ Adding a top border for a view
+ **/
+- (void)addUpperBorder
+{
+    CALayer *upperBorder = [CALayer layer];
+    upperBorder.backgroundColor = [[UIColor lightGrayColor] CGColor];
+    upperBorder.frame = CGRectMake(0, 0, CGRectGetWidth(_pickerCloseBtn.frame), 1.0f);
+    [_pickerCloseBtn.layer addSublayer:upperBorder];
+}
+
+- (IBAction)untechNowClick:(id)sender {
+    
+    [self showHideTextPicker:YES];
+
+}
+
+- (IBAction)untechCustomClick:(id)sender {
+   
+    NSLog(@"Go To add untechable screen");
+    AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
+    
+    addUntechable.untechable = untechable;
+    addUntechable.indexOfUntechableInEditMode = -1;
+    [self.navigationController pushViewController:addUntechable animated:YES];
+
+}
 @end

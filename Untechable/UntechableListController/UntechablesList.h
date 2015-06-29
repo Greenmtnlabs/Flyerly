@@ -19,8 +19,16 @@
     Untechable *untechable;
     
     Reachability *internetReachable;
+    
+    IBOutlet UIButton *btnUntechNow;
+    IBOutlet UIButton *btnUntechCustom;
+    
 }
 
 @property(nonatomic,strong) IBOutlet UITableView *untechablesTable;
+
+- (IBAction)untechNowClick:(id)sender;
+- (IBAction)untechCustomClick:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *btnClosePicker;
 
 @end

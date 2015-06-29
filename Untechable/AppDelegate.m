@@ -68,9 +68,11 @@ NSMutableArray *allUntechables;
         if ( allUntechables.count <= 0 ){
             
             //For testing -------- } --
-            UntechOptionsViewController *mainViewController = [[UntechOptionsViewController alloc] initWithNibName:@"UntechOptionsViewController" bundle:nil];
+            //UntechOptionsViewController *mainViewController = [[UntechOptionsViewController alloc] initWithNibName:@"UntechOptionsViewController" bundle:nil];
             
-            mainViewController.untechable = untechable;
+            UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
+            
+            mainViewController.untechablesTable = untechable;
             navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
             
         } else {
