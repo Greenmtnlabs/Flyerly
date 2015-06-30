@@ -26,11 +26,11 @@
                     </constraints>
                 </imageView>
                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XGp-dh-10q">
-                    <rect key="frame" x="0.0" y="206" width="320" height="162"/>
+                    <rect key="frame" x="0.0" y="205" width="320" height="162"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </pickerView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oza-5Y-MF3">
-                    <rect key="frame" x="0.0" y="369" width="320" height="113"/>
+                    <rect key="frame" x="0.0" y="367" width="320" height="113"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="113" id="Nxd-td-eTO"/>
@@ -63,6 +63,7 @@
                 <constraint firstItem="UNA-AN-XXL" firstAttribute="leading" secondItem="79C-fk-0Vv" secondAttribute="leading" constant="93" id="csY-5t-DTF"/>
                 <constraint firstAttribute="trailing" secondItem="beE-63-vlL" secondAttribute="trailing" constant="10" id="hhe-Rh-70Y"/>
                 <constraint firstItem="UNA-AN-XXL" firstAttribute="top" secondItem="79C-fk-0Vv" secondAttribute="top" constant="68" id="nYf-wh-nnU"/>
+                <constraint firstAttribute="bottom" secondItem="Oza-5Y-MF3" secondAttribute="bottom" id="qfw-iI-8Ea"/>
                 <constraint firstItem="beE-63-vlL" firstAttribute="top" secondItem="UNA-AN-XXL" secondAttribute="bottom" constant="27" id="unq-jM-SBz"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
