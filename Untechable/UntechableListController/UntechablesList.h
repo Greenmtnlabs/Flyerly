@@ -10,12 +10,13 @@
 #import "Untechable.h"
 #import "Reachability.h"
 
-@interface UntechablesList : UIViewController <UITableViewDelegate,UITableViewDataSource> {
+@interface UntechablesList : UIViewController <UITableViewDelegate,UITableViewDataSource,UIPickerViewDataSource,UIPickerViewDelegate> {
 
     UIColor *defGreen;//GREEN
     UIColor *defGray;//GRAY
     UIButton *newUntechableButton;
     UIButton *settingsButton;
+    
     Untechable *untechable;
     
     Reachability *internetReachable;
@@ -30,5 +31,8 @@
 - (IBAction)untechNowClick:(id)sender;
 - (IBAction)untechCustomClick:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *btnClosePicker;
+@property (strong, nonatomic) IBOutlet UIPickerView *timeDurationPicker;
+- (IBAction)btnDoneClick:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *doneButtonView;
 
 @end

@@ -18,6 +18,9 @@
     NSMutableArray *allUntechables;
     NSMutableArray *sectionOneArray;
     NSMutableArray *sectionTwoArray;
+    
+    NSArray *_pickerData;
+
 }
 
 @property (strong, nonatomic) IBOutlet UIButton *pickerCloseBtn;
@@ -197,11 +200,14 @@ int indexArrayS2[];
     self.untechablesTable.allowsMultipleSelectionDuringEditing = NO;
     
     [self setDefaultModel];
-    [self showHideTextPicker:NO];
-
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
     [self updateUI];
+    
+    [self initializePickerData];
+    [_timeDurationPicker setHidden:YES];
+    [_doneButtonView setHidden:YES];
+    // Do any additional setup after loading the view from its nib.
 }
 
 // Override to support conditional editing of the table view.
@@ -634,30 +640,30 @@ int indexArrayS2[];
 }
 
 -(void)showHideTextPicker:(BOOL)showHide{
-    if ( IS_IPHONE_4 ){
-        [_pickerCloseBtn setFrame:CGRectMake(-2, 300, 580, 30)];
-        [_spendingTimeTextPicker setFrame:CGRectMake(0, 300, 0, 140)];
-    }else if( IS_IPHONE_5 ){
-        [_pickerCloseBtn setFrame:CGRectMake(-10, 340, 580, 35)];
-        [_spendingTimeTextPicker setFrame:CGRectMake(0, 375, 0, 240)];
-    }else if ( IS_IPHONE_6 ){
-        [_pickerCloseBtn setFrame:CGRectMake(0, 400, 650, 40)];
-        [_spendingTimeTextPicker setFrame:CGRectMake(0, 440, 0, 260)];
-    }else if (IS_IPHONE_6_PLUS){
-        [_pickerCloseBtn setFrame:CGRectMake(0, 500, 750, 50)];
-        [_spendingTimeTextPicker setFrame:CGRectMake(0, 540, 0, 500)];
-    }
+//    if ( IS_IPHONE_4 ){
+//        [_doneButtonView setFrame:CGRectMake(-2, 300, 580, 30)];
+//        [_timeDurationPicker setFrame:CGRectMake(0, 300, 0, 140)];
+//    }else if( IS_IPHONE_5 ){
+//        [_doneButtonView setFrame:CGRectMake(-10, 340, 580, 35)];
+//        [_timeDurationPicker setFrame:CGRectMake(0, 375, 0, 240)];
+//    }else if ( IS_IPHONE_6 ){
+//        [_doneButtonView setFrame:CGRectMake(0, 400, 650, 40)];
+//        [_timeDurationPicker setFrame:CGRectMake(0, 440, 0, 260)];
+//    }else if (IS_IPHONE_6_PLUS){
+//        [_doneButtonView setFrame:CGRectMake(0, 500, 750, 50)];
+//        [_timeDurationPicker setFrame:CGRectMake(0, 540, 0, 500)];
+//    }
     
     float alpha = (showHide) ? 1.0 : 0.0;
     
-    _spendingTimeTextPicker.alpha = alpha;
-    _pickerCloseBtn.alpha = alpha;
+    _timeDurationPicker.alpha = alpha;
+    _doneButtonView.alpha = alpha;
     [self addUpperBorder];
-    self.pickerCloseBtn.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
-    //self.spendingTimeTextPicker.backgroundColor = [self colorFromHexString:@"#fafafa"];
+    self.doneButtonView.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
+    self.timeDurationPicker.backgroundColor = [self colorFromHexString:@"#fafafa"];
     
     //changing the "CLOSE"button text color to black
-    [_pickerCloseBtn setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
+    [_doneButtonView setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
     
 }
 
@@ -681,14 +687,55 @@ int indexArrayS2[];
 {
     CALayer *upperBorder = [CALayer layer];
     upperBorder.backgroundColor = [[UIColor lightGrayColor] CGColor];
-    upperBorder.frame = CGRectMake(0, 0, CGRectGetWidth(_pickerCloseBtn.frame), 1.0f);
-    [_pickerCloseBtn.layer addSublayer:upperBorder];
+    upperBorder.frame = CGRectMake(0, 0, CGRectGetWidth(_doneButtonView.frame), 1.0f);
+    [_doneButtonView.layer addSublayer:upperBorder];
+}
+
+-(void)initializePickerData {
+    
+    NSArray *arrayToBeAdded =  @[@"30 min", @"1 hr", @"1 day", @"2 days"];
+   
+    _pickerData = arrayToBeAdded;
+    
+    self.timeDurationPicker.dataSource = self;
+    self.timeDurationPicker.delegate = self;
+    
+    
+}
+
+// The number of columns of data
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+// The number of rows of data
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return _pickerData.count;
+}
+
+// The data to return for the row and component (column) that's being passed in
+- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return _pickerData[row];
 }
 
 - (IBAction)untechNowClick:(id)sender {
     
-    [self showHideTextPicker:YES];
+    [self addUpperBorder];
+    self.doneButtonView.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
+    //self.spendingTimeTextPicker.backgroundColor = [self colorFromHexString:@"#fafafa"];
+    
+    //changing the "CLOSE"button text color to black
+    [_doneButtonView setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
 
+    
+    [self initializePickerData];
+    [_timeDurationPicker setHidden:NO];
+    [_doneButtonView setHidden:NO];
+    [self showHideTextPicker:YES];
+   
 }
 
 - (IBAction)untechCustomClick:(id)sender {
@@ -699,6 +746,10 @@ int indexArrayS2[];
     addUntechable.untechable = untechable;
     addUntechable.indexOfUntechableInEditMode = -1;
     [self.navigationController pushViewController:addUntechable animated:YES];
-
+    
+}
+- (IBAction)btnDoneClick:(id)sender {
+    [_timeDurationPicker setHidden:YES];
+    [_doneButtonView setHidden:YES];
 }
 @end

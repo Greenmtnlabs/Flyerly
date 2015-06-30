@@ -542,9 +542,9 @@
     now1 = [NSDate date]; //current date
     
     //init object
-//    untechable  = [[Untechable alloc] init];
-//    untechable.commonFunctions = [[CommonFunctions alloc] init];
-//
+    untechable  = [[Untechable alloc] init];
+    untechable.commonFunctions = [[CommonFunctions alloc] init];
+
     //Set Date formate
     untechable.dateFormatter = [[NSDateFormatter alloc] init];
     [untechable.dateFormatter setDateFormat:DATE_FORMATE_1];
@@ -555,8 +555,8 @@
     
     NSMutableDictionary *sUntechable = nil;
     
-    BOOL calledFromSetupScreen = SetupGuideThirdView.calledFromSetup;
-    if( !calledFromSetupScreen ) {
+   // BOOL calledFromSetupScreen = SetupGuideThirdView.calledFromSetup;
+    //if( !calledFromSetupScreen ) {
         
         BOOL isNew = YES;
         
@@ -596,7 +596,7 @@
         if( ![callReset isEqualToString:@""] ){
             [self resetUntechable:callReset];
         }
-    }    
+    //}
 }
 
 -(void)resetUntechable:(NSString *)callResetFor{
