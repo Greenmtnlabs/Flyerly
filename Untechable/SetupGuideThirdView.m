@@ -9,7 +9,7 @@
 #import "SetupGuideThirdView.h"
 #import "SetupGuideSecondViewController.h"
 #import "ContactsListControllerViewController.h"
-#import "UntechOptionsViewController.h"
+#import "SetupGuideFourthView.h"
 
 @interface SetupGuideThirdView () {
     
@@ -21,8 +21,6 @@
 
 @synthesize untechable;
 
-BOOL setupCalledNewUntech;
-
 - (void)viewDidLoad {
     
     [super viewDidLoad];
@@ -33,9 +31,6 @@ BOOL setupCalledNewUntech;
     
     //setting up a view and showing contact list in it
     [self setupContactView];
-    
-    setupCalledNewUntech = NO;
-       
 }
 
 - (void)didReceiveMemoryWarning {
@@ -110,7 +105,7 @@ BOOL setupCalledNewUntech;
         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
 
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [nextButton setTitle:TITLE_DONE_TXT forState:normal];
+        [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
         [nextButton setTitleColor:defGray forState:UIControlStateNormal];
         [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
         [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
@@ -136,10 +131,11 @@ BOOL setupCalledNewUntech;
 
 -(void)onNext{
     
-    UIAlertView *congratesAlert = [[UIAlertView alloc]initWithTitle:@"Congratulation" message:@"Thank you for setting up your Untech settings. Now you can easily become Untechable whenever you need a break from technology in order to spend more time with the people & experiencing the things that are most important." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    [congratesAlert show];
+    [self saveBeforeGoing];
     
-    [self saveBeforeGoing];    
+    SetupGuideFourthView *fourthScreen = [[SetupGuideFourthView alloc] initWithNibName:@"SetupGuideFourthView" bundle:nil];
+    fourthScreen.untechable = untechable;
+    [self.navigationController pushViewController:fourthScreen animated:YES];
 }
 
 -(void) goBack {
@@ -148,17 +144,6 @@ BOOL setupCalledNewUntech;
     [navigationController popViewControllerAnimated:YES];
     [self saveBeforeGoing];
     
-}
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-   
-    //we're assuming cancel as done because there is only one button on the alert
-    if( buttonIndex == [alertView cancelButtonIndex] ) {
-        
-        UntechOptionsViewController *untechScreen = [[UntechOptionsViewController alloc] initWithNibName:@"UntechOptionsViewController" bundle:nil];
-        untechScreen.untechable = untechable;
-        [self.navigationController pushViewController:untechScreen animated:YES];
-    
-    }
 }
 
 -(void)saveBeforeGoing {
@@ -169,15 +154,6 @@ BOOL setupCalledNewUntech;
 
     [[NSUserDefaults standardUserDefaults] setObject:customizeContactsForCurrentSession forKey:@"customizedContactsFromSetup"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    setupCalledNewUntech = YES;
-    
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-
-}
-
-+(BOOL)calledFromSetup{
-    return setupCalledNewUntech;
 }
 
 @end

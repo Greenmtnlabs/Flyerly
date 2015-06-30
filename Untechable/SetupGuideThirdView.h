@@ -10,7 +10,7 @@
 #import "Untechable.h"
 #import "Common.h"
 
-@interface SetupGuideThirdView : UIViewController <UIAlertViewDelegate>{
+@interface SetupGuideThirdView : UIViewController {
     UILabel *titleLabel;
     UIButton *backButton;
     UIButton *nextButton;
@@ -21,7 +21,5 @@
 //Properties
 @property (nonatomic,strong)  Untechable *untechable;
 @property (weak, nonatomic) IBOutlet UIView *viewForContacts;
-
-+(BOOL)calledFromSetup;
 
 @end
