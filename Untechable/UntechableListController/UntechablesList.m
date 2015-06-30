@@ -23,8 +23,6 @@
 
 }
 
-@property (strong, nonatomic) IBOutlet UIButton *pickerCloseBtn;
-@property (strong, nonatomic) IBOutlet UIPickerView *spendingTimeTextPicker;
 
 
 @end
@@ -57,13 +55,6 @@ int indexArrayS2[];
 
 #pragma mark -  Navigation functions
 - (void)setNavigationDefaults{
-    
-    /*
-     NSDateFormatter *df = [[NSDateFormatter alloc] init];
-     [df setDateFormat:@"EEEE, dd MMMM yyyy HH:mm"];
-     NSDate *date = [df dateFromString:@"Sep 25, 2014 05:27 PM"];
-     NSLog(@"\n\n  DATE: %@ \n\n\n", date);
-     */
     
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
@@ -134,18 +125,12 @@ int indexArrayS2[];
     addUntechable.untechable = untechable;
     addUntechable.indexOfUntechableInEditMode = -1;
     [self.navigationController pushViewController:addUntechable animated:YES];
-    
-    /*
-    NSLog(@"Go To add untechable screen");
-    AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
-    addUntechable.indexOfUntechableInEditMode = -1;
-    [self.navigationController pushViewController:addUntechable animated:YES];
-     */
 }
 
 /*
  Variable we must need in model, for testing we can use these vars
  */
+
 -(void) configureTestData
 {
     untechable.userId   = TEST_UID;
@@ -287,7 +272,6 @@ int indexArrayS2[];
     [request setHTTPMethod:@"POST"];
     
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    // NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
     
     if( returnData != nil ){
         
@@ -640,20 +624,7 @@ int indexArrayS2[];
 }
 
 -(void)showHideTextPicker:(BOOL)showHide{
-//    if ( IS_IPHONE_4 ){
-//        [_doneButtonView setFrame:CGRectMake(-2, 300, 580, 30)];
-//        [_timeDurationPicker setFrame:CGRectMake(0, 300, 0, 140)];
-//    }else if( IS_IPHONE_5 ){
-//        [_doneButtonView setFrame:CGRectMake(-10, 340, 580, 35)];
-//        [_timeDurationPicker setFrame:CGRectMake(0, 375, 0, 240)];
-//    }else if ( IS_IPHONE_6 ){
-//        [_doneButtonView setFrame:CGRectMake(0, 400, 650, 40)];
-//        [_timeDurationPicker setFrame:CGRectMake(0, 440, 0, 260)];
-//    }else if (IS_IPHONE_6_PLUS){
-//        [_doneButtonView setFrame:CGRectMake(0, 500, 750, 50)];
-//        [_timeDurationPicker setFrame:CGRectMake(0, 540, 0, 500)];
-//    }
-    
+
     float alpha = (showHide) ? 1.0 : 0.0;
     
     _timeDurationPicker.alpha = alpha;
@@ -725,7 +696,6 @@ int indexArrayS2[];
     
     [self addUpperBorder];
     self.doneButtonView.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
-    //self.spendingTimeTextPicker.backgroundColor = [self colorFromHexString:@"#fafafa"];
     
     //changing the "CLOSE"button text color to black
     [_doneButtonView setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
