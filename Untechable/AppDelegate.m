@@ -66,10 +66,7 @@ NSMutableArray *allUntechables;
         // else show untechable list..
         allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
         if ( allUntechables.count <= 0 ){
-            
-            //For testing -------- } --
-            //UntechOptionsViewController *mainViewController = [[UntechOptionsViewController alloc] initWithNibName:@"UntechOptionsViewController" bundle:nil];
-            
+           
             UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
             
             mainViewController.untechablesTable = untechable;
