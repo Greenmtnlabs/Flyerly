@@ -20,5 +20,6 @@
 
 @property (nonatomic,strong)  Untechable *untechable;
 
+@property (weak, nonatomic) IBOutlet UIView *viewForShareScreen;
 
 @end

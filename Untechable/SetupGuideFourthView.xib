@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
@@ -8,13 +8,44 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SetupGuideFourthView">
             <connections>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewForShareScreen" destination="jnA-gw-UPc" id="ozt-k5-Hyo"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigation3.png" translatesAutoresizingMaskIntoConstraints="NO" id="1R4-Aw-JU2">
+                    <rect key="frame" x="93" y="68" width="126" height="28"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jnA-gw-UPc">
+                    <rect key="frame" x="0.0" y="97" width="320" height="383"/>
+                </view>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="jnA-gw-UPc" secondAttribute="bottom" id="5JZ-BW-SGy"/>
+                <constraint firstAttribute="trailing" secondItem="1R4-Aw-JU2" secondAttribute="trailing" constant="101" id="Sdd-ra-kN4"/>
+                <constraint firstItem="1R4-Aw-JU2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="68" id="XCv-lj-XWQ"/>
+                <constraint firstItem="1R4-Aw-JU2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="93" id="jFQ-PL-AN0"/>
+                <constraint firstAttribute="trailing" secondItem="jnA-gw-UPc" secondAttribute="trailing" id="lNH-vd-P4k"/>
+                <constraint firstItem="jnA-gw-UPc" firstAttribute="top" secondItem="1R4-Aw-JU2" secondAttribute="bottom" constant="1" id="pBF-tq-ROF"/>
+                <constraint firstItem="jnA-gw-UPc" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="97" id="s3T-iu-w1d"/>
+                <constraint firstItem="jnA-gw-UPc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="zhu-Qb-3GB"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="419" y="294"/>
         </view>
     </objects>
+    <resources>
+        <image name="navigation3.png" width="140" height="30"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

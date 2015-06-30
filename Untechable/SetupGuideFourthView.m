@@ -8,6 +8,7 @@
 
 #import "SetupGuideFourthView.h"
 #import "UntechOptionsViewController.h"
+#import "SocialnetworkController.h"
 
 @interface SetupGuideFourthView ()
 
@@ -23,6 +24,8 @@
     
     //navigation related Stuff
     [self setNavigationBarItems];
+    
+    [self setupShareScreen];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -135,6 +138,20 @@
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
+}
+
+-(void)setupShareScreen {
+    
+    SocialnetworkController *viewControllerToAdd = [[SocialnetworkController alloc] initWithNibName:@"SocialnetworkController" bundle:nil];
+    
+    viewControllerToAdd.untechable = untechable;
+    
+    [viewControllerToAdd willMoveToParentViewController:self];
+    [self.viewForShareScreen addSubview:viewControllerToAdd.view];
+    [self addChildViewController:viewControllerToAdd];
+    
+    [viewControllerToAdd didMoveToParentViewController:self];
+    
 }
 
 
