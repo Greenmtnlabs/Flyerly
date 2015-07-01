@@ -3559,7 +3559,16 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     // Declare your local data outside the block.
     // `__block` specifies that the variable can be modified from within the block.
     __block UIImage *uiImage = [self getFlyerSnapshotWithSize:self.flyimgView.size];
+    uiImage = [self updateImageSize:uiImage scaledToSize:CGSizeMake(flyerlyWidth/2, flyerlyHeight/2)];
     return uiImage;
+}
+
+- (UIImage *)updateImageSize:(UIImage *)image scaledToSize:(CGSize)newSize {
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 //Here we Getting Snap Shot of Flyer Image View Context for desired size

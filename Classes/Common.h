@@ -11,8 +11,8 @@
 #define ALPHA1 1
 #define IMAGETYPE @"png"
 #define YOUTUBEPREFIX @"https://youtube.com/watch?v="
-#define flyerlyWidth 620
-#define flyerlyHeight 620
+#define flyerlyWidth 1240
+#define flyerlyHeight 1240
 #define FLYER_ZOOM_MIN_SCALE 1.0
 #define FLYER_ZOOM_SET_SCALE 2.0 //THIS MUST BE IN RANGE OF MIN AND MAX
 #define FLYER_ZOOM_MAX_SCALE 5.0
