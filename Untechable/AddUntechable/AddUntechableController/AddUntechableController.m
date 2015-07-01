@@ -83,7 +83,6 @@
     //removing custom text from showing
     int customTextPosition = ( int )[customSpendingTextArray indexOfObject:@"Custom"];
     
-    //[customSpendingTextArray removeObjectAtIndex:customTextPosition];
     
     _pickerData = customSpendingTextArray;
     
@@ -175,18 +174,7 @@
 
 - (void)keyboardControls:(BSKeyboardControls *)keyboardControls selectedField:(UIView *)field inDirection:(BSKeyboardControlsDirection)direction
 {
-    /*
-     UIView *view;
-     
-     if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
-     view = field.superview.superview;
-     } else {
-     view = field.superview.superview.superview;
-     }
-     
-     [self.tableView scrollRectToVisible:view.frame animated:YES];
-     */
-}
+    }
 
 - (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboardControls
 {
@@ -195,13 +183,6 @@
 
 #pragma mark -  Navigation functions
 - (void)setNavigationDefaults{
-
-    /*
-    NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    [df setDateFormat:@"EEEE, dd MMMM yyyy HH:mm"];
-    NSDate *date = [df dateFromString:@"Sep 25, 2014 05:27 PM"];
-    NSLog(@"\n\n  DATE: %@ \n\n\n", date);
-    */
 
     defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
     defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
@@ -338,12 +319,7 @@
             ContactsListControllerViewController *listController = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
             listController.untechable = untechable;
             [self.navigationController pushViewController:listController animated:YES];
-            
-            /*PhoneSetupController *phoneSetup;
-             phoneSetup = [[PhoneSetupController alloc]initWithNibName:@"PhoneSetupController" bundle:nil];
-             phoneSetup.untechable = untechable;
-             [self.navigationController pushViewController:phoneSetup animated:YES];*/
-        }
+          }
     }else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"What are you going untechable for?"
                                                         message:@"You must specify what you'll be doing with your time away from technology before proceeding."
@@ -414,9 +390,6 @@
     }
     
     
-    //NSLog(@"time stamp dateStr %@", timeStampStr); //1414329211
-    //NSLog(@"newDateStr: %@", [untechable.commonFunctions timestampStrToAppDate:dateStr]); // "startTime": "Oct 24, 2014 03:04 PM",
-    
     
 	if( [pickerOpenFor isEqualToString:@"_btnStartTime"] ){
         untechable.startDate = pickerTimeStampStr;
@@ -473,7 +446,6 @@
     _pickerCloseBtn.alpha = alpha;
     [self addUpperBorder];
     self.pickerCloseBtn.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
-    //self.spendingTimeTextPicker.backgroundColor = [self colorFromHexString:@"#fafafa"];
     
     //changing the "CLOSE"button text color to black
     [_pickerCloseBtn setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
@@ -502,8 +474,7 @@
     _picker.alpha = alpha;
     _pickerCloseBtn.alpha = alpha;
     self.pickerCloseBtn.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
-    //self.picker.backgroundColor = [self colorFromHexString:@"#fafafa"];
-    
+  
     //changing the "CLOSE"button text color to black
     [_pickerCloseBtn setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
 }
@@ -538,10 +509,6 @@
 
     now1 = [NSDate date]; //current date
     
-    //init object
-//    untechable  = [[Untechable alloc] init];
-//    untechable.commonFunctions = [[CommonFunctions alloc] init];
-//
     //Set Date formate
     untechable.dateFormatter = [[NSDateFormatter alloc] init];
     [untechable.dateFormatter setDateFormat:DATE_FORMATE_1];
@@ -662,7 +629,6 @@
     
 
     [self showHideDateTimePicker:NO];
-    //[self showHideDateTimePicker:!([_cbNoEndDate isSelected])];
     
     if( !([_cbNoEndDate isSelected]) ){
         untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*60*24)] ]; //current time +1 Day
@@ -764,18 +730,7 @@
     [_pickerCloseBtn.layer addSublayer:upperBorder];
 }
 
-/*
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    // Prevent crashing undo bug – see note below.
-    if(range.length + range.location > textView.text.length)
-    {
-        return NO;
-    }
-    
-    NSUInteger newLength = [textView.text length] + [text length] - range.length;
-    return (newLength > 140) ? NO : YES;
-}
-*/
+
 
 - (IBAction)openPicker:(id)sender {
     
