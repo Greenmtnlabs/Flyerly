@@ -3559,7 +3559,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     // Declare your local data outside the block.
     // `__block` specifies that the variable can be modified from within the block.
     __block UIImage *uiImage = [self getFlyerSnapshotWithSize:self.flyimgView.size];
-    uiImage = [self updateImageSize:uiImage scaledToSize:CGSizeMake(flyerlyWidth/2, flyerlyHeight/2)];
+    uiImage = [self updateImageSize:uiImage scaledToSize:CGSizeMake(uiImage.size.width*2, uiImage.size.height*2)];
     return uiImage;
 }
 
