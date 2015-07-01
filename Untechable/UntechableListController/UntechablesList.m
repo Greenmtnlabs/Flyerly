@@ -537,21 +537,17 @@ int indexArrayS2[];
         indexArrayS2 [timeStampArray.count];
     }
     
-    
     //now getting the indexes of array and save it.
     for( int i = 0; i<timeStampArray.count; i++){
         for( int j = 0; j<timeStampArray.count; j++){
-            
+
             if( sortedTimeStamps[i] == timeStamps[j] ){
                 indexArray[i] = j;
-                
                 if( [sortFor isEqual:@"sec1"]){
                     indexArrayS1[i] = j;
                 }else{
                     indexArrayS2[i] = j;
                 }
-                
-                
                 break;
             }
         }
@@ -562,10 +558,6 @@ int indexArrayS2[];
     for( int i = 0; i < timeStampArray.count; i++ ){
         NSLog(@" Index array is %i, sorted array %i, unsorted array %i", indexArray[i], sortedTimeStamps[i], timeStamps[i] );
     }
-    
-
-    
-    
 }
 
 // Customize the number of rows in the table view.
@@ -585,6 +577,7 @@ int indexArrayS2[];
 {
     return 2;
 }
+
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
@@ -671,6 +664,43 @@ int indexArrayS2[];
     self.timeDurationPicker.dataSource = self;
     self.timeDurationPicker.delegate = self;
     
+    
+}
+
+- (NSDate *)timestampStrToNsDate:(NSString *)timeStamp
+{
+    return [NSDate dateWithTimeIntervalSince1970:[timeStamp integerValue]];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+   
+    int timeDuration = 0;
+    
+    switch (row) {
+        case 0:
+            timeDuration = 30*60; //30 minutes
+            break;
+            
+        case 1:
+            timeDuration = 60*60; //1 hr
+            break;
+        
+        case 2:
+            timeDuration = 24*60*60; //1 day
+            break;
+        
+        case 3:
+            timeDuration = 2*24*60*60; //2 days
+            break;
+            
+        default:
+            break;
+    }
+    
+    
+    untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)] ]; //current time + time duration
+    
+    untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration+(24*60*60))] ]; //start time +1 Day
     
 }
 

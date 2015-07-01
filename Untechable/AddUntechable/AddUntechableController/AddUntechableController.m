@@ -389,8 +389,6 @@
         dateStr = @"NOW";
     }
     
-    
-    
 	if( [pickerOpenFor isEqualToString:@"_btnStartTime"] ){
         untechable.startDate = pickerTimeStampStr;
         [_btnStartTime setTitle:dateStr forState:UIControlStateNormal];
