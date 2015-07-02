@@ -106,6 +106,7 @@ int indexArrayS2[];
         
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
 
+        
     }
 }
 
@@ -697,12 +698,45 @@ int indexArrayS2[];
             break;
     }
     
+    [untechable initWithDefValues];
+    [untechable initUntechableDirectory];
     
-    untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)] ]; //current time + time duration
+    untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(0)] ]; //current time + time duration
     
-    untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration+(24*60*60))] ]; //start time +1 Day
+    untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)] ]; //start time +1 Day
+    
+    [self changeNavigation:@"ON_FINISH"];
+    
+    //Background work
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        
+        [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
+            
+            if( !([message isEqualToString:@""]) ) {
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    //[self showMsgOnApiResponse:message];
+                });
+            }
+            
+            if( errorOnFinish ){
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    [self changeNavigation:@"ERROR_ON_FINISH"];
+                });
+            }
+            else{
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    [self changeNavigation:@"ON_FINISH"];
+                    //[self next:@"GO_TO_THANKYOU"];
+                });
+            }
+            
+        }];
+        
+    });
     
 }
+
+
 
 // The number of columns of data
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -751,5 +785,6 @@ int indexArrayS2[];
 - (IBAction)btnDoneClick:(id)sender {
     [_timeDurationPicker setHidden:YES];
     [_doneButtonView setHidden:YES];
+    
 }
 @end
