@@ -537,7 +537,7 @@
                     }
                     else{
                         dispatch_async( dispatch_get_main_queue(), ^{
-                            [self changeNavigation:@"ON_FINISH_SUCCESS"];
+                            [self changeNavigation:@"GO_TO_THANKYOU"];
                         });
                     }
                     
