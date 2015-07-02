@@ -161,7 +161,7 @@ int indexArrayS2[];
     
     allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
     
-    if ( allUntechables.count <= 0 ){
+    if ( false && allUntechables.count <= 0 ){
         
         AddUntechableController *mainViewController = [[AddUntechableController alloc] initWithNibName:@"AddUntechableController" bundle:nil];
         mainViewController.untechable = untechable;
@@ -248,6 +248,10 @@ int indexArrayS2[];
         newUntechableButton.userInteractionEnabled = YES;
         
         [self showHidLoadingIndicator:NO];
+        
+        [self setNumberOfRowsInSection];
+        
+        [untechablesTable reloadData];
     }
 }
 
@@ -321,12 +325,6 @@ int indexArrayS2[];
     else{
         dispatch_async( dispatch_get_main_queue(), ^{
             [self changeNavigation:@"ON_FINISH_SUCCESS"];
-            
-            //Setting the new number of rows for each section
-            [self setNumberOfRowsInSection];
-            
-            // Request table view to reload
-            [untechablesTable reloadData];
         });
     }
 }
@@ -725,8 +723,7 @@ int indexArrayS2[];
             }
             else{
                 dispatch_async( dispatch_get_main_queue(), ^{
-                    [self changeNavigation:@"ON_FINISH"];
-                    //[self next:@"GO_TO_THANKYOU"];
+                    [self changeNavigation:@"ON_FINISH_SUCCESS"];
                 });
             }
             
