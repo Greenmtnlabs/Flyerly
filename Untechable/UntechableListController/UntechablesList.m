@@ -702,35 +702,6 @@ int indexArrayS2[];
     untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(0)] ]; //current time + time duration
     
     untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)] ]; //start time +1 Day
-    
-    [self changeNavigation:@"ON_FINISH"];
-    
-    //Background work
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        
-        [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
-            
-            if( !([message isEqualToString:@""]) ) {
-                dispatch_async( dispatch_get_main_queue(), ^{
-                    //[self showMsgOnApiResponse:message];
-                });
-            }
-            
-            if( errorOnFinish ){
-                dispatch_async( dispatch_get_main_queue(), ^{
-                    [self changeNavigation:@"ERROR_ON_FINISH"];
-                });
-            }
-            else{
-                dispatch_async( dispatch_get_main_queue(), ^{
-                    [self changeNavigation:@"ON_FINISH_SUCCESS"];
-                });
-            }
-            
-        }];
-        
-    });
-    
 }
 
 
@@ -782,6 +753,35 @@ int indexArrayS2[];
 - (IBAction)btnDoneClick:(id)sender {
     [_timeDurationPicker setHidden:YES];
     [_doneButtonView setHidden:YES];
+    
+    [self changeNavigation:@"ON_FINISH"];
+    
+    //Background work
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        
+        [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
+            
+            if( !([message isEqualToString:@""]) ) {
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    //[self showMsgOnApiResponse:message];
+                });
+            }
+            
+            if( errorOnFinish ){
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    [self changeNavigation:@"ERROR_ON_FINISH"];
+                });
+            }
+            else{
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    [self changeNavigation:@"ON_FINISH_SUCCESS"];
+                });
+            }
+            
+        }];
+        
+    });
+
     
 }
 @end

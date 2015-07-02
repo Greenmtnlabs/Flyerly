@@ -58,6 +58,8 @@
     [self.keyboardControls setDelegate:self];
 }
 
+
+
 -(void)viewWillAppear:(BOOL)animated {
     [self updateUI];
 }
@@ -266,6 +268,8 @@
             
             [self changeNavigation:@"ON_FINISH"];
             
+            
+            
             //Background work
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
                 
@@ -290,7 +294,35 @@
                     
                 }];
             });
+             /*
+            //Background work
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+                
+                [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
+                    
+                    if( !([message isEqualToString:@""]) ) {
+                        dispatch_async( dispatch_get_main_queue(), ^{
+                            //[self showMsgOnApiResponse:message];
+                        });
+                    }
+                    
+                    if( errorOnFinish ){
+                        dispatch_async( dispatch_get_main_queue(), ^{
+                            [self changeNavigation:@"ERROR_ON_FINISH"];
+                        });
+                    }
+                    else{
+                        dispatch_async( dispatch_get_main_queue(), ^{
+                            [self changeNavigation:@"GO_TO_THANKYOU"];
+                        });
+                    }
+
+                    
+                }];
+                
+            });*/
         }
+             
     }
     } else {
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Put in your name below. This will be used to help identify yourself to friends."
