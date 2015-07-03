@@ -1509,7 +1509,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     }
     else if( [[templateDictionary objectForKey:@"FlyerType"] isEqualToString:@"video"] && [templateDictionary objectForKey:@"videoWidth"] != nil ){
         int videoWidth = [[templateDictionary objectForKey:@"videoWidth"] intValue];
-        if( videoWidth == 1240 ){
+        if( videoWidth == flyerlyWidth ){
             resizeImageRequired = YES;
         }
     }
