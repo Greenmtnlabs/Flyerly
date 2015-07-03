@@ -1485,6 +1485,9 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     NSMutableDictionary *templateDictionary = [self getLayerFromMaster:@"Template"];
     
     [templateDictionary setValue:@"video" forKey:@"FlyerType"];
+    [templateDictionary setValue:[NSString stringWithFormat:@"%i",flyerlyWidth] forKey:@"videoWidth"];
+    [templateDictionary setValue:[NSString stringWithFormat:@"%i",flyerlyWidth] forKey:@"videoHeight"];
+    
     
     // Set timeStamp
     [templateDictionary setValue:[Flyer getUniqueId] forKey:@"Timestamp"];
@@ -1492,6 +1495,26 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     // Set to Master Dictionary
     [masterLayers setValue:templateDictionary forKey:@"Template"];
     
+}
+
+/**
+ * Basically this is the supportive function for old video flyers, new flyers have double size(1240x1240)
+ */
+-(BOOL)canIncreaseVideoSize {
+    BOOL resizeImageRequired = NO;
+    
+    NSMutableDictionary *templateDictionary = [self getLayerFromMaster:@"Template"];
+    if( [[templateDictionary objectForKey:@"FlyerType"] isEqualToString:@"video"] == NO ){
+        resizeImageRequired = YES;
+    }
+    else if( [[templateDictionary objectForKey:@"FlyerType"] isEqualToString:@"video"] && [templateDictionary objectForKey:@"videoWidth"] != nil ){
+        int videoWidth = [[templateDictionary objectForKey:@"videoWidth"] intValue];
+        if( videoWidth == flyerlyWidth ){
+            resizeImageRequired = YES;
+        }
+    }
+    
+    return resizeImageRequired;
 }
 
 /*
@@ -1652,7 +1675,13 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     UIImage *image = [UIImage imageNamed:@"play_icon"];
     
-    CGSize newSize = CGSizeMake( flyerlyWidth, flyerlyHeight );
+    int vWidth = flyerlyWidth;
+    int vHeight = flyerlyHeight;
+    if( [self canIncreaseVideoSize] == NO ){
+        vWidth = OldFlyerlyWidth;
+        vHeight = OldFlyerlyHeight;
+    }
+    CGSize newSize = CGSizeMake( vWidth, vHeight );
     UIGraphicsBeginImageContext( newSize );
     
     // Use existing opacity as is

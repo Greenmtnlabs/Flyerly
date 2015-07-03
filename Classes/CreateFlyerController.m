@@ -3555,11 +3555,23 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 #pragma mark - Screenshot funcs
 //Here we Getting Snap Shot of Flyer Image View Context
 -(UIImage *)getFlyerSnapShot {
-    
     // Declare your local data outside the block.
     // `__block` specifies that the variable can be modified from within the block.
     __block UIImage *uiImage = [self getFlyerSnapshotWithSize:self.flyimgView.size];
+    if( [flyer canIncreaseVideoSize] == YES )
+    uiImage = [self updateImageSize:uiImage scaledToSize:CGSizeMake(uiImage.size.width*2, uiImage.size.height*2)];
+    
     return uiImage;
+}
+
+
+
+- (UIImage *)updateImageSize:(UIImage *)image scaledToSize:(CGSize)newSize {
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 //Here we Getting Snap Shot of Flyer Image View Context for desired size
@@ -3844,7 +3856,14 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     // Export the URL
     NSURL *exportURL = [NSURL fileURLWithPath:destination];
     
-    [self modifyVideo:firstURL destination:exportURL crop:CGRectMake(0, 0, flyerlyWidth, flyerlyHeight ) scale:1 overlay:image completion:^(NSInteger status, NSError *error) {
+    int vWidth = flyerlyWidth;
+    int vHeight = flyerlyHeight;
+    if( [self.flyer canIncreaseVideoSize] == NO ){
+        vWidth = OldFlyerlyWidth;
+        vHeight = OldFlyerlyHeight;
+    }
+    
+    [self modifyVideo:firstURL destination:exportURL crop:CGRectMake(0, 0, vHeight, vHeight ) scale:1 overlay:image completion:^(NSInteger status, NSError *error) {
         switch ( status ) {
             case AVAssetExportSessionStatusFailed:{
                 NSLog (@"FAIL = %@", error );

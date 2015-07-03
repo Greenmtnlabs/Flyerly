@@ -168,6 +168,7 @@
 
 -(CGFloat)getTvDefPosX;
 -(CGFloat)getTvDefPosY;
+-(BOOL)canIncreaseVideoSize;
 
 @property (strong, readonly) NSMutableDictionary *masterLayers;
 @property (strong, nonatomic) NSMutableArray *socialArray;
