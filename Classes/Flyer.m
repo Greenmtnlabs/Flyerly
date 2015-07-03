@@ -1485,6 +1485,9 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     NSMutableDictionary *templateDictionary = [self getLayerFromMaster:@"Template"];
     
     [templateDictionary setValue:@"video" forKey:@"FlyerType"];
+    [templateDictionary setValue:[NSString stringWithFormat:@"%i",flyerlyWidth] forKey:@"videoWidth"];
+    [templateDictionary setValue:[NSString stringWithFormat:@"%i",flyerlyWidth] forKey:@"videoHeight"];
+    
     
     // Set timeStamp
     [templateDictionary setValue:[Flyer getUniqueId] forKey:@"Timestamp"];

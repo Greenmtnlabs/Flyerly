@@ -3555,11 +3555,23 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 #pragma mark - Screenshot funcs
 //Here we Getting Snap Shot of Flyer Image View Context
 -(UIImage *)getFlyerSnapShot {
-    
     // Declare your local data outside the block.
     // `__block` specifies that the variable can be modified from within the block.
     __block UIImage *uiImage = [self getFlyerSnapshotWithSize:self.flyimgView.size];
+    BOOL resizeImageRequired = NO;
+    
+    NSMutableDictionary *templateDictionary = [flyer getLayerFromMaster:@"Template"];
+    if( [[templateDictionary objectForKey:@"FlyerType"] isEqualToString:@"video"] && [templateDictionary objectForKey:@"videoWidth"] != nil ){
+        int videoWidth = [[templateDictionary objectForKey:@"videoWidth"] intValue];
+        if( videoWidth == flyerlyWidth ){
+            resizeImageRequired = YES;
+        }
+    }
+    
+        
+    if( resizeImageRequired == YES )
     uiImage = [self updateImageSize:uiImage scaledToSize:CGSizeMake(uiImage.size.width*2, uiImage.size.height*2)];
+    
     return uiImage;
 }
 
