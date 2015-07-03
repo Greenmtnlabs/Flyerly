@@ -693,6 +693,7 @@ int indexArrayS2[];
             break;
             
         default:
+            timeDuration = 30*60; //30 minutes
             break;
     }
     
@@ -751,6 +752,8 @@ int indexArrayS2[];
     
 }
 - (IBAction)btnDoneClick:(id)sender {
+    
+    
     [_timeDurationPicker setHidden:YES];
     [_doneButtonView setHidden:YES];
     

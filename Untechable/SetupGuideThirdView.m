@@ -9,7 +9,7 @@
 #import "SetupGuideThirdView.h"
 #import "SetupGuideSecondViewController.h"
 #import "ContactsListControllerViewController.h"
-#import "UntechOptionsViewController.h"
+#import "SocialnetworkController.h"
 
 @interface SetupGuideThirdView () {
     
@@ -188,10 +188,9 @@ BOOL setupCalledNewUntech;
     //we're assuming cancel as done because there is only one button on the alert
     if( buttonIndex == [alertView cancelButtonIndex] ) {
         
-        UntechOptionsViewController *untechScreen = [[UntechOptionsViewController alloc] initWithNibName:@"UntechOptionsViewController" bundle:nil];
+        SocialnetworkController *untechScreen = [[SocialnetworkController alloc] initWithNibName:@"SocialnetworkController" bundle:nil];
         untechScreen.untechable = untechable;
         [self.navigationController pushViewController:untechScreen animated:YES];
-    
     }
 }
 
