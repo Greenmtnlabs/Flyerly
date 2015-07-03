@@ -14,7 +14,7 @@
 
 @implementation SaveFlyerCell
 @synthesize nameLabel, description, dateLabel, createLabel,cellImage,backgroundImage;
-@synthesize flyerLock,lockImage,updatedDateLabel,updatedLabel;
+@synthesize shareBtn,flyerLock,lockImage,updatedDateLabel,updatedLabel;
 
 
 /*
