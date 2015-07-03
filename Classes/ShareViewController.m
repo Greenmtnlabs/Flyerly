@@ -9,6 +9,7 @@
 #import "ShareViewController.h"
 #import "UserVoice.h"
 
+
 @implementation ShareViewController
 
 @synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,flickrButton,printFlyerButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,lblFirstShareOnYoutube,tempTxtArea;
@@ -1084,6 +1085,36 @@
 	}
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
-
+/*
+ *Here we Set Stars
+ */
+-(void)setStarsofShareScreen :(NSString *)rate {
+    
+    if ([rate isEqualToString:@"1"]) {
+        [star1 setSelected:YES];
+        
+    }else if ([rate isEqualToString:@"2"]) {
+        [star1 setSelected:YES];
+        [star2 setSelected:YES];
+        
+    }else if ([rate isEqualToString:@"3"]) {
+        [star1 setSelected:YES];
+        [star2 setSelected:YES];
+        [star3 setSelected:YES];
+        
+    }else if ([rate isEqualToString:@"4"]) {
+        [star1 setSelected:YES];
+        [star2 setSelected:YES];
+        [star3 setSelected:YES];
+        [star4 setSelected:YES];
+        
+    }else if ([rate isEqualToString:@"5"]) {
+        [star1 setSelected:YES];
+        [star2 setSelected:YES];
+        [star3 setSelected:YES];
+        [star4 setSelected:YES];
+        [star5 setSelected:YES];
+    }
+}
 
 @end
