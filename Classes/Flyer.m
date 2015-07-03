@@ -1497,6 +1497,26 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
 }
 
+/**
+ * Basically this is the supportive function for old video flyers, new flyers have double size(1240x1240)
+ */
+-(BOOL)canIncreaseVideoSize {
+    BOOL resizeImageRequired = NO;
+    
+    NSMutableDictionary *templateDictionary = [self getLayerFromMaster:@"Template"];
+    if( [[templateDictionary objectForKey:@"FlyerType"] isEqualToString:@"video"] == NO ){
+        resizeImageRequired = YES;
+    }
+    else if( [[templateDictionary objectForKey:@"FlyerType"] isEqualToString:@"video"] && [templateDictionary objectForKey:@"videoWidth"] != nil ){
+        int videoWidth = [[templateDictionary objectForKey:@"videoWidth"] intValue];
+        if( videoWidth == 1240 ){
+            resizeImageRequired = YES;
+        }
+    }
+    
+    return resizeImageRequired;
+}
+
 /*
  * Here we Get Flyer Type for Video Flyer
  */
@@ -1655,7 +1675,13 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     UIImage *image = [UIImage imageNamed:@"play_icon"];
     
-    CGSize newSize = CGSizeMake( flyerlyWidth, flyerlyHeight );
+    int vWidth = flyerlyWidth;
+    int vHeight = flyerlyHeight;
+    if( [self canIncreaseVideoSize] == NO ){
+        vWidth = OldFlyerlyWidth;
+        vHeight = OldFlyerlyHeight;
+    }
+    CGSize newSize = CGSizeMake( vWidth, vHeight );
     UIGraphicsBeginImageContext( newSize );
     
     // Use existing opacity as is

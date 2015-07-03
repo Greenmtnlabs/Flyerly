@@ -3558,22 +3558,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     // Declare your local data outside the block.
     // `__block` specifies that the variable can be modified from within the block.
     __block UIImage *uiImage = [self getFlyerSnapshotWithSize:self.flyimgView.size];
-    BOOL resizeImageRequired = NO;
-    
-    NSMutableDictionary *templateDictionary = [flyer getLayerFromMaster:@"Template"];
-    if( [[templateDictionary objectForKey:@"FlyerType"] isEqualToString:@"video"] && [templateDictionary objectForKey:@"videoWidth"] != nil ){
-        int videoWidth = [[templateDictionary objectForKey:@"videoWidth"] intValue];
-        if( videoWidth == flyerlyWidth ){
-            resizeImageRequired = YES;
-        }
-    }
-    
-        
-    if( resizeImageRequired == YES )
+    if( [flyer canIncreaseVideoSize] == YES )
     uiImage = [self updateImageSize:uiImage scaledToSize:CGSizeMake(uiImage.size.width*2, uiImage.size.height*2)];
     
     return uiImage;
 }
+
+
 
 - (UIImage *)updateImageSize:(UIImage *)image scaledToSize:(CGSize)newSize {
     UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
@@ -3865,7 +3856,14 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     // Export the URL
     NSURL *exportURL = [NSURL fileURLWithPath:destination];
     
-    [self modifyVideo:firstURL destination:exportURL crop:CGRectMake(0, 0, flyerlyWidth, flyerlyHeight ) scale:1 overlay:image completion:^(NSInteger status, NSError *error) {
+    int vWidth = flyerlyWidth;
+    int vHeight = flyerlyHeight;
+    if( [self.flyer canIncreaseVideoSize] == NO ){
+        vWidth = OldFlyerlyWidth;
+        vHeight = OldFlyerlyHeight;
+    }
+    
+    [self modifyVideo:firstURL destination:exportURL crop:CGRectMake(0, 0, vHeight, vHeight ) scale:1 overlay:image completion:^(NSInteger status, NSError *error) {
         switch ( status ) {
             case AVAssetExportSessionStatusFailed:{
                 NSLog (@"FAIL = %@", error );
