@@ -4561,7 +4561,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         PFUser *user = [PFUser currentUser];
         if (user[@"appStarRate"])
-            [self setStarsofShareScreen:user[@"appStarRate"]];
+            [shareviewcontroller setStarsofShareScreen:user[@"appStarRate"]];
         
         [user saveInBackground];
         
@@ -4608,37 +4608,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             [signInAlert show];
     }
     
-}
-/*
- *Here we Set Stars
- */
--(void)setStarsofShareScreen :(NSString *)rate {
-    
-    if ([rate isEqualToString:@"1"]) {
-        [shareviewcontroller.star1 setSelected:YES];
-        
-    }else if ([rate isEqualToString:@"2"]) {
-        [shareviewcontroller.star1 setSelected:YES];
-        [shareviewcontroller.star2 setSelected:YES];
-        
-    }else if ([rate isEqualToString:@"3"]) {
-        [shareviewcontroller.star1 setSelected:YES];
-        [shareviewcontroller.star2 setSelected:YES];
-        [shareviewcontroller.star3 setSelected:YES];
-        
-    }else if ([rate isEqualToString:@"4"]) {
-        [shareviewcontroller.star1 setSelected:YES];
-        [shareviewcontroller.star2 setSelected:YES];
-        [shareviewcontroller.star3 setSelected:YES];
-        [shareviewcontroller.star4 setSelected:YES];
-        
-    }else if ([rate isEqualToString:@"5"]) {
-        [shareviewcontroller.star1 setSelected:YES];
-        [shareviewcontroller.star2 setSelected:YES];
-        [shareviewcontroller.star3 setSelected:YES];
-        [shareviewcontroller.star4 setSelected:YES];
-        [shareviewcontroller.star5 setSelected:YES];
-    }
 }
 
 -(NSString *) getTagForText:(NSString*)clipart {
