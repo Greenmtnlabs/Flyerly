@@ -518,7 +518,7 @@
     NSMutableDictionary *sUntechable = nil;
     
     BOOL calledFromSetupScreen = SetupGuideThirdView.calledFromSetup;
-    if( !calledFromSetupScreen ) {
+    if( calledFromSetupScreen ) {
         
         BOOL isNew = YES;
         

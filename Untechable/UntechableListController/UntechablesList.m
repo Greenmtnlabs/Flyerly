@@ -161,7 +161,7 @@ int indexArrayS2[];
     
     allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
     
-    if ( false && allUntechables.count <= 0 ){
+    if ( allUntechables.count <= 0 ){
         
         AddUntechableController *mainViewController = [[AddUntechableController alloc] initWithNibName:@"AddUntechableController" bundle:nil];
         mainViewController.untechable = untechable;

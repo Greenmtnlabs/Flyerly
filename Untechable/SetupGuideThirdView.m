@@ -9,7 +9,8 @@
 #import "SetupGuideThirdView.h"
 #import "SetupGuideSecondViewController.h"
 #import "ContactsListControllerViewController.h"
-#import "SocialnetworkController.h"
+#import "UntechablesList.h"
+#import "EmailSettingController.h"
 
 @interface SetupGuideThirdView () {
     
@@ -170,8 +171,16 @@ BOOL setupCalledNewUntech;
 
 -(void)onNext{
     
+    // ----------------
+    
+    
+    
+    // ----------------
     UIAlertView *congratesAlert = [[UIAlertView alloc]initWithTitle:@"Congratulation" message:@"Thank you for setting up your Untech settings. Now you can easily become Untechable whenever you need a break from technology in order to spend more time with the people & experiencing the things that are most important." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    
+    
     [congratesAlert show];
+    
     
     [self saveBeforeGoing];    
 }
@@ -188,8 +197,8 @@ BOOL setupCalledNewUntech;
     //we're assuming cancel as done because there is only one button on the alert
     if( buttonIndex == [alertView cancelButtonIndex] ) {
         
-        SocialnetworkController *untechScreen = [[SocialnetworkController alloc] initWithNibName:@"SocialnetworkController" bundle:nil];
-        untechScreen.untechable = untechable;
+        UntechablesList *untechScreen = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
+        untechScreen.untechablesTable = untechable;
         [self.navigationController pushViewController:untechScreen animated:YES];
     }
 }
