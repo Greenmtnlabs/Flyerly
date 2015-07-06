@@ -46,12 +46,6 @@
     
 }
 
--(void)viewWillAppear:(BOOL)animated {
-    // the navigation at the top bar wont move according to screen sizes
-    //so here we just move that on the basis of screen sizes
-    [untechable.commonFunctions setNavigationTopBarViewForScreens:_topNavBarView];
-}
-
 #pragma - mark Initializing Views
 -(void) initializeTextViews{
     
@@ -90,16 +84,9 @@
 }
 
 #pragma - mark TextView Delegate Methods
--(void)textViewDidEndEditing:(UITextView *)textView{
-    
-    [self animateTextField: textView up: NO];
-    
-}
 
 -(void) textViewDidBeginEditing:(UITextView *)textView {
     
-    [self animateTextField: textView up: YES];
-
     //using labels as placeholder, because textview doesn't have 'em.
     if( textView.tag == 101 ){
          _usernameHintText.hidden = YES;
@@ -182,13 +169,11 @@
         
         // Right Navigation ______________________________________________
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-        //[nextButton setBackgroundColor:[UIColor redColor]];//for testing
         
         nextButton.titleLabel.shadowColor = [UIColor clearColor];
-        //nextButton.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
         
         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
-        //[nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
+
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
         [nextButton setTitleColor:defGray forState:UIControlStateNormal];
@@ -249,26 +234,5 @@
     [untechable initUntechableDirectory];
 }
 
-/**
- Moving up view if the keyboard hides a view.
- **/
-- (void) animateTextField: (UITextView *) textField up: (BOOL) up {
-    
-    //only move up the screen if we had smaller screen size like iphone 4 and 5
-    if( IS_IPHONE_4 || IS_IPHONE_5 ) {
-        
-        const int movementDistance = 80;
-        const float movementDuration = 0.3f;
-        
-        int movement = (up ? -movementDistance : movementDistance);
-        
-        [UIView beginAnimations: @"anim" context: nil];
-        [UIView setAnimationBeginsFromCurrentState: YES];
-        [UIView setAnimationDuration: movementDuration];
-        self.view.frame = CGRectOffset(self.view.frame, 0, movement);
-        [UIView commitAnimations];
-        
-    }
-}
 
 @end

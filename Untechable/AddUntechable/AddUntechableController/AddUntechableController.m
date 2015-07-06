@@ -79,11 +79,7 @@
     
     // Initialize Data
     NSMutableArray *customSpendingTextArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"spendingTimeText"];
-    
-    //removing custom text from showing
-    int customTextPosition = ( int )[customSpendingTextArray indexOfObject:@"Custom"];
-    
-    
+
     _pickerData = customSpendingTextArray;
     
     // Connect data

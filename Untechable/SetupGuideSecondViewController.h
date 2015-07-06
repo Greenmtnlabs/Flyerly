@@ -24,6 +24,5 @@
 
 @property (weak, nonatomic) IBOutlet UIPickerView *setupSpendingTimeText;
 @property (weak, nonatomic) IBOutlet UILabel *doctorsResearchLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *navBarTopView;
 
 @end

@@ -69,7 +69,6 @@
     self.setupSpendingTimeText.dataSource = self;
     self.setupSpendingTimeText.delegate = self;
     
-    //[_setupSpendingTimeText setFont:[UIFont boldSystemFontOfSize:15]];
 }
 
 /**
@@ -137,16 +136,7 @@
     lbl.adjustsFontSizeToFitWidth = YES;
     lbl.textAlignment = NSTextAlignmentCenter;
     
-    //change the text size of pickers array accordingly
-    if( IS_IPHONE_4 ){
-        lbl.font=[UIFont systemFontOfSize:19];
-    } else if( IS_IPHONE_5 ){
-        lbl.font=[UIFont systemFontOfSize:20];
-    } else if( IS_IPHONE_6 ){
-        lbl.font=[UIFont systemFontOfSize:23];
-    } else if( IS_IPHONE_6_PLUS ){
-        lbl.font=[UIFont systemFontOfSize:24];
-    }
+    [lbl sizeToFit];
     return lbl;
 }
 
@@ -209,10 +199,7 @@
 }
 
 -(void)setNavigation:(NSString *)callFrom {
-    
-    // setting up top bar with (1,2,3) number for different screen sizes
-    [untechable.commonFunctions setNavigationTopBarViewForScreens:_navBarTopView];
-    
+        
     if([callFrom isEqualToString:@"viewDidLoad"])
     {
         self.navigationItem.hidesBackButton = YES;
@@ -236,13 +223,11 @@
 
         // Right Navigation ______________________________________________
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-        //[nextButton setBackgroundColor:[UIColor redColor]];//for testing
         
         nextButton.titleLabel.shadowColor = [UIColor clearColor];
-        //nextButton.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
         
         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
-        //[nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
+
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
         [nextButton setTitleColor:defGray forState:UIControlStateNormal];
@@ -293,8 +278,6 @@
     if( untechable.spendingTimeTxt == nil || [untechable.spendingTimeTxt isEqualToString:@""] ) {
         untechable.spendingTimeTxt = [customSpendingText objectAtIndex:0];
     }
-    
-    //[untechable setOrSaveVars:@"SAVE"];
 }
 
 @end
