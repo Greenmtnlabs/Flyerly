@@ -698,13 +698,6 @@ int indexArrayS2[];
             timeDuration = 30*60; //30 minutes
             break;
     }
-    
-    [untechable initWithDefValues];
-    [untechable initUntechableDirectory];
-    
-    untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(0)] ]; //current time + time duration
-    
-    untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)] ]; //start time +1 Day
 }
 
 
@@ -759,6 +752,8 @@ int indexArrayS2[];
     [_timeDurationPicker setHidden:YES];
     [_doneButtonView setHidden:YES];
     
+    [self initializeUntechNow];
+    
     [self changeNavigation:@"ON_FINISH"];
     
     //Background work
@@ -787,6 +782,19 @@ int indexArrayS2[];
         
     });
 
+}
+
+/**
+ Initiailzing related stuff for Untech now Option
+ e.g Directory, Untech vals, and options
+ */
+-(void)initializeUntechNow {
     
+    [untechable initWithDefValues];
+    [untechable initUntechableDirectory];
+    untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(0)] ]; //current time + time duration
+    
+    untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)] ]; //start time +1 Day
+
 }
 @end
