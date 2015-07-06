@@ -56,9 +56,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
+    
     return self;
 }
 
@@ -138,7 +136,6 @@
  we need to set some ui fields
  **/
 -(void)viewWillAppear:(BOOL)animated {
-   // [self setPickerValue];
     [self setNavigation:@"viewDidLoad"];
 }
 // ________________________     Custom functions    ___________________________
@@ -229,13 +226,8 @@
         
         // Right Navigation ______________________________________________
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-        //[nextButton setBackgroundColor:[UIColor redColor]];//for testing
-
         nextButton.titleLabel.shadowColor = [UIColor clearColor];
-        //nextButton.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
-        
         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
-        //[nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
         [nextButton setTitleColor:defGray forState:UIControlStateNormal];
@@ -247,8 +239,6 @@
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
         
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
-        
-        
     }
 }
 
@@ -298,18 +288,15 @@
             NSDate *d1 = [untechable.commonFunctions timestampStrToNsDate:untechable.startDate];
             NSDate *d2 = [untechable.commonFunctions timestampStrToNsDate:untechable.endDate];
             
-            
             goToNext = [untechable.commonFunctions date1IsSmallerThenDate2:d1 date2:d2];
             
             if( goToNext == NO ) {
                 
                 [untechable.commonFunctions showAlert:@"Invalid Dates" message:@"End date should be greater than start date."];
             }
-            
         }
         
         NSLog(goToNext ? @"goToNext- YES" : @"goToNext- NO");
-        
         
         if( goToNext ) {
             
@@ -326,6 +313,7 @@
         [alert show];
     }
 }
+
 -(void)storeSceenVarsInDic
 {
     untechable.spendingTimeTxt = _inputSpendingTimeText.text;
@@ -378,8 +366,6 @@
     NSString *dateStr, *pickerTimeStampStr;
     pickerTimeStampStr   = [untechable.commonFunctions nsDateToTimeStampStr:[_picker date]];
 	dateStr = [untechable.dateFormatter stringFromDate:[_picker date]];
-    //NSLog(@"date str dateStr %@", dateStr); //    "startTime": "Oct 24, 2014 03:04 PM",
-    
 
     NSString *nowDateStr = [untechable.dateFormatter stringFromDate:[NSDate date]];
     if( [nowDateStr isEqualToString:dateStr] ){
@@ -392,17 +378,13 @@
         
         NSDate *endD = [untechable.commonFunctions timestampStrToNsDate:untechable.endDate];
         NSDate *statD = [untechable.commonFunctions timestampStrToNsDate:untechable.startDate];
-
-        
+    
         if( [untechable.commonFunctions date1IsSmallerThenDate2:endD date2:statD] ){
             endD = [statD dateByAddingTimeInterval:(60*60*24)];
             untechable.endDate = [untechable.commonFunctions nsDateToTimeStampStr:endD]; //current time +1 day
             NSString *dateStrUpdated = [untechable.dateFormatter stringFromDate:endD];
             [_btnEndTime setTitle:dateStrUpdated forState:UIControlStateNormal];
         }
-        
-        
-        
     }
     else if( [pickerOpenFor isEqualToString:@"_btnEndTime"] ){
         untechable.endDate = pickerTimeStampStr;
@@ -493,9 +475,6 @@
 -(void) configureTestData
 {
     untechable.userId   = TEST_UID;
-    //untechable.eventId = TEST_EID;
-    //untechable.twillioNumber = TEST_TWILLIO_NUM;
-    //untechable.twillioNumber = @"123";
 }
 
 #pragma mark -  Model funcs
@@ -564,11 +543,8 @@
         [untechable initWithDefValues];
     }
     else if( [callResetFor isEqualToString:@"RESET1"] ){
-        //untechable.hasFinished = NO;
         untechable.savedOnServer = NO;
-        //untechable.twillioNumber = @"";
         untechable.paid = NO;
-        
         [untechable setOrSaveVars:SAVE];
     }
 }
@@ -622,7 +598,6 @@
     untechable.hasEndDate = [_cbNoEndDate isSelected];
     [_cbNoEndDate setSelected:!(untechable.hasEndDate)];
     
-
     [self showHideDateTimePicker:NO];
     
     if( !([_cbNoEndDate isSelected]) ){

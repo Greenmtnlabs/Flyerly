@@ -527,7 +527,7 @@
                     
                     if( !([message isEqualToString:@""]) ) {
                         dispatch_async( dispatch_get_main_queue(), ^{
-                            //[self showMsgOnApiResponse:message];
+                            [self showMsgOnApiResponse:message];
                         });
                     }
                     

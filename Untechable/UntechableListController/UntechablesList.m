@@ -13,6 +13,7 @@
 #import "Common.h"
 #import "Untechable.h"
 
+
 @interface UntechablesList () {
     
     NSMutableArray *allUntechables;
@@ -23,8 +24,6 @@
     int timeDuration;
 
 }
-
-
 
 @end
 
@@ -88,26 +87,16 @@ int indexArrayS2[];
         
         // Right Navigation ______________________________________________
         newUntechableButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-        //[newUntechableButton setBackgroundColor:[UIColor redColor]];//for testing
-        
         newUntechableButton.titleLabel.shadowColor = [UIColor clearColor];
-        //newUntechableButton.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
-        
-        
-        //[newUntechableButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
         newUntechableButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [newUntechableButton setTitle:TITLE_NEW_TXT forState:normal];
         [newUntechableButton setTitleColor:defGray forState:UIControlStateNormal];
         [newUntechableButton addTarget:self action:@selector(addUntechable) forControlEvents:UIControlEventTouchUpInside];
-        
-        
         newUntechableButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:newUntechableButton];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
         
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
-
-        
     }
 }
 
@@ -136,9 +125,6 @@ int indexArrayS2[];
 -(void) configureTestData
 {
     untechable.userId   = TEST_UID;
-    //untechable.eventId = TEST_EID;
-    //untechable.twillioNumber = TEST_TWILLIO_NUM;
-    //untechable.twillioNumber = @"123";
 }
 
 #pragma mark -  Model funcs
@@ -181,8 +167,6 @@ int indexArrayS2[];
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    //[untechablesTable reloadData];
-    
     // During startup (-viewDidLoad or in storyboard) do:
     self.untechablesTable.allowsMultipleSelectionDuringEditing = NO;
     
@@ -194,6 +178,7 @@ int indexArrayS2[];
     [self initializePickerData];
     [_timeDurationPicker setHidden:YES];
     [_doneButtonView setHidden:YES];
+
     // Do any additional setup after loading the view from its nib.
     
     //setting default time duration for untech now
@@ -236,7 +221,6 @@ int indexArrayS2[];
         
         newUntechableButton.userInteractionEnabled = NO;
         [self showHidLoadingIndicator:YES];
-        
     }
     
     // RE-ENABLE NAVIGATION WHEN ANY ERROR OCCURED
@@ -256,6 +240,28 @@ int indexArrayS2[];
         [self setNumberOfRowsInSection];
         
         [untechablesTable reloadData];
+    }
+}
+
+
+-(void)showMsgOnApiResponse:(NSString *)message
+{
+    UIAlertView *temAlert = [[UIAlertView alloc ]
+                             initWithTitle:@""
+                             message:message
+                             delegate:self
+                             cancelButtonTitle:@"OK"
+                             otherButtonTitles:nil];
+    [temAlert show];
+    
+    if( [message isEqualToString:@"Untechable created successfully"] ){
+        
+        /* //doing this app crashing bcz alert value nil
+         //Go to main screen
+         [self.navigationController popToRootViewControllerAnimated:YES];
+         // Remove observers
+         [[NSNotificationCenter defaultCenter] removeObserver:self];
+         */
     }
 }
 
@@ -290,8 +296,7 @@ int indexArrayS2[];
         NSString *message = @"";
         
         if( [[dict valueForKey:@"status"] isEqualToString:@"OK"] ) {
-            //message = @"Untechable saved successfully";
-            
+        
             if ( section == 0 ){
                 NSString *untechablePath = [tempDict objectForKey:@"untechablePath"];
                 [[NSFileManager defaultManager] removeItemAtPath:untechablePath error:nil];
@@ -307,13 +312,12 @@ int indexArrayS2[];
             if( !([[dict valueForKey:@"eventId"] isEqualToString:@"0"]) ) {
 
             }
-            
             errorOnFinish = YES;
         }
         
         if( !([message isEqualToString:@""]) ) {
             dispatch_async( dispatch_get_main_queue(), ^{
-                //[self showMsgOnApiResponse:message];
+                [self showMsgOnApiResponse:message];
             });
         }
     }
@@ -348,8 +352,6 @@ int indexArrayS2[];
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    //[tableView beginUpdates];
-    //[tableView setEditing:YES animated:YES];
     if( !internetReachable.isReachable ){
         //show alert
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection"
@@ -763,7 +765,7 @@ int indexArrayS2[];
             
             if( !([message isEqualToString:@""]) ) {
                 dispatch_async( dispatch_get_main_queue(), ^{
-                    //[self showMsgOnApiResponse:message];
+                    [self showMsgOnApiResponse:message];
                 });
             }
             
