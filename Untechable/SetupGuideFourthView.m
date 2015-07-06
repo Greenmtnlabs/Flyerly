@@ -130,7 +130,6 @@
     if( buttonIndex == [alertView cancelButtonIndex] ) {
         
         UntechablesList *untechScreen = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
-        //untechScreen.untechable = untechable;
         [self.navigationController pushViewController:untechScreen animated:YES];
         
     }

@@ -724,7 +724,6 @@ int indexArrayS2[];
 
 - (IBAction)untechNowClick:(id)sender {
     
-   // [self addUpperBorder];
     self.doneButtonView.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
     
     //changing the "CLOSE"button text color to black
