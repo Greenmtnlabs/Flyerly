@@ -29,7 +29,7 @@
 
 @implementation UntechablesList
 
-@synthesize untechablesTable;
+@synthesize untechablesTable, untechable;
 int indexArrayS1[];
 int indexArrayS2[];
 
@@ -163,8 +163,8 @@ int indexArrayS2[];
     if ( allUntechables.count <= 0 ){
         
         AddUntechableController *mainViewController = [[AddUntechableController alloc] initWithNibName:@"AddUntechableController" bundle:nil];
-        mainViewController.untechable = untechable;
-        [self.navigationController pushViewController:mainViewController animated:YES];
+        //mainViewController.untechable = untechable;
+        //[self.navigationController pushViewController:mainViewController animated:YES];
         
     }
     

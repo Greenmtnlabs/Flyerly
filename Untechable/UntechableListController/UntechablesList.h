@@ -27,6 +27,9 @@
 }
 
 @property(nonatomic,strong) IBOutlet UITableView *untechablesTable;
+//Properties
+@property (nonatomic,strong)  Untechable *untechable;
+
 
 - (IBAction)untechNowClick:(id)sender;
 - (IBAction)untechCustomClick:(id)sender;

@@ -64,20 +64,20 @@ NSMutableArray *allUntechables;
     {
         //check wheter untechables are already added, if not then go to add untechable screen
         // else show untechable list..
-        allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
-        if ( allUntechables.count <= 0 ){
-           
+//        allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
+//        if ( allUntechables.count <= 0 ){
+//           
+//            UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
+//            
+//            mainViewController.untechablesTable = untechable;
+//            navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+//            
+//        } else {
+        
             UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
-            
-            mainViewController.untechablesTable = untechable;
             navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
             
-        } else {
-            
-            UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
-            navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
-            
-        }
+        //}
 
     }
     else
