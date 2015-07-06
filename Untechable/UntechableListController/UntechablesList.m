@@ -20,6 +20,7 @@
     NSMutableArray *sectionTwoArray;
     
     NSArray *_pickerData;
+    int timeDuration;
 
 }
 
@@ -194,6 +195,9 @@ int indexArrayS2[];
     [_timeDurationPicker setHidden:YES];
     [_doneButtonView setHidden:YES];
     // Do any additional setup after loading the view from its nib.
+    
+    //setting default time duration for untech now
+    timeDuration = 30*60;
 }
 
 // Override to support conditional editing of the table view.
@@ -672,8 +676,6 @@ int indexArrayS2[];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-   
-    int timeDuration = 0;
     
     switch (row) {
         case 0:
@@ -727,7 +729,7 @@ int indexArrayS2[];
 
 - (IBAction)untechNowClick:(id)sender {
     
-    [self addUpperBorder];
+   // [self addUpperBorder];
     self.doneButtonView.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
     
     //changing the "CLOSE"button text color to black
