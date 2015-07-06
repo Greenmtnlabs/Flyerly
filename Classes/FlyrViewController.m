@@ -500,6 +500,7 @@ id lastShareBtnSender;
     flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:row] setDirectory:NO];
     
     if ( [[PFUser currentUser] sessionToken] ) {
+        [self enableBtns:NO];
         sharePanel.hidden = NO;
         [sharePanel removeFromSuperview];
         
