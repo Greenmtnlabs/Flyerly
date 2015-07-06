@@ -25,8 +25,6 @@
 		200ACE331A3874B200DC7047 /* YahooIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE211A3874B200DC7047 /* YahooIcon.png */; };
 		200ACE341A3874B200DC7047 /* YahooIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE221A3874B200DC7047 /* YahooIcon@2x.png */; };
 		200ACE351A3874B200DC7047 /* YahooIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE231A3874B200DC7047 /* YahooIcon@3x.png */; };
-		20C9EF431B3A8DCB0016A610 /* UntechOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20C9EF411B3A8DCB0016A610 /* UntechOptionsViewController.m */; };
-		20C9EF441B3A8DCB0016A610 /* UntechOptionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20C9EF421B3A8DCB0016A610 /* UntechOptionsViewController.xib */; };
 		2402BB831A1DBF6A00255A73 /* UntechablesList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402BB811A1DBF6A00255A73 /* UntechablesList.m */; };
 		2402BB841A1DBF6A00255A73 /* UntechablesList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2402BB821A1DBF6A00255A73 /* UntechablesList.xib */; };
 		2402BB881A1DC3A200255A73 /* UntechableTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402BB861A1DC3A200255A73 /* UntechableTableCell.m */; };
@@ -273,9 +271,6 @@
 		200ACE211A3874B200DC7047 /* YahooIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YahooIcon.png; sourceTree = "<group>"; };
 		200ACE221A3874B200DC7047 /* YahooIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YahooIcon@2x.png"; sourceTree = "<group>"; };
 		200ACE231A3874B200DC7047 /* YahooIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YahooIcon@3x.png"; sourceTree = "<group>"; };
-		20C9EF401B3A8DCB0016A610 /* UntechOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UntechOptionsViewController.h; sourceTree = "<group>"; };
-		20C9EF411B3A8DCB0016A610 /* UntechOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UntechOptionsViewController.m; sourceTree = "<group>"; };
-		20C9EF421B3A8DCB0016A610 /* UntechOptionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UntechOptionsViewController.xib; sourceTree = "<group>"; };
 		2402BB801A1DBF6A00255A73 /* UntechablesList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UntechablesList.h; path = UntechableListController/UntechablesList.h; sourceTree = "<group>"; };
 		2402BB811A1DBF6A00255A73 /* UntechablesList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UntechablesList.m; path = UntechableListController/UntechablesList.m; sourceTree = "<group>"; };
 		2402BB821A1DBF6A00255A73 /* UntechablesList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UntechablesList.xib; path = UntechableListController/UntechablesList.xib; sourceTree = "<group>"; };
@@ -878,9 +873,6 @@
 				366ECD9319D323DA00F71A11 /* AddUntechableController.h */,
 				366ECD9419D323DA00F71A11 /* AddUntechableController.m */,
 				366ECD9519D323DA00F71A11 /* AddUntechableController.xib */,
-				20C9EF401B3A8DCB0016A610 /* UntechOptionsViewController.h */,
-				20C9EF411B3A8DCB0016A610 /* UntechOptionsViewController.m */,
-				20C9EF421B3A8DCB0016A610 /* UntechOptionsViewController.xib */,
 			);
 			name = AddUntechableController;
 			sourceTree = "<group>";
@@ -1372,7 +1364,6 @@
 				366EAF931A14C3530011D6C6 /* icon-50@2x.png in Resources */,
 				243C59F51A4D753C0020350C /* FirstTableViewCell.xib in Resources */,
 				366EAFB81A14EDA30011D6C6 /* copy.png in Resources */,
-				20C9EF441B3A8DCB0016A610 /* UntechOptionsViewController.xib in Resources */,
 				C346D17F1A7FD13B00856A58 /* twitter@3x.png in Resources */,
 				24A65BED1A30451E00BE83C6 /* SSLCell.xib in Resources */,
 				C346D1851A7FD13B00856A58 /* linkedin.png in Resources */,
@@ -1498,7 +1489,6 @@
 				36524AF119D940F4006DCAAF /* SocialnetworkController.m in Sources */,
 				241AC0011AE68AE000F1C8C9 /* NameAndPhoneCellView.m in Sources */,
 				24A65BEC1A30451E00BE83C6 /* SSLCell.m in Sources */,
-				20C9EF431B3A8DCB0016A610 /* UntechOptionsViewController.m in Sources */,
 				24354D701A499F4F000EC781 /* ContactListCell.m in Sources */,
 				36561D7819D2C8A40069D897 /* main.m in Sources */,
 				247402421B33CBD700459759 /* SetupGuideViewController.m in Sources */,

@@ -13,6 +13,7 @@
 #import "Common.h"
 #import "Untechable.h"
 
+
 @interface UntechablesList () {
     
     NSMutableArray *allUntechables;
@@ -20,10 +21,9 @@
     NSMutableArray *sectionTwoArray;
     
     NSArray *_pickerData;
+    int timeDuration;
 
 }
-
-
 
 @end
 
@@ -87,25 +87,16 @@ int indexArrayS2[];
         
         // Right Navigation ______________________________________________
         newUntechableButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-        //[newUntechableButton setBackgroundColor:[UIColor redColor]];//for testing
-        
         newUntechableButton.titleLabel.shadowColor = [UIColor clearColor];
-        //newUntechableButton.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
-        
-        
-        //[newUntechableButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
         newUntechableButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [newUntechableButton setTitle:TITLE_NEW_TXT forState:normal];
         [newUntechableButton setTitleColor:defGray forState:UIControlStateNormal];
         [newUntechableButton addTarget:self action:@selector(addUntechable) forControlEvents:UIControlEventTouchUpInside];
-        
-        
         newUntechableButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:newUntechableButton];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
         
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
-
     }
 }
 
@@ -134,9 +125,6 @@ int indexArrayS2[];
 -(void) configureTestData
 {
     untechable.userId   = TEST_UID;
-    //untechable.eventId = TEST_EID;
-    //untechable.twillioNumber = TEST_TWILLIO_NUM;
-    //untechable.twillioNumber = @"123";
 }
 
 #pragma mark -  Model funcs
@@ -179,8 +167,6 @@ int indexArrayS2[];
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    //[untechablesTable reloadData];
-    
     // During startup (-viewDidLoad or in storyboard) do:
     self.untechablesTable.allowsMultipleSelectionDuringEditing = NO;
     
@@ -192,7 +178,11 @@ int indexArrayS2[];
     [self initializePickerData];
     [_timeDurationPicker setHidden:YES];
     [_doneButtonView setHidden:YES];
+
     // Do any additional setup after loading the view from its nib.
+    
+    //setting default time duration for untech now
+    timeDuration = 30*60;
 }
 
 // Override to support conditional editing of the table view.
@@ -231,7 +221,6 @@ int indexArrayS2[];
         
         newUntechableButton.userInteractionEnabled = NO;
         [self showHidLoadingIndicator:YES];
-        
     }
     
     // RE-ENABLE NAVIGATION WHEN ANY ERROR OCCURED
@@ -247,6 +236,32 @@ int indexArrayS2[];
         newUntechableButton.userInteractionEnabled = YES;
         
         [self showHidLoadingIndicator:NO];
+        
+        [self setNumberOfRowsInSection];
+        
+        [untechablesTable reloadData];
+    }
+}
+
+
+-(void)showMsgOnApiResponse:(NSString *)message
+{
+    UIAlertView *temAlert = [[UIAlertView alloc ]
+                             initWithTitle:@""
+                             message:message
+                             delegate:self
+                             cancelButtonTitle:@"OK"
+                             otherButtonTitles:nil];
+    [temAlert show];
+    
+    if( [message isEqualToString:@"Untechable created successfully"] ){
+        
+        /* //doing this app crashing bcz alert value nil
+         //Go to main screen
+         [self.navigationController popToRootViewControllerAnimated:YES];
+         // Remove observers
+         [[NSNotificationCenter defaultCenter] removeObserver:self];
+         */
     }
 }
 
@@ -281,8 +296,7 @@ int indexArrayS2[];
         NSString *message = @"";
         
         if( [[dict valueForKey:@"status"] isEqualToString:@"OK"] ) {
-            //message = @"Untechable saved successfully";
-            
+        
             if ( section == 0 ){
                 NSString *untechablePath = [tempDict objectForKey:@"untechablePath"];
                 [[NSFileManager defaultManager] removeItemAtPath:untechablePath error:nil];
@@ -298,13 +312,12 @@ int indexArrayS2[];
             if( !([[dict valueForKey:@"eventId"] isEqualToString:@"0"]) ) {
 
             }
-            
             errorOnFinish = YES;
         }
         
         if( !([message isEqualToString:@""]) ) {
             dispatch_async( dispatch_get_main_queue(), ^{
-                //[self showMsgOnApiResponse:message];
+                [self showMsgOnApiResponse:message];
             });
         }
     }
@@ -320,12 +333,6 @@ int indexArrayS2[];
     else{
         dispatch_async( dispatch_get_main_queue(), ^{
             [self changeNavigation:@"ON_FINISH_SUCCESS"];
-            
-            //Setting the new number of rows for each section
-            [self setNumberOfRowsInSection];
-            
-            // Request table view to reload
-            [untechablesTable reloadData];
         });
     }
 }
@@ -345,8 +352,6 @@ int indexArrayS2[];
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    //[tableView beginUpdates];
-    //[tableView setEditing:YES animated:YES];
     if( !internetReachable.isReachable ){
         //show alert
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection"
@@ -537,21 +542,17 @@ int indexArrayS2[];
         indexArrayS2 [timeStampArray.count];
     }
     
-    
     //now getting the indexes of array and save it.
     for( int i = 0; i<timeStampArray.count; i++){
         for( int j = 0; j<timeStampArray.count; j++){
-            
+
             if( sortedTimeStamps[i] == timeStamps[j] ){
                 indexArray[i] = j;
-                
                 if( [sortFor isEqual:@"sec1"]){
                     indexArrayS1[i] = j;
                 }else{
                     indexArrayS2[i] = j;
                 }
-                
-                
                 break;
             }
         }
@@ -562,10 +563,6 @@ int indexArrayS2[];
     for( int i = 0; i < timeStampArray.count; i++ ){
         NSLog(@" Index array is %i, sorted array %i, unsorted array %i", indexArray[i], sortedTimeStamps[i], timeStamps[i] );
     }
-    
-
-    
-    
 }
 
 // Customize the number of rows in the table view.
@@ -585,6 +582,7 @@ int indexArrayS2[];
 {
     return 2;
 }
+
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
@@ -674,6 +672,38 @@ int indexArrayS2[];
     
 }
 
+- (NSDate *)timestampStrToNsDate:(NSString *)timeStamp
+{
+    return [NSDate dateWithTimeIntervalSince1970:[timeStamp integerValue]];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    
+    switch (row) {
+        case 0:
+            timeDuration = 30*60; //30 minutes
+            break;
+            
+        case 1:
+            timeDuration = 60*60; //1 hr
+            break;
+        
+        case 2:
+            timeDuration = 24*60*60; //1 day
+            break;
+        
+        case 3:
+            timeDuration = 2*24*60*60; //2 days
+            break;
+            
+        default:
+            timeDuration = 30*60; //30 minutes
+            break;
+    }
+}
+
+
+
 // The number of columns of data
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
@@ -694,7 +724,6 @@ int indexArrayS2[];
 
 - (IBAction)untechNowClick:(id)sender {
     
-    [self addUpperBorder];
     self.doneButtonView.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
     
     //changing the "CLOSE"button text color to black
@@ -719,7 +748,54 @@ int indexArrayS2[];
     
 }
 - (IBAction)btnDoneClick:(id)sender {
+    
+    
     [_timeDurationPicker setHidden:YES];
     [_doneButtonView setHidden:YES];
+    
+    [self initializeUntechNow];
+    
+    [self changeNavigation:@"ON_FINISH"];
+    
+    //Background work
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        
+        [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
+            
+            if( !([message isEqualToString:@""]) ) {
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    [self showMsgOnApiResponse:message];
+                });
+            }
+            
+            if( errorOnFinish ){
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    [self changeNavigation:@"ERROR_ON_FINISH"];
+                });
+            }
+            else{
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    [self changeNavigation:@"ON_FINISH_SUCCESS"];
+                });
+            }
+            
+        }];
+        
+    });
+
+}
+
+/**
+ Initiailzing related stuff for Untech now Option
+ e.g Directory, Untech vals, and options
+ */
+-(void)initializeUntechNow {
+    
+    [untechable initWithDefValues];
+    [untechable initUntechableDirectory];
+    untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(0)] ]; //current time + time duration
+    
+    untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)] ]; //start time +1 Day
+
 }
 @end

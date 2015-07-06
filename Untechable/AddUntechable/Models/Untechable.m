@@ -424,4 +424,100 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [self twUpdateData:@"" oAuthTokenSecret:@"" ];
 }
 
+
+#pragma mark - Send to Server
+-(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack
+{
+    
+    
+    //[self removeRedundentDataForContacts];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:API_SAVE]];
+    [request setHTTPMethod:@"POST"];
+    
+    NSMutableData *body = [NSMutableData data];
+    NSString *boundary = @"---------------------------14737809831466499882746641449";
+    
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+    [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+    
+    NSArray *stringVarsAry = [[NSArray alloc] initWithObjects:@"eventId", @"userId", @"paid",
+                              @"timezoneOffset", @"spendingTimeTxt", @"startDate", @"endDate", @"hasEndDate"
+                              , @"location",@"twillioNumber"
+                              ,@"socialStatus", @"fbAuth", @"fbAuthExpiryTs" , @"twitterAuth",@"twOAuthTokenSecret",   @"linkedinAuth"
+                              ,@"acType", @"email", @"password", @"respondingEmail", @"iSsl", @"imsHostName", @"imsPort", @"oSsl", @"omsHostName", @"omsPort",@"customizedContacts",@"userName"
+                              ,nil];
+    
+    
+    // getting the username and phone number to be send
+    
+    NSString *userNameInDb = [[NSUserDefaults standardUserDefaults]
+                              stringForKey:@"userName"];
+    
+    [dic setValue:userNameInDb forKey:@"userName"];
+    
+    
+    for (NSString* key in dic) {
+        BOOL sendIt =   NO;
+        id value    =   [dic objectForKey:key];
+        
+        if( sendIt || [stringVarsAry containsObject:key]){
+            
+            [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+            [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n",key] dataUsingEncoding:NSUTF8StringEncoding]];
+            
+            [body appendData:[value dataUsingEncoding:NSUTF8StringEncoding]];
+            [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+        }
+        
+    }//for
+    
+    
+    // close form
+    [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // setting the body of the post to the reqeust
+    [request setHTTPBody:body];
+    
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    // NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    
+    //[self setNextHighlighted:NO];
+    
+    BOOL errorOnFinish = NO;
+    NSString *message = @"";
+    
+    if( returnData != nil ){
+        
+        NSDictionary *dict=[NSJSONSerialization JSONObjectWithData:returnData options:NSJSONReadingMutableLeaves error:nil];
+        NSLog(@"In response of save api: %@",dict);
+        
+        
+        
+        if( [[dict valueForKey:@"status"] isEqualToString:@"OK"] ) {
+            
+            twillioNumber = [dict valueForKey:@"twillioNumber"];
+            eventId = [dict valueForKey:@"eventId"];
+            savedOnServer = YES;
+            hasFinished = YES;
+            [self setOrSaveVars:SAVE];
+            
+        } else{
+            message = [dict valueForKey:@"message"];
+            if( !([[dict valueForKey:@"eventId"] isEqualToString:@"0"]) ) {
+                eventId = [dict valueForKey:@"eventId"];
+                [self setOrSaveVars:SAVE];
+            }
+            
+            errorOnFinish = YES;
+        }
+    }
+    else{
+        errorOnFinish = YES;
+    }
+    
+    callBack(errorOnFinish, message);
+}
+
 @end

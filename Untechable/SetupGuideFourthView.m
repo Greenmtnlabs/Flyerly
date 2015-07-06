@@ -7,8 +7,8 @@
 //
 
 #import "SetupGuideFourthView.h"
-#import "UntechOptionsViewController.h"
 #import "SocialnetworkController.h"
+#import "UntechablesList.h"
 
 @interface SetupGuideFourthView ()
 
@@ -129,8 +129,7 @@
     //we're assuming cancel as done because there is only one button on the alert
     if( buttonIndex == [alertView cancelButtonIndex] ) {
         
-        UntechOptionsViewController *untechScreen = [[UntechOptionsViewController alloc] initWithNibName:@"UntechOptionsViewController" bundle:nil];
-        untechScreen.untechable = untechable;
+        UntechablesList *untechScreen = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
         [self.navigationController pushViewController:untechScreen animated:YES];
         
     }

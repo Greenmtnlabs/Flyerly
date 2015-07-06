@@ -58,6 +58,8 @@
     [self.keyboardControls setDelegate:self];
 }
 
+
+
 -(void)viewWillAppear:(BOOL)animated {
     [self updateUI];
 }
@@ -263,8 +265,37 @@
         if( [APP_IN_MODE isEqualToString:TESTING] ){
             [self next:@"GO_TO_THANKYOU"];
         } else {
-            [self sendToApi];
+            
+            [self changeNavigation:@"ON_FINISH"];
+            
+            
+            
+            //Background work
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+                
+                [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
+                    
+                    if( !([message isEqualToString:@""]) ) {
+                        dispatch_async( dispatch_get_main_queue(), ^{
+                            [self showMsgOnApiResponse:message];
+                        });
+                    }
+                    
+                    if( errorOnFinish ){
+                        dispatch_async( dispatch_get_main_queue(), ^{
+                            [self changeNavigation:@"ERROR_ON_FINISH"];
+                        });
+                    }
+                    else{
+                        dispatch_async( dispatch_get_main_queue(), ^{
+                            [self changeNavigation:@"GO_TO_THANKYOU"];
+                        });
+                    }
+                    
+                }];
+            });
         }
+             
     }
     } else {
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Put in your name below. This will be used to help identify yourself to friends."
@@ -325,17 +356,6 @@
     [internetReachable startNotifier];
 }
 
--(void) sendToApi{
-    
-    [self changeNavigation:@"ON_FINISH"];
-    
-    //Background work
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        
-        [self sendToApiAfterTask];
-        
-    });
-}
 
 -(void)changeNavigation:(NSString *)option
 {
@@ -410,113 +430,6 @@
     [self storeSceenVarsInDic];
 }
 
--(void) sendToApiAfterTask
-{
-    [self removeRedundentDataForContacts];
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:API_SAVE]];
-    [request setHTTPMethod:@"POST"];
-    
-    NSMutableData *body = [NSMutableData data];
-    NSString *boundary = @"---------------------------14737809831466499882746641449";
-    
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
-    [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
-    
-    NSArray *stringVarsAry = [[NSArray alloc] initWithObjects:@"eventId", @"userId", @"paid",
-                              @"timezoneOffset", @"spendingTimeTxt", @"startDate", @"endDate", @"hasEndDate"
-                              , @"location",@"twillioNumber"
-                              ,@"socialStatus", @"fbAuth", @"fbAuthExpiryTs" , @"twitterAuth",@"twOAuthTokenSecret",   @"linkedinAuth"
-                              ,@"acType", @"email", @"password", @"respondingEmail", @"iSsl", @"imsHostName", @"imsPort", @"oSsl", @"omsHostName", @"omsPort",@"customizedContacts",@"userName"
-                              ,nil];
-    
-    
-    // getting the username and phone number to be send
-   
-    NSString *userNameInDb = [[NSUserDefaults standardUserDefaults]
-                              stringForKey:@"userName"];
-    
-    [untechable.dic setValue:userNameInDb forKey:@"userName"];
-        
-    
-    for (NSString* key in untechable.dic) {
-        BOOL sendIt =   NO;
-        id value    =   [untechable.dic objectForKey:key];
-    
-        if( sendIt || [stringVarsAry containsObject:key]){
-            
-            [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-            [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n",key] dataUsingEncoding:NSUTF8StringEncoding]];
-            
-            [body appendData:[value dataUsingEncoding:NSUTF8StringEncoding]];
-            [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-        }
-        
-    }//for
-    
-    
-    // close form
-    [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    // setting the body of the post to the reqeust
-    [request setHTTPBody:body];
-    
-    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    // NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
-    
-    [self setNextHighlighted:NO];
-    
-    BOOL errorOnFinish = NO;
-    
-    if( returnData != nil ){
-        
-        NSDictionary *dict=[NSJSONSerialization JSONObjectWithData:returnData options:NSJSONReadingMutableLeaves error:nil];
-        NSLog(@"In response of save api: %@",dict);
-        
-        NSString *message = @"";
-        
-        if( [[dict valueForKey:@"status"] isEqualToString:@"OK"] ) {
-            
-            untechable.twillioNumber = [dict valueForKey:@"twillioNumber"];
-            untechable.eventId = [dict valueForKey:@"eventId"];
-            untechable.savedOnServer = YES;
-            untechable.hasFinished = YES;
-            [untechable setOrSaveVars:SAVE];
-            
-        } else{
-            message = [dict valueForKey:@"message"];
-            if( !([[dict valueForKey:@"eventId"] isEqualToString:@"0"]) ) {
-                untechable.eventId = [dict valueForKey:@"eventId"];
-                [untechable setOrSaveVars:SAVE];
-            }
-            
-            errorOnFinish = YES;
-        }
-        
-        if( !([message isEqualToString:@""]) ) {
-            dispatch_async( dispatch_get_main_queue(), ^{
-                [self showMsgOnApiResponse:message];
-            });
-        }
-    }
-    else{
-        errorOnFinish = YES;
-    }
-    
-    
-    if( errorOnFinish ){
-        dispatch_async( dispatch_get_main_queue(), ^{
-            [self changeNavigation:@"ERROR_ON_FINISH"];
-        });
-    }
-    else{
-        dispatch_async( dispatch_get_main_queue(), ^{
-            [self changeNavigation:@"ON_FINISH"];
-            [self next:@"GO_TO_THANKYOU"];
-        });
-    }
-}
 
 -(void)showMsgOnApiResponse:(NSString *)message
 {

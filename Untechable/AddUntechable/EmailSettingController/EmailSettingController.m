@@ -60,13 +60,11 @@
 
 @synthesize untechable,sslSwitch,serverAccountTable,scrollView,comingFromSettingsScreen,comingFromChangeEmailScreen,comingFromContactsListScreen;
 
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+   return self;
 }
 
 - (void)viewDidLoad
@@ -79,6 +77,7 @@
     
     //Setting up the Scroll size
     [scrollView setContentSize:CGSizeMake(320, 750)];
+ 
     //Setting the initial position for scroll view
     scrollView.contentOffset = CGPointMake(0,0);
     
@@ -89,7 +88,6 @@
     
     [self setDefaultModel];
     
-    //NSArray *fields = @[ self.inputEmail, self.inputPassword, self.inputMsg ];
     NSArray *fields = @[ self.inputEmail, self.inputPassword ];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
     [self.keyboardControls setDelegate:self];
@@ -214,20 +212,14 @@
     }else {
         self.inputEmail.text = untechable.email;
     }
-    
-    /*[self.inputMsg setTextColor:defGreen];
-    self.inputMsg.font = [UIFont fontWithName:APP_FONT size:16];
-    self.inputMsg.delegate = self;
-    self.inputMsg.text = untechable.respondingEmail;*/
-    
 }
+
 #pragma mark -  Navigation functions
 
 - (void)setNavigationDefaults{
     
     defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
     defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
-    
     
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
@@ -306,9 +298,6 @@
         }
         
         [rightBarButton setTitleColor:defGray forState:UIControlStateNormal];
-        //[nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
-        //[nextButton addTarget:self action:@selector(btnNextTouchEndToServerAccount) forControlEvents:UIControlEventTouchUpInside];
-        
         rightBarButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton_ = [[UIBarButtonItem alloc] initWithCustomView:rightBarButton];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton_,nil];
@@ -517,7 +506,33 @@
         if( [APP_IN_MODE isEqualToString:TESTING] ){
             [self next:@"GO_TO_THANKYOU"];
         } else {
-            [self sendToApi];
+            [self changeNavigation:@"ON_FINISH"];
+            
+            //Background work
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+                
+                [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
+                    
+                    if( !([message isEqualToString:@""]) ) {
+                        dispatch_async( dispatch_get_main_queue(), ^{
+                            [self showMsgOnApiResponse:message];
+                        });
+                    }
+                    
+                    if( errorOnFinish ){
+                        dispatch_async( dispatch_get_main_queue(), ^{
+                            [self changeNavigation:@"ERROR_ON_FINISH"];
+                        });
+                    }
+                    else{
+                        dispatch_async( dispatch_get_main_queue(), ^{
+                            [self changeNavigation:@"GO_TO_THANKYOU"];
+                        });
+                    }
+                    
+                }];
+                
+            });
         }
     }
 }
@@ -564,7 +579,6 @@
 
     untechable.email = self.inputEmail.text;
     untechable.password = self.inputPassword.text;
-    //untechable.respondingEmail = self.inputMsg.text;
     
     [self hideAllViews];
     
@@ -592,7 +606,6 @@
     
     untechable.email = _inputEmail.text;
     untechable.password = _inputPassword.text;
-    //untechable.respondingEmail = _inputMsg.text;
     
     if ( [untechable.acType isEqualToString:@"OTHER"] ) {
         untechable.iSsl          = iSsl;
@@ -615,150 +628,8 @@
     [untechable setOrSaveVars:SAVE];
 }
 
--(void) sendToApi{
 
-    [self changeNavigation:@"ON_FINISH"];
 
-    //Background work
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        
-        [self sendToApiAfterTask];
-        
-    });
-}
-                   
--(void) sendToApiAfterTask
-{
-    //NSLog(@"API_SAVE = %@ ",API_SAVE);
-    //NSLog(@"[untechable getRecFilePath]: %@",[untechable getRecFilePath]);
-    //NSLog(@"[untechable getRecFileName]: %@",[untechable getRecFileName]);
-    
-    [self removeRedundentDataForContacts];
-
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:API_SAVE]];
-    [request setHTTPMethod:@"POST"];
-
-    NSMutableData *body = [NSMutableData data];
-    NSString *boundary = @"---------------------------14737809831466499882746641449";
-    
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
-    [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
-    
-    // -------------------- ---- Audio Upload Status ---------------------------\\
-    //pass MediaType file
-    
-    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"recording\"; filename=\"%@\"\r\n",[untechable getRecFileName]] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[@"Content-Type: audio/caf\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[@"Content-Transfer-Encoding: binary\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    // get the audio data from main bundle directly into NSData object
-    NSData *audioData;
-    audioData = [[NSData alloc] initWithContentsOfFile:[NSURL URLWithString:[untechable getRecFilePath]]];
-    // add it to body
-    [body appendData:audioData];
-    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-
-    NSArray *stringVarsAry = [[NSArray alloc] initWithObjects:@"eventId", @"userId", @"paid",
-                              @"timezoneOffset", @"spendingTimeTxt", @"startDate", @"endDate", @"hasEndDate"
-                             , @"location",@"twillioNumber"
-                             ,@"socialStatus", @"fbAuth", @"fbAuthExpiryTs" , @"twitterAuth",@"twOAuthTokenSecret",   @"linkedinAuth"
-                             ,@"acType", @"email", @"password", @"respondingEmail", @"iSsl", @"imsHostName", @"imsPort", @"oSsl", @"omsHostName", @"omsPort",@"customizedContacts", @"userName"
-                             ,nil];
-    
-    // getting the username and phone number to be send
-    NSString *userNameInDb = [[NSUserDefaults standardUserDefaults]
-                              stringForKey:@"userName"];
-    [untechable.dic setValue:userNameInDb forKey:@"userName"];
-    
-    for (NSString* key in untechable.dic) {
-        BOOL sendIt =   NO;
-        id value    =   [untechable.dic objectForKey:key];
-        
-        if([key isEqualToString:@"emergencyContacts"] ){
-            value = [untechable.commonFunctions convertDicIntoJsonString:value];
-            sendIt = YES;
-        }
-        
-        if( sendIt || [stringVarsAry containsObject:key]){
-            
-            [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-            [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n",key] dataUsingEncoding:NSUTF8StringEncoding]];
-            
-            [body appendData:[value dataUsingEncoding:NSUTF8StringEncoding]];
-            [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-        }
-        
-    }//for
-    
-    
-    // close form
-    [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    
-
-    // setting the body of the post to the reqeust
-    [request setHTTPBody:body];
-    
-    
-    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    // NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
-
-    [self setNextHighlighted:NO];
-    
-    BOOL errorOnFinish = NO;
-    
-    if( returnData != nil ){
-        
-        NSDictionary *dict=[NSJSONSerialization JSONObjectWithData:returnData options:NSJSONReadingMutableLeaves error:nil];
-        NSLog(@"In response of save api: %@",dict);
-        
-        NSString *message = @"";
-        
-        if( [[dict valueForKey:@"status"] isEqualToString:@"OK"] ) {
-            //message = @"Untechable saved successfully";
-            
-            untechable.twillioNumber = [dict valueForKey:@"twillioNumber"];
-            untechable.eventId = [dict valueForKey:@"eventId"];
-            untechable.savedOnServer    = YES;
-            untechable.hasFinished = YES;
-            [untechable setOrSaveVars:SAVE];
-            
-        } else{
-            message = [dict valueForKey:@"message"];
-            if( !([[dict valueForKey:@"eventId"] isEqualToString:@"0"]) ) {
-                untechable.eventId = [dict valueForKey:@"eventId"];
-                [untechable setOrSaveVars:SAVE];
-            }
-            
-            errorOnFinish = YES;
-        }
-        
-        if( !([message isEqualToString:@""]) ) {
-            dispatch_async( dispatch_get_main_queue(), ^{
-                [self showMsgOnApiResponse:message];
-            });
-        }
-    }
-    else{
-        errorOnFinish = YES;
-    }
-    
-    
-    if( errorOnFinish ){
-        dispatch_async( dispatch_get_main_queue(), ^{
-            [self changeNavigation:@"ERROR_ON_FINISH"];
-        });
-    }
-    else{
-        dispatch_async( dispatch_get_main_queue(), ^{
-            [self changeNavigation:@"ON_FINISH"];
-            [self next:@"GO_TO_THANKYOU"];
-        });
-    }
-    
-    
-}
 -(void)changeNavigation:(NSString *)option
 {
     // DISABLE NAVIGATION ON SEND DATA TO API
@@ -1083,7 +954,6 @@
         NSString *imgPath = [[_table01Data objectAtIndex:indexPath.row] objectForKey:@"imgPath"];
         cell.button1.tag = indexPath.row;
         [cell.button1 setImage:[UIImage imageNamed:imgPath] forState:UIControlStateNormal];
-        //[cell.button1 setBackgroundImage:[UIImage imageNamed:imgPath] forState:UIControlStateNormal];
         [cell.button1 addTarget:self action:@selector(clickedOnEmailOption:) forControlEvents:UIControlEventTouchUpInside];
         
         return cell;
@@ -1105,7 +975,6 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     NSLog(@"textFieldShouldBeginEditing");
-    //textField.backgroundColor = [UIColor colorWithRed:220.0f/255.0f green:220.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
     if ( textField == _inputOmsHostName || textField == _inputOmsPort ){
         
         [scrollView setContentOffset:CGPointMake(0, 100) animated:YES];

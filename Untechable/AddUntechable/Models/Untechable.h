@@ -87,4 +87,6 @@
 
 #pragma mark - current Date method
 -(NSDate *)getCurrentDate;
+
+-(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack;
 @end
