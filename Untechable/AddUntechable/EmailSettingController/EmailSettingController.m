@@ -64,10 +64,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+   return self;
 }
 
 - (void)viewDidLoad
@@ -80,6 +77,7 @@
     
     //Setting up the Scroll size
     [scrollView setContentSize:CGSizeMake(320, 750)];
+ 
     //Setting the initial position for scroll view
     scrollView.contentOffset = CGPointMake(0,0);
     
@@ -90,7 +88,6 @@
     
     [self setDefaultModel];
     
-    //NSArray *fields = @[ self.inputEmail, self.inputPassword, self.inputMsg ];
     NSArray *fields = @[ self.inputEmail, self.inputPassword ];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
     [self.keyboardControls setDelegate:self];
@@ -215,20 +212,14 @@
     }else {
         self.inputEmail.text = untechable.email;
     }
-    
-    /*[self.inputMsg setTextColor:defGreen];
-    self.inputMsg.font = [UIFont fontWithName:APP_FONT size:16];
-    self.inputMsg.delegate = self;
-    self.inputMsg.text = untechable.respondingEmail;*/
-    
 }
+
 #pragma mark -  Navigation functions
 
 - (void)setNavigationDefaults{
     
     defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
     defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
-    
     
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
@@ -307,9 +298,6 @@
         }
         
         [rightBarButton setTitleColor:defGray forState:UIControlStateNormal];
-        //[nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
-        //[nextButton addTarget:self action:@selector(btnNextTouchEndToServerAccount) forControlEvents:UIControlEventTouchUpInside];
-        
         rightBarButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton_ = [[UIBarButtonItem alloc] initWithCustomView:rightBarButton];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton_,nil];
@@ -591,7 +579,6 @@
 
     untechable.email = self.inputEmail.text;
     untechable.password = self.inputPassword.text;
-    //untechable.respondingEmail = self.inputMsg.text;
     
     [self hideAllViews];
     
@@ -619,7 +606,6 @@
     
     untechable.email = _inputEmail.text;
     untechable.password = _inputPassword.text;
-    //untechable.respondingEmail = _inputMsg.text;
     
     if ( [untechable.acType isEqualToString:@"OTHER"] ) {
         untechable.iSsl          = iSsl;
@@ -968,7 +954,6 @@
         NSString *imgPath = [[_table01Data objectAtIndex:indexPath.row] objectForKey:@"imgPath"];
         cell.button1.tag = indexPath.row;
         [cell.button1 setImage:[UIImage imageNamed:imgPath] forState:UIControlStateNormal];
-        //[cell.button1 setBackgroundImage:[UIImage imageNamed:imgPath] forState:UIControlStateNormal];
         [cell.button1 addTarget:self action:@selector(clickedOnEmailOption:) forControlEvents:UIControlEventTouchUpInside];
         
         return cell;
@@ -990,7 +975,6 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     NSLog(@"textFieldShouldBeginEditing");
-    //textField.backgroundColor = [UIColor colorWithRed:220.0f/255.0f green:220.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
     if ( textField == _inputOmsHostName || textField == _inputOmsPort ){
         
         [scrollView setContentOffset:CGPointMake(0, 100) animated:YES];
