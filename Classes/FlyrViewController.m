@@ -342,7 +342,7 @@
             [cell renderCell:flyer LockStatus:lockFlyer];
             [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
             cell.shareBtn.tag = indexPath.row;
-            [cell.shareBtn addTarget:self action:@selector(onShare) forControlEvents:UIControlEventTouchUpInside];
+            [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
             
 
             
@@ -360,7 +360,7 @@
             [cell renderCell:flyer LockStatus:lockFlyer];
             [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
             cell.shareBtn.tag = indexPath.row;
-            [cell.shareBtn addTarget:self action:@selector(onShare) forControlEvents:UIControlEventTouchUpInside];
+            [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
             
         });
 
@@ -473,8 +473,9 @@
     inappviewcontroller.buttondelegate = self;
 }
 
--(void)onShare {
-    int row = 0; ///will get it from button tag
+-(void)onShare:(id)sender {
+    UIButton *clickButton = sender;
+    NSInteger row = clickButton.tag; ///will get it from button tag
     flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:row] setDirectory:NO];
     NSLog(@"Share");
     
