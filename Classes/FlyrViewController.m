@@ -539,10 +539,13 @@ id lastShareBtnSender;
         UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
         
         //Here we Pass Param to Share Screen Which use for Sharing
-        //[shareviewcontroller.titleView becomeFirstResponder];
+        [shareviewcontroller.titleView resignFirstResponder];
+        [shareviewcontroller.descriptionView resignFirstResponder];
         shareviewcontroller.selectedFlyerImage = shareImage;
         shareviewcontroller.flyer = self.flyer;
         shareviewcontroller.imageFileName = shareImagePath;
+        shareviewcontroller.helpButton = helpButton;
+        shareviewcontroller.backButton = backButton;
         if( [shareviewcontroller.titleView.text isEqualToString:@"Flyer"] ) {
             shareviewcontroller.titleView.text = [flyer getFlyerTitle];
         }
@@ -606,7 +609,6 @@ id lastShareBtnSender;
             [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height-550, 420,550 )];
         }
         [UIView commitAnimations];
-        [self enableBtns:YES];
         [self hideLoadingIndicator];
         
     } else {
