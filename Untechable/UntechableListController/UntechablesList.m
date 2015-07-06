@@ -18,7 +18,12 @@
     NSMutableArray *allUntechables;
     NSMutableArray *sectionOneArray;
     NSMutableArray *sectionTwoArray;
+    
+    NSArray *_pickerData;
+
 }
+
+
 
 @end
 
@@ -50,13 +55,6 @@ int indexArrayS2[];
 
 #pragma mark -  Navigation functions
 - (void)setNavigationDefaults{
-    
-    /*
-     NSDateFormatter *df = [[NSDateFormatter alloc] init];
-     [df setDateFormat:@"EEEE, dd MMMM yyyy HH:mm"];
-     NSDate *date = [df dateFromString:@"Sep 25, 2014 05:27 PM"];
-     NSLog(@"\n\n  DATE: %@ \n\n\n", date);
-     */
     
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
@@ -123,6 +121,8 @@ int indexArrayS2[];
     
     NSLog(@"Go To add untechable screen");
     AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
+    
+    addUntechable.untechable = untechable;
     addUntechable.indexOfUntechableInEditMode = -1;
     [self.navigationController pushViewController:addUntechable animated:YES];
 }
@@ -130,6 +130,7 @@ int indexArrayS2[];
 /*
  Variable we must need in model, for testing we can use these vars
  */
+
 -(void) configureTestData
 {
     untechable.userId   = TEST_UID;
@@ -184,9 +185,14 @@ int indexArrayS2[];
     self.untechablesTable.allowsMultipleSelectionDuringEditing = NO;
     
     [self setDefaultModel];
-    
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
+    [self updateUI];
+    
+    [self initializePickerData];
+    [_timeDurationPicker setHidden:YES];
+    [_doneButtonView setHidden:YES];
+    // Do any additional setup after loading the view from its nib.
 }
 
 // Override to support conditional editing of the table view.
@@ -266,7 +272,6 @@ int indexArrayS2[];
     [request setHTTPMethod:@"POST"];
     
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    // NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
     
     if( returnData != nil ){
         
@@ -325,6 +330,17 @@ int indexArrayS2[];
     }
 }
 
+-(void)updateUI{
+    
+    [btnUntechCustom setTitleColor:defGray forState:UIControlStateNormal];
+    btnUntechCustom.titleLabel.font = [UIFont fontWithName:APP_FONT size:16];
+    btnUntechCustom.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
+    
+    [btnUntechNow setTitleColor:defGray forState:UIControlStateNormal];
+    btnUntechNow.titleLabel.font = [UIFont fontWithName:APP_FONT size:16];
+    btnUntechNow.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
+    
+}
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -607,4 +623,103 @@ int indexArrayS2[];
     [internetReachable startNotifier];
 }
 
+-(void)showHideTextPicker:(BOOL)showHide{
+
+    float alpha = (showHide) ? 1.0 : 0.0;
+    
+    _timeDurationPicker.alpha = alpha;
+    _doneButtonView.alpha = alpha;
+    [self addUpperBorder];
+    self.doneButtonView.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
+    self.timeDurationPicker.backgroundColor = [self colorFromHexString:@"#fafafa"];
+    
+    //changing the "CLOSE"button text color to black
+    [_doneButtonView setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
+    
+}
+
+/**
+ Hex Color Converter
+ @params NSString
+ retunrs UIColor
+ */
+- (UIColor *)colorFromHexString:(NSString *)hexString {
+    unsigned rgbValue = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:hexString];
+    [scanner setScanLocation:1]; // bypass '#' character
+    [scanner scanHexInt:&rgbValue];
+    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
+}
+
+/**
+ Adding a top border for a view
+ **/
+- (void)addUpperBorder
+{
+    CALayer *upperBorder = [CALayer layer];
+    upperBorder.backgroundColor = [[UIColor lightGrayColor] CGColor];
+    upperBorder.frame = CGRectMake(0, 0, CGRectGetWidth(_doneButtonView.frame), 1.0f);
+    [_doneButtonView.layer addSublayer:upperBorder];
+}
+
+-(void)initializePickerData {
+    
+    NSArray *arrayToBeAdded =  @[@"30 min", @"1 hr", @"1 day", @"2 days"];
+   
+    _pickerData = arrayToBeAdded;
+    
+    self.timeDurationPicker.dataSource = self;
+    self.timeDurationPicker.delegate = self;
+    
+    
+}
+
+// The number of columns of data
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+// The number of rows of data
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return _pickerData.count;
+}
+
+// The data to return for the row and component (column) that's being passed in
+- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return _pickerData[row];
+}
+
+- (IBAction)untechNowClick:(id)sender {
+    
+    [self addUpperBorder];
+    self.doneButtonView.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
+    
+    //changing the "CLOSE"button text color to black
+    [_doneButtonView setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
+
+    
+    [self initializePickerData];
+    [_timeDurationPicker setHidden:NO];
+    [_doneButtonView setHidden:NO];
+    [self showHideTextPicker:YES];
+   
+}
+
+- (IBAction)untechCustomClick:(id)sender {
+   
+    NSLog(@"Go To add untechable screen");
+    AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
+    
+    addUntechable.untechable = untechable;
+    addUntechable.indexOfUntechableInEditMode = -1;
+    [self.navigationController pushViewController:addUntechable animated:YES];
+    
+}
+- (IBAction)btnDoneClick:(id)sender {
+    [_timeDurationPicker setHidden:YES];
+    [_doneButtonView setHidden:YES];
+}
 @end

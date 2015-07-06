@@ -66,11 +66,10 @@ NSMutableArray *allUntechables;
         // else show untechable list..
         allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
         if ( allUntechables.count <= 0 ){
+           
+            UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
             
-            //For testing -------- } --
-            UntechOptionsViewController *mainViewController = [[UntechOptionsViewController alloc] initWithNibName:@"UntechOptionsViewController" bundle:nil];
-            
-            mainViewController.untechable = untechable;
+            mainViewController.untechablesTable = untechable;
             navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
             
         } else {
