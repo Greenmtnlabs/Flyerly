@@ -52,10 +52,10 @@
 		2448343D1A5D776200E6F173 /* phone_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2448343A1A5D776200E6F173 /* phone_selected@3x.png */; };
 		2448343E1A5D776200E6F173 /* sms_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2448343B1A5D776200E6F173 /* sms_selected@3x.png */; };
 		244834401A5D915D00E6F173 /* sms@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2448343F1A5D915D00E6F173 /* sms@3x.png */; };
+		2448AC391B4A492E0087FF3E /* SetupGuideSecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2448AC381B4A492E0087FF3E /* SetupGuideSecondViewController.xib */; };
 		247402421B33CBD700459759 /* SetupGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 247402401B33CBD700459759 /* SetupGuideViewController.m */; };
 		247402431B33CBD700459759 /* SetupGuideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 247402411B33CBD700459759 /* SetupGuideViewController.xib */; };
 		2474024A1B34198400459759 /* SetupGuideSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 247402481B34198400459759 /* SetupGuideSecondViewController.m */; };
-		2474024B1B34198400459759 /* SetupGuideSecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 247402491B34198400459759 /* SetupGuideSecondViewController.xib */; };
 		2474025F1B3425A400459759 /* navigation1_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2474025E1B3425A400459759 /* navigation1_2x.png */; };
 		247402681B3425C600459759 /* navigation1_3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 247402601B3425C600459759 /* navigation1_3x.png */; };
 		247402691B3425C600459759 /* navigation1.png in Resources */ = {isa = PBXBuildFile; fileRef = 247402611B3425C600459759 /* navigation1.png */; };
@@ -307,12 +307,12 @@
 		2448343A1A5D776200E6F173 /* phone_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone_selected@3x.png"; sourceTree = "<group>"; };
 		2448343B1A5D776200E6F173 /* sms_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sms_selected@3x.png"; sourceTree = "<group>"; };
 		2448343F1A5D915D00E6F173 /* sms@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sms@3x.png"; sourceTree = "<group>"; };
+		2448AC381B4A492E0087FF3E /* SetupGuideSecondViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetupGuideSecondViewController.xib; sourceTree = "<group>"; };
 		2474023F1B33CBD700459759 /* SetupGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupGuideViewController.h; sourceTree = "<group>"; };
 		247402401B33CBD700459759 /* SetupGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupGuideViewController.m; sourceTree = "<group>"; };
 		247402411B33CBD700459759 /* SetupGuideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetupGuideViewController.xib; sourceTree = "<group>"; };
 		247402471B34198400459759 /* SetupGuideSecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupGuideSecondViewController.h; sourceTree = "<group>"; };
 		247402481B34198400459759 /* SetupGuideSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupGuideSecondViewController.m; sourceTree = "<group>"; };
-		247402491B34198400459759 /* SetupGuideSecondViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetupGuideSecondViewController.xib; sourceTree = "<group>"; };
 		2474025E1B3425A400459759 /* navigation1_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigation1_2x.png; sourceTree = "<group>"; };
 		247402601B3425C600459759 /* navigation1_3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigation1_3x.png; sourceTree = "<group>"; };
 		247402611B3425C600459759 /* navigation1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigation1.png; sourceTree = "<group>"; };
@@ -632,12 +632,12 @@
 		2474023E1B33CB7900459759 /* SetupGuide */ = {
 			isa = PBXGroup;
 			children = (
+				2448AC381B4A492E0087FF3E /* SetupGuideSecondViewController.xib */,
 				2474023F1B33CBD700459759 /* SetupGuideViewController.h */,
 				247402401B33CBD700459759 /* SetupGuideViewController.m */,
 				247402411B33CBD700459759 /* SetupGuideViewController.xib */,
 				247402471B34198400459759 /* SetupGuideSecondViewController.h */,
 				247402481B34198400459759 /* SetupGuideSecondViewController.m */,
-				247402491B34198400459759 /* SetupGuideSecondViewController.xib */,
 				24AFE7981B38086A00CC8230 /* SetupGuideThirdView.h */,
 				24AFE7991B38086A00CC8230 /* SetupGuideThirdView.m */,
 				24AFE79A1B38086A00CC8230 /* SetupGuideThirdView.xib */,
@@ -1231,7 +1231,6 @@
 				36B276781A0124E800ED58AD /* record_gray@2x.png in Resources */,
 				366ECD9C19D323E200F71A11 /* PhoneSetupController.xib in Resources */,
 				2486CBA51A5A79AC00AC125E /* sms.png in Resources */,
-				2474024B1B34198400459759 /* SetupGuideSecondViewController.xib in Resources */,
 				36B2767D1A0124E800ED58AD /* searchicon@2x.png in Resources */,
 				36B276711A0124E800ED58AD /* pause.png in Resources */,
 				243C59FA1A4D984B0020350C /* PhoneNumberCell.xib in Resources */,
@@ -1321,6 +1320,7 @@
 				C346D17A1A7FD13B00856A58 /* login.png in Resources */,
 				2499521A1A56C905001AEB84 /* Entypo.otf in Resources */,
 				366EAFA71A14C3530011D6C6 /* CHECKBOX_EMPTY.png in Resources */,
+				2448AC391B4A492E0087FF3E /* SetupGuideSecondViewController.xib in Resources */,
 				200ACE301A3874B200DC7047 /* outlookIcon.png in Resources */,
 				366EAFAA1A14E5370011D6C6 /* playvideo.png in Resources */,
 				2474026C1B3425C600459759 /* navigation2.png in Resources */,
