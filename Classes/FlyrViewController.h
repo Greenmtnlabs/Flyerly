@@ -46,6 +46,7 @@
     NSArray *requestedProducts;
     RMStoreKeychainPersistence *_persistence;
     PrintViewController *printViewController;
+    UIButton *helpButton, *backButton;
 }
 
 
@@ -55,6 +56,7 @@
 @property ( nonatomic, strong ) NSMutableArray *flyerPaths;
 @property ( nonatomic, strong ) Flyer *flyer;
 @property (nonatomic, strong) UIView *sharePanel;
+@property (nonatomic, strong) UIAlertView *signInAlert;
 
 
 -(void)goBack;

@@ -16,14 +16,16 @@
 @synthesize sharePanel,tView;
 @synthesize searchTextField;
 @synthesize flyerPaths;
-@synthesize flyer;
+@synthesize flyer, signInAlert;
 
+id lastShareBtnSender;
 
 #pragma mark  View Methods
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    lastShareBtnSender = nil;
     
     UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
     [UserVoice initialize:config];
@@ -228,13 +230,13 @@
 -(NSArray *)leftBarItems{
     
     // Create left bar help button
-    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
     [helpButton setImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
     helpButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
    
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"home_button"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
@@ -343,8 +345,6 @@
             [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
             cell.shareBtn.tag = indexPath.row;
             [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
-            
-
             
         });
 
@@ -456,6 +456,27 @@
     [inappviewcontroller inAppDataLoaded];
 }
 
+#pragma mark - UIAlertView delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if(alertView == signInAlert && buttonIndex == 0) {
+        [self enableBtns:YES];
+        [self hideLoadingIndicator];
+    } else if(alertView == signInAlert && buttonIndex == 1) {
+        [self signInRequired];
+    }
+}
+
+
+-(void)enableHome:(BOOL)enable{
+    [self enableBtns:YES];
+}
+//Enable buttons
+-(void)enableBtns:(BOOL)enable{
+    backButton.enabled = enable;
+    helpButton.enabled = enable;
+}
+
 /*
  * Here we Open InAppPurchase Panel
  */
@@ -477,7 +498,6 @@
     UIButton *clickButton = sender;
     NSInteger row = clickButton.tag; ///will get it from button tag
     flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:row] setDirectory:NO];
-    NSLog(@"Share");
     
     if ( [[PFUser currentUser] sessionToken] ) {
         sharePanel.hidden = NO;
@@ -585,10 +605,10 @@
             [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height-550, 420,550 )];
         }
         [UIView commitAnimations];
-        
+        [self enableBtns:YES];
         [self hideLoadingIndicator];
         
-    } else { /*
+    } else {
         // Alert when user logged in as anonymous
         signInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In"
                                                  message:@"The selected feature requires that you sign in. Would you like to register or sign in now?"
@@ -597,17 +617,12 @@
                                        otherButtonTitles:@"Sign In",nil];
         
         
-        if ( !self.interstitialAdd.hasBeenUsed )
-            [signInAlert show];*/
+        if ( !self.interstitial.hasBeenUsed )
+            [signInAlert show];
     }
     
 }
 
--(void)enableHome:(BOOL)enable{
-    
-    //[backButton setEnabled:enable];
-    
-}
 
 - (void)printFlyer {
     
@@ -638,33 +653,38 @@
     
     __weak InAppViewController *inappviewcontroller_ = inappviewcontroller;
     if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Sign In")]) {
-        
-        signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
-        
-        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        signInController.launchController = appDelegate.lauchController;
-        
-        __weak FlyrViewController *flyrViewController = self;
-        
-        UserPurchases *userPurchases_ = [UserPurchases getInstance];
-        
-        userPurchases_.delegate = self;
-        
         [inappviewcontroller_.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-        
-        signInController.signInCompletion = ^void(void) {
-            
-            UINavigationController* navigationController = flyrViewController.navigationController;
-            [navigationController popViewControllerAnimated:NO];
-        };
-        
-        [self.navigationController pushViewController:signInController animated:YES];
-        
+        [self signInRequired];
     }else if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Restore Purchases")]){
-        
-        
         [inappviewcontroller_ restorePurchase];
     }
+}
+
+-(void)signInRequired {
+    signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    signInController.launchController = appDelegate.lauchController;
+
+    __weak FlyrViewController *flyrViewController = self;
+
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
+
+    userPurchases_.delegate = self;
+
+    signInController.signInCompletion = ^void(void) {
+        UINavigationController* navigationController = flyrViewController.navigationController;
+        [navigationController popViewControllerAnimated:NO];
+        [userPurchases_ setUserPurcahsesFromParse];
+
+        if( lastShareBtnSender != nil ){
+            [flyrViewController onShare:lastShareBtnSender];
+        }
+        [self enableBtns:YES];
+        [flyrViewController hideLoadingIndicator];
+    };
+
+    [self.navigationController pushViewController:signInController animated:YES];
 }
 
 - (void) userPurchasesLoaded {
