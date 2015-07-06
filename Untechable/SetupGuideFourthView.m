@@ -1,42 +1,31 @@
 //
-//  SetupGuideThirdView.m
+//  SetupGuideFourthView.m
 //  Untechable
 //
-//  Created by RIKSOF Developer on 6/22/15.
+//  Created by RIKSOF Developer on 6/30/15.
 //  Copyright (c) 2015 Green MTN Labs Inc. All rights reserved.
 //
 
-#import "SetupGuideThirdView.h"
-#import "SetupGuideSecondViewController.h"
-#import "ContactsListControllerViewController.h"
-#import "UntechablesList.h"
 #import "SetupGuideFourthView.h"
+#import "SocialnetworkController.h"
+#import "UntechablesList.h"
 
-@interface SetupGuideThirdView () {
-    
-    ContactsListControllerViewController *viewControllerToAdd;
-}
+@interface SetupGuideFourthView ()
+
 @end
 
-@implementation SetupGuideThirdView
+@implementation SetupGuideFourthView
 
 @synthesize untechable;
 
 - (void)viewDidLoad {
-    
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
     //navigation related Stuff
     [self setNavigationBarItems];
     
-    //setting up a view and showing contact list in it
-    [self setupContactView];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [self setupShareScreen];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -50,19 +39,11 @@
     [self setNavigation:@"viewDidLoad"];
 }
 
--(void)setupContactView {
-    
-     viewControllerToAdd = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
-    
-    viewControllerToAdd.untechable = untechable;
-    
-    [viewControllerToAdd willMoveToParentViewController:self];
-    [self.viewForContacts addSubview:viewControllerToAdd.view];
-    [self addChildViewController:viewControllerToAdd];
-
-    [viewControllerToAdd didMoveToParentViewController:self];
-    
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
+
 
 #pragma - mark setting navigation bar related stuff
 -(void) setNavigationBarItems {
@@ -104,9 +85,9 @@
         nextButton.titleLabel.shadowColor = [UIColor clearColor];
         
         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
-
+        
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
+        [nextButton setTitle:TITLE_DONE_TXT forState:normal];
         [nextButton setTitleColor:defGray forState:UIControlStateNormal];
         [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
         [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
@@ -131,30 +112,47 @@
 }
 
 -(void)onNext{
-
-    [self saveBeforeGoing];
     
-    SetupGuideFourthView *fourthScreen = [[SetupGuideFourthView alloc] initWithNibName:@"SetupGuideFourthView" bundle:nil];
-    fourthScreen.untechable = untechable;
-    [self.navigationController pushViewController:fourthScreen animated:YES];
+    UIAlertView *congratesAlert = [[UIAlertView alloc]initWithTitle:@"Congratulation" message:@"Thank you for setting up your Untech settings. Now you can easily become Untechable whenever you need a break from technology in order to spend more time with the people & experiencing the things that are most important." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [congratesAlert show];
+    
 }
 
 -(void) goBack {
     
     UINavigationController *navigationController = self.navigationController;
     [navigationController popViewControllerAnimated:YES];
-    [self saveBeforeGoing];
     
 }
-
--(void)saveBeforeGoing {
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
-    NSMutableArray *customizedContactsFromSetup = [viewControllerToAdd currentlyEditingContacts];
-    untechable.customizedContactsForCurrentSession = customizedContactsFromSetup;
-    NSString *customizeContactsForCurrentSession = [untechable.commonFunctions convertCCMArrayIntoJsonString:customizedContactsFromSetup];
-
-    [[NSUserDefaults standardUserDefaults] setObject:customizeContactsForCurrentSession forKey:@"customizedContactsFromSetup"];
+    //we're assuming cancel as done because there is only one button on the alert
+    if( buttonIndex == [alertView cancelButtonIndex] ) {
+        
+        UntechablesList *untechScreen = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
+        //untechScreen.untechable = untechable;
+        [self.navigationController pushViewController:untechScreen animated:YES];
+        
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+
 }
+
+-(void)setupShareScreen {
+    
+    SocialnetworkController *viewControllerToAdd = [[SocialnetworkController alloc] initWithNibName:@"SocialnetworkController" bundle:nil];
+    
+    viewControllerToAdd.untechable = untechable;
+    
+    [viewControllerToAdd willMoveToParentViewController:self];
+    [self.viewForShareScreen addSubview:viewControllerToAdd.view];
+    [self addChildViewController:viewControllerToAdd];
+    
+    [viewControllerToAdd didMoveToParentViewController:self];
+    
+}
+
 
 @end
