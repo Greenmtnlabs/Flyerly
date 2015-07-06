@@ -497,7 +497,12 @@ id lastShareBtnSender;
 -(void)onShare:(id)sender {
     UIButton *clickButton = sender;
     NSInteger row = clickButton.tag; ///will get it from button tag
-    flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:row] setDirectory:NO];
+    if([searchTextField.text isEqualToString:@""]) {
+        flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:row] setDirectory:NO];
+    } else{
+        flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:row] setDirectory:NO];
+    }
+    
     
     if ( [[PFUser currentUser] sessionToken] ) {
         [self enableBtns:NO];
