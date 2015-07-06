@@ -21,9 +21,11 @@
 #import "GADInterstitialDelegate.h"
 #import "GADInterstitial.h"
 #import "GADInterstitialDelegate.h"
+#import "InviteForPrint.h"
+#import "PrintViewController.h"
 
 
-@class SaveFlyerCell, Flyer, SigninController, RegisterController, InAppViewController, CreateFlyerController,ShareViewController;
+@class SaveFlyerCell, Flyer, SigninController, RegisterController, InAppViewController, CreateFlyerController,ShareViewController,PrintViewController;
 
 @interface FlyrViewController : ParentViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,RMStoreObserver,InAppPurchasePanelButtonProtocol, UserPurchasesDelegate ,GADInterstitialDelegate>{
 
@@ -43,6 +45,8 @@
     NSMutableArray *searchFlyerPaths;
     NSArray *requestedProducts;
     RMStoreKeychainPersistence *_persistence;
+    PrintViewController *printViewController;
+    UIButton *helpButton, *backButton;
 }
 
 
@@ -51,11 +55,15 @@
 @property ( nonatomic, strong ) IBOutlet UITextField *searchTextField;
 @property ( nonatomic, strong ) NSMutableArray *flyerPaths;
 @property ( nonatomic, strong ) Flyer *flyer;
+@property (nonatomic, strong) UIView *sharePanel;
+@property (nonatomic, strong) UIAlertView *signInAlert;
 
 
 -(void)goBack;
 -(NSMutableArray *)getFlyersPaths;
 -(IBAction)createFlyer:(id)sender;
 
+-(void)printFlyer;
+-(void)enableHome:(BOOL)enable;
 
 @end

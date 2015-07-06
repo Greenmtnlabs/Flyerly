@@ -115,5 +115,6 @@
 -(void)shareOnInstagram;
 -(void)setSocialStatus;
 -(void)enableAllShareOptions;
+-(void)setStarsofShareScreen :(NSString *)rate;
 
 @end

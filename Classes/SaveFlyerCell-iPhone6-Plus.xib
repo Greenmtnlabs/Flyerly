@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -85,6 +85,14 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wTy-hl-yka">
+                        <rect key="frame" x="262" y="74" width="45" height="20"/>
+                        <color key="backgroundColor" red="0.81691929299999999" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                        <state key="normal" title="Share">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
             </tableViewCellContentView>
             <connections>
@@ -96,6 +104,7 @@
                 <outlet property="flyerLock" destination="XBs-Lj-INJ" id="R3a-Xy-Ltk"/>
                 <outlet property="lockImage" destination="Kjf-Iy-JgA" id="h5w-Cb-9ZO"/>
                 <outlet property="nameLabel" destination="yqm-e3-DZR" id="fdh-3a-rmR"/>
+                <outlet property="shareBtn" destination="wTy-hl-yka" id="hMe-2m-9ao"/>
                 <outlet property="updatedDateLabel" destination="maR-IX-wF0" id="B36-fM-qfG"/>
                 <outlet property="updatedLabel" destination="yDa-FD-d2p" id="hfC-rj-6QS"/>
                 <outletCollection property="socialStatus" destination="y64-mj-4z1" id="fLM-aQ-bQd"/>
