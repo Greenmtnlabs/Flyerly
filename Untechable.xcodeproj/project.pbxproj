@@ -88,6 +88,8 @@
 		2499521A1A56C905001AEB84 /* Entypo.otf in Resources */ = {isa = PBXBuildFile; fileRef = 249952181A56C905001AEB84 /* Entypo.otf */; };
 		2499521D1A56F260001AEB84 /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = 2499521B1A56F260001AEB84 /* email.png */; };
 		2499521E1A56F260001AEB84 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 2499521C1A56F260001AEB84 /* phone.png */; };
+		24A0EA6D1B42522C0008081A /* SetupGuideFourthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A0EA6B1B42522C0008081A /* SetupGuideFourthView.m */; };
+		24A0EA6E1B42522C0008081A /* SetupGuideFourthView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A0EA6C1B42522C0008081A /* SetupGuideFourthView.xib */; };
 		24A4B7A71A5126410029C8DF /* CustomTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A4B7A51A5126410029C8DF /* CustomTextTableViewCell.m */; };
 		24A4B7A81A5126410029C8DF /* CustomTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A4B7A61A5126410029C8DF /* CustomTextTableViewCell.xib */; };
 		24A65BEC1A30451E00BE83C6 /* SSLCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A65BEA1A30451E00BE83C6 /* SSLCell.m */; };
@@ -347,6 +349,9 @@
 		249952181A56C905001AEB84 /* Entypo.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.otf; sourceTree = "<group>"; };
 		2499521B1A56F260001AEB84 /* email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email.png; sourceTree = "<group>"; };
 		2499521C1A56F260001AEB84 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
+		24A0EA6A1B42522C0008081A /* SetupGuideFourthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupGuideFourthView.h; sourceTree = "<group>"; };
+		24A0EA6B1B42522C0008081A /* SetupGuideFourthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupGuideFourthView.m; sourceTree = "<group>"; };
+		24A0EA6C1B42522C0008081A /* SetupGuideFourthView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetupGuideFourthView.xib; sourceTree = "<group>"; };
 		24A4B7A41A5126410029C8DF /* CustomTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTextTableViewCell.h; sourceTree = "<group>"; };
 		24A4B7A51A5126410029C8DF /* CustomTextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTextTableViewCell.m; sourceTree = "<group>"; };
 		24A4B7A61A5126410029C8DF /* CustomTextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTextTableViewCell.xib; sourceTree = "<group>"; };
@@ -641,6 +646,9 @@
 				24AFE7981B38086A00CC8230 /* SetupGuideThirdView.h */,
 				24AFE7991B38086A00CC8230 /* SetupGuideThirdView.m */,
 				24AFE79A1B38086A00CC8230 /* SetupGuideThirdView.xib */,
+				24A0EA6A1B42522C0008081A /* SetupGuideFourthView.h */,
+				24A0EA6B1B42522C0008081A /* SetupGuideFourthView.m */,
+				24A0EA6C1B42522C0008081A /* SetupGuideFourthView.xib */,
 			);
 			name = SetupGuide;
 			sourceTree = "<group>";
@@ -1399,6 +1407,7 @@
 				36B276721A0124E800ED58AD /* pause@2x.png in Resources */,
 				366EAF941A14C3530011D6C6 /* icon-60.png in Resources */,
 				C346D1831A7FD13B00856A58 /* facebook.png in Resources */,
+				24A0EA6E1B42522C0008081A /* SetupGuideFourthView.xib in Resources */,
 				C33C1EDB1A72274F0064DBE8 /* EmailTableViewCell-iPhone6.xib in Resources */,
 				2448343D1A5D776200E6F173 /* phone_selected@3x.png in Resources */,
 				200ACE271A3874B200DC7047 /* exchangeIcon.png in Resources */,
@@ -1481,6 +1490,7 @@
 				366ECD7E19D3135200F71A11 /* Untechable.m in Sources */,
 				24848FE71A30403600BF1138 /* ServerAccountDetailsViewCell.m in Sources */,
 				C36D2E581A7919C2000537C5 /* SettingsCellView.m in Sources */,
+				24A0EA6D1B42522C0008081A /* SetupGuideFourthView.m in Sources */,
 				243C59E01A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.m in Sources */,
 				36FD975519E694AC00427507 /* BSKeyboardControls.m in Sources */,
 				C3CA4DD51A80CE0700B03A23 /* SocialNetworksStatusModal.m in Sources */,

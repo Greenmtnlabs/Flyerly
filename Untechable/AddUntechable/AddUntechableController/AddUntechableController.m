@@ -138,7 +138,7 @@
  we need to set some ui fields
  **/
 -(void)viewWillAppear:(BOOL)animated {
-    [self setPickerValue];
+   // [self setPickerValue];
 }
 // ________________________     Custom functions    ___________________________
 #pragma mark - Text Field Delegate
@@ -505,6 +505,10 @@
 
     now1 = [NSDate date]; //current date
     
+    //init object
+    untechable  = [[Untechable alloc] init];
+    untechable.commonFunctions = [[CommonFunctions alloc] init];
+
     //Set Date formate
     untechable.dateFormatter = [[NSDateFormatter alloc] init];
     [untechable.dateFormatter setDateFormat:DATE_FORMATE_1];
@@ -515,48 +519,44 @@
     
     NSMutableDictionary *sUntechable = nil;
     
-    BOOL calledFromSetupScreen = SetupGuideThirdView.calledFromSetup;
-    if( !calledFromSetupScreen ) {
-        
-        BOOL isNew = YES;
-        
-        //When we are going to edit event
-        if ( indexOfUntechableInEditMode > -1 ){ //&& [untechable.commonFunctions getAllUntechables:untechable.userId].count > 0){
-            sUntechable = [untechable.commonFunctions getUntechable:indexOfUntechableInEditMode UserId:untechable.userId];
-            if( sUntechable != nil ){
-                isNew = NO;
-            }
-        }
-        
-        //Check is there any incomplete untechable exist ?
-        if( isNew == YES ){
-            sUntechable = [untechable.commonFunctions getAnyInCompleteUntechable:untechable.userId];
-            
-            if( sUntechable != nil ){
-                isNew = NO;
-                callReset = @"RESET1";
-            }
-        }
-        
-        
-        //Old Untechable going to edit, set the vars
+    BOOL isNew = YES;
+    
+    //When we are going to edit event
+    if ( indexOfUntechableInEditMode > -1 ){ //&& [untechable.commonFunctions getAllUntechables:untechable.userId].count > 0){
+        sUntechable = [untechable.commonFunctions getUntechable:indexOfUntechableInEditMode UserId:untechable.userId];
         if( sUntechable != nil ){
-            //Settings required for calling initUntechableDirectory
-            untechable.uniqueId = sUntechable[@"uniqueId"];
-            untechable.untechablePath = sUntechable[@"untechablePath"];
-            [untechable initUntechableDirectory];
+            isNew = NO;
         }
-        else if( isNew ) {
-            [untechable initWithDefValues];
-            [untechable initUntechableDirectory];
-            callReset = @"";
-        }
+    }
+    
+    //Check is there any incomplete untechable exist ?
+    if( isNew == YES ){
+        sUntechable = [untechable.commonFunctions getAnyInCompleteUntechable:untechable.userId];
         
-        
-        if( ![callReset isEqualToString:@""] ){
-            [self resetUntechable:callReset];
+        if( sUntechable != nil ){
+            isNew = NO;
+            callReset = @"RESET1";
         }
-    }    
+    }
+    
+    
+    //Old Untechable going to edit, set the vars
+    if( sUntechable != nil ){
+        //Settings required for calling initUntechableDirectory
+        untechable.uniqueId = sUntechable[@"uniqueId"];
+        untechable.untechablePath = sUntechable[@"untechablePath"];
+        [untechable initUntechableDirectory];
+    }
+    else if( isNew ) {
+        [untechable initWithDefValues];
+        [untechable initUntechableDirectory];
+        callReset = @"";
+    }
+    
+    
+    if( ![callReset isEqualToString:@""] ){
+        [self resetUntechable:callReset];
+    }
 }
 
 -(void)resetUntechable:(NSString *)callResetFor{

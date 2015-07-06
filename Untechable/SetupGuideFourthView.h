@@ -1,8 +1,8 @@
 //
-//  SetupGuideThirdView.h
+//  SetupGuideFourthView.h
 //  Untechable
 //
-//  Created by RIKSOF Developer on 6/22/15.
+//  Created by RIKSOF Developer on 6/30/15.
 //  Copyright (c) 2015 Green MTN Labs Inc. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 #import "Untechable.h"
 #import "Common.h"
 
-@interface SetupGuideThirdView : UIViewController {
+@interface SetupGuideFourthView : UIViewController <UIAlertViewDelegate>{
     UILabel *titleLabel;
     UIButton *backButton;
     UIButton *nextButton;
@@ -18,8 +18,8 @@
     UIColor *defGray;//GRAY
 }
 
-//Properties
 @property (nonatomic,strong)  Untechable *untechable;
-@property (weak, nonatomic) IBOutlet UIView *viewForContacts;
+
+@property (weak, nonatomic) IBOutlet UIView *viewForShareScreen;
 
 @end
