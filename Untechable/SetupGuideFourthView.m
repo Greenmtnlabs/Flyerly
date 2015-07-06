@@ -133,11 +133,11 @@
         untechScreen.untechable = untechable;
         [self.navigationController pushViewController:untechScreen animated:YES];
         
+        // flag that tells if app setup has been completed so dont show setup again on
+        // the next Run or Launch.
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
-    
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-
 }
 
 -(void)setupShareScreen {
