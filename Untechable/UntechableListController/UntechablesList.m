@@ -12,6 +12,7 @@
 #import "SettingsViewController.h"
 #import "Common.h"
 #import "Untechable.h"
+#import "ThankyouController.h"
 
 
 @interface UntechablesList () {
@@ -22,6 +23,7 @@
     
     NSArray *_pickerData;
     int timeDuration;
+    NSString *timeInString;
 
 }
 
@@ -147,15 +149,7 @@ int indexArrayS2[];
 - (void)viewWillAppear:(BOOL)animated{
     
     allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
-    
-    if ( allUntechables.count <= 0 ){
         
-        AddUntechableController *mainViewController = [[AddUntechableController alloc] initWithNibName:@"AddUntechableController" bundle:nil];
-        mainViewController.untechable = untechable;
-        [self.navigationController pushViewController:mainViewController animated:YES];
-        
-    }
-    
     [self setNumberOfRowsInSection];
     
     untechablesTable.separatorInset = UIEdgeInsetsZero;
@@ -183,6 +177,7 @@ int indexArrayS2[];
     
     //setting default time duration for untech now
     timeDuration = 30*60;
+    timeInString = @"30 minutes";
 }
 
 // Override to support conditional editing of the table view.
@@ -682,22 +677,27 @@ int indexArrayS2[];
     switch (row) {
         case 0:
             timeDuration = 30*60; //30 minutes
+            timeInString = @"30 minutes";
             break;
             
         case 1:
             timeDuration = 60*60; //1 hr
+            timeInString = @"1 hour";
             break;
         
         case 2:
             timeDuration = 24*60*60; //1 day
+            timeInString = @"1 Day";
             break;
         
         case 3:
             timeDuration = 2*24*60*60; //2 days
+            timeInString = @"2 Days";
             break;
             
         default:
             timeDuration = 30*60; //30 minutes
+            timeInString = @"30 minutes";
             break;
     }
 }
@@ -759,7 +759,7 @@ int indexArrayS2[];
     
     //Background work
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        
+        [untechable setOrSaveVars:@"SAVE"];
         [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
             
             if( !([message isEqualToString:@""]) ) {
@@ -776,6 +776,7 @@ int indexArrayS2[];
             else{
                 dispatch_async( dispatch_get_main_queue(), ^{
                     [self changeNavigation:@"ON_FINISH_SUCCESS"];
+                    [self goToThankyouScreen];
                 });
             }
             
@@ -793,9 +794,62 @@ int indexArrayS2[];
     
     [untechable initWithDefValues];
     [untechable initUntechableDirectory];
-    untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(0)] ]; //current time + time duration
+    untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60)] ]; //current time + time duration
     
-    untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)] ]; //start time +1 Day
+    untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)+60] ]; //start time +1 Day
+    
+    // the selected status from the setup screen would be set as default status on unetch now option
+    NSInteger positionOfSelectedStatusFromArray = [[NSUserDefaults standardUserDefaults] integerForKey:@"positionToRemember"];
+    NSArray *customArrayOfStatuses = [[NSUserDefaults standardUserDefaults]objectForKey:@"spendingTimeText"];
+    NSString *selectedStatus = [customArrayOfStatuses objectAtIndex:positionOfSelectedStatusFromArray];
+    //setting spending time text to status got from setup screen.
+    untechable.spendingTimeTxt = selectedStatus;
+    NSString *socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", timeInString, untechable.spendingTimeTxt];
+    untechable.socialStatus = socialStatus;
+    [self getAuthsOfSocialMedias];
+}
 
+/**
+ Social Medias Auths are in device and we can get them and use them
+ **/
+-( void ) getAuthsOfSocialMedias {
+    
+    NSString *fbAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuth"];
+    fbAuth = ( fbAuth ) ? fbAuth : @"";
+    
+    NSString *fbAuthExpiryTs = [[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuthExpiryTs"];
+    fbAuthExpiryTs = ( fbAuthExpiryTs ) ? fbAuthExpiryTs : @"";
+    
+    NSString *twitterAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuth"];
+    twitterAuth = (twitterAuth) ? twitterAuth : @"";
+    
+    NSString *twOAuthTokenSecret = [[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuthTokkenSecerate"];
+    twOAuthTokenSecret = (twOAuthTokenSecret) ? (twOAuthTokenSecret) : @"";
+    
+    NSString *linkedinAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"linkedinAuth" ];
+    linkedinAuth = (linkedinAuth) ? linkedinAuth : @"";
+    
+    NSString *email = [[NSUserDefaults standardUserDefaults] objectForKey:@"email" ];
+    email = (email) ? email : @"";
+    
+    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:@"password" ];
+    password = (password) ? password : @"";
+    
+    untechable.fbAuth = fbAuth;
+    untechable.fbAuthExpiryTs = fbAuthExpiryTs;
+    untechable.twitterAuth = twitterAuth;
+    untechable.twOAuthTokenSecret = twOAuthTokenSecret;
+    untechable.linkedinAuth = linkedinAuth;
+    untechable.email = email;
+    untechable.password = password;
+}
+
+/**
+ navigate to thank you controller screen when successfully user create an untech
+ **/
+-( void ) goToThankyouScreen {
+    ThankyouController *thankyouScreen = [[ThankyouController alloc] init];
+    thankyouScreen.untechable = untechable;
+    [self.navigationController pushViewController:thankyouScreen animated:YES];
 }
 @end
