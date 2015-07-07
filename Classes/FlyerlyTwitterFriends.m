@@ -70,7 +70,7 @@
     
     // Setup the request
     if ( account ) {
-        SLRequest *twitterRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodGET URL:[NSURL URLWithString:@"https://api.twitter.com/1.1/followers/list.json"] parameters:[NSDictionary dictionaryWithObjectsAndKeys:account.username, @"screen_name", nextCursor, @"cursor", nil]];
+        SLRequest *twitterRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodGET URL:[NSURL URLWithString:@"https://api.twitter.com/1.1/followers/list.json"] parameters:[NSDictionary dictionaryWithObjectsAndKeys:account.username, @"screen_name", [cursor stringValue], @"cursor", nil]];
     
         // This is important! Set the account for the request so we can do an authenticated request. Without this you cannot get the followers for private accounts and Twitter may also return an error if you're doing too many requests
         [twitterRequest setAccount:account];
