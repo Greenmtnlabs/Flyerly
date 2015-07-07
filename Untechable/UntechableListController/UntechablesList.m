@@ -796,6 +796,12 @@ int indexArrayS2[];
     untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(0)] ]; //current time + time duration
     
     untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)] ]; //start time +1 Day
-
+    
+    // the selected status from the setup screen would be set as default status on unetch now option
+    NSInteger positionOfSelectedStatusFromArray = [[NSUserDefaults standardUserDefaults] integerForKey:@"positionToRemember"];
+    NSArray *customArrayOfStatuses = [[NSUserDefaults standardUserDefaults]objectForKey:@"spendingTimeText"];
+    
+    NSString *selectedStatus = [customArrayOfStatuses objectAtIndex:positionOfSelectedStatusFromArray];
+    untechable.spendingTimeTxt = selectedStatus;
 }
 @end
