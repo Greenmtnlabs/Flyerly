@@ -797,6 +797,29 @@ int indexArrayS2[];
     NSString *selectedStatus = [customArrayOfStatuses objectAtIndex:positionOfSelectedStatusFromArray];
     //setting spending time text to status got from setup screen.
     untechable.spendingTimeTxt = selectedStatus;
+    
+    [self getAuthsOfSocialMedias];
+}
+
+/**
+ Social Medias Auths are in device and we can get them and use them
+ **/
+-( void ) getAuthsOfSocialMedias {
+    NSString *fbAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuth"];
+    NSString *fbAuthExpiryTs = [[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuthExpiryTs"];
+    NSString *twitterAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuth"];
+   // NSString *twOAuthTokenSecret = [[NSUserDefaults standardUserDefaults] objectForKey:@"twOAuthTokenSecret" ];
+   // NSString *linkedinAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"linkedinAuth" ];
+   // NSString *email = [[NSUserDefaults standardUserDefaults] objectForKey:@"email" ];
+  //  NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:@"password" ];
+    
+    untechable.fbAuth = fbAuth;
+    untechable.fbAuthExpiryTs = fbAuthExpiryTs;
+    untechable.twitterAuth = twitterAuth;
+   // untechable.twOAuthTokenSecret = twOAuthTokenSecret;
+    //untechable.linkedinAuth = linkedinAuth;
+//untechable.email = email;
+    //untechable.password = password;
 }
 
 /**
