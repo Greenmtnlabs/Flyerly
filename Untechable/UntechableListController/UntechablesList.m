@@ -23,6 +23,7 @@
     
     NSArray *_pickerData;
     int timeDuration;
+    NSString *timeInString;
 
 }
 
@@ -176,6 +177,7 @@ int indexArrayS2[];
     
     //setting default time duration for untech now
     timeDuration = 30*60;
+    timeInString = @"30 minutes";
 }
 
 // Override to support conditional editing of the table view.
@@ -675,22 +677,27 @@ int indexArrayS2[];
     switch (row) {
         case 0:
             timeDuration = 30*60; //30 minutes
+            timeInString = @"30 minutes";
             break;
             
         case 1:
             timeDuration = 60*60; //1 hr
+            timeInString = @"1 hour";
             break;
         
         case 2:
             timeDuration = 24*60*60; //1 day
+            timeInString = @"1 Day";
             break;
         
         case 3:
             timeDuration = 2*24*60*60; //2 days
+            timeInString = @"2 Days";
             break;
             
         default:
             timeDuration = 30*60; //30 minutes
+            timeInString = @"30 minutes";
             break;
     }
 }
@@ -787,9 +794,9 @@ int indexArrayS2[];
     
     [untechable initWithDefValues];
     [untechable initUntechableDirectory];
-    untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(0)] ]; //current time + time duration
+    untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60)] ]; //current time + time duration
     
-    untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)] ]; //start time +1 Day
+    untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)+60] ]; //start time +1 Day
     
     // the selected status from the setup screen would be set as default status on unetch now option
     NSInteger positionOfSelectedStatusFromArray = [[NSUserDefaults standardUserDefaults] integerForKey:@"positionToRemember"];
@@ -797,6 +804,8 @@ int indexArrayS2[];
     NSString *selectedStatus = [customArrayOfStatuses objectAtIndex:positionOfSelectedStatusFromArray];
     //setting spending time text to status got from setup screen.
     untechable.spendingTimeTxt = selectedStatus;
+    NSString *socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", timeInString, untechable.spendingTimeTxt];
+    untechable.socialStatus = socialStatus;
     
     [self getAuthsOfSocialMedias];
 }
