@@ -995,15 +995,18 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template66.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="3yJ-1T-GnY">
                     <rect key="frame" x="92" y="890" width="65" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" tag="74" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template74.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="xUp-NQ-g1b" userLabel="Image View - Template74.jpg">
-                    <rect key="frame" x="95" y="217" width="65" height="58"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <imageView userInteractionEnabled="NO" tag="16" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template16.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Mrp-y3-GRJ">
+                    <rect key="frame" x="169" y="890" width="65" height="58"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template0.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Nrs-uo-jgL">
                     <rect key="frame" x="15" y="11" width="65" height="58"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="8LT-2z-Aek">
                     <rect key="frame" x="92" y="14" width="65" height="58"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" tag="74" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template74.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="xUp-NQ-g1b" userLabel="Image View - Template74.jpg">
+                    <rect key="frame" x="95" y="217" width="65" height="58"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template75.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="oH7-ra-MMK" userLabel="Template75.jpg">
                     <rect key="frame" x="246" y="890" width="65" height="58"/>
@@ -1064,9 +1067,6 @@
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template94.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="jGA-75-nJc" userLabel="Template94.jpg">
                     <rect key="frame" x="169" y="1158" width="65" height="58"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" tag="16" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template16.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Mrp-y3-GRJ">
-                    <rect key="frame" x="169" y="890" width="65" height="58"/>
                 </imageView>
             </subviews>
             <nil key="simulatedStatusBarMetrics"/>
