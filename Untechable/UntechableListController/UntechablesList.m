@@ -752,7 +752,7 @@ int indexArrayS2[];
     
     //Background work
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        
+        [untechable setOrSaveVars:@"SAVE"];
         [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
             
             if( !([message isEqualToString:@""]) ) {
@@ -805,21 +805,35 @@ int indexArrayS2[];
  Social Medias Auths are in device and we can get them and use them
  **/
 -( void ) getAuthsOfSocialMedias {
+    
     NSString *fbAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuth"];
+    fbAuth = ( fbAuth ) ? fbAuth : @"";
+    
     NSString *fbAuthExpiryTs = [[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuthExpiryTs"];
+    fbAuthExpiryTs = ( fbAuthExpiryTs ) ? fbAuthExpiryTs : @"";
+    
     NSString *twitterAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuth"];
-   // NSString *twOAuthTokenSecret = [[NSUserDefaults standardUserDefaults] objectForKey:@"twOAuthTokenSecret" ];
-   // NSString *linkedinAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"linkedinAuth" ];
-   // NSString *email = [[NSUserDefaults standardUserDefaults] objectForKey:@"email" ];
-  //  NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:@"password" ];
+    twitterAuth = (twitterAuth) ? twitterAuth : @"";
+    
+    NSString *twOAuthTokenSecret = [[NSUserDefaults standardUserDefaults] objectForKey:@"twOAuthTokenSecret" ];
+    twOAuthTokenSecret = (twOAuthTokenSecret) ? (twOAuthTokenSecret) : @"";
+    
+    NSString *linkedinAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"linkedinAuth" ];
+    linkedinAuth = (linkedinAuth) ? linkedinAuth : @"";
+    
+    NSString *email = [[NSUserDefaults standardUserDefaults] objectForKey:@"email" ];
+    email = (email) ? email : @"";
+    
+    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:@"password" ];
+    password = (password) ? password : @"";
     
     untechable.fbAuth = fbAuth;
     untechable.fbAuthExpiryTs = fbAuthExpiryTs;
     untechable.twitterAuth = twitterAuth;
-   // untechable.twOAuthTokenSecret = twOAuthTokenSecret;
-    //untechable.linkedinAuth = linkedinAuth;
-//untechable.email = email;
-    //untechable.password = password;
+    untechable.twOAuthTokenSecret = twOAuthTokenSecret;
+    untechable.linkedinAuth = linkedinAuth;
+    untechable.email = email;
+    untechable.password = password;
 }
 
 /**
