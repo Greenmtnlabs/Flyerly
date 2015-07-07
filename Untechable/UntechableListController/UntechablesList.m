@@ -794,8 +794,8 @@ int indexArrayS2[];
     // the selected status from the setup screen would be set as default status on unetch now option
     NSInteger positionOfSelectedStatusFromArray = [[NSUserDefaults standardUserDefaults] integerForKey:@"positionToRemember"];
     NSArray *customArrayOfStatuses = [[NSUserDefaults standardUserDefaults]objectForKey:@"spendingTimeText"];
-    
     NSString *selectedStatus = [customArrayOfStatuses objectAtIndex:positionOfSelectedStatusFromArray];
+    //setting spending time text to status got from setup screen.
     untechable.spendingTimeTxt = selectedStatus;
 }
 
