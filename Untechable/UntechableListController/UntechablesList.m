@@ -12,6 +12,7 @@
 #import "SettingsViewController.h"
 #import "Common.h"
 #import "Untechable.h"
+#import "ThankyouController.h"
 
 
 @interface UntechablesList () {
@@ -147,15 +148,7 @@ int indexArrayS2[];
 - (void)viewWillAppear:(BOOL)animated{
     
     allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
-    
-    if ( allUntechables.count <= 0 ){
         
-        AddUntechableController *mainViewController = [[AddUntechableController alloc] initWithNibName:@"AddUntechableController" bundle:nil];
-        mainViewController.untechable = untechable;
-        [self.navigationController pushViewController:mainViewController animated:YES];
-        
-    }
-    
     [self setNumberOfRowsInSection];
     
     untechablesTable.separatorInset = UIEdgeInsetsZero;
@@ -776,6 +769,7 @@ int indexArrayS2[];
             else{
                 dispatch_async( dispatch_get_main_queue(), ^{
                     [self changeNavigation:@"ON_FINISH_SUCCESS"];
+                    [self goToThankyouScreen];
                 });
             }
             
@@ -803,5 +797,14 @@ int indexArrayS2[];
     
     NSString *selectedStatus = [customArrayOfStatuses objectAtIndex:positionOfSelectedStatusFromArray];
     untechable.spendingTimeTxt = selectedStatus;
+}
+
+/**
+ navigate to thank you controller screen when successfully user create an untech
+ **/
+-( void ) goToThankyouScreen {
+    ThankyouController *thankyouScreen = [[ThankyouController alloc] init];
+    thankyouScreen.untechable = untechable;
+    [self.navigationController pushViewController:thankyouScreen animated:YES];
 }
 @end
