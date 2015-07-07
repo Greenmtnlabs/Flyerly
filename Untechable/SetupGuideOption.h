@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SetupGuideOption : UITableViewCell
+@interface SetupGuideOption  : UITableViewCell {
+    
+    
+}
+@property (nonatomic,strong)IBOutlet UIButton *setupBtn;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
-- (IBAction)onTouchSetup:(id)sender;
 
 @end

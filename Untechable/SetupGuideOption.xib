@@ -41,9 +41,6 @@
                         <state key="normal" title="Setup">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
-                        <connections>
-                            <action selector="onTouchSetup:" destination="AU9-7C-Sft" eventType="touchUpInside" id="0dR-es-dgf"/>
-                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -65,6 +62,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="setupBtn" destination="Y3N-0S-XJX" id="jLG-9Y-hJC"/>
                 <outlet property="statusLabel" destination="xa0-bR-2kk" id="TTh-e3-gKo"/>
             </connections>
             <point key="canvasLocation" x="377" y="226"/>

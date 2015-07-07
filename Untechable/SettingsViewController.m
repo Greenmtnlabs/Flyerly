@@ -13,6 +13,7 @@
 #import "SocialnetworkController.h"
 #import "EmailSettingController.h"
 #import "SocialNetworksStatusModal.h"
+#import "SetupGuideViewController.h"
 #import "SetupGuideOption.h"
 
 @interface SettingsViewController () {
@@ -147,16 +148,17 @@
     } else if( indexPath.row == 5 ) {
             
         cellId = @"SetupGuideOption";
-        cell = (SettingsCellView *)[tableView dequeueReusableCellWithIdentifier:cellId];
+        SetupGuideOption *cellSetup = (SetupGuideOption *)[tableView dequeueReusableCellWithIdentifier:cellId];
         
-        if (cell == nil)
+        if (cellSetup == nil)
         {
             
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SetupGuideOption" owner:self options:nil];
-            cell = (SettingsCellView *)[nib objectAtIndex:0];
+            cellSetup = (SetupGuideOption *)[nib objectAtIndex:0];
+            [cellSetup.setupBtn addTarget:self action:@selector(testRufi:) forControlEvents:UIControlEventTouchUpInside];
         
         }
-        return cell;
+        return cellSetup;
 
     } else {
 
@@ -221,6 +223,13 @@
         }
     }
     return cell;
+}
+
+-(IBAction)testRufi:(id)sender {
+    
+        SetupGuideViewController *secondSetupScreen = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
+        secondSetupScreen.untechable = untechable;
+        [self.navigationController pushViewController:secondSetupScreen animated:YES];
 }
 
 -(IBAction)emailLogin:(id)sender {

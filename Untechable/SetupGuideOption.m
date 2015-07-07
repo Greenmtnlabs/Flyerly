@@ -12,6 +12,8 @@
 
 @implementation SetupGuideOption
 
+@synthesize setupBtn;
+
 - (void)awakeFromNib {
     // Initialization code
 }
@@ -22,13 +24,4 @@
     // Configure the view for the selected state
 }
 
-- (IBAction)onTouchSetup:(id)sender {
-    
-    UIViewController *tv = (UIViewController *) self.superview.superview;
-    
-    SetupGuideViewController *secondSetupScreen = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
-    //secondSetupScreen.untechable = untechable;
-    [tv.navigationController pushViewController:secondSetupScreen animated:YES];
-    
-}
 @end
