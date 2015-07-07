@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="TTo-2i-XSf" customClass="ResourcesView">
-            <rect key="frame" x="0.0" y="0.0" width="400" height="955"/>
+            <rect key="frame" x="0.0" y="0.0" width="400" height="1227"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9fj-57-DF8">
@@ -623,6 +623,186 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
+                <button opaque="NO" tag="75" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vYr-6B-hOM" userLabel="Button - Button75">
+                    <rect key="frame" x="243" y="886" width="70" height="65"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="76" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Br9-4w-jDl" userLabel="Button - Button76">
+                    <rect key="frame" x="320" y="886" width="70" height="65"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="77" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wqm-09-YNk" userLabel="Button - Button77">
+                    <rect key="frame" x="11" y="953" width="70" height="65"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="78" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bVb-kn-VBN" userLabel="Button - Button78">
+                    <rect key="frame" x="88" y="953" width="70" height="65"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="79" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KQ8-ks-Wjv" userLabel="Button - Button79">
+                    <rect key="frame" x="165" y="953" width="70" height="65"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="80" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ggQ-Sv-Rm0" userLabel="Button - Button80">
+                    <rect key="frame" x="242" y="953" width="70" height="65"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="81" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9aO-Sa-NNf" userLabel="Button - Button81">
+                    <rect key="frame" x="319" y="953" width="70" height="65"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="82" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5gt-EL-z27" userLabel="Button - Button82">
+                    <rect key="frame" x="11" y="1020" width="70" height="65"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="83" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rXz-Xc-JlP" userLabel="Button - Button83">
+                    <rect key="frame" x="88" y="1020" width="70" height="65"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="84" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KGF-sL-1g2" userLabel="Button - Button84">
+                    <rect key="frame" x="165" y="1020" width="70" height="65"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="85" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pjk-hh-SXz" userLabel="Button - Button85">
+                    <rect key="frame" x="242" y="1020" width="70" height="65"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="86" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pOn-0E-vNW" userLabel="Button - Button86">
+                    <rect key="frame" x="319" y="1020" width="70" height="65"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="87" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="my6-lN-kzS" userLabel="Button - Button87">
+                    <rect key="frame" x="11" y="1087" width="70" height="65"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="88" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KMx-jx-8Zg" userLabel="Button - Button88">
+                    <rect key="frame" x="88" y="1087" width="70" height="65"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="89" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISo-4D-ApG" userLabel="Button - Button89">
+                    <rect key="frame" x="165" y="1087" width="70" height="65"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="90" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L2K-lk-ecN" userLabel="Button - Button90">
+                    <rect key="frame" x="242" y="1087" width="70" height="65"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="91" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jds-oM-8cS" userLabel="Button - Button91">
+                    <rect key="frame" x="319" y="1087" width="70" height="65"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="92" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2a-dd-Iwa" userLabel="Button - Button92">
+                    <rect key="frame" x="11" y="1154" width="70" height="65"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="93" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kgw-M2-ugF" userLabel="Button - Button93">
+                    <rect key="frame" x="88" y="1154" width="70" height="65"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="94" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Hw-Z5-CgV" userLabel="Button - Button94">
+                    <rect key="frame" x="165" y="1154" width="70" height="65"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template2.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="qvW-Dy-ePR">
                     <rect key="frame" x="169" y="14" width="65" height="58"/>
                 </imageView>
@@ -664,9 +844,6 @@
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template15.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="BIH-5i-Fwd">
                     <rect key="frame" x="15" y="217" width="65" height="58"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" tag="16" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template16.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Mrp-y3-GRJ">
-                    <rect key="frame" x="169" y="890" width="65" height="58"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template17.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="W6c-lK-1to">
                     <rect key="frame" x="169" y="217" width="65" height="58"/>
@@ -828,10 +1005,73 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="8LT-2z-Aek">
                     <rect key="frame" x="92" y="14" width="65" height="58"/>
                 </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template75.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="oH7-ra-MMK" userLabel="Template75.jpg">
+                    <rect key="frame" x="246" y="890" width="65" height="58"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template76.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="vCI-aE-Gi5" userLabel="Template76.jpg">
+                    <rect key="frame" x="323" y="890" width="65" height="58"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template77.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="7WN-Wk-0H1" userLabel="Template77.jpg">
+                    <rect key="frame" x="15" y="957" width="65" height="58"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template78.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="LdN-SR-zEv" userLabel="Template78.jpg">
+                    <rect key="frame" x="92" y="957" width="65" height="58"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template79.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="6ad-hs-gcr" userLabel="Template79.jpg">
+                    <rect key="frame" x="169" y="957" width="65" height="58"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template80.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="QAg-w9-0HC" userLabel="Template80.jpg">
+                    <rect key="frame" x="246" y="957" width="65" height="58"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template81.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="yQj-7D-3iQ" userLabel="Template81.jpg">
+                    <rect key="frame" x="323" y="957" width="65" height="58"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template82.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="hAm-iQ-sXc" userLabel="Template82.jpg">
+                    <rect key="frame" x="15" y="1024" width="65" height="58"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template83.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="2MJ-TB-C23" userLabel="Template83.jpg">
+                    <rect key="frame" x="92" y="1024" width="65" height="58"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template84.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="GrC-hO-Pob" userLabel="Template84.jpg">
+                    <rect key="frame" x="169" y="1024" width="65" height="58"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template85.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Dho-7U-bhS" userLabel="Template85.jpg">
+                    <rect key="frame" x="246" y="1024" width="65" height="58"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template86.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="haC-xX-eD5" userLabel="Template86.jpg">
+                    <rect key="frame" x="323" y="1024" width="65" height="58"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template87.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="THh-1Z-geT" userLabel="Template87.jpg">
+                    <rect key="frame" x="15" y="1091" width="65" height="58"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template88.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="DHG-dp-3Wq" userLabel="Template88.jpg">
+                    <rect key="frame" x="92" y="1091" width="65" height="58"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template89.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="X6t-sF-hnM" userLabel="Template89.jpg">
+                    <rect key="frame" x="169" y="1091" width="65" height="58"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template90.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="pZ4-dq-UXE" userLabel="Template90.jpg">
+                    <rect key="frame" x="246" y="1091" width="65" height="58"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template91.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="J2a-BE-82B" userLabel="Template91.jpg">
+                    <rect key="frame" x="323" y="1091" width="65" height="58"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template92.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="m65-lH-JHf" userLabel="Template92.jpg">
+                    <rect key="frame" x="15" y="1158" width="65" height="58"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template93.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Uc5-SQ-hr9" userLabel="Template93.jpg">
+                    <rect key="frame" x="92" y="1158" width="65" height="58"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template94.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="jGA-75-nJc" userLabel="Template94.jpg">
+                    <rect key="frame" x="169" y="1158" width="65" height="58"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" tag="16" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template16.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Mrp-y3-GRJ">
+                    <rect key="frame" x="169" y="890" width="65" height="58"/>
+                </imageView>
             </subviews>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="57.5" y="273.5"/>
+            <point key="canvasLocation" x="57" y="409.5"/>
         </view>
     </objects>
     <resources>
@@ -901,7 +1141,27 @@
         <image name="Template66.jpg" width="612" height="612"/>
         <image name="Template7.jpg" width="612" height="612"/>
         <image name="Template74.jpg" width="612" height="612"/>
+        <image name="Template75.jpg" width="1240" height="1240"/>
+        <image name="Template76.jpg" width="1240" height="1240"/>
+        <image name="Template77.jpg" width="1240" height="1240"/>
+        <image name="Template78.jpg" width="1240" height="1240"/>
+        <image name="Template79.jpg" width="1240" height="1240"/>
         <image name="Template8.jpg" width="612" height="612"/>
+        <image name="Template80.jpg" width="1240" height="1240"/>
+        <image name="Template81.jpg" width="1240" height="1240"/>
+        <image name="Template82.jpg" width="1240" height="1240"/>
+        <image name="Template83.jpg" width="1240" height="1240"/>
+        <image name="Template84.jpg" width="1240" height="1240"/>
+        <image name="Template85.jpg" width="1240" height="1240"/>
+        <image name="Template86.jpg" width="1240" height="1240"/>
+        <image name="Template87.jpg" width="1240" height="1240"/>
+        <image name="Template88.jpg" width="1240" height="1240"/>
+        <image name="Template89.jpg" width="1240" height="1240"/>
         <image name="Template9.jpg" width="612" height="612"/>
+        <image name="Template90.jpg" width="1240" height="1240"/>
+        <image name="Template91.jpg" width="1240" height="1240"/>
+        <image name="Template92.jpg" width="1240" height="1240"/>
+        <image name="Template93.jpg" width="1240" height="1240"/>
+        <image name="Template94.jpg" width="1240" height="1240"/>
     </resources>
 </document>
