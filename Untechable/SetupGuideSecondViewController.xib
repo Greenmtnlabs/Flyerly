@@ -72,7 +72,7 @@
         </view>
     </objects>
     <resources>
-        <image name="navigation2.png" width="140" height="30"/>
+        <image name="navigation2.png" width="169" height="27"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
