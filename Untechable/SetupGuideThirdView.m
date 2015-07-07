@@ -136,11 +136,12 @@
     
     if( viewControllerToAdd.selectedAnyEmail ) {
         [viewControllerToAdd showEmailSetupScreen:YES];
-    }
+    } else {
     
-//    SetupGuideFourthView *fourthScreen = [[SetupGuideFourthView alloc] initWithNibName:@"SetupGuideFourthView" bundle:nil];
-//    fourthScreen.untechable = untechable;
-//    [self.navigationController pushViewController:fourthScreen animated:YES];
+        SetupGuideFourthView *fourthScreen = [[SetupGuideFourthView alloc] initWithNibName:@"SetupGuideFourthView" bundle:nil];
+        fourthScreen.untechable = untechable;
+        [self.navigationController pushViewController:fourthScreen animated:YES];
+    }
 }
 
 -(void) goBack {

@@ -281,11 +281,19 @@
             [self.navigationController pushViewController:emailChangeController animated:YES];
         }
     }else {
-        
-        emailSettingController.untechable = untechable;
-        
-        [self changingBoolVals:calledFromSetupScreen];
-        [self.navigationController pushViewController:emailSettingController animated:YES];
+        if( calledFromSetupScreen ) {
+            emailSettingController.untechable = untechable;
+            
+            [self changingBoolVals:calledFromSetupScreen];
+            [self.navigationController pushViewController:emailSettingController animated:YES];
+            
+        } else {
+            
+            SocialnetworkController *socialnetwork;
+            socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
+            socialnetwork.untechable = untechable;
+            [self.navigationController pushViewController:socialnetwork animated:YES];
+        }
     }
 }
 
