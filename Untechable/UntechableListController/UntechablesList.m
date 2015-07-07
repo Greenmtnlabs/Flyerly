@@ -829,10 +829,10 @@ int indexArrayS2[];
     NSString *linkedinAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"linkedinAuth" ];
     linkedinAuth = (linkedinAuth) ? linkedinAuth : @"";
     
-    NSString *email = [[NSUserDefaults standardUserDefaults] objectForKey:@"email" ];
+    NSString *email = [[NSUserDefaults standardUserDefaults] objectForKey:@"emailAddress" ];
     email = (email) ? email : @"";
     
-    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:@"password" ];
+    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:@"emailPassword" ];
     password = (password) ? password : @"";
     
     untechable.fbAuth = fbAuth;
