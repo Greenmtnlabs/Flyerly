@@ -806,7 +806,6 @@ int indexArrayS2[];
     untechable.spendingTimeTxt = selectedStatus;
     NSString *socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", timeInString, untechable.spendingTimeTxt];
     untechable.socialStatus = socialStatus;
-    
     [self getAuthsOfSocialMedias];
 }
 
@@ -824,7 +823,7 @@ int indexArrayS2[];
     NSString *twitterAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuth"];
     twitterAuth = (twitterAuth) ? twitterAuth : @"";
     
-    NSString *twOAuthTokenSecret = [[NSUserDefaults standardUserDefaults] objectForKey:@"twOAuthTokenSecret" ];
+    NSString *twOAuthTokenSecret = [[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuthTokkenSecerate"];
     twOAuthTokenSecret = (twOAuthTokenSecret) ? (twOAuthTokenSecret) : @"";
     
     NSString *linkedinAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"linkedinAuth" ];
