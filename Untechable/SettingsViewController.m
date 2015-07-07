@@ -13,6 +13,7 @@
 #import "SocialnetworkController.h"
 #import "EmailSettingController.h"
 #import "SocialNetworksStatusModal.h"
+#import "SetupGuideOption.h"
 
 @interface SettingsViewController () {
     
@@ -112,7 +113,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     //return number of rows;
-    return  5;
+    return  6;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -143,9 +144,21 @@
             
         }
         return cell;
+    } else if( indexPath.row == 5 ) {
+            
+        cellId = @"SetupGuideOption";
+        cell = (SettingsCellView *)[tableView dequeueReusableCellWithIdentifier:cellId];
         
-    }
-    else{
+        if (cell == nil)
+        {
+            
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SetupGuideOption" owner:self options:nil];
+            cell = (SettingsCellView *)[nib objectAtIndex:0];
+        
+        }
+        return cell;
+
+    } else {
 
         NSString *sNetworksName = [socialNetworksName objectAtIndex:(indexPath.row-1)];
         
@@ -204,6 +217,7 @@
             }
             
             [cell.socialNetworkButton addTarget:self action:@selector(emailLogin:) forControlEvents:UIControlEventTouchUpInside];
+            
         }
     }
     return cell;

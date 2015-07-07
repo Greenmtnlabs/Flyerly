@@ -63,6 +63,8 @@
 		2465A6101B4BE1C400B3E22C /* navigation4_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2465A6041B4BE1C400B3E22C /* navigation4_2x.png */; };
 		2465A6111B4BE1C400B3E22C /* navigation4_3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2465A6051B4BE1C400B3E22C /* navigation4_3x.png */; };
 		2465A6121B4BE1C400B3E22C /* navigation4.png in Resources */ = {isa = PBXBuildFile; fileRef = 2465A6061B4BE1C400B3E22C /* navigation4.png */; };
+		2465A6161B4BE9E100B3E22C /* SetupGuideOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 2465A6141B4BE9E100B3E22C /* SetupGuideOption.m */; };
+		2465A6171B4BE9E100B3E22C /* SetupGuideOption.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2465A6151B4BE9E100B3E22C /* SetupGuideOption.xib */; };
 		247402421B33CBD700459759 /* SetupGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 247402401B33CBD700459759 /* SetupGuideViewController.m */; };
 		247402431B33CBD700459759 /* SetupGuideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 247402411B33CBD700459759 /* SetupGuideViewController.xib */; };
 		2474024A1B34198400459759 /* SetupGuideSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 247402481B34198400459759 /* SetupGuideSecondViewController.m */; };
@@ -320,6 +322,9 @@
 		2465A6041B4BE1C400B3E22C /* navigation4_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigation4_2x.png; sourceTree = "<group>"; };
 		2465A6051B4BE1C400B3E22C /* navigation4_3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigation4_3x.png; sourceTree = "<group>"; };
 		2465A6061B4BE1C400B3E22C /* navigation4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigation4.png; sourceTree = "<group>"; };
+		2465A6131B4BE9E100B3E22C /* SetupGuideOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupGuideOption.h; sourceTree = "<group>"; };
+		2465A6141B4BE9E100B3E22C /* SetupGuideOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupGuideOption.m; sourceTree = "<group>"; };
+		2465A6151B4BE9E100B3E22C /* SetupGuideOption.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetupGuideOption.xib; sourceTree = "<group>"; };
 		2474023F1B33CBD700459759 /* SetupGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupGuideViewController.h; sourceTree = "<group>"; };
 		247402401B33CBD700459759 /* SetupGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupGuideViewController.m; sourceTree = "<group>"; };
 		247402411B33CBD700459759 /* SetupGuideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetupGuideViewController.xib; sourceTree = "<group>"; };
@@ -1117,6 +1122,9 @@
 				C36D2E5A1A7919DC000537C5 /* SettingsViewController.h */,
 				C36D2E5B1A7919DC000537C5 /* SettingsViewController.m */,
 				C36D2E5C1A7919DC000537C5 /* SettingsViewController.xib */,
+				2465A6131B4BE9E100B3E22C /* SetupGuideOption.h */,
+				2465A6141B4BE9E100B3E22C /* SetupGuideOption.m */,
+				2465A6151B4BE9E100B3E22C /* SetupGuideOption.xib */,
 				C36D2E551A7919C2000537C5 /* SettingsCellView.h */,
 				C36D2E561A7919C2000537C5 /* SettingsCellView.m */,
 				C36D2E571A7919C2000537C5 /* SettingsCellView.xib */,
@@ -1386,6 +1394,7 @@
 				366EAFA01A14C3530011D6C6 /* Default-667h@2x.png in Resources */,
 				248E06BB1A4AD8BA0099846A /* ContactListCell-iPhone6.xib in Resources */,
 				2465A60C1B4BE1C400B3E22C /* navigation2.png in Resources */,
+				2465A6171B4BE9E100B3E22C /* SetupGuideOption.xib in Resources */,
 				2448343E1A5D776200E6F173 /* sms_selected@3x.png in Resources */,
 				200ACE2C1A3874B200DC7047 /* GoogleIcon@3x.png in Resources */,
 				366EAFB61A14EDA30011D6C6 /* copy_selected@2x.png in Resources */,
@@ -1488,6 +1497,7 @@
 				36474F2919D9AC3800084F34 /* UIPlaceHolderTextView.m in Sources */,
 				36B036A619DAF44D00E8CD21 /* EmailSettingController.m in Sources */,
 				24AFE79B1B38086A00CC8230 /* SetupGuideThirdView.m in Sources */,
+				2465A6161B4BE9E100B3E22C /* SetupGuideOption.m in Sources */,
 				36561D7C19D2C8A40069D897 /* AppDelegate.m in Sources */,
 				2474024A1B34198400459759 /* SetupGuideSecondViewController.m in Sources */,
 				366ECD7E19D3135200F71A11 /* Untechable.m in Sources */,

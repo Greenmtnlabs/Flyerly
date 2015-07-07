@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,27 +15,29 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="WOy-Fg-c0L">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WOy-Fg-c0L">
                         <rect key="frame" x="8" y="18" width="30" height="30"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="fXb-jG-6Gz"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cy9-6U-vyV">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cy9-6U-vyV">
                         <rect key="frame" x="46" y="8" width="185" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                         <color key="textColor" red="0.25882352939999997" green="0.96862745100000003" blue="0.80784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UDs-p5-bcS">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UDs-p5-bcS">
                         <rect key="frame" x="46" y="34" width="185" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LEp-zR-JYH">
-                        <rect key="frame" x="268.00000016093247" y="8" width="40" height="49"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LEp-zR-JYH">
+                        <rect key="frame" x="268" y="8" width="40" height="49"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="SEm-Fe-aTd"/>
+                        </constraints>
                         <state key="normal" title="Edit">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -43,6 +46,22 @@
                         </connections>
                     </button>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="cy9-6U-vyV" firstAttribute="leading" secondItem="UDs-p5-bcS" secondAttribute="leading" id="1CU-nx-cF2"/>
+                    <constraint firstItem="UDs-p5-bcS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="26" id="4Ij-Gg-OfF"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="WOy-Fg-c0L" secondAttribute="bottom" constant="9" id="FTX-LS-0f9"/>
+                    <constraint firstItem="LEp-zR-JYH" firstAttribute="top" secondItem="cy9-6U-vyV" secondAttribute="top" id="Hy5-LN-Vvw"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="cy9-6U-vyV" secondAttribute="bottom" constant="17" id="IE8-vL-0iD"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="UDs-p5-bcS" secondAttribute="bottom" constant="2" id="J78-Up-wbr"/>
+                    <constraint firstItem="WOy-Fg-c0L" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="LLO-uV-JC6"/>
+                    <constraint firstItem="LEp-zR-JYH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="NqU-QN-I7e"/>
+                    <constraint firstItem="cy9-6U-vyV" firstAttribute="leading" secondItem="WOy-Fg-c0L" secondAttribute="trailing" constant="8" symbolic="YES" id="S2E-9U-rrw"/>
+                    <constraint firstItem="LEp-zR-JYH" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="XQD-uI-yod"/>
+                    <constraint firstItem="cy9-6U-vyV" firstAttribute="trailing" secondItem="UDs-p5-bcS" secondAttribute="trailing" id="Yx8-gT-eUd"/>
+                    <constraint firstItem="WOy-Fg-c0L" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="gXt-FR-T82"/>
+                    <constraint firstItem="LEp-zR-JYH" firstAttribute="leading" secondItem="cy9-6U-vyV" secondAttribute="trailing" constant="37" id="k9Y-gR-5Pp"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="LEp-zR-JYH" secondAttribute="trailing" constant="4" id="sH2-mB-3tb"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="nameAndPhoneImage" destination="WOy-Fg-c0L" id="qKE-sM-u7e"/>
