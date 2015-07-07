@@ -17,6 +17,7 @@
 #import "SocialnetworkController.h"
 #import "SocialNetworksStatusModal.h"
 #import "ContactsCustomizedModal.h"
+#import "SetupGuideFourthView.h"
 
 
 @class EmailTableViewCell;
@@ -58,7 +59,7 @@
 
 @implementation EmailSettingController
 
-@synthesize untechable,sslSwitch,serverAccountTable,scrollView,comingFromSettingsScreen,comingFromChangeEmailScreen,comingFromContactsListScreen;
+@synthesize untechable,sslSwitch,serverAccountTable,scrollView,comingFromSettingsScreen,comingFromChangeEmailScreen,comingFromContactsListScreen, comingFromSetupScreen;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -284,6 +285,10 @@
             
             [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
             
+        }else if ( comingFromSetupScreen ) {
+            
+            [rightBarButton setTitle:TITLE_NEXT_TXT forState:normal];
+            
         }else if ( comingFromChangeEmailScreen ) {
             
             [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
@@ -342,6 +347,10 @@
         }else if ( comingFromChangeEmailScreen ) {
             
             [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
+            
+        }else if ( comingFromSetupScreen ) {
+            
+            [rightBarButton setTitle:TITLE_NEXT_TXT forState:normal];
             
         }else if ( comingFromContactsListScreen ){
             
@@ -408,6 +417,10 @@
             [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
             
         }else if ( comingFromContactsListScreen ){
+            
+            [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
+            
+        }else if ( comingFromSetupScreen ){
             
             [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
             
@@ -489,6 +502,13 @@
         socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
         socialnetwork.untechable = untechable;
         [self.navigationController pushViewController:socialnetwork animated:YES];
+        
+    } else if ( comingFromSetupScreen ) {
+        
+        SetupGuideFourthView *fourthScreen = [[SetupGuideFourthView alloc] init];
+        fourthScreen.untechable = untechable;
+        [self storeSceenVarsInDic];
+        [self.navigationController pushViewController:fourthScreen animated:YES];
         
     }else {
         

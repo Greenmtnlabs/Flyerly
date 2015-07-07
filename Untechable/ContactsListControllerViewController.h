@@ -29,8 +29,9 @@
 @property(nonatomic,strong) NSMutableArray *contactBackupArray;
 @property(nonatomic,strong) NSMutableArray *selectedIdentifiers;
 @property(nonatomic,strong) NSMutableArray *currentlyEditingContacts;
+@property(assign) BOOL selectedAnyEmail;
 
 @property(nonatomic,strong) IBOutlet UITextField *searchTextField;
-- (void) onNext;
+- (void) showEmailSetupScreen : ( BOOL ) calledFromSetupScreen;
 
 @end
