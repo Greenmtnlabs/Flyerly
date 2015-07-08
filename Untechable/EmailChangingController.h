@@ -24,4 +24,6 @@
 
 @property (strong, nonatomic) NSString *emailAddresstext;
 
+@property(assign) BOOL *setupScreenCalling;
+
 @end

@@ -277,23 +277,17 @@
             EmailChangingController *emailChangeController;
             emailChangeController = [[EmailChangingController alloc]initWithNibName:@"EmailChangingController" bundle:nil];
             emailChangeController.untechable = untechable;
+            emailChangeController.setupScreenCalling = &(calledFromSetupScreen);
             emailChangeController.emailAddresstext = [[SocialNetworksStatusModal sharedInstance] getEmailAddress];
             [self.navigationController pushViewController:emailChangeController animated:YES];
         }
+        
     }else {
-        if( calledFromSetupScreen ) {
-            emailSettingController.untechable = untechable;
+        
+        emailSettingController.untechable = untechable;
             
-            [self changingBoolVals:calledFromSetupScreen];
-            [self.navigationController pushViewController:emailSettingController animated:YES];
-            
-        } else {
-            
-            SocialnetworkController *socialnetwork;
-            socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
-            socialnetwork.untechable = untechable;
-            [self.navigationController pushViewController:socialnetwork animated:YES];
-        }
+        [self changingBoolVals:calledFromSetupScreen];
+        [self.navigationController pushViewController:emailSettingController animated:YES];
     }
 }
 

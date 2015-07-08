@@ -14,6 +14,7 @@
     UIColor *defGreen;//GREEN
     UIColor *defGray;//GRAY
     UIButton *backButton;
+    UIButton *nextButton;
 }
 
 //Properties

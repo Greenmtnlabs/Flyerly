@@ -446,7 +446,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
                               @"timezoneOffset", @"spendingTimeTxt", @"startDate", @"endDate", @"hasEndDate"
                               , @"location",@"twillioNumber"
                               ,@"socialStatus", @"fbAuth", @"fbAuthExpiryTs" , @"twitterAuth",@"twOAuthTokenSecret",   @"linkedinAuth"
-                              ,@"acType", @"email", @"password", @"respondingEmail", @"iSsl", @"imsHostName", @"imsPort", @"oSsl", @"omsHostName", @"omsPort",@"customizedContacts",@"userName"
+                              ,@"acType", @"email", @"password", @"respondingEmail", @"iSsl", @"imsHostName", @"imsPort", @"oSsl", @"omsHostName", @"omsPort",@"customizedContacts",@"userName", @"userPhoneNumber"
                               ,nil];
     
     
@@ -454,8 +454,10 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     NSString *userNameInDb = [[NSUserDefaults standardUserDefaults]
                               stringForKey:@"userName"];
+    NSString *userPhoneNumber = [[NSUserDefaults standardUserDefaults] stringForKey:@"userphoneNumber"];
     
     [dic setValue:userNameInDb forKey:@"userName"];
+    [dic setValue:userPhoneNumber forKey:@"userPhoneNumber"];
     
     
     for (NSString* key in dic) {

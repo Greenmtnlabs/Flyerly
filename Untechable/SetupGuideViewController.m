@@ -35,6 +35,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [self setNavigation:@"viewDidLoad"];
+}
+
 /**
  * Update the view once it appears.
  */
@@ -42,8 +46,6 @@
     
     [super viewDidAppear:animated];
     [untechable printNavigation:[self navigationController]];
-    [self setNavigation:@"viewDidLoad"];
-    
 }
 
 #pragma - mark Initializing Views
@@ -92,6 +94,14 @@
          _usernameHintText.hidden = YES;
     } else {
         _phoneNumberHintText.hidden =  YES;
+        [self animateTextField:textView up:YES];
+    }
+}
+
+-(void) textViewDidEndEditing:(UITextView *)textView {
+    
+    if(textView.tag == 102 ) {
+        [self animateTextField:textView up:NO];
     }
 }
 
@@ -234,5 +244,22 @@
     [untechable initUntechableDirectory];
 }
 
+/**
+ Moving up view if the keyboard hides a view.
+ **/
+- (void) animateTextField: (UITextView *) textField up: (BOOL) up {
+    
+    const int movementDistance = 140;
+    const float movementDuration = 0.3f;
+    
+    int movement = (up ? -movementDistance : movementDistance);
+    
+    [UIView beginAnimations: @"anim" context: nil];
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    [UIView setAnimationDuration: movementDuration];
+    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+    [UIView commitAnimations];
+    
+}
 
 @end

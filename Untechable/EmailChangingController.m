@@ -11,7 +11,7 @@
 #import "Common.h"
 #import "EmailSettingController.h"
 #import "SocialNetworksStatusModal.h"
-#import "SocialNetworksStatusModal.h"
+#import "SetupGuideFourthView.h"
 
 @interface EmailChangingController ()
 
@@ -21,7 +21,7 @@
 
 @implementation EmailChangingController
 
-@synthesize untechable,emailAddress,emailAddresstext;
+@synthesize untechable,emailAddress,emailAddresstext, setupScreenCalling;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -124,10 +124,20 @@
     
     untechable.email = emailAddress.text;
     untechable.password = [[SocialNetworksStatusModal sharedInstance] getEmailPassword];
-    SocialnetworkController *socialnetwork;
-    socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
-    socialnetwork.untechable = untechable;
-    [self.navigationController pushViewController:socialnetwork animated:YES];
+    
+    if( setupScreenCalling ) {
+        
+        SetupGuideFourthView *fourthView = [[SetupGuideFourthView alloc] initWithNibName:@"SetupGuideFourthView" bundle:nil];
+        fourthView.untechable = untechable;
+        [self.navigationController pushViewController:fourthView animated:YES];
+        
+    } else {
+        
+        SocialnetworkController *socialnetwork;
+        socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
+        socialnetwork.untechable = untechable;
+        [self.navigationController pushViewController:socialnetwork animated:YES];
+    }
 }
 
 -(void) goBack {

@@ -19,7 +19,7 @@
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigation2.png" translatesAutoresizingMaskIntoConstraints="NO" id="UNA-AN-XXL">
-                    <rect key="frame" x="93" y="68" width="126" height="28"/>
+                    <rect key="frame" x="93" y="75" width="126" height="28"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="28" id="r6c-2t-DxC"/>
@@ -62,9 +62,9 @@
                 <constraint firstItem="beE-63-vlL" firstAttribute="leading" secondItem="79C-fk-0Vv" secondAttribute="leading" constant="10" id="aSN-eA-NDK"/>
                 <constraint firstItem="UNA-AN-XXL" firstAttribute="leading" secondItem="79C-fk-0Vv" secondAttribute="leading" constant="93" id="csY-5t-DTF"/>
                 <constraint firstAttribute="trailing" secondItem="beE-63-vlL" secondAttribute="trailing" constant="10" id="hhe-Rh-70Y"/>
-                <constraint firstItem="UNA-AN-XXL" firstAttribute="top" secondItem="79C-fk-0Vv" secondAttribute="top" constant="68" id="nYf-wh-nnU"/>
+                <constraint firstItem="UNA-AN-XXL" firstAttribute="top" secondItem="79C-fk-0Vv" secondAttribute="top" constant="75" id="nYf-wh-nnU"/>
                 <constraint firstAttribute="bottom" secondItem="Oza-5Y-MF3" secondAttribute="bottom" id="qfw-iI-8Ea"/>
-                <constraint firstItem="beE-63-vlL" firstAttribute="top" secondItem="UNA-AN-XXL" secondAttribute="bottom" constant="27" id="unq-jM-SBz"/>
+                <constraint firstItem="beE-63-vlL" firstAttribute="top" secondItem="UNA-AN-XXL" secondAttribute="bottom" constant="20" id="unq-jM-SBz"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>

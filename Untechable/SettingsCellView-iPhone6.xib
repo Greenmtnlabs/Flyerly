@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,32 +15,51 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fb_Like.png" id="v0s-4V-4yg">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fb_Like.png" translatesAutoresizingMaskIntoConstraints="NO" id="v0s-4V-4yg">
                         <rect key="frame" x="8" y="18" width="30" height="30"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="uVm-Y7-Q8m"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Social Network Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HhY-Os-Ipd">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Social Network Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HhY-Os-Ipd">
                         <rect key="frame" x="46" y="14" width="185" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="ooB-kg-eel"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                         <color key="textColor" red="0.25882352939999997" green="0.96862745100000003" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wlt-MX-cXf">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wlt-MX-cXf">
                         <rect key="frame" x="257" y="18" width="56" height="30"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="56" id="fbo-v7-dIh"/>
+                        </constraints>
                         <state key="normal" title="Log In">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logged Out" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VW3-m3-t8d">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logged Out" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VW3-m3-t8d">
                         <rect key="frame" x="46" y="36" width="185" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                         <color key="textColor" red="0.72156862749999995" green="0.72156862749999995" blue="0.72156862749999995" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="VW3-m3-t8d" firstAttribute="top" secondItem="HhY-Os-Ipd" secondAttribute="bottom" constant="1" id="3LX-AU-wEM"/>
+                    <constraint firstItem="v0s-4V-4yg" firstAttribute="leading" secondItem="SHc-1n-A7G" secondAttribute="leadingMargin" id="8us-UU-0HH"/>
+                    <constraint firstItem="HhY-Os-Ipd" firstAttribute="leading" secondItem="VW3-m3-t8d" secondAttribute="leading" id="NTn-UO-oeS"/>
+                    <constraint firstItem="HhY-Os-Ipd" firstAttribute="trailing" secondItem="VW3-m3-t8d" secondAttribute="trailing" id="Njy-6A-ca1"/>
+                    <constraint firstItem="wlt-MX-cXf" firstAttribute="leading" secondItem="HhY-Os-Ipd" secondAttribute="trailing" constant="26" id="Q8l-qv-6cp"/>
+                    <constraint firstItem="HhY-Os-Ipd" firstAttribute="top" secondItem="SHc-1n-A7G" secondAttribute="topMargin" constant="6" id="R1g-ga-m5K"/>
+                    <constraint firstItem="HhY-Os-Ipd" firstAttribute="leading" secondItem="v0s-4V-4yg" secondAttribute="trailing" constant="8" symbolic="YES" id="U2F-xN-oJp"/>
+                    <constraint firstItem="wlt-MX-cXf" firstAttribute="bottom" secondItem="v0s-4V-4yg" secondAttribute="bottom" id="dw7-8t-J3K"/>
+                    <constraint firstItem="v0s-4V-4yg" firstAttribute="top" secondItem="SHc-1n-A7G" secondAttribute="topMargin" constant="10" id="kf6-Cr-bFf"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="wlt-MX-cXf" secondAttribute="trailing" constant="-1" id="mkz-bd-zwf"/>
+                    <constraint firstItem="VW3-m3-t8d" firstAttribute="bottom" secondItem="SHc-1n-A7G" secondAttribute="bottomMargin" id="ndq-1N-hD0"/>
+                    <constraint firstItem="wlt-MX-cXf" firstAttribute="top" secondItem="v0s-4V-4yg" secondAttribute="top" id="v5Z-eH-ird"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="loginStatus" destination="VW3-m3-t8d" id="5cT-i5-cZV"/>
