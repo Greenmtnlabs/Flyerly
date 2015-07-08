@@ -16,13 +16,13 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jnA-gw-UPc">
+                    <rect key="frame" x="0.0" y="75" width="320" height="405"/>
+                </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigation4.png" translatesAutoresizingMaskIntoConstraints="NO" id="1R4-Aw-JU2">
                     <rect key="frame" x="93" y="75" width="126" height="28"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </imageView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jnA-gw-UPc">
-                    <rect key="frame" x="0.0" y="97" width="320" height="383"/>
-                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -31,8 +31,8 @@
                 <constraint firstItem="1R4-Aw-JU2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="75" id="XCv-lj-XWQ"/>
                 <constraint firstItem="1R4-Aw-JU2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="93" id="jFQ-PL-AN0"/>
                 <constraint firstAttribute="trailing" secondItem="jnA-gw-UPc" secondAttribute="trailing" id="lNH-vd-P4k"/>
-                <constraint firstItem="jnA-gw-UPc" firstAttribute="top" secondItem="1R4-Aw-JU2" secondAttribute="bottom" constant="-6" id="pBF-tq-ROF"/>
-                <constraint firstItem="jnA-gw-UPc" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="97" id="s3T-iu-w1d"/>
+                <constraint firstItem="jnA-gw-UPc" firstAttribute="top" secondItem="1R4-Aw-JU2" secondAttribute="bottom" constant="-28" id="pBF-tq-ROF"/>
+                <constraint firstItem="jnA-gw-UPc" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="75" id="s3T-iu-w1d"/>
                 <constraint firstItem="jnA-gw-UPc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="zhu-Qb-3GB"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
