@@ -21,7 +21,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigation3.png" translatesAutoresizingMaskIntoConstraints="NO" id="uhQ-TO-PvR">
-                    <rect key="frame" x="93" y="68" width="126" height="27"/>
+                    <rect key="frame" x="93" y="75" width="126" height="27"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </imageView>
             </subviews>
@@ -29,13 +29,13 @@
             <constraints>
                 <constraint firstItem="hTj-ch-n04" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="35" id="CpE-AH-nV2"/>
                 <constraint firstAttribute="trailing" secondItem="uhQ-TO-PvR" secondAttribute="trailing" constant="101" id="DYh-gM-rJa"/>
-                <constraint firstItem="hTj-ch-n04" firstAttribute="top" secondItem="uhQ-TO-PvR" secondAttribute="bottom" constant="-60" id="Nmf-ux-2o0"/>
+                <constraint firstItem="hTj-ch-n04" firstAttribute="top" secondItem="uhQ-TO-PvR" secondAttribute="bottom" constant="-67" id="Nmf-ux-2o0"/>
                 <constraint firstItem="hTj-ch-n04" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ODi-KM-F32"/>
                 <constraint firstItem="uhQ-TO-PvR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="93" id="Pum-Zn-7uT"/>
                 <constraint firstAttribute="bottom" secondItem="hTj-ch-n04" secondAttribute="bottom" constant="-14" id="Vay-nW-OHf"/>
-                <constraint firstItem="hTj-ch-n04" firstAttribute="top" secondItem="uhQ-TO-PvR" secondAttribute="bottom" constant="-60" id="Wpi-wl-a8i"/>
+                <constraint firstItem="hTj-ch-n04" firstAttribute="top" secondItem="uhQ-TO-PvR" secondAttribute="bottom" constant="-67" id="Wpi-wl-a8i"/>
                 <constraint firstAttribute="trailing" secondItem="hTj-ch-n04" secondAttribute="trailing" id="XIk-Fn-U33"/>
-                <constraint firstItem="uhQ-TO-PvR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="68" id="zaH-9F-37x"/>
+                <constraint firstItem="uhQ-TO-PvR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="75" id="zaH-9F-37x"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
