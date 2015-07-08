@@ -35,6 +35,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [self setNavigation:@"viewDidLoad"];
+}
+
 /**
  * Update the view once it appears.
  */
@@ -42,8 +46,6 @@
     
     [super viewDidAppear:animated];
     [untechable printNavigation:[self navigationController]];
-    [self setNavigation:@"viewDidLoad"];
-    
 }
 
 #pragma - mark Initializing Views

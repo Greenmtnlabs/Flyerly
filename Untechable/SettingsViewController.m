@@ -14,7 +14,6 @@
 #import "EmailSettingController.h"
 #import "SocialNetworksStatusModal.h"
 #import "SetupGuideViewController.h"
-#import "SetupGuideOption.h"
 
 @interface SettingsViewController () {
     
@@ -183,21 +182,7 @@
             
         }
         return cell;
-    } else if( indexPath.row == 5 ) {
-            
-        cellId = @"SetupGuideOption";
-        SetupGuideOption *cellSetup = (SetupGuideOption *)[tableView dequeueReusableCellWithIdentifier:cellId];
         
-        if (cellSetup == nil)
-        {
-            
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SetupGuideOption" owner:self options:nil];
-            cellSetup = (SetupGuideOption *)[nib objectAtIndex:0];
-            [cellSetup.setupBtn addTarget:self action:@selector(goToSetupScreen:) forControlEvents:UIControlEventTouchUpInside];
-        
-        }
-        return cellSetup;
-
     } else {
 
         NSString *sNetworksName = [socialNetworksName objectAtIndex:(indexPath.row-1)];
