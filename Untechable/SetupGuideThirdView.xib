@@ -32,6 +32,7 @@
             <constraints>
                 <constraint firstItem="uhQ-TO-PvR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="75" id="6sX-z5-xiK"/>
                 <constraint firstAttribute="bottom" secondItem="hTj-ch-n04" secondAttribute="bottom" constant="-14" id="Dgf-tj-3Ss"/>
+                <constraint firstAttribute="trailing" secondItem="uhQ-TO-PvR" secondAttribute="trailing" constant="105" id="Ibm-Df-NPJ"/>
                 <constraint firstAttribute="trailing" secondItem="hTj-ch-n04" secondAttribute="trailing" id="ORz-Tc-NQP"/>
                 <constraint firstItem="hTj-ch-n04" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="QCK-QY-NGT"/>
                 <constraint firstItem="uhQ-TO-PvR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="93" id="RcW-OX-YNR"/>
