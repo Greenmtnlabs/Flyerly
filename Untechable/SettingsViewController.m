@@ -248,11 +248,6 @@
     return cell;
 }
 
--(IBAction)goToSetupScreen:(id)sender {
-    
-    
-}
-
 -(IBAction)emailLogin:(id)sender {
     
     UIButton *emailButton = (UIButton *) sender;
