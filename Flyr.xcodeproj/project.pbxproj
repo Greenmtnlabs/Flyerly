@@ -151,9 +151,7 @@
 		202978A71B4CFBE700F35E40 /* emoticon244-surrender@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202978621B4CFBE700F35E40 /* emoticon244-surrender@2x.png */; };
 		202978A81B4CFBE700F35E40 /* emoticon245-sweat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202978631B4CFBE700F35E40 /* emoticon245-sweat@2x.png */; };
 		202978A91B4CFBE700F35E40 /* emoticon246-sweet_kiss@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202978641B4CFBE700F35E40 /* emoticon246-sweet_kiss@2x.png */; };
-		202978AA1B4CFBE700F35E40 /* emoticon247-SweetAngel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202978651B4CFBE700F35E40 /* emoticon247-SweetAngel@2x.png */; };
-		202978AB1B4CFBE700F35E40 /* emoticon248-ThumbsUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202978661B4CFBE700F35E40 /* emoticon248-ThumbsUp@2x.png */; };
-		202978AC1B4CFBE700F35E40 /* emoticon249-tire@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202978671B4CFBE700F35E40 /* emoticon249-tire@2x.png */; };
+		202978AC1B4CFBE700F35E40 /* emoticon247-tire@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202978671B4CFBE700F35E40 /* emoticon247-tire@2x.png */; };
 		202978AD1B4CFBE700F35E40 /* emoticon231-too_sad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202978681B4CFBE700F35E40 /* emoticon231-too_sad@2x.png */; };
 		202978AE1B4CFBE700F35E40 /* emoticon198-waaaht@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202978691B4CFBE700F35E40 /* emoticon198-waaaht@2x.png */; };
 		202978AF1B4CFBE700F35E40 /* emoticon211-what@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2029786A1B4CFBE700F35E40 /* emoticon211-what@2x.png */; };
@@ -1123,8 +1121,6 @@
 		24A81AC51B32D8AC00B6328D /* save_share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A81AC21B32D8AC00B6328D /* save_share@2x.png */; };
 		24A81AC81B32D92E00B6328D /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A81AC71B32D92E00B6328D /* Photos.framework */; };
 		24B7511E193DA02F007B6B85 /* Cliparts.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24B7511D193DA02F007B6B85 /* Cliparts.plist */; };
-		24B75120193DA06D007B6B85 /* Cliparts.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24B7511F193DA06D007B6B85 /* Cliparts.xib */; };
-		24B75122193DA07C007B6B85 /* Cliparts-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24B75121193DA07C007B6B85 /* Cliparts-iPhone4.xib */; };
 		24CF67AC1A026C75003A5623 /* CropViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24CF67AB1A026C75003A5623 /* CropViewController.xib */; };
 		24CF67AE1A026D88003A5623 /* CropViewController-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24CF67AD1A026D88003A5623 /* CropViewController-iPhone6.xib */; };
 		24D2543619F009E000590782 /* AnjelikaRose.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24D2543519F009E000590782 /* AnjelikaRose.ttf */; };
@@ -1132,7 +1128,6 @@
 		24F130BB1A0D0AF700464587 /* Borders-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F130BA1A0D0AF700464587 /* Borders-iPhone6.xib */; };
 		24F130BD1A0D0BF200464587 /* Colours-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F130BC1A0D0BF200464587 /* Colours-iPhone6.xib */; };
 		24F130BF1A0D0CA500464587 /* Sizes-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F130BE1A0D0CA500464587 /* Sizes-iPhone6.xib */; };
-		24F130C11A0D118200464587 /* Cliparts-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F130C01A0D118200464587 /* Cliparts-iPhone6.xib */; };
 		24F130C51A0D143F00464587 /* TextBorders-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F130C41A0D143F00464587 /* TextBorders-iPhone6.xib */; };
 		24F130C71A0D154900464587 /* DrawingEraserMsg-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F130C61A0D154900464587 /* DrawingEraserMsg-iPhone6.xib */; };
 		24F130C91A0D159600464587 /* DrawingPatterns-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F130C81A0D159600464587 /* DrawingPatterns-iPhone6.xib */; };
@@ -1660,9 +1655,7 @@
 		202978621B4CFBE700F35E40 /* emoticon244-surrender@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon244-surrender@2x.png"; sourceTree = "<group>"; };
 		202978631B4CFBE700F35E40 /* emoticon245-sweat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon245-sweat@2x.png"; sourceTree = "<group>"; };
 		202978641B4CFBE700F35E40 /* emoticon246-sweet_kiss@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon246-sweet_kiss@2x.png"; sourceTree = "<group>"; };
-		202978651B4CFBE700F35E40 /* emoticon247-SweetAngel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon247-SweetAngel@2x.png"; sourceTree = "<group>"; };
-		202978661B4CFBE700F35E40 /* emoticon248-ThumbsUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon248-ThumbsUp@2x.png"; sourceTree = "<group>"; };
-		202978671B4CFBE700F35E40 /* emoticon249-tire@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon249-tire@2x.png"; sourceTree = "<group>"; };
+		202978671B4CFBE700F35E40 /* emoticon247-tire@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon247-tire@2x.png"; sourceTree = "<group>"; };
 		202978681B4CFBE700F35E40 /* emoticon231-too_sad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon231-too_sad@2x.png"; sourceTree = "<group>"; };
 		202978691B4CFBE700F35E40 /* emoticon198-waaaht@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon198-waaaht@2x.png"; sourceTree = "<group>"; };
 		2029786A1B4CFBE700F35E40 /* emoticon211-what@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon211-what@2x.png"; sourceTree = "<group>"; };
@@ -2832,8 +2825,6 @@
 		24A81AC21B32D8AC00B6328D /* save_share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save_share@2x.png"; sourceTree = "<group>"; };
 		24A81AC71B32D92E00B6328D /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		24B7511D193DA02F007B6B85 /* Cliparts.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Cliparts.plist; sourceTree = "<group>"; };
-		24B7511F193DA06D007B6B85 /* Cliparts.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cliparts.xib; sourceTree = "<group>"; };
-		24B75121193DA07C007B6B85 /* Cliparts-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Cliparts-iPhone4.xib"; sourceTree = "<group>"; };
 		24CF67AB1A026C75003A5623 /* CropViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CropViewController.xib; sourceTree = "<group>"; };
 		24CF67AD1A026D88003A5623 /* CropViewController-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CropViewController-iPhone6.xib"; sourceTree = "<group>"; };
 		24D2543519F009E000590782 /* AnjelikaRose.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AnjelikaRose.ttf; path = Data/fonts/AnjelikaRose.ttf; sourceTree = "<group>"; };
@@ -2841,7 +2832,6 @@
 		24F130BA1A0D0AF700464587 /* Borders-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Borders-iPhone6.xib"; sourceTree = "<group>"; };
 		24F130BC1A0D0BF200464587 /* Colours-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Colours-iPhone6.xib"; sourceTree = "<group>"; };
 		24F130BE1A0D0CA500464587 /* Sizes-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Sizes-iPhone6.xib"; sourceTree = "<group>"; };
-		24F130C01A0D118200464587 /* Cliparts-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Cliparts-iPhone6.xib"; sourceTree = "<group>"; };
 		24F130C41A0D143F00464587 /* TextBorders-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "TextBorders-iPhone6.xib"; sourceTree = "<group>"; };
 		24F130C61A0D154900464587 /* DrawingEraserMsg-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DrawingEraserMsg-iPhone6.xib"; sourceTree = "<group>"; };
 		24F130C81A0D159600464587 /* DrawingPatterns-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DrawingPatterns-iPhone6.xib"; sourceTree = "<group>"; };
@@ -4382,9 +4372,6 @@
 				2012ECBA19261D0B00D5EA58 /* Colours-iPhone4s.xib */,
 				243DD520192B24B500391786 /* FlyerIcons.xib */,
 				243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */,
-				24B7511F193DA06D007B6B85 /* Cliparts.xib */,
-				24F130C01A0D118200464587 /* Cliparts-iPhone6.xib */,
-				24B75121193DA07C007B6B85 /* Cliparts-iPhone4.xib */,
 				24B7511D193DA02F007B6B85 /* Cliparts.plist */,
 				246264DE1947416A00933A69 /* Cliparts-paid.plist */,
 				2478587E19485BAC0062F1E4 /* Fonts.plist */,
@@ -4572,9 +4559,7 @@
 				202978621B4CFBE700F35E40 /* emoticon244-surrender@2x.png */,
 				202978631B4CFBE700F35E40 /* emoticon245-sweat@2x.png */,
 				202978641B4CFBE700F35E40 /* emoticon246-sweet_kiss@2x.png */,
-				202978651B4CFBE700F35E40 /* emoticon247-SweetAngel@2x.png */,
-				202978661B4CFBE700F35E40 /* emoticon248-ThumbsUp@2x.png */,
-				202978671B4CFBE700F35E40 /* emoticon249-tire@2x.png */,
+				202978671B4CFBE700F35E40 /* emoticon247-tire@2x.png */,
 				202978681B4CFBE700F35E40 /* emoticon231-too_sad@2x.png */,
 				202978691B4CFBE700F35E40 /* emoticon198-waaaht@2x.png */,
 				2029786A1B4CFBE700F35E40 /* emoticon211-what@2x.png */,
@@ -5850,7 +5835,6 @@
 				2435952E1A0CA85F00DD3C39 /* CustomAssetsGroupView-iPhone6-Plus.xib in Resources */,
 				248A3639193F26280005FCAD /* image_icon@2x.png in Resources */,
 				242184CD194B4AEC00FDDA97 /* firecracker-icon.png in Resources */,
-				24F130C11A0D118200464587 /* Cliparts-iPhone6.xib in Resources */,
 				30D58D3E10FB1BF800E0C7E8 /* icon66.jpg in Resources */,
 				30D58D3F10FB1BF800E0C7E8 /* icon7.jpg in Resources */,
 				30D58D4010FB1BF800E0C7E8 /* icon8.jpg in Resources */,
@@ -5887,7 +5871,6 @@
 				30D58D4910FB1BF800E0C7E8 /* Template15.jpg in Resources */,
 				242184FD194B4AEC00FDDA97 /* star-icon.png in Resources */,
 				30D58D4A10FB1BF800E0C7E8 /* Template16.jpg in Resources */,
-				202978AA1B4CFBE700F35E40 /* emoticon247-SweetAngel@2x.png in Resources */,
 				30D58D4B10FB1BF800E0C7E8 /* Template17.jpg in Resources */,
 				247858C71948764D0062F1E4 /* LilyScriptOne-Regular.ttf in Resources */,
 				30D58D4C10FB1BF800E0C7E8 /* Template18.jpg in Resources */,
@@ -6315,7 +6298,6 @@
 				24861EE919F9147100670F6D /* drawing_tab_color@3x.png in Resources */,
 				368ADADD19B6FF0400EAB305 /* DrawingEraserMsg-iPhone4.xib in Resources */,
 				C312C4691B4A55160073EB45 /* Template78@2x.jpg in Resources */,
-				24B75122193DA07C007B6B85 /* Cliparts-iPhone4.xib in Resources */,
 				65C1A4351742516D00947D5E /* Template29@2x.jpg in Resources */,
 				24218507194B4AEC00FDDA97 /* treasure-icon.png in Resources */,
 				65C1A4361742516D00947D5E /* Template30@2x.jpg in Resources */,
@@ -6362,7 +6344,7 @@
 				65C1A43F1742516D00947D5E /* Template39@2x.jpg in Resources */,
 				204231601A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib in Resources */,
 				242184FA194B4AEC00FDDA97 /* Skating-icon.png in Resources */,
-				202978AC1B4CFBE700F35E40 /* emoticon249-tire@2x.png in Resources */,
+				202978AC1B4CFBE700F35E40 /* emoticon247-tire@2x.png in Resources */,
 				24861EE519F9147100670F6D /* delete_button@3x.png in Resources */,
 				65C1A4401742516D00947D5E /* Template40@2x.jpg in Resources */,
 				24861F0619F9147100670F6D /* flyerlylogo@3x.png in Resources */,
@@ -6651,7 +6633,6 @@
 				202FF12B17C3ABDE003C6245 /* bkg_register-568h@2x.png in Resources */,
 				247858BA194875D20062F1E4 /* Komoda-Regular.otf in Resources */,
 				2086F90E17C4C2E300664123 /* Zmain_screenbg@2x.png in Resources */,
-				24B75120193DA06D007B6B85 /* Cliparts.xib in Resources */,
 				246EF504193C515D004539B2 /* emoticon39@2x.png in Resources */,
 				24861EF119F9147100670F6D /* drawing_tab@3x.png in Resources */,
 				202978931B4CFBE700F35E40 /* emoticon224-matrix@2x.png in Resources */,
@@ -6712,7 +6693,6 @@
 				202C639617EA06E800CB9A75 /* ricon31.png in Resources */,
 				24861F3119F9147100670F6D /* pause_icon@3x.png in Resources */,
 				2453E39F19AC5E0300CB2958 /* buy@2x.png in Resources */,
-				202978AB1B4CFBE700F35E40 /* emoticon248-ThumbsUp@2x.png in Resources */,
 				24861F5E19F9147100670F6D /* twitter_login@3x.png in Resources */,
 				249F2035193F562C0072835E /* outline_button_selected@2x.png in Resources */,
 				202C639817EA06E800CB9A75 /* ricon32.png in Resources */,
