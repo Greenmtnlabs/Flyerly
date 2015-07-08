@@ -97,6 +97,25 @@
         [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
         
        // [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
+        
+        // Right Navigation ______________________________________________
+        nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        
+        nextButton.titleLabel.shadowColor = [UIColor clearColor];
+        
+        [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
+        
+        nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [nextButton setTitle:TITLE_EDIT_TEXT forState:normal];
+        [nextButton setTitleColor:defGray forState:UIControlStateNormal];
+        [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
+        [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
+        
+        nextButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
+        
+        [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
     }
 }
 
@@ -110,11 +129,30 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(void)btnNextTouchStart{
+    [self setNextHighlighted:YES];
+}
+-(void)btnNextTouchEnd{
+    [self setNextHighlighted:NO];
+}
+- (void)setNextHighlighted:(BOOL)highlighted {
+    (highlighted) ? [nextButton setBackgroundColor:defGreen] : [nextButton setBackgroundColor:[UIColor clearColor]];
+}
+
+-(void)onNext{
+    
+    SetupGuideViewController *secondSetupScreen = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
+    secondSetupScreen.untechable = untechable;
+    [self.navigationController pushViewController:secondSetupScreen animated:YES];
+    
+}
+
+
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     //return number of rows;
-    return  6;
+    return  5;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -155,7 +193,7 @@
             
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SetupGuideOption" owner:self options:nil];
             cellSetup = (SetupGuideOption *)[nib objectAtIndex:0];
-            [cellSetup.setupBtn addTarget:self action:@selector(testRufi:) forControlEvents:UIControlEventTouchUpInside];
+            [cellSetup.setupBtn addTarget:self action:@selector(goToSetupScreen:) forControlEvents:UIControlEventTouchUpInside];
         
         }
         return cellSetup;
@@ -225,11 +263,9 @@
     return cell;
 }
 
--(IBAction)testRufi:(id)sender {
+-(IBAction)goToSetupScreen:(id)sender {
     
-        SetupGuideViewController *secondSetupScreen = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
-        secondSetupScreen.untechable = untechable;
-        [self.navigationController pushViewController:secondSetupScreen animated:YES];
+    
 }
 
 -(IBAction)emailLogin:(id)sender {

@@ -29,6 +29,7 @@
 #define TITLE_SETTINGS_TXT @"SETTINGS"
 #define TITLE_DONE_TXT @"DONE"
 #define TITLE_FINISH_TXT @"FINISH"
+#define TITLE_EDIT_TEXT @"EDIT"
 #define TITLE_FONT @"Pigiarniq-Bold"
 #define TITLE_FONT_SIZE 18
 #define TITLE_LEFT_SIZE 12

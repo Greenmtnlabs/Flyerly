@@ -20,7 +20,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    _statusLabel.text = @"";
     // Configure the view for the selected state
 }
 
