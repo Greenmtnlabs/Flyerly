@@ -454,7 +454,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     NSString *userNameInDb = [[NSUserDefaults standardUserDefaults]
                               stringForKey:@"userName"];
-    NSString *userPhoneNumber = [[NSUserDefaults standardUserDefaults] stringForKey:@"userPhoneNumber"];
+    NSString *userPhoneNumber = [[NSUserDefaults standardUserDefaults] stringForKey:@"userphoneNumber"];
     
     [dic setValue:userNameInDb forKey:@"userName"];
     [dic setValue:userPhoneNumber forKey:@"userPhoneNumber"];
