@@ -57,6 +57,7 @@ BOOL adLoaded = false;
 	createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
     createFlyer.flyerPath = flyPath;
     createFlyer.flyer = flyer;
+
     
     //Tasks after create new flyer 
     [createFlyer tasksOnCreateNewFlyer];
@@ -65,9 +66,10 @@ BOOL adLoaded = false;
     __weak CreateFlyerController *weakCreate = createFlyer;
     
     [createFlyer setOnFlyerBack:^(NSString *flyPath) {
-        
         //Here we setCurrent Flyer is Most Recent Flyer
         [weakCreate.flyer setRecentFlyer];
+
+        [weakCreate.flyer saveAfterCheck];
         
         //Getting Recent Flyers
         weakSelf.recentFlyers = [Flyer recentFlyerPreview:4];
@@ -109,6 +111,7 @@ BOOL adLoaded = false;
         [button setUserInteractionEnabled:NO];
     }
 }
+
 
 -(IBAction)doOpen:(id)sender{
     tpController = [[FlyrViewController alloc]initWithNibName:@"FlyrViewController" bundle:nil];
@@ -402,6 +405,8 @@ BOOL adLoaded = false;
 
 - (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
     
+    [createFlyer.flyer saveAfterCheck];
+    
     self.addInterstialFms.delegate = nil;
     
     // Prepare next addInterstialFms.
@@ -580,9 +585,11 @@ BOOL adLoaded = false;
     __weak CreateFlyerController *weakCreate = createFlyer;
     
     [createFlyer setOnFlyerBack:^(NSString *flyPath) {
-
+        
         //Here we setCurrent Flyer is Most Recent Flyer
         [weakCreate.flyer setRecentFlyer];
+        
+        [weakCreate.flyer saveAfterCheck];
 
         //Getting Recent Flyers
         weakSelf.recentFlyers = [Flyer recentFlyerPreview:4];

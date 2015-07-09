@@ -20,6 +20,9 @@
     NSString *socialFile;
     NSString *flyerImageFile;
     BOOL     *_setDirectory;
+
+    //On back save in gallary, after number of tasks
+    int saveInGallaryAfterNumberOfTasks;
 }
 
 
@@ -31,7 +34,7 @@
 
 -(void)setUpdatedSnapshotWithImage :(UIImage *)snapShot;
 
--(void)saveInGallery :(NSData *)imgData;
+-(void)saveIntoGallery;
 
 -(void)addToHistory;
 -(void)addToGallery :(NSData *)snapShotData;
@@ -169,6 +172,7 @@
 -(CGFloat)getTvDefPosX;
 -(CGFloat)getTvDefPosY;
 -(BOOL)canIncreaseVideoSize;
+-(void)saveAfterCheck;
 
 @property (strong, readonly) NSMutableDictionary *masterLayers;
 @property (strong, nonatomic) NSMutableArray *socialArray;

@@ -85,7 +85,7 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     
     //Load flyer
     [self loadFlyer:flyPath];
-    
+    saveInGallaryAfterNumberOfTasks = 0;
     return self;
 }
 
@@ -158,7 +158,7 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
         
         //USER ALLOWED
         //HERE WE WRITE IMAGE OR VIDEO IN GALLERY
-        [self saveInGallery:snapShotData];
+        //[self saveIntoGallery:snapShotData];
     }
 
 }
@@ -202,11 +202,47 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     [snapShotData writeToFile:flyerImageFile atomically:YES];
 }
 
+-(void)saveAfterCheck{
+    saveInGallaryAfterNumberOfTasks++;
+    NSLog(@"saveInGallaryAfterNumberOfTasks=%i",saveInGallaryAfterNumberOfTasks);
+    if ( [self isVideoFlyer] ){
+        if( saveInGallaryAfterNumberOfTasks > 1 ){
+            [self saveIntoGallery];
+        }
+    } else{
+            [self saveIntoGallery];
+    }
+}
+
+-(void)saveIntoGallery{
+    // HERE WE CHECK USER ALLOWED TO SAVE IN GALLERY FROM SETTING
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"]){
+        
+        if ( [self isVideoFlyer] ){
+            [self saveIntoGallery2:nil];
+        }else {
+            UIImage *snapShot = [UIImage imageWithContentsOfFile:[self getFlyerImage]];
+            //Getting Current Path
+            NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+            
+            //set Flyer Image for Future Update
+            flyerImageFile = [currentPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE]];
+            
+            
+            //Convert Imgae into Data
+            NSData *snapShotData = UIImagePNGRepresentation(snapShot);
+            
+            //Here we Update Flyer File from Current Snapshot
+            [snapShotData writeToFile:flyerImageFile atomically:YES];
+            [self saveIntoGallery2:snapShotData];
+        }
+    }
+}
 /*** HERE WE SAVE IMAGE INTO GALLERY
  * AND LINK WITH FLYERLY ALBUM
  *
  */
--(void)saveInGallery :(NSData *)imgData {
+-(void)saveIntoGallery2 :(NSData *)imgData {
     
 
     // CREATE LIBRARY OBJECT FIRST
@@ -1157,7 +1193,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  * Here We Change Flyer Directory Name to Current Time Stamp
  */
 -(void)setRecentFlyer {
-
+    NSLog( @"setRecentFlyer");
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     
     NSString *uniqueId = [Flyer getUniqueId];
