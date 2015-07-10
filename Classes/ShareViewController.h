@@ -43,6 +43,7 @@
     FlyerlySingleton *globle;
     NSArray *arrayOfAccounts;
     SHKSharer *iosSharer;
+    BOOL hasSavedInGallary;//have we called saved in gallary from share screen
 
 }
 

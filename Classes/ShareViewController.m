@@ -25,6 +25,7 @@ UIAlertView *saveCurrentFlyerAlert;
 - (void)viewDidLoad {
     [super viewDidLoad];
     isSharePanelOpen = YES;
+    hasSavedInGallary = NO;
     
     UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
     [UserVoice initialize:config];
@@ -803,10 +804,18 @@ UIAlertView *saveCurrentFlyerAlert;
 
 
 
-
+-(void)callSaveInGallary {
+    if( hasSavedInGallary != YES ){
+        hasSavedInGallary = YES;
+        self.flyer.saveInGallaryAfterNumberOfTasks++;
+        [self.flyer saveAfterCheck];
+    }
+}
 
 - (void)sharerFinishedSending:(SHKSharer *)sharer
 {
+
+    [self callSaveInGallary];
     // Here we Check Sharer for
     // Update Flyer Share Info in Social File
     if ( [sharer isKindOfClass:[SHKiOSFacebook class]] == YES ||
@@ -1027,8 +1036,7 @@ UIAlertView *saveCurrentFlyerAlert;
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
    if( alertView == saveCurrentFlyerAlert ) {
-       self.flyer.saveInGallaryAfterNumberOfTasks++;
-       [self.flyer saveAfterCheck];
+       [self callSaveInGallary];
    }
    else{
        switch (alertView.tag)
