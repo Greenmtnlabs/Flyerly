@@ -807,7 +807,8 @@ UIAlertView *saveCurrentFlyerAlert;
     if( hasSavedInGallary != YES ){
         hasSavedInGallary = YES;
         self.flyer.saveInGallaryAfterNumberOfTasks++;
-        [self.flyer saveAfterCheck];
+        //Will enable once sharing work logic is clear
+        //[self.flyer saveAfterCheck];
     }
 }
 
