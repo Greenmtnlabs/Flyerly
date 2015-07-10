@@ -387,7 +387,7 @@ id lastShareBtnSender;
     [createFlyer setOnFlyerBack:^(NSString *nothing) {
         
         // Here we setCurrent Flyer is Most Recent Flyer
-        [weakSelf.flyer setRecentFlyer];
+        [weakCreate.flyer setRecentFlyer];
         
         [weakCreate.flyer saveAfterCheck];
         
