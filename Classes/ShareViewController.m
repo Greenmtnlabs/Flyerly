@@ -12,16 +12,19 @@
 
 @implementation ShareViewController
 
-@synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,flickrButton,printFlyerButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,lblFirstShareOnYoutube,tempTxtArea;
+@synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,flickrButton,printFlyerButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,lblFirstShareOnYoutube,tempTxtArea,isSharePanelOpen;
 
 @synthesize flyerShareType,star1,star2,star3,star4,star5;
 
 @synthesize descriptionView, titlePlaceHolderImg, titleView, descTextAreaImg;
 
+UIAlertView *saveCurrentFlyerAlert;
+
 #pragma mark  View Appear Methods
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    isSharePanelOpen = YES;
     
     UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
     [UserVoice initialize:config];
@@ -333,6 +336,7 @@
     shareButton.enabled = YES;
     backButton.enabled = YES;
     helpButton.enabled = YES;
+    isSharePanelOpen = NO;
 }
 
 -(void)enableAllShareOptions {
@@ -560,7 +564,11 @@
 
     [flickrButton setSelected:YES];
     [self updateDescription];
-    UIAlertView *saveCurrentFlyerAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"The current Flyer has been saved successfully" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    saveCurrentFlyerAlert = [[UIAlertView alloc] initWithTitle:@"Success"
+                                                 message:@"The current Flyer has been saved successfully"
+                                                 delegate:self
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil, nil];
     
     [saveCurrentFlyerAlert show];
     
@@ -1018,26 +1026,31 @@
 #pragma mark UIAlertView delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-  
-   switch (alertView.tag)
-  {
-    // if 1 alert view selected having tag 0
-      case 0:
-          if (buttonIndex == 1 ){
-          [self sendAlertEmail];
-      }
-    break;
-          
-    //if 2 alert view selected having tag 1
-      case 1:
-    if(buttonIndex == 1) {
-            NSString *url = [NSString stringWithFormat: @"itms-apps://itunes.apple.com/app/id344130515"];
-            [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
-        }
-    break;
-    
-      }
+   if( alertView == saveCurrentFlyerAlert ) {
+       self.flyer.saveInGallaryAfterNumberOfTasks++;
+       [self.flyer saveAfterCheck];
+   }
+   else{
+       switch (alertView.tag)
+      {
+        // if 1 alert view selected having tag 0
+          case 0:
+              if (buttonIndex == 1 ){
+              [self sendAlertEmail];
+          }
+        break;
+              
+        //if 2 alert view selected having tag 1
+          case 1:
+        if(buttonIndex == 1) {
+                NSString *url = [NSString stringWithFormat: @"itms-apps://itunes.apple.com/app/id344130515"];
+                [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
+            }
+        break;
+        
+          }
     }
+}
 
 
 -(IBAction)clickOnFlyerType:(id)sender {

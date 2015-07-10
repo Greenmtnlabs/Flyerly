@@ -842,7 +842,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             [Flurry logEvent:@"Saved Flyer"];
             
         } else {
-            flyer.saveInGallaryAfterNumberOfTasks--;//when we have no need to saveInGallary on back
+            flyer.saveInGallaryAfterNumberOfTasks = 0;//when we have no need to saveInGallary on back
             dispatch_async( dispatch_get_main_queue(), ^{
                 
                 // Here we call Block for update Main UI
@@ -3892,9 +3892,13 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                     
                     // Main Thread
                     dispatch_async( dispatch_get_main_queue(), ^{
-                        
-                        //Here we Open Share Panel for Share Flyer
-                        self.onFlyerBack(@"");
+                          //Here we Open Share Panel for Share Flyer
+                        if( shareviewcontroller == nil ){
+                          self.onFlyerBack(@"");
+                        }
+                        else if(shareviewcontroller != nil && shareviewcontroller.isSharePanelOpen == NO){
+                          self.onFlyerBack(@"");
+                        }
                         
                     });
                 }

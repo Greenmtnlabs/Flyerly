@@ -211,9 +211,11 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     if( saveInGallaryAfterNumberOfTasks > 0 ){
         if ( [self isVideoFlyer] ){
             if( saveInGallaryAfterNumberOfTasks > 1 ){
+                saveInGallaryAfterNumberOfTasks = 0;
                 [self saveIntoGallery];
             }
         } else{
+                saveInGallaryAfterNumberOfTasks = 0;
                 [self saveIntoGallery];
         }
     }
