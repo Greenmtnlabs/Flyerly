@@ -187,7 +187,8 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
 }
 
 /**
- * Here we check, if its video flyer then add in gallary after interstiall add hide and merging done
+ * Here we check following tasks before save
+ * if its video flyer then add in gallary after interstiall add hide and merging done
  */
 -(void)saveAfterCheck{
     saveInGallaryAfterNumberOfTasks++;
@@ -204,13 +205,15 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
         }
     }
 }
-
+/**
+ * Save in gallary after checking userdefaults, without data
+ */
 -(void)saveIntoGallery{
     // HERE WE CHECK USER ALLOWED TO SAVE IN GALLERY FROM SETTING
     if([[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"]){
         
         if ( [self isVideoFlyer] ){
-            [self saveIntoGallery2:nil];
+            [self saveIntoGalleryWithData:nil];
         }else {
             UIImage *snapShot = [UIImage imageWithContentsOfFile:[self getFlyerImage]];
             //Getting Current Path
@@ -225,15 +228,16 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
             
             //Here we Update Flyer File from Current Snapshot
             [snapShotData writeToFile:flyerImageFile atomically:YES];
-            [self saveIntoGallery2:snapShotData];
+            [self saveIntoGalleryWithData:snapShotData];
         }
     }
 }
+
 /*** HERE WE SAVE IMAGE INTO GALLERY
  * AND LINK WITH FLYERLY ALBUM
- *
+ * Data is required
  */
--(void)saveIntoGallery2 :(NSData *)imgData {
+-(void)saveIntoGalleryWithData :(NSData *)imgData {
     
 
     // CREATE LIBRARY OBJECT FIRST
