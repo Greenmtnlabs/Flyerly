@@ -164,7 +164,7 @@ UIAlertView *saveCurrentFlyerAlert;
     [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIGraphicsEndImageContext();
     
-    UIImage *originalImage = [UIImage imageWithContentsOfFile:imageFileName];
+    UIImage *originalImage = selectedFlyerImage;//[UIImage imageWithContentsOfFile:imageFileName];
     
     NSString  *updatedImagePath = [imageFileName stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@".%@",IMAGETYPE ] withString:@".igo"];
     NSData *imgData = UIImagePNGRepresentation(originalImage);
