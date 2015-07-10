@@ -28,7 +28,7 @@
     [self initializeTextViews];
     [self setNavigationBarItems];
     [self setupDefaultModel];
-    
+    [self setNavigation:@"viewDidLoad"];
 
 }
 
@@ -38,7 +38,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    [self setNavigation:@"viewDidLoad"];
+    
 }
 
 /**
