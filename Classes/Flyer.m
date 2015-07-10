@@ -525,6 +525,7 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     if( canSave == NO && [self isVideoFlyer]){
         canSave = [self isVideoMergeProcessRequired];
     }
+    NSLog(@"canSave:%@",(canSave ? @"YES" : @"NO"));
     return  canSave;
 }
 

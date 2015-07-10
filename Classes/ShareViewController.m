@@ -90,20 +90,8 @@ UIAlertView *saveCurrentFlyerAlert;
     
     [self.view addSubview:descriptionView];
     
-    [self testPrintFrameSize];
-    
     descTextAreaImg.frame = descriptionView.frame;
     
-}
-
--(void)printFrame:(NSString *)frameName frame:(CGRect)frame{
-    NSLog(@"%@:(%f,%f,%f,%f)",frameName, frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
-}
--(void)testPrintFrameSize {
-    [self printFrame:@"titlePlaceHolderImg.frame" frame:titlePlaceHolderImg.frame];
-    [self printFrame:@"titleView.frame" frame:titleView.frame];
-    [self printFrame:@"descTextAreaImg.frame" frame:descTextAreaImg.frame];
-    [self printFrame:@"descriptionView.frame" frame:descriptionView.frame];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
