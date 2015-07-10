@@ -800,10 +800,9 @@ UIAlertView *saveCurrentFlyerAlert;
     
 }
 
-
-
-
-
+/**
+ * save in gallary only once when sharing pannel is open
+ */
 -(void)callSaveInGallary {
     if( hasSavedInGallary != YES ){
         hasSavedInGallary = YES;
