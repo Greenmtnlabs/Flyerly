@@ -28,6 +28,8 @@
     [self initializeTextViews];
     [self setNavigationBarItems];
     [self setupDefaultModel];
+    
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -172,10 +174,30 @@
     
     if([callFrom isEqualToString:@"viewDidLoad"])
     {
+
         self.navigationItem.hidesBackButton = YES;
         
         // Center title __________________________________________________
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
+       
+        if( userName != NULL ){
+        // Left Navigation ______________________________________________
+        backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+            
+        backButton.titleLabel.shadowColor = [UIColor clearColor];
+        
+        [backButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
+        backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
+        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitleColor:defGray forState:UIControlStateNormal];
+        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
+        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+            
+        backButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        
+        [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+        }
         
         // Right Navigation ______________________________________________
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
@@ -197,6 +219,10 @@
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
         
     }
+}
+
+-(IBAction)goBack{
+    [untechable goBack:self.navigationController];
 }
 
 -(void)btnNextTouchStart{
