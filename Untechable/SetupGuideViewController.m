@@ -10,7 +10,6 @@
 #import "Common.h"
 #import "SetupGuideSecondViewController.h"
 #import "AddUntechableController.h"
-#import "SetupGuideViewController.h"
 
 @interface SetupGuideViewController () {
     NSString *userName;
@@ -223,10 +222,6 @@
 }
 
 -(IBAction)goBack{
-    
-   // NSLog(@"selectedContacts %@",selectedContacts);
-    //untechable.emergencyContacts = selectedContacts;
-    
     [untechable goBack:self.navigationController];
 }
 
