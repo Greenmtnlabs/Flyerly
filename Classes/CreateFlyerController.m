@@ -842,6 +842,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             [Flurry logEvent:@"Saved Flyer"];
             
         } else {
+            flyer.saveInGallaryAfterNumberOfTasks--;//when we have no need to saveInGallary on back
             dispatch_async( dispatch_get_main_queue(), ^{
                 
                 // Here we call Block for update Main UI

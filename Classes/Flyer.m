@@ -38,6 +38,7 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
 @synthesize masterLayers;
 @synthesize textFileArray;
 @synthesize socialArray;
+@synthesize saveInGallaryAfterNumberOfTasks;
 
 /*
  * This method will be used to initiate the Flyer class
@@ -204,13 +205,17 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
 
 -(void)saveAfterCheck{
     saveInGallaryAfterNumberOfTasks++;
+    
     NSLog(@"saveInGallaryAfterNumberOfTasks=%i",saveInGallaryAfterNumberOfTasks);
-    if ( [self isVideoFlyer] ){
-        if( saveInGallaryAfterNumberOfTasks > 1 ){
-            [self saveIntoGallery];
+    
+    if( saveInGallaryAfterNumberOfTasks > 0 ){
+        if ( [self isVideoFlyer] ){
+            if( saveInGallaryAfterNumberOfTasks > 1 ){
+                [self saveIntoGallery];
+            }
+        } else{
+                [self saveIntoGallery];
         }
-    } else{
-            [self saveIntoGallery];
     }
 }
 
@@ -527,7 +532,7 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
 -(BOOL)isSaveRequired {
     NSMutableDictionary *oldMasterLayers = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
     BOOL canSave = ( [oldMasterLayers isEqualToDictionary:masterLayers]) ? NO : YES;
-    if( canSave == NO ){
+    if( canSave == NO && [self isVideoFlyer]){
         canSave = [self isVideoMergeProcessRequired];
     }
     return  canSave;

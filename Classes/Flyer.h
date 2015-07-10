@@ -20,9 +20,6 @@
     NSString *socialFile;
     NSString *flyerImageFile;
     BOOL     *_setDirectory;
-
-    //On back save in gallary, after number of tasks
-    int saveInGallaryAfterNumberOfTasks;
 }
 
 
@@ -178,5 +175,8 @@
 @property (strong, nonatomic) NSMutableArray *socialArray;
 @property (strong, nonatomic) NSMutableArray *textFileArray;
 @property (strong, nonatomic) ALAssetsLibrary *library;
+
+//On back save in gallary, after number of tasks
+@property (assign) int saveInGallaryAfterNumberOfTasks;
 
 @end
