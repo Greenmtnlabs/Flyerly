@@ -22,6 +22,7 @@
 #define EMAIL_KEY @"emailAddress"
 #define PASSWORD_KEY @"emailPassword"
 
+#define TITLE_SKIP_TXT @"SKIP"
 #define TITLE_SAVE_TXT @"SAVE"
 #define TITLE_NEXT_TXT @"NEXT"
 #define TITLE_NEW_TXT @"NEW"
