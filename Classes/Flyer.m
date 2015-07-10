@@ -1188,7 +1188,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  * Here We Change Flyer Directory Name to Current Time Stamp
  */
 -(void)setRecentFlyer {
-    NSLog( @"setRecentFlyer");
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     
     NSString *uniqueId = [Flyer getUniqueId];
