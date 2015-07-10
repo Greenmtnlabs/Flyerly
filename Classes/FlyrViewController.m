@@ -192,10 +192,11 @@ id lastShareBtnSender;
     [createFlyer tasksOnCreateNewFlyer];
     
     __weak FlyrViewController *weakSelf = self;
+    __weak CreateFlyerController *weakCreate = createFlyer;
     
     //Here we Manage Block for Update
     [createFlyer setOnFlyerBack:^(NSString *nothing) {
-        
+        [weakCreate.flyer saveAfterCheck];
         //HERE WE GET FLYERS
         weakSelf.flyerPaths = [weakSelf getFlyersPaths];
         [weakSelf.tView reloadData];
@@ -204,12 +205,11 @@ id lastShareBtnSender;
 
     [createFlyer setShouldShowAdd:^(NSString *flyPath) {
         dispatch_async( dispatch_get_main_queue(), ^{
-            UserPurchases *userPurchases_ = [UserPurchases getInstance];
-            //if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
-                if ([weakSelf.interstitial isReady] && ![weakSelf.interstitial hasBeenUsed]){
-                    [weakSelf.interstitial presentFromRootViewController:weakSelf];
-                }
-            //}
+            if ([weakSelf.interstitial isReady] && ![weakSelf.interstitial hasBeenUsed]){
+                [weakSelf.interstitial presentFromRootViewController:weakSelf];
+            }  else{
+                [weakCreate.flyer saveAfterCheck];
+            }
         });
     }];
     
@@ -381,12 +381,15 @@ id lastShareBtnSender;
     createFlyer.flyer = flyer;
     
     __weak FlyrViewController *weakSelf = self;
+    __weak CreateFlyerController *weakCreate = createFlyer;
     
     //Here we Manage Block for Update
     [createFlyer setOnFlyerBack:^(NSString *nothing) {
         
         // Here we setCurrent Flyer is Most Recent Flyer
         [weakSelf.flyer setRecentFlyer];
+        
+        [weakCreate.flyer saveAfterCheck];
         
         // HERE WE GET FLYERS
         weakSelf.flyerPaths = [weakSelf getFlyersPaths];
@@ -396,17 +399,21 @@ id lastShareBtnSender;
     
     [createFlyer setShouldShowAdd:^(NSString *flyPath) {
         dispatch_async( dispatch_get_main_queue(), ^{
-            UserPurchases *userPurchases_ = [UserPurchases getInstance];
-            //if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
             if ([weakSelf.interstitial isReady] && ![weakSelf.interstitial hasBeenUsed]){
                 [weakSelf.interstitial presentFromRootViewController:weakSelf];
+            } else{
+                [weakCreate.flyer saveAfterCheck];
             }
-            //}
         });
     }];
     
 	[self.navigationController pushViewController:createFlyer animated:YES];
 }
+- (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
+    //on add dismiss && after merging video process, save in gallery
+    [createFlyer.flyer saveAfterCheck];
+}
+
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
