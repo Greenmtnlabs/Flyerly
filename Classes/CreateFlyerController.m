@@ -842,9 +842,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             [Flurry logEvent:@"Saved Flyer"];
             
         } else {
-            flyer.saveInGallaryAfterNumberOfTasks = -1;//when we have no need to saveInGallary on back
             dispatch_async( dispatch_get_main_queue(), ^{
-                
+                self.flyer.saveInGallaryAfterNumberOfTasks = -1;//when we have no need to saveInGallary on back
                 // Here we call Block for update Main UI
                 self.onFlyerBack( @"" );
             });
@@ -4407,6 +4406,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     //Here we remove Borders from layer if user touch any layer
     [self.flyimgView layerStoppedEditing:currentLayer];
     
+    
     if( [flyer isSaveRequired] == YES ) {
         
         // Save flyer to disk //
@@ -4418,11 +4418,12 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         //Here we Merge Video for Sharing
         if ([flyer isVideoFlyer]) {
             
+            //here we keep the merging vido path
+            [flyer isVideoMergeProcessRequired];
+            flyer.saveInGallaryAfterNumberOfTasks  = 2;
+            
             //Background Thread
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-                
-                //here we keep the merging vido path
-                [flyer isVideoMergeProcessRequired];
                 
                 //Here we Merge All Layers in Video File
                 [self videoMergeProcess];
@@ -4432,6 +4433,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             //Here we take Snap shot of Flyer and
             //Flyer Add to Gallery if user allow to Access there photos
             [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
+            [flyer saveIntoGallery];
+            
         }
     }
     
