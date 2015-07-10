@@ -811,12 +811,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
             // Make a history entry if needed.
             [flyer addToHistory]; //
+            
+            //here we keep the merging vido path
+            [flyer isVideoMergeProcessRequired];
         
             // If this is a video flyer, then merge the video.
             if ( [flyer isVideoFlyer] ) {
-
-                //here we keep the merging vido path
-                [flyer isVideoMergeProcessRequired];
+                
                 
                 self.shouldShowAdd ( @"" );
                 
@@ -4415,11 +4416,12 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         // Make a history entry if needed.
         [flyer addToHistory];
         
+        //here we keep the merging vido path
+        [flyer isVideoMergeProcessRequired];
+        
         //Here we Merge Video for Sharing
         if ([flyer isVideoFlyer]) {
-            
-            //here we keep the merging vido path
-            [flyer isVideoMergeProcessRequired];
+
             flyer.saveInGallaryAfterNumberOfTasks  = 2;
             
             //Background Thread
