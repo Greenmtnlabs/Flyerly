@@ -186,10 +186,11 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     [snapShotData writeToFile:flyerImageFile atomically:YES];
 }
 
+/**
+ * Here we check, if its video flyer then add in gallary after interstiall add hide and merging done
+ */
 -(void)saveAfterCheck{
     saveInGallaryAfterNumberOfTasks++;
-    
-    NSLog(@"saveInGallaryAfterNumberOfTasks=%i",saveInGallaryAfterNumberOfTasks);
     
     if( saveInGallaryAfterNumberOfTasks > 0 ){
         if ( [self isVideoFlyer] ){
