@@ -180,29 +180,25 @@
         
         // Center title __________________________________________________
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
-        BOOL isFirstTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"isFirstTime"];
-        if( isFirstTime == nil )
-        {
-            // Right Navigation ______________________________________________
-            backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+       
+        if( userName != NULL ){
+        // Left Navigation ______________________________________________
+        backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
             
-            backButton.titleLabel.shadowColor = [UIColor clearColor];
-            
-            [backButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
-            
-            backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
-            [backButton setTitle:TITLE_BACK_TXT forState:normal];
-            [backButton setTitleColor:defGray forState:UIControlStateNormal];
-            [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
-            [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-            
-            backButton.showsTouchWhenHighlighted = YES;
-            UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
-            NSMutableArray  *leftNavItems  = [NSMutableArray arrayWithObjects:leftBarButton,nil];
-
+        backButton.titleLabel.shadowColor = [UIColor clearColor];
         
+        [backButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
+        backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
+        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitleColor:defGray forState:UIControlStateNormal];
+        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
+        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+            
+        backButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        
+        [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
         }
-        
         
         // Right Navigation ______________________________________________
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
