@@ -3903,8 +3903,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                     });
                 }
                 
-                // Here we Add Video In Flyerly Album
-                [self.flyer addToGallery:nil];
             }
         };
         

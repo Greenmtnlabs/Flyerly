@@ -34,7 +34,6 @@
 -(void)saveIntoGallery;
 
 -(void)addToHistory;
--(void)addToGallery :(NSData *)snapShotData;
 
 -(void)replaceFromHistory;
 

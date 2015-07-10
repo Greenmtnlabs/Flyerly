@@ -142,27 +142,10 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     
     //Here we Update Flyer File from Current Snapshot
     [snapShotData writeToFile:flyerImageFile atomically:YES];
-    
-    //Here we Add Image in Flyerly Album
-    [self addToGallery:snapShotData];
 
 }
 
 
-/*
- * HERE WE SAVE CONTENT IN USER GALLERY
- */
--(void)addToGallery :(NSData *)snapShotData {
-    
-    // HERE WE CHECK USER ALLOWED TO SAVE IN GALLERY FROM SETTING
-    if([[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"]){
-        
-        //USER ALLOWED
-        //HERE WE WRITE IMAGE OR VIDEO IN GALLERY
-        //[self saveIntoGallery:snapShotData];
-    }
-
-}
 
 /*
  * Here we save the dictionary to .peices files
