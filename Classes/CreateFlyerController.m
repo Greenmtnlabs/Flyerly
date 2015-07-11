@@ -288,8 +288,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 }
 
 -(void)testingFn{
-    NSLog(@"layerScrollView(%f,%f,%f,%f)",layerScrollView.frame.origin.x,layerScrollView.frame.origin.y,layerScrollView.frame.size.width,layerScrollView.frame.size.height);
-    NSLog(@"self.contextView(%f,%f,%f,%f)",self.contextView.frame.origin.x,self.contextView.frame.origin.y,self.contextView.frame.size.width,self.contextView.frame.size.height);
+//    NSLog(@"layerScrollView(%f,%f,%f,%f)",layerScrollView.frame.origin.x,layerScrollView.frame.origin.y,layerScrollView.frame.size.width,layerScrollView.frame.size.height);
+//    NSLog(@"self.contextView(%f,%f,%f,%f)",self.contextView.frame.origin.x,self.contextView.frame.origin.y,self.contextView.frame.size.width,self.contextView.frame.size.height);
     
 }
 
@@ -4230,7 +4230,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
  */
 -(void)bringNotEditableLayersToFront:(NSString *)callFrom{
 
-    NSLog(@"bringNotEditableLayersToFront callFrom = %@",callFrom);
     
     NSArray *flyerPiecesKeys = [flyer allKeys];
     
