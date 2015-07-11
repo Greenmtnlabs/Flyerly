@@ -46,7 +46,7 @@
     NSArray *requestedProducts;
     RMStoreKeychainPersistence *_persistence;
     PrintViewController *printViewController;
-    UIButton *helpButton, *backButton;
+    UIButton *helpButton, *backButton,*createButton;
 }
 
 
