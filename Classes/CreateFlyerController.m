@@ -288,12 +288,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     bannerAddClosed = valForBannerClose;
 }
 
--(void)testingFn{
-//    NSLog(@"layerScrollView(%f,%f,%f,%f)",layerScrollView.frame.origin.x,layerScrollView.frame.origin.y,layerScrollView.frame.size.width,layerScrollView.frame.size.height);
-//    NSLog(@"self.contextView(%f,%f,%f,%f)",self.contextView.frame.origin.x,self.contextView.frame.origin.y,self.contextView.frame.size.width,self.contextView.frame.size.height);
-    
-}
-
 /**
  * View setup. This is done once per instance.
  */
@@ -362,9 +356,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         lsvRec = CGRectMake(0, 0,420,189);
     }
     layerScrollView = [[UIScrollView alloc]initWithFrame:lsvRec];
-    [self testingFn];
+    
     layerScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(lsvRec.origin.x, lsvRec.origin.y, self.contextView.frame.size.width,self.contextView.frame.size.height)];
-    [self testingFn];
+    
     
     layerScrollView.autoresizesSubviews = YES;
     layerScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
@@ -3506,8 +3500,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 -(void)addScrollView:(id)obj{
     // Remove previously added scrollviews.
     [self removeAllScrolviews];
-    
-    [self testingFn];
     
     //Add ScrollViews
     [self.contextView addSubview:obj];
