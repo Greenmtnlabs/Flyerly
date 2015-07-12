@@ -1663,7 +1663,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     } else {
         NSLog( @"Video cover not found" );
     }
-    NSLog(@"getSnapShotOfVideoPath = width = %f, height = %f", img.size.width, img.size.height);
 
     return img;
 }
@@ -1671,20 +1670,14 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 - (UIImage*)mergeImages:(UIImage*)firstImage withImage:(UIImage*)secondImage width:(CGFloat)width height:(CGFloat)height {
     
     
-        NSLog(@"firstImage= width = %f, height = %f", firstImage.size.width, firstImage.size.height);
-        NSLog(@"secondImage= width = %f, height = %f", secondImage.size.width, secondImage.size.height);
-    
         UIImage *mergedImg = nil;
-        
-        //CGSize newImageSize = CGSizeMake(MAX(firstImage.size.width, secondImage.size.width), MAX(firstImage.size.height, secondImage.size.height));
+
         CGSize newImageSize = CGSizeMake(width, height);
         if (UIGraphicsBeginImageContextWithOptions != NULL) {
             UIGraphicsBeginImageContextWithOptions(newImageSize, NO, [[UIScreen mainScreen] scale]);
         } else {
             UIGraphicsBeginImageContext(newImageSize);
         }
-        //[firstImage drawAtPoint:CGPointMake(0,0)];
-        //[secondImage drawAtPoint:CGPointMake(0,0)];
         [firstImage drawInRect:CGRectMake(0, 0, width, height)];
         [secondImage drawInRect:CGRectMake(0, 0, width, height)];
     
@@ -1692,7 +1685,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         mergedImg = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
 
-        NSLog(@"merged image= width = %f, height = %f", mergedImg.size.width, mergedImg.size.height);
         return mergedImg;
     }
     
