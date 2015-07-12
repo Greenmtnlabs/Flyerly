@@ -493,12 +493,18 @@ id lastShareBtnSender;
  * It was required when mergin process takes time, so prevent user to do any action
  */
 -(void)enableBtns:(BOOL)enable{
+
     backButton.enabled = enable;
     helpButton.enabled = enable;
     createButton.enabled = enable;
-   [rightUndoBarButton setEnabled:enable];
+    rightUndoBarButton.enabled = enable;
     
     tView.userInteractionEnabled = enable;
+    
+    if( enable ){
+        // Set right bar items
+        [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
+    }
 }
 
 /*
