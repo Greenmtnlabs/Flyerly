@@ -12,7 +12,7 @@
 
 @implementation ShareViewController
 
-@synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,flickrButton,printFlyerButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,lblFirstShareOnYoutube,tempTxtArea,isSharePanelOpen;
+@synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,flickrButton,printFlyerButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,lblFirstShareOnYoutube,tempTxtArea;
 
 @synthesize flyerShareType,star1,star2,star3,star4,star5;
 
@@ -24,7 +24,6 @@ UIAlertView *saveCurrentFlyerAlert;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    isSharePanelOpen = YES;
     hasSavedInGallary = NO;
     
     UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
@@ -311,9 +310,21 @@ UIAlertView *saveCurrentFlyerAlert;
     [alert show];
 }
 
-
+/**
+ * 1- check we have call saved in gallary or not
+ * 2- check we have need of saving in gallary
+ */
+-(void)saveInGallaryIfNeeded {
+    if( hasSavedInGallary != YES ){
+        hasSavedInGallary = YES;
+        if( self.flyer.saveInGallaryRequired ){
+            [self.flyer saveIntoGallery];
+            self.flyer.saveInGallaryRequired = NO;
+        }
+    }
+}
 -(IBAction)hideMe {
-        
+    [self saveInGallaryIfNeeded];
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.4f];
     [self.view setFrame:CGRectMake(0, [Yvalue integerValue], 320,425 )];
@@ -325,7 +336,6 @@ UIAlertView *saveCurrentFlyerAlert;
     shareButton.enabled = YES;
     backButton.enabled = YES;
     helpButton.enabled = YES;
-    isSharePanelOpen = NO;
 }
 
 -(void)enableAllShareOptions {
@@ -788,22 +798,9 @@ UIAlertView *saveCurrentFlyerAlert;
     
 }
 
-/**
- * save in gallary only once when sharing pannel is open
- */
--(void)callSaveInGallary {
-    if( hasSavedInGallary != YES ){
-        hasSavedInGallary = YES;
-        self.flyer.saveInGallaryAfterNumberOfTasks++;
-        //Will enable once sharing work logic is clear
-        //[self.flyer saveAfterCheck];
-    }
-}
-
 - (void)sharerFinishedSending:(SHKSharer *)sharer
 {
 
-    [self callSaveInGallary];
     // Here we Check Sharer for
     // Update Flyer Share Info in Social File
     if ( [sharer isKindOfClass:[SHKiOSFacebook class]] == YES ||
@@ -870,6 +867,8 @@ UIAlertView *saveCurrentFlyerAlert;
     
     iosSharer.shareDelegate = nil;
     iosSharer = nil;
+
+    [self saveInGallaryIfNeeded];
     [self.cfController enableHome:YES];
     
 }
@@ -888,6 +887,8 @@ UIAlertView *saveCurrentFlyerAlert;
     
     iosSharer.shareDelegate = nil;
 	NSLog(@"Sharing Error");
+    
+    [self saveInGallaryIfNeeded];
     [self.cfController enableHome:YES];
 }
 
@@ -899,6 +900,8 @@ UIAlertView *saveCurrentFlyerAlert;
     iosSharer.shareDelegate = nil;
     iosSharer = nil;
     NSLog(@"Sending cancelled");
+    
+    [self saveInGallaryIfNeeded];
     [self.cfController enableHome:YES];
 }
 
@@ -1024,7 +1027,7 @@ UIAlertView *saveCurrentFlyerAlert;
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
    if( alertView == saveCurrentFlyerAlert ) {
-       [self callSaveInGallary];
+       [self saveInGallaryIfNeeded];
    }
    else{
        switch (alertView.tag)

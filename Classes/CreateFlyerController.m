@@ -45,6 +45,7 @@
 
 @implementation CreateFlyerController
 
+@synthesize sharingPannelIsHiddin;
 
 //Outlets form zoom
 @synthesize zoomScrollView,zoomScreenShot,zoomMagnifyingGlass,zoomScreenShotForVideo;
@@ -77,8 +78,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [libPhoto setFrame:newFrame];
     [libDrawing setFrame:newFrame];
     
-    //Set Context Tabs
-    //[self addBottomTabs:libFlyer];
+
+    sharingPannelIsHiddin = YES;
 }
 
 /**
@@ -504,15 +505,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
         // Setup the share panel.
         sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,200 )];
-        /* //No need to pree load ShareViewController
-        if ( IS_IPHONE_5 || IS_IPHONE_4) {
-            shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
-        }else if ( IS_IPHONE_6 ){
-            shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController-iPhone6" bundle:nil];
-        }
-        shareviewcontroller.cfController = self;
-        sharePanel = shareviewcontroller.view;
-         */
         sharePanel.hidden = YES;
         [self.view addSubview:sharePanel];
 
@@ -844,7 +836,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
         } else {
             dispatch_async( dispatch_get_main_queue(), ^{
-                self.flyer.saveInGallaryAfterNumberOfTasks = -1;//when we have no need to saveInGallary on back
+                if( self.flyer.saveInGallaryRequired == NO ) {
+                    self.flyer.saveInGallaryAfterNumberOfTasks = -1;//when we have no need to saveInGallary on back
+                }
                 // Here we call Block for update Main UI
                 self.onFlyerBack( @"" );
             });
@@ -3892,13 +3886,12 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                     
                     // Main Thread
                     dispatch_async( dispatch_get_main_queue(), ^{
-                          //Here we Open Share Panel for Share Flyer
-                        if( shareviewcontroller == nil ){
-                          self.onFlyerBack(@"");
+                        if( sharingPannelIsHiddin == YES ){
+                            self.onFlyerBack(@"");
+                        } else {
+                            self.flyer.saveInGallaryRequired = YES;
                         }
-                        else if(shareviewcontroller != nil && shareviewcontroller.isSharePanelOpen == NO){
-                          self.onFlyerBack(@"");
-                        }
+
                         
                     });
                 }
@@ -4392,6 +4385,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
  */
 -(void)share {
     
+    sharingPannelIsHiddin = NO;
+    
     // Disable  Buttons
     rightUndoBarButton.enabled = NO;
     shareButton.enabled = NO;
@@ -4421,8 +4416,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         //Here we Merge Video for Sharing
         if ([flyer isVideoFlyer]) {
 
-            flyer.saveInGallaryAfterNumberOfTasks  = 2;
-            
             //Background Thread
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
                 
@@ -4434,7 +4427,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             //Here we take Snap shot of Flyer and
             //Flyer Add to Gallery if user allow to Access there photos
             [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
-            [flyer saveIntoGallery];
+            self.flyer.saveInGallaryRequired = YES;
             
         }
     }
@@ -5822,9 +5815,11 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 }
 
 -(void)enableHome:(BOOL)enable{
-    
+    sharePanel.hidden = enable;
+    sharingPannelIsHiddin = enable;
     [backButton setEnabled:enable];
-    
+    [helpButton setEnabled:enable];
+    [shareButton setEnabled:enable];
 }
 
 //return free space in in mb

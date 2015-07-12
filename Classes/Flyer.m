@@ -38,7 +38,7 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
 @synthesize masterLayers;
 @synthesize textFileArray;
 @synthesize socialArray;
-@synthesize saveInGallaryAfterNumberOfTasks;
+@synthesize saveInGallaryAfterNumberOfTasks,saveInGallaryRequired;
 
 /*
  * This method will be used to initiate the Flyer class
@@ -86,7 +86,8 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     
     //Load flyer
     [self loadFlyer:flyPath];
-    saveInGallaryAfterNumberOfTasks = 0;
+    [self resetSaveGallaryTasks];
+
     return self;
 }
 
@@ -196,11 +197,11 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     if( saveInGallaryAfterNumberOfTasks > 0 ){
         if ( [self isVideoFlyer] ){
             if( saveInGallaryAfterNumberOfTasks > 1 ){
-                saveInGallaryAfterNumberOfTasks = 0;
+                [self resetSaveGallaryTasks];
                 [self saveIntoGallery];
             }
         } else{
-                saveInGallaryAfterNumberOfTasks = 0;
+                [self resetSaveGallaryTasks];
                 [self saveIntoGallery];
         }
     }
@@ -232,6 +233,7 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
         }
     }
 }
+
 
 /*** HERE WE SAVE IMAGE INTO GALLERY
  * AND LINK WITH FLYERLY ALBUM
@@ -283,6 +285,8 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
             }else {
                 currentUrl = [self getFlyerURL];
             }
+
+            [self resetSaveGallaryTasks];
             
             if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.3 ) {
                 // delete any previous saved flyer
@@ -372,6 +376,15 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     }
     failureBlock:^(NSError *error) {
     }];
+}
+
+/**
+ * Reset vars who helps while saving in gallary
+ */
+-(void)resetSaveGallaryTasks{
+    //Reset gallary saving conditions
+    saveInGallaryRequired = NO;
+    saveInGallaryAfterNumberOfTasks = 0;
 }
 
 /**

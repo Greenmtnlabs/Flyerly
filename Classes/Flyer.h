@@ -178,4 +178,9 @@
 //On back save in gallary, after number of tasks
 @property (assign) int saveInGallaryAfterNumberOfTasks;
 
+//Tap on share button, merge video, dont save in gallary because it prompts delete dialoag
+//so this flag will help when sharing pannel gone hide, we check if its ture we call the saveInGallary at that time
+@property (assign) BOOL saveInGallaryRequired;
+
+
 @end

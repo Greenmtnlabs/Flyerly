@@ -92,7 +92,6 @@
 
 @property (strong, nonatomic) NSTimer *timer;
 @property (strong, nonatomic) IBOutlet UITextView *tempTxtArea;
-@property (readonly) BOOL isSharePanelOpen;
 
 
 
