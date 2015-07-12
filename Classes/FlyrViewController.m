@@ -272,9 +272,9 @@ id lastShareBtnSender;
     [createButton addTarget:self action:@selector(createFlyer:) forControlEvents:UIControlEventTouchUpInside];
     [createButton setBackgroundImage:[UIImage imageNamed:@"createButton"] forState:UIControlStateNormal];
     createButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *createBarButton = [[UIBarButtonItem alloc] initWithCustomView:createButton];
+    rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:createButton];
     
-    return [NSMutableArray arrayWithObjects:createBarButton,nil];
+    return [NSMutableArray arrayWithObjects:rightUndoBarButton,nil];
 }
 
 
@@ -496,6 +496,8 @@ id lastShareBtnSender;
     backButton.enabled = enable;
     helpButton.enabled = enable;
     createButton.enabled = enable;
+   [rightUndoBarButton setEnabled:enable];
+    
     tView.userInteractionEnabled = enable;
 }
 
@@ -571,6 +573,8 @@ id lastShareBtnSender;
         shareviewcontroller.selectedFlyerImage = shareImage;
         shareviewcontroller.flyer = self.flyer;
         shareviewcontroller.imageFileName = shareImagePath;
+        shareviewcontroller.rightUndoBarButton = rightUndoBarButton;
+        shareviewcontroller.shareButton = createButton;
         shareviewcontroller.helpButton = helpButton;
         shareviewcontroller.backButton = backButton;
         if( [shareviewcontroller.titleView.text isEqualToString:@"Flyer"] ) {

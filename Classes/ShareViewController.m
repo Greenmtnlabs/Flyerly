@@ -332,10 +332,7 @@ UIAlertView *saveCurrentFlyerAlert;
     [self.titleView resignFirstResponder];
     [self.descriptionView resignFirstResponder];
 
-    rightUndoBarButton.enabled = YES;
-    shareButton.enabled = YES;
-    backButton.enabled = YES;
-    helpButton.enabled = YES;
+    [self.cfController enableHome:YES];
 }
 
 -(void)enableAllShareOptions {

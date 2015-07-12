@@ -47,6 +47,7 @@
     RMStoreKeychainPersistence *_persistence;
     PrintViewController *printViewController;
     UIButton *helpButton, *backButton,*createButton;
+    UIBarButtonItem *rightUndoBarButton;
 }
 
 

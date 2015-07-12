@@ -5817,9 +5817,12 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 -(void)enableHome:(BOOL)enable{
     sharePanel.hidden = enable;
     sharingPannelIsHiddin = enable;
+
     [backButton setEnabled:enable];
     [helpButton setEnabled:enable];
     [shareButton setEnabled:enable];
+    [rightUndoBarButton setEnabled:enable];
+    
 }
 
 //return free space in in mb
