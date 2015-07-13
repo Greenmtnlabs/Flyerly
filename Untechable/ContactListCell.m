@@ -50,6 +50,7 @@
             iconImage.image = [UIImage imageNamed:@"phone_selected"];
             statusCount++;
         }
+    
     }
     /*if ([model.others isEqualToString:@""]){
         [description setText:model.description];

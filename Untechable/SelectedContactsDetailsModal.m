@@ -1,17 +1,18 @@
 //
-//  ContactsModal.m
+//  SelectedContactsDetailsModal.m
 //  Untechable
 //
-//  Created by RIKSOF Developer on 12/24/14.
-//  Copyright (c) 2014 Green MTN Labs Inc. All rights reserved.
+//  Created by arqam on 13/07/2015.
+//  Copyright (c) 2015 Green MTN Labs Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import "ContactsCustomizedModal.h"
 
 
 @implementation ContactsCustomizedModal
 
-@synthesize delegate,name,description,img,checkImageName,status,others,imageUrl,zip,mobileNumber,mainNumber,iPhoneNumber,homeNumber,workNumber,allEmails,allPhoneNumbers,phoneNumbersStatus,customTextForContact,untechable,cutomizingStatusArray,IsCustomized;
+@synthesize name,status,mobileNumber,mainNumber,iPhoneNumber,homeNumber,workNumber,allEmails,allPhoneNumbers,phoneNumbersStatus,customTextForContact,untechable,cutomizingStatusArray,IsCustomized;
 
 
 -(id)init{
@@ -22,21 +23,6 @@
     return self;
 }
 
--(void)setInvitedStatus :(int)sts{
-    
-    
-    status = sts;
-    
-    if (status == 1) {
-        checkImageName = @"checkBlue";
-    } else if (status == 2) {
-        checkImageName = @"checkDouble";
-    }else {
-        checkImageName = @"checkgray";
-    }
-    
-    [self.delegate contactInvited:self];
-}
 
 /*
  * Here we Return Email Status of Contact
@@ -81,3 +67,5 @@
     [cutomizingStatusArray replaceObjectAtIndex:2 withObject:[NSString stringWithFormat:@"%d",status_]];
 }
 @end
+
+

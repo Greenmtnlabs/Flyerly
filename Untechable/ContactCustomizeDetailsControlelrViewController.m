@@ -539,6 +539,7 @@
     
     NSMutableArray *tempPhoneWithStatus = [editingPhonesWithStatus objectForKey:indexPath];
     
+    
     if ( [[tempPhoneWithStatus objectAtIndex:2] isEqualToString:@"1"] ){
         [tempPhoneWithStatus setObject:@"0" atIndexedSubscript:2];
         [phoneCell.smsButton setSelected:NO];
@@ -547,6 +548,16 @@
         [phoneCell.smsButton setSelected:YES];
     }
     
+    /*
+    if ([[contactModal getSmsStatus] isEqualToString:@"1"]){
+        [contactModal setSmsStatus:0];
+        [phoneCell.smsButton setSelected:NO];
+    }
+    else{
+        [contactModal setSmsStatus:1];
+        [phoneCell.smsButton setSelected:YES];
+    }
+    */
     [editingPhonesWithStatus setObject:tempPhoneWithStatus forKey:indexPath];
 }
 
