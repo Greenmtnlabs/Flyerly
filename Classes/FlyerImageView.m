@@ -653,10 +653,21 @@ CGAffineTransform previuosTransform;
         }
         
     }else{
-        
-        NSArray *rgbBorder = [[layDic valueForKey:@"bordercolor"] componentsSeparatedByString:@","];
-        
-        borderColor = [UIColor colorWithRed:[rgbBorder[0] floatValue] green:[rgbBorder[1] floatValue] blue:[rgbBorder[2] floatValue] alpha:1];
+        //[layDic valueForKey:@"bordercolor"]
+        //when border are images
+        if ([@"b1.png" rangeOfString:@".png"].location != NSNotFound) {
+            // Here We Write Code for Image
+            ImageLayer *img = [[ImageLayer alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+            img.image = [UIImage imageNamed:@"dottedborder1.png"];
+            [self addSubview:img];
+            [layers setValue:img forKey:@"TemplateBorder"];
+            return;
+        }
+        else{
+            NSArray *rgbBorder = [[layDic valueForKey:@"bordercolor"] componentsSeparatedByString:@","];
+            
+            borderColor = [UIColor colorWithRed:[rgbBorder[0] floatValue] green:[rgbBorder[1] floatValue] blue:[rgbBorder[2] floatValue] alpha:1];
+        }
     }
 
 
