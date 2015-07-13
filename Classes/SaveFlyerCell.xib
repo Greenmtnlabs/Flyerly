@@ -107,7 +107,7 @@
                         </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qP4-jY-AaV">
-                        <rect key="frame" x="265" y="58" width="45" height="46"/>
+                        <rect key="frame" x="267" y="58" width="45" height="46"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="Entypo" family="Entypo" pointSize="44"/>
                         <state key="normal" title="">
