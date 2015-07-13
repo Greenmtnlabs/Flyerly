@@ -58,14 +58,8 @@ id lastShareBtnSender;
     sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,200 )];
     sharePanel.hidden = YES;
     [self.view addSubview:sharePanel];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
     
-    [super viewWillAppear:animated];
-    searching = NO;
-    searchTextField.text = @"";
-    
+    //set Navigation
     self.navigationController.navigationBarHidden=NO;
     self.navigationItem.leftItemsSupplementBackButton = YES;
     
@@ -74,6 +68,12 @@ id lastShareBtnSender;
     
     // Set right bar items
     [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    searching = NO;
+    searchTextField.text = @"";
     
     //HERE WE GET USER PURCHASES INFO FROM PARSE
     if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
@@ -178,6 +178,8 @@ id lastShareBtnSender;
 //when user tap on create new flyer(from saved flyer)
 -(IBAction)createFlyer:(id)sender {
     
+    [self enableBtns:NO];
+    
     cancelRequest = YES;
     NSString *flyPath = [Flyer newFlyerPath];
     
@@ -192,9 +194,13 @@ id lastShareBtnSender;
     [createFlyer tasksOnCreateNewFlyer];
     
     __weak FlyrViewController *weakSelf = self;
+    __weak CreateFlyerController *weakCreate = createFlyer;
     
     //Here we Manage Block for Update
     [createFlyer setOnFlyerBack:^(NSString *nothing) {
+        [weakCreate.flyer saveAfterCheck];
+        
+        [weakSelf enableBtns:YES];
         
         //HERE WE GET FLYERS
         weakSelf.flyerPaths = [weakSelf getFlyersPaths];
@@ -204,12 +210,11 @@ id lastShareBtnSender;
 
     [createFlyer setShouldShowAdd:^(NSString *flyPath) {
         dispatch_async( dispatch_get_main_queue(), ^{
-            UserPurchases *userPurchases_ = [UserPurchases getInstance];
-            //if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
-                if ([weakSelf.interstitial isReady] && ![weakSelf.interstitial hasBeenUsed]){
-                    [weakSelf.interstitial presentFromRootViewController:weakSelf];
-                }
-            //}
+            if ([weakSelf.interstitial isReady] && ![weakSelf.interstitial hasBeenUsed]){
+                [weakSelf.interstitial presentFromRootViewController:weakSelf];
+            }  else{
+                [weakCreate.flyer saveAfterCheck];
+            }
         });
     }];
     
@@ -263,13 +268,13 @@ id lastShareBtnSender;
     self.navigationItem.titleView = label;
 
     // Create Button
-    UIButton *createButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    createButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [createButton addTarget:self action:@selector(createFlyer:) forControlEvents:UIControlEventTouchUpInside];
     [createButton setBackgroundImage:[UIImage imageNamed:@"createButton"] forState:UIControlStateNormal];
     createButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *createBarButton = [[UIBarButtonItem alloc] initWithCustomView:createButton];
+    rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:createButton];
     
-    return [NSMutableArray arrayWithObjects:createBarButton,nil];
+    return [NSMutableArray arrayWithObjects:rightUndoBarButton,nil];
 }
 
 
@@ -373,6 +378,8 @@ id lastShareBtnSender;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    [self enableBtns:NO];
+    
     flyer = [[Flyer alloc]initWithPath:[flyerPaths objectAtIndex:indexPath.row] setDirectory:YES];
     
     createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
@@ -381,12 +388,17 @@ id lastShareBtnSender;
     createFlyer.flyer = flyer;
     
     __weak FlyrViewController *weakSelf = self;
+    __weak CreateFlyerController *weakCreate = createFlyer;
     
     //Here we Manage Block for Update
     [createFlyer setOnFlyerBack:^(NSString *nothing) {
         
         // Here we setCurrent Flyer is Most Recent Flyer
-        [weakSelf.flyer setRecentFlyer];
+        [weakCreate.flyer setRecentFlyer];
+        
+        [weakCreate.flyer saveAfterCheck];
+
+        [weakSelf enableBtns:YES];
         
         // HERE WE GET FLYERS
         weakSelf.flyerPaths = [weakSelf getFlyersPaths];
@@ -396,17 +408,21 @@ id lastShareBtnSender;
     
     [createFlyer setShouldShowAdd:^(NSString *flyPath) {
         dispatch_async( dispatch_get_main_queue(), ^{
-            UserPurchases *userPurchases_ = [UserPurchases getInstance];
-            //if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
             if ([weakSelf.interstitial isReady] && ![weakSelf.interstitial hasBeenUsed]){
                 [weakSelf.interstitial presentFromRootViewController:weakSelf];
+            } else{
+                [weakCreate.flyer saveAfterCheck];
             }
-            //}
         });
     }];
     
 	[self.navigationController pushViewController:createFlyer animated:YES];
 }
+- (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
+    //on add dismiss && after merging video process, save in gallery
+    [createFlyer.flyer saveAfterCheck];
+}
+
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -471,10 +487,24 @@ id lastShareBtnSender;
 -(void)enableHome:(BOOL)enable{
     [self enableBtns:YES];
 }
-//Enable buttons
+
+/**
+ * Enable touche on table view and buttons,
+ * It was required when mergin process takes time, so prevent user to do any action
+ */
 -(void)enableBtns:(BOOL)enable{
+
     backButton.enabled = enable;
     helpButton.enabled = enable;
+    createButton.enabled = enable;
+    rightUndoBarButton.enabled = enable;
+    
+    tView.userInteractionEnabled = enable;
+    
+    if( enable ){
+        // Set right bar items
+        [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
+    }
 }
 
 /*
@@ -549,6 +579,8 @@ id lastShareBtnSender;
         shareviewcontroller.selectedFlyerImage = shareImage;
         shareviewcontroller.flyer = self.flyer;
         shareviewcontroller.imageFileName = shareImagePath;
+        shareviewcontroller.rightUndoBarButton = rightUndoBarButton;
+        shareviewcontroller.shareButton = createButton;
         shareviewcontroller.helpButton = helpButton;
         shareviewcontroller.backButton = backButton;
         if( [shareviewcontroller.titleView.text isEqualToString:@"Flyer"] ) {
@@ -688,7 +720,7 @@ id lastShareBtnSender;
         if( lastShareBtnSender != nil ){
             [flyrViewController onShare:lastShareBtnSender];
         }
-        [self enableBtns:YES];
+        [flyrViewController enableBtns:YES];
         [flyrViewController hideLoadingIndicator];
     };
 

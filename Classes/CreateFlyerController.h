@@ -208,6 +208,8 @@
 @property (strong, nonatomic) IBOutlet UIImageView *zoomMagnifyingGlass;
 @property (strong, nonatomic) IBOutlet UIImageView *zoomScreenShotForVideo;
 
+@property (assign) BOOL sharingPannelIsHidden;
+
 
 @property (nonatomic,strong)MPMoviePlayerController *player;
 @property (nonatomic,strong) Flyer *flyer;

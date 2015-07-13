@@ -57,6 +57,7 @@ BOOL adLoaded = false;
 	createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
     createFlyer.flyerPath = flyPath;
     createFlyer.flyer = flyer;
+
     
     //Tasks after create new flyer 
     [createFlyer tasksOnCreateNewFlyer];
@@ -65,9 +66,10 @@ BOOL adLoaded = false;
     __weak CreateFlyerController *weakCreate = createFlyer;
     
     [createFlyer setOnFlyerBack:^(NSString *flyPath) {
-        
         //Here we setCurrent Flyer is Most Recent Flyer
         [weakCreate.flyer setRecentFlyer];
+
+        [weakCreate.flyer saveAfterCheck];
         
         //Getting Recent Flyers
         weakSelf.recentFlyers = [Flyer recentFlyerPreview:4];
@@ -87,12 +89,11 @@ BOOL adLoaded = false;
     
     [createFlyer setShouldShowAdd:^(NSString *flyPath) {
         dispatch_async( dispatch_get_main_queue(), ^{
-            //UserPurchases *userPurchases_ = [UserPurchases getInstance];
-            //if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
                 if ([weakSelf.addInterstialFms isReady] && ![weakSelf.addInterstialFms hasBeenUsed]){
                     [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
+                } else{
+                    [weakCreate.flyer saveAfterCheck];
                 }
-            //}
         });
     }];
     
@@ -109,6 +110,7 @@ BOOL adLoaded = false;
         [button setUserInteractionEnabled:NO];
     }
 }
+
 
 -(IBAction)doOpen:(id)sender{
     tpController = [[FlyrViewController alloc]initWithNibName:@"FlyrViewController" bundle:nil];
@@ -401,6 +403,8 @@ BOOL adLoaded = false;
 
 
 - (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
+    //on add dismiss && after merging video process, save in gallery
+    [createFlyer.flyer saveAfterCheck];
     
     self.addInterstialFms.delegate = nil;
     
@@ -580,9 +584,11 @@ BOOL adLoaded = false;
     __weak CreateFlyerController *weakCreate = createFlyer;
     
     [createFlyer setOnFlyerBack:^(NSString *flyPath) {
-
+        
         //Here we setCurrent Flyer is Most Recent Flyer
         [weakCreate.flyer setRecentFlyer];
+        
+        [weakCreate.flyer saveAfterCheck];
 
         //Getting Recent Flyers
         weakSelf.recentFlyers = [Flyer recentFlyerPreview:4];
@@ -605,15 +611,12 @@ BOOL adLoaded = false;
     [createFlyer setShouldShowAdd:^(NSString *flyPath) {
         
         dispatch_async( dispatch_get_main_queue(), ^{
-            
-            //UserPurchases *userPurchases_ = [UserPurchases getInstance];
-            //if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
-                
                 if ([weakSelf.addInterstialFms isReady]  && ![weakSelf.addInterstialFms hasBeenUsed]){
                     [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
                 }
-                
-            //}
+                else{
+                    [weakCreate.flyer saveAfterCheck];
+                }
         });
         
     }];

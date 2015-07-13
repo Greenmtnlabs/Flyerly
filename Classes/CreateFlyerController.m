@@ -45,6 +45,7 @@
 
 @implementation CreateFlyerController
 
+@synthesize sharingPannelIsHidden;
 
 //Outlets form zoom
 @synthesize zoomScrollView,zoomScreenShot,zoomMagnifyingGlass,zoomScreenShotForVideo;
@@ -77,8 +78,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [libPhoto setFrame:newFrame];
     [libDrawing setFrame:newFrame];
     
-    //Set Context Tabs
-    //[self addBottomTabs:libFlyer];
+
+    sharingPannelIsHidden = YES;
 }
 
 /**
@@ -287,12 +288,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     bannerAddClosed = valForBannerClose;
 }
 
--(void)testingFn{
-    NSLog(@"layerScrollView(%f,%f,%f,%f)",layerScrollView.frame.origin.x,layerScrollView.frame.origin.y,layerScrollView.frame.size.width,layerScrollView.frame.size.height);
-    NSLog(@"self.contextView(%f,%f,%f,%f)",self.contextView.frame.origin.x,self.contextView.frame.origin.y,self.contextView.frame.size.width,self.contextView.frame.size.height);
-    
-}
-
 /**
  * View setup. This is done once per instance.
  */
@@ -361,9 +356,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         lsvRec = CGRectMake(0, 0,420,189);
     }
     layerScrollView = [[UIScrollView alloc]initWithFrame:lsvRec];
-    [self testingFn];
+    
     layerScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(lsvRec.origin.x, lsvRec.origin.y, self.contextView.frame.size.width,self.contextView.frame.size.height)];
-    [self testingFn];
+    
     
     layerScrollView.autoresizesSubviews = YES;
     layerScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
@@ -504,15 +499,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
         // Setup the share panel.
         sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,200 )];
-        /* //No need to pree load ShareViewController
-        if ( IS_IPHONE_5 || IS_IPHONE_4) {
-            shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
-        }else if ( IS_IPHONE_6 ){
-            shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController-iPhone6" bundle:nil];
-        }
-        shareviewcontroller.cfController = self;
-        sharePanel = shareviewcontroller.view;
-         */
         sharePanel.hidden = YES;
         [self.view addSubview:sharePanel];
 
@@ -811,12 +797,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
             // Make a history entry if needed.
             [flyer addToHistory]; //
+            
+            //here we keep the merging vido path
+            [flyer isVideoMergeProcessRequired];
         
             // If this is a video flyer, then merge the video.
             if ( [flyer isVideoFlyer] ) {
-
-                //here we keep the merging vido path
-                [flyer isVideoMergeProcessRequired];
+                
                 
                 self.shouldShowAdd ( @"" );
                 
@@ -843,7 +830,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
         } else {
             dispatch_async( dispatch_get_main_queue(), ^{
-                
+                if( self.flyer.saveInGallaryRequired == NO ) {
+                    self.flyer.saveInGallaryAfterNumberOfTasks = -1;//when we have no need to saveInGallary on back
+                }
                 // Here we call Block for update Main UI
                 self.onFlyerBack( @"" );
             });
@@ -3512,8 +3501,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     // Remove previously added scrollviews.
     [self removeAllScrolviews];
     
-    [self testingFn];
-    
     //Add ScrollViews
     [self.contextView addSubview:obj];
 }
@@ -3891,15 +3878,16 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                     
                     // Main Thread
                     dispatch_async( dispatch_get_main_queue(), ^{
-                        
-                        //Here we Open Share Panel for Share Flyer
-                        self.onFlyerBack(@"");
+                        if( sharingPannelIsHidden == YES ){
+                            self.onFlyerBack(@"");
+                        } else {
+                            self.flyer.saveInGallaryRequired = YES;
+                        }
+
                         
                     });
                 }
                 
-                // Here we Add Video In Flyerly Album
-                [self.flyer addToGallery:nil];
             }
         };
         
@@ -4227,7 +4215,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
  */
 -(void)bringNotEditableLayersToFront:(NSString *)callFrom{
 
-    NSLog(@"bringNotEditableLayersToFront callFrom = %@",callFrom);
     
     NSArray *flyerPiecesKeys = [flyer allKeys];
     
@@ -4390,6 +4377,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
  */
 -(void)share {
     
+    sharingPannelIsHidden = NO;
+    
     // Disable  Buttons
     rightUndoBarButton.enabled = NO;
     shareButton.enabled = NO;
@@ -4404,6 +4393,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     //Here we remove Borders from layer if user touch any layer
     [self.flyimgView layerStoppedEditing:currentLayer];
     
+    
     if( [flyer isSaveRequired] == YES ) {
         
         // Save flyer to disk //
@@ -4412,14 +4402,14 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         // Make a history entry if needed.
         [flyer addToHistory];
         
+        //here we keep the merging vido path
+        [flyer isVideoMergeProcessRequired];
+        
         //Here we Merge Video for Sharing
         if ([flyer isVideoFlyer]) {
-            
+
             //Background Thread
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-                
-                //here we keep the merging vido path
-                [flyer isVideoMergeProcessRequired];
                 
                 //Here we Merge All Layers in Video File
                 [self videoMergeProcess];
@@ -4429,6 +4419,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             //Here we take Snap shot of Flyer and
             //Flyer Add to Gallery if user allow to Access there photos
             [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
+            self.flyer.saveInGallaryRequired = YES;
+            
         }
     }
     
@@ -4518,7 +4510,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         sharePanel = shareviewcontroller.view;
         NSString *shareImagePath = [flyer getFlyerImage];
-        UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
+        UIImage *shareImage =  [self getFlyerSnapShot];
         
         //Here we Pass Param to Share Screen Which use for Sharing
         //[shareviewcontroller.titleView becomeFirstResponder];
@@ -5815,8 +5807,13 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 }
 
 -(void)enableHome:(BOOL)enable{
-    
+    sharePanel.hidden = enable;
+    sharingPannelIsHidden = enable;
+
     [backButton setEnabled:enable];
+    [helpButton setEnabled:enable];
+    [shareButton setEnabled:enable];
+    [rightUndoBarButton setEnabled:enable];
     
 }
 

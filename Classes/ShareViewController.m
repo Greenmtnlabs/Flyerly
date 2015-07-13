@@ -18,10 +18,13 @@
 
 @synthesize descriptionView, titlePlaceHolderImg, titleView, descTextAreaImg;
 
+UIAlertView *saveCurrentFlyerAlert;
+
 #pragma mark  View Appear Methods
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    hasSavedInGallary = NO;
     
     UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
     [UserVoice initialize:config];
@@ -86,20 +89,8 @@
     
     [self.view addSubview:descriptionView];
     
-    [self testPrintFrameSize];
-    
     descTextAreaImg.frame = descriptionView.frame;
     
-}
-
--(void)printFrame:(NSString *)frameName frame:(CGRect)frame{
-    NSLog(@"%@:(%f,%f,%f,%f)",frameName, frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
-}
--(void)testPrintFrameSize {
-    [self printFrame:@"titlePlaceHolderImg.frame" frame:titlePlaceHolderImg.frame];
-    [self printFrame:@"titleView.frame" frame:titleView.frame];
-    [self printFrame:@"descTextAreaImg.frame" frame:descTextAreaImg.frame];
-    [self printFrame:@"descriptionView.frame" frame:descriptionView.frame];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -160,7 +151,7 @@
     [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIGraphicsEndImageContext();
     
-    UIImage *originalImage = [UIImage imageWithContentsOfFile:imageFileName];
+    UIImage *originalImage = selectedFlyerImage;//[UIImage imageWithContentsOfFile:imageFileName];
     
     NSString  *updatedImagePath = [imageFileName stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@".%@",IMAGETYPE ] withString:@".igo"];
     NSData *imgData = UIImagePNGRepresentation(originalImage);
@@ -319,9 +310,21 @@
     [alert show];
 }
 
-
+/**
+ * 1- check we have call saved in gallary or not
+ * 2- check we have need of saving in gallary
+ */
+-(void)saveInGallaryIfNeeded {
+    if( hasSavedInGallary != YES ){
+        hasSavedInGallary = YES;
+        if( self.flyer.saveInGallaryRequired ){
+            [self.flyer saveIntoGallery];
+            self.flyer.saveInGallaryRequired = NO;
+        }
+    }
+}
 -(IBAction)hideMe {
-        
+    [self saveInGallaryIfNeeded];
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.4f];
     [self.view setFrame:CGRectMake(0, [Yvalue integerValue], 320,425 )];
@@ -329,10 +332,7 @@
     [self.titleView resignFirstResponder];
     [self.descriptionView resignFirstResponder];
 
-    rightUndoBarButton.enabled = YES;
-    shareButton.enabled = YES;
-    backButton.enabled = YES;
-    helpButton.enabled = YES;
+    [self.cfController enableHome:YES];
 }
 
 -(void)enableAllShareOptions {
@@ -560,7 +560,11 @@
 
     [flickrButton setSelected:YES];
     [self updateDescription];
-    UIAlertView *saveCurrentFlyerAlert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"The current Flyer has been saved successfully" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    saveCurrentFlyerAlert = [[UIAlertView alloc] initWithTitle:@"Success"
+                                                 message:@"The current Flyer has been saved successfully"
+                                                 delegate:self
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil, nil];
     
     [saveCurrentFlyerAlert show];
     
@@ -791,14 +795,9 @@
     
 }
 
-
-
-
-
-
-
 - (void)sharerFinishedSending:(SHKSharer *)sharer
 {
+
     // Here we Check Sharer for
     // Update Flyer Share Info in Social File
     if ( [sharer isKindOfClass:[SHKiOSFacebook class]] == YES ||
@@ -865,6 +864,8 @@
     
     iosSharer.shareDelegate = nil;
     iosSharer = nil;
+
+    [self saveInGallaryIfNeeded];
     [self.cfController enableHome:YES];
     
 }
@@ -883,6 +884,8 @@
     
     iosSharer.shareDelegate = nil;
 	NSLog(@"Sharing Error");
+    
+    [self saveInGallaryIfNeeded];
     [self.cfController enableHome:YES];
 }
 
@@ -894,6 +897,8 @@
     iosSharer.shareDelegate = nil;
     iosSharer = nil;
     NSLog(@"Sending cancelled");
+    
+    [self saveInGallaryIfNeeded];
     [self.cfController enableHome:YES];
 }
 
@@ -1018,26 +1023,30 @@
 #pragma mark UIAlertView delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-  
-   switch (alertView.tag)
-  {
-    // if 1 alert view selected having tag 0
-      case 0:
-          if (buttonIndex == 1 ){
-          [self sendAlertEmail];
-      }
-    break;
-          
-    //if 2 alert view selected having tag 1
-      case 1:
-    if(buttonIndex == 1) {
-            NSString *url = [NSString stringWithFormat: @"itms-apps://itunes.apple.com/app/id344130515"];
-            [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
-        }
-    break;
-    
-      }
+   if( alertView == saveCurrentFlyerAlert ) {
+       [self saveInGallaryIfNeeded];
+   }
+   else{
+       switch (alertView.tag)
+      {
+        // if 1 alert view selected having tag 0
+          case 0:
+              if (buttonIndex == 1 ){
+              [self sendAlertEmail];
+          }
+        break;
+              
+        //if 2 alert view selected having tag 1
+          case 1:
+        if(buttonIndex == 1) {
+                NSString *url = [NSString stringWithFormat: @"itms-apps://itunes.apple.com/app/id344130515"];
+                [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
+            }
+        break;
+        
+          }
     }
+}
 
 
 -(IBAction)clickOnFlyerType:(id)sender {

@@ -38,6 +38,7 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
 @synthesize masterLayers;
 @synthesize textFileArray;
 @synthesize socialArray;
+@synthesize saveInGallaryAfterNumberOfTasks,saveInGallaryRequired;
 
 /*
  * This method will be used to initiate the Flyer class
@@ -85,7 +86,8 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     
     //Load flyer
     [self loadFlyer:flyPath];
-    
+    [self resetSaveGallaryTasks];
+
     return self;
 }
 
@@ -141,27 +143,10 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     
     //Here we Update Flyer File from Current Snapshot
     [snapShotData writeToFile:flyerImageFile atomically:YES];
-    
-    //Here we Add Image in Flyerly Album
-    [self addToGallery:snapShotData];
 
 }
 
 
-/*
- * HERE WE SAVE CONTENT IN USER GALLERY
- */
--(void)addToGallery :(NSData *)snapShotData {
-    
-    // HERE WE CHECK USER ALLOWED TO SAVE IN GALLERY FROM SETTING
-    if([[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"]){
-        
-        //USER ALLOWED
-        //HERE WE WRITE IMAGE OR VIDEO IN GALLERY
-        [self saveInGallery:snapShotData];
-    }
-
-}
 
 /*
  * Here we save the dictionary to .peices files
@@ -202,11 +187,59 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     [snapShotData writeToFile:flyerImageFile atomically:YES];
 }
 
+/**
+ * Here we check following tasks before save
+ * if its video flyer then add in gallary after interstiall add hide and merging done
+ */
+-(void)saveAfterCheck{
+    saveInGallaryAfterNumberOfTasks++;
+    
+    if( saveInGallaryAfterNumberOfTasks > 0 ){
+        if ( [self isVideoFlyer] ){
+            if( saveInGallaryAfterNumberOfTasks > 1 ){
+                [self resetSaveGallaryTasks];
+                [self saveIntoGallery];
+            }
+        } else{
+                [self resetSaveGallaryTasks];
+                [self saveIntoGallery];
+        }
+    }
+}
+/**
+ * Save in gallary after checking userdefaults, without data
+ */
+-(void)saveIntoGallery{
+    // HERE WE CHECK USER ALLOWED TO SAVE IN GALLERY FROM SETTING
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"]){
+        
+        if ( [self isVideoFlyer] ){
+            [self saveIntoGalleryWithData:nil];
+        }else {
+            UIImage *snapShot = [UIImage imageWithContentsOfFile:[self getFlyerImage]];
+            //Getting Current Path
+            NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+            
+            //set Flyer Image for Future Update
+            flyerImageFile = [currentPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE]];
+            
+            
+            //Convert Imgae into Data
+            NSData *snapShotData = UIImagePNGRepresentation(snapShot);
+            
+            //Here we Update Flyer File from Current Snapshot
+            [snapShotData writeToFile:flyerImageFile atomically:YES];
+            [self saveIntoGalleryWithData:snapShotData];
+        }
+    }
+}
+
+
 /*** HERE WE SAVE IMAGE INTO GALLERY
  * AND LINK WITH FLYERLY ALBUM
- *
+ * Data is required
  */
--(void)saveInGallery :(NSData *)imgData {
+-(void)saveIntoGalleryWithData :(NSData *)imgData {
     
 
     // CREATE LIBRARY OBJECT FIRST
@@ -252,6 +285,8 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
             }else {
                 currentUrl = [self getFlyerURL];
             }
+
+            [self resetSaveGallaryTasks];
             
             if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.3 ) {
                 // delete any previous saved flyer
@@ -341,6 +376,15 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     }
     failureBlock:^(NSError *error) {
     }];
+}
+
+/**
+ * Reset vars who helps while saving in gallary
+ */
+-(void)resetSaveGallaryTasks{
+    //Reset gallary saving conditions
+    saveInGallaryRequired = NO;
+    saveInGallaryAfterNumberOfTasks = 0;
 }
 
 /**
@@ -1157,7 +1201,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  * Here We Change Flyer Directory Name to Current Time Stamp
  */
 -(void)setRecentFlyer {
-
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     
     NSString *uniqueId = [Flyer getUniqueId];
@@ -1633,7 +1676,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     } else {
         NSLog( @"Video cover not found" );
     }
-    NSLog(@"getSnapShotOfVideoPath = width = %f, height = %f", img.size.width, img.size.height);
 
     return img;
 }
@@ -1641,20 +1683,14 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 - (UIImage*)mergeImages:(UIImage*)firstImage withImage:(UIImage*)secondImage width:(CGFloat)width height:(CGFloat)height {
     
     
-        NSLog(@"firstImage= width = %f, height = %f", firstImage.size.width, firstImage.size.height);
-        NSLog(@"secondImage= width = %f, height = %f", secondImage.size.width, secondImage.size.height);
-    
         UIImage *mergedImg = nil;
-        
-        //CGSize newImageSize = CGSizeMake(MAX(firstImage.size.width, secondImage.size.width), MAX(firstImage.size.height, secondImage.size.height));
+
         CGSize newImageSize = CGSizeMake(width, height);
         if (UIGraphicsBeginImageContextWithOptions != NULL) {
             UIGraphicsBeginImageContextWithOptions(newImageSize, NO, [[UIScreen mainScreen] scale]);
         } else {
             UIGraphicsBeginImageContext(newImageSize);
         }
-        //[firstImage drawAtPoint:CGPointMake(0,0)];
-        //[secondImage drawAtPoint:CGPointMake(0,0)];
         [firstImage drawInRect:CGRectMake(0, 0, width, height)];
         [secondImage drawInRect:CGRectMake(0, 0, width, height)];
     
@@ -1662,7 +1698,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         mergedImg = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
 
-        NSLog(@"merged image= width = %f, height = %f", mergedImg.size.width, mergedImg.size.height);
         return mergedImg;
     }
     

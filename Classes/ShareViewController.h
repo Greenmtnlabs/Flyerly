@@ -43,6 +43,7 @@
     FlyerlySingleton *globle;
     NSArray *arrayOfAccounts;
     SHKSharer *iosSharer;
+    BOOL hasSavedInGallary;//have we called saved in gallary from share screen
 
 }
 
@@ -91,7 +92,6 @@
 
 @property (strong, nonatomic) NSTimer *timer;
 @property (strong, nonatomic) IBOutlet UITextView *tempTxtArea;
-
 
 
 

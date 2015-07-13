@@ -67,5 +67,6 @@
 -(IBAction)showFlyerDetail:(UIImageView *)sender;
 
 - (void)updateRecentFlyer:(NSMutableArray *)recentFlyers;
+-(void)saveAfterTasksCheck;
 
 @end

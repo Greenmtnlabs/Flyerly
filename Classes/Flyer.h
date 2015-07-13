@@ -31,10 +31,9 @@
 
 -(void)setUpdatedSnapshotWithImage :(UIImage *)snapShot;
 
--(void)saveInGallery :(NSData *)imgData;
+-(void)saveIntoGallery;
 
 -(void)addToHistory;
--(void)addToGallery :(NSData *)snapShotData;
 
 -(void)replaceFromHistory;
 
@@ -169,10 +168,19 @@
 -(CGFloat)getTvDefPosX;
 -(CGFloat)getTvDefPosY;
 -(BOOL)canIncreaseVideoSize;
+-(void)saveAfterCheck;
 
 @property (strong, readonly) NSMutableDictionary *masterLayers;
 @property (strong, nonatomic) NSMutableArray *socialArray;
 @property (strong, nonatomic) NSMutableArray *textFileArray;
 @property (strong, nonatomic) ALAssetsLibrary *library;
+
+//On back save in gallary, after number of tasks
+@property (assign) int saveInGallaryAfterNumberOfTasks;
+
+//Tap on share button, merge video, dont save in gallary because it prompts delete dialoag
+//so this flag will help when sharing pannel gone hide, we check if its ture we call the saveInGallary at that time
+@property (assign) BOOL saveInGallaryRequired;
+
 
 @end
