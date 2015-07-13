@@ -45,7 +45,7 @@
 
 @implementation CreateFlyerController
 
-@synthesize sharingPannelIsHiddin;
+@synthesize sharingPannelIsHidden;
 
 //Outlets form zoom
 @synthesize zoomScrollView,zoomScreenShot,zoomMagnifyingGlass,zoomScreenShotForVideo;
@@ -79,7 +79,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [libDrawing setFrame:newFrame];
     
 
-    sharingPannelIsHiddin = YES;
+    sharingPannelIsHidden = YES;
 }
 
 /**
@@ -3878,7 +3878,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                     
                     // Main Thread
                     dispatch_async( dispatch_get_main_queue(), ^{
-                        if( sharingPannelIsHiddin == YES ){
+                        if( sharingPannelIsHidden == YES ){
                             self.onFlyerBack(@"");
                         } else {
                             self.flyer.saveInGallaryRequired = YES;
@@ -4377,7 +4377,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
  */
 -(void)share {
     
-    sharingPannelIsHiddin = NO;
+    sharingPannelIsHidden = NO;
     
     // Disable  Buttons
     rightUndoBarButton.enabled = NO;
@@ -5808,7 +5808,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 
 -(void)enableHome:(BOOL)enable{
     sharePanel.hidden = enable;
-    sharingPannelIsHiddin = enable;
+    sharingPannelIsHidden = enable;
 
     [backButton setEnabled:enable];
     [helpButton setEnabled:enable];
