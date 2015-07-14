@@ -944,27 +944,29 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             id colorName = borderArray[(i-1)];
             
             //Here we Highlight Last Color Selected
-            if( [colorName isKindOfClass:[NSString class]] ){
-            
-            }
-            else if (textColor != nil) {
-                colorName  = (UIColor *)colorName;
-                NSString *tcolor;
-                NSString *twhite;
-                CGFloat r = 0.0, g = 0.0, b = 0.0, a = 0.0,wht = 0.0;
-                
-                UILabel *labelToStore = [[UILabel alloc]init];
-                labelToStore.textColor = colorName;
-                
-                //Getting RGB Color Code
-                [labelToStore.textColor getRed:&r green:&g blue:&b alpha:&a];
-                
-                tcolor = [NSString stringWithFormat:@"%f, %f, %f", r, g, b];
-                
-                [labelToStore.textColor getWhite:&wht alpha:&a];
-                twhite = [NSString stringWithFormat:@"%f, %f", wht, a];
-                
-                i++;
+            if (textColor != nil) {
+                if ([textColor rangeOfString:@".png"].location != NSNotFound && [colorName isKindOfClass:[NSString class]] ) {
+                    
+                }
+                else if( [colorName isKindOfClass:[UIColor class]] ){
+                    colorName  = (UIColor *)colorName;
+                    NSString *tcolor;
+                    NSString *twhite;
+                    CGFloat r = 0.0, g = 0.0, b = 0.0, a = 0.0,wht = 0.0;
+                    
+                    UILabel *labelToStore = [[UILabel alloc]init];
+                    labelToStore.textColor = colorName;
+                    
+                    //Getting RGB Color Code
+                    [labelToStore.textColor getRed:&r green:&g blue:&b alpha:&a];
+                    
+                    tcolor = [NSString stringWithFormat:@"%f, %f, %f", r, g, b];
+                    
+                    [labelToStore.textColor getWhite:&wht alpha:&a];
+                    twhite = [NSString stringWithFormat:@"%f, %f", wht, a];
+                    
+                    i++;
+                }
             }
         }// Loop
     });
@@ -5243,7 +5245,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     }
     else if(selectedButton == flyerBorder)
     {
-        [flyerBorder setSelected:YES];
         
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
@@ -5259,6 +5260,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         //Add ContextView
         [self addScrollView:layerScrollView];
         
+        [flyerBorder setSelected:YES];
     }
     
 }
@@ -5478,12 +5480,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         [layerScrollView setContentSize:CGSizeMake(backgroundsView.frame.size.width, backgroundsView.frame.size.height)];
         
-        if ( backgroundImageTag ) {
-            [backgroundsView highlightResource:backgroundImageTag];
-            UIButton *highLight = [backgroundsView getHighlightedResource];
-            
-            [layerScrollView scrollRectToVisible:highLight.frame animated:YES];
-        }
+        [self highlightAndScrollRect:backgroundImageTag inView:backgroundsView];
         
         [backgroundTabButton setSelected:YES];
         //Add right Bar button
@@ -5559,7 +5556,17 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
 }
 
-
+/**
+ * Hightlight a button and scroll to it in view
+ */
+-(void)highlightAndScrollRect:(NSInteger *)btnTag inView:(ResourcesView *)viewForHighlight {
+    if ( btnTag ) {
+        [backgroundsView highlightResource:btnTag];
+        UIButton *highLight = [viewForHighlight getHighlightedResource];
+        
+        [layerScrollView scrollRectToVisible:highLight.frame animated:YES];
+    }
+}
 
 #pragma mark - Flurry Methods
 
