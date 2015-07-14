@@ -491,7 +491,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                          [UIColor colorWithRed:38.0/255.0 green:72.0/255.0 blue:18.0/255.0 alpha:1],
                          [UIColor colorWithRed:73.0/255.0 green:69.0/255.0 blue:215.0/255.0 alpha:1],
                          @"b1.png",@"b2.png",@"b3.png",@"b4.png",@"b5.png",@"b6.png",@"b7.png",@"b8.png",@"b9.png",@"b10.png",
-                         @"b11.png",@"b12.png",@"b13.png",@"b14.png",@"b15.png",@"b16.png",@"b17.png",@"b18.png",@"b19.png",@"b20.png",
+                         @"b11.png",@"b12.png",@"b13.png",@"b14.png",@"b15.png",@"b16.png",@"b17.png",@"b18.png",@"b19.png",@"b20.png",@"b21.png",
                          nil];
         
         // HERE WE CREATE FLYERLY ALBUM ON DEVICE
@@ -935,18 +935,23 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }
         
         NSArray *bodersArray = flyerBordersView.subviews;
-        int count = (int)(bodersArray.count)/3;
-        
-        int i=1;
-        for (int index = 0; index < count; index++ )
+        int i =-1;
+        for (int index = 0; index < bodersArray.count; index += 3 )
         {
-            
-            id colorName = borderArray[(i-1)];
+            i++;
+            id colorName = borderArray[i];
             
             //Here we Highlight Last Color Selected
             if (textColor != nil) {
-                if ([textColor rangeOfString:@".png"].location != NSNotFound && [colorName isKindOfClass:[NSString class]] ) {
-                    
+                if ([textColor rangeOfString:@".png"].location != NSNotFound ) {
+                    if ( [colorName isKindOfClass:[NSString class]] ) {
+                        UIButton *curBtn =  bodersArray[index+2];//image is on third button
+                        NSString *currentBackgroundImage = curBtn.currentTitle;
+                        if( [currentBackgroundImage isEqual:textColor] ){
+                            [self highlightAndScrollRect:curBtn.tag inView:flyerBordersView];
+                            break;
+                        }
+                    }
                 }
                 else if( [colorName isKindOfClass:[UIColor class]] ){
                     colorName  = (UIColor *)colorName;
@@ -961,11 +966,19 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     [labelToStore.textColor getRed:&r green:&g blue:&b alpha:&a];
                     
                     tcolor = [NSString stringWithFormat:@"%f, %f, %f", r, g, b];
+                    if ( r == 0 && g == 0 && b ==0) {
+                        [labelToStore.textColor getWhite:&wht alpha:&a];
+                    }
                     
-                    [labelToStore.textColor getWhite:&wht alpha:&a];
                     twhite = [NSString stringWithFormat:@"%f, %f", wht, a];
                     
-                    i++;
+                    if( [textColor isEqual:tcolor] && [textWhiteColor isEqual:twhite]  ){
+                        UIButton *curBtn =  bodersArray[index+2];//color is on second button
+                        [self highlightAndScrollRect:curBtn.tag inView:flyerBordersView];
+                        break;
+                    }
+                    
+                    
                 }
             }
         }// Loop
@@ -5561,7 +5574,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
  */
 -(void)highlightAndScrollRect:(NSInteger *)btnTag inView:(ResourcesView *)viewForHighlight {
     if ( btnTag ) {
-        [backgroundsView highlightResource:btnTag];
+        [viewForHighlight highlightResource:btnTag];
         UIButton *highLight = [viewForHighlight getHighlightedResource];
         
         [layerScrollView scrollRectToVisible:highLight.frame animated:YES];
