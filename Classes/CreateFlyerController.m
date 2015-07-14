@@ -490,6 +490,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                          [UIColor magentaColor],
                          [UIColor colorWithRed:38.0/255.0 green:72.0/255.0 blue:18.0/255.0 alpha:1],
                          [UIColor colorWithRed:73.0/255.0 green:69.0/255.0 blue:215.0/255.0 alpha:1],
+                         @"b1.png",@"b2.png",@"b3.png",@"b4.png",@"b5.png",@"b6.png",@"b7.png",@"b8.png",@"b9.png",@"b10.png",
+                         @"b11.png",@"b12.png",@"b13.png",@"b14.png",@"b15.png",@"b16.png",@"b17.png",@"b18.png",@"b19.png",@"b20.png",
                          nil];
         
         // HERE WE CREATE FLYERLY ALBUM ON DEVICE
@@ -924,7 +926,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 flyerBordersView.frame = CGRectMake((layerScrollView.frame.origin.x+22), (layerScrollView.frame.origin.y+7), flyerBordersView.frame.size.width, flyerBordersView.frame.size.height);
             }
             [layerScrollView addSubview:flyerBordersView];
-            [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+            [layerScrollView setContentSize:CGSizeMake(320, flyerBordersView.frame.size.height + heightValue)];
             
         } else {
             
@@ -933,17 +935,20 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }
         
         NSArray *bodersArray = flyerBordersView.subviews;
-        int count = (bodersArray.count)/3;
+        int count = (int)(bodersArray.count)/3;
         
         int i=1;
         for (int index = 0; index < count; index++ )
         {
             
-            UIColor *colorName = borderArray[(i-1)];
+            id colorName = borderArray[(i-1)];
             
             //Here we Highlight Last Color Selected
-            if (textColor != nil) {
-                
+            if( [colorName isKindOfClass:[NSString class]] ){
+            
+            }
+            else if (textColor != nil) {
+                colorName  = (UIColor *)colorName;
                 NSString *tcolor;
                 NSString *twhite;
                 CGFloat r = 0.0, g = 0.0, b = 0.0, a = 0.0,wht = 0.0;
@@ -958,11 +963,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
                 [labelToStore.textColor getWhite:&wht alpha:&a];
                 twhite = [NSString stringWithFormat:@"%f, %f", wht, a];
-                
-                if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
-                    // Add border to selected layer thumbnail
-                    //color.backgroundColor = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
-                }
                 
                 i++;
             }
@@ -2525,7 +2525,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 {
     
     NSArray *bodersArray = flyerBordersView.subviews;
-    int count = (bodersArray.count);
+    int count = (int)(bodersArray.count);
     
     UIView *tempView;
     
@@ -2552,12 +2552,15 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         if(tempView == view)
         {
-            UIColor *borderColor = borderArray[i-2];
+            id borderColor = borderArray[i-2];
             currentLayer = @"Template";
+
+            //Save in dictionary
             [flyer setFlyerBorder:currentLayer RGBColor:borderColor];
             
-            //Here we call Render Layer on View
+            //Reflect on view / Here we call Render Layer on View
             [flyimgView setTemplateBorder:[flyer getLayerFromMaster:currentLayer]];
+            
             
             // Add border to selected layer thumbnail
             tempView = [bodersArray objectAtIndex:(index-2)];

@@ -646,31 +646,30 @@ CGAffineTransform previuosTransform;
     if ([[layDic valueForKey:@"bordercolor"] isEqualToString:@"0.000000, 0.000000, 0.000000"]) {
         
         if ([layDic valueForKey:@"bordercolorWhite"] != nil) {
+
             NSArray *rgbBorder = [[layDic valueForKey:@"bordercolorWhite"] componentsSeparatedByString:@","];
-            
             borderColor = [UIColor colorWithWhite:[rgbBorder[0] floatValue] alpha:[rgbBorder[1] floatValue]];
-            
         }
-        
     }else{
-        //[layDic valueForKey:@"bordercolor"]
-        //when border are images
-        if ([@"b1.png" rangeOfString:@".png"].location != NSNotFound) {
+        [self deleteLayer:@"TemplateBorder"];
+        borderColor = [UIColor clearColor];
+        
+        //When picture flyer border
+        if ([[layDic valueForKey:@"bordercolor"] rangeOfString:@".png"].location != NSNotFound) {
             // Here We Write Code for Image
             ImageLayer *img = [[ImageLayer alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-            img.image = [UIImage imageNamed:@"dottedborder1.png"];
+            img.image = [UIImage imageNamed:[layDic valueForKey:@"bordercolor"]];
             [self addSubview:img];
             [layers setValue:img forKey:@"TemplateBorder"];
-            return;
         }
+        //Colored flyer border
         else{
             NSArray *rgbBorder = [[layDic valueForKey:@"bordercolor"] componentsSeparatedByString:@","];
             
             borderColor = [UIColor colorWithRed:[rgbBorder[0] floatValue] green:[rgbBorder[1] floatValue] blue:[rgbBorder[2] floatValue] alpha:1];
         }
     }
-
-
+    
     self.layer.borderColor = borderColor.CGColor;
     self.layer.borderWidth = 3.0;
 }
