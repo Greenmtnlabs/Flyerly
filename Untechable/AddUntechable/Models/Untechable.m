@@ -33,6 +33,8 @@
 //4-vars for screen4
 @synthesize email, password, respondingEmail,acType, iSsl, oSsl, imsHostName, imsPort, omsHostName, omsPort;
 
+@synthesize selectedContacts;
+
 
 -(NSDate *)stringToDate:(NSString *)inputStrFormate dateString:(NSString *)dateString{
         NSLog(@"dateString is %@", dateString);
@@ -228,6 +230,7 @@
         [data writeToFile:piecesFile atomically:YES];
         //Here we write the dictionary of .peices files
         //[dic writeToFile:piecesFile atomically:YES];
+        
 
     }
     else if( [setOrSAve isEqualToString:RESET] ) {
@@ -296,6 +299,8 @@
         imsPort         = ( dic[@"imsPort"] ) ? dic[@"imsPort"] : @"";
         omsHostName     = ( dic[@"omsHostName"] ) ? dic[@"omsHostName"] : @"";
         omsPort         = ( dic[@"omsPort"] ) ? dic[@"omsPort"] : @"";
+        
+        selectedContacts = [[NSMutableArray alloc] init];
     }
     
     //NSLog(@"dic: %@", dic);
@@ -366,6 +371,9 @@
     iSsl = @"";
     oSsl = @"";
     acType = imsHostName = imsPort = omsHostName = omsPort= @"";
+    
+    selectedContacts = [[NSMutableArray alloc] init];
+
 }
 
 /*

@@ -11,6 +11,7 @@
 #import "ContactsListControllerViewController.h"
 #import "ContactsCustomizedModal.h"
 #import "BSKeyboardControls.h"
+#import "SingleContactDetailsModal.h"
 
 @interface ContactCustomizeDetailsControlelrViewController : UIViewController <UITableViewDelegate, BSKeyboardControlsDelegate, UITableViewDataSource,UITextViewDelegate>
 {
@@ -31,6 +32,10 @@
 @property (nonatomic,strong)  Untechable *untechable;
 @property (nonatomic,strong)  ContactsListControllerViewController *contactListController;
 @property (nonatomic,strong)  ContactsCustomizedModal *contactModal;
+
+@property (nonatomic,strong)  SingleContactDetailsModal *tempContactDetailsModal;
+
+
 
 - (void) saveSpendingTimeText;
 @end

@@ -12,6 +12,7 @@
 #import "EmailCell.h"
 #import "CustomTextTableViewCell.h"
 #import "Common.h"
+#import "SingleContactDetailsModal.h"
 
 @interface ContactCustomizeDetailsControlelrViewController (){
     
@@ -30,7 +31,7 @@
 
 @implementation ContactCustomizeDetailsControlelrViewController
 
-@synthesize contactModal,untechable,allEmails,allPhoneNumbers,customTextForContact,customizedContactsDictionary,contactListController;
+@synthesize contactModal,untechable,allEmails,allPhoneNumbers,customTextForContact,customizedContactsDictionary,contactListController,tempContactDetailsModal;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -45,6 +46,12 @@
     
     editingEmailsWithStatus = [[NSMutableDictionary alloc] init];
     editingPhonesWithStatus = [[NSMutableDictionary alloc] init];
+
+    tempContactDetailsModal = [[SingleContactDetailsModal alloc] init];
+    tempContactDetailsModal.allEmails = [[NSMutableArray alloc] init];
+    tempContactDetailsModal.allPhoneNumbers = [[NSMutableArray alloc] init];
+    
+    
     for ( int i = 0; i<contactModal.allPhoneNumbers.count; i++ ){
         NSMutableArray * phoneWithStatus = [[NSMutableArray alloc] initWithArray:[contactModal.allPhoneNumbers objectAtIndex:i]];
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:2];
@@ -57,11 +64,10 @@
         [editingEmailsWithStatus setObject:emailWithStatus forKey:indexPath];
     }
     
-    
-    
     if( contactModal.IsCustomized ){
         IsCustomized = YES;
     }
+   tempContactDetailsModal.name = contactModal.name;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -470,7 +476,8 @@
             [contactListController.currentlyEditingContacts addObject:contactModal];
         }
     }
- 
+    
+    [untechable.selectedContacts addObject:tempContactDetailsModal];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -495,7 +502,19 @@
         [emailCell.emailButton setSelected:YES];
     }
     
+    
+    if( tempContactDetailsModal.allEmails.count == 0){
+        [tempContactDetailsModal.allEmails addObject:tempEmailWithStatus];
+    } else {
+        for(int i=0;i<tempContactDetailsModal.allEmails.count; i++ ){
+            if( [tempContactDetailsModal.allEmails[i][0] isEqualToString:tempEmailWithStatus[0]] )
+                tempContactDetailsModal.allEmails[i] = tempEmailWithStatus;
+        }
+    }
+    
+    
     [editingEmailsWithStatus setObject:tempEmailWithStatus forKey:indexPath];
+    //[tempContactDetailsModal.allEmails addObject:editingEmailsWithStatus];
 }
 
 
@@ -520,8 +539,18 @@
         [tempPhoneWithStatus setObject:@"1" atIndexedSubscript:3];
         [phoneCell.callButton setSelected:YES];
     }
-    
+
+    if( tempContactDetailsModal.allPhoneNumbers.count == 0){
+        [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
+    } else {
+        for(int i=0;i<tempContactDetailsModal.allPhoneNumbers.count; i++ ){
+            if( [tempContactDetailsModal.allPhoneNumbers[i][0] isEqualToString:tempPhoneWithStatus[0]] )
+                tempContactDetailsModal.allPhoneNumbers[i] = tempPhoneWithStatus;
+        }
+    }
     [editingPhonesWithStatus setObject:tempPhoneWithStatus forKey:indexPath];
+    //[tempContactDetailsModal.allPhoneNumbers addObject:editingPhonesWithStatus];
+    
 }
 
 
@@ -543,10 +572,25 @@
     if ( [[tempPhoneWithStatus objectAtIndex:2] isEqualToString:@"1"] ){
         [tempPhoneWithStatus setObject:@"0" atIndexedSubscript:2];
         [phoneCell.smsButton setSelected:NO];
+        
+        
     }else if ( [[tempPhoneWithStatus objectAtIndex:2] isEqualToString:@"0"] ){
         [tempPhoneWithStatus setObject:@"1" atIndexedSubscript:2];
         [phoneCell.smsButton setSelected:YES];
     }
+    
+    
+    
+    if( tempContactDetailsModal.allPhoneNumbers.count == 0){
+        [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
+    } else {
+        for(int i=0;i<tempContactDetailsModal.allPhoneNumbers.count; i++ ){
+            if( [tempContactDetailsModal.allPhoneNumbers[i][0] isEqualToString:tempPhoneWithStatus[0]] )
+                tempContactDetailsModal.allPhoneNumbers[i] = tempPhoneWithStatus;
+        }
+    }
+    
+    
     
     /*
     if ([[contactModal getSmsStatus] isEqualToString:@"1"]){
@@ -559,6 +603,7 @@
     }
     */
     [editingPhonesWithStatus setObject:tempPhoneWithStatus forKey:indexPath];
+    //[tempContactDetailsModal.allPhoneNumbers addObject:editingPhonesWithStatus];
 }
 
 - (void) saveSpendingTimeText {

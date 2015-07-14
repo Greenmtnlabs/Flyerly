@@ -25,7 +25,7 @@
 		200ACE331A3874B200DC7047 /* YahooIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE211A3874B200DC7047 /* YahooIcon.png */; };
 		200ACE341A3874B200DC7047 /* YahooIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE221A3874B200DC7047 /* YahooIcon@2x.png */; };
 		200ACE351A3874B200DC7047 /* YahooIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE231A3874B200DC7047 /* YahooIcon@3x.png */; };
-		207E6A521B53ED070067A1B5 /* ContactDetailsModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 207E6A511B53ED070067A1B5 /* ContactDetailsModal.m */; };
+		207E6A521B53ED070067A1B5 /* SingleContactDetailsModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 207E6A511B53ED070067A1B5 /* SingleContactDetailsModal.m */; };
 		2402BB831A1DBF6A00255A73 /* UntechablesList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402BB811A1DBF6A00255A73 /* UntechablesList.m */; };
 		2402BB841A1DBF6A00255A73 /* UntechablesList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2402BB821A1DBF6A00255A73 /* UntechablesList.xib */; };
 		2402BB881A1DC3A200255A73 /* UntechableTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402BB861A1DC3A200255A73 /* UntechableTableCell.m */; };
@@ -275,8 +275,8 @@
 		200ACE211A3874B200DC7047 /* YahooIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YahooIcon.png; sourceTree = "<group>"; };
 		200ACE221A3874B200DC7047 /* YahooIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YahooIcon@2x.png"; sourceTree = "<group>"; };
 		200ACE231A3874B200DC7047 /* YahooIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YahooIcon@3x.png"; sourceTree = "<group>"; };
-		207E6A501B53ECF60067A1B5 /* ContactDetailsModal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactDetailsModal.h; sourceTree = "<group>"; };
-		207E6A511B53ED070067A1B5 /* ContactDetailsModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactDetailsModal.m; sourceTree = "<group>"; };
+		207E6A501B53ECF60067A1B5 /* SingleContactDetailsModal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingleContactDetailsModal.h; sourceTree = "<group>"; };
+		207E6A511B53ED070067A1B5 /* SingleContactDetailsModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleContactDetailsModal.m; sourceTree = "<group>"; };
 		2402BB801A1DBF6A00255A73 /* UntechablesList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UntechablesList.h; path = UntechableListController/UntechablesList.h; sourceTree = "<group>"; };
 		2402BB811A1DBF6A00255A73 /* UntechablesList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UntechablesList.m; path = UntechableListController/UntechablesList.m; sourceTree = "<group>"; };
 		2402BB821A1DBF6A00255A73 /* UntechablesList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UntechablesList.xib; path = UntechableListController/UntechablesList.xib; sourceTree = "<group>"; };
@@ -577,13 +577,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		207E6A4F1B53ECAB0067A1B5 /* ContactDetailsModal */ = {
+		207E6A4F1B53ECAB0067A1B5 /* SingleContactDetailsModal */ = {
 			isa = PBXGroup;
 			children = (
-				207E6A501B53ECF60067A1B5 /* ContactDetailsModal.h */,
-				207E6A511B53ED070067A1B5 /* ContactDetailsModal.m */,
+				207E6A501B53ECF60067A1B5 /* SingleContactDetailsModal.h */,
+				207E6A511B53ED070067A1B5 /* SingleContactDetailsModal.m */,
 			);
-			name = ContactDetailsModal;
+			name = SingleContactDetailsModal;
 			sourceTree = "<group>";
 		};
 		2402BB7F1A1DBEF800255A73 /* UntechableListController */ = {
@@ -602,7 +602,7 @@
 		24354D671A499D93000EC781 /* ContactsListController */ = {
 			isa = PBXGroup;
 			children = (
-				207E6A4F1B53ECAB0067A1B5 /* ContactDetailsModal */,
+				207E6A4F1B53ECAB0067A1B5 /* SingleContactDetailsModal */,
 				243C59DC1A4D3A530020350C /* ContactCustomizeDetailsControlelr */,
 				248E06B41A4ACD350099846A /* ContactsCustomizedModal */,
 				24354D681A499EC5000EC781 /* ContactsListControllerViewController.h */,
@@ -1482,7 +1482,7 @@
 				C36D2E5D1A7919DC000537C5 /* SettingsViewController.m in Sources */,
 				36BB7B8919FFD98C00562069 /* ThankyouController.m in Sources */,
 				243C59F41A4D753C0020350C /* FirstTableViewCell.m in Sources */,
-				207E6A521B53ED070067A1B5 /* ContactDetailsModal.m in Sources */,
+				207E6A521B53ED070067A1B5 /* SingleContactDetailsModal.m in Sources */,
 				366ECD9619D323DA00F71A11 /* AddUntechableController.m in Sources */,
 				36B4E53E1A28BBD400CC18B0 /* EmailTableViewCell.m in Sources */,
 				36B275D71A00D36400ED58AD /* RMStore.m in Sources */,
