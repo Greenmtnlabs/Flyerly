@@ -945,7 +945,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             if (textColor != nil) {
                 if ([textColor rangeOfString:@".png"].location != NSNotFound ) {
                     if ( [colorName isKindOfClass:[NSString class]] ) {
-                        UIButton *curBtn =  bodersArray[index+2];//image is on third button
+                        UIButton *curBtn =  bodersArray[index+1];//image is in second button
                         NSString *currentBackgroundImage = curBtn.currentTitle;
                         if( [currentBackgroundImage isEqual:textColor] ){
                             [self highlightAndScrollRect:curBtn.tag inView:flyerBordersView];
