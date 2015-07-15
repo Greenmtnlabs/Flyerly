@@ -803,269 +803,269 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="S5X-bJ-0G6">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon1.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="S5X-bJ-0G6">
                     <rect key="frame" x="83" y="14" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template2.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="vjj-k1-kAZ">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon2.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="vjj-k1-kAZ">
                     <rect key="frame" x="157" y="14" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template3.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="XaT-9a-rtq">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon3.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="XaT-9a-rtq">
                     <rect key="frame" x="232" y="14" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template4.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="mIT-81-bWa">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon4.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="mIT-81-bWa">
                     <rect key="frame" x="307" y="14" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template5.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Jda-kq-z6a">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon5.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="Jda-kq-z6a">
                     <rect key="frame" x="8" y="82" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template6.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="yoM-1n-srY">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon6.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="yoM-1n-srY">
                     <rect key="frame" x="83" y="82" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template7.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="rDc-4w-rna">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon7.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="rDc-4w-rna">
                     <rect key="frame" x="157" y="82" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template8.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="NCV-ZQ-53C">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon8.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="NCV-ZQ-53C">
                     <rect key="frame" x="232" y="82" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template9.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="lqM-uv-enB">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon9.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="lqM-uv-enB">
                     <rect key="frame" x="307" y="82" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template10.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="fFR-cl-uqx">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon10.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="fFR-cl-uqx">
                     <rect key="frame" x="8" y="150" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template11.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="1sn-9L-MdN">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon11.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="1sn-9L-MdN">
                     <rect key="frame" x="83" y="150" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template12.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="uTs-Mt-Ep0">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon12.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="uTs-Mt-Ep0">
                     <rect key="frame" x="157" y="150" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template13.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="VQP-He-QRO">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon13.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="VQP-He-QRO">
                     <rect key="frame" x="232" y="150" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template14.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="8UN-ix-eNZ">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon14.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="8UN-ix-eNZ">
                     <rect key="frame" x="307" y="150" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template15.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="meK-l2-ao2">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon15.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="meK-l2-ao2">
                     <rect key="frame" x="8" y="217" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" tag="16" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template16.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="51n-cG-bl0">
+                <imageView userInteractionEnabled="NO" tag="16" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon16.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="51n-cG-bl0">
                     <rect key="frame" x="157" y="890" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template17.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="d1r-yR-2L7">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon17.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="d1r-yR-2L7">
                     <rect key="frame" x="157" y="217" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template18.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="hWC-Tq-utk">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon18.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="hWC-Tq-utk">
                     <rect key="frame" x="232" y="217" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template19.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="qc1-LG-QPF">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon19.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="qc1-LG-QPF">
                     <rect key="frame" x="307" y="215" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template20.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="w0v-E2-Z6h">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon20.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="w0v-E2-Z6h">
                     <rect key="frame" x="8" y="283" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template21.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="P46-gG-jYl">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon21.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="P46-gG-jYl">
                     <rect key="frame" x="83" y="283" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template22.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="4d7-Ur-sWF">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon22.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="4d7-Ur-sWF">
                     <rect key="frame" x="157" y="283" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template23.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Xhc-rT-Url">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon23.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Xhc-rT-Url">
                     <rect key="frame" x="232" y="283" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template24.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="EMO-B4-oKd">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon24.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="EMO-B4-oKd">
                     <rect key="frame" x="307" y="283" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template25.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Qh3-0c-h1p">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon25.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Qh3-0c-h1p">
                     <rect key="frame" x="8" y="350" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template26.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="DQ9-Jm-pGB">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon26.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="DQ9-Jm-pGB">
                     <rect key="frame" x="83" y="350" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template27.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="L34-BZ-jaZ">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon27.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="L34-BZ-jaZ">
                     <rect key="frame" x="157" y="350" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template28.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="oKZ-So-bYQ">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon28.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="oKZ-So-bYQ">
                     <rect key="frame" x="232" y="350" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template29.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="fBf-nF-t4u">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon29.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="fBf-nF-t4u">
                     <rect key="frame" x="307" y="350" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template30.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="0Kj-iN-LRe">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon30.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="0Kj-iN-LRe">
                     <rect key="frame" x="8" y="418" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template31.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="rUT-eo-FHy">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon31.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="rUT-eo-FHy">
                     <rect key="frame" x="83" y="418" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template32.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="VTS-c2-Q2u">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon32.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="VTS-c2-Q2u">
                     <rect key="frame" x="157" y="418" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template33.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="qBC-Wp-o0G">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon33.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="qBC-Wp-o0G">
                     <rect key="frame" x="232" y="418" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template34.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="GsC-T0-qU3">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon34.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="GsC-T0-qU3">
                     <rect key="frame" x="307" y="418" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template35.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="9Mv-n2-vTu">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon35.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="9Mv-n2-vTu">
                     <rect key="frame" x="8" y="486" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template36.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="FtG-QP-Hl9">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon36.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="FtG-QP-Hl9">
                     <rect key="frame" x="83" y="486" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template37.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="stV-zc-6m3">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon37.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="stV-zc-6m3">
                     <rect key="frame" x="157" y="486" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template38.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="K8U-OE-4cH">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon38.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="K8U-OE-4cH">
                     <rect key="frame" x="232" y="486" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template39.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Ae8-Hc-hUy">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon39.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Ae8-Hc-hUy">
                     <rect key="frame" x="307" y="486" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template40.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="HMq-yU-9gJ">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon40.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="HMq-yU-9gJ">
                     <rect key="frame" x="8" y="553" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template41.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="RT4-s7-FHt">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon41.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="RT4-s7-FHt">
                     <rect key="frame" x="83" y="553" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template42.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="5sW-4M-Sr6">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon42.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="5sW-4M-Sr6">
                     <rect key="frame" x="157" y="553" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template43.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Lrk-PC-V6K">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon43.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Lrk-PC-V6K">
                     <rect key="frame" x="232" y="553" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template44.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Z9X-pN-WPr">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon44.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Z9X-pN-WPr">
                     <rect key="frame" x="307" y="553" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template45.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="m7p-yS-hxQ">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon45.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="m7p-yS-hxQ">
                     <rect key="frame" x="8" y="621" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template46.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="s3H-f8-bcw">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon46.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="s3H-f8-bcw">
                     <rect key="frame" x="83" y="621" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template47.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="EgC-e2-0tt">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon47.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="EgC-e2-0tt" userLabel="icon47.jpg">
                     <rect key="frame" x="157" y="621" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template48.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Ej8-Ow-vtL">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon48.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Ej8-Ow-vtL" userLabel="icon48.jpg">
                     <rect key="frame" x="232" y="621" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template49.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="zSg-h7-UNB">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon49.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="zSg-h7-UNB">
                     <rect key="frame" x="307" y="621" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template50.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="IF1-oN-pns">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon50.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="IF1-oN-pns">
                     <rect key="frame" x="8" y="688" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template51.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="klz-fs-Fz8">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon51.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="klz-fs-Fz8">
                     <rect key="frame" x="83" y="688" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template52.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="KHa-Ey-4SH">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon52.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="KHa-Ey-4SH">
                     <rect key="frame" x="157" y="688" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template53.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="WGv-if-Fsx">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon53.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="WGv-if-Fsx">
                     <rect key="frame" x="232" y="688" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template54.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="1NA-yu-NWC">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon54.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="1NA-yu-NWC">
                     <rect key="frame" x="307" y="688" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template55.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="4Z3-Qk-WOT">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon55.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="4Z3-Qk-WOT">
                     <rect key="frame" x="8" y="755" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template56.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="a09-3P-tOc">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon56.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="a09-3P-tOc">
                     <rect key="frame" x="83" y="755" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template57.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="H34-uo-Lq7">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon57.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="H34-uo-Lq7">
                     <rect key="frame" x="157" y="755" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template58.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ZMQ-Xo-c0q">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon58.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ZMQ-Xo-c0q">
                     <rect key="frame" x="232" y="755" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template59.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="3tG-I1-qKy">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon59.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="3tG-I1-qKy">
                     <rect key="frame" x="307" y="755" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template60.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="xpq-oz-AYJ">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon60.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="xpq-oz-AYJ">
                     <rect key="frame" x="8" y="823" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template61.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="AQt-wq-JBo">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon61.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="AQt-wq-JBo">
                     <rect key="frame" x="83" y="823" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template62.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="H9d-1l-LRW">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon62.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="H9d-1l-LRW">
                     <rect key="frame" x="157" y="823" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template63.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="E6d-Lx-r2H">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon63.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="E6d-Lx-r2H">
                     <rect key="frame" x="232" y="823" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template64.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="wB1-L0-1DB">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon64.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="wB1-L0-1DB">
                     <rect key="frame" x="307" y="823" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template65.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="V2n-sd-9FJ">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon65.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="V2n-sd-9FJ">
                     <rect key="frame" x="8" y="890" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template66.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="BP8-5c-YYP">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon66.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="BP8-5c-YYP">
                     <rect key="frame" x="83" y="890" width="60" height="58"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" tag="74" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template74.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="PvU-P3-3Cy" userLabel="Image View - Template74.jpg">
                     <rect key="frame" x="83" y="217" width="60" height="58"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template0.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="7DB-Sc-t2p">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon0.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="7DB-Sc-t2p">
                     <rect key="frame" x="8" y="11" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template75.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="XY8-je-9mh" userLabel="Template75.jpg">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon75.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="XY8-je-9mh" userLabel="Template75.jpg">
                     <rect key="frame" x="232" y="890" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template76.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="8BD-h8-sPN" userLabel="Template76.jpg">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon76.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="8BD-h8-sPN" userLabel="Template76.jpg">
                     <rect key="frame" x="307" y="890" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template77.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="fMk-ib-rnM" userLabel="Template77.jpg">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon77.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="fMk-ib-rnM" userLabel="Template77.jpg">
                     <rect key="frame" x="8" y="957" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template78.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="h5E-dK-GGx" userLabel="Template78.jpg">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon78.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="h5E-dK-GGx" userLabel="Template78.jpg">
                     <rect key="frame" x="83" y="957" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template79.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="zCK-Tr-Agi" userLabel="Template79.jpg">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon79.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="zCK-Tr-Agi" userLabel="Template79.jpg">
                     <rect key="frame" x="157" y="957" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template80.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="zAw-E7-DxR" userLabel="Template80.jpg">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon80.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="zAw-E7-DxR" userLabel="Template80.jpg">
                     <rect key="frame" x="232" y="957" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template81.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="045-c6-lf1" userLabel="Template81.jpg">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon81.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="045-c6-lf1" userLabel="Template81.jpg">
                     <rect key="frame" x="307" y="957" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template82.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="eMj-yu-BR7" userLabel="Template82.jpg">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon82.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="eMj-yu-BR7" userLabel="Template82.jpg">
                     <rect key="frame" x="8" y="1024" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template83.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="wPT-Ol-uhx" userLabel="Template83.jpg">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon83.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="wPT-Ol-uhx" userLabel="Template83.jpg">
                     <rect key="frame" x="83" y="1024" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template84.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="fiW-wL-J72" userLabel="Template84.jpg">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon84.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="fiW-wL-J72" userLabel="Template84.jpg">
                     <rect key="frame" x="157" y="1024" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template85.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ZdF-xg-lFI" userLabel="Template85.jpg">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon85.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ZdF-xg-lFI" userLabel="Template85.jpg">
                     <rect key="frame" x="232" y="1024" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template86.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="vYW-Zk-bRt" userLabel="Template86.jpg">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon86.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="vYW-Zk-bRt" userLabel="Template86.jpg">
                     <rect key="frame" x="307" y="1024" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template87.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="BEr-d2-fde" userLabel="Template87.jpg">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon87.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="BEr-d2-fde" userLabel="Template87.jpg">
                     <rect key="frame" x="8" y="1091" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template88.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="4hl-2r-QgX" userLabel="Template88.jpg">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon88.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="4hl-2r-QgX" userLabel="Template88.jpg">
                     <rect key="frame" x="83" y="1091" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template89.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="yeB-fF-u1b" userLabel="Template89.jpg">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon89.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="yeB-fF-u1b" userLabel="Template89.jpg">
                     <rect key="frame" x="157" y="1091" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template90.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="OqX-zx-bFv" userLabel="Template90.jpg">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon90.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="OqX-zx-bFv" userLabel="Template90.jpg">
                     <rect key="frame" x="232" y="1091" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template91.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="U09-Fc-Hpq" userLabel="Template91.jpg">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon91.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="U09-Fc-Hpq" userLabel="Template91.jpg">
                     <rect key="frame" x="307" y="1092" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template92.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="B6y-ae-exZ" userLabel="Template92.jpg">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon92.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="B6y-ae-exZ" userLabel="Template92.jpg">
                     <rect key="frame" x="8" y="1158" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template93.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="y98-AK-x2X" userLabel="Template93.jpg">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon93.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="y98-AK-x2X" userLabel="Template93.jpg">
                     <rect key="frame" x="83" y="1158" width="60" height="58"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Template94.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Bfh-5P-QMV" userLabel="Template94.jpg">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon94.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Bfh-5P-QMV" userLabel="Template94.jpg">
                     <rect key="frame" x="157" y="1158" width="60" height="58"/>
                 </imageView>
             </subviews>
@@ -1075,93 +1075,93 @@
         </view>
     </objects>
     <resources>
-        <image name="Template0.jpg" width="612" height="612"/>
-        <image name="Template1.jpg" width="612" height="612"/>
-        <image name="Template10.jpg" width="612" height="612"/>
-        <image name="Template11.jpg" width="612" height="612"/>
-        <image name="Template12.jpg" width="612" height="612"/>
-        <image name="Template13.jpg" width="612" height="612"/>
-        <image name="Template14.jpg" width="612" height="612"/>
-        <image name="Template15.jpg" width="612" height="612"/>
-        <image name="Template16.jpg" width="612" height="612"/>
-        <image name="Template17.jpg" width="612" height="612"/>
-        <image name="Template18.jpg" width="612" height="612"/>
-        <image name="Template19.jpg" width="612" height="612"/>
-        <image name="Template2.jpg" width="612" height="612"/>
-        <image name="Template20.jpg" width="612" height="612"/>
-        <image name="Template21.jpg" width="612" height="612"/>
-        <image name="Template22.jpg" width="612" height="612"/>
-        <image name="Template23.jpg" width="612" height="612"/>
-        <image name="Template24.jpg" width="612" height="612"/>
-        <image name="Template25.jpg" width="612" height="612"/>
-        <image name="Template26.jpg" width="612" height="612"/>
-        <image name="Template27.jpg" width="612" height="612"/>
-        <image name="Template28.jpg" width="612" height="612"/>
-        <image name="Template29.jpg" width="612" height="612"/>
-        <image name="Template3.jpg" width="612" height="612"/>
-        <image name="Template30.jpg" width="612" height="612"/>
-        <image name="Template31.jpg" width="612" height="612"/>
-        <image name="Template32.jpg" width="612" height="612"/>
-        <image name="Template33.jpg" width="612" height="612"/>
-        <image name="Template34.jpg" width="612" height="612"/>
-        <image name="Template35.jpg" width="612" height="612"/>
-        <image name="Template36.jpg" width="612" height="612"/>
-        <image name="Template37.jpg" width="612" height="612"/>
-        <image name="Template38.jpg" width="612" height="612"/>
-        <image name="Template39.jpg" width="612" height="612"/>
-        <image name="Template4.jpg" width="612" height="612"/>
-        <image name="Template40.jpg" width="612" height="612"/>
-        <image name="Template41.jpg" width="612" height="612"/>
-        <image name="Template42.jpg" width="612" height="612"/>
-        <image name="Template43.jpg" width="612" height="612"/>
-        <image name="Template44.jpg" width="612" height="612"/>
-        <image name="Template45.jpg" width="612" height="612"/>
-        <image name="Template46.jpg" width="612" height="612"/>
-        <image name="Template47.jpg" width="612" height="612"/>
-        <image name="Template48.jpg" width="612" height="612"/>
-        <image name="Template49.jpg" width="612" height="612"/>
-        <image name="Template5.jpg" width="612" height="612"/>
-        <image name="Template50.jpg" width="612" height="612"/>
-        <image name="Template51.jpg" width="612" height="612"/>
-        <image name="Template52.jpg" width="612" height="612"/>
-        <image name="Template53.jpg" width="612" height="612"/>
-        <image name="Template54.jpg" width="612" height="612"/>
-        <image name="Template55.jpg" width="612" height="612"/>
-        <image name="Template56.jpg" width="612" height="612"/>
-        <image name="Template57.jpg" width="612" height="612"/>
-        <image name="Template58.jpg" width="612" height="612"/>
-        <image name="Template59.jpg" width="612" height="612"/>
-        <image name="Template6.jpg" width="612" height="612"/>
-        <image name="Template60.jpg" width="612" height="612"/>
-        <image name="Template61.jpg" width="612" height="612"/>
-        <image name="Template62.jpg" width="612" height="612"/>
-        <image name="Template63.jpg" width="612" height="612"/>
-        <image name="Template64.jpg" width="612" height="612"/>
-        <image name="Template65.jpg" width="612" height="612"/>
-        <image name="Template66.jpg" width="612" height="612"/>
-        <image name="Template7.jpg" width="612" height="612"/>
         <image name="Template74.jpg" width="612" height="612"/>
-        <image name="Template75.jpg" width="1240" height="1240"/>
-        <image name="Template76.jpg" width="1240" height="1240"/>
-        <image name="Template77.jpg" width="1240" height="1240"/>
-        <image name="Template78.jpg" width="1240" height="1240"/>
-        <image name="Template79.jpg" width="1240" height="1240"/>
-        <image name="Template8.jpg" width="612" height="612"/>
-        <image name="Template80.jpg" width="1240" height="1240"/>
-        <image name="Template81.jpg" width="1240" height="1240"/>
-        <image name="Template82.jpg" width="1240" height="1240"/>
-        <image name="Template83.jpg" width="1240" height="1240"/>
-        <image name="Template84.jpg" width="1240" height="1240"/>
-        <image name="Template85.jpg" width="1240" height="1240"/>
-        <image name="Template86.jpg" width="1240" height="1240"/>
-        <image name="Template87.jpg" width="1240" height="1240"/>
-        <image name="Template88.jpg" width="1240" height="1240"/>
-        <image name="Template89.jpg" width="1240" height="1240"/>
-        <image name="Template9.jpg" width="612" height="612"/>
-        <image name="Template90.jpg" width="1240" height="1240"/>
-        <image name="Template91.jpg" width="1240" height="1240"/>
-        <image name="Template92.jpg" width="1240" height="1240"/>
-        <image name="Template93.jpg" width="1240" height="1240"/>
-        <image name="Template94.jpg" width="1240" height="1240"/>
+        <image name="icon0.jpeg" width="93" height="93"/>
+        <image name="icon1.jpeg" width="93" height="93"/>
+        <image name="icon10.jpeg" width="93" height="93"/>
+        <image name="icon11.jpeg" width="93" height="93"/>
+        <image name="icon12.jpeg" width="93" height="93"/>
+        <image name="icon13.jpeg" width="93" height="93"/>
+        <image name="icon14.jpeg" width="93" height="93"/>
+        <image name="icon15.jpeg" width="93" height="93"/>
+        <image name="icon16.jpg" width="93" height="93"/>
+        <image name="icon17.jpg" width="93" height="93"/>
+        <image name="icon18.jpg" width="93" height="93"/>
+        <image name="icon19.jpg" width="93" height="93"/>
+        <image name="icon2.jpeg" width="93" height="93"/>
+        <image name="icon20.jpg" width="93" height="93"/>
+        <image name="icon21.jpg" width="93" height="93"/>
+        <image name="icon22.jpg" width="93" height="93"/>
+        <image name="icon23.jpg" width="93" height="93"/>
+        <image name="icon24.jpg" width="93" height="93"/>
+        <image name="icon25.jpg" width="93" height="93"/>
+        <image name="icon26.jpg" width="93" height="93"/>
+        <image name="icon27.jpg" width="93" height="93"/>
+        <image name="icon28.jpg" width="93" height="93"/>
+        <image name="icon29.jpg" width="93" height="93"/>
+        <image name="icon3.jpeg" width="93" height="93"/>
+        <image name="icon30.jpg" width="93" height="93"/>
+        <image name="icon31.jpg" width="93" height="93"/>
+        <image name="icon32.jpg" width="93" height="93"/>
+        <image name="icon33.jpg" width="93" height="93"/>
+        <image name="icon34.jpg" width="93" height="93"/>
+        <image name="icon35.jpg" width="93" height="93"/>
+        <image name="icon36.jpg" width="93" height="93"/>
+        <image name="icon37.jpg" width="93" height="93"/>
+        <image name="icon38.jpg" width="93" height="93"/>
+        <image name="icon39.jpg" width="93" height="93"/>
+        <image name="icon4.jpeg" width="93" height="93"/>
+        <image name="icon40.jpg" width="93" height="93"/>
+        <image name="icon41.jpg" width="93" height="93"/>
+        <image name="icon42.jpg" width="93" height="93"/>
+        <image name="icon43.jpg" width="93" height="93"/>
+        <image name="icon44.jpg" width="93" height="93"/>
+        <image name="icon45.jpg" width="93" height="93"/>
+        <image name="icon46.jpg" width="93" height="93"/>
+        <image name="icon47.jpg" width="93" height="93"/>
+        <image name="icon48.jpg" width="93" height="93"/>
+        <image name="icon49.jpg" width="93" height="93"/>
+        <image name="icon5.jpeg" width="93" height="93"/>
+        <image name="icon50.jpg" width="93" height="93"/>
+        <image name="icon51.jpg" width="93" height="93"/>
+        <image name="icon52.jpg" width="93" height="93"/>
+        <image name="icon53.jpg" width="93" height="93"/>
+        <image name="icon54.jpg" width="93" height="93"/>
+        <image name="icon55.jpg" width="93" height="93"/>
+        <image name="icon56.jpg" width="93" height="93"/>
+        <image name="icon57.jpg" width="93" height="93"/>
+        <image name="icon58.jpg" width="93" height="93"/>
+        <image name="icon59.jpg" width="93" height="93"/>
+        <image name="icon6.jpeg" width="93" height="93"/>
+        <image name="icon60.jpg" width="93" height="93"/>
+        <image name="icon61.jpg" width="93" height="93"/>
+        <image name="icon62.jpg" width="93" height="93"/>
+        <image name="icon63.jpg" width="93" height="93"/>
+        <image name="icon64.jpg" width="93" height="93"/>
+        <image name="icon65.jpg" width="93" height="93"/>
+        <image name="icon66.jpg" width="93" height="93"/>
+        <image name="icon7.jpeg" width="93" height="93"/>
+        <image name="icon75.jpg" width="93" height="93"/>
+        <image name="icon76.jpg" width="93" height="93"/>
+        <image name="icon77.jpg" width="93" height="93"/>
+        <image name="icon78.jpg" width="93" height="93"/>
+        <image name="icon79.jpg" width="93" height="93"/>
+        <image name="icon8.jpeg" width="93" height="93"/>
+        <image name="icon80.jpg" width="93" height="93"/>
+        <image name="icon81.jpg" width="93" height="93"/>
+        <image name="icon82.jpg" width="93" height="93"/>
+        <image name="icon83.jpg" width="93" height="93"/>
+        <image name="icon84.jpg" width="93" height="93"/>
+        <image name="icon85.jpg" width="93" height="93"/>
+        <image name="icon86.jpg" width="93" height="93"/>
+        <image name="icon87.jpg" width="93" height="93"/>
+        <image name="icon88.jpg" width="93" height="93"/>
+        <image name="icon89.jpg" width="93" height="93"/>
+        <image name="icon9.jpeg" width="93" height="93"/>
+        <image name="icon90.jpg" width="93" height="93"/>
+        <image name="icon91.jpg" width="93" height="93"/>
+        <image name="icon92.jpg" width="93" height="93"/>
+        <image name="icon93.jpg" width="93" height="93"/>
+        <image name="icon94.jpg" width="93" height="93"/>
     </resources>
 </document>

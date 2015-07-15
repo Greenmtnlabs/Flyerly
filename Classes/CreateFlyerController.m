@@ -5207,9 +5207,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     if( selectedButton == backtemplates )
 	{
-        [backtemplates setBackgroundImage:[UIImage imageNamed:@"addbg_library_selected"] forState:UIControlStateNormal];
-        
-        
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
                          animations:^{
