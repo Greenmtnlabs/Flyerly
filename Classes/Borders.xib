@@ -719,7 +719,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="Button">
+                    <state key="normal" title="b1.png" backgroundImage="b1.png">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -729,7 +729,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="b1.png" backgroundImage="b1.png">
+                    <state key="normal">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -752,7 +752,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="Button">
+                    <state key="normal" title="b2.png" backgroundImage="b2.png">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -762,7 +762,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="b2.png" backgroundImage="b2.png">
+                    <state key="normal">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -785,7 +785,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="Button">
+                    <state key="normal" title="b3.png" backgroundImage="b3.png">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -795,7 +795,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="b3.png" backgroundImage="b3.png">
+                    <state key="normal">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -818,7 +818,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="Button">
+                    <state key="normal" title="b4.png" backgroundImage="b4.png">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -828,7 +828,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="b4.png" backgroundImage="b4.png">
+                    <state key="normal">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -851,7 +851,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="Button">
+                    <state key="normal" title="b5.png" backgroundImage="b5.png">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -861,7 +861,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="b5.png" backgroundImage="b5.png">
+                    <state key="normal">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -884,7 +884,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="Button">
+                    <state key="normal" title="b6.png" backgroundImage="b6.png">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -894,7 +894,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="b6.png" backgroundImage="b6.png">
+                    <state key="normal">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -917,7 +917,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="Button">
+                    <state key="normal" title="b7.png" backgroundImage="b7.png">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -927,7 +927,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="b7.png" backgroundImage="b7.png">
+                    <state key="normal">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -950,7 +950,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="Button">
+                    <state key="normal" title="b8.png" backgroundImage="b8.png">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -960,7 +960,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="b8.png" backgroundImage="b8.png">
+                    <state key="normal">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -983,7 +983,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="Button">
+                    <state key="normal" title="b9.png" backgroundImage="b9.png">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -993,7 +993,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="b9.png" backgroundImage="b9.png">
+                    <state key="normal">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -1016,7 +1016,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="Button">
+                    <state key="normal" title="b10.png" backgroundImage="b10.png">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -1026,7 +1026,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="b10.png" backgroundImage="b10.png">
+                    <state key="normal">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -1049,7 +1049,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="Button">
+                    <state key="normal" title="b11.png" backgroundImage="b11.png">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -1059,7 +1059,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="b11.png" backgroundImage="b11.png">
+                    <state key="normal">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -1082,7 +1082,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="Button">
+                    <state key="normal" title="b12.png" backgroundImage="b12.png">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -1092,7 +1092,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="b12.png" backgroundImage="b12.png">
+                    <state key="normal">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -1115,7 +1115,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="Button">
+                    <state key="normal" title="b13.png" backgroundImage="b13.png">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -1125,7 +1125,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="b13.png" backgroundImage="b13.png">
+                    <state key="normal">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -1148,7 +1148,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="Button">
+                    <state key="normal" title="b14.png" backgroundImage="b14.png">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -1158,7 +1158,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="b14.png" backgroundImage="b14.png">
+                    <state key="normal">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -1181,7 +1181,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="Button">
+                    <state key="normal" title="b15.png" backgroundImage="b15.png">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -1191,7 +1191,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="b15.png" backgroundImage="b15.png">
+                    <state key="normal">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -1214,7 +1214,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="Button">
+                    <state key="normal" title="b16.png" backgroundImage="b16.png">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -1224,7 +1224,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="b16.png" backgroundImage="b16.png">
+                    <state key="normal">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -1247,7 +1247,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="Button">
+                    <state key="normal" title="b17.png" backgroundImage="b17.png">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -1257,7 +1257,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="b17.png" backgroundImage="b17.png">
+                    <state key="normal">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -1280,7 +1280,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="Button">
+                    <state key="normal" title="b18.png" backgroundImage="b18.png">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -1290,7 +1290,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="b18.png" backgroundImage="b18.png">
+                    <state key="normal">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -1313,7 +1313,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="Button">
+                    <state key="normal" title="b19.png" backgroundImage="b19.png">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -1323,7 +1323,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="b19.png" backgroundImage="b19.png">
+                    <state key="normal">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -1346,7 +1346,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="Button">
+                    <state key="normal" title="b20.png" backgroundImage="b20.png">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -1356,7 +1356,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="b20.png" backgroundImage="b20.png">
+                    <state key="normal">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -1379,7 +1379,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="Button">
+                    <state key="normal" title="b21.png" backgroundImage="b21.png">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -1389,7 +1389,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="b21.png" backgroundImage="b21.png">
+                    <state key="normal">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
