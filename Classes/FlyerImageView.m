@@ -642,9 +642,10 @@ CGAffineTransform previuosTransform;
  */
 -(void)setTemplateBorder :(NSMutableDictionary *)layDic {
     
-    UIColor *borderColor;
+    UIColor *borderColor =     borderColor = [UIColor clearColor];
+    [self deleteLayer:@"TemplateBorder"];
+
     if ([[layDic valueForKey:@"bordercolor"] isEqualToString:@"0.000000, 0.000000, 0.000000"]) {
-        
         if ([layDic valueForKey:@"bordercolorWhite"] != nil) {
 
             NSArray *rgbBorder = [[layDic valueForKey:@"bordercolorWhite"] componentsSeparatedByString:@","];
