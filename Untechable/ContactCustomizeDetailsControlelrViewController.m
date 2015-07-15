@@ -68,6 +68,13 @@
         IsCustomized = YES;
     }
    tempContactDetailsModal.name = contactModal.name;
+    
+    if(untechable.selectedContacts.count != 0){
+        if(untechable.selectedContacts[0]){
+    
+        }
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -476,8 +483,7 @@
             [contactListController.currentlyEditingContacts addObject:contactModal];
         }
     }
-    
-    [untechable.selectedContacts addObject:tempContactDetailsModal];
+   [untechable.selectedContacts addObject:tempContactDetailsModal];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -501,20 +507,22 @@
         [tempEmailWithStatus setObject:@"1" atIndexedSubscript:1];
         [emailCell.emailButton setSelected:YES];
     }
-    
-    
+  
     if( tempContactDetailsModal.allEmails.count == 0){
         [tempContactDetailsModal.allEmails addObject:tempEmailWithStatus];
     } else {
         for(int i=0;i<tempContactDetailsModal.allEmails.count; i++ ){
-            if( [tempContactDetailsModal.allEmails[i][0] isEqualToString:tempEmailWithStatus[0]] )
-                tempContactDetailsModal.allEmails[i] = tempEmailWithStatus;
+            if( [tempContactDetailsModal.allEmails[i][0] isEqualToString:tempEmailWithStatus[0]] ){
+                [tempContactDetailsModal.allEmails replaceObjectAtIndex:i withObject:tempEmailWithStatus];
+            }
+            else{
+                [tempContactDetailsModal.allEmails addObject:tempEmailWithStatus];
+                break;
+            }
         }
     }
-    
-    
     [editingEmailsWithStatus setObject:tempEmailWithStatus forKey:indexPath];
-    //[tempContactDetailsModal.allEmails addObject:editingEmailsWithStatus];
+    [tempContactDetailsModal.allEmails addObject:editingEmailsWithStatus];
 }
 
 
@@ -539,18 +547,47 @@
         [tempPhoneWithStatus setObject:@"1" atIndexedSubscript:3];
         [phoneCell.callButton setSelected:YES];
     }
-
-    if( tempContactDetailsModal.allPhoneNumbers.count == 0){
+    
+    
+    
+    
+    /*
+    if(tempContactDetailsModal.allPhoneNumbers.count == 0){
         [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
-    } else {
+    }
+     else {
+     for(int i=0;i<tempContactDetailsModal.allPhoneNumbers.count; i++ ){
+     if([tempContactDetailsModal.allPhoneNumbers[i][0] isEqualToString:tempPhoneWithStatus[0]] ){
+     [tempContactDetailsModal.allPhoneNumbers replaceObjectAtIndex:i withObject:tempPhoneWithStatus];
+     break;
+     }
+     else{
+     [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
+     break;
+     }
+     }
+     }
+    */
+    
+    
+    if(tempContactDetailsModal.allPhoneNumbers.count == 0){
+        [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
+    }
+    else {
         for(int i=0;i<tempContactDetailsModal.allPhoneNumbers.count; i++ ){
-            if( [tempContactDetailsModal.allPhoneNumbers[i][0] isEqualToString:tempPhoneWithStatus[0]] )
-                tempContactDetailsModal.allPhoneNumbers[i] = tempPhoneWithStatus;
+            if([tempContactDetailsModal.allPhoneNumbers[i][0] isEqualToString:tempPhoneWithStatus[0]] ){
+                [tempContactDetailsModal.allPhoneNumbers replaceObjectAtIndex:i withObject:tempPhoneWithStatus];
+                break;
+            }
+            else{
+                [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
+                break;
+            }
         }
     }
+
     [editingPhonesWithStatus setObject:tempPhoneWithStatus forKey:indexPath];
     //[tempContactDetailsModal.allPhoneNumbers addObject:editingPhonesWithStatus];
-    
 }
 
 
@@ -579,31 +616,25 @@
         [phoneCell.smsButton setSelected:YES];
     }
     
-    
-    
-    if( tempContactDetailsModal.allPhoneNumbers.count == 0){
+   
+    if(tempContactDetailsModal.allPhoneNumbers.count == 0){
         [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
     } else {
         for(int i=0;i<tempContactDetailsModal.allPhoneNumbers.count; i++ ){
-            if( [tempContactDetailsModal.allPhoneNumbers[i][0] isEqualToString:tempPhoneWithStatus[0]] )
-                tempContactDetailsModal.allPhoneNumbers[i] = tempPhoneWithStatus;
+            if( [tempContactDetailsModal.allPhoneNumbers[i][0] isEqualToString:tempPhoneWithStatus[0]] ){
+                [tempContactDetailsModal.allPhoneNumbers replaceObjectAtIndex:i withObject:tempPhoneWithStatus];
+                break;
+            }
+            else{
+                [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
+                break;
+            }
         }
     }
     
     
-    
-    /*
-    if ([[contactModal getSmsStatus] isEqualToString:@"1"]){
-        [contactModal setSmsStatus:0];
-        [phoneCell.smsButton setSelected:NO];
-    }
-    else{
-        [contactModal setSmsStatus:1];
-        [phoneCell.smsButton setSelected:YES];
-    }
-    */
     [editingPhonesWithStatus setObject:tempPhoneWithStatus forKey:indexPath];
-    //[tempContactDetailsModal.allPhoneNumbers addObject:editingPhonesWithStatus];
+    [tempContactDetailsModal.allPhoneNumbers addObject:editingPhonesWithStatus];
 }
 
 - (void) saveSpendingTimeText {
