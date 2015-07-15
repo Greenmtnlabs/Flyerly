@@ -50,7 +50,7 @@ id lastShareBtnSender;
     [searchTextField addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingChanged];
     searchTextField.borderStyle = nil;
     
-    lockFlyer = YES;
+    lockFlyer = NO; //Unlock save flyer feature for all users
     
     // Load the flyers.
     flyerPaths = [self getFlyersPaths];
