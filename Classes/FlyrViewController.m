@@ -50,7 +50,7 @@ id lastShareBtnSender;
     [searchTextField addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingChanged];
     searchTextField.borderStyle = nil;
     
-    lockFlyer = YES;
+    lockFlyer = NO; //Unlock save flyer feature for all users
     
     // Load the flyers.
     flyerPaths = [self getFlyersPaths];
@@ -74,21 +74,6 @@ id lastShareBtnSender;
     [super viewWillAppear:animated];
     searching = NO;
     searchTextField.text = @"";
-    
-    //HERE WE GET USER PURCHASES INFO FROM PARSE
-    if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
-        
-        UserPurchases *userPurchases_ = [UserPurchases getInstance];
-        
-        //Checking if user valid purchases
-        if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-             [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"]    ) {
-            
-            //Unloking features
-            lockFlyer = NO;
-            [self.tView reloadData];
-        }
-    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
