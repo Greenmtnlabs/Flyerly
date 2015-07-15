@@ -39,6 +39,8 @@
     UIButton *bannerAdDismissBtn;
     
     BOOL isNewText;
+    
+    BOOL premiumBtnStatus;//when true then dont show premium button
 }
 
 @end
@@ -63,6 +65,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider,tempelateView;
 @synthesize durationLabel,durationChange,onFlyerBack,shouldShowAdd;
 @synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAddView,drawingPatternsView,drawingEraserMsgView;
+@synthesize premiumBtnBg,premiumBtnBgBorder;
 
 #pragma mark -  View Appear Methods
 - (void)viewWillAppear:(BOOL)animated{
@@ -298,7 +301,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     if( IS_IPHONE_4 ){
         [[NSBundle mainBundle] loadNibNamed:@"CreateFlyerController-iPhone4" owner:self options:nil];
     }
-    
+
+    premiumBtnStatus = NO; //hide the button
     isNewText   =   NO;
     bannerAddClosed = NO;
     bannerShowed = NO;
@@ -700,8 +704,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [self addEmoticonsInSubView];
                 
             }
-        });
-    });
+            
+            [self premiumBtnHideAfterCheck];
+        }); //main queue2
+    });//main queue1
     
     [self zoomInit];
 }
@@ -895,6 +901,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  */
 -(void)addFlyerBorderInSubView {
     
+    
     //Delete Subviews From ScrollView
     [self deleteSubviewsFromScrollView];
     
@@ -935,10 +942,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }
         
         NSArray *bodersArray = flyerBordersView.subviews;
-        int i =-1;
+        int borderArrayCount =  borderArray.count;
+        int i =0;
         for (int index = 0; index < bodersArray.count; index += 3 )
         {
-            i++;
+            if( i >= borderArrayCount )
+            break;
+            
             id colorName = borderArray[i];
             
             //Here we Highlight Last Color Selected
@@ -981,6 +991,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     
                 }
             }
+          i++;
         }// Loop
     });
 }
@@ -3380,8 +3391,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             textDetailDictionary[@"x"]  =    [NSString stringWithFormat:@"%f",newX];
             textDetailDictionary[@"y"]  =    [NSString stringWithFormat:@"%f",newY];
         }
-//        NSLog(@"txtSize:(w:%f,h:%f), lastTxtViewSize.frame.origin(x:%f,y:%f,w:%f,h:%f)",txtSize.width,txtSize.height, lastTextView.frame.origin.x,lastTextView.frame.origin.y,lastTextView.size.width,lastTextView.size.height);
-        
     }
 
 
@@ -3391,11 +3400,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
         [flyer.masterLayers setValue:textDetailDictionary forKey:currentLayer];
     //Update Dictionaries-----------------}---
-
-    
-    
-    NSLog(@"textDetailDictionary2 after update:%@ ",textDetailDictionary);
-    
     
     //Here we call Render Layer on View
     [flyimgView renderLayer:currentLayer layerDictionary:textDetailDictionary];
@@ -3404,17 +3408,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [self.flyimgView layerIsBeingEdited:currentLayer];
     
 
-//    [self loadXibsAfterInAppCheck:NO againAddInSubViews:YES];
-
-    
-    
     // SET BOTTOM BAR
     [self setStyleTabAction:fontTabButton];
     
     if( isNewText == YES ) {
          isNewText = NO;
     }
-
     
 	[lastTextView resignFirstResponder];
 	[lastTextView removeFromSuperview];
@@ -5230,7 +5229,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         _addMoreLayerOrSaveFlyerLabel.alpha = 0;
         _takeOrAddPhotoLabel.alpha = 0;
-        
+
     }
     else if(selectedButton == cameraRoll)
     {
@@ -5399,6 +5398,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
             [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
             
+            premiumBtnStatus = YES; //testing //aik enter mara hy
+            [self premiumBtnHideAfterCheck];//testing
         }
         
         //Here we Highlight The ImageView
@@ -6725,11 +6726,15 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
     }
     
+    //When user have complete design bundle or any subscription dont show the premium button
+    premiumBtnStatus = ([userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || [userPurchases isSubscriptionValid] );
+    
     if( againAddInSubViews ) {
         [self addEmoticonsInSubView];
         [self addClipArtsInSubView];
         [self addFontsInSubView];
     }
+    [self premiumBtnHideAfterCheck];
 
 }
 
@@ -6739,6 +6744,12 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     return YES;
 }
 
-
+-(void)premiumBtnHideAfterCheck{
+    //Hide premium button
+    if( premiumBtnStatus ){
+        [premiumBtnBg removeFromSuperview];
+        [premiumBtnBgBorder removeFromSuperview];
+    }
+}
 
 @end
