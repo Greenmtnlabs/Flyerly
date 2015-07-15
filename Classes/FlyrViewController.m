@@ -74,21 +74,6 @@ id lastShareBtnSender;
     [super viewWillAppear:animated];
     searching = NO;
     searchTextField.text = @"";
-    
-    //HERE WE GET USER PURCHASES INFO FROM PARSE
-    if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
-        
-        UserPurchases *userPurchases_ = [UserPurchases getInstance];
-        
-        //Checking if user valid purchases
-        if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-             [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"]    ) {
-            
-            //Unloking features
-            lockFlyer = NO;
-            [self.tView reloadData];
-        }
-    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
