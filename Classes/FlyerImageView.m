@@ -642,24 +642,39 @@ CGAffineTransform previuosTransform;
  */
 -(void)setTemplateBorder :(NSMutableDictionary *)layDic {
     
-    UIColor *borderColor;
-    if ([[layDic valueForKey:@"bordercolor"] isEqualToString:@"0.000000, 0.000000, 0.000000"]) {
-        
-        if ([layDic valueForKey:@"bordercolorWhite"] != nil) {
-            NSArray *rgbBorder = [[layDic valueForKey:@"bordercolorWhite"] componentsSeparatedByString:@","];
+    UIColor *borderColor =     borderColor = [UIColor clearColor];
+    [self deleteLayer:@"TemplateBorder"];
+    NSString *flyerTyp = [layDic objectForKey:@"FlyerType"];
+    //when type is not video
+    if ( !(flyerTyp != nil && [flyerTyp isEqualToString:@"video"]) ) {
+
+        if ([[layDic valueForKey:@"bordercolor"] isEqualToString:@"0.000000, 0.000000, 0.000000"]) {
+            if ([layDic valueForKey:@"bordercolorWhite"] != nil) {
+
+                NSArray *rgbBorder = [[layDic valueForKey:@"bordercolorWhite"] componentsSeparatedByString:@","];
+                borderColor = [UIColor colorWithWhite:[rgbBorder[0] floatValue] alpha:[rgbBorder[1] floatValue]];
+            }
+        }else {
+            [self deleteLayer:@"TemplateBorder"];
+            borderColor = [UIColor clearColor];
             
-            borderColor = [UIColor colorWithWhite:[rgbBorder[0] floatValue] alpha:[rgbBorder[1] floatValue]];
-            
+            //When picture flyer border
+            if ([[layDic valueForKey:@"bordercolor"] rangeOfString:@".png"].location != NSNotFound) {
+                // Here We Write Code for Image
+                ImageLayer *img = [[ImageLayer alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+                img.image = [UIImage imageNamed:[layDic valueForKey:@"bordercolor"]];
+                [self addSubview:img];
+                [layers setValue:img forKey:@"TemplateBorder"];
+            }
+            //Colored flyer border
+            else{
+                NSArray *rgbBorder = [[layDic valueForKey:@"bordercolor"] componentsSeparatedByString:@","];
+                
+                borderColor = [UIColor colorWithRed:[rgbBorder[0] floatValue] green:[rgbBorder[1] floatValue] blue:[rgbBorder[2] floatValue] alpha:1];
+            }
         }
-        
-    }else{
-        
-        NSArray *rgbBorder = [[layDic valueForKey:@"bordercolor"] componentsSeparatedByString:@","];
-        
-        borderColor = [UIColor colorWithRed:[rgbBorder[0] floatValue] green:[rgbBorder[1] floatValue] blue:[rgbBorder[2] floatValue] alpha:1];
     }
-
-
+    
     self.layer.borderColor = borderColor.CGColor;
     self.layer.borderWidth = 3.0;
 }

@@ -490,6 +490,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                          [UIColor magentaColor],
                          [UIColor colorWithRed:38.0/255.0 green:72.0/255.0 blue:18.0/255.0 alpha:1],
                          [UIColor colorWithRed:73.0/255.0 green:69.0/255.0 blue:215.0/255.0 alpha:1],
+                         @"b1.png",@"b2.png",@"b3.png",@"b4.png",@"b5.png",@"b6.png",@"b7.png",@"b8.png",@"b9.png",@"b10.png",
+                         @"b11.png",@"b12.png",@"b13.png",@"b14.png",@"b15.png",@"b16.png",@"b17.png",@"b18.png",@"b19.png",@"b20.png",@"b21.png",
                          nil];
         
         // HERE WE CREATE FLYERLY ALBUM ON DEVICE
@@ -924,7 +926,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 flyerBordersView.frame = CGRectMake((layerScrollView.frame.origin.x+22), (layerScrollView.frame.origin.y+7), flyerBordersView.frame.size.width, flyerBordersView.frame.size.height);
             }
             [layerScrollView addSubview:flyerBordersView];
-            [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+            [layerScrollView setContentSize:CGSizeMake(320, flyerBordersView.frame.size.height + heightValue)];
             
         } else {
             
@@ -933,38 +935,51 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }
         
         NSArray *bodersArray = flyerBordersView.subviews;
-        int count = (bodersArray.count)/3;
-        
-        int i=1;
-        for (int index = 0; index < count; index++ )
+        int i =-1;
+        for (int index = 0; index < bodersArray.count; index += 3 )
         {
-            
-            UIColor *colorName = borderArray[(i-1)];
+            i++;
+            id colorName = borderArray[i];
             
             //Here we Highlight Last Color Selected
             if (textColor != nil) {
-                
-                NSString *tcolor;
-                NSString *twhite;
-                CGFloat r = 0.0, g = 0.0, b = 0.0, a = 0.0,wht = 0.0;
-                
-                UILabel *labelToStore = [[UILabel alloc]init];
-                labelToStore.textColor = colorName;
-                
-                //Getting RGB Color Code
-                [labelToStore.textColor getRed:&r green:&g blue:&b alpha:&a];
-                
-                tcolor = [NSString stringWithFormat:@"%f, %f, %f", r, g, b];
-                
-                [labelToStore.textColor getWhite:&wht alpha:&a];
-                twhite = [NSString stringWithFormat:@"%f, %f", wht, a];
-                
-                if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
-                    // Add border to selected layer thumbnail
-                    //color.backgroundColor = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
+                if ([textColor rangeOfString:@".png"].location != NSNotFound ) {
+                    if ( [colorName isKindOfClass:[NSString class]] ) {
+                        UIButton *curBtn =  bodersArray[index+1];//image is in second button
+                        NSString *currentBackgroundImage = curBtn.currentTitle;
+                        if( [currentBackgroundImage isEqual:textColor] ){
+                            [self highlightAndScrollRect:curBtn.tag inView:flyerBordersView];
+                            break;
+                        }
+                    }
                 }
-                
-                i++;
+                else if( [colorName isKindOfClass:[UIColor class]] ){
+                    colorName  = (UIColor *)colorName;
+                    NSString *tcolor;
+                    NSString *twhite;
+                    CGFloat r = 0.0, g = 0.0, b = 0.0, a = 0.0,wht = 0.0;
+                    
+                    UILabel *labelToStore = [[UILabel alloc]init];
+                    labelToStore.textColor = colorName;
+                    
+                    //Getting RGB Color Code
+                    [labelToStore.textColor getRed:&r green:&g blue:&b alpha:&a];
+                    
+                    tcolor = [NSString stringWithFormat:@"%f, %f, %f", r, g, b];
+                    if ( r == 0 && g == 0 && b ==0) {
+                        [labelToStore.textColor getWhite:&wht alpha:&a];
+                    }
+                    
+                    twhite = [NSString stringWithFormat:@"%f, %f", wht, a];
+                    
+                    if( [textColor isEqual:tcolor] && [textWhiteColor isEqual:twhite]  ){
+                        UIButton *curBtn =  bodersArray[index+2];//color is on second button
+                        [self highlightAndScrollRect:curBtn.tag inView:flyerBordersView];
+                        break;
+                    }
+                    
+                    
+                }
             }
         }// Loop
     });
@@ -2525,7 +2540,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 {
     
     NSArray *bodersArray = flyerBordersView.subviews;
-    int count = (bodersArray.count);
+    int count = (int)(bodersArray.count);
     
     UIView *tempView;
     
@@ -2552,12 +2567,15 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         if(tempView == view)
         {
-            UIColor *borderColor = borderArray[i-2];
+            id borderColor = borderArray[i-2];
             currentLayer = @"Template";
+
+            //Save in dictionary
             [flyer setFlyerBorder:currentLayer RGBColor:borderColor];
             
-            //Here we call Render Layer on View
+            //Reflect on view / Here we call Render Layer on View
             [flyimgView setTemplateBorder:[flyer getLayerFromMaster:currentLayer]];
+            
             
             // Add border to selected layer thumbnail
             tempView = [bodersArray objectAtIndex:(index-2)];
@@ -5240,7 +5258,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     }
     else if(selectedButton == flyerBorder)
     {
-        [flyerBorder setSelected:YES];
         
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
@@ -5256,6 +5273,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         //Add ContextView
         [self addScrollView:layerScrollView];
         
+        [flyerBorder setSelected:YES];
     }
     
 }
@@ -5475,12 +5493,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         [layerScrollView setContentSize:CGSizeMake(backgroundsView.frame.size.width, backgroundsView.frame.size.height)];
         
-        if ( backgroundImageTag ) {
-            [backgroundsView highlightResource:backgroundImageTag];
-            UIButton *highLight = [backgroundsView getHighlightedResource];
-            
-            [layerScrollView scrollRectToVisible:highLight.frame animated:YES];
-        }
+        [self highlightAndScrollRect:backgroundImageTag inView:backgroundsView];
         
         [backgroundTabButton setSelected:YES];
         //Add right Bar button
@@ -5556,7 +5569,17 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
 }
 
-
+/**
+ * Hightlight a button and scroll to it in view
+ */
+-(void)highlightAndScrollRect:(NSInteger *)btnTag inView:(ResourcesView *)viewForHighlight {
+    if ( btnTag ) {
+        [viewForHighlight highlightResource:btnTag];
+        UIButton *highLight = [viewForHighlight getHighlightedResource];
+        
+        [layerScrollView scrollRectToVisible:highLight.frame animated:YES];
+    }
+}
 
 #pragma mark - Flurry Methods
 
