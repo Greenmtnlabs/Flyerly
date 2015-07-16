@@ -66,6 +66,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAddView,drawingPatternsView,drawingEraserMsgView;
 
 @synthesize premiumBtnBg, premiumBtnBgBorder, premiumBtnEmoticons, premiumBtnCliparts, premiumBtnFonts;
+@synthesize premiumImgBg, premiumImgBgBorder, premiumImgEmoticons, premiumImgCliparts, premiumImgFonts;
 
 #pragma mark -  View Appear Methods
 - (void)viewWillAppear:(BOOL)animated{
@@ -705,6 +706,14 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
             }
             
+            premiumImgBg = [[UIImageView alloc] initWithFrame:CGRectMake(premiumBtnBg.frame.origin.x,premiumBtnBg.frame.origin.y,100,100)];
+            premiumImgBg.image = [UIImage imageNamed:@"premiumImg.png"];
+            [backgroundsView addSubview:premiumImgBg];
+
+            premiumImgBgBorder = [[UIImageView alloc] initWithFrame:CGRectMake(premiumBtnBgBorder.frame.origin.x,premiumBtnBgBorder.frame.origin.y,100,100)];
+            premiumImgBgBorder.image = [UIImage imageNamed:@"premiumImg.png"];
+            [flyerBordersView addSubview:premiumImgBgBorder];
+            
             if( canCheckPurchases ){
                 [self loadXibsAfterInAppCheck:NO againAddInSubViews:YES];
             }
@@ -1123,7 +1132,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 premiumBtnFonts.frame = CGRectMake(fOPrem[0], fOPrem[1], fOPrem[2], fOPrem[3]);
                 
                 [premiumBtnFonts addTarget:self action:@selector(openPanel:) forControlEvents:UIControlEventTouchUpInside];
-                [premiumBtnFonts setTitle:@"Premium" forState:UIControlStateNormal];
                 
                 UIFont *fontname = [UIFont fontWithName:@"Helvetica" size:15.0];
                 [premiumBtnFonts.titleLabel setFont: fontname];
@@ -1133,6 +1141,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 
                 [fontsView addSubview:premiumBtnFonts];
+                
+                premiumImgFonts = [[UIImageView alloc] initWithFrame:CGRectMake(fOPrem[0], fOPrem[1],100,100)];
+                premiumImgFonts.image = [UIImage imageNamed:@"premiumImg.png"];
+                [fontsView addSubview:premiumImgFonts];
             }
             
                 //fontsView.backgroundColor = [UIColor redColor];
@@ -1568,7 +1580,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 premiumBtnCliparts.frame = CGRectMake(fOPrem[0], fOPrem[1], fOPrem[2], fOPrem[3]);
                 
                 [premiumBtnCliparts addTarget:self action:@selector(openPanel:) forControlEvents:UIControlEventTouchUpInside];
-                [premiumBtnCliparts setTitle:@"Premium" forState:UIControlStateNormal];
                 
                 UIFont *fontname = [UIFont fontWithName:@"Helvetica" size:15.0];
                 [premiumBtnCliparts.titleLabel setFont: fontname];
@@ -1577,6 +1588,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [premiumBtnCliparts setAlpha:0.6];
                 
                 [clipartsView addSubview:premiumBtnCliparts];
+                
+                premiumImgCliparts = [[UIImageView alloc] initWithFrame:CGRectMake(fOPrem[0], fOPrem[1],100,100)];
+                premiumImgCliparts.image = [UIImage imageNamed:@"premiumImg.png"];
+                [clipartsView addSubview:premiumImgCliparts];
             }
             
                 //clipartsView.backgroundColor = [UIColor redColor];
@@ -1709,7 +1724,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 premiumBtnEmoticons.frame = CGRectMake(fOPrem[0], fOPrem[1], fOPrem[2], fOPrem[3]);
                 
                 [premiumBtnEmoticons addTarget:self action:@selector(openPanel:) forControlEvents:UIControlEventTouchUpInside];
-                [premiumBtnEmoticons setTitle:@"Premium" forState:UIControlStateNormal];
                 
                 UIFont *fontname = [UIFont fontWithName:@"Helvetica" size:15.0];
                 [premiumBtnEmoticons.titleLabel setFont: fontname];
@@ -1718,6 +1732,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [premiumBtnEmoticons setAlpha:0.6];
                 
                 [emoticonsView addSubview:premiumBtnEmoticons];
+                
+                premiumImgEmoticons = [[UIImageView alloc] initWithFrame:CGRectMake(fOPrem[0], fOPrem[1],100,100)];
+                premiumImgEmoticons.image = [UIImage imageNamed:@"premiumImg.png"];
+                [emoticonsView addSubview:premiumImgEmoticons];
             }
           
                 //emoticonsView.backgroundColor = [UIColor redColor];
@@ -6695,25 +6713,34 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 
 //Hide premium button from view
 -(void)premiumBtnHideAfterCheck:(NSString *)from{
-    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString:@"BACKGROUND"]){
-        [premiumBtnBg removeFromSuperview];
-    }
-    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString:@"BACKGROUND_BORDER"]){
-        [premiumBtnBgBorder removeFromSuperview];
-    }
     if( [from isEqualToString:@"ALL"] ||  [from isEqualToString:@"comflyerlyUnlockCreateVideoFlyerOption"]){
         UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
         [addVideoTabButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
     }
+    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString:@"BACKGROUND"]){
+        [premiumBtnBg removeFromSuperview];
+        [premiumImgBg removeFromSuperview];
+    }
+    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString:@"BACKGROUND_BORDER"]){
+        [premiumBtnBgBorder removeFromSuperview];
+        [premiumImgBgBorder removeFromSuperview];
+    }
+    
     if( [from isEqualToString:@"ALL"] ||  [from isEqualToString:@"comflyerlyIconsBundle"]){
-        if(premiumBtnEmoticons != nil )
+        if(premiumBtnEmoticons != nil ){
             [premiumBtnEmoticons removeFromSuperview];
+            [premiumImgEmoticons removeFromSuperview];
+        }
         
-        if(premiumBtnCliparts != nil )
+        if(premiumBtnCliparts != nil ){
             [premiumBtnCliparts  removeFromSuperview];
+            [premiumImgCliparts removeFromSuperview];
+        }
         
-        if(premiumBtnFonts != nil )
+        if(premiumBtnFonts != nil ){
             [premiumBtnFonts  removeFromSuperview];
+            [premiumImgFonts removeFromSuperview];
+        }
     }
     
     
