@@ -65,7 +65,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize durationLabel,durationChange,onFlyerBack,shouldShowAdd;
 @synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAddView,drawingPatternsView,drawingEraserMsgView;
 
-@synthesize premiumBtnBg, premiumBtnBgBorder, premiumBtnEmoticons;
+@synthesize premiumBtnBg, premiumBtnBgBorder, premiumBtnEmoticons, premiumBtnCliparts, premiumBtnFonts;
 
 #pragma mark -  View Appear Methods
 - (void)viewWillAppear:(BOOL)animated{
@@ -1488,6 +1488,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 curYLoc = 10;
                 increment = 8;
             }
+            
+            int initialX = curXLoc;
+            int initialY = curYLoc;
+            int fOPrem[4] = {initialX,initialY,0,0};
     
             NSMutableDictionary *textLayer;
             NSString *textFamily;
@@ -1497,11 +1501,26 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 textLayer = [flyer getLayerFromMaster:currentLayer];
                 textFamily = [textLayer objectForKey:@"fontname"];
             }
-    
-            for (int i = 1; i <=[clipartsArray count] ; i++) {
+            int clipartsArrayCount = [clipartsArray count];
+            for (int i = 1; i <=clipartsArrayCount ; i++) {
             
                 UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
                 font.frame = CGRectMake(0, 0, widthValue, heightValue);
+                
+                //We have 3 free emoticon, so start yellow overly after it ( from new row)
+                if( i >= 3 && (fOPrem[0] == initialX && fOPrem[1] == initialY) && (curXLoc == initialX || curYLoc == initialY )){
+                    fOPrem[0] = curXLoc;
+                    fOPrem[1] = curYLoc;
+                } else if ( i == 6 ){
+                    if(curYLoc == fOPrem[1] ){ //iPhone4 landscap views
+                        fOPrem[2] = (curXLoc + widthValue  ) - fOPrem[0];
+                        fOPrem[3] = heightValue;
+                    } else{ //square views
+                        fOPrem[1] = curXLoc;
+                        fOPrem[3] = ( curYLoc + heightValue) - fOPrem[1];
+                    }
+                }
+                
                 [font addTarget:self action:@selector(selectIcon:) forControlEvents:UIControlEventTouchUpInside];
                 UIFont *fontType = [UIFont fontWithName:[clipartsArray[i-1] objectForKey:@"fontType"] size:33.0f];
                 [font.titleLabel setFont: fontType];
@@ -1547,69 +1566,39 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             if (  !([userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"])  ) {
 
                 //More button
-                UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
-                if ( IS_IPHONE_5 ) {
-                    font.frame = CGRectMake(curXLoc, curYLoc , 300, heightValue);
-                } else if ( IS_IPHONE_6 ){
-                    font.frame = CGRectMake(18, curYLoc + 40, 335, heightValue);
-                }else if ( IS_IPHONE_6_PLUS ){
-                    font.frame = CGRectMake(13, curYLoc + 40, 380, heightValue);
-                }else {
-                    font.frame = CGRectMake(curXLoc, curYLoc, 150, heightValue);
-                }
-
+                premiumBtnCliparts = [UIButton buttonWithType:UIButtonTypeCustom];
+                premiumBtnCliparts.frame = CGRectMake(fOPrem[0], fOPrem[1], fOPrem[2], fOPrem[3]);
                 
-                [font addTarget:self action:@selector(openPanel:) forControlEvents:UIControlEventTouchUpInside];
-                [font setTitle:@"More" forState:UIControlStateNormal];
+                [premiumBtnCliparts addTarget:self action:@selector(openPanel:) forControlEvents:UIControlEventTouchUpInside];
+                [premiumBtnCliparts setTitle:@"Premium" forState:UIControlStateNormal];
                 
                 UIFont *fontname = [UIFont fontWithName:@"Helvetica" size:15.0];
-                [font.titleLabel setFont: fontname];
-                [font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                [premiumBtnCliparts.titleLabel setFont: fontname];
+                [premiumBtnCliparts setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                [premiumBtnCliparts setBackgroundColor:[UIColor yellowColor]];
+                [premiumBtnCliparts setAlpha:0.6];
                 
-                [font setBackgroundImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
-
-                
-                [clipartsView addSubview:font];
-                
+                [clipartsView addSubview:premiumBtnCliparts];
+            }
                 if ( IS_IPHONE_5 ) {
-                    clipartsView.size = CGSizeMake(320, curYLoc + heightValue + 55);
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+                    clipartsView.size = CGSizeMake(320, curYLoc + 85);
+                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + 50)];
                 } else if ( IS_IPHONE_6 ) {
-                    clipartsView.size = CGSizeMake(380, curYLoc + heightValue + 55);
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue + 55)];
+                    clipartsView.size = CGSizeMake(380, curYLoc + 85);
+                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + 50)];
                     
                 }else if ( IS_IPHONE_6_PLUS ) {
-                    clipartsView.size = CGSizeMake(584, curYLoc + heightValue + 50);
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue+50)];
+                    clipartsView.size = CGSizeMake(584, curYLoc + 85);
+                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + 50)];
                     
                     clipartsView.frame = CGRectMake((layerScrollView.frame.origin.x+1), clipartsView.frame.origin.y, layerScrollView.size.width, clipartsView.size.height);
                 }else {
-                    clipartsView.size = CGSizeMake(curXLoc + 190 , heightValue + 5);
+                    clipartsView.size = CGSizeMake(curXLoc+ widthValue + 5 , heightValue + 5);
                     [layerScrollView setContentSize:CGSizeMake(clipartsView.size.width , heightValue)];
 
                     clipartsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), (layerScrollView.frame.origin.y+5), clipartsView.frame.size.width, clipartsView.frame.size.height);
                 }
-            }
-            else{
-                if( IS_IPHONE_5 ){
-                    clipartsView.size = CGSizeMake(320, curYLoc + 85 );//(heightValue + 7) );
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + 50)];//  heightValue)];
-                    
-                }else if ( IS_IPHONE_6 ){
-                    clipartsView.size = CGSizeMake(380, curYLoc + 85 );//(heightValue + 7) );
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + 50)];//  heightValue)];
-                } else if ( IS_IPHONE_6_PLUS ){
-                    clipartsView.size = CGSizeMake(584, curYLoc + 85 );//(heightValue + 7) );
-                    [layerScrollView setContentSize:CGSizeMake(584, curYLoc + 50)];//  heightValue)];
-                    clipartsView.frame = CGRectMake((layerScrollView.frame.origin.x+4), clipartsView.frame.origin.y, layerScrollView.size.width, clipartsView.size.height);
-                } else {
-                    clipartsView.size = CGSizeMake(curXLoc + widthValue + 5 , heightValue + 5);
-                    [layerScrollView setContentSize:CGSizeMake(clipartsView.size.width , heightValue)];
-                    
-                    clipartsView.frame = CGRectMake((layerScrollView.frame.origin.x+1), clipartsView.frame.origin.y, layerScrollView.size.width, clipartsView.size.height);
-                }
-
-            }
+            
             
             
         });
@@ -5785,30 +5774,34 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
-    
-    if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
-        [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
-        
-        
-        UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
-        [addVideoTabButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
-        [inappviewcontroller.paidFeaturesTview reloadData];
-        
-        //Checking if user valid purchases
-    } else if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || [userPurchases isSubscriptionValid] ){
+
+    if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || [userPurchases isSubscriptionValid] ){
+
         [self premiumBtnHideAfterCheck:@"ALL"];
         [inappviewcontroller.paidFeaturesTview reloadData];
-    } else if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"] ){
-        [self premiumBtnHideAfterCheck:@"ALL"];
-        [inappviewcontroller.paidFeaturesTview reloadData];
-    } else {
+    } else{
+        //check for videos
+        if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
         
-        if ( [sharePanel isHidden] && inappviewcontroller != nil &&
-            ![[self presentedViewController] isKindOfClass:[InAppViewController class]])
-        {
-            [self presentViewController:inappviewcontroller animated:YES completion:nil];
+            [self premiumBtnHideAfterCheck:@"comflyerlyUnlockCreateVideoFlyerOption"];
+            [inappviewcontroller.paidFeaturesTview reloadData];
+            
+        }
+        //check for icons
+        if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"] ){
+
+            [self premiumBtnHideAfterCheck:@"comflyerlyIconsBundle"];
+            [inappviewcontroller.paidFeaturesTview reloadData];
+            
         }
     }
+    
+    if ( [sharePanel isHidden] && inappviewcontroller != nil &&
+        ![[self presentedViewController] isKindOfClass:[InAppViewController class]])
+    {
+        [self presentViewController:inappviewcontroller animated:YES completion:nil];
+    }
+
     
 }
 
@@ -6717,8 +6710,19 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     if( [from isEqualToString:@"ALL"] ||  [from isEqualToString:@"BACKGROUND_BORDER"]){
         [premiumBtnBgBorder removeFromSuperview];
     }
+    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString:@"comflyerlyUnlockCreateVideoFlyerOption"]){
+        UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
+        [addVideoTabButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
+    }
     if( [from isEqualToString:@"ALL"] ||  [from isEqualToString:@"comflyerlyIconsBundle"]){
-        [premiumBtnEmoticons removeFromSuperview];
+        if(premiumBtnEmoticons != nil )
+            [premiumBtnEmoticons removeFromSuperview];
+        
+        if(premiumBtnCliparts != nil )
+            [premiumBtnCliparts  removeFromSuperview];
+        
+        if(premiumBtnFonts != nil )
+            [premiumBtnFonts  removeFromSuperview];
     }
     
     
