@@ -1073,6 +1073,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 frame.origin = CGPointMake(curXLoc, curYLoc);
                 font.frame = frame;
                 
+                if(fOPrem[2] < curXLoc )
+                    fOPrem[2] = curXLoc + (widthValue )*2 ;
+                
                 //We have 21 free fonts, so start yellow overly after it ( from new row)
                 if( i >= 22 && (fOPrem[0] == initialX && fOPrem[1] == initialY) && (curXLoc == initialX || curYLoc == initialY )){
                     fOPrem[0] = curXLoc;
@@ -1082,7 +1085,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                         fOPrem[2] = (curXLoc + widthValue  ) - fOPrem[0];
                         fOPrem[3] = heightValue;
                     } else{ //square views
-                        fOPrem[1] = curXLoc;
                         fOPrem[3] = ( curYLoc + heightValue) - fOPrem[1];
                     }
                 }
@@ -1500,6 +1502,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 frame.origin = CGPointMake(curXLoc, curYLoc);
                 font.frame = frame;
                 
+                if(fOPrem[2] < curXLoc )
+                    fOPrem[2] = curXLoc + (widthValue )*2;
+                
                 //We have 42 free cliparts, so start yellow overly after it ( from new row)
                 if( i >= 43 && (fOPrem[0] == initialX && fOPrem[1] == initialY) && (curXLoc == initialX || curYLoc == initialY )){
                     fOPrem[0] = curXLoc;
@@ -1509,7 +1514,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                         fOPrem[2] = (curXLoc + widthValue  ) - fOPrem[0];
                         fOPrem[3] = heightValue;
                     } else{ //square views
-                        fOPrem[1] = curXLoc;
                         fOPrem[3] = ( curYLoc + heightValue) - fOPrem[1];
                     }
                 }
@@ -1633,6 +1637,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 frame.origin = CGPointMake(curXLoc, curYLoc);
                 symbolButton.frame = frame;
             
+                if(fOPrem[2] < curXLoc )
+                    fOPrem[2] = curXLoc + (symbolScrollWidth)*2;
+            
                 //We have 98 free emoticon, so start yellow overly after it ( from new row)
                 if( i >= 99 && (fOPrem[0] == initialX && fOPrem[1] == initialY) && (curXLoc == initialX || curYLoc == initialY )){
                     fOPrem[0] = curXLoc;
@@ -1642,7 +1649,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                         fOPrem[2] = (curXLoc + symbolScrollWidth  ) - fOPrem[0];
                         fOPrem[3] = symbolScrollHeight;
                     } else{ //square views
-                        fOPrem[1] = curXLoc;
                         fOPrem[3] = ( curYLoc + symbolScrollHeight) - fOPrem[1];
                     }
                 }
