@@ -5386,8 +5386,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
             [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
             
-            [self premiumBtnHideAfterCheck:@"ALL"]; //testing //aik enter mara hy
-            
         }
         
         //Here we Highlight The ImageView
