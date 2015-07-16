@@ -1046,7 +1046,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
             int initialX = curXLoc;
             int initialY = curYLoc;
-            int fOPrem[4] = {initialX,initialY,0,0};
+            int fOPrem[6] = {initialX,initialY,0,0};
             
             NSMutableDictionary *textLayer;
             NSString *textFamily;
@@ -1073,8 +1073,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 frame.origin = CGPointMake(curXLoc, curYLoc);
                 font.frame = frame;
                 
-                if(fOPrem[2] < curXLoc )
-                    fOPrem[2] = curXLoc + (widthValue )*2 ;
                 
                 //We have 21 free fonts, so start yellow overly after it ( from new row)
                 if( i >= 22 && (fOPrem[0] == initialX && fOPrem[1] == initialY) && (curXLoc == initialX || curYLoc == initialY )){
@@ -1094,12 +1092,15 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
                 if( i != 0 ) {
                     if(IS_IPHONE_5 && curXLoc >= 300 ){
+                        fOPrem[4] = 0; fOPrem[5] = 320;
                         curXLoc = 13;
                         curYLoc = curYLoc + heightValue + 7;
                     } else if ( IS_IPHONE_6 && curXLoc >= 350 ){
+                        fOPrem[4] = 0; fOPrem[5] = 380;
                         curXLoc = 13;
                         curYLoc = curYLoc + heightValue + 7;
                     } else if( IS_IPHONE_6_PLUS && ( i%9 == 0 ) ){ //iphon6+ screen can show 8 font type icons
+                        fOPrem[4] = 0; fOPrem[5] = 584;
                         curXLoc = 13;
                         curYLoc = curYLoc + heightValue + 7;
                     }
@@ -1108,9 +1109,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [fontsView addSubview:font];
             }
             
+            fOPrem[0] = fOPrem[4]; fOPrem[2] = fOPrem[5];
+            
             userPurchases = [UserPurchases getInstance];
             userPurchases.delegate = self;
             
+            fOPrem[0] = fOPrem[4]; fOPrem[2] = fOPrem[5];
             
               //Checking if user valid purchases
             if (  !([userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"])  ) {
@@ -1129,7 +1133,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
                 [fontsView addSubview:premiumBtnFonts];
             }
-
+            
+                //fontsView.backgroundColor = [UIColor redColor];
                 
                 if ( IS_IPHONE_5 ) {
                     
@@ -1474,7 +1479,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
             int initialX = curXLoc;
             int initialY = curYLoc;
-            int fOPrem[4] = {initialX,initialY,0,0};
+            int fOPrem[6] = {initialX,initialY,0,0};
     
             NSMutableDictionary *textLayer;
             NSString *textFamily;
@@ -1502,8 +1507,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 frame.origin = CGPointMake(curXLoc, curYLoc);
                 font.frame = frame;
                 
-                if(fOPrem[2] < curXLoc )
-                    fOPrem[2] = curXLoc + (widthValue )*2;
                 
                 //We have 42 free cliparts, so start yellow overly after it ( from new row)
                 if( i >= 43 && (fOPrem[0] == initialX && fOPrem[1] == initialY) && (curXLoc == initialX || curYLoc == initialY )){
@@ -1522,6 +1525,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 curXLoc += (widthValue)+increment;
         
                 if(IS_IPHONE_5){
+                    fOPrem[4] = 0; fOPrem[5] = 320;
                     if(curXLoc >= 300){
                         curXLoc = 13;
                         curYLoc = curYLoc + widthValue + 7;
@@ -1529,6 +1533,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 }
                 
                 if(IS_IPHONE_6){
+                    fOPrem[4] = 0; fOPrem[5] = 380;
                     if(curXLoc >= 350){
                         curXLoc = 18;
                         curYLoc = curYLoc + widthValue + 7;
@@ -1536,6 +1541,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 }
                 
                 if(IS_IPHONE_6_PLUS && i%9==0){
+                    fOPrem[4] = 0; fOPrem[5] = 584;
                     //if(curXLoc >= 300){
                         curXLoc = 13;
                         curYLoc = curYLoc + widthValue + 7;
@@ -1548,6 +1554,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             userPurchases = [UserPurchases getInstance];
             userPurchases.delegate = self;
 
+            fOPrem[0] = fOPrem[4]; fOPrem[2] = fOPrem[5];
+            
             //Checking if user valid purchases
             if (  !([userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"])  ) {
 
@@ -1566,6 +1574,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
                 [clipartsView addSubview:premiumBtnCliparts];
             }
+            
+                //clipartsView.backgroundColor = [UIColor redColor];
+            
                 if ( IS_IPHONE_5 ) {
                     clipartsView.size = CGSizeMake(320, curYLoc + 85);
                     [layerScrollView setContentSize:CGSizeMake(320, curYLoc + 50)];
@@ -1616,7 +1627,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         CGFloat curXLoc = initialX;
         CGFloat curYLoc = initialY;
             
-        int fOPrem[4] = {initialX,initialY,0,0};
+        int fOPrem[6] = {initialX,initialY,0,0};
 
         int emoticonsArrayCount = emoticonsArray.count;
         for( int i=1 ; i<=emoticonsArrayCount; i++ ) {
@@ -1637,8 +1648,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 frame.origin = CGPointMake(curXLoc, curYLoc);
                 symbolButton.frame = frame;
             
-                if(fOPrem[2] < curXLoc )
-                    fOPrem[2] = curXLoc + (symbolScrollWidth)*2;
             
                 //We have 98 free emoticon, so start yellow overly after it ( from new row)
                 if( i >= 99 && (fOPrem[0] == initialX && fOPrem[1] == initialY) && (curXLoc == initialX || curYLoc == initialY )){
@@ -1656,17 +1665,20 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 curXLoc += (symbolScrollWidth)+5;
             
                 if(IS_IPHONE_5){
+                    fOPrem[4] = 0; fOPrem[5] = 320;
                     if(curXLoc >= 320){
                         curXLoc = initialX;
                         curYLoc = curYLoc + symbolScrollHeight + 7;
                     }
                 }else if(IS_IPHONE_6){
+                    fOPrem[4] = 0; fOPrem[5] = 380;
                     curXLoc +=  - 2;
                     if(curXLoc >= 400){
                         curXLoc = initialX;
                         curYLoc = curYLoc + symbolScrollHeight + 7;
                     }
                 }else if (IS_IPHONE_6_PLUS && i%6 == 0 ){
+                    fOPrem[4] = 0; fOPrem[5] = 584;
                     //if(curXLoc >= 320){
                         curXLoc = initialX;
                         curYLoc = curYLoc + symbolScrollHeight + 7;
@@ -1679,7 +1691,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
             userPurchases = [UserPurchases getInstance];
             userPurchases.delegate = self;
-            
+
+            fOPrem[0] = fOPrem[4]; fOPrem[2] = fOPrem[5];
           
             //Checking if user valid purchases
             if (  !([userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"])  ) {
@@ -1699,6 +1712,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
                 [emoticonsView addSubview:premiumBtnEmoticons];
             }
+          
+                //emoticonsView.backgroundColor = [UIColor redColor];
           
                 if(IS_IPHONE_5 ){
                     emoticonsView.size = CGSizeMake(320, curYLoc + symbolScrollHeight + 75);
