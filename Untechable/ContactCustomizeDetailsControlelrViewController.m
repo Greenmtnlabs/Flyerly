@@ -23,7 +23,7 @@
     BOOL IsCustomized;
     NSMutableDictionary *editingEmailsWithStatus;
     NSMutableDictionary *editingPhonesWithStatus;
-    
+    BOOL isRepeat;
 }
 @property (weak, nonatomic) IBOutlet UITableView *contactDetailsTable;
 
@@ -35,7 +35,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
     
@@ -489,6 +488,7 @@
 
 -(IBAction)emailButtonTapped:(id) sender
 {
+    isRepeat = YES;
     IsCustomized = YES;
     saveButton.hidden = NO;
     EmailCell *emailCell;
@@ -508,26 +508,30 @@
         [emailCell.emailButton setSelected:YES];
     }
   
-    if( tempContactDetailsModal.allEmails.count == 0){
+    // to remove the redundant email addresses and flags
+    if(tempContactDetailsModal.allEmails.count == 0){
         [tempContactDetailsModal.allEmails addObject:tempEmailWithStatus];
-    } else {
-        for(int i=0;i<tempContactDetailsModal.allEmails.count; i++ ){
-            if( [tempContactDetailsModal.allEmails[i][0] isEqualToString:tempEmailWithStatus[0]] ){
-                [tempContactDetailsModal.allEmails replaceObjectAtIndex:i withObject:tempEmailWithStatus];
+    }else{
+        if(isRepeat){
+            for(int i=0;i<tempContactDetailsModal.allEmails.count; i++ ){
+                if( [tempContactDetailsModal.allEmails[i][0] isEqualToString:tempEmailWithStatus[0]] ){
+                    [tempContactDetailsModal.allEmails replaceObjectAtIndex:i withObject:tempEmailWithStatus];
+                    isRepeat = NO;
+                }
             }
-            else{
-                [tempContactDetailsModal.allEmails addObject:tempEmailWithStatus];
-                break;
-            }
+        }if(isRepeat){
+            [tempContactDetailsModal.allEmails addObject:tempEmailWithStatus];
+            isRepeat = YES;
         }
     }
     [editingEmailsWithStatus setObject:tempEmailWithStatus forKey:indexPath];
-    [tempContactDetailsModal.allEmails addObject:editingEmailsWithStatus];
+   
 }
 
 
 -(IBAction)callButtonTapped:(id) sender
 {
+    isRepeat = YES;
     IsCustomized = YES;
     saveButton.hidden = NO;
     PhoneNumberCell *phoneCell;
@@ -548,51 +552,31 @@
         [phoneCell.callButton setSelected:YES];
     }
     
-    
-    
-    
-    /*
+    // to remove the redundant phone numbers and flags
     if(tempContactDetailsModal.allPhoneNumbers.count == 0){
         [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
-    }
-     else {
-     for(int i=0;i<tempContactDetailsModal.allPhoneNumbers.count; i++ ){
-     if([tempContactDetailsModal.allPhoneNumbers[i][0] isEqualToString:tempPhoneWithStatus[0]] ){
-     [tempContactDetailsModal.allPhoneNumbers replaceObjectAtIndex:i withObject:tempPhoneWithStatus];
-     break;
-     }
-     else{
-     [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
-     break;
-     }
-     }
-     }
-    */
-    
-    
-    if(tempContactDetailsModal.allPhoneNumbers.count == 0){
-        [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
-    }
-    else {
-        for(int i=0;i<tempContactDetailsModal.allPhoneNumbers.count; i++ ){
-            if([tempContactDetailsModal.allPhoneNumbers[i][0] isEqualToString:tempPhoneWithStatus[0]] ){
-                [tempContactDetailsModal.allPhoneNumbers replaceObjectAtIndex:i withObject:tempPhoneWithStatus];
-                break;
+    }else{
+        if(isRepeat){
+            for(int i=0;i<tempContactDetailsModal.allPhoneNumbers.count; i++ ){
+                if( [tempContactDetailsModal.allPhoneNumbers[i][0] isEqualToString:tempPhoneWithStatus[0]] ){
+                    [tempContactDetailsModal.allPhoneNumbers replaceObjectAtIndex:i withObject:tempPhoneWithStatus];
+                    isRepeat = NO;
+                }
             }
-            else{
-                [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
-                break;
-            }
+        }if(isRepeat){
+            [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
+            isRepeat = YES;
         }
     }
 
     [editingPhonesWithStatus setObject:tempPhoneWithStatus forKey:indexPath];
-    //[tempContactDetailsModal.allPhoneNumbers addObject:editingPhonesWithStatus];
+   
 }
 
 
 -(IBAction)smsButtonTapped:(id) sender
 {
+    isRepeat = YES;
     IsCustomized = YES;
     saveButton.hidden = NO;
     PhoneNumberCell *phoneCell;
@@ -616,25 +600,24 @@
         [phoneCell.smsButton setSelected:YES];
     }
     
-   
+    // to remove the redundant phone numbers and flags
     if(tempContactDetailsModal.allPhoneNumbers.count == 0){
         [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
-    } else {
-        for(int i=0;i<tempContactDetailsModal.allPhoneNumbers.count; i++ ){
-            if( [tempContactDetailsModal.allPhoneNumbers[i][0] isEqualToString:tempPhoneWithStatus[0]] ){
-                [tempContactDetailsModal.allPhoneNumbers replaceObjectAtIndex:i withObject:tempPhoneWithStatus];
-                break;
+    }else{
+        if(isRepeat){
+            for(int i=0;i<tempContactDetailsModal.allPhoneNumbers.count; i++ ){
+                if( [tempContactDetailsModal.allPhoneNumbers[i][0] isEqualToString:tempPhoneWithStatus[0]] ){
+                    [tempContactDetailsModal.allPhoneNumbers replaceObjectAtIndex:i withObject:tempPhoneWithStatus];
+                    isRepeat = NO;
+                }
             }
-            else{
-                [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
-                break;
-            }
+        }if(isRepeat){
+            [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
+            isRepeat = YES;
         }
     }
     
-    
     [editingPhonesWithStatus setObject:tempPhoneWithStatus forKey:indexPath];
-    [tempContactDetailsModal.allPhoneNumbers addObject:editingPhonesWithStatus];
 }
 
 - (void) saveSpendingTimeText {
