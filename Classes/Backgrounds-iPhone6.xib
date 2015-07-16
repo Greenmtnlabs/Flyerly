@@ -5,7 +5,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateFlyerController">
+            <connections>
+                <outlet property="premiumBtnBg" destination="1cP-9g-gCI" id="KlZ-I3-MYu"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="HFd-Cd-QYs" customClass="ResourcesView">
             <rect key="frame" x="0.0" y="0.0" width="375" height="1223"/>
@@ -1068,6 +1072,16 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon94.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Bfh-5P-QMV" userLabel="Template94.jpg">
                     <rect key="frame" x="157" y="1158" width="60" height="58"/>
                 </imageView>
+                <button opaque="NO" alpha="0.75" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1cP-9g-gCI">
+                    <rect key="frame" x="5" y="889" width="364" height="330"/>
+                    <color key="backgroundColor" red="0.98431378599999997" green="0.98431378599999997" blue="0.85548236720000004" alpha="1" colorSpace="deviceRGB"/>
+                    <state key="normal" title="    Premium">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="openPanel:" destination="-2" eventType="touchUpInside" id="RPd-3R-gpR"/>
+                    </connections>
+                </button>
             </subviews>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

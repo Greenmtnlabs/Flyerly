@@ -5,7 +5,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateFlyerController"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateFlyerController">
+            <connections>
+                <outlet property="premiumBtnBgBorder" destination="0Il-3o-81m" id="1c9-dJ-6hr"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="ICn-MY-yty" customClass="ResourcesView">
             <rect key="frame" x="0.0" y="0.0" width="325" height="270"/>
@@ -1395,6 +1399,17 @@
                     </state>
                     <connections>
                         <action selector="selectBorder:" destination="-1" eventType="touchUpInside" id="hRr-m4-sEf"/>
+                    </connections>
+                </button>
+                <button opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0Il-3o-81m">
+                    <rect key="frame" x="14" y="141" width="297" height="124"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.98431378599999997" green="0.98431378599999997" blue="0.85548236720000004" alpha="1" colorSpace="deviceRGB"/>
+                    <state key="normal" title="    Premium">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="openPanel:" destination="-2" eventType="touchUpInside" id="kMz-1o-7fL"/>
                     </connections>
                 </button>
             </subviews>
