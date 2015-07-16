@@ -706,13 +706,16 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
             }
             
-            premiumImgBg = [[UIImageView alloc] initWithFrame:CGRectMake(premiumBtnBg.frame.origin.x,premiumBtnBg.frame.origin.y,50,50)];
+            premiumImgBg = [[UIImageView alloc] initWithFrame:[self getSizeOfPremium:premiumBtnBg.frame.origin.x y:premiumBtnBg.frame.origin.y]];
             premiumImgBg.image = [UIImage imageNamed:@"premiumImg.png"];
             [backgroundsView addSubview:premiumImgBg];
 
-            premiumImgBgBorder = [[UIImageView alloc] initWithFrame:CGRectMake(premiumBtnBgBorder.frame.origin.x,premiumBtnBgBorder.frame.origin.y,50,50)];
+            premiumImgBgBorder = [[UIImageView alloc] initWithFrame:[self getSizeOfPremium:premiumBtnBgBorder.frame.origin.x y:premiumBtnBgBorder.frame.origin.y]];
             premiumImgBgBorder.image = [UIImage imageNamed:@"premiumImg.png"];
             [flyerBordersView addSubview:premiumImgBgBorder];
+            
+            [premiumBtnBg setBackgroundColor:[self getPremiumBgColor]];
+            [premiumBtnBgBorder setBackgroundColor:[self getPremiumBgColor]];
             
             if( canCheckPurchases ){
                 [self loadXibsAfterInAppCheck:NO againAddInSubViews:YES];
@@ -1136,13 +1139,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 UIFont *fontname = [UIFont fontWithName:@"Helvetica" size:15.0];
                 [premiumBtnFonts.titleLabel setFont: fontname];
                 [premiumBtnFonts setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                [premiumBtnFonts setBackgroundColor:[UIColor yellowColor]];
-                [premiumBtnFonts setAlpha:0.5];
+                [premiumBtnFonts setBackgroundColor:[self getPremiumBgColor]];
+
 
 
                 [fontsView addSubview:premiumBtnFonts];
                 
-                premiumImgFonts = [[UIImageView alloc] initWithFrame:CGRectMake(fOPrem[0], fOPrem[1],50,50)];
+                premiumImgFonts = [[UIImageView alloc] initWithFrame:[self getSizeOfPremium:fOPrem[0] y:fOPrem[1] ] ];
                 premiumImgFonts.image = [UIImage imageNamed:@"premiumImg.png"];
                 [fontsView addSubview:premiumImgFonts];
             }
@@ -1584,12 +1587,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 UIFont *fontname = [UIFont fontWithName:@"Helvetica" size:15.0];
                 [premiumBtnCliparts.titleLabel setFont: fontname];
                 [premiumBtnCliparts setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                [premiumBtnCliparts setBackgroundColor:[UIColor yellowColor]];
-                [premiumBtnCliparts setAlpha:0.5];
+                [premiumBtnCliparts setBackgroundColor:[self getPremiumBgColor]];
+
                 
                 [clipartsView addSubview:premiumBtnCliparts];
                 
-                premiumImgCliparts = [[UIImageView alloc] initWithFrame:CGRectMake(fOPrem[0], fOPrem[1],50,50)];
+                premiumImgCliparts = [[UIImageView alloc] initWithFrame:[self getSizeOfPremium:fOPrem[0] y:fOPrem[1]] ];
                 premiumImgCliparts.image = [UIImage imageNamed:@"premiumImg.png"];
                 [clipartsView addSubview:premiumImgCliparts];
             }
@@ -1728,12 +1731,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 UIFont *fontname = [UIFont fontWithName:@"Helvetica" size:15.0];
                 [premiumBtnEmoticons.titleLabel setFont: fontname];
                 [premiumBtnEmoticons setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                [premiumBtnEmoticons setBackgroundColor:[UIColor yellowColor]];
-                [premiumBtnEmoticons setAlpha:0.5];
+                [premiumBtnEmoticons setBackgroundColor:[self getPremiumBgColor]];
+
                 
                 [emoticonsView addSubview:premiumBtnEmoticons];
                 
-                premiumImgEmoticons = [[UIImageView alloc] initWithFrame:CGRectMake(fOPrem[0], fOPrem[1],50,50)];
+                premiumImgEmoticons = [[UIImageView alloc] initWithFrame:[self getSizeOfPremium:fOPrem[0] y:fOPrem[1]] ];
                 premiumImgEmoticons.image = [UIImage imageNamed:@"premiumImg.png"];
                 [emoticonsView addSubview:premiumImgEmoticons];
             }
@@ -6740,8 +6743,17 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             [premiumImgFonts removeFromSuperview];
         }
     }
-    
-    
 }
 
+-(CGRect)getSizeOfPremium:(int)x y:(int)y {
+    CGRect recT = CGRectMake(x,y,200,150);
+    if( IS_IPHONE_4 ){
+        recT = CGRectMake(x,y,70,50);
+    }
+    return recT;
+}
+
+-(UIColor *) getPremiumBgColor{
+    return [UIColor colorWithRed:0 green:0 blue:255 alpha:0.5];
+}
 @end
