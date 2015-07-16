@@ -1507,11 +1507,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
                 font.frame = CGRectMake(0, 0, widthValue, heightValue);
                 
-                //We have 3 free emoticon, so start yellow overly after it ( from new row)
-                if( i >= 3 && (fOPrem[0] == initialX && fOPrem[1] == initialY) && (curXLoc == initialX || curYLoc == initialY )){
+                //We have 42 free cliparts, so start yellow overly after it ( from new row)
+                if( i >= 43 && (fOPrem[0] == initialX && fOPrem[1] == initialY) && (curXLoc == initialX || curYLoc == initialY )){
                     fOPrem[0] = curXLoc;
                     fOPrem[1] = curYLoc;
-                } else if ( i == 6 ){
+                } else if ( i == clipartsArrayCount ){
                     if(curYLoc == fOPrem[1] ){ //iPhone4 landscap views
                         fOPrem[2] = (curXLoc + widthValue  ) - fOPrem[0];
                         fOPrem[3] = heightValue;
@@ -1731,7 +1731,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     emoticonsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), (layerScrollView.frame.origin.y-5), emoticonsView.frame.size.width, emoticonsView.frame.size.height);
                 }
                 
-            
+          
             
         
             });
