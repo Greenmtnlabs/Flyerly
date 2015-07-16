@@ -1073,7 +1073,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 frame.origin = CGPointMake(curXLoc, curYLoc);
                 font.frame = frame;
                 
-                //We have 21 free cliparts, so start yellow overly after it ( from new row)
+                //We have 21 free fonts, so start yellow overly after it ( from new row)
                 if( i >= 22 && (fOPrem[0] == initialX && fOPrem[1] == initialY) && (curXLoc == initialX || curYLoc == initialY )){
                     fOPrem[0] = curXLoc;
                     fOPrem[1] = curYLoc;
