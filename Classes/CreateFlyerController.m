@@ -40,7 +40,6 @@
     
     BOOL isNewText;
     
-    BOOL premiumBtnStatus;//when true then dont show premium button
 }
 
 @end
@@ -65,7 +64,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider,tempelateView;
 @synthesize durationLabel,durationChange,onFlyerBack,shouldShowAdd;
 @synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAddView,drawingPatternsView,drawingEraserMsgView;
-@synthesize premiumBtnBg,premiumBtnBgBorder;
+
+@synthesize premiumBtnBg, premiumBtnBgBorder, premiumBtnEmoticons;
 
 #pragma mark -  View Appear Methods
 - (void)viewWillAppear:(BOOL)animated{
@@ -302,7 +302,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         [[NSBundle mainBundle] loadNibNamed:@"CreateFlyerController-iPhone4" owner:self options:nil];
     }
 
-    premiumBtnStatus = NO; //hide the button
+
     isNewText   =   NO;
     bannerAddClosed = NO;
     bannerShowed = NO;
@@ -515,15 +515,15 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         //Set Context Tabs
         [self addBottomTabs:libFlyer];
         
+        //Show paid xid for all with yellow overly ( open in app on tap ), we will hide it after user checking user purchases
+        fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts-paid" ofType:@"plist"];
+        clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts-paid" ofType:@"plist"];
+        emoticonsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Emoticons-paid" ofType:@"plist"];
+        
         // Execute the rest of the stuff, a little delayed to speed up loading.
         dispatch_async( dispatch_get_main_queue(), ^{
+            BOOL canCheckPurchases = ( ![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"] );
             
-            //HERE WE GET USER PURCHASES INFO FROM PARSE
-            if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
-                
-                [self loadXibsAfterInAppCheck:NO againAddInSubViews:NO];
-                
-            }
             
             if( IS_IPHONE_4 || IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
                 
@@ -705,7 +705,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
             }
             
-            [self premiumBtnHideAfterCheck];
+            if( canCheckPurchases ){
+                [self loadXibsAfterInAppCheck:NO againAddInSubViews:YES];
+            }
+
         }); //main queue2
     });//main queue1
     
@@ -1086,16 +1089,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             userPurchases = [UserPurchases getInstance];
             userPurchases.delegate = self;
             
-    
-            //fontsView.backgroundColor = [UIColor yellowColor];
-            //layerScrollView.backgroundColor= [UIColor purpleColor];
-            
-            BOOL comflyerlyAllDesignBundle =  [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"];
-            BOOL comflyerlyIconsBundle =  [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"];
-            
             
               //Checking if user valid purchases
-            if (  !(comflyerlyAllDesignBundle || comflyerlyIconsBundle)  ) {
+            if (  !([userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"])  ) {
             
                 //More button---{--
                 UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -1544,19 +1540,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [clipartsView addSubview:font];
             }//end for loop
             
-            //clipartsView.backgroundColor = [UIColor redColor];
-            //layerScrollView.backgroundColor = [UIColor greenColor];
-            
-            
             userPurchases = [UserPurchases getInstance];
             userPurchases.delegate = self;
 
-            BOOL comflyerlyAllDesignBundle =  [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"];
-            BOOL comflyerlyIconsBundle =  [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"];
-            
-            
             //Checking if user valid purchases
-            if (  !(comflyerlyAllDesignBundle || comflyerlyIconsBundle)  ) {
+            if (  !([userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"])  ) {
 
                 //More button
                 UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -1643,15 +1631,20 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         emoticonsArray = [[NSMutableArray alloc] initWithContentsOfFile:emoticonsViewResourcePath];
     
+      dispatch_async(dispatch_get_main_queue(), ^{
+
         NSInteger symbolScrollWidth = 60;
         NSInteger symbolScrollHeight = 60;
-    
-        __block CGFloat curXLoc = 0;
-        __block CGFloat curYLoc = 5;
-    
-        dispatch_async(dispatch_get_main_queue(), ^{
+
+        int initialX = 0;
+        int initialY = 5;
+        CGFloat curXLoc = initialX;
+        CGFloat curYLoc = initialY;
             
-        for( int i=1 ; i<= emoticonsArray.count ; i++ ) {
+        int fOPrem[4] = {initialX,initialY,0,0};
+
+        int emoticonsArrayCount = emoticonsArray.count;
+        for( int i=1 ; i<=emoticonsArrayCount; i++ ) {
         
             NSString* symbolName = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@",[emoticonsArray objectAtIndex:(i-1)]] ofType:@"png"];
             UIImage *symbolImg = [UIImage imageWithContentsOfFile:symbolName];
@@ -1668,69 +1661,66 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 CGRect frame = symbolButton.frame;
                 frame.origin = CGPointMake(curXLoc, curYLoc);
                 symbolButton.frame = frame;
-                curXLoc += (symbolScrollWidth)+5;
-                if( IS_IPHONE_6 ){
-                    curXLoc +=  - 2;
+            
+                //We have 98 free emoticon, so start yellow overly after it ( from new row)
+                if( i >= 99 && (fOPrem[0] == initialX && fOPrem[1] == initialY) && (curXLoc == initialX || curYLoc == initialY )){
+                    fOPrem[0] = curXLoc;
+                    fOPrem[1] = curYLoc;
+                } else if ( i == emoticonsArrayCount ){
+                    if(curYLoc == fOPrem[1] ){ //iPhone4 landscap views
+                        fOPrem[2] = (curXLoc + symbolScrollWidth  ) - fOPrem[0];
+                        fOPrem[3] = symbolScrollHeight;
+                    } else{ //square views
+                        fOPrem[1] = curXLoc;
+                        fOPrem[3] = ( curYLoc + symbolScrollHeight) - fOPrem[1];
+                    }
                 }
             
+                curXLoc += (symbolScrollWidth)+5;
             
                 if(IS_IPHONE_5){
                     if(curXLoc >= 320){
-                        curXLoc = 0;
+                        curXLoc = initialX;
                         curYLoc = curYLoc + symbolScrollHeight + 7;
                     }
                 }else if(IS_IPHONE_6){
+                    curXLoc +=  - 2;
                     if(curXLoc >= 400){
-                        curXLoc = 0;
+                        curXLoc = initialX;
                         curYLoc = curYLoc + symbolScrollHeight + 7;
                     }
                 }else if (IS_IPHONE_6_PLUS && i%6 == 0 ){
                     //if(curXLoc >= 320){
-                        curXLoc = 0;
+                        curXLoc = initialX;
                         curYLoc = curYLoc + symbolScrollHeight + 7;
                     //}
                 }
                 
                 [emoticonsView addSubview:symbolButton];
             
-            
-            
         } // Loop
-            
-            //emoticonsView.backgroundColor = [UIColor redColor];
-            //layerScrollView.backgroundColor = [UIColor greenColor];
             
             userPurchases = [UserPurchases getInstance];
             userPurchases.delegate = self;
             
-            BOOL comflyerlyAllDesignBundle =  [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"];
-            BOOL comflyerlyIconsBundle =  [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"];
-            
-            
+          
             //Checking if user valid purchases
-            if (  !(comflyerlyAllDesignBundle || comflyerlyIconsBundle)  ) {
+            if (  !([userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"])  ) {
+                
                 //More button
-                UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
-                if ( IS_IPHONE_5 ) {
-                    font.frame = CGRectMake(10, curYLoc + 70, 300, heightValue);
-                } else if ( IS_IPHONE_6 ){
-                    font.frame = CGRectMake(10, curYLoc + 10, 335, heightValue);
-                }else if ( IS_IPHONE_6_PLUS ){
-                    font.frame = CGRectMake(10, curYLoc + symbolScrollHeight+7, 380, heightValue);
-                }else {
-                    font.frame = CGRectMake(curXLoc, curYLoc+10, 100, heightValue);
-                }
-
-                [font addTarget:self action:@selector(openPanel:) forControlEvents:UIControlEventTouchUpInside];
-                [font setTitle:@"More" forState:UIControlStateNormal];
+                premiumBtnEmoticons = [UIButton buttonWithType:UIButtonTypeCustom];
+                premiumBtnEmoticons.frame = CGRectMake(fOPrem[0], fOPrem[1], fOPrem[2], fOPrem[3]);
+                
+                [premiumBtnEmoticons addTarget:self action:@selector(openPanel:) forControlEvents:UIControlEventTouchUpInside];
+                [premiumBtnEmoticons setTitle:@"Premium" forState:UIControlStateNormal];
                 
                 UIFont *fontname = [UIFont fontWithName:@"Helvetica" size:15.0];
-                [font.titleLabel setFont: fontname];
-                [font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                [premiumBtnEmoticons.titleLabel setFont: fontname];
+                [premiumBtnEmoticons setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                [premiumBtnEmoticons setBackgroundColor:[UIColor yellowColor]];
+                [premiumBtnEmoticons setAlpha:0.6];
                 
-                [font setBackgroundImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
-                
-                [emoticonsView addSubview:font];
+                [emoticonsView addSubview:premiumBtnEmoticons];
                 
                 if ( IS_IPHONE_5  ) {
                     emoticonsView.size = CGSizeMake(320, curYLoc + heightValue + 125);
@@ -5398,8 +5388,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
             [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
             
-            premiumBtnStatus = YES; //testing //aik enter mara hy
-            [self premiumBtnHideAfterCheck];//testing
+            [self premiumBtnHideAfterCheck:@"ALL"]; //testing //aik enter mara hy
+            
         }
         
         //Here we Highlight The ImageView
@@ -5805,18 +5795,13 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [inappviewcontroller.paidFeaturesTview reloadData];
         
         //Checking if user valid purchases
-    } else if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-               [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    )     {
-        
-        fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts-paid" ofType:@"plist"];
-        clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts-paid" ofType:@"plist"];
-        emoticonsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Emoticons-paid" ofType:@"plist"];
-        [self addEmoticonsInSubView];
-        [self addClipArtsInSubView];
-        [self addFontsInSubView];
+    } else if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || [userPurchases isSubscriptionValid] ){
+        [self premiumBtnHideAfterCheck:@"ALL"];
         [inappviewcontroller.paidFeaturesTview reloadData];
-        
-    }else {
+    } else if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"] ){
+        [self premiumBtnHideAfterCheck:@"ALL"];
+        [inappviewcontroller.paidFeaturesTview reloadData];
+    } else {
         
         if ( [sharePanel isHidden] && inappviewcontroller != nil &&
             ![[self presentedViewController] isKindOfClass:[InAppViewController class]])
@@ -6704,38 +6689,18 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
         }
     }
-    
-    //Checking if user valid purchases
-    if ( ([userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-        [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"])        ||
-        [userPurchases isSubscriptionValid ] ) {
-        
-        fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts-paid" ofType:@"plist"];
-        clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts-paid" ofType:@"plist"];
-        emoticonsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Emoticons-paid" ofType:@"plist"];
-        
-        if( checkAndCloseInAppPanel ) {
-            [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-        }
-        
-    } else {
-        
-        fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts" ofType:@"plist"];
-        clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts" ofType:@"plist"];
-        emoticonsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Emoticons" ofType:@"plist"];
-        
-    }
-    
-    //When user have complete design bundle or any subscription dont show the premium button
-    premiumBtnStatus = ([userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || [userPurchases isSubscriptionValid] );
-    
-    if( againAddInSubViews ) {
-        [self addEmoticonsInSubView];
-        [self addClipArtsInSubView];
-        [self addFontsInSubView];
-    }
-    [self premiumBtnHideAfterCheck];
 
+    if( checkAndCloseInAppPanel ) {
+        [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+    
+    if( againAddInSubViews ){
+        //When user have complete design bundle or any subscription dont show the premium button
+        if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || [userPurchases isSubscriptionValid] )
+            [self premiumBtnHideAfterCheck:@"ALL"];
+        else if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"] )
+            [self premiumBtnHideAfterCheck:@"comflyerlyIconsBundle"];
+    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -6744,12 +6709,19 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     return YES;
 }
 
--(void)premiumBtnHideAfterCheck{
-    //Hide premium button
-    if( premiumBtnStatus ){
+//Hide premium button from view
+-(void)premiumBtnHideAfterCheck:(NSString *)from{
+    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString:@"BACKGROUND"]){
         [premiumBtnBg removeFromSuperview];
+    }
+    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString:@"BACKGROUND_BORDER"]){
         [premiumBtnBgBorder removeFromSuperview];
     }
+    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString:@"comflyerlyIconsBundle"]){
+        [premiumBtnEmoticons removeFromSuperview];
+    }
+    
+    
 }
 
 @end
