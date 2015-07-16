@@ -6748,7 +6748,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 -(CGRect)getSizeOfPremium:(int)x y:(int)y {
     CGRect recT = CGRectMake(x,y,200,150);
     if( IS_IPHONE_4 ){
-        recT = CGRectMake(x,y,70,70);
+        recT = CGRectMake(x,y,70,50);
     }
     return recT;
 }
