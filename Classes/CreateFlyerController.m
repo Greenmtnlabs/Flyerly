@@ -1109,12 +1109,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [fontsView addSubview:font];
             }
             
-            fOPrem[0] = fOPrem[4]; fOPrem[2] = fOPrem[5];
-            
             userPurchases = [UserPurchases getInstance];
             userPurchases.delegate = self;
             
-            fOPrem[0] = fOPrem[4]; fOPrem[2] = fOPrem[5];
+            if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
+                fOPrem[0] = fOPrem[4]; fOPrem[2] = fOPrem[5];
+            }
+            
             
               //Checking if user valid purchases
             if (  !([userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"])  ) {
@@ -1554,7 +1555,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             userPurchases = [UserPurchases getInstance];
             userPurchases.delegate = self;
 
-            fOPrem[0] = fOPrem[4]; fOPrem[2] = fOPrem[5];
+            if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
+                fOPrem[0] = fOPrem[4]; fOPrem[2] = fOPrem[5];
+            }
+
             
             //Checking if user valid purchases
             if (  !([userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"])  ) {
@@ -1692,7 +1696,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             userPurchases = [UserPurchases getInstance];
             userPurchases.delegate = self;
 
-            fOPrem[0] = fOPrem[4]; fOPrem[2] = fOPrem[5];
+          if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
+              fOPrem[0] = fOPrem[4]; fOPrem[2] = fOPrem[5];
+          }
+
           
             //Checking if user valid purchases
             if (  !([userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"])  ) {
