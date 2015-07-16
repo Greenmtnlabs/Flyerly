@@ -1043,7 +1043,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 curYLoc = 10;
                 increment = 8;
             }
-    
+            
+            int initialX = curXLoc;
+            int initialY = curYLoc;
+            int fOPrem[4] = {initialX,initialY,0,0};
+            
             NSMutableDictionary *textLayer;
             NSString *textFamily;
     
@@ -1052,8 +1056,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 textLayer = [flyer getLayerFromMaster:currentLayer];
                 textFamily = [textLayer objectForKey:@"fontname"];
             }
-    
-            for (int i = 1; i <=[fontsArray count] ; i++) {
+            int fontsArrayCount = [fontsArray count];
+            for (int i = 1; i <=fontsArrayCount ; i++) {
                 UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
                 font.frame = CGRectMake(0, 0, widthValue, heightValue);
                 [font addTarget:self action:@selector(selectFont:) forControlEvents:UIControlEventTouchUpInside];
@@ -1068,6 +1072,22 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 CGRect frame = font.frame;
                 frame.origin = CGPointMake(curXLoc, curYLoc);
                 font.frame = frame;
+                
+                //We have 21 free cliparts, so start yellow overly after it ( from new row)
+                if( i >= 22 && (fOPrem[0] == initialX && fOPrem[1] == initialY) && (curXLoc == initialX || curYLoc == initialY )){
+                    fOPrem[0] = curXLoc;
+                    fOPrem[1] = curYLoc;
+                } else if ( i == fontsArrayCount ){
+                    if(curYLoc == fOPrem[1] ){ //iPhone4 landscap views
+                        fOPrem[2] = (curXLoc + widthValue  ) - fOPrem[0];
+                        fOPrem[3] = heightValue;
+                    } else{ //square views
+                        fOPrem[1] = curXLoc;
+                        fOPrem[3] = ( curYLoc + heightValue) - fOPrem[1];
+                    }
+                }
+                
+                
                 curXLoc = curXLoc + widthValue + increment ;
                 
                 if( i != 0 ) {
@@ -1092,61 +1112,22 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
               //Checking if user valid purchases
             if (  !([userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"])  ) {
-            
-                //More button---{--
-                UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
+                premiumBtnFonts = [UIButton buttonWithType:UIButtonTypeCustom];
+                premiumBtnFonts.frame = CGRectMake(fOPrem[0], fOPrem[1], fOPrem[2], fOPrem[3]);
                 
-                if ( IS_IPHONE_5 ) {
-                    font.frame = CGRectMake(curXLoc, curYLoc, 300, heightValue);
-                } else if ( IS_IPHONE_6 ) {
-                    font.frame = CGRectMake(13, curYLoc + 40, 335, heightValue);
-                } else if( IS_IPHONE_6_PLUS ){
-                   font.frame = CGRectMake(13, curYLoc + 40, 380, heightValue);
-                }else {
-                    font.frame = CGRectMake(curXLoc, curYLoc, 150, heightValue);
-                }
-
-                //font.backgroundColor = [UIColor blueColor];
-                
-                [font addTarget:self action:@selector(openPanel:) forControlEvents:UIControlEventTouchUpInside];
-                
-                [font setTitle:@"More" forState:UIControlStateNormal];
+                [premiumBtnFonts addTarget:self action:@selector(openPanel:) forControlEvents:UIControlEventTouchUpInside];
+                [premiumBtnFonts setTitle:@"Premium" forState:UIControlStateNormal];
                 
                 UIFont *fontname = [UIFont fontWithName:@"Helvetica" size:15.0];
-                [font.titleLabel setFont: fontname];
-                [font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                
-                [font setBackgroundImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
+                [premiumBtnFonts.titleLabel setFont: fontname];
+                [premiumBtnFonts setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                [premiumBtnFonts setBackgroundColor:[UIColor yellowColor]];
+                [premiumBtnFonts setAlpha:0.6];
 
-                [fontsView addSubview:font];
-                //More button---}--
-                
-                
-                if ( IS_IPHONE_5 ) {
-                    
-                    fontsView.size = CGSizeMake(320, curYLoc + heightValue + 50);
-                    [layerScrollView setContentSize:CGSizeMake(fontsView.frame.size.width, fontsView.frame.size.height)];
-                }
-                else if ( IS_IPHONE_6 ) {
-                    
-                    fontsView.size = CGSizeMake(380, curYLoc + heightValue + 50);
-                    [layerScrollView setContentSize:CGSizeMake(fontsView.frame.size.width, fontsView.frame.size.height)];
-                
-                } else if ( IS_IPHONE_6_PLUS ) {
-                    fontsView.size = CGSizeMake(584, (curYLoc + heightValue + 50) );
-                    [layerScrollView setContentSize:CGSizeMake(fontsView.frame.size.width, fontsView.frame.size.height)];
-                    
-                     fontsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), layerScrollView.frame.origin.y, fontsView.frame.size.width, fontsView.frame.size.height);
-                }
-                else {
-                    fontsView.size = CGSizeMake(curXLoc + 185 , heightValue);
-                    [layerScrollView setContentSize:CGSizeMake(fontsView.frame.size.width, fontsView.frame.size.height)];
-                    
-                    fontsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), (layerScrollView.frame.origin.y+5), fontsView.frame.size.width, fontsView.frame.size.height);
 
-                }
+                [fontsView addSubview:premiumBtnFonts];
             }
-            else {
+
                 
                 if ( IS_IPHONE_5 ) {
                     
@@ -1171,7 +1152,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     fontsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), (layerScrollView.frame.origin.y+5), fontsView.frame.size.width, fontsView.frame.size.height);
                     
                 }
-            }
+
             
             
             
@@ -1506,6 +1487,18 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
                 UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
                 font.frame = CGRectMake(0, 0, widthValue, heightValue);
+                [font addTarget:self action:@selector(selectIcon:) forControlEvents:UIControlEventTouchUpInside];
+                UIFont *fontType = [UIFont fontWithName:[clipartsArray[i-1] objectForKey:@"fontType"] size:33.0f];
+                [font.titleLabel setFont: fontType];
+                [font setTitle:[clipartsArray[i-1] objectForKey:@"character"] forState:UIControlStateNormal];
+                [font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                font.tag = i;
+                [font setBackgroundImage:[UIImage imageNamed:@"a_bg"] forState:UIControlStateNormal];
+        
+                //SET BUTTON POSITION ON SCROLLVIEW
+                CGRect frame = font.frame;
+                frame.origin = CGPointMake(curXLoc, curYLoc);
+                font.frame = frame;
                 
                 //We have 42 free cliparts, so start yellow overly after it ( from new row)
                 if( i >= 43 && (fOPrem[0] == initialX && fOPrem[1] == initialY) && (curXLoc == initialX || curYLoc == initialY )){
@@ -1520,19 +1513,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                         fOPrem[3] = ( curYLoc + heightValue) - fOPrem[1];
                     }
                 }
+
                 
-                [font addTarget:self action:@selector(selectIcon:) forControlEvents:UIControlEventTouchUpInside];
-                UIFont *fontType = [UIFont fontWithName:[clipartsArray[i-1] objectForKey:@"fontType"] size:33.0f];
-                [font.titleLabel setFont: fontType];
-                [font setTitle:[clipartsArray[i-1] objectForKey:@"character"] forState:UIControlStateNormal];
-                [font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                font.tag = i;
-                [font setBackgroundImage:[UIImage imageNamed:@"a_bg"] forState:UIControlStateNormal];
-        
-                //SET BUTTON POSITION ON SCROLLVIEW
-                CGRect frame = font.frame;
-                frame.origin = CGPointMake(curXLoc, curYLoc);
-                font.frame = frame;
                 curXLoc += (widthValue)+increment;
         
                 if(IS_IPHONE_5){
