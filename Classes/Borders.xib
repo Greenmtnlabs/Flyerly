@@ -1401,11 +1401,11 @@
                         <action selector="selectBorder:" destination="-1" eventType="touchUpInside" id="hRr-m4-sEf"/>
                     </connections>
                 </button>
-                <button opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0Il-3o-81m">
+                <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0Il-3o-81m">
                     <rect key="frame" x="14" y="141" width="297" height="124"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.98431378599999997" green="0.98431378599999997" blue="0.85548236720000004" alpha="1" colorSpace="deviceRGB"/>
-                    <state key="normal" title="    Premium">
+                    <color key="backgroundColor" red="0.98431378599999997" green="0.98431378599999997" blue="0.29019609089999998" alpha="1" colorSpace="deviceRGB"/>
+                    <state key="normal">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>

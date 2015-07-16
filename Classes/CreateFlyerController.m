@@ -706,11 +706,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
             }
             
-            premiumImgBg = [[UIImageView alloc] initWithFrame:CGRectMake(premiumBtnBg.frame.origin.x,premiumBtnBg.frame.origin.y,100,100)];
+            premiumImgBg = [[UIImageView alloc] initWithFrame:CGRectMake(premiumBtnBg.frame.origin.x,premiumBtnBg.frame.origin.y,50,50)];
             premiumImgBg.image = [UIImage imageNamed:@"premiumImg.png"];
             [backgroundsView addSubview:premiumImgBg];
 
-            premiumImgBgBorder = [[UIImageView alloc] initWithFrame:CGRectMake(premiumBtnBgBorder.frame.origin.x,premiumBtnBgBorder.frame.origin.y,100,100)];
+            premiumImgBgBorder = [[UIImageView alloc] initWithFrame:CGRectMake(premiumBtnBgBorder.frame.origin.x,premiumBtnBgBorder.frame.origin.y,50,50)];
             premiumImgBgBorder.image = [UIImage imageNamed:@"premiumImg.png"];
             [flyerBordersView addSubview:premiumImgBgBorder];
             
@@ -1137,12 +1137,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [premiumBtnFonts.titleLabel setFont: fontname];
                 [premiumBtnFonts setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
                 [premiumBtnFonts setBackgroundColor:[UIColor yellowColor]];
-                [premiumBtnFonts setAlpha:0.6];
+                [premiumBtnFonts setAlpha:0.5];
 
 
                 [fontsView addSubview:premiumBtnFonts];
                 
-                premiumImgFonts = [[UIImageView alloc] initWithFrame:CGRectMake(fOPrem[0], fOPrem[1],100,100)];
+                premiumImgFonts = [[UIImageView alloc] initWithFrame:CGRectMake(fOPrem[0], fOPrem[1],50,50)];
                 premiumImgFonts.image = [UIImage imageNamed:@"premiumImg.png"];
                 [fontsView addSubview:premiumImgFonts];
             }
@@ -1585,11 +1585,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [premiumBtnCliparts.titleLabel setFont: fontname];
                 [premiumBtnCliparts setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
                 [premiumBtnCliparts setBackgroundColor:[UIColor yellowColor]];
-                [premiumBtnCliparts setAlpha:0.6];
+                [premiumBtnCliparts setAlpha:0.5];
                 
                 [clipartsView addSubview:premiumBtnCliparts];
                 
-                premiumImgCliparts = [[UIImageView alloc] initWithFrame:CGRectMake(fOPrem[0], fOPrem[1],100,100)];
+                premiumImgCliparts = [[UIImageView alloc] initWithFrame:CGRectMake(fOPrem[0], fOPrem[1],50,50)];
                 premiumImgCliparts.image = [UIImage imageNamed:@"premiumImg.png"];
                 [clipartsView addSubview:premiumImgCliparts];
             }
@@ -1729,11 +1729,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [premiumBtnEmoticons.titleLabel setFont: fontname];
                 [premiumBtnEmoticons setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
                 [premiumBtnEmoticons setBackgroundColor:[UIColor yellowColor]];
-                [premiumBtnEmoticons setAlpha:0.6];
+                [premiumBtnEmoticons setAlpha:0.5];
                 
                 [emoticonsView addSubview:premiumBtnEmoticons];
                 
-                premiumImgEmoticons = [[UIImageView alloc] initWithFrame:CGRectMake(fOPrem[0], fOPrem[1],100,100)];
+                premiumImgEmoticons = [[UIImageView alloc] initWithFrame:CGRectMake(fOPrem[0], fOPrem[1],50,50)];
                 premiumImgEmoticons.image = [UIImage imageNamed:@"premiumImg.png"];
                 [emoticonsView addSubview:premiumImgEmoticons];
             }

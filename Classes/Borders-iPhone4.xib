@@ -1401,11 +1401,11 @@
                         <action selector="selectBorder:" destination="-1" eventType="touchUpInside" id="jTP-ha-mmA"/>
                     </connections>
                 </button>
-                <button opaque="NO" alpha="0.84999999999999987" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9Vf-eD-jL5">
+                <button opaque="NO" alpha="0.49999999999999961" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9Vf-eD-jL5">
                     <rect key="frame" x="912" y="0.0" width="898" height="54"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.98431378599999997" green="0.98431378599999997" blue="0.85548236720000004" alpha="1" colorSpace="deviceRGB"/>
-                    <state key="normal" title="      Premium">
+                    <color key="backgroundColor" red="0.98431378599999997" green="0.98431378599999997" blue="0.29019609089999998" alpha="1" colorSpace="deviceRGB"/>
+                    <state key="normal">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
