@@ -285,4 +285,9 @@
 
 -(void)tasksOnCreateNewFlyer;
 
+-(IBAction)openPanel:(id)sender;
+//premium button for premium backgrounds / borders / clipart / Emoticons / fonts
+@property (nonatomic,strong)IBOutlet UIButton *premiumBtnBg, *premiumBtnBgBorder, *premiumBtnEmoticons, *premiumBtnCliparts, *premiumBtnFonts;
+@property (nonatomic,strong)IBOutlet UIImageView *premiumImgBg, *premiumImgBgBorder, *premiumImgEmoticons, *premiumImgCliparts, *premiumImgFonts;
+
 @end
