@@ -1710,27 +1710,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [premiumBtnEmoticons setAlpha:0.6];
                 
                 [emoticonsView addSubview:premiumBtnEmoticons];
-                
-                if ( IS_IPHONE_5  ) {
-                    emoticonsView.size = CGSizeMake(320, curYLoc + heightValue + 125);
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
-                } else if ( IS_IPHONE_6 ){
-                    emoticonsView.size = CGSizeMake(380, curYLoc + heightValue + 75);
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
-                } else if ( IS_IPHONE_6_PLUS ) {
-                    emoticonsView.size = CGSizeMake(584, curYLoc + symbolScrollHeight + 50);
-                    [layerScrollView setContentSize:CGSizeMake(emoticonsView.size.width, emoticonsView.size.height)];
-                    
-                    emoticonsView.frame = CGRectMake((layerScrollView.frame.origin.x+13), emoticonsView.frame.origin.y, emoticonsView.size.width, emoticonsView.size.height);
-                } else {
-                    emoticonsView.size = CGSizeMake(curXLoc + 155 , heightValue + 5);
-                    [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , heightValue)];
-                    
-                    emoticonsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), (layerScrollView.frame.origin.y-5), emoticonsView.frame.size.width, emoticonsView.frame.size.height);
-                }
             }
-            else{
-                
+          
                 if(IS_IPHONE_5 ){
                     emoticonsView.size = CGSizeMake(320, curYLoc + symbolScrollHeight + 75);
                     [layerScrollView setContentSize:CGSizeMake(320, curYLoc + symbolScrollHeight)];
@@ -1750,7 +1731,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     emoticonsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), (layerScrollView.frame.origin.y-5), emoticonsView.frame.size.width, emoticonsView.frame.size.height);
                 }
                 
-            }
+            
             
         
             });
