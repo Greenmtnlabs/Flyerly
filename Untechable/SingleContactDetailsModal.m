@@ -19,6 +19,8 @@
 -(id)init{
     
     self = [super init];
+    allEmails = [[NSMutableArray alloc] init];
+    allPhoneNumbers = [[NSMutableArray alloc] init];
     return self;
 }
 

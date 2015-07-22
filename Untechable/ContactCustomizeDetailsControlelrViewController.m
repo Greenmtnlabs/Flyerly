@@ -47,9 +47,6 @@
     editingPhonesWithStatus = [[NSMutableDictionary alloc] init];
 
     tempContactDetailsModal = [[SingleContactDetailsModal alloc] init];
-    tempContactDetailsModal.allEmails = [[NSMutableArray alloc] init];
-    tempContactDetailsModal.allPhoneNumbers = [[NSMutableArray alloc] init];
-    
     
     for ( int i = 0; i<contactModal.allPhoneNumbers.count; i++ ){
         NSMutableArray * phoneWithStatus = [[NSMutableArray alloc] initWithArray:[contactModal.allPhoneNumbers objectAtIndex:i]];
