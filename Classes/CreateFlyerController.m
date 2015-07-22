@@ -957,17 +957,18 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }
         
         NSArray *bodersArray = flyerBordersView.subviews;
-        int borderArrayCount =  borderArray.count;
+        int borderArrayCount =  (int)borderArray.count;
         int i =0;
+
         for (int index = 0; index < bodersArray.count; index += 3 )
         {
             if( i >= borderArrayCount )
             break;
             
-            id colorName = borderArray[i];
-            
             //Here we Highlight Last Color Selected
             if (textColor != nil) {
+                id colorName = borderArray[i];
+
                 if ([textColor rangeOfString:@".png"].location != NSNotFound ) {
                     if ( [colorName isKindOfClass:[NSString class]] ) {
                         UIButton *curBtn =  bodersArray[index+1];//image is in second button
@@ -1006,8 +1007,16 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     
                 }
             }
+            else{
+                //When we have no border, focus on first btn
+                UIButton *fb =  bodersArray[index+2];
+                [layerScrollView scrollRectToVisible:CGRectMake(0, 0, fb.frame.size.width, fb.frame.size.height) animated:YES];
+                break;
+            }
           i++;
         }// Loop
+
+
     });
 }
 
