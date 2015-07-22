@@ -74,10 +74,13 @@
     if(untechable.selectedContacts.count != 0){
         for(int i=0; i<untechable.selectedContacts.count; i++){
             if([[untechable.selectedContacts[i] valueForKey:@"name"] isEqualToString: tempContactDetailsModal.name] ){
-                NSMutableArray *output = [untechable.selectedContacts[i] valueForKey:@"allPhoneNumbers"];
-                NSLog(@"%i", output.count);
-                for(int k=0; k<output.count;k++) {
-                    [tempContactDetailsModal.allPhoneNumbers addObject: output[k]];
+                NSMutableArray *allPh = [untechable.selectedContacts[i] valueForKey:@"allPhoneNumbers"];
+                NSMutableArray *allEmail = [untechable.selectedContacts[i] valueForKey:@"allEmails"];
+                for(int j=0; j<allPh.count;j++) {
+                    [tempContactDetailsModal.allPhoneNumbers addObject: allPh[j]];
+                }
+                for(int k=0; k<allEmail.count;k++) {
+                    [tempContactDetailsModal.allEmails addObject: allEmail[k]];
                 }
                 //[tempContactDetailsModal.allPhoneNumbers[i] addObject:[untechable.selectedContacts[i] valueForKey:@"allPhoneNumbers"]];
                 //[tempContactDetailsModal.allEmails[i] addObject:[untechable.selectedContacts[i] valueForKey:@"allEmails"]];
@@ -521,8 +524,6 @@
         NSLog(@"All Phone numbers %@",tempContactDetailsModal.allPhoneNumbers[i][0]);
     }
     
-    
-   
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -551,19 +552,21 @@
     // to remove the redundant email addresses and flags
     if(tempContactDetailsModal.allEmails.count == 0){
         [tempContactDetailsModal.allEmails addObject:tempEmailWithStatus];
-    } else {
-        
+    }else{
         if(isRepeat){
-            for(int i=0;i<tempContactDetailsModal.allEmails.count; i++ ){
-                if( [tempContactDetailsModal.allEmails[i][0] isEqualToValue:tempEmailWithStatus[0]] ){
+            // to find email address type and update flags
+            for(int i=0; i<tempContactDetailsModal.allEmails.count; i++){
+                // found contact type
+                if( [tempContactDetailsModal.allEmails[i][0] isEqualToString: tempEmailWithStatus[0]]){
                     [tempContactDetailsModal.allEmails replaceObjectAtIndex:i withObject:tempEmailWithStatus];
                     isRepeat = NO;
+                    break;
                 }
             }
-        }
-        
-        if(isRepeat){
-            [tempContactDetailsModal.allEmails addObject:tempEmailWithStatus];
+            //if not found, add new eamil
+            if(isRepeat) {
+                [tempContactDetailsModal.allEmails addObject:tempEmailWithStatus];
+            }
         }
     }
     [editingEmailsWithStatus setObject:tempEmailWithStatus forKey:indexPath];
@@ -599,21 +602,21 @@
         [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
     }else{
         if(isRepeat){
-            for(int i=0;i<tempContactDetailsModal.allPhoneNumbers.count; i++ ){
-                //NSLog(@"Temp model  %@",tempPhoneWithStatus[0]);
-                if( [tempContactDetailsModal.allPhoneNumbers[i][0] isEqualToValue:tempPhoneWithStatus[0]] ){
-                    NSLog(@"I was here");
+            // to find phone number type and update flags
+            for(int i=0; i<tempContactDetailsModal.allPhoneNumbers.count; i++){
+                // found contact type
+                if( tempContactDetailsModal.allPhoneNumbers[i][0] == tempPhoneWithStatus[0] ){
                     [tempContactDetailsModal.allPhoneNumbers replaceObjectAtIndex:i withObject:tempPhoneWithStatus];
                     isRepeat = NO;
+                    break;
                 }
             }
-        }if(isRepeat){
-            [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
+            //if not found, add new phone number
+            if(isRepeat) {
+                [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
+            }
         }
     }
-
-   NSLog(@"Temp model  %@",tempPhoneWithStatus[0]);
-    
     [editingPhonesWithStatus setObject:tempPhoneWithStatus forKey:indexPath];
    
 }
@@ -627,13 +630,12 @@
     PhoneNumberCell *phoneCell;
     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.contactDetailsTable];
     NSIndexPath *indexPath = [self.contactDetailsTable indexPathForRowAtPoint:buttonPosition];
-    if (indexPath != nil)
-    {
+    
+    if (indexPath != nil){
         phoneCell = (PhoneNumberCell*)[_contactDetailsTable cellForRowAtIndexPath:indexPath];
     }
     
     NSMutableArray *tempPhoneWithStatus = [editingPhonesWithStatus objectForKey:indexPath];
-    
     
     if ( [[tempPhoneWithStatus objectAtIndex:2] isEqualToString:@"1"] ){
         [tempPhoneWithStatus setObject:@"0" atIndexedSubscript:2];
@@ -649,57 +651,23 @@
     if(tempContactDetailsModal.allPhoneNumbers.count == 0){
         [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
     }else{
-        if(isRepeat)
-        {
-            //[tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
-            //if([[untechable.selectedContacts[i] valueForKey:@"name"] isEqualToString: tempContactDetailsModal.name] )
-            //NSLog(@"Temp Model Count  %i",tempContactDetailsModal.allPhoneNumbers.count);
-            for(int i=0; i<tempContactDetailsModal.allPhoneNumbers.count; i++)
-            {
-                //for (int j=0; j<tempContactDetailsModal.allPhoneNumbers.count; j++)
-                //{
-                     NSLog(@"tempContactDetailsModal-i: %@",tempContactDetailsModal.allPhoneNumbers[i]);
-                     NSLog(@"tempContactDetailsModal0: %@",tempContactDetailsModal.allPhoneNumbers[i][0] );
-                     NSLog(@"tempPhoneWithStatus: %@",tempPhoneWithStatus[0] );
-                    // found contact type
-                    if( tempContactDetailsModal.allPhoneNumbers[i][0] == tempPhoneWithStatus[0] ){
-                        NSLog(@"tempContactDetailsModal: %@",tempContactDetailsModal.allPhoneNumbers[i] );
-                        NSLog(@"tempPhoneWithStatus: %@",tempPhoneWithStatus );
-                        [tempContactDetailsModal.allPhoneNumbers replaceObjectAtIndex:i withObject:tempPhoneWithStatus];
-                        isRepeat = NO;
-                        break;
-                    } else {
-                        [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
-                        break;
-                    }
-                    
-                //}
+        if(isRepeat){
+            // to find phone number type and update flags
+            for(int i=0; i<tempContactDetailsModal.allPhoneNumbers.count; i++){
+                // found contact type
+                if( tempContactDetailsModal.allPhoneNumbers[i][0] == tempPhoneWithStatus[0] ){
+                    [tempContactDetailsModal.allPhoneNumbers replaceObjectAtIndex:i withObject:tempPhoneWithStatus];
+                    isRepeat = NO;
+                    break;
+                }
             }
-            /*
-            NSLog(@"Temp Model Count  %i",tempContactDetailsModal.allPhoneNumbers.count);
-            NSLog(@"Temp Model Count  %i",editingPhonesWithStatus.count);
-            NSLog(@"Temp Model 1 %@",tempContactDetailsModal.allPhoneNumbers[0]);
-            NSLog(@"Temp Model 2 %@",tempContactDetailsModal.allPhoneNumbers[1]);
-            
-            NSLog(@"Temp Status %@",tempPhoneWithStatus[0]);
-            
-            NSLog(@"Temp Model 00 %@",tempContactDetailsModal.allPhoneNumbers[0][0] );
-            NSLog(@"Temp Model 01 %@",tempContactDetailsModal.allPhoneNumbers[0][1] );
-            NSLog(@"Temp Model 02 %@",tempContactDetailsModal.allPhoneNumbers[0][2] );
-            NSLog(@"Temp Model 03 %@",tempContactDetailsModal.allPhoneNumbers[0][3] );
-            
-            
-            
-            NSLog(@"Temp Model 10 %@",tempContactDetailsModal.allPhoneNumbers[1][0] );
-            NSLog(@"Temp Model 11 %@",tempContactDetailsModal.allPhoneNumbers[1][1] );
-            NSLog(@"Temp Model 12 %@",tempContactDetailsModal.allPhoneNumbers[1][2] );
-            NSLog(@"Temp Model 13 %@",tempContactDetailsModal.allPhoneNumbers[1][3] );
-             */
+            //if not found, add new phone number
+            if(isRepeat) {
+                    [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
+            }
         }
-        
-        
     }
-    
+
     [editingPhonesWithStatus setObject:tempPhoneWithStatus forKey:indexPath];
 }
 
