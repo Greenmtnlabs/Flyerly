@@ -14,6 +14,8 @@
 @property (nonatomic,strong)NSMutableArray *allEmails;
 @property (nonatomic,strong)NSMutableArray *allPhoneNumbers;
 
+-(BOOL)checkContacts;
+
 /**
  * This is a sample json object for this model
  {

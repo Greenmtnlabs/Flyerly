@@ -19,58 +19,24 @@
 -(id)init{
     
     self = [super init];
-    //customTextForContact = untechable.spendingTimeTxt;
-    //cutomizingStatusArray = [[NSMutableArray alloc] init];
     return self;
 }
 
 
-/*
- * Here we Return Email Status of Contact
- */
-/*
--(NSString *)getEmailStatus {
-    return [cutomizingStatusArray objectAtIndex:0];
-}
-*/
-
-/*
- * Here we Return SMS Share Status of Contact
- */
-/*
--(NSString *)getSmsStatus {
-    return [cutomizingStatusArray objectAtIndex:1];
-    
-}
-*/
-
-
-/*
- * Here we Return Phone Share Status of Contact
+/**
+ *
+ * This method returns YES(true)
+ * if any of the flags in this Modal
+ * is set to 1
+ * so useless contact can be deleted
+ *
+ * params: none
+ * return: BOOL
  */
 
-/*
--(NSString *)getPhoneStatus {
-    return [cutomizingStatusArray objectAtIndex:2];
-    
+- (BOOL)checkContacts{
+    return allPhoneNumbers.count==0 && allEmails.count==0 ? YES : NO;
 }
 
--(void)setEmailStatus :(int)status_ {
-    
-    [cutomizingStatusArray replaceObjectAtIndex:0 withObject:[NSString stringWithFormat:@"%d",status_]];
-}
-
-
--(void)setPhoneStatus :(int)status_ {
-    
-    [cutomizingStatusArray replaceObjectAtIndex:1 withObject:[NSString stringWithFormat:@"%d",status_]];
-}
-
-
--(void)setSmsStatus :(int)status_ {
-    
-    [cutomizingStatusArray replaceObjectAtIndex:2 withObject:[NSString stringWithFormat:@"%d",status_]];
-}
- */
 @end
 

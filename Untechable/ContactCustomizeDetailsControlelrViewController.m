@@ -82,15 +82,11 @@
                 for(int k=0; k<allEmail.count;k++) {
                     [tempContactDetailsModal.allEmails addObject: allEmail[k]];
                 }
-                //[tempContactDetailsModal.allPhoneNumbers[i] addObject:[untechable.selectedContacts[i] valueForKey:@"allPhoneNumbers"]];
-                //[tempContactDetailsModal.allEmails[i] addObject:[untechable.selectedContacts[i] valueForKey:@"allEmails"]];
                 break;
             }
         }
     }
     
-    
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -500,32 +496,34 @@
         }
     }
     
-    
-    if(untechable.selectedContacts.count == 0){
+    //save selected contact details to Untechable(modal)
+    if(untechable.selectedContacts.count == 0 && !tempContactDetailsModal.checkContacts){
         [untechable.selectedContacts addObject:tempContactDetailsModal];
     } else {
-        
         if(isRepeat){
             for(int i=0; i<untechable.selectedContacts.count; i++){
                 if([[untechable.selectedContacts[i] valueForKey:@"name"] isEqualToString: tempContactDetailsModal.name] ){
-                    [untechable.selectedContacts replaceObjectAtIndex:i withObject:tempContactDetailsModal];
-                    isRepeat = NO;
+                    
+                    // check if there is no contact type (i:e email, phone) set, remove this from contact list
+                    if( tempContactDetailsModal.checkContacts ){
+                        [untechable.selectedContacts removeObjectAtIndex:i];
+                        isRepeat = NO;
+                        break;
+                    }else{
+                        [untechable.selectedContacts replaceObjectAtIndex:i withObject:tempContactDetailsModal];
+                        isRepeat = NO;
+                    }
                 }
             }
         }
-        
         if(isRepeat){
             [untechable.selectedContacts addObject:tempContactDetailsModal];
         }
     }
     
-    for(int i=0; i<tempContactDetailsModal.allPhoneNumbers.count;i++)
-    {
-        NSLog(@"All Phone numbers %@",tempContactDetailsModal.allPhoneNumbers[i][0]);
-    }
-    
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 
 -(IBAction)emailButtonTapped:(id) sender
 {
@@ -549,18 +547,23 @@
         [emailCell.emailButton setSelected:YES];
     }
   
-    // to remove the redundant email addresses and flags
-    if(tempContactDetailsModal.allEmails.count == 0){
-        [tempContactDetailsModal.allEmails addObject:tempEmailWithStatus];
-    }else{
+    // to add and remove the redundant email addresses and flags
+    if(tempContactDetailsModal.allEmails.count > 0){
         if(isRepeat){
             // to find email address type and update flags
             for(int i=0; i<tempContactDetailsModal.allEmails.count; i++){
                 // found contact type
-                if( [tempContactDetailsModal.allEmails[i][0] isEqualToString: tempEmailWithStatus[0]]){
-                    [tempContactDetailsModal.allEmails replaceObjectAtIndex:i withObject:tempEmailWithStatus];
-                    isRepeat = NO;
-                    break;
+                if( [tempContactDetailsModal.allEmails[i][0] isEqualToString: tempEmailWithStatus[0]] ){
+                    // to remove if no flag is set to 1
+                    if([tempEmailWithStatus[1] isEqualToString: @"0"] ){
+                        [tempContactDetailsModal.allEmails removeObjectAtIndex:i];
+                        isRepeat = NO;
+                        break;
+                    }else{
+                        [tempContactDetailsModal.allEmails replaceObjectAtIndex:i withObject:tempEmailWithStatus];
+                        isRepeat = NO;
+                        break;
+                    }
                 }
             }
             //if not found, add new eamil
@@ -568,7 +571,10 @@
                 [tempContactDetailsModal.allEmails addObject:tempEmailWithStatus];
             }
         }
+    }else{
+        [tempContactDetailsModal.allEmails addObject:tempEmailWithStatus];
     }
+    
     [editingEmailsWithStatus setObject:tempEmailWithStatus forKey:indexPath];
    
 }
@@ -597,18 +603,23 @@
         [phoneCell.callButton setSelected:YES];
     }
     
-    // to remove the redundant phone numbers and flags
-    if(tempContactDetailsModal.allPhoneNumbers.count == 0){
-        [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
-    }else{
+    // to add and remove the redundant phone numbers and flags
+    if(tempContactDetailsModal.allPhoneNumbers.count > 0){
         if(isRepeat){
             // to find phone number type and update flags
             for(int i=0; i<tempContactDetailsModal.allPhoneNumbers.count; i++){
                 // found contact type
-                if( tempContactDetailsModal.allPhoneNumbers[i][0] == tempPhoneWithStatus[0] ){
-                    [tempContactDetailsModal.allPhoneNumbers replaceObjectAtIndex:i withObject:tempPhoneWithStatus];
-                    isRepeat = NO;
-                    break;
+                if( [tempContactDetailsModal.allPhoneNumbers[i][0] isEqualToString: tempPhoneWithStatus[0]] ){
+                    // to remove if no flag is set to 1
+                    if([tempPhoneWithStatus[2] isEqualToString: @"0"] && [tempPhoneWithStatus[3] isEqualToString: @"0"]  ){
+                        [tempContactDetailsModal.allPhoneNumbers removeObjectAtIndex:i];
+                        isRepeat = NO;
+                        break;
+                    }else{
+                        [tempContactDetailsModal.allPhoneNumbers replaceObjectAtIndex:i withObject:tempPhoneWithStatus];
+                        isRepeat = NO;
+                        break;
+                    }
                 }
             }
             //if not found, add new phone number
@@ -616,6 +627,8 @@
                 [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
             }
         }
+    }else{
+        [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
     }
     [editingPhonesWithStatus setObject:tempPhoneWithStatus forKey:indexPath];
    
@@ -647,29 +660,36 @@
         [phoneCell.smsButton setSelected:YES];
     }
     
-    // to remove the redundant phone numbers and flags
-    if(tempContactDetailsModal.allPhoneNumbers.count == 0){
-        [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
-    }else{
+    // to add and remove the redundant phone numbers and flags
+    if(tempContactDetailsModal.allPhoneNumbers.count > 0){
         if(isRepeat){
             // to find phone number type and update flags
             for(int i=0; i<tempContactDetailsModal.allPhoneNumbers.count; i++){
                 // found contact type
-                if( tempContactDetailsModal.allPhoneNumbers[i][0] == tempPhoneWithStatus[0] ){
-                    [tempContactDetailsModal.allPhoneNumbers replaceObjectAtIndex:i withObject:tempPhoneWithStatus];
-                    isRepeat = NO;
-                    break;
+                if( [tempContactDetailsModal.allPhoneNumbers[i][0] isEqualToString: tempPhoneWithStatus[0]] ){
+                    // to remove if no flag is set to 1
+                    if([tempPhoneWithStatus[2] isEqualToString: @"0"] && [tempPhoneWithStatus[3] isEqualToString: @"0"]  ){
+                        [tempContactDetailsModal.allPhoneNumbers removeObjectAtIndex:i];
+                        isRepeat = NO;
+                        break;
+                    }else{
+                        [tempContactDetailsModal.allPhoneNumbers replaceObjectAtIndex:i withObject:tempPhoneWithStatus];
+                        isRepeat = NO;
+                        break;
+                    }
                 }
             }
             //if not found, add new phone number
             if(isRepeat) {
-                    [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
+                [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
             }
         }
+    }else{
+        [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
     }
-
     [editingPhonesWithStatus setObject:tempPhoneWithStatus forKey:indexPath];
 }
+
 
 - (void) saveSpendingTimeText {
     
