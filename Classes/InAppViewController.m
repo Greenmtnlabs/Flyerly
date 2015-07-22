@@ -283,7 +283,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
     if ( [tableView isEqual:self.paidFeaturesTview] ){
         
         static NSString *cellId = @"InAppPurchaseCell";
@@ -306,6 +305,8 @@
         if([[product objectForKey:@"productidentifier"] isEqualToString:@"com.flyerly.AllDesignBundle"]) {
             [completeDesignBundleButton setTitle:@"Help us grow Flyerly!"];
             [completeDesignBundleButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
+        } else if([[product objectForKey:@"productidentifier"] isEqualToString:@"com.flyerly.YearlySubscription1"]) {
+            inAppCell.backgroundColor = [UIColor grayColor];//heighlight the Yearly subscription cell
         }
         //Setting the packagename,packageprice,packagedesciption values for cell view
         [inAppCell setCellValueswithProductTitle:[product objectForKey:@"packagename"] ProductPrice:[product objectForKey:@"packageprice"] ProductDescription:[product objectForKey:@"packagedesciption"]];

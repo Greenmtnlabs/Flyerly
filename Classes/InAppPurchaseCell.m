@@ -33,6 +33,16 @@
     packageName.text = title;
     packagePrice.text = price;
     packageDescription.text = description;
+    [self setTextInTopCenter:packageDescription];
+}
+
+//set text vertically top and center
+-(void)setTextInTopCenter:(UILabel *)lbl{
+    lbl.textAlignment = NSTextAlignmentCenter;
+    CGRect oldFrame = lbl.frame;
+    [lbl setNumberOfLines:0];
+    [lbl sizeToFit];
+    lbl.frame = CGRectMake(lbl.frame.origin.x, lbl.frame.origin.y, oldFrame.size.width, lbl.frame.size.height);
 }
 
 @end
