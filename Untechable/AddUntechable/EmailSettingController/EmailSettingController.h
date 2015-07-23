@@ -19,6 +19,7 @@
     UILabel *titleLabel;
     UIButton *helpButton;
     UIButton *backButton;
+    UIButton *skipButton;
     UIButton *rightBarButton;
     UIColor *defGreen;//GREEN
     UIColor *defGray;//GRAY

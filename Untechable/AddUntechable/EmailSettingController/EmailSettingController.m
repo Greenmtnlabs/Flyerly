@@ -381,6 +381,7 @@
     
     if([callFrom isEqualToString:@"viewDidLoad"])
     {
+        
         // Left Navigation ________________________________________________________________________________________________________
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
@@ -421,15 +422,47 @@
             [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
             
         }else if ( comingFromSetupScreen ){
+        
+            // Left Navigation ________________________________________________________________________________________________________
+            skipButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+            skipButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
+            [skipButton setTitle:TITLE_SKIP_TXT forState:normal];
+            [skipButton setTitleColor:defGray forState:UIControlStateNormal];
+            [skipButton addTarget:self action:@selector(btnSkipTouchStart) forControlEvents:UIControlEventTouchDown];
+            [skipButton addTarget:self action:@selector(btnSkipTouchEnd) forControlEvents:UIControlEventTouchUpInside];
+            skipButton.showsTouchWhenHighlighted = YES;
+            UIBarButtonItem *skipBarButton = [[UIBarButtonItem alloc] initWithCustomView:skipButton];
+            NSMutableArray  *skipNavItems  = [NSMutableArray arrayWithObjects:skipBarButton,nil];
             
-            [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
-            
+            [self.navigationItem setRightBarButtonItems:skipNavItems]; //Left button ___________
+         
         }else {
             
             [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
         }
     }
 }
+
+-(void)btnSkipTouchStart{
+    [self setSkipHighlighted:YES];
+}
+-(void)btnSkipTouchEnd{
+    [self setSkipHighlighted:NO];
+    [self onSkip];
+}
+- (void)setSkipHighlighted:(BOOL)highlighted {
+    (highlighted) ? [skipButton setBackgroundColor:defGreen] : [skipButton setBackgroundColor:[UIColor clearColor]];
+}
+
+-(void)onSkip{
+    SocialnetworkController *socialnetwork;
+    socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
+    socialnetwork.untechable = untechable;
+    [self.navigationController pushViewController:socialnetwork animated:YES];
+
+}
+
+
 
 -(void)btnNextTouchStart{
     [self setNextHighlighted:YES];
