@@ -2241,6 +2241,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 {
 	UIButton *view = sender;
     
+    if( view.tag < 0 )
+    return;
+    
     //Handling Select Unselect
     for(UIView *tempView  in [backgroundsView subviews])
     {
