@@ -1660,7 +1660,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
         int fOPrem[6] = {initialX,initialY,0,0};
 
-        int emoticonsArrayCount = emoticonsArray.count;
+        int emoticonsArrayCount = (int)emoticonsArray.count;
         for( int i=1 ; i<=emoticonsArrayCount; i++ ) {
         
             NSString* symbolName = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@",[emoticonsArray objectAtIndex:(i-1)]] ofType:@"png"];
@@ -1687,7 +1687,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 } else if ( i == emoticonsArrayCount ){
                     if(curYLoc == fOPrem[1] ){ //iPhone4 landscap views
                         fOPrem[2] = (curXLoc + symbolScrollWidth  ) - fOPrem[0];
-                        fOPrem[3] = symbolScrollHeight;
+                        fOPrem[3] = (int)symbolScrollHeight;
                     } else{ //square views
                         fOPrem[3] = ( curYLoc + symbolScrollHeight) - fOPrem[1];
                     }
