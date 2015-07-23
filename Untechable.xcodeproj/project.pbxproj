@@ -27,6 +27,9 @@
 		200ACE341A3874B200DC7047 /* YahooIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE221A3874B200DC7047 /* YahooIcon@2x.png */; };
 		200ACE351A3874B200DC7047 /* YahooIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE231A3874B200DC7047 /* YahooIcon@3x.png */; };
 		20468BF91B5FCF480019A2D3 /* ContactCustomizeDetailsControlelrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 243C59DE1A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.m */; };
+		2063F46D1B611484005EF723 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2063F46A1B611484005EF723 /* logo.png */; };
+		2063F46E1B611484005EF723 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2063F46B1B611484005EF723 /* logo@2x.png */; };
+		2063F46F1B611484005EF723 /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2063F46C1B611484005EF723 /* logo@3x.png */; };
 		207E6A521B53ED070067A1B5 /* SingleContactDetailsModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 207E6A511B53ED070067A1B5 /* SingleContactDetailsModal.m */; };
 		2402BB831A1DBF6A00255A73 /* UntechablesList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402BB811A1DBF6A00255A73 /* UntechablesList.m */; };
 		2402BB841A1DBF6A00255A73 /* UntechablesList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2402BB821A1DBF6A00255A73 /* UntechablesList.xib */; };
@@ -142,9 +145,6 @@
 		366EAFA11A14C3530011D6C6 /* Default-Landscape-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAF891A14C3530011D6C6 /* Default-Landscape-736h@3x.png */; };
 		366EAFA21A14C3530011D6C6 /* Default-Portrait-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAF8A1A14C3530011D6C6 /* Default-Portrait-736h@3x.png */; };
 		366EAFA31A14C3530011D6C6 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAF8B1A14C3530011D6C6 /* Default@2x.png */; };
-		366EAFA41A14C3530011D6C6 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAF8C1A14C3530011D6C6 /* logo.png */; };
-		366EAFA51A14C3530011D6C6 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAF8D1A14C3530011D6C6 /* logo@2x.png */; };
-		366EAFA61A14C3530011D6C6 /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAF8E1A14C3530011D6C6 /* logo@3x.png */; };
 		366EAFA71A14C3530011D6C6 /* CHECKBOX_EMPTY.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAF8F1A14C3530011D6C6 /* CHECKBOX_EMPTY.png */; };
 		366EAFAA1A14E5370011D6C6 /* playvideo.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAFA81A14E5370011D6C6 /* playvideo.png */; };
 		366EAFAB1A14E5370011D6C6 /* playvideo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAFA91A14E5370011D6C6 /* playvideo@2x.png */; };
@@ -276,6 +276,9 @@
 		200ACE211A3874B200DC7047 /* YahooIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YahooIcon.png; sourceTree = "<group>"; };
 		200ACE221A3874B200DC7047 /* YahooIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YahooIcon@2x.png"; sourceTree = "<group>"; };
 		200ACE231A3874B200DC7047 /* YahooIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YahooIcon@3x.png"; sourceTree = "<group>"; };
+		2063F46A1B611484005EF723 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		2063F46B1B611484005EF723 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
+		2063F46C1B611484005EF723 /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
 		207E6A501B53ECF60067A1B5 /* SingleContactDetailsModal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingleContactDetailsModal.h; sourceTree = "<group>"; };
 		207E6A511B53ED070067A1B5 /* SingleContactDetailsModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleContactDetailsModal.m; sourceTree = "<group>"; };
 		2402BB801A1DBF6A00255A73 /* UntechablesList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UntechablesList.h; path = UntechableListController/UntechablesList.h; sourceTree = "<group>"; };
@@ -418,9 +421,6 @@
 		366EAF891A14C3530011D6C6 /* Default-Landscape-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape-736h@3x.png"; sourceTree = "<group>"; };
 		366EAF8A1A14C3530011D6C6 /* Default-Portrait-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait-736h@3x.png"; sourceTree = "<group>"; };
 		366EAF8B1A14C3530011D6C6 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		366EAF8C1A14C3530011D6C6 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
-		366EAF8D1A14C3530011D6C6 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
-		366EAF8E1A14C3530011D6C6 /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
 		366EAF8F1A14C3530011D6C6 /* CHECKBOX_EMPTY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CHECKBOX_EMPTY.png; sourceTree = "<group>"; };
 		366EAFA81A14E5370011D6C6 /* playvideo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playvideo.png; sourceTree = "<group>"; };
 		366EAFA91A14E5370011D6C6 /* playvideo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playvideo@2x.png"; sourceTree = "<group>"; };
@@ -827,14 +827,14 @@
 		366EAF861A14C3530011D6C6 /* untechablesplashscreensandlogotext */ = {
 			isa = PBXGroup;
 			children = (
+				2063F46A1B611484005EF723 /* logo.png */,
+				2063F46B1B611484005EF723 /* logo@2x.png */,
+				2063F46C1B611484005EF723 /* logo@3x.png */,
 				366EAF881A14C3530011D6C6 /* Default-667h@2x.png */,
 				366EAF871A14C3530011D6C6 /* Default-568h@2x.png */,
 				366EAF891A14C3530011D6C6 /* Default-Landscape-736h@3x.png */,
 				366EAF8A1A14C3530011D6C6 /* Default-Portrait-736h@3x.png */,
 				366EAF8B1A14C3530011D6C6 /* Default@2x.png */,
-				366EAF8C1A14C3530011D6C6 /* logo.png */,
-				366EAF8D1A14C3530011D6C6 /* logo@2x.png */,
-				366EAF8E1A14C3530011D6C6 /* logo@3x.png */,
 			);
 			path = untechablesplashscreensandlogotext;
 			sourceTree = "<group>";
@@ -1274,7 +1274,6 @@
 				36B4E53F1A28BBD400CC18B0 /* EmailTableViewCell.xib in Resources */,
 				36B2767A1A0124E800ED58AD /* record@2x.png in Resources */,
 				24354D6C1A499EC5000EC781 /* ContactsListControllerViewController.xib in Resources */,
-				366EAFA41A14C3530011D6C6 /* logo.png in Resources */,
 				36B2765F1A0124E800ED58AD /* CHECKBOX_FILLED@2x.png in Resources */,
 				24A4B7A81A5126410029C8DF /* CustomTextTableViewCell.xib in Resources */,
 				247C72D51A5C0968005C9693 /* user_img@3x.png in Resources */,
@@ -1310,7 +1309,6 @@
 				C346D1841A7FD13B00856A58 /* facebook@3x.png in Resources */,
 				2448343C1A5D776200E6F173 /* email_selected@3x.png in Resources */,
 				C346D1791A7FD13B00856A58 /* login@3x.png in Resources */,
-				366EAFA51A14C3530011D6C6 /* logo@2x.png in Resources */,
 				366EAF9D1A14C3530011D6C6 /* icon@1024.png in Resources */,
 				36B2767C1A0124E800ED58AD /* right_arrow@2x.png in Resources */,
 				200ACE331A3874B200DC7047 /* YahooIcon.png in Resources */,
@@ -1334,7 +1332,6 @@
 				C33C1EE11A7242970064DBE8 /* FirstTableViewCell-iPhone6-Plus.xib in Resources */,
 				243C59E11A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.xib in Resources */,
 				2486CBA61A5A79AC00AC125E /* sms@2x.png in Resources */,
-				366EAFA61A14C3530011D6C6 /* logo@3x.png in Resources */,
 				36524AF219D940F4006DCAAF /* SocialnetworkController.xib in Resources */,
 				C33C1EEB1A724CFE0064DBE8 /* CustomTextTableViewCell-iPhone6.xib in Resources */,
 				2465A6111B4BE1C400B3E22C /* navigation4_3x.png in Resources */,
@@ -1381,6 +1378,7 @@
 				3681603E19E6B81E00B9B64C /* InviteFriendsCell.xib in Resources */,
 				C36D2E601A791ADA000537C5 /* SettingsCellView-iPhone6.xib in Resources */,
 				C346D1761A7FD13B00856A58 /* logout.png in Resources */,
+				2063F46D1B611484005EF723 /* logo.png in Resources */,
 				2465A60A1B4BE1C400B3E22C /* navigation2_2x.png in Resources */,
 				C33A87B41A7BCDB4000B9DAE /* EmailChangingController.xib in Resources */,
 				C36D2E5E1A7919DC000537C5 /* SettingsViewController.xib in Resources */,
@@ -1412,6 +1410,7 @@
 				2465A60D1B4BE1C400B3E22C /* navigation3_2x.png in Resources */,
 				366EAF9E1A14C3530011D6C6 /* icon@2x.png in Resources */,
 				2486CBB21A5A7B1000AC125E /* phone@2x.png in Resources */,
+				2063F46F1B611484005EF723 /* logo@3x.png in Resources */,
 				2465A60F1B4BE1C400B3E22C /* navigation3.png in Resources */,
 				243C59FF1A4DA17C0020350C /* EmailCell.xib in Resources */,
 				C33C1EF51A727A7B0064DBE8 /* SSLCell-iPhone6-Plus.xib in Resources */,
@@ -1428,6 +1427,7 @@
 				366EAF941A14C3530011D6C6 /* icon-60.png in Resources */,
 				C346D1831A7FD13B00856A58 /* facebook.png in Resources */,
 				24A0EA6E1B42522C0008081A /* SetupGuideFourthView.xib in Resources */,
+				2063F46E1B611484005EF723 /* logo@2x.png in Resources */,
 				C33C1EDB1A72274F0064DBE8 /* EmailTableViewCell-iPhone6.xib in Resources */,
 				2448343D1A5D776200E6F173 /* phone_selected@3x.png in Resources */,
 				200ACE271A3874B200DC7047 /* exchangeIcon.png in Resources */,
