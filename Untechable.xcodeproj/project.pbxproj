@@ -121,7 +121,6 @@
 		36561D8619D2C8A40069D897 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36561D6B19D2C8A40069D897 /* Foundation.framework */; };
 		36561D8719D2C8A40069D897 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36561D6F19D2C8A40069D897 /* UIKit.framework */; };
 		36561D8F19D2C8A40069D897 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36561D8D19D2C8A40069D897 /* InfoPlist.strings */; };
-		36561D9119D2C8A40069D897 /* UntechableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 36561D9019D2C8A40069D897 /* UntechableTests.m */; };
 		3663932519D6A0A700512965 /* CommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3663932419D6A0A700512965 /* CommonFunctions.m */; };
 		366EAF901A14C3530011D6C6 /* icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAF771A14C3530011D6C6 /* icon-40.png */; };
 		366EAF911A14C3530011D6C6 /* icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAF781A14C3530011D6C6 /* icon-40@2x.png */; };
@@ -1563,7 +1562,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				20468BF91B5FCF480019A2D3 /* ContactCustomizeDetailsControlelrViewController.m in Sources */,
-				36561D9119D2C8A40069D897 /* UntechableTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

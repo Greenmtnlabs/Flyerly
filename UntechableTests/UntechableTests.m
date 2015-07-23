@@ -13,10 +13,6 @@
 @interface UntechableTests : XCTestCase{
     SingleContactDetailsModal *singleContactModal;
 }
-
-
-
-
 @end
 
 @implementation UntechableTests
@@ -74,7 +70,7 @@
     XCTAssertEqual([singleContactModal.allEmails[0] count], emails.count, @"Result was not correct!");
 }
 
--(void)testSingleContactModal_checkMethod_checkContacts_YES{
+-(void)testSingleContactModal_checkMethod_hasContacts_YES{
     
     NSString *name = @"Tester";
     singleContactModal.name = name;
@@ -84,13 +80,13 @@
     
     
     BOOL expectedFlag = YES;
-    BOOL estimatedFlag = singleContactModal.checkContacts;
+    BOOL estimatedFlag = singleContactModal.hasContacts;
     
     XCTAssertEqual(expectedFlag, estimatedFlag, @"Result was not correct!");
 }
 
 
--(void)testSingleContactModal_checkMethod_checkContacts_NO{
+-(void)testSingleContactModal_checkMethod_hasContacts_NO{
     
     NSString *name = @"Tester";
     singleContactModal.name = name;
@@ -109,7 +105,7 @@
     [singleContactModal.allEmails addObject:emails];
     
     BOOL expectedFlag = NO;
-    BOOL estimatedFlag = singleContactModal.checkContacts;
+    BOOL estimatedFlag = singleContactModal.hasContacts;
    
     XCTAssertEqual(expectedFlag, estimatedFlag, @"Result was not correct!");
 }

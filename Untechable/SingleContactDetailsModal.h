@@ -14,20 +14,9 @@
 @property (nonatomic,strong)NSMutableArray *allEmails;
 @property (nonatomic,strong)NSMutableArray *allPhoneNumbers;
 
--(BOOL)checkContacts;
 
-/**
- * This is a sample json object for this model
- {
- name: "Rehan"
- allEmails:[
- ["abdul@rauf.com","email status 1/0 in string " ],
- ["abdul@rauf.com","email status 1/0 in string " ]
- ],
- allPhoneNumbers:[
- ["phonenumber123","sms status 1/0 in string ", "call status 1/0" ],
- ["phonenumber123","sms status 1/0 in string ", "call status 1/0" ]
- ]
- }
- */
+
+-(BOOL)hasContacts;
+
+
 @end

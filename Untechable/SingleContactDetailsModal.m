@@ -36,8 +36,8 @@
  * return: BOOL
  */
 
-- (BOOL)checkContacts{
-    return allPhoneNumbers.count==0 && allEmails.count==0 ? YES : NO;
+- (BOOL)hasContacts{
+    return (allPhoneNumbers.count==0 && allEmails.count==0) ? NO : YES;
 }
 
 @end

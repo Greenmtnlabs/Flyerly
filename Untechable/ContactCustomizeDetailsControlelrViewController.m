@@ -493,16 +493,22 @@
         }
     }
     
-    //save selected contact details to Untechable(modal)
-    if(untechable.selectedContacts.count == 0 && !tempContactDetailsModal.checkContacts){
+    /**
+     * This condition makes sure that
+     * any contact without any flag set
+     * should not be saved to
+     * untechable modal
+     */
+    
+    if( untechable.selectedContacts.count == 0 && tempContactDetailsModal.hasContacts ){
         [untechable.selectedContacts addObject:tempContactDetailsModal];
     } else {
-        if(isRepeat){
-            for(int i=0; i<untechable.selectedContacts.count; i++){
-                if([[untechable.selectedContacts[i] valueForKey:@"name"] isEqualToString: tempContactDetailsModal.name] ){
+        if( isRepeat) {
+            for( int i=0; i<untechable.selectedContacts.count; i++ ){
+                if( [[untechable.selectedContacts[i] valueForKey:@"name"] isEqualToString: tempContactDetailsModal.name] ){
                     
-                    // check if there is no contact type (i:e email, phone) set, remove this from contact list
-                    if( tempContactDetailsModal.checkContacts ){
+                    // check if there is no contact type (i.e, email, phone) set, remove this from contact list
+                    if( !tempContactDetailsModal.hasContacts ){
                         [untechable.selectedContacts removeObjectAtIndex:i];
                         isRepeat = NO;
                         break;
