@@ -1259,6 +1259,33 @@
 		C31E92F61B566229004DF193 /* icon75.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C31E92E11B566229004DF193 /* icon75.jpg */; };
 		C31E92F71B566229004DF193 /* icon74.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C31E92E21B566229004DF193 /* icon74.jpg */; };
 		C32139D61A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32139D51A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib */; };
+		C35350941B60CF5D00CF68F9 /* emoticon276zeimusu-Recorder-and-music.png in Resources */ = {isa = PBXBuildFile; fileRef = C35350791B60CF5D00CF68F9 /* emoticon276zeimusu-Recorder-and-music.png */; };
+		C35350951B60CF5D00CF68F9 /* emoticon268purplecar.png in Resources */ = {isa = PBXBuildFile; fileRef = C353507A1B60CF5D00CF68F9 /* emoticon268purplecar.png */; };
+		C35350961B60CF5D00CF68F9 /* emoticon275yellowglass.png in Resources */ = {isa = PBXBuildFile; fileRef = C353507B1B60CF5D00CF68F9 /* emoticon275yellowglass.png */; };
+		C35350971B60CF5D00CF68F9 /* emoticon271silvercar.png in Resources */ = {isa = PBXBuildFile; fileRef = C353507C1B60CF5D00CF68F9 /* emoticon271silvercar.png */; };
+		C35350981B60CF5D00CF68F9 /* emoticon250beer1.png in Resources */ = {isa = PBXBuildFile; fileRef = C353507D1B60CF5D00CF68F9 /* emoticon250beer1.png */; };
+		C35350991B60CF5D00CF68F9 /* emoticon251belarus-folk-dancers.png in Resources */ = {isa = PBXBuildFile; fileRef = C353507E1B60CF5D00CF68F9 /* emoticon251belarus-folk-dancers.png */; };
+		C353509A1B60CF5D00CF68F9 /* emoticon252chinabox.png in Resources */ = {isa = PBXBuildFile; fileRef = C353507F1B60CF5D00CF68F9 /* emoticon252chinabox.png */; };
+		C353509B1B60CF5D00CF68F9 /* emoticon253cocktail-daniel-steele-r.png in Resources */ = {isa = PBXBuildFile; fileRef = C35350801B60CF5D00CF68F9 /* emoticon253cocktail-daniel-steele-r.png */; };
+		C353509C1B60CF5D00CF68F9 /* emoticon255cupcake.png in Resources */ = {isa = PBXBuildFile; fileRef = C35350811B60CF5D00CF68F9 /* emoticon255cupcake.png */; };
+		C353509D1B60CF5D00CF68F9 /* emoticon254cupcake-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C35350821B60CF5D00CF68F9 /* emoticon254cupcake-small.png */; };
+		C353509E1B60CF5D00CF68F9 /* emoticon256dancers-twotone.png in Resources */ = {isa = PBXBuildFile; fileRef = C35350831B60CF5D00CF68F9 /* emoticon256dancers-twotone.png */; };
+		C353509F1B60CF5D00CF68F9 /* emoticon257dstankie-Birthday-cake.png in Resources */ = {isa = PBXBuildFile; fileRef = C35350841B60CF5D00CF68F9 /* emoticon257dstankie-Birthday-cake.png */; };
+		C35350A01B60CF5D00CF68F9 /* emoticon258frenchwinebottle.png in Resources */ = {isa = PBXBuildFile; fileRef = C35350851B60CF5D00CF68F9 /* emoticon258frenchwinebottle.png */; };
+		C35350A11B60CF5D00CF68F9 /* emoticon259Gerald-G-Fast-Food-menu-samples-FF-Menu.png in Resources */ = {isa = PBXBuildFile; fileRef = C35350861B60CF5D00CF68F9 /* emoticon259Gerald-G-Fast-Food-menu-samples-FF-Menu.png */; };
+		C35350A21B60CF5D00CF68F9 /* emoticon260Glamorous-Lady-Dancing--2-by-Merlin2525.png in Resources */ = {isa = PBXBuildFile; fileRef = C35350871B60CF5D00CF68F9 /* emoticon260Glamorous-Lady-Dancing--2-by-Merlin2525.png */; };
+		C35350A31B60CF5D00CF68F9 /* emoticon261JNESS-POLICE-CAR.png in Resources */ = {isa = PBXBuildFile; fileRef = C35350881B60CF5D00CF68F9 /* emoticon261JNESS-POLICE-CAR.png */; };
+		C35350A41B60CF5D00CF68F9 /* emoticon262johnny-automatic-dancing-santa.png in Resources */ = {isa = PBXBuildFile; fileRef = C35350891B60CF5D00CF68F9 /* emoticon262johnny-automatic-dancing-santa.png */; };
+		C35350A51B60CF5D00CF68F9 /* emoticon263kid-jump.png in Resources */ = {isa = PBXBuildFile; fileRef = C353508A1B60CF5D00CF68F9 /* emoticon263kid-jump.png */; };
+		C35350A61B60CF5D00CF68F9 /* emoticon264Machovka-drink.png in Resources */ = {isa = PBXBuildFile; fileRef = C353508B1B60CF5D00CF68F9 /* emoticon264Machovka-drink.png */; };
+		C35350A71B60CF5D00CF68F9 /* emoticon265martini-glass.png in Resources */ = {isa = PBXBuildFile; fileRef = C353508C1B60CF5D00CF68F9 /* emoticon265martini-glass.png */; };
+		C35350A81B60CF5D00CF68F9 /* emoticon266molotov.png in Resources */ = {isa = PBXBuildFile; fileRef = C353508D1B60CF5D00CF68F9 /* emoticon266molotov.png */; };
+		C35350A91B60CF5D00CF68F9 /* emoticon267ossidiana-girl-dancing.png in Resources */ = {isa = PBXBuildFile; fileRef = C353508E1B60CF5D00CF68F9 /* emoticon267ossidiana-girl-dancing.png */; };
+		C35350AA1B60CF5D00CF68F9 /* emoticon269rally-car.png in Resources */ = {isa = PBXBuildFile; fileRef = C353508F1B60CF5D00CF68F9 /* emoticon269rally-car.png */; };
+		C35350AB1B60CF5D00CF68F9 /* emoticon270ryanlerch-Red-Lamborghini.png in Resources */ = {isa = PBXBuildFile; fileRef = C35350901B60CF5D00CF68F9 /* emoticon270ryanlerch-Red-Lamborghini.png */; };
+		C35350AC1B60CF5D00CF68F9 /* emoticon272sweet-kids.png in Resources */ = {isa = PBXBuildFile; fileRef = C35350911B60CF5D00CF68F9 /* emoticon272sweet-kids.png */; };
+		C35350AD1B60CF5D00CF68F9 /* emoticon273TheStructorr-Lamborghini-Gallardo.png in Resources */ = {isa = PBXBuildFile; fileRef = C35350921B60CF5D00CF68F9 /* emoticon273TheStructorr-Lamborghini-Gallardo.png */; };
+		C35350AE1B60CF5D00CF68F9 /* emoticon274wine.png in Resources */ = {isa = PBXBuildFile; fileRef = C35350931B60CF5D00CF68F9 /* emoticon274wine.png */; };
 		C35D49241B3A75370021A0E9 /* save_share_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = C35D49211B3A75370021A0E9 /* save_share_selected.png */; };
 		C35D49251B3A75370021A0E9 /* save_share_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C35D49221B3A75370021A0E9 /* save_share_selected@2x.png */; };
 		C35D49261B3A75370021A0E9 /* save_share_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C35D49231B3A75370021A0E9 /* save_share_selected@3x.png */; };
@@ -2984,6 +3011,33 @@
 		C31E92E11B566229004DF193 /* icon75.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon75.jpg; sourceTree = "<group>"; };
 		C31E92E21B566229004DF193 /* icon74.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon74.jpg; sourceTree = "<group>"; };
 		C32139D51A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CropVideoViewController-iPhone6-Plus.xib"; sourceTree = "<group>"; };
+		C35350791B60CF5D00CF68F9 /* emoticon276zeimusu-Recorder-and-music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon276zeimusu-Recorder-and-music.png"; sourceTree = "<group>"; };
+		C353507A1B60CF5D00CF68F9 /* emoticon268purplecar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoticon268purplecar.png; sourceTree = "<group>"; };
+		C353507B1B60CF5D00CF68F9 /* emoticon275yellowglass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoticon275yellowglass.png; sourceTree = "<group>"; };
+		C353507C1B60CF5D00CF68F9 /* emoticon271silvercar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoticon271silvercar.png; sourceTree = "<group>"; };
+		C353507D1B60CF5D00CF68F9 /* emoticon250beer1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoticon250beer1.png; sourceTree = "<group>"; };
+		C353507E1B60CF5D00CF68F9 /* emoticon251belarus-folk-dancers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon251belarus-folk-dancers.png"; sourceTree = "<group>"; };
+		C353507F1B60CF5D00CF68F9 /* emoticon252chinabox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoticon252chinabox.png; sourceTree = "<group>"; };
+		C35350801B60CF5D00CF68F9 /* emoticon253cocktail-daniel-steele-r.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon253cocktail-daniel-steele-r.png"; sourceTree = "<group>"; };
+		C35350811B60CF5D00CF68F9 /* emoticon255cupcake.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoticon255cupcake.png; sourceTree = "<group>"; };
+		C35350821B60CF5D00CF68F9 /* emoticon254cupcake-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon254cupcake-small.png"; sourceTree = "<group>"; };
+		C35350831B60CF5D00CF68F9 /* emoticon256dancers-twotone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon256dancers-twotone.png"; sourceTree = "<group>"; };
+		C35350841B60CF5D00CF68F9 /* emoticon257dstankie-Birthday-cake.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon257dstankie-Birthday-cake.png"; sourceTree = "<group>"; };
+		C35350851B60CF5D00CF68F9 /* emoticon258frenchwinebottle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoticon258frenchwinebottle.png; sourceTree = "<group>"; };
+		C35350861B60CF5D00CF68F9 /* emoticon259Gerald-G-Fast-Food-menu-samples-FF-Menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon259Gerald-G-Fast-Food-menu-samples-FF-Menu.png"; sourceTree = "<group>"; };
+		C35350871B60CF5D00CF68F9 /* emoticon260Glamorous-Lady-Dancing--2-by-Merlin2525.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon260Glamorous-Lady-Dancing--2-by-Merlin2525.png"; sourceTree = "<group>"; };
+		C35350881B60CF5D00CF68F9 /* emoticon261JNESS-POLICE-CAR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon261JNESS-POLICE-CAR.png"; sourceTree = "<group>"; };
+		C35350891B60CF5D00CF68F9 /* emoticon262johnny-automatic-dancing-santa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon262johnny-automatic-dancing-santa.png"; sourceTree = "<group>"; };
+		C353508A1B60CF5D00CF68F9 /* emoticon263kid-jump.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon263kid-jump.png"; sourceTree = "<group>"; };
+		C353508B1B60CF5D00CF68F9 /* emoticon264Machovka-drink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon264Machovka-drink.png"; sourceTree = "<group>"; };
+		C353508C1B60CF5D00CF68F9 /* emoticon265martini-glass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon265martini-glass.png"; sourceTree = "<group>"; };
+		C353508D1B60CF5D00CF68F9 /* emoticon266molotov.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoticon266molotov.png; sourceTree = "<group>"; };
+		C353508E1B60CF5D00CF68F9 /* emoticon267ossidiana-girl-dancing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon267ossidiana-girl-dancing.png"; sourceTree = "<group>"; };
+		C353508F1B60CF5D00CF68F9 /* emoticon269rally-car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon269rally-car.png"; sourceTree = "<group>"; };
+		C35350901B60CF5D00CF68F9 /* emoticon270ryanlerch-Red-Lamborghini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon270ryanlerch-Red-Lamborghini.png"; sourceTree = "<group>"; };
+		C35350911B60CF5D00CF68F9 /* emoticon272sweet-kids.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon272sweet-kids.png"; sourceTree = "<group>"; };
+		C35350921B60CF5D00CF68F9 /* emoticon273TheStructorr-Lamborghini-Gallardo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon273TheStructorr-Lamborghini-Gallardo.png"; sourceTree = "<group>"; };
+		C35350931B60CF5D00CF68F9 /* emoticon274wine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoticon274wine.png; sourceTree = "<group>"; };
 		C35D49211B3A75370021A0E9 /* save_share_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save_share_selected.png; sourceTree = "<group>"; };
 		C35D49221B3A75370021A0E9 /* save_share_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save_share_selected@2x.png"; sourceTree = "<group>"; };
 		C35D49231B3A75370021A0E9 /* save_share_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save_share_selected@3x.png"; sourceTree = "<group>"; };
@@ -4499,6 +4553,33 @@
 		246EF477193C515D004539B2 /* Emoticons */ = {
 			isa = PBXGroup;
 			children = (
+				C35350791B60CF5D00CF68F9 /* emoticon276zeimusu-Recorder-and-music.png */,
+				C353507A1B60CF5D00CF68F9 /* emoticon268purplecar.png */,
+				C353507B1B60CF5D00CF68F9 /* emoticon275yellowglass.png */,
+				C353507C1B60CF5D00CF68F9 /* emoticon271silvercar.png */,
+				C353507D1B60CF5D00CF68F9 /* emoticon250beer1.png */,
+				C353507E1B60CF5D00CF68F9 /* emoticon251belarus-folk-dancers.png */,
+				C353507F1B60CF5D00CF68F9 /* emoticon252chinabox.png */,
+				C35350801B60CF5D00CF68F9 /* emoticon253cocktail-daniel-steele-r.png */,
+				C35350811B60CF5D00CF68F9 /* emoticon255cupcake.png */,
+				C35350821B60CF5D00CF68F9 /* emoticon254cupcake-small.png */,
+				C35350831B60CF5D00CF68F9 /* emoticon256dancers-twotone.png */,
+				C35350841B60CF5D00CF68F9 /* emoticon257dstankie-Birthday-cake.png */,
+				C35350851B60CF5D00CF68F9 /* emoticon258frenchwinebottle.png */,
+				C35350861B60CF5D00CF68F9 /* emoticon259Gerald-G-Fast-Food-menu-samples-FF-Menu.png */,
+				C35350871B60CF5D00CF68F9 /* emoticon260Glamorous-Lady-Dancing--2-by-Merlin2525.png */,
+				C35350881B60CF5D00CF68F9 /* emoticon261JNESS-POLICE-CAR.png */,
+				C35350891B60CF5D00CF68F9 /* emoticon262johnny-automatic-dancing-santa.png */,
+				C353508A1B60CF5D00CF68F9 /* emoticon263kid-jump.png */,
+				C353508B1B60CF5D00CF68F9 /* emoticon264Machovka-drink.png */,
+				C353508C1B60CF5D00CF68F9 /* emoticon265martini-glass.png */,
+				C353508D1B60CF5D00CF68F9 /* emoticon266molotov.png */,
+				C353508E1B60CF5D00CF68F9 /* emoticon267ossidiana-girl-dancing.png */,
+				C353508F1B60CF5D00CF68F9 /* emoticon269rally-car.png */,
+				C35350901B60CF5D00CF68F9 /* emoticon270ryanlerch-Red-Lamborghini.png */,
+				C35350911B60CF5D00CF68F9 /* emoticon272sweet-kids.png */,
+				C35350921B60CF5D00CF68F9 /* emoticon273TheStructorr-Lamborghini-Gallardo.png */,
+				C35350931B60CF5D00CF68F9 /* emoticon274wine.png */,
 				202978261B4CFBE500F35E40 /* emoticon184-adore@2x.png */,
 				202978271B4CFBE500F35E40 /* emoticon185-Adore1@2x.png */,
 				202978281B4CFBE500F35E40 /* emoticon186-after_boom@2x.png */,
@@ -5654,6 +5735,7 @@
 				202978761B4CFBE700F35E40 /* emoticon195-beated@2x.png in Resources */,
 				243AA72019DE8136004A5613 /* README.txt in Resources */,
 				249F2041193F562C0072835E /* save_bg@2x.png in Resources */,
+				C353509F1B60CF5D00CF68F9 /* emoticon257dstankie-Birthday-cake.png in Resources */,
 				C3766D031B5650B000B7F5B2 /* Template71.jpg in Resources */,
 				C3766D561B56510200B7F5B2 /* icon10.jpeg in Resources */,
 				247858D6194878080062F1E4 /* OpenSans-Regular.ttf in Resources */,
@@ -5668,6 +5750,7 @@
 				C3766CE51B5650B000B7F5B2 /* Template41.jpg in Resources */,
 				242184FF194B4AEC00FDDA97 /* sunglasses-icon.png in Resources */,
 				242184EC194B4AEC00FDDA97 /* pentathlon-icon.png in Resources */,
+				C35350A41B60CF5D00CF68F9 /* emoticon262johnny-automatic-dancing-santa.png in Resources */,
 				C3766CE81B5650B000B7F5B2 /* Template44.jpg in Resources */,
 				2421849F194B4AEC00FDDA97 /* emoticon144@2x.png in Resources */,
 				246EF50F193C515D004539B2 /* emoticon49@2x.png in Resources */,
@@ -5676,6 +5759,7 @@
 				24218460194B4AEC00FDDA97 /* Ballet-icon.png in Resources */,
 				242184F3194B4AEC00FDDA97 /* Sailing-icon (1).png in Resources */,
 				2029786E1B4CFBE700F35E40 /* emoticon187-ah@2x.png in Resources */,
+				C35350991B60CF5D00CF68F9 /* emoticon251belarus-folk-dancers.png in Resources */,
 				249F203B193F562C0072835E /* privacy_icon@2x.png in Resources */,
 				C3766CA71B5650B000B7F5B2 /* Template93.jpg in Resources */,
 				C3766CB81B5650B000B7F5B2 /* Template75.jpg in Resources */,
@@ -5712,6 +5796,7 @@
 				249F1F9C193F55D50072835E /* app_store_selected@2x.png in Resources */,
 				242184D1194B4AEC00FDDA97 /* flippers-icon.png in Resources */,
 				249F1FA6193F55D50072835E /* camera_grid@2x.png in Resources */,
+				C35350A81B60CF5D00CF68F9 /* emoticon266molotov.png in Resources */,
 				24861EC119F9147100670F6D /* app_store@3x.png in Resources */,
 				C31E92C81B566207004DF193 /* bicon5.png in Resources */,
 				C3766CC11B5650B000B7F5B2 /* Template5.jpg in Resources */,
@@ -5742,6 +5827,7 @@
 				24F130BF1A0D0CA500464587 /* Sizes-iPhone6.xib in Resources */,
 				247858D8194878080062F1E4 /* PaihuenMapuche-Regular.ttf in Resources */,
 				24861F2F19F9147100670F6D /* password_box@3x.png in Resources */,
+				C353509E1B60CF5D00CF68F9 /* emoticon256dancers-twotone.png in Resources */,
 				247858B3194875D20062F1E4 /* Homizio-Regular.ttf in Resources */,
 				2471593419408E5F00B30301 /* flickr_share_saved@2x.png in Resources */,
 				C3766D5F1B56510200B7F5B2 /* icon19.jpg in Resources */,
@@ -5777,6 +5863,7 @@
 				20B099351AC58D1900F19836 /* send@2x.png in Resources */,
 				24861F3019F9147100670F6D /* password_email_icon@3x.png in Resources */,
 				24861F3E19F9147100670F6D /* save_bg@3x.png in Resources */,
+				C35350A61B60CF5D00CF68F9 /* emoticon264Machovka-drink.png in Resources */,
 				247858CA1948764D0062F1E4 /* Manteka-Regular.ttf in Resources */,
 				24861EBF19F9147100670F6D /* afterupdatescreen_bg@3x.png in Resources */,
 				24861F0D19F9147100670F6D /* help_img@3x.png in Resources */,
@@ -5786,6 +5873,7 @@
 				2029789C1B4CFBE700F35E40 /* emoticon233-Pudently@2x.png in Resources */,
 				246EF4E2193C515D004539B2 /* emoticon102@2x.png in Resources */,
 				2029789E1B4CFBE700F35E40 /* emoticon235-sad@2x.png in Resources */,
+				C35350AB1B60CF5D00CF68F9 /* emoticon270ryanlerch-Red-Lamborghini.png in Resources */,
 				24861EB219F9147100670F6D /* 07_roll@3x.png in Resources */,
 				C3766CFA1B5650B000B7F5B2 /* Template62.jpg in Resources */,
 				24218509194B4AEC00FDDA97 /* trophy-ball-icon.png in Resources */,
@@ -5905,6 +5993,7 @@
 				246EF505193C515D004539B2 /* emoticon3@2x.png in Resources */,
 				24751A701938A52800DF03B2 /* video_tab@2x.png in Resources */,
 				2421845C194B4AEC00FDDA97 /* ball-football-camp-icon.png in Resources */,
+				C35350971B60CF5D00CF68F9 /* emoticon271silvercar.png in Resources */,
 				24861F2A19F9147100670F6D /* new_grid_line@3x.png in Resources */,
 				242184A3194B4AEC00FDDA97 /* emoticon148@2x.png in Resources */,
 				24861EB619F9147100670F6D /* account_settings@3x.png in Resources */,
@@ -5916,6 +6005,7 @@
 				246EF50C193C515D004539B2 /* emoticon46@2x.png in Resources */,
 				2421849C194B4AEC00FDDA97 /* emoticon141@2x.png in Resources */,
 				24861EFE19F9147100670F6D /* facebook@3x.png in Resources */,
+				C35350A01B60CF5D00CF68F9 /* emoticon258frenchwinebottle.png in Resources */,
 				24861F1819F9147100670F6D /* invite_facebook@3x.png in Resources */,
 				246EF526193C515D004539B2 /* emoticon6@2x.png in Resources */,
 				24861ED819F9147100670F6D /* close_button@3x.png in Resources */,
@@ -5997,6 +6087,7 @@
 				C3766CC41B5650B000B7F5B2 /* Template8.jpg in Resources */,
 				24861EEE19F9147100670F6D /* drawing_tab_selected@3x.png in Resources */,
 				247858891948736B0062F1E4 /* AMBROSIA_DEMO-Regular.ttf in Resources */,
+				C35350A71B60CF5D00CF68F9 /* emoticon265martini-glass.png in Resources */,
 				654B255017202B1C0047C8F6 /* AfterUpdateController.xib in Resources */,
 				242184C5194B4AEC00FDDA97 /* emoticon183@2x.png in Resources */,
 				C3766CD21B5650B000B7F5B2 /* Template22.jpg in Resources */,
@@ -6094,6 +6185,7 @@
 				65A464F31726CBA2002C32FB /* Signika-Regular.otf in Resources */,
 				C3766D781B56510200B7F5B2 /* icon44.jpg in Resources */,
 				24861F3B19F9147100670F6D /* public_on@3x.png in Resources */,
+				C35350951B60CF5D00CF68F9 /* emoticon268purplecar.png in Resources */,
 				24861F5819F9147100670F6D /* text_icon@3x.png in Resources */,
 				24218491194B4AEC00FDDA97 /* emoticon130@2x.png in Resources */,
 				65A464F41726CBA2002C32FB /* Signika-Semibold.otf in Resources */,
@@ -6106,6 +6198,7 @@
 				2421847B194B4AEC00FDDA97 /* emoticon108@2x.png in Resources */,
 				24218505194B4AEC00FDDA97 /* taekwondo-icon.png in Resources */,
 				24861F6919F9147100670F6D /* video_tab@3x.png in Resources */,
+				C35350A21B60CF5D00CF68F9 /* emoticon260Glamorous-Lady-Dancing--2-by-Merlin2525.png in Resources */,
 				242184AA194B4AEC00FDDA97 /* emoticon156@2x.png in Resources */,
 				65A464FD1726D703002C32FB /* HelveticaRoundedLTStd-BdCn_0.otf in Resources */,
 				249F2056193F562C0072835E /* text_edit_selected@2x.png in Resources */,
@@ -6126,6 +6219,7 @@
 				C3766D8D1B56510200B7F5B2 /* icon65.jpg in Resources */,
 				24218464194B4AEC00FDDA97 /* beach-chair-icon.png in Resources */,
 				243FCF1919DD75C3003661EF /* watermark.png in Resources */,
+				C353509A1B60CF5D00CF68F9 /* emoticon252chinabox.png in Resources */,
 				246EF517193C515D004539B2 /* emoticon56@2x.png in Resources */,
 				249F2060193F562C0072835E /* youtube_share_selected@2x.png in Resources */,
 				246EF4FE193C515D004539B2 /* emoticon33@2x.png in Resources */,
@@ -6185,6 +6279,7 @@
 				C32139D61A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib in Resources */,
 				2421849A194B4AEC00FDDA97 /* emoticon139@2x.png in Resources */,
 				202978AE1B4CFBE700F35E40 /* emoticon198-waaaht@2x.png in Resources */,
+				C35350AA1B60CF5D00CF68F9 /* emoticon269rally-car.png in Resources */,
 				249F1FA7193F55D50072835E /* cell_bg_first@2x.png in Resources */,
 				36A93F3719AE243D00D0A810 /* line_dotted@2x.png in Resources */,
 				246EF545193C515D004539B2 /* emoticon98@2x.png in Resources */,
@@ -6223,6 +6318,7 @@
 				C3766D691B56510200B7F5B2 /* icon29.jpg in Resources */,
 				24861EF319F9147100670F6D /* email_setting_selected@3x.png in Resources */,
 				24861ECB19F9147100670F6D /* camera_button@3x.png in Resources */,
+				C35350A11B60CF5D00CF68F9 /* emoticon259Gerald-G-Fast-Food-menu-samples-FF-Menu.png in Resources */,
 				24861EFB19F9147100670F6D /* facebook_share_saved@3x.png in Resources */,
 				C3766C441B564D7C00B7F5B2 /* icon0.jpeg in Resources */,
 				2471593819408E5F00B30301 /* invite_facebook@2x.png in Resources */,
@@ -6234,6 +6330,7 @@
 				C31E92E31B566229004DF193 /* icon76.jpg in Resources */,
 				24861F1519F9147100670F6D /* instagram_share@3x.png in Resources */,
 				242184DD194B4AEC00FDDA97 /* gymnastics-trampoline-icon.png in Resources */,
+				C35350941B60CF5D00CF68F9 /* emoticon276zeimusu-Recorder-and-music.png in Resources */,
 				2098BDBA1AB2FEC300CDE1A4 /* tnc@2x.png in Resources */,
 				24861EB119F9147100670F6D /* 07_roll_selected@3x.png in Resources */,
 				246EF51C193C515D004539B2 /* emoticon60@2x.png in Resources */,
@@ -6341,7 +6438,9 @@
 				242184DE194B4AEC00FDDA97 /* handball-icon.png in Resources */,
 				24861EDB19F9147100670F6D /* color_button@3x.png in Resources */,
 				24218482194B4AEC00FDDA97 /* emoticon115@2x.png in Resources */,
+				C353509D1B60CF5D00CF68F9 /* emoticon254cupcake-small.png in Resources */,
 				24218487194B4AEC00FDDA97 /* emoticon120@2x.png in Resources */,
+				C35350981B60CF5D00CF68F9 /* emoticon250beer1.png in Resources */,
 				24861F0719F9147100670F6D /* font_button_selected@3x.png in Resources */,
 				242184EB194B4AEC00FDDA97 /* pearl-icon.png in Resources */,
 				246EF516193C515D004539B2 /* emoticon55@2x.png in Resources */,
@@ -6410,6 +6509,7 @@
 				36A93F3819AE243D00D0A810 /* line_plane@2x.png in Resources */,
 				2478589A194874B70062F1E4 /* circula-medium.otf in Resources */,
 				49F109D2192C7926002B0CD4 /* CropVideoViewController.xib in Resources */,
+				C353509B1B60CF5D00CF68F9 /* emoticon253cocktail-daniel-steele-r.png in Resources */,
 				2479BC671941FB9400FF5FF5 /* TextBorders.xib in Resources */,
 				24597CDE1A120E5B00CE1061 /* FreeFeatureCell-iPhone6.xib in Resources */,
 				249F201E193F562C0072835E /* flickr_share_selected@2x.png in Resources */,
@@ -6479,6 +6579,7 @@
 				0F8007EA175378F0000FF7FA /* ricon17.png in Resources */,
 				0F8007EC175378F0000FF7FA /* ricon18.png in Resources */,
 				202D78141962BAAE00D54F3B /* facebook_share_saved@2x.png in Resources */,
+				C35350961B60CF5D00CF68F9 /* emoticon275yellowglass.png in Resources */,
 				249F1FD1193F55E90072835E /* fb_setting_selected@2x.png in Resources */,
 				0F8007EE175378F0000FF7FA /* ricon19.png in Resources */,
 				242184E6194B4AEC00FDDA97 /* mask-icon.png in Resources */,
@@ -6662,6 +6763,8 @@
 				202C63A417EA06E800CB9A75 /* ricon38.png in Resources */,
 				202C63A617EA06E800CB9A75 /* ricon39.png in Resources */,
 				202C63A817EA06E800CB9A75 /* ricon40.png in Resources */,
+				C35350A31B60CF5D00CF68F9 /* emoticon261JNESS-POLICE-CAR.png in Resources */,
+				C35350AC1B60CF5D00CF68F9 /* emoticon272sweet-kids.png in Resources */,
 				242184A0194B4AEC00FDDA97 /* emoticon145@2x.png in Resources */,
 				249F214B193F615F0072835E /* Zmain_screenbg.png in Resources */,
 				246EF53F193C515D004539B2 /* emoticon92@2x.png in Resources */,
@@ -6730,6 +6833,7 @@
 				249F1FC7193F55E90072835E /* email_setting_selected@2x.png in Resources */,
 				C3766D851B56510200B7F5B2 /* icon57.jpg in Resources */,
 				2029788C1B4CFBE700F35E40 /* emoticon217-Furious@2x.png in Resources */,
+				C35350AE1B60CF5D00CF68F9 /* emoticon274wine.png in Resources */,
 				242184D3194B4AEC00FDDA97 /* folder-icon.png in Resources */,
 				249F205D193F562C0072835E /* twitter_share@2x.png in Resources */,
 				249F2058193F562C0072835E /* text_icon@2x.png in Resources */,
@@ -6834,6 +6938,7 @@
 				202C641217EA06E800CB9A75 /* ricon93.png in Resources */,
 				24861EC919F9147100670F6D /* buy@3x.png in Resources */,
 				242184A8194B4AEC00FDDA97 /* emoticon154@2x.png in Resources */,
+				C35350AD1B60CF5D00CF68F9 /* emoticon273TheStructorr-Lamborghini-Gallardo.png in Resources */,
 				24861EF819F9147100670F6D /* emoticons_tab_selected@3x.png in Resources */,
 				24218493194B4AEC00FDDA97 /* emoticon132@2x.png in Resources */,
 				24861F6319F9147100670F6D /* twt_follow@3x.png in Resources */,
@@ -6859,6 +6964,7 @@
 				248A362D193F221E0005FCAD /* clipart_tab_selected@2x.png in Resources */,
 				C3766D631B56510200B7F5B2 /* icon23.jpg in Resources */,
 				24785890194873E60062F1E4 /* Aurora-Regular.ttf in Resources */,
+				C35350A51B60CF5D00CF68F9 /* emoticon263kid-jump.png in Resources */,
 				24218508194B4AEC00FDDA97 /* triathlon-icon.png in Resources */,
 				246EF4E5193C515D004539B2 /* emoticon10@2x.png in Resources */,
 				249F1FAF193F55D50072835E /* color_button_selected@2x.png in Resources */,
@@ -6923,8 +7029,10 @@
 				249F1F93193F55D50072835E /* addbg_border_selected@2x.png in Resources */,
 				C3766D8E1B56510200B7F5B2 /* icon66.jpg in Resources */,
 				C31E92CA1B566207004DF193 /* bicon7.png in Resources */,
+				C35350A91B60CF5D00CF68F9 /* emoticon267ossidiana-girl-dancing.png in Resources */,
 				246EF537193C515D004539B2 /* emoticon85@2x.png in Resources */,
 				2471593619408E5F00B30301 /* instagram_share_saved@2x.png in Resources */,
+				C353509C1B60CF5D00CF68F9 /* emoticon255cupcake.png in Resources */,
 				24218499194B4AEC00FDDA97 /* emoticon138@2x.png in Resources */,
 				2029789D1B4CFBE700F35E40 /* emoticon234-rap@2x.png in Resources */,
 				C3D8DD961B53DBE1006C2A9F /* b14.png in Resources */,
