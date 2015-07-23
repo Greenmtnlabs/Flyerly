@@ -16,6 +16,9 @@
     
 }
 
+//Array of selected contacts for Untechable
+@property (strong, nonatomic) NSMutableArray *selectedContacts;
+
 
 //Settings
 @property (strong, nonatomic) CommonFunctions *commonFunctions;

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0AE41DD6C3E9B8B3C8E56DAE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC11B82CE184AE8B063B3995 /* libPods.a */; };
 		200ACE241A3874B200DC7047 /* aolIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE121A3874B200DC7047 /* aolIcon.png */; };
 		200ACE251A3874B200DC7047 /* aolIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE131A3874B200DC7047 /* aolIcon@2x.png */; };
 		200ACE261A3874B200DC7047 /* aolIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE141A3874B200DC7047 /* aolIcon@3x.png */; };
@@ -25,6 +26,8 @@
 		200ACE331A3874B200DC7047 /* YahooIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE211A3874B200DC7047 /* YahooIcon.png */; };
 		200ACE341A3874B200DC7047 /* YahooIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE221A3874B200DC7047 /* YahooIcon@2x.png */; };
 		200ACE351A3874B200DC7047 /* YahooIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE231A3874B200DC7047 /* YahooIcon@3x.png */; };
+		20468BF91B5FCF480019A2D3 /* ContactCustomizeDetailsControlelrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 243C59DE1A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.m */; };
+		207E6A521B53ED070067A1B5 /* SingleContactDetailsModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 207E6A511B53ED070067A1B5 /* SingleContactDetailsModal.m */; };
 		2402BB831A1DBF6A00255A73 /* UntechablesList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402BB811A1DBF6A00255A73 /* UntechablesList.m */; };
 		2402BB841A1DBF6A00255A73 /* UntechablesList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2402BB821A1DBF6A00255A73 /* UntechablesList.xib */; };
 		2402BB881A1DC3A200255A73 /* UntechableTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402BB861A1DC3A200255A73 /* UntechableTableCell.m */; };
@@ -118,7 +121,6 @@
 		36561D8619D2C8A40069D897 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36561D6B19D2C8A40069D897 /* Foundation.framework */; };
 		36561D8719D2C8A40069D897 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36561D6F19D2C8A40069D897 /* UIKit.framework */; };
 		36561D8F19D2C8A40069D897 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36561D8D19D2C8A40069D897 /* InfoPlist.strings */; };
-		36561D9119D2C8A40069D897 /* UntechableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 36561D9019D2C8A40069D897 /* UntechableTests.m */; };
 		3663932519D6A0A700512965 /* CommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3663932419D6A0A700512965 /* CommonFunctions.m */; };
 		366EAF901A14C3530011D6C6 /* icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAF771A14C3530011D6C6 /* icon-40.png */; };
 		366EAF911A14C3530011D6C6 /* icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAF781A14C3530011D6C6 /* icon-40@2x.png */; };
@@ -274,6 +276,8 @@
 		200ACE211A3874B200DC7047 /* YahooIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YahooIcon.png; sourceTree = "<group>"; };
 		200ACE221A3874B200DC7047 /* YahooIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YahooIcon@2x.png"; sourceTree = "<group>"; };
 		200ACE231A3874B200DC7047 /* YahooIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YahooIcon@3x.png"; sourceTree = "<group>"; };
+		207E6A501B53ECF60067A1B5 /* SingleContactDetailsModal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingleContactDetailsModal.h; sourceTree = "<group>"; };
+		207E6A511B53ED070067A1B5 /* SingleContactDetailsModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleContactDetailsModal.m; sourceTree = "<group>"; };
 		2402BB801A1DBF6A00255A73 /* UntechablesList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UntechablesList.h; path = UntechableListController/UntechablesList.h; sourceTree = "<group>"; };
 		2402BB811A1DBF6A00255A73 /* UntechablesList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UntechablesList.m; path = UntechableListController/UntechablesList.m; sourceTree = "<group>"; };
 		2402BB821A1DBF6A00255A73 /* UntechablesList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UntechablesList.xib; path = UntechableListController/UntechablesList.xib; sourceTree = "<group>"; };
@@ -568,12 +572,22 @@
 				36561D8519D2C8A40069D897 /* XCTest.framework in Frameworks */,
 				36561D8719D2C8A40069D897 /* UIKit.framework in Frameworks */,
 				36561D8619D2C8A40069D897 /* Foundation.framework in Frameworks */,
+				0AE41DD6C3E9B8B3C8E56DAE /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		207E6A4F1B53ECAB0067A1B5 /* SingleContactDetailsModal */ = {
+			isa = PBXGroup;
+			children = (
+				207E6A501B53ECF60067A1B5 /* SingleContactDetailsModal.h */,
+				207E6A511B53ED070067A1B5 /* SingleContactDetailsModal.m */,
+			);
+			name = SingleContactDetailsModal;
+			sourceTree = "<group>";
+		};
 		2402BB7F1A1DBEF800255A73 /* UntechableListController */ = {
 			isa = PBXGroup;
 			children = (
@@ -590,6 +604,7 @@
 		24354D671A499D93000EC781 /* ContactsListController */ = {
 			isa = PBXGroup;
 			children = (
+				207E6A4F1B53ECAB0067A1B5 /* SingleContactDetailsModal */,
 				243C59DC1A4D3A530020350C /* ContactCustomizeDetailsControlelr */,
 				248E06B41A4ACD350099846A /* ContactsCustomizedModal */,
 				24354D681A499EC5000EC781 /* ContactsListControllerViewController.h */,
@@ -1164,9 +1179,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 36561D9719D2C8A40069D897 /* Build configuration list for PBXNativeTarget "UntechableTests" */;
 			buildPhases = (
+				469E57A53390F5F784B4B94A /* Check Pods Manifest.lock */,
 				36561D7F19D2C8A40069D897 /* Sources */,
 				36561D8019D2C8A40069D897 /* Frameworks */,
 				36561D8119D2C8A40069D897 /* Resources */,
+				01E9D72E80B7B449AA1107D9 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1429,6 +1446,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		01E9D72E80B7B449AA1107D9 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		453E9082471B3D2E3B943517 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1442,6 +1474,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		469E57A53390F5F784B4B94A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		C25A91D3676EC682EAEA5C2E /* Check Pods Manifest.lock */ = {
@@ -1469,6 +1516,7 @@
 				C36D2E5D1A7919DC000537C5 /* SettingsViewController.m in Sources */,
 				36BB7B8919FFD98C00562069 /* ThankyouController.m in Sources */,
 				243C59F41A4D753C0020350C /* FirstTableViewCell.m in Sources */,
+				207E6A521B53ED070067A1B5 /* SingleContactDetailsModal.m in Sources */,
 				366ECD9619D323DA00F71A11 /* AddUntechableController.m in Sources */,
 				36B4E53E1A28BBD400CC18B0 /* EmailTableViewCell.m in Sources */,
 				36B275D71A00D36400ED58AD /* RMStore.m in Sources */,
@@ -1513,7 +1561,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36561D9119D2C8A40069D897 /* UntechableTests.m in Sources */,
+				20468BF91B5FCF480019A2D3 /* ContactCustomizeDetailsControlelrViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1597,7 +1645,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "d47ad45a-8978-43b1-aea9-4efac12eb4a6";
+				PROVISIONING_PROFILE = "8574bbea-baf8-46b5-bbbd-daa3f60313c7";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1649,7 +1697,7 @@
 				INFOPLIST_FILE = "Untechable/Untechable-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d47ad45a-8978-43b1-aea9-4efac12eb4a6";
+				PROVISIONING_PROFILE = "8574bbea-baf8-46b5-bbbd-daa3f60313c7";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1675,6 +1723,7 @@
 		};
 		36561D9819D2C8A40069D897 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 72C191FD26DBEFE2614E002A /* Pods.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Untechable.app/Untechable";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1700,6 +1749,7 @@
 		};
 		36561D9919D2C8A40069D897 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A7C0CDC4AAAC5466484B8C12 /* Pods.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Untechable.app/Untechable";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
