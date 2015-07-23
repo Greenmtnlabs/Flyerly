@@ -2267,13 +2267,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [flyer setFlyerTypeImage];
                 
                 //Getting Image Path
-                NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"Template%d",view.tag]];
+                NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"Template%d",(int)view.tag]];
                 
-                //set template Image
+                //set template Image on view
                 [self.flyimgView setTemplate:imgPath];
                 
-                //Set Image Tag
-                [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",view.tag]];
+                //Set Image Tag in dictionary
+                [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",(int)view.tag]];
                 
             }
             
