@@ -12,6 +12,7 @@
 #import "EmailCell.h"
 #import "CustomTextTableViewCell.h"
 #import "Common.h"
+#import "SingleContactDetailsModal.h"
 
 @interface ContactCustomizeDetailsControlelrViewController (){
     
@@ -22,7 +23,7 @@
     BOOL IsCustomized;
     NSMutableDictionary *editingEmailsWithStatus;
     NSMutableDictionary *editingPhonesWithStatus;
-    
+    BOOL isRepeat;
 }
 @property (weak, nonatomic) IBOutlet UITableView *contactDetailsTable;
 
@@ -30,11 +31,10 @@
 
 @implementation ContactCustomizeDetailsControlelrViewController
 
-@synthesize contactModal,untechable,allEmails,allPhoneNumbers,customTextForContact,customizedContactsDictionary,contactListController;
+@synthesize contactModal,untechable,allEmails,allPhoneNumbers,customTextForContact,customizedContactsDictionary,contactListController,tempContactDetailsModal;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
     
@@ -45,6 +45,9 @@
     
     editingEmailsWithStatus = [[NSMutableDictionary alloc] init];
     editingPhonesWithStatus = [[NSMutableDictionary alloc] init];
+
+    tempContactDetailsModal = [[SingleContactDetailsModal alloc] init];
+    
     for ( int i = 0; i<contactModal.allPhoneNumbers.count; i++ ){
         NSMutableArray * phoneWithStatus = [[NSMutableArray alloc] initWithArray:[contactModal.allPhoneNumbers objectAtIndex:i]];
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:2];
@@ -57,11 +60,39 @@
         [editingEmailsWithStatus setObject:emailWithStatus forKey:indexPath];
     }
     
-    
-    
     if( contactModal.IsCustomized ){
         IsCustomized = YES;
     }
+    
+    // assign tempContactDetailsModal the name of contact
+    tempContactDetailsModal.name = contactModal.name;
+    
+    /**
+     * After matching the current contact name
+     * with the name in untechable.selectedContacts,
+     * the condition below assigns
+     * running model (i.e. tempContactDetailsModal)
+     * the values in Untechable model (i.e. untechable.selectedContacts).
+     * This is done so that changes (i.e. update, delete etc) can be made
+     * on the running model (i.e. tempContactDetailsModal).
+     */
+    
+    if(untechable.selectedContacts.count != 0){
+        for(int i=0; i<untechable.selectedContacts.count; i++){
+            if([[untechable.selectedContacts[i] valueForKey:@"name"] isEqualToString: tempContactDetailsModal.name] ){
+                NSMutableArray *allPh = [untechable.selectedContacts[i] valueForKey:@"allPhoneNumbers"];
+                NSMutableArray *allEmail = [untechable.selectedContacts[i] valueForKey:@"allEmails"];
+                for(int j=0; j<allPh.count;j++) {
+                    [tempContactDetailsModal.allPhoneNumbers addObject: allPh[j]];
+                }
+                for(int k=0; k<allEmail.count;k++) {
+                    [tempContactDetailsModal.allEmails addObject: allEmail[k]];
+                }
+                break;
+            }
+        }
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -339,7 +370,7 @@
 -(void) save{
     
     [textView resignFirstResponder];
-    
+    isRepeat = YES;
     CustomTextTableViewCell *customeTextCell;
     CGPoint buttonPosition = [textView convertPoint:CGPointZero toView:self.contactDetailsTable];
     NSIndexPath *indexPath = [self.contactDetailsTable indexPathForRowAtPoint:buttonPosition];
@@ -470,12 +501,45 @@
             [contactListController.currentlyEditingContacts addObject:contactModal];
         }
     }
- 
+    
+    /**
+     * This condition makes sure that
+     * any contact without any flag set
+     * should not be saved to
+     * untechable modal
+     */
+    
+    if( untechable.selectedContacts.count == 0 && tempContactDetailsModal.hasContacts ){
+        [untechable.selectedContacts addObject:tempContactDetailsModal];
+    } else {
+        if( isRepeat) {
+            for( int i=0; i<untechable.selectedContacts.count; i++ ){
+                if( [[untechable.selectedContacts[i] valueForKey:@"name"] isEqualToString: tempContactDetailsModal.name] ){
+                    
+                    // check if there is no contact type (i.e, email, phone) set, remove this from contact list
+                    if( !tempContactDetailsModal.hasContacts ){
+                        [untechable.selectedContacts removeObjectAtIndex:i];
+                        isRepeat = NO;
+                        break;
+                    }else{
+                        [untechable.selectedContacts replaceObjectAtIndex:i withObject:tempContactDetailsModal];
+                        isRepeat = NO;
+                    }
+                }
+            }
+        }
+        if(isRepeat){
+            [untechable.selectedContacts addObject:tempContactDetailsModal];
+        }
+    }
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+
 -(IBAction)emailButtonTapped:(id) sender
 {
+    isRepeat = YES;
     IsCustomized = YES;
     saveButton.hidden = NO;
     EmailCell *emailCell;
@@ -494,13 +558,43 @@
         [tempEmailWithStatus setObject:@"1" atIndexedSubscript:1];
         [emailCell.emailButton setSelected:YES];
     }
+  
+    // to add and remove the redundant email addresses and flags
+    if(tempContactDetailsModal.allEmails.count > 0){
+        if(isRepeat){
+            // to find email address type and update flags
+            for(int i=0; i<tempContactDetailsModal.allEmails.count; i++){
+                // found contact type
+                if( [tempContactDetailsModal.allEmails[i][0] isEqualToString: tempEmailWithStatus[0]] ){
+                    // to remove if no flag is set to 1
+                    if([tempEmailWithStatus[1] isEqualToString: @"0"] ){
+                        [tempContactDetailsModal.allEmails removeObjectAtIndex:i];
+                        isRepeat = NO;
+                        break;
+                    }else{
+                        [tempContactDetailsModal.allEmails replaceObjectAtIndex:i withObject:tempEmailWithStatus];
+                        isRepeat = NO;
+                        break;
+                    }
+                }
+            }
+            //if not found, add new eamil
+            if(isRepeat) {
+                [tempContactDetailsModal.allEmails addObject:tempEmailWithStatus];
+            }
+        }
+    }else{
+        [tempContactDetailsModal.allEmails addObject:tempEmailWithStatus];
+    }
     
     [editingEmailsWithStatus setObject:tempEmailWithStatus forKey:indexPath];
+   
 }
 
 
 -(IBAction)callButtonTapped:(id) sender
 {
+    isRepeat = YES;
     IsCustomized = YES;
     saveButton.hidden = NO;
     PhoneNumberCell *phoneCell;
@@ -521,19 +615,48 @@
         [phoneCell.callButton setSelected:YES];
     }
     
+    // to add and remove the redundant phone numbers and flags
+    if(tempContactDetailsModal.allPhoneNumbers.count > 0){
+        if(isRepeat){
+            // to find phone number type and update flags
+            for(int i=0; i<tempContactDetailsModal.allPhoneNumbers.count; i++){
+                // found contact type
+                if( [tempContactDetailsModal.allPhoneNumbers[i][0] isEqualToString: tempPhoneWithStatus[0]] ){
+                    // to remove if no flag is set to 1
+                    if([tempPhoneWithStatus[2] isEqualToString: @"0"] && [tempPhoneWithStatus[3] isEqualToString: @"0"]  ){
+                        [tempContactDetailsModal.allPhoneNumbers removeObjectAtIndex:i];
+                        isRepeat = NO;
+                        break;
+                    }else{
+                        [tempContactDetailsModal.allPhoneNumbers replaceObjectAtIndex:i withObject:tempPhoneWithStatus];
+                        isRepeat = NO;
+                        break;
+                    }
+                }
+            }
+            //if not found, add new phone number
+            if(isRepeat) {
+                [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
+            }
+        }
+    }else{
+        [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
+    }
     [editingPhonesWithStatus setObject:tempPhoneWithStatus forKey:indexPath];
+   
 }
 
 
 -(IBAction)smsButtonTapped:(id) sender
 {
+    isRepeat = YES;
     IsCustomized = YES;
     saveButton.hidden = NO;
     PhoneNumberCell *phoneCell;
     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.contactDetailsTable];
     NSIndexPath *indexPath = [self.contactDetailsTable indexPathForRowAtPoint:buttonPosition];
-    if (indexPath != nil)
-    {
+    
+    if (indexPath != nil){
         phoneCell = (PhoneNumberCell*)[_contactDetailsTable cellForRowAtIndexPath:indexPath];
     }
     
@@ -542,13 +665,43 @@
     if ( [[tempPhoneWithStatus objectAtIndex:2] isEqualToString:@"1"] ){
         [tempPhoneWithStatus setObject:@"0" atIndexedSubscript:2];
         [phoneCell.smsButton setSelected:NO];
+        
+        
     }else if ( [[tempPhoneWithStatus objectAtIndex:2] isEqualToString:@"0"] ){
         [tempPhoneWithStatus setObject:@"1" atIndexedSubscript:2];
         [phoneCell.smsButton setSelected:YES];
     }
     
+    // to add and remove the redundant phone numbers and flags
+    if(tempContactDetailsModal.allPhoneNumbers.count > 0){
+        if(isRepeat){
+            // to find phone number type and update flags
+            for(int i=0; i<tempContactDetailsModal.allPhoneNumbers.count; i++){
+                // found contact type
+                if( [tempContactDetailsModal.allPhoneNumbers[i][0] isEqualToString: tempPhoneWithStatus[0]] ){
+                    // to remove if no flag is set to 1
+                    if([tempPhoneWithStatus[2] isEqualToString: @"0"] && [tempPhoneWithStatus[3] isEqualToString: @"0"]  ){
+                        [tempContactDetailsModal.allPhoneNumbers removeObjectAtIndex:i];
+                        isRepeat = NO;
+                        break;
+                    }else{
+                        [tempContactDetailsModal.allPhoneNumbers replaceObjectAtIndex:i withObject:tempPhoneWithStatus];
+                        isRepeat = NO;
+                        break;
+                    }
+                }
+            }
+            //if not found, add new phone number
+            if(isRepeat) {
+                [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
+            }
+        }
+    }else{
+        [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
+    }
     [editingPhonesWithStatus setObject:tempPhoneWithStatus forKey:indexPath];
 }
+
 
 - (void) saveSpendingTimeText {
     
