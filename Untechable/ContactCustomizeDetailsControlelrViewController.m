@@ -64,9 +64,18 @@
         IsCustomized = YES;
     }
     
-    // assign temporary contacts details model the name of contact
+    // assign tempContactDetailsModal the name of contact
     tempContactDetailsModal.name = contactModal.name;
     
+    /**
+     * After matching the current contact name
+     * with the name in untechable.selectedContacts,
+     * the condition below assigns
+     * running model (i.e. tempContactDetailsModal)
+     * the values in Untechable model (i.e. untechable.selectedContacts).
+     * This is done so that changes (i.e. update, delete etc) can be made
+     * on the running model (i.e. tempContactDetailsModal).
+     */
     
     if(untechable.selectedContacts.count != 0){
         for(int i=0; i<untechable.selectedContacts.count; i++){
