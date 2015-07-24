@@ -386,7 +386,7 @@
 		36524AEE19D940F4006DCAAF /* SocialnetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SocialnetworkController.h; path = AddUntechable/SocialnetworkController/SocialnetworkController.h; sourceTree = "<group>"; };
 		36524AEF19D940F4006DCAAF /* SocialnetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SocialnetworkController.m; path = AddUntechable/SocialnetworkController/SocialnetworkController.m; sourceTree = "<group>"; };
 		36524AF019D940F4006DCAAF /* SocialnetworkController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SocialnetworkController.xib; path = AddUntechable/SocialnetworkController/SocialnetworkController.xib; sourceTree = "<group>"; };
-		36561D6819D2C8A40069D897 /* Untech.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Untech.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		36561D6819D2C8A40069D897 /* Untechable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Untechable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36561D6B19D2C8A40069D897 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		36561D6D19D2C8A40069D897 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		36561D6F19D2C8A40069D897 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -397,7 +397,7 @@
 		36561D7A19D2C8A40069D897 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		36561D7B19D2C8A40069D897 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		36561D7D19D2C8A40069D897 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		36561D8319D2C8A40069D897 /* UntechTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UntechTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		36561D8319D2C8A40069D897 /* UntechableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UntechableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		36561D8419D2C8A40069D897 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		36561D8C19D2C8A40069D897 /* UntechableTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UntechableTests-Info.plist"; sourceTree = "<group>"; };
 		36561D8E19D2C8A40069D897 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -731,8 +731,8 @@
 		36561D6919D2C8A40069D897 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				36561D6819D2C8A40069D897 /* Untech.app */,
-				36561D8319D2C8A40069D897 /* UntechTests.xctest */,
+				36561D6819D2C8A40069D897 /* Untechable.app */,
+				36561D8319D2C8A40069D897 /* UntechableTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1159,9 +1159,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		36561D6719D2C8A40069D897 /* Untech */ = {
+		36561D6719D2C8A40069D897 /* Untechable */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 36561D9419D2C8A40069D897 /* Build configuration list for PBXNativeTarget "Untech" */;
+			buildConfigurationList = 36561D9419D2C8A40069D897 /* Build configuration list for PBXNativeTarget "Untechable" */;
 			buildPhases = (
 				C25A91D3676EC682EAEA5C2E /* Check Pods Manifest.lock */,
 				36561D6419D2C8A40069D897 /* Sources */,
@@ -1173,14 +1173,14 @@
 			);
 			dependencies = (
 			);
-			name = Untech;
+			name = Untechable;
 			productName = Untechable;
-			productReference = 36561D6819D2C8A40069D897 /* Untech.app */;
+			productReference = 36561D6819D2C8A40069D897 /* Untechable.app */;
 			productType = "com.apple.product-type.application";
 		};
-		36561D8219D2C8A40069D897 /* UntechTests */ = {
+		36561D8219D2C8A40069D897 /* UntechableTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 36561D9719D2C8A40069D897 /* Build configuration list for PBXNativeTarget "UntechTests" */;
+			buildConfigurationList = 36561D9719D2C8A40069D897 /* Build configuration list for PBXNativeTarget "UntechableTests" */;
 			buildPhases = (
 				469E57A53390F5F784B4B94A /* Check Pods Manifest.lock */,
 				36561D7F19D2C8A40069D897 /* Sources */,
@@ -1193,9 +1193,9 @@
 			dependencies = (
 				36561D8919D2C8A40069D897 /* PBXTargetDependency */,
 			);
-			name = UntechTests;
+			name = UntechableTests;
 			productName = UntechableTests;
-			productReference = 36561D8319D2C8A40069D897 /* UntechTests.xctest */;
+			productReference = 36561D8319D2C8A40069D897 /* UntechableTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -1240,8 +1240,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				36561D6719D2C8A40069D897 /* Untech */,
-				36561D8219D2C8A40069D897 /* UntechTests */,
+				36561D6719D2C8A40069D897 /* Untechable */,
+				36561D8219D2C8A40069D897 /* UntechableTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1576,7 +1576,7 @@
 /* Begin PBXTargetDependency section */
 		36561D8919D2C8A40069D897 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 36561D6719D2C8A40069D897 /* Untech */;
+			target = 36561D6719D2C8A40069D897 /* Untechable */;
 			targetProxy = 36561D8819D2C8A40069D897 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1787,7 +1787,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		36561D9419D2C8A40069D897 /* Build configuration list for PBXNativeTarget "Untech" */ = {
+		36561D9419D2C8A40069D897 /* Build configuration list for PBXNativeTarget "Untechable" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				36561D9519D2C8A40069D897 /* Debug */,
@@ -1796,7 +1796,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		36561D9719D2C8A40069D897 /* Build configuration list for PBXNativeTarget "UntechTests" */ = {
+		36561D9719D2C8A40069D897 /* Build configuration list for PBXNativeTarget "UntechableTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				36561D9819D2C8A40069D897 /* Debug */,
