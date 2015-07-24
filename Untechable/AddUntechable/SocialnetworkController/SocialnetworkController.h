@@ -50,4 +50,7 @@
 //Check if coming from contacstListScreen screen
 @property (nonatomic, assign) BOOL comingFromContactsListScreen;
 
+//Check if the previous screen is SetupGuideFourthView
+@property(nonatomic) BOOL *isSentFromSetupGuideFourthView;
+
 @end

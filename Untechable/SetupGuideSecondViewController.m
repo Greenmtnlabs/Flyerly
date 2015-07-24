@@ -277,6 +277,7 @@
     
     if( untechable.spendingTimeTxt == nil || [untechable.spendingTimeTxt isEqualToString:@""] ) {
         untechable.spendingTimeTxt = [customSpendingText objectAtIndex:0];
+        untechable.socialStatus = untechable.spendingTimeTxt;
     }
 }
 
