@@ -462,8 +462,6 @@
 
 }
 
-
-
 -(void)btnNextTouchStart{
     [self setNextHighlighted:YES];
 }
