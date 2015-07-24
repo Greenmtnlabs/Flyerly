@@ -2829,7 +2829,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     // Call back for when video is selected.
     [nbuCamera setOnVideoFinished:^(NSURL *recvUrl, CGRect cropRect, CGFloat scale ) {
         
-        
         //Remove tag of selected background
         [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
         
@@ -2862,13 +2861,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     break;
                     
                 case AVAssetExportSessionStatusCompleted:
-                    
                     // Main Thread
                     dispatch_async( dispatch_get_main_queue(), ^{
-                        
                         // Render the movie player.
                         [weakSelf.flyimgView renderLayer:@"Template" layerDictionary:[self.flyer getLayerFromMaster:@"Template"]];
-                        
                     });
                     break;
             }
@@ -2885,8 +2881,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     }];
     
     if ( [[weakSelf.flyer getFlyerTypeVideo]isEqualToString:@"video"] ){
-        
-        //nbuCamera.isVideoFlyer = YES;
+
         if ( [[flyer getLayerType:currentLayer]isEqualToString:FLYER_LAYER_IMAGE] ) {
             nbuCamera.isVideoFlyer = YES;
         }
@@ -2905,11 +2900,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     if ( player != nil ) {
         [player.view removeFromSuperview];
     }
-    
-    NSLog(@"Video URL = %@",movieURL);
+
     player =[[MPMoviePlayerController alloc] initWithContentURL:movieURL];
     [player.view setFrame:self.playerView.bounds];
-    
     
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(movieFinishedCallback:)
@@ -2967,16 +2960,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 }
 
 -(IBAction)slide:(id)sender {
-    
-    NSLog(@"%f",playerSlider.value);
     player.currentPlaybackTime = playerSlider.value;
     durationChange.text =[self stringFromTimeInterval:playerSlider.value];
-    
 }
 
 - (void)updateTime:(NSTimer *)timer {
-    
-    NSLog(@"%f",player.currentPlaybackTime);
     playerSlider.value = player.currentPlaybackTime;
     durationChange.text =[self stringFromTimeInterval:player.currentPlaybackTime];
     
@@ -2985,17 +2973,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     }
 }
 
-
 #pragma mark -  Movie Player Delegate
-
-
 /*
  * Here we Set Slider
  */
-- (void)MPMoviePlayerLoadStateDidChange:(NSNotification *)notification
-{
-    if ((player.loadState & MPMovieLoadStatePlaythroughOK) == MPMovieLoadStatePlaythroughOK)
-    {
+- (void)MPMoviePlayerLoadStateDidChange:(NSNotification *)notification {
+
+    if ((player.loadState & MPMovieLoadStatePlaythroughOK) == MPMovieLoadStatePlaythroughOK) {
         
         videolastImage = [player thumbnailImageAtTime:player.duration /2
                                            timeOption:MPMovieTimeOptionNearestKeyFrame];
@@ -3024,8 +3008,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  * Here we Get Player Button Press Info
  */
 - (void) movieStateChangeCallback:(NSNotification*) aNotification {
-    
-    
     //User Press Pause or Stop we Disable Player Access and Enable Flyer for Others Layers
     if (player.playbackState == MPMoviePlaybackStatePaused || player.playbackState == MPMoviePlaybackStateStopped ) {
         [self performSelectorOnMainThread:@selector(toggleImageViewInteraction) withObject:nil waitUntilDone:NO ];
@@ -3033,17 +3015,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 }
 
 - (void) movieFinishedCallback:(NSNotification*) aNotification {
-    
     playerSlider.value = 0.0;
     isPlaying = NO;
     [playButton setSelected:NO];
     player.currentPlaybackTime = playerSlider.value;
-    
 }
 
-
 #pragma mark - UIAlertView delegate
-
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     if(alertView == deleteAlert && buttonIndex == 1) {
@@ -3058,12 +3036,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         [Flurry logEvent:@"Layer Deleted"];
         
 	}else if(alertView == spaceUnavailableAlert && buttonIndex == 0) {
-        
         [self goBack];
-        
     }
-    else if(alertView == signInAlert && buttonIndex == 0) {
-        
+    else if(alertView == signInAlert && buttonIndex == 0) {        
         // Enable  Buttons
         backButton.enabled = YES;
         helpButton.enabled = YES;
