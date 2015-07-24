@@ -143,10 +143,8 @@
     
     NSString *socialStatus;
     
-    NSString *currentClass = [NSString stringWithFormat:@"%@",[self.navigationController visibleViewController] ];
+    if(self.isSentFromSetupGuideFourthView){
     
-    if([currentClass containsString:@"SetupGuideFourthView"] ) {
-        
         socialStatus = untechable.spendingTimeTxt;
         
     } else {

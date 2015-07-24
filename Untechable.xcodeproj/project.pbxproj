@@ -656,12 +656,12 @@
 		2474023E1B33CB7900459759 /* SetupGuide */ = {
 			isa = PBXGroup;
 			children = (
-				2448AC381B4A492E0087FF3E /* SetupGuideSecondViewController.xib */,
 				2474023F1B33CBD700459759 /* SetupGuideViewController.h */,
 				247402401B33CBD700459759 /* SetupGuideViewController.m */,
 				247402411B33CBD700459759 /* SetupGuideViewController.xib */,
 				247402471B34198400459759 /* SetupGuideSecondViewController.h */,
 				247402481B34198400459759 /* SetupGuideSecondViewController.m */,
+				2448AC381B4A492E0087FF3E /* SetupGuideSecondViewController.xib */,
 				24AFE7981B38086A00CC8230 /* SetupGuideThirdView.h */,
 				24AFE7991B38086A00CC8230 /* SetupGuideThirdView.m */,
 				24AFE79A1B38086A00CC8230 /* SetupGuideThirdView.xib */,

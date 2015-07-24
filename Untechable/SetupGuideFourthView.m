@@ -9,6 +9,7 @@
 #import "SetupGuideFourthView.h"
 #import "SocialnetworkController.h"
 #import "UntechablesList.h"
+#import "SocialnetworkController.h"
 
 @interface SetupGuideFourthView ()
 
@@ -142,6 +143,8 @@
 -(void)setupShareScreen {
     
     SocialnetworkController *viewControllerToAdd = [[SocialnetworkController alloc] initWithNibName:@"SocialnetworkController" bundle:nil];
+    
+    viewControllerToAdd.isSentFromSetupGuideFourthView = YES;
     
     viewControllerToAdd.untechable = untechable;
     
