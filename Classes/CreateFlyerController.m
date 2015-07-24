@@ -2525,25 +2525,21 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 /*
  * When any Flyer border is selected
  */
--(IBAction)selectBorder:(id)sender
-{
+-(IBAction)selectBorder:(id)sender {
     
     NSArray *bodersArray = flyerBordersView.subviews;
     int count = (int)(bodersArray.count);
     
     UIView *tempView;
-    
     int  i=1;
 	UIButton *view = sender;
     
-	for (int index = 0; index < count; index++ )
-    {
+	for (int index = 0; index < count; index++ ) {
         tempView  = [bodersArray objectAtIndex:index];
         
-        if ( (index % 3) == 0)
-        {
-            tempView  = [bodersArray objectAtIndex:index];
+        if ( (index % 3) == 0) {
             
+            tempView  = [bodersArray objectAtIndex:index];
             // Add border to Un-select layer thumbnail
             CALayer * l = [tempView layer];
             [l setBorderWidth:1];
@@ -2551,11 +2547,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             UIColor * c = [UIColor clearColor];
             [l setBorderColor:c.CGColor];
             i++;
-            
         }
         
-        if(tempView == view)
-        {
+        if(tempView == view) {
             id borderColor = borderArray[i-2];
             currentLayer = @"Template";
 
@@ -2565,7 +2559,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             //Reflect on view / Here we call Render Layer on View
             [flyimgView setTemplateBorder:[flyer getLayerFromMaster:currentLayer]];
             
-            
             // Add border to selected layer thumbnail
             tempView = [bodersArray objectAtIndex:(index-2)];
             CALayer * l = [tempView layer];
@@ -2574,12 +2567,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
             [l setBorderColor:c.CGColor];
         }
-        
 	}//LOOP
 }
 
 #pragma mark -  Progress Indicator
-
 -(void)showLoadingView:(NSString *)message{
     [self showLoadingIndicator];
 }
@@ -2588,8 +2579,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [self hideLoadingIndicator];
 }
 
--(CGSize)setSizeForCropView: (CGSize)imageSize
-{
+-(CGSize)setSizeForCropView: (CGSize)imageSize {
     if ( IS_IPHONE_5 ){
         if( imageSize.width > 320.0 ){
             imageSize.width = 320;
@@ -2634,12 +2624,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     nbuGallary.videoAllow = videoAllow;
     
     if ( imgPickerFlag == IMAGEPICKER_PHOTO ) {
-        //NSDictionary *dict = [flyer getLayerFromMaster:currentLayer];
-        
         UIImageView *currentImage = [self.flyimgView.layers objectForKey:currentLayer];
-        
         nbuGallary.desiredImageSize = [self setSizeForCropView:currentImage.frame.size];
-        
     } else {
         nbuGallary.desiredImageSize = [self setSizeForCropView:CGSizeMake( flyerlyWidth, flyerlyHeight )];
     }
@@ -2675,9 +2661,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [weakSelf.flyimgView layerStoppedEditing:weakSelf.currentLayer];
                 
                 weakSelf.imgPickerFlag = IMAGEPICKER_TEMPLATE;
-            
-                //Render Flyer
-                //[self renderFlyer];
+
             }else{
                 
                 //Here we Set Flyer Type
@@ -2689,7 +2673,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 //set template Image
                 [weakSelf.flyimgView setTemplate:[NSString stringWithFormat:@"Template/template.%@",IMAGETYPE] ];
                 [Flurry logEvent:@"Custom Background"];
-                
             }
         });
     }];
@@ -2699,8 +2682,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         [uiBusy stopAnimating];
         [uiBusy removeFromSuperview];
-        
-        NSLog(@"%@",recvUrl);
+
         NSError *error = nil;
         
         [weakSelf.flyer setFlyerTypeVideo];
@@ -2726,13 +2708,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     break;
                     
                 case AVAssetExportSessionStatusCompleted:
-                    
                     // Main Thread
                     dispatch_async( dispatch_get_main_queue(), ^{
-                        
                         // Render the movie player.
                         [weakSelf.flyimgView renderLayer:@"Template" layerDictionary:[self.flyer getLayerFromMaster:@"Template"]];
-                        
                     });
                     break;
             }
