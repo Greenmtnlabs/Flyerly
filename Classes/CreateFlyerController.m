@@ -2098,7 +2098,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     }
                 }
                 break;
-            }            
+            }
             i++;
         }//UIIMAGEVIEW CHECK
         
@@ -2355,7 +2355,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     // Getting info of selected layer
     UIView *layerView = [flyimgView.layers objectForKey:currentLayer];
     if ( layerView != nil ) {
-        //if (![currentLayer isEqualToString:@""]) {
         
         if ( ![previousLayerType isEqualToString:FLYER_LAYER_EMOTICON] ) {
             
@@ -2369,13 +2368,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
             // Now apply the previous transform again
             layerView.transform = tempTransform;
-            
-        }else {
-            
-            // Get size of current clipart and set it for new clipart
-            //NSDictionary* textLayer = [flyer getLayerFromMaster:currentLayer];
-            //fontType = [UIFont fontWithName:[clipartsArray[i] objectForKey:@"fontType"] size:[[textLayer objectForKey:@"fontsize"] floatValue]];
-            
         }
         
         // If no layer is selected then have the emoticon of default size
