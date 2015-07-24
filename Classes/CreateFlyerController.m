@@ -2428,8 +2428,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     // Getting info of selected layer
     UIView *layerView = [flyimgView.layers objectForKey:currentLayer];
     if ( layerView != nil ) {
-        //if (![currentLayer isEqualToString:@""]) {
-        
+
         if ( ![previousLayerType isEqualToString:FLYER_LAYER_CLIP_ART] ) {
             
             // Keep existing layer's transform
@@ -2447,20 +2446,15 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             // Now apply the previous transform again
             layerView.transform = tempTransform;
             
-            
         } else {
-            
             // Get size of current clipart and set it for new clipart
             NSDictionary* textLayer = [flyer getLayerFromMaster:currentLayer];
             fontType = [UIFont fontWithName:[clipartsArray[i] objectForKey:@"fontType"] size:[[textLayer objectForKey:@"fontsize"] floatValue]];
-            
         }
         
     } else {
-        
         //Set default icon (entypo) size
         fontType = [UIFont fontWithName:[clipartsArray[i] objectForKey:@"fontType"] size:(60 * 3.0)];
-        
     }
     
     NSUInteger index = [[clipartsView subviews] indexOfObject:view];
@@ -2486,9 +2480,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
                 //Here we call Render Layer on View
                 [flyimgView renderLayer:currentLayer layerDictionary:layDic];
-                //[flyimgView configureClipartFont :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
-                //[flyimgView configureClipartDimensions :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
-                
                 
                 if ([layDic objectForKey:@"type"] != nil && [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_CLIP_ART]){
                     [flyimgView configureLabelSize:currentLayer labelDictionary:layDic];
@@ -2501,8 +2492,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }
         
     }// Loop
-    
-    
     
     [self bringNotEditableLayersToFront:@"call from selectIcon"];
 }
@@ -2522,10 +2511,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             [flyer setFlyerTextBorderColor:currentLayer Color:borderColor];
             
             //Here we call Render Layer on View
-            //[flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
-            //[flyimgView configureLabelColor :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
             [self.flyimgView configureLabelBorder:currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
-            
             
             //Handling Select Unselect
             [self setSelectedItem:FLYER_LAYER_TEXT inView:textBordersView ofLayerAttribute:LAYER_ATTRIBUTE_BORDER];
