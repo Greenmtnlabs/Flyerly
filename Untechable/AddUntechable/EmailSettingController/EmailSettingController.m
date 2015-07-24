@@ -486,7 +486,7 @@
 }
 
 -(void)onBack{
-    [untechable goBack:self.navigationController];
+    [[self navigationController] popViewControllerAnimated:YES];
 }
 
 -(void)onFinish {
