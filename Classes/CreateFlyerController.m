@@ -4797,27 +4797,23 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                                  
                              } else {
                                  
-                                 
                                  // Delete SubViews from ScrollView and add Emoticons view
                                  [self deleteSubviewsFromScrollView];
                                  [layerScrollView addSubview:emoticonsView];
                                  [layerScrollView setContentSize:CGSizeMake(emoticonsView.size.width , emoticonsView.size.height)];
                                  
                                  [self setSelectedItem:FLYER_LAYER_EMOTICON inView:emoticonsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
-                                 //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
                              }
                          }
                          completion:^(BOOL finished){
                              [layerScrollView flashScrollIndicators];
                          }];
         //END ANIMATION
-        
         //Add ContextView
         [self addScrollView:layerScrollView];
         [emoticonsTabButton setSelected:YES];
-	}
-    else if(selectedButton == artsColorTabButton)
-	{
+        
+	} else if(selectedButton == artsColorTabButton) {
         // Set the type
         if ( [[flyer getLayerType:currentLayer] isEqualToString:FLYER_LAYER_EMOTICON] ) {
             
@@ -4864,7 +4860,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     else if(selectedButton == drawingMenueButton ){
         //for drawing we are doing all(add/edit) work in setAddMoreLayerTabAction
     }
-    
 }
 
 #pragma mark -  Bottom Tabs Context
@@ -4872,8 +4867,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
  * When we click on Text Tab
  * This Method Manage Text SubTabs
  */
--(IBAction)setStyleTabAction:(id) sender
-{
+-(IBAction)setStyleTabAction:(id) sender {
     
     [self addBottomTabs:libText];
     
@@ -4885,8 +4879,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     UIButton *selectedButton = (UIButton*)sender;
 	
-    if(selectedButton == fontTabButton)
-	{
+    if(selectedButton == fontTabButton) {
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
                          animations:^{
@@ -4908,7 +4901,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                                  [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , fontsView.size.height)];
                                  
                                  [self setSelectedItem:FLYER_LAYER_TEXT inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
-                                 //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
                              }
                              
                          }
@@ -4922,8 +4914,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
 		[fontTabButton setSelected:YES];
 	}
-	else if(selectedButton == colorTabButton)
-	{
+	else if(selectedButton == colorTabButton) {
         
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
@@ -4941,8 +4932,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [colorTabButton setSelected:YES];
         
 	}
-	else if(selectedButton == sizeTabButton)
-	{
+	else if(selectedButton == sizeTabButton) {
         
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
@@ -4960,8 +4950,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
 		[sizeTabButton setSelected:YES];
 	}
-	else if(selectedButton == fontBorderTabButton)
-	{
+	else if(selectedButton == fontBorderTabButton) {
         
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
@@ -4979,28 +4968,24 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
 		[fontBorderTabButton setSelected:YES];
 	}
-    else if(selectedButton == fontEditButton)
-	{
+    else if(selectedButton == fontEditButton) {
         [fontEditButton setSelected:YES];
         [self callWrite];
 	}
-    
 }
 
 /*
  * When we click on Background Tab
  * This Method Manage Background SubTabs
  */
--(IBAction)setlibBackgroundTabAction:(id)sender{
+-(IBAction)setlibBackgroundTabAction:(id)sender {
     UIButton *selectedButton = (UIButton*)sender;
     
     //Un Selected State of Buttons
     [backtemplates setSelected:NO];
     [flyerBorder setSelected:NO];
     
-    
-    if( selectedButton == backtemplates )
-	{
+    if( selectedButton == backtemplates ) {
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
                          animations:^{
@@ -5016,8 +5001,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [self addScrollView:layerScrollView];
         [backtemplates setSelected:YES];
     }
-    else if(selectedButton == cameraTakePhoto)
-    {
+    else if(selectedButton == cameraTakePhoto) {
         
         [self openCustomCamera:YES];
         _videoLabel.alpha = 1;
@@ -5026,8 +5010,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         _takeOrAddPhotoLabel.alpha = 0;
 
     }
-    else if(selectedButton == cameraRoll)
-    {
+    else if(selectedButton == cameraRoll) {
         
         //HERE WE CHECK USER DID ALLOWED TO ACCESS PHOTO library
         if ([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusRestricted || [ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusDenied) {
@@ -5035,7 +5018,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             UIAlertView *photoAlert = [[UIAlertView alloc ] initWithTitle:@"" message:@"Flyerly does not access to your photo album.To enable access goto the Setting app >> Privacy >> Photos and enable Flyerly" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [photoAlert show];
             return;
-            
         }
         
         [self loadCustomPhotoLibrary:YES];
@@ -5047,8 +5029,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         _takeOrAddPhotoLabel.alpha = 0;
         
     }
-    else if(selectedButton == flyerBorder)
-    {
+    else if(selectedButton == flyerBorder) {
         
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
@@ -5066,7 +5047,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         [flyerBorder setSelected:YES];
     }
-    
 }
 
 /*
@@ -5078,14 +5058,12 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     UIButton *selectedButton = (UIButton*)sender;
     
     
-    if( selectedButton == cameraTabButton )
-	{
+    if( selectedButton == cameraTabButton ) {
         imgPickerFlag = IMAGEPICKER_PHOTO;
         [self openCustomCamera:NO];
         
     }
-    else if( selectedButton == photoTabButton )
-	{
+    else if( selectedButton == photoTabButton ) {
         imgPickerFlag = IMAGEPICKER_PHOTO;
         
         //HERE WE CHECK USER DID ALLOWED TO ACESS PHOTO library
@@ -5099,8 +5077,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         [self loadCustomPhotoLibrary:NO];
     }
-    else if( selectedButton == widthTabButton )
-	{
+    else if( selectedButton == widthTabButton ) {
         if (widthTabButton.isSelected == YES) {
             
             //Set here Un-Selected
@@ -5117,8 +5094,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         self.flyimgView.heightIsSelected = NO;
         
     }
-    else if( selectedButton == heightTabButton )
-	{
+    else if( selectedButton == heightTabButton ) {
         
         if (heightTabButton.isSelected == YES) {
             
@@ -5129,7 +5105,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             //FOR PINCH
             [heightTabButton  setSelected:YES];
             [widthTabButton setSelected:NO];
-            
         }
         
         self.flyimgView.widthIsSelected = NO;
@@ -5156,10 +5131,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     [addVideoTabButton setSelected:NO];
     [backgroundTabButton setSelected:NO];
     
-    
-    
-	if(selectedButton == addMoreFontTabButton)
-	{
+	if(selectedButton == addMoreFontTabButton) {
         
         selectedAddMoreLayerTab = ADD_MORE_TEXTTAB;
         
@@ -5173,10 +5145,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [self callWrite];
 
 	}
-    else if(selectedButton == addMorePhotoTabButton)
-	{
+    else if(selectedButton == addMorePhotoTabButton) {
         selectedAddMoreLayerTab = ADD_MORE_PHOTOTAB;
-        
         
         if ([currentLayer isEqualToString:@""]) {
             currentLayer = [flyer addImage];
@@ -5192,7 +5162,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             [flyer setImageFrame:currentLayer :imageFrame];
             NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
             [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
-            
         }
         
         //Here we Highlight The ImageView
@@ -5217,7 +5186,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         if ([currentLayer isEqualToString:@""]) {
             
             currentLayer = [flyer addClipArt];
-            
             editButtonGlobal.uid = currentLayer;
         }
         
@@ -5235,8 +5203,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                              [layerScrollView flashScrollIndicators];
                          }];
         
-        
-        
         [clipArtTabButton setSelected:YES];
         //Add right Bar button
         [self addDonetoRightBarBotton];
@@ -5251,8 +5217,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [self setArtsTabAction:clipArtTabButton];
         
 	}
-	else if(selectedButton == addVideoTabButton)
-	{
+	else if(selectedButton == addVideoTabButton) {
+        
         userPurchases = [UserPurchases getInstance];
         userPurchases.delegate = self;
         
@@ -5275,8 +5241,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             [self openInAppPanel];
         }
 	}
-    else if(selectedButton == backgroundTabButton)
-	{
+    else if(selectedButton == backgroundTabButton) {
         currentLayer = nil;
         
         NSMutableDictionary *templateDictionary = [flyer getLayerFromMaster:@"Template"];
@@ -5296,8 +5261,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [self setlibBackgroundTabAction:backtemplates];
         
     }
-    else if( selectedButton == drawingMenueButton)
-    {
+    else if( selectedButton == drawingMenueButton)  {
         [drawingMenueButton setSelected:YES];
         
         NSMutableDictionary *dic;
@@ -5314,7 +5278,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             dw_isOldLayer   =   NO;
         }
         // editDrawing layer case
-        else{
+        else {
             dic = [flyer getLayerFromMaster:currentLayer];
             dw_layer_save   =   YES;
             dw_isOldLayer   =   YES;
@@ -5357,7 +5321,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [self drawingSetStyleTabAction:drawingPatternTabButton];
         
 	}
-    
 }
 
 /**
@@ -5700,8 +5663,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 	int  i=1;
 	UIButton *view = sender;
     
-	for(UIView *tempView  in [drawingPatternsView subviews])
-	{
+	for(UIView *tempView  in [drawingPatternsView subviews]) {
         //CHECK UIIMAGEVIEW BECAUSE SCROLL VIEW HAVE ADDITIONAL
         //SUBVIEWS OF UIIMAGEVIEW FOR FLASH INDICATORS
         if (![tempView isKindOfClass:[UIImageView class]]) {
@@ -5710,12 +5672,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             {
                 //Here we set line
                 [self setDrawingLine:DRAWING_PATTERNS_ARRAY[i-1] updateDic:YES];
-                
-                //Here we set Font
-                //[flyer setFlyerTextFont:currentLayer FontName:[NSString stringWithFormat:@"%@",[selectedFont familyName]]];
-                
-                //Here we call Render Layer on View
-                //[flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
                 
                 //Handling Select Unselect
                 [self setSelectedItem:FLYER_LAYER_DRAWING inView:drawingPatternsView ofLayerAttribute:LAYER_ATTRIBUTE_DRAWING_PATTERN];
@@ -5743,7 +5699,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                 drawingEraserMsg    =   (UITextView *) tempView;
             }
         }
-        
     }
 }
 -(void)addEraserMsgInSubViewFor:msgFor {
@@ -5759,7 +5714,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [layerScrollView addSubview:drawingEraserMsgView];
         [layerScrollView setContentSize:CGSizeMake(drawingEraserMsgView.frame.size.width, [drawingEraserMsgView bounds].size.height)];
     }
-    
 }
 
 
@@ -5794,17 +5748,12 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
             
         } else {
-            
             [layerScrollView addSubview:drawingView];
             [layerScrollView setContentSize:CGSizeMake(drawingView.frame.size.width, [layerScrollView bounds].size.height)];
-            
         }
         
-        
-        
         NSArray *sizesArray = drawingView.subviews;
-        for (int i = 1; i <=  3 ; i++)
-        {
+        for (int i = 1; i <=  3 ; i++) {
             
             UIButton *size;
             if ([sizesArray[i-1] isKindOfClass:[UIButton class]]) {
@@ -5814,11 +5763,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             NSString *sizeValue =SIZE_ARRAY[(i-1)];
             [size setTitle:sizeValue forState:UIControlStateNormal];
         }
-        
     });
 }
-
-
 
 -(IBAction)addDrawingLayer:(id) sender {
     
@@ -5835,6 +5781,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     //show drawing layer menu
     [self setAddMoreLayerTabAction:drawingMenueButton];
 }
+
 #pragma mark -  DRAWING FUNCTIONS
 /*
  * When we click on Drawing Tab
@@ -5853,8 +5800,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     UIButton *selectedButton = (UIButton*)sender;
 	
-    if(selectedButton == drawingPatternTabButton)
-	{
+    if(selectedButton == drawingPatternTabButton) {
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
                          animations:^{
@@ -5876,8 +5822,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 		[drawingPatternTabButton setSelected:YES];
 
 	}
-	else if(selectedButton == drawingColorTabButton)
-	{
+	else if(selectedButton == drawingColorTabButton) {
         if( [dw_drawingLayerMode  isEqual: DRAWING_LAYER_MODE_ERASER]){
             //HERE WE SET ANIMATION
             [UIView animateWithDuration:0.4f
@@ -5912,8 +5857,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [drawingColorTabButton setSelected:YES];
         
 	}
-	else if(selectedButton == drawingSizeTabButton)
-	{
+	else if(selectedButton == drawingSizeTabButton) {
         if( [dw_drawingLayerMode  isEqual: DRAWING_LAYER_MODE_ERASER]){
             
         } else {
@@ -5939,8 +5883,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 		[drawingSizeTabButton setSelected:YES];
 
 	}
-    else if(selectedButton == drawingEraserTabButton)
-	{
+    else if(selectedButton == drawingEraserTabButton) {
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
                          animations:^{
@@ -5962,8 +5905,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 }
 
 //Assign dic values(pattern,color,size) to class level variables
-- (void)setDrawingTools:(NSMutableDictionary *)dic callFrom:(NSString *)callFrom
-{
+- (void)setDrawingTools:(NSMutableDictionary *)dic callFrom:(NSString *)callFrom {
     dw_drawingLayerMode = callFrom;
     
     //Get color(r,g,b) from dic, then assign them to class level red,green,blue
@@ -5977,8 +5919,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 }
 
 // Set value of rgb of drawing tool
-- (void)setDrawingRGB:(UIColor *) color updateDic:(BOOL)updateDic
-{
+- (void)setDrawingRGB:(UIColor *) color updateDic:(BOOL)updateDic {
     CGFloat alpha;
     //Getting RGB Color Code
     [color getRed:&dw_red green:&dw_green blue:&dw_blue alpha:&alpha];
@@ -5992,8 +5933,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 }
 
 // Set value brush radius
-- (void)setDrawingBrushRadius:(NSInteger)brushRadiusSize  updateDic:(BOOL)updateDic
-{
+- (void)setDrawingBrushRadius:(NSInteger)brushRadiusSize  updateDic:(BOOL)updateDic {
     dw_brush = (CGFloat)brushRadiusSize;
     
     if( updateDic ) {
@@ -6004,8 +5944,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 }
 
 // Set value of
-- (void)setDrawingLine:(NSString *)lineType updateDic:(BOOL)updateDic
-{
+- (void)setDrawingLine:(NSString *)lineType updateDic:(BOOL)updateDic {
     dw_brushType   =  lineType;
     
     if( updateDic ) {
@@ -6015,7 +5954,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     }
 }
 
--(CGFloat) distanceBtwPoints:(CGPoint)p1 p2:(CGPoint)p2{
+-(CGFloat) distanceBtwPoints:(CGPoint)p1 p2:(CGPoint)p2 {
     CGFloat xDist = (p2.x - p1.x);
     CGFloat yDist = (p2.y - p1.y);
     return sqrt((xDist * xDist) + (yDist * yDist));
@@ -6235,9 +6174,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     [zoomScrollView setZoomScale:FLYER_ZOOM_SET_SCALE];
 
     //FOR TESTING SHOW RED RECT AROUND CURSOR
-    //[zoomMagnifyingGlass.layer setBorderColor: [[UIColor redColor] CGColor]];
-    //[zoomMagnifyingGlass.layer setBorderWidth: 2.0];
-    
     [zoomScrollView setContentSize:CGSizeMake(flyimgView.frame.size.width, flyimgView.frame.size.height)];
 
     // set buttons in right nav
@@ -6323,8 +6259,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     int x2 = floor( (x*100)/zoomScreenShot.size.width );
     int y2 = floor( (y*100)/zoomScreenShot.size.height);
     
-    //NSLog(@"x,y(%i,%i) x2,y2(%i,%i)",x,y, x2,y2);
-    
     //CHANGE ZOOM SCOLLVIEW
     CGFloat xSv = x2, ySv = y2;
     if( ySv < 11)
@@ -6372,29 +6306,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 #pragma mark -  Watermark funcs
 //Tasks after create new flyer
 -(void)tasksOnCreateNewFlyer{
-    //we have updated the flyer.pieces and flyer.txt, so whitebg and watermark layer work will be in default bundle.
-    /*
-    //------- set white bg --- Start ----
-    //Here we Set Flyer Type
-    [flyer setFlyerTypeImage];
-    
-    int viewTag = 74;// white bg tag number
-    
-    //Getting Image Path
-    NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"Template%d",viewTag]];
-    
-    //set template Image
-    [self.flyimgView setTemplate:imgPath];
-    
-    //Set Image Tag
-    [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",viewTag]];
-    //------- set white bg --- End ----
-    
-    //------- Add water mark layer --- start ---
-    [flyer addWatermark];
-    //------- Add water mark layer --- end ---
-    */
-    
 }
 
 - (void)inAppPanelDismissed {
