@@ -2749,10 +2749,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     nbuCamera.videoAllow = forVideo;
     
     if ( imgPickerFlag == IMAGEPICKER_PHOTO ) {
-        NSDictionary *dict = [flyer getLayerFromMaster:currentLayer];
-        
         UIImageView *currentImage = [self.flyimgView.layers objectForKey:currentLayer];
-        
         CGRect imgRect = currentImage.frame;
         
         if ( IS_IPHONE_5 ){
