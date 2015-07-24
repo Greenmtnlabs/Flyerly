@@ -147,7 +147,8 @@ xcuserdata
 #         (private scheme).xcscheme
 #         xcschememanagement.plist
 #
-project.xcworkspace/
+Untechable.xcworkspace/
+Untechable.xcodeproj/project.xcworkspace/
 
 ####
 # Xcode 4 - Deprecated classes
