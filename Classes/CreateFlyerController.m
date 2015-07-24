@@ -39,7 +39,8 @@
     UIButton *bannerAdDismissBtn;
     
     BOOL isNewText;
-    
+    //Fix for: 162-create-flyer-screen-when-user-close-the-inapp-tabs-are-active-and-extra-layer-showing-when-it-comes-from-clipart
+    BOOL appearingViewAfterInAppHide;
 }
 
 @end
@@ -134,7 +135,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 -(void)viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
-    
+    if( appearingViewAfterInAppHide == YES ){
+        appearingViewAfterInAppHide = NO;
+        return;
+    }
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     
     //Render Flyer
@@ -303,7 +307,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         [[NSBundle mainBundle] loadNibNamed:@"CreateFlyerController-iPhone4" owner:self options:nil];
     }
 
-
+    appearingViewAfterInAppHide = NO;
     isNewText   =   NO;
     bannerAddClosed = NO;
     bannerShowed = NO;
@@ -2076,23 +2080,17 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     [self setDrawingRGB:selectedColor updateDic:YES];
                     //Handling Select Unselect
                     [self setSelectedItem:FLYER_LAYER_DRAWING inView:colorsView ofLayerAttribute:LAYER_ATTRIBUTE_COLOR];
-                    
                 }
                 else {
                 
                     [flyer setFlyerTextColor:currentLayer RGBColor:selectedColor];
                     
                     //Here we call Render Layer on View
-                    //[flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
                     [flyimgView configureLabelColor :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
                     
-                    
-                    
                     if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
-                        
                         //Handling Select Unselect
                         [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:colorsView ofLayerAttribute:LAYER_ATTRIBUTE_COLOR];
-                        
                     }
                     else {
                         //Handling Select Unselect
@@ -2100,8 +2098,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     }
                 }
                 break;
-            }
-            
+            }            
             i++;
         }//UIIMAGEVIEW CHECK
         
@@ -6606,7 +6603,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 }
 
 - (void)inAppPanelDismissed {
-
+    appearingViewAfterInAppHide = YES;
 }
 
 //When user perform action on watermark layer and has no complete design bundle then show in app panel
