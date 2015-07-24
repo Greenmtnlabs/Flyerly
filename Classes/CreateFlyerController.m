@@ -3038,7 +3038,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 	}else if(alertView == spaceUnavailableAlert && buttonIndex == 0) {
         [self goBack];
     }
-    else if(alertView == signInAlert && buttonIndex == 0) {        
+    else if(alertView == signInAlert && buttonIndex == 0) {
         // Enable  Buttons
         backButton.enabled = YES;
         helpButton.enabled = YES;
@@ -3051,8 +3051,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     }else if (alertView == waterMarkPurchasingAlert && buttonIndex == 1) {
         [self openInAppPanel];
     }else if(alertView == signInAlert && buttonIndex == 1) {
-        
-        NSLog(@"Sign In was selected.");
+
         signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
         
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
@@ -3063,8 +3062,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         UserPurchases *userPurchases_ = [UserPurchases getInstance];
         userPurchases_.delegate = self;
         
-        //__weak CreateFlyerController *weakCreateFlyerController = signInController;
-        
         signInController.signInCompletion = ^void(void) {
             NSLog(@"Sign In via Share");
             
@@ -3073,26 +3070,19 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             [userPurchases_ setUserPurcahsesFromParse];
             
             [weakSelf openPanel];
-            
             [weakSelf hideLoadingIndicator];
         };
-        
         [self.navigationController pushViewController:signInController animated:YES];
     }
 }
 
-
 #pragma mark - Custom Methods
-
 /*
  * Load Help Screen
  */
-
 -(void)loadHelpController{
-    
     [UserVoice presentUserVoiceInterfaceForParentViewController:self];
 }
-
 
 /*
  * Here we Create Text Box for Getting Text And
@@ -3405,18 +3395,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 }
 
 -(void)deleteLayer:(UIButton *)crossButton{
-    
-    
     deleteAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"Delete this layer?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK" ,nil];
     [deleteAlert show];
 }
 
 -(void) callDeleteLayer{
-    
     deleteAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"Delete this layer?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK" ,nil];
     [deleteAlert show];
-    
-    
 }
 
 
@@ -3455,7 +3440,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  * For Adding Bottom Button On runtime
  */
 -(void)addBottomTabs:(id)obj{
-    
     // Remove previously added scrollviews.
     [self removeAllScrolviews];
     
@@ -3476,7 +3460,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         if ([child isKindOfClass:[LayerTileButton class]] || [child isKindOfClass:[UIButton class]] || [child isKindOfClass:[UILabel class]] || [child isKindOfClass:[UIView class]] ) {
             [child removeFromSuperview];
         }
-        
     }
     
     // Hide the labels.
@@ -3496,8 +3479,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     return uiImage;
 }
-
-
 
 - (UIImage *)updateImageSize:(UIImage *)image scaledToSize:(CGSize)newSize {
     UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
@@ -3558,8 +3539,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     }
     [self bringNotEditableLayersToFront:@"call from renderFlyer"];
 }
-
-
 
 /**
  * Rotate frames to ensure they are in their correct orientation. This method returns and instraction that we
@@ -3815,10 +3794,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                     
                     // Main Thread
                     dispatch_async( dispatch_get_main_queue(), ^{
-                        
                         //Here we Open Share Panel for Share Flyer
                         [self openPanel];
-                        
                     });
                 }else {
                     
@@ -3829,21 +3806,15 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                         } else {
                             self.flyer.saveInGallaryRequired = YES;
                         }
-
-                        
                     });
                 }
-                
             }
         };
         
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
         [appDelegate endAppBgTask];
-        
-        
     }];
 }
-
 
 #pragma mark - Flyer Modified
 
@@ -3860,8 +3831,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     [self deSelectPreviousLayer];
     
     [self.flyimgView layerIsBeingEdited:currentLayer];
-    
-
     
     if ( [type isEqualToString:FLYER_LAYER_TEXT] ) {
         
@@ -3916,7 +3885,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         [self editCurrentLayer];
     }
-    
     [self bringThisLayerToFront:editButton.uid];
 }
 /*
@@ -3965,7 +3933,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         if (error) {
             NSLog(@"%@", error.debugDescription);
         }
-        
         //Remove tag of selected background
         [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
         
@@ -3974,7 +3941,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         // Render flyer
         [self renderFlyer];
-        
     }
 }
 
@@ -3987,13 +3953,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
  *  Transformation changed for layer, let the model know.
  */
 - (void)layerTransformedforKey:(NSString *)uid :(CGAffineTransform *) transform {
-   
     //Update Dictionary
     [flyer setImageTransform:uid :transform];
-    
-    //Update Controller
-    //[self.flyimgView renderLayer:uid layerDictionary:[flyer getLayerFromMaster:uid]];
-
 }
 
 /**
@@ -4002,25 +3963,10 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 - (void)frameChangedForLayer:(NSString *)uid frame:(CGRect)frame {
     
     if ([widthTabButton isSelected]) {
-        
         self.flyimgView.widthIsSelected = YES;
         
-        /*CGRect lastFrame = [flyer getImageFrame:uid];
-        
-        lastFrame.origin.x = frame.origin.x;
-        lastFrame.size.width = frame.size.width;
-        frame = lastFrame;*/
-        
     } else if ([heightTabButton isSelected]) {
-        
         self.flyimgView.heightIsSelected = YES;
-
-        /*CGRect lastFrame = [flyer getImageFrame:uid];
-        
-        lastFrame.origin.y = frame.origin.y;
-        lastFrame.size.height = frame.size.height;
-        frame = lastFrame;*/
-        
     }
     
     //Update Dictionary
@@ -4043,30 +3989,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
  * Rotation Angle changed for layer, let the model know.
  */
 - (void)rotationAngleChangedForLayer:(NSString *)uid rotationAngle:(CGFloat)rotationAngle {
-    
-    /*if ([widthTabButton isSelected]) {
-     
-     CGRect lastFrame = [flyer getImageFrame:uid];
-     
-     lastFrame.origin.x = frame.origin.x;
-     lastFrame.size.width = frame.size.width;
-     frame = lastFrame;
-     
-     } else if ([heightTabButton isSelected]) {
-     
-     CGRect lastFrame = [flyer getImageFrame:uid];
-     
-     lastFrame.origin.y = frame.origin.y;
-     lastFrame.size.height = frame.size.height;
-     frame = lastFrame;
-     
-     }*/
-    
     //Update Dictionary
     [flyer addImageRotationAngle:uid :rotationAngle];
-    
-    //Update Controller
-    //[self.flyimgView renderLayer:uid layerDictionary:[flyer getLayerFromMaster:uid]];
 }
 
 
@@ -4075,8 +3999,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
  * Frame changed for layer, let the model know.
  */
 - (void)sendLayerToEditMode:(NSString *)uid  {
-    // Set the given layer as current. If it is not
-    // already set.
+    // Set the given layer as current. If it is not already set.
     if ( ![self.currentLayer isEqualToString:uid] ) {
         
         // Make sure we hide the keyboard.
