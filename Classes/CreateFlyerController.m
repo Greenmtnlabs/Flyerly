@@ -5506,6 +5506,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 }
 
 - ( void )productSuccesfullyPurchased: (NSString *)productId {
+    appearingViewAfterInAppHide = YES;
     [self loadXibsAfterInAppCheck:YES againAddInSubViews:YES];
 }
 
