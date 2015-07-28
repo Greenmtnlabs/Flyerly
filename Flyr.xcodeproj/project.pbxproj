@@ -207,7 +207,6 @@
 		208C684F186DAA59004A74F2 /* FlyerlyConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 208C684E186DAA59004A74F2 /* FlyerlyConfigurator.m */; };
 		208E35A217C1F5C500CE54BE /* SigninController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A117C1F5C500CE54BE /* SigninController.xib */; };
 		208E35A417C20CC700CE54BE /* RegisterViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A317C20CC700CE54BE /* RegisterViewController_iPhone5.xib */; };
-		208E35AC17C224B100CE54BE /* welcome_bg-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 208E35AB17C224B100CE54BE /* welcome_bg-568h@2x.png */; };
 		20920015184F40330034C4F6 /* InviteFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20920013184F40330034C4F6 /* InviteFriendsCell.m */; };
 		20920016184F40330034C4F6 /* InviteFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20920014184F40330034C4F6 /* InviteFriendsCell.xib */; };
 		2092FFCC184E00BF0034C4F6 /* flyerlylogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2092FFCA184E00BF0034C4F6 /* flyerlylogo@2x.png */; };
@@ -1714,7 +1713,6 @@
 		208C684E186DAA59004A74F2 /* FlyerlyConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FlyerlyConfigurator.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		208E35A117C1F5C500CE54BE /* SigninController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SigninController.xib; path = ../SigninController.xib; sourceTree = "<group>"; };
 		208E35A317C20CC700CE54BE /* RegisterViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RegisterViewController_iPhone5.xib; path = ../RegisterViewController_iPhone5.xib; sourceTree = "<group>"; };
-		208E35AB17C224B100CE54BE /* welcome_bg-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome_bg-568h@2x.png"; sourceTree = "<group>"; };
 		20920012184F40330034C4F6 /* InviteFriendsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendsCell.h; sourceTree = "<group>"; };
 		20920013184F40330034C4F6 /* InviteFriendsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsCell.m; sourceTree = "<group>"; };
 		20920014184F40330034C4F6 /* InviteFriendsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendsCell.xib; sourceTree = "<group>"; };
@@ -3949,7 +3947,6 @@
 				20824B361908DFDA00AC0CB5 /* signin@2x.png */,
 				2086F90B17C4C2E300664123 /* Zmain_screenbg@2x.png */,
 				202FF12817C3ABDE003C6245 /* bkg_register-568h@2x.png */,
-				208E35AB17C224B100CE54BE /* welcome_bg-568h@2x.png */,
 				20D7474317BE7A9900966BA6 /* login_email_icon.png */,
 			);
 			name = NewLayOuts;
@@ -6295,7 +6292,6 @@
 				24751A6C1938A41A00DF03B2 /* art_tab@2x.png in Resources */,
 				208E35A217C1F5C500CE54BE /* SigninController.xib in Resources */,
 				208E35A417C20CC700CE54BE /* RegisterViewController_iPhone5.xib in Resources */,
-				208E35AC17C224B100CE54BE /* welcome_bg-568h@2x.png in Resources */,
 				2012ECAF1926078E00D5EA58 /* Sizes-iPhone4.xib in Resources */,
 				202FF12B17C3ABDE003C6245 /* bkg_register-568h@2x.png in Resources */,
 				247858BA194875D20062F1E4 /* Komoda-Regular.otf in Resources */,
