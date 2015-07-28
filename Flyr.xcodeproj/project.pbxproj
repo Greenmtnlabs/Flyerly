@@ -201,7 +201,6 @@
 		20714DF9187F25E1000D6838 /* settingsrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 20714DF8187F25E1000D6838 /* settingsrow.png */; };
 		207AB32B18ED473400945924 /* ShareKit.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 207AB32A18ED473400945924 /* ShareKit.podspec */; };
 		20824B371908DFDA00AC0CB5 /* signin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20824B361908DFDA00AC0CB5 /* signin@2x.png */; };
-		2086F90E17C4C2E300664123 /* Zmain_screenbg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2086F90B17C4C2E300664123 /* Zmain_screenbg@2x.png */; };
 		2087B6C017C73B40007A6A90 /* ResetPWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2087B6BE17C73B40007A6A90 /* ResetPWViewController.m */; };
 		2087B6C117C73B40007A6A90 /* ResetPWViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2087B6BF17C73B40007A6A90 /* ResetPWViewController.xib */; };
 		208C684F186DAA59004A74F2 /* FlyerlyConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 208C684E186DAA59004A74F2 /* FlyerlyConfigurator.m */; };
@@ -870,7 +869,6 @@
 		24861F6A19F9147100670F6D /* watermark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24861EA419F9147100670F6D /* watermark@3x.png */; };
 		24861F6B19F9147100670F6D /* youtube_share_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24861EA519F9147100670F6D /* youtube_share_selected@3x.png */; };
 		24861F6C19F9147100670F6D /* youtube_share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24861EA619F9147100670F6D /* youtube_share@3x.png */; };
-		24861F6D19F9147100670F6D /* Zmain_screenbg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24861EA719F9147100670F6D /* Zmain_screenbg@3x.png */; };
 		24861F6E19F9147100670F6D /* Zpassword_box@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24861EA819F9147100670F6D /* Zpassword_box@3x.png */; };
 		24861F6F19F9147100670F6D /* Zqemail_box@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24861EA919F9147100670F6D /* Zqemail_box@3x.png */; };
 		24861F7019F9147100670F6D /* Zregister_flyer@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24861EAA19F9147100670F6D /* Zregister_flyer@3x.png */; };
@@ -1012,8 +1010,6 @@
 		249F2064193F562C0072835E /* Zregister_flyer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 249F201A193F562C0072835E /* Zregister_flyer@2x.png */; };
 		249F2065193F562C0072835E /* Zsignup_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 249F201B193F562C0072835E /* Zsignup_button@2x.png */; };
 		249F2147193F5FAB0072835E /* password_email_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 249F2146193F5FAB0072835E /* password_email_icon@2x.png */; };
-		249F214A193F615F0072835E /* Zmain_screenbg-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 249F2148193F615F0072835E /* Zmain_screenbg-568h@2x.png */; };
-		249F214B193F615F0072835E /* Zmain_screenbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 249F2149193F615F0072835E /* Zmain_screenbg.png */; };
 		249F214D193F62020072835E /* pinned_flyer_bg2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 249F214C193F62020072835E /* pinned_flyer_bg2@2x.png */; };
 		24A81AC41B32D8AC00B6328D /* save_share.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A81AC11B32D8AC00B6328D /* save_share.png */; };
 		24A81AC51B32D8AC00B6328D /* save_share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A81AC21B32D8AC00B6328D /* save_share@2x.png */; };
@@ -1156,6 +1152,10 @@
 		C31E92F71B566229004DF193 /* icon74.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C31E92E21B566229004DF193 /* icon74.jpg */; };
 		C31F67481B676E6F0025FBBF /* Zwelcome_bg@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C31F67461B676E6F0025FBBF /* Zwelcome_bg@2x.jpg */; };
 		C31F67491B676E6F0025FBBF /* Zwelcome_bg@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C31F67471B676E6F0025FBBF /* Zwelcome_bg@3x.jpg */; };
+		C31F674E1B67855F0025FBBF /* Zmain_screenbg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C31F674A1B67855F0025FBBF /* Zmain_screenbg.jpg */; };
+		C31F674F1B67855F0025FBBF /* Zmain_screenbg@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C31F674B1B67855F0025FBBF /* Zmain_screenbg@2x.jpg */; };
+		C31F67501B67855F0025FBBF /* Zmain_screenbg@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C31F674C1B67855F0025FBBF /* Zmain_screenbg@3x.jpg */; };
+		C31F67511B67855F0025FBBF /* Zmain_screenbg-568h@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C31F674D1B67855F0025FBBF /* Zmain_screenbg-568h@2x.jpg */; };
 		C32139D61A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32139D51A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib */; };
 		C35350941B60CF5D00CF68F9 /* emoticon276zeimusu-Recorder-and-music.png in Resources */ = {isa = PBXBuildFile; fileRef = C35350791B60CF5D00CF68F9 /* emoticon276zeimusu-Recorder-and-music.png */; };
 		C35350951B60CF5D00CF68F9 /* emoticon268purplecar.png in Resources */ = {isa = PBXBuildFile; fileRef = C353507A1B60CF5D00CF68F9 /* emoticon268purplecar.png */; };
@@ -1705,7 +1705,6 @@
 		20714DF8187F25E1000D6838 /* settingsrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settingsrow.png; path = ../Classes/settingsrow.png; sourceTree = "<group>"; };
 		207AB32A18ED473400945924 /* ShareKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ShareKit.podspec; sourceTree = "<group>"; };
 		20824B361908DFDA00AC0CB5 /* signin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signin@2x.png"; sourceTree = "<group>"; };
-		2086F90B17C4C2E300664123 /* Zmain_screenbg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zmain_screenbg@2x.png"; sourceTree = "<group>"; };
 		2087B6BD17C73B40007A6A90 /* ResetPWViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPWViewController.h; sourceTree = "<group>"; };
 		2087B6BE17C73B40007A6A90 /* ResetPWViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPWViewController.m; sourceTree = "<group>"; };
 		2087B6BF17C73B40007A6A90 /* ResetPWViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResetPWViewController.xib; sourceTree = "<group>"; };
@@ -2436,7 +2435,6 @@
 		24861EA419F9147100670F6D /* watermark@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "watermark@3x.png"; sourceTree = "<group>"; };
 		24861EA519F9147100670F6D /* youtube_share_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "youtube_share_selected@3x.png"; sourceTree = "<group>"; };
 		24861EA619F9147100670F6D /* youtube_share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "youtube_share@3x.png"; sourceTree = "<group>"; };
-		24861EA719F9147100670F6D /* Zmain_screenbg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zmain_screenbg@3x.png"; sourceTree = "<group>"; };
 		24861EA819F9147100670F6D /* Zpassword_box@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zpassword_box@3x.png"; sourceTree = "<group>"; };
 		24861EA919F9147100670F6D /* Zqemail_box@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zqemail_box@3x.png"; sourceTree = "<group>"; };
 		24861EAA19F9147100670F6D /* Zregister_flyer@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zregister_flyer@3x.png"; sourceTree = "<group>"; };
@@ -2580,8 +2578,6 @@
 		249F201A193F562C0072835E /* Zregister_flyer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zregister_flyer@2x.png"; sourceTree = "<group>"; };
 		249F201B193F562C0072835E /* Zsignup_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zsignup_button@2x.png"; sourceTree = "<group>"; };
 		249F2146193F5FAB0072835E /* password_email_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "password_email_icon@2x.png"; sourceTree = "<group>"; };
-		249F2148193F615F0072835E /* Zmain_screenbg-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zmain_screenbg-568h@2x.png"; sourceTree = "<group>"; };
-		249F2149193F615F0072835E /* Zmain_screenbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Zmain_screenbg.png; sourceTree = "<group>"; };
 		249F214C193F62020072835E /* pinned_flyer_bg2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pinned_flyer_bg2@2x.png"; sourceTree = "<group>"; };
 		24A81AC11B32D8AC00B6328D /* save_share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save_share.png; sourceTree = "<group>"; };
 		24A81AC21B32D8AC00B6328D /* save_share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save_share@2x.png"; sourceTree = "<group>"; };
@@ -2748,6 +2744,10 @@
 		C31E92E21B566229004DF193 /* icon74.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon74.jpg; sourceTree = "<group>"; };
 		C31F67461B676E6F0025FBBF /* Zwelcome_bg@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Zwelcome_bg@2x.jpg"; sourceTree = "<group>"; };
 		C31F67471B676E6F0025FBBF /* Zwelcome_bg@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Zwelcome_bg@3x.jpg"; sourceTree = "<group>"; };
+		C31F674A1B67855F0025FBBF /* Zmain_screenbg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Zmain_screenbg.jpg; sourceTree = "<group>"; };
+		C31F674B1B67855F0025FBBF /* Zmain_screenbg@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Zmain_screenbg@2x.jpg"; sourceTree = "<group>"; };
+		C31F674C1B67855F0025FBBF /* Zmain_screenbg@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Zmain_screenbg@3x.jpg"; sourceTree = "<group>"; };
+		C31F674D1B67855F0025FBBF /* Zmain_screenbg-568h@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Zmain_screenbg-568h@2x.jpg"; sourceTree = "<group>"; };
 		C32139D51A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CropVideoViewController-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		C35350791B60CF5D00CF68F9 /* emoticon276zeimusu-Recorder-and-music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon276zeimusu-Recorder-and-music.png"; sourceTree = "<group>"; };
 		C353507A1B60CF5D00CF68F9 /* emoticon268purplecar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoticon268purplecar.png; sourceTree = "<group>"; };
@@ -3334,7 +3334,6 @@
 				24861EA419F9147100670F6D /* watermark@3x.png */,
 				24861EA519F9147100670F6D /* youtube_share_selected@3x.png */,
 				24861EA619F9147100670F6D /* youtube_share@3x.png */,
-				24861EA719F9147100670F6D /* Zmain_screenbg@3x.png */,
 				24861EA819F9147100670F6D /* Zpassword_box@3x.png */,
 				24861EA919F9147100670F6D /* Zqemail_box@3x.png */,
 				24861EAA19F9147100670F6D /* Zregister_flyer@3x.png */,
@@ -3382,8 +3381,6 @@
 				2471593019408E5F00B30301 /* tumblr_share_saved@2x.png */,
 				2471593119408E5F00B30301 /* Zpassword_box@2x.png */,
 				249F214C193F62020072835E /* pinned_flyer_bg2@2x.png */,
-				249F2148193F615F0072835E /* Zmain_screenbg-568h@2x.png */,
-				249F2149193F615F0072835E /* Zmain_screenbg.png */,
 				249F1FD3193F562C0072835E /* fb_setting@2x.png */,
 				249F1FD4193F562C0072835E /* flickr_share_selected@2x.png */,
 				249F1FD5193F562C0072835E /* flickr_share@2x.png */,
@@ -3943,9 +3940,12 @@
 		20D7473D17BE77C800966BA6 /* NewLayOuts */ = {
 			isa = PBXGroup;
 			children = (
+				C31F674A1B67855F0025FBBF /* Zmain_screenbg.jpg */,
+				C31F674B1B67855F0025FBBF /* Zmain_screenbg@2x.jpg */,
+				C31F674C1B67855F0025FBBF /* Zmain_screenbg@3x.jpg */,
+				C31F674D1B67855F0025FBBF /* Zmain_screenbg-568h@2x.jpg */,
 				249F2146193F5FAB0072835E /* password_email_icon@2x.png */,
 				20824B361908DFDA00AC0CB5 /* signin@2x.png */,
-				2086F90B17C4C2E300664123 /* Zmain_screenbg@2x.png */,
 				202FF12817C3ABDE003C6245 /* bkg_register-568h@2x.png */,
 				20D7474317BE7A9900966BA6 /* login_email_icon.png */,
 			);
@@ -5335,6 +5335,7 @@
 				0DFC5321109576AB00B18478 /* CreateFlyerController.xib in Resources */,
 				249F203C193F562C0072835E /* private_off_button@2x.png in Resources */,
 				C3766CF11B5650B000B7F5B2 /* Template53.jpg in Resources */,
+				C31F67511B67855F0025FBBF /* Zmain_screenbg-568h@2x.jpg in Resources */,
 				249F202E193F562C0072835E /* login_email_icon@2x.png in Resources */,
 				247858CD1948764D0062F1E4 /* Montserrat-Regular.ttf in Resources */,
 				204231641A10E1A1002F93D7 /* TextBorders-iPhone6-Plus.xib in Resources */,
@@ -5468,6 +5469,7 @@
 				202978891B4CFBE700F35E40 /* emoticon214-embarrassed@2x.png in Resources */,
 				24861F2619F9147100670F6D /* main_area_bg@3x.png in Resources */,
 				24861F4719F9147100670F6D /* size_button_selected@3x.png in Resources */,
+				C31F67501B67855F0025FBBF /* Zmain_screenbg@3x.jpg in Resources */,
 				C35D49261B3A75370021A0E9 /* save_share_selected@3x.png in Resources */,
 				242184E7194B4AEC00FDDA97 /* miga-icon.png in Resources */,
 				246EF4FC193C515D004539B2 /* emoticon31@2x.png in Resources */,
@@ -5765,6 +5767,7 @@
 				65A464E81726CBA2002C32FB /* Comfortaa_Bold.ttf in Resources */,
 				2018AF8F195AF14C00188F8E /* image_icon_selected@2x.png in Resources */,
 				C31E92E41B566229004DF193 /* icon77.jpg in Resources */,
+				C31F674F1B67855F0025FBBF /* Zmain_screenbg@2x.jpg in Resources */,
 				65A464E91726CBA2002C32FB /* GoodDog.otf in Resources */,
 				65A464EA1726CBA2002C32FB /* GrandHotel-Regular.otf in Resources */,
 				24861F1A19F9147100670F6D /* invite_sms_selected@3x.png in Resources */,
@@ -5777,7 +5780,6 @@
 				249F1FA3193F55D50072835E /* camera_button@2x.png in Resources */,
 				C31F67481B676E6F0025FBBF /* Zwelcome_bg@2x.jpg in Resources */,
 				249F2021193F562C0072835E /* font_button@2x.png in Resources */,
-				249F214A193F615F0072835E /* Zmain_screenbg-568h@2x.png in Resources */,
 				C3766CEF1B5650B000B7F5B2 /* Template51.jpg in Resources */,
 				24861F7119F9147100670F6D /* Zsignup_button@3x.png in Resources */,
 				242184C1194B4AEC00FDDA97 /* emoticon179@2x.png in Resources */,
@@ -5911,6 +5913,7 @@
 				246EF4E1193C515D004539B2 /* emoticon101@2x.png in Resources */,
 				24861F5319F9147100670F6D /* t_email_button@3x.png in Resources */,
 				2012ECBB19261D0B00D5EA58 /* Colours-iPhone4s.xib in Resources */,
+				C31F674E1B67855F0025FBBF /* Zmain_screenbg.jpg in Resources */,
 				249F1FB1193F55D50072835E /* cp_share_selected@2x.png in Resources */,
 				246EF509193C515D004539B2 /* emoticon43@2x.png in Resources */,
 				246EF51F193C515D004539B2 /* emoticon63@2x.png in Resources */,
@@ -6296,7 +6299,6 @@
 				2012ECAF1926078E00D5EA58 /* Sizes-iPhone4.xib in Resources */,
 				202FF12B17C3ABDE003C6245 /* bkg_register-568h@2x.png in Resources */,
 				247858BA194875D20062F1E4 /* Komoda-Regular.otf in Resources */,
-				2086F90E17C4C2E300664123 /* Zmain_screenbg@2x.png in Resources */,
 				24B75120193DA06D007B6B85 /* Cliparts.xib in Resources */,
 				246EF504193C515D004539B2 /* emoticon39@2x.png in Resources */,
 				24861EF119F9147100670F6D /* drawing_tab@3x.png in Resources */,
@@ -6382,7 +6384,6 @@
 				C35350A31B60CF5D00CF68F9 /* emoticon261JNESS-POLICE-CAR.png in Resources */,
 				C35350AC1B60CF5D00CF68F9 /* emoticon272sweet-kids.png in Resources */,
 				242184A0194B4AEC00FDDA97 /* emoticon145@2x.png in Resources */,
-				249F214B193F615F0072835E /* Zmain_screenbg.png in Resources */,
 				246EF53F193C515D004539B2 /* emoticon92@2x.png in Resources */,
 				24861F3D19F9147100670F6D /* register-bg-iPhone5@3x.png in Resources */,
 				249F1FB3193F55D50072835E /* createButton@2x.png in Resources */,
@@ -6585,7 +6586,6 @@
 				24861F3F19F9147100670F6D /* save_gallery@3x.png in Resources */,
 				C31E92C21B566207004DF193 /* bicon19.png in Resources */,
 				204BC2E21A10E99800FEB946 /* Sizes-iPhone6-Plus.xib in Resources */,
-				24861F6D19F9147100670F6D /* Zmain_screenbg@3x.png in Resources */,
 				2026992E18CF200F00945218 /* blue_arrow.png in Resources */,
 				24861F0E19F9147100670F6D /* home_button@3x.png in Resources */,
 				C3766CAB1B5650B000B7F5B2 /* Template92.jpg in Resources */,

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FlyerlyMainScreen">
@@ -35,7 +35,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Zmain_screenbg.png" id="76">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Zmain_screenbg.jpg" id="76">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="530"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         </imageView>
@@ -228,7 +228,7 @@
         </view>
     </objects>
     <resources>
-        <image name="Zmain_screenbg.png" width="230" height="300"/>
+        <image name="Zmain_screenbg.jpg" width="230" height="300"/>
         <image name="pinned_flyer2.png" width="63" height="82"/>
         <image name="pinned_flyer_bg2.png" width="130" height="130"/>
         <image name="settings2.png" width="71" height="68"/>
