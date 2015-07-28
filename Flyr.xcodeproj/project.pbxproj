@@ -875,7 +875,6 @@
 		24861F6F19F9147100670F6D /* Zqemail_box@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24861EA919F9147100670F6D /* Zqemail_box@3x.png */; };
 		24861F7019F9147100670F6D /* Zregister_flyer@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24861EAA19F9147100670F6D /* Zregister_flyer@3x.png */; };
 		24861F7119F9147100670F6D /* Zsignup_button@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24861EAB19F9147100670F6D /* Zsignup_button@3x.png */; };
-		24861F7219F9147100670F6D /* Zwelcome_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24861EAC19F9147100670F6D /* Zwelcome_bg@3x.png */; };
 		248A3625193EF44D0005FCAD /* Entypo.otf in Resources */ = {isa = PBXBuildFile; fileRef = 248A3624193EF44D0005FCAD /* Entypo.otf */; };
 		248A3628193F20F30005FCAD /* video_tab_lock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 248A3626193F20F30005FCAD /* video_tab_lock@2x.png */; };
 		248A3629193F20F30005FCAD /* video_tab_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 248A3627193F20F30005FCAD /* video_tab_selected@2x.png */; };
@@ -1012,7 +1011,6 @@
 		249F2063193F562C0072835E /* Zqemail_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 249F2019193F562C0072835E /* Zqemail_box@2x.png */; };
 		249F2064193F562C0072835E /* Zregister_flyer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 249F201A193F562C0072835E /* Zregister_flyer@2x.png */; };
 		249F2065193F562C0072835E /* Zsignup_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 249F201B193F562C0072835E /* Zsignup_button@2x.png */; };
-		249F2066193F562C0072835E /* Zwelcome_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 249F201C193F562C0072835E /* Zwelcome_bg@2x.png */; };
 		249F2147193F5FAB0072835E /* password_email_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 249F2146193F5FAB0072835E /* password_email_icon@2x.png */; };
 		249F214A193F615F0072835E /* Zmain_screenbg-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 249F2148193F615F0072835E /* Zmain_screenbg-568h@2x.png */; };
 		249F214B193F615F0072835E /* Zmain_screenbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 249F2149193F615F0072835E /* Zmain_screenbg.png */; };
@@ -1156,6 +1154,8 @@
 		C31E92F51B566229004DF193 /* icon94.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C31E92E01B566229004DF193 /* icon94.jpg */; };
 		C31E92F61B566229004DF193 /* icon75.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C31E92E11B566229004DF193 /* icon75.jpg */; };
 		C31E92F71B566229004DF193 /* icon74.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C31E92E21B566229004DF193 /* icon74.jpg */; };
+		C31F67481B676E6F0025FBBF /* Zwelcome_bg@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C31F67461B676E6F0025FBBF /* Zwelcome_bg@2x.jpg */; };
+		C31F67491B676E6F0025FBBF /* Zwelcome_bg@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C31F67471B676E6F0025FBBF /* Zwelcome_bg@3x.jpg */; };
 		C32139D61A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32139D51A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib */; };
 		C35350941B60CF5D00CF68F9 /* emoticon276zeimusu-Recorder-and-music.png in Resources */ = {isa = PBXBuildFile; fileRef = C35350791B60CF5D00CF68F9 /* emoticon276zeimusu-Recorder-and-music.png */; };
 		C35350951B60CF5D00CF68F9 /* emoticon268purplecar.png in Resources */ = {isa = PBXBuildFile; fileRef = C353507A1B60CF5D00CF68F9 /* emoticon268purplecar.png */; };
@@ -2441,7 +2441,6 @@
 		24861EA919F9147100670F6D /* Zqemail_box@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zqemail_box@3x.png"; sourceTree = "<group>"; };
 		24861EAA19F9147100670F6D /* Zregister_flyer@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zregister_flyer@3x.png"; sourceTree = "<group>"; };
 		24861EAB19F9147100670F6D /* Zsignup_button@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zsignup_button@3x.png"; sourceTree = "<group>"; };
-		24861EAC19F9147100670F6D /* Zwelcome_bg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zwelcome_bg@3x.png"; sourceTree = "<group>"; };
 		248A3624193EF44D0005FCAD /* Entypo.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Entypo.otf; path = Data/fonts/Entypo.otf; sourceTree = "<group>"; };
 		248A3626193F20F30005FCAD /* video_tab_lock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_tab_lock@2x.png"; sourceTree = "<group>"; };
 		248A3627193F20F30005FCAD /* video_tab_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_tab_selected@2x.png"; sourceTree = "<group>"; };
@@ -2580,7 +2579,6 @@
 		249F2019193F562C0072835E /* Zqemail_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zqemail_box@2x.png"; sourceTree = "<group>"; };
 		249F201A193F562C0072835E /* Zregister_flyer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zregister_flyer@2x.png"; sourceTree = "<group>"; };
 		249F201B193F562C0072835E /* Zsignup_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zsignup_button@2x.png"; sourceTree = "<group>"; };
-		249F201C193F562C0072835E /* Zwelcome_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zwelcome_bg@2x.png"; sourceTree = "<group>"; };
 		249F2146193F5FAB0072835E /* password_email_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "password_email_icon@2x.png"; sourceTree = "<group>"; };
 		249F2148193F615F0072835E /* Zmain_screenbg-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zmain_screenbg-568h@2x.png"; sourceTree = "<group>"; };
 		249F2149193F615F0072835E /* Zmain_screenbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Zmain_screenbg.png; sourceTree = "<group>"; };
@@ -2748,6 +2746,8 @@
 		C31E92E01B566229004DF193 /* icon94.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon94.jpg; sourceTree = "<group>"; };
 		C31E92E11B566229004DF193 /* icon75.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon75.jpg; sourceTree = "<group>"; };
 		C31E92E21B566229004DF193 /* icon74.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon74.jpg; sourceTree = "<group>"; };
+		C31F67461B676E6F0025FBBF /* Zwelcome_bg@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Zwelcome_bg@2x.jpg"; sourceTree = "<group>"; };
+		C31F67471B676E6F0025FBBF /* Zwelcome_bg@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Zwelcome_bg@3x.jpg"; sourceTree = "<group>"; };
 		C32139D51A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CropVideoViewController-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		C35350791B60CF5D00CF68F9 /* emoticon276zeimusu-Recorder-and-music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon276zeimusu-Recorder-and-music.png"; sourceTree = "<group>"; };
 		C353507A1B60CF5D00CF68F9 /* emoticon268purplecar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoticon268purplecar.png; sourceTree = "<group>"; };
@@ -3124,6 +3124,8 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				C31F67461B676E6F0025FBBF /* Zwelcome_bg@2x.jpg */,
+				C31F67471B676E6F0025FBBF /* Zwelcome_bg@3x.jpg */,
 				C31E92A21B566207004DF193 /* BordersIcons */,
 				C3D8DD7C1B53DBE1006C2A9F /* Borders */,
 				246EF477193C515D004539B2 /* Emoticons */,
@@ -3337,7 +3339,6 @@
 				24861EA919F9147100670F6D /* Zqemail_box@3x.png */,
 				24861EAA19F9147100670F6D /* Zregister_flyer@3x.png */,
 				24861EAB19F9147100670F6D /* Zsignup_button@3x.png */,
-				24861EAC19F9147100670F6D /* Zwelcome_bg@3x.png */,
 				24556D8419EE7E65005FCDFE /* more@2x.png */,
 				24556D7E19EE7E2E005FCDFE /* more.png */,
 				24556D8019EE7E2E005FCDFE /* more@3x.png */,
@@ -3453,7 +3454,6 @@
 				249F2019193F562C0072835E /* Zqemail_box@2x.png */,
 				249F201A193F562C0072835E /* Zregister_flyer@2x.png */,
 				249F201B193F562C0072835E /* Zsignup_button@2x.png */,
-				249F201C193F562C0072835E /* Zwelcome_bg@2x.png */,
 				249F1FB5193F55E90072835E /* dfcontact@2x.jpg */,
 				249F1FB6193F55E90072835E /* email_box@2x.png */,
 				249F1FB8193F55E90072835E /* email_setting_selected@2x.png */,
@@ -5503,7 +5503,6 @@
 				24861ED419F9147100670F6D /* clip_setting_selected@3x.png in Resources */,
 				20930D7B19AB5F22004B9F93 /* drawing_tab_selected@2x.png in Resources */,
 				C3766D8A1B56510200B7F5B2 /* icon62.jpg in Resources */,
-				24861F7219F9147100670F6D /* Zwelcome_bg@3x.png in Resources */,
 				2029789F1B4CFBE700F35E40 /* emoticon236-sexy_girl@2x.png in Resources */,
 				242184BC194B4AEC00FDDA97 /* emoticon174@2x.png in Resources */,
 				24218469194B4AEC00FDDA97 /* bucket-icon.png in Resources */,
@@ -5776,6 +5775,7 @@
 				65A464EB1726CBA2002C32FB /* Helvetica Inserat Cyrillic Upright.ttf in Resources */,
 				C3766D941B56510200B7F5B2 /* icon72.jpg in Resources */,
 				249F1FA3193F55D50072835E /* camera_button@2x.png in Resources */,
+				C31F67481B676E6F0025FBBF /* Zwelcome_bg@2x.jpg in Resources */,
 				249F2021193F562C0072835E /* font_button@2x.png in Resources */,
 				249F214A193F615F0072835E /* Zmain_screenbg-568h@2x.png in Resources */,
 				C3766CEF1B5650B000B7F5B2 /* Template51.jpg in Resources */,
@@ -5914,6 +5914,7 @@
 				249F1FB1193F55D50072835E /* cp_share_selected@2x.png in Resources */,
 				246EF509193C515D004539B2 /* emoticon43@2x.png in Resources */,
 				246EF51F193C515D004539B2 /* emoticon63@2x.png in Resources */,
+				C31F67491B676E6F0025FBBF /* Zwelcome_bg@3x.jpg in Resources */,
 				C32139D61A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib in Resources */,
 				2421849A194B4AEC00FDDA97 /* emoticon139@2x.png in Resources */,
 				202978AE1B4CFBE700F35E40 /* emoticon198-waaaht@2x.png in Resources */,
@@ -6325,7 +6326,6 @@
 				C353512F1B61008200CF68F9 /* icon2.jpg in Resources */,
 				C35D49251B3A75370021A0E9 /* save_share_selected@2x.png in Resources */,
 				C3766CF01B5650B000B7F5B2 /* Template52.jpg in Resources */,
-				249F2066193F562C0072835E /* Zwelcome_bg@2x.png in Resources */,
 				246EF534193C515D004539B2 /* emoticon82@2x.png in Resources */,
 				4977B1DF193C90FA0024A209 /* tick@2x.png in Resources */,
 				C31E92B91B566207004DF193 /* bicon10.png in Resources */,
