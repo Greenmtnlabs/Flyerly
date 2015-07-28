@@ -35,15 +35,16 @@ static UserPurchases *sharedSingleton = nil;
 }
 
 - (BOOL) checkKeyExistsInPurchases : (NSString *)productId {
-    if ( [oldPurchases objectForKey:@"comflyerlyAllDesignBundle"] || [self isSubscriptionValid] ) {
-        return YES;
-    } else {
     
-        NSString *productId_ = [productId stringByReplacingOccurrencesOfString:@"." withString:@""];
-        //Bundles have a particular expiry date
-        BOOL notInExpiryBaseBundles = !([productId_ isEqualToString:@"comflyerlyMonthlySubscription"] || [productId_ isEqualToString:@"comflyerlyYearlySubscription1"]);
+    if ( [oldPurchases objectForKey:@"comflyerlyAllDesignBundle"] || [self isSubscriptionValid] ) {
         
-        if ( notInExpiryBaseBundles && [oldPurchases objectForKey:productId_] ) {
+        return YES;
+        
+    } else {
+        
+        NSString *productId_ = [productId stringByReplacingOccurrencesOfString:@"." withString:@""];
+        
+        if ( !([productId_ isEqualToString:@"comflyerlyMonthlySubscription"] || [productId_ isEqualToString:@"comflyerlyYearlySubscription1"]) && [oldPurchases objectForKey:productId_] ) {
             return YES;
         }
     }
@@ -115,23 +116,23 @@ static UserPurchases *sharedSingleton = nil;
 
 /**
  Check if monthly subscription is valid or not
-**/
--(BOOL)isSubscriptionValid {
+ **/
+-(BOOL)isSubscriptionValid{
+    
     RMAppReceipt* appReceipt = [RMAppReceipt bundleReceipt];
-
+    
+    // get monthly subscription validity
+    NSString *isMonthlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:@"com.flyerly.MonthlySubscription" forDate:[NSDate date]]];
+    
     // get Yearly subscription validity
     NSString *isYearlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:@"com.flyerly.YearlySubscription1" forDate:[NSDate date]]];
-
-    if( [oldPurchases objectForKey:@"comflyerlyYearlySubscription1"] && [isYearlySubValid isEqualToString:@"1"] ){
+    
+    // check whether one of 'em is valid or not..
+    if( [isMonthlySubValid isEqual:@"1"] || [isYearlySubValid isEqualToString:@"1"] ){
         return YES;
+    } else {
+        return NO;
     }
-
-    NSString *isMonthlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:@"com.flyerly.MonthlySubscription" forDate:[NSDate date]]];
-    if( [oldPurchases objectForKey:@"comflyerlyMonthlySubscription"] && [isMonthlySubValid isEqual:@"1"] ){
-        return YES;
-    }
-
-    return NO;
 }
 
 @end
