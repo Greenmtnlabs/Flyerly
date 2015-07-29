@@ -23,6 +23,7 @@
 @synthesize untechable;
 
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initializeTextViews];
@@ -266,8 +267,14 @@
     
     untechable  = [[Untechable alloc] init];
     untechable.commonFunctions = [[CommonFunctions alloc] init];
-    [untechable setOrSaveVars:@"RESET"];
+    untechable.untechableModel = [[UntechableModel alloc] init];
+    //untechable.untechableModel.
+    //untechable.untechableModel.id = (int)[untechable.untechableModel primaryKey];
+    //[untechable setOrSaveVars:@"RESET"];
+    //[untechable initWithDefValues];
     [untechable initUntechableDirectory];
+    
+    
 }
 
 /**

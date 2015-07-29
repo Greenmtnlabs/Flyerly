@@ -27,6 +27,8 @@
 		200ACE341A3874B200DC7047 /* YahooIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE221A3874B200DC7047 /* YahooIcon@2x.png */; };
 		200ACE351A3874B200DC7047 /* YahooIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE231A3874B200DC7047 /* YahooIcon@3x.png */; };
 		20468BF91B5FCF480019A2D3 /* ContactCustomizeDetailsControlelrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 243C59DE1A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.m */; };
+		2059DEA61B6602D600CC8AFB /* RealmModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2059DEA51B6602D600CC8AFB /* RealmModel.m */; };
+		2059DEAC1B660A5800CC8AFB /* UntechableModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2059DEAB1B660A5800CC8AFB /* UntechableModel.m */; };
 		207E6A521B53ED070067A1B5 /* SingleContactDetailsModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 207E6A511B53ED070067A1B5 /* SingleContactDetailsModal.m */; };
 		20CCD2CF1B611DAA00CBE11A /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CCD2CE1B611DAA00CBE11A /* logo.png */; };
 		20CCD2D01B611DAA00CBE11A /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CCD2CE1B611DAA00CBE11A /* logo.png */; };
@@ -279,11 +281,15 @@
 		200ACE211A3874B200DC7047 /* YahooIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YahooIcon.png; sourceTree = "<group>"; };
 		200ACE221A3874B200DC7047 /* YahooIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YahooIcon@2x.png"; sourceTree = "<group>"; };
 		200ACE231A3874B200DC7047 /* YahooIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YahooIcon@3x.png"; sourceTree = "<group>"; };
+		2059DEA51B6602D600CC8AFB /* RealmModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealmModel.m; sourceTree = "<group>"; };
+		2059DEA81B6609E300CC8AFB /* UntechableModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UntechableModel.h; sourceTree = "<group>"; };
+		2059DEAB1B660A5800CC8AFB /* UntechableModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UntechableModel.m; sourceTree = "<group>"; };
 		207E6A501B53ECF60067A1B5 /* SingleContactDetailsModal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingleContactDetailsModal.h; sourceTree = "<group>"; };
 		207E6A511B53ED070067A1B5 /* SingleContactDetailsModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleContactDetailsModal.m; sourceTree = "<group>"; };
 		20CCD2CE1B611DAA00CBE11A /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		20CCD2D11B611E1200CBE11A /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		20CCD2D41B611E1900CBE11A /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
+		20D24C301B668CA3004EEB92 /* RealmModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealmModel.h; sourceTree = "<group>"; };
 		2402BB801A1DBF6A00255A73 /* UntechablesList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UntechablesList.h; path = UntechableListController/UntechablesList.h; sourceTree = "<group>"; };
 		2402BB811A1DBF6A00255A73 /* UntechablesList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UntechablesList.m; path = UntechableListController/UntechablesList.m; sourceTree = "<group>"; };
 		2402BB821A1DBF6A00255A73 /* UntechablesList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UntechablesList.xib; path = UntechableListController/UntechablesList.xib; sourceTree = "<group>"; };
@@ -876,6 +882,10 @@
 				36474F2819D9AC3800084F34 /* UIPlaceHolderTextView.m */,
 				366ECD7C19D3135200F71A11 /* Untechable.h */,
 				366ECD7D19D3135200F71A11 /* Untechable.m */,
+				20D24C301B668CA3004EEB92 /* RealmModel.h */,
+				2059DEA51B6602D600CC8AFB /* RealmModel.m */,
+				2059DEA81B6609E300CC8AFB /* UntechableModel.h */,
+				2059DEAB1B660A5800CC8AFB /* UntechableModel.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1540,6 +1550,7 @@
 				3663932519D6A0A700512965 /* CommonFunctions.m in Sources */,
 				3681603D19E6B81E00B9B64C /* InviteFriendsCell.m in Sources */,
 				36474F2919D9AC3800084F34 /* UIPlaceHolderTextView.m in Sources */,
+				2059DEAC1B660A5800CC8AFB /* UntechableModel.m in Sources */,
 				36B036A619DAF44D00E8CD21 /* EmailSettingController.m in Sources */,
 				24AFE79B1B38086A00CC8230 /* SetupGuideThirdView.m in Sources */,
 				36561D7C19D2C8A40069D897 /* AppDelegate.m in Sources */,
@@ -1558,6 +1569,7 @@
 				24354D701A499F4F000EC781 /* ContactListCell.m in Sources */,
 				36561D7819D2C8A40069D897 /* main.m in Sources */,
 				247402421B33CBD700459759 /* SetupGuideViewController.m in Sources */,
+				2059DEA61B6602D600CC8AFB /* RealmModel.m in Sources */,
 				24354D6B1A499EC5000EC781 /* ContactsListControllerViewController.m in Sources */,
 				C33A87B31A7BCDB4000B9DAE /* EmailChangingController.m in Sources */,
 			);

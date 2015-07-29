@@ -137,6 +137,8 @@ int indexArrayS2[];
     untechable  = [[Untechable alloc] init];
     untechable.commonFunctions = [[CommonFunctions alloc] init];
     
+    untechable.untechableModel = [[UntechableModel alloc] init];
+    
     //For testing -------- { --
     [self configureTestData];
     //For testing -------- } --
@@ -759,7 +761,7 @@ int indexArrayS2[];
     
     //Background work
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        [untechable setOrSaveVars:@"SAVE"];
+       // [untechable setOrSaveVars:@"SAVE"];
         [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
             
             if( !([message isEqualToString:@""]) ) {

@@ -10,9 +10,12 @@
 
 @interface SingleContactDetailsModal : NSObject
 
-@property (nonatomic,strong)NSString *name;
-@property (nonatomic,strong)NSMutableArray *allEmails;
-@property (nonatomic,strong)NSMutableArray *allPhoneNumbers;
+@property (nonatomic,strong)NSString *contactName;
+@property (nonatomic,strong)NSMutableArray *emailAddresses;
+@property (nonatomic,strong)NSMutableArray *phoneNumbers;
+@property (nonatomic,strong)NSString *customTextForContact;
+@property (nonatomic,strong)NSMutableArray *cutomizingStatusArray;
+@property BOOL *IsCustomized;
 
 
 

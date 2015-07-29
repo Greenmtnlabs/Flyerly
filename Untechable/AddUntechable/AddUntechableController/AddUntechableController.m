@@ -50,6 +50,7 @@
 
 @implementation AddUntechableController
 
+
 @synthesize indexOfUntechableInEditMode,callReset,untechable;
 
 #pragma mark -  Default functions
@@ -319,7 +320,7 @@
     untechable.spendingTimeTxt = _inputSpendingTimeText.text;
     untechable.hasEndDate = !([_cbNoEndDate isSelected]);
     
-    [untechable setOrSaveVars:SAVE];
+    //[untechable setOrSaveVars:SAVE];
 }
 
 -(void) hideAllControlls {
@@ -486,6 +487,8 @@
     //init object
     untechable  = [[Untechable alloc] init];
     untechable.commonFunctions = [[CommonFunctions alloc] init];
+    untechable.untechableModel = [[UntechableModel alloc] init];
+    //untechable.untechableModel.id = (int)[untechable.untechableModel primaryKey];
     
     //Set Date formate
     untechable.dateFormatter = [[NSDateFormatter alloc] init];
@@ -545,7 +548,7 @@
     else if( [callResetFor isEqualToString:@"RESET1"] ){
         untechable.savedOnServer = NO;
         untechable.paid = NO;
-        [untechable setOrSaveVars:SAVE];
+        //[untechable setOrSaveVars:SAVE];
     }
 }
 

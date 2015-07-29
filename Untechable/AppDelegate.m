@@ -15,13 +15,42 @@
 #import "SetupGuideViewController.h"
 #import "UntechOptionsViewController.h"
 
+#import "Person.h"
+#import <Realm/Realm.h>
+
 @implementation AppDelegate
 
 Untechable *untechable;
+
 NSMutableArray *allUntechables;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    /*
+    NSString *date = nil;
+    // Create object
+    Person *author = [[Person alloc] init];
+    
+    author.name    = @"David Foster Wallace";
+    author.birthdate =(date != nil) ? date : @"";
+    // Get the default Realm
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    // You only need to do this once (per thread)
+    
+    NSMutableArray *stringObjects = [[NSMutableArray alloc] init ];
+                                     [stringObjects addObject:@"Aaaa"];
+                                     [stringObjects addObject:@"Bbbb"];
+                                     
+    author.emails = @"{\"name\": \"John Doe\",\"aliases\": [{\"alias\": \"John\"},{\"alias\": \"JD\"}]}";
+    
+    // Add to Realm with transaction
+    [realm beginWriteTransaction];
+    [realm addObject:author];
+    [realm commitWriteTransaction];
+    
+    
+    return YES;
+    */
     [Crittercism enableWithAppID: CRITTERCISM_APP_ID];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -53,6 +82,10 @@ NSMutableArray *allUntechables;
     //init object
     untechable  = [[Untechable alloc] init];
     untechable.commonFunctions = [[CommonFunctions alloc] init];
+    
+    // init new untechable model
+    untechable.untechableModel = [[UntechableModel alloc] init];
+    
     
     //For testing -------- { --
     [self configureTestData];

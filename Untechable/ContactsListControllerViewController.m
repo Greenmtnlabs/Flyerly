@@ -183,7 +183,7 @@
     //untechable.spendingTimeTxt = _inputSpendingTimeText.text;
     //untechable.hasEndDate = !([_cbNoEndDate isSelected]);
     
-    [untechable setOrSaveVars:SAVE];
+    //[untechable setOrSaveVars:SAVE];
 }
 
 - (void)setSkipHighlighted:(BOOL)highlighted {

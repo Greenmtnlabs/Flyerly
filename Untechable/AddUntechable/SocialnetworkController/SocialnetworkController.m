@@ -78,7 +78,7 @@
     
     [super viewDidAppear:animated];
     [untechable printNavigation:[self navigationController]];
-    [untechable setOrSaveVars:SAVE];
+    //[untechable setOrSaveVars:SAVE];
     
 }
 /*
@@ -285,7 +285,7 @@
             
             //Background work
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-                [untechable setOrSaveVars:SAVE];
+                //[untechable setOrSaveVars:SAVE];
                 [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
                     
                     if( !([message isEqualToString:@""]) ) {
@@ -506,7 +506,7 @@
 {
     //untechable.socialStatus = [NSString stringWithFormat:@"%@",_inputSetSocialStatus.text];
     untechable.socialStatus = inputSetSocialStatus.text;
-    [untechable setOrSaveVars:SAVE];
+    //[untechable setOrSaveVars:SAVE];
 }
 
 -(void)requestPublishPermissions{

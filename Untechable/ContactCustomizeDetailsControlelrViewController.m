@@ -65,7 +65,7 @@
     }
     
     // assign tempContactDetailsModal the name of contact
-    tempContactDetailsModal.name = contactModal.name;
+    tempContactDetailsModal.contactName = contactModal.name;
     
     /**
      * After matching the current contact name
@@ -76,17 +76,17 @@
      * This is done so that changes (i.e. update, delete etc) can be made
      * on the running model (i.e. tempContactDetailsModal).
      */
-    
+   
     if(untechable.selectedContacts.count != 0){
         for(int i=0; i<untechable.selectedContacts.count; i++){
-            if([[untechable.selectedContacts[i] valueForKey:@"name"] isEqualToString: tempContactDetailsModal.name] ){
-                NSMutableArray *allPh = [untechable.selectedContacts[i] valueForKey:@"allPhoneNumbers"];
-                NSMutableArray *allEmail = [untechable.selectedContacts[i] valueForKey:@"allEmails"];
+            if([[untechable.selectedContacts[i] valueForKey:@"contactName"] isEqualToString: tempContactDetailsModal.contactName] ){
+                NSMutableArray *allPh = [untechable.selectedContacts[i] valueForKey:@"phoneNumbers"];
+                NSMutableArray *allEmail = [untechable.selectedContacts[i] valueForKey:@"emailAddresses"];
                 for(int j=0; j<allPh.count;j++) {
-                    [tempContactDetailsModal.allPhoneNumbers addObject: allPh[j]];
+                    [tempContactDetailsModal.phoneNumbers addObject: allPh[j]];
                 }
                 for(int k=0; k<allEmail.count;k++) {
-                    [tempContactDetailsModal.allEmails addObject: allEmail[k]];
+                    [tempContactDetailsModal.emailAddresses addObject: allEmail[k]];
                 }
                 break;
             }
@@ -502,6 +502,11 @@
         }
     }
     
+    tempContactDetailsModal.IsCustomized = contactModal.IsCustomized;
+    tempContactDetailsModal.customTextForContact = contactModal.customTextForContact;
+    [tempContactDetailsModal.cutomizingStatusArray addObject:contactModal.cutomizingStatusArray];
+    
+    
     /**
      * This condition makes sure that
      * any contact without any flag set
@@ -514,7 +519,7 @@
     } else {
         if( isRepeat) {
             for( int i=0; i<untechable.selectedContacts.count; i++ ){
-                if( [[untechable.selectedContacts[i] valueForKey:@"name"] isEqualToString: tempContactDetailsModal.name] ){
+                if( [[untechable.selectedContacts[i] valueForKey:@"contactName"] isEqualToString: tempContactDetailsModal.contactName] ){
                     
                     // check if there is no contact type (i.e, email, phone) set, remove this from contact list
                     if( !tempContactDetailsModal.hasContacts ){
@@ -560,19 +565,19 @@
     }
   
     // to add and remove the redundant email addresses and flags
-    if(tempContactDetailsModal.allEmails.count > 0){
+    if(tempContactDetailsModal.emailAddresses.count > 0){
         if(isRepeat){
             // to find email address type and update flags
-            for(int i=0; i<tempContactDetailsModal.allEmails.count; i++){
+            for(int i=0; i<tempContactDetailsModal.emailAddresses.count; i++){
                 // found contact type
-                if( [tempContactDetailsModal.allEmails[i][0] isEqualToString: tempEmailWithStatus[0]] ){
+                if( [tempContactDetailsModal.emailAddresses[i][0] isEqualToString: tempEmailWithStatus[0]] ){
                     // to remove if no flag is set to 1
                     if([tempEmailWithStatus[1] isEqualToString: @"0"] ){
-                        [tempContactDetailsModal.allEmails removeObjectAtIndex:i];
+                        [tempContactDetailsModal.emailAddresses removeObjectAtIndex:i];
                         isRepeat = NO;
                         break;
                     }else{
-                        [tempContactDetailsModal.allEmails replaceObjectAtIndex:i withObject:tempEmailWithStatus];
+                        [tempContactDetailsModal.emailAddresses replaceObjectAtIndex:i withObject:tempEmailWithStatus];
                         isRepeat = NO;
                         break;
                     }
@@ -580,11 +585,11 @@
             }
             //if not found, add new eamil
             if(isRepeat) {
-                [tempContactDetailsModal.allEmails addObject:tempEmailWithStatus];
+                [tempContactDetailsModal.emailAddresses addObject:tempEmailWithStatus];
             }
         }
     }else{
-        [tempContactDetailsModal.allEmails addObject:tempEmailWithStatus];
+        [tempContactDetailsModal.emailAddresses addObject:tempEmailWithStatus];
     }
     
     [editingEmailsWithStatus setObject:tempEmailWithStatus forKey:indexPath];
@@ -616,19 +621,19 @@
     }
     
     // to add and remove the redundant phone numbers and flags
-    if(tempContactDetailsModal.allPhoneNumbers.count > 0){
+    if(tempContactDetailsModal.phoneNumbers.count > 0){
         if(isRepeat){
             // to find phone number type and update flags
-            for(int i=0; i<tempContactDetailsModal.allPhoneNumbers.count; i++){
+            for(int i=0; i<tempContactDetailsModal.phoneNumbers.count; i++){
                 // found contact type
-                if( [tempContactDetailsModal.allPhoneNumbers[i][0] isEqualToString: tempPhoneWithStatus[0]] ){
+                if( [tempContactDetailsModal.phoneNumbers[i][0] isEqualToString: tempPhoneWithStatus[0]] ){
                     // to remove if no flag is set to 1
                     if([tempPhoneWithStatus[2] isEqualToString: @"0"] && [tempPhoneWithStatus[3] isEqualToString: @"0"]  ){
-                        [tempContactDetailsModal.allPhoneNumbers removeObjectAtIndex:i];
+                        [tempContactDetailsModal.phoneNumbers removeObjectAtIndex:i];
                         isRepeat = NO;
                         break;
                     }else{
-                        [tempContactDetailsModal.allPhoneNumbers replaceObjectAtIndex:i withObject:tempPhoneWithStatus];
+                        [tempContactDetailsModal.phoneNumbers replaceObjectAtIndex:i withObject:tempPhoneWithStatus];
                         isRepeat = NO;
                         break;
                     }
@@ -636,11 +641,11 @@
             }
             //if not found, add new phone number
             if(isRepeat) {
-                [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
+                [tempContactDetailsModal.phoneNumbers addObject:tempPhoneWithStatus];
             }
         }
     }else{
-        [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
+        [tempContactDetailsModal.phoneNumbers addObject:tempPhoneWithStatus];
     }
     [editingPhonesWithStatus setObject:tempPhoneWithStatus forKey:indexPath];
    
@@ -673,19 +678,19 @@
     }
     
     // to add and remove the redundant phone numbers and flags
-    if(tempContactDetailsModal.allPhoneNumbers.count > 0){
+    if(tempContactDetailsModal.phoneNumbers.count > 0){
         if(isRepeat){
             // to find phone number type and update flags
-            for(int i=0; i<tempContactDetailsModal.allPhoneNumbers.count; i++){
+            for(int i=0; i<tempContactDetailsModal.phoneNumbers.count; i++){
                 // found contact type
-                if( [tempContactDetailsModal.allPhoneNumbers[i][0] isEqualToString: tempPhoneWithStatus[0]] ){
+                if( [tempContactDetailsModal.phoneNumbers[i][0] isEqualToString: tempPhoneWithStatus[0]] ){
                     // to remove if no flag is set to 1
                     if([tempPhoneWithStatus[2] isEqualToString: @"0"] && [tempPhoneWithStatus[3] isEqualToString: @"0"]  ){
-                        [tempContactDetailsModal.allPhoneNumbers removeObjectAtIndex:i];
+                        [tempContactDetailsModal.phoneNumbers removeObjectAtIndex:i];
                         isRepeat = NO;
                         break;
                     }else{
-                        [tempContactDetailsModal.allPhoneNumbers replaceObjectAtIndex:i withObject:tempPhoneWithStatus];
+                        [tempContactDetailsModal.phoneNumbers replaceObjectAtIndex:i withObject:tempPhoneWithStatus];
                         isRepeat = NO;
                         break;
                     }
@@ -693,11 +698,11 @@
             }
             //if not found, add new phone number
             if(isRepeat) {
-                [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
+                [tempContactDetailsModal.phoneNumbers addObject:tempPhoneWithStatus];
             }
         }
     }else{
-        [tempContactDetailsModal.allPhoneNumbers addObject:tempPhoneWithStatus];
+        [tempContactDetailsModal.phoneNumbers addObject:tempPhoneWithStatus];
     }
     [editingPhonesWithStatus setObject:tempPhoneWithStatus forKey:indexPath];
 }

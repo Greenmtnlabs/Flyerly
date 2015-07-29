@@ -108,7 +108,7 @@
     [untechable printNavigation:[self navigationController]];
     
     if ( untechable != nil ){
-        [untechable setOrSaveVars:SAVE];
+        //[untechable setOrSaveVars:SAVE];
     }
     
    [self hideAllViews];
@@ -561,7 +561,7 @@
             
             //Background work
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-                [untechable setOrSaveVars:@"SAVE"];
+                //[untechable setOrSaveVars:@"SAVE"];
                 [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
                     
                     if( !([message isEqualToString:@""]) ) {
@@ -676,7 +676,7 @@
     }
     
     
-    [untechable setOrSaveVars:SAVE];
+   // [untechable setOrSaveVars:SAVE];
 }
 
 
