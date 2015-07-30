@@ -46,7 +46,7 @@ NSString *currentEnteredPhoneNumber;
 /*
  * Here we get the dictionary of saved untechable
  */
-- (NSMutableDictionary *)getUntechable:(int)count UserId:(NSString *)userId
+- (NSMutableDictionary *)getUntechable:(int)findIt UserId:(NSString *)userId
 {
     NSMutableDictionary *retDic = nil;
     NSString *userPath = [self getUserPath:userId];
@@ -62,15 +62,21 @@ NSString *currentEnteredPhoneNumber;
     {
         uniqueId_temp = sortedList[i];
         untechablePath_temp = [NSString stringWithFormat:@"%@/%@",userPath,uniqueId_temp];
+
+        //get first untechable ( because its default untechable)
+        if( findIt == 0 ){
+         if([untechablePath_temp rangeOfString:[NSString stringWithFormat:@"%@_",userId]].location == NSNotFound )
+            findIt = 1;
+        }
+            
         
-        if ( count == i ) {
+        if ( findIt == i ) {
             retDic =   [[NSMutableDictionary alloc] init];
             
             //Checking For Integer Dir Names Only
             if ([[NSScanner scannerWithString:uniqueId_temp] scanInt:nil]) {
                 NSString *piecesF =[untechablePath_temp stringByAppendingString:[NSString stringWithFormat:@"/%@", PIECES_FILE]];
-                NSData *data = [NSData dataWithContentsOfFile:piecesF];
-                retDic = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+                retDic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesF];
                 //retDic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesF];
                 [retDic setValue:uniqueId_temp forKey:@"uniqueId"];
                 [retDic setValue:untechablePath_temp forKey:@"untechablePath"];
@@ -322,8 +328,8 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
         //Checking For Integer Dir Names Only
         if ([[NSScanner scannerWithString:uniqueId_temp] scanInt:nil]) {
             NSString *piecesF =[untechablePath_temp stringByAppendingString:[NSString stringWithFormat:@"/%@", PIECES_FILE]];
-            NSData *data = [NSData dataWithContentsOfFile:piecesF];
-            retDic = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            retDic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesF];
+            
             //retDic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesF];
             [retDic setValue:uniqueId_temp forKey:@"uniqueId"];
             [retDic setValue:untechablePath_temp forKey:@"untechablePath"];

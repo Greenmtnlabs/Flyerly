@@ -115,7 +115,7 @@ int indexArrayS2[];
 
 -(void)addUntechable{
     
-    [untechable setDefaultUntechable:timeDuration timeInString:timeInString];
+    [untechable setDefaultUntechable:DEF_TIME_DURATION timeInString:DEF_TIME_IN_STRING];
     
     NSLog(@"Go To add untechable screen");
     AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
@@ -165,8 +165,8 @@ int indexArrayS2[];
     // Do any additional setup after loading the view from its nib.
     
     //setting default time duration for untech now
-    timeDuration = 30*60;
-    timeInString = @"30 minutes";
+    timeDuration = DEF_TIME_DURATION;
+    timeInString = DEF_TIME_IN_STRING;
 }
 
 // Override to support conditional editing of the table view.
