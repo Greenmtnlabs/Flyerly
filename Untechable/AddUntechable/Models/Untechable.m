@@ -234,21 +234,14 @@
         dic[@"imsPort"] = imsPort;
         dic[@"omsHostName"] = omsHostName;
         dic[@"omsPort"] = omsPort;
-        
-        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dic];
-        [data writeToFile:piecesFile atomically:YES];
-        //Here we write the dictionary of .peices files
-        //[dic writeToFile:piecesFile atomically:YES];
-        
-        
-        
+
+        [dic writeToFile:piecesFile atomically:YES];
     }
     else if( [setOrSAve isEqualToString:RESET] ) {
         
         piecesFile = [untechablePath stringByAppendingString:[NSString stringWithFormat:@"/%@", PIECES_FILE]];
-        NSData *data = [NSData dataWithContentsOfFile:piecesFile];
-        dic = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        //dic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
+        dic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
+        
         NSString *customizedContactsFromSetup = [[NSUserDefaults standardUserDefaults]
                                                  stringForKey:@"customizedContactsFromSetup"];
         if(customizedContactsFromSetup){
