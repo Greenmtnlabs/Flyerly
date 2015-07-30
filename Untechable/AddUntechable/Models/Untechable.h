@@ -10,11 +10,15 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 #import "CommonFunctions.h"
+#import "UntechableModel.h"
 #import <FacebookSDK/FacebookSDK.h>
 
 @interface Untechable : NSObject {
     
 }
+
+// new Untechable model
+@property (strong, nonatomic) UntechableModel *untechableModel;
 
 //Array of selected contacts for Untechable
 @property (strong, nonatomic) NSMutableArray *selectedContacts;

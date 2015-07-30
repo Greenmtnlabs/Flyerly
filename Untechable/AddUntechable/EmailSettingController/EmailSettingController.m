@@ -213,6 +213,23 @@
     }else {
         self.inputEmail.text = untechable.email;
     }
+    
+    // changes
+    /*
+    if ( [untechable.untechableModel.email isEqualToString:@""] ){
+        
+        if ( ![[[NSUserDefaults standardUserDefaults] objectForKey:EMAIL_KEY] isEqualToString:@""] ||
+            ![[[NSUserDefaults standardUserDefaults] objectForKey:PASSWORD_KEY] isEqualToString:@""] ){
+            
+            self.inputEmail.text = [[NSUserDefaults standardUserDefaults] objectForKey:EMAIL_KEY];
+            self.inputPassword.text = [[NSUserDefaults standardUserDefaults] objectForKey:PASSWORD_KEY];
+        }
+    }else {
+        self.inputEmail.text = untechable.untechableModel.email;
+    }
+     */
+
+    
 }
 
 #pragma mark -  Navigation functions
@@ -315,6 +332,19 @@
             
             [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
         }
+        
+        // changes
+        /*
+        if ( comingFromSettingsScreen && ![untechable.untechableModel.acType isEqualToString:@"OTHER"] ){
+            
+            [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
+            
+        }else {
+            
+            [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
+        }
+        */
+        
     }
     
     if( [callFrom isEqualToString:@"emailSetting2"] )
@@ -372,6 +402,20 @@
             [rightBarButton setTitleColor:defGray forState:UIControlStateNormal];
             
         }
+        
+        // changes
+        /*
+         if ( [untechable.untechableModel.acType isEqualToString:@"OTHER"] ){
+         
+         rightBarButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+         [rightBarButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
+         rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+         [rightBarButton setTitle:@"NEXT" forState:normal];
+         [rightBarButton setTitleColor:defGray forState:UIControlStateNormal];
+         
+         }
+         */
+        
          rightBarButton.showsTouchWhenHighlighted = YES;
          UIBarButtonItem *rightBarButton_ = [[UIBarButtonItem alloc] initWithCustomView:rightBarButton];
          NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton_,nil];
@@ -545,10 +589,12 @@
         
         if ( iSsl == nil ){
             untechable.iSsl = @"YES";
+            untechable.untechableModel.iSsl = @"YES";
         }
         
         if ( oSsl == nil ){
             untechable.oSsl = @"YES";
+            untechable.untechableModel.oSsl = @"YES";
         }
         
         [self storeSceenVarsInDic];
@@ -621,6 +667,7 @@
             tempModal.allEmails = emailOnly;
         }
         untechable.customizedContactsForCurrentSession = untechable.customizedContactsForCurrentSession;
+        
     }
     
     [self storeSceenVarsInDic];
@@ -650,6 +697,8 @@
     
 }
 
+
+
 -(void)storeSceenVarsInDic
 {
     [[NSUserDefaults standardUserDefaults] setObject:_inputEmail.text forKey:EMAIL_KEY];
@@ -675,10 +724,40 @@
         untechable.omsPort       = @"";
     }
     
+    [self setToModel];
     
     [untechable setOrSaveVars:SAVE];
 }
 
+
+-(void)setToModel{
+    
+    [[NSUserDefaults standardUserDefaults] setObject:_inputEmail.text forKey:EMAIL_KEY];
+    [[NSUserDefaults standardUserDefaults] setObject:_inputPassword.text forKey:PASSWORD_KEY];
+    
+    untechable.untechableModel.email = _inputEmail.text;
+    untechable.untechableModel.password = _inputPassword.text;
+    
+    if ( [untechable.untechableModel.acType isEqualToString:@"OTHER"] ) {
+        untechable.untechableModel.iSsl          = iSsl;
+        untechable.untechableModel.oSsl          = oSsl;
+        untechable.untechableModel.imsHostName  = _inputImsHostName.text;
+        untechable.untechableModel.imsPort      = _inputImsPort.text;
+        untechable.untechableModel.omsHostName  = _inputOmsHostName.text;
+        untechable.untechableModel.omsPort      = _inputOmsPort.text;
+    }else {
+        
+        untechable.untechableModel.iSsl          = @"";
+        untechable.untechableModel.oSsl          = @"";
+        untechable.untechableModel.imsHostName   = @"";
+        untechable.untechableModel.imsPort       = @"";
+        untechable.untechableModel.omsHostName   = @"";
+        untechable.untechableModel.omsPort       = @"";
+    }
+    
+
+    
+}
 
 
 -(void)changeNavigation:(NSString *)option
@@ -810,6 +889,9 @@
     UIButton *btn = sender;
     NSArray *acTypesAry = [[NSMutableArray arrayWithObjects:@"ICLOUD", @"EXCHANGE", @"GOOGLE", @"YAHOO", @"AOL", @"OUTLOOK", @"OTHER", nil] init];
     untechable.acType = [acTypesAry objectAtIndex:btn.tag];
+    
+    // set acType to UntechableModel
+    untechable.untechableModel.acType = [acTypesAry objectAtIndex:btn.tag];
 
     [self hideAllViews];
     

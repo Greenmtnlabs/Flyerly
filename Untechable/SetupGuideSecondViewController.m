@@ -120,6 +120,7 @@
     } else  {
         [self setupDoctorsResearchLabel:[customSpendingText objectAtIndex:row]];
         untechable.spendingTimeTxt = [customSpendingText objectAtIndex:row];
+        untechable.untechableModel.spendingTimeTxt = [customSpendingText objectAtIndex:row];
         positionToRemember = (NSInteger)row;
     }
     
@@ -268,6 +269,8 @@
     [self saveBeforeGoing];
 }
 
+
+
 -(void) goBack {
     
     UINavigationController *navigationController = self.navigationController;
@@ -278,6 +281,15 @@
     if( untechable.spendingTimeTxt == nil || [untechable.spendingTimeTxt isEqualToString:@""] ) {
         untechable.spendingTimeTxt = [customSpendingText objectAtIndex:0];
         untechable.socialStatus = untechable.spendingTimeTxt;
+    }
+    [self setToModel];
+
+}
+
+-(void)setToModel{
+    if( untechable.untechableModel.spendingTimeTxt == nil || [untechable.untechableModel.spendingTimeTxt isEqualToString:@""] ) {
+        untechable.untechableModel.spendingTimeTxt = [customSpendingText objectAtIndex:0];
+        untechable.untechableModel.socialStatus = untechable.untechableModel.spendingTimeTxt;
     }
 }
 

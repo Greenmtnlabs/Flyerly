@@ -15,13 +15,18 @@
 #import "SetupGuideViewController.h"
 #import "UntechOptionsViewController.h"
 
+#import "Person.h"
+#import <Realm/Realm.h>
+
 @implementation AppDelegate
 
 Untechable *untechable;
+
 NSMutableArray *allUntechables;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  
     [Crittercism enableWithAppID: CRITTERCISM_APP_ID];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -41,6 +46,7 @@ NSMutableArray *allUntechables;
 -(void) configureTestData
 {
     untechable.userId   = TEST_UID;
+    untechable.untechableModel.userId = TEST_UID;
     //untechable.eventId = TEST_EID;
     //untechable.twillioNumber = TEST_TWILLIO_NUM;
     //untechable.twillioNumber = @"123";
@@ -53,6 +59,10 @@ NSMutableArray *allUntechables;
     //init object
     untechable  = [[Untechable alloc] init];
     untechable.commonFunctions = [[CommonFunctions alloc] init];
+    
+    // init new untechable model
+    untechable.untechableModel = [[UntechableModel alloc] init];
+    
     
     //For testing -------- { --
     [self configureTestData];

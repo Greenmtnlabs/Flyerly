@@ -10,6 +10,7 @@
 #import "CommonFunctions.h"
 #import "Common.h"
 #import "ContactsCustomizedModal.h"
+#import "SingleContactDetailsModal.h"
 
 @implementation CommonFunctions
 
@@ -122,6 +123,7 @@ NSString *currentEnteredPhoneNumber;
         NSMutableDictionary *curContactDetails = [[NSMutableDictionary alloc] init];
         curContactDetails = [customizedContactsModals objectForKey:[NSString stringWithFormat:@"%d",i]];
        
+        
         ContactsCustomizedModal *curObj =  [[ContactsCustomizedModal alloc] init];
         curObj.name = [curContactDetails objectForKey:@"contactName"];
         curObj.allPhoneNumbers = [curContactDetails objectForKey:@"phoneNumbers"];
@@ -135,6 +137,11 @@ NSString *currentEnteredPhoneNumber;
     
     return savedCustomContacts;
 }
+
+
+
+
+
 
 -(NSString *)convertCCMArrayIntoJsonString:(NSMutableArray *)value_
 {
@@ -155,6 +162,26 @@ NSString *currentEnteredPhoneNumber;
     
     return [self convertDicIntoJsonString:customizedContactsArray];
 }
+//copy of above method
+-(NSString *)convertCCMArrayIntoJsonString2:(NSMutableArray *)value_
+{
+    NSMutableDictionary *customizedContactsArray = [[NSMutableDictionary alloc] init];
+    for(int i=0;i<[value_ count]; i++) {
+        
+        NSMutableDictionary *curContactDetails = [[NSMutableDictionary alloc] init];
+        SingleContactDetailsModal *curObj =  [value_ objectAtIndex:i];
+        [curContactDetails setValue:curObj.contactName forKey:@"contactName"];
+        [curContactDetails setValue:curObj.phoneNumbers forKey:@"phoneNumbers"];
+        [curContactDetails setValue:curObj.emailAddresses forKey:@"emailAddresses"];
+        [curContactDetails setValue:curObj.customTextForContact forKey:@"customTextForContact"];
+        [curContactDetails setObject:[NSNumber numberWithBool:curObj.IsCustomized] forKey:@"IsCustomized"];
+        [customizedContactsArray setValue:curContactDetails forKey:[NSString stringWithFormat:@"%i",i]];
+        
+    }
+    
+    return [self convertDicIntoJsonString:customizedContactsArray];
+}
+
 
 -(NSMutableDictionary *)convertJsonStringIntoDictinoary:(NSString *)value
 {

@@ -18,6 +18,7 @@
     UIColor *defGray;//GRAY
 }
 
+
 //Properties
 @property (nonatomic,strong)  Untechable *untechable;
 

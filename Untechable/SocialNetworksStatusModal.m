@@ -619,11 +619,19 @@
         if ( [socialButton.titleLabel.text isEqualToString:@"Facebook"] ){
             untechable.fbAuth = [self getFbAuth];
             untechable.fbAuthExpiryTs = [self fbAuthExpiryTs];
+            
+            untechable.untechableModel.fbAuth = [self getFbAuth];
+            untechable.untechableModel.fbAuthExpiryTs = [self fbAuthExpiryTs];
+            
         }else if ( [socialButton.titleLabel.text isEqualToString:@"Twitter"] ){
             untechable.twitterAuth = [self getTwitterAuth];
             untechable.twOAuthTokenSecret = [self getTwitterAuthTokkenSecerate];
+            
+            untechable.untechableModel.twitterAuth = [self getTwitterAuth];
+            untechable.untechableModel.twOAuthTokenSecret = [self getTwitterAuthTokkenSecerate];
         }else if ( [socialButton.titleLabel.text isEqualToString:@"LinkedIn"] ){
             untechable.linkedinAuth = [self getLinkedInAuth];
+            untechable.untechableModel.linkedinAuth = [self getLinkedInAuth];
         }
         
         [self btnActivate:socialButton active:NO];
@@ -669,11 +677,20 @@
         if ( [socialButton.titleLabel.text isEqualToString:@"Facebook"] ){
             untechable.fbAuth = [self getFbAuth];
             untechable.fbAuthExpiryTs = [self fbAuthExpiryTs];
+            
+            untechable.untechableModel.fbAuth = [self getFbAuth];
+            untechable.untechableModel.fbAuthExpiryTs = [self fbAuthExpiryTs];
+            
         }else if ( [socialButton.titleLabel.text isEqualToString:@"Twitter"] ){
             untechable.twitterAuth = [self getTwitterAuth];
             untechable.twOAuthTokenSecret = [self getTwitterAuthTokkenSecerate];
+            
+            untechable.untechableModel.twitterAuth = [self getTwitterAuth];
+            untechable.untechableModel.twOAuthTokenSecret = [self getTwitterAuthTokkenSecerate];
+            
         }else if ( [socialButton.titleLabel.text isEqualToString:@"LinkedIn"] ){
             untechable.linkedinAuth = [self getLinkedInAuth];
+            untechable.untechableModel.linkedinAuth = [self getLinkedInAuth];
         }
         
         if (LoggedIn ){

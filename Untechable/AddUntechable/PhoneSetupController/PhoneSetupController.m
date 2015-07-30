@@ -439,6 +439,8 @@
                     
                     //NSLog(@"Successfully purchased product: %@", PRODUCT_UntechableMessage);
                      untechable.paid = YES;
+                    untechable.untechableModel.paid = YES;
+                    
                     [untechable setOrSaveVars:SAVE];
                     [self next:@"GO_TO_NEXT"];
                 

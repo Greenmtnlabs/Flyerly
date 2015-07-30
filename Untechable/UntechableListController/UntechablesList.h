@@ -18,6 +18,7 @@
     UIButton *settingsButton;
     
     Untechable *untechable;
+
     
     Reachability *internetReachable;
     

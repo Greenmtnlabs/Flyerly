@@ -13,6 +13,9 @@
 
 @implementation Untechable
 
+//new untechable model
+@synthesize untechableModel;
+
 //Settings
 @synthesize commonFunctions, dic, piecesFile, paid, userId, uniqueId, eventId, untechablePath, dateFormatter, savedOnServer, hasFinished;
 
@@ -172,19 +175,19 @@
         piecesFile = [untechablePath stringByAppendingPathComponent:[NSString stringWithFormat:@"/%@", PIECES_FILE]];
         
         dic = [[NSMutableDictionary alloc] init];
-
+        
         dic[@"eventId"]         = eventId;
         dic[@"paid"]            = paid ? @"YES" : @"NO";
         dic[@"userId"]          = userId;
         dic[@"uniqueId"]        = uniqueId;
         dic[@"untechablePath"]  = untechablePath;
         dic[@"savedOnServer"]   = savedOnServer ? @"YES" : @"NO";
-        dic[@"hasFinished"]     = hasFinished ? @"YES" : @"NO";        
+        dic[@"hasFinished"]     = hasFinished ? @"YES" : @"NO";
         
         //SetupGuide First Screen
         dic[@"userName"]        = userName;
         dic[@"userPhoneNumber"] = userPhoneNumber;
-
+        
         //Screen1 vars
         dic[@"timezoneOffset"]  = timezoneOffset;
         dic[@"spendingTimeTxt"] = spendingTimeTxt;
@@ -195,9 +198,7 @@
         //Screen2 vars
         dic[@"twillioNumber"] = twillioNumber;
         dic[@"location"] = location;
-        //dic[@"emergencyNumber"] = emergencyNumber;
-        //dic[@"emergencyContacts"] = emergencyContacts;
-        //dic[@"hasRecording"] = hasRecording ? @"YES" : @"NO";
+        
         
         dic[@"customizedContacts"] = [commonFunctions convertCCMArrayIntoJsonString:customizedContactsForCurrentSession];
         customizedContacts = dic[@"customizedContacts"];
@@ -231,7 +232,8 @@
         //Here we write the dictionary of .peices files
         //[dic writeToFile:piecesFile atomically:YES];
         
-
+        
+        
     }
     else if( [setOrSAve isEqualToString:RESET] ) {
         
@@ -274,10 +276,10 @@
         //emergencyNumber   = ( dic[@"emergencyNumber"] ) ? dic[@"emergencyNumber"] : @"";
         //emergencyContacts = ( dic[@"emergencyContacts"] ) ? dic[@"emergencyContacts"] : @"";
         //hasRecording      = ([dic[@"hasRecording"] isEqualToString:@"YES"]) ? YES : NO;
-    
+        
         customizedContacts = ( customizedContactsFromSetup ) ? customizedContactsFromSetup :dic[@"customizedContacts"];
         customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:customizedContacts];
-    
+        
         //Screen3 vars
         socialStatus = ( dic[@"socialStatus"] ) ? dic[@"socialStatus"] : @"";
         fbAuth       = ( dic[@"fbAuth"] ) ? dic[@"fbAuth"] : @"";
@@ -286,7 +288,7 @@
         twitterAuth  = ( dic[@"twitterAuth"] ) ? dic[@"twitterAuth"] : @"";
         twOAuthTokenSecret = ( dic[@"twOAuthTokenSecret"] ) ? dic[@"twOAuthTokenSecret"] : @"";
         linkedinAuth = ( dic[@"linkedinAuth"] ) ? dic[@"linkedinAuth"] : @"";
-
+        
         
         //Screen3 vars
         email           = ( dic[@"email"] ) ? dic[@"email"] : @"";
@@ -301,6 +303,7 @@
         omsPort         = ( dic[@"omsPort"] ) ? dic[@"omsPort"] : @"";
         
         selectedContacts = [[NSMutableArray alloc] init];
+       
     }
     
     //NSLog(@"dic: %@", dic);
@@ -318,16 +321,23 @@
  Set default values for new event
  */
 -(void)initWithDefValues {
+    
+    
     NSString *customizedContactsFromSetup = [[NSUserDefaults standardUserDefaults]
                                              stringForKey:@"customizedContactsFromSetup"];
+    
+    
     if(customizedContactsFromSetup){
         
     } else {
         customizedContactsFromSetup = @"";
     }
     
+    
+    
     NSMutableArray *customizeContacts1 = [commonFunctions convertJsonStringIntoCCMArray:customizedContactsFromSetup];
-
+    //untechableModel.pk = (int)[untechableModel primaryKey];
+    
     //Settings
     eventId  = @"";
     paid     = NO;
@@ -355,6 +365,8 @@
     //hasRecording = NO;
     customizedContactsForCurrentSession = [[NSMutableArray alloc] initWithArray:customizeContacts1];
     customizedContacts = customizedContactsFromSetup;
+    
+    
 
     //Screen3
     socialStatus = @"";
@@ -373,7 +385,6 @@
     acType = imsHostName = imsPort = omsHostName = omsPort= @"";
     
     selectedContacts = [[NSMutableArray alloc] init];
-
 }
 
 /*
@@ -436,8 +447,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 #pragma mark - Send to Server
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack
 {
-    
-    
     //[self removeRedundentDataForContacts];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -467,6 +476,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [dic setValue:userNameInDb forKey:@"userName"];
     [dic setValue:userPhoneNumber forKey:@"userPhoneNumber"];
     
+    //dic = func()
     
     for (NSString* key in dic) {
         BOOL sendIt =   NO;

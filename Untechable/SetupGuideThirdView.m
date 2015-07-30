@@ -54,7 +54,10 @@
     
      viewControllerToAdd = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
     
+    
+    
     viewControllerToAdd.untechable = untechable;
+    //viewControllerToAdd.untechable.untechableModel = untechable.untechableModel;
     
     [viewControllerToAdd willMoveToParentViewController:self];
     [self.viewForContacts addSubview:viewControllerToAdd.view];
@@ -154,12 +157,24 @@
 
 -(void)saveBeforeGoing {
     
-    NSMutableArray *customizedContactsFromSetup = [viewControllerToAdd currentlyEditingContacts];
+   NSMutableArray *customizedContactsFromSetup = [viewControllerToAdd currentlyEditingContacts];
+    
     untechable.customizedContactsForCurrentSession = customizedContactsFromSetup;
+    
     NSString *customizeContactsForCurrentSession = [untechable.commonFunctions convertCCMArrayIntoJsonString:customizedContactsFromSetup];
 
+    
     [[NSUserDefaults standardUserDefaults] setObject:customizeContactsForCurrentSession forKey:@"customizedContactsFromSetup"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    untechable.untechableModel.selectedContacts = [untechable.commonFunctions convertCCMArrayIntoJsonString2:untechable.selectedContacts];
+    
+
+    [[NSUserDefaults standardUserDefaults] setObject:untechable.untechableModel.selectedContacts forKey:@"customizedContactsFromSetup2"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
+    
 }
 
 @end

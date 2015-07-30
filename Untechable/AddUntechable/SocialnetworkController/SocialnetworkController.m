@@ -506,6 +506,8 @@
 {
     //untechable.socialStatus = [NSString stringWithFormat:@"%@",_inputSetSocialStatus.text];
     untechable.socialStatus = inputSetSocialStatus.text;
+    untechable.untechableModel.socialStatus = inputSetSocialStatus.text;
+    
     [untechable setOrSaveVars:SAVE];
 }
 
@@ -526,6 +528,7 @@
     if(sender == self.btnFacebook){
         
         untechable.socialStatus = inputSetSocialStatus.text;
+        untechable.untechableModel.socialStatus = inputSetSocialStatus.text;
         
         NSString *savedFbAuth = @"";
         NSString *savedFbAuthExpiryTs = @"";
@@ -543,12 +546,20 @@
                 
                 untechable.fbAuth = savedFbAuth;
                 untechable.fbAuthExpiryTs = savedFbAuthExpiryTs;
+                
+                untechable.untechableModel.fbAuth = savedFbAuth;
+                untechable.untechableModel.fbAuthExpiryTs = savedFbAuthExpiryTs;
+
                 [self btnActivate:self.btnFacebook active:YES];
             }
         }else {
             
             untechable.fbAuth = @"";
             untechable.fbAuthExpiryTs = @"";
+            
+            untechable.untechableModel.fbAuth = @"";
+            untechable.untechableModel.fbAuthExpiryTs = @"";
+            
             [self btnActivate:self.btnFacebook active:NO];
         }
     }else if(sender == self.btnTwitter){
@@ -570,12 +581,20 @@
                 
                 untechable.twitterAuth = savedTwitterAuth;
                 untechable.twOAuthTokenSecret = savedTwitterAuthTokkenSecerate;
+                
+                untechable.untechableModel.twitterAuth = savedTwitterAuth;
+                untechable.untechableModel.twOAuthTokenSecret = savedTwitterAuthTokkenSecerate;
+                
                 [self btnActivate:self.btnTwitter active:YES];
             }
         }else {
             
             untechable.twitterAuth = @"";
             untechable.twOAuthTokenSecret = @"";
+            
+            untechable.untechableModel.twitterAuth = @"";
+            untechable.untechableModel.twOAuthTokenSecret = @"";
+            
             [self btnActivate:self.btnTwitter active:NO];
         }
 
@@ -595,11 +614,12 @@
             }else {
                 
                 untechable.linkedinAuth = savedLinkedInAuth;
+                untechable.untechableModel.linkedinAuth = savedLinkedInAuth;
                 [self btnActivate:self.btnLinkedin active:YES];
             }
         }else {
             
-            untechable.linkedinAuth = @"";
+            untechable.untechableModel.linkedinAuth = @"";
             [self btnActivate:self.btnLinkedin active:NO];
         }
     }

@@ -127,6 +127,7 @@ int indexArrayS2[];
 -(void) configureTestData
 {
     untechable.userId   = TEST_UID;
+    untechable.untechableModel.userId   = TEST_UID;
 }
 
 #pragma mark -  Model funcs
@@ -136,6 +137,8 @@ int indexArrayS2[];
     //init object
     untechable  = [[Untechable alloc] init];
     untechable.commonFunctions = [[CommonFunctions alloc] init];
+    
+    untechable.untechableModel = [[UntechableModel alloc] init];
     
     //For testing -------- { --
     [self configureTestData];
@@ -746,6 +749,7 @@ int indexArrayS2[];
     addUntechable.indexOfUntechableInEditMode = -1;
     [self.navigationController pushViewController:addUntechable animated:YES];
     
+    
 }
 - (IBAction)btnDoneClick:(id)sender {
     
@@ -759,7 +763,7 @@ int indexArrayS2[];
     
     //Background work
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        [untechable setOrSaveVars:@"SAVE"];
+       [untechable setOrSaveVars:@"SAVE"];
         [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
             
             if( !([message isEqualToString:@""]) ) {
@@ -798,15 +802,23 @@ int indexArrayS2[];
     
     untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)+60] ]; //start time +1 Day
     
+    untechable.untechableModel.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60)] ]; //current time + time duration
+    
+    untechable.untechableModel.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)+60] ]; //start time +1 Day
+    
+    
     // the selected status from the setup screen would be set as default status on unetch now option
     NSInteger positionOfSelectedStatusFromArray = [[NSUserDefaults standardUserDefaults] integerForKey:@"positionToRemember"];
     NSArray *customArrayOfStatuses = [[NSUserDefaults standardUserDefaults]objectForKey:@"spendingTimeText"];
     NSString *selectedStatus = [customArrayOfStatuses objectAtIndex:positionOfSelectedStatusFromArray];
     //setting spending time text to status got from setup screen.
     untechable.spendingTimeTxt = selectedStatus;
+    untechable.untechableModel.spendingTimeTxt = selectedStatus;
     NSString *socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", timeInString, untechable.spendingTimeTxt];
     untechable.socialStatus = socialStatus;
+    untechable.untechableModel.socialStatus = socialStatus;
     [self getAuthsOfSocialMedias];
+    
 }
 
 /**
@@ -842,6 +854,18 @@ int indexArrayS2[];
     untechable.linkedinAuth = linkedinAuth;
     untechable.email = email;
     untechable.password = password;
+
+    // setting to model
+    untechable.untechableModel.fbAuth = fbAuth;
+    untechable.untechableModel.fbAuthExpiryTs = fbAuthExpiryTs;
+    untechable.untechableModel.twitterAuth = twitterAuth;
+    untechable.untechableModel.twOAuthTokenSecret = twOAuthTokenSecret;
+    untechable.untechableModel.linkedinAuth = linkedinAuth;
+    untechable.untechableModel.email = email;
+    untechable.untechableModel.password = password;
+    
+    
+
 }
 
 /**

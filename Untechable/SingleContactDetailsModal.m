@@ -13,14 +13,17 @@
 @implementation SingleContactDetailsModal
 
 
-@synthesize name,allEmails,allPhoneNumbers;
+@synthesize contactName,emailAddresses,phoneNumbers,customTextForContact,cutomizingStatusArray,IsCustomized;
 
 
 -(id)init{
     
     self = [super init];
-    allEmails = [[NSMutableArray alloc] init];
-    allPhoneNumbers = [[NSMutableArray alloc] init];
+    emailAddresses = [[NSMutableArray alloc] init];
+    phoneNumbers = [[NSMutableArray alloc] init];
+    cutomizingStatusArray = [[NSMutableArray alloc] init];
+    customTextForContact = @"";
+    IsCustomized = NO;
     return self;
 }
 
@@ -37,7 +40,7 @@
  */
 
 - (BOOL)hasContacts{
-    return (allPhoneNumbers.count==0 && allEmails.count==0) ? NO : YES;
+    return (phoneNumbers.count==0 && emailAddresses.count==0) ? NO : YES;
 }
 
 @end

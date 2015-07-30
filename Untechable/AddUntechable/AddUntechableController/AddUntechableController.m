@@ -50,6 +50,7 @@
 
 @implementation AddUntechableController
 
+
 @synthesize indexOfUntechableInEditMode,callReset,untechable;
 
 #pragma mark -  Default functions
@@ -319,7 +320,16 @@
     untechable.spendingTimeTxt = _inputSpendingTimeText.text;
     untechable.hasEndDate = !([_cbNoEndDate isSelected]);
     
+    [self setToModel];
+    
     [untechable setOrSaveVars:SAVE];
+}
+
+-(void)setToModel{
+    
+    untechable.untechableModel.spendingTimeTxt = _inputSpendingTimeText.text;
+    untechable.untechableModel.hasEndDate = !([_cbNoEndDate isSelected]);
+
 }
 
 -(void) hideAllControlls {
@@ -374,6 +384,8 @@
     
 	if( [pickerOpenFor isEqualToString:@"_btnStartTime"] ){
         untechable.startDate = pickerTimeStampStr;
+        untechable.untechableModel.startDate = pickerTimeStampStr;
+        
         [_btnStartTime setTitle:dateStr forState:UIControlStateNormal];
         
         NSDate *endD = [untechable.commonFunctions timestampStrToNsDate:untechable.endDate];
@@ -475,6 +487,7 @@
 -(void) configureTestData
 {
     untechable.userId   = TEST_UID;
+    untechable.untechableModel.userId   = TEST_UID;
 }
 
 #pragma mark -  Model funcs
@@ -486,6 +499,8 @@
     //init object
     untechable  = [[Untechable alloc] init];
     untechable.commonFunctions = [[CommonFunctions alloc] init];
+    untechable.untechableModel = [[UntechableModel alloc] init];
+    untechable.untechableModel.pk = (int)[untechable.untechableModel primaryKey];
     
     //Set Date formate
     untechable.dateFormatter = [[NSDateFormatter alloc] init];
@@ -517,12 +532,15 @@
         }
     }
     
-    
     //Old Untechable going to edit, set the vars
     if( sUntechable != nil ){
         //Settings required for calling initUntechableDirectory
         untechable.uniqueId = sUntechable[@"uniqueId"];
         untechable.untechablePath = sUntechable[@"untechablePath"];
+        
+        untechable.untechableModel.pk =(int) [untechable.untechableModel primaryKey];
+        untechable.untechableModel.uniqueId = sUntechable[@"uniqueId"];
+        
         [untechable initUntechableDirectory];
     }
     else if( isNew ) {
@@ -545,6 +563,10 @@
     else if( [callResetFor isEqualToString:@"RESET1"] ){
         untechable.savedOnServer = NO;
         untechable.paid = NO;
+        
+        untechable.untechableModel.savedOnServer = NO;
+        untechable.untechableModel.paid = NO;
+        
         [untechable setOrSaveVars:SAVE];
     }
 }
@@ -596,6 +618,8 @@
 
 - (IBAction)noEndDate:(id)sender {
     untechable.hasEndDate = [_cbNoEndDate isSelected];
+    untechable.untechableModel.hasEndDate = [_cbNoEndDate isSelected];
+    
     [_cbNoEndDate setSelected:!(untechable.hasEndDate)];
     
     [self showHideDateTimePicker:NO];
