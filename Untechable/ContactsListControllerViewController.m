@@ -77,8 +77,8 @@
     NSError *writeError = nil;
     customizedContactsDictionary =
     [NSJSONSerialization JSONObjectWithData: [customizedContactsString dataUsingEncoding:NSUTF8StringEncoding]
-                                    options: NSJSONReadingMutableContainers
-                                      error: &writeError];
+                                  options: NSJSONReadingMutableContainers
+                                  error: &writeError];
     NSLog(@" Contact Dic %@", customizedContactsDictionary );
     [_contactsTable reloadData];
     
@@ -180,10 +180,7 @@
 
 -(void)storeSceenVarsInDic
 {
-    //untechable.spendingTimeTxt = _inputSpendingTimeText.text;
-    //untechable.hasEndDate = !([_cbNoEndDate isSelected]);
-    
-    //[untechable setOrSaveVars:SAVE];
+    [untechable setOrSaveVars:SAVE];
 }
 
 - (void)setSkipHighlighted:(BOOL)highlighted {
@@ -277,7 +274,7 @@
             EmailChangingController *emailChangeController;
             emailChangeController = [[EmailChangingController alloc]initWithNibName:@"EmailChangingController" bundle:nil];
             emailChangeController.untechable = untechable;
-            emailChangeController.setupScreenCalling = &(calledFromSetupScreen);
+            emailChangeController.setupScreenCalling = calledFromSetupScreen;
             emailChangeController.emailAddresstext = [[SocialNetworksStatusModal sharedInstance] getEmailAddress];
             [self.navigationController pushViewController:emailChangeController animated:YES];
         }

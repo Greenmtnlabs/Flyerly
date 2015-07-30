@@ -25,7 +25,7 @@
 
 
 -(NSMutableArray *)convertJsonStringIntoCCMArray:(NSString *)customizedContactsString;
--(NSMutableArray *)convertJsonStringIntoCCMArray2:(NSString *)customizedContactsString;
+
 
 -(NSMutableDictionary *)convertJsonStringIntoDictinoary:(NSString *)value;
 -(NSString *)getTimeZoneOffset;

@@ -10,6 +10,7 @@
 #import "CommonFunctions.h"
 #import "Common.h"
 #import "ContactsCustomizedModal.h"
+#import "SingleContactDetailsModal.h"
 
 @implementation CommonFunctions
 
@@ -138,31 +139,9 @@ NSString *currentEnteredPhoneNumber;
 }
 
 
--(NSMutableArray *)convertJsonStringIntoCCMArray2:(NSString *)customizedContactsString
-{
-    NSMutableArray *savedCustomContacts = [[NSMutableArray alloc] init];
-    
-    NSMutableDictionary *customizedContactsModals =  [self convertJsonStringIntoDictinoary:customizedContactsString];
-    
-    for(int i=0; i<[customizedContactsModals count]; i++) {
-        
-        NSMutableDictionary *curContactDetails = [[NSMutableDictionary alloc] init];
-        curContactDetails = [customizedContactsModals objectForKey:[NSString stringWithFormat:@"%d",i]];
-        
-        
-        ContactsCustomizedModal *curObj =  [[ContactsCustomizedModal alloc] init];
-        curObj.name = [curContactDetails objectForKey:@"contactName"];
-        curObj.allPhoneNumbers = [curContactDetails objectForKey:@"phoneNumbers"];
-        curObj.allEmails = [curContactDetails objectForKey:@"emailAddresses"];
-        curObj.customTextForContact = [curContactDetails objectForKey:@"customTextForContact"];
-        curObj.IsCustomized = [curContactDetails objectForKey:@"IsCustomized"];
-        curObj.cutomizingStatusArray = [curContactDetails objectForKey:@"cutomizingStatusArray"];
-        
-        [savedCustomContacts addObject:curObj];
-    }
-    
-    return savedCustomContacts;
-}
+
+
+
 
 -(NSString *)convertCCMArrayIntoJsonString:(NSMutableArray *)value_
 {
@@ -190,12 +169,11 @@ NSString *currentEnteredPhoneNumber;
     for(int i=0;i<[value_ count]; i++) {
         
         NSMutableDictionary *curContactDetails = [[NSMutableDictionary alloc] init];
-        ContactsCustomizedModal *curObj =  [value_ objectAtIndex:i];
-        [curContactDetails setValue:curObj.name forKey:@"contactName"];
-        [curContactDetails setValue:curObj.allPhoneNumbers forKey:@"phoneNumbers"];
-        [curContactDetails setValue:curObj.allEmails forKey:@"emailAddresses"];
+        SingleContactDetailsModal *curObj =  [value_ objectAtIndex:i];
+        [curContactDetails setValue:curObj.contactName forKey:@"contactName"];
+        [curContactDetails setValue:curObj.phoneNumbers forKey:@"phoneNumbers"];
+        [curContactDetails setValue:curObj.emailAddresses forKey:@"emailAddresses"];
         [curContactDetails setValue:curObj.customTextForContact forKey:@"customTextForContact"];
-        [curContactDetails setValue:curObj.cutomizingStatusArray forKey:@"cutomizingStatusArray"];
         [curContactDetails setObject:[NSNumber numberWithBool:curObj.IsCustomized] forKey:@"IsCustomized"];
         [customizedContactsArray setValue:curContactDetails forKey:[NSString stringWithFormat:@"%i",i]];
         

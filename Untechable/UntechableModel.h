@@ -23,11 +23,11 @@
 
 
 //Settings
-@property (strong, nonatomic) NSString *paid;
+@property (nonatomic, assign) BOOL paid;
 @property (strong, nonatomic) NSString *userId;
 @property (strong, nonatomic) NSString *uniqueId;
-@property (strong, nonatomic) NSString *savedOnServer;
-@property (strong, nonatomic) NSString *hasFinished;
+@property (nonatomic, assign) BOOL savedOnServer;
+@property (nonatomic, assign) BOOL hasFinished;
 
 
 //SetupGuide Screen 1
@@ -36,13 +36,12 @@
 
 //Screen1
 @property (strong, nonatomic) NSString *timezoneOffset, *spendingTimeTxt, *startDate, *endDate;
-@property (strong, nonatomic) NSString *hasEndDate;
+@property (nonatomic, assign) BOOL hasEndDate;
 
 
 //Screen2
 @property (strong, nonatomic) NSString *customizedContacts;
 @property (strong, nonatomic) NSString *twillioNumber, *location;
-@property (strong, nonatomic) NSString *customizedContactsForCurrentSession;
 
 //Screen3
 @property (strong, nonatomic) NSString *socialStatus, *fbAuth, *fbAuthExpiryTs, *twitterAuth, *twOAuthTokenSecret, *linkedinAuth;
@@ -52,8 +51,11 @@
 *omsHostName, *omsPort;
 
 
+//selected contacts
+@property (strong, nonatomic) NSString *selectedContacts;
 
 
+-(NSString *)primaryKey;
 
 @end
 #endif

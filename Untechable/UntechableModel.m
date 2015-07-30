@@ -24,7 +24,7 @@
 
 //2-vars for screen2
 
-@synthesize customizedContacts, twillioNumber, location, customizedContactsForCurrentSession;
+@synthesize customizedContacts, twillioNumber, location;
 
 //3-vars for screen3
 @synthesize socialStatus, fbAuth, fbAuthExpiryTs, twitterAuth, twOAuthTokenSecret, linkedinAuth;
@@ -32,6 +32,7 @@
 //4-vars for screen4
 @synthesize email, password, respondingEmail,acType, iSsl, oSsl, imsHostName, imsPort, omsHostName, omsPort;
 
+@synthesize selectedContacts;
 
 -(NSString *)primaryKey {
     return @"pk";

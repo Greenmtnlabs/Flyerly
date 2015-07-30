@@ -125,7 +125,9 @@
     untechable.email = emailAddress.text;
     untechable.password = [[SocialNetworksStatusModal sharedInstance] getEmailPassword];
     
-    if( setupScreenCalling ) {
+    [self setToModel];
+    
+    if( setupScreenCalling == YES ) {
         
         SetupGuideFourthView *fourthView = [[SetupGuideFourthView alloc] initWithNibName:@"SetupGuideFourthView" bundle:nil];
         fourthView.untechable = untechable;
@@ -138,6 +140,10 @@
         socialnetwork.untechable = untechable;
         [self.navigationController pushViewController:socialnetwork animated:YES];
     }
+}
+-(void)setToModel{
+    untechable.untechableModel.email = emailAddress.text;
+    untechable.untechableModel.password = [[SocialNetworksStatusModal sharedInstance] getEmailPassword];
 }
 
 -(void) goBack {

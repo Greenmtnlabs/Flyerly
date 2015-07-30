@@ -70,6 +70,7 @@ NSMutableArray *allUntechables;
 -(void) configureTestData
 {
     untechable.userId   = TEST_UID;
+    untechable.untechableModel.userId = TEST_UID;
     //untechable.eventId = TEST_EID;
     //untechable.twillioNumber = TEST_TWILLIO_NUM;
     //untechable.twillioNumber = @"123";

@@ -143,7 +143,7 @@
         if([fm createDirectoryAtPath:untechablePath withIntermediateDirectories:YES attributes:nil error:nil]){
             NSLog(@"New Directory Created");
             
-           //[self setOrSaveVars:SAVE];
+           [self setOrSaveVars:SAVE];
             
             hasInit = YES;
         }
@@ -153,7 +153,7 @@
     }
     else {
         NSLog(@"Directory Already Exist");
-       //[self setOrSaveVars:RESET];
+       [self setOrSaveVars:RESET];
         hasInit = YES;
     }
     
@@ -198,9 +198,7 @@
         //Screen2 vars
         dic[@"twillioNumber"] = twillioNumber;
         dic[@"location"] = location;
-        //dic[@"emergencyNumber"] = emergencyNumber;
-        //dic[@"emergencyContacts"] = emergencyContacts;
-        //dic[@"hasRecording"] = hasRecording ? @"YES" : @"NO";
+        
         
         dic[@"customizedContacts"] = [commonFunctions convertCCMArrayIntoJsonString:customizedContactsForCurrentSession];
         customizedContacts = dic[@"customizedContacts"];
@@ -234,6 +232,9 @@
         //Here we write the dictionary of .peices files
         //[dic writeToFile:piecesFile atomically:YES];
         
+        
+        self.untechableModel.location = @"location";
+
         
     }
     else if( [setOrSAve isEqualToString:RESET] ) {
@@ -304,6 +305,8 @@
         omsPort         = ( dic[@"omsPort"] ) ? dic[@"omsPort"] : @"";
         
         selectedContacts = [[NSMutableArray alloc] init];
+        
+       self.untechableModel.location = @"location";
     }
     
     //NSLog(@"dic: %@", dic);
@@ -476,6 +479,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [dic setValue:userNameInDb forKey:@"userName"];
     [dic setValue:userPhoneNumber forKey:@"userPhoneNumber"];
     
+    //dic = func()
     
     for (NSString* key in dic) {
         BOOL sendIt =   NO;
@@ -520,13 +524,13 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
             eventId = [dict valueForKey:@"eventId"];
             savedOnServer = YES;
             hasFinished = YES;
-            //[self setOrSaveVars:SAVE];
+            [self setOrSaveVars:SAVE];
             
         } else{
             message = [dict valueForKey:@"message"];
             if( !([[dict valueForKey:@"eventId"] isEqualToString:@"0"]) ) {
                 eventId = [dict valueForKey:@"eventId"];
-                //[self setOrSaveVars:SAVE];
+                [self setOrSaveVars:SAVE];
             }
             
             errorOnFinish = YES;
