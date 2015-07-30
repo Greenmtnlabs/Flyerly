@@ -38,6 +38,30 @@
 
 @synthesize selectedContacts;
 
+/*
+ * load extras of untechable
+ */
+- (id)initAll{
+    self = [super init];
+    commonFunctions = [[CommonFunctions alloc] init];
+    untechableModel = [[UntechableModel alloc] init];
+    untechableModel.pk = (int)[untechableModel primaryKey];
+    
+    [self configureTestData];
+     return self;
+}
+
+/*
+ Variable we must need in model, for testing we can use these vars
+ */
+-(void) configureTestData
+{
+    userId   = TEST_UID;
+    untechableModel.userId = TEST_UID;
+    //untechable.eventId = TEST_EID;
+    //untechable.twillioNumber = TEST_TWILLIO_NUM;
+    //untechable.twillioNumber = @"123";
+}
 
 -(NSDate *)stringToDate:(NSString *)inputStrFormate dateString:(NSString *)dateString{
         NSLog(@"dateString is %@", dateString);

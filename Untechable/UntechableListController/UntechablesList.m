@@ -126,30 +126,11 @@ int indexArrayS2[];
     [self.navigationController pushViewController:addUntechable animated:YES];
 }
 
-/*
- Variable we must need in model, for testing we can use these vars
- */
-
--(void) configureTestData
-{
-    untechable.userId   = TEST_UID;
-    untechable.untechableModel.userId   = TEST_UID;
-}
-
 #pragma mark -  Model funcs
 // set default vaules in model
 -(void)setDefaultModel{
     
-    //init object
-    untechable  = [[Untechable alloc] init];
-    untechable.commonFunctions = [[CommonFunctions alloc] init];
-    untechable.untechableModel = [[UntechableModel alloc] init];
-    untechable.untechableModel.pk = (int)[untechable.untechableModel primaryKey];
-    
-    //For testing -------- { --
-    [self configureTestData];
-    //For testing -------- } --
-    
+    untechable  = [[Untechable alloc] initAll];    
     allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
     
     [self testInternetConnection];

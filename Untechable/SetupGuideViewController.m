@@ -272,10 +272,7 @@
  **/
 -(void)setupDefaultModel {
     
-    untechable  = [[Untechable alloc] init];
-    untechable.commonFunctions = [[CommonFunctions alloc] init];
-    untechable.untechableModel = [[UntechableModel alloc] init];
-    untechable.untechableModel.pk = (int)[untechable.untechableModel primaryKey];
+    untechable  = [[Untechable alloc] initAll];
     
     untechable.untechableModel.eventId = (untechable.untechableModel.eventId != nil) ? untechable.untechableModel.eventId : @"";
     untechable.untechableModel.paid    = (untechable.untechableModel.paid) ? YES : NO;

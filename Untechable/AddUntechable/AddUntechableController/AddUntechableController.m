@@ -481,15 +481,6 @@
     return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
 }
 
-/*
- Variable we must need in model, for testing we can use these vars
- */
--(void) configureTestData
-{
-    untechable.userId   = TEST_UID;
-    untechable.untechableModel.userId   = TEST_UID;
-}
-
 #pragma mark -  Model funcs
 // set default vaules in model
 -(void)setDefaultModel{
@@ -498,14 +489,8 @@
     if( untechable == nil ){
 
         //init object
-        untechable  = [[Untechable alloc] init];
-        untechable.commonFunctions = [[CommonFunctions alloc] init];
-        untechable.untechableModel = [[UntechableModel alloc] init];
-        untechable.untechableModel.pk = (int)[untechable.untechableModel primaryKey];
+        untechable  = [[Untechable alloc] initAll];
         
-        //For testing -------- { --
-        [self configureTestData];
-        //For testing -------- } --
         
         NSMutableDictionary *sUntechable = nil;
         

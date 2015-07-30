@@ -40,18 +40,6 @@ NSMutableArray *allUntechables;
 
 }
 
-/*
- Variable we must need in model, for testing we can use these vars
- */
--(void) configureTestData
-{
-    untechable.userId   = TEST_UID;
-    untechable.untechableModel.userId = TEST_UID;
-    //untechable.eventId = TEST_EID;
-    //untechable.twillioNumber = TEST_TWILLIO_NUM;
-    //untechable.twillioNumber = @"123";
-}
-
 #pragma mark -  Model funcs
 // set default vaules in model
 -(void)setDefaultModel{
@@ -66,15 +54,7 @@ NSMutableArray *allUntechables;
     } else {
         //When app launching first time
         
-        //init object
-        untechable  = [[Untechable alloc] init];
-        untechable.commonFunctions = [[CommonFunctions alloc] init];
-        untechable.untechableModel = [[UntechableModel alloc] init];
-        untechable.untechableModel.pk = (int)[untechable.untechableModel primaryKey];
-        
-        //For testing -------- { --
-        [self configureTestData];
-        //For testing -------- } --
+        untechable  = [[Untechable alloc] initAll];
         
         SetupGuideViewController *mainViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];        
         mainViewController.untechable = untechable;
