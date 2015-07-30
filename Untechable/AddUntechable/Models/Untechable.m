@@ -233,8 +233,6 @@
         //[dic writeToFile:piecesFile atomically:YES];
         
         
-        self.untechableModel.location = @"location";
-
         
     }
     else if( [setOrSAve isEqualToString:RESET] ) {
@@ -305,8 +303,7 @@
         omsPort         = ( dic[@"omsPort"] ) ? dic[@"omsPort"] : @"";
         
         selectedContacts = [[NSMutableArray alloc] init];
-        
-       self.untechableModel.location = @"location";
+       
     }
     
     //NSLog(@"dic: %@", dic);
