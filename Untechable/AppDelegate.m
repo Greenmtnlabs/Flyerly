@@ -15,7 +15,7 @@
 #import "SetupGuideViewController.h"
 #import "UntechOptionsViewController.h"
 
-#import "Person.h"
+
 #import <Realm/Realm.h>
 
 @implementation AppDelegate
