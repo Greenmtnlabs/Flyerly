@@ -274,10 +274,7 @@
     
     untechable  = [[Untechable alloc] init];
     untechable.commonFunctions = [[CommonFunctions alloc] init];
-    
-    // initialize Realm Untechable model
     untechable.untechableModel = [[UntechableModel alloc] init];
-    // set primary key
     untechable.untechableModel.pk = (int)[untechable.untechableModel primaryKey];
     
     untechable.untechableModel.eventId = (untechable.untechableModel.eventId != nil) ? untechable.untechableModel.eventId : @"";

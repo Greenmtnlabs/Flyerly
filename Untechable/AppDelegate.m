@@ -69,10 +69,8 @@ NSMutableArray *allUntechables;
         //init object
         untechable  = [[Untechable alloc] init];
         untechable.commonFunctions = [[CommonFunctions alloc] init];
-        
-        // init new untechable model
         untechable.untechableModel = [[UntechableModel alloc] init];
-        
+        untechable.untechableModel.pk = (int)[untechable.untechableModel primaryKey];
         
         //For testing -------- { --
         [self configureTestData];

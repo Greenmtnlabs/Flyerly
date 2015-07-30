@@ -110,7 +110,13 @@ int indexArrayS2[];
     [self.navigationController pushViewController:settingsController animated:YES];
 }
 
+- (IBAction)untechCustomClick:(id)sender {
+    [self addUntechable];
+}
+
 -(void)addUntechable{
+    
+    [untechable setDefaultUntechable:timeDuration timeInString:timeInString];
     
     NSLog(@"Go To add untechable screen");
     AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
@@ -137,8 +143,8 @@ int indexArrayS2[];
     //init object
     untechable  = [[Untechable alloc] init];
     untechable.commonFunctions = [[CommonFunctions alloc] init];
-    
     untechable.untechableModel = [[UntechableModel alloc] init];
+    untechable.untechableModel.pk = (int)[untechable.untechableModel primaryKey];
     
     //For testing -------- { --
     [self configureTestData];
@@ -740,24 +746,13 @@ int indexArrayS2[];
    
 }
 
-- (IBAction)untechCustomClick:(id)sender {
-   
-    NSLog(@"Go To add untechable screen");
-    AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
-    
-    addUntechable.untechable = untechable;
-    addUntechable.indexOfUntechableInEditMode = -1;
-    [self.navigationController pushViewController:addUntechable animated:YES];
-    
-    
-}
 - (IBAction)btnDoneClick:(id)sender {
     
     
     [_timeDurationPicker setHidden:YES];
     [_doneButtonView setHidden:YES];
     
-    [self initializeUntechNow];
+    [untechable setDefaultUntechable:timeDuration timeInString:timeInString];
     
     [self changeNavigation:@"ON_FINISH"];
     
@@ -787,84 +782,6 @@ int indexArrayS2[];
         }];
         
     });
-
-}
-
-/**
- Initiailzing related stuff for Untech now Option
- e.g Directory, Untech vals, and options
- */
--(void)initializeUntechNow {
-    
-    [untechable initWithDefValues];
-    [untechable initUntechableDirectory];
-    untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60)] ]; //current time + time duration
-    
-    untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)+60] ]; //start time +1 Day
-    
-    untechable.untechableModel.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60)] ]; //current time + time duration
-    
-    untechable.untechableModel.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)+60] ]; //start time +1 Day
-    
-    
-    // the selected status from the setup screen would be set as default status on unetch now option
-    NSInteger positionOfSelectedStatusFromArray = [[NSUserDefaults standardUserDefaults] integerForKey:@"positionToRemember"];
-    NSArray *customArrayOfStatuses = [[NSUserDefaults standardUserDefaults]objectForKey:@"spendingTimeText"];
-    NSString *selectedStatus = [customArrayOfStatuses objectAtIndex:positionOfSelectedStatusFromArray];
-    //setting spending time text to status got from setup screen.
-    untechable.spendingTimeTxt = selectedStatus;
-    untechable.untechableModel.spendingTimeTxt = selectedStatus;
-    NSString *socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", timeInString, untechable.spendingTimeTxt];
-    untechable.socialStatus = socialStatus;
-    untechable.untechableModel.socialStatus = socialStatus;
-    [self getAuthsOfSocialMedias];
-    
-}
-
-/**
- Social Medias Auths are in device and we can get them and use them
- **/
--( void ) getAuthsOfSocialMedias {
-    
-    NSString *fbAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuth"];
-    fbAuth = ( fbAuth ) ? fbAuth : @"";
-    
-    NSString *fbAuthExpiryTs = [[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuthExpiryTs"];
-    fbAuthExpiryTs = ( fbAuthExpiryTs ) ? fbAuthExpiryTs : @"";
-    
-    NSString *twitterAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuth"];
-    twitterAuth = (twitterAuth) ? twitterAuth : @"";
-    
-    NSString *twOAuthTokenSecret = [[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuthTokkenSecerate"];
-    twOAuthTokenSecret = (twOAuthTokenSecret) ? (twOAuthTokenSecret) : @"";
-    
-    NSString *linkedinAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"linkedinAuth" ];
-    linkedinAuth = (linkedinAuth) ? linkedinAuth : @"";
-    
-    NSString *email = [[NSUserDefaults standardUserDefaults] objectForKey:@"emailAddress" ];
-    email = (email) ? email : @"";
-    
-    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:@"emailPassword" ];
-    password = (password) ? password : @"";
-    
-    untechable.fbAuth = fbAuth;
-    untechable.fbAuthExpiryTs = fbAuthExpiryTs;
-    untechable.twitterAuth = twitterAuth;
-    untechable.twOAuthTokenSecret = twOAuthTokenSecret;
-    untechable.linkedinAuth = linkedinAuth;
-    untechable.email = email;
-    untechable.password = password;
-
-    // setting to model
-    untechable.untechableModel.fbAuth = fbAuth;
-    untechable.untechableModel.fbAuthExpiryTs = fbAuthExpiryTs;
-    untechable.untechableModel.twitterAuth = twitterAuth;
-    untechable.untechableModel.twOAuthTokenSecret = twOAuthTokenSecret;
-    untechable.untechableModel.linkedinAuth = linkedinAuth;
-    untechable.untechableModel.email = email;
-    untechable.untechableModel.password = password;
-    
-    
 
 }
 

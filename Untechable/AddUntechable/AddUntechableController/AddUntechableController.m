@@ -495,64 +495,65 @@
 -(void)setDefaultModel{
 
     now1 = [NSDate date]; //current date
-    
-    //init object
-    untechable  = [[Untechable alloc] init];
-    untechable.commonFunctions = [[CommonFunctions alloc] init];
-    untechable.untechableModel = [[UntechableModel alloc] init];
-    untechable.untechableModel.pk = (int)[untechable.untechableModel primaryKey];
-    
+    if( untechable == nil ){
+
+        //init object
+        untechable  = [[Untechable alloc] init];
+        untechable.commonFunctions = [[CommonFunctions alloc] init];
+        untechable.untechableModel = [[UntechableModel alloc] init];
+        untechable.untechableModel.pk = (int)[untechable.untechableModel primaryKey];
+        
+        //For testing -------- { --
+        [self configureTestData];
+        //For testing -------- } --
+        
+        NSMutableDictionary *sUntechable = nil;
+        
+        BOOL isNew = YES;
+        
+        //When we are going to edit event
+        if ( indexOfUntechableInEditMode > -1 ){ //&& [untechable.commonFunctions getAllUntechables:untechable.userId].count > 0){
+            sUntechable = [untechable.commonFunctions getUntechable:indexOfUntechableInEditMode UserId:untechable.userId];
+            if( sUntechable != nil ){
+                isNew = NO;
+            }
+        }
+        
+        //Check is there any incomplete untechable exist ?
+        if( isNew == YES ){
+            sUntechable = [untechable.commonFunctions getAnyInCompleteUntechable:untechable.userId];
+            
+            if( sUntechable != nil ){
+                isNew = NO;
+                callReset = @"RESET1";
+            }
+        }
+        
+        //Old Untechable going to edit, set the vars
+        if( sUntechable != nil ){
+            //Settings required for calling initUntechableDirectory
+            untechable.uniqueId = sUntechable[@"uniqueId"];
+            untechable.untechablePath = sUntechable[@"untechablePath"];
+            
+            untechable.untechableModel.pk =(int) [untechable.untechableModel primaryKey];
+            untechable.untechableModel.uniqueId = sUntechable[@"uniqueId"];
+            
+            [untechable initUntechableDirectory];
+        }
+        else if( isNew ) {
+            [untechable initWithDefValues];
+            [untechable initUntechableDirectory];
+            callReset = @"";
+        }
+        
+        
+        if( ![callReset isEqualToString:@""] ){
+            [self resetUntechable:callReset];
+        }
+    }
     //Set Date formate
     untechable.dateFormatter = [[NSDateFormatter alloc] init];
     [untechable.dateFormatter setDateFormat:DATE_FORMATE_1];
-    
-    //For testing -------- { --
-    [self configureTestData];
-    //For testing -------- } --
-    
-    NSMutableDictionary *sUntechable = nil;
-    
-    BOOL isNew = YES;
-    
-    //When we are going to edit event
-    if ( indexOfUntechableInEditMode > -1 ){ //&& [untechable.commonFunctions getAllUntechables:untechable.userId].count > 0){
-        sUntechable = [untechable.commonFunctions getUntechable:indexOfUntechableInEditMode UserId:untechable.userId];
-        if( sUntechable != nil ){
-            isNew = NO;
-        }
-    }
-    
-    //Check is there any incomplete untechable exist ?
-    if( isNew == YES ){
-        sUntechable = [untechable.commonFunctions getAnyInCompleteUntechable:untechable.userId];
-        
-        if( sUntechable != nil ){
-            isNew = NO;
-            callReset = @"RESET1";
-        }
-    }
-    
-    //Old Untechable going to edit, set the vars
-    if( sUntechable != nil ){
-        //Settings required for calling initUntechableDirectory
-        untechable.uniqueId = sUntechable[@"uniqueId"];
-        untechable.untechablePath = sUntechable[@"untechablePath"];
-        
-        untechable.untechableModel.pk =(int) [untechable.untechableModel primaryKey];
-        untechable.untechableModel.uniqueId = sUntechable[@"uniqueId"];
-        
-        [untechable initUntechableDirectory];
-    }
-    else if( isNew ) {
-        [untechable initWithDefValues];
-        [untechable initUntechableDirectory];
-        callReset = @"";
-    }
-    
-    
-    if( ![callReset isEqualToString:@""] ){
-        [self resetUntechable:callReset];
-    }
 }
 
 -(void)resetUntechable:(NSString *)callResetFor{
@@ -588,6 +589,8 @@
     _inputSpendingTimeText.text = untechable.spendingTimeTxt;
     if ( [untechable.spendingTimeTxt isEqualToString:@""] ){
         _inputSpendingTimeText.text = @"e.g Spending time with family.";
+    } else {
+        _inputSpendingTimeText.text = untechable.spendingTimeTxt;
     }
     _inputSpendingTimeText.font = [UIFont fontWithName:APP_FONT size:18];
     

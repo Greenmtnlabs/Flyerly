@@ -96,4 +96,5 @@
 -(NSDate *)getCurrentDate;
 
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack;
+-(void)setDefaultUntechable:(int)timeDuration timeInString:(NSString *)timeInString;
 @end
