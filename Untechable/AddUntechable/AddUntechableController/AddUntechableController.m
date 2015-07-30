@@ -127,8 +127,7 @@
  */
 -(void)viewDidAppear:(BOOL)animated {
     
-    [super viewDidAppear:animated];
-    [untechable printNavigation:[self navigationController]];
+    [super viewDidAppear:animated];    
     [self setNavigation:@"viewDidLoad"];
 
 }

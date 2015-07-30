@@ -48,7 +48,6 @@
 -(void)viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
-    [untechable printNavigation:[self navigationController]];
 }
 
 #pragma - mark Initializing Views

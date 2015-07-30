@@ -105,7 +105,6 @@
 -(void)viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
-    [untechable printNavigation:[self navigationController]];
     
     if ( untechable != nil ){
         [untechable setOrSaveVars:SAVE];

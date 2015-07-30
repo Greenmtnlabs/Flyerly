@@ -51,7 +51,6 @@ int indexArrayS2[];
 -(void)viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
-    [untechable printNavigation:[self navigationController]];
     
 }
 
