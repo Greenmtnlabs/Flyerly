@@ -38,6 +38,30 @@
 
 @synthesize selectedContacts;
 
+/*
+ * load extras of untechable
+ */
+- (id)initAll{
+    self = [super init];
+    commonFunctions = [[CommonFunctions alloc] init];
+    untechableModel = [[UntechableModel alloc] init];
+    untechableModel.pk = (int)[untechableModel primaryKey];
+    
+    [self configureTestData];
+     return self;
+}
+
+/*
+ Variable we must need in model, for testing we can use these vars
+ */
+-(void) configureTestData
+{
+    userId   = TEST_UID;
+    untechableModel.userId = TEST_UID;
+    //untechable.eventId = TEST_EID;
+    //untechable.twillioNumber = TEST_TWILLIO_NUM;
+    //untechable.twillioNumber = @"123";
+}
 
 -(NSDate *)stringToDate:(NSString *)inputStrFormate dateString:(NSString *)dateString{
         NSLog(@"dateString is %@", dateString);
@@ -56,22 +80,6 @@
     }
     
     return [NSDate date];//default
-}
--(void)printNavigation:navigationControllerPointer
-{
-
-    // Pop the current view, and push the crop view.
-    //NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[navigationControllerPointer viewControllers]];
-    //NSLog(@"NSMutableArray *viewControllers = %@", viewControllers);
-    
-    
-    
-    /*
-    [viewControllers removeLastObject];
-    [viewControllers removeLastObject];
-    [viewControllers addObject:nbuCrop];
-    [[self navigationController] setViewControllers:viewControllers animated:YES];
-     */
 }
 
 -(void)goBack:navigationControllerPointer{
@@ -226,21 +234,14 @@
         dic[@"imsPort"] = imsPort;
         dic[@"omsHostName"] = omsHostName;
         dic[@"omsPort"] = omsPort;
-        
-        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dic];
-        [data writeToFile:piecesFile atomically:YES];
-        //Here we write the dictionary of .peices files
-        //[dic writeToFile:piecesFile atomically:YES];
-        
-        
-        
+
+        [dic writeToFile:piecesFile atomically:YES];
     }
     else if( [setOrSAve isEqualToString:RESET] ) {
         
         piecesFile = [untechablePath stringByAppendingString:[NSString stringWithFormat:@"/%@", PIECES_FILE]];
-        NSData *data = [NSData dataWithContentsOfFile:piecesFile];
-        dic = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        //dic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
+        dic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
+        
         NSString *customizedContactsFromSetup = [[NSUserDefaults standardUserDefaults]
                                                  stringForKey:@"customizedContactsFromSetup"];
         if(customizedContactsFromSetup){
@@ -538,6 +539,62 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     }
     
     callBack(errorOnFinish, message);
+}
+
+/**
+ * Set untechable from default setting, with start time
+ */
+-(void)setDefaultUntechable:(int)timeDuration timeInString:(NSString *)timeInString{
+    
+    
+    [self initWithDefValues];
+    [self initUntechableDirectory];
+    startDate  = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60)] ]; //current time + time duration
+    endDate  = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)+60] ]; //start time +1 Day
+    
+    untechableModel.startDate  = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60)] ]; //current time + time duration
+    untechableModel.endDate  = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)+60] ]; //start time +1 Day
+    
+    
+    // the selected status from the setup screen would be set as default status on unetch now option
+    NSInteger positionOfSelectedStatusFromArray = [[NSUserDefaults standardUserDefaults] integerForKey:@"positionToRemember"];
+    NSArray *customArrayOfStatuses = [[NSUserDefaults standardUserDefaults]objectForKey:@"spendingTimeText"];
+    NSString *selectedStatus = [customArrayOfStatuses objectAtIndex:positionOfSelectedStatusFromArray];
+    //setting spending time text to status got from setup screen.
+    spendingTimeTxt = selectedStatus;
+    untechableModel.spendingTimeTxt = selectedStatus;
+    socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", timeInString, spendingTimeTxt];
+    untechableModel.socialStatus = socialStatus;
+    
+    fbAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuth"];
+    fbAuth = ( fbAuth ) ? fbAuth : @"";
+    
+    fbAuthExpiryTs = [[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuthExpiryTs"];
+    fbAuthExpiryTs = ( fbAuthExpiryTs ) ? fbAuthExpiryTs : @"";
+    
+    twitterAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuth"];
+    twitterAuth = (twitterAuth) ? twitterAuth : @"";
+    
+    twOAuthTokenSecret = [[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuthTokkenSecerate"];
+    twOAuthTokenSecret = (twOAuthTokenSecret) ? (twOAuthTokenSecret) : @"";
+    
+    linkedinAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"linkedinAuth" ];
+    linkedinAuth = (linkedinAuth) ? linkedinAuth : @"";
+    
+    email = [[NSUserDefaults standardUserDefaults] objectForKey:@"emailAddress" ];
+    email = (email) ? email : @"";
+    
+    password = [[NSUserDefaults standardUserDefaults] objectForKey:@"emailPassword" ];
+    password = (password) ? password : @"";
+    
+    // setting to model
+    untechableModel.fbAuth = fbAuth;
+    untechableModel.fbAuthExpiryTs = fbAuthExpiryTs;
+    untechableModel.twitterAuth = twitterAuth;
+    untechableModel.twOAuthTokenSecret = twOAuthTokenSecret;
+    untechableModel.linkedinAuth = linkedinAuth;
+    untechableModel.email = email;
+    untechableModel.password = password;
 }
 
 @end

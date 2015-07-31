@@ -94,3 +94,6 @@
 #define IS_IPHONE_6_PLUS (fabs((double)[[UIScreen mainScreen]bounds].size.height - (double)736) < DBL_EPSILON)
 
 #define DEF_ARAY_SPLITER @"-ary-spliter-"
+
+#define DEF_TIME_DURATION 1800
+#define DEF_TIME_IN_STRING @"30 minutes"

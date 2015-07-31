@@ -48,7 +48,6 @@
 -(void)viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
-    [untechable printNavigation:[self navigationController]];
 }
 
 #pragma - mark Initializing Views
@@ -271,43 +270,24 @@
  Initializing Untech Model
  **/
 -(void)setupDefaultModel {
-    
-    untechable  = [[Untechable alloc] init];
-    untechable.commonFunctions = [[CommonFunctions alloc] init];
-    
-    // initialize Realm Untechable model
-    untechable.untechableModel = [[UntechableModel alloc] init];
-    // set primary key
-    untechable.untechableModel.pk = (int)[untechable.untechableModel primaryKey];
-    
-    untechable.untechableModel.eventId = (untechable.untechableModel.eventId != nil) ? untechable.untechableModel.eventId : @"";
-    untechable.untechableModel.paid    = (untechable.untechableModel.paid) ? YES : NO;
-    untechable.untechableModel.userId  = (untechable.untechableModel.userId != nil) ? untechable.untechableModel.userId : @"";
-    untechable.untechableModel.uniqueId = (untechable.untechableModel.uniqueId != nil) ? untechable.untechableModel.uniqueId : [untechable getUniqueId];
-    
-    untechable.untechableModel.savedOnServer = (untechable.untechableModel.savedOnServer) ? YES : NO;
-    untechable.untechableModel.hasFinished = (untechable.untechableModel.hasFinished) ? YES : NO;
-    
-    // set realm untechable model data for screen1
-    untechable.untechableModel.timezoneOffset  = ( untechable.untechableModel.timezoneOffset != nil ) ? untechable.untechableModel.timezoneOffset : [untechable.commonFunctions getTimeZoneOffset];
-    
-    untechable.untechableModel.spendingTimeTxt = ( untechable.untechableModel.spendingTimeTxt != nil ) ? untechable.untechableModel.spendingTimeTxt : @"";
-    
-    untechable.untechableModel.startDate       = ( untechable.untechableModel.startDate != nil ) ? untechable.untechableModel.startDate : [untechable.commonFunctions nsDateToTimeStampStr: [NSDate date] ]; //start now
-    
-    untechable.untechableModel.endDate         = ( untechable.untechableModel.endDate != nil ) ? untechable.untechableModel.endDate : [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*60*24)] ]; //current time +1 day
-    
-    untechable.untechableModel.hasEndDate      = (untechable.untechableModel.hasEndDate) ? YES : NO;
-    
-    untechable.untechableModel.fbAuthExpiryTs  = ( untechable.untechableModel.fbAuthExpiryTs != nil ) ? untechable.untechableModel.fbAuthExpiryTs : [untechable.commonFunctions nsDateToTimeStampStr:[untechable.commonFunctions getDate:@"PAST_1_MONTH"]];
-    
-    
-    
-    [untechable setOrSaveVars:@"RESET"];
-    //[untechable initWithDefValues];
-    [untechable initUntechableDirectory];
-    
-    
+    untechable  = [[Untechable alloc] initAll];
+    NSMutableDictionary *sUntechable = nil;
+    sUntechable = [untechable.commonFunctions getUntechable:0 UserId:untechable.userId];
+    //Old Untechable going to edit, set the vars
+    if( sUntechable != nil ){
+        //Settings required for calling initUntechableDirectory
+        untechable.uniqueId = sUntechable[@"uniqueId"];
+        untechable.untechablePath = sUntechable[@"untechablePath"];
+        
+        untechable.untechableModel.pk =(int) [untechable.untechableModel primaryKey];
+        untechable.untechableModel.uniqueId = sUntechable[@"uniqueId"];
+        
+        [untechable initUntechableDirectory];
+    }
+    else {
+        [untechable initWithDefValues];
+        [untechable initUntechableDirectory];
+    }
 }
 
 /**

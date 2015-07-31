@@ -63,8 +63,9 @@
 @property (strong, nonatomic) NSString *email, *password, *respondingEmail, *acType, *iSsl, *oSsl, *imsHostName, *imsPort,
                                        *omsHostName, *omsPort;
 
+- (id)initAll;
+
 -(NSDate *)stringToDate:(NSString *)inputStrFormate dateString:(NSString *)dateString;
--(void)printNavigation:navigationControllerPointer;
 -(void)goBack:navigationControllerPointer;
 
 
@@ -96,4 +97,5 @@
 -(NSDate *)getCurrentDate;
 
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack;
+-(void)setDefaultUntechable:(int)timeDuration timeInString:(NSString *)timeInString;
 @end

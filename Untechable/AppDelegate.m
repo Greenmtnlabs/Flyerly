@@ -15,7 +15,7 @@
 #import "SetupGuideViewController.h"
 #import "UntechOptionsViewController.h"
 
-#import "Person.h"
+
 #import <Realm/Realm.h>
 
 @implementation AppDelegate
@@ -40,60 +40,23 @@ NSMutableArray *allUntechables;
 
 }
 
-/*
- Variable we must need in model, for testing we can use these vars
- */
--(void) configureTestData
-{
-    untechable.userId   = TEST_UID;
-    untechable.untechableModel.userId = TEST_UID;
-    //untechable.eventId = TEST_EID;
-    //untechable.twillioNumber = TEST_TWILLIO_NUM;
-    //untechable.twillioNumber = @"123";
-}
-
 #pragma mark -  Model funcs
 // set default vaules in model
 -(void)setDefaultModel{
     
-    //init object
-    untechable  = [[Untechable alloc] init];
-    untechable.commonFunctions = [[CommonFunctions alloc] init];
-    
-    // init new untechable model
-    untechable.untechableModel = [[UntechableModel alloc] init];
-    
-    
-    //For testing -------- { --
-    [self configureTestData];
-    //For testing -------- } --
-    
     UINavigationController *navigationController;
-    
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
-    {
-        //check wheter untechables are already added, if not then go to add untechable screen
-        // else show untechable list..
-        allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
-        if ( allUntechables.count <= 0 ){
-           
-            UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
-            
-            mainViewController.untechablesTable = untechable;
-            navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
-            
-        } else {
-            
-            UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
-            navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
-            
-        }
 
-    }
-    else
-    {        
-        SetupGuideViewController *mainViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"]) {
         
+        UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
+        navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+
+    } else {
+        //When app launching first time
+        
+        untechable  = [[Untechable alloc] initAll];
+        
+        SetupGuideViewController *mainViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];        
         mainViewController.untechable = untechable;
         navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
     }
