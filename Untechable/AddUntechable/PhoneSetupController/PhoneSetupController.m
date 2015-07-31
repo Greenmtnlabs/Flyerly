@@ -260,8 +260,8 @@
 }
 
 -(void)btnSkipTouchEnd{
-    [self setSkipHighlighted:NO];
     [self onSkip];
+    [self setSkipHighlighted:NO];
 }
 -(void)onSkip{
     
@@ -498,11 +498,7 @@
 }
 
 -(void)storeSceenVarsInDic{
-    //untechable.twillioNumber = _inputForwadingNumber.text;
-    //untechable.location = _inputLocation.text;
-    //untechable.emergencyNumber = _inputEmergencyNumber.text;
-    //untechable.emergencyContacts = untechable.emergencyContacts; //no need
-    
+   
     [untechable setOrSaveVars:SAVE];
 }
 

@@ -18,6 +18,7 @@
 #import "ContactsCustomizedModal.h"
 #import "CommonFunctions.h"
 #import <math.h>
+#import "ContactsListControllerViewController.h"
 
 
 @implementation SocialnetworkController
@@ -255,7 +256,13 @@
 }
 
 -(void)onBack{
-    [untechable goBack:self.navigationController];
+    
+    ContactsListControllerViewController *socialnetwork;
+    socialnetwork = [[ContactsListControllerViewController alloc]initWithNibName:@"ContactsListControllerViewController" bundle:nil];
+    socialnetwork.untechable = untechable;
+    [self.navigationController pushViewController:socialnetwork animated:YES];
+    
+    //[untechable goBack:self.navigationController];
 }
 
 -(void)onNext{
