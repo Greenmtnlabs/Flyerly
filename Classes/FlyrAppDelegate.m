@@ -42,10 +42,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     
     // Start the long-running task and return immediately.
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        // Do the work associated with the task, preferably in chunks.
          [self goingToBg];
-        
     });
     
     NSLog(@"backgroundTimeRemaining: %f", [[UIApplication sharedApplication] backgroundTimeRemaining]);
@@ -57,18 +54,10 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     bgTask = UIBackgroundTaskInvalid;
 }
 
-/*
-
-- (void)applicationWillResignActive:(UIApplication *)application {
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        [self goingToBg];
-    });
-}
-*/
-
--(void)goingToBg
-{
-    
+/**
+ * Perform task when app going to background
+ */
+-(void)goingToBg {
     
     if ([[self.navigationController topViewController] isKindOfClass:[CreateFlyerController class]]) {
         
@@ -82,38 +71,30 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
                 createView = [views objectAtIndex:i];
             }
         }
-        
-        //Save On background Mode
-        // Here we Save Flyer Info
-        [createView.flyer saveFlyer];
-        
-        //Here we Create One History BackUp for Future Undo Request
-        [createView.flyer addToHistory];
-        
-        //Here we Merge Video for Sharing
-        if ([createView.flyer isVideoFlyer]) {
-           
-            //Here Compare Current Flyer with history Flyer
-            if ([createView.flyer isVideoMergeProcessRequired]) {
-                    //Here we Merge All Layers in Video File
-                    [createView videoMergeProcess];
-            }
-            else{
-                NSLog(@"videoFlyer-mergeNotRequired ");
-            }
-            
-            
-            
-        }else {
+
+        //When flyer is picture flyer
+        if ([createView.flyer isVideoFlyer] == NO) {
+            if( [createView.flyer isSaveRequired] == YES ) {
+
+                // Here we Save Flyer Info
+                [createView.flyer saveFlyer];
+                
+                //Here we Create One History BackUp for Future Undo Request
+                [createView.flyer addToHistory];
+                
+                [createView.flyer isVideoMergeProcessRequired];
+                
                 //Here we remove Borders from layer if user touch any layer
                 [createView.flyimgView layerStoppedEditing:createView.currentLayer];
                 
                 //Here we take Snap shot of Flyer and
                 //Flyer Add to Gallery if user allow to Access there photos
                 [createView.flyer setUpdatedSnapshotWithImage:[createView getFlyerSnapShot]];
+
+                [createView.flyer saveIntoGallery];
+            }
         }
     }
-
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
