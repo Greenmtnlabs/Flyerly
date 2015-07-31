@@ -257,10 +257,10 @@
 
 -(void)onBack{
     
-    ContactsListControllerViewController *socialnetwork;
-    socialnetwork = [[ContactsListControllerViewController alloc]initWithNibName:@"ContactsListControllerViewController" bundle:nil];
-    socialnetwork.untechable = untechable;
-    [self.navigationController pushViewController:socialnetwork animated:YES];
+    ContactsListControllerViewController *contactsListControllerViewController;
+    contactsListControllerViewController = [[ContactsListControllerViewController alloc]initWithNibName:@"ContactsListControllerViewController" bundle:nil];
+    contactsListControllerViewController.untechable = untechable;
+    [self.navigationController pushViewController:contactsListControllerViewController animated:YES];
     
     //[untechable goBack:self.navigationController];
 }
