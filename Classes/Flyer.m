@@ -1719,9 +1719,11 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     int vWidth = flyerlyWidth;
     int vHeight = flyerlyHeight;
+    int sizeIncreased = 2;
     if( [self canIncreaseVideoSize] == NO ){
         vWidth = OldFlyerlyWidth;
         vHeight = OldFlyerlyHeight;
+        sizeIncreased = 1;
     }
     CGSize newSize = CGSizeMake( vWidth, vHeight );
     UIGraphicsBeginImageContext( newSize );
@@ -1731,7 +1733,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     // Apply supplied opacity
 
-    [image drawInRect:CGRectMake( 480, -15, 180, 180 ) blendMode:kCGBlendModeNormal alpha:1];
+    [image drawInRect:CGRectMake( 10, -15, 180*sizeIncreased, 180*sizeIncreased ) blendMode:kCGBlendModeNormal alpha:1];
     
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     
