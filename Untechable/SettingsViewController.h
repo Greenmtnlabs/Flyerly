@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "Untechable.h"
+#import "EmailSettingController.h"
+
 
 @interface SettingsViewController : UIViewController <UITableViewDelegate,UITableViewDataSource>{
     
@@ -19,6 +21,8 @@
 
 //Properties
 @property (nonatomic,strong)  Untechable *untechable;
+
+@property (nonatomic,strong)  EmailSettingController *emailSettingController;
 
 @property (strong, nonatomic) IBOutlet UITableView *socialNetworksTable;
 

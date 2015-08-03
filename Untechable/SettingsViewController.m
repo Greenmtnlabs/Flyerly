@@ -26,6 +26,7 @@
 @implementation SettingsViewController
 
 @synthesize untechable,socialNetworksTable;
+@synthesize emailSettingController;
 
 - (void)viewDidLoad {
     [super viewDidLoad];

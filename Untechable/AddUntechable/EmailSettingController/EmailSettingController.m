@@ -460,13 +460,9 @@
             
             [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
             
-        }else if ( comingFromContactsListScreen ){
-            
-            [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
-            
-        }else if ( comingFromSetupScreen ){
-        
-            // Left Navigation ________________________________________________________________________________________________________
+        }else if ( comingFromContactsListScreen || comingFromSetupScreen){
+  
+            // Left Navigation
             skipButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
             skipButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
             [skipButton setTitle:TITLE_SKIP_TXT forState:normal];
@@ -477,32 +473,44 @@
             UIBarButtonItem *skipBarButton = [[UIBarButtonItem alloc] initWithCustomView:skipButton];
             NSMutableArray  *skipNavItems  = [NSMutableArray arrayWithObjects:skipBarButton,nil];
             
-            [self.navigationItem setRightBarButtonItems:skipNavItems]; //Left button ___________
-         
-        }else {
+            [self.navigationItem setRightBarButtonItems:skipNavItems];
+        
+        } else {
             
             [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
         }
     }
 }
 
+
+
 -(void)btnSkipTouchStart{
     [self setSkipHighlighted:YES];
 }
 -(void)btnSkipTouchEnd{
-    [self setSkipHighlighted:NO];
     [self onSkip];
+    [self setSkipHighlighted:NO];
 }
 - (void)setSkipHighlighted:(BOOL)highlighted {
     (highlighted) ? [skipButton setBackgroundColor:defGreen] : [skipButton setBackgroundColor:[UIColor clearColor]];
 }
 
 -(void)onSkip{
-    SocialnetworkController *socialnetwork;
-    socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
-    socialnetwork.untechable = untechable;
-    [self.navigationController pushViewController:socialnetwork animated:YES];
-
+   
+    if( !comingFromSetupScreen ) {
+        SocialnetworkController *socialnetwork;
+        socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
+        socialnetwork.untechable = untechable;
+        [self.navigationController pushViewController:socialnetwork animated:YES];
+    } else {
+        
+        SetupGuideFourthView *fourthScreen;
+        fourthScreen = [[SetupGuideFourthView alloc]initWithNibName:@"SetupGuideFourthView" bundle:nil];
+        fourthScreen.untechable = untechable;
+        [self.navigationController pushViewController:fourthScreen animated:YES];
+        
+    }
+    
 }
 
 -(void)btnNextTouchStart{
