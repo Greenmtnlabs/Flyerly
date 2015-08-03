@@ -316,10 +316,10 @@ UIAlertView *saveCurrentFlyerAlert;
  */
 -(void)saveInGallaryIfNeeded {
     if( hasSavedInGallary != YES ){
-        hasSavedInGallary = YES;
-        if( self.flyer.saveInGallaryRequired ){
+        if( self.flyer.saveInGallaryRequired == 1){
+            hasSavedInGallary = YES;            
             [self.flyer saveIntoGallery];
-            self.flyer.saveInGallaryRequired = NO;
+            self.flyer.saveInGallaryRequired = 0;
         }
     }
 }
@@ -557,17 +557,18 @@ UIAlertView *saveCurrentFlyerAlert;
  * Called when flickr button is pressed
  */
 -(IBAction)onClickFlickrButton{
-
-    [flickrButton setSelected:YES];
-    [self updateDescription];
-    saveCurrentFlyerAlert = [[UIAlertView alloc] initWithTitle:@"Success"
-                                                 message:@"The current Flyer has been saved successfully"
-                                                 delegate:self
-                                                 cancelButtonTitle:@"OK"
-                                                 otherButtonTitles:nil, nil];
-    
-    [saveCurrentFlyerAlert show];
-    
+    //video merging is in process please wait
+    if( self.flyer.saveInGallaryRequired == 1 ) {
+        [flickrButton setSelected:YES];
+        [self updateDescription];
+        saveCurrentFlyerAlert = [[UIAlertView alloc] initWithTitle:@"Success"
+                                                     message:@"The current Flyer has been saved successfully"
+                                                     delegate:self
+                                                     cancelButtonTitle:@"OK"
+                                                     otherButtonTitles:nil, nil];
+        
+        [saveCurrentFlyerAlert show];
+    }
 }
 
 /*
