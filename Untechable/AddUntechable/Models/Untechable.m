@@ -38,6 +38,8 @@
 
 @synthesize selectedContacts;
 
+@synthesize customTextForContact;
+
 /*
  * load extras of untechable
  */
@@ -234,6 +236,8 @@
         dic[@"imsPort"] = imsPort;
         dic[@"omsHostName"] = omsHostName;
         dic[@"omsPort"] = omsPort;
+        
+        dic[@"customTextForContact"] = customTextForContact;
 
         [dic writeToFile:piecesFile atomically:YES];
     }
@@ -278,6 +282,7 @@
         //emergencyContacts = ( dic[@"emergencyContacts"] ) ? dic[@"emergencyContacts"] : @"";
         //hasRecording      = ([dic[@"hasRecording"] isEqualToString:@"YES"]) ? YES : NO;
         
+        
         customizedContacts = ( customizedContactsFromSetup ) ? customizedContactsFromSetup :dic[@"customizedContacts"];
         customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:customizedContacts];
         
@@ -302,6 +307,8 @@
         imsPort         = ( dic[@"imsPort"] ) ? dic[@"imsPort"] : @"";
         omsHostName     = ( dic[@"omsHostName"] ) ? dic[@"omsHostName"] : @"";
         omsPort         = ( dic[@"omsPort"] ) ? dic[@"omsPort"] : @"";
+        
+        customTextForContact = ( dic[@"customTextForContact"]);
         
         selectedContacts = [[NSMutableArray alloc] init];
        
@@ -385,6 +392,8 @@
     oSsl = @"";
     acType = imsHostName = imsPort = omsHostName = omsPort= @"";
     
+    customTextForContact = @"";
+    
     selectedContacts = [[NSMutableArray alloc] init];
 }
 
@@ -464,7 +473,8 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
                               @"timezoneOffset", @"spendingTimeTxt", @"startDate", @"endDate", @"hasEndDate"
                               , @"location",@"twillioNumber"
                               ,@"socialStatus", @"fbAuth", @"fbAuthExpiryTs" , @"twitterAuth",@"twOAuthTokenSecret",   @"linkedinAuth"
-                              ,@"acType", @"email", @"password", @"respondingEmail", @"iSsl", @"imsHostName", @"imsPort", @"oSsl", @"omsHostName", @"omsPort",@"customizedContacts",@"userName", @"userPhoneNumber"
+                              ,@"acType", @"email", @"password", @"respondingEmail", @"iSsl", @"imsHostName", @"imsPort", @"oSsl", @"omsHostName", @"omsPort",@"customizedContacts",@"userName", @"userPhoneNumber",
+                              @"customTextForContact"
                               ,nil];
     
     

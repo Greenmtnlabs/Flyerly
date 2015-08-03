@@ -379,6 +379,8 @@
         customeTextCell = (CustomTextTableViewCell*)[_contactDetailsTable cellForRowAtIndexPath:indexPath];
     }
     contactModal.customTextForContact = customeTextCell.customText.text;
+    untechable.customTextForContact = customeTextCell.customText.text;
+    untechable.untechableModel.customTextForContact = customeTextCell.customText.text;
     
     if ( editingPhonesWithStatus.count > 0 ) {
         
