@@ -460,14 +460,21 @@
             
             [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
             
-        }else if ( comingFromContactsListScreen ){
+        }else if ( comingFromContactsListScreen || comingFromSetupScreen){
   
-            [self addSKIPbutton];
-        
-        } else if ( comingFromSetupScreen ){
-        
-            [self addSKIPbutton];
+            // Left Navigation
+            skipButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+            skipButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
+            [skipButton setTitle:TITLE_SKIP_TXT forState:normal];
+            [skipButton setTitleColor:defGray forState:UIControlStateNormal];
+            [skipButton addTarget:self action:@selector(btnSkipTouchStart) forControlEvents:UIControlEventTouchDown];
+            [skipButton addTarget:self action:@selector(btnSkipTouchEnd) forControlEvents:UIControlEventTouchUpInside];
+            skipButton.showsTouchWhenHighlighted = YES;
+            UIBarButtonItem *skipBarButton = [[UIBarButtonItem alloc] initWithCustomView:skipButton];
+            NSMutableArray  *skipNavItems  = [NSMutableArray arrayWithObjects:skipBarButton,nil];
             
+            [self.navigationItem setRightBarButtonItems:skipNavItems];
+        
         } else {
             
             [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
@@ -475,27 +482,14 @@
     }
 }
 
--(void)addSKIPbutton{
-    // Left Navigation
-    skipButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-    skipButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
-    [skipButton setTitle:TITLE_SKIP_TXT forState:normal];
-    [skipButton setTitleColor:defGray forState:UIControlStateNormal];
-    [skipButton addTarget:self action:@selector(btnSkipTouchStart) forControlEvents:UIControlEventTouchDown];
-    [skipButton addTarget:self action:@selector(btnSkipTouchEnd) forControlEvents:UIControlEventTouchUpInside];
-    skipButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *skipBarButton = [[UIBarButtonItem alloc] initWithCustomView:skipButton];
-    NSMutableArray  *skipNavItems  = [NSMutableArray arrayWithObjects:skipBarButton,nil];
-    
-    [self.navigationItem setRightBarButtonItems:skipNavItems];
-}
+
 
 -(void)btnSkipTouchStart{
     [self setSkipHighlighted:YES];
 }
 -(void)btnSkipTouchEnd{
-    [self setSkipHighlighted:NO];
     [self onSkip];
+    [self setSkipHighlighted:NO];
 }
 - (void)setSkipHighlighted:(BOOL)highlighted {
     (highlighted) ? [skipButton setBackgroundColor:defGreen] : [skipButton setBackgroundColor:[UIColor clearColor]];
