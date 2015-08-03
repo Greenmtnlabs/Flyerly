@@ -9,6 +9,8 @@
 
 #import "Untechable.h"
 #import "Common.h"
+#import <objc/runtime.h>
+
 
 
 @implementation Untechable
@@ -39,6 +41,8 @@
 @synthesize selectedContacts;
 
 @synthesize customTextForContact;
+
+
 
 /*
  * load extras of untechable
@@ -454,10 +458,44 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 }
 
 
+/**
+ * This method converts model into dictionary
+ */
+
+-(void)modelToDictionary:(id)u{
+    
+    unsigned int count=0;
+    ///NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+    NSMutableArray *properties = [[NSMutableArray alloc] init];
+    
+    objc_property_t *props;
+        //if( [u isKindOfClass:[untechableModel class] ]){
+                props = class_copyPropertyList([untechableModel class],&count);
+            for ( int i=0; i<count; i++ ){
+                const char *name = property_getName(props[i]);
+                [properties addObject: [ NSString stringWithUTF8String:name ] ];
+            }
+    //}
+}
+
+
 #pragma mark - Send to Server
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack
 {
     //[self removeRedundentDataForContacts];
+    
+    [self modelToDictionary:self.untechableModel];
+    
+    
+    unsigned int count=0;
+    objc_property_t *props = class_copyPropertyList([untechableModel class],&count);
+    for ( int i=0;i<count;i++ )
+    {
+        const char *name = property_getName(props[i]);
+        NSLog(@"property %d: %s",i,name);
+    }
+    
+    
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:API_SAVE]];
@@ -478,7 +516,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
                               ,nil];
     
     
-    // getting the username and phone number to be send
+    // getting the username and phone number to be sent
     
     NSString *userNameInDb = [[NSUserDefaults standardUserDefaults]
                               stringForKey:@"userName"];
@@ -550,6 +588,34 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     callBack(errorOnFinish, message);
 }
+
+
+
+/**
+ * This method converts model into dictionary
+ */
+
+//-(NSMutableDictionary *)modelToDictionary:(Untechable *)untechable{
+//    
+//    unsigned int count=0;
+//    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+//    NSMutableArray *properties = [[NSMutableArray alloc] init];
+//
+//
+//    objc_property_t *props = class_copyPropertyList([self class],&count);
+//    for ( int i=0;i<count;i++ )
+//    {
+//        const char *name = property_getName(props[i]);
+//        NSLog(@"property %d: %s",i,name);
+//    }
+//
+//  
+//}
+
+
+
+
+
 
 /**
  * Set untechable from default setting, with start time
