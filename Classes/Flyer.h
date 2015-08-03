@@ -180,7 +180,7 @@
 
 //Tap on share button, merge video, dont save in gallary because it prompts delete dialoag
 //so this flag will help when sharing pannel gone hide, we check if its ture we call the saveInGallary at that time
-@property (assign) BOOL saveInGallaryRequired;
+@property (assign) int saveInGallaryRequired; //0 not required, 1 required, -1 video mergin is in progress
 
 
 @end

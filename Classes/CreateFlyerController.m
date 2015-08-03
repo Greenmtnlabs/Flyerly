@@ -82,9 +82,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [libText setFrame:newFrame];
     [libPhoto setFrame:newFrame];
     [libDrawing setFrame:newFrame];
-    
-
-    sharingPannelIsHidden = YES;
 }
 
 /**
@@ -307,6 +304,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         [[NSBundle mainBundle] loadNibNamed:@"CreateFlyerController-iPhone4" owner:self options:nil];
     }
 
+    sharingPannelIsHidden = YES;
     appearingViewAfterInAppHide = NO;
     isNewText   =   NO;
     bannerAddClosed = NO;
@@ -857,7 +855,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
         } else {
             dispatch_async( dispatch_get_main_queue(), ^{
-                if( self.flyer.saveInGallaryRequired == NO ) {
+                if( self.flyer.saveInGallaryRequired == 0 ) {
                     self.flyer.saveInGallaryAfterNumberOfTasks = -1;//when we have no need to saveInGallary on back
                 }
                 // Here we call Block for update Main UI
@@ -3774,7 +3772,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         vWidth = OldFlyerlyWidth;
         vHeight = OldFlyerlyHeight;
     }
-    
+    self.flyer.saveInGallaryRequired = -1;//video merging starts now
     [self modifyVideo:firstURL destination:exportURL crop:CGRectMake(0, 0, vHeight, vHeight ) scale:1 overlay:image completion:^(NSInteger status, NSError *error) {
         switch ( status ) {
             case AVAssetExportSessionStatusFailed:{
@@ -3801,10 +3799,10 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                     
                     // Main Thread
                     dispatch_async( dispatch_get_main_queue(), ^{
-                        if( sharingPannelIsHidden == YES ){
+                        if( self.sharingPannelIsHidden == YES ){
                             self.onFlyerBack(@"");
                         } else {
-                            self.flyer.saveInGallaryRequired = YES;
+                            self.flyer.saveInGallaryRequired = 1;
                         }
                     });
                 }
@@ -4272,7 +4270,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             //Here we take Snap shot of Flyer and
             //Flyer Add to Gallery if user allow to Access there photos
             [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
-            self.flyer.saveInGallaryRequired = YES;
+            self.flyer.saveInGallaryRequired = 1;
         }
     }
     

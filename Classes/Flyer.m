@@ -383,7 +383,7 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
  */
 -(void)resetSaveGallaryTasks{
     //Reset gallary saving conditions
-    saveInGallaryRequired = NO;
+    saveInGallaryRequired = 0;
     saveInGallaryAfterNumberOfTasks = 0;
 }
 
