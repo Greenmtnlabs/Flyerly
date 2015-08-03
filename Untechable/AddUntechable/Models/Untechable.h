@@ -57,11 +57,14 @@
 @property (strong, nonatomic) NSMutableArray *customizedContactsForCurrentSession;
 
 //Screen3
-@property (strong, nonatomic) NSString *socialStatus, *fbAuth, *fbAuthExpiryTs, *twitterAuth, *twOAuthTokenSecret, *linkedinAuth;
+@property (strong, nonatomic) NSString *socialStatus, *fbAuth, *fbAuthExpiryTs, *twitterAuth,
+    *twOAuthTokenSecret, *linkedinAuth;
 
 //Screen4
-@property (strong, nonatomic) NSString *email, *password, *respondingEmail, *acType, *iSsl, *oSsl, *imsHostName, *imsPort,
-                                       *omsHostName, *omsPort;
+@property (strong, nonatomic) NSString *email, *password, *respondingEmail, *acType, *iSsl, *oSsl,
+    *imsHostName, *imsPort, *omsHostName, *omsPort;
+
+@property (strong, nonatomic) NSString *customTextForContact;
 
 - (id)initAll;
 

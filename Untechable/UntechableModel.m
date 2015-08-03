@@ -34,6 +34,8 @@
 
 @synthesize selectedContacts;
 
+@synthesize customTextForContact;
+
 -(NSString *)primaryKey {
     return @"pk";
 }

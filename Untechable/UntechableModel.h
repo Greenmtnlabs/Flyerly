@@ -54,6 +54,7 @@
 //selected contacts
 @property (strong, nonatomic) NSString *selectedContacts;
 
+@property (strong, nonatomic) NSString *customTextForContact;
 
 -(NSString *)primaryKey;
 
