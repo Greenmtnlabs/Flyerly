@@ -558,15 +558,7 @@ UIAlertView *saveCurrentFlyerAlert;
  */
 -(IBAction)onClickFlickrButton{
     //video merging is in process please wait
-    if( self.flyer.saveInGallaryRequired == 1 ){
-        UIAlertView *tempAlert = [[UIAlertView alloc] initWithTitle:@"Wait"
-                                                           message:@"Video mergin is in prgoress, please wait."
-                                                          delegate:self
-                                                 cancelButtonTitle:@"OK"
-                                                 otherButtonTitles:nil, nil];
-        
-        [tempAlert show];
-    } else{
+    if( self.flyer.saveInGallaryRequired == 1 ) {
         [flickrButton setSelected:YES];
         [self updateDescription];
         saveCurrentFlyerAlert = [[UIAlertView alloc] initWithTitle:@"Success"
@@ -577,7 +569,6 @@ UIAlertView *saveCurrentFlyerAlert;
         
         [saveCurrentFlyerAlert show];
     }
-    
 }
 
 /*
