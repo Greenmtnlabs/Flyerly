@@ -462,32 +462,98 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  * This method converts model into dictionary
  */
 
--(NSMutableDictionary *)modelToDictionary:(Class)obj{
+//-(NSMutableDictionary *)modelToDictionary:(Class)obj{
+//
+//    // Get a list of all properties in the class.
+//    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+//    objc_property_t *properties = NULL;
+//    unsigned int count = 0;
+//    
+//    if([obj isKindOfClass:[UntechableModel class]]){
+//        properties = class_copyPropertyList([UntechableModel class], &count);
+//    }
+//    
+//    if( count > 0 ){
+//        dictionary = [[NSMutableDictionary alloc] initWithCapacity:count];
+//    
+//        for (int i = 0; i < count; i++) {
+//            NSString *key = [NSString stringWithUTF8String:property_getName(properties[i])];
+//            id value = [obj valueForKey:key];
+//            
+//            
+//            // if nil then "", else value
+//            value = value ? value : @"";
+//                
+//            [dictionary setObject:value forKey:key];
+//        }
+//        free(properties);
+//    }
+//    return dictionary;
+//}
 
-    // Get a list of all properties in the class.
-    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
-    objc_property_t *properties = NULL;
-    unsigned int count = 0;
+
+
+-(NSMutableDictionary *) modelToDictionary{
     
-    if([obj isKindOfClass:[UntechableModel class]]){
-        properties = class_copyPropertyList([UntechableModel class], &count);
-    }
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     
-    if( count > 0 ){
-        dictionary = [[NSMutableDictionary alloc] initWithCapacity:count];
     
-        for (int i = 0; i < count; i++) {
-            NSString *key = [NSString stringWithUTF8String:property_getName(properties[i])];
-            NSString *value = [obj valueForKey:key];
-            
-            // if nil then "", else value
-            value = value ? value : @"";
-                
-            [dictionary setObject:value forKey:key];
-        }
-        free(properties);
-    }
-    return dictionary;
+    dic[@"eventId"]         = eventId;
+    dic[@"paid"]            = paid ? @"YES" : @"NO";
+    dic[@"userId"]          = userId;
+    dic[@"uniqueId"]        = uniqueId;
+    dic[@"untechablePath"]  = untechablePath;
+    dic[@"savedOnServer"]   = savedOnServer ? @"YES" : @"NO";
+    dic[@"hasFinished"]     = hasFinished ? @"YES" : @"NO";
+    
+    //SetupGuide First Screen
+    dic[@"userName"]        = userName;
+    dic[@"userPhoneNumber"] = userPhoneNumber;
+    
+    //Screen1 vars
+    dic[@"timezoneOffset"]  = timezoneOffset;
+    dic[@"spendingTimeTxt"] = spendingTimeTxt;
+    dic[@"startDate"]       = startDate;
+    dic[@"endDate"]         = endDate;
+    dic[@"hasEndDate"]      = hasEndDate ? @"YES" : @"NO";
+    
+    //Screen2 vars
+    dic[@"twillioNumber"] = twillioNumber;
+    dic[@"location"] = location;
+    
+    
+    dic[@"customizedContacts"] = [commonFunctions convertCCMArrayIntoJsonString:customizedContactsForCurrentSession];
+    customizedContacts = dic[@"customizedContacts"];
+    customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:dic[@"customizedContacts"]];
+    
+    //Screen3 vars
+    dic[@"socialStatus"] = socialStatus;
+    dic[@"fbAuth"] = fbAuth;
+    dic[@"fbAuthExpiryTs"] = fbAuthExpiryTs;
+    
+    dic[@"twitterAuth"] = twitterAuth;
+    dic[@"twOAuthTokenSecret"] = twOAuthTokenSecret;
+    
+    dic[@"linkedinAuth"] = linkedinAuth;
+    
+    //Screen4 vars
+    dic[@"email"] = email;
+    dic[@"password"] = password;
+    dic[@"respondingEmail"] = respondingEmail;
+    dic[@"acType"] = acType;
+    
+    dic[@"iSsl"] = iSsl;
+    dic[@"oSsl"] = oSsl;
+    dic[@"imsHostName"] = imsHostName;
+    dic[@"imsPort"] = imsPort;
+    dic[@"omsHostName"] = omsHostName;
+    dic[@"omsPort"] = omsPort;
+    
+    dic[@"customTextForContact"] = customTextForContact;
+    
+    
+    
+    return dic;
 }
 
 
@@ -497,7 +563,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     //[self removeRedundentDataForContacts];
     
     
-    NSMutableDictionary *dictionary =  [self modelToDictionary:self.untechableModel];
+    NSMutableDictionary *dictionary =  [self modelToDictionary];
     
     
     
@@ -528,12 +594,16 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     [dic setValue:userNameInDb forKey:@"userName"];
     [dic setValue:userPhoneNumber forKey:@"userPhoneNumber"];
+
     
+    [dictionary setValue:userNameInDb forKey:@"userName"];
+    [dictionary setValue:userPhoneNumber forKey:@"userPhoneNumber"];
+
     //dic = func()
     
-    for (NSString* key in dic) {
+    for (NSString* key in dictionary) {
         BOOL sendIt =   NO;
-        id value    =   [dic objectForKey:key];
+        id value    =   [dictionary objectForKey:key];
         
         if( sendIt || [stringVarsAry containsObject:key]){
             
