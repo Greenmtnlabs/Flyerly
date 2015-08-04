@@ -557,8 +557,11 @@ UIAlertView *saveCurrentFlyerAlert;
  * Called when flickr button is pressed
  */
 -(IBAction)onClickFlickrButton{
+    if( [self.flyer canSaveInGallary] == NO){
+      [self.flyer showAllowSaveInGallerySettingAlert];
+    }
     //video merging is in process please wait
-    if( self.flyer.saveInGallaryRequired == 1 ) {
+    else if( self.flyer.saveInGallaryRequired == 1 ) {
         [flickrButton setSelected:YES];
         [self updateDescription];
         saveCurrentFlyerAlert = [[UIAlertView alloc] initWithTitle:@"Success"
