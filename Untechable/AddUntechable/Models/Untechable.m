@@ -10,7 +10,6 @@
 #import "Untechable.h"
 #import "Common.h"
 
-
 @implementation Untechable
 
 //new untechable model
@@ -457,7 +456,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 #pragma mark - Send to Server
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack
 {
-    //[self removeRedundentDataForContacts];
+    NSMutableDictionary *dictionary =  [self.untechableModel modelToDictionary];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:API_SAVE]];
@@ -478,20 +477,20 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
                               ,nil];
     
     
-    // getting the username and phone number to be send
+    // getting the username and phone number to be sent
     
     NSString *userNameInDb = [[NSUserDefaults standardUserDefaults]
                               stringForKey:@"userName"];
     NSString *userPhoneNumber = [[NSUserDefaults standardUserDefaults] stringForKey:@"userphoneNumber"];
     
-    [dic setValue:userNameInDb forKey:@"userName"];
-    [dic setValue:userPhoneNumber forKey:@"userPhoneNumber"];
-    
+    [dictionary setValue:userNameInDb forKey:@"userName"];
+    [dictionary setValue:userPhoneNumber forKey:@"userPhoneNumber"];
+
     //dic = func()
     
-    for (NSString* key in dic) {
+    for (NSString* key in dictionary) {
         BOOL sendIt =   NO;
-        id value    =   [dic objectForKey:key];
+        id value    =   [dictionary objectForKey:key];
         
         if( sendIt || [stringVarsAry containsObject:key]){
             
@@ -562,19 +561,14 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     startDate  = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60)] ]; //current time + time duration
     endDate  = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)+60] ]; //start time +1 Day
     
-    untechableModel.startDate  = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60)] ]; //current time + time duration
-    untechableModel.endDate  = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)+60] ]; //start time +1 Day
-    
-    
     // the selected status from the setup screen would be set as default status on unetch now option
     NSInteger positionOfSelectedStatusFromArray = [[NSUserDefaults standardUserDefaults] integerForKey:@"positionToRemember"];
     NSArray *customArrayOfStatuses = [[NSUserDefaults standardUserDefaults]objectForKey:@"spendingTimeText"];
     NSString *selectedStatus = [customArrayOfStatuses objectAtIndex:positionOfSelectedStatusFromArray];
     //setting spending time text to status got from setup screen.
     spendingTimeTxt = selectedStatus;
-    untechableModel.spendingTimeTxt = selectedStatus;
     socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", timeInString, spendingTimeTxt];
-    untechableModel.socialStatus = socialStatus;
+
     
     fbAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuth"];
     fbAuth = ( fbAuth ) ? fbAuth : @"";
@@ -597,14 +591,50 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     password = [[NSUserDefaults standardUserDefaults] objectForKey:@"emailPassword" ];
     password = (password) ? password : @"";
     
+    
     // setting to model
-    untechableModel.fbAuth = fbAuth;
-    untechableModel.fbAuthExpiryTs = fbAuthExpiryTs;
-    untechableModel.twitterAuth = twitterAuth;
-    untechableModel.twOAuthTokenSecret = twOAuthTokenSecret;
-    untechableModel.linkedinAuth = linkedinAuth;
-    untechableModel.email = email;
-    untechableModel.password = password;
+    untechableModel.eventId    = @"";
+    untechableModel.startDate  = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60)] ]; //current time + time duration
+    untechableModel.endDate  = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)+60] ]; //start time +1 Day
+    untechableModel.spendingTimeTxt = selectedStatus;
+    untechableModel.socialStatus = @"";
+    untechableModel.fbAuth = @"";
+    untechableModel.fbAuthExpiryTs = @"";
+    untechableModel.twitterAuth = @"";
+    untechableModel.twOAuthTokenSecret = @"";
+    untechableModel.linkedinAuth = @"";
+    untechableModel.email = @"";
+    untechableModel.password = @"";
+    
+    untechableModel.paid          = NO;
+    untechableModel.userId          = @"";
+    untechableModel.uniqueId        = @"";
+    untechableModel.savedOnServer   = NO;
+    untechableModel.hasFinished     = NO;
+    
+   
+    untechableModel.userName       =  @"";
+    untechableModel.userPhoneNumber = @"";
+    
+    untechableModel.timezoneOffset  = @"";
+    untechableModel.hasEndDate    = NO;
+    
+    untechableModel.twillioNumber = @"";
+    untechableModel.location= @"";
+    
+    untechableModel.customizedContacts = @"";
+    
+    untechableModel.respondingEmail = @"";
+    untechableModel.acType = @"";
+    
+    untechableModel.iSsl = @"";
+    untechableModel.oSsl = @"";
+    untechableModel.imsHostName = @"";
+    untechableModel.imsPort = @"";
+    untechableModel.omsHostName = @"";
+    untechableModel.omsPort = @"";
+    
+    untechableModel.customTextForContact = @"";
 }
 
 @end

@@ -12,6 +12,8 @@
 #import "ContactsCustomizedModal.h"
 #import "SingleContactDetailsModal.h"
 
+
+
 @implementation CommonFunctions
 
 NSString *currentEnteredUserName;
@@ -465,7 +467,7 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
     
     NSLog(@"%@", mobileNumber);
     
-    int length = [mobileNumber length];
+    int length = (int)[mobileNumber length];
     if(length > 10)
     {
         mobileNumber = [mobileNumber substringFromIndex: length-10];
@@ -487,7 +489,7 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
     mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@"-" withString:@""];
     mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@"+" withString:@""];
     
-    int length = [mobileNumber length];
+    int length = (int)[mobileNumber length];
     
     return length;
 }
