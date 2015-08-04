@@ -39,8 +39,6 @@
 
 @synthesize customTextForContact;
 
-
-
 /*
  * load extras of untechable
  */
@@ -458,12 +456,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 #pragma mark - Send to Server
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack
 {
-    //[self removeRedundentDataForContacts];
-    
-    
     NSMutableDictionary *dictionary =  [self.untechableModel modelToDictionary];
-    
-    
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:API_SAVE]];
@@ -600,48 +593,48 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     
     // setting to model
-    untechableModel.eventId    = eventId;
+    untechableModel.eventId    = @"";
     untechableModel.startDate  = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60)] ]; //current time + time duration
     untechableModel.endDate  = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)+60] ]; //start time +1 Day
     untechableModel.spendingTimeTxt = selectedStatus;
-    untechableModel.socialStatus = socialStatus;
-    untechableModel.fbAuth = fbAuth;
-    untechableModel.fbAuthExpiryTs = fbAuthExpiryTs;
-    untechableModel.twitterAuth = twitterAuth;
-    untechableModel.twOAuthTokenSecret = twOAuthTokenSecret;
-    untechableModel.linkedinAuth = linkedinAuth;
-    untechableModel.email = email;
-    untechableModel.password = password;
+    untechableModel.socialStatus = @"";
+    untechableModel.fbAuth = @"";
+    untechableModel.fbAuthExpiryTs = @"";
+    untechableModel.twitterAuth = @"";
+    untechableModel.twOAuthTokenSecret = @"";
+    untechableModel.linkedinAuth = @"";
+    untechableModel.email = @"";
+    untechableModel.password = @"";
     
-    untechableModel.paid          = paid ? @"YES" : @"NO";
-    untechableModel.userId          = userId;
-    untechableModel.uniqueId        = uniqueId;
-    untechableModel.savedOnServer   = savedOnServer ? @"YES" : @"NO";
-    untechableModel.hasFinished     = hasFinished ? @"YES" : @"NO";
+    untechableModel.paid          = NO;
+    untechableModel.userId          = @"";
+    untechableModel.uniqueId        = @"";
+    untechableModel.savedOnServer   = NO;
+    untechableModel.hasFinished     = NO;
     
    
-    untechableModel.userName       = userName;
-    untechableModel.userPhoneNumber = userPhoneNumber;
+    untechableModel.userName       =  @"";
+    untechableModel.userPhoneNumber = @"";
     
-    untechableModel.timezoneOffset  = timezoneOffset;
-    untechableModel.hasEndDate    = hasEndDate ? @"YES" : @"NO";
+    untechableModel.timezoneOffset  = @"";
+    untechableModel.hasEndDate    = NO;
     
-    untechableModel.twillioNumber = twillioNumber;
-    untechableModel.location= location;
+    untechableModel.twillioNumber = @"";
+    untechableModel.location= @"";
     
-    untechableModel.customizedContacts = customizedContacts;
+    untechableModel.customizedContacts = @"";
     
-    untechableModel.respondingEmail = respondingEmail;
-    untechableModel.acType = acType;
+    untechableModel.respondingEmail = @"";
+    untechableModel.acType = @"";
     
-    untechableModel.iSsl = iSsl;
-    untechableModel.oSsl = oSsl;
-    untechableModel.imsHostName = imsHostName;
-    untechableModel.imsPort = imsPort;
-    untechableModel.omsHostName = omsHostName;
-    untechableModel.omsPort = omsPort;
+    untechableModel.iSsl = @"";
+    untechableModel.oSsl = @"";
+    untechableModel.imsHostName = @"";
+    untechableModel.imsPort = @"";
+    untechableModel.omsHostName = @"";
+    untechableModel.omsPort = @"";
     
-    untechableModel.customTextForContact = customTextForContact;
+    untechableModel.customTextForContact = @"";
 }
 
 @end
