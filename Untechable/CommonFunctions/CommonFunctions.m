@@ -175,20 +175,27 @@ NSString *currentEnteredPhoneNumber;
 {
     NSMutableDictionary *customizedContactsArray = [[NSMutableDictionary alloc] init];
     for(int i=0;i<[value_ count]; i++) {
-        
         NSMutableDictionary *curContactDetails = [[NSMutableDictionary alloc] init];
-        SingleContactDetailsModal *curObj =  [value_ objectAtIndex:i];
-        [curContactDetails setValue:curObj.contactName forKey:@"contactName"];
-        [curContactDetails setValue:curObj.phoneNumbers forKey:@"phoneNumbers"];
-        [curContactDetails setValue:curObj.emailAddresses forKey:@"emailAddresses"];
+        ContactsCustomizedModal *curObj =  [value_ objectAtIndex:i];
+        [curContactDetails setValue:curObj.name forKey:@"contactName"];
+        
+        if([ [value_[i] valueForKey:@"allPhoneNumbers"][0][2] isEqualToString:@"1" ]||  [[value_[i] valueForKey:@"allPhoneNumbers"][0][3]isEqualToString:@"1"]){
+          [curContactDetails setValue:curObj.allPhoneNumbers forKey:@"phoneNumbers"];
+        }
+        if([[value_[i] valueForKey:@"allEmails"][0][1] isEqualToString:@"1"]){
+            [curContactDetails setValue:curObj.allEmails forKey:@"emailAddresses"];
+        }
+        
         [curContactDetails setValue:curObj.customTextForContact forKey:@"customTextForContact"];
+        [curContactDetails setValue:curObj.cutomizingStatusArray forKey:@"cutomizingStatusArray"];
         [curContactDetails setObject:[NSNumber numberWithBool:curObj.IsCustomized] forKey:@"IsCustomized"];
         [customizedContactsArray setValue:curContactDetails forKey:[NSString stringWithFormat:@"%i",i]];
-        
+   
     }
-    
     return [self convertDicIntoJsonString:customizedContactsArray];
 }
+
+
 
 
 -(NSMutableDictionary *)convertJsonStringIntoDictinoary:(NSString *)value

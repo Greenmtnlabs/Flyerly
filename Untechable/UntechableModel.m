@@ -8,9 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "UntechableModel.h"
+#import "CommonFunctions.h"
 
-@implementation UntechableModel
 
+@implementation UntechableModel{
+
+    CommonFunctions *commonFunctions;
+}
 @synthesize  pk;
 
 //Settings
@@ -36,6 +40,7 @@
 
 @synthesize customTextForContact;
 
+
 -(NSString *)primaryKey {
     return @"pk";
 }
@@ -44,36 +49,40 @@
 -(NSMutableDictionary *) modelToDictionary {
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    commonFunctions = [[CommonFunctions alloc] init];
     
+    NSString *customizedContactsFromSetup = [[NSUserDefaults standardUserDefaults]
+                                             stringForKey:@"customizedContactsFromSetup2"];
+
     
-    dic[@"eventId"]         = eventId;
+    dic[@"eventId"]         = @"";
     dic[@"paid"]            = paid ? @"YES" : @"NO";
-    dic[@"userId"]          = userId;
-    dic[@"uniqueId"]        = uniqueId;
+    dic[@"userId"]          = @"";
+    dic[@"uniqueId"]        = @"";
     dic[@"savedOnServer"]   = savedOnServer ? @"YES" : @"NO";
     dic[@"hasFinished"]     = hasFinished ? @"YES" : @"NO";
     
     //SetupGuide First Screen
-    dic[@"userName"]        = userName;
-    dic[@"userPhoneNumber"] = userPhoneNumber;
+    dic[@"userName"]        = @"";
+    dic[@"userPhoneNumber"] = @"";
     
     //Screen1 vars
-    dic[@"timezoneOffset"]  = timezoneOffset;
-    dic[@"spendingTimeTxt"] = spendingTimeTxt;
-    dic[@"startDate"]       = startDate;
-    dic[@"endDate"]         = endDate;
+    dic[@"timezoneOffset"]  = [commonFunctions getTimeZoneOffset];
+    dic[@"spendingTimeTxt"] = @"";
+    dic[@"startDate"]       = [commonFunctions nsDateToTimeStampStr: [NSDate date] ];
+    dic[@"endDate"]         = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*60*24)]];
     dic[@"hasEndDate"]      = hasEndDate ? @"YES" : @"NO";
     
     //Screen2 vars
     dic[@"twillioNumber"] = twillioNumber;
     dic[@"location"] = location;
     
-    dic[@"customizedContacts"] = customizedContacts;
+    dic[@"customizedContacts"] =  customizedContactsFromSetup;
     
     //Screen3 vars
     dic[@"socialStatus"] = socialStatus;
     dic[@"fbAuth"] = fbAuth;
-    dic[@"fbAuthExpiryTs"] = fbAuthExpiryTs;
+    dic[@"fbAuthExpiryTs"] = [commonFunctions nsDateToTimeStampStr:[commonFunctions getDate:@"PAST_1_MONTH"]];
     
     dic[@"twitterAuth"] = twitterAuth;
     dic[@"twOAuthTokenSecret"] = twOAuthTokenSecret;

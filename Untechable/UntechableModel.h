@@ -56,7 +56,6 @@
 
 @property (strong, nonatomic) NSString *customTextForContact;
 
-
 -(NSString *)primaryKey;
 
 -(NSMutableDictionary *) modelToDictionary;
