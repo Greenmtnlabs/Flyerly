@@ -103,6 +103,5 @@
 -(void)setDefaultUntechable:(int)timeDuration timeInString:(NSString *)timeInString;
 
 
--(NSMutableDictionary *)modelToDictionary:(Class)obj;
 
 @end

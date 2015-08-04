@@ -9,9 +9,6 @@
 
 #import "Untechable.h"
 #import "Common.h"
-#import <objc/runtime.h>
-
-
 
 @implementation Untechable
 
