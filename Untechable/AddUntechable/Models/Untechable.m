@@ -462,20 +462,32 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  * This method converts model into dictionary
  */
 
--(void)modelToDictionary:(id)u{
+-(NSMutableDictionary *)modelToDictionary:(Class)obj{
+
+    // Get a list of all properties in the class.
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+    objc_property_t *properties = NULL;
+    unsigned int count = 0;
     
-    unsigned int count=0;
-    ///NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
-    NSMutableArray *properties = [[NSMutableArray alloc] init];
+    if([obj isKindOfClass:[UntechableModel class]]){
+        properties = class_copyPropertyList([UntechableModel class], &count);
+    }
     
-    objc_property_t *props;
-        //if( [u isKindOfClass:[untechableModel class] ]){
-                props = class_copyPropertyList([untechableModel class],&count);
-            for ( int i=0; i<count; i++ ){
-                const char *name = property_getName(props[i]);
-                [properties addObject: [ NSString stringWithUTF8String:name ] ];
-            }
-    //}
+    if( count > 0 ){
+        dictionary = [[NSMutableDictionary alloc] initWithCapacity:count];
+    
+        for (int i = 0; i < count; i++) {
+            NSString *key = [NSString stringWithUTF8String:property_getName(properties[i])];
+            NSString *value = [obj valueForKey:key];
+            
+            // if nil then "", else value
+            value = value ? value : @"";
+                
+            [dictionary setObject:value forKey:key];
+        }
+        free(properties);
+    }
+    return dictionary;
 }
 
 
@@ -484,16 +496,8 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 {
     //[self removeRedundentDataForContacts];
     
-    [self modelToDictionary:self.untechableModel];
     
-    
-    unsigned int count=0;
-    objc_property_t *props = class_copyPropertyList([untechableModel class],&count);
-    for ( int i=0;i<count;i++ )
-    {
-        const char *name = property_getName(props[i]);
-        NSLog(@"property %d: %s",i,name);
-    }
+    NSMutableDictionary *dictionary =  [self modelToDictionary:self.untechableModel];
     
     
     
