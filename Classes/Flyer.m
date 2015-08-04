@@ -235,6 +235,21 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
 }
 
 
+//HERE WE CHECK USER DID ALLOWED TO ACESS PHOTO library
+-(BOOL)canSaveInGallary {
+    return !([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusRestricted || [ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusDenied);
+}
+
+-(void)showAllowSaveInGallerySettingAlert{
+    UIAlertView *permAlert = [[UIAlertView alloc] initWithTitle:@"Settings"
+                                                        message:@"Please allow flyerly to add photo in gallery( Settings -> Privacy -> Photos)"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil, nil];
+    
+    [permAlert show];
+}
+
 /*** HERE WE SAVE IMAGE INTO GALLERY
  * AND LINK WITH FLYERLY ALBUM
  * Data is required
@@ -254,11 +269,12 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
         return;
     }
 
-    //HERE WE CHECK USER DID ALLOWED TO ACESS PHOTO library
     //if not allow so ignore Flyer saving in Gallery
-    if ([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusRestricted || [ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusDenied) {
+    if ( [self canSaveInGallary ] == NO ) {
+        [self showAllowSaveInGallerySettingAlert];
         return;
     }
+
 
     
     // HERE WE GET FLYERLY ALBUM URL
