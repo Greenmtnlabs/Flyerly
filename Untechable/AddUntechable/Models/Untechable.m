@@ -458,112 +458,13 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 }
 
 
-/**
- * This method converts model into dictionary
- */
-
-//-(NSMutableDictionary *)modelToDictionary:(Class)obj{
-//
-//    // Get a list of all properties in the class.
-//    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
-//    objc_property_t *properties = NULL;
-//    unsigned int count = 0;
-//    
-//    if([obj isKindOfClass:[UntechableModel class]]){
-//        properties = class_copyPropertyList([UntechableModel class], &count);
-//    }
-//    
-//    if( count > 0 ){
-//        dictionary = [[NSMutableDictionary alloc] initWithCapacity:count];
-//    
-//        for (int i = 0; i < count; i++) {
-//            NSString *key = [NSString stringWithUTF8String:property_getName(properties[i])];
-//            id value = [obj valueForKey:key];
-//            
-//            
-//            // if nil then "", else value
-//            value = value ? value : @"";
-//                
-//            [dictionary setObject:value forKey:key];
-//        }
-//        free(properties);
-//    }
-//    return dictionary;
-//}
-
-
-
--(NSMutableDictionary *) modelToDictionary{
-    
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    
-    
-    dic[@"eventId"]         = eventId;
-    dic[@"paid"]            = paid ? @"YES" : @"NO";
-    dic[@"userId"]          = userId;
-    dic[@"uniqueId"]        = uniqueId;
-    dic[@"untechablePath"]  = untechablePath;
-    dic[@"savedOnServer"]   = savedOnServer ? @"YES" : @"NO";
-    dic[@"hasFinished"]     = hasFinished ? @"YES" : @"NO";
-    
-    //SetupGuide First Screen
-    dic[@"userName"]        = userName;
-    dic[@"userPhoneNumber"] = userPhoneNumber;
-    
-    //Screen1 vars
-    dic[@"timezoneOffset"]  = timezoneOffset;
-    dic[@"spendingTimeTxt"] = spendingTimeTxt;
-    dic[@"startDate"]       = startDate;
-    dic[@"endDate"]         = endDate;
-    dic[@"hasEndDate"]      = hasEndDate ? @"YES" : @"NO";
-    
-    //Screen2 vars
-    dic[@"twillioNumber"] = twillioNumber;
-    dic[@"location"] = location;
-    
-    
-    dic[@"customizedContacts"] = [commonFunctions convertCCMArrayIntoJsonString:customizedContactsForCurrentSession];
-    customizedContacts = dic[@"customizedContacts"];
-    customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:dic[@"customizedContacts"]];
-    
-    //Screen3 vars
-    dic[@"socialStatus"] = socialStatus;
-    dic[@"fbAuth"] = fbAuth;
-    dic[@"fbAuthExpiryTs"] = fbAuthExpiryTs;
-    
-    dic[@"twitterAuth"] = twitterAuth;
-    dic[@"twOAuthTokenSecret"] = twOAuthTokenSecret;
-    
-    dic[@"linkedinAuth"] = linkedinAuth;
-    
-    //Screen4 vars
-    dic[@"email"] = email;
-    dic[@"password"] = password;
-    dic[@"respondingEmail"] = respondingEmail;
-    dic[@"acType"] = acType;
-    
-    dic[@"iSsl"] = iSsl;
-    dic[@"oSsl"] = oSsl;
-    dic[@"imsHostName"] = imsHostName;
-    dic[@"imsPort"] = imsPort;
-    dic[@"omsHostName"] = omsHostName;
-    dic[@"omsPort"] = omsPort;
-    
-    dic[@"customTextForContact"] = customTextForContact;
-    
-    
-    
-    return dic;
-}
-
-
 #pragma mark - Send to Server
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack
 {
     //[self removeRedundentDataForContacts];
     
     
-    NSMutableDictionary *dictionary =  [self modelToDictionary];
+    NSMutableDictionary *dictionary =  [self.untechableModel modelToDictionary];
     
     
     
@@ -591,10 +492,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     NSString *userNameInDb = [[NSUserDefaults standardUserDefaults]
                               stringForKey:@"userName"];
     NSString *userPhoneNumber = [[NSUserDefaults standardUserDefaults] stringForKey:@"userphoneNumber"];
-    
-    [dic setValue:userNameInDb forKey:@"userName"];
-    [dic setValue:userPhoneNumber forKey:@"userPhoneNumber"];
-
     
     [dictionary setValue:userNameInDb forKey:@"userName"];
     [dictionary setValue:userPhoneNumber forKey:@"userPhoneNumber"];
@@ -663,34 +560,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     callBack(errorOnFinish, message);
 }
 
-
-
-/**
- * This method converts model into dictionary
- */
-
-//-(NSMutableDictionary *)modelToDictionary:(Untechable *)untechable{
-//    
-//    unsigned int count=0;
-//    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
-//    NSMutableArray *properties = [[NSMutableArray alloc] init];
-//
-//
-//    objc_property_t *props = class_copyPropertyList([self class],&count);
-//    for ( int i=0;i<count;i++ )
-//    {
-//        const char *name = property_getName(props[i]);
-//        NSLog(@"property %d: %s",i,name);
-//    }
-//
-//  
-//}
-
-
-
-
-
-
 /**
  * Set untechable from default setting, with start time
  */
@@ -702,19 +571,14 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     startDate  = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60)] ]; //current time + time duration
     endDate  = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)+60] ]; //start time +1 Day
     
-    untechableModel.startDate  = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60)] ]; //current time + time duration
-    untechableModel.endDate  = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)+60] ]; //start time +1 Day
-    
-    
     // the selected status from the setup screen would be set as default status on unetch now option
     NSInteger positionOfSelectedStatusFromArray = [[NSUserDefaults standardUserDefaults] integerForKey:@"positionToRemember"];
     NSArray *customArrayOfStatuses = [[NSUserDefaults standardUserDefaults]objectForKey:@"spendingTimeText"];
     NSString *selectedStatus = [customArrayOfStatuses objectAtIndex:positionOfSelectedStatusFromArray];
     //setting spending time text to status got from setup screen.
     spendingTimeTxt = selectedStatus;
-    untechableModel.spendingTimeTxt = selectedStatus;
     socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", timeInString, spendingTimeTxt];
-    untechableModel.socialStatus = socialStatus;
+
     
     fbAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuth"];
     fbAuth = ( fbAuth ) ? fbAuth : @"";
@@ -737,7 +601,13 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     password = [[NSUserDefaults standardUserDefaults] objectForKey:@"emailPassword" ];
     password = (password) ? password : @"";
     
+    
     // setting to model
+    untechableModel.eventId    = eventId;
+    untechableModel.startDate  = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60)] ]; //current time + time duration
+    untechableModel.endDate  = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)+60] ]; //start time +1 Day
+    untechableModel.spendingTimeTxt = selectedStatus;
+    untechableModel.socialStatus = socialStatus;
     untechableModel.fbAuth = fbAuth;
     untechableModel.fbAuthExpiryTs = fbAuthExpiryTs;
     untechableModel.twitterAuth = twitterAuth;
@@ -745,6 +615,36 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     untechableModel.linkedinAuth = linkedinAuth;
     untechableModel.email = email;
     untechableModel.password = password;
+    
+    untechableModel.paid          = paid ? @"YES" : @"NO";
+    untechableModel.userId          = userId;
+    untechableModel.uniqueId        = uniqueId;
+    untechableModel.savedOnServer   = savedOnServer ? @"YES" : @"NO";
+    untechableModel.hasFinished     = hasFinished ? @"YES" : @"NO";
+    
+   
+    untechableModel.userName       = userName;
+    untechableModel.userPhoneNumber = userPhoneNumber;
+    
+    untechableModel.timezoneOffset  = timezoneOffset;
+    untechableModel.hasEndDate    = hasEndDate ? @"YES" : @"NO";
+    
+    untechableModel.twillioNumber = twillioNumber;
+    untechableModel.location= location;
+    
+    untechableModel.customizedContacts = customizedContacts;
+    
+    untechableModel.respondingEmail = respondingEmail;
+    untechableModel.acType = acType;
+    
+    untechableModel.iSsl = iSsl;
+    untechableModel.oSsl = oSsl;
+    untechableModel.imsHostName = imsHostName;
+    untechableModel.imsPort = imsPort;
+    untechableModel.omsHostName = omsHostName;
+    untechableModel.omsPort = omsPort;
+    
+    untechableModel.customTextForContact = customTextForContact;
 }
 
 @end

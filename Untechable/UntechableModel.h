@@ -59,5 +59,7 @@
 
 -(NSString *)primaryKey;
 
+-(NSMutableDictionary *) modelToDictionary;
+
 @end
 #endif
