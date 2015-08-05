@@ -248,6 +248,9 @@
 
      //hides the keyboard when navigating to the next views
      [searchTextField resignFirstResponder];
+    
+    
+       untechable.untechableModel.selectedContacts = [untechable.commonFunctions convertCCMArrayIntoJsonString2:untechable.customizedContactsForCurrentSession];    
 }
 
 -( void ) showEmailSetupScreen : ( BOOL ) calledFromSetupScreen {
