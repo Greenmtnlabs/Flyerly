@@ -176,16 +176,40 @@ NSString *currentEnteredPhoneNumber;
     NSMutableDictionary *customizedContactsArray = [[NSMutableDictionary alloc] init];
     for(int i=0;i<[value_ count]; i++) {
         NSMutableDictionary *curContactDetails = [[NSMutableDictionary alloc] init];
+        int phoneCount = (int) [[value_[i] valueForKey:@"allPhoneNumbers"] count];
+        int emailCount = (int) [[value_[i] valueForKey:@"allEmails"] count];
+        
         ContactsCustomizedModal *curObj =  [value_ objectAtIndex:i];
         [curContactDetails setValue:curObj.name forKey:@"contactName"];
         
-        if([ [value_[i] valueForKey:@"allPhoneNumbers"][0][2] isEqualToString:@"1" ]||  [[value_[i] valueForKey:@"allPhoneNumbers"][0][3]isEqualToString:@"1"]){
-          [curContactDetails setValue:curObj.allPhoneNumbers forKey:@"phoneNumbers"];
+        
+        for(int j=0; j<phoneCount; j++){
+        
+            if([ [value_[i] valueForKey:@"allPhoneNumbers"][j][2] isEqualToString:@"1" ]||  [[value_[i] valueForKey:@"allPhoneNumbers"][j][3]isEqualToString:@"1"]){
+                
+                [curObj.allPhoneNumbers addObject:[value_[i] valueForKey:@"allPhoneNumbers"][j]];
+                NSLog(@" aaaaa : %@", [value_[i] valueForKey:@"allPhoneNumbers"][j] );
+            }
         }
-        if([[value_[i] valueForKey:@"allEmails"][0][1] isEqualToString:@"1"]){
-            [curContactDetails setValue:curObj.allEmails forKey:@"emailAddresses"];
+       
+        if(curObj.allPhoneNumbers>0){
+            [curContactDetails setValue:curObj.allPhoneNumbers forKey:@"phoneNumbers"];
         }
         
+        
+        for(int j=0; j<emailCount; j++){
+            
+            if([[value_[i] valueForKey:@"allEmails"][j][1] isEqualToString:@"1"]){
+                
+                [curObj.allEmails addObject:[value_[i] valueForKey:@"allEmails"][j]];
+                NSLog(@" aaaaa : %@", [value_[i] valueForKey:@"allEmails"][j] );
+                
+            }
+        }
+        if(curObj.allEmails>0){
+            [curContactDetails setValue:curObj.allEmails forKey:@"emailAddresses"];
+        }
+              
         [curContactDetails setValue:curObj.customTextForContact forKey:@"customTextForContact"];
         [curContactDetails setValue:curObj.cutomizingStatusArray forKey:@"cutomizingStatusArray"];
         [curContactDetails setObject:[NSNumber numberWithBool:curObj.IsCustomized] forKey:@"IsCustomized"];

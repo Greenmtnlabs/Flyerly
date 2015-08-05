@@ -49,6 +49,25 @@
     untechableModel.pk = (int)[untechableModel primaryKey];
     
     [self configureTestData];
+    
+    NSMutableDictionary *sUntechable = [commonFunctions getUntechable:0 UserId:userId];
+    //Old Untechable going to edit, set the vars
+    if( sUntechable != nil ){
+        //Settings required for calling initUntechableDirectory
+        uniqueId = sUntechable[@"uniqueId"];
+        untechablePath = sUntechable[@"untechablePath"];
+        
+        untechableModel.pk =(int) [untechableModel primaryKey];
+        untechableModel.uniqueId = sUntechable[@"uniqueId"];
+        
+        [self initUntechableDirectory];
+    }
+    else {
+        [self initWithDefValues];
+        [self initUntechableDirectory];
+    }
+    
+    
      return self;
 }
 
@@ -209,7 +228,7 @@
         dic[@"location"] = location;
         
         
-        dic[@"customizedContacts"] = [commonFunctions convertCCMArrayIntoJsonString:customizedContactsForCurrentSession];
+        dic[@"customizedContacts"] = [commonFunctions convertCCMArrayIntoJsonString2:customizedContactsForCurrentSession];
         customizedContacts = dic[@"customizedContacts"];
         customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:dic[@"customizedContacts"]];
         
@@ -531,12 +550,21 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
             eventId = [dict valueForKey:@"eventId"];
             savedOnServer = YES;
             hasFinished = YES;
+            
+            // setting to model
+            self.untechableModel.twillioNumber = [dict valueForKey:@"twillioNumber"];;
+            self.untechableModel.eventId = [dict valueForKey:@"eventId"];
+            self.untechableModel.savedOnServer = YES;
+            self.untechableModel.hasFinished = YES;
+
+            
             [self setOrSaveVars:SAVE];
             
         } else{
             message = [dict valueForKey:@"message"];
             if( !([[dict valueForKey:@"eventId"] isEqualToString:@"0"]) ) {
                 eventId = [dict valueForKey:@"eventId"];
+                self.untechableModel.eventId = [dict valueForKey:@"eventId"];
                 [self setOrSaveVars:SAVE];
             }
             
@@ -593,48 +621,68 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     
     // setting to model
+    
+    
+    NSString *_socialStatus, *_fbAuth, *_fbAuthExpiryTs, *_twitterAuth, *_twOAuthTokenSecret, *_linkedinAuth, *_email, *_password;
+    
     untechableModel.eventId    = @"";
     untechableModel.startDate  = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60)] ]; //current time + time duration
+    
     untechableModel.endDate  = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)+60] ]; //start time +1 Day
+    
     untechableModel.spendingTimeTxt = selectedStatus;
-    untechableModel.socialStatus = @"";
-    untechableModel.fbAuth = @"";
-    untechableModel.fbAuthExpiryTs = @"";
-    untechableModel.twitterAuth = @"";
-    untechableModel.twOAuthTokenSecret = @"";
-    untechableModel.linkedinAuth = @"";
-    untechableModel.email = @"";
-    untechableModel.password = @"";
+    
+    _socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", timeInString, spendingTimeTxt];
+    untechableModel.socialStatus = (_socialStatus) ? _socialStatus :@"";
+    
+    _fbAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuth"];
+    untechableModel.fbAuth = (_fbAuth) ? _fbAuth : @"";
+    
+    _fbAuthExpiryTs = [[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuthExpiryTs"];
+    untechableModel.fbAuthExpiryTs = (_fbAuthExpiryTs) ? _fbAuthExpiryTs : @"";
+    
+    
+    _twitterAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuth"];
+    untechableModel.twitterAuth = (_twitterAuth) ? _twitterAuth : @"";
+    
+    _twOAuthTokenSecret = [[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuthTokkenSecerate"];
+    untechableModel.twOAuthTokenSecret = (_twOAuthTokenSecret) ? _twOAuthTokenSecret : @"";
+    
+    _linkedinAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"linkedinAuth" ];
+    untechableModel.linkedinAuth = (_linkedinAuth) ? _linkedinAuth : @"";
+    
+    _email = [[NSUserDefaults standardUserDefaults] objectForKey:@"emailAddress" ];
+    untechableModel.email = (_email) ? _email : @"";
+   
+    _password = [[NSUserDefaults standardUserDefaults] objectForKey:@"emailPassword" ];
+    untechableModel.password = (_password) ? _password : @"";
     
     untechableModel.paid          = NO;
-    untechableModel.userId          = @"";
-    untechableModel.uniqueId        = @"";
+    untechableModel.userId          = (untechableModel.userId) ? untechableModel.userId : @"";
+    untechableModel.uniqueId        = (untechableModel.uniqueId) ? untechableModel.uniqueId : @"";
     untechableModel.savedOnServer   = NO;
     untechableModel.hasFinished     = NO;
     
    
-    untechableModel.userName       =  @"";
-    untechableModel.userPhoneNumber = @"";
-    
-    untechableModel.timezoneOffset  = @"";
-    untechableModel.hasEndDate    = NO;
-    
-    untechableModel.twillioNumber = @"";
-    untechableModel.location= @"";
-    
-    untechableModel.customizedContacts = @"";
-    
-    untechableModel.respondingEmail = @"";
-    untechableModel.acType = @"";
-    
-    untechableModel.iSsl = @"";
-    untechableModel.oSsl = @"";
-    untechableModel.imsHostName = @"";
-    untechableModel.imsPort = @"";
-    untechableModel.omsHostName = @"";
-    untechableModel.omsPort = @"";
-    
-    untechableModel.customTextForContact = @"";
+//    untechableModel.timezoneOffset  = (untechableModel.timezoneOffset) ? untechableModel.timezoneOffset : @"";
+//    untechableModel.hasEndDate    = NO;
+//    
+//    untechableModel.twillioNumber = @"";
+//    untechableModel.location= @"";
+//    
+//    untechableModel.customizedContacts = @"";
+//    
+//    untechableModel.respondingEmail = @"";
+//    untechableModel.acType = @"";
+//    
+//    untechableModel.iSsl = @"";
+//    untechableModel.oSsl = @"";
+//    untechableModel.imsHostName = @"";
+//    untechableModel.imsPort = @"";
+//    untechableModel.omsHostName = @"";
+//    untechableModel.omsPort = @"";
+//    
+//    untechableModel.customTextForContact = @"";
 }
 
 @end

@@ -505,7 +505,7 @@
         
         //Check is there any incomplete untechable exist ?
         if( isNew == YES ){
-            sUntechable = [untechable.commonFunctions getAnyInCompleteUntechable:untechable.userId];
+        sUntechable = [untechable.commonFunctions getAnyInCompleteUntechable:untechable.userId];
             
             if( sUntechable != nil ){
                 isNew = NO;

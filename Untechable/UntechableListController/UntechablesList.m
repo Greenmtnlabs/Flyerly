@@ -129,7 +129,7 @@ int indexArrayS2[];
 // set default vaules in model
 -(void)setDefaultModel{
     
-    untechable  = [[Untechable alloc] initAll];    
+    untechable  = [[Untechable alloc] initAll];
     allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
     
     [self testInternetConnection];

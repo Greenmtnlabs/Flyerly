@@ -270,6 +270,7 @@
  Initializing Untech Model
  **/
 -(void)setupDefaultModel {
+    
     untechable  = [[Untechable alloc] initAll];
     NSMutableDictionary *sUntechable = nil;
     sUntechable = [untechable.commonFunctions getUntechable:0 UserId:untechable.userId];
@@ -278,16 +279,16 @@
         //Settings required for calling initUntechableDirectory
         untechable.uniqueId = sUntechable[@"uniqueId"];
         untechable.untechablePath = sUntechable[@"untechablePath"];
-        
         untechable.untechableModel.pk =(int) [untechable.untechableModel primaryKey];
         untechable.untechableModel.uniqueId = sUntechable[@"uniqueId"];
-        
         [untechable initUntechableDirectory];
-    }
+        }
     else {
         [untechable initWithDefValues];
         [untechable initUntechableDirectory];
-    }
+        }
+
+    //untechable  = [[Untechable alloc] initAll];
 }
 
 /**
