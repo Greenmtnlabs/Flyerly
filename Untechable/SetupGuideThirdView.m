@@ -160,14 +160,14 @@
     
     untechable.customizedContactsForCurrentSession = customizedContactsFromSetup;
     
-    NSString *customizeContactsForCurrentSession = [untechable.commonFunctions convertCCMArrayIntoJsonString2:customizedContactsFromSetup];
+    NSString *customizeContactsForCurrentSession = [untechable.commonFunctions convertCCMArrayIntoJsonString:customizedContactsFromSetup];
 
     
     
     
-    //untechable.untechableModel.selectedContacts = [untechable.commonFunctions convertCCMArrayIntoJsonString2:customizedContactsFromSetup];
+    untechable.untechableModel.selectedContacts = [untechable.commonFunctions convertCCMArrayIntoJsonString2:customizedContactsFromSetup];
     
-    untechable.untechableModel.selectedContacts = customizeContactsForCurrentSession;
+    //untechable.untechableModel.selectedContacts = customizeContactsForCurrentSession;
     
     [[NSUserDefaults standardUserDefaults] setObject:customizeContactsForCurrentSession forKey:@"customizedContactsFromSetup"];
     [[NSUserDefaults standardUserDefaults] setObject:customizeContactsForCurrentSession forKey:@"customizedContactsFromSetup2"];
