@@ -77,7 +77,28 @@
 
 
 -(void)setSmsStatus :(int)status_ {
-    
     [cutomizingStatusArray replaceObjectAtIndex:2 withObject:[NSString stringWithFormat:@"%d",status_]];
 }
+
+-(void)removeNotSelectedPhoneNumbers {    
+    NSMutableArray *tempAllPhoneNumbers = [[NSMutableArray alloc] init];
+    for(int j=0; j<[allPhoneNumbers count]; j++){
+        if([allPhoneNumbers[j][2] isEqualToString:@"1" ]||  [allPhoneNumbers[j][3]isEqualToString:@"1"] ){
+            [tempAllPhoneNumbers addObject:allPhoneNumbers[j]];
+        }
+    }
+    allPhoneNumbers = [[NSMutableArray alloc] initWithArray:tempAllPhoneNumbers];
+}
+
+
+-(void)removeNotSelectedEmails {
+    NSMutableArray *tempAllEmails = [[NSMutableArray alloc] init];
+    for(int j=0; j<[allEmails count]; j++){
+        if([allEmails[j][1] isEqualToString:@"1" ] ){
+            [tempAllEmails addObject:allEmails[j]];
+        }
+    }
+    allEmails = [[NSMutableArray alloc] initWithArray:tempAllEmails];
+}
+
 @end

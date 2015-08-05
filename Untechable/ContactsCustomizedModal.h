@@ -61,4 +61,9 @@
 @property (nonatomic,strong)NSString *country;
 @property (nonatomic,strong)NSString *zip;
 
+-(void)removeNotSelectedPhoneNumbers;
+
+-(void)removeNotSelectedEmails;
+
+
 @end
