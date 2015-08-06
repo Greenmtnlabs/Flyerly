@@ -41,6 +41,7 @@
     BOOL isNewText;
     //Fix for: 162-create-flyer-screen-when-user-close-the-inapp-tabs-are-active-and-extra-layer-showing-when-it-comes-from-clipart
     BOOL appearingViewAfterInAppHide;
+    
 }
 
 @end
@@ -54,7 +55,7 @@
 
 //Drawing required files
 @synthesize mainImage;
-@synthesize tempDrawImage;
+@synthesize tempDrawImage,enableRenderFlyer;
 
 @synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,
 fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sharePanel,clipArtTabButton,emoticonsTabButton,artsColorTabButton,artsSizeTabButton, drawingColorTabButton,drawingPatternTabButton, drawingSizeTabButton,drawingEraserTabButton,drawingEraserMsg;
@@ -139,7 +140,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     
     //Render Flyer
+    if( enableRenderFlyer == YES )
     [self renderFlyer];
+    
+    enableRenderFlyer = YES;
     
     self.flyimgView.addUiImgForDrawingLayer = NO;//must set:NO after renderFlyer all layers first time
     
@@ -304,6 +308,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         [[NSBundle mainBundle] loadNibNamed:@"CreateFlyerController-iPhone4" owner:self options:nil];
     }
 
+    enableRenderFlyer = YES;
     sharingPannelIsHidden = YES;
     appearingViewAfterInAppHide = NO;
     isNewText   =   NO;
@@ -2677,6 +2682,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     
     [nbuGallary setOnVideoFinished:^(NSURL *recvUrl, CGRect cropRect, CGFloat scale ) {
+        weakSelf.enableRenderFlyer = NO;
+        [weakSelf enableNavigation:NO];
         
         [uiBusy stopAnimating];
         [uiBusy removeFromSuperview];
@@ -2700,6 +2707,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         // Make sure the video is scaled and cropped as required.
         [weakSelf modifyVideo:recvUrl destination:movieURL crop:cropRect scale:scale overlay:nil completion:^(NSInteger status, NSError *error) {
+            dispatch_async( dispatch_get_main_queue(), ^{
+                [weakSelf enableNavigation:YES];
+            });
             switch ( status ) {
                 case AVAssetExportSessionStatusFailed:
                     NSLog (@"FAIL = %@", error );
@@ -2709,7 +2719,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     // Main Thread
                     dispatch_async( dispatch_get_main_queue(), ^{
                         // Render the movie player.
-                        [weakSelf.flyimgView renderLayer:@"Template" layerDictionary:[self.flyer getLayerFromMaster:@"Template"]];
+                        [weakSelf.flyimgView renderLayer:@"Template" layerDictionary:[weakSelf.flyer getLayerFromMaster:@"Template"]];
                     });
                     break;
             }
@@ -2826,9 +2836,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     // Call back for when video is selected.
     [nbuCamera setOnVideoFinished:^(NSURL *recvUrl, CGRect cropRect, CGFloat scale ) {
+         weakSelf.enableRenderFlyer = NO;
+        [weakSelf enableNavigation:NO];
         
         //Remove tag of selected background
-        [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
+        [weakSelf.flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
         
         [uiBusy stopAnimating];
         [uiBusy removeFromSuperview];
@@ -2853,6 +2865,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         // Make sure the video is scaled and cropped as required.
         [weakSelf modifyVideo:recvUrl destination:movieURL crop:cropRect scale:scale overlay:nil completion:^(NSInteger status, NSError *error) {
+            dispatch_async( dispatch_get_main_queue(), ^{
+                [weakSelf enableNavigation:YES];
+            });
             switch ( status ) {
                 case AVAssetExportSessionStatusFailed:
                     NSLog (@"FAIL = %@", error );
@@ -2862,7 +2877,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     // Main Thread
                     dispatch_async( dispatch_get_main_queue(), ^{
                         // Render the movie player.
-                        [weakSelf.flyimgView renderLayer:@"Template" layerDictionary:[self.flyer getLayerFromMaster:@"Template"]];
+                        [weakSelf.flyimgView renderLayer:@"Template" layerDictionary:[weakSelf.flyer getLayerFromMaster:@"Template"]];
                     });
                     break;
             }
@@ -2872,7 +2887,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     [nbuCamera setOnVideoCancel:^() {
         dispatch_async( dispatch_get_main_queue(), ^{
-            [weakSelf.view addSubview:flyimgView];
+            [weakSelf.view addSubview:weakSelf.flyimgView];
             [uiBusy stopAnimating];
             [uiBusy removeFromSuperview];
         });
@@ -2894,30 +2909,36 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  * Here we Configure Player and Load File in Player
  */
 -(void)loadPlayerWithURL :(NSURL *)movieURL {
-    
+
+
+    BOOL playerIsNil = YES;
     if ( player != nil ) {
         [player.view removeFromSuperview];
+        playerIsNil = NO;
     }
-
+    
     player =[[MPMoviePlayerController alloc] initWithContentURL:movieURL];
+    
     [player.view setFrame:self.playerView.bounds];
     
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(movieFinishedCallback:)
-     name:MPMoviePlayerPlaybackDidFinishNotification
-     object:player];
-    
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(movieStateChangeCallback:)
-     name:MPMoviePlayerPlaybackStateDidChangeNotification
-     object:player];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MPMoviePlayerThumbnailImageRequestDidFinishNotification::) name:MPMoviePlayerThumbnailImageRequestDidFinishNotification object:player];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(MPMoviePlayerLoadStateDidChange:)
-                                                 name:MPMoviePlayerLoadStateDidChangeNotification
-                                               object:nil];
+    if( playerIsNil ){
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self selector:@selector(movieFinishedCallback:)
+         name:MPMoviePlayerPlaybackDidFinishNotification
+         object:player];
+        
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self selector:@selector(movieStateChangeCallback:)
+         name:MPMoviePlayerPlaybackStateDidChangeNotification
+         object:player];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MPMoviePlayerThumbnailImageRequestDidFinishNotification::) name:MPMoviePlayerThumbnailImageRequestDidFinishNotification object:player];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(MPMoviePlayerLoadStateDidChange:)
+                                                     name:MPMoviePlayerLoadStateDidChangeNotification
+                                                   object:nil];
+    }
     
     self.flyimgView.image = nil;
     
@@ -5584,13 +5605,14 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 -(void)enableHome:(BOOL)enable{
     sharePanel.hidden = enable;
     sharingPannelIsHidden = enable;
-
+}
+-(void)enableNavigation:(BOOL)enable{
     [backButton setEnabled:enable];
     [helpButton setEnabled:enable];
     [shareButton setEnabled:enable];
     [rightUndoBarButton setEnabled:enable];
-    
 }
+
 
 //return free space in in mb
 -(unsigned long long)getFreeDiskspace {
