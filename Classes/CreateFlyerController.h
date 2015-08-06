@@ -291,6 +291,6 @@
 @property (nonatomic,strong)IBOutlet UIImageView *premiumImgBg, *premiumImgBgBorder, *premiumImgEmoticons, *premiumImgCliparts, *premiumImgFonts;
 
 //This variable was needed because When comming from cropview render flyer relaocating video flyer
-@property (assign) BOOL doNotRenderFlery;
+@property (assign) BOOL enableRenderFlyer;
 -(void)enableNavigation:(BOOL)enable;
 @end

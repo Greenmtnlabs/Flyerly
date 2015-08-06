@@ -55,7 +55,7 @@
 
 //Drawing required files
 @synthesize mainImage;
-@synthesize tempDrawImage,doNotRenderFlery;
+@synthesize tempDrawImage,enableRenderFlyer;
 
 @synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,
 fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sharePanel,clipArtTabButton,emoticonsTabButton,artsColorTabButton,artsSizeTabButton, drawingColorTabButton,drawingPatternTabButton, drawingSizeTabButton,drawingEraserTabButton,drawingEraserMsg;
@@ -140,10 +140,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     
     //Render Flyer
-    if( doNotRenderFlery == NO )
+    if( enableRenderFlyer == YES )
     [self renderFlyer];
     
-    doNotRenderFlery = NO;
+    enableRenderFlyer = YES;
     
     self.flyimgView.addUiImgForDrawingLayer = NO;//must set:NO after renderFlyer all layers first time
     
@@ -308,7 +308,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         [[NSBundle mainBundle] loadNibNamed:@"CreateFlyerController-iPhone4" owner:self options:nil];
     }
 
-    doNotRenderFlery = NO;
+    enableRenderFlyer = YES;
     sharingPannelIsHidden = YES;
     appearingViewAfterInAppHide = NO;
     isNewText   =   NO;
@@ -2682,7 +2682,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     
     [nbuGallary setOnVideoFinished:^(NSURL *recvUrl, CGRect cropRect, CGFloat scale ) {
-        weakSelf.doNotRenderFlery = YES;
+        weakSelf.enableRenderFlyer = NO;
         [weakSelf enableNavigation:NO];
         
         [uiBusy stopAnimating];
@@ -2836,7 +2836,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     // Call back for when video is selected.
     [nbuCamera setOnVideoFinished:^(NSURL *recvUrl, CGRect cropRect, CGFloat scale ) {
-         weakSelf.doNotRenderFlery = YES;
+         weakSelf.enableRenderFlyer = NO;
         [weakSelf enableNavigation:NO];
         
         //Remove tag of selected background
