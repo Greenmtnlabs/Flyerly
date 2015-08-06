@@ -290,4 +290,7 @@
 @property (nonatomic,strong)IBOutlet UIButton *premiumBtnBg, *premiumBtnBgBorder, *premiumBtnEmoticons, *premiumBtnCliparts, *premiumBtnFonts;
 @property (nonatomic,strong)IBOutlet UIImageView *premiumImgBg, *premiumImgBgBorder, *premiumImgEmoticons, *premiumImgCliparts, *premiumImgFonts;
 
+//This variable was needed because When comming from cropview render flyer relaocating video flyer
+@property (assign) BOOL doNotRenderFlery;
+-(void)enableNavigation:(BOOL)enable;
 @end
