@@ -41,9 +41,20 @@
 @synthesize customTextForContact;
 
 
+-(id)initWithDefault{
+    self = [super init];
+    NSString *customizedContactsFromSetup = [[NSUserDefaults standardUserDefaults]
+                                             stringForKey:@"customizedContactsFromSetup"];
+    
+    customizedContacts = customizedContactsFromSetup;
+    return self;
+}
+
+
 -(NSString *)primaryKey {
     return @"pk";
 }
+
 
 
 -(NSMutableDictionary *) modelToDictionary {
@@ -52,7 +63,7 @@
     commonFunctions = [[CommonFunctions alloc] init];
     
     NSString *customizedContactsFromSetup = [[NSUserDefaults standardUserDefaults]
-                                             stringForKey:@"customizedContactsFromSetup2"];
+                                             stringForKey:@"customizedContactsFromSetup"];
 
     
     dic[@"eventId"]         = eventId ? eventId : @"";

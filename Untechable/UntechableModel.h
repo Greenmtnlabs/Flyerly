@@ -60,5 +60,7 @@
 
 -(NSMutableDictionary *) modelToDictionary;
 
+-(id)initWithDefault;
+
 @end
 #endif

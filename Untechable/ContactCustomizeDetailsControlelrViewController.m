@@ -24,6 +24,8 @@
     NSMutableDictionary *editingEmailsWithStatus;
     NSMutableDictionary *editingPhonesWithStatus;
     BOOL isRepeat;
+    
+    BOOL isEmailSet, isSmsSet, isPhoneNumberSet;
 }
 @property (weak, nonatomic) IBOutlet UITableView *contactDetailsTable;
 
@@ -79,9 +81,9 @@
    
     if(untechable.selectedContacts.count != 0){
         for(int i=0; i<untechable.selectedContacts.count; i++){
-            if([[untechable.selectedContacts[i] valueForKey:@"contactName"] isEqualToString: tempContactDetailsModal.contactName] ){
-                NSMutableArray *allPh = [untechable.selectedContacts[i] valueForKey:@"phoneNumbers"];
-                NSMutableArray *allEmail = [untechable.selectedContacts[i] valueForKey:@"emailAddresses"];
+            if([[untechable.selectedContacts[i] valueForKey:@"name"] isEqualToString: tempContactDetailsModal.contactName] ){
+                NSMutableArray *allPh = [untechable.selectedContacts[i] valueForKey:@"allPhoneNumbers"];
+                NSMutableArray *allEmail = [untechable.selectedContacts[i] valueForKey:@"allEmails"];
                 for(int j=0; j<allPh.count;j++) {
                     [tempContactDetailsModal.phoneNumbers addObject: allPh[j]];
                 }
@@ -429,9 +431,9 @@
         [contactModal setEmailStatus:setEmailStatus];
     }
     
-    BOOL alreadyExist = NO;
-    int indexToBeChanged = 0;
-    
+        BOOL alreadyExist = NO;
+        int indexToBeChanged = 0;
+
     for ( int i = 0 ;i<contactListController.currentlyEditingContacts.count;i++){
         
         ContactsCustomizedModal *tempModal = [contactListController.currentlyEditingContacts objectAtIndex:i];
@@ -503,10 +505,39 @@
             [contactListController.currentlyEditingContacts addObject:contactModal];
         }
     }
+   
+    /*
+     * set cutomizingStatusArray
+     * status and IsCustomized
+     */
     
-    tempContactDetailsModal.IsCustomized = contactModal.IsCustomized;
+    
+    
+    if(isEmailSet){
+        [tempContactDetailsModal.cutomizingStatusArray addObject:@"1"];
+        tempContactDetailsModal.IsCustomized = YES;
+        
+    } else {
+        [tempContactDetailsModal.cutomizingStatusArray  addObject:@"0"];
+    }
+    
+    if(isPhoneNumberSet){
+        [tempContactDetailsModal.cutomizingStatusArray addObject:@"1"];
+        tempContactDetailsModal.IsCustomized = YES;
+        
+    } else {
+        [tempContactDetailsModal.cutomizingStatusArray addObject:@"0"];
+    }
+    
+    if(isSmsSet){
+        [tempContactDetailsModal.cutomizingStatusArray addObject:@"1"];
+        tempContactDetailsModal.IsCustomized = YES;
+        
+    } else {
+        [tempContactDetailsModal.cutomizingStatusArray addObject:@"0"];
+    }
+    
     tempContactDetailsModal.customTextForContact = contactModal.customTextForContact;
-    [tempContactDetailsModal.cutomizingStatusArray addObject:contactModal.cutomizingStatusArray];
     
     
     /**
@@ -515,17 +546,17 @@
      * should not be saved to
      * untechable modal
      */
-    
     if( untechable.selectedContacts.count == 0 && tempContactDetailsModal.hasContacts ){
         [untechable.selectedContacts addObject:tempContactDetailsModal];
+        contactModal.IsCustomized = YES;
     } else {
         if( isRepeat) {
             for( int i=0; i<untechable.selectedContacts.count; i++ ){
-                if( [[untechable.selectedContacts[i] valueForKey:@"contactName"] isEqualToString: tempContactDetailsModal.contactName] ){
-                    
+                if( [[untechable.selectedContacts[i] valueForKey:@"name"] isEqualToString: tempContactDetailsModal.contactName] ){
                     // check if there is no contact type (i.e, email, phone) set, remove this from contact list
                     if( !tempContactDetailsModal.hasContacts ){
                         [untechable.selectedContacts removeObjectAtIndex:i];
+                        
                         isRepeat = NO;
                         break;
                     }else{
@@ -539,6 +570,8 @@
             [untechable.selectedContacts addObject:tempContactDetailsModal];
         }
     }
+   
+    
     
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -576,10 +609,12 @@
                     // to remove if no flag is set to 1
                     if([tempEmailWithStatus[1] isEqualToString: @"0"] ){
                         [tempContactDetailsModal.emailAddresses removeObjectAtIndex:i];
+                        isEmailSet = NO;
                         isRepeat = NO;
                         break;
                     }else{
                         [tempContactDetailsModal.emailAddresses replaceObjectAtIndex:i withObject:tempEmailWithStatus];
+                        isEmailSet = YES;
                         isRepeat = NO;
                         break;
                     }
@@ -588,10 +623,12 @@
             //if not found, add new eamil
             if(isRepeat) {
                 [tempContactDetailsModal.emailAddresses addObject:tempEmailWithStatus];
+                isEmailSet = YES;
             }
         }
     }else{
         [tempContactDetailsModal.emailAddresses addObject:tempEmailWithStatus];
+        isEmailSet = YES;
     }
     
     [editingEmailsWithStatus setObject:tempEmailWithStatus forKey:indexPath];
@@ -632,10 +669,12 @@
                     // to remove if no flag is set to 1
                     if([tempPhoneWithStatus[2] isEqualToString: @"0"] && [tempPhoneWithStatus[3] isEqualToString: @"0"]  ){
                         [tempContactDetailsModal.phoneNumbers removeObjectAtIndex:i];
+                        isPhoneNumberSet = NO;
                         isRepeat = NO;
                         break;
                     }else{
                         [tempContactDetailsModal.phoneNumbers replaceObjectAtIndex:i withObject:tempPhoneWithStatus];
+                        isPhoneNumberSet = YES;
                         isRepeat = NO;
                         break;
                     }
@@ -644,10 +683,12 @@
             //if not found, add new phone number
             if(isRepeat) {
                 [tempContactDetailsModal.phoneNumbers addObject:tempPhoneWithStatus];
+                isPhoneNumberSet = YES;
             }
         }
     }else{
         [tempContactDetailsModal.phoneNumbers addObject:tempPhoneWithStatus];
+        isPhoneNumberSet = YES;
     }
     [editingPhonesWithStatus setObject:tempPhoneWithStatus forKey:indexPath];
    
@@ -689,10 +730,12 @@
                     // to remove if no flag is set to 1
                     if([tempPhoneWithStatus[2] isEqualToString: @"0"] && [tempPhoneWithStatus[3] isEqualToString: @"0"]  ){
                         [tempContactDetailsModal.phoneNumbers removeObjectAtIndex:i];
+                        isSmsSet = NO;
                         isRepeat = NO;
                         break;
                     }else{
                         [tempContactDetailsModal.phoneNumbers replaceObjectAtIndex:i withObject:tempPhoneWithStatus];
+                        isSmsSet = YES;
                         isRepeat = NO;
                         break;
                     }
@@ -701,10 +744,12 @@
             //if not found, add new phone number
             if(isRepeat) {
                 [tempContactDetailsModal.phoneNumbers addObject:tempPhoneWithStatus];
+                isSmsSet = YES;
             }
         }
     }else{
         [tempContactDetailsModal.phoneNumbers addObject:tempPhoneWithStatus];
+        isSmsSet = YES;
     }
     [editingPhonesWithStatus setObject:tempPhoneWithStatus forKey:indexPath];
 }

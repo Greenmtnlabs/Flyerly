@@ -45,7 +45,7 @@
 - (id)initAll{
     self = [super init];
     commonFunctions = [[CommonFunctions alloc] init];
-    untechableModel = [[UntechableModel alloc] init];
+    untechableModel = [[UntechableModel alloc] initWithDefault];
     untechableModel.pk = (int)[untechableModel primaryKey];
     
     [self configureTestData];
@@ -228,7 +228,7 @@
         dic[@"location"] = location;
         
         
-        dic[@"customizedContacts"] = [commonFunctions convertCCMArrayIntoJsonString2:customizedContactsForCurrentSession];
+        dic[@"customizedContacts"] = [commonFunctions convertCCMArrayIntoJsonString2:selectedContacts];
         customizedContacts = dic[@"customizedContacts"];
         customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:dic[@"customizedContacts"]];
         
@@ -329,7 +329,8 @@
         customTextForContact = ( dic[@"customTextForContact"]);
         
         selectedContacts = [[NSMutableArray alloc] init];
-       
+        
+        selectedContacts = [commonFunctions convertJsonStringIntoCCMArray:customizedContacts];
     }
     
     //NSLog(@"dic: %@", dic);

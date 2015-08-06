@@ -234,7 +234,7 @@
         }
     }
     
-    untechable.customizedContactsForCurrentSession = currentlyEditingContacts;
+    untechable.customizedContactsForCurrentSession = untechable.selectedContacts;
     
     if ( selectedAnyEmail  ){
         [self showEmailSetupScreen:NO];
@@ -249,8 +249,11 @@
      //hides the keyboard when navigating to the next views
      [searchTextField resignFirstResponder];
     
+     untechable.untechableModel.selectedContacts = [untechable.commonFunctions convertCCMArrayIntoJsonString2:untechable.customizedContactsForCurrentSession];
     
-       untechable.untechableModel.selectedContacts = [untechable.commonFunctions convertCCMArrayIntoJsonString2:untechable.customizedContactsForCurrentSession];    
+    
+    [[NSUserDefaults standardUserDefaults] setObject:untechable.untechableModel.selectedContacts forKey:@"customizedContactsFromSetup"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 -( void ) showEmailSetupScreen : ( BOOL ) calledFromSetupScreen {

@@ -15,7 +15,7 @@
 @property (nonatomic,strong)NSMutableArray *phoneNumbers;
 @property (nonatomic,strong)NSString *customTextForContact;
 @property (nonatomic,strong)NSMutableArray *cutomizingStatusArray;
-@property BOOL *IsCustomized;
+@property BOOL IsCustomized;
 
 
 

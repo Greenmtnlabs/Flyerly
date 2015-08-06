@@ -175,27 +175,25 @@ NSString *currentEnteredPhoneNumber;
 {
     NSMutableDictionary *customizedContacts = [[NSMutableDictionary alloc] init];
     int j=0;
+    
     for(int i=0;i<[value_ count]; i++) {
         
         NSMutableDictionary *curContactDetails = [[NSMutableDictionary alloc] init];
         
-        ContactsCustomizedModal *curObj =  [value_ objectAtIndex:i];
-        [curContactDetails setValue:curObj.name forKey:@"contactName"];
         
-        [curObj removeNotSelectedPhoneNumbers];
-        [curContactDetails setValue:curObj.allPhoneNumbers forKey:@"phoneNumbers"];
+        SingleContactDetailsModal *curObj =  [value_ objectAtIndex:i];
+        [curContactDetails setValue:curObj.contactName forKey:@"name"];
+        
+        [curContactDetails setValue:curObj.phoneNumbers forKey:@"allPhoneNumbers"];
 
-        [curObj removeNotSelectedEmails];
-        [curContactDetails setValue:curObj.allEmails forKey:@"emailAddresses"];
+        [curContactDetails setValue:curObj.emailAddresses forKey:@"allEmails"];
         
-        if( curObj.allEmails.count >0 || curObj.allPhoneNumbers.count > 0){
-            [curContactDetails setValue:curObj.customTextForContact forKey:@"customTextForContact"];
-            [curContactDetails setValue:curObj.cutomizingStatusArray forKey:@"cutomizingStatusArray"];
-            [curContactDetails setObject:[NSNumber numberWithBool:curObj.IsCustomized] forKey:@"IsCustomized"];
-            [customizedContacts setValue:curContactDetails forKey:[NSString stringWithFormat:@"%i",j++]];
-        }
-   
+        [curContactDetails setValue:curObj.customTextForContact forKey:@"customTextForContact"];
+        [curContactDetails setValue:curObj.cutomizingStatusArray forKey:@"cutomizingStatusArray"];
+        [curContactDetails setObject:[NSNumber numberWithBool:curObj.IsCustomized] forKey:@"IsCustomized"];
+        [customizedContacts setValue:curContactDetails forKey:[NSString stringWithFormat:@"%i",j++]];
     }
+    
     return [self convertDicIntoJsonString:customizedContacts];
 }
 
