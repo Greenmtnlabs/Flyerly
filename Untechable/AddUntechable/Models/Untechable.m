@@ -302,7 +302,7 @@
         
         
         customizedContacts = ( customizedContactsFromSetup ) ? customizedContactsFromSetup :dic[@"customizedContacts"];
-        customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:customizedContacts];
+        customizedContactsForCurrentSession = [commonFunctions convertCCMArrayIntoJsonString2:customizedContacts];
         
         //Screen3 vars
         socialStatus = ( dic[@"socialStatus"] ) ? dic[@"socialStatus"] : @"";
