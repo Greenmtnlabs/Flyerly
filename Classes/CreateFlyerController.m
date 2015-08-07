@@ -2684,11 +2684,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     [nbuGallary setOnVideoFinished:^(NSURL *recvUrl, CGRect cropRect, CGFloat scale ) {
         weakSelf.enableRenderFlyer = NO;
+        [weakSelf stopUiBusy];
+        [weakSelf.flyimgView addSubview:[weakSelf getUiBusyIndication:[weakSelf getCenterOfView:weakSelf.flyimgView w:20 h:20]] ];
         [weakSelf enableNavigation:NO];
         
-        [uiBusy stopAnimating];
-        [uiBusy removeFromSuperview];
-
+        
         NSError *error = nil;
         
         [weakSelf.flyer setFlyerTypeVideo];
@@ -2709,6 +2709,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         // Make sure the video is scaled and cropped as required.
         [weakSelf modifyVideo:recvUrl destination:movieURL crop:cropRect scale:scale overlay:nil completion:^(NSInteger status, NSError *error) {
             dispatch_async( dispatch_get_main_queue(), ^{
+                [weakSelf stopUiBusy];
                 [weakSelf enableNavigation:YES];
             });
             switch ( status ) {
@@ -2739,6 +2740,23 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [Flurry logEvent:@"Custom Background"];
 }
 
+-(UIActivityIndicatorView *)getUiBusyIndication:(CGRect)rect{
+    uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [uiBusy setFrame:rect];
+    [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
+    uiBusy.hidesWhenStopped = YES;
+    [uiBusy startAnimating];
+    return uiBusy;
+}
+-(void)stopUiBusy{
+    [uiBusy stopAnimating];
+    [uiBusy removeFromSuperview];
+}
+
+-(CGRect)getCenterOfView:(UIImageView *)tempImgView w:(int)w h:(int)h{
+    CGRect imageViewCenterRect = CGRectMake( (tempImgView.size.width/2-w/2), (tempImgView.size.height/2-h/2), w, h);
+    return imageViewCenterRect;
+}
 
 #pragma mark - Add Video
 /*
@@ -2746,12 +2764,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  */
 -(void)openCustomCamera:(BOOL)forVideo {
     
-    uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    [uiBusy setFrame:CGRectMake(280, 5, 20, 20)];
-    [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
-    uiBusy.hidesWhenStopped = YES;
-    [uiBusy startAnimating];
-    [self.view addSubview:uiBusy];
+    [self.view addSubview:[self getUiBusyIndication:CGRectMake(280, 5, 20, 20)] ];
     
     nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
     
@@ -2792,8 +2805,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     // Callback once image is selected.
     [nbuCamera setOnImageTaken:^(UIImage *img) {
         
-        [uiBusy stopAnimating];
-        [uiBusy removeFromSuperview];
+        [weakSelf stopUiBusy];
         
         // If there is no image, do no further processing.
         if ( img == nil ) {
@@ -2801,7 +2813,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }
         
         //Remove tag of selected background
-        [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
+        [weakSelf.flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
         
         dispatch_async( dispatch_get_main_queue(), ^{
             
@@ -2838,17 +2850,16 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     // Call back for when video is selected.
     [nbuCamera setOnVideoFinished:^(NSURL *recvUrl, CGRect cropRect, CGFloat scale ) {
          weakSelf.enableRenderFlyer = NO;
+        [weakSelf stopUiBusy];
+        [weakSelf.flyimgView addSubview:[weakSelf getUiBusyIndication:[weakSelf getCenterOfView:weakSelf.flyimgView w:20 h:20]] ];
         [weakSelf enableNavigation:NO];
         
         //Remove tag of selected background
         [weakSelf.flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
         
-        [uiBusy stopAnimating];
-        [uiBusy removeFromSuperview];
-        
         NSError *error = nil;
         
-        [weakSelf.view addSubview:flyimgView];
+        [weakSelf.view addSubview:weakSelf.flyimgView];
         [weakSelf.flyer setFlyerTypeVideo];
         
         // Move video in to the sour flyer.
@@ -2867,6 +2878,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         // Make sure the video is scaled and cropped as required.
         [weakSelf modifyVideo:recvUrl destination:movieURL crop:cropRect scale:scale overlay:nil completion:^(NSInteger status, NSError *error) {
             dispatch_async( dispatch_get_main_queue(), ^{
+                [weakSelf stopUiBusy];
                 [weakSelf enableNavigation:YES];
             });
             switch ( status ) {

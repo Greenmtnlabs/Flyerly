@@ -147,6 +147,7 @@
  * Go back to the last screen.
  */
 -(void) goBack {
+    [player stop];
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     [self.navigationController popViewControllerAnimated:YES];
     
@@ -182,6 +183,8 @@
                 _desiredVideoSize.width,
                 _desiredVideoSize.height );
     }
+    
+    [player stop];
     
     _onVideoFinished( _url, cropRect, scaleRatio );
     
