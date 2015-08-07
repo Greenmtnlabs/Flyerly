@@ -2631,6 +2631,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         nbuGallary.desiredImageSize = [self setSizeForCropView:currentImage.frame.size];
     } else {
         nbuGallary.desiredImageSize = [self setSizeForCropView:CGSizeMake( flyerlyWidth, flyerlyHeight )];
+        nbuGallary.desiredVideoSize = CGSizeMake( flyerlyWidth, flyerlyHeight );
     }
     
     __weak CreateFlyerController *weakSelf = self;
@@ -5039,7 +5040,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             return;
         }
         
-        [self loadCustomPhotoLibrary:YES];
+        [self loadCustomPhotoLibrary:NO];
         
         //Add ContextView
         _videoLabel.alpha = 1;
