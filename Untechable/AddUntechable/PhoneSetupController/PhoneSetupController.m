@@ -109,7 +109,6 @@
  */
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [untechable setOrSaveVars:SAVE];
 }
 
 
@@ -439,7 +438,6 @@
                     
                     //NSLog(@"Successfully purchased product: %@", PRODUCT_UntechableMessage);
                      untechable.paid = YES;
-                    [untechable setOrSaveVars:SAVE];
                     [self next:@"GO_TO_NEXT"];
                 
                 } failure:^(SKPaymentTransaction *transaction, NSError *error) {
@@ -496,12 +494,7 @@
 }
 
 -(void)storeSceenVarsInDic{
-    //untechable.twillioNumber = _inputForwadingNumber.text;
-    //untechable.location = _inputLocation.text;
-    //untechable.emergencyNumber = _inputEmergencyNumber.text;
-    //untechable.emergencyContacts = untechable.emergencyContacts; //no need
-    
-    [untechable setOrSaveVars:SAVE];
+
 }
 
 #pragma mark -  Model funcs
@@ -641,8 +634,6 @@
         if( [tableViewFor isEqualToString:@"contactsTableView"] ) {
 
             //[untechable.commonFunctions deleteKeyFromDic:untechable.emergencyContacts delKeyAtIndex:indexPath.row];
-            
-            [untechable setOrSaveVars:SAVE];
             
             [self tableViewSR:@"reStart" callFor:@"contactsTableView"];
         }

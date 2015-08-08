@@ -107,11 +107,7 @@
     [super viewDidAppear:animated];
     [untechable printNavigation:[self navigationController]];
     
-    if ( untechable != nil ){
-        [untechable setOrSaveVars:SAVE];
-    }
-    
-   [self hideAllViews];
+    [self hideAllViews];
     
 }
 
@@ -521,7 +517,6 @@
         }
         
         [self storeSceenVarsInDic];
-        NSLog(@"onFinish dic = %@ ",untechable.dic);
         
         if( [APP_IN_MODE isEqualToString:TESTING] ){
             [self next:@"GO_TO_THANKYOU"];
@@ -530,7 +525,6 @@
             
             //Background work
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-                [untechable setOrSaveVars:@"SAVE"];
                 [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
                     
                     if( !([message isEqualToString:@""]) ) {
@@ -619,8 +613,8 @@
     
 }
 
--(void)storeSceenVarsInDic
-{
+-(void)storeSceenVarsInDic{
+    
     [[NSUserDefaults standardUserDefaults] setObject:_inputEmail.text forKey:EMAIL_KEY];
     [[NSUserDefaults standardUserDefaults] setObject:_inputPassword.text forKey:PASSWORD_KEY];
     
@@ -634,8 +628,8 @@
         untechable.imsPort      = _inputImsPort.text;
         untechable.omsHostName  = _inputOmsHostName.text;
         untechable.omsPort      = _inputOmsPort.text;
-    }else {
         
+    }else {
         untechable.iSsl          = @"";
         untechable.oSsl          = @"";
         untechable.imsHostName   = @"";
@@ -643,9 +637,7 @@
         untechable.omsHostName   = @"";
         untechable.omsPort       = @"";
     }
-    
-    
-    [untechable setOrSaveVars:SAVE];
+
 }
 
 

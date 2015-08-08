@@ -314,12 +314,9 @@
     }
 }
 
--(void)storeSceenVarsInDic
-{
+-(void)storeSceenVarsInDic {
     untechable.spendingTimeTxt = _inputSpendingTimeText.text;
     untechable.hasEndDate = !([_cbNoEndDate isSelected]);
-    
-    [untechable setOrSaveVars:SAVE];
 }
 
 -(void) hideAllControlls {
@@ -545,7 +542,6 @@
     else if( [callResetFor isEqualToString:@"RESET1"] ){
         untechable.savedOnServer = NO;
         untechable.paid = NO;
-        [untechable setOrSaveVars:SAVE];
     }
 }
 

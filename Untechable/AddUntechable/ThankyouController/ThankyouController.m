@@ -79,13 +79,9 @@
 
 -(void)goToUntechablesTableScreen{
     
-    /*untechable.savedOnServer    = NO;
-    [untechable setOrSaveVars:SAVE];*/
-    
     UntechablesList *untechableTableController;
     untechableTableController = [[UntechablesList alloc]initWithNibName:@"UntechablesList" bundle:nil];
-    [self.navigationController pushViewController:untechableTableController animated:YES];
-    
+    [self.navigationController pushViewController:untechableTableController animated:YES];    
 }
 
 - (IBAction)onEdit:(id)sender {

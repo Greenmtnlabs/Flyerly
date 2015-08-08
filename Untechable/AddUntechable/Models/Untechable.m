@@ -137,9 +137,6 @@
     {
         if([fm createDirectoryAtPath:untechablePath withIntermediateDirectories:YES attributes:nil error:nil]){
             NSLog(@"New Directory Created");
-            
-           [self setOrSaveVars:SAVE];
-            
             hasInit = YES;
         }
         else{
@@ -426,11 +423,10 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
 
 #pragma mark - Send to Server
--(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack
-{
-    
-    
+-(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack{
+
     //[self removeRedundentDataForContacts];
+    [self setOrSaveVars:SAVE];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:API_SAVE]];
@@ -452,12 +448,12 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     // getting the username and phone number to be send
     
-    NSString *userNameInDb = [[NSUserDefaults standardUserDefaults]
+    NSString *nsdUserNameInDb = [[NSUserDefaults standardUserDefaults]
                               stringForKey:@"userName"];
-    NSString *userPhoneNumber = [[NSUserDefaults standardUserDefaults] stringForKey:@"userphoneNumber"];
+    NSString *nsdUserPhoneNumber = [[NSUserDefaults standardUserDefaults] stringForKey:@"userphoneNumber"];
     
-    [dic setValue:userNameInDb forKey:@"userName"];
-    [dic setValue:userPhoneNumber forKey:@"userPhoneNumber"];
+    [dic setValue:nsdUserNameInDb forKey:@"userName"];
+    [dic setValue:nsdUserPhoneNumber forKey:@"userPhoneNumber"];
     
     
     for (NSString* key in dic) {

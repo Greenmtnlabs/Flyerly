@@ -178,12 +178,8 @@
     [searchTextField resignFirstResponder];
 }
 
--(void)storeSceenVarsInDic
-{
-    //untechable.spendingTimeTxt = _inputSpendingTimeText.text;
-    //untechable.hasEndDate = !([_cbNoEndDate isSelected]);
-    
-    [untechable setOrSaveVars:SAVE];
+-(void)storeSceenVarsInDic{
+    //we have already stored evey thing on save of inner scree of it
 }
 
 - (void)setSkipHighlighted:(BOOL)highlighted {

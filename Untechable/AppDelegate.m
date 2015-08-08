@@ -14,6 +14,18 @@
 #import "NameAndPhoneCellView.h"
 #import "SetupGuideViewController.h"
 #import "UntechOptionsViewController.h"
+#import <Realm/Realm.h>
+// Realm model object
+@interface DemoObject : RLMObject
+@property NSString *title;
+@property NSDate   *date;
+@property NSString *sectionTitle;
+@end
+
+@implementation DemoObject
+// None needed
+@end
+
 
 @implementation AppDelegate
 
@@ -22,6 +34,8 @@ NSMutableArray *allUntechables;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSLog( @"homeDirectoryPath %@", NSHomeDirectory() );
+    [self add];
     [Crittercism enableWithAppID: CRITTERCISM_APP_ID];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -134,5 +148,23 @@ NSMutableArray *allUntechables;
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)add
+{
+    [[RLMRealm defaultRealm] transactionWithBlock:^{
+        [DemoObject createInDefaultRealmWithValue:@[[self randomTitle], [NSDate date], [self randomSectionTitle]]];
+    }];
+}
+
+- (NSString *)randomTitle
+{
+    return [NSString stringWithFormat:@"Title %d", arc4random()];
+}
+
+- (NSString *)randomSectionTitle
+{
+    int r = arc4random() % 100;
+    return [NSString stringWithFormat:@"%i",r];
 }
 @end

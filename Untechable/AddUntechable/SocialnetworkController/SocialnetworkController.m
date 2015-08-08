@@ -78,8 +78,6 @@
     
     [super viewDidAppear:animated];
     [untechable printNavigation:[self navigationController]];
-    [untechable setOrSaveVars:SAVE];
-    
 }
 /*
  Hide keyboard on done button of keyboard press
@@ -286,7 +284,6 @@
             
             //Background work
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-                [untechable setOrSaveVars:SAVE];
                 [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
                     
                     if( !([message isEqualToString:@""]) ) {
@@ -503,11 +500,8 @@
     }
 }
 
--(void)storeSceenVarsInDic
-{
-    //untechable.socialStatus = [NSString stringWithFormat:@"%@",_inputSetSocialStatus.text];
+-(void)storeSceenVarsInDic{
     untechable.socialStatus = inputSetSocialStatus.text;
-    [untechable setOrSaveVars:SAVE];
 }
 
 -(void)requestPublishPermissions{

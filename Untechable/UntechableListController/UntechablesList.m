@@ -759,7 +759,6 @@ int indexArrayS2[];
     
     //Background work
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        [untechable setOrSaveVars:@"SAVE"];
         [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
             
             if( !([message isEqualToString:@""]) ) {
