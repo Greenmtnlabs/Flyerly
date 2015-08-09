@@ -52,11 +52,9 @@
 
 -(void)initializePickerData {
     
-    NSArray *arrayToBeAdded =  @[@"Spending time with family.", @"Driving.", @"Spending time outdoors.", @"At the beach.", @"Enjoying the holidays.", @"Just needed a break.", @"Running.", @"On vacation.", @"Finding my inner peace.", @"Removing myself from technology.", @"Custom"];
+    NSArray *customSpendingTextArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];
     
-    NSArray *customSpendingTextArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"spendingTimeText"];
-    
-    NSMutableOrderedSet * set = [NSMutableOrderedSet orderedSetWithArray:arrayToBeAdded ];
+    NSMutableOrderedSet * set = [NSMutableOrderedSet orderedSetWithArray:DEF_SPENDING_TIME_ARY ];
     
     [set unionSet:[NSSet setWithArray:customSpendingTextArray]];
 
@@ -172,7 +170,7 @@
         [customSpendingText insertObject:newMsg atIndex:position];
         
         // inserting values in our pickerview's data source.
-        [[NSUserDefaults standardUserDefaults] setObject:customSpendingText forKey:@"spendingTimeText"];
+        [[NSUserDefaults standardUserDefaults] setObject:customSpendingText forKey:@"cutomSpendingTimeTextAry"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         //Update new msg in doctors research string
@@ -189,9 +187,6 @@
 
 #pragma - mark setting navigation bar related stuff
 -(void) setNavigationBarItems {
-    
-    defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
-    defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
     
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
@@ -212,7 +207,7 @@
         backButton.titleLabel.shadowColor = [UIColor clearColor];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [backButton setTitle:TITLE_BACK_TXT forState:normal];
-        [backButton setTitleColor:defGray forState:UIControlStateNormal];
+        [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
         backButton.showsTouchWhenHighlighted = YES;
@@ -230,7 +225,7 @@
 
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
-        [nextButton setTitleColor:defGray forState:UIControlStateNormal];
+        [nextButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
         [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
         
@@ -242,10 +237,10 @@
         
     }
     //checking whether array is empty or not
-     NSArray *customSpendingTextArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"spendingTimeText"];
+     NSArray *customSpendingTextArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];
     if( customSpendingTextArray == nil ) {
         // inserting values in our pickerview's data source.
-        [[NSUserDefaults standardUserDefaults] setObject:customSpendingText forKey:@"spendingTimeText"];
+        [[NSUserDefaults standardUserDefaults] setObject:customSpendingText forKey:@"cutomSpendingTimeTextAry"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
@@ -257,7 +252,7 @@
     [self setNextHighlighted:NO];
 }
 - (void)setNextHighlighted:(BOOL)highlighted {
-    (highlighted) ? [nextButton setBackgroundColor:defGreen] : [nextButton setBackgroundColor:[UIColor clearColor]];
+    (highlighted) ? [nextButton setBackgroundColor:DEF_GREEN] : [nextButton setBackgroundColor:[UIColor clearColor]];
 }
 
 -(void)onNext{

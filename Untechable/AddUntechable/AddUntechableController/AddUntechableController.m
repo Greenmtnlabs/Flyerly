@@ -76,7 +76,7 @@
     [self showHideTextPicker:NO];
     
     // Initialize Data
-    NSMutableArray *customSpendingTextArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"spendingTimeText"];
+    NSMutableArray *customSpendingTextArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];
 
     _pickerData = customSpendingTextArray;
     
