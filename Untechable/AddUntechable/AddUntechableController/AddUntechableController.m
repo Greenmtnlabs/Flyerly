@@ -466,7 +466,7 @@
 /*
  Variable we must need in model, for testing we can use these vars
  */
--(void) configureTestData
+-(void) setUserData
 {
     untechable.userId   = TEST_UID;
 }
@@ -485,9 +485,9 @@
     untechable.dateFormatter = [[NSDateFormatter alloc] init];
     [untechable.dateFormatter setDateFormat:DATE_FORMATE_1];
     
-    //For testing -------- { --
-    [self configureTestData];
-    //For testing -------- } --
+
+    [self setUserData];
+
     
     NSMutableDictionary *sUntechable = nil;
     

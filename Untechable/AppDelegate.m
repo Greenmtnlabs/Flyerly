@@ -44,7 +44,7 @@
          NSMutableDictionary *dic2 = [rSetUntechable getModelDic];
          
          Untechable *untechable  = [[Untechable alloc] initWithCF];
-         [untechable setOrSaveVars:SET dic2:dic2];
+         [untechable setOrSaveVars:RESET dic2:dic2];
 
          SetupGuideViewController *mainViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
          mainViewController.untechable = untechable;

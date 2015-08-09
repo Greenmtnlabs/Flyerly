@@ -13,6 +13,8 @@
 #import "Common.h"
 #import "Untechable.h"
 #import "ThankyouController.h"
+#import "RUntechable.h"
+#import "RSetUntechable.h"
 
 
 @interface UntechablesList () {
@@ -20,6 +22,8 @@
     NSMutableArray *allUntechables;
     NSMutableArray *sectionOneArray;
     NSMutableArray *sectionTwoArray;
+    
+    int loadAllUntecs;
     
     NSArray *_pickerData;
     int timeDuration;
@@ -52,6 +56,44 @@ int indexArrayS2[];
     [super viewDidAppear:animated];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    
+    if( loadAllUntecs == 1)
+        [self setDefaultModel];
+    else
+        loadAllUntecs = 1;
+        
+    untechablesTable.separatorInset = UIEdgeInsetsZero;
+    
+    [untechablesTable reloadData];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+    
+    // During startup (-viewDidLoad or in storyboard) do:
+    self.untechablesTable.allowsMultipleSelectionDuringEditing = NO;
+    
+    [self setDefaultModel];
+    loadAllUntecs = 0;
+    
+    [self testInternetConnection];
+    [self setNavigationDefaults];
+    [self setNavigation:@"viewDidLoad"];
+    [self updateUI];
+    
+    [self initializePickerData];
+    [_timeDurationPicker setHidden:YES];
+    [_doneButtonView setHidden:YES];
+
+    // Do any additional setup after loading the view from its nib.
+    
+    //setting default time duration for untech now
+    timeDuration = 30*60;
+    timeInString = @"30 minutes";
+}
+
 #pragma mark -  Navigation functions
 - (void)setNavigationDefaults{
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
@@ -59,7 +101,7 @@ int indexArrayS2[];
 }
 
 -(void)setNavigation:(NSString *)callFrom{
-
+    
     if([callFrom isEqualToString:@"viewDidLoad"]){
         
         self.navigationItem.hidesBackButton = YES;
@@ -117,68 +159,160 @@ int indexArrayS2[];
  Variable we must need in model, for testing we can use these vars
  */
 
--(void) configureTestData
-{
+-(void) setUserData{
     untechable.userId   = TEST_UID;
 }
 
 #pragma mark -  Model funcs
+-(void)setDefaultUntech{
+    RLMResults *unsortedSetObjects = [RSetUntechable objectsWhere:@"rUId == '1'"];
+    RSetUntechable *rSetUntechable = unsortedSetObjects[0];
+    NSMutableDictionary *setDic = [rSetUntechable getModelDic];
+    
+    untechable  = [[Untechable alloc] initWithCF];
+    [untechable setOrSaveVars:RESET dic2:setDic];
+    
+    untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60)] ]; //current time + time duration
+    untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)+60] ]; //start time +1 Day
+    
+    [self setUserData];
+    
+    
+    // the selected status from the setup screen would be set as default status on unetch now option
+    NSInteger positionOfSelectedStatusFromArray = [[NSUserDefaults standardUserDefaults] integerForKey:@"positionToRemember"];
+    NSArray *customArrayOfStatuses = [[NSUserDefaults standardUserDefaults]objectForKey:@"cutomSpendingTimeTextAry"];
+    NSString *selectedStatus = [customArrayOfStatuses objectAtIndex:positionOfSelectedStatusFromArray];
+    //setting spending time text to status got from setup screen.
+    untechable.spendingTimeTxt = selectedStatus;
+    NSString *socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", timeInString, untechable.spendingTimeTxt];
+    untechable.socialStatus = socialStatus;
+    
+   [self getAuthsOfSocialMedias];
+}
+/**
+ Social Medias Auths are in device and we can get them and use them
+ **/
+-( void ) getAuthsOfSocialMedias {
+    
+    NSString *fbAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuth"];
+    fbAuth = ( fbAuth ) ? fbAuth : @"";
+    
+    NSString *fbAuthExpiryTs = [[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuthExpiryTs"];
+    fbAuthExpiryTs = ( fbAuthExpiryTs ) ? fbAuthExpiryTs : @"";
+    
+    NSString *twitterAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuth"];
+    twitterAuth = (twitterAuth) ? twitterAuth : @"";
+    
+    NSString *twOAuthTokenSecret = [[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuthTokkenSecerate"];
+    twOAuthTokenSecret = (twOAuthTokenSecret) ? (twOAuthTokenSecret) : @"";
+    
+    NSString *linkedinAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"linkedinAuth" ];
+    linkedinAuth = (linkedinAuth) ? linkedinAuth : @"";
+    
+    NSString *email = [[NSUserDefaults standardUserDefaults] objectForKey:@"emailAddress" ];
+    email = (email) ? email : @"";
+    
+    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:@"emailPassword" ];
+    password = (password) ? password : @"";
+    
+    untechable.fbAuth = fbAuth;
+    untechable.fbAuthExpiryTs = fbAuthExpiryTs;
+    untechable.twitterAuth = twitterAuth;
+    untechable.twOAuthTokenSecret = twOAuthTokenSecret;
+    untechable.linkedinAuth = linkedinAuth;
+    untechable.email = email;
+    untechable.password = password;
+}
+
 // set default vaules in model
 -(void)setDefaultModel{
     
-    //init object
-    untechable  = [[Untechable alloc] init];
-    untechable.commonFunctions = [[CommonFunctions alloc] init];
+    [self setDefaultUntech];
     
-    //For testing -------- { --
-    [self configureTestData];
-    //For testing -------- } --
+    allUntechables = [[NSMutableArray alloc] init];
+    sectionOneArray = [[NSMutableArray alloc] init];
+    sectionTwoArray = [[NSMutableArray alloc] init];
     
-    allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
+    NSDate *currentDate = [NSDate date];
+    NSMutableArray *currentTimeStamps1 = [[NSMutableArray alloc] init];
+    NSMutableArray *currentTimeStamps2 = [[NSMutableArray alloc] init];
     
-    [self testInternetConnection];
-}
-
-- (void)viewWillAppear:(BOOL)animated{
     
-    allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
+    RLMResults *unsortedObjects = [RUntechable objectsWhere:@"rUId != ''"];
+    for(int i=0;i<unsortedObjects.count;i++){
+        RSetUntechable *rUntechable = unsortedObjects[i];
+        NSMutableDictionary *tempDict = [rUntechable getModelDic];
+        [allUntechables addObject:tempDict];
         
-    [self setNumberOfRowsInSection];
+        [tempDict setObject:[NSNumber numberWithInt:i] forKey:@"index"];
+        
+        NSDate *startDate = [untechable.commonFunctions timestampStrToNsDate:[tempDict objectForKey:@"startDate"]];
+        if ( ![untechable.commonFunctions date1IsSmallerThenDate2:startDate date2:currentDate] ){
+            [sectionOneArray addObject:tempDict];
+            [currentTimeStamps1 addObject:[tempDict valueForKey:@"startDate"]];
+        }else{
+            [sectionTwoArray addObject:tempDict];
+            [currentTimeStamps2 addObject:[tempDict valueForKey:@"startDate"]];
+        }
+    }//end for looop
     
-    untechablesTable.separatorInset = UIEdgeInsetsZero;
+    [self sortOutTheTimeStamp:currentTimeStamps1 sortFor:@"sec1"];
+    [self sortOutTheTimeStamp:currentTimeStamps2 sortFor:@"sec2"];
     
-    [untechablesTable reloadData];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+//getting the time stamps from the array and sorting it out!
+-(void)sortOutTheTimeStamp:(NSMutableArray *)timeStampArray sortFor:(NSString *)sortFor{
+    int timeStamps [timeStampArray.count];
+    int sortedTimeStamps [timeStampArray.count];
     
-    // During startup (-viewDidLoad or in storyboard) do:
-    self.untechablesTable.allowsMultipleSelectionDuringEditing = NO;
+    // get all the values from mutable array and change it into integer array
+    for( int i = 0; i < timeStampArray.count; i++){
+        //will be used as unsorted array to compare
+        timeStamps[i] = (int)[timeStampArray[i] integerValue];
+        
+        // will be used as sorted array to compare
+        sortedTimeStamps[i] = (int)[timeStampArray[i] integerValue];
+    }
     
-    [self setDefaultModel];
-    [self setNavigationDefaults];
-    [self setNavigation:@"viewDidLoad"];
-    [self updateUI];
+    // temprary variable that will hold down the values when sorting being done
+    int tempVal;
     
-    [self initializePickerData];
-    [_timeDurationPicker setHidden:YES];
-    [_doneButtonView setHidden:YES];
-
-    // Do any additional setup after loading the view from its nib.
+    // now sort it out on the time stamp
+    for( int i = 0; i < timeStampArray.count; i++ ){
+        for( int j = 0; j<timeStampArray.count-1; j++ ){
+            if( sortedTimeStamps[j] < sortedTimeStamps [i] ){
+                tempVal = sortedTimeStamps[j];
+                sortedTimeStamps[j] = sortedTimeStamps[i];
+                sortedTimeStamps[i] = tempVal;
+            }
+        }
+    }
     
-    //setting default time duration for untech now
-    timeDuration = 30*60;
-    timeInString = @"30 minutes";
-}
-
-// Override to support conditional editing of the table view.
-// This only needs to be implemented if you are going to be returning NO
-// for some items. By default, all items are editable.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return YES if you want the specified item to be editable.
-    return YES;
+    // temporary array that will hold indexes of values
+    int indexArray [timeStampArray.count];
+    
+    if( [sortFor isEqual:@"sec1"]){
+        indexArrayS1 [timeStampArray.count];
+    }else{
+        indexArrayS2 [timeStampArray.count];
+    }
+    
+    //now getting the indexes of array and save it.
+    for( int i = 0; i<timeStampArray.count; i++){
+        for( int j = 0; j<timeStampArray.count; j++){
+            
+            if( sortedTimeStamps[i] == timeStamps[j] ){
+                indexArray[i] = j;
+                if( [sortFor isEqual:@"sec1"]){
+                    indexArrayS1[i] = j;
+                }else{
+                    indexArrayS2[i] = j;
+                }
+                break;
+            }
+        }
+    }
 }
 
 /**
@@ -225,15 +359,15 @@ int indexArrayS2[];
         
         [self showHidLoadingIndicator:NO];
         
-        [self setNumberOfRowsInSection];
+        [self setDefaultModel];
         
         [untechablesTable reloadData];
     }
 }
 
 
--(void)showMsgOnApiResponse:(NSString *)message
-{
+-(void)showMsgOnApiResponse:(NSString *)message{
+    
     UIAlertView *temAlert = [[UIAlertView alloc ]
                              initWithTitle:@""
                              message:message
@@ -326,7 +460,6 @@ int indexArrayS2[];
 }
 
 -(void)updateUI{
-    
     [btnUntechCustom setTitleColor:DEF_GRAY forState:UIControlStateNormal];
     btnUntechCustom.titleLabel.font = [UIFont fontWithName:APP_FONT size:16];
     btnUntechCustom.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -334,7 +467,14 @@ int indexArrayS2[];
     [btnUntechNow setTitleColor:DEF_GRAY forState:UIControlStateNormal];
     btnUntechNow.titleLabel.font = [UIFont fontWithName:APP_FONT size:16];
     btnUntechNow.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
-    
+}
+
+// Override to support conditional editing of the table view.
+// This only needs to be implemented if you are going to be returning NO
+// for some items. By default, all items are editable.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return YES if you want the specified item to be editable.
+    return YES;
 }
 
 // Override to support editing the table view.
@@ -459,97 +599,6 @@ int indexArrayS2[];
 
     [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
 }
-
-- (void) setNumberOfRowsInSection {
-    
-    NSDate *currentDate = [NSDate date];
-    
-    sectionOneArray = [[NSMutableArray alloc] init];
-    sectionTwoArray = [[NSMutableArray alloc] init];
-    NSMutableArray *currentTimeStamps1 = [[NSMutableArray alloc] init];
-    NSMutableArray *currentTimeStamps2 = [[NSMutableArray alloc] init];
-    
-    allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
-    
-    for (int i=0 ; i < allUntechables.count ; i++){
-        NSMutableDictionary *tempDict = [allUntechables objectAtIndex:i];
-        [tempDict setObject:[NSNumber numberWithInt:i] forKey:@"index"];
-        
-        NSDate *startDate = [untechable.commonFunctions timestampStrToNsDate:[tempDict objectForKey:@"startDate"]];
-        if ( ![untechable.commonFunctions date1IsSmallerThenDate2:startDate date2:currentDate] ){
-            [sectionOneArray addObject:tempDict];
-            [currentTimeStamps1 addObject:[tempDict valueForKey:@"startDate"]];
-        }else{
-            [sectionTwoArray addObject:tempDict];
-            [currentTimeStamps2 addObject:[tempDict valueForKey:@"startDate"]];
-        }
-        
-    }
-    
-    [self sortOutTheTimeStamp:currentTimeStamps1 sortFor:@"sec1"];
-    [self sortOutTheTimeStamp:currentTimeStamps2 sortFor:@"sec2"];
-    
-}
-
-//getting the time stamps from the array and sorting it out!
--(void)sortOutTheTimeStamp:(NSMutableArray *)timeStampArray sortFor:(NSString *)sortFor{
-    int timeStamps [timeStampArray.count];
-    int sortedTimeStamps [timeStampArray.count];
-    
-    // get all the values from mutable array and change it into integer array
-    for( int i = 0; i < timeStampArray.count; i++){
-        //will be used as unsorted array to compare
-        timeStamps[i] = [timeStampArray[i] integerValue];
-        
-        // will be used as sorted array to compare
-        sortedTimeStamps[i] = [timeStampArray[i] integerValue];
-    }
-    
-    // temprary variable that will hold down the values when sorting being done
-    int tempVal;
-    
-    // now sort it out on the time stamp
-    for( int i = 0; i < timeStampArray.count; i++ ){
-        for( int j = 0; j<timeStampArray.count-1; j++ ){
-            if( sortedTimeStamps[j] < sortedTimeStamps [i] ){
-                tempVal = sortedTimeStamps[j];
-                sortedTimeStamps[j] = sortedTimeStamps[i];
-                sortedTimeStamps[i] = tempVal;
-            }
-        }
-    }
-
-    // temporary array that will hold indexes of values
-    int indexArray [timeStampArray.count];
-    if( [sortFor isEqual:@"sec1"]){
-        indexArrayS1 [timeStampArray.count];
-    }else{
-        indexArrayS2 [timeStampArray.count];
-    }
-    
-    //now getting the indexes of array and save it.
-    for( int i = 0; i<timeStampArray.count; i++){
-        for( int j = 0; j<timeStampArray.count; j++){
-
-            if( sortedTimeStamps[i] == timeStamps[j] ){
-                indexArray[i] = j;
-                if( [sortFor isEqual:@"sec1"]){
-                    indexArrayS1[i] = j;
-                }else{
-                    indexArrayS2[i] = j;
-                }
-                break;
-            }
-        }
-    }
-    
-    // testing
-    //print out all the arrays
-    for( int i = 0; i < timeStampArray.count; i++ ){
-        NSLog(@" Index array is %i, sorted array %i, unsorted array %i", indexArray[i], sortedTimeStamps[i], timeStamps[i] );
-    }
-}
-
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
@@ -653,8 +702,6 @@ int indexArrayS2[];
     
     self.timeDurationPicker.dataSource = self;
     self.timeDurationPicker.delegate = self;
-    
-    
 }
 
 - (NSDate *)timestampStrToNsDate:(NSString *)timeStamp
@@ -728,15 +775,13 @@ int indexArrayS2[];
 }
 
 - (IBAction)untechCustomClick:(id)sender {
-    [self addUntechable];    
+    [self addUntechable];
 }
 - (IBAction)btnDoneClick:(id)sender {
     
     
     [_timeDurationPicker setHidden:YES];
     [_doneButtonView setHidden:YES];
-    
-    [self initializeUntechNow];
     
     [self changeNavigation:@"ON_FINISH"];
     
@@ -767,65 +812,6 @@ int indexArrayS2[];
     });
 
 }
-
-/**
- Initiailzing related stuff for Untech now Option
- e.g Directory, Untech vals, and options
- */
--(void)initializeUntechNow {
-    
-    [untechable initWithDefValues];
-    [untechable initUntechableDirectory];
-    untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60)] ]; //current time + time duration
-    
-    untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)+60] ]; //start time +1 Day
-    
-    // the selected status from the setup screen would be set as default status on unetch now option
-    NSInteger positionOfSelectedStatusFromArray = [[NSUserDefaults standardUserDefaults] integerForKey:@"positionToRemember"];
-    NSArray *customArrayOfStatuses = [[NSUserDefaults standardUserDefaults]objectForKey:@"cutomSpendingTimeTextAry"];
-    NSString *selectedStatus = [customArrayOfStatuses objectAtIndex:positionOfSelectedStatusFromArray];
-    //setting spending time text to status got from setup screen.
-    untechable.spendingTimeTxt = selectedStatus;
-    NSString *socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", timeInString, untechable.spendingTimeTxt];
-    untechable.socialStatus = socialStatus;
-    [self getAuthsOfSocialMedias];
-}
-
-/**
- Social Medias Auths are in device and we can get them and use them
- **/
--( void ) getAuthsOfSocialMedias {
-    
-    NSString *fbAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuth"];
-    fbAuth = ( fbAuth ) ? fbAuth : @"";
-    
-    NSString *fbAuthExpiryTs = [[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuthExpiryTs"];
-    fbAuthExpiryTs = ( fbAuthExpiryTs ) ? fbAuthExpiryTs : @"";
-    
-    NSString *twitterAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuth"];
-    twitterAuth = (twitterAuth) ? twitterAuth : @"";
-    
-    NSString *twOAuthTokenSecret = [[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuthTokkenSecerate"];
-    twOAuthTokenSecret = (twOAuthTokenSecret) ? (twOAuthTokenSecret) : @"";
-    
-    NSString *linkedinAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"linkedinAuth" ];
-    linkedinAuth = (linkedinAuth) ? linkedinAuth : @"";
-    
-    NSString *email = [[NSUserDefaults standardUserDefaults] objectForKey:@"emailAddress" ];
-    email = (email) ? email : @"";
-    
-    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:@"emailPassword" ];
-    password = (password) ? password : @"";
-    
-    untechable.fbAuth = fbAuth;
-    untechable.fbAuthExpiryTs = fbAuthExpiryTs;
-    untechable.twitterAuth = twitterAuth;
-    untechable.twOAuthTokenSecret = twOAuthTokenSecret;
-    untechable.linkedinAuth = linkedinAuth;
-    untechable.email = email;
-    untechable.password = password;
-}
-
 /**
  navigate to thank you controller screen when successfully user create an untech
  **/

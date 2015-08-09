@@ -140,7 +140,7 @@
     }
     else {
         NSLog(@"Directory Already Exist");
-       [self setOrSaveVars:SET dic2:dic];
+       [self setOrSaveVars:RESET dic2:dic];
         hasInit = YES;
     }
     
@@ -212,7 +212,7 @@
         dic[@"omsHostName"] = omsHostName;
         dic[@"omsPort"] = omsPort;
     }
-    else if( [setOrSAve isEqualToString:SET] ) {
+    else if( [setOrSAve isEqualToString:RESET] ) {
         dic = [[NSMutableDictionary alloc] initWithDictionary:dic2];
        
         //Settings
