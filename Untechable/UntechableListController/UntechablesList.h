@@ -11,19 +11,12 @@
 #import "Reachability.h"
 
 @interface UntechablesList : UIViewController <UITableViewDelegate,UITableViewDataSource> {
-
-    UIColor *defGreen;//GREEN
-    UIColor *defGray;//GRAY
     UIButton *newUntechableButton;
     UIButton *settingsButton;
-    
     Untechable *untechable;
-    
     Reachability *internetReachable;
-    
     IBOutlet UIButton *btnUntechNow;
     IBOutlet UIButton *btnUntechCustom;
-    
 }
 
 @property(nonatomic,strong) IBOutlet UITableView *untechablesTable;

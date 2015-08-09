@@ -59,13 +59,10 @@ int indexArrayS2[];
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
 }
 
--(void)setNavigation:(NSString *)callFrom
-{
-    defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
-    defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
-    
-    if([callFrom isEqualToString:@"viewDidLoad"])
-    {
+-(void)setNavigation:(NSString *)callFrom{
+
+    if([callFrom isEqualToString:@"viewDidLoad"]){
+        
         self.navigationItem.hidesBackButton = YES;
         
         // Setting left Navigation button "Settings"
@@ -73,7 +70,7 @@ int indexArrayS2[];
         settingsButton.titleLabel.shadowColor = [UIColor clearColor];
         settingsButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [settingsButton setTitle:TITLE_SETTINGS_TXT forState:normal];
-        [settingsButton setTitleColor:defGray forState:UIControlStateNormal];
+        [settingsButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [settingsButton addTarget:self action:@selector(goToSettings) forControlEvents:UIControlEventTouchUpInside];
         settingsButton.showsTouchWhenHighlighted = YES;
         
@@ -89,7 +86,7 @@ int indexArrayS2[];
         newUntechableButton.titleLabel.shadowColor = [UIColor clearColor];
         newUntechableButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [newUntechableButton setTitle:TITLE_NEW_TXT forState:normal];
-        [newUntechableButton setTitleColor:defGray forState:UIControlStateNormal];
+        [newUntechableButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [newUntechableButton addTarget:self action:@selector(addUntechable) forControlEvents:UIControlEventTouchUpInside];
         newUntechableButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:newUntechableButton];
@@ -331,11 +328,11 @@ int indexArrayS2[];
 
 -(void)updateUI{
     
-    [btnUntechCustom setTitleColor:defGray forState:UIControlStateNormal];
+    [btnUntechCustom setTitleColor:DEF_GRAY forState:UIControlStateNormal];
     btnUntechCustom.titleLabel.font = [UIFont fontWithName:APP_FONT size:16];
     btnUntechCustom.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
     
-    [btnUntechNow setTitleColor:defGray forState:UIControlStateNormal];
+    [btnUntechNow setTitleColor:DEF_GRAY forState:UIControlStateNormal];
     btnUntechNow.titleLabel.font = [UIFont fontWithName:APP_FONT size:16];
     btnUntechNow.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
     
@@ -407,10 +404,7 @@ int indexArrayS2[];
         }
 }
 
-- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
-    defGray = [UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:150.0/255.0 alpha:1.0];//GRAY
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 20)];
     UILabel *label;
@@ -418,7 +412,7 @@ int indexArrayS2[];
         
         label = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, tableView.bounds.size.width - 10, 18)];
         label.text = @"Upcoming Untechable Time:";
-        label.textColor = defGray;
+        label.textColor = DEF_GRAY;
         [label setFont:[UIFont fontWithName:APP_FONT size:16]];
         label.backgroundColor = [UIColor clearColor];
     
@@ -426,7 +420,7 @@ int indexArrayS2[];
     
         label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.bounds.size.width - 10, 30)];
         label.text = @"Current Untechable Time:";
-        label.textColor = defGray;
+        label.textColor = DEF_GRAY;
         [label setFont:[UIFont fontWithName:APP_FONT size:16]];
         label.backgroundColor = [UIColor clearColor];
     }
