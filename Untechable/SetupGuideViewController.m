@@ -108,24 +108,13 @@
     // so if the current text view is related to username's
     // get the text and save it into the username field
     if( textView.tag == 101 ){
-        
-        
-        
         userName = textView.text;
         _usernameHintText.hidden = ([userName length] > 0);
-        
-        [[NSUserDefaults standardUserDefaults] setObject:userName forKey:@"userName"];
-
     } else {
         // else  we've phone number field
         userphoneNumber = textView.text;
         _phoneNumberHintText.hidden = ([userphoneNumber length] > 0);
-        [[NSUserDefaults standardUserDefaults] setObject:userphoneNumber forKey:@"userphoneNumber"];
     }
-    
-    // sync the current fields
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
 }
 
 - (BOOL)textView:(UITextView *)aTextView shouldChangeTextInRange:(NSRange)aRange replacementText:(NSString*)aText
