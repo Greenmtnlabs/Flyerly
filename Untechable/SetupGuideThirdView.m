@@ -153,10 +153,7 @@
     
     NSMutableArray *customizedContactsFromSetup = [viewControllerToAdd currentlyEditingContacts];
     untechable.customizedContactsForCurrentSession = customizedContactsFromSetup;
-    NSString *customizeContactsForCurrentSession = [untechable.commonFunctions convertCCMArrayIntoJsonString:customizedContactsFromSetup];
-
-    [[NSUserDefaults standardUserDefaults] setObject:customizeContactsForCurrentSession forKey:@"customizedContactsFromSetup"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    untechable.customizedContacts = [untechable.commonFunctions convertCCMArrayIntoJsonString:customizedContactsFromSetup];
 }
 
 @end
