@@ -13,7 +13,7 @@
 #import "UntechOptionsViewController.h"
 
 @interface SetupGuideSecondViewController () {
-    NSMutableArray *customSpendingText;
+    NSMutableArray *customSpendingTextAry;
 }
 
 
@@ -58,11 +58,11 @@
     
     [set unionSet:[NSSet setWithArray:customSpendingTextArray]];
 
-    customSpendingText = [NSMutableArray arrayWithArray:[set array]];
+    customSpendingTextAry = [NSMutableArray arrayWithArray:[set array]];
     
-    customSpendingText = [self customValAtTheEnd:customSpendingText];
+    customSpendingTextAry = [self customValAtTheEnd:customSpendingTextAry];
     
-    [self setupDoctorsResearchLabel:[customSpendingText objectAtIndex:0]];
+    [self setupDoctorsResearchLabel:[customSpendingTextAry objectAtIndex:0]];
     
     self.setupSpendingTimeText.dataSource = self;
     self.setupSpendingTimeText.delegate = self;
@@ -100,12 +100,12 @@
 
 // The number of rows of data
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return customSpendingText.count;
+    return customSpendingTextAry.count;
 }
 
 // The data to return for the row and component (column) that's being passed in
 - (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return customSpendingText[row];
+    return customSpendingTextAry[row];
 }
 
 // Catpure the picker view selection
@@ -113,11 +113,11 @@
     
     NSInteger positionToRemember = 0;
 
-    if( [[customSpendingText objectAtIndex:row] isEqualToString:@"Custom"] ) {
+    if( [[customSpendingTextAry objectAtIndex:row] isEqualToString:@"Custom"] ) {
         [self showAddFieldPopUp];
     } else  {
-        [self setupDoctorsResearchLabel:[customSpendingText objectAtIndex:row]];
-        untechable.spendingTimeTxt = [customSpendingText objectAtIndex:row];
+        [self setupDoctorsResearchLabel:[customSpendingTextAry objectAtIndex:row]];
+        untechable.spendingTimeTxt = [customSpendingTextAry objectAtIndex:row];
         positionToRemember = (NSInteger)row;
     }
     
@@ -130,7 +130,7 @@
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
     UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, [pickerView rowSizeForComponent:component].width, [pickerView rowSizeForComponent:component].height)];
-    lbl.text = [customSpendingText objectAtIndex:row];
+    lbl.text = [customSpendingTextAry objectAtIndex:row];
     lbl.adjustsFontSizeToFitWidth = YES;
     lbl.textAlignment = NSTextAlignmentCenter;
     
@@ -158,7 +158,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     // we will add new message at the second last index
-    int position = ( int )[customSpendingText count] - 1;
+    int position = ( int )[customSpendingTextAry count] - 1;
     
     //if cancel was not pressed
     if( buttonIndex != 0 ){
@@ -167,10 +167,10 @@
         NSString *newMsg = [[alertView textFieldAtIndex:0] text];
         
         // adding the new msg at the second last index of the picker
-        [customSpendingText insertObject:newMsg atIndex:position];
+        [customSpendingTextAry insertObject:newMsg atIndex:position];
         
         // inserting values in our pickerview's data source.
-        [[NSUserDefaults standardUserDefaults] setObject:customSpendingText forKey:@"cutomSpendingTimeTextAry"];
+        [[NSUserDefaults standardUserDefaults] setObject:customSpendingTextAry forKey:@"cutomSpendingTimeTextAry"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         //Update new msg in doctors research string
@@ -240,7 +240,7 @@
      NSArray *customSpendingTextArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];
     if( customSpendingTextArray == nil ) {
         // inserting values in our pickerview's data source.
-        [[NSUserDefaults standardUserDefaults] setObject:customSpendingText forKey:@"cutomSpendingTimeTextAry"];
+        [[NSUserDefaults standardUserDefaults] setObject:customSpendingTextAry forKey:@"cutomSpendingTimeTextAry"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
@@ -271,7 +271,7 @@
 -(void)saveBeforeGoing {
     
     if( untechable.spendingTimeTxt == nil || [untechable.spendingTimeTxt isEqualToString:@""] ) {
-        untechable.spendingTimeTxt = [customSpendingText objectAtIndex:0];
+        untechable.spendingTimeTxt = [customSpendingTextAry objectAtIndex:0];
     }
 }
 
