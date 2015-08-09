@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Green MTN Labs Inc. All rights reserved.
 //
 
-#import "rUntechable.h"
+#import "RUntechable.h"
 
-@interface rSetUntechable : rUntechable
+@interface RSetUntechable : RUntechable
 
 @end
 

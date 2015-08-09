@@ -8,10 +8,10 @@
 
 #import <Realm/Realm.h>
 
-@interface rSetting : RLMObject
+@interface RSetting : RLMObject
 
 @end
 
 // This protocol enables typed collections. i.e.:
-// RLMArray<rSetting>
-RLM_ARRAY_TYPE(rSetting)
+// RLMArray<RSetting>
+RLM_ARRAY_TYPE(RSetting)

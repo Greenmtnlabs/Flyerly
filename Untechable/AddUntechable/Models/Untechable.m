@@ -33,6 +33,16 @@
 //4-vars for screen4
 @synthesize email, password, respondingEmail,acType, iSsl, oSsl, imsHostName, imsPort, omsHostName, omsPort;
 
+/*
+ * load extras of untechable
+ */
+- (id)initWithCF{
+    self = [super init];
+    commonFunctions = [[CommonFunctions alloc] init];
+    
+    return self;
+}
+
 
 -(NSDate *)stringToDate:(NSString *)inputStrFormate dateString:(NSString *)dateString{
         NSLog(@"dateString is %@", dateString);
@@ -145,7 +155,7 @@
     }
     else {
         NSLog(@"Directory Already Exist");
-       [self setOrSaveVars:RESET];
+       [self setOrSaveVars:RESET dic2:dic];
         hasInit = YES;
     }
     
@@ -159,15 +169,9 @@
     else if setOrSAve: SAVE
     get dic( must have untechablePath ) , then update instance variables a/c .pieces file
  */
--(void)setOrSaveVars:(NSString *)setOrSAve
-{
-    
-    if( [setOrSAve isEqualToString:SAVE] ) {
-        
-        piecesFile = [untechablePath stringByAppendingPathComponent:[NSString stringWithFormat:@"/%@", PIECES_FILE]];
-        
-        dic = [[NSMutableDictionary alloc] init];
+-(void)setOrSaveVars:(NSString *)setOrSAve dic2:(NSMutableDictionary *)dic2{
 
+    if( [setOrSAve isEqualToString:SAVE] ) {
         dic[@"eventId"]         = eventId;
         dic[@"paid"]            = paid ? @"YES" : @"NO";
         dic[@"userId"]          = userId;
@@ -220,27 +224,9 @@
         dic[@"imsPort"] = imsPort;
         dic[@"omsHostName"] = omsHostName;
         dic[@"omsPort"] = omsPort;
-        
-        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dic];
-        [data writeToFile:piecesFile atomically:YES];
-        //Here we write the dictionary of .peices files
-        //[dic writeToFile:piecesFile atomically:YES];
-
     }
     else if( [setOrSAve isEqualToString:RESET] ) {
-        
-        piecesFile = [untechablePath stringByAppendingString:[NSString stringWithFormat:@"/%@", PIECES_FILE]];
-        NSData *data = [NSData dataWithContentsOfFile:piecesFile];
-        dic = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        //dic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
-        NSString *customizedContactsFromSetup = [[NSUserDefaults standardUserDefaults]
-                                                 stringForKey:@"customizedContactsFromSetup"];
-        if(customizedContactsFromSetup){
-            
-        } else {
-            customizedContactsFromSetup = @"";
-        }
-        
+        dic = [[NSMutableDictionary alloc] initWithDictionary:dic2];
         
         //Settings
         eventId        = ( dic[@"eventId"] ) ? dic[@"eventId"] : @"";
@@ -269,7 +255,7 @@
         //emergencyContacts = ( dic[@"emergencyContacts"] ) ? dic[@"emergencyContacts"] : @"";
         //hasRecording      = ([dic[@"hasRecording"] isEqualToString:@"YES"]) ? YES : NO;
     
-        customizedContacts = ( customizedContactsFromSetup ) ? customizedContactsFromSetup :dic[@"customizedContacts"];
+        customizedContacts = ( dic[@"customizedContacts"] ) ? dic[@"customizedContacts"] : @"";
         customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:customizedContacts];
     
         //Screen3 vars
@@ -426,7 +412,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack{
 
     //[self removeRedundentDataForContacts];
-    [self setOrSaveVars:SAVE];
+    [self setOrSaveVars:SAVE dic2:dic];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:API_SAVE]];
@@ -499,13 +485,13 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
             eventId = [dict valueForKey:@"eventId"];
             savedOnServer = YES;
             hasFinished = YES;
-            [self setOrSaveVars:SAVE];
+            [self setOrSaveVars:SAVE dic2:dic];
             
         } else{
             message = [dict valueForKey:@"message"];
             if( !([[dict valueForKey:@"eventId"] isEqualToString:@"0"]) ) {
                 eventId = [dict valueForKey:@"eventId"];
-                [self setOrSaveVars:SAVE];
+                [self setOrSaveVars:SAVE dic2:dic];
             }
             
             errorOnFinish = YES;

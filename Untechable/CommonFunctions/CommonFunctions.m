@@ -166,6 +166,7 @@ NSString *currentEnteredPhoneNumber;
     
     if (!jsonArray) {
         NSLog(@"Error parsing JSON: %@", e);
+        jsonArray = [[NSMutableDictionary alloc] init];
     } else {
         for(NSDictionary *item in jsonArray) {
             NSLog(@"Item: %@", item);

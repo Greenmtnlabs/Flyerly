@@ -194,9 +194,6 @@
 		36FD975619E694AC00427507 /* BSKeyboardControls.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36FD974C19E694AC00427507 /* BSKeyboardControls.strings */; };
 		5D79B096E56438180F2DF221 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC11B82CE184AE8B063B3995 /* libPods.a */; };
 		B25028EEA7EDED382B05805D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC11B82CE184AE8B063B3995 /* libPods.a */; };
-		C311DB8D1B76285A00C19E53 /* rUntechable.m in Sources */ = {isa = PBXBuildFile; fileRef = C311DB8C1B76285A00C19E53 /* rUntechable.m */; };
-		C311DB901B762CFD00C19E53 /* rSetUntechable.m in Sources */ = {isa = PBXBuildFile; fileRef = C311DB8F1B762CFD00C19E53 /* rSetUntechable.m */; };
-		C311DB931B762D4B00C19E53 /* rSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = C311DB921B762D4B00C19E53 /* rSetting.m */; };
 		C334E60B1A777472005539B4 /* logo-Other@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C334E6081A777472005539B4 /* logo-Other@3x.png */; };
 		C334E60C1A777472005539B4 /* logo-Other.png in Resources */ = {isa = PBXBuildFile; fileRef = C334E6091A777472005539B4 /* logo-Other.png */; };
 		C334E60D1A777472005539B4 /* logo-Other@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C334E60A1A777472005539B4 /* logo-Other@2x.png */; };
@@ -241,6 +238,9 @@
 		C36D2E5E1A7919DC000537C5 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C36D2E5C1A7919DC000537C5 /* SettingsViewController.xib */; };
 		C36D2E601A791ADA000537C5 /* SettingsCellView-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = C36D2E5F1A791ADA000537C5 /* SettingsCellView-iPhone6.xib */; };
 		C36D2E621A791AEA000537C5 /* SettingsCellView-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = C36D2E611A791AEA000537C5 /* SettingsCellView-iPhone6-Plus.xib */; };
+		C372098D1B7767AA003A40F2 /* RUntechable.m in Sources */ = {isa = PBXBuildFile; fileRef = C37209891B7767AA003A40F2 /* RUntechable.m */; };
+		C372098E1B7767AA003A40F2 /* RSetUntechable.m in Sources */ = {isa = PBXBuildFile; fileRef = C372098A1B7767AA003A40F2 /* RSetUntechable.m */; };
+		C372098F1B7767AA003A40F2 /* RSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = C372098B1B7767AA003A40F2 /* RSetting.m */; };
 		C37F755B1A7F50D100B5AC71 /* twt_follow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C37F75571A7F50D100B5AC71 /* twt_follow@2x.png */; };
 		C37F755C1A7F50D100B5AC71 /* twt_follow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C37F75581A7F50D100B5AC71 /* twt_follow@3x.png */; };
 		C37F755D1A7F50D100B5AC71 /* fb_Like@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C37F75591A7F50D100B5AC71 /* fb_Like@2x.png */; };
@@ -493,12 +493,6 @@
 		36FD975419E694AC00427507 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/BSKeyboardControls.strings; sourceTree = "<group>"; };
 		72C191FD26DBEFE2614E002A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		A7C0CDC4AAAC5466484B8C12 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		C311DB8B1B76285A00C19E53 /* rUntechable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = rUntechable.h; path = AddUntechable/Models/rUntechable.h; sourceTree = "<group>"; };
-		C311DB8C1B76285A00C19E53 /* rUntechable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = rUntechable.m; path = AddUntechable/Models/rUntechable.m; sourceTree = "<group>"; };
-		C311DB8E1B762CFD00C19E53 /* rSetUntechable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = rSetUntechable.h; path = AddUntechable/Models/rSetUntechable.h; sourceTree = "<group>"; };
-		C311DB8F1B762CFD00C19E53 /* rSetUntechable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = rSetUntechable.m; path = AddUntechable/Models/rSetUntechable.m; sourceTree = "<group>"; };
-		C311DB911B762D4B00C19E53 /* rSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = rSetting.h; path = AddUntechable/Models/rSetting.h; sourceTree = "<group>"; };
-		C311DB921B762D4B00C19E53 /* rSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = rSetting.m; path = AddUntechable/Models/rSetting.m; sourceTree = "<group>"; };
 		C334E6081A777472005539B4 /* logo-Other@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-Other@3x.png"; sourceTree = "<group>"; };
 		C334E6091A777472005539B4 /* logo-Other.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-Other.png"; sourceTree = "<group>"; };
 		C334E60A1A777472005539B4 /* logo-Other@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-Other@2x.png"; sourceTree = "<group>"; };
@@ -546,6 +540,12 @@
 		C36D2E5C1A7919DC000537C5 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		C36D2E5F1A791ADA000537C5 /* SettingsCellView-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SettingsCellView-iPhone6.xib"; sourceTree = "<group>"; };
 		C36D2E611A791AEA000537C5 /* SettingsCellView-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SettingsCellView-iPhone6-Plus.xib"; sourceTree = "<group>"; };
+		C37209881B7767AA003A40F2 /* RUntechable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RUntechable.h; path = AddUntechable/Models/RUntechable.h; sourceTree = "<group>"; };
+		C37209891B7767AA003A40F2 /* RUntechable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RUntechable.m; path = AddUntechable/Models/RUntechable.m; sourceTree = "<group>"; };
+		C372098A1B7767AA003A40F2 /* RSetUntechable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSetUntechable.m; path = AddUntechable/Models/RSetUntechable.m; sourceTree = "<group>"; };
+		C372098B1B7767AA003A40F2 /* RSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSetting.m; path = AddUntechable/Models/RSetting.m; sourceTree = "<group>"; };
+		C372098C1B7767AA003A40F2 /* RSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSetting.h; path = AddUntechable/Models/RSetting.h; sourceTree = "<group>"; };
+		C37209901B7768A7003A40F2 /* RSetUntechable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSetUntechable.h; path = AddUntechable/Models/RSetUntechable.h; sourceTree = "<group>"; };
 		C37F75571A7F50D100B5AC71 /* twt_follow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twt_follow@2x.png"; sourceTree = "<group>"; };
 		C37F75581A7F50D100B5AC71 /* twt_follow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twt_follow@3x.png"; sourceTree = "<group>"; };
 		C37F75591A7F50D100B5AC71 /* fb_Like@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb_Like@2x.png"; sourceTree = "<group>"; };
@@ -865,16 +865,16 @@
 		366ECD7B19D312BE00F71A11 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C37209881B7767AA003A40F2 /* RUntechable.h */,
+				C37209891B7767AA003A40F2 /* RUntechable.m */,
+				C37209901B7768A7003A40F2 /* RSetUntechable.h */,
+				C372098A1B7767AA003A40F2 /* RSetUntechable.m */,
+				C372098B1B7767AA003A40F2 /* RSetting.m */,
+				C372098C1B7767AA003A40F2 /* RSetting.h */,
 				36474F2719D9AC3800084F34 /* UIPlaceHolderTextView.h */,
 				36474F2819D9AC3800084F34 /* UIPlaceHolderTextView.m */,
 				366ECD7C19D3135200F71A11 /* Untechable.h */,
 				366ECD7D19D3135200F71A11 /* Untechable.m */,
-				C311DB8B1B76285A00C19E53 /* rUntechable.h */,
-				C311DB8C1B76285A00C19E53 /* rUntechable.m */,
-				C311DB8E1B762CFD00C19E53 /* rSetUntechable.h */,
-				C311DB8F1B762CFD00C19E53 /* rSetUntechable.m */,
-				C311DB911B762D4B00C19E53 /* rSetting.h */,
-				C311DB921B762D4B00C19E53 /* rSetting.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1519,11 +1519,11 @@
 				36BB7B8919FFD98C00562069 /* ThankyouController.m in Sources */,
 				243C59F41A4D753C0020350C /* FirstTableViewCell.m in Sources */,
 				366ECD9619D323DA00F71A11 /* AddUntechableController.m in Sources */,
+				C372098E1B7767AA003A40F2 /* RSetUntechable.m in Sources */,
 				36B4E53E1A28BBD400CC18B0 /* EmailTableViewCell.m in Sources */,
 				36B275D71A00D36400ED58AD /* RMStore.m in Sources */,
 				24A4B7A71A5126410029C8DF /* CustomTextTableViewCell.m in Sources */,
 				366F9DAA1A124FC7006602E1 /* FHSStream.m in Sources */,
-				C311DB901B762CFD00C19E53 /* rSetUntechable.m in Sources */,
 				243C59F91A4D984B0020350C /* PhoneNumberCell.m in Sources */,
 				3681603C19E6B81E00B9B64C /* ContactsModel.m in Sources */,
 				243C59FE1A4DA17C0020350C /* EmailCell.m in Sources */,
@@ -1544,13 +1544,13 @@
 				24848FE71A30403600BF1138 /* ServerAccountDetailsViewCell.m in Sources */,
 				C36D2E581A7919C2000537C5 /* SettingsCellView.m in Sources */,
 				24A0EA6D1B42522C0008081A /* SetupGuideFourthView.m in Sources */,
-				C311DB931B762D4B00C19E53 /* rSetting.m in Sources */,
 				243C59E01A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.m in Sources */,
 				36FD975519E694AC00427507 /* BSKeyboardControls.m in Sources */,
 				C3CA4DD51A80CE0700B03A23 /* SocialNetworksStatusModal.m in Sources */,
 				248E06B71A4ACD6E0099846A /* ContactsCustomizedModal.m in Sources */,
-				C311DB8D1B76285A00C19E53 /* rUntechable.m in Sources */,
 				36524AF119D940F4006DCAAF /* SocialnetworkController.m in Sources */,
+				C372098F1B7767AA003A40F2 /* RSetting.m in Sources */,
+				C372098D1B7767AA003A40F2 /* RUntechable.m in Sources */,
 				241AC0011AE68AE000F1C8C9 /* NameAndPhoneCellView.m in Sources */,
 				24A65BEC1A30451E00BE83C6 /* SSLCell.m in Sources */,
 				24354D701A499F4F000EC781 /* ContactListCell.m in Sources */,

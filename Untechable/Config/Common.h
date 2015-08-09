@@ -93,3 +93,6 @@
 #define IS_IPHONE_6_PLUS (fabs((double)[[UIScreen mainScreen]bounds].size.height - (double)736) < DBL_EPSILON)
 
 #define DEF_ARAY_SPLITER @"-ary-spliter-"
+
+#define DEF_GREEN [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0]
+#define DEF_GRAY [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0]

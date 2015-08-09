@@ -1,5 +1,5 @@
 //
-//  rUntechable.h
+//  RUntechable.h
 //  Untechable
 //
 //  Created by Abdul Rauf on 08/08/2015.
@@ -8,7 +8,8 @@
 
 #import <Realm/Realm.h>
 
-@interface rUntechable : RLMObject
+@interface RUntechable : RLMObject
+@property NSString *rUId;
 @property NSString *eventId;
 @property NSString *userId;
 @property NSString *paid;
@@ -38,8 +39,12 @@
 @property NSString *customizedContacts;
 @property NSString *userName;
 @property NSString *userPhoneNumber;
+
+-(void)setDefault;
+-(NSMutableDictionary *)getModelDic;
+
 @end
 
 // This protocol enables typed collections. i.e.:
-// RLMArray<rUntechable>
-RLM_ARRAY_TYPE(rUntechable)
+// RLMArray<RUntechable>
+RLM_ARRAY_TYPE(RUntechable)

@@ -56,6 +56,8 @@
 @property (strong, nonatomic) NSString *email, *password, *respondingEmail, *acType, *iSsl, *oSsl, *imsHostName, *imsPort,
                                        *omsHostName, *omsPort;
 
+- (id)initWithCF;
+
 -(NSDate *)stringToDate:(NSString *)inputStrFormate dateString:(NSString *)dateString;
 -(void)printNavigation:navigationControllerPointer;
 -(void)goBack:navigationControllerPointer;
@@ -66,7 +68,7 @@
 -(NSString *)getRecFileName;
 -(NSString *)getUniqueId;
 -(BOOL)initUntechableDirectory;
--(void)setOrSaveVars:(NSString *)setOrSAve;
+-(void)setOrSaveVars:(NSString *)setOrSAve dic2:(NSMutableDictionary *)dic2;
 -(void)initWithDefValues;
 -(NSString *)timestampStrToAppDate:(NSString *)timeStamp;
 
@@ -89,4 +91,5 @@
 -(NSDate *)getCurrentDate;
 
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack;
+
 @end

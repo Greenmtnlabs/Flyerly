@@ -1,3 +1,4 @@
+
 //
 //  AppDelegate.m
 //  Untechable
@@ -7,102 +8,55 @@
 //
 
 #import "AppDelegate.h"
-#import "UntechableListController/UntechablesList.h"
-#import "AddUntechableController.h"
-#import "Common.h"
 #import "Crittercism.h"
-#import "NameAndPhoneCellView.h"
+#import "Common.h"
+#import "UntechablesList.h"
 #import "SetupGuideViewController.h"
 #import "UntechOptionsViewController.h"
-#import <Realm/Realm.h>
-// Realm model object
-@interface DemoObject : RLMObject
-@property NSString *title;
-@property NSDate   *date;
-@property NSString *sectionTitle;
-@end
-
-@implementation DemoObject
-// None needed
-@end
-
+#import "RSetUntechable.h"
 
 @implementation AppDelegate
 
-Untechable *untechable;
-NSMutableArray *allUntechables;
+
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    NSLog( @"homeDirectoryPath %@", NSHomeDirectory() );
-    [self add];
+    NSLog( @"homeDirectoryPath this will help us in finding realm file: %@", NSHomeDirectory() );
+
     [Crittercism enableWithAppID: CRITTERCISM_APP_ID];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     
-    [self setDefaultModel];
+    UINavigationController *navigationController;
+    Untechable *untechable  = [[Untechable alloc] initWithCF];
+    RSetUntechable *rSetUntechable = [[RSetUntechable alloc] init];
+    RLMResults *unsortedObjects = [RSetUntechable objectsWhere:@"rUId == '1'"];
+     if ( unsortedObjects.count > 0){
+       /*  UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
+         
+         mainViewController.untechablesTable = untechable;
+         navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+        */
+     
+     } else {
+         SetupGuideViewController *mainViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
+        
+         [rSetUntechable setDefault];
+         rSetUntechable.rUId = @"1";
+         NSMutableDictionary *dic2 = [rSetUntechable getModelDic];
+         [untechable setOrSaveVars:RESET dic2:dic2];
+         mainViewController.untechable = untechable;
+         navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+     }
+    
+    self.window.rootViewController = navigationController;
     
     [self.window makeKeyAndVisible];
     return YES;
 
-}
-
-/*
- Variable we must need in model, for testing we can use these vars
- */
--(void) configureTestData
-{
-    untechable.userId   = TEST_UID;
-    //untechable.eventId = TEST_EID;
-    //untechable.twillioNumber = TEST_TWILLIO_NUM;
-    //untechable.twillioNumber = @"123";
-}
-
-#pragma mark -  Model funcs
-// set default vaules in model
--(void)setDefaultModel{
-    
-    //init object
-    untechable  = [[Untechable alloc] init];
-    untechable.commonFunctions = [[CommonFunctions alloc] init];
-    
-    //For testing -------- { --
-    [self configureTestData];
-    //For testing -------- } --
-    
-    UINavigationController *navigationController;
-    
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
-    {
-        //check wheter untechables are already added, if not then go to add untechable screen
-        // else show untechable list..
-        allUntechables = [untechable.commonFunctions getAllUntechables:untechable.userId];
-        if ( allUntechables.count <= 0 ){
-           
-            UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
-            
-            mainViewController.untechablesTable = untechable;
-            navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
-            
-        } else {
-            
-            UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
-            navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
-            
-        }
-
-    }
-    else
-    {        
-        SetupGuideViewController *mainViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
-        
-        mainViewController.untechable = untechable;
-        navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
-    }
-    
-    self.window.rootViewController = navigationController;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -148,23 +102,5 @@ NSMutableArray *allUntechables;
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
-- (void)add
-{
-    [[RLMRealm defaultRealm] transactionWithBlock:^{
-        [DemoObject createInDefaultRealmWithValue:@[[self randomTitle], [NSDate date], [self randomSectionTitle]]];
-    }];
-}
-
-- (NSString *)randomTitle
-{
-    return [NSString stringWithFormat:@"Title %d", arc4random()];
-}
-
-- (NSString *)randomSectionTitle
-{
-    int r = arc4random() % 100;
-    return [NSString stringWithFormat:@"%i",r];
 }
 @end

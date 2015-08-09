@@ -27,7 +27,6 @@
     [super viewDidLoad];
     [self initializeTextViews];
     [self setNavigationBarItems];
-    [self setupDefaultModel];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,11 +51,9 @@
 -(void) initializeTextViews{
     
     // getting the values of name and number
-    userName = [[NSUserDefaults standardUserDefaults]
-                            stringForKey:@"userName"];
+    userName = untechable.userName;
     
-    userphoneNumber = [[NSUserDefaults standardUserDefaults]
-                            stringForKey:@"userphoneNumber"];
+    userphoneNumber = untechable.userPhoneNumber;
     
     // if these are not null values then set what we've
     if( userName == NULL || [userName isEqualToString:@""] ){
@@ -115,14 +112,14 @@
         
         
         userName = textView.text;
-        self.usernameHintText.hidden = ([userName length] > 0);
+        _usernameHintText.hidden = ([userName length] > 0);
         
         [[NSUserDefaults standardUserDefaults] setObject:userName forKey:@"userName"];
 
     } else {
         // else  we've phone number field
         userphoneNumber = textView.text;
-        self.phoneNumberHintText.hidden = ([userphoneNumber length] > 0);
+        _phoneNumberHintText.hidden = ([userphoneNumber length] > 0);
         [[NSUserDefaults standardUserDefaults] setObject:userphoneNumber forKey:@"userphoneNumber"];
     }
     
@@ -158,11 +155,6 @@
 #pragma - mark setting navigation bar related stuff
 -(void) setNavigationBarItems {
     
-   
-    
-    defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
-    defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
-    
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     
@@ -186,7 +178,7 @@
 
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
-        [nextButton setTitleColor:defGray forState:UIControlStateNormal];
+        [nextButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
         [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
         
@@ -206,7 +198,7 @@
     [self setNextHighlighted:NO];
 }
 - (void)setNextHighlighted:(BOOL)highlighted {
-    (highlighted) ? [nextButton setBackgroundColor:defGreen] : [nextButton setBackgroundColor:[UIColor clearColor]];
+    (highlighted) ? [nextButton setBackgroundColor:DEF_GREEN] : [nextButton setBackgroundColor:[UIColor clearColor]];
 }
 
 -(void)onNext{
@@ -231,17 +223,6 @@
         [alert show];
     }
     
-}
-
-/**
- Initializing Untech Model
- **/
--(void)setupDefaultModel {
-    
-    untechable  = [[Untechable alloc] init];
-    untechable.commonFunctions = [[CommonFunctions alloc] init];
-    [untechable setOrSaveVars:@"RESET"];
-    [untechable initUntechableDirectory];
 }
 
 /**
