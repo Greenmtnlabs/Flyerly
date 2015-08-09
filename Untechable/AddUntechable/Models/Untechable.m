@@ -9,7 +9,7 @@
 
 #import "Untechable.h"
 #import "Common.h"
-
+#import "RUntechable.h"
 
 @implementation Untechable
 
@@ -395,12 +395,23 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [self twUpdateData:@"" oAuthTokenSecret:@"" ];
 }
 
+#pragma mark - Save in realm
+-(void)saveOrUpdate{
+    //Save setting untechable in data base
+    [[RLMRealm defaultRealm] transactionWithBlock:^{
+        [self setOrSaveVars:SAVE dic2:nil];
+        [RUntechable createOrUpdateInDefaultRealmWithValue:self.dic];
+        NSLog(@"SAved in db");
+    }];
+}
 
 #pragma mark - Send to Server
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack{
 
     //[self removeRedundentDataForContacts];
-    [self setOrSaveVars:SAVE dic2:nil];
+    [self saveOrUpdate];
+    
+    callBack(NO, @"Testing"); return;
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:API_SAVE]];
@@ -418,18 +429,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
                               ,@"socialStatus", @"fbAuth", @"fbAuthExpiryTs" , @"twitterAuth",@"twOAuthTokenSecret",   @"linkedinAuth"
                               ,@"acType", @"email", @"password", @"respondingEmail", @"iSsl", @"imsHostName", @"imsPort", @"oSsl", @"omsHostName", @"omsPort",@"customizedContacts",@"userName", @"userPhoneNumber"
                               ,nil];
-    
-    
-    // getting the username and phone number to be send
-    
-    NSString *nsdUserNameInDb = [[NSUserDefaults standardUserDefaults]
-                              stringForKey:@"userName"];
-    NSString *nsdUserPhoneNumber = [[NSUserDefaults standardUserDefaults] stringForKey:@"userphoneNumber"];
-    
-    [dic setValue:nsdUserNameInDb forKey:@"userName"];
-    [dic setValue:nsdUserPhoneNumber forKey:@"userPhoneNumber"];
-    
-    
+
     for (NSString* key in dic) {
         BOOL sendIt =   NO;
         id value    =   [dic objectForKey:key];

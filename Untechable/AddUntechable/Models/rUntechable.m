@@ -11,15 +11,17 @@
 @implementation RUntechable
 @synthesize rUId,eventId,userId,paid,timezoneOffset,spendingTimeTxt,startDate,endDate,hasEndDate,location,twillioNumber,socialStatus,fbAuth,fbAuthExpiryTs,twitterAuth,twOAuthTokenSecret,linkedinAuth,acType,email,password,respondingEmail,iSsl,imsHostName,imsPort,oSsl,omsHostName,omsPort,customizedContacts,userName,userPhoneNumber;
 
+@synthesize savedOnServer, hasFinished;
+
 + (NSString *)primaryKey {
     return @"rUId";
 }
 -(void)setDefault{
-    self.rUId = @"";
+    self.rUId = @"1";
     self.eventId= @"";
     self.userId= @"";
-    self.paid= @"";
-    self.timezoneOffset= @"";
+    self.paid= @"NO";
+    self.timezoneOffset= @"+5";
     self.spendingTimeTxt= @"";
     self.startDate= @"";
     self.endDate= @"";
@@ -45,6 +47,11 @@
     self.customizedContacts= @"";
     self.userName= @"";
     self.userPhoneNumber= @"";
+    
+    //device base
+    self.savedOnServer = @"NO";
+    self.hasFinished = @"NO";
+
 }
 -(NSMutableDictionary *)getModelDic{
     NSMutableDictionary *dic2= [[NSMutableDictionary alloc] init];
@@ -54,7 +61,7 @@
     dic2[@"paid"] = self.paid;
     dic2[@"timezoneOffset"] = self.timezoneOffset;
     dic2[@"spendingTimeTxt"] = self.spendingTimeTxt;
-    dic2[@"spendingTimeTxt"] = self.startDate;
+    dic2[@"startDate"] = self.startDate;
     dic2[@"endDate"] = self.endDate;
     dic2[@"hasEndDate"] = self.hasEndDate;
     dic2[@"location"] = self.location;
@@ -76,9 +83,64 @@
     dic2[@"omsHostName"] = self.omsHostName;
     dic2[@"omsPort"] = self.omsPort;
     dic2[@"customizedContacts"] = self.customizedContacts;
+    
     dic2[@"userName"] = self.userName;
     dic2[@"userPhoneNumber"] = self.userPhoneNumber;
+    
+    //device base
+    dic2[@"savedOnServer"] = self.savedOnServer;
+    dic2[@"hasFinished"] = self.hasFinished;
+    
     return dic2;
+}
+
+-(void)setModelDic:(NSMutableDictionary *)dic{
+    self.rUId  = ( dic[@"rUId"] ) ? dic[@"rUId"] : @"";
+    self.eventId  = ( dic[@"eventId"] ) ? dic[@"eventId"] : @"";
+    self.paid  = ([dic[@"paid"] isEqualToString:@"YES"]) ? @"YES" : @"NO";
+    self.userId   = ( dic[@"userId"] ) ? dic[@"userId"] : @"";
+
+    //Screen1 vars
+    self.timezoneOffset  = ( dic[@"timezoneOffset"] ) ? dic[@"timezoneOffset"] : @"";
+    self.spendingTimeTxt = ( dic[@"spendingTimeTxt"] ) ? dic[@"spendingTimeTxt"] : @"";
+    self.startDate = ( dic[@"startDate"] ) ? dic[@"startDate"] : @"";
+    self.endDate   = ( dic[@"endDate"] ) ? dic[@"endDate"] : @"";
+    self.hasEndDate   = ([dic[@"hasEndDate"] isEqualToString:@"NO"]) ? @"YES" : @"NO";
+    
+    //Screen2 vars
+    self.twillioNumber  = ( dic[@"twillioNumber"] ) ? dic[@"twillioNumber"] : @"";
+    self.location = ( dic[@"location"] ) ? dic[@"location"] : @"";
+    self.customizedContacts = ( dic[@"customizedContacts"] ) ? dic[@"customizedContacts"] : @"";
+    
+    //Screen3 vars
+    self.socialStatus = ( dic[@"socialStatus"] ) ? dic[@"socialStatus"] : @"";
+    self.fbAuth = ( dic[@"fbAuth"] ) ? dic[@"fbAuth"] : @"";
+    self.fbAuthExpiryTs = ( dic[@"fbAuthExpiryTs"] ) ? dic[@"fbAuthExpiryTs"] : @"";
+    self.twitterAuth  = ( dic[@"twitterAuth"] ) ? dic[@"twitterAuth"] : @"";
+    self.twOAuthTokenSecret = ( dic[@"twOAuthTokenSecret"] ) ? dic[@"twOAuthTokenSecret"] : @"";
+    self.linkedinAuth = ( dic[@"linkedinAuth"] ) ? dic[@"linkedinAuth"] : @"";
+    
+    
+    //Screen3 vars
+    self.email  = ( dic[@"email"] ) ? dic[@"email"] : @"";
+    self.password  = ( dic[@"password"] ) ? dic[@"password"] : @"";
+    self.respondingEmail = ( dic[@"respondingEmail"] ) ? dic[@"respondingEmail"] : @"";
+    self.acType = ( dic[@"acType"] ) ? dic[@"acType"] : @"";
+    self.iSsl   = ( dic[@"iSsl"] ) ? dic[@"iSsl"] : @"";
+    self.oSsl   = ( dic[@"oSsl"] ) ? dic[@"oSsl"] : @"";
+    self.imsHostName  = ( dic[@"imsHostName"] ) ? dic[@"imsHostName"] : @"";
+    self.imsPort   = ( dic[@"imsPort"] ) ? dic[@"imsPort"] : @"";
+    self.omsHostName  = ( dic[@"omsHostName"] ) ? dic[@"omsHostName"] : @"";
+    self.omsPort   = ( dic[@"omsPort"] ) ? dic[@"omsPort"] : @"";
+    
+    
+    //SetupGuide First Screen
+    self.userName  = ( dic[@"userName"] ) ? dic[@"userName"] : @"";
+    self.userPhoneNumber  = ( dic[@"userPhoneNumber"] ) ? dic[@"userPhoneNumber"] : @"";
+    
+    //device base
+    self.savedOnServer  = ([dic[@"savedOnServer"] isEqualToString:@"YES"]) ? @"YES" : @"NO";
+    self.hasFinished  = ([dic[@"hasFinished"] isEqualToString:@"YES"]) ? @"YES" : @"NO";
 }
 
 

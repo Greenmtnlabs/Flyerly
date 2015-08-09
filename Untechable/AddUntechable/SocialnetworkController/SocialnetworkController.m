@@ -257,10 +257,6 @@
 }
 
 -(void)onNext{
-    NSString *userNameInDb = [[NSUserDefaults standardUserDefaults]
-                    stringForKey:@"userName"];
-    
-    if( ! ([userNameInDb isEqual:@""] || [userNameInDb length] ==0 || userNameInDb == nil) ){
 
     if( !internetReachable.isReachable ){
         //Show alert if internet is not avaialble...
@@ -270,6 +266,7 @@
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
         [alert show];
+        [self testInternetConnection];
         
     }else {
         if( [APP_IN_MODE isEqualToString:TESTING] ){
@@ -277,8 +274,6 @@
         } else {
             
             [self changeNavigation:@"ON_FINISH"];
-            
-            
             
             //Background work
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
@@ -306,22 +301,7 @@
         }
              
     }
-    } else {
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Put in your name below. This will be used to help identify yourself to friends."
-                                                         message:@""
-                                                        delegate:self
-                                               cancelButtonTitle:@"Done"
-                                               otherButtonTitles:nil, nil];
-        
-        
-        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-        UITextField * nameField = [alert textFieldAtIndex:0];
-        nameField.keyboardType = UIKeyboardTypeTwitter;
-        nameField.placeholder = @"Name";
-        
-        [alert show];
 
-    }
 }
 
 /**

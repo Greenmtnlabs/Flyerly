@@ -40,6 +40,8 @@
 @property NSString *userName;
 @property NSString *userPhoneNumber;
 
+@property NSString *savedOnServer, *hasFinished;
+
 -(void)setDefault;
 -(NSMutableDictionary *)getModelDic;
 

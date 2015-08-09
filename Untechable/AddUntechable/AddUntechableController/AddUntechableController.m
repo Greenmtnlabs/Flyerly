@@ -76,9 +76,7 @@
     [self showHideTextPicker:NO];
     
     // Initialize Data
-    NSMutableArray *customSpendingTextArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];
-
-    _pickerData = customSpendingTextArray;
+    _pickerData = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];;
     
     // Connect data
     _spendingTimeTextPicker.dataSource = self;
@@ -463,72 +461,16 @@
     return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
 }
 
-/*
- Variable we must need in model, for testing we can use these vars
- */
--(void) setUserData
-{
-    untechable.userId   = TEST_UID;
-}
-
 #pragma mark -  Model funcs
 // set default vaules in model
 -(void)setDefaultModel{
 
     now1 = [NSDate date]; //current date
     
-    //init object
-    untechable  = [[Untechable alloc] init];
-    untechable.commonFunctions = [[CommonFunctions alloc] init];
-    
     //Set Date formate
     untechable.dateFormatter = [[NSDateFormatter alloc] init];
     [untechable.dateFormatter setDateFormat:DATE_FORMATE_1];
     
-
-    [self setUserData];
-
-    
-    NSMutableDictionary *sUntechable = nil;
-    
-    BOOL isNew = YES;
-    
-    //When we are going to edit event
-    if ( indexOfUntechableInEditMode > -1 ){ //&& [untechable.commonFunctions getAllUntechables:untechable.userId].count > 0){
-        sUntechable = [untechable.commonFunctions getUntechable:indexOfUntechableInEditMode UserId:untechable.userId];
-        if( sUntechable != nil ){
-            isNew = NO;
-        }
-    }
-    
-    //Check is there any incomplete untechable exist ?
-    if( isNew == YES ){
-        sUntechable = [untechable.commonFunctions getAnyInCompleteUntechable:untechable.userId];
-        
-        if( sUntechable != nil ){
-            isNew = NO;
-            callReset = @"RESET1";
-        }
-    }
-    
-    
-    //Old Untechable going to edit, set the vars
-    if( sUntechable != nil ){
-        //Settings required for calling initUntechableDirectory
-        untechable.uniqueId = sUntechable[@"uniqueId"];
-        untechable.untechablePath = sUntechable[@"untechablePath"];
-        [untechable initUntechableDirectory];
-    }
-    else if( isNew ) {
-        [untechable initWithDefValues];
-        [untechable initUntechableDirectory];
-        callReset = @"";
-    }
-    
-    
-    if( ![callReset isEqualToString:@""] ){
-        [self resetUntechable:callReset];
-    }
 }
 
 -(void)resetUntechable:(NSString *)callResetFor{
@@ -550,8 +492,7 @@
 }
 
 #pragma mark -  UI functions
--(void)updateUI
-{
+-(void)updateUI{
     
     [_btnLblWwud setTitleColor:defGray forState:UIControlStateNormal];
     _btnLblWwud.titleLabel.font = [UIFont fontWithName:APP_FONT size:25];
@@ -559,6 +500,8 @@
     _inputSpendingTimeText.text = untechable.spendingTimeTxt;
     if ( [untechable.spendingTimeTxt isEqualToString:@""] ){
         _inputSpendingTimeText.text = @"e.g Spending time with family.";
+    } else{
+        _inputSpendingTimeText.text = untechable.spendingTimeTxt;
     }
     _inputSpendingTimeText.font = [UIFont fontWithName:APP_FONT size:18];
     

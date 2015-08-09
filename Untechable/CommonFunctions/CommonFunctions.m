@@ -462,16 +462,19 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
 
 -(NSString *)formateStringIntoPhoneNumber:(NSString *)unformatted
 {
-    
-    NSArray *stringComponents = [NSArray arrayWithObjects:[unformatted substringWithRange:NSMakeRange(0, 2)],
-                                 [unformatted substringWithRange:NSMakeRange(2, 3)],
-                                 [unformatted substringWithRange:NSMakeRange(5, 3)],
-                                 [unformatted substringWithRange:NSMakeRange(8, [unformatted length]-8)], nil];
-    
-    NSString *formattedString = [NSString stringWithFormat:@"%@ (%@) %@-%@", [stringComponents objectAtIndex:0], [stringComponents objectAtIndex:1], [stringComponents objectAtIndex:2],[stringComponents objectAtIndex:3]];
-    NSLog(@"Formatted Phone Number: %@", formattedString);
-    
-    return formattedString;
+    if([unformatted isEqualToString:@""] == NO){
+        NSArray *stringComponents = [NSArray arrayWithObjects:[unformatted substringWithRange:NSMakeRange(0, 2)],
+                                     [unformatted substringWithRange:NSMakeRange(2, 3)],
+                                     [unformatted substringWithRange:NSMakeRange(5, 3)],
+                                     [unformatted substringWithRange:NSMakeRange(8, [unformatted length]-8)], nil];
+        
+        NSString *formattedString = [NSString stringWithFormat:@"%@ (%@) %@-%@", [stringComponents objectAtIndex:0], [stringComponents objectAtIndex:1], [stringComponents objectAtIndex:2],[stringComponents objectAtIndex:3]];
+        NSLog(@"Formatted Phone Number: %@", formattedString);
+        
+        return formattedString;
+    } else{
+       return unformatted;
+    }
 }
 
 #pragma mark UIView Changes base on Iphone Screen Sizes

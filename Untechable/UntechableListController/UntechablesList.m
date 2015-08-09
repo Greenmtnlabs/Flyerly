@@ -165,11 +165,13 @@ int indexArrayS2[];
 
 #pragma mark -  Model funcs
 -(void)setDefaultUntech{
+    untechable  = [[Untechable alloc] initWithCF];
+    
     RLMResults *unsortedSetObjects = [RSetUntechable objectsWhere:@"rUId == '1'"];
     RSetUntechable *rSetUntechable = unsortedSetObjects[0];
     NSMutableDictionary *setDic = [rSetUntechable getModelDic];
+    setDic[@"rUId"] = [untechable getUniqueId];
     
-    untechable  = [[Untechable alloc] initWithCF];
     [untechable setOrSaveVars:RESET dic2:setDic];
     
     untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60)] ]; //current time + time duration
