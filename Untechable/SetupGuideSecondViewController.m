@@ -256,11 +256,10 @@
 }
 
 -(void)onNext{
-    
+    [self saveBeforeGoing];
     SetupGuideThirdView *thirdSetupScreen = [[SetupGuideThirdView alloc] initWithNibName:@"SetupGuideThirdView" bundle:nil];
     thirdSetupScreen.untechable = untechable;
     [self.navigationController pushViewController:thirdSetupScreen animated:YES];
-    [self saveBeforeGoing];
 }
 
 -(void) goBack {
@@ -268,8 +267,11 @@
     UINavigationController *navigationController = self.navigationController;
     [navigationController popViewControllerAnimated:YES];
 }
+
+/**
+ * if text not select then set first one
+ */
 -(void)saveBeforeGoing {
-    
     if( untechable.spendingTimeTxt == nil || [untechable.spendingTimeTxt isEqualToString:@""] ) {
         untechable.spendingTimeTxt = [customSpendingTextAry objectAtIndex:0];
     }
