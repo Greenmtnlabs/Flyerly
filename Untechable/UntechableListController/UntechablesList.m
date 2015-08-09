@@ -54,7 +54,6 @@ int indexArrayS2[];
 
 #pragma mark -  Navigation functions
 - (void)setNavigationDefaults{
-    
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
 }
@@ -729,14 +728,7 @@ int indexArrayS2[];
 }
 
 - (IBAction)untechCustomClick:(id)sender {
-   
-    NSLog(@"Go To add untechable screen");
-    AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
-    
-    addUntechable.untechable = untechable;
-    addUntechable.indexOfUntechableInEditMode = -1;
-    [self.navigationController pushViewController:addUntechable animated:YES];
-    
+    [self addUntechable];    
 }
 - (IBAction)btnDoneClick:(id)sender {
     
