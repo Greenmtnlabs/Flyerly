@@ -121,8 +121,7 @@
     [navigationController popViewControllerAnimated:YES];
     
 }
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {    
     //we're assuming cancel as done because there is only one button on the alert
     if( buttonIndex == [alertView cancelButtonIndex] ) {
         
@@ -130,10 +129,6 @@
         [self.navigationController pushViewController:untechScreen animated:YES];
         
     }
-    
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-
 }
 
 -(void)setupShareScreen {
