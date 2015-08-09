@@ -14,7 +14,7 @@
 @implementation Untechable
 
 //Settings
-@synthesize commonFunctions, dic, piecesFile, paid, userId, uniqueId, eventId, untechablePath, dateFormatter, savedOnServer, hasFinished;
+@synthesize commonFunctions, dic, piecesFile, paid, userId, uniqueId, rUId, eventId, untechablePath, dateFormatter, savedOnServer, hasFinished;
 
 //SetupGuide Screen 1 Data
 @synthesize userName, userPhoneNumber;
@@ -140,7 +140,7 @@
     }
     else {
         NSLog(@"Directory Already Exist");
-       [self setOrSaveVars:RESET dic2:dic];
+       [self setOrSaveVars:SET dic2:dic];
         hasInit = YES;
     }
     
@@ -157,6 +157,8 @@
 -(void)setOrSaveVars:(NSString *)setOrSAve dic2:(NSMutableDictionary *)dic2{
 
     if( [setOrSAve isEqualToString:SAVE] ) {
+        dic = [[NSMutableDictionary alloc] init];
+        dic[@"rUId"]            = rUId;
         dic[@"eventId"]         = eventId;
         dic[@"paid"]            = paid ? @"YES" : @"NO";
         dic[@"userId"]          = userId;
@@ -210,10 +212,11 @@
         dic[@"omsHostName"] = omsHostName;
         dic[@"omsPort"] = omsPort;
     }
-    else if( [setOrSAve isEqualToString:RESET] ) {
+    else if( [setOrSAve isEqualToString:SET] ) {
         dic = [[NSMutableDictionary alloc] initWithDictionary:dic2];
-        
+       
         //Settings
+        rUId        = ( dic[@"rUId"] ) ? dic[@"rUId"] : @"";
         eventId        = ( dic[@"eventId"] ) ? dic[@"eventId"] : @"";
         paid           = ([dic[@"paid"] isEqualToString:@"YES"]) ? YES : NO;
         userId         = ( dic[@"userId"] ) ? dic[@"userId"] : @"";
@@ -397,7 +400,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack{
 
     //[self removeRedundentDataForContacts];
-    [self setOrSaveVars:SAVE dic2:dic];
+    [self setOrSaveVars:SAVE dic2:nil];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:API_SAVE]];
@@ -470,13 +473,13 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
             eventId = [dict valueForKey:@"eventId"];
             savedOnServer = YES;
             hasFinished = YES;
-            [self setOrSaveVars:SAVE dic2:dic];
+            [self setOrSaveVars:SAVE dic2:nil];
             
         } else{
             message = [dict valueForKey:@"message"];
             if( !([[dict valueForKey:@"eventId"] isEqualToString:@"0"]) ) {
                 eventId = [dict valueForKey:@"eventId"];
-                [self setOrSaveVars:SAVE dic2:dic];
+                [self setOrSaveVars:SAVE dic2:nil];
             }
             
             errorOnFinish = YES;

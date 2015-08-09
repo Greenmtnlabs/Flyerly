@@ -24,7 +24,7 @@
 @property (nonatomic, assign) BOOL paid;
 @property (strong, nonatomic) NSString *userId;
 @property (strong, nonatomic) NSString *uniqueId;
-@property (strong, nonatomic) NSString *eventId;
+@property (strong, nonatomic) NSString *eventId, *rUId;
 @property (strong, nonatomic) NSString *untechablePath;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, assign) BOOL savedOnServer;

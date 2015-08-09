@@ -31,23 +31,22 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     UINavigationController *navigationController;
-    Untechable *untechable  = [[Untechable alloc] initWithCF];
-    RSetUntechable *rSetUntechable = [[RSetUntechable alloc] init];
+
     RLMResults *unsortedObjects = [RSetUntechable objectsWhere:@"rUId == '1'"];
+    //If we have default untechable then go to untechable list screen
      if ( unsortedObjects.count > 0){
-       /*  UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
-         
-         mainViewController.untechablesTable = untechable;
+         UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
          navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
-        */
-     
      } else {
-         SetupGuideViewController *mainViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
-        
+         RSetUntechable *rSetUntechable = [[RSetUntechable alloc] init];
          [rSetUntechable setDefault];
          rSetUntechable.rUId = @"1";
          NSMutableDictionary *dic2 = [rSetUntechable getModelDic];
-         [untechable setOrSaveVars:RESET dic2:dic2];
+         
+         Untechable *untechable  = [[Untechable alloc] initWithCF];
+         [untechable setOrSaveVars:SET dic2:dic2];
+
+         SetupGuideViewController *mainViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
          mainViewController.untechable = untechable;
          navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
      }

@@ -9,6 +9,7 @@
 #import "SetupGuideFourthView.h"
 #import "SocialnetworkController.h"
 #import "UntechablesList.h"
+#import "RSetUntechable.h"
 
 @interface SetupGuideFourthView ()
 
@@ -107,9 +108,14 @@
 
 -(void)onNext{
     
-    UIAlertView *congratesAlert = [[UIAlertView alloc]initWithTitle:@"Congratulation" message:@"Thank you for setting up your Untech settings. Now you can easily become Untechable whenever you need a break from technology in order to spend more time with the people & experiencing the things that are most important." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    [congratesAlert show];
-    
+    //Save setting untechable in data base
+    [[RLMRealm defaultRealm] transactionWithBlock:^{
+        [untechable setOrSaveVars:SAVE dic2:nil];
+        [RSetUntechable createOrUpdateInDefaultRealmWithValue:untechable.dic];
+        
+        UIAlertView *congratesAlert = [[UIAlertView alloc]initWithTitle:@"Congratulation" message:@"Thank you for setting up your Untech settings. Now you can easily become Untechable whenever you need a break from technology in order to spend more time with the people & experiencing the things that are most important." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [congratesAlert show];
+    }];
 }
 
 -(void) goBack {
