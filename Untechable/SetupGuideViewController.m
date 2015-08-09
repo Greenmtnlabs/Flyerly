@@ -41,10 +41,8 @@
 /**
  * Update the view once it appears.
  */
--(void)viewDidAppear:(BOOL)animated {
-    
+-(void)viewDidAppear:(BOOL)animated {    
     [super viewDidAppear:animated];
-    [untechable printNavigation:[self navigationController]];
 }
 
 #pragma - mark Initializing Views

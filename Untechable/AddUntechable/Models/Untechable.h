@@ -59,7 +59,6 @@
 - (id)initWithCF;
 
 -(NSDate *)stringToDate:(NSString *)inputStrFormate dateString:(NSString *)dateString;
--(void)printNavigation:navigationControllerPointer;
 -(void)goBack:navigationControllerPointer;
 
 

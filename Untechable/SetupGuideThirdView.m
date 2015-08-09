@@ -40,10 +40,7 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated {
-    
-    [super viewDidAppear:animated];
-    [untechable printNavigation:[self navigationController]];
-    
+    [super viewDidAppear:animated];    
 }
 
 -(void)viewWillAppear:(BOOL)animated {

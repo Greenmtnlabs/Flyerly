@@ -62,22 +62,7 @@
     
     return [NSDate date];//default
 }
--(void)printNavigation:navigationControllerPointer
-{
 
-    // Pop the current view, and push the crop view.
-    //NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[navigationControllerPointer viewControllers]];
-    //NSLog(@"NSMutableArray *viewControllers = %@", viewControllers);
-    
-    
-    
-    /*
-    [viewControllers removeLastObject];
-    [viewControllers removeLastObject];
-    [viewControllers addObject:nbuCrop];
-    [[self navigationController] setViewControllers:viewControllers animated:YES];
-     */
-}
 
 -(void)goBack:navigationControllerPointer{
     [navigationControllerPointer popViewControllerAnimated:YES];

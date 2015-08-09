@@ -74,10 +74,8 @@
 /**
  * Update the view once it appears.
  */
--(void)viewDidAppear:(BOOL)animated {
-    
+-(void)viewDidAppear:(BOOL)animated {    
     [super viewDidAppear:animated];
-    [untechable printNavigation:[self navigationController]];
 }
 /*
  Hide keyboard on done button of keyboard press
