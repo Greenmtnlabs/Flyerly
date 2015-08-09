@@ -572,32 +572,21 @@ int indexArrayS2[];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    NSMutableDictionary *tempDict;
     if ( indexPath.section == 0 ){
-        
-        NSMutableDictionary *tempDict = [sectionOneArray  objectAtIndex:indexArrayS1[indexPath.row]];
-       
-
-        AddUntechableController *addUntechable;
-        addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
-        
-        addUntechable.indexOfUntechableInEditMode = [[tempDict objectForKey:@"index"] intValue];
-        addUntechable.callReset = @"";
-        
-        [self.navigationController pushViewController:addUntechable animated:YES];
-        
+        tempDict = [sectionOneArray  objectAtIndex:indexArrayS1[indexPath.row]];
     }else if ( indexPath.section == 1 ){
-        
-        NSMutableDictionary *tempDict = [sectionTwoArray  objectAtIndex:indexArrayS2[indexPath.row]];
-        
-        AddUntechableController *addUntechable;
-        addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
-        
-        addUntechable.indexOfUntechableInEditMode = [[tempDict objectForKey:@"index"] intValue];
-        addUntechable.callReset = @"RESET1";
-        
-        [self.navigationController pushViewController:addUntechable animated:YES];
+        tempDict = [sectionTwoArray  objectAtIndex:indexArrayS2[indexPath.row]];
     }
+    
+    
+    AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
+    [untechable setOrSaveVars:RESET dic2:tempDict];
+    
+    addUntechable.untechable = untechable;
+    addUntechable.indexOfUntechableInEditMode = -1;
+    
+    [self.navigationController pushViewController:addUntechable animated:YES];
 
     [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
 }
