@@ -456,7 +456,7 @@
     
     if ( comingFromSettingsScreen ){
     
-        [self storeSceenVarsInDic];
+        [self storeScreenVarsInDic];
         
         NSLog(@"Go To settings screen");
         
@@ -472,7 +472,7 @@
         
     }else if ( comingFromChangeEmailScreen ){
         
-        [self storeSceenVarsInDic];
+        [self storeScreenVarsInDic];
         
         NSLog(@"Go To settings screen");
         
@@ -488,7 +488,7 @@
         
     } else if ( comingFromContactsListScreen ){
     
-        [self storeSceenVarsInDic];
+        [self storeScreenVarsInDic];
         
         SocialnetworkController *socialnetwork;
         socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
@@ -499,7 +499,7 @@
         
         SetupGuideFourthView *fourthScreen = [[SetupGuideFourthView alloc] init];
         fourthScreen.untechable = untechable;
-        [self storeSceenVarsInDic];
+        [self storeScreenVarsInDic];
         [self.navigationController pushViewController:fourthScreen animated:YES];
         
     }else {
@@ -512,7 +512,7 @@
             untechable.oSsl = @"YES";
         }
         
-        [self storeSceenVarsInDic];
+        [self storeScreenVarsInDic];
         
         if( [APP_IN_MODE isEqualToString:TESTING] ){
             [self next:@"GO_TO_THANKYOU"];
@@ -582,7 +582,7 @@
         untechable.customizedContactsForCurrentSession = untechable.customizedContactsForCurrentSession;
     }
     
-    [self storeSceenVarsInDic];
+    [self storeScreenVarsInDic];
 }
 
 -(void)onNext {
@@ -609,7 +609,7 @@
     
 }
 
--(void)storeSceenVarsInDic{
+-(void)storeScreenVarsInDic{
     
     [[NSUserDefaults standardUserDefaults] setObject:_inputEmail.text forKey:EMAIL_KEY];
     [[NSUserDefaults standardUserDefaults] setObject:_inputPassword.text forKey:PASSWORD_KEY];

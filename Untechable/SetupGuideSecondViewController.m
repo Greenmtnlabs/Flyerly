@@ -59,11 +59,13 @@
     customSpendingTextAry = [NSMutableArray arrayWithArray:[set array]];
     
     customSpendingTextAry = [self customValAtTheEnd:customSpendingTextAry];
-    
-    [self setupDoctorsResearchLabel:[customSpendingTextAry objectAtIndex:0]];
+    NSString *temStr = ( [untechable.spendingTimeTxt isEqualToString:@""] ) ? @"e.g Spending time with family." : untechable.spendingTimeTxt;
+    [self setupDoctorsResearchLabel:temStr];//[customSpendingTextAry objectAtIndex:0]];
     
     self.setupSpendingTimeText.dataSource = self;
     self.setupSpendingTimeText.delegate = self;
+    
+
     
 }
 

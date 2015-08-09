@@ -275,6 +275,8 @@
             
             [self changeNavigation:@"ON_FINISH"];
             
+            [self storeScreenVarsInDic];
+            
             //Background work
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
                 [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
@@ -416,7 +418,7 @@
         }
     }
     
-    [self storeSceenVarsInDic];
+    [self storeScreenVarsInDic];
 }
 
 
@@ -478,7 +480,7 @@
     }
 }
 
--(void)storeSceenVarsInDic{
+-(void)storeScreenVarsInDic{
     untechable.socialStatus = inputSetSocialStatus.text;
 }
 

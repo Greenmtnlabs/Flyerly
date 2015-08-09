@@ -50,7 +50,7 @@
 
 @implementation AddUntechableController
 
-@synthesize indexOfUntechableInEditMode,callReset,untechable;
+@synthesize totalUntechables,callReset,untechable;
 
 #pragma mark -  Default functions
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -69,8 +69,6 @@
     
     [self setNavigationDefaults];
     
-    [self updateUI];
-    
     [self showHideDateTimePicker:NO];
     
     [self showHideTextPicker:NO];
@@ -84,8 +82,6 @@
     
     self.picker.datePickerMode = UIDatePickerModeDateAndTime;
     //WHEN any of the date is similer to current date time, the show NOW in date's area
-    [self pickerSetAcTo:@"_btnStartTime"];
-    [self pickerSetAcTo:@"_btnEndTime"];
     self.picker.minimumDate = now1;
     [self.picker setDate:now1 animated:YES];
     
@@ -95,6 +91,8 @@
     NSArray *fields = @[ _inputSpendingTimeText ];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
     [self.keyboardControls setDelegate:self];
+    
+    [self updateUI];
     
 }
 
@@ -189,7 +187,7 @@
         // Center title __________________________________________________
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
 
-        if ( [untechable.commonFunctions getAllUntechables:untechable.userId].count > 0 ) {
+        if ( totalUntechables > 0 ) {
             // Back Navigation button
             backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
             backButton.titleLabel.shadowColor = [UIColor clearColor];
@@ -271,7 +269,7 @@
 -(void)onNext{
     
     if ( ![_inputSpendingTimeText.text isEqualToString:@"e.g Spending time with family."] ){
-        [self storeSceenVarsInDic];
+        [self storeScreenVarsInDic];
         
         [self hideAllControlls];
         
@@ -309,7 +307,7 @@
     }
 }
 
--(void)storeSceenVarsInDic {
+-(void)storeScreenVarsInDic {
     untechable.spendingTimeTxt = _inputSpendingTimeText.text;
     untechable.hasEndDate = !([_cbNoEndDate isSelected]);
 }
@@ -518,7 +516,7 @@
     
     [_btnEndTime setTitleColor:defGreen forState:UIControlStateNormal];
     _btnEndTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
-    [_btnEndTime setTitle:[untechable.commonFunctions timestampStrToAppDate:untechable.startDate] forState:UIControlStateNormal];
+    [_btnEndTime setTitle:[untechable.commonFunctions timestampStrToAppDate:untechable.endDate] forState:UIControlStateNormal];
     
     [_lblNoEndDate setTextColor:defGray];
     _lblNoEndDate.font = [UIFont fontWithName:APP_FONT size:14];

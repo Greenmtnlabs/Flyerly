@@ -266,7 +266,7 @@
     
     [self setSkipHighlighted:NO];
     
-    [self storeSceenVarsInDic];
+    [self storeScreenVarsInDic];
     [self stopAllTask];
     
     [self next:@"ON_SKIP"];
@@ -359,7 +359,7 @@
 
     [self setNextHighlighted:NO];
     
-    [self storeSceenVarsInDic];
+    [self storeScreenVarsInDic];
     [self stopAllTask];
     
     
@@ -493,7 +493,7 @@
     skipButton.enabled = enable;
 }
 
--(void)storeSceenVarsInDic{
+-(void)storeScreenVarsInDic{
 
 }
 
@@ -669,7 +669,7 @@
 //Show select contacts screen
 - (IBAction)importContacts:(id)sender {
 
-    [self storeSceenVarsInDic];
+    [self storeScreenVarsInDic];
     [self stopAllTask];
     
     InviteFriendsController *ifc;

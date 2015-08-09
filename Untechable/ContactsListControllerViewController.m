@@ -178,7 +178,7 @@
     [searchTextField resignFirstResponder];
 }
 
--(void)storeSceenVarsInDic{
+-(void)storeScreenVarsInDic{
     //we have already stored evey thing on save of inner scree of it
 }
 
@@ -212,7 +212,7 @@
     
     [self setSkipHighlighted:NO];
     
-    [self storeSceenVarsInDic];
+    [self storeScreenVarsInDic];
     //[self stopAllTask];
     
     [self next:@"ON_SKIP"];

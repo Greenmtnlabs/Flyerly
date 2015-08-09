@@ -34,7 +34,7 @@
 
 @property (nonatomic,strong)  Untechable *untechable;
 
-@property int indexOfUntechableInEditMode;
+@property int totalUntechables;
 @property NSString *callReset;
 
 @end
