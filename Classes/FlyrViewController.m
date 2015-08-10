@@ -470,6 +470,7 @@ id lastShareBtnSender;
 
 
 -(void)enableHome:(BOOL)enable{
+    [self.tView reloadData];
     [self enableBtns:YES];
 }
 
