@@ -110,6 +110,7 @@
     
     //Save setting untechable in data base
     [[RLMRealm defaultRealm] transactionWithBlock:^{
+        untechable.hasFinished = YES;
         [untechable setOrSaveVars:SAVE dic2:nil];
         [RSetUntechable createOrUpdateInDefaultRealmWithValue:untechable.dic];
         

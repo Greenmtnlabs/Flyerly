@@ -7,19 +7,14 @@
 //
 
 #import "NameAndPhoneCellView.h"
-#import "CommonFunctions.h"
 #import "Common.h"
 
 @implementation NameAndPhoneCellView
 
 NSString *userNameInDb;
 
-CommonFunctions *commonFunc;
+
 - (void)awakeFromNib {
-    // get the setted value of name and number and
-    // set it in the fields by default
-    commonFunc = [[CommonFunctions alloc] init];
-    
     userNameInDb = [[NSUserDefaults standardUserDefaults]
                   stringForKey:@"userName"];
     if( userNameInDb == NULL ){

@@ -175,7 +175,7 @@
         
         
         
-        if(YES){
+        if( untechable.hasFinished ){
         
         
             // Left Navigation ______________________________________________
@@ -200,7 +200,7 @@
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
         
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
-        [self.navigationItem setLeftBarButtonItem:leftBarButton];//Right button ___________
+        [self.navigationItem setLeftBarButtonItem:leftBarButton];//Left button ___________
         
     }
 }
@@ -216,8 +216,7 @@
 }
 
 -(void)onBack{
-    SettingsViewController *settingsViewController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil];
-    [self.navigationController pushViewController:settingsViewController animated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 
