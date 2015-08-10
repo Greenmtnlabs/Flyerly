@@ -33,6 +33,8 @@
 
 @synthesize contactModalsArray,contactsArray,contactBackupArray,searchTextField,selectedIdentifiers,untechable,currentlyEditingContacts, selectedAnyEmail;
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -235,16 +237,19 @@
     
     untechable.customizedContactsForCurrentSession = currentlyEditingContacts;
     
-    if ( selectedAnyEmail  ){
-        [self showEmailSetupScreen:NO];
-    }else {
-        
-        SocialnetworkController *socialnetwork;
-        socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
-        socialnetwork.untechable = untechable;
-        [self.navigationController pushViewController:socialnetwork animated:YES];
+    if(![untechable.rUId  isEqualToString: @"1"]){
+        if ( selectedAnyEmail  ){
+            [self showEmailSetupScreen:NO];
+        }else {
+            
+            SocialnetworkController *socialnetwork;
+            socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
+            socialnetwork.untechable = untechable;
+            [self.navigationController pushViewController:socialnetwork animated:YES];
+        }
     }
-
+    
+    
      //hides the keyboard when navigating to the next views
      [searchTextField resignFirstResponder];
 }

@@ -10,6 +10,8 @@
 #import "Common.h"
 #import "SetupGuideSecondViewController.h"
 #import "AddUntechableController.h"
+#import "SettingsViewController.h"
+
 
 @interface SetupGuideViewController () {
     NSString *userName;
@@ -170,13 +172,55 @@
         [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
         
         nextButton.showsTouchWhenHighlighted = YES;
+        
+        
+        
+        if(YES){
+        
+        
+            // Left Navigation ______________________________________________
+            backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+            
+            backButton.titleLabel.shadowColor = [UIColor clearColor];
+            
+            [backButton addTarget:self action:@selector(onBack) forControlEvents:UIControlEventTouchUpInside];
+            
+            backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
+            [backButton setTitle:TITLE_BACK_TXT forState:normal];
+            [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
+            [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
+            [backButton addTarget:self action:@selector(btnBackTouchEnd) forControlEvents:UIControlEventTouchUpInside];
+            
+            backButton.showsTouchWhenHighlighted = YES;
+
+        }
+        
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+        UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
         
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
+        [self.navigationItem setLeftBarButtonItem:leftBarButton];//Right button ___________
         
     }
 }
+
+-(void)btnBackTouchStart{
+    [self setBackHighlighted:YES];
+}
+-(void)btnBackTouchEnd{
+    [self setBackHighlighted:NO];
+}
+- (void)setBackHighlighted:(BOOL)highlighted {
+    (highlighted) ? [backButton setBackgroundColor:DEF_GREEN] : [backButton setBackgroundColor:[UIColor clearColor]];
+}
+
+-(void)onBack{
+    SettingsViewController *settingsViewController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil];
+    [self.navigationController pushViewController:settingsViewController animated:YES];
+}
+
+
 
 -(void)btnNextTouchStart{
     [self setNextHighlighted:YES];

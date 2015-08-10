@@ -23,7 +23,6 @@
     
 }
 
-
 @property (strong, nonatomic) IBOutlet UIButton *btnLblWwud;
 @property (strong, nonatomic) IBOutlet UITextView *inputSpendingTimeText;
 @property (strong, nonatomic) IBOutlet UILabel *char_Limit;
@@ -51,6 +50,7 @@
 @implementation AddUntechableController
 
 @synthesize totalUntechables,callReset,untechable;
+
 
 #pragma mark -  Default functions
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

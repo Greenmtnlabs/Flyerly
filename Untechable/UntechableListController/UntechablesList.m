@@ -149,8 +149,8 @@ int indexArrayS2[];
 -(void)addUntechable{
     
     NSLog(@"Go To add untechable screen");
-    AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
     
+    AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
     addUntechable.untechable = untechable;
     addUntechable.totalUntechables = (int)allUntechables.count;
     [self.navigationController pushViewController:addUntechable animated:YES];
