@@ -5618,6 +5618,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 -(void)enableHome:(BOOL)enable{
     sharePanel.hidden = enable;
     sharingPannelIsHidden = enable;
+    [self enableNavigation:enable];
 }
 -(void)enableNavigation:(BOOL)enable{
     [backButton setEnabled:enable];
