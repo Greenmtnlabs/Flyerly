@@ -239,6 +239,8 @@
     
     NSLog(@"Go To settings screen");
     SettingsViewController *settingsController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil];
+    untechable.rUId = @"1";
+    untechable.dic[@"rUId"] = @"1";
     settingsController.untechable = untechable;
     [self.navigationController pushViewController:settingsController animated:YES];
 }

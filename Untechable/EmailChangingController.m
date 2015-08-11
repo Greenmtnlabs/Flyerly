@@ -125,7 +125,7 @@
     untechable.email = emailAddress.text;
     untechable.password = [[SocialNetworksStatusModal sharedInstance] getEmailPassword];
     
-    if( setupScreenCalling ) {
+    if( [untechable.rUId isEqualToString:@"1"] ) {
         
         SetupGuideFourthView *fourthView = [[SetupGuideFourthView alloc] initWithNibName:@"SetupGuideFourthView" bundle:nil];
         fourthView.untechable = untechable;

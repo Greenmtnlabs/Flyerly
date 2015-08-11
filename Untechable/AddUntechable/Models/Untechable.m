@@ -411,7 +411,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     //[self removeRedundentDataForContacts];
     [self saveOrUpdate];
     
-    callBack(NO, @"Testing"); return;
+    //callBack(NO, @"Testing"); return;
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:API_SAVE]];
