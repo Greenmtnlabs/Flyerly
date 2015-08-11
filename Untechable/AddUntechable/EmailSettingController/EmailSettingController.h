@@ -22,6 +22,8 @@
     UIButton *rightBarButton;
     UIColor *defGreen;//GREEN
     UIColor *defGray;//GRAY
+    UIButton *skipButton;
+
     
 }
 
