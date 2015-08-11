@@ -23,7 +23,6 @@
     
 }
 
-
 @property (strong, nonatomic) IBOutlet UIButton *btnLblWwud;
 @property (strong, nonatomic) IBOutlet UITextView *inputSpendingTimeText;
 @property (strong, nonatomic) IBOutlet UILabel *char_Limit;
@@ -51,6 +50,7 @@
 @implementation AddUntechableController
 
 @synthesize totalUntechables,callReset,untechable;
+
 
 #pragma mark -  Default functions
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -239,6 +239,8 @@
     
     NSLog(@"Go To settings screen");
     SettingsViewController *settingsController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil];
+    untechable.rUId = @"1";
+    untechable.dic[@"rUId"] = @"1";
     settingsController.untechable = untechable;
     [self.navigationController pushViewController:settingsController animated:YES];
 }

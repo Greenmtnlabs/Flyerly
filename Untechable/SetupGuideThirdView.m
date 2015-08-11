@@ -133,6 +133,10 @@
     } else {
     
         SetupGuideFourthView *fourthScreen = [[SetupGuideFourthView alloc] initWithNibName:@"SetupGuideFourthView" bundle:nil];
+        if([untechable.rUId isEqualToString:@"1"]){
+            untechable.dic[@"rUId"] = @"1";
+        }
+        
         fourthScreen.untechable = untechable;
         [self.navigationController pushViewController:fourthScreen animated:YES];
     }

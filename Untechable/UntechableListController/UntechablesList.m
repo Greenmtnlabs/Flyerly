@@ -142,6 +142,7 @@ int indexArrayS2[];
     NSLog(@"Go To p[refrences screen");
     SettingsViewController *settingsController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil];
     untechable.rUId = @"1";
+    untechable.dic[@"rUId"] = @"1";
     settingsController.untechable = untechable;
     [self.navigationController pushViewController:settingsController animated:YES];
 }
@@ -149,8 +150,8 @@ int indexArrayS2[];
 -(void)addUntechable{
     
     NSLog(@"Go To add untechable screen");
-    AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
     
+    AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
     addUntechable.untechable = untechable;
     addUntechable.totalUntechables = (int)allUntechables.count;
     [self.navigationController pushViewController:addUntechable animated:YES];
