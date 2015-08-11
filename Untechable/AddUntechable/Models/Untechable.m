@@ -9,7 +9,7 @@
 
 #import "Untechable.h"
 #import "Common.h"
-#import "RUntechable.h"
+#import "RSetUntechable.h"
 
 @implementation Untechable
 
@@ -400,7 +400,11 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     //Save setting untechable in data base
     [[RLMRealm defaultRealm] transactionWithBlock:^{
         [self setOrSaveVars:SAVE dic2:nil];
+        if([rUId isEqualToString:@"1"])
+        [RSetUntechable createOrUpdateInDefaultRealmWithValue:self.dic];
+        else
         [RUntechable createOrUpdateInDefaultRealmWithValue:self.dic];
+        
         NSLog(@"SAved in db");
     }];
 }
@@ -410,8 +414,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
     //[self removeRedundentDataForContacts];
     [self saveOrUpdate];
-    
-    //callBack(NO, @"Testing"); return;
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:API_SAVE]];

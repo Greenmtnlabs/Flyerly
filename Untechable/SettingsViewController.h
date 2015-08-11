@@ -21,5 +21,6 @@
 @property (nonatomic,strong)  Untechable *untechable;
 
 @property (strong, nonatomic) IBOutlet UITableView *socialNetworksTable;
+@property (strong, nonatomic) UIAlertView *editNameAlert;
 
 @end
