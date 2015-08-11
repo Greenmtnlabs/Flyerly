@@ -22,10 +22,7 @@
 
 -(void)setCellValueswithUntechableTitle :(NSString *)title StartDate:(NSString *)startDate StartTime:(NSString *)startTime EndDate: (NSString *)endDate EndTime:(NSString *)endTime {
     
-    UIColor *defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
-    UIColor *defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
-    
-    
+       
     [startHeaderLabel setFont:[UIFont fontWithName:APP_FONT size:18]];
     [endHeaderLabel setFont:[UIFont fontWithName:APP_FONT size:18]];
     

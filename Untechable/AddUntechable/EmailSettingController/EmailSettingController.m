@@ -408,18 +408,51 @@
             
             [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
             
-        }else if ( comingFromContactsListScreen ){
+        }else if ( comingFromContactsListScreen || comingFromSetupScreen){
             
-            [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
+            // Left Navigation
+            skipButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+            skipButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
+            [skipButton setTitle:TITLE_SKIP_TXT forState:normal];
+            [skipButton setTitleColor:defGray forState:UIControlStateNormal];
+            [skipButton addTarget:self action:@selector(btnSkipTouchStart) forControlEvents:UIControlEventTouchDown];
+            [skipButton addTarget:self action:@selector(btnSkipTouchEnd) forControlEvents:UIControlEventTouchUpInside];
+            skipButton.showsTouchWhenHighlighted = YES;
+            UIBarButtonItem *skipBarButton = [[UIBarButtonItem alloc] initWithCustomView:skipButton];
+            NSMutableArray  *skipNavItems  = [NSMutableArray arrayWithObjects:skipBarButton,nil];
             
-        }else if ( comingFromSetupScreen ){
-            
-            [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
-            
-        }else {
+            [self.navigationItem setRightBarButtonItems:skipNavItems];        }else {
             
             [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
         }
+    }
+}
+
+-(void)btnSkipTouchStart{
+    [self setSkipHighlighted:YES];
+}
+-(void)btnSkipTouchEnd{
+    [self onSkip];
+    [self setSkipHighlighted:NO];
+}
+- (void)setSkipHighlighted:(BOOL)highlighted {
+    (highlighted) ? [skipButton setBackgroundColor:defGreen] : [skipButton setBackgroundColor:[UIColor clearColor]];
+}
+
+-(void)onSkip{
+    
+    if( !comingFromSetupScreen ) {
+        SocialnetworkController *socialnetwork;
+        socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
+        socialnetwork.untechable = untechable;
+        [self.navigationController pushViewController:socialnetwork animated:YES];
+    } else {
+        
+        SetupGuideFourthView *fourthScreen;
+        fourthScreen = [[SetupGuideFourthView alloc]initWithNibName:@"SetupGuideFourthView" bundle:nil];
+        fourthScreen.untechable = untechable;
+        [self.navigationController pushViewController:fourthScreen animated:YES];
+        
     }
 }
 
@@ -1006,7 +1039,7 @@
     } else if ( tableView == _tableView0 ) {
         
         if( tableView == _tableView0 )
-            count = _table01Data.count;
+            count = (int)_table01Data.count;
     }
 
     return count;
