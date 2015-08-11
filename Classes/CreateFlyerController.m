@@ -159,15 +159,23 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     }
 }
 
-- (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
-    
+-(void) loadInterstitialAdd{
     self.interstitialAdd.delegate = nil;
     
-    // Prepare next interstitial.
+    // Create a new GADInterstitial each time. A GADInterstitial will only show one request in its
+    // lifetime. The property will release the old one and set the new one.
     self.interstitialAdd = [[GADInterstitial alloc] init];
-    self.interstitialAdd.adUnitID = [flyerConfigurator interstitialAdID];
     self.interstitialAdd.delegate = self;
+    
+    // Note: Edit SampleConstants.h to update kSampleAdUnitId with your interstitial ad unit id.
+    self.interstitialAdd.adUnitID = [flyerConfigurator interstitialAdID];
+    
     [self.interstitialAdd loadRequest:[self request]];
+
+}
+- (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
+    
+    [self loadInterstitialAdd];
     
     //Here we remove Borders from layer if user touch any layer
     [self.flyimgView layerStoppedEditing:currentLayer];
@@ -334,15 +342,14 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     flyerConfigurator = appDelegate.flyerConfigurator;
     
-    // Create a new GADInterstitial each time. A GADInterstitial will only show one request in its
-    // lifetime. The property will release the old one and set the new one.
-    self.interstitialAdd = [[GADInterstitial alloc] init];
-    self.interstitialAdd.delegate = self;
     
-    // Note: Edit SampleConstants.h to update kSampleAdUnitId with your interstitial ad unit id.
-    self.interstitialAdd.adUnitID = [flyerConfigurator interstitialAdID];
+    userPurchases = [UserPurchases getInstance];
+    userPurchases.delegate = self;
+    BOOL haveValidSubscription = [userPurchases isSubscriptionValid];
     
-    [self.interstitialAdd loadRequest:[self request]];
+    if( haveValidSubscription == NO ) {
+        [self loadInterstitialAdd];
+    }
     
     // If 50mb space not availble then go to Back
     [self isDiskSpaceAvailable];
@@ -552,16 +559,17 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     customAdSize = GADAdSizeFromCGSize(CGSizeMake(320, 50));
                 }
                 
-                
-                // Use predefined GADAdSize constants to define the GADBannerView.
-                self.bannerAdd = [[GADBannerView alloc] initWithAdSize:customAdSize origin:origin];
-                
-                // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID before compiling.
-                self.bannerAdd.adUnitID = [flyerConfigurator bannerAdID];
-                self.bannerAdd.delegate = self;
-                self.bannerAdd.rootViewController = self;
-                
-                [self.bannerAdd loadRequest:[self request]];
+                if( haveValidSubscription == NO ) {
+                    // Use predefined GADAdSize constants to define the GADBannerView.
+                    self.bannerAdd = [[GADBannerView alloc] initWithAdSize:customAdSize origin:origin];
+                    
+                    // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID before compiling.
+                    self.bannerAdd.adUnitID = [flyerConfigurator bannerAdID];
+                    self.bannerAdd.delegate = self;
+                    self.bannerAdd.rootViewController = self;
+                    
+                    [self.bannerAdd loadRequest:[self request]];
+                }
                 
                 NSArray *flyerbackgroundsViewArray;
                 if ( IS_IPHONE_4) {
@@ -4311,7 +4319,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     //Background Thread
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         
-        if ( [[PFUser currentUser] sessionToken] ) {
+        /* // Remove full screen add when user going to share
+         if ( [[PFUser currentUser] sessionToken] ) {
             if ( [self.interstitialAdd isReady]  && ![self.interstitialAdd hasBeenUsed] ) {
                 
                 dispatch_async( dispatch_get_main_queue(), ^{
@@ -4320,6 +4329,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                 return;
             }
         }
+         */
         
         //If pennel didn't open [ and return-ed ] then open the sharing pannel
         dispatch_async( dispatch_get_main_queue(), ^{
