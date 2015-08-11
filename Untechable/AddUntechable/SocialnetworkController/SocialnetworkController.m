@@ -139,9 +139,7 @@
     
     NSString *socialStatus;
     
-    NSString *currentClass = [NSString stringWithFormat:@"%@",[self.navigationController visibleViewController] ];
-    
-    if( [currentClass containsString:@"SetupGuideFourthView"] ) {
+    if( [untechable.rUId isEqualToString:@"1"] ) {
         
         socialStatus = untechable.spendingTimeTxt;
         
