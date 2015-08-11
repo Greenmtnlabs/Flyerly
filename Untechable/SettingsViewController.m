@@ -25,7 +25,8 @@
 
 @implementation SettingsViewController
 
-@synthesize untechable,socialNetworksTable;
+@synthesize untechable, socialNetworksTable, editNameAlert;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,7 +35,7 @@
     [self setNavigation:@"viewDidLoad"];
     [self updateUI];
 
-    socialNetworksName = [[NSMutableArray alloc] initWithObjects:@"Facebook",@"Twitter",@"LinkedIn",@"Email", nil];
+    socialNetworksName = [[NSMutableArray alloc] initWithObjects: @"Facebook",@"Twitter",@"LinkedIn",@"Email", nil];
     
     socialIcons = [[NSMutableArray alloc] init];
     
@@ -53,7 +54,7 @@
         [socialIcons addObject:@{@"type":@"image", @"imgPath":@"linkedIn@3x.png", @"text":@""}];
         [socialIcons addObject:@{@"type":@"image", @"imgPath":@"email@3x.png", @"text":@""}];
     }
-    
+        
  }
 
 - (void) updateUI {
@@ -170,17 +171,14 @@
     //NSArray *keys = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys];
     if( indexPath.row == 0 ){
         
-        cellId = @"NameAndPhoneCellView";
-        cell = (SettingsCellView *)[tableView dequeueReusableCellWithIdentifier:cellId];
+        // set first cell to show user name
+        cell.socialNetworkName.text = @"Name";
+        cell.socialNetworkImage.image = [UIImage imageNamed:@"user_img"];
+        cell.loginStatus.text = untechable.userName;
+        [cell.socialNetworkButton setTitle:@"Edit" forState:UIControlStateNormal];
+        [cell.socialNetworkButton addTarget:self action:@selector(onEditName)
+                           forControlEvents:UIControlEventTouchUpInside];
         
-        if (cell == nil)
-        {
-            
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"NameAndPhoneCellView" owner:self options:nil];
-            
-            cell = (SettingsCellView *)[nib objectAtIndex:0];
-            
-        }
         return cell;
         
     } else {
@@ -276,8 +274,7 @@
         if ( [[[SocialNetworksStatusModal sharedInstance] getEmailAddress] isEqualToString:@""] ||
              [[[SocialNetworksStatusModal sharedInstance] getEmailPassword] isEqualToString:@""] ){
             
-            EmailSettingController *emailSettingController;
-            emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
+            EmailSettingController *emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
             emailSettingController.untechable = nil;
             emailSettingController.comingFromSettingsScreen = YES;
             emailSettingController.comingFromChangeEmailScreen = NO;
@@ -299,6 +296,43 @@
 -(IBAction)loginFacebook:(id) sender {
     
     [[SocialNetworksStatusModal sharedInstance] loginFacebook:sender Controller:self Untechable:untechable];
+}
+
+
+-(void)onEditName{
+    editNameAlert = [[UIAlertView alloc] initWithTitle:@"Put in your name below. This will be used to identify yourself to friends."
+                                                 message:@""
+                                                delegate:self
+                                       cancelButtonTitle:@"Done"
+                                       otherButtonTitles:nil, nil];
+
+    editNameAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    //Name field
+    UITextField * nameField = [editNameAlert textFieldAtIndex:0];
+    nameField.text = untechable.userName;
+    nameField.keyboardType = UIKeyboardTypeTwitter;
+    nameField.placeholder = @"Enter Name";
+
+[editNameAlert show];
+}
+
+/**
+ Action catch for the uiAlertview buttons
+ we have to save name and phone number on button press
+ */
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if( alertView == editNameAlert ){
+        //getting text from the text fields
+        NSString *name = [alertView textFieldAtIndex:0].text;
+        
+        //setting the name in model and in local app data
+        untechable.userName = name;
+        [untechable saveOrUpdate];
+        
+        [socialNetworksTable reloadData];
+        
+    }
 }
 
 @end

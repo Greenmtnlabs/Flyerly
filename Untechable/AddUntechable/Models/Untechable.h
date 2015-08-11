@@ -90,5 +90,6 @@
 -(NSDate *)getCurrentDate;
 
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack;
+-(void)saveOrUpdate;
 
 @end
