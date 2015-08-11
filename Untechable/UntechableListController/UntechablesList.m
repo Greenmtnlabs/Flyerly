@@ -422,7 +422,14 @@ int indexArrayS2[];
         NSString *message = @"";
         
         if( [[dict valueForKey:@"status"] isEqualToString:@"OK"] ) {
-        
+            //Delete from realm
+            RSetUntechable *rUntechable = [[RSetUntechable alloc] init];
+            [rUntechable setModelDic:( section == 0 ) ? sectionOneArray[indexToremoveOnSucess] : sectionTwoArray[indexToremoveOnSucess] ];
+            RLMRealm *realm = RLMRealm.defaultRealm;
+            [realm beginWriteTransaction];
+            [realm deleteObject:rUntechable];
+            [realm commitWriteTransaction];
+            
             if ( section == 0 ){
                 NSString *untechablePath = [tempDict objectForKey:@"untechablePath"];
                 [[NSFileManager defaultManager] removeItemAtPath:untechablePath error:nil];

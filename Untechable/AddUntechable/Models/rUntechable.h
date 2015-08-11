@@ -44,6 +44,7 @@
 
 -(void)setDefault;
 -(NSMutableDictionary *)getModelDic;
+-(void)setModelDic:(NSMutableDictionary *)dic;
 
 @end
 
