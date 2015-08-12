@@ -7,6 +7,7 @@
     <customFonts key="customFonts">
         <mutableArray key="Entypo.otf">
             <string>Entypo</string>
+            <string>Entypo</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -80,9 +81,6 @@
                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XMz-bs-DWZ">
                         <rect key="frame" x="236" y="74" width="20" height="20"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="blue_arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="Kjf-Iy-JgA">
-                        <rect key="frame" x="365" y="30" width="20" height="32"/>
-                    </imageView>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XBs-Lj-INJ">
                         <rect key="frame" x="0.0" y="0.0" width="314" height="104"/>
                         <state key="normal">
@@ -91,10 +89,18 @@
                         </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wTy-hl-yka">
-                        <rect key="frame" x="350" y="63" width="50" height="45"/>
+                        <rect key="frame" x="360" y="63" width="50" height="45"/>
                         <fontDescription key="fontDescription" name="Entypo" family="Entypo" pointSize="45"/>
                         <state key="normal" title="">
-                            <color key="titleColor" red="0.0" green="0.5725490196078431" blue="0.74117647058823533" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleColor" red="0.01176470588" green="0.56862745100000001" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="crQ-8M-MRO">
+                        <rect key="frame" x="360" y="-1" width="50" height="45"/>
+                        <fontDescription key="fontDescription" name="Entypo" family="Entypo" pointSize="45"/>
+                        <state key="normal" title="✎">
+                            <color key="titleColor" red="0.01176470588" green="0.56862745100000001" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
@@ -107,7 +113,6 @@
                 <outlet property="dateLabel" destination="bjQ-yJ-udf" id="DQc-no-jiK"/>
                 <outlet property="description" destination="27n-NS-2ka" id="Dwj-Mc-fQv"/>
                 <outlet property="flyerLock" destination="XBs-Lj-INJ" id="R3a-Xy-Ltk"/>
-                <outlet property="lockImage" destination="Kjf-Iy-JgA" id="h5w-Cb-9ZO"/>
                 <outlet property="nameLabel" destination="yqm-e3-DZR" id="fdh-3a-rmR"/>
                 <outlet property="shareBtn" destination="wTy-hl-yka" id="hMe-2m-9ao"/>
                 <outlet property="updatedDateLabel" destination="maR-IX-wF0" id="B36-fM-qfG"/>
@@ -123,7 +128,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="blue_arrow.png" width="20" height="35"/>
         <image name="invite_Bg.png" width="311" height="100"/>
     </resources>
 </document>

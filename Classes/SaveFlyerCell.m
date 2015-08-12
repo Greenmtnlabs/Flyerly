@@ -14,7 +14,7 @@
 
 @implementation SaveFlyerCell
 @synthesize nameLabel, description, dateLabel, createLabel,cellImage,backgroundImage;
-@synthesize shareBtn,flyerLock,lockImage,updatedDateLabel,updatedLabel;
+@synthesize shareBtn,flyerLock,updatedDateLabel,updatedLabel;
 
 
 /*
@@ -26,7 +26,6 @@
     //HERE WE LOCK FLYER CELL
     if (status) {
         flyerLock.hidden = NO;
-        [lockImage setImage:[UIImage imageNamed:@"lock_icon"]];
     }
     
     // HERE WE SET FLYER INFORMATION FORM .TXT FILE

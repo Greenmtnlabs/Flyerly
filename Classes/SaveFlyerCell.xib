@@ -7,6 +7,7 @@
     <customFonts key="customFonts">
         <mutableArray key="Entypo.otf">
             <string>Entypo</string>
+            <string>Entypo</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -94,10 +95,6 @@
                         <rect key="frame" x="236" y="74" width="20" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue_arrow.png" id="ot2-CF-xz6">
-                        <rect key="frame" x="290" y="37" width="20" height="20"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </imageView>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tr4-sN-ZUc">
                         <rect key="frame" x="0.0" y="0.0" width="314" height="104"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -107,11 +104,20 @@
                         </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qP4-jY-AaV">
-                        <rect key="frame" x="267" y="58" width="45" height="46"/>
+                        <rect key="frame" x="267" y="56" width="45" height="46"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="Entypo" family="Entypo" pointSize="44"/>
                         <state key="normal" title="">
-                            <color key="titleColor" red="0.0" green="0.57254901960000004" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleColor" red="0.01176470588" green="0.56862745100000001" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wlX-wx-fgU">
+                        <rect key="frame" x="267" y="2" width="45" height="46"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="Entypo" family="Entypo" pointSize="45"/>
+                        <state key="normal" title="✎">
+                            <color key="titleColor" red="0.01176470588" green="0.56862745100000001" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
@@ -124,7 +130,6 @@
                 <outlet property="dateLabel" destination="N9E-L4-Ap0" id="H7f-Xl-TdM"/>
                 <outlet property="description" destination="O2h-x4-GPI" id="Iu8-Dh-YyS"/>
                 <outlet property="flyerLock" destination="tr4-sN-ZUc" id="2No-bK-Xkb"/>
-                <outlet property="lockImage" destination="ot2-CF-xz6" id="Beb-zA-cjc"/>
                 <outlet property="nameLabel" destination="nIU-g9-EY6" id="C3v-AI-gA6"/>
                 <outlet property="shareBtn" destination="qP4-jY-AaV" id="mnR-TH-YZk"/>
                 <outlet property="updatedDateLabel" destination="RUH-7h-bUU" id="JXB-rE-RYU"/>
@@ -140,7 +145,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="blue_arrow.png" width="20" height="35"/>
         <image name="invite_Bg.png" width="311" height="100"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

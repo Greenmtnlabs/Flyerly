@@ -21,7 +21,6 @@
 @property(nonatomic, strong)IBOutlet UIImageView *cellImage;
 @property(nonatomic, strong)IBOutlet UIImageView *backgroundImage;
 @property(nonatomic, strong) NSString *filePath;
-@property(nonatomic, strong)IBOutlet UIImageView *lockImage;
 
 @property ( nonatomic, strong ) IBOutletCollection(UIImageView) NSArray *socialStatus;
 @property(nonatomic, strong)IBOutlet UIButton *flyerLock;
