@@ -39,6 +39,7 @@
 int indexArrayS1[];
 int indexArrayS2[];
 
+
 #pragma mark -  Default functions
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -391,12 +392,39 @@ int indexArrayS2[];
     }
 }
 
+/**
+ * Delete Untechable from Realm(Database)
+ * @params: indexToremoveOnSucess - is the index table view section
+ * @params: section - is table view section (we have different arrays for different sections)
+ */
+-(void)deleteUntechable:(NSInteger)indexToremoveOnSucess Section:(NSInteger)section {
+
+    NSMutableDictionary *tempDict = ( section == 0 ) ? sectionOneArray[indexToremoveOnSucess] : sectionTwoArray[indexToremoveOnSucess];
+
+    RLMRealm *realm = RLMRealm.defaultRealm;
+    RLMResults *untechableToBeDeleted = [RUntechable objectsInRealm:realm where:@"rUId == %@", tempDict[@"rUId"]];
+    if( untechableToBeDeleted.count ){
+        [realm beginWriteTransaction];
+        [realm deleteObjects:untechableToBeDeleted];
+        [realm commitWriteTransaction];
+    }
+    if ( section == 0 ){
+        NSString *untechablePath = [tempDict objectForKey:@"untechablePath"];
+        [[NSFileManager defaultManager] removeItemAtPath:untechablePath error:nil];
+        [sectionOneArray removeObjectAtIndex:indexToremoveOnSucess];
+    }else if ( section == 1 ){
+        NSString *untechablePath = [tempDict objectForKey:@"untechablePath"];
+        [[NSFileManager defaultManager] removeItemAtPath:untechablePath error:nil];
+        [sectionTwoArray removeObjectAtIndex:indexToremoveOnSucess];
+    }
+}
+
 - (void)sendDeleteRequestToApi:(NSInteger)indexToremoveOnSucess Section:(NSInteger)section {
     
     BOOL errorOnFinish = NO;
     
     [self changeNavigation:@"ON_FINISH"];
-    
+
     NSMutableDictionary *tempDict;
     
     NSString *apiDelete;
@@ -422,24 +450,7 @@ int indexArrayS2[];
         NSString *message = @"";
         
         if( [[dict valueForKey:@"status"] isEqualToString:@"OK"] ) {
-            //Delete from realm
-            RSetUntechable *rUntechable = [[RSetUntechable alloc] init];
-            [rUntechable setModelDic:( section == 0 ) ? sectionOneArray[indexToremoveOnSucess] : sectionTwoArray[indexToremoveOnSucess] ];
-            RLMRealm *realm = RLMRealm.defaultRealm;
-            [realm beginWriteTransaction];
-            [realm deleteObject:rUntechable];
-            [realm commitWriteTransaction];
-            
-            if ( section == 0 ){
-                NSString *untechablePath = [tempDict objectForKey:@"untechablePath"];
-                [[NSFileManager defaultManager] removeItemAtPath:untechablePath error:nil];
-                [sectionOneArray removeObjectAtIndex:indexToremoveOnSucess];
-            }else if ( section == 1 ){
-                NSString *untechablePath = [tempDict objectForKey:@"untechablePath"];
-                [[NSFileManager defaultManager] removeItemAtPath:untechablePath error:nil];
-                [sectionTwoArray removeObjectAtIndex:indexToremoveOnSucess];
-            }
-            
+            [self deleteUntechable:indexToremoveOnSucess Section:section];
         } else{
             message = [dict valueForKey:@"message"];
             if( !([[dict valueForKey:@"eventId"] isEqualToString:@"0"]) ) {
@@ -468,6 +479,8 @@ int indexArrayS2[];
             [self changeNavigation:@"ON_FINISH_SUCCESS"];
         });
     }
+    
+    [untechablesTable reloadData];
 }
 
 -(void)updateUI{
