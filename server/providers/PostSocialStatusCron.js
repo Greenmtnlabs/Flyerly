@@ -301,7 +301,7 @@ SocialStatusCron.setup = function(app) {
 				var emailAddresses	=	eventObj.customizedContacts[i].emailAddresses;
 				var toName = eventObj.customizedContacts[i].contactName;
 				//console.log("emailAddresses:",emailAddresses);
-				if(!eventObj.customizedContacts[i].customTextForContact && eventObj.customizedContacts[i].customTextForContact!=""){
+				if( eventObj.customizedContacts[i].customTextForContact && eventObj.customizedContacts[i].customTextForContact != "" ){
 					reason = eventObj.customizedContacts[i].customTextForContact;
 				}
 				for(var j=0; j<emailAddresses.length; j++ ){
