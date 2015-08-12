@@ -475,13 +475,13 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
             eventId = [dict valueForKey:@"eventId"];
             savedOnServer = YES;
             hasFinished = YES;
-            [self setOrSaveVars:SAVE dic2:nil];
+            [self saveOrUpdate];
             
         } else{
             message = [dict valueForKey:@"message"];
             if( !([[dict valueForKey:@"eventId"] isEqualToString:@"0"]) ) {
                 eventId = [dict valueForKey:@"eventId"];
-                [self setOrSaveVars:SAVE dic2:nil];
+                [self saveOrUpdate];
             }
             
             errorOnFinish = YES;
