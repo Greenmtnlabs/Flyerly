@@ -216,7 +216,7 @@
 }
 
 -(void)onBack{
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count -2 ] animated:YES];
 }
 
 
