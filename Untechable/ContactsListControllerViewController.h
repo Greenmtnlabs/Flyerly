@@ -17,14 +17,12 @@
     UIButton *backButton;
     UIButton *nextButton;
     UIButton *skipButton;
-    UIColor *defGreen;//GREEN
-    UIColor *defGray;//GRAY
-    
 }
 
 @property (nonatomic,strong)  Untechable *untechable;
 
 @property(nonatomic,strong) NSMutableArray *contactModalsArray;
+//Array of all phone contacts
 @property(nonatomic,strong) NSMutableArray *contactsArray;
 @property(nonatomic,strong) NSMutableArray *contactBackupArray;
 @property(nonatomic,strong) NSMutableArray *selectedIdentifiers;

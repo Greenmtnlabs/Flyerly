@@ -98,10 +98,6 @@
 
 #pragma mark -  Navigation functions
 - (void)setNavigationDefaults{
-
-    defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
-    defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
-    
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
 }
@@ -120,7 +116,7 @@
         backButton.titleLabel.shadowColor = [UIColor clearColor];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [backButton setTitle:TITLE_BACK_TXT forState:normal];
-        [backButton setTitleColor:defGray forState:UIControlStateNormal];
+        [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         //[backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
         backButton.showsTouchWhenHighlighted = YES;
@@ -141,7 +137,7 @@
         [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
-        [nextButton setTitleColor:defGray forState:UIControlStateNormal];
+        [nextButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
         [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
         
@@ -150,7 +146,7 @@
         skipButton = [[UIButton alloc] initWithFrame:CGRectMake(33, 0, 33, 42)];
         skipButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
         [skipButton setTitle:@"SKIP" forState:normal];
-        [skipButton setTitleColor:defGray forState:UIControlStateNormal];
+        [skipButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [skipButton addTarget:self action:@selector(btnSkipTouchStart) forControlEvents:UIControlEventTouchDown];
         [skipButton addTarget:self action:@selector(btnSkipTouchEnd) forControlEvents:UIControlEventTouchUpInside];
         
@@ -185,7 +181,7 @@
 }
 
 - (void)setSkipHighlighted:(BOOL)highlighted {
-    (highlighted) ? [skipButton setBackgroundColor:defGreen] : [skipButton setBackgroundColor:[UIColor clearColor]];
+    (highlighted) ? [skipButton setBackgroundColor:DEF_GREEN] : [skipButton setBackgroundColor:[UIColor clearColor]];
 }
 
 -(void)next:(NSString *)after{
@@ -317,7 +313,7 @@
     [self setNextHighlighted:NO];
 }
 - (void)setNextHighlighted:(BOOL)highlighted {
-    (highlighted) ? [nextButton setBackgroundColor:defGreen] : [nextButton setBackgroundColor:[UIColor clearColor]];
+    (highlighted) ? [nextButton setBackgroundColor:DEF_GREEN] : [nextButton setBackgroundColor:[UIColor clearColor]];
 }
 
 - (void)didReceiveMemoryWarning {
