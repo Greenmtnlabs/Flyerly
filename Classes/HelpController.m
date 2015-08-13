@@ -131,7 +131,7 @@
         
         // Set up recipients
         NSMutableArray *toRecipients = [[NSMutableArray alloc]init];
-        [toRecipients addObject:@"info@greenmtnlabs.com"];
+        [toRecipients addObject:@"hello@flyerly.com"];
         [picker setToRecipients:toRecipients];
 
         [self presentViewController:picker animated:YES completion:nil];
