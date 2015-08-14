@@ -27,6 +27,8 @@
 @property(nonatomic,strong) NSMutableArray *contactBackupArray;
 @property(nonatomic,strong) NSMutableArray *selectedIdentifiers;
 @property(nonatomic,strong) NSMutableArray *currentlyEditingContacts;
+
+//This will help us on next, if emails are exist then go to setup email screen
 @property(assign) BOOL selectedAnyEmail;
 
 @property(nonatomic,strong) IBOutlet UITextField *searchTextField;
