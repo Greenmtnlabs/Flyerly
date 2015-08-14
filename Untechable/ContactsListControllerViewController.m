@@ -30,7 +30,7 @@
 
 @implementation ContactsListControllerViewController
 
-@synthesize contactsArray,contactBackupArray,searchTextField,untechable, selectedAnyEmail;
+@synthesize mobileContactsArray,mobileContactBackupArray,searchTextField,untechable, selectedAnyEmail;
 
 
 
@@ -58,7 +58,7 @@
     
     [self setNavigation:@"viewDidLoad"];
     
-    // Load device contacts
+    // Load device contacts and set into contactsArray
     [self loadLocalContacts];
     
     selectedAnyEmail = NO;
@@ -314,7 +314,7 @@
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return  contactsArray.count;
+    return  mobileContactsArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -341,12 +341,12 @@
     
     ContactsCustomizedModal *_contactModal;
     
-    if ( contactsArray.count >= 1 ){
+    if ( mobileContactsArray.count >= 1 ){
         
         // GETTING DATA FROM RECEIVED DICTIONARY
         // SET OVER MODEL FROM DATA
         
-        _contactModal = contactsArray[(indexPath.row)];
+        _contactModal = mobileContactsArray[indexPath.row];
     }
     
     if (_contactModal.img == nil) {
@@ -435,9 +435,9 @@
             //Filter array a/c to search text
             NSMutableArray *filteredArray = [[NSMutableArray alloc] init];
             
-            for(int contactIndex=0; contactIndex<contactBackupArray.count; contactIndex++) {
+            for(int contactIndex=0; contactIndex< mobileContactBackupArray.count; contactIndex++) {
                 
-                ContactsCustomizedModal *contactModal = contactBackupArray[contactIndex];
+                ContactsCustomizedModal *contactModal = mobileContactBackupArray[contactIndex];
                 NSString *name = contactModal.name;
                 
                 if( !([[name lowercaseString] rangeOfString:[newString lowercaseString]].location == NSNotFound) ){
@@ -445,7 +445,7 @@
                 }
             }
             
-            contactsArray = filteredArray;
+            mobileContactsArray = filteredArray;
             [self reloadContactsTableInMainThread];
             return YES;
         }
@@ -454,7 +454,7 @@
 
 // Reload table data after all the contacts get loaded
 -(void)resetContactsArrayFromBackupArray{
-    contactsArray = [[NSMutableArray alloc] initWithArray:contactBackupArray];
+    mobileContactsArray = [[NSMutableArray alloc] initWithArray:mobileContactBackupArray];
 }
 -(void)reloadContactsTableInMainThread{
     [_contactsTable performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
@@ -464,11 +464,12 @@
 
 /*
  * This method is used to load device contact details
+ * Load device contacts and set into contactsArray
  */
-- (IBAction)loadLocalContacts{
+- (void)loadLocalContacts{
     
     // init contact array
-    if( contactBackupArray ){
+    if( mobileContactBackupArray ){
         
         [self resetContactsArrayFromBackupArray];
         
@@ -478,7 +479,7 @@
         [self reloadContactsTableInMainThread];
     } else {
         
-        contactsArray = [[NSMutableArray alloc] init];
+        mobileContactsArray = [[NSMutableArray alloc] init];
         ABAddressBookRef m_addressbook = ABAddressBookCreateWithOptions(NULL, NULL);
         searchTextField.text = @"";
         
@@ -741,11 +742,11 @@
         }
     
         if ( currentltRenderingContactModal.allEmails.count > 0 || currentltRenderingContactModal.allPhoneNumbers.count > 0 ){
-            [contactsArray addObject:currentltRenderingContactModal];
+            [mobileContactsArray addObject:currentltRenderingContactModal];
         }
     }
     // Reload table data after all the contacts get loaded
-    contactBackupArray = [[NSMutableArray alloc] initWithArray:contactsArray];
+    mobileContactBackupArray = [[NSMutableArray alloc] initWithArray:mobileContactsArray];
     [self reloadContactsTableInMainThread];
 }
 
@@ -770,7 +771,7 @@
     
     NSMutableDictionary *curContactDetails;
     // contact which is going to be edit
-    ContactsCustomizedModal *editingContactModel = [contactsArray objectAtIndex:indexPath.row];
+    ContactsCustomizedModal *editingContactModel = mobileContactsArray[indexPath.row];
     
     if ( ![untechable.customizedContacts isEqualToString:@""] ){
         

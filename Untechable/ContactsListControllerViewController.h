@@ -22,10 +22,10 @@
 @property (nonatomic,strong)  Untechable *untechable;
 
 //Array of all phone contacts (extracted from phonebook )
-@property(nonatomic,strong) NSMutableArray *contactsArray;
+@property(nonatomic,strong) NSMutableArray *mobileContactsArray;
 //This array required because when user searched any name, above contactsArray will sort a/c to name,
 //but when user remove searching text, we have to fill that array with it
-@property(nonatomic,strong) NSMutableArray *contactBackupArray;
+@property(nonatomic,strong) NSMutableArray *mobileContactBackupArray;
 
 //This will help us on next, if emails are exist then go to setup email screen
 @property(assign) BOOL selectedAnyEmail;
