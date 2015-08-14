@@ -186,8 +186,8 @@
         //dic[@"hasRecording"] = hasRecording ? @"YES" : @"NO";
         
         dic[@"customizedContacts"] = [commonFunctions convertCCMArrayIntoJsonString:customizedContactsForCurrentSession];
-        customizedContacts = dic[@"customizedContacts"];
-        customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:dic[@"customizedContacts"]];
+        customizedContacts = ( dic[@"customizedContacts"] ) ? dic[@"customizedContacts"] : @"";
+        customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:customizedContacts];
         
         //Screen3 vars
         dic[@"socialStatus"] = socialStatus;
@@ -414,6 +414,10 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
     //[self removeRedundentDataForContacts];
     [self saveOrUpdate];
+    callBack(NO, @"Thankyou");
+    return;
+
+    
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:API_SAVE]];

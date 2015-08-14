@@ -144,7 +144,13 @@ NSString *currentEnteredPhoneNumber;
         NSMutableDictionary *curContactDetails = [[NSMutableDictionary alloc] init];
         ContactsCustomizedModal *curObj =  [value_ objectAtIndex:i];
         [curContactDetails setValue:curObj.name forKey:@"contactName"];
-        [curContactDetails setValue:curObj.allPhoneNumbers forKey:@"phoneNumbers"];
+        NSMutableArray *filterdPhoneNumbers = [[NSMutableArray alloc] init];
+        for(int i=0; i<curObj.allPhoneNumbers.count; i++){
+            if( [curObj.allPhoneNumbers[i][2] isEqualToString:@"1"] || [curObj.allPhoneNumbers[i][3] isEqualToString:@"1"] )
+            [filterdPhoneNumbers addObject:curObj.allPhoneNumbers[i]];
+        }
+        [curContactDetails setValue:filterdPhoneNumbers forKey:@"phoneNumbers"];
+        
         [curContactDetails setValue:curObj.allEmails forKey:@"emailAddresses"];
         [curContactDetails setValue:curObj.customTextForContact forKey:@"customTextForContact"];
         [curContactDetails setValue:curObj.cutomizingStatusArray forKey:@"cutomizingStatusArray"];

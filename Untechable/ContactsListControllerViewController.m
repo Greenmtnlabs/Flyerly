@@ -21,7 +21,6 @@
 @interface ContactsListControllerViewController () {
     
     NSMutableDictionary *customizedContactsDictionary;
-    NSString *customizedContactsString;
     EmailSettingController *emailSettingController;
 }
 
@@ -72,13 +71,13 @@
     // Load device contacts
     [self loadLocalContacts];
         
-    customizedContactsString = untechable.customizedContacts;
+
     
     selectedAnyEmail = NO;
     
     NSError *writeError = nil;
     customizedContactsDictionary =
-    [NSJSONSerialization JSONObjectWithData: [customizedContactsString dataUsingEncoding:NSUTF8StringEncoding]
+    [NSJSONSerialization JSONObjectWithData: [untechable.customizedContacts dataUsingEncoding:NSUTF8StringEncoding]
                                     options: NSJSONReadingMutableContainers
                                       error: &writeError];
     NSLog(@" Contact Dic %@", customizedContactsDictionary );
@@ -102,10 +101,9 @@
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
 }
 
--(void)setNavigation:(NSString *)callFrom
-{
-    if([callFrom isEqualToString:@"viewDidLoad"])
-    {
+-(void)setNavigation:(NSString *)callFrom{
+    
+    if([callFrom isEqualToString:@"viewDidLoad"]) {
         self.navigationItem.hidesBackButton = YES;
         
         // Center title __________________________________________________
@@ -392,7 +390,7 @@
         }
     }
     
-    if ( currentlyEditingContacts.count <= 0 && [customizedContactsString isEqualToString:@""] ){
+    if ( currentlyEditingContacts.count <= 0 && [untechable.customizedContacts isEqualToString:@""] ){
         
         [self resetContactModal:_contactModal];
     }
@@ -541,7 +539,9 @@
 }
 
 /*
- * Mehod called to get contacts
+ * Get all contacts of mobile 
+ * This function will set data in 
+ 
  */
 -(void)constructInThread:(ABAddressBookRef)m_addressbook{
     
@@ -803,9 +803,10 @@
     NSMutableDictionary *curContactDetails;
     
     contactBackupArray = [[NSMutableArray alloc] initWithArray:contactsArray];
-    ContactsCustomizedModal *tempModal = [contactBackupArray objectAtIndex:indexPath.row];
+    // contact which is going to be edit
+    ContactsCustomizedModal *editingContactModel = [contactBackupArray objectAtIndex:indexPath.row];
     
-    if ( ![customizedContactsString isEqualToString:@""] ){
+    if ( ![untechable.customizedContacts isEqualToString:@""] ){
         
         for ( int i = 0; i < customizedContactsDictionary.count; i++ ){
             
@@ -815,25 +816,25 @@
             
             if ( [[curContactDetails objectForKey:@"contactName"] isEqualToString:detailsController.contactModal.name]
                 &&
-                tempModal.allPhoneNumbers.count == tempPhonesNumbers.count) {
+                editingContactModel.allPhoneNumbers.count == tempPhonesNumbers.count) {
                 
-                tempModal.name = [curContactDetails objectForKey:@"contactName"];
-                tempModal.allPhoneNumbers = [curContactDetails objectForKey:@"phoneNumbers"];
-                tempModal.allEmails = [curContactDetails objectForKey:@"emailAddresses"];
-                tempModal.customTextForContact = [curContactDetails objectForKey:@"customTextForContact"];
+                editingContactModel.name = [curContactDetails objectForKey:@"contactName"];
+                editingContactModel.allPhoneNumbers = [curContactDetails objectForKey:@"phoneNumbers"];
+                editingContactModel.allEmails = [curContactDetails objectForKey:@"emailAddresses"];
+                editingContactModel.customTextForContact = [curContactDetails objectForKey:@"customTextForContact"];
             
-                detailsController.contactModal = tempModal;
+                detailsController.contactModal = editingContactModel;
                 break;
                 
             }else {
                 
-                detailsController.contactModal = tempModal;
+                detailsController.contactModal = editingContactModel;
                 break;
             }
         }
     }else{
         
-        detailsController.contactModal = tempModal;
+        detailsController.contactModal = editingContactModel;
     }
     detailsController.customizedContactsDictionary =  customizedContactsDictionary;
     [self.navigationController pushViewController:detailsController animated:YES];
