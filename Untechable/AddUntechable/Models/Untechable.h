@@ -91,5 +91,6 @@
 
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack;
 -(void)saveOrUpdate;
+-(void)setCustomizedContactsForSession;
 
 @end

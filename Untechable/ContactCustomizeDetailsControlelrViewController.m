@@ -399,9 +399,9 @@
     BOOL alreadyExist = NO;
     int indexToBeChanged = 0;
     
-    for ( int i = 0 ;i<contactListController.currentlyEditingContacts.count;i++){
+    for ( int i = 0 ;i<untechable.customizedContactsForCurrentSession.count;i++){
         
-        ContactsCustomizedModal *tempModal = [contactListController.currentlyEditingContacts objectAtIndex:i];
+        ContactsCustomizedModal *tempModal = [untechable.customizedContactsForCurrentSession objectAtIndex:i];
         
         BOOL phoneNumberFound = NO;
         
@@ -459,15 +459,15 @@
                 &&
                 [[tempStatusArray objectAtIndex:2] isEqualToString:@"0"] )
             {
-                [contactListController.currentlyEditingContacts removeObjectAtIndex:indexToBeChanged];
+                [untechable.customizedContactsForCurrentSession removeObjectAtIndex:indexToBeChanged];
                 
             }else {
                 
-                [contactListController.currentlyEditingContacts replaceObjectAtIndex:indexToBeChanged withObject:contactModal];
+                [untechable.customizedContactsForCurrentSession replaceObjectAtIndex:indexToBeChanged withObject:contactModal];
             }
         }else {
             contactModal.IsCustomized = YES;
-            [contactListController.currentlyEditingContacts addObject:contactModal];
+            [untechable.customizedContactsForCurrentSession addObject:contactModal];
         }
     }
  

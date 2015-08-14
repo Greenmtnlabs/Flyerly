@@ -30,7 +30,7 @@
 
 @implementation ContactsListControllerViewController
 
-@synthesize contactsArray,contactBackupArray,searchTextField,untechable,currentlyEditingContacts, selectedAnyEmail;
+@synthesize contactsArray,contactBackupArray,searchTextField,untechable, selectedAnyEmail;
 
 
 
@@ -47,14 +47,6 @@
     
     [_contactsTable  setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
     [searchTextField setReturnKeyType:UIReturnKeyDone];
-
-    if ( untechable.customizedContactsForCurrentSession.count > 0 ){
-        currentlyEditingContacts = untechable.customizedContactsForCurrentSession;
-    }
-    
-    if ( currentlyEditingContacts == nil ){
-        currentlyEditingContacts = [[NSMutableArray alloc] init];
-    }
     
     [searchTextField resignFirstResponder];
 
@@ -163,7 +155,6 @@
     for (UIViewController *controller in self.navigationController.viewControllers) {
         if ([controller isKindOfClass:[AddUntechableController class]]) {
             
-            untechable.customizedContactsForCurrentSession = currentlyEditingContacts;
             AddUntechableController *addViewController = (AddUntechableController *)controller;
             addViewController.untechable = untechable;
             [self.navigationController popToViewController:addViewController animated:YES];
@@ -185,9 +176,8 @@
 -(void)next:(NSString *)after{
     
     if( [after isEqualToString:@"GO_TO_NEXT"] || [after isEqualToString:@"ON_SKIP"] ) {
-        
-        currentlyEditingContacts = [[NSMutableArray alloc] init];
-        [_contactsTable reloadData];
+        //reset contacts from model
+        [untechable setCustomizedContactsForSession];
         
         SocialnetworkController *socialnetwork;
         socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
@@ -214,22 +204,27 @@
     [self next:@"ON_SKIP"];
     
 }
--(void)onNext{
 
-    if ( currentlyEditingContacts.count > 0 ){
+/**
+ * Want to send email to any contact about untechable
+ */
+-(BOOL)haveSelectedAnyEmail{
+    BOOL wantToSend = NO;
+    for (int i = 0;i<untechable.customizedContactsForCurrentSession.count; i++){
+        ContactsCustomizedModal *previousModal = [untechable.customizedContactsForCurrentSession objectAtIndex:i];
         
-        for (int i = 0;i<currentlyEditingContacts.count; i++){
-            ContactsCustomizedModal *previousModal = [currentlyEditingContacts objectAtIndex:i];
+        if ( [[previousModal.cutomizingStatusArray objectAtIndex:0] isEqualToString:@"1"] ){
             
-            if ( [[previousModal.cutomizingStatusArray objectAtIndex:0] isEqualToString:@"1"] ){
-                
-                selectedAnyEmail = YES;
-                break;
-            }
+            wantToSend =  YES;
+            break;
         }
     }
     
-    untechable.customizedContactsForCurrentSession = currentlyEditingContacts;
+    return wantToSend;
+}
+-(void)onNext{
+    
+    selectedAnyEmail = [self haveSelectedAnyEmail];
     
     if(![untechable.rUId  isEqualToString: @"1"]){
         if ( selectedAnyEmail  ){
@@ -366,27 +361,25 @@
         _contactModal.img =[[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"dfcontact" ofType:@"jpg"]];
     }
     
-    if ( currentlyEditingContacts.count > 0 ){
+    
+    for (int i = 0;i<untechable.customizedContactsForCurrentSession.count; i++){
         
-        for (int i = 0;i<currentlyEditingContacts.count; i++){
-            
-            ContactsCustomizedModal *previousModal = [currentlyEditingContacts objectAtIndex:i];
-            
-            if ( [previousModal.name isEqualToString:_contactModal.name] &&
-                 previousModal.allPhoneNumbers.count == _contactModal.allPhoneNumbers.count )
-            {
-                _contactModal.cutomizingStatusArray = previousModal.cutomizingStatusArray;
-                if ( [[_contactModal.cutomizingStatusArray objectAtIndex:0] isEqualToString:@"1"] ){
-                    selectedAnyEmail = YES;
-                }
-                if ( previousModal.IsCustomized ) {
-                    _contactModal.IsCustomized = YES;
-                }
+        ContactsCustomizedModal *previousModal = [untechable.customizedContactsForCurrentSession objectAtIndex:i];
+        
+        if ( [previousModal.name isEqualToString:_contactModal.name] &&
+             previousModal.allPhoneNumbers.count == _contactModal.allPhoneNumbers.count )
+        {
+            _contactModal.cutomizingStatusArray = previousModal.cutomizingStatusArray;
+            if ( [[_contactModal.cutomizingStatusArray objectAtIndex:0] isEqualToString:@"1"] ){
+                selectedAnyEmail = YES;
+            }
+            if ( previousModal.IsCustomized ) {
+                _contactModal.IsCustomized = YES;
             }
         }
     }
     
-    if ( currentlyEditingContacts.count <= 0 && [untechable.customizedContacts isEqualToString:@""] ){
+    if ( untechable.customizedContactsForCurrentSession.count <= 0 && [untechable.customizedContacts isEqualToString:@""] ){
         
         [self resetContactModal:_contactModal];
     }
@@ -662,11 +655,9 @@
         // Here we getting all previously customized contacts status and setting it according to contact modal
         ContactsCustomizedModal *previuoslyEditedContact;
         
-        for ( int editedContactsArrIndex = 0; editedContactsArrIndex < currentlyEditingContacts.count; editedContactsArrIndex++ ){
+        for ( int editedContactsArrIndex = 0; editedContactsArrIndex < untechable.customizedContactsForCurrentSession.count; editedContactsArrIndex++ ){
             
-            previuoslyEditedContact = [[ContactsCustomizedModal alloc] init];
-            
-            previuoslyEditedContact = [currentlyEditingContacts objectAtIndex:editedContactsArrIndex];
+            previuoslyEditedContact = [untechable.customizedContactsForCurrentSession objectAtIndex:editedContactsArrIndex];
             
             // getting previously customized contact phone numbers
             NSMutableArray *tempPhoneNumbers = previuoslyEditedContact.allPhoneNumbers;

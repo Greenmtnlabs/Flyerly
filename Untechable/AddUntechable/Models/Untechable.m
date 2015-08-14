@@ -187,7 +187,7 @@
         
         dic[@"customizedContacts"] = [commonFunctions convertCCMArrayIntoJsonString:customizedContactsForCurrentSession];
         customizedContacts = ( dic[@"customizedContacts"] ) ? dic[@"customizedContacts"] : @"";
-        customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:customizedContacts];
+        [self setCustomizedContactsForSession];
         
         //Screen3 vars
         dic[@"socialStatus"] = socialStatus;
@@ -270,6 +270,10 @@
     }
     
     //NSLog(@"dic: %@", dic);
+}
+
+-(void) setCustomizedContactsForSession {
+    customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:customizedContacts];
 }
 
 /**
