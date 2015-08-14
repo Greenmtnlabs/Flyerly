@@ -151,15 +151,8 @@
 		366ECD7E19D3135200F71A11 /* Untechable.m in Sources */ = {isa = PBXBuildFile; fileRef = 366ECD7D19D3135200F71A11 /* Untechable.m */; };
 		366ECD9619D323DA00F71A11 /* AddUntechableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 366ECD9419D323DA00F71A11 /* AddUntechableController.m */; };
 		366ECD9719D323DA00F71A11 /* AddUntechableController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 366ECD9519D323DA00F71A11 /* AddUntechableController.xib */; };
-		366ECD9B19D323E200F71A11 /* PhoneSetupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 366ECD9919D323E200F71A11 /* PhoneSetupController.m */; };
-		366ECD9C19D323E200F71A11 /* PhoneSetupController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 366ECD9A19D323E200F71A11 /* PhoneSetupController.xib */; };
 		366F9DAA1A124FC7006602E1 /* FHSStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 366F9DA71A124FC7006602E1 /* FHSStream.m */; };
 		366F9DAB1A124FC7006602E1 /* FHSTwitterEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 366F9DA91A124FC7006602E1 /* FHSTwitterEngine.m */; };
-		3681603C19E6B81E00B9B64C /* ContactsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3681603519E6B81E00B9B64C /* ContactsModel.m */; };
-		3681603D19E6B81E00B9B64C /* InviteFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3681603719E6B81E00B9B64C /* InviteFriendsCell.m */; };
-		3681603E19E6B81E00B9B64C /* InviteFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3681603819E6B81E00B9B64C /* InviteFriendsCell.xib */; };
-		3681603F19E6B81E00B9B64C /* InviteFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3681603A19E6B81E00B9B64C /* InviteFriendsController.m */; };
-		3681604019E6B81E00B9B64C /* InviteFriendsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3681603B19E6B81E00B9B64C /* InviteFriendsController.xib */; };
 		36A370B819F53E6D005A7AFE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36A370B719F53E6D005A7AFE /* AVFoundation.framework */; };
 		36B006481A161B92005C3791 /* untechable.mov in Resources */ = {isa = PBXBuildFile; fileRef = 36B006471A161B92005C3791 /* untechable.mov */; };
 		36B036A619DAF44D00E8CD21 /* EmailSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B036A419DAF44D00E8CD21 /* EmailSettingController.m */; };
@@ -429,21 +422,10 @@
 		366ECD9319D323DA00F71A11 /* AddUntechableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddUntechableController.h; path = AddUntechable/AddUntechableController/AddUntechableController.h; sourceTree = "<group>"; };
 		366ECD9419D323DA00F71A11 /* AddUntechableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddUntechableController.m; path = AddUntechable/AddUntechableController/AddUntechableController.m; sourceTree = "<group>"; };
 		366ECD9519D323DA00F71A11 /* AddUntechableController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddUntechableController.xib; path = AddUntechable/AddUntechableController/AddUntechableController.xib; sourceTree = "<group>"; };
-		366ECD9819D323E200F71A11 /* PhoneSetupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhoneSetupController.h; path = AddUntechable/PhoneSetupController/PhoneSetupController.h; sourceTree = "<group>"; };
-		366ECD9919D323E200F71A11 /* PhoneSetupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneSetupController.m; path = AddUntechable/PhoneSetupController/PhoneSetupController.m; sourceTree = "<group>"; };
-		366ECD9A19D323E200F71A11 /* PhoneSetupController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhoneSetupController.xib; path = AddUntechable/PhoneSetupController/PhoneSetupController.xib; sourceTree = "<group>"; };
 		366F9DA61A124FC7006602E1 /* FHSStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FHSStream.h; sourceTree = "<group>"; };
 		366F9DA71A124FC7006602E1 /* FHSStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FHSStream.m; sourceTree = "<group>"; };
 		366F9DA81A124FC7006602E1 /* FHSTwitterEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FHSTwitterEngine.h; sourceTree = "<group>"; };
 		366F9DA91A124FC7006602E1 /* FHSTwitterEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FHSTwitterEngine.m; sourceTree = "<group>"; };
-		3681603419E6B81E00B9B64C /* ContactsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsModel.h; sourceTree = "<group>"; };
-		3681603519E6B81E00B9B64C /* ContactsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsModel.m; sourceTree = "<group>"; };
-		3681603619E6B81E00B9B64C /* InviteFriendsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendsCell.h; sourceTree = "<group>"; };
-		3681603719E6B81E00B9B64C /* InviteFriendsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsCell.m; sourceTree = "<group>"; };
-		3681603819E6B81E00B9B64C /* InviteFriendsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendsCell.xib; sourceTree = "<group>"; };
-		3681603919E6B81E00B9B64C /* InviteFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendsController.h; sourceTree = "<group>"; };
-		3681603A19E6B81E00B9B64C /* InviteFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsController.m; sourceTree = "<group>"; };
-		3681603B19E6B81E00B9B64C /* InviteFriendsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendsController.xib; sourceTree = "<group>"; };
 		36A370B719F53E6D005A7AFE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		36B006471A161B92005C3791 /* untechable.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = untechable.mov; sourceTree = "<group>"; };
 		36B036A319DAF44D00E8CD21 /* EmailSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmailSettingController.h; path = AddUntechable/EmailSettingController/EmailSettingController.h; sourceTree = "<group>"; };
@@ -849,7 +831,6 @@
 				2402BB7F1A1DBEF800255A73 /* UntechableListController */,
 				366ECD8619D322D700F71A11 /* AddUntechableController */,
 				24354D671A499D93000EC781 /* ContactsListController */,
-				366ECD8719D322F800F71A11 /* PhoneSetupController */,
 				36524AED19D9409C006DCAAF /* SocialnetworkController */,
 				36B0369F19DAF3E400E8CD21 /* EmailSettingController */,
 				36BB7B8219FFD94D00562069 /* ThankyouController */,
@@ -895,17 +876,6 @@
 			name = AddUntechableController;
 			sourceTree = "<group>";
 		};
-		366ECD8719D322F800F71A11 /* PhoneSetupController */ = {
-			isa = PBXGroup;
-			children = (
-				3681603319E6B81E00B9B64C /* InviteScreen */,
-				366ECD9819D323E200F71A11 /* PhoneSetupController.h */,
-				366ECD9919D323E200F71A11 /* PhoneSetupController.m */,
-				366ECD9A19D323E200F71A11 /* PhoneSetupController.xib */,
-			);
-			name = PhoneSetupController;
-			sourceTree = "<group>";
-		};
 		366F9DA51A124FC7006602E1 /* FHSTwitterEngine */ = {
 			isa = PBXGroup;
 			children = (
@@ -915,22 +885,6 @@
 				366F9DA91A124FC7006602E1 /* FHSTwitterEngine.m */,
 			);
 			path = FHSTwitterEngine;
-			sourceTree = "<group>";
-		};
-		3681603319E6B81E00B9B64C /* InviteScreen */ = {
-			isa = PBXGroup;
-			children = (
-				3681603619E6B81E00B9B64C /* InviteFriendsCell.h */,
-				3681603719E6B81E00B9B64C /* InviteFriendsCell.m */,
-				3681603819E6B81E00B9B64C /* InviteFriendsCell.xib */,
-				3681603419E6B81E00B9B64C /* ContactsModel.h */,
-				3681603519E6B81E00B9B64C /* ContactsModel.m */,
-				3681603919E6B81E00B9B64C /* InviteFriendsController.h */,
-				3681603A19E6B81E00B9B64C /* InviteFriendsController.m */,
-				3681603B19E6B81E00B9B64C /* InviteFriendsController.xib */,
-			);
-			name = InviteScreen;
-			path = AddUntechable/PhoneSetupController/InviteScreen;
 			sourceTree = "<group>";
 		};
 		36B0369A19DAD2AB00E8CD21 /* images */ = {
@@ -1249,7 +1203,6 @@
 				200ACE2D1A3874B200DC7047 /* icloudIcon.png in Resources */,
 				2402BB891A1DC3A200255A73 /* UntechableTableCell.xib in Resources */,
 				36B276781A0124E800ED58AD /* record_gray@2x.png in Resources */,
-				366ECD9C19D323E200F71A11 /* PhoneSetupController.xib in Resources */,
 				2486CBA51A5A79AC00AC125E /* sms.png in Resources */,
 				36B2767D1A0124E800ED58AD /* searchicon@2x.png in Resources */,
 				36B276711A0124E800ED58AD /* pause.png in Resources */,
@@ -1316,7 +1269,6 @@
 				C37F755E1A7F50D100B5AC71 /* fb_Like@3x.png in Resources */,
 				2465A60B1B4BE1C400B3E22C /* navigation2_3x.png in Resources */,
 				2486CBAA1A5A79F500AC125E /* email_selected.png in Resources */,
-				3681604019E6B81E00B9B64C /* InviteFriendsController.xib in Resources */,
 				C334E60D1A777472005539B4 /* logo-Other@2x.png in Resources */,
 				247402431B33CBD700459759 /* SetupGuideViewController.xib in Resources */,
 				C346D1811A7FD13B00856A58 /* twitter@2x.png in Resources */,
@@ -1371,7 +1323,6 @@
 				2486CBAB1A5A79F500AC125E /* email_selected@2x.png in Resources */,
 				C346D1771A7FD13B00856A58 /* logout@3x.png in Resources */,
 				366EAF981A14C3530011D6C6 /* icon-76.png in Resources */,
-				3681603E19E6B81E00B9B64C /* InviteFriendsCell.xib in Resources */,
 				C36D2E601A791ADA000537C5 /* SettingsCellView-iPhone6.xib in Resources */,
 				C346D1761A7FD13B00856A58 /* logout.png in Resources */,
 				2465A60A1B4BE1C400B3E22C /* navigation2_2x.png in Resources */,
@@ -1516,16 +1467,12 @@
 				24A4B7A71A5126410029C8DF /* CustomTextTableViewCell.m in Sources */,
 				366F9DAA1A124FC7006602E1 /* FHSStream.m in Sources */,
 				243C59F91A4D984B0020350C /* PhoneNumberCell.m in Sources */,
-				3681603C19E6B81E00B9B64C /* ContactsModel.m in Sources */,
 				243C59FE1A4DA17C0020350C /* EmailCell.m in Sources */,
 				24BAB1881A2F0E8C00855B77 /* Reachability.m in Sources */,
 				366F9DAB1A124FC7006602E1 /* FHSTwitterEngine.m in Sources */,
 				2402BB831A1DBF6A00255A73 /* UntechablesList.m in Sources */,
 				2402BB881A1DC3A200255A73 /* UntechableTableCell.m in Sources */,
-				366ECD9B19D323E200F71A11 /* PhoneSetupController.m in Sources */,
-				3681603F19E6B81E00B9B64C /* InviteFriendsController.m in Sources */,
 				3663932519D6A0A700512965 /* CommonFunctions.m in Sources */,
-				3681603D19E6B81E00B9B64C /* InviteFriendsCell.m in Sources */,
 				36474F2919D9AC3800084F34 /* UIPlaceHolderTextView.m in Sources */,
 				36B036A619DAF44D00E8CD21 /* EmailSettingController.m in Sources */,
 				24AFE79B1B38086A00CC8230 /* SetupGuideThirdView.m in Sources */,

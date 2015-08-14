@@ -7,7 +7,6 @@
 //
 
 #import "AddUntechableController.h"
-#import "PhoneSetupController.h"
 #import "ThankyouController.h"
 #import "Common.h"
 #import "BSKeyboardControls.h"
