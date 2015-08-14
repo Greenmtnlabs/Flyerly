@@ -30,7 +30,7 @@
 
 @implementation ContactsListControllerViewController
 
-@synthesize contactModalsArray,contactsArray,contactBackupArray,searchTextField,selectedIdentifiers,untechable,currentlyEditingContacts, selectedAnyEmail;
+@synthesize contactsArray,contactBackupArray,searchTextField,selectedIdentifiers,untechable,currentlyEditingContacts, selectedAnyEmail;
 
 
 
