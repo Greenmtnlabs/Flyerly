@@ -23,7 +23,6 @@
 //Array of all phone contacts
 @property(nonatomic,strong) NSMutableArray *contactsArray;
 @property(nonatomic,strong) NSMutableArray *contactBackupArray;
-@property(nonatomic,strong) NSMutableArray *selectedIdentifiers;
 @property(nonatomic,strong) NSMutableArray *currentlyEditingContacts;
 
 //This will help us on next, if emails are exist then go to setup email screen

@@ -30,7 +30,7 @@
 
 @implementation ContactsListControllerViewController
 
-@synthesize contactsArray,contactBackupArray,searchTextField,selectedIdentifiers,untechable,currentlyEditingContacts, selectedAnyEmail;
+@synthesize contactsArray,contactBackupArray,searchTextField,untechable,currentlyEditingContacts, selectedAnyEmail;
 
 
 
@@ -352,10 +352,6 @@
         }
     }
     
-    if(!self.selectedIdentifiers){
-        self.selectedIdentifiers = [[NSMutableArray alloc] init];
-    }
-    
     ContactsCustomizedModal *_contactModal;
     
     if ( [[ self getArrayOfSelectedTab ] count ] >= 1 ){
@@ -486,8 +482,6 @@
  * This method is used to load device contact details
  */
 - (IBAction)loadLocalContacts{
-    
-    self.selectedIdentifiers = [[NSMutableArray alloc] init];
     
     [_contactsTable reloadData];
     
