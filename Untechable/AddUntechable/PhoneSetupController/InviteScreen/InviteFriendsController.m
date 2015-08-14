@@ -330,18 +330,10 @@
     return 1;
 }
 
--(NSArray *) getArrayOfSelectedTab{
-        return contactsArray;
-}
-
--(NSArray *) getBackupArrayOfSelectedTab{
-        return contactBackupArray;
-}
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    int count = ([[self getArrayOfSelectedTab] count]);
-    return  count;
+    return  contactsArray.count;
 }
 
 
@@ -363,12 +355,12 @@
     
     ContactsModel *receivedDic;
     
-    if ( [[ self getArrayOfSelectedTab ] count ] >= 1 ){
+    if ( contactsArray.count >= 1 ){
         
         // GETTING DATA FROM RECEIVED DICTIONARY
         // SET OVER MODEL FROM DATA
        
-        receivedDic = [self getArrayOfSelectedTab ][(indexPath.row)];
+        receivedDic = contactsArray[(indexPath.row)];
     }
 
     if (receivedDic.img == nil) {
@@ -404,7 +396,7 @@
     // HERE WE WORK FOR CONTACTS
     if (YES) {
         
-        ContactsModel *model = [self getArrayOfSelectedTab][(indexPath.row)];
+        ContactsModel *model = contactsArray[(indexPath.row)];
         
 
         if (model.status == CHECKBOX_EMPTY ) {
@@ -462,10 +454,10 @@
     
     NSMutableArray *filteredArray = [[NSMutableArray alloc] init];
     
-    for(int contactIndex=0; contactIndex<[[self getBackupArrayOfSelectedTab] count]; contactIndex++){
+    for(int contactIndex=0; contactIndex<[contactBackupArray count]; contactIndex++){
         // Get left contact data
         
-        ContactsModel *model = [self getBackupArrayOfSelectedTab][contactIndex];
+        ContactsModel *model = contactBackupArray[contactIndex];
         
         NSString *name = model.name;
         

@@ -314,15 +314,11 @@
     // Dispose of any resources that can be recreated.
 }
 
--(NSArray *) getArrayOfSelectedTab{
-    
-        return contactsArray;
-}
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return  self.getArrayOfSelectedTab.count;
+    return  contactsArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -349,12 +345,12 @@
     
     ContactsCustomizedModal *_contactModal;
     
-    if ( [[ self getArrayOfSelectedTab ] count ] >= 1 ){
+    if ( contactsArray.count >= 1 ){
         
         // GETTING DATA FROM RECEIVED DICTIONARY
         // SET OVER MODEL FROM DATA
         
-        _contactModal = [self getArrayOfSelectedTab ][(indexPath.row)];
+        _contactModal = contactsArray[(indexPath.row)];
     }
     
     if (_contactModal.img == nil) {
@@ -442,10 +438,10 @@
     
     NSMutableArray *filteredArray = [[NSMutableArray alloc] init];
     
-    for(int contactIndex=0; contactIndex<[[self getBackupArrayOfSelectedTab] count]; contactIndex++){
+    for(int contactIndex=0; contactIndex<[contactBackupArray count]; contactIndex++){
         // Get left contact data
         
-        ContactsCustomizedModal *contactModal = [self getBackupArrayOfSelectedTab][contactIndex];
+        ContactsCustomizedModal *contactModal = contactBackupArray[contactIndex];
         
         NSString *name = contactModal.name;
         
@@ -464,10 +460,7 @@
     return YES;
 }
 
--(NSArray *) getBackupArrayOfSelectedTab{
-    
-    return contactBackupArray;
-}
+
 
 #pragma mark  Device Contact List
 
