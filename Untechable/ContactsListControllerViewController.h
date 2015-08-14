@@ -20,16 +20,17 @@
 }
 
 @property (nonatomic,strong)  Untechable *untechable;
-//Array of all phone contacts
+
+//Array of all phone contacts (extracted from phonebook )
 @property(nonatomic,strong) NSMutableArray *contactsArray;
+//This array required because when user searched any name, above contactsArray will sort a/c to name,
+//but when user remove searching text, we have to fill that array with it
 @property(nonatomic,strong) NSMutableArray *contactBackupArray;
 
 //This will help us on next, if emails are exist then go to setup email screen
 @property(assign) BOOL selectedAnyEmail;
-
-@property(nonatomic,strong) IBOutlet UITextField *searchTextField;
 - (void) showEmailSetupScreen : ( BOOL ) calledFromSetupScreen;
 
-
+@property(nonatomic,strong) IBOutlet UITextField *searchTextField;
 
 @end

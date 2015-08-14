@@ -58,12 +58,8 @@
     
     [self setNavigation:@"viewDidLoad"];
     
-    contactBackupArray = nil;
-    
     // Load device contacts
     [self loadLocalContacts];
-        
-
     
     selectedAnyEmail = NO;
     
@@ -407,60 +403,62 @@
 
 - (IBAction)onSearchClick:(UIButton *)sender{
     
-    if([searchTextField canResignFirstResponder])
-    {
+    if([searchTextField canResignFirstResponder]){
         [searchTextField resignFirstResponder];
     }
     
     [self textField:searchTextField shouldChangeCharactersInRange:NSMakeRange(0, 0) replacementString:@""];
 }
 
+/**
+ * When user starts typing in search contact input field
+ */
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
     if([string isEqualToString:@"\n"]){
-        if([searchTextField canResignFirstResponder])
-        {
+        if([searchTextField canResignFirstResponder]) {
             [searchTextField resignFirstResponder];
         }
         return NO;
-    }
-    
-    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    
-    if([newString isEqualToString:@""]){
         
-        contactsArray = contactBackupArray;
+    } else{
         
-        [_contactsTable performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-        
-        return YES;
-    }
-    
-    NSMutableArray *filteredArray = [[NSMutableArray alloc] init];
-    
-    for(int contactIndex=0; contactIndex<[contactBackupArray count]; contactIndex++){
-        // Get left contact data
-        
-        ContactsCustomizedModal *contactModal = contactBackupArray[contactIndex];
-        
-        NSString *name = contactModal.name;
-        
-        if([[name lowercaseString] rangeOfString:[newString lowercaseString]].location == NSNotFound){
+        //When text is empty reset contactsArray with contactBackupArray
+        NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        if([newString isEqualToString:@""]){
             
-        } else {
-            [filteredArray addObject:contactModal];
+            [self resetContactsArrayFromBackupArray];
+            [self reloadContactsTableInMainThread];
+            return YES;
+            
+        } else{
+            //Filter array a/c to search text
+            NSMutableArray *filteredArray = [[NSMutableArray alloc] init];
+            
+            for(int contactIndex=0; contactIndex<contactBackupArray.count; contactIndex++) {
+                
+                ContactsCustomizedModal *contactModal = contactBackupArray[contactIndex];
+                NSString *name = contactModal.name;
+                
+                if( !([[name lowercaseString] rangeOfString:[newString lowercaseString]].location == NSNotFound) ){
+                    [filteredArray addObject:contactModal];
+                }
+            }
+            
+            contactsArray = filteredArray;
+            [self reloadContactsTableInMainThread];
+            return YES;
         }
     }
-    
-    
-    contactsArray = filteredArray;
-    
-    [_contactsTable performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-    
-    return YES;
 }
 
-
+// Reload table data after all the contacts get loaded
+-(void)resetContactsArrayFromBackupArray{
+    contactsArray = [[NSMutableArray alloc] initWithArray:contactBackupArray];
+}
+-(void)reloadContactsTableInMainThread{
+    [_contactsTable performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+}
 
 #pragma mark  Device Contact List
 
@@ -469,20 +467,15 @@
  */
 - (IBAction)loadLocalContacts{
     
-    [_contactsTable reloadData];
-    
     // init contact array
-    if(contactBackupArray){
+    if( contactBackupArray ){
         
-        // Reload table data after all the contacts get loaded
-        contactsArray = nil;
-        contactsArray = contactBackupArray;
-        
+        [self resetContactsArrayFromBackupArray];
         
         // Filter contacts on new tab selection
         [self onSearchClick:nil];
         
-        [_contactsTable performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+        [self reloadContactsTableInMainThread];
     } else {
         
         contactsArray = [[NSMutableArray alloc] init];
@@ -519,9 +512,7 @@
 }
 
 /*
- * Get all contacts of mobile 
- * This function will set data in 
- 
+ * Set all contacts of mobile in contactsArray, this is a kind of call back
  */
 -(void)constructInThread:(ABAddressBookRef)m_addressbook{
     
@@ -754,9 +745,8 @@
         }
     }
     // Reload table data after all the contacts get loaded
-    contactBackupArray = nil;
     contactBackupArray = [[NSMutableArray alloc] initWithArray:contactsArray];
-    [_contactsTable performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+    [self reloadContactsTableInMainThread];
 }
 
 
@@ -779,10 +769,8 @@
     detailsController.contactListController = self;
     
     NSMutableDictionary *curContactDetails;
-    
-    contactBackupArray = [[NSMutableArray alloc] initWithArray:contactsArray];
     // contact which is going to be edit
-    ContactsCustomizedModal *editingContactModel = [contactBackupArray objectAtIndex:indexPath.row];
+    ContactsCustomizedModal *editingContactModel = [contactsArray objectAtIndex:indexPath.row];
     
     if ( ![untechable.customizedContacts isEqualToString:@""] ){
         
