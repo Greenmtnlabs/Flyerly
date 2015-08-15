@@ -29,7 +29,7 @@
 
 @implementation ContactCustomizeDetailsControlelrViewController
 
-@synthesize contactModal,untechable,allEmails,allPhoneNumbers,customTextForContact,contactListController;
+@synthesize contactModal,untechable;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -65,9 +65,6 @@
 #pragma mark -  Navigation functions
 - (void)setNavigationDefaults{
     
-    defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
-    defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
-    
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
 }
@@ -86,7 +83,7 @@
         backButton.titleLabel.shadowColor = [UIColor clearColor];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [backButton setTitle:TITLE_BACK_TXT forState:normal];
-        [backButton setTitleColor:defGray forState:UIControlStateNormal];
+        [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         
         [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
         backButton.showsTouchWhenHighlighted = YES;
@@ -106,7 +103,7 @@
         //[saveButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
         saveButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [saveButton setTitle:TITLE_SAVE_TXT forState:normal];
-        [saveButton setTitleColor:defGray forState:UIControlStateNormal];
+        [saveButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [saveButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
         [saveButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
         
@@ -132,7 +129,7 @@
     [self setNextHighlighted:NO];
 }
 - (void)setNextHighlighted:(BOOL)highlighted {
-    (highlighted) ? [saveButton setBackgroundColor:defGreen] : [saveButton setBackgroundColor:[UIColor clearColor]];
+    (highlighted) ? [saveButton setBackgroundColor:DEF_GREEN] : [saveButton setBackgroundColor:[UIColor clearColor]];
 }
 
 // Customize the number of rows in the table view.
@@ -211,7 +208,7 @@
         }
         
         [cell.customText setDelegate:self];
-        cell.customText.textColor = defGreen;
+        cell.customText.textColor = DEF_GREEN;
         textView = cell.customText;
         
         [cell.customText setReturnKeyType:UIReturnKeyDone];
@@ -352,6 +349,8 @@
     }
     
     
+    
+    
     if ( editingEmailsWithStatus.count > 0 ) {
         for( int j=0; j < editingEmailsWithStatus.count; j++){
             NSArray *allKeys = [editingEmailsWithStatus allKeys];
@@ -479,10 +478,8 @@ shouldChangeTextInRange:(NSRange)range
     return YES;
 }
 
-- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
-    defGray = [UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:150.0/255.0 alpha:1.0];//GRAY
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+
     
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 0)];
     
