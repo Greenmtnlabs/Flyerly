@@ -59,6 +59,8 @@ int indexArrayS2[];
 
 - (void)viewWillAppear:(BOOL)animated{
     
+    NSLog( @"homeDirectoryPath this will help us in finding realm file: %@", NSHomeDirectory() );
+    
     if( loadAllUntecs == 1)
         [self setDefaultModel];
     else
