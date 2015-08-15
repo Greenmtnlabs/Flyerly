@@ -703,7 +703,6 @@
     ContactCustomizeDetailsControlelrViewController *detailsController = [[ContactCustomizeDetailsControlelrViewController alloc] init];
     
     detailsController.untechable = untechable;
-    detailsController.contactListController = self;
 
     // contact which is going to be edit
     ContactsCustomizedModal *editingContactModel = mobileContactsArray[indexPath.row];
