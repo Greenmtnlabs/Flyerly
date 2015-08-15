@@ -363,58 +363,18 @@
     
     BOOL alreadyExist = NO;
     int indexToBeChanged = 0;
+    Boolean  tempStatusArray[3] = { [contactModal getEmailStatus], [contactModal getSmsStatus], [contactModal getPhoneStatus] };
+    BOOL canAddOrUpdate = ( tempStatusArray[0] || tempStatusArray[1] || tempStatusArray[2] );
     
     for ( int i = 0 ;i<untechable.customizedContactsForCurrentSession.count;i++){
-        
         ContactsCustomizedModal *tempModal = [untechable.customizedContactsForCurrentSession objectAtIndex:i];
-        
-        BOOL phoneNumberFound = NO;
-        
-        for ( int j = 0; j<tempModal.allPhoneNumbers.count; j++ ){
-            
-            NSMutableArray *phoneDetails = [tempModal.allPhoneNumbers objectAtIndex:j];
-            NSString *anyNumber = [phoneDetails objectAtIndex:1];
-            
-            for ( int k=0; k<contactModal.allPhoneNumbers.count; k++){
-                 NSMutableArray *otherPhoneDetails = [contactModal.allPhoneNumbers objectAtIndex:k];
-                
-                if ( [anyNumber isEqualToString:[otherPhoneDetails objectAtIndex:1]] ){
-                    phoneNumberFound = YES;
-                }
-            }
-        }
-        
-        BOOL emailAddressFound = NO;
-        
-        for ( int l = 0; l<tempModal.allEmails.count; l++ ){
-            
-            NSMutableArray *emailDetails = [tempModal.allEmails objectAtIndex:l];
-            
-            NSString *anyEmail = [emailDetails objectAtIndex:0];
-            
-            for ( int m = 0; m<contactModal.allEmails.count; m++ ){
-                NSMutableArray *otherEmailDetails = [contactModal.allEmails objectAtIndex:m];
-                
-                if ( [anyEmail isEqualToString:[otherEmailDetails objectAtIndex:0]] ){
-                    emailAddressFound = YES;
-                }
-            }
-        }
-        
-        if ( [tempModal.name isEqualToString:contactModal.name] ){
-            
-            if ( emailAddressFound || phoneNumberFound ){
+        if ( [tempModal.name isEqualToString:contactModal.name] && canAddOrUpdate ){
                 alreadyExist = YES;
                 indexToBeChanged = i;
-            }
+                break;
         }
     }
-    
 
-    
-    Boolean  tempStatusArray[3] = { [contactModal getEmailStatus], [contactModal getSmsStatus], [contactModal getPhoneStatus] };
-    
-     BOOL canAddOrUpdate = ( tempStatusArray[0] || tempStatusArray[1] || tempStatusArray[2] );
     if ( alreadyExist ) {
         if ( canAddOrUpdate ) {
             [untechable.customizedContactsForCurrentSession replaceObjectAtIndex:indexToBeChanged withObject:contactModal];
