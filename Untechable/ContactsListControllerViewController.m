@@ -741,7 +741,7 @@
         }
     }
     
-    
+    mobileContModel.customTextForContact = sessionModel.customTextForContact;
     
     return mobileContModel;
 }
