@@ -31,7 +31,6 @@
 @property (nonatomic,strong)NSString *homeNumber;
 @property (nonatomic,strong)NSString *workNumber;
 
-@property (nonatomic, assign) BOOL IsCustomized;
 
 -(BOOL)getEmailStatus;
 -(BOOL)getSmsStatus;

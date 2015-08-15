@@ -29,36 +29,29 @@
     self.contactImage.layer.cornerRadius = self.contactImage.frame.size.width / 2;
     self.contactImage.clipsToBounds = YES;
     
-    if ( model.IsCustomized ){
-        // HERE WE SET SOCIAL NETWORK STATUS OF FLYER
-        NSInteger statusCount = 0;
-        UIImageView *iconImage;
-        
-        
-        iconImage = [_customizationStatus objectAtIndex:statusCount];
-        if ( [model getEmailStatus] ) {
-            iconImage.image = [UIImage imageNamed:@"email_selected"];
-            statusCount++;
-        }
-        
-        iconImage = [_customizationStatus objectAtIndex:statusCount];
-        if ( [model getPhoneStatus] ) {
-            iconImage.image = [UIImage imageNamed:@"sms_selected"];
-            statusCount++;
-        }
-        
-        iconImage = [_customizationStatus objectAtIndex:statusCount];
-        if ( [model getSmsStatus] ) {
-            iconImage.image = [UIImage imageNamed:@"phone_selected"];
-            statusCount++;
-        }
+    
+    // HERE WE SET SOCIAL NETWORK STATUS OF FLYER
+    NSInteger statusCount = 0;
+    UIImageView *iconImage;
+    
+    
+    iconImage = [_customizationStatus objectAtIndex:statusCount];
+    if ( [model getEmailStatus] ) {
+        iconImage.image = [UIImage imageNamed:@"email_selected"];
+        statusCount++;
     }
-    /*if ([model.others isEqualToString:@""]){
-        [description setText:model.description];
-    }else {
-        [description setText:model.others];
+    
+    iconImage = [_customizationStatus objectAtIndex:statusCount];
+    if ( [model getPhoneStatus] ) {
+        iconImage.image = [UIImage imageNamed:@"sms_selected"];
+        statusCount++;
     }
-    [imgview setImage:model.img];*/
+    
+    iconImage = [_customizationStatus objectAtIndex:statusCount];
+    if ( [model getSmsStatus] ) {
+        iconImage.image = [UIImage imageNamed:@"phone_selected"];
+        statusCount++;
+    }
     model.delegate = self;
    
 }

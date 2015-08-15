@@ -332,33 +332,14 @@
     }
 
     //we are rendering cell with the help of mobileContactsArray, thisMCAmodel is one contact model
-    ContactsCustomizedModal *thisMCAmodel = mobileContactsArray[indexPath.row];
-    
-    // check in session(previously selected contacts), have we any thing for this contact
-    for (int i = 0;i<untechable.customizedContactsForCurrentSession.count; i++){
-        ContactsCustomizedModal *previousModal = [untechable.customizedContactsForCurrentSession objectAtIndex:i];
-        
-        if ( [previousModal.name isEqualToString:thisMCAmodel.name] &&
-             previousModal.allPhoneNumbers.count == thisMCAmodel.allPhoneNumbers.count )
-        {
-
-            if ( previousModal.IsCustomized ) {
-                thisMCAmodel.IsCustomized = YES;
-            }
-        }
-    }
-    
-    if ( untechable.customizedContactsForCurrentSession.count <= 0 ){
-        [self resetContactModal:thisMCAmodel];
-    }
-
+    ContactsCustomizedModal *thisMCAmodel = mobileContactsArray[indexPath.row];    
     // HERE WE PASS DATA TO CELL CLASS
     [cell setCellObjects:thisMCAmodel :1 :@"InviteFriends"];
     
     return cell;
 }
 
-- (void)resetContactModal:(ContactsCustomizedModal *)contactModal{
+- (void)resetContactModal2:(ContactsCustomizedModal *)contactModal{
     for ( int i=0;i<contactModal.allPhoneNumbers.count;i++){
         NSMutableArray *tempPhoneArray = [contactModal.allPhoneNumbers objectAtIndex:i];
         [tempPhoneArray setObject:@"0" atIndexedSubscript:2];
@@ -640,8 +621,6 @@
                         
                         previuoslyEditedContact.allPhoneNumbers = currentltRenderingContactModal.allPhoneNumbers;
                         
-                        currentltRenderingContactModal.IsCustomized = YES;
-                        
                         currentltRenderingContactModal.customTextForContact = previuoslyEditedContact.customTextForContact;
                     }
                 }
@@ -685,9 +664,7 @@
                         [currentltRenderingContactModal.allEmails replaceObjectAtIndex:j withObject:currentContactEmailDetails];
                         
                         previuoslyEditedContact.allEmails = currentltRenderingContactModal.allEmails;
-                        
-                        currentltRenderingContactModal.IsCustomized = YES;
-                        
+
                         currentltRenderingContactModal.customTextForContact = previuoslyEditedContact.customTextForContact;
                         
                         break;

@@ -11,7 +11,7 @@
 
 @implementation ContactsCustomizedModal
 
-@synthesize delegate,name,description,img,checkImageName,status,others,imageUrl,zip,mobileNumber,mainNumber,iPhoneNumber,homeNumber,workNumber,allEmails,allPhoneNumbers,phoneNumbersStatus,customTextForContact,untechable,IsCustomized;
+@synthesize delegate,name,description,img,checkImageName,status,others,imageUrl,zip,mobileNumber,mainNumber,iPhoneNumber,homeNumber,workNumber,allEmails,allPhoneNumbers,phoneNumbersStatus,customTextForContact,untechable;
 
 
 -(id)init{

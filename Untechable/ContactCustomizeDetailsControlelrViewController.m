@@ -19,7 +19,6 @@
     NSArray *phoneNumberTypes;
     NSMutableDictionary *curContactDetails;
     UITextView *textView;
-    BOOL IsCustomized;
     NSMutableDictionary *editingEmailsWithStatus;
     NSMutableDictionary *editingPhonesWithStatus;
     
@@ -55,12 +54,6 @@
         NSMutableArray *emailWithStatus = [[NSMutableArray alloc] initWithArray:[contactModal.allEmails objectAtIndex:i]];
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:3] ;
         [editingEmailsWithStatus setObject:emailWithStatus forKey:indexPath];
-    }
-    
-    
-    
-    if( contactModal.IsCustomized ){
-        IsCustomized = YES;
     }
 }
 
@@ -422,28 +415,21 @@
     Boolean  tempStatusArray[3] = { [contactModal getEmailStatus], [contactModal getSmsStatus], [contactModal getPhoneStatus] };
     
      BOOL canAddOrUpdate = ( tempStatusArray[0] || tempStatusArray[1] || tempStatusArray[2] );
-    
-    
-    if ( IsCustomized ){
-        
-        if ( alreadyExist ) {
-            if ( canAddOrUpdate ) {
-                [untechable.customizedContactsForCurrentSession replaceObjectAtIndex:indexToBeChanged withObject:contactModal];
-            }else {
-                [untechable.customizedContactsForCurrentSession removeObjectAtIndex:indexToBeChanged];
-            }
-        }else if( canAddOrUpdate ) {
-            contactModal.IsCustomized = YES;
-            [untechable.customizedContactsForCurrentSession addObject:contactModal];
+    if ( alreadyExist ) {
+        if ( canAddOrUpdate ) {
+            [untechable.customizedContactsForCurrentSession replaceObjectAtIndex:indexToBeChanged withObject:contactModal];
+        }else {
+            [untechable.customizedContactsForCurrentSession removeObjectAtIndex:indexToBeChanged];
         }
+    }else if( canAddOrUpdate ) {
+        [untechable.customizedContactsForCurrentSession addObject:contactModal];
     }
- 
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(IBAction)emailButtonTapped:(id) sender
-{
-    IsCustomized = YES;
+-(IBAction)emailButtonTapped:(id) sender {
+
     saveButton.hidden = NO;
     EmailCell *emailCell;
     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.contactDetailsTable];
@@ -466,9 +452,7 @@
 }
 
 
--(IBAction)callButtonTapped:(id) sender
-{
-    IsCustomized = YES;
+-(IBAction)callButtonTapped:(id) sender {
     saveButton.hidden = NO;
     PhoneNumberCell *phoneCell;
     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.contactDetailsTable];
@@ -492,9 +476,8 @@
 }
 
 
--(IBAction)smsButtonTapped:(id) sender
-{
-    IsCustomized = YES;
+-(IBAction)smsButtonTapped:(id) sender {
+
     saveButton.hidden = NO;
     PhoneNumberCell *phoneCell;
     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.contactDetailsTable];
@@ -518,13 +501,8 @@
 }
 
 - (void) saveSpendingTimeText {
-    
-    IsCustomized = YES;
     saveButton.hidden = NO;
-
     contactModal.customTextForContact = textView.text;
-        //[_contactDetailsTable scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    //return YES;
 }
 
 - (BOOL)textView:(UITextView *)textView
