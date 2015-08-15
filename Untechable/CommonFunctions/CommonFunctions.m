@@ -128,7 +128,7 @@ NSString *currentEnteredPhoneNumber;
         curObj.allEmails = [curContactDetails objectForKey:@"emailAddresses"];
         curObj.customTextForContact = [curContactDetails objectForKey:@"customTextForContact"];
         curObj.IsCustomized = [curContactDetails objectForKey:@"IsCustomized"];
-        curObj.cutomizingStatusArray = [curContactDetails objectForKey:@"cutomizingStatusArray"];
+        
         
         [savedCustomContacts addObject:curObj];
     }
@@ -153,7 +153,6 @@ NSString *currentEnteredPhoneNumber;
         
         [curContactDetails setValue:curObj.allEmails forKey:@"emailAddresses"];
         [curContactDetails setValue:curObj.customTextForContact forKey:@"customTextForContact"];
-        [curContactDetails setValue:curObj.cutomizingStatusArray forKey:@"cutomizingStatusArray"];
         [curContactDetails setObject:[NSNumber numberWithBool:curObj.IsCustomized] forKey:@"IsCustomized"];
         [customizedContactsArray setValue:curContactDetails forKey:[NSString stringWithFormat:@"%i",i]];
         

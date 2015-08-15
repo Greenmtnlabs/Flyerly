@@ -11,14 +11,13 @@
 
 @implementation ContactsCustomizedModal
 
-@synthesize delegate,name,description,img,checkImageName,status,others,imageUrl,zip,mobileNumber,mainNumber,iPhoneNumber,homeNumber,workNumber,allEmails,allPhoneNumbers,phoneNumbersStatus,customTextForContact,untechable,cutomizingStatusArray,IsCustomized;
+@synthesize delegate,name,description,img,checkImageName,status,others,imageUrl,zip,mobileNumber,mainNumber,iPhoneNumber,homeNumber,workNumber,allEmails,allPhoneNumbers,phoneNumbersStatus,customTextForContact,untechable,IsCustomized;
 
 
 -(id)init{
     
     self = [super init];
     customTextForContact = untechable.spendingTimeTxt;
-    cutomizingStatusArray = [[NSMutableArray alloc] init];
     return self;
 }
 
@@ -39,19 +38,32 @@
 }
 
 /*
- * Here we Return Email Status of Contact
+ * Here we Return Email Status of Contact, @"1" for true case
  */
--(NSString *)getEmailStatus {
-    return [cutomizingStatusArray objectAtIndex:0];
+-(BOOL)getEmailStatus {
+    BOOL csStatus = NO;
+    for(int i=0; i<allEmails.count; i++){
+        if( [[allEmails[i] objectAtIndex:1] isEqualToString:@"1"] ){
+            csStatus = YES;
+            break;
+        }
+    }
+    return csStatus;
 }
 
 
 /*
  * Here we Return SMS Share Status of Contact
  */
--(NSString *)getSmsStatus {
-    return [cutomizingStatusArray objectAtIndex:1];
-    
+-(BOOL)getSmsStatus {
+    BOOL csStatus = NO;
+    for(int i=0; i<allPhoneNumbers.count; i++){
+        if( [[allPhoneNumbers[i] objectAtIndex:3] isEqualToString:@"1"] ){
+            csStatus = YES;
+            break;
+        }
+    }
+    return csStatus;
 }
 
 
@@ -59,25 +71,15 @@
  * Here we Return Phone Share Status of Contact
  */
 
--(NSString *)getPhoneStatus {
-    return [cutomizingStatusArray objectAtIndex:2];
+-(BOOL)getPhoneStatus {
+    BOOL csStatus = NO;
+    for(int i=0; i<allPhoneNumbers.count; i++){
+        if( [[allPhoneNumbers[i] objectAtIndex:2] isEqualToString:@"1"] ){
+            csStatus = YES;
+            break;
+        }
+    }
+    return csStatus;
     
-}
-
--(void)setEmailStatus :(int)status_ {
-    
-    [cutomizingStatusArray replaceObjectAtIndex:0 withObject:[NSString stringWithFormat:@"%d",status_]];
-}
-
-
--(void)setPhoneStatus :(int)status_ {
-    
-    [cutomizingStatusArray replaceObjectAtIndex:1 withObject:[NSString stringWithFormat:@"%d",status_]];
-}
-
-
--(void)setSmsStatus :(int)status_ {
-    
-    [cutomizingStatusArray replaceObjectAtIndex:2 withObject:[NSString stringWithFormat:@"%d",status_]];
 }
 @end

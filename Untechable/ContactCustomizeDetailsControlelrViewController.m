@@ -30,7 +30,7 @@
 
 @implementation ContactCustomizeDetailsControlelrViewController
 
-@synthesize contactModal,untechable,allEmails,allPhoneNumbers,customTextForContact,customizedContactsDictionary,contactListController;
+@synthesize contactModal,untechable,allEmails,allPhoneNumbers,customTextForContact,contactListController;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -350,50 +350,22 @@
     contactModal.customTextForContact = customeTextCell.customText.text;
     
     if ( editingPhonesWithStatus.count > 0 ) {
-        
-        BOOL setSMSStatus = NO;
-        BOOL setCallStatus = NO;
-        
         for( int j=0; j < editingPhonesWithStatus.count; j++){
             NSArray *allKeys = [editingPhonesWithStatus allKeys];
             NSArray *allObjects = [editingPhonesWithStatus allValues];
             NSIndexPath *indexPath =  [allKeys objectAtIndex:j];
-            
-            NSMutableArray *phoneWithStatus = [allObjects objectAtIndex:j];
-            if ( [[phoneWithStatus objectAtIndex:2] isEqualToString:@"1"] ){
-                setSMSStatus = YES;
-            }
-            
-            if ( [[phoneWithStatus objectAtIndex:3] isEqualToString:@"1"] ){
-                setCallStatus = YES;
-            }
-            
             [contactModal.allPhoneNumbers  replaceObjectAtIndex:indexPath.row withObject:[allObjects objectAtIndex:j]];
         }
-        
-        [contactModal setSmsStatus:setSMSStatus];
-        [contactModal setPhoneStatus:setCallStatus];
     }
     
     
     if ( editingEmailsWithStatus.count > 0 ) {
-        
-        BOOL setEmailStatus = NO;
-        
         for( int j=0; j < editingEmailsWithStatus.count; j++){
             NSArray *allKeys = [editingEmailsWithStatus allKeys];
             NSArray *allObjects = [editingEmailsWithStatus allValues];
             NSIndexPath *indexPath =  [allKeys objectAtIndex:j];
-            
-            NSMutableArray *emailWithStatus = [allObjects objectAtIndex:j];
-            if ( [[emailWithStatus objectAtIndex:1] isEqualToString:@"1"] ){
-                setEmailStatus = YES;
-            }
-            
             [contactModal.allEmails  replaceObjectAtIndex:indexPath.row withObject:[allObjects objectAtIndex:j]];
         }
-        
-        [contactModal setEmailStatus:setEmailStatus];
     }
     
     BOOL alreadyExist = NO;
@@ -445,27 +417,22 @@
         }
     }
     
+
+    
+    Boolean  tempStatusArray[3] = { [contactModal getEmailStatus], [contactModal getSmsStatus], [contactModal getPhoneStatus] };
+    
+     BOOL canAddOrUpdate = ( tempStatusArray[0] || tempStatusArray[1] || tempStatusArray[2] );
+    
+    
     if ( IsCustomized ){
         
         if ( alreadyExist ) {
-        
-            NSMutableArray  *tempStatusArray = contactModal.cutomizingStatusArray;
-            
-            if ( [contactModal.customTextForContact isEqualToString:untechable.spendingTimeTxt]
-                &&
-                [[tempStatusArray objectAtIndex:0] isEqualToString:@"0"]
-                &&
-                [[tempStatusArray objectAtIndex:1] isEqualToString:@"0"]
-                &&
-                [[tempStatusArray objectAtIndex:2] isEqualToString:@"0"] )
-            {
-                [untechable.customizedContactsForCurrentSession removeObjectAtIndex:indexToBeChanged];
-                
-            }else {
-                
+            if ( canAddOrUpdate ) {
                 [untechable.customizedContactsForCurrentSession replaceObjectAtIndex:indexToBeChanged withObject:contactModal];
+            }else {
+                [untechable.customizedContactsForCurrentSession removeObjectAtIndex:indexToBeChanged];
             }
-        }else {
+        }else if( canAddOrUpdate ) {
             contactModal.IsCustomized = YES;
             [untechable.customizedContactsForCurrentSession addObject:contactModal];
         }

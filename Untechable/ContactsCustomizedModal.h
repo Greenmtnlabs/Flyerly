@@ -31,17 +31,11 @@
 @property (nonatomic,strong)NSString *homeNumber;
 @property (nonatomic,strong)NSString *workNumber;
 
-@property (strong, nonatomic) NSMutableArray *cutomizingStatusArray;
-
 @property (nonatomic, assign) BOOL IsCustomized;
 
--(void)setPhoneStatus :(int)status;
--(void)setEmailStatus :(int)status;
--(void)setSmsStatus :(int)status;
-
--(NSString *)getEmailStatus;
--(NSString *)getSmsStatus;
--(NSString *)getPhoneStatus;
+-(BOOL)getEmailStatus;
+-(BOOL)getSmsStatus;
+-(BOOL)getPhoneStatus;
 
 @property (nonatomic,strong)NSMutableArray *allEmails;
 @property (nonatomic,strong)NSMutableArray *allPhoneNumbers;

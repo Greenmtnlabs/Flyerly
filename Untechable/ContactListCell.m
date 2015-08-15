@@ -23,6 +23,8 @@
     
     if ( model.img != nil ){
         self.contactImage.image = model.img;
+    } else {
+        self.contactImage.image =[[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"dfcontact" ofType:@"jpg"]];
     }
     self.contactImage.layer.cornerRadius = self.contactImage.frame.size.width / 2;
     self.contactImage.clipsToBounds = YES;
@@ -34,19 +36,19 @@
         
         
         iconImage = [_customizationStatus objectAtIndex:statusCount];
-        if ( [[model getEmailStatus] isEqualToString:@"1"] ) {
+        if ( [model getEmailStatus] ) {
             iconImage.image = [UIImage imageNamed:@"email_selected"];
             statusCount++;
         }
         
         iconImage = [_customizationStatus objectAtIndex:statusCount];
-        if ( [[model getPhoneStatus] isEqualToString:@"1"] ) {
+        if ( [model getPhoneStatus] ) {
             iconImage.image = [UIImage imageNamed:@"sms_selected"];
             statusCount++;
         }
         
         iconImage = [_customizationStatus objectAtIndex:statusCount];
-        if ( [[model getSmsStatus] isEqualToString:@"1"] ) {
+        if ( [model getSmsStatus] ) {
             iconImage.image = [UIImage imageNamed:@"phone_selected"];
             statusCount++;
         }

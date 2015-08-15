@@ -19,8 +19,7 @@
 #import "AddUntechableController.h"
 
 @interface ContactsListControllerViewController () {
-    
-    NSMutableDictionary *customizedContactsDictionary;
+
     EmailSettingController *emailSettingController;
 }
 
@@ -59,16 +58,10 @@
     [self setNavigation:@"viewDidLoad"];
     
     // Load device contacts and set into contactsArray
-    [self loadLocalContacts];
+    [self loadContactsFromDevice];
     
     selectedAnyEmail = NO;
-    
-    NSError *writeError = nil;
-    customizedContactsDictionary =
-    [NSJSONSerialization JSONObjectWithData: [untechable.customizedContacts dataUsingEncoding:NSUTF8StringEncoding]
-                                    options: NSJSONReadingMutableContainers
-                                      error: &writeError];
-    NSLog(@" Contact Dic %@", customizedContactsDictionary );
+
     [_contactsTable reloadData];
     
     //hides the keyboard when navigating between views
@@ -209,8 +202,7 @@
     for (int i = 0;i<untechable.customizedContactsForCurrentSession.count; i++){
         ContactsCustomizedModal *previousModal = [untechable.customizedContactsForCurrentSession objectAtIndex:i];
         
-        if ( [[previousModal.cutomizingStatusArray objectAtIndex:0] isEqualToString:@"1"] ){
-            
+        if ( [previousModal getEmailStatus] ){
             wantToSend =  YES;
             break;
         }
@@ -338,54 +330,35 @@
             cell = (ContactListCell *)[nib objectAtIndex:0];
         }
     }
+
+    //we are rendering cell with the help of mobileContactsArray, thisMCAmodel is one contact model
+    ContactsCustomizedModal *thisMCAmodel = mobileContactsArray[indexPath.row];
     
-    ContactsCustomizedModal *_contactModal;
-    
-    if ( mobileContactsArray.count >= 1 ){
-        
-        // GETTING DATA FROM RECEIVED DICTIONARY
-        // SET OVER MODEL FROM DATA
-        
-        _contactModal = mobileContactsArray[indexPath.row];
-    }
-    
-    if (_contactModal.img == nil) {
-        _contactModal.img =[[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"dfcontact" ofType:@"jpg"]];
-    }
-    
-    
+    // check in session(previously selected contacts), have we any thing for this contact
     for (int i = 0;i<untechable.customizedContactsForCurrentSession.count; i++){
-        
         ContactsCustomizedModal *previousModal = [untechable.customizedContactsForCurrentSession objectAtIndex:i];
         
-        if ( [previousModal.name isEqualToString:_contactModal.name] &&
-             previousModal.allPhoneNumbers.count == _contactModal.allPhoneNumbers.count )
+        if ( [previousModal.name isEqualToString:thisMCAmodel.name] &&
+             previousModal.allPhoneNumbers.count == thisMCAmodel.allPhoneNumbers.count )
         {
-            _contactModal.cutomizingStatusArray = previousModal.cutomizingStatusArray;
-            if ( [[_contactModal.cutomizingStatusArray objectAtIndex:0] isEqualToString:@"1"] ){
-                selectedAnyEmail = YES;
-            }
+
             if ( previousModal.IsCustomized ) {
-                _contactModal.IsCustomized = YES;
+                thisMCAmodel.IsCustomized = YES;
             }
         }
     }
     
-    if ( untechable.customizedContactsForCurrentSession.count <= 0 && [untechable.customizedContacts isEqualToString:@""] ){
-        
-        [self resetContactModal:_contactModal];
+    if ( untechable.customizedContactsForCurrentSession.count <= 0 ){
+        [self resetContactModal:thisMCAmodel];
     }
 
     // HERE WE PASS DATA TO CELL CLASS
-    [cell setCellObjects:_contactModal :1 :@"InviteFriends"];
+    [cell setCellObjects:thisMCAmodel :1 :@"InviteFriends"];
     
     return cell;
 }
 
 - (void)resetContactModal:(ContactsCustomizedModal *)contactModal{
-    
-    contactModal.cutomizingStatusArray = [[NSMutableArray alloc] initWithObjects:@"0",@"0",@"0", nil];
-    
     for ( int i=0;i<contactModal.allPhoneNumbers.count;i++){
         NSMutableArray *tempPhoneArray = [contactModal.allPhoneNumbers objectAtIndex:i];
         [tempPhoneArray setObject:@"0" atIndexedSubscript:2];
@@ -396,7 +369,6 @@
         NSMutableArray *tempEmailArray = [contactModal.allEmails objectAtIndex:j];
         [tempEmailArray setObject:@"0" atIndexedSubscript:1];
     }
-    
     contactModal.customTextForContact = untechable.spendingTimeTxt;
 }
 
@@ -466,7 +438,7 @@
  * This method is used to load device contact details
  * Load device contacts and set into contactsArray
  */
-- (void)loadLocalContacts{
+- (void)loadContactsFromDevice{
     
     // init contact array
     if( mobileContactBackupArray ){
@@ -578,10 +550,7 @@
             
         }
         currentltRenderingContactModal.allEmails = allEmails;
-        
-        [currentltRenderingContactModal.cutomizingStatusArray setObject:@"0" atIndexedSubscript:0];
-        [currentltRenderingContactModal.cutomizingStatusArray setObject:@"0" atIndexedSubscript:1];
-        [currentltRenderingContactModal.cutomizingStatusArray setObject:@"0" atIndexedSubscript:2];
+
         
         //For Phone number
         NSMutableArray *allNumbers = [[NSMutableArray alloc] initWithCapacity:CFArrayGetCount(allPeople)];
@@ -668,17 +637,6 @@
                         
                         [currentltRenderingContactModal.allPhoneNumbers replaceObjectAtIndex:j withObject:phoneNumberDetails];
                         
-                        if ( [[phoneNumberDetails objectAtIndex:2] isEqualToString:@"1"] ){
-                            [currentltRenderingContactModal.cutomizingStatusArray setObject:@"1" atIndexedSubscript:2];
-                        }else {
-                            [currentltRenderingContactModal.cutomizingStatusArray setObject:@"0" atIndexedSubscript:2];
-                        }
-                        
-                        if ( [[phoneNumberDetails objectAtIndex:3] isEqualToString:@"1"] ){
-                            [currentltRenderingContactModal.cutomizingStatusArray setObject:@"1" atIndexedSubscript:1];
-                        }else {
-                            [currentltRenderingContactModal.cutomizingStatusArray setObject:@"0" atIndexedSubscript:1];
-                        }
                         
                         previuoslyEditedContact.allPhoneNumbers = currentltRenderingContactModal.allPhoneNumbers;
                         
@@ -717,14 +675,11 @@
                             NSString *emailStatus = [emailDetails objectAtIndex:1];
                             if ( [emailStatus isEqualToString:@"1"] ){
                                 [currentContactEmailDetails setObject:@"1" atIndexedSubscript:1];
-                                [currentltRenderingContactModal.cutomizingStatusArray setObject:@"1" atIndexedSubscript:0];
                             }else {
                                 [currentContactEmailDetails setObject:@"0" atIndexedSubscript:1];
-                                [currentltRenderingContactModal.cutomizingStatusArray setObject:@"0" atIndexedSubscript:0];
                             }
                         }else {
                             [currentContactEmailDetails setObject:@"1" atIndexedSubscript:1];
-                            [currentltRenderingContactModal.cutomizingStatusArray setObject:@"1" atIndexedSubscript:0];
                         }
                         
                         [currentltRenderingContactModal.allEmails replaceObjectAtIndex:j withObject:currentContactEmailDetails];
@@ -762,48 +717,25 @@
     return stringts;
 }*/
 
+
+/**
+ * On row tap, go to contact details
+ */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     ContactCustomizeDetailsControlelrViewController *detailsController = [[ContactCustomizeDetailsControlelrViewController alloc] init];
     
     detailsController.untechable = untechable;
     detailsController.contactListController = self;
-    
-    NSMutableDictionary *curContactDetails;
+
     // contact which is going to be edit
     ContactsCustomizedModal *editingContactModel = mobileContactsArray[indexPath.row];
-    
-    if ( ![untechable.customizedContacts isEqualToString:@""] ){
-        
-        for ( int i = 0; i < customizedContactsDictionary.count; i++ ){
-            
-            curContactDetails =  [customizedContactsDictionary objectForKey:[NSString stringWithFormat:@"%i",i]];
-            
-            NSMutableArray *tempPhonesNumbers = [curContactDetails objectForKey:@"phoneNumbers"];
-            
-            if ( [[curContactDetails objectForKey:@"contactName"] isEqualToString:detailsController.contactModal.name]
-                &&
-                editingContactModel.allPhoneNumbers.count == tempPhonesNumbers.count) {
-                
-                editingContactModel.name = [curContactDetails objectForKey:@"contactName"];
-                editingContactModel.allPhoneNumbers = [curContactDetails objectForKey:@"phoneNumbers"];
-                editingContactModel.allEmails = [curContactDetails objectForKey:@"emailAddresses"];
-                editingContactModel.customTextForContact = [curContactDetails objectForKey:@"customTextForContact"];
-            
-                detailsController.contactModal = editingContactModel;
-                break;
-                
-            }else {
-                
-                detailsController.contactModal = editingContactModel;
-                break;
-            }
-        }
-    }else{
-        
-        detailsController.contactModal = editingContactModel;
+    for (int i = 0;i< untechable.customizedContactsForCurrentSession.count; i++){
+        ContactsCustomizedModal *thisModel = [untechable.customizedContactsForCurrentSession objectAtIndex:i];
+        if( [thisModel.name isEqualToString:editingContactModel.name] )
+        editingContactModel = thisModel;
     }
-    detailsController.customizedContactsDictionary =  customizedContactsDictionary;
+    detailsController.contactModal = editingContactModel;
     [self.navigationController pushViewController:detailsController animated:YES];
 }
 @end
