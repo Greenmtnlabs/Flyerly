@@ -11,13 +11,15 @@
 
 @implementation ContactsCustomizedModal
 
-@synthesize delegate,name,description,img,checkImageName,status,others,imageUrl,zip,mobileNumber,mainNumber,iPhoneNumber,homeNumber,workNumber,allEmails,allPhoneNumbers,phoneNumbersStatus,customTextForContact,untechable;
+@synthesize contactName,customTextForContact, allEmails, allPhoneNumbers;
+@synthesize delegate;
+@synthesize img,checkImageName,status,imageUrl;
 
 
--(id)init{
-    
+-(id)init{    
     self = [super init];
-    customTextForContact = untechable.spendingTimeTxt;
+    allEmails = [[NSMutableArray alloc] init];
+    allPhoneNumbers = [[NSMutableArray alloc] init];
     return self;
 }
 

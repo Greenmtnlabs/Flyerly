@@ -19,39 +19,28 @@
 
 @interface ContactsCustomizedModal : NSObject
 
-@property (nonatomic,weak) id <ContactsCustomizedModalDelegate>delegate;
-
-@property (nonatomic,strong)NSString *name;
-
-@property (nonatomic,strong)  Untechable *untechable;
-
-@property (nonatomic,strong)NSString *mobileNumber;
-@property (nonatomic,strong)NSString *mainNumber;
-@property (nonatomic,strong)NSString *iPhoneNumber;
-@property (nonatomic,strong)NSString *homeNumber;
-@property (nonatomic,strong)NSString *workNumber;
-
-
--(BOOL)getEmailStatus;
--(BOOL)getSmsStatus;
--(BOOL)getPhoneStatus;
-
+//Model saving in database
+@property (nonatomic,strong)NSString *contactName;
+@property (nonatomic,strong)NSString *customTextForContact;
 @property (nonatomic,strong)NSMutableArray *allEmails;
 @property (nonatomic,strong)NSMutableArray *allPhoneNumbers;
-@property (nonatomic,strong)NSMutableArray *phoneNumbersStatus;
-@property (nonatomic,strong)NSString *customTextForContact;
 
-@property (nonatomic,strong)NSString *description;
-@property (nonatomic,strong)NSString *others;
+
+//Extras
+@property (nonatomic,weak) id <ContactsCustomizedModalDelegate>delegate;
+//@property (nonatomic,strong)  Untechable *untechable;
+
+//Ui related required bars
 @property (nonatomic,strong)UIImage *img;
 @property (nonatomic,strong)NSString *imageUrl;
 @property (nonatomic,strong)NSString *checkImageName;
 @property (nonatomic,assign)int status;
-//--- Address
-@property (nonatomic,strong)NSString *streetAddress;
-@property (nonatomic,strong)NSString *state;
-@property (nonatomic,strong)NSString *city;
-@property (nonatomic,strong)NSString *country;
-@property (nonatomic,strong)NSString *zip;
+
+
+//Functions
+
+-(BOOL)getEmailStatus;
+-(BOOL)getSmsStatus;
+-(BOOL)getPhoneStatus;
 
 @end

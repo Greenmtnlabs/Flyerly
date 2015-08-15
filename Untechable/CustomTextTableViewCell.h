@@ -17,7 +17,6 @@
 
 @interface CustomTextTableViewCell : UITableViewCell < UITextViewDelegate >
 
-@property (nonatomic,strong)  Untechable *untechable;
 @property (nonatomic,strong)IBOutlet UITextView *customText;
 
 -(void)setCellValuesWithDeleg :(NSString *)message deleg:(id)deleg;

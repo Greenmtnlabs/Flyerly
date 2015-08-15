@@ -19,7 +19,7 @@
 -(void)setCellObjects :(ContactsCustomizedModal *)model :(int)status :(NSString*) tableName {
     
     // Set Values
-    [contactName setText:model.name];
+    [contactName setText:model.contactName];
     
     if ( model.img != nil ){
         self.contactImage.image = model.img;

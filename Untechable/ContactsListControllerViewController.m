@@ -332,27 +332,18 @@
     }
 
     //we are rendering cell with the help of mobileContactsArray, thisMCAmodel is one contact model
-    ContactsCustomizedModal *thisMCAmodel = mobileContactsArray[indexPath.row];    
+    mobileContactsArray[indexPath.row] = [self deepCopyWithDefaultValues:mobileContactsArray[indexPath.row]];
+    ContactsCustomizedModal *thisMCAmodel = mobileContactsArray[indexPath.row];
+    for(int i=0;i<untechable.customizedContactsForCurrentSession.count;i++){
+        if( [thisMCAmodel.contactName isEqualToString:[untechable.customizedContactsForCurrentSession[i] contactName]] ){
+            thisMCAmodel = untechable.customizedContactsForCurrentSession[i];
+        }
+    }
     // HERE WE PASS DATA TO CELL CLASS
     [cell setCellObjects:thisMCAmodel :1 :@"InviteFriends"];
     
     return cell;
 }
-
-- (void)resetContactModal2:(ContactsCustomizedModal *)contactModal{
-    for ( int i=0;i<contactModal.allPhoneNumbers.count;i++){
-        NSMutableArray *tempPhoneArray = [contactModal.allPhoneNumbers objectAtIndex:i];
-        [tempPhoneArray setObject:@"0" atIndexedSubscript:2];
-        [tempPhoneArray setObject:@"0" atIndexedSubscript:3];
-    }
-    
-    for (int j=0;j<contactModal.allEmails.count;j++){
-        NSMutableArray *tempEmailArray = [contactModal.allEmails objectAtIndex:j];
-        [tempEmailArray setObject:@"0" atIndexedSubscript:1];
-    }
-    contactModal.customTextForContact = untechable.spendingTimeTxt;
-}
-
 
 - (IBAction)onSearchClick:(UIButton *)sender{
     
@@ -391,7 +382,7 @@
             for(int contactIndex=0; contactIndex< mobileContactBackupArray.count; contactIndex++) {
                 
                 ContactsCustomizedModal *contactModal = mobileContactBackupArray[contactIndex];
-                NSString *name = contactModal.name;
+                NSString *name = contactModal.contactName;
                 
                 if( !([[name lowercaseString] rangeOfString:[newString lowercaseString]].location == NSNotFound) ){
                     [filteredArray addObject:contactModal];
@@ -481,7 +472,7 @@
     for (int i=0;i < nPeople;i++) {
         currentltRenderingContactModal = [[ContactsCustomizedModal alloc] init];
         
-        currentltRenderingContactModal.others = @"";
+
         
         ABRecordRef ref = CFArrayGetValueAtIndex(allPeople,i);
         
@@ -497,7 +488,7 @@
         if(!lastName)
             lastName = (CFStringRef) @"";
         
-        currentltRenderingContactModal.name = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+        currentltRenderingContactModal.contactName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
         
         // For contact picture
         UIImage *contactPicture;
@@ -701,17 +692,77 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     ContactCustomizeDetailsControlelrViewController *detailsController = [[ContactCustomizeDetailsControlelrViewController alloc] init];
-    
     detailsController.untechable = untechable;
 
+    
     // contact which is going to be edit
-    ContactsCustomizedModal *editingContactModel = mobileContactsArray[indexPath.row];
+    ContactsCustomizedModal *mobileContModel = [self deepCopyWithDefaultValues:mobileContactsArray[indexPath.row]];
+    
     for (int i = 0;i< untechable.customizedContactsForCurrentSession.count; i++){
-        ContactsCustomizedModal *thisModel = [untechable.customizedContactsForCurrentSession objectAtIndex:i];
-        if( [thisModel.name isEqualToString:editingContactModel.name] )
-        editingContactModel = thisModel;
+        ContactsCustomizedModal *sessionModel = [untechable.customizedContactsForCurrentSession objectAtIndex:i];
+        if( [sessionModel.contactName isEqualToString:mobileContModel.contactName] ){
+            mobileContModel = [self mapDbInfoIntoMobileContactModel:mobileContModel sessionModel:sessionModel];
+            break;
+        }
     }
-    detailsController.contactModal = editingContactModel;
+    
+    detailsController.contactModal = mobileContModel;
+    
     [self.navigationController pushViewController:detailsController animated:YES];
 }
+
+//Map all the things to model, check what we required for it from ContactCustomizeDetailsControlelrViewController save method.
+-(ContactsCustomizedModal *)mapDbInfoIntoMobileContactModel:(ContactsCustomizedModal *)mobileContModel sessionModel:(ContactsCustomizedModal *)sessionModel{
+    for(int i=0; i<mobileContModel.allPhoneNumbers.count; i++){
+        for(int j=0; j<sessionModel.allPhoneNumbers.count; j++){
+            if( [mobileContModel.allPhoneNumbers[i][0] isEqualToString:sessionModel.allPhoneNumbers[j][0] ] ){
+
+                if( [sessionModel.allPhoneNumbers[j][2] isEqualToString:@"1"] )
+                    mobileContModel.allPhoneNumbers[i][2] = sessionModel.allPhoneNumbers[j][2];
+
+                if( [sessionModel.allPhoneNumbers[j][3] isEqualToString:@"1"] )
+                    mobileContModel.allPhoneNumbers[i][3] = sessionModel.allPhoneNumbers[j][3];
+                    
+                
+                break;
+            }
+        }
+    }
+    
+    for(int i=0; i<mobileContModel.allEmails.count; i++){
+        for(int j=0; j<sessionModel.allEmails.count; j++){
+            if( [mobileContModel.allEmails[i][0] isEqualToString:sessionModel.allEmails[j][0] ] ){
+                
+                if( [sessionModel.allEmails[j][1] isEqualToString:@"1"] )
+                mobileContModel.allEmails[i][1] = sessionModel.allEmails[j][1];
+                
+                break;
+            }
+        }
+    }
+    
+    
+    
+    return mobileContModel;
+}
+
+/**
+ * Deep copy the model
+ */
+- (ContactsCustomizedModal *)deepCopyWithDefaultValues:(ContactsCustomizedModal *)mobileContactModel{
+    ContactsCustomizedModal *contactModal = [[ContactsCustomizedModal alloc] init];
+    contactModal.customTextForContact = untechable.spendingTimeTxt;
+    for ( int i=0;i<mobileContactModel.allPhoneNumbers.count;i++){
+        [contactModal.allPhoneNumbers addObject:[NSMutableArray arrayWithArray:@[mobileContactModel.allPhoneNumbers[i][0], mobileContactModel.allPhoneNumbers[i][1], @"0",@"0"]]];
+    }
+    
+    for ( int i=0;i<mobileContactModel.allEmails.count;i++){
+        [contactModal.allEmails addObject:[NSMutableArray arrayWithArray:@[mobileContactModel.allEmails[i][0], @"0"]]];
+    }
+    
+    contactModal.contactName = [NSString stringWithString:mobileContactModel.contactName];
+    
+    return contactModal;
+}
+
 @end

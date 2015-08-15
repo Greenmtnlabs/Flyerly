@@ -1,6 +1,5 @@
 //
 //  CustomTextTableViewCell.m
-//  Untechable
 //
 //  Created by RIKSOF Developer on 12/29/14.
 //  Copyright (c) 2014 Green MTN Labs Inc. All rights reserved.
@@ -13,7 +12,7 @@ ContactsCustomizedModal *contactModal_;
 
 @implementation CustomTextTableViewCell
 
-@synthesize untechable,customText;
+@synthesize customText;
 @synthesize delegate;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
