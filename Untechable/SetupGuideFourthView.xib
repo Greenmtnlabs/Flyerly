@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SetupGuideFourthView">
@@ -16,25 +16,15 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jnA-gw-UPc">
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jnA-gw-UPc">
                     <rect key="frame" x="0.0" y="75" width="320" height="405"/>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigation4.png" translatesAutoresizingMaskIntoConstraints="NO" id="1R4-Aw-JU2">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="navigation4.png" translatesAutoresizingMaskIntoConstraints="NO" id="1R4-Aw-JU2">
                     <rect key="frame" x="93" y="75" width="126" height="28"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstAttribute="bottom" secondItem="jnA-gw-UPc" secondAttribute="bottom" id="5JZ-BW-SGy"/>
-                <constraint firstAttribute="trailing" secondItem="1R4-Aw-JU2" secondAttribute="trailing" constant="101" id="Sdd-ra-kN4"/>
-                <constraint firstItem="1R4-Aw-JU2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="75" id="XCv-lj-XWQ"/>
-                <constraint firstItem="1R4-Aw-JU2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="93" id="jFQ-PL-AN0"/>
-                <constraint firstAttribute="trailing" secondItem="jnA-gw-UPc" secondAttribute="trailing" id="lNH-vd-P4k"/>
-                <constraint firstItem="jnA-gw-UPc" firstAttribute="top" secondItem="1R4-Aw-JU2" secondAttribute="bottom" constant="-28" id="pBF-tq-ROF"/>
-                <constraint firstItem="jnA-gw-UPc" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="75" id="s3T-iu-w1d"/>
-                <constraint firstItem="jnA-gw-UPc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="zhu-Qb-3GB"/>
-            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="419" y="294"/>

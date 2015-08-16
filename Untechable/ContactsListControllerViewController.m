@@ -530,28 +530,23 @@
             
             NSString *numberType;
             
-            if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMainLabel])
-            {
+            if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMainLabel]) {
                 numberType = @"Main";
             }
             
-            if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
-            {
+            if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel]) {
                 numberType = @"Mobile";
             }
             
-            if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel])
-            {
+            if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel]) {
                 numberType = @"iPhoneNumber";
             }
             
-            if ([mobileLabel isEqualToString:(NSString*)kABHomeLabel])
-            {
+            if ([mobileLabel isEqualToString:(NSString*)kABHomeLabel]) {
                 numberType = @"Home";
             }
             
-            if ([mobileLabel isEqualToString:(NSString*)kABWorkLabel])
-            {
+            if ([mobileLabel isEqualToString:(NSString*)kABWorkLabel]) {
                 numberType = @"Work";
             }
             
@@ -573,94 +568,19 @@
         currentltRenderingContactModal.allPhoneNumbers = allNumbers;
         
         currentltRenderingContactModal.customTextForContact = untechable.spendingTimeTxt;
-        
-        // Here we getting all previously customized contacts status and setting it according to contact modal
-        ContactsCustomizedModal *previuoslyEditedContact;
-        
-        for ( int editedContactsArrIndex = 0; editedContactsArrIndex < untechable.customizedContactsForCurrentSession.count; editedContactsArrIndex++ ){
-            
-            previuoslyEditedContact = [untechable.customizedContactsForCurrentSession objectAtIndex:editedContactsArrIndex];
-            
-            // getting previously customized contact phone numbers
-            NSMutableArray *tempPhoneNumbers = previuoslyEditedContact.allPhoneNumbers;
-            
-            // setting phone number status in rendering contact according saved contact status
-            for ( int i=0; i < tempPhoneNumbers.count; i++ ){
-                
-                NSMutableArray *phoneNumberDetails = [tempPhoneNumbers objectAtIndex:i];
-                
-                NSString *customizedNumber = [phoneNumberDetails objectAtIndex:1];
-                
-                //customizedNumber = [self NumberToFormatIntoUSstandard:customizedNumber];
-                
-                for ( int j=0; j < currentltRenderingContactModal.allPhoneNumbers.count; j++ ){
-                    
-                    NSMutableArray *currentContactNumberDetails = [currentltRenderingContactModal.allPhoneNumbers objectAtIndex:j];
-                    
-                    NSString *currentContactCustomizedNumber  = [currentContactNumberDetails objectAtIndex:1];
-                    
-                    //currentContactCustomizedNumber = [self NumberToFormatIntoUSstandard:currentContactCustomizedNumber];
-                    
-                    if ( [currentContactCustomizedNumber isEqualToString:customizedNumber] ){
-                        
-                        [currentltRenderingContactModal.allPhoneNumbers replaceObjectAtIndex:j withObject:phoneNumberDetails];
-                        
-                        
-                        previuoslyEditedContact.allPhoneNumbers = currentltRenderingContactModal.allPhoneNumbers;
-                        
-                        currentltRenderingContactModal.customTextForContact = previuoslyEditedContact.customTextForContact;
-                    }
-                }
-            }
-            
-            NSMutableArray *tempEmails = previuoslyEditedContact.allEmails;
-            
-            // setting email status in rendering contact according saved contact status
-            for ( int i=0; i < tempEmails.count; i++ ){
-                
-                NSString *exactEmailAddress;
-                NSMutableArray *emailDetails;
-                
-                if ( [[tempEmails objectAtIndex:i] isKindOfClass:[NSString class]] ){
-                    
-                    exactEmailAddress = [tempEmails objectAtIndex:i];
-                    
-                }else if ( [[tempEmails objectAtIndex:i] isKindOfClass:[NSArray class]] ){
-                    
-                    emailDetails = [tempEmails objectAtIndex:i];
-                    exactEmailAddress = [emailDetails objectAtIndex:0];
-                }
-                
-                for ( int j=0; j < currentltRenderingContactModal.allEmails.count; j++ ){
-                    
-                    NSMutableArray *currentContactEmailDetails = [currentltRenderingContactModal.allEmails objectAtIndex:j];
-                    
-                    if ( [[currentContactEmailDetails objectAtIndex:0] isEqualToString:exactEmailAddress] ){
-                        
-                        if ( emailDetails.count > 0 ){
-                            NSString *emailStatus = [emailDetails objectAtIndex:1];
-                            if ( [emailStatus isEqualToString:@"1"] ){
-                                [currentContactEmailDetails setObject:@"1" atIndexedSubscript:1];
-                            }else {
-                                [currentContactEmailDetails setObject:@"0" atIndexedSubscript:1];
-                            }
-                        }else {
-                            [currentContactEmailDetails setObject:@"1" atIndexedSubscript:1];
-                        }
-                        
-                        [currentltRenderingContactModal.allEmails replaceObjectAtIndex:j withObject:currentContactEmailDetails];
-                        
-                        previuoslyEditedContact.allEmails = currentltRenderingContactModal.allEmails;
 
-                        currentltRenderingContactModal.customTextForContact = previuoslyEditedContact.customTextForContact;
-                        
-                        break;
-                    }
+        //check for repeatation of contact
+        if ( currentltRenderingContactModal.allEmails.count > 0 || currentltRenderingContactModal.allPhoneNumbers.count > 0 ){
+            BOOL canAddInMCA = YES;
+            
+            for(int chk=0; chk<mobileContactsArray.count; chk++){
+                if([currentltRenderingContactModal.contactName isEqualToString:[mobileContactsArray[chk] contactName]]){
+                    canAddInMCA = NO;
+                    break;
                 }
             }
-        }
-    
-        if ( currentltRenderingContactModal.allEmails.count > 0 || currentltRenderingContactModal.allPhoneNumbers.count > 0 ){
+            
+            if( canAddInMCA )
             [mobileContactsArray addObject:currentltRenderingContactModal ];
         }
     }
