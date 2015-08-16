@@ -237,40 +237,18 @@
 }
 
 -( void ) showEmailSetupScreen : ( BOOL ) calledFromSetupScreen {
-    NSLog(@"%@", [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allValues]);
-    
-    NSArray *keys = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys];
-    
-    if (  [keys containsObject:EMAIL_KEY] || [keys containsObject:PASSWORD_KEY]  ){
-        
-        NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:EMAIL_KEY]);
-        NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:PASSWORD_KEY]);
-        
-        if ( [[[NSUserDefaults standardUserDefaults] objectForKey:EMAIL_KEY] isEqualToString:@""] ||
-            [[[NSUserDefaults standardUserDefaults] objectForKey:PASSWORD_KEY] isEqualToString:@""] ){
-            
-            emailSettingController.untechable = untechable;
-            
-            [self changingBoolVals:calledFromSetupScreen];
-            
-            [self.navigationController pushViewController:emailSettingController animated:YES];
-            
-        }else {
-            
-            EmailChangingController *emailChangeController;
-            emailChangeController = [[EmailChangingController alloc]initWithNibName:@"EmailChangingController" bundle:nil];
-            emailChangeController.untechable = untechable;
-            emailChangeController.setupScreenCalling = &(calledFromSetupScreen);
-            emailChangeController.emailAddresstext = [[SocialNetworksStatusModal sharedInstance] getEmailAddress];
-            [self.navigationController pushViewController:emailChangeController animated:YES];
-        }
-        
-    }else {
-        
+
+    //if email or password not set then go to setting emials screen , else change emial screen
+    if (  [untechable.email isEqualToString:@""] || [untechable.password isEqualToString:@""]  ){
         emailSettingController.untechable = untechable;
-            
         [self changingBoolVals:calledFromSetupScreen];
         [self.navigationController pushViewController:emailSettingController animated:YES];
+    } else {
+        EmailChangingController *emailChangeController = [[EmailChangingController alloc]initWithNibName:@"EmailChangingController" bundle:nil];
+        emailChangeController.untechable = untechable;
+        emailChangeController.setupScreenCalling = &(calledFromSetupScreen);
+        emailChangeController.emailAddresstext = [[SocialNetworksStatusModal sharedInstance] getEmailAddress];
+        [self.navigationController pushViewController:emailChangeController animated:YES];
     }
 }
 
