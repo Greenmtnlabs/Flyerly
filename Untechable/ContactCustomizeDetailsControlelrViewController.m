@@ -19,6 +19,11 @@
     NSArray *phoneNumberTypes;
     NSMutableDictionary *curContactDetails;
     UITextView *textView;
+    
+    
+    //Temporary variable, required when user wants to go back without saving
+    NSString *tempCustomTextForContact;
+    NSMutableArray *tempAllEmails, *tempAllPhoneNumbers;
 }
 @property (weak, nonatomic) IBOutlet UITableView *contactDetailsTable;
 
@@ -30,6 +35,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setTampVariables];
     
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
@@ -102,7 +109,7 @@
 
 
 -(void) goBack {
-    
+    [self restoreOldStateFromTemp];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -312,25 +319,6 @@
     }
     contactModal.customTextForContact = customeTextCell.customText.text;
 
-    //Only save selected contacts
-    NSMutableArray *tempAllPhoneNumbers = [[NSMutableArray alloc] init];
-    for( int j=0; j < contactModal.allPhoneNumbers.count; j++){
-        if( [contactModal.allPhoneNumbers[j][2] isEqualToString:@"1"] || [contactModal.allPhoneNumbers[j][3] isEqualToString:@"1"] )
-        [tempAllPhoneNumbers addObject:contactModal.allPhoneNumbers[j]];
-    }
-    contactModal.allPhoneNumbers = tempAllPhoneNumbers;
-    
-    
-    //only save selected email addresses
-    NSMutableArray *tempAllEmails = [[NSMutableArray alloc] init];
-    for( int j=0; j < contactModal.allEmails.count; j++){
-        if( [contactModal.allEmails[j][1] isEqualToString:@"1"] )
-            [tempAllEmails addObject:contactModal.allEmails[j]];
-    }
-    contactModal.allEmails = tempAllEmails;
-    
-    
-
     BOOL alreadyExist = NO;
     int indexToBeChanged = 0;
     Boolean  tempStatusArray[3] = { [contactModal getEmailStatus], [contactModal getSmsStatus], [contactModal getPhoneStatus] };
@@ -356,6 +344,28 @@
     }
     
     [self.navigationController popViewControllerAnimated:YES];
+}
+/**
+ * Create a backup of all variable which are changable on this screen, so when user wants to 
+ * go back without saving then replace all with them
+ */
+-(void)setTampVariables{
+    tempCustomTextForContact = [[NSString alloc] initWithString:contactModal.customTextForContact];
+    tempAllPhoneNumbers = [[NSMutableArray alloc] init];
+    for( int j=0; j < contactModal.allPhoneNumbers.count; j++){
+        [tempAllPhoneNumbers addObject:[[NSMutableArray alloc] initWithArray:@[contactModal.allPhoneNumbers[j][0],contactModal.allPhoneNumbers[j][1],contactModal.allPhoneNumbers[j][2],contactModal.allPhoneNumbers[j][3]]]];
+    }
+
+    tempAllEmails = [[NSMutableArray alloc] init];
+    for( int j=0; j < contactModal.allEmails.count; j++){
+        [tempAllEmails addObject:[[NSMutableArray alloc] initWithArray:@[contactModal.allEmails[j][0],contactModal.allEmails[j][1]]]];
+    }
+}
+
+-(void)restoreOldStateFromTemp{
+    contactModal.customTextForContact = tempCustomTextForContact;
+    contactModal.allPhoneNumbers = tempAllPhoneNumbers;
+    contactModal.allEmails = tempAllEmails;
 }
 
 -(IBAction)emailButtonTapped:(id) sender {

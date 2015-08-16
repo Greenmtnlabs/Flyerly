@@ -154,27 +154,11 @@
     [searchTextField resignFirstResponder];
 }
 
--(void)storeScreenVarsInDic{
-    //we have already stored evey thing on save of inner scree of it
-}
 
 - (void)setSkipHighlighted:(BOOL)highlighted {
     (highlighted) ? [skipButton setBackgroundColor:DEF_GREEN] : [skipButton setBackgroundColor:[UIColor clearColor]];
 }
 
--(void)next:(NSString *)after{
-    
-    if( [after isEqualToString:@"GO_TO_NEXT"] || [after isEqualToString:@"ON_SKIP"] ) {
-        //reset contacts from model
-        [untechable setCustomizedContactsForSession];
-        
-        SocialnetworkController *socialnetwork;
-        socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
-        socialnetwork.untechable = untechable;
-        [self.navigationController pushViewController:socialnetwork animated:YES];
-        
-    }
-}
 -(void)btnSkipTouchStart{
     [self setSkipHighlighted:YES];
 }
@@ -187,10 +171,17 @@
     
     [self setSkipHighlighted:NO];
     
-    [self storeScreenVarsInDic];
-    //[self stopAllTask];
+    //reset contacts from model
+    [untechable setCustomizedContactsForSession];
+    [self mapAllSessionContactSelectionsOnMobileArray];
     
-    [self next:@"ON_SKIP"];
+    //[self reloadContactsTableInMainThread];
+    
+    
+    SocialnetworkController *socialnetwork;
+    socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
+    socialnetwork.untechable = untechable;
+    [self.navigationController pushViewController:socialnetwork animated:YES];
     
 }
 
@@ -210,7 +201,13 @@
     
     return wantToSend;
 }
+
+/**
+ * Save data and go next
+ */
 -(void)onNext{
+    
+    [self removeExtrasFromSessionAry];
     
     selectedAnyEmail = [self haveSelectedAnyEmail];
     
@@ -330,17 +327,8 @@
             cell = (ContactListCell *)[nib objectAtIndex:0];
         }
     }
-
-    //we are rendering cell with the help of mobileContactsArray, thisMCAmodel is one contact model
-    mobileContactsArray[indexPath.row] = [self deepCopyWithDefaultValues:mobileContactsArray[indexPath.row]];
-    ContactsCustomizedModal *thisMCAmodel = mobileContactsArray[indexPath.row];
-    for(int i=0;i<untechable.customizedContactsForCurrentSession.count;i++){
-        if( [thisMCAmodel.contactName isEqualToString:[untechable.customizedContactsForCurrentSession[i] contactName]] ){
-            thisMCAmodel = untechable.customizedContactsForCurrentSession[i];
-        }
-    }
     // HERE WE PASS DATA TO CELL CLASS
-    [cell setCellObjects:thisMCAmodel :1 :@"InviteFriends"];
+    [cell setCellObjects:mobileContactsArray[indexPath.row] :1 :@"InviteFriends"];
     
     return cell;
 }
@@ -665,9 +653,13 @@
         }
     
         if ( currentltRenderingContactModal.allEmails.count > 0 || currentltRenderingContactModal.allPhoneNumbers.count > 0 ){
-            [mobileContactsArray addObject:currentltRenderingContactModal];
+            [mobileContactsArray addObject:currentltRenderingContactModal ];
         }
     }
+    
+
+    [self mapAllSessionContactSelectionsOnMobileArray];
+    
     // Reload table data after all the contacts get loaded
     mobileContactBackupArray = [[NSMutableArray alloc] initWithArray:mobileContactsArray];
     [self reloadContactsTableInMainThread];
@@ -696,55 +688,12 @@
 
     
     // contact which is going to be edit
-    ContactsCustomizedModal *mobileContModel = [self deepCopyWithDefaultValues:mobileContactsArray[indexPath.row]];
-    
-    for (int i = 0;i< untechable.customizedContactsForCurrentSession.count; i++){
-        ContactsCustomizedModal *sessionModel = [untechable.customizedContactsForCurrentSession objectAtIndex:i];
-        if( [sessionModel.contactName isEqualToString:mobileContModel.contactName] ){
-            mobileContModel = [self mapDbInfoIntoMobileContactModel:mobileContModel sessionModel:sessionModel];
-            break;
-        }
-    }
-    
+    ContactsCustomizedModal *mobileContModel = mobileContactsArray[indexPath.row];
     detailsController.contactModal = mobileContModel;
     
     [self.navigationController pushViewController:detailsController animated:YES];
 }
 
-//Map all the things to model, check what we required for it from ContactCustomizeDetailsControlelrViewController save method.
--(ContactsCustomizedModal *)mapDbInfoIntoMobileContactModel:(ContactsCustomizedModal *)mobileContModel sessionModel:(ContactsCustomizedModal *)sessionModel{
-    for(int i=0; i<mobileContModel.allPhoneNumbers.count; i++){
-        for(int j=0; j<sessionModel.allPhoneNumbers.count; j++){
-            if( [mobileContModel.allPhoneNumbers[i][0] isEqualToString:sessionModel.allPhoneNumbers[j][0] ] ){
-
-                if( [sessionModel.allPhoneNumbers[j][2] isEqualToString:@"1"] )
-                    mobileContModel.allPhoneNumbers[i][2] = sessionModel.allPhoneNumbers[j][2];
-
-                if( [sessionModel.allPhoneNumbers[j][3] isEqualToString:@"1"] )
-                    mobileContModel.allPhoneNumbers[i][3] = sessionModel.allPhoneNumbers[j][3];
-                    
-                
-                break;
-            }
-        }
-    }
-    
-    for(int i=0; i<mobileContModel.allEmails.count; i++){
-        for(int j=0; j<sessionModel.allEmails.count; j++){
-            if( [mobileContModel.allEmails[i][0] isEqualToString:sessionModel.allEmails[j][0] ] ){
-                
-                if( [sessionModel.allEmails[j][1] isEqualToString:@"1"] )
-                mobileContModel.allEmails[i][1] = sessionModel.allEmails[j][1];
-                
-                break;
-            }
-        }
-    }
-    
-    mobileContModel.customTextForContact = sessionModel.customTextForContact;
-    
-    return mobileContModel;
-}
 
 /**
  * Deep copy the model
@@ -763,6 +712,100 @@
     contactModal.contactName = [NSString stringWithString:mobileContactModel.contactName];
     
     return contactModal;
+}
+
+/**
+ * This function will map the session values on to mobileContactsArray( extracted from mobile contacts) this
+ * will be using between contact list and contact list details controllers
+ */
+-(void)mapAllSessionContactSelectionsOnMobileArray{
+    for (int i = 0;i< untechable.customizedContactsForCurrentSession.count; i++){
+        ContactsCustomizedModal *sessionModel = [untechable.customizedContactsForCurrentSession objectAtIndex:i];
+
+        for (int j = 0; j< mobileContactsArray.count; j++){
+            ContactsCustomizedModal *mobileContModel = [mobileContactsArray objectAtIndex:j];
+            
+            if( [sessionModel.contactName isEqualToString:mobileContModel.contactName] ){
+                mobileContModel = [self mapSingleSessionModelToSingleMobileModel:mobileContModel sessionModel:sessionModel];
+                break;
+            }
+        }//for2//
+    }//for1//
+}
+
+//Mapping of single sessionModel on to single mobileContactModel, will return mobileContactModel
+-(ContactsCustomizedModal *)mapSingleSessionModelToSingleMobileModel:(ContactsCustomizedModal *)mobileContModel sessionModel:(ContactsCustomizedModal *)sessionModel{
+    
+    BOOL found = NO;
+    
+    for(int i=0; i<mobileContModel.allPhoneNumbers.count; i++){
+        for(int j=0; j<sessionModel.allPhoneNumbers.count; j++){
+            if( [mobileContModel.allPhoneNumbers[i][0] isEqualToString:sessionModel.allPhoneNumbers[j][0] ] ){
+                
+                mobileContModel.allPhoneNumbers[i][2] = ( [sessionModel.allPhoneNumbers[j][2] isEqualToString:@"1"] ) ? @"1" : @"0";
+                mobileContModel.allPhoneNumbers[i][3] = ( [sessionModel.allPhoneNumbers[j][3] isEqualToString:@"1"] ) ? @"1" : @"0";
+                
+                found = YES;
+                break;
+            }
+        }
+        
+        if( found == NO ){
+            mobileContModel.allPhoneNumbers[i][2] = @"0";
+            mobileContModel.allPhoneNumbers[i][3] = @"0";
+        }
+        
+        found = NO;
+        
+        
+    }
+    
+    for(int i=0; i<mobileContModel.allEmails.count; i++){
+        for(int j=0; j<sessionModel.allEmails.count; j++){
+            if( [mobileContModel.allEmails[i][0] isEqualToString:sessionModel.allEmails[j][0] ] ){
+                mobileContModel.allEmails[i][1] = ( [sessionModel.allEmails[j][1] isEqualToString:@"1"] ) ? @"1" : @"0";
+                
+                found = YES;
+                break;
+            }
+        }
+        
+        if( found == NO ){
+            mobileContModel.allEmails[i][1] = @"0";
+            found = NO;
+        }
+    }
+    
+    mobileContModel.customTextForContact = sessionModel.customTextForContact;
+    
+    return mobileContModel;
+}
+
+/**
+ * Before going to next page, remove extras from session model
+ */
+-(void)removeExtrasFromSessionAry{
+    for (int i = 0;i< untechable.customizedContactsForCurrentSession.count; i++){
+        ContactsCustomizedModal *sessionModel = [untechable.customizedContactsForCurrentSession objectAtIndex:i];
+
+        //Only save selected contacts
+        NSMutableArray *tempAllPhoneNumbers = [[NSMutableArray alloc] init];
+        for( int j=0; j < sessionModel.allPhoneNumbers.count; j++){
+            if( [sessionModel.allPhoneNumbers[j][2] isEqualToString:@"1"] || [sessionModel.allPhoneNumbers[j][3] isEqualToString:@"1"] )
+                [tempAllPhoneNumbers addObject:sessionModel.allPhoneNumbers[j]];
+        }
+        sessionModel.allPhoneNumbers = tempAllPhoneNumbers;
+        
+        //only save selected email addresses
+        NSMutableArray *tempAllEmails = [[NSMutableArray alloc] init];
+        for( int j=0; j < sessionModel.allEmails.count; j++){
+            if( [sessionModel.allEmails[j][1] isEqualToString:@"1"] )
+                [tempAllEmails addObject:sessionModel.allEmails[j]];
+        }
+        sessionModel.allEmails = tempAllEmails;
+        
+        [untechable.customizedContactsForCurrentSession replaceObjectAtIndex:i withObject:sessionModel];
+    }
 }
 
 @end
