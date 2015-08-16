@@ -181,9 +181,6 @@
         //Screen2 vars
         dic[@"twillioNumber"] = twillioNumber;
         dic[@"location"] = location;
-        //dic[@"emergencyNumber"] = emergencyNumber;
-        //dic[@"emergencyContacts"] = emergencyContacts;
-        //dic[@"hasRecording"] = hasRecording ? @"YES" : @"NO";
         
         dic[@"customizedContacts"] = [commonFunctions convertCCMArrayIntoJsonString:customizedContactsForCurrentSession];
         customizedContacts = ( dic[@"customizedContacts"] ) ? dic[@"customizedContacts"] : @"";
@@ -239,9 +236,6 @@
         //Screen2 vars
         twillioNumber     = ( dic[@"twillioNumber"] ) ? dic[@"twillioNumber"] : @"";
         location          = ( dic[@"location"] ) ? dic[@"location"] : @"";
-        //emergencyNumber   = ( dic[@"emergencyNumber"] ) ? dic[@"emergencyNumber"] : @"";
-        //emergencyContacts = ( dic[@"emergencyContacts"] ) ? dic[@"emergencyContacts"] : @"";
-        //hasRecording      = ([dic[@"hasRecording"] isEqualToString:@"YES"]) ? YES : NO;
     
         customizedContacts = ( dic[@"customizedContacts"] ) ? dic[@"customizedContacts"] : @"";
         customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:customizedContacts];
@@ -268,8 +262,7 @@
         omsHostName     = ( dic[@"omsHostName"] ) ? dic[@"omsHostName"] : @"";
         omsPort         = ( dic[@"omsPort"] ) ? dic[@"omsPort"] : @"";
     }
-    
-    //NSLog(@"dic: %@", dic);
+
 }
 
 -(void) setCustomizedContactsForSession {
