@@ -7,10 +7,8 @@
 //
 
 #import "SetupGuideSecondViewController.h"
-#import "SetupGuideViewController.h"
 #import "SetupGuideThirdView.h"
-#import "AddUntechableController.h"
-#import "UntechOptionsViewController.h"
+
 
 @interface SetupGuideSecondViewController () {
     NSMutableArray *customSpendingTextAry;

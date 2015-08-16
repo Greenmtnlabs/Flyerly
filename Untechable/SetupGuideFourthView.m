@@ -9,7 +9,7 @@
 #import "SetupGuideFourthView.h"
 #import "SocialnetworkController.h"
 #import "UntechablesList.h"
-#import "RSetUntechable.h"
+
 
 @interface SetupGuideFourthView ()
 
