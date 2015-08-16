@@ -7,7 +7,6 @@
 //
 
 #import "AddUntechableController.h"
-#import "ThankyouController.h"
 #import "Common.h"
 #import "BSKeyboardControls.h"
 #import "SettingsViewController.h"
@@ -48,7 +47,7 @@
 
 @implementation AddUntechableController
 
-@synthesize totalUntechables,callReset,untechable;
+@synthesize totalUntechables,callReset,untechable,openPickerButton;
 
 
 #pragma mark -  Default functions
@@ -232,8 +231,6 @@
 }
 
 -(IBAction)goToSettings{
-    
-    NSLog(@"Go To settings screen");
     SettingsViewController *settingsController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil];
     untechable.rUId = @"1";
     untechable.dic[@"rUId"] = @"1";
@@ -242,15 +239,7 @@
 }
 
 -(void) goBack {
-    
-    for (UIViewController *controller in self.navigationController.viewControllers) {
-        if ([controller isKindOfClass:[UntechablesList class]]) {
-            
-            UntechablesList *untechableListController = (UntechablesList *)controller;
-            [self.navigationController popToViewController:untechableListController animated:YES];
-            break;
-        }
-    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)btnNextTouchStart{
@@ -287,15 +276,13 @@
             }
         }
         
-        NSLog(goToNext ? @"goToNext- YES" : @"goToNext- NO");
-        
         if( goToNext ) {
-            
             ContactsListControllerViewController *listController = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
             listController.untechable = untechable;
             [self.navigationController pushViewController:listController animated:YES];
-          }
-    }else {
+        }
+        
+    } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"What are you going untechable for?"
                                                         message:@"You must specify what you'll be doing with your time away from technology before proceeding."
                                                        delegate:nil
@@ -478,13 +465,6 @@
         untechable.savedOnServer = NO;
         untechable.paid = NO;
     }
-}
-
--(void)goToThankyou{
-    ThankyouController *thankyouController;
-    thankyouController = [[ThankyouController alloc]initWithNibName:@"ThankyouController" bundle:nil];
-    thankyouController.untechable = untechable;
-    [self.navigationController pushViewController:thankyouController animated:YES];
 }
 
 #pragma mark -  UI functions
