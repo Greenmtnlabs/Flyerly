@@ -409,10 +409,13 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 #pragma mark - Send to Server
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack{
 
-    //[self removeRedundentDataForContacts];
     [self saveOrUpdate];
-    callBack(NO, @"Thankyou");
-    return;
+    
+    //During testing dont send untechable to server, just create in device and go t thankyou screen
+    if( [ENVIRONMENT isEqualToString:TESTING] ){
+        callBack(NO, @"Thankyou");
+        return;
+    }
 
     
     

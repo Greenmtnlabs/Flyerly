@@ -53,7 +53,7 @@
 #define DEVELOPMENT @"DEVELOPMENT"
 #define PRODUCTION @"PRODUCTION"
 
-
+#define ENVIRONMENT TESTING
 
 //#define SERVER_URL @"http://192.168.0.109:3000" //LOCALHOST
 //#define SERVER_URL @"http://riksof.com:8000"    //DEVELOPMENT

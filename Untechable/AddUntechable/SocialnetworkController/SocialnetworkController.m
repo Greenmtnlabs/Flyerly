@@ -306,15 +306,8 @@
 
 /**
  Action catch for the uiAlertview buttons
- we have to save name and phone number on button press
  */
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    //getting text from the text fields
-    NSString *name = [alertView textFieldAtIndex:0].text;
-    
-    [[NSUserDefaults standardUserDefaults] setObject:name forKey:@"userName"];
-
-    [[NSUserDefaults standardUserDefaults] synchronize];    
 }
 
 
