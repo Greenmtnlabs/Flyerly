@@ -226,6 +226,7 @@
 }
 
 -(IBAction)playVideo:(id)sender{
+    // I did desabled because it looks we have no video for it, once I got it I will enable it
     /*
     NSString *path = [[NSBundle mainBundle]pathForResource:
                       @"untechable" ofType:@"mov"];
