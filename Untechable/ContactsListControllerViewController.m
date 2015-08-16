@@ -624,22 +624,18 @@
 
 
 /**
- * Deep copy the model
+ * Reset model with inital flags
  */
-- (ContactsCustomizedModal *)deepCopyWithDefaultValues:(ContactsCustomizedModal *)mobileContactModel{
-    ContactsCustomizedModal *contactModal = [[ContactsCustomizedModal alloc] init];
-    contactModal.customTextForContact = untechable.spendingTimeTxt;
+- (ContactsCustomizedModal *)resetModel:(ContactsCustomizedModal *)mobileContactModel{
     for ( int i=0;i<mobileContactModel.allPhoneNumbers.count;i++){
-        [contactModal.allPhoneNumbers addObject:[NSMutableArray arrayWithArray:@[mobileContactModel.allPhoneNumbers[i][0], mobileContactModel.allPhoneNumbers[i][1], @"0",@"0"]]];
+        [mobileContactModel.allPhoneNumbers replaceObjectAtIndex:i withObject:[NSMutableArray arrayWithArray:@[mobileContactModel.allPhoneNumbers[i][0], mobileContactModel.allPhoneNumbers[i][1], @"0",@"0"]]];
     }
     
     for ( int i=0;i<mobileContactModel.allEmails.count;i++){
-        [contactModal.allEmails addObject:[NSMutableArray arrayWithArray:@[mobileContactModel.allEmails[i][0], @"0"]]];
+        [mobileContactModel.allEmails replaceObjectAtIndex:i withObject:[NSMutableArray arrayWithArray:@[mobileContactModel.allEmails[i][0], @"0"]]];
     }
     
-    contactModal.contactName = [NSString stringWithString:mobileContactModel.contactName];
-    
-    return contactModal;
+    return mobileContactModel;
 }
 
 /**
@@ -647,17 +643,23 @@
  * will be using between contact list and contact list details controllers
  */
 -(void)mapAllSessionContactSelectionsOnMobileArray{
-    for (int i = 0;i< untechable.customizedContactsForCurrentSession.count; i++){
-        ContactsCustomizedModal *sessionModel = [untechable.customizedContactsForCurrentSession objectAtIndex:i];
-
-        for (int j = 0; j< mobileContactsArray.count; j++){
-            ContactsCustomizedModal *mobileContModel = [mobileContactsArray objectAtIndex:j];
+    for (int i = 0;i< mobileContactsArray.count; i++){
+        ContactsCustomizedModal *mobileContModel = mobileContactsArray[i];
+        
+        BOOL found = NO;
+        for (int j = 0; j< untechable.customizedContactsForCurrentSession.count; j++){
+            ContactsCustomizedModal *sessionModel = untechable.customizedContactsForCurrentSession[j];
             
             if( [sessionModel.contactName isEqualToString:mobileContModel.contactName] ){
                 mobileContModel = [self mapSingleSessionModelToSingleMobileModel:mobileContModel sessionModel:sessionModel];
+                found = YES;
                 break;
             }
         }//for2//
+        
+       if( found == NO )
+        mobileContModel = [self resetModel:mobileContModel];
+        
     }//for1//
 }
 
