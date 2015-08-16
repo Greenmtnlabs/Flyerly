@@ -92,29 +92,29 @@
 #pragma mark -  UI functions
 -(void)updateUI
 {
-    [_lblStartsFrom setTextColor:defGray];
+    [_lblStartsFrom setTextColor:DEF_GRAY];
     _lblStartsFrom.font = [UIFont fontWithName:APP_FONT size:20];
     
     
-    [_lblStartDateTime setTextColor:defGreen];
+    [_lblStartDateTime setTextColor:DEF_GREEN];
     _lblStartDateTime.font = [UIFont fontWithName:APP_FONT size:20];
     _lblStartDateTime.text = [untechable.commonFunctions timestampStrToAppDate:untechable.startDate];
     
     
-    [_lblEnd setTextColor:defGray];
+    [_lblEnd setTextColor:DEF_GRAY];
     _lblEnd.font = [UIFont fontWithName:APP_FONT size:20];
     
     
-    [_lblEndDateTime setTextColor:defGreen];
+    [_lblEndDateTime setTextColor:DEF_GREEN];
     _lblEndDateTime.font = [UIFont fontWithName:APP_FONT size:20];
     _lblEndDateTime.text = [untechable.commonFunctions timestampStrToAppDate:untechable.endDate];
     
-    [_lblForwadingNumber setTextColor:defGray];
+    [_lblForwadingNumber setTextColor:DEF_GRAY];
     _lblForwadingNumber.font = [UIFont fontWithName:APP_FONT size:20];
     
     
     NSString *twillioNumber = untechable.twillioNumber;
-    [_lblTwillioNumber setTextColor:defGreen];
+    [_lblTwillioNumber setTextColor:DEF_GREEN];
     _lblTwillioNumber.font = [UIFont fontWithName:APP_FONT size:20];
     _lblTwillioNumber.text = twillioNumber;
     NSLog(@"twillioNumber1: %@", twillioNumber);
@@ -124,24 +124,20 @@
     
     
     
-    [_lblPlay1 setTextColor:defGray];
+    [_lblPlay1 setTextColor:DEF_GRAY];
     _lblPlay1.font = [UIFont fontWithName:APP_FONT size:19];
     
-    [_btnCopy setTitleColor:defGray forState:UIControlStateNormal];
+    [_btnCopy setTitleColor:DEF_GRAY forState:UIControlStateNormal];
     _btnCopy.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
     
     [[_playVideoBtn layer] setBorderWidth:2.0f];
-    [[_playVideoBtn layer] setBorderColor:defGreen.CGColor];
+    [[_playVideoBtn layer] setBorderColor:DEF_GREEN.CGColor];
 
 }
 
 #pragma mark -  Navigation functions
 
-- (void)setNavigationDefaults{
-    
-    defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
-    defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
-    
+- (void)setNavigationDefaults{    
     
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
@@ -178,7 +174,7 @@
             [editUntechable addTarget:self action:@selector(onEdit:) forControlEvents:UIControlEventTouchUpInside];
             editUntechable.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
             [editUntechable setTitle:@"EDIT" forState:normal];
-            [editUntechable setTitleColor:defGray forState:UIControlStateNormal];
+            [editUntechable setTitleColor:DEF_GRAY forState:UIControlStateNormal];
             editUntechable.showsTouchWhenHighlighted = YES;
             
             UIBarButtonItem *editUntechableBarBtn = [[UIBarButtonItem alloc] initWithCustomView:editUntechable];
@@ -190,7 +186,7 @@
             [startNewUntechable addTarget:self action:@selector(onNew:) forControlEvents:UIControlEventTouchUpInside];
             startNewUntechable.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
             [startNewUntechable setTitle:@"HOME" forState:normal];
-            [startNewUntechable setTitleColor:defGray forState:UIControlStateNormal];
+            [startNewUntechable setTitleColor:DEF_GRAY forState:UIControlStateNormal];
             startNewUntechable.showsTouchWhenHighlighted = YES;
             
             UIBarButtonItem *startNewUntechableBarBtn = [[UIBarButtonItem alloc] initWithCustomView:startNewUntechable];
@@ -202,7 +198,7 @@
         settingsButton.titleLabel.shadowColor = [UIColor clearColor];
         settingsButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [settingsButton setTitle:TITLE_SETTINGS_TXT forState:normal];
-        [settingsButton setTitleColor:defGray forState:UIControlStateNormal];
+        [settingsButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         
         [settingsButton addTarget:self action:@selector(goToSettings) forControlEvents:UIControlEventTouchUpInside];
         settingsButton.showsTouchWhenHighlighted = YES;
@@ -215,7 +211,7 @@
         [startNewUntechable addTarget:self action:@selector(onNew:) forControlEvents:UIControlEventTouchUpInside];
         startNewUntechable.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [startNewUntechable setTitle:@"HOME" forState:normal];
-        [startNewUntechable setTitleColor:defGray forState:UIControlStateNormal];
+        [startNewUntechable setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         startNewUntechable.showsTouchWhenHighlighted = YES;
         
         UIBarButtonItem *startNewUntechableBarBtn = [[UIBarButtonItem alloc] initWithCustomView:startNewUntechable];

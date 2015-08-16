@@ -51,7 +51,7 @@
     NSString *showMsgToUser = [NSString stringWithFormat:@"The above message will be posted on %@ to the networks you selected below", newDateStr];
     
     _showMessageBeforeSending.text = showMsgToUser;
-    _showMessageBeforeSending.textColor = defGray;
+    _showMessageBeforeSending.textColor = DEF_GRAY;
     
     NSArray *fields = @[ inputSetSocialStatus ];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
@@ -121,7 +121,7 @@
 -(void)updateUI
 {
 
-    [inputSetSocialStatus setTextColor:defGreen];
+    [inputSetSocialStatus setTextColor:DEF_GREEN];
     inputSetSocialStatus.font = [UIFont fontWithName:APP_FONT size:16];
     inputSetSocialStatus.delegate = self;
     
@@ -154,13 +154,13 @@
     
 
     
-    [self.btnFacebook setTitleColor:( [untechable.fbAuth isEqualToString:@""] ? defGray : defGreen ) forState:UIControlStateNormal];
+    [self.btnFacebook setTitleColor:( [untechable.fbAuth isEqualToString:@""] ? DEF_GRAY : DEF_GREEN ) forState:UIControlStateNormal];
     self.btnFacebook.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
     
-    [self.btnTwitter setTitleColor:( [untechable.twitterAuth isEqualToString:@""] ? defGray : defGreen ) forState:UIControlStateNormal];
+    [self.btnTwitter setTitleColor:( [untechable.twitterAuth isEqualToString:@""] ? DEF_GRAY : DEF_GREEN ) forState:UIControlStateNormal];
     self.btnTwitter.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
     
-    [self.btnLinkedin setTitleColor:( [untechable.linkedinAuth isEqualToString:@""] ? defGray : defGreen ) forState:UIControlStateNormal];
+    [self.btnLinkedin setTitleColor:( [untechable.linkedinAuth isEqualToString:@""] ? DEF_GRAY : DEF_GREEN ) forState:UIControlStateNormal];
     self.btnLinkedin.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
     
 }
@@ -196,9 +196,6 @@
 
 - (void)setNavigationDefaults{
     
-    defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
-    defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
-    
     [self testInternetConnection];
     
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
@@ -213,7 +210,7 @@
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
         [backButton setTitle:TITLE_BACK_TXT forState:normal];
-        [backButton setTitleColor:defGray forState:UIControlStateNormal];
+        [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(btnBackTouchEnd) forControlEvents:UIControlEventTouchUpInside];
         backButton.showsTouchWhenHighlighted = YES;
@@ -230,7 +227,7 @@
         [finishButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
         finishButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [finishButton setTitle:TITLE_FINISH_TXT forState:normal];
-        [finishButton setTitleColor:defGray forState:UIControlStateNormal];
+        [finishButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:finishButton];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
@@ -247,7 +244,7 @@
     [self onBack];
 }
 - (void)setBackHighlighted:(BOOL)highlighted {
-    (highlighted) ? [backButton setBackgroundColor:defGreen] : [backButton setBackgroundColor:[UIColor clearColor]];
+    (highlighted) ? [backButton setBackgroundColor:DEF_GREEN] : [backButton setBackgroundColor:[UIColor clearColor]];
 }
 
 -(void)onBack{
@@ -435,7 +432,7 @@
 }
 
 - (void)setNextHighlighted:(BOOL)highlighted {
-    (highlighted) ? [finishButton setBackgroundColor:defGreen] : [finishButton setBackgroundColor:[UIColor clearColor]];
+    (highlighted) ? [finishButton setBackgroundColor:DEF_GREEN] : [finishButton setBackgroundColor:[UIColor clearColor]];
 }
 
 /**
@@ -574,9 +571,9 @@
 // Button green (active) and gray ( inActive ) case
 -(void)btnActivate:(UIButton *)btnPointer active:(BOOL)active {
     if( active == YES )
-        [btnPointer setTitleColor:defGreen forState:UIControlStateNormal];
+        [btnPointer setTitleColor:DEF_GREEN forState:UIControlStateNormal];
     else
-        [btnPointer setTitleColor:defGray forState:UIControlStateNormal];
+        [btnPointer setTitleColor:DEF_GRAY forState:UIControlStateNormal];
 }
 
 #pragma mark -  Facebook functions

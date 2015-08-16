@@ -19,10 +19,8 @@
     UIButton *settingsButton;
     UIButton *nextButton;
     
-    UIButton *openPickerButton;
+    UIButton *openPickerButton;    
     
-    UIColor *defGreen;//GREEN
-    UIColor *defGray;//GRAY
     NSString *pickerOpenFor;
     
     NSDate *now1; //current time +60mint

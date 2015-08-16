@@ -58,9 +58,6 @@
 #pragma mark -  Navigation functions
 - (void)setNavigationDefaults{
     
-    defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
-    defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
-    
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
 }
@@ -78,7 +75,7 @@
         backButton.titleLabel.shadowColor = [UIColor clearColor];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [backButton setTitle:TITLE_BACK_TXT forState:normal];
-        [backButton setTitleColor:defGray forState:UIControlStateNormal];
+        [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
         backButton.showsTouchWhenHighlighted = YES;
         
@@ -98,7 +95,7 @@
         [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
-        [nextButton setTitleColor:defGray forState:UIControlStateNormal];
+        [nextButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         
         
         nextButton.showsTouchWhenHighlighted = YES;

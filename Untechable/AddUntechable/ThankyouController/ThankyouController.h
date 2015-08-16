@@ -10,17 +10,13 @@
 #import "Untechable.h"
 #import <MediaPlayer/MediaPlayer.h>
 
-@interface ThankyouController : UIViewController
-{
+@interface ThankyouController : UIViewController {
     UILabel *titleLabel;
     //UIButton *helpButton;
 
     UIButton *startNewUntechable;
     UIButton *settingsButton;
     UIButton *editUntechable;
-    
-    UIColor *defGreen;//GREEN
-    UIColor *defGray;//GRAY
     
     MPMoviePlayerViewController *moviePlayer;
 }

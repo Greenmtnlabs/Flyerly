@@ -13,18 +13,12 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "Reachability.h"
 
-@interface SocialnetworkController : UIViewController < UITextViewDelegate , BSKeyboardControlsDelegate >
-{
+@interface SocialnetworkController : UIViewController < UITextViewDelegate , BSKeyboardControlsDelegate > {
+    
     UILabel *titleLabel;
     UIButton *helpButton;
     UIButton *backButton;
     UIButton *finishButton;
-    //UIButton *nextButton;
-    //UIButton *skipButton;
-    
-    UIColor *defGreen;//GREEN
-    UIColor *defGray;//GRAY
-    
     Reachability *internetReachable;
 }
 
