@@ -157,7 +157,6 @@
 		36B006481A161B92005C3791 /* untechable.mov in Resources */ = {isa = PBXBuildFile; fileRef = 36B006471A161B92005C3791 /* untechable.mov */; };
 		36B036A619DAF44D00E8CD21 /* EmailSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B036A419DAF44D00E8CD21 /* EmailSettingController.m */; };
 		36B036A719DAF44D00E8CD21 /* EmailSettingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36B036A519DAF44D00E8CD21 /* EmailSettingController.xib */; };
-		36B275D71A00D36400ED58AD /* RMStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B275D61A00D36400ED58AD /* RMStore.m */; };
 		36B2765D1A0124E800ED58AD /* CHECKBOX_EMPTY@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B276311A0124E800ED58AD /* CHECKBOX_EMPTY@2x.png */; };
 		36B2765E1A0124E800ED58AD /* CHECKBOX_FILLED.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B276321A0124E800ED58AD /* CHECKBOX_FILLED.png */; };
 		36B2765F1A0124E800ED58AD /* CHECKBOX_FILLED@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B276331A0124E800ED58AD /* CHECKBOX_FILLED@2x.png */; };
@@ -431,8 +430,6 @@
 		36B036A319DAF44D00E8CD21 /* EmailSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmailSettingController.h; path = AddUntechable/EmailSettingController/EmailSettingController.h; sourceTree = "<group>"; };
 		36B036A419DAF44D00E8CD21 /* EmailSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmailSettingController.m; path = AddUntechable/EmailSettingController/EmailSettingController.m; sourceTree = "<group>"; };
 		36B036A519DAF44D00E8CD21 /* EmailSettingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EmailSettingController.xib; path = AddUntechable/EmailSettingController/EmailSettingController.xib; sourceTree = "<group>"; };
-		36B275D51A00D36400ED58AD /* RMStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMStore.h; path = AddUntechable/RMStore/RMStore.h; sourceTree = "<group>"; };
-		36B275D61A00D36400ED58AD /* RMStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMStore.m; path = AddUntechable/RMStore/RMStore.m; sourceTree = "<group>"; };
 		36B276311A0124E800ED58AD /* CHECKBOX_EMPTY@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CHECKBOX_EMPTY@2x.png"; sourceTree = "<group>"; };
 		36B276321A0124E800ED58AD /* CHECKBOX_FILLED.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CHECKBOX_FILLED.png; sourceTree = "<group>"; };
 		36B276331A0124E800ED58AD /* CHECKBOX_FILLED@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CHECKBOX_FILLED@2x.png"; sourceTree = "<group>"; };
@@ -580,6 +577,7 @@
 			children = (
 				243C59DC1A4D3A530020350C /* ContactCustomizeDetailsControlelr */,
 				248E06B41A4ACD350099846A /* ContactsCustomizedModal */,
+				C33A87AF1A7BCD76000B9DAE /* EmailSettingsChangingController */,
 				24354D681A499EC5000EC781 /* ContactsListControllerViewController.h */,
 				24354D691A499EC5000EC781 /* ContactsListControllerViewController.m */,
 				24354D6A1A499EC5000EC781 /* ContactsListControllerViewController.xib */,
@@ -727,9 +725,12 @@
 			children = (
 				36561D7A19D2C8A40069D897 /* AppDelegate.h */,
 				36561D7B19D2C8A40069D897 /* AppDelegate.m */,
-				366ECD7B19D312BE00F71A11 /* Models */,
 				366ECD7F19D317E200F71A11 /* Config */,
 				3663932219D6A0A700512965 /* CommonFunctions */,
+				366ECD7B19D312BE00F71A11 /* Models */,
+				C36D2E4F1A79196E000537C5 /* PreferencesController */,
+				2474023E1B33CB7900459759 /* SetupGuide */,
+				2402BB7F1A1DBEF800255A73 /* UntechableListController */,
 				366ECD7519D2D24600F71A11 /* AddUntechable */,
 				36561D7D19D2C8A40069D897 /* Images.xcassets */,
 			);
@@ -824,15 +825,10 @@
 		366ECD7519D2D24600F71A11 /* AddUntechable */ = {
 			isa = PBXGroup;
 			children = (
-				2474023E1B33CB7900459759 /* SetupGuide */,
-				C33A87AF1A7BCD76000B9DAE /* EmailSettingsChangingController */,
-				C36D2E4F1A79196E000537C5 /* PreferencesController */,
-				36B275CF1A00CC9400ED58AD /* RMStore */,
-				2402BB7F1A1DBEF800255A73 /* UntechableListController */,
 				366ECD8619D322D700F71A11 /* AddUntechableController */,
 				24354D671A499D93000EC781 /* ContactsListController */,
-				36524AED19D9409C006DCAAF /* SocialnetworkController */,
 				36B0369F19DAF3E400E8CD21 /* EmailSettingController */,
+				36524AED19D9409C006DCAAF /* SocialnetworkController */,
 				36BB7B8219FFD94D00562069 /* ThankyouController */,
 			);
 			name = AddUntechable;
@@ -851,6 +847,8 @@
 				36474F2819D9AC3800084F34 /* UIPlaceHolderTextView.m */,
 				366ECD7C19D3135200F71A11 /* Untechable.h */,
 				366ECD7D19D3135200F71A11 /* Untechable.m */,
+				C3CA4DD31A80CE0700B03A23 /* SocialNetworksStatusModal.h */,
+				C3CA4DD41A80CE0700B03A23 /* SocialNetworksStatusModal.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1026,15 +1024,6 @@
 			name = EmailSettingController;
 			sourceTree = "<group>";
 		};
-		36B275CF1A00CC9400ED58AD /* RMStore */ = {
-			isa = PBXGroup;
-			children = (
-				36B275D51A00D36400ED58AD /* RMStore.h */,
-				36B275D61A00D36400ED58AD /* RMStore.m */,
-			);
-			name = RMStore;
-			sourceTree = "<group>";
-		};
 		36BB7B8219FFD94D00562069 /* ThankyouController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1079,7 +1068,6 @@
 		C36D2E4F1A79196E000537C5 /* PreferencesController */ = {
 			isa = PBXGroup;
 			children = (
-				C3CA4DD21A80CDCF00B03A23 /* SocialNetworksModal */,
 				C36D2E5A1A7919DC000537C5 /* SettingsViewController.h */,
 				C36D2E5B1A7919DC000537C5 /* SettingsViewController.m */,
 				C36D2E5C1A7919DC000537C5 /* SettingsViewController.xib */,
@@ -1090,15 +1078,6 @@
 				C36D2E611A791AEA000537C5 /* SettingsCellView-iPhone6-Plus.xib */,
 			);
 			name = PreferencesController;
-			sourceTree = "<group>";
-		};
-		C3CA4DD21A80CDCF00B03A23 /* SocialNetworksModal */ = {
-			isa = PBXGroup;
-			children = (
-				C3CA4DD31A80CE0700B03A23 /* SocialNetworksStatusModal.h */,
-				C3CA4DD41A80CE0700B03A23 /* SocialNetworksStatusModal.m */,
-			);
-			name = SocialNetworksModal;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1463,7 +1442,6 @@
 				366ECD9619D323DA00F71A11 /* AddUntechableController.m in Sources */,
 				C372098E1B7767AA003A40F2 /* RSetUntechable.m in Sources */,
 				36B4E53E1A28BBD400CC18B0 /* EmailTableViewCell.m in Sources */,
-				36B275D71A00D36400ED58AD /* RMStore.m in Sources */,
 				24A4B7A71A5126410029C8DF /* CustomTextTableViewCell.m in Sources */,
 				366F9DAA1A124FC7006602E1 /* FHSStream.m in Sources */,
 				243C59F91A4D984B0020350C /* PhoneNumberCell.m in Sources */,
