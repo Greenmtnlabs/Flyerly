@@ -12,7 +12,6 @@
 #import "SettingsViewController.h"
 #import "ContactsListControllerViewController.h"
 #import "UntechablesList.h"
-#import "SetupGuideThirdView.h"
 
 
 @interface AddUntechableController (){

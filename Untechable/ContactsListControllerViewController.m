@@ -17,7 +17,7 @@
 #import "EmailSettingController.h"
 #import "EmailChangingController.h"
 #import "SocialNetworksStatusModal.h"
-#import "AddUntechableController.h"
+
 
 @interface ContactsListControllerViewController () {
 
@@ -141,16 +141,7 @@
 }
 
 -(void) goBack {
-
-    for (UIViewController *controller in self.navigationController.viewControllers) {
-        if ([controller isKindOfClass:[AddUntechableController class]]) {
-            
-            AddUntechableController *addViewController = (AddUntechableController *)controller;
-            addViewController.untechable = untechable;
-            [self.navigationController popToViewController:addViewController animated:YES];
-            break;
-        }
-    }
+    [self.navigationController popViewControllerAnimated:YES];
     //hide keyboard when going back to view
     [searchTextField resignFirstResponder];
 }
