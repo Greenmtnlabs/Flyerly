@@ -226,13 +226,14 @@
 }
 
 -(IBAction)playVideo:(id)sender{
-    
+    /*
     NSString *path = [[NSBundle mainBundle]pathForResource:
                       @"untechable" ofType:@"mov"];
     moviePlayer = [[MPMoviePlayerViewController
                     alloc]initWithContentURL:[NSURL fileURLWithPath:path]];
     //[self presentModalViewController:moviePlayer animated:NO];
     [self presentViewController:moviePlayer animated:YES completion:nil];
+     */
 }
 
 
