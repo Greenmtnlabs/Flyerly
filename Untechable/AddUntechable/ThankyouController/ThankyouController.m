@@ -168,31 +168,6 @@
         
         // Right Navigation ________________________________________
         NSMutableArray  *rightNavItems;
-        /*if( [self canEdit] ) {
-            
-            editUntechable = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-            [editUntechable addTarget:self action:@selector(onEdit:) forControlEvents:UIControlEventTouchUpInside];
-            editUntechable.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
-            [editUntechable setTitle:@"EDIT" forState:normal];
-            [editUntechable setTitleColor:DEF_GRAY forState:UIControlStateNormal];
-            editUntechable.showsTouchWhenHighlighted = YES;
-            
-            UIBarButtonItem *editUntechableBarBtn = [[UIBarButtonItem alloc] initWithCustomView:editUntechable];
-            rightNavItems  = [NSMutableArray arrayWithObjects:editUntechableBarBtn,nil];
-            
-        }
-        else{
-            startNewUntechable = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-            [startNewUntechable addTarget:self action:@selector(onNew:) forControlEvents:UIControlEventTouchUpInside];
-            startNewUntechable.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-            [startNewUntechable setTitle:@"HOME" forState:normal];
-            [startNewUntechable setTitleColor:DEF_GRAY forState:UIControlStateNormal];
-            startNewUntechable.showsTouchWhenHighlighted = YES;
-            
-            UIBarButtonItem *startNewUntechableBarBtn = [[UIBarButtonItem alloc] initWithCustomView:startNewUntechable];
-            rightNavItems  = [NSMutableArray arrayWithObjects:startNewUntechableBarBtn,nil];
-        }*/
-        
         // Setting left Navigation button "Settings"
         settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 86, 42)];
         settingsButton.titleLabel.shadowColor = [UIColor clearColor];
