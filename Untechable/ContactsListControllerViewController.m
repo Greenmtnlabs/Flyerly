@@ -11,6 +11,7 @@
 #import "ContactListCell.h"
 #import "ContactCustomizeDetailsControlelrViewController.h"
 #import "SocialnetworkController.h"
+#import "SetupGuideFourthView.h"
 #import "Common.h"
 #import "ContactsCustomizedModal.h"
 #import "EmailSettingController.h"
@@ -175,13 +176,7 @@
     [untechable setCustomizedContactsForSession];
     [self mapAllSessionContactSelectionsOnMobileArray];
     
-    //[self reloadContactsTableInMainThread];
-    
-    
-    SocialnetworkController *socialnetwork;
-    socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
-    socialnetwork.untechable = untechable;
-    [self.navigationController pushViewController:socialnetwork animated:YES];
+    [self onNext];
     
 }
 
@@ -211,9 +206,24 @@
     
     selectedAnyEmail = [self haveSelectedAnyEmail];
     
-    if(![untechable.rUId  isEqualToString: @"1"]){
+    if( [untechable.rUId  isEqualToString: @"1"]){
+        
+        if( selectedAnyEmail ) {
+            [self showEmailSetupScreen:YES];//calledFromSetupScreen is YES
+        } else {
+            
+            SetupGuideFourthView *fourthScreen = [[SetupGuideFourthView alloc] initWithNibName:@"SetupGuideFourthView" bundle:nil];
+            if([untechable.rUId isEqualToString:@"1"]){
+                untechable.dic[@"rUId"] = @"1";
+            }
+            
+            fourthScreen.untechable = untechable;
+            [self.navigationController pushViewController:fourthScreen animated:YES];
+        }
+        
+    } else if( ![untechable.rUId  isEqualToString: @"1"] ){
         if ( selectedAnyEmail  ){
-            [self showEmailSetupScreen:NO];
+            [self showEmailSetupScreen:NO];//calledFromSetupScreen is NO
         }else {
             
             SocialnetworkController *socialnetwork;
@@ -222,8 +232,6 @@
             [self.navigationController pushViewController:socialnetwork animated:YES];
         }
     }
-    
-    
      //hides the keyboard when navigating to the next views
      [searchTextField resignFirstResponder];
 }

@@ -7,10 +7,7 @@
 //
 
 #import "SetupGuideThirdView.h"
-#import "SetupGuideSecondViewController.h"
 #import "ContactsListControllerViewController.h"
-#import "UntechablesList.h"
-#import "SetupGuideFourthView.h"
 
 @interface SetupGuideThirdView () {
     
@@ -125,32 +122,13 @@
 }
 
 -(void)onNext{
-
-    [self saveBeforeGoing];
-    
-    if( viewControllerToAdd.selectedAnyEmail ) {
-        [viewControllerToAdd showEmailSetupScreen:YES];
-    } else {
-    
-        SetupGuideFourthView *fourthScreen = [[SetupGuideFourthView alloc] initWithNibName:@"SetupGuideFourthView" bundle:nil];
-        if([untechable.rUId isEqualToString:@"1"]){
-            untechable.dic[@"rUId"] = @"1";
-        }
-        
-        fourthScreen.untechable = untechable;
-        [self.navigationController pushViewController:fourthScreen animated:YES];
-    }
+    [viewControllerToAdd onNext];
 }
 
 -(void) goBack {
     
     UINavigationController *navigationController = self.navigationController;
     [navigationController popViewControllerAnimated:YES];
-    [self saveBeforeGoing];
-    
-}
-
--(void)saveBeforeGoing {
     
 }
 
