@@ -281,16 +281,6 @@
  Set default values for new event
  */
 -(void)initWithDefValues {
-    NSString *customizedContactsFromSetup = [[NSUserDefaults standardUserDefaults]
-                                             stringForKey:@"customizedContactsFromSetup"];
-    if(customizedContactsFromSetup){
-        
-    } else {
-        customizedContactsFromSetup = @"";
-    }
-    
-    NSMutableArray *customizeContacts1 = [commonFunctions convertJsonStringIntoCCMArray:customizedContactsFromSetup];
-
     //Settings
     eventId  = @"";
     paid     = NO;
@@ -313,11 +303,8 @@
     //Screen2
     twillioNumber  = @"";
     location  = @"";
-    //emergencyNumber  = @"";
-    //emergencyContacts = [[NSMutableDictionary alloc] init];
-    //hasRecording = NO;
-    customizedContactsForCurrentSession = [[NSMutableArray alloc] initWithArray:customizeContacts1];
-    customizedContacts = customizedContactsFromSetup;
+    customizedContactsForCurrentSession = [[NSMutableArray alloc] init];
+    customizedContacts = @"";
 
     //Screen3
     socialStatus = @"";

@@ -187,24 +187,12 @@
     [self.inputEmail setTextColor:DEF_GREEN];
     self.inputEmail.font = [UIFont fontWithName:APP_FONT size:16];
     self.inputEmail.delegate = self;
-    
+    self.inputEmail.text = untechable.email;
     
     [self.inputPassword setTextColor:DEF_GREEN];
     self.inputPassword.font = [UIFont fontWithName:APP_FONT size:16];
     self.inputPassword.delegate = self;
-    
-    
-    if ( [untechable.email isEqualToString:@""] ){
-        
-        if ( ![[[NSUserDefaults standardUserDefaults] objectForKey:EMAIL_KEY] isEqualToString:@""] ||
-            ![[[NSUserDefaults standardUserDefaults] objectForKey:PASSWORD_KEY] isEqualToString:@""] ){
-            
-            self.inputEmail.text = [[NSUserDefaults standardUserDefaults] objectForKey:EMAIL_KEY];
-            self.inputPassword.text = [[NSUserDefaults standardUserDefaults] objectForKey:PASSWORD_KEY];
-        }
-    }else {
-        self.inputEmail.text = untechable.email;
-    }
+    self.inputPassword.text  = untechable.password;
 }
 
 #pragma mark -  Navigation functions
@@ -640,9 +628,6 @@
 }
 
 -(void)storeScreenVarsInDic{
-    
-    [[NSUserDefaults standardUserDefaults] setObject:_inputEmail.text forKey:EMAIL_KEY];
-    [[NSUserDefaults standardUserDefaults] setObject:_inputPassword.text forKey:PASSWORD_KEY];
     
     untechable.email = _inputEmail.text;
     untechable.password = _inputPassword.text;

@@ -156,16 +156,11 @@
     static NSString *cellId = @"SettingsCellView";
     SettingsCellView *cell = (SettingsCellView *)[tableView dequeueReusableCellWithIdentifier:cellId];
     
-    if (cell == nil)
-    {
+    if (cell == nil) {
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SettingsCellView" owner:self options:nil];
             cell = (SettingsCellView *)[nib objectAtIndex:0];
     }
     
-    NSLog(@"%@", [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allValues]);
-    
-    
-    //NSArray *keys = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys];
     if( indexPath.row == 0 ){
         
         // set first cell to show user name
