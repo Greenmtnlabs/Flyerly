@@ -399,7 +399,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [self saveOrUpdate];
     
     //During testing dont send untechable to server, just create in device and go t thankyou screen
-    if( [ENVIRONMENT isEqualToString:TESTING] ){
+    if( [UNT_ENVIRONMENT isEqualToString:TESTING] ){
         callBack(NO, @"Thankyou");
         return;
     }

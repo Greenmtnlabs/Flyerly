@@ -253,7 +253,7 @@
 
 -(void)onNext{
 
-    if( !internetReachable.isReachable && !([ENVIRONMENT isEqualToString:TESTING]) ){
+    if( !internetReachable.isReachable && !([UNT_ENVIRONMENT isEqualToString:TESTING]) ){
         //Show alert if internet is not avaialble...
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection"
                                                         message:@"You must be connected to the internet to sync your untechable on server."
