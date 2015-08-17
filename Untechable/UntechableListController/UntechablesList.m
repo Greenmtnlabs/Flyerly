@@ -256,21 +256,11 @@ int indexArrayS2[];
         }
     }
     
-    // temporary array that will hold indexes of values
-    int indexArray [timeStampArray.count];
-    
-    if( [sortFor isEqual:@"sec1"]){
-        indexArrayS1 [timeStampArray.count];
-    }else{
-        indexArrayS2 [timeStampArray.count];
-    }
-    
     //now getting the indexes of array and save it.
     for( int i = 0; i<timeStampArray.count; i++){
         for( int j = 0; j<timeStampArray.count; j++){
             
             if( sortedTimeStamps[i] == timeStamps[j] ){
-                indexArray[i] = j;
                 if( [sortFor isEqual:@"sec1"]){
                     indexArrayS1[i] = j;
                 }else{
@@ -662,9 +652,6 @@ int indexArrayS2[];
     NSArray *arrayToBeAdded =  @[@"30 min", @"1 hr", @"1 day", @"2 days"];
    
     _pickerData = arrayToBeAdded;
-    
-    self.timeDurationPicker.dataSource = self;
-    self.timeDurationPicker.delegate = self;
 }
 
 - (NSDate *)timestampStrToNsDate:(NSString *)timeStamp
@@ -741,7 +728,6 @@ int indexArrayS2[];
     [self addUntechable];
 }
 - (IBAction)btnDoneClick:(id)sender {
-    
     
     [_timeDurationPicker setHidden:YES];
     [_doneButtonView setHidden:YES];
