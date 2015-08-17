@@ -419,16 +419,6 @@
                              cancelButtonTitle:@"OK"
                              otherButtonTitles:nil];
     [temAlert show];
-    
-    if( [message isEqualToString:@"Untechable created successfully"] ){
-        
-        /* //doing this app crashing bcz alert value nil
-         //Go to main screen
-         [self.navigationController popToRootViewControllerAnimated:YES];
-         // Remove observers
-         [[NSNotificationCenter defaultCenter] removeObserver:self];
-         */
-    }
 }
 
 - (void)setNextHighlighted:(BOOL)highlighted {

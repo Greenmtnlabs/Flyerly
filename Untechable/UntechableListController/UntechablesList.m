@@ -353,15 +353,9 @@ int indexArrayS2[];
         [realm beginWriteTransaction];
         [realm deleteObjects:untechableToBeDeleted];
         [realm commitWriteTransaction];
-    }
-    if ( section == 0 ){
-        NSString *untechablePath = [tempDict objectForKey:@"untechablePath"];
-        [[NSFileManager defaultManager] removeItemAtPath:untechablePath error:nil];
-        [sectionOneArray removeObjectAtIndex:indexToremoveOnSucess];
-    }else if ( section == 1 ){
-        NSString *untechablePath = [tempDict objectForKey:@"untechablePath"];
-        [[NSFileManager defaultManager] removeItemAtPath:untechablePath error:nil];
-        [sectionTwoArray removeObjectAtIndex:indexToremoveOnSucess];
+        
+        [self setDefaultModel];
+        [untechablesTable reloadData];
     }
 }
 
@@ -392,7 +386,7 @@ int indexArrayS2[];
         //NSLog(@"In response of save api: %@",dict);
         
         if( [[dict valueForKey:@"status"] isEqualToString:@"OK"] ) {
-            [self deleteUntechable:indexToremoveOnSucess Section:section];
+            
         } else{
             message = [dict valueForKey:@"message"];
             if( !([[dict valueForKey:@"eventId"] isEqualToString:@"0"]) ) {
@@ -415,6 +409,7 @@ int indexArrayS2[];
     else{
         dispatch_async( dispatch_get_main_queue(), ^{
             [self changeNavigation:@"ON_FINISH_SUCCESS"];
+            [self deleteUntechable:indexToremoveOnSucess Section:section];
         });
     }
     
@@ -423,8 +418,6 @@ int indexArrayS2[];
             [self showMsgOnApiResponse:message];
         });
     }
-    
-    [untechablesTable reloadData];
 }
 
 -(void)updateUI{
