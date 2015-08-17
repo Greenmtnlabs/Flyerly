@@ -45,7 +45,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="130" sectionHeaderHeight="20" sectionFooterHeight="20" translatesAutoresizingMaskIntoConstraints="NO" id="Rzs-Cc-ehm">
-                    <rect key="frame" x="0.0" y="136" width="414" height="600"/>
+                    <rect key="frame" x="0.0" y="136" width="320" height="600"/>
                     <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="EBG-2h-CJK"/>
