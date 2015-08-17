@@ -576,7 +576,7 @@
     UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, [pickerView rowSizeForComponent:component].width, [pickerView rowSizeForComponent:component].height)];
     lbl.text = [_pickerData objectAtIndex:row];
     lbl.adjustsFontSizeToFitWidth = YES;
-    lbl.textAlignment=UITextAlignmentCenter;
+    lbl.textAlignment= NSTextAlignmentCenter;
     
     //change the text size of pickers array accordingly
     if( IS_IPHONE_4 ){
