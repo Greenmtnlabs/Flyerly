@@ -363,6 +363,8 @@ int indexArrayS2[];
         [[NSFileManager defaultManager] removeItemAtPath:untechablePath error:nil];
         [sectionTwoArray removeObjectAtIndex:indexToremoveOnSucess];
     }
+    
+    [untechablesTable reloadData];
 }
 
 - (void)sendDeleteRequestToApi:(NSInteger)indexToremoveOnSucess Section:(NSInteger)section {
@@ -392,7 +394,7 @@ int indexArrayS2[];
         //NSLog(@"In response of save api: %@",dict);
         
         if( [[dict valueForKey:@"status"] isEqualToString:@"OK"] ) {
-            [self deleteUntechable:indexToremoveOnSucess Section:section];
+            
         } else{
             message = [dict valueForKey:@"message"];
             if( !([[dict valueForKey:@"eventId"] isEqualToString:@"0"]) ) {
@@ -415,6 +417,7 @@ int indexArrayS2[];
     else{
         dispatch_async( dispatch_get_main_queue(), ^{
             [self changeNavigation:@"ON_FINISH_SUCCESS"];
+            [self deleteUntechable:indexToremoveOnSucess Section:section];
         });
     }
     
@@ -423,8 +426,6 @@ int indexArrayS2[];
             [self showMsgOnApiResponse:message];
         });
     }
-    
-    [untechablesTable reloadData];
 }
 
 -(void)updateUI{

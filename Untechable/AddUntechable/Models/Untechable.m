@@ -480,6 +480,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     }
     else{
         errorOnFinish = YES;
+        message = @"Error occurred, please try again later.";        
     }
     
     callBack(errorOnFinish, message);
