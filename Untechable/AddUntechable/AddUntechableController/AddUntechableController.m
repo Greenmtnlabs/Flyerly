@@ -7,14 +7,11 @@
 //
 
 #import "AddUntechableController.h"
-#import "PhoneSetupController.h"
-#import "ThankyouController.h"
 #import "Common.h"
 #import "BSKeyboardControls.h"
 #import "SettingsViewController.h"
 #import "ContactsListControllerViewController.h"
 #import "UntechablesList.h"
-#import "SetupGuideThirdView.h"
 
 
 @interface AddUntechableController (){
@@ -49,7 +46,7 @@
 
 @implementation AddUntechableController
 
-@synthesize totalUntechables,callReset,untechable;
+@synthesize totalUntechables,callReset,untechable,openPickerButton;
 
 
 #pragma mark -  Default functions
@@ -170,9 +167,6 @@
 
 #pragma mark -  Navigation functions
 - (void)setNavigationDefaults{
-
-    defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
-    defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
     
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
@@ -193,7 +187,7 @@
             backButton.titleLabel.shadowColor = [UIColor clearColor];
             backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
             [backButton setTitle:TITLE_BACK_TXT forState:normal];
-            [backButton setTitleColor:defGray forState:UIControlStateNormal];
+            [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
             [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
             [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
             backButton.showsTouchWhenHighlighted = YES;
@@ -208,7 +202,7 @@
             settingsButton.titleLabel.shadowColor = [UIColor clearColor];
             settingsButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
             [settingsButton setTitle:TITLE_SETTINGS_TXT forState:normal];
-            [settingsButton setTitleColor:defGray forState:UIControlStateNormal];
+            [settingsButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
             [settingsButton addTarget:self action:@selector(goToSettings) forControlEvents:UIControlEventTouchUpInside];
             settingsButton.showsTouchWhenHighlighted = YES;
             
@@ -223,7 +217,7 @@
         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
-        [nextButton setTitleColor:defGray forState:UIControlStateNormal];
+        [nextButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
         [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
 
@@ -236,8 +230,6 @@
 }
 
 -(IBAction)goToSettings{
-    
-    NSLog(@"Go To settings screen");
     SettingsViewController *settingsController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil];
     untechable.rUId = @"1";
     untechable.dic[@"rUId"] = @"1";
@@ -246,15 +238,7 @@
 }
 
 -(void) goBack {
-    
-    for (UIViewController *controller in self.navigationController.viewControllers) {
-        if ([controller isKindOfClass:[UntechablesList class]]) {
-            
-            UntechablesList *untechableListController = (UntechablesList *)controller;
-            [self.navigationController popToViewController:untechableListController animated:YES];
-            break;
-        }
-    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)btnNextTouchStart{
@@ -264,7 +248,7 @@
     [self setNextHighlighted:NO];
 }
 - (void)setNextHighlighted:(BOOL)highlighted {
-    (highlighted) ? [nextButton setBackgroundColor:defGreen] : [nextButton setBackgroundColor:[UIColor clearColor]];
+    (highlighted) ? [nextButton setBackgroundColor:DEF_GREEN] : [nextButton setBackgroundColor:[UIColor clearColor]];
 }
 
 
@@ -291,15 +275,13 @@
             }
         }
         
-        NSLog(goToNext ? @"goToNext- YES" : @"goToNext- NO");
-        
         if( goToNext ) {
-            
             ContactsListControllerViewController *listController = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
             listController.untechable = untechable;
             [self.navigationController pushViewController:listController animated:YES];
-          }
-    }else {
+        }
+        
+    } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"What are you going untechable for?"
                                                         message:@"You must specify what you'll be doing with your time away from technology before proceeding."
                                                        delegate:nil
@@ -484,17 +466,10 @@
     }
 }
 
--(void)goToThankyou{
-    ThankyouController *thankyouController;
-    thankyouController = [[ThankyouController alloc]initWithNibName:@"ThankyouController" bundle:nil];
-    thankyouController.untechable = untechable;
-    [self.navigationController pushViewController:thankyouController animated:YES];
-}
-
 #pragma mark -  UI functions
 -(void)updateUI{
     
-    [_btnLblWwud setTitleColor:defGray forState:UIControlStateNormal];
+    [_btnLblWwud setTitleColor:DEF_GRAY forState:UIControlStateNormal];
     _btnLblWwud.titleLabel.font = [UIFont fontWithName:APP_FONT size:25];
 
     _inputSpendingTimeText.text = untechable.spendingTimeTxt;
@@ -505,27 +480,27 @@
     }
     _inputSpendingTimeText.font = [UIFont fontWithName:APP_FONT size:18];
     
-    [_btnLblStartTime setTitleColor:defGray forState:UIControlStateNormal];
+    [_btnLblStartTime setTitleColor:DEF_GRAY forState:UIControlStateNormal];
     _btnLblStartTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:25];
     
-    [_btnStartTime setTitleColor:defGreen forState:UIControlStateNormal];
+    [_btnStartTime setTitleColor:DEF_GREEN forState:UIControlStateNormal];
     _btnStartTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
     [_btnStartTime setTitle:[untechable.commonFunctions timestampStrToAppDate:untechable.startDate] forState:UIControlStateNormal];
     
     
-    [_btnLblEndTime setTitleColor:defGray forState:UIControlStateNormal];
+    [_btnLblEndTime setTitleColor:DEF_GRAY forState:UIControlStateNormal];
     _btnLblEndTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:25];
     
-    [_btnEndTime setTitleColor:defGreen forState:UIControlStateNormal];
+    [_btnEndTime setTitleColor:DEF_GREEN forState:UIControlStateNormal];
     _btnEndTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
     [_btnEndTime setTitle:[untechable.commonFunctions timestampStrToAppDate:untechable.endDate] forState:UIControlStateNormal];
     
-    [_lblNoEndDate setTextColor:defGray];
+    [_lblNoEndDate setTextColor:DEF_GRAY];
     _lblNoEndDate.font = [UIFont fontWithName:APP_FONT size:14];
 
     [_cbNoEndDate setSelected:!(untechable.hasEndDate)];
     
-    [_pickerCloseBtn setTitleColor:defGray forState:UIControlStateNormal];
+    [_pickerCloseBtn setTitleColor:DEF_GRAY forState:UIControlStateNormal];
     _pickerCloseBtn.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
     
 }

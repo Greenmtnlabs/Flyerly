@@ -16,6 +16,7 @@
 
 -(void)setCellObjects :(ContactsCustomizedModal *)model :(int)status :(NSString *)tableName;
 
+//Array of images collection
 @property ( nonatomic, strong ) IBOutletCollection(UIImageView) NSArray *customizationStatus;
 
 @end

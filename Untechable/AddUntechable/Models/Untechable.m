@@ -181,13 +181,10 @@
         //Screen2 vars
         dic[@"twillioNumber"] = twillioNumber;
         dic[@"location"] = location;
-        //dic[@"emergencyNumber"] = emergencyNumber;
-        //dic[@"emergencyContacts"] = emergencyContacts;
-        //dic[@"hasRecording"] = hasRecording ? @"YES" : @"NO";
         
         dic[@"customizedContacts"] = [commonFunctions convertCCMArrayIntoJsonString:customizedContactsForCurrentSession];
-        customizedContacts = dic[@"customizedContacts"];
-        customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:dic[@"customizedContacts"]];
+        customizedContacts = ( dic[@"customizedContacts"] ) ? dic[@"customizedContacts"] : @"";
+        [self setCustomizedContactsForSession];
         
         //Screen3 vars
         dic[@"socialStatus"] = socialStatus;
@@ -239,9 +236,6 @@
         //Screen2 vars
         twillioNumber     = ( dic[@"twillioNumber"] ) ? dic[@"twillioNumber"] : @"";
         location          = ( dic[@"location"] ) ? dic[@"location"] : @"";
-        //emergencyNumber   = ( dic[@"emergencyNumber"] ) ? dic[@"emergencyNumber"] : @"";
-        //emergencyContacts = ( dic[@"emergencyContacts"] ) ? dic[@"emergencyContacts"] : @"";
-        //hasRecording      = ([dic[@"hasRecording"] isEqualToString:@"YES"]) ? YES : NO;
     
         customizedContacts = ( dic[@"customizedContacts"] ) ? dic[@"customizedContacts"] : @"";
         customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:customizedContacts];
@@ -268,8 +262,11 @@
         omsHostName     = ( dic[@"omsHostName"] ) ? dic[@"omsHostName"] : @"";
         omsPort         = ( dic[@"omsPort"] ) ? dic[@"omsPort"] : @"";
     }
-    
-    //NSLog(@"dic: %@", dic);
+
+}
+
+-(void) setCustomizedContactsForSession {
+    customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:customizedContacts];
 }
 
 /**
@@ -284,16 +281,6 @@
  Set default values for new event
  */
 -(void)initWithDefValues {
-    NSString *customizedContactsFromSetup = [[NSUserDefaults standardUserDefaults]
-                                             stringForKey:@"customizedContactsFromSetup"];
-    if(customizedContactsFromSetup){
-        
-    } else {
-        customizedContactsFromSetup = @"";
-    }
-    
-    NSMutableArray *customizeContacts1 = [commonFunctions convertJsonStringIntoCCMArray:customizedContactsFromSetup];
-
     //Settings
     eventId  = @"";
     paid     = NO;
@@ -316,11 +303,8 @@
     //Screen2
     twillioNumber  = @"";
     location  = @"";
-    //emergencyNumber  = @"";
-    //emergencyContacts = [[NSMutableDictionary alloc] init];
-    //hasRecording = NO;
-    customizedContactsForCurrentSession = [[NSMutableArray alloc] initWithArray:customizeContacts1];
-    customizedContacts = customizedContactsFromSetup;
+    customizedContactsForCurrentSession = [[NSMutableArray alloc] init];
+    customizedContacts = @"";
 
     //Screen3
     socialStatus = @"";
@@ -412,8 +396,15 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 #pragma mark - Send to Server
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack{
 
-    //[self removeRedundentDataForContacts];
     [self saveOrUpdate];
+    
+    //During testing dont send untechable to server, just create in device and go t thankyou screen
+    if( [UNT_ENVIRONMENT isEqualToString:TESTING] ){
+        callBack(NO, @"Thankyou");
+        return;
+    }
+
+    
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:API_SAVE]];

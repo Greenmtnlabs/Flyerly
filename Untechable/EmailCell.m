@@ -8,11 +8,9 @@
 
 #import "EmailCell.h"
 
-ContactsCustomizedModal *contactModal_;
-
 @implementation EmailCell
 
-@synthesize untechable,emailButton,contactEmail;
+@synthesize emailButton,contactEmail;
 
 -(void)setCellValues :(NSString *)email {
     
@@ -21,14 +19,9 @@ ContactsCustomizedModal *contactModal_;
     
 }
 
--(void)setCellModal :(ContactsCustomizedModal *)contactModal{
-
-    contactModal_ = contactModal;
-}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 

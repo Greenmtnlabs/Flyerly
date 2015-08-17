@@ -12,24 +12,13 @@
 #import "ContactsCustomizedModal.h"
 #import "BSKeyboardControls.h"
 
-@interface ContactCustomizeDetailsControlelrViewController : UIViewController <UITableViewDelegate, BSKeyboardControlsDelegate, UITableViewDataSource,UITextViewDelegate>
-{
+@interface ContactCustomizeDetailsControlelrViewController : UIViewController <UITableViewDelegate, BSKeyboardControlsDelegate, UITableViewDataSource,UITextViewDelegate> {
     
     UIButton *backButton;
-    UIButton *saveButton;
-    UIColor *defGreen;//GREEN
-    UIColor *defGray;//GRAY
-    
+    UIButton *saveButton;    
 }
 
-@property (nonatomic,strong)NSMutableArray *allEmails;
-@property (nonatomic,strong)NSMutableArray *allPhoneNumbers;
-@property (nonatomic,strong)NSMutableArray *phoneNumbersStatus;
-@property (nonatomic,strong)NSString *customTextForContact;
-
-@property (nonatomic,strong)NSMutableDictionary *customizedContactsDictionary;
 @property (nonatomic,strong)  Untechable *untechable;
-@property (nonatomic,strong)  ContactsListControllerViewController *contactListController;
 @property (nonatomic,strong)  ContactsCustomizedModal *contactModal;
 
 - (void) saveSpendingTimeText;

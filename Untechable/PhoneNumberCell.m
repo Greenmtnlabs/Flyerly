@@ -8,11 +8,8 @@
 
 #import "PhoneNumberCell.h"
 
-ContactsCustomizedModal *contactModal_;
 
 @implementation PhoneNumberCell
-
-@synthesize untechable,contactModal;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
@@ -24,12 +21,6 @@ ContactsCustomizedModal *contactModal_;
 
     self.nubmerType.text = nubmerType;
     self.nubmer.text = phoneNumber;
-}
-
--(void)setCellModal :(ContactsCustomizedModal *)contactModal{
-
-    //if ( contactModal.)
-    contactModal_ = contactModal;
 }
 
 @end

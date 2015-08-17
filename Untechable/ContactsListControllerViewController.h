@@ -17,23 +17,21 @@
     UIButton *backButton;
     UIButton *nextButton;
     UIButton *skipButton;
-    UIColor *defGreen;//GREEN
-    UIColor *defGray;//GRAY
-    
 }
 
 @property (nonatomic,strong)  Untechable *untechable;
 
-@property(nonatomic,strong) NSMutableArray *contactModalsArray;
-@property(nonatomic,strong) NSMutableArray *contactsArray;
-@property(nonatomic,strong) NSMutableArray *contactBackupArray;
-@property(nonatomic,strong) NSMutableArray *selectedIdentifiers;
-@property(nonatomic,strong) NSMutableArray *currentlyEditingContacts;
-@property(assign) BOOL selectedAnyEmail;
+//Array of all phone contacts (extracted from phonebook )
+@property(nonatomic,strong) NSMutableArray *mobileContactsArray;
+//This array required because when user searched any name, above contactsArray will sort a/c to name,
+//but when user remove searching text, we have to fill that array with it
+@property(nonatomic,strong) NSMutableArray *mobileContactBackupArray;
 
-@property(nonatomic,strong) IBOutlet UITextField *searchTextField;
+//This will help us on next, if emails are exist then go to setup email screen
+@property(assign) BOOL selectedAnyEmail;
 - (void) showEmailSetupScreen : ( BOOL ) calledFromSetupScreen;
 
+@property(nonatomic,strong) IBOutlet UITextField *searchTextField;
 
-
+-(void)onNext;
 @end

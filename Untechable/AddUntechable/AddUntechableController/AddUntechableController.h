@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <AddressBookUI/AddressBookUI.h>
 #import "Untechable.h"
 #import "BSKeyboardControls.h"
 
-@interface AddUntechableController : UIViewController < UITextViewDelegate, BSKeyboardControlsDelegate, ABPeoplePickerNavigationControllerDelegate , UIPickerViewDataSource , UIPickerViewDelegate>
+@interface AddUntechableController : UIViewController < UITextViewDelegate, BSKeyboardControlsDelegate, UIPickerViewDataSource , UIPickerViewDelegate>
 {
     UILabel *titleLabel;
     UIButton *helpButton;
@@ -20,14 +19,8 @@
     UIButton *nextButton;
     
     UIButton *openPickerButton;
-    
-    UIColor *defGreen;//GREEN
-    UIColor *defGray;//GRAY
     NSString *pickerOpenFor;
-    
     NSDate *now1; //current time +60mint
-    
-    //Untechable *untechable;
 }
 
 -(void)setDefaultModel;

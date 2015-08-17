@@ -22,10 +22,6 @@
 @end
 
 @implementation SocialNetworksStatusModal {
-    
-    UIColor *defGreen;
-    UIColor *defGray;
-    
     LIALinkedInHttpClient *_linkedInclient;
 }
 
@@ -49,9 +45,6 @@
         commonFunctions = [[CommonFunctions alloc] init];
         
         _linkedInclient = [self linkedInclient];
-        
-        defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
-        defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
     }
     return self;
 }
@@ -687,9 +680,9 @@
 // Button green (active) and gray ( inActive ) case
 -(void)btnActivate:(UIButton *)btnPointer active:(BOOL)active {
     if( active == YES )
-        [btnPointer setTitleColor:defGreen forState:UIControlStateNormal];
+        [btnPointer setTitleColor:DEF_GREEN forState:UIControlStateNormal];
     else
-        [btnPointer setTitleColor:defGray forState:UIControlStateNormal];
+        [btnPointer setTitleColor:DEF_GRAY forState:UIControlStateNormal];
 }
 
 @end

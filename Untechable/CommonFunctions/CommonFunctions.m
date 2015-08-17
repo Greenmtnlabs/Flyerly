@@ -123,12 +123,10 @@ NSString *currentEnteredPhoneNumber;
         curContactDetails = [customizedContactsModals objectForKey:[NSString stringWithFormat:@"%d",i]];
        
         ContactsCustomizedModal *curObj =  [[ContactsCustomizedModal alloc] init];
-        curObj.name = [curContactDetails objectForKey:@"contactName"];
+        curObj.contactName = [curContactDetails objectForKey:@"contactName"];
         curObj.allPhoneNumbers = [curContactDetails objectForKey:@"phoneNumbers"];
         curObj.allEmails = [curContactDetails objectForKey:@"emailAddresses"];
         curObj.customTextForContact = [curContactDetails objectForKey:@"customTextForContact"];
-        curObj.IsCustomized = [curContactDetails objectForKey:@"IsCustomized"];
-        curObj.cutomizingStatusArray = [curContactDetails objectForKey:@"cutomizingStatusArray"];
         
         [savedCustomContacts addObject:curObj];
     }
@@ -143,12 +141,16 @@ NSString *currentEnteredPhoneNumber;
         
         NSMutableDictionary *curContactDetails = [[NSMutableDictionary alloc] init];
         ContactsCustomizedModal *curObj =  [value_ objectAtIndex:i];
-        [curContactDetails setValue:curObj.name forKey:@"contactName"];
-        [curContactDetails setValue:curObj.allPhoneNumbers forKey:@"phoneNumbers"];
+        [curContactDetails setValue:curObj.contactName forKey:@"contactName"];
+        NSMutableArray *filterdPhoneNumbers = [[NSMutableArray alloc] init];
+        for(int i=0; i<curObj.allPhoneNumbers.count; i++){
+            if( curObj.allPhoneNumbers[i][2] || curObj.allPhoneNumbers[i][3] )
+            [filterdPhoneNumbers addObject:curObj.allPhoneNumbers[i]];
+        }
+        [curContactDetails setValue:filterdPhoneNumbers forKey:@"phoneNumbers"];
+        
         [curContactDetails setValue:curObj.allEmails forKey:@"emailAddresses"];
         [curContactDetails setValue:curObj.customTextForContact forKey:@"customTextForContact"];
-        [curContactDetails setValue:curObj.cutomizingStatusArray forKey:@"cutomizingStatusArray"];
-        [curContactDetails setObject:[NSNumber numberWithBool:curObj.IsCustomized] forKey:@"IsCustomized"];
         [customizedContactsArray setValue:curContactDetails forKey:[NSString stringWithFormat:@"%i",i]];
         
     }

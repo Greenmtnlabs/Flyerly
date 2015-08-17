@@ -12,7 +12,6 @@
 #import "Common.h"
 #import "UntechablesList.h"
 #import "SetupGuideViewController.h"
-#import "UntechOptionsViewController.h"
 #import "RSetUntechable.h"
 
 @implementation AppDelegate
@@ -20,9 +19,8 @@
 
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    NSLog( @"homeDirectoryPath this will help us in finding realm file: %@", NSHomeDirectory() );
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
 
     [Crittercism enableWithAppID: CRITTERCISM_APP_ID];
     

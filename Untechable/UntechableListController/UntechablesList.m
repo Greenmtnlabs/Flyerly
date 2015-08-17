@@ -59,6 +59,8 @@ int indexArrayS2[];
 
 - (void)viewWillAppear:(BOOL)animated{
     
+    NSLog( @"homeDirectoryPath this will help us in finding realm file: %@", NSHomeDirectory() );
+    
     if( loadAllUntecs == 1)
         [self setDefaultModel];
     else
@@ -191,42 +193,6 @@ int indexArrayS2[];
     untechable.spendingTimeTxt = selectedStatus;
     NSString *socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", timeInString, untechable.spendingTimeTxt];
     untechable.socialStatus = socialStatus;
-    
-   [self getAuthsOfSocialMedias];
-}
-/**
- Social Medias Auths are in device and we can get them and use them
- **/
--( void ) getAuthsOfSocialMedias {
-    
-    NSString *fbAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuth"];
-    fbAuth = ( fbAuth ) ? fbAuth : @"";
-    
-    NSString *fbAuthExpiryTs = [[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuthExpiryTs"];
-    fbAuthExpiryTs = ( fbAuthExpiryTs ) ? fbAuthExpiryTs : @"";
-    
-    NSString *twitterAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuth"];
-    twitterAuth = (twitterAuth) ? twitterAuth : @"";
-    
-    NSString *twOAuthTokenSecret = [[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuthTokkenSecerate"];
-    twOAuthTokenSecret = (twOAuthTokenSecret) ? (twOAuthTokenSecret) : @"";
-    
-    NSString *linkedinAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"linkedinAuth" ];
-    linkedinAuth = (linkedinAuth) ? linkedinAuth : @"";
-    
-    NSString *email = [[NSUserDefaults standardUserDefaults] objectForKey:@"emailAddress" ];
-    email = (email) ? email : @"";
-    
-    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:@"emailPassword" ];
-    password = (password) ? password : @"";
-    
-    untechable.fbAuth = fbAuth;
-    untechable.fbAuthExpiryTs = fbAuthExpiryTs;
-    untechable.twitterAuth = twitterAuth;
-    untechable.twOAuthTokenSecret = twOAuthTokenSecret;
-    untechable.linkedinAuth = linkedinAuth;
-    untechable.email = email;
-    untechable.password = password;
 }
 
 // set default vaules in model

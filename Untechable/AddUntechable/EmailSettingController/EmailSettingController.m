@@ -181,38 +181,23 @@
 -(void)updateUI
 {
     
-    [_lbl1 setTextColor:defGray];
+    [_lbl1 setTextColor:DEF_GRAY];
     _lbl1.font = [UIFont fontWithName:APP_FONT size:20];
     
-    [self.inputEmail setTextColor:defGreen];
+    [self.inputEmail setTextColor:DEF_GREEN];
     self.inputEmail.font = [UIFont fontWithName:APP_FONT size:16];
     self.inputEmail.delegate = self;
+    self.inputEmail.text = untechable.email;
     
-    
-    [self.inputPassword setTextColor:defGreen];
+    [self.inputPassword setTextColor:DEF_GREEN];
     self.inputPassword.font = [UIFont fontWithName:APP_FONT size:16];
     self.inputPassword.delegate = self;
-    
-    
-    if ( [untechable.email isEqualToString:@""] ){
-        
-        if ( ![[[NSUserDefaults standardUserDefaults] objectForKey:EMAIL_KEY] isEqualToString:@""] ||
-            ![[[NSUserDefaults standardUserDefaults] objectForKey:PASSWORD_KEY] isEqualToString:@""] ){
-            
-            self.inputEmail.text = [[NSUserDefaults standardUserDefaults] objectForKey:EMAIL_KEY];
-            self.inputPassword.text = [[NSUserDefaults standardUserDefaults] objectForKey:PASSWORD_KEY];
-        }
-    }else {
-        self.inputEmail.text = untechable.email;
-    }
+    self.inputPassword.text  = untechable.password;
 }
 
 #pragma mark -  Navigation functions
 
 - (void)setNavigationDefaults{
-    
-    defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
-    defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
     
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
@@ -256,7 +241,7 @@
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
         [backButton setTitle:TITLE_BACK_TXT forState:normal];
-        [backButton setTitleColor:defGray forState:UIControlStateNormal];
+        [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(btnNextTouchEndToServerAccount) forControlEvents:UIControlEventTouchUpInside];
         backButton.showsTouchWhenHighlighted = YES;
@@ -294,7 +279,7 @@
             [rightBarButton setTitle:TITLE_FINISH_TXT forState:normal];
         }
         
-        [rightBarButton setTitleColor:defGray forState:UIControlStateNormal];
+        [rightBarButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         rightBarButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton_ = [[UIBarButtonItem alloc] initWithCustomView:rightBarButton];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton_,nil];
@@ -315,7 +300,7 @@
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
         [backButton setTitle:TITLE_BACK_TXT forState:normal];
-        [backButton setTitleColor:defGray forState:UIControlStateNormal];
+        [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(btnBackToAccountType) forControlEvents:UIControlEventTouchUpInside];
         
@@ -353,7 +338,7 @@
             [rightBarButton setTitle:TITLE_FINISH_TXT forState:normal];
         }
         
-        [rightBarButton setTitleColor:defGray forState:UIControlStateNormal];
+        [rightBarButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         
         if ( [untechable.acType isEqualToString:@"OTHER"] ){
             
@@ -361,7 +346,7 @@
             [rightBarButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
             rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
             [rightBarButton setTitle:@"NEXT" forState:normal];
-            [rightBarButton setTitleColor:defGray forState:UIControlStateNormal];
+            [rightBarButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
             
         }
          rightBarButton.showsTouchWhenHighlighted = YES;
@@ -377,7 +362,7 @@
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
         [backButton setTitle:TITLE_BACK_TXT forState:normal];
-        [backButton setTitleColor:defGray forState:UIControlStateNormal];
+        [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(btnBackTouchEnd) forControlEvents:UIControlEventTouchUpInside];
         backButton.showsTouchWhenHighlighted = YES;
@@ -394,7 +379,7 @@
         [rightBarButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
         rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [rightBarButton setTitle:@"FINISH" forState:normal];
-        [rightBarButton setTitleColor:defGray forState:UIControlStateNormal];
+        [rightBarButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         
         rightBarButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton_ = [[UIBarButtonItem alloc] initWithCustomView:rightBarButton];
@@ -414,7 +399,7 @@
             skipButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
             skipButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
             [skipButton setTitle:TITLE_SKIP_TXT forState:normal];
-            [skipButton setTitleColor:defGray forState:UIControlStateNormal];
+            [skipButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
             [skipButton addTarget:self action:@selector(btnSkipTouchStart) forControlEvents:UIControlEventTouchDown];
             [skipButton addTarget:self action:@selector(btnSkipTouchEnd) forControlEvents:UIControlEventTouchUpInside];
             skipButton.showsTouchWhenHighlighted = YES;
@@ -436,7 +421,7 @@
     [self setSkipHighlighted:NO];
 }
 - (void)setSkipHighlighted:(BOOL)highlighted {
-    (highlighted) ? [skipButton setBackgroundColor:defGreen] : [skipButton setBackgroundColor:[UIColor clearColor]];
+    (highlighted) ? [skipButton setBackgroundColor:DEF_GREEN] : [skipButton setBackgroundColor:[UIColor clearColor]];
 }
 
 -(void)onSkip{
@@ -463,7 +448,7 @@
     [self setNextHighlighted:NO];
 }
 - (void)setNextHighlighted:(BOOL)highlighted {
-    (highlighted) ? [rightBarButton setBackgroundColor:defGreen] : [rightBarButton setBackgroundColor:[UIColor clearColor]];
+    (highlighted) ? [rightBarButton setBackgroundColor:DEF_GREEN] : [rightBarButton setBackgroundColor:[UIColor clearColor]];
 }
 
 -(void)btnBackTouchStart{
@@ -474,7 +459,7 @@
     [self onBack];
 }
 - (void)setBackHighlighted:(BOOL)highlighted {
-    (highlighted) ? [backButton setBackgroundColor:defGreen] : [backButton setBackgroundColor:[UIColor clearColor]];
+    (highlighted) ? [backButton setBackgroundColor:DEF_GREEN] : [backButton setBackgroundColor:[UIColor clearColor]];
 }
 
 -(void)onBack{
@@ -643,9 +628,6 @@
 }
 
 -(void)storeScreenVarsInDic{
-    
-    [[NSUserDefaults standardUserDefaults] setObject:_inputEmail.text forKey:EMAIL_KEY];
-    [[NSUserDefaults standardUserDefaults] setObject:_inputPassword.text forKey:PASSWORD_KEY];
     
     untechable.email = _inputEmail.text;
     untechable.password = _inputPassword.text;

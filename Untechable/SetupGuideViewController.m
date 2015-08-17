@@ -9,8 +9,6 @@
 #import "SetupGuideViewController.h"
 #import "Common.h"
 #import "SetupGuideSecondViewController.h"
-#import "AddUntechableController.h"
-#import "SettingsViewController.h"
 
 
 @interface SetupGuideViewController () {

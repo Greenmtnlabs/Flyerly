@@ -11,17 +11,16 @@
 #import "ContactListCell.h"
 #import "ContactCustomizeDetailsControlelrViewController.h"
 #import "SocialnetworkController.h"
+#import "SetupGuideFourthView.h"
 #import "Common.h"
 #import "ContactsCustomizedModal.h"
 #import "EmailSettingController.h"
 #import "EmailChangingController.h"
 #import "SocialNetworksStatusModal.h"
-#import "AddUntechableController.h"
+
 
 @interface ContactsListControllerViewController () {
-    
-    NSMutableDictionary *customizedContactsDictionary;
-    NSString *customizedContactsString;
+
     EmailSettingController *emailSettingController;
 }
 
@@ -31,7 +30,7 @@
 
 @implementation ContactsListControllerViewController
 
-@synthesize contactModalsArray,contactsArray,contactBackupArray,searchTextField,selectedIdentifiers,untechable,currentlyEditingContacts, selectedAnyEmail;
+@synthesize mobileContactsArray,mobileContactBackupArray,searchTextField,untechable, selectedAnyEmail;
 
 
 
@@ -48,14 +47,6 @@
     
     [_contactsTable  setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
     [searchTextField setReturnKeyType:UIReturnKeyDone];
-
-    if ( untechable.customizedContactsForCurrentSession.count > 0 ){
-        currentlyEditingContacts = untechable.customizedContactsForCurrentSession;
-    }
-    
-    if ( currentlyEditingContacts == nil ){
-        currentlyEditingContacts = [[NSMutableArray alloc] init];
-    }
     
     [searchTextField resignFirstResponder];
 
@@ -67,21 +58,11 @@
     
     [self setNavigation:@"viewDidLoad"];
     
-    contactBackupArray = nil;
-    
-    // Load device contacts
-    [self loadLocalContacts];
-        
-    customizedContactsString = untechable.customizedContacts;
+    // Load device contacts and set into contactsArray
+    [self loadContactsFromDevice];
     
     selectedAnyEmail = NO;
-    
-    NSError *writeError = nil;
-    customizedContactsDictionary =
-    [NSJSONSerialization JSONObjectWithData: [customizedContactsString dataUsingEncoding:NSUTF8StringEncoding]
-                                    options: NSJSONReadingMutableContainers
-                                      error: &writeError];
-    NSLog(@" Contact Dic %@", customizedContactsDictionary );
+
     [_contactsTable reloadData];
     
     //hides the keyboard when navigating between views
@@ -98,18 +79,13 @@
 
 #pragma mark -  Navigation functions
 - (void)setNavigationDefaults{
-
-    defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
-    defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
-    
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
 }
 
--(void)setNavigation:(NSString *)callFrom
-{
-    if([callFrom isEqualToString:@"viewDidLoad"])
-    {
+-(void)setNavigation:(NSString *)callFrom{
+    
+    if([callFrom isEqualToString:@"viewDidLoad"]) {
         self.navigationItem.hidesBackButton = YES;
         
         // Center title __________________________________________________
@@ -120,7 +96,7 @@
         backButton.titleLabel.shadowColor = [UIColor clearColor];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [backButton setTitle:TITLE_BACK_TXT forState:normal];
-        [backButton setTitleColor:defGray forState:UIControlStateNormal];
+        [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         //[backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
         backButton.showsTouchWhenHighlighted = YES;
@@ -141,7 +117,7 @@
         [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
-        [nextButton setTitleColor:defGray forState:UIControlStateNormal];
+        [nextButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
         [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
         
@@ -150,7 +126,7 @@
         skipButton = [[UIButton alloc] initWithFrame:CGRectMake(33, 0, 33, 42)];
         skipButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
         [skipButton setTitle:@"SKIP" forState:normal];
-        [skipButton setTitleColor:defGray forState:UIControlStateNormal];
+        [skipButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [skipButton addTarget:self action:@selector(btnSkipTouchStart) forControlEvents:UIControlEventTouchDown];
         [skipButton addTarget:self action:@selector(btnSkipTouchEnd) forControlEvents:UIControlEventTouchUpInside];
         
@@ -165,43 +141,16 @@
 }
 
 -(void) goBack {
-
-    for (UIViewController *controller in self.navigationController.viewControllers) {
-        if ([controller isKindOfClass:[AddUntechableController class]]) {
-            
-            untechable.customizedContactsForCurrentSession = currentlyEditingContacts;
-            AddUntechableController *addViewController = (AddUntechableController *)controller;
-            addViewController.untechable = untechable;
-            [self.navigationController popToViewController:addViewController animated:YES];
-            break;
-        }
-    }
+    [self.navigationController popViewControllerAnimated:YES];
     //hide keyboard when going back to view
     [searchTextField resignFirstResponder];
 }
 
--(void)storeScreenVarsInDic{
-    //we have already stored evey thing on save of inner scree of it
-}
 
 - (void)setSkipHighlighted:(BOOL)highlighted {
-    (highlighted) ? [skipButton setBackgroundColor:defGreen] : [skipButton setBackgroundColor:[UIColor clearColor]];
+    (highlighted) ? [skipButton setBackgroundColor:DEF_GREEN] : [skipButton setBackgroundColor:[UIColor clearColor]];
 }
 
--(void)next:(NSString *)after{
-    
-    if( [after isEqualToString:@"GO_TO_NEXT"] || [after isEqualToString:@"ON_SKIP"] ) {
-        
-        currentlyEditingContacts = [[NSMutableArray alloc] init];
-        [_contactsTable reloadData];
-        
-        SocialnetworkController *socialnetwork;
-        socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
-        socialnetwork.untechable = untechable;
-        [self.navigationController pushViewController:socialnetwork animated:YES];
-        
-    }
-}
 -(void)btnSkipTouchStart{
     [self setSkipHighlighted:YES];
 }
@@ -214,32 +163,58 @@
     
     [self setSkipHighlighted:NO];
     
-    [self storeScreenVarsInDic];
-    //[self stopAllTask];
+    //reset contacts from model
+    [untechable setCustomizedContactsForSession];
+    [self mapAllSessionContactSelectionsOnMobileArray];
     
-    [self next:@"ON_SKIP"];
+    [self onNext];
     
 }
--(void)onNext{
 
-    if ( currentlyEditingContacts.count > 0 ){
+/**
+ * Want to send email to any contact about untechable
+ */
+-(BOOL)haveSelectedAnyEmail{
+    BOOL wantToSend = NO;
+    for (int i = 0;i<untechable.customizedContactsForCurrentSession.count; i++){
+        ContactsCustomizedModal *previousModal = [untechable.customizedContactsForCurrentSession objectAtIndex:i];
         
-        for (int i = 0;i<currentlyEditingContacts.count; i++){
-            ContactsCustomizedModal *previousModal = [currentlyEditingContacts objectAtIndex:i];
-            
-            if ( [[previousModal.cutomizingStatusArray objectAtIndex:0] isEqualToString:@"1"] ){
-                
-                selectedAnyEmail = YES;
-                break;
-            }
+        if ( [previousModal getEmailStatus] ){
+            wantToSend =  YES;
+            break;
         }
     }
     
-    untechable.customizedContactsForCurrentSession = currentlyEditingContacts;
+    return wantToSend;
+}
+
+/**
+ * Save data and go next
+ */
+-(void)onNext{
     
-    if(![untechable.rUId  isEqualToString: @"1"]){
+    [self removeExtrasFromSessionAry];
+    
+    selectedAnyEmail = [self haveSelectedAnyEmail];
+    
+    if( [untechable.rUId  isEqualToString: @"1"]){
+        
+        if( selectedAnyEmail ) {
+            [self showEmailSetupScreen:YES];//calledFromSetupScreen is YES
+        } else {
+            
+            SetupGuideFourthView *fourthScreen = [[SetupGuideFourthView alloc] initWithNibName:@"SetupGuideFourthView" bundle:nil];
+            if([untechable.rUId isEqualToString:@"1"]){
+                untechable.dic[@"rUId"] = @"1";
+            }
+            
+            fourthScreen.untechable = untechable;
+            [self.navigationController pushViewController:fourthScreen animated:YES];
+        }
+        
+    } else if( ![untechable.rUId  isEqualToString: @"1"] ){
         if ( selectedAnyEmail  ){
-            [self showEmailSetupScreen:NO];
+            [self showEmailSetupScreen:NO];//calledFromSetupScreen is NO
         }else {
             
             SocialnetworkController *socialnetwork;
@@ -248,47 +223,23 @@
             [self.navigationController pushViewController:socialnetwork animated:YES];
         }
     }
-    
-    
      //hides the keyboard when navigating to the next views
      [searchTextField resignFirstResponder];
 }
 
 -( void ) showEmailSetupScreen : ( BOOL ) calledFromSetupScreen {
-    NSLog(@"%@", [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allValues]);
-    
-    NSArray *keys = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys];
-    
-    if (  [keys containsObject:EMAIL_KEY] || [keys containsObject:PASSWORD_KEY]  ){
-        
-        NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:EMAIL_KEY]);
-        NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:PASSWORD_KEY]);
-        
-        if ( [[[NSUserDefaults standardUserDefaults] objectForKey:EMAIL_KEY] isEqualToString:@""] ||
-            [[[NSUserDefaults standardUserDefaults] objectForKey:PASSWORD_KEY] isEqualToString:@""] ){
-            
-            emailSettingController.untechable = untechable;
-            
-            [self changingBoolVals:calledFromSetupScreen];
-            
-            [self.navigationController pushViewController:emailSettingController animated:YES];
-            
-        }else {
-            
-            EmailChangingController *emailChangeController;
-            emailChangeController = [[EmailChangingController alloc]initWithNibName:@"EmailChangingController" bundle:nil];
-            emailChangeController.untechable = untechable;
-            emailChangeController.setupScreenCalling = &(calledFromSetupScreen);
-            emailChangeController.emailAddresstext = [[SocialNetworksStatusModal sharedInstance] getEmailAddress];
-            [self.navigationController pushViewController:emailChangeController animated:YES];
-        }
-        
-    }else {
-        
+
+    //if email or password not set then go to setting emials screen , else change emial screen
+    if (  [untechable.email isEqualToString:@""] || [untechable.password isEqualToString:@""]  ){
         emailSettingController.untechable = untechable;
-            
         [self changingBoolVals:calledFromSetupScreen];
         [self.navigationController pushViewController:emailSettingController animated:YES];
+    } else {
+        EmailChangingController *emailChangeController = [[EmailChangingController alloc]initWithNibName:@"EmailChangingController" bundle:nil];
+        emailChangeController.untechable = untechable;
+        emailChangeController.setupScreenCalling = &(calledFromSetupScreen);
+        emailChangeController.emailAddresstext = [[SocialNetworksStatusModal sharedInstance] getEmailAddress];
+        [self.navigationController pushViewController:emailChangeController animated:YES];
     }
 }
 
@@ -317,7 +268,7 @@
     [self setNextHighlighted:NO];
 }
 - (void)setNextHighlighted:(BOOL)highlighted {
-    (highlighted) ? [nextButton setBackgroundColor:defGreen] : [nextButton setBackgroundColor:[UIColor clearColor]];
+    (highlighted) ? [nextButton setBackgroundColor:DEF_GREEN] : [nextButton setBackgroundColor:[UIColor clearColor]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -325,15 +276,11 @@
     // Dispose of any resources that can be recreated.
 }
 
--(NSArray *) getArrayOfSelectedTab{
-    
-        return contactsArray;
-}
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return  self.getArrayOfSelectedTab.count;
+    return  mobileContactsArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -357,161 +304,91 @@
             cell = (ContactListCell *)[nib objectAtIndex:0];
         }
     }
-    
-    if(!self.selectedIdentifiers){
-        self.selectedIdentifiers = [[NSMutableArray alloc] init];
-    }
-    
-    ContactsCustomizedModal *_contactModal;
-    
-    if ( [[ self getArrayOfSelectedTab ] count ] >= 1 ){
-        
-        // GETTING DATA FROM RECEIVED DICTIONARY
-        // SET OVER MODEL FROM DATA
-        
-        _contactModal = [self getArrayOfSelectedTab ][(indexPath.row)];
-    }
-    
-    if (_contactModal.img == nil) {
-        _contactModal.img =[[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"dfcontact" ofType:@"jpg"]];
-    }
-    
-    if ( currentlyEditingContacts.count > 0 ){
-        
-        for (int i = 0;i<currentlyEditingContacts.count; i++){
-            
-            ContactsCustomizedModal *previousModal = [currentlyEditingContacts objectAtIndex:i];
-            
-            if ( [previousModal.name isEqualToString:_contactModal.name] &&
-                 previousModal.allPhoneNumbers.count == _contactModal.allPhoneNumbers.count )
-            {
-                _contactModal.cutomizingStatusArray = previousModal.cutomizingStatusArray;
-                if ( [[_contactModal.cutomizingStatusArray objectAtIndex:0] isEqualToString:@"1"] ){
-                    selectedAnyEmail = YES;
-                }
-                if ( previousModal.IsCustomized ) {
-                    _contactModal.IsCustomized = YES;
-                }
-            }
-        }
-    }
-    
-    if ( currentlyEditingContacts.count <= 0 && [customizedContactsString isEqualToString:@""] ){
-        
-        [self resetContactModal:_contactModal];
-    }
-
     // HERE WE PASS DATA TO CELL CLASS
-    [cell setCellObjects:_contactModal :1 :@"InviteFriends"];
+    [cell setCellObjects:mobileContactsArray[indexPath.row] :1 :@"InviteFriends"];
     
     return cell;
 }
 
-- (void)resetContactModal:(ContactsCustomizedModal *)contactModal{
-    
-    contactModal.cutomizingStatusArray = [[NSMutableArray alloc] initWithObjects:@"0",@"0",@"0", nil];
-    
-    for ( int i=0;i<contactModal.allPhoneNumbers.count;i++){
-        NSMutableArray *tempPhoneArray = [contactModal.allPhoneNumbers objectAtIndex:i];
-        [tempPhoneArray setObject:@"0" atIndexedSubscript:2];
-        [tempPhoneArray setObject:@"0" atIndexedSubscript:3];
-    }
-    
-    for (int j=0;j<contactModal.allEmails.count;j++){
-        NSMutableArray *tempEmailArray = [contactModal.allEmails objectAtIndex:j];
-        [tempEmailArray setObject:@"0" atIndexedSubscript:1];
-    }
-    
-    contactModal.customTextForContact = untechable.spendingTimeTxt;
-}
-
-
 - (IBAction)onSearchClick:(UIButton *)sender{
     
-    if([searchTextField canResignFirstResponder])
-    {
+    if([searchTextField canResignFirstResponder]){
         [searchTextField resignFirstResponder];
     }
     
     [self textField:searchTextField shouldChangeCharactersInRange:NSMakeRange(0, 0) replacementString:@""];
 }
 
+/**
+ * When user starts typing in search contact input field
+ */
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
     if([string isEqualToString:@"\n"]){
-        if([searchTextField canResignFirstResponder])
-        {
+        if([searchTextField canResignFirstResponder]) {
             [searchTextField resignFirstResponder];
         }
         return NO;
-    }
-    
-    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    
-    if([newString isEqualToString:@""]){
         
-        contactsArray = contactBackupArray;
+    } else{
         
-        [_contactsTable performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-        
-        return YES;
-    }
-    
-    NSMutableArray *filteredArray = [[NSMutableArray alloc] init];
-    
-    for(int contactIndex=0; contactIndex<[[self getBackupArrayOfSelectedTab] count]; contactIndex++){
-        // Get left contact data
-        
-        ContactsCustomizedModal *contactModal = [self getBackupArrayOfSelectedTab][contactIndex];
-        
-        NSString *name = contactModal.name;
-        
-        if([[name lowercaseString] rangeOfString:[newString lowercaseString]].location == NSNotFound){
+        //When text is empty reset contactsArray with contactBackupArray
+        NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        if([newString isEqualToString:@""]){
             
-        } else {
-            [filteredArray addObject:contactModal];
+            [self resetContactsArrayFromBackupArray];
+            [self reloadContactsTableInMainThread];
+            return YES;
+            
+        } else{
+            //Filter array a/c to search text
+            NSMutableArray *filteredArray = [[NSMutableArray alloc] init];
+            
+            for(int contactIndex=0; contactIndex< mobileContactBackupArray.count; contactIndex++) {
+                
+                ContactsCustomizedModal *contactModal = mobileContactBackupArray[contactIndex];
+                NSString *name = contactModal.contactName;
+                
+                if( !([[name lowercaseString] rangeOfString:[newString lowercaseString]].location == NSNotFound) ){
+                    [filteredArray addObject:contactModal];
+                }
+            }
+            
+            mobileContactsArray = filteredArray;
+            [self reloadContactsTableInMainThread];
+            return YES;
         }
     }
-    
-    
-    contactsArray = filteredArray;
-    
-    [_contactsTable performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-    
-    return YES;
 }
 
--(NSArray *) getBackupArrayOfSelectedTab{
-    
-    return contactBackupArray;
+// Reload table data after all the contacts get loaded
+-(void)resetContactsArrayFromBackupArray{
+    mobileContactsArray = [[NSMutableArray alloc] initWithArray:mobileContactBackupArray];
+}
+-(void)reloadContactsTableInMainThread{
+    [_contactsTable performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
 }
 
 #pragma mark  Device Contact List
 
 /*
  * This method is used to load device contact details
+ * Load device contacts and set into contactsArray
  */
-- (IBAction)loadLocalContacts{
-    
-    self.selectedIdentifiers = [[NSMutableArray alloc] init];
-    
-    [_contactsTable reloadData];
+- (void)loadContactsFromDevice{
     
     // init contact array
-    if(contactBackupArray){
+    if( mobileContactBackupArray ){
         
-        // Reload table data after all the contacts get loaded
-        contactsArray = nil;
-        contactsArray = contactBackupArray;
-        
+        [self resetContactsArrayFromBackupArray];
         
         // Filter contacts on new tab selection
         [self onSearchClick:nil];
         
-        [_contactsTable performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+        [self reloadContactsTableInMainThread];
     } else {
         
-        contactsArray = [[NSMutableArray alloc] init];
+        mobileContactsArray = [[NSMutableArray alloc] init];
         ABAddressBookRef m_addressbook = ABAddressBookCreateWithOptions(NULL, NULL);
         searchTextField.text = @"";
         
@@ -545,7 +422,7 @@
 }
 
 /*
- * Mehod called to get contacts
+ * Set all contacts of mobile in contactsArray, this is a kind of call back
  */
 -(void)constructInThread:(ABAddressBookRef)m_addressbook{
     
@@ -560,7 +437,7 @@
     for (int i=0;i < nPeople;i++) {
         currentltRenderingContactModal = [[ContactsCustomizedModal alloc] init];
         
-        currentltRenderingContactModal.others = @"";
+
         
         ABRecordRef ref = CFArrayGetValueAtIndex(allPeople,i);
         
@@ -576,7 +453,7 @@
         if(!lastName)
             lastName = (CFStringRef) @"";
         
-        currentltRenderingContactModal.name = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+        currentltRenderingContactModal.contactName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
         
         // For contact picture
         UIImage *contactPicture;
@@ -610,10 +487,7 @@
             
         }
         currentltRenderingContactModal.allEmails = allEmails;
-        
-        [currentltRenderingContactModal.cutomizingStatusArray setObject:@"0" atIndexedSubscript:0];
-        [currentltRenderingContactModal.cutomizingStatusArray setObject:@"0" atIndexedSubscript:1];
-        [currentltRenderingContactModal.cutomizingStatusArray setObject:@"0" atIndexedSubscript:2];
+
         
         //For Phone number
         NSMutableArray *allNumbers = [[NSMutableArray alloc] initWithCapacity:CFArrayGetCount(allPeople)];
@@ -625,28 +499,23 @@
             
             NSString *numberType;
             
-            if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMainLabel])
-            {
+            if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMainLabel]) {
                 numberType = @"Main";
             }
             
-            if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
-            {
+            if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel]) {
                 numberType = @"Mobile";
             }
             
-            if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel])
-            {
+            if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel]) {
                 numberType = @"iPhoneNumber";
             }
             
-            if ([mobileLabel isEqualToString:(NSString*)kABHomeLabel])
-            {
+            if ([mobileLabel isEqualToString:(NSString*)kABHomeLabel]) {
                 numberType = @"Home";
             }
             
-            if ([mobileLabel isEqualToString:(NSString*)kABWorkLabel])
-            {
+            if ([mobileLabel isEqualToString:(NSString*)kABWorkLabel]) {
                 numberType = @"Work";
             }
             
@@ -668,121 +537,29 @@
         currentltRenderingContactModal.allPhoneNumbers = allNumbers;
         
         currentltRenderingContactModal.customTextForContact = untechable.spendingTimeTxt;
-        
-        // Here we getting all previously customized contacts status and setting it according to contact modal
-        ContactsCustomizedModal *previuoslyEditedContact;
-        
-        for ( int editedContactsArrIndex = 0; editedContactsArrIndex < currentlyEditingContacts.count; editedContactsArrIndex++ ){
-            
-            previuoslyEditedContact = [[ContactsCustomizedModal alloc] init];
-            
-            previuoslyEditedContact = [currentlyEditingContacts objectAtIndex:editedContactsArrIndex];
-            
-            // getting previously customized contact phone numbers
-            NSMutableArray *tempPhoneNumbers = previuoslyEditedContact.allPhoneNumbers;
-            
-            // setting phone number status in rendering contact according saved contact status
-            for ( int i=0; i < tempPhoneNumbers.count; i++ ){
-                
-                NSMutableArray *phoneNumberDetails = [tempPhoneNumbers objectAtIndex:i];
-                
-                NSString *customizedNumber = [phoneNumberDetails objectAtIndex:1];
-                
-                //customizedNumber = [self NumberToFormatIntoUSstandard:customizedNumber];
-                
-                for ( int j=0; j < currentltRenderingContactModal.allPhoneNumbers.count; j++ ){
-                    
-                    NSMutableArray *currentContactNumberDetails = [currentltRenderingContactModal.allPhoneNumbers objectAtIndex:j];
-                    
-                    NSString *currentContactCustomizedNumber  = [currentContactNumberDetails objectAtIndex:1];
-                    
-                    //currentContactCustomizedNumber = [self NumberToFormatIntoUSstandard:currentContactCustomizedNumber];
-                    
-                    if ( [currentContactCustomizedNumber isEqualToString:customizedNumber] ){
-                        
-                        [currentltRenderingContactModal.allPhoneNumbers replaceObjectAtIndex:j withObject:phoneNumberDetails];
-                        
-                        if ( [[phoneNumberDetails objectAtIndex:2] isEqualToString:@"1"] ){
-                            [currentltRenderingContactModal.cutomizingStatusArray setObject:@"1" atIndexedSubscript:2];
-                        }else {
-                            [currentltRenderingContactModal.cutomizingStatusArray setObject:@"0" atIndexedSubscript:2];
-                        }
-                        
-                        if ( [[phoneNumberDetails objectAtIndex:3] isEqualToString:@"1"] ){
-                            [currentltRenderingContactModal.cutomizingStatusArray setObject:@"1" atIndexedSubscript:1];
-                        }else {
-                            [currentltRenderingContactModal.cutomizingStatusArray setObject:@"0" atIndexedSubscript:1];
-                        }
-                        
-                        previuoslyEditedContact.allPhoneNumbers = currentltRenderingContactModal.allPhoneNumbers;
-                        
-                        currentltRenderingContactModal.IsCustomized = YES;
-                        
-                        currentltRenderingContactModal.customTextForContact = previuoslyEditedContact.customTextForContact;
-                    }
-                }
-            }
-            
-            NSMutableArray *tempEmails = previuoslyEditedContact.allEmails;
-            
-            // setting email status in rendering contact according saved contact status
-            for ( int i=0; i < tempEmails.count; i++ ){
-                
-                NSString *exactEmailAddress;
-                NSMutableArray *emailDetails;
-                
-                if ( [[tempEmails objectAtIndex:i] isKindOfClass:[NSString class]] ){
-                    
-                    exactEmailAddress = [tempEmails objectAtIndex:i];
-                    
-                }else if ( [[tempEmails objectAtIndex:i] isKindOfClass:[NSArray class]] ){
-                    
-                    emailDetails = [tempEmails objectAtIndex:i];
-                    exactEmailAddress = [emailDetails objectAtIndex:0];
-                }
-                
-                for ( int j=0; j < currentltRenderingContactModal.allEmails.count; j++ ){
-                    
-                    NSMutableArray *currentContactEmailDetails = [currentltRenderingContactModal.allEmails objectAtIndex:j];
-                    
-                    if ( [[currentContactEmailDetails objectAtIndex:0] isEqualToString:exactEmailAddress] ){
-                        
-                        if ( emailDetails.count > 0 ){
-                            NSString *emailStatus = [emailDetails objectAtIndex:1];
-                            if ( [emailStatus isEqualToString:@"1"] ){
-                                [currentContactEmailDetails setObject:@"1" atIndexedSubscript:1];
-                                [currentltRenderingContactModal.cutomizingStatusArray setObject:@"1" atIndexedSubscript:0];
-                            }else {
-                                [currentContactEmailDetails setObject:@"0" atIndexedSubscript:1];
-                                [currentltRenderingContactModal.cutomizingStatusArray setObject:@"0" atIndexedSubscript:0];
-                            }
-                        }else {
-                            [currentContactEmailDetails setObject:@"1" atIndexedSubscript:1];
-                            [currentltRenderingContactModal.cutomizingStatusArray setObject:@"1" atIndexedSubscript:0];
-                        }
-                        
-                        [currentltRenderingContactModal.allEmails replaceObjectAtIndex:j withObject:currentContactEmailDetails];
-                        
-                        previuoslyEditedContact.allEmails = currentltRenderingContactModal.allEmails;
-                        
-                        currentltRenderingContactModal.IsCustomized = YES;
-                        
-                        currentltRenderingContactModal.customTextForContact = previuoslyEditedContact.customTextForContact;
-                        
-                        break;
-                    }
-                }
-            }
-        }
-    
+
+        //check for repeatation of contact
         if ( currentltRenderingContactModal.allEmails.count > 0 || currentltRenderingContactModal.allPhoneNumbers.count > 0 ){
-            [contactsArray addObject:currentltRenderingContactModal];
+            BOOL canAddInMCA = YES;
+            
+            for(int chk=0; chk<mobileContactsArray.count; chk++){
+                if([currentltRenderingContactModal.contactName isEqualToString:[mobileContactsArray[chk] contactName]]){
+                    canAddInMCA = NO;
+                    break;
+                }
+            }
+            
+            if( canAddInMCA )
+            [mobileContactsArray addObject:currentltRenderingContactModal ];
         }
     }
+    
+
+    [self mapAllSessionContactSelectionsOnMobileArray];
+    
     // Reload table data after all the contacts get loaded
-    contactBackupArray = nil;
-    contactBackupArray = [[NSMutableArray alloc] initWithArray:contactsArray];
-    [_contactsTable performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+    mobileContactBackupArray = [[NSMutableArray alloc] initWithArray:mobileContactsArray];
+    [self reloadContactsTableInMainThread];
 }
 
 
@@ -797,49 +574,137 @@
     return stringts;
 }*/
 
+
+/**
+ * On row tap, go to contact details
+ */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     ContactCustomizeDetailsControlelrViewController *detailsController = [[ContactCustomizeDetailsControlelrViewController alloc] init];
-    
     detailsController.untechable = untechable;
-    detailsController.contactListController = self;
+
     
-    NSMutableDictionary *curContactDetails;
+    // contact which is going to be edit
+    ContactsCustomizedModal *mobileContModel = mobileContactsArray[indexPath.row];
+    detailsController.contactModal = mobileContModel;
     
-    contactBackupArray = [[NSMutableArray alloc] initWithArray:contactsArray];
-    ContactsCustomizedModal *tempModal = [contactBackupArray objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:detailsController animated:YES];
+}
+
+
+/**
+ * Reset model with inital flags
+ */
+- (ContactsCustomizedModal *)resetModel:(ContactsCustomizedModal *)mobileContactModel{
+    for ( int i=0;i<mobileContactModel.allPhoneNumbers.count;i++){
+        [mobileContactModel.allPhoneNumbers replaceObjectAtIndex:i withObject:[NSMutableArray arrayWithArray:@[mobileContactModel.allPhoneNumbers[i][0], mobileContactModel.allPhoneNumbers[i][1], @"0",@"0"]]];
+    }
     
-    if ( ![customizedContactsString isEqualToString:@""] ){
+    for ( int i=0;i<mobileContactModel.allEmails.count;i++){
+        [mobileContactModel.allEmails replaceObjectAtIndex:i withObject:[NSMutableArray arrayWithArray:@[mobileContactModel.allEmails[i][0], @"0"]]];
+    }
+    
+    return mobileContactModel;
+}
+
+/**
+ * This function will map the session values on to mobileContactsArray( extracted from mobile contacts) this
+ * will be using between contact list and contact list details controllers
+ */
+-(void)mapAllSessionContactSelectionsOnMobileArray{
+    for (int i = 0;i< mobileContactsArray.count; i++){
+        ContactsCustomizedModal *mobileContModel = mobileContactsArray[i];
         
-        for ( int i = 0; i < customizedContactsDictionary.count; i++ ){
+        BOOL found = NO;
+        for (int j = 0; j< untechable.customizedContactsForCurrentSession.count; j++){
+            ContactsCustomizedModal *sessionModel = untechable.customizedContactsForCurrentSession[j];
             
-            curContactDetails =  [customizedContactsDictionary objectForKey:[NSString stringWithFormat:@"%i",i]];
-            
-            NSMutableArray *tempPhonesNumbers = [curContactDetails objectForKey:@"phoneNumbers"];
-            
-            if ( [[curContactDetails objectForKey:@"contactName"] isEqualToString:detailsController.contactModal.name]
-                &&
-                tempModal.allPhoneNumbers.count == tempPhonesNumbers.count) {
-                
-                tempModal.name = [curContactDetails objectForKey:@"contactName"];
-                tempModal.allPhoneNumbers = [curContactDetails objectForKey:@"phoneNumbers"];
-                tempModal.allEmails = [curContactDetails objectForKey:@"emailAddresses"];
-                tempModal.customTextForContact = [curContactDetails objectForKey:@"customTextForContact"];
-            
-                detailsController.contactModal = tempModal;
+            if( [sessionModel.contactName isEqualToString:mobileContModel.contactName] ){
+                mobileContModel = [self mapSingleSessionModelToSingleMobileModel:mobileContModel sessionModel:sessionModel];
+                found = YES;
                 break;
+            }
+        }//for2//
+        
+       if( found == NO )
+        mobileContModel = [self resetModel:mobileContModel];
+        
+    }//for1//
+}
+
+//Mapping of single sessionModel on to single mobileContactModel, will return mobileContactModel
+-(ContactsCustomizedModal *)mapSingleSessionModelToSingleMobileModel:(ContactsCustomizedModal *)mobileContModel sessionModel:(ContactsCustomizedModal *)sessionModel{
+    
+    BOOL found = NO;
+    
+    for(int i=0; i<mobileContModel.allPhoneNumbers.count; i++){
+        for(int j=0; j<sessionModel.allPhoneNumbers.count; j++){
+            if( [mobileContModel.allPhoneNumbers[i][0] isEqualToString:sessionModel.allPhoneNumbers[j][0] ] ){
                 
-            }else {
+                mobileContModel.allPhoneNumbers[i][2] = ( [sessionModel.allPhoneNumbers[j][2] isEqualToString:@"1"] ) ? @"1" : @"0";
+                mobileContModel.allPhoneNumbers[i][3] = ( [sessionModel.allPhoneNumbers[j][3] isEqualToString:@"1"] ) ? @"1" : @"0";
                 
-                detailsController.contactModal = tempModal;
+                found = YES;
                 break;
             }
         }
-    }else{
         
-        detailsController.contactModal = tempModal;
+        if( found == NO ){
+            mobileContModel.allPhoneNumbers[i][2] = @"0";
+            mobileContModel.allPhoneNumbers[i][3] = @"0";
+        }
+        
+        found = NO;
+        
+        
     }
-    detailsController.customizedContactsDictionary =  customizedContactsDictionary;
-    [self.navigationController pushViewController:detailsController animated:YES];
+    
+    for(int i=0; i<mobileContModel.allEmails.count; i++){
+        for(int j=0; j<sessionModel.allEmails.count; j++){
+            if( [mobileContModel.allEmails[i][0] isEqualToString:sessionModel.allEmails[j][0] ] ){
+                mobileContModel.allEmails[i][1] = ( [sessionModel.allEmails[j][1] isEqualToString:@"1"] ) ? @"1" : @"0";
+                
+                found = YES;
+                break;
+            }
+        }
+        
+        if( found == NO ){
+            mobileContModel.allEmails[i][1] = @"0";
+            found = NO;
+        }
+    }
+    
+    mobileContModel.customTextForContact = sessionModel.customTextForContact;
+    
+    return mobileContModel;
 }
+
+/**
+ * Before going to next page, remove extras from session model
+ */
+-(void)removeExtrasFromSessionAry{
+    for (int i = 0;i< untechable.customizedContactsForCurrentSession.count; i++){
+        ContactsCustomizedModal *sessionModel = [untechable.customizedContactsForCurrentSession objectAtIndex:i];
+
+        //Only save selected contacts
+        NSMutableArray *tempAllPhoneNumbers = [[NSMutableArray alloc] init];
+        for( int j=0; j < sessionModel.allPhoneNumbers.count; j++){
+            if( [sessionModel.allPhoneNumbers[j][2] isEqualToString:@"1"] || [sessionModel.allPhoneNumbers[j][3] isEqualToString:@"1"] )
+                [tempAllPhoneNumbers addObject:sessionModel.allPhoneNumbers[j]];
+        }
+        sessionModel.allPhoneNumbers = tempAllPhoneNumbers;
+        
+        //only save selected email addresses
+        NSMutableArray *tempAllEmails = [[NSMutableArray alloc] init];
+        for( int j=0; j < sessionModel.allEmails.count; j++){
+            if( [sessionModel.allEmails[j][1] isEqualToString:@"1"] )
+                [tempAllEmails addObject:sessionModel.allEmails[j]];
+        }
+        sessionModel.allEmails = tempAllEmails;
+        
+        [untechable.customizedContactsForCurrentSession replaceObjectAtIndex:i withObject:sessionModel];
+    }
+}
+
 @end

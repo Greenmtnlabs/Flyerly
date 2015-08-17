@@ -10,9 +10,6 @@
 #import "Untechable.h"
 
 @interface SettingsViewController : UIViewController <UITableViewDelegate,UITableViewDataSource>{
-    
-    UIColor *defGreen;//GREEN
-    UIColor *defGray;//GRAY
     UIButton *backButton;
     UIButton *nextButton;
 }
