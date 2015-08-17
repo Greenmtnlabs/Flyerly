@@ -284,20 +284,10 @@ Events.setup = function(app) {
                 },
                 function(err, events) {
                     if (err) {
-                        retError1(res, err, __line, "Event not found.");
+                        //retError1(res, err, __line, "Event not found.");
+                        retSuccess1(res, __line);
                     } else {
 
-                        var fs = require('fs');
-
-                        for (var i = 0; i < events.length; i++) {
-                            try {
-                                // remove recording files
-                                fs.unlinkSync(__dirname + '/../../recordings/' + events[i].recording);
-                                logger.info('File ' + events[i].recording + ' removed successfully.');
-                            } catch (e) {
-                                logger.info('Problem found in file delete: error:', e);
-                            }
-                        }
                         // remove events
                         Events.remove({
                                 _id: eventId
