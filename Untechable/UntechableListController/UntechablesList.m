@@ -141,8 +141,6 @@ int indexArrayS2[];
 }
 
 - (IBAction)goToSettings {
-    
-    NSLog(@"Go To p[refrences screen");
     SettingsViewController *settingsController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil];
     untechable.rUId = @"1";
     untechable.dic[@"rUId"] = @"1";
@@ -151,8 +149,6 @@ int indexArrayS2[];
 }
 
 -(void)addUntechable{
-    
-    NSLog(@"Go To add untechable screen");
     
     AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
     addUntechable.untechable = untechable;
@@ -260,21 +256,11 @@ int indexArrayS2[];
         }
     }
     
-    // temporary array that will hold indexes of values
-    int indexArray [timeStampArray.count];
-    
-    if( [sortFor isEqual:@"sec1"]){
-        indexArrayS1 [timeStampArray.count];
-    }else{
-        indexArrayS2 [timeStampArray.count];
-    }
-    
     //now getting the indexes of array and save it.
     for( int i = 0; i<timeStampArray.count; i++){
         for( int j = 0; j<timeStampArray.count; j++){
             
             if( sortedTimeStamps[i] == timeStamps[j] ){
-                indexArray[i] = j;
                 if( [sortFor isEqual:@"sec1"]){
                     indexArrayS1[i] = j;
                 }else{
@@ -309,30 +295,32 @@ int indexArrayS2[];
 
 -(void)changeNavigation:(NSString *)option
 {
+    int btnStatusInt = -1;
     // DISABLE NAVIGATION ON SEND DATA TO API
     if([option isEqualToString:@"ON_FINISH"] ){
-        
-        newUntechableButton.userInteractionEnabled = NO;
-        [self showHidLoadingIndicator:YES];
+        btnStatusInt = 0;
     }
     
     // RE-ENABLE NAVIGATION WHEN ANY ERROR OCCURED
     else if([option isEqualToString:@"ERROR_ON_FINISH"] ){
-        
-        newUntechableButton.userInteractionEnabled = YES;
-        
-        [self showHidLoadingIndicator:NO];
+        btnStatusInt = 1;
     }
-    
     else if ( [option isEqualToString:@"ON_FINISH_SUCCESS"] ){
         
-        newUntechableButton.userInteractionEnabled = YES;
-        
-        [self showHidLoadingIndicator:NO];
+        btnStatusInt = 1;
         
         [self setDefaultModel];
-        
         [untechablesTable reloadData];
+    }
+    
+    BOOL btnsStatus = (btnStatusInt == 1) ? YES : NO;
+    if( btnStatusInt != -1 ){
+        newUntechableButton.enabled = btnsStatus;
+        btnUntechNow.enabled = btnsStatus;
+        btnUntechCustom.enabled = btnsStatus;
+        settingsButton.enabled = btnsStatus;
+        untechablesTable.userInteractionEnabled = btnsStatus;
+        [self showHidLoadingIndicator:!(btnsStatus)];
     }
 }
 
@@ -346,15 +334,7 @@ int indexArrayS2[];
                              cancelButtonTitle:@"OK"
                              otherButtonTitles:nil];
     [temAlert show];
-    
     if( [message isEqualToString:@"Untechable created successfully"] ){
-        
-        /* //doing this app crashing bcz alert value nil
-         //Go to main screen
-         [self.navigationController popToRootViewControllerAnimated:YES];
-         // Remove observers
-         [[NSNotificationCenter defaultCenter] removeObserver:self];
-         */
     }
 }
 
@@ -388,12 +368,9 @@ int indexArrayS2[];
 - (void)sendDeleteRequestToApi:(NSInteger)indexToremoveOnSucess Section:(NSInteger)section {
     
     BOOL errorOnFinish = NO;
-    
-    [self changeNavigation:@"ON_FINISH"];
-
     NSMutableDictionary *tempDict;
-    
     NSString *apiDelete;
+    
     if ( section == 0 ){
         tempDict = [sectionOneArray objectAtIndex:indexToremoveOnSucess];
         apiDelete = [NSString stringWithFormat:@"%@?eventId=%@",API_DELETE,[tempDict valueForKey:@"eventId"]];
@@ -407,13 +384,12 @@ int indexArrayS2[];
     [request setHTTPMethod:@"POST"];
     
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    
+ 
+    NSString *message = @"";
     if( returnData != nil ){
         
         NSDictionary *dict=[NSJSONSerialization JSONObjectWithData:returnData options:NSJSONReadingMutableLeaves error:nil];
-        NSLog(@"In response of save api: %@",dict);
-        
-        NSString *message = @"";
+        //NSLog(@"In response of save api: %@",dict);
         
         if( [[dict valueForKey:@"status"] isEqualToString:@"OK"] ) {
             [self deleteUntechable:indexToremoveOnSucess Section:section];
@@ -425,14 +401,10 @@ int indexArrayS2[];
             errorOnFinish = YES;
         }
         
-        if( !([message isEqualToString:@""]) ) {
-            dispatch_async( dispatch_get_main_queue(), ^{
-                [self showMsgOnApiResponse:message];
-            });
-        }
     }
     else{
         errorOnFinish = YES;
+        message = @"Unable to delete, please try agin later!";
     }
     
     if( errorOnFinish ){
@@ -443,6 +415,12 @@ int indexArrayS2[];
     else{
         dispatch_async( dispatch_get_main_queue(), ^{
             [self changeNavigation:@"ON_FINISH_SUCCESS"];
+        });
+    }
+    
+    if( !([message isEqualToString:@""]) ) {
+        dispatch_async( dispatch_get_main_queue(), ^{
+            [self showMsgOnApiResponse:message];
         });
     }
     
@@ -483,14 +461,10 @@ int indexArrayS2[];
     else {
         if (editingStyle == UITableViewCellEditingStyleDelete) {
             
-            if ( indexPath.section == 0 ){
-                
+            [self changeNavigation:@"ON_FINISH"];
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
                 [self sendDeleteRequestToApi:indexPath.row Section:indexPath.section];
-        
-            }else if ( indexPath.section == 1 ){
-            
-                [self sendDeleteRequestToApi:indexPath.row Section:indexPath.section];
-            }
+            });
         }
     }
 }
@@ -678,9 +652,6 @@ int indexArrayS2[];
     NSArray *arrayToBeAdded =  @[@"30 min", @"1 hr", @"1 day", @"2 days"];
    
     _pickerData = arrayToBeAdded;
-    
-    self.timeDurationPicker.dataSource = self;
-    self.timeDurationPicker.delegate = self;
 }
 
 - (NSDate *)timestampStrToNsDate:(NSString *)timeStamp
@@ -757,7 +728,6 @@ int indexArrayS2[];
     [self addUntechable];
 }
 - (IBAction)btnDoneClick:(id)sender {
-    
     
     [_timeDurationPicker setHidden:YES];
     [_doneButtonView setHidden:YES];

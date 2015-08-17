@@ -986,9 +986,10 @@
 }
 
 
--(IBAction)inputBegin:(id) sender
-{
-    UITextField *feild = (UITextField *) sender;
+-(IBAction)inputBegin:(id) sender {
+    //UITextField *feild = (UITextField *) sender;
+}
+-(IBAction)inputEnd:(id) sender {
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
