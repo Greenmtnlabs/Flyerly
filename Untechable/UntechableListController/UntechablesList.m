@@ -353,18 +353,10 @@ int indexArrayS2[];
         [realm beginWriteTransaction];
         [realm deleteObjects:untechableToBeDeleted];
         [realm commitWriteTransaction];
+        
+        [self setDefaultModel];
+        [untechablesTable reloadData];
     }
-    if ( section == 0 ){
-        NSString *untechablePath = [tempDict objectForKey:@"untechablePath"];
-        [[NSFileManager defaultManager] removeItemAtPath:untechablePath error:nil];
-        [sectionOneArray removeObjectAtIndex:indexToremoveOnSucess];
-    }else if ( section == 1 ){
-        NSString *untechablePath = [tempDict objectForKey:@"untechablePath"];
-        [[NSFileManager defaultManager] removeItemAtPath:untechablePath error:nil];
-        [sectionTwoArray removeObjectAtIndex:indexToremoveOnSucess];
-    }
-    
-    [untechablesTable reloadData];
 }
 
 - (void)sendDeleteRequestToApi:(NSInteger)indexToremoveOnSucess Section:(NSInteger)section {
