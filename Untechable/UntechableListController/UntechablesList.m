@@ -36,9 +36,6 @@
 @implementation UntechablesList
 
 @synthesize untechablesTable;
-int indexArrayS1[];
-int indexArrayS2[];
-
 
 #pragma mark -  Default functions
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -206,6 +203,7 @@ int indexArrayS2[];
     
     
     RLMResults *unsortedObjects = [RUntechable objectsWhere:@"rUId != ''"];
+    int s1=0,s2=0;
     for(int i=0;i<unsortedObjects.count;i++){
         RSetUntechable *rUntechable = unsortedObjects[i];
         NSMutableDictionary *tempDict = [rUntechable getModelDic];
@@ -215,10 +213,10 @@ int indexArrayS2[];
         
         NSDate *startDate = [untechable.commonFunctions timestampStrToNsDate:[tempDict objectForKey:@"startDate"]];
         if ( ![untechable.commonFunctions date1IsSmallerThenDate2:startDate date2:currentDate] ){
-            [sectionOneArray addObject:tempDict];
+            sectionOneArray[s1++] = tempDict;
             [currentTimeStamps1 addObject:[tempDict valueForKey:@"startDate"]];
         }else{
-            [sectionTwoArray addObject:tempDict];
+            sectionTwoArray[s2++] = tempDict;
             [currentTimeStamps2 addObject:[tempDict valueForKey:@"startDate"]];
         }
     }//end for looop
@@ -256,20 +254,29 @@ int indexArrayS2[];
         }
     }
     
+    NSMutableArray *tempSectionOneArray = [[NSMutableArray alloc] init];
+    NSMutableArray *tempSectionTwoArray = [[NSMutableArray alloc] init];
+    
     //now getting the indexes of array and save it.
     for( int i = 0; i<timeStampArray.count; i++){
         for( int j = 0; j<timeStampArray.count; j++){
             
             if( sortedTimeStamps[i] == timeStamps[j] ){
                 if( [sortFor isEqual:@"sec1"]){
-                    indexArrayS1[i] = j;
+                    tempSectionOneArray[i] = sectionOneArray[j];
                 }else{
-                    indexArrayS2[i] = j;
+                    tempSectionTwoArray[i] = sectionTwoArray[j];
                 }
                 break;
             }
         }
     }
+    
+    if( [sortFor isEqual:@"sec1"])
+        sectionOneArray = tempSectionOneArray;
+    else
+        sectionTwoArray = tempSectionTwoArray;
+    
 }
 
 /**
@@ -470,13 +477,11 @@ int indexArrayS2[];
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
         NSMutableDictionary *tempDict = nil;
-        
+        int row = indexPath.row;
         if ( indexPath.section == 0 ){
-             tempDict = [sectionOneArray objectAtIndex:indexArrayS1[indexPath.row]];
+             tempDict = sectionOneArray[row];
         }else if ( indexPath.section == 1 ){
-            int r = (int)indexPath.row;
-            NSLog(@"r %i",r);
-             tempDict = [sectionTwoArray objectAtIndex:indexArrayS2[r]];
+             tempDict = sectionTwoArray[row];
         }
         
         //Setting the packagename,packageprice,packagedesciption values for cell view
@@ -529,9 +534,9 @@ int indexArrayS2[];
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSMutableDictionary *tempDict;
     if ( indexPath.section == 0 ){
-        tempDict = [sectionOneArray  objectAtIndex:indexArrayS1[indexPath.row]];
+        tempDict = sectionOneArray[indexPath.row];
     }else if ( indexPath.section == 1 ){
-        tempDict = [sectionTwoArray  objectAtIndex:indexArrayS2[indexPath.row]];
+        tempDict = sectionTwoArray[indexPath.row];
     }
     
     
