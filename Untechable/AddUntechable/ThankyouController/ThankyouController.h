@@ -23,5 +23,7 @@
 //Properties
 @property (nonatomic,strong)  Untechable *untechable;
 
+@property (strong,nonatomic) MPMoviePlayerViewController * moviePlayerController;
+
 -(IBAction)playVideo:(id)sender;
 @end

@@ -30,6 +30,7 @@
 @implementation ThankyouController
 
 @synthesize untechable;
+@synthesize  moviePlayerController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -197,15 +198,33 @@
 }
 
 -(IBAction)playVideo:(id)sender{
-    // I did desabled because it looks we have no video for it, once I got it I will enable it
-    /*
-    NSString *path = [[NSBundle mainBundle]pathForResource:
-                      @"untechable" ofType:@"mov"];
-    moviePlayer = [[MPMoviePlayerViewController
-                    alloc]initWithContentURL:[NSURL fileURLWithPath:path]];
-    //[self presentModalViewController:moviePlayer animated:NO];
-    [self presentViewController:moviePlayer animated:YES completion:nil];
-     */
+
+    NSURL *fileURL = [[NSBundle mainBundle] URLForResource:@"untechable" withExtension:@"mov"];
+    self.moviePlayerController = [[MPMoviePlayerViewController alloc] initWithContentURL:fileURL];
+    
+    [moviePlayerController.moviePlayer prepareToPlay];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(moviePlaybackComplete:)
+                                                 name:MPMoviePlayerPlaybackDidFinishNotification
+                                               object:nil];
+    
+    [self presentViewController:moviePlayerController animated:YES completion:nil];
+
+}
+
+/**
+ * It is called when 
+ * video is stopped
+ * either by user or when finished
+ */
+
+- (void)moviePlaybackComplete:(NSNotification *)notification {
+    NSLog(@"I am in movie playback complete!!!");
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:MPMoviePlayerPlaybackDidFinishNotification
+                                                  object:nil];
 }
 
 
