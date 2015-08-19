@@ -37,15 +37,13 @@
     
     if ( [untechable.email isEqualToString:@""] ){
         
-        if ( ![[[SocialNetworksStatusModal sharedInstance] getEmailAddress] isEqualToString:@""] &&
-            ![[[SocialNetworksStatusModal sharedInstance] getEmailPassword] isEqualToString:@""] ){
+        if ( ![untechable.email isEqualToString:@""] && ![untechable.password isEqualToString:@""] ) {
             
-            [emailAddress setText:[[SocialNetworksStatusModal sharedInstance] getEmailAddress]];
+            [emailAddress setText:untechable.email];
             
             [emailAddress setText:emailAddresstext];
         }
     }else {
-        
         [emailAddress setText:untechable.email];
     }
 }
@@ -120,7 +118,7 @@
 -(void)onNext{
     
     untechable.email = emailAddress.text;
-    untechable.password = [[SocialNetworksStatusModal sharedInstance] getEmailPassword];
+    untechable.password = untechable.password;
     
     if( [untechable.rUId isEqualToString:@"1"] ) {
         

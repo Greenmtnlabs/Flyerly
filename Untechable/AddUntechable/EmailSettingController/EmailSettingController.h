@@ -14,8 +14,7 @@
 @class EmailTableViewCell;
 
 
-@interface EmailSettingController :UIViewController <UITableViewDelegate,UITableViewDataSource, UITextFieldDelegate , BSKeyboardControlsDelegate >
-{
+@interface EmailSettingController :UIViewController <UITableViewDelegate,UITableViewDataSource, UITextFieldDelegate , BSKeyboardControlsDelegate > {
     UILabel *titleLabel;
     UIButton *helpButton;
     UIButton *backButton;

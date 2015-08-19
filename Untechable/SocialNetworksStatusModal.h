@@ -15,11 +15,6 @@
 
 + (SocialNetworksStatusModal*)sharedInstance;
 
-- (void)setEmailAddress:(NSString *)emailAddressString;
-- (void)setEmailPassword:(NSString *)emailPasswordString;
-- (NSString *)getEmailAddress;
-- (NSString *)getEmailPassword;
-
 - (void)loginFacebook:(id)sender Controller:(UIViewController *) Controller;
 - (void)loginTwitter:(id)sender Controller:(UIViewController *)Controller;
 - (void)loginLinkedIn:(id)sender Controller:(UIViewController *) Controller;

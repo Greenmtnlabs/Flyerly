@@ -238,7 +238,7 @@
         EmailChangingController *emailChangeController = [[EmailChangingController alloc]initWithNibName:@"EmailChangingController" bundle:nil];
         emailChangeController.untechable = untechable;
         emailChangeController.setupScreenCalling = &(calledFromSetupScreen);
-        emailChangeController.emailAddresstext = [[SocialNetworksStatusModal sharedInstance] getEmailAddress];
+        emailChangeController.emailAddresstext = untechable.email;
         [self.navigationController pushViewController:emailChangeController animated:YES];
     }
 }

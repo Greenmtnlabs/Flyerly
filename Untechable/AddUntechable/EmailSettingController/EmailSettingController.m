@@ -62,14 +62,12 @@
 @synthesize untechable,sslSwitch,serverAccountTable,scrollView,comingFromSettingsScreen,comingFromChangeEmailScreen,comingFromContactsListScreen, comingFromSetupScreen;
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
    return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
@@ -178,8 +176,7 @@
 }
 
 #pragma mark -  UI functions
--(void)updateUI
-{
+-(void)updateUI {
     
     [_lbl1 setTextColor:DEF_GRAY];
     _lbl1.font = [UIFont fontWithName:APP_FONT size:20];
@@ -233,8 +230,7 @@
                     }];
 }
 
--(void)setNavigation:(NSString *)callFrom
-{
+-(void)setNavigation:(NSString *)callFrom {
     if( [callFrom isEqualToString:@"emailSetting1"] ){
         
         // Left Navigation ________________________________________________________________________________________________________
@@ -294,8 +290,7 @@
         }
     }
     
-    if( [callFrom isEqualToString:@"emailSetting2"] )
-    {
+    if( [callFrom isEqualToString:@"emailSetting2"] ) {
         // Left Navigation ________________________________________________________________________________________________________
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
@@ -317,6 +312,7 @@
         rightBarButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         [rightBarButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
         rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+
         if ( comingFromSettingsScreen ){
             
             [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
@@ -468,9 +464,8 @@
 
 -(void)onFinish {
     
-    [[SocialNetworksStatusModal sharedInstance] setEmailAddress:self.inputEmail.text];
-    
-    [[SocialNetworksStatusModal sharedInstance] setEmailPassword:self.inputPassword.text];
+    untechable.email = self.inputEmail.text;
+    untechable.email = self.inputPassword.text;
     
     if ( comingFromSettingsScreen ){
     

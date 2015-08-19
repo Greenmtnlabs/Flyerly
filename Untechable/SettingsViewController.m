@@ -211,7 +211,7 @@
         }
         else if ( indexPath.row == 4){
             
-            if (  [[[SocialNetworksStatusModal sharedInstance] getEmailAddress] isEqualToString:@""]  || [[[SocialNetworksStatusModal sharedInstance] getEmailPassword] isEqualToString:@""] ){
+            if (  [untechable.email isEqualToString:@""]  || [untechable.password isEqualToString:@""] ){
                 [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:0 NetworkImage:@"emailic@2x.png"];
             }else {
                 [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:1 NetworkImage:@"emailic@2x.png"];
@@ -228,16 +228,13 @@
     UIButton *emailButton = (UIButton *) sender;
     
     if ( [emailButton.titleLabel.text isEqualToString:@"Log Out"] ){
-        
-        [[SocialNetworksStatusModal sharedInstance] setEmailAddress:@""];
-        
-        [[SocialNetworksStatusModal sharedInstance] setEmailPassword:@""];
+        untechable.email = @"";
+        untechable.password = @"";
         
         SettingsCellView *settingCell;
         CGPoint buttonPosition = [emailButton convertPoint:CGPointZero toView:self.socialNetworksTable];
         NSIndexPath *indexPath = [self.socialNetworksTable indexPathForRowAtPoint:buttonPosition];
-        if (indexPath != nil)
-        {
+        if (indexPath != nil) {
             settingCell = (SettingsCellView*)[self.socialNetworksTable cellForRowAtIndexPath:indexPath];
         }
         
@@ -246,17 +243,12 @@
         [settingCell.loginStatus setText:@"Logged Out"];
     }
     
-    if ( [emailButton.titleLabel.text isEqualToString:@"Log In"]  ){
-        
-        if ( [[[SocialNetworksStatusModal sharedInstance] getEmailAddress] isEqualToString:@""] ||
-             [[[SocialNetworksStatusModal sharedInstance] getEmailPassword] isEqualToString:@""] ){
-            
-            EmailSettingController *emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
-            emailSettingController.untechable = nil;
-            emailSettingController.comingFromSettingsScreen = YES;
-            emailSettingController.comingFromChangeEmailScreen = NO;
-            [self.navigationController pushViewController:emailSettingController animated:YES];
-        }
+    if ( [emailButton.titleLabel.text isEqualToString:@"Log In"] ){
+        EmailSettingController *emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
+        emailSettingController.untechable = untechable;
+        emailSettingController.comingFromSettingsScreen = YES;
+        emailSettingController.comingFromChangeEmailScreen = NO;
+        [self.navigationController pushViewController:emailSettingController animated:YES];
     }
 }
 

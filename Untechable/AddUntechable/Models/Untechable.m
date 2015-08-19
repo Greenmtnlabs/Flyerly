@@ -254,8 +254,7 @@
         socialNetworksStatusModal.mFbAuthExpiryTs = fbAuthExpiryTs;
         socialNetworksStatusModal.mTwitterAuth = twitterAuth;
         socialNetworksStatusModal.mTwOAuthTokenSecret = twOAuthTokenSecret;
-        socialNetworksStatusModal.mLinkedinAuth = linkedinAuth;
-        
+        socialNetworksStatusModal.mLinkedinAuth = linkedinAuth;        
 
         
         //Screen3 vars

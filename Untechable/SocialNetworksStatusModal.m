@@ -49,33 +49,6 @@
     }
     return self;
 }
-
-- (void)setEmailAddress:(NSString *)emailAddressString{
-    [[NSUserDefaults standardUserDefaults] setObject:emailAddressString forKey:EMAIL_KEY];
-}
-
-- (void)setEmailPassword:(NSString *)emailPasswordString{
-    [[NSUserDefaults standardUserDefaults] setObject:emailPasswordString forKey:PASSWORD_KEY];
-}
-
-- (NSString *)getEmailAddress {
-    NSString *savedEmailAddress = @"";
-    NSArray *keys = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys];
-    if ( [keys containsObject:EMAIL_KEY] ){
-        savedEmailAddress = [[NSUserDefaults standardUserDefaults] objectForKey:EMAIL_KEY];
-    }
-    return savedEmailAddress;
-}
-
-- (NSString *)getEmailPassword {
-    NSString *savedEmailPassword = @"";
-    NSArray *keys = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys];
-    if ( [keys containsObject:PASSWORD_KEY] ){
-        savedEmailPassword = [[NSUserDefaults standardUserDefaults] objectForKey:PASSWORD_KEY];
-    }
-    return savedEmailPassword;
-}
-
 - (void)loginLinkedIn:(id)sender Controller:(UIViewController *)Controller{
     
     if( [self linkedInBtnStatus] ) {
