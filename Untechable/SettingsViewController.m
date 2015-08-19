@@ -261,17 +261,14 @@
 }
 
 -(IBAction)loginLinkedIn:(id) sender {
-    
     [untechable.socialNetworksStatusModal loginLinkedIn:sender Controller:self];
 }
 
 -(IBAction)loginTwitter:(id) sender {
-
     [untechable.socialNetworksStatusModal loginTwitter:sender Controller:self];
 }
 
--(IBAction)loginFacebook:(id) sender {
-    
+-(IBAction)loginFacebook:(id) sender {    
     [untechable.socialNetworksStatusModal loginFacebook:sender Controller:self];
 }
 

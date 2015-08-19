@@ -274,10 +274,12 @@
 - (void)fbSessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error {
     // If the session was opened successfully
     if (!error && state == FBSessionStateOpen){
-        NSLog(@"Session opened");
         
         // Show the user the logged-in UI
-        [self fbUserLoggedIn];
+        mFbAuth = [[[FBSession activeSession] accessTokenData] accessToken];
+        mFbAuthExpiryTs = [commonFunctions nsDateToTimeStampStr:[[[FBSession activeSession] accessTokenData] expirationDate]];
+        NSLog(@"Session opened new mFbAuth=%@ \n mFbAuthExpiryTs=%@ ", mFbAuth, mFbAuthExpiryTs);
+        
         return;
     }
     if (state == FBSessionStateClosed || state == FBSessionStateClosedLoginFailed){
@@ -340,59 +342,59 @@
     [self fbFlushFbData];
 }
 
-// Show the user the logged-in UI
-- (void)fbUserLoggedIn {
-    
-    NSString *fbAccessToken = [[[FBSession activeSession] accessTokenData] accessToken];
-    NSDate *expirationDate = [[[FBSession activeSession] accessTokenData] expirationDate];
-    [self fbUpdateFbData:fbAccessToken fbAuthExpD:expirationDate];
-}
-
 //Update data base for fb data
 -(void)fbFlushFbData {
-    [self fbUpdateFbData:@"" fbAuthExpD:[commonFunctions getDate:@"PAST_1_MONTH"] ];
+    mFbAuth = @"";
+    mFbAuthExpiryTs = @"";
 }
 
-//Update data base for fb data
--(void)fbUpdateFbData:(NSString *)fbA fbAuthExpD:(NSDate * )fbAuthExpD{
-    mFbAuth = fbA;
-    mFbAuthExpiryTs = [commonFunctions nsDateToTimeStampStr:fbAuthExpD ];
-}
+/**
+ * if fb session is open then close the session and return the state
+ */
+-(BOOL)closeFbSessionIfOpen{
+    BOOL wasSessionOpen = NO;
+    // If the session state is any of the two "open" states when the button is clicked
+    if (FBSession.activeSession.state == FBSessionStateOpen
+        || FBSession.activeSession.state == FBSessionStateOpenTokenExtended) {
 
-- (void)loginFacebook:(id)sender Controller:(UIViewController *)Controller {
+        // Close the session and remove the access token from the cache
+        // The session state handler (in the app delegate) will be called automatically
+        [FBSession.activeSession closeAndClearTokenInformation];
+        // If the session state is not any of the two "open" states when the button is clicked
+        
+        wasSessionOpen = YES;
+    }
     
+    return wasSessionOpen;
+}
+
+/**
+ * Function for handling facebook login and logouts
+ */
+- (void)loginFacebook:(id)sender Controller:(UIViewController *)Controller {
+    //if we have token( already login) then logout and flush the token
     if( [commonFunctions fbBtnStatus:mFbAuthExpiryTs] ) {
         //When button was green , the delete permissions
         [self fbFlushFbData];
+        [self closeFbSessionIfOpen];
         [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:NO];
     }
-    else{
-        //When button was gray , take permissions
-        
-        // If the session state is any of the two "open" states when the button is clicked
-        if (FBSession.activeSession.state == FBSessionStateOpen
-            || FBSession.activeSession.state == FBSessionStateOpenTokenExtended) {
-            
-            // Close the session and remove the access token from the cache
-            // The session state handler (in the app delegate) will be called automatically
-            [FBSession.activeSession closeAndClearTokenInformation];
-            // If the session state is not any of the two "open" states when the button is clicked
-        }
-        else {
-            // Open a session showing the user the login UI
-            // You must ALWAYS ask for public_profile permissions when opening a session
-            [FBSession openActiveSessionWithReadPermissions:@[@"publish_actions"]
-                                               allowLoginUI:YES
-                                          completionHandler:
-             ^(FBSession *session, FBSessionState state, NSError *error) {
-                 
-                 // Call the app delegate's sessionStateChanged:state:error method to handle session state changes
-                 [self fbSessionStateChanged:session state:state error:error];
-                 
-                 [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:YES];
-             }];
-        }
+    //if we haven't token then login to facebook
+    else if( [self closeFbSessionIfOpen] == NO ) {
+        // Open a session showing the user the login UI
+        // You must ALWAYS ask for public_profile permissions when opening a session
+        [FBSession openActiveSessionWithReadPermissions:@[@"publish_actions"]
+                                           allowLoginUI:YES
+                                      completionHandler:
+         ^(FBSession *session, FBSessionState state, NSError *error) {
+             
+             // Call the app delegate's sessionStateChanged:state:error method to handle session state changes
+             [self fbSessionStateChanged:session state:state error:error];
+             
+             [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:YES];
+         }];
     }
+    
 }
 -(void) setLoggedOutStatusOnCell:(id)sender Controller:(UIViewController *)Controller {
     

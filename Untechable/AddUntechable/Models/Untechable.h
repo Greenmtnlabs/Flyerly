@@ -71,7 +71,6 @@
 -(BOOL)initUntechableDirectory;
 -(void)setOrSaveVars:(NSString *)setOrSAve dic2:(NSMutableDictionary *)dic2;
 -(void)initWithDefValues;
--(NSString *)timestampStrToAppDate:(NSString *)timeStamp;
 
 -(BOOL)isUntechableStarted;
 -(BOOL)isUntechableExpired;

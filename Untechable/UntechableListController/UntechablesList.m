@@ -477,7 +477,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
         NSMutableDictionary *tempDict = nil;
-        int row = indexPath.row;
+        int row = (int)indexPath.row;
         if ( indexPath.section == 0 ){
              tempDict = sectionOneArray[row];
         }else if ( indexPath.section == 1 ){
