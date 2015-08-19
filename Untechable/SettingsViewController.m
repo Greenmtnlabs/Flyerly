@@ -122,7 +122,7 @@
 }
 
 -(void) goBack {
-    [untechable saveOrUpdate];
+    [untechable saveOrUpdateInDb];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

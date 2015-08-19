@@ -382,7 +382,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 #pragma mark -  Twitter functions
 
 #pragma mark - Save in realm
--(void)saveOrUpdate{
+-(void)saveOrUpdateInDb{
     //Save setting untechable in data base
     [[RLMRealm defaultRealm] transactionWithBlock:^{
         [self setOrSaveVars:SAVE dic2:nil];
@@ -398,7 +398,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 #pragma mark - Send to Server
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack{
 
-    [self saveOrUpdate];
+    [self saveOrUpdateInDb];
     
     //During testing dont send untechable to server, just create in device and go t thankyou screen
     if( [UNT_ENVIRONMENT isEqualToString:TESTING] ){
@@ -468,13 +468,13 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
             eventId = [dict valueForKey:@"eventId"];
             savedOnServer = YES;
             hasFinished = YES;
-            [self saveOrUpdate];
+            [self saveOrUpdateInDb];
             
         } else{
             message = [dict valueForKey:@"message"];
             if( !([[dict valueForKey:@"eventId"] isEqualToString:@"0"]) ) {
                 eventId = [dict valueForKey:@"eventId"];
-                [self saveOrUpdate];
+                [self saveOrUpdateInDb];
             }
             
             errorOnFinish = YES;

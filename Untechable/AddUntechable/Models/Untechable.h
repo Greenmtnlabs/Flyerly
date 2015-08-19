@@ -79,7 +79,7 @@
 -(NSDate *)getCurrentDate;
 
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack;
--(void)saveOrUpdate;
+-(void)saveOrUpdateInDb;
 -(void)setCustomizedContactsForSession;
 
 @end
