@@ -47,4 +47,6 @@
 
 #pragma mark Navigation Top Bar View
 -(void)setNavigationTopBarViewForScreens:(UIImageView *) topNavigationView;
+
+-(BOOL)fbBtnStatus:(NSString *)fbAuthExpiryTs;
 @end

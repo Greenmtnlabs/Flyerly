@@ -40,6 +40,7 @@
 @property(nonatomic,strong) IBOutlet UIPlaceHolderTextView *descriptionView;
 @property (strong, nonatomic) IBOutlet UILabel *showMessageBeforeSending;
 - (IBAction)shareOn:(id)sender;
+-(void)btnActivate:(UIButton *)btnPointer active:(BOOL)active;
 
 //Check if coming from contacstListScreen screen
 @property (nonatomic, assign) BOOL comingFromContactsListScreen;

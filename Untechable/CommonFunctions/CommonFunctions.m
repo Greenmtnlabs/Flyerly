@@ -488,4 +488,11 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
     }
 }
 
+//Active fb button when fb toke expiry date is greater then current date.
+-(BOOL)fbBtnStatus:(NSString *)fbAuthExpiryTs{
+    NSDate* date1 = [NSDate date];
+    NSDate* date2 = [self timestampStrToNsDate:fbAuthExpiryTs];
+    BOOL active   = [self date1IsSmallerThenDate2:date1 date2:date2];
+    return active;
+}
 @end

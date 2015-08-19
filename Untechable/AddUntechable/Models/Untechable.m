@@ -14,7 +14,7 @@
 @implementation Untechable
 
 //Settings
-@synthesize commonFunctions, dic, piecesFile, paid, userId, uniqueId, rUId, eventId, untechablePath, dateFormatter, savedOnServer, hasFinished;
+@synthesize socialNetworksStatusModal, commonFunctions, dic, piecesFile, paid, userId, uniqueId, rUId, eventId, untechablePath, dateFormatter, savedOnServer, hasFinished;
 
 //SetupGuide Screen 1 Data
 @synthesize userName, userPhoneNumber;
@@ -39,7 +39,7 @@
 - (id)initWithCF{
     self = [super init];
     commonFunctions = [[CommonFunctions alloc] init];
-    
+    socialNetworksStatusModal = [SocialNetworksStatusModal sharedInstance];
     return self;
 }
 
@@ -248,6 +248,14 @@
         twitterAuth  = ( dic[@"twitterAuth"] ) ? dic[@"twitterAuth"] : @"";
         twOAuthTokenSecret = ( dic[@"twOAuthTokenSecret"] ) ? dic[@"twOAuthTokenSecret"] : @"";
         linkedinAuth = ( dic[@"linkedinAuth"] ) ? dic[@"linkedinAuth"] : @"";
+
+        //set in social media model
+        socialNetworksStatusModal.mFbAuth = fbAuth;
+        socialNetworksStatusModal.mFbAuthExpiryTs = fbAuthExpiryTs;
+        socialNetworksStatusModal.mTwitterAuth = twitterAuth;
+        socialNetworksStatusModal.mTwOAuthTokenSecret = twOAuthTokenSecret;
+        socialNetworksStatusModal.mLinkedinAuth = linkedinAuth;
+        
 
         
         //Screen3 vars

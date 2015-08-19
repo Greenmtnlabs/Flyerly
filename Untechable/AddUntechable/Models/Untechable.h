@@ -11,6 +11,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "CommonFunctions.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "SocialNetworksStatusModal.h"
 
 @interface Untechable : NSObject {
     
@@ -19,6 +20,7 @@
 
 //Settings
 @property (strong, nonatomic) CommonFunctions *commonFunctions;
+@property (strong, nonatomic) SocialNetworksStatusModal *socialNetworksStatusModal;
 @property (strong, readonly)  NSMutableDictionary *dic;
 @property (strong, nonatomic) NSString *piecesFile;
 @property (nonatomic, assign) BOOL paid;

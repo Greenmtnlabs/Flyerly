@@ -480,78 +480,44 @@
         
         untechable.socialStatus = inputSetSocialStatus.text;
         
-        NSString *savedFbAuth = @"";
-        NSString *savedFbAuthExpiryTs = @"";
-        if ( [untechable.fbAuth isEqualToString:@""] || [untechable.fbAuthExpiryTs isEqualToString:@""] ){
-            
-             savedFbAuth = [[SocialNetworksStatusModal sharedInstance] getFbAuth];
-             savedFbAuthExpiryTs = [[SocialNetworksStatusModal sharedInstance] getFbAuthExpiryTs];
-            
-            if ( [savedFbAuth isEqualToString:@""] || [savedFbAuthExpiryTs isEqualToString:@""] )
-            {
-                
-                [[SocialNetworksStatusModal sharedInstance] loginFacebook:sender Controller:self Untechable:untechable];
-                
+
+        if ( [untechable.fbAuth isEqualToString:@""] ){
+            if ( [untechable.socialNetworksStatusModal.mFbAuth isEqualToString:@""] ) {
+                [untechable.socialNetworksStatusModal loginFacebook:sender Controller:self];
             }else {
-                
-                untechable.fbAuth = savedFbAuth;
-                untechable.fbAuthExpiryTs = savedFbAuthExpiryTs;
+                untechable.fbAuth = untechable.socialNetworksStatusModal.mFbAuth;
+                untechable.fbAuthExpiryTs = untechable.socialNetworksStatusModal.mFbAuthExpiryTs;
                 [self btnActivate:self.btnFacebook active:YES];
             }
         }else {
-            
             untechable.fbAuth = @"";
             untechable.fbAuthExpiryTs = @"";
             [self btnActivate:self.btnFacebook active:NO];
         }
     }else if(sender == self.btnTwitter){
-        
-        
-        NSString *savedTwitterAuth = @"";
-        NSString *savedTwitterAuthTokkenSecerate = @"";
         if ( [untechable.twitterAuth isEqualToString:@""] || [untechable.twOAuthTokenSecret isEqualToString:@""] ){
-            
-            savedTwitterAuth = [[SocialNetworksStatusModal sharedInstance] getTwitterAuth];
-            savedTwitterAuthTokkenSecerate = [[SocialNetworksStatusModal sharedInstance] getTwitterAuthTokkenSecerate];
-            
-            if ( [savedTwitterAuth isEqualToString:@""] || [savedTwitterAuthTokkenSecerate isEqualToString:@""] )
-            {
-                
-                [[SocialNetworksStatusModal sharedInstance] loginTwitter:sender Controller:self Untechable:untechable];
-                
+            if ( [untechable.socialNetworksStatusModal.mTwitterAuth isEqualToString:@""] || [untechable.socialNetworksStatusModal.mTwOAuthTokenSecret isEqualToString:@""] ){
+                [untechable.socialNetworksStatusModal loginTwitter:sender Controller:self];
             }else {
-                
-                untechable.twitterAuth = savedTwitterAuth;
-                untechable.twOAuthTokenSecret = savedTwitterAuthTokkenSecerate;
+                untechable.twitterAuth = untechable.socialNetworksStatusModal.mTwitterAuth;
+                untechable.twOAuthTokenSecret = untechable.socialNetworksStatusModal.mTwOAuthTokenSecret;
                 [self btnActivate:self.btnTwitter active:YES];
             }
         }else {
-            
             untechable.twitterAuth = @"";
             untechable.twOAuthTokenSecret = @"";
             [self btnActivate:self.btnTwitter active:NO];
         }
 
     }else if(sender == self.btnLinkedin){
-        
-        NSString *savedLinkedInAuth = @"";
-
         if ( [untechable.linkedinAuth isEqualToString:@""] ){
-            
-            savedLinkedInAuth = [[SocialNetworksStatusModal sharedInstance] getLinkedInAuth];
-            
-            if ( [savedLinkedInAuth isEqualToString:@""] )
-            {
-                
-                [[SocialNetworksStatusModal sharedInstance] loginLinkedIn:sender Controller:self Untechable:untechable ];
-                
+            if ( [untechable.socialNetworksStatusModal.mLinkedinAuth isEqualToString:@""] ) {
+                [untechable.socialNetworksStatusModal loginLinkedIn:sender Controller:self];
             }else {
-                
-                untechable.linkedinAuth = savedLinkedInAuth;
+                untechable.linkedinAuth = untechable.socialNetworksStatusModal.mLinkedinAuth;
                 [self btnActivate:self.btnLinkedin active:YES];
             }
         }else {
-            
             untechable.linkedinAuth = @"";
             [self btnActivate:self.btnLinkedin active:NO];
         }
@@ -572,39 +538,7 @@
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user {
     NSLog(@"%@", user);
 }
-
-//Active fb button when fb toke expiry date is greater then current date.
--(BOOL)fbBtnStatus
-{
-    NSDate* date1 = [NSDate date];
-    NSDate* date2 = [untechable.commonFunctions timestampStrToNsDate:untechable.fbAuthExpiryTs];
-    BOOL active   = [untechable.commonFunctions date1IsSmallerThenDate2:date1 date2:date2];
-    return active;
-}
-
-#pragma mark -  Twitter functions
--(BOOL)twitterBtnStatus
-{
-    
-    return !([untechable.twitterAuth isEqualToString:@""]);
-}
-
-//LOGOUT FROM TWITTER
-- (void)twLogout {
-    [[FHSTwitterEngine sharedEngine]clearAccessToken];
-    
-    //Bello code will auto call insdie above function
-    [untechable twUpdateData:@"" oAuthTokenSecret:@""];
-}
-
-//RETURN TWITTER TOKEN [Note: Do not change the name of this functions, it will called from twitter libraries]
-- (NSString *)twLoadAccessToken {
-    return [[NSUserDefaults standardUserDefaults]objectForKey:@"SavedAccessHTTPBody"];
-}
-
-
--(void)textViewDidChange:(UITextView *)textView
-{
+-(void)textViewDidChange:(UITextView *)textView{
     int len = (int)textView.text.length;
     char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
 }

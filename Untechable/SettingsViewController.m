@@ -179,12 +179,10 @@
         
         if ( indexPath.row == 1 ){
             
-            if ( [[[SocialNetworksStatusModal sharedInstance] getFbAuth] isEqualToString:@""] ||
-                 [[[SocialNetworksStatusModal sharedInstance] getFbAuthExpiryTs] isEqualToString:@""] )
-            {
+            if ( [untechable.socialNetworksStatusModal.mFbAuth isEqualToString:@""] ||
+                 [untechable.socialNetworksStatusModal.mFbAuthExpiryTs isEqualToString:@""] ) {
                 [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:0 NetworkImage:@"facebook@2x.png"];
-            }else
-            {
+            } else {
                 [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:1 NetworkImage:@"facebook@2x.png"];
             }
             
@@ -192,12 +190,10 @@
         
         }else if ( indexPath.row == 2 ){
             
-           if ( [[[SocialNetworksStatusModal sharedInstance] getTwitterAuth] isEqualToString:@""] ||
-                [[[SocialNetworksStatusModal sharedInstance] getTwitterAuthTokkenSecerate] isEqualToString:@""]  )
-            {
+           if ( [untechable.socialNetworksStatusModal.mTwitterAuth isEqualToString:@""] ||
+                [untechable.socialNetworksStatusModal.mTwOAuthTokenSecret isEqualToString:@""]  ){
                 [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:0 NetworkImage:@"twitter@2x.png"];
-            }else
-            {
+            } else {
                 [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:1 NetworkImage:@"twitter@2x.png"];
             }
             
@@ -205,16 +201,10 @@
             
         }else if ( indexPath.row == 3 ){
             
-            if ( [[[SocialNetworksStatusModal sharedInstance] getLinkedInAuth] isEqualToString:@""] )
-            {
-                
+            if ( [untechable.socialNetworksStatusModal.mLinkedinAuth isEqualToString:@""] ) {
                 [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:0 NetworkImage:@"linkedin@2x.png"];
-                
-            }else
-            {
-                
+            } else {
                  [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:1 NetworkImage:@"linkedin@2x.png"];
-                
             }
             
             [cell.socialNetworkButton addTarget:self action:@selector(loginLinkedIn:) forControlEvents:UIControlEventTouchUpInside];
@@ -222,17 +212,12 @@
         else if ( indexPath.row == 4){
             
             if (  [[[SocialNetworksStatusModal sharedInstance] getEmailAddress] isEqualToString:@""]  || [[[SocialNetworksStatusModal sharedInstance] getEmailPassword] isEqualToString:@""] ){
-                
                 [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:0 NetworkImage:@"emailic@2x.png"];
-                
             }else {
-                
                 [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:1 NetworkImage:@"emailic@2x.png"];
-                
             }
             
             [cell.socialNetworkButton addTarget:self action:@selector(emailLogin:) forControlEvents:UIControlEventTouchUpInside];
-            
         }
     }
     return cell;
@@ -277,17 +262,17 @@
 
 -(IBAction)loginLinkedIn:(id) sender {
     
-    [[SocialNetworksStatusModal sharedInstance] loginLinkedIn:sender Controller:self Untechable:untechable];
+    [untechable.socialNetworksStatusModal loginLinkedIn:sender Controller:self];
 }
 
 -(IBAction)loginTwitter:(id) sender {
 
-    [[SocialNetworksStatusModal sharedInstance] loginTwitter:sender Controller:self Untechable:untechable];
+    [untechable.socialNetworksStatusModal loginTwitter:sender Controller:self];
 }
 
 -(IBAction)loginFacebook:(id) sender {
     
-    [[SocialNetworksStatusModal sharedInstance] loginFacebook:sender Controller:self Untechable:untechable];
+    [untechable.socialNetworksStatusModal loginFacebook:sender Controller:self];
 }
 
 
