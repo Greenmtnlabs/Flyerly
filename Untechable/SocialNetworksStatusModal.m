@@ -147,24 +147,21 @@
     //1-st async call
     [self.linkedInclient getAuthorizationCode:^(NSString *code) {
         
-        //2-st async call for getting access token
-        [self.linkedInclient getAccessToken:code
-                                    success:^(NSDictionary *accessTokenData) {
-                                        
-                                        [self linkedInUpdateData:[accessTokenData objectForKey:@"access_token"]];
-                                        [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:YES];
-                                        
-                                    }
-                                    failure:^(NSError *error) {
-                                        NSLog(@"Quering accessToken failed %@", error);
-                                    }];
+            //2-st async call for getting access token
+            [self.linkedInclient getAccessToken:code success:^(NSDictionary *accessTokenData) {
+                [self linkedInUpdateData:[accessTokenData objectForKey:@"access_token"]];
+                [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:YES];
+            }
+            failure:^(NSError *error) {
+                NSLog(@"Quering accessToken failed %@", error);
+            }];
     }
-                                       cancel:^{
-                                           NSLog(@"Authorization was cancelled by user");
-                                       }
-                                      failure:^(NSError *error) {
-                                          NSLog(@"Authorization failed %@", error);
-                                      }];
+    cancel:^{
+           NSLog(@"Authorization was cancelled by user");
+    }
+    failure:^(NSError *error) {
+          NSLog(@"Authorization failed %@", error);
+    }];
 }
 
 #pragma mark -  Twitter functions
