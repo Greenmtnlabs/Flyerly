@@ -258,7 +258,7 @@
             [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
             
         }else if ( [commingFrom isEqualToString:@"SetupScreen"] ) {
-            [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
+            [rightBarButton setTitle:TITLE_NEXT_TXT forState:normal];
             
         }else if ( [commingFrom isEqualToString:@"ChangeEmailScreen"] ) {
             [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
