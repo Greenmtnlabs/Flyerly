@@ -381,11 +381,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 }
 
 #pragma mark -  Twitter functions
-//Update data base for fb data
--(void)twFlushData
-{
-    [self twUpdateData:@"" oAuthTokenSecret:@"" ];
-}
 
 #pragma mark - Save in realm
 -(void)saveOrUpdate{

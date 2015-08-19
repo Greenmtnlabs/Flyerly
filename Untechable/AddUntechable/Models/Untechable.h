@@ -76,18 +76,6 @@
 -(BOOL)isUntechableStarted;
 -(BOOL)isUntechableExpired;
 
-#pragma mark -  Facebook functions
-- (void)fbSessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error;
--(void)fbFlushFbData;
-
-#pragma mark -  Twitter functions
--(void)twFlushData;
--(void)twUpdateData:(NSString *)oAuthToken oAuthTokenSecret:(NSString * )oAuthTokenSecret;
-
-#pragma mark -  LinkedIn functions
--(void)linkedInFlushData;
--(void)linkedInUpdateData:(NSString *)linkedInAccessToken;
-
 #pragma mark - current Date method
 -(NSDate *)getCurrentDate;
 

@@ -17,21 +17,20 @@
 #import "SocialnetworkController.h"
 #import "SettingsViewController.h"
 
-@interface SocialNetworksStatusModal () <FHSTwitterEngineAccessTokenDelegate>{
-    CommonFunctions *commonFunctions;
-}
+@interface SocialNetworksStatusModal () <FHSTwitterEngineAccessTokenDelegate>
+
 
 @end
 
 @implementation SocialNetworksStatusModal {
     LIALinkedInHttpClient *_linkedInclient;
+    CommonFunctions *commonFunctions;
 }
 
 @synthesize mSocialStatus, mFbAuth, mFbAuthExpiryTs, mTwitterAuth, mTwOAuthTokenSecret, mLinkedinAuth;;
 
 #pragma mark - singleton method
-+ (SocialNetworksStatusModal* )sharedInstance
-{
++ (SocialNetworksStatusModal* )sharedInstance {
     static dispatch_once_t predicate = 0;
     static id sharedObject = nil;
     //static id sharedObject = nil;  //if you're not using ARC
@@ -52,37 +51,28 @@
 }
 
 - (void)setEmailAddress:(NSString *)emailAddressString{
-    
     [[NSUserDefaults standardUserDefaults] setObject:emailAddressString forKey:EMAIL_KEY];
 }
 
 - (void)setEmailPassword:(NSString *)emailPasswordString{
-    
     [[NSUserDefaults standardUserDefaults] setObject:emailPasswordString forKey:PASSWORD_KEY];
 }
 
-- (NSString *)getEmailAddress{
-    
+- (NSString *)getEmailAddress {
     NSString *savedEmailAddress = @"";
     NSArray *keys = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys];
     if ( [keys containsObject:EMAIL_KEY] ){
-        
         savedEmailAddress = [[NSUserDefaults standardUserDefaults] objectForKey:EMAIL_KEY];
     }
-    
     return savedEmailAddress;
-
 }
 
-- (NSString *)getEmailPassword{
-    
+- (NSString *)getEmailPassword {
     NSString *savedEmailPassword = @"";
     NSArray *keys = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys];
     if ( [keys containsObject:PASSWORD_KEY] ){
-        
         savedEmailPassword = [[NSUserDefaults standardUserDefaults] objectForKey:PASSWORD_KEY];
     }
-    
     return savedEmailPassword;
 }
 
@@ -92,12 +82,9 @@
         //When button was green , the delete permissions
         [self linkedInLogout];
         [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:NO];
-        //[self btnActivate:self.btnLinkedin active:[self linkedInBtnStatus]];
     }
     else {
-        //[self getLinkedInAuth];
         [self getLinkedInAuth:sender Controller:Controller];
-
     }
 }
 
@@ -117,7 +104,6 @@
 //Get linkedin User profile details using accessToken
 - (void)requestMeWithToken:(NSString *)linkedInAccessToken {
     
-    NSLog(@"linked2 in accessToken %@",linkedInAccessToken);
     //Async call
     [self.linkedInclient GET:[NSString stringWithFormat:@"https://api.linkedin.com/v1/people/~?oauth2_access_token=%@&format=json", linkedInAccessToken] parameters:nil
                      success:^(AFHTTPRequestOperation *operation, NSDictionary *result) {
@@ -229,13 +215,12 @@
 - (void)twStoreAccessToken:(NSString *)accessTokenZ {
     
     [[NSUserDefaults standardUserDefaults]setObject:accessTokenZ forKey:@"SavedAccessHTTPBody"];
-    NSString *authenticatedUsername = [self extractValueForKey:@"screen_name" fromHTTPBody:accessTokenZ];
-    NSString *authenticatedID = [self extractValueForKey:@"user_id" fromHTTPBody:accessTokenZ];
-    
     NSString *oauth_token = [self extractValueForKey:@"oauth_token" fromHTTPBody:accessTokenZ];
     NSString *oauth_token_secret = [self extractValueForKey:@"oauth_token_secret" fromHTTPBody:accessTokenZ];
     
-    NSLog(@"B- twitter : oauth_token: %@, oauth_token_secret: %@, self.authenticatedUsername: %@, self.authenticatedID: %@, ", oauth_token, oauth_token_secret, authenticatedUsername, authenticatedID);
+//    NSString *authenticatedUsername = [self extractValueForKey:@"screen_name" fromHTTPBody:accessTokenZ];
+//    NSString *authenticatedID = [self extractValueForKey:@"user_id" fromHTTPBody:accessTokenZ];
+//    NSLog(@"B- twitter : oauth_token: %@, oauth_token_secret: %@, self.authenticatedUsername: %@, self.authenticatedID: %@, ", oauth_token, oauth_token_secret, authenticatedUsername, authenticatedID);
     
     if(oauth_token == nil || oauth_token_secret == nil){
         oauth_token = oauth_token_secret =  @"";
@@ -286,8 +271,7 @@
 
 #pragma mark -  Facebook functions
 // This method will handle ALL the session state changes in the app
-- (void)fbSessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error
-{
+- (void)fbSessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error {
     // If the session was opened successfully
     if (!error && state == FBSessionStateOpen){
         NSLog(@"Session opened");
@@ -360,9 +344,7 @@
 - (void)fbUserLoggedIn {
     
     NSString *fbAccessToken = [[[FBSession activeSession] accessTokenData] accessToken];
-    
     NSDate *expirationDate = [[[FBSession activeSession] accessTokenData] expirationDate];
-    
     [self fbUpdateFbData:fbAccessToken fbAuthExpD:expirationDate];
 }
 
@@ -462,8 +444,7 @@
         SettingsCellView *settingCell;
         CGPoint buttonPosition = [socialButton convertPoint:CGPointZero toView:settingsViewController.socialNetworksTable];
         NSIndexPath *indexPath = [settingsViewController.socialNetworksTable indexPathForRowAtPoint:buttonPosition];
-        if (indexPath != nil)
-        {
+        if (indexPath != nil){
             settingCell = (SettingsCellView*)[settingsViewController.socialNetworksTable cellForRowAtIndexPath:indexPath];
         }else {
             
