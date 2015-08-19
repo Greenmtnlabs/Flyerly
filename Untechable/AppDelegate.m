@@ -21,7 +21,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-
+    NSLog( @"homeDirectoryPath this will help us in finding realm file: %@", NSHomeDirectory() );
+    
     [Crittercism enableWithAppID: CRITTERCISM_APP_ID];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
