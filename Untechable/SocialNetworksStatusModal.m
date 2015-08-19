@@ -54,7 +54,7 @@
     if( [self linkedInBtnStatus] ) {
         //When button was green , the delete permissions
         [self linkedInLogout];
-        [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:NO];
+        [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:NO calledFor:@"LinkedIn"];
     }
     else {
         [self getLinkedInAuth:sender Controller:Controller];
@@ -123,7 +123,7 @@
             //2-st async call for getting access token
             [self.linkedInclient getAccessToken:code success:^(NSDictionary *accessTokenData) {
                 [self linkedInUpdateData:[accessTokenData objectForKey:@"access_token"]];
-                [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:YES];
+                [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:YES calledFor:@"LinkedIn"];
             }
             failure:^(NSError *error) {
                 NSLog(@"Quering accessToken failed %@", error);
@@ -144,6 +144,7 @@
     
     //Bello code will auto call insdie above function
     mTwitterAuth = @"";
+    mTwOAuthTokenSecret = @"";
 }
 
 //RETURN TWITTER TOKEN [Note: Do not change the name of this functions, it will called from twitter libraries]
@@ -155,9 +156,8 @@
     
     if( [mTwitterAuth isEqualToString:@""] == NO ) {
         //When button was green , the delete permissions
-        
         [self twLogout];
-        [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:NO];
+        [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:NO calledFor:@"Twitter"];
     }
     else {
         //When button was gray , take permissions
@@ -172,9 +172,9 @@
         UIViewController *loginController = [[FHSTwitterEngine sharedEngine]loginControllerWithCompletionHandler:^(BOOL success) {
             NSLog( success ? @"Twitter, success login on twitter" : @"Twitter login failure.");
             if ( success ){
-                
-                [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:YES];
+                [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:YES calledFor:@"Twitter"];
             }
+            
         }];
         
         [Controller presentViewController:loginController animated:YES completion:nil];
@@ -347,7 +347,7 @@
         //When button was green , the delete permissions
         [self fbFlushFbData];
         [self closeFbSessionIfOpen];
-        [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:NO];
+        [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:NO calledFor:@"Facebook"];
     }
     //if we haven't token then login to facebook
     else if( [self closeFbSessionIfOpen] == NO ) {
@@ -361,53 +361,13 @@
              // Call the app delegate's sessionStateChanged:state:error method to handle session state changes
              [self fbSessionStateChanged:session state:state error:error];
              
-             [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:YES];
+             [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:YES calledFor:@"Facebook"];
          }];
     }
     
 }
--(void) setLoggedOutStatusOnCell:(id)sender Controller:(UIViewController *)Controller {
-    
-    if( [Controller isKindOfClass:[SettingsViewController class]] ){
-        
-        UIButton *socialButton = (UIButton *) sender;
-        SettingsViewController *settingsViewController = (SettingsViewController *) Controller;
-        SettingsCellView *settingCell;
-        CGPoint buttonPosition = [socialButton convertPoint:CGPointZero toView:settingsViewController.socialNetworksTable];
-        NSIndexPath *indexPath = [settingsViewController.socialNetworksTable indexPathForRowAtPoint:buttonPosition];
 
-        if (indexPath != nil) {
-            settingCell = (SettingsCellView*)[settingsViewController.socialNetworksTable cellForRowAtIndexPath:indexPath];
-        }else {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
-            settingCell = (SettingsCellView*)[settingsViewController.socialNetworksTable cellForRowAtIndexPath:indexPath];
-            [settingCell.socialNetworkButton setTitle:@"Log In" forState:UIControlStateNormal];
-        }
-        
-        [socialButton setTitle:@"Log In" forState:UIControlStateNormal];
-        [settingCell.loginStatus setText:@"Logged Out"];
-        indexPath = nil;
-        
-    }
-    else if ( [Controller isKindOfClass:[SocialnetworkController class]] ){
-        SocialnetworkController *socialnetworkController = (SocialnetworkController *) Controller;
-        UIButton *socialButton = (UIButton *) sender;
-        
-        if ( [socialButton.titleLabel.text isEqualToString:@"Facebook"] ){
-            socialnetworkController.untechable.fbAuth = mFbAuth;
-            socialnetworkController.untechable.fbAuthExpiryTs = mFbAuthExpiryTs;
-        }else if ( [socialButton.titleLabel.text isEqualToString:@"Twitter"] ){
-            socialnetworkController.untechable.twitterAuth = mTwitterAuth;
-            socialnetworkController.untechable.twOAuthTokenSecret = mTwOAuthTokenSecret;
-        }else if ( [socialButton.titleLabel.text isEqualToString:@"LinkedIn"] ){
-            socialnetworkController.untechable.linkedinAuth = mLinkedinAuth;
-        }
-        
-        [socialnetworkController btnActivate:socialButton active:NO];
-    }
-}
-
--(void) setLoggedInStatusOnCell:(id)sender Controller:(UIViewController *)Controller LoggedIn:(BOOL)LoggedIn{
+-(void) setLoggedInStatusOnCell:(id)sender Controller:(UIViewController *)Controller LoggedIn:(BOOL)LoggedIn calledFor:(NSString * )calledFor{
     
     if( [Controller isKindOfClass:[SettingsViewController class]] ){
         
@@ -428,7 +388,6 @@
                 [settingCell.socialNetworkButton setTitle:@"Log In" forState:UIControlStateNormal];
             }
         }
-        
         if ( LoggedIn ){
             [socialButton setTitle:@"Log Out" forState:UIControlStateNormal];
             [settingCell.loginStatus setText:@"Logged In"];
@@ -437,7 +396,6 @@
             [settingCell.loginStatus setText:@"Logged Out"];
         }
         indexPath = nil;
-        
     }
     else if ( [Controller isKindOfClass:[SocialnetworkController class]] ){
         SocialnetworkController *socialnetworkController = (SocialnetworkController *) Controller;
@@ -452,7 +410,6 @@
         }else if ( [socialButton.titleLabel.text isEqualToString:@"LinkedIn"] ){
             socialnetworkController.untechable.linkedinAuth = mLinkedinAuth;
         }
-
         [socialnetworkController btnActivate:socialButton active:LoggedIn];
     }
 }
