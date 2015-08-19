@@ -122,7 +122,7 @@
 }
 
 -(void) goBack {
-  
+    [untechable saveOrUpdate];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -279,7 +279,7 @@
     nameField.keyboardType = UIKeyboardTypeTwitter;
     nameField.placeholder = @"Enter Name";
 
-[editNameAlert show];
+    [editNameAlert show];
 }
 
 /**
@@ -287,17 +287,10 @@
  we have to save name and phone number on button press
  */
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
     if( alertView == editNameAlert ){
         //getting text from the text fields
-        NSString *name = [alertView textFieldAtIndex:0].text;
-        
-        //setting the name in model and in local app data
-        untechable.userName = name;
-        [untechable saveOrUpdate];
-        
+        untechable.userName = [alertView textFieldAtIndex:0].text;
         [socialNetworksTable reloadData];
-        
     }
 }
 
