@@ -306,7 +306,12 @@
         [rightBarButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
         rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
 
-        [rightBarButton setTitle:TITLE_NEXT_TXT forState:normal];        
+        if ( [commingFrom isEqualToString:@"SettingsScreen"] && [untechable.acType isEqualToString:@"OTHER"] == NO){
+            [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
+        }else{
+            [rightBarButton setTitle:TITLE_NEXT_TXT forState:normal];
+        }
+        
         [rightBarButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         
         if ( [untechable.acType isEqualToString:@"OTHER"] ){
