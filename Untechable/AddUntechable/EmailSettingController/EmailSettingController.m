@@ -231,6 +231,8 @@
 }
 
 -(void)setNavigation:(NSString *)callFrom {
+    
+    //Last ims setting screen
     if( [callFrom isEqualToString:@"emailSetting1"] ){
         
         // Left Navigation ________________________________________________________________________________________________________
@@ -260,9 +262,6 @@
         }else if ( [commingFrom isEqualToString:@"SetupScreen"] ) {
             [rightBarButton setTitle:TITLE_NEXT_TXT forState:normal];
             
-        }else if ( [commingFrom isEqualToString:@"ChangeEmailScreen"] ) {
-            [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
-            
         }else if ( [commingFrom isEqualToString:@"ContactsListScreen"] ){
             [rightBarButton setTitle:TITLE_NEXT_TXT forState:normal];
             
@@ -283,7 +282,7 @@
             [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
         }
     }
-    
+    //second screen where email address and password input
     if( [callFrom isEqualToString:@"emailSetting2"] ) {
         // Left Navigation ________________________________________________________________________________________________________
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
@@ -307,14 +306,7 @@
         [rightBarButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
         rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
 
-        if ( [commingFrom isEqualToString:@"SettingsScreen"] || [commingFrom isEqualToString:@"ChangeEmailScreen"] ){
-            [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
-        }else if ( [commingFrom isEqualToString:@"SetupScreen"] || [commingFrom isEqualToString:@"ContactsListScreen"]) {
-            [rightBarButton setTitle:TITLE_NEXT_TXT forState:normal];
-        }else {
-            [rightBarButton setTitle:TITLE_FINISH_TXT forState:normal];
-        }
-        
+        [rightBarButton setTitle:TITLE_NEXT_TXT forState:normal];        
         [rightBarButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         
         if ( [untechable.acType isEqualToString:@"OTHER"] ){
@@ -332,7 +324,7 @@
         
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
     }
-    
+    //first screen where user select a/c types
     if([callFrom isEqualToString:@"viewDidLoad"])
     {
         // Left Navigation ________________________________________________________________________________________________________
@@ -448,18 +440,6 @@
         
         for (UIViewController *controller in self.navigationController.viewControllers) {
             if ([controller isKindOfClass:[SettingsViewController class]]) {
-                //Do not forget to import AnOldViewController.h
-                [self.navigationController popToViewController:controller animated:YES];
-                break;
-            }
-        }
-    }
-    else if ( [commingFrom isEqualToString:@"ChangeEmailScreen"] ){
-        
-        [self storeScreenVarsInDic];
-        
-        for (UIViewController *controller in self.navigationController.viewControllers) {
-            if ([controller isKindOfClass:[EmailChangingController class]]) {
                 //Do not forget to import AnOldViewController.h
                 [self.navigationController popToViewController:controller animated:YES];
                 break;

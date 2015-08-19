@@ -112,7 +112,7 @@
     emailSettingController.untechable = untechable;
     
     if( [untechable.rUId isEqualToString:@"1"] )
-    emailSettingController.commingFrom = @"ChangeEmailScreen";
+    emailSettingController.commingFrom = @"SetupScreen";
     else
     emailSettingController.commingFrom = @"ContactsListScreen";
     
