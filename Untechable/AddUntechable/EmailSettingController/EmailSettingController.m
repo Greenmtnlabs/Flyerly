@@ -59,7 +59,7 @@
 
 @implementation EmailSettingController
 
-@synthesize untechable,sslSwitch,serverAccountTable,scrollView,comingFromSettingsScreen,comingFromChangeEmailScreen,comingFromContactsListScreen, comingFromSetupScreen;
+@synthesize untechable,sslSwitch,serverAccountTable,scrollView,commingFrom;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
@@ -254,24 +254,19 @@
         [rightBarButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
         rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         
-        if ( comingFromSettingsScreen ){
-            
+        if ( [commingFrom isEqualToString:@"SettingsScreen"] ){
             [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
             
-        }else if ( comingFromSetupScreen ) {
+        }else if ( [commingFrom isEqualToString:@"SetupScreen"] ) {
+            [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
             
+        }else if ( [commingFrom isEqualToString:@"ChangeEmailScreen"] ) {
+            [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
+            
+        }else if ( [commingFrom isEqualToString:@"ContactsListScreen"] ){
             [rightBarButton setTitle:TITLE_NEXT_TXT forState:normal];
             
-        }else if ( comingFromChangeEmailScreen ) {
-            
-            [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
-            
-        }else if ( comingFromContactsListScreen ){
-            
-            [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
-            
         }else {
-            
             [rightBarButton setTitle:TITLE_FINISH_TXT forState:normal];
         }
         
@@ -280,8 +275,7 @@
         UIBarButtonItem *rightBarButton_ = [[UIBarButtonItem alloc] initWithCustomView:rightBarButton];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton_,nil];
         
-        if ( comingFromSettingsScreen && ![untechable.acType isEqualToString:@"OTHER"] ){
-            
+        if ( [commingFrom isEqualToString:@"SettingsScreen"] && ![untechable.acType isEqualToString:@"OTHER"] ){
             [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
             
         }else {
@@ -313,24 +307,11 @@
         [rightBarButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
         rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
 
-        if ( comingFromSettingsScreen ){
-            
+        if ( [commingFrom isEqualToString:@"SettingsScreen"] || [commingFrom isEqualToString:@"ChangeEmailScreen"] ){
             [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
-            
-        }else if ( comingFromChangeEmailScreen ) {
-            
-            [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
-            
-        }else if ( comingFromSetupScreen ) {
-            
+        }else if ( [commingFrom isEqualToString:@"SetupScreen"] || [commingFrom isEqualToString:@"ContactsListScreen"]) {
             [rightBarButton setTitle:TITLE_NEXT_TXT forState:normal];
-            
-        }else if ( comingFromContactsListScreen ){
-            
-            [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
-            
         }else {
-            
             [rightBarButton setTitle:TITLE_FINISH_TXT forState:normal];
         }
         
@@ -374,22 +355,13 @@
         rightBarButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         [rightBarButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
         rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [rightBarButton setTitle:@"FINISH" forState:normal];
+        [rightBarButton setTitle:TITLE_FINISH_TXT forState:normal];
         [rightBarButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
-        
         rightBarButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *rightBarButton_ = [[UIBarButtonItem alloc] initWithCustomView:rightBarButton];
-        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton_,nil];
+
+        BOOL showSkip = [untechable canSkipEmailSetting];
         
-        if ( comingFromSettingsScreen ){
-            
-            [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
-            
-        }else if ( comingFromChangeEmailScreen ) {
-            
-            [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
-            
-        }else if ( comingFromContactsListScreen || comingFromSetupScreen){
+        if ( showSkip ){
             
             // Left Navigation
             skipButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
@@ -402,10 +374,11 @@
             UIBarButtonItem *skipBarButton = [[UIBarButtonItem alloc] initWithCustomView:skipButton];
             NSMutableArray  *skipNavItems  = [NSMutableArray arrayWithObjects:skipBarButton,nil];
             
-            [self.navigationItem setRightBarButtonItems:skipNavItems];        }else {
-            
-            [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
+            [self.navigationItem setRightBarButtonItems:skipNavItems];
+        }else {
+            [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
         }
+
     }
 }
 
@@ -422,7 +395,7 @@
 
 -(void)onSkip{
     
-    if( !comingFromSetupScreen ) {
+    if( ![commingFrom isEqualToString:@"SetupScreen"] ) {
         SocialnetworkController *socialnetwork;
         socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
         socialnetwork.untechable = untechable;
@@ -466,41 +439,43 @@
     
     untechable.email = self.inputEmail.text;
     untechable.email = self.inputPassword.text;
+
+    NSLog(@"Go To settings screen commingFrom=%@",commingFrom);
     
-    if ( comingFromSettingsScreen ){
-    
-        [self storeScreenVarsInDic];
+    if ( [commingFrom isEqualToString:@"SettingsScreen"] ) {
         
-        NSLog(@"Go To settings screen");
+        [self storeScreenVarsInDic];
         
         for (UIViewController *controller in self.navigationController.viewControllers) {
             if ([controller isKindOfClass:[SettingsViewController class]]) {
                 //Do not forget to import AnOldViewController.h
-                
-                [self.navigationController popToViewController:controller
-                                                      animated:YES];
+                [self.navigationController popToViewController:controller animated:YES];
                 break;
             }
         }
-        
-    }else if ( comingFromChangeEmailScreen ){
+    }
+    else if ( [commingFrom isEqualToString:@"ChangeEmailScreen"] ){
         
         [self storeScreenVarsInDic];
-        
-        NSLog(@"Go To settings screen");
         
         for (UIViewController *controller in self.navigationController.viewControllers) {
             if ([controller isKindOfClass:[EmailChangingController class]]) {
                 //Do not forget to import AnOldViewController.h
-                
-                [self.navigationController popToViewController:controller
-                                                      animated:YES];
+                [self.navigationController popToViewController:controller animated:YES];
                 break;
             }
         }
+    }
+    else if ( [commingFrom isEqualToString:@"SetupScreen"] ) {
         
-    } else if ( comingFromContactsListScreen ){
-    
+        [self storeScreenVarsInDic];
+        
+        SetupGuideFourthView *fourthScreen = [[SetupGuideFourthView alloc] init];
+        fourthScreen.untechable = untechable;
+        [self.navigationController pushViewController:fourthScreen animated:YES];
+    }
+    else if ( [commingFrom isEqualToString:@"ContactsListScreen"] ){
+        
         [self storeScreenVarsInDic];
         
         SocialnetworkController *socialnetwork;
@@ -508,55 +483,6 @@
         socialnetwork.untechable = untechable;
         [self.navigationController pushViewController:socialnetwork animated:YES];
         
-    } else if ( comingFromSetupScreen ) {
-        
-        SetupGuideFourthView *fourthScreen = [[SetupGuideFourthView alloc] init];
-        fourthScreen.untechable = untechable;
-        [self storeScreenVarsInDic];
-        [self.navigationController pushViewController:fourthScreen animated:YES];
-        
-    }else {
-        
-        if ( iSsl == nil ){
-            untechable.iSsl = @"YES";
-        }
-        
-        if ( oSsl == nil ){
-            untechable.oSsl = @"YES";
-        }
-        
-        [self storeScreenVarsInDic];
-        
-        if( [APP_IN_MODE isEqualToString:TESTING] ){
-            [self next:@"GO_TO_THANKYOU"];
-        } else {
-            [self changeNavigation:@"ON_FINISH"];
-            
-            //Background work
-            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-                [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
-                    
-                    if( !([message isEqualToString:@""]) ) {
-                        dispatch_async( dispatch_get_main_queue(), ^{
-                            [self showMsgOnApiResponse:message];
-                        });
-                    }
-                    
-                    if( errorOnFinish ){
-                        dispatch_async( dispatch_get_main_queue(), ^{
-                            [self changeNavigation:@"ERROR_ON_FINISH"];
-                        });
-                    }
-                    else{
-                        dispatch_async( dispatch_get_main_queue(), ^{
-                            [self changeNavigation:@"GO_TO_THANKYOU"];
-                        });
-                    }
-                    
-                }];
-                
-            });
-        }
     }
 }
 

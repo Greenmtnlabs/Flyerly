@@ -488,4 +488,16 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     callBack(errorOnFinish, message);
 }
 
+-(BOOL)canSkipEmailSetting{
+    BOOL showSkip = NO;
+    BOOL hasEmailAndPassword = !( [email isEqualToString:@""] || [password isEqualToString:@""]);
+    BOOL isOtherAcType = [acType isEqualToString:@"OTHER"];
+    BOOL hasAllOtherAcInfo = !( [iSsl isEqualToString:@""] || [oSsl isEqualToString:@""] || [imsHostName isEqualToString:@""] || [imsPort isEqualToString:@""] || [omsHostName isEqualToString:@""] || [omsPort isEqualToString:@""] );
+    
+    if( ( !isOtherAcType && hasEmailAndPassword ) || ( isOtherAcType && hasEmailAndPassword && hasAllOtherAcInfo) ){
+        showSkip = YES;
+    }
+    return showSkip;
+}
+
 @end

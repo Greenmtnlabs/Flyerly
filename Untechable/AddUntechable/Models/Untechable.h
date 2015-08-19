@@ -81,5 +81,6 @@
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack;
 -(void)saveOrUpdateInDb;
 -(void)setCustomizedContactsForSession;
+-(BOOL)canSkipEmailSetting;
 
 @end

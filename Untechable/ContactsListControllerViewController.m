@@ -20,8 +20,6 @@
 
 
 @interface ContactsListControllerViewController () {
-
-    EmailSettingController *emailSettingController;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *contactsTable;
@@ -36,8 +34,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
     [self setNavigationDefaults];
     
     _contactsTable.delegate = self;
@@ -228,36 +224,18 @@
 }
 
 -( void ) showEmailSetupScreen : ( BOOL ) calledFromSetupScreen {
-
     //if email or password not set then go to setting emials screen , else change emial screen
-    if (  [untechable.email isEqualToString:@""] || [untechable.password isEqualToString:@""]  ){
+    if (  [untechable canSkipEmailSetting] == NO ){
+        // Do any additional setup after loading the view from its nib.
+        EmailSettingController *emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
         emailSettingController.untechable = untechable;
-        [self changingBoolVals:calledFromSetupScreen];
+        emailSettingController.commingFrom = ( calledFromSetupScreen ) ? @"SetupScreen" : @"ContactsListScreen";
         [self.navigationController pushViewController:emailSettingController animated:YES];
     } else {
         EmailChangingController *emailChangeController = [[EmailChangingController alloc]initWithNibName:@"EmailChangingController" bundle:nil];
         emailChangeController.untechable = untechable;
-        emailChangeController.setupScreenCalling = &(calledFromSetupScreen);
         emailChangeController.emailAddresstext = untechable.email;
         [self.navigationController pushViewController:emailChangeController animated:YES];
-    }
-}
-
--( void ) changingBoolVals : ( BOOL ) calledFromSetupScreen {
-    
-    if( calledFromSetupScreen ) {
-        
-        emailSettingController.comingFromSettingsScreen = NO;
-        emailSettingController.comingFromChangeEmailScreen = NO;
-        emailSettingController.comingFromContactsListScreen = NO;
-        emailSettingController.comingFromSetupScreen = YES;
-        
-    } else {
-        
-        emailSettingController.comingFromSettingsScreen = NO;
-        emailSettingController.comingFromChangeEmailScreen = NO;
-        emailSettingController.comingFromContactsListScreen = YES;
-        emailSettingController.comingFromSetupScreen = NO;
     }
 }
 
