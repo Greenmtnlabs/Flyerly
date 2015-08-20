@@ -229,12 +229,12 @@
         // Do any additional setup after loading the view from its nib.
         EmailSettingController *emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
         emailSettingController.untechable = untechable;
-        emailSettingController.commingFrom = ( calledFromSetupScreen ) ? @"SetupScreen" : @"ContactsListScreen";
+        emailSettingController.comingFrom = ( calledFromSetupScreen ) ? @"SetupScreen" : @"ContactsListScreen";
         [self.navigationController pushViewController:emailSettingController animated:YES];
     } else {
         EmailChangingController *emailChangeController = [[EmailChangingController alloc]initWithNibName:@"EmailChangingController" bundle:nil];
         emailChangeController.untechable = untechable;
-        emailChangeController.emailAddresstext = untechable.email;
+        emailChangeController.emailAddressText = untechable.email;
         [self.navigationController pushViewController:emailChangeController animated:YES];
     }
 }

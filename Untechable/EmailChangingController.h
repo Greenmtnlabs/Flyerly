@@ -20,7 +20,7 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *emailAddress;
 
-@property (strong, nonatomic) NSString *emailAddresstext;
+@property (strong, nonatomic) NSString *emailAddressText;
 
 @property(assign) BOOL *setupScreenCalling;
 

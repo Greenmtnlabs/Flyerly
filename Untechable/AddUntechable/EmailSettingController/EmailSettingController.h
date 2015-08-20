@@ -36,6 +36,6 @@
 @property (nonatomic,strong)  Untechable *untechable;
 @property (weak, nonatomic) IBOutlet UISwitch *sslSwitch;
 
-@property (strong, nonatomic) NSString *commingFrom;
+@property (strong, nonatomic) NSString *comingFrom;
 
 @end

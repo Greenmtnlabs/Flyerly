@@ -246,7 +246,7 @@
     if ( [emailButton.titleLabel.text isEqualToString:@"Log In"] ){
         EmailSettingController *emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
         emailSettingController.untechable = untechable;
-        emailSettingController.commingFrom = @"SettingsScreen";
+        emailSettingController.comingFrom = @"SettingsScreen";
         [self.navigationController pushViewController:emailSettingController animated:YES];
     }
 }

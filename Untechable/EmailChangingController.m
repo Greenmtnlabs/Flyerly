@@ -21,7 +21,7 @@
 
 @implementation EmailChangingController
 
-@synthesize untechable,emailAddress,emailAddresstext;
+@synthesize untechable,emailAddress,emailAddressText;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,7 +41,7 @@
             
             [emailAddress setText:untechable.email];
             
-            [emailAddress setText:emailAddresstext];
+            [emailAddress setText:emailAddressText];
         }
     }else {
         [emailAddress setText:untechable.email];
@@ -112,9 +112,9 @@
     emailSettingController.untechable = untechable;
     
     if( [untechable.rUId isEqualToString:@"1"] )
-    emailSettingController.commingFrom = @"SetupScreen";
+    emailSettingController.comingFrom = @"SetupScreen";
     else
-    emailSettingController.commingFrom = @"ContactsListScreen";
+    emailSettingController.comingFrom = @"ContactsListScreen";
     
     [self.navigationController pushViewController:emailSettingController animated:YES];
 }

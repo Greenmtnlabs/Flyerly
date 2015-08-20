@@ -59,7 +59,7 @@
 
 @implementation EmailSettingController
 
-@synthesize untechable,sslSwitch,serverAccountTable,scrollView,commingFrom;
+@synthesize untechable,sslSwitch,serverAccountTable,scrollView,comingFrom;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
@@ -256,13 +256,13 @@
         [rightBarButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
         rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         
-        if ( [commingFrom isEqualToString:@"SettingsScreen"] ){
+        if ( [comingFrom isEqualToString:@"SettingsScreen"] ){
             [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
             
-        }else if ( [commingFrom isEqualToString:@"SetupScreen"] ) {
+        }else if ( [comingFrom isEqualToString:@"SetupScreen"] ) {
             [rightBarButton setTitle:TITLE_NEXT_TXT forState:normal];
             
-        }else if ( [commingFrom isEqualToString:@"ContactsListScreen"] ){
+        }else if ( [comingFrom isEqualToString:@"ContactsListScreen"] ){
             [rightBarButton setTitle:TITLE_NEXT_TXT forState:normal];
             
         }else {
@@ -274,7 +274,7 @@
         UIBarButtonItem *rightBarButton_ = [[UIBarButtonItem alloc] initWithCustomView:rightBarButton];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton_,nil];
         
-        if ( [commingFrom isEqualToString:@"SettingsScreen"] && ![untechable.acType isEqualToString:@"OTHER"] ){
+        if ( [comingFrom isEqualToString:@"SettingsScreen"] && ![untechable.acType isEqualToString:@"OTHER"] ){
             [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
             
         }else {
@@ -306,7 +306,7 @@
         [rightBarButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
         rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
 
-        if ( [commingFrom isEqualToString:@"SettingsScreen"] && [untechable.acType isEqualToString:@"OTHER"] == NO){
+        if ( [comingFrom isEqualToString:@"SettingsScreen"] && [untechable.acType isEqualToString:@"OTHER"] == NO){
             [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
         }else{
             [rightBarButton setTitle:TITLE_NEXT_TXT forState:normal];
@@ -392,7 +392,7 @@
 
 -(void)onSkip{
     
-    if( ![commingFrom isEqualToString:@"SetupScreen"] ) {
+    if( ![comingFrom isEqualToString:@"SetupScreen"] ) {
         SocialnetworkController *socialnetwork;
         socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
         socialnetwork.untechable = untechable;
@@ -437,9 +437,9 @@
     untechable.email = self.inputEmail.text;
     untechable.email = self.inputPassword.text;
 
-    NSLog(@"Go To settings screen commingFrom=%@",commingFrom);
+    NSLog(@"Go To settings screen comingFrom=%@",comingFrom);
     
-    if ( [commingFrom isEqualToString:@"SettingsScreen"] ) {
+    if ( [comingFrom isEqualToString:@"SettingsScreen"] ) {
         
         [self storeScreenVarsInDic];
         
@@ -451,7 +451,7 @@
             }
         }
     }
-    else if ( [commingFrom isEqualToString:@"SetupScreen"] ) {
+    else if ( [comingFrom isEqualToString:@"SetupScreen"] ) {
         
         [self storeScreenVarsInDic];
         
@@ -459,7 +459,7 @@
         fourthScreen.untechable = untechable;
         [self.navigationController pushViewController:fourthScreen animated:YES];
     }
-    else if ( [commingFrom isEqualToString:@"ContactsListScreen"] ){
+    else if ( [comingFrom isEqualToString:@"ContactsListScreen"] ){
         
         [self storeScreenVarsInDic];
         
