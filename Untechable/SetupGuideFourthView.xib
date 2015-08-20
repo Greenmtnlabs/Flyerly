@@ -16,16 +16,26 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jnA-gw-UPc">
-                    <rect key="frame" x="0.0" y="75" width="320" height="405"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jnA-gw-UPc" userLabel="SocialnetworkController.xib">
+                    <rect key="frame" x="0.0" y="25" width="320" height="405"/>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="navigation4.png" translatesAutoresizingMaskIntoConstraints="NO" id="1R4-Aw-JU2">
-                    <rect key="frame" x="93" y="75" width="126" height="28"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigation4.png" translatesAutoresizingMaskIntoConstraints="NO" id="1R4-Aw-JU2">
+                    <rect key="frame" x="72" y="75" width="177" height="27"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="1R4-Aw-JU2" secondAttribute="trailing" constant="71" id="39r-Cb-TDk"/>
+                <constraint firstItem="jnA-gw-UPc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="8Wp-z2-C0g"/>
+                <constraint firstItem="jnA-gw-UPc" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="25" id="Xbs-lS-VBE"/>
+                <constraint firstAttribute="bottom" secondItem="jnA-gw-UPc" secondAttribute="bottom" constant="50" id="jdR-pM-kQO"/>
+                <constraint firstItem="1R4-Aw-JU2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="75" id="sii-y6-N6h"/>
+                <constraint firstItem="1R4-Aw-JU2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="72" id="st5-G2-cTS"/>
+                <constraint firstItem="jnA-gw-UPc" firstAttribute="centerX" secondItem="1R4-Aw-JU2" secondAttribute="centerX" id="wl0-Sa-e1v"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="419" y="294"/>
         </view>

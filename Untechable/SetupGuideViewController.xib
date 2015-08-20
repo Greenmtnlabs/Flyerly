@@ -134,6 +134,7 @@
                 <constraint firstItem="T6g-jg-Slb" firstAttribute="leading" secondItem="FSA-BZ-uNp" secondAttribute="leading" id="vku-dm-3jk"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="238" y="216"/>
         </view>
