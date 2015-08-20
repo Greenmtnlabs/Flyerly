@@ -22,20 +22,17 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigation3.png" translatesAutoresizingMaskIntoConstraints="NO" id="uhQ-TO-PvR">
                     <rect key="frame" x="72" y="75" width="177" height="27"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="27" id="2ld-iJ-mVL"/>
-                        <constraint firstAttribute="width" constant="177" id="3SM-59-hZO"/>
-                    </constraints>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="uhQ-TO-PvR" firstAttribute="centerX" secondItem="hTj-ch-n04" secondAttribute="centerX" id="8L5-qy-lTA"/>
+                <constraint firstItem="uhQ-TO-PvR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="75" id="8mU-2o-Zk1"/>
                 <constraint firstItem="hTj-ch-n04" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="AYV-Pl-wCl"/>
+                <constraint firstItem="uhQ-TO-PvR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="72" id="B5u-aV-FC3"/>
                 <constraint firstAttribute="trailing" secondItem="hTj-ch-n04" secondAttribute="trailing" id="Iei-kF-auv"/>
                 <constraint firstAttribute="bottom" secondItem="hTj-ch-n04" secondAttribute="bottom" id="gA9-CQ-y4T"/>
                 <constraint firstItem="hTj-ch-n04" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="59" id="hXz-Id-uJH"/>
-                <constraint firstItem="uhQ-TO-PvR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="75" id="lXx-Eb-Rhu"/>
+                <constraint firstItem="uhQ-TO-PvR" firstAttribute="centerX" secondItem="hTj-ch-n04" secondAttribute="centerX" id="zeO-BE-2gS"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
