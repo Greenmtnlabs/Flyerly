@@ -28,16 +28,11 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="oAk-CL-mxT" secondAttribute="trailing" id="LHo-1I-I2G"/>
-                <constraint firstItem="oAk-CL-mxT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="OII-fI-EcP"/>
-                <constraint firstAttribute="bottom" secondItem="oAk-CL-mxT" secondAttribute="bottom" constant="-4" id="Xl4-q8-W2Y"/>
-                <constraint firstItem="oAk-CL-mxT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="-32" id="fuM-x7-0dZ"/>
-                <constraint firstAttribute="bottom" secondItem="oAk-CL-mxT" secondAttribute="bottom" constant="-4" id="jt8-Xg-pbb"/>
-                <constraint firstItem="oAk-CL-mxT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="mi7-KL-Was"/>
-                <constraint firstAttribute="trailing" secondItem="oAk-CL-mxT" secondAttribute="trailing" id="s1Y-aC-zCH"/>
-                <constraint firstItem="oAk-CL-mxT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="-32" id="tj4-ju-OsR"/>
+                <constraint firstAttribute="trailing" secondItem="oAk-CL-mxT" secondAttribute="trailing" id="3ab-nm-ned"/>
+                <constraint firstItem="oAk-CL-mxT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="HEQ-gt-1hg"/>
+                <constraint firstItem="oAk-CL-mxT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="-32" id="Q4h-fT-hUz"/>
+                <constraint firstAttribute="bottom" secondItem="oAk-CL-mxT" secondAttribute="bottom" constant="-4" id="X7Z-Vl-ji8"/>
             </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <point key="canvasLocation" x="392" y="322"/>
         </view>
     </objects>
