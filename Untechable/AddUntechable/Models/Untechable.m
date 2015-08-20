@@ -14,7 +14,7 @@
 @implementation Untechable
 
 //Settings
-@synthesize commonFunctions, dic, piecesFile, paid, userId, uniqueId, rUId, eventId, untechablePath, dateFormatter, savedOnServer, hasFinished;
+@synthesize socialNetworksStatusModal, commonFunctions, dic, piecesFile, paid, userId, uniqueId, rUId, eventId, untechablePath, dateFormatter, savedOnServer, hasFinished;
 
 //SetupGuide Screen 1 Data
 @synthesize userName, userPhoneNumber;
@@ -39,7 +39,7 @@
 - (id)initWithCF{
     self = [super init];
     commonFunctions = [[CommonFunctions alloc] init];
-    
+    socialNetworksStatusModal = [SocialNetworksStatusModal sharedInstance];
     return self;
 }
 
@@ -249,6 +249,13 @@
         twOAuthTokenSecret = ( dic[@"twOAuthTokenSecret"] ) ? dic[@"twOAuthTokenSecret"] : @"";
         linkedinAuth = ( dic[@"linkedinAuth"] ) ? dic[@"linkedinAuth"] : @"";
 
+        //set in social media model
+        socialNetworksStatusModal.mFbAuth = fbAuth;
+        socialNetworksStatusModal.mFbAuthExpiryTs = fbAuthExpiryTs;
+        socialNetworksStatusModal.mTwitterAuth = twitterAuth;
+        socialNetworksStatusModal.mTwOAuthTokenSecret = twOAuthTokenSecret;
+        socialNetworksStatusModal.mLinkedinAuth = linkedinAuth;        
+
         
         //Screen3 vars
         email           = ( dic[@"email"] ) ? dic[@"email"] : @"";
@@ -373,14 +380,9 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 }
 
 #pragma mark -  Twitter functions
-//Update data base for fb data
--(void)twFlushData
-{
-    [self twUpdateData:@"" oAuthTokenSecret:@"" ];
-}
 
 #pragma mark - Save in realm
--(void)saveOrUpdate{
+-(void)saveOrUpdateInDb{
     //Save setting untechable in data base
     [[RLMRealm defaultRealm] transactionWithBlock:^{
         [self setOrSaveVars:SAVE dic2:nil];
@@ -396,7 +398,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 #pragma mark - Send to Server
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack{
 
-    [self saveOrUpdate];
+    [self saveOrUpdateInDb];
     
     //During testing dont send untechable to server, just create in device and go t thankyou screen
     if( [UNT_ENVIRONMENT isEqualToString:TESTING] ){
@@ -466,13 +468,13 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
             eventId = [dict valueForKey:@"eventId"];
             savedOnServer = YES;
             hasFinished = YES;
-            [self saveOrUpdate];
+            [self saveOrUpdateInDb];
             
         } else{
             message = [dict valueForKey:@"message"];
             if( !([[dict valueForKey:@"eventId"] isEqualToString:@"0"]) ) {
                 eventId = [dict valueForKey:@"eventId"];
-                [self saveOrUpdate];
+                [self saveOrUpdateInDb];
             }
             
             errorOnFinish = YES;
@@ -484,6 +486,18 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     }
     
     callBack(errorOnFinish, message);
+}
+
+-(BOOL)canSkipEmailSetting{
+    BOOL showSkip = NO;
+    BOOL hasEmailAndPassword = !( [email isEqualToString:@""] || [password isEqualToString:@""]);
+    BOOL isOtherAcType = [acType isEqualToString:@"OTHER"];
+    BOOL hasAllOtherAcInfo = !( [iSsl isEqualToString:@""] || [oSsl isEqualToString:@""] || [imsHostName isEqualToString:@""] || [imsPort isEqualToString:@""] || [omsHostName isEqualToString:@""] || [omsPort isEqualToString:@""] );
+    
+    if( ( !isOtherAcType && hasEmailAndPassword ) || ( isOtherAcType && hasEmailAndPassword && hasAllOtherAcInfo) ){
+        showSkip = YES;
+    }
+    return showSkip;
 }
 
 @end

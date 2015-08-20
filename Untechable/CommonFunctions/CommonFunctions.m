@@ -23,30 +23,19 @@ NSString *currentEnteredPhoneNumber;
     for (NSString *key in sortedKeys) {
         [sortedDic setObject:[inputDic objectForKey: key]  forKey:key];
     }
-    
     inputDic = sortedDic;
-    
-    //return sortedDic;
 }
 
 -(void)deleteKeyFromDic:dic delKeyAtIndex:(int)rowNumber {
     NSArray *arrayOfKeys = [[dic allKeys] sortedArrayUsingSelector: @selector(compare:)];
     NSString *key   = [arrayOfKeys objectAtIndex:rowNumber];
-    
-    //NSLog(@"dic before delete rowNumber: %i, key: %@, dic: %@", rowNumber, key, dic);
-    
     [dic removeObjectForKey:key];
-
-   // NSLog(@"dic after delete rowNumber: %i, key: %@, dic: %@", rowNumber, key, dic);
-
-    //return dic;
 }
 
 /*
  * Here we get the dictionary of saved untechable
  */
-- (NSMutableDictionary *)getUntechable:(int)count UserId:(NSString *)userId
-{
+- (NSMutableDictionary *)getUntechable:(int)count UserId:(NSString *)userId {
     NSMutableDictionary *retDic = nil;
     NSString *userPath = [self getUserPath:userId];
     
@@ -57,8 +46,7 @@ NSString *currentEnteredPhoneNumber;
     
     NSString *uniqueId_temp,*untechablePath_temp;
     
-    for(int i = 0 ; i < sortedList.count ;i++)
-    {
+    for(int i = 0 ; i < sortedList.count ;i++) {
         uniqueId_temp = sortedList[i];
         untechablePath_temp = [NSString stringWithFormat:@"%@/%@",userPath,uniqueId_temp];
         
@@ -70,24 +58,17 @@ NSString *currentEnteredPhoneNumber;
                 NSString *piecesF =[untechablePath_temp stringByAppendingString:[NSString stringWithFormat:@"/%@", PIECES_FILE]];
                 NSData *data = [NSData dataWithContentsOfFile:piecesF];
                 retDic = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-                //retDic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesF];
                 [retDic setValue:uniqueId_temp forKey:@"uniqueId"];
                 [retDic setValue:untechablePath_temp forKey:@"untechablePath"];
-                //[retDic setValue:[NSString stringWithFormat:@"%@/%@%@", untechablePath_temp,uniqueId_temp,REC_FORMATE] forKey:@"recFileURL"];
-                
             }
             break;
         }
     }
-    
-    //NSLog(@"in fn getUntechable retDic: %@",retDic);
-    
     return retDic;
 }
 
 //[commonFunctions showAlert:@"Please select any contact to invite !" message:@""];
--(void)showAlert:(NSString *)title message:(NSString *)message
-{
+-(void)showAlert:(NSString *)title message:(NSString *)message {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
                                                     message:message
                                                    delegate:nil
@@ -95,8 +76,7 @@ NSString *currentEnteredPhoneNumber;
                                           otherButtonTitles:nil];
     [alert show];
 }
--(NSString *)convertDicIntoJsonString:(NSMutableDictionary *)value
-{
+-(NSString *)convertDicIntoJsonString:(NSMutableDictionary *)value {
     NSError *writeError = nil;
     NSString *jsonString;
     if (value.count > 0) {
@@ -107,12 +87,10 @@ NSString *currentEnteredPhoneNumber;
     }else {
         jsonString = @"";
     }
-    
     return jsonString;
 }
 
--(NSMutableArray *)convertJsonStringIntoCCMArray:(NSString *)customizedContactsString
-{
+-(NSMutableArray *)convertJsonStringIntoCCMArray:(NSString *)customizedContactsString {
     NSMutableArray *savedCustomContacts = [[NSMutableArray alloc] init];
     
     NSMutableDictionary *customizedContactsModals =  [self convertJsonStringIntoDictinoary:customizedContactsString];
@@ -134,8 +112,7 @@ NSString *currentEnteredPhoneNumber;
     return savedCustomContacts;
 }
 
--(NSString *)convertCCMArrayIntoJsonString:(NSMutableArray *)value_
-{
+-(NSString *)convertCCMArrayIntoJsonString:(NSMutableArray *)value_ {
     NSMutableDictionary *customizedContactsArray = [[NSMutableDictionary alloc] init];
     for(int i=0;i<[value_ count]; i++) {
         
@@ -152,14 +129,11 @@ NSString *currentEnteredPhoneNumber;
         [curContactDetails setValue:curObj.allEmails forKey:@"emailAddresses"];
         [curContactDetails setValue:curObj.customTextForContact forKey:@"customTextForContact"];
         [customizedContactsArray setValue:curContactDetails forKey:[NSString stringWithFormat:@"%i",i]];
-        
     }
-    
     return [self convertDicIntoJsonString:customizedContactsArray];
 }
 
--(NSMutableDictionary *)convertJsonStringIntoDictinoary:(NSString *)value
-{
+-(NSMutableDictionary *)convertJsonStringIntoDictinoary:(NSString *)value {
 
     NSData* data = [value dataUsingEncoding:NSUTF8StringEncoding];
 
@@ -174,36 +148,24 @@ NSString *currentEnteredPhoneNumber;
             NSLog(@"Item: %@", item);
         }
     }
-    
     return jsonArray;
-    
-    /*if ( [value isEqualToString:@""] ){
-        return nil;
-    }
-    return [value componentsSeparatedByCharactersInSet:
-            [NSCharacterSet characterSetWithCharactersInString:DEF_ARAY_SPLITER]
-            ];*/
 }
 
--(NSString *)getTimeZoneOffset
-{
+-(NSString *)getTimeZoneOffset {
     NSString *timezoneoffset3 = [NSString stringWithFormat:@"%f",([[NSTimeZone systemTimeZone] secondsFromGMT] / 3600.0)];
     NSLog(@"timezoneoffset3 %@", timezoneoffset3);
     
     return timezoneoffset3;
 }
 
-- (NSString *)nsDateToTimeStampStr:(NSDate *)inpDate
-{
+- (NSString *)nsDateToTimeStampStr:(NSDate *)inpDate {
     return [NSString stringWithFormat:@"%.0f",[inpDate timeIntervalSince1970]];
 }
-- (NSDate *)timestampStrToNsDate:(NSString *)timeStamp
-{
+- (NSDate *)timestampStrToNsDate:(NSString *)timeStamp {
     return [NSDate dateWithTimeIntervalSince1970:[timeStamp integerValue]];
 }
 
-- (NSString *)timestampStringToAppDate:(NSString *)timeStamp
-{
+- (NSString *)timestampStringToAppDate:(NSString *)timeStamp {
     
     NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
     [dateFormatter1 setDateFormat:DATE_FORMATE_DATE];
@@ -214,8 +176,7 @@ NSString *currentEnteredPhoneNumber;
     return newDateStr;
 }
 
-- (NSString *)timestampStringToAppDateTime:(NSString *)timeStamp
-{
+- (NSString *)timestampStringToAppDateTime:(NSString *)timeStamp {
     
     NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
     [dateFormatter1 setDateFormat:DATE_FORMATE_TIME];
@@ -227,8 +188,7 @@ NSString *currentEnteredPhoneNumber;
 }
 
 
-- (NSString *)timestampStrToAppDate:(NSString *)timeStamp
-{
+- (NSString *)timestampStrToAppDate:(NSString *)timeStamp {
     
     NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
     [dateFormatter1 setDateFormat:DATE_FORMATE_1];
@@ -239,17 +199,7 @@ NSString *currentEnteredPhoneNumber;
     return newDateStr;
 }
 
--(UIImageView *) navigationGetTitleView
-{
-    /*
-     titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-     titleLabel.backgroundColor = [UIColor clearColor];
-     titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_FONT_SIZE];
-     titleLabel.textAlignment = NSTextAlignmentCenter;
-     titleLabel.textColor = defGreen;
-     titleLabel.text = APP_NAME;
-     self.navigationItem.titleView = titleLabel; //Center title ___________
-     */
+-(UIImageView *) navigationGetTitleView {
     return  [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
 }
 
@@ -274,8 +224,7 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
 /*
  * Here we get the dictionary of dictionaries of saved untechable
  */
-- ( NSMutableArray * )getAllUntechables :(NSString *)userId
-{
+- ( NSMutableArray * )getAllUntechables :(NSString *)userId {
     
     NSMutableArray *totalUntechables = [[NSMutableArray alloc] init];
     NSMutableDictionary *retDic;
@@ -288,8 +237,7 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
     
     NSString *uniqueId_temp,*untechablePath_temp;
     
-    for(int i = 0 ; i < sortedList.count ;i++)
-    {
+    for(int i = 0 ; i < sortedList.count ;i++) {
         uniqueId_temp = sortedList[i];
         untechablePath_temp = [NSString stringWithFormat:@"%@/%@",userPath,uniqueId_temp];
         
@@ -300,7 +248,6 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
             NSString *piecesF =[untechablePath_temp stringByAppendingString:[NSString stringWithFormat:@"/%@", PIECES_FILE]];
             NSData *data = [NSData dataWithContentsOfFile:piecesF];
             retDic = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-            //retDic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesF];
             [retDic setValue:uniqueId_temp forKey:@"uniqueId"];
             [retDic setValue:untechablePath_temp forKey:@"untechablePath"];
         }
@@ -312,8 +259,7 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
     return totalUntechables;
 }
 
--(NSString *)getUserPath :userId
-{
+-(NSString *)getUserPath:userId {
     //Getting Home Directory
     NSString *homeDirectoryPath = NSHomeDirectory();
     return [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Untechable",userId]];
@@ -323,8 +269,7 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
 /*
  * Here we get the dictionary of saved untechable
  */
-- ( NSMutableDictionary * )getAnyInCompleteUntechable :(NSString *)userId
-{
+- ( NSMutableDictionary *)getAnyInCompleteUntechable :(NSString *)userId {
     NSMutableDictionary *retDic;
     NSString *userPath = [self getUserPath:userId];
     
@@ -335,8 +280,7 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
     
     NSString *uniqueId_temp,*untechablePath_temp;
     
-    for(int i = 0 ; i < sortedList.count ;i++)
-    {
+    for(int i = 0 ; i < sortedList.count ;i++) {
         uniqueId_temp = sortedList[i];
         untechablePath_temp = [NSString stringWithFormat:@"%@/%@",userPath,uniqueId_temp];
         
@@ -360,8 +304,7 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
     return nil;
 }
 
-- (BOOL)date1IsSmallerThenDate2:(NSDate *)date1 date2:(NSDate *)date2
-{
+- (BOOL)date1IsSmallerThenDate2:(NSDate *)date1 date2:(NSDate *)date2 {
     NSTimeInterval distanceBetweenDates = [date1 timeIntervalSinceDate:date2];
     double secondsInMinute = 60;
     NSInteger secondsBetweenDates = distanceBetweenDates / secondsInMinute;
@@ -374,8 +317,7 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
         return NO;
 }
 
--(NSDate *)getDate:(NSString *)callFor
-{
+-(NSDate *)getDate:(NSString *)callFor {
     NSDate *today = [NSDate date];
     
     if( [callFor isEqual:@"PAST_1_DAY"]){
@@ -392,30 +334,24 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
 }
 
 #pragma mark -  Set number formating functions
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
     int length = [self getLength:textField.text];
     //NSLog(@"Length  =  %d ",length);
     
-    if(length == 10)
-    {
+    if(length == 10){
         if(range.length == 0)
             return NO;
     }
     
-    if(length == 3)
-    {
+    if(length == 3) {
         NSString *num = [self formatNumber:textField.text];
         textField.text = [NSString stringWithFormat:@"(%@) ",num];
         if(range.length > 0)
             textField.text = [NSString stringWithFormat:@"%@",[num substringToIndex:3]];
     }
-    else if(length == 6)
-    {
+    else if(length == 6){
         NSString *num = [self formatNumber:textField.text];
-        //NSLog(@"%@",[num  substringToIndex:3]);
-        //NSLog(@"%@",[num substringFromIndex:3]);
         textField.text = [NSString stringWithFormat:@"(%@) %@-",[num  substringToIndex:3],[num substringFromIndex:3]];
         if(range.length > 0)
             textField.text = [NSString stringWithFormat:@"(%@) %@",[num substringToIndex:3],[num substringFromIndex:3]];
@@ -424,8 +360,7 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
     return YES;
 }
 
--(NSString*)formatNumber:(NSString*)mobileNumber
-{
+-(NSString*)formatNumber:(NSString*)mobileNumber {
     
     mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@"(" withString:@""];
     mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@")" withString:@""];
@@ -433,23 +368,15 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
     mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@"-" withString:@""];
     mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@"+" withString:@""];
     
-    NSLog(@"%@", mobileNumber);
-    
-    int length = [mobileNumber length];
-    if(length > 10)
-    {
+    int length = (int)[mobileNumber length];
+    if(length > 10) {
         mobileNumber = [mobileNumber substringFromIndex: length-10];
-        NSLog(@"%@", mobileNumber);
-        
     }
-    
-    
     return mobileNumber;
 }
 
 
--(int)getLength:(NSString*)mobileNumber
-{
+-(int)getLength:(NSString*)mobileNumber {
     
     mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@"(" withString:@""];
     mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@")" withString:@""];
@@ -457,13 +384,12 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
     mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@"-" withString:@""];
     mobileNumber = [mobileNumber stringByReplacingOccurrencesOfString:@"+" withString:@""];
     
-    int length = [mobileNumber length];
+    int length = (int)[mobileNumber length];
     
     return length;
 }
 
--(NSString *)formateStringIntoPhoneNumber:(NSString *)unformatted
-{
+-(NSString *)formateStringIntoPhoneNumber:(NSString *)unformatted {
     if([unformatted isEqualToString:@""] == NO){
         NSArray *stringComponents = [NSArray arrayWithObjects:[unformatted substringWithRange:NSMakeRange(0, 2)],
                                      [unformatted substringWithRange:NSMakeRange(2, 3)],
@@ -471,7 +397,6 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
                                      [unformatted substringWithRange:NSMakeRange(8, [unformatted length]-8)], nil];
         
         NSString *formattedString = [NSString stringWithFormat:@"%@ (%@) %@-%@", [stringComponents objectAtIndex:0], [stringComponents objectAtIndex:1], [stringComponents objectAtIndex:2],[stringComponents objectAtIndex:3]];
-        NSLog(@"Formatted Phone Number: %@", formattedString);
         
         return formattedString;
     } else{
@@ -488,4 +413,14 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
     }
 }
 
+//Active fb button when fb toke expiry date is greater then current date.
+-(BOOL)fbBtnStatus:(NSString *)fbAuthExpiryTs{
+    BOOL active = NO;
+    if( [fbAuthExpiryTs isEqualToString:@""] == NO ){
+        NSDate* date1 = [NSDate date];
+        NSDate* date2 = [self timestampStrToNsDate:fbAuthExpiryTs];
+        active   = [self date1IsSmallerThenDate2:date1 date2:date2];
+    }
+    return active;
+}
 @end

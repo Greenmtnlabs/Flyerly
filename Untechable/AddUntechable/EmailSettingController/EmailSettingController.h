@@ -14,8 +14,7 @@
 @class EmailTableViewCell;
 
 
-@interface EmailSettingController :UIViewController <UITableViewDelegate,UITableViewDataSource, UITextFieldDelegate , BSKeyboardControlsDelegate >
-{
+@interface EmailSettingController :UIViewController <UITableViewDelegate,UITableViewDataSource, UITextFieldDelegate , BSKeyboardControlsDelegate > {
     UILabel *titleLabel;
     UIButton *helpButton;
     UIButton *backButton;
@@ -37,16 +36,6 @@
 @property (nonatomic,strong)  Untechable *untechable;
 @property (weak, nonatomic) IBOutlet UISwitch *sslSwitch;
 
-//Check if coming from settings screen
-@property (nonatomic, assign) BOOL comingFromSettingsScreen;
-
-//Check if coming from change email screen
-@property (nonatomic, assign) BOOL comingFromChangeEmailScreen;
-
-//Check if coming from contacstListScreen screen
-@property (nonatomic, assign) BOOL comingFromContactsListScreen;
-
-//Check if coming from contacstListScreen screen
-@property (nonatomic, assign) BOOL comingFromSetupScreen;
+@property (strong, nonatomic) NSString *comingFrom;
 
 @end

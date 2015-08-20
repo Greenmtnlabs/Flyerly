@@ -122,7 +122,7 @@
 }
 
 -(void) goBack {
-  
+    [untechable saveOrUpdateInDb];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -179,12 +179,10 @@
         
         if ( indexPath.row == 1 ){
             
-            if ( [[[SocialNetworksStatusModal sharedInstance] getFbAuth] isEqualToString:@""] ||
-                 [[[SocialNetworksStatusModal sharedInstance] getFbAuthExpiryTs] isEqualToString:@""] )
-            {
+            if ( [untechable.socialNetworksStatusModal.mFbAuth isEqualToString:@""] ||
+                 [untechable.socialNetworksStatusModal.mFbAuthExpiryTs isEqualToString:@""] ) {
                 [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:0 NetworkImage:@"facebook@2x.png"];
-            }else
-            {
+            } else {
                 [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:1 NetworkImage:@"facebook@2x.png"];
             }
             
@@ -192,12 +190,10 @@
         
         }else if ( indexPath.row == 2 ){
             
-           if ( [[[SocialNetworksStatusModal sharedInstance] getTwitterAuth] isEqualToString:@""] ||
-                [[[SocialNetworksStatusModal sharedInstance] getTwitterAuthTokkenSecerate] isEqualToString:@""]  )
-            {
+           if ( [untechable.socialNetworksStatusModal.mTwitterAuth isEqualToString:@""] ||
+                [untechable.socialNetworksStatusModal.mTwOAuthTokenSecret isEqualToString:@""]  ){
                 [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:0 NetworkImage:@"twitter@2x.png"];
-            }else
-            {
+            } else {
                 [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:1 NetworkImage:@"twitter@2x.png"];
             }
             
@@ -205,34 +201,23 @@
             
         }else if ( indexPath.row == 3 ){
             
-            if ( [[[SocialNetworksStatusModal sharedInstance] getLinkedInAuth] isEqualToString:@""] )
-            {
-                
+            if ( [untechable.socialNetworksStatusModal.mLinkedinAuth isEqualToString:@""] ) {
                 [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:0 NetworkImage:@"linkedin@2x.png"];
-                
-            }else
-            {
-                
+            } else {
                  [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:1 NetworkImage:@"linkedin@2x.png"];
-                
             }
             
             [cell.socialNetworkButton addTarget:self action:@selector(loginLinkedIn:) forControlEvents:UIControlEventTouchUpInside];
         }
         else if ( indexPath.row == 4){
             
-            if (  [[[SocialNetworksStatusModal sharedInstance] getEmailAddress] isEqualToString:@""]  || [[[SocialNetworksStatusModal sharedInstance] getEmailPassword] isEqualToString:@""] ){
-                
+            if (  [untechable.email isEqualToString:@""]  || [untechable.password isEqualToString:@""] ){
                 [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:0 NetworkImage:@"emailic@2x.png"];
-                
             }else {
-                
                 [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:1 NetworkImage:@"emailic@2x.png"];
-                
             }
             
             [cell.socialNetworkButton addTarget:self action:@selector(emailLogin:) forControlEvents:UIControlEventTouchUpInside];
-            
         }
     }
     return cell;
@@ -243,16 +228,13 @@
     UIButton *emailButton = (UIButton *) sender;
     
     if ( [emailButton.titleLabel.text isEqualToString:@"Log Out"] ){
-        
-        [[SocialNetworksStatusModal sharedInstance] setEmailAddress:@""];
-        
-        [[SocialNetworksStatusModal sharedInstance] setEmailPassword:@""];
+        untechable.email = @"";
+        untechable.password = @"";
         
         SettingsCellView *settingCell;
         CGPoint buttonPosition = [emailButton convertPoint:CGPointZero toView:self.socialNetworksTable];
         NSIndexPath *indexPath = [self.socialNetworksTable indexPathForRowAtPoint:buttonPosition];
-        if (indexPath != nil)
-        {
+        if (indexPath != nil) {
             settingCell = (SettingsCellView*)[self.socialNetworksTable cellForRowAtIndexPath:indexPath];
         }
         
@@ -261,33 +243,24 @@
         [settingCell.loginStatus setText:@"Logged Out"];
     }
     
-    if ( [emailButton.titleLabel.text isEqualToString:@"Log In"]  ){
-        
-        if ( [[[SocialNetworksStatusModal sharedInstance] getEmailAddress] isEqualToString:@""] ||
-             [[[SocialNetworksStatusModal sharedInstance] getEmailPassword] isEqualToString:@""] ){
-            
-            EmailSettingController *emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
-            emailSettingController.untechable = nil;
-            emailSettingController.comingFromSettingsScreen = YES;
-            emailSettingController.comingFromChangeEmailScreen = NO;
-            [self.navigationController pushViewController:emailSettingController animated:YES];
-        }
+    if ( [emailButton.titleLabel.text isEqualToString:@"Log In"] ){
+        EmailSettingController *emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
+        emailSettingController.untechable = untechable;
+        emailSettingController.comingFrom = @"SettingsScreen";
+        [self.navigationController pushViewController:emailSettingController animated:YES];
     }
 }
 
 -(IBAction)loginLinkedIn:(id) sender {
-    
-    [[SocialNetworksStatusModal sharedInstance] loginLinkedIn:sender Controller:self Untechable:untechable];
+    [untechable.socialNetworksStatusModal loginLinkedIn:sender Controller:self];
 }
 
 -(IBAction)loginTwitter:(id) sender {
-
-    [[SocialNetworksStatusModal sharedInstance] loginTwitter:sender Controller:self Untechable:untechable];
+    [untechable.socialNetworksStatusModal loginTwitter:sender Controller:self];
 }
 
--(IBAction)loginFacebook:(id) sender {
-    
-    [[SocialNetworksStatusModal sharedInstance] loginFacebook:sender Controller:self Untechable:untechable];
+-(IBAction)loginFacebook:(id) sender {    
+    [untechable.socialNetworksStatusModal loginFacebook:sender Controller:self];
 }
 
 
@@ -305,7 +278,7 @@
     nameField.keyboardType = UIKeyboardTypeTwitter;
     nameField.placeholder = @"Enter Name";
 
-[editNameAlert show];
+    [editNameAlert show];
 }
 
 /**
@@ -313,17 +286,10 @@
  we have to save name and phone number on button press
  */
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
     if( alertView == editNameAlert ){
         //getting text from the text fields
-        NSString *name = [alertView textFieldAtIndex:0].text;
-        
-        //setting the name in model and in local app data
-        untechable.userName = name;
-        [untechable saveOrUpdate];
-        
+        untechable.userName = [alertView textFieldAtIndex:0].text;
         [socialNetworksTable reloadData];
-        
     }
 }
 

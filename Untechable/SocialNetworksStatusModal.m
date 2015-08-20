@@ -19,17 +19,18 @@
 
 @interface SocialNetworksStatusModal () <FHSTwitterEngineAccessTokenDelegate>
 
+
 @end
 
 @implementation SocialNetworksStatusModal {
     LIALinkedInHttpClient *_linkedInclient;
+    CommonFunctions *commonFunctions;
 }
 
-@synthesize socialStatus,fbAuth,fbAuthExpiryTs,twitterAuth,twOAuthTokenSecret,linkedinAuth;
+@synthesize mSocialStatus, mFbAuth, mFbAuthExpiryTs, mTwitterAuth, mTwOAuthTokenSecret, mLinkedinAuth;;
 
 #pragma mark - singleton method
-+ (SocialNetworksStatusModal* )sharedInstance
-{
++ (SocialNetworksStatusModal* )sharedInstance {
     static dispatch_once_t predicate = 0;
     static id sharedObject = nil;
     //static id sharedObject = nil;  //if you're not using ARC
@@ -48,129 +49,15 @@
     }
     return self;
 }
-
-- (void)setFbAuth:(NSString *)fbAuthString {
-    
-    [[NSUserDefaults standardUserDefaults] setObject:fbAuthString forKey:@"fbAuth"];
-}
-
-- (void)setFbAuthExpiryTs:(NSString *)setFbAuthExpiryTsString {
-    
-    [[NSUserDefaults standardUserDefaults] setObject:setFbAuthExpiryTsString forKey:@"fbAuthExpiryTs"];
-    
-}
-
-- (NSString *)getFbAuth {
-    
-    NSString *savedFbAuth = @"";
-    NSArray *keys = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys];
-    if ( [keys containsObject:@"fbAuth"] ){
-        
-         savedFbAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuth"];
-    }
-    
-    return savedFbAuth;
-}
-
-- (void)setTwitterAuth:(NSString *)twitterAuthString {
-    
-    [[NSUserDefaults standardUserDefaults] setObject:twitterAuthString forKey:@"twitterAuth"];
-}
-
-- (NSString *)getTwitterAuth {
-    
-    NSString *savedTwitterAuth = @"";
-    NSArray *keys = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys];
-    if ( [keys containsObject:@"twitterAuth"] ){
-        
-        savedTwitterAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuth"];
-    }
-    
-    return savedTwitterAuth;
-}
-
-- (void)setTwitterAuthTokkenSecerate:(NSString *)twitterAuthTokkenSecerate {
-
-    [[NSUserDefaults standardUserDefaults] setObject:twitterAuthTokkenSecerate forKey:@"twitterAuthTokkenSecerate"];
-    
-}
-
-- (NSString *)getTwitterAuthTokkenSecerate{
-    
-    NSString *savedTwitterAuthTokkenSecerate = @"";
-    NSArray *keys = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys];
-    if ( [keys containsObject:@"twitterAuthTokkenSecerate"] ){
-        
-        savedTwitterAuthTokkenSecerate = [[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuthTokkenSecerate"];
-    }
-    
-    return savedTwitterAuthTokkenSecerate;
-}
-
-- (void)setLinkedInAuth:(NSString *)linkedInAuthString{
-    
-    [[NSUserDefaults standardUserDefaults] setObject:linkedInAuthString forKey:@"linkedinAuth"];
-}
-
-- (NSString *)getLinkedInAuth{
-    
-    NSString *savedLinkedInAuth = @"";
-    NSArray *keys = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys];
-    if ( [keys containsObject:@"linkedinAuth"] ){
-        
-        savedLinkedInAuth = [[NSUserDefaults standardUserDefaults] objectForKey:@"linkedinAuth"];
-    }
-    
-    return savedLinkedInAuth;
-}
-
-- (void)setEmailAddress:(NSString *)emailAddressString{
-    
-    [[NSUserDefaults standardUserDefaults] setObject:emailAddressString forKey:EMAIL_KEY];
-}
-
-- (void)setEmailPassword:(NSString *)emailPasswordString{
-    
-    [[NSUserDefaults standardUserDefaults] setObject:emailPasswordString forKey:PASSWORD_KEY];
-}
-
-- (NSString *)getEmailAddress{
-    
-    NSString *savedEmailAddress = @"";
-    NSArray *keys = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys];
-    if ( [keys containsObject:EMAIL_KEY] ){
-        
-        savedEmailAddress = [[NSUserDefaults standardUserDefaults] objectForKey:EMAIL_KEY];
-    }
-    
-    return savedEmailAddress;
-
-}
-
-- (NSString *)getEmailPassword{
-    
-    NSString *savedEmailPassword = @"";
-    NSArray *keys = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys];
-    if ( [keys containsObject:PASSWORD_KEY] ){
-        
-        savedEmailPassword = [[NSUserDefaults standardUserDefaults] objectForKey:PASSWORD_KEY];
-    }
-    
-    return savedEmailPassword;
-}
-
-- (void)loginLinkedIn:(id)sender Controller:(UIViewController *)Controller Untechable:(Untechable *)untechable{
+- (void)loginLinkedIn:(id)sender Controller:(UIViewController *)Controller{
     
     if( [self linkedInBtnStatus] ) {
         //When button was green , the delete permissions
         [self linkedInLogout];
-        [self setLoggedInStatusOnCell:sender Controller:Controller Untechable:untechable LoggedIn:NO];
-        //[self btnActivate:self.btnLinkedin active:[self linkedInBtnStatus]];
+        [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:NO calledFor:@"LinkedIn"];
     }
     else {
-        //[self getLinkedInAuth];
-        [self getLinkedInAuth:sender Controller:Controller Untechable:untechable];
-
+        [self getLinkedInAuth:sender Controller:Controller];
     }
 }
 
@@ -190,7 +77,6 @@
 //Get linkedin User profile details using accessToken
 - (void)requestMeWithToken:(NSString *)linkedInAccessToken {
     
-    NSLog(@"linked2 in accessToken %@",linkedInAccessToken);
     //Async call
     [self.linkedInclient GET:[NSString stringWithFormat:@"https://api.linkedin.com/v1/people/~?oauth2_access_token=%@&format=json", linkedInAccessToken] parameters:nil
                      success:^(AFHTTPRequestOperation *operation, NSDictionary *result) {
@@ -213,89 +99,52 @@
 }
 
 //Update data base for fb data
--(void)linkedInFlushData
-{
+-(void)linkedInFlushData {
     [self linkedInUpdateData:@""];
 }
 
 //Update data base for fb data
--(void)linkedInUpdateData:(NSString *)linkedInAccessToken
-{
-    NSLog(@"linkedInAccessToken=%@",linkedInAccessToken);
-    
-    linkedinAuth = linkedInAccessToken;
-    
-    [self setLinkedInAuth:linkedinAuth];
+-(void)linkedInUpdateData:(NSString *)linkedInAccessToken {
+    mLinkedinAuth = linkedInAccessToken;
 }
 
--(BOOL)linkedInBtnStatus
-{
-    return !( [[self getLinkedInAuth] isEqualToString:@""] );
+-(BOOL)linkedInBtnStatus {
+    return !( [mLinkedinAuth isEqualToString:@""] );
 }
 
 - (void)linkedInLogout {
-    
     [self linkedInUpdateData:@""];
-
 }
 
-- (void)getLinkedInAuth:(id)sender Controller:(UIViewController *)Controller Untechable:(Untechable *)untechable{
+- (void)getLinkedInAuth:(id)sender Controller:(UIViewController *)Controller{
     //1-st async call
     [self.linkedInclient getAuthorizationCode:^(NSString *code) {
         
-        //2-st async call for getting access token
-        [self.linkedInclient getAccessToken:code
-                                    success:^(NSDictionary *accessTokenData) {
-                                        
-                                        [self linkedInUpdateData:[accessTokenData objectForKey:@"access_token"]];
-                                        [self setLoggedInStatusOnCell:sender Controller:Controller Untechable:untechable LoggedIn:YES];
-                                        
-                                    }
-                                    failure:^(NSError *error) {
-                                        NSLog(@"Quering accessToken failed %@", error);
-                                    }];
+            //2-st async call for getting access token
+            [self.linkedInclient getAccessToken:code success:^(NSDictionary *accessTokenData) {
+                [self linkedInUpdateData:[accessTokenData objectForKey:@"access_token"]];
+                [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:YES calledFor:@"LinkedIn"];
+            }
+            failure:^(NSError *error) {
+                NSLog(@"Quering accessToken failed %@", error);
+            }];
     }
-                                       cancel:^{
-                                           NSLog(@"Authorization was cancelled by user");
-                                       }
-                                      failure:^(NSError *error) {
-                                          NSLog(@"Authorization failed %@", error);
-                                      }];
+    cancel:^{
+           NSLog(@"Authorization was cancelled by user");
+    }
+    failure:^(NSError *error) {
+          NSLog(@"Authorization failed %@", error);
+    }];
 }
-
-/*
- -(IBAction)loginLinkedIn:(id) sender {
- 
- if( [self linkedInBtnStatus] ) {
- //When button was green , the delete permissions
- [self linkedInLogout];
- UIButton *linkedInButton = (UIButton *) sender;
- [linkedInButton setTitle:@"Log In" forState:UIControlStateNormal];
- }
- else {
- [self getLinkedInAuth:sender];
- }
- }
- 
- 
- -(BOOL)linkedInBtnStatus
- {
- //return !([[self getLinkedinAuth] isEqualToString:@""]);
- }*/
 
 #pragma mark -  Twitter functions
--(BOOL)twitterBtnStatus
-{
-    return !( [[self getTwitterAuth] isEqualToString:@""] );
-}
-
 //LOGOUT FROM TWITTER
 - (void)twLogout {
     [[FHSTwitterEngine sharedEngine]clearAccessToken];
     
     //Bello code will auto call insdie above function
-    [self setTwitterAuth:@""];
-    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"twitterAuth"];
+    mTwitterAuth = @"";
+    mTwOAuthTokenSecret = @"";
 }
 
 //RETURN TWITTER TOKEN [Note: Do not change the name of this functions, it will called from twitter libraries]
@@ -303,13 +152,12 @@
     return [[NSUserDefaults standardUserDefaults]objectForKey:@"SavedAccessHTTPBody"];
 }
 
-- (void)loginTwitter:(id)sender Controller:(UIViewController *)Controller Untechable:(Untechable *)untechable{
+- (void)loginTwitter:(id)sender Controller:(UIViewController *)Controller{
     
-    if( [self twitterBtnStatus] ) {
+    if( [mTwitterAuth isEqualToString:@""] == NO ) {
         //When button was green , the delete permissions
-        
         [self twLogout];
-        [self setLoggedInStatusOnCell:sender Controller:Controller Untechable:untechable LoggedIn:NO];
+        [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:NO calledFor:@"Twitter"];
     }
     else {
         //When button was gray , take permissions
@@ -324,9 +172,9 @@
         UIViewController *loginController = [[FHSTwitterEngine sharedEngine]loginControllerWithCompletionHandler:^(BOOL success) {
             NSLog( success ? @"Twitter, success login on twitter" : @"Twitter login failure.");
             if ( success ){
-                
-                [self setLoggedInStatusOnCell:sender Controller:Controller Untechable:untechable LoggedIn:YES];
+                [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:YES calledFor:@"Twitter"];
             }
+            
         }];
         
         [Controller presentViewController:loginController animated:YES completion:nil];
@@ -337,13 +185,12 @@
 - (void)twStoreAccessToken:(NSString *)accessTokenZ {
     
     [[NSUserDefaults standardUserDefaults]setObject:accessTokenZ forKey:@"SavedAccessHTTPBody"];
-    NSString *authenticatedUsername = [self extractValueForKey:@"screen_name" fromHTTPBody:accessTokenZ];
-    NSString *authenticatedID = [self extractValueForKey:@"user_id" fromHTTPBody:accessTokenZ];
-    
     NSString *oauth_token = [self extractValueForKey:@"oauth_token" fromHTTPBody:accessTokenZ];
     NSString *oauth_token_secret = [self extractValueForKey:@"oauth_token_secret" fromHTTPBody:accessTokenZ];
     
-    NSLog(@"B- twitter : oauth_token: %@, oauth_token_secret: %@, self.authenticatedUsername: %@, self.authenticatedID: %@, ", oauth_token, oauth_token_secret, authenticatedUsername, authenticatedID);
+//    NSString *authenticatedUsername = [self extractValueForKey:@"screen_name" fromHTTPBody:accessTokenZ];
+//    NSString *authenticatedID = [self extractValueForKey:@"user_id" fromHTTPBody:accessTokenZ];
+//    NSLog(@"B- twitter : oauth_token: %@, oauth_token_secret: %@, self.authenticatedUsername: %@, self.authenticatedID: %@, ", oauth_token, oauth_token_secret, authenticatedUsername, authenticatedID);
     
     if(oauth_token == nil || oauth_token_secret == nil){
         oauth_token = oauth_token_secret =  @"";
@@ -354,16 +201,10 @@
 }
 
 //Update data base for fb data
--(void)twUpdateData:(NSString *)oAuthToken oAuthTokenSecret:(NSString * )oAuthTokenSecret
-{
-    NSLog(@"oAuthToken=%@",oAuthToken);
-    NSLog(@"oAuthTokenSecret=%@",oAuthTokenSecret);
+-(void)twUpdateData:(NSString *)oAuthToken oAuthTokenSecret:(NSString * )oAuthTokenSecret {
     
-    twitterAuth =   oAuthToken;
-    twOAuthTokenSecret =   oAuthTokenSecret;
-    
-    [[SocialNetworksStatusModal sharedInstance] setTwitterAuth:twitterAuth];
-    [[SocialNetworksStatusModal sharedInstance] setTwitterAuthTokkenSecerate:twOAuthTokenSecret];
+    mTwitterAuth =   oAuthToken;
+    mTwOAuthTokenSecret =   oAuthTokenSecret;
 }
 
 //This functions return parmaeter value from url parmeter string
@@ -400,14 +241,15 @@
 
 #pragma mark -  Facebook functions
 // This method will handle ALL the session state changes in the app
-- (void)fbSessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error
-{
+- (void)fbSessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error {
     // If the session was opened successfully
     if (!error && state == FBSessionStateOpen){
-        NSLog(@"Session opened");
         
         // Show the user the logged-in UI
-        [self fbUserLoggedIn];
+        mFbAuth = [[[FBSession activeSession] accessTokenData] accessToken];
+        mFbAuthExpiryTs = [commonFunctions nsDateToTimeStampStr:[[[FBSession activeSession] accessTokenData] expirationDate]];
+        NSLog(@"Session opened new mFbAuth=%@ \n mFbAuthExpiryTs=%@ ", mFbAuth, mFbAuthExpiryTs);
+        
         return;
     }
     if (state == FBSessionStateClosed || state == FBSessionStateClosedLoginFailed){
@@ -461,128 +303,71 @@
 }
 
 // Show an alert message
-- (void)fbShowMessage:(NSString *)text withTitle:(NSString *)title
-{
+- (void)fbShowMessage:(NSString *)text withTitle:(NSString *)title{
     NSLog(@"in fbShowMessage: title=%@, text=%@", title, text);
-    
-    /*
-     [[[UIAlertView alloc] initWithTitle:title
-     message:text
-     delegate:self
-     cancelButtonTitle:@"OK!"
-     otherButtonTitles:nil] show];
-     */
 }
 
 // Show the user the logged-out UI
-- (void)fbUserLoggedOut
-{
-    // Set the button title as "Log in with Facebook"
-    //----//UIButton *loginButton = [self.customLoginViewController loginButton];
-    //----//[loginButton setTitle:@"Log in with Facebook" forState:UIControlStateNormal];
-    
-    // Confirm logout message
-    //----// [self fbShowMessage:@"You're now logged out" withTitle:@""];
-    
+- (void)fbUserLoggedOut{
     [self fbFlushFbData];
 }
 
-// Show the user the logged-in UI
-- (void)fbUserLoggedIn
-{
-    
-    NSString *fbAccessToken = [[[FBSession activeSession] accessTokenData] accessToken];
-    
-    NSDate *expirationDate = [[[FBSession activeSession] accessTokenData] expirationDate];
-    
-    [self fbUpdateFbData:fbAccessToken fbAuthExpD:expirationDate];
-    
-    // Set the button title as "Log out"
-    //----// UIButton *loginButton = self.customLoginViewController.loginButton;
-    //----// [loginButton setTitle:@"Log out" forState:UIControlStateNormal];
-    
-    // Welcome message
-    //----// [self fbShowMessage:@"You're now logged in" withTitle:@"Welcome!"];
-    
-}
-
 //Update data base for fb data
--(void)fbFlushFbData
-{
-    [self fbUpdateFbData:@"" fbAuthExpD:[commonFunctions getDate:@"PAST_1_MONTH"] ];
+-(void)fbFlushFbData {
+    mFbAuth = @"";
+    mFbAuthExpiryTs = @"";
 }
 
-- (NSString *)getFbAuthExpiryTs {
-    
-    NSString *savedFbAuthExpiryTs = @"";
-    NSArray *keys = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys];
-    if ( [keys containsObject:@"fbAuthExpiryTs"] ){
+/**
+ * if fb session is open then close the session and return the state
+ */
+-(BOOL)closeFbSessionIfOpen{
+    BOOL wasSessionOpen = NO;
+    // If the session state is any of the two "open" states when the button is clicked
+    if (FBSession.activeSession.state == FBSessionStateOpen
+        || FBSession.activeSession.state == FBSessionStateOpenTokenExtended) {
+
+        // Close the session and remove the access token from the cache
+        // The session state handler (in the app delegate) will be called automatically
+        [FBSession.activeSession closeAndClearTokenInformation];
+        // If the session state is not any of the two "open" states when the button is clicked
         
-        savedFbAuthExpiryTs = [[NSUserDefaults standardUserDefaults] objectForKey:@"fbAuthExpiryTs"];
+        wasSessionOpen = YES;
     }
     
-    return savedFbAuthExpiryTs;
+    return wasSessionOpen;
 }
 
-//Update data base for fb data
--(void)fbUpdateFbData:(NSString *)fbA fbAuthExpD:(NSDate * )fbAuthExpD
-{
-    NSLog(@"expirationDate=%@",fbAuthExpD);
-    NSLog(@"fbAccessToken=%@",fbA);
-    
-    fbAuth = fbA;
-    fbAuthExpiryTs = [commonFunctions nsDateToTimeStampStr:fbAuthExpD ];
-    
-    [[SocialNetworksStatusModal sharedInstance] setFbAuth:fbAuth];
-    [[SocialNetworksStatusModal sharedInstance] setFbAuthExpiryTs:fbAuthExpiryTs];
-}
-
-- (void)loginFacebook:(id)sender Controller:(UIViewController *)Controller Untechable:(Untechable *)untechable {
-    
-    if( [self fbBtnStatus] ) {
+/**
+ * Function for handling facebook login and logouts
+ */
+- (void)loginFacebook:(id)sender Controller:(UIViewController *)Controller {
+    //if we have token( already login) then logout and flush the token
+    if( [commonFunctions fbBtnStatus:mFbAuthExpiryTs] ) {
         //When button was green , the delete permissions
         [self fbFlushFbData];
-        [self setLoggedInStatusOnCell:sender Controller:Controller Untechable:untechable LoggedIn:NO];
+        [self closeFbSessionIfOpen];
+        [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:NO calledFor:@"Facebook"];
     }
-    else{
-        //When button was gray , take permissions
-        
-        // If the session state is any of the two "open" states when the button is clicked
-        if (FBSession.activeSession.state == FBSessionStateOpen
-            || FBSession.activeSession.state == FBSessionStateOpenTokenExtended) {
-            
-            // Close the session and remove the access token from the cache
-            // The session state handler (in the app delegate) will be called automatically
-            [FBSession.activeSession closeAndClearTokenInformation];
-            // If the session state is not any of the two "open" states when the button is clicked
-        }
-        else {
-            // Open a session showing the user the login UI
-            // You must ALWAYS ask for public_profile permissions when opening a session
-            [FBSession openActiveSessionWithReadPermissions:@[@"publish_actions"]
-                                               allowLoginUI:YES
-                                          completionHandler:
-             ^(FBSession *session, FBSessionState state, NSError *error) {
-                 
-                 // Call the app delegate's sessionStateChanged:state:error method to handle session state changes
-                 [self fbSessionStateChanged:session state:state error:error];
-                 
-                 [self setLoggedInStatusOnCell:sender Controller:Controller Untechable:untechable LoggedIn:YES];
-             }];
-        }
+    //if we haven't token then login to facebook
+    else if( [self closeFbSessionIfOpen] == NO ) {
+        // Open a session showing the user the login UI
+        // You must ALWAYS ask for public_profile permissions when opening a session
+        [FBSession openActiveSessionWithReadPermissions:@[@"publish_actions"]
+                                           allowLoginUI:YES
+                                      completionHandler:
+         ^(FBSession *session, FBSessionState state, NSError *error) {
+             
+             // Call the app delegate's sessionStateChanged:state:error method to handle session state changes
+             [self fbSessionStateChanged:session state:state error:error];
+             
+             [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:YES calledFor:@"Facebook"];
+         }];
     }
+    
 }
 
-//Active fb button when fb toke expiry date is greater then current date.
--(BOOL)fbBtnStatus
-{
-    NSDate* date1 = [NSDate date];
-    NSDate* date2 = [commonFunctions timestampStrToNsDate:[self getFbAuthExpiryTs]];
-    BOOL active   = [commonFunctions date1IsSmallerThenDate2:date1 date2:date2];
-    return active;
-}
-
--(void) setLoggedOutStatusOnCell:(id)sender Controller:(UIViewController *)Controller Untechable:(Untechable *)untechable{
+-(void) setLoggedInStatusOnCell:(id)sender Controller:(UIViewController *)Controller LoggedIn:(BOOL)LoggedIn calledFor:(NSString * )calledFor{
     
     if( [Controller isKindOfClass:[SettingsViewController class]] ){
         
@@ -591,49 +376,7 @@
         SettingsCellView *settingCell;
         CGPoint buttonPosition = [socialButton convertPoint:CGPointZero toView:settingsViewController.socialNetworksTable];
         NSIndexPath *indexPath = [settingsViewController.socialNetworksTable indexPathForRowAtPoint:buttonPosition];
-        if (indexPath != nil)
-        {
-            settingCell = (SettingsCellView*)[settingsViewController.socialNetworksTable cellForRowAtIndexPath:indexPath];
-        }else {
-            
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
-            settingCell = (SettingsCellView*)[settingsViewController.socialNetworksTable cellForRowAtIndexPath:indexPath];
-            [settingCell.socialNetworkButton setTitle:@"Log In" forState:UIControlStateNormal];
-        }
-        
-        [socialButton setTitle:@"Log In" forState:UIControlStateNormal];
-        [settingCell.loginStatus setText:@"Logged Out"];
-        indexPath = nil;
-        
-    }else if ( [Controller isKindOfClass:[SocialnetworkController class]] ){
-        
-        UIButton *socialButton = (UIButton *) sender;
-        
-        if ( [socialButton.titleLabel.text isEqualToString:@"Facebook"] ){
-            untechable.fbAuth = [self getFbAuth];
-            untechable.fbAuthExpiryTs = [self fbAuthExpiryTs];
-        }else if ( [socialButton.titleLabel.text isEqualToString:@"Twitter"] ){
-            untechable.twitterAuth = [self getTwitterAuth];
-            untechable.twOAuthTokenSecret = [self getTwitterAuthTokkenSecerate];
-        }else if ( [socialButton.titleLabel.text isEqualToString:@"LinkedIn"] ){
-            untechable.linkedinAuth = [self getLinkedInAuth];
-        }
-        
-        [self btnActivate:socialButton active:NO];
-    }
-}
-
--(void) setLoggedInStatusOnCell:(id)sender Controller:(UIViewController *)Controller Untechable:(Untechable *)untechable LoggedIn:(BOOL)LoggedIn{
-    
-    if( [Controller isKindOfClass:[SettingsViewController class]] ){
-        
-        UIButton *socialButton = (UIButton *) sender;
-        SettingsViewController *settingsViewController = (SettingsViewController *) Controller;
-        SettingsCellView *settingCell;
-        CGPoint buttonPosition = [socialButton convertPoint:CGPointZero toView:settingsViewController.socialNetworksTable];
-        NSIndexPath *indexPath = [settingsViewController.socialNetworksTable indexPathForRowAtPoint:buttonPosition];
-        if (indexPath != nil)
-        {
+        if (indexPath != nil){
             settingCell = (SettingsCellView*)[settingsViewController.socialNetworksTable cellForRowAtIndexPath:indexPath];
         }else {
             
@@ -645,7 +388,6 @@
                 [settingCell.socialNetworkButton setTitle:@"Log In" forState:UIControlStateNormal];
             }
         }
-        
         if ( LoggedIn ){
             [socialButton setTitle:@"Log Out" forState:UIControlStateNormal];
             [settingCell.loginStatus setText:@"Logged In"];
@@ -654,35 +396,21 @@
             [settingCell.loginStatus setText:@"Logged Out"];
         }
         indexPath = nil;
-        
-    }else if ( [Controller isKindOfClass:[SocialnetworkController class]] ){
-        
+    }
+    else if ( [Controller isKindOfClass:[SocialnetworkController class]] ){
+        SocialnetworkController *socialnetworkController = (SocialnetworkController *) Controller;
         UIButton *socialButton = (UIButton *) sender;
         
         if ( [socialButton.titleLabel.text isEqualToString:@"Facebook"] ){
-            untechable.fbAuth = [self getFbAuth];
-            untechable.fbAuthExpiryTs = [self fbAuthExpiryTs];
+            socialnetworkController.untechable.fbAuth = mFbAuth;
+            socialnetworkController.untechable.fbAuthExpiryTs = mFbAuthExpiryTs;
         }else if ( [socialButton.titleLabel.text isEqualToString:@"Twitter"] ){
-            untechable.twitterAuth = [self getTwitterAuth];
-            untechable.twOAuthTokenSecret = [self getTwitterAuthTokkenSecerate];
+            socialnetworkController.untechable.twitterAuth = mTwitterAuth;
+            socialnetworkController.untechable.twOAuthTokenSecret = mTwOAuthTokenSecret;
         }else if ( [socialButton.titleLabel.text isEqualToString:@"LinkedIn"] ){
-            untechable.linkedinAuth = [self getLinkedInAuth];
+            socialnetworkController.untechable.linkedinAuth = mLinkedinAuth;
         }
-        
-        if (LoggedIn ){
-            [self btnActivate:socialButton active:YES];
-        }else {
-            [self btnActivate:socialButton active:NO];
-        }
+        [socialnetworkController btnActivate:socialButton active:LoggedIn];
     }
 }
-
-// Button green (active) and gray ( inActive ) case
--(void)btnActivate:(UIButton *)btnPointer active:(BOOL)active {
-    if( active == YES )
-        [btnPointer setTitleColor:DEF_GREEN forState:UIControlStateNormal];
-    else
-        [btnPointer setTitleColor:DEF_GRAY forState:UIControlStateNormal];
-}
-
 @end

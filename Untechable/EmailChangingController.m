@@ -21,7 +21,7 @@
 
 @implementation EmailChangingController
 
-@synthesize untechable,emailAddress,emailAddresstext, setupScreenCalling;
+@synthesize untechable,emailAddress,emailAddressText;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,15 +37,13 @@
     
     if ( [untechable.email isEqualToString:@""] ){
         
-        if ( ![[[SocialNetworksStatusModal sharedInstance] getEmailAddress] isEqualToString:@""] &&
-            ![[[SocialNetworksStatusModal sharedInstance] getEmailPassword] isEqualToString:@""] ){
+        if ( ![untechable.email isEqualToString:@""] && ![untechable.password isEqualToString:@""] ) {
             
-            [emailAddress setText:[[SocialNetworksStatusModal sharedInstance] getEmailAddress]];
+            [emailAddress setText:untechable.email];
             
-            [emailAddress setText:emailAddresstext];
+            [emailAddress setText:emailAddressText];
         }
     }else {
-        
         [emailAddress setText:untechable.email];
     }
 }
@@ -112,15 +110,19 @@
     EmailSettingController *emailSettingController;
     emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
     emailSettingController.untechable = untechable;
-    emailSettingController.comingFromSettingsScreen = NO;
-    emailSettingController.comingFromChangeEmailScreen = YES;
+    
+    if( [untechable.rUId isEqualToString:@"1"] )
+    emailSettingController.comingFrom = @"SetupScreen";
+    else
+    emailSettingController.comingFrom = @"ContactsListScreen";
+    
     [self.navigationController pushViewController:emailSettingController animated:YES];
 }
 
 -(void)onNext{
     
     untechable.email = emailAddress.text;
-    untechable.password = [[SocialNetworksStatusModal sharedInstance] getEmailPassword];
+    untechable.password = untechable.password;
     
     if( [untechable.rUId isEqualToString:@"1"] ) {
         

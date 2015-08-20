@@ -11,6 +11,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "CommonFunctions.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "SocialNetworksStatusModal.h"
 
 @interface Untechable : NSObject {
     
@@ -19,6 +20,7 @@
 
 //Settings
 @property (strong, nonatomic) CommonFunctions *commonFunctions;
+@property (strong, nonatomic) SocialNetworksStatusModal *socialNetworksStatusModal;
 @property (strong, readonly)  NSMutableDictionary *dic;
 @property (strong, nonatomic) NSString *piecesFile;
 @property (nonatomic, assign) BOOL paid;
@@ -69,28 +71,16 @@
 -(BOOL)initUntechableDirectory;
 -(void)setOrSaveVars:(NSString *)setOrSAve dic2:(NSMutableDictionary *)dic2;
 -(void)initWithDefValues;
--(NSString *)timestampStrToAppDate:(NSString *)timeStamp;
 
 -(BOOL)isUntechableStarted;
 -(BOOL)isUntechableExpired;
-
-#pragma mark -  Facebook functions
-- (void)fbSessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error;
--(void)fbFlushFbData;
-
-#pragma mark -  Twitter functions
--(void)twFlushData;
--(void)twUpdateData:(NSString *)oAuthToken oAuthTokenSecret:(NSString * )oAuthTokenSecret;
-
-#pragma mark -  LinkedIn functions
--(void)linkedInFlushData;
--(void)linkedInUpdateData:(NSString *)linkedInAccessToken;
 
 #pragma mark - current Date method
 -(NSDate *)getCurrentDate;
 
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack;
--(void)saveOrUpdate;
+-(void)saveOrUpdateInDb;
 -(void)setCustomizedContactsForSession;
+-(BOOL)canSkipEmailSetting;
 
 @end

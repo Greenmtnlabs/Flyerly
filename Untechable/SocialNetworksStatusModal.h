@@ -8,39 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import "CommonFunctions.h"
-#import "Untechable.h"
+
 
 @interface SocialNetworksStatusModal : NSObject {
-    
-    CommonFunctions *commonFunctions;
 }
 
 + (SocialNetworksStatusModal*)sharedInstance;
 
-- (void)setFbAuth:(NSString *)fbAuthString;
-- (void)setFbAuthExpiryTs:(NSString *)setFbAuthExpiryTsString;
-- (NSString *)getFbAuth;
-- (NSString *)getFbAuthExpiryTs;
+- (void)loginFacebook:(id)sender Controller:(UIViewController *) Controller;
+- (void)loginTwitter:(id)sender Controller:(UIViewController *)Controller;
+- (void)loginLinkedIn:(id)sender Controller:(UIViewController *) Controller;
 
-- (void)setTwitterAuth:(NSString *)twitterAuthString;
-- (void)setTwitterAuthTokkenSecerate:(NSString *)twitterAuthTokkenSecerate;
-- (NSString *)getTwitterAuth;
-- (NSString *)getTwitterAuthTokkenSecerate;
-
-- (void)setLinkedInAuth:(NSString *)linkedInAuthString;
-- (NSString *)getLinkedInAuth;
-
-- (void)setEmailAddress:(NSString *)emailAddressString;
-- (void)setEmailPassword:(NSString *)emailPasswordString;
-- (NSString *)getEmailAddress;
-- (NSString *)getEmailPassword;
-
-- (void)loginFacebook:(id)sender Controller:(UIViewController *) Controller Untechable:(Untechable *)untechable;
-- (void)loginTwitter:(id)sender Controller:(UIViewController *)Controller Untechable:(Untechable *)untechable;
-- (void)loginLinkedIn:(id)sender Controller:(UIViewController *) Controller Untechable:(Untechable *)untechable;
-
-
-
-@property (strong, nonatomic) NSString *socialStatus, *fbAuth, *fbAuthExpiryTs, *twitterAuth, *twOAuthTokenSecret, *linkedinAuth;
+@property (strong, nonatomic) NSString *mSocialStatus, *mFbAuth, *mFbAuthExpiryTs, *mTwitterAuth, *mTwOAuthTokenSecret, *mLinkedinAuth;
 
 @end
