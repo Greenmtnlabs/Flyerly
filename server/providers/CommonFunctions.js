@@ -114,8 +114,15 @@ CommonFunctions.sendEmail2 = function( eventObj, mailOptions ){
 }
 
 CommonFunctions.sendDefaultEmail = function(mailOptions) {
+	
 	// send email with default email settings
-	    
+	var Options = {
+					    from: mailOptions.from, // sender address
+					    to: mailOptions.to[0], // list of receivers "email1,email2,email3"
+					    subject: mailOptions.subject, // Subject line
+					    text: mailOptions.text // html body
+					}
+    
 	var smtpTransport = nodemailer.createTransport("SMTP",{
 	    service: "Gmail",
 	    auth: {
@@ -125,7 +132,7 @@ CommonFunctions.sendDefaultEmail = function(mailOptions) {
 
 	});
 
-	smtpTransport.sendMail(mailOptions, function(error, response){
+	smtpTransport.sendMail(Options, function(error, response){
 		
 		if(error){
 			logger.info("commongFunction.js line: "+__line+" ,Error occured while send email with default settings");
