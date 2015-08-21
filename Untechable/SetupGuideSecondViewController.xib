@@ -18,18 +18,18 @@
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigation2.png" translatesAutoresizingMaskIntoConstraints="NO" id="UNA-AN-XXL">
-                    <rect key="frame" x="72" y="75" width="177" height="27"/>
+                    <rect key="frame" x="76" y="75" width="169" height="27"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </imageView>
                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XGp-dh-10q">
-                    <rect key="frame" x="0.0" y="198" width="320" height="162"/>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <rect key="frame" x="0.0" y="193" width="320" height="162"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </pickerView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oza-5Y-MF3">
-                    <rect key="frame" x="0.0" y="366" width="320" height="113"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <rect key="frame" x="0.0" y="367" width="320" height="113"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="113" id="flV-Jm-JDU"/>
+                        <constraint firstAttribute="height" constant="113" id="sGE-8x-A4i"/>
                     </constraints>
                     <string key="text">Did you know that based on a study, people who remove themselves from technology have better relationships, better quality of sleep and in general are more emotionally balanced.</string>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -37,9 +37,10 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When you take time away from technology, what do you typically do or hope to do more of?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="beE-63-vlL">
-                    <rect key="frame" x="0.0" y="123" width="320" height="67"/>
+                    <rect key="frame" x="0.0" y="114" width="320" height="67"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="67" id="to8-re-rBw"/>
+                        <constraint firstAttribute="height" constant="67" id="0Lj-LI-yBo"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.25882352939999997" green="0.96862745100000003" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -48,19 +49,17 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="Oza-5Y-MF3" secondAttribute="bottom" constant="1" id="1bV-HN-jno"/>
-                <constraint firstItem="beE-63-vlL" firstAttribute="top" secondItem="UNA-AN-XXL" secondAttribute="bottom" constant="21" id="8yd-TG-sjr"/>
-                <constraint firstItem="beE-63-vlL" firstAttribute="leading" secondItem="XGp-dh-10q" secondAttribute="leading" id="EIA-ZI-tHW"/>
-                <constraint firstItem="Oza-5Y-MF3" firstAttribute="top" secondItem="XGp-dh-10q" secondAttribute="bottom" constant="6" id="EOs-aB-IKb"/>
-                <constraint firstItem="UNA-AN-XXL" firstAttribute="centerX" secondItem="beE-63-vlL" secondAttribute="centerX" id="NnK-1j-CZX"/>
-                <constraint firstItem="UNA-AN-XXL" firstAttribute="leading" secondItem="79C-fk-0Vv" secondAttribute="leading" constant="72" id="Tco-Jl-GHa"/>
-                <constraint firstItem="beE-63-vlL" firstAttribute="trailing" secondItem="XGp-dh-10q" secondAttribute="trailing" id="USr-9r-Puo"/>
-                <constraint firstItem="XGp-dh-10q" firstAttribute="leading" secondItem="79C-fk-0Vv" secondAttribute="leading" id="afw-CM-E0b"/>
-                <constraint firstItem="Oza-5Y-MF3" firstAttribute="leading" secondItem="XGp-dh-10q" secondAttribute="leading" id="jia-7h-bqZ"/>
-                <constraint firstItem="Oza-5Y-MF3" firstAttribute="trailing" secondItem="XGp-dh-10q" secondAttribute="trailing" id="nre-Ob-6nG"/>
-                <constraint firstItem="beE-63-vlL" firstAttribute="top" secondItem="79C-fk-0Vv" secondAttribute="top" constant="123" id="q9O-Ea-yBa"/>
-                <constraint firstItem="XGp-dh-10q" firstAttribute="top" secondItem="beE-63-vlL" secondAttribute="bottom" constant="8" symbolic="YES" id="uBr-pv-syj"/>
-                <constraint firstAttribute="trailing" secondItem="XGp-dh-10q" secondAttribute="trailing" id="ycl-mJ-fT6"/>
+                <constraint firstItem="Oza-5Y-MF3" firstAttribute="top" secondItem="XGp-dh-10q" secondAttribute="bottom" constant="12" id="5ey-ZQ-zxi"/>
+                <constraint firstAttribute="trailing" secondItem="XGp-dh-10q" secondAttribute="trailing" id="M7x-B3-gVa"/>
+                <constraint firstItem="beE-63-vlL" firstAttribute="leading" secondItem="XGp-dh-10q" secondAttribute="leading" id="Yw9-NY-3Zo"/>
+                <constraint firstItem="UNA-AN-XXL" firstAttribute="top" secondItem="79C-fk-0Vv" secondAttribute="top" constant="75" id="Yxx-2V-hor"/>
+                <constraint firstItem="beE-63-vlL" firstAttribute="trailing" secondItem="XGp-dh-10q" secondAttribute="trailing" id="azv-L9-OC9"/>
+                <constraint firstItem="Oza-5Y-MF3" firstAttribute="leading" secondItem="XGp-dh-10q" secondAttribute="leading" id="b36-fC-You"/>
+                <constraint firstItem="XGp-dh-10q" firstAttribute="top" secondItem="beE-63-vlL" secondAttribute="bottom" constant="12" id="gmS-aC-obr"/>
+                <constraint firstItem="Oza-5Y-MF3" firstAttribute="trailing" secondItem="XGp-dh-10q" secondAttribute="trailing" id="guW-Ta-cvc"/>
+                <constraint firstItem="XGp-dh-10q" firstAttribute="leading" secondItem="79C-fk-0Vv" secondAttribute="leading" id="ldB-yK-gBh"/>
+                <constraint firstAttribute="centerX" secondItem="UNA-AN-XXL" secondAttribute="centerX" id="tez-4E-lre"/>
+                <constraint firstItem="beE-63-vlL" firstAttribute="top" secondItem="UNA-AN-XXL" secondAttribute="bottom" constant="12" id="wfo-J2-Ohf"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
