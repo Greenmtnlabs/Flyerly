@@ -173,9 +173,7 @@
     
     [untechable setOrSaveVars:RESET dic2:setDic];
     
-    untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60)] ]; //current time + time duration
-    untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)] ]; //start time + selected time duration
-    
+    [self setTimeAcToCurVars];
     [self setUserData];
     
     
@@ -686,6 +684,8 @@
             timeInString = @"30 minutes";
             break;
     }
+    
+    [self setTimeAcToCurVars];
 }
 
 
@@ -731,8 +731,6 @@
     [_timeDurationPicker setHidden:YES];
     [_doneButtonView setHidden:YES];
     
-    [self setDefaultUntech];
-    
     [self changeNavigation:@"ON_FINISH"];
     
     //Background work
@@ -769,5 +767,10 @@
     ThankyouController *thankyouScreen = [[ThankyouController alloc] init];
     thankyouScreen.untechable = untechable;
     [self.navigationController pushViewController:thankyouScreen animated:YES];
+}
+-( void )setTimeAcToCurVars {
+    untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60)] ]; //current time + time duration
+    untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)] ]; //start time + selected time duration
+    
 }
 @end
