@@ -122,7 +122,14 @@
 }
 
 -(void) goBack {
+    
+    untechable.fbAuth = untechable.socialNetworksStatusModal.mFbAuth;
+    untechable.fbAuthExpiryTs = untechable.socialNetworksStatusModal.mFbAuthExpiryTs;
+    untechable.twitterAuth = untechable.socialNetworksStatusModal.mTwitterAuth;
+    untechable.twOAuthTokenSecret = untechable.socialNetworksStatusModal.mTwOAuthTokenSecret;
+    untechable.linkedinAuth = untechable.socialNetworksStatusModal.mLinkedinAuth;
     [untechable saveOrUpdateInDb];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
