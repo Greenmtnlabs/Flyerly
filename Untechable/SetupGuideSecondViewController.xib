@@ -18,7 +18,7 @@
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigation2.png" translatesAutoresizingMaskIntoConstraints="NO" id="UNA-AN-XXL">
-                    <rect key="frame" x="72" y="75" width="177" height="27"/>
+                    <rect key="frame" x="76" y="75" width="169" height="27"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </imageView>
                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XGp-dh-10q">
@@ -53,7 +53,6 @@
                 <constraint firstItem="beE-63-vlL" firstAttribute="leading" secondItem="XGp-dh-10q" secondAttribute="leading" id="EIA-ZI-tHW"/>
                 <constraint firstItem="Oza-5Y-MF3" firstAttribute="top" secondItem="XGp-dh-10q" secondAttribute="bottom" constant="6" id="EOs-aB-IKb"/>
                 <constraint firstItem="UNA-AN-XXL" firstAttribute="centerX" secondItem="beE-63-vlL" secondAttribute="centerX" id="NnK-1j-CZX"/>
-                <constraint firstItem="UNA-AN-XXL" firstAttribute="leading" secondItem="79C-fk-0Vv" secondAttribute="leading" constant="72" id="Tco-Jl-GHa"/>
                 <constraint firstItem="beE-63-vlL" firstAttribute="trailing" secondItem="XGp-dh-10q" secondAttribute="trailing" id="USr-9r-Puo"/>
                 <constraint firstItem="XGp-dh-10q" firstAttribute="leading" secondItem="79C-fk-0Vv" secondAttribute="leading" id="afw-CM-E0b"/>
                 <constraint firstItem="Oza-5Y-MF3" firstAttribute="leading" secondItem="XGp-dh-10q" secondAttribute="leading" id="jia-7h-bqZ"/>
