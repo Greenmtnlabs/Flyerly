@@ -379,8 +379,12 @@
         if (indexPath != nil){
             settingCell = (SettingsCellView*)[settingsViewController.socialNetworksTable cellForRowAtIndexPath:indexPath];
         }else {
+            int index = 0;
+            if( ([calledFor isEqualToString:@"Facebook"])) index = 1;
+            if( ([calledFor isEqualToString:@"Twitter"])) index = 2;
+            if( ([calledFor isEqualToString:@"LinkedIn"])) index = 3;
             
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
             settingCell = (SettingsCellView*)[settingsViewController.socialNetworksTable cellForRowAtIndexPath:indexPath];
             if ( LoggedIn ){
                 [settingCell.socialNetworkButton setTitle:@"Log Out" forState:UIControlStateNormal];
