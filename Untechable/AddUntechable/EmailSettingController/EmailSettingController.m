@@ -356,7 +356,7 @@
         [rightBarButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         rightBarButton.showsTouchWhenHighlighted = YES;
 
-        BOOL showSkip = [untechable canSkipEmailSetting];
+        BOOL showSkip = YES;//[untechable canSkipEmailSetting]; //show skip button for all cases it requirment
         
         if ( showSkip ){
             
