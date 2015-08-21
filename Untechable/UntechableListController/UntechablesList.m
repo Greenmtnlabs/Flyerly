@@ -72,6 +72,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    //setting default time duration for untech now
+    timeDuration = 30*60; //30 minutes
+    timeInString = @"30 minutes";
+    
     // During startup (-viewDidLoad or in storyboard) do:
     self.untechablesTable.allowsMultipleSelectionDuringEditing = NO;
     
@@ -88,10 +92,7 @@
     [_doneButtonView setHidden:YES];
 
     // Do any additional setup after loading the view from its nib.
-    
-    //setting default time duration for untech now
-    timeDuration = 30*60;
-    timeInString = @"30 minutes";
+   
 }
 
 #pragma mark -  Navigation functions
@@ -172,9 +173,7 @@
     
     [untechable setOrSaveVars:RESET dic2:setDic];
     
-    untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60)] ]; //current time + time duration
-    untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)+60] ]; //start time +1 Day
-    
+    [self setTimeAcToCurVars];
     [self setUserData];
     
     
@@ -685,6 +684,8 @@
             timeInString = @"30 minutes";
             break;
     }
+    
+    [self setTimeAcToCurVars];
 }
 
 
@@ -766,5 +767,10 @@
     ThankyouController *thankyouScreen = [[ThankyouController alloc] init];
     thankyouScreen.untechable = untechable;
     [self.navigationController pushViewController:thankyouScreen animated:YES];
+}
+-( void )setTimeAcToCurVars {
+    untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60)] ]; //current time + time duration
+    untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)] ]; //start time + selected time duration
+    
 }
 @end
