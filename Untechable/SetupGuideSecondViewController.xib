@@ -23,11 +23,13 @@
                 </imageView>
                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XGp-dh-10q">
                     <rect key="frame" x="0.0" y="193" width="320" height="162"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.69040464743589736" green="0.66666666666666663" blue="0.66666666666666663" alpha="0.13" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="162" id="48q-dD-ySi"/>
+                    </constraints>
                 </pickerView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oza-5Y-MF3">
                     <rect key="frame" x="0.0" y="367" width="320" height="113"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="113" id="sGE-8x-A4i"/>
                     </constraints>
@@ -64,7 +66,7 @@
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="1175" y="215"/>
+            <point key="canvasLocation" x="1094" y="198"/>
         </view>
     </objects>
     <resources>
