@@ -175,16 +175,6 @@
     
     [self setTimeAcToCurVars];
     [self setUserData];
-    
-    
-    // the selected status from the setup screen would be set as default status on unetch now option
-    NSInteger positionOfSelectedStatusFromArray = [[NSUserDefaults standardUserDefaults] integerForKey:@"positionToRemember"];
-    NSArray *customArrayOfStatuses = [[NSUserDefaults standardUserDefaults]objectForKey:@"cutomSpendingTimeTextAry"];
-    NSString *selectedStatus = [customArrayOfStatuses objectAtIndex:positionOfSelectedStatusFromArray];
-    //setting spending time text to status got from setup screen.
-    untechable.spendingTimeTxt = selectedStatus;
-    NSString *socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", timeInString, untechable.spendingTimeTxt];
-    untechable.socialStatus = socialStatus;
 }
 
 // set default vaules in model
@@ -771,6 +761,16 @@
 -( void )setTimeAcToCurVars {
     untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60)] ]; //current time + time duration
     untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)] ]; //start time + selected time duration
+    
+    // the selected status from the setup screen would be set as default status on unetch now option
+    NSInteger positionOfSelectedStatusFromArray = [[NSUserDefaults standardUserDefaults] integerForKey:@"positionToRemember"];
+    NSArray *customArrayOfStatuses = [[NSUserDefaults standardUserDefaults]objectForKey:@"cutomSpendingTimeTextAry"];
+    NSString *selectedStatus = [customArrayOfStatuses objectAtIndex:positionOfSelectedStatusFromArray];
+    
+    //setting spending time text to status got from setup screen.
+    untechable.spendingTimeTxt = selectedStatus;
+    NSString *socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", timeInString, untechable.spendingTimeTxt];
+    untechable.socialStatus = socialStatus;
     
 }
 @end
