@@ -210,14 +210,37 @@ SocialStatusCron.setup = function(app) {
     	var OneHour =  60 * 60;
     	var OneDay  =  60 * 60 * 24;    	
     	var diff = Math.abs(Number(end) - Number(start));
+    	var minutes = Math.round( diff / 60 );
     	totalHoursDays = Math.round(diff/OneHour);
+    	var hourMinutes = diff/OneHour;
+
     	if(totalHoursDays>48){
     		totalHoursDays = Math.round(diff/OneDay);
     		totalHoursDays = totalHoursDays + " days"; 
-    	}else if(totalHoursDays<2){
-    		totalHoursDays = totalHoursDays + " hour";
+    	}else if(totalHoursDays>24){
+    		totalHoursDays = Math.round(diff/OneDay);
+    		totalHoursDays = totalHoursDays + " day"; 
+
+    	}else if (diff < OneHour){
+    		totalHoursDays = minutes + " minutes";
+    	}else if(hourMinutes < 2 ){
+    		hourMinutes =  minutes - 60;
+
+    		if(totalHoursDays != 1 ){ totalHoursDays = totalHoursDays -1 ;}
+    		
+    		if(hourMinutes == 0){
+    			totalHoursDays = totalHoursDays + " hour ";
+    		}else{
+    			totalHoursDays = totalHoursDays + " hour " + hourMinutes + " minutes" ;
+    		}
     	}else{
-    		totalHoursDays = totalHoursDays + " hours";
+    		hours = Math.floor(diff/OneHour);
+    		hourMinutes = minutes - ( hours * 60 );
+    		if(hours == diff/OneHour){
+    			totalHoursDays = hours + " hours";
+    		}else{
+    			totalHoursDays = hours + " hours " + hourMinutes + " minutes" ;
+    		}
     	}
     	logger.info("Number of days or hours:" + totalHoursDays);
     	return totalHoursDays;
