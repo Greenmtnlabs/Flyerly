@@ -2,7 +2,7 @@
 //  ThankyouController.m
 //  Untechable
 //
-//  Created by Muhammad Raheel on 28/10/2014.
+//  Created by RIKSOF Developer on 28/10/2014.
 //  Copyright (c) 2014 Green MTN Labs Inc. All rights reserved.
 //
 

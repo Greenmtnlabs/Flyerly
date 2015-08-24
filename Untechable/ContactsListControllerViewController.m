@@ -18,7 +18,6 @@
 #import "EmailChangingController.h"
 #import "SocialNetworksStatusModal.h"
 
-
 @interface ContactsListControllerViewController () {
 }
 
@@ -137,6 +136,7 @@
 }
 
 -(void) goBack {
+    
     [self.navigationController popViewControllerAnimated:YES];
     //hide keyboard when going back to view
     [searchTextField resignFirstResponder];
@@ -160,11 +160,10 @@
     [self setSkipHighlighted:NO];
     
     //reset contacts from model
-    [untechable setCustomizedContactsForSession];
+    [untechable reSetCustomizedContactsInSession];
     [self mapAllSessionContactSelectionsOnMobileArray];
     
     [self onNext];
-    
 }
 
 /**

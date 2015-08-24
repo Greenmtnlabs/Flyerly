@@ -2,7 +2,7 @@
 //  SocialNetworksStatusModal.m
 //  Untechable
 //
-//  Created by Abdul Rauf on 03/02/2015.
+//  Created by RIKSOF Developer on 03/02/2015.
 //  Copyright (c) 2015 Green MTN Labs Inc. All rights reserved.
 //
 
@@ -72,30 +72,6 @@
                                            ];
     
     return [LIALinkedInHttpClient clientForApplication:application presentingViewController:nil];
-}
-
-//Get linkedin User profile details using accessToken
-- (void)requestMeWithToken:(NSString *)linkedInAccessToken {
-    
-    //Async call
-    [self.linkedInclient GET:[NSString stringWithFormat:@"https://api.linkedin.com/v1/people/~?oauth2_access_token=%@&format=json", linkedInAccessToken] parameters:nil
-                     success:^(AFHTTPRequestOperation *operation, NSDictionary *result) {
-                         
-                         NSLog(@"current user %@", result);
-                         /* //SAMPLE DATA
-                          current user {
-                          firstName = rufi;
-                          headline = "Sr. Software Engineer at RIKSOF";
-                          lastName = untechable;
-                          siteStandardProfileRequest =     {
-                          url = "https://www.linkedin.com/profile/view?id=384207301&authType=name&authToken=I9FC&trk=api*a3572303*s3643513*";
-                          };
-                          */
-                         
-                     }
-                     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                         NSLog(@"failed to fetch current user %@", error);
-                     }];
 }
 
 //Update data base for fb data
@@ -187,10 +163,6 @@
     [[NSUserDefaults standardUserDefaults]setObject:accessTokenZ forKey:@"SavedAccessHTTPBody"];
     NSString *oauth_token = [self extractValueForKey:@"oauth_token" fromHTTPBody:accessTokenZ];
     NSString *oauth_token_secret = [self extractValueForKey:@"oauth_token_secret" fromHTTPBody:accessTokenZ];
-    
-//    NSString *authenticatedUsername = [self extractValueForKey:@"screen_name" fromHTTPBody:accessTokenZ];
-//    NSString *authenticatedID = [self extractValueForKey:@"user_id" fromHTTPBody:accessTokenZ];
-//    NSLog(@"B- twitter : oauth_token: %@, oauth_token_secret: %@, self.authenticatedUsername: %@, self.authenticatedID: %@, ", oauth_token, oauth_token_secret, authenticatedUsername, authenticatedID);
     
     if(oauth_token == nil || oauth_token_secret == nil){
         oauth_token = oauth_token_secret =  @"";
@@ -379,8 +351,12 @@
         if (indexPath != nil){
             settingCell = (SettingsCellView*)[settingsViewController.socialNetworksTable cellForRowAtIndexPath:indexPath];
         }else {
+            int index = 0;
+            if( ([calledFor isEqualToString:@"Facebook"])) index = 1;
+            if( ([calledFor isEqualToString:@"Twitter"])) index = 2;
+            if( ([calledFor isEqualToString:@"LinkedIn"])) index = 3;
             
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
             settingCell = (SettingsCellView*)[settingsViewController.socialNetworksTable cellForRowAtIndexPath:indexPath];
             if ( LoggedIn ){
                 [settingCell.socialNetworkButton setTitle:@"Log Out" forState:UIControlStateNormal];

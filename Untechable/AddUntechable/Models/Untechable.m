@@ -2,7 +2,7 @@
 //  UntechableClass.m
 //  Untechable
 //
-//  Created by Abdul Rauf on 23/sep/2014
+//  Created by RIKSOF Developer on 23/sep/2014
 //  Copyright (c) 2014 RIKSOF (Pvt) Ltd. All rights reserved.
 //
 //
@@ -14,7 +14,7 @@
 @implementation Untechable
 
 //Settings
-@synthesize socialNetworksStatusModal, commonFunctions, dic, piecesFile, paid, userId, uniqueId, rUId, eventId, untechablePath, dateFormatter, savedOnServer, hasFinished;
+@synthesize socialNetworksStatusModal, commonFunctions, dic, paid, userId, rUId, eventId, dateFormatter, savedOnServer, hasFinished;
 
 //SetupGuide Screen 1 Data
 @synthesize userName, userPhoneNumber;
@@ -23,8 +23,6 @@
 @synthesize timezoneOffset, spendingTimeTxt, startDate, endDate, hasEndDate;
 
 //2-vars for screen2
-//@synthesize customizedContacts,twillioNumber, location, emergencyContacts, emergencyNumber, hasRecording,customizedContactsForCurrentSession;
-
 @synthesize customizedContacts, twillioNumber, location ,customizedContactsForCurrentSession;
 
 //3-vars for screen3
@@ -34,7 +32,7 @@
 @synthesize email, password, respondingEmail,acType, iSsl, oSsl, imsHostName, imsPort, omsHostName, omsPort;
 
 /*
- * load extras of untechable
+ * Initialize untechable object with required models initialization
  */
 - (id)initWithCF{
     self = [super init];
@@ -43,42 +41,20 @@
     return self;
 }
 
-
--(NSDate *)stringToDate:(NSString *)inputStrFormate dateString:(NSString *)dateString{
-        NSLog(@"dateString is %@", dateString);
-    NSDateFormatter *dateFormatterTemp = [[NSDateFormatter alloc] init];
-
-    if( [inputStrFormate  isEqual:DATE_FORMATE_1] ){
-        dateFormatterTemp.dateFormat = inputStrFormate;
-
-        NSDate *dateFrmString = [dateFormatterTemp dateFromString:dateString];
-
-        NSString *formattedDateString = [dateFormatterTemp stringFromDate:dateFrmString];
-        NSLog(@"Date in new format is %@", formattedDateString);
-        
-        
-        return dateFrmString;
-    }
-    
-    return [NSDate date];//default
-}
-
-
+/**
+ * Common function for going back to previous screen
+ */
 -(void)goBack:navigationControllerPointer{
     [navigationControllerPointer popViewControllerAnimated:YES];
     // Remove observers
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-/******************** ******************** ******************** ******************** ********************/
-
 /**
- * getUniqueId
  *
- * This method ensures a unique ID is assigned to each element.
+ * @return: Unique Id in string formate
  */
-- (NSString *)getUniqueId
-{
+- (NSString *)getUniqueId {
     static int randomNumber = 0;
     
     // Create Unique ID even within a second
@@ -89,70 +65,13 @@
     return uniqId;
 }
 
--(NSString *)getUserPath
-{
-    //Getting Home Directory
-	NSString *homeDirectoryPath = NSHomeDirectory();
-    return [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Untechable",userId]];
-}
-
 /*
- * Get path of recording file
- */
--(NSString *)getRecFilePath
-{
-    return [NSString stringWithFormat:@"%@/%@",untechablePath, [self getRecFileName]];
-}
--(NSString *)getRecFileName
-{
-    return [NSString stringWithFormat:@"%@_%@%@",userId,uniqueId, REC_FORMATE];
-}
-
-/*
- * Here we Getting Path for new Untechable
- */
--(NSString *)getNewUntechablePath
-{
-	NSString *userPath = [self getUserPath];
-    NSString *retUntechablePath = [userPath stringByAppendingString:[NSString stringWithFormat:@"/%@_%@", userId, uniqueId]];
-    
-    return retUntechablePath;
-}
-
-/*
-    Check untechablePath ( folder ) exist in device, if not then create and return the directory url
- */
--(BOOL)initUntechableDirectory
-{
-    BOOL hasInit = NO;
-    BOOL isDir;
-    NSFileManager *fm = [NSFileManager defaultManager];
-
-    if(![fm fileExistsAtPath:untechablePath isDirectory:&isDir])
-    {
-        if([fm createDirectoryAtPath:untechablePath withIntermediateDirectories:YES attributes:nil error:nil]){
-            NSLog(@"New Directory Created");
-            hasInit = YES;
-        }
-        else{
-            NSLog(@"Directory Creation Failed");
-        }
-    }
-    else {
-        NSLog(@"Directory Already Exist");
-       [self setOrSaveVars:RESET dic2:dic];
-        hasInit = YES;
-    }
-    
-    return hasInit;
-}
-
-/*
-    if setOrSAve: SAVE
-    save instance variables into dic, then save that dic into .piecs file
+    if setOrSAve: SAVE ( in this case we have no need of dic2, it can be nil )
+    save instance variables into dic
  
-    else if setOrSAve: SAVE
-    get dic( must have untechablePath ) , then update instance variables a/c .pieces file
+    else if setOrSAve: RESET dic2: must required NSMutableDictionary
+    in this case we update all instance variable with dic2
+ 
  */
 -(void)setOrSaveVars:(NSString *)setOrSAve dic2:(NSMutableDictionary *)dic2{
 
@@ -162,8 +81,6 @@
         dic[@"eventId"]         = eventId;
         dic[@"paid"]            = paid ? @"YES" : @"NO";
         dic[@"userId"]          = userId;
-        dic[@"uniqueId"]        = uniqueId;
-        dic[@"untechablePath"]  = untechablePath;
         dic[@"savedOnServer"]   = savedOnServer ? @"YES" : @"NO";
         dic[@"hasFinished"]     = hasFinished ? @"YES" : @"NO";        
         
@@ -184,7 +101,7 @@
         
         dic[@"customizedContacts"] = [commonFunctions convertCCMArrayIntoJsonString:customizedContactsForCurrentSession];
         customizedContacts = ( dic[@"customizedContacts"] ) ? dic[@"customizedContacts"] : @"";
-        [self setCustomizedContactsForSession];
+        [self reSetCustomizedContactsInSession];
         
         //Screen3 vars
         dic[@"socialStatus"] = socialStatus;
@@ -217,8 +134,6 @@
         eventId        = ( dic[@"eventId"] ) ? dic[@"eventId"] : @"";
         paid           = ([dic[@"paid"] isEqualToString:@"YES"]) ? YES : NO;
         userId         = ( dic[@"userId"] ) ? dic[@"userId"] : @"";
-        uniqueId       = ( dic[@"uniqueId"] ) ? dic[@"uniqueId"] : [self getUniqueId];
-        untechablePath = ( dic[@"untechablePath"] ) ? dic[@"untechablePath"] : [self getNewUntechablePath];
         savedOnServer  = ([dic[@"savedOnServer"] isEqualToString:@"YES"]) ? YES : NO;
         hasFinished     = ([dic[@"hasFinished"] isEqualToString:@"YES"]) ? YES : NO;
         
@@ -272,84 +187,17 @@
 
 }
 
--(void) setCustomizedContactsForSession {
+/**
+ * Reset contacts into session contact variable
+ */
+-(void) reSetCustomizedContactsInSession {
     customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:customizedContacts];
 }
 
 /**
- Get the current date of device
- **/
--(NSDate *)getCurrentDate{
-    NSDate *date = [NSDate date];
-    return date;
-}
-
-/*
- Set default values for new event
+ * @return: is current untechable started
  */
--(void)initWithDefValues {
-    //Settings
-    eventId  = @"";
-    paid     = NO;
-    uniqueId = [self getUniqueId];
-    untechablePath = [self getNewUntechablePath];
-    savedOnServer = NO;
-    hasFinished   = NO;
-    
-    //Setup Guide First Screen
-    userName = @"";
-    userPhoneNumber = @"";
-    
-    //Screen1
-    timezoneOffset  = [commonFunctions getTimeZoneOffset];
-    spendingTimeTxt = @"";
-    startDate = [commonFunctions nsDateToTimeStampStr: [NSDate date] ]; //start now
-    endDate   = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*60*24)] ]; //current time +1 Day
-    hasEndDate = YES;
-    
-    //Screen2
-    twillioNumber  = @"";
-    location  = @"";
-    customizedContactsForCurrentSession = [[NSMutableArray alloc] init];
-    customizedContacts = @"";
-
-    //Screen3
-    socialStatus = @"";
-    fbAuth       = @"";
-    fbAuthExpiryTs = [commonFunctions nsDateToTimeStampStr:[commonFunctions getDate:@"PAST_1_MONTH"] ];
-    twitterAuth  = @"";
-    twOAuthTokenSecret = @"";
-    linkedinAuth = @"";
-    
-    //Screen4
-    email           = @"";
-    password        = @"";
-    respondingEmail = @"";
-    iSsl = @"";
-    oSsl = @"";
-    acType = imsHostName = imsPort = omsHostName = omsPort= @"";
-}
-
-/*
- *Here we sort Array in Desending order for Exact Render of Flyer
- * as last saved.
- */
-NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
-    
-    // Convert both strings to integers
-    long long intLeft = [stringLeft longLongValue];
-    long long intRight = [stringRight longLongValue];
-    
-    if (intLeft < intRight)
-        return NSOrderedDescending;
-    else if (intLeft > intRight)
-        return NSOrderedAscending;
-    else
-        return NSOrderedSame;
-}
-
-- (BOOL)isUntechableStarted
-{
+- (BOOL)isUntechableStarted {
     BOOL started = NO;
     
     NSDate* date1 = [commonFunctions timestampStrToNsDate:startDate];
@@ -360,14 +208,11 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     return started;
 }
 
-- (BOOL)isUntechableExpired
-{
+/**
+ * @return: is current untechable expired
+ */
+- (BOOL)isUntechableExpired {
     BOOL expired = NO;
-    
-    
-    if( hasEndDate == NO ){
-        //expired = YES;
-    }
     
     if( expired == NO ){
         NSDate* date1 = [commonFunctions timestampStrToNsDate:endDate];
@@ -375,27 +220,30 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
             expired = YES;
         }
     }
-    
     return expired;
 }
 
-#pragma mark -  Twitter functions
-
 #pragma mark - Save in realm
+/**
+ * Save running instance into realm database
+ */
 -(void)saveOrUpdateInDb{
-    //Save setting untechable in data base
     [[RLMRealm defaultRealm] transactionWithBlock:^{
         [self setOrSaveVars:SAVE dic2:nil];
         if([rUId isEqualToString:@"1"])
         [RSetUntechable createOrUpdateInDefaultRealmWithValue:self.dic];
         else
         [RUntechable createOrUpdateInDefaultRealmWithValue:self.dic];
-        
-        NSLog(@"SAved in db");
     }];
 }
 
 #pragma mark - Send to Server
+/**
+ * Send untechable to server
+ * 1- Save into database
+ * 2- Send to server
+ * @Callback: 3- callback function will be invoked when we got response from api
+ */
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack{
 
     [self saveOrUpdateInDb];
@@ -405,8 +253,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         callBack(NO, @"Thankyou");
         return;
     }
-
-    
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:API_SAVE]];
@@ -448,19 +294,12 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [request setHTTPBody:body];
     
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    // NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
-    
-    //[self setNextHighlighted:NO];
-    
     BOOL errorOnFinish = NO;
     NSString *message = @"";
     
     if( returnData != nil ){
         
         NSDictionary *dict=[NSJSONSerialization JSONObjectWithData:returnData options:NSJSONReadingMutableLeaves error:nil];
-        NSLog(@"In response of save api: %@",dict);
-        
-        
         
         if( [[dict valueForKey:@"status"] isEqualToString:@"OK"] ) {
             
@@ -488,6 +327,10 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     callBack(errorOnFinish, message);
 }
 
+/**
+ * @return: When we have all neccessory data required for sending email then we can show skip button,
+            on email setting related screens
+ */
 -(BOOL)canSkipEmailSetting{
     BOOL showSkip = NO;
     BOOL hasEmailAndPassword = !( [email isEqualToString:@""] || [password isEqualToString:@""]);

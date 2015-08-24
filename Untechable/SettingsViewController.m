@@ -2,7 +2,7 @@
 //  SettingsViewController.m
 //  Untechable
 //
-//  Created by Abdul Rauf on 28/01/2015.
+//  Created by RIKSOF Developer on 28/01/2015.
 //  Copyright (c) 2015 Green MTN Labs Inc. All rights reserved.
 //
 
@@ -122,7 +122,14 @@
 }
 
 -(void) goBack {
+    
+    untechable.fbAuth = untechable.socialNetworksStatusModal.mFbAuth;
+    untechable.fbAuthExpiryTs = untechable.socialNetworksStatusModal.mFbAuthExpiryTs;
+    untechable.twitterAuth = untechable.socialNetworksStatusModal.mTwitterAuth;
+    untechable.twOAuthTokenSecret = untechable.socialNetworksStatusModal.mTwOAuthTokenSecret;
+    untechable.linkedinAuth = untechable.socialNetworksStatusModal.mLinkedinAuth;
     [untechable saveOrUpdateInDb];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 

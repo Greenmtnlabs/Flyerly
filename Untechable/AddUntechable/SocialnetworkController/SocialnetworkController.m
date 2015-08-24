@@ -2,7 +2,7 @@
 //  SocialnetworkController.m
 //  Untechable
 //
-//  Created by ABDUL RAUF on 29/09/2014.
+//  Created by RIKSOF Developer on 29/09/2014.
 //  Copyright (c) 2014 RIKSOF (Pvt) Ltd. All rights reserved.
 //
 
@@ -135,24 +135,18 @@
     NSString *startTimeStamp = [ untechable startDate];
     NSString *endTimeStamp = [ untechable endDate];
     NSString *getDaysOrHours = [ self calculateHoursDays:startTimeStamp  endTime: endTimeStamp];
-    
-    
+   
     NSString *socialStatus;
     
     if( [untechable.rUId isEqualToString:@"1"] ) {
-        
         socialStatus = untechable.spendingTimeTxt;
-        
     } else {
-        
         socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", getDaysOrHours,untechable.spendingTimeTxt];
     }
     
     [inputSetSocialStatus setText:socialStatus];
     int len = (int)inputSetSocialStatus.text.length;
     char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
-    
-
     
     [self.btnFacebook setTitleColor:( [untechable.fbAuth isEqualToString:@""] ? DEF_GRAY : DEF_GREEN ) forState:UIControlStateNormal];
     self.btnFacebook.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
@@ -166,28 +160,67 @@
 }
 #pragma mark - timeStamp to days or hours coverter
 -(NSString *) calculateHoursDays:(NSString *) startTime endTime:(NSString *)endTime {
+    
+    int totalMinutes;
     int totalHoursDays;
+    int remainingMinutes;
     double start = [startTime doubleValue];
     double end = [endTime doubleValue];
     
     NSString *daysOrHoursToBeShown;
+    int OneMinute = 60;
     int OneHour =  60 * 60;
     int OneDay  =  60 * 60 * 24;
     double diff = fabs(end  - start);
-    totalHoursDays = round(diff/OneHour);
-    if(totalHoursDays>48){
-        
-        totalHoursDays = round(diff/OneDay + 0.1);
-        daysOrHoursToBeShown = [NSString stringWithFormat:@"%i days", totalHoursDays];
-        
-    }else if(totalHoursDays<2){
-        
-        daysOrHoursToBeShown = [NSString stringWithFormat:@"%i hour", totalHoursDays];
     
-    }else{
-        daysOrHoursToBeShown = [NSString stringWithFormat:@"%i hours", totalHoursDays];
+    totalHoursDays = round(diff/OneHour);
+    totalMinutes = round(((diff/OneHour) * OneMinute));
+    
+    // calculating remaining minutes
+    
+    if(totalMinutes<=59){
+        remainingMinutes = totalMinutes;
+    } else if(totalMinutes<=120) {
+        remainingMinutes = totalMinutes%60;
+    } else {
+        remainingMinutes = totalMinutes%(totalHoursDays*60);
     }
     
+    if(totalHoursDays>=24) {
+
+        totalHoursDays = round(diff/OneDay + 0.1);
+        
+        if( totalHoursDays == 1 ) {
+            daysOrHoursToBeShown = [NSString stringWithFormat:@"%i day", totalHoursDays];
+        } else {
+            daysOrHoursToBeShown = [NSString stringWithFormat:@"%i days", totalHoursDays];
+        }
+    } else {
+       
+        NSString *minutes;
+        if(remainingMinutes>1) {
+            minutes = @"minutes";
+        } else if(remainingMinutes==1) {
+            minutes = @"minute";
+        }
+        
+        if(totalHoursDays>1){
+            if(remainingMinutes>0) {
+                daysOrHoursToBeShown = [NSString stringWithFormat:@"%i hours and %i %@" ,totalHoursDays, remainingMinutes, minutes];
+            } else {
+                daysOrHoursToBeShown = [NSString stringWithFormat:@"%i hours" ,totalHoursDays];
+            }
+        } else if(totalHoursDays==1) {
+            if(remainingMinutes>0) {
+                daysOrHoursToBeShown = [NSString stringWithFormat:@"%i hour and %i %@" ,totalHoursDays, remainingMinutes, minutes];
+            } else {
+                daysOrHoursToBeShown = [NSString stringWithFormat:@"%i hour" ,totalHoursDays];
+            }
+        } else if(totalHoursDays<1) {
+            daysOrHoursToBeShown = [NSString stringWithFormat:@"%i minutes", remainingMinutes];
+        }
+    }
+ 
     NSLog(@"Number of days or hours: %@", daysOrHoursToBeShown);
     return daysOrHoursToBeShown;
 }

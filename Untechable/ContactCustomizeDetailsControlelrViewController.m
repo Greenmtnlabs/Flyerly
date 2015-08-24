@@ -151,7 +151,6 @@
         
         if ( cell == nil ) {
             
-            
             if( IS_IPHONE_5 ){
                 NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"FirstTableViewCell" owner:self options:nil];
                 cell = (FirstTableViewCell *)[nib objectAtIndex:0];
@@ -167,8 +166,6 @@
             }
         }
         
-        //cell.contact_Name.frame = CGRectMake(20,20,200,800);
-
         NSString *valueToBeShown =[ NSString stringWithFormat:@"Message to %@\n",contactModal.contactName];
         [cell setCellValues:valueToBeShown ContactImage:contactModal.img];
         
@@ -208,10 +205,6 @@
             
             cell.customText.text = contactModal.customTextForContact;
         }
-        
-//        int len = contactModal_.customTextForContact.length;
-//        _char_limit.text=[NSString stringWithFormat:@"%i",124-len];
-
         
         [cell setCellValuesWithDeleg:contactModal.customTextForContact deleg:self];
         

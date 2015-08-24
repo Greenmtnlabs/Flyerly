@@ -2,7 +2,7 @@
 //  EmailSettingController.m
 //  Untechable
 //
-//  Created by ABDUL RAUF on 30/09/2014.
+//  Created by RIKSOF Developer on 30/09/2014.
 //  Copyright (c) 2014 Green MTN Labs Inc. All rights reserved.
 //
 
@@ -356,7 +356,7 @@
         [rightBarButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         rightBarButton.showsTouchWhenHighlighted = YES;
 
-        BOOL showSkip = [untechable canSkipEmailSetting];
+        BOOL showSkip = YES;//[untechable canSkipEmailSetting]; //show skip button for all cases it requirment
         
         if ( showSkip ){
             

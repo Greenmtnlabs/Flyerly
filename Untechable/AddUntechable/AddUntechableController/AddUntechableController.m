@@ -2,7 +2,7 @@
 //  AddUntechableController.m
 //  Untechable
 //
-//  Created by Abdul Rauf on 23/sep/2014
+//  Created by RIKSOF Developer on 23/sep/2014
 //  Copyright (c) 2014 RIKSOF (Pvt) Ltd. All rights reserved.
 //
 
@@ -16,8 +16,7 @@
 
 @interface AddUntechableController (){
     
-    NSArray *_pickerData;
-    
+    NSMutableArray *_pickerData;
 }
 
 @property (strong, nonatomic) IBOutlet UIButton *btnLblWwud;
@@ -68,10 +67,14 @@
     
     [self showHideDateTimePicker:NO];
     
-    [self showHideTextPicker:NO];
-    
     // Initialize Data
     _pickerData = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];;
+    
+    // remove last element from array which is "Custom"
+    [_pickerData removeObjectAtIndex: _pickerData.count-1];
+
+    
+    [self showHideTextPicker:NO];
     
     // Connect data
     _spendingTimeTextPicker.dataSource = self;
@@ -84,7 +87,6 @@
     
     _inputSpendingTimeText.delegate = self;
    
-    
     NSArray *fields = @[ _inputSpendingTimeText ];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
     [self.keyboardControls setDelegate:self];
@@ -97,7 +99,7 @@
 {
     if( [callFor isEqualToString:@"_btnStartTime"] ) {
         pickerOpenFor = @"_btnStartTime";
-        [self.picker setDate:[untechable getCurrentDate] animated:YES];
+        [self.picker setDate:[NSDate date] animated:YES];
         [self dateChanged];
     }
     else if( [callFor isEqualToString:@"_btnEndTime"] ) {
@@ -106,7 +108,6 @@
         [self dateChanged];
     }
 }
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -377,6 +378,18 @@
 }
 
 -(void)showHideTextPicker:(BOOL)showHide{
+    
+    // set the selected default message or custom message in pickerview
+    
+    NSInteger positionToShow = 0;
+    for (int i = 0; i<_pickerData.count; i++) {
+        if([_pickerData[i] isEqualToString:untechable.spendingTimeTxt] ){
+            positionToShow = i;
+            break;
+        }
+    }
+    [self.spendingTimeTextPicker selectRow:positionToShow inComponent:0 animated:NO];
+
     if ( IS_IPHONE_4 ){
         [_pickerCloseBtn setFrame:CGRectMake(-2, 300, 580, 30)];
         [_spendingTimeTextPicker setFrame:CGRectMake(0, 300, 0, 140)];
@@ -454,24 +467,12 @@
     [untechable.dateFormatter setDateFormat:DATE_FORMATE_1];
     
 }
-
--(void)resetUntechable:(NSString *)callResetFor{
-
-    if( [callResetFor isEqualToString:@"RESET_DEFAULTS"] ){
-        [untechable initWithDefValues];
-    }
-    else if( [callResetFor isEqualToString:@"RESET1"] ){
-        untechable.savedOnServer = NO;
-        untechable.paid = NO;
-    }
-}
-
 #pragma mark -  UI functions
 -(void)updateUI{
     
     [_btnLblWwud setTitleColor:DEF_GRAY forState:UIControlStateNormal];
     _btnLblWwud.titleLabel.font = [UIFont fontWithName:APP_FONT size:25];
-
+ 
     _inputSpendingTimeText.text = untechable.spendingTimeTxt;
     if ( [untechable.spendingTimeTxt isEqualToString:@""] ){
         _inputSpendingTimeText.text = @"e.g Spending time with family.";
@@ -611,24 +612,10 @@
     [_pickerCloseBtn.layer addSublayer:upperBorder];
 }
 
-
-
 - (IBAction)openPicker:(id)sender {
     
     [self.view addSubview:_spendingTimeTextPicker];
 }
 
-/**
- Setting Picker Value Got From Setting Screen
- **/
--(void)setPickerValue {
-    // Initialize Data
-    NSInteger positionToRemember = [[NSUserDefaults standardUserDefaults]
-                            integerForKey:@"positionToRemember"];
 
-    [_spendingTimeTextPicker selectRow:positionToRemember inComponent:0 animated:YES];
-    [_spendingTimeTextPicker reloadAllComponents];
-    _inputSpendingTimeText.text = [_pickerData objectAtIndex:positionToRemember];
-    
-}
 @end

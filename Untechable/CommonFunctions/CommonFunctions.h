@@ -2,7 +2,7 @@
 //  UntechableClass.h
 //  Untechable
 //
-//  Created by Abdul Rauf on 23/sep/2014
+//  Created by RIKSOF Developer on 23/sep/2014
 //  Copyright (c) 2014 RIKSOF (Pvt) Ltd. All rights reserved.
 //
 //
@@ -14,9 +14,6 @@
     
 }
 
--(void)sortDic:inputDic;
-
--(void)deleteKeyFromDic:dic delKeyAtIndex:(int)rowNumber;
 -(void)showAlert:(NSString *)title message:(NSString *)message;
 -(NSString *)convertDicIntoJsonString:(NSMutableDictionary *)value;
 -(NSString *)convertCCMArrayIntoJsonString:(NSMutableArray *)value;
@@ -29,11 +26,8 @@
 
 - (NSString *)timestampStringToAppDateTime:(NSString *)timeStam;
 - (NSString *)timestampStringToAppDate:(NSString *)timeStam;
--( NSMutableArray * )getAllUntechables :(NSString *)userId;
--(NSMutableDictionary *)getUntechable:(int)count UserId:(NSString *)userId;
 - (BOOL)date1IsSmallerThenDate2:(NSDate *)date1 date2:(NSDate *)date2;
-- ( NSMutableDictionary * )getAnyInCompleteUntechable :(NSString *)userId;
--(NSString *)getUserPath :(NSString *)userId;
+
 -(UIImageView *) navigationGetTitleView;
 -(NSDate *)getDate:(NSString *)callFor;
 //fb988650031150166
@@ -44,9 +38,6 @@
 -(int)getLength:(NSString*)mobileNumber;
 
 -(NSString *)formateStringIntoPhoneNumber:(NSString *)unformatted;
-
-#pragma mark Navigation Top Bar View
--(void)setNavigationTopBarViewForScreens:(UIImageView *) topNavigationView;
 
 -(BOOL)fbBtnStatus:(NSString *)fbAuthExpiryTs;
 @end

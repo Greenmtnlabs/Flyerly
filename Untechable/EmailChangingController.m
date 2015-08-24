@@ -2,7 +2,7 @@
 //  EmailChangingController.m
 //  Untechable
 //
-//  Created by Abdul Rauf on 30/01/2015.
+//  Created by RIKSOF Developer on 30/01/2015.
 //  Copyright (c) 2015 Green MTN Labs Inc. All rights reserved.
 //
 
