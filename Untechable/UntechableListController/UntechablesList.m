@@ -769,7 +769,7 @@
     [self.navigationController pushViewController:thankyouScreen animated:YES];
 }
 -( void )setTimeAcToCurVars {
-    untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60)] ]; //current time + time duration
+    untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(0)] ]; //current time + time duration
     untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)] ]; //start time + selected time duration
     
 }
