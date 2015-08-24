@@ -115,16 +115,6 @@
     return [NSDate dateWithTimeIntervalSince1970:[timestamp integerValue]];
 }
 
-- (NSString *)timestampStringToAppDate:(NSString *)timeStamp {
-    
-    NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
-    [dateFormatter1 setDateFormat:DATE_FORMATE_DATE];
-    
-    NSDate *newDate  =   [self convertTimestampToNSDate:timeStamp];
-    NSString *newDateStr    =   [dateFormatter1 stringFromDate:newDate];
-    return newDateStr;
-}
-
 - (NSString *)convertTimestampToAppDateTime:(NSString *)timestamp {
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -235,18 +225,18 @@
     return length;
 }
 
--(NSString *)formateStringIntoPhoneNumber:(NSString *)unformatted {
-    if([unformatted isEqualToString:@""] == NO){
-        NSArray *stringComponents = [NSArray arrayWithObjects:[unformatted substringWithRange:NSMakeRange(0, 2)],
-                                     [unformatted substringWithRange:NSMakeRange(2, 3)],
-                                     [unformatted substringWithRange:NSMakeRange(5, 3)],
-                                     [unformatted substringWithRange:NSMakeRange(8, [unformatted length]-8)], nil];
+-(NSString *)standarizePhoneNumber:(NSString *)phoneNumber {
+    if([phoneNumber isEqualToString:@""] == NO){
+        NSArray *stringComponents = [NSArray arrayWithObjects:[phoneNumber substringWithRange:NSMakeRange(0, 2)],
+                                     [phoneNumber substringWithRange:NSMakeRange(2, 3)],
+                                     [phoneNumber substringWithRange:NSMakeRange(5, 3)],
+                                     [phoneNumber substringWithRange:NSMakeRange(8, [phoneNumber length]-8)], nil];
         
-        NSString *formattedString = [NSString stringWithFormat:@"%@ (%@) %@-%@", [stringComponents objectAtIndex:0], [stringComponents objectAtIndex:1], [stringComponents objectAtIndex:2],[stringComponents objectAtIndex:3]];
+        NSString *standarizedPhoneNumber = [NSString stringWithFormat:@"%@ (%@) %@-%@", [stringComponents objectAtIndex:0], [stringComponents objectAtIndex:1], [stringComponents objectAtIndex:2],[stringComponents objectAtIndex:3]];
         
-        return formattedString;
+        return standarizedPhoneNumber;
     } else{
-       return unformatted;
+       return phoneNumber;
     }
 }
 

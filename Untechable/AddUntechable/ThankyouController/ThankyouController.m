@@ -114,7 +114,7 @@
     _lblTwillioNumber.font = [UIFont fontWithName:APP_FONT size:20];
     _lblTwillioNumber.text = twillioNumber;
     NSLog(@"twillioNumber1: %@", twillioNumber);
-    twillioNumber   =   [untechable.commonFunctions formateStringIntoPhoneNumber:twillioNumber];
+    twillioNumber   =   [untechable.commonFunctions standarizePhoneNumber:twillioNumber];
     NSLog(@"twillioNumber2: %@", twillioNumber);
     _lblTwillioNumber.text = twillioNumber;
     

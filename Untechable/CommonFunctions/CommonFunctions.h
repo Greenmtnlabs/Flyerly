@@ -22,10 +22,10 @@
 -(NSString *)getTimeZoneOffset;
 -(NSString *)convertNSDateToTimestamp:(NSDate *) nsDate;
 -(NSDate *)convertTimestampToNSDate:(NSString *)timestamp;
--(NSString *)convertTimestampToAppDate:(NSString *)timestamp;
 
-- (NSString *)convertTimestampToAppDateTime:(NSString *)timestamp;
-- (NSString *)timestampStringToAppDate:(NSString *)timeStam;
+-(NSString *)convertTimestampToAppDate:(NSString *)timestamp;
+- (NSString *)convertTimestampToAppDateTime:(NSString *)timeStam;
+
 - (BOOL)isEndDateGreaterThanStartDate:(NSDate *)startDate endDate:(NSDate *)endDate;
 
 -(UIImageView *) navigationGetTitleView;
@@ -37,7 +37,7 @@
 -(NSString*)formatNumber:(NSString*)mobileNumber;
 -(int)getLength:(NSString*)mobileNumber;
 
--(NSString *)formateStringIntoPhoneNumber:(NSString *)unformatted;
+-(NSString *)standarizePhoneNumber:(NSString *)phoneNumber;
 
 -(BOOL)fbBtnStatus:(NSString *)fbAuthExpiryTs;
 @end
