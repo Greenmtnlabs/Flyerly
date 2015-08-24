@@ -222,9 +222,9 @@
 
 #pragma mark - Save in realm
 /**
- * Save running instance into realm database
+ * Add or Update running instance variable into realm database
  */
--(void)saveOrUpdateInDb{
+-(void)addOrUpdateInDatabase{
     [[RLMRealm defaultRealm] transactionWithBlock:^{
         [self addOrUpdateInModel:SAVE dictionary:nil];
         if([rUId isEqualToString:@"1"])
@@ -243,7 +243,7 @@
  */
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack{
 
-    [self saveOrUpdateInDb];
+    [self addOrUpdateInDatabase];
     
     //During testing dont send untechable to server, just create in device and go t thankyou screen
     if( [UNT_ENVIRONMENT isEqualToString:TESTING] ){
@@ -304,13 +304,13 @@
             eventId = [dict valueForKey:@"eventId"];
             savedOnServer = YES;
             hasFinished = YES;
-            [self saveOrUpdateInDb];
+            [self addOrUpdateInDatabase];
             
         } else{
             message = [dict valueForKey:@"message"];
             if( !([[dict valueForKey:@"eventId"] isEqualToString:@"0"]) ) {
                 eventId = [dict valueForKey:@"eventId"];
-                [self saveOrUpdateInDb];
+                [self addOrUpdateInDatabase];
             }
             
             errorOnFinish = YES;

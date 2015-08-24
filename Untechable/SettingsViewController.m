@@ -128,7 +128,7 @@
     untechable.twitterAuth = untechable.socialNetworksStatusModal.mTwitterAuth;
     untechable.twOAuthTokenSecret = untechable.socialNetworksStatusModal.mTwOAuthTokenSecret;
     untechable.linkedinAuth = untechable.socialNetworksStatusModal.mLinkedinAuth;
-    [untechable saveOrUpdateInDb];
+    [untechable addOrUpdateInDatabase];
     
     [self.navigationController popViewControllerAnimated:YES];
 }
