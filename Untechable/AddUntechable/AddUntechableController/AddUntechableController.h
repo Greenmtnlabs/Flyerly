@@ -20,7 +20,7 @@
     
     UIButton *openPickerButton;
     NSString *pickerOpenFor;
-    NSDate *now1; //current time +60mint
+    NSDate *now1; //current time + 60 min
 }
 
 -(void)setDefaultModel;

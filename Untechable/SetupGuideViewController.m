@@ -65,7 +65,7 @@
     if ( userphoneNumber == NULL || [userphoneNumber isEqualToString:@""] ) {
         _userPhoneNumber.text = @"";
         _phoneNumberHintText.hidden = NO;
-    } else  {
+    } else {
         _phoneNumberHintText.hidden = YES;
         _userPhoneNumber.text = userphoneNumber;
     }

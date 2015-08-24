@@ -73,7 +73,6 @@
     // remove last element from array which is "Custom"
     [_pickerData removeObjectAtIndex: _pickerData.count-1];
 
-    
     [self showHideTextPicker:NO];
     
     // Connect data
@@ -81,7 +80,7 @@
     _spendingTimeTextPicker.delegate = self;
     
     self.picker.datePickerMode = UIDatePickerModeDateAndTime;
-    //WHEN any of the date is similer to current date time, the show NOW in date's area
+    // If the date is similer to current date time, then show NOW in date's area
     self.picker.minimumDate = now1;
     [self.picker setDate:now1 animated:YES];
     
@@ -262,7 +261,6 @@
         
         BOOL goToNext = untechable.hasEndDate ? NO : YES;
         
-        //When we have end date, must check end date is greater then start date
         if( untechable.hasEndDate == YES )
         {
             NSDate *startDate = [untechable.commonFunctions convertTimestampToNSDate:untechable.startDate];
@@ -439,7 +437,7 @@
     _pickerCloseBtn.alpha = alpha;
     self.pickerCloseBtn.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
   
-    //changing the "CLOSE"button text color to black
+    // changing the "CLOSE" button text color to black
     [_pickerCloseBtn setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
 }
 
@@ -462,7 +460,7 @@
 
     now1 = [NSDate date]; //current date
     
-    //Set Date formate
+    //Set Date format
     untechable.dateFormatter = [[NSDateFormatter alloc] init];
     [untechable.dateFormatter setDateFormat:DATE_FORMATE_1];
     
@@ -513,7 +511,7 @@
     [self showHideDateTimePicker:NO];
     
     if( !([_cbNoEndDate isSelected]) ){
-        untechable.endDate  = [untechable.commonFunctions convertNSDateToTimestamp: [[NSDate date] dateByAddingTimeInterval:(60*60*24)] ]; //current time +1 Day
+        untechable.endDate  = [untechable.commonFunctions convertNSDateToTimestamp: [[NSDate date] dateByAddingTimeInterval:(60*60*24)] ]; //current time + 1 Day
     }
     [self pickerSetAcTo:@"_btnEndTime"];
 }
