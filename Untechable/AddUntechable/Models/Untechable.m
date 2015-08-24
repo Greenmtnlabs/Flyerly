@@ -14,7 +14,7 @@
 @implementation Untechable
 
 //Settings
-@synthesize socialNetworksStatusModal, commonFunctions, dic, piecesFile, paid, userId, uniqueId, rUId, eventId, untechablePath, dateFormatter, savedOnServer, hasFinished;
+@synthesize socialNetworksStatusModal, commonFunctions, dic, paid, userId, rUId, eventId, untechablePath, dateFormatter, savedOnServer, hasFinished;
 
 //SetupGuide Screen 1 Data
 @synthesize userName, userPhoneNumber;
@@ -73,12 +73,10 @@
 /******************** ******************** ******************** ******************** ********************/
 
 /**
- * getUniqueId
  *
  * This method ensures a unique ID is assigned to each element.
  */
-- (NSString *)getUniqueId
-{
+- (NSString *)getUniqueId {
     static int randomNumber = 0;
     
     // Create Unique ID even within a second
@@ -134,7 +132,6 @@
         dic[@"eventId"]         = eventId;
         dic[@"paid"]            = paid ? @"YES" : @"NO";
         dic[@"userId"]          = userId;
-        dic[@"uniqueId"]        = uniqueId;
         dic[@"untechablePath"]  = untechablePath;
         dic[@"savedOnServer"]   = savedOnServer ? @"YES" : @"NO";
         dic[@"hasFinished"]     = hasFinished ? @"YES" : @"NO";        
@@ -189,7 +186,6 @@
         eventId        = ( dic[@"eventId"] ) ? dic[@"eventId"] : @"";
         paid           = ([dic[@"paid"] isEqualToString:@"YES"]) ? YES : NO;
         userId         = ( dic[@"userId"] ) ? dic[@"userId"] : @"";
-        uniqueId       = ( dic[@"uniqueId"] ) ? dic[@"uniqueId"] : [self getUniqueId];
         savedOnServer  = ([dic[@"savedOnServer"] isEqualToString:@"YES"]) ? YES : NO;
         hasFinished     = ([dic[@"hasFinished"] isEqualToString:@"YES"]) ? YES : NO;
         
@@ -262,7 +258,6 @@
     //Settings
     eventId  = @"";
     paid     = NO;
-    uniqueId = [self getUniqueId];
     savedOnServer = NO;
     hasFinished   = NO;
     
