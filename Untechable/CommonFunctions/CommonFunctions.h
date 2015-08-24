@@ -39,5 +39,5 @@
 
 -(NSString *)standarizePhoneNumber:(NSString *)phoneNumber;
 
--(BOOL)fbBtnStatus:(NSString *)fbAuthExpiryTs;
+-(BOOL)isFacebookLoggedIn:(NSString *)fbAuthExpiryTs;
 @end

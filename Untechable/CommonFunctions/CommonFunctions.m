@@ -242,11 +242,11 @@
 
 #pragma mark -  Fb functions
 /** 
- * @parm: fbAuthExpiryTs is facebook token expiry date( string of timestamp )
- * @return: facebook token is expired or not
- * Active fb button when fb toke expiry date is greater then current date.
+ * @parm: fbAuthExpiryTs is facebook token expiry date( timestamp string )
+ * @return: BOOL (whether facebook token is expired or not)
+ * Shows fb button active when fb token expiry date is greater than current date.
  */
--(BOOL)fbBtnStatus:(NSString *)fbAuthExpiryTs{
+-(BOOL)isFacebookLoggedIn:(NSString *)fbAuthExpiryTs{
     BOOL active = NO;
     if( [fbAuthExpiryTs isEqualToString:@""] == NO ){
         NSDate* startDate = [NSDate date];
