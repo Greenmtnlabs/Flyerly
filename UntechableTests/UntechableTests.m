@@ -2,7 +2,7 @@
 //  UntechableTests.m
 //  UntechableTests
 //
-//  Created by ABDUL RAUF on 24/09/2014.
+//  Created by RIKSOF Developer on 24/09/2014.
 //  Copyright (c) 2014 RIKSOF (Pvt) Ltd. All rights reserved.
 //
 

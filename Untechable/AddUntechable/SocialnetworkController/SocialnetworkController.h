@@ -2,7 +2,7 @@
 //  SocialnetworkController.h
 //  Untechable
 //
-//  Created by ABDUL RAUF abdul.rauf@riksof.com on 29/09/2014.
+//  Created by RIKSOF Developer on 29/09/2014.
 //  Copyright (c) 2014 RIKSOF (Pvt) Ltd. All rights reserved.
 //
 
