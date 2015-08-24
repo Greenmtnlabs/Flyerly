@@ -89,35 +89,7 @@
     return uniqId;
 }
 
--(NSString *)getUserPath
-{
-    //Getting Home Directory
-	NSString *homeDirectoryPath = NSHomeDirectory();
-    return [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Untechable",userId]];
-}
 
-/*
- * Get path of recording file
- */
--(NSString *)getRecFilePath
-{
-    return [NSString stringWithFormat:@"%@/%@",untechablePath, [self getRecFileName]];
-}
--(NSString *)getRecFileName
-{
-    return [NSString stringWithFormat:@"%@_%@%@",userId,uniqueId, REC_FORMATE];
-}
-
-/*
- * Here we Getting Path for new Untechable
- */
--(NSString *)getNewUntechablePath
-{
-	NSString *userPath = [self getUserPath];
-    NSString *retUntechablePath = [userPath stringByAppendingString:[NSString stringWithFormat:@"/%@_%@", userId, uniqueId]];
-    
-    return retUntechablePath;
-}
 
 /*
     Check untechablePath ( folder ) exist in device, if not then create and return the directory url
@@ -218,7 +190,6 @@
         paid           = ([dic[@"paid"] isEqualToString:@"YES"]) ? YES : NO;
         userId         = ( dic[@"userId"] ) ? dic[@"userId"] : @"";
         uniqueId       = ( dic[@"uniqueId"] ) ? dic[@"uniqueId"] : [self getUniqueId];
-        untechablePath = ( dic[@"untechablePath"] ) ? dic[@"untechablePath"] : [self getNewUntechablePath];
         savedOnServer  = ([dic[@"savedOnServer"] isEqualToString:@"YES"]) ? YES : NO;
         hasFinished     = ([dic[@"hasFinished"] isEqualToString:@"YES"]) ? YES : NO;
         
@@ -292,7 +263,6 @@
     eventId  = @"";
     paid     = NO;
     uniqueId = [self getUniqueId];
-    untechablePath = [self getNewUntechablePath];
     savedOnServer = NO;
     hasFinished   = NO;
     

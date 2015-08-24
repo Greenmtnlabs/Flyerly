@@ -64,9 +64,7 @@
 -(void)goBack:navigationControllerPointer;
 
 
--(NSString *)getNewUntechablePath;
--(NSString *)getRecFilePath;
--(NSString *)getRecFileName;
+
 -(NSString *)getUniqueId;
 -(BOOL)initUntechableDirectory;
 -(void)setOrSaveVars:(NSString *)setOrSAve dic2:(NSMutableDictionary *)dic2;
