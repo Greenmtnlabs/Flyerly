@@ -174,6 +174,9 @@
         //Update new msg in doctors research string
         [self setupDoctorsResearchLabel:newMsg];
         
+        // save new Custom message to model 
+        untechable.spendingTimeTxt = [customSpendingTextAry objectAtIndex:position];
+        
         // reloading the new picker view with custom messages
         [_setupSpendingTimeText reloadAllComponents];
         
