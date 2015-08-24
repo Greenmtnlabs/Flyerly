@@ -150,10 +150,11 @@
     return  [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
 }
 
-- (BOOL)date1IsSmallerThenDate2:(NSDate *)date1 date2:(NSDate *)date2 {
-    NSTimeInterval distanceBetweenDates = [date1 timeIntervalSinceDate:date2];
+- (BOOL)isEndDateGreaterThanStartDate:(NSDate *)startDate endDate:(NSDate *)endDate {
+    
+    NSTimeInterval interval = [startDate timeIntervalSinceDate:endDate];
     double secondsInMinute = 60;
-    NSInteger secondsBetweenDates = distanceBetweenDates / secondsInMinute;
+    NSInteger secondsBetweenDates = interval / secondsInMinute;
     
     if (secondsBetweenDates == 0)
         return YES;
@@ -258,9 +259,9 @@
 -(BOOL)fbBtnStatus:(NSString *)fbAuthExpiryTs{
     BOOL active = NO;
     if( [fbAuthExpiryTs isEqualToString:@""] == NO ){
-        NSDate* date1 = [NSDate date];
-        NSDate* date2 = [self timestampStrToNsDate:fbAuthExpiryTs];
-        active   = [self date1IsSmallerThenDate2:date1 date2:date2];
+        NSDate* startDate = [NSDate date];
+        NSDate* endDate = [self timestampStrToNsDate:fbAuthExpiryTs];
+        active   = [self isEndDateGreaterThanStartDate:startDate endDate:endDate];
     }
     return active;
 }

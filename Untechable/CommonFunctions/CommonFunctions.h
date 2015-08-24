@@ -26,7 +26,7 @@
 
 - (NSString *)timestampStringToAppDateTime:(NSString *)timeStam;
 - (NSString *)timestampStringToAppDate:(NSString *)timeStam;
-- (BOOL)date1IsSmallerThenDate2:(NSDate *)date1 date2:(NSDate *)date2;
+- (BOOL)isEndDateGreaterThanStartDate:(NSDate *)startDate endDate:(NSDate *)endDate;
 
 -(UIImageView *) navigationGetTitleView;
 -(NSDate *)getDate:(NSString *)callFor;

@@ -265,10 +265,10 @@
         //When we have end date, must check end date is greater then start date
         if( untechable.hasEndDate == YES )
         {
-            NSDate *d1 = [untechable.commonFunctions timestampStrToNsDate:untechable.startDate];
-            NSDate *d2 = [untechable.commonFunctions timestampStrToNsDate:untechable.endDate];
+            NSDate *startDate = [untechable.commonFunctions timestampStrToNsDate:untechable.startDate];
+            NSDate *endDate = [untechable.commonFunctions timestampStrToNsDate:untechable.endDate];
             
-            goToNext = [untechable.commonFunctions date1IsSmallerThenDate2:d1 date2:d2];
+            goToNext = [untechable.commonFunctions isEndDateGreaterThanStartDate:startDate endDate:endDate];
             
             if( goToNext == NO ) {
                 
@@ -352,10 +352,10 @@
         [_btnStartTime setTitle:dateStr forState:UIControlStateNormal];
         
         NSDate *endD = [untechable.commonFunctions timestampStrToNsDate:untechable.endDate];
-        NSDate *statD = [untechable.commonFunctions timestampStrToNsDate:untechable.startDate];
+        NSDate *startD = [untechable.commonFunctions timestampStrToNsDate:untechable.startDate];
     
-        if( [untechable.commonFunctions date1IsSmallerThenDate2:endD date2:statD] ){
-            endD = [statD dateByAddingTimeInterval:(60*60*24)];
+        if( [untechable.commonFunctions isEndDateGreaterThanStartDate:endD endDate: startD] ){
+            endD = [startD dateByAddingTimeInterval:(60*60*24)];
             untechable.endDate = [untechable.commonFunctions nsDateToTimeStampStr:endD]; //current time +1 day
             NSString *dateStrUpdated = [untechable.dateFormatter stringFromDate:endD];
             [_btnEndTime setTitle:dateStrUpdated forState:UIControlStateNormal];

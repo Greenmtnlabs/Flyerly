@@ -201,7 +201,7 @@
         [tempDict setObject:[NSNumber numberWithInt:i] forKey:@"index"];
         
         NSDate *startDate = [untechable.commonFunctions timestampStrToNsDate:[tempDict objectForKey:@"startDate"]];
-        if ( ![untechable.commonFunctions date1IsSmallerThenDate2:startDate date2:currentDate] ){
+        if ( ![untechable.commonFunctions isEndDateGreaterThanStartDate:startDate endDate:currentDate] ){
             sectionOneArray[s1++] = tempDict;
             [currentTimeStamps1 addObject:[tempDict valueForKey:@"startDate"]];
         }else{
