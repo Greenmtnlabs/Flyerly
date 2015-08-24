@@ -104,7 +104,7 @@
     }
     else if( [callFor isEqualToString:@"_btnEndTime"] ) {
         pickerOpenFor = @"_btnEndTime";
-        [self.picker setDate:[untechable.commonFunctions timestampStrToNsDate:untechable.endDate] animated:YES];
+        [self.picker setDate:[untechable.commonFunctions convertTimestampToNSDate:untechable.endDate] animated:YES];
         [self dateChanged];
     }
 }
@@ -265,8 +265,8 @@
         //When we have end date, must check end date is greater then start date
         if( untechable.hasEndDate == YES )
         {
-            NSDate *startDate = [untechable.commonFunctions timestampStrToNsDate:untechable.startDate];
-            NSDate *endDate = [untechable.commonFunctions timestampStrToNsDate:untechable.endDate];
+            NSDate *startDate = [untechable.commonFunctions convertTimestampToNSDate:untechable.startDate];
+            NSDate *endDate = [untechable.commonFunctions convertTimestampToNSDate:untechable.endDate];
             
             goToNext = [untechable.commonFunctions isEndDateGreaterThanStartDate:startDate endDate:endDate];
             
@@ -323,11 +323,11 @@
     UIButton *clickedBtn = sender;
     if( clickedBtn == _btnStartTime || clickedBtn == _btnLblStartTime ){
         pickerOpenFor = @"_btnStartTime";
-        _picker.date = [untechable.commonFunctions timestampStrToNsDate:untechable.startDate];
+        _picker.date = [untechable.commonFunctions convertTimestampToNSDate:untechable.startDate];
     }
     else if( clickedBtn == _btnEndTime || clickedBtn == _btnLblEndTime ){
         pickerOpenFor = @"_btnEndTime";
-        _picker.date = [untechable.commonFunctions timestampStrToNsDate:untechable.endDate];
+        _picker.date = [untechable.commonFunctions convertTimestampToNSDate:untechable.endDate];
     }
     
 }
@@ -351,8 +351,8 @@
         untechable.startDate = pickerTimeStampStr;
         [_btnStartTime setTitle:dateStr forState:UIControlStateNormal];
         
-        NSDate *endD = [untechable.commonFunctions timestampStrToNsDate:untechable.endDate];
-        NSDate *startD = [untechable.commonFunctions timestampStrToNsDate:untechable.startDate];
+        NSDate *endD = [untechable.commonFunctions convertTimestampToNSDate:untechable.endDate];
+        NSDate *startD = [untechable.commonFunctions convertTimestampToNSDate:untechable.startDate];
     
         if( [untechable.commonFunctions isEndDateGreaterThanStartDate:endD endDate: startD] ){
             endD = [startD dateByAddingTimeInterval:(60*60*24)];

@@ -200,7 +200,7 @@
         
         [tempDict setObject:[NSNumber numberWithInt:i] forKey:@"index"];
         
-        NSDate *startDate = [untechable.commonFunctions timestampStrToNsDate:[tempDict objectForKey:@"startDate"]];
+        NSDate *startDate = [untechable.commonFunctions convertTimestampToNSDate:[tempDict objectForKey:@"startDate"]];
         if ( ![untechable.commonFunctions isEndDateGreaterThanStartDate:startDate endDate:currentDate] ){
             sectionOneArray[s1++] = tempDict;
             [currentTimeStamps1 addObject:[tempDict valueForKey:@"startDate"]];
@@ -639,11 +639,6 @@
     NSArray *arrayToBeAdded =  @[@"30 min", @"1 hr", @"1 day", @"2 days"];
    
     _pickerData = arrayToBeAdded;
-}
-
-- (NSDate *)timestampStrToNsDate:(NSString *)timeStamp
-{
-    return [NSDate dateWithTimeIntervalSince1970:[timeStamp integerValue]];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {

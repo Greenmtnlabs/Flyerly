@@ -46,7 +46,7 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"MMMM dd yyyy"];
     //showing start date on fields
-    NSDate *startDate  =   [untechable.commonFunctions timestampStrToNsDate:untechable.startDate];
+    NSDate *startDate  =   [untechable.commonFunctions convertTimestampToNSDate:untechable.startDate];
     NSString *newDateStr    =   [dateFormat stringFromDate:startDate];
     NSString *showMsgToUser = [NSString stringWithFormat:@"The above message will be posted on %@ to the networks you selected below", newDateStr];
     

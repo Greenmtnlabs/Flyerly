@@ -200,8 +200,8 @@
 - (BOOL)isUntechableStarted {
     BOOL started = NO;
     
-    NSDate* startDate = [commonFunctions timestampStrToNsDate:startDate];
-    if( [commonFunctions isEndDateGreaterThanStartDate: startDate endDate:[NSDate date]]){
+    NSDate* _startDate = [commonFunctions convertTimestampToNSDate:startDate];
+    if( [commonFunctions isEndDateGreaterThanStartDate: _startDate endDate:[NSDate date]]){
         started = YES;
     }
     
@@ -215,7 +215,7 @@
     BOOL expired = NO;
     
     if( expired == NO ){
-        NSDate* date1 = [commonFunctions timestampStrToNsDate:endDate];
+        NSDate* date1 = [commonFunctions convertTimestampToNSDate:endDate];
         if( [commonFunctions isEndDateGreaterThanStartDate:date1 endDate:[NSDate date]]){
             expired = YES;
         }

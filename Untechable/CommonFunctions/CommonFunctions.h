@@ -21,7 +21,7 @@
 -(NSMutableDictionary *)convertJsonStringIntoDictinoary:(NSString *)value;
 -(NSString *)getTimeZoneOffset;
 -(NSString *)convertNSDateToTimestamp:(NSDate *) nsDate;
--(NSDate *)timestampStrToNsDate:(NSString *)timeStamp;
+-(NSDate *)convertTimestampToNSDate:(NSString *)timestamp;
 -(NSString *)timestampStrToAppDate:(NSString *)timeStamp;
 
 - (NSString *)timestampStringToAppDateTime:(NSString *)timeStam;

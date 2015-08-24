@@ -111,8 +111,8 @@
 - (NSString *)convertNSDateToTimestamp:(NSDate *)nsDate {
     return [NSString stringWithFormat:@"%.0f",[nsDate timeIntervalSince1970]];
 }
-- (NSDate *)timestampStrToNsDate:(NSString *)timeStamp {
-    return [NSDate dateWithTimeIntervalSince1970:[timeStamp integerValue]];
+- (NSDate *)convertTimestampToNSDate:(NSString *)timestamp {
+    return [NSDate dateWithTimeIntervalSince1970:[timestamp integerValue]];
 }
 
 - (NSString *)timestampStringToAppDate:(NSString *)timeStamp {
@@ -120,7 +120,7 @@
     NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
     [dateFormatter1 setDateFormat:DATE_FORMATE_DATE];
     
-    NSDate *newDate  =   [self timestampStrToNsDate:timeStamp];
+    NSDate *newDate  =   [self convertTimestampToNSDate:timeStamp];
     NSString *newDateStr    =   [dateFormatter1 stringFromDate:newDate];
     return newDateStr;
 }
@@ -130,7 +130,7 @@
     NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
     [dateFormatter1 setDateFormat:DATE_FORMATE_TIME];
     
-    NSDate *newDate  =   [self timestampStrToNsDate:timeStamp];
+    NSDate *newDate  =   [self convertTimestampToNSDate:timeStamp];
     NSString *newDateStr    =   [dateFormatter1 stringFromDate:newDate];
     return newDateStr;
 }
@@ -141,7 +141,7 @@
     NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
     [dateFormatter1 setDateFormat:DATE_FORMATE_1];
     
-    NSDate *newDate  =   [self timestampStrToNsDate:timeStamp];
+    NSDate *newDate  =   [self convertTimestampToNSDate:timeStamp];
     NSString *newDateStr    =   [dateFormatter1 stringFromDate:newDate];
     return newDateStr;
 }
@@ -260,7 +260,7 @@
     BOOL active = NO;
     if( [fbAuthExpiryTs isEqualToString:@""] == NO ){
         NSDate* startDate = [NSDate date];
-        NSDate* endDate = [self timestampStrToNsDate:fbAuthExpiryTs];
+        NSDate* endDate = [self convertTimestampToNSDate:fbAuthExpiryTs];
         active   = [self isEndDateGreaterThanStartDate:startDate endDate:endDate];
     }
     return active;
