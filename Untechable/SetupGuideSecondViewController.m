@@ -29,6 +29,9 @@
     //navigation related Stuff
     [self setNavigationBarItems];
     
+    // set the selected default message or custom message in pickerview if already selected
+    NSInteger positionToRemember = [[NSUserDefaults standardUserDefaults] integerForKey:@"positionToRemember"];
+    [self.setupSpendingTimeText selectRow:positionToRemember inComponent:0 animated:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,7 +42,6 @@
 
 -(void)viewDidAppear:(BOOL)animated {    
     [super viewDidAppear:animated];
-
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -62,9 +64,6 @@
     
     self.setupSpendingTimeText.dataSource = self;
     self.setupSpendingTimeText.delegate = self;
-    
-
-    
 }
 
 /**
@@ -179,7 +178,6 @@
         
         // reloading the new picker view with custom messages
         [_setupSpendingTimeText reloadAllComponents];
-        
 
     }
 }
@@ -191,7 +189,6 @@
     
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    
 }
 
 -(void)setNavigation:(NSString *)callFrom {

@@ -176,7 +176,6 @@
     double start = [startTime doubleValue];
     double end = [endTime doubleValue];
     
-    
     NSString *daysOrHoursToBeShown;
     int OneMinute = 60;
     int OneHour =  60 * 60;
@@ -230,8 +229,7 @@
             daysOrHoursToBeShown = [NSString stringWithFormat:@"%i minutes", remainingMinutes];
         }
     }
-    
-
+ 
     NSLog(@"Number of days or hours: %@", daysOrHoursToBeShown);
     return daysOrHoursToBeShown;
 }

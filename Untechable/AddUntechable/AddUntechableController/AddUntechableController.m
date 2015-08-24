@@ -611,8 +611,6 @@
     [_pickerCloseBtn.layer addSublayer:upperBorder];
 }
 
-
-
 - (IBAction)openPicker:(id)sender {
     
     [self.view addSubview:_spendingTimeTextPicker];
