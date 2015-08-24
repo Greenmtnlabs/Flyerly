@@ -229,7 +229,6 @@
 		C36D2E621A791AEA000537C5 /* SettingsCellView-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = C36D2E611A791AEA000537C5 /* SettingsCellView-iPhone6-Plus.xib */; };
 		C372098D1B7767AA003A40F2 /* RUntechable.m in Sources */ = {isa = PBXBuildFile; fileRef = C37209891B7767AA003A40F2 /* RUntechable.m */; };
 		C372098E1B7767AA003A40F2 /* RSetUntechable.m in Sources */ = {isa = PBXBuildFile; fileRef = C372098A1B7767AA003A40F2 /* RSetUntechable.m */; };
-		C372098F1B7767AA003A40F2 /* RSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = C372098B1B7767AA003A40F2 /* RSetting.m */; };
 		C37F755B1A7F50D100B5AC71 /* twt_follow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C37F75571A7F50D100B5AC71 /* twt_follow@2x.png */; };
 		C37F755C1A7F50D100B5AC71 /* twt_follow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C37F75581A7F50D100B5AC71 /* twt_follow@3x.png */; };
 		C37F755D1A7F50D100B5AC71 /* fb_Like@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C37F75591A7F50D100B5AC71 /* fb_Like@2x.png */; };
@@ -514,8 +513,6 @@
 		C37209881B7767AA003A40F2 /* RUntechable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RUntechable.h; path = AddUntechable/Models/RUntechable.h; sourceTree = "<group>"; };
 		C37209891B7767AA003A40F2 /* RUntechable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RUntechable.m; path = AddUntechable/Models/RUntechable.m; sourceTree = "<group>"; };
 		C372098A1B7767AA003A40F2 /* RSetUntechable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSetUntechable.m; path = AddUntechable/Models/RSetUntechable.m; sourceTree = "<group>"; };
-		C372098B1B7767AA003A40F2 /* RSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSetting.m; path = AddUntechable/Models/RSetting.m; sourceTree = "<group>"; };
-		C372098C1B7767AA003A40F2 /* RSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSetting.h; path = AddUntechable/Models/RSetting.h; sourceTree = "<group>"; };
 		C37209901B7768A7003A40F2 /* RSetUntechable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSetUntechable.h; path = AddUntechable/Models/RSetUntechable.h; sourceTree = "<group>"; };
 		C37F75571A7F50D100B5AC71 /* twt_follow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twt_follow@2x.png"; sourceTree = "<group>"; };
 		C37F75581A7F50D100B5AC71 /* twt_follow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twt_follow@3x.png"; sourceTree = "<group>"; };
@@ -838,8 +835,6 @@
 				C37209891B7767AA003A40F2 /* RUntechable.m */,
 				C37209901B7768A7003A40F2 /* RSetUntechable.h */,
 				C372098A1B7767AA003A40F2 /* RSetUntechable.m */,
-				C372098B1B7767AA003A40F2 /* RSetting.m */,
-				C372098C1B7767AA003A40F2 /* RSetting.h */,
 				366ECD7C19D3135200F71A11 /* Untechable.h */,
 				366ECD7D19D3135200F71A11 /* Untechable.m */,
 				C3CA4DD31A80CE0700B03A23 /* SocialNetworksStatusModal.h */,
@@ -1459,7 +1454,6 @@
 				C3CA4DD51A80CE0700B03A23 /* SocialNetworksStatusModal.m in Sources */,
 				248E06B71A4ACD6E0099846A /* ContactsCustomizedModal.m in Sources */,
 				36524AF119D940F4006DCAAF /* SocialnetworkController.m in Sources */,
-				C372098F1B7767AA003A40F2 /* RSetting.m in Sources */,
 				C372098D1B7767AA003A40F2 /* RUntechable.m in Sources */,
 				24A65BEC1A30451E00BE83C6 /* SSLCell.m in Sources */,
 				24354D701A499F4F000EC781 /* ContactListCell.m in Sources */,
