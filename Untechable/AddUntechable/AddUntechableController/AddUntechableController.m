@@ -382,7 +382,7 @@
     
     // set the selected default message or custom message in pickerview
     
-    NSInteger positionToShow;
+    NSInteger positionToShow = 0;
     for (int i = 0; i<_pickerData.count; i++) {
         if([_pickerData[i] isEqualToString:untechable.spendingTimeTxt] ){
             positionToShow = i;
