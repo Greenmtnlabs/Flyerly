@@ -46,6 +46,7 @@
 
 #define SAVE @"SAVE"
 #define RESET @"RESET"
+#define UPDATE @"UPDATE"
 
 #define TESTING @"TESTING"
 

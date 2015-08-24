@@ -144,7 +144,7 @@
 {
     BOOL canEditUntechable;
     if( [untechable isUntechableStarted] || [untechable isUntechableExpired] ){
-        canEditUntechable = NO;//start's new
+        canEditUntechable = NO;//starts new
     } else{
         canEditUntechable = YES;
     }

@@ -65,17 +65,14 @@
     return uniqId;
 }
 
-/*
-    if setOrSAve: SAVE ( in this case we have no need of dic2, it can be nil )
-    save instance variables into dic
- 
-    else if setOrSAve: RESET dic2: must required NSMutableDictionary
-    in this case we update all instance variable with dic2
- 
+/**
+ * addOrUpdateInModel saves and updates in model (Untechable)
+ * if command is SAVE, dictionary is not required (i.e. pass nil)
+ * if command is UPDATE, dictionary is required
  */
--(void)setOrSaveVars:(NSString *)setOrSAve dic2:(NSMutableDictionary *)dic2{
+-(void)addOrUpdateInModel:(NSString *)command dictionary:(NSMutableDictionary *)dictionary{
 
-    if( [setOrSAve isEqualToString:SAVE] ) {
+    if( [command isEqualToString:SAVE] ) {
         dic = [[NSMutableDictionary alloc] init];
         dic[@"rUId"]            = rUId;
         dic[@"eventId"]         = eventId;
@@ -126,8 +123,8 @@
         dic[@"omsHostName"] = omsHostName;
         dic[@"omsPort"] = omsPort;
     }
-    else if( [setOrSAve isEqualToString:RESET] ) {
-        dic = [[NSMutableDictionary alloc] initWithDictionary:dic2];
+    else if( [command isEqualToString:UPDATE] ) {
+        dic = [[NSMutableDictionary alloc] initWithDictionary:dictionary];
        
         //Settings
         rUId        = ( dic[@"rUId"] ) ? dic[@"rUId"] : @"";
@@ -195,7 +192,7 @@
 }
 
 /**
- * @return: is current untechable started
+ * @return: BOOL ( whether current untechable is started)
  */
 - (BOOL)isUntechableStarted {
     BOOL started = NO;
@@ -229,7 +226,7 @@
  */
 -(void)saveOrUpdateInDb{
     [[RLMRealm defaultRealm] transactionWithBlock:^{
-        [self setOrSaveVars:SAVE dic2:nil];
+        [self addOrUpdateInModel:SAVE dictionary:nil];
         if([rUId isEqualToString:@"1"])
         [RSetUntechable createOrUpdateInDefaultRealmWithValue:self.dic];
         else

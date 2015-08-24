@@ -38,10 +38,10 @@
          RSetUntechable *rSetUntechable = [[RSetUntechable alloc] init];
          [rSetUntechable setDefault];
          rSetUntechable.rUId = @"1";
-         NSMutableDictionary *dic2 = [rSetUntechable getModelDic];
+         NSMutableDictionary *dic = [rSetUntechable getModelDic];
          
          Untechable *untechable  = [[Untechable alloc] initWithCommonFunctions];
-         [untechable setOrSaveVars:RESET dic2:dic2];
+         [untechable addOrUpdateInModel:UPDATE dictionary:dic];
 
          SetupGuideViewController *mainViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
          mainViewController.untechable = untechable;

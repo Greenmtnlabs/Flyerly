@@ -50,7 +50,7 @@
 - (id)initWithCommonFunctions;
 -(void)goBack:navigationControllerPointer;
 -(NSString *)getUniqueId;
--(void)setOrSaveVars:(NSString *)setOrSAve dic2:(NSMutableDictionary *)dic2;
+-(void)addOrUpdateInModel:(NSString *)command dictionary:(NSMutableDictionary *)dictionary;
 -(BOOL)isUntechableStarted;
 -(BOOL)isUntechableExpired;
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack;

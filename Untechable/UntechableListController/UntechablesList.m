@@ -168,10 +168,10 @@
     
     RLMResults *unsortedSetObjects = [RSetUntechable objectsWhere:@"rUId == '1'"];
     RSetUntechable *rSetUntechable = unsortedSetObjects[0];
-    NSMutableDictionary *setDic = [rSetUntechable getModelDic];
-    setDic[@"rUId"] = [untechable getUniqueId];
+    NSMutableDictionary *dic = [rSetUntechable getModelDic];
+    dic[@"rUId"] = [untechable getUniqueId];
     
-    [untechable setOrSaveVars:RESET dic2:setDic];
+    [untechable addOrUpdateInModel:UPDATE dictionary:dic];
     
     [self setTimeAcToCurVars];
     [self setUserData];
@@ -521,16 +521,16 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSMutableDictionary *tempDict;
+    NSMutableDictionary *tempDictionary;
     if ( indexPath.section == 0 ){
-        tempDict = sectionOneArray[indexPath.row];
+        tempDictionary = sectionOneArray[indexPath.row];
     }else if ( indexPath.section == 1 ){
-        tempDict = sectionTwoArray[indexPath.row];
+        tempDictionary = sectionTwoArray[indexPath.row];
     }
     
     
     AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
-    [untechable setOrSaveVars:RESET dic2:tempDict];
+    [untechable addOrUpdateInModel:UPDATE dictionary:tempDictionary];
     
     addUntechable.untechable = untechable;
     addUntechable.totalUntechables = (int)allUntechables.count;
