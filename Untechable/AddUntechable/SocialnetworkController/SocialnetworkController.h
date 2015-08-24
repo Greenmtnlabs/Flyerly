@@ -2,13 +2,12 @@
 //  SocialnetworkController.h
 //  Untechable
 //
-//  Created by ABDUL RAUF abdul.rauf@riksof.com on 29/09/2014.
+//  Created by RIKSOF Developer on 29/09/2014.
 //  Copyright (c) 2014 RIKSOF (Pvt) Ltd. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "Untechable.h"
-#import "UIPlaceHolderTextView.h"
 #import "BSKeyboardControls.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "Reachability.h"
@@ -37,7 +36,6 @@
 
 
 @property (nonatomic,strong)  Untechable *untechable;
-@property(nonatomic,strong) IBOutlet UIPlaceHolderTextView *descriptionView;
 @property (strong, nonatomic) IBOutlet UILabel *showMessageBeforeSending;
 - (IBAction)shareOn:(id)sender;
 -(void)btnActivate:(UIButton *)btnPointer active:(BOOL)active;

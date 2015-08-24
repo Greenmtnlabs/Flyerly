@@ -2,7 +2,7 @@
 //  UntechableClass.h
 //  Untechable
 //
-//  Created by Abdul Rauf on 23/sep/2014
+//  Created by RIKSOF Developer on 23/sep/2014
 //  Copyright (c) 2014 RIKSOF (Pvt) Ltd. All rights reserved.
 //
 //
@@ -22,12 +22,9 @@
 @property (strong, nonatomic) CommonFunctions *commonFunctions;
 @property (strong, nonatomic) SocialNetworksStatusModal *socialNetworksStatusModal;
 @property (strong, readonly)  NSMutableDictionary *dic;
-@property (strong, nonatomic) NSString *piecesFile;
 @property (nonatomic, assign) BOOL paid;
 @property (strong, nonatomic) NSString *userId;
-@property (strong, nonatomic) NSString *uniqueId;
 @property (strong, nonatomic) NSString *eventId, *rUId;
-@property (strong, nonatomic) NSString *untechablePath;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, assign) BOOL savedOnServer;
 @property (nonatomic, assign) BOOL hasFinished;
@@ -59,28 +56,14 @@
                                        *omsHostName, *omsPort;
 
 - (id)initWithCF;
-
--(NSDate *)stringToDate:(NSString *)inputStrFormate dateString:(NSString *)dateString;
 -(void)goBack:navigationControllerPointer;
-
-
--(NSString *)getNewUntechablePath;
--(NSString *)getRecFilePath;
--(NSString *)getRecFileName;
 -(NSString *)getUniqueId;
--(BOOL)initUntechableDirectory;
 -(void)setOrSaveVars:(NSString *)setOrSAve dic2:(NSMutableDictionary *)dic2;
--(void)initWithDefValues;
-
 -(BOOL)isUntechableStarted;
 -(BOOL)isUntechableExpired;
-
-#pragma mark - current Date method
--(NSDate *)getCurrentDate;
-
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack;
 -(void)saveOrUpdateInDb;
--(void)setCustomizedContactsForSession;
+-(void)reSetCustomizedContactsInSession;
 -(BOOL)canSkipEmailSetting;
 
 @end

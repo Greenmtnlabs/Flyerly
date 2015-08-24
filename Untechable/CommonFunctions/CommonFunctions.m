@@ -2,7 +2,7 @@
 //  UntechableClass.m
 //  Untechable
 //
-//  Created by Abdul Rauf on 23/sep/2014
+//  Created by RIKSOF Developer on 23/sep/2014
 //  Copyright (c) 2014 RIKSOF (Pvt) Ltd. All rights reserved.
 //
 //
@@ -13,61 +13,11 @@
 
 @implementation CommonFunctions
 
-NSString *currentEnteredUserName;
-NSString *currentEnteredPhoneNumber;
 
--(void)sortDic:inputDic {
-    NSMutableDictionary *sortedDic = [[NSMutableDictionary alloc] init];
-    NSArray *sortedKeys = [[inputDic allKeys] sortedArrayUsingSelector: @selector(compare:)];
-    
-    for (NSString *key in sortedKeys) {
-        [sortedDic setObject:[inputDic objectForKey: key]  forKey:key];
-    }
-    inputDic = sortedDic;
-}
-
--(void)deleteKeyFromDic:dic delKeyAtIndex:(int)rowNumber {
-    NSArray *arrayOfKeys = [[dic allKeys] sortedArrayUsingSelector: @selector(compare:)];
-    NSString *key   = [arrayOfKeys objectAtIndex:rowNumber];
-    [dic removeObjectForKey:key];
-}
-
-/*
- * Here we get the dictionary of saved untechable
+/**
+ * A common function for showing alert
+ * Example code: [commonFunctions showAlert:@"Please select any contact to invite !" message:@""];
  */
-- (NSMutableDictionary *)getUntechable:(int)count UserId:(NSString *)userId {
-    NSMutableDictionary *retDic = nil;
-    NSString *userPath = [self getUserPath:userId];
-    
-    //List of folder names create for this userid
-    NSArray *UntechablesList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:userPath error:nil];
-    //sort list
-    NSArray *sortedList = [UntechablesList sortedArrayUsingFunction:compareDesc_ context:NULL];
-    
-    NSString *uniqueId_temp,*untechablePath_temp;
-    
-    for(int i = 0 ; i < sortedList.count ;i++) {
-        uniqueId_temp = sortedList[i];
-        untechablePath_temp = [NSString stringWithFormat:@"%@/%@",userPath,uniqueId_temp];
-        
-        if ( count == i ) {
-            retDic =   [[NSMutableDictionary alloc] init];
-            
-            //Checking For Integer Dir Names Only
-            if ([[NSScanner scannerWithString:uniqueId_temp] scanInt:nil]) {
-                NSString *piecesF =[untechablePath_temp stringByAppendingString:[NSString stringWithFormat:@"/%@", PIECES_FILE]];
-                NSData *data = [NSData dataWithContentsOfFile:piecesF];
-                retDic = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-                [retDic setValue:uniqueId_temp forKey:@"uniqueId"];
-                [retDic setValue:untechablePath_temp forKey:@"untechablePath"];
-            }
-            break;
-        }
-    }
-    return retDic;
-}
-
-//[commonFunctions showAlert:@"Please select any contact to invite !" message:@""];
 -(void)showAlert:(NSString *)title message:(NSString *)message {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
                                                     message:message
@@ -76,13 +26,19 @@ NSString *currentEnteredPhoneNumber;
                                           otherButtonTitles:nil];
     [alert show];
 }
+
+/**
+ * Conver dictionary into a json strong 
+ * @param: NSMutableDictionary
+ * @return: NSString
+ */
 -(NSString *)convertDicIntoJsonString:(NSMutableDictionary *)value {
     NSError *writeError = nil;
     NSString *jsonString;
+    
     if (value.count > 0) {
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:value options:NSJSONWritingPrettyPrinted error:&writeError];
     jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    NSLog(@"JSON Output: %@", jsonString);
     
     }else {
         jsonString = @"";
@@ -141,19 +97,13 @@ NSString *currentEnteredPhoneNumber;
     NSMutableDictionary *jsonArray = [NSJSONSerialization JSONObjectWithData: data options: NSJSONReadingMutableContainers error: &e];
     
     if (!jsonArray) {
-        NSLog(@"Error parsing JSON: %@", e);
         jsonArray = [[NSMutableDictionary alloc] init];
-    } else {
-        for(NSDictionary *item in jsonArray) {
-            NSLog(@"Item: %@", item);
-        }
     }
     return jsonArray;
 }
 
 -(NSString *)getTimeZoneOffset {
     NSString *timezoneoffset3 = [NSString stringWithFormat:@"%f",([[NSTimeZone systemTimeZone] secondsFromGMT] / 3600.0)];
-    NSLog(@"timezoneoffset3 %@", timezoneoffset3);
     
     return timezoneoffset3;
 }
@@ -172,7 +122,6 @@ NSString *currentEnteredPhoneNumber;
     
     NSDate *newDate  =   [self timestampStrToNsDate:timeStamp];
     NSString *newDateStr    =   [dateFormatter1 stringFromDate:newDate];
-    NSLog(@"newDateStr: %@", newDateStr);
     return newDateStr;
 }
 
@@ -183,7 +132,6 @@ NSString *currentEnteredPhoneNumber;
     
     NSDate *newDate  =   [self timestampStrToNsDate:timeStamp];
     NSString *newDateStr    =   [dateFormatter1 stringFromDate:newDate];
-    NSLog(@"newDateStr: %@", newDateStr);
     return newDateStr;
 }
 
@@ -195,113 +143,11 @@ NSString *currentEnteredPhoneNumber;
     
     NSDate *newDate  =   [self timestampStrToNsDate:timeStamp];
     NSString *newDateStr    =   [dateFormatter1 stringFromDate:newDate];
-    NSLog(@"newDateStr: %@", newDateStr);
     return newDateStr;
 }
 
 -(UIImageView *) navigationGetTitleView {
     return  [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
-}
-
-/*
- *Here we sort Array in Desending order for Exact Render of Flyer
- * as last saved.
- */
-NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
-    
-    // Convert both strings to integers
-    long long intLeft = [stringLeft longLongValue];
-    long long intRight = [stringRight longLongValue];
-    
-    if (intLeft < intRight)
-        return NSOrderedDescending;
-    else if (intLeft > intRight)
-        return NSOrderedAscending;
-    else
-        return NSOrderedSame;
-}
-
-/*
- * Here we get the dictionary of dictionaries of saved untechable
- */
-- ( NSMutableArray * )getAllUntechables :(NSString *)userId {
-    
-    NSMutableArray *totalUntechables = [[NSMutableArray alloc] init];
-    NSMutableDictionary *retDic;
-    NSString *userPath = [self getUserPath:userId];
-    
-    //List of folder names create for this userid
-    NSArray *UntechablesList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:userPath error:nil];
-    //sort list
-    NSArray *sortedList = [UntechablesList sortedArrayUsingFunction:compareDesc_ context:NULL];
-    
-    NSString *uniqueId_temp,*untechablePath_temp;
-    
-    for(int i = 0 ; i < sortedList.count ;i++) {
-        uniqueId_temp = sortedList[i];
-        untechablePath_temp = [NSString stringWithFormat:@"%@/%@",userPath,uniqueId_temp];
-        
-        retDic =   [[NSMutableDictionary alloc] init];
-        
-        //Checking For Integer Dir Names Only
-        if ([[NSScanner scannerWithString:uniqueId_temp] scanInt:nil]) {
-            NSString *piecesF =[untechablePath_temp stringByAppendingString:[NSString stringWithFormat:@"/%@", PIECES_FILE]];
-            NSData *data = [NSData dataWithContentsOfFile:piecesF];
-            retDic = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-            [retDic setValue:uniqueId_temp forKey:@"uniqueId"];
-            [retDic setValue:untechablePath_temp forKey:@"untechablePath"];
-        }
-        
-        if ( [[retDic objectForKey:@"hasFinished"] boolValue] ){
-            [totalUntechables addObject:retDic];
-        }
-    }
-    return totalUntechables;
-}
-
--(NSString *)getUserPath:userId {
-    //Getting Home Directory
-    NSString *homeDirectoryPath = NSHomeDirectory();
-    return [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Untechable",userId]];
-}
-
-
-/*
- * Here we get the dictionary of saved untechable
- */
-- ( NSMutableDictionary *)getAnyInCompleteUntechable :(NSString *)userId {
-    NSMutableDictionary *retDic;
-    NSString *userPath = [self getUserPath:userId];
-    
-    //List of folder names create for this userid
-    NSArray *UntechablesList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:userPath error:nil];
-    //sort list
-    NSArray *sortedList = [UntechablesList sortedArrayUsingFunction:compareDesc_ context:NULL];
-    
-    NSString *uniqueId_temp,*untechablePath_temp;
-    
-    for(int i = 0 ; i < sortedList.count ;i++) {
-        uniqueId_temp = sortedList[i];
-        untechablePath_temp = [NSString stringWithFormat:@"%@/%@",userPath,uniqueId_temp];
-        
-        retDic =   [[NSMutableDictionary alloc] init];
-        
-        //Checking For Integer Dir Names Only
-        if ([[NSScanner scannerWithString:uniqueId_temp] scanInt:nil]) {
-            NSString *piecesF =[untechablePath_temp stringByAppendingString:[NSString stringWithFormat:@"/%@", PIECES_FILE]];
-            NSData *data = [NSData dataWithContentsOfFile:piecesF];
-            retDic = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-            //retDic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesF];
-            [retDic setValue:uniqueId_temp forKey:@"uniqueId"];
-            [retDic setValue:untechablePath_temp forKey:@"untechablePath"];
-            
-            if ( ![[retDic objectForKey:@"hasFinished"] boolValue] ){
-                return retDic;
-            }
-            //[retDic setValue:[NSString stringWithFormat:@"%@/%@%@", untechablePath_temp,uniqueId_temp,REC_FORMATE] forKey:@"recFileURL"];
-        }
-    }
-    return nil;
 }
 
 - (BOOL)date1IsSmallerThenDate2:(NSDate *)date1 date2:(NSDate *)date2 {
@@ -337,7 +183,6 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
     int length = [self getLength:textField.text];
-    //NSLog(@"Length  =  %d ",length);
     
     if(length == 10){
         if(range.length == 0)
@@ -404,16 +249,12 @@ NSInteger compareDesc_(id stringLeft, id stringRight, void *context) {
     }
 }
 
-#pragma mark UIView Changes base on Iphone Screen Sizes
--(void)setNavigationTopBarViewForScreens:(UIImageView *) topNavigationView {
-    
-    if( IS_IPHONE_4 || IS_IPHONE_5 ) {
-        
-        topNavigationView.frame = CGRectMake( 93, 77, 126, 28 );
-    }
-}
-
-//Active fb button when fb toke expiry date is greater then current date.
+#pragma mark -  Fb functions
+/** 
+ * @parm: fbAuthExpiryTs is facebook token expiry date( string of timestamp )
+ * @return: facebook token is expired or not
+ * Active fb button when fb toke expiry date is greater then current date.
+ */
 -(BOOL)fbBtnStatus:(NSString *)fbAuthExpiryTs{
     BOOL active = NO;
     if( [fbAuthExpiryTs isEqualToString:@""] == NO ){

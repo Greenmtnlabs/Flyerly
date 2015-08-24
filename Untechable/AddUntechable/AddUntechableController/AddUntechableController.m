@@ -2,7 +2,7 @@
 //  AddUntechableController.m
 //  Untechable
 //
-//  Created by Abdul Rauf on 23/sep/2014
+//  Created by RIKSOF Developer on 23/sep/2014
 //  Copyright (c) 2014 RIKSOF (Pvt) Ltd. All rights reserved.
 //
 
@@ -97,7 +97,7 @@
 {
     if( [callFor isEqualToString:@"_btnStartTime"] ) {
         pickerOpenFor = @"_btnStartTime";
-        [self.picker setDate:[untechable getCurrentDate] animated:YES];
+        [self.picker setDate:[NSDate date] animated:YES];
         [self dateChanged];
     }
     else if( [callFor isEqualToString:@"_btnEndTime"] ) {
@@ -454,18 +454,6 @@
     [untechable.dateFormatter setDateFormat:DATE_FORMATE_1];
     
 }
-
--(void)resetUntechable:(NSString *)callResetFor{
-
-    if( [callResetFor isEqualToString:@"RESET_DEFAULTS"] ){
-        [untechable initWithDefValues];
-    }
-    else if( [callResetFor isEqualToString:@"RESET1"] ){
-        untechable.savedOnServer = NO;
-        untechable.paid = NO;
-    }
-}
-
 #pragma mark -  UI functions
 -(void)updateUI{
     

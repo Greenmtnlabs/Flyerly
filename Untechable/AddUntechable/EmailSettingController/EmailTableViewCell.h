@@ -2,7 +2,7 @@
 //  EmailTableViewCell.h
 //  Untechable
 //
-//  Created by Muhammad Raheel on 28/11/2014.
+//  Created by RIKSOF Developer on 28/11/2014.
 //  Copyright (c) 2014 Green MTN Labs Inc. All rights reserved.
 //
 
