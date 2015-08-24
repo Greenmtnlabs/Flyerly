@@ -377,6 +377,11 @@
 }
 
 -(void)showHideTextPicker:(BOOL)showHide{
+    
+    // set the selected default message or custom message in pickerview if already selected
+    NSInteger positionToRemember = [[NSUserDefaults standardUserDefaults] integerForKey:@"positionToRemember"];
+    [self.spendingTimeTextPicker selectRow:positionToRemember inComponent:0 animated:NO];
+    
     if ( IS_IPHONE_4 ){
         [_pickerCloseBtn setFrame:CGRectMake(-2, 300, 580, 30)];
         [_spendingTimeTextPicker setFrame:CGRectMake(0, 300, 0, 140)];
