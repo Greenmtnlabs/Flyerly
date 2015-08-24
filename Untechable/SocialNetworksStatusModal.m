@@ -74,30 +74,6 @@
     return [LIALinkedInHttpClient clientForApplication:application presentingViewController:nil];
 }
 
-//Get linkedin User profile details using accessToken
-- (void)requestMeWithToken:(NSString *)linkedInAccessToken {
-    
-    //Async call
-    [self.linkedInclient GET:[NSString stringWithFormat:@"https://api.linkedin.com/v1/people/~?oauth2_access_token=%@&format=json", linkedInAccessToken] parameters:nil
-                     success:^(AFHTTPRequestOperation *operation, NSDictionary *result) {
-                         
-                         NSLog(@"current user %@", result);
-                         /* //SAMPLE DATA
-                          current user {
-                          firstName = rufi;
-                          headline = "Sr. Software Engineer at RIKSOF";
-                          lastName = untechable;
-                          siteStandardProfileRequest =     {
-                          url = "https://www.linkedin.com/profile/view?id=384207301&authType=name&authToken=I9FC&trk=api*a3572303*s3643513*";
-                          };
-                          */
-                         
-                     }
-                     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                         NSLog(@"failed to fetch current user %@", error);
-                     }];
-}
-
 //Update data base for fb data
 -(void)linkedInFlushData {
     [self linkedInUpdateData:@""];
