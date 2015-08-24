@@ -164,7 +164,7 @@
 
 #pragma mark -  Model funcs
 -(void)setDefaultUntech{
-    untechable  = [[Untechable alloc] initWithCF];
+    untechable  = [[Untechable alloc] initWithCommonFunctions];
     
     RLMResults *unsortedSetObjects = [RSetUntechable objectsWhere:@"rUId == '1'"];
     RSetUntechable *rSetUntechable = unsortedSetObjects[0];

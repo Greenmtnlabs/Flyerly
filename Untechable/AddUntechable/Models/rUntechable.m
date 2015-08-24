@@ -47,8 +47,6 @@
     self.customizedContacts= @"";
     self.userName= @"";
     self.userPhoneNumber= @"";
-    
-    //device base
     self.savedOnServer = @"NO";
     self.hasFinished = @"NO";
 
@@ -83,11 +81,8 @@
     dic2[@"omsHostName"] = self.omsHostName;
     dic2[@"omsPort"] = self.omsPort;
     dic2[@"customizedContacts"] = self.customizedContacts;
-    
     dic2[@"userName"] = self.userName;
     dic2[@"userPhoneNumber"] = self.userPhoneNumber;
-    
-    //device base
     dic2[@"savedOnServer"] = self.savedOnServer;
     dic2[@"hasFinished"] = self.hasFinished;
     
@@ -100,28 +95,26 @@
     self.paid  = ([dic[@"paid"] isEqualToString:@"YES"]) ? @"YES" : @"NO";
     self.userId   = ( dic[@"userId"] ) ? dic[@"userId"] : @"";
 
-    //Screen1 vars
+    // SetupGuide Screen1 vars
     self.timezoneOffset  = ( dic[@"timezoneOffset"] ) ? dic[@"timezoneOffset"] : @"";
     self.spendingTimeTxt = ( dic[@"spendingTimeTxt"] ) ? dic[@"spendingTimeTxt"] : @"";
     self.startDate = ( dic[@"startDate"] ) ? dic[@"startDate"] : @"";
     self.endDate   = ( dic[@"endDate"] ) ? dic[@"endDate"] : @"";
     self.hasEndDate   = ([dic[@"hasEndDate"] isEqualToString:@"NO"]) ? @"YES" : @"NO";
     
-    //Screen2 vars
+    // SetupGuide Screen2 vars
     self.twillioNumber  = ( dic[@"twillioNumber"] ) ? dic[@"twillioNumber"] : @"";
     self.location = ( dic[@"location"] ) ? dic[@"location"] : @"";
     self.customizedContacts = ( dic[@"customizedContacts"] ) ? dic[@"customizedContacts"] : @"";
     
-    //Screen3 vars
+    // SetupGuide Screen3 vars
     self.socialStatus = ( dic[@"socialStatus"] ) ? dic[@"socialStatus"] : @"";
     self.fbAuth = ( dic[@"fbAuth"] ) ? dic[@"fbAuth"] : @"";
     self.fbAuthExpiryTs = ( dic[@"fbAuthExpiryTs"] ) ? dic[@"fbAuthExpiryTs"] : @"";
     self.twitterAuth  = ( dic[@"twitterAuth"] ) ? dic[@"twitterAuth"] : @"";
     self.twOAuthTokenSecret = ( dic[@"twOAuthTokenSecret"] ) ? dic[@"twOAuthTokenSecret"] : @"";
     self.linkedinAuth = ( dic[@"linkedinAuth"] ) ? dic[@"linkedinAuth"] : @"";
-    
-    
-    //Screen3 vars
+   
     self.email  = ( dic[@"email"] ) ? dic[@"email"] : @"";
     self.password  = ( dic[@"password"] ) ? dic[@"password"] : @"";
     self.respondingEmail = ( dic[@"respondingEmail"] ) ? dic[@"respondingEmail"] : @"";
@@ -134,14 +127,12 @@
     self.omsPort   = ( dic[@"omsPort"] ) ? dic[@"omsPort"] : @"";
     
     
-    //SetupGuide First Screen
+    //SetupGuide Screen1 vars
     self.userName  = ( dic[@"userName"] ) ? dic[@"userName"] : @"";
     self.userPhoneNumber  = ( dic[@"userPhoneNumber"] ) ? dic[@"userPhoneNumber"] : @"";
     
-    //device base
     self.savedOnServer  = ([dic[@"savedOnServer"] isEqualToString:@"YES"]) ? @"YES" : @"NO";
     self.hasFinished  = ([dic[@"hasFinished"] isEqualToString:@"YES"]) ? @"YES" : @"NO";
 }
-
 
 @end

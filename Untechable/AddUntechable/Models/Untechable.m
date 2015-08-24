@@ -34,7 +34,7 @@
 /*
  * Initialize untechable object with required models initialization
  */
-- (id)initWithCF{
+- (id)initWithCommonFunctions{
     self = [super init];
     commonFunctions = [[CommonFunctions alloc] init];
     socialNetworksStatusModal = [SocialNetworksStatusModal sharedInstance];
