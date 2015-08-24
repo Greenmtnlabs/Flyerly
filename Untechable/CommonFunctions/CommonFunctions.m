@@ -125,13 +125,13 @@
     return newDateStr;
 }
 
-- (NSString *)timestampStringToAppDateTime:(NSString *)timeStamp {
+- (NSString *)convertTimestampToAppDateTime:(NSString *)timestamp {
     
-    NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
-    [dateFormatter1 setDateFormat:DATE_FORMATE_TIME];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:DATE_FORMATE_TIME];
     
-    NSDate *newDate  =   [self convertTimestampToNSDate:timeStamp];
-    NSString *newDateStr    =   [dateFormatter1 stringFromDate:newDate];
+    NSDate *newDate  =   [self convertTimestampToNSDate:timestamp];
+    NSString *newDateStr    =   [dateFormatter stringFromDate:newDate];
     return newDateStr;
 }
 

@@ -24,7 +24,7 @@
 -(NSDate *)convertTimestampToNSDate:(NSString *)timestamp;
 -(NSString *)convertTimestampToAppDate:(NSString *)timestamp;
 
-- (NSString *)timestampStringToAppDateTime:(NSString *)timeStam;
+- (NSString *)convertTimestampToAppDateTime:(NSString *)timestamp;
 - (NSString *)timestampStringToAppDate:(NSString *)timeStam;
 - (BOOL)isEndDateGreaterThanStartDate:(NSDate *)startDate endDate:(NSDate *)endDate;
 
