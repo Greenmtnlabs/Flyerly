@@ -759,13 +759,24 @@
     [self.navigationController pushViewController:thankyouScreen animated:YES];
 }
 -( void )setTimeAcToCurVars {
+    
+    NSInteger positionToShow = 0;
+    
     untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60)] ]; //current time + time duration
     untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)] ]; //start time + selected time duration
     
     // the selected status from the setup screen would be set as default status on unetch now option
-    NSInteger positionOfSelectedStatusFromArray = [[NSUserDefaults standardUserDefaults] integerForKey:@"positionToRemember"];
+
     NSArray *customArrayOfStatuses = [[NSUserDefaults standardUserDefaults]objectForKey:@"cutomSpendingTimeTextAry"];
-    NSString *selectedStatus = [customArrayOfStatuses objectAtIndex:positionOfSelectedStatusFromArray];
+    
+    for (int i = 0; i<customArrayOfStatuses.count; i++) {
+        if([customArrayOfStatuses[i] isEqualToString:untechable.spendingTimeTxt] ){
+            positionToShow = i;
+            break;
+        }
+    }
+   
+    NSString *selectedStatus = [customArrayOfStatuses objectAtIndex:positionToShow];
     
     //setting spending time text to status got from setup screen.
     untechable.spendingTimeTxt = selectedStatus;

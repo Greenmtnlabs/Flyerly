@@ -87,7 +87,6 @@
     
     _inputSpendingTimeText.delegate = self;
    
-    
     NSArray *fields = @[ _inputSpendingTimeText ];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
     [self.keyboardControls setDelegate:self];
@@ -612,11 +611,6 @@
     
     int len = (int)_inputSpendingTimeText.text.length;
     _char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
-   
-    // set the selected default message or custom message position
-    [[NSUserDefaults standardUserDefaults] setInteger:row forKey:@"tempPositionToRemember"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-  
 }
 
 /**

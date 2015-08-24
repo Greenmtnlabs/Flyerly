@@ -29,9 +29,7 @@
     //navigation related Stuff
     [self setNavigationBarItems];
     
-    // set the selected default message or custom message in pickerview if already selected
-    NSInteger positionToRemember = [[NSUserDefaults standardUserDefaults] integerForKey:@"positionToRemember"];
-    [self.setupSpendingTimeText selectRow:positionToRemember inComponent:0 animated:NO];
+    [self setDefaultUntechSpendingTimeText];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -107,19 +105,13 @@
 
 // Catpure the picker view selection
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    
-    NSInteger positionToRemember = 0;
 
     if( [[customSpendingTextAry objectAtIndex:row] isEqualToString:@"Custom"] ) {
         [self showAddFieldPopUp];
     } else  {
         [self setupDoctorsResearchLabel:[customSpendingTextAry objectAtIndex:row]];
         untechable.spendingTimeTxt = [customSpendingTextAry objectAtIndex:row];
-        positionToRemember = (NSInteger)row;
     }
-    
-    [[NSUserDefaults standardUserDefaults] setInteger:positionToRemember forKey:@"positionToRemember"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 //the size of the fonts in picker view was big for iphone 5 and small for iphone 6
@@ -273,6 +265,23 @@
     if( untechable.spendingTimeTxt == nil || [untechable.spendingTimeTxt isEqualToString:@""] ) {
         untechable.spendingTimeTxt = [customSpendingTextAry objectAtIndex:0];
     }
+}
+
+/**
+ * This method set default untech
+ * spending time text in picker view
+ */
+
+-(void)setDefaultUntechSpendingTimeText{
+    // set the selected default message or custom message in pickerview if already selected
+    int positionToShow;
+    for (int i = 0; i<customSpendingTextAry.count; i++) {
+        if([customSpendingTextAry[i] isEqualToString:untechable.spendingTimeTxt] ){
+            positionToShow = i;
+            break;
+        }
+    }
+    [self.setupSpendingTimeText selectRow:positionToShow inComponent:0 animated:NO];
 }
 
 @end
