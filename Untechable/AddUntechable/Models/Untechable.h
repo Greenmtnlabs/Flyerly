@@ -56,25 +56,14 @@
                                        *omsHostName, *omsPort;
 
 - (id)initWithCF;
-
--(NSDate *)stringToDate:(NSString *)inputStrFormate dateString:(NSString *)dateString;
 -(void)goBack:navigationControllerPointer;
-
-
-
 -(NSString *)getUniqueId;
 -(void)setOrSaveVars:(NSString *)setOrSAve dic2:(NSMutableDictionary *)dic2;
--(void)initWithDefValues;
-
 -(BOOL)isUntechableStarted;
 -(BOOL)isUntechableExpired;
-
-#pragma mark - current Date method
--(NSDate *)getCurrentDate;
-
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack;
 -(void)saveOrUpdateInDb;
--(void)setCustomizedContactsForSession;
+-(void)reSetCustomizedContactsInSession;
 -(BOOL)canSkipEmailSetting;
 
 @end

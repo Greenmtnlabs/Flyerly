@@ -43,27 +43,6 @@
     return self;
 }
 
-
--(NSDate *)stringToDate:(NSString *)inputStrFormate dateString:(NSString *)dateString{
-        NSLog(@"dateString is %@", dateString);
-    NSDateFormatter *dateFormatterTemp = [[NSDateFormatter alloc] init];
-
-    if( [inputStrFormate  isEqual:DATE_FORMATE_1] ){
-        dateFormatterTemp.dateFormat = inputStrFormate;
-
-        NSDate *dateFrmString = [dateFormatterTemp dateFromString:dateString];
-
-        NSString *formattedDateString = [dateFormatterTemp stringFromDate:dateFrmString];
-        NSLog(@"Date in new format is %@", formattedDateString);
-        
-        
-        return dateFrmString;
-    }
-    
-    return [NSDate date];//default
-}
-
-
 -(void)goBack:navigationControllerPointer{
     [navigationControllerPointer popViewControllerAnimated:YES];
     // Remove observers
@@ -123,7 +102,7 @@
         
         dic[@"customizedContacts"] = [commonFunctions convertCCMArrayIntoJsonString:customizedContactsForCurrentSession];
         customizedContacts = ( dic[@"customizedContacts"] ) ? dic[@"customizedContacts"] : @"";
-        [self setCustomizedContactsForSession];
+        [self reSetCustomizedContactsInSession];
         
         //Screen3 vars
         dic[@"socialStatus"] = socialStatus;
@@ -209,60 +188,8 @@
 
 }
 
--(void) setCustomizedContactsForSession {
+-(void) reSetCustomizedContactsInSession {
     customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:customizedContacts];
-}
-
-/**
- Get the current date of device
- **/
--(NSDate *)getCurrentDate{
-    NSDate *date = [NSDate date];
-    return date;
-}
-
-/*
- Set default values for new event
- */
--(void)initWithDefValues {
-    //Settings
-    eventId  = @"";
-    paid     = NO;
-    savedOnServer = NO;
-    hasFinished   = NO;
-    
-    //Setup Guide First Screen
-    userName = @"";
-    userPhoneNumber = @"";
-    
-    //Screen1
-    timezoneOffset  = [commonFunctions getTimeZoneOffset];
-    spendingTimeTxt = @"";
-    startDate = [commonFunctions nsDateToTimeStampStr: [NSDate date] ]; //start now
-    endDate   = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*60*24)] ]; //current time +1 Day
-    hasEndDate = YES;
-    
-    //Screen2
-    twillioNumber  = @"";
-    location  = @"";
-    customizedContactsForCurrentSession = [[NSMutableArray alloc] init];
-    customizedContacts = @"";
-
-    //Screen3
-    socialStatus = @"";
-    fbAuth       = @"";
-    fbAuthExpiryTs = [commonFunctions nsDateToTimeStampStr:[commonFunctions getDate:@"PAST_1_MONTH"] ];
-    twitterAuth  = @"";
-    twOAuthTokenSecret = @"";
-    linkedinAuth = @"";
-    
-    //Screen4
-    email           = @"";
-    password        = @"";
-    respondingEmail = @"";
-    iSsl = @"";
-    oSsl = @"";
-    acType = imsHostName = imsPort = omsHostName = omsPort= @"";
 }
 
 /*
