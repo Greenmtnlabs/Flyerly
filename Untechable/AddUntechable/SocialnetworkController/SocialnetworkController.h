@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "Untechable.h"
-#import "UIPlaceHolderTextView.h"
 #import "BSKeyboardControls.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "Reachability.h"
@@ -37,7 +36,6 @@
 
 
 @property (nonatomic,strong)  Untechable *untechable;
-@property(nonatomic,strong) IBOutlet UIPlaceHolderTextView *descriptionView;
 @property (strong, nonatomic) IBOutlet UILabel *showMessageBeforeSending;
 - (IBAction)shareOn:(id)sender;
 -(void)btnActivate:(UIButton *)btnPointer active:(BOOL)active;
