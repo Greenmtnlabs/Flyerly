@@ -17,6 +17,8 @@
 #import "EmailSettingController.h"
 #import "EmailChangingController.h"
 #import "SocialNetworksStatusModal.h"
+#import "NBPhoneNumberUtil.h"
+
 
 @interface ContactsListControllerViewController () {
 }
@@ -402,10 +404,11 @@
  * Set all contacts of mobile in contactsArray, this is a kind of call back
  */
 -(void)constructInThread:(ABAddressBookRef)m_addressbook{
-    
-    if (!m_addressbook) {
-        NSLog(@"opening address book");
-    }
+
+    NSString *countryCode = [[NSLocale currentLocale] objectForKey:NSLocaleCountryCode];//@"PK";
+    NBPhoneNumberUtil *phoneUtil = [NBPhoneNumberUtil sharedInstance];
+    NSError *phoneUtilError = nil;
+    NSCharacterSet *onlyAllowedChars = [[NSCharacterSet characterSetWithCharactersInString:@"+0123456789"] invertedSet];
     
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(m_addressbook);
     CFIndex nPeople = ABAddressBookGetPersonCount(m_addressbook);
@@ -497,17 +500,32 @@
             }
             
             if ( numberType != nil ){
-                NSMutableArray *numberWithStatus = [[NSMutableArray alloc] init];
-                // Phone Number type at index 0
-                [numberWithStatus setObject:numberType atIndexedSubscript:0];
-                // Phone Number at index 1
-                [numberWithStatus setObject:(NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i)) atIndexedSubscript:1];
-                // Phone Number SMS status at index 2
-                [numberWithStatus setObject:@"0" atIndexedSubscript:2];
-                // Phone Number CALL status at index 3
-                [numberWithStatus setObject:@"0" atIndexedSubscript:3];
                 
-                [allNumbers addObject:numberWithStatus];
+                NSString *phoneNumberStr = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
+                phoneNumberStr = [[phoneNumberStr componentsSeparatedByCharactersInSet:onlyAllowedChars] componentsJoinedByString:@""];
+                
+                NBPhoneNumber *myNumber = [phoneUtil parse:phoneNumberStr
+                                             defaultRegion:countryCode error:&phoneUtilError];
+
+                if ( phoneUtilError == nil ) {
+                    //NBEPhoneNumberFormatE164 it is the formate required in twillio
+                    phoneNumberStr = [phoneUtil format:myNumber numberFormat:NBEPhoneNumberFormatE164
+                                                    error:&phoneUtilError];
+                }
+                
+                if( phoneUtilError != nil ){
+                    NSMutableArray *numberWithStatus = [[NSMutableArray alloc] init];
+                    // Phone Number type at index 0
+                    [numberWithStatus setObject:numberType atIndexedSubscript:0];
+                    // Phone Number at index 1
+                    [numberWithStatus setObject:phoneNumberStr atIndexedSubscript:1];
+                    // Phone Number SMS status at index 2
+                    [numberWithStatus setObject:@"0" atIndexedSubscript:2];
+                    // Phone Number CALL status at index 3
+                    [numberWithStatus setObject:@"0" atIndexedSubscript:3];
+                    
+                    [allNumbers addObject:numberWithStatus];
+                }
             }
         }
         
