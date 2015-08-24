@@ -30,5 +30,4 @@
 @property int totalUntechables;
 @property NSString *callReset;
 
-
 @end

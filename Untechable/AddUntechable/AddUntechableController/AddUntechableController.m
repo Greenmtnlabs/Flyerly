@@ -16,7 +16,8 @@
 
 @interface AddUntechableController (){
     
-    NSArray *_pickerData;
+    NSMutableArray *_pickerData;
+    BOOL showDefaultCustomMessage;
     
 }
 
@@ -61,6 +62,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    showDefaultCustomMessage = YES;
 
     [self setDefaultModel];
     
@@ -72,6 +75,9 @@
     
     // Initialize Data
     _pickerData = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];;
+    
+    // remove last element from array which is "Custom"
+    [_pickerData removeObjectAtIndex: _pickerData.count-1];
     
     // Connect data
     _spendingTimeTextPicker.dataSource = self;
@@ -106,7 +112,6 @@
         [self dateChanged];
     }
 }
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -276,6 +281,8 @@
         }
         
         if( goToNext ) {
+            
+            showDefaultCustomMessage = NO;
             ContactsListControllerViewController *listController = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
             listController.untechable = untechable;
             [self.navigationController pushViewController:listController animated:YES];
@@ -379,7 +386,17 @@
 -(void)showHideTextPicker:(BOOL)showHide{
     
     // set the selected default message or custom message in pickerview if already selected
-    NSInteger positionToRemember = [[NSUserDefaults standardUserDefaults] integerForKey:@"positionToRemember"];
+    
+    NSInteger positionToRemember;
+    
+    if(showDefaultCustomMessage){
+        positionToRemember = [[NSUserDefaults standardUserDefaults]
+                              integerForKey:@"positionToRemember"];
+    } else {
+        positionToRemember = [[NSUserDefaults standardUserDefaults]
+                              integerForKey:@"tempPositionToRemember"];
+    }
+
     [self.spendingTimeTextPicker selectRow:positionToRemember inComponent:0 animated:NO];
     
     if ( IS_IPHONE_4 ){
@@ -603,6 +620,11 @@
     
     int len = (int)_inputSpendingTimeText.text.length;
     _char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
+   
+    // set the selected default message or custom message position
+    [[NSUserDefaults standardUserDefaults] setInteger:row forKey:@"tempPositionToRemember"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+  
 }
 
 /**
@@ -626,9 +648,15 @@
  **/
 -(void)setPickerValue {
     // Initialize Data
-    NSInteger positionToRemember = [[NSUserDefaults standardUserDefaults]
-                            integerForKey:@"positionToRemember"];
-
+    NSInteger positionToRemember;
+    
+    if(showDefaultCustomMessage){
+         positionToRemember = [[NSUserDefaults standardUserDefaults]
+                            integerForKey:@"tempPositionToRemember"];
+    } else {
+        positionToRemember = [[NSUserDefaults standardUserDefaults]
+                              integerForKey:@"positionToRemember"];
+    }
     [_spendingTimeTextPicker selectRow:positionToRemember inComponent:0 animated:YES];
     [_spendingTimeTextPicker reloadAllComponents];
     _inputSpendingTimeText.text = [_pickerData objectAtIndex:positionToRemember];
