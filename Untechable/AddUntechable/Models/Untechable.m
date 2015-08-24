@@ -14,7 +14,7 @@
 @implementation Untechable
 
 //Settings
-@synthesize socialNetworksStatusModal, commonFunctions, dic, paid, userId, rUId, eventId, untechablePath, dateFormatter, savedOnServer, hasFinished;
+@synthesize socialNetworksStatusModal, commonFunctions, dic, paid, userId, rUId, eventId, dateFormatter, savedOnServer, hasFinished;
 
 //SetupGuide Screen 1 Data
 @synthesize userName, userPhoneNumber;
@@ -87,42 +87,13 @@
     return uniqId;
 }
 
-
-
 /*
-    Check untechablePath ( folder ) exist in device, if not then create and return the directory url
- */
--(BOOL)initUntechableDirectory
-{
-    BOOL hasInit = NO;
-    BOOL isDir;
-    NSFileManager *fm = [NSFileManager defaultManager];
-
-    if(![fm fileExistsAtPath:untechablePath isDirectory:&isDir])
-    {
-        if([fm createDirectoryAtPath:untechablePath withIntermediateDirectories:YES attributes:nil error:nil]){
-            NSLog(@"New Directory Created");
-            hasInit = YES;
-        }
-        else{
-            NSLog(@"Directory Creation Failed");
-        }
-    }
-    else {
-        NSLog(@"Directory Already Exist");
-       [self setOrSaveVars:RESET dic2:dic];
-        hasInit = YES;
-    }
-    
-    return hasInit;
-}
-
-/*
-    if setOrSAve: SAVE
-    save instance variables into dic, then save that dic into .piecs file
+    if setOrSAve: SAVE ( in this case we have no need of dic2, it can be nil )
+    save instance variables into dic
  
-    else if setOrSAve: SAVE
-    get dic( must have untechablePath ) , then update instance variables a/c .pieces file
+    else if setOrSAve: RESET dic2: must required NSMutableDictionary
+    in this case we update all instance variable with dic2
+ 
  */
 -(void)setOrSaveVars:(NSString *)setOrSAve dic2:(NSMutableDictionary *)dic2{
 
@@ -132,7 +103,6 @@
         dic[@"eventId"]         = eventId;
         dic[@"paid"]            = paid ? @"YES" : @"NO";
         dic[@"userId"]          = userId;
-        dic[@"untechablePath"]  = untechablePath;
         dic[@"savedOnServer"]   = savedOnServer ? @"YES" : @"NO";
         dic[@"hasFinished"]     = hasFinished ? @"YES" : @"NO";        
         

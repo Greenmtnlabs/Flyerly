@@ -25,7 +25,6 @@
 @property (nonatomic, assign) BOOL paid;
 @property (strong, nonatomic) NSString *userId;
 @property (strong, nonatomic) NSString *eventId, *rUId;
-@property (strong, nonatomic) NSString *untechablePath;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, assign) BOOL savedOnServer;
 @property (nonatomic, assign) BOOL hasFinished;
@@ -64,7 +63,6 @@
 
 
 -(NSString *)getUniqueId;
--(BOOL)initUntechableDirectory;
 -(void)setOrSaveVars:(NSString *)setOrSAve dic2:(NSMutableDictionary *)dic2;
 -(void)initWithDefValues;
 
