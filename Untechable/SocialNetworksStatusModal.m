@@ -219,7 +219,7 @@
         
         // Show the user the logged-in UI
         mFbAuth = [[[FBSession activeSession] accessTokenData] accessToken];
-        mFbAuthExpiryTs = [commonFunctions nsDateToTimeStampStr:[[[FBSession activeSession] accessTokenData] expirationDate]];
+        mFbAuthExpiryTs = [commonFunctions convertNSDateToTimestamp:[[[FBSession activeSession] accessTokenData] expirationDate]];
         NSLog(@"Session opened new mFbAuth=%@ \n mFbAuthExpiryTs=%@ ", mFbAuth, mFbAuthExpiryTs);
         
         return;

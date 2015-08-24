@@ -17,8 +17,6 @@
 @implementation AppDelegate
 
 
-
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     NSLog( @"homeDirectoryPath this will help us in finding realm file: %@", NSHomeDirectory() );
@@ -54,7 +52,6 @@
     
     [self.window makeKeyAndVisible];
     return YES;
-
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -93,9 +90,6 @@
     // For example: when the user presses the iOS "home" button while the login dialog is active
     [FBAppCall handleDidBecomeActive];
 }
-
-
-
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {

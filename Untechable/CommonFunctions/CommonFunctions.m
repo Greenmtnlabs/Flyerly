@@ -108,8 +108,8 @@
     return timezoneoffset3;
 }
 
-- (NSString *)nsDateToTimeStampStr:(NSDate *)inpDate {
-    return [NSString stringWithFormat:@"%.0f",[inpDate timeIntervalSince1970]];
+- (NSString *)convertNSDateToTimestamp:(NSDate *)nsDate {
+    return [NSString stringWithFormat:@"%.0f",[nsDate timeIntervalSince1970]];
 }
 - (NSDate *)timestampStrToNsDate:(NSString *)timeStamp {
     return [NSDate dateWithTimeIntervalSince1970:[timeStamp integerValue]];

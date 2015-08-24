@@ -339,7 +339,7 @@
 -(void)dateChanged
 {
     NSString *dateStr, *pickerTimeStampStr;
-    pickerTimeStampStr   = [untechable.commonFunctions nsDateToTimeStampStr:[_picker date]];
+    pickerTimeStampStr   = [untechable.commonFunctions convertNSDateToTimestamp:[_picker date]];
 	dateStr = [untechable.dateFormatter stringFromDate:[_picker date]];
 
     NSString *nowDateStr = [untechable.dateFormatter stringFromDate:[NSDate date]];
@@ -356,7 +356,7 @@
     
         if( [untechable.commonFunctions isEndDateGreaterThanStartDate:endD endDate: startD] ){
             endD = [startD dateByAddingTimeInterval:(60*60*24)];
-            untechable.endDate = [untechable.commonFunctions nsDateToTimeStampStr:endD]; //current time +1 day
+            untechable.endDate = [untechable.commonFunctions convertNSDateToTimestamp:endD]; //current time +1 day
             NSString *dateStrUpdated = [untechable.dateFormatter stringFromDate:endD];
             [_btnEndTime setTitle:dateStrUpdated forState:UIControlStateNormal];
         }
@@ -513,7 +513,7 @@
     [self showHideDateTimePicker:NO];
     
     if( !([_cbNoEndDate isSelected]) ){
-        untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*60*24)] ]; //current time +1 Day
+        untechable.endDate  = [untechable.commonFunctions convertNSDateToTimestamp: [[NSDate date] dateByAddingTimeInterval:(60*60*24)] ]; //current time +1 Day
     }
     [self pickerSetAcTo:@"_btnEndTime"];
 }

@@ -20,7 +20,7 @@
 -(NSMutableArray *)convertJsonStringIntoCCMArray:(NSString *)customizedContactsString;
 -(NSMutableDictionary *)convertJsonStringIntoDictinoary:(NSString *)value;
 -(NSString *)getTimeZoneOffset;
--(NSString *)nsDateToTimeStampStr:(NSDate *)inpDate;
+-(NSString *)convertNSDateToTimestamp:(NSDate *) nsDate;
 -(NSDate *)timestampStrToNsDate:(NSString *)timeStamp;
 -(NSString *)timestampStrToAppDate:(NSString *)timeStamp;
 
