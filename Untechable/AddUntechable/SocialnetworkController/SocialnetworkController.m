@@ -135,27 +135,18 @@
     NSString *startTimeStamp = [ untechable startDate];
     NSString *endTimeStamp = [ untechable endDate];
     NSString *getDaysOrHours = [ self calculateHoursDays:startTimeStamp  endTime: endTimeStamp];
-    
-    
-    
-    
-    
+   
     NSString *socialStatus;
     
     if( [untechable.rUId isEqualToString:@"1"] ) {
-        
         socialStatus = untechable.spendingTimeTxt;
-        
     } else {
-        
         socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", getDaysOrHours,untechable.spendingTimeTxt];
     }
     
     [inputSetSocialStatus setText:socialStatus];
     int len = (int)inputSetSocialStatus.text.length;
     char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
-    
-
     
     [self.btnFacebook setTitleColor:( [untechable.fbAuth isEqualToString:@""] ? DEF_GRAY : DEF_GREEN ) forState:UIControlStateNormal];
     self.btnFacebook.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
@@ -175,7 +166,6 @@
     int remainingMinutes;
     double start = [startTime doubleValue];
     double end = [endTime doubleValue];
-    
     
     NSString *daysOrHoursToBeShown;
     int OneMinute = 60;
@@ -230,8 +220,7 @@
             daysOrHoursToBeShown = [NSString stringWithFormat:@"%i minutes", remainingMinutes];
         }
     }
-    
-
+ 
     NSLog(@"Number of days or hours: %@", daysOrHoursToBeShown);
     return daysOrHoursToBeShown;
 }

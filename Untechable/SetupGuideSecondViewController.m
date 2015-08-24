@@ -29,6 +29,7 @@
     //navigation related Stuff
     [self setNavigationBarItems];
     
+    [self setDefaultUntechSpendingTimeText];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,7 +40,6 @@
 
 -(void)viewDidAppear:(BOOL)animated {    
     [super viewDidAppear:animated];
-
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -62,9 +62,6 @@
     
     self.setupSpendingTimeText.dataSource = self;
     self.setupSpendingTimeText.delegate = self;
-    
-
-    
 }
 
 /**
@@ -108,19 +105,13 @@
 
 // Catpure the picker view selection
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    
-    NSInteger positionToRemember = 0;
 
     if( [[customSpendingTextAry objectAtIndex:row] isEqualToString:@"Custom"] ) {
         [self showAddFieldPopUp];
     } else  {
         [self setupDoctorsResearchLabel:[customSpendingTextAry objectAtIndex:row]];
         untechable.spendingTimeTxt = [customSpendingTextAry objectAtIndex:row];
-        positionToRemember = (NSInteger)row;
     }
-    
-    [[NSUserDefaults standardUserDefaults] setInteger:positionToRemember forKey:@"positionToRemember"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 //the size of the fonts in picker view was big for iphone 5 and small for iphone 6
@@ -174,9 +165,11 @@
         //Update new msg in doctors research string
         [self setupDoctorsResearchLabel:newMsg];
         
+        // save new Custom message to model 
+        untechable.spendingTimeTxt = [customSpendingTextAry objectAtIndex:position];
+        
         // reloading the new picker view with custom messages
         [_setupSpendingTimeText reloadAllComponents];
-        
 
     }
 }
@@ -188,7 +181,6 @@
     
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    
 }
 
 -(void)setNavigation:(NSString *)callFrom {
@@ -273,6 +265,23 @@
     if( untechable.spendingTimeTxt == nil || [untechable.spendingTimeTxt isEqualToString:@""] ) {
         untechable.spendingTimeTxt = [customSpendingTextAry objectAtIndex:0];
     }
+}
+
+/**
+ * This method set default untech
+ * spending time text in picker view
+ */
+
+-(void)setDefaultUntechSpendingTimeText{
+    // set the selected default message or custom message in pickerview if already selected
+    int positionToShow;
+    for (int i = 0; i<customSpendingTextAry.count; i++) {
+        if([customSpendingTextAry[i] isEqualToString:untechable.spendingTimeTxt] ){
+            positionToShow = i;
+            break;
+        }
+    }
+    [self.setupSpendingTimeText selectRow:positionToShow inComponent:0 animated:NO];
 }
 
 @end
