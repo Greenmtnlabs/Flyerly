@@ -94,7 +94,7 @@
     
     [_lblStartDateTime setTextColor:DEF_GREEN];
     _lblStartDateTime.font = [UIFont fontWithName:APP_FONT size:20];
-    _lblStartDateTime.text = [untechable.commonFunctions timestampStrToAppDate:untechable.startDate];
+    _lblStartDateTime.text = [untechable.commonFunctions convertTimestampToAppDate:untechable.startDate];
     
     
     [_lblEnd setTextColor:DEF_GRAY];
@@ -103,7 +103,7 @@
     
     [_lblEndDateTime setTextColor:DEF_GREEN];
     _lblEndDateTime.font = [UIFont fontWithName:APP_FONT size:20];
-    _lblEndDateTime.text = [untechable.commonFunctions timestampStrToAppDate:untechable.endDate];
+    _lblEndDateTime.text = [untechable.commonFunctions convertTimestampToAppDate:untechable.endDate];
     
     [_lblForwadingNumber setTextColor:DEF_GRAY];
     _lblForwadingNumber.font = [UIFont fontWithName:APP_FONT size:20];

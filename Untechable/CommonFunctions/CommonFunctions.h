@@ -22,7 +22,7 @@
 -(NSString *)getTimeZoneOffset;
 -(NSString *)convertNSDateToTimestamp:(NSDate *) nsDate;
 -(NSDate *)convertTimestampToNSDate:(NSString *)timestamp;
--(NSString *)timestampStrToAppDate:(NSString *)timeStamp;
+-(NSString *)convertTimestampToAppDate:(NSString *)timestamp;
 
 - (NSString *)timestampStringToAppDateTime:(NSString *)timeStam;
 - (NSString *)timestampStringToAppDate:(NSString *)timeStam;
