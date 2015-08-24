@@ -759,14 +759,13 @@
     [self.navigationController pushViewController:thankyouScreen animated:YES];
 }
 -( void )setTimeAcToCurVars {
-    
     NSInteger positionToShow = 0;
     
-    untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60)] ]; //current time + time duration
+    untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(0)] ]; //current time
     untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)] ]; //start time + selected time duration
     
+    
     // the selected status from the setup screen would be set as default status on unetch now option
-
     NSArray *customArrayOfStatuses = [[NSUserDefaults standardUserDefaults]objectForKey:@"cutomSpendingTimeTextAry"];
     
     for (int i = 0; i<customArrayOfStatuses.count; i++) {
