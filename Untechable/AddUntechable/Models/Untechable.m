@@ -23,8 +23,6 @@
 @synthesize timezoneOffset, spendingTimeTxt, startDate, endDate, hasEndDate;
 
 //2-vars for screen2
-//@synthesize customizedContacts,twillioNumber, location, emergencyContacts, emergencyNumber, hasRecording,customizedContactsForCurrentSession;
-
 @synthesize customizedContacts, twillioNumber, location ,customizedContactsForCurrentSession;
 
 //3-vars for screen3
@@ -34,7 +32,7 @@
 @synthesize email, password, respondingEmail,acType, iSsl, oSsl, imsHostName, imsPort, omsHostName, omsPort;
 
 /*
- * load extras of untechable
+ * Initialize untechable object with required models initialization
  */
 - (id)initWithCF{
     self = [super init];
@@ -43,17 +41,18 @@
     return self;
 }
 
+/**
+ * Common function for going back to previous screen
+ */
 -(void)goBack:navigationControllerPointer{
     [navigationControllerPointer popViewControllerAnimated:YES];
     // Remove observers
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-/******************** ******************** ******************** ******************** ********************/
-
 /**
  *
- * This method ensures a unique ID is assigned to each element.
+ * @return: Unique Id in string formate
  */
 - (NSString *)getUniqueId {
     static int randomNumber = 0;
@@ -188,30 +187,17 @@
 
 }
 
+/**
+ * Reset contacts into session contact variable
+ */
 -(void) reSetCustomizedContactsInSession {
     customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:customizedContacts];
 }
 
-/*
- *Here we sort Array in Desending order for Exact Render of Flyer
- * as last saved.
+/**
+ * @return: is current untechable started
  */
-NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
-    
-    // Convert both strings to integers
-    long long intLeft = [stringLeft longLongValue];
-    long long intRight = [stringRight longLongValue];
-    
-    if (intLeft < intRight)
-        return NSOrderedDescending;
-    else if (intLeft > intRight)
-        return NSOrderedAscending;
-    else
-        return NSOrderedSame;
-}
-
-- (BOOL)isUntechableStarted
-{
+- (BOOL)isUntechableStarted {
     BOOL started = NO;
     
     NSDate* date1 = [commonFunctions timestampStrToNsDate:startDate];
@@ -222,14 +208,11 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     return started;
 }
 
-- (BOOL)isUntechableExpired
-{
+/**
+ * @return: is current untechable expired
+ */
+- (BOOL)isUntechableExpired {
     BOOL expired = NO;
-    
-    
-    if( hasEndDate == NO ){
-        //expired = YES;
-    }
     
     if( expired == NO ){
         NSDate* date1 = [commonFunctions timestampStrToNsDate:endDate];
@@ -237,27 +220,30 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
             expired = YES;
         }
     }
-    
     return expired;
 }
 
-#pragma mark -  Twitter functions
-
 #pragma mark - Save in realm
+/**
+ * Save running instance into realm database
+ */
 -(void)saveOrUpdateInDb{
-    //Save setting untechable in data base
     [[RLMRealm defaultRealm] transactionWithBlock:^{
         [self setOrSaveVars:SAVE dic2:nil];
         if([rUId isEqualToString:@"1"])
         [RSetUntechable createOrUpdateInDefaultRealmWithValue:self.dic];
         else
         [RUntechable createOrUpdateInDefaultRealmWithValue:self.dic];
-        
-        NSLog(@"SAved in db");
     }];
 }
 
 #pragma mark - Send to Server
+/**
+ * Send untechable to server
+ * 1- Save into database
+ * 2- Send to server
+ * @Callback: 3- callback function will be invoked when we got response from api
+ */
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack{
 
     [self saveOrUpdateInDb];
@@ -267,8 +253,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         callBack(NO, @"Thankyou");
         return;
     }
-
-    
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:API_SAVE]];
@@ -310,19 +294,12 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [request setHTTPBody:body];
     
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    // NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
-    
-    //[self setNextHighlighted:NO];
-    
     BOOL errorOnFinish = NO;
     NSString *message = @"";
     
     if( returnData != nil ){
         
         NSDictionary *dict=[NSJSONSerialization JSONObjectWithData:returnData options:NSJSONReadingMutableLeaves error:nil];
-        NSLog(@"In response of save api: %@",dict);
-        
-        
         
         if( [[dict valueForKey:@"status"] isEqualToString:@"OK"] ) {
             
@@ -350,6 +327,10 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     callBack(errorOnFinish, message);
 }
 
+/**
+ * @return: When we have all neccessory data required for sending email then we can show skip button,
+            on email setting related screens
+ */
 -(BOOL)canSkipEmailSetting{
     BOOL showSkip = NO;
     BOOL hasEmailAndPassword = !( [email isEqualToString:@""] || [password isEqualToString:@""]);
