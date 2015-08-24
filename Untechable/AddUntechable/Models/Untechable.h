@@ -49,7 +49,7 @@
 
 - (id)initWithCommonFunctions;
 -(void)goBack:navigationControllerPointer;
--(NSString *)getUniqueId;
+-(NSString *)generateUniqueId;
 -(void)addOrUpdateInModel:(NSString *)command dictionary:(NSMutableDictionary *)dictionary;
 -(BOOL)isUntechableStarted;
 -(BOOL)isUntechableExpired;

@@ -169,7 +169,7 @@
     RLMResults *unsortedSetObjects = [RSetUntechable objectsWhere:@"rUId == '1'"];
     RSetUntechable *rSetUntechable = unsortedSetObjects[0];
     NSMutableDictionary *dic = [rSetUntechable getModelDic];
-    dic[@"rUId"] = [untechable getUniqueId];
+    dic[@"rUId"] = [untechable generateUniqueId];
     
     [untechable addOrUpdateInModel:UPDATE dictionary:dic];
     

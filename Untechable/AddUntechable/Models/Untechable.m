@@ -52,12 +52,12 @@
 
 /**
  *
- * @return: Unique Id in string formate
+ * @return: Unique Id in the form of string
  */
-- (NSString *)getUniqueId {
+- (NSString *)generateUniqueId {
     static int randomNumber = 0;
     
-    // Create Unique ID even within a second
+    // Generates Unique ID even within a second
     int timestamp = [[NSDate date] timeIntervalSince1970];
     randomNumber = (randomNumber + 1) % 100;
     
@@ -206,7 +206,7 @@
 }
 
 /**
- * @return: is current untechable expired
+ * @return: BOOL ( whether current untechable is started)
  */
 - (BOOL)isUntechableExpired {
     BOOL expired = NO;
