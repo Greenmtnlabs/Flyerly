@@ -17,8 +17,6 @@
 @interface AddUntechableController (){
     
     NSMutableArray *_pickerData;
-    BOOL showDefaultCustomMessage;
-    
 }
 
 @property (strong, nonatomic) IBOutlet UIButton *btnLblWwud;
@@ -62,8 +60,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    showDefaultCustomMessage = YES;
 
     [self setDefaultModel];
     
@@ -71,13 +67,14 @@
     
     [self showHideDateTimePicker:NO];
     
-    [self showHideTextPicker:NO];
-    
     // Initialize Data
     _pickerData = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];;
     
     // remove last element from array which is "Custom"
     [_pickerData removeObjectAtIndex: _pickerData.count-1];
+
+    
+    [self showHideTextPicker:NO];
     
     // Connect data
     _spendingTimeTextPicker.dataSource = self;
@@ -281,8 +278,6 @@
         }
         
         if( goToNext ) {
-            
-            showDefaultCustomMessage = NO;
             ContactsListControllerViewController *listController = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
             listController.untechable = untechable;
             [self.navigationController pushViewController:listController animated:YES];
@@ -385,20 +380,17 @@
 
 -(void)showHideTextPicker:(BOOL)showHide{
     
-    // set the selected default message or custom message in pickerview if already selected
+    // set the selected default message or custom message in pickerview
     
-    NSInteger positionToRemember;
-    
-    if(showDefaultCustomMessage){
-        positionToRemember = [[NSUserDefaults standardUserDefaults]
-                              integerForKey:@"positionToRemember"];
-    } else {
-        positionToRemember = [[NSUserDefaults standardUserDefaults]
-                              integerForKey:@"tempPositionToRemember"];
+    NSInteger positionToShow;
+    for (int i = 0; i<_pickerData.count; i++) {
+        if([_pickerData[i] isEqualToString:untechable.spendingTimeTxt] ){
+            positionToShow = i;
+            break;
+        }
     }
+    [self.spendingTimeTextPicker selectRow:positionToShow inComponent:0 animated:NO];
 
-    [self.spendingTimeTextPicker selectRow:positionToRemember inComponent:0 animated:NO];
-    
     if ( IS_IPHONE_4 ){
         [_pickerCloseBtn setFrame:CGRectMake(-2, 300, 580, 30)];
         [_spendingTimeTextPicker setFrame:CGRectMake(0, 300, 0, 140)];
@@ -493,7 +485,7 @@
     
     [_btnLblWwud setTitleColor:DEF_GRAY forState:UIControlStateNormal];
     _btnLblWwud.titleLabel.font = [UIFont fontWithName:APP_FONT size:25];
-
+ 
     _inputSpendingTimeText.text = untechable.spendingTimeTxt;
     if ( [untechable.spendingTimeTxt isEqualToString:@""] ){
         _inputSpendingTimeText.text = @"e.g Spending time with family.";
@@ -643,23 +635,5 @@
     [self.view addSubview:_spendingTimeTextPicker];
 }
 
-/**
- Setting Picker Value Got From Setting Screen
- **/
--(void)setPickerValue {
-    // Initialize Data
-    NSInteger positionToRemember;
-    
-    if(showDefaultCustomMessage){
-         positionToRemember = [[NSUserDefaults standardUserDefaults]
-                            integerForKey:@"tempPositionToRemember"];
-    } else {
-        positionToRemember = [[NSUserDefaults standardUserDefaults]
-                              integerForKey:@"positionToRemember"];
-    }
-    [_spendingTimeTextPicker selectRow:positionToRemember inComponent:0 animated:YES];
-    [_spendingTimeTextPicker reloadAllComponents];
-    _inputSpendingTimeText.text = [_pickerData objectAtIndex:positionToRemember];
-    
-}
+
 @end
