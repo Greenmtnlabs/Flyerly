@@ -55,7 +55,7 @@
 -(BOOL)isUntechableExpired;
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack;
 -(void)addOrUpdateInDatabase;
--(void)reSetCustomizedContactsInSession;
+-(void)resetCustomizedContactsForCurrentSession;
 -(BOOL)canSkipEmailSetting;
 
 @end

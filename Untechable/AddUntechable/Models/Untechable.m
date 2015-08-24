@@ -98,7 +98,7 @@
         
         dic[@"customizedContacts"] = [commonFunctions convertCCMArrayIntoJsonString:customizedContactsForCurrentSession];
         customizedContacts = ( dic[@"customizedContacts"] ) ? dic[@"customizedContacts"] : @"";
-        [self reSetCustomizedContactsInSession];
+        customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:customizedContacts];
         
         //Screen3 vars
         dic[@"socialStatus"] = socialStatus;
@@ -187,7 +187,7 @@
 /**
  * Reset contacts into session contact variable
  */
--(void) reSetCustomizedContactsInSession {
+-(void) resetCustomizedContactsForCurrentSession {
     customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:customizedContacts];
 }
 

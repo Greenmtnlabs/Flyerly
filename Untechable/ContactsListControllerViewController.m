@@ -160,7 +160,7 @@
     [self setSkipHighlighted:NO];
     
     //reset contacts from model
-    [untechable reSetCustomizedContactsInSession];
+    [untechable resetCustomizedContactsForCurrentSession];
     [self mapAllSessionContactSelectionsOnMobileArray];
     
     [self onNext];
