@@ -6,3 +6,6 @@ pod 'IOSLinkedInAPI', '2.0.0'
 pod 'CrittercismSDK', '5.2.4'
 pod 'Realm', '0.93.2'
 pod 'libPhoneNumber-iOS', '~> 0.8'
+
+# Open SSL, required for RMAppReceipt
+pod 'OpenSSL', '~> 1.0.201'

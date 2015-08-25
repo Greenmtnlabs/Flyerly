@@ -53,7 +53,7 @@
 #define DEVELOPMENT @"DEVELOPMENT"
 #define PRODUCTION @"PRODUCTION"
 
-#define UNT_ENVIRONMENT PRODUCTION
+#define UNT_ENVIRONMENT TESTING
 
 //#define SERVER_URL @"http://192.168.0.109:3000" //LOCALHOST
 //#define SERVER_URL @"http://riksof.com:8000"    //DEVELOPMENT
@@ -98,3 +98,8 @@
 #define DEF_GREEN [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0]
 #define DEF_GRAY [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0]
 #define DEF_SPENDING_TIME_ARY @[@"Spending time with family.", @"Driving.", @"Spending time outdoors.", @"At the beach.", @"Enjoying the holidays.", @"Just needed a break.", @"Running.", @"On vacation.", @"Finding my inner peace.", @"Removing myself from technology.", @"Custom"]
+
+
+#define PRO_MONTHLY_SUBS @"com.untech.MonthlySubscription"
+#define PRO_YEARLY_SUBS @"com.untech.YearlySubscription"
+

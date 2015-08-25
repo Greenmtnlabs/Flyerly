@@ -15,6 +15,7 @@
 #import "ThankyouController.h"
 #import "RUntechable.h"
 #import "RSetUntechable.h"
+#import "UserPurchases.h"
 
 
 @interface UntechablesList () {
@@ -28,7 +29,7 @@
     NSArray *_pickerData;
     int timeDuration;
     NSString *timeInString;
-
+    UserPurchases *userPurchases;
 }
 
 @end
@@ -71,6 +72,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    userPurchases = [UserPurchases getInstance];
     
     //setting default time duration for untech now
     timeDuration = 30*60; //30 minutes
@@ -718,7 +721,26 @@
     
     [_timeDurationPicker setHidden:YES];
     [_doneButtonView setHidden:YES];
+
+    [self checkPayment];
+}
+
+-(void)checkPayment{
+    BOOL haveValidSubscription = [userPurchases isSubscriptionValid];
+
     
+    if( haveValidSubscription ){        
+        //[self createUntechableAfterPaymentCheck];
+    } else{
+        
+    }
+        
+        
+
+}
+
+-(void)createUntechableAfterPaymentCheck{
+
     [self changeNavigation:@"ON_FINISH"];
     
     // Background work
