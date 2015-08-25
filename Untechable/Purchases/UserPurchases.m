@@ -8,15 +8,18 @@
  */
 #import "UserPurchases.h"
 #import "RMAppReceipt.h"
+#import "RMStore.h"
+#import "SKProduct+LocalPrice.h"
 #import "Common.h"
 
 
 
-@implementation UserPurchases
-
-
+@implementation UserPurchases{
+    
+}
 
 static UserPurchases *sharedSingleton = nil;
+@synthesize productArray;
 
 /**
  * This method would be called by runtime only once per class, and we are initializing
@@ -31,6 +34,64 @@ static UserPurchases *sharedSingleton = nil;
 
 + (id) getInstance {
     return sharedSingleton;
+}
+
+/*
+ * load all products from store 
+ */
+-(void)loadAllProducts:(void(^)(NSString *))callBack{
+    
+    //Check For Crash Maintain
+    NSArray *productIdentifiersAry = @[PRO_MONTHLY_SUBS, PRO_YEARLY_SUBS];
+    //These are over Products on App Store
+    NSSet *productIdentifiers = [NSSet setWithArray:productIdentifiersAry];
+    
+    [[RMStore defaultStore] requestProducts:productIdentifiers success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
+        
+        productArray = [[NSMutableArray alloc] init];
+        
+        for(NSString *identifier in productIdentifiersAry){
+            for(SKProduct *product in products)
+            {
+                if( [identifier isEqualToString:product.productIdentifier]){
+                    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                          product.localizedTitle,@"packagename",
+                                          product.priceAsString,@"packageprice" ,
+                                          product.localizedDescription,@"packagedesciption",
+                                          product.productIdentifier,@"productidentifier" , nil];
+                    
+                    [productArray addObject:dict];
+                    break;
+                }
+            }
+        }
+        
+        if( callBack != nil )
+        callBack(@"");
+        
+    } failure:^(NSError *error) {
+        if( callBack != nil )
+        callBack(@"Something went wrong, while loading products.");
+    }];
+}
+
+/*
+ HERE WE PURCHASE PRODUCT FROM APP STORE
+ When user tap on product for purchase
+ */
+-(void)purchaseProductID:(NSString *)productidentifier{
+    
+    [[RMStore defaultStore] addPayment:productidentifier success:^(SKPaymentTransaction *transaction) {
+        
+        NSLog(@"Product purchased");
+        
+        
+        
+    } failure:^(SKPaymentTransaction *transaction, NSError *error) {
+        
+        NSLog(@"Something went wrong");
+        
+    }];
 }
 
 /**
@@ -55,4 +116,3 @@ static UserPurchases *sharedSingleton = nil;
 }
 
 @end
-

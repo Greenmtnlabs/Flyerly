@@ -243,6 +243,7 @@
 		C3DC2E251B8C77070091CCF4 /* RMStoreTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DC2E1C1B8C77070091CCF4 /* RMStoreTransaction.m */; };
 		C3DC2E261B8C77070091CCF4 /* RMStoreTransactionReceiptVerificator.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DC2E1E1B8C77070091CCF4 /* RMStoreTransactionReceiptVerificator.m */; };
 		C3DC2E271B8C77070091CCF4 /* RMStoreUserDefaultsPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DC2E201B8C77070091CCF4 /* RMStoreUserDefaultsPersistence.m */; };
+		C3DC2E2A1B8C8B6A0091CCF4 /* SKProduct+LocalPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DC2E291B8C8B6A0091CCF4 /* SKProduct+LocalPrice.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -545,6 +546,8 @@
 		C3DC2E1E1B8C77070091CCF4 /* RMStoreTransactionReceiptVerificator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStoreTransactionReceiptVerificator.m; sourceTree = "<group>"; };
 		C3DC2E1F1B8C77070091CCF4 /* RMStoreUserDefaultsPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStoreUserDefaultsPersistence.h; sourceTree = "<group>"; };
 		C3DC2E201B8C77070091CCF4 /* RMStoreUserDefaultsPersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStoreUserDefaultsPersistence.m; sourceTree = "<group>"; };
+		C3DC2E281B8C8B6A0091CCF4 /* SKProduct+LocalPrice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKProduct+LocalPrice.h"; sourceTree = "<group>"; };
+		C3DC2E291B8C8B6A0091CCF4 /* SKProduct+LocalPrice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKProduct+LocalPrice.m"; sourceTree = "<group>"; };
 		FC11B82CE184AE8B063B3995 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1098,6 +1101,8 @@
 		C3DC2E0F1B8C73620091CCF4 /* Purchases */ = {
 			isa = PBXGroup;
 			children = (
+				C3DC2E281B8C8B6A0091CCF4 /* SKProduct+LocalPrice.h */,
+				C3DC2E291B8C8B6A0091CCF4 /* SKProduct+LocalPrice.m */,
 				C3DC2E101B8C73620091CCF4 /* UserPurchases.h */,
 				C3DC2E111B8C73620091CCF4 /* UserPurchases.m */,
 				C3DC2E131B8C77070091CCF4 /* RMAppReceipt.h */,
@@ -1511,6 +1516,7 @@
 				24354D701A499F4F000EC781 /* ContactListCell.m in Sources */,
 				36561D7819D2C8A40069D897 /* main.m in Sources */,
 				C3DC2E221B8C77070091CCF4 /* RMStore.m in Sources */,
+				C3DC2E2A1B8C8B6A0091CCF4 /* SKProduct+LocalPrice.m in Sources */,
 				247402421B33CBD700459759 /* SetupGuideViewController.m in Sources */,
 				C3DC2E251B8C77070091CCF4 /* RMStoreTransaction.m in Sources */,
 				C3DC2E241B8C77070091CCF4 /* RMStoreKeychainPersistence.m in Sources */,

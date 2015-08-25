@@ -7,10 +7,14 @@
  *
  */
 #import <Foundation/Foundation.h>
-@interface UserPurchases : NSObject
+@interface UserPurchases : NSObject{
+
+}
 
 
+@property (strong, nonatomic) NSMutableArray *productArray;
 + (id) getInstance;
-- (BOOL) isSubscriptionValid;
+-(void)loadAllProducts:(void(^)(NSString *))callBack;
+- (BOOL)isSubscriptionValid;
 @end
 

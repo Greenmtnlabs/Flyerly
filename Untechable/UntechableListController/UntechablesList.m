@@ -304,7 +304,7 @@
     }
     
     // enables navigation when any error occurs
-    else if([option isEqualToString:@"ERROR_ON_FINISH"] ){
+    else if( [option isEqualToString:@"ERROR_ON_FINISH"] || [option isEqualToString:@"ALERT_CANCEL"]){
         btnStatusInt = 1;
     }
     else if ( [option isEqualToString:@"ON_FINISH_SUCCESS"] ){
@@ -721,28 +721,86 @@
     
     [_timeDurationPicker setHidden:YES];
     [_doneButtonView setHidden:YES];
-
+    [self changeNavigation:@"ON_FINISH"];
+    
     [self checkPayment];
 }
 
+
+//alert view delegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    //Alert tag = 0, while loading product cause an error prompts the alert
+    if( alertView.tag == 0 ) {
+        [self changeNavigation:@"ALERT_CANCEL"];
+    }
+    //Alert tag = 1, while showing products in alert
+    else if( alertView.tag == 1 ) {
+        if(buttonIndex == 1) {
+            //[self purchaseProduct:PRO_MONTHLY_SUBS];
+        } else if(buttonIndex == 2) {
+            //[self purchaseProduct:PRO_YEARLY_SUBS];
+        } else {
+            [self changeNavigation:@"ALERT_CANCEL"];
+        }
+    }
+}
+
+/**
+ * Check have valid subscription before creating untechable
+ */
 -(void)checkPayment{
     BOOL haveValidSubscription = [userPurchases isSubscriptionValid];
 
-    
-    if( haveValidSubscription ){        
+    if( haveValidSubscription ){
         //[self createUntechableAfterPaymentCheck];
     } else{
         
+        if( userPurchases.productArray != nil ){
+            [self showProductsForPurchase];
+        } else if( userPurchases.productArray == nil ){
+            [userPurchases loadAllProducts:^(NSString *errorMsg){
+                if( [errorMsg isEqualToString:@""] ){
+                    [self showProductsForPurchase];
+                } else{
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error occured while loading products"
+                                                                    message:errorMsg
+                                                                   delegate:self
+                                                          cancelButtonTitle:@"Close"
+                                                          otherButtonTitles: nil];
+                    alert.tag = 0;
+                    [alert show];
+                }
+                
+            }];
+        }
     }
-        
-        
+}
 
+-(void)showProductsForPurchase {
+    if( userPurchases.productArray.count > 1) {
+        NSMutableDictionary *prodDic = userPurchases.productArray[0];
+        NSString *monthlySubs = [NSString stringWithFormat:@"%@ - %@",
+                                 [prodDic objectForKey:@"packagename"],
+                                 [prodDic objectForKey:@"packageprice"]];
+        
+        prodDic = userPurchases.productArray[1];
+        NSString *yearlySubs = [NSString stringWithFormat:@"%@ - %@",
+                                 [prodDic objectForKey:@"packagename"],
+                                 [prodDic objectForKey:@"packageprice"]];
+        
+        // Show alert before start of match to purchase our product
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchase Subscription"
+                                                        message:@"You can purchase monthly and yearly subscription"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Not now"
+                                              otherButtonTitles: monthlySubs, yearlySubs ,nil];
+        alert.tag = 1;
+        [alert show];
+    }
 }
 
 -(void)createUntechableAfterPaymentCheck{
 
-    [self changeNavigation:@"ON_FINISH"];
-    
     // Background work
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){

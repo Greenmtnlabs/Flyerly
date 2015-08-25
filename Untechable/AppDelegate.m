@@ -13,6 +13,7 @@
 #import "UntechablesList.h"
 #import "SetupGuideViewController.h"
 #import "RSetUntechable.h"
+#import "UserPurchases.h"
 
 @implementation AppDelegate
 
@@ -20,6 +21,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     NSLog( @"homeDirectoryPath this will help us in finding realm file: %@", NSHomeDirectory() );
+    
+    UserPurchases *userPurchases = [UserPurchases getInstance];
+    [userPurchases loadAllProducts:^(NSString *errorMsg){}];
+
     
     [Crittercism enableWithAppID: CRITTERCISM_APP_ID];
     
