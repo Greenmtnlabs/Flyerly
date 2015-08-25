@@ -99,7 +99,14 @@
 #define DEF_GRAY [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0]
 #define DEF_SPENDING_TIME_ARY @[@"Spending time with family.", @"Driving.", @"Spending time outdoors.", @"At the beach.", @"Enjoying the holidays.", @"Just needed a break.", @"Running.", @"On vacation.", @"Finding my inner peace.", @"Removing myself from technology.", @"Custom"]
 
+// Screen 1
+
 #define TITLE_NAME @"Name"
 #define MESSAGE_NAME @"Please Enter Your Name"
 #define TITLE_PHONENUMBER @"Phone Number"
 #define MESSAGE_PHONENUMBER @"Please Enter Your Number"
+
+#define ERROR @"Error"
+#define ERROR_MESSAGE_PHONENUMBER @"Please Enter Your Name and Number"
+#define OK @"OK"
+

@@ -243,10 +243,10 @@
         
     } else {
         
-        UIAlertView *alert  = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                         message:@"Please Enter Your Name and Number"
+        UIAlertView *alert  = [[UIAlertView alloc] initWithTitle:NSLocalizedString(ERROR, nil)
+                                                         message:NSLocalizedString(ERROR_MESSAGE_PHONENUMBER, nil)
                                                         delegate:nil
-                                               cancelButtonTitle:@"OK"
+                                               cancelButtonTitle:NSLocalizedString(OK, nil)
                                                otherButtonTitles:nil, nil];
         [alert show];
     }
