@@ -42,9 +42,9 @@
     [self setNavigation:@"viewDidLoad"];
     [self updateUI];
     
-    //[self setDefaultModel];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"MMMM dd yyyy"];
+  
     //showing start date on fields
     NSDate *startDate  =   [untechable.commonFunctions convertTimestampToNSDate:untechable.startDate];
     NSString *newDateStr    =   [dateFormat stringFromDate:startDate];
@@ -57,8 +57,6 @@
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
     [self.keyboardControls setDelegate:self];
 }
-
-
 
 -(void)viewWillAppear:(BOOL)animated {
     [self updateUI];
@@ -78,13 +76,14 @@
     [super viewDidAppear:animated];
 }
 /*
- Hide keyboard on done button of keyboard press
+ * Hide keyboard on done button of keyboard press
  */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return NO;
 }
-// ________________________     Custom functions    ___________________________
+
+// Custom functions
 
 #pragma mark - Text View Delegate
 - (void)textViewDidBeginEditing:(UITextView *)textView
@@ -106,13 +105,10 @@
 
 #pragma mark - Keyboard Controls(< PREV , NEXT > )  Delegate
 
-- (void)keyboardControls:(BSKeyboardControls *)keyboardControls selectedField:(UIView *)field inDirection:(BSKeyboardControlsDirection)direction
-{
-    
+- (void)keyboardControls:(BSKeyboardControls *)keyboardControls selectedField:(UIView *)field inDirection:(BSKeyboardControlsDirection)direction {
 }
 
-- (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboardControls
-{
+- (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboardControls {
     [self.view endEditing:YES];
 }
 
@@ -239,7 +235,7 @@
 {
     if([callFrom isEqualToString:@"viewDidLoad"])
     {
-        // Left Navigation ________________________________________________________________________________________________________
+        // Left Navigation
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
         [backButton setTitle:TITLE_BACK_TXT forState:normal];
@@ -250,12 +246,13 @@
         UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         NSMutableArray  *leftNavItems  = [NSMutableArray arrayWithObjects:leftBarButton,nil];
         
-        [self.navigationItem setLeftBarButtonItems:leftNavItems]; //Left button ___________
+        // adds left button to navigation bar
+        [self.navigationItem setLeftBarButtonItems:leftNavItems];
         
-        // Center title ________________________________________
+        // Center title
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
-        // Right Navigation ________________________________________
+        // Right Navigation
         finishButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         [finishButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
         finishButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
@@ -265,7 +262,8 @@
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:finishButton];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
         
-        [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
+        // adds right button to navigation bar
+        [self.navigationItem setRightBarButtonItems:rightNavItems];
     }
 }
 
@@ -410,10 +408,6 @@
                 NSMutableArray *numberWithStatus = [[NSMutableArray alloc] init];
                 
                 numberWithStatus = [phoneNumbersWithStatus objectAtIndex:j];
-                
-                //NSString *phoneNumDecimalsOnly = [[[numberWithStatus objectAtIndex:1] componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
-                
-                //[numberWithStatus replaceObjectAtIndex:1 withObject:phoneNumDecimalsOnly];
                 
                 if ( [[numberWithStatus objectAtIndex:2] isEqualToString:@"0"] &&
                     [[numberWithStatus objectAtIndex:3] isEqualToString:@"0"]  )
