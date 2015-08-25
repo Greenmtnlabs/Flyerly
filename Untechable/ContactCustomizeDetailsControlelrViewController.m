@@ -20,8 +20,7 @@
     NSMutableDictionary *curContactDetails;
     UITextView *textView;
     
-    
-    //Temporary variable, required when user wants to go back without saving
+    // Temporary variable, to hold the data unless it is saved in model
     NSString *tempCustomTextForContact;
     NSMutableArray *tempAllEmails, *tempAllPhoneNumbers;
 }
@@ -66,7 +65,7 @@
     {
         self.navigationItem.hidesBackButton = YES;
         
-        // Center title __________________________________________________
+        // Center title
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
         // Back Navigation button
@@ -81,17 +80,13 @@
         
         UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         
-        [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+        // adds Left button to navigation
+        [self.navigationItem setLeftBarButtonItem:lefttBarButton];
         
-        // Right Navigation ______________________________________________
+        // Right Navigation
         saveButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-        //[saveButton setBackgroundColor:[UIColor redColor]];//for testing
-        
         saveButton.titleLabel.shadowColor = [UIColor clearColor];
-        //saveButton.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
-        
         [saveButton addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
-        //[saveButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
         saveButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [saveButton setTitle:TITLE_SAVE_TXT forState:normal];
         [saveButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
@@ -103,7 +98,8 @@
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:saveButton];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
         
-        [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
+        // adds Right button to navigation
+        [self.navigationItem setRightBarButtonItems:rightNavItems];
     }
 }
 
@@ -137,7 +133,6 @@
     }else if ( section == 3 ){
         numberOfRowsInSection = (int)contactModal.allEmails.count;
     }
-    //return sectionHeader;
     return  numberOfRowsInSection;
 }
 
@@ -339,10 +334,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 /**
- * Create a backup of all variable which are changable on this screen, so when user wants to 
+ * Create a backup of all variables which are changeable on this screen, so when user wants to
  * go back without saving then replace all with them
  */
--(void)setTampVariables{
+-(void)setTampVariables {
     tempCustomTextForContact = [[NSString alloc] initWithString:contactModal.customTextForContact];
     tempAllPhoneNumbers = [[NSMutableArray alloc] init];
     for( int j=0; j < contactModal.allPhoneNumbers.count; j++){
@@ -355,7 +350,7 @@
     }
 }
 
--(void)restoreOldStateFromTemp{
+-(void)restoreOldStateFromTemp {
     contactModal.customTextForContact = tempCustomTextForContact;
     contactModal.allPhoneNumbers = tempAllPhoneNumbers;
     contactModal.allEmails = tempAllEmails;
@@ -372,10 +367,10 @@
     }
     
     NSMutableArray *tempEmailWithStatus = contactModal.allEmails[indexPath.row];
-    if ( [[tempEmailWithStatus objectAtIndex:1] isEqualToString:@"1"] ){
+    if ( [[tempEmailWithStatus objectAtIndex:1] isEqualToString:@"1"] ) {
         [tempEmailWithStatus setObject:@"0" atIndexedSubscript:1];
         [emailCell.emailButton setSelected:NO];
-    }else if ( [[tempEmailWithStatus objectAtIndex:1] isEqualToString:@"0"] ){
+    } else if ( [[tempEmailWithStatus objectAtIndex:1] isEqualToString:@"0"] ) {
         [tempEmailWithStatus setObject:@"1" atIndexedSubscript:1];
         [emailCell.emailButton setSelected:YES];
     }
@@ -383,34 +378,37 @@
     contactModal.allEmails[indexPath.row] = tempEmailWithStatus;
 }
 
-
-//aryIndex = 2 for sms
-//aryIndex = 3 for call
--(void)onCallSmsTap:(int)aryIndex sender:(id) sender{
+-(void)onCallSmsTap:(int)aryIndex sender:(id) sender {
+    
     saveButton.hidden = NO;
     PhoneNumberCell *phoneCell;
     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.contactDetailsTable];
     NSIndexPath *indexPath = [self.contactDetailsTable indexPathForRowAtPoint:buttonPosition];
-    if (indexPath != nil){
+    if (indexPath != nil) {
         phoneCell = (PhoneNumberCell*)[_contactDetailsTable cellForRowAtIndexPath:indexPath];
     }
     
     NSMutableArray *tempPhoneWithStatus = contactModal.allPhoneNumbers[indexPath.row];
     BOOL btnStatus = NO;
-    if ( [[tempPhoneWithStatus objectAtIndex:aryIndex] isEqualToString:@"1"] ){
+    
+    // aryIndex = 2 for sms
+    // aryIndex = 3 for call
+    
+    if ( [[tempPhoneWithStatus objectAtIndex:aryIndex] isEqualToString:@"1"] ) {
         [tempPhoneWithStatus setObject:@"0" atIndexedSubscript:aryIndex];
         btnStatus = NO;
-    }else if ( [[tempPhoneWithStatus objectAtIndex:aryIndex] isEqualToString:@"0"] ){
+    } else if ( [[tempPhoneWithStatus objectAtIndex:aryIndex] isEqualToString:@"0"] ) {
         [tempPhoneWithStatus setObject:@"1" atIndexedSubscript:aryIndex];
         btnStatus = YES;
     }
+    
     if(aryIndex == 2 )
-    [phoneCell.smsButton setSelected:btnStatus];
+        [phoneCell.smsButton setSelected:btnStatus];
+    
     if(aryIndex == 3 )
-    [phoneCell.callButton setSelected:btnStatus];
+        [phoneCell.callButton setSelected:btnStatus];
     
     contactModal.allPhoneNumbers[indexPath.row] = tempPhoneWithStatus;
-    
 }
 
 -(IBAction)callButtonTapped:(id) sender {
@@ -427,13 +425,10 @@
     contactModal.customTextForContact = textView.text;
 }
 
-- (BOOL)textView:(UITextView *)textView
-shouldChangeTextInRange:(NSRange)range
- replacementText:(NSString *)text
-{
-    if ([text isEqualToString:@"\n"])
-    {
-        [textView resignFirstResponder];
+- (BOOL)textView:(UITextView *)_textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    if ([text isEqualToString:@"\n"]) {
+        [_textView resignFirstResponder];
         NSIndexPath *myIP = [NSIndexPath indexPathForRow:0 inSection:0] ;
         _contactDetailsTable.frame= CGRectMake(_contactDetailsTable.frame.origin.x, _contactDetailsTable.frame.origin.y, _contactDetailsTable.frame.size.width, _contactDetailsTable.frame.size.height + 190);
         [_contactDetailsTable scrollToRowAtIndexPath:myIP atScrollPosition:UITableViewScrollPositionTop animated:YES];
@@ -443,7 +438,6 @@ shouldChangeTextInRange:(NSRange)range
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 
-    
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 0)];
     
     UIColor *untechableGreen = [UIColor colorWithRed:(66/255.0) green:(247/255.0) blue:(206/255.0) alpha:1];
@@ -455,12 +449,9 @@ shouldChangeTextInRange:(NSRange)range
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1)
-    {
+    if (indexPath.section == 1) {
             return 120.f;
-    }
-    else
-    {
+    } else {
         return 80.f;
     }
     return 0;
