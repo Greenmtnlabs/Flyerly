@@ -17,5 +17,7 @@
 "FINISH" = "ACABADO";
 "EDIT" = "EDITAR";
 
-
-
+"Name" = "Nombre";
+"Please Enter Your Name" = "Por favor, escriba su nombre";
+"Phone Number" = "Número de teléfono";
+"Please Enter Your Number" = "Introduce tu número";

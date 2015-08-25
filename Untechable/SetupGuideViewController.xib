@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SetupGuideViewController">
             <connections>
+                <outlet property="btnLblPhoneNumber" destination="HuL-mv-7cf" id="hG3-BH-fAV"/>
+                <outlet property="btnLblWwud" destination="gIc-ml-s9P" id="XRd-A2-5RH"/>
                 <outlet property="phoneNumberHintText" destination="fN1-Ji-IMy" id="hJx-bl-6wV"/>
                 <outlet property="userNameTextView" destination="ZZU-eQ-ydF" id="ym2-QP-gsG"/>
                 <outlet property="userPhoneNumber" destination="YmA-Gd-Mzy" id="5dC-z8-buj"/>

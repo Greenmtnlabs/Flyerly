@@ -23,10 +23,21 @@
 @synthesize untechable;
 
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initializeTextViews];
     [self setNavigationBarItems];
+    [self applyLocalization];
+    
+}
+
+-(void)applyLocalization{
+    [_btnLblWwud setTitle: NSLocalizedString(TITLE_NAME, nil) forState:normal];
+    [_usernameHintText setText:NSLocalizedString(MESSAGE_NAME, nil) ];
+    [_btnLblPhoneNumber setTitle: NSLocalizedString(TITLE_PHONENUMBER, nil) forState:normal];
+    [_phoneNumberHintText setText:NSLocalizedString(MESSAGE_PHONENUMBER, nil)];
+    
 }
 
 - (void)didReceiveMemoryWarning {
