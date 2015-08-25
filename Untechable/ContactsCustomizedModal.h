@@ -19,25 +19,24 @@
 
 @interface ContactsCustomizedModal : NSObject
 
-//Model saving in database
+// Model variables to be saved in database
 @property (nonatomic,strong)NSString *contactName;
 @property (nonatomic,strong)NSString *customTextForContact;
 @property (nonatomic,strong)NSMutableArray *allEmails;
 @property (nonatomic,strong)NSMutableArray *allPhoneNumbers;
 
 
-//Extras
+// Extras
 @property (nonatomic,weak) id <ContactsCustomizedModalDelegate>delegate;
-//@property (nonatomic,strong)  Untechable *untechable;
 
-//Ui related required bars
+// UI related related bars
 @property (nonatomic,strong)UIImage *img;
 @property (nonatomic,strong)NSString *imageUrl;
 @property (nonatomic,strong)NSString *checkImageName;
 @property (nonatomic,assign)int status;
 
 
-//Functions
+// Functions
 
 -(BOOL)getEmailStatus;
 -(BOOL)getSmsStatus;

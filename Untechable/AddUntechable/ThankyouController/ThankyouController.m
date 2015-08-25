@@ -70,11 +70,6 @@
 }
 
 - (IBAction)onNew:(id)sender {
-    /*untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*2)] ]; //current time +2MIN
-    untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*120)] ]; //current time +2hr
-
-    untechable.paid = NO;*/
-    
     [self goToUntechablesTableScreen];
 }
 
@@ -99,7 +94,7 @@
     
     [_lblStartDateTime setTextColor:DEF_GREEN];
     _lblStartDateTime.font = [UIFont fontWithName:APP_FONT size:20];
-    _lblStartDateTime.text = [untechable.commonFunctions timestampStrToAppDate:untechable.startDate];
+    _lblStartDateTime.text = [untechable.commonFunctions convertTimestampToAppDate:untechable.startDate];
     
     
     [_lblEnd setTextColor:DEF_GRAY];
@@ -108,22 +103,19 @@
     
     [_lblEndDateTime setTextColor:DEF_GREEN];
     _lblEndDateTime.font = [UIFont fontWithName:APP_FONT size:20];
-    _lblEndDateTime.text = [untechable.commonFunctions timestampStrToAppDate:untechable.endDate];
+    _lblEndDateTime.text = [untechable.commonFunctions convertTimestampToAppDate:untechable.endDate];
     
     [_lblForwadingNumber setTextColor:DEF_GRAY];
     _lblForwadingNumber.font = [UIFont fontWithName:APP_FONT size:20];
-    
     
     NSString *twillioNumber = untechable.twillioNumber;
     [_lblTwillioNumber setTextColor:DEF_GREEN];
     _lblTwillioNumber.font = [UIFont fontWithName:APP_FONT size:20];
     _lblTwillioNumber.text = twillioNumber;
     NSLog(@"twillioNumber1: %@", twillioNumber);
-    twillioNumber   =   [untechable.commonFunctions formateStringIntoPhoneNumber:twillioNumber];
+    twillioNumber   =   [untechable.commonFunctions standarizePhoneNumber:twillioNumber];
     NSLog(@"twillioNumber2: %@", twillioNumber);
     _lblTwillioNumber.text = twillioNumber;
-    
-    
     
     [_lblPlay1 setTextColor:DEF_GRAY];
     _lblPlay1.font = [UIFont fontWithName:APP_FONT size:19];
@@ -149,7 +141,7 @@
 {
     BOOL canEditUntechable;
     if( [untechable isUntechableStarted] || [untechable isUntechableExpired] ){
-        canEditUntechable = NO;//start's new
+        canEditUntechable = NO; //starts new
     } else{
         canEditUntechable = YES;
     }
@@ -163,12 +155,12 @@
         
         self.navigationItem.hidesBackButton = YES;
         
-        // Center title ________________________________________
+        // Center title
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
-        
-        // Right Navigation ________________________________________
+        // Right Navigation
         NSMutableArray  *rightNavItems;
+        
         // Setting left Navigation button "Settings"
         settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 86, 42)];
         settingsButton.titleLabel.shadowColor = [UIColor clearColor];
@@ -193,7 +185,8 @@
         UIBarButtonItem *startNewUntechableBarBtn = [[UIBarButtonItem alloc] initWithCustomView:startNewUntechable];
         rightNavItems  = [NSMutableArray arrayWithObjects:startNewUntechableBarBtn,nil];
         
-        [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
+        // adds right button to navigation bar
+        [self.navigationItem setRightBarButtonItems:rightNavItems];
     }
 }
 
@@ -233,7 +226,8 @@
     [_btnCopy setSelected:YES];
     
     UIPasteboard *pb = [UIPasteboard generalPasteboard];
-    // This code assumes that you have created the outlet for UITextField as 'textField1'. // Update the below code, if you have given different name
+    // This code assumes that you have created the outlet for UITextField as 'textField1'.
+    // Update the below code, if you have given different name
     [pb setString:_lblTwillioNumber.text];
     
 }

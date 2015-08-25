@@ -29,8 +29,6 @@
     
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
-
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -55,17 +53,16 @@
 
 #pragma mark -  Navigation functions
 - (void)setNavigationDefaults{
-    
-    [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
+    // shows navigation bar
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
 }
-
 
 -(void)setNavigation:(NSString *)callFrom
 {
     if([callFrom isEqualToString:@"viewDidLoad"])
     {
-        // Center title __________________________________________________
+        // Center title
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
         // Back Navigation button
@@ -79,29 +76,25 @@
         
         UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         
-        [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+        // adds left button to navigation
+        [self.navigationItem setLeftBarButtonItem:lefttBarButton];
         
-        // Right Navigation ______________________________________________
+        // Right Navigation
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-        //[nextButton setBackgroundColor:[UIColor redColor]];//for testing
-        
         nextButton.titleLabel.shadowColor = [UIColor clearColor];
-        //nextButton.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
-        
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 33, 42)];
         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
         [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
         [nextButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
-        
-        
         nextButton.showsTouchWhenHighlighted = YES;
         
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
         
-        [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
+        // adds right button to navigation
+        [self.navigationItem setRightBarButtonItems:rightNavItems];
     }
 }
 
@@ -142,15 +135,4 @@
 -(void) goBack {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end

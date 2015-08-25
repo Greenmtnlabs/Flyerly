@@ -219,7 +219,7 @@
         
         // Show the user the logged-in UI
         mFbAuth = [[[FBSession activeSession] accessTokenData] accessToken];
-        mFbAuthExpiryTs = [commonFunctions nsDateToTimeStampStr:[[[FBSession activeSession] accessTokenData] expirationDate]];
+        mFbAuthExpiryTs = [commonFunctions convertNSDateToTimestamp:[[[FBSession activeSession] accessTokenData] expirationDate]];
         NSLog(@"Session opened new mFbAuth=%@ \n mFbAuthExpiryTs=%@ ", mFbAuth, mFbAuthExpiryTs);
         
         return;
@@ -311,17 +311,16 @@
 }
 
 /**
- * Function for handling facebook login and logouts
+ * Function to handle facebook login and logout
  */
 - (void)loginFacebook:(id)sender Controller:(UIViewController *)Controller {
-    //if we have token( already login) then logout and flush the token
-    if( [commonFunctions fbBtnStatus:mFbAuthExpiryTs] ) {
-        //When button was green , the delete permissions
+    //if user has a token (already logged in) then logout and flush the token
+    if( [commonFunctions isFacebookLoggedIn:mFbAuthExpiryTs] ) {
         [self fbFlushFbData];
         [self closeFbSessionIfOpen];
         [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:NO calledFor:@"Facebook"];
     }
-    //if we haven't token then login to facebook
+    //if no token is found, login to facebook
     else if( [self closeFbSessionIfOpen] == NO ) {
         // Open a session showing the user the login UI
         // You must ALWAYS ask for public_profile permissions when opening a session

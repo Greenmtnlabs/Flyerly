@@ -34,7 +34,7 @@
 /*
  * Initialize untechable object with required models initialization
  */
-- (id)initWithCF{
+- (id)initWithCommonFunctions{
     self = [super init];
     commonFunctions = [[CommonFunctions alloc] init];
     socialNetworksStatusModal = [SocialNetworksStatusModal sharedInstance];
@@ -52,12 +52,12 @@
 
 /**
  *
- * @return: Unique Id in string formate
+ * @return: Unique Id in the form of string
  */
-- (NSString *)getUniqueId {
+- (NSString *)generateUniqueId {
     static int randomNumber = 0;
     
-    // Create Unique ID even within a second
+    // Generates Unique ID even within a second
     int timestamp = [[NSDate date] timeIntervalSince1970];
     randomNumber = (randomNumber + 1) % 100;
     
@@ -65,17 +65,14 @@
     return uniqId;
 }
 
-/*
-    if setOrSAve: SAVE ( in this case we have no need of dic2, it can be nil )
-    save instance variables into dic
- 
-    else if setOrSAve: RESET dic2: must required NSMutableDictionary
-    in this case we update all instance variable with dic2
- 
+/**
+ * addOrUpdateInModel saves and updates in model (Untechable)
+ * if command is SAVE, dictionary is not required (i.e. pass nil)
+ * if command is UPDATE, dictionary is required
  */
--(void)setOrSaveVars:(NSString *)setOrSAve dic2:(NSMutableDictionary *)dic2{
+-(void)addOrUpdateInModel:(NSString *)command dictionary:(NSMutableDictionary *)dictionary{
 
-    if( [setOrSAve isEqualToString:SAVE] ) {
+    if( [command isEqualToString:SAVE] ) {
         dic = [[NSMutableDictionary alloc] init];
         dic[@"rUId"]            = rUId;
         dic[@"eventId"]         = eventId;
@@ -101,7 +98,7 @@
         
         dic[@"customizedContacts"] = [commonFunctions convertCCMArrayIntoJsonString:customizedContactsForCurrentSession];
         customizedContacts = ( dic[@"customizedContacts"] ) ? dic[@"customizedContacts"] : @"";
-        [self reSetCustomizedContactsInSession];
+        customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:customizedContacts];
         
         //Screen3 vars
         dic[@"socialStatus"] = socialStatus;
@@ -126,8 +123,8 @@
         dic[@"omsHostName"] = omsHostName;
         dic[@"omsPort"] = omsPort;
     }
-    else if( [setOrSAve isEqualToString:RESET] ) {
-        dic = [[NSMutableDictionary alloc] initWithDictionary:dic2];
+    else if( [command isEqualToString:UPDATE] ) {
+        dic = [[NSMutableDictionary alloc] initWithDictionary:dictionary];
        
         //Settings
         rUId        = ( dic[@"rUId"] ) ? dic[@"rUId"] : @"";
@@ -144,8 +141,8 @@
         //Screen1 vars
         timezoneOffset  = ( dic[@"timezoneOffset"] ) ? dic[@"timezoneOffset"] : [commonFunctions getTimeZoneOffset];
         spendingTimeTxt = ( dic[@"spendingTimeTxt"] ) ? dic[@"spendingTimeTxt"] : @"";
-        startDate       = ( dic[@"startDate"] ) ? dic[@"startDate"] : [commonFunctions nsDateToTimeStampStr: [NSDate date] ]; //start now
-        endDate         = ( dic[@"endDate"] ) ? dic[@"endDate"] : [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*60*24)] ]; //current time +1 day
+        startDate       = ( dic[@"startDate"] ) ? dic[@"startDate"] : [commonFunctions convertNSDateToTimestamp: [NSDate date] ]; //start now
+        endDate         = ( dic[@"endDate"] ) ? dic[@"endDate"] : [commonFunctions convertNSDateToTimestamp: [[NSDate date] dateByAddingTimeInterval:(60*60*24)] ]; //current time +1 day
         hasEndDate      = ([dic[@"hasEndDate"] isEqualToString:@"NO"]) ? NO : YES;
         
         //Screen2 vars
@@ -158,7 +155,7 @@
         //Screen3 vars
         socialStatus = ( dic[@"socialStatus"] ) ? dic[@"socialStatus"] : @"";
         fbAuth       = ( dic[@"fbAuth"] ) ? dic[@"fbAuth"] : @"";
-        fbAuthExpiryTs = ( dic[@"fbAuthExpiryTs"] ) ? dic[@"fbAuthExpiryTs"] : [commonFunctions nsDateToTimeStampStr:[commonFunctions getDate:@"PAST_1_MONTH"] ];
+        fbAuthExpiryTs = ( dic[@"fbAuthExpiryTs"] ) ? dic[@"fbAuthExpiryTs"] : [commonFunctions convertNSDateToTimestamp:[commonFunctions getDate:@"PAST_1_MONTH"] ];
         
         twitterAuth  = ( dic[@"twitterAuth"] ) ? dic[@"twitterAuth"] : @"";
         twOAuthTokenSecret = ( dic[@"twOAuthTokenSecret"] ) ? dic[@"twOAuthTokenSecret"] : @"";
@@ -190,18 +187,18 @@
 /**
  * Reset contacts into session contact variable
  */
--(void) reSetCustomizedContactsInSession {
+-(void) resetCustomizedContactsForCurrentSession {
     customizedContactsForCurrentSession = [commonFunctions convertJsonStringIntoCCMArray:customizedContacts];
 }
 
 /**
- * @return: is current untechable started
+ * @return: BOOL ( whether current untechable is started)
  */
 - (BOOL)isUntechableStarted {
     BOOL started = NO;
     
-    NSDate* date1 = [commonFunctions timestampStrToNsDate:startDate];
-    if( [commonFunctions date1IsSmallerThenDate2:date1 date2:[NSDate date]]){
+    NSDate* _startDate = [commonFunctions convertTimestampToNSDate:startDate];
+    if( [commonFunctions isEndDateGreaterThanStartDate: _startDate endDate:[NSDate date]]){
         started = YES;
     }
     
@@ -209,14 +206,14 @@
 }
 
 /**
- * @return: is current untechable expired
+ * @return: BOOL ( whether current untechable is started)
  */
 - (BOOL)isUntechableExpired {
     BOOL expired = NO;
     
     if( expired == NO ){
-        NSDate* date1 = [commonFunctions timestampStrToNsDate:endDate];
-        if( [commonFunctions date1IsSmallerThenDate2:date1 date2:[NSDate date]]){
+        NSDate* date1 = [commonFunctions convertTimestampToNSDate:endDate];
+        if( [commonFunctions isEndDateGreaterThanStartDate:date1 endDate:[NSDate date]]){
             expired = YES;
         }
     }
@@ -225,11 +222,11 @@
 
 #pragma mark - Save in realm
 /**
- * Save running instance into realm database
+ * Add or Update running instance variable into realm database
  */
--(void)saveOrUpdateInDb{
+-(void)addOrUpdateInDatabase{
     [[RLMRealm defaultRealm] transactionWithBlock:^{
-        [self setOrSaveVars:SAVE dic2:nil];
+        [self addOrUpdateInModel:SAVE dictionary:nil];
         if([rUId isEqualToString:@"1"])
         [RSetUntechable createOrUpdateInDefaultRealmWithValue:self.dic];
         else
@@ -246,7 +243,7 @@
  */
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack{
 
-    [self saveOrUpdateInDb];
+    [self addOrUpdateInDatabase];
     
     //During testing dont send untechable to server, just create in device and go t thankyou screen
     if( [UNT_ENVIRONMENT isEqualToString:TESTING] ){
@@ -307,13 +304,13 @@
             eventId = [dict valueForKey:@"eventId"];
             savedOnServer = YES;
             hasFinished = YES;
-            [self saveOrUpdateInDb];
+            [self addOrUpdateInDatabase];
             
         } else{
             message = [dict valueForKey:@"message"];
             if( !([[dict valueForKey:@"eventId"] isEqualToString:@"0"]) ) {
                 eventId = [dict valueForKey:@"eventId"];
-                [self saveOrUpdateInDb];
+                [self addOrUpdateInDatabase];
             }
             
             errorOnFinish = YES;

@@ -17,8 +17,6 @@
 @implementation AppDelegate
 
 
-
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     NSLog( @"homeDirectoryPath this will help us in finding realm file: %@", NSHomeDirectory() );
@@ -40,10 +38,10 @@
          RSetUntechable *rSetUntechable = [[RSetUntechable alloc] init];
          [rSetUntechable setDefault];
          rSetUntechable.rUId = @"1";
-         NSMutableDictionary *dic2 = [rSetUntechable getModelDic];
+         NSMutableDictionary *dic = [rSetUntechable getModelDic];
          
-         Untechable *untechable  = [[Untechable alloc] initWithCF];
-         [untechable setOrSaveVars:RESET dic2:dic2];
+         Untechable *untechable  = [[Untechable alloc] initWithCommonFunctions];
+         [untechable addOrUpdateInModel:UPDATE dictionary:dic];
 
          SetupGuideViewController *mainViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
          mainViewController.untechable = untechable;
@@ -54,7 +52,6 @@
     
     [self.window makeKeyAndVisible];
     return YES;
-
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -93,9 +90,6 @@
     // For example: when the user presses the iOS "home" button while the login dialog is active
     [FBAppCall handleDidBecomeActive];
 }
-
-
-
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {

@@ -13,12 +13,8 @@
 @synthesize emailButton,contactEmail;
 
 -(void)setCellValues :(NSString *)email {
-    
-    //NSMutableArray *alLEmails = [[NSMutableArray alloc] initWithArray:allEmail];
     self.contactEmail.text = email;
-    
 }
-
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

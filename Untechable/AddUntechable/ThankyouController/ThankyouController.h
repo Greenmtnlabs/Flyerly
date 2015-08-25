@@ -12,12 +12,9 @@
 
 @interface ThankyouController : UIViewController {
     UILabel *titleLabel;
-    //UIButton *helpButton;
-
     UIButton *startNewUntechable;
     UIButton *settingsButton;
     UIButton *editUntechable;
-    
     MPMoviePlayerViewController *moviePlayer;
 }
 //Properties

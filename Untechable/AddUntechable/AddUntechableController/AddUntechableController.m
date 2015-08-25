@@ -67,13 +67,12 @@
     
     [self showHideDateTimePicker:NO];
     
-    // Initialize Data
+    // initializes array
     _pickerData = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];;
     
-    // remove last element from array which is "Custom"
+    // removes last element from array which is "Custom"
     [_pickerData removeObjectAtIndex: _pickerData.count-1];
 
-    
     [self showHideTextPicker:NO];
     
     // Connect data
@@ -81,7 +80,7 @@
     _spendingTimeTextPicker.delegate = self;
     
     self.picker.datePickerMode = UIDatePickerModeDateAndTime;
-    //WHEN any of the date is similer to current date time, the show NOW in date's area
+    // If the date is similer to current date time, then show NOW in date's area
     self.picker.minimumDate = now1;
     [self.picker setDate:now1 animated:YES];
     
@@ -104,7 +103,7 @@
     }
     else if( [callFor isEqualToString:@"_btnEndTime"] ) {
         pickerOpenFor = @"_btnEndTime";
-        [self.picker setDate:[untechable.commonFunctions timestampStrToNsDate:untechable.endDate] animated:YES];
+        [self.picker setDate:[untechable.commonFunctions convertTimestampToNSDate:untechable.endDate] animated:YES];
         [self dateChanged];
     }
 }
@@ -123,9 +122,9 @@
     [self setNavigation:@"viewDidLoad"];
 }
 /**
- before appearing view
- we need to set some ui fields
- **/
+ * before appearing view
+ * we need to set some UI fields
+ */
 -(void)viewWillAppear:(BOOL)animated {
     [self setNavigation:@"viewDidLoad"];
 }
@@ -262,13 +261,12 @@
         
         BOOL goToNext = untechable.hasEndDate ? NO : YES;
         
-        //When we have end date, must check end date is greater then start date
         if( untechable.hasEndDate == YES )
         {
-            NSDate *d1 = [untechable.commonFunctions timestampStrToNsDate:untechable.startDate];
-            NSDate *d2 = [untechable.commonFunctions timestampStrToNsDate:untechable.endDate];
+            NSDate *startDate = [untechable.commonFunctions convertTimestampToNSDate:untechable.startDate];
+            NSDate *endDate = [untechable.commonFunctions convertTimestampToNSDate:untechable.endDate];
             
-            goToNext = [untechable.commonFunctions date1IsSmallerThenDate2:d1 date2:d2];
+            goToNext = [untechable.commonFunctions isEndDateGreaterThanStartDate:startDate endDate:endDate];
             
             if( goToNext == NO ) {
                 
@@ -304,7 +302,7 @@
 }
 
 #pragma mark- Select text
-//when user tapes on select text
+//when user taps on select text
 -(IBAction)selectText:(id)sender{
     
     [self hideAllControlls];
@@ -313,7 +311,7 @@
 }
 
 #pragma mark -  Select Date
-//when user tap on dates
+//when user taps on datepicker
 -(IBAction)changeDate:(id)sender
 {
     [self hideAllControlls];
@@ -323,15 +321,15 @@
     UIButton *clickedBtn = sender;
     if( clickedBtn == _btnStartTime || clickedBtn == _btnLblStartTime ){
         pickerOpenFor = @"_btnStartTime";
-        _picker.date = [untechable.commonFunctions timestampStrToNsDate:untechable.startDate];
+        _picker.date = [untechable.commonFunctions convertTimestampToNSDate:untechable.startDate];
     }
     else if( clickedBtn == _btnEndTime || clickedBtn == _btnLblEndTime ){
         pickerOpenFor = @"_btnEndTime";
-        _picker.date = [untechable.commonFunctions timestampStrToNsDate:untechable.endDate];
+        _picker.date = [untechable.commonFunctions convertTimestampToNSDate:untechable.endDate];
     }
     
 }
-//when user select the date from datepicker
+//when user selects the date from datepicker
 -(IBAction)onDateChange:(id)sender {
     [self dateChanged];
 }
@@ -339,7 +337,7 @@
 -(void)dateChanged
 {
     NSString *dateStr, *pickerTimeStampStr;
-    pickerTimeStampStr   = [untechable.commonFunctions nsDateToTimeStampStr:[_picker date]];
+    pickerTimeStampStr   = [untechable.commonFunctions convertNSDateToTimestamp:[_picker date]];
 	dateStr = [untechable.dateFormatter stringFromDate:[_picker date]];
 
     NSString *nowDateStr = [untechable.dateFormatter stringFromDate:[NSDate date]];
@@ -351,12 +349,12 @@
         untechable.startDate = pickerTimeStampStr;
         [_btnStartTime setTitle:dateStr forState:UIControlStateNormal];
         
-        NSDate *endD = [untechable.commonFunctions timestampStrToNsDate:untechable.endDate];
-        NSDate *statD = [untechable.commonFunctions timestampStrToNsDate:untechable.startDate];
+        NSDate *endD = [untechable.commonFunctions convertTimestampToNSDate:untechable.endDate];
+        NSDate *startD = [untechable.commonFunctions convertTimestampToNSDate:untechable.startDate];
     
-        if( [untechable.commonFunctions date1IsSmallerThenDate2:endD date2:statD] ){
-            endD = [statD dateByAddingTimeInterval:(60*60*24)];
-            untechable.endDate = [untechable.commonFunctions nsDateToTimeStampStr:endD]; //current time +1 day
+        if( [untechable.commonFunctions isEndDateGreaterThanStartDate:endD endDate: startD] ){
+            endD = [startD dateByAddingTimeInterval:(60*60*24)];
+            untechable.endDate = [untechable.commonFunctions convertNSDateToTimestamp:endD]; //current time +1 day
             NSString *dateStrUpdated = [untechable.dateFormatter stringFromDate:endD];
             [_btnEndTime setTitle:dateStrUpdated forState:UIControlStateNormal];
         }
@@ -411,7 +409,7 @@
     [self addUpperBorder];
     self.pickerCloseBtn.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
     
-    //changing the "CLOSE"button text color to black
+    //changes the "CLOSE" button text color to black
     [_pickerCloseBtn setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
    
 }
@@ -439,14 +437,14 @@
     _pickerCloseBtn.alpha = alpha;
     self.pickerCloseBtn.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
   
-    //changing the "CLOSE"button text color to black
+    // changing the "CLOSE" button text color to black
     [_pickerCloseBtn setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
 }
 
 /**
- Hex Color Converter
- @params NSString
- retunrs UIColor
+ * Hex Color Converter
+ * @params: NSString
+ * retunrs: UIColor
  */
 - (UIColor *)colorFromHexString:(NSString *)hexString {
     unsigned rgbValue = 0;
@@ -460,9 +458,9 @@
 // set default vaules in model
 -(void)setDefaultModel{
 
-    now1 = [NSDate date]; //current date
+    now1 = [NSDate date]; // current date
     
-    //Set Date formate
+    //Set Date format
     untechable.dateFormatter = [[NSDateFormatter alloc] init];
     [untechable.dateFormatter setDateFormat:DATE_FORMATE_1];
     
@@ -486,7 +484,7 @@
     
     [_btnStartTime setTitleColor:DEF_GREEN forState:UIControlStateNormal];
     _btnStartTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
-    [_btnStartTime setTitle:[untechable.commonFunctions timestampStrToAppDate:untechable.startDate] forState:UIControlStateNormal];
+    [_btnStartTime setTitle:[untechable.commonFunctions convertTimestampToAppDate:untechable.startDate] forState:UIControlStateNormal];
     
     
     [_btnLblEndTime setTitleColor:DEF_GRAY forState:UIControlStateNormal];
@@ -494,7 +492,7 @@
     
     [_btnEndTime setTitleColor:DEF_GREEN forState:UIControlStateNormal];
     _btnEndTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
-    [_btnEndTime setTitle:[untechable.commonFunctions timestampStrToAppDate:untechable.endDate] forState:UIControlStateNormal];
+    [_btnEndTime setTitle:[untechable.commonFunctions convertTimestampToAppDate:untechable.endDate] forState:UIControlStateNormal];
     
     [_lblNoEndDate setTextColor:DEF_GRAY];
     _lblNoEndDate.font = [UIFont fontWithName:APP_FONT size:14];
@@ -513,7 +511,7 @@
     [self showHideDateTimePicker:NO];
     
     if( !([_cbNoEndDate isSelected]) ){
-        untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*60*24)] ]; //current time +1 Day
+        untechable.endDate  = [untechable.commonFunctions convertNSDateToTimestamp: [[NSDate date] dateByAddingTimeInterval:(60*60*24)] ]; //current time + 1 Day
     }
     [self pickerSetAcTo:@"_btnEndTime"];
 }
@@ -602,8 +600,8 @@
 }
 
 /**
- Adding a top border for a view
- **/
+ * Adding a top border for a view
+ */
 - (void)addUpperBorder
 {
     CALayer *upperBorder = [CALayer layer];

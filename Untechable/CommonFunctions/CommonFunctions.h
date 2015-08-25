@@ -20,13 +20,13 @@
 -(NSMutableArray *)convertJsonStringIntoCCMArray:(NSString *)customizedContactsString;
 -(NSMutableDictionary *)convertJsonStringIntoDictinoary:(NSString *)value;
 -(NSString *)getTimeZoneOffset;
--(NSString *)nsDateToTimeStampStr:(NSDate *)inpDate;
--(NSDate *)timestampStrToNsDate:(NSString *)timeStamp;
--(NSString *)timestampStrToAppDate:(NSString *)timeStamp;
+-(NSString *)convertNSDateToTimestamp:(NSDate *) nsDate;
+-(NSDate *)convertTimestampToNSDate:(NSString *)timestamp;
 
-- (NSString *)timestampStringToAppDateTime:(NSString *)timeStam;
-- (NSString *)timestampStringToAppDate:(NSString *)timeStam;
-- (BOOL)date1IsSmallerThenDate2:(NSDate *)date1 date2:(NSDate *)date2;
+-(NSString *)convertTimestampToAppDate:(NSString *)timestamp;
+- (NSString *)convertTimestampToAppDateTime:(NSString *)timeStam;
+
+- (BOOL)isEndDateGreaterThanStartDate:(NSDate *)startDate endDate:(NSDate *)endDate;
 
 -(UIImageView *) navigationGetTitleView;
 -(NSDate *)getDate:(NSString *)callFor;
@@ -37,7 +37,7 @@
 -(NSString*)formatNumber:(NSString*)mobileNumber;
 -(int)getLength:(NSString*)mobileNumber;
 
--(NSString *)formateStringIntoPhoneNumber:(NSString *)unformatted;
+-(NSString *)standarizePhoneNumber:(NSString *)phoneNumber;
 
--(BOOL)fbBtnStatus:(NSString *)fbAuthExpiryTs;
+-(BOOL)isFacebookLoggedIn:(NSString *)fbAuthExpiryTs;
 @end

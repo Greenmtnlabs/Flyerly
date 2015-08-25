@@ -54,8 +54,7 @@
         [socialIcons addObject:@{@"type":@"image", @"imgPath":@"linkedIn@3x.png", @"text":@""}];
         [socialIcons addObject:@{@"type":@"image", @"imgPath":@"email@3x.png", @"text":@""}];
     }
-        
- }
+}
 
 - (void) updateUI {
     
@@ -78,12 +77,7 @@
         
         // Right Navigation ______________________________________________
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-        //[newUntechableButton setBackgroundColor:[UIColor redColor]];//for testing
-        
         backButton.titleLabel.shadowColor = [UIColor clearColor];
-        //newUntechableButton.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
-        
-        //[newUntechableButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [backButton setTitle:TITLE_BACK_TXT forState:normal];
         [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
@@ -93,15 +87,10 @@
         UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
         
-       // [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
-        
         // Right Navigation ______________________________________________
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-        
         nextButton.titleLabel.shadowColor = [UIColor clearColor];
-        
         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
-        
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [nextButton setTitle:TITLE_EDIT_TEXT forState:normal];
         [nextButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
@@ -128,7 +117,7 @@
     untechable.twitterAuth = untechable.socialNetworksStatusModal.mTwitterAuth;
     untechable.twOAuthTokenSecret = untechable.socialNetworksStatusModal.mTwOAuthTokenSecret;
     untechable.linkedinAuth = untechable.socialNetworksStatusModal.mLinkedinAuth;
-    [untechable saveOrUpdateInDb];
+    [untechable addOrUpdateInDatabase];
     
     [self.navigationController popViewControllerAnimated:YES];
 }

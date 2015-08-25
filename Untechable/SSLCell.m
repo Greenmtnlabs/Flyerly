@@ -13,7 +13,6 @@
 
 - (void)awakeFromNib {
     // Initialization code    
-   // [sslSwitch addTarget:self action:@selector(sslStateChanged:) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

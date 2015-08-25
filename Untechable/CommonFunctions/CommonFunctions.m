@@ -108,52 +108,44 @@
     return timezoneoffset3;
 }
 
-- (NSString *)nsDateToTimeStampStr:(NSDate *)inpDate {
-    return [NSString stringWithFormat:@"%.0f",[inpDate timeIntervalSince1970]];
+- (NSString *)convertNSDateToTimestamp:(NSDate *)nsDate {
+    return [NSString stringWithFormat:@"%.0f",[nsDate timeIntervalSince1970]];
 }
-- (NSDate *)timestampStrToNsDate:(NSString *)timeStamp {
-    return [NSDate dateWithTimeIntervalSince1970:[timeStamp integerValue]];
-}
-
-- (NSString *)timestampStringToAppDate:(NSString *)timeStamp {
-    
-    NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
-    [dateFormatter1 setDateFormat:DATE_FORMATE_DATE];
-    
-    NSDate *newDate  =   [self timestampStrToNsDate:timeStamp];
-    NSString *newDateStr    =   [dateFormatter1 stringFromDate:newDate];
-    return newDateStr;
+- (NSDate *)convertTimestampToNSDate:(NSString *)timestamp {
+    return [NSDate dateWithTimeIntervalSince1970:[timestamp integerValue]];
 }
 
-- (NSString *)timestampStringToAppDateTime:(NSString *)timeStamp {
+- (NSString *)convertTimestampToAppDateTime:(NSString *)timestamp {
     
-    NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
-    [dateFormatter1 setDateFormat:DATE_FORMATE_TIME];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:DATE_FORMATE_TIME];
     
-    NSDate *newDate  =   [self timestampStrToNsDate:timeStamp];
-    NSString *newDateStr    =   [dateFormatter1 stringFromDate:newDate];
+    NSDate *newDate  =   [self convertTimestampToNSDate:timestamp];
+    NSString *newDateStr    =   [dateFormatter stringFromDate:newDate];
     return newDateStr;
 }
 
 
-- (NSString *)timestampStrToAppDate:(NSString *)timeStamp {
+- (NSString *)convertTimestampToAppDate:(NSString *)timestamp {
     
-    NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
-    [dateFormatter1 setDateFormat:DATE_FORMATE_1];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:DATE_FORMATE_DATE];
     
-    NSDate *newDate  =   [self timestampStrToNsDate:timeStamp];
-    NSString *newDateStr    =   [dateFormatter1 stringFromDate:newDate];
+    NSDate *newDate  =   [self convertTimestampToNSDate:timestamp];
+    NSString *newDateStr    =   [dateFormatter stringFromDate:newDate];
     return newDateStr;
+    
 }
 
 -(UIImageView *) navigationGetTitleView {
     return  [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
 }
 
-- (BOOL)date1IsSmallerThenDate2:(NSDate *)date1 date2:(NSDate *)date2 {
-    NSTimeInterval distanceBetweenDates = [date1 timeIntervalSinceDate:date2];
+- (BOOL)isEndDateGreaterThanStartDate:(NSDate *)startDate endDate:(NSDate *)endDate {
+    
+    NSTimeInterval interval = [startDate timeIntervalSinceDate:endDate];
     double secondsInMinute = 60;
-    NSInteger secondsBetweenDates = distanceBetweenDates / secondsInMinute;
+    NSInteger secondsBetweenDates = interval / secondsInMinute;
     
     if (secondsBetweenDates == 0)
         return YES;
@@ -234,33 +226,33 @@
     return length;
 }
 
--(NSString *)formateStringIntoPhoneNumber:(NSString *)unformatted {
-    if([unformatted isEqualToString:@""] == NO){
-        NSArray *stringComponents = [NSArray arrayWithObjects:[unformatted substringWithRange:NSMakeRange(0, 2)],
-                                     [unformatted substringWithRange:NSMakeRange(2, 3)],
-                                     [unformatted substringWithRange:NSMakeRange(5, 3)],
-                                     [unformatted substringWithRange:NSMakeRange(8, [unformatted length]-8)], nil];
+-(NSString *)standarizePhoneNumber:(NSString *)phoneNumber {
+    if([phoneNumber isEqualToString:@""] == NO){
+        NSArray *stringComponents = [NSArray arrayWithObjects:[phoneNumber substringWithRange:NSMakeRange(0, 2)],
+                                     [phoneNumber substringWithRange:NSMakeRange(2, 3)],
+                                     [phoneNumber substringWithRange:NSMakeRange(5, 3)],
+                                     [phoneNumber substringWithRange:NSMakeRange(8, [phoneNumber length]-8)], nil];
         
-        NSString *formattedString = [NSString stringWithFormat:@"%@ (%@) %@-%@", [stringComponents objectAtIndex:0], [stringComponents objectAtIndex:1], [stringComponents objectAtIndex:2],[stringComponents objectAtIndex:3]];
+        NSString *standarizedPhoneNumber = [NSString stringWithFormat:@"%@ (%@) %@-%@", [stringComponents objectAtIndex:0], [stringComponents objectAtIndex:1], [stringComponents objectAtIndex:2],[stringComponents objectAtIndex:3]];
         
-        return formattedString;
+        return standarizedPhoneNumber;
     } else{
-       return unformatted;
+       return phoneNumber;
     }
 }
 
 #pragma mark -  Fb functions
 /** 
- * @parm: fbAuthExpiryTs is facebook token expiry date( string of timestamp )
- * @return: facebook token is expired or not
- * Active fb button when fb toke expiry date is greater then current date.
+ * @parm: fbAuthExpiryTs is facebook token expiry date( timestamp string )
+ * @return: BOOL (whether facebook token is expired or not)
+ * Shows fb button active when fb token expiry date is greater than current date.
  */
--(BOOL)fbBtnStatus:(NSString *)fbAuthExpiryTs{
+-(BOOL)isFacebookLoggedIn:(NSString *)fbAuthExpiryTs{
     BOOL active = NO;
     if( [fbAuthExpiryTs isEqualToString:@""] == NO ){
-        NSDate* date1 = [NSDate date];
-        NSDate* date2 = [self timestampStrToNsDate:fbAuthExpiryTs];
-        active   = [self date1IsSmallerThenDate2:date1 date2:date2];
+        NSDate* startDate = [NSDate date];
+        NSDate* endDate = [self convertTimestampToNSDate:fbAuthExpiryTs];
+        active   = [self isEndDateGreaterThanStartDate:startDate endDate:endDate];
     }
     return active;
 }

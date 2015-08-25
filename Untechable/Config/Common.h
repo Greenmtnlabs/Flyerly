@@ -45,7 +45,7 @@
 #define RECORDING_LIMIT_IN_SEC 60
 
 #define SAVE @"SAVE"
-#define RESET @"RESET"
+#define UPDATE @"UPDATE"
 
 #define TESTING @"TESTING"
 

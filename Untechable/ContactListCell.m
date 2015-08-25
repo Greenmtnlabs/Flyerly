@@ -30,10 +30,9 @@
     self.contactImage.clipsToBounds = YES;
     
     
-    // HERE WE SET SOCIAL NETWORK STATUS OF FLYER
+    // Set social network status for untech
     NSInteger statusCount = 0;
     UIImageView *iconImage;
-    
     
     iconImage = [_customizationStatus objectAtIndex:statusCount];
     if ( [model getEmailStatus] ) {
@@ -59,15 +58,13 @@
 
 -(void)contactInvited :(ContactsCustomizedModal *)model{
     
-    //[checkBtn setImage:[UIImage imageNamed:model.checkImageName]];
+    
 }
 
 /*
- * HERE WE SET FLYER IMAGE ,TITLE,DESCRICPTION,DATE AND SOCIAL NETWORK STATUS
+ * HERE WE SET untech IMAGE ,TITLE,DESCRICPTION,DATE AND SOCIAL NETWORK STATUS
  */
 - (void)renderCell :(ContactsCustomizedModal *)contactModal LockStatus:(BOOL )status {
-    
-    
     
 }
 

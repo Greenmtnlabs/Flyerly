@@ -39,8 +39,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *inputEmail;
 
 @property (strong, nonatomic) IBOutlet UITextField *inputPassword;
-//@property (strong, nonatomic) IBOutlet UITextField *inputMsg;
-
 
 @property (strong, nonatomic) IBOutlet UITextField *inputImsHostName;
 @property (strong, nonatomic) IBOutlet UITextField *inputImsPort;
@@ -51,7 +49,6 @@
 @property (strong, nonatomic) IBOutlet UISwitch *oSslSwitch;
 
 @property (nonatomic, strong) BSKeyboardControls *keyboardControls;
-
 
 @property (strong, nonatomic) NSMutableArray *table01Data;
 
@@ -77,7 +74,7 @@
     //Setting up the Scroll size
     [scrollView setContentSize:CGSizeMake(320, 750)];
  
-    //Setting the initial position for scroll view
+    //Setting the initial position of scroll view
     scrollView.contentOffset = CGPointMake(0,0);
     
     _tableView0.contentInset = UIEdgeInsetsMake(-65.0f, 0.0f, 0.0f, 0.0f);
@@ -119,7 +116,8 @@
     [textField resignFirstResponder];
     return NO;
 }
-// ________________________     Custom functions    ___________________________
+
+// Custom functions
 
 - (void)setDefaultModel {
 
@@ -150,28 +148,20 @@
 
 
 #pragma mark - Text Field Delegate
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
     [self.keyboardControls setActiveField:textField];
 }
 
 #pragma mark - Text View Delegate
-
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
+- (void)textViewDidBeginEditing:(UITextView *)textView {
     [self.keyboardControls setActiveField:textView];
 }
 
 #pragma mark - Keyboard Controls(< PREV , NEXT > )  Delegate
-
-- (void)keyboardControls:(BSKeyboardControls *)keyboardControls selectedField:(UIView *)field inDirection:(BSKeyboardControlsDirection)direction
-{
-    	
+- (void)keyboardControls:(BSKeyboardControls *)keyboardControls selectedField:(UIView *)field inDirection:(BSKeyboardControlsDirection)direction {
 }
 
-- (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboardControls
-{
+- (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboardControls {
     [self.view endEditing:YES];
 }
 
@@ -194,13 +184,13 @@
 
 #pragma mark -  Navigation functions
 
-- (void)setNavigationDefaults{
+- (void)setNavigationDefaults {
     
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
 }
 
--(void)btnBackToAccountType{
+-(void)btnBackToAccountType {
 
     [self hideAllViews];
     [UIView transitionWithView:self.view duration:0.5
@@ -211,7 +201,7 @@
                     }];
 }
 
--(void)btnNextTouchEndToServerAccount{
+-(void)btnNextTouchEndToServerAccount {
     
     if( IS_IPHONE_5 ){
         [_emailSetting2 setFrame:CGRectMake(0,0,320,568)];
@@ -235,7 +225,7 @@
     //Last ims setting screen
     if( [callFrom isEqualToString:@"emailSetting1"] ){
         
-        // Left Navigation ________________________________________________________________________________________________________
+        // Left Button
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
         [backButton setTitle:TITLE_BACK_TXT forState:normal];
@@ -246,26 +236,24 @@
         UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         NSMutableArray  *leftNavItems  = [NSMutableArray arrayWithObjects:leftBarButton,nil];
         
-        [self.navigationItem setLeftBarButtonItems:leftNavItems]; //Left button ___________
+        // adds left button to navigation bar
+        [self.navigationItem setLeftBarButtonItems:leftNavItems];
         
-        // Center title ________________________________________
+        // Center title
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
-        // Right Navigation ________________________________________
+        // Right Button
         rightBarButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         [rightBarButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
         rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         
-        if ( [comingFrom isEqualToString:@"SettingsScreen"] ){
+        if ( [comingFrom isEqualToString:@"SettingsScreen"] ) {
             [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
-            
-        }else if ( [comingFrom isEqualToString:@"SetupScreen"] ) {
+        } else if ( [comingFrom isEqualToString:@"SetupScreen"] ) {
             [rightBarButton setTitle:TITLE_NEXT_TXT forState:normal];
-            
-        }else if ( [comingFrom isEqualToString:@"ContactsListScreen"] ){
+        } else if ( [comingFrom isEqualToString:@"ContactsListScreen"] ) {
             [rightBarButton setTitle:TITLE_NEXT_TXT forState:normal];
-            
-        }else {
+        } else {
             [rightBarButton setTitle:TITLE_FINISH_TXT forState:normal];
         }
         
@@ -274,47 +262,48 @@
         UIBarButtonItem *rightBarButton_ = [[UIBarButtonItem alloc] initWithCustomView:rightBarButton];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton_,nil];
         
+        // adds right button to navigation bar
         if ( [comingFrom isEqualToString:@"SettingsScreen"] && ![untechable.acType isEqualToString:@"OTHER"] ){
-            [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
-            
+            [self.navigationItem setRightBarButtonItems:nil];
         }else {
             
-            [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
+            [self.navigationItem setRightBarButtonItems:rightNavItems];
         }
     }
+    
     //second screen where email address and password input
     if( [callFrom isEqualToString:@"emailSetting2"] ) {
-        // Left Navigation ________________________________________________________________________________________________________
+        // Left Button
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
         [backButton setTitle:TITLE_BACK_TXT forState:normal];
         [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(btnBackToAccountType) forControlEvents:UIControlEventTouchUpInside];
-        
         backButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         NSMutableArray  *leftNavItems  = [NSMutableArray arrayWithObjects:leftBarButton,nil];
         
-        [self.navigationItem setLeftBarButtonItems:leftNavItems]; //Left button ___________
+        // adds left button to navigation bar
+        [self.navigationItem setLeftBarButtonItems:leftNavItems];
         
-        // Center title ________________________________________
+        // Center title
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
-         // Right Navigation ________________________________________
+         // Right Button
         rightBarButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         [rightBarButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
         rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
 
-        if ( [comingFrom isEqualToString:@"SettingsScreen"] && [untechable.acType isEqualToString:@"OTHER"] == NO){
+        if ( [comingFrom isEqualToString:@"SettingsScreen"] && [untechable.acType isEqualToString:@"OTHER"] == NO) {
             [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
-        }else{
+        } else {
             [rightBarButton setTitle:TITLE_NEXT_TXT forState:normal];
         }
         
         [rightBarButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         
-        if ( [untechable.acType isEqualToString:@"OTHER"] ){
+        if ( [untechable.acType isEqualToString:@"OTHER"] ) {
             
             rightBarButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
             [rightBarButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
@@ -327,12 +316,13 @@
          UIBarButtonItem *rightBarButton_ = [[UIBarButtonItem alloc] initWithCustomView:rightBarButton];
          NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton_,nil];
         
-        [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
+        // adds right button to navigation bar
+        [self.navigationItem setRightBarButtonItems:rightNavItems];
     }
     //first screen where user select a/c types
     if([callFrom isEqualToString:@"viewDidLoad"])
     {
-        // Left Navigation ________________________________________________________________________________________________________
+        // Left Button
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
         [backButton setTitle:TITLE_BACK_TXT forState:normal];
@@ -343,12 +333,13 @@
         UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         NSMutableArray  *leftNavItems  = [NSMutableArray arrayWithObjects:leftBarButton,nil];
         
-        [self.navigationItem setLeftBarButtonItems:leftNavItems]; //Left button ___________
+        // adds left button to navigation bar
+        [self.navigationItem setLeftBarButtonItems:leftNavItems];
         
-        // Center title ________________________________________
+        // Center title
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];        
         
-        // Right Navigation ________________________________________
+        // Right Button
         rightBarButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         [rightBarButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
         rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
@@ -356,11 +347,12 @@
         [rightBarButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         rightBarButton.showsTouchWhenHighlighted = YES;
 
-        BOOL showSkip = YES;//[untechable canSkipEmailSetting]; //show skip button for all cases it requirment
+        //show skip button for all cases
+        BOOL showSkip = YES;
         
         if ( showSkip ){
             
-            // Left Navigation
+            // Right Button
             skipButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
             skipButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
             [skipButton setTitle:TITLE_SKIP_TXT forState:normal];
@@ -371,11 +363,11 @@
             UIBarButtonItem *skipBarButton = [[UIBarButtonItem alloc] initWithCustomView:skipButton];
             NSMutableArray  *skipNavItems  = [NSMutableArray arrayWithObjects:skipBarButton,nil];
             
+            // adds right button  to navigation bar
             [self.navigationItem setRightBarButtonItems:skipNavItems];
         }else {
-            [self.navigationItem setRightBarButtonItems:nil];//Right buttons ___________
+            [self.navigationItem setRightBarButtonItems:nil];
         }
-
     }
 }
 
@@ -390,7 +382,7 @@
     (highlighted) ? [skipButton setBackgroundColor:DEF_GREEN] : [skipButton setBackgroundColor:[UIColor clearColor]];
 }
 
--(void)onSkip{
+-(void)onSkip {
     
     if( ![comingFrom isEqualToString:@"SetupScreen"] ) {
         SocialnetworkController *socialnetwork;
@@ -398,12 +390,10 @@
         socialnetwork.untechable = untechable;
         [self.navigationController pushViewController:socialnetwork animated:YES];
     } else {
-        
         SetupGuideFourthView *fourthScreen;
         fourthScreen = [[SetupGuideFourthView alloc]initWithNibName:@"SetupGuideFourthView" bundle:nil];
         fourthScreen.untechable = untechable;
         [self.navigationController pushViewController:fourthScreen animated:YES];
-        
     }
 }
 
@@ -437,7 +427,7 @@
     untechable.email = self.inputEmail.text;
     untechable.email = self.inputPassword.text;
 
-    NSLog(@"Go To settings screen comingFrom=%@",comingFrom);
+    NSLog(@"Go to settings screen comingFrom = %@",comingFrom);
     
     if ( [comingFrom isEqualToString:@"SettingsScreen"] ) {
         
@@ -720,7 +710,6 @@
     return countOfSection;
 }
 
-//4
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = nil;
@@ -893,7 +882,7 @@
 
 
 -(IBAction)inputBegin:(id) sender {
-    //UITextField *feild = (UITextField *) sender;
+   
 }
 -(IBAction)inputEnd:(id) sender {
 }
@@ -913,7 +902,6 @@
     return YES;
 }
 
-//3
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     int count = 0;
     

@@ -56,7 +56,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     
-    NSLog( @"homeDirectoryPath this will help us in finding realm file: %@", NSHomeDirectory() );
+    NSLog( @"HomeDirectoryPath - this will help us in finding realm file: %@", NSHomeDirectory() );
     
     if( loadAllUntecs == 1)
         [self setDefaultModel];
@@ -154,8 +154,8 @@
     [self.navigationController pushViewController:addUntechable animated:YES];
 }
 
-/*
- Variable we must need in model, for testing we can use these vars
+/**
+ * Variable we must need in model, for testing we can use these vars
  */
 
 -(void) setUserData{
@@ -164,14 +164,14 @@
 
 #pragma mark -  Model funcs
 -(void)setDefaultUntech{
-    untechable  = [[Untechable alloc] initWithCF];
+    untechable  = [[Untechable alloc] initWithCommonFunctions];
     
     RLMResults *unsortedSetObjects = [RSetUntechable objectsWhere:@"rUId == '1'"];
     RSetUntechable *rSetUntechable = unsortedSetObjects[0];
-    NSMutableDictionary *setDic = [rSetUntechable getModelDic];
-    setDic[@"rUId"] = [untechable getUniqueId];
+    NSMutableDictionary *dic = [rSetUntechable getModelDic];
+    dic[@"rUId"] = [untechable generateUniqueId];
     
-    [untechable setOrSaveVars:RESET dic2:setDic];
+    [untechable addOrUpdateInModel:UPDATE dictionary:dic];
     
     [self setTimeAcToCurVars];
     [self setUserData];
@@ -193,6 +193,7 @@
     
     RLMResults *unsortedObjects = [RUntechable objectsWhere:@"rUId != ''"];
     int s1=0,s2=0;
+    // start for loop
     for(int i=0;i<unsortedObjects.count;i++){
         RSetUntechable *rUntechable = unsortedObjects[i];
         NSMutableDictionary *tempDict = [rUntechable getModelDic];
@@ -200,22 +201,23 @@
         
         [tempDict setObject:[NSNumber numberWithInt:i] forKey:@"index"];
         
-        NSDate *startDate = [untechable.commonFunctions timestampStrToNsDate:[tempDict objectForKey:@"startDate"]];
-        if ( ![untechable.commonFunctions date1IsSmallerThenDate2:startDate date2:currentDate] ){
+        NSDate *startDate = [untechable.commonFunctions convertTimestampToNSDate:[tempDict objectForKey:@"startDate"]];
+        if ( ![untechable.commonFunctions isEndDateGreaterThanStartDate:startDate endDate:currentDate] ){
             sectionOneArray[s1++] = tempDict;
             [currentTimeStamps1 addObject:[tempDict valueForKey:@"startDate"]];
         }else{
             sectionTwoArray[s2++] = tempDict;
             [currentTimeStamps2 addObject:[tempDict valueForKey:@"startDate"]];
         }
-    }//end for looop
+    }
+    // end for loop
     
     [self sortOutTheTimeStamp:currentTimeStamps1 sortFor:@"sec1"];
     [self sortOutTheTimeStamp:currentTimeStamps2 sortFor:@"sec2"];
     
 }
 
-//getting the time stamps from the array and sorting it out!
+//getting the timestamps from the array and sorting it out!
 -(void)sortOutTheTimeStamp:(NSMutableArray *)timeStampArray sortFor:(NSString *)sortFor{
     int timeStamps [timeStampArray.count];
     int sortedTimeStamps [timeStampArray.count];
@@ -229,10 +231,10 @@
         sortedTimeStamps[i] = (int)[timeStampArray[i] integerValue];
     }
     
-    // temprary variable that will hold down the values when sorting being done
+    // temporary variable that will hold the values when sorting being done
     int tempVal;
     
-    // now sort it out on the time stamp
+    // now sort it out on the timestamp
     for( int i = 0; i < timeStampArray.count; i++ ){
         for( int j = 0; j<timeStampArray.count-1; j++ ){
             if( sortedTimeStamps[j] < sortedTimeStamps [i] ){
@@ -246,7 +248,7 @@
     NSMutableArray *tempSectionOneArray = [[NSMutableArray alloc] init];
     NSMutableArray *tempSectionTwoArray = [[NSMutableArray alloc] init];
     
-    //now getting the indexes of array and save it.
+    // gets the indexes of array and saves it
     for( int i = 0; i<timeStampArray.count; i++){
         for( int j = 0; j<timeStampArray.count; j++){
             
@@ -269,7 +271,7 @@
 }
 
 /**
- * Show / hide, a loding indicator in the right bar button.
+ * Show / hide, a loding indicator in the right bar button
  */
 - (void)showHidLoadingIndicator:(BOOL)show {
     if( show ){
@@ -292,12 +294,13 @@
 -(void)changeNavigation:(NSString *)option
 {
     int btnStatusInt = -1;
-    // DISABLE NAVIGATION ON SEND DATA TO API
+    
+    // disables navigations when data is sent to API
     if([option isEqualToString:@"ON_FINISH"] ){
         btnStatusInt = 0;
     }
     
-    // RE-ENABLE NAVIGATION WHEN ANY ERROR OCCURED
+    // enables navigation when any error occurs
     else if([option isEqualToString:@"ERROR_ON_FINISH"] ){
         btnStatusInt = 1;
     }
@@ -379,7 +382,6 @@
     if( returnData != nil ){
         
         NSDictionary *dict=[NSJSONSerialization JSONObjectWithData:returnData options:NSJSONReadingMutableLeaves error:nil];
-        //NSLog(@"In response of save api: %@",dict);
         
         if( [[dict valueForKey:@"status"] isEqualToString:@"OK"] ) {
             
@@ -426,9 +428,11 @@
     btnUntechNow.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
 }
 
-// Override to support conditional editing of the table view.
-// This only needs to be implemented if you are going to be returning NO
-// for some items. By default, all items are editable.
+/**
+ * Override to support conditional editing of the table view.
+ * This only needs to be implemented if you are going to return NO
+ * for some items. By default, all items are editable.
+ */
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return YES if you want the specified item to be editable.
     return YES;
@@ -438,7 +442,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if( !internetReachable.isReachable ){
-        //show alert
+        // show alert
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection"
                                                         message:@"You must be connected to the internet to use this app."
                                                        delegate:nil
@@ -482,10 +486,10 @@
             cell = (UntechableTableCell *)[nib objectAtIndex:0];
             
             [cell setCellValueswithUntechableTitle:[tempDict objectForKey:@"spendingTimeTxt"]
-                                        StartDate:[untechable.commonFunctions timestampStringToAppDate:[tempDict objectForKey:@"startDate"]]
-                                         StartTime:[untechable.commonFunctions timestampStringToAppDateTime:[tempDict objectForKey:@"startDate"]]
-                                           EndDate:[untechable.commonFunctions timestampStringToAppDate:[tempDict objectForKey:@"endDate"]]
-                                           EndTime:[untechable.commonFunctions timestampStringToAppDateTime:[tempDict objectForKey:@"endDate"]]];
+                                        StartDate:[untechable.commonFunctions convertTimestampToAppDate:[tempDict objectForKey:@"startDate"]]
+                                         StartTime:[untechable.commonFunctions convertTimestampToAppDateTime:[tempDict objectForKey:@"startDate"]]
+                                           EndDate:[untechable.commonFunctions convertTimestampToAppDate:[tempDict objectForKey:@"endDate"]]
+                                           EndTime:[untechable.commonFunctions convertTimestampToAppDateTime:[tempDict objectForKey:@"endDate"]]];
             return cell;
         }
         else{
@@ -521,16 +525,16 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSMutableDictionary *tempDict;
+    NSMutableDictionary *tempDictionary;
     if ( indexPath.section == 0 ){
-        tempDict = sectionOneArray[indexPath.row];
+        tempDictionary = sectionOneArray[indexPath.row];
     }else if ( indexPath.section == 1 ){
-        tempDict = sectionTwoArray[indexPath.row];
+        tempDictionary = sectionTwoArray[indexPath.row];
     }
     
     
     AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
-    [untechable setOrSaveVars:RESET dic2:tempDict];
+    [untechable addOrUpdateInModel:UPDATE dictionary:tempDictionary];
     
     addUntechable.untechable = untechable;
     addUntechable.totalUntechables = (int)allUntechables.count;
@@ -605,15 +609,15 @@
     self.doneButtonView.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
     self.timeDurationPicker.backgroundColor = [self colorFromHexString:@"#fafafa"];
     
-    //changing the "CLOSE"button text color to black
+    //changes the "CLOSE" button text color to black
     [_doneButtonView setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
     
 }
 
 /**
- Hex Color Converter
- @params NSString
- retunrs UIColor
+ * Hex Color Converter
+ * @params: NSString
+ * retunrs: UIColor
  */
 - (UIColor *)colorFromHexString:(NSString *)hexString {
     unsigned rgbValue = 0;
@@ -624,8 +628,8 @@
 }
 
 /**
- Adding a top border for a view
- **/
+ * Adding a top border for a view
+ */
 - (void)addUpperBorder
 {
     CALayer *upperBorder = [CALayer layer];
@@ -641,36 +645,31 @@
     _pickerData = arrayToBeAdded;
 }
 
-- (NSDate *)timestampStrToNsDate:(NSString *)timeStamp
-{
-    return [NSDate dateWithTimeIntervalSince1970:[timeStamp integerValue]];
-}
-
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     
     switch (row) {
         case 0:
-            timeDuration = 30*60; //30 minutes
+            timeDuration = 30*60; // 30 minutes
             timeInString = @"30 minutes";
             break;
             
         case 1:
-            timeDuration = 60*60; //1 hr
+            timeDuration = 60*60; // 1 hr
             timeInString = @"1 hour";
             break;
         
         case 2:
-            timeDuration = 24*60*60; //1 day
+            timeDuration = 24*60*60; // 1 day
             timeInString = @"1 Day";
             break;
         
         case 3:
-            timeDuration = 2*24*60*60; //2 days
+            timeDuration = 2*24*60*60; // 2 days
             timeInString = @"2 Days";
             break;
             
         default:
-            timeDuration = 30*60; //30 minutes
+            timeDuration = 30*60; // 30 minutes
             timeInString = @"30 minutes";
             break;
     }
@@ -702,10 +701,9 @@
     
     self.doneButtonView.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
     
-    //changing the "CLOSE"button text color to black
+    // changes the "CLOSE" button text color to black
     [_doneButtonView setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
 
-    
     [self initializePickerData];
     [_timeDurationPicker setHidden:NO];
     [_doneButtonView setHidden:NO];
@@ -723,7 +721,7 @@
     
     [self changeNavigation:@"ON_FINISH"];
     
-    //Background work
+    // Background work
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
             
@@ -751,8 +749,8 @@
 
 }
 /**
- navigate to thank you controller screen when successfully user create an untech
- **/
+ * navigate to ThankyouController screen when untech is created successfully
+ */
 -( void ) goToThankyouScreen {
     ThankyouController *thankyouScreen = [[ThankyouController alloc] init];
     thankyouScreen.untechable = untechable;
@@ -761,9 +759,8 @@
 -( void )setTimeAcToCurVars {
     NSInteger positionToShow = 0;
     
-    untechable.startDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(0)] ]; //current time
-    untechable.endDate  = [untechable.commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(timeDuration)] ]; //start time + selected time duration
-    
+    untechable.startDate  = [untechable.commonFunctions convertNSDateToTimestamp: [[NSDate date] dateByAddingTimeInterval:(0)] ]; // current time
+    untechable.endDate  = [untechable.commonFunctions convertNSDateToTimestamp: [[NSDate date] dateByAddingTimeInterval:(timeDuration)] ]; // start time + selected time duration
     
     // the selected status from the setup screen would be set as default status on unetch now option
     NSArray *customArrayOfStatuses = [[NSUserDefaults standardUserDefaults]objectForKey:@"cutomSpendingTimeTextAry"];
@@ -777,7 +774,7 @@
    
     NSString *selectedStatus = [customArrayOfStatuses objectAtIndex:positionToShow];
     
-    //setting spending time text to status got from setup screen.
+    //setting spendingTimeTxt to status got from setup screen.
     untechable.spendingTimeTxt = selectedStatus;
     NSString *socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", timeInString, untechable.spendingTimeTxt];
     untechable.socialStatus = socialStatus;

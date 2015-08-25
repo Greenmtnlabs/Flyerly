@@ -29,41 +29,33 @@
 @property (nonatomic, assign) BOOL savedOnServer;
 @property (nonatomic, assign) BOOL hasFinished;
 
-//SetupGuide Screen 1
+// SetupGuide Screen 1
 @property (strong, nonatomic) NSString *userName;
 @property (strong, nonatomic) NSString *userPhoneNumber;
-
-//Screen1
 @property (strong, nonatomic) NSString *timezoneOffset, *spendingTimeTxt, *startDate, *endDate;
 @property (nonatomic, assign) BOOL hasEndDate;
 
-
-
-//Screen2
-//@property (strong, nonatomic) NSMutableArray *customizedContacts;
+// SetupGuide Screen2
 @property (strong, nonatomic) NSString *customizedContacts;
-//@property (strong, nonatomic) NSString *twillioNumber, *emergencyNumber, *location;
 @property (strong, nonatomic) NSString *twillioNumber, *location;
-//@property (strong, nonatomic) NSMutableDictionary *emergencyContacts;
-//@property (nonatomic, assign) BOOL hasRecording;
 @property (strong, nonatomic) NSMutableArray *customizedContactsForCurrentSession;
 
-//Screen3
+// SetupGuide Screen3
 @property (strong, nonatomic) NSString *socialStatus, *fbAuth, *fbAuthExpiryTs, *twitterAuth, *twOAuthTokenSecret, *linkedinAuth;
 
-//Screen4
+// SetupGuide Screen4
 @property (strong, nonatomic) NSString *email, *password, *respondingEmail, *acType, *iSsl, *oSsl, *imsHostName, *imsPort,
                                        *omsHostName, *omsPort;
 
-- (id)initWithCF;
+- (id)initWithCommonFunctions;
 -(void)goBack:navigationControllerPointer;
--(NSString *)getUniqueId;
--(void)setOrSaveVars:(NSString *)setOrSAve dic2:(NSMutableDictionary *)dic2;
+-(NSString *)generateUniqueId;
+-(void)addOrUpdateInModel:(NSString *)command dictionary:(NSMutableDictionary *)dictionary;
 -(BOOL)isUntechableStarted;
 -(BOOL)isUntechableExpired;
 -(void)sendToApiAfterTask:(void(^)(BOOL,NSString *))callBack;
--(void)saveOrUpdateInDb;
--(void)reSetCustomizedContactsInSession;
+-(void)addOrUpdateInDatabase;
+-(void)resetCustomizedContactsForCurrentSession;
 -(BOOL)canSkipEmailSetting;
 
 @end
