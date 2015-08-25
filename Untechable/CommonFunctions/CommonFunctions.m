@@ -129,11 +129,12 @@
 - (NSString *)convertTimestampToAppDate:(NSString *)timestamp {
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:DATE_FORMATE_1];
+    [dateFormatter setDateFormat:DATE_FORMATE_DATE];
     
     NSDate *newDate  =   [self convertTimestampToNSDate:timestamp];
     NSString *newDateStr    =   [dateFormatter stringFromDate:newDate];
     return newDateStr;
+    
 }
 
 -(UIImageView *) navigationGetTitleView {
