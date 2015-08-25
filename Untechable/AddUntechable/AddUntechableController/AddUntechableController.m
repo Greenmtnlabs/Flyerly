@@ -67,10 +67,10 @@
     
     [self showHideDateTimePicker:NO];
     
-    // Initialize Data
+    // initializes array
     _pickerData = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];;
     
-    // remove last element from array which is "Custom"
+    // removes last element from array which is "Custom"
     [_pickerData removeObjectAtIndex: _pickerData.count-1];
 
     [self showHideTextPicker:NO];
@@ -122,9 +122,9 @@
     [self setNavigation:@"viewDidLoad"];
 }
 /**
- before appearing view
- we need to set some ui fields
- **/
+ * before appearing view
+ * we need to set some UI fields
+ */
 -(void)viewWillAppear:(BOOL)animated {
     [self setNavigation:@"viewDidLoad"];
 }
@@ -302,7 +302,7 @@
 }
 
 #pragma mark- Select text
-//when user tapes on select text
+//when user taps on select text
 -(IBAction)selectText:(id)sender{
     
     [self hideAllControlls];
@@ -311,7 +311,7 @@
 }
 
 #pragma mark -  Select Date
-//when user tap on dates
+//when user taps on datepicker
 -(IBAction)changeDate:(id)sender
 {
     [self hideAllControlls];
@@ -329,7 +329,7 @@
     }
     
 }
-//when user select the date from datepicker
+//when user selects the date from datepicker
 -(IBAction)onDateChange:(id)sender {
     [self dateChanged];
 }
@@ -409,7 +409,7 @@
     [self addUpperBorder];
     self.pickerCloseBtn.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
     
-    //changing the "CLOSE"button text color to black
+    //changes the "CLOSE" button text color to black
     [_pickerCloseBtn setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
    
 }
@@ -442,9 +442,9 @@
 }
 
 /**
- Hex Color Converter
- @params NSString
- retunrs UIColor
+ * Hex Color Converter
+ * @params: NSString
+ * retunrs: UIColor
  */
 - (UIColor *)colorFromHexString:(NSString *)hexString {
     unsigned rgbValue = 0;
@@ -458,7 +458,7 @@
 // set default vaules in model
 -(void)setDefaultModel{
 
-    now1 = [NSDate date]; //current date
+    now1 = [NSDate date]; // current date
     
     //Set Date format
     untechable.dateFormatter = [[NSDateFormatter alloc] init];
@@ -600,8 +600,8 @@
 }
 
 /**
- Adding a top border for a view
- **/
+ * Adding a top border for a view
+ */
 - (void)addUpperBorder
 {
     CALayer *upperBorder = [CALayer layer];
