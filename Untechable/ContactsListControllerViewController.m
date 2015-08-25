@@ -1,4 +1,3 @@
-
 //
 //  ContactsListControllerViewController.m
 //  Untechable
@@ -28,8 +27,6 @@
 @implementation ContactsListControllerViewController
 
 @synthesize mobileContactsArray,mobileContactBackupArray,searchTextField,untechable, selectedAnyEmail;
-
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -65,8 +62,8 @@
 }
 
 /**
- dismiss keyboard when view will off the screen
- **/
+ * dismiss keyboard when view will off the screen
+ */
 - (void)viewWillDisappear:(BOOL)animated{
     [searchTextField resignFirstResponder];
 }
@@ -83,7 +80,7 @@
     if([callFrom isEqualToString:@"viewDidLoad"]) {
         self.navigationItem.hidesBackButton = YES;
         
-        // Center title __________________________________________________
+        // Center title
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
         // Back Navigation button
@@ -92,21 +89,17 @@
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [backButton setTitle:TITLE_BACK_TXT forState:normal];
         [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
-        //[backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
         backButton.showsTouchWhenHighlighted = YES;
         
         UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         
-        [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+        // adds left button to navigation bar
+        [self.navigationItem setLeftBarButtonItem:lefttBarButton];
         
-        // Right Navigation ______________________________________________
+        // Right Navigation
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-        //[nextButton setBackgroundColor:[UIColor redColor]];//for testing
-        
         nextButton.titleLabel.shadowColor = [UIColor clearColor];
-        //nextButton.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
-        
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 33, 42)];
         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
         [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
@@ -115,7 +108,6 @@
         [nextButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
         [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
-        
         nextButton.showsTouchWhenHighlighted = YES;
         
         skipButton = [[UIButton alloc] initWithFrame:CGRectMake(33, 0, 33, 42)];
@@ -131,7 +123,8 @@
         UIBarButtonItem *skipButtonBarButton = [[UIBarButtonItem alloc] initWithCustomView:skipButton];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,skipButtonBarButton,nil];
         
-        [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
+        // adds nextButton and skipButton to navigation bar
+        [self.navigationItem setRightBarButtonItems:rightNavItems];
     }
 }
 
@@ -142,15 +135,14 @@
     [searchTextField resignFirstResponder];
 }
 
-
 - (void)setSkipHighlighted:(BOOL)highlighted {
     (highlighted) ? [skipButton setBackgroundColor:DEF_GREEN] : [skipButton setBackgroundColor:[UIColor clearColor]];
 }
 
--(void)btnSkipTouchStart{
+-(void)btnSkipTouchStart {
     [self setSkipHighlighted:YES];
 }
--(void)btnSkipTouchEnd{
+-(void)btnSkipTouchEnd {
     [self setSkipHighlighted:NO];
     [self onSkip];
 }
@@ -195,7 +187,7 @@
     if( [untechable.rUId  isEqualToString: @"1"]){
         
         if( selectedAnyEmail ) {
-            [self showEmailSetupScreen:YES];//calledFromSetupScreen is YES
+            [self showEmailSetupScreen:YES]; //calledFromSetupScreen is YES
         } else {
             
             SetupGuideFourthView *fourthScreen = [[SetupGuideFourthView alloc] initWithNibName:@"SetupGuideFourthView" bundle:nil];
@@ -209,7 +201,7 @@
         
     } else if( ![untechable.rUId  isEqualToString: @"1"] ){
         if ( selectedAnyEmail  ){
-            [self showEmailSetupScreen:NO];//calledFromSetupScreen is NO
+            [self showEmailSetupScreen:NO]; //calledFromSetupScreen is NO
         }else {
             
             SocialnetworkController *socialnetwork;
@@ -414,8 +406,6 @@
     for (int i=0;i < nPeople;i++) {
         currentltRenderingContactModal = [[ContactsCustomizedModal alloc] init];
         
-
-        
         ABRecordRef ref = CFArrayGetValueAtIndex(allPeople,i);
         
         //For username and surname
@@ -539,19 +529,6 @@
     [self reloadContactsTableInMainThread];
 }
 
-
-/*
--(NSString *) NumberToFormatIntoUSstandard :(NSString *)nonFormatedNumber{
-    
-    NSMutableString *stringts = [NSMutableString stringWithString:nonFormatedNumber];
-    [stringts insertString:@"(" atIndex:0];
-    [stringts insertString:@")" atIndex:4];
-    [stringts insertString:@"-" atIndex:5];
-    [stringts insertString:@"-" atIndex:9];
-    return stringts;
-}*/
-
-
 /**
  * On row tap, go to contact details
  */
@@ -559,7 +536,6 @@
     
     ContactCustomizeDetailsControlelrViewController *detailsController = [[ContactCustomizeDetailsControlelrViewController alloc] init];
     detailsController.untechable = untechable;
-
     
     // contact which is going to be edit
     ContactsCustomizedModal *mobileContModel = mobileContactsArray[indexPath.row];
@@ -588,25 +564,26 @@
  * This function will map the session values on to mobileContactsArray( extracted from mobile contacts) this
  * will be using between contact list and contact list details controllers
  */
--(void)mapAllSessionContactSelectionsOnMobileArray{
+-(void)mapAllSessionContactSelectionsOnMobileArray {
+    
     for (int i = 0;i< mobileContactsArray.count; i++){
         ContactsCustomizedModal *mobileContModel = mobileContactsArray[i];
         
         BOOL found = NO;
-        for (int j = 0; j< untechable.customizedContactsForCurrentSession.count; j++){
+        for (int j = 0; j< untechable.customizedContactsForCurrentSession.count; j++) {
             ContactsCustomizedModal *sessionModel = untechable.customizedContactsForCurrentSession[j];
             
-            if( [sessionModel.contactName isEqualToString:mobileContModel.contactName] ){
+            if( [sessionModel.contactName isEqualToString:mobileContModel.contactName] ) {
                 mobileContModel = [self mapSingleSessionModelToSingleMobileModel:mobileContModel sessionModel:sessionModel];
                 found = YES;
                 break;
             }
-        }//for2//
+        } // inner loop
         
        if( found == NO )
-        mobileContModel = [self resetModel:mobileContModel];
+           mobileContModel = [self resetModel:mobileContModel];
         
-    }//for1//
+    } // outter loop
 }
 
 //Mapping of single sessionModel on to single mobileContactModel, will return mobileContactModel
@@ -632,8 +609,6 @@
         }
         
         found = NO;
-        
-        
     }
     
     for(int i=0; i<mobileContModel.allEmails.count; i++){
