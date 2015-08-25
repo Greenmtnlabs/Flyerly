@@ -25,14 +25,13 @@
 
 -(void)setInvitedStatus :(int)sts{
     
-    
     status = sts;
     
     if (status == 1) {
         checkImageName = @"checkBlue";
     } else if (status == 2) {
         checkImageName = @"checkDouble";
-    }else {
+    } else {
         checkImageName = @"checkgray";
     }
     
@@ -40,7 +39,7 @@
 }
 
 /*
- * Here we Return Email Status of Contact, @"1" for true case
+ * returns YES if email status of contact is set to @"1"
  */
 -(BOOL)getEmailStatus {
     BOOL csStatus = NO;
@@ -53,9 +52,8 @@
     return csStatus;
 }
 
-
 /*
- * Here we Return SMS Share Status of Contact
+ * returns YES if sms status of contact is set to @"1"
  */
 -(BOOL)getSmsStatus {
     BOOL csStatus = NO;
@@ -70,9 +68,8 @@
 
 
 /*
- * Here we Return Phone Share Status of Contact
+ * returns YES if phone status of contact is set to @"1"
  */
-
 -(BOOL)getPhoneStatus {
     BOOL csStatus = NO;
     for(int i=0; i<allPhoneNumbers.count; i++){
