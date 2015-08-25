@@ -28,6 +28,7 @@
 		203A2A281B7A2A29009949AA /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 203A2A251B7A2A29009949AA /* logo.png */; };
 		203A2A291B7A2A29009949AA /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 203A2A261B7A2A29009949AA /* logo@2x.png */; };
 		203A2A2A1B7A2A29009949AA /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 203A2A271B7A2A29009949AA /* logo@3x.png */; };
+		2065E8DA1B8C94F60005D184 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2065E8DC1B8C94F60005D184 /* Localizable.strings */; };
 		2402BB831A1DBF6A00255A73 /* UntechablesList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402BB811A1DBF6A00255A73 /* UntechablesList.m */; };
 		2402BB841A1DBF6A00255A73 /* UntechablesList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2402BB821A1DBF6A00255A73 /* UntechablesList.xib */; };
 		2402BB881A1DC3A200255A73 /* UntechableTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402BB861A1DC3A200255A73 /* UntechableTableCell.m */; };
@@ -269,6 +270,8 @@
 		203A2A251B7A2A29009949AA /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		203A2A261B7A2A29009949AA /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		203A2A271B7A2A29009949AA /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
+		2065E8DB1B8C94F60005D184 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2065E8DD1B8C95290005D184 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2402BB801A1DBF6A00255A73 /* UntechablesList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UntechablesList.h; path = UntechableListController/UntechablesList.h; sourceTree = "<group>"; };
 		2402BB811A1DBF6A00255A73 /* UntechablesList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UntechablesList.m; path = UntechableListController/UntechablesList.m; sourceTree = "<group>"; };
 		2402BB821A1DBF6A00255A73 /* UntechablesList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UntechablesList.xib; path = UntechableListController/UntechablesList.xib; sourceTree = "<group>"; };
@@ -739,6 +742,7 @@
 				36561D7419D2C8A40069D897 /* InfoPlist.strings */,
 				36561D7719D2C8A40069D897 /* main.m */,
 				36561D7919D2C8A40069D897 /* Untechable-Prefix.pch */,
+				2065E8DC1B8C94F60005D184 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			path = Untechable;
@@ -1183,6 +1187,7 @@
 				2465A6071B4BE1C400B3E22C /* navigation1@2x.png in Resources */,
 				36474F2619D9780100084F34 /* Pigiarniq Regular.ttf in Resources */,
 				C33C1EF31A727A690064DBE8 /* SSLCell-iPhone6.xib in Resources */,
+				2065E8DA1B8C94F60005D184 /* Localizable.strings in Resources */,
 				C346D1801A7FD13B00856A58 /* twitter.png in Resources */,
 				2499521E1A56F260001AEB84 /* phone.png in Resources */,
 				36B276791A0124E800ED58AD /* record.png in Resources */,
@@ -1483,6 +1488,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		2065E8DC1B8C94F60005D184 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2065E8DB1B8C94F60005D184 /* es */,
+				2065E8DD1B8C95290005D184 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		36561D7419D2C8A40069D897 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

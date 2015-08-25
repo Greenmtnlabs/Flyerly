@@ -153,38 +153,27 @@
     {
         self.navigationItem.hidesBackButton = YES;
         
-        // Center title __________________________________________________
+        // Center title
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
-        // Right Navigation ______________________________________________
+        // Right Button
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-        
         nextButton.titleLabel.shadowColor = [UIColor clearColor];
-        
         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
-
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
+        [nextButton setTitle:NSLocalizedString(TITLE_NEXT_TXT, nil) forState:normal];
         [nextButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
         [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
-        
         nextButton.showsTouchWhenHighlighted = YES;
         
-        
-        
         if( untechable.hasFinished ){
-        
-        
-            // Left Navigation ______________________________________________
+            // Left Button
             backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-            
             backButton.titleLabel.shadowColor = [UIColor clearColor];
-            
             [backButton addTarget:self action:@selector(onBack) forControlEvents:UIControlEventTouchUpInside];
-            
             backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
-            [backButton setTitle:TITLE_BACK_TXT forState:normal];
+            [backButton setTitle: NSLocalizedString(TITLE_BACK_TXT, nil) forState:normal];
             [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
             [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
             [backButton addTarget:self action:@selector(btnBackTouchEnd) forControlEvents:UIControlEventTouchUpInside];

@@ -1,0 +1,18 @@
+/* 
+  Localizable.strings
+  Untechable
+
+  Created by Muhammad Arqam Owais on 25/08/2015.
+  Copyright (c) 2015 Green MTN Labs Inc. All rights reserved.
+*/
+
+
+"SKIP" = "SKIP";
+"SAVE" = "SAVE";
+"NEXT" = "NEXT";
+"NEW" = "NEW";
+"BACK" = "BACK";
+"SETTINGS" = "SETTINGS";
+"DONE" = "DONE";
+"FINISH" = "FINISH";
+"EDIT" = "EDIT";
