@@ -8,7 +8,7 @@
 
 #import "SetupGuideSecondViewController.h"
 #import "SetupGuideThirdView.h"
-
+#import "Common.h"
 
 @interface SetupGuideSecondViewController () {
     NSMutableArray *customSpendingTextAry;
@@ -24,12 +24,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self initializePickerData];
     
     //navigation related Stuff
     [self setNavigationBarItems];
     
     [self setDefaultUntechSpendingTimeText];
+    
+    [self initializePickerData];
+
+    [self applyLocalization];
+}
+
+-(void)applyLocalization{
+    [_lblUntechQuestion setText:NSLocalizedString(UNTECH_QUESTION, nil)];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,15 +55,16 @@
 
 -(void)initializePickerData {
     
-    NSArray *customSpendingTextArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];
+    NSMutableArray *customSpendingTextArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];
     
-    NSMutableOrderedSet * set = [NSMutableOrderedSet orderedSetWithArray:DEF_SPENDING_TIME_ARY ];
-    
-    [set unionSet:[NSSet setWithArray:customSpendingTextArray]];
+//    NSMutableOrderedSet *set = [NSMutableOrderedSet orderedSetWithArray:DEF_SPENDING_TIME_ARY ];
+//    
+//    [set unionSet:[NSSet setWithArray:customSpendingTextArray]];
+//
+//    customSpendingTextAry = [NSMutableArray arrayWithArray:[set array]];
 
-    customSpendingTextAry = [NSMutableArray arrayWithArray:[set array]];
+    customSpendingTextAry = customSpendingTextArray;
     
-    customSpendingTextAry = [self customValAtTheEnd:customSpendingTextAry];
     NSString *temStr = ( [untechable.spendingTimeTxt isEqualToString:@""] ) ? @"e.g Spending time with family." : untechable.spendingTimeTxt;
     [self setupDoctorsResearchLabel:temStr];//[customSpendingTextAry objectAtIndex:0]];
     
@@ -84,7 +92,7 @@
  Setting up Doctors Research Label to be shown
  **/
 -(void) setupDoctorsResearchLabel:(NSString *)msg {
-    _doctorsResearchLabel.text = [NSString stringWithFormat:@"Did you know that based on a study, people %@ have better relationships, better quality of sleep and in general are more emotionally balanced.", msg];
+    _doctorsResearchLabel.text = [NSString stringWithFormat:NSLocalizedString(DOCTOR_RESEARCH_LABEL, nil), msg];
 }
 
 #pragma - Mark UI PICKER VIEW Delegate Methods
@@ -231,6 +239,13 @@
      NSArray *customSpendingTextArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];
     if( customSpendingTextArray == nil ) {
         // inserting values in our pickerview's data source.
+//        
+//        NSMutableArray *userAddedSpendingTimeText;
+//        
+//        for (int i=9; i<customSpendingTextArray.count; i++) {
+//            [userAddedSpendingTimeText addObject:customSpendingTextArray[i]];
+//        }
+        
         [[NSUserDefaults standardUserDefaults] setObject:customSpendingTextAry forKey:@"cutomSpendingTimeTextAry"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }

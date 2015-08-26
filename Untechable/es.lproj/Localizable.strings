@@ -17,6 +17,22 @@
 "FINISH" = "ACABADO";
 "EDIT" = "EDITAR";
 
+
+// Untech Options
+"Spending time with family" = "Pasar tiempo con la familia";
+"Driving" = "Conducir";
+"Spending time outdoors" = "Pasar tiempo al aire libre";
+"At the beach" = "En la playa";
+"Enjoying the holidays" = "Disfrutando de las vacaciones";
+"Just needed a break" = "Sólo necesitaba un descanso";
+"Running" = "Corriendo";
+"On vacation" = "De vacaciones";
+"Finding my inner peace" = "Encontrar a mi paz interna";
+"Removing myself from technology" = "Extracción de mí mismo de la tecnología";
+"Custom" = "Personalizado";
+
+
+// SetupGuide Screen 1
 "Name" = "Nombre";
 "Please Enter Your Name" = "Por favor, escriba su nombre";
 "Phone Number" = "Número de teléfono";
@@ -24,3 +40,8 @@
 "Error" = "Error";
 "Please Enter Your Name and Number" = "Por favor, introduzca su nombre y número";
 "OK" = "OK";
+
+// SetupGuide Screen 2
+"When you take time away from technology, what do you typically do or hope to do more of?" = "Cuando te tomas el tiempo lejos de la tecnología , ¿qué lo hace normalmente o la esperanza de hacer más de";
+
+"Did you know that based on a study, people %@ have better relationships, better quality of sleep and in general are more emotionally balanced." = "¿Sabía usted que en base a un estudio , las personas %@ tener mejores relaciones, mejor calidad del sueño y en general son más emocionalmente equilibrado.";

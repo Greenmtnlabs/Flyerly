@@ -97,10 +97,10 @@
 
 #define DEF_GREEN [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0]
 #define DEF_GRAY [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0]
-#define DEF_SPENDING_TIME_ARY @[@"Spending time with family.", @"Driving.", @"Spending time outdoors.", @"At the beach.", @"Enjoying the holidays.", @"Just needed a break.", @"Running.", @"On vacation.", @"Finding my inner peace.", @"Removing myself from technology.", @"Custom"]
 
-// Screen 1
+#define DEF_SPENDING_TIME_ARY @[@"Spending time with family", @"Driving", @"Spending time outdoors", @"At the beach", @"Enjoying the holidays", @"Just needed a break", @"Running", @"On vacation", @"Finding my inner peace", @"Removing myself from technology", @"Custom"]
 
+// SetupGuide Screen 1
 #define TITLE_NAME @"Name"
 #define MESSAGE_NAME @"Please Enter Your Name"
 #define TITLE_PHONENUMBER @"Phone Number"
@@ -110,3 +110,6 @@
 #define ERROR_MESSAGE_PHONENUMBER @"Please Enter Your Name and Number"
 #define OK @"OK"
 
+// SetupGuide Screen 2
+#define UNTECH_QUESTION @"When you take time away from technology, what do you typically do or hope to do more of?"
+#define DOCTOR_RESEARCH_LABEL @"Did you know that based on a study, people %@ have better relationships, better quality of sleep and in general are more emotionally balanced."

@@ -17,6 +17,22 @@
 "FINISH" = "FINISH";
 "EDIT" = "EDIT";
 
+
+// Untech Options
+"Spending time with family" = "Spending time with family";
+"Driving" = "Driving";
+"Spending time outdoors" = "Spending time outdoors";
+"At the beach" = "At the beach";
+"Enjoying the holidays" = "Enjoying the holidays";
+"Just needed a break" = "Just needed a break";
+"Running" = "Running";
+"On vacation" = "On vacation";
+"Finding my inner peace" = "Finding my inner peace";
+"Removing myself from technology" = "Removing myself from technology";
+"Custom" = "Custom";
+
+
+// SetupGuide Screen 1
 "Name" = "Name";
 "Please Enter Your Name" = "Please Enter Your Name";
 "Phone Number" = "Phone Number";
@@ -24,3 +40,12 @@
 "Error" = "Error";
 "Please Enter Your Name and Number" = "Please Enter Your Name and Number";
 "OK" = "OK";
+
+// SetupGuide Screen 2
+"When you take time away from technology, what do you typically do or hope to do more of?" = "When you take time away from technology, what do you typically do or hope to do more of?";
+
+"Did you know that based on a study, people %@ have better relationships, better quality of sleep and in general are more emotionally balanced." = "Did you know that based on a study, people %@ have better relationships, better quality of sleep and in general are more emotionally balanced.";
+
+
+
+
