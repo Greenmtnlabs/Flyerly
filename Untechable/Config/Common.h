@@ -44,6 +44,8 @@
 #define PIECES_FILE @"untechable.pieces"
 #define RECORDING_LIMIT_IN_SEC 60
 
+#define SUCCESS @"SUCCESS"
+#define CANCEL @"CANCEL"
 #define SAVE @"SAVE"
 #define UPDATE @"UPDATE"
 
@@ -102,4 +104,3 @@
 
 #define PRO_MONTHLY_SUBS @"com.untech.MonthlySubscription"
 #define PRO_YEARLY_SUBS @"com.untech.YearlySubscription"
-

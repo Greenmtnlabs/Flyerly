@@ -726,6 +726,18 @@
     [self checkPayment];
 }
 
+-(void)handlePurchaseProductResponse:(NSString *)msg{
+    if ( [msg isEqualToString:SUCCESS] ) {
+        [self createUntechableAfterPaymentCheck];
+    }
+    else if ( [msg isEqualToString:CANCEL] ) {
+        [self changeNavigation:@"ALERT_CANCEL"];
+    }
+    else{
+        [self changeNavigation:@"ERROR_ON_FINISH"];
+        [untechable.commonFunctions showAlert:@"Error in purchase" message:msg];
+    }
+}
 
 //alert view delegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -735,10 +747,11 @@
     }
     //Alert tag = 1, while showing products in alert
     else if( alertView.tag == 1 ) {
-        if(buttonIndex == 1) {
-            //[self purchaseProduct:PRO_MONTHLY_SUBS];
-        } else if(buttonIndex == 2) {
-            //[self purchaseProduct:PRO_YEARLY_SUBS];
+        if(buttonIndex == 1 || buttonIndex == 2) {
+            NSString *productidentifier = ( buttonIndex == 1 ) ? PRO_MONTHLY_SUBS : PRO_YEARLY_SUBS;
+            [userPurchases purchaseProductID:productidentifier callBack:^(NSString *msg){
+                [self handlePurchaseProductResponse:msg];
+            }];
         } else {
             [self changeNavigation:@"ALERT_CANCEL"];
         }
@@ -800,7 +813,6 @@
 }
 
 -(void)createUntechableAfterPaymentCheck{
-
     // Background work
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){

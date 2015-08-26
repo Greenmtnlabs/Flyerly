@@ -79,18 +79,20 @@ static UserPurchases *sharedSingleton = nil;
  HERE WE PURCHASE PRODUCT FROM APP STORE
  When user tap on product for purchase
  */
--(void)purchaseProductID:(NSString *)productidentifier{
+-(void)purchaseProductID:(NSString *)productidentifier callBack:(void(^)(NSString *))callBack{
     
     [[RMStore defaultStore] addPayment:productidentifier success:^(SKPaymentTransaction *transaction) {
-        
-        NSLog(@"Product purchased");
-        
-        
-        
+        callBack(SUCCESS);
     } failure:^(SKPaymentTransaction *transaction, NSError *error) {
-        
-        NSLog(@"Something went wrong");
-        
+        if( error != nil){
+            if( error.code == 2 ){
+                callBack( CANCEL );
+            } else {
+                callBack( error.description );
+            }
+        } else{
+            callBack(@"Something went wrong");
+        }
     }];
 }
 

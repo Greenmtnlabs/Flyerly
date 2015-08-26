@@ -16,5 +16,6 @@
 + (id) getInstance;
 -(void)loadAllProducts:(void(^)(NSString *))callBack;
 - (BOOL)isSubscriptionValid;
+-(void)purchaseProductID:(NSString *)productidentifier callBack:(void(^)(NSString *))callBack;
 @end
 

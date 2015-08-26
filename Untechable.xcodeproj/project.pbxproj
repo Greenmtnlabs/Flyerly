@@ -1101,10 +1101,10 @@
 		C3DC2E0F1B8C73620091CCF4 /* Purchases */ = {
 			isa = PBXGroup;
 			children = (
-				C3DC2E281B8C8B6A0091CCF4 /* SKProduct+LocalPrice.h */,
-				C3DC2E291B8C8B6A0091CCF4 /* SKProduct+LocalPrice.m */,
 				C3DC2E101B8C73620091CCF4 /* UserPurchases.h */,
 				C3DC2E111B8C73620091CCF4 /* UserPurchases.m */,
+				C3DC2E281B8C8B6A0091CCF4 /* SKProduct+LocalPrice.h */,
+				C3DC2E291B8C8B6A0091CCF4 /* SKProduct+LocalPrice.m */,
 				C3DC2E131B8C77070091CCF4 /* RMAppReceipt.h */,
 				C3DC2E141B8C77070091CCF4 /* RMAppReceipt.m */,
 				C3DC2E151B8C77070091CCF4 /* RMStore.h */,
