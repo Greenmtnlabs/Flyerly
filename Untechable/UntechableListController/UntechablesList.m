@@ -31,7 +31,6 @@
     NSString *timeInString;
     UserPurchases *userPurchases;
 }
-
 @end
 
 @implementation UntechablesList
@@ -907,7 +906,7 @@
 /**
  * Alert view delegate functions
  */
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+-(void)alertView:(UIAlertView *) alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     //Alert tag = 0, while loading product cause an error prompts the alert
     if( alertView.tag == 0 ) {
         [self changeNavigation:@"ALERT_CANCEL"];

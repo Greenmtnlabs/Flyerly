@@ -18,7 +18,12 @@
 #import "ContactsCustomizedModal.h"
 #import "CommonFunctions.h"
 #import <math.h>
+#import "UserPurchases.h"
 
+@interface SocialnetworkController(){
+    UserPurchases *userPurchases;
+}
+@end
 
 @implementation SocialnetworkController
 
@@ -38,6 +43,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
  
+    userPurchases = [UserPurchases getInstance];
+    
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
     [self updateUI];
@@ -303,51 +310,19 @@
             
             [self storeScreenVarsInDic];
             
-            //Background work
-            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-                [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
-                    
-                    if( !([message isEqualToString:@""]) ) {
-                        dispatch_async( dispatch_get_main_queue(), ^{
-                            [self showMsgOnApiResponse:message];
-                        });
-                    }
-                    
-                    if( errorOnFinish ){
-                        dispatch_async( dispatch_get_main_queue(), ^{
-                            [self changeNavigation:@"ERROR_ON_FINISH"];
-                        });
-                    }
-                    else{
-                        dispatch_async( dispatch_get_main_queue(), ^{
-                            [self changeNavigation:@"GO_TO_THANKYOU"];
-                        });
-                    }
-                    
-                }];
-            });
+            [self checkPayment];
         }
              
     }
 
 }
 
-/**
- Action catch for the uiAlertview buttons
- */
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-}
-
-
-
 // Checks if we have an internet connection or not
-- (void)testInternetConnection
-{
+- (void)testInternetConnection {
     internetReachable = [Reachability reachabilityWithHostname:@"www.google.com"];
     
     // Internet is reachable
-    internetReachable.reachableBlock = ^(Reachability*reach)
-    {
+    internetReachable.reachableBlock = ^(Reachability*reach) {
         // Update the UI on the main thread
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"Yayyy, we have the interwebs!");
@@ -355,8 +330,7 @@
     };
     
     // Internet is not reachable
-    internetReachable.unreachableBlock = ^(Reachability*reach)
-    {
+    internetReachable.unreachableBlock = ^(Reachability*reach) {
         // Update the UI on the main thread
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"Someone broke the internet :(");
@@ -367,30 +341,29 @@
 }
 
 
--(void)changeNavigation:(NSString *)option
-{
-    // DISABLE NAVIGATION ON SEND DATA TO API
+-(void)changeNavigation:(NSString *)option {
+    
+    int btnStatusInt = -1;
+    
+    // disables navigations when data is sent to API
     if([option isEqualToString:@"ON_FINISH"] ){
-        
-        finishButton.userInteractionEnabled = NO;
-        backButton.userInteractionEnabled = NO;
-        
-        [self showHidLoadingIndicator:YES];
+        btnStatusInt = 0;
     }
     
-    // RE-ENABLE NAVIGATION WHEN ANY ERROR OCCURED
-    else if([option isEqualToString:@"ERROR_ON_FINISH"] ){
-        
-        finishButton.userInteractionEnabled = YES;
-        backButton.userInteractionEnabled = YES;
-        
-        [self showHidLoadingIndicator:NO];
+    // enables navigation when any error occurs
+    else if( [option isEqualToString:@"ERROR_ON_FINISH"] || [option isEqualToString:@"ALERT_CANCEL"]){
+        btnStatusInt = 1;
     }
-    
     // ON DATA SAVED TO API SUCCESSFULLY
     else if([option isEqualToString:@"GO_TO_THANKYOU"] ){
-        
         [self next:@"GO_TO_THANKYOU"];
+    }
+    
+    BOOL btnsStatus = (btnStatusInt == 1) ? YES : NO;
+    if( btnStatusInt != -1 ){
+        finishButton.userInteractionEnabled = btnsStatus;
+        backButton.userInteractionEnabled = btnsStatus;
+        [self showHidLoadingIndicator:!(btnsStatus)];
     }
 }
 
@@ -437,8 +410,7 @@
 }
 
 
--(void)showMsgOnApiResponse:(NSString *)message
-{
+-(void)showMsgOnApiResponse:(NSString *)message {
     UIAlertView *temAlert = [[UIAlertView alloc ]
                              initWithTitle:@""
                              message:message
@@ -475,7 +447,7 @@
     }
 }
 
--(void)next:(NSString *)after{
+-(void)next:(NSString *)after {
     
     if( [after isEqualToString:@"GO_TO_THANKYOU"] ) {
         ThankyouController *thankyouController;
@@ -492,7 +464,7 @@
 -(void)requestPublishPermissions{
     
 }
--(void)publishStory{
+-(void)publishStory {
     
 }
 
@@ -570,4 +542,187 @@
     char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
 }
 
+#pragma mark -  Payment functions
+/**
+ * Check have valid subscription before creating untechable
+ */
+-(void)checkPayment{
+    //When haven't any sms/call in untechable
+    if( [untechable.commonFunctions haveCallOrSms:untechable.customizedContactsForCurrentSession] == NO ){
+        [self createUntechableAfterPaymentCheck];
+    } else {
+        if( [userPurchases isSubscriptionValid] ){
+            [self createUntechableAfterPaymentCheck];
+        } else{
+            [self showOrLoadProductsForPurchase:YES];
+        }
+    }
+}
+
+/**
+ * Create untechable in free,without paid services (call/sms notifications)
+ */
+-(void)createFreeUntechable{
+    //1-
+    //Remove all sms / call flags, user wants free untechable
+    [untechable.commonFunctions delCallAndSmsStatus:untechable.customizedContactsForCurrentSession];
+    
+    //2-
+    [self createUntechableAfterPaymentCheck];
+}
+
+/**
+ * Create untechable without payment
+ */
+-(void)createUntechableAfterPaymentCheck{
+    //Background work
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
+            
+            if( !([message isEqualToString:@""]) ) {
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    [self showMsgOnApiResponse:message];
+                });
+            }
+            
+            if( errorOnFinish ){
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    [self changeNavigation:@"ERROR_ON_FINISH"];
+                });
+            }
+            else{
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    [self changeNavigation:@"GO_TO_THANKYOU"];
+                });
+            }
+            
+        }];
+    });
+}
+
+
+/**
+ * When products loaded from apple store then show, else load
+ * @param: For handling recursion deadlock we have this flag
+ */
+-(void)showOrLoadProductsForPurchase:(BOOL)canLoadProduct {
+    
+    if( userPurchases.productArray.count > 1) {
+        [self showAlert:1];
+    } else if( canLoadProduct ){
+        
+        [userPurchases loadAllProducts:^(NSString *errorMsg){
+            
+            if( [errorMsg isEqualToString:@""] ){
+                [self showOrLoadProductsForPurchase:NO];
+            } else{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error occured while loading products"
+                                                                message:errorMsg
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Close"
+                                                      otherButtonTitles: nil];
+                alert.tag = 0;
+                [alert show];
+            }
+        }];
+        
+    } else {
+        [self changeNavigation:@"ERROR_ON_FINISH"];
+    }
+}
+
+/**
+ * Create untechable on response
+ */
+-(void)handlePurchaseProductResponse:(NSString *)msg{
+    if ( [msg isEqualToString:SUCCESS] ) {
+        [self createUntechableAfterPaymentCheck];
+    }
+    else if ( [msg isEqualToString:CANCEL] ) {
+        [self changeNavigation:@"ALERT_CANCEL"];
+    }
+    else{
+        [self changeNavigation:@"ERROR_ON_FINISH"];
+        [untechable.commonFunctions showAlert:@"Error in purchase" message:msg];
+    }
+}
+
+/**
+ * All ui alerts at one place
+ */
+-(void)showAlert:(int)tag{
+    
+    //Show products in alert
+    if( tag == 1 ){
+        NSMutableDictionary *prodDic = userPurchases.productArray[0];
+        NSString *monthlySubs = [NSString stringWithFormat:@"%@ - %@",
+                                 [prodDic objectForKey:@"packagename"],
+                                 [prodDic objectForKey:@"packageprice"]];
+        
+        prodDic = userPurchases.productArray[1];
+        NSString *yearlySubs = [NSString stringWithFormat:@"%@ - %@",
+                                [prodDic objectForKey:@"packagename"],
+                                [prodDic objectForKey:@"packageprice"]];
+        
+        // Show alert before start of match to purchase our product
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchase Subscription"
+                                                        message:@"You can purchase monthly and yearly subscription"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Not now"
+                                              otherButtonTitles: monthlySubs, yearlySubs , @"Restore", nil];
+        alert.tag = tag;
+        [alert show];
+    }
+    //Show create untechable in free without sms/call, offer in alert
+    else if( tag == 2 ){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Note"
+                                                        message:@"Call / sms notifications of untechable are paid, Do you want untechable without it."
+                                                       delegate:self
+                                              cancelButtonTitle:@"No"
+                                              otherButtonTitles: @"Yes", nil];
+        alert.tag = tag;
+        [alert show];
+    }
+    
+}
+
+/**
+ * Alert view delegate functions
+ */
+-(void)alertView:(UIAlertView *) alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    //Alert tag = 0, while loading product cause an error prompts the alert
+    if( alertView.tag == 0 ) {
+        [self changeNavigation:@"ALERT_CANCEL"];
+    }
+    //Alert tag = 1, while showing products in alert
+    else if( alertView.tag == 1 ) {
+        
+        //Purchase monthly / yearly subscription
+        if(buttonIndex == 1 || buttonIndex == 2) {
+            NSString *productidentifier = ( buttonIndex == 1 ) ? PRO_MONTHLY_SUBS : PRO_YEARLY_SUBS;
+            [userPurchases purchaseProductID:productidentifier callBack:^(NSString *msg){
+                [self handlePurchaseProductResponse:msg];
+            }];
+        }
+        //Restore purchase
+        else if (buttonIndex == 3){
+            [userPurchases restorePurchase:^(NSString *msg){
+                [self handlePurchaseProductResponse:msg];
+            }];
+        }
+        else{
+            [self showAlert:2];
+        }
+    }
+    //Create untechable without call / sms
+    else if( alertView.tag == 2 ){
+        if( buttonIndex == 1 ){
+            [self createFreeUntechable];
+        }
+        //Cancel
+        else {
+            [self changeNavigation:@"ALERT_CANCEL"];
+        }
+    }
+}
 @end
