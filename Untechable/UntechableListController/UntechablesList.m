@@ -346,17 +346,10 @@
 -(void)deleteUntechable:(NSInteger)indexToremoveOnSucess Section:(NSInteger)section {
 
     NSMutableDictionary *tempDict = ( section == 0 ) ? sectionOneArray[indexToremoveOnSucess] : sectionTwoArray[indexToremoveOnSucess];
-
-    RLMRealm *realm = RLMRealm.defaultRealm;
-    RLMResults *untechableToBeDeleted = [RUntechable objectsInRealm:realm where:@"rUId == %@", tempDict[@"rUId"]];
-    if( untechableToBeDeleted.count ){
-        [realm beginWriteTransaction];
-        [realm deleteObjects:untechableToBeDeleted];
-        [realm commitWriteTransaction];
-        
+    [untechable deleteUntechable:tempDict[@"rUId"] callBack:^(bool deleted){
         [self setDefaultModel];
         [untechablesTable reloadData];
-    }
+    }];
 }
 
 - (void)sendDeleteRequestToApi:(NSInteger)indexToremoveOnSucess Section:(NSInteger)section {

@@ -19,6 +19,7 @@
 #import "CommonFunctions.h"
 #import <math.h>
 #import "UserPurchases.h"
+#import "UntechablesList.h"
 
 @interface SocialnetworkController(){
     UserPurchases *userPurchases;
@@ -272,6 +273,11 @@
     if( btnStatusInt != -1 ){
         finishButton.userInteractionEnabled = btnsStatus;
         backButton.userInteractionEnabled = btnsStatus;
+        
+        btnFacebook.userInteractionEnabled = btnsStatus;
+        btnTwitter.userInteractionEnabled = btnsStatus;
+        btnLinkedin.userInteractionEnabled = btnsStatus;
+        
         [self showHidLoadingIndicator:!(btnsStatus)];
     }
 }
@@ -589,7 +595,11 @@
         }
         //Cancel
         else {
-            [self changeNavigation:@"ALERT_CANCEL"];
+            [untechable deleteUntechable:untechable.rUId callBack:^(bool deleted){
+                [self changeNavigation:@"ALERT_CANCEL"];
+                UntechablesList *untechScreen = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
+                [self.navigationController pushViewController:untechScreen animated:YES];
+            }];
         }
     }
 }

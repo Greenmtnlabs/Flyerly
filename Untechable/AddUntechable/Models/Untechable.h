@@ -59,4 +59,5 @@
 -(BOOL)canSkipEmailSetting;
 
 -(NSString *) calculateHoursDays:(NSString *) startTime endTime:(NSString *)endTime;
+-(void)deleteUntechable:(NSString *)dbRowId callBack:(void(^)(bool))callBack;
 @end

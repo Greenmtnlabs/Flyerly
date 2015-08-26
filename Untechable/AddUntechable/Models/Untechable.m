@@ -406,4 +406,21 @@
     NSLog(@"Number of days or hours: %@", daysOrHoursToBeShown);
     return daysOrHoursToBeShown;
 }
+
+/**
+ * Delete untechable from datebase
+ */
+-(void)deleteUntechable:(NSString *)dbRowId callBack:(void(^)(bool))callBack{
+    RLMRealm *realm = RLMRealm.defaultRealm;
+    RLMResults *untechableToBeDeleted = [RUntechable objectsInRealm:realm where:@"rUId == %@", dbRowId];
+    if( untechableToBeDeleted.count ){
+        [realm beginWriteTransaction];
+        [realm deleteObjects:untechableToBeDeleted];
+        [realm commitWriteTransaction];
+        
+        callBack(YES);
+    } else{
+        callBack(YES);
+    }
+}
 @end
