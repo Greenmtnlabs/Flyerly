@@ -14,7 +14,6 @@ ContactsCustomizedModal *contactModal_;
 
 @synthesize customText;
 @synthesize delegate;
-@synthesize lblMessage_iPhone5, lblMessage_iPhone6, lblMessage_iPhone6Plus;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
@@ -34,9 +33,9 @@ ContactsCustomizedModal *contactModal_;
 }
 
 -(void)applyLocalization{
-    [lblMessage_iPhone5 setText:NSLocalizedString(@"Select one or more modes", nil)];
-    [lblMessage_iPhone6 setText:NSLocalizedString(@"Select one or more modes", nil)];
-    [lblMessage_iPhone6Plus setText:NSLocalizedString(@"Select one or more modes", nil)];
+    [_lblMessage_iPhone5 setText:NSLocalizedString(@"Select one or more modes", nil)];
+    [_lblMessage_iPhone6 setText:NSLocalizedString(@"Select one or more modes", nil)];
+    [_lblMessage_iPhone6Plus setText:NSLocalizedString(@"Select one or more modes", nil)];
 }
 
 -(void)updateChrCounter:(NSString *)message {

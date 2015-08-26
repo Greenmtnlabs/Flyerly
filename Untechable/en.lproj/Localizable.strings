@@ -55,5 +55,10 @@
 "Select one or more modes" = "Select one or more modes";
 "Message to %@\n" = "Message to %@\n";
 
-// Email Screen
+// Email Settings related
 "Select your email service to let your contacts know you will be untechable." = "Select your email service to let your contacts know you will be untechable.";
+"Set Your Email Responder" = "Set Your Email Responder";
+"Password" = "Password";
+"example@example.com" = "example@example.com";
+
+

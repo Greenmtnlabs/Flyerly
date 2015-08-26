@@ -170,7 +170,7 @@
     
     [_lbl1 setTextColor:DEF_GRAY];
     _lbl1.font = [UIFont fontWithName:APP_FONT size:20];
-    
+    [_lbl1 setText:NSLocalizedString(@"Set Your Email Responder",nil)];
     [self.inputEmail setTextColor:DEF_GREEN];
     self.inputEmail.font = [UIFont fontWithName:APP_FONT size:16];
     self.inputEmail.delegate = self;
@@ -180,6 +180,8 @@
     self.inputPassword.font = [UIFont fontWithName:APP_FONT size:16];
     self.inputPassword.delegate = self;
     self.inputPassword.text  = untechable.password;
+    self.inputPassword.placeholder = NSLocalizedString(@"Password", nil);
+    self.inputEmail.placeholder = NSLocalizedString(@"example@example.com", nil);
 }
 
 #pragma mark -  Navigation functions
