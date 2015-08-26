@@ -960,7 +960,7 @@
         NSString *label = NSLocalizedString(@"Select your email service to let your contacts know you will be untechable.", nil);;
         UILabel* headerLabel = [[UILabel alloc] init];
         
-        headerLabel.frame = CGRectMake(10, 0, tableView.frame.size.width - 10, 60);
+        headerLabel.frame = CGRectMake(10, 0, tableView.frame.size.width - 10, 80);
         headerLabel.textColor = [UIColor lightGrayColor];
         headerLabel.font = [UIFont fontWithName:APP_FONT size:18];
         headerLabel.numberOfLines = 3;
