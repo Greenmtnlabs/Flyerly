@@ -57,27 +57,11 @@
     
     customSpendingTextAry = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];
     
-    NSString *temStr = ( [untechable.spendingTimeTxt isEqualToString:@""] ) ? @"e.g Spending time with family." : untechable.spendingTimeTxt;
+    NSString *temStr = ( [untechable.spendingTimeTxt isEqualToString:@""] ) ? NSLocalizedString(UNTECH_EXEMPLARY_LABEL, nil) : untechable.spendingTimeTxt;
     [self setupDoctorsResearchLabel:temStr];//[customSpendingTextAry objectAtIndex:0]];
     
     self.setupSpendingTimeText.dataSource = self;
     self.setupSpendingTimeText.delegate = self;
-}
-
-/**
- We Need To Set "Custom" Message at the end so we need to sort the
- array.
- **/
--(NSMutableArray *) customValAtTheEnd:(NSMutableArray *) customText {
- 
-    int totalCount = ( int )customText.count - 1;
-    
-    int customTextPosition = ( int )[customText indexOfObject:@"Custom"];
-    
-    [customText removeObjectAtIndex:customTextPosition];
-    [customText insertObject:@"Custom" atIndex:totalCount];
-    
-    return customText;
 }
 
 /**
@@ -106,12 +90,21 @@
 // Catpure the picker view selection
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
 
-    if( [[customSpendingTextAry objectAtIndex:row] isEqualToString:@"Custom"] ) {
+    customSpendingTextAry = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];
+
+    if( [[customSpendingTextAry objectAtIndex:row] isEqualToString:[customSpendingTextAry objectAtIndex:customSpendingTextAry.count-1]] ) {
         [self showAddFieldPopUp];
     } else  {
         [self setupDoctorsResearchLabel:[customSpendingTextAry objectAtIndex:row]];
         untechable.spendingTimeTxt = [customSpendingTextAry objectAtIndex:row];
     }
+    
+//    if( [[customSpendingTextAry objectAtIndex:row] isEqualToString:@"Custom"] ) {
+//        [self showAddFieldPopUp];
+//    } else  {
+//        [self setupDoctorsResearchLabel:[customSpendingTextAry objectAtIndex:row]];
+//        untechable.spendingTimeTxt = [customSpendingTextAry objectAtIndex:row];
+//    }
 }
 
 //the size of the fonts in picker view was big for iphone 5 and small for iphone 6

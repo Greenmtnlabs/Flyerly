@@ -58,37 +58,35 @@
 
 -(void)applyLocalization{
     
-    NSMutableOrderedSet *set ;
-    NSMutableArray *customSpendingTextArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];
+    NSMutableArray *myArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];
+    
+    NSMutableArray *customSpendingTextArray = [[NSMutableArray alloc] initWithArray:myArray];
+
+    
+    NSMutableOrderedSet *set = [NSMutableOrderedSet orderedSetWithArray:DEF_SPENDING_TIME_ARY ];
+    
+    NSMutableArray *defaultSpendingTimeText = [NSMutableArray arrayWithArray:[set array]];
     
     if(customSpendingTextArray != nil){
         for (int i=0; i<=9; i++) {
-            [customSpendingTextArray replaceObjectAtIndex:i withObject:NSLocalizedString(customSpendingTextArray[i], nil)];
+            
+            [customSpendingTextArray replaceObjectAtIndex:i withObject:NSLocalizedString(defaultSpendingTimeText[i], nil)];
         }
     } else {
-        set = [NSMutableOrderedSet orderedSetWithArray:DEF_SPENDING_TIME_ARY ];
-        [set unionSet:[NSSet setWithArray:customSpendingTextArray]];
-        customSpendingTextArray = [NSMutableArray arrayWithArray:[set array]];
         
+        [set unionSet:[NSSet setWithArray:defaultSpendingTimeText]];
+        customSpendingTextArray = [NSMutableArray arrayWithArray:[set array]];
+      
         for (int i=0; i<customSpendingTextArray.count; i++) {
             [customSpendingTextArray replaceObjectAtIndex:i withObject:NSLocalizedString(customSpendingTextArray[i], nil)];
         }
-    
     }
     
-    
-    //set = [NSMutableOrderedSet orderedSetWithArray:DEF_SPENDING_TIME_ARY ];
-    
-    
-    
-    int lastIndex = customSpendingTextArray.count - 1;
-    [customSpendingTextArray replaceObjectAtIndex: lastIndex withObject:NSLocalizedString(customSpendingTextArray[lastIndex], nil)];
+    int lastIndex = (int)customSpendingTextArray.count - 1;
+    [customSpendingTextArray replaceObjectAtIndex: lastIndex withObject:NSLocalizedString(@"Custom", nil)];
     
     [[NSUserDefaults standardUserDefaults] setObject:customSpendingTextArray forKey:@"cutomSpendingTimeTextAry"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-
-
-
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
