@@ -768,7 +768,7 @@
     if( [untechable.commonFunctions haveCallOrSms:untechable.customizedContactsForCurrentSession] == NO ){
         [self createUntechableAfterPaymentCheck];
     } else {
-        if( NO && [userPurchases isSubscriptionValid] ){
+        if( [userPurchases isSubscriptionValid] ){
             [self createUntechableAfterPaymentCheck];
         } else{
             [self showOrLoadProductsForPurchase:YES];
