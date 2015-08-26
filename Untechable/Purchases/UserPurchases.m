@@ -29,11 +29,36 @@ static UserPurchases *sharedSingleton = nil;
 + (void)initialize {
     if( !sharedSingleton ){
         sharedSingleton = [[UserPurchases alloc] init];
+        sharedSingleton.productArray = [[NSMutableArray alloc] init];
     }
 }
 
+/**
+ * GET singleton instance
+ */
 + (id) getInstance {
     return sharedSingleton;
+}
+
+/**
+ Check if monthly subscription is valid or not
+ **/
+-(BOOL)isSubscriptionValid{
+    BOOL valid = NO;
+    RMAppReceipt* appReceipt = [RMAppReceipt bundleReceipt];
+    
+    // get monthly subscription validity
+    NSString *isMonthlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:PRO_MONTHLY_SUBS forDate:[NSDate date]]];
+    
+    // get Yearly subscription validity
+    NSString *isYearlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:PRO_YEARLY_SUBS forDate:[NSDate date]]];
+    
+    // check whether one of 'em is valid or not..
+    if( [isMonthlySubValid isEqual:@"1"] || [isYearlySubValid isEqualToString:@"1"] ){
+        valid = YES;
+    }
+    NSLog(valid ? @"Has valid subscription": @"No subscription found");
+    return valid;
 }
 
 /*
@@ -96,25 +121,22 @@ static UserPurchases *sharedSingleton = nil;
     }];
 }
 
-/**
- Check if monthly subscription is valid or not
- **/
--(BOOL)isSubscriptionValid{
-    BOOL valid = NO;
-    RMAppReceipt* appReceipt = [RMAppReceipt bundleReceipt];
-    
-    // get monthly subscription validity
-    NSString *isMonthlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:PRO_MONTHLY_SUBS forDate:[NSDate date]]];
-    
-    // get Yearly subscription validity
-    NSString *isYearlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:PRO_YEARLY_SUBS forDate:[NSDate date]]];
-    
-    // check whether one of 'em is valid or not..
-    if( [isMonthlySubValid isEqual:@"1"] || [isYearlySubValid isEqualToString:@"1"] ){
-        valid = YES;
-    }
-    NSLog(valid ? @"Has valid subscription": @"No subscription found");
-    return valid;
+/* HERE WE RESTORE PURCHASE PRODUCT FROM APP STORE
+ */
+-(void)restorePurchase:(void(^)(NSString *))callBack{
+    [[RMStore defaultStore] restoreTransactionsOnSuccess:^{
+        callBack(SUCCESS);
+    } failure:^(NSError *error) {
+        if( error != nil){
+            if( error.code == 2 ){
+                callBack( CANCEL );
+            } else {
+                callBack( error.description );
+            }
+        } else{
+            callBack(@"Something went wrong");
+        }
+    }];
 }
 
 @end

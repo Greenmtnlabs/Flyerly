@@ -747,12 +747,22 @@
     }
     //Alert tag = 1, while showing products in alert
     else if( alertView.tag == 1 ) {
+
+        //Purchase monthly / yearly subscription
         if(buttonIndex == 1 || buttonIndex == 2) {
             NSString *productidentifier = ( buttonIndex == 1 ) ? PRO_MONTHLY_SUBS : PRO_YEARLY_SUBS;
             [userPurchases purchaseProductID:productidentifier callBack:^(NSString *msg){
                 [self handlePurchaseProductResponse:msg];
             }];
-        } else {
+        }
+        //Restore purchase
+        else if (buttonIndex == 3){
+            [userPurchases restorePurchase:^(NSString *msg){
+                [self handlePurchaseProductResponse:msg];
+            }];
+        }
+        //Cancel
+        else {
             [self changeNavigation:@"ALERT_CANCEL"];
         }
     }
@@ -765,31 +775,13 @@
     BOOL haveValidSubscription = [userPurchases isSubscriptionValid];
 
     if( haveValidSubscription ){
-        //[self createUntechableAfterPaymentCheck];
+        [self createUntechableAfterPaymentCheck];
     } else{
-        
-        if( userPurchases.productArray != nil ){
-            [self showProductsForPurchase];
-        } else if( userPurchases.productArray == nil ){
-            [userPurchases loadAllProducts:^(NSString *errorMsg){
-                if( [errorMsg isEqualToString:@""] ){
-                    [self showProductsForPurchase];
-                } else{
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error occured while loading products"
-                                                                    message:errorMsg
-                                                                   delegate:self
-                                                          cancelButtonTitle:@"Close"
-                                                          otherButtonTitles: nil];
-                    alert.tag = 0;
-                    [alert show];
-                }
-                
-            }];
-        }
+        [self showOrLoadProductsForPurchase:YES];
     }
 }
 
--(void)showProductsForPurchase {
+-(void)showOrLoadProductsForPurchase:(BOOL)canLoadProduct {
     if( userPurchases.productArray.count > 1) {
         NSMutableDictionary *prodDic = userPurchases.productArray[0];
         NSString *monthlySubs = [NSString stringWithFormat:@"%@ - %@",
@@ -806,9 +798,27 @@
                                                         message:@"You can purchase monthly and yearly subscription"
                                                        delegate:self
                                               cancelButtonTitle:@"Not now"
-                                              otherButtonTitles: monthlySubs, yearlySubs ,nil];
+                                              otherButtonTitles: monthlySubs, yearlySubs , @"Restore", nil];
         alert.tag = 1;
         [alert show];
+    } else if( canLoadProduct ){
+        [userPurchases loadAllProducts:^(NSString *errorMsg){
+            if( [errorMsg isEqualToString:@""] ){
+                [self showOrLoadProductsForPurchase:NO];
+            } else{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error occured while loading products"
+                                                                message:errorMsg
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Close"
+                                                      otherButtonTitles: nil];
+                alert.tag = 0;
+                [alert show];
+            }
+            
+        }];
+        
+    } else {
+        [self changeNavigation:@"ERROR_ON_FINISH"];
     }
 }
 

@@ -14,8 +14,9 @@
 
 @property (strong, nonatomic) NSMutableArray *productArray;
 + (id) getInstance;
--(void)loadAllProducts:(void(^)(NSString *))callBack;
 - (BOOL)isSubscriptionValid;
+-(void)loadAllProducts:(void(^)(NSString *))callBack;
 -(void)purchaseProductID:(NSString *)productidentifier callBack:(void(^)(NSString *))callBack;
+-(void)restorePurchase:(void(^)(NSString *))callBack;
 @end
 

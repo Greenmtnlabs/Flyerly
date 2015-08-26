@@ -103,4 +103,4 @@
 
 
 #define PRO_MONTHLY_SUBS @"com.untech.MonthlySubscription"
-#define PRO_YEARLY_SUBS @"com.untech.YearlySubscription"
+#define PRO_YEARLY_SUBS @"com.untech.YearlySubscriptions"
