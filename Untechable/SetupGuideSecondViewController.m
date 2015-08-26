@@ -57,13 +57,6 @@
     
     customSpendingTextAry = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];
     
-//    NSMutableOrderedSet *set = [NSMutableOrderedSet orderedSetWithArray:DEF_SPENDING_TIME_ARY ];
-//    
-//    [set unionSet:[NSSet setWithArray:customSpendingTextArray]];
-//
-//    customSpendingTextAry = [NSMutableArray arrayWithArray:[set array]];
-
-    
     NSString *temStr = ( [untechable.spendingTimeTxt isEqualToString:@""] ) ? @"e.g Spending time with family." : untechable.spendingTimeTxt;
     [self setupDoctorsResearchLabel:temStr];//[customSpendingTextAry objectAtIndex:0]];
     

@@ -66,15 +66,20 @@
             [customSpendingTextArray replaceObjectAtIndex:i withObject:NSLocalizedString(customSpendingTextArray[i], nil)];
         }
     } else {
+        set = [NSMutableOrderedSet orderedSetWithArray:DEF_SPENDING_TIME_ARY ];
+        [set unionSet:[NSSet setWithArray:customSpendingTextArray]];
+        customSpendingTextArray = [NSMutableArray arrayWithArray:[set array]];
+        
+        for (int i=0; i<customSpendingTextArray.count; i++) {
+            [customSpendingTextArray replaceObjectAtIndex:i withObject:NSLocalizedString(customSpendingTextArray[i], nil)];
+        }
     
     }
     
     
-    set = [NSMutableOrderedSet orderedSetWithArray:DEF_SPENDING_TIME_ARY ];
+    //set = [NSMutableOrderedSet orderedSetWithArray:DEF_SPENDING_TIME_ARY ];
     
-    [set unionSet:[NSSet setWithArray:customSpendingTextArray]];
     
-    customSpendingTextArray = [NSMutableArray arrayWithArray:[set array]];
     
     int lastIndex = customSpendingTextArray.count - 1;
     [customSpendingTextArray replaceObjectAtIndex: lastIndex withObject:NSLocalizedString(customSpendingTextArray[lastIndex], nil)];
