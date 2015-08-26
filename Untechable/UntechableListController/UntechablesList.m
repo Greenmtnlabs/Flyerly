@@ -784,8 +784,6 @@
     //Remove all sms / call flags, user wants free untechable
     [untechable.commonFunctions delCallAndSmsStatus:untechable.customizedContactsForCurrentSession];
     
-    BOOL haveCallOrSms = [untechable.commonFunctions haveCallOrSms:untechable.customizedContactsForCurrentSession];
-    
     //2-
     [self createUntechableAfterPaymentCheck];
 }
