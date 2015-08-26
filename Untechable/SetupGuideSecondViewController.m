@@ -58,7 +58,7 @@
     customSpendingTextAry = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"]];
     
     NSString *temStr = ( [untechable.spendingTimeTxt isEqualToString:@""] ) ? NSLocalizedString(UNTECH_EXEMPLARY_LABEL, nil) : untechable.spendingTimeTxt;
-    [self setupDoctorsResearchLabel:temStr];//[customSpendingTextAry objectAtIndex:0]];
+    [self setupDoctorsResearchLabel:temStr];
     
     self.setupSpendingTimeText.dataSource = self;
     self.setupSpendingTimeText.delegate = self;
@@ -174,7 +174,7 @@
     {
         self.navigationItem.hidesBackButton = YES;
         
-        // Center title __________________________________________________
+        // Center title
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
         // Back Navigation button
@@ -189,9 +189,10 @@
         
         UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         
-        [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+        // adds left button to navigation bar
+        [self.navigationItem setLeftBarButtonItem:lefttBarButton];
 
-        // Right Button
+        // Right Navigation Button
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         
         nextButton.titleLabel.shadowColor = [UIColor clearColor];
@@ -212,20 +213,6 @@
         [self.navigationItem setRightBarButtonItems:rightNavItems];
         
     }
-//    //checking whether array is empty or not
-//    NSArray *customSpendingTextArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];
-//    if( customSpendingTextArray == nil ) {
-//        // inserting values in our pickerview's data source.
-//        
-//        NSMutableArray *userAddedSpendingTimeText;
-//        
-//        for (int i=9; i<customSpendingTextArray.count; i++) {
-//            [userAddedSpendingTimeText addObject:customSpendingTextArray[i]];
-//        }
-//        
-//        [[NSUserDefaults standardUserDefaults] setObject:userAddedSpendingTimeText forKey:@"cutomSpendingTimeTextAry"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-//    }
 }
 
 -(void)btnNextTouchStart{

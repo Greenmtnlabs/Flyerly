@@ -48,7 +48,7 @@
          navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
      }
     
-    [self applyLocalization];
+    [self setLocalizedSpendingTimeText];
     
     self.window.rootViewController = navigationController;
     
@@ -56,7 +56,7 @@
     return YES;
 }
 
--(void)applyLocalization{
+-(void)setLocalizedSpendingTimeText{
     
     NSMutableArray *customSpendingTextArray = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"]];
 
