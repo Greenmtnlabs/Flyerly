@@ -22,7 +22,7 @@
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                     </textView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select one or more modes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zBG-1G-C9G">
-                        <rect key="frame" x="34" y="107" width="204" height="21"/>
+                        <rect key="frame" x="34" y="107" width="254" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -49,7 +49,7 @@
             <connections>
                 <outlet property="char_limit" destination="2pR-Bd-WU2" id="StL-qb-0xw"/>
                 <outlet property="customText" destination="o9l-MC-FxV" id="BCO-Xz-SmY"/>
-                <outlet property="lblMessage" destination="zBG-1G-C9G" id="r7g-2R-FVp"/>
+                <outlet property="lblMessage_iPhone5" destination="zBG-1G-C9G" id="dhP-EU-Yge"/>
             </connections>
             <point key="canvasLocation" x="268" y="233.5"/>
         </tableViewCell>

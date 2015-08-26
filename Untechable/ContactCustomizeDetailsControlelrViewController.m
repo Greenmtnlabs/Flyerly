@@ -72,7 +72,7 @@
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.shadowColor = [UIColor clearColor];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitle:NSLocalizedString(TITLE_BACK_TXT, nil) forState:normal];
         [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         
         [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
@@ -161,7 +161,7 @@
             }
         }
         
-        NSString *valueToBeShown =[ NSString stringWithFormat:@"Message to %@\n",contactModal.contactName];
+        NSString *valueToBeShown =[ NSString stringWithFormat:NSLocalizedString(@"Message to %@\n", nil),contactModal.contactName];
         [cell setCellValues:valueToBeShown ContactImage:contactModal.img];
         
         cell.contact_Name.numberOfLines = 0;
