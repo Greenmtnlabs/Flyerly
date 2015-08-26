@@ -55,7 +55,7 @@
 
 -(void)initializePickerData {
     
-    NSMutableArray *customSpendingTextArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];
+    customSpendingTextAry = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];
     
 //    NSMutableOrderedSet *set = [NSMutableOrderedSet orderedSetWithArray:DEF_SPENDING_TIME_ARY ];
 //    
@@ -63,7 +63,6 @@
 //
 //    customSpendingTextAry = [NSMutableArray arrayWithArray:[set array]];
 
-    customSpendingTextAry = customSpendingTextArray;
     
     NSString *temStr = ( [untechable.spendingTimeTxt isEqualToString:@""] ) ? @"e.g Spending time with family." : untechable.spendingTimeTxt;
     [self setupDoctorsResearchLabel:temStr];//[customSpendingTextAry objectAtIndex:0]];
@@ -183,7 +182,6 @@
 }
 
 
-
 #pragma - mark setting navigation bar related stuff
 -(void) setNavigationBarItems {
     
@@ -235,20 +233,20 @@
         [self.navigationItem setRightBarButtonItems:rightNavItems];
         
     }
-    //checking whether array is empty or not
-     NSArray *customSpendingTextArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];
-    if( customSpendingTextArray == nil ) {
-        // inserting values in our pickerview's data source.
+//    //checking whether array is empty or not
+//    NSArray *customSpendingTextArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];
+//    if( customSpendingTextArray == nil ) {
+//        // inserting values in our pickerview's data source.
 //        
 //        NSMutableArray *userAddedSpendingTimeText;
 //        
 //        for (int i=9; i<customSpendingTextArray.count; i++) {
 //            [userAddedSpendingTimeText addObject:customSpendingTextArray[i]];
 //        }
-        
-        [[NSUserDefaults standardUserDefaults] setObject:customSpendingTextAry forKey:@"cutomSpendingTimeTextAry"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
+//        
+//        [[NSUserDefaults standardUserDefaults] setObject:userAddedSpendingTimeText forKey:@"cutomSpendingTimeTextAry"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//    }
 }
 
 -(void)btnNextTouchStart{

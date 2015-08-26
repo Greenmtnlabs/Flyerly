@@ -48,6 +48,8 @@
          navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
      }
     
+    [self applyLocalization];
+    
     self.window.rootViewController = navigationController;
     
     [self.window makeKeyAndVisible];
@@ -56,12 +58,29 @@
 
 -(void)applyLocalization{
     
-    NSMutableArray *customSpendingTextArray;
-    NSMutableOrderedSet *set = [NSMutableOrderedSet orderedSetWithArray:DEF_SPENDING_TIME_ARY ];
+    NSMutableOrderedSet *set ;
+    NSMutableArray *customSpendingTextArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];
     
-    //[set unionSet:[NSSet setWithArray:customSpendingTextArray]];
+    if(customSpendingTextArray != nil){
+        for (int i=0; i<=9; i++) {
+            [customSpendingTextArray replaceObjectAtIndex:i withObject:NSLocalizedString(customSpendingTextArray[i], nil)];
+        }
+    } else {
     
-    //customSpendingTextAry = [NSMutableArray arrayWithArray:[set array]];
+    }
+    
+    
+    set = [NSMutableOrderedSet orderedSetWithArray:DEF_SPENDING_TIME_ARY ];
+    
+    [set unionSet:[NSSet setWithArray:customSpendingTextArray]];
+    
+    customSpendingTextArray = [NSMutableArray arrayWithArray:[set array]];
+    
+    int lastIndex = customSpendingTextArray.count - 1;
+    [customSpendingTextArray replaceObjectAtIndex: lastIndex withObject:NSLocalizedString(customSpendingTextArray[lastIndex], nil)];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:customSpendingTextArray forKey:@"cutomSpendingTimeTextAry"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 
 
 
