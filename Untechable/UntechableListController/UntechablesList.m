@@ -726,130 +726,6 @@
     [self checkPayment];
 }
 
--(void)handlePurchaseProductResponse:(NSString *)msg{
-    if ( [msg isEqualToString:SUCCESS] ) {
-        [self createUntechableAfterPaymentCheck];
-    }
-    else if ( [msg isEqualToString:CANCEL] ) {
-        [self changeNavigation:@"ALERT_CANCEL"];
-    }
-    else{
-        [self changeNavigation:@"ERROR_ON_FINISH"];
-        [untechable.commonFunctions showAlert:@"Error in purchase" message:msg];
-    }
-}
-
-//alert view delegate
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    //Alert tag = 0, while loading product cause an error prompts the alert
-    if( alertView.tag == 0 ) {
-        [self changeNavigation:@"ALERT_CANCEL"];
-    }
-    //Alert tag = 1, while showing products in alert
-    else if( alertView.tag == 1 ) {
-
-        //Purchase monthly / yearly subscription
-        if(buttonIndex == 1 || buttonIndex == 2) {
-            NSString *productidentifier = ( buttonIndex == 1 ) ? PRO_MONTHLY_SUBS : PRO_YEARLY_SUBS;
-            [userPurchases purchaseProductID:productidentifier callBack:^(NSString *msg){
-                [self handlePurchaseProductResponse:msg];
-            }];
-        }
-        //Restore purchase
-        else if (buttonIndex == 3){
-            [userPurchases restorePurchase:^(NSString *msg){
-                [self handlePurchaseProductResponse:msg];
-            }];
-        }
-        //Cancel
-        else {
-            [self changeNavigation:@"ALERT_CANCEL"];
-        }
-    }
-}
-
-/**
- * Check have valid subscription before creating untechable
- */
--(void)checkPayment{
-    BOOL haveValidSubscription = [userPurchases isSubscriptionValid];
-
-    if( haveValidSubscription ){
-        [self createUntechableAfterPaymentCheck];
-    } else{
-        [self showOrLoadProductsForPurchase:YES];
-    }
-}
-
--(void)showOrLoadProductsForPurchase:(BOOL)canLoadProduct {
-    if( userPurchases.productArray.count > 1) {
-        NSMutableDictionary *prodDic = userPurchases.productArray[0];
-        NSString *monthlySubs = [NSString stringWithFormat:@"%@ - %@",
-                                 [prodDic objectForKey:@"packagename"],
-                                 [prodDic objectForKey:@"packageprice"]];
-        
-        prodDic = userPurchases.productArray[1];
-        NSString *yearlySubs = [NSString stringWithFormat:@"%@ - %@",
-                                 [prodDic objectForKey:@"packagename"],
-                                 [prodDic objectForKey:@"packageprice"]];
-        
-        // Show alert before start of match to purchase our product
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchase Subscription"
-                                                        message:@"You can purchase monthly and yearly subscription"
-                                                       delegate:self
-                                              cancelButtonTitle:@"Not now"
-                                              otherButtonTitles: monthlySubs, yearlySubs , @"Restore", nil];
-        alert.tag = 1;
-        [alert show];
-    } else if( canLoadProduct ){
-        [userPurchases loadAllProducts:^(NSString *errorMsg){
-            if( [errorMsg isEqualToString:@""] ){
-                [self showOrLoadProductsForPurchase:NO];
-            } else{
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error occured while loading products"
-                                                                message:errorMsg
-                                                               delegate:self
-                                                      cancelButtonTitle:@"Close"
-                                                      otherButtonTitles: nil];
-                alert.tag = 0;
-                [alert show];
-            }
-            
-        }];
-        
-    } else {
-        [self changeNavigation:@"ERROR_ON_FINISH"];
-    }
-}
-
--(void)createUntechableAfterPaymentCheck{
-    // Background work
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
-            
-            if( !([message isEqualToString:@""]) ) {
-                dispatch_async( dispatch_get_main_queue(), ^{
-                    [self showMsgOnApiResponse:message];
-                });
-            }
-            
-            if( errorOnFinish ){
-                dispatch_async( dispatch_get_main_queue(), ^{
-                    [self changeNavigation:@"ERROR_ON_FINISH"];
-                });
-            }
-            else{
-                dispatch_async( dispatch_get_main_queue(), ^{
-                    [self changeNavigation:@"ON_FINISH_SUCCESS"];
-                    [self goToThankyouScreen];
-                });
-            }
-            
-        }];
-        
-    });
-
-}
 /**
  * navigate to ThankyouController screen when untech is created successfully
  */
@@ -881,5 +757,166 @@
     NSString *socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", timeInString, untechable.spendingTimeTxt];
     untechable.socialStatus = socialStatus;
     
+}
+
+#pragma mark -  Payment functions
+/**
+ * Check have valid subscription before creating untechable
+ */
+-(void)checkPayment{
+    BOOL haveValidSubscription = [userPurchases isSubscriptionValid];
+    
+    if( haveValidSubscription ){
+        [self createUntechableAfterPaymentCheck];
+    } else{
+        [self showOrLoadProductsForPurchase:YES];
+    }
+}
+
+-(void)createUntechableAfterPaymentCheck{
+    // Background work
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
+            
+            if( !([message isEqualToString:@""]) ) {
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    [self showMsgOnApiResponse:message];
+                });
+            }
+            
+            if( errorOnFinish ){
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    [self changeNavigation:@"ERROR_ON_FINISH"];
+                });
+            }
+            else{
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    [self changeNavigation:@"ON_FINISH_SUCCESS"];
+                    [self goToThankyouScreen];
+                });
+            }
+            
+        }];
+        
+    });
+}
+
+-(void)createFreeUntechable{
+    //1-
+    //Remove all sms / call flags, user wants free untechable
+    
+    //2-
+    [self createUntechableAfterPaymentCheck];
+}
+
+-(void)showOrLoadProductsForPurchase:(BOOL)canLoadProduct {
+    
+    if( userPurchases.productArray.count > 1) {
+        [self showAlert:1];
+    } else if( canLoadProduct ){
+        [userPurchases loadAllProducts:^(NSString *errorMsg){
+            if( [errorMsg isEqualToString:@""] ){
+                [self showOrLoadProductsForPurchase:NO];
+            } else{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error occured while loading products"
+                                                                message:errorMsg
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Close"
+                                                      otherButtonTitles: nil];
+                alert.tag = 0;
+                [alert show];
+            }
+            
+        }];
+        
+    } else {
+        [self changeNavigation:@"ERROR_ON_FINISH"];
+    }
+}
+
+
+-(void)handlePurchaseProductResponse:(NSString *)msg{
+    if ( [msg isEqualToString:SUCCESS] ) {
+        [self createUntechableAfterPaymentCheck];
+    }
+    else if ( [msg isEqualToString:CANCEL] ) {
+        [self changeNavigation:@"ALERT_CANCEL"];
+    }
+    else{
+        [self changeNavigation:@"ERROR_ON_FINISH"];
+        [untechable.commonFunctions showAlert:@"Error in purchase" message:msg];
+    }
+}
+
+
+-(void)showAlert:(int)tag{
+    if( tag == 1 ){
+        NSMutableDictionary *prodDic = userPurchases.productArray[0];
+        NSString *monthlySubs = [NSString stringWithFormat:@"%@ - %@",
+                                 [prodDic objectForKey:@"packagename"],
+                                 [prodDic objectForKey:@"packageprice"]];
+        
+        prodDic = userPurchases.productArray[1];
+        NSString *yearlySubs = [NSString stringWithFormat:@"%@ - %@",
+                                [prodDic objectForKey:@"packagename"],
+                                [prodDic objectForKey:@"packageprice"]];
+        
+        // Show alert before start of match to purchase our product
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchase Subscription"
+                                                        message:@"You can purchase monthly and yearly subscription"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Not now"
+                                              otherButtonTitles: monthlySubs, yearlySubs , @"Restore", nil];
+        alert.tag = tag;
+        [alert show];
+    }
+    else if( tag == 2 ){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Note"
+                                                        message:@"Call / sms notifications of untechable are paid, Do you want untechable without it."
+                                                       delegate:self
+                                              cancelButtonTitle:@"No"
+                                              otherButtonTitles: @"Yes", nil];
+        alert.tag = tag;
+        [alert show];
+    }
+    
+}
+
+//alert view delegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    //Alert tag = 0, while loading product cause an error prompts the alert
+    if( alertView.tag == 0 ) {
+        [self changeNavigation:@"ALERT_CANCEL"];
+    }
+    //Alert tag = 1, while showing products in alert
+    else if( alertView.tag == 1 ) {
+        
+        //Purchase monthly / yearly subscription
+        if(buttonIndex == 1 || buttonIndex == 2) {
+            NSString *productidentifier = ( buttonIndex == 1 ) ? PRO_MONTHLY_SUBS : PRO_YEARLY_SUBS;
+            [userPurchases purchaseProductID:productidentifier callBack:^(NSString *msg){
+                [self handlePurchaseProductResponse:msg];
+            }];
+        }
+        //Restore purchase
+        else if (buttonIndex == 3){
+            [userPurchases restorePurchase:^(NSString *msg){
+                [self handlePurchaseProductResponse:msg];
+            }];
+        }
+        else{
+            [self showAlert:2];
+        }
+    }
+    //Create untechable without call / sms
+    else if( alertView.tag == 2 ){
+        if( buttonIndex == 1 ){
+            [self createFreeUntechable];
+        }
+        //Cancel
+        else {
+            [self changeNavigation:@"ALERT_CANCEL"];
+        }
+    }
 }
 @end
