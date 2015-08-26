@@ -122,14 +122,6 @@
     [inputSetSocialStatus setTextColor:DEF_GREEN];
     inputSetSocialStatus.font = [UIFont fontWithName:APP_FONT size:16];
     inputSetSocialStatus.delegate = self;
-    
-    NSString *startTimeStamp = [ untechable startDate];
-    NSString *endTimeStamp = [ untechable endDate];
-    NSString *getDaysOrHours = [ self calculateHoursDays:startTimeStamp  endTime: endTimeStamp];
-    
-    if ( [untechable.socialStatus isEqualToString:@""] ){
-        untechable.socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", getDaysOrHours,untechable.spendingTimeTxt];
-    }
     [inputSetSocialStatus setText:untechable.socialStatus];
     
     int len = (int)inputSetSocialStatus.text.length;
@@ -145,73 +137,6 @@
     self.btnLinkedin.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
     
 }
-#pragma mark - timeStamp to days or hours coverter
--(NSString *) calculateHoursDays:(NSString *) startTime endTime:(NSString *)endTime {
-    
-    int totalMinutes;
-    int totalHoursDays;
-    int remainingMinutes;
-    double start = [startTime doubleValue];
-    double end = [endTime doubleValue];
-    
-    NSString *daysOrHoursToBeShown;
-    int OneMinute = 60;
-    int OneHour =  60 * 60;
-    int OneDay  =  60 * 60 * 24;
-    double diff = fabs(end  - start);
-    
-    totalHoursDays = round(diff/OneHour);
-    totalMinutes = round(((diff/OneHour) * OneMinute));
-    
-    // calculating remaining minutes
-    
-    if(totalMinutes<=59){
-        remainingMinutes = totalMinutes;
-    } else if(totalMinutes<=120) {
-        remainingMinutes = totalMinutes%60;
-    } else {
-        remainingMinutes = totalMinutes%(totalHoursDays*60);
-    }
-    
-    if(totalHoursDays>=24) {
-
-        totalHoursDays = round(diff/OneDay + 0.1);
-        
-        if( totalHoursDays == 1 ) {
-            daysOrHoursToBeShown = [NSString stringWithFormat:@"%i day", totalHoursDays];
-        } else {
-            daysOrHoursToBeShown = [NSString stringWithFormat:@"%i days", totalHoursDays];
-        }
-    } else {
-       
-        NSString *minutes;
-        if(remainingMinutes>1) {
-            minutes = @"minutes";
-        } else if(remainingMinutes==1) {
-            minutes = @"minute";
-        }
-        
-        if(totalHoursDays>1){
-            if(remainingMinutes>0) {
-                daysOrHoursToBeShown = [NSString stringWithFormat:@"%i hours and %i %@" ,totalHoursDays, remainingMinutes, minutes];
-            } else {
-                daysOrHoursToBeShown = [NSString stringWithFormat:@"%i hours" ,totalHoursDays];
-            }
-        } else if(totalHoursDays==1) {
-            if(remainingMinutes>0) {
-                daysOrHoursToBeShown = [NSString stringWithFormat:@"%i hour and %i %@" ,totalHoursDays, remainingMinutes, minutes];
-            } else {
-                daysOrHoursToBeShown = [NSString stringWithFormat:@"%i hour" ,totalHoursDays];
-            }
-        } else if(totalHoursDays<1) {
-            daysOrHoursToBeShown = [NSString stringWithFormat:@"%i minutes", remainingMinutes];
-        }
-    }
- 
-    NSLog(@"Number of days or hours: %@", daysOrHoursToBeShown);
-    return daysOrHoursToBeShown;
-}
-
 #pragma mark -  Navigation functions
 
 - (void)setNavigationDefaults{

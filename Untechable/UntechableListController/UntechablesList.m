@@ -149,7 +149,6 @@
 }
 
 -(void)addUntechable{
-    
     AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
     addUntechable.untechable = untechable;
     addUntechable.totalUntechables = (int)allUntechables.count;

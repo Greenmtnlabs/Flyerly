@@ -58,4 +58,5 @@
 -(void)resetCustomizedContactsForCurrentSession;
 -(BOOL)canSkipEmailSetting;
 
+-(NSString *) calculateHoursDays:(NSString *) startTime endTime:(NSString *)endTime;
 @end
