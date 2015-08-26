@@ -490,7 +490,7 @@
             }
             
             if ( numberType != nil ){
-                
+                phoneUtilError = nil;
                 NSString *phoneNumberStr = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
                 phoneNumberStr = [[phoneNumberStr componentsSeparatedByCharactersInSet:onlyAllowedChars] componentsJoinedByString:@""];
                 
@@ -503,7 +503,7 @@
                                                     error:&phoneUtilError];
                 }
                 
-                if( phoneUtilError != nil ){
+                if( phoneUtilError == nil ){
                     NSMutableArray *numberWithStatus = [[NSMutableArray alloc] init];
                     // Phone Number type at index 0
                     [numberWithStatus setObject:numberType atIndexedSubscript:0];
