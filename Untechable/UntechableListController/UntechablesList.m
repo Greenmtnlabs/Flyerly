@@ -764,15 +764,16 @@
  * Check have valid subscription before creating untechable
  */
 -(void)checkPayment{
-    BOOL haveValidSubscription = [userPurchases isSubscriptionValid];
-    
-    if( haveValidSubscription ){
+    if( [userPurchases isSubscriptionValid] ){
         [self createUntechableAfterPaymentCheck];
     } else{
         [self showOrLoadProductsForPurchase:YES];
     }
 }
 
+/**
+ * Create untechable without payment
+ */
 -(void)createUntechableAfterPaymentCheck{
     // Background work
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
@@ -801,6 +802,9 @@
     });
 }
 
+/**
+ * Create untechable in free( without call/sms notifications)
+ */
 -(void)createFreeUntechable{
     //1-
     //Remove all sms / call flags, user wants free untechable
@@ -809,12 +813,18 @@
     [self createUntechableAfterPaymentCheck];
 }
 
+/**
+ * When products loaded from apple store then show, else load 
+ * @param: For handling recursion deadlock we have this flag
+ */
 -(void)showOrLoadProductsForPurchase:(BOOL)canLoadProduct {
     
     if( userPurchases.productArray.count > 1) {
         [self showAlert:1];
     } else if( canLoadProduct ){
+        
         [userPurchases loadAllProducts:^(NSString *errorMsg){
+            
             if( [errorMsg isEqualToString:@""] ){
                 [self showOrLoadProductsForPurchase:NO];
             } else{
@@ -826,7 +836,6 @@
                 alert.tag = 0;
                 [alert show];
             }
-            
         }];
         
     } else {
@@ -834,7 +843,9 @@
     }
 }
 
-
+/**
+ * Create untechable on response
+ */
 -(void)handlePurchaseProductResponse:(NSString *)msg{
     if ( [msg isEqualToString:SUCCESS] ) {
         [self createUntechableAfterPaymentCheck];
@@ -848,8 +859,12 @@
     }
 }
 
-
+/**
+ * All ui alerts at one place
+ */
 -(void)showAlert:(int)tag{
+
+    //Show products in alert
     if( tag == 1 ){
         NSMutableDictionary *prodDic = userPurchases.productArray[0];
         NSString *monthlySubs = [NSString stringWithFormat:@"%@ - %@",
@@ -870,6 +885,7 @@
         alert.tag = tag;
         [alert show];
     }
+    //Show create untechable in free without sms/call, offer in alert
     else if( tag == 2 ){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Note"
                                                         message:@"Call / sms notifications of untechable are paid, Do you want untechable without it."
@@ -882,7 +898,9 @@
     
 }
 
-//alert view delegate
+/**
+ * Alert view delegate functions
+ */
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     //Alert tag = 0, while loading product cause an error prompts the alert
     if( alertView.tag == 0 ) {
