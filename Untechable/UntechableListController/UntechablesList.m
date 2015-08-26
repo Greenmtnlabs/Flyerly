@@ -764,11 +764,30 @@
  * Check have valid subscription before creating untechable
  */
 -(void)checkPayment{
-    if( [userPurchases isSubscriptionValid] ){
+    //When haven't any sms/call in untechable
+    if( [untechable.commonFunctions haveCallOrSms:untechable.customizedContactsForCurrentSession] == NO ){
         [self createUntechableAfterPaymentCheck];
-    } else{
-        [self showOrLoadProductsForPurchase:YES];
+    } else {
+        if( NO && [userPurchases isSubscriptionValid] ){
+            [self createUntechableAfterPaymentCheck];
+        } else{
+            [self showOrLoadProductsForPurchase:YES];
+        }
     }
+}
+
+/**
+ * Create untechable in free,without paid services (call/sms notifications)
+ */
+-(void)createFreeUntechable{
+    //1-
+    //Remove all sms / call flags, user wants free untechable
+    [untechable.commonFunctions delCallAndSmsStatus:untechable.customizedContactsForCurrentSession];
+    
+    BOOL haveCallOrSms = [untechable.commonFunctions haveCallOrSms:untechable.customizedContactsForCurrentSession];
+    
+    //2-
+    [self createUntechableAfterPaymentCheck];
 }
 
 /**
@@ -800,17 +819,6 @@
         }];
         
     });
-}
-
-/**
- * Create untechable in free( without call/sms notifications)
- */
--(void)createFreeUntechable{
-    //1-
-    //Remove all sms / call flags, user wants free untechable
-    
-    //2-
-    [self createUntechableAfterPaymentCheck];
 }
 
 /**
