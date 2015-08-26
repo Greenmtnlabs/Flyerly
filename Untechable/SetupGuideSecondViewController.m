@@ -55,7 +55,7 @@
 
 -(void)initializePickerData {
     
-    customSpendingTextAry = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];
+    customSpendingTextAry = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"]];
     
     NSString *temStr = ( [untechable.spendingTimeTxt isEqualToString:@""] ) ? NSLocalizedString(UNTECH_EXEMPLARY_LABEL, nil) : untechable.spendingTimeTxt;
     [self setupDoctorsResearchLabel:temStr];//[customSpendingTextAry objectAtIndex:0]];
@@ -90,7 +90,7 @@
 // Catpure the picker view selection
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
 
-    customSpendingTextAry = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];
+    customSpendingTextAry =  [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"]];
 
     if( [[customSpendingTextAry objectAtIndex:row] isEqualToString:[customSpendingTextAry objectAtIndex:customSpendingTextAry.count-1]] ) {
         [self showAddFieldPopUp];
@@ -98,13 +98,6 @@
         [self setupDoctorsResearchLabel:[customSpendingTextAry objectAtIndex:row]];
         untechable.spendingTimeTxt = [customSpendingTextAry objectAtIndex:row];
     }
-    
-//    if( [[customSpendingTextAry objectAtIndex:row] isEqualToString:@"Custom"] ) {
-//        [self showAddFieldPopUp];
-//    } else  {
-//        [self setupDoctorsResearchLabel:[customSpendingTextAry objectAtIndex:row]];
-//        untechable.spendingTimeTxt = [customSpendingTextAry objectAtIndex:row];
-//    }
 }
 
 //the size of the fonts in picker view was big for iphone 5 and small for iphone 6

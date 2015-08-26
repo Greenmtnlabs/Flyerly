@@ -58,19 +58,15 @@
 
 -(void)applyLocalization{
     
-    NSMutableArray *myArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];
-    
-    NSMutableArray *customSpendingTextArray = [[NSMutableArray alloc] initWithArray:myArray];
+    NSMutableArray *customSpendingTextArray = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"]];
 
-    
     NSMutableOrderedSet *set = [NSMutableOrderedSet orderedSetWithArray:DEF_SPENDING_TIME_ARY ];
     
     NSMutableArray *defaultSpendingTimeText = [NSMutableArray arrayWithArray:[set array]];
     
-    if(customSpendingTextArray != nil){
-        for (int i=0; i<=9; i++) {
-            
-            [customSpendingTextArray replaceObjectAtIndex:i withObject:NSLocalizedString(defaultSpendingTimeText[i], nil)];
+    if(customSpendingTextArray.count != 0){
+        for (int i=0; i< DEF_SPENDING_TIME_ARY.count-1; i++) {
+           [customSpendingTextArray replaceObjectAtIndex:i withObject: NSLocalizedString(defaultSpendingTimeText[i], nil)];
         }
     } else {
         
@@ -78,7 +74,7 @@
         customSpendingTextArray = [NSMutableArray arrayWithArray:[set array]];
       
         for (int i=0; i<customSpendingTextArray.count; i++) {
-            [customSpendingTextArray replaceObjectAtIndex:i withObject:NSLocalizedString(customSpendingTextArray[i], nil)];
+            customSpendingTextArray[i] = NSLocalizedString(customSpendingTextArray[i], nil);
         }
     }
     
