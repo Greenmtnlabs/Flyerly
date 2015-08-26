@@ -29,8 +29,7 @@
 
 @synthesize untechable,comingFromContactsListScreen,char_Limit,inputSetSocialStatus,btnFacebook,btnTwitter,btnLinkedin,keyboardControls;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -38,8 +37,7 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
  
@@ -70,8 +68,7 @@
 }
 
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -93,8 +90,7 @@
 // Custom functions
 
 #pragma mark - Text View Delegate
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
+- (void)textViewDidBeginEditing:(UITextView *)textView {
     
     if ( [textView.text isEqualToString:@"e.g Spending time with family."] ){
         textView.text = @"";
@@ -121,33 +117,21 @@
 
 
 #pragma mark -  UI functions
--(void)updateUI
-{
+-(void)updateUI{
 
     [inputSetSocialStatus setTextColor:DEF_GREEN];
     inputSetSocialStatus.font = [UIFont fontWithName:APP_FONT size:16];
     inputSetSocialStatus.delegate = self;
     
-    if ( [untechable.socialStatus isEqualToString:@""] ){
-        inputSetSocialStatus.text = @"e.g Spending time with family.";
-    }
-    
-    NSString *url = [NSString stringWithFormat:@"%@",untechable.spendingTimeTxt];
-    url = [url stringByReplacingOccurrencesOfString:@" " withString:@""];
-    
     NSString *startTimeStamp = [ untechable startDate];
     NSString *endTimeStamp = [ untechable endDate];
     NSString *getDaysOrHours = [ self calculateHoursDays:startTimeStamp  endTime: endTimeStamp];
-   
-    NSString *socialStatus;
     
-    if( [untechable.rUId isEqualToString:@"1"] ) {
-        socialStatus = untechable.spendingTimeTxt;
-    } else {
-        socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", getDaysOrHours,untechable.spendingTimeTxt];
+    if ( [untechable.socialStatus isEqualToString:@""] ){
+        untechable.socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", getDaysOrHours,untechable.spendingTimeTxt];
     }
+    [inputSetSocialStatus setText:untechable.socialStatus];
     
-    [inputSetSocialStatus setText:socialStatus];
     int len = (int)inputSetSocialStatus.text.length;
     char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
     
@@ -367,49 +351,6 @@
     }
 }
 
-- (void) removeRedundentDataForContacts {
-    
-    if ( untechable.customizedContactsForCurrentSession.count > 0){
-    
-        for ( int i=0; i<untechable.customizedContactsForCurrentSession.count; i++){
-            
-            ContactsCustomizedModal *tempModal = [untechable.customizedContactsForCurrentSession objectAtIndex:i];
-            
-            NSMutableArray *phoneNumbersWithStatus  = [[NSMutableArray alloc] initWithArray:tempModal.allPhoneNumbers copyItems:NO];
-            
-            for ( int j = 0; j < phoneNumbersWithStatus.count; j++){
-                NSMutableArray *numberWithStatus = [[NSMutableArray alloc] init];
-                
-                numberWithStatus = [phoneNumbersWithStatus objectAtIndex:j];
-                
-                if ( [[numberWithStatus objectAtIndex:2] isEqualToString:@"0"] &&
-                    [[numberWithStatus objectAtIndex:3] isEqualToString:@"0"]  )
-                {
-                    [tempModal.allPhoneNumbers removeObject:numberWithStatus];
-                }
-            }
-            
-            NSMutableArray *emailOnly  = [[NSMutableArray alloc] init];
-            NSMutableArray *emailsWithStatus  = tempModal.allEmails;
-    
-            for ( int k = 0; k < emailsWithStatus.count; k++) {
-                
-                NSMutableArray *emailWithStatus = [emailsWithStatus objectAtIndex:k];
-                
-                if ( [[emailWithStatus objectAtIndex:1] isEqualToString:@"1"] ) {
-                    
-                    [emailOnly addObject:emailWithStatus];
-                }
-            }
-            
-            tempModal.allEmails = emailOnly;
-        }
-    }
-    
-    [self storeScreenVarsInDic];
-}
-
-
 -(void)showMsgOnApiResponse:(NSString *)message {
     UIAlertView *temAlert = [[UIAlertView alloc ]
                              initWithTitle:@""
@@ -474,6 +415,8 @@
 
 #pragma mark -  Get Sharing permissions functions
 - (IBAction)shareOn:(id)sender {
+    
+    [self storeScreenVarsInDic];
     
     if(sender == self.btnFacebook){
         
