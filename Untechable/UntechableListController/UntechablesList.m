@@ -889,10 +889,10 @@
     //Show create untechable in free without sms/call, offer in alert
     else if( tag == 2 ){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Note"
-                                                        message:@"Call / sms notifications of untechable are paid, Do you want untechable without it."
+                                                        message:@"App will not allow Call/SMS to your selected contact without premium subscription but Social Media Status and email we will be sent to your contacts"
                                                        delegate:self
-                                              cancelButtonTitle:@"No"
-                                              otherButtonTitles: @"Yes", nil];
+                                              cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles: @"Ok", nil];
         alert.tag = tag;
         [alert show];
     }
