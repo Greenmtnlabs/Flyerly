@@ -68,7 +68,7 @@
     [self showHideDateTimePicker:NO];
     
     // initializes array
-    _pickerData = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];;
+    _pickerData = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"]];
 
     if( _pickerData.count > 0 ){
         // removes last element from array which is "Custom"
