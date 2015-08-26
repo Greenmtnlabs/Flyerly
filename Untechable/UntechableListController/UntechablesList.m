@@ -747,8 +747,6 @@
             break;
         }
     }
-   
-    
     
     //setting spendingTimeTxt to status got from setup screen.
     untechable.spendingTimeTxt = selectedStatus;

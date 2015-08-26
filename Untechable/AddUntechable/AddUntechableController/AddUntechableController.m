@@ -69,9 +69,11 @@
     
     // initializes array
     _pickerData = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];;
-    
-    // removes last element from array which is "Custom"
-    [_pickerData removeObjectAtIndex: _pickerData.count-1];
+
+    if( _pickerData.count > 0 ){
+        // removes last element from array which is "Custom"
+        [_pickerData removeObjectAtIndex: _pickerData.count-1];
+    }
 
     [self showHideTextPicker:NO];
     
