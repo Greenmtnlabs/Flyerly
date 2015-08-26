@@ -34,5 +34,6 @@
 
 @property(nonatomic,strong) IBOutlet UITextField *searchTextField;
 
+@property (strong, nonatomic) IBOutlet UILabel *lblSearchMessage;
 -(void)onNext;
 @end

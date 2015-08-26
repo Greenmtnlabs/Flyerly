@@ -114,3 +114,7 @@
 #define UNTECH_EXEMPLARY_LABEL @"e.g. Spending time with family"
 #define UNTECH_QUESTION @"When you take time away from technology, what do you typically do or hope to do more of?"
 #define DOCTOR_RESEARCH_LABEL @"Did you know that based on a study, people %@ have better relationships, better quality of sleep and in general are more emotionally balanced."
+
+// SetupGuide Screen 2
+#define MESSAGE_SERACH @"Select contacts to inform of your unavailability"
+#define MESSAGE_SERACH_HINT @"Select contacts"

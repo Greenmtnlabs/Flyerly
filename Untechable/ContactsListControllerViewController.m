@@ -29,11 +29,13 @@
 @implementation ContactsListControllerViewController
 
 @synthesize mobileContactsArray,mobileContactBackupArray,searchTextField,untechable, selectedAnyEmail;
+@synthesize lblSearchMessage;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setNavigationDefaults];
     
+    [self applyLocalization];
     _contactsTable.delegate = self;
     _contactsTable.dataSource = self;
     
@@ -44,6 +46,11 @@
     
     [searchTextField resignFirstResponder];
 
+}
+
+-(void)applyLocalization{
+    [lblSearchMessage setText:NSLocalizedString(MESSAGE_SERACH, nil)];
+    [searchTextField setText:NSLocalizedString(MESSAGE_SERACH_HINT, nil)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
