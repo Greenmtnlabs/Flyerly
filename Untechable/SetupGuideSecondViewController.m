@@ -36,7 +36,7 @@
 }
 
 -(void)applyLocalization{
-    [_lblUntechQuestion setText:NSLocalizedString(UNTECH_QUESTION, nil)];
+    [_lblUntechQuestion setText:NSLocalizedString(@"When you take time away from technology, what do you typically do or hope to do more of?", nil)];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,7 +57,7 @@
     
     customSpendingTextAry = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"]];
     
-    NSString *temStr = ( [untechable.spendingTimeTxt isEqualToString:@""] ) ? NSLocalizedString(UNTECH_EXEMPLARY_LABEL, nil) : untechable.spendingTimeTxt;
+    NSString *temStr = ( [untechable.spendingTimeTxt isEqualToString:@""] ) ? NSLocalizedString(@"e.g. Spending time with family", nil) : untechable.spendingTimeTxt;
     [self setupDoctorsResearchLabel:temStr];
     
     self.setupSpendingTimeText.dataSource = self;
@@ -68,7 +68,7 @@
  Setting up Doctors Research Label to be shown
  **/
 -(void) setupDoctorsResearchLabel:(NSString *)msg {
-    _doctorsResearchLabel.text = [NSString stringWithFormat:NSLocalizedString(DOCTOR_RESEARCH_LABEL, nil), msg];
+    _doctorsResearchLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Did you know that based on a study, people %@ have better relationships, better quality of sleep and in general are more emotionally balanced.", nil), msg];
 }
 
 #pragma - Mark UI PICKER VIEW Delegate Methods

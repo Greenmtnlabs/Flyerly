@@ -100,21 +100,9 @@
 
 #define DEF_SPENDING_TIME_ARY @[@"Spending time with family", @"Driving", @"Spending time outdoors", @"At the beach", @"Enjoying the holidays", @"Just needed a break", @"Running", @"On vacation", @"Finding my inner peace", @"Removing myself from technology", @"Custom"]
 
-// SetupGuide Screen 1
-#define TITLE_NAME @"Name"
-#define MESSAGE_NAME @"Please Enter Your Name"
-#define TITLE_PHONENUMBER @"Phone Number"
-#define MESSAGE_PHONENUMBER @"Please Enter Your Number"
-
 #define ERROR @"Error"
-#define ERROR_MESSAGE_PHONENUMBER @"Please Enter Your Name and Number"
 #define OK @"OK"
 
-// SetupGuide Screen 2
-#define UNTECH_EXEMPLARY_LABEL @"e.g. Spending time with family"
-#define UNTECH_QUESTION @"When you take time away from technology, what do you typically do or hope to do more of?"
-#define DOCTOR_RESEARCH_LABEL @"Did you know that based on a study, people %@ have better relationships, better quality of sleep and in general are more emotionally balanced."
 
-// SetupGuide Screen 2
-#define MESSAGE_SERACH @"Select contacts to inform of your unavailability"
-#define MESSAGE_SERACH_HINT @"Select contacts"
+
+

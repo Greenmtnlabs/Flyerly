@@ -49,8 +49,8 @@
 }
 
 -(void)applyLocalization{
-    [lblSearchMessage setText:NSLocalizedString(MESSAGE_SERACH, nil)];
-    [searchTextField setText:NSLocalizedString(MESSAGE_SERACH_HINT, nil)];
+    [lblSearchMessage setText:NSLocalizedString(@"Select contacts to inform of your unavailability", nil)];
+    [searchTextField setText:NSLocalizedString(@"Select contacts", nil)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

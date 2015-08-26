@@ -49,6 +49,7 @@
             <connections>
                 <outlet property="char_limit" destination="2pR-Bd-WU2" id="StL-qb-0xw"/>
                 <outlet property="customText" destination="o9l-MC-FxV" id="BCO-Xz-SmY"/>
+                <outlet property="lblMessage" destination="zBG-1G-C9G" id="r7g-2R-FVp"/>
             </connections>
             <point key="canvasLocation" x="268" y="233.5"/>
         </tableViewCell>

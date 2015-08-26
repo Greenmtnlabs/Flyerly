@@ -14,6 +14,7 @@ ContactsCustomizedModal *contactModal_;
 
 @synthesize customText;
 @synthesize delegate;
+@synthesize lblMessage;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
@@ -24,11 +25,17 @@ ContactsCustomizedModal *contactModal_;
 -(void)setCellValuesWithDeleg :(NSString *)message deleg:(id)deleg {
     self.customText.text = message;
     self.customText.delegate = self;
-    [self updateChrCounter:message];
     
+    [self applyLocalization];
+    
+    [self updateChrCounter:message];
     if( deleg != nil )
     self.delegate = deleg;
         
+}
+
+-(void)applyLocalization{
+    [lblMessage setText:NSLocalizedString(@"Select one or more modes", nil)];
 }
 
 -(void)updateChrCounter:(NSString *)message {

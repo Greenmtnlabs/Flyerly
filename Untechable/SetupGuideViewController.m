@@ -33,10 +33,10 @@
 }
 
 -(void)applyLocalization{
-    [_btnLblWwud setTitle: NSLocalizedString(TITLE_NAME, nil) forState:normal];
-    [_usernameHintText setText:NSLocalizedString(MESSAGE_NAME, nil) ];
-    [_btnLblPhoneNumber setTitle: NSLocalizedString(TITLE_PHONENUMBER, nil) forState:normal];
-    [_phoneNumberHintText setText:NSLocalizedString(MESSAGE_PHONENUMBER, nil)];
+    [_btnLblWwud setTitle: NSLocalizedString(@"Name", nil) forState:normal];
+    [_usernameHintText setText:NSLocalizedString(@"Please Enter Your Name", nil) ];
+    [_btnLblPhoneNumber setTitle: NSLocalizedString(@"Phone Number", nil) forState:normal];
+    [_phoneNumberHintText setText:NSLocalizedString(@"Please Enter Your Number", nil)];
     
 }
 
@@ -244,7 +244,7 @@
     } else {
         
         UIAlertView *alert  = [[UIAlertView alloc] initWithTitle:NSLocalizedString(ERROR, nil)
-                                                         message:NSLocalizedString(ERROR_MESSAGE_PHONENUMBER, nil)
+                                                         message:NSLocalizedString(@"Please Enter Your Name and Number", nil)
                                                         delegate:nil
                                                cancelButtonTitle:NSLocalizedString(OK, nil)
                                                otherButtonTitles:nil, nil];
