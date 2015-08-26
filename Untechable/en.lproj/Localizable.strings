@@ -53,4 +53,7 @@
 "Select contacts" = "Select contacts";
 
 "Select one or more modes" = "Select one or more modes";
-"Message to %@" = "Message to %@";
+"Message to %@\n" = "Message to %@\n";
+
+// Email Screen
+"Select your email service to let your contacts know you will be untechable." = "Select your email service to let your contacts know you will be untechable.";

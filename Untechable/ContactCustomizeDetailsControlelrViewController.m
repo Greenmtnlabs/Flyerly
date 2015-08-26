@@ -88,7 +88,7 @@
         saveButton.titleLabel.shadowColor = [UIColor clearColor];
         [saveButton addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
         saveButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [saveButton setTitle:TITLE_SAVE_TXT forState:normal];
+        [saveButton setTitle:NSLocalizedString(TITLE_SAVE_TXT, nil) forState:normal];
         [saveButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [saveButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
         [saveButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];

@@ -228,7 +228,7 @@
         // Left Button
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
-        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitle:NSLocalizedString(TITLE_BACK_TXT, nil) forState:normal];
         [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(btnNextTouchEndToServerAccount) forControlEvents:UIControlEventTouchUpInside];
@@ -248,13 +248,13 @@
         rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         
         if ( [comingFrom isEqualToString:@"SettingsScreen"] ) {
-            [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
+            [rightBarButton setTitle:NSLocalizedString(TITLE_DONE_TXT, nil) forState:normal];
         } else if ( [comingFrom isEqualToString:@"SetupScreen"] ) {
-            [rightBarButton setTitle:TITLE_NEXT_TXT forState:normal];
+            [rightBarButton setTitle:NSLocalizedString(TITLE_NEXT_TXT, nil) forState:normal];
         } else if ( [comingFrom isEqualToString:@"ContactsListScreen"] ) {
-            [rightBarButton setTitle:TITLE_NEXT_TXT forState:normal];
+            [rightBarButton setTitle:NSLocalizedString(TITLE_NEXT_TXT, nil) forState:normal];
         } else {
-            [rightBarButton setTitle:TITLE_FINISH_TXT forState:normal];
+            [rightBarButton setTitle:NSLocalizedString(TITLE_FINISH_TXT, nil) forState:normal];
         }
         
         [rightBarButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
@@ -276,7 +276,7 @@
         // Left Button
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
-        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitle:NSLocalizedString(TITLE_BACK_TXT, nil) forState:normal];
         [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(btnBackToAccountType) forControlEvents:UIControlEventTouchUpInside];
@@ -296,9 +296,9 @@
         rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
 
         if ( [comingFrom isEqualToString:@"SettingsScreen"] && [untechable.acType isEqualToString:@"OTHER"] == NO) {
-            [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
+            [rightBarButton setTitle:NSLocalizedString(TITLE_DONE_TXT, nil) forState:normal];
         } else {
-            [rightBarButton setTitle:TITLE_NEXT_TXT forState:normal];
+            [rightBarButton setTitle:NSLocalizedString(TITLE_NEXT_TXT, nil) forState:normal];
         }
         
         [rightBarButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
@@ -308,7 +308,7 @@
             rightBarButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
             [rightBarButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
             rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-            [rightBarButton setTitle:@"NEXT" forState:normal];
+            [rightBarButton setTitle:NSLocalizedString(TITLE_NEXT_TXT, nil) forState:normal];
             [rightBarButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
             
         }
@@ -325,7 +325,7 @@
         // Left Button
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
-        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitle:NSLocalizedString(TITLE_BACK_TXT, nil) forState:normal];
         [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(btnBackTouchEnd) forControlEvents:UIControlEventTouchUpInside];
@@ -343,7 +343,7 @@
         rightBarButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         [rightBarButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
         rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [rightBarButton setTitle:TITLE_FINISH_TXT forState:normal];
+        [rightBarButton setTitle:NSLocalizedString(TITLE_FINISH_TXT, nil) forState:normal];
         [rightBarButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         rightBarButton.showsTouchWhenHighlighted = YES;
 
@@ -355,7 +355,7 @@
             // Right Button
             skipButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
             skipButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
-            [skipButton setTitle:TITLE_SKIP_TXT forState:normal];
+            [skipButton setTitle:NSLocalizedString(TITLE_SKIP_TXT, nil) forState:normal];
             [skipButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
             [skipButton addTarget:self action:@selector(btnSkipTouchStart) forControlEvents:UIControlEventTouchDown];
             [skipButton addTarget:self action:@selector(btnSkipTouchEnd) forControlEvents:UIControlEventTouchUpInside];
@@ -619,7 +619,7 @@
                              initWithTitle:@""
                              message:message
                              delegate:self
-                             cancelButtonTitle:@"OK"
+                             cancelButtonTitle:NSLocalizedString(OK, nil)
                              otherButtonTitles:nil];
     [temAlert show];
     
@@ -954,15 +954,17 @@
         headerView.backgroundColor = [UIColor whiteColor];
         
         // 3. Add a label
+        
+        NSString *label = NSLocalizedString(@"Select your email service to let your contacts know you will be untechable.", nil);;
         UILabel* headerLabel = [[UILabel alloc] init];
         
         headerLabel.frame = CGRectMake(10, 0, tableView.frame.size.width - 10, 60);
         headerLabel.textColor = [UIColor lightGrayColor];
         headerLabel.font = [UIFont fontWithName:APP_FONT size:18];
         headerLabel.numberOfLines = 3;
-        headerLabel.text = @"Select your email service to let your contacts know you will be untechable.";
+        headerLabel.text = label;
         
-        NSString *labelText = @"Select your email service to let your contacts know you will be untechable.";
+        NSString *labelText = label;
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:labelText];
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
         [paragraphStyle setLineSpacing:8];
