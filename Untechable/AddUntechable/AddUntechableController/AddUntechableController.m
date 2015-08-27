@@ -407,7 +407,6 @@
     _spendingTimeTextPicker.alpha = alpha;
     _pickerCloseBtn.alpha = alpha;
     [self addUpperBorder];
-    [self.pickerCloseBtn setTitle:NSLocalizedString(@"DONE", nil) forState:normal];
     self.pickerCloseBtn.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
     
     //changes the "CLOSE" button text color to black
@@ -498,11 +497,13 @@
     _btnEndTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
     [_btnEndTime setTitle:[untechable.commonFunctions convertTimestampToAppDate:untechable.endDate] forState:UIControlStateNormal];
     
+    [_lblNoEndDate setText:NSLocalizedString(@"No End Date",nil)];
     [_lblNoEndDate setTextColor:DEF_GRAY];
     _lblNoEndDate.font = [UIFont fontWithName:APP_FONT size:14];
 
     [_cbNoEndDate setSelected:!(untechable.hasEndDate)];
     
+    [_pickerCloseBtn setTitle:NSLocalizedString(@"DONE", nil) forState:normal];
     [_pickerCloseBtn setTitleColor:DEF_GRAY forState:UIControlStateNormal];
     _pickerCloseBtn.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
     
