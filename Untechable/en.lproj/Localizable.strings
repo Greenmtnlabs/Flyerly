@@ -68,3 +68,9 @@
 "Incoming Mail Server" = "Incoming Mail Server";
 "Outgoing Mail Server" = "Outgoing Mail Server";
 
+// SetupGuide Screen 4
+"Congratulation" = "Congratulation";
+"Thank you for setting up your Untech settings. Now you can easily become Untechable whenever you need a break from technology in order to spend more time with the people & experiencing the things that are most important." = "Thank you for setting up your Untech settings. Now you can easily become Untechable whenever you need a break from technology in order to spend more time with the people & experiencing the things that are most important.";
+
+// Socialnetwork Controller
+"The above message will be posted on %@ to the networks you selected below" = "The above message will be posted on %@ to the networks you selected below";
