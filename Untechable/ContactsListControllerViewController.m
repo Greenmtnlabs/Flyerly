@@ -28,7 +28,7 @@
 
 @implementation ContactsListControllerViewController
 
-@synthesize mobileContactsArray,mobileContactBackupArray,searchTextField,untechable, selectedAnyEmail;
+@synthesize mobileContactsArray,mobileContactBackupArray,searchTextField,untechable, selectedAnyEmail,selectContactStr;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -43,6 +43,12 @@
     [searchTextField setReturnKeyType:UIReturnKeyDone];
     
     [searchTextField resignFirstResponder];
+
+    //hock tap gesture, when user tap on selectContactLable then open keyboard for search contact field
+    selectContactStr.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGesture =
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSearchContactKeyBoard)];
+    [selectContactStr addGestureRecognizer:tapGesture];
 
 }
 
@@ -675,6 +681,10 @@
         
         [untechable.customizedContactsForCurrentSession replaceObjectAtIndex:i withObject:sessionModel];
     }
+}
+
+-(void)showSearchContactKeyBoard{
+    [searchTextField becomeFirstResponder];
 }
 
 @end
