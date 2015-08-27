@@ -338,7 +338,7 @@
                              cancelButtonTitle:NSLocalizedString(OK, nil)
                              otherButtonTitles:nil];
     [temAlert show];
-    if( [message isEqualToString:@"Untechable created successfully"] ){
+    if( [message isEqualToString:NSLocalizedString(@"Untechable created successfully", nil)] ){
     }
 }
 
@@ -448,10 +448,10 @@
     
     if( !internetReachable.isReachable ){
         // show alert
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection"
-                                                        message:@"You must be connected to the internet to use this app."
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No network connection", nil)
+                                                        message:NSLocalizedString(@"You must be connected to the internet to use this app.", nil)
                                                        delegate:nil
-                                              cancelButtonTitle:@"OK"
+                                              cancelButtonTitle:NSLocalizedString(OK, nil)
                                               otherButtonTitles:nil];
         [alert show];
         
