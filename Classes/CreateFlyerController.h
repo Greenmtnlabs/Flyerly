@@ -216,7 +216,7 @@
 @property(strong,nonatomic) NSString *currentLayer;
 @property(strong,nonatomic) NSMutableDictionary *layersDic;
 @property (nonatomic, copy) void (^onFlyerBack)(NSString *);
-@property (nonatomic, copy) void (^shouldShowAdd)(NSString *);
+@property (nonatomic, copy) void (^shouldShowAdd)(NSString *,BOOL);
 
 -(void) callDeleteLayer;
 -(void) choosePhoto;
