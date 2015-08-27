@@ -104,3 +104,19 @@
 
 "Untech Custom" = "Untech Personalizado";
 "Untech Now" = "Untech Ahora";
+
+// AddUntechableController
+"Going Untechable and.." = "Yendo Untechable y..";
+"Invalid Dates" = "Fechas no válidas";
+"End date should be greater than start date." = "Fecha de finalización debe ser mayor que la fecha de inicio.";
+"What are you going untechable for?" = "¿Qué vas untechable buscas?";
+"You must specify what you'll be doing with your time away from technology before proceeding." = "Debe especificar lo que va a hacer con su tiempo lejos de la tecnología antes de proceder.";
+"NOW" = "AHORA";
+"Never" = "Nunca";
+"Start" = "Empezar";
+"End" = "Fin";
+
+
+
+
+

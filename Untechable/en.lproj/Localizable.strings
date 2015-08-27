@@ -105,5 +105,15 @@
 "Untech Custom" = "Untech Custom";
 "Untech Now" = "Untech Now";
 
+// AddUntechableController
+"Going Untechable and.." = "Going Untechable and..";
+"Invalid Dates" = "Invalid Dates";
+"End date should be greater than start date." = "End date should be greater than start date.";
+"What are you going untechable for?" = "What are you going untechable for?";
+"You must specify what you'll be doing with your time away from technology before proceeding." = "You must specify what you'll be doing with your time away from technology before proceeding.";
+"NOW" = "NOW";
+"Never" = "Never";
+"Start" = "Start";
+"End" = "End";
 
 
