@@ -46,6 +46,12 @@
     
     [searchTextField resignFirstResponder];
 
+    //hock tap gesture, when user tap on selectContactLable then open keyboard for search contact field
+    selectContactStr.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGesture =
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSearchContactKeyBoard)];
+    [selectContactStr addGestureRecognizer:tapGesture];
+
 }
 
 -(void)applyLocalization{
@@ -682,6 +688,10 @@
         
         [untechable.customizedContactsForCurrentSession replaceObjectAtIndex:i withObject:sessionModel];
     }
+}
+
+-(void)showSearchContactKeyBoard{
+    [searchTextField becomeFirstResponder];
 }
 
 @end

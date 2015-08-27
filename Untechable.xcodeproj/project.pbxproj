@@ -236,6 +236,15 @@
 		C37F755E1A7F50D100B5AC71 /* fb_Like@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C37F755A1A7F50D100B5AC71 /* fb_Like@3x.png */; };
 		C39C31A51A77D6D0003CE153 /* downArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C39C31A41A77D6D0003CE153 /* downArrow@2x.png */; };
 		C3CA4DD51A80CE0700B03A23 /* SocialNetworksStatusModal.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA4DD41A80CE0700B03A23 /* SocialNetworksStatusModal.m */; };
+		C3DC2E121B8C73620091CCF4 /* UserPurchases.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DC2E111B8C73620091CCF4 /* UserPurchases.m */; };
+		C3DC2E211B8C77070091CCF4 /* RMAppReceipt.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DC2E141B8C77070091CCF4 /* RMAppReceipt.m */; };
+		C3DC2E221B8C77070091CCF4 /* RMStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DC2E161B8C77070091CCF4 /* RMStore.m */; };
+		C3DC2E231B8C77070091CCF4 /* RMStoreAppReceiptVerificator.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DC2E181B8C77070091CCF4 /* RMStoreAppReceiptVerificator.m */; };
+		C3DC2E241B8C77070091CCF4 /* RMStoreKeychainPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DC2E1A1B8C77070091CCF4 /* RMStoreKeychainPersistence.m */; };
+		C3DC2E251B8C77070091CCF4 /* RMStoreTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DC2E1C1B8C77070091CCF4 /* RMStoreTransaction.m */; };
+		C3DC2E261B8C77070091CCF4 /* RMStoreTransactionReceiptVerificator.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DC2E1E1B8C77070091CCF4 /* RMStoreTransactionReceiptVerificator.m */; };
+		C3DC2E271B8C77070091CCF4 /* RMStoreUserDefaultsPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DC2E201B8C77070091CCF4 /* RMStoreUserDefaultsPersistence.m */; };
+		C3DC2E2A1B8C8B6A0091CCF4 /* SKProduct+LocalPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DC2E291B8C8B6A0091CCF4 /* SKProduct+LocalPrice.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -524,6 +533,24 @@
 		C39C31A41A77D6D0003CE153 /* downArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "downArrow@2x.png"; sourceTree = "<group>"; };
 		C3CA4DD31A80CE0700B03A23 /* SocialNetworksStatusModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialNetworksStatusModal.h; sourceTree = "<group>"; };
 		C3CA4DD41A80CE0700B03A23 /* SocialNetworksStatusModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialNetworksStatusModal.m; sourceTree = "<group>"; };
+		C3DC2E101B8C73620091CCF4 /* UserPurchases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPurchases.h; sourceTree = "<group>"; };
+		C3DC2E111B8C73620091CCF4 /* UserPurchases.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPurchases.m; sourceTree = "<group>"; };
+		C3DC2E131B8C77070091CCF4 /* RMAppReceipt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAppReceipt.h; sourceTree = "<group>"; };
+		C3DC2E141B8C77070091CCF4 /* RMAppReceipt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAppReceipt.m; sourceTree = "<group>"; };
+		C3DC2E151B8C77070091CCF4 /* RMStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStore.h; sourceTree = "<group>"; };
+		C3DC2E161B8C77070091CCF4 /* RMStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStore.m; sourceTree = "<group>"; };
+		C3DC2E171B8C77070091CCF4 /* RMStoreAppReceiptVerificator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStoreAppReceiptVerificator.h; sourceTree = "<group>"; };
+		C3DC2E181B8C77070091CCF4 /* RMStoreAppReceiptVerificator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStoreAppReceiptVerificator.m; sourceTree = "<group>"; };
+		C3DC2E191B8C77070091CCF4 /* RMStoreKeychainPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStoreKeychainPersistence.h; sourceTree = "<group>"; };
+		C3DC2E1A1B8C77070091CCF4 /* RMStoreKeychainPersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStoreKeychainPersistence.m; sourceTree = "<group>"; };
+		C3DC2E1B1B8C77070091CCF4 /* RMStoreTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStoreTransaction.h; sourceTree = "<group>"; };
+		C3DC2E1C1B8C77070091CCF4 /* RMStoreTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStoreTransaction.m; sourceTree = "<group>"; };
+		C3DC2E1D1B8C77070091CCF4 /* RMStoreTransactionReceiptVerificator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStoreTransactionReceiptVerificator.h; sourceTree = "<group>"; };
+		C3DC2E1E1B8C77070091CCF4 /* RMStoreTransactionReceiptVerificator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStoreTransactionReceiptVerificator.m; sourceTree = "<group>"; };
+		C3DC2E1F1B8C77070091CCF4 /* RMStoreUserDefaultsPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStoreUserDefaultsPersistence.h; sourceTree = "<group>"; };
+		C3DC2E201B8C77070091CCF4 /* RMStoreUserDefaultsPersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStoreUserDefaultsPersistence.m; sourceTree = "<group>"; };
+		C3DC2E281B8C8B6A0091CCF4 /* SKProduct+LocalPrice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKProduct+LocalPrice.h"; sourceTree = "<group>"; };
+		C3DC2E291B8C8B6A0091CCF4 /* SKProduct+LocalPrice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKProduct+LocalPrice.m"; sourceTree = "<group>"; };
 		FC11B82CE184AE8B063B3995 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -725,6 +752,7 @@
 				366ECD7F19D317E200F71A11 /* Config */,
 				3663932219D6A0A700512965 /* CommonFunctions */,
 				366ECD7B19D312BE00F71A11 /* Models */,
+				C3DC2E0F1B8C73620091CCF4 /* Purchases */,
 				C36D2E4F1A79196E000537C5 /* PreferencesController */,
 				2474023E1B33CB7900459759 /* SetupGuide */,
 				2402BB7F1A1DBEF800255A73 /* UntechableListController */,
@@ -1072,6 +1100,31 @@
 				C36D2E611A791AEA000537C5 /* SettingsCellView-iPhone6-Plus.xib */,
 			);
 			name = PreferencesController;
+			sourceTree = "<group>";
+		};
+		C3DC2E0F1B8C73620091CCF4 /* Purchases */ = {
+			isa = PBXGroup;
+			children = (
+				C3DC2E101B8C73620091CCF4 /* UserPurchases.h */,
+				C3DC2E111B8C73620091CCF4 /* UserPurchases.m */,
+				C3DC2E281B8C8B6A0091CCF4 /* SKProduct+LocalPrice.h */,
+				C3DC2E291B8C8B6A0091CCF4 /* SKProduct+LocalPrice.m */,
+				C3DC2E131B8C77070091CCF4 /* RMAppReceipt.h */,
+				C3DC2E141B8C77070091CCF4 /* RMAppReceipt.m */,
+				C3DC2E151B8C77070091CCF4 /* RMStore.h */,
+				C3DC2E161B8C77070091CCF4 /* RMStore.m */,
+				C3DC2E171B8C77070091CCF4 /* RMStoreAppReceiptVerificator.h */,
+				C3DC2E181B8C77070091CCF4 /* RMStoreAppReceiptVerificator.m */,
+				C3DC2E191B8C77070091CCF4 /* RMStoreKeychainPersistence.h */,
+				C3DC2E1A1B8C77070091CCF4 /* RMStoreKeychainPersistence.m */,
+				C3DC2E1B1B8C77070091CCF4 /* RMStoreTransaction.h */,
+				C3DC2E1C1B8C77070091CCF4 /* RMStoreTransaction.m */,
+				C3DC2E1D1B8C77070091CCF4 /* RMStoreTransactionReceiptVerificator.h */,
+				C3DC2E1E1B8C77070091CCF4 /* RMStoreTransactionReceiptVerificator.m */,
+				C3DC2E1F1B8C77070091CCF4 /* RMStoreUserDefaultsPersistence.h */,
+				C3DC2E201B8C77070091CCF4 /* RMStoreUserDefaultsPersistence.m */,
+			);
+			path = Purchases;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1438,6 +1491,7 @@
 				C372098E1B7767AA003A40F2 /* RSetUntechable.m in Sources */,
 				36B4E53E1A28BBD400CC18B0 /* EmailTableViewCell.m in Sources */,
 				24A4B7A71A5126410029C8DF /* CustomTextTableViewCell.m in Sources */,
+				C3DC2E121B8C73620091CCF4 /* UserPurchases.m in Sources */,
 				366F9DAA1A124FC7006602E1 /* FHSStream.m in Sources */,
 				243C59F91A4D984B0020350C /* PhoneNumberCell.m in Sources */,
 				243C59FE1A4DA17C0020350C /* EmailCell.m in Sources */,
@@ -1449,13 +1503,16 @@
 				36B036A619DAF44D00E8CD21 /* EmailSettingController.m in Sources */,
 				24AFE79B1B38086A00CC8230 /* SetupGuideThirdView.m in Sources */,
 				36561D7C19D2C8A40069D897 /* AppDelegate.m in Sources */,
+				C3DC2E261B8C77070091CCF4 /* RMStoreTransactionReceiptVerificator.m in Sources */,
 				2474024A1B34198400459759 /* SetupGuideSecondViewController.m in Sources */,
 				366ECD7E19D3135200F71A11 /* Untechable.m in Sources */,
 				24848FE71A30403600BF1138 /* ServerAccountDetailsViewCell.m in Sources */,
 				C36D2E581A7919C2000537C5 /* SettingsCellView.m in Sources */,
 				24A0EA6D1B42522C0008081A /* SetupGuideFourthView.m in Sources */,
+				C3DC2E211B8C77070091CCF4 /* RMAppReceipt.m in Sources */,
 				243C59E01A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.m in Sources */,
 				36FD975519E694AC00427507 /* BSKeyboardControls.m in Sources */,
+				C3DC2E271B8C77070091CCF4 /* RMStoreUserDefaultsPersistence.m in Sources */,
 				C3CA4DD51A80CE0700B03A23 /* SocialNetworksStatusModal.m in Sources */,
 				248E06B71A4ACD6E0099846A /* ContactsCustomizedModal.m in Sources */,
 				36524AF119D940F4006DCAAF /* SocialnetworkController.m in Sources */,
@@ -1463,8 +1520,13 @@
 				24A65BEC1A30451E00BE83C6 /* SSLCell.m in Sources */,
 				24354D701A499F4F000EC781 /* ContactListCell.m in Sources */,
 				36561D7819D2C8A40069D897 /* main.m in Sources */,
+				C3DC2E221B8C77070091CCF4 /* RMStore.m in Sources */,
+				C3DC2E2A1B8C8B6A0091CCF4 /* SKProduct+LocalPrice.m in Sources */,
 				247402421B33CBD700459759 /* SetupGuideViewController.m in Sources */,
+				C3DC2E251B8C77070091CCF4 /* RMStoreTransaction.m in Sources */,
+				C3DC2E241B8C77070091CCF4 /* RMStoreKeychainPersistence.m in Sources */,
 				24354D6B1A499EC5000EC781 /* ContactsListControllerViewController.m in Sources */,
+				C3DC2E231B8C77070091CCF4 /* RMStoreAppReceiptVerificator.m in Sources */,
 				C33A87B31A7BCDB4000B9DAE /* EmailChangingController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

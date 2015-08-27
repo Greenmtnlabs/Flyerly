@@ -15,6 +15,7 @@
 #import "ThankyouController.h"
 #import "RUntechable.h"
 #import "RSetUntechable.h"
+#import "UserPurchases.h"
 
 
 @interface UntechablesList () {
@@ -28,11 +29,9 @@
     NSArray *_pickerData;
     int timeDuration;
     NSString *timeInString;
-    
     NSArray *arrayToBeAdded;
-
+    UserPurchases *userPurchases;
 }
-
 @end
 
 @implementation UntechablesList
@@ -74,8 +73,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    
+
     arrayToBeAdded =  @[ NSLocalizedString(@"30 minutes", nil), NSLocalizedString(@"1 hour", nil), NSLocalizedString(@"1 Day", nil), NSLocalizedString(@"2 Days", nil)];
+    userPurchases = [UserPurchases getInstance];
+
     
     //setting default time duration for untech now
     timeDuration = 30*60; //30 minutes
@@ -152,7 +153,6 @@
 }
 
 -(void)addUntechable{
-    
     AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
     addUntechable.untechable = untechable;
     addUntechable.totalUntechables = (int)allUntechables.count;
@@ -306,7 +306,7 @@
     }
     
     // enables navigation when any error occurs
-    else if([option isEqualToString:@"ERROR_ON_FINISH"] ){
+    else if( [option isEqualToString:@"ERROR_ON_FINISH"] || [option isEqualToString:@"ALERT_CANCEL"]){
         btnStatusInt = 1;
     }
     else if ( [option isEqualToString:@"ON_FINISH_SUCCESS"] ){
@@ -350,17 +350,10 @@
 -(void)deleteUntechable:(NSInteger)indexToremoveOnSucess Section:(NSInteger)section {
 
     NSMutableDictionary *tempDict = ( section == 0 ) ? sectionOneArray[indexToremoveOnSucess] : sectionTwoArray[indexToremoveOnSucess];
-
-    RLMRealm *realm = RLMRealm.defaultRealm;
-    RLMResults *untechableToBeDeleted = [RUntechable objectsInRealm:realm where:@"rUId == %@", tempDict[@"rUId"]];
-    if( untechableToBeDeleted.count ){
-        [realm beginWriteTransaction];
-        [realm deleteObjects:untechableToBeDeleted];
-        [realm commitWriteTransaction];
-        
+    [untechable deleteUntechable:tempDict[@"rUId"] callBack:^(bool deleted){
         [self setDefaultModel];
         [untechablesTable reloadData];
-    }
+    }];
 }
 
 - (void)sendDeleteRequestToApi:(NSInteger)indexToremoveOnSucess Section:(NSInteger)section {
@@ -726,9 +719,74 @@
     
     [_timeDurationPicker setHidden:YES];
     [_doneButtonView setHidden:YES];
-    
     [self changeNavigation:@"ON_FINISH"];
     
+    [self checkPayment];
+}
+
+/**
+ * navigate to ThankyouController screen when untech is created successfully
+ */
+-( void ) goToThankyouScreen {
+    ThankyouController *thankyouScreen = [[ThankyouController alloc] init];
+    thankyouScreen.untechable = untechable;
+    [self.navigationController pushViewController:thankyouScreen animated:YES];
+}
+-( void )setTimeAcToCurVars {
+    
+    untechable.startDate  = [untechable.commonFunctions convertNSDateToTimestamp: [[NSDate date] dateByAddingTimeInterval:(0)] ]; // current time
+    untechable.endDate  = [untechable.commonFunctions convertNSDateToTimestamp: [[NSDate date] dateByAddingTimeInterval:(timeDuration)] ]; // start time + selected time duration
+    
+    // the selected status from the setup screen would be set as default status on unetch now option
+    NSArray *customArrayOfStatuses = [[NSUserDefaults standardUserDefaults]objectForKey:@"cutomSpendingTimeTextAry"];
+    NSString *selectedStatus = @"";
+    for (int i = 0; i<customArrayOfStatuses.count; i++) {
+        if([customArrayOfStatuses[i] isEqualToString:untechable.spendingTimeTxt] ){
+            selectedStatus = [customArrayOfStatuses objectAtIndex:i];
+            break;
+        }
+    }
+    
+    //setting spendingTimeTxt to status got from setup screen.
+    untechable.spendingTimeTxt = selectedStatus;
+    NSString *socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", timeInString, untechable.spendingTimeTxt];
+    untechable.socialStatus = socialStatus;
+    
+}
+
+#pragma mark -  Payment functions
+/**
+ * Check have valid subscription before creating untechable
+ */
+-(void)checkPayment{
+    //When haven't any sms/call in untechable
+    if( [untechable.commonFunctions haveCallOrSms:untechable.customizedContactsForCurrentSession] == NO ){
+        [self createUntechableAfterPaymentCheck];
+    } else {
+        if( [userPurchases isSubscriptionValid] ){
+            [self createUntechableAfterPaymentCheck];
+        } else{
+            [self showOrLoadProductsForPurchase:YES];
+        }
+    }
+}
+
+/**
+ * Create untechable in free,without paid services (call/sms notifications)
+ */
+-(void)createFreeUntechable{
+    //1-
+    //Remove all sms / call flags, user wants free untechable
+    [untechable.commonFunctions delCallAndSmsStatus:untechable.customizedContactsForCurrentSession];
+    
+    //2-
+    [self createUntechableAfterPaymentCheck];
+}
+
+/**
+ * Create untechable without payment
+ */
+-(void)createUntechableAfterPaymentCheck{
     // Background work
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
@@ -754,38 +812,130 @@
         }];
         
     });
+}
 
-}
 /**
- * navigate to ThankyouController screen when untech is created successfully
+ * When products loaded from apple store then show, else load 
+ * @param: For handling recursion deadlock we have this flag
  */
--( void ) goToThankyouScreen {
-    ThankyouController *thankyouScreen = [[ThankyouController alloc] init];
-    thankyouScreen.untechable = untechable;
-    [self.navigationController pushViewController:thankyouScreen animated:YES];
+-(void)showOrLoadProductsForPurchase:(BOOL)canLoadProduct {
+    
+    if( userPurchases.productArray.count > 1) {
+        [self showAlert:1];
+    } else if( canLoadProduct ){
+        
+        [userPurchases loadAllProducts:^(NSString *errorMsg){
+            
+            if( [errorMsg isEqualToString:@""] ){
+                [self showOrLoadProductsForPurchase:NO];
+            } else{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error occured while loading products"
+                                                                message:errorMsg
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Close"
+                                                      otherButtonTitles: nil];
+                alert.tag = 0;
+                [alert show];
+            }
+        }];
+        
+    } else {
+        [self changeNavigation:@"ERROR_ON_FINISH"];
+    }
 }
--( void )setTimeAcToCurVars {
-    NSInteger positionToShow = 0;
+
+/**
+ * Create untechable on response
+ */
+-(void)handlePurchaseProductResponse:(NSString *)msg{
+    if ( [msg isEqualToString:SUCCESS] ) {
+        [self createUntechableAfterPaymentCheck];
+    }
+    else if ( [msg isEqualToString:CANCEL] ) {
+        [self changeNavigation:@"ALERT_CANCEL"];
+    }
+    else{
+        [self changeNavigation:@"ERROR_ON_FINISH"];
+        [untechable.commonFunctions showAlert:@"Error in purchase" message:msg];
+    }
+}
+
+/**
+ * All ui alerts at one place
+ */
+-(void)showAlert:(int)tag{
+
+    //Show products in alert
+    if( tag == 1 ){
+        NSMutableDictionary *prodDic = userPurchases.productArray[0];
+        NSString *monthlySubs = [NSString stringWithFormat:@"%@ - %@",
+                                 [prodDic objectForKey:@"packagename"],
+                                 [prodDic objectForKey:@"packageprice"]];
+        
+        prodDic = userPurchases.productArray[1];
+        NSString *yearlySubs = [NSString stringWithFormat:@"%@ - %@",
+                                [prodDic objectForKey:@"packagename"],
+                                [prodDic objectForKey:@"packageprice"]];
+        
+        // Show alert before start of match to purchase our product
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchase Subscription"
+                                                        message:@"You can purchase monthly and yearly subscription"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Not now"
+                                              otherButtonTitles: monthlySubs, yearlySubs , @"Restore", nil];
+        alert.tag = tag;
+        [alert show];
+    }
+    //Show create untechable in free without sms/call, offer in alert
+    else if( tag == 2 ){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Note"
+                                                        message:@"App will not allow Call/SMS to your selected contact without premium subscription but Social Media Status and email we will be sent to your contacts"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles: @"Ok", nil];
+        alert.tag = tag;
+        [alert show];
+    }
     
-    untechable.startDate  = [untechable.commonFunctions convertNSDateToTimestamp: [[NSDate date] dateByAddingTimeInterval:(0)] ]; // current time
-    untechable.endDate  = [untechable.commonFunctions convertNSDateToTimestamp: [[NSDate date] dateByAddingTimeInterval:(timeDuration)] ]; // start time + selected time duration
-    
-    // the selected status from the setup screen would be set as default status on unetch now option
-    NSArray *customArrayOfStatuses = [[NSUserDefaults standardUserDefaults]objectForKey:@"cutomSpendingTimeTextAry"];
-    
-    for (int i = 0; i<customArrayOfStatuses.count; i++) {
-        if([customArrayOfStatuses[i] isEqualToString:untechable.spendingTimeTxt] ){
-            positionToShow = i;
-            break;
+}
+
+/**
+ * Alert view delegate functions
+ */
+-(void)alertView:(UIAlertView *) alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    //Alert tag = 0, while loading product cause an error prompts the alert
+    if( alertView.tag == 0 ) {
+        [self changeNavigation:@"ALERT_CANCEL"];
+    }
+    //Alert tag = 1, while showing products in alert
+    else if( alertView.tag == 1 ) {
+        
+        //Purchase monthly / yearly subscription
+        if(buttonIndex == 1 || buttonIndex == 2) {
+            NSString *productidentifier = ( buttonIndex == 1 ) ? PRO_MONTHLY_SUBS : PRO_YEARLY_SUBS;
+            [userPurchases purchaseProductID:productidentifier callBack:^(NSString *msg){
+                [self handlePurchaseProductResponse:msg];
+            }];
+        }
+        //Restore purchase
+        else if (buttonIndex == 3){
+            [userPurchases restorePurchase:^(NSString *msg){
+                [self handlePurchaseProductResponse:msg];
+            }];
+        }
+        else{
+            [self showAlert:2];
         }
     }
-   
-    NSString *selectedStatus = [customArrayOfStatuses objectAtIndex:positionToShow];
-    
-    //setting spendingTimeTxt to status got from setup screen.
-    untechable.spendingTimeTxt = selectedStatus;
-    NSString *socialStatus = [NSString stringWithFormat:NSLocalizedString(@"#Untechable for %@ %@ ", nil), timeInString, untechable.spendingTimeTxt];
-    untechable.socialStatus = socialStatus;
-    
+    //Create untechable without call / sms
+    else if( alertView.tag == 2 ){
+        if( buttonIndex == 1 ){
+            [self createFreeUntechable];
+        }
+        //Cancel
+        else {
+            [self changeNavigation:@"ALERT_CANCEL"];
+        }
+    }
 }
 @end

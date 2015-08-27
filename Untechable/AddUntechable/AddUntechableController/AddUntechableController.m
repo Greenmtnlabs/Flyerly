@@ -68,10 +68,12 @@
     [self showHideDateTimePicker:NO];
     
     // initializes array
-    _pickerData = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];;
-    
-    // removes last element from array which is "Custom"
-    [_pickerData removeObjectAtIndex: _pickerData.count-1];
+    _pickerData = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"]];
+
+    if( _pickerData.count > 0 ){
+        // removes last element from array which is "Custom"
+        [_pickerData removeObjectAtIndex: _pickerData.count-1];
+    }
 
     [self showHideTextPicker:NO];
     
@@ -276,6 +278,8 @@
         }
         
         if( goToNext ) {
+            NSString *getDaysOrHours = [untechable calculateHoursDays:untechable.startDate  endTime: untechable.endDate];
+            untechable.socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", getDaysOrHours,untechable.spendingTimeTxt];
             ContactsListControllerViewController *listController = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
             listController.untechable = untechable;
             [self.navigationController pushViewController:listController animated:YES];
