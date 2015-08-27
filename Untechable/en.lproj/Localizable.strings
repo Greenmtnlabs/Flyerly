@@ -72,5 +72,36 @@
 "Congratulation" = "Congratulation";
 "Thank you for setting up your Untech settings. Now you can easily become Untechable whenever you need a break from technology in order to spend more time with the people & experiencing the things that are most important." = "Thank you for setting up your Untech settings. Now you can easily become Untechable whenever you need a break from technology in order to spend more time with the people & experiencing the things that are most important.";
 
-// Socialnetwork Controller
 "The above message will be posted on %@ to the networks you selected below" = "The above message will be posted on %@ to the networks you selected below";
+
+"%i day" = "%i day";
+"%i days" = "%i days";
+"%i hour" = "%i hour";
+"%i hours" = "%i hours";
+"minute" = "minute";
+"minutes" = "minutes";
+"%i hours and %i %@" = "%i hours and %i %@";
+"%i hour and %i %@" = "%i hour and %i %@" ;
+
+
+// UntechablesList
+"30 minutes" = "30 minutes";
+"1 hour" = "1 hour";
+"1 Day" = "1 Day";
+"2 Days" = "2 Days";
+
+"Upcoming Untechables" = "Upcoming Untechables";
+"Archives Untechables" = "Archives Untechables";
+"#Untechable for %@ %@ " = "#Untechable for %@ %@ ";
+"Untechable created successfully" = "Untechable created successfully";
+"Unable to delete, please try agin later!" = "Unable to delete, please try agin later!";
+
+"No network connection" = "No network connection";
+"You must be connected to the internet to sync your untechable on server." = "You must be connected to the internet to sync your untechable on server.";
+
+"Upcoming Untechable Time:" = "Upcoming Untechable Time:";
+"Current Untechable Time:" = "Current Untechable Time:";
+
+
+
+

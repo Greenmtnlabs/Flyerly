@@ -137,7 +137,7 @@
     if( [untechable.rUId isEqualToString:@"1"] ) {
         socialStatus = untechable.spendingTimeTxt;
     } else {
-        socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", getDaysOrHours,untechable.spendingTimeTxt];
+        socialStatus = [NSString stringWithFormat: NSLocalizedString(@"#Untechable for %@ %@ ", nil), getDaysOrHours,untechable.spendingTimeTxt];
     }
     
     [inputSetSocialStatus setText:socialStatus];
@@ -187,33 +187,33 @@
         totalHoursDays = round(diff/OneDay + 0.1);
         
         if( totalHoursDays == 1 ) {
-            daysOrHoursToBeShown = [NSString stringWithFormat:@"%i day", totalHoursDays];
+            daysOrHoursToBeShown = [NSString stringWithFormat:NSLocalizedString(@"%i day", nil), totalHoursDays];
         } else {
-            daysOrHoursToBeShown = [NSString stringWithFormat:@"%i days", totalHoursDays];
+            daysOrHoursToBeShown = [NSString stringWithFormat:NSLocalizedString(@"%i days", nil), totalHoursDays];
         }
     } else {
        
         NSString *minutes;
         if(remainingMinutes>1) {
-            minutes = @"minutes";
+            minutes = NSLocalizedString(@"minutes", nil);
         } else if(remainingMinutes==1) {
-            minutes = @"minute";
+            minutes = NSLocalizedString(@"minute", nil);
         }
         
         if(totalHoursDays>1){
             if(remainingMinutes>0) {
-                daysOrHoursToBeShown = [NSString stringWithFormat:@"%i hours and %i %@" ,totalHoursDays, remainingMinutes, minutes];
+                daysOrHoursToBeShown = [NSString stringWithFormat: NSLocalizedString(@"%i hours and %i %@", nil) ,totalHoursDays, remainingMinutes, minutes];
             } else {
-                daysOrHoursToBeShown = [NSString stringWithFormat:@"%i hours" ,totalHoursDays];
+                daysOrHoursToBeShown = [NSString stringWithFormat: NSLocalizedString(@"%i hours", nil) ,totalHoursDays];
             }
         } else if(totalHoursDays==1) {
             if(remainingMinutes>0) {
-                daysOrHoursToBeShown = [NSString stringWithFormat:@"%i hour and %i %@" ,totalHoursDays, remainingMinutes, minutes];
+                daysOrHoursToBeShown = [NSString stringWithFormat: NSLocalizedString(@"%i hour and %i %@", nil) ,totalHoursDays, remainingMinutes, minutes];
             } else {
-                daysOrHoursToBeShown = [NSString stringWithFormat:@"%i hour" ,totalHoursDays];
+                daysOrHoursToBeShown = [NSString stringWithFormat: NSLocalizedString(@"%i hour", nil) ,totalHoursDays];
             }
         } else if(totalHoursDays<1) {
-            daysOrHoursToBeShown = [NSString stringWithFormat:@"%i minutes", remainingMinutes];
+            daysOrHoursToBeShown = [NSString stringWithFormat: NSLocalizedString(@"%i minutes", nil), remainingMinutes];
         }
     }
  
@@ -238,7 +238,7 @@
         // Left Navigation
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
-        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitle: NSLocalizedString(TITLE_BACK_TXT, nil) forState:normal];
         [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(btnBackTouchEnd) forControlEvents:UIControlEventTouchUpInside];
@@ -256,7 +256,7 @@
         finishButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         [finishButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
         finishButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [finishButton setTitle:TITLE_FINISH_TXT forState:normal];
+        [finishButton setTitle:NSLocalizedString(TITLE_FINISH_TXT, nil) forState:normal];
         [finishButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:finishButton];
@@ -286,10 +286,10 @@
 
     if( !internetReachable.isReachable && !([UNT_ENVIRONMENT isEqualToString:TESTING]) ){
         //Show alert if internet is not avaialble...
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection"
-                                                        message:@"You must be connected to the internet to sync your untechable on server."
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No network connection", nil)
+                                                        message:NSLocalizedString(@"You must be connected to the internet to sync your untechable on server.", nil)
                                                        delegate:nil
-                                              cancelButtonTitle:@"OK"
+                                              cancelButtonTitle:NSLocalizedString(OK, nil)
                                               otherButtonTitles:nil];
         [alert show];
         [self testInternetConnection];
@@ -443,7 +443,7 @@
                              initWithTitle:@""
                              message:message
                              delegate:self
-                             cancelButtonTitle:@"OK"
+                             cancelButtonTitle:NSLocalizedString(OK, nil)
                              otherButtonTitles:nil];
     [temAlert show];
 }
