@@ -88,6 +88,7 @@
 #pragma mark -  UI functions
 -(void)updateUI
 {
+    [_lblStartsFrom setText:NSLocalizedString(@"You will be untechable from", nil)];
     [_lblStartsFrom setTextColor:DEF_GRAY];
     _lblStartsFrom.font = [UIFont fontWithName:APP_FONT size:20];
     
@@ -97,6 +98,7 @@
     _lblStartDateTime.text = [untechable.commonFunctions convertTimestampToAppDate:untechable.startDate];
     
     
+    [_lblEnd setText:NSLocalizedString(@"To", nil)];
     [_lblEnd setTextColor:DEF_GRAY];
     _lblEnd.font = [UIFont fontWithName:APP_FONT size:20];
     
@@ -165,7 +167,7 @@
         settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 86, 42)];
         settingsButton.titleLabel.shadowColor = [UIColor clearColor];
         settingsButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [settingsButton setTitle:TITLE_SETTINGS_TXT forState:normal];
+        [settingsButton setTitle:NSLocalizedString(TITLE_SETTINGS_TXT, nil) forState:normal];
         [settingsButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         
         [settingsButton addTarget:self action:@selector(goToSettings) forControlEvents:UIControlEventTouchUpInside];
@@ -178,7 +180,7 @@
         startNewUntechable = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         [startNewUntechable addTarget:self action:@selector(onNew:) forControlEvents:UIControlEventTouchUpInside];
         startNewUntechable.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [startNewUntechable setTitle:@"HOME" forState:normal];
+        [startNewUntechable setTitle:NSLocalizedString(@"HOME", nil) forState:normal];
         [startNewUntechable setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         startNewUntechable.showsTouchWhenHighlighted = YES;
         
