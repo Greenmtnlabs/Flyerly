@@ -60,3 +60,14 @@
 "Set Your Email Responder" = "Establezca su Email Responder";
 "Password" = "Contraseña";
 "example@example.com" = "ejemplo@ejemplo.com";
+"Host Name" = "Nombre de host";
+"IMAP Port" = "Puerto IMAP";
+"mail.example.com" = "mail.ejemplo.com";
+"SMTP Port" = "Puerto SMTP";
+"smtp.example.com" = "smtp.ejemplo.com";
+"Incoming Mail Server" = "Servidor de correo entrante";
+"Outgoing Mail Server" = "Servidor de correo saliente";
+
+
+
+

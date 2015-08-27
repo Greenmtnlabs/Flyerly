@@ -60,5 +60,11 @@
 "Set Your Email Responder" = "Set Your Email Responder";
 "Password" = "Password";
 "example@example.com" = "example@example.com";
-
+"Host Name" = "Host Name";
+"IMAP Port" = "IMAP Port";
+"mail.example.com" = "mail.example.com";
+"SMTP Port" = "SMTP Port";
+"smtp.example.com" = "smtp.example.com";
+"Incoming Mail Server" = "Incoming Mail Server";
+"Outgoing Mail Server" = "Outgoing Mail Server";
 

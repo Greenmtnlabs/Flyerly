@@ -764,8 +764,8 @@
         else if ( indexPath.section == 0 || indexPath.section == 1 ){
             
             if ( indexPath.section == 0 ){
-                NSMutableArray *inputLabel = [[NSMutableArray arrayWithObjects:@"Host Name",@"IMAP Port",nil] init];
-                NSMutableArray *inputFeildPlaceHolder = [[NSMutableArray arrayWithObjects:@"mail.example.com",@"993",nil] init];
+                NSMutableArray *inputLabel = [[NSMutableArray arrayWithObjects:NSLocalizedString(@"Host Name", nil), NSLocalizedString(@"IMAP Port", nil),nil] init];
+                NSMutableArray *inputFeildPlaceHolder = [[NSMutableArray arrayWithObjects:NSLocalizedString(@"mail.example.com", nil) ,@"993",nil] init];
                 
                 static NSString *cellId = @"ServerAccountDetailsViewCell";
                 ServerAccountDetailsViewCell *cell = (ServerAccountDetailsViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
@@ -805,8 +805,8 @@
                 
                 return cell;
             }else if ( indexPath.section == 1 ){
-                NSMutableArray *inputLabel = [[NSMutableArray arrayWithObjects:@"Host Name",@"SMTP Port",nil] init];
-                NSMutableArray *inputFeildPlaceHolder = [[NSMutableArray arrayWithObjects:@"smtp.example.com",@"587",nil] init];
+                NSMutableArray *inputLabel = [[NSMutableArray arrayWithObjects:NSLocalizedString(@"Host Name", nil), NSLocalizedString(@"SMTP Port", nil),nil] init];
+                NSMutableArray *inputFeildPlaceHolder = [[NSMutableArray arrayWithObjects:NSLocalizedString(@"smtp.example.com", nil),@"587",nil] init];
                 
                 static NSString *cellId = @"ServerAccountDetailsViewCell";
                 ServerAccountDetailsViewCell *cell = (ServerAccountDetailsViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
@@ -988,9 +988,9 @@
     NSString *sectionHeader;
     if ( tableView != _tableView0 ){
         if ( section == 0 ){
-            sectionHeader = @"Incoming Mail Server";
+            sectionHeader = NSLocalizedString(@"Incoming Mail Server", nil);
         }else if ( section == 1 ){
-            sectionHeader = @"OutGoing Mail Server";
+            sectionHeader = NSLocalizedString(@"Outgoing Mail Server", nil);
         }
     }
     return sectionHeader;
