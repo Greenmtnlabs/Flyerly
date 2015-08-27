@@ -41,6 +41,7 @@
     BOOL isNewText;
     //Fix for: 162-create-flyer-screen-when-user-close-the-inapp-tabs-are-active-and-extra-layer-showing-when-it-comes-from-clipart
     BOOL appearingViewAfterInAppHide;
+    BOOL haveValidSubscription;
     
 }
 
@@ -345,7 +346,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
-    BOOL haveValidSubscription = [userPurchases isSubscriptionValid];
+    haveValidSubscription = [userPurchases isSubscriptionValid];
     
     if( haveValidSubscription == NO ) {
         [self loadInterstitialAdd];
@@ -843,7 +844,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             if ( [flyer isVideoFlyer] ) {
                 
                 
-                self.shouldShowAdd ( @"" );
+                self.shouldShowAdd ( @"", haveValidSubscription );
                 
                 panelWillOpen = NO;
                 
@@ -5594,8 +5595,9 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
+    haveValidSubscription = [userPurchases isSubscriptionValid];
 
-    if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || [userPurchases isSubscriptionValid] ){
+    if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || haveValidSubscription ){
 
         [self premiumBtnHideAfterCheck:@"ALL"];
         [inappviewcontroller.paidFeaturesTview reloadData];
@@ -6439,10 +6441,11 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 -(void)loadXibsAfterInAppCheck:(BOOL)checkAndCloseInAppPanel againAddInSubViews:(BOOL)againAddInSubViews{
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
+    haveValidSubscription = [userPurchases isSubscriptionValid];
     
     if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
         [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ||
-        [userPurchases isSubscriptionValid] ) {
+        haveValidSubscription ) {
         
         UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
         [addVideoTabButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
@@ -6459,7 +6462,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     if( againAddInSubViews ){
         //When user have complete design bundle or any subscription dont show the premium button
-        if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || [userPurchases isSubscriptionValid] )
+        if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || haveValidSubscription )
             [self premiumBtnHideAfterCheck:@"ALL"];
         else if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"] )
             [self premiumBtnHideAfterCheck:@"comflyerlyIconsBundle"];

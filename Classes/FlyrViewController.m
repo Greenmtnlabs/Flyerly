@@ -193,9 +193,9 @@ id lastShareBtnSender;
         
     }];
 
-    [createFlyer setShouldShowAdd:^(NSString *flyPath) {
+    [createFlyer setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
         dispatch_async( dispatch_get_main_queue(), ^{
-            if ([weakSelf.interstitial isReady] && ![weakSelf.interstitial hasBeenUsed]){
+            if (haveValidSubscription == NO && ([weakSelf.interstitial isReady] && ![weakSelf.interstitial hasBeenUsed]) ){
                 [weakSelf.interstitial presentFromRootViewController:weakSelf];
             }  else{
                 [weakCreate.flyer saveAfterCheck];
@@ -391,9 +391,9 @@ id lastShareBtnSender;
         
     }];
     
-    [createFlyer setShouldShowAdd:^(NSString *flyPath) {
+    [createFlyer setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
         dispatch_async( dispatch_get_main_queue(), ^{
-            if ([weakSelf.interstitial isReady] && ![weakSelf.interstitial hasBeenUsed]){
+            if (haveValidSubscription == NO && ([weakSelf.interstitial isReady] && ![weakSelf.interstitial hasBeenUsed]) ){
                 [weakSelf.interstitial presentFromRootViewController:weakSelf];
             } else{
                 [weakCreate.flyer saveAfterCheck];

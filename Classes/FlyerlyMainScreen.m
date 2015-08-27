@@ -87,9 +87,9 @@ BOOL adLoaded = false;
         }
     }];
     
-    [createFlyer setShouldShowAdd:^(NSString *flyPath) {
+    [createFlyer setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
         dispatch_async( dispatch_get_main_queue(), ^{
-                if ([weakSelf.addInterstialFms isReady] && ![weakSelf.addInterstialFms hasBeenUsed]){
+                if (haveValidSubscription == NO && ([weakSelf.addInterstialFms isReady] && ![weakSelf.addInterstialFms hasBeenUsed]) ){
                     [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
                 } else{
                     [weakCreate.flyer saveAfterCheck];
@@ -608,10 +608,10 @@ BOOL adLoaded = false;
         
     }];
     
-    [createFlyer setShouldShowAdd:^(NSString *flyPath) {
+    [createFlyer setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
         
         dispatch_async( dispatch_get_main_queue(), ^{
-                if ([weakSelf.addInterstialFms isReady]  && ![weakSelf.addInterstialFms hasBeenUsed]){
+                if (haveValidSubscription == NO && ([weakSelf.addInterstialFms isReady] && ![weakSelf.addInterstialFms hasBeenUsed]) ){
                     [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
                 }
                 else{
