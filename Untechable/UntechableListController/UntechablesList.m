@@ -709,6 +709,7 @@
     self.doneButtonView.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
     
     // changes the "CLOSE" button text color to black
+    [_doneButtonView setTitle:NSLocalizedString(TITLE_DONE_TXT, nil) forState:normal];
     [_doneButtonView setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
 
     [self initializePickerData];
