@@ -256,4 +256,76 @@
     }
     return active;
 }
+
+/**
+ * Count sms/call
+ * @param customizedContactsForCurrentSession
+ *           customizedContactsForCurrentSession: Array of contacts
+ * @param breakIfFound
+ *           dont count all, just return if any one found
+ *
+ * @return
+ *           Array of [callsCount, smsCount ]
+ */
+
+-(NSMutableArray *)countCallAndSms:(NSMutableArray *)customizedContactsForCurrentSession breakIfFound:(BOOL)breakIfFound{
+    NSMutableArray *callAndSmsStatus = [NSMutableArray arrayWithArray:@[@0, @0 ]];
+    for(int i=0; i<customizedContactsForCurrentSession.count; i++){
+        ContactsCustomizedModal *tempModal = [customizedContactsForCurrentSession objectAtIndex:i];
+        BOOL needToSendCall = NO;
+        BOOL needToSendSms = NO;
+        for(int j=0; j<tempModal.allPhoneNumbers.count; j++){
+            needToSendCall = ([[tempModal.allPhoneNumbers[j] objectAtIndex:2] isEqualToString:@"1"]);
+            needToSendSms = ([[tempModal.allPhoneNumbers[j] objectAtIndex:3] isEqualToString:@"1"]);
+            
+            if( needToSendCall )
+                callAndSmsStatus[0] = [[NSNumber alloc]initWithInt:([callAndSmsStatus[0] integerValue]+1)];
+
+            if( needToSendSms )
+                callAndSmsStatus[1] = [[NSNumber alloc]initWithInt:([callAndSmsStatus[1] integerValue]+1)];
+            
+            if( (needToSendCall || needToSendSms) && breakIfFound ){
+                break;
+            }
+            
+        }
+        
+        if( (needToSendCall || needToSendSms) && breakIfFound ){
+            break;
+        }
+    }
+    return callAndSmsStatus;
+}
+
+
+/**
+ * Check user want to notify his contact using sms and call service
+ */
+-(BOOL)haveCallOrSms:(NSMutableArray *)customizedContactsForCurrentSession{
+    BOOL have = NO;
+    NSMutableArray *callAndSmsStatus = [self countCallAndSms:customizedContactsForCurrentSession breakIfFound:YES];
+    if( [callAndSmsStatus[0] integerValue] > 0 || [callAndSmsStatus[1] integerValue] > 0){
+        have = YES;
+    }
+    return have;
+}
+
+/**
+ * For creating free untechable, delete all calls and phone numbers status
+ */
+-(void)delCallAndSmsStatus:(NSMutableArray *)customizedContactsForCurrentSession{
+    
+    for(int i=(customizedContactsForCurrentSession.count-1); i >= 0; i--){
+        ContactsCustomizedModal *tempModal = [customizedContactsForCurrentSession objectAtIndex:i];
+        for(int j=(tempModal.allPhoneNumbers.count-1); j>=0; j--){
+            [tempModal.allPhoneNumbers removeObjectAtIndex:j];
+        }
+        
+        if( tempModal.allEmails.count > 0 ){
+            [customizedContactsForCurrentSession replaceObjectAtIndex:i withObject:tempModal];
+        } else{
+            [customizedContactsForCurrentSession removeObjectAtIndex:i];
+        }
+    }
+}
 @end
