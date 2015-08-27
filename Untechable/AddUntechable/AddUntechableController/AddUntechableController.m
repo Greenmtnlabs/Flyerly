@@ -254,6 +254,7 @@
 
 -(void)onNext{
     
+    NSLog(@"%@", _inputSpendingTimeText.text);
     if ( ![_inputSpendingTimeText.text isEqualToString:@"e.g. Spending time with family"] ){
         [self storeScreenVarsInDic];
         

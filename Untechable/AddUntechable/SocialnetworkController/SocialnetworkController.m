@@ -89,11 +89,11 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
     
-    if ( [textView.text isEqualToString:@"e.g Spending time with family."] ){
+    if ( [textView.text isEqualToString:@"e.g. Spending time with family"] ){
         textView.text = @"";
     }
     if ( textView == inputSetSocialStatus ){
-        if ([textView.text isEqualToString:@"e.g Spending time with family."]) {
+        if ([textView.text isEqualToString:@"e.g. Spending time with family"]) {
             textView.text = @"";
             textView.font = [UIFont fontWithName:TITLE_FONT size:12.0];
             textView.textColor = [UIColor blackColor]; //optional
@@ -122,7 +122,7 @@
     inputSetSocialStatus.delegate = self;
     
     if ( [untechable.socialStatus isEqualToString:@""] ){
-        inputSetSocialStatus.text = @"e.g Spending time with family.";
+        inputSetSocialStatus.text = @"e.g. Spending time with family";
     }
     
     NSString *url = [NSString stringWithFormat:@"%@",untechable.spendingTimeTxt];
