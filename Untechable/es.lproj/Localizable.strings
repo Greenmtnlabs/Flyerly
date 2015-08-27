@@ -92,7 +92,7 @@
 
 "Upcoming Untechables" = "Próximas Untechables";
 "Archives Untechables" = "Archivos Untechables";
-"#Untechable para %@ %@ " = "#Untechable para %@ %@ ";
+"#Untechable for %@ %@ " = "#Untechable para %@ %@ ";
 "Untechable created successfully" = "Untechable creado con éxito";
 "Unable to delete, please try agin later!" = "No se puede eliminar, por favor intente más tarde volveré!";
 

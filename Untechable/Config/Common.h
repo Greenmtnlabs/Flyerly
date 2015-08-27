@@ -103,5 +103,6 @@
 
 #define ERROR @"Error"
 #define OK @"OK"
+
 #define PRO_MONTHLY_SUBS @"com.untech.MonthlySubscription"
 #define PRO_YEARLY_SUBS @"com.untech.YearlySubscriptions"

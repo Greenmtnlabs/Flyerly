@@ -142,11 +142,11 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    if ( [textView.text isEqualToString:@"e.g. Spending time with family"] ){
+    if ( [textView.text isEqualToString:NSLocalizedString(@"e.g. Spending time with family", nil)] ){
         textView.text = @"";
     }
     if ( textView == _inputSpendingTimeText ){
-        if ([textView.text isEqualToString:@"e.g. Spending time with family"]) {
+        if ([textView.text isEqualToString:NSLocalizedString(@"e.g. Spending time with family", nil)]) {
             textView.text = @"";
             textView.font = [UIFont fontWithName:TITLE_FONT size:12.0];
             textView.textColor = [UIColor blackColor]; //optional
@@ -257,7 +257,7 @@
 -(void)onNext{
     
     NSLog(@"%@", _inputSpendingTimeText.text);
-    if ( ![_inputSpendingTimeText.text isEqualToString:@"e.g. Spending time with family"] ){
+    if ( ![_inputSpendingTimeText.text isEqualToString:NSLocalizedString(@"e.g. Spending time with family", nil)] ){
         [self storeScreenVarsInDic];
         
         [self hideAllControlls];
@@ -279,7 +279,7 @@
         
         if( goToNext ) {
             NSString *getDaysOrHours = [untechable calculateHoursDays:untechable.startDate  endTime: untechable.endDate];
-            untechable.socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", getDaysOrHours,untechable.spendingTimeTxt];
+            untechable.socialStatus = [NSString stringWithFormat:NSLocalizedString(@"#Untechable for %@ %@ ", nil), getDaysOrHours,untechable.spendingTimeTxt];
             ContactsListControllerViewController *listController = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
             listController.untechable = untechable;
             [self.navigationController pushViewController:listController animated:YES];
@@ -557,7 +557,7 @@
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     if ([textView.text isEqualToString:@""]) {
-        textView.text = @"e.g. Spending time with family";
+        textView.text = NSLocalizedString(@"e.g. Spending time with family", nil);
     }
     [textView resignFirstResponder];
 }

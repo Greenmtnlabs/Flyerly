@@ -749,7 +749,7 @@
     
     //setting spendingTimeTxt to status got from setup screen.
     untechable.spendingTimeTxt = selectedStatus;
-    NSString *socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", timeInString, untechable.spendingTimeTxt];
+    NSString *socialStatus = [NSString stringWithFormat:NSLocalizedString(@"#Untechable for %@ %@ ", nil), timeInString, untechable.spendingTimeTxt];
     untechable.socialStatus = socialStatus;
     
 }
