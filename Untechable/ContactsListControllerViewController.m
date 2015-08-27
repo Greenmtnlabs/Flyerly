@@ -43,7 +43,8 @@
     [searchTextField setReturnKeyType:UIReturnKeyDone];
     
     [searchTextField resignFirstResponder];
-    
+
+    //hock tap gesture, when user tap on selectContactLable then open keyboard for search contact field
     selectContactStr.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapGesture =
     [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSearchContactKeyBoard)];
