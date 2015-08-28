@@ -13,6 +13,7 @@
 #import "UntechablesList.h"
 #import "SetupGuideViewController.h"
 #import "RSetUntechable.h"
+#import "UserPurchases.h"
 
 @implementation AppDelegate
 
@@ -20,6 +21,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     NSLog( @"homeDirectoryPath this will help us in finding realm file: %@", NSHomeDirectory() );
+    
+    UserPurchases *userPurchases = [UserPurchases getInstance];
+    [userPurchases loadAllProducts:^(NSString *errorMsg){}];
+
     
     [Crittercism enableWithAppID: CRITTERCISM_APP_ID];
     
@@ -48,10 +53,47 @@
          navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
      }
     
+    [self setLocalizedSpendingTimeText];
+    
     self.window.rootViewController = navigationController;
     
     [self.window makeKeyAndVisible];
     return YES;
+}
+/**
+ * This method sets Spending Time Text
+ * according to the selected language of iPhone
+ * and lets user added texts remains same
+ */
+
+
+-(void)setLocalizedSpendingTimeText{
+    
+    NSMutableArray *customSpendingTextArray = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"]];
+
+    NSMutableOrderedSet *set = [NSMutableOrderedSet orderedSetWithArray:DEF_SPENDING_TIME_ARY ];
+    
+    NSMutableArray *defaultSpendingTimeText = [NSMutableArray arrayWithArray:[set array]];
+    
+    if(customSpendingTextArray.count != 0){
+        for (int i=0; i< DEF_SPENDING_TIME_ARY.count-1; i++) {
+           [customSpendingTextArray replaceObjectAtIndex:i withObject: NSLocalizedString(defaultSpendingTimeText[i], nil)];
+        }
+    } else {
+        
+        [set unionSet:[NSSet setWithArray:defaultSpendingTimeText]];
+        customSpendingTextArray = [NSMutableArray arrayWithArray:[set array]];
+      
+        for (int i=0; i<customSpendingTextArray.count; i++) {
+            customSpendingTextArray[i] = NSLocalizedString(customSpendingTextArray[i], nil);
+        }
+    }
+    
+    int lastIndex = (int)customSpendingTextArray.count - 1;
+    [customSpendingTextArray replaceObjectAtIndex: lastIndex withObject:NSLocalizedString(@"Custom", nil)];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:customSpendingTextArray forKey:@"cutomSpendingTimeTextAry"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
