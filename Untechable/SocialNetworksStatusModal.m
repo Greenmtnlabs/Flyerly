@@ -311,7 +311,7 @@
 }
 
 /**
- * Function to handle facebook login and logout
+ * Function to handle Facebook login and logout
  */
 - (void)loginFacebook:(id)sender Controller:(UIViewController *)Controller {
     //if user has a token (already logged in) then logout and flush the token
@@ -320,7 +320,7 @@
         [self closeFbSessionIfOpen];
         [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:NO calledFor:@"Facebook"];
     }
-    //if no token is found, login to facebook
+    //if no token is found, login to Facebook
     else if( [self closeFbSessionIfOpen] == NO ) {
         // Open a session showing the user the login UI
         // You must ALWAYS ask for public_profile permissions when opening a session

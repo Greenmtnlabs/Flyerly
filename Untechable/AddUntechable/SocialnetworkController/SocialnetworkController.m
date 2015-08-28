@@ -406,7 +406,7 @@
 
 #pragma mark -  Facebook functions
 
-//Fb user info [Note: Do not change the name of this functions, it will called from facebook libraries]
+//Fb user info [Note: Do not change the name of this functions, it will called from Facebook libraries]
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user {
     NSLog(@"%@", user);
 }

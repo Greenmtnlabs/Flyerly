@@ -749,7 +749,7 @@
                     }
                 }
                 
-                [cell setCellValueswithInputLabel:[inputLabel objectAtIndex:indexPath.row] FeildPlaceholder:[inputFeildPlaceHolder objectAtIndex:indexPath.row]];
+                [cell setCellValuesWithInputLabel:[inputLabel objectAtIndex:indexPath.row] FeildPlaceholder:[inputFeildPlaceHolder objectAtIndex:indexPath.row]];
                 
                 cell.inputFeild.delegate = self;
                 cell.inputFeild.tag = indexPath.row + indexPath.section;
@@ -790,7 +790,7 @@
                     }
                 }
             
-                [cell setCellValueswithInputLabel:[inputLabel objectAtIndex:indexPath.row] FeildPlaceholder:[inputFeildPlaceHolder objectAtIndex:indexPath.row]];
+                [cell setCellValuesWithInputLabel:[inputLabel objectAtIndex:indexPath.row] FeildPlaceholder:[inputFeildPlaceHolder objectAtIndex:indexPath.row]];
                 
                 cell.inputFeild.delegate = self;
                 cell.inputFeild.tag = indexPath.row + indexPath.section;

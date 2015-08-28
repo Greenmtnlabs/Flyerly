@@ -26,7 +26,7 @@
 //Array of all contacts (extracted from phonebook)
 @property(nonatomic,strong) NSMutableArray *mobileContactsArray;
 
-//The above array (contactsArray) is sorted w.r.t name when searced by name
+//The above array (contactsArray) is sorted w.r.t name when searched by name
 //but when user removes searching text, we have to fill that array with it
 @property(nonatomic,strong) NSMutableArray *mobileContactBackupArray;
 

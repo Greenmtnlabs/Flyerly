@@ -194,9 +194,9 @@
             [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
             backButton.showsTouchWhenHighlighted = YES;
             
-            UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+            UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
             
-            [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+            [self.navigationItem setLeftBarButtonItem:leftBarButton];//Left button ___________
         }else {
             
             // Setting left Navigation button "Settings"
@@ -208,9 +208,9 @@
             [settingsButton addTarget:self action:@selector(goToSettings) forControlEvents:UIControlEventTouchUpInside];
             settingsButton.showsTouchWhenHighlighted = YES;
             
-            UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
+            UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
             
-            [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+            [self.navigationItem setLeftBarButtonItem:leftBarButton];//Left button ___________
         }
         
         // Right Navigation ______________________________________________

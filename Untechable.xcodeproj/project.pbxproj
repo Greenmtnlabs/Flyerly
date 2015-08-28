@@ -37,8 +37,8 @@
 		24354D6C1A499EC5000EC781 /* ContactsListControllerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24354D6A1A499EC5000EC781 /* ContactsListControllerViewController.xib */; };
 		24354D701A499F4F000EC781 /* ContactListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24354D6E1A499F4F000EC781 /* ContactListCell.m */; };
 		24354D711A499F4F000EC781 /* ContactListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24354D6F1A499F4F000EC781 /* ContactListCell.xib */; };
-		243C59E01A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 243C59DE1A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.m */; };
-		243C59E11A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243C59DF1A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.xib */; };
+		243C59E01A4D3A910020350C /* ContactCustomizeDetailsControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 243C59DE1A4D3A910020350C /* ContactCustomizeDetailsControllerViewController.m */; };
+		243C59E11A4D3A910020350C /* ContactCustomizeDetailsControllerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243C59DF1A4D3A910020350C /* ContactCustomizeDetailsControllerViewController.xib */; };
 		243C59F41A4D753C0020350C /* FirstTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 243C59F21A4D753C0020350C /* FirstTableViewCell.m */; };
 		243C59F51A4D753C0020350C /* FirstTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243C59F31A4D753C0020350C /* FirstTableViewCell.xib */; };
 		243C59F91A4D984B0020350C /* PhoneNumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 243C59F71A4D984B0020350C /* PhoneNumberCell.m */; };
@@ -293,9 +293,9 @@
 		24354D6D1A499F4F000EC781 /* ContactListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactListCell.h; sourceTree = "<group>"; };
 		24354D6E1A499F4F000EC781 /* ContactListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactListCell.m; sourceTree = "<group>"; };
 		24354D6F1A499F4F000EC781 /* ContactListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactListCell.xib; sourceTree = "<group>"; };
-		243C59DD1A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactCustomizeDetailsControlelrViewController.h; sourceTree = "<group>"; };
-		243C59DE1A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactCustomizeDetailsControlelrViewController.m; sourceTree = "<group>"; };
-		243C59DF1A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactCustomizeDetailsControlelrViewController.xib; sourceTree = "<group>"; };
+		243C59DD1A4D3A910020350C /* ContactCustomizeDetailsControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactCustomizeDetailsControllerViewController.h; sourceTree = "<group>"; };
+		243C59DE1A4D3A910020350C /* ContactCustomizeDetailsControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactCustomizeDetailsControllerViewController.m; sourceTree = "<group>"; };
+		243C59DF1A4D3A910020350C /* ContactCustomizeDetailsControllerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactCustomizeDetailsControllerViewController.xib; sourceTree = "<group>"; };
 		243C59F11A4D753C0020350C /* FirstTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstTableViewCell.h; sourceTree = "<group>"; };
 		243C59F21A4D753C0020350C /* FirstTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstTableViewCell.m; sourceTree = "<group>"; };
 		243C59F31A4D753C0020350C /* FirstTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstTableViewCell.xib; sourceTree = "<group>"; };
@@ -599,7 +599,7 @@
 		24354D671A499D93000EC781 /* ContactsListController */ = {
 			isa = PBXGroup;
 			children = (
-				243C59DC1A4D3A530020350C /* ContactCustomizeDetailsControlelr */,
+				243C59DC1A4D3A530020350C /* ContactCustomizeDetailsController */,
 				248E06B41A4ACD350099846A /* ContactsCustomizedModal */,
 				C33A87AF1A7BCD76000B9DAE /* EmailSettingsChangingController */,
 				24354D681A499EC5000EC781 /* ContactsListControllerViewController.h */,
@@ -614,12 +614,12 @@
 			name = ContactsListController;
 			sourceTree = "<group>";
 		};
-		243C59DC1A4D3A530020350C /* ContactCustomizeDetailsControlelr */ = {
+		243C59DC1A4D3A530020350C /* ContactCustomizeDetailsController */ = {
 			isa = PBXGroup;
 			children = (
-				243C59DD1A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.h */,
-				243C59DE1A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.m */,
-				243C59DF1A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.xib */,
+				243C59DD1A4D3A910020350C /* ContactCustomizeDetailsControllerViewController.h */,
+				243C59DE1A4D3A910020350C /* ContactCustomizeDetailsControllerViewController.m */,
+				243C59DF1A4D3A910020350C /* ContactCustomizeDetailsControllerViewController.xib */,
 				243C59F11A4D753C0020350C /* FirstTableViewCell.h */,
 				243C59F21A4D753C0020350C /* FirstTableViewCell.m */,
 				243C59F31A4D753C0020350C /* FirstTableViewCell.xib */,
@@ -642,7 +642,7 @@
 				C33C1EEC1A724D830064DBE8 /* CustomTextTableViewCell-iPhone6-Plus.xib */,
 				249952151A56C8A1001AEB84 /* Cliparts.plist */,
 			);
-			name = ContactCustomizeDetailsControlelr;
+			name = ContactCustomizeDetailsController;
 			sourceTree = "<group>";
 		};
 		2474023E1B33CB7900459759 /* SetupGuide */ = {
@@ -1306,7 +1306,7 @@
 				366EAFA11A14C3530011D6C6 /* Default-Landscape-736h@3x.png in Resources */,
 				366EAFB51A14EDA30011D6C6 /* copy@2x.png in Resources */,
 				C33C1EE11A7242970064DBE8 /* FirstTableViewCell-iPhone6-Plus.xib in Resources */,
-				243C59E11A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.xib in Resources */,
+				243C59E11A4D3A910020350C /* ContactCustomizeDetailsControllerViewController.xib in Resources */,
 				2486CBA61A5A79AC00AC125E /* sms@2x.png in Resources */,
 				36524AF219D940F4006DCAAF /* SocialnetworkController.xib in Resources */,
 				C33C1EEB1A724CFE0064DBE8 /* CustomTextTableViewCell-iPhone6.xib in Resources */,
@@ -1510,7 +1510,7 @@
 				C36D2E581A7919C2000537C5 /* SettingsCellView.m in Sources */,
 				24A0EA6D1B42522C0008081A /* SetupGuideFourthView.m in Sources */,
 				C3DC2E211B8C77070091CCF4 /* RMAppReceipt.m in Sources */,
-				243C59E01A4D3A910020350C /* ContactCustomizeDetailsControlelrViewController.m in Sources */,
+				243C59E01A4D3A910020350C /* ContactCustomizeDetailsControllerViewController.m in Sources */,
 				36FD975519E694AC00427507 /* BSKeyboardControls.m in Sources */,
 				C3DC2E271B8C77070091CCF4 /* RMStoreUserDefaultsPersistence.m in Sources */,
 				C3CA4DD51A80CE0700B03A23 /* SocialNetworksStatusModal.m in Sources */,

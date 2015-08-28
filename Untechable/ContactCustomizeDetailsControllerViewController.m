@@ -1,19 +1,19 @@
 //
-//  ContactCustomizeDetailsControlelrViewController.m
+//  ContactCustomizeDetailsControllerViewController.m
 //  Untechable
 //
 //  Created by RIKSOF Developer on 12/26/14.
 //  Copyright (c) 2014 Green MTN Labs Inc. All rights reserved.
 //
 
-#import "ContactCustomizeDetailsControlelrViewController.h"
+#import "ContactCustomizeDetailsControllerViewController.h"
 #import "FirstTableViewCell.h"
 #import "PhoneNumberCell.h"
 #import "EmailCell.h"
 #import "CustomTextTableViewCell.h"
 #import "Common.h"
 
-@interface ContactCustomizeDetailsControlelrViewController (){
+@interface ContactCustomizeDetailsControllerViewController (){
     
     int rowsInFirstSection,rowsInSecondSection;
     NSArray *phoneNumberTypes;
@@ -28,7 +28,7 @@
 
 @end
 
-@implementation ContactCustomizeDetailsControlelrViewController
+@implementation ContactCustomizeDetailsControllerViewController
 
 @synthesize contactModal,untechable;
 
@@ -85,10 +85,10 @@
         [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
         backButton.showsTouchWhenHighlighted = YES;
         
-        UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         
         // adds Left button to navigation
-        [self.navigationItem setLeftBarButtonItem:lefttBarButton];
+        [self.navigationItem setLeftBarButtonItem:leftBarButton];
         
         // Right Navigation
         saveButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];

@@ -30,7 +30,7 @@
     self.contactImage.clipsToBounds = YES;
     
     
-    // Set social network status for untech
+    // Set social network status for Untechable
     NSInteger statusCount = 0;
     UIImageView *iconImage;
     
@@ -62,7 +62,7 @@
 }
 
 /*
- * HERE WE SET untech IMAGE ,TITLE,DESCRICPTION,DATE AND SOCIAL NETWORK STATUS
+ * Here we set Untechable image ,title, description, date and social network status
  */
 - (void)renderCell :(ContactsCustomizedModal *)contactModal LockStatus:(BOOL )status {
     
