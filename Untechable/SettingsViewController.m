@@ -163,7 +163,7 @@
         cell.socialNetworkName.text = NSLocalizedString(@"Name", nil);
         cell.socialNetworkImage.image = [UIImage imageNamed:@"user_img"];
         cell.loginStatus.text = untechable.userName;
-        [cell.socialNetworkButton setTitle:NSLocalizedString(TITLE_EDIT_TEXT, nil) forState:UIControlStateNormal];
+        [cell.socialNetworkButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
         [cell.socialNetworkButton addTarget:self action:@selector(onEditName)
                            forControlEvents:UIControlEventTouchUpInside];
         
