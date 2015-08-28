@@ -95,7 +95,7 @@
 
 -(void) textViewDidBeginEditing:(UITextView *)textView {
     
-    //using labels as placeholder, because textview doesn't have 'em.
+    //using labels as placeholder, because textview does not have them.
     if( textView.tag == 101 ){
          _usernameHintText.hidden = YES;
     } else {
@@ -113,8 +113,8 @@
 
 -(void) textViewDidChange:(UITextView *)textView {
     
-    // we've set username text view tag to 101.
-    // so if the current text view is related to username's
+    // we have set username text view tag to 101.
+    // so if the current text view is related to username
     // get the text and save it into the username field
     if( textView.tag == 101 ){
         userName = textView.text;
@@ -136,7 +136,7 @@
 
     if (newSize.height > aTextView.frame.size.height || [aTextView.text isEqualToString:@"\n"])
     {
-        // if next button is pressed then take user to next textfield which is in this case is userphone number field
+        // if next button is pressed then take user to next textfield which is in this case is user phone number field
         [_userPhoneNumber becomeFirstResponder];
         return NO;
     }

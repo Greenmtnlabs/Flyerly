@@ -17,9 +17,9 @@
     // Configure the view for the selected state
 }
 
--(void)setCellValues :(NSString *)nubmerType Number:(NSString *)phoneNumber{
+-(void)setCellValues :(NSString *)numberType Number:(NSString *)phoneNumber{
 
-    self.nubmerType.text = nubmerType;
+    self.nubmerType.text = numberType;
     self.nubmer.text = phoneNumber;
 }
 

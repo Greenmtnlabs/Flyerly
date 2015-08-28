@@ -102,7 +102,7 @@
                 [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:YES calledFor:@"LinkedIn"];
             }
             failure:^(NSError *error) {
-                NSLog(@"Quering accessToken failed %@", error);
+                NSLog(@"Querying accessToken failed %@", error);
             }];
     }
     cancel:^{
@@ -114,8 +114,8 @@
 }
 
 #pragma mark -  Twitter functions
-//LOGOUT FROM TWITTER
-- (void)twLogout {
+//Logout from Twitter
+- (void)twitterLogout {
     [[FHSTwitterEngine sharedEngine]clearAccessToken];
     
     //Bello code will auto call insdie above function
@@ -132,7 +132,7 @@
     
     if( [mTwitterAuth isEqualToString:@""] == NO ) {
         //When button was green , the delete permissions
-        [self twLogout];
+        [self twitterLogout];
         [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:NO calledFor:@"Twitter"];
     }
     else {

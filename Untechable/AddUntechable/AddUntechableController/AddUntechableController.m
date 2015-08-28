@@ -381,7 +381,7 @@
 
 -(void)showHideTextPicker:(BOOL)showHide{
     
-    // set the selected default message or custom message in pickerview
+    // set the selected default message or custom message in picker view
     
     NSInteger positionToShow = 0;
     for (int i = 0; i<_pickerData.count; i++) {

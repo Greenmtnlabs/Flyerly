@@ -87,7 +87,7 @@
     return customSpendingTextAry[row];
 }
 
-// Catpure the picker view selection
+// Capture the picker view selection
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
 
     customSpendingTextAry =  [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"]];
@@ -101,7 +101,7 @@
 }
 
 //the size of the fonts in picker view was big for iphone 5 and small for iphone 6
-// so again need to handle it programitacally
+// so again need to handle it programmatically
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
     UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, [pickerView rowSizeForComponent:component].width, [pickerView rowSizeForComponent:component].height)];
@@ -144,7 +144,7 @@
         // adding the new msg at the second last index of the picker
         [customSpendingTextAry insertObject:newMsg atIndex:position];
         
-        // inserting values in our pickerview's data source.
+        // inserting values in data source of picker view.
         [[NSUserDefaults standardUserDefaults] setObject:customSpendingTextAry forKey:@"cutomSpendingTimeTextAry"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
@@ -248,12 +248,12 @@
 }
 
 /**
- * This method set default untech
+ * This method set default Untechable
  * spending time text in picker view
  */
 
 -(void)setDefaultUntechSpendingTimeText{
-    // set the selected default message or custom message in pickerview if already selected
+    // set the selected default message or custom message in picker view if already selected
     int positionToShow;
     for (int i = 0; i<customSpendingTextAry.count; i++) {
         if([customSpendingTextAry[i] isEqualToString:untechable.spendingTimeTxt] ){
