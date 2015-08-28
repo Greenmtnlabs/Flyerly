@@ -24,7 +24,7 @@
     NSMutableArray *sectionOneArray;
     NSMutableArray *sectionTwoArray;
     
-    int loadAllUntecs;
+    int loadAllUntechs;
     
     NSArray *_pickerData;
     int timeDuration;
@@ -59,10 +59,10 @@
     
     NSLog( @"HomeDirectoryPath - this will help us in finding realm file: %@", NSHomeDirectory() );
     
-    if( loadAllUntecs == 1)
+    if( loadAllUntechs == 1)
         [self setDefaultModel];
     else
-        loadAllUntecs = 1;
+        loadAllUntechs = 1;
         
     untechablesTable.separatorInset = UIEdgeInsetsZero;
     
@@ -86,7 +86,7 @@
     self.untechablesTable.allowsMultipleSelectionDuringEditing = NO;
     
     [self setDefaultModel];
-    loadAllUntecs = 0;
+    loadAllUntechs = 0;
     
     [self testInternetConnection];
     [self setNavigationDefaults];
@@ -167,7 +167,7 @@
     untechable.userId   = TEST_UID;
 }
 
-#pragma mark -  Model funcs
+#pragma mark -  Model functions
 -(void)setDefaultUntech{
     untechable  = [[Untechable alloc] initWithCommonFunctions];
     
@@ -617,7 +617,7 @@
 /**
  * Hex Color Converter
  * @params: NSString
- * retunrs: UIColor
+ * returns: UIColor
  */
 - (UIColor *)colorFromHexString:(NSString *)hexString {
     unsigned rgbValue = 0;

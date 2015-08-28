@@ -32,7 +32,7 @@
 -(NSDate *)getDate:(NSString *)callFor;
 //fb988650031150166
 
-#pragma mark -  Set number formating functions
+#pragma mark -  Number formatting functions
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
 -(NSString*)formatNumber:(NSString*)mobileNumber;
 -(int)getLength:(NSString*)mobileNumber;
