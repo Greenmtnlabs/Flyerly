@@ -49,7 +49,7 @@
             <connections>
                 <outlet property="char_limit" destination="qZ5-pW-7UT" id="NRg-3x-XZF"/>
                 <outlet property="customText" destination="sK8-o7-Xz9" id="m3K-3J-kht"/>
-                <outlet property="lblMessage_iPhone6" destination="ffY-PU-nBe" id="tjB-10-SzH"/>
+                <outlet property="lblMessage" destination="ffY-PU-nBe" id="5Ck-mc-zNe"/>
             </connections>
             <point key="canvasLocation" x="267.5" y="227"/>
         </tableViewCell>

@@ -26,9 +26,7 @@
 @property (weak, nonatomic) id deleg;
 @property (weak, nonatomic) id<CustomTextTableViewCell> delegate;
 
+@property (strong, nonatomic) IBOutlet UILabel *lblMessage;
 
-@property (strong, nonatomic) IBOutlet UILabel *lblMessage_iPhone5;
-@property (strong, nonatomic) IBOutlet UILabel *lblMessage_iPhone6;
-@property (strong, nonatomic) IBOutlet UILabel *lblMessage_iPhone6Plus;
 
 @end

@@ -33,9 +33,8 @@ ContactsCustomizedModal *contactModal_;
 }
 
 -(void)applyLocalization{
-    [_lblMessage_iPhone5 setText:NSLocalizedString(@"Select one or more modes", nil)];
-    [_lblMessage_iPhone6 setText:NSLocalizedString(@"Select one or more modes", nil)];
-    [_lblMessage_iPhone6Plus setText:NSLocalizedString(@"Select one or more modes", nil)];
+    [_lblMessage setText:NSLocalizedString(@"Select one or more modes", nil)];
+
 }
 
 -(void)updateChrCounter:(NSString *)message {
