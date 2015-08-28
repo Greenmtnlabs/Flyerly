@@ -381,25 +381,25 @@
         
         NSString *minutes;
         if(remainingMinutes>1) {
-            minutes = @"minutes";
+            minutes = NSLocalizedString(@"minutes", nil);
         } else if(remainingMinutes==1) {
-            minutes = @"minute";
+            minutes = NSLocalizedString(@"minute", nil);
         }
         
         if(totalHoursDays>1){
             if(remainingMinutes>0) {
-                daysOrHoursToBeShown = [NSString stringWithFormat:@"%i hours and %i %@" ,totalHoursDays, remainingMinutes, minutes];
+                daysOrHoursToBeShown = [NSString stringWithFormat:NSLocalizedString(@"%i hours and %i %@", nil) ,totalHoursDays, remainingMinutes, minutes];
             } else {
-                daysOrHoursToBeShown = [NSString stringWithFormat:@"%i hours" ,totalHoursDays];
+                daysOrHoursToBeShown = [NSString stringWithFormat:NSLocalizedString(@"%i hours", nil) ,totalHoursDays];
             }
         } else if(totalHoursDays==1) {
             if(remainingMinutes>0) {
-                daysOrHoursToBeShown = [NSString stringWithFormat:@"%i hour and %i %@" ,totalHoursDays, remainingMinutes, minutes];
+                daysOrHoursToBeShown = [NSString stringWithFormat:NSLocalizedString(@"%i hour and %i %@", nil) ,totalHoursDays, remainingMinutes, minutes];
             } else {
-                daysOrHoursToBeShown = [NSString stringWithFormat:@"%i hour" ,totalHoursDays];
+                daysOrHoursToBeShown = [NSString stringWithFormat:NSLocalizedString(@"%i hour", nil) ,totalHoursDays];
             }
         } else if(totalHoursDays<1) {
-            daysOrHoursToBeShown = [NSString stringWithFormat:@"%i minutes", remainingMinutes];
+            daysOrHoursToBeShown = [NSString stringWithFormat:NSLocalizedString(@"%i minutes", nil), remainingMinutes];
         }
     }
     

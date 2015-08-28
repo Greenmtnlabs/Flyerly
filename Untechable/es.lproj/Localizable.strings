@@ -1,0 +1,134 @@
+/* 
+  Localizable.strings
+  Untechable
+
+  Created by Created by RIKSOF Developer on 25/08/2015.
+  Copyright (c) 2015 Green MTN Labs Inc. All rights reserved.
+*/
+
+
+"SKIP" = "SALTAR";
+"SAVE" = "GUARDAR";
+"NEXT" = "SIGUIENTE";
+"NEW" = "NUEVO";
+"BACK" = "ESPALDA";
+"SETTINGS" = "AJUSTES";
+"DONE" = "HECHO";
+"FINISH" = "ACABADO";
+"EDIT" = "EDITAR";
+"Edit" = "Editar";
+
+// Untech Options
+"Spending time with family" = "Pasar tiempo con la familia";
+"Driving" = "Conducir";
+"Spending time outdoors" = "Pasar tiempo al aire libre";
+"At the beach" = "En la playa";
+"Enjoying the holidays" = "Disfrutando de las vacaciones";
+"Just needed a break" = "Sólo necesitaba un descanso";
+"Running" = "Corriendo";
+"On vacation" = "De vacaciones";
+"Finding my inner peace" = "Encontrar a mi paz interna";
+"Removing myself from technology" = "Extracción de mí mismo de la tecnología";
+"Custom" = "Personalizado";
+
+
+// SetupGuide Screen 1
+"Name" = "Nombre";
+"Please Enter Your Name" = "Por favor, escriba su nombre";
+"Phone Number" = "Número de teléfono";
+"Please Enter Your Number" = "Introduce tu número";
+"Error" = "Error";
+"Please Enter Your Name and Number" = "Por favor, introduzca su nombre y número";
+"OK" = "OK";
+
+// SetupGuide Screen 2
+"When you take time away from technology, what do you typically do or hope to do more of?" = "Cuando te tomas el tiempo lejos de la tecnología , ¿qué lo hace normalmente o la esperanza de hacer más de";
+
+"Did you know that based on a study, people %@ have better relationships, better quality of sleep and in general are more emotionally balanced." = "¿Sabía usted que en base a un estudio , las personas %@ tener mejores relaciones, mejor calidad del sueño y en general son más emocionalmente equilibrado.";
+
+"e.g. Spending time with family" = "por ejemplo Pasar tiempo con la familia";
+
+// SetupGuide Screen 3
+"Select contacts to inform of your unavailability" = "Seleccione los contactos para informar de la falta de disponibilidad";
+"Select contacts" = "Seleccione los contactos";
+
+"Select one or more modes" = "Seleccione uno o varios medios";
+"Message to %@\n" = "Mensaje al %@\n";
+
+// Email Settings related
+"Select your email service to let your contacts know you will be untechable." = "Seleccione su servicio de correo electrónico y deja que tus contactos sepan que será untechable.";
+"Set Your Email Responder" = "Establezca su Email Responder";
+"Password" = "Contraseña";
+"example@example.com" = "ejemplo@ejemplo.com";
+"Host Name" = "Nombre de host";
+"IMAP Port" = "Puerto IMAP";
+"mail.example.com" = "mail.ejemplo.com";
+"SMTP Port" = "Puerto SMTP";
+"smtp.example.com" = "smtp.ejemplo.com";
+"Incoming Mail Server" = "Servidor de correo entrante";
+"Outgoing Mail Server" = "Servidor de correo saliente";
+
+
+// SetupGuide Screen 4
+"Congratulation" = "Enhorabuena";
+"Thank you for setting up your Untech settings. Now you can easily become Untechable whenever you need a break from technology in order to spend more time with the people & experiencing the things that are most important." = "Gracias por la creación de la configuración Untech usted. Ahora usted puede fácilmente convertirse en Untechable cada vez que necesite un descanso de la tecnología con el fin de pasar más tiempo con la gente y experimentar las cosas que son más importantes.";
+
+"The above message will be posted on %@ to the networks you selected below" = "El mensaje anterior se publicará en % @ a las redes que ha seleccionado a continuación";
+
+"%i day" = "%i día";
+"%i days" = "%i días";
+"%i hour" = "%i horas";
+"%i hours" = "%i horas";
+"minute" = "momento";
+"minutes" = "minutos";
+"%i hours and %i %@" = "%i horas and %i %@";
+"%i hour and %i %@" = "%i horas and %i %@" ;
+
+// UntechablesList
+"30 minutes" = "30 minutos";
+"1 hour" = "1 horas";
+"1 Day" = "1 Día";
+"2 Days" = "2 Días";
+
+"Upcoming Untechables" = "Próximas Untechables";
+"Archives Untechables" = "Archivos Untechables";
+"#Untechable for %@ %@ " = "#Untechable para %@ %@ ";
+"Untechable created successfully" = "Untechable creado con éxito";
+"Unable to delete, please try agin later!" = "No se puede eliminar, por favor intente más tarde volveré!";
+
+"No network connection" = "No hay conexión a la red";
+"You must be connected to the internet to sync your untechable on server." = "Usted debe estar conectado a Internet para sincronizar tu untechable en el servidor.";
+
+"Upcoming Untechable Time:" = "Próximas Tiempo Untechable:";
+"Current Untechable Time:" = "Hora actual Untechable:";
+
+"Untech Custom" = "Untech Personalizado";
+"Untech Now" = "Untech Ahora";
+
+// AddUntechableController
+"Going Untechable and.." = "Yendo Untechable y..";
+"Invalid Dates" = "Fechas no válidas";
+"End date should be greater than start date." = "Fecha de finalización debe ser mayor que la fecha de inicio.";
+"What are you going untechable for?" = "¿Qué vas untechable buscas?";
+"You must specify what you'll be doing with your time away from technology before proceeding." = "Debe especificar lo que va a hacer con su tiempo lejos de la tecnología antes de proceder.";
+"NOW" = "AHORA";
+"Never" = "Nunca";
+"Start" = "Empezar";
+"End" = "Fin";
+"No End Date" = "Sin fecha de finalización";
+
+// ThankyouController
+"You will be untechable from" = "Usted será untechable de";
+"To" = "para";
+"HOME" = "CASA";
+
+// ContactCustomizeDetailsControlelrViewController
+"Calls and Texts required premium subscription." = "Llamadas y Textos requiere suscripción premium.";
+
+// SettingsViewController
+"Log Out" = "Cerrar sesión";
+"Logged Out" = "Desconectado";
+"Log In" = "Iniciar sesión";
+"Logged In" = "Conectado";
+"Put in your name below. This will be used to identify yourself to friends." = "Ponga en su nombre a continuación. Esto se utilizará para identificarse ante los amigos.";
+"Enter Name" = "Ingrese su nombre";

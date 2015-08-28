@@ -29,6 +29,7 @@
     NSArray *_pickerData;
     int timeDuration;
     NSString *timeInString;
+    NSArray *arrayToBeAdded;
     UserPurchases *userPurchases;
 }
 @end
@@ -72,7 +73,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+
+    arrayToBeAdded =  @[ NSLocalizedString(@"30 minutes", nil), NSLocalizedString(@"1 hour", nil), NSLocalizedString(@"1 Day", nil), NSLocalizedString(@"2 Days", nil)];
     userPurchases = [UserPurchases getInstance];
+
     
     //setting default time duration for untech now
     timeDuration = 30*60; //30 minutes
@@ -113,7 +117,7 @@
         settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 86, 42)];
         settingsButton.titleLabel.shadowColor = [UIColor clearColor];
         settingsButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [settingsButton setTitle:TITLE_SETTINGS_TXT forState:normal];
+        [settingsButton setTitle:NSLocalizedString(TITLE_SETTINGS_TXT, nil) forState:normal];
         [settingsButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [settingsButton addTarget:self action:@selector(goToSettings) forControlEvents:UIControlEventTouchUpInside];
         settingsButton.showsTouchWhenHighlighted = YES;
@@ -129,7 +133,7 @@
         newUntechableButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         newUntechableButton.titleLabel.shadowColor = [UIColor clearColor];
         newUntechableButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [newUntechableButton setTitle:TITLE_NEW_TXT forState:normal];
+        [newUntechableButton setTitle:NSLocalizedString(TITLE_NEW_TXT, nil) forState:normal];
         [newUntechableButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [newUntechableButton addTarget:self action:@selector(addUntechable) forControlEvents:UIControlEventTouchUpInside];
         newUntechableButton.showsTouchWhenHighlighted = YES;
@@ -331,10 +335,10 @@
                              initWithTitle:@""
                              message:message
                              delegate:self
-                             cancelButtonTitle:@"OK"
+                             cancelButtonTitle:NSLocalizedString(OK, nil)
                              otherButtonTitles:nil];
     [temAlert show];
-    if( [message isEqualToString:@"Untechable created successfully"] ){
+    if( [message isEqualToString:NSLocalizedString(@"Untechable created successfully", nil)] ){
     }
 }
 
@@ -390,7 +394,7 @@
     }
     else{
         errorOnFinish = YES;
-        message = @"Unable to delete, please try agin later!";
+        message = NSLocalizedString(@"Unable to delete, please try agin later!", nil);
     }
     
     if( errorOnFinish ){
@@ -413,10 +417,12 @@
 }
 
 -(void)updateUI{
+    [btnUntechCustom setTitle:NSLocalizedString(@"Untech Custom", nil) forState:normal];
     [btnUntechCustom setTitleColor:DEF_GRAY forState:UIControlStateNormal];
     btnUntechCustom.titleLabel.font = [UIFont fontWithName:APP_FONT size:16];
     btnUntechCustom.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
     
+    [btnUntechNow setTitle:NSLocalizedString(@"Untech Now", nil) forState:normal];
     [btnUntechNow setTitleColor:DEF_GRAY forState:UIControlStateNormal];
     btnUntechNow.titleLabel.font = [UIFont fontWithName:APP_FONT size:16];
     btnUntechNow.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -437,10 +443,10 @@
     
     if( !internetReachable.isReachable ){
         // show alert
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection"
-                                                        message:@"You must be connected to the internet to use this app."
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No network connection", nil)
+                                                        message:NSLocalizedString(@"You must be connected to the internet to use this app.", nil)
                                                        delegate:nil
-                                              cancelButtonTitle:@"OK"
+                                              cancelButtonTitle:NSLocalizedString(OK, nil)
                                               otherButtonTitles:nil];
         [alert show];
         
@@ -499,7 +505,7 @@
     if (section == 0){
         
         label = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, tableView.bounds.size.width - 10, 18)];
-        label.text = @"Upcoming Untechable Time:";
+        label.text = NSLocalizedString(@"Upcoming Untechable Time:", nil);
         label.textColor = DEF_GRAY;
         [label setFont:[UIFont fontWithName:APP_FONT size:16]];
         label.backgroundColor = [UIColor clearColor];
@@ -507,7 +513,7 @@
     }else {
     
         label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.bounds.size.width - 10, 30)];
-        label.text = @"Current Untechable Time:";
+        label.text = NSLocalizedString(@"Current Untechable Time:", nil);
         label.textColor = DEF_GRAY;
         [label setFont:[UIFont fontWithName:APP_FONT size:16]];
         label.backgroundColor = [UIColor clearColor];
@@ -560,9 +566,9 @@
 {
     NSString *sectionHeader;
     if ( section == 0 ){
-        sectionHeader = @"Upcoming Untechables";
+        sectionHeader = NSLocalizedString(@"Upcoming Untechables", nil);
     }else if ( section == 1 ){
-        sectionHeader = @"Archives Untechables";
+        sectionHeader = NSLocalizedString(@"Archives Untechables", nil);
     }
     return sectionHeader;
 }
@@ -634,7 +640,7 @@
 
 -(void)initializePickerData {
     
-    NSArray *arrayToBeAdded =  @[@"30 min", @"1 hr", @"1 day", @"2 days"];
+    
    
     _pickerData = arrayToBeAdded;
 }
@@ -644,27 +650,27 @@
     switch (row) {
         case 0:
             timeDuration = 30*60; // 30 minutes
-            timeInString = @"30 minutes";
+            timeInString = arrayToBeAdded[0];
             break;
             
         case 1:
             timeDuration = 60*60; // 1 hr
-            timeInString = @"1 hour";
+            timeInString = arrayToBeAdded[1];
             break;
         
         case 2:
             timeDuration = 24*60*60; // 1 day
-            timeInString = @"1 Day";
+            timeInString = arrayToBeAdded[2];
             break;
         
         case 3:
             timeDuration = 2*24*60*60; // 2 days
-            timeInString = @"2 Days";
+            timeInString = arrayToBeAdded[3];
             break;
             
         default:
             timeDuration = 30*60; // 30 minutes
-            timeInString = @"30 minutes";
+            timeInString = arrayToBeAdded[0];
             break;
     }
     
@@ -696,6 +702,7 @@
     self.doneButtonView.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
     
     // changes the "CLOSE" button text color to black
+    [_doneButtonView setTitle:NSLocalizedString(TITLE_DONE_TXT, nil) forState:normal];
     [_doneButtonView setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
 
     [self initializePickerData];
@@ -742,7 +749,7 @@
     
     //setting spendingTimeTxt to status got from setup screen.
     untechable.spendingTimeTxt = selectedStatus;
-    NSString *socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", timeInString, untechable.spendingTimeTxt];
+    NSString *socialStatus = [NSString stringWithFormat:NSLocalizedString(@"#Untechable for %@ %@ ", nil), timeInString, untechable.spendingTimeTxt];
     untechable.socialStatus = socialStatus;
     
 }

@@ -54,7 +54,7 @@
     //showing start date on fields
     NSDate *startDate  =   [untechable.commonFunctions convertTimestampToNSDate:untechable.startDate];
     NSString *newDateStr    =   [dateFormat stringFromDate:startDate];
-    NSString *showMsgToUser = [NSString stringWithFormat:@"The above message will be posted on %@ to the networks you selected below", newDateStr];
+    NSString *showMsgToUser = [NSString stringWithFormat:NSLocalizedString(@"The above message will be posted on %@ to the networks you selected below", nil) , newDateStr];
     
     _showMessageBeforeSending.text = showMsgToUser;
     _showMessageBeforeSending.textColor = DEF_GRAY;
@@ -93,11 +93,11 @@
 #pragma mark - Text View Delegate
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     
-    if ( [textView.text isEqualToString:@"e.g Spending time with family."] ){
+    if ( [textView.text isEqualToString:@"e.g. Spending time with family"] ){
         textView.text = @"";
     }
     if ( textView == inputSetSocialStatus ){
-        if ([textView.text isEqualToString:@"e.g Spending time with family."]) {
+        if ([textView.text isEqualToString:@"e.g. Spending time with family"]) {
             textView.text = @"";
             textView.font = [UIFont fontWithName:TITLE_FONT size:12.0];
             textView.textColor = [UIColor blackColor]; //optional
@@ -124,7 +124,7 @@
     inputSetSocialStatus.font = [UIFont fontWithName:APP_FONT size:16];
     inputSetSocialStatus.delegate = self;
     [inputSetSocialStatus setText:untechable.socialStatus];
-    
+
     int len = (int)inputSetSocialStatus.text.length;
     char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
     
@@ -138,6 +138,7 @@
     self.btnLinkedin.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
     
 }
+
 #pragma mark -  Navigation functions
 
 - (void)setNavigationDefaults{
@@ -148,14 +149,12 @@
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
 }
 
--(void)setNavigation:(NSString *)callFrom
-{
-    if([callFrom isEqualToString:@"viewDidLoad"])
-    {
+-(void)setNavigation:(NSString *)callFrom {
+    if([callFrom isEqualToString:@"viewDidLoad"]) {
         // Left Navigation
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
-        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitle: NSLocalizedString(TITLE_BACK_TXT, nil) forState:normal];
         [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(btnBackTouchEnd) forControlEvents:UIControlEventTouchUpInside];
@@ -173,7 +172,7 @@
         finishButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         [finishButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
         finishButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [finishButton setTitle:TITLE_FINISH_TXT forState:normal];
+        [finishButton setTitle:NSLocalizedString(TITLE_FINISH_TXT, nil) forState:normal];
         [finishButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:finishButton];
@@ -203,10 +202,10 @@
 
     if( !internetReachable.isReachable && !([UNT_ENVIRONMENT isEqualToString:TESTING]) ){
         //Show alert if internet is not avaialble...
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection"
-                                                        message:@"You must be connected to the internet to sync your untechable on server."
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No network connection", nil)
+                                                        message:NSLocalizedString(@"You must be connected to the internet to sync your untechable on server.", nil)
                                                        delegate:nil
-                                              cancelButtonTitle:@"OK"
+                                              cancelButtonTitle:NSLocalizedString(OK, nil)
                                               otherButtonTitles:nil];
         [alert show];
         [self testInternetConnection];
@@ -287,7 +286,7 @@
                              initWithTitle:@""
                              message:message
                              delegate:self
-                             cancelButtonTitle:@"OK"
+                             cancelButtonTitle:NSLocalizedString(OK, nil)
                              otherButtonTitles:nil];
     [temAlert show];
 }

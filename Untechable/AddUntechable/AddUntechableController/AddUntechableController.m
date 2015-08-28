@@ -142,11 +142,11 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    if ( [textView.text isEqualToString:@"e.g Spending time with family."] ){
+    if ( [textView.text isEqualToString:NSLocalizedString(@"e.g. Spending time with family", nil)] ){
         textView.text = @"";
     }
     if ( textView == _inputSpendingTimeText ){
-        if ([textView.text isEqualToString:@"e.g Spending time with family."]) {
+        if ([textView.text isEqualToString:NSLocalizedString(@"e.g. Spending time with family", nil)]) {
             textView.text = @"";
             textView.font = [UIFont fontWithName:TITLE_FONT size:12.0];
             textView.textColor = [UIColor blackColor]; //optional
@@ -203,7 +203,7 @@
             settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 86, 42)];
             settingsButton.titleLabel.shadowColor = [UIColor clearColor];
             settingsButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-            [settingsButton setTitle:TITLE_SETTINGS_TXT forState:normal];
+            [settingsButton setTitle:NSLocalizedString(TITLE_SETTINGS_TXT, nil) forState:normal];
             [settingsButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
             [settingsButton addTarget:self action:@selector(goToSettings) forControlEvents:UIControlEventTouchUpInside];
             settingsButton.showsTouchWhenHighlighted = YES;
@@ -218,7 +218,7 @@
         nextButton.titleLabel.shadowColor = [UIColor clearColor];
         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
+        [nextButton setTitle:NSLocalizedString(TITLE_NEXT_TXT, nil) forState:normal];
         [nextButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
         [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
@@ -256,7 +256,7 @@
 
 -(void)onNext{
     
-    if ( ![_inputSpendingTimeText.text isEqualToString:@"e.g Spending time with family."] ){
+    if ( ![_inputSpendingTimeText.text isEqualToString:NSLocalizedString(@"e.g. Spending time with family", nil)] ){
         [self storeScreenVarsInDic];
         
         [self hideAllControlls];
@@ -272,23 +272,23 @@
             
             if( goToNext == NO ) {
                 
-                [untechable.commonFunctions showAlert:@"Invalid Dates" message:@"End date should be greater than start date."];
+                [untechable.commonFunctions showAlert:NSLocalizedString(@"Invalid Dates", nil) message:NSLocalizedString(@"End date should be greater than start date.", nil)];
             }
         }
         
         if( goToNext ) {
             NSString *getDaysOrHours = [untechable calculateHoursDays:untechable.startDate  endTime: untechable.endDate];
-            untechable.socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", getDaysOrHours,untechable.spendingTimeTxt];
+            untechable.socialStatus = [NSString stringWithFormat:NSLocalizedString(@"#Untechable for %@ %@ ", nil), getDaysOrHours,untechable.spendingTimeTxt];
             ContactsListControllerViewController *listController = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
             listController.untechable = untechable;
             [self.navigationController pushViewController:listController animated:YES];
         }
         
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"What are you going untechable for?"
-                                                        message:@"You must specify what you'll be doing with your time away from technology before proceeding."
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"What are you going untechable for?", nil)
+                                                        message:NSLocalizedString(@"You must specify what you'll be doing with your time away from technology before proceeding.", nil)
                                                        delegate:nil
-                                              cancelButtonTitle:@"OK"
+                                              cancelButtonTitle:NSLocalizedString(OK, nil)
                                               otherButtonTitles:nil];
         [alert show];
     }
@@ -346,7 +346,7 @@
 
     NSString *nowDateStr = [untechable.dateFormatter stringFromDate:[NSDate date]];
     if( [nowDateStr isEqualToString:dateStr] ){
-        dateStr = @"NOW";
+        dateStr = NSLocalizedString(@"NOW", nil);
     }
     
 	if( [pickerOpenFor isEqualToString:@"_btnStartTime"] ){
@@ -367,7 +367,7 @@
         untechable.endDate = pickerTimeStampStr;
         
         if( [_cbNoEndDate isSelected] )
-        dateStr = @"Never";
+        dateStr =NSLocalizedString(@"Never", nil);
         
         [_btnEndTime setTitle:dateStr forState:UIControlStateNormal];
     }
@@ -472,17 +472,19 @@
 #pragma mark -  UI functions
 -(void)updateUI{
     
+    [_btnLblWwud setTitle:NSLocalizedString(@"Going Untechable and..", nil) forState:normal];
     [_btnLblWwud setTitleColor:DEF_GRAY forState:UIControlStateNormal];
     _btnLblWwud.titleLabel.font = [UIFont fontWithName:APP_FONT size:25];
  
     _inputSpendingTimeText.text = untechable.spendingTimeTxt;
     if ( [untechable.spendingTimeTxt isEqualToString:@""] ){
-        _inputSpendingTimeText.text = @"e.g Spending time with family.";
+        _inputSpendingTimeText.text = NSLocalizedString(@"e.g. Spending time with family", nil);
     } else{
         _inputSpendingTimeText.text = untechable.spendingTimeTxt;
     }
     _inputSpendingTimeText.font = [UIFont fontWithName:APP_FONT size:18];
     
+    [_btnLblStartTime setTitle:NSLocalizedString(@"Start", nil) forState:normal];
     [_btnLblStartTime setTitleColor:DEF_GRAY forState:UIControlStateNormal];
     _btnLblStartTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:25];
     
@@ -491,6 +493,7 @@
     [_btnStartTime setTitle:[untechable.commonFunctions convertTimestampToAppDate:untechable.startDate] forState:UIControlStateNormal];
     
     
+    [_btnLblEndTime setTitle:NSLocalizedString(@"End", nil) forState:normal];
     [_btnLblEndTime setTitleColor:DEF_GRAY forState:UIControlStateNormal];
     _btnLblEndTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:25];
     
@@ -498,11 +501,13 @@
     _btnEndTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
     [_btnEndTime setTitle:[untechable.commonFunctions convertTimestampToAppDate:untechable.endDate] forState:UIControlStateNormal];
     
+    [_lblNoEndDate setText:NSLocalizedString(@"No End Date",nil)];
     [_lblNoEndDate setTextColor:DEF_GRAY];
     _lblNoEndDate.font = [UIFont fontWithName:APP_FONT size:14];
 
     [_cbNoEndDate setSelected:!(untechable.hasEndDate)];
     
+    [_pickerCloseBtn setTitle:NSLocalizedString(@"DONE", nil) forState:normal];
     [_pickerCloseBtn setTitleColor:DEF_GRAY forState:UIControlStateNormal];
     _pickerCloseBtn.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
     
@@ -551,7 +556,7 @@
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     if ([textView.text isEqualToString:@""]) {
-        textView.text = @"e.g Spending time with family.";
+        textView.text = NSLocalizedString(@"e.g. Spending time with family", nil);
     }
     [textView resignFirstResponder];
 }

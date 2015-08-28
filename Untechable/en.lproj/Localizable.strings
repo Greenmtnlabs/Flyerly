@@ -1,0 +1,137 @@
+/* 
+  Localizable.strings
+  Untechable
+
+  Created by Created by RIKSOF Developer on 25/08/2015.
+  Copyright (c) 2015 Green MTN Labs Inc. All rights reserved.
+*/
+
+
+"SKIP" = "SKIP";
+"SAVE" = "SAVE";
+"NEXT" = "NEXT";
+"NEW" = "NEW";
+"BACK" = "BACK";
+"SETTINGS" = "SETTINGS";
+"DONE" = "DONE";
+"FINISH" = "FINISH";
+"EDIT" = "EDIT";
+"Edit" = "Edit";
+
+
+// Untech Options
+"Spending time with family" = "Spending time with family";
+"Driving" = "Driving";
+"Spending time outdoors" = "Spending time outdoors";
+"At the beach" = "At the beach";
+"Enjoying the holidays" = "Enjoying the holidays";
+"Just needed a break" = "Just needed a break";
+"Running" = "Running";
+"On vacation" = "On vacation";
+"Finding my inner peace" = "Finding my inner peace";
+"Removing myself from technology" = "Removing myself from technology";
+"Custom" = "Custom";
+
+
+// SetupGuide Screen 1
+"Name" = "Name";
+"Please Enter Your Name" = "Please Enter Your Name";
+"Phone Number" = "Phone Number";
+"Please Enter Your Number" = "Please Enter Your Number";
+"Error" = "Error";
+"Please Enter Your Name and Number" = "Please Enter Your Name and Number";
+"OK" = "OK";
+
+// SetupGuide Screen 2
+"When you take time away from technology, what do you typically do or hope to do more of?" = "When you take time away from technology, what do you typically do or hope to do more of?";
+
+"Did you know that based on a study, people %@ have better relationships, better quality of sleep and in general are more emotionally balanced." = "Did you know that based on a study, people %@ have better relationships, better quality of sleep and in general are more emotionally balanced.";
+
+"e.g. Spending time with family" = "e.g. Spending time with family";
+
+// SetupGuide Screen 3
+"Select contacts to inform of your unavailability" = "Select contacts to inform of your unavailability";
+"Select contacts" = "Select contacts";
+
+"Select one or more modes" = "Select one or more modes";
+"Message to %@\n" = "Message to %@\n";
+
+// Email Settings related
+"Select your email service to let your contacts know you will be untechable." = "Select your email service to let your contacts know you will be untechable.";
+"Set Your Email Responder" = "Set Your Email Responder";
+"Password" = "Password";
+"example@example.com" = "example@example.com";
+"Host Name" = "Host Name";
+"IMAP Port" = "IMAP Port";
+"mail.example.com" = "mail.example.com";
+"SMTP Port" = "SMTP Port";
+"smtp.example.com" = "smtp.example.com";
+"Incoming Mail Server" = "Incoming Mail Server";
+"Outgoing Mail Server" = "Outgoing Mail Server";
+
+// SetupGuide Screen 4
+"Congratulation" = "Congratulation";
+"Thank you for setting up your Untech settings. Now you can easily become Untechable whenever you need a break from technology in order to spend more time with the people & experiencing the things that are most important." = "Thank you for setting up your Untech settings. Now you can easily become Untechable whenever you need a break from technology in order to spend more time with the people & experiencing the things that are most important.";
+
+"The above message will be posted on %@ to the networks you selected below" = "The above message will be posted on %@ to the networks you selected below";
+
+"%i day" = "%i day";
+"%i days" = "%i days";
+"%i hour" = "%i hour";
+"%i hours" = "%i hours";
+"minute" = "minute";
+"minutes" = "minutes";
+"%i hours and %i %@" = "%i hours and %i %@";
+"%i hour and %i %@" = "%i hour and %i %@" ;
+
+
+// UntechablesList
+"30 minutes" = "30 minutes";
+"1 hour" = "1 hour";
+"1 Day" = "1 Day";
+"2 Days" = "2 Days";
+
+"Upcoming Untechables" = "Upcoming Untechables";
+"Archives Untechables" = "Archives Untechables";
+"#Untechable for %@ %@ " = "#Untechable for %@ %@ ";
+"Untechable created successfully" = "Untechable created successfully";
+"Unable to delete, please try agin later!" = "Unable to delete, please try agin later!";
+
+"No network connection" = "No network connection";
+"You must be connected to the internet to sync your untechable on server." = "You must be connected to the internet to sync your untechable on server.";
+
+"Upcoming Untechable Time:" = "Upcoming Untechable Time:";
+"Current Untechable Time:" = "Current Untechable Time:";
+
+"Untech Custom" = "Untech Custom";
+"Untech Now" = "Untech Now";
+
+// AddUntechableController
+"Going Untechable and.." = "Going Untechable and..";
+"Invalid Dates" = "Invalid Dates";
+"End date should be greater than start date." = "End date should be greater than start date.";
+"What are you going untechable for?" = "What are you going untechable for?";
+"You must specify what you'll be doing with your time away from technology before proceeding." = "You must specify what you'll be doing with your time away from technology before proceeding.";
+"NOW" = "NOW";
+"Never" = "Never";
+"Start" = "Start";
+"End" = "End";
+"No End Date" = "No End Date";
+
+// ThankyouController
+"You will be untechable from" = "You will be untechable from";
+"To" = "To";
+"HOME" = "HOME";
+
+// ContactCustomizeDetailsControlelrViewController
+"Calls and Texts required premium subscription." = "Calls and Texts required premium subscription.";
+
+// SettingsViewController
+"Log Out" = "Log Out";
+"Logged Out" = "Logged Out";
+"Log In" = "Log In";
+"Logged In" = "Logged In";
+"Put in your name below. This will be used to identify yourself to friends." = "Put in your name below. This will be used to identify yourself to friends.";
+"Enter Name" = "Enter Name";
+
+

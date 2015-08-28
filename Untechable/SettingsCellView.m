@@ -23,9 +23,12 @@
     [socialNetworkName setText:networkName];
     
     if ( LoginStatus ){
-        [socialNetworkButton setTitle:@"Log Out" forState:UIControlStateNormal];
-        [loginStatus setText:@"Logged In"];
-        NSLog(@"set button logout");
+        [socialNetworkButton setTitle:NSLocalizedString(@"Log Out", nil) forState:UIControlStateNormal];
+        [loginStatus setText: NSLocalizedString(@"Logged In", nil)];
+    } else {
+        [socialNetworkButton setTitle:NSLocalizedString(@"Log In", nil) forState:UIControlStateNormal];
+        [loginStatus setText: NSLocalizedString(@"Logged Out", nil)];
+    
     }
     
     UIImage *socialIocn = [UIImage imageNamed:ImageName];
