@@ -28,7 +28,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A1Z-DM-7Sj">
-                        <rect key="frame" x="223" y="10" width="96" height="45"/>
+                        <rect key="frame" x="215" y="10" width="96" height="45"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="96" id="8Z5-J0-HGV"/>
                         </constraints>
@@ -44,14 +44,15 @@
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="A1Z-DM-7Sj" firstAttribute="leading" secondItem="vDw-aj-Z4D" secondAttribute="trailing" constant="4" id="3kg-Tq-wNq"/>
                     <constraint firstItem="vDw-aj-Z4D" firstAttribute="leading" secondItem="ihx-7m-lLZ" secondAttribute="trailing" constant="8" symbolic="YES" id="AUd-O7-GLr"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="A1Z-DM-7Sj" secondAttribute="trailing" constant="1" id="Ee2-mr-59e"/>
                     <constraint firstItem="vDw-aj-Z4D" firstAttribute="leading" secondItem="FPU-wG-xGE" secondAttribute="leading" id="MAl-t2-7j9"/>
                     <constraint firstAttribute="bottomMargin" secondItem="A1Z-DM-7Sj" secondAttribute="bottom" constant="2" id="R8c-lt-O3j"/>
                     <constraint firstItem="ihx-7m-lLZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="YJF-Lt-Y59"/>
                     <constraint firstAttribute="bottomMargin" secondItem="vDw-aj-Z4D" secondAttribute="bottom" constant="17" id="eML-hL-C2i"/>
                     <constraint firstAttribute="bottomMargin" secondItem="ihx-7m-lLZ" secondAttribute="bottom" constant="9" id="iLt-wF-Jxj"/>
                     <constraint firstItem="FPU-wG-xGE" firstAttribute="bottom" secondItem="A1Z-DM-7Sj" secondAttribute="bottom" id="ieN-GV-cXb"/>
-                    <constraint firstAttribute="trailing" secondItem="A1Z-DM-7Sj" secondAttribute="trailing" constant="1" id="j8b-XX-JCW"/>
                     <constraint firstItem="vDw-aj-Z4D" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="sod-bh-P1K"/>
                     <constraint firstItem="A1Z-DM-7Sj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="wKh-cB-0bj"/>
                     <constraint firstItem="ihx-7m-lLZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="x5r-3u-46E"/>
