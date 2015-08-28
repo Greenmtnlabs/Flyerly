@@ -60,6 +60,12 @@
     [self.window makeKeyAndVisible];
     return YES;
 }
+/**
+ * This method sets Spending Time Text
+ * according to the selected language of iPhone
+ * and lets user added texts remains same
+ */
+
 
 -(void)setLocalizedSpendingTimeText{
     
