@@ -25,7 +25,6 @@
     if ( LoginStatus ){
         [socialNetworkButton setTitle:NSLocalizedString(@"Log Out", nil) forState:UIControlStateNormal];
         [loginStatus setText: NSLocalizedString(@"Logged In", nil)];
-        NSLog(@"set button logout");
     } else {
         [socialNetworkButton setTitle:NSLocalizedString(@"Log In", nil) forState:UIControlStateNormal];
         [loginStatus setText: NSLocalizedString(@"Logged Out", nil)];

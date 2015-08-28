@@ -256,7 +256,6 @@
 
 -(void)onNext{
     
-    NSLog(@"%@", _inputSpendingTimeText.text);
     if ( ![_inputSpendingTimeText.text isEqualToString:NSLocalizedString(@"e.g. Spending time with family", nil)] ){
         [self storeScreenVarsInDic];
         
