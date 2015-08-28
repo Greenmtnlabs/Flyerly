@@ -122,5 +122,6 @@
 "To" = "para";
 "HOME" = "CASA";
 
-
+// ContactCustomizeDetailsControlelrViewController
+"Calls and Texts required premium subscription." = "Llamadas y Textos requiere suscripción premium.";
 

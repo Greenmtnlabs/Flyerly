@@ -52,17 +52,13 @@ ContactsCustomizedModal *contactModal_;
     [self.delegate saveSpendingTimeText];
 }
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-{
-    if([text length] == 0)
-    {
-        if([textView.text length] != 0)
-        {
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    
+    if([text length] == 0) {
+        if([textView.text length] != 0) {
             return YES;
         }
-    }
-    else if([[textView text] length] > 123)
-    {
+    } else if ([[textView text] length] > 123) {
         return NO;
     }
 
@@ -70,7 +66,6 @@ ContactsCustomizedModal *contactModal_;
         [textView resignFirstResponder];
         return NO;
     }
-
     return YES;
 }
 

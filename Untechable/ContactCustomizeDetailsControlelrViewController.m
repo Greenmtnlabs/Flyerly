@@ -45,6 +45,13 @@
     
     self.contactDetailsTable.contentInset = UIEdgeInsetsMake(-32.0f, 0.0f, 0.0f, 0.0f);
     
+    [self applyLocalization];
+    
+}
+
+-(void)applyLocalization{
+    [_lblMessage setText:NSLocalizedString(@"Calls and Texts required premium subscription.", nil)];
+
 }
 
 - (void)didReceiveMemoryWarning {

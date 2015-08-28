@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContactCustomizeDetailsControlelrViewController">
             <connections>
                 <outlet property="contactDetailsTable" destination="oZD-vf-wOV" id="5bO-tM-KcL"/>
+                <outlet property="lblMessage" destination="zCG-bC-pDY" id="cyH-1y-AVG"/>
                 <outlet property="view" destination="Hwg-Db-wxb" id="p0g-rQ-xjU"/>
             </connections>
         </placeholder>
