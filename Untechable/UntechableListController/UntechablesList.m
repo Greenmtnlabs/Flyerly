@@ -24,7 +24,7 @@
     NSMutableArray *sectionOneArray;
     NSMutableArray *sectionTwoArray;
     
-    int loadAllUntecs;
+    int loadAllUntechs;
     
     NSArray *_pickerData;
     int timeDuration;
@@ -59,10 +59,10 @@
     
     NSLog( @"HomeDirectoryPath - this will help us in finding realm file: %@", NSHomeDirectory() );
     
-    if( loadAllUntecs == 1)
+    if( loadAllUntechs == 1)
         [self setDefaultModel];
     else
-        loadAllUntecs = 1;
+        loadAllUntechs = 1;
         
     untechablesTable.separatorInset = UIEdgeInsetsZero;
     
@@ -86,7 +86,7 @@
     self.untechablesTable.allowsMultipleSelectionDuringEditing = NO;
     
     [self setDefaultModel];
-    loadAllUntecs = 0;
+    loadAllUntechs = 0;
     
     [self testInternetConnection];
     [self setNavigationDefaults];
@@ -122,9 +122,9 @@
         [settingsButton addTarget:self action:@selector(goToSettings) forControlEvents:UIControlEventTouchUpInside];
         settingsButton.showsTouchWhenHighlighted = YES;
         
-        UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
+        UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
         
-        [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+        [self.navigationItem setLeftBarButtonItem:leftBarButton];//Left button ___________
         
         // Center title __________________________________________________
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
@@ -167,7 +167,7 @@
     untechable.userId   = TEST_UID;
 }
 
-#pragma mark -  Model funcs
+#pragma mark -  Model functions
 -(void)setDefaultUntech{
     untechable  = [[Untechable alloc] initWithCommonFunctions];
     
@@ -276,7 +276,7 @@
 }
 
 /**
- * Show / hide, a loding indicator in the right bar button
+ * Show / hide, a loading indicator in the right bar button
  */
 - (void)showHidLoadingIndicator:(BOOL)show {
     if( show ){
@@ -617,7 +617,7 @@
 /**
  * Hex Color Converter
  * @params: NSString
- * retunrs: UIColor
+ * returns: UIColor
  */
 - (UIColor *)colorFromHexString:(NSString *)hexString {
     unsigned rgbValue = 0;
@@ -756,10 +756,10 @@
 
 #pragma mark -  Payment functions
 /**
- * Check have valid subscription before creating untechable
+ * Check have valid subscription before creating Untechable
  */
 -(void)checkPayment{
-    //When haven't any sms/call in untechable
+    //When haven't any sms/call in Untechable
     if( [untechable.commonFunctions haveCallOrSms:untechable.customizedContactsForCurrentSession] == NO ){
         [self createUntechableAfterPaymentCheck];
     } else {
@@ -772,11 +772,11 @@
 }
 
 /**
- * Create untechable in free,without paid services (call/sms notifications)
+ * Create Untechable in free,without paid services (call/sms notifications)
  */
 -(void)createFreeUntechable{
     //1-
-    //Remove all sms / call flags, user wants free untechable
+    //Remove all sms / call flags, user wants free Untechable
     [untechable.commonFunctions delCallAndSmsStatus:untechable.customizedContactsForCurrentSession];
     
     //2-
@@ -784,7 +784,7 @@
 }
 
 /**
- * Create untechable without payment
+ * Create Untechable without payment
  */
 -(void)createUntechableAfterPaymentCheck{
     // Background work
@@ -845,7 +845,7 @@
 }
 
 /**
- * Create untechable on response
+ * Create Untechable on response
  */
 -(void)handlePurchaseProductResponse:(NSString *)msg{
     if ( [msg isEqualToString:SUCCESS] ) {
@@ -886,7 +886,7 @@
         alert.tag = tag;
         [alert show];
     }
-    //Show create untechable in free without sms/call, offer in alert
+    //Show create Untechable in free without sms/call, offer in alert
     else if( tag == 2 ){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Note"
                                                         message:@"App will not allow Call/SMS to your selected contact without premium subscription but Social Media Status and email we will be sent to your contacts"
@@ -927,7 +927,7 @@
             [self showAlert:2];
         }
     }
-    //Create untechable without call / sms
+    //Create Untechable without call / sms
     else if( alertView.tag == 2 ){
         if( buttonIndex == 1 ){
             [self createFreeUntechable];

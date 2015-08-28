@@ -17,5 +17,5 @@
 @property (strong,nonatomic)IBOutlet UILabel *nubmerType;
 @property (strong,nonatomic)IBOutlet UILabel *nubmer;
 
--(void)setCellValues :(NSString *)nubmerType Number:(NSString *)phoneNumber;
+-(void)setCellValues :(NSString *)numberType Number:(NSString *)phoneNumber;
 @end

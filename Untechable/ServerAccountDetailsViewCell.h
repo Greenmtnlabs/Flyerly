@@ -12,6 +12,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *inputFeild;
 @property (weak, nonatomic) IBOutlet UILabel *inputLabel;
 
--(void)setCellValueswithInputLabel :(NSString *)label FeildPlaceholder:(NSString *)palceHolder;
+-(void)setCellValuesWithInputLabel :(NSString *)label FeildPlaceholder:(NSString *)palceHolder;
 
 @end

@@ -22,7 +22,7 @@
     // Configure the view for the selected state
 }
 
--(void)setCellValueswithInputLabel :(NSString *)label FeildPlaceholder:(NSString *)palceHolder{
+-(void)setCellValuesWithInputLabel :(NSString *)label FeildPlaceholder:(NSString *)palceHolder{
     
     self.inputLabel.text = label;
     self.inputFeild.placeholder = palceHolder;

@@ -70,7 +70,7 @@
 "Outgoing Mail Server" = "Outgoing Mail Server";
 
 // SetupGuide Screen 4
-"Congratulation" = "Congratulation";
+"Congratulations" = "Congratulations";
 "Thank you for setting up your Untech settings. Now you can easily become Untechable whenever you need a break from technology in order to spend more time with the people & experiencing the things that are most important." = "Thank you for setting up your Untech settings. Now you can easily become Untechable whenever you need a break from technology in order to spend more time with the people & experiencing the things that are most important.";
 
 "The above message will be posted on %@ to the networks you selected below" = "The above message will be posted on %@ to the networks you selected below";
@@ -110,7 +110,7 @@
 "Going Untechable and.." = "Going Untechable and..";
 "Invalid Dates" = "Invalid Dates";
 "End date should be greater than start date." = "End date should be greater than start date.";
-"What are you going untechable for?" = "What are you going untechable for?";
+"What are you going Untechable for?" = "What are you going Untechable for?";
 "You must specify what you'll be doing with your time away from technology before proceeding." = "You must specify what you'll be doing with your time away from technology before proceeding.";
 "NOW" = "NOW";
 "Never" = "Never";
@@ -123,7 +123,7 @@
 "To" = "To";
 "HOME" = "HOME";
 
-// ContactCustomizeDetailsControlelrViewController
+// ContactCustomizeDetailsControllerViewController
 "Calls and Texts required premium subscription." = "Calls and Texts required premium subscription.";
 
 // SettingsViewController

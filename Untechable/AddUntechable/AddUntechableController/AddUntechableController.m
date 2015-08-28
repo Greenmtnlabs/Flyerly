@@ -194,9 +194,9 @@
             [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
             backButton.showsTouchWhenHighlighted = YES;
             
-            UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+            UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
             
-            [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+            [self.navigationItem setLeftBarButtonItem:leftBarButton];//Left button ___________
         }else {
             
             // Setting left Navigation button "Settings"
@@ -208,9 +208,9 @@
             [settingsButton addTarget:self action:@selector(goToSettings) forControlEvents:UIControlEventTouchUpInside];
             settingsButton.showsTouchWhenHighlighted = YES;
             
-            UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
+            UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
             
-            [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+            [self.navigationItem setLeftBarButtonItem:leftBarButton];//Left button ___________
         }
         
         // Right Navigation ______________________________________________
@@ -285,7 +285,7 @@
         }
         
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"What are you going untechable for?", nil)
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"What are you going Untechable for?", nil)
                                                         message:NSLocalizedString(@"You must specify what you'll be doing with your time away from technology before proceeding.", nil)
                                                        delegate:nil
                                               cancelButtonTitle:NSLocalizedString(OK, nil)
@@ -381,7 +381,7 @@
 
 -(void)showHideTextPicker:(BOOL)showHide{
     
-    // set the selected default message or custom message in pickerview
+    // set the selected default message or custom message in picker view
     
     NSInteger positionToShow = 0;
     for (int i = 0; i<_pickerData.count; i++) {
@@ -448,7 +448,7 @@
 /**
  * Hex Color Converter
  * @params: NSString
- * retunrs: UIColor
+ * returns: UIColor
  */
 - (UIColor *)colorFromHexString:(NSString *)hexString {
     unsigned rgbValue = 0;
@@ -458,7 +458,7 @@
     return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
 }
 
-#pragma mark -  Model funcs
+#pragma mark -  Model functions
 // set default vaules in model
 -(void)setDefaultModel{
 

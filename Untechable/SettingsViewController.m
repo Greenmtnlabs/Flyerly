@@ -84,8 +84,8 @@
         [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
         
         backButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-        [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+        UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        [self.navigationItem setLeftBarButtonItem:leftBarButton];//Left button ___________
         
         // Right Navigation ______________________________________________
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];

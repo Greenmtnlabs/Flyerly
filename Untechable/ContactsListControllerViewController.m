@@ -8,7 +8,7 @@
 
 #import "ContactsListControllerViewController.h"
 #import "ContactListCell.h"
-#import "ContactCustomizeDetailsControlelrViewController.h"
+#import "ContactCustomizeDetailsControllerViewController.h"
 #import "SocialnetworkController.h"
 #import "SetupGuideFourthView.h"
 #import "Common.h"
@@ -46,7 +46,7 @@
     
     [searchTextField resignFirstResponder];
 
-    //hock tap gesture, when user tap on selectContactLable then open keyboard for search contact field
+    //Hock tap gesture, when user tap on selectContactLable then open keyboard for search contact field
     _selectContactStr.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapGesture =
     [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSearchContactKeyBoard)];
@@ -107,10 +107,10 @@
         [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
         backButton.showsTouchWhenHighlighted = YES;
         
-        UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         
         // adds left button to navigation bar
-        [self.navigationItem setLeftBarButtonItem:lefttBarButton];
+        [self.navigationItem setLeftBarButtonItem:leftBarButton];
         
         // Right Navigation
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
@@ -174,7 +174,7 @@
 }
 
 /**
- * Want to send email to any contact about untechable
+ * Want to send email to any contact about Untechable
  */
 -(BOOL)haveSelectedAnyEmail{
     BOOL wantToSend = NO;
@@ -230,7 +230,7 @@
 }
 
 -( void ) showEmailSetupScreen : ( BOOL ) calledFromSetupScreen {
-    //if email or password not set then go to setting emials screen , else change emial screen
+    //if email or password not set then go to EmailSettingController screen , else change email screen
     if (  [untechable canSkipEmailSetting] == NO ){
         // Do any additional setup after loading the view from its nib.
         EmailSettingController *emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
@@ -511,7 +511,7 @@
                                              defaultRegion:countryCode error:&phoneUtilError];
 
                 if ( phoneUtilError == nil ) {
-                    //NBEPhoneNumberFormatE164 it is the formate required in twillio
+                    //NBEPhoneNumberFormatE164 it is the format required in Twillio
                     phoneNumberStr = [phoneUtil format:myNumber numberFormat:NBEPhoneNumberFormatE164
                                                     error:&phoneUtilError];
                 }
@@ -536,7 +536,7 @@
         
         currentltRenderingContactModal.customTextForContact = untechable.spendingTimeTxt;
 
-        //check for repeatation of contact
+        //check contact repetition
         if ( currentltRenderingContactModal.allEmails.count > 0 || currentltRenderingContactModal.allPhoneNumbers.count > 0 ){
             BOOL canAddInMCA = YES;
             
@@ -565,7 +565,7 @@
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    ContactCustomizeDetailsControlelrViewController *detailsController = [[ContactCustomizeDetailsControlelrViewController alloc] init];
+    ContactCustomizeDetailsControllerViewController *detailsController = [[ContactCustomizeDetailsControllerViewController alloc] init];
     detailsController.untechable = untechable;
     
     // contact which is going to be edit
@@ -577,7 +577,7 @@
 
 
 /**
- * Reset model with inital flags
+ * Reset model with initial flags
  */
 - (ContactsCustomizedModal *)resetModel:(ContactsCustomizedModal *)mobileContactModel{
     for ( int i=0;i<mobileContactModel.allPhoneNumbers.count;i++){
@@ -614,7 +614,7 @@
        if( found == NO )
            mobileContModel = [self resetModel:mobileContModel];
         
-    } // outter loop
+    } // outer loop
 }
 
 //Mapping of single sessionModel on to single mobileContactModel, will return mobileContactModel

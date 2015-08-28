@@ -70,7 +70,7 @@
 
 
 // SetupGuide Screen 4
-"Congratulation" = "Enhorabuena";
+"Congratulations" = "¡Felicidades";
 "Thank you for setting up your Untech settings. Now you can easily become Untechable whenever you need a break from technology in order to spend more time with the people & experiencing the things that are most important." = "Gracias por la creación de la configuración Untech usted. Ahora usted puede fácilmente convertirse en Untechable cada vez que necesite un descanso de la tecnología con el fin de pasar más tiempo con la gente y experimentar las cosas que son más importantes.";
 
 "The above message will be posted on %@ to the networks you selected below" = "El mensaje anterior se publicará en % @ a las redes que ha seleccionado a continuación";
@@ -109,7 +109,7 @@
 "Going Untechable and.." = "Yendo Untechable y..";
 "Invalid Dates" = "Fechas no válidas";
 "End date should be greater than start date." = "Fecha de finalización debe ser mayor que la fecha de inicio.";
-"What are you going untechable for?" = "¿Qué vas untechable buscas?";
+"What are you going untechable for?" = "¿Qué vas Untechable buscas?";
 "You must specify what you'll be doing with your time away from technology before proceeding." = "Debe especificar lo que va a hacer con su tiempo lejos de la tecnología antes de proceder.";
 "NOW" = "AHORA";
 "Never" = "Nunca";
@@ -122,7 +122,7 @@
 "To" = "para";
 "HOME" = "CASA";
 
-// ContactCustomizeDetailsControlelrViewController
+// ContactCustomizeDetailsControllerViewController
 "Calls and Texts required premium subscription." = "Llamadas y Textos requiere suscripción premium.";
 
 // SettingsViewController

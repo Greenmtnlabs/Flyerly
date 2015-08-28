@@ -1,9 +1,9 @@
 //
 //  SKProduct+LocalPrice.m
-//  Flyr
+//  Untechable
 //
-//  Created by Riksof Pvt. Ltd Ali on 9/11/13.
-//
+//  Created by RIKSOF Developer on on 9/11/13.
+//  Copyright (c) 2014 RIKSOF (Pvt) Ltd. All rights reserved.
 //
 
 #import "SKProduct+LocalPrice.h"

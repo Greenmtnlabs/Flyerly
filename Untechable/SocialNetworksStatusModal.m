@@ -102,7 +102,7 @@
                 [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:YES calledFor:@"LinkedIn"];
             }
             failure:^(NSError *error) {
-                NSLog(@"Quering accessToken failed %@", error);
+                NSLog(@"Querying accessToken failed %@", error);
             }];
     }
     cancel:^{
@@ -114,16 +114,16 @@
 }
 
 #pragma mark -  Twitter functions
-//LOGOUT FROM TWITTER
-- (void)twLogout {
+//Logout from Twitter
+- (void)twitterLogout {
     [[FHSTwitterEngine sharedEngine]clearAccessToken];
     
-    //Bello code will auto call insdie above function
+    //Below code will automatically call inside above function
     mTwitterAuth = @"";
     mTwOAuthTokenSecret = @"";
 }
 
-//RETURN TWITTER TOKEN [Note: Do not change the name of this functions, it will called from twitter libraries]
+//Return Twitter Token [Note: Do not change the name of this function, it will called from twitter libraries]
 - (NSString *)twLoadAccessToken {
     return [[NSUserDefaults standardUserDefaults]objectForKey:@"SavedAccessHTTPBody"];
 }
@@ -132,7 +132,7 @@
     
     if( [mTwitterAuth isEqualToString:@""] == NO ) {
         //When button was green , the delete permissions
-        [self twLogout];
+        [self twitterLogout];
         [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:NO calledFor:@"Twitter"];
     }
     else {
@@ -146,7 +146,7 @@
         
         //GO TO TWITTER AUTH LOGIN SCREEN
         UIViewController *loginController = [[FHSTwitterEngine sharedEngine]loginControllerWithCompletionHandler:^(BOOL success) {
-            NSLog( success ? @"Twitter, success login on twitter" : @"Twitter login failure.");
+            NSLog( success ? @"Twitter - successfully loggedin" : @"Twitter - login failed.");
             if ( success ){
                 [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:YES calledFor:@"Twitter"];
             }
@@ -179,7 +179,7 @@
     mTwOAuthTokenSecret =   oAuthTokenSecret;
 }
 
-//This functions return parmaeter value from url parmeter string
+//This function returns value from url parameter string
 //http:abc.com?a=1&b=c in this url a is target and body is the full url
 - (NSString *)extractValueForKey:(NSString *)target fromHTTPBody:(NSString *)body {
     if (body.length == 0) {
@@ -311,7 +311,7 @@
 }
 
 /**
- * Function to handle facebook login and logout
+ * Function to handle Facebook login and logout
  */
 - (void)loginFacebook:(id)sender Controller:(UIViewController *)Controller {
     //if user has a token (already logged in) then logout and flush the token
@@ -320,7 +320,7 @@
         [self closeFbSessionIfOpen];
         [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:NO calledFor:@"Facebook"];
     }
-    //if no token is found, login to facebook
+    //if no token is found, login to Facebook
     else if( [self closeFbSessionIfOpen] == NO ) {
         // Open a session showing the user the login UI
         // You must ALWAYS ask for public_profile permissions when opening a session

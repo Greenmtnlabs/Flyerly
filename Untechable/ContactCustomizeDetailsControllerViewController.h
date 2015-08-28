@@ -1,5 +1,5 @@
 //
-//  ContactCustomizeDetailsControlelrViewController.h
+//  ContactCustomizeDetailsControllerViewController.h
 //  Untechable
 //
 //  Created by RIKSOF Developer on 12/26/14.
@@ -12,7 +12,7 @@
 #import "ContactsCustomizedModal.h"
 #import "BSKeyboardControls.h"
 
-@interface ContactCustomizeDetailsControlelrViewController : UIViewController <UITableViewDelegate, BSKeyboardControlsDelegate, UITableViewDataSource,UITextViewDelegate> {
+@interface ContactCustomizeDetailsControllerViewController : UIViewController <UITableViewDelegate, BSKeyboardControlsDelegate, UITableViewDataSource,UITextViewDelegate> {
     
     UIButton *backButton;
     UIButton *saveButton;    

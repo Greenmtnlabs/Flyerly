@@ -35,7 +35,7 @@
     UINavigationController *navigationController;
 
     RLMResults *unsortedObjects = [RSetUntechable objectsWhere:@"rUId == '1'"];
-    //If we have default untechable then go to untechable list screen
+    //If we have default Untechable then go to UntechablesList screen
      if ( unsortedObjects.count > 0){
          UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
          navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];

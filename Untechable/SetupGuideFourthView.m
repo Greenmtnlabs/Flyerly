@@ -70,10 +70,10 @@
         [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
         backButton.showsTouchWhenHighlighted = YES;
         
-        UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         
         // adds left button to navigation bar
-        [self.navigationItem setLeftBarButtonItem:lefttBarButton];
+        [self.navigationItem setLeftBarButtonItem:leftBarButton];
         
         // Right Button
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
@@ -107,7 +107,7 @@
 -(void)onNext{
     untechable.hasFinished = YES;
     [untechable addOrUpdateInDatabase];
-    UIAlertView *congratesAlert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Congratulation", nil)  message:NSLocalizedString(@"Thank you for setting up your Untech settings. Now you can easily become Untechable whenever you need a break from technology in order to spend more time with the people & experiencing the things that are most important.", nil) delegate:self cancelButtonTitle:NSLocalizedString(OK, nil) otherButtonTitles:nil, nil];
+    UIAlertView *congratesAlert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Congratulations", nil)  message:NSLocalizedString(@"Thank you for setting up your Untech settings. Now you can easily become Untechable whenever you need a break from technology in order to spend more time with the people & experiencing the things that are most important.", nil) delegate:self cancelButtonTitle:NSLocalizedString(OK, nil) otherButtonTitles:nil, nil];
     [congratesAlert show];
     
 }
