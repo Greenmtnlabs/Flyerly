@@ -170,7 +170,7 @@
     
     [_lbl1 setTextColor:DEF_GRAY];
     _lbl1.font = [UIFont fontWithName:APP_FONT size:20];
-    
+    [_lbl1 setText:NSLocalizedString(@"Set Your Email Responder",nil)];
     [self.inputEmail setTextColor:DEF_GREEN];
     self.inputEmail.font = [UIFont fontWithName:APP_FONT size:16];
     self.inputEmail.delegate = self;
@@ -180,6 +180,8 @@
     self.inputPassword.font = [UIFont fontWithName:APP_FONT size:16];
     self.inputPassword.delegate = self;
     self.inputPassword.text  = untechable.password;
+    self.inputPassword.placeholder = NSLocalizedString(@"Password", nil);
+    self.inputEmail.placeholder = NSLocalizedString(@"example@example.com", nil);
 }
 
 #pragma mark -  Navigation functions
@@ -228,7 +230,7 @@
         // Left Button
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
-        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitle:NSLocalizedString(TITLE_BACK_TXT, nil) forState:normal];
         [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(btnNextTouchEndToServerAccount) forControlEvents:UIControlEventTouchUpInside];
@@ -248,13 +250,13 @@
         rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         
         if ( [comingFrom isEqualToString:@"SettingsScreen"] ) {
-            [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
+            [rightBarButton setTitle:NSLocalizedString(TITLE_DONE_TXT, nil) forState:normal];
         } else if ( [comingFrom isEqualToString:@"SetupScreen"] ) {
-            [rightBarButton setTitle:TITLE_NEXT_TXT forState:normal];
+            [rightBarButton setTitle:NSLocalizedString(TITLE_NEXT_TXT, nil) forState:normal];
         } else if ( [comingFrom isEqualToString:@"ContactsListScreen"] ) {
-            [rightBarButton setTitle:TITLE_NEXT_TXT forState:normal];
+            [rightBarButton setTitle:NSLocalizedString(TITLE_NEXT_TXT, nil) forState:normal];
         } else {
-            [rightBarButton setTitle:TITLE_FINISH_TXT forState:normal];
+            [rightBarButton setTitle:NSLocalizedString(TITLE_FINISH_TXT, nil) forState:normal];
         }
         
         [rightBarButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
@@ -276,7 +278,7 @@
         // Left Button
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
-        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitle:NSLocalizedString(TITLE_BACK_TXT, nil) forState:normal];
         [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(btnBackToAccountType) forControlEvents:UIControlEventTouchUpInside];
@@ -296,9 +298,9 @@
         rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
 
         if ( [comingFrom isEqualToString:@"SettingsScreen"] && [untechable.acType isEqualToString:@"OTHER"] == NO) {
-            [rightBarButton setTitle:TITLE_DONE_TXT forState:normal];
+            [rightBarButton setTitle:NSLocalizedString(TITLE_DONE_TXT, nil) forState:normal];
         } else {
-            [rightBarButton setTitle:TITLE_NEXT_TXT forState:normal];
+            [rightBarButton setTitle:NSLocalizedString(TITLE_NEXT_TXT, nil) forState:normal];
         }
         
         [rightBarButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
@@ -308,7 +310,7 @@
             rightBarButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
             [rightBarButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
             rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-            [rightBarButton setTitle:@"NEXT" forState:normal];
+            [rightBarButton setTitle:NSLocalizedString(TITLE_NEXT_TXT, nil) forState:normal];
             [rightBarButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
             
         }
@@ -325,7 +327,7 @@
         // Left Button
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
-        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitle:NSLocalizedString(TITLE_BACK_TXT, nil) forState:normal];
         [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(btnBackTouchEnd) forControlEvents:UIControlEventTouchUpInside];
@@ -343,7 +345,7 @@
         rightBarButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         [rightBarButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
         rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [rightBarButton setTitle:TITLE_FINISH_TXT forState:normal];
+        [rightBarButton setTitle:NSLocalizedString(TITLE_FINISH_TXT, nil) forState:normal];
         [rightBarButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         rightBarButton.showsTouchWhenHighlighted = YES;
 
@@ -355,7 +357,7 @@
             // Right Button
             skipButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
             skipButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
-            [skipButton setTitle:TITLE_SKIP_TXT forState:normal];
+            [skipButton setTitle:NSLocalizedString(TITLE_SKIP_TXT, nil) forState:normal];
             [skipButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
             [skipButton addTarget:self action:@selector(btnSkipTouchStart) forControlEvents:UIControlEventTouchDown];
             [skipButton addTarget:self action:@selector(btnSkipTouchEnd) forControlEvents:UIControlEventTouchUpInside];
@@ -459,44 +461,6 @@
         [self.navigationController pushViewController:socialnetwork animated:YES];
         
     }
-}
-
-- (void) removeRedundentDataForContacts {
-    
-    if ( untechable.customizedContactsForCurrentSession.count > 0){
-        
-        for ( int i=0; i<untechable.customizedContactsForCurrentSession.count; i++){
-            
-            ContactsCustomizedModal *tempModal = [untechable.customizedContactsForCurrentSession objectAtIndex:i];
-            
-            NSMutableArray *phoneNumbersWithStatus  = tempModal.allPhoneNumbers;
-            for ( int j = 0; j < phoneNumbersWithStatus.count; j++){
-                NSMutableArray *numberWithStatus = [phoneNumbersWithStatus objectAtIndex:j];
-                if ( [[numberWithStatus objectAtIndex:2] isEqualToString:@"0"] &&
-                    [[numberWithStatus objectAtIndex:3] isEqualToString:@"0"]  )
-                {
-                    [phoneNumbersWithStatus removeObject:numberWithStatus];
-                }
-            }
-            
-            NSMutableArray *emailOnly  = [[NSMutableArray alloc] init];
-            NSMutableArray *emailsWithStatus  = tempModal.allEmails;
-            for ( int k = 0; k < emailsWithStatus.count; k++){
-                NSMutableArray *emailWithStatus = [emailsWithStatus objectAtIndex:k];
-                if ( [[emailWithStatus objectAtIndex:1] isEqualToString:@"0"] )
-                {
-                    [emailsWithStatus removeObject:emailWithStatus];
-                }else {
-                    [emailOnly addObject:emailWithStatus];
-                }
-            }
-            
-            tempModal.allEmails = emailOnly;
-        }
-        untechable.customizedContactsForCurrentSession = untechable.customizedContactsForCurrentSession;
-    }
-    
-    [self storeScreenVarsInDic];
 }
 
 -(void)onNext {
@@ -619,7 +583,7 @@
                              initWithTitle:@""
                              message:message
                              delegate:self
-                             cancelButtonTitle:@"OK"
+                             cancelButtonTitle:NSLocalizedString(OK, nil)
                              otherButtonTitles:nil];
     [temAlert show];
     
@@ -762,8 +726,8 @@
         else if ( indexPath.section == 0 || indexPath.section == 1 ){
             
             if ( indexPath.section == 0 ){
-                NSMutableArray *inputLabel = [[NSMutableArray arrayWithObjects:@"Host Name",@"IMAP Port",nil] init];
-                NSMutableArray *inputFeildPlaceHolder = [[NSMutableArray arrayWithObjects:@"mail.example.com",@"993",nil] init];
+                NSMutableArray *inputLabel = [[NSMutableArray arrayWithObjects:NSLocalizedString(@"Host Name", nil), NSLocalizedString(@"IMAP Port", nil),nil] init];
+                NSMutableArray *inputFeildPlaceHolder = [[NSMutableArray arrayWithObjects:NSLocalizedString(@"mail.example.com", nil) ,@"993",nil] init];
                 
                 static NSString *cellId = @"ServerAccountDetailsViewCell";
                 ServerAccountDetailsViewCell *cell = (ServerAccountDetailsViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
@@ -803,8 +767,8 @@
                 
                 return cell;
             }else if ( indexPath.section == 1 ){
-                NSMutableArray *inputLabel = [[NSMutableArray arrayWithObjects:@"Host Name",@"SMTP Port",nil] init];
-                NSMutableArray *inputFeildPlaceHolder = [[NSMutableArray arrayWithObjects:@"smtp.example.com",@"587",nil] init];
+                NSMutableArray *inputLabel = [[NSMutableArray arrayWithObjects:NSLocalizedString(@"Host Name", nil), NSLocalizedString(@"SMTP Port", nil),nil] init];
+                NSMutableArray *inputFeildPlaceHolder = [[NSMutableArray arrayWithObjects:NSLocalizedString(@"smtp.example.com", nil),@"587",nil] init];
                 
                 static NSString *cellId = @"ServerAccountDetailsViewCell";
                 ServerAccountDetailsViewCell *cell = (ServerAccountDetailsViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
@@ -954,15 +918,17 @@
         headerView.backgroundColor = [UIColor whiteColor];
         
         // 3. Add a label
+        
+        NSString *label = NSLocalizedString(@"Select your email service to let your contacts know you will be untechable.", nil);;
         UILabel* headerLabel = [[UILabel alloc] init];
         
-        headerLabel.frame = CGRectMake(10, 0, tableView.frame.size.width - 10, 60);
+        headerLabel.frame = CGRectMake(10, 0, tableView.frame.size.width - 10, 80);
         headerLabel.textColor = [UIColor lightGrayColor];
         headerLabel.font = [UIFont fontWithName:APP_FONT size:18];
         headerLabel.numberOfLines = 3;
-        headerLabel.text = @"Select your email service to let your contacts know you will be untechable.";
+        headerLabel.text = label;
         
-        NSString *labelText = @"Select your email service to let your contacts know you will be untechable.";
+        NSString *labelText = label;
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:labelText];
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
         [paragraphStyle setLineSpacing:8];
@@ -984,9 +950,9 @@
     NSString *sectionHeader;
     if ( tableView != _tableView0 ){
         if ( section == 0 ){
-            sectionHeader = @"Incoming Mail Server";
+            sectionHeader = NSLocalizedString(@"Incoming Mail Server", nil);
         }else if ( section == 1 ){
-            sectionHeader = @"OutGoing Mail Server";
+            sectionHeader = NSLocalizedString(@"Outgoing Mail Server", nil);
         }
     }
     return sectionHeader;

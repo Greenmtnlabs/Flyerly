@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContactCustomizeDetailsControlelrViewController">
             <connections>
                 <outlet property="contactDetailsTable" destination="oZD-vf-wOV" id="5bO-tM-KcL"/>
+                <outlet property="lblMessage" destination="zCG-bC-pDY" id="cyH-1y-AVG"/>
                 <outlet property="view" destination="Hwg-Db-wxb" id="p0g-rQ-xjU"/>
             </connections>
         </placeholder>
@@ -17,15 +18,30 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="70" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="oZD-vf-wOV">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="450"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="450" id="PJH-Ts-3fk"/>
+                    </constraints>
                 </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calls and Texts required premium subscription." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zCG-bC-pDY">
+                    <rect key="frame" x="0.0" y="450" width="320" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="caq-Ee-JRq"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="oZD-vf-wOV" secondAttribute="trailing" id="2Iv-fG-bcK"/>
-                <constraint firstItem="oZD-vf-wOV" firstAttribute="leading" secondItem="Hwg-Db-wxb" secondAttribute="leading" id="LTK-3N-bJY"/>
-                <constraint firstAttribute="bottom" secondItem="oZD-vf-wOV" secondAttribute="bottom" id="dkv-sA-h3u"/>
-                <constraint firstItem="oZD-vf-wOV" firstAttribute="top" secondItem="Hwg-Db-wxb" secondAttribute="top" id="sVw-XP-WGA"/>
+                <constraint firstItem="oZD-vf-wOV" firstAttribute="top" secondItem="Hwg-Db-wxb" secondAttribute="top" id="7Tg-2n-7ub"/>
+                <constraint firstItem="zCG-bC-pDY" firstAttribute="top" secondItem="oZD-vf-wOV" secondAttribute="bottom" id="NsY-JE-Xbo"/>
+                <constraint firstAttribute="trailing" secondItem="zCG-bC-pDY" secondAttribute="trailing" id="TcC-1Z-kHp"/>
+                <constraint firstItem="zCG-bC-pDY" firstAttribute="trailing" secondItem="oZD-vf-wOV" secondAttribute="trailing" id="ZcG-tt-wgI"/>
+                <constraint firstItem="zCG-bC-pDY" firstAttribute="leading" secondItem="Hwg-Db-wxb" secondAttribute="leading" id="h0c-Xd-FcT"/>
+                <constraint firstAttribute="bottom" secondItem="zCG-bC-pDY" secondAttribute="bottom" id="lFK-1k-e1a"/>
+                <constraint firstItem="zCG-bC-pDY" firstAttribute="leading" secondItem="oZD-vf-wOV" secondAttribute="leading" id="v6Q-as-fE1"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-407" y="-5"/>

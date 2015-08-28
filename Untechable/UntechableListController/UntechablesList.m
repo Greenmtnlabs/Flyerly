@@ -15,6 +15,7 @@
 #import "ThankyouController.h"
 #import "RUntechable.h"
 #import "RSetUntechable.h"
+#import "UserPurchases.h"
 
 
 @interface UntechablesList () {
@@ -28,9 +29,9 @@
     NSArray *_pickerData;
     int timeDuration;
     NSString *timeInString;
-
+    NSArray *arrayToBeAdded;
+    UserPurchases *userPurchases;
 }
-
 @end
 
 @implementation UntechablesList
@@ -72,6 +73,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+
+    arrayToBeAdded =  @[ NSLocalizedString(@"30 minutes", nil), NSLocalizedString(@"1 hour", nil), NSLocalizedString(@"1 Day", nil), NSLocalizedString(@"2 Days", nil)];
+    userPurchases = [UserPurchases getInstance];
+
+    
     //setting default time duration for untech now
     timeDuration = 30*60; //30 minutes
     timeInString = @"30 minutes";
@@ -111,7 +117,7 @@
         settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 86, 42)];
         settingsButton.titleLabel.shadowColor = [UIColor clearColor];
         settingsButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [settingsButton setTitle:TITLE_SETTINGS_TXT forState:normal];
+        [settingsButton setTitle:NSLocalizedString(TITLE_SETTINGS_TXT, nil) forState:normal];
         [settingsButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [settingsButton addTarget:self action:@selector(goToSettings) forControlEvents:UIControlEventTouchUpInside];
         settingsButton.showsTouchWhenHighlighted = YES;
@@ -127,7 +133,7 @@
         newUntechableButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         newUntechableButton.titleLabel.shadowColor = [UIColor clearColor];
         newUntechableButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [newUntechableButton setTitle:TITLE_NEW_TXT forState:normal];
+        [newUntechableButton setTitle:NSLocalizedString(TITLE_NEW_TXT, nil) forState:normal];
         [newUntechableButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [newUntechableButton addTarget:self action:@selector(addUntechable) forControlEvents:UIControlEventTouchUpInside];
         newUntechableButton.showsTouchWhenHighlighted = YES;
@@ -147,7 +153,6 @@
 }
 
 -(void)addUntechable{
-    
     AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
     addUntechable.untechable = untechable;
     addUntechable.totalUntechables = (int)allUntechables.count;
@@ -301,7 +306,7 @@
     }
     
     // enables navigation when any error occurs
-    else if([option isEqualToString:@"ERROR_ON_FINISH"] ){
+    else if( [option isEqualToString:@"ERROR_ON_FINISH"] || [option isEqualToString:@"ALERT_CANCEL"]){
         btnStatusInt = 1;
     }
     else if ( [option isEqualToString:@"ON_FINISH_SUCCESS"] ){
@@ -330,10 +335,10 @@
                              initWithTitle:@""
                              message:message
                              delegate:self
-                             cancelButtonTitle:@"OK"
+                             cancelButtonTitle:NSLocalizedString(OK, nil)
                              otherButtonTitles:nil];
     [temAlert show];
-    if( [message isEqualToString:@"Untechable created successfully"] ){
+    if( [message isEqualToString:NSLocalizedString(@"Untechable created successfully", nil)] ){
     }
 }
 
@@ -345,17 +350,10 @@
 -(void)deleteUntechable:(NSInteger)indexToremoveOnSucess Section:(NSInteger)section {
 
     NSMutableDictionary *tempDict = ( section == 0 ) ? sectionOneArray[indexToremoveOnSucess] : sectionTwoArray[indexToremoveOnSucess];
-
-    RLMRealm *realm = RLMRealm.defaultRealm;
-    RLMResults *untechableToBeDeleted = [RUntechable objectsInRealm:realm where:@"rUId == %@", tempDict[@"rUId"]];
-    if( untechableToBeDeleted.count ){
-        [realm beginWriteTransaction];
-        [realm deleteObjects:untechableToBeDeleted];
-        [realm commitWriteTransaction];
-        
+    [untechable deleteUntechable:tempDict[@"rUId"] callBack:^(bool deleted){
         [self setDefaultModel];
         [untechablesTable reloadData];
-    }
+    }];
 }
 
 - (void)sendDeleteRequestToApi:(NSInteger)indexToremoveOnSucess Section:(NSInteger)section {
@@ -396,7 +394,7 @@
     }
     else{
         errorOnFinish = YES;
-        message = @"Unable to delete, please try agin later!";
+        message = NSLocalizedString(@"Unable to delete, please try agin later!", nil);
     }
     
     if( errorOnFinish ){
@@ -419,10 +417,12 @@
 }
 
 -(void)updateUI{
+    [btnUntechCustom setTitle:NSLocalizedString(@"Untech Custom", nil) forState:normal];
     [btnUntechCustom setTitleColor:DEF_GRAY forState:UIControlStateNormal];
     btnUntechCustom.titleLabel.font = [UIFont fontWithName:APP_FONT size:16];
     btnUntechCustom.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
     
+    [btnUntechNow setTitle:NSLocalizedString(@"Untech Now", nil) forState:normal];
     [btnUntechNow setTitleColor:DEF_GRAY forState:UIControlStateNormal];
     btnUntechNow.titleLabel.font = [UIFont fontWithName:APP_FONT size:16];
     btnUntechNow.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -443,10 +443,10 @@
     
     if( !internetReachable.isReachable ){
         // show alert
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection"
-                                                        message:@"You must be connected to the internet to use this app."
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No network connection", nil)
+                                                        message:NSLocalizedString(@"You must be connected to the internet to use this app.", nil)
                                                        delegate:nil
-                                              cancelButtonTitle:@"OK"
+                                              cancelButtonTitle:NSLocalizedString(OK, nil)
                                               otherButtonTitles:nil];
         [alert show];
         
@@ -505,7 +505,7 @@
     if (section == 0){
         
         label = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, tableView.bounds.size.width - 10, 18)];
-        label.text = @"Upcoming Untechable Time:";
+        label.text = NSLocalizedString(@"Upcoming Untechable Time:", nil);
         label.textColor = DEF_GRAY;
         [label setFont:[UIFont fontWithName:APP_FONT size:16]];
         label.backgroundColor = [UIColor clearColor];
@@ -513,7 +513,7 @@
     }else {
     
         label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.bounds.size.width - 10, 30)];
-        label.text = @"Current Untechable Time:";
+        label.text = NSLocalizedString(@"Current Untechable Time:", nil);
         label.textColor = DEF_GRAY;
         [label setFont:[UIFont fontWithName:APP_FONT size:16]];
         label.backgroundColor = [UIColor clearColor];
@@ -566,9 +566,9 @@
 {
     NSString *sectionHeader;
     if ( section == 0 ){
-        sectionHeader = @"Upcoming Untechables";
+        sectionHeader = NSLocalizedString(@"Upcoming Untechables", nil);
     }else if ( section == 1 ){
-        sectionHeader = @"Archives Untechables";
+        sectionHeader = NSLocalizedString(@"Archives Untechables", nil);
     }
     return sectionHeader;
 }
@@ -640,7 +640,7 @@
 
 -(void)initializePickerData {
     
-    NSArray *arrayToBeAdded =  @[@"30 min", @"1 hr", @"1 day", @"2 days"];
+    
    
     _pickerData = arrayToBeAdded;
 }
@@ -650,27 +650,27 @@
     switch (row) {
         case 0:
             timeDuration = 30*60; // 30 minutes
-            timeInString = @"30 minutes";
+            timeInString = arrayToBeAdded[0];
             break;
             
         case 1:
             timeDuration = 60*60; // 1 hr
-            timeInString = @"1 hour";
+            timeInString = arrayToBeAdded[1];
             break;
         
         case 2:
             timeDuration = 24*60*60; // 1 day
-            timeInString = @"1 Day";
+            timeInString = arrayToBeAdded[2];
             break;
         
         case 3:
             timeDuration = 2*24*60*60; // 2 days
-            timeInString = @"2 Days";
+            timeInString = arrayToBeAdded[3];
             break;
             
         default:
             timeDuration = 30*60; // 30 minutes
-            timeInString = @"30 minutes";
+            timeInString = arrayToBeAdded[0];
             break;
     }
     
@@ -702,6 +702,7 @@
     self.doneButtonView.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
     
     // changes the "CLOSE" button text color to black
+    [_doneButtonView setTitle:NSLocalizedString(TITLE_DONE_TXT, nil) forState:normal];
     [_doneButtonView setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
 
     [self initializePickerData];
@@ -718,9 +719,74 @@
     
     [_timeDurationPicker setHidden:YES];
     [_doneButtonView setHidden:YES];
-    
     [self changeNavigation:@"ON_FINISH"];
     
+    [self checkPayment];
+}
+
+/**
+ * navigate to ThankyouController screen when untech is created successfully
+ */
+-( void ) goToThankyouScreen {
+    ThankyouController *thankyouScreen = [[ThankyouController alloc] init];
+    thankyouScreen.untechable = untechable;
+    [self.navigationController pushViewController:thankyouScreen animated:YES];
+}
+-( void )setTimeAcToCurVars {
+    
+    untechable.startDate  = [untechable.commonFunctions convertNSDateToTimestamp: [[NSDate date] dateByAddingTimeInterval:(0)] ]; // current time
+    untechable.endDate  = [untechable.commonFunctions convertNSDateToTimestamp: [[NSDate date] dateByAddingTimeInterval:(timeDuration)] ]; // start time + selected time duration
+    
+    // the selected status from the setup screen would be set as default status on unetch now option
+    NSArray *customArrayOfStatuses = [[NSUserDefaults standardUserDefaults]objectForKey:@"cutomSpendingTimeTextAry"];
+    NSString *selectedStatus = @"";
+    for (int i = 0; i<customArrayOfStatuses.count; i++) {
+        if([customArrayOfStatuses[i] isEqualToString:untechable.spendingTimeTxt] ){
+            selectedStatus = [customArrayOfStatuses objectAtIndex:i];
+            break;
+        }
+    }
+    
+    //setting spendingTimeTxt to status got from setup screen.
+    untechable.spendingTimeTxt = selectedStatus;
+    NSString *socialStatus = [NSString stringWithFormat:NSLocalizedString(@"#Untechable for %@ %@ ", nil), timeInString, untechable.spendingTimeTxt];
+    untechable.socialStatus = socialStatus;
+    
+}
+
+#pragma mark -  Payment functions
+/**
+ * Check have valid subscription before creating untechable
+ */
+-(void)checkPayment{
+    //When haven't any sms/call in untechable
+    if( [untechable.commonFunctions haveCallOrSms:untechable.customizedContactsForCurrentSession] == NO ){
+        [self createUntechableAfterPaymentCheck];
+    } else {
+        if( [userPurchases isSubscriptionValid] ){
+            [self createUntechableAfterPaymentCheck];
+        } else{
+            [self showOrLoadProductsForPurchase:YES];
+        }
+    }
+}
+
+/**
+ * Create untechable in free,without paid services (call/sms notifications)
+ */
+-(void)createFreeUntechable{
+    //1-
+    //Remove all sms / call flags, user wants free untechable
+    [untechable.commonFunctions delCallAndSmsStatus:untechable.customizedContactsForCurrentSession];
+    
+    //2-
+    [self createUntechableAfterPaymentCheck];
+}
+
+/**
+ * Create untechable without payment
+ */
+-(void)createUntechableAfterPaymentCheck{
     // Background work
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
@@ -746,38 +812,130 @@
         }];
         
     });
+}
 
-}
 /**
- * navigate to ThankyouController screen when untech is created successfully
+ * When products loaded from apple store then show, else load 
+ * @param: For handling recursion deadlock we have this flag
  */
--( void ) goToThankyouScreen {
-    ThankyouController *thankyouScreen = [[ThankyouController alloc] init];
-    thankyouScreen.untechable = untechable;
-    [self.navigationController pushViewController:thankyouScreen animated:YES];
+-(void)showOrLoadProductsForPurchase:(BOOL)canLoadProduct {
+    
+    if( userPurchases.productArray.count > 1) {
+        [self showAlert:1];
+    } else if( canLoadProduct ){
+        
+        [userPurchases loadAllProducts:^(NSString *errorMsg){
+            
+            if( [errorMsg isEqualToString:@""] ){
+                [self showOrLoadProductsForPurchase:NO];
+            } else{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error occured while loading products"
+                                                                message:errorMsg
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Close"
+                                                      otherButtonTitles: nil];
+                alert.tag = 0;
+                [alert show];
+            }
+        }];
+        
+    } else {
+        [self changeNavigation:@"ERROR_ON_FINISH"];
+    }
 }
--( void )setTimeAcToCurVars {
-    NSInteger positionToShow = 0;
+
+/**
+ * Create untechable on response
+ */
+-(void)handlePurchaseProductResponse:(NSString *)msg{
+    if ( [msg isEqualToString:SUCCESS] ) {
+        [self createUntechableAfterPaymentCheck];
+    }
+    else if ( [msg isEqualToString:CANCEL] ) {
+        [self changeNavigation:@"ALERT_CANCEL"];
+    }
+    else{
+        [self changeNavigation:@"ERROR_ON_FINISH"];
+        [untechable.commonFunctions showAlert:@"Error in purchase" message:msg];
+    }
+}
+
+/**
+ * All ui alerts at one place
+ */
+-(void)showAlert:(int)tag{
+
+    //Show products in alert
+    if( tag == 1 ){
+        NSMutableDictionary *prodDic = userPurchases.productArray[0];
+        NSString *monthlySubs = [NSString stringWithFormat:@"%@ - %@",
+                                 [prodDic objectForKey:@"packagename"],
+                                 [prodDic objectForKey:@"packageprice"]];
+        
+        prodDic = userPurchases.productArray[1];
+        NSString *yearlySubs = [NSString stringWithFormat:@"%@ - %@",
+                                [prodDic objectForKey:@"packagename"],
+                                [prodDic objectForKey:@"packageprice"]];
+        
+        // Show alert before start of match to purchase our product
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchase Subscription"
+                                                        message:@"You can purchase monthly and yearly subscription"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Not now"
+                                              otherButtonTitles: monthlySubs, yearlySubs , @"Restore", nil];
+        alert.tag = tag;
+        [alert show];
+    }
+    //Show create untechable in free without sms/call, offer in alert
+    else if( tag == 2 ){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Note"
+                                                        message:@"App will not allow Call/SMS to your selected contact without premium subscription but Social Media Status and email we will be sent to your contacts"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles: @"Ok", nil];
+        alert.tag = tag;
+        [alert show];
+    }
     
-    untechable.startDate  = [untechable.commonFunctions convertNSDateToTimestamp: [[NSDate date] dateByAddingTimeInterval:(0)] ]; // current time
-    untechable.endDate  = [untechable.commonFunctions convertNSDateToTimestamp: [[NSDate date] dateByAddingTimeInterval:(timeDuration)] ]; // start time + selected time duration
-    
-    // the selected status from the setup screen would be set as default status on unetch now option
-    NSArray *customArrayOfStatuses = [[NSUserDefaults standardUserDefaults]objectForKey:@"cutomSpendingTimeTextAry"];
-    
-    for (int i = 0; i<customArrayOfStatuses.count; i++) {
-        if([customArrayOfStatuses[i] isEqualToString:untechable.spendingTimeTxt] ){
-            positionToShow = i;
-            break;
+}
+
+/**
+ * Alert view delegate functions
+ */
+-(void)alertView:(UIAlertView *) alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    //Alert tag = 0, while loading product cause an error prompts the alert
+    if( alertView.tag == 0 ) {
+        [self changeNavigation:@"ALERT_CANCEL"];
+    }
+    //Alert tag = 1, while showing products in alert
+    else if( alertView.tag == 1 ) {
+        
+        //Purchase monthly / yearly subscription
+        if(buttonIndex == 1 || buttonIndex == 2) {
+            NSString *productidentifier = ( buttonIndex == 1 ) ? PRO_MONTHLY_SUBS : PRO_YEARLY_SUBS;
+            [userPurchases purchaseProductID:productidentifier callBack:^(NSString *msg){
+                [self handlePurchaseProductResponse:msg];
+            }];
+        }
+        //Restore purchase
+        else if (buttonIndex == 3){
+            [userPurchases restorePurchase:^(NSString *msg){
+                [self handlePurchaseProductResponse:msg];
+            }];
+        }
+        else{
+            [self showAlert:2];
         }
     }
-   
-    NSString *selectedStatus = [customArrayOfStatuses objectAtIndex:positionToShow];
-    
-    //setting spendingTimeTxt to status got from setup screen.
-    untechable.spendingTimeTxt = selectedStatus;
-    NSString *socialStatus = [NSString stringWithFormat:@"#Untechable for %@ %@ ", timeInString, untechable.spendingTimeTxt];
-    untechable.socialStatus = socialStatus;
-    
+    //Create untechable without call / sms
+    else if( alertView.tag == 2 ){
+        if( buttonIndex == 1 ){
+            [self createFreeUntechable];
+        }
+        //Cancel
+        else {
+            [self changeNavigation:@"ALERT_CANCEL"];
+        }
+    }
 }
 @end

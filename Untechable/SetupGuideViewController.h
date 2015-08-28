@@ -23,4 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *usernameHintText;
 @property (weak, nonatomic) IBOutlet UILabel *phoneNumberHintText;
 
+@property (strong, nonatomic) IBOutlet UIButton *btnLblWwud;
+
+@property (strong, nonatomic) IBOutlet UIButton *btnLblPhoneNumber;
 @end

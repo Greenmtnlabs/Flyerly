@@ -57,14 +57,14 @@
     {
         self.navigationItem.hidesBackButton = YES;
         
-        // Center title __________________________________________________
+        // Center title
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
-        // Back Navigation button
+        // Back Button
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.shadowColor = [UIColor clearColor];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitle:NSLocalizedString(TITLE_NEXT_TXT, nil) forState:normal];
         [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
@@ -72,26 +72,24 @@
         
         UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         
-        [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
-        // }
-        // Right Navigation ______________________________________________
+        // adds left button to navigation bar
+        [self.navigationItem setLeftBarButtonItem:lefttBarButton];
+        
+        // Right Button
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-        
         nextButton.titleLabel.shadowColor = [UIColor clearColor];
-        
         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
-        
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [nextButton setTitle:TITLE_DONE_TXT forState:normal];
+        [nextButton setTitle:NSLocalizedString(TITLE_DONE_TXT, nil) forState:normal];
         [nextButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
         [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
-        
         nextButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
         
-        [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
+         // adds right button to navigation bar
+        [self.navigationItem setRightBarButtonItems:rightNavItems];
         
     }
 }
@@ -109,7 +107,7 @@
 -(void)onNext{
     untechable.hasFinished = YES;
     [untechable addOrUpdateInDatabase];
-    UIAlertView *congratesAlert = [[UIAlertView alloc]initWithTitle:@"Congratulation" message:@"Thank you for setting up your Untech settings. Now you can easily become Untechable whenever you need a break from technology in order to spend more time with the people & experiencing the things that are most important." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    UIAlertView *congratesAlert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Congratulation", nil)  message:NSLocalizedString(@"Thank you for setting up your Untech settings. Now you can easily become Untechable whenever you need a break from technology in order to spend more time with the people & experiencing the things that are most important.", nil) delegate:self cancelButtonTitle:NSLocalizedString(OK, nil) otherButtonTitles:nil, nil];
     [congratesAlert show];
     
 }

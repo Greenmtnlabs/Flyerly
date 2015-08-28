@@ -20,6 +20,7 @@
 
 @property (nonatomic,strong)  Untechable *untechable;
 @property (nonatomic,strong)  ContactsCustomizedModal *contactModal;
+@property (strong, nonatomic) IBOutlet UILabel *lblMessage;
 
 - (void) saveSpendingTimeText;
 @end

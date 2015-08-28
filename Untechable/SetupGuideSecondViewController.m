@@ -8,7 +8,7 @@
 
 #import "SetupGuideSecondViewController.h"
 #import "SetupGuideThirdView.h"
-
+#import "Common.h"
 
 @interface SetupGuideSecondViewController () {
     NSMutableArray *customSpendingTextAry;
@@ -24,12 +24,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self initializePickerData];
     
     //navigation related Stuff
     [self setNavigationBarItems];
     
     [self setDefaultUntechSpendingTimeText];
+    
+    [self initializePickerData];
+
+    [self applyLocalization];
+}
+
+-(void)applyLocalization{
+    [_lblUntechQuestion setText:NSLocalizedString(@"When you take time away from technology, what do you typically do or hope to do more of?", nil)];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,43 +55,20 @@
 
 -(void)initializePickerData {
     
-    NSArray *customSpendingTextArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];
+    customSpendingTextAry = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"]];
     
-    NSMutableOrderedSet * set = [NSMutableOrderedSet orderedSetWithArray:DEF_SPENDING_TIME_ARY ];
-    
-    [set unionSet:[NSSet setWithArray:customSpendingTextArray]];
-
-    customSpendingTextAry = [NSMutableArray arrayWithArray:[set array]];
-    
-    customSpendingTextAry = [self customValAtTheEnd:customSpendingTextAry];
-    NSString *temStr = ( [untechable.spendingTimeTxt isEqualToString:@""] ) ? @"e.g Spending time with family." : untechable.spendingTimeTxt;
-    [self setupDoctorsResearchLabel:temStr];//[customSpendingTextAry objectAtIndex:0]];
+    NSString *temStr = ( [untechable.spendingTimeTxt isEqualToString:@""] ) ? NSLocalizedString(@"e.g. Spending time with family", nil) : untechable.spendingTimeTxt;
+    [self setupDoctorsResearchLabel:temStr];
     
     self.setupSpendingTimeText.dataSource = self;
     self.setupSpendingTimeText.delegate = self;
 }
 
 /**
- We Need To Set "Custom" Message at the end so we need to sort the
- array.
- **/
--(NSMutableArray *) customValAtTheEnd:(NSMutableArray *) customText {
- 
-    int totalCount = ( int )customText.count - 1;
-    
-    int customTextPosition = ( int )[customText indexOfObject:@"Custom"];
-    
-    [customText removeObjectAtIndex:customTextPosition];
-    [customText insertObject:@"Custom" atIndex:totalCount];
-    
-    return customText;
-}
-
-/**
  Setting up Doctors Research Label to be shown
  **/
 -(void) setupDoctorsResearchLabel:(NSString *)msg {
-    _doctorsResearchLabel.text = [NSString stringWithFormat:@"Did you know that based on a study, people %@ have better relationships, better quality of sleep and in general are more emotionally balanced.", msg];
+    _doctorsResearchLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Did you know that based on a study, people %@ have better relationships, better quality of sleep and in general are more emotionally balanced.", nil), msg];
 }
 
 #pragma - Mark UI PICKER VIEW Delegate Methods
@@ -106,7 +90,9 @@
 // Catpure the picker view selection
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
 
-    if( [[customSpendingTextAry objectAtIndex:row] isEqualToString:@"Custom"] ) {
+    customSpendingTextAry =  [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"]];
+
+    if( [[customSpendingTextAry objectAtIndex:row] isEqualToString:[customSpendingTextAry objectAtIndex:customSpendingTextAry.count-1]] ) {
         [self showAddFieldPopUp];
     } else  {
         [self setupDoctorsResearchLabel:[customSpendingTextAry objectAtIndex:row]];
@@ -175,7 +161,6 @@
 }
 
 
-
 #pragma - mark setting navigation bar related stuff
 -(void) setNavigationBarItems {
     
@@ -189,14 +174,14 @@
     {
         self.navigationItem.hidesBackButton = YES;
         
-        // Center title __________________________________________________
+        // Center title
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
         // Back Navigation button
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.shadowColor = [UIColor clearColor];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitle:NSLocalizedString(TITLE_BACK_TXT, nil) forState:normal];
         [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
@@ -204,9 +189,10 @@
         
         UIBarButtonItem *lefttBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         
-        [self.navigationItem setLeftBarButtonItem:lefttBarButton];//Left button ___________
+        // adds left button to navigation bar
+        [self.navigationItem setLeftBarButtonItem:lefttBarButton];
 
-        // Right Navigation ______________________________________________
+        // Right Navigation Button
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         
         nextButton.titleLabel.shadowColor = [UIColor clearColor];
@@ -214,7 +200,7 @@
         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
 
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
+        [nextButton setTitle:NSLocalizedString(TITLE_NEXT_TXT, nil) forState:normal];
         [nextButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
         [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
@@ -223,15 +209,9 @@
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
         
-        [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
+        // adds right button to navigation bar
+        [self.navigationItem setRightBarButtonItems:rightNavItems];
         
-    }
-    //checking whether array is empty or not
-     NSArray *customSpendingTextArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"];
-    if( customSpendingTextArray == nil ) {
-        // inserting values in our pickerview's data source.
-        [[NSUserDefaults standardUserDefaults] setObject:customSpendingTextAry forKey:@"cutomSpendingTimeTextAry"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 

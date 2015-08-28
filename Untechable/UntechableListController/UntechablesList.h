@@ -10,7 +10,7 @@
 #import "Untechable.h"
 #import "Reachability.h"
 
-@interface UntechablesList : UIViewController <UITableViewDelegate,UITableViewDataSource> {
+@interface UntechablesList : UIViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate> {
     UIButton *newUntechableButton;
     UIButton *settingsButton;
     Untechable *untechable;

@@ -23,4 +23,5 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *setupSpendingTimeText;
 @property (weak, nonatomic) IBOutlet UILabel *doctorsResearchLabel;
 
+@property (strong, nonatomic) IBOutlet UILabel *lblUntechQuestion;
 @end

@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SetupGuideSecondViewController">
             <connections>
                 <outlet property="doctorsResearchLabel" destination="Oza-5Y-MF3" id="OY5-KY-M0R"/>
+                <outlet property="lblUntechQuestion" destination="beE-63-vlL" id="v3W-aU-Au5"/>
                 <outlet property="setupSpendingTimeText" destination="XGp-dh-10q" id="ykm-Xm-SgO"/>
                 <outlet property="view" destination="79C-fk-0Vv" id="zTg-NE-HuQ"/>
             </connections>
@@ -28,22 +29,22 @@
                         <constraint firstAttribute="height" constant="162" id="48q-dD-ySi"/>
                     </constraints>
                 </pickerView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oza-5Y-MF3">
-                    <rect key="frame" x="0.0" y="367" width="320" height="113"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="113" id="sGE-8x-A4i"/>
-                    </constraints>
-                    <string key="text">Did you know that based on a study, people who remove themselves from technology have better relationships, better quality of sleep and in general are more emotionally balanced.</string>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.25882352939999997" green="0.96862745100000003" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When you take time away from technology, what do you typically do or hope to do more of?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="beE-63-vlL">
                     <rect key="frame" x="0.0" y="114" width="320" height="67"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="67" id="0Lj-LI-yBo"/>
                     </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.25882352939999997" green="0.96862745100000003" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oza-5Y-MF3">
+                    <rect key="frame" x="0.0" y="367" width="320" height="113"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="113" id="sGE-8x-A4i"/>
+                    </constraints>
+                    <string key="text">Did you know that based on a study, people who remove themselves from technology have better relationships, better quality of sleep and in general are more emotionally balanced.</string>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.25882352939999997" green="0.96862745100000003" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>

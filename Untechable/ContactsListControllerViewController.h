@@ -21,6 +21,8 @@
 
 @property (nonatomic,strong)  Untechable *untechable;
 
+@property (strong, nonatomic) IBOutlet UILabel *selectContactStr;
+
 //Array of all contacts (extracted from phonebook)
 @property(nonatomic,strong) NSMutableArray *mobileContactsArray;
 
@@ -34,5 +36,6 @@
 
 @property(nonatomic,strong) IBOutlet UITextField *searchTextField;
 
+@property (strong, nonatomic) IBOutlet UILabel *lblSearchMessage;
 -(void)onNext;
 @end

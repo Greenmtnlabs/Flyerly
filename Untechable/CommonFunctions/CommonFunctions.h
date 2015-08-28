@@ -40,4 +40,9 @@
 -(NSString *)standarizePhoneNumber:(NSString *)phoneNumber;
 
 -(BOOL)isFacebookLoggedIn:(NSString *)fbAuthExpiryTs;
+
+-(NSMutableArray *)countCallAndSms:(NSMutableArray *)customizedContactsForCurrentSession breakIfFound:(BOOL)breakIfFound;
+-(BOOL)haveCallOrSms:(NSMutableArray *)customizedContactsForCurrentSession;
+
+-(void)delCallAndSmsStatus:(NSMutableArray *)customizedContactsForCurrentSession;
 @end
