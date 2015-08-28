@@ -79,7 +79,7 @@
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.shadowColor = [UIColor clearColor];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitle:NSLocalizedString(TITLE_BACK_TXT,  nil) forState:normal];
         [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
         
@@ -92,7 +92,7 @@
         nextButton.titleLabel.shadowColor = [UIColor clearColor];
         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [nextButton setTitle:TITLE_EDIT_TEXT forState:normal];
+        [nextButton setTitle:NSLocalizedString(TITLE_EDIT_TEXT, nil) forState:normal];
         [nextButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
         [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
@@ -160,10 +160,10 @@
     if( indexPath.row == 0 ){
         
         // set first cell to show user name
-        cell.socialNetworkName.text = @"Name";
+        cell.socialNetworkName.text = NSLocalizedString(@"Name", nil);
         cell.socialNetworkImage.image = [UIImage imageNamed:@"user_img"];
         cell.loginStatus.text = untechable.userName;
-        [cell.socialNetworkButton setTitle:@"Edit" forState:UIControlStateNormal];
+        [cell.socialNetworkButton setTitle:NSLocalizedString(TITLE_EDIT_TEXT, nil) forState:UIControlStateNormal];
         [cell.socialNetworkButton addTarget:self action:@selector(onEditName)
                            forControlEvents:UIControlEventTouchUpInside];
         
@@ -223,7 +223,7 @@
     
     UIButton *emailButton = (UIButton *) sender;
     
-    if ( [emailButton.titleLabel.text isEqualToString:@"Log Out"] ){
+    if ( [emailButton.titleLabel.text isEqualToString:NSLocalizedString(@"Log Out", nil)] ){
         untechable.email = @"";
         untechable.password = @"";
         
@@ -234,12 +234,12 @@
             settingCell = (SettingsCellView*)[self.socialNetworksTable cellForRowAtIndexPath:indexPath];
         }
         
-        [emailButton setTitle:@"Log In" forState:UIControlStateNormal];
+        [emailButton setTitle:NSLocalizedString(@"Log In", nil) forState:UIControlStateNormal];
         
-        [settingCell.loginStatus setText:@"Logged Out"];
+        [settingCell.loginStatus setText:NSLocalizedString(@"Logged Out", nil)];
     }
     
-    if ( [emailButton.titleLabel.text isEqualToString:@"Log In"] ){
+    if ( [emailButton.titleLabel.text isEqualToString:NSLocalizedString(@"Log In", nil)] ){
         EmailSettingController *emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
         emailSettingController.untechable = untechable;
         emailSettingController.comingFrom = @"SettingsScreen";
@@ -261,10 +261,10 @@
 
 
 -(void)onEditName{
-    editNameAlert = [[UIAlertView alloc] initWithTitle:@"Put in your name below. This will be used to identify yourself to friends."
+    editNameAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Put in your name below. This will be used to identify yourself to friends.", nil)
                                                  message:@""
                                                 delegate:self
-                                       cancelButtonTitle:@"Done"
+                                       cancelButtonTitle:NSLocalizedString(TITLE_DONE_TXT, nil)
                                        otherButtonTitles:nil, nil];
 
     editNameAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
@@ -272,7 +272,7 @@
     UITextField * nameField = [editNameAlert textFieldAtIndex:0];
     nameField.text = untechable.userName;
     nameField.keyboardType = UIKeyboardTypeTwitter;
-    nameField.placeholder = @"Enter Name";
+    nameField.placeholder = NSLocalizedString(@"Enter Name", nil);
 
     [editNameAlert show];
 }

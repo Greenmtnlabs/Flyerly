@@ -124,3 +124,13 @@
 
 // ContactCustomizeDetailsControlelrViewController
 "Calls and Texts required premium subscription." = "Calls and Texts required premium subscription.";
+
+// SettingsViewController
+"Log Out" = "Log Out";
+"Logged Out" = "Logged Out";
+"Log In" = "Log In";
+"Logged In" = "Logged In";
+"Put in your name below. This will be used to identify yourself to friends." = "Put in your name below. This will be used to identify yourself to friends.";
+"Enter Name" = "Enter Name";
+
+
