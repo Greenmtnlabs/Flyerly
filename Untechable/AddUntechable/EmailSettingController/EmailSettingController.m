@@ -555,7 +555,7 @@
     }
 }
 /**
- * Show / hide, a loding indicator in the right bar button.
+ * Show / hide, a loading indicator in the right bar button.
  */
 - (void)showHidLoadingIndicator:(BOOL)show {
     if( show ){

@@ -118,12 +118,12 @@
 - (void)twitterLogout {
     [[FHSTwitterEngine sharedEngine]clearAccessToken];
     
-    //Bello code will auto call insdie above function
+    //Below code will automatically call inside above function
     mTwitterAuth = @"";
     mTwOAuthTokenSecret = @"";
 }
 
-//RETURN TWITTER TOKEN [Note: Do not change the name of this functions, it will called from twitter libraries]
+//Return Twitter Token [Note: Do not change the name of this function, it will called from twitter libraries]
 - (NSString *)twLoadAccessToken {
     return [[NSUserDefaults standardUserDefaults]objectForKey:@"SavedAccessHTTPBody"];
 }
@@ -146,7 +146,7 @@
         
         //GO TO TWITTER AUTH LOGIN SCREEN
         UIViewController *loginController = [[FHSTwitterEngine sharedEngine]loginControllerWithCompletionHandler:^(BOOL success) {
-            NSLog( success ? @"Twitter, success login on twitter" : @"Twitter login failure.");
+            NSLog( success ? @"Twitter - successfully loggedin" : @"Twitter - login failed.");
             if ( success ){
                 [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:YES calledFor:@"Twitter"];
             }
@@ -179,7 +179,7 @@
     mTwOAuthTokenSecret =   oAuthTokenSecret;
 }
 
-//This functions return parmaeter value from url parmeter string
+//This function returns value from url parameter string
 //http:abc.com?a=1&b=c in this url a is target and body is the full url
 - (NSString *)extractValueForKey:(NSString *)target fromHTTPBody:(NSString *)body {
     if (body.length == 0) {
