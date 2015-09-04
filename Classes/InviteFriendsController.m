@@ -505,6 +505,9 @@ const int CONTACTS_TAB = 0;
  */
 - (IBAction)loadFacebookContacts:(UIButton *)sender{
     
+    [self loadEmailInvite];
+    return;
+    
     ACAccountStore *accountStore = [[ACAccountStore alloc] init];
     ACAccountType *facebookAccountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
     
@@ -519,6 +522,18 @@ const int CONTACTS_TAB = 0;
            [self shareViaIOSFacebook:NO];
           
         }
+}
+/**
+ * This method is used
+ * to invite via Email
+ */
+-(void)loadEmailInvite{
+    SHKItem *item;
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",flyerConfigurator.referralURL, userUniqueObjectId]];
+    
+    item = [SHKItem URL:url title:@"Invite Friends" contentType:nil];
+    item.text = @"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try?";
+    [SHKMail shareItem:item];
 }
 
 -(void) shareViaIOSFacebook:( BOOL ) withAccount {
