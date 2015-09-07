@@ -62,6 +62,13 @@ FlyerlyServer.setup = function( app ) {
 					body = body.replace(new RegExp('src=../js/"', 'g'),('src="'+config.url.greenMtnlabsUrl+'../js/')  );
 					body = body.replace(new RegExp('href="../index.html"', 'g'),('href="'+config.url.greenMtnlabsUrl+'../index.html"')  );
 
+					var appLink =  '<meta property="al:ios:url" content="http://app.flyerly.com/cs" /> \n';
+						appLink += '<meta property="al:ios:app_store_id" content="344130515" /> \n';
+						appLink += '<meta property="al:ios:app_name" content="Flyerly" /> \n';
+						appLink += '<meta property="og:title" content="Flyerly by Green Mtn Labs : NYC / Green Mountains" /> \n';
+						appLink += '<meta property="og:type" content="website" /> \n';
+					body = body.replace(new RegExp('</head>', 'g'), appLink+'</head>'  );
+
 				    res.end( body ) ;
 				  } else{
 					res.redirect( config.url.download );
