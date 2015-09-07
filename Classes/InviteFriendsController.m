@@ -27,7 +27,7 @@
     ACAccount *selectedAccount;
 }
 
-@synthesize uiTableView, emailsArray, contactsArray, selectedIdentifiers,contactsButton, facebookButton, twitterButton,  searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited;
+@synthesize uiTableView, emailsArray, contactsArray, selectedIdentifiers, emailButton, contactsButton, facebookButton, twitterButton,  searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited;
 @synthesize emailBackupArray, contactBackupArray, facebookBackupArray, twitterBackupArray,refrelText;
 @synthesize fbText;
 
@@ -255,9 +255,10 @@ const int CONTACTS_TAB = 0;
 
 -(IBAction)invite{
     
+    SHKItem *item;
     NSMutableArray *identifiers = [[NSMutableArray alloc] init];
     identifiers = selectedIdentifiers;
-    NSLog(@"%@,  selectedTab = %i",identifiers, selectedTab);
+    NSLog(@"identifiers = %@,  selectedTab = %i",identifiers, selectedTab);
 
     NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
     
@@ -267,7 +268,7 @@ const int CONTACTS_TAB = 0;
         if(selectedTab == 0){ // for SMS
             globle.accounts = [[NSMutableArray alloc] initWithArray:selectedIdentifiers];
             
-            SHKItem *item = [SHKItem text:sharingText];
+            item = [SHKItem text:sharingText];
             item.textMessageToRecipients = selectedIdentifiers;
             
             iosSharer = [[ SHKSharer alloc] init];
@@ -276,15 +277,15 @@ const int CONTACTS_TAB = 0;
    
         }else if(selectedTab == 1){ // for Facebook
             
-            SHKItem *i = [SHKItem text:sharingText];
+            item = [SHKItem text:sharingText];
             
-            NSArray *shareFormFields = [SHKFacebookCommon shareFormFieldsForItem:i];
+            NSArray *shareFormFields = [SHKFacebookCommon shareFormFieldsForItem:item];
             SHKFormController *rootView = [[SHKCONFIG(SHKFormControllerSubclass) alloc] initWithStyle:UITableViewStyleGrouped
                                                                                                 title:nil
                                                                                      rightButtonTitle:SHKLocalizedString(@"Send to Facebook")
                                            ];
             
-            [rootView addSection:shareFormFields header:nil footer:i.URL!=nil?i.URL.absoluteString:nil];
+            [rootView addSection:shareFormFields header:nil footer:item.URL!=nil?item.URL.absoluteString:nil];
             
             rootView.validateBlock = ^(SHKFormController *form) {
                 
@@ -304,11 +305,11 @@ const int CONTACTS_TAB = 0;
             
             [[SHK currentHelper] showViewController:rootView];
         } else if (selectedTab == 3) { // for Email
-            SHKItem *item;
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",flyerConfigurator.referralURL, userUniqueObjectId]];
-            
-            item = [SHKItem URL:url title:@"Invite Friends" contentType:nil];
+            item = [SHKItem URL:url title:@"Invite Friends" contentType:SHKURLContentTypeUndefined];
+            [item setMailToRecipients:identifiers];
             item.text = @"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try?";
+            // Share the item with my custom class
             [SHKMail shareItem:item];
         }
     } else {
@@ -327,11 +328,7 @@ const int CONTACTS_TAB = 0;
  */
 - (IBAction)loadLocalContacts:(UIButton *)sender{
     
-    // HERE WE HIGHLIGHT BUTTON SELECT AND
-    // UNSELECTED BUTTON
-    [contactsButton setSelected:YES];
-    [twitterButton setSelected:NO];
-    [facebookButton setSelected:NO];
+    
 
     [selectedIdentifiers removeAllObjects];
     if(selectedTab == CONTACTS_TAB && ! sender.tag == EMAIL_TAB){
@@ -353,6 +350,21 @@ const int CONTACTS_TAB = 0;
     
     selectedTab = sender.tag;//CONTACTS_TAB;
   
+    // HERE WE HIGHLIGHT BUTTON SELECT AND
+    // UNSELECTED BUTTON
+    if(selectedTab == CONTACTS_TAB){
+        [emailButton setSelected:NO];
+        [contactsButton setSelected:YES];
+    }
+    if(selectedTab == EMAIL_TAB){
+        [emailButton setSelected:YES];
+        [contactsButton setSelected:NO];
+    }
+    
+    
+    [twitterButton setSelected:NO];
+    [facebookButton setSelected:NO];
+    
     [self.uiTableView reloadData];
     // init contact array
     if(contactBackupArray){
@@ -693,6 +705,7 @@ const int CONTACTS_TAB = 0;
         [contactsButton setSelected:NO];
         [twitterButton setSelected:YES];
         [facebookButton setSelected:NO];
+        [emailButton setSelected:NO];
         
         self.selectedIdentifiers = nil;
         self.selectedIdentifiers = [[NSMutableArray alloc] init];

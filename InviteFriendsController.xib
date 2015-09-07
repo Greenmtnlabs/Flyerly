@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InviteFriendsController">
             <connections>
                 <outlet property="contactsButton" destination="8" id="198"/>
+                <outlet property="emailButton" destination="lVv-oE-l1Y" id="870-pn-F4B"/>
                 <outlet property="facebookButton" destination="11" id="199"/>
                 <outlet property="refrelText" destination="gJ8-BK-vCT" id="ZZ0-mA-r46"/>
                 <outlet property="searchTextField" destination="333" id="336"/>
