@@ -257,14 +257,14 @@ const int CONTACTS_TAB = 0;
     
     NSMutableArray *identifiers = [[NSMutableArray alloc] init];
     identifiers = selectedIdentifiers;
-    NSLog(@"%@",identifiers);
+    NSLog(@"%@,  selectedTab = %i",identifiers, selectedTab);
 
     NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
     
     if([identifiers count] > 0){
         
         // Send invitations
-        if(selectedTab == 0){
+        if(selectedTab == 0){ // for SMS
             globle.accounts = [[NSMutableArray alloc] initWithArray:selectedIdentifiers];
             
             SHKItem *item = [SHKItem text:sharingText];
@@ -273,9 +273,8 @@ const int CONTACTS_TAB = 0;
             iosSharer = [[ SHKSharer alloc] init];
             iosSharer = [SHKTextMessage shareItem:item];
             iosSharer.shareDelegate = self;
-            
-            
-        }else if(selectedTab == 1){
+   
+        }else if(selectedTab == 1){ // for Facebook
             
             SHKItem *i = [SHKItem text:sharingText];
             
@@ -287,32 +286,31 @@ const int CONTACTS_TAB = 0;
             
             [rootView addSection:shareFormFields header:nil footer:i.URL!=nil?i.URL.absoluteString:nil];
             
-            
             rootView.validateBlock = ^(SHKFormController *form) {
                 
                 // default does no checking and proceeds to share
                 [form saveForm];
                 
             };
-            
-            
+        
             rootView.saveBlock = ^(SHKFormController *form) {
-                
                 [self updateItemWithForm:form];
                 [self fbSend];
-                
             };
             
             rootView.cancelBlock = ^(SHKFormController *form) {
-                
                 [self fbCancel];
-                
             };
             
             [[SHK currentHelper] showViewController:rootView];
+        } else if (selectedTab == 3) { // for Email
+            SHKItem *item;
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",flyerConfigurator.referralURL, userUniqueObjectId]];
             
+            item = [SHKItem URL:url title:@"Invite Friends" contentType:nil];
+            item.text = @"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try?";
+            [SHKMail shareItem:item];
         }
-        
     } else {
         [self showAlert:@"Please select any contact to invite !" message:@""];
     }
