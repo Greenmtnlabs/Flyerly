@@ -27,7 +27,7 @@
     ACAccount *selectedAccount;
 }
 
-@synthesize uiTableView, emailsArray, contactsArray, selectedIdentifiers, emailButton, contactsButton, facebookButton, twitterButton,  searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited;
+@synthesize uiTableView, emailsArray, contactsArray, selectedIdentifiers, emailButton, contactsButton, facebookButton, twitterButton,  searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited, emailInvited;
 @synthesize emailBackupArray, contactBackupArray, facebookBackupArray, twitterBackupArray,refrelText;
 @synthesize fbText;
 
@@ -174,6 +174,7 @@ const int CONTACTS_TAB = 0;
     self.iPhoneinvited = [[NSMutableArray alloc] init];
     self.fbinvited = [[NSMutableArray alloc] init];
     self.twitterInvited = [[NSMutableArray alloc] init];
+    self.emailInvited = [[NSMutableArray alloc] init];
 
     if (user[@"iphoneinvited"])
         self.iPhoneinvited  = user[@"iphoneinvited"];
@@ -183,6 +184,8 @@ const int CONTACTS_TAB = 0;
 
     if (user[@"tweetinvited"])
         twitterInvited = user[@"tweetinvited"];
+    if(user [@"emailinvited"])
+        self.emailInvited = user[@"emailinvited"];
    
     
     // Load device contacts
@@ -241,7 +244,9 @@ const int CONTACTS_TAB = 0;
         checkary = fbinvited;
     }else if(selectedTab == TWITTER_TAB){
         checkary = twitterInvited;
-    }else{
+    } else if (selectedTab == EMAIL_TAB){
+        checkary = emailInvited;
+    } else {
         checkary = iPhoneinvited;
     }
     
@@ -328,10 +333,9 @@ const int CONTACTS_TAB = 0;
  */
 - (IBAction)loadLocalContacts:(UIButton *)sender{
     
-    
-
     [selectedIdentifiers removeAllObjects];
-    if(selectedTab == CONTACTS_TAB && ! sender.tag == EMAIL_TAB){
+    
+    if( selectedTab == CONTACTS_TAB &&  sender.tag != EMAIL_TAB ){
         
         // INVITE BAR BUTTON
         UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
@@ -343,13 +347,13 @@ const int CONTACTS_TAB = 0;
         return;
     }
     
+    selectedTab = sender.tag;//CONTACTS_TAB;
+    
     [self showLoadingIndicator];
     
     self.selectedIdentifiers = nil;
     self.selectedIdentifiers = [[NSMutableArray alloc] init];
     
-    selectedTab = sender.tag;//CONTACTS_TAB;
-  
     // HERE WE HIGHLIGHT BUTTON SELECT AND
     // UNSELECTED BUTTON
     if(selectedTab == CONTACTS_TAB){
@@ -361,29 +365,35 @@ const int CONTACTS_TAB = 0;
         [contactsButton setSelected:NO];
     }
     
-    
     [twitterButton setSelected:NO];
     [facebookButton setSelected:NO];
     
-    [self.uiTableView reloadData];
-    // init contact array
-    if(contactBackupArray){
+    
+    // init email array
+    if( emailBackupArray ){
         
         // Reload table data after all the contacts get loaded
         contactsArray = nil;
-        contactsArray = contactBackupArray;
-  
+        if( selectedTab == CONTACTS_TAB ){
+            contactsArray = contactBackupArray;
+        } else if( selectedTab == EMAIL_TAB ){
+            emailsArray = emailBackupArray;
+        }
+        
         // Filter contacts on new tab selection
         [self onSearchClick:nil];
         
         [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
         [self hideLoadingIndicator];
         
-    } else {
-        emailsArray = [[NSMutableArray alloc] init];
+        
+    }
+    else {
         contactsArray = [[NSMutableArray alloc] init];
+        emailsArray = [[NSMutableArray alloc] init];
+        searchTextField.text = @"";
+        
         ABAddressBookRef m_addressbook = ABAddressBookCreateWithOptions(NULL, NULL);
-         searchTextField.text = @"";
         
         if (m_addressbook == NULL) {
             m_addressbook = ABAddressBookCreateWithOptions(NULL, NULL);
@@ -412,6 +422,7 @@ const int CONTACTS_TAB = 0;
             }
         }
     }
+
 }
 
 
@@ -469,9 +480,8 @@ const int CONTACTS_TAB = 0;
             }
         }
 
-        //For Phone number
+            //For Phone number
             NSString* mobileLabel;
-            
             for(CFIndex i = 0; i < ABMultiValueGetCount(phones); i++) {
                 
                 mobileLabel = (NSString*)CFBridgingRelease(ABMultiValueCopyLabelAtIndex(phones, i));
@@ -498,7 +508,9 @@ const int CONTACTS_TAB = 0;
                     break ;
                 }
             }
-        // For Email
+        
+        
+            // For Email
             for(CFIndex i = 0; i < ABMultiValueGetCount(emails); i++) {
                 modelForEmail.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(emails, i));
                 [emailsArray addObject:modelForEmail];
@@ -509,8 +521,10 @@ const int CONTACTS_TAB = 0;
     // Reload table data after all the contacts get loaded
     contactBackupArray = nil;
     contactBackupArray = contactsArray;
+    
     emailBackupArray = nil;
     emailBackupArray = emailsArray;
+    
     [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
     [self hideLoadingIndicator];
     
@@ -814,6 +828,7 @@ const int CONTACTS_TAB = 0;
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     int count = ((int)[[self getArrayOfSelectedTab] count]);
+    NSLog(@"selectedTab = %i , numberOfRowsInSection - count = %i", selectedTab, count );
     return  count;
 }
 
@@ -857,6 +872,7 @@ const int CONTACTS_TAB = 0;
         
         // GETTING DATA FROM RECEIVED DICTIONARY
         // SET OVER MODEL FROM DATA
+        NSLog(@"selectedTab = %i, indexPath.row = %i",selectedTab, indexPath.row);
        
         receivedDic = [self getArrayOfSelectedTab ][(indexPath.row)];
     }
@@ -1090,8 +1106,6 @@ const int CONTACTS_TAB = 0;
         return;
     }
     
-    
-    
     PFUser *user = [PFUser currentUser];
     
     // Here we Check Sharer for
@@ -1111,6 +1125,11 @@ const int CONTACTS_TAB = 0;
         user[@"iphoneinvited"] = iPhoneinvited;
         [self friendsInvited];
 
+    } else if ([sharer isKindOfClass:[SHKMail class]] == YES){
+        // HERE WE GET AND SET SELECTED EMAIL LIST
+        [emailInvited  addObjectsFromArray:selectedIdentifiers];
+        user[@"emailinvited"] = emailInvited;
+        [self friendsInvited];
     }
 
 

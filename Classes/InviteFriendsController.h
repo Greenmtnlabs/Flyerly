@@ -65,6 +65,7 @@
 @property(nonatomic,strong) NSMutableArray *fbinvited;
 @property(nonatomic,strong) NSMutableArray *twitterInvited;
 @property(nonatomic,strong) NSMutableArray *iPhoneinvited;
+@property(nonatomic,strong) NSMutableArray *emailInvited;
 
 @property(nonatomic,strong)NSString  *fbText;
 - (void)fbSend;
