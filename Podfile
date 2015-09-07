@@ -20,4 +20,7 @@ platform :ios, '7.0'
 	pod 'ParseFacebookUtils', '~> 1.7.4'
 
 	# Open SSL
-	pod 'OpenSSL', '~> 1.0.201' 
+	pod 'OpenSSL', '~> 1.0.201'
+
+    pod 'FBSDKCoreKit',  '4.1.0'
+    pod 'FBSDKShareKit', '4.1.0'
