@@ -51,10 +51,12 @@
 @property(nonatomic,strong) IBOutlet UITextField *searchTextField;
 
 @property(nonatomic,strong) IBOutlet UITableView *uiTableView;
+@property(nonatomic,strong) NSMutableArray *emailsArray;
 @property(nonatomic,strong) NSMutableArray *contactsArray;
 @property(nonatomic,strong) NSMutableArray *facebookArray;
 @property(nonatomic,strong) NSMutableArray *twitterArray;
 
+@property(nonatomic,strong) NSMutableArray *emailBackupArray;
 @property(nonatomic,strong) NSMutableArray *contactBackupArray;
 @property(nonatomic,strong) NSMutableArray *facebookBackupArray;
 @property(nonatomic,strong) NSMutableArray *twitterBackupArray;
@@ -71,6 +73,7 @@
 - (IBAction)loadLocalContacts:(UIButton *)sender;
 - (IBAction)loadFacebookContacts:(UIButton *)sender;
 - (IBAction)loadTwitterContacts:(UIButton *)sender;
+- (IBAction)loadEmailContacts:(id)sender;
 - (IBAction)onSearchClick:(UIButton *)sender;
 -(IBAction)goBack;
 -(IBAction)invite;
