@@ -329,16 +329,14 @@ const int CONTACTS_TAB = 0;
  */
 - (IBAction)loadLocalContacts:(UIButton *)sender{
     
-    
     // HERE WE HIGHLIGHT BUTTON SELECT AND
     // UNSELECTED BUTTON
     [contactsButton setSelected:YES];
     [twitterButton setSelected:NO];
     [facebookButton setSelected:NO];
 
-    
     [selectedIdentifiers removeAllObjects];
-    if(selectedTab == CONTACTS_TAB ){
+    if(selectedTab == CONTACTS_TAB && ! sender.tag == EMAIL_TAB){
         
         // INVITE BAR BUTTON
         UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
@@ -347,19 +345,6 @@ const int CONTACTS_TAB = 0;
         inviteButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
-
-        return;
-    }
-    
-    if(sender.tag == EMAIL_TAB){
-        // INVITE BAR BUTTON
-        UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-        [inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
-        [inviteButton setBackgroundImage:[UIImage imageNamed:@"invite_friend"] forState:UIControlStateNormal];
-        inviteButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
-        [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
-        
         return;
     }
     
@@ -369,9 +354,7 @@ const int CONTACTS_TAB = 0;
     self.selectedIdentifiers = [[NSMutableArray alloc] init];
     
     selectedTab = sender.tag;//CONTACTS_TAB;
-    
-    
-    
+  
     [self.uiTableView reloadData];
     // init contact array
     if(contactBackupArray){
@@ -380,7 +363,6 @@ const int CONTACTS_TAB = 0;
         contactsArray = nil;
         contactsArray = contactBackupArray;
   
-        
         // Filter contacts on new tab selection
         [self onSearchClick:nil];
         
@@ -451,7 +433,6 @@ const int CONTACTS_TAB = 0;
         CFStringRef firstName, lastName;
         firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
         lastName  = ABRecordCopyValue(ref, kABPersonLastNameProperty);
-        
         
         if(!firstName)
             firstName = (CFStringRef) @"";
@@ -933,24 +914,19 @@ const int CONTACTS_TAB = 0;
 	
 
     // HERE WE WORK FOR CONTACTS
-    if (selectedTab == 0) {
+    if (selectedTab == 0 || selectedTab == 3) {
         
         ContactsModel *model = [self getArrayOfSelectedTab][(indexPath.row)];
         
         //CHECK FOR ALREADY SELECTED
         if (model.status == 0) {
-            
             [model setInvitedStatus:1];
             [selectedIdentifiers addObject:model.description];
-            
-        }else if (model.status == 1) {
-            
+        } else if (model.status == 1) {
             [model setInvitedStatus:0];
-            
             //REMOVE FROM SENDING LIST
             [selectedIdentifiers removeObject:model.description];
         }
-        
     }
 
     // HERE WE WORK FOR FACEBOOK
