@@ -525,7 +525,7 @@ const int CONTACTS_TAB = 0;
 
            [self shareViaIOSFacebook:NO];
           
-        }
+       }
 }
 
 -(void) shareViaIOSFacebook:( BOOL ) withAccount {
@@ -681,20 +681,6 @@ const int CONTACTS_TAB = 0;
 }];
     
 }
-
-/**
- * This method is used
- * to invite via Email
- */
--(void)loadEmailInvite{
-    SHKItem *item;
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",flyerConfigurator.referralURL, userUniqueObjectId]];
-    
-    item = [SHKItem URL:url title:@"Invite Friends" contentType:nil];
-    item.text = @"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try?";
-    [SHKMail shareItem:item];
-}
-
 
 /**
  After one of twitter account is selected
