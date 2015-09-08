@@ -23,6 +23,7 @@
 #import "GADInterstitialDelegate.h"
 #import "InviteForPrint.h"
 #import "PrintViewController.h"
+#import "UserPurchases.h"
 
 
 @class SaveFlyerCell, Flyer, SigninController, RegisterController, InAppViewController, CreateFlyerController,ShareViewController,PrintViewController;

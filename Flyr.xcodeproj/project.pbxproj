@@ -1071,7 +1071,6 @@
 		49F109D2192C7926002B0CD4 /* CropVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F109D0192C7926002B0CD4 /* CropVideoViewController.xib */; };
 		49F5CA03192E11C200681C6E /* CropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F5CA02192E11C200681C6E /* CropView.m */; };
 		6501CAF0173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6501CAEF173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf */; };
-		6501CAF2173249C900A89E59 /* FlyerlyMainScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6501CAF1173249C900A89E59 /* FlyerlyMainScreen.xib */; };
 		654B255017202B1C0047C8F6 /* AfterUpdateController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 654B254F17202B1C0047C8F6 /* AfterUpdateController.xib */; };
 		654B255317202B360047C8F6 /* AfterUpdateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 654B255217202B360047C8F6 /* AfterUpdateController.m */; };
 		6560C1C51727FAF9005BE8DD /* grids.png in Resources */ = {isa = PBXBuildFile; fileRef = 6560C1C31727FAF9005BE8DD /* grids.png */; };
@@ -1157,6 +1156,7 @@
 		C31F67501B67855F0025FBBF /* Zmain_screenbg@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C31F674C1B67855F0025FBBF /* Zmain_screenbg@3x.jpg */; };
 		C31F67511B67855F0025FBBF /* Zmain_screenbg-568h@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C31F674D1B67855F0025FBBF /* Zmain_screenbg-568h@2x.jpg */; };
 		C32139D61A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32139D51A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib */; };
+		C33F80051B9F115500E7AFF9 /* FlyerlyMainScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33F80041B9F115500E7AFF9 /* FlyerlyMainScreen.xib */; };
 		C35350941B60CF5D00CF68F9 /* emoticon276zeimusu-Recorder-and-music.png in Resources */ = {isa = PBXBuildFile; fileRef = C35350791B60CF5D00CF68F9 /* emoticon276zeimusu-Recorder-and-music.png */; };
 		C35350951B60CF5D00CF68F9 /* emoticon268purplecar.png in Resources */ = {isa = PBXBuildFile; fileRef = C353507A1B60CF5D00CF68F9 /* emoticon268purplecar.png */; };
 		C35350961B60CF5D00CF68F9 /* emoticon275yellowglass.png in Resources */ = {isa = PBXBuildFile; fileRef = C353507B1B60CF5D00CF68F9 /* emoticon275yellowglass.png */; };
@@ -2654,7 +2654,6 @@
 		49F5CA01192E11C200681C6E /* CropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropView.h; sourceTree = "<group>"; };
 		49F5CA02192E11C200681C6E /* CropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropView.m; sourceTree = "<group>"; };
 		6501CAEF173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Swiss_721_Black_Extended_BT.ttf; path = Data/fonts/Swiss_721_Black_Extended_BT.ttf; sourceTree = "<group>"; };
-		6501CAF1173249C900A89E59 /* FlyerlyMainScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FlyerlyMainScreen.xib; path = ../FlyerlyMainScreen.xib; sourceTree = "<group>"; };
 		654B254F17202B1C0047C8F6 /* AfterUpdateController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AfterUpdateController.xib; path = ../AfterUpdateController.xib; sourceTree = "<group>"; };
 		654B255117202B360047C8F6 /* AfterUpdateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfterUpdateController.h; sourceTree = "<group>"; };
 		654B255217202B360047C8F6 /* AfterUpdateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfterUpdateController.m; sourceTree = "<group>"; };
@@ -2749,6 +2748,7 @@
 		C31F674C1B67855F0025FBBF /* Zmain_screenbg@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Zmain_screenbg@3x.jpg"; sourceTree = "<group>"; };
 		C31F674D1B67855F0025FBBF /* Zmain_screenbg-568h@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Zmain_screenbg-568h@2x.jpg"; sourceTree = "<group>"; };
 		C32139D51A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CropVideoViewController-iPhone6-Plus.xib"; sourceTree = "<group>"; };
+		C33F80041B9F115500E7AFF9 /* FlyerlyMainScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlyerlyMainScreen.xib; sourceTree = "<group>"; };
 		C35350791B60CF5D00CF68F9 /* emoticon276zeimusu-Recorder-and-music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon276zeimusu-Recorder-and-music.png"; sourceTree = "<group>"; };
 		C353507A1B60CF5D00CF68F9 /* emoticon268purplecar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoticon268purplecar.png; sourceTree = "<group>"; };
 		C353507B1B60CF5D00CF68F9 /* emoticon275yellowglass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoticon275yellowglass.png; sourceTree = "<group>"; };
@@ -4051,9 +4051,9 @@
 		20F3597B1888DBEE001376B6 /* FlyerlyMainScreen */ = {
 			isa = PBXGroup;
 			children = (
+				C33F80041B9F115500E7AFF9 /* FlyerlyMainScreen.xib */,
 				0DF3A2C1108DF1D200D6C887 /* FlyerlyMainScreen.h */,
 				0DF3A2C2108DF1D200D6C887 /* FlyerlyMainScreen.m */,
-				6501CAF1173249C900A89E59 /* FlyerlyMainScreen.xib */,
 			);
 			name = FlyerlyMainScreen;
 			sourceTree = "<group>";
@@ -5883,7 +5883,6 @@
 				C3766D011B5650B000B7F5B2 /* Template69.jpg in Resources */,
 				249F202D193F562C0072835E /* lock_icon@2x.png in Resources */,
 				202978981B4CFBE700F35E40 /* emoticon229-oh@2x.png in Resources */,
-				6501CAF2173249C900A89E59 /* FlyerlyMainScreen.xib in Resources */,
 				249F2063193F562C0072835E /* Zqemail_box@2x.png in Resources */,
 				246EF510193C515D004539B2 /* emoticon4@2x.png in Resources */,
 				365A9D1919AF697300E284B5 /* drawing_tab_size@2x.png in Resources */,
@@ -6222,6 +6221,7 @@
 				249F1FC8193F55E90072835E /* email_setting@2x.png in Resources */,
 				24218506194B4AEC00FDDA97 /* tennis-icon.png in Resources */,
 				24861F5619F9147100670F6D /* text_edit_selected@3x.png in Resources */,
+				C33F80051B9F115500E7AFF9 /* FlyerlyMainScreen.xib in Resources */,
 				24861EFC19F9147100670F6D /* facebook_share_selected@3x.png in Resources */,
 				0FE6F9B81770763200C726F7 /* pinned_flyer2@2x.png in Resources */,
 				246EF4F8193C515D004539B2 /* emoticon28@2x.png in Resources */,
