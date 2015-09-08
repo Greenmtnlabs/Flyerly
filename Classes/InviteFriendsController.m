@@ -26,10 +26,11 @@
     ACAccount *selectedAccount;
 }
 
-@synthesize uiTableView, contactsArray, selectedIdentifiers,contactsButton, facebookButton, twitterButton,  searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited;
-@synthesize contactBackupArray, facebookBackupArray, twitterBackupArray,refrelText;
+@synthesize uiTableView, emailsArray, contactsArray, selectedIdentifiers, emailButton, contactsButton, facebookButton, twitterButton,  searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited, emailInvited;
+@synthesize emailBackupArray, contactBackupArray, facebookBackupArray, twitterBackupArray,refrelText;
 @synthesize fbText;
 
+const int EMAIL_TAB = 3;
 const int TWITTER_TAB = 2;
 const int FACEBOOK_TAB = 1;
 const int CONTACTS_TAB = 0;
@@ -172,6 +173,7 @@ const int CONTACTS_TAB = 0;
     self.iPhoneinvited = [[NSMutableArray alloc] init];
     self.fbinvited = [[NSMutableArray alloc] init];
     self.twitterInvited = [[NSMutableArray alloc] init];
+    self.emailInvited = [[NSMutableArray alloc] init];
 
     if (user[@"iphoneinvited"])
         self.iPhoneinvited  = user[@"iphoneinvited"];
@@ -181,6 +183,8 @@ const int CONTACTS_TAB = 0;
 
     if (user[@"tweetinvited"])
         twitterInvited = user[@"tweetinvited"];
+    if(user [@"emailinvited"])
+        self.emailInvited = user[@"emailinvited"];
    
     
     // Load device contacts
@@ -239,7 +243,9 @@ const int CONTACTS_TAB = 0;
         checkary = fbinvited;
     }else if(selectedTab == TWITTER_TAB){
         checkary = twitterInvited;
-    }else{
+    } else if (selectedTab == EMAIL_TAB){
+        checkary = emailInvited;
+    } else {
         checkary = iPhoneinvited;
     }
     
@@ -253,38 +259,37 @@ const int CONTACTS_TAB = 0;
 
 -(IBAction)invite{
     
+    SHKItem *item;
     NSMutableArray *identifiers = [[NSMutableArray alloc] init];
     identifiers = selectedIdentifiers;
-    NSLog(@"%@",identifiers);
+    NSLog(@"identifiers = %@,  selectedTab = %i",identifiers, selectedTab);
 
     NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
     
     if([identifiers count] > 0){
         
         // Send invitations
-        if(selectedTab == 0){
+        if(selectedTab == 0){ // for SMS
             globle.accounts = [[NSMutableArray alloc] initWithArray:selectedIdentifiers];
             
-            SHKItem *item = [SHKItem text:sharingText];
+            item = [SHKItem text:sharingText];
             item.textMessageToRecipients = selectedIdentifiers;
             
             iosSharer = [[ SHKSharer alloc] init];
             iosSharer = [SHKTextMessage shareItem:item];
             iosSharer.shareDelegate = self;
+   
+        }else if(selectedTab == 1){ // for Facebook
             
+            item = [SHKItem text:sharingText];
             
-        }else if(selectedTab == 1){
-            
-            SHKItem *i = [SHKItem text:sharingText];
-            
-            NSArray *shareFormFields = [SHKFacebookCommon shareFormFieldsForItem:i];
+            NSArray *shareFormFields = [SHKFacebookCommon shareFormFieldsForItem:item];
             SHKFormController *rootView = [[SHKCONFIG(SHKFormControllerSubclass) alloc] initWithStyle:UITableViewStyleGrouped
                                                                                                 title:nil
                                                                                      rightButtonTitle:SHKLocalizedString(@"Send to Facebook")
                                            ];
             
-            [rootView addSection:shareFormFields header:nil footer:i.URL!=nil?i.URL.absoluteString:nil];
-            
+            [rootView addSection:shareFormFields header:nil footer:item.URL!=nil?item.URL.absoluteString:nil];
             
             rootView.validateBlock = ^(SHKFormController *form) {
                 
@@ -292,25 +297,25 @@ const int CONTACTS_TAB = 0;
                 [form saveForm];
                 
             };
-            
-            
+        
             rootView.saveBlock = ^(SHKFormController *form) {
-                
                 [self updateItemWithForm:form];
                 [self fbSend];
-                
             };
             
             rootView.cancelBlock = ^(SHKFormController *form) {
-                
                 [self fbCancel];
-                
             };
             
             [[SHK currentHelper] showViewController:rootView];
-            
+        } else if (selectedTab == 3) { // for Email
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",flyerConfigurator.referralURL, userUniqueObjectId]];
+            item = [SHKItem URL:url title:@"Invite Friends" contentType:SHKURLContentTypeUndefined];
+            [item setMailToRecipients:identifiers];
+            item.text = @"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try?";
+            // Share the item with my custom class
+            [SHKMail shareItem:item];
         }
-        
     } else {
         [self showAlert:@"Please select any contact to invite !" message:@""];
     }
@@ -327,16 +332,9 @@ const int CONTACTS_TAB = 0;
  */
 - (IBAction)loadLocalContacts:(UIButton *)sender{
     
-    
-    // HERE WE HIGHLIGHT BUTTON SELECT AND
-    // UNSELECTED BUTTON
-    [contactsButton setSelected:YES];
-    [twitterButton setSelected:NO];
-    [facebookButton setSelected:NO];
-
-    
     [selectedIdentifiers removeAllObjects];
-    if(selectedTab == CONTACTS_TAB){
+    
+    if( selectedTab == CONTACTS_TAB &&  sender.tag != EMAIL_TAB ){
         
         // INVITE BAR BUTTON
         UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
@@ -345,24 +343,41 @@ const int CONTACTS_TAB = 0;
         inviteButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
-
         return;
     }
+    
+    selectedTab = sender.tag;//CONTACTS_TAB;
+    
     [self showLoadingIndicator];
     
     self.selectedIdentifiers = nil;
     self.selectedIdentifiers = [[NSMutableArray alloc] init];
     
-    selectedTab = CONTACTS_TAB;
+    // HERE WE HIGHLIGHT BUTTON SELECT AND
+    // UNSELECTED BUTTON
+    if(selectedTab == CONTACTS_TAB){
+        [emailButton setSelected:NO];
+        [contactsButton setSelected:YES];
+    }
+    if(selectedTab == EMAIL_TAB){
+        [emailButton setSelected:YES];
+        [contactsButton setSelected:NO];
+    }
     
-    [self.uiTableView reloadData];
-    // init contact array
-    if(contactBackupArray){
+    [twitterButton setSelected:NO];
+    [facebookButton setSelected:NO];
+    
+    
+    // init email array
+    if( emailBackupArray ){
         
         // Reload table data after all the contacts get loaded
         contactsArray = nil;
-        contactsArray = contactBackupArray;
-  
+        if( selectedTab == CONTACTS_TAB ){
+            contactsArray = contactBackupArray;
+        } else if( selectedTab == EMAIL_TAB ){
+            emailsArray = emailBackupArray;
+        }
         
         // Filter contacts on new tab selection
         [self onSearchClick:nil];
@@ -370,11 +385,14 @@ const int CONTACTS_TAB = 0;
         [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
         [self hideLoadingIndicator];
         
-    } else {
-       
+        
+    }
+    else {
         contactsArray = [[NSMutableArray alloc] init];
+        emailsArray = [[NSMutableArray alloc] init];
+        searchTextField.text = @"";
+        
         ABAddressBookRef m_addressbook = ABAddressBookCreateWithOptions(NULL, NULL);
-         searchTextField.text = @"";
         
         if (m_addressbook == NULL) {
             m_addressbook = ABAddressBookCreateWithOptions(NULL, NULL);
@@ -403,6 +421,7 @@ const int CONTACTS_TAB = 0;
             }
         }
     }
+
 }
 
 
@@ -419,18 +438,21 @@ const int CONTACTS_TAB = 0;
     CFIndex nPeople = ABAddressBookGetPersonCount(m_addressbook);
     
     for (int i=0;i < nPeople;i++) {
+    
         ContactsModel *model = [[ContactsModel alloc] init];
+        ContactsModel *modelForEmail = [[ContactsModel alloc] init];
         
         model.others = @"";
+        modelForEmail.others = @"";
         
         ABRecordRef ref = CFArrayGetValueAtIndex(allPeople,i);
         
         //For username and surname
         ABMultiValueRef phones =(__bridge ABMultiValueRef)((NSString*)CFBridgingRelease(ABRecordCopyValue(ref, kABPersonPhoneProperty)));
+        ABMultiValueRef emails =(__bridge ABMultiValueRef)((NSString*)CFBridgingRelease(ABRecordCopyValue(ref, kABPersonEmailProperty)));
         CFStringRef firstName, lastName;
         firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
         lastName  = ABRecordCopyValue(ref, kABPersonLastNameProperty);
-        
         
         if(!firstName)
             firstName = (CFStringRef) @"";
@@ -438,7 +460,8 @@ const int CONTACTS_TAB = 0;
             lastName = (CFStringRef) @"";
         
         model.name = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
-        
+        modelForEmail.name = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+
         // For contact picture
         UIImage *contactPicture;
         
@@ -446,51 +469,61 @@ const int CONTACTS_TAB = 0;
             if ( &ABPersonCopyImageDataWithFormat != nil ) {
                 // iOS >= 4.1
                 contactPicture = [UIImage imageWithData:(NSData *)CFBridgingRelease(ABPersonCopyImageDataWithFormat(ref, kABPersonImageFormatThumbnail))];
-               model.img = contactPicture;
+                model.img = contactPicture;
+                modelForEmail.img = contactPicture;
             } else {
                 // iOS < 4.1
                 contactPicture = [UIImage imageWithData:(NSData *)CFBridgingRelease(ABPersonCopyImageData(ref))];
                 model.img = contactPicture;
+                modelForEmail.img = contactPicture;
             }
         }
-        
-        
-        
-        //For Phone number
-        NSString* mobileLabel;
-        
-        for(CFIndex i = 0; i < ABMultiValueGetCount(phones); i++) {
-            
-            mobileLabel = (NSString*)CFBridgingRelease(ABMultiValueCopyLabelAtIndex(phones, i));
-            if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
-            {
-                model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                [contactsArray addObject:model];
-                break ;
+
+            //For Phone number
+            NSString* mobileLabel;
+            for(CFIndex i = 0; i < ABMultiValueGetCount(phones); i++) {
+                
+                mobileLabel = (NSString*)CFBridgingRelease(ABMultiValueCopyLabelAtIndex(phones, i));
+                if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
+                {
+                    model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
+                    [contactsArray addObject:model];
+                    break ;
+                }
+                else if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel])
+                {
+                    model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
+                    [contactsArray addObject:model];
+                    break ;
+                }else if ([mobileLabel isEqualToString:(NSString*)kABHomeLabel])
+                {
+                    model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
+                    [contactsArray addObject:model];
+                    break ;
+                }else if ([mobileLabel isEqualToString:(NSString*)kABWorkLabel])
+                {
+                    model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
+                    [contactsArray addObject:model];
+                    break ;
+                }
             }
-            else if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel])
-            {
-                model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                [contactsArray addObject:model];
-                break ;
-            }else if ([mobileLabel isEqualToString:(NSString*)kABHomeLabel])
-            {
-                model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                [contactsArray addObject:model];
-                break ;
-            }else if ([mobileLabel isEqualToString:(NSString*)kABWorkLabel])
-            {
-                model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                [contactsArray addObject:model];
-                break ;
-            }
-        }
         
-    }
+        
+            // For Email
+            for(CFIndex i = 0; i < ABMultiValueGetCount(emails); i++) {
+                modelForEmail.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(emails, i));
+                [emailsArray addObject:modelForEmail];
+                break;
+            }
+         }
     
     // Reload table data after all the contacts get loaded
     contactBackupArray = nil;
     contactBackupArray = contactsArray;
+    
+    emailBackupArray = nil;
+    emailBackupArray = emailsArray;
+    
     [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
     [self hideLoadingIndicator];
     
@@ -512,6 +545,7 @@ const int CONTACTS_TAB = 0;
     [FBSDKAppInviteDialog showWithContent:content
                                        delegate:self];
 }
+
 
 -(void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didCompleteWithResults:(NSDictionary *)results {
     NSLog(@"app invite dialog did complete");
@@ -686,6 +720,7 @@ const int CONTACTS_TAB = 0;
         [contactsButton setSelected:NO];
         [twitterButton setSelected:YES];
         [facebookButton setSelected:NO];
+        [emailButton setSelected:NO];
         
         self.selectedIdentifiers = nil;
         self.selectedIdentifiers = [[NSMutableArray alloc] init];
@@ -772,6 +807,8 @@ const int CONTACTS_TAB = 0;
 -(NSArray *) getArrayOfSelectedTab{
     if(selectedTab == CONTACTS_TAB)
         return contactsArray;
+    else if (selectedTab == EMAIL_TAB)
+        return emailsArray;
     else if(selectedTab == FACEBOOK_TAB)
         return facebookArray;
     else
@@ -781,6 +818,8 @@ const int CONTACTS_TAB = 0;
 -(NSArray *) getBackupArrayOfSelectedTab{
     if(selectedTab == CONTACTS_TAB)
         return contactBackupArray;
+    else if (selectedTab == EMAIL_TAB)
+        return emailBackupArray;
     else if(selectedTab == FACEBOOK_TAB)
         return facebookBackupArray;
     else
@@ -790,6 +829,7 @@ const int CONTACTS_TAB = 0;
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     int count = ((int)[[self getArrayOfSelectedTab] count]);
+    NSLog(@"selectedTab = %i , numberOfRowsInSection - count = %i", selectedTab, count );
     return  count;
 }
 
@@ -833,6 +873,7 @@ const int CONTACTS_TAB = 0;
         
         // GETTING DATA FROM RECEIVED DICTIONARY
         // SET OVER MODEL FROM DATA
+        NSLog(@"selectedTab = %i, indexPath.row = %i",selectedTab, indexPath.row);
        
         receivedDic = [self getArrayOfSelectedTab ][(indexPath.row)];
     }
@@ -887,24 +928,19 @@ const int CONTACTS_TAB = 0;
 	
 
     // HERE WE WORK FOR CONTACTS
-    if (selectedTab == 0) {
+    if (selectedTab == 0 || selectedTab == 3) {
         
         ContactsModel *model = [self getArrayOfSelectedTab][(indexPath.row)];
         
         //CHECK FOR ALREADY SELECTED
         if (model.status == 0) {
-            
             [model setInvitedStatus:1];
             [selectedIdentifiers addObject:model.description];
-            
-        }else if (model.status == 1) {
-            
+        } else if (model.status == 1) {
             [model setInvitedStatus:0];
-            
             //REMOVE FROM SENDING LIST
             [selectedIdentifiers removeObject:model.description];
         }
-        
     }
 
     // HERE WE WORK FOR FACEBOOK
@@ -1004,6 +1040,8 @@ const int CONTACTS_TAB = 0;
             facebookArray = facebookBackupArray;
         else if(selectedTab == TWITTER_TAB)
             twitterArray = twitterBackupArray;
+        else if (selectedTab == EMAIL_TAB)
+            contactsArray = emailBackupArray;
         
         [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
        
@@ -1027,6 +1065,8 @@ const int CONTACTS_TAB = 0;
     
     if(selectedTab == CONTACTS_TAB)
         contactsArray = filteredArray;
+    if(selectedTab == EMAIL_TAB)
+        emailsArray = filteredArray;
     else if (selectedTab == FACEBOOK_TAB)
         facebookArray = filteredArray;
     else if(selectedTab == TWITTER_TAB)
@@ -1067,8 +1107,6 @@ const int CONTACTS_TAB = 0;
         return;
     }
     
-    
-    
     PFUser *user = [PFUser currentUser];
     
     // Here we Check Sharer for
@@ -1088,6 +1126,11 @@ const int CONTACTS_TAB = 0;
         user[@"iphoneinvited"] = iPhoneinvited;
         [self friendsInvited];
 
+    } else if ([sharer isKindOfClass:[SHKMail class]] == YES){
+        // HERE WE GET AND SET SELECTED EMAIL LIST
+        [emailInvited  addObjectsFromArray:selectedIdentifiers];
+        user[@"emailinvited"] = emailInvited;
+        [self friendsInvited];
     }
 
 

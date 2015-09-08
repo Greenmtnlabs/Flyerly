@@ -180,15 +180,6 @@
     
     [selectedIdentifiers removeAllObjects];
     
-    // INVITE BAR BUTTON
-    /*UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
-    [inviteButton setBackgroundImage:[UIImage imageNamed:@"invite_friend"] forState:UIControlStateNormal];
-    inviteButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];*/
-    //return;
-    
     [self showLoadingIndicator];
     
     self.selectedIdentifiers = nil;
@@ -320,7 +311,6 @@
             model.zip = [contactInfoDict objectForKey:@"zip"];
         
             //For username and surname
-            ABMultiValueRef phones =(__bridge ABMultiValueRef)((NSString*)CFBridgingRelease(ABRecordCopyValue(ref, kABPersonPhoneProperty)));
             CFStringRef firstName, lastName;
             firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
             lastName  = ABRecordCopyValue(ref, kABPersonLastNameProperty);
@@ -352,35 +342,6 @@
                 [contactsArray addObject:model];
                 
             }
-            
-            //For Phone number
-            /*NSString* mobileLabel;
-            for(CFIndex i = 0; i < ABMultiValueGetCount(phones); i++) {
-                
-                mobileLabel = (NSString*)CFBridgingRelease(ABMultiValueCopyLabelAtIndex(phones, i));
-                if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
-                {
-                    model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                    [contactsArray addObject:model];
-                    break ;
-                }
-                else if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel])
-                {
-                    model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                    [contactsArray addObject:model];
-                    break ;
-                }else if ([mobileLabel isEqualToString:(NSString*)kABHomeLabel])
-                {
-                    model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                    [contactsArray addObject:model];
-                    break ;
-                }else if ([mobileLabel isEqualToString:(NSString*)kABWorkLabel])
-                {
-                    model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                    [contactsArray addObject:model];
-                    break ;
-                }
-            }*/
         }
     }
     
