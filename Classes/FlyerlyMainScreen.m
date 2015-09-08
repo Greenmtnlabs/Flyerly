@@ -8,13 +8,10 @@
 
 #import "FlyerlyMainScreen.h"
 #import "UserPurchases.h"
-#import "UserVoice.h"
-
 
 @implementation FlyerlyMainScreen
 
 @synthesize sharePanel,tView;
-@synthesize searchTextField;
 @synthesize flyerPaths;
 @synthesize flyer, signInAlert;
 
@@ -27,28 +24,17 @@ id lastShareBtnSender;
     [super viewDidLoad];
     lastShareBtnSender = nil;
     
-    UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
-    [UserVoice initialize:config];
-    
-    searching = NO;
-
     [self.view setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
     
     self.navigationItem.hidesBackButton = YES;
-    searchTextField.font = [UIFont systemFontOfSize:12.0];
-    searchTextField.textAlignment = NSTextAlignmentLeft;
-    searchTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    [searchTextField setBorderStyle:UITextBorderStyleRoundedRect];
-    [searchTextField setReturnKeyType:UIReturnKeyDone];
-    
+
     [self.tView setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
 	tView.dataSource = self;
 	tView.delegate = self;
     [self.view addSubview:tView];
     [self.tView setBackgroundView:nil];
     [self.tView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    [searchTextField addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingChanged];
-    searchTextField.borderStyle = nil;
+
     
     lockFlyer = NO; //Unlock save flyer feature for all users
     
@@ -72,8 +58,6 @@ id lastShareBtnSender;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    searching = NO;
-    searchTextField.text = @"";
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -90,37 +74,9 @@ id lastShareBtnSender;
 #pragma mark  Text Field Delegete
 
 - (void)textFieldTapped:(id)sender {
-    
-    if (searchTextField.text == nil || [searchTextField.text isEqualToString:@""])
-    {
-        searching = NO;
-        [self.tView reloadData];
-        [searchTextField resignFirstResponder];
-    }else{
-        searching = YES;
-        [self searchTableView:[NSString stringWithFormat:@"%@", ((UITextField *)sender).text]];
-    }
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-
-    if([string isEqualToString:@"\n"]){
-        if([searchTextField canResignFirstResponder])
-        {
-            [searchTextField resignFirstResponder];
-        }
-        return NO;
-    }
-    
-    if(searching){
-        if([string isEqualToString:@"\n"]){
-            
-            if([searchTextField canResignFirstResponder])
-            {
-                [searchTextField resignFirstResponder];
-            }
-        }
-    }
     return YES;
 }
 
@@ -128,35 +84,6 @@ id lastShareBtnSender;
 #pragma mark  custom Methods
 
 - (void) searchTableView:(NSString *)schTxt {
-	NSString *sTemp;
-    NSString *sTemp1;
-	NSString *sTemp2;
-
-	NSString *searchText = searchTextField.text;
-   
-	searchFlyerPaths = [[NSMutableArray alloc] init];
-	
-	for (int i =0 ; i < [flyerPaths count] ; i++)
-	{
-		
-        Flyer *fly = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:i] setDirectory:NO];
-        
- 		sTemp = [fly getFlyerTitle];
-        sTemp1 = [fly getFlyerDescription];
-        sTemp2 = [fly getFlyerDate];
-
-        
-        NSRange titleResultsRange = [sTemp rangeOfString:searchText options:NSCaseInsensitiveSearch];
-        NSRange titleResultsRange1 = [sTemp1 rangeOfString:searchText options:NSCaseInsensitiveSearch];
-        NSRange titleResultsRange2 = [sTemp2 rangeOfString:searchText options:NSCaseInsensitiveSearch];
-
-        if (titleResultsRange.length > 0 || titleResultsRange1.length > 0 || titleResultsRange2.length > 0){
-
-            [searchFlyerPaths addObject:[flyerPaths objectAtIndex:i]];
-        }
-        
-
-	}
     [self.tView reloadData];
 }
 
@@ -218,28 +145,17 @@ id lastShareBtnSender;
 
 
 -(NSArray *)leftBarItems{
-    
-    // Create left bar help button
-    helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
-    [helpButton setImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
-    helpButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
-   
-    backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"home_button"] forState:UIControlStateNormal];
-    [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-    backButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    [inviteButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [inviteButton setBackgroundImage:[UIImage imageNamed:@"home_button"] forState:UIControlStateNormal];
+    [inviteButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    inviteButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
 
-    return [NSMutableArray arrayWithObjects:backBarButton,leftBarButton,nil];
+    return [NSMutableArray arrayWithObjects:backBarButton,nil];
 }
 
--(void)loadHelpController{
-    
-    [UserVoice presentUserVoiceInterfaceForParentViewController:self];
-}
+
 
 
 -(NSArray *)rightBarItems{
@@ -480,8 +396,7 @@ id lastShareBtnSender;
  */
 -(void)enableBtns:(BOOL)enable{
 
-    backButton.enabled = enable;
-    helpButton.enabled = enable;
+    inviteButton.enabled = enable;
     createButton.enabled = enable;
     rightUndoBarButton.enabled = enable;
     
@@ -513,12 +428,7 @@ id lastShareBtnSender;
 -(void)onShare:(id)sender {
     UIButton *clickButton = sender;
     NSInteger row = clickButton.tag; ///will get it from button tag
-    if([searchTextField.text isEqualToString:@""]) {
-        flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:row] setDirectory:NO];
-    } else{
-        flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:row] setDirectory:NO];
-    }
-    
+    flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:row] setDirectory:NO];
     
     if ( [[PFUser currentUser] sessionToken] ) {
         [self enableBtns:NO];
@@ -567,8 +477,7 @@ id lastShareBtnSender;
         shareviewcontroller.imageFileName = shareImagePath;
         shareviewcontroller.rightUndoBarButton = rightUndoBarButton;
         shareviewcontroller.shareButton = createButton;
-        shareviewcontroller.helpButton = helpButton;
-        shareviewcontroller.backButton = backButton;
+        shareviewcontroller.backButton = inviteButton;
         if( [shareviewcontroller.titleView.text isEqualToString:@"Flyer"] ) {
             shareviewcontroller.titleView.text = [flyer getFlyerTitle];
         }
