@@ -54,7 +54,6 @@
 
 @property(nonatomic, strong) GADInterstitial *interstitial;
 @property ( nonatomic, strong ) IBOutlet UITableView *tView;
-@property ( nonatomic, strong ) IBOutlet UITextField *searchTextField;
 @property ( nonatomic, strong ) NSMutableArray *flyerPaths;
 @property ( nonatomic, strong ) Flyer *flyer;
 @property (nonatomic, strong) UIView *sharePanel;
