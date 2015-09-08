@@ -181,6 +181,10 @@
 		204BC2E01A10E87700FEB946 /* Fonts-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204BC2DF1A10E87700FEB946 /* Fonts-iPhone6-Plus.xib */; };
 		204BC2E21A10E99800FEB946 /* Sizes-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204BC2E11A10E99800FEB946 /* Sizes-iPhone6-Plus.xib */; };
 		204BC2E41A10ED3000FEB946 /* Colours-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204BC2E31A10ED3000FEB946 /* Colours-iPhone6-Plus.xib */; };
+		204D690C1B9EFB7600C6732E /* invite_email_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 204D69081B9EFB7600C6732E /* invite_email_selected@2x.png */; };
+		204D690D1B9EFB7600C6732E /* invite_email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 204D69091B9EFB7600C6732E /* invite_email@2x.png */; };
+		204D690E1B9EFB7600C6732E /* invite_email@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 204D690A1B9EFB7600C6732E /* invite_email@3x.png */; };
+		204D690F1B9EFB7600C6732E /* invite_email_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 204D690B1B9EFB7600C6732E /* invite_email_selected@3x.png */; };
 		20563E131962D64200C206FD /* CutiveMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20563E0B1962D64200C206FD /* CutiveMono-Regular.ttf */; };
 		20563E151962D64200C206FD /* Lora-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20563E0D1962D64200C206FD /* Lora-Italic.ttf */; };
 		20563E161962D64200C206FD /* Monoton-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20563E0E1962D64200C206FD /* Monoton-Regular.ttf */; };
@@ -1684,6 +1688,10 @@
 		204BC2DF1A10E87700FEB946 /* Fonts-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Fonts-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		204BC2E11A10E99800FEB946 /* Sizes-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Sizes-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		204BC2E31A10ED3000FEB946 /* Colours-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Colours-iPhone6-Plus.xib"; sourceTree = "<group>"; };
+		204D69081B9EFB7600C6732E /* invite_email_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_email_selected@2x.png"; sourceTree = "<group>"; };
+		204D69091B9EFB7600C6732E /* invite_email@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_email@2x.png"; sourceTree = "<group>"; };
+		204D690A1B9EFB7600C6732E /* invite_email@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_email@3x.png"; sourceTree = "<group>"; };
+		204D690B1B9EFB7600C6732E /* invite_email_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_email_selected@3x.png"; sourceTree = "<group>"; };
 		20563E0B1962D64200C206FD /* CutiveMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CutiveMono-Regular.ttf"; path = "Data/fonts/CutiveMono-Regular.ttf"; sourceTree = "<group>"; };
 		20563E0D1962D64200C206FD /* Lora-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lora-Italic.ttf"; path = "Data/fonts/Lora-Italic.ttf"; sourceTree = "<group>"; };
 		20563E0E1962D64200C206FD /* Monoton-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Monoton-Regular.ttf"; path = "Data/fonts/Monoton-Regular.ttf"; sourceTree = "<group>"; };
@@ -3124,6 +3132,10 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				204D69081B9EFB7600C6732E /* invite_email_selected@2x.png */,
+				204D69091B9EFB7600C6732E /* invite_email@2x.png */,
+				204D690A1B9EFB7600C6732E /* invite_email@3x.png */,
+				204D690B1B9EFB7600C6732E /* invite_email_selected@3x.png */,
 				C31F67461B676E6F0025FBBF /* Zwelcome_bg@2x.jpg */,
 				C31F67471B676E6F0025FBBF /* Zwelcome_bg@3x.jpg */,
 				C31E92A21B566207004DF193 /* BordersIcons */,
@@ -6016,6 +6028,7 @@
 				24861EE519F9147100670F6D /* delete_button@3x.png in Resources */,
 				24861F0619F9147100670F6D /* flyerlylogo@3x.png in Resources */,
 				C35351151B60F68600CF68F9 /* Template98.jpg in Resources */,
+				204D690D1B9EFB7600C6732E /* invite_email@2x.png in Resources */,
 				202978921B4CFBE700F35E40 /* emoticon223-look_down@2x.png in Resources */,
 				C3D8DD921B53DBE1006C2A9F /* b10.png in Resources */,
 				20F7371A195D882000B24C1D /* Junction.ttf in Resources */,
@@ -6288,6 +6301,7 @@
 				24861EDC19F9147100670F6D /* color_tab_selected@3x.png in Resources */,
 				365A9D1719AF697300E284B5 /* drawing_tab_pencil@2x.png in Resources */,
 				C35351041B60F68600CF68F9 /* Template120.jpg in Resources */,
+				204D690E1B9EFB7600C6732E /* invite_email@3x.png in Resources */,
 				C3766CE41B5650B000B7F5B2 /* Template40.jpg in Resources */,
 				C353512D1B61008200CF68F9 /* icon0.jpg in Resources */,
 				C31E92EC1B566229004DF193 /* icon85.jpg in Resources */,
@@ -6505,6 +6519,7 @@
 				24861EC919F9147100670F6D /* buy@3x.png in Resources */,
 				242184A8194B4AEC00FDDA97 /* emoticon154@2x.png in Resources */,
 				C35350AD1B60CF5D00CF68F9 /* emoticon273TheStructorr-Lamborghini-Gallardo.png in Resources */,
+				204D690F1B9EFB7600C6732E /* invite_email_selected@3x.png in Resources */,
 				24861EF819F9147100670F6D /* emoticons_tab_selected@3x.png in Resources */,
 				24218493194B4AEC00FDDA97 /* emoticon132@2x.png in Resources */,
 				24861F6319F9147100670F6D /* twt_follow@3x.png in Resources */,
@@ -6609,6 +6624,7 @@
 				C3766CF51B5650B000B7F5B2 /* Template57.jpg in Resources */,
 				C35351341B61008200CF68F9 /* icon7.jpg in Resources */,
 				C31E92F51B566229004DF193 /* icon94.jpg in Resources */,
+				204D690C1B9EFB7600C6732E /* invite_email_selected@2x.png in Resources */,
 				246EF512193C515D004539B2 /* emoticon51@2x.png in Resources */,
 				249F202F193F562C0072835E /* main_area_bg@2x.png in Resources */,
 				C35351091B60F68600CF68F9 /* Template112.jpg in Resources */,
