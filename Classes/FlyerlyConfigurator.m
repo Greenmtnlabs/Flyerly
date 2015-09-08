@@ -30,6 +30,13 @@
     return @"http://app.flyerly.com/cs?i=";
 }
 
+- (NSString*)appLinkURL{
+    return @"http://app.flyerly.com/cs";
+}
+- (NSString*)appInvitePreviewImageURL{
+    return @"http://greenmtnlabs.com/flyerly/images/phones.png";
+}
+
 
 /*
  API Keys

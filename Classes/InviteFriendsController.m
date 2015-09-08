@@ -10,7 +10,6 @@
 #import "Common.h"
 #import <QuartzCore/QuartzCore.h>
 #import "FlyrAppDelegate.h"
-#import <FacebookSDK/FacebookSDK.h>
 #import "CreateFlyerController.h"
 #import "HelpController.h"
 #import "Flurry.h"
@@ -537,21 +536,23 @@ const int CONTACTS_TAB = 0;
  * Called when facebook  button is selected on screen
  */
 - (IBAction)loadFacebookContacts:(UIButton *)sender{
-    
-    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-    ACAccountType *facebookAccountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-    
-    availableAccounts = [accountStore accountsWithAccountType:facebookAccountType];
-    
-       if ([availableAccounts count] > 0 ) {
-           
-           [self shareViaIOSFacebook:YES];
-         
-       } else {
+    FBSDKAppInviteContent *content =[[FBSDKAppInviteContent alloc] init];
+    content.appLinkURL = [NSURL URLWithString:flyerConfigurator.appLinkURL];
+    //optionally set previewImageURL
+    content.previewImageURL = [NSURL URLWithString:flyerConfigurator.appInvitePreviewImageURL];
 
-           [self shareViaIOSFacebook:NO];
-          
-       }
+    // present the dialog. Assumes self implements protocol `FBSDKAppInviteDialogDelegate`
+    [FBSDKAppInviteDialog showWithContent:content
+                                       delegate:self];
+}
+
+
+-(void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didCompleteWithResults:(NSDictionary *)results {
+    NSLog(@"app invite dialog did complete");
+}
+
+-(void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didFailWithError:(NSError *)error {
+    NSLog(@"app invite dialog did fail");
 }
 
 -(void) shareViaIOSFacebook:( BOOL ) withAccount {

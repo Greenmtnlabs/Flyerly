@@ -30,9 +30,12 @@
 #import "Flurry.h"
 #import "SHKSharerDelegate.h"
 
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
+
 @class FlyerlySingleton,SHKSharer;
 
-@interface InviteFriendsController : ParentViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate, SHKSharerDelegate>{
+@interface InviteFriendsController : ParentViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate, SHKSharerDelegate, FBSDKAppInviteDialogDelegate>{
     
     
     FlyerlySingleton *globle;
@@ -80,5 +83,8 @@
 -(IBAction)goBack;
 -(IBAction)invite;
 - (BOOL)ckeckExistContact:(NSString *)identifier;
+
+-(void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didCompleteWithResults:(NSDictionary *)results;
+-(void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didFailWithError:(NSError *)error;
 
 @end
