@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CreateFlyerController.h"
-#import "SaveFlyerCell.h"
+#import "MainFlyerCell.h"
 #import "Common.h"
 #import "ShareViewController.h"
 #import "HelpController.h"
@@ -26,7 +26,7 @@
 #import "UserPurchases.h"
 
 
-@class SaveFlyerCell, Flyer, SigninController, RegisterController, InAppViewController, CreateFlyerController,ShareViewController,PrintViewController;
+@class MainFlyerCell, Flyer, SigninController, RegisterController, InAppViewController, CreateFlyerController,ShareViewController,PrintViewController;
 
 @interface FlyerlyMainScreen : ParentViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,RMStoreObserver,InAppPurchasePanelButtonProtocol, UserPurchasesDelegate ,GADInterstitialDelegate>{
 

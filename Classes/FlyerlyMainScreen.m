@@ -220,22 +220,22 @@ id lastShareBtnSender;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *cellId = @"Cell";
-    SaveFlyerCell *cell = (SaveFlyerCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
+    MainFlyerCell *cell = (MainFlyerCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
     
     [cell setAccessoryType:UITableViewCellAccessoryNone];
     if (cell == nil) {
         if( IS_IPHONE_5 || IS_IPHONE_4){
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell" owner:self options:nil];
-            cell = (SaveFlyerCell *)[nib objectAtIndex:0];
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
+            cell = (MainFlyerCell *)[nib objectAtIndex:0];
         } else if ( IS_IPHONE_6 ){
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell-iPhone6" owner:self options:nil];
-            cell = (SaveFlyerCell *)[nib objectAtIndex:0];
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6" owner:self options:nil];
+            cell = (MainFlyerCell *)[nib objectAtIndex:0];
         } else if ( IS_IPHONE_6_PLUS ) {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell-iPhone6-Plus" owner:self options:nil];
-            cell = (SaveFlyerCell *)[nib objectAtIndex:0];
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6-Plus" owner:self options:nil];
+            cell = (MainFlyerCell *)[nib objectAtIndex:0];
         } else {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell" owner:self options:nil];
-            cell = (SaveFlyerCell *)[nib objectAtIndex:0];
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
+            cell = (MainFlyerCell *)[nib objectAtIndex:0];
         }
         
         

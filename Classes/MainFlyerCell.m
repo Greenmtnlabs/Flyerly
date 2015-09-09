@@ -1,18 +1,18 @@
 //
-//  SaveFlyerCellViewController.m
+//  MainFlyerCellViewController.m
 //  Flyr
 //
 //  Created by Riksof Pvt. Ltd on 17/01/2014.
 //
 //
 
-#import "SaveFlyerCell.h"
+#import "MainFlyerCell.h"
 
-@interface SaveFlyerCell ()
+@interface MainFlyerCell ()
 
 @end
 
-@implementation SaveFlyerCell
+@implementation MainFlyerCell
 @synthesize  cellImage;
 @synthesize shareBtn,flyerLock;
 

@@ -1438,6 +1438,10 @@
 		C3D8DDA21B53DBE1006C2A9F /* b7.png in Resources */ = {isa = PBXBuildFile; fileRef = C3D8DD8E1B53DBE1006C2A9F /* b7.png */; };
 		C3D8DDA31B53DBE1006C2A9F /* b8.png in Resources */ = {isa = PBXBuildFile; fileRef = C3D8DD8F1B53DBE1006C2A9F /* b8.png */; };
 		C3D8DDA41B53DBE1006C2A9F /* b9.png in Resources */ = {isa = PBXBuildFile; fileRef = C3D8DD901B53DBE1006C2A9F /* b9.png */; };
+		C3F98D941BA065D000CBADCC /* MainFlyerCell-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3F98D8F1BA065D000CBADCC /* MainFlyerCell-iPhone6-Plus.xib */; };
+		C3F98D951BA065D000CBADCC /* MainFlyerCell-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3F98D901BA065D000CBADCC /* MainFlyerCell-iPhone6.xib */; };
+		C3F98D961BA065D000CBADCC /* MainFlyerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F98D921BA065D000CBADCC /* MainFlyerCell.m */; };
+		C3F98D971BA065D000CBADCC /* MainFlyerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3F98D931BA065D000CBADCC /* MainFlyerCell.xib */; };
 		E8A7347D1092CFF300661AAD /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A7347B1092CFF300661AAD /* ShareViewController.m */; };
 		E8A7347E1092CFF300661AAD /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8A7347C1092CFF300661AAD /* ShareViewController.xib */; };
 		E8E424ACA7CB4913890F4F3B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26D73E02307543D994C6C8BE /* libPods.a */; };
@@ -3033,6 +3037,11 @@
 		C3D8DD8E1B53DBE1006C2A9F /* b7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b7.png; sourceTree = "<group>"; };
 		C3D8DD8F1B53DBE1006C2A9F /* b8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b8.png; sourceTree = "<group>"; };
 		C3D8DD901B53DBE1006C2A9F /* b9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b9.png; sourceTree = "<group>"; };
+		C3F98D8F1BA065D000CBADCC /* MainFlyerCell-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "MainFlyerCell-iPhone6-Plus.xib"; sourceTree = "<group>"; };
+		C3F98D901BA065D000CBADCC /* MainFlyerCell-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "MainFlyerCell-iPhone6.xib"; sourceTree = "<group>"; };
+		C3F98D911BA065D000CBADCC /* MainFlyerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainFlyerCell.h; sourceTree = "<group>"; };
+		C3F98D921BA065D000CBADCC /* MainFlyerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainFlyerCell.m; sourceTree = "<group>"; };
+		C3F98D931BA065D000CBADCC /* MainFlyerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainFlyerCell.xib; sourceTree = "<group>"; };
 		E8A7347A1092CFF300661AAD /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		E8A7347B1092CFF300661AAD /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		E8A7347C1092CFF300661AAD /* ShareViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
@@ -4066,6 +4075,7 @@
 				C33F80041B9F115500E7AFF9 /* FlyerlyMainScreen.xib */,
 				0DF3A2C1108DF1D200D6C887 /* FlyerlyMainScreen.h */,
 				0DF3A2C2108DF1D200D6C887 /* FlyerlyMainScreen.m */,
+				C3F98D8D1BA065A300CBADCC /* MainFlyerCells */,
 			);
 			name = FlyerlyMainScreen;
 			sourceTree = "<group>";
@@ -5223,6 +5233,18 @@
 			path = Borders;
 			sourceTree = "<group>";
 		};
+		C3F98D8D1BA065A300CBADCC /* MainFlyerCells */ = {
+			isa = PBXGroup;
+			children = (
+				C3F98D911BA065D000CBADCC /* MainFlyerCell.h */,
+				C3F98D921BA065D000CBADCC /* MainFlyerCell.m */,
+				C3F98D8F1BA065D000CBADCC /* MainFlyerCell-iPhone6-Plus.xib */,
+				C3F98D901BA065D000CBADCC /* MainFlyerCell-iPhone6.xib */,
+				C3F98D931BA065D000CBADCC /* MainFlyerCell.xib */,
+			);
+			name = MainFlyerCells;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -5723,6 +5745,7 @@
 				24861EC419F9147100670F6D /* back_button@3x.png in Resources */,
 				24861F0519F9147100670F6D /* flickr_share@3x.png in Resources */,
 				202978831B4CFBE700F35E40 /* emoticon208-Cool1@2x.png in Resources */,
+				C3F98D941BA065D000CBADCC /* MainFlyerCell-iPhone6-Plus.xib in Resources */,
 				C3766D731B56510200B7F5B2 /* icon39.jpg in Resources */,
 				C3766CC41B5650B000B7F5B2 /* Template8.jpg in Resources */,
 				24861EEE19F9147100670F6D /* drawing_tab_selected@3x.png in Resources */,
@@ -6081,6 +6104,7 @@
 				249F2048193F562C0072835E /* share_settings@2x.png in Resources */,
 				C353511B1B60F68600CF68F9 /* Template105.jpg in Resources */,
 				C3766CB51B5650B000B7F5B2 /* Template79.jpg in Resources */,
+				C3F98D951BA065D000CBADCC /* MainFlyerCell-iPhone6.xib in Resources */,
 				24218492194B4AEC00FDDA97 /* emoticon131@2x.png in Resources */,
 				24218511194B4AEC00FDDA97 /* weightlifting-icon.png in Resources */,
 				242184B6194B4AEC00FDDA97 /* emoticon168@2x.png in Resources */,
@@ -6369,6 +6393,7 @@
 				24218465194B4AEC00FDDA97 /* beach-volley-icon.png in Resources */,
 				242184D4194B4AEC00FDDA97 /* folder-trophy-icon.png in Resources */,
 				C35350E31B60F66C00CF68F9 /* icon117.jpg in Resources */,
+				C3F98D971BA065D000CBADCC /* MainFlyerCell.xib in Resources */,
 				24218501194B4AEC00FDDA97 /* Surfing-icon.png in Resources */,
 				2479A29C19658ABF00B57F86 /* Sofia-Regular.otf in Resources */,
 				C3766CEA1B5650B000B7F5B2 /* Template46.jpg in Resources */,
@@ -6707,6 +6732,7 @@
 				0D4903BB1091893B00855C30 /* FlyrViewController.m in Sources */,
 				242BFA7B1B29711800EF370B /* RMStoreAppReceiptVerificator.m in Sources */,
 				202C47FC187D6E4B00FE0975 /* BitlyRequest.m in Sources */,
+				C3F98D961BA065D000CBADCC /* MainFlyerCell.m in Sources */,
 				E8A7347D1092CFF300661AAD /* ShareViewController.m in Sources */,
 				20E4638A197E3FB600473921 /* UIImagePDF.m in Sources */,
 				208C684F186DAA59004A74F2 /* FlyerlyConfigurator.m in Sources */,
