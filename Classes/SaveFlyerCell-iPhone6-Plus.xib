@@ -20,9 +20,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="314" height="103"/>
                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="invite_Bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="XXS-Cm-glb">
-                        <rect key="frame" x="0.0" y="0.0" width="408" height="104"/>
-                    </imageView>
                     <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="27n-NS-2ka">
                         <rect key="frame" x="106" y="25" width="173" height="34"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -106,8 +103,8 @@
                     </button>
                 </subviews>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
-                <outlet property="backgroundImage" destination="XXS-Cm-glb" id="G1V-xZ-Xca"/>
                 <outlet property="cellImage" destination="fok-5k-MZh" id="VLU-PY-U1B"/>
                 <outlet property="createLabel" destination="s7M-g7-31a" id="n7n-SY-Scg"/>
                 <outlet property="dateLabel" destination="bjQ-yJ-udf" id="DQc-no-jiK"/>
@@ -127,7 +124,4 @@
             <point key="canvasLocation" x="268" y="-139"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="invite_Bg.png" width="311" height="100"/>
-    </resources>
 </document>

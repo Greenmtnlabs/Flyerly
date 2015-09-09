@@ -19,7 +19,6 @@
 @property(nonatomic, strong)IBOutlet UILabel * updatedDateLabel;
 
 @property(nonatomic, strong)IBOutlet UIImageView *cellImage;
-@property(nonatomic, strong)IBOutlet UIImageView *backgroundImage;
 @property(nonatomic, strong) NSString *filePath;
 
 @property ( nonatomic, strong ) IBOutletCollection(UIImageView) NSArray *socialStatus;

@@ -26,11 +26,11 @@ id lastShareBtnSender;
     [super viewDidLoad];
     lastShareBtnSender = nil;
     
-    [self.view setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
+//    [self.view setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
     
     self.navigationItem.hidesBackButton = YES;
 
-    [self.tView setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
+//    [self.tView setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
 	tView.dataSource = self;
 	tView.delegate = self;
     [self.view addSubview:tView];
@@ -242,39 +242,24 @@ id lastShareBtnSender;
         
         
     }
-    
-    if( searching ){
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:indexPath.row] setDirectory:NO];
-            [cell renderCell:flyer LockStatus:lockFlyer];
-            [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
-            cell.shareBtn.tag = indexPath.row;
-            [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
-            
-        });
-
-
-        return cell;
-        
-
-    }else{
-
-        dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
             
             flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:indexPath.row] setDirectory:NO];
             [cell renderCell:flyer LockStatus:lockFlyer];
             [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
             cell.shareBtn.tag = indexPath.row;
             [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
-            
-        });
 
-
-         return cell;
+//            cell.contentView.backgroundColor = [UIColor clearColor];
+//            cell.backgroundColor = [UIColor clearColor];
+//            tableView.backgroundColor = [UIColor clearColor];
         
-    }
+    });
+
+
+     return cell;
+        
+    
     
 }
 

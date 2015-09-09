@@ -13,7 +13,7 @@
 @end
 
 @implementation SaveFlyerCell
-@synthesize nameLabel, description, dateLabel, createLabel,cellImage,backgroundImage;
+@synthesize nameLabel, description, dateLabel, createLabel,cellImage;
 @synthesize shareBtn,flyerLock,updatedDateLabel,updatedLabel;
 
 
