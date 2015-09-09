@@ -8,6 +8,8 @@
 
 #import "FlyerlyMainScreen.h"
 #import "UserPurchases.h"
+#import "InviteFriendsController.h"
+#import "MainSettingViewController.h"
 
 @implementation FlyerlyMainScreen
 
@@ -147,8 +149,10 @@ id lastShareBtnSender;
 -(NSArray *)leftBarItems{
     inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [inviteButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-    [inviteButton setBackgroundImage:[UIImage imageNamed:@"home_button"] forState:UIControlStateNormal];
-    [inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
+    //[inviteButton setBackgroundImage:[UIImage imageNamed:@"home_button"] forState:UIControlStateNormal];
+    inviteButton.title = @"Invite";
+    [inviteButton setBackgroundColor:[UIColor blueColor]];
+    [inviteButton addTarget:self action:@selector(doInvite:) forControlEvents:UIControlEventTouchUpInside];
     inviteButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
 
@@ -642,5 +646,24 @@ id lastShareBtnSender;
     [self.navigationController pushViewController:mainsettingviewcontroller animated:YES];
 }
 //End
+
+// Load invite friends
+-(IBAction)doInvite:(id)sender{
+    
+    //Checking if the user is valid or anonymous
+    if ([[PFUser currentUser] sessionToken]) {
+        
+        InviteFriendsController *addFriendsController = [[InviteFriendsController alloc]initWithNibName:@"InviteFriendsController" bundle:nil];
+        
+        [self.navigationController pushViewController:addFriendsController animated:YES];
+        
+    } else {
+        // Alert when user logged in as anonymous
+        signInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In" message:@"The selected feature requires that you sign in. Would you like to register or sign in now?" delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Sign In",nil];
+        [signInAlert show];
+        
+    }
+    
+}
 
 @end

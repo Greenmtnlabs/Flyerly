@@ -67,6 +67,8 @@
 
 -(void)printFlyer;
 -(void)enableHome:(BOOL)enable;
+
 -(IBAction)doAbout:(id)sender;
+-(IBAction)doInvite:(id)sender;
 
 @end
