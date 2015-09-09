@@ -26,11 +26,8 @@ id lastShareBtnSender;
     [super viewDidLoad];
     lastShareBtnSender = nil;
     
-//    [self.view setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
-    
     self.navigationItem.hidesBackButton = YES;
 
-//    [self.tView setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
 	tView.dataSource = self;
 	tView.delegate = self;
     [self.view addSubview:tView];
@@ -195,8 +192,6 @@ id lastShareBtnSender;
                                          stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE] withString:@""];
         [sortedList replaceObjectAtIndex:i withObject:pathWithoutFileName];
     }
-    
-    
     return sortedList;
 }
 
@@ -215,7 +210,6 @@ id lastShareBtnSender;
         return  [flyerPaths count];
     }
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -237,24 +231,17 @@ id lastShareBtnSender;
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
             cell = (MainFlyerCell *)[nib objectAtIndex:0];
         }
-        
-        
     }
+    
     dispatch_async(dispatch_get_main_queue(), ^{
-            
             flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:indexPath.row] setDirectory:NO];
             [cell renderCell:flyer LockStatus:lockFlyer];
             [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
             cell.shareBtn.tag = indexPath.row;
             [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
-        
     });
 
-
-     return cell;
-        
-    
-    
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
