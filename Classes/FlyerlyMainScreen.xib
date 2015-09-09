@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FlyrViewController">
             <connections>
+                <outlet property="settingBtn" destination="nFc-73-sac" id="JsE-9X-CbM"/>
                 <outlet property="tView" destination="kGq-MQ-Rhl" id="vDj-iA-mjT"/>
                 <outlet property="view" destination="12" id="14"/>
             </connections>

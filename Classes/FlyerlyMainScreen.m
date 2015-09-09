@@ -15,7 +15,7 @@
 
 @synthesize sharePanel,tView;
 @synthesize flyerPaths;
-@synthesize flyer, signInAlert;
+@synthesize flyer, signInAlert,settingBtn;
 
 id lastShareBtnSender;
 
@@ -366,12 +366,16 @@ id lastShareBtnSender;
     inviteButton.enabled = enable;
     createButton.enabled = enable;
     rightUndoBarButton.enabled = enable;
+    settingBtn.enabled = enable;
     
     tView.userInteractionEnabled = enable;
     
     if( enable ){
+        [self hideLoadingIndicator];
         // Set right bar items
         [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
+    } else{
+        [self showLoadingIndicator];
     }
 }
 

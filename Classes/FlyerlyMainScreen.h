@@ -59,6 +59,7 @@
 @property ( nonatomic, strong ) Flyer *flyer;
 @property (nonatomic, strong) UIView *sharePanel;
 @property (nonatomic, strong) UIAlertView *signInAlert;
+@property (nonatomic, strong) UIButton *settingBtn;
 
 
 -(void)goBack;
