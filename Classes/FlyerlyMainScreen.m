@@ -249,10 +249,6 @@ id lastShareBtnSender;
             [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
             cell.shareBtn.tag = indexPath.row;
             [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
-
-//            cell.contentView.backgroundColor = [UIColor clearColor];
-//            cell.backgroundColor = [UIColor clearColor];
-//            tableView.backgroundColor = [UIColor clearColor];
         
     });
 

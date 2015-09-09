@@ -122,7 +122,9 @@
                         </state>
                     </button>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="backgroundImage" destination="Yye-42-UbL" id="xCy-am-nbK"/>
                 <outlet property="cellImage" destination="Nq4-Ll-xah" id="oA8-2E-24k"/>
