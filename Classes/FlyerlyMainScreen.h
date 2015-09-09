@@ -31,10 +31,6 @@
 @interface FlyerlyMainScreen : ParentViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,RMStoreObserver,InAppPurchasePanelButtonProtocol, UserPurchasesDelegate ,GADInterstitialDelegate>{
 
     CreateFlyerController *createFlyer;
-    BOOL searching;
-    BOOL lockFlyer;
-    BOOL sheetAlreadyOpen;
-    BOOL cancelRequest;
 
     SigninController *signInController;
     RegisterController *signUpController;
@@ -62,14 +58,13 @@
 @property (nonatomic, strong) UIButton *settingBtn;
 
 
--(void)goBack;
--(NSMutableArray *)getFlyersPaths;
 -(IBAction)createFlyer:(id)sender;
+-(IBAction)doAbout:(id)sender;
+-(IBAction)doInvite:(id)sender;
+
+-(NSMutableArray *)getFlyersPaths;
 
 -(void)printFlyer;
 -(void)enableHome:(BOOL)enable;
-
--(IBAction)doAbout:(id)sender;
--(IBAction)doInvite:(id)sender;
 
 @end

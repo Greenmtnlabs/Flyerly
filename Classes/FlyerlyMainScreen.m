@@ -34,9 +34,6 @@ id lastShareBtnSender;
     [self.tView setBackgroundView:nil];
     [self.tView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 
-    
-    lockFlyer = NO; //Unlock save flyer feature for all users
-    
     // Load the flyers.
     flyerPaths = [self getFlyersPaths];
     
@@ -90,8 +87,7 @@ id lastShareBtnSender;
 -(IBAction)createFlyer:(id)sender {
     
     [self enableBtns:NO];
-    
-    cancelRequest = YES;
+
     NSString *flyPath = [Flyer newFlyerPath];
     
     //Here We set Source for Flyer screen
@@ -136,12 +132,6 @@ id lastShareBtnSender;
 - (void)inAppPanelDismissed {
 
 }
-
--(void)goBack{
-  	[self.navigationController popViewControllerAnimated:YES];
-    cancelRequest = YES;
-}
-
 
 -(NSArray *)leftBarItems{
     inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
@@ -204,11 +194,7 @@ id lastShareBtnSender;
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (searching){
-        return  [searchFlyerPaths count];
-    }else{
-        return  [flyerPaths count];
-    }
+    return  [flyerPaths count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -235,7 +221,7 @@ id lastShareBtnSender;
     
     dispatch_async(dispatch_get_main_queue(), ^{
             flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:indexPath.row] setDirectory:NO];
-            [cell renderCell:flyer LockStatus:lockFlyer];
+            [cell renderCell:flyer LockStatus:NO];
             [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
             cell.shareBtn.tag = indexPath.row;
             [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
@@ -302,18 +288,10 @@ id lastShareBtnSender;
         [tableView deleteRowsAtIndexPaths:
         @[[NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section]]
                          withRowAnimation:UITableViewRowAnimationLeft];
-        
-        // HERE WE REMOVE FLYER FROM DIRECTORY
-        if ( searching ) {
+       
             
-            [[NSFileManager defaultManager] removeItemAtPath:[searchFlyerPaths objectAtIndex:indexPath.row] error:nil];
-            [searchFlyerPaths removeObjectAtIndex:indexPath.row];
-
-        } else {
-            
-            [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:indexPath.row] error:nil];
-            [flyerPaths removeObjectAtIndex:indexPath.row];
-        }
+        [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:indexPath.row] error:nil];
+        [flyerPaths removeObjectAtIndex:indexPath.row];
 
 	}
     
@@ -330,7 +308,6 @@ id lastShareBtnSender;
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
         
-        lockFlyer = NO;
         [self.tView reloadData];
         [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
@@ -600,7 +577,6 @@ id lastShareBtnSender;
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
          [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
 
-        lockFlyer = NO;
         [self.tView reloadData];
         [inappviewcontroller.paidFeaturesTview reloadData];
     }else {
