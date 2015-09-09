@@ -149,9 +149,7 @@ id lastShareBtnSender;
 -(NSArray *)leftBarItems{
     inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [inviteButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-    //[inviteButton setBackgroundImage:[UIImage imageNamed:@"home_button"] forState:UIControlStateNormal];
-    inviteButton.title = @"Invite";
-    [inviteButton setBackgroundColor:[UIColor blueColor]];
+    [inviteButton setBackgroundImage:[UIImage imageNamed:@"invite_friend"] forState:UIControlStateNormal];
     [inviteButton addTarget:self action:@selector(doInvite:) forControlEvents:UIControlEventTouchUpInside];
     inviteButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
