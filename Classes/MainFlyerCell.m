@@ -13,8 +13,8 @@
 @end
 
 @implementation SaveFlyerCell
-@synthesize nameLabel, description, dateLabel, createLabel,cellImage,backgroundImage;
-@synthesize shareBtn,flyerLock,updatedDateLabel,updatedLabel;
+@synthesize  cellImage;
+@synthesize shareBtn,flyerLock;
 
 
 /*
@@ -27,19 +27,6 @@
     if (status) {
         flyerLock.hidden = NO;
     }
-    
-    // HERE WE SET FLYER INFORMATION FORM .TXT FILE
-    [self.nameLabel setText: [flyer getFlyerTitle]];
-    [self.description setText:[flyer getFlyerDescription]];
-    [self.dateLabel setText:[flyer getFlyerDate]];
-    NSString *updatedDate = [flyer getFlyerUpdateDate];
-    if ([updatedDate isEqualToString:@""]) {
-        self.updatedLabel.hidden = YES ;
-        self.updatedDateLabel.hidden = YES;
-    }else {
-        self.updatedDateLabel.text = updatedDate;
-    }
-    
     
     // HERE WE SET FLYER IMAGE
     UIImage *flyerImage =  [UIImage imageWithContentsOfFile:[flyer getFlyerImage]];

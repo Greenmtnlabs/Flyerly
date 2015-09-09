@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Entypo.otf">
+            <string>Entypo</string>
+            <string>Entypo</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleAspectFit" selectionStyle="default" indentationWidth="10" rowHeight="104" id="p1g-PH-a1W" customClass="SaveFlyerCell">
+            <rect key="frame" x="0.0" y="0.0" width="314" height="270"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p1g-PH-a1W" id="cob-BB-dgi">
+                <rect key="frame" x="0.0" y="0.0" width="314" height="269"/>
+                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Nq4-Ll-xah" userLabel="cellImage">
+                        <rect key="frame" x="5" y="10" width="250" height="250"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Vu7-BD-USu">
+                        <rect key="frame" x="277" y="89" width="20" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="5dI-Oq-C7c">
+                        <rect key="frame" x="277" y="112" width="20" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="I2a-9L-hhr">
+                        <rect key="frame" x="277" y="134" width="20" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="ewT-nG-9kd">
+                        <rect key="frame" x="277" y="157" width="20" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="XBk-Dh-0EO">
+                        <rect key="frame" x="277" y="180" width="20" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tr4-sN-ZUc" userLabel="flyerLock">
+                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="1"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal">
+                            <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qP4-jY-AaV" userLabel="shareBtn">
+                        <rect key="frame" x="264" y="214" width="45" height="46"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="Entypo" family="Entypo" pointSize="44"/>
+                        <state key="normal" title="">
+                            <color key="titleColor" red="0.01176470588" green="0.56862745100000001" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wlX-wx-fgU" userLabel="edit">
+                        <rect key="frame" x="264" y="12" width="45" height="46"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="Entypo" family="Entypo" pointSize="45"/>
+                        <state key="normal" title="✎">
+                            <color key="titleColor" red="0.01176470588" green="0.56862745100000001" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="z79-gJ-DMF">
+                        <rect key="frame" x="277" y="67" width="20" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="cellImage" destination="Nq4-Ll-xah" id="oA8-2E-24k"/>
+                <outlet property="flyerLock" destination="tr4-sN-ZUc" id="2No-bK-Xkb"/>
+                <outlet property="shareBtn" destination="qP4-jY-AaV" id="mnR-TH-YZk"/>
+                <outletCollection property="socialStatus" destination="z79-gJ-DMF" id="Qdy-IF-W8M"/>
+                <outletCollection property="socialStatus" destination="Vu7-BD-USu" id="kc9-GD-7eU"/>
+                <outletCollection property="socialStatus" destination="5dI-Oq-C7c" id="8d5-Im-EPZ"/>
+                <outletCollection property="socialStatus" destination="I2a-9L-hhr" id="NtQ-MB-5rq"/>
+                <outletCollection property="socialStatus" destination="ewT-nG-9kd" id="wHR-Lm-AK8"/>
+                <outletCollection property="socialStatus" destination="XBk-Dh-0EO" id="xfc-zv-LLj"/>
+            </connections>
+            <point key="canvasLocation" x="268" y="-139"/>
+        </tableViewCell>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
