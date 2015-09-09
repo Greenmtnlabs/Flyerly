@@ -148,7 +148,7 @@ id lastShareBtnSender;
     inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [inviteButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [inviteButton setBackgroundImage:[UIImage imageNamed:@"home_button"] forState:UIControlStateNormal];
-    [inviteButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
     inviteButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
 
@@ -160,13 +160,10 @@ id lastShareBtnSender;
 
 -(NSArray *)rightBarItems{
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:TITLE_FONT size:18];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
-    label.text = @"SAVED";
-    self.navigationItem.titleView = label;
+    // for Navigation Bar logo
+    UIImageView *logo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 102, 38)];
+    [logo setImage:[UIImage imageNamed:@"flyerlylogo"]];
+    self.navigationItem.titleView = logo;
 
     // Create Button
     createButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
@@ -639,7 +636,11 @@ id lastShareBtnSender;
 
 }
 
+// Load Preferences Method
+-(IBAction)doAbout:(id)sender{
+    MainSettingViewController *mainsettingviewcontroller = [[MainSettingViewController alloc]initWithNibName:@"MainSettingViewController" bundle:nil] ;
+    [self.navigationController pushViewController:mainsettingviewcontroller animated:YES];
+}
+//End
+
 @end
-
-
-

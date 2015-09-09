@@ -49,6 +49,7 @@
     PrintViewController *printViewController;
     UIButton *inviteButton,*createButton;
     UIBarButtonItem *rightUndoBarButton;
+    
 }
 
 
@@ -66,5 +67,6 @@
 
 -(void)printFlyer;
 -(void)enableHome:(BOOL)enable;
+-(IBAction)doAbout:(id)sender;
 
 @end
