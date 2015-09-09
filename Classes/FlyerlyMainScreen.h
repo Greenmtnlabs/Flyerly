@@ -15,6 +15,7 @@
 #import "RMStoreKeychainPersistence.h"
 #import "FlyerImageView.h"
 #import "GADInterstitialDelegate.h"
+#import "IntroScreenViewController.h"
 
 @class FlyrViewController;
 @class CreateFlyerController ;
@@ -43,6 +44,8 @@
 
 @property(nonatomic,strong) FlyrViewController *tpController;
 @property(nonatomic,strong) InviteFriendsController *addFriendsController;
+
+@property(nonatomic, strong) IntroScreenViewController *introScreenViewController;
 
 
 @property (nonatomic, strong) IBOutlet UILabel *createFlyrLabel;

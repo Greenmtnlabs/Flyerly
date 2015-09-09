@@ -41,6 +41,7 @@
 @synthesize savedFlyrButton;
 @synthesize recentFlyers;
 @synthesize inviteFriendButton;
+@synthesize introScreenViewController;
 
 BOOL adLoaded = false;
 
@@ -359,7 +360,19 @@ BOOL adLoaded = false;
 /*
  * Here we Open InAppPurchase Panel
  */
+
 -(void)openPanel {
+    
+    introScreenViewController = [[IntroScreenViewController alloc] initWithNibName:@"IntroScreenViewController" bundle:nil];
+    [introScreenViewController setModalPresentationStyle:UIModalPresentationFullScreen];
+    
+    [self presentViewController:introScreenViewController animated:YES completion:nil];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
+    
+}
+
+
+-(void)openPanel1{
     
     if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
         inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
