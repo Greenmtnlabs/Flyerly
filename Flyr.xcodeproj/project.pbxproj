@@ -169,6 +169,8 @@
 		2036661C188DB67300C71EAA /* FlyerUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2036661B188DB67300C71EAA /* FlyerUser.m */; };
 		203E0B7617DDDD720039C3A7 /* InputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 203E0B7417DDDD720039C3A7 /* InputViewController.m */; };
 		203E0B7717DDDD720039C3A7 /* InputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 203E0B7517DDDD720039C3A7 /* InputViewController.xib */; };
+		2041D5AA1BA07F9600EEFF83 /* IntroScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2041D5A81BA07F9600EEFF83 /* IntroScreenViewController.m */; };
+		2041D5AB1BA07F9600EEFF83 /* IntroScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2041D5A91BA07F9600EEFF83 /* IntroScreenViewController.xib */; };
 		204231601A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2042315F1A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib */; };
 		204231621A10D5AC002F93D7 /* Borders-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204231611A10D5AC002F93D7 /* Borders-iPhone6-Plus.xib */; };
 		204231641A10E1A1002F93D7 /* TextBorders-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204231631A10E1A1002F93D7 /* TextBorders-iPhone6-Plus.xib */; };
@@ -1673,6 +1675,9 @@
 		203E0B7317DDDD720039C3A7 /* InputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputViewController.h; sourceTree = "<group>"; };
 		203E0B7417DDDD720039C3A7 /* InputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputViewController.m; sourceTree = "<group>"; };
 		203E0B7517DDDD720039C3A7 /* InputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputViewController.xib; sourceTree = "<group>"; };
+		2041D5A71BA07F9600EEFF83 /* IntroScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroScreenViewController.h; sourceTree = "<group>"; };
+		2041D5A81BA07F9600EEFF83 /* IntroScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroScreenViewController.m; sourceTree = "<group>"; };
+		2041D5A91BA07F9600EEFF83 /* IntroScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroScreenViewController.xib; sourceTree = "<group>"; };
 		2042315F1A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Backgrounds-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		204231611A10D5AC002F93D7 /* Borders-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Borders-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		204231631A10E1A1002F93D7 /* TextBorders-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "TextBorders-iPhone6-Plus.xib"; sourceTree = "<group>"; };
@@ -3089,6 +3094,7 @@
 		080E96DDFE201D6D7F000001 /* FlyerlyClasses */ = {
 			isa = PBXGroup;
 			children = (
+				2041D5A51BA07F4900EEFF83 /* IntroScreen */,
 				20F3597C1888DC8A001376B6 /* CreateFlyer */,
 				1D3623240D0F684500981E51 /* FlyrAppDelegate.h */,
 				1D3623250D0F684500981E51 /* FlyrAppDelegate.m */,
@@ -3822,6 +3828,16 @@
 				2036661B188DB67300C71EAA /* FlyerUser.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		2041D5A51BA07F4900EEFF83 /* IntroScreen */ = {
+			isa = PBXGroup;
+			children = (
+				2041D5A71BA07F9600EEFF83 /* IntroScreenViewController.h */,
+				2041D5A81BA07F9600EEFF83 /* IntroScreenViewController.m */,
+				2041D5A91BA07F9600EEFF83 /* IntroScreenViewController.xib */,
+			);
+			name = IntroScreen;
 			sourceTree = "<group>";
 		};
 		2046355F1895E47100A94C42 /* Models */ = {
@@ -5815,6 +5831,7 @@
 				65A464F01726CBA2002C32FB /* Quicksand_Bold.otf in Resources */,
 				246EF4E8193C515D004539B2 /* emoticon13@2x.png in Resources */,
 				24861F6619F9147100670F6D /* undo@3x.png in Resources */,
+				2041D5AB1BA07F9600EEFF83 /* IntroScreenViewController.xib in Resources */,
 				C35351161B60F68600CF68F9 /* Template99.jpg in Resources */,
 				2421846B194B4AEC00FDDA97 /* cocktail-icon.png in Resources */,
 				65A464F11726CBA2002C32FB /* Signika-Bold.otf in Resources */,
@@ -6758,6 +6775,7 @@
 				2087B6C017C73B40007A6A90 /* ResetPWViewController.m in Sources */,
 				209F8E4119A47A4E00323559 /* DrawingViewController.m in Sources */,
 				24803523192F3207009403F7 /* CameraViewController.m in Sources */,
+				2041D5AA1BA07F9600EEFF83 /* IntroScreenViewController.m in Sources */,
 				202C4802187D6E4B00FE0975 /* BitlyTwitterOAuthViewController.m in Sources */,
 				203E0B7617DDDD720039C3A7 /* InputViewController.m in Sources */,
 				20967D9818C8973200B273FC /* FlyerlyTwitterLike.m in Sources */,
