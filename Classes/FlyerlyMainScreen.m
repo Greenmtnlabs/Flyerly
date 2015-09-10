@@ -399,7 +399,7 @@ id lastShareBtnSender;
 }
 
 /*
- * Here we Open InAppPurchase Panel
+ * Here we Open Intro screens
  */
 -(void)openIntro {
     
@@ -408,9 +408,12 @@ id lastShareBtnSender;
     introScreenViewController.buttonDelegate = self;
     
     [self presentViewController:introScreenViewController animated:YES completion:nil];
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
-    
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];    
 }
+
+/*
+ * Here we Open InAppPurchase Panel
+ */
 -(void)openPanel {
     
     if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
