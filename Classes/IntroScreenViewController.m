@@ -109,26 +109,6 @@
         [inAppViewController setModalPresentationStyle:UIModalPresentationFullScreen];
         [self presentModalViewController:inAppViewController animated:YES];
         
-//        
-////        [self presentViewController:inAppViewController animated:YES completion:nil];
-////        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
-//        
-//        CATransition *animation = [CATransition animation];
-//        [animation setDuration:0.3];
-//        [animation setType:kCATransitionPush];
-//        [animation setSubtype:kCATransitionFromLeft];
-//        [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-//        //[[inAppViewController.view layer] addAnimation:animation forKey:@"abc"];
-//        [self presentModalViewController:inAppViewController animated:NO];
-        
-        
-//        CATransition *animation = [CATransition animation];
-//        [animation setDuration:0.3];
-//        [animation setType:kCATransitionPush];
-//        [animation setSubtype:kCATransitionFromLeft];
-//        [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-//        [[inAppViewController.view.superview layer] addAnimation:animation forKey:@"abc"];
-        
         
     }
 }
