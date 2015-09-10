@@ -458,9 +458,9 @@ BOOL adLoaded = false;
     // Determin if the user has been greeted?
     NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
     
-    if( !greeted ) {
+    //if( !greeted ) {
         
-        
+    if(YES){
         
         
         

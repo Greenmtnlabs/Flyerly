@@ -8,6 +8,7 @@
 
 #import "IntroScreenViewController.h"
 #import "InAppViewController.h"
+#import "FlyerlyMainScreen.h"
 
 @interface IntroScreenViewController () <UIGestureRecognizerDelegate> {
 }
@@ -24,7 +25,7 @@
 }
 
 @synthesize imageView;
-
+//@synthesize buttonDelegate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,10 +34,8 @@
     self.navigationController.navigationBarHidden = NO;
     
     countSwipe = 1;
-    imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"one.jpeg"]];
-    imageView.frame = CGRectMake(0, 0, 320, 548);
+    imageView.image = [UIImage imageNamed:@"one.jpeg"];
     [imageView setUserInteractionEnabled:YES];
-    
     swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     
@@ -48,14 +47,30 @@
     [imageView addGestureRecognizer:swipeLeft];
     [imageView addGestureRecognizer:swipeRight];
     
-    [self.view addSubview:imageView];
+
     
+}
+
+-(void)performAnimation:(NSString *)direction {
+    CATransition *animation = [CATransition animation];
+    [animation setDuration:0.3];
+    [animation setType:kCATransitionPush];
+    
+    if([direction isEqualToString:@"LEFT"]){
+         [animation setSubtype:kCATransitionFromRight];
+    }
+    if([direction isEqualToString:@"RIGHT"]){
+         [animation setSubtype:kCATransitionFromLeft];
+    }
+   
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    [[self.view layer] addAnimation:animation forKey:@"abc"];
 }
 
 - (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
     
+    
     NSString *leftImage, *rightImage;
-    CATransition *animation;
     
     if(countSwipe == 1){
         rightImage = @"two.jpeg";
@@ -72,44 +87,20 @@
     
     if (swipe.direction == UISwipeGestureRecognizerDirectionLeft) {
         NSLog(@"Left Swipe");
-        
-        imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:rightImage]];
-        imageView.frame = CGRectMake(0, 0, 320, 548);
-        [imageView setUserInteractionEnabled:YES];
-        animation = [CATransition animation];
-        [animation setDuration:0.3];
-        [animation setType:kCATransitionPush];
-        [animation setSubtype:kCATransitionFromRight];
-        [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-        
+        imageView.image = [UIImage imageNamed:rightImage];
+        [self performAnimation:@"LEFT"];
         countSwipe++;
     }
     
-    if (swipe.direction == UISwipeGestureRecognizerDirectionRight) {
+    if (swipe.direction == UISwipeGestureRecognizerDirectionRight && countSwipe > 1) {
         NSLog(@"Right Swipe");
         
-        imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:leftImage]];
-        imageView.frame = CGRectMake(0, 0, 320, 548);
-        [imageView setUserInteractionEnabled:YES];
-        animation = [CATransition animation];
-        [animation setDuration:0.3];
-        [animation setType:kCATransitionPush];
-        [animation setSubtype:kCATransitionFromLeft];
-        [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-        
+        imageView.image = [UIImage imageNamed:leftImage];
+        [self performAnimation:@"RIGHT"];
         countSwipe--;
     }
     
-    swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-    swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-    
-    // Setting the swipe direction.
-    [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
-    [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
-    
-    // Adding the swipe gesture on image view
-    [imageView addGestureRecognizer:swipeLeft];
-    [imageView addGestureRecognizer:swipeRight];
+
     
     if(countSwipe > 3){
         InAppViewController *inAppViewController = [[InAppViewController alloc]initWithNibName:@"InAppViewController" bundle:nil];
@@ -121,14 +112,9 @@
 //        [inAppViewController requestProduct];
 //        inAppViewController.buttondelegate = self;
 
-    } else {
-        [self.view addSubview:imageView];
-    }
-    
-    
-    [[self.view layer] addAnimation:animation forKey:@"abc"];
-    
+    } 
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -136,4 +122,11 @@
 }
 
 
+- (IBAction)signIn:(id)sender {
+    //[self.buttonDelegate inAppPurchasePanelButtonTappedWasPressed:_btnSignIn.currentTitle];
+}
+
+- (IBAction)hideTray:(id)sender {
+    //[self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
 @end
