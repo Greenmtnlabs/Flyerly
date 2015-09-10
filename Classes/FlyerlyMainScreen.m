@@ -45,15 +45,30 @@ id lastShareBtnSender;
     self.navigationController.navigationBarHidden=NO;
     self.navigationItem.leftItemsSupplementBackButton = YES;
     
-    // Set left bar items
-    [self.navigationItem setLeftBarButtonItems: [self leftBarItems]];
+    [self setNavigation];
     
-    // Set right bar items
-    [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
+    // Determin if the user has been greeted?
+    NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
+    
+    if( !greeted ) {
+        // Determining the previous version of app
+        NSString *previuosVersion = [[NSUserDefaults standardUserDefaults] stringForKey:@"previousVersion"];
+        if( ![previuosVersion isEqualToString:[self appVersion]] || previuosVersion == nil ) {
+              [self openPanel];
+        }
+        
+        // Show the greeting before going to the main app.
+        [[NSUserDefaults standardUserDefaults] setObject:@"greeted" forKey:@"greeted"];
+        
+    }
+    
+    [self checkUserPurchases];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [self checkUserPurchases];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -66,6 +81,23 @@ id lastShareBtnSender;
     [super didReceiveMemoryWarning];
 }
 
+- (NSString *) appVersion {
+    return [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
+}
+
+-(void)checkUserPurchases{
+    //Checking if the user is valid or anonymus
+    if ([[PFUser currentUser] sessionToken]) {
+        
+        UserPurchases *userPurchases_ = [UserPurchases getInstance];
+        
+        //GET UPDATED USER PUCHASES INFO
+        [userPurchases_ setUserPurcahsesFromParse];
+        
+    } else {
+        NSLog(@"Anonymous, User is NOT authenticated.");
+    }
+}
 
 #pragma mark  Text Field Delegete
 
@@ -349,11 +381,20 @@ id lastShareBtnSender;
     
     if( enable ){
         [self hideLoadingIndicator];
-        // Set right bar items
-        [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
     } else{
         [self showLoadingIndicator];
     }
+}
+
+/**
+ * Set navigation bar
+ */
+-(void)setNavigation{
+    // Set left bar items
+    [self.navigationItem setLeftBarButtonItems: [self leftBarItems]];
+
+    // Set right bar items
+    [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
 }
 
 /*
@@ -559,12 +600,6 @@ id lastShareBtnSender;
         UINavigationController* navigationController = flyerlyMainScreen.navigationController;
         [navigationController popViewControllerAnimated:NO];
         [userPurchases_ setUserPurcahsesFromParse];
-
-        if( lastShareBtnSender != nil ){
-            [flyerlyMainScreen onShare:lastShareBtnSender];
-        }
-        [flyerlyMainScreen enableBtns:YES];
-        [flyerlyMainScreen hideLoadingIndicator];
     };
 
     [self.navigationController pushViewController:signInController animated:YES];
