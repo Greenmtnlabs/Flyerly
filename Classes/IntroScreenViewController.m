@@ -7,7 +7,6 @@
 //
 
 #import "IntroScreenViewController.h"
-#import "InAppViewController.h"
 #import "FlyerlyMainScreen.h"
 
 @interface IntroScreenViewController () <UIGestureRecognizerDelegate> {
@@ -21,6 +20,7 @@
     UISwipeGestureRecognizer *swipeLeft;
     UISwipeGestureRecognizer *swipeRight;
     int countSwipe;
+    NSArray *imgsArray;
 
 }
 
@@ -34,7 +34,8 @@
     self.navigationController.navigationBarHidden = NO;
     
     countSwipe = 1;
-    imageView.image = [UIImage imageNamed:@"intro-img-1.jpg"];
+    imgsArray = [NSArray arrayWithObjects:@"intro-img-1.jpg",@"intro-img-2.jpg",@"intro-img-3.jpg",nil];
+    imageView.image = [UIImage imageNamed:imgsArray[0]];
     [imageView setUserInteractionEnabled:YES];
     swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
@@ -47,10 +48,16 @@
     [imageView addGestureRecognizer:swipeLeft];
     [imageView addGestureRecognizer:swipeRight];
     
-
+    //Remove signin button if user already logged in
+    if ([[PFUser currentUser] sessionToken].length != 0) {
+        [_btnSignIn removeFromSuperview];
+    }
     
 }
 
+/**
+ * Perform animmation
+ */
 -(void)performAnimation:(NSString *)direction {
     CATransition *animation = [CATransition animation];
     [animation setDuration:0.3];
@@ -67,49 +74,41 @@
     [[self.view layer] addAnimation:animation forKey:@"abc"];
 }
 
+
+/**
+ * Hook swipe functions
+ */
 - (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
-    
     
     NSString *leftImage, *rightImage;
     
     if(countSwipe == 1){
-        rightImage = @"intro-img-2.jpg";
-        
+        rightImage = imgsArray[1];
     } else if (countSwipe == 2) {
-        leftImage = @"intro-img-1.jpg";
-        rightImage = @"intro-img-3.jpg";
-        
+        leftImage = imgsArray[0];
+        rightImage = imgsArray[2];
     } else if (countSwipe >= 3){
-        leftImage = @"intro-img-2.jpg";
-        
+        leftImage = imgsArray[1];
     }
     
-    
-    if (swipe.direction == UISwipeGestureRecognizerDirectionLeft && countSwipe < 4) {
-        NSLog(@"Left Swipe");
-        imageView.image = [UIImage imageNamed:rightImage];
-        [self performAnimation:@"LEFT"];
-        countSwipe++;
-    }
-    else if (swipe.direction == UISwipeGestureRecognizerDirectionRight && countSwipe > 1) {
-        NSLog(@"Right Swipe");
-        
+    //Dont go beside first slide
+    if (swipe.direction == UISwipeGestureRecognizerDirectionRight && countSwipe > 1) {
         imageView.image = [UIImage imageNamed:leftImage];
         [self performAnimation:@"RIGHT"];
         countSwipe--;
     }
-    
-
-    
-    if(countSwipe > 3){
-        
-//        InAppViewController *inAppViewController = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
-//        inAppViewController.buttondelegate = self;
-//        [inAppViewController setModalPresentationStyle:UIModalPresentationFullScreen];
-//        [self presentModalViewController:inAppViewController animated:YES];
-        
-        
+    //Max is third slid
+    else if (swipe.direction == UISwipeGestureRecognizerDirectionLeft && countSwipe < 3) {
+        imageView.image = [UIImage imageNamed:rightImage];
+        [self performAnimation:@"LEFT"];
+        countSwipe++;
     }
+    //On forth slide
+    else if(countSwipe > 3){
+        [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
+        [self.buttonDelegate openPanel];
+    }
+    
 }
 
 
@@ -120,9 +119,13 @@
 
 
 - (IBAction)signIn:(id)sender {
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     [self.buttonDelegate inAppPurchasePanelButtonTappedWasPressed:_btnSignIn.currentTitle];
 }
 
+/**
+ * Hide tray
+ */
 - (IBAction)hideTray:(id)sender {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
