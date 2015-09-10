@@ -1419,6 +1419,9 @@
 		C3766D941B56510200B7F5B2 /* icon72.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3766D4C1B56510100B7F5B2 /* icon72.jpg */; };
 		C3766D951B56510200B7F5B2 /* icon73.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3766D4D1B56510100B7F5B2 /* icon73.jpg */; };
 		C3766D961B56510200B7F5B2 /* old_icon8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3766D4E1B56510200B7F5B2 /* old_icon8.jpg */; };
+		C391EB041BA1AE9700A8DDE1 /* intro-img-1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C391EB011BA1AE9700A8DDE1 /* intro-img-1.jpg */; };
+		C391EB051BA1AE9700A8DDE1 /* intro-img-2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C391EB021BA1AE9700A8DDE1 /* intro-img-2.jpg */; };
+		C391EB061BA1AE9700A8DDE1 /* intro-img-3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C391EB031BA1AE9700A8DDE1 /* intro-img-3.jpg */; };
 		C3A30DA61AB7F8BD00B0F1CF /* liblob-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C300432A1AB6ED9300866385 /* liblob-ios.a */; };
 		C3D8DD911B53DBE1006C2A9F /* b1.png in Resources */ = {isa = PBXBuildFile; fileRef = C3D8DD7D1B53DBE1006C2A9F /* b1.png */; };
 		C3D8DD921B53DBE1006C2A9F /* b10.png in Resources */ = {isa = PBXBuildFile; fileRef = C3D8DD7E1B53DBE1006C2A9F /* b10.png */; };
@@ -3022,6 +3025,9 @@
 		C3766D4C1B56510100B7F5B2 /* icon72.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon72.jpg; sourceTree = "<group>"; };
 		C3766D4D1B56510100B7F5B2 /* icon73.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon73.jpg; sourceTree = "<group>"; };
 		C3766D4E1B56510200B7F5B2 /* old_icon8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = old_icon8.jpg; sourceTree = "<group>"; };
+		C391EB011BA1AE9700A8DDE1 /* intro-img-1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "intro-img-1.jpg"; sourceTree = "<group>"; };
+		C391EB021BA1AE9700A8DDE1 /* intro-img-2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "intro-img-2.jpg"; sourceTree = "<group>"; };
+		C391EB031BA1AE9700A8DDE1 /* intro-img-3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "intro-img-3.jpg"; sourceTree = "<group>"; };
 		C3D8DD7D1B53DBE1006C2A9F /* b1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b1.png; sourceTree = "<group>"; };
 		C3D8DD7E1B53DBE1006C2A9F /* b10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b10.png; sourceTree = "<group>"; };
 		C3D8DD7F1B53DBE1006C2A9F /* b11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b11.png; sourceTree = "<group>"; };
@@ -3147,6 +3153,9 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				C391EB011BA1AE9700A8DDE1 /* intro-img-1.jpg */,
+				C391EB021BA1AE9700A8DDE1 /* intro-img-2.jpg */,
+				C391EB031BA1AE9700A8DDE1 /* intro-img-3.jpg */,
 				204D69081B9EFB7600C6732E /* invite_email_selected@2x.png */,
 				204D69091B9EFB7600C6732E /* invite_email@2x.png */,
 				204D690A1B9EFB7600C6732E /* invite_email@3x.png */,
@@ -5532,6 +5541,7 @@
 				20F1FB061976526600D40E60 /* closeAd@2x.png in Resources */,
 				C3766D7F1B56510200B7F5B2 /* icon51.jpg in Resources */,
 				20B099351AC58D1900F19836 /* send@2x.png in Resources */,
+				C391EB061BA1AE9700A8DDE1 /* intro-img-3.jpg in Resources */,
 				24861F3019F9147100670F6D /* password_email_icon@3x.png in Resources */,
 				24861F3E19F9147100670F6D /* save_bg@3x.png in Resources */,
 				C35350A61B60CF5D00CF68F9 /* emoticon264Machovka-drink.png in Resources */,
@@ -6300,6 +6310,7 @@
 				24861EE719F9147100670F6D /* discount@3x.png in Resources */,
 				246EF52D193C515D004539B2 /* emoticon76@2x.png in Resources */,
 				20824B371908DFDA00AC0CB5 /* signin@2x.png in Resources */,
+				C391EB041BA1AE9700A8DDE1 /* intro-img-1.jpg in Resources */,
 				0F80C3B61785B41300D36795 /* twitter_login@2x.png in Resources */,
 				246EF4FF193C515D004539B2 /* emoticon34@2x.png in Resources */,
 				C3766D6C1B56510200B7F5B2 /* icon32.jpg in Resources */,
@@ -6656,6 +6667,7 @@
 				C353509C1B60CF5D00CF68F9 /* emoticon255cupcake.png in Resources */,
 				24218499194B4AEC00FDDA97 /* emoticon138@2x.png in Resources */,
 				2029789D1B4CFBE700F35E40 /* emoticon234-rap@2x.png in Resources */,
+				C391EB051BA1AE9700A8DDE1 /* intro-img-2.jpg in Resources */,
 				C3D8DD961B53DBE1006C2A9F /* b14.png in Resources */,
 				2029787C1B4CFBE700F35E40 /* emoticon201-byebye@2x.png in Resources */,
 				49B88988188652A2003766AD /* FacebookLikeView.html in Resources */,

@@ -34,7 +34,7 @@
     self.navigationController.navigationBarHidden = NO;
     
     countSwipe = 1;
-    imageView.image = [UIImage imageNamed:@"one.jpeg"];
+    imageView.image = [UIImage imageNamed:@"intro-img-1.jpg"];
     [imageView setUserInteractionEnabled:YES];
     swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
@@ -73,26 +73,25 @@
     NSString *leftImage, *rightImage;
     
     if(countSwipe == 1){
-        rightImage = @"two.jpeg";
+        rightImage = @"intro-img-2.jpg";
         
     } else if (countSwipe == 2) {
-        leftImage = @"one.jpeg";
-        rightImage = @"three.jpg";
+        leftImage = @"intro-img-1.jpg";
+        rightImage = @"intro-img-3.jpg";
         
     } else if (countSwipe >= 3){
-        leftImage = @"two.jpeg";
+        leftImage = @"intro-img-2.jpg";
         
     }
     
     
-    if (swipe.direction == UISwipeGestureRecognizerDirectionLeft) {
+    if (swipe.direction == UISwipeGestureRecognizerDirectionLeft && countSwipe < 4) {
         NSLog(@"Left Swipe");
         imageView.image = [UIImage imageNamed:rightImage];
         [self performAnimation:@"LEFT"];
         countSwipe++;
     }
-    
-    if (swipe.direction == UISwipeGestureRecognizerDirectionRight && countSwipe > 1) {
+    else if (swipe.direction == UISwipeGestureRecognizerDirectionRight && countSwipe > 1) {
         NSLog(@"Right Swipe");
         
         imageView.image = [UIImage imageNamed:leftImage];
@@ -104,10 +103,10 @@
     
     if(countSwipe > 3){
         
-        InAppViewController *inAppViewController = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
-        inAppViewController.buttondelegate = self;
-        [inAppViewController setModalPresentationStyle:UIModalPresentationFullScreen];
-        [self presentModalViewController:inAppViewController animated:YES];
+//        InAppViewController *inAppViewController = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
+//        inAppViewController.buttondelegate = self;
+//        [inAppViewController setModalPresentationStyle:UIModalPresentationFullScreen];
+//        [self presentModalViewController:inAppViewController animated:YES];
         
         
     }

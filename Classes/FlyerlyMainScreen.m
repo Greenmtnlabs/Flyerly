@@ -11,6 +11,7 @@
 #import "InviteFriendsController.h"
 #import "MainSettingViewController.h"
 
+
 @implementation FlyerlyMainScreen
 
 @synthesize sharePanel,tView;
@@ -50,10 +51,10 @@ id lastShareBtnSender;
     // Determin if the user has been greeted?
     NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
     
-    if( !greeted ) {
+    if( YES || !greeted ) {
         // Determining the previous version of app
         NSString *previuosVersion = [[NSUserDefaults standardUserDefaults] stringForKey:@"previousVersion"];
-        if( ![previuosVersion isEqualToString:[self appVersion]] || previuosVersion == nil ) {
+        if(  YES || ![previuosVersion isEqualToString:[self appVersion]] || previuosVersion == nil ) {
               [self openPanel];
         }
         
@@ -401,6 +402,16 @@ id lastShareBtnSender;
  * Here we Open InAppPurchase Panel
  */
 -(void)openPanel {
+    
+    introScreenViewController = [[IntroScreenViewController alloc] initWithNibName:@"IntroScreenViewController" bundle:nil];
+    [introScreenViewController setModalPresentationStyle:UIModalPresentationFullScreen];
+    introScreenViewController.buttonDelegate = self;
+    
+    [self presentViewController:introScreenViewController animated:YES completion:nil];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
+    
+}
+-(void)openPanel1 {
     
     if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
         inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
