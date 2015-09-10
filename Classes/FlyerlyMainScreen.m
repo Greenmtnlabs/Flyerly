@@ -51,11 +51,11 @@ id lastShareBtnSender;
     // Determin if the user has been greeted?
     NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
     
-    if( YES || !greeted ) {
+    if( !greeted ) {
         // Determining the previous version of app
         NSString *previuosVersion = [[NSUserDefaults standardUserDefaults] stringForKey:@"previousVersion"];
-        if(  YES || ![previuosVersion isEqualToString:[self appVersion]] || previuosVersion == nil ) {
-              [self openPanel];
+        if( ![previuosVersion isEqualToString:[self appVersion]] || previuosVersion == nil ) {
+              [self openIntro];
         }
         
         // Show the greeting before going to the main app.
@@ -401,7 +401,7 @@ id lastShareBtnSender;
 /*
  * Here we Open InAppPurchase Panel
  */
--(void)openPanel {
+-(void)openIntro {
     
     introScreenViewController = [[IntroScreenViewController alloc] initWithNibName:@"IntroScreenViewController" bundle:nil];
     [introScreenViewController setModalPresentationStyle:UIModalPresentationFullScreen];
@@ -411,7 +411,7 @@ id lastShareBtnSender;
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
     
 }
--(void)openPanel1 {
+-(void)openPanel {
     
     if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
         inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
@@ -641,6 +641,8 @@ id lastShareBtnSender;
 
 // Load invite friends
 -(IBAction)doInvite:(id)sender{
+    
+    //[self openIntro]; return; //for testing of intro screen
     
     //Checking if the user is valid or anonymous
     if ([[PFUser currentUser] sessionToken]) {
