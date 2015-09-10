@@ -9,6 +9,7 @@
 @protocol IntroScreenViewControllerButtonProtocol
 
 -(void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)introScreenPanelButtonCurrentTitle;
+-(void)openPanel;
 
 @end
 
