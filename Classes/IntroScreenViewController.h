@@ -6,18 +6,18 @@
 //
 //
 
-//@protocol IntroScreenViewControllerButtonProtocol
-//
-//-(void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)introScreenPanelButtonCurrentTitle;
-//
-//@end
+@protocol IntroScreenViewControllerButtonProtocol
+
+-(void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)introScreenPanelButtonCurrentTitle;
+
+@end
 
 
 #import <UIKit/UIKit.h>
 
 @interface IntroScreenViewController : UIViewController 
 
-//@property (nonatomic, assign) id <IntroScreenViewControllerButtonProtocol> buttonDelegate;
+@property (nonatomic, assign) id <IntroScreenViewControllerButtonProtocol> buttonDelegate;
 
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UIButton *btnHideMe;

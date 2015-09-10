@@ -365,6 +365,7 @@ BOOL adLoaded = false;
     
     introScreenViewController = [[IntroScreenViewController alloc] initWithNibName:@"IntroScreenViewController" bundle:nil];
     [introScreenViewController setModalPresentationStyle:UIModalPresentationFullScreen];
+    introScreenViewController.buttonDelegate = self;
     
     [self presentViewController:introScreenViewController animated:YES completion:nil];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
@@ -513,6 +514,7 @@ BOOL adLoaded = false;
 - (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle {
     
     __weak InAppViewController *inappviewcontroller_ = inappviewcontroller;
+    
     if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Sign In")]) {
         
         signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
@@ -525,7 +527,11 @@ BOOL adLoaded = false;
         UserPurchases *userPurchases_ = [UserPurchases getInstance];
         userPurchases_.delegate = self;
         
-        [inappviewcontroller_.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        if( inappviewcontroller_ != nil )
+            [inappviewcontroller_.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        if( introScreenViewController != nil )
+            [introScreenViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        
         [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
         
         signInController.signInCompletion = ^void(void) {
@@ -538,7 +544,6 @@ BOOL adLoaded = false;
         [self.navigationController pushViewController:signInController animated:YES];
         
     }else if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Restore Purchases")]){
-        
         
         [inappviewcontroller_ restorePurchase];
     }
