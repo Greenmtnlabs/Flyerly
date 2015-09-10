@@ -32,8 +32,9 @@
 #import "SHKActivityIndicator.h"
 #import "UIPlaceHolderTextView.h"
 #import "YouTubeSubClass.h"
+#import "CreateFlyerController.h"
 
-@class FlyrViewController,FlyerlySingleton;
+@class FlyrViewController,FlyerlySingleton, CreateFlyerController;
 @class SHKSharer;
 @class SHKActivityIndicator;
 
@@ -84,7 +85,7 @@
 @property (nonatomic,strong)NSString *selectedFlyerDescription;
 @property (nonatomic,strong)NSString *imageFileName;
 @property (nonatomic,weak)FlyrViewController *fvController;
-@property (nonatomic,weak)CreateFlyerController *cfController;
+@property (nonatomic,weak) CreateFlyerController *cfController;
 @property (strong, nonatomic) SHKActivityIndicator *activityIndicator;
 @property (nonatomic,strong) Flyer *flyer;
 @property (weak, nonatomic) id<SHKSharerDelegate> delegate;
