@@ -29,16 +29,16 @@
 @class MainFlyerCell, Flyer, SigninController, RegisterController, InAppViewController, CreateFlyerController,ShareViewController,PrintViewController;
 
 @interface FlyerlyMainScreen : ParentViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,RMStoreObserver,InAppPurchasePanelButtonProtocol, UserPurchasesDelegate ,GADInterstitialDelegate>{
-    
+
     CreateFlyerController *createFlyer;
-    
+
     SigninController *signInController;
     RegisterController *signUpController;
     ShareViewController *shareviewcontroller;
     InAppViewController *inappviewcontroller;
     UserPurchases *userPurchases;
     NSMutableArray *flyerPaths;
-    
+
     NSMutableArray *searchFlyerPaths;
     NSArray *requestedProducts;
     RMStoreKeychainPersistence *_persistence;

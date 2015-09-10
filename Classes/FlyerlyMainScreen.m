@@ -27,13 +27,13 @@ id lastShareBtnSender;
     lastShareBtnSender = nil;
     
     self.navigationItem.hidesBackButton = YES;
-    
-    tView.dataSource = self;
-    tView.delegate = self;
+
+	tView.dataSource = self;
+	tView.delegate = self;
     [self.view addSubview:tView];
     [self.tView setBackgroundView:nil];
     [self.tView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    
+
     // Load the flyers.
     flyerPaths = [self getFlyersPaths];
     
@@ -54,7 +54,7 @@ id lastShareBtnSender;
         // Determining the previous version of app
         NSString *previuosVersion = [[NSUserDefaults standardUserDefaults] stringForKey:@"previousVersion"];
         if( ![previuosVersion isEqualToString:[self appVersion]] || previuosVersion == nil ) {
-            [self openPanel];
+              [self openPanel];
         }
         
         // Show the greeting before going to the main app.
@@ -119,16 +119,16 @@ id lastShareBtnSender;
 -(IBAction)createFlyer:(id)sender {
     
     [self enableBtns:NO];
-    
+
     NSString *flyPath = [Flyer newFlyerPath];
     
     //Here We set Source for Flyer screen
     flyer = [[Flyer alloc]initWithPath:flyPath setDirectory:YES];
     
-    createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
+	createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
     createFlyer.flyerPath = flyPath;
     createFlyer.flyer = flyer;
-    
+
     //Tasks after create new flyer
     [createFlyer tasksOnCreateNewFlyer];
     
@@ -146,7 +146,7 @@ id lastShareBtnSender;
         [weakSelf.tView reloadData];
         
     }];
-    
+
     [createFlyer setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
         dispatch_async( dispatch_get_main_queue(), ^{
             if (haveValidSubscription == NO && ([weakSelf.interstitial isReady] && ![weakSelf.interstitial hasBeenUsed]) ){
@@ -157,12 +157,12 @@ id lastShareBtnSender;
         });
     }];
     
-    [self.navigationController pushViewController:createFlyer animated:YES];
+	[self.navigationController pushViewController:createFlyer animated:YES];
     
 }
 
 - (void)inAppPanelDismissed {
-    
+
 }
 
 -(NSArray *)leftBarItems{
@@ -172,7 +172,7 @@ id lastShareBtnSender;
     [inviteButton addTarget:self action:@selector(doInvite:) forControlEvents:UIControlEventTouchUpInside];
     inviteButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
-    
+
     return [NSMutableArray arrayWithObjects:backBarButton,nil];
 }
 
@@ -185,7 +185,7 @@ id lastShareBtnSender;
     UIImageView *logo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 102, 38)];
     [logo setImage:[UIImage imageNamed:@"flyerlylogo"]];
     self.navigationItem.titleView = logo;
-    
+
     // Create Button
     createButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [createButton addTarget:self action:@selector(createFlyer:) forControlEvents:UIControlEventTouchUpInside];
@@ -252,13 +252,13 @@ id lastShareBtnSender;
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:indexPath.row] setDirectory:NO];
-        [cell renderCell:flyer LockStatus:NO];
-        [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
-        cell.shareBtn.tag = indexPath.row;
-        [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
+            flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:indexPath.row] setDirectory:NO];
+            [cell renderCell:flyer LockStatus:NO];
+            [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
+            cell.shareBtn.tag = indexPath.row;
+            [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
     });
-    
+
     return cell;
 }
 
@@ -283,7 +283,7 @@ id lastShareBtnSender;
         [weakCreate.flyer setRecentFlyer];
         
         [weakCreate.flyer saveAfterCheck];
-        
+
         [weakSelf enableBtns:YES];
         
         // HERE WE GET FLYERS
@@ -302,7 +302,7 @@ id lastShareBtnSender;
         });
     }];
     
-    [self.navigationController pushViewController:createFlyer animated:YES];
+	[self.navigationController pushViewController:createFlyer animated:YES];
 }
 - (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
     //on add dismiss && after merging video process, save in gallery
@@ -312,24 +312,24 @@ id lastShareBtnSender;
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    [tableView beginUpdates];
-    [tableView setEditing:YES animated:YES];
+	[tableView beginUpdates];
+	[tableView setEditing:YES animated:YES];
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
         [tableView deleteRowsAtIndexPaths:
-         @[[NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section]]
+        @[[NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section]]
                          withRowAnimation:UITableViewRowAnimationLeft];
-        
-        
+       
+            
         [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:indexPath.row] error:nil];
         [flyerPaths removeObjectAtIndex:indexPath.row];
-        
-    }
+
+	}
     
     [tableView setEditing:NO animated:YES];
-    [tableView endUpdates];
-    [tableView reloadData];
+	[tableView endUpdates];
+	[tableView reloadData];
 }
 
 
@@ -371,7 +371,7 @@ id lastShareBtnSender;
  * It was required when mergin process takes time, so prevent user to do any action
  */
 -(void)enableBtns:(BOOL)enable{
-    
+
     inviteButton.enabled = enable;
     createButton.enabled = enable;
     rightUndoBarButton.enabled = enable;
@@ -392,7 +392,7 @@ id lastShareBtnSender;
 -(void)setNavigation{
     // Set left bar items
     [self.navigationItem setLeftBarButtonItems: [self leftBarItems]];
-    
+
     // Set right bar items
     [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
 }
@@ -586,22 +586,22 @@ id lastShareBtnSender;
 
 -(void)signInRequired {
     signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
-    
+
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     signInController.launchController = appDelegate.lauchController;
-    
+
     __weak FlyerlyMainScreen *flyerlyMainScreen = self;
-    
+
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
-    
+
     userPurchases_.delegate = self;
-    
+
     signInController.signInCompletion = ^void(void) {
         UINavigationController* navigationController = flyerlyMainScreen.navigationController;
         [navigationController popViewControllerAnimated:NO];
         [userPurchases_ setUserPurcahsesFromParse];
     };
-    
+
     [self.navigationController pushViewController:signInController animated:YES];
 }
 
@@ -610,15 +610,15 @@ id lastShareBtnSender;
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
-        
+         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+
         [self.tView reloadData];
         [inappviewcontroller.paidFeaturesTview reloadData];
     }else {
-        
+            
         [self presentViewController:inappviewcontroller animated:NO completion:nil];
     }
-    
+
 }
 
 // Load Preferences Method
