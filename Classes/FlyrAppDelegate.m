@@ -386,11 +386,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
             // Migrate Account For 3.0 Version
             [FlyerUser migrateUserto3dot0:object];
             
-            //Getting Recent Flyers
-            lauchController.recentFlyers = [Flyer recentFlyerPreview:4];
-            
-            //Set Recent Flyers
-            [lauchController updateRecentFlyer:lauchController.recentFlyers];
             [lauchController hideLoadingIndicator];
             
         }
@@ -434,12 +429,6 @@ if it exist then we call Merging Process
                     // Migrate Account For 3.0 Version
                     [FlyerUser migrateUserto3dot0:object];
                     
-                    //Getting Recent Flyers
-                    
-                    lauchController.recentFlyers = [Flyer recentFlyerPreview:4];
-                    
-                    //Set Recent Flyers
-                    [lauchController updateRecentFlyer:lauchController.recentFlyers];
                     [lauchController hideLoadingIndicator];
                     
                 }

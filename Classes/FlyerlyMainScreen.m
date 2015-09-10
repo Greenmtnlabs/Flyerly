@@ -1,126 +1,627 @@
-
-
+//
+//  FlyerlyMainScreen.m
+//  Flyr
 //
 //  Created by Riksof Pvt. Ltd. on 22/Jan/2014.
+//  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
 #import "FlyerlyMainScreen.h"
-#import "CreateFlyerController.h"
-#import "FlyrViewController.h"
-#import "InviteFriendsController.h"
-#import "FlyrAppDelegate.h"
-#import "ShareViewController.h"
-#import "Common.h"
 #import "UserPurchases.h"
-#import "HelpController.h"
-#import "Flurry.h"
-#import "SHKConfiguration.h"
-#import "FlyerlyConfigurator.h"
-#import "FlyerUser.h"
-#import "UVConfig.h"
-#import "UserVoice.h"
-#import "Common.h"
-#import "GADInterstitial.h"
-#import "GADInterstitialDelegate.h"
-
-@interface FlyerlyMainScreen ()  {
-    
-    FlyerlyConfigurator *flyerConfigurator;
-}
-
-@end
+#import "InviteFriendsController.h"
+#import "MainSettingViewController.h"
 
 @implementation FlyerlyMainScreen
 
-@synthesize tpController;
-@synthesize createFlyrLabel;
-@synthesize savedFlyrLabel;
-@synthesize inviteFriendLabel;
-@synthesize addFriendsController;
-@synthesize createFlyrButton;
-@synthesize savedFlyrButton;
-@synthesize recentFlyers;
-@synthesize inviteFriendButton;
-@synthesize introScreenViewController;
+@synthesize sharePanel,tView;
+@synthesize flyerPaths;
+@synthesize flyer, signInAlert,settingBtn;
 
-BOOL adLoaded = false;
+id lastShareBtnSender;
 
+#pragma mark  View Methods
 
-//When user tap on create new flyer(from main screen)
--(IBAction)doNew:(id)sender{
+- (void)viewDidLoad {
     
-    [Flurry logEvent:@"Create Flyer"];
+    [super viewDidLoad];
+    lastShareBtnSender = nil;
+    
+    self.navigationItem.hidesBackButton = YES;
+    
+    tView.dataSource = self;
+    tView.delegate = self;
+    [self.view addSubview:tView];
+    [self.tView setBackgroundView:nil];
+    [self.tView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    
+    // Load the flyers.
+    flyerPaths = [self getFlyersPaths];
+    
+    sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,200 )];
+    sharePanel.hidden = YES;
+    [self.view addSubview:sharePanel];
+    
+    //set Navigation
+    self.navigationController.navigationBarHidden=NO;
+    self.navigationItem.leftItemsSupplementBackButton = YES;
+    
+    [self setNavigation];
+    
+    // Determin if the user has been greeted?
+    NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
+    
+    if( !greeted ) {
+        // Determining the previous version of app
+        NSString *previuosVersion = [[NSUserDefaults standardUserDefaults] stringForKey:@"previousVersion"];
+        if( ![previuosVersion isEqualToString:[self appVersion]] || previuosVersion == nil ) {
+            [self openPanel];
+        }
+        
+        // Show the greeting before going to the main app.
+        [[NSUserDefaults standardUserDefaults] setObject:@"greeted" forKey:@"greeted"];
+        
+    }
+    
+    [self checkUserPurchases];
+}
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self checkUserPurchases];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBar.alpha = 1.0;
+}
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+- (NSString *) appVersion {
+    return [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
+}
+
+-(void)checkUserPurchases{
+    //Checking if the user is valid or anonymus
+    if ([[PFUser currentUser] sessionToken]) {
+        
+        UserPurchases *userPurchases_ = [UserPurchases getInstance];
+        
+        //GET UPDATED USER PUCHASES INFO
+        [userPurchases_ setUserPurcahsesFromParse];
+        
+    } else {
+        NSLog(@"Anonymous, User is NOT authenticated.");
+    }
+}
+
+#pragma mark  Text Field Delegete
+
+- (void)textFieldTapped:(id)sender {
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    return YES;
+}
+
+
+#pragma mark  custom Methods
+
+- (void) searchTableView:(NSString *)schTxt {
+    [self.tView reloadData];
+}
+
+//when user tap on create new flyer(from saved flyer)
+-(IBAction)createFlyer:(id)sender {
+    
+    [self enableBtns:NO];
+    
     NSString *flyPath = [Flyer newFlyerPath];
-
+    
     //Here We set Source for Flyer screen
     flyer = [[Flyer alloc]initWithPath:flyPath setDirectory:YES];
-	createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
+    
+    createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
     createFlyer.flyerPath = flyPath;
     createFlyer.flyer = flyer;
-
     
-    //Tasks after create new flyer 
+    //Tasks after create new flyer
     [createFlyer tasksOnCreateNewFlyer];
     
     __weak FlyerlyMainScreen *weakSelf = self;
     __weak CreateFlyerController *weakCreate = createFlyer;
     
-    [createFlyer setOnFlyerBack:^(NSString *flyPath) {
-        //Here we setCurrent Flyer is Most Recent Flyer
-        [weakCreate.flyer setRecentFlyer];
-
+    //Here we Manage Block for Update
+    [createFlyer setOnFlyerBack:^(NSString *nothing) {
         [weakCreate.flyer saveAfterCheck];
         
-        //Getting Recent Flyers
-        weakSelf.recentFlyers = [Flyer recentFlyerPreview:4];
+        [weakSelf enableBtns:YES];
         
-        //Set Recent Flyers
-        [weakSelf updateRecentFlyer:weakSelf.recentFlyers];
+        //HERE WE GET FLYERS
+        weakSelf.flyerPaths = [weakSelf getFlyersPaths];
+        [weakSelf.tView reloadData];
         
-        // Stop Animations ane enable buttons
-        for ( int i = 0; i < weakSelf.activityIndicators.count; i++ ) {
-            UIActivityIndicatorView *indicator = [weakSelf.activityIndicators objectAtIndex:i];
-            [indicator stopAnimating];
-            
-            UIButton *button = [weakSelf.flyerButtons objectAtIndex:i];
-            [button setUserInteractionEnabled:YES];
-        }
     }];
     
     [createFlyer setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
         dispatch_async( dispatch_get_main_queue(), ^{
-                if (haveValidSubscription == NO && ([weakSelf.addInterstialFms isReady] && ![weakSelf.addInterstialFms hasBeenUsed]) ){
-                    [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
-                } else{
-                    [weakCreate.flyer saveAfterCheck];
-                }
+            if (haveValidSubscription == NO && ([weakSelf.interstitial isReady] && ![weakSelf.interstitial hasBeenUsed]) ){
+                [weakSelf.interstitial presentFromRootViewController:weakSelf];
+            }  else{
+                [weakCreate.flyer saveAfterCheck];
+            }
         });
     }];
     
+    [self.navigationController pushViewController:createFlyer animated:YES];
     
+}
+
+- (void)inAppPanelDismissed {
     
-	[self.navigationController pushViewController:createFlyer animated:YES];
+}
+
+-(NSArray *)leftBarItems{
+    inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    [inviteButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [inviteButton setBackgroundImage:[UIImage imageNamed:@"invite_friend"] forState:UIControlStateNormal];
+    [inviteButton addTarget:self action:@selector(doInvite:) forControlEvents:UIControlEventTouchUpInside];
+    inviteButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
     
-    // Start animations and disable buttons
-    for ( int i = 0; i < _activityIndicators.count; i++ ) {
-        UIActivityIndicatorView *indicator = [_activityIndicators objectAtIndex:i];
-        [indicator startAnimating];
+    return [NSMutableArray arrayWithObjects:backBarButton,nil];
+}
+
+
+
+
+-(NSArray *)rightBarItems{
+    
+    // for Navigation Bar logo
+    UIImageView *logo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 102, 38)];
+    [logo setImage:[UIImage imageNamed:@"flyerlylogo"]];
+    self.navigationItem.titleView = logo;
+    
+    // Create Button
+    createButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    [createButton addTarget:self action:@selector(createFlyer:) forControlEvents:UIControlEventTouchUpInside];
+    [createButton setBackgroundImage:[UIImage imageNamed:@"createButton"] forState:UIControlStateNormal];
+    createButton.showsTouchWhenHighlighted = YES;
+    rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:createButton];
+    
+    return [NSMutableArray arrayWithObjects:rightUndoBarButton,nil];
+}
+
+
+
+/*
+ * Here we get All Flyers Directories
+ * return
+ *      Nsarray of Flyers Path
+ */
+-(NSMutableArray *)getFlyersPaths{
+    
+    NSMutableArray *sortedList = [ Flyer recentFlyerPreview:0];
+    
+    for(int i = 0 ; i < [sortedList count];i++) {
         
-        UIButton *button = [_flyerButtons objectAtIndex:i];
-        [button setUserInteractionEnabled:NO];
+        //Here we remove File Name from Path
+        NSString *pathWithoutFileName = [[sortedList objectAtIndex:i]
+                                         stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE] withString:@""];
+        [sortedList replaceObjectAtIndex:i withObject:pathWithoutFileName];
+    }
+    return sortedList;
+}
+
+
+#pragma mark Table view methods
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+// Customize the number of rows in the table view.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return  [flyerPaths count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *cellId = @"Cell";
+    MainFlyerCell *cell = (MainFlyerCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
+    
+    [cell setAccessoryType:UITableViewCellAccessoryNone];
+    if (cell == nil) {
+        if( IS_IPHONE_5 || IS_IPHONE_4){
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
+            cell = (MainFlyerCell *)[nib objectAtIndex:0];
+        } else if ( IS_IPHONE_6 ){
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6" owner:self options:nil];
+            cell = (MainFlyerCell *)[nib objectAtIndex:0];
+        } else if ( IS_IPHONE_6_PLUS ) {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6-Plus" owner:self options:nil];
+            cell = (MainFlyerCell *)[nib objectAtIndex:0];
+        } else {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
+            cell = (MainFlyerCell *)[nib objectAtIndex:0];
+        }
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:indexPath.row] setDirectory:NO];
+        [cell renderCell:flyer LockStatus:NO];
+        [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
+        cell.shareBtn.tag = indexPath.row;
+        [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
+    });
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [self enableBtns:NO];
+    
+    flyer = [[Flyer alloc]initWithPath:[flyerPaths objectAtIndex:indexPath.row] setDirectory:YES];
+    
+    createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
+    
+    // Set CreateFlyer Screen
+    createFlyer.flyer = flyer;
+    
+    __weak FlyerlyMainScreen *weakSelf = self;
+    __weak CreateFlyerController *weakCreate = createFlyer;
+    
+    //Here we Manage Block for Update
+    [createFlyer setOnFlyerBack:^(NSString *nothing) {
+        
+        // Here we setCurrent Flyer is Most Recent Flyer
+        [weakCreate.flyer setRecentFlyer];
+        
+        [weakCreate.flyer saveAfterCheck];
+        
+        [weakSelf enableBtns:YES];
+        
+        // HERE WE GET FLYERS
+        weakSelf.flyerPaths = [weakSelf getFlyersPaths];
+        [weakSelf.tView reloadData];
+        
+    }];
+    
+    [createFlyer setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
+        dispatch_async( dispatch_get_main_queue(), ^{
+            if (haveValidSubscription == NO && ([weakSelf.interstitial isReady] && ![weakSelf.interstitial hasBeenUsed]) ){
+                [weakSelf.interstitial presentFromRootViewController:weakSelf];
+            } else{
+                [weakCreate.flyer saveAfterCheck];
+            }
+        });
+    }];
+    
+    [self.navigationController pushViewController:createFlyer animated:YES];
+}
+- (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
+    //on add dismiss && after merging video process, save in gallery
+    [createFlyer.flyer saveAfterCheck];
+}
+
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [tableView beginUpdates];
+    [tableView setEditing:YES animated:YES];
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        [tableView deleteRowsAtIndexPaths:
+         @[[NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section]]
+                         withRowAnimation:UITableViewRowAnimationLeft];
+        
+        
+        [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:indexPath.row] error:nil];
+        [flyerPaths removeObjectAtIndex:indexPath.row];
+        
+    }
+    
+    [tableView setEditing:NO animated:YES];
+    [tableView endUpdates];
+    [tableView reloadData];
+}
+
+
+- ( void )productSuccesfullyPurchased: (NSString *)productId {
+    
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
+    
+    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
+        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+        
+        [self.tView reloadData];
+        [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+    
+}
+- ( void )inAppPurchasePanelContent {
+    [inappviewcontroller inAppDataLoaded];
+}
+
+#pragma mark - UIAlertView delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if(alertView == signInAlert && buttonIndex == 0) {
+        [self enableBtns:YES];
+        [self hideLoadingIndicator];
+    } else if(alertView == signInAlert && buttonIndex == 1) {
+        [self signInRequired];
     }
 }
 
 
--(IBAction)doOpen:(id)sender{
-    tpController = [[FlyrViewController alloc]initWithNibName:@"FlyrViewController" bundle:nil];
-	[self.navigationController pushViewController:tpController animated:YES];
+-(void)enableHome:(BOOL)enable{
+    [self.tView reloadData];
+    [self enableBtns:YES];
 }
-//End
+
+/**
+ * Enable touche on table view and buttons,
+ * It was required when mergin process takes time, so prevent user to do any action
+ */
+-(void)enableBtns:(BOOL)enable{
+    
+    inviteButton.enabled = enable;
+    createButton.enabled = enable;
+    rightUndoBarButton.enabled = enable;
+    settingBtn.enabled = enable;
+    
+    tView.userInteractionEnabled = enable;
+    
+    if( enable ){
+        [self hideLoadingIndicator];
+    } else{
+        [self showLoadingIndicator];
+    }
+}
+
+/**
+ * Set navigation bar
+ */
+-(void)setNavigation{
+    // Set left bar items
+    [self.navigationItem setLeftBarButtonItems: [self leftBarItems]];
+    
+    // Set right bar items
+    [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
+}
+
+/*
+ * Here we Open InAppPurchase Panel
+ */
+-(void)openPanel {
+    
+    if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
+        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
+    } else {
+        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
+    }
+    
+    [self presentViewController:inappviewcontroller animated:NO completion:nil];
+    
+    [inappviewcontroller requestProduct];
+    inappviewcontroller.buttondelegate = self;
+}
+
+-(void)onShare:(id)sender {
+    UIButton *clickButton = sender;
+    NSInteger row = clickButton.tag; ///will get it from button tag
+    flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:row] setDirectory:NO];
+    
+    if ( [[PFUser currentUser] sessionToken] ) {
+        [self enableBtns:NO];
+        sharePanel.hidden = NO;
+        [sharePanel removeFromSuperview];
+        
+        if ([flyer isVideoFlyer]) {
+            if ( IS_IPHONE_5 || IS_IPHONE_4) {
+                shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareVideoViewController" bundle:nil];
+            }else if ( IS_IPHONE_6 || IS_IPHONE_6_PLUS ) {
+                shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareVideoViewController-iPhone6" bundle:nil];
+            }
+            
+        } else {
+            
+            if ( IS_IPHONE_5 || IS_IPHONE_4) {
+                shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
+            }else if ( IS_IPHONE_6  || IS_IPHONE_6_PLUS ) {
+                shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController-iPhone6" bundle:nil];
+            }
+            
+        }
+        shareviewcontroller.cfController = self;
+        
+        sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
+        if ( IS_IPHONE_6) {
+            sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 340,350 )];
+        }else if ( IS_IPHONE_6_PLUS){
+            sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 400,600 )];
+        }
+        
+        sharePanel.backgroundColor = [UIColor redColor];
+        sharePanel = shareviewcontroller.view;
+        
+        [self.view addSubview:sharePanel];
+        
+        sharePanel = shareviewcontroller.view;
+        NSString *shareImagePath = [flyer getFlyerImage];
+        UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
+        
+        //Here we Pass Param to Share Screen Which use for Sharing
+        [shareviewcontroller.titleView resignFirstResponder];
+        [shareviewcontroller.descriptionView resignFirstResponder];
+        shareviewcontroller.selectedFlyerImage = shareImage;
+        shareviewcontroller.flyer = self.flyer;
+        shareviewcontroller.imageFileName = shareImagePath;
+        shareviewcontroller.rightUndoBarButton = rightUndoBarButton;
+        shareviewcontroller.shareButton = createButton;
+        shareviewcontroller.backButton = inviteButton;
+        if( [shareviewcontroller.titleView.text isEqualToString:@"Flyer"] ) {
+            shareviewcontroller.titleView.text = [flyer getFlyerTitle];
+        }
+        
+        NSString *title = [flyer getFlyerTitle];
+        if (![title isEqualToString:@""]) {
+            shareviewcontroller.titleView.text = title;
+        }
+        
+        NSString *description = [flyer getFlyerDescription];
+        if (![description isEqualToString:@""]) {
+            shareviewcontroller.descriptionView.text = description;
+        }
+        
+        NSString *shareType  = [[NSUserDefaults standardUserDefaults] valueForKey:@"FlyerlyPublic"];
+        
+        if ([shareType isEqualToString:@"Private"]) {
+            [shareviewcontroller.flyerShareType setSelected:YES];
+        }
+        
+        if ([[flyer getShareType] isEqualToString:@"Private"]){
+            [shareviewcontroller.flyerShareType setSelected:YES];
+        }
+        
+        shareviewcontroller.selectedFlyerDescription = [flyer getFlyerDescription];
+        //shareviewcontroller.topTitleLabel = titleLabel;
+        
+        [shareviewcontroller.descriptionView setReturnKeyType:UIReturnKeyDone];
+        shareviewcontroller.Yvalue = [NSString stringWithFormat:@"%f",self.view.frame.size.height];
+        
+        PFUser *user = [PFUser currentUser];
+        if (user[@"appStarRate"])
+            [shareviewcontroller setStarsofShareScreen:user[@"appStarRate"]];
+        
+        [user saveInBackground];
+        
+        [shareviewcontroller setSocialStatus];
+        
+        //Here we Get youtube Link
+        NSString *isAnyVideoUploadOnYoutube = [self.flyer getYoutubeLink];
+        
+        // Any Uploaded Video Link Available of Youtube
+        // then we Enable Other Sharing Options
+        if (![isAnyVideoUploadOnYoutube isEqualToString:@""]) {
+            [shareviewcontroller enableAllShareOptions];
+        }
+        
+        //Create Animation Here
+        [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,475 )];
+        if ( IS_IPHONE_6) {
+            [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 375,350 )];
+        }else if ( IS_IPHONE_6_PLUS){
+            [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 375,550 )];
+        }
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+        [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height - 450, 320,505 )];
+        if ( IS_IPHONE_6) {
+            [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height - 450, 375,450 )];
+        }else if ( IS_IPHONE_6_PLUS){
+            [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height-550, 420,550 )];
+        }
+        [UIView commitAnimations];
+        [self hideLoadingIndicator];
+        
+    } else {
+        // Alert when user logged in as anonymous
+        signInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In"
+                                                 message:@"The selected feature requires that you sign in. Would you like to register or sign in now?"
+                                                delegate:self
+                                       cancelButtonTitle:@"Later"
+                                       otherButtonTitles:@"Sign In",nil];
+        
+        
+        if ( !self.interstitial.hasBeenUsed )
+            [signInAlert show];
+    }
+    
+}
 
 
-// Load Preferences Method 
+- (void)printFlyer {
+    
+    if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+        printViewController = [[PrintViewController alloc] initWithNibName:@"PrintViewController" bundle:nil];
+    }else {
+        printViewController = [[PrintViewController alloc] initWithNibName:@"PrintViewController-iPhone4" bundle:nil];
+    }
+    
+    printViewController.flyer = self.flyer;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didDismissPrintViewController)
+                                                 name:@"PrintViewControllerDismissed"
+                                               object:nil];
+    [self presentViewController:printViewController animated:NO completion:nil];
+}
+
+
+-(void)didDismissPrintViewController {
+    
+    InviteForPrint *inviteForPrint = [[InviteForPrint alloc]initWithNibName:@"InviteForPrint" bundle:nil];
+    inviteForPrint.flyer = self.flyer;
+    [self.navigationController pushViewController:inviteForPrint animated:YES];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PrintViewControllerDismissed" object:nil];
+}
+
+- (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle {
+    
+    __weak InAppViewController *inappviewcontroller_ = inappviewcontroller;
+    if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Sign In")]) {
+        [inappviewcontroller_.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        [self signInRequired];
+    }else if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Restore Purchases")]){
+        [inappviewcontroller_ restorePurchase];
+    }
+}
+
+-(void)signInRequired {
+    signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    signInController.launchController = appDelegate.lauchController;
+    
+    __weak FlyerlyMainScreen *flyerlyMainScreen = self;
+    
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
+    
+    userPurchases_.delegate = self;
+    
+    signInController.signInCompletion = ^void(void) {
+        UINavigationController* navigationController = flyerlyMainScreen.navigationController;
+        [navigationController popViewControllerAnimated:NO];
+        [userPurchases_ setUserPurcahsesFromParse];
+    };
+    
+    [self.navigationController pushViewController:signInController animated:YES];
+}
+
+- (void) userPurchasesLoaded {
+    
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
+    
+    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
+        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+        
+        [self.tView reloadData];
+        [inappviewcontroller.paidFeaturesTview reloadData];
+    }else {
+        
+        [self presentViewController:inappviewcontroller animated:NO completion:nil];
+    }
+    
+}
+
+// Load Preferences Method
 -(IBAction)doAbout:(id)sender{
     MainSettingViewController *mainsettingviewcontroller = [[MainSettingViewController alloc]initWithNibName:@"MainSettingViewController" bundle:nil] ;
     [self.navigationController pushViewController:mainsettingviewcontroller animated:YES];
@@ -132,552 +633,16 @@ BOOL adLoaded = false;
     
     //Checking if the user is valid or anonymous
     if ([[PFUser currentUser] sessionToken]) {
-       
-        addFriendsController = [[InviteFriendsController alloc]initWithNibName:@"InviteFriendsController" bundle:nil];
+        
+        InviteFriendsController *addFriendsController = [[InviteFriendsController alloc]initWithNibName:@"InviteFriendsController" bundle:nil];
         
         [self.navigationController pushViewController:addFriendsController animated:YES];
         
     } else {
-         // Alert when user logged in as anonymous
-        UIAlertView *signInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In" message:@"The selected feature requires that you sign in. Would you like to register or sign in now?" delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Sign In",nil];
+        // Alert when user logged in as anonymous
+        signInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In" message:@"The selected feature requires that you sign in. Would you like to register or sign in now?" delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Sign In",nil];
         [signInAlert show];
-      
-    }
-	
-}
-//End
-
-// Buttons event handler,when user click on invite button in anonymous mood
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-   //when click on sign in button in alert view
-    if(buttonIndex == 1)
-    {
-
-        signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
         
-        signInController.launchController = self;
-        
-        __weak FlyerlyMainScreen *weakMainFlyerScreen = self;
-                        
-        signInController.signInCompletion = ^void(void) {
-            
-            UINavigationController* navigationController = weakMainFlyerScreen.navigationController;
-            [navigationController popViewControllerAnimated:NO];
-            
-            // Push Invite friends screen on navigation stack
-            weakMainFlyerScreen.addFriendsController = [[InviteFriendsController alloc]initWithNibName:@"InviteFriendsController" bundle:nil];            
-            [weakMainFlyerScreen.navigationController pushViewController:weakMainFlyerScreen.addFriendsController animated:YES];
-            
-        };
-        
-        [self.navigationController pushViewController:signInController animated:YES];
-    }
-   
-    
-}
-
-/*
- * here we Resize Image by providing image & Size as param
- */
-- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
-    
-    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
-    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
-}
-
-/*
- * Here we Set recent Flyer
- */
-- (void)updateRecentFlyer:(NSMutableArray *)recFlyers{
-
-    for ( int i = 0; i < _flyerPreviews.count; i++ ) {
-        UIImageView *preview = [_flyerPreviews objectAtIndex:i];
-        
-        
-        // Get the size.
-        CGSize size = CGSizeMake( preview.frame.size.width, preview.frame.size.height );
-        
-        // Do we have a flyer at this index?
-        if ( recFlyers.count > i ) {
-            // Get the recent image
-            UIImage *recentImage =  [UIImage imageWithContentsOfFile:[recFlyers objectAtIndex:i]];
-            
-            // Resize it
-            UIImage *resizeImage = [self imageWithImage:recentImage scaledToSize:size];
-            
-            // Set this image for preview
-            preview.image = resizeImage;
-        } else {
-            // Use default image.
-            preview.image = [UIImage imageNamed:@"pinned_flyer2.png"];
-        }
-        
-    }
-}
-
-
-#pragma mark View Appear 
-
--(void)viewWillAppear:(BOOL)animated{
-	[super viewWillAppear:YES];
-    
-    globle.NBUimage = nil;
-
-    //Getting Recent Flyers
-    recentFlyers = [Flyer recentFlyerPreview:4];
-
-    //Set Recent Flyers
-    [self updateRecentFlyer:recentFlyers];
-    
-    self.navigationController.navigationBarHidden = NO;
-    
-    // Execute the rest of the stuff, a little delayed to speed up loading.
-    dispatch_async( dispatch_get_main_queue(), ^{
-        
-        //Checking if the user is valid or anonymus
-        if ([[PFUser currentUser] sessionToken].length != 0) {
-        
-        NSString *username = [[PFUser currentUser] objectForKey:@"username"];
-        //Save congratulation message a/c to username
-        NSString *congratulatedVal  =   [NSString stringWithFormat:@"%@-%@",username, @"congratulated"];
-        // Determin if the user has been congratulated?
-        NSString *congratulated = [[NSUserDefaults standardUserDefaults] stringForKey:@"congratulated"];
-
-        PFQuery *query = [PFUser query];
-        [query whereKey:@"username" equalTo:username];
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            if (!error) {
-                if (objects.count) {
-                    for (PFObject *object in objects){
-                        NSLog(@"ParseUser unique object ID: %@", object.objectId);
-                        
-                        PFQuery *query = [PFUser  query];
-                        [query whereKey:@"objectId" equalTo:object.objectId];
-                        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
-                            
-                            if (!error) {
-                                NSMutableDictionary *counterDictionary = [object valueForKey:@"estimatedData"];
-                                int refrelCounter = [[counterDictionary objectForKey:@"inviteCounter"] intValue];
-
-                                //When user invited more then 20 peoples
-                                if ( refrelCounter >= 20 && ![congratulated isEqualToString:congratulatedVal] ) {
-                                    //bundel changed on preston request, see git issue #417
-                                    NSString *pid  = @"com.flyerly.AllDesignBundle";//@"com.flyerly.UnlockSavedFlyers";
-                                    
-                                    NSString *strWithOutDot = [pid stringByReplacingOccurrencesOfString:@"." withString:@""];
-                                    
-                                    if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
-                                        
-                                        NSMutableDictionary *userPurchase =[[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults]valueForKey:@"InAppPurchases"]];
-                                        
-                                        [userPurchase setValue:@"1" forKey:strWithOutDot];
-                                        [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
-                                        
-                                    }else {
-                                        NSMutableDictionary *userPurchase =[[NSMutableDictionary alloc] init];
-                                        [userPurchase setValue:@"1" forKey:strWithOutDot];
-                                        [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
-                                        
-                                    }
-                                    
-                                    InAppViewController *purchseController = [[InAppViewController alloc] init];
-                                    
-                                    //Saved in Parse Account
-                                    [purchseController updateParse];
-                                    // Showing action sheet after succesfull sign in
-                                    [userPurchases setUserPurcahsesFromParse];
-                                    [purchseController.buttondelegate productSuccesfullyPurchased:pid];
-                                    
-                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Design Bundle Unlocked!" message:@"Thank you for helping us grow!  You just earned the Design Bundle for inviting others to join Flyerly." delegate:self cancelButtonTitle:@"Awesome!" otherButtonTitles:nil, nil];
-                                    
-                                    [alert show];
-                                    
-                                    // Show the greeting before going to the main app.
-                                    [[NSUserDefaults standardUserDefaults] setObject:congratulatedVal forKey:@"congratulated"];
-                                    
-                                }
-                            }
-                        }];
-                    }
-                }
-            }
-        }];
-        
-
-        
-    }
-    });
-    
-    // for Navigation Bar logo
-    UIImageView *logo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 102, 38)];
-    [logo setImage:[UIImage imageNamed:@"flyerlylogo"]];
-    self.navigationItem.titleView = logo;
-    
-    [self.navigationItem setHidesBackButton:YES];
-    
-    
-    //Checking if the user is valid or anonymus
-    if ([[PFUser currentUser] sessionToken]) {
-        
-        UserPurchases *userPurchases_ = [UserPurchases getInstance];
-        
-        //GET UPDATED USER PUCHASES INFO
-        [userPurchases_ setUserPurcahsesFromParse];
-        
-    } else {
-        NSLog(@"Anonymous, User is NOT authenticated.");
-    }
-}
-
-/*
- * Returns the left items on navigation bar
- * Add space item with help icon
- */
--(NSArray *)leftBarItems{
-    // Space item
-    UIBarButtonItem *spaceBarButton = [[UIBarButtonItem alloc] initWithCustomView:[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)]];
-    
-    // Create left bar help button
-    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
-    [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
-    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
-    
-    NSMutableArray *leftItems = [NSMutableArray arrayWithObjects:spaceBarButton,leftBarButton,nil];
-    
-    return leftItems;
-}
-
--(void)loadHelpController{
-    
-    [UserVoice presentUserVoiceInterfaceForParentViewController:self];
-}
-
-/*
- * Here we Open InAppPurchase Panel
- */
-
--(void)openPanel {
-    
-    introScreenViewController = [[IntroScreenViewController alloc] initWithNibName:@"IntroScreenViewController" bundle:nil];
-    [introScreenViewController setModalPresentationStyle:UIModalPresentationFullScreen];
-    introScreenViewController.buttonDelegate = self;
-    
-    [self presentViewController:introScreenViewController animated:YES completion:nil];
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
-    
-}
-
-
--(void)openPanel1{
-    
-    if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
-        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
-        [inappviewcontroller setModalPresentationStyle:UIModalPresentationFullScreen];
-        
-    }else {
-        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
-        [inappviewcontroller setModalPresentationStyle:UIModalPresentationFullScreen];
-        
-    }
-    [self presentViewController:inappviewcontroller animated:YES completion:nil];
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
-    
-    [inappviewcontroller requestProduct];
-    inappviewcontroller.buttondelegate = self;
-}
-
-- ( void )inAppPurchasePanelContent {
-    [inappviewcontroller inAppDataLoaded];
-}
-
-- (GADRequest *)request {
-    GADRequest *request = [GADRequest request];
-    
-    // Make the request for a test ad. Put in an identifier for the simulator as well as any devices
-    // you want to receive test ads.
-    request.testDevices = @[
-                            // TODO: Add your device/simulator test identifiers here. Your device identifier is printed to
-                            // the console when the app is launched.
-                            //NSString *udid = [UIDevice currentDevice].uniqueIdentifier;
-                            GAD_SIMULATOR_ID
-                            ];
-    return request;
-}
-
-- (void)interstitialDidReceiveAd:(GADInterstitial *)ad
-{
-    //adLoaded = true;
-    //[self.addInterstialFms presentFromRootViewController:self];
-}
-
-
-- (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
-    //on add dismiss && after merging video process, save in gallery
-    [createFlyer.flyer saveAfterCheck];
-    
-    self.addInterstialFms.delegate = nil;
-    
-    // Prepare next addInterstialFms.
-    self.addInterstialFms = [[GADInterstitial alloc] init];
-    self.addInterstialFms.adUnitID = [flyerConfigurator interstitialAdID];
-    self.addInterstialFms.delegate = self;
-    [self.addInterstialFms loadRequest:[self request]];
-    
-}
-
-
-- (void)viewDidLoad {
-    
-    [super viewDidLoad];
-    
-    UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
-    [UserVoice initialize:config];
-    
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    flyerConfigurator = appDelegate.flyerConfigurator;
-    
-    // Create a new GADInterstitial each time. A GADInterstitial will only show one request in its
-    // lifetime. The property will release the old one and set the new one.
-    
-    dispatch_async( dispatch_get_main_queue(), ^{
-        
-        self.addInterstialFms = [[GADInterstitial alloc] init];
-        self.addInterstialFms.delegate = self;
-        
-        // Note: Edit SampleConstants.h to update kSampleAdUnitId with your addInterstialFms ad unit id.
-        self.addInterstialFms.adUnitID = [flyerConfigurator interstitialAdID];
-        [self.addInterstialFms loadRequest:[self request]];
-        
-    });
- 
-    
-    // Determin if the user has been greeted?
-    NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
-    
-    //if( !greeted ) {
-        
-    if(YES){
-        
-        
-        
-        // Determining the previous version of app
-        NSString *previuosVersion = [[NSUserDefaults standardUserDefaults] stringForKey:@"previousVersion"];
-        
-        if( ![previuosVersion isEqualToString:[self appVersion]] ||
-            previuosVersion == nil ) {
-    
-            
-            [self openPanel];
-        }
-        
-        
-        
-        // Show the greeting before going to the main app.
-        [[NSUserDefaults standardUserDefaults] setObject:@"greeted" forKey:@"greeted"];
-    
-    }
-    
-	globle = [FlyerlySingleton RetrieveSingleton];
-    createFlyrButton.showsTouchWhenHighlighted = YES;
-    savedFlyrButton.showsTouchWhenHighlighted = YES;
-    inviteFriendButton.showsTouchWhenHighlighted = YES;
-
-    [createFlyrLabel setText:NSLocalizedString(@"create_flyer", nil)];
-    
-    [savedFlyrLabel setText:NSLocalizedString(@"saved_flyers", nil)];
-
-    [inviteFriendLabel setText:NSLocalizedString(@"invite_friends", nil)];
-    
-    //Checking if the user is valid or anonymus
-    if ([[PFUser currentUser] sessionToken]) {
-        
-        UserPurchases *userPurchases_ = [UserPurchases getInstance];
-        
-        //GET UPDATED USER PUCHASES INFO
-        [userPurchases_ setUserPurcahsesFromParse];
-        
-    } else {
-        NSLog(@"Anonymous, User is NOT authenticated.");
-    }
-    
-}
-
-- (void)inAppPanelDismissed {
-    
-}
-
-- (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle {
-    
-    __weak InAppViewController *inappviewcontroller_ = inappviewcontroller;
-    
-    if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Sign In")]) {
-        
-        signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
-        
-        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        signInController.launchController = appDelegate.lauchController;
-        
-        __weak FlyerlyMainScreen *flyerlyMainScreen = self;
-        
-        UserPurchases *userPurchases_ = [UserPurchases getInstance];
-        userPurchases_.delegate = self;
-        
-        if( inappviewcontroller_ != nil )
-            [inappviewcontroller_.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-        if( introScreenViewController != nil )
-            [introScreenViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-        
-        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
-        
-        signInController.signInCompletion = ^void(void) {
-            
-            UINavigationController* navigationController = flyerlyMainScreen.navigationController;
-            [navigationController popViewControllerAnimated:NO];
-            [userPurchases_ setUserPurcahsesFromParse];
-        };
-        
-        [self.navigationController pushViewController:signInController animated:YES];
-        
-    }else if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Restore Purchases")]){
-        
-        [inappviewcontroller_ restorePurchase];
-    }
-}
-
-- (void) userPurchasesLoaded {
-    
-    UserPurchases *userPurchases_ = [UserPurchases getInstance];
-    
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
-         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
-        
-        //[inappviewcontroller.paidFeaturesTview reloadData];
-    }else {
-        
-        //[self presentModalViewController:inappviewcontroller animated:YES];
-    }
-    
-}
-
-//When user tap on flyer from main screen
--(IBAction)showFlyerDetail:(id)sender {
-    
-    UIButton *clickButton = sender;
-    NSString *flyPath;
-    
-    BOOL isNewFlyer = NO;
-    if (clickButton.tag < [recentFlyers count]) {
-        
-        NSString *pathWitFileName = [recentFlyers objectAtIndex:clickButton.tag];
-        NSString *pathWithoutFileName = [pathWitFileName
-                                         stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE] withString:@""];
-        flyPath = pathWithoutFileName;
-        
-    }else {
-        
-        flyPath = [Flyer newFlyerPath];
-        isNewFlyer = YES;
-    }
-    
-    
-    flyer = [[Flyer alloc]initWithPath:flyPath setDirectory:YES];
-    
-    createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
-    
-    // Set CreateFlyer Screen
-    createFlyer.flyer = flyer;
-    
-    if( isNewFlyer ){
-        //Tasks after create new flyer
-        [createFlyer tasksOnCreateNewFlyer];
-    }
-    
-
-    __weak FlyerlyMainScreen *weakSelf = self;
-    __weak CreateFlyerController *weakCreate = createFlyer;
-    
-    [createFlyer setOnFlyerBack:^(NSString *flyPath) {
-        
-        //Here we setCurrent Flyer is Most Recent Flyer
-        [weakCreate.flyer setRecentFlyer];
-        
-        [weakCreate.flyer saveAfterCheck];
-
-        //Getting Recent Flyers
-        weakSelf.recentFlyers = [Flyer recentFlyerPreview:4];
-        
-        //Set Recent Flyers
-        [weakSelf updateRecentFlyer:weakSelf.recentFlyers];
-        
-        // Stop Animations and enable buttons
-        for ( int i = 0; i < weakSelf.activityIndicators.count; i++ ) {
-            UIActivityIndicatorView *indicator = [weakSelf.activityIndicators objectAtIndex:i];
-            [indicator stopAnimating];
-            
-            UIButton *button = [weakSelf.flyerButtons objectAtIndex:i];
-            [button setUserInteractionEnabled:YES];
-        }
-        
-        
-    }];
-    
-    [createFlyer setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
-        
-        dispatch_async( dispatch_get_main_queue(), ^{
-                if (haveValidSubscription == NO && ([weakSelf.addInterstialFms isReady] && ![weakSelf.addInterstialFms hasBeenUsed]) ){
-                    [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
-                }
-                else{
-                    [weakCreate.flyer saveAfterCheck];
-                }
-        });
-        
-    }];
-    
-    
-    dispatch_async( dispatch_get_main_queue(), ^{
-        
-        [self.addInterstialFms loadRequest:[self request]];
-        
-    });
-
-	[self.navigationController pushViewController:createFlyer animated:YES];
-    
-    // Start Animations and disable buttons
-    for ( int i = 0; i < _activityIndicators.count; i++ ) {
-        UIActivityIndicatorView *indicator = [_activityIndicators objectAtIndex:i];
-        [indicator startAnimating];
-        
-        UIButton *button = [_flyerButtons objectAtIndex:i];
-        [button setUserInteractionEnabled:NO];
-    }
-}
-
-
--(void)showAlert:(NSString *)title message:(NSString *)message {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-                                                    message:message
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-}
-
-- (NSString *) appVersion {
-    return [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
-}
-
-- ( void )productSuccesfullyPurchased: (NSString *)productId {
-    
-    UserPurchases *userPurchases_ = [UserPurchases getInstance];
-    
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
     }
     
 }
