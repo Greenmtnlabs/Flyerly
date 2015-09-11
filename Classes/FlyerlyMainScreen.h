@@ -20,7 +20,6 @@
 #import "ParentViewController.h"
 #import "GADInterstitialDelegate.h"
 #import "GADInterstitial.h"
-#import "GADInterstitialDelegate.h"
 #import "InviteForPrint.h"
 #import "PrintViewController.h"
 #import "UserPurchases.h"
@@ -51,7 +50,7 @@
 }
 
 
-@property(nonatomic, strong) GADInterstitial *interstitial;
+@property(nonatomic, strong) GADInterstitial *addInterstialFms;
 @property ( nonatomic, strong ) IBOutlet UITableView *tView;
 @property ( nonatomic, strong ) NSMutableArray *flyerPaths;
 @property ( nonatomic, strong ) Flyer *flyer;

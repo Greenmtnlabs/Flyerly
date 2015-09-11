@@ -10,7 +10,16 @@
 #import "UserPurchases.h"
 #import "InviteFriendsController.h"
 #import "MainSettingViewController.h"
+#import "FlyrAppDelegate.h"
+#import "FlyerlyConfigurator.h"
 
+
+@interface FlyerlyMainScreen ()  {
+    
+    FlyerlyConfigurator *flyerConfigurator;
+}
+
+@end
 
 @implementation FlyerlyMainScreen
 
@@ -25,8 +34,11 @@ id lastShareBtnSender;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    lastShareBtnSender = nil;
     
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    flyerConfigurator = appDelegate.flyerConfigurator;
+    
+    lastShareBtnSender = nil;
     self.navigationItem.hidesBackButton = YES;
 
 	tView.dataSource = self;
@@ -64,6 +76,10 @@ id lastShareBtnSender;
     }
     
     [self checkUserPurchases];
+    
+    dispatch_async( dispatch_get_main_queue(), ^{
+        [self loadGoogleAdd];
+    });
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -150,8 +166,8 @@ id lastShareBtnSender;
 
     [createFlyer setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
         dispatch_async( dispatch_get_main_queue(), ^{
-            if (haveValidSubscription == NO && ([weakSelf.interstitial isReady] && ![weakSelf.interstitial hasBeenUsed]) ){
-                [weakSelf.interstitial presentFromRootViewController:weakSelf];
+            if (haveValidSubscription == NO && ([weakSelf.addInterstialFms isReady] && ![weakSelf.addInterstialFms hasBeenUsed]) ){
+                [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
             }  else{
                 [weakCreate.flyer saveAfterCheck];
             }
@@ -295,8 +311,8 @@ id lastShareBtnSender;
     
     [createFlyer setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
         dispatch_async( dispatch_get_main_queue(), ^{
-            if (haveValidSubscription == NO && ([weakSelf.interstitial isReady] && ![weakSelf.interstitial hasBeenUsed]) ){
-                [weakSelf.interstitial presentFromRootViewController:weakSelf];
+            if ( haveValidSubscription == NO && ([weakSelf.addInterstialFms isReady] && ![weakSelf.addInterstialFms hasBeenUsed]) ){
+                [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
             } else{
                 [weakCreate.flyer saveAfterCheck];
             }
@@ -305,11 +321,51 @@ id lastShareBtnSender;
     
 	[self.navigationController pushViewController:createFlyer animated:YES];
 }
+
+/**
+ * When interstial add received
+ */
+- (void)interstitialDidReceiveAd:(GADInterstitial *)ad {
+    //adLoaded = true;
+    //[self.addInterstialFms presentFromRootViewController:self];
+}
+
+/**
+ * After dismiss of interstial add
+ */
 - (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
     //on add dismiss && after merging video process, save in gallery
     [createFlyer.flyer saveAfterCheck];
 }
 
+/**
+ * Request for google add
+ */
+- (GADRequest *)request {
+    GADRequest *request = [GADRequest request];
+    
+    // Make the request for a test ad. Put in an identifier for the simulator as well as any devices
+    // you want to receive test ads.
+    request.testDevices = @[
+                            // TODO: Add your device/simulator test identifiers here. Your device identifier is printed to
+                            // the console when the app is launched.
+                            //NSString *udid = [UIDevice currentDevice].uniqueIdentifier;
+                            GAD_SIMULATOR_ID
+                            ];
+    return request;
+}
+
+/**
+ * Load google add
+ */
+-(void)loadGoogleAdd{
+    self.addInterstialFms = [[GADInterstitial alloc] init];
+    self.addInterstialFms.delegate = self;
+    
+    // Note: Edit SampleConstants.h to update kSampleAdUnitId with your addInterstialFms ad unit id.
+    self.addInterstialFms.adUnitID = [flyerConfigurator interstitialAdID];
+    [self.addInterstialFms loadRequest:[self request]];
+}
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -555,7 +611,7 @@ id lastShareBtnSender;
                                        otherButtonTitles:@"Sign In",nil];
         
         
-        if ( !self.interstitial.hasBeenUsed )
+        if ( !self.addInterstialFms.hasBeenUsed )
             [signInAlert show];
     }
     
