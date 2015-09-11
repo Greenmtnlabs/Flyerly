@@ -169,6 +169,8 @@
 		2036661C188DB67300C71EAA /* FlyerUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2036661B188DB67300C71EAA /* FlyerUser.m */; };
 		203E0B7617DDDD720039C3A7 /* InputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 203E0B7417DDDD720039C3A7 /* InputViewController.m */; };
 		203E0B7717DDDD720039C3A7 /* InputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 203E0B7517DDDD720039C3A7 /* InputViewController.xib */; };
+		2041D5AA1BA07F9600EEFF83 /* IntroScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2041D5A81BA07F9600EEFF83 /* IntroScreenViewController.m */; };
+		2041D5AB1BA07F9600EEFF83 /* IntroScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2041D5A91BA07F9600EEFF83 /* IntroScreenViewController.xib */; };
 		204231601A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2042315F1A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib */; };
 		204231621A10D5AC002F93D7 /* Borders-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204231611A10D5AC002F93D7 /* Borders-iPhone6-Plus.xib */; };
 		204231641A10E1A1002F93D7 /* TextBorders-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204231631A10E1A1002F93D7 /* TextBorders-iPhone6-Plus.xib */; };
@@ -1417,6 +1419,9 @@
 		C3766D941B56510200B7F5B2 /* icon72.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3766D4C1B56510100B7F5B2 /* icon72.jpg */; };
 		C3766D951B56510200B7F5B2 /* icon73.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3766D4D1B56510100B7F5B2 /* icon73.jpg */; };
 		C3766D961B56510200B7F5B2 /* old_icon8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3766D4E1B56510200B7F5B2 /* old_icon8.jpg */; };
+		C391EB041BA1AE9700A8DDE1 /* intro-img-1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C391EB011BA1AE9700A8DDE1 /* intro-img-1.jpg */; };
+		C391EB051BA1AE9700A8DDE1 /* intro-img-2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C391EB021BA1AE9700A8DDE1 /* intro-img-2.jpg */; };
+		C391EB061BA1AE9700A8DDE1 /* intro-img-3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C391EB031BA1AE9700A8DDE1 /* intro-img-3.jpg */; };
 		C3A30DA61AB7F8BD00B0F1CF /* liblob-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C300432A1AB6ED9300866385 /* liblob-ios.a */; };
 		C3D8DD911B53DBE1006C2A9F /* b1.png in Resources */ = {isa = PBXBuildFile; fileRef = C3D8DD7D1B53DBE1006C2A9F /* b1.png */; };
 		C3D8DD921B53DBE1006C2A9F /* b10.png in Resources */ = {isa = PBXBuildFile; fileRef = C3D8DD7E1B53DBE1006C2A9F /* b10.png */; };
@@ -1677,6 +1682,9 @@
 		203E0B7317DDDD720039C3A7 /* InputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputViewController.h; sourceTree = "<group>"; };
 		203E0B7417DDDD720039C3A7 /* InputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputViewController.m; sourceTree = "<group>"; };
 		203E0B7517DDDD720039C3A7 /* InputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputViewController.xib; sourceTree = "<group>"; };
+		2041D5A71BA07F9600EEFF83 /* IntroScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroScreenViewController.h; sourceTree = "<group>"; };
+		2041D5A81BA07F9600EEFF83 /* IntroScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroScreenViewController.m; sourceTree = "<group>"; };
+		2041D5A91BA07F9600EEFF83 /* IntroScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroScreenViewController.xib; sourceTree = "<group>"; };
 		2042315F1A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Backgrounds-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		204231611A10D5AC002F93D7 /* Borders-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Borders-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		204231631A10E1A1002F93D7 /* TextBorders-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "TextBorders-iPhone6-Plus.xib"; sourceTree = "<group>"; };
@@ -3017,6 +3025,9 @@
 		C3766D4C1B56510100B7F5B2 /* icon72.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon72.jpg; sourceTree = "<group>"; };
 		C3766D4D1B56510100B7F5B2 /* icon73.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon73.jpg; sourceTree = "<group>"; };
 		C3766D4E1B56510200B7F5B2 /* old_icon8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = old_icon8.jpg; sourceTree = "<group>"; };
+		C391EB011BA1AE9700A8DDE1 /* intro-img-1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "intro-img-1.jpg"; sourceTree = "<group>"; };
+		C391EB021BA1AE9700A8DDE1 /* intro-img-2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "intro-img-2.jpg"; sourceTree = "<group>"; };
+		C391EB031BA1AE9700A8DDE1 /* intro-img-3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "intro-img-3.jpg"; sourceTree = "<group>"; };
 		C3D8DD7D1B53DBE1006C2A9F /* b1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b1.png; sourceTree = "<group>"; };
 		C3D8DD7E1B53DBE1006C2A9F /* b10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b10.png; sourceTree = "<group>"; };
 		C3D8DD7F1B53DBE1006C2A9F /* b11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b11.png; sourceTree = "<group>"; };
@@ -3098,6 +3109,7 @@
 		080E96DDFE201D6D7F000001 /* FlyerlyClasses */ = {
 			isa = PBXGroup;
 			children = (
+				2041D5A51BA07F4900EEFF83 /* IntroScreen */,
 				20F3597C1888DC8A001376B6 /* CreateFlyer */,
 				1D3623240D0F684500981E51 /* FlyrAppDelegate.h */,
 				1D3623250D0F684500981E51 /* FlyrAppDelegate.m */,
@@ -3141,6 +3153,9 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				C391EB011BA1AE9700A8DDE1 /* intro-img-1.jpg */,
+				C391EB021BA1AE9700A8DDE1 /* intro-img-2.jpg */,
+				C391EB031BA1AE9700A8DDE1 /* intro-img-3.jpg */,
 				204D69081B9EFB7600C6732E /* invite_email_selected@2x.png */,
 				204D69091B9EFB7600C6732E /* invite_email@2x.png */,
 				204D690A1B9EFB7600C6732E /* invite_email@3x.png */,
@@ -3831,6 +3846,16 @@
 				2036661B188DB67300C71EAA /* FlyerUser.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		2041D5A51BA07F4900EEFF83 /* IntroScreen */ = {
+			isa = PBXGroup;
+			children = (
+				2041D5A71BA07F9600EEFF83 /* IntroScreenViewController.h */,
+				2041D5A81BA07F9600EEFF83 /* IntroScreenViewController.m */,
+				2041D5A91BA07F9600EEFF83 /* IntroScreenViewController.xib */,
+			);
+			name = IntroScreen;
 			sourceTree = "<group>";
 		};
 		2046355F1895E47100A94C42 /* Models */ = {
@@ -5516,6 +5541,7 @@
 				20F1FB061976526600D40E60 /* closeAd@2x.png in Resources */,
 				C3766D7F1B56510200B7F5B2 /* icon51.jpg in Resources */,
 				20B099351AC58D1900F19836 /* send@2x.png in Resources */,
+				C391EB061BA1AE9700A8DDE1 /* intro-img-3.jpg in Resources */,
 				24861F3019F9147100670F6D /* password_email_icon@3x.png in Resources */,
 				24861F3E19F9147100670F6D /* save_bg@3x.png in Resources */,
 				C35350A61B60CF5D00CF68F9 /* emoticon264Machovka-drink.png in Resources */,
@@ -5838,6 +5864,7 @@
 				65A464F01726CBA2002C32FB /* Quicksand_Bold.otf in Resources */,
 				246EF4E8193C515D004539B2 /* emoticon13@2x.png in Resources */,
 				24861F6619F9147100670F6D /* undo@3x.png in Resources */,
+				2041D5AB1BA07F9600EEFF83 /* IntroScreenViewController.xib in Resources */,
 				C35351161B60F68600CF68F9 /* Template99.jpg in Resources */,
 				2421846B194B4AEC00FDDA97 /* cocktail-icon.png in Resources */,
 				65A464F11726CBA2002C32FB /* Signika-Bold.otf in Resources */,
@@ -6283,6 +6310,7 @@
 				24861EE719F9147100670F6D /* discount@3x.png in Resources */,
 				246EF52D193C515D004539B2 /* emoticon76@2x.png in Resources */,
 				20824B371908DFDA00AC0CB5 /* signin@2x.png in Resources */,
+				C391EB041BA1AE9700A8DDE1 /* intro-img-1.jpg in Resources */,
 				0F80C3B61785B41300D36795 /* twitter_login@2x.png in Resources */,
 				246EF4FF193C515D004539B2 /* emoticon34@2x.png in Resources */,
 				C3766D6C1B56510200B7F5B2 /* icon32.jpg in Resources */,
@@ -6639,6 +6667,7 @@
 				C353509C1B60CF5D00CF68F9 /* emoticon255cupcake.png in Resources */,
 				24218499194B4AEC00FDDA97 /* emoticon138@2x.png in Resources */,
 				2029789D1B4CFBE700F35E40 /* emoticon234-rap@2x.png in Resources */,
+				C391EB051BA1AE9700A8DDE1 /* intro-img-2.jpg in Resources */,
 				C3D8DD961B53DBE1006C2A9F /* b14.png in Resources */,
 				2029787C1B4CFBE700F35E40 /* emoticon201-byebye@2x.png in Resources */,
 				49B88988188652A2003766AD /* FacebookLikeView.html in Resources */,
@@ -6784,6 +6813,7 @@
 				2087B6C017C73B40007A6A90 /* ResetPWViewController.m in Sources */,
 				209F8E4119A47A4E00323559 /* DrawingViewController.m in Sources */,
 				24803523192F3207009403F7 /* CameraViewController.m in Sources */,
+				2041D5AA1BA07F9600EEFF83 /* IntroScreenViewController.m in Sources */,
 				202C4802187D6E4B00FE0975 /* BitlyTwitterOAuthViewController.m in Sources */,
 				203E0B7617DDDD720039C3A7 /* InputViewController.m in Sources */,
 				20967D9818C8973200B273FC /* FlyerlyTwitterLike.m in Sources */,

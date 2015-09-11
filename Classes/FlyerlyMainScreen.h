@@ -24,9 +24,10 @@
 #import "InviteForPrint.h"
 #import "PrintViewController.h"
 #import "UserPurchases.h"
+#import "IntroScreenViewController.h"
 
 
-@class MainFlyerCell, Flyer, SigninController, RegisterController, InAppViewController, CreateFlyerController,ShareViewController,PrintViewController;
+@class MainFlyerCell, Flyer, SigninController, RegisterController, InAppViewController, IntroScreenViewController, CreateFlyerController,ShareViewController,PrintViewController;
 
 @interface FlyerlyMainScreen : ParentViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,RMStoreObserver,InAppPurchasePanelButtonProtocol, UserPurchasesDelegate ,GADInterstitialDelegate>{
 
@@ -36,6 +37,7 @@
     RegisterController *signUpController;
     ShareViewController *shareviewcontroller;
     InAppViewController *inappviewcontroller;
+    IntroScreenViewController *introScreenViewController;
     UserPurchases *userPurchases;
     NSMutableArray *flyerPaths;
 

@@ -11,6 +11,7 @@
 #import "InviteFriendsController.h"
 #import "MainSettingViewController.h"
 
+
 @implementation FlyerlyMainScreen
 
 @synthesize sharePanel,tView;
@@ -54,7 +55,7 @@ id lastShareBtnSender;
         // Determining the previous version of app
         NSString *previuosVersion = [[NSUserDefaults standardUserDefaults] stringForKey:@"previousVersion"];
         if( ![previuosVersion isEqualToString:[self appVersion]] || previuosVersion == nil ) {
-              [self openPanel];
+              [self openIntro];
         }
         
         // Show the greeting before going to the main app.
@@ -398,6 +399,19 @@ id lastShareBtnSender;
 }
 
 /*
+ * Here we Open Intro screens
+ */
+-(void)openIntro {
+    
+    introScreenViewController = [[IntroScreenViewController alloc] initWithNibName:@"IntroScreenViewController" bundle:nil];
+    [introScreenViewController setModalPresentationStyle:UIModalPresentationFullScreen];
+    introScreenViewController.buttonDelegate = self;
+    
+    [self presentViewController:introScreenViewController animated:YES completion:nil];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];    
+}
+
+/*
  * Here we Open InAppPurchase Panel
  */
 -(void)openPanel {
@@ -630,6 +644,8 @@ id lastShareBtnSender;
 
 // Load invite friends
 -(IBAction)doInvite:(id)sender{
+    
+    //[self openIntro]; return; //for testing of intro screen
     
     //Checking if the user is valid or anonymous
     if ([[PFUser currentUser] sessionToken]) {
