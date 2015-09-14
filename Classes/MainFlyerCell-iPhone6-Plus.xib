@@ -20,6 +20,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="314" height="103"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="o0W-KT-qZD">
+                        <rect key="frame" x="197" y="125" width="20" height="20"/>
+                    </activityIndicatorView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fok-5k-MZh" userLabel="cellImage">
                         <rect key="frame" x="15" y="10" width="330" height="250"/>
                     </imageView>

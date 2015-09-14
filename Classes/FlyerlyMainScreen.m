@@ -95,9 +95,8 @@ id lastShareBtnSender;
          // Initialize the banner at the bottom of the screen.
          CGPoint origin;
          origin = CGPointMake(0.0,0.0);
-         
          GADAdSize customAdSize;
-         customAdSize = GADAdSizeFromCGSize(CGSizeMake(300, 250));
+         customAdSize = GADAdSizeFromCGSize(CGSizeMake(300,250));
          
          self.bannerAdd[j] = [[GADBannerView alloc] initWithAdSize:customAdSize origin:origin];
          
@@ -304,6 +303,7 @@ id lastShareBtnSender;
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
     //Adding ad in custom view
     if( addsLoaded < self.bannerAdd.count ){
+        adView.frame = [self getSizeForAddR];
         self.bannerAdd[addsLoaded] = adView;
     }
     addsLoaded++;
@@ -324,6 +324,37 @@ id lastShareBtnSender;
     return [self getRowsCountWithAdds];
 }
 
+-(MainFlyerCell *)getMainFlyerCell:(MainFlyerCell *)cell{
+    if (cell == nil) {
+        if( IS_IPHONE_5 || IS_IPHONE_4){
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
+            cell = (MainFlyerCell *)[nib objectAtIndex:0];
+        } else if ( IS_IPHONE_6 ){
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6" owner:self options:nil];
+            cell = (MainFlyerCell *)[nib objectAtIndex:0];
+        } else if ( IS_IPHONE_6_PLUS ) {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6-Plus" owner:self options:nil];
+            cell = (MainFlyerCell *)[nib objectAtIndex:0];
+        } else {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
+            cell = (MainFlyerCell *)[nib objectAtIndex:0];
+        }
+    }
+    return cell;
+}
+
+-(CGRect)getSizeForAddR{
+    MainFlyerCell *mainFlyerCell = nil;
+      mainFlyerCell = [self getMainFlyerCell:mainFlyerCell];
+
+      NSLog(@"(%f,%f,%f,%f)",mainFlyerCell.cellImage.origin.x, mainFlyerCell.cellImage.origin.y, (mainFlyerCell.cellImage.size.width+mainFlyerCell.sideView.size.width), mainFlyerCell.cellImage.size.height);
+
+      CGRect sizeOfAdd = CGRectMake(mainFlyerCell.cellImage.origin.x, mainFlyerCell.cellImage.origin.y, (mainFlyerCell.cellImage.size.width+mainFlyerCell.sideView.size.width), mainFlyerCell.cellImage.size.height);
+
+      NSLog(@"sizeOfAdd= (%f,%f,%f,%f)",sizeOfAdd.origin.x, sizeOfAdd.origin.y, sizeOfAdd.size.width, sizeOfAdd.size.height);
+      return sizeOfAdd;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     int rowNumber = (int)indexPath.row;
     NSString *showCell = @"MainFlyerCell";
@@ -338,21 +369,7 @@ id lastShareBtnSender;
         MainFlyerCell *cell = (MainFlyerCell *)[tableView dequeueReusableCellWithIdentifier:MainFlyerCellId];
         
         [cell setAccessoryType:UITableViewCellAccessoryNone];
-        if (cell == nil) {
-            if( IS_IPHONE_5 || IS_IPHONE_4){
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
-                cell = (MainFlyerCell *)[nib objectAtIndex:0];
-            } else if ( IS_IPHONE_6 ){
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6" owner:self options:nil];
-                cell = (MainFlyerCell *)[nib objectAtIndex:0];
-            } else if ( IS_IPHONE_6_PLUS ) {
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6-Plus" owner:self options:nil];
-                cell = (MainFlyerCell *)[nib objectAtIndex:0];
-            } else {
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
-                cell = (MainFlyerCell *)[nib objectAtIndex:0];
-            }
-        }
+        
         
         dispatch_async(dispatch_get_main_queue(), ^{
                 flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:rowNumber] setDirectory:NO];
@@ -368,7 +385,6 @@ id lastShareBtnSender;
         MainScreenAddsCell *cell = (MainScreenAddsCell *)[tableView dequeueReusableCellWithIdentifier:MainScreenAddsCellId];
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainScreenAddsCell" owner:self options:nil];
         cell = (MainScreenAddsCell *)[nib objectAtIndex:0];
-        
         [cell addSubview:self.bannerAdd[rowNumber]];
         return cell;
     }

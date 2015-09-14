@@ -13,18 +13,14 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7Hr-l9-4mG" id="knb-hH-zgY">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="07_height@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="6dA-A3-DxA">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="270"/>
-                    </imageView>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="WQM-IF-x6i">
+                        <rect key="frame" x="197" y="125" width="20" height="20"/>
+                    </activityIndicatorView>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </tableViewCellContentView>
-            <connections>
-                <outlet property="addImage" destination="6dA-A3-DxA" id="KFR-O0-jZf"/>
-            </connections>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="313" y="129"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="07_height@3x.png" width="240" height="135"/>
-    </resources>
 </document>
