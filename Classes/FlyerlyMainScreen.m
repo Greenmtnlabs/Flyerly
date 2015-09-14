@@ -12,6 +12,7 @@
 #import "MainSettingViewController.h"
 #import "FlyrAppDelegate.h"
 #import "FlyerlyConfigurator.h"
+#import "MainScreenAddsCell.h"
 
 
 @interface FlyerlyMainScreen ()  {
@@ -234,92 +235,128 @@ id lastShareBtnSender;
     return sortedList;
 }
 
+/**
+ * Return incremented numbers of rows with respect to add
+ */
+-(int)getRowsCountWithAdds{
+    int flyersCount = (int)flyerPaths.count;
+    int total = flyersCount + 3;
+    
+    return  total;
+}
+
+/**
+ * It will return the row flag, is the row belongs from advertise or not
+ */
+-(BOOL)isAddvertiseRow:(int)rowNumber{
+    BOOL isAddRow = NO;
+    if( (rowNumber+1) >= (int)flyerPaths.count ) {
+        isAddRow = YES;
+    }
+    return isAddRow;
+}
 
 #pragma mark Table view methods
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return  [flyerPaths count];
+    return [self getRowsCountWithAdds];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    static NSString *cellId = @"Cell";
-    MainFlyerCell *cell = (MainFlyerCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
-    
-    [cell setAccessoryType:UITableViewCellAccessoryNone];
-    if (cell == nil) {
-        if( IS_IPHONE_5 || IS_IPHONE_4){
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
-            cell = (MainFlyerCell *)[nib objectAtIndex:0];
-        } else if ( IS_IPHONE_6 ){
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6" owner:self options:nil];
-            cell = (MainFlyerCell *)[nib objectAtIndex:0];
-        } else if ( IS_IPHONE_6_PLUS ) {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6-Plus" owner:self options:nil];
-            cell = (MainFlyerCell *)[nib objectAtIndex:0];
-        } else {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
-            cell = (MainFlyerCell *)[nib objectAtIndex:0];
-        }
+    int rowNumber = (int)indexPath.row;
+    NSString *showCell = @"MainFlyerCell";
+
+    if( [self isAddvertiseRow:rowNumber] ) {
+        showCell = @"MainScreenAddsCell";
     }
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-            flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:indexPath.row] setDirectory:NO];
-            [cell renderCell:flyer LockStatus:NO];
-            [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
-            cell.shareBtn.tag = indexPath.row;
-            [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
-    });
-
-    return cell;
+    
+    if( [showCell isEqualToString:@"MainFlyerCell"] ){
+        static NSString *MainFlyerCellId = @"MainFlyerCellId";
+        MainFlyerCell *cell = (MainFlyerCell *)[tableView dequeueReusableCellWithIdentifier:MainFlyerCellId];
+        
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
+        if (cell == nil) {
+            if( IS_IPHONE_5 || IS_IPHONE_4){
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
+                cell = (MainFlyerCell *)[nib objectAtIndex:0];
+            } else if ( IS_IPHONE_6 ){
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6" owner:self options:nil];
+                cell = (MainFlyerCell *)[nib objectAtIndex:0];
+            } else if ( IS_IPHONE_6_PLUS ) {
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6-Plus" owner:self options:nil];
+                cell = (MainFlyerCell *)[nib objectAtIndex:0];
+            } else {
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
+                cell = (MainFlyerCell *)[nib objectAtIndex:0];
+            }
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+                flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:rowNumber] setDirectory:NO];
+                [cell renderCell:flyer LockStatus:NO];
+                [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
+                cell.shareBtn.tag = rowNumber;
+                [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
+        });
+        return cell;
+    }
+    else/* if( [showCell isEqualToString:@"MainScreenAddsCell"] )*/{
+        static NSString *MainScreenAddsCellId = @"MainScreenAddsCell";
+        MainScreenAddsCell *cell = (MainScreenAddsCell *)[tableView dequeueReusableCellWithIdentifier:MainScreenAddsCellId];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainScreenAddsCell" owner:self options:nil];
+        cell = (MainScreenAddsCell *)[nib objectAtIndex:0];
+        return cell;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    [self enableBtns:NO];
-    
-    flyer = [[Flyer alloc]initWithPath:[flyerPaths objectAtIndex:indexPath.row] setDirectory:YES];
-    
-    createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
-    
-    // Set CreateFlyer Screen
-    createFlyer.flyer = flyer;
-    
-    __weak FlyerlyMainScreen *weakSelf = self;
-    __weak CreateFlyerController *weakCreate = createFlyer;
-    
-    //Here we Manage Block for Update
-    [createFlyer setOnFlyerBack:^(NSString *nothing) {
+    int rowNumber = (int)indexPath.row;
+    if( [self isAddvertiseRow:rowNumber] == NO ) {
+        [self enableBtns:NO];
         
-        // Here we setCurrent Flyer is Most Recent Flyer
-        [weakCreate.flyer setRecentFlyer];
+        flyer = [[Flyer alloc]initWithPath:[flyerPaths objectAtIndex:indexPath.row] setDirectory:YES];
         
-        [weakCreate.flyer saveAfterCheck];
+        createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
+        
+        // Set CreateFlyer Screen
+        createFlyer.flyer = flyer;
+        
+        __weak FlyerlyMainScreen *weakSelf = self;
+        __weak CreateFlyerController *weakCreate = createFlyer;
+        
+        //Here we Manage Block for Update
+        [createFlyer setOnFlyerBack:^(NSString *nothing) {
+            
+            // Here we setCurrent Flyer is Most Recent Flyer
+            [weakCreate.flyer setRecentFlyer];
+            
+            [weakCreate.flyer saveAfterCheck];
 
-        [weakSelf enableBtns:YES];
+            [weakSelf enableBtns:YES];
+            
+            // HERE WE GET FLYERS
+            weakSelf.flyerPaths = [weakSelf getFlyersPaths];
+            [weakSelf.tView reloadData];
+            
+        }];
         
-        // HERE WE GET FLYERS
-        weakSelf.flyerPaths = [weakSelf getFlyersPaths];
-        [weakSelf.tView reloadData];
+        [createFlyer setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
+            dispatch_async( dispatch_get_main_queue(), ^{
+                if ( haveValidSubscription == NO && ([weakSelf.addInterstialFms isReady] && ![weakSelf.addInterstialFms hasBeenUsed]) ){
+                    [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
+                } else{
+                    [weakCreate.flyer saveAfterCheck];
+                }
+            });
+        }];
         
-    }];
-    
-    [createFlyer setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
-        dispatch_async( dispatch_get_main_queue(), ^{
-            if ( haveValidSubscription == NO && ([weakSelf.addInterstialFms isReady] && ![weakSelf.addInterstialFms hasBeenUsed]) ){
-                [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
-            } else{
-                [weakCreate.flyer saveAfterCheck];
-            }
-        });
-    }];
-    
-	[self.navigationController pushViewController:createFlyer animated:YES];
+        [self.navigationController pushViewController:createFlyer animated:YES];
+    }
 }
 
 /**
@@ -368,25 +405,27 @@ id lastShareBtnSender;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-	[tableView beginUpdates];
-	[tableView setEditing:YES animated:YES];
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
+    int rowNumber = (int)indexPath.row;
+    if( [self isAddvertiseRow:rowNumber] == NO ) {
+        [tableView beginUpdates];
+        [tableView setEditing:YES animated:YES];
         
-        [tableView deleteRowsAtIndexPaths:
-        @[[NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section]]
-                         withRowAnimation:UITableViewRowAnimationLeft];
-       
+        if (editingStyle == UITableViewCellEditingStyleDelete) {
             
-        [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:indexPath.row] error:nil];
-        [flyerPaths removeObjectAtIndex:indexPath.row];
+            [tableView deleteRowsAtIndexPaths:
+            @[[NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section]]
+                             withRowAnimation:UITableViewRowAnimationLeft];
+           
+            
+            [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:indexPath.row] error:nil];
+            [flyerPaths removeObjectAtIndex:indexPath.row];
 
-	}
-    
-    [tableView setEditing:NO animated:YES];
-	[tableView endUpdates];
-	[tableView reloadData];
+        }
+        
+        [tableView setEditing:NO animated:YES];
+        [tableView endUpdates];
+        [tableView reloadData];
+    }
 }
 
 

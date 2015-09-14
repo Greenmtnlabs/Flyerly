@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainScreenAddsCell : UIViewController
+@interface MainScreenAddsCell : UITableViewCell
 
 @end
