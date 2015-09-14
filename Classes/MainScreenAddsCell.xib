@@ -18,6 +18,9 @@
                     </imageView>
                 </subviews>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="addImage" destination="6dA-A3-DxA" id="KFR-O0-jZf"/>
+            </connections>
             <point key="canvasLocation" x="313" y="129"/>
         </tableViewCell>
     </objects>

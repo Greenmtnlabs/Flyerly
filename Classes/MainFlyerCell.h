@@ -12,6 +12,7 @@
 @interface MainFlyerCell : UITableViewCell
 
 @property(nonatomic, strong)IBOutlet UIImageView *cellImage;
+@property(nonatomic, strong)IBOutlet UIView *sideView;
 @property ( nonatomic, strong ) IBOutletCollection(UIImageView) NSArray *socialStatus;
 @property(nonatomic, strong)IBOutlet UIButton *flyerLock;
 @property(nonatomic, strong)IBOutlet UIButton *shareBtn;

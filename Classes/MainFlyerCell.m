@@ -13,7 +13,7 @@
 @end
 
 @implementation MainFlyerCell
-@synthesize  cellImage;
+@synthesize  cellImage,sideView;
 @synthesize shareBtn,flyerLock;
 
 
