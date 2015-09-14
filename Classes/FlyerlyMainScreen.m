@@ -18,6 +18,8 @@
 @interface FlyerlyMainScreen ()  {
     
     FlyerlyConfigurator *flyerConfigurator;
+    int addsCount;
+    int addsLoaded;
 }
 
 @end
@@ -79,8 +81,50 @@ id lastShareBtnSender;
     [self checkUserPurchases];
     
     dispatch_async( dispatch_get_main_queue(), ^{
+        //full screen adds
         [self loadGoogleAdd];
     });
+    
+    addsLoaded = 0;
+     [self getRowsCountWithAdds];
+     self.bannerAdd = [[NSMutableArray alloc] init];
+
+     __block int i=-1;
+     for(int j=0;j<addsCount; j++){
+         //add strip
+         // Initialize the banner at the bottom of the screen.
+         CGPoint origin;
+         origin = CGPointMake(0.0,0.0);
+         
+         GADAdSize customAdSize;
+         customAdSize = GADAdSizeFromCGSize(CGSizeMake(300, 250));
+         
+         self.bannerAdd[j] = [[GADBannerView alloc] initWithAdSize:customAdSize origin:origin];
+         
+        dispatch_async( dispatch_get_main_queue(), ^{
+            i++;
+            //if( haveValidSubscription == NO ) {
+                // Use predefined GADAdSize constants to define the GADBannerView.
+                GADBannerView *bannerAddTemp = self.bannerAdd[i];
+                
+                // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID before compiling.
+                bannerAddTemp.adUnitID = [flyerConfigurator bannerAdID];
+                bannerAddTemp.delegate = self;
+                bannerAddTemp.rootViewController = self;
+
+                self.bannerAdd[i] = bannerAddTemp;
+             
+                [self.bannerAdd[i] loadRequest:[self request]];
+             
+
+             
+            //}
+        });
+      }
+        
+    
+    
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -240,11 +284,11 @@ id lastShareBtnSender;
  */
 -(int)getRowsCountWithAdds{
     int flyersCount = (int)flyerPaths.count;
-    int total = flyersCount + 3;
+    addsCount = 3;
+    int total = flyersCount + addsCount;
     
     return  total;
 }
-
 /**
  * It will return the row flag, is the row belongs from advertise or not
  */
@@ -254,6 +298,20 @@ id lastShareBtnSender;
         isAddRow = YES;
     }
     return isAddRow;
+}
+
+// We've received an Banner ad successfully.
+- (void)adViewDidReceiveAd:(GADBannerView *)adView {
+    //Adding ad in custom view
+    if( addsLoaded < self.bannerAdd.count ){
+        self.bannerAdd[addsLoaded] = adView;
+    }
+    addsLoaded++;
+    
+//    UIView *bannerAddViewTemp = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 250)];
+//    bannerAddViewTemp.backgroundColor = [UIColor whiteColor];
+    [self.tView reloadData];
+    
 }
 
 #pragma mark Table view methods
@@ -310,6 +368,8 @@ id lastShareBtnSender;
         MainScreenAddsCell *cell = (MainScreenAddsCell *)[tableView dequeueReusableCellWithIdentifier:MainScreenAddsCellId];
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainScreenAddsCell" owner:self options:nil];
         cell = (MainScreenAddsCell *)[nib objectAtIndex:0];
+        
+        [cell addSubview:self.bannerAdd[rowNumber]];
         return cell;
     }
 }
@@ -757,5 +817,4 @@ id lastShareBtnSender;
     }
     
 }
-
 @end
