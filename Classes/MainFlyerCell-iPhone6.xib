@@ -78,6 +78,7 @@
                 <outlet property="cellImage" destination="4Ai-qZ-EHD" id="AKm-70-7Bc"/>
                 <outlet property="flyerLock" destination="9Vl-o4-2p6" id="4n7-W2-0Zs"/>
                 <outlet property="shareBtn" destination="prD-qy-qro" id="M63-Dm-aQE"/>
+                <outlet property="sideView" destination="WJK-5t-1NB" id="DJe-Ca-t55"/>
                 <outletCollection property="socialStatus" destination="rvG-Qc-PWK" id="OUO-Zj-nZU"/>
                 <outletCollection property="socialStatus" destination="fKI-yF-MVg" id="4j5-5O-DQP"/>
                 <outletCollection property="socialStatus" destination="auo-38-ZSx" id="rMo-4x-aPh"/>
