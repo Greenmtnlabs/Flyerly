@@ -513,26 +513,16 @@ id lastShareBtnSender;
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     int rowNumber = (int)indexPath.row;
+
     if( [self isAddvertiseRow:rowNumber] == NO ) {
         rowNumber = [self getIndexOfFlyer:rowNumber];
-        
-//        [tableView beginUpdates];
-//        [tableView setEditing:YES animated:YES];
-        
+
         if (editingStyle == UITableViewCellEditingStyleDelete) {
-            
-//            [tableView deleteRowsAtIndexPaths:
-//            @[[NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section]]
-//                             withRowAnimation:UITableViewRowAnimationLeft];
-           
             
             [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:rowNumber] error:nil];
             [flyerPaths removeObjectAtIndex:rowNumber];
-
         }
-        
-//        [tableView setEditing:NO animated:YES];
-//        [tableView endUpdates];
+
         [tableView reloadData];
     }
 }
