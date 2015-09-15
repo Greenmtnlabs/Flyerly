@@ -21,6 +21,7 @@
     FlyerlyConfigurator *flyerConfigurator;
     int addsCount;
     int addsLoaded;
+    CGRect sizeRectForAdd;
 }
 
 @end
@@ -93,6 +94,20 @@ id lastShareBtnSender;
     [super viewWillAppear:animated];
     
     [self checkUserPurchases];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    if( sizeRectForAdd.size.width == 0 ){
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+        MainFlyerCell *cell = (MainFlyerCell *)[self.tView cellForRowAtIndexPath:indexPath];
+        sizeRectForAdd = CGRectMake(cell.cellImage.frame.origin.x,cell.cellImage.frame.origin.y,(cell.cellImage.frame.size.width+cell.sideView.frame.size.width),cell.cellImage.frame.size.height);
+        NSLog(@"flyerImg(%f,%f)",cell.cellImage.frame.size.width,cell.cellImage.frame.size.height);
+    }
+    
+    NSLog(@"sizeRectForAdd(%f,%f,%f,%f,)",sizeRectForAdd.origin.x,sizeRectForAdd.origin.y,sizeRectForAdd.size.width,sizeRectForAdd.size.height);
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -168,6 +183,7 @@ id lastShareBtnSender;
         //HERE WE GET FLYERS
         weakSelf.flyerPaths = [weakSelf getFlyersPaths];
         [weakSelf loadAddTiles];
+         [weakSelf.tView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         [weakSelf.tView reloadData];
         
     }];
@@ -288,12 +304,12 @@ id lastShareBtnSender;
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
     //Adding ad in custom view
     if( addsLoaded < self.bannerAdd.count ){
-        adView.frame = [self getSizeForAddR];
+        if( sizeRectForAdd.size.width != 0 ){
+            adView.frame = sizeRectForAdd;
+        }
         self.bannerAdd[addsLoaded] = adView;
     }
     addsLoaded++;
-//    [self.tView reloadData];
-    
 }
 
 /**
@@ -353,33 +369,10 @@ id lastShareBtnSender;
 
 -(MainFlyerCell *)getMainFlyerCell:(MainFlyerCell *)cell{
     if (cell == nil) {
-        if( IS_IPHONE_5 || IS_IPHONE_4){
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
-            cell = (MainFlyerCell *)[nib objectAtIndex:0];
-        } else if ( IS_IPHONE_6 ){
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6" owner:self options:nil];
-            cell = (MainFlyerCell *)[nib objectAtIndex:0];
-        } else if ( IS_IPHONE_6_PLUS ) {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6-Plus" owner:self options:nil];
-            cell = (MainFlyerCell *)[nib objectAtIndex:0];
-        } else {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
-            cell = (MainFlyerCell *)[nib objectAtIndex:0];
-        }
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
+        cell = (MainFlyerCell *)[nib objectAtIndex:0];
     }
     return cell;
-}
-
-/**
- * Get flyer visible size, the size of flyer and social icon bar
- */
--(CGRect)getSizeForAddR{
-    MainFlyerCell *mainFlyerCell = nil;
-      mainFlyerCell = [self getMainFlyerCell:mainFlyerCell];
-
-      CGRect sizeOfAdd = CGRectMake(mainFlyerCell.cellImage.origin.x, mainFlyerCell.cellImage.origin.y, (mainFlyerCell.cellImage.size.width+mainFlyerCell.sideView.size.width), mainFlyerCell.cellImage.size.height);
-
-      return sizeOfAdd;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -406,6 +399,7 @@ id lastShareBtnSender;
                 cell.shareBtn.tag = indexPath.row;
                 [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
         });
+        
         return cell;
     }
     else/* if( [showCell isEqualToString:@"MainScreenAddsCell"] )*/{
@@ -413,8 +407,16 @@ id lastShareBtnSender;
         MainScreenAddsCell *cell = (MainScreenAddsCell *)[tableView dequeueReusableCellWithIdentifier:MainScreenAddsCellId];
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainScreenAddsCell" owner:self options:nil];
         cell = (MainScreenAddsCell *)[nib objectAtIndex:0];
+
         int addRow = [self getIndexOfAdd:rowNumber];
+        GADBannerView *adView = self.bannerAdd[ addRow ];
+        adView.frame = CGRectMake(cell.frame.origin.x+10, cell.frame.origin.y+10, tView.frame.size.width-20, cell.frame.size.height-20);
+        if( sizeRectForAdd.size.width != 0 ){
+            adView.frame = sizeRectForAdd;
+        }
+        self.bannerAdd[ addRow ] = adView;
         [cell addSubview:self.bannerAdd[ addRow ]];
+        
         return cell;
     }
 }
@@ -448,6 +450,7 @@ id lastShareBtnSender;
             
             // HERE WE GET FLYERS
             weakSelf.flyerPaths = [weakSelf getFlyersPaths];
+             [weakSelf.tView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
             [weakSelf.tView reloadData];
             
         }];
