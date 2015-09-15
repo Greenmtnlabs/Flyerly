@@ -21,10 +21,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fok-5k-MZh" userLabel="cellImage">
-                        <rect key="frame" x="15" y="10" width="330" height="250"/>
+                        <rect key="frame" x="54" y="10" width="250" height="250"/>
                     </imageView>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5uu-x6-1xh">
-                        <rect key="frame" x="346" y="10" width="55" height="250"/>
+                        <rect key="frame" x="305" y="10" width="55" height="250"/>
                         <subviews>
                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="crQ-8M-MRO" userLabel="editBtn">
                                 <rect key="frame" x="2" y="0.0" width="50" height="50"/>

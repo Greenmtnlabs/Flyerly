@@ -288,12 +288,9 @@ id lastShareBtnSender;
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
     //Adding ad in custom view
     if( addsLoaded < self.bannerAdd.count ){
-        adView.frame = [self getSizeForAddR];
         self.bannerAdd[addsLoaded] = adView;
     }
     addsLoaded++;
-//    [self.tView reloadData];
-    
 }
 
 /**
@@ -353,33 +350,10 @@ id lastShareBtnSender;
 
 -(MainFlyerCell *)getMainFlyerCell:(MainFlyerCell *)cell{
     if (cell == nil) {
-        if( IS_IPHONE_5 || IS_IPHONE_4){
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
-            cell = (MainFlyerCell *)[nib objectAtIndex:0];
-        } else if ( IS_IPHONE_6 ){
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6" owner:self options:nil];
-            cell = (MainFlyerCell *)[nib objectAtIndex:0];
-        } else if ( IS_IPHONE_6_PLUS ) {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6-Plus" owner:self options:nil];
-            cell = (MainFlyerCell *)[nib objectAtIndex:0];
-        } else {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
-            cell = (MainFlyerCell *)[nib objectAtIndex:0];
-        }
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
+        cell = (MainFlyerCell *)[nib objectAtIndex:0];
     }
     return cell;
-}
-
-/**
- * Get flyer visible size, the size of flyer and social icon bar
- */
--(CGRect)getSizeForAddR{
-    MainFlyerCell *mainFlyerCell = nil;
-      mainFlyerCell = [self getMainFlyerCell:mainFlyerCell];
-
-      CGRect sizeOfAdd = CGRectMake(mainFlyerCell.cellImage.origin.x, mainFlyerCell.cellImage.origin.y, (mainFlyerCell.cellImage.size.width+mainFlyerCell.sideView.size.width), mainFlyerCell.cellImage.size.height);
-
-      return sizeOfAdd;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -406,6 +380,7 @@ id lastShareBtnSender;
                 cell.shareBtn.tag = indexPath.row;
                 [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
         });
+        
         return cell;
     }
     else/* if( [showCell isEqualToString:@"MainScreenAddsCell"] )*/{
@@ -413,8 +388,14 @@ id lastShareBtnSender;
         MainScreenAddsCell *cell = (MainScreenAddsCell *)[tableView dequeueReusableCellWithIdentifier:MainScreenAddsCellId];
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainScreenAddsCell" owner:self options:nil];
         cell = (MainScreenAddsCell *)[nib objectAtIndex:0];
+
         int addRow = [self getIndexOfAdd:rowNumber];
+        GADBannerView *adView = self.bannerAdd[ addRow ];
+        
+        adView.frame = CGRectMake(cell.frame.origin.x+10, cell.frame.origin.y+10, tView.frame.size.width-20, cell.frame.size.height-20);
+        self.bannerAdd[ addRow ] = adView;
         [cell addSubview:self.bannerAdd[ addRow ]];
+        
         return cell;
     }
 }
