@@ -21,6 +21,7 @@
     FlyerlyConfigurator *flyerConfigurator;
     int addsCount;
     int addsLoaded;
+    CGRect sizeRectForAdd;
 }
 
 @end
@@ -93,6 +94,20 @@ id lastShareBtnSender;
     [super viewWillAppear:animated];
     
     [self checkUserPurchases];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    if( sizeRectForAdd.size.width == 0 ){
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+        MainFlyerCell *cell = (MainFlyerCell *)[self.tView cellForRowAtIndexPath:indexPath];
+        sizeRectForAdd = CGRectMake(cell.cellImage.frame.origin.x,cell.cellImage.frame.origin.y,(cell.cellImage.frame.size.width+cell.sideView.frame.size.width),cell.cellImage.frame.size.height);
+        NSLog(@"flyerImg(%f,%f)",cell.cellImage.frame.size.width,cell.cellImage.frame.size.height);
+    }
+    
+    NSLog(@"sizeRectForAdd(%f,%f,%f,%f,)",sizeRectForAdd.origin.x,sizeRectForAdd.origin.y,sizeRectForAdd.size.width,sizeRectForAdd.size.height);
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -168,6 +183,7 @@ id lastShareBtnSender;
         //HERE WE GET FLYERS
         weakSelf.flyerPaths = [weakSelf getFlyersPaths];
         [weakSelf loadAddTiles];
+         [weakSelf.tView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         [weakSelf.tView reloadData];
         
     }];
@@ -288,6 +304,9 @@ id lastShareBtnSender;
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
     //Adding ad in custom view
     if( addsLoaded < self.bannerAdd.count ){
+        if( sizeRectForAdd.size.width != 0 ){
+            adView.frame = sizeRectForAdd;
+        }
         self.bannerAdd[addsLoaded] = adView;
     }
     addsLoaded++;
@@ -391,8 +410,10 @@ id lastShareBtnSender;
 
         int addRow = [self getIndexOfAdd:rowNumber];
         GADBannerView *adView = self.bannerAdd[ addRow ];
-        
         adView.frame = CGRectMake(cell.frame.origin.x+10, cell.frame.origin.y+10, tView.frame.size.width-20, cell.frame.size.height-20);
+        if( sizeRectForAdd.size.width != 0 ){
+            adView.frame = sizeRectForAdd;
+        }
         self.bannerAdd[ addRow ] = adView;
         [cell addSubview:self.bannerAdd[ addRow ]];
         
@@ -429,6 +450,7 @@ id lastShareBtnSender;
             
             // HERE WE GET FLYERS
             weakSelf.flyerPaths = [weakSelf getFlyersPaths];
+             [weakSelf.tView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
             [weakSelf.tView reloadData];
             
         }];
