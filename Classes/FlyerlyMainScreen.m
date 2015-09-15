@@ -10,7 +10,20 @@
 #import "UserPurchases.h"
 #import "InviteFriendsController.h"
 #import "MainSettingViewController.h"
+#import "FlyrAppDelegate.h"
+#import "FlyerlyConfigurator.h"
+#import "MainScreenAddsCell.h"
 
+#define ADD_AFTER_FLYERS 4 //SHOW AD AFTER (ADD_AFTER_FLYERS - 1 ) => 3 FLYERS
+
+@interface FlyerlyMainScreen ()  {
+    
+    FlyerlyConfigurator *flyerConfigurator;
+    int addsCount;
+    int addsLoaded;
+}
+
+@end
 
 @implementation FlyerlyMainScreen
 
@@ -25,8 +38,11 @@ id lastShareBtnSender;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    lastShareBtnSender = nil;
     
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    flyerConfigurator = appDelegate.flyerConfigurator;
+    
+    lastShareBtnSender = nil;
     self.navigationItem.hidesBackButton = YES;
 
 	tView.dataSource = self;
@@ -64,6 +80,13 @@ id lastShareBtnSender;
     }
     
     [self checkUserPurchases];
+    
+    dispatch_async( dispatch_get_main_queue(), ^{
+        //full screen adds
+        [self loadGoogleAdd];
+    });
+    
+    [self loadAddTiles];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -144,14 +167,15 @@ id lastShareBtnSender;
         
         //HERE WE GET FLYERS
         weakSelf.flyerPaths = [weakSelf getFlyersPaths];
+        [weakSelf loadAddTiles];
         [weakSelf.tView reloadData];
         
     }];
 
     [createFlyer setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
         dispatch_async( dispatch_get_main_queue(), ^{
-            if (haveValidSubscription == NO && ([weakSelf.interstitial isReady] && ![weakSelf.interstitial hasBeenUsed]) ){
-                [weakSelf.interstitial presentFromRootViewController:weakSelf];
+            if (haveValidSubscription == NO && ([weakSelf.addInterstialFms isReady] && ![weakSelf.addInterstialFms hasBeenUsed]) ){
+                [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
             }  else{
                 [weakCreate.flyer saveAfterCheck];
             }
@@ -218,24 +242,116 @@ id lastShareBtnSender;
     return sortedList;
 }
 
+/**
+ * Return incremented numbers of rows with respect to add
+ */
+-(int)getRowsCountWithAdds{
+    int flyersCount = (int)flyerPaths.count;
+    addsCount = floor(flyersCount/ (ADD_AFTER_FLYERS -1) );
+    int total = flyersCount + addsCount;
+    
+    return  total;
+}
+
+/**
+ * Get index of add row
+ */
+-(int)getIndexOfAdd:(int)rowNumber{
+    rowNumber++;
+    int row = floor(rowNumber / ADD_AFTER_FLYERS ) - 1;
+    return  row;
+}
+
+/**
+ * Get index of flyer row
+ */
+-(int)getIndexOfFlyer:(int)rowNumber{
+    rowNumber++;//because indexes are starting from 0
+    int row = rowNumber - floor(rowNumber / ADD_AFTER_FLYERS ) - 1 ;
+    return  row;
+}
+
+/**
+ * It will return the index is it belongs from advertise or not
+ */
+-(BOOL)isAddvertiseRow:(int)rowNumber{
+    rowNumber++;//because indexes are starting from 0
+    
+    BOOL isAddRow = NO;
+    if( addsCount > 0 && rowNumber > 0 && ( rowNumber % ADD_AFTER_FLYERS ) == 0 ) {
+        isAddRow = YES;
+    }
+    return isAddRow;
+}
+
+// We've received an Banner ad successfully.
+- (void)adViewDidReceiveAd:(GADBannerView *)adView {
+    //Adding ad in custom view
+    if( addsLoaded < self.bannerAdd.count ){
+        adView.frame = [self getSizeForAddR];
+        self.bannerAdd[addsLoaded] = adView;
+    }
+    addsLoaded++;
+//    [self.tView reloadData];
+    
+}
+
+/**
+ * Load addvertise tiles
+ */
+-(void)loadAddTiles{
+    __block int i=-1;
+    addsLoaded = 0;
+    
+    if( self.bannerAdd == nil )
+        self.bannerAdd = [[NSMutableArray alloc] init];
+    
+    [self getRowsCountWithAdds]; // addsCount will be set in this function
+    
+    if( self.bannerAdd.count >= addsCount )
+    return; //dont load adds if we already have
+    
+    for(int j=0;j<addsCount; j++){
+        //add strip
+        // Initialize the banner at the bottom of the screen.
+        CGPoint origin;
+        origin = CGPointMake(0.0,0.0);
+        GADAdSize customAdSize;
+        customAdSize = GADAdSizeFromCGSize(CGSizeMake(300,250));
+        
+        if( j >= self.bannerAdd.count  )
+            self.bannerAdd[j] = [[GADBannerView alloc] initWithAdSize:customAdSize origin:origin];
+        
+        dispatch_async( dispatch_get_main_queue(), ^{
+            i++;
+            //if( haveValidSubscription == NO ) {
+            // Use predefined GADAdSize constants to define the GADBannerView.
+            GADBannerView *bannerAddTemp = self.bannerAdd[i];
+            
+            // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID before compiling.
+            bannerAddTemp.adUnitID = [flyerConfigurator bannerAdID];
+            bannerAddTemp.delegate = self;
+            bannerAddTemp.rootViewController = self;
+            
+            self.bannerAdd[i] = bannerAddTemp;
+            
+            [self.bannerAdd[i] loadRequest:[self request]];
+            //}
+        });
+    }
+}
 
 #pragma mark Table view methods
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return  [flyerPaths count];
+    return [self getRowsCountWithAdds];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    static NSString *cellId = @"Cell";
-    MainFlyerCell *cell = (MainFlyerCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
-    
-    [cell setAccessoryType:UITableViewCellAccessoryNone];
+-(MainFlyerCell *)getMainFlyerCell:(MainFlyerCell *)cell{
     if (cell == nil) {
         if( IS_IPHONE_5 || IS_IPHONE_4){
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
@@ -251,86 +367,164 @@ id lastShareBtnSender;
             cell = (MainFlyerCell *)[nib objectAtIndex:0];
         }
     }
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-            flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:indexPath.row] setDirectory:NO];
-            [cell renderCell:flyer LockStatus:NO];
-            [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
-            cell.shareBtn.tag = indexPath.row;
-            [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
-    });
-
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    [self enableBtns:NO];
-    
-    flyer = [[Flyer alloc]initWithPath:[flyerPaths objectAtIndex:indexPath.row] setDirectory:YES];
-    
-    createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
-    
-    // Set CreateFlyer Screen
-    createFlyer.flyer = flyer;
-    
-    __weak FlyerlyMainScreen *weakSelf = self;
-    __weak CreateFlyerController *weakCreate = createFlyer;
-    
-    //Here we Manage Block for Update
-    [createFlyer setOnFlyerBack:^(NSString *nothing) {
-        
-        // Here we setCurrent Flyer is Most Recent Flyer
-        [weakCreate.flyer setRecentFlyer];
-        
-        [weakCreate.flyer saveAfterCheck];
+/**
+ * Get flyer visible size, the size of flyer and social icon bar
+ */
+-(CGRect)getSizeForAddR{
+    MainFlyerCell *mainFlyerCell = nil;
+      mainFlyerCell = [self getMainFlyerCell:mainFlyerCell];
 
-        [weakSelf enableBtns:YES];
-        
-        // HERE WE GET FLYERS
-        weakSelf.flyerPaths = [weakSelf getFlyersPaths];
-        [weakSelf.tView reloadData];
-        
-    }];
-    
-    [createFlyer setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
-        dispatch_async( dispatch_get_main_queue(), ^{
-            if (haveValidSubscription == NO && ([weakSelf.interstitial isReady] && ![weakSelf.interstitial hasBeenUsed]) ){
-                [weakSelf.interstitial presentFromRootViewController:weakSelf];
-            } else{
-                [weakCreate.flyer saveAfterCheck];
-            }
-        });
-    }];
-    
-	[self.navigationController pushViewController:createFlyer animated:YES];
+      CGRect sizeOfAdd = CGRectMake(mainFlyerCell.cellImage.origin.x, mainFlyerCell.cellImage.origin.y, (mainFlyerCell.cellImage.size.width+mainFlyerCell.sideView.size.width), mainFlyerCell.cellImage.size.height);
+
+      return sizeOfAdd;
 }
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    int rowNumber = (int)indexPath.row;
+    NSString *showCell = @"MainFlyerCell";
+
+    if( [self isAddvertiseRow:rowNumber] ) {
+        showCell = @"MainScreenAddsCell";
+    }
+    
+    
+    if( [showCell isEqualToString:@"MainFlyerCell"] ){
+        static NSString *MainFlyerCellId = @"MainFlyerCellId";
+        MainFlyerCell *cell = (MainFlyerCell *)[tableView dequeueReusableCellWithIdentifier:MainFlyerCellId];
+        cell = [self getMainFlyerCell:cell];
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
+        
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+                int flyerRow = [self getIndexOfFlyer:rowNumber];
+                flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:flyerRow] setDirectory:NO];
+                [cell renderCell:flyer LockStatus:NO];
+                [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
+                cell.shareBtn.tag = indexPath.row;
+                [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
+        });
+        return cell;
+    }
+    else/* if( [showCell isEqualToString:@"MainScreenAddsCell"] )*/{
+        static NSString *MainScreenAddsCellId = @"MainScreenAddsCell";
+        MainScreenAddsCell *cell = (MainScreenAddsCell *)[tableView dequeueReusableCellWithIdentifier:MainScreenAddsCellId];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainScreenAddsCell" owner:self options:nil];
+        cell = (MainScreenAddsCell *)[nib objectAtIndex:0];
+        int addRow = [self getIndexOfAdd:rowNumber];
+        [cell addSubview:self.bannerAdd[ addRow ]];
+        return cell;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    int rowNumber = (int)indexPath.row;
+    if( [self isAddvertiseRow:rowNumber] == NO ) {
+        rowNumber = [self getIndexOfFlyer:rowNumber];
+        
+        [self enableBtns:NO];
+        
+        flyer = [[Flyer alloc]initWithPath:[flyerPaths objectAtIndex:rowNumber] setDirectory:YES];
+        
+        createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
+        
+        // Set CreateFlyer Screen
+        createFlyer.flyer = flyer;
+        
+        __weak FlyerlyMainScreen *weakSelf = self;
+        __weak CreateFlyerController *weakCreate = createFlyer;
+        
+        //Here we Manage Block for Update
+        [createFlyer setOnFlyerBack:^(NSString *nothing) {
+            
+            // Here we setCurrent Flyer is Most Recent Flyer
+            [weakCreate.flyer setRecentFlyer];
+            
+            [weakCreate.flyer saveAfterCheck];
+
+            [weakSelf enableBtns:YES];
+            
+            // HERE WE GET FLYERS
+            weakSelf.flyerPaths = [weakSelf getFlyersPaths];
+            [weakSelf.tView reloadData];
+            
+        }];
+        
+        [createFlyer setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
+            dispatch_async( dispatch_get_main_queue(), ^{
+                if ( haveValidSubscription == NO && ([weakSelf.addInterstialFms isReady] && ![weakSelf.addInterstialFms hasBeenUsed]) ){
+                    [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
+                } else{
+                    [weakCreate.flyer saveAfterCheck];
+                }
+            });
+        }];
+        
+        [self.navigationController pushViewController:createFlyer animated:YES];
+    }
+}
+
+/**
+ * When interstial add received
+ */
+- (void)interstitialDidReceiveAd:(GADInterstitial *)ad {
+    //adLoaded = true;
+    //[self.addInterstialFms presentFromRootViewController:self];
+}
+
+/**
+ * After dismiss of interstial add
+ */
 - (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
     //on add dismiss && after merging video process, save in gallery
     [createFlyer.flyer saveAfterCheck];
 }
 
+/**
+ * Request for google add
+ */
+- (GADRequest *)request {
+    GADRequest *request = [GADRequest request];
+    
+    // Make the request for a test ad. Put in an identifier for the simulator as well as any devices
+    // you want to receive test ads.
+    request.testDevices = @[
+                            // TODO: Add your device/simulator test identifiers here. Your device identifier is printed to
+                            // the console when the app is launched.
+                            //NSString *udid = [UIDevice currentDevice].uniqueIdentifier;
+                            GAD_SIMULATOR_ID
+                            ];
+    return request;
+}
+
+/**
+ * Load google add
+ */
+-(void)loadGoogleAdd{
+    self.addInterstialFms = [[GADInterstitial alloc] init];
+    self.addInterstialFms.delegate = self;
+    
+    // Note: Edit SampleConstants.h to update kSampleAdUnitId with your addInterstialFms ad unit id.
+    self.addInterstialFms.adUnitID = [flyerConfigurator interstitialAdID];
+    [self.addInterstialFms loadRequest:[self request]];
+}
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-	[tableView beginUpdates];
-	[tableView setEditing:YES animated:YES];
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        
-        [tableView deleteRowsAtIndexPaths:
-        @[[NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section]]
-                         withRowAnimation:UITableViewRowAnimationLeft];
-       
-            
-        [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:indexPath.row] error:nil];
-        [flyerPaths removeObjectAtIndex:indexPath.row];
+    int rowNumber = (int)indexPath.row;
 
-	}
-    
-    [tableView setEditing:NO animated:YES];
-	[tableView endUpdates];
-	[tableView reloadData];
+    if( [self isAddvertiseRow:rowNumber] == NO ) {
+        rowNumber = [self getIndexOfFlyer:rowNumber];
+
+        if (editingStyle == UITableViewCellEditingStyleDelete) {
+            
+            [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:rowNumber] error:nil];
+            [flyerPaths removeObjectAtIndex:rowNumber];
+        }
+
+        [tableView reloadData];
+    }
 }
 
 
@@ -555,7 +749,7 @@ id lastShareBtnSender;
                                        otherButtonTitles:@"Sign In",nil];
         
         
-        if ( !self.interstitial.hasBeenUsed )
+        if ( !self.addInterstialFms.hasBeenUsed )
             [signInAlert show];
     }
     
@@ -662,5 +856,4 @@ id lastShareBtnSender;
     }
     
 }
-
 @end
