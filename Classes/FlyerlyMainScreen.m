@@ -379,7 +379,6 @@ id lastShareBtnSender;
 
       CGRect sizeOfAdd = CGRectMake(mainFlyerCell.cellImage.origin.x, mainFlyerCell.cellImage.origin.y, (mainFlyerCell.cellImage.size.width+mainFlyerCell.sideView.size.width), mainFlyerCell.cellImage.size.height);
 
-//      NSLog(@"sizeOfAdd= (%f,%f,%f,%f)",sizeOfAdd.origin.x, sizeOfAdd.origin.y, sizeOfAdd.size.width, sizeOfAdd.size.height);
       return sizeOfAdd;
 }
 
