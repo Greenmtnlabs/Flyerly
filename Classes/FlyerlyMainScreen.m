@@ -14,6 +14,7 @@
 #import "FlyerlyConfigurator.h"
 #import "MainScreenAddsCell.h"
 
+#define ADD_AFTER_FLYERS 4 //SHOW AD AFTER (ADD_AFTER_FLYERS - 1 ) => 3 FLYERS
 
 @interface FlyerlyMainScreen ()  {
     
@@ -85,45 +86,7 @@ id lastShareBtnSender;
         [self loadGoogleAdd];
     });
     
-    addsLoaded = 0;
-     [self getRowsCountWithAdds];
-     self.bannerAdd = [[NSMutableArray alloc] init];
-
-     __block int i=-1;
-     for(int j=0;j<addsCount; j++){
-         //add strip
-         // Initialize the banner at the bottom of the screen.
-         CGPoint origin;
-         origin = CGPointMake(0.0,0.0);
-         GADAdSize customAdSize;
-         customAdSize = GADAdSizeFromCGSize(CGSizeMake(300,250));
-         
-         self.bannerAdd[j] = [[GADBannerView alloc] initWithAdSize:customAdSize origin:origin];
-         
-        dispatch_async( dispatch_get_main_queue(), ^{
-            i++;
-            //if( haveValidSubscription == NO ) {
-                // Use predefined GADAdSize constants to define the GADBannerView.
-                GADBannerView *bannerAddTemp = self.bannerAdd[i];
-                
-                // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID before compiling.
-                bannerAddTemp.adUnitID = [flyerConfigurator bannerAdID];
-                bannerAddTemp.delegate = self;
-                bannerAddTemp.rootViewController = self;
-
-                self.bannerAdd[i] = bannerAddTemp;
-             
-                [self.bannerAdd[i] loadRequest:[self request]];
-             
-
-             
-            //}
-        });
-      }
-        
-    
-    
-
+    [self loadAddTiles];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -204,6 +167,7 @@ id lastShareBtnSender;
         
         //HERE WE GET FLYERS
         weakSelf.flyerPaths = [weakSelf getFlyersPaths];
+        [weakSelf loadAddTiles];
         [weakSelf.tView reloadData];
         
     }];
@@ -283,17 +247,38 @@ id lastShareBtnSender;
  */
 -(int)getRowsCountWithAdds{
     int flyersCount = (int)flyerPaths.count;
-    addsCount = 3;
+    addsCount = floor(flyersCount/ (ADD_AFTER_FLYERS -1) );
     int total = flyersCount + addsCount;
     
     return  total;
 }
+
 /**
- * It will return the row flag, is the row belongs from advertise or not
+ * Get index of add row
+ */
+-(int)getIndexOfAdd:(int)rowNumber{
+    rowNumber++;
+    int row = floor(rowNumber / ADD_AFTER_FLYERS ) - 1;
+    return  row;
+}
+
+/**
+ * Get index of flyer row
+ */
+-(int)getIndexOfFlyer:(int)rowNumber{
+    rowNumber++;//because indexes are starting from 0
+    int row = rowNumber - floor(rowNumber / ADD_AFTER_FLYERS ) - 1 ;
+    return  row;
+}
+
+/**
+ * It will return the index is it belongs from advertise or not
  */
 -(BOOL)isAddvertiseRow:(int)rowNumber{
+    rowNumber++;//because indexes are starting from 0
+    
     BOOL isAddRow = NO;
-    if( (rowNumber+1) >= (int)flyerPaths.count ) {
+    if( addsCount > 0 && rowNumber > 0 && ( rowNumber % ADD_AFTER_FLYERS ) == 0 ) {
         isAddRow = YES;
     }
     return isAddRow;
@@ -307,11 +292,53 @@ id lastShareBtnSender;
         self.bannerAdd[addsLoaded] = adView;
     }
     addsLoaded++;
+//    [self.tView reloadData];
     
-//    UIView *bannerAddViewTemp = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 250)];
-//    bannerAddViewTemp.backgroundColor = [UIColor whiteColor];
-    [self.tView reloadData];
+}
+
+/**
+ * Load addvertise tiles
+ */
+-(void)loadAddTiles{
+    __block int i=-1;
+    addsLoaded = 0;
     
+    if( self.bannerAdd == nil )
+        self.bannerAdd = [[NSMutableArray alloc] init];
+    
+    [self getRowsCountWithAdds]; // addsCount will be set in this function
+    
+    if( self.bannerAdd.count >= addsCount )
+    return; //dont load adds if we already have
+    
+    for(int j=0;j<addsCount; j++){
+        //add strip
+        // Initialize the banner at the bottom of the screen.
+        CGPoint origin;
+        origin = CGPointMake(0.0,0.0);
+        GADAdSize customAdSize;
+        customAdSize = GADAdSizeFromCGSize(CGSizeMake(300,250));
+        
+        if( j >= self.bannerAdd.count  )
+            self.bannerAdd[j] = [[GADBannerView alloc] initWithAdSize:customAdSize origin:origin];
+        
+        dispatch_async( dispatch_get_main_queue(), ^{
+            i++;
+            //if( haveValidSubscription == NO ) {
+            // Use predefined GADAdSize constants to define the GADBannerView.
+            GADBannerView *bannerAddTemp = self.bannerAdd[i];
+            
+            // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID before compiling.
+            bannerAddTemp.adUnitID = [flyerConfigurator bannerAdID];
+            bannerAddTemp.delegate = self;
+            bannerAddTemp.rootViewController = self;
+            
+            self.bannerAdd[i] = bannerAddTemp;
+            
+            [self.bannerAdd[i] loadRequest:[self request]];
+            //}
+        });
+    }
 }
 
 #pragma mark Table view methods
@@ -343,15 +370,16 @@ id lastShareBtnSender;
     return cell;
 }
 
+/**
+ * Get flyer visible size, the size of flyer and social icon bar
+ */
 -(CGRect)getSizeForAddR{
     MainFlyerCell *mainFlyerCell = nil;
       mainFlyerCell = [self getMainFlyerCell:mainFlyerCell];
 
-      NSLog(@"(%f,%f,%f,%f)",mainFlyerCell.cellImage.origin.x, mainFlyerCell.cellImage.origin.y, (mainFlyerCell.cellImage.size.width+mainFlyerCell.sideView.size.width), mainFlyerCell.cellImage.size.height);
-
       CGRect sizeOfAdd = CGRectMake(mainFlyerCell.cellImage.origin.x, mainFlyerCell.cellImage.origin.y, (mainFlyerCell.cellImage.size.width+mainFlyerCell.sideView.size.width), mainFlyerCell.cellImage.size.height);
 
-      NSLog(@"sizeOfAdd= (%f,%f,%f,%f)",sizeOfAdd.origin.x, sizeOfAdd.origin.y, sizeOfAdd.size.width, sizeOfAdd.size.height);
+//      NSLog(@"sizeOfAdd= (%f,%f,%f,%f)",sizeOfAdd.origin.x, sizeOfAdd.origin.y, sizeOfAdd.size.width, sizeOfAdd.size.height);
       return sizeOfAdd;
 }
 
@@ -367,15 +395,16 @@ id lastShareBtnSender;
     if( [showCell isEqualToString:@"MainFlyerCell"] ){
         static NSString *MainFlyerCellId = @"MainFlyerCellId";
         MainFlyerCell *cell = (MainFlyerCell *)[tableView dequeueReusableCellWithIdentifier:MainFlyerCellId];
-        
+        cell = [self getMainFlyerCell:cell];
         [cell setAccessoryType:UITableViewCellAccessoryNone];
         
         
         dispatch_async(dispatch_get_main_queue(), ^{
-                flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:rowNumber] setDirectory:NO];
+                int flyerRow = [self getIndexOfFlyer:rowNumber];
+                flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:flyerRow] setDirectory:NO];
                 [cell renderCell:flyer LockStatus:NO];
                 [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
-                cell.shareBtn.tag = rowNumber;
+                cell.shareBtn.tag = indexPath.row;
                 [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
         });
         return cell;
@@ -385,7 +414,8 @@ id lastShareBtnSender;
         MainScreenAddsCell *cell = (MainScreenAddsCell *)[tableView dequeueReusableCellWithIdentifier:MainScreenAddsCellId];
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainScreenAddsCell" owner:self options:nil];
         cell = (MainScreenAddsCell *)[nib objectAtIndex:0];
-        [cell addSubview:self.bannerAdd[rowNumber]];
+        int addRow = [self getIndexOfAdd:rowNumber];
+        [cell addSubview:self.bannerAdd[ addRow ]];
         return cell;
     }
 }
@@ -393,9 +423,11 @@ id lastShareBtnSender;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     int rowNumber = (int)indexPath.row;
     if( [self isAddvertiseRow:rowNumber] == NO ) {
+        rowNumber = [self getIndexOfFlyer:rowNumber];
+        
         [self enableBtns:NO];
         
-        flyer = [[Flyer alloc]initWithPath:[flyerPaths objectAtIndex:indexPath.row] setDirectory:YES];
+        flyer = [[Flyer alloc]initWithPath:[flyerPaths objectAtIndex:rowNumber] setDirectory:YES];
         
         createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
         
@@ -483,23 +515,25 @@ id lastShareBtnSender;
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     int rowNumber = (int)indexPath.row;
     if( [self isAddvertiseRow:rowNumber] == NO ) {
-        [tableView beginUpdates];
-        [tableView setEditing:YES animated:YES];
+        rowNumber = [self getIndexOfFlyer:rowNumber];
+        
+//        [tableView beginUpdates];
+//        [tableView setEditing:YES animated:YES];
         
         if (editingStyle == UITableViewCellEditingStyleDelete) {
             
-            [tableView deleteRowsAtIndexPaths:
-            @[[NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section]]
-                             withRowAnimation:UITableViewRowAnimationLeft];
+//            [tableView deleteRowsAtIndexPaths:
+//            @[[NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section]]
+//                             withRowAnimation:UITableViewRowAnimationLeft];
            
             
-            [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:indexPath.row] error:nil];
-            [flyerPaths removeObjectAtIndex:indexPath.row];
+            [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:rowNumber] error:nil];
+            [flyerPaths removeObjectAtIndex:rowNumber];
 
         }
         
-        [tableView setEditing:NO animated:YES];
-        [tableView endUpdates];
+//        [tableView setEditing:NO animated:YES];
+//        [tableView endUpdates];
         [tableView reloadData];
     }
 }

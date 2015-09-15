@@ -71,6 +71,5 @@
 
 //Add view for injecting in cells
 @property(nonatomic, strong) IBOutletCollection(GADBannerView) NSMutableArray *bannerAdd;
-@property (nonatomic, strong) UIView *bannerAddView;
-//@property (nonatomic, strong) IBOutletCollection(UIView) NSArray *bannerAddView;
+
 @end
