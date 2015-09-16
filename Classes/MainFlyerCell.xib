@@ -24,9 +24,6 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nq4-Ll-xah" userLabel="cellImage">
                         <rect key="frame" x="10" y="10" width="250" height="250"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="Nq4-Ll-xah" secondAttribute="height" multiplier="1:1" id="F29-1x-tSH"/>
-                        </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9BH-EE-Cfw">
                         <rect key="frame" x="261" y="10" width="50" height="250"/>
@@ -74,20 +71,18 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="9BH-EE-Cfw" secondAttribute="height" multiplier="1:5" id="bzy-0o-jlA"/>
-                        </constraints>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstAttribute="bottomMargin" secondItem="Nq4-Ll-xah" secondAttribute="bottom" constant="1" id="FeB-QD-apL"/>
-                    <constraint firstItem="9BH-EE-Cfw" firstAttribute="leading" secondItem="Nq4-Ll-xah" secondAttribute="trailing" constant="1" id="KYh-Ta-cOX"/>
-                    <constraint firstItem="Nq4-Ll-xah" firstAttribute="top" secondItem="cob-BB-dgi" secondAttribute="topMargin" constant="2" id="aEP-Xt-4uc"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="9BH-EE-Cfw" secondAttribute="bottom" constant="1" id="gal-aS-PQV"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="9BH-EE-Cfw" secondAttribute="trailing" constant="1" id="h9l-PG-qlW"/>
-                    <constraint firstItem="Nq4-Ll-xah" firstAttribute="leading" secondItem="cob-BB-dgi" secondAttribute="leadingMargin" constant="2" id="rj1-Jr-c4a"/>
-                    <constraint firstItem="9BH-EE-Cfw" firstAttribute="top" secondItem="cob-BB-dgi" secondAttribute="topMargin" constant="2" id="uhM-2J-j1y"/>
+                    <constraint firstItem="Nq4-Ll-xah" firstAttribute="leading" secondItem="cob-BB-dgi" secondAttribute="leadingMargin" constant="2" id="4Re-YH-zDQ"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="9BH-EE-Cfw" secondAttribute="bottom" constant="1" id="4bc-nK-3es"/>
+                    <constraint firstItem="9BH-EE-Cfw" firstAttribute="leading" secondItem="Nq4-Ll-xah" secondAttribute="trailing" constant="1" id="4hM-hv-jTJ"/>
+                    <constraint firstItem="9BH-EE-Cfw" firstAttribute="width" secondItem="Nq4-Ll-xah" secondAttribute="height" multiplier="1:5" id="Hwd-I3-Twn"/>
+                    <constraint firstItem="9BH-EE-Cfw" firstAttribute="top" secondItem="cob-BB-dgi" secondAttribute="topMargin" constant="2" id="ZcI-Wo-UwS"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="9BH-EE-Cfw" secondAttribute="trailing" constant="1" id="mxs-Nt-5t3"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Nq4-Ll-xah" secondAttribute="bottom" constant="1" id="tON-u5-XNr"/>
+                    <constraint firstItem="Nq4-Ll-xah" firstAttribute="top" secondItem="cob-BB-dgi" secondAttribute="topMargin" constant="2" id="zau-Nj-MjB"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
