@@ -228,34 +228,34 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 384.3, 310, 50)];
             
             if ( bannerAdDismissBtn == nil ){
-                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(296, 5, 23, 23)];
+                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(270, 0, 52, 52)];
             }
         }
         else if ( IS_IPHONE_5 ) {
             self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 473, 320, 50)];
             
             if ( bannerAdDismissBtn == nil ){
-                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(296, 5, 23, 23)];
+                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(270, 0, 52, 52)];
             }
         } else if ( IS_IPHONE_6 ){
             
             self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 564, 620, 50)];
             
             if ( bannerAdDismissBtn == nil ){
-            bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(320, -35, 72, 72)];
+                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(320, 0, 52, 52)];
             }
         }else if ( IS_IPHONE_6_PLUS ){
             
             self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 628, 620, 50)];
             
             if ( bannerAdDismissBtn == nil ){
-            bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(320, -35, 72, 72)];
+                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(360, 0, 52, 52)];
             }
         }else {
             self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 310, 320, 50)];
             
             if ( bannerAdDismissBtn == nil ){
-                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(296, 5, 23, 23)];
+                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(270, 0, 52, 52)];
             }
         }
     
