@@ -3,8 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainScreenAddsCell"/>
@@ -17,17 +15,12 @@
                 <subviews>
                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="WQM-IF-x6i">
                         <rect key="frame" x="150" y="125" width="20" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="WQM-IF-x6i" secondAttribute="height" multiplier="1:1" id="QcL-Y6-ZS7"/>
-                        </constraints>
                     </activityIndicatorView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstItem="WQM-IF-x6i" firstAttribute="leading" secondItem="knb-hH-zgY" secondAttribute="leadingMargin" constant="142" id="GTy-Au-alU"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="WQM-IF-x6i" secondAttribute="trailing" constant="142" id="R6T-b6-AQO"/>
-                    <constraint firstItem="WQM-IF-x6i" firstAttribute="top" secondItem="knb-hH-zgY" secondAttribute="topMargin" constant="117" id="R6g-83-vL0"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="WQM-IF-x6i" secondAttribute="bottom" constant="116" id="drb-y7-Cgk"/>
+                    <constraint firstAttribute="centerX" secondItem="WQM-IF-x6i" secondAttribute="centerX" id="WPb-0d-yA9"/>
+                    <constraint firstAttribute="centerY" secondItem="WQM-IF-x6i" secondAttribute="centerY" id="olK-Bp-uy4"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
