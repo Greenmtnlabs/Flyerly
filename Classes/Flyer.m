@@ -1731,8 +1731,8 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     UIImage *bottomImage = [self  getSharingVideoCover];
     
-    UIImage *image = [UIImage imageNamed:@"play_icon"];
-    
+    UIImage *imgPlayIcon = [UIImage imageNamed:@"play_icon"];
+
     int vWidth = flyerlyWidth;
     int vHeight = flyerlyHeight;
     int sizeIncreased = 2;
@@ -1741,15 +1741,24 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         vHeight = OldFlyerlyHeight;
         sizeIncreased = 1;
     }
+    
+    // play icon width and height
+    CGFloat playIconWidth = 180*sizeIncreased;
+    CGFloat playIconHeight = 180*sizeIncreased;
+    
     CGSize newSize = CGSizeMake( vWidth, vHeight );
     UIGraphicsBeginImageContext( newSize );
+    
+    // setting play icon coordinates
+    CGFloat x_playIcon = (vWidth/2)-(playIconWidth/2);
+    CGFloat y_playIcon = (vHeight/2)-(playIconHeight/2);
     
     // Use existing opacity as is
     [bottomImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
     
     // Apply supplied opacity
 
-    [image drawInRect:CGRectMake( 10, -15, 180*sizeIncreased, 180*sizeIncreased ) blendMode:kCGBlendModeNormal alpha:1];
+    [imgPlayIcon drawInRect:CGRectMake( x_playIcon, y_playIcon , playIconWidth, playIconHeight ) blendMode:kCGBlendModeNormal alpha:1];
     
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     
