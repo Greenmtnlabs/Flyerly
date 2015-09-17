@@ -14,32 +14,31 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="12">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Zmain_screenbg@3x.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="qAD-NW-M6j">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                 </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="270" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="kGq-MQ-Rhl" userLabel="tView">
-                    <rect key="frame" x="0.0" y="65" width="375" height="556"/>
+                    <rect key="frame" x="0.0" y="65" width="414" height="625"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZWV-7a-5WA" userLabel="bottomBar">
-                    <rect key="frame" x="0.0" y="619" width="375" height="48"/>
+                    <rect key="frame" x="0.0" y="688" width="414" height="48"/>
                     <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="48" id="t2E-kL-bc1"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nFc-73-sac" userLabel="settingBtn">
-                    <rect key="frame" x="161" y="595" width="55" height="48"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nFc-73-sac" userLabel="settingBtn">
+                    <rect key="frame" x="172" y="668" width="71" height="69"/>
                     <accessibility key="accessibilityConfiguration" label="Settings"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="48" id="bVb-Mp-1yb"/>
-                        <constraint firstAttribute="width" constant="55" id="mTd-gv-4uG"/>
+                        <constraint firstAttribute="height" constant="69" id="06i-zI-FyY"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <state key="normal" image="settings2.png">
@@ -58,13 +57,13 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="qAD-NW-M6j" secondAttribute="trailing" id="3DG-5h-d6N"/>
                 <constraint firstItem="qAD-NW-M6j" firstAttribute="leading" secondItem="12" secondAttribute="leading" id="7bc-fE-LVr"/>
+                <constraint firstItem="nFc-73-sac" firstAttribute="centerX" secondItem="ZWV-7a-5WA" secondAttribute="centerX" id="HMY-nA-JMG"/>
                 <constraint firstAttribute="bottom" secondItem="kGq-MQ-Rhl" secondAttribute="bottom" constant="46" id="JCG-Io-BGw"/>
                 <constraint firstAttribute="bottom" secondItem="ZWV-7a-5WA" secondAttribute="bottom" id="KkS-du-1jT"/>
+                <constraint firstAttribute="bottom" secondItem="nFc-73-sac" secondAttribute="bottom" constant="-1" id="QRP-uO-weJ"/>
                 <constraint firstItem="ZWV-7a-5WA" firstAttribute="top" secondItem="kGq-MQ-Rhl" secondAttribute="bottom" constant="-2" id="TUx-NO-eaH"/>
                 <constraint firstItem="kGq-MQ-Rhl" firstAttribute="top" secondItem="12" secondAttribute="top" constant="65" id="aCk-bC-uOd"/>
-                <constraint firstAttribute="bottom" secondItem="nFc-73-sac" secondAttribute="bottom" constant="24" id="ayE-LR-rXr"/>
                 <constraint firstItem="kGq-MQ-Rhl" firstAttribute="trailing" secondItem="qAD-NW-M6j" secondAttribute="trailing" id="bAq-1I-Kww"/>
-                <constraint firstAttribute="centerX" secondItem="nFc-73-sac" secondAttribute="centerX" id="bwy-Sq-4Nl"/>
                 <constraint firstItem="qAD-NW-M6j" firstAttribute="top" secondItem="12" secondAttribute="top" id="gDv-qu-Hzg"/>
                 <constraint firstItem="kGq-MQ-Rhl" firstAttribute="leading" secondItem="qAD-NW-M6j" secondAttribute="leading" id="o8B-Ri-U03"/>
                 <constraint firstItem="kGq-MQ-Rhl" firstAttribute="leading" secondItem="ZWV-7a-5WA" secondAttribute="leading" id="pVO-bX-KJd"/>
@@ -72,7 +71,7 @@
                 <constraint firstAttribute="bottom" secondItem="qAD-NW-M6j" secondAttribute="bottom" id="wJs-PD-zll"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
             <point key="canvasLocation" x="324" y="179"/>
         </view>
     </objects>
