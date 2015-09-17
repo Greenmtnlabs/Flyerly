@@ -817,6 +817,7 @@ id lastShareBtnSender;
     userPurchases_.delegate = self;
 
     signInController.signInCompletion = ^void(void) {
+        flyerlyMainScreen.flyerPaths = [flyerlyMainScreen getFlyersPaths];
         UINavigationController* navigationController = flyerlyMainScreen.navigationController;
         [navigationController popViewControllerAnimated:NO];
         [userPurchases_ setUserPurcahsesFromParse];
