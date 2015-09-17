@@ -182,8 +182,12 @@ id lastShareBtnSender;
         
         //HERE WE GET FLYERS
         weakSelf.flyerPaths = [weakSelf getFlyersPaths];
+        
         [weakSelf loadAddTiles];
+        
+        if( weakSelf.flyerPaths.count > 1 ){
          [weakSelf.tView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
         [weakSelf.tView reloadData];
         
     }];
@@ -450,7 +454,10 @@ id lastShareBtnSender;
             
             // HERE WE GET FLYERS
             weakSelf.flyerPaths = [weakSelf getFlyersPaths];
-             [weakSelf.tView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            
+            if( weakSelf.flyerPaths.count > 1 ){
+                 [weakSelf.tView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            }
             [weakSelf.tView reloadData];
             
         }];
