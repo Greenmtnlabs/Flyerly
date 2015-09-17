@@ -194,6 +194,8 @@
 		20563E181962D64200C206FD /* Raleway-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20563E101962D64200C206FD /* Raleway-Light.ttf */; };
 		20563E191962D64200C206FD /* Sancreek-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20563E111962D64200C206FD /* Sancreek-Regular.ttf */; };
 		20563E1A1962D64200C206FD /* YanoneKaffeesatz-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20563E121962D64200C206FD /* YanoneKaffeesatz-Light.ttf */; };
+		20588CFD1BAB077B006232CF /* youtube_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20588CFB1BAB077B006232CF /* youtube_saved@2x.png */; };
+		20588CFE1BAB077B006232CF /* youtube_saved@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20588CFC1BAB077B006232CF /* youtube_saved@3x.png */; };
 		2060689B1924CC6100AB5230 /* Backgrounds.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2060689A1924CC6100AB5230 /* Backgrounds.xib */; };
 		2060689D1924CCE400AB5230 /* Backgrounds-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2060689C1924CCE400AB5230 /* Backgrounds-iPhone4.xib */; };
 		206068A11924EE7500AB5230 /* Borders.xib in Resources */ = {isa = PBXBuildFile; fileRef = 206068A01924EE7500AB5230 /* Borders.xib */; };
@@ -1713,6 +1715,8 @@
 		20563E101962D64200C206FD /* Raleway-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Raleway-Light.ttf"; path = "Data/fonts/Raleway-Light.ttf"; sourceTree = "<group>"; };
 		20563E111962D64200C206FD /* Sancreek-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Sancreek-Regular.ttf"; path = "Data/fonts/Sancreek-Regular.ttf"; sourceTree = "<group>"; };
 		20563E121962D64200C206FD /* YanoneKaffeesatz-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "YanoneKaffeesatz-Light.ttf"; path = "Data/fonts/YanoneKaffeesatz-Light.ttf"; sourceTree = "<group>"; };
+		20588CFB1BAB077B006232CF /* youtube_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "youtube_saved@2x.png"; sourceTree = "<group>"; };
+		20588CFC1BAB077B006232CF /* youtube_saved@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "youtube_saved@3x.png"; sourceTree = "<group>"; };
 		2060689A1924CC6100AB5230 /* Backgrounds.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Backgrounds.xib; sourceTree = "<group>"; };
 		2060689C1924CCE400AB5230 /* Backgrounds-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Backgrounds-iPhone4.xib"; sourceTree = "<group>"; };
 		206068A01924EE7500AB5230 /* Borders.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Borders.xib; sourceTree = "<group>"; };
@@ -3158,6 +3162,8 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				20588CFB1BAB077B006232CF /* youtube_saved@2x.png */,
+				20588CFC1BAB077B006232CF /* youtube_saved@3x.png */,
 				C391EB011BA1AE9700A8DDE1 /* intro-img-1.jpg */,
 				C391EB021BA1AE9700A8DDE1 /* intro-img-2.jpg */,
 				C391EB031BA1AE9700A8DDE1 /* intro-img-3.jpg */,
@@ -5655,6 +5661,7 @@
 				246EF4E4193C515D004539B2 /* emoticon104@2x.png in Resources */,
 				24218459194B4AEC00FDDA97 /* Badminton-icon (1).png in Resources */,
 				249F203A193F562C0072835E /* play_icon@2x.png in Resources */,
+				20588CFD1BAB077B006232CF /* youtube_saved@2x.png in Resources */,
 				249F2044193F562C0072835E /* searchicon@2x.png in Resources */,
 				242184C4194B4AEC00FDDA97 /* emoticon182@2x.png in Resources */,
 				C3D8DD9D1B53DBE1006C2A9F /* b20.png in Resources */,
@@ -6400,6 +6407,7 @@
 				24861F2119F9147100670F6D /* lock_icon@3x.png in Resources */,
 				203E0B7717DDDD720039C3A7 /* InputViewController.xib in Resources */,
 				24218472194B4AEC00FDDA97 /* cycling-mountain-biking-icon.png in Resources */,
+				20588CFE1BAB077B006232CF /* youtube_saved@3x.png in Resources */,
 				24861F1319F9147100670F6D /* instagram_share_saved@3x.png in Resources */,
 				C3766D881B56510200B7F5B2 /* icon60.jpg in Resources */,
 				365A9D1819AF697300E284B5 /* drawing_tab_size_selected@2x.png in Resources */,
