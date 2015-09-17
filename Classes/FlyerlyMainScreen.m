@@ -88,6 +88,8 @@ id lastShareBtnSender;
     });
     
     [self loadAddTiles];
+
+    [self.view bringSubviewToFront:settingBtn];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
