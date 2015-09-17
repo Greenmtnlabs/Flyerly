@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Entypo.otf">
@@ -13,21 +14,22 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleAspectFit" selectionStyle="default" indentationWidth="10" rowHeight="270" id="L1n-HL-Ezo" customClass="MainFlyerCell">
+        <tableViewCell contentMode="scaleAspectFit" selectionStyle="default" indentationWidth="10" rowHeight="0.0" id="L1n-HL-Ezo" customClass="MainFlyerCell">
             <rect key="frame" x="0.0" y="0.0" width="375" height="320"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="L1n-HL-Ezo" id="owk-LN-l8X">
                 <rect key="frame" x="0.0" y="0.0" width="314" height="103"/>
                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Ai-qZ-EHD" userLabel="cellImage">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Ai-qZ-EHD" userLabel="cellImage">
                         <rect key="frame" x="10" y="10" width="300" height="300"/>
                     </imageView>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WJK-5t-1NB" userLabel="btnsView">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WJK-5t-1NB" userLabel="btnsView">
                         <rect key="frame" x="311" y="10" width="55" height="300"/>
                         <subviews>
                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BOj-4f-qvM" userLabel="editBtn">
                                 <rect key="frame" x="2" y="0.0" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.011764707040000001" green="1" blue="0.23921570180000001" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" name="Entypo" family="Entypo" pointSize="45"/>
                                 <state key="normal" title="✎">
                                     <color key="titleColor" red="0.011764705882352941" green="0.56862745098039214" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
@@ -49,6 +51,9 @@
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Co7-rf-eSD">
                                 <rect key="frame" x="16" y="152" width="20" height="20"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GfU-pr-kJT">
+                                <rect key="frame" x="16" y="174" width="20" height="20"/>
+                            </imageView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Vl-o4-2p6" userLabel="flyerLock">
                                 <rect key="frame" x="26" y="124" width="0.0" height="0.0"/>
                                 <state key="normal">
@@ -64,14 +69,23 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GfU-pr-kJT">
-                                <rect key="frame" x="16" y="174" width="20" height="20"/>
-                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.98431378599999997" green="0.0" blue="0.29019609089999998" alpha="1" colorSpace="deviceRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="55" id="HpM-Gl-eU1"/>
+                        </constraints>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstAttribute="bottomMargin" secondItem="4Ai-qZ-EHD" secondAttribute="bottom" constant="1" id="JVI-oU-ei3"/>
+                    <constraint firstItem="WJK-5t-1NB" firstAttribute="leading" secondItem="4Ai-qZ-EHD" secondAttribute="trailing" constant="1" id="Th6-8B-iSu"/>
+                    <constraint firstItem="4Ai-qZ-EHD" firstAttribute="top" secondItem="owk-LN-l8X" secondAttribute="topMargin" constant="2" id="aak-96-6MW"/>
+                    <constraint firstItem="WJK-5t-1NB" firstAttribute="bottom" secondItem="4Ai-qZ-EHD" secondAttribute="bottom" id="aiS-Re-sv9"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="WJK-5t-1NB" secondAttribute="trailing" constant="1" id="dts-yq-8de"/>
+                    <constraint firstItem="4Ai-qZ-EHD" firstAttribute="leading" secondItem="owk-LN-l8X" secondAttribute="leadingMargin" constant="2" id="kRX-i7-mUF"/>
+                    <constraint firstItem="WJK-5t-1NB" firstAttribute="top" secondItem="4Ai-qZ-EHD" secondAttribute="top" id="w1A-5O-kqa"/>
+                </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>

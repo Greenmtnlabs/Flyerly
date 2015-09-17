@@ -20,7 +20,7 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Zmain_screenbg@3x.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="qAD-NW-M6j">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="270" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="kGq-MQ-Rhl" userLabel="tView">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="320" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="kGq-MQ-Rhl" userLabel="tView">
                     <rect key="frame" x="0.0" y="65" width="375" height="556"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
