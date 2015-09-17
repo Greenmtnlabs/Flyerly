@@ -375,7 +375,7 @@ id lastShareBtnSender;
 
 -(MainFlyerCell *)getMainFlyerCell:(MainFlyerCell *)cell{
     if (cell == nil) {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6" owner:self options:nil];
         cell = (MainFlyerCell *)[nib objectAtIndex:0];
     }
     return cell;
@@ -383,14 +383,14 @@ id lastShareBtnSender;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     int rowNumber = (int)indexPath.row;
-    NSString *showCell = @"MainFlyerCell";
+    NSString *showCell = @"MainFlyerCell-iPhone6";
 
     if( [self isAddvertiseRow:rowNumber] ) {
         showCell = @"MainScreenAddsCell";
     }
     
     
-    if( [showCell isEqualToString:@"MainFlyerCell"] ){
+    if( [showCell isEqualToString:@"MainFlyerCell-iPhone6"] ){
         static NSString *MainFlyerCellId = @"MainFlyerCellId";
         MainFlyerCell *cell = (MainFlyerCell *)[tableView dequeueReusableCellWithIdentifier:MainFlyerCellId];
         cell = [self getMainFlyerCell:cell];
