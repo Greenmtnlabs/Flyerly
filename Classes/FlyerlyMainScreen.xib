@@ -34,7 +34,7 @@
                         <constraint firstAttribute="height" constant="48" id="t2E-kL-bc1"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nFc-73-sac" userLabel="settingBtn">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nFc-73-sac" userLabel="settingBtn">
                     <rect key="frame" x="153" y="599" width="71" height="69"/>
                     <accessibility key="accessibilityConfiguration" label="Settings"/>
                     <constraints>
@@ -57,7 +57,7 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="qAD-NW-M6j" secondAttribute="trailing" id="3DG-5h-d6N"/>
                 <constraint firstItem="qAD-NW-M6j" firstAttribute="leading" secondItem="12" secondAttribute="leading" id="7bc-fE-LVr"/>
-                <constraint firstItem="nFc-73-sac" firstAttribute="centerX" secondItem="ZWV-7a-5WA" secondAttribute="centerX" id="HMY-nA-JMG"/>
+                <constraint firstItem="nFc-73-sac" firstAttribute="centerX" secondItem="ZWV-7a-5WA" secondAttribute="centerX" constant="1" id="HMY-nA-JMG"/>
                 <constraint firstAttribute="bottom" secondItem="kGq-MQ-Rhl" secondAttribute="bottom" constant="46" id="JCG-Io-BGw"/>
                 <constraint firstAttribute="bottom" secondItem="ZWV-7a-5WA" secondAttribute="bottom" id="KkS-du-1jT"/>
                 <constraint firstAttribute="bottom" secondItem="nFc-73-sac" secondAttribute="bottom" constant="-1" id="QRP-uO-weJ"/>
