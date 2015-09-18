@@ -50,6 +50,7 @@ id lastShareBtnSender;
 	tView.delegate = self;
     [self.view addSubview:tView];
     [self.tView setBackgroundView:nil];
+    [self.tView setBackgroundColor:[UIColor clearColor]];
     [self.tView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 
     // Load the flyers.
