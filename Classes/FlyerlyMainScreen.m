@@ -48,10 +48,11 @@ id lastShareBtnSender;
 
 	tView.dataSource = self;
 	tView.delegate = self;
+    [tView setBackgroundView:nil];
+    [tView setBackgroundColor:[UIColor clearColor]];
+    [tView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.view addSubview:tView];
-    [self.tView setBackgroundView:nil];
-    [self.tView setBackgroundColor:[UIColor clearColor]];
-    [self.tView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+
 
     // Load the flyers.
     flyerPaths = [self getFlyersPaths];

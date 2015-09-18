@@ -73,7 +73,7 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </tableViewCellContentView>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.61960784310000006" green="0.59215686270000001" blue="0.39607843139999999" alpha="0.050000000000000003" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="cellImage" destination="Nq4-Ll-xah" id="oA8-2E-24k"/>
                 <outlet property="flyerLock" destination="tr4-sN-ZUc" id="2No-bK-Xkb"/>
