@@ -30,7 +30,7 @@
 
 @synthesize sharePanel,tView;
 @synthesize flyerPaths;
-@synthesize flyer, signInAlert,settingBtn;
+@synthesize flyer, signInAlert,settingBtn,bottomBar;
 
 id lastShareBtnSender;
 
@@ -48,9 +48,12 @@ id lastShareBtnSender;
 
 	tView.dataSource = self;
 	tView.delegate = self;
+    [tView setBackgroundView:nil];
+    [tView setBackgroundColor:[UIColor clearColor]];
+    [tView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [self.view setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:tView];
-    [self.tView setBackgroundView:nil];
-    [self.tView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+
 
     // Load the flyers.
     flyerPaths = [self getFlyersPaths];
@@ -89,7 +92,9 @@ id lastShareBtnSender;
     
     [self loadAddTiles];
 
+    [self.view bringSubviewToFront:bottomBar];
     [self.view bringSubviewToFront:settingBtn];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -105,11 +110,7 @@ id lastShareBtnSender;
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
         MainFlyerCell *cell = (MainFlyerCell *)[self.tView cellForRowAtIndexPath:indexPath];
         sizeRectForAdd = CGRectMake(cell.cellImage.frame.origin.x,cell.cellImage.frame.origin.y,(cell.cellImage.frame.size.width+cell.sideView.frame.size.width),cell.cellImage.frame.size.height);
-        NSLog(@"flyerImg(%f,%f)",cell.cellImage.frame.size.width,cell.cellImage.frame.size.height);
     }
-    
-    NSLog(@"sizeRectForAdd(%f,%f,%f,%f,)",sizeRectForAdd.origin.x,sizeRectForAdd.origin.y,sizeRectForAdd.size.width,sizeRectForAdd.size.height);
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -368,19 +369,18 @@ id lastShareBtnSender;
     return 1;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ( IS_IPHONE_4 || IS_IPHONE_5 ) {
+        return 270;
+    } else{
+        return 320;
+    }
+}
+
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self getRowsCountWithAdds];
 }
-
--(MainFlyerCell *)getMainFlyerCell:(MainFlyerCell *)cell{
-    if (cell == nil) {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
-        cell = (MainFlyerCell *)[nib objectAtIndex:0];
-    }
-    return cell;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     int rowNumber = (int)indexPath.row;
     NSString *showCell = @"MainFlyerCell";
@@ -393,7 +393,17 @@ id lastShareBtnSender;
     if( [showCell isEqualToString:@"MainFlyerCell"] ){
         static NSString *MainFlyerCellId = @"MainFlyerCellId";
         MainFlyerCell *cell = (MainFlyerCell *)[tableView dequeueReusableCellWithIdentifier:MainFlyerCellId];
-        cell = [self getMainFlyerCell:cell];
+        if (cell == nil) {
+            NSArray *nib;
+            if ( IS_IPHONE_4 || IS_IPHONE_5 ) {
+                nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
+            } else if ( IS_IPHONE_6 ) {
+                nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6" owner:self options:nil];
+            } else if ( IS_IPHONE_6_PLUS ) {
+                nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6-Plus" owner:self options:nil];
+            }
+            cell = (MainFlyerCell *)[nib objectAtIndex:0];
+        }
         [cell setAccessoryType:UITableViewCellAccessoryNone];
         
         
@@ -408,7 +418,7 @@ id lastShareBtnSender;
         
         return cell;
     }
-    else/* if( [showCell isEqualToString:@"MainScreenAddsCell"] )*/{
+    else {
         static NSString *MainScreenAddsCellId = @"MainScreenAddsCell";
         MainScreenAddsCell *cell = (MainScreenAddsCell *)[tableView dequeueReusableCellWithIdentifier:MainScreenAddsCellId];
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainScreenAddsCell" owner:self options:nil];

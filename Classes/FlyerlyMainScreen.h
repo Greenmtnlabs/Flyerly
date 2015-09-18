@@ -57,7 +57,8 @@
 @property ( nonatomic, strong ) Flyer *flyer;
 @property (nonatomic, strong) UIView *sharePanel;
 @property (nonatomic, strong) UIAlertView *signInAlert;
-@property (nonatomic, strong) UIButton *settingBtn;
+@property (nonatomic, strong) IBOutlet UIButton *settingBtn;
+@property (nonatomic, strong) IBOutlet UIView *bottomBar;
 
 
 -(IBAction)createFlyer:(id)sender;
