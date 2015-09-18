@@ -635,6 +635,78 @@ UIAlertView *saveCurrentFlyerAlert;
  */
 -(IBAction)onClickFacebookButton{
     
+    
+    
+    FBShareDialogPhotoParams *photoParams = [[FBShareDialogPhotoParams alloc] init];
+    UIImage *screenshot =selectedFlyerImage;
+    photoParams.photos = @[screenshot];
+    [FBDialogs presentMessageDialogWithPhotoParams:photoParams
+                                     clientState:nil
+                                         handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+                                             if(error) {
+
+                                                 // An error occurred, we need to handle the error
+                                                 
+                                                 // See: https://developers.facebook.com/docs/ios/errors
+                                                 NSLog(@"error %@", error);
+                                                 
+                                             } else {
+                                             
+                                                 // Success
+                                                 
+                                                 NSLog(@"result %@", results);
+                                                 
+                                             }
+
+                                             
+                                         }];
+    
+    
+//    [FBDialogs presentMessageDialogWithLink:[NSURL URLWithString:@"https://developers.facebook.com/docs/ios/"]
+//                                    handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+//                                        if(error) {
+//                                            // An error occurred, we need to handle the error
+//                                            // See: https://developers.facebook.com/docs/ios/errors
+//                                        } else {
+//                                            // Success
+//                                            NSLog(@"result %@", results);
+//                                        }
+//                                    }];
+    
+   
+//    id<FBGraphObject> pictureObject =
+//    [FBGraphObject openGraphObjectForPostWithType:@"your_namespace:picture"
+//                                            title:@""
+//                                            image:selectedFlyerImage
+//                                              url:@""
+//                                      description:@""];
+//    
+//    id<FBOpenGraphAction> action = (id<FBOpenGraphAction>)[FBGraphObject graphObject];
+//    [action setObject:pictureObject forKey:@"picture"];
+//    
+//    [FBDialogs presentShareDialogWithOpenGraphAction:action
+//                                          actionType:@"your_namespace:action_name"
+//                                 previewPropertyName:@"picture"
+//                                             handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+//                                                 if(error) {
+//                                                     NSLog(@"Error: %@", error.description);
+//                                                 } else {
+//                                                     NSLog(@"Success");
+//                                                 }
+//                                             }];
+    
+//    [FBDialogs presentMessageDialogWithPhotos:(NSArray *)selectedFlyerImage clientState:nil handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+//        if(error) {
+//            // An error occurred, we need to handle the error
+//            // See: https://developers.facebook.com/docs/ios/errors
+//        } else {
+//            // Success
+//            NSLog(@"result %@", results);
+//        }
+//    }];
+   
+    return;
+    
     //We just need to check if device has account or not.
     // If it has, then share directly via iOSfacebook, else we need to share
     // via browser authentication service.
