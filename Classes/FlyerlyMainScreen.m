@@ -105,12 +105,7 @@ id lastShareBtnSender;
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
         MainFlyerCell *cell = (MainFlyerCell *)[self.tView cellForRowAtIndexPath:indexPath];
         sizeRectForAdd = CGRectMake(cell.cellImage.frame.origin.x,cell.cellImage.frame.origin.y,(cell.cellImage.frame.size.width+cell.sideView.frame.size.width),cell.cellImage.frame.size.height);
-        NSLog(@"flyerImg(%f,%f,%f,%f)",cell.cellImage.frame.origin.x,cell.cellImage.frame.origin.y,cell.cellImage.frame.size.width,cell.cellImage.frame.size.height);
-        NSLog(@"cell(%f,%f)",cell.frame.size.width,cell.frame.size.height);
     }
-    
-    NSLog(@"sizeRectForAdd(%f,%f,%f,%f,)",sizeRectForAdd.origin.x,sizeRectForAdd.origin.y,sizeRectForAdd.size.width,sizeRectForAdd.size.height);
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
