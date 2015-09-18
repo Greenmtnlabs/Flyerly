@@ -1157,10 +1157,6 @@
 		C31E92F71B566229004DF193 /* icon74.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C31E92E21B566229004DF193 /* icon74.jpg */; };
 		C31F67481B676E6F0025FBBF /* Zwelcome_bg@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C31F67461B676E6F0025FBBF /* Zwelcome_bg@2x.jpg */; };
 		C31F67491B676E6F0025FBBF /* Zwelcome_bg@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C31F67471B676E6F0025FBBF /* Zwelcome_bg@3x.jpg */; };
-		C31F674E1B67855F0025FBBF /* Zmain_screenbg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C31F674A1B67855F0025FBBF /* Zmain_screenbg.jpg */; };
-		C31F674F1B67855F0025FBBF /* Zmain_screenbg@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C31F674B1B67855F0025FBBF /* Zmain_screenbg@2x.jpg */; };
-		C31F67501B67855F0025FBBF /* Zmain_screenbg@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C31F674C1B67855F0025FBBF /* Zmain_screenbg@3x.jpg */; };
-		C31F67511B67855F0025FBBF /* Zmain_screenbg-568h@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C31F674D1B67855F0025FBBF /* Zmain_screenbg-568h@2x.jpg */; };
 		C32139D61A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32139D51A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib */; };
 		C33F80051B9F115500E7AFF9 /* FlyerlyMainScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33F80041B9F115500E7AFF9 /* FlyerlyMainScreen.xib */; };
 		C34E98531BA2E54F00692597 /* MainScreenAddsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C34E98511BA2E54F00692597 /* MainScreenAddsCell.m */; };
@@ -5410,7 +5406,6 @@
 				0DFC5321109576AB00B18478 /* CreateFlyerController.xib in Resources */,
 				249F203C193F562C0072835E /* private_off_button@2x.png in Resources */,
 				C3766CF11B5650B000B7F5B2 /* Template53.jpg in Resources */,
-				C31F67511B67855F0025FBBF /* Zmain_screenbg-568h@2x.jpg in Resources */,
 				249F202E193F562C0072835E /* login_email_icon@2x.png in Resources */,
 				247858CD1948764D0062F1E4 /* Montserrat-Regular.ttf in Resources */,
 				204231641A10E1A1002F93D7 /* TextBorders-iPhone6-Plus.xib in Resources */,
@@ -5544,7 +5539,6 @@
 				202978891B4CFBE700F35E40 /* emoticon214-embarrassed@2x.png in Resources */,
 				24861F2619F9147100670F6D /* main_area_bg@3x.png in Resources */,
 				24861F4719F9147100670F6D /* size_button_selected@3x.png in Resources */,
-				C31F67501B67855F0025FBBF /* Zmain_screenbg@3x.jpg in Resources */,
 				C35D49261B3A75370021A0E9 /* save_share_selected@3x.png in Resources */,
 				242184E7194B4AEC00FDDA97 /* miga-icon.png in Resources */,
 				246EF4FC193C515D004539B2 /* emoticon31@2x.png in Resources */,
@@ -5845,7 +5839,6 @@
 				65A464E81726CBA2002C32FB /* Comfortaa_Bold.ttf in Resources */,
 				2018AF8F195AF14C00188F8E /* image_icon_selected@2x.png in Resources */,
 				C31E92E41B566229004DF193 /* icon77.jpg in Resources */,
-				C31F674F1B67855F0025FBBF /* Zmain_screenbg@2x.jpg in Resources */,
 				65A464E91726CBA2002C32FB /* GoodDog.otf in Resources */,
 				65A464EA1726CBA2002C32FB /* GrandHotel-Regular.otf in Resources */,
 				24861F1A19F9147100670F6D /* invite_sms_selected@3x.png in Resources */,
@@ -5991,7 +5984,6 @@
 				246EF4E1193C515D004539B2 /* emoticon101@2x.png in Resources */,
 				24861F5319F9147100670F6D /* t_email_button@3x.png in Resources */,
 				2012ECBB19261D0B00D5EA58 /* Colours-iPhone4s.xib in Resources */,
-				C31F674E1B67855F0025FBBF /* Zmain_screenbg.jpg in Resources */,
 				249F1FB1193F55D50072835E /* cp_share_selected@2x.png in Resources */,
 				246EF509193C515D004539B2 /* emoticon43@2x.png in Resources */,
 				246EF51F193C515D004539B2 /* emoticon63@2x.png in Resources */,
