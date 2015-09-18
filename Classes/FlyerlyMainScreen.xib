@@ -5,9 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FlyrViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FlyerlyMainScreen">
             <connections>
-                <outlet property="settingBtn" destination="nFc-73-sac" id="JsE-9X-CbM"/>
+                <outlet property="bottomBar" destination="ZWV-7a-5WA" id="2ye-ng-O5U"/>
+                <outlet property="settingBtn" destination="nFc-73-sac" id="iBf-GG-5xM"/>
                 <outlet property="tView" destination="kGq-MQ-Rhl" id="vDj-iA-mjT"/>
                 <outlet property="view" destination="12" id="14"/>
             </connections>
@@ -18,7 +19,7 @@
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="320" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="kGq-MQ-Rhl" userLabel="tView">
-                    <rect key="frame" x="0.0" y="65" width="375" height="556"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="619"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -55,13 +56,13 @@
                 <constraint firstItem="ZWV-7a-5WA" firstAttribute="leading" secondItem="12" secondAttribute="leading" id="byE-wh-BVY"/>
                 <constraint firstAttribute="trailing" secondItem="ZWV-7a-5WA" secondAttribute="trailing" id="ech-1X-Y3k"/>
                 <constraint firstAttribute="bottom" secondItem="nFc-73-sac" secondAttribute="bottom" constant="-1" id="f4W-TJ-Dx0"/>
-                <constraint firstItem="kGq-MQ-Rhl" firstAttribute="top" secondItem="12" secondAttribute="top" constant="65" id="gbt-fO-DVu"/>
-                <constraint firstItem="ZWV-7a-5WA" firstAttribute="top" secondItem="kGq-MQ-Rhl" secondAttribute="bottom" constant="-2" id="uqZ-oM-Zpn"/>
+                <constraint firstItem="kGq-MQ-Rhl" firstAttribute="top" secondItem="12" secondAttribute="top" id="gbt-fO-DVu"/>
+                <constraint firstItem="ZWV-7a-5WA" firstAttribute="top" secondItem="kGq-MQ-Rhl" secondAttribute="bottom" id="uqZ-oM-Zpn"/>
                 <constraint firstAttribute="trailing" secondItem="kGq-MQ-Rhl" secondAttribute="trailing" id="w9P-hy-SsH"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-            <point key="canvasLocation" x="324" y="179"/>
+            <point key="canvasLocation" x="323.5" y="178.5"/>
         </view>
     </objects>
     <resources>

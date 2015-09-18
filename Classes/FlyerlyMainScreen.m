@@ -30,7 +30,7 @@
 
 @synthesize sharePanel,tView;
 @synthesize flyerPaths;
-@synthesize flyer, signInAlert,settingBtn;
+@synthesize flyer, signInAlert,settingBtn,bottomBar;
 
 id lastShareBtnSender;
 
@@ -51,6 +51,7 @@ id lastShareBtnSender;
     [tView setBackgroundView:nil];
     [tView setBackgroundColor:[UIColor clearColor]];
     [tView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [self.view setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:tView];
 
 
@@ -91,7 +92,9 @@ id lastShareBtnSender;
     
     [self loadAddTiles];
 
+    [self.view bringSubviewToFront:bottomBar];
     [self.view bringSubviewToFront:settingBtn];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
