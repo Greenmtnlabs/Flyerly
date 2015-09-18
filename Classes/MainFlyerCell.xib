@@ -3,8 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Entypo.otf">
@@ -22,10 +20,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="269"/>
                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nq4-Ll-xah" userLabel="cellImage">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nq4-Ll-xah" userLabel="cellImage">
                         <rect key="frame" x="10" y="10" width="250" height="250"/>
                     </imageView>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9BH-EE-Cfw">
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9BH-EE-Cfw">
                         <rect key="frame" x="261" y="10" width="50" height="250"/>
                         <subviews>
                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wlX-wx-fgU" userLabel="edit">
@@ -74,16 +72,6 @@
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                <constraints>
-                    <constraint firstItem="Nq4-Ll-xah" firstAttribute="leading" secondItem="cob-BB-dgi" secondAttribute="leadingMargin" constant="2" id="4Re-YH-zDQ"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="9BH-EE-Cfw" secondAttribute="bottom" constant="1" id="4bc-nK-3es"/>
-                    <constraint firstItem="9BH-EE-Cfw" firstAttribute="leading" secondItem="Nq4-Ll-xah" secondAttribute="trailing" constant="1" id="4hM-hv-jTJ"/>
-                    <constraint firstItem="9BH-EE-Cfw" firstAttribute="width" secondItem="Nq4-Ll-xah" secondAttribute="height" multiplier="1:5" id="Hwd-I3-Twn"/>
-                    <constraint firstItem="9BH-EE-Cfw" firstAttribute="top" secondItem="cob-BB-dgi" secondAttribute="topMargin" constant="2" id="ZcI-Wo-UwS"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="9BH-EE-Cfw" secondAttribute="trailing" constant="1" id="mxs-Nt-5t3"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="Nq4-Ll-xah" secondAttribute="bottom" constant="1" id="tON-u5-XNr"/>
-                    <constraint firstItem="Nq4-Ll-xah" firstAttribute="top" secondItem="cob-BB-dgi" secondAttribute="topMargin" constant="2" id="zau-Nj-MjB"/>
-                </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
