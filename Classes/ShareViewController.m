@@ -635,32 +635,25 @@ UIAlertView *saveCurrentFlyerAlert;
  */
 -(IBAction)onClickFacebookButton{
     
+    FBPhotoParams *params = [[FBPhotoParams alloc] init];
+    UIImage *screenshot = selectedFlyerImage; //calling to capture screenshot
+    params.photos = @[screenshot];
     
-    
-    FBShareDialogPhotoParams *photoParams = [[FBShareDialogPhotoParams alloc] init];
-    UIImage *screenshot =selectedFlyerImage;
-    photoParams.photos = @[screenshot];
-    [FBDialogs presentMessageDialogWithPhotoParams:photoParams
+    [FBDialogs presentMessageDialogWithPhotoParams:params
                                      clientState:nil
                                          handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
                                              if(error) {
-
                                                  // An error occurred, we need to handle the error
-                                                 
                                                  // See: https://developers.facebook.com/docs/ios/errors
                                                  NSLog(@"error %@", error);
-                                                 
                                              } else {
-                                             
                                                  // Success
-                                                 
+                                                 [flyer setFacebookStatus:1];
                                                  NSLog(@"result %@", results);
-                                                 
                                              }
-
-                                             
                                          }];
-    
+ 
+        
     
 //    [FBDialogs presentMessageDialogWithLink:[NSURL URLWithString:@"https://developers.facebook.com/docs/ios/"]
 //                                    handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
