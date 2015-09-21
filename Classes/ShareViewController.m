@@ -428,6 +428,23 @@ UIAlertView *saveCurrentFlyerAlert;
  */
 -(IBAction)uploadOnYoutube:(id)sender {
     
+    
+    NSURL *videoURL = [NSURL fileURLWithPath:[self.flyer getSharingVideoPath]];
+    
+    //FBSDKMessageDialog *shareDialog = [[FBSDKMessageDialog alloc]init];
+    //FBSDKShareDialog *shareDialog = [[FBSDKShareDialog alloc]init];
+    
+    FBSDKShareVideo *video = [[FBSDKShareVideo alloc] init];
+    video.videoURL = videoURL;
+    
+    FBSDKShareVideoContent *content = [[FBSDKShareVideoContent alloc] init];
+    content.video = video;
+    
+        [FBSDKShareDialog showFromViewController:self withContent:content delegate:nil];
+        //[FBSDKMessageDialog showWithContent:content delegate:nil];
+
+    
+    return;
     [self updateDescription];
     
     if ([FlyerlySingleton connected]) {
