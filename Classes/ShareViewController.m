@@ -424,12 +424,12 @@ UIAlertView *saveCurrentFlyerAlert;
 #pragma mark Social Network
 
 /*
- * Called when Youtube button is pressed
+ * Called when Youtube button is pressed\
  */
 -(IBAction)uploadOnYoutube:(id)sender {
     
     
-    NSURL *videoURL = [NSURL fileURLWithPath:[self.flyer getSharingVideoPath]];
+   NSURL *videoURL = [NSURL URLWithString:[self.flyer getVideoAssetURL]];
     
     //FBSDKMessageDialog *shareDialog = [[FBSDKMessageDialog alloc]init];
     //FBSDKShareDialog *shareDialog = [[FBSDKShareDialog alloc]init];
@@ -440,8 +440,8 @@ UIAlertView *saveCurrentFlyerAlert;
     FBSDKShareVideoContent *content = [[FBSDKShareVideoContent alloc] init];
     content.video = video;
     
-        [FBSDKShareDialog showFromViewController:self withContent:content delegate:nil];
-        //[FBSDKMessageDialog showWithContent:content delegate:nil];
+    [FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
+    //[FBSDKMessageDialog showWithContent:content delegate:nil];
 
     
     return;
@@ -676,6 +676,16 @@ UIAlertView *saveCurrentFlyerAlert;
  * Called when facebook button is pressed
  */
 -(IBAction)onClickFacebookButton{
+   
+    FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+    photo.image = selectedFlyerImage;
+    
+    FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+    content.photos = @[photo];
+    
+    [FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
+    
+    return;
     
     FBPhotoParams *params = [[FBPhotoParams alloc] init];
     UIImage *image = selectedFlyerImage; //calling to capture screenshot
