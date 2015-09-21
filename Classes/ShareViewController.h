@@ -33,12 +33,13 @@
 #import "UIPlaceHolderTextView.h"
 #import "YouTubeSubClass.h"
 #import "CreateFlyerController.h"
+#import "FBSDKSharing.h"
 
 @class FlyrViewController,FlyerlySingleton, CreateFlyerController;
 @class SHKSharer;
 @class SHKActivityIndicator;
 
-@interface ShareViewController : UIViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,UITextViewDelegate,UITextFieldDelegate, SHKSharerDelegate,MFMailComposeViewControllerDelegate> {
+@interface ShareViewController : UIViewController<FBSDKSharingDelegate, UIWebViewDelegate,UIDocumentInteractionControllerDelegate,UITextViewDelegate,UITextFieldDelegate, SHKSharerDelegate,MFMailComposeViewControllerDelegate> {
 
     FlyerlySingleton *globle;
     NSArray *arrayOfAccounts;

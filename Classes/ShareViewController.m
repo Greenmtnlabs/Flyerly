@@ -8,6 +8,7 @@
 
 #import "ShareViewController.h"
 #import "UserVoice.h"
+#import <FBSDKMessengerShareKit/FBSDKMessengerShareKit.h>
 
 
 @implementation ShareViewController
@@ -419,6 +420,7 @@ UIAlertView *saveCurrentFlyerAlert;
     
 }
 
+
 #pragma mark Social Network
 
 /*
@@ -440,9 +442,32 @@ UIAlertView *saveCurrentFlyerAlert;
     } else {
         [FlyerlySingleton showNotConnectedAlert];
     }
-    
-    
 }
+
+
+#pragma mark === delegate method
+- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results
+{
+    NSLog(@"fb-completed share:%@", results);
+}
+
+- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error
+{
+    NSLog(@"fb-sharing error:%@", error);
+    NSString *message = error.userInfo[FBSDKErrorLocalizedDescriptionKey] ?:
+    @"fb-There was a problem sharing, please try again later.";
+    NSString *title = error.userInfo[FBSDKErrorLocalizedTitleKey] ?: @"Oops!";
+    
+    [[[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+}
+
+- (void)sharerDidCancel:(id<FBSDKSharing>)sharer
+{
+    NSLog(@"fb-share cancelled");
+}
+
+
+
 
 /*
  * Called when twitter button is pressed
@@ -635,31 +660,26 @@ UIAlertView *saveCurrentFlyerAlert;
  */
 -(IBAction)onClickFacebookButton{
     
-    //We just need to check if device has account or not.
-    // If it has, then share directly via iOSfacebook, else we need to share
-    // via browser authentication service.
+    FBPhotoParams *params = [[FBPhotoParams alloc] init];
+    UIImage *image = selectedFlyerImage; //calling to capture screenshot
+    params.photos = @[image];
     
-    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-    ACAccountType *facebookAccountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-    NSArray *availableAccounts = [accountStore accountsWithAccountType:facebookAccountType];
-    
-    
-   if ([availableAccounts count] > 0 ) {
-       
-       dispatch_async(dispatch_get_main_queue(), ^{
-           [self shareOnFacebook:YES];
-       });
-       
-   } else {
-       
-       dispatch_async(dispatch_get_main_queue(), ^{
-           [self shareOnFacebook:NO];
-       });
-       
-   }
-    
-    [self updateDescription];
-
+    [FBDialogs presentMessageDialogWithPhotoParams:params
+                                     clientState:nil
+                                         handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+                                             if(error) {
+                                                 // An error occurred, we need to handle the error
+                                                 // See: https://developers.facebook.com/docs/ios/errors
+                                                 NSLog(@"error %@", error);
+                                             } else {
+                                                 // Success
+                                                 if([[results objectForKey:@"completionGesture"] isEqualToString:@"message"]){
+                                                     [flyer setFacebookStatus:1];
+                                                     [self setSocialStatus];
+                                                 }
+                                                 NSLog(@"result %@", results);
+                                             }
+                                         }];
 }
 
 -(void)shareOnFacebook:(BOOL )hasAccount{    
