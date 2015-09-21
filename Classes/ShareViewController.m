@@ -11,10 +11,7 @@
 #import <FBSDKMessengerShareKit/FBSDKMessengerShareKit.h>
 
 
-@implementation ShareViewController{
-    NSURL *url_new;
-
-}
+@implementation ShareViewController
 
 @synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,flickrButton,printFlyerButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,lblFirstShareOnYoutube,tempTxtArea;
 
@@ -447,52 +444,6 @@ UIAlertView *saveCurrentFlyerAlert;
     }
 }
 
-- (void) saveToCameraRoll:(NSURL *)srcURL {
-    
-    NSLog(@"srcURL: %@", srcURL);
-    
-    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-    ALAssetsLibraryWriteVideoCompletionBlock videoWriteCompletionBlock =
-    ^(NSURL *newURL, NSError *error) {
-        if (error) {
-            NSLog( @"Error writing image with metadata to Photo Library: %@", error );
-        } else {
-            NSLog( @"Wrote image with metadata to Photo Library %@", newURL.absoluteString);
-            url_new  = newURL;
-        }
-    };
-    
-    if ([library videoAtPathIsCompatibleWithSavedPhotosAlbum:srcURL])
-    {
-        [library writeVideoAtPathToSavedPhotosAlbum:srcURL
-                                    completionBlock:videoWriteCompletionBlock];
-    }
-}
-
-
-
--(void)shareVideoOnFb{
-    
-    
-    
-    
-    return;
-    
-    
-    NSURL *videoURL1 = [NSURL URLWithString:[self.flyer getSharingVideoPath]];
-    [self saveToCameraRoll:videoURL1];
-    
-    FBSDKShareDialog *shareDialog = [[FBSDKShareDialog alloc]init];
-    NSURL *videoURL=url_new;
-    FBSDKShareVideo *video = [[FBSDKShareVideo alloc] init];
-    video.videoURL = videoURL;
-    FBSDKShareVideoContent *content = [[FBSDKShareVideoContent alloc] init];
-    content.video = video;
-    shareDialog.shareContent = content;
-    shareDialog.delegate=(id)self;
-    [shareDialog show];
-
-}
 
 #pragma mark === delegate method
 - (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results
