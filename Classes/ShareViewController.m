@@ -430,11 +430,6 @@ UIAlertView *saveCurrentFlyerAlert;
  * Called when Youtube button is pressed
  */
 -(IBAction)uploadOnYoutube:(id)sender {
-   
-    [self shareVideoOnFb];
-    
-    
-    return;
     
     [self updateDescription];
     
@@ -478,6 +473,12 @@ UIAlertView *saveCurrentFlyerAlert;
 
 -(void)shareVideoOnFb{
     
+    
+    
+    
+    return;
+    
+    
     NSURL *videoURL1 = [NSURL URLWithString:[self.flyer getSharingVideoPath]];
     [self saveToCameraRoll:videoURL1];
     
@@ -491,26 +492,6 @@ UIAlertView *saveCurrentFlyerAlert;
     shareDialog.delegate=(id)self;
     [shareDialog show];
 
-//    NSURL *videoURL = [NSURL URLWithString:[self.flyer getSharingVideoPath]];
-//    FBSDKShareVideo *video = [[FBSDKShareVideo alloc] init];
-//    video.videoURL = videoURL;
-//    
-//    FBSDKShareVideoContent *content = [[FBSDKShareVideoContent alloc] init];
-//    content.video = video;
-//    FBSDKMessageDialog *shareFB = [[FBSDKMessageDialog alloc] init];
-//    if ([shareFB canShow]) {
-//        shareFB.shareContent = content;
-//        
-//        shareFB.delegate =(id) self;
-//        [shareFB show];
-//    }
-//    else{
-//        
-//        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"can't show the share dialog box" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil ];
-//        
-//        [alert show];
-//        
-//    }
 }
 
 #pragma mark === delegate method
@@ -748,79 +729,6 @@ UIAlertView *saveCurrentFlyerAlert;
                                                  NSLog(@"result %@", results);
                                              }
                                          }];
- 
-    
-    
-//    [FBDialogs presentMessageDialogWithLink:[NSURL URLWithString:@"https://developers.facebook.com/docs/ios/"]
-//                                    handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
-//                                        if(error) {
-//                                            // An error occurred, we need to handle the error
-//                                            // See: https://developers.facebook.com/docs/ios/errors
-//                                        } else {
-//                                            // Success
-//                                            NSLog(@"result %@", results);
-//                                        }
-//                                    }];
-    
-   
-//    id<FBGraphObject> pictureObject =
-//    [FBGraphObject openGraphObjectForPostWithType:@"your_namespace:picture"
-//                                            title:@""
-//                                            image:selectedFlyerImage
-//                                              url:@""
-//                                      description:@""];
-//    
-//    id<FBOpenGraphAction> action = (id<FBOpenGraphAction>)[FBGraphObject graphObject];
-//    [action setObject:pictureObject forKey:@"picture"];
-//    
-//    [FBDialogs presentShareDialogWithOpenGraphAction:action
-//                                          actionType:@"your_namespace:action_name"
-//                                 previewPropertyName:@"picture"
-//                                             handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
-//                                                 if(error) {
-//                                                     NSLog(@"Error: %@", error.description);
-//                                                 } else {
-//                                                     NSLog(@"Success");
-//                                                 }
-//                                             }];
-    
-//    [FBDialogs presentMessageDialogWithPhotos:(NSArray *)selectedFlyerImage clientState:nil handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
-//        if(error) {
-//            // An error occurred, we need to handle the error
-//            // See: https://developers.facebook.com/docs/ios/errors
-//        } else {
-//            // Success
-//            NSLog(@"result %@", results);
-//        }
-//    }];
-   
-    return;
-    
-    //We just need to check if device has account or not.
-    // If it has, then share directly via iOSfacebook, else we need to share
-    // via browser authentication service.
-    
-    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-    ACAccountType *facebookAccountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-    NSArray *availableAccounts = [accountStore accountsWithAccountType:facebookAccountType];
-    
-    
-   if ([availableAccounts count] > 0 ) {
-       
-       dispatch_async(dispatch_get_main_queue(), ^{
-           [self shareOnFacebook:YES];
-       });
-       
-   } else {
-       
-       dispatch_async(dispatch_get_main_queue(), ^{
-           [self shareOnFacebook:NO];
-       });
-       
-   }
-    
-    [self updateDescription];
-
 }
 
 -(void)shareOnFacebook:(BOOL )hasAccount{    
