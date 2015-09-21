@@ -8,9 +8,13 @@
 
 #import "ShareViewController.h"
 #import "UserVoice.h"
+#import <FBSDKMessengerShareKit/FBSDKMessengerShareKit.h>
 
 
-@implementation ShareViewController
+@implementation ShareViewController{
+    NSURL *url_new;
+
+}
 
 @synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,flickrButton,printFlyerButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,lblFirstShareOnYoutube,tempTxtArea;
 
@@ -419,12 +423,18 @@ UIAlertView *saveCurrentFlyerAlert;
     
 }
 
+
 #pragma mark Social Network
 
 /*
  * Called when Youtube button is pressed
  */
 -(IBAction)uploadOnYoutube:(id)sender {
+   
+    [self shareVideoOnFb];
+    
+    
+    return;
     
     [self updateDescription];
     
@@ -440,9 +450,92 @@ UIAlertView *saveCurrentFlyerAlert;
     } else {
         [FlyerlySingleton showNotConnectedAlert];
     }
-    
-    
 }
+
+- (void) saveToCameraRoll:(NSURL *)srcURL {
+    
+    NSLog(@"srcURL: %@", srcURL);
+    
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    ALAssetsLibraryWriteVideoCompletionBlock videoWriteCompletionBlock =
+    ^(NSURL *newURL, NSError *error) {
+        if (error) {
+            NSLog( @"Error writing image with metadata to Photo Library: %@", error );
+        } else {
+            NSLog( @"Wrote image with metadata to Photo Library %@", newURL.absoluteString);
+            url_new  = newURL;
+        }
+    };
+    
+    if ([library videoAtPathIsCompatibleWithSavedPhotosAlbum:srcURL])
+    {
+        [library writeVideoAtPathToSavedPhotosAlbum:srcURL
+                                    completionBlock:videoWriteCompletionBlock];
+    }
+}
+
+
+
+-(void)shareVideoOnFb{
+    
+    NSURL *videoURL1 = [NSURL URLWithString:[self.flyer getSharingVideoPath]];
+    [self saveToCameraRoll:videoURL1];
+    
+    FBSDKShareDialog *shareDialog = [[FBSDKShareDialog alloc]init];
+    NSURL *videoURL=url_new;
+    FBSDKShareVideo *video = [[FBSDKShareVideo alloc] init];
+    video.videoURL = videoURL;
+    FBSDKShareVideoContent *content = [[FBSDKShareVideoContent alloc] init];
+    content.video = video;
+    shareDialog.shareContent = content;
+    shareDialog.delegate=(id)self;
+    [shareDialog show];
+
+//    NSURL *videoURL = [NSURL URLWithString:[self.flyer getSharingVideoPath]];
+//    FBSDKShareVideo *video = [[FBSDKShareVideo alloc] init];
+//    video.videoURL = videoURL;
+//    
+//    FBSDKShareVideoContent *content = [[FBSDKShareVideoContent alloc] init];
+//    content.video = video;
+//    FBSDKMessageDialog *shareFB = [[FBSDKMessageDialog alloc] init];
+//    if ([shareFB canShow]) {
+//        shareFB.shareContent = content;
+//        
+//        shareFB.delegate =(id) self;
+//        [shareFB show];
+//    }
+//    else{
+//        
+//        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"can't show the share dialog box" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil ];
+//        
+//        [alert show];
+//        
+//    }
+}
+
+#pragma mark === delegate method
+- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results
+{
+    NSLog(@"fb-completed share:%@", results);
+}
+
+- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error
+{
+    NSLog(@"fb-sharing error:%@", error);
+    NSString *message = error.userInfo[FBSDKErrorLocalizedDescriptionKey] ?:
+    @"fb-There was a problem sharing, please try again later.";
+    NSString *title = error.userInfo[FBSDKErrorLocalizedTitleKey] ?: @"Oops!";
+    
+    [[[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+}
+
+- (void)sharerDidCancel:(id<FBSDKSharing>)sharer
+{
+    NSLog(@"fb-share cancelled");
+}
+
+
+
 
 /*
  * Called when twitter button is pressed
@@ -636,8 +729,8 @@ UIAlertView *saveCurrentFlyerAlert;
 -(IBAction)onClickFacebookButton{
     
     FBPhotoParams *params = [[FBPhotoParams alloc] init];
-    UIImage *screenshot = selectedFlyerImage; //calling to capture screenshot
-    params.photos = @[screenshot];
+    UIImage *image = selectedFlyerImage; //calling to capture screenshot
+    params.photos = @[image];
     
     [FBDialogs presentMessageDialogWithPhotoParams:params
                                      clientState:nil

@@ -7015,7 +7015,6 @@
 				);
 				PRODUCT_NAME = Flyr;
 				PROVISIONING_PROFILE = "0fa3dff2-ecfb-4d91-bbaf-ec80632f2898";
-				"PROVISIONING_PROFILE[sdk=iphoneos7.0]" = "0fa3dff2-ecfb-4d91-bbaf-ec80632f2898";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/**";
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -7094,7 +7093,7 @@
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "0fa3dff2-ecfb-4d91-bbaf-ec80632f2898";
-				"PROVISIONING_PROFILE[sdk=iphoneos7.0]" = "0fa3dff2-ecfb-4d91-bbaf-ec80632f2898";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0fa3dff2-ecfb-4d91-bbaf-ec80632f2898";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
