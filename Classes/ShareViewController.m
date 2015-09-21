@@ -741,12 +741,15 @@ UIAlertView *saveCurrentFlyerAlert;
                                                  NSLog(@"error %@", error);
                                              } else {
                                                  // Success
-                                                 [flyer setFacebookStatus:1];
+                                                 if([[results objectForKey:@"completionGesture"] isEqualToString:@"message"]){
+                                                     [flyer setFacebookStatus:1];
+                                                     [self setSocialStatus];
+                                                 }
                                                  NSLog(@"result %@", results);
                                              }
                                          }];
  
-        
+    
     
 //    [FBDialogs presentMessageDialogWithLink:[NSURL URLWithString:@"https://developers.facebook.com/docs/ios/"]
 //                                    handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
