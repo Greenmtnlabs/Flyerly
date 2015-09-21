@@ -570,8 +570,13 @@ id lastShareBtnSender;
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     if(alertView == signInAlert && buttonIndex == 0) {
-        [self enableBtns:YES];
         [self hideLoadingIndicator];
+        
+        if( rightBarButtonItem == nil ){
+            [self setNavigation];
+        } else {
+            [self enableBtns:YES];
+        }
     } else if(alertView == signInAlert && buttonIndex == 1) {
         [self signInRequired];
     }
