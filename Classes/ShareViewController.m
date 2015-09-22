@@ -677,15 +677,15 @@ UIAlertView *saveCurrentFlyerAlert;
  */
 -(IBAction)onClickFacebookButton{
    
-    FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
-    photo.image = selectedFlyerImage;
-    
-    FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
-    content.photos = @[photo];
-    
-    [FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
-    
-    return;
+//    FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+//    photo.image = selectedFlyerImage;
+//    
+//    FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+//    content.photos = @[photo];
+//    
+//    [FBSDKShareDialog showFromViewController:self withContent:content delegate:nil];
+//    
+//    return;
     
     FBPhotoParams *params = [[FBPhotoParams alloc] init];
     UIImage *image = selectedFlyerImage; //calling to capture screenshot
