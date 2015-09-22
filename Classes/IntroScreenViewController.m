@@ -34,7 +34,17 @@
     self.navigationController.navigationBarHidden = NO;
     
     countSwipe = 1;
-    imgsArray = [NSArray arrayWithObjects:@"intro-img-1.jpg",@"intro-img-2.jpg",@"intro-img-3.jpg",nil];
+    if( IS_IPHONE_4 ){
+        imgsArray = [NSArray arrayWithObjects:@"intro-1-screen-iPhone4.png",@"intro-2-screen-iPhone4.png",@"intro-3-screen-iPhone4.png",nil];
+    } else if( IS_IPHONE_5 ){
+        imgsArray = [NSArray arrayWithObjects:@"intro-1-screen-iPhone5.png",@"intro-2-screen-iPhone5.png",@"intro-3-screen-iPhone5.png",nil];
+    } else if( IS_IPHONE_6 ){
+        imgsArray = [NSArray arrayWithObjects:@"intro-1-screen-iPhone6.png",@"intro-2-screen-iPhone6.png",@"intro-3-screen-iPhone6.png",nil];
+    } else {
+        imgsArray = [NSArray arrayWithObjects:@"intro-1-screen-iPhone6p.png",@"intro-2-screen-iPhone6p.png",@"intro-3-screen-iPhone6p.png",nil];
+    }
+
+    
     imageView.image = [UIImage imageNamed:imgsArray[0]];
     [imageView setUserInteractionEnabled:YES];
     swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
@@ -47,6 +57,9 @@
     // Adding the swipe gesture on image view
     [imageView addGestureRecognizer:swipeLeft];
     [imageView addGestureRecognizer:swipeRight];
+    
+    [self.view bringSubviewToFront:_btnHideMe];
+    [self.view bringSubviewToFront:_btnSignIn];
     
     //Remove signin button if user already logged in
     if ([[PFUser currentUser] sessionToken].length != 0) {
