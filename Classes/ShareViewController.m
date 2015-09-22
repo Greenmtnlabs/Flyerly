@@ -10,10 +10,7 @@
 #import "UserVoice.h"
 
 
-@implementation ShareViewController{
-    NSURL *url_new;
-
-}
+@implementation ShareViewController
 
 @synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,flickrButton,printFlyerButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,lblFirstShareOnYoutube,tempTxtArea;
 
@@ -429,32 +426,84 @@ UIAlertView *saveCurrentFlyerAlert;
  * Called when Youtube button is pressed\
  */
 -(IBAction)uploadOnYoutube:(id)sender {
-
     
-//    NSURL *videoUrl = [NSURL fileURLWithPath:[self.flyer getSharingVideoPath]];
-//    [self saveToCameraRoll:videoUrl];
+   
+
+//    NSMutableDictionary<FBOpenGraphAction> *action = (NSMutableDictionary<FBOpenGraphAction> *)[FBGraphObject graphObject];
+//    NSMutableDictionary *graphObject = [FBGraphObject openGraphObjectForPostWithType:@"mov"
+//                                                                               title:@"FlyerlyMovie"
+//                                                                               image:nil
+//                                                                                 url:nil
+//                                                                         description:@"This movie may contain adult material."];
 //    
 //    
-//    FBSDKShareDialog *shareDialog = [[FBSDKShareDialog alloc]init];
-//    FBSDKShareVideo *video = [[FBSDKShareVideo alloc] init];
-//    video.videoURL = url_new;
-//    FBSDKShareVideoContent *content = [[FBSDKShareVideoContent alloc] init];
-//    content.video = video;
-//    shareDialog.shareContent = content;
-//    shareDialog.delegate=nil;
-//    [shareDialog show];
+//    action[@"movie"] = graphObject;
+//    
+//    [FBDialogs presentMessageDialogWithOpenGraphAction:action
+//                                            actionType:@"video.wants_to_watch"
+//                                   previewPropertyName:@"movie"
+//                                               handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+//                                                   if (error) {
+//                                                       NSLog(@"error: %@", [error localizedDescription]);
+//                                                   } else {
+//                                                       NSLog(@"results: %@", results);
+//                                                   }
+//                                               }];
+//    
+//    return;
+    
     
     NSURL *videoURL = [NSURL URLWithString:[self.flyer getVideoAssetURL]];
-    [self saveToCameraRoll:videoURL];
     
     FBSDKShareVideo *video = [[FBSDKShareVideo alloc] init];
-    video.videoURL = url_new;
+    video.videoURL = videoURL;
     
     FBSDKShareVideoContent *content = [[FBSDKShareVideoContent alloc] init];
     content.video = video;
     
-    [FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
+//    FBSDKShareDialog *shareDialog = [[FBSDKShareDialog alloc] init];
+//    [shareDialog setShareContent:content];
+//    shareDialog.delegate = self;
+//    [shareDialog show];
     
+    //[FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
+    //[FBSDKMessageDialog showWithContent:content delegate:self];
+    
+    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+    
+    
+    [login logInWithReadPermissions:@[@"email"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error)
+    {
+        
+        if (error)
+        {
+            // Process error
+        }
+        else if (result.isCancelled)
+        {
+            // Handle cancellations
+        }
+        else
+        {
+            FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+            content.contentURL = [NSURL URLWithString:@"https://developers.facebook.com/"];
+            
+            FBSDKMessageDialog *messageDialog = [[FBSDKMessageDialog alloc] init];
+            messageDialog.delegate = self;
+            [messageDialog setShareContent:content];
+            
+            if ([messageDialog canShow])
+            {
+                [messageDialog show];
+            }
+            else
+            {
+                // Messenger isn't installed. Redirect the person to the App Store.
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/en/app/facebook-messenger/id454638411?mt=8"]];
+            }
+            
+        }
+    }];
     
     return;
     [self updateDescription];
@@ -472,28 +521,6 @@ UIAlertView *saveCurrentFlyerAlert;
         [FlyerlySingleton showNotConnectedAlert];
     }
 }
-
-- (void) saveToCameraRoll:(NSURL *)srcURL { NSLog(@"srcURL: %@", srcURL);
-    
-    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-    ALAssetsLibraryWriteVideoCompletionBlock videoWriteCompletionBlock =
-    ^(NSURL *newURL, NSError *error) {
-        if (error) {
-            NSLog( @"Error writing image with metadata to Photo Library: %@", error );
-        } else {
-            NSLog( @"Wrote image with metadata to Photo Library %@", newURL.absoluteString);
-            url_new  = newURL;
-        }
-    };
-    
-    if ([library videoAtPathIsCompatibleWithSavedPhotosAlbum:srcURL])
-    {
-        [library writeVideoAtPathToSavedPhotosAlbum:srcURL
-                                    completionBlock:videoWriteCompletionBlock];
-    }
-}
-
-
 
 
 #pragma mark === delegate method
