@@ -18,9 +18,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro-img-1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Zkd-8U-b7v">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gz3-El-eFF" userLabel="hideMeBtn">
                     <rect key="frame" x="60" y="10" width="200" height="40"/>
                     <constraints>
@@ -34,17 +31,28 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qKX-GS-spi" userLabel="signInBtn">
-                    <rect key="frame" x="205" y="429" width="100" height="30"/>
+                    <rect key="frame" x="205" y="418" width="100" height="30"/>
+                    <color key="backgroundColor" red="0.0" green="0.65490196079999996" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="aaR-6C-3W4"/>
                     </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <state key="normal" title="Sign In">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="signIn:" destination="-1" eventType="touchUpInside" id="kO1-0m-dbU"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro-1-screen-iPhone4.png" translatesAutoresizingMaskIntoConstraints="NO" id="Zkd-8U-b7v">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.78898185489999995" green="0.34580323099999999" blue="0.26904308799999999" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -56,13 +64,13 @@
                 <constraint firstItem="Zkd-8U-b7v" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="YIc-Nf-f9e"/>
                 <constraint firstAttribute="trailing" secondItem="Zkd-8U-b7v" secondAttribute="trailing" id="fZI-Mk-ZNl"/>
                 <constraint firstItem="gz3-El-eFF" firstAttribute="centerX" secondItem="Zkd-8U-b7v" secondAttribute="centerX" id="s01-eI-YKS"/>
-                <constraint firstAttribute="bottom" secondItem="qKX-GS-spi" secondAttribute="bottom" constant="21" id="yKk-UO-crs"/>
+                <constraint firstAttribute="bottom" secondItem="qKX-GS-spi" secondAttribute="bottom" constant="32" id="yKk-UO-crs"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
     <resources>
-        <image name="intro-img-1.jpg" width="1280" height="1024"/>
+        <image name="intro-1-screen-iPhone4.png" width="640" height="960"/>
         <image name="panel_close_button.png" width="320" height="37"/>
     </resources>
 </document>
