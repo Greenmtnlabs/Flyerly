@@ -10,8 +10,10 @@
 #import "UserVoice.h"
 
 
+@implementation ShareViewController{
+    NSURL *url_new;
 
-@implementation ShareViewController
+}
 
 @synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,flickrButton,printFlyerButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,lblFirstShareOnYoutube,tempTxtArea;
 
@@ -427,22 +429,32 @@ UIAlertView *saveCurrentFlyerAlert;
  * Called when Youtube button is pressed\
  */
 -(IBAction)uploadOnYoutube:(id)sender {
+
     
+//    NSURL *videoUrl = [NSURL fileURLWithPath:[self.flyer getSharingVideoPath]];
+//    [self saveToCameraRoll:videoUrl];
+//    
+//    
+//    FBSDKShareDialog *shareDialog = [[FBSDKShareDialog alloc]init];
+//    FBSDKShareVideo *video = [[FBSDKShareVideo alloc] init];
+//    video.videoURL = url_new;
+//    FBSDKShareVideoContent *content = [[FBSDKShareVideoContent alloc] init];
+//    content.video = video;
+//    shareDialog.shareContent = content;
+//    shareDialog.delegate=nil;
+//    [shareDialog show];
     
-   NSURL *videoURL = [NSURL URLWithString:[self.flyer getVideoAssetURL]];
-    
-    //FBSDKMessageDialog *shareDialog = [[FBSDKMessageDialog alloc]init];
-    //FBSDKShareDialog *shareDialog = [[FBSDKShareDialog alloc]init];
+    NSURL *videoURL = [NSURL URLWithString:[self.flyer getVideoAssetURL]];
+    [self saveToCameraRoll:videoURL];
     
     FBSDKShareVideo *video = [[FBSDKShareVideo alloc] init];
-    video.videoURL = videoURL;
+    video.videoURL = url_new;
     
     FBSDKShareVideoContent *content = [[FBSDKShareVideoContent alloc] init];
     content.video = video;
     
     [FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
-    //[FBSDKMessageDialog showWithContent:content delegate:nil];
-
+    
     
     return;
     [self updateDescription];
@@ -460,6 +472,28 @@ UIAlertView *saveCurrentFlyerAlert;
         [FlyerlySingleton showNotConnectedAlert];
     }
 }
+
+- (void) saveToCameraRoll:(NSURL *)srcURL { NSLog(@"srcURL: %@", srcURL);
+    
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    ALAssetsLibraryWriteVideoCompletionBlock videoWriteCompletionBlock =
+    ^(NSURL *newURL, NSError *error) {
+        if (error) {
+            NSLog( @"Error writing image with metadata to Photo Library: %@", error );
+        } else {
+            NSLog( @"Wrote image with metadata to Photo Library %@", newURL.absoluteString);
+            url_new  = newURL;
+        }
+    };
+    
+    if ([library videoAtPathIsCompatibleWithSavedPhotosAlbum:srcURL])
+    {
+        [library writeVideoAtPathToSavedPhotosAlbum:srcURL
+                                    completionBlock:videoWriteCompletionBlock];
+    }
+}
+
+
 
 
 #pragma mark === delegate method
@@ -482,7 +516,6 @@ UIAlertView *saveCurrentFlyerAlert;
 {
     NSLog(@"fb-share cancelled");
 }
-
 
 
 
@@ -677,15 +710,15 @@ UIAlertView *saveCurrentFlyerAlert;
  */
 -(IBAction)onClickFacebookButton{
    
-//    FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
-//    photo.image = selectedFlyerImage;
-//    
-//    FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
-//    content.photos = @[photo];
-//    
-//    [FBSDKShareDialog showFromViewController:self withContent:content delegate:nil];
-//    
-//    return;
+    FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+    photo.image = selectedFlyerImage;
+    
+    FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+    content.photos = @[photo];
+    
+    [FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
+    
+    return;
     
     FBPhotoParams *params = [[FBPhotoParams alloc] init];
     UIImage *image = selectedFlyerImage; //calling to capture screenshot
