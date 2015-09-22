@@ -867,7 +867,7 @@ id lastShareBtnSender;
 // Load invite friends
 -(IBAction)doInvite:(id)sender{
     
-    //[self openIntro]; return; //for testing of intro screen
+    [self openIntro]; return; //for testing of intro screen
     
     //Checking if the user is valid or anonymous
     if ([[PFUser currentUser] sessionToken]) {

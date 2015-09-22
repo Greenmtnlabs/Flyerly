@@ -105,8 +105,8 @@
     }
     //On forth slide
     else if(countSwipe >= 3 ){
-        [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
-        [self.buttonDelegate openPanel];
+        //[self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        //[self.buttonDelegate openPanel];
     }
     
 }
