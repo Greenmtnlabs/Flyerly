@@ -427,7 +427,31 @@ UIAlertView *saveCurrentFlyerAlert;
  */
 -(IBAction)uploadOnYoutube:(id)sender {
     
-   
+//    NSURL *videoURL = [NSURL URLWithString:[self.flyer getVideoAssetURL]];
+//    
+//    FBSDKShareVideo *video = [[FBSDKShareVideo alloc] init];
+//    video.videoURL = videoURL;
+//    
+//    FBSDKShareVideoContent *content = [[FBSDKShareVideoContent alloc] init];
+//    content.video = video;
+//    
+//    //    FBSDKShareDialog *shareDialog = [[FBSDKShareDialog alloc] init];
+//    //    [shareDialog setShareContent:content];
+//    //    shareDialog.delegate = self;
+//    //    [shareDialog show];
+//    
+//    //[FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
+//    [FBSDKMessageDialog showWithContent:content delegate:self];
+//    
+    //NSURL *videoURL = [NSURL URLWithString:[self.flyer getSharingVideoPath]];
+    NSURL *videoURL = [NSURL URLWithString:[self.flyer getVideoAssetURL]];
+    FBSDKShareVideo *video = [[FBSDKShareVideo alloc] init];
+    video.videoURL = videoURL;
+    
+    FBSDKShareVideoContent *content = [[FBSDKShareVideoContent alloc] init];
+    content.video = video;
+    
+        return;
 
 //    NSMutableDictionary<FBOpenGraphAction> *action = (NSMutableDictionary<FBOpenGraphAction> *)[FBGraphObject graphObject];
 //    NSMutableDictionary *graphObject = [FBGraphObject openGraphObjectForPostWithType:@"mov"
@@ -451,63 +475,9 @@ UIAlertView *saveCurrentFlyerAlert;
 //                                               }];
 //    
 //    return;
-    
-    
-    NSURL *videoURL = [NSURL URLWithString:[self.flyer getVideoAssetURL]];
-    
-    FBSDKShareVideo *video = [[FBSDKShareVideo alloc] init];
-    video.videoURL = videoURL;
-    
-    FBSDKShareVideoContent *content = [[FBSDKShareVideoContent alloc] init];
-    content.video = video;
-    
-//    FBSDKShareDialog *shareDialog = [[FBSDKShareDialog alloc] init];
-//    [shareDialog setShareContent:content];
-//    shareDialog.delegate = self;
-//    [shareDialog show];
-    
-    //[FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
-    //[FBSDKMessageDialog showWithContent:content delegate:self];
-    
-    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-    
-    
-    [login logInWithReadPermissions:@[@"email"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error)
-    {
-        
-        if (error)
-        {
-            // Process error
-        }
-        else if (result.isCancelled)
-        {
-            // Handle cancellations
-        }
-        else
-        {
-            FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
-            content.contentURL = [NSURL URLWithString:@"https://developers.facebook.com/"];
-            
-            FBSDKMessageDialog *messageDialog = [[FBSDKMessageDialog alloc] init];
-            messageDialog.delegate = self;
-            [messageDialog setShareContent:content];
-            
-            if ([messageDialog canShow])
-            {
-                [messageDialog show];
-            }
-            else
-            {
-                // Messenger isn't installed. Redirect the person to the App Store.
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/en/app/facebook-messenger/id454638411?mt=8"]];
-            }
-            
-        }
-    }];
-    
-    return;
+
     [self updateDescription];
-    
+
     if ([FlyerlySingleton connected]) {
         SHKItem *item = [SHKItem filePath:[self.flyer getSharingVideoPath] title:titleView.text];
         
