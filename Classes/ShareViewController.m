@@ -9,7 +9,9 @@
 #import "ShareViewController.h"
 #import "UserVoice.h"
 
-@implementation ShareViewController
+@implementation ShareViewController{
+    NSString *fbShareType; // 4 possible values to assign: fb-photo-wall | fb-photo-messenger | fb-video-wall | fb-video-messenger
+}
 
 @synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,flickrButton,printFlyerButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,lblFirstShareOnYoutube,tempTxtArea;
 
@@ -90,6 +92,7 @@ UIAlertView *saveCurrentFlyerAlert;
     
     descTextAreaImg.frame = descriptionView.frame;
     
+    [facebookButton setEnabled:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -340,7 +343,6 @@ UIAlertView *saveCurrentFlyerAlert;
     [smsButton setEnabled:YES];
     [instagramButton setEnabled:YES];
     [clipboardButton setEnabled:YES];
-    [facebookButton setEnabled:YES];
     [lblFirstShareOnYoutube setHidden:YES];
 }
 
@@ -425,41 +427,6 @@ UIAlertView *saveCurrentFlyerAlert;
  * Called when Youtube button is pressed\
  */
 -(IBAction)uploadOnYoutube:(id)sender {
-    
-    //NSURL *videoURL = [NSURL URLWithString:[self.flyer getSharingVideoPath]];
-    NSURL *videoURL = [NSURL URLWithString:[self.flyer getVideoAssetURL]];
-    FBSDKShareVideo *video = [[FBSDKShareVideo alloc] init];
-    video.videoURL = videoURL;
-    
-    FBSDKShareVideoContent *content = [[FBSDKShareVideoContent alloc] init];
-    content.video = video;
-    //[FBSDKMessageDialog showWithContent:content delegate:self];
-    [FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
-
-    return;
-
-//    NSMutableDictionary<FBOpenGraphAction> *action = (NSMutableDictionary<FBOpenGraphAction> *)[FBGraphObject graphObject];
-//    NSMutableDictionary *graphObject = [FBGraphObject openGraphObjectForPostWithType:@"mov"
-//                                                                               title:@"FlyerlyMovie"
-//                                                                               image:nil
-//                                                                                 url:nil
-//                                                                         description:@"This movie may contain adult material."];
-//    
-//    
-//    action[@"movie"] = graphObject;
-//    
-//    [FBDialogs presentMessageDialogWithOpenGraphAction:action
-//                                            actionType:@"video.wants_to_watch"
-//                                   previewPropertyName:@"movie"
-//                                               handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
-//                                                   if (error) {
-//                                                       NSLog(@"error: %@", [error localizedDescription]);
-//                                                   } else {
-//                                                       NSLog(@"results: %@", results);
-//                                                   }
-//                                               }];
-//    
-//    return;
 
     [self updateDescription];
 
@@ -484,6 +451,13 @@ UIAlertView *saveCurrentFlyerAlert;
 - (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results
 {
     NSLog(@"fb-completed share:%@", results);
+    
+    if([fbShareType isEqualToString:@"fb-photo-wall"] || [fbShareType isEqualToString:@"fb-video-wall"]){
+        [self.flyer setFacebookStatus:1];
+    } else if([fbShareType isEqualToString:@"fb-photo-messenger"] || [fbShareType isEqualToString:@"fb-video-messenger"]) {
+        [self.flyer setThumblerStatus:1];
+    }
+    [self setSocialStatus];
 }
 
 - (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error
@@ -588,6 +562,18 @@ UIAlertView *saveCurrentFlyerAlert;
 -(IBAction)onClickTumblrButton{
     
     [self updateDescription];
+    
+    fbShareType = @"fb-photo-messenger";
+    
+    FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+    photo.image = selectedFlyerImage;
+    photo.userGenerated = YES;
+    FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+    content.photos = @[photo];
+    
+    [FBSDKMessageDialog showWithContent:content delegate:self];
+    
+    return;
     
     // Current Item For Sharing
     SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@", selectedFlyerDescription ]];
@@ -694,86 +680,29 @@ UIAlertView *saveCurrentFlyerAlert;
  */
 -(IBAction)onClickFacebookButton{
    
-    FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
-    photo.image = selectedFlyerImage;
+    [self updateDescription];
     
-    FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
-    content.photos = @[photo];
+    if([self.flyer isVideoFlyer]){
     
-    //[FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
-    [FBSDKMessageDialog showWithContent:content delegate:self ];
-    return;
+        fbShareType = @"fb-video-wall";
+        NSURL *videoURL = [NSURL URLWithString:[self.flyer getVideoAssetURL]];
+        FBSDKShareVideo *video = [[FBSDKShareVideo alloc] init];
+        video.videoURL = videoURL;
     
-    FBPhotoParams *params = [[FBPhotoParams alloc] init];
-    UIImage *image = selectedFlyerImage; //calling to capture screenshot
-    params.photos = @[image];
+        FBSDKShareVideoContent *content = [[FBSDKShareVideoContent alloc] init];
+        content.video = video;
+        [FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
     
-    [FBDialogs presentMessageDialogWithPhotoParams:params
-                                     clientState:nil
-                                         handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
-                                             if(error) {
-                                                 // An error occurred, we need to handle the error
-                                                 // See: https://developers.facebook.com/docs/ios/errors
-                                                 NSLog(@"error %@", error);
-                                             } else {
-                                                 // Success
-                                                 if([[results objectForKey:@"completionGesture"] isEqualToString:@"message"]){
-                                                     [flyer setFacebookStatus:1];
-                                                     [self setSocialStatus];
-                                                 }
-                                                 NSLog(@"result %@", results);
-                                             }
-                                         }];
-}
-
--(void)shareOnFacebook:(BOOL )hasAccount{    
-    
-    // Current Item For Sharing
-    SHKItem *item;
-    
-    if( hasAccount ){
-        
-        // if we got an account of facebook, then it's good to share it via shkIosFacebook, which is newer sharer.
-        iosSharer = [[SHKiOSFacebook alloc] init];
-        
-        if ([flyer isVideoFlyer]) {
-            // getting youtube link from flyer and sharing on facebook via url
-            NSString *getYouTubeLink = [self.flyer getYoutubeLink];
-            NSURL *videoURL = [NSURL URLWithString:getYouTubeLink];
-
-            item = [SHKItem URL:videoURL title:@"Share On Youtube" contentType:SHKURLContentTypeVideo];
-            //item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
-            
-        } else {
-            
-            item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly ", selectedFlyerDescription ]];
-            item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
-            
-        }
-        
     } else {
-        // if we haven't any accounts of facebook, we'll have to share item via shkFacebook
-        iosSharer = [[SHKFacebook alloc] init];
-        
-        if ([flyer isVideoFlyer]) {
-            // getting youtube link from flyer and sharing on facebook via url
-            NSString *getYouTubeLink = [self.flyer getYoutubeLink];
-            NSURL *videoURL = [NSURL URLWithString:getYouTubeLink];
-            item = [SHKItem URL:videoURL title:@"Share On Youtube" contentType:SHKURLContentTypeVideo];
     
-        }
-        else {
-            item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly ", selectedFlyerDescription ]];
-        }
+        fbShareType = @"fb-photo-wall";
+        FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+        photo.image = selectedFlyerImage;
+    
+        FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+        content.photos = @[photo];
+        [FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
     }
-    
-    // load item that is ready to share.
-    [iosSharer loadItem:item];
-    
-    // at last we need to call delegates of sharing and start sharing.
-    iosSharer.shareDelegate = self;
-    [iosSharer share];
-   
 }
 
 /*
