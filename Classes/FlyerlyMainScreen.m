@@ -372,8 +372,12 @@ id lastShareBtnSender;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if ( IS_IPHONE_4 || IS_IPHONE_5 ) {
         return 270;
-    } else{
+    }
+    else if ( IS_IPHONE_6 ) {
         return 320;
+    }
+    else{
+        return 440;
     }
 }
 

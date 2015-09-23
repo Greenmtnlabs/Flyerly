@@ -17,5 +17,9 @@
 @property(nonatomic, strong)IBOutlet UIButton *flyerLock;
 @property(nonatomic, strong)IBOutlet UIButton *shareBtn;
 
+@property (nonatomic, strong) IBOutlet UILabel *lblFlyerTitle;
+@property (nonatomic, strong) IBOutlet UILabel *lblCreatedAt;
+
+
 - (void)renderCell :(Flyer *)flyer LockStatus:(BOOL )status;
 @end
