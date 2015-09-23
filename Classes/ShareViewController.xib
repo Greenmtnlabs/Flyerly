@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment version="768" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShareViewController">
@@ -129,10 +129,10 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <accessibility key="accessibilityConfiguration" label="Tumblr"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
-                                    <state key="normal" backgroundImage="tumblr_share.png">
+                                    <state key="normal" backgroundImage="messenger_share.png">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
-                                    <state key="selected" backgroundImage="tumblr_share_selected.png">
+                                    <state key="selected" backgroundImage="messenger_share_selected.png">
                                         <color key="titleColor" red="0.3575665864" green="0.76047690010000002" blue="0.97315449620000005" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                     <state key="highlighted">
@@ -282,7 +282,7 @@
                         <outlet property="delegate" destination="-1" id="54"/>
                     </connections>
                 </textField>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="500BD8D4-75C6-4D53-A339-5EF98846C1A2" id="cXJ-PV-xl2" userLabel="descTextAreaImg">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="F750BFA2-D629-4C05-A413-2AD4B4115092" id="cXJ-PV-xl2" userLabel="descTextAreaImg">
                     <rect key="frame" x="10" y="96" width="298" height="69"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -313,7 +313,7 @@
         </view>
     </objects>
     <resources>
-        <image name="500BD8D4-75C6-4D53-A339-5EF98846C1A2" width="251" height="34">
+        <image name="F750BFA2-D629-4C05-A413-2AD4B4115092" width="251" height="34">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -942,6 +942,8 @@ AAAAAAAAj4g
         <image name="flat_text_box.png" width="251" height="34"/>
         <image name="instagram_share.png" width="60" height="60"/>
         <image name="instagram_share_selected.png" width="60" height="60"/>
+        <image name="messenger_share.png" width="60" height="60"/>
+        <image name="messenger_share_selected.png" width="60" height="60"/>
         <image name="panel_close_button.png" width="320" height="37"/>
         <image name="printer_sharing.png" width="120" height="120"/>
         <image name="printer_sharing_selected.png" width="120" height="120"/>
@@ -952,8 +954,6 @@ AAAAAAAAj4g
         <image name="sms_share_selected.png" width="60" height="60"/>
         <image name="star.png" width="25" height="24"/>
         <image name="star_selected.png" width="25" height="24"/>
-        <image name="tumblr_share.png" width="60" height="60"/>
-        <image name="tumblr_share_selected.png" width="60" height="60"/>
         <image name="twitter_share.png" width="60" height="60"/>
         <image name="twitter_share_selected.png" width="60" height="60"/>
     </resources>

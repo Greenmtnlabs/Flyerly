@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShareViewController">
@@ -193,10 +193,10 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <accessibility key="accessibilityConfiguration" label="Tumblr"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
-                                    <state key="normal" backgroundImage="tumblr_share.png">
+                                    <state key="normal" backgroundImage="messenger_share.png">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
-                                    <state key="selected" backgroundImage="tumblr_share_selected.png">
+                                    <state key="selected" backgroundImage="messenger_share_selected@3x.png">
                                         <color key="titleColor" red="0.3575665864" green="0.76047690010000002" blue="0.97315449620000005" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                     <state key="highlighted">
@@ -322,6 +322,8 @@
         <image name="flat_text_box.png" width="251" height="34"/>
         <image name="instagram_share.png" width="60" height="60"/>
         <image name="instagram_share_selected.png" width="60" height="60"/>
+        <image name="messenger_share.png" width="60" height="60"/>
+        <image name="messenger_share_selected@3x.png" width="180" height="180"/>
         <image name="panel_close_button.png" width="320" height="37"/>
         <image name="printer_sharing.png" width="120" height="120"/>
         <image name="printer_sharing_selected.png" width="120" height="120"/>
@@ -332,8 +334,6 @@
         <image name="sms_share_selected.png" width="60" height="60"/>
         <image name="star.png" width="25" height="24"/>
         <image name="star_selected.png" width="25" height="24"/>
-        <image name="tumblr_share.png" width="60" height="60"/>
-        <image name="tumblr_share_selected.png" width="60" height="60"/>
         <image name="twitter_share.png" width="60" height="60"/>
         <image name="twitter_share_selected.png" width="60" height="60"/>
     </resources>

@@ -91,8 +91,6 @@ UIAlertView *saveCurrentFlyerAlert;
     [self.view addSubview:descriptionView];
     
     descTextAreaImg.frame = descriptionView.frame;
-    
-    [facebookButton setEnabled:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -445,38 +443,6 @@ UIAlertView *saveCurrentFlyerAlert;
 }
 
 
-
-
-#pragma mark === delegate method
-- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results
-{
-    NSLog(@"fb-completed share:%@", results);
-    
-    if([fbShareType isEqualToString:@"fb-photo-wall"] || [fbShareType isEqualToString:@"fb-video-wall"]){
-        [self.flyer setFacebookStatus:1];
-    } else if([fbShareType isEqualToString:@"fb-photo-messenger"] || [fbShareType isEqualToString:@"fb-video-messenger"]) {
-        [self.flyer setThumblerStatus:1];
-    }
-    [self setSocialStatus];
-}
-
-- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error
-{
-    NSLog(@"fb-sharing error:%@", error);
-    NSString *message = error.userInfo[FBSDKErrorLocalizedDescriptionKey] ?:
-    @"fb-There was a problem sharing, please try again later.";
-    NSString *title = error.userInfo[FBSDKErrorLocalizedTitleKey] ?: @"Oops!";
-    
-    [[[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-}
-
-- (void)sharerDidCancel:(id<FBSDKSharing>)sharer
-{
-    NSLog(@"fb-share cancelled");
-}
-
-
-
 /*
  * Called when twitter button is pressed
  */
@@ -704,6 +670,35 @@ UIAlertView *saveCurrentFlyerAlert;
         [FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
     }
 }
+
+#pragma mark === delegate method
+- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results
+{
+    NSLog(@"fb-completed share:%@", results);
+    
+    if([fbShareType isEqualToString:@"fb-photo-wall"] || [fbShareType isEqualToString:@"fb-video-wall"]){
+        [self.flyer setFacebookStatus:1];
+    } else if([fbShareType isEqualToString:@"fb-photo-messenger"] || [fbShareType isEqualToString:@"fb-video-messenger"]) {
+        [self.flyer setThumblerStatus:1];
+    }
+    [self setSocialStatus];
+}
+
+- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error
+{
+    NSLog(@"fb-sharing error:%@", error);
+    NSString *message = error.userInfo[FBSDKErrorLocalizedDescriptionKey] ?:
+    @"fb-There was a problem sharing, please try again later.";
+    NSString *title = error.userInfo[FBSDKErrorLocalizedTitleKey] ?: @"Oops!";
+    
+    [[[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+}
+
+- (void)sharerDidCancel:(id<FBSDKSharing>)sharer
+{
+    NSLog(@"fb-share cancelled");
+}
+
 
 /*
  * Called when clipboard button is pressed
