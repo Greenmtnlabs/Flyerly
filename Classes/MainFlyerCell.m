@@ -14,7 +14,7 @@
 
 @implementation MainFlyerCell
 @synthesize  cellImage,sideView;
-@synthesize shareBtn,flyerLock;
+@synthesize shareBtn,flyerLock, lblCreatedAt, lblFlyerTitle;
 
 
 /*
@@ -22,6 +22,13 @@
  */
 - (void)renderCell :(Flyer *)flyer LockStatus:(BOOL )status {
     
+    [self.lblFlyerTitle setText: [flyer getFlyerTitle]];
+    NSString *updatedDate = [flyer getFlyerUpdateDateInAgoFormat];
+    if ([updatedDate isEqualToString:@""]) {
+        self.lblCreatedAt.hidden = YES;
+    }else {
+        self.lblCreatedAt.text = updatedDate;
+    }
 
     //HERE WE LOCK FLYER CELL
     if (status) {
