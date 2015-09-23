@@ -60,7 +60,7 @@
 @property(nonatomic,strong) IBOutlet UIButton *facebookButton;
 @property(nonatomic,strong) IBOutlet UIButton *twitterButton;
 @property(nonatomic,strong) IBOutlet UIButton *emailButton;
-@property(nonatomic,strong) IBOutlet UIButton *tumblrButton;
+@property(nonatomic,strong) IBOutlet UIButton *messengerButton;
 @property(nonatomic,strong) IBOutlet UIButton *flickrButton;
 @property(nonatomic,strong) IBOutlet UIButton *printFlyerButton;
 @property(nonatomic,strong) IBOutlet UIButton *instagramButton;
@@ -97,12 +97,12 @@
 @property (strong, nonatomic) IBOutlet UITextView *tempTxtArea;
 
 
+- (IBAction)onClickMessengerButton:(id)sender;
 
 -(IBAction)onClickFacebookButton;
 -(IBAction)onClickTwitterButton;
 -(IBAction)onClickInstagramButton;
 -(IBAction)onClickEmailButton;
--(IBAction)onClickTumblrButton;
 -(IBAction)onClickFlickrButton;
 -(IBAction)onPrintFlyerButton;
 -(IBAction)onClickSMSButton;

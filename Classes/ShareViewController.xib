@@ -13,6 +13,7 @@
                 <outlet property="facebookButton" destination="11" id="23"/>
                 <outlet property="flyerShareType" destination="02X-0M-pgw" id="RRD-OV-hAp"/>
                 <outlet property="instagramButton" destination="17" id="30"/>
+                <outlet property="messengerButton" destination="16" id="vjz-JM-uUe"/>
                 <outlet property="printFlyerButton" destination="13" id="fF7-tu-6hI"/>
                 <outlet property="smsButton" destination="14" id="26"/>
                 <outlet property="star1" destination="D0f-Ce-0gF" id="Qb0-gF-RHV"/>
@@ -22,7 +23,6 @@
                 <outlet property="star5" destination="N5u-za-btZ" id="eEZ-aC-WkI"/>
                 <outlet property="titlePlaceHolderImg" destination="69" id="d2b-4a-dwq"/>
                 <outlet property="titleView" destination="7" id="21"/>
-                <outlet property="tumblrButton" destination="16" id="29"/>
                 <outlet property="twitterButton" destination="15" id="31"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
@@ -139,7 +139,7 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="onClickTumblrButton" destination="-1" eventType="touchUpInside" id="38"/>
+                                        <action selector="onClickMessengerButton:" destination="-1" eventType="touchUpInside" id="Lca-aj-CC5"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="17">
@@ -282,7 +282,7 @@
                         <outlet property="delegate" destination="-1" id="54"/>
                     </connections>
                 </textField>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="F750BFA2-D629-4C05-A413-2AD4B4115092" id="cXJ-PV-xl2" userLabel="descTextAreaImg">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="EA3B34A2-B7B7-4DC3-ABCF-0FF8E94870A3" id="cXJ-PV-xl2" userLabel="descTextAreaImg">
                     <rect key="frame" x="10" y="96" width="298" height="69"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -313,7 +313,7 @@
         </view>
     </objects>
     <resources>
-        <image name="F750BFA2-D629-4C05-A413-2AD4B4115092" width="251" height="34">
+        <image name="EA3B34A2-B7B7-4DC3-ABCF-0FF8E94870A3" width="251" height="34">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

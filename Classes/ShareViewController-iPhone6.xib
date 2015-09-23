@@ -13,6 +13,7 @@
                 <outlet property="facebookButton" destination="4M1-ak-6j0" id="ZBu-bv-D4E"/>
                 <outlet property="flyerShareType" destination="ZTU-GJ-gaF" id="ymp-mG-nee"/>
                 <outlet property="instagramButton" destination="58R-ta-gfl" id="O0P-nl-Pii"/>
+                <outlet property="messengerButton" destination="GPb-8k-ff5" id="n2G-V3-9DW"/>
                 <outlet property="printFlyerButton" destination="0u6-sQ-5iI" id="Se0-Sg-LxF"/>
                 <outlet property="smsButton" destination="gec-4E-QfO" id="w1u-6t-OmV"/>
                 <outlet property="star1" destination="ACd-J2-Cu0" id="gyb-17-7ya"/>
@@ -22,7 +23,6 @@
                 <outlet property="star5" destination="NFm-q5-r7R" id="R5a-IE-Ko5"/>
                 <outlet property="titlePlaceHolderImg" destination="nnz-o7-oNh" id="8bY-zA-Nxg"/>
                 <outlet property="titleView" destination="9II-6f-o3X" id="HWQ-Am-5h4"/>
-                <outlet property="tumblrButton" destination="GPb-8k-ff5" id="C6j-SP-cc6"/>
                 <outlet property="twitterButton" destination="iNa-cQ-zi8" id="zAg-o0-qVP"/>
                 <outlet property="view" destination="UJI-Q1-CfS" id="GGI-GT-5At"/>
             </connections>
@@ -203,7 +203,7 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="onClickTumblrButton" destination="-1" eventType="touchUpInside" id="6Zo-Bf-eqw"/>
+                                        <action selector="onClickMessengerButton:" destination="-1" eventType="touchUpInside" id="LVW-Y1-jWz"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="58R-ta-gfl">

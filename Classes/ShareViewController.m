@@ -13,7 +13,7 @@
     NSString *fbShareType; // 4 possible values to assign: fb-photo-wall | fb-photo-messenger | fb-video-wall | fb-video-messenger
 }
 
-@synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,flickrButton,printFlyerButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,lblFirstShareOnYoutube,tempTxtArea;
+@synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,flickrButton,printFlyerButton,facebookButton,twitterButton,instagramButton,messengerButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,lblFirstShareOnYoutube,tempTxtArea;
 
 @synthesize flyerShareType,star1,star2,star3,star4,star5;
 
@@ -284,9 +284,9 @@ UIAlertView *saveCurrentFlyerAlert;
     // Set Thumbler Sharing Status From Social File
     status = [flyer getMessengerStatus];
     if([status isEqualToString:@"1"]){
-        [tumblrButton setSelected:YES];
+        [messengerButton setSelected:YES];
     }else{
-        [tumblrButton setSelected:NO];
+        [messengerButton setSelected:NO];
     }
     
     // Set Flicker Sharing Status From Social File
@@ -523,38 +523,6 @@ UIAlertView *saveCurrentFlyerAlert;
 }
 
 /*
- * Called when tumblr button is pressed
- */
--(IBAction)onClickTumblrButton{
-    
-    [self updateDescription];
-    
-    fbShareType = @"fb-photo-messenger";
-    
-    FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
-    photo.image = selectedFlyerImage;
-    photo.userGenerated = YES;
-    FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
-    content.photos = @[photo];
-    
-    [FBSDKMessageDialog showWithContent:content delegate:self];
-    
-    return;
-    
-    // Current Item For Sharing
-    SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@", selectedFlyerDescription ]];
-    
-    item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
-    
-    //Calling ShareKit for Sharing
-    iosSharer = [[ SHKSharer alloc] init];
-    iosSharer = [SHKTumblr shareItem:item];
-    iosSharer.shareDelegate = self;
-    iosSharer = nil;
-    
-}
-
-/*
  * Called when print flyer button pressed
  */
 
@@ -642,8 +610,26 @@ UIAlertView *saveCurrentFlyerAlert;
 
 
 /*
+ * Called when Messenger button is pressed
+ */
+- (IBAction)onClickMessengerButton:(id)sender {
+    
+    [self updateDescription];
+    
+    fbShareType = @"fb-photo-messenger";
+    
+    FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+    photo.image = selectedFlyerImage;
+    photo.userGenerated = YES;
+    FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+    content.photos = @[photo];
+    
+    [FBSDKMessageDialog showWithContent:content delegate:self];
+ }
+/*
  * Called when facebook button is pressed
  */
+
 -(IBAction)onClickFacebookButton{
    
     [self updateDescription];
@@ -764,7 +750,7 @@ UIAlertView *saveCurrentFlyerAlert;
         
     } else if ( [sharer isKindOfClass:[SHKTumblr class]] == YES ) {
         
-        tumblrButton.enabled = NO;
+        messengerButton.enabled = NO;
         
     } else if ( [sharer isKindOfClass:[SHKFlickr class]] == YES ) {
         
@@ -810,7 +796,7 @@ UIAlertView *saveCurrentFlyerAlert;
         
     } else if ( [sharer isKindOfClass:[SHKTumblr class]] == YES ) {
         
-        tumblrButton.enabled = YES;
+        messengerButton.enabled = YES;
         [self.flyer setMessengerStatus:1];
         [Flurry logEvent:@"Shared Tumblr"];
        
