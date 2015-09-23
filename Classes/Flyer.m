@@ -158,9 +158,11 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     
     //Here we Update Flyer Date in Text File
     NSDate *date = [NSDate date];
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc]init];
-    [dateFormat setDateFormat:@"MM/dd/YYYY"];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"];
     NSString *dateString = [dateFormat stringFromDate:date];
+    
+//    NSDate *startDate = [dateFormat dateFromString:dateString];
 
     NSString *createdDate = [self getFlyerDate];
 
@@ -169,8 +171,48 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     }else {
         [self setFlyerUpdatedDate:dateString];
     }
-    
 }
+
+/**
+ * Get flyer updated date in ago format: 3Mi ( 3minutes ) or 3Y
+ */
+-(NSString *)getFlyerUpdateDateInAgoFormat{
+   NSString *updatedDate = [self getFlyerUpdateDate];
+    if ([updatedDate isEqualToString:@""] == NO) {
+        
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        if( [updatedDate rangeOfString:@":"].location != NSNotFound )
+            [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"]; //this is we are using new format
+        else
+            [dateFormat setDateFormat:@"MM/dd/yyyy"]; //for old flyer
+        
+        NSDate *startDate = [dateFormat dateFromString:updatedDate];
+        
+        NSDate *endDate = [NSDate date];
+        NSTimeInterval secondsBetween = [endDate timeIntervalSinceDate:startDate];
+        int minute  = floor(secondsBetween/(60));
+        int hour  = secondsBetween/(60*60);
+        int day  = secondsBetween/(60*60*24);
+        int month = secondsBetween/(60*60*24*30);
+        int year  = secondsBetween/(60*60*24*30*12);
+        
+        if( year > 0 ){
+            updatedDate = [NSString stringWithFormat:@"%iy",year];
+        } else if( month > 0 ){
+            updatedDate = [NSString stringWithFormat:@"%im",month];
+        } else if( day > 0 ){
+            updatedDate = [NSString stringWithFormat:@"%id",day];
+        } else if( hour > 0 ){
+            updatedDate = [NSString stringWithFormat:@"%ih",hour];
+        } else {
+            updatedDate = [NSString stringWithFormat:@"%imin",minute];
+        }
+    }
+    return updatedDate;
+}
+
+
+
 
 /*
  * Here we Update Image for Video Overlay Image

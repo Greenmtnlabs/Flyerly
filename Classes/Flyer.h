@@ -140,6 +140,7 @@
 
 -(NSString *)getShareType;
 -(NSString *)getFlyerUpdateDate;
+-(NSString *)getFlyerUpdateDateInAgoFormat;
 -(NSString *)getVideoAssetURL;
 -(NSString *)getYoutubeLink;
 -(NSString *)getVideoMergeAddress;
