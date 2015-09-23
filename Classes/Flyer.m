@@ -182,9 +182,9 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
         
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         if( [updatedDate rangeOfString:@":"].location != NSNotFound )
-            [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"];
+            [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"]; //this is we are using new format
         else
-            [dateFormat setDateFormat:@"MM/dd/yyyy"];
+            [dateFormat setDateFormat:@"MM/dd/yyyy"]; //for old flyer
         
         NSDate *startDate = [dateFormat dateFromString:updatedDate];
         
@@ -197,15 +197,15 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
         int year  = secondsBetween/(60*60*24*30*12);
         
         if( year > 0 ){
-            updatedDate = [NSString stringWithFormat:@"%iY",year];
+            updatedDate = [NSString stringWithFormat:@"%iy",year];
         } else if( month > 0 ){
-            updatedDate = [NSString stringWithFormat:@"%iMo",month];
+            updatedDate = [NSString stringWithFormat:@"%im",month];
         } else if( day > 0 ){
-            updatedDate = [NSString stringWithFormat:@"%iD",day];
+            updatedDate = [NSString stringWithFormat:@"%id",day];
         } else if( hour > 0 ){
-            updatedDate = [NSString stringWithFormat:@"%iH",hour];
+            updatedDate = [NSString stringWithFormat:@"%ih",hour];
         } else {
-            updatedDate = [NSString stringWithFormat:@"%iMi",minute];
+            updatedDate = [NSString stringWithFormat:@"%imin",minute];
         }
     }
     return updatedDate;
