@@ -35,6 +35,8 @@
 #import "CreateFlyerController.h"
 #import "FBSDKSharing.h"
 
+
+
 @class FlyrViewController,FlyerlySingleton, CreateFlyerController;
 @class SHKSharer;
 @class SHKActivityIndicator;
@@ -93,8 +95,6 @@
 
 @property (strong, nonatomic) NSTimer *timer;
 @property (strong, nonatomic) IBOutlet UITextView *tempTxtArea;
-
-
 
 
 

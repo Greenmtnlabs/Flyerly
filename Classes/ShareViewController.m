@@ -9,7 +9,6 @@
 #import "ShareViewController.h"
 #import "UserVoice.h"
 
-
 @implementation ShareViewController
 
 @synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,flickrButton,printFlyerButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,lblFirstShareOnYoutube,tempTxtArea;
@@ -427,22 +426,6 @@ UIAlertView *saveCurrentFlyerAlert;
  */
 -(IBAction)uploadOnYoutube:(id)sender {
     
-//    NSURL *videoURL = [NSURL URLWithString:[self.flyer getVideoAssetURL]];
-//    
-//    FBSDKShareVideo *video = [[FBSDKShareVideo alloc] init];
-//    video.videoURL = videoURL;
-//    
-//    FBSDKShareVideoContent *content = [[FBSDKShareVideoContent alloc] init];
-//    content.video = video;
-//    
-//    //    FBSDKShareDialog *shareDialog = [[FBSDKShareDialog alloc] init];
-//    //    [shareDialog setShareContent:content];
-//    //    shareDialog.delegate = self;
-//    //    [shareDialog show];
-//    
-//    //[FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
-//    [FBSDKMessageDialog showWithContent:content delegate:self];
-//    
     //NSURL *videoURL = [NSURL URLWithString:[self.flyer getSharingVideoPath]];
     NSURL *videoURL = [NSURL URLWithString:[self.flyer getVideoAssetURL]];
     FBSDKShareVideo *video = [[FBSDKShareVideo alloc] init];
@@ -450,8 +433,10 @@ UIAlertView *saveCurrentFlyerAlert;
     
     FBSDKShareVideoContent *content = [[FBSDKShareVideoContent alloc] init];
     content.video = video;
-    
-        return;
+    //[FBSDKMessageDialog showWithContent:content delegate:self];
+    [FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
+
+    return;
 
 //    NSMutableDictionary<FBOpenGraphAction> *action = (NSMutableDictionary<FBOpenGraphAction> *)[FBGraphObject graphObject];
 //    NSMutableDictionary *graphObject = [FBGraphObject openGraphObjectForPostWithType:@"mov"
@@ -491,6 +476,8 @@ UIAlertView *saveCurrentFlyerAlert;
         [FlyerlySingleton showNotConnectedAlert];
     }
 }
+
+
 
 
 #pragma mark === delegate method
@@ -713,8 +700,8 @@ UIAlertView *saveCurrentFlyerAlert;
     FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
     content.photos = @[photo];
     
-    [FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
-    
+    //[FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
+    [FBSDKMessageDialog showWithContent:content delegate:self ];
     return;
     
     FBPhotoParams *params = [[FBPhotoParams alloc] init];

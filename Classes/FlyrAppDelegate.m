@@ -113,6 +113,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [SHKFacebook handleDidBecomeActive];
+    [FBSDKAppEvents activateApp];
 }
 
 
@@ -145,7 +146,12 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
-        
+    NSLog(@"[url absoluteString] = %@", [url absoluteString]);
+    
+    if ([[url absoluteString] hasPrefix:[NSString stringWithFormat:@"fb%@://bridge/share",SHKCONFIG(facebookAppId)]]) {
+        return [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+    }
+    
     if ([[url absoluteString] hasPrefix:[NSString stringWithFormat:@"fb%@", SHKCONFIG(facebookAppId)]]) {
         
        //return One of the handled URL
@@ -159,7 +165,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     } else {
   
         return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
-        
     }
 }
 
@@ -324,7 +329,9 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 	[window makeKeyAndVisible];
     
-    return YES;
+    //return YES;
+    return [ [FBSDKApplicationDelegate sharedInstance] application :application
+                                      didFinishLaunchingWithOptions:launchOptions];
 }
 
 /**
