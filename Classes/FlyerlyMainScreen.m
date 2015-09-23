@@ -109,7 +109,7 @@ id lastShareBtnSender;
     if( sizeRectForAdd.size.width == 0 ){
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
         MainFlyerCell *cell = (MainFlyerCell *)[self.tView cellForRowAtIndexPath:indexPath];
-        sizeRectForAdd = cell.cellImage.frame;//CGRectMake(cell.cellImage.frame.origin.x,cell.cellImage.frame.origin.y,(cell.cellImage.frame.size.width+cell.sideView.frame.size.width),cell.cellImage.frame.size.height);
+        sizeRectForAdd = cell.cellImage.frame;
     }
 }
 
@@ -371,7 +371,7 @@ id lastShareBtnSender;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if ( IS_IPHONE_4 || IS_IPHONE_5 ) {
-        return 270;
+        return 340;
     }
     else if ( IS_IPHONE_6 ) {
         return 393;
