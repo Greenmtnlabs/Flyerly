@@ -282,7 +282,7 @@ UIAlertView *saveCurrentFlyerAlert;
     }
     
     // Set Thumbler Sharing Status From Social File
-    status = [flyer getThumblerStatus];
+    status = [flyer getMessengerStatus];
     if([status isEqualToString:@"1"]){
         [tumblrButton setSelected:YES];
     }else{
@@ -679,7 +679,7 @@ UIAlertView *saveCurrentFlyerAlert;
     if([fbShareType isEqualToString:@"fb-photo-wall"] || [fbShareType isEqualToString:@"fb-video-wall"]){
         [self.flyer setFacebookStatus:1];
     } else if([fbShareType isEqualToString:@"fb-photo-messenger"] || [fbShareType isEqualToString:@"fb-video-messenger"]) {
-        [self.flyer setThumblerStatus:1];
+        [self.flyer setMessengerStatus:1];
     }
     [self setSocialStatus];
 }
@@ -811,7 +811,7 @@ UIAlertView *saveCurrentFlyerAlert;
     } else if ( [sharer isKindOfClass:[SHKTumblr class]] == YES ) {
         
         tumblrButton.enabled = YES;
-        [self.flyer setThumblerStatus:1];
+        [self.flyer setMessengerStatus:1];
         [Flurry logEvent:@"Shared Tumblr"];
        
     } else if ( [sharer isKindOfClass:[SHKFlickr class]] == YES ) {

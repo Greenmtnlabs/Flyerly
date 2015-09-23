@@ -68,7 +68,7 @@
     }
     
     iconImage = [_socialStatus objectAtIndex:sharingCount];
-    if ( [[flyer getThumblerStatus] isEqualToString:@"1"] ) {
+    if ( [[flyer getMessengerStatus] isEqualToString:@"1"] ) {
         iconImage.image = [UIImage imageNamed:@"messenger_share_saved"];
         sharingCount++;
     }

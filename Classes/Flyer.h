@@ -107,7 +107,7 @@
 -(void)setTwitterStatus :(int)status;
 -(void)setInstagaramStatus :(int)status;
 -(void)setFlickerStatus :(int)status;
--(void)setThumblerStatus :(int)status;
+-(void)setMessengerStatus :(int)status;
 -(void)setEmailStatus :(int)status;
 -(void)setSmsStatus :(int)status;
 -(void)setClipboardStatus :(int)status;
@@ -121,7 +121,7 @@
 -(NSString *)getTwitterStatus;
 -(NSString *)getInstagaramStatus;
 -(NSString *)getFlickerStatus;
--(NSString *)getThumblerStatus;
+-(NSString *)getMessengerStatus;
 -(NSString *)getEmailStatus;
 -(NSString *)getSmsStatus;
 -(NSString *)getClipboardStatus;
