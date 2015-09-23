@@ -4376,7 +4376,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             }
             
         } else {
-            
+            saveToGallaryReqBeforeSharing = NO;
             if ( IS_IPHONE_5 || IS_IPHONE_4) {
                 shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
             }else if ( IS_IPHONE_6  || IS_IPHONE_6_PLUS ) {
