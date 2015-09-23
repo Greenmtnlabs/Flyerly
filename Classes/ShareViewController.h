@@ -92,6 +92,7 @@
 @property (strong, nonatomic) SHKActivityIndicator *activityIndicator;
 @property (nonatomic,strong) Flyer *flyer;
 @property (weak, nonatomic) id<SHKSharerDelegate> delegate;
+@property BOOL saveToGallaryReqBeforeSharing;
 
 @property (strong, nonatomic) NSTimer *timer;
 @property (strong, nonatomic) IBOutlet UITextView *tempTxtArea;
@@ -116,6 +117,7 @@
 -(void)shareOnInstagram;
 -(void)setSocialStatus;
 -(void)enableAllShareOptions;
+-(void)enableFacebook:(BOOL)enable;
 -(void)setStarsofShareScreen :(NSString *)rate;
 
 @end
