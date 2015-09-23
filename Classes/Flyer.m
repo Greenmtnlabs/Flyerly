@@ -1893,7 +1893,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
 }
 
--(void)setThumblerStatus :(int)status {
+-(void)setMessengerStatus :(int)status {
     
     [socialArray replaceObjectAtIndex:3 withObject:[NSString stringWithFormat:@"%d",status]];
     
@@ -1985,7 +1985,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 /*
  * Here we Return Thumbler Share Status of Flyer
  */
--(NSString *)getThumblerStatus {
+-(NSString *)getMessengerStatus {
     return [socialArray objectAtIndex:3];
     
 }

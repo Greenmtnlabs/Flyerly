@@ -42,6 +42,7 @@
     //Fix for: 162-create-flyer-screen-when-user-close-the-inapp-tabs-are-active-and-extra-layer-showing-when-it-comes-from-clipart
     BOOL appearingViewAfterInAppHide;
     BOOL haveValidSubscription;
+    BOOL saveToGallaryReqBeforeSharing;
     
 }
 
@@ -84,6 +85,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [libText setFrame:newFrame];
     [libPhoto setFrame:newFrame];
     [libDrawing setFrame:newFrame];
+    saveToGallaryReqBeforeSharing = NO;
 }
 
 /**
@@ -4290,6 +4292,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     [self.flyimgView layerStoppedEditing:currentLayer];
     
     if( [flyer isSaveRequired] == YES ) {
+        saveToGallaryReqBeforeSharing = YES;
         
         // Save flyer to disk //
         [flyer saveFlyer]; //
@@ -4373,7 +4376,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             }
             
         } else {
-            
+            saveToGallaryReqBeforeSharing = NO;
             if ( IS_IPHONE_5 || IS_IPHONE_4) {
                 shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
             }else if ( IS_IPHONE_6  || IS_IPHONE_6_PLUS ) {
@@ -4407,6 +4410,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         shareviewcontroller.shareButton = shareButton;
         shareviewcontroller.helpButton = helpButton;
         shareviewcontroller.backButton = backButton;
+        shareviewcontroller.saveToGallaryReqBeforeSharing = saveToGallaryReqBeforeSharing;
         if( [shareviewcontroller.titleView.text isEqualToString:@"Flyer"] ) {
             shareviewcontroller.titleView.text = [flyer getFlyerTitle];
         }
@@ -4453,7 +4457,9 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         if (![isAnyVideoUploadOnYoutube isEqualToString:@""]) {
             [shareviewcontroller enableAllShareOptions];
         }
-        
+        //enable facebook button if save to gallary not required
+        [shareviewcontroller enableFacebook:!(saveToGallaryReqBeforeSharing)];
+
         //Create Animation Here
         [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,475 )];
         if ( IS_IPHONE_6) {

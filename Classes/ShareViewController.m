@@ -9,11 +9,11 @@
 #import "ShareViewController.h"
 #import "UserVoice.h"
 
+@implementation ShareViewController{
+    NSString *fbShareType; // 4 possible values to assign: fb-photo-wall | fb-photo-messenger | fb-video-wall | fb-video-messenger
+}
 
-
-@implementation ShareViewController
-
-@synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,flickrButton,printFlyerButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,lblFirstShareOnYoutube,tempTxtArea;
+@synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,flickrButton,printFlyerButton,facebookButton,twitterButton,instagramButton,messengerButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,lblFirstShareOnYoutube,tempTxtArea,saveToGallaryReqBeforeSharing;
 
 @synthesize flyerShareType,star1,star2,star3,star4,star5;
 
@@ -91,7 +91,6 @@ UIAlertView *saveCurrentFlyerAlert;
     [self.view addSubview:descriptionView];
     
     descTextAreaImg.frame = descriptionView.frame;
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -283,11 +282,11 @@ UIAlertView *saveCurrentFlyerAlert;
     }
     
     // Set Thumbler Sharing Status From Social File
-    status = [flyer getThumblerStatus];
+    status = [flyer getMessengerStatus];
     if([status isEqualToString:@"1"]){
-        [tumblrButton setSelected:YES];
+        [messengerButton setSelected:YES];
     }else{
-        [tumblrButton setSelected:NO];
+        [messengerButton setSelected:NO];
     }
     
     // Set Flicker Sharing Status From Social File
@@ -323,6 +322,7 @@ UIAlertView *saveCurrentFlyerAlert;
             self.flyer.saveInGallaryRequired = 0;
         }
     }
+    [self enableFacebook:YES];
 }
 -(IBAction)hideMe {
     [self saveInGallaryIfNeeded];
@@ -342,8 +342,10 @@ UIAlertView *saveCurrentFlyerAlert;
     [smsButton setEnabled:YES];
     [instagramButton setEnabled:YES];
     [clipboardButton setEnabled:YES];
-    [facebookButton setEnabled:YES];
     [lblFirstShareOnYoutube setHidden:YES];
+}
+-(void)enableFacebook:(BOOL)enable{
+    [facebookButton setEnabled:enable];
 }
 
 #pragma mark  Text Field Delegate
@@ -424,12 +426,12 @@ UIAlertView *saveCurrentFlyerAlert;
 #pragma mark Social Network
 
 /*
- * Called when Youtube button is pressed
+ * Called when Youtube button is pressed\
  */
 -(IBAction)uploadOnYoutube:(id)sender {
-    
+
     [self updateDescription];
-    
+
     if ([FlyerlySingleton connected]) {
         SHKItem *item = [SHKItem filePath:[self.flyer getSharingVideoPath] title:titleView.text];
         
@@ -443,30 +445,6 @@ UIAlertView *saveCurrentFlyerAlert;
         [FlyerlySingleton showNotConnectedAlert];
     }
 }
-
-
-#pragma mark === delegate method
-- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results
-{
-    NSLog(@"fb-completed share:%@", results);
-}
-
-- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error
-{
-    NSLog(@"fb-sharing error:%@", error);
-    NSString *message = error.userInfo[FBSDKErrorLocalizedDescriptionKey] ?:
-    @"fb-There was a problem sharing, please try again later.";
-    NSString *title = error.userInfo[FBSDKErrorLocalizedTitleKey] ?: @"Oops!";
-    
-    [[[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-}
-
-- (void)sharerDidCancel:(id<FBSDKSharing>)sharer
-{
-    NSLog(@"fb-share cancelled");
-}
-
-
 
 
 /*
@@ -546,26 +524,6 @@ UIAlertView *saveCurrentFlyerAlert;
 -(IBAction)onClickInstagramButton{
     
     [self shareOnInstagram];
-}
-
-/*
- * Called when tumblr button is pressed
- */
--(IBAction)onClickTumblrButton{
-    
-    [self updateDescription];
-    
-    // Current Item For Sharing
-    SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@", selectedFlyerDescription ]];
-    
-    item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
-    
-    //Calling ShareKit for Sharing
-    iosSharer = [[ SHKSharer alloc] init];
-    iosSharer = [SHKTumblr shareItem:item];
-    iosSharer.shareDelegate = self;
-    iosSharer = nil;
-    
 }
 
 /*
@@ -656,81 +614,81 @@ UIAlertView *saveCurrentFlyerAlert;
 
 
 /*
+ * Called when Messenger button is pressed
+ */
+- (IBAction)onClickMessengerButton:(id)sender {
+    
+    [self updateDescription];
+    
+    fbShareType = @"fb-photo-messenger";
+    
+    FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+    photo.image = selectedFlyerImage;
+    photo.userGenerated = YES;
+    FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+    content.photos = @[photo];
+    
+    [FBSDKMessageDialog showWithContent:content delegate:self];
+ }
+/*
  * Called when facebook button is pressed
  */
+
 -(IBAction)onClickFacebookButton{
-    
-    FBPhotoParams *params = [[FBPhotoParams alloc] init];
-    UIImage *image = selectedFlyerImage; //calling to capture screenshot
-    params.photos = @[image];
-    
-    [FBDialogs presentMessageDialogWithPhotoParams:params
-                                     clientState:nil
-                                         handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
-                                             if(error) {
-                                                 // An error occurred, we need to handle the error
-                                                 // See: https://developers.facebook.com/docs/ios/errors
-                                                 NSLog(@"error %@", error);
-                                             } else {
-                                                 // Success
-                                                 if([[results objectForKey:@"completionGesture"] isEqualToString:@"message"]){
-                                                     [flyer setFacebookStatus:1];
-                                                     [self setSocialStatus];
-                                                 }
-                                                 NSLog(@"result %@", results);
-                                             }
-                                         }];
-}
-
--(void)shareOnFacebook:(BOOL )hasAccount{    
-    
-    // Current Item For Sharing
-    SHKItem *item;
-    
-    if( hasAccount ){
-        
-        // if we got an account of facebook, then it's good to share it via shkIosFacebook, which is newer sharer.
-        iosSharer = [[SHKiOSFacebook alloc] init];
-        
-        if ([flyer isVideoFlyer]) {
-            // getting youtube link from flyer and sharing on facebook via url
-            NSString *getYouTubeLink = [self.flyer getYoutubeLink];
-            NSURL *videoURL = [NSURL URLWithString:getYouTubeLink];
-
-            item = [SHKItem URL:videoURL title:@"Share On Youtube" contentType:SHKURLContentTypeVideo];
-            //item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
-            
-        } else {
-            
-            item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly ", selectedFlyerDescription ]];
-            item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
-            
-        }
-        
-    } else {
-        // if we haven't any accounts of facebook, we'll have to share item via shkFacebook
-        iosSharer = [[SHKFacebook alloc] init];
-        
-        if ([flyer isVideoFlyer]) {
-            // getting youtube link from flyer and sharing on facebook via url
-            NSString *getYouTubeLink = [self.flyer getYoutubeLink];
-            NSURL *videoURL = [NSURL URLWithString:getYouTubeLink];
-            item = [SHKItem URL:videoURL title:@"Share On Youtube" contentType:SHKURLContentTypeVideo];
-    
-        }
-        else {
-            item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly ", selectedFlyerDescription ]];
-        }
-    }
-    
-    // load item that is ready to share.
-    [iosSharer loadItem:item];
-    
-    // at last we need to call delegates of sharing and start sharing.
-    iosSharer.shareDelegate = self;
-    [iosSharer share];
    
+    [self updateDescription];
+    
+    if([self.flyer isVideoFlyer]){
+    
+        fbShareType = @"fb-video-wall";
+        NSURL *videoURL = [NSURL URLWithString:[self.flyer getVideoAssetURL]];
+        FBSDKShareVideo *video = [[FBSDKShareVideo alloc] init];
+        video.videoURL = videoURL;
+    
+        FBSDKShareVideoContent *content = [[FBSDKShareVideoContent alloc] init];
+        content.video = video;
+        [FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
+    
+    } else {
+    
+        fbShareType = @"fb-photo-wall";
+        FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+        photo.image = selectedFlyerImage;
+    
+        FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+        content.photos = @[photo];
+        [FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
+    }
 }
+
+#pragma mark === delegate method
+- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results
+{
+    NSLog(@"fb-completed share:%@", results);
+    
+    if([fbShareType isEqualToString:@"fb-photo-wall"] || [fbShareType isEqualToString:@"fb-video-wall"]){
+        [self.flyer setFacebookStatus:1];
+    } else if([fbShareType isEqualToString:@"fb-photo-messenger"] || [fbShareType isEqualToString:@"fb-video-messenger"]) {
+        [self.flyer setMessengerStatus:1];
+    }
+    [self setSocialStatus];
+}
+
+- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error
+{
+    NSLog(@"fb-sharing error:%@", error);
+    NSString *message = error.userInfo[FBSDKErrorLocalizedDescriptionKey] ?:
+    @"fb-There was a problem sharing, please try again later.";
+    NSString *title = error.userInfo[FBSDKErrorLocalizedTitleKey] ?: @"Oops!";
+    
+    [[[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+}
+
+- (void)sharerDidCancel:(id<FBSDKSharing>)sharer
+{
+    NSLog(@"fb-share cancelled");
+}
+
 
 /*
  * Called when clipboard button is pressed
@@ -796,7 +754,7 @@ UIAlertView *saveCurrentFlyerAlert;
         
     } else if ( [sharer isKindOfClass:[SHKTumblr class]] == YES ) {
         
-        tumblrButton.enabled = NO;
+        messengerButton.enabled = NO;
         
     } else if ( [sharer isKindOfClass:[SHKFlickr class]] == YES ) {
         
@@ -842,8 +800,8 @@ UIAlertView *saveCurrentFlyerAlert;
         
     } else if ( [sharer isKindOfClass:[SHKTumblr class]] == YES ) {
         
-        tumblrButton.enabled = YES;
-        [self.flyer setThumblerStatus:1];
+        messengerButton.enabled = YES;
+        [self.flyer setMessengerStatus:1];
         [Flurry logEvent:@"Shared Tumblr"];
        
     } else if ( [sharer isKindOfClass:[SHKFlickr class]] == YES ) {

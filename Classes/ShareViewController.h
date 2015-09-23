@@ -35,6 +35,8 @@
 #import "CreateFlyerController.h"
 #import "FBSDKSharing.h"
 
+
+
 @class FlyrViewController,FlyerlySingleton, CreateFlyerController;
 @class SHKSharer;
 @class SHKActivityIndicator;
@@ -58,7 +60,7 @@
 @property(nonatomic,strong) IBOutlet UIButton *facebookButton;
 @property(nonatomic,strong) IBOutlet UIButton *twitterButton;
 @property(nonatomic,strong) IBOutlet UIButton *emailButton;
-@property(nonatomic,strong) IBOutlet UIButton *tumblrButton;
+@property(nonatomic,strong) IBOutlet UIButton *messengerButton;
 @property(nonatomic,strong) IBOutlet UIButton *flickrButton;
 @property(nonatomic,strong) IBOutlet UIButton *printFlyerButton;
 @property(nonatomic,strong) IBOutlet UIButton *instagramButton;
@@ -90,19 +92,18 @@
 @property (strong, nonatomic) SHKActivityIndicator *activityIndicator;
 @property (nonatomic,strong) Flyer *flyer;
 @property (weak, nonatomic) id<SHKSharerDelegate> delegate;
+@property BOOL saveToGallaryReqBeforeSharing;
 
 @property (strong, nonatomic) NSTimer *timer;
 @property (strong, nonatomic) IBOutlet UITextView *tempTxtArea;
 
 
-
-
+- (IBAction)onClickMessengerButton:(id)sender;
 
 -(IBAction)onClickFacebookButton;
 -(IBAction)onClickTwitterButton;
 -(IBAction)onClickInstagramButton;
 -(IBAction)onClickEmailButton;
--(IBAction)onClickTumblrButton;
 -(IBAction)onClickFlickrButton;
 -(IBAction)onPrintFlyerButton;
 -(IBAction)onClickSMSButton;
@@ -116,6 +117,7 @@
 -(void)shareOnInstagram;
 -(void)setSocialStatus;
 -(void)enableAllShareOptions;
+-(void)enableFacebook:(BOOL)enable;
 -(void)setStarsofShareScreen :(NSString *)rate;
 
 @end
