@@ -109,7 +109,7 @@ id lastShareBtnSender;
     if( sizeRectForAdd.size.width == 0 ){
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
         MainFlyerCell *cell = (MainFlyerCell *)[self.tView cellForRowAtIndexPath:indexPath];
-        sizeRectForAdd = CGRectMake(cell.cellImage.frame.origin.x,cell.cellImage.frame.origin.y,(cell.cellImage.frame.size.width+cell.sideView.frame.size.width),cell.cellImage.frame.size.height);
+        sizeRectForAdd = cell.cellImage.frame;//CGRectMake(cell.cellImage.frame.origin.x,cell.cellImage.frame.origin.y,(cell.cellImage.frame.size.width+cell.sideView.frame.size.width),cell.cellImage.frame.size.height);
     }
 }
 
@@ -374,7 +374,7 @@ id lastShareBtnSender;
         return 270;
     }
     else if ( IS_IPHONE_6 ) {
-        return 320;
+        return 393;
     }
     else{
         return 440;
