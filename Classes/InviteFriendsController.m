@@ -539,11 +539,10 @@ const int CONTACTS_TAB = 0;
     FBSDKAppInviteContent *content =[[FBSDKAppInviteContent alloc] init];
     content.appLinkURL = [NSURL URLWithString:flyerConfigurator.appLinkURL];
     //optionally set previewImageURL
-    content.previewImageURL = [NSURL URLWithString:flyerConfigurator.appInvitePreviewImageURL];
+    content.appInvitePreviewImageURL = [NSURL URLWithString:flyerConfigurator.appInvitePreviewImageURL];
 
     // present the dialog. Assumes self implements protocol `FBSDKAppInviteDialogDelegate`
-    [FBSDKAppInviteDialog showWithContent:content
-                                       delegate:self];
+    [FBSDKAppInviteDialog showFromViewController:self withContent:content delegate:self];
 }
 
 
