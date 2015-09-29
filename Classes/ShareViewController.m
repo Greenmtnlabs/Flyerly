@@ -91,6 +91,9 @@ UIAlertView *saveCurrentFlyerAlert;
     [self.view addSubview:descriptionView];
     
     descTextAreaImg.frame = descriptionView.frame;
+    
+    [self enableFacebook:YES];
+    [self enableYoutube:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -347,6 +350,10 @@ UIAlertView *saveCurrentFlyerAlert;
     [facebookButton setEnabled:enable];
 }
 
+-(void)enableYoutube:(BOOL)enable{
+    [youTubeButton setEnabled:enable];
+}
+
 #pragma mark  Text Field Delegate
 
 - (BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
@@ -551,10 +558,10 @@ UIAlertView *saveCurrentFlyerAlert;
                                                      delegate:self
                                                      cancelButtonTitle:@"OK"
                                                      otherButtonTitles:nil, nil];
-        [self enableFacebook:YES];
-        youTubeButton.enabled = YES;
-        
+       
         [saveCurrentFlyerAlert show];
+        [self enableFacebook:YES];
+        [self enableYoutube:YES];
     }
 }
 
@@ -621,7 +628,10 @@ UIAlertView *saveCurrentFlyerAlert;
     
     [self updateDescription];
     
+    
     fbShareType = @"fb-photo-messenger";
+    
+    
     
     FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
     photo.image = selectedFlyerImage;

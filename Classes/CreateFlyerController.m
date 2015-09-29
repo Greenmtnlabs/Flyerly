@@ -4451,15 +4451,17 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         //Here we Get youtube Link
         NSString *isAnyVideoUploadOnYoutube = [self.flyer getYoutubeLink];
-        
+    
         // Any Uploaded Video Link Available of Youtube
         // then we Enable Other Sharing Options
         if (![isAnyVideoUploadOnYoutube isEqualToString:@""]) {
             [shareviewcontroller enableAllShareOptions];
         }
         //enable facebook button if save to gallary not required
-        //[shareviewcontroller enableFacebook:!(saveToGallaryReqBeforeSharing)];
-
+        if ( [flyer isVideoFlyer] ){
+            [shareviewcontroller enableFacebook:!(saveToGallaryReqBeforeSharing)];
+            [shareviewcontroller enableYoutube:!(saveToGallaryReqBeforeSharing)];
+        }
         //Create Animation Here
         [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,475 )];
         if ( IS_IPHONE_6) {

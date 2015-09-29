@@ -117,6 +117,7 @@
 -(void)setSocialStatus;
 -(void)enableAllShareOptions;
 -(void)enableFacebook:(BOOL)enable;
+-(void)enableYoutube:(BOOL)enable;
 -(void)setStarsofShareScreen :(NSString *)rate;
 
 @end
