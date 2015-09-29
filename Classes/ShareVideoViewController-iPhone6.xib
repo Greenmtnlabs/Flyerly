@@ -13,6 +13,7 @@
                 <outlet property="facebookButton" destination="FdQ-7T-iT1" id="RVl-wO-WaY"/>
                 <outlet property="flickrButton" destination="GVr-7i-SKr" id="8iN-g4-nuk"/>
                 <outlet property="flyerShareType" destination="cNj-7M-s9Z" id="p6l-Kw-XDg"/>
+                <outlet property="messengerButton" destination="jsX-A7-yv3" id="TOk-2H-MAY"/>
                 <outlet property="smsButton" destination="vnx-CM-GUx" id="cKm-PL-KB1"/>
                 <outlet property="star1" destination="7OZ-LA-8cx" id="t9I-Dw-vVA"/>
                 <outlet property="star2" destination="m9Y-2i-uBl" id="PId-rw-KaN"/>
@@ -237,6 +238,9 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="selected" image="messenger_share_selected.png"/>
+                            <connections>
+                                <action selector="onClickMessengerButton:" destination="-1" eventType="touchUpInside" id="wjg-Cn-oC9"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="GVr-7i-SKr">
                             <rect key="frame" x="245" y="6" width="60" height="60"/>

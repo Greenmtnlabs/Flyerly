@@ -13,6 +13,7 @@
                 <outlet property="facebookButton" destination="11" id="23"/>
                 <outlet property="flickrButton" destination="13" id="25"/>
                 <outlet property="flyerShareType" destination="02X-0M-pgw" id="RRD-OV-hAp"/>
+                <outlet property="messengerButton" destination="j8Y-Ly-dUY" id="MJT-sB-ElR"/>
                 <outlet property="smsButton" destination="14" id="26"/>
                 <outlet property="star1" destination="D0f-Ce-0gF" id="Qb0-gF-RHV"/>
                 <outlet property="star2" destination="mVn-Rd-jbl" id="CSS-K6-EAK"/>
@@ -255,6 +256,9 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="selected" image="messenger_share_selected.png"/>
+                            <connections>
+                                <action selector="onClickMessengerButton:" destination="-1" eventType="touchUpInside" id="E1P-n4-Gtr"/>
+                            </connections>
                         </button>
                     </subviews>
                 </view>

@@ -4458,7 +4458,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             [shareviewcontroller enableAllShareOptions];
         }
         //enable facebook button if save to gallary not required
-        [shareviewcontroller enableFacebook:!(saveToGallaryReqBeforeSharing)];
+        //[shareviewcontroller enableFacebook:!(saveToGallaryReqBeforeSharing)];
 
         //Create Animation Here
         [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,475 )];

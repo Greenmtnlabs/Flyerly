@@ -281,7 +281,7 @@ UIAlertView *saveCurrentFlyerAlert;
         [clipboardButton setSelected:NO];
     }
     
-    // Set Thumbler Sharing Status From Social File
+    // Set Messenger Sharing Status From Social File
     status = [flyer getMessengerStatus];
     if([status isEqualToString:@"1"]){
         [messengerButton setSelected:YES];
@@ -322,7 +322,6 @@ UIAlertView *saveCurrentFlyerAlert;
             self.flyer.saveInGallaryRequired = 0;
         }
     }
-    [self enableFacebook:YES];
 }
 -(IBAction)hideMe {
     [self saveInGallaryIfNeeded];
@@ -342,6 +341,7 @@ UIAlertView *saveCurrentFlyerAlert;
     [smsButton setEnabled:YES];
     [instagramButton setEnabled:YES];
     [clipboardButton setEnabled:YES];
+    [messengerButton setEnabled:YES];
 }
 -(void)enableFacebook:(BOOL)enable{
     [facebookButton setEnabled:enable];
@@ -551,6 +551,8 @@ UIAlertView *saveCurrentFlyerAlert;
                                                      delegate:self
                                                      cancelButtonTitle:@"OK"
                                                      otherButtonTitles:nil, nil];
+        [self enableFacebook:YES];
+        youTubeButton.enabled = YES;
         
         [saveCurrentFlyerAlert show];
     }
@@ -801,7 +803,7 @@ UIAlertView *saveCurrentFlyerAlert;
         
         messengerButton.enabled = YES;
         [self.flyer setMessengerStatus:1];
-        [Flurry logEvent:@"Shared Tumblr"];
+        [Flurry logEvent:@"Shared on Messenger"];
        
     } else if ( [sharer isKindOfClass:[SHKFlickr class]] == YES ) {
         
