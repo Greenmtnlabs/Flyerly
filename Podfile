@@ -13,7 +13,8 @@ platform :ios, '7.0'
 	pod 'Facebook-iOS-SDK', '~> 3.23.2'
 	
 	# Pre-release versions:
-	pod 'GPUImage', '~> 0.1.6'
+    # Recommended to keep GPUImage up-to-date
+    pod 'GPUImage', :head
 	pod 'NBUKit', '~> 2.4.1'
 	pod 'NBUImagePicker', '~> 1.5.3'
 	pod 'Parse', '~> 1.7.3'
