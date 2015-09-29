@@ -656,6 +656,11 @@ id lastShareBtnSender;
 -(void)onShare:(id)sender {
     UIButton *clickButton = sender;
     NSInteger row = clickButton.tag; ///will get it from button tag
+    
+    if(row > (ADD_AFTER_FLYERS-1)){
+        row = row - floor(row/ADD_AFTER_FLYERS);
+    }
+    
     flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:row] setDirectory:NO];
     
     if ( [[PFUser currentUser] sessionToken] ) {
