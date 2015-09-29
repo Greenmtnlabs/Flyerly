@@ -69,7 +69,6 @@
 @property(nonatomic,strong) IBOutlet UIButton *clipboardButton;
 @property(nonatomic,strong) IBOutlet UILabel *clipboardlabel;
 @property(nonatomic,strong) IBOutlet UILabel *topTitleLabel;
-@property(nonatomic,strong) IBOutlet UILabel *lblFirstShareOnYoutube;
 @property(nonatomic,strong) NSString *Yvalue;
 @property(nonatomic,strong) UIBarButtonItem *rightUndoBarButton;
 @property(nonatomic,strong) UIButton *shareButton;

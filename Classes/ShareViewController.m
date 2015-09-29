@@ -13,7 +13,7 @@
     NSString *fbShareType; // 4 possible values to assign: fb-photo-wall | fb-photo-messenger | fb-video-wall | fb-video-messenger
 }
 
-@synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,flickrButton,printFlyerButton,facebookButton,twitterButton,instagramButton,messengerButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,lblFirstShareOnYoutube,tempTxtArea,saveToGallaryReqBeforeSharing;
+@synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,flickrButton,printFlyerButton,facebookButton,twitterButton,instagramButton,messengerButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,tempTxtArea,saveToGallaryReqBeforeSharing;
 
 @synthesize flyerShareType,star1,star2,star3,star4,star5;
 
@@ -342,7 +342,6 @@ UIAlertView *saveCurrentFlyerAlert;
     [smsButton setEnabled:YES];
     [instagramButton setEnabled:YES];
     [clipboardButton setEnabled:YES];
-    [lblFirstShareOnYoutube setHidden:YES];
 }
 -(void)enableFacebook:(BOOL)enable{
     [facebookButton setEnabled:enable];

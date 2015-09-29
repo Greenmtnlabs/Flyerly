@@ -13,7 +13,6 @@
                 <outlet property="facebookButton" destination="FdQ-7T-iT1" id="RVl-wO-WaY"/>
                 <outlet property="flickrButton" destination="GVr-7i-SKr" id="8iN-g4-nuk"/>
                 <outlet property="flyerShareType" destination="cNj-7M-s9Z" id="p6l-Kw-XDg"/>
-                <outlet property="lblFirstShareOnYoutube" destination="PFt-pA-WMe" id="BUg-Sb-c6G"/>
                 <outlet property="smsButton" destination="vnx-CM-GUx" id="cKm-PL-KB1"/>
                 <outlet property="star1" destination="7OZ-LA-8cx" id="t9I-Dw-vVA"/>
                 <outlet property="star2" destination="m9Y-2i-uBl" id="PId-rw-KaN"/>
@@ -127,8 +126,8 @@
                     <rect key="frame" x="30" y="273" width="320" height="135"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="FdQ-7T-iT1">
-                            <rect key="frame" x="245" y="6" width="60" height="60"/>
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="FdQ-7T-iT1">
+                            <rect key="frame" x="167" y="6" width="60" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Facebook"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
@@ -164,22 +163,6 @@
                             </state>
                             <connections>
                                 <action selector="onClickEmailButton" destination="-1" eventType="touchUpInside" id="Wht-zE-gdU"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="GVr-7i-SKr">
-                            <rect key="frame" x="167" y="6" width="60" height="60"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="Flicker"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
-                            <state key="normal" image="save_share.png"/>
-                            <state key="selected" image="save_share_selected@3x.png">
-                                <color key="titleColor" red="0.3575665864" green="0.76047690010000002" blue="0.97315449620000005" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <state key="highlighted">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="onClickFlickrButton" destination="-1" eventType="touchUpInside" id="dVu-PT-Ziq"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vnx-CM-GUx">
@@ -236,14 +219,7 @@
                                 <action selector="onClickClipboardButton" destination="-1" eventType="touchUpInside" id="z9D-Gp-Akc"/>
                             </connections>
                         </button>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First upload your video flyer to YouTube then select other sharing options." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PFt-pA-WMe">
-                            <rect key="frame" x="77" y="6" width="82" height="60"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="BfR-GT-dR9">
+                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="BfR-GT-dR9">
                             <rect key="frame" x="9" y="6" width="60" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="youtube_share.png">
@@ -252,6 +228,30 @@
                             <state key="selected" image="youtube_share_selected.png"/>
                             <connections>
                                 <action selector="uploadOnYoutube:" destination="-1" eventType="touchUpInside" id="tl9-fQ-OaE"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jsX-A7-yv3">
+                            <rect key="frame" x="88" y="6" width="60" height="60"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="messenger_share.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="messenger_share_selected.png"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="GVr-7i-SKr">
+                            <rect key="frame" x="245" y="6" width="60" height="60"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="Flicker"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
+                            <state key="normal" image="save_share.png"/>
+                            <state key="selected" image="save_share_selected@3x.png">
+                                <color key="titleColor" red="0.3575665864" green="0.76047690010000002" blue="0.97315449620000005" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <state key="highlighted">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onClickFlickrButton" destination="-1" eventType="touchUpInside" id="dVu-PT-Ziq"/>
                             </connections>
                         </button>
                     </subviews>
@@ -300,6 +300,8 @@
         <image name="facebook_share.png" width="60" height="60"/>
         <image name="facebook_share_selected.png" width="60" height="60"/>
         <image name="flat_text_box.png" width="251" height="34"/>
+        <image name="messenger_share.png" width="60" height="60"/>
+        <image name="messenger_share_selected.png" width="60" height="60"/>
         <image name="panel_close_button.png" width="320" height="37"/>
         <image name="private_off_button.png" width="92" height="31"/>
         <image name="public_on.png" width="92" height="31"/>
