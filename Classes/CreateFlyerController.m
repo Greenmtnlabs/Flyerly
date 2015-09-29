@@ -4455,12 +4455,14 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         // Any Uploaded Video Link Available of Youtube
         // then we Enable Other Sharing Options
         if (![isAnyVideoUploadOnYoutube isEqualToString:@""]) {
-            [shareviewcontroller enableAllShareOptions];
+            [shareviewcontroller enableAllShareOptions: YES];
         }
         //enable facebook button if save to gallary not required
         if ( [flyer isVideoFlyer] ){
             [shareviewcontroller enableFacebook:!(saveToGallaryReqBeforeSharing)];
             [shareviewcontroller enableYoutube:!(saveToGallaryReqBeforeSharing)];
+            [shareviewcontroller saveButtonSelected:!(saveToGallaryReqBeforeSharing)];
+            [shareviewcontroller enableAllShareOptions:!(saveToGallaryReqBeforeSharing)];
         }
         //Create Animation Here
         [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,475 )];

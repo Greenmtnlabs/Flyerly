@@ -92,8 +92,9 @@ UIAlertView *saveCurrentFlyerAlert;
     
     descTextAreaImg.frame = descriptionView.frame;
     
-    [self enableFacebook:YES];
-    [self enableYoutube:YES];
+    [self enableFacebook:!(saveToGallaryReqBeforeSharing)];
+    [self enableYoutube:!(saveToGallaryReqBeforeSharing)];
+    [self saveButtonSelected:!(saveToGallaryReqBeforeSharing)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -133,6 +134,32 @@ UIAlertView *saveCurrentFlyerAlert;
     
 }
 
+-(void) setAllButtonSelected:(BOOL)selected{
+    
+    [messengerButton setSelected:selected];
+    [facebookButton setSelected:selected];
+    [youTubeButton setSelected:selected];
+    [emailButton setSelected:selected];
+    [smsButton setSelected:selected];
+    [twitterButton setSelected:selected];
+    [clipboardButton setSelected:selected];
+
+}
+/*
+ * When video is edited
+ * all buttons except for facebookButton and youTubeButton
+ * set as unselected
+ */
+-(void) setAllButtonStatus{
+    
+    [self.flyer setMessengerStatus:0];
+    [self.flyer setEmailStatus:0];
+    [self.flyer setSmsStatus:0];
+    [self.flyer setTwitterStatus:0];
+    [self.flyer setClipboardStatus:0];
+    
+    
+}
 
 /*
  * Share on Instagram
@@ -338,13 +365,13 @@ UIAlertView *saveCurrentFlyerAlert;
     [self.cfController enableHome:YES];
 }
 
--(void)enableAllShareOptions {
-    [twitterButton setEnabled:YES];
-    [emailButton setEnabled:YES];
-    [smsButton setEnabled:YES];
-    [instagramButton setEnabled:YES];
-    [clipboardButton setEnabled:YES];
-    [messengerButton setEnabled:YES];
+-(void)enableAllShareOptions:(BOOL) enable {
+    [twitterButton setEnabled:enable];
+    [emailButton setEnabled:enable];
+    [smsButton setEnabled:enable];
+    [instagramButton setEnabled:enable];
+    [clipboardButton setEnabled:enable];
+    [messengerButton setEnabled:enable];
 }
 -(void)enableFacebook:(BOOL)enable{
     [facebookButton setEnabled:enable];
@@ -353,6 +380,11 @@ UIAlertView *saveCurrentFlyerAlert;
 -(void)enableYoutube:(BOOL)enable{
     [youTubeButton setEnabled:enable];
 }
+
+-(void)saveButtonSelected:(BOOL)enable{
+    [flickrButton setSelected:enable];
+}
+
 
 #pragma mark  Text Field Delegate
 
@@ -552,6 +584,7 @@ UIAlertView *saveCurrentFlyerAlert;
     //video merging is in process please wait
     else if( self.flyer.saveInGallaryRequired == 1 ) {
         [flickrButton setSelected:YES];
+       
         [self updateDescription];
         saveCurrentFlyerAlert = [[UIAlertView alloc] initWithTitle:@"Success"
                                                      message:@"The current Flyer has been saved successfully"
@@ -562,6 +595,11 @@ UIAlertView *saveCurrentFlyerAlert;
         [saveCurrentFlyerAlert show];
         [self enableFacebook:YES];
         [self enableYoutube:YES];
+        
+        [self setAllButtonSelected:NO];
+        
+        //[self saveButtonSelected:!(saveToGallaryReqBeforeSharing)];
+        //[self.flyer setFlickerStatus:1];
     }
 }
 
@@ -645,8 +683,7 @@ UIAlertView *saveCurrentFlyerAlert;
         FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
         content.photos = @[photo];
         [FBSDKMessageDialog showWithContent:content delegate:self];
-        
-        
+  
     }
  }
 /*
@@ -853,7 +890,11 @@ UIAlertView *saveCurrentFlyerAlert;
         // Mark Social Status In .soc File of Flyer
         [self.flyer setYouTubeStatus:1];
         [Flurry logEvent:@"Shared Youtube"];
-        [self enableAllShareOptions];
+        [self enableAllShareOptions:YES];
+        
+        if(saveToGallaryReqBeforeSharing){
+            [self setAllButtonStatus];
+        }
         
     }
     

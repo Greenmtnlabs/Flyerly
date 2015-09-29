@@ -115,9 +115,10 @@
 
 -(void)shareOnInstagram;
 -(void)setSocialStatus;
--(void)enableAllShareOptions;
+-(void)enableAllShareOptions:(BOOL)enable;
 -(void)enableFacebook:(BOOL)enable;
 -(void)enableYoutube:(BOOL)enable;
+-(void)saveButtonSelected:(BOOL)enable;
 -(void)setStarsofShareScreen :(NSString *)rate;
 
 @end
