@@ -628,18 +628,26 @@ UIAlertView *saveCurrentFlyerAlert;
     
     [self updateDescription];
     
-    
     fbShareType = @"fb-photo-messenger";
     
+    if([self.flyer isVideoFlyer]){
+        FBSDKShareLinkContent *contentLink = [[FBSDKShareLinkContent alloc] init];
+        contentLink.contentURL = [NSURL URLWithString: [self.flyer getYoutubeLink]];
+        
+        [FBSDKMessageDialog showWithContent:contentLink delegate:self];
+        
+ 
+    } else {
     
-    
-    FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
-    photo.image = selectedFlyerImage;
-    photo.userGenerated = YES;
-    FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
-    content.photos = @[photo];
-    
-    [FBSDKMessageDialog showWithContent:content delegate:self];
+        FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+        photo.image = selectedFlyerImage;
+        photo.userGenerated = YES;
+        FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+        content.photos = @[photo];
+        [FBSDKMessageDialog showWithContent:content delegate:self];
+        
+        
+    }
  }
 /*
  * Called when facebook button is pressed
