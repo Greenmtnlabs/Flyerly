@@ -124,7 +124,7 @@
 "HOME" = "HOME";
 
 // ContactCustomizeDetailsControllerViewController
-"Calls and Texts required premium subscription." = "Calls and Texts required premium subscription.";
+"Calls and text require premium subscription." = "Calls and text require premium subscription.";
 
 // SettingsViewController
 "Log Out" = "Log Out";

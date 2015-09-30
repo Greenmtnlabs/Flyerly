@@ -50,7 +50,7 @@
 }
 
 -(void)applyLocalization{
-    [_lblMessage setText:NSLocalizedString(@"Calls and Texts required premium subscription.", nil)];
+    [_lblMessage setText:NSLocalizedString(@"Calls and text require premium subscription.", nil)];
 
 }
 
