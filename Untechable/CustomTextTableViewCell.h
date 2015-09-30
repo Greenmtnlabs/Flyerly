@@ -30,5 +30,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *contact_Name;
 @property (strong, nonatomic) IBOutlet UIImageView *contact_Image;
 
+@property (strong, nonatomic) IBOutlet UILabel *lblSeperator;
 
 @end

@@ -168,7 +168,7 @@
             }
         }
         
-        NSString *valueToBeShown =[ NSString stringWithFormat:NSLocalizedString(@"Message to %@:\n", nil),contactModal.contactName];
+        NSString *valueToBeShown =[ NSString stringWithFormat:NSLocalizedString(@"Message to %@:", nil),contactModal.contactName];
         [cell setCellValues:valueToBeShown ContactImage:contactModal.img];
         
         cell.contact_Name.numberOfLines = 0;
@@ -208,7 +208,7 @@
             cell.customText.text = contactModal.customTextForContact;
         }
         
-        NSString *valueToBeShown =[ NSString stringWithFormat:NSLocalizedString(@"Message to %@:\n", nil),contactModal.contactName];
+        NSString *valueToBeShown =[ NSString stringWithFormat:NSLocalizedString(@"Message to %@:", nil),contactModal.contactName];
         
         [cell setCellValuesWithDeleg:contactModal.contactFirstName message:valueToBeShown customText:contactModal.customTextForContact ContactImage:contactModal.img deleg:self];
         
@@ -451,7 +451,7 @@
     
     UIColor *untechableGreen = [UIColor colorWithRed:(66/255.0) green:(247/255.0) blue:(206/255.0) alpha:1];
     
-    headerView.backgroundColor = DEF_GRAY;
+    headerView.backgroundColor = untechableGreen;
     
     return headerView;
 }
@@ -459,7 +459,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-          return 160.f;
+          return 154.f;
     }
     if (indexPath.section == 1) {
             return 120.f;

@@ -12,7 +12,7 @@ ContactsCustomizedModal *contactModal_;
 
 @implementation CustomTextTableViewCell
 
-@synthesize customText;
+@synthesize customText, lblSeperator;
 @synthesize delegate;
 @synthesize contact_Name, contact_Image;
 
@@ -43,7 +43,9 @@ ContactsCustomizedModal *contactModal_;
     self.contact_Image.layer.cornerRadius = self.contact_Image.frame.size.width / 2;
     self.contact_Image.clipsToBounds = YES;
     
+    UIColor *untechableGreen = [UIColor colorWithRed:(66/255.0) green:(247/255.0) blue:(206/255.0) alpha:1];
     
+    self.lblSeperator.backgroundColor = untechableGreen;
     
     if( deleg != nil )
     self.delegate = deleg;

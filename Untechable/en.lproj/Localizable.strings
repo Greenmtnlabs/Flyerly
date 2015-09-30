@@ -54,7 +54,7 @@
 "Select contacts" = "Select contacts";
 
 "How would you like to notify %@?" = "How would you like to notify %@?";
-"Message to %@:\n" = "Message to %@:\n";
+"Message to %@:" = "Message to %@:";
 
 // Email Settings related
 "Select your email service to let your contacts know you will be untechable." = "Select your email service to let your contacts know you will be untechable.";
