@@ -598,8 +598,6 @@ UIAlertView *saveCurrentFlyerAlert;
         
         [self setAllButtonSelected:NO];
         
-        //[self saveButtonSelected:!(saveToGallaryReqBeforeSharing)];
-        //[self.flyer setFlickerStatus:1];
     }
 }
 
