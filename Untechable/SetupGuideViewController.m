@@ -29,7 +29,9 @@
     [self initializeTextViews];
     [self setNavigationBarItems];
     [self applyLocalization];
-    
+
+    // this enables input field for Name to capitalize initial letter of the word
+    self.userNameTextView.autocapitalizationType = UITextAutocapitalizationTypeWords;
 }
 
 -(void)applyLocalization{
