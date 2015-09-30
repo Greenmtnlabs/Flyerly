@@ -35,9 +35,9 @@
 
 // SetupGuide Screen 1
 "Name" = "Name";
-"Please Enter Your Name" = "Please Enter Your Name";
+"Enter Your Name" = "Enter Your Name";
 "Phone Number" = "Phone Number";
-"Please Enter Your Number" = "Please Enter Your Number";
+"Enter Your Number" = "Enter Your Number";
 "Error" = "Error";
 "Please Enter Your Name and Number" = "Please Enter Your Name and Number";
 "OK" = "OK";
