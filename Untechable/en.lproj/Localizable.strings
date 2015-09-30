@@ -53,7 +53,7 @@
 "Select contacts to inform of your unavailability" = "Select contacts to inform of your unavailability";
 "Select contacts" = "Select contacts";
 
-"Select one or more modes" = "Select one or more modes";
+"How would you like to notify %@?" = "How would you like to notify %@?";
 "Message to %@:\n" = "Message to %@:\n";
 
 // Email Settings related

@@ -52,7 +52,7 @@
 "Select contacts to inform of your unavailability" = "Seleccione los contactos para informar de la falta de disponibilidad";
 "Select contacts" = "Seleccione los contactos";
 
-"Select one or more modes" = "Seleccione uno o varios medios";
+"How would you like to notify %@?" = "¿Cómo le gustaría a notificar a %@?";
 "Message to %@:\n" = "Mensaje a %@:\n";
 
 // Email Settings related

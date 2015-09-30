@@ -208,7 +208,7 @@
             cell.customText.text = contactModal.customTextForContact;
         }
         
-        [cell setCellValuesWithDeleg:contactModal.customTextForContact deleg:self];
+        [cell setCellValuesWithDeleg:contactModal.contactFirstName message:contactModal.customTextForContact deleg:self];
         
         return cell;
         

@@ -21,21 +21,18 @@ ContactsCustomizedModal *contactModal_;
     // Configure the view for the selected state
 }
 
--(void)setCellValuesWithDeleg :(NSString *)message deleg:(id)deleg {
+-(void)setCellValuesWithDeleg :(NSString *)name message: (NSString *)message deleg:(id)deleg {
     self.customText.text = message;
     self.customText.delegate = self;
     
+    [_lblMessage setText:[NSString stringWithFormat:NSLocalizedString(@"How would you like to notify %@?", nil) , name]];
+
     [self updateChrCounter:message];
     if( deleg != nil )
     self.delegate = deleg;
-    
-    [self applyLocalization];
 }
 
--(void)applyLocalization{
-    [_lblMessage setText:NSLocalizedString(@"Select one or more modes", nil)];
 
-}
 
 -(void)updateChrCounter:(NSString *)message {
    

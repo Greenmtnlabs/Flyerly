@@ -437,6 +437,7 @@
             lastName = (CFStringRef) @"";
         
         currentltRenderingContactModal.contactName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+        currentltRenderingContactModal.contactFirstName = [NSString stringWithFormat:@"%@", firstName];
         
         // For contact picture
         UIImage *contactPicture;

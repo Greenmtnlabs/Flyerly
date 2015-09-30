@@ -19,7 +19,7 @@
 
 @property (nonatomic,strong)IBOutlet UITextView *customText;
 
--(void)setCellValuesWithDeleg :(NSString *)message deleg:(id)deleg;
+-(void)setCellValuesWithDeleg :(NSString *)name message: (NSString *)message deleg:(id)deleg;
 @property (strong, nonatomic) IBOutlet UILabel *char_limit;
 
 
