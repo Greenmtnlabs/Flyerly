@@ -168,7 +168,7 @@
             }
         }
         
-        NSString *valueToBeShown =[ NSString stringWithFormat:NSLocalizedString(@"Message to %@\n", nil),contactModal.contactName];
+        NSString *valueToBeShown =[ NSString stringWithFormat:NSLocalizedString(@"Message to %@:\n", nil),contactModal.contactName];
         [cell setCellValues:valueToBeShown ContactImage:contactModal.img];
         
         cell.contact_Name.numberOfLines = 0;

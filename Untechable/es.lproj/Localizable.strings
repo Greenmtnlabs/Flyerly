@@ -53,7 +53,7 @@
 "Select contacts" = "Seleccione los contactos";
 
 "Select one or more modes" = "Seleccione uno o varios medios";
-"Message to %@\n" = "Mensaje al %@\n";
+"Message to %@:\n" = "Mensaje a %@:\n";
 
 // Email Settings related
 "Select your email service to let your contacts know you will be untechable." = "Seleccione su servicio de correo electrónico y deja que tus contactos sepan que será untechable.";

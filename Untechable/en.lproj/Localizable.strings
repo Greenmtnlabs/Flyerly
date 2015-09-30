@@ -54,7 +54,7 @@
 "Select contacts" = "Select contacts";
 
 "Select one or more modes" = "Select one or more modes";
-"Message to %@\n" = "Message to %@\n";
+"Message to %@:\n" = "Message to %@:\n";
 
 // Email Settings related
 "Select your email service to let your contacts know you will be untechable." = "Select your email service to let your contacts know you will be untechable.";
