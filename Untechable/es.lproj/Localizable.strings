@@ -70,8 +70,8 @@
 
 
 // SetupGuide Screen 4
-"Congratulations" = "¡Felicidades";
-"Thank you for setting up your Untech settings. Now you can easily become Untechable whenever you need a break from technology in order to spend more time with the people & experiencing the things that are most important." = "Gracias por la creación de la configuración Untech usted. Ahora usted puede fácilmente convertirse en Untechable cada vez que necesite un descanso de la tecnología con el fin de pasar más tiempo con la gente y experimentar las cosas que son más importantes.";
+"Congratulations!" = "¡Felicidades!";
+"Thank you! Now easily Untech from technology and spend quality time with people while experiencing things that are important." = "¡Gracias! Ahora fácilmente Untech de la tecnología y pasar tiempo de calidad con la gente, mientras que experimentan las cosas que son importantes.";
 
 "The above message will be posted on %@ to the networks you selected below" = "El mensaje anterior se publicará en % @ a las redes que ha seleccionado a continuación";
 

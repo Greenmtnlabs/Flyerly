@@ -107,7 +107,7 @@
 -(void)onNext{
     untechable.hasFinished = YES;
     [untechable addOrUpdateInDatabase];
-    UIAlertView *congratesAlert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Congratulations", nil)  message:NSLocalizedString(@"Thank you for setting up your Untech settings. Now you can easily become Untechable whenever you need a break from technology in order to spend more time with the people & experiencing the things that are most important.", nil) delegate:self cancelButtonTitle:NSLocalizedString(OK, nil) otherButtonTitles:nil, nil];
+    UIAlertView *congratesAlert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Congratulations!", nil)  message:NSLocalizedString(@"Thank you! Now easily Untech from technology and spend quality time with people while experiencing things that are important.", nil) delegate:self cancelButtonTitle:NSLocalizedString(OK, nil) otherButtonTitles:nil, nil];
     [congratesAlert show];
     
 }
