@@ -34,9 +34,9 @@
 
 -(void)applyLocalization{
     [_btnLblWwud setTitle: NSLocalizedString(@"Name", nil) forState:normal];
-    [_usernameHintText setText:NSLocalizedString(@"Please Enter Your Name", nil) ];
+    [_usernameHintText setText:NSLocalizedString(@"Enter Your Name", nil) ];
     [_btnLblPhoneNumber setTitle: NSLocalizedString(@"Phone Number", nil) forState:normal];
-    [_phoneNumberHintText setText:NSLocalizedString(@"Please Enter Your Number", nil)];
+    [_phoneNumberHintText setText:NSLocalizedString(@"Enter Your Number", nil)];
     
 }
 

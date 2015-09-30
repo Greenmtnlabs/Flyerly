@@ -34,9 +34,9 @@
 
 // SetupGuide Screen 1
 "Name" = "Nombre";
-"Please Enter Your Name" = "Por favor, escriba su nombre";
+"Enter Your Name" = "Introduzca su nombre";
 "Phone Number" = "Número de teléfono";
-"Please Enter Your Number" = "Introduce tu número";
+"Enter Your Number" = "Entra tu numero";
 "Error" = "Error";
 "Please Enter Your Name and Number" = "Por favor, introduzca su nombre y número";
 "OK" = "OK";
