@@ -35,7 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setTampVariables];
+    [self setTempVariables];
     
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
@@ -147,7 +147,7 @@
     
     UITableViewCell *cell;
     
-    if ( indexPath.section == 0 ){
+    if (NO && indexPath.section == 0 ){
         static NSString *cellId = @"FirstTableViewCell";
         FirstTableViewCell *cell = (FirstTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
         
@@ -175,7 +175,7 @@
         [cell.contact_Name sizeToFit];
         
         return cell;
-    }else if ( indexPath.section == 1 ){
+    }else if ( indexPath.section == 0 ){
         
         static NSString *cellId = @"CustomText";
         CustomTextTableViewCell *cell = (CustomTextTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
@@ -208,11 +208,13 @@
             cell.customText.text = contactModal.customTextForContact;
         }
         
-        [cell setCellValuesWithDeleg:contactModal.contactFirstName message:contactModal.customTextForContact deleg:self];
+        NSString *valueToBeShown =[ NSString stringWithFormat:NSLocalizedString(@"Message to %@:\n", nil),contactModal.contactName];
+        
+        [cell setCellValuesWithDeleg:contactModal.contactFirstName message:valueToBeShown customText:contactModal.customTextForContact ContactImage:contactModal.img deleg:self];
         
         return cell;
         
-    }else if ( indexPath.section == 2 ){
+    }else if ( indexPath.section == 1 ){
         
         static NSString *cellId = @"PhoneNumberCell";
         PhoneNumberCell *cell = (PhoneNumberCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
@@ -256,7 +258,7 @@
 
         return cell;
         
-    }else if ( indexPath.section == 3 ){
+    }else if ( indexPath.section == 2 ){
         
         static NSString *cellId = @"EmailCell";
         EmailCell *cell = (EmailCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
@@ -299,7 +301,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 3;
 }
 
 -(void) save{
@@ -344,7 +346,7 @@
  * Create a backup of all variables which are changeable on this screen, so when user wants to
  * go back without saving then replace all with them
  */
--(void)setTampVariables {
+-(void)setTempVariables {
     tempCustomTextForContact = [[NSString alloc] initWithString:contactModal.customTextForContact];
     tempAllPhoneNumbers = [[NSMutableArray alloc] init];
     for( int j=0; j < contactModal.allPhoneNumbers.count; j++){
@@ -449,13 +451,16 @@
     
     UIColor *untechableGreen = [UIColor colorWithRed:(66/255.0) green:(247/255.0) blue:(206/255.0) alpha:1];
     
-    headerView.backgroundColor = untechableGreen;
+    headerView.backgroundColor = DEF_GRAY;
     
     return headerView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == 0) {
+          return 160.f;
+    }
     if (indexPath.section == 1) {
             return 120.f;
     } else {

@@ -14,6 +14,7 @@ ContactsCustomizedModal *contactModal_;
 
 @synthesize customText;
 @synthesize delegate;
+@synthesize contact_Name, contact_Image;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
@@ -21,15 +22,38 @@ ContactsCustomizedModal *contactModal_;
     // Configure the view for the selected state
 }
 
--(void)setCellValuesWithDeleg :(NSString *)name message: (NSString *)message deleg:(id)deleg {
-    self.customText.text = message;
+-(void)setCellValuesWithDeleg :(NSString *)name message: (NSString *)message customText:(NSString *) spendingTimeText ContactImage:(UIImage *) contactImage deleg:(id)deleg {
+    
+    self.customText.text = spendingTimeText;
+    [self.customText sizeToFit];
     self.customText.delegate = self;
     
     [_lblMessage setText:[NSString stringWithFormat:NSLocalizedString(@"How would you like to notify %@?", nil) , name]];
 
     [self updateChrCounter:message];
+    
+    self.contact_Name.text = message;
+    if ( contactImage != nil ){
+        self.contact_Image.image = contactImage;
+    }
+
+    contact_Name.numberOfLines = 0;
+    [contact_Name sizeToFit];
+
+    self.contact_Image.layer.cornerRadius = self.contact_Image.frame.size.width / 2;
+    self.contact_Image.clipsToBounds = YES;
+    
+    
+    
     if( deleg != nil )
     self.delegate = deleg;
+}
+
+
+-(void)setCellValues :(NSString *)contactName ContactImage:(UIImage *) contactImage;
+{
+    
+    
 }
 
 
