@@ -282,7 +282,7 @@
                         <outlet property="delegate" destination="-1" id="54"/>
                     </connections>
                 </textField>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="146C8531-24A7-4574-80AC-E0D73EBC8635" id="cXJ-PV-xl2" userLabel="descTextAreaImg">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="3F8F56AD-364B-4E61-9CDC-EB5F0FE9C9BF" id="cXJ-PV-xl2" userLabel="descTextAreaImg">
                     <rect key="frame" x="10" y="96" width="298" height="69"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -313,7 +313,7 @@
         </view>
     </objects>
     <resources>
-        <image name="146C8531-24A7-4574-80AC-E0D73EBC8635" width="251" height="34">
+        <image name="3F8F56AD-364B-4E61-9CDC-EB5F0FE9C9BF" width="251" height="34">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

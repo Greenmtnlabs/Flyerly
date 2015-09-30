@@ -13,7 +13,7 @@
     NSString *fbShareType; // 4 possible values to assign: fb-photo-wall | fb-photo-messenger | fb-video-wall | fb-video-messenger
 }
 
-@synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,flickrButton,printFlyerButton,facebookButton,twitterButton,instagramButton,messengerButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,lblFirstShareOnYoutube,tempTxtArea,saveToGallaryReqBeforeSharing;
+@synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,flickrButton,printFlyerButton,facebookButton,twitterButton,instagramButton,messengerButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,tempTxtArea,saveToGallaryReqBeforeSharing;
 
 @synthesize flyerShareType,star1,star2,star3,star4,star5;
 
@@ -91,6 +91,10 @@ UIAlertView *saveCurrentFlyerAlert;
     [self.view addSubview:descriptionView];
     
     descTextAreaImg.frame = descriptionView.frame;
+    
+    [self enableFacebook:!(saveToGallaryReqBeforeSharing)];
+    [self enableYoutube:!(saveToGallaryReqBeforeSharing)];
+    [self saveButtonSelected:!(saveToGallaryReqBeforeSharing)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -130,6 +134,32 @@ UIAlertView *saveCurrentFlyerAlert;
     
 }
 
+-(void) setAllButtonSelected:(BOOL)selected{
+    
+    [messengerButton setSelected:selected];
+    [facebookButton setSelected:selected];
+    [youTubeButton setSelected:selected];
+    [emailButton setSelected:selected];
+    [smsButton setSelected:selected];
+    [twitterButton setSelected:selected];
+    [clipboardButton setSelected:selected];
+
+}
+/*
+ * When video is edited
+ * all buttons except for facebookButton and youTubeButton
+ * set as unselected
+ */
+-(void) setAllButtonStatus{
+    
+    [self.flyer setMessengerStatus:0];
+    [self.flyer setEmailStatus:0];
+    [self.flyer setSmsStatus:0];
+    [self.flyer setTwitterStatus:0];
+    [self.flyer setClipboardStatus:0];
+    
+    
+}
 
 /*
  * Share on Instagram
@@ -281,7 +311,7 @@ UIAlertView *saveCurrentFlyerAlert;
         [clipboardButton setSelected:NO];
     }
     
-    // Set Thumbler Sharing Status From Social File
+    // Set Messenger Sharing Status From Social File
     status = [flyer getMessengerStatus];
     if([status isEqualToString:@"1"]){
         [messengerButton setSelected:YES];
@@ -322,7 +352,6 @@ UIAlertView *saveCurrentFlyerAlert;
             self.flyer.saveInGallaryRequired = 0;
         }
     }
-    [self enableFacebook:YES];
 }
 -(IBAction)hideMe {
     [self saveInGallaryIfNeeded];
@@ -336,17 +365,26 @@ UIAlertView *saveCurrentFlyerAlert;
     [self.cfController enableHome:YES];
 }
 
--(void)enableAllShareOptions {
-    [twitterButton setEnabled:YES];
-    [emailButton setEnabled:YES];
-    [smsButton setEnabled:YES];
-    [instagramButton setEnabled:YES];
-    [clipboardButton setEnabled:YES];
-    [lblFirstShareOnYoutube setHidden:YES];
+-(void)enableAllShareOptions:(BOOL) enable {
+    [twitterButton setEnabled:enable];
+    [emailButton setEnabled:enable];
+    [smsButton setEnabled:enable];
+    [instagramButton setEnabled:enable];
+    [clipboardButton setEnabled:enable];
+    [messengerButton setEnabled:enable];
 }
 -(void)enableFacebook:(BOOL)enable{
     [facebookButton setEnabled:enable];
 }
+
+-(void)enableYoutube:(BOOL)enable{
+    [youTubeButton setEnabled:enable];
+}
+
+-(void)saveButtonSelected:(BOOL)enable{
+    [flickrButton setSelected:enable];
+}
+
 
 #pragma mark  Text Field Delegate
 
@@ -546,14 +584,20 @@ UIAlertView *saveCurrentFlyerAlert;
     //video merging is in process please wait
     else if( self.flyer.saveInGallaryRequired == 1 ) {
         [flickrButton setSelected:YES];
+       
         [self updateDescription];
         saveCurrentFlyerAlert = [[UIAlertView alloc] initWithTitle:@"Success"
                                                      message:@"The current Flyer has been saved successfully"
                                                      delegate:self
                                                      cancelButtonTitle:@"OK"
                                                      otherButtonTitles:nil, nil];
-        
+       
         [saveCurrentFlyerAlert show];
+        [self enableFacebook:YES];
+        [self enableYoutube:YES];
+        
+        [self setAllButtonSelected:NO];
+        
     }
 }
 
@@ -622,13 +666,23 @@ UIAlertView *saveCurrentFlyerAlert;
     
     fbShareType = @"fb-photo-messenger";
     
-    FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
-    photo.image = selectedFlyerImage;
-    photo.userGenerated = YES;
-    FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
-    content.photos = @[photo];
+    if([self.flyer isVideoFlyer]){
+        FBSDKShareLinkContent *contentLink = [[FBSDKShareLinkContent alloc] init];
+        contentLink.contentURL = [NSURL URLWithString: [self.flyer getYoutubeLink]];
+        
+        [FBSDKMessageDialog showWithContent:contentLink delegate:self];
+        
+ 
+    } else {
     
-    [FBSDKMessageDialog showWithContent:content delegate:self];
+        FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+        photo.image = selectedFlyerImage;
+        photo.userGenerated = YES;
+        FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+        content.photos = @[photo];
+        [FBSDKMessageDialog showWithContent:content delegate:self];
+  
+    }
  }
 /*
  * Called when facebook button is pressed
@@ -802,7 +856,7 @@ UIAlertView *saveCurrentFlyerAlert;
         
         messengerButton.enabled = YES;
         [self.flyer setMessengerStatus:1];
-        [Flurry logEvent:@"Shared Tumblr"];
+        [Flurry logEvent:@"Shared on Messenger"];
        
     } else if ( [sharer isKindOfClass:[SHKFlickr class]] == YES ) {
         
@@ -834,7 +888,11 @@ UIAlertView *saveCurrentFlyerAlert;
         // Mark Social Status In .soc File of Flyer
         [self.flyer setYouTubeStatus:1];
         [Flurry logEvent:@"Shared Youtube"];
-        [self enableAllShareOptions];
+        [self enableAllShareOptions:YES];
+        
+        if(saveToGallaryReqBeforeSharing){
+            [self setAllButtonStatus];
+        }
         
     }
     
