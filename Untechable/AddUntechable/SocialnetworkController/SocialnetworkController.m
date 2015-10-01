@@ -23,10 +23,15 @@
 
 @interface SocialnetworkController(){
     UserPurchases *userPurchases;
+    NSString *defaultStatus;
+    
 }
 @end
 
-@implementation SocialnetworkController
+@implementation SocialnetworkController{
+
+    BOOL isPlaceholder;
+}
 
 @synthesize untechable,comingFromContactsListScreen,char_Limit,inputSetSocialStatus,btnFacebook,btnTwitter,btnLinkedin,keyboardControls;
 
@@ -42,6 +47,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
  
+    defaultStatus = @"Enter default status";
     userPurchases = [UserPurchases getInstance];
     
     [self setNavigationDefaults];
@@ -117,6 +123,41 @@
 }
 
 
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    if ([textView.text isEqualToString:@""]) {
+        textView.text = defaultStatus;
+        textView.textColor = DEF_GREEN; //optional
+    }
+    [textView resignFirstResponder];
+}
+
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+            if (textView.text.length == 1 || textView.text.length == 0){
+                textView.textColor = [UIColor lightGrayColor];
+                textView.text = defaultStatus;
+                [textView setSelectedRange:NSMakeRange(0, 0)];
+                isPlaceholder = YES;
+                
+            } else if (isPlaceholder && ![textView.text isEqualToString:defaultStatus]) {
+                textView.text = [textView.text substringToIndex:1];
+                textView.textColor = [UIColor blackColor];
+                isPlaceholder = NO;
+            } else if (isPlaceholder && textView.text.length > 1 ){
+                
+                if ([textView.text isEqualToString:defaultStatus]) {
+                    textView.text = @"";
+                    textView.textColor = DEF_GREEN; //optional
+                    isPlaceholder = NO;
+                }
+                return YES;
+            }
+            
+            [self.inputSetSocialStatus setText:textView.text];
+    return YES;
+}
+
 #pragma mark -  UI functions
 -(void)updateUI{
 
@@ -138,6 +179,7 @@
     self.btnLinkedin.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
     
 }
+
 
 #pragma mark -  Navigation functions
 
