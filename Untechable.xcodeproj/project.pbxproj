@@ -189,8 +189,6 @@
 		C33A87B41A7BCDB4000B9DAE /* EmailChangingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33A87B21A7BCDB4000B9DAE /* EmailChangingController.xib */; };
 		C33C1EDB1A72274F0064DBE8 /* EmailTableViewCell-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33C1EDA1A72274F0064DBE8 /* EmailTableViewCell-iPhone6.xib */; };
 		C33C1EDD1A72277C0064DBE8 /* EmailTableViewCell-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33C1EDC1A72277C0064DBE8 /* EmailTableViewCell-iPhone6-Plus.xib */; };
-		C33C1EE71A724A0E0064DBE8 /* EmailCell-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33C1EE61A724A0E0064DBE8 /* EmailCell-iPhone6.xib */; };
-		C33C1EE91A724A1E0064DBE8 /* EmailCell-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33C1EE81A724A1E0064DBE8 /* EmailCell-iPhone6-Plus.xib */; };
 		C33C1EEF1A7278730064DBE8 /* ServerAccountDetailsViewCell-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33C1EEE1A7278730064DBE8 /* ServerAccountDetailsViewCell-iPhone6.xib */; };
 		C33C1EF11A7278870064DBE8 /* ServerAccountDetailsViewCell-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33C1EF01A7278870064DBE8 /* ServerAccountDetailsViewCell-iPhone6-Plus.xib */; };
 		C33C1EF31A727A690064DBE8 /* SSLCell-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33C1EF21A727A690064DBE8 /* SSLCell-iPhone6.xib */; };
@@ -472,8 +470,6 @@
 		C33A87B21A7BCDB4000B9DAE /* EmailChangingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmailChangingController.xib; sourceTree = "<group>"; };
 		C33C1EDA1A72274F0064DBE8 /* EmailTableViewCell-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "EmailTableViewCell-iPhone6.xib"; sourceTree = "<group>"; };
 		C33C1EDC1A72277C0064DBE8 /* EmailTableViewCell-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "EmailTableViewCell-iPhone6-Plus.xib"; sourceTree = "<group>"; };
-		C33C1EE61A724A0E0064DBE8 /* EmailCell-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "EmailCell-iPhone6.xib"; sourceTree = "<group>"; };
-		C33C1EE81A724A1E0064DBE8 /* EmailCell-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "EmailCell-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		C33C1EEE1A7278730064DBE8 /* ServerAccountDetailsViewCell-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ServerAccountDetailsViewCell-iPhone6.xib"; sourceTree = "<group>"; };
 		C33C1EF01A7278870064DBE8 /* ServerAccountDetailsViewCell-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ServerAccountDetailsViewCell-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		C33C1EF21A727A690064DBE8 /* SSLCell-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SSLCell-iPhone6.xib"; sourceTree = "<group>"; };
@@ -609,8 +605,6 @@
 				243C59FB1A4DA17C0020350C /* EmailCell.h */,
 				243C59FC1A4DA17C0020350C /* EmailCell.m */,
 				243C59FD1A4DA17C0020350C /* EmailCell.xib */,
-				C33C1EE61A724A0E0064DBE8 /* EmailCell-iPhone6.xib */,
-				C33C1EE81A724A1E0064DBE8 /* EmailCell-iPhone6-Plus.xib */,
 				24A4B7A41A5126410029C8DF /* CustomTextTableViewCell.h */,
 				24A4B7A51A5126410029C8DF /* CustomTextTableViewCell.m */,
 				24A4B7A61A5126410029C8DF /* CustomTextTableViewCell.xib */,
@@ -1229,7 +1223,6 @@
 				366EAF921A14C3530011D6C6 /* icon-50.png in Resources */,
 				C36D2E621A791AEA000537C5 /* SettingsCellView-iPhone6-Plus.xib in Resources */,
 				248E06BD1A4AD9180099846A /* ContactListCell-iPhone6-Plus.xib in Resources */,
-				C33C1EE71A724A0E0064DBE8 /* EmailCell-iPhone6.xib in Resources */,
 				C346D17C1A7FD13B00856A58 /* emailic@3x.png in Resources */,
 				366EAFAB1A14E5370011D6C6 /* playvideo@2x.png in Resources */,
 				200ACE321A3874B200DC7047 /* outlookIcon@3x.png in Resources */,
@@ -1242,7 +1235,6 @@
 				C36D2E591A7919C2000537C5 /* SettingsCellView.xib in Resources */,
 				36B276761A0124E800ED58AD /* play@2x.png in Resources */,
 				2402BB841A1DBF6A00255A73 /* UntechablesList.xib in Resources */,
-				C33C1EE91A724A1E0064DBE8 /* EmailCell-iPhone6-Plus.xib in Resources */,
 				200ACE281A3874B200DC7047 /* exchangeIcon@2x.png in Resources */,
 				247C72D31A5C0968005C9693 /* user_img.png in Resources */,
 				C37F755D1A7F50D100B5AC71 /* fb_Like@2x.png in Resources */,

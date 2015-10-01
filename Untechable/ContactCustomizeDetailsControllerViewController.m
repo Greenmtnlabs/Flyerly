@@ -209,19 +209,8 @@
         
         if ( cell == nil ) {
             
-            if( IS_IPHONE_5 ){
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmailCell" owner:self options:nil];
-                cell = (EmailCell *)[nib objectAtIndex:0];
-            } else if ( IS_IPHONE_6 ){
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmailCell-iPhone6" owner:self options:nil];
-                cell = (EmailCell *)[nib objectAtIndex:0];
-            } else if ( IS_IPHONE_6_PLUS ) {
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmailCell-iPhone6-Plus" owner:self options:nil];
-                cell = (EmailCell *)[nib objectAtIndex:0];
-            } else if (IS_IPHONE_4){
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmailCell" owner:self options:nil];
-                cell = (EmailCell *)[nib objectAtIndex:0];
-            }
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmailCell" owner:self options:nil];
+            cell = (EmailCell *)[nib objectAtIndex:0];
         }
         NSMutableArray *emailWithStatus = contactModal.allEmails[indexPath.row];
         BOOL emailButtonStatus = NO;
