@@ -178,21 +178,8 @@
         PhoneNumberCell *cell = (PhoneNumberCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
         
         if ( cell == nil ) {
-            
-            if( IS_IPHONE_5 ){
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PhoneNumberCell" owner:self options:nil];
-                cell = (PhoneNumberCell *)[nib objectAtIndex:0];
-            } else if ( IS_IPHONE_6 ){
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PhoneNumberCell-iPhone6" owner:self options:nil];
-                cell = (PhoneNumberCell *)[nib objectAtIndex:0];
-            } else if ( IS_IPHONE_6_PLUS ) {
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PhoneNumberCell-iPhone6-Plus" owner:self options:nil];
-                cell = (PhoneNumberCell *)[nib objectAtIndex:0];
-            } else if (IS_IPHONE_4) {
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PhoneNumberCell" owner:self options:nil];
-                cell = (PhoneNumberCell *)[nib objectAtIndex:0];
-
-            }
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PhoneNumberCell" owner:self options:nil];
+            cell = (PhoneNumberCell *)[nib objectAtIndex:0];
         }
         NSMutableArray *numberWithStatus = contactModal.allPhoneNumbers[indexPath.row];
         BOOL smsBtnStatus = NO;
