@@ -212,18 +212,18 @@
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmailCell" owner:self options:nil];
             cell = (EmailCell *)[nib objectAtIndex:0];
         }
-//        NSMutableArray *emailWithStatus = contactModal.allEmails[indexPath.row];
-//        BOOL emailButtonStatus = NO;
-//        if ( [emailWithStatus[1] isEqualToString:@"1"] ){
-//            emailButtonStatus = YES;
-//        }
-//        
-//        [cell.emailButton addTarget:self
-//                           action:@selector(emailButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-//        
-//        
-//        [cell setCellValues: [emailWithStatus objectAtIndex:0]];
-//        [cell.emailButton setSelected:emailButtonStatus];
+        NSMutableArray *emailWithStatus = contactModal.allEmails[indexPath.row];
+        BOOL emailButtonStatus = NO;
+        if ( [emailWithStatus[1] isEqualToString:@"1"] ){
+            emailButtonStatus = YES;
+        }
+        
+        [cell.emailButton addTarget:self
+                           action:@selector(emailButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        [cell setCellValues: [emailWithStatus objectAtIndex:0]];
+        [cell.emailButton setSelected:emailButtonStatus];
 
         
         return cell;
