@@ -49,9 +49,7 @@ id lastShareBtnSender;
 	tView.dataSource = self;
 	tView.delegate = self;
     [tView setBackgroundView:nil];
-//    [tView setBackgroundColor:[UIColor clearColor]];
     [tView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-//    [self.view setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:tView];
 
 
