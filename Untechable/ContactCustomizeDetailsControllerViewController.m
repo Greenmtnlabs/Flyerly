@@ -147,7 +147,7 @@
     
     UITableViewCell *cell;
     
-    if (NO && indexPath.section == 0 ){
+    if (indexPath.section == 0 ){
         static NSString *cellId = @"FirstTableViewCell";
         FirstTableViewCell *cell = (FirstTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
         
@@ -175,7 +175,7 @@
         [cell.contact_Name sizeToFit];
         
         return cell;
-    }else if ( indexPath.section == 0 ){
+    }else if ( indexPath.section == 1 ){
         
         static NSString *cellId = @"CustomText";
         CustomTextTableViewCell *cell = (CustomTextTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
@@ -214,7 +214,7 @@
         
         return cell;
         
-    }else if ( indexPath.section == 1 ){
+    }else if ( indexPath.section == 2 ){
         
         static NSString *cellId = @"PhoneNumberCell";
         PhoneNumberCell *cell = (PhoneNumberCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
@@ -258,7 +258,7 @@
 
         return cell;
         
-    }else if ( indexPath.section == 2 ){
+    }else if ( indexPath.section == 3 ){
         
         static NSString *cellId = @"EmailCell";
         EmailCell *cell = (EmailCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
@@ -279,7 +279,7 @@
                 cell = (EmailCell *)[nib objectAtIndex:0];
             }
         }
-        
+        NSLog(@"%ld", (long)indexPath.row);
         NSMutableArray *emailWithStatus = contactModal.allEmails[indexPath.row];
         BOOL emailButtonStatus = NO;
         if ( [emailWithStatus[1] isEqualToString:@"1"] ){
