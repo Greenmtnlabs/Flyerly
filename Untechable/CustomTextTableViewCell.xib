@@ -63,7 +63,7 @@
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="124 " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2pR-Bd-WU2">
-                        <rect key="frame" x="284" y="118" width="36" height="21"/>
+                        <rect key="frame" x="284" y="107" width="36" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="POn-iA-VrY"/>
                             <constraint firstAttribute="width" constant="36" id="jAb-BB-Xxa"/>
@@ -79,8 +79,7 @@
                     <constraint firstItem="Jry-XP-mb2" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="8fq-YY-fkm"/>
                     <constraint firstItem="Jry-XP-mb2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="HIy-xI-9US"/>
                     <constraint firstItem="IaY-Kp-jvg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="KqA-UO-IiY"/>
-                    <constraint firstItem="zBG-1G-C9G" firstAttribute="top" secondItem="2pR-Bd-WU2" secondAttribute="bottom" constant="13" id="MVb-JF-hzJ"/>
-                    <constraint firstItem="2pR-Bd-WU2" firstAttribute="top" secondItem="bNI-6I-rug" secondAttribute="bottom" constant="8" id="Pum-S6-NXT"/>
+                    <constraint firstItem="zBG-1G-C9G" firstAttribute="top" secondItem="2pR-Bd-WU2" secondAttribute="bottom" constant="24" id="VX2-sL-qCY"/>
                     <constraint firstAttribute="trailing" secondItem="wrr-Al-ZOn" secondAttribute="trailing" constant="8" id="Xbt-k0-PFB"/>
                     <constraint firstItem="bNI-6I-rug" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="68" id="YMN-9Z-sHF"/>
                     <constraint firstAttribute="trailing" secondItem="bNI-6I-rug" secondAttribute="trailing" constant="8" id="bIq-2u-23Z"/>
@@ -90,6 +89,7 @@
                     <constraint firstItem="wrr-Al-ZOn" firstAttribute="leading" secondItem="IaY-Kp-jvg" secondAttribute="trailing" constant="8" id="m6s-kC-OUm"/>
                     <constraint firstAttribute="bottom" secondItem="zBG-1G-C9G" secondAttribute="bottom" constant="15" id="mb0-Wa-jsH"/>
                     <constraint firstItem="bNI-6I-rug" firstAttribute="top" secondItem="wrr-Al-ZOn" secondAttribute="bottom" constant="8" id="s2y-Hh-Cfi"/>
+                    <constraint firstItem="2pR-Bd-WU2" firstAttribute="top" secondItem="bNI-6I-rug" secondAttribute="bottom" constant="-3" id="tTx-yj-j91"/>
                     <constraint firstAttribute="trailing" secondItem="2pR-Bd-WU2" secondAttribute="trailing" id="xxD-Ez-15z"/>
                 </constraints>
             </tableViewCellContentView>
