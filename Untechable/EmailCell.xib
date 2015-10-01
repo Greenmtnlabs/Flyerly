@@ -15,7 +15,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agN-fU-WRr">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agN-fU-WRr">
                         <rect key="frame" x="30" y="18" width="166" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="166" id="NPZ-Kr-3qz"/>
@@ -58,6 +58,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="contactEmail" destination="Au3-jz-FGU" id="fei-jj-9qR"/>
                 <outlet property="emailButton" destination="hdk-sq-2Wb" id="Qws-Wz-ohZ"/>
             </connections>
         </tableViewCell>
