@@ -47,7 +47,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
  
-    defaultStatus = @"Enter default status";
+    defaultStatus = NSLocalizedString(@"Enter default status", nil);
     userPurchases = [UserPurchases getInstance];
     
     [self setNavigationDefaults];
@@ -98,20 +98,26 @@
 
 #pragma mark - Text View Delegate
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    
-    if ( [textView.text isEqualToString:@"e.g. Spending time with family"] ){
-        textView.text = @"";
-    }
     if ( textView == inputSetSocialStatus ){
-        if ([textView.text isEqualToString:@"e.g. Spending time with family"]) {
+        if ([textView.text isEqualToString:defaultStatus]) {
             textView.text = @"";
-            textView.font = [UIFont fontWithName:TITLE_FONT size:12.0];
-            textView.textColor = [UIColor blackColor]; //optional
         }
+        textView.textColor = DEF_GREEN;
         [textView becomeFirstResponder];
     }
     [self.keyboardControls setActiveField:textView];
 }
+
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    if ([textView.text isEqualToString:@""]) {
+        textView.text = defaultStatus;
+        textView.textColor = [UIColor lightGrayColor]; //optional
+    }
+    [textView resignFirstResponder];
+}
+
 
 #pragma mark - Keyboard Controls(< PREV , NEXT > )  Delegate
 
@@ -120,42 +126,6 @@
 
 - (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboardControls {
     [self.view endEditing:YES];
-}
-
-
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
-    if ([textView.text isEqualToString:@""]) {
-        textView.text = defaultStatus;
-        textView.textColor = DEF_GREEN; //optional
-    }
-    [textView resignFirstResponder];
-}
-
-
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-            if (textView.text.length == 1 || textView.text.length == 0){
-                textView.textColor = [UIColor lightGrayColor];
-                textView.text = defaultStatus;
-                [textView setSelectedRange:NSMakeRange(0, 0)];
-                isPlaceholder = YES;
-                
-            } else if (isPlaceholder && ![textView.text isEqualToString:defaultStatus]) {
-                textView.text = [textView.text substringToIndex:1];
-                textView.textColor = [UIColor blackColor];
-                isPlaceholder = NO;
-            } else if (isPlaceholder && textView.text.length > 1 ){
-                
-                if ([textView.text isEqualToString:defaultStatus]) {
-                    textView.text = @"";
-                    textView.textColor = DEF_GREEN; //optional
-                    isPlaceholder = NO;
-                }
-                return YES;
-            }
-            
-            [self.inputSetSocialStatus setText:textView.text];
-    return YES;
 }
 
 #pragma mark -  UI functions
@@ -256,12 +226,20 @@
         if( [APP_IN_MODE isEqualToString:TESTING] ){
             [self next:@"GO_TO_THANKYOU"];
         } else {
-            
-            [self changeNavigation:@"ON_FINISH"];
-            
-            [self storeScreenVarsInDic];
-            
-            [self checkPayment];
+            if( [inputSetSocialStatus.text isEqualToString:defaultStatus] || [inputSetSocialStatus.text isEqualToString:@""] ){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(ERROR, nil)
+                                                                message:defaultStatus
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Close"
+                                                      otherButtonTitles: nil];
+                [alert show];
+            } else{
+                [self changeNavigation:@"ON_FINISH"];
+                
+                [self storeScreenVarsInDic];
+                
+                [self checkPayment];
+            }
         }
              
     }

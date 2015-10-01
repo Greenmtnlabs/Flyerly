@@ -131,3 +131,6 @@
 "Logged In" = "Conectado";
 "Put in your name below. This will be used to identify yourself to friends." = "Ponga en su nombre a continuación. Esto se utilizará para identificarse ante los amigos.";
 "Enter Name" = "Ingrese su nombre";
+
+// Socialnetwork
+"Enter default status" = "Introduzca estado por defecto";
