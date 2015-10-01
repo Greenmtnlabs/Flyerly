@@ -29,7 +29,6 @@
 @implementation ContactsListControllerViewController
 
 @synthesize mobileContactsArray,mobileContactBackupArray,searchTextField,untechable, selectedAnyEmail;
-@synthesize lblSearchMessage;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -47,16 +46,13 @@
     [searchTextField resignFirstResponder];
 
     //Hock tap gesture, when user tap on selectContactLable then open keyboard for search contact field
-    _selectContactStr.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapGesture =
     [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSearchContactKeyBoard)];
-    [_selectContactStr addGestureRecognizer:tapGesture];
 
 }
 
 -(void)applyLocalization{
-    [lblSearchMessage setText:NSLocalizedString(@"Select contacts to inform of your unavailability", nil)];
-    [searchTextField setPlaceholder:NSLocalizedString(@"Select contacts", nil)];
+    [searchTextField setPlaceholder:NSLocalizedString(@"Search contacts to notify of untech time", nil)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -452,6 +448,8 @@
                 contactPicture = [UIImage imageWithData:(NSData *)CFBridgingRelease(ABPersonCopyImageData(ref))];
                 currentltRenderingContactModal.img = contactPicture;
             }
+        } else {
+            currentltRenderingContactModal.img = [UIImage imageNamed:@"user_img.png"];;
         }
     
         //For all emails

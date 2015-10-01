@@ -50,8 +50,7 @@
 "e.g. Spending time with family" = "e.g. Spending time with family";
 
 // SetupGuide Screen 3
-"Select contacts to inform of your unavailability" = "Select contacts to inform of your unavailability";
-"Select contacts" = "Select contacts";
+"Search contacts to notify of untech time" = "Search contacts to notify of untech time";
 
 "How would you like to notify %@?" = "How would you like to notify %@?";
 "Message to %@:" = "Message to %@:";
