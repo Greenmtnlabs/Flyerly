@@ -49,7 +49,7 @@
 "e.g. Spending time with family" = "por ejemplo Pasar tiempo con la familia";
 
 // SetupGuide Screen 3
-"Select contacts" = "Seleccione los contactos";
+"Search contacts to notify of untech time" = "Buscar contactos para notificar de tiempo untech";
 
 "How would you like to notify %@?" = "¿Cómo le gustaría a notificar a %@?";
 "Message to %@:" = "Mensaje a %@:";

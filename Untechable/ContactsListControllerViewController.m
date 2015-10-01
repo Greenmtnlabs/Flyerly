@@ -52,7 +52,7 @@
 }
 
 -(void)applyLocalization{
-    [searchTextField setPlaceholder:NSLocalizedString(@"Select contacts", nil)];
+    [searchTextField setPlaceholder:NSLocalizedString(@"Search contacts to notify of untech time", nil)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
