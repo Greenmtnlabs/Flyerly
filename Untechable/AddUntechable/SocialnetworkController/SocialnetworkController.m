@@ -55,7 +55,7 @@
     [self updateUI];
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"MMMM dd yyyy"];
+    [dateFormat setDateFormat:@"dd MMMM yyyy, hh:mm a"];
   
     //showing start date on fields
     NSDate *startDate  =   [untechable.commonFunctions convertTimestampToNSDate:untechable.startDate];
