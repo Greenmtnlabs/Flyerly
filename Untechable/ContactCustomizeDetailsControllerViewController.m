@@ -415,13 +415,23 @@
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 0)];
+    UIView *headerView = [[UIView alloc] init];
+    UIColor *untecchableGrey = [UIColor colorWithWhite: 0.70 alpha:1];
+
     
-    UIColor *untechableGreen = [UIColor colorWithRed:(66/255.0) green:(247/255.0) blue:(206/255.0) alpha:1];
+    CGRect frame = CGRectMake(0, 0, 0, 1);
+    UIView *customView = [[UIView alloc] initWithFrame:frame];
     
-    headerView.backgroundColor = untechableGreen;
+    [customView addSubview:headerView];
+    customView.backgroundColor = [UIColor clearColor];
     
-    return headerView;
+    frame.origin.x = 10; //move the frame over..this adds the padding!
+    frame.size.width = self.view.bounds.size.width - frame.origin.x*2;
+    
+    headerView.frame = frame;
+    headerView.backgroundColor = untecchableGrey;
+    
+    return customView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -430,7 +440,7 @@
           return 154.f;
     }
     if (indexPath.section == 1) {
-            return 120.f;
+            return 80.f;
     } else {
         return 80.f;
     }
