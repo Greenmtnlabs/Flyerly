@@ -153,20 +153,6 @@
             
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CustomTextTableViewCell" owner:self options:nil];
             cell = (CustomTextTableViewCell *)[nib objectAtIndex:0];
-            
-//            if( IS_IPHONE_5 ){
-//                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CustomTextTableViewCell" owner:self options:nil];
-//                cell = (CustomTextTableViewCell *)[nib objectAtIndex:0];
-//            } else if ( IS_IPHONE_6 ){
-//                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CustomTextTableViewCell-iPhone6" owner:self options:nil];
-//                cell = (CustomTextTableViewCell *)[nib objectAtIndex:0];
-//            } else if ( IS_IPHONE_6_PLUS ) {
-//                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CustomTextTableViewCell-iPhone6-Plus" owner:self options:nil];
-//                cell = (CustomTextTableViewCell *)[nib objectAtIndex:0];
-//            } else if (IS_IPHONE_4){
-//                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CustomTextTableViewCell" owner:self options:nil];
-//                cell = (CustomTextTableViewCell *)[nib objectAtIndex:0];
-//            }
         }
         
         [cell.customText setDelegate:self];
