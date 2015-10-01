@@ -127,7 +127,6 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
     int numberOfRowsInSection;
     if ( section == 0 ){
         numberOfRowsInSection = 1;
@@ -142,7 +141,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell;
+    
     
     if ( indexPath.section == 0 ){
         
@@ -172,7 +171,8 @@
         
         return cell;
         
-    }else if ( indexPath.section == 1 ){
+    }
+    else if ( indexPath.section == 1 ){
         
         static NSString *cellId = @"PhoneNumberCell";
         PhoneNumberCell *cell = (PhoneNumberCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
@@ -202,7 +202,7 @@
 
         return cell;
         
-    }else if ( indexPath.section == 2 ){
+    }else if (indexPath.section == 2 ){
         
         static NSString *cellId = @"EmailCell";
         EmailCell *cell = (EmailCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
@@ -212,23 +212,26 @@
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmailCell" owner:self options:nil];
             cell = (EmailCell *)[nib objectAtIndex:0];
         }
-        NSMutableArray *emailWithStatus = contactModal.allEmails[indexPath.row];
-        BOOL emailButtonStatus = NO;
-        if ( [emailWithStatus[1] isEqualToString:@"1"] ){
-            emailButtonStatus = YES;
-        }
-        
-        [cell.emailButton addTarget:self
-                           action:@selector(emailButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-        
-        
-        [cell setCellValues: [emailWithStatus objectAtIndex:0]];
-        [cell.emailButton setSelected:emailButtonStatus];
+//        NSMutableArray *emailWithStatus = contactModal.allEmails[indexPath.row];
+//        BOOL emailButtonStatus = NO;
+//        if ( [emailWithStatus[1] isEqualToString:@"1"] ){
+//            emailButtonStatus = YES;
+//        }
+//        
+//        [cell.emailButton addTarget:self
+//                           action:@selector(emailButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+//        
+//        
+//        [cell setCellValues: [emailWithStatus objectAtIndex:0]];
+//        [cell.emailButton setSelected:emailButtonStatus];
 
         
         return cell;
     }
-    return cell;
+    else{
+        UITableViewCell *cell;
+        return cell;
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
