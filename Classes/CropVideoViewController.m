@@ -151,7 +151,9 @@
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     [self.navigationController popViewControllerAnimated:YES];
     
-    _onVideoCancel();
+    if( _onVideoCancel != NULL ){
+        _onVideoCancel();
+    }
 }
 
 /**
