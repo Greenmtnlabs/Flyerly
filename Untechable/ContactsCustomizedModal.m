@@ -11,6 +11,7 @@
 
 @implementation ContactsCustomizedModal
 
+@synthesize contactFirstName;
 @synthesize contactName,customTextForContact, allEmails, allPhoneNumbers;
 @synthesize delegate;
 @synthesize img,checkImageName,status,imageUrl;

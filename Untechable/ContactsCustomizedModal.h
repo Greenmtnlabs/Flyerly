@@ -19,6 +19,9 @@
 
 @interface ContactsCustomizedModal : NSObject
 
+@property (nonatomic,strong)NSString *contactFirstName;
+
+
 // Model variables to be saved in database
 @property (nonatomic,strong)NSString *contactName;
 @property (nonatomic,strong)NSString *customTextForContact;

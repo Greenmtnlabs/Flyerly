@@ -7,7 +7,6 @@
 //
 
 #import "ContactCustomizeDetailsControllerViewController.h"
-#import "FirstTableViewCell.h"
 #import "PhoneNumberCell.h"
 #import "EmailCell.h"
 #import "CustomTextTableViewCell.h"
@@ -35,7 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setTampVariables];
+    [self setTempVariables];
     
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
@@ -50,7 +49,7 @@
 }
 
 -(void)applyLocalization{
-    [_lblMessage setText:NSLocalizedString(@"Calls and Texts required premium subscription.", nil)];
+    [_lblMessage setText:NSLocalizedString(@"Calls and text require premium subscription.", nil)];
 
 }
 
@@ -128,16 +127,13 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
     int numberOfRowsInSection;
     if ( section == 0 ){
         numberOfRowsInSection = 1;
     }else if ( section == 1 ){
-        numberOfRowsInSection = 1;
-    }else if ( section == 2 ){
         numberOfRowsInSection = (int)contactModal.allPhoneNumbers.count;
         
-    }else if ( section == 3 ){
+    }else if ( section == 2 ){
         numberOfRowsInSection = (int)contactModal.allEmails.count;
     }
     return  numberOfRowsInSection;
@@ -145,56 +141,17 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell;
+    
     
     if ( indexPath.section == 0 ){
-        static NSString *cellId = @"FirstTableViewCell";
-        FirstTableViewCell *cell = (FirstTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
-        
-        if ( cell == nil ) {
-            
-            if( IS_IPHONE_5 ){
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"FirstTableViewCell" owner:self options:nil];
-                cell = (FirstTableViewCell *)[nib objectAtIndex:0];
-            } else if ( IS_IPHONE_6 ){
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"FirstTableViewCell-iPhone6" owner:self options:nil];
-                cell = (FirstTableViewCell *)[nib objectAtIndex:0];
-            } else if ( IS_IPHONE_6_PLUS ) {
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"FirstTableViewCell-iPhone6-Plus" owner:self options:nil];
-                cell = (FirstTableViewCell *)[nib objectAtIndex:0];
-            } else if (IS_IPHONE_4){
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"FirstTableViewCell" owner:self options:nil];
-                cell = (FirstTableViewCell *)[nib objectAtIndex:0];
-            }
-        }
-        
-        NSString *valueToBeShown =[ NSString stringWithFormat:NSLocalizedString(@"Message to %@\n", nil),contactModal.contactName];
-        [cell setCellValues:valueToBeShown ContactImage:contactModal.img];
-        
-        cell.contact_Name.numberOfLines = 0;
-        [cell.contact_Name sizeToFit];
-        
-        return cell;
-    }else if ( indexPath.section == 1 ){
         
         static NSString *cellId = @"CustomText";
         CustomTextTableViewCell *cell = (CustomTextTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
     
         if ( cell == nil ) {
             
-            if( IS_IPHONE_5 ){
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CustomTextTableViewCell" owner:self options:nil];
-                cell = (CustomTextTableViewCell *)[nib objectAtIndex:0];
-            } else if ( IS_IPHONE_6 ){
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CustomTextTableViewCell-iPhone6" owner:self options:nil];
-                cell = (CustomTextTableViewCell *)[nib objectAtIndex:0];
-            } else if ( IS_IPHONE_6_PLUS ) {
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CustomTextTableViewCell-iPhone6-Plus" owner:self options:nil];
-                cell = (CustomTextTableViewCell *)[nib objectAtIndex:0];
-            } else if (IS_IPHONE_4){
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CustomTextTableViewCell" owner:self options:nil];
-                cell = (CustomTextTableViewCell *)[nib objectAtIndex:0];
-            }
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CustomTextTableViewCell" owner:self options:nil];
+            cell = (CustomTextTableViewCell *)[nib objectAtIndex:0];
         }
         
         [cell.customText setDelegate:self];
@@ -208,33 +165,22 @@
             cell.customText.text = contactModal.customTextForContact;
         }
         
-        [cell setCellValuesWithDeleg:contactModal.customTextForContact deleg:self];
+        NSString *valueToBeShown =[ NSString stringWithFormat:NSLocalizedString(@"Message to %@:", nil),contactModal.contactName];
+        
+        [cell setCellValuesWithDeleg:contactModal.contactFirstName message:valueToBeShown customText:contactModal.customTextForContact ContactImage:contactModal.img deleg:self];
         
         return cell;
         
-    }else if ( indexPath.section == 2 ){
+    }
+    else if ( indexPath.section == 1 ){
         
         static NSString *cellId = @"PhoneNumberCell";
         PhoneNumberCell *cell = (PhoneNumberCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
         
         if ( cell == nil ) {
-            
-            if( IS_IPHONE_5 ){
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PhoneNumberCell" owner:self options:nil];
-                cell = (PhoneNumberCell *)[nib objectAtIndex:0];
-            } else if ( IS_IPHONE_6 ){
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PhoneNumberCell-iPhone6" owner:self options:nil];
-                cell = (PhoneNumberCell *)[nib objectAtIndex:0];
-            } else if ( IS_IPHONE_6_PLUS ) {
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PhoneNumberCell-iPhone6-Plus" owner:self options:nil];
-                cell = (PhoneNumberCell *)[nib objectAtIndex:0];
-            } else if (IS_IPHONE_4) {
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PhoneNumberCell" owner:self options:nil];
-                cell = (PhoneNumberCell *)[nib objectAtIndex:0];
-
-            }
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PhoneNumberCell" owner:self options:nil];
+            cell = (PhoneNumberCell *)[nib objectAtIndex:0];
         }
-        
         NSMutableArray *numberWithStatus = contactModal.allPhoneNumbers[indexPath.row];
         BOOL smsBtnStatus = NO;
         BOOL callButton = NO;
@@ -256,28 +202,16 @@
 
         return cell;
         
-    }else if ( indexPath.section == 3 ){
+    }else if (indexPath.section == 2 ){
         
         static NSString *cellId = @"EmailCell";
         EmailCell *cell = (EmailCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
         
         if ( cell == nil ) {
             
-            if( IS_IPHONE_5 ){
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmailCell" owner:self options:nil];
-                cell = (EmailCell *)[nib objectAtIndex:0];
-            } else if ( IS_IPHONE_6 ){
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmailCell-iPhone6" owner:self options:nil];
-                cell = (EmailCell *)[nib objectAtIndex:0];
-            } else if ( IS_IPHONE_6_PLUS ) {
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmailCell-iPhone6-Plus" owner:self options:nil];
-                cell = (EmailCell *)[nib objectAtIndex:0];
-            } else if (IS_IPHONE_4){
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmailCell" owner:self options:nil];
-                cell = (EmailCell *)[nib objectAtIndex:0];
-            }
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmailCell" owner:self options:nil];
+            cell = (EmailCell *)[nib objectAtIndex:0];
         }
-        
         NSMutableArray *emailWithStatus = contactModal.allEmails[indexPath.row];
         BOOL emailButtonStatus = NO;
         if ( [emailWithStatus[1] isEqualToString:@"1"] ){
@@ -294,12 +228,15 @@
         
         return cell;
     }
-    return cell;
+    else{
+        UITableViewCell *cell;
+        return cell;
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 3;
 }
 
 -(void) save{
@@ -344,7 +281,7 @@
  * Create a backup of all variables which are changeable on this screen, so when user wants to
  * go back without saving then replace all with them
  */
--(void)setTampVariables {
+-(void)setTempVariables {
     tempCustomTextForContact = [[NSString alloc] initWithString:contactModal.customTextForContact];
     tempAllPhoneNumbers = [[NSMutableArray alloc] init];
     for( int j=0; j < contactModal.allPhoneNumbers.count; j++){
@@ -445,19 +382,32 @@
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 0)];
+    UIView *headerView = [[UIView alloc] init];
+    UIColor *untecchableGrey = [UIColor colorWithWhite: 0.70 alpha:1];
+
     
-    UIColor *untechableGreen = [UIColor colorWithRed:(66/255.0) green:(247/255.0) blue:(206/255.0) alpha:1];
+    CGRect frame = CGRectMake(0, 0, 0, 1);
+    UIView *customView = [[UIView alloc] initWithFrame:frame];
     
-    headerView.backgroundColor = untechableGreen;
+    [customView addSubview:headerView];
+    customView.backgroundColor = [UIColor clearColor];
     
-    return headerView;
+    frame.origin.x = 10; //move the frame over..this adds the padding!
+    frame.size.width = self.view.bounds.size.width - frame.origin.x*2;
+    
+    headerView.frame = frame;
+    headerView.backgroundColor = untecchableGrey;
+    
+    return customView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == 0) {
+          return 154.f;
+    }
     if (indexPath.section == 1) {
-            return 120.f;
+            return 80.f;
     } else {
         return 80.f;
     }

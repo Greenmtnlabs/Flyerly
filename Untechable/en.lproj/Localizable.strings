@@ -53,8 +53,8 @@
 "Select contacts to inform of your unavailability" = "Select contacts to inform of your unavailability";
 "Select contacts" = "Select contacts";
 
-"Select one or more modes" = "Select one or more modes";
-"Message to %@\n" = "Message to %@\n";
+"How would you like to notify %@?" = "How would you like to notify %@?";
+"Message to %@:" = "Message to %@:";
 
 // Email Settings related
 "Select your email service to let your contacts know you will be untechable." = "Select your email service to let your contacts know you will be untechable.";
@@ -124,7 +124,7 @@
 "HOME" = "HOME";
 
 // ContactCustomizeDetailsControllerViewController
-"Calls and Texts required premium subscription." = "Calls and Texts required premium subscription.";
+"Calls and text require premium subscription." = "Calls and text require premium subscription.";
 
 // SettingsViewController
 "Log Out" = "Log Out";
