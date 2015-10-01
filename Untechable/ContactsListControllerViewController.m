@@ -448,6 +448,8 @@
                 contactPicture = [UIImage imageWithData:(NSData *)CFBridgingRelease(ABPersonCopyImageData(ref))];
                 currentltRenderingContactModal.img = contactPicture;
             }
+        } else {
+            currentltRenderingContactModal.img = [UIImage imageNamed:@"user_img.png"];;
         }
     
         //For all emails
