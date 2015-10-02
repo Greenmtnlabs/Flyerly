@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -18,8 +17,8 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4u6-AW-xso" userLabel="Phone Number">
                         <rect key="frame" x="30" y="32" width="187" height="25"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="25" id="bcp-tL-LEr"/>
-                            <constraint firstAttribute="width" constant="187" id="ghi-yb-WFK"/>
+                            <constraint firstAttribute="width" constant="187" id="Adb-JM-I7f"/>
+                            <constraint firstAttribute="height" constant="25" id="RtC-ic-KPs"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -28,46 +27,45 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1i9-B9-Ple" userLabel="Call">
                         <rect key="frame" x="275" y="18" width="40" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="40" id="AM9-VI-seA"/>
+                            <constraint firstAttribute="height" constant="40" id="JbT-he-Ofl"/>
+                            <constraint firstAttribute="width" constant="40" id="MEh-k1-8lh"/>
                         </constraints>
                         <state key="normal" backgroundImage="phone.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <state key="selected" backgroundImage="phone_selected.png"/>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a2O-xM-2ec">
+                        <rect key="frame" x="30" y="18" width="157" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="HAn-L9-b2o"/>
+                            <constraint firstAttribute="width" constant="157" id="Xgb-7M-dMh"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yUV-uZ-85o" userLabel="SMS">
                         <rect key="frame" x="220" y="18" width="40" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="40" id="dSq-Bh-aOb"/>
-                            <constraint firstAttribute="height" constant="40" id="wZI-NT-5c1"/>
+                            <constraint firstAttribute="height" constant="40" id="4Ch-gf-Oqd"/>
+                            <constraint firstAttribute="width" constant="40" id="aJH-lR-SAr"/>
                         </constraints>
                         <state key="normal" backgroundImage="sms.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <state key="selected" backgroundImage="sms_selected.png"/>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a2O-xM-2ec">
-                        <rect key="frame" x="30" y="18" width="157" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="157" id="7xj-mf-2Jp"/>
-                            <constraint firstAttribute="height" constant="21" id="QAS-Ml-XH5"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="1i9-B9-Ple" firstAttribute="leading" secondItem="yUV-uZ-85o" secondAttribute="trailing" constant="15" id="2gM-SL-C9V"/>
-                    <constraint firstItem="1i9-B9-Ple" firstAttribute="top" secondItem="yUV-uZ-85o" secondAttribute="top" id="5r9-ic-n6r"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="1i9-B9-Ple" secondAttribute="trailing" constant="-3" id="B2g-b1-mL7"/>
-                    <constraint firstItem="1i9-B9-Ple" firstAttribute="bottom" secondItem="yUV-uZ-85o" secondAttribute="bottom" id="EEw-Gp-HHt"/>
-                    <constraint firstItem="a2O-xM-2ec" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="JK9-PA-IiT"/>
-                    <constraint firstItem="4u6-AW-xso" firstAttribute="top" secondItem="a2O-xM-2ec" secondAttribute="bottom" constant="-7" id="L5i-0T-vCz"/>
-                    <constraint firstItem="a2O-xM-2ec" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="O54-WE-CCt"/>
-                    <constraint firstItem="4u6-AW-xso" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="ZUW-U4-klD"/>
-                    <constraint firstItem="1i9-B9-Ple" firstAttribute="top" secondItem="a2O-xM-2ec" secondAttribute="top" id="syo-m9-5QT"/>
-                    <constraint firstAttribute="bottom" secondItem="4u6-AW-xso" secondAttribute="bottom" constant="2" id="tHk-ZJ-KO6"/>
+                    <constraint firstItem="4u6-AW-xso" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="0Lh-A3-rIa"/>
+                    <constraint firstItem="1i9-B9-Ple" firstAttribute="leading" secondItem="yUV-uZ-85o" secondAttribute="trailing" constant="15" id="5GW-CJ-PjF"/>
+                    <constraint firstAttribute="trailing" secondItem="1i9-B9-Ple" secondAttribute="trailing" constant="5" id="M2x-of-Wbc"/>
+                    <constraint firstItem="a2O-xM-2ec" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="NXR-et-oA4"/>
+                    <constraint firstItem="a2O-xM-2ec" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="PXa-ae-95O"/>
+                    <constraint firstItem="4u6-AW-xso" firstAttribute="top" secondItem="a2O-xM-2ec" secondAttribute="bottom" constant="-7" id="fGJ-AG-L2Y"/>
+                    <constraint firstItem="1i9-B9-Ple" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="idx-sd-XfX"/>
+                    <constraint firstItem="yUV-uZ-85o" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="xkC-oa-KJr"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
