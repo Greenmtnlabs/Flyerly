@@ -28,10 +28,7 @@
 }
 @end
 
-@implementation SocialnetworkController{
-
-    BOOL isPlaceholder;
-}
+@implementation SocialnetworkController
 
 @synthesize untechable,comingFromContactsListScreen,char_Limit,inputSetSocialStatus,btnFacebook,btnTwitter,btnLinkedin,keyboardControls;
 

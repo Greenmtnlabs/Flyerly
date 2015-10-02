@@ -30,7 +30,7 @@ ContactsCustomizedModal *contactModal_;
     
     [_lblMessage setText:NSLocalizedString(@"How to notify?", nil)];
 
-    [self updateChrCounter:message];
+    [self updateChrCounter:spendingTimeText];
     
     self.contact_Name.text = message;
     if ( contactImage != nil ){
