@@ -21,7 +21,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uff-Cq-vQE">
-                        <rect key="frame" x="9" y="5" width="302" height="354"/>
+                        <rect key="frame" x="6" y="5" width="308" height="354"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vhe-S0-aW5" userLabel="topLabelsView">
@@ -72,22 +72,22 @@
                                 </state>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z79-gJ-DMF">
-                                <rect key="frame" x="5" y="11" width="20" height="20"/>
+                                <rect key="frame" x="0.0" y="11" width="20" height="20"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vu7-BD-USu">
-                                <rect key="frame" x="28" y="11" width="20" height="20"/>
+                                <rect key="frame" x="23" y="11" width="20" height="20"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5dI-Oq-C7c">
-                                <rect key="frame" x="51" y="11" width="20" height="20"/>
+                                <rect key="frame" x="46" y="11" width="20" height="20"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I2a-9L-hhr">
-                                <rect key="frame" x="74" y="11" width="20" height="20"/>
+                                <rect key="frame" x="69" y="11" width="20" height="20"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ewT-nG-9kd">
-                                <rect key="frame" x="97" y="11" width="20" height="20"/>
+                                <rect key="frame" x="92" y="11" width="20" height="20"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XBk-Dh-0EO">
-                                <rect key="frame" x="120" y="11" width="20" height="20"/>
+                                <rect key="frame" x="115" y="11" width="20" height="20"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
