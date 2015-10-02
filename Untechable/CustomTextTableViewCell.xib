@@ -42,10 +42,10 @@
                         </constraints>
                     </imageView>
                     <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Name" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jry-XP-mb2">
-                        <rect key="frame" x="12" y="8" width="124" height="30"/>
+                        <rect key="frame" x="12" y="8" width="240" height="30"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="124" id="InB-bp-wHf"/>
-                            <constraint firstAttribute="height" constant="30" id="Rj3-X3-ebm"/>
+                            <constraint firstAttribute="width" constant="240" id="BA9-W6-dST"/>
+                            <constraint firstAttribute="height" constant="30" id="GT8-SF-IAI"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
