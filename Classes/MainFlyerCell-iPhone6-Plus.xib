@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Entypo.otf">
@@ -13,18 +13,22 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleAspectFit" selectionStyle="default" indentationWidth="10" rowHeight="440" id="Gn8-a9-RsV" customClass="MainFlyerCell">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="440"/>
+        <tableViewCell contentMode="scaleAspectFit" selectionStyle="default" indentationWidth="10" rowHeight="453" id="Gn8-a9-RsV" customClass="MainFlyerCell">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="445"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gn8-a9-RsV" id="CJj-La-hyp">
                 <rect key="frame" x="0.0" y="0.0" width="314" height="103"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zow-th-S9P">
+                        <rect key="frame" x="7" y="7" width="400" height="438"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Egv-eR-2IJ" userLabel="topLabelsView">
-                        <rect key="frame" x="32" y="5" width="350" height="30"/>
+                        <rect key="frame" x="32" y="7" width="350" height="44"/>
                         <subviews>
                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="crQ-8M-MRO" userLabel="editBtn">
-                                <rect key="frame" x="-2" y="0.0" width="38" height="30"/>
+                                <rect key="frame" x="1" y="5" width="38" height="30"/>
                                 <fontDescription key="fontDescription" name="Entypo" family="Entypo" pointSize="45"/>
                                 <state key="normal" title="✎">
                                     <color key="titleColor" red="0.01176470588" green="0.56862745100000001" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -32,13 +36,13 @@
                                 </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Flyer Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O2r-vZ-OBa">
-                                <rect key="frame" x="43" y="5" width="204" height="20"/>
+                                <rect key="frame" x="43" y="10" width="229" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1m" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xuC-dF-jkn">
-                                <rect key="frame" x="255" y="5" width="95" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="25 mint" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xuC-dF-jkn">
+                                <rect key="frame" x="280" y="10" width="67" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -47,28 +51,28 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fok-5k-MZh" userLabel="cellImage">
-                        <rect key="frame" x="32" y="36" width="350" height="350"/>
+                        <rect key="frame" x="32" y="50" width="350" height="350"/>
                     </imageView>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5uu-x6-1xh" userLabel="bottomLabelsView">
-                        <rect key="frame" x="32" y="387" width="350" height="44"/>
+                        <rect key="frame" x="32" y="400" width="350" height="44"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y64-mj-4z1" userLabel="socialStatus">
-                                <rect key="frame" x="8" y="12" width="20" height="20"/>
+                                <rect key="frame" x="0.0" y="12" width="20" height="20"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o6V-Sf-fdg" userLabel="socialStatus">
-                                <rect key="frame" x="33" y="12" width="20" height="20"/>
+                                <rect key="frame" x="25" y="12" width="20" height="20"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yNg-Fz-MYV" userLabel="socialStatus">
-                                <rect key="frame" x="58" y="12" width="20" height="20"/>
+                                <rect key="frame" x="50" y="12" width="20" height="20"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ct7-Mz-Iqq" userLabel="socialStatus">
-                                <rect key="frame" x="83" y="12" width="20" height="20"/>
+                                <rect key="frame" x="75" y="12" width="20" height="20"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CnC-Z6-yhJ" userLabel="socialStatus">
-                                <rect key="frame" x="108" y="12" width="20" height="20"/>
+                                <rect key="frame" x="100" y="12" width="20" height="20"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XMz-bs-DWZ" userLabel="socialStatus">
-                                <rect key="frame" x="133" y="12" width="20" height="20"/>
+                                <rect key="frame" x="125" y="12" width="20" height="20"/>
                             </imageView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XBs-Lj-INJ" userLabel="flyerLock">
                                 <state key="normal">
@@ -93,6 +97,7 @@
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="cellImage" destination="fok-5k-MZh" id="VLU-PY-U1B"/>
+                <outlet property="containerView" destination="Zow-th-S9P" id="JEQ-UN-1qp"/>
                 <outlet property="flyerLock" destination="XBs-Lj-INJ" id="R3a-Xy-Ltk"/>
                 <outlet property="lblCreatedAt" destination="xuC-dF-jkn" id="EIF-o1-Z5a"/>
                 <outlet property="lblFlyerTitle" destination="O2r-vZ-OBa" id="siW-7s-Z1J"/>
@@ -105,7 +110,7 @@
                 <outletCollection property="socialStatus" destination="CnC-Z6-yhJ" id="TO2-ee-hcF"/>
                 <outletCollection property="socialStatus" destination="XMz-bs-DWZ" id="36k-Kc-dON"/>
             </connections>
-            <point key="canvasLocation" x="271" y="-6"/>
+            <point key="canvasLocation" x="271" y="0.5"/>
         </tableViewCell>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

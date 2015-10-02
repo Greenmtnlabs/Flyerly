@@ -20,6 +20,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *lblFlyerTitle;
 @property (nonatomic, strong) IBOutlet UILabel *lblCreatedAt;
 
+@property (strong, nonatomic) IBOutlet UIView *containerView;
 
 - (void)renderCell :(Flyer *)flyer LockStatus:(BOOL )status;
 @end

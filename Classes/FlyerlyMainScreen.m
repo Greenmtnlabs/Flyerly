@@ -107,7 +107,7 @@ id lastShareBtnSender;
     if( sizeRectForAdd.size.width == 0 ){
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
         MainFlyerCell *cell = (MainFlyerCell *)[self.tView cellForRowAtIndexPath:indexPath];
-        sizeRectForAdd = cell.cellImage.frame;
+        sizeRectForAdd = cell.containerView.frame;
     }
 }
 
@@ -369,14 +369,15 @@ id lastShareBtnSender;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if ( IS_IPHONE_4 || IS_IPHONE_5 ) {
-        return 340;
+        return 360;
     }
     else if ( IS_IPHONE_6 ) {
-        return 393;
+        return 421;
     }
     else{
-        return 440;
+        return 445;
     }
+    
 }
 
 // Customize the number of rows in the table view.
