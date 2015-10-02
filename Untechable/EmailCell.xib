@@ -14,20 +14,32 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xR7-H4-8r8">
-                        <rect key="frame" x="30" y="5" width="42" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xR7-H4-8r8">
+                        <rect key="frame" x="30" y="18" width="42" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Qtj-gk-YkC"/>
+                            <constraint firstAttribute="width" constant="42" id="kLD-SI-hy9"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0j1-5R-zrP">
-                        <rect key="frame" x="30" y="26" width="209" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0j1-5R-zrP">
+                        <rect key="frame" x="30" y="32" width="209" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="SBC-lk-Tps"/>
+                            <constraint firstAttribute="width" constant="209" id="WQa-Kc-lzZ"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ga-Vn-3GB">
-                        <rect key="frame" x="268" y="8" width="44" height="44"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ga-Vn-3GB">
+                        <rect key="frame" x="275" y="18" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="fll-dU-CXv"/>
+                            <constraint firstAttribute="height" constant="40" id="hZD-ma-6SS"/>
+                        </constraints>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <state key="normal" backgroundImage="email.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -37,12 +49,20 @@
                         </state>
                     </button>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="0j1-5R-zrP" firstAttribute="top" secondItem="xR7-H4-8r8" secondAttribute="bottom" constant="-7" id="8Pv-Wf-sUt"/>
+                    <constraint firstAttribute="trailing" secondItem="7Ga-Vn-3GB" secondAttribute="trailing" constant="5" id="Cen-EK-eyd"/>
+                    <constraint firstItem="xR7-H4-8r8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="ejU-YX-Mn6"/>
+                    <constraint firstItem="xR7-H4-8r8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="qUE-E7-DtW"/>
+                    <constraint firstItem="7Ga-Vn-3GB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="vId-bz-cLd"/>
+                    <constraint firstItem="0j1-5R-zrP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="zR7-lv-Cek"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="contactEmail" destination="0j1-5R-zrP" id="QcQ-Gq-D5Q"/>
                 <outlet property="emailButton" destination="7Ga-Vn-3GB" id="qhp-YD-YQz"/>
             </connections>
-            <point key="canvasLocation" x="-73" y="235.5"/>
+            <point key="canvasLocation" x="-73" y="235"/>
         </tableViewCell>
     </objects>
     <resources>

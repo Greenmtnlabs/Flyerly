@@ -23,10 +23,15 @@
 
 @interface SocialnetworkController(){
     UserPurchases *userPurchases;
+    NSString *defaultStatus;
+    
 }
 @end
 
-@implementation SocialnetworkController
+@implementation SocialnetworkController{
+
+    BOOL isPlaceholder;
+}
 
 @synthesize untechable,comingFromContactsListScreen,char_Limit,inputSetSocialStatus,btnFacebook,btnTwitter,btnLinkedin,keyboardControls;
 
@@ -42,6 +47,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
  
+    defaultStatus = NSLocalizedString(@"Enter default status", nil);
     userPurchases = [UserPurchases getInstance];
     
     [self setNavigationDefaults];
@@ -49,7 +55,7 @@
     [self updateUI];
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"MMMM dd yyyy"];
+    [dateFormat setDateFormat:@"dd MMMM yyyy, hh:mm a"];
   
     //showing start date on fields
     NSDate *startDate  =   [untechable.commonFunctions convertTimestampToNSDate:untechable.startDate];
@@ -92,20 +98,26 @@
 
 #pragma mark - Text View Delegate
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    
-    if ( [textView.text isEqualToString:@"e.g. Spending time with family"] ){
-        textView.text = @"";
-    }
     if ( textView == inputSetSocialStatus ){
-        if ([textView.text isEqualToString:@"e.g. Spending time with family"]) {
+        if ([textView.text isEqualToString:defaultStatus]) {
             textView.text = @"";
-            textView.font = [UIFont fontWithName:TITLE_FONT size:12.0];
-            textView.textColor = [UIColor blackColor]; //optional
         }
+        textView.textColor = DEF_GREEN;
         [textView becomeFirstResponder];
     }
     [self.keyboardControls setActiveField:textView];
 }
+
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    if ([textView.text isEqualToString:@""]) {
+        textView.text = defaultStatus;
+        textView.textColor = [UIColor lightGrayColor]; //optional
+    }
+    [textView resignFirstResponder];
+}
+
 
 #pragma mark - Keyboard Controls(< PREV , NEXT > )  Delegate
 
@@ -115,7 +127,6 @@
 - (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboardControls {
     [self.view endEditing:YES];
 }
-
 
 #pragma mark -  UI functions
 -(void)updateUI{
@@ -138,6 +149,7 @@
     self.btnLinkedin.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
     
 }
+
 
 #pragma mark -  Navigation functions
 
@@ -214,12 +226,20 @@
         if( [APP_IN_MODE isEqualToString:TESTING] ){
             [self next:@"GO_TO_THANKYOU"];
         } else {
-            
-            [self changeNavigation:@"ON_FINISH"];
-            
-            [self storeScreenVarsInDic];
-            
-            [self checkPayment];
+            if( [inputSetSocialStatus.text isEqualToString:defaultStatus] || [inputSetSocialStatus.text isEqualToString:@""] ){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(ERROR, nil)
+                                                                message:defaultStatus
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Close"
+                                                      otherButtonTitles: nil];
+                [alert show];
+            } else{
+                [self changeNavigation:@"ON_FINISH"];
+                
+                [self storeScreenVarsInDic];
+                
+                [self checkPayment];
+            }
         }
              
     }

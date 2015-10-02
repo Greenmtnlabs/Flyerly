@@ -22,6 +22,9 @@
     // Temporary variable, to hold the data unless it is saved in model
     NSString *tempCustomTextForContact;
     NSMutableArray *tempAllEmails, *tempAllPhoneNumbers;
+    
+    // to show separator between phone number and emails
+    BOOL phoneNumberCellExist, emailCellExist;
 }
 @property (weak, nonatomic) IBOutlet UITableView *contactDetailsTable;
 
@@ -46,6 +49,8 @@
     
     [self applyLocalization];
     
+    phoneNumberCellExist = NO;
+    emailCellExist = NO;
 }
 
 -(void)applyLocalization{
@@ -132,7 +137,6 @@
         numberOfRowsInSection = 1;
     }else if ( section == 1 ){
         numberOfRowsInSection = (int)contactModal.allPhoneNumbers.count;
-        
     }else if ( section == 2 ){
         numberOfRowsInSection = (int)contactModal.allEmails.count;
     }
@@ -141,15 +145,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
-    
     if ( indexPath.section == 0 ){
         
         static NSString *cellId = @"CustomText";
         CustomTextTableViewCell *cell = (CustomTextTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
     
         if ( cell == nil ) {
-            
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CustomTextTableViewCell" owner:self options:nil];
             cell = (CustomTextTableViewCell *)[nib objectAtIndex:0];
         }
@@ -161,19 +162,18 @@
         [cell.customText setReturnKeyType:UIReturnKeyDone];
         
         if ( contactModal.customTextForContact != nil ){
-            
             cell.customText.text = contactModal.customTextForContact;
         }
         
         NSString *valueToBeShown =[ NSString stringWithFormat:NSLocalizedString(@"Message to %@:", nil),contactModal.contactName];
         
         [cell setCellValuesWithDeleg:contactModal.contactFirstName message:valueToBeShown customText:contactModal.customTextForContact ContactImage:contactModal.img deleg:self];
-        
         return cell;
         
     }
     else if ( indexPath.section == 1 ){
         
+        phoneNumberCellExist = YES;
         static NSString *cellId = @"PhoneNumberCell";
         PhoneNumberCell *cell = (PhoneNumberCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
         
@@ -203,7 +203,9 @@
         return cell;
         
     }else if (indexPath.section == 2 ){
-        
+
+        emailCellExist = YES;
+
         static NSString *cellId = @"EmailCell";
         EmailCell *cell = (EmailCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
         
@@ -224,8 +226,6 @@
         
         [cell setCellValues: [emailWithStatus objectAtIndex:0]];
         [cell.emailButton setSelected:emailButtonStatus];
-
-        
         return cell;
     }
     else{
@@ -383,28 +383,29 @@
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 
     UIView *headerView = [[UIView alloc] init];
-    UIColor *untecchableGrey = [UIColor colorWithWhite: 0.70 alpha:1];
-
     
     CGRect frame = CGRectMake(0, 0, 0, 1);
     UIView *customView = [[UIView alloc] initWithFrame:frame];
     
-    [customView addSubview:headerView];
-    customView.backgroundColor = [UIColor clearColor];
+    if(section == 2){
+        if(phoneNumberCellExist && emailCellExist){
+            [customView addSubview:headerView];
+            customView.backgroundColor = [UIColor clearColor];
     
-    frame.origin.x = 10; //move the frame over..this adds the padding!
-    frame.size.width = self.view.bounds.size.width - frame.origin.x*2;
+            frame.origin.x = 15; //move the frame over..this adds the padding!
+            frame.size.width = self.view.bounds.size.width - frame.origin.x*2;
     
-    headerView.frame = frame;
-    headerView.backgroundColor = untecchableGrey;
-    
+            headerView.frame = frame;
+            headerView.backgroundColor = [UIColor lightGrayColor];
+        }
+    }
     return customView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-          return 154.f;
+          return 155.f;
     }
     if (indexPath.section == 1) {
             return 80.f;
