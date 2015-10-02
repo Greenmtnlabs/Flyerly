@@ -52,7 +52,7 @@
 // SetupGuide Screen 3
 "Search contacts to notify of untech time" = "Search contacts to notify of untech time";
 
-"How would you like to notify %@?" = "How would you like to notify %@?";
+"How to notify?" = "How to notify?";
 "Message to %@:" = "Message to %@:";
 
 // Email Settings related

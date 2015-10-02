@@ -51,7 +51,7 @@
 // SetupGuide Screen 3
 "Search contacts to notify of untech time" = "Buscar contactos para notificar de tiempo untech";
 
-"How would you like to notify %@?" = "¿Cómo le gustaría a notificar a %@?";
+"How to notify?" = "Cómo notificar?";
 "Message to %@:" = "Mensaje a %@:";
 
 // Email Settings related

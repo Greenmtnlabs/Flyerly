@@ -28,7 +28,7 @@ ContactsCustomizedModal *contactModal_;
     [self.customText sizeToFit];
     self.customText.delegate = self;
     
-    [_lblMessage setText:[NSString stringWithFormat:NSLocalizedString(@"How would you like to notify %@?", nil) , name]];
+    [_lblMessage setText:NSLocalizedString(@"How to notify?", nil)];
 
     [self updateChrCounter:message];
     
