@@ -97,6 +97,7 @@
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="cellImage" destination="fok-5k-MZh" id="VLU-PY-U1B"/>
+                <outlet property="containerView" destination="Zow-th-S9P" id="JEQ-UN-1qp"/>
                 <outlet property="flyerLock" destination="XBs-Lj-INJ" id="R3a-Xy-Ltk"/>
                 <outlet property="lblCreatedAt" destination="xuC-dF-jkn" id="EIF-o1-Z5a"/>
                 <outlet property="lblFlyerTitle" destination="O2r-vZ-OBa" id="siW-7s-Z1J"/>

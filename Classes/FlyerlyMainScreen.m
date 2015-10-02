@@ -107,7 +107,7 @@ id lastShareBtnSender;
     if( sizeRectForAdd.size.width == 0 ){
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
         MainFlyerCell *cell = (MainFlyerCell *)[self.tView cellForRowAtIndexPath:indexPath];
-        sizeRectForAdd = cell.cellImage.frame;
+        sizeRectForAdd = cell.containerView.frame;
     }
 }
 
@@ -377,6 +377,7 @@ id lastShareBtnSender;
     else{
         return 445;
     }
+    
 }
 
 // Customize the number of rows in the table view.
