@@ -236,7 +236,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 1;
 }
 
 -(void) save{
@@ -405,7 +405,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-          return 160.f;
+          return 155.f;
     }
     if (indexPath.section == 1) {
             return 80.f;
