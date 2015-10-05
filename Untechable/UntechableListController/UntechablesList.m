@@ -94,6 +94,7 @@
     [self updateUI];
     
     [self initializePickerData];
+    [self showHideTextPicker:NO];
     [_timeDurationPicker setHidden:YES];
     [_doneButtonView setHidden:YES];
 
@@ -708,8 +709,7 @@
     [self initializePickerData];
     [_timeDurationPicker setHidden:NO];
     [_doneButtonView setHidden:NO];
-    [self showHideTextPicker:YES];
-   
+    [self showHideTextPicker:( (int)_timeDurationPicker.alpha == 0 )];
 }
 
 - (IBAction)untechCustomClick:(id)sender {
