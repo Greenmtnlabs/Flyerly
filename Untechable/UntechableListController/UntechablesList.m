@@ -94,6 +94,7 @@
     [self updateUI];
     
     [self initializePickerData];
+    [self showHideTextPicker:NO];
     [_timeDurationPicker setHidden:YES];
     [_doneButtonView setHidden:YES];
 
@@ -708,7 +709,11 @@
     [self initializePickerData];
     [_timeDurationPicker setHidden:NO];
     [_doneButtonView setHidden:NO];
-    [self showHideTextPicker:YES];
+    
+    NSLog(@"%f",_timeDurationPicker.alpha);
+    
+    [self showHideTextPicker:( (int)_timeDurationPicker.alpha == 0 )];
+    
    
 }
 
