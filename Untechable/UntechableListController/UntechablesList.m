@@ -709,12 +709,7 @@
     [self initializePickerData];
     [_timeDurationPicker setHidden:NO];
     [_doneButtonView setHidden:NO];
-    
-    NSLog(@"%f",_timeDurationPicker.alpha);
-    
     [self showHideTextPicker:( (int)_timeDurationPicker.alpha == 0 )];
-    
-   
 }
 
 - (IBAction)untechCustomClick:(id)sender {
