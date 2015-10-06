@@ -21,9 +21,9 @@
 @interface UntechablesList () {
     
     NSMutableArray *allUntechables;
-    NSMutableArray *sectionZeroArray;
     NSMutableArray *sectionOneArray;
     NSMutableArray *sectionTwoArray;
+    NSMutableArray *sectionThreeArray;
     
     int loadAllUntechs;
     
@@ -194,18 +194,17 @@
     [self setDefaultUntech];
     
     allUntechables = [[NSMutableArray alloc] init];
-    sectionZeroArray = [[NSMutableArray alloc] init];
     sectionOneArray = [[NSMutableArray alloc] init];
     sectionTwoArray = [[NSMutableArray alloc] init];
+    sectionThreeArray = [[NSMutableArray alloc] init];
     
     NSDate *currentDate = [NSDate date];
-    NSMutableArray *currentTimeStamps0 = [[NSMutableArray alloc] init];
     NSMutableArray *currentTimeStamps1 = [[NSMutableArray alloc] init];
     NSMutableArray *currentTimeStamps2 = [[NSMutableArray alloc] init];
-    
+    NSMutableArray *currentTimeStamps3 = [[NSMutableArray alloc] init];
     
     RLMResults *unsortedObjects = [RUntechable objectsWhere:@"rUId != ''"];
-    int s0=0, s1=0, s2=0;
+    int s1=0, s2=0, s3=0;
     // start for loop
     for(int i=0;i<unsortedObjects.count;i++){
         RSetUntechable *rUntechable = unsortedObjects[i];
@@ -219,9 +218,9 @@
         
         
         if ([untechable.commonFunctions isEndDateGreaterThanStartDate:endDate endDate:currentDate] ){
-            sectionZeroArray[s0++] = tempDict;
-            [currentTimeStamps0 addObject:[tempDict valueForKey:@"startDate"]];
-        }else if ( ![untechable.commonFunctions isEndDateGreaterThanStartDate:startDate endDate:currentDate] ){
+            sectionThreeArray[s3++] = tempDict;
+            [currentTimeStamps3 addObject:[tempDict valueForKey:@"startDate"]];
+        }else if ( [untechable.commonFunctions isEndDateGreaterThanStartDate:startDate endDate:currentDate] && [untechable.commonFunctions isEndDateGreaterThanStartDate:currentDate endDate:endDate] ){
             sectionOneArray[s1++] = tempDict;
             [currentTimeStamps1 addObject:[tempDict valueForKey:@"startDate"]];
         }else{
@@ -231,9 +230,9 @@
     }
     // end for loop
     
-    //[self sortOutTheTimeStamp:currentTimeStamps0 sortFor:@"sec0"];
     [self sortOutTheTimeStamp:currentTimeStamps1 sortFor:@"sec1"];
     [self sortOutTheTimeStamp:currentTimeStamps2 sortFor:@"sec2"];
+    [self sortOutTheTimeStamp:currentTimeStamps3 sortFor:@"sec3"];
     
 }
 
@@ -265,34 +264,34 @@
         }
     }
     
-    NSMutableArray *tempSectionZeroArray = [[NSMutableArray alloc] init];
     NSMutableArray *tempSectionOneArray = [[NSMutableArray alloc] init];
     NSMutableArray *tempSectionTwoArray = [[NSMutableArray alloc] init];
+    NSMutableArray *tempSectionThreeArray = [[NSMutableArray alloc] init];
     
     // gets the indexes of array and saves it
     for( int i = 0; i<timeStampArray.count; i++){
         for( int j = 0; j<timeStampArray.count; j++){
             if( sortedTimeStamps[i] == timeStamps[j] ){
                 
-                if( [sortFor isEqual:@"sec0"]){
-                    tempSectionZeroArray[i] = sectionZeroArray[j];
-                }else if( [sortFor isEqual:@"sec1"]){
+                if( [sortFor isEqual:@"sec1"]){
                     tempSectionOneArray[i] = sectionOneArray[j];
-                }else{
+                }else if( [sortFor isEqual:@"sec2"]){
                     tempSectionTwoArray[i] = sectionTwoArray[j];
+                }else if( [sortFor isEqual:@"sec3"]){
+                    tempSectionThreeArray[i] = sectionThreeArray[j];
                 }
+                    
                 break;
             }
         }
     }
     
-    if( [sortFor isEqual:@"sec0"])
-        sectionZeroArray = tempSectionZeroArray;
-    else if( [sortFor isEqual:@"sec1"])
+    if([sortFor isEqual:@"sec1"])
         sectionOneArray = tempSectionOneArray;
-    else
+    else if ([sortFor isEqual:@"sec2"])
         sectionTwoArray = tempSectionTwoArray;
-    
+    if([sortFor isEqual:@"sec3"])
+        sectionThreeArray = tempSectionThreeArray;
 }
 
 /**
@@ -491,10 +490,13 @@
     
         NSMutableDictionary *tempDict = nil;
         int row = (int)indexPath.row;
+    
         if ( indexPath.section == 0 ){
-             tempDict = sectionOneArray[row];
+            tempDict = sectionOneArray[row];
         }else if ( indexPath.section == 1 ){
-             tempDict = sectionTwoArray[row];
+            tempDict = sectionTwoArray[row];
+        }else if ( indexPath.section == 2 ){
+            tempDict = sectionThreeArray[row];
         }
         
         //Setting the packagename,packageprice,packagedesciption values for cell view
@@ -530,13 +532,21 @@
         [label setFont:[UIFont fontWithName:APP_FONT size:16]];
         label.backgroundColor = [UIColor clearColor];
     
-    }else {
+    }else if(section == 1){
     
         label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.bounds.size.width - 10, 30)];
         label.text = NSLocalizedString(@"Current Untechable Time:", nil);
         label.textColor = DEF_GRAY;
         [label setFont:[UIFont fontWithName:APP_FONT size:16]];
         label.backgroundColor = [UIColor clearColor];
+    } else if (section == 2){
+        
+        label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.bounds.size.width - 10, 18)];
+        label.text = NSLocalizedString(@"Pass Untechable:", nil);
+        label.textColor = DEF_GRAY;
+        [label setFont:[UIFont fontWithName:APP_FONT size:16]];
+        label.backgroundColor = [UIColor clearColor];
+        
     }
 
     [headerView addSubview:label];
@@ -548,8 +558,10 @@
     NSMutableDictionary *tempDictionary;
     if ( indexPath.section == 0 ){
         tempDictionary = sectionOneArray[indexPath.row];
-    }else if ( indexPath.section == 1 ){
+    } else if ( indexPath.section == 1 ){
         tempDictionary = sectionTwoArray[indexPath.row];
+    }else if ( indexPath.section == 2 ){
+        tempDictionary = sectionThreeArray[indexPath.row];
     }
     
     
@@ -571,6 +583,8 @@
         numberOfRowsInSection = (int)sectionOneArray.count;
     }else if ( section == 1 ){
         numberOfRowsInSection = (int)sectionTwoArray.count;
+    }else if ( section == 2 ){
+        numberOfRowsInSection = (int)sectionThreeArray.count;
     }
     //return sectionHeader;
     return  numberOfRowsInSection;
@@ -578,7 +592,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 
@@ -587,9 +601,11 @@
     NSString *sectionHeader;
     if ( section == 0 ){
         sectionHeader = NSLocalizedString(@"Upcoming Untechables", nil);
-    }else if ( section == 1 ){
+    } else if ( section == 1 ){
         sectionHeader = NSLocalizedString(@"Archives Untechables", nil);
-    }
+    }else if ( section == 2 ){
+        sectionHeader = NSLocalizedString(@"Pass Untechables", nil);
+    } 
     return sectionHeader;
 }
 
@@ -659,9 +675,6 @@
 }
 
 -(void)initializePickerData {
-    
-    
-   
     _pickerData = arrayToBeAdded;
 }
 
