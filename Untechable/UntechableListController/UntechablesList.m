@@ -220,7 +220,7 @@
         if ([untechable.commonFunctions isEndDateGreaterThanStartDate:endDate endDate:currentDate] ){
             sectionThreeArray[s3++] = tempDict;
             [currentTimeStamps3 addObject:[tempDict valueForKey:@"startDate"]];
-        }else if ( [untechable.commonFunctions isEndDateGreaterThanStartDate:startDate endDate:currentDate] && [untechable.commonFunctions isEndDateGreaterThanStartDate:currentDate endDate:endDate] ){
+        }else if ( ![untechable.commonFunctions isEndDateGreaterThanStartDate:startDate endDate:currentDate] && ![untechable.commonFunctions isEndDateGreaterThanStartDate:currentDate endDate:endDate] ){
             sectionOneArray[s1++] = tempDict;
             [currentTimeStamps1 addObject:[tempDict valueForKey:@"startDate"]];
         }else{
@@ -366,7 +366,16 @@
  */
 -(void)deleteUntechable:(NSInteger)indexToremoveOnSucess Section:(NSInteger)section {
 
-    NSMutableDictionary *tempDict = ( section == 0 ) ? sectionOneArray[indexToremoveOnSucess] : sectionTwoArray[indexToremoveOnSucess];
+    NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
+    
+    if(section == 0){
+        tempDict = sectionOneArray[indexToremoveOnSucess];
+    } else if (section == 1){
+        tempDict = sectionTwoArray[indexToremoveOnSucess];
+    } else if(section == 2){
+        tempDict = sectionThreeArray[indexToremoveOnSucess];
+    }
+    
     [untechable deleteUntechable:tempDict[@"rUId"] callBack:^(bool deleted){
         [self setDefaultModel];
         [untechablesTable reloadData];
@@ -385,7 +394,11 @@
     }else if ( section == 1 ){
         tempDict = [sectionTwoArray objectAtIndex:indexToremoveOnSucess];
         apiDelete = [NSString stringWithFormat:@"%@?eventId=%@",API_DELETE,[tempDict valueForKey:@"eventId"]];
+    } else if ( section == 2 ){
+        tempDict = [sectionThreeArray objectAtIndex:indexToremoveOnSucess];
+        apiDelete = [NSString stringWithFormat:@"%@?eventId=%@",API_DELETE,[tempDict valueForKey:@"eventId"]];
     }
+
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:apiDelete]];
@@ -448,13 +461,13 @@
 }
 
 - (IBAction)btnTouchStart:(id)sender{
-    [self setNextHighlighted:YES sender:sender];
+    [self setHighlighted:YES sender:sender];
 }
 - (IBAction)btnTouchEnd:(id)sender{
-    [self setNextHighlighted:NO sender:sender];
+    [self setHighlighted:NO sender:sender];
 }
 
-- (void)setNextHighlighted:(BOOL)highlighted sender:(id)sender {
+- (void)setHighlighted:(BOOL)highlighted sender:(id)sender {
     (highlighted) ? [sender setBackgroundColor:DEF_GRAY] : [sender setBackgroundColor:DEF_GREEN];
 }
 
