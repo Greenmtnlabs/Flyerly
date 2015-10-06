@@ -541,8 +541,8 @@
         label.backgroundColor = [UIColor clearColor];
     } else if (section == 2){
         
-        label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.bounds.size.width - 10, 18)];
-        label.text = NSLocalizedString(@"Pass Untechable:", nil);
+        label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, tableView.bounds.size.width - 10, 18)];
+        label.text = NSLocalizedString(@"Pass Untechable Time:", nil);
         label.textColor = DEF_GRAY;
         [label setFont:[UIFont fontWithName:APP_FONT size:16]];
         label.backgroundColor = [UIColor clearColor];
