@@ -220,12 +220,12 @@
         if ([untechable.commonFunctions isEndDateGreaterThanStartDate:endDate endDate:currentDate] ){
             sectionThreeArray[s3++] = tempDict;
             [currentTimeStamps3 addObject:[tempDict valueForKey:@"startDate"]];
-        }else if ( ![untechable.commonFunctions isEndDateGreaterThanStartDate:startDate endDate:currentDate] && ![untechable.commonFunctions isEndDateGreaterThanStartDate:currentDate endDate:endDate] ){
-            sectionOneArray[s1++] = tempDict;
-            [currentTimeStamps1 addObject:[tempDict valueForKey:@"startDate"]];
-        }else{
+        }else if ( [untechable.commonFunctions isEndDateGreaterThanStartDate:startDate endDate:currentDate] && [untechable.commonFunctions isEndDateGreaterThanStartDate:currentDate endDate:endDate] ){
             sectionTwoArray[s2++] = tempDict;
             [currentTimeStamps2 addObject:[tempDict valueForKey:@"startDate"]];
+        }else{
+            sectionOneArray[s1++] = tempDict;
+            [currentTimeStamps1 addObject:[tempDict valueForKey:@"startDate"]];
         }
     }
     // end for loop
@@ -290,7 +290,7 @@
         sectionOneArray = tempSectionOneArray;
     else if ([sortFor isEqual:@"sec2"])
         sectionTwoArray = tempSectionTwoArray;
-    if([sortFor isEqual:@"sec3"])
+    else if([sortFor isEqual:@"sec3"])
         sectionThreeArray = tempSectionThreeArray;
 }
 
@@ -566,7 +566,7 @@
     } else if (section == 2){
         
         label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, tableView.bounds.size.width - 10, 18)];
-        label.text = NSLocalizedString(@"Pass Untechable Time:", nil);
+        label.text = NSLocalizedString(@"Past Untechable Time:", nil);
         label.textColor = DEF_GRAY;
         [label setFont:[UIFont fontWithName:APP_FONT size:16]];
         label.backgroundColor = [UIColor clearColor];
@@ -628,7 +628,7 @@
     } else if ( section == 1 ){
         sectionHeader = NSLocalizedString(@"Archives Untechables", nil);
     }else if ( section == 2 ){
-        sectionHeader = NSLocalizedString(@"Pass Untechables", nil);
+        sectionHeader = NSLocalizedString(@"Past Untechable Time:", nil);
     } 
     return sectionHeader;
 }
