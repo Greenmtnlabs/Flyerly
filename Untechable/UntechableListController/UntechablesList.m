@@ -447,6 +447,17 @@
     btnUntechNow.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
 }
 
+- (IBAction)btnTouchStart:(id)sender{
+    [self setNextHighlighted:YES sender:sender];
+}
+- (IBAction)btnTouchEnd:(id)sender{
+    [self setNextHighlighted:NO sender:sender];
+}
+
+- (void)setNextHighlighted:(BOOL)highlighted sender:(id)sender {
+    (highlighted) ? [sender setBackgroundColor:DEF_GRAY] : [sender setBackgroundColor:DEF_GREEN];
+}
+
 /**
  * Override to support conditional editing of the table view.
  * This only needs to be implemented if you are going to return NO

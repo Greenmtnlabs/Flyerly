@@ -34,6 +34,8 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
+                                <action selector="btnTouchEnd:" destination="-1" eventType="touchUpInside" id="Imh-Jh-SHe"/>
+                                <action selector="btnTouchStart:" destination="-1" eventType="touchDown" id="BSA-Ji-ZPz"/>
                                 <action selector="untechNowClick:" destination="-1" eventType="touchUpInside" id="AvI-Kh-pMV"/>
                             </connections>
                         </button>
@@ -48,6 +50,8 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
+                                <action selector="btnTouchEnd:" destination="-1" eventType="touchUpInside" id="qRA-iv-hFV"/>
+                                <action selector="btnTouchStart:" destination="-1" eventType="touchDown" id="a3w-8l-RI9"/>
                                 <action selector="untechCustomClick:" destination="-1" eventType="touchUpInside" id="ZMO-Zk-FmS"/>
                             </connections>
                         </button>
