@@ -21,6 +21,7 @@
 @interface UntechablesList () {
     
     NSMutableArray *allUntechables;
+    NSMutableArray *sectionZeroArray;
     NSMutableArray *sectionOneArray;
     NSMutableArray *sectionTwoArray;
     
@@ -193,16 +194,18 @@
     [self setDefaultUntech];
     
     allUntechables = [[NSMutableArray alloc] init];
+    sectionZeroArray = [[NSMutableArray alloc] init];
     sectionOneArray = [[NSMutableArray alloc] init];
     sectionTwoArray = [[NSMutableArray alloc] init];
     
     NSDate *currentDate = [NSDate date];
+    NSMutableArray *currentTimeStamps0 = [[NSMutableArray alloc] init];
     NSMutableArray *currentTimeStamps1 = [[NSMutableArray alloc] init];
     NSMutableArray *currentTimeStamps2 = [[NSMutableArray alloc] init];
     
     
     RLMResults *unsortedObjects = [RUntechable objectsWhere:@"rUId != ''"];
-    int s1=0,s2=0;
+    int s0=0, s1=0, s2=0;
     // start for loop
     for(int i=0;i<unsortedObjects.count;i++){
         RSetUntechable *rUntechable = unsortedObjects[i];
@@ -212,7 +215,13 @@
         [tempDict setObject:[NSNumber numberWithInt:i] forKey:@"index"];
         
         NSDate *startDate = [untechable.commonFunctions convertTimestampToNSDate:[tempDict objectForKey:@"startDate"]];
-        if ( ![untechable.commonFunctions isEndDateGreaterThanStartDate:startDate endDate:currentDate] ){
+        NSDate *endDate = [untechable.commonFunctions convertTimestampToNSDate:[tempDict objectForKey:@"endDate"]];
+        
+        
+        if ([untechable.commonFunctions isEndDateGreaterThanStartDate:endDate endDate:currentDate] ){
+            sectionZeroArray[s0++] = tempDict;
+            [currentTimeStamps0 addObject:[tempDict valueForKey:@"startDate"]];
+        }else if ( ![untechable.commonFunctions isEndDateGreaterThanStartDate:startDate endDate:currentDate] ){
             sectionOneArray[s1++] = tempDict;
             [currentTimeStamps1 addObject:[tempDict valueForKey:@"startDate"]];
         }else{
@@ -222,6 +231,7 @@
     }
     // end for loop
     
+    //[self sortOutTheTimeStamp:currentTimeStamps0 sortFor:@"sec0"];
     [self sortOutTheTimeStamp:currentTimeStamps1 sortFor:@"sec1"];
     [self sortOutTheTimeStamp:currentTimeStamps2 sortFor:@"sec2"];
     
@@ -255,15 +265,18 @@
         }
     }
     
+    NSMutableArray *tempSectionZeroArray = [[NSMutableArray alloc] init];
     NSMutableArray *tempSectionOneArray = [[NSMutableArray alloc] init];
     NSMutableArray *tempSectionTwoArray = [[NSMutableArray alloc] init];
     
     // gets the indexes of array and saves it
     for( int i = 0; i<timeStampArray.count; i++){
         for( int j = 0; j<timeStampArray.count; j++){
-            
             if( sortedTimeStamps[i] == timeStamps[j] ){
-                if( [sortFor isEqual:@"sec1"]){
+                
+                if( [sortFor isEqual:@"sec0"]){
+                    tempSectionZeroArray[i] = sectionZeroArray[j];
+                }else if( [sortFor isEqual:@"sec1"]){
                     tempSectionOneArray[i] = sectionOneArray[j];
                 }else{
                     tempSectionTwoArray[i] = sectionTwoArray[j];
@@ -273,7 +286,9 @@
         }
     }
     
-    if( [sortFor isEqual:@"sec1"])
+    if( [sortFor isEqual:@"sec0"])
+        sectionZeroArray = tempSectionZeroArray;
+    else if( [sortFor isEqual:@"sec1"])
         sectionOneArray = tempSectionOneArray;
     else
         sectionTwoArray = tempSectionTwoArray;
