@@ -11,7 +11,7 @@
 #import "Reachability.h"
 
 @interface UntechablesList : UIViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate> {
-    UIButton *newUntechableButton;
+    UIButton *btnHelp;
     UIButton *settingsButton;
     Untechable *untechable;
     Reachability *internetReachable;

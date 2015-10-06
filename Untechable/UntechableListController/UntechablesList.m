@@ -131,14 +131,14 @@
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
         // Right Navigation ______________________________________________
-        newUntechableButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-        newUntechableButton.titleLabel.shadowColor = [UIColor clearColor];
-        newUntechableButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [newUntechableButton setTitle:NSLocalizedString(TITLE_NEW_TXT, nil) forState:normal];
-        [newUntechableButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
-        [newUntechableButton addTarget:self action:@selector(addUntechable) forControlEvents:UIControlEventTouchUpInside];
-        newUntechableButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:newUntechableButton];
+        btnHelp = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        btnHelp.titleLabel.shadowColor = [UIColor clearColor];
+        btnHelp.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [btnHelp setTitle:NSLocalizedString(TITLE_HELP_TXT, nil) forState:normal];
+        [btnHelp setTitleColor:DEF_GRAY forState:UIControlStateNormal];
+        [btnHelp addTarget:self action:@selector(goToHelp) forControlEvents:UIControlEventTouchUpInside];
+        btnHelp.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:btnHelp];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
         
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
@@ -158,6 +158,10 @@
     addUntechable.untechable = untechable;
     addUntechable.totalUntechables = (int)allUntechables.count;
     [self.navigationController pushViewController:addUntechable animated:YES];
+}
+
+- (IBAction)goToHelp {
+  
 }
 
 /**
@@ -281,7 +285,6 @@
  */
 - (void)showHidLoadingIndicator:(BOOL)show {
     if( show ){
-        newUntechableButton.enabled = NO;
         
         UIActivityIndicatorView *uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
         [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
@@ -292,7 +295,6 @@
         [self.navigationItem setRightBarButtonItem:btn animated:NO];
     }
     else{
-        newUntechableButton.enabled = YES;
         [self setNavigation:@"viewDidLoad"];
     }
 }
@@ -320,7 +322,7 @@
     
     BOOL btnsStatus = (btnStatusInt == 1) ? YES : NO;
     if( btnStatusInt != -1 ){
-        newUntechableButton.enabled = btnsStatus;
+        btnHelp.enabled = btnsStatus;
         btnUntechNow.enabled = btnsStatus;
         btnUntechCustom.enabled = btnsStatus;
         settingsButton.enabled = btnsStatus;
