@@ -419,12 +419,13 @@
 
 -(void)updateUI{
     [btnUntechCustom setTitle:NSLocalizedString(@"Untech Custom", nil) forState:normal];
-    [btnUntechCustom setTitleColor:DEF_GRAY forState:UIControlStateNormal];
+    [btnUntechCustom setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btnUntechCustom setBackgroundColor:DEF_GREEN];
     btnUntechCustom.titleLabel.font = [UIFont fontWithName:APP_FONT size:16];
     btnUntechCustom.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
     
     [btnUntechNow setTitle:NSLocalizedString(@"Untech Now", nil) forState:normal];
-    [btnUntechNow setTitleColor:DEF_GRAY forState:UIControlStateNormal];
+    [btnUntechNow setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnUntechNow setBackgroundColor:DEF_GREEN];
     btnUntechNow.titleLabel.font = [UIFont fontWithName:APP_FONT size:16];
     btnUntechNow.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
