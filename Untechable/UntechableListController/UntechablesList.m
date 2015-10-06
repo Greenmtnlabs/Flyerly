@@ -425,6 +425,7 @@
     
     [btnUntechNow setTitle:NSLocalizedString(@"Untech Now", nil) forState:normal];
     [btnUntechNow setTitleColor:DEF_GRAY forState:UIControlStateNormal];
+    [btnUntechNow setBackgroundColor:DEF_GREEN];
     btnUntechNow.titleLabel.font = [UIFont fontWithName:APP_FONT size:16];
     btnUntechNow.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
 }
