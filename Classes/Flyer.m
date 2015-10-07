@@ -197,15 +197,15 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
         int year  = secondsBetween/(60*60*24*30*12);
         
         if( year > 0 ){
-            updatedDate = [NSString stringWithFormat:@"%i y",year];
+            updatedDate = [NSString stringWithFormat:@"%iy",year];
         } else if( month > 0 ){
-            updatedDate = [NSString stringWithFormat:@"%i m",month];
+            updatedDate = [NSString stringWithFormat:@"%im",month];
         } else if( day > 0 ){
-            updatedDate = [NSString stringWithFormat:@"%i d",day];
+            updatedDate = [NSString stringWithFormat:@"%id",day];
         } else if( hour > 0 ){
-            updatedDate = [NSString stringWithFormat:@"%i h",hour];
+            updatedDate = [NSString stringWithFormat:@"%ih",hour];
         } else {
-            updatedDate = [NSString stringWithFormat:@"%i min",minute];
+            updatedDate = [NSString stringWithFormat:@"%imin",minute];
         }
     }
     return updatedDate;

@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Entypo.otf">
             <string>Entypo</string>
             <string>Entypo</string>
+        </mutableArray>
+        <mutableArray key="HelveticaRoundedLTStd-BdCn_0.otf">
+            <string>HelveticaRoundedLTStd-BdCn</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -28,26 +31,29 @@
                         <rect key="frame" x="20" y="9" width="280" height="30"/>
                         <subviews>
                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8XO-1P-h7X" userLabel="editBtn">
-                                <rect key="frame" x="2" y="4" width="24" height="26"/>
+                                <rect key="frame" x="0.0" y="3" width="24" height="25"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Entypo" family="Entypo" pointSize="32"/>
+                                <fontDescription key="fontDescription" name="Entypo" family="Entypo" pointSize="38"/>
                                 <state key="normal" title="✎">
                                     <color key="titleColor" red="0.01176470588" green="0.56862745100000001" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Flyer Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v5J-mH-bR1">
-                                <rect key="frame" x="30" y="8" width="193" height="20"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="32" y="5" width="194" height="20"/>
+                                <fontDescription key="fontDescription" name="HelveticaRoundedLTStd-BdCn" family="Helvetica Rounded LT Std" pointSize="17"/>
+                                <color key="textColor" red="0.26666666666666666" green="0.26666666666666666" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="25 mint" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FaV-lV-7yw">
-                                <rect key="frame" x="224" y="8" width="54" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="25mint" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FaV-lV-7yw">
+                                <rect key="frame" x="227" y="5" width="50" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="separator_vertical.png" translatesAutoresizingMaskIntoConstraints="NO" id="h3u-BP-CT2">
+                                <rect key="frame" x="19" y="4" width="15" height="22"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
@@ -65,8 +71,8 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qP4-jY-AaV" userLabel="shareBtn">
-                                <rect key="frame" x="238" y="1" width="40" height="41"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qP4-jY-AaV" userLabel="shareBtn">
+                                <rect key="frame" x="250" y="3" width="30" height="37"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Entypo" family="Entypo" pointSize="44"/>
                                 <state key="normal" title="">
@@ -92,6 +98,9 @@
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z79-gJ-DMF">
                                 <rect key="frame" x="0.0" y="11" width="20" height="20"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="separator_vertical.png" translatesAutoresizingMaskIntoConstraints="NO" id="8Gn-pZ-TZG">
+                                <rect key="frame" x="241" y="6" width="15" height="30"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
@@ -114,7 +123,10 @@
                 <outletCollection property="socialStatus" destination="ewT-nG-9kd" id="wHR-Lm-AK8"/>
                 <outletCollection property="socialStatus" destination="XBk-Dh-0EO" id="xfc-zv-LLj"/>
             </connections>
-            <point key="canvasLocation" x="268" y="-63"/>
+            <point key="canvasLocation" x="268" y="-63.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="separator_vertical.png" width="5" height="16"/>
+    </resources>
 </document>
