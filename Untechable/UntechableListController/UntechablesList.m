@@ -137,7 +137,7 @@
         btnHelp.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [btnHelp setTitle:NSLocalizedString(TITLE_HELP_TXT, nil) forState:normal];
         [btnHelp setTitleColor:DEF_GRAY forState:UIControlStateNormal];
-        [btnHelp addTarget:self action:@selector(goToHelp) forControlEvents:UIControlEventTouchUpInside];
+        [btnHelp addTarget:self action:@selector(emailComposer) forControlEvents:UIControlEventTouchUpInside];
         btnHelp.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:btnHelp];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
@@ -161,8 +161,41 @@
     [self.navigationController pushViewController:addUntechable animated:YES];
 }
 
-- (IBAction)goToHelp {
-  
+/*
+ * This method sends email
+ * to support team
+ */
+- (IBAction)emailComposer {
+    
+    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+    
+    if([MFMailComposeViewController canSendMail]){
+        
+        picker.mailComposeDelegate = self;
+        [picker setSubject:@"Untech Email Feedback..."];
+        
+        // Set up recipients
+        NSMutableArray *toRecipients = [[NSMutableArray alloc]init];
+        [toRecipients addObject:@"support@greenmtnlabs.com"];
+        [picker setToRecipients:toRecipients];
+        
+        [self presentViewController:picker animated:YES completion:nil];
+    }
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+    switch (result) {
+        case MFMailComposeResultCancelled:
+            break;
+        case MFMailComposeResultSaved:
+            break;
+        case MFMailComposeResultSent:
+            break;
+        case MFMailComposeResultFailed:
+            break;
+    }
+    
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 /**
