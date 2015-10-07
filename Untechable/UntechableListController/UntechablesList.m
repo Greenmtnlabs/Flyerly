@@ -449,13 +449,13 @@
 -(void)updateUI{
     [btnUntechCustom setTitle:NSLocalizedString(@"Untech Custom", nil) forState:normal];
     [btnUntechCustom setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btnUntechCustom setBackgroundColor:DEF_GREEN];
+    [btnUntechCustom setBackgroundColor:DEF_GRAY];
     btnUntechCustom.titleLabel.font = [UIFont fontWithName:APP_FONT size:16];
     btnUntechCustom.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
     
     [btnUntechNow setTitle:NSLocalizedString(@"Untech Now", nil) forState:normal];
     [btnUntechNow setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btnUntechNow setBackgroundColor:DEF_GREEN];
+    [btnUntechNow setBackgroundColor:DEF_GRAY];
     btnUntechNow.titleLabel.font = [UIFont fontWithName:APP_FONT size:16];
     btnUntechNow.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
 }
@@ -468,7 +468,7 @@
 }
 
 - (void)setHighlighted:(BOOL)highlighted sender:(id)sender {
-    (highlighted) ? [sender setBackgroundColor:DEF_GRAY] : [sender setBackgroundColor:DEF_GREEN];
+    (highlighted) ? [sender setBackgroundColor:DEF_GRAY] : [sender setBackgroundColor:DEF_GRAY];
 }
 
 /**
