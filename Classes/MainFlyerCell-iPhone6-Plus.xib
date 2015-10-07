@@ -31,23 +31,26 @@
                         <rect key="frame" x="32" y="13" width="350" height="44"/>
                         <subviews>
                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="crQ-8M-MRO" userLabel="editBtn">
-                                <rect key="frame" x="1" y="5" width="38" height="30"/>
-                                <fontDescription key="fontDescription" name="Entypo" family="Entypo" pointSize="45"/>
+                                <rect key="frame" x="1" y="5" width="34" height="36"/>
+                                <fontDescription key="fontDescription" name="Entypo" family="Entypo" pointSize="43"/>
                                 <state key="normal" title="✎">
                                     <color key="titleColor" red="0.01176470588" green="0.56862745100000001" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Flyer Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O2r-vZ-OBa">
-                                <rect key="frame" x="43" y="10" width="229" height="20"/>
-                                <fontDescription key="fontDescription" name="HelveticaRoundedLTStd-BdCn" family="Helvetica Rounded LT Std" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="25 mint" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xuC-dF-jkn">
-                                <rect key="frame" x="280" y="10" width="67" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="25mint" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xuC-dF-jkn">
+                                <rect key="frame" x="297" y="13" width="50" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="separator_vertical.png" translatesAutoresizingMaskIntoConstraints="NO" id="I1r-T8-ELG">
+                                <rect key="frame" x="29" y="6" width="15" height="34"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Flyer Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O2r-vZ-OBa">
+                                <rect key="frame" x="44" y="12" width="250" height="20"/>
+                                <fontDescription key="fontDescription" name="HelveticaRoundedLTStd-BdCn" family="Helvetica Rounded LT Std" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -84,8 +87,11 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wTy-hl-yka" userLabel="shareBtn">
-                                <rect key="frame" x="300" y="0.0" width="50" height="44"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="separator_vertical.png" translatesAutoresizingMaskIntoConstraints="NO" id="GvK-ho-asG">
+                                <rect key="frame" x="311" y="5" width="15" height="34"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wTy-hl-yka" userLabel="shareBtn">
+                                <rect key="frame" x="320" y="0.0" width="30" height="44"/>
                                 <fontDescription key="fontDescription" name="Entypo" family="Entypo" pointSize="45"/>
                                 <state key="normal" title="">
                                     <color key="titleColor" red="0.01176470588" green="0.56862745100000001" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -117,6 +123,9 @@
             <point key="canvasLocation" x="271" y="0.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="separator_vertical.png" width="5" height="16"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
