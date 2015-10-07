@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "Untechable.h"
 #import "Reachability.h"
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
-@interface UntechablesList : UIViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate> {
-    UIButton *newUntechableButton;
+@interface UntechablesList : UIViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate, MFMailComposeViewControllerDelegate> {
+    UIButton *btnHelp;
     UIButton *settingsButton;
     Untechable *untechable;
     Reachability *internetReachable;
@@ -27,5 +29,7 @@
 @property (strong, nonatomic) IBOutlet UIPickerView *timeDurationPicker;
 - (IBAction)btnDoneClick:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *doneButtonView;
+
+- (IBAction)emailComposer;
 
 @end

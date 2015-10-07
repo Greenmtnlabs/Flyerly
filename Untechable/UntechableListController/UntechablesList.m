@@ -23,6 +23,7 @@
     NSMutableArray *allUntechables;
     NSMutableArray *sectionOneArray;
     NSMutableArray *sectionTwoArray;
+    NSMutableArray *sectionThreeArray;
     
     int loadAllUntechs;
     
@@ -131,14 +132,14 @@
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
         // Right Navigation ______________________________________________
-        newUntechableButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-        newUntechableButton.titleLabel.shadowColor = [UIColor clearColor];
-        newUntechableButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [newUntechableButton setTitle:NSLocalizedString(TITLE_NEW_TXT, nil) forState:normal];
-        [newUntechableButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
-        [newUntechableButton addTarget:self action:@selector(addUntechable) forControlEvents:UIControlEventTouchUpInside];
-        newUntechableButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:newUntechableButton];
+        btnHelp = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        btnHelp.titleLabel.shadowColor = [UIColor clearColor];
+        btnHelp.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [btnHelp setTitle:NSLocalizedString(TITLE_HELP_TXT, nil) forState:normal];
+        [btnHelp setTitleColor:DEF_GRAY forState:UIControlStateNormal];
+        [btnHelp addTarget:self action:@selector(emailComposer) forControlEvents:UIControlEventTouchUpInside];
+        btnHelp.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:btnHelp];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
         
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
@@ -158,6 +159,43 @@
     addUntechable.untechable = untechable;
     addUntechable.totalUntechables = (int)allUntechables.count;
     [self.navigationController pushViewController:addUntechable animated:YES];
+}
+
+/*
+ * This method sends email
+ * to support team
+ */
+- (IBAction)emailComposer {
+    
+    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+    
+    if([MFMailComposeViewController canSendMail]){
+        
+        picker.mailComposeDelegate = self;
+        [picker setSubject:@"Untech Email Feedback..."];
+        
+        // Set up recipients
+        NSMutableArray *toRecipients = [[NSMutableArray alloc]init];
+        [toRecipients addObject:@"support@greenmtnlabs.com"];
+        [picker setToRecipients:toRecipients];
+        
+        [self presentViewController:picker animated:YES completion:nil];
+    }
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+    switch (result) {
+        case MFMailComposeResultCancelled:
+            break;
+        case MFMailComposeResultSaved:
+            break;
+        case MFMailComposeResultSent:
+            break;
+        case MFMailComposeResultFailed:
+            break;
+    }
+    
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 /**
@@ -191,14 +229,15 @@
     allUntechables = [[NSMutableArray alloc] init];
     sectionOneArray = [[NSMutableArray alloc] init];
     sectionTwoArray = [[NSMutableArray alloc] init];
+    sectionThreeArray = [[NSMutableArray alloc] init];
     
     NSDate *currentDate = [NSDate date];
     NSMutableArray *currentTimeStamps1 = [[NSMutableArray alloc] init];
     NSMutableArray *currentTimeStamps2 = [[NSMutableArray alloc] init];
-    
+    NSMutableArray *currentTimeStamps3 = [[NSMutableArray alloc] init];
     
     RLMResults *unsortedObjects = [RUntechable objectsWhere:@"rUId != ''"];
-    int s1=0,s2=0;
+    int s1=0, s2=0, s3=0;
     // start for loop
     for(int i=0;i<unsortedObjects.count;i++){
         RSetUntechable *rUntechable = unsortedObjects[i];
@@ -208,18 +247,25 @@
         [tempDict setObject:[NSNumber numberWithInt:i] forKey:@"index"];
         
         NSDate *startDate = [untechable.commonFunctions convertTimestampToNSDate:[tempDict objectForKey:@"startDate"]];
-        if ( ![untechable.commonFunctions isEndDateGreaterThanStartDate:startDate endDate:currentDate] ){
-            sectionOneArray[s1++] = tempDict;
-            [currentTimeStamps1 addObject:[tempDict valueForKey:@"startDate"]];
-        }else{
+        NSDate *endDate = [untechable.commonFunctions convertTimestampToNSDate:[tempDict objectForKey:@"endDate"]];
+        
+        
+        if ([untechable.commonFunctions isEndDateGreaterThanStartDate:endDate endDate:currentDate] ){
+            sectionThreeArray[s3++] = tempDict;
+            [currentTimeStamps3 addObject:[tempDict valueForKey:@"startDate"]];
+        }else if ( [untechable.commonFunctions isEndDateGreaterThanStartDate:startDate endDate:currentDate] && [untechable.commonFunctions isEndDateGreaterThanStartDate:currentDate endDate:endDate] ){
             sectionTwoArray[s2++] = tempDict;
             [currentTimeStamps2 addObject:[tempDict valueForKey:@"startDate"]];
+        }else{
+            sectionOneArray[s1++] = tempDict;
+            [currentTimeStamps1 addObject:[tempDict valueForKey:@"startDate"]];
         }
     }
     // end for loop
     
     [self sortOutTheTimeStamp:currentTimeStamps1 sortFor:@"sec1"];
     [self sortOutTheTimeStamp:currentTimeStamps2 sortFor:@"sec2"];
+    [self sortOutTheTimeStamp:currentTimeStamps3 sortFor:@"sec3"];
     
 }
 
@@ -253,27 +299,32 @@
     
     NSMutableArray *tempSectionOneArray = [[NSMutableArray alloc] init];
     NSMutableArray *tempSectionTwoArray = [[NSMutableArray alloc] init];
+    NSMutableArray *tempSectionThreeArray = [[NSMutableArray alloc] init];
     
     // gets the indexes of array and saves it
     for( int i = 0; i<timeStampArray.count; i++){
         for( int j = 0; j<timeStampArray.count; j++){
-            
             if( sortedTimeStamps[i] == timeStamps[j] ){
+                
                 if( [sortFor isEqual:@"sec1"]){
                     tempSectionOneArray[i] = sectionOneArray[j];
-                }else{
+                }else if( [sortFor isEqual:@"sec2"]){
                     tempSectionTwoArray[i] = sectionTwoArray[j];
+                }else if( [sortFor isEqual:@"sec3"]){
+                    tempSectionThreeArray[i] = sectionThreeArray[j];
                 }
+                    
                 break;
             }
         }
     }
     
-    if( [sortFor isEqual:@"sec1"])
+    if([sortFor isEqual:@"sec1"])
         sectionOneArray = tempSectionOneArray;
-    else
+    else if ([sortFor isEqual:@"sec2"])
         sectionTwoArray = tempSectionTwoArray;
-    
+    else if([sortFor isEqual:@"sec3"])
+        sectionThreeArray = tempSectionThreeArray;
 }
 
 /**
@@ -281,7 +332,6 @@
  */
 - (void)showHidLoadingIndicator:(BOOL)show {
     if( show ){
-        newUntechableButton.enabled = NO;
         
         UIActivityIndicatorView *uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
         [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
@@ -292,7 +342,6 @@
         [self.navigationItem setRightBarButtonItem:btn animated:NO];
     }
     else{
-        newUntechableButton.enabled = YES;
         [self setNavigation:@"viewDidLoad"];
     }
 }
@@ -320,7 +369,7 @@
     
     BOOL btnsStatus = (btnStatusInt == 1) ? YES : NO;
     if( btnStatusInt != -1 ){
-        newUntechableButton.enabled = btnsStatus;
+        btnHelp.enabled = btnsStatus;
         btnUntechNow.enabled = btnsStatus;
         btnUntechCustom.enabled = btnsStatus;
         settingsButton.enabled = btnsStatus;
@@ -350,7 +399,16 @@
  */
 -(void)deleteUntechable:(NSInteger)indexToremoveOnSucess Section:(NSInteger)section {
 
-    NSMutableDictionary *tempDict = ( section == 0 ) ? sectionOneArray[indexToremoveOnSucess] : sectionTwoArray[indexToremoveOnSucess];
+    NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
+    
+    if(section == 0){
+        tempDict = sectionOneArray[indexToremoveOnSucess];
+    } else if (section == 1){
+        tempDict = sectionTwoArray[indexToremoveOnSucess];
+    } else if(section == 2){
+        tempDict = sectionThreeArray[indexToremoveOnSucess];
+    }
+    
     [untechable deleteUntechable:tempDict[@"rUId"] callBack:^(bool deleted){
         [self setDefaultModel];
         [untechablesTable reloadData];
@@ -369,7 +427,11 @@
     }else if ( section == 1 ){
         tempDict = [sectionTwoArray objectAtIndex:indexToremoveOnSucess];
         apiDelete = [NSString stringWithFormat:@"%@?eventId=%@",API_DELETE,[tempDict valueForKey:@"eventId"]];
+    } else if ( section == 2 ){
+        tempDict = [sectionThreeArray objectAtIndex:indexToremoveOnSucess];
+        apiDelete = [NSString stringWithFormat:@"%@?eventId=%@",API_DELETE,[tempDict valueForKey:@"eventId"]];
     }
+
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:apiDelete]];
@@ -419,14 +481,27 @@
 
 -(void)updateUI{
     [btnUntechCustom setTitle:NSLocalizedString(@"Untech Custom", nil) forState:normal];
-    [btnUntechCustom setTitleColor:DEF_GRAY forState:UIControlStateNormal];
+    [btnUntechCustom setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btnUntechCustom setBackgroundColor:DEF_GRAY];
     btnUntechCustom.titleLabel.font = [UIFont fontWithName:APP_FONT size:16];
     btnUntechCustom.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
     
     [btnUntechNow setTitle:NSLocalizedString(@"Untech Now", nil) forState:normal];
-    [btnUntechNow setTitleColor:DEF_GRAY forState:UIControlStateNormal];
+    [btnUntechNow setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btnUntechNow setBackgroundColor:DEF_GRAY];
     btnUntechNow.titleLabel.font = [UIFont fontWithName:APP_FONT size:16];
     btnUntechNow.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
+}
+
+- (IBAction)btnTouchStart:(id)sender{
+    [self setHighlighted:YES sender:sender];
+}
+- (IBAction)btnTouchEnd:(id)sender{
+    [self setHighlighted:NO sender:sender];
+}
+
+- (void)setHighlighted:(BOOL)highlighted sender:(id)sender {
+    (highlighted) ? [sender setBackgroundColor:DEF_GRAY] : [sender setBackgroundColor:DEF_GRAY];
 }
 
 /**
@@ -472,10 +547,13 @@
     
         NSMutableDictionary *tempDict = nil;
         int row = (int)indexPath.row;
+    
         if ( indexPath.section == 0 ){
-             tempDict = sectionOneArray[row];
+            tempDict = sectionOneArray[row];
         }else if ( indexPath.section == 1 ){
-             tempDict = sectionTwoArray[row];
+            tempDict = sectionTwoArray[row];
+        }else if ( indexPath.section == 2 ){
+            tempDict = sectionThreeArray[row];
         }
         
         //Setting the packagename,packageprice,packagedesciption values for cell view
@@ -511,13 +589,21 @@
         [label setFont:[UIFont fontWithName:APP_FONT size:16]];
         label.backgroundColor = [UIColor clearColor];
     
-    }else {
+    }else if(section == 1){
     
         label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.bounds.size.width - 10, 30)];
         label.text = NSLocalizedString(@"Current Untechable Time:", nil);
         label.textColor = DEF_GRAY;
         [label setFont:[UIFont fontWithName:APP_FONT size:16]];
         label.backgroundColor = [UIColor clearColor];
+    } else if (section == 2){
+        
+        label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, tableView.bounds.size.width - 10, 18)];
+        label.text = NSLocalizedString(@"Past Untechable Time:", nil);
+        label.textColor = DEF_GRAY;
+        [label setFont:[UIFont fontWithName:APP_FONT size:16]];
+        label.backgroundColor = [UIColor clearColor];
+        
     }
 
     [headerView addSubview:label];
@@ -529,8 +615,10 @@
     NSMutableDictionary *tempDictionary;
     if ( indexPath.section == 0 ){
         tempDictionary = sectionOneArray[indexPath.row];
-    }else if ( indexPath.section == 1 ){
+    } else if ( indexPath.section == 1 ){
         tempDictionary = sectionTwoArray[indexPath.row];
+    }else if ( indexPath.section == 2 ){
+        tempDictionary = sectionThreeArray[indexPath.row];
     }
     
     
@@ -552,6 +640,8 @@
         numberOfRowsInSection = (int)sectionOneArray.count;
     }else if ( section == 1 ){
         numberOfRowsInSection = (int)sectionTwoArray.count;
+    }else if ( section == 2 ){
+        numberOfRowsInSection = (int)sectionThreeArray.count;
     }
     //return sectionHeader;
     return  numberOfRowsInSection;
@@ -559,7 +649,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 
@@ -568,9 +658,11 @@
     NSString *sectionHeader;
     if ( section == 0 ){
         sectionHeader = NSLocalizedString(@"Upcoming Untechables", nil);
-    }else if ( section == 1 ){
+    } else if ( section == 1 ){
         sectionHeader = NSLocalizedString(@"Archives Untechables", nil);
-    }
+    }else if ( section == 2 ){
+        sectionHeader = NSLocalizedString(@"Past Untechable Time:", nil);
+    } 
     return sectionHeader;
 }
 
@@ -640,9 +732,6 @@
 }
 
 -(void)initializePickerData {
-    
-    
-   
     _pickerData = arrayToBeAdded;
 }
 

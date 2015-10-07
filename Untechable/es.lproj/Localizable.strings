@@ -6,7 +6,7 @@
   Copyright (c) 2015 Green MTN Labs Inc. All rights reserved.
 */
 
-
+"HELP" = "AYUDA";
 "SKIP" = "SALTAR";
 "SAVE" = "GUARDAR";
 "NEXT" = "SIGUIENTE";
@@ -100,6 +100,8 @@
 
 "Upcoming Untechable Time:" = "Próximas Tiempo Untechable:";
 "Current Untechable Time:" = "Hora actual Untechable:";
+"Past Untechable Time:" = "Pasado Tiempo Untechable:";
+
 
 "Untech Custom" = "Untech Personalizado";
 "Untech Now" = "Untech Ahora";
