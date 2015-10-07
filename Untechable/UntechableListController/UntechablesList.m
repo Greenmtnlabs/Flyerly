@@ -481,12 +481,14 @@
 
 -(void)updateUI{
     
+    btnUntechCustom.layer.cornerRadius = 10;
     [btnUntechCustom setTitle:NSLocalizedString(@"Untech Custom", nil) forState:normal];
     [btnUntechCustom setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnUntechCustom setBackgroundColor:DEF_GRAY];
     btnUntechCustom.titleLabel.font = [UIFont fontWithName:APP_FONT size:16];
     btnUntechCustom.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
     
+    btnUntechNow.layer.cornerRadius = 10;
     [btnUntechNow setTitle:NSLocalizedString(@"Untech Now", nil) forState:normal];
     [btnUntechNow setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnUntechNow setBackgroundColor:DEF_GRAY];
