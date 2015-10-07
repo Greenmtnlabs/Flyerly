@@ -480,6 +480,7 @@
 }
 
 -(void)updateUI{
+    
     [btnUntechCustom setTitle:NSLocalizedString(@"Untech Custom", nil) forState:normal];
     [btnUntechCustom setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnUntechCustom setBackgroundColor:DEF_GRAY];
