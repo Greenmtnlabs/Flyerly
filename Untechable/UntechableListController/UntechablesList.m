@@ -584,32 +584,30 @@
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 20)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 0)];
     UILabel *label;
-    
+    label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, tableView.bounds.size.width - 10, 18)];
+
     if (section == sectionCurrentUntech ){
-        
-        label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, tableView.bounds.size.width - 10, 18)];
         label.text = NSLocalizedString(@"Current Untechs:", nil);
     }else if(section == sectionUpcomingUntech){
-    
-        label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, tableView.bounds.size.width - 10, 18)];
         label.text = NSLocalizedString(@"Upcoming Untechs:", nil);
     } else if (section == sectionPastUntech){
-        
-        label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, tableView.bounds.size.width - 10, 18)];
         label.text = NSLocalizedString(@"Past Untechs:", nil);
     }
     
     label.textColor = DEF_GRAY;
     [label setFont:[UIFont fontWithName:APP_FONT size:16]];
     label.backgroundColor = [UIColor clearColor];
-
     [headerView addSubview:label];
     
     return headerView;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 30.0;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSMutableDictionary *tempDictionary;
