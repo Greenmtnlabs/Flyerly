@@ -20,6 +20,8 @@
 
 @interface UntechablesList () {
     
+    int sectionCurrentUntech, sectionUpcomingUntech, sectionPastUntech;
+    
     NSMutableArray *allUntechables;
     NSMutableArray *currentUntechs;
     NSMutableArray *upcomingUntechs;
@@ -586,7 +588,7 @@
     
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 20)];
     UILabel *label;
-    if (section == 0){
+    if (section == sectionCurrentUntech){
         
         label = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, tableView.bounds.size.width - 10, 18)];
         label.text = NSLocalizedString(@"Current Untechs:", nil);
@@ -594,14 +596,14 @@
         [label setFont:[UIFont fontWithName:APP_FONT size:16]];
         label.backgroundColor = [UIColor clearColor];
     
-    }else if(section == 1){
+    }else if(section == sectionUpcomingUntech){
     
         label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.bounds.size.width - 10, 30)];
         label.text = NSLocalizedString(@"Upcoming Untechs:", nil);
         label.textColor = DEF_GRAY;
         [label setFont:[UIFont fontWithName:APP_FONT size:16]];
         label.backgroundColor = [UIColor clearColor];
-    } else if (section == 2){
+    } else if (section == sectionPastUntech){
         
         label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, tableView.bounds.size.width - 10, 18)];
         label.text = NSLocalizedString(@"Past Untechs:", nil);
@@ -655,7 +657,32 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    int noOfSections = 3;
+    sectionCurrentUntech = 0;
+    sectionUpcomingUntech = 1;
+    sectionPastUntech = 2;
+    
+    
+//    int noOfSections = 0;
+//    sectionCurrentUntech = sectionUpcomingUntech = sectionPastUntech = -1;
+    
+    if(currentUntechs.count > 0){
+        //sectionCurrentUntech = noOfSections++;
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
+        [self.untechablesTable beginUpdates];
+        [self.untechablesTable insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+        [self.untechablesTable endUpdates];
+    }
+    if(upcomingUntechs.count > 0){
+        //sectionUpcomingUntech = noOfSections++;
+    }
+    if(pastUntechs.count > 0){
+       //sectionPastUntech = noOfSections++;
+    }
+    
+    NSLog(@"%i  %i  %i", sectionCurrentUntech, sectionUpcomingUntech, sectionPastUntech );
+    
+    return noOfSections;
 }
 
 
