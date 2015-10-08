@@ -21,9 +21,9 @@
 @interface UntechablesList () {
     
     NSMutableArray *allUntechables;
-    NSMutableArray *sectionOneArray;
-    NSMutableArray *sectionTwoArray;
-    NSMutableArray *sectionThreeArray;
+    NSMutableArray *currentUntechs;
+    NSMutableArray *upcomingUntechs;
+    NSMutableArray *pastUntechs;
     
     int loadAllUntechs;
     
@@ -227,9 +227,9 @@
     [self setDefaultUntech];
     
     allUntechables = [[NSMutableArray alloc] init];
-    sectionOneArray = [[NSMutableArray alloc] init];
-    sectionTwoArray = [[NSMutableArray alloc] init];
-    sectionThreeArray = [[NSMutableArray alloc] init];
+    currentUntechs = [[NSMutableArray alloc] init];
+    upcomingUntechs = [[NSMutableArray alloc] init];
+    pastUntechs = [[NSMutableArray alloc] init];
     
     NSDate *currentDate = [NSDate date];
     NSMutableArray *currentTimeStamps1 = [[NSMutableArray alloc] init];
@@ -251,21 +251,21 @@
         
         
         if ([untechable.commonFunctions isEndDateGreaterThanStartDate:endDate endDate:currentDate] ){
-            sectionThreeArray[s3++] = tempDict;
+            pastUntechs[s3++] = tempDict;
             [currentTimeStamps3 addObject:[tempDict valueForKey:@"startDate"]];
         }else if ( [untechable.commonFunctions isEndDateGreaterThanStartDate:startDate endDate:currentDate] && [untechable.commonFunctions isEndDateGreaterThanStartDate:currentDate endDate:endDate] ){
-            sectionTwoArray[s2++] = tempDict;
+            currentUntechs[s2++] = tempDict;
             [currentTimeStamps2 addObject:[tempDict valueForKey:@"startDate"]];
         }else{
-            sectionOneArray[s1++] = tempDict;
+            upcomingUntechs[s1++] = tempDict;
             [currentTimeStamps1 addObject:[tempDict valueForKey:@"startDate"]];
         }
     }
     // end for loop
     
-    [self sortOutTheTimeStamp:currentTimeStamps1 sortFor:@"sec1"];
-    [self sortOutTheTimeStamp:currentTimeStamps2 sortFor:@"sec2"];
-    [self sortOutTheTimeStamp:currentTimeStamps3 sortFor:@"sec3"];
+    [self sortOutTheTimeStamp:currentTimeStamps1 sortFor:@"upcoming"];
+    [self sortOutTheTimeStamp:currentTimeStamps2 sortFor:@"current"];
+    [self sortOutTheTimeStamp:currentTimeStamps3 sortFor:@"past"];
     
 }
 
@@ -297,21 +297,21 @@
         }
     }
     
-    NSMutableArray *tempSectionOneArray = [[NSMutableArray alloc] init];
-    NSMutableArray *tempSectionTwoArray = [[NSMutableArray alloc] init];
-    NSMutableArray *tempSectionThreeArray = [[NSMutableArray alloc] init];
+    NSMutableArray *tempCurrentUntechs = [[NSMutableArray alloc] init];
+    NSMutableArray *tempUpcomingUntechs = [[NSMutableArray alloc] init];
+    NSMutableArray *tempPastUntechs = [[NSMutableArray alloc] init];
     
     // gets the indexes of array and saves it
     for( int i = 0; i<timeStampArray.count; i++){
         for( int j = 0; j<timeStampArray.count; j++){
             if( sortedTimeStamps[i] == timeStamps[j] ){
                 
-                if( [sortFor isEqual:@"sec1"]){
-                    tempSectionOneArray[i] = sectionOneArray[j];
-                }else if( [sortFor isEqual:@"sec2"]){
-                    tempSectionTwoArray[i] = sectionTwoArray[j];
-                }else if( [sortFor isEqual:@"sec3"]){
-                    tempSectionThreeArray[i] = sectionThreeArray[j];
+                if( [sortFor isEqual:@"current"]){
+                    tempCurrentUntechs[i] = currentUntechs[j];
+                }else if( [sortFor isEqual:@"upcoming"]){
+                    tempUpcomingUntechs[i] = upcomingUntechs[j];
+                }else if( [sortFor isEqual:@"past"]){
+                    tempPastUntechs[i] = pastUntechs[j];
                 }
                     
                 break;
@@ -319,12 +319,12 @@
         }
     }
     
-    if([sortFor isEqual:@"sec1"])
-        sectionOneArray = tempSectionOneArray;
-    else if ([sortFor isEqual:@"sec2"])
-        sectionTwoArray = tempSectionTwoArray;
-    else if([sortFor isEqual:@"sec3"])
-        sectionThreeArray = tempSectionThreeArray;
+    if([sortFor isEqual:@"current"])
+        currentUntechs = tempCurrentUntechs;
+    else if ([sortFor isEqual:@"upcoming"])
+        upcomingUntechs = tempUpcomingUntechs;
+    else if([sortFor isEqual:@"past"])
+        pastUntechs = tempPastUntechs;
 }
 
 /**
@@ -402,11 +402,11 @@
     NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
     
     if(section == 0){
-        tempDict = sectionOneArray[indexToremoveOnSucess];
+        tempDict = currentUntechs[indexToremoveOnSucess];
     } else if (section == 1){
-        tempDict = sectionTwoArray[indexToremoveOnSucess];
+        tempDict = upcomingUntechs[indexToremoveOnSucess];
     } else if(section == 2){
-        tempDict = sectionThreeArray[indexToremoveOnSucess];
+        tempDict = pastUntechs[indexToremoveOnSucess];
     }
     
     [untechable deleteUntechable:tempDict[@"rUId"] callBack:^(bool deleted){
@@ -422,13 +422,13 @@
     NSString *apiDelete;
     
     if ( section == 0 ){
-        tempDict = [sectionOneArray objectAtIndex:indexToremoveOnSucess];
+        tempDict = [currentUntechs objectAtIndex:indexToremoveOnSucess];
         apiDelete = [NSString stringWithFormat:@"%@?eventId=%@",API_DELETE,[tempDict valueForKey:@"eventId"]];
     }else if ( section == 1 ){
-        tempDict = [sectionTwoArray objectAtIndex:indexToremoveOnSucess];
+        tempDict = [upcomingUntechs objectAtIndex:indexToremoveOnSucess];
         apiDelete = [NSString stringWithFormat:@"%@?eventId=%@",API_DELETE,[tempDict valueForKey:@"eventId"]];
     } else if ( section == 2 ){
-        tempDict = [sectionThreeArray objectAtIndex:indexToremoveOnSucess];
+        tempDict = [pastUntechs objectAtIndex:indexToremoveOnSucess];
         apiDelete = [NSString stringWithFormat:@"%@?eventId=%@",API_DELETE,[tempDict valueForKey:@"eventId"]];
     }
 
@@ -480,6 +480,8 @@
 }
 
 -(void)updateUI{
+    
+    self.untechablesTable.contentInset = UIEdgeInsetsMake(-30, 0, 0, 0);
     
     btnUntechCustom.layer.cornerRadius = 10;
     [btnUntechCustom setTitle:NSLocalizedString(@"Untech Custom", nil) forState:normal];
@@ -552,11 +554,11 @@
         int row = (int)indexPath.row;
     
         if ( indexPath.section == 0 ){
-            tempDict = sectionOneArray[row];
+            tempDict = currentUntechs[row];
         }else if ( indexPath.section == 1 ){
-            tempDict = sectionTwoArray[row];
+            tempDict = upcomingUntechs[row];
         }else if ( indexPath.section == 2 ){
-            tempDict = sectionThreeArray[row];
+            tempDict = pastUntechs[row];
         }
         
         //Setting the packagename,packageprice,packagedesciption values for cell view
@@ -587,7 +589,7 @@
     if (section == 0){
         
         label = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, tableView.bounds.size.width - 10, 18)];
-        label.text = NSLocalizedString(@"Upcoming Untechable Time:", nil);
+        label.text = NSLocalizedString(@"Current Untechs:", nil);
         label.textColor = DEF_GRAY;
         [label setFont:[UIFont fontWithName:APP_FONT size:16]];
         label.backgroundColor = [UIColor clearColor];
@@ -595,14 +597,14 @@
     }else if(section == 1){
     
         label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.bounds.size.width - 10, 30)];
-        label.text = NSLocalizedString(@"Current Untechable Time:", nil);
+        label.text = NSLocalizedString(@"Upcoming Untechs:", nil);
         label.textColor = DEF_GRAY;
         [label setFont:[UIFont fontWithName:APP_FONT size:16]];
         label.backgroundColor = [UIColor clearColor];
     } else if (section == 2){
         
         label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, tableView.bounds.size.width - 10, 18)];
-        label.text = NSLocalizedString(@"Past Untechable Time:", nil);
+        label.text = NSLocalizedString(@"Past Untechs:", nil);
         label.textColor = DEF_GRAY;
         [label setFont:[UIFont fontWithName:APP_FONT size:16]];
         label.backgroundColor = [UIColor clearColor];
@@ -614,14 +616,15 @@
     return headerView;
 }
 
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSMutableDictionary *tempDictionary;
     if ( indexPath.section == 0 ){
-        tempDictionary = sectionOneArray[indexPath.row];
+        tempDictionary = currentUntechs[indexPath.row];
     } else if ( indexPath.section == 1 ){
-        tempDictionary = sectionTwoArray[indexPath.row];
+        tempDictionary = upcomingUntechs[indexPath.row];
     }else if ( indexPath.section == 2 ){
-        tempDictionary = sectionThreeArray[indexPath.row];
+        tempDictionary = pastUntechs[indexPath.row];
     }
     
     
@@ -640,11 +643,11 @@
     
     int numberOfRowsInSection = 0;
     if ( section == 0 ){
-        numberOfRowsInSection = (int)sectionOneArray.count;
+        numberOfRowsInSection = (int)currentUntechs.count;
     }else if ( section == 1 ){
-        numberOfRowsInSection = (int)sectionTwoArray.count;
+        numberOfRowsInSection = (int)upcomingUntechs.count;
     }else if ( section == 2 ){
-        numberOfRowsInSection = (int)sectionThreeArray.count;
+        numberOfRowsInSection = (int)pastUntechs.count;
     }
     //return sectionHeader;
     return  numberOfRowsInSection;
@@ -660,11 +663,11 @@
 {
     NSString *sectionHeader;
     if ( section == 0 ){
-        sectionHeader = NSLocalizedString(@"Upcoming Untechables", nil);
+        sectionHeader = NSLocalizedString(@"Current Untechs", nil);
     } else if ( section == 1 ){
-        sectionHeader = NSLocalizedString(@"Archives Untechables", nil);
+        sectionHeader = NSLocalizedString(@"Upcoming Untechs", nil);
     }else if ( section == 2 ){
-        sectionHeader = NSLocalizedString(@"Past Untechable Time:", nil);
+        sectionHeader = NSLocalizedString(@"Past Untechs:", nil);
     } 
     return sectionHeader;
 }
