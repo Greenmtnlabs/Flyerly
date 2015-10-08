@@ -483,8 +483,6 @@
 
 -(void)updateUI{
     
-    self.untechablesTable.contentInset = UIEdgeInsetsMake(-30, 0, 0, 0);
-    
     btnUntechCustom.layer.cornerRadius = 10;
     [btnUntechCustom setTitle:NSLocalizedString(@"Untech Custom", nil) forState:normal];
     [btnUntechCustom setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -591,15 +589,15 @@
     
     if (section == sectionCurrentUntech ){
         
-        label = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, tableView.bounds.size.width - 10, 18)];
+        label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, tableView.bounds.size.width - 10, 18)];
         label.text = NSLocalizedString(@"Current Untechs:", nil);
     }else if(section == sectionUpcomingUntech){
     
-        label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.bounds.size.width - 10, 18)];
+        label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, tableView.bounds.size.width - 10, 18)];
         label.text = NSLocalizedString(@"Upcoming Untechs:", nil);
     } else if (section == sectionPastUntech){
         
-        label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.bounds.size.width - 10, 18)];
+        label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, tableView.bounds.size.width - 10, 18)];
         label.text = NSLocalizedString(@"Past Untechs:", nil);
     }
     
