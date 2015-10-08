@@ -89,8 +89,6 @@
 "1 Day" = "1 Día";
 "2 Days" = "2 Días";
 
-"Upcoming Untechables" = "Próximas Untechables";
-"Archives Untechables" = "Archivos Untechables";
 "#Untechable for %@ %@ " = "#Untechable para %@ %@ ";
 "Untechable created successfully" = "Untechable creado con éxito";
 "Unable to delete, please try agin later!" = "No se puede eliminar, por favor intente más tarde volveré!";
@@ -98,9 +96,9 @@
 "No network connection" = "No hay conexión a la red";
 "You must be connected to the internet to sync your untechable on server." = "Usted debe estar conectado a Internet para sincronizar tu untechable en el servidor.";
 
-"Upcoming Untechable Time:" = "Próximas Tiempo Untechable:";
-"Current Untechable Time:" = "Hora actual Untechable:";
-"Past Untechable Time:" = "Pasado Tiempo Untechable:";
+"Upcoming Untechs:" = "Próximas Tiempo Untechs:";
+"Current Untechs:" = "Hora actual Untechs:";
+"Past Untechs:" = "Pasado Tiempo Untechs:";
 
 
 "Untech Custom" = "Untech Personalizado";
