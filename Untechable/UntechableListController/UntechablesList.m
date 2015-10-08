@@ -403,11 +403,11 @@
 
     NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
     
-    if(section == 0){
+    if(section == sectionCurrentUntech){
         tempDict = currentUntechs[indexToremoveOnSucess];
-    } else if (section == 1){
+    } else if (section == sectionUpcomingUntech){
         tempDict = upcomingUntechs[indexToremoveOnSucess];
-    } else if(section == 2){
+    } else if(section == sectionPastUntech){
         tempDict = pastUntechs[indexToremoveOnSucess];
     }
     
@@ -423,13 +423,13 @@
     NSMutableDictionary *tempDict;
     NSString *apiDelete;
     
-    if ( section == 0 ){
+    if ( section == sectionCurrentUntech ){
         tempDict = [currentUntechs objectAtIndex:indexToremoveOnSucess];
         apiDelete = [NSString stringWithFormat:@"%@?eventId=%@",API_DELETE,[tempDict valueForKey:@"eventId"]];
-    }else if ( section == 1 ){
+    }else if ( section == sectionUpcomingUntech ){
         tempDict = [upcomingUntechs objectAtIndex:indexToremoveOnSucess];
         apiDelete = [NSString stringWithFormat:@"%@?eventId=%@",API_DELETE,[tempDict valueForKey:@"eventId"]];
-    } else if ( section == 2 ){
+    } else if ( section == sectionPastUntech ){
         tempDict = [pastUntechs objectAtIndex:indexToremoveOnSucess];
         apiDelete = [NSString stringWithFormat:@"%@?eventId=%@",API_DELETE,[tempDict valueForKey:@"eventId"]];
     }
@@ -555,11 +555,11 @@
         NSMutableDictionary *tempDict = nil;
         int row = (int)indexPath.row;
     
-        if ( indexPath.section == 0 ){
+        if ( indexPath.section == sectionCurrentUntech ){
             tempDict = currentUntechs[row];
-        }else if ( indexPath.section == 1 ){
+        }else if ( indexPath.section == sectionUpcomingUntech ){
             tempDict = upcomingUntechs[row];
-        }else if ( indexPath.section == 2 ){
+        }else if ( indexPath.section == sectionPastUntech ){
             tempDict = pastUntechs[row];
         }
         
@@ -588,30 +588,24 @@
     
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 20)];
     UILabel *label;
-    if (section == sectionCurrentUntech){
+    
+    if (section == sectionCurrentUntech ){
         
         label = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, tableView.bounds.size.width - 10, 18)];
         label.text = NSLocalizedString(@"Current Untechs:", nil);
-        label.textColor = DEF_GRAY;
-        [label setFont:[UIFont fontWithName:APP_FONT size:16]];
-        label.backgroundColor = [UIColor clearColor];
-    
     }else if(section == sectionUpcomingUntech){
     
-        label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.bounds.size.width - 10, 30)];
+        label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.bounds.size.width - 10, 18)];
         label.text = NSLocalizedString(@"Upcoming Untechs:", nil);
-        label.textColor = DEF_GRAY;
-        [label setFont:[UIFont fontWithName:APP_FONT size:16]];
-        label.backgroundColor = [UIColor clearColor];
     } else if (section == sectionPastUntech){
         
-        label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, tableView.bounds.size.width - 10, 18)];
+        label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.bounds.size.width - 10, 18)];
         label.text = NSLocalizedString(@"Past Untechs:", nil);
-        label.textColor = DEF_GRAY;
-        [label setFont:[UIFont fontWithName:APP_FONT size:16]];
-        label.backgroundColor = [UIColor clearColor];
-        
     }
+    
+    label.textColor = DEF_GRAY;
+    [label setFont:[UIFont fontWithName:APP_FONT size:16]];
+    label.backgroundColor = [UIColor clearColor];
 
     [headerView addSubview:label];
     
@@ -621,11 +615,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSMutableDictionary *tempDictionary;
-    if ( indexPath.section == 0 ){
+    if ( indexPath.section == sectionCurrentUntech ){
         tempDictionary = currentUntechs[indexPath.row];
-    } else if ( indexPath.section == 1 ){
+    } else if ( indexPath.section == sectionUpcomingUntech ){
         tempDictionary = upcomingUntechs[indexPath.row];
-    }else if ( indexPath.section == 2 ){
+    }else if ( indexPath.section == sectionPastUntech ){
         tempDictionary = pastUntechs[indexPath.row];
     }
     
@@ -644,11 +638,11 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     int numberOfRowsInSection = 0;
-    if ( section == 0 ){
+    if ( section == sectionCurrentUntech ){
         numberOfRowsInSection = (int)currentUntechs.count;
-    }else if ( section == 1 ){
+    }else if ( section == sectionUpcomingUntech ){
         numberOfRowsInSection = (int)upcomingUntechs.count;
-    }else if ( section == 2 ){
+    }else if ( section == sectionPastUntech ){
         numberOfRowsInSection = (int)pastUntechs.count;
     }
     //return sectionHeader;
@@ -657,31 +651,18 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    int noOfSections = 3;
-    sectionCurrentUntech = 0;
-    sectionUpcomingUntech = 1;
-    sectionPastUntech = 2;
-    
-    
-//    int noOfSections = 0;
-//    sectionCurrentUntech = sectionUpcomingUntech = sectionPastUntech = -1;
+    int noOfSections = 0;
+    sectionCurrentUntech = sectionUpcomingUntech = sectionPastUntech = -1;
     
     if(currentUntechs.count > 0){
-        //sectionCurrentUntech = noOfSections++;
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
-        [self.untechablesTable beginUpdates];
-        [self.untechablesTable insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
-        [self.untechablesTable endUpdates];
+        sectionCurrentUntech = noOfSections++;
     }
     if(upcomingUntechs.count > 0){
-        //sectionUpcomingUntech = noOfSections++;
+        sectionUpcomingUntech = noOfSections++;
     }
     if(pastUntechs.count > 0){
-       //sectionPastUntech = noOfSections++;
+       sectionPastUntech = noOfSections++;
     }
-    
-    NSLog(@"%i  %i  %i", sectionCurrentUntech, sectionUpcomingUntech, sectionPastUntech );
-    
     return noOfSections;
 }
 
@@ -689,11 +670,11 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     NSString *sectionHeader;
-    if ( section == 0 ){
+    if ( section == sectionCurrentUntech ){
         sectionHeader = NSLocalizedString(@"Current Untechs", nil);
-    } else if ( section == 1 ){
+    } else if ( section == sectionUpcomingUntech ){
         sectionHeader = NSLocalizedString(@"Upcoming Untechs", nil);
-    }else if ( section == 2 ){
+    }else if ( section == sectionPastUntech ){
         sectionHeader = NSLocalizedString(@"Past Untechs:", nil);
     } 
     return sectionHeader;
