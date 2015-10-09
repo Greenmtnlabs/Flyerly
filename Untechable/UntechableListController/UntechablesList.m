@@ -143,6 +143,8 @@
         [btnHelp setTitle:NSLocalizedString(TITLE_HELP_TXT, nil) forState:normal];
         [btnHelp setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [btnHelp addTarget:self action:@selector(emailComposer) forControlEvents:UIControlEventTouchUpInside];
+        [btnHelp addTarget:self action:@selector(btnHelpTouchEnd) forControlEvents:UIControlEventTouchUpInside];
+        [btnHelp addTarget:self action:@selector(btnHelpTouchStart) forControlEvents:UIControlEventTouchDown];
         btnHelp.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:btnHelp];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
@@ -504,6 +506,16 @@
 
 #pragma mark -  Highlighting Functions
 
+-(void)btnHelpTouchStart{
+    [self setHelpHighlighted:YES];
+}
+-(void)btnHelpTouchEnd{
+    [self setHelpHighlighted:NO];
+}
+- (void)setHelpHighlighted:(BOOL)highlighted {
+    (highlighted) ? [btnHelp setBackgroundColor:DEF_GREEN] : [btnHelp setBackgroundColor:[UIColor clearColor]];
+}
+
 -(void)btnSettingsTouchStart{
     [self setSettingsHighlighted:YES];
 }
@@ -513,6 +525,7 @@
 - (void)setSettingsHighlighted:(BOOL)highlighted {
     (highlighted) ? [settingsButton setBackgroundColor:DEF_GREEN] : [settingsButton setBackgroundColor:[UIColor clearColor]];
 }
+
 - (IBAction)btnTouchStart:(id)sender{
     [self setHighlighted:YES sender:sender];
 }
