@@ -85,8 +85,9 @@
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [backButton setTitle:NSLocalizedString(TITLE_BACK_TXT, nil) forState:normal];
         [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
-        
         [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+        [backButton addTarget:self action:@selector(btnTouchStart:) forControlEvents:UIControlEventTouchDown];
+        [backButton addTarget:self action:@selector(btnTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
         backButton.showsTouchWhenHighlighted = YES;
         
         UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
@@ -97,12 +98,12 @@
         // Right Navigation
         saveButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         saveButton.titleLabel.shadowColor = [UIColor clearColor];
-        [saveButton addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
         saveButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [saveButton setTitle:NSLocalizedString(TITLE_SAVE_TXT, nil) forState:normal];
         [saveButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
-        [saveButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
-        [saveButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
+        [saveButton addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
+        [saveButton addTarget:self action:@selector(btnTouchStart:) forControlEvents:UIControlEventTouchDown];
+        [saveButton addTarget:self action:@selector(btnTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
         
         saveButton.showsTouchWhenHighlighted = YES;
         saveButton.hidden = YES;
@@ -120,15 +121,19 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)btnNextTouchStart{
-    [self setNextHighlighted:YES];
+#pragma mark -  Highlighting Functions
+
+-(void)btnTouchStart :(id)button{
+    [self setHighlighted:YES sender:button];
 }
--(void)btnNextTouchEnd{
-    [self setNextHighlighted:NO];
+-(void)btnTouchEnd :(id)button{
+    [self setHighlighted:NO sender:button];
 }
-- (void)setNextHighlighted:(BOOL)highlighted {
-    (highlighted) ? [saveButton setBackgroundColor:DEF_GREEN] : [saveButton setBackgroundColor:[UIColor clearColor]];
+- (void)setHighlighted:(BOOL)highlighted sender:(id)button {
+    (highlighted) ? [button setBackgroundColor:DEF_GREEN] : [button setBackgroundColor:[UIColor clearColor]];
 }
+
+
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
