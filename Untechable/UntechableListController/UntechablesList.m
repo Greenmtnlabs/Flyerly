@@ -124,6 +124,9 @@
         [settingsButton setTitle:NSLocalizedString(TITLE_SETTINGS_TXT, nil) forState:normal];
         [settingsButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [settingsButton addTarget:self action:@selector(goToSettings) forControlEvents:UIControlEventTouchUpInside];
+        [settingsButton addTarget:self action:@selector(btnSettingsTouchEnd) forControlEvents:UIControlEventTouchUpInside];
+        [settingsButton addTarget:self action:@selector(btnSettingsTouchStart) forControlEvents:UIControlEventTouchDown];
+        
         settingsButton.showsTouchWhenHighlighted = YES;
         
         UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
@@ -498,6 +501,18 @@
     btnUntechNow.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
 }
 
+
+#pragma mark -  Highlighting Functions
+
+-(void)btnSettingsTouchStart{
+    [self setSettingsHighlighted:YES];
+}
+-(void)btnSettingsTouchEnd{
+    [self setSettingsHighlighted:NO];
+}
+- (void)setSettingsHighlighted:(BOOL)highlighted {
+    (highlighted) ? [settingsButton setBackgroundColor:DEF_GREEN] : [settingsButton setBackgroundColor:[UIColor clearColor]];
+}
 - (IBAction)btnTouchStart:(id)sender{
     [self setHighlighted:YES sender:sender];
 }
