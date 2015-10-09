@@ -118,15 +118,18 @@
  **/
 -(void) showAddFieldPopUp {
     
-    UIAlertView *customMsg = [ [UIAlertView alloc] initWithTitle:@"Add Your Own Custom Untechable Message"
+    UIAlertView *customMsg = [ [UIAlertView alloc] initWithTitle:NSLocalizedString(@"Add Your Own Custom Untech Message", nil)
                                                     message:nil
                                                     delegate:self
-                                                    cancelButtonTitle:@"Cancel"
-                                                    otherButtonTitles:@"Add", nil];
+                                                    cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                                    otherButtonTitles:NSLocalizedString(@"Add", nil), nil];
     
-    customMsg.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [customMsg setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    [customMsg textFieldAtIndex:0].autocapitalizationType = UITextAutocapitalizationTypeSentences;
+    //customMsg.alertViewStyle = UIAlertViewStylePlainTextInput;
     
     [customMsg show];
+
 }
 
 #pragma - mark UIAlert View Delegate Methods
