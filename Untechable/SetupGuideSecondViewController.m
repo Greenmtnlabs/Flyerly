@@ -197,14 +197,11 @@
 
         // Right Navigation Button
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-        
         nextButton.titleLabel.shadowColor = [UIColor clearColor];
-        
-        [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
-
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [nextButton setTitle:NSLocalizedString(TITLE_NEXT_TXT, nil) forState:normal];
         [nextButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
+        [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
         [nextButton addTarget:self action:@selector(btnTouchStart:) forControlEvents:UIControlEventTouchDown];
         [nextButton addTarget:self action:@selector(btnTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
         
