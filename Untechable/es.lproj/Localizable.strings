@@ -91,8 +91,7 @@
 "1 Day" = "1 Día";
 "2 Days" = "2 Días";
 
-"#Untechable for %@ %@ " = "#Untechable para %@ %@ ";
-"Untechable created successfully" = "Untechable creado con éxito";
+"#Untech for %@ %@ " = "#Untech para %@ %@ ";
 "Unable to delete, please try agin later!" = "No se puede eliminar, por favor intente más tarde volveré!";
 
 "No network connection" = "No hay conexión a la red";
@@ -110,7 +109,7 @@
 "Going Untech and.." = "Yendo Untech y..";
 "Invalid Dates" = "Fechas no válidas";
 "End date should be greater than start date." = "Fecha de finalización debe ser mayor que la fecha de inicio.";
-"What are you going untechable for?" = "¿Qué vas Untechable buscas?";
+"What are you going Untech for?" = "¿Qué vas Untech buscas?";
 "You must specify what you'll be doing with your time away from technology before proceeding." = "Debe especificar lo que va a hacer con su tiempo lejos de la tecnología antes de proceder.";
 "NOW" = "AHORA";
 "Never" = "Nunca";
@@ -136,3 +135,4 @@
 
 // Socialnetwork
 "Enter default status" = "Introduzca estado por defecto";
+"Close" = "Cerrar";

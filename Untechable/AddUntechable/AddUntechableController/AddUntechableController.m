@@ -201,7 +201,11 @@
             [settingsButton setTitle:NSLocalizedString(TITLE_SETTINGS_TXT, nil) forState:normal];
             [settingsButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
             [settingsButton addTarget:self action:@selector(goToSettings) forControlEvents:UIControlEventTouchUpInside];
+            [settingsButton addTarget:self action:@selector(btnSettingsTouchEnd) forControlEvents:UIControlEventTouchUpInside];
+            [settingsButton addTarget:self action:@selector(btnSettingsTouchStart) forControlEvents:UIControlEventTouchDown];
             settingsButton.showsTouchWhenHighlighted = YES;
+            
+            
             
             UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
             
@@ -236,6 +240,18 @@
 
 -(void) goBack {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark -  Highlighting Functions
+
+-(void)btnSettingsTouchStart{
+    [self setSettingsHighlighted:YES];
+}
+-(void)btnSettingsTouchEnd{
+    [self setSettingsHighlighted:NO];
+}
+- (void)setSettingsHighlighted:(BOOL)highlighted {
+    (highlighted) ? [settingsButton setBackgroundColor:DEF_GREEN] : [settingsButton setBackgroundColor:[UIColor clearColor]];
 }
 
 -(void)btnNextTouchStart{
@@ -273,14 +289,14 @@
         
         if( goToNext ) {
             NSString *getDaysOrHours = [untechable calculateHoursDays:untechable.startDate  endTime: untechable.endDate];
-            untechable.socialStatus = [NSString stringWithFormat:NSLocalizedString(@"#Untechable for %@ %@ ", nil), getDaysOrHours,untechable.spendingTimeTxt];
+            untechable.socialStatus = [NSString stringWithFormat:NSLocalizedString(@"#Untech for %@ %@ ", nil), getDaysOrHours,untechable.spendingTimeTxt];
             ContactsListControllerViewController *listController = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
             listController.untechable = untechable;
             [self.navigationController pushViewController:listController animated:YES];
         }
         
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"What are you going Untechable for?", nil)
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"What are you going Untech for?", nil)
                                                         message:NSLocalizedString(@"You must specify what you'll be doing with your time away from technology before proceeding.", nil)
                                                        delegate:nil
                                               cancelButtonTitle:NSLocalizedString(OK, nil)

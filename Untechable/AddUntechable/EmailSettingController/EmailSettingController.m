@@ -232,8 +232,9 @@
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
         [backButton setTitle:NSLocalizedString(TITLE_BACK_TXT, nil) forState:normal];
         [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
-        [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
-        [backButton addTarget:self action:@selector(btnNextTouchEndToServerAccount) forControlEvents:UIControlEventTouchUpInside];
+        [backButton addTarget:self action:@selector(onBack) forControlEvents:UIControlEventTouchUpInside];
+        [backButton addTarget:self action:@selector(btnTouchStart:) forControlEvents:UIControlEventTouchDown];
+        [backButton addTarget:self action:@selector(btnTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
         backButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         NSMutableArray  *leftNavItems  = [NSMutableArray arrayWithObjects:leftBarButton,nil];
@@ -246,7 +247,6 @@
         
         // Right Button
         rightBarButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-        [rightBarButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
         rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         
         if ( [comingFrom isEqualToString:@"SettingsScreen"] ) {
@@ -260,6 +260,9 @@
         }
         
         [rightBarButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
+        [rightBarButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
+        [rightBarButton addTarget:self action:@selector(btnTouchStart:) forControlEvents:UIControlEventTouchDown];
+        [rightBarButton addTarget:self action:@selector(btnTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
         rightBarButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton_ = [[UIBarButtonItem alloc] initWithCustomView:rightBarButton];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton_,nil];
@@ -280,8 +283,9 @@
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
         [backButton setTitle:NSLocalizedString(TITLE_BACK_TXT, nil) forState:normal];
         [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
-        [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
-        [backButton addTarget:self action:@selector(btnBackToAccountType) forControlEvents:UIControlEventTouchUpInside];
+        [backButton addTarget:self action:@selector(onBack) forControlEvents:UIControlEventTouchUpInside];
+        [backButton addTarget:self action:@selector(btnTouchStart:) forControlEvents:UIControlEventTouchDown];
+        [backButton addTarget:self action:@selector(btnTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
         backButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         NSMutableArray  *leftNavItems  = [NSMutableArray arrayWithObjects:leftBarButton,nil];
@@ -295,6 +299,8 @@
          // Right Button
         rightBarButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         [rightBarButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
+        [rightBarButton addTarget:self action:@selector(btnTouchStart:) forControlEvents:UIControlEventTouchDown];
+        [rightBarButton addTarget:self action:@selector(btnTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
         rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
 
         if ( [comingFrom isEqualToString:@"SettingsScreen"] && [untechable.acType isEqualToString:@"OTHER"] == NO) {
@@ -329,8 +335,9 @@
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
         [backButton setTitle:NSLocalizedString(TITLE_BACK_TXT, nil) forState:normal];
         [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
-        [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
-        [backButton addTarget:self action:@selector(btnBackTouchEnd) forControlEvents:UIControlEventTouchUpInside];
+        [backButton addTarget:self action:@selector(onBack) forControlEvents:UIControlEventTouchUpInside];
+        [backButton addTarget:self action:@selector(btnTouchStart:) forControlEvents:UIControlEventTouchDown];
+        [backButton addTarget:self action:@selector(btnTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
         backButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         NSMutableArray  *leftNavItems  = [NSMutableArray arrayWithObjects:leftBarButton,nil];
@@ -344,6 +351,8 @@
         // Right Button
         rightBarButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         [rightBarButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
+        [rightBarButton addTarget:self action:@selector(btnTouchStart:) forControlEvents:UIControlEventTouchDown];
+        [rightBarButton addTarget:self action:@selector(btnTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
         rightBarButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [rightBarButton setTitle:NSLocalizedString(TITLE_FINISH_TXT, nil) forState:normal];
         [rightBarButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
@@ -359,8 +368,9 @@
             skipButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
             [skipButton setTitle:NSLocalizedString(TITLE_SKIP_TXT, nil) forState:normal];
             [skipButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
-            [skipButton addTarget:self action:@selector(btnSkipTouchStart) forControlEvents:UIControlEventTouchDown];
-            [skipButton addTarget:self action:@selector(btnSkipTouchEnd) forControlEvents:UIControlEventTouchUpInside];
+            [skipButton addTarget:self action:@selector(onSkip) forControlEvents:UIControlEventTouchUpInside];
+            [skipButton addTarget:self action:@selector(btnTouchStart:) forControlEvents:UIControlEventTouchDown];
+            [skipButton addTarget:self action:@selector(btnTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
             skipButton.showsTouchWhenHighlighted = YES;
             UIBarButtonItem *skipBarButton = [[UIBarButtonItem alloc] initWithCustomView:skipButton];
             NSMutableArray  *skipNavItems  = [NSMutableArray arrayWithObjects:skipBarButton,nil];
@@ -373,16 +383,18 @@
     }
 }
 
--(void)btnSkipTouchStart{
-    [self setSkipHighlighted:YES];
+#pragma mark -  Highlighting Functions
+
+-(void)btnTouchStart :(id)button{
+    [self setHighlighted:YES sender:button];
 }
--(void)btnSkipTouchEnd{
-    [self onSkip];
-    [self setSkipHighlighted:NO];
+-(void)btnTouchEnd :(id)button{
+    [self setHighlighted:NO sender:button];
 }
-- (void)setSkipHighlighted:(BOOL)highlighted {
-    (highlighted) ? [skipButton setBackgroundColor:DEF_GREEN] : [skipButton setBackgroundColor:[UIColor clearColor]];
+- (void)setHighlighted:(BOOL)highlighted sender:(id)button {
+    (highlighted) ? [button setBackgroundColor:DEF_GREEN] : [button setBackgroundColor:[UIColor clearColor]];
 }
+
 
 -(void)onSkip {
     
@@ -397,27 +409,6 @@
         fourthScreen.untechable = untechable;
         [self.navigationController pushViewController:fourthScreen animated:YES];
     }
-}
-
--(void)btnNextTouchStart{
-    [self setNextHighlighted:YES];
-}
--(void)btnNextTouchEnd{
-    [self setNextHighlighted:NO];
-}
-- (void)setNextHighlighted:(BOOL)highlighted {
-    (highlighted) ? [rightBarButton setBackgroundColor:DEF_GREEN] : [rightBarButton setBackgroundColor:[UIColor clearColor]];
-}
-
--(void)btnBackTouchStart{
-    [self setBackHighlighted:YES];
-}
--(void)btnBackTouchEnd{
-    [self setBackHighlighted:NO];
-    [self onBack];
-}
-- (void)setBackHighlighted:(BOOL)highlighted {
-    (highlighted) ? [backButton setBackgroundColor:DEF_GREEN] : [backButton setBackgroundColor:[UIColor clearColor]];
 }
 
 -(void)onBack{
