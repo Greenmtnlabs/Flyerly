@@ -47,6 +47,8 @@
 "Did you know that based on a study, people %@ have better relationships, better quality of sleep and in general are more emotionally balanced." = "¿Sabía usted que en base a un estudio , las personas %@ tener mejores relaciones, mejor calidad del sueño y en general son más emocionalmente equilibrado.";
 
 "e.g. Spending time with family" = "por ejemplo Pasar tiempo con la familia";
+"Add Your Own Custom Untech Message" = "Añadir su propio mensaje personalizado Untech";
+"Cancel" = "Cancelar";
 
 // SetupGuide Screen 3
 "Search contacts to notify of untech time" = "Buscar contactos para notificar de tiempo untech";
