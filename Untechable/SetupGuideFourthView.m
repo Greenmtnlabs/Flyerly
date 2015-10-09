@@ -64,10 +64,11 @@
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.shadowColor = [UIColor clearColor];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [backButton setTitle:NSLocalizedString(TITLE_NEXT_TXT, nil) forState:normal];
+        [backButton setTitle:NSLocalizedString(TITLE_BACK_TXT, nil) forState:normal];
         [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
-        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+        [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
+        [backButton addTarget:self action:@selector(btnBackTouchEnd) forControlEvents:UIControlEventTouchUpInside];
         backButton.showsTouchWhenHighlighted = YES;
         
         UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
@@ -92,6 +93,18 @@
         [self.navigationItem setRightBarButtonItems:rightNavItems];
         
     }
+}
+
+#pragma mark -  Highlighting Functions
+
+-(void)btnBackTouchStart{
+    [self setBackHighlighted:YES];
+}
+-(void)btnBackTouchEnd{
+    [self setBackHighlighted:NO];
+}
+- (void)setBackHighlighted:(BOOL)highlighted {
+    (highlighted) ? [backButton setBackgroundColor:DEF_GREEN] : [backButton setBackgroundColor:[UIColor clearColor]];
 }
 
 -(void)btnNextTouchStart{
