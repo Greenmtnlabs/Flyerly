@@ -126,10 +126,7 @@
     
     [customMsg setAlertViewStyle:UIAlertViewStylePlainTextInput];
     [customMsg textFieldAtIndex:0].autocapitalizationType = UITextAutocapitalizationTypeSentences;
-    //customMsg.alertViewStyle = UIAlertViewStylePlainTextInput;
-    
     [customMsg show];
-
 }
 
 #pragma - mark UIAlert View Delegate Methods
