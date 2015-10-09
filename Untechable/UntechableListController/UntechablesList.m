@@ -124,8 +124,8 @@
         [settingsButton setTitle:NSLocalizedString(TITLE_SETTINGS_TXT, nil) forState:normal];
         [settingsButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [settingsButton addTarget:self action:@selector(goToSettings) forControlEvents:UIControlEventTouchUpInside];
-        [settingsButton addTarget:self action:@selector(btnSettingsTouchEnd) forControlEvents:UIControlEventTouchUpInside];
-        [settingsButton addTarget:self action:@selector(btnSettingsTouchStart) forControlEvents:UIControlEventTouchDown];
+        [settingsButton addTarget:self action:@selector(btnTouchStart:) forControlEvents:UIControlEventTouchDown];
+        [settingsButton addTarget:self action:@selector(btnTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
         
         settingsButton.showsTouchWhenHighlighted = YES;
         
@@ -143,8 +143,8 @@
         [btnHelp setTitle:NSLocalizedString(TITLE_HELP_TXT, nil) forState:normal];
         [btnHelp setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [btnHelp addTarget:self action:@selector(emailComposer) forControlEvents:UIControlEventTouchUpInside];
-        [btnHelp addTarget:self action:@selector(btnHelpTouchEnd) forControlEvents:UIControlEventTouchUpInside];
-        [btnHelp addTarget:self action:@selector(btnHelpTouchStart) forControlEvents:UIControlEventTouchDown];
+        [btnHelp addTarget:self action:@selector(btnTouchStart:) forControlEvents:UIControlEventTouchDown];
+        [btnHelp addTarget:self action:@selector(btnTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
         btnHelp.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:btnHelp];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
@@ -506,37 +506,15 @@
 
 #pragma mark -  Highlighting Functions
 
--(void)btnHelpTouchStart{
-    [self setHelpHighlighted:YES];
+-(void)btnTouchStart :(id)button{
+    [self setHighlighted:YES sender:button];
 }
--(void)btnHelpTouchEnd{
-    [self setHelpHighlighted:NO];
+-(void)btnTouchEnd :(id)button{
+    [self setHighlighted:NO sender:button];
 }
-- (void)setHelpHighlighted:(BOOL)highlighted {
-    (highlighted) ? [btnHelp setBackgroundColor:DEF_GREEN] : [btnHelp setBackgroundColor:[UIColor clearColor]];
+- (void)setHighlighted:(BOOL)highlighted sender:(id)button {
+    (highlighted) ? [button setBackgroundColor:DEF_GREEN] : [button setBackgroundColor:[UIColor clearColor]];
 }
-
--(void)btnSettingsTouchStart{
-    [self setSettingsHighlighted:YES];
-}
--(void)btnSettingsTouchEnd{
-    [self setSettingsHighlighted:NO];
-}
-- (void)setSettingsHighlighted:(BOOL)highlighted {
-    (highlighted) ? [settingsButton setBackgroundColor:DEF_GREEN] : [settingsButton setBackgroundColor:[UIColor clearColor]];
-}
-
-- (IBAction)btnTouchStart:(id)sender{
-    [self setHighlighted:YES sender:sender];
-}
-- (IBAction)btnTouchEnd:(id)sender{
-    [self setHighlighted:NO sender:sender];
-}
-
-- (void)setHighlighted:(BOOL)highlighted sender:(id)sender {
-    (highlighted) ? [sender setBackgroundColor:DEF_GRAY] : [sender setBackgroundColor:DEF_GRAY];
-}
-
 /**
  * Override to support conditional editing of the table view.
  * This only needs to be implemented if you are going to return NO
