@@ -70,10 +70,10 @@
     // initializes array
     _pickerData = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"]];
 
-    if( _pickerData.count > 0 ){
-        // removes last element from array which is "Custom"
-        [_pickerData removeObjectAtIndex: _pickerData.count-1];
-    }
+//    if( _pickerData.count > 0 ){
+//        // removes last element from array which is "Custom"
+//        [_pickerData removeObjectAtIndex: _pickerData.count-1];
+//    }
 
     [self showHideTextPicker:NO];
     
@@ -472,7 +472,7 @@
 #pragma mark -  UI functions
 -(void)updateUI{
     
-    [_btnLblWwud setTitle:NSLocalizedString(@"Going Untechable and..", nil) forState:normal];
+    [_btnLblWwud setTitle:NSLocalizedString(@"Going Untech and..", nil) forState:normal];
     [_btnLblWwud setTitleColor:DEF_GRAY forState:UIControlStateNormal];
     _btnLblWwud.titleLabel.font = [UIFont fontWithName:APP_FONT size:25];
  
@@ -606,6 +606,17 @@
     
     int len = (int)_inputSpendingTimeText.text.length;
     _char_Limit.text=[NSString stringWithFormat:@"%i",124-len];
+    
+    _pickerData = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"]];
+    
+   
+    
+    if( [[_pickerData objectAtIndex:row] isEqualToString:[_pickerData objectAtIndex:_pickerData.count-1]] ){
+        //[self showAddFieldPopUp];
+    } else  {
+       // untechable.spendingTimeTxt = [customSpendingTextAry objectAtIndex:row];
+    }
+
 }
 
 /**
@@ -623,6 +634,54 @@
     
     [self.view addSubview:_spendingTimeTextPicker];
 }
+
+
+///**
+// Showing a prompt where user can add their custom messages.
+// **/
+//-(void) showAddFieldPopUp {
+//    
+//    UIAlertView *customMsg = [ [UIAlertView alloc] initWithTitle:NSLocalizedString(@"Add Your Own Custom Untech Message", nil)
+//                                                         message:nil
+//                                                        delegate:self
+//                                               cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+//                                               otherButtonTitles:NSLocalizedString(@"Add", nil), nil];
+//    
+//    [customMsg setAlertViewStyle:UIAlertViewStylePlainTextInput];
+//    [customMsg textFieldAtIndex:0].autocapitalizationType = UITextAutocapitalizationTypeSentences;
+//    [customMsg show];
+//}
+//
+//#pragma - mark UIAlert View Delegate Methods
+//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+//    
+//    // we will add new message at the second last index
+//    int position = ( int )[customSpendingTextAry count] - 1;
+//    
+//    //if cancel was not pressed
+//    if( buttonIndex != 0 ){
+//        
+//        // getting the newly added text from the field
+//        NSString *newMsg = [[alertView textFieldAtIndex:0] text];
+//        
+//        // adding the new msg at the second last index of the picker
+//        [customSpendingTextAry insertObject:newMsg atIndex:position];
+//        
+//        // inserting values in data source of picker view.
+//        [[NSUserDefaults standardUserDefaults] setObject:customSpendingTextAry forKey:@"cutomSpendingTimeTextAry"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//        
+//        //Update new msg in doctors research string
+//        [self setupDoctorsResearchLabel:newMsg];
+//        
+//        // save new Custom message to model
+//        untechable.spendingTimeTxt = [customSpendingTextAry objectAtIndex:position];
+//        
+//        // reloading the new picker view with custom messages
+//        [_setupSpendingTimeText reloadAllComponents];
+//        
+//    }
+//}
 
 
 @end
