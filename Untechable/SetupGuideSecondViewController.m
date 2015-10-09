@@ -153,10 +153,11 @@
         
         // save new Custom message to model 
         untechable.spendingTimeTxt = [customSpendingTextAry objectAtIndex:position];
+        NSString *getDaysOrHours = [untechable calculateHoursDays:untechable.startDate  endTime: untechable.endDate];
+        untechable.socialStatus = [NSString stringWithFormat:NSLocalizedString(@"#Untech for %@ %@ ", nil), getDaysOrHours,untechable.spendingTimeTxt];
         
         // reloading the new picker view with custom messages
         [_setupSpendingTimeText reloadAllComponents];
-
     }
 }
 

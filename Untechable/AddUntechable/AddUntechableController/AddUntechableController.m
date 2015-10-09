@@ -273,14 +273,14 @@
         
         if( goToNext ) {
             NSString *getDaysOrHours = [untechable calculateHoursDays:untechable.startDate  endTime: untechable.endDate];
-            untechable.socialStatus = [NSString stringWithFormat:NSLocalizedString(@"#Untechable for %@ %@ ", nil), getDaysOrHours,untechable.spendingTimeTxt];
+            untechable.socialStatus = [NSString stringWithFormat:NSLocalizedString(@"#Untech for %@ %@ ", nil), getDaysOrHours,untechable.spendingTimeTxt];
             ContactsListControllerViewController *listController = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
             listController.untechable = untechable;
             [self.navigationController pushViewController:listController animated:YES];
         }
         
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"What are you going Untechable for?", nil)
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"What are you going Untech for?", nil)
                                                         message:NSLocalizedString(@"You must specify what you'll be doing with your time away from technology before proceeding.", nil)
                                                        delegate:nil
                                               cancelButtonTitle:NSLocalizedString(OK, nil)

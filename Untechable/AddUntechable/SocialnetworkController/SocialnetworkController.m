@@ -227,7 +227,7 @@
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(ERROR, nil)
                                                                 message:defaultStatus
                                                                delegate:nil
-                                                      cancelButtonTitle:@"Close"
+                                                      cancelButtonTitle:NSLocalizedString(@"Close", nil)
                                                       otherButtonTitles: nil];
                 [alert show];
             } else{

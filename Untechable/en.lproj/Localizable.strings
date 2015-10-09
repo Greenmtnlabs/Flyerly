@@ -94,7 +94,7 @@
 "1 Day" = "1 Day";
 "2 Days" = "2 Days";
 
-"#Untechable for %@ %@ " = "#Untechable for %@ %@ ";
+"#Untech for %@ %@ " = "#Untech for %@ %@ ";
 "Untechable created successfully" = "Untechable created successfully";
 "Unable to delete, please try agin later!" = "Unable to delete, please try agin later!";
 
@@ -112,7 +112,7 @@
 "Going Untech and.." = "Going Untech and..";
 "Invalid Dates" = "Invalid Dates";
 "End date should be greater than start date." = "End date should be greater than start date.";
-"What are you going Untechable for?" = "What are you going Untechable for?";
+"What are you going Untech for?" = "What are you going Untech for?";
 "You must specify what you'll be doing with your time away from technology before proceeding." = "You must specify what you'll be doing with your time away from technology before proceeding.";
 "NOW" = "NOW";
 "Never" = "Never";
@@ -138,4 +138,5 @@
 
 // Socialnetwork
 "Enter default status" = "Enter default status";
+"Close" = "Close";
 
