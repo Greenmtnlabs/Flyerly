@@ -22,6 +22,7 @@
     int addsCount;
     int addsLoaded;
     CGRect sizeRectForAdd;
+    BOOL searching;
 }
 
 @end
@@ -31,6 +32,7 @@
 @synthesize sharePanel,tView;
 @synthesize flyerPaths;
 @synthesize flyer, signInAlert,settingBtn,bottomBar;
+@synthesize txtSearch;
 
 id lastShareBtnSender;
 
@@ -42,6 +44,8 @@ id lastShareBtnSender;
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     flyerConfigurator = appDelegate.flyerConfigurator;
+    
+    [self updateUI];
     
     lastShareBtnSender = nil;
     self.navigationItem.hidesBackButton = YES;
@@ -95,8 +99,29 @@ id lastShareBtnSender;
 
 }
 
+
+-(void) updateUI{
+    
+    searching = NO;
+    
+    txtSearch.font = [UIFont systemFontOfSize:12.0];
+    txtSearch.textAlignment = NSTextAlignmentLeft;
+    txtSearch.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    [txtSearch setBorderStyle:UITextBorderStyleRoundedRect];
+    [txtSearch setReturnKeyType:UIReturnKeyDone];
+    
+    [txtSearch addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingChanged];
+    txtSearch.borderStyle = nil;
+
+
+
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    searching = NO;
+    txtSearch.text = @"";
     
     [self checkUserPurchases];
 }
@@ -137,15 +162,6 @@ id lastShareBtnSender;
     } else {
         NSLog(@"Anonymous, User is NOT authenticated.");
     }
-}
-
-#pragma mark  Text Field Delegete
-
-- (void)textFieldTapped:(id)sender {
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    return YES;
 }
 
 
@@ -892,4 +908,43 @@ id lastShareBtnSender;
     }
     
 }
+
+
+#pragma mark  Text Field Delegete
+
+- (void)textFieldTapped:(id)sender {
+    
+    if (txtSearch.text == nil || [txtSearch.text isEqualToString:@""])
+    {
+        searching = NO;
+        [self.tView reloadData];
+        [txtSearch resignFirstResponder];
+    }else{
+        searching = YES;
+        [self searchTableView:[NSString stringWithFormat:@"%@", ((UITextField *)sender).text]];
+    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    if([string isEqualToString:@"\n"]){
+        if([txtSearch canResignFirstResponder])
+        {
+            [txtSearch resignFirstResponder];
+        }
+        return NO;
+    }
+    
+    if(searching){
+        if([string isEqualToString:@"\n"]){
+            
+            if([txtSearch canResignFirstResponder])
+            {
+                [txtSearch resignFirstResponder];
+            }
+        }
+    }
+    return YES;
+}
+
 @end

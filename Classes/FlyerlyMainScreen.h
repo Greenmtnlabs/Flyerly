@@ -64,6 +64,7 @@
 -(IBAction)createFlyer:(id)sender;
 -(IBAction)doAbout:(id)sender;
 -(IBAction)doInvite:(id)sender;
+@property (strong, nonatomic) IBOutlet UITextField *txtSearch;
 
 -(NSMutableArray *)getFlyersPaths;
 

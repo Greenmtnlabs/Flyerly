@@ -10,6 +10,7 @@
                 <outlet property="bottomBar" destination="ZWV-7a-5WA" id="2ye-ng-O5U"/>
                 <outlet property="settingBtn" destination="nFc-73-sac" id="iBf-GG-5xM"/>
                 <outlet property="tView" destination="kGq-MQ-Rhl" id="vDj-iA-mjT"/>
+                <outlet property="txtSearch" destination="hXf-hs-j92" id="bB6-hf-E0O"/>
                 <outlet property="view" destination="12" id="14"/>
             </connections>
         </placeholder>
