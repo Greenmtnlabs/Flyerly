@@ -113,8 +113,6 @@ id lastShareBtnSender;
     [txtSearch addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingChanged];
     txtSearch.borderStyle = nil;
 
-
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -193,6 +191,7 @@ id lastShareBtnSender;
             [searchFlyerPaths addObject:[flyerPaths objectAtIndex:i]];
         }
     }
+    
     [self.tView reloadData];
 }
 
@@ -262,9 +261,6 @@ id lastShareBtnSender;
 
     return [NSMutableArray arrayWithObjects:backBarButton,nil];
 }
-
-
-
 
 -(NSArray *)rightBarItems{
     
@@ -427,9 +423,8 @@ id lastShareBtnSender;
     if (searching){
         return  [searchFlyerPaths count];
     }else{
-        return  [flyerPaths count];
+        return [self getRowsCountWithAdds];
     }
-    //return [self getRowsCountWithAdds];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     int rowNumber = (int)indexPath.row;
@@ -457,16 +452,28 @@ id lastShareBtnSender;
         [cell setAccessoryType:UITableViewCellAccessoryNone];
         
         
-        dispatch_async(dispatch_get_main_queue(), ^{
+        if( searching ){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:indexPath.row] setDirectory:NO];
+                [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
+                cell.shareBtn.tag = indexPath.row;
+                [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
+                
+            });
+            return cell;
+          } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
                 int flyerRow = [self getIndexOfFlyer:rowNumber];
                 flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:flyerRow] setDirectory:NO];
                 [cell renderCell:flyer LockStatus:NO];
                 [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
                 cell.shareBtn.tag = indexPath.row;
                 [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
-        });
-        
-        return cell;
+            });
+            return cell;
+        }
+
     }
     else {
         static NSString *MainScreenAddsCellId = @"MainScreenAddsCell";
@@ -590,9 +597,20 @@ id lastShareBtnSender;
         rowNumber = [self getIndexOfFlyer:rowNumber];
 
         if (editingStyle == UITableViewCellEditingStyleDelete) {
+            // HERE WE REMOVE FLYER FROM DIRECTORY
+            if ( searching ) {
+                
+                [[NSFileManager defaultManager] removeItemAtPath:[searchFlyerPaths objectAtIndex:indexPath.row] error:nil];
+                [searchFlyerPaths removeObjectAtIndex:indexPath.row];
+                
+            } else {
+                
+                [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:indexPath.row] error:nil];
+                [flyerPaths removeObjectAtIndex:indexPath.row];
+            }
             
-            [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:rowNumber] error:nil];
-            [flyerPaths removeObjectAtIndex:rowNumber];
+//            [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:rowNumber] error:nil];
+//            [flyerPaths removeObjectAtIndex:rowNumber];
         }
 
         [tableView reloadData];
@@ -703,11 +721,17 @@ id lastShareBtnSender;
     UIButton *clickButton = sender;
     NSInteger row = clickButton.tag; ///will get it from button tag
     
+    if([txtSearch.text isEqualToString:@""]) {
+        flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:row] setDirectory:NO];
+    } else{
+        flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:row] setDirectory:NO];
+    }
+    
     if(row > (ADD_AFTER_FLYERS-1)){
         row = row - floor(row/ADD_AFTER_FLYERS);
     }
     
-    flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:row] setDirectory:NO];
+    //flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:row] setDirectory:NO];
     
     if ( [[PFUser currentUser] sessionToken] ) {
         [self enableBtns:NO];
