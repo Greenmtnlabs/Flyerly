@@ -301,10 +301,18 @@ id lastShareBtnSender;
 }
 
 /**
- * Return incremented numbers of rows with respect to add
+ * Return incremented numbers of rows with respect to ads
  */
 -(int)getRowsCountWithAdds{
     int flyersCount = (int)flyerPaths.count;
+    addsCount = floor(flyersCount/ (ADD_AFTER_FLYERS -1) );
+    int total = flyersCount + addsCount;
+    
+    return  total;
+}
+
+-(int)getRowsCountWithAddsInSeleceted{
+    int flyersCount = (int)searchFlyerPaths.count;
     addsCount = floor(flyersCount/ (ADD_AFTER_FLYERS -1) );
     int total = flyersCount + addsCount;
     
@@ -322,6 +330,8 @@ id lastShareBtnSender;
 
 /**
  * Get index of flyer row
+ * because of  ads
+ * indices of flyers are not in proper order
  */
 -(int)getIndexOfFlyer:(int)rowNumber{
     rowNumber++;//because indexes are starting from 0
@@ -421,7 +431,7 @@ id lastShareBtnSender;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if (searching){
-        return  [searchFlyerPaths count];
+        return  [self getRowsCountWithAddsInSeleceted];
     }else{
         return [self getRowsCountWithAdds];
     }
@@ -455,10 +465,13 @@ id lastShareBtnSender;
         if( searching ){
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:indexPath.row] setDirectory:NO];
+                int flyerRow = [self getIndexOfFlyer:rowNumber];
+                flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:flyerRow] setDirectory:NO];
+                [cell renderCell:flyer LockStatus:NO];
                 [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
                 cell.shareBtn.tag = indexPath.row;
                 [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
+
                 
             });
             return cell;
@@ -1001,5 +1014,7 @@ id lastShareBtnSender;
     }
     return YES;
 }
+
+
 
 @end
