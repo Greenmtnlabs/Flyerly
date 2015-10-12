@@ -161,12 +161,7 @@
     [self.navigationController pushViewController:settingsController animated:YES];
 }
 
--(void)addUntechable{
-    AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
-    addUntechable.untechable = untechable;
-    addUntechable.totalUntechables = (int)allUntechables.count;
-    [self.navigationController pushViewController:addUntechable animated:YES];
-}
+
 
 /*
  * This method sends email
@@ -530,6 +525,7 @@
 }
 - (void)setUntechHighlighted:(BOOL)highlighted sender:(id)button {
     (highlighted) ? [button setBackgroundColor:DEF_GREEN] : [button setBackgroundColor:DEF_GRAY];
+    (highlighted) ? [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal] : [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
 
 /**
@@ -823,7 +819,6 @@
 - (IBAction)untechNowClick:(id)sender {
     
     self.doneButtonView.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
-    
     // changes the "CLOSE" button text color to black
     [_doneButtonView setTitle:NSLocalizedString(TITLE_DONE_TXT, nil) forState:normal];
     [_doneButtonView setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
@@ -835,7 +830,10 @@
 }
 
 - (IBAction)untechCustomClick:(id)sender {
-    [self addUntechable];
+    AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
+    addUntechable.untechable = untechable;
+    addUntechable.totalUntechables = (int)allUntechables.count;
+    [self.navigationController pushViewController:addUntechable animated:YES];
 }
 - (IBAction)btnDoneClick:(id)sender {
     
