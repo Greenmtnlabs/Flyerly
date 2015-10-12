@@ -494,6 +494,8 @@
     [btnUntechCustom setBackgroundColor:DEF_GRAY];
     btnUntechCustom.titleLabel.font = [UIFont fontWithName:APP_FONT size:16];
     btnUntechCustom.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
+    [btnUntechCustom addTarget:self action:@selector(btnUntechTouchStart:) forControlEvents:UIControlEventTouchDown];
+    [btnUntechCustom addTarget:self action:@selector(btnUntechTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
     
     btnUntechNow.layer.cornerRadius = 10;
     [btnUntechNow setTitle:NSLocalizedString(@"Untech Now", nil) forState:normal];
@@ -501,6 +503,9 @@
     [btnUntechNow setBackgroundColor:DEF_GRAY];
     btnUntechNow.titleLabel.font = [UIFont fontWithName:APP_FONT size:16];
     btnUntechNow.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
+    [btnUntechNow addTarget:self action:@selector(btnUntechTouchStart:) forControlEvents:UIControlEventTouchDown];
+    [btnUntechNow addTarget:self action:@selector(btnUntechTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
 
@@ -515,6 +520,18 @@
 - (void)setHighlighted:(BOOL)highlighted sender:(id)button {
     (highlighted) ? [button setBackgroundColor:DEF_GREEN] : [button setBackgroundColor:[UIColor clearColor]];
 }
+
+
+-(void)btnUntechTouchStart :(id)button{
+    [self setUntechHighlighted:YES sender:button];
+}
+-(void)btnUntechTouchEnd :(id)button{
+    [self setUntechHighlighted:NO sender:button];
+}
+- (void)setUntechHighlighted:(BOOL)highlighted sender:(id)button {
+    (highlighted) ? [button setBackgroundColor:DEF_GREEN] : [button setBackgroundColor:DEF_GRAY];
+}
+
 /**
  * Override to support conditional editing of the table view.
  * This only needs to be implemented if you are going to return NO
