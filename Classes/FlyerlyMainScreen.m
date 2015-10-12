@@ -168,6 +168,31 @@ id lastShareBtnSender;
 #pragma mark  custom Methods
 
 - (void) searchTableView:(NSString *)schTxt {
+    NSString *sTemp;
+    NSString *sTemp1;
+    NSString *sTemp2;
+    
+    NSString *searchText = txtSearch.text;
+    
+    searchFlyerPaths = [[NSMutableArray alloc] init];
+    
+    for (int i =0 ; i < [flyerPaths count] ; i++)
+    {
+        Flyer *fly = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:i] setDirectory:NO];
+        
+        sTemp = [fly getFlyerTitle];
+        sTemp1 = [fly getFlyerDescription];
+        sTemp2 = [fly getFlyerDate];
+    
+        NSRange titleResultsRange = [sTemp rangeOfString:searchText options:NSCaseInsensitiveSearch];
+        NSRange titleResultsRange1 = [sTemp1 rangeOfString:searchText options:NSCaseInsensitiveSearch];
+        NSRange titleResultsRange2 = [sTemp2 rangeOfString:searchText options:NSCaseInsensitiveSearch];
+        
+        if (titleResultsRange.length > 0 || titleResultsRange1.length > 0 || titleResultsRange2.length > 0){
+            
+            [searchFlyerPaths addObject:[flyerPaths objectAtIndex:i]];
+        }
+    }
     [self.tView reloadData];
 }
 
@@ -398,7 +423,13 @@ id lastShareBtnSender;
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self getRowsCountWithAdds];
+    
+    if (searching){
+        return  [searchFlyerPaths count];
+    }else{
+        return  [flyerPaths count];
+    }
+    //return [self getRowsCountWithAdds];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     int rowNumber = (int)indexPath.row;
