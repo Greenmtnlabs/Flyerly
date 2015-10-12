@@ -339,6 +339,12 @@ id lastShareBtnSender;
     return  row;
 }
 
+-(int)getIndexOfSelectedFlyer:(int)rowNumber{
+    rowNumber++;//because indexes are starting from 0
+    int row = rowNumber - floor(rowNumber / ADD_AFTER_FLYERS ) - 1 ;
+    return  row;
+}
+
 /**
  * It will return the index is it belongs from advertise or not
  */
@@ -465,7 +471,7 @@ id lastShareBtnSender;
         if( searching ){
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                int flyerRow = [self getIndexOfFlyer:rowNumber];
+                int flyerRow = [self getIndexOfSelectedFlyer:rowNumber];
                 flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:flyerRow] setDirectory:NO];
                 [cell renderCell:flyer LockStatus:NO];
                 [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
@@ -509,12 +515,19 @@ id lastShareBtnSender;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     int rowNumber = (int)indexPath.row;
+    int rowNumberSelectedFlyer = (int)indexPath.row;
+    
     if( [self isAddvertiseRow:rowNumber] == NO ) {
         rowNumber = [self getIndexOfFlyer:rowNumber];
+        rowNumberSelectedFlyer = [self getIndexOfSelectedFlyer:rowNumberSelectedFlyer];
         
         [self enableBtns:NO];
         
-        flyer = [[Flyer alloc]initWithPath:[flyerPaths objectAtIndex:rowNumber] setDirectory:YES];
+        if(searching){
+             flyer = [[Flyer alloc]initWithPath:[searchFlyerPaths objectAtIndex:rowNumberSelectedFlyer] setDirectory:YES];
+        } else {
+             flyer = [[Flyer alloc]initWithPath:[flyerPaths objectAtIndex:rowNumber] setDirectory:YES];
+        }
         
         createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
         
@@ -605,25 +618,21 @@ id lastShareBtnSender;
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     int rowNumber = (int)indexPath.row;
+    int rowNumberSelectedFlyer = (int)indexPath.row;
 
     if( [self isAddvertiseRow:rowNumber] == NO ) {
         rowNumber = [self getIndexOfFlyer:rowNumber];
+        rowNumberSelectedFlyer = [self getIndexOfFlyer:rowNumberSelectedFlyer];
 
         if (editingStyle == UITableViewCellEditingStyleDelete) {
             // HERE WE REMOVE FLYER FROM DIRECTORY
             if ( searching ) {
-                
-                [[NSFileManager defaultManager] removeItemAtPath:[searchFlyerPaths objectAtIndex:indexPath.row] error:nil];
-                [searchFlyerPaths removeObjectAtIndex:indexPath.row];
-                
+                [[NSFileManager defaultManager] removeItemAtPath:[searchFlyerPaths objectAtIndex:rowNumberSelectedFlyer] error:nil];
+                [searchFlyerPaths removeObjectAtIndex:rowNumberSelectedFlyer];
             } else {
-                
-                [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:indexPath.row] error:nil];
-                [flyerPaths removeObjectAtIndex:indexPath.row];
+                [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:rowNumber] error:nil];
+                [flyerPaths removeObjectAtIndex:rowNumber];
             }
-            
-//            [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:rowNumber] error:nil];
-//            [flyerPaths removeObjectAtIndex:rowNumber];
         }
 
         [tableView reloadData];
