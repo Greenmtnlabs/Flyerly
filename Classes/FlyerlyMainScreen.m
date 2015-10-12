@@ -44,6 +44,7 @@ id lastShareBtnSender;
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     flyerConfigurator = appDelegate.flyerConfigurator;
+    txtSearch.delegate = self;
     
     [self updateUI];
     
@@ -117,10 +118,10 @@ id lastShareBtnSender;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    // Load the flyers.
     searching = NO;
     txtSearch.text = @"";
-    
+    [self.tView reloadData];
     [self checkUserPurchases];
 }
 
