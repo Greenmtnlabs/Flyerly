@@ -161,12 +161,7 @@
     [self.navigationController pushViewController:settingsController animated:YES];
 }
 
--(void)addUntechable{
-    AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
-    addUntechable.untechable = untechable;
-    addUntechable.totalUntechables = (int)allUntechables.count;
-    [self.navigationController pushViewController:addUntechable animated:YES];
-}
+
 
 /*
  * This method sends email
@@ -494,6 +489,8 @@
     [btnUntechCustom setBackgroundColor:DEF_GRAY];
     btnUntechCustom.titleLabel.font = [UIFont fontWithName:APP_FONT size:16];
     btnUntechCustom.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
+    [btnUntechCustom addTarget:self action:@selector(btnUntechTouchStart:) forControlEvents:UIControlEventTouchDown];
+    [btnUntechCustom addTarget:self action:@selector(btnUntechTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
     
     btnUntechNow.layer.cornerRadius = 10;
     [btnUntechNow setTitle:NSLocalizedString(@"Untech Now", nil) forState:normal];
@@ -501,6 +498,9 @@
     [btnUntechNow setBackgroundColor:DEF_GRAY];
     btnUntechNow.titleLabel.font = [UIFont fontWithName:APP_FONT size:16];
     btnUntechNow.contentVerticalAlignment = UIControlContentHorizontalAlignmentCenter;
+    [btnUntechNow addTarget:self action:@selector(btnUntechTouchStart:) forControlEvents:UIControlEventTouchDown];
+    [btnUntechNow addTarget:self action:@selector(btnUntechTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
 
@@ -515,6 +515,19 @@
 - (void)setHighlighted:(BOOL)highlighted sender:(id)button {
     (highlighted) ? [button setBackgroundColor:DEF_GREEN] : [button setBackgroundColor:[UIColor clearColor]];
 }
+
+
+-(void)btnUntechTouchStart :(id)button{
+    [self setUntechHighlighted:YES sender:button];
+}
+-(void)btnUntechTouchEnd :(id)button{
+    [self setUntechHighlighted:NO sender:button];
+}
+- (void)setUntechHighlighted:(BOOL)highlighted sender:(id)button {
+    (highlighted) ? [button setBackgroundColor:DEF_GREEN] : [button setBackgroundColor:DEF_GRAY];
+    (highlighted) ? [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal] : [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+}
+
 /**
  * Override to support conditional editing of the table view.
  * This only needs to be implemented if you are going to return NO
@@ -806,7 +819,6 @@
 - (IBAction)untechNowClick:(id)sender {
     
     self.doneButtonView.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
-    
     // changes the "CLOSE" button text color to black
     [_doneButtonView setTitle:NSLocalizedString(TITLE_DONE_TXT, nil) forState:normal];
     [_doneButtonView setTitleColor:[self colorFromHexString:@"#000000"] forState:UIControlStateNormal];
@@ -818,7 +830,10 @@
 }
 
 - (IBAction)untechCustomClick:(id)sender {
-    [self addUntechable];
+    AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
+    addUntechable.untechable = untechable;
+    addUntechable.totalUntechables = (int)allUntechables.count;
+    [self.navigationController pushViewController:addUntechable animated:YES];
 }
 - (IBAction)btnDoneClick:(id)sender {
     
