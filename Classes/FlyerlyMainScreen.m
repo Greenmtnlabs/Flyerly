@@ -267,9 +267,16 @@ id lastShareBtnSender;
     
     // for Navigation Bar logo
     UIImageView *logo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 102, 38)];
+    
     [logo setImage:[UIImage imageNamed:@"flyerlylogo"]];
     self.navigationItem.titleView = logo;
-
+    
+    // to apply gesture recognizer on image(flyerlylogo)
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
+    singleTap.numberOfTapsRequired = 1;
+    [logo setUserInteractionEnabled:YES];
+    [logo addGestureRecognizer:singleTap];
+    
     // Create Button
     createButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [createButton addTarget:self action:@selector(createFlyer:) forControlEvents:UIControlEventTouchUpInside];
@@ -280,7 +287,14 @@ id lastShareBtnSender;
     return [NSMutableArray arrayWithObjects:rightUndoBarButton,nil];
 }
 
+/*
+ * This method is invoked
+ * when the Flyerly Logo is tapped
+ */
 
+-(void)tapDetected{
+    [self.tView setContentOffset:CGPointZero animated:YES];
+}
 
 /*
  * Here we get All Flyers Directories
