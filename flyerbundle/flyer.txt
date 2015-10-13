@@ -4,7 +4,7 @@
 <array>
 	<string></string>
 	<string></string>
-	<string>09/16/2014</string>
+	<string></string>
 	<string>assets-library://asset/asset.PNG?id=CF5D375F-8C2B-4E81-8310-26519FF2E92A&amp;ext=PNG</string>
 	<string></string>
 	<string></string>
