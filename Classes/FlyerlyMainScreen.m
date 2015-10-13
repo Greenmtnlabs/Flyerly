@@ -191,6 +191,7 @@ id lastShareBtnSender;
     
     searchFlyerPaths = [[NSMutableArray alloc] init];
     
+    // To get Flyer Title,, Description and Date to search
     for (int i =0 ; i < [flyerPaths count] ; i++)
     {
         Flyer *fly = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:i] setDirectory:NO];
@@ -485,6 +486,7 @@ id lastShareBtnSender;
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
+    // If searching, the number of rows may be different
     if (isSearch){
         return  [self getRowsCountWithAddsInSeleceted];
     }else{
