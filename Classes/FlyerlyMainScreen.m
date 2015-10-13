@@ -22,7 +22,7 @@
     int addsCount;
     int addsLoaded;
     CGRect sizeRectForAdd;
-    BOOL searching;
+    BOOL isSearch;
 }
 
 @end
@@ -46,7 +46,11 @@ id lastShareBtnSender;
     flyerConfigurator = appDelegate.flyerConfigurator;
     txtSearch.delegate = self;
     
-    [self updateUI];
+    // setting isSearch to NO i.e. no search at first time
+    isSearch = NO;
+    
+    // adding SearchBox to main screen
+    [self addSearchBox];
     
     lastShareBtnSender = nil;
     self.navigationItem.hidesBackButton = YES;
@@ -100,10 +104,15 @@ id lastShareBtnSender;
 
 }
 
+/*
+ * TextView to input and search
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
 
--(void) updateUI{
-    
-    searching = NO;
+-(void) addSearchBox{
     
     txtSearch.font = [UIFont systemFontOfSize:12.0];
     txtSearch.textAlignment = NSTextAlignmentLeft;
@@ -119,7 +128,7 @@ id lastShareBtnSender;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     // Load the flyers.
-    searching = NO;
+    isSearch = NO;
     txtSearch.text = @"";
     [self.tView reloadData];
     [self checkUserPurchases];
@@ -165,13 +174,20 @@ id lastShareBtnSender;
 
 
 #pragma mark  custom Methods
-
-- (void) searchTableView:(NSString *)schTxt {
-    NSString *sTemp;
-    NSString *sTemp1;
-    NSString *sTemp2;
+/*
+ * Inputs a string and searches it in the given data
+ * @params:
+ *      textToSearch: String
+ * @return:
+ *      void
+ */
+- (void) searchTableView: (NSString *) textToSearch {
     
-    NSString *searchText = txtSearch.text;
+    NSString *tempFlyerTitle;
+    NSString *tempFlyerDescription;
+    NSString *tempFlyerDate;
+    
+    NSString *searchText = textToSearch;
     
     searchFlyerPaths = [[NSMutableArray alloc] init];
     
@@ -179,15 +195,15 @@ id lastShareBtnSender;
     {
         Flyer *fly = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:i] setDirectory:NO];
         
-        sTemp = [fly getFlyerTitle];
-        sTemp1 = [fly getFlyerDescription];
-        sTemp2 = [fly getFlyerDate];
+        tempFlyerTitle = [fly getFlyerTitle];
+        tempFlyerDescription = [fly getFlyerDescription];
+        tempFlyerDate = [fly getFlyerDate];
     
-        NSRange titleResultsRange = [sTemp rangeOfString:searchText options:NSCaseInsensitiveSearch];
-        NSRange titleResultsRange1 = [sTemp1 rangeOfString:searchText options:NSCaseInsensitiveSearch];
-        NSRange titleResultsRange2 = [sTemp2 rangeOfString:searchText options:NSCaseInsensitiveSearch];
+        NSRange flyerTitileRange = [tempFlyerTitle rangeOfString:searchText options:NSCaseInsensitiveSearch];
+        NSRange flyerDescriptionRange = [tempFlyerDescription rangeOfString:searchText options:NSCaseInsensitiveSearch];
+        NSRange flyerDateRange = [tempFlyerDate rangeOfString:searchText options:NSCaseInsensitiveSearch];
         
-        if (titleResultsRange.length > 0 || titleResultsRange1.length > 0 || titleResultsRange2.length > 0){
+        if (flyerTitileRange.length > 0 || flyerDescriptionRange.length > 0 || flyerDateRange.length > 0){
             
             [searchFlyerPaths addObject:[flyerPaths objectAtIndex:i]];
         }
@@ -316,7 +332,12 @@ id lastShareBtnSender;
 }
 
 /**
- * Return incremented numbers of rows with respect to ads
+ * Return incremented number of rows with respect to ads
+ * @params:
+ *      void
+ * @return:
+ *      total(number of rows with ads): int
+ *
  */
 -(int)getRowsCountWithAdds{
     int flyersCount = (int)flyerPaths.count;
@@ -326,6 +347,14 @@ id lastShareBtnSender;
     return  total;
 }
 
+/**
+ * Return incremented number of rows with respect to ads
+ * @params:
+ *      void
+ * @return:
+ *      total(number of rows with ads): int
+ *
+ */
 -(int)getRowsCountWithAddsInSeleceted{
     int flyersCount = (int)searchFlyerPaths.count;
     addsCount = floor(flyersCount/ (ADD_AFTER_FLYERS -1) );
@@ -345,8 +374,13 @@ id lastShareBtnSender;
 
 /**
  * Get index of flyer row
- * because of  ads
+ * because of ads
  * indices of flyers are not in proper order
+ *
+ * @params:
+ *      rowNumber: int
+ * @return:
+ *      row (index of flyer): int
  */
 -(int)getIndexOfFlyer:(int)rowNumber{
     rowNumber++;//because indexes are starting from 0
@@ -451,7 +485,7 @@ id lastShareBtnSender;
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if (searching){
+    if (isSearch){
         return  [self getRowsCountWithAddsInSeleceted];
     }else{
         return [self getRowsCountWithAdds];
@@ -482,8 +516,10 @@ id lastShareBtnSender;
         }
         [cell setAccessoryType:UITableViewCellAccessoryNone];
         
+        // If searching, it will load selected flyers else all flyers
+        // To perform it asynchronously, dispatch_async is used
         
-        if( searching ){
+        if( isSearch ){
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 int flyerRow = [self getIndexOfSelectedFlyer:rowNumber];
@@ -538,7 +574,7 @@ id lastShareBtnSender;
         
         [self enableBtns:NO];
         
-        if(searching){
+        if(isSearch){
              flyer = [[Flyer alloc]initWithPath:[searchFlyerPaths objectAtIndex:rowNumberSelectedFlyer] setDirectory:YES];
         } else {
              flyer = [[Flyer alloc]initWithPath:[flyerPaths objectAtIndex:rowNumber] setDirectory:YES];
@@ -641,7 +677,7 @@ id lastShareBtnSender;
 
         if (editingStyle == UITableViewCellEditingStyleDelete) {
             // HERE WE REMOVE FLYER FROM DIRECTORY
-            if ( searching ) {
+            if ( isSearch ) {
                 [[NSFileManager defaultManager] removeItemAtPath:[searchFlyerPaths objectAtIndex:rowNumberSelectedFlyer] error:nil];
                 [searchFlyerPaths removeObjectAtIndex:rowNumberSelectedFlyer];
             } else {
@@ -767,8 +803,6 @@ id lastShareBtnSender;
     if(row > (ADD_AFTER_FLYERS-1)){
         row = row - floor(row/ADD_AFTER_FLYERS);
     }
-    
-    //flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:row] setDirectory:NO];
     
     if ( [[PFUser currentUser] sessionToken] ) {
         [self enableBtns:NO];
@@ -1008,11 +1042,11 @@ id lastShareBtnSender;
     
     if (txtSearch.text == nil || [txtSearch.text isEqualToString:@""])
     {
-        searching = NO;
+        isSearch = NO;
         [self.tView reloadData];
         [txtSearch resignFirstResponder];
     }else{
-        searching = YES;
+        isSearch = YES;
         [self searchTableView:[NSString stringWithFormat:@"%@", ((UITextField *)sender).text]];
     }
 }
@@ -1027,7 +1061,7 @@ id lastShareBtnSender;
         return NO;
     }
     
-    if(searching){
+    if(isSearch){
         if([string isEqualToString:@"\n"]){
             
             if([txtSearch canResignFirstResponder])
