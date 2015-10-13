@@ -1038,6 +1038,14 @@ id lastShareBtnSender;
 
 #pragma mark  Text Field Delegete
 
+/*
+ * When any key of a keyboard of a textview is pressed, it is invoked
+ * @params:
+ *      sender(uicontrol):id
+ * @return:
+ *      void
+ */
+
 - (void)textFieldTapped:(id)sender {
     
     if (txtSearch.text == nil || [txtSearch.text isEqualToString:@""])
@@ -1050,6 +1058,16 @@ id lastShareBtnSender;
         [self searchTableView:[NSString stringWithFormat:@"%@", ((UITextField *)sender).text]];
     }
 }
+
+/*
+ * When any key of a keyboard of a textview is pressed, it is invoked
+ * @params:
+ *      textField(UITextField):UITextField
+ *      range: NSRange
+ *      string: NSString
+ * @return:
+ *      BOOL
+ */
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
