@@ -22,6 +22,7 @@
     int addsCount;
     int addsLoaded;
     CGRect sizeRectForAdd;
+    BOOL isSearch;
 }
 
 @end
@@ -31,6 +32,7 @@
 @synthesize sharePanel,tView;
 @synthesize flyerPaths;
 @synthesize flyer, signInAlert,settingBtn,bottomBar;
+@synthesize txtSearch;
 
 id lastShareBtnSender;
 
@@ -42,6 +44,13 @@ id lastShareBtnSender;
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     flyerConfigurator = appDelegate.flyerConfigurator;
+    txtSearch.delegate = self;
+    
+    // setting isSearch to NO i.e. no search at first time
+    isSearch = NO;
+    
+    // adding SearchBox to main screen
+    [self addSearchBox];
     
     lastShareBtnSender = nil;
     self.navigationItem.hidesBackButton = YES;
@@ -95,9 +104,33 @@ id lastShareBtnSender;
 
 }
 
+/*
+ * TextView to input and search
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+
+-(void) addSearchBox{
+    
+    txtSearch.font = [UIFont systemFontOfSize:12.0];
+    txtSearch.textAlignment = NSTextAlignmentLeft;
+    txtSearch.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    [txtSearch setBorderStyle:UITextBorderStyleRoundedRect];
+    [txtSearch setReturnKeyType:UIReturnKeyDone];
+    
+    [txtSearch addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingChanged];
+    txtSearch.borderStyle = nil;
+
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    // Load the flyers.
+    isSearch = NO;
+    txtSearch.text = @"";
+    [self.tView reloadData];
     [self checkUserPurchases];
 }
 
@@ -139,19 +172,44 @@ id lastShareBtnSender;
     }
 }
 
-#pragma mark  Text Field Delegete
-
-- (void)textFieldTapped:(id)sender {
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    return YES;
-}
-
 
 #pragma mark  custom Methods
-
-- (void) searchTableView:(NSString *)schTxt {
+/*
+ * Inputs a string and searches it in the given data
+ * @params:
+ *      textToSearch: String
+ * @return:
+ *      void
+ */
+- (void) searchTableView: (NSString *) textToSearch {
+    
+    NSString *tempFlyerTitle;
+    NSString *tempFlyerDescription;
+    NSString *tempFlyerDate;
+    
+    NSString *searchText = textToSearch;
+    
+    searchFlyerPaths = [[NSMutableArray alloc] init];
+    
+    // To get Flyer Title,, Description and Date to search
+    for (int i =0 ; i < [flyerPaths count] ; i++)
+    {
+        Flyer *fly = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:i] setDirectory:NO];
+        
+        tempFlyerTitle = [fly getFlyerTitle];
+        tempFlyerDescription = [fly getFlyerDescription];
+        tempFlyerDate = [fly getFlyerDate];
+    
+        NSRange flyerTitileRange = [tempFlyerTitle rangeOfString:searchText options:NSCaseInsensitiveSearch];
+        NSRange flyerDescriptionRange = [tempFlyerDescription rangeOfString:searchText options:NSCaseInsensitiveSearch];
+        NSRange flyerDateRange = [tempFlyerDate rangeOfString:searchText options:NSCaseInsensitiveSearch];
+        
+        if (flyerTitileRange.length > 0 || flyerDescriptionRange.length > 0 || flyerDateRange.length > 0){
+            
+            [searchFlyerPaths addObject:[flyerPaths objectAtIndex:i]];
+        }
+    }
+    
     [self.tView reloadData];
 }
 
@@ -222,16 +280,20 @@ id lastShareBtnSender;
     return [NSMutableArray arrayWithObjects:backBarButton,nil];
 }
 
-
-
-
 -(NSArray *)rightBarItems{
     
     // for Navigation Bar logo
     UIImageView *logo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 102, 38)];
+    
     [logo setImage:[UIImage imageNamed:@"flyerlylogo"]];
     self.navigationItem.titleView = logo;
-
+    
+    // to apply gesture recognizer on image(flyerlylogo)
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
+    singleTap.numberOfTapsRequired = 1;
+    [logo setUserInteractionEnabled:YES];
+    [logo addGestureRecognizer:singleTap];
+    
     // Create Button
     createButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [createButton addTarget:self action:@selector(createFlyer:) forControlEvents:UIControlEventTouchUpInside];
@@ -242,7 +304,14 @@ id lastShareBtnSender;
     return [NSMutableArray arrayWithObjects:rightUndoBarButton,nil];
 }
 
+/*
+ * This method is invoked
+ * when the Flyerly Logo is tapped
+ */
 
+-(void)tapDetected{
+    [self.tView setContentOffset:CGPointZero animated:YES];
+}
 
 /*
  * Here we get All Flyers Directories
@@ -264,10 +333,31 @@ id lastShareBtnSender;
 }
 
 /**
- * Return incremented numbers of rows with respect to add
+ * Return incremented number of rows with respect to ads
+ * @params:
+ *      void
+ * @return:
+ *      total(number of rows with ads): int
+ *
  */
 -(int)getRowsCountWithAdds{
     int flyersCount = (int)flyerPaths.count;
+    addsCount = floor(flyersCount/ (ADD_AFTER_FLYERS -1) );
+    int total = flyersCount + addsCount;
+    
+    return  total;
+}
+
+/**
+ * Return incremented number of rows with respect to ads
+ * @params:
+ *      void
+ * @return:
+ *      total(number of rows with ads): int
+ *
+ */
+-(int)getRowsCountWithAddsInSeleceted{
+    int flyersCount = (int)searchFlyerPaths.count;
     addsCount = floor(flyersCount/ (ADD_AFTER_FLYERS -1) );
     int total = flyersCount + addsCount;
     
@@ -285,8 +375,21 @@ id lastShareBtnSender;
 
 /**
  * Get index of flyer row
+ * because of ads
+ * indices of flyers are not in proper order
+ *
+ * @params:
+ *      rowNumber: int
+ * @return:
+ *      row (index of flyer): int
  */
 -(int)getIndexOfFlyer:(int)rowNumber{
+    rowNumber++;//because indexes are starting from 0
+    int row = rowNumber - floor(rowNumber / ADD_AFTER_FLYERS ) - 1 ;
+    return  row;
+}
+
+-(int)getIndexOfSelectedFlyer:(int)rowNumber{
     rowNumber++;//because indexes are starting from 0
     int row = rowNumber - floor(rowNumber / ADD_AFTER_FLYERS ) - 1 ;
     return  row;
@@ -382,7 +485,13 @@ id lastShareBtnSender;
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self getRowsCountWithAdds];
+    
+    // If searching, the number of rows may be different
+    if (isSearch){
+        return  [self getRowsCountWithAddsInSeleceted];
+    }else{
+        return [self getRowsCountWithAdds];
+    }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     int rowNumber = (int)indexPath.row;
@@ -409,17 +518,34 @@ id lastShareBtnSender;
         }
         [cell setAccessoryType:UITableViewCellAccessoryNone];
         
+        // If searching, it will load selected flyers else all flyers
+        // To perform it asynchronously, dispatch_async is used
         
-        dispatch_async(dispatch_get_main_queue(), ^{
+        if( isSearch ){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                int flyerRow = [self getIndexOfSelectedFlyer:rowNumber];
+                flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:flyerRow] setDirectory:NO];
+                [cell renderCell:flyer LockStatus:NO];
+                [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
+                cell.shareBtn.tag = indexPath.row;
+                [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
+
+                
+            });
+            return cell;
+          } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
                 int flyerRow = [self getIndexOfFlyer:rowNumber];
                 flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:flyerRow] setDirectory:NO];
                 [cell renderCell:flyer LockStatus:NO];
                 [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
                 cell.shareBtn.tag = indexPath.row;
                 [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
-        });
-        
-        return cell;
+            });
+            return cell;
+        }
+
     }
     else {
         static NSString *MainScreenAddsCellId = @"MainScreenAddsCell";
@@ -442,12 +568,19 @@ id lastShareBtnSender;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     int rowNumber = (int)indexPath.row;
+    int rowNumberSelectedFlyer = (int)indexPath.row;
+    
     if( [self isAddvertiseRow:rowNumber] == NO ) {
         rowNumber = [self getIndexOfFlyer:rowNumber];
+        rowNumberSelectedFlyer = [self getIndexOfSelectedFlyer:rowNumberSelectedFlyer];
         
         [self enableBtns:NO];
         
-        flyer = [[Flyer alloc]initWithPath:[flyerPaths objectAtIndex:rowNumber] setDirectory:YES];
+        if(isSearch){
+             flyer = [[Flyer alloc]initWithPath:[searchFlyerPaths objectAtIndex:rowNumberSelectedFlyer] setDirectory:YES];
+        } else {
+             flyer = [[Flyer alloc]initWithPath:[flyerPaths objectAtIndex:rowNumber] setDirectory:YES];
+        }
         
         createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
         
@@ -538,14 +671,21 @@ id lastShareBtnSender;
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     int rowNumber = (int)indexPath.row;
+    int rowNumberSelectedFlyer = (int)indexPath.row;
 
     if( [self isAddvertiseRow:rowNumber] == NO ) {
         rowNumber = [self getIndexOfFlyer:rowNumber];
+        rowNumberSelectedFlyer = [self getIndexOfFlyer:rowNumberSelectedFlyer];
 
         if (editingStyle == UITableViewCellEditingStyleDelete) {
-            
-            [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:rowNumber] error:nil];
-            [flyerPaths removeObjectAtIndex:rowNumber];
+            // HERE WE REMOVE FLYER FROM DIRECTORY
+            if ( isSearch ) {
+                [[NSFileManager defaultManager] removeItemAtPath:[searchFlyerPaths objectAtIndex:rowNumberSelectedFlyer] error:nil];
+                [searchFlyerPaths removeObjectAtIndex:rowNumberSelectedFlyer];
+            } else {
+                [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:rowNumber] error:nil];
+                [flyerPaths removeObjectAtIndex:rowNumber];
+            }
         }
 
         [tableView reloadData];
@@ -656,11 +796,15 @@ id lastShareBtnSender;
     UIButton *clickButton = sender;
     NSInteger row = clickButton.tag; ///will get it from button tag
     
+    if([txtSearch.text isEqualToString:@""]) {
+        flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:row] setDirectory:NO];
+    } else{
+        flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:row] setDirectory:NO];
+    }
+    
     if(row > (ADD_AFTER_FLYERS-1)){
         row = row - floor(row/ADD_AFTER_FLYERS);
     }
-    
-    flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:row] setDirectory:NO];
     
     if ( [[PFUser currentUser] sessionToken] ) {
         [self enableBtns:NO];
@@ -892,4 +1036,63 @@ id lastShareBtnSender;
     }
     
 }
+
+
+#pragma mark  Text Field Delegete
+
+/*
+ * When any key of a keyboard of a textview is pressed, it is invoked
+ * @params:
+ *      sender(uicontrol):id
+ * @return:
+ *      void
+ */
+
+- (void)textFieldTapped:(id)sender {
+    
+    if (txtSearch.text == nil || [txtSearch.text isEqualToString:@""])
+    {
+        isSearch = NO;
+        [self.tView reloadData];
+        [txtSearch resignFirstResponder];
+    }else{
+        isSearch = YES;
+        [self searchTableView:[NSString stringWithFormat:@"%@", ((UITextField *)sender).text]];
+    }
+}
+
+/*
+ * When any key of a keyboard of a textview is pressed, it is invoked
+ * @params:
+ *      textField(UITextField):UITextField
+ *      range: NSRange
+ *      string: NSString
+ * @return:
+ *      BOOL
+ */
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    if([string isEqualToString:@"\n"]){
+        if([txtSearch canResignFirstResponder])
+        {
+            [txtSearch resignFirstResponder];
+        }
+        return NO;
+    }
+    
+    if(isSearch){
+        if([string isEqualToString:@"\n"]){
+            
+            if([txtSearch canResignFirstResponder])
+            {
+                [txtSearch resignFirstResponder];
+            }
+        }
+    }
+    return YES;
+}
+
+
+
 @end

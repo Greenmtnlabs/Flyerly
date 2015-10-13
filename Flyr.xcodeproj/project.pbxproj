@@ -4155,9 +4155,9 @@
 		20F3597B1888DBEE001376B6 /* FlyerlyMainScreen */ = {
 			isa = PBXGroup;
 			children = (
-				C33F80041B9F115500E7AFF9 /* FlyerlyMainScreen.xib */,
 				0DF3A2C1108DF1D200D6C887 /* FlyerlyMainScreen.h */,
 				0DF3A2C2108DF1D200D6C887 /* FlyerlyMainScreen.m */,
+				C33F80041B9F115500E7AFF9 /* FlyerlyMainScreen.xib */,
 				C3F98D8D1BA065A300CBADCC /* MainFlyerCells */,
 				C34E984E1BA2D43300692597 /* GoogleAddCell */,
 			);
