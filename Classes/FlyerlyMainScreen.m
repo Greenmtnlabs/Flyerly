@@ -100,13 +100,14 @@ id lastShareBtnSender;
     
     [self loadAddTiles];
 
+    
     [self.view bringSubviewToFront:bottomBar];
     [self.view bringSubviewToFront:btnCreateFlyer];
     [self.view bringSubviewToFront:btnInvite];
     [self.view bringSubviewToFront:btnSaved];
     [self.view bringSubviewToFront:btnShared];
     [self.view bringSubviewToFront:btnSocial];
-    [self setTabButtonsPosition];
+    
 
 }
 /*
@@ -116,7 +117,6 @@ id lastShareBtnSender;
  * @return:
  *      void
  */
-
 
 -(void)setTabButtonsPosition{
     
@@ -152,10 +152,12 @@ id lastShareBtnSender;
         
     }
     
-    [btnInvite setBounds:rectInvite];
-    [btnSaved setBounds:rectSaved];
-    [btnShared setBounds:rectShared];
-    [btnSocial setBounds:rectSocial];
+    btnInvite.frame = rectInvite;
+    
+//    [btnInvite setBounds:rectInvite];
+//    [btnSaved setBounds:rectSaved];
+//    [btnShared setBounds:rectShared];
+//    [btnSocial setBounds:rectSocial];
 
 
 }
@@ -199,6 +201,7 @@ id lastShareBtnSender;
         MainFlyerCell *cell = (MainFlyerCell *)[self.tView cellForRowAtIndexPath:indexPath];
         sizeRectForAdd = cell.containerView.frame;
     }
+    [self setTabButtonsPosition];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
