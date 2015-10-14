@@ -33,7 +33,7 @@
 @synthesize flyerPaths;
 @synthesize flyer, signInAlert,settingBtn,bottomBar;
 @synthesize txtSearch;
-@synthesize btnCreateFlyer;
+@synthesize btnCreateFlyer, btnInvite;
 
 id lastShareBtnSender;
 
@@ -270,16 +270,16 @@ id lastShareBtnSender;
 
 }
 
--(NSArray *)leftBarItems{
-    inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [inviteButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-    [inviteButton setBackgroundImage:[UIImage imageNamed:@"invite_friend"] forState:UIControlStateNormal];
-    [inviteButton addTarget:self action:@selector(doInvite:) forControlEvents:UIControlEventTouchUpInside];
-    inviteButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
-
-    return [NSMutableArray arrayWithObjects:backBarButton,nil];
-}
+//-(NSArray *)leftBarItems{
+//    inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+//    [inviteButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+//    [inviteButton setBackgroundImage:[UIImage imageNamed:@"invite_friend"] forState:UIControlStateNormal];
+//    [inviteButton addTarget:self action:@selector(doInvite:) forControlEvents:UIControlEventTouchUpInside];
+//    inviteButton.showsTouchWhenHighlighted = YES;
+//    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
+//
+//    return [NSMutableArray arrayWithObjects:backBarButton,nil];
+//}
 
 -(NSArray *)rightBarItems{
     
@@ -738,7 +738,7 @@ id lastShareBtnSender;
  */
 -(void)enableBtns:(BOOL)enable{
 
-    inviteButton.enabled = enable;
+    btnInvite.enabled = enable;
     createButton.enabled = enable;
     rightUndoBarButton.enabled = enable;
     btnCreateFlyer.enabled = enable;
@@ -757,7 +757,7 @@ id lastShareBtnSender;
  */
 -(void)setNavigation{
     // Set left bar items
-    [self.navigationItem setLeftBarButtonItems: [self leftBarItems]];
+    //[self.navigationItem setLeftBarButtonItems: [self leftBarItems]];
 
     // Set right bar items
     [self.navigationItem setRightBarButtonItems: [self rightBarItems]];

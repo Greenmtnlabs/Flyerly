@@ -61,6 +61,7 @@
 @property (nonatomic, strong) IBOutlet UIView *bottomBar;
 
 @property (strong, nonatomic) IBOutlet UIButton *btnCreateFlyer;
+@property (strong, nonatomic) IBOutlet UIButton *btnInvite;
 
 -(IBAction)createFlyer:(id)sender;
 -(IBAction)doAbout:(id)sender;

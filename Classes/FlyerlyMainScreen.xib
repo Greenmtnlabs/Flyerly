@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="bottomBar" destination="ZWV-7a-5WA" id="2ye-ng-O5U"/>
                 <outlet property="btnCreateFlyer" destination="nFc-73-sac" id="9TP-2q-PTK"/>
+                <outlet property="btnInvite" destination="gA0-AY-5M7" id="eUq-iW-K5o"/>
                 <outlet property="tView" destination="kGq-MQ-Rhl" id="vDj-iA-mjT"/>
                 <outlet property="txtSearch" destination="hXf-hs-j92" id="bB6-hf-E0O"/>
                 <outlet property="view" destination="12" id="14"/>
@@ -16,7 +17,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="12">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcM-4t-gbj">
@@ -62,14 +63,14 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="320" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="kGq-MQ-Rhl" userLabel="tView">
-                    <rect key="frame" x="0.0" y="104" width="320" height="464"/>
+                    <rect key="frame" x="0.0" y="104" width="320" height="376"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <color key="sectionIndexBackgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZWV-7a-5WA" userLabel="bottomBar">
-                    <rect key="frame" x="0.0" y="520" width="320" height="48"/>
+                    <rect key="frame" x="0.0" y="432" width="320" height="48"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gA0-AY-5M7">
                             <rect key="frame" x="0.0" y="0.0" width="63" height="48"/>
@@ -77,6 +78,9 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="selected" image="homeInviteSelected.png"/>
+                            <connections>
+                                <action selector="doInvite:" destination="-1" eventType="touchUpInside" id="bcs-ee-XwJ"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F7u-90-jDR">
                             <rect key="frame" x="64" y="0.0" width="63" height="48"/>
@@ -106,7 +110,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nFc-73-sac" userLabel="settingBtn">
-                    <rect key="frame" x="125" y="500" width="70" height="68"/>
+                    <rect key="frame" x="125" y="412" width="70" height="68"/>
                     <accessibility key="accessibilityConfiguration" label="Settings"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="68" id="Jvv-TI-kBQ"/>
@@ -149,7 +153,7 @@
                 <constraint firstAttribute="bottom" secondItem="nFc-73-sac" secondAttribute="bottom" id="yW7-b0-ARs"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="323" y="178"/>
         </view>
     </objects>
