@@ -43,6 +43,7 @@
     BOOL appearingViewAfterInAppHide;
     BOOL haveValidSubscription;
     BOOL saveToGallaryReqBeforeSharing;
+    BOOL isNewFlyer;
     
 }
 
@@ -160,6 +161,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     } else {
         titleLabel.text = @"Flyer";
     }
+    
+    //245-feature-in-create-screen-when-user-is-creating-brand-new-flyer-have-the-background-button-selected-for-them-initially
+    if( isNewFlyer )
+    [self setAddMoreLayerTabAction:backgroundTabButton];
 }
 
 -(void) loadInterstitialAdd{
@@ -6363,6 +6368,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 #pragma mark -  Watermark funcs
 //Tasks after create new flyer
 -(void)tasksOnCreateNewFlyer{
+    isNewFlyer = YES;
 }
 
 - (void)inAppPanelDismissed {
