@@ -152,10 +152,10 @@ id lastShareBtnSender;
         
     }
     
-    [self.btnInvite setBounds:rectInvite];
-    [self.btnSaved setBounds:rectSaved];
-    [self.btnShared setBounds:rectShared];
-    [self.btnSocial setBounds:rectSocial];
+    [btnInvite setBounds:rectInvite];
+    [btnSaved setBounds:rectSaved];
+    [btnShared setBounds:rectShared];
+    [btnSocial setBounds:rectSocial];
 
 
 }
