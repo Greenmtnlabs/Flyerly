@@ -60,6 +60,7 @@
 @property (nonatomic, strong) IBOutlet UIButton *settingBtn;
 @property (nonatomic, strong) IBOutlet UIView *bottomBar;
 
+@property (strong, nonatomic) IBOutlet UIButton *btnCreateFlyer;
 
 -(IBAction)createFlyer:(id)sender;
 -(IBAction)doAbout:(id)sender;

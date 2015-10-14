@@ -174,6 +174,24 @@
 		204231601A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2042315F1A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib */; };
 		204231621A10D5AC002F93D7 /* Borders-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204231611A10D5AC002F93D7 /* Borders-iPhone6-Plus.xib */; };
 		204231641A10E1A1002F93D7 /* TextBorders-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204231631A10E1A1002F93D7 /* TextBorders-iPhone6-Plus.xib */; };
+		204410F81BCE2A1400A63031 /* homeCreate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 204410E61BCE2A1400A63031 /* homeCreate@2x.png */; };
+		204410F91BCE2A1400A63031 /* homeCreate@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 204410E71BCE2A1400A63031 /* homeCreate@3x.png */; };
+		204410FA1BCE2A1400A63031 /* homeInvite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 204410E81BCE2A1400A63031 /* homeInvite@2x.png */; };
+		204410FB1BCE2A1400A63031 /* homeInvite@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 204410E91BCE2A1400A63031 /* homeInvite@3x.png */; };
+		204410FC1BCE2A1400A63031 /* homeInviteSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 204410EA1BCE2A1400A63031 /* homeInviteSelected@2x.png */; };
+		204410FD1BCE2A1400A63031 /* homeInviteSelected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 204410EB1BCE2A1400A63031 /* homeInviteSelected@3x.png */; };
+		204410FE1BCE2A1400A63031 /* homeSaved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 204410EC1BCE2A1400A63031 /* homeSaved@2x.png */; };
+		204410FF1BCE2A1400A63031 /* homeSaved@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 204410ED1BCE2A1400A63031 /* homeSaved@3x.png */; };
+		204411001BCE2A1400A63031 /* homeSavedSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 204410EE1BCE2A1400A63031 /* homeSavedSelected@2x.png */; };
+		204411011BCE2A1400A63031 /* homeSavedSelected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 204410EF1BCE2A1400A63031 /* homeSavedSelected@3x.png */; };
+		204411021BCE2A1400A63031 /* homeShare@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 204410F01BCE2A1400A63031 /* homeShare@2x.png */; };
+		204411031BCE2A1400A63031 /* homeShare@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 204410F11BCE2A1400A63031 /* homeShare@3x.png */; };
+		204411041BCE2A1400A63031 /* homeShareSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 204410F21BCE2A1400A63031 /* homeShareSelected@2x.png */; };
+		204411051BCE2A1400A63031 /* homeShareSelected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 204410F31BCE2A1400A63031 /* homeShareSelected@3x.png */; };
+		204411061BCE2A1400A63031 /* homeSocial@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 204410F41BCE2A1400A63031 /* homeSocial@2x.png */; };
+		204411071BCE2A1400A63031 /* homeSocial@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 204410F51BCE2A1400A63031 /* homeSocial@3x.png */; };
+		204411081BCE2A1400A63031 /* homeSocialSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 204410F61BCE2A1400A63031 /* homeSocialSelected@2x.png */; };
+		204411091BCE2A1400A63031 /* homeSocialSelected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 204410F71BCE2A1400A63031 /* homeSocialSelected@3x.png */; };
 		20449F93196181A6007BE4BF /* discount.png in Resources */ = {isa = PBXBuildFile; fileRef = 20449F92196181A6007BE4BF /* discount.png */; };
 		2044FF96185088ED00A26B42 /* MainSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2044FF94185088ED00A26B42 /* MainSettingCell.m */; };
 		2044FF97185088ED00A26B42 /* MainSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2044FF95185088ED00A26B42 /* MainSettingCell.xib */; };
@@ -1705,6 +1723,24 @@
 		2042315F1A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Backgrounds-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		204231611A10D5AC002F93D7 /* Borders-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Borders-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		204231631A10E1A1002F93D7 /* TextBorders-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "TextBorders-iPhone6-Plus.xib"; sourceTree = "<group>"; };
+		204410E61BCE2A1400A63031 /* homeCreate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "homeCreate@2x.png"; sourceTree = "<group>"; };
+		204410E71BCE2A1400A63031 /* homeCreate@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "homeCreate@3x.png"; sourceTree = "<group>"; };
+		204410E81BCE2A1400A63031 /* homeInvite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "homeInvite@2x.png"; sourceTree = "<group>"; };
+		204410E91BCE2A1400A63031 /* homeInvite@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "homeInvite@3x.png"; sourceTree = "<group>"; };
+		204410EA1BCE2A1400A63031 /* homeInviteSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "homeInviteSelected@2x.png"; sourceTree = "<group>"; };
+		204410EB1BCE2A1400A63031 /* homeInviteSelected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "homeInviteSelected@3x.png"; sourceTree = "<group>"; };
+		204410EC1BCE2A1400A63031 /* homeSaved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "homeSaved@2x.png"; sourceTree = "<group>"; };
+		204410ED1BCE2A1400A63031 /* homeSaved@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "homeSaved@3x.png"; sourceTree = "<group>"; };
+		204410EE1BCE2A1400A63031 /* homeSavedSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "homeSavedSelected@2x.png"; sourceTree = "<group>"; };
+		204410EF1BCE2A1400A63031 /* homeSavedSelected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "homeSavedSelected@3x.png"; sourceTree = "<group>"; };
+		204410F01BCE2A1400A63031 /* homeShare@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "homeShare@2x.png"; sourceTree = "<group>"; };
+		204410F11BCE2A1400A63031 /* homeShare@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "homeShare@3x.png"; sourceTree = "<group>"; };
+		204410F21BCE2A1400A63031 /* homeShareSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "homeShareSelected@2x.png"; sourceTree = "<group>"; };
+		204410F31BCE2A1400A63031 /* homeShareSelected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "homeShareSelected@3x.png"; sourceTree = "<group>"; };
+		204410F41BCE2A1400A63031 /* homeSocial@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "homeSocial@2x.png"; sourceTree = "<group>"; };
+		204410F51BCE2A1400A63031 /* homeSocial@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "homeSocial@3x.png"; sourceTree = "<group>"; };
+		204410F61BCE2A1400A63031 /* homeSocialSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "homeSocialSelected@2x.png"; sourceTree = "<group>"; };
+		204410F71BCE2A1400A63031 /* homeSocialSelected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "homeSocialSelected@3x.png"; sourceTree = "<group>"; };
 		20449F92196181A6007BE4BF /* discount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discount.png; sourceTree = "<group>"; };
 		2044FF93185088ED00A26B42 /* MainSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainSettingCell.h; sourceTree = "<group>"; };
 		2044FF94185088ED00A26B42 /* MainSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainSettingCell.m; sourceTree = "<group>"; };
@@ -3192,6 +3228,24 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				204410E61BCE2A1400A63031 /* homeCreate@2x.png */,
+				204410E71BCE2A1400A63031 /* homeCreate@3x.png */,
+				204410E81BCE2A1400A63031 /* homeInvite@2x.png */,
+				204410E91BCE2A1400A63031 /* homeInvite@3x.png */,
+				204410EA1BCE2A1400A63031 /* homeInviteSelected@2x.png */,
+				204410EB1BCE2A1400A63031 /* homeInviteSelected@3x.png */,
+				204410EC1BCE2A1400A63031 /* homeSaved@2x.png */,
+				204410ED1BCE2A1400A63031 /* homeSaved@3x.png */,
+				204410EE1BCE2A1400A63031 /* homeSavedSelected@2x.png */,
+				204410EF1BCE2A1400A63031 /* homeSavedSelected@3x.png */,
+				204410F01BCE2A1400A63031 /* homeShare@2x.png */,
+				204410F11BCE2A1400A63031 /* homeShare@3x.png */,
+				204410F21BCE2A1400A63031 /* homeShareSelected@2x.png */,
+				204410F31BCE2A1400A63031 /* homeShareSelected@3x.png */,
+				204410F41BCE2A1400A63031 /* homeSocial@2x.png */,
+				204410F51BCE2A1400A63031 /* homeSocial@3x.png */,
+				204410F61BCE2A1400A63031 /* homeSocialSelected@2x.png */,
+				204410F71BCE2A1400A63031 /* homeSocialSelected@3x.png */,
 				20AB0B801BC53411005D4CB3 /* separator_vertical@2x.png */,
 				20AB0B811BC53411005D4CB3 /* separator_vertical@3x.png */,
 				20C98B321BB2F6DF00D3EC4B /* messenger_share_saved@2x.png */,
@@ -5527,6 +5581,7 @@
 				24597CE01A1213B000CE1061 /* InAppPurchaseCell-iPhone6.xib in Resources */,
 				24861F1F19F9147100670F6D /* line_dotted@3x.png in Resources */,
 				2421849D194B4AEC00FDDA97 /* emoticon142@2x.png in Resources */,
+				204410F81BCE2A1400A63031 /* homeCreate@2x.png in Resources */,
 				2098BDBC1AB2FEDB00CDE1A4 /* tnc@3x.png in Resources */,
 				2471593919408E5F00B30301 /* invite_sms_selected@2x.png in Resources */,
 				2471593719408E5F00B30301 /* invite_facebook_selected@2x.png in Resources */,
@@ -5625,6 +5680,7 @@
 				C3766CFA1B5650B000B7F5B2 /* Template62.jpg in Resources */,
 				24218509194B4AEC00FDDA97 /* trophy-ball-icon.png in Resources */,
 				C31E92E51B566229004DF193 /* icon78.jpg in Resources */,
+				204411041BCE2A1400A63031 /* homeShareSelected@2x.png in Resources */,
 				2421850B194B4AEC00FDDA97 /* trophy-icon.png in Resources */,
 				2435952A1A0CA43100DD3C39 /* CustomAssetThumbnailView-iPhone6-Plus.xib in Resources */,
 				C3D8DD981B53DBE1006C2A9F /* b16.png in Resources */,
@@ -5731,6 +5787,7 @@
 				20563E171962D64200C206FD /* MontserratAlternates-Regular.ttf in Resources */,
 				249F2027193F562C0072835E /* inAppPurchaseViewBg-iPhone4@2x.png in Resources */,
 				C3D8DD991B53DBE1006C2A9F /* b17.png in Resources */,
+				204411051BCE2A1400A63031 /* homeShareSelected@3x.png in Resources */,
 				24218457194B4AEC00FDDA97 /* archery-icon.png in Resources */,
 				C35350DD1B60F66B00CF68F9 /* icon111.jpg in Resources */,
 				246EF541193C515D004539B2 /* emoticon94@2x.png in Resources */,
@@ -5740,6 +5797,7 @@
 				C31519CC1BB18708001D6B8D /* intro-3-screen-iPhone4.png in Resources */,
 				C3D8DD911B53DBE1006C2A9F /* b1.png in Resources */,
 				202978AD1B4CFBE700F35E40 /* emoticon231-too_sad@2x.png in Resources */,
+				204410FB1BCE2A1400A63031 /* homeInvite@3x.png in Resources */,
 				C3766CB61B5650B000B7F5B2 /* Template80.jpg in Resources */,
 				2098BDBF1AB2FEF800CDE1A4 /* privacy@2x.png in Resources */,
 				C3766CBC1B5650B000B7F5B2 /* Template0.jpg in Resources */,
@@ -5773,6 +5831,7 @@
 				202978841B4CFBE700F35E40 /* emoticon209-cry@2x.png in Resources */,
 				24218470194B4AEC00FDDA97 /* cycling-bmx-icon.png in Resources */,
 				242184A5194B4AEC00FDDA97 /* emoticon151@2x.png in Resources */,
+				204411071BCE2A1400A63031 /* homeSocial@3x.png in Resources */,
 				C35351101B60F68600CF68F9 /* Template100.jpg in Resources */,
 				24861EE319F9147100670F6D /* Default-Landscape-736h@3x.png in Resources */,
 				2029787B1B4CFBE700F35E40 /* emoticon200-burn_joss_stick@2x.png in Resources */,
@@ -5835,6 +5894,7 @@
 				C3766D721B56510200B7F5B2 /* icon38.jpg in Resources */,
 				C31E92F61B566229004DF193 /* icon75.jpg in Resources */,
 				247858A61948757C0062F1E4 /* Gutsy-Regular.ttf in Resources */,
+				204411011BCE2A1400A63031 /* homeSavedSelected@3x.png in Resources */,
 				249F2028193F562C0072835E /* inAppPurchaseViewBg@2x.png in Resources */,
 				24218461194B4AEC00FDDA97 /* Baseball-icon.png in Resources */,
 				24218514194B4AEC00FDDA97 /* Wrestling-icon.png in Resources */,
@@ -5885,6 +5945,7 @@
 				204BC2E01A10E87700FEB946 /* Fonts-iPhone6-Plus.xib in Resources */,
 				246EF52A193C515D004539B2 /* emoticon73@2x.png in Resources */,
 				C3766D821B56510200B7F5B2 /* icon54.jpg in Resources */,
+				204410F91BCE2A1400A63031 /* homeCreate@3x.png in Resources */,
 				C353511A1B60F68600CF68F9 /* Template104.jpg in Resources */,
 				242184AD194B4AEC00FDDA97 /* emoticon159@2x.png in Resources */,
 				65A464E41726CBA2002C32FB /* ALGER.TTF in Resources */,
@@ -5904,6 +5965,7 @@
 				65A464E81726CBA2002C32FB /* Comfortaa_Bold.ttf in Resources */,
 				2018AF8F195AF14C00188F8E /* image_icon_selected@2x.png in Resources */,
 				C31E92E41B566229004DF193 /* icon77.jpg in Resources */,
+				204411061BCE2A1400A63031 /* homeSocial@2x.png in Resources */,
 				65A464E91726CBA2002C32FB /* GoodDog.otf in Resources */,
 				65A464EA1726CBA2002C32FB /* GrandHotel-Regular.otf in Resources */,
 				24861F1A19F9147100670F6D /* invite_sms_selected@3x.png in Resources */,
@@ -5932,6 +5994,7 @@
 				248A3629193F20F30005FCAD /* video_tab_selected@2x.png in Resources */,
 				24861F5119F9147100670F6D /* symbolicon_button@2x.png in Resources */,
 				202978A61B4CFBE700F35E40 /* emoticon243-sure@2x.png in Resources */,
+				204410FE1BCE2A1400A63031 /* homeSaved@2x.png in Resources */,
 				C3766CAF1B5650B000B7F5B2 /* Template82.jpg in Resources */,
 				65A464EF1726CBA2002C32FB /* Nexa Bold.otf in Resources */,
 				C3766CB01B5650B000B7F5B2 /* Template83.jpg in Resources */,
@@ -5940,6 +6003,7 @@
 				246EF4E8193C515D004539B2 /* emoticon13@2x.png in Resources */,
 				24861F6619F9147100670F6D /* undo@3x.png in Resources */,
 				2041D5AB1BA07F9600EEFF83 /* IntroScreenViewController.xib in Resources */,
+				204411001BCE2A1400A63031 /* homeSavedSelected@2x.png in Resources */,
 				C35351161B60F68600CF68F9 /* Template99.jpg in Resources */,
 				2421846B194B4AEC00FDDA97 /* cocktail-icon.png in Resources */,
 				65A464F11726CBA2002C32FB /* Signika-Bold.otf in Resources */,
@@ -6012,6 +6076,7 @@
 				24751A641938A1F600DF03B2 /* color_tab@2x.png in Resources */,
 				24861F0F19F9147100670F6D /* icon_button@3x.png in Resources */,
 				202978A31B4CFBE700F35E40 /* emoticon240-still_dreaming@2x.png in Resources */,
+				204410FC1BCE2A1400A63031 /* homeInviteSelected@2x.png in Resources */,
 				249F1FA2193F55D50072835E /* camera_bottombg@2x.png in Resources */,
 				242184CB194B4AEC00FDDA97 /* field-hockey-icon.png in Resources */,
 				C3766D7A1B56510200B7F5B2 /* icon46.jpg in Resources */,
@@ -6263,6 +6328,7 @@
 				242184B7194B4AEC00FDDA97 /* emoticon169@2x.png in Resources */,
 				2421847A194B4AEC00FDDA97 /* emoticon107@2x.png in Resources */,
 				2433AC441A02113300F7CF42 /* SaveFlyerCell-iPhone6-Plus.xib in Resources */,
+				204411091BCE2A1400A63031 /* homeSocialSelected@3x.png in Resources */,
 				247858A51948757C0062F1E4 /* Gnuolane-Regular.ttf in Resources */,
 				24861F6B19F9147100670F6D /* youtube_share_selected@3x.png in Resources */,
 				202978711B4CFBE700F35E40 /* emoticon190-bad_smelly@2x.png in Resources */,
@@ -6296,6 +6362,7 @@
 				247858DF1948788C0062F1E4 /* QuattrocentoSans-Regular.otf in Resources */,
 				249F2026193F562C0072835E /* icon_button@2x.png in Resources */,
 				242184B5194B4AEC00FDDA97 /* emoticon167@2x.png in Resources */,
+				204411081BCE2A1400A63031 /* homeSocialSelected@2x.png in Resources */,
 				36A93F3819AE243D00D0A810 /* line_plane@2x.png in Resources */,
 				2478589A194874B70062F1E4 /* circula-medium.otf in Resources */,
 				49F109D2192C7926002B0CD4 /* CropVideoViewController.xib in Resources */,
@@ -6398,6 +6465,7 @@
 				202978951B4CFBE700F35E40 /* emoticon226-Nerd@2x.png in Resources */,
 				202978941B4CFBE700F35E40 /* emoticon225-misdoubt@2x.png in Resources */,
 				4986857818B50657002113E4 /* CustomAssetThumbnailView.xib in Resources */,
+				204410FD1BCE2A1400A63031 /* homeInviteSelected@3x.png in Resources */,
 				C35351351B61008200CF68F9 /* icon10.jpg in Resources */,
 				20F93DD417B2262200F6F88C /* MainSettingViewController.xib in Resources */,
 				242184F8194B4AEC00FDDA97 /* shell-icon.png in Resources */,
@@ -6561,6 +6629,7 @@
 				247858871948736B0062F1E4 /* Aller-Regular.ttf in Resources */,
 				246EF4F5193C515D004539B2 /* emoticon25@2x.png in Resources */,
 				2459E8B0196130810072A56C /* greenButton.png in Resources */,
+				204411021BCE2A1400A63031 /* homeShare@2x.png in Resources */,
 				24861F4819F9147100670F6D /* size_button@3x.png in Resources */,
 				24861F2C19F9147100670F6D /* outline_button_selected@3x.png in Resources */,
 				C31E92C71B566207004DF193 /* bicon4.png in Resources */,
@@ -6702,6 +6771,7 @@
 				2471593B19408E5F00B30301 /* invite_twitter_selected@2x.png in Resources */,
 				24861F5519F9147100670F6D /* text_box@3x.png in Resources */,
 				246EF50B193C515D004539B2 /* emoticon45@2x.png in Resources */,
+				204410FF1BCE2A1400A63031 /* homeSaved@3x.png in Resources */,
 				246EF4F1193C515D004539B2 /* emoticon21@2x.png in Resources */,
 				202978801B4CFBE700F35E40 /* emoticon205-confident@2x.png in Resources */,
 				246EF4EB193C515D004539B2 /* emoticon16@2x.png in Resources */,
@@ -6714,6 +6784,7 @@
 				249F1FC4193F55E90072835E /* dfcontact@2x.jpg in Resources */,
 				C3766D771B56510200B7F5B2 /* icon43.jpg in Resources */,
 				20C98B341BB2F6DF00D3EC4B /* messenger_share_saved@2x.png in Resources */,
+				204410FA1BCE2A1400A63031 /* homeInvite@2x.png in Resources */,
 				2029786D1B4CFBE700F35E40 /* emoticon186-after_boom@2x.png in Resources */,
 				246EF52E193C515D004539B2 /* emoticon77@2x.png in Resources */,
 				20563E1A1962D64200C206FD /* YanoneKaffeesatz-Light.ttf in Resources */,
@@ -6733,6 +6804,7 @@
 				C31E92BE1B566207004DF193 /* bicon15.png in Resources */,
 				C31E92ED1B566229004DF193 /* icon86.jpg in Resources */,
 				2012ECB1192612A000D5EA58 /* a_bg@2x.png in Resources */,
+				204411031BCE2A1400A63031 /* homeShare@3x.png in Resources */,
 				24861F4F19F9147100670F6D /* star@3x.png in Resources */,
 				24861F1419F9147100670F6D /* instagram_share_selected@3x.png in Resources */,
 				C35351311B61008200CF68F9 /* icon4.jpg in Resources */,

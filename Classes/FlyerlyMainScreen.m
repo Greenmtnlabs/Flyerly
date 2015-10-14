@@ -33,6 +33,7 @@
 @synthesize flyerPaths;
 @synthesize flyer, signInAlert,settingBtn,bottomBar;
 @synthesize txtSearch;
+@synthesize btnCreateFlyer;
 
 id lastShareBtnSender;
 
@@ -100,7 +101,7 @@ id lastShareBtnSender;
     [self loadAddTiles];
 
     [self.view bringSubviewToFront:bottomBar];
-    [self.view bringSubviewToFront:settingBtn];
+    [self.view bringSubviewToFront:btnCreateFlyer];
 
 }
 
@@ -740,7 +741,7 @@ id lastShareBtnSender;
     inviteButton.enabled = enable;
     createButton.enabled = enable;
     rightUndoBarButton.enabled = enable;
-    settingBtn.enabled = enable;
+    btnCreateFlyer.enabled = enable;
     
     tView.userInteractionEnabled = enable;
     
