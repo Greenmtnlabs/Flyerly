@@ -33,7 +33,7 @@
 @synthesize flyerPaths;
 @synthesize flyer, signInAlert,settingBtn,bottomBar;
 @synthesize txtSearch;
-@synthesize btnCreateFlyer, btnInvite;
+@synthesize btnCreateFlyer, btnInvite, btnSaved, btnShared, btnSocial;
 
 id lastShareBtnSender;
 

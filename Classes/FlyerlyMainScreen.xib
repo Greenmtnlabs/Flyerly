@@ -10,6 +10,9 @@
                 <outlet property="bottomBar" destination="ZWV-7a-5WA" id="2ye-ng-O5U"/>
                 <outlet property="btnCreateFlyer" destination="nFc-73-sac" id="9TP-2q-PTK"/>
                 <outlet property="btnInvite" destination="gA0-AY-5M7" id="eUq-iW-K5o"/>
+                <outlet property="btnSaved" destination="F7u-90-jDR" id="FQd-fS-wWL"/>
+                <outlet property="btnShared" destination="OLd-mr-1w3" id="w8g-eU-F13"/>
+                <outlet property="btnSocial" destination="Fbw-k5-O7c" id="pvP-9Z-vz0"/>
                 <outlet property="tView" destination="kGq-MQ-Rhl" id="vDj-iA-mjT"/>
                 <outlet property="txtSearch" destination="hXf-hs-j92" id="bB6-hf-E0O"/>
                 <outlet property="view" destination="12" id="14"/>
@@ -137,6 +140,7 @@
                 <constraint firstAttribute="centerX" secondItem="nFc-73-sac" secondAttribute="centerX" id="K4I-U6-DQe"/>
                 <constraint firstItem="hXf-hs-j92" firstAttribute="top" secondItem="fcM-4t-gbj" secondAttribute="bottom" constant="-41" id="NWC-WI-at6"/>
                 <constraint firstItem="kGq-MQ-Rhl" firstAttribute="leading" secondItem="12" secondAttribute="leading" id="Pfy-3R-Na2"/>
+                <constraint firstAttribute="bottom" secondItem="nFc-73-sac" secondAttribute="bottom" id="TLx-ej-vQx"/>
                 <constraint firstAttribute="trailing" secondItem="kGq-MQ-Rhl" secondAttribute="trailing" id="Ucx-1n-S4D"/>
                 <constraint firstAttribute="trailing" secondItem="BaI-j9-whZ" secondAttribute="trailing" id="Wnr-zt-I15"/>
                 <constraint firstItem="kGq-MQ-Rhl" firstAttribute="top" secondItem="BaI-j9-whZ" secondAttribute="bottom" id="cN6-8T-8c1"/>
