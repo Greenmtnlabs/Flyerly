@@ -282,30 +282,31 @@ id lastShareBtnSender;
         [allFlyers replaceObjectAtIndex:i withObject:pathWithoutFileName];
     }
     
-    NSMutableArray *sortedList = [[NSMutableArray alloc] initWithArray:allFlyers];
-    
+    NSMutableArray *unsharedFlyer = [[NSMutableArray alloc] initWithArray:allFlyers];
+    // Finding unshared flyers
     for (int i =0 ; i < [allFlyers count] ; i++)
     {
         Flyer *flyr = [[Flyer alloc] initWithPath:[allFlyers objectAtIndex:i] setDirectory:NO];
         
         for(int j =0 ; j < [flyr.socialArray count] ; j++){
-            
-            if(showUnsharedFlyers){ // unshared flyers
-                
-                if([flyr.socialArray[j] isEqualToString:@"1"]){
-                    [sortedList removeObjectAtIndex:i];
-                    break;
-                }
-            } else { //shared flyers
-                
-                if([flyr.socialArray[j] isEqualToString:@"0"]){
-                    [sortedList removeObjectAtIndex:i];
-                    break;
-                }
+            if([flyr.socialArray[j] isEqualToString:@"1"]){
+                [unsharedFlyer removeObjectAtIndex:i];
+                break;
             }
         }
     }
-    return sortedList;}
+    
+    
+    if(showUnsharedFlyers){ // unshared flyers
+        return unsharedFlyer;
+    } else { //shared flyers
+        [allFlyers removeObjectsInArray:unsharedFlyer];
+        return allFlyers;
+    }
+
+    
+    return unsharedFlyer;
+}
 
 
 #pragma mark Table view methods
