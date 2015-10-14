@@ -25,7 +25,7 @@
                     </state>
                 </button>
                 <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xFR-dh-0pS" userLabel="Button1">
-                    <rect key="frame" x="91" y="10" width="70" height="65"/>
+                    <rect key="frame" x="90" y="10" width="70" height="65"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <state key="normal" title="Button">
@@ -34,7 +34,7 @@
                     </state>
                 </button>
                 <button opaque="NO" tag="74" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qf6-wE-kVZ" userLabel="Button74">
-                    <rect key="frame" x="166" y="10" width="70" height="65"/>
+                    <rect key="frame" x="165" y="10" width="70" height="65"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <state key="normal" title="Button">
