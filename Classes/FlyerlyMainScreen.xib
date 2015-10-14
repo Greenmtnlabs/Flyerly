@@ -71,44 +71,21 @@
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZWV-7a-5WA" userLabel="bottomBar">
                     <rect key="frame" x="0.0" y="432" width="320" height="48"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gA0-AY-5M7">
-                            <rect key="frame" x="0.0" y="0.0" width="63" height="48"/>
-                            <state key="normal" image="homeInvite.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="selected" image="homeInviteSelected.png"/>
-                            <connections>
-                                <action selector="doInvite:" destination="-1" eventType="touchUpInside" id="bcs-ee-XwJ"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F7u-90-jDR">
-                            <rect key="frame" x="64" y="0.0" width="63" height="48"/>
-                            <state key="normal" image="homeSaved.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="selected" image="homeSavedSelected.png"/>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OLd-mr-1w3">
-                            <rect key="frame" x="193" y="0.0" width="63" height="48"/>
-                            <state key="normal" image="homeShare.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="selected" image="homeShareSelected.png"/>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fbw-k5-O7c">
-                            <rect key="frame" x="257" y="0.0" width="63" height="48"/>
-                            <state key="normal" image="homeSocial.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="selected" image="homeSocialSelected.png"/>
-                        </button>
-                    </subviews>
                     <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="48" id="KGF-uc-wpp"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gA0-AY-5M7">
+                    <rect key="frame" x="0.0" y="432" width="63" height="48"/>
+                    <state key="normal" image="homeInvite.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="homeInviteSelected.png"/>
+                    <connections>
+                        <action selector="doInvite:" destination="-1" eventType="touchUpInside" id="bcs-ee-XwJ"/>
+                    </connections>
+                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nFc-73-sac" userLabel="settingBtn">
                     <rect key="frame" x="125" y="412" width="70" height="68"/>
                     <accessibility key="accessibilityConfiguration" label="Settings"/>
@@ -127,6 +104,27 @@
                     <connections>
                         <action selector="createFlyer:" destination="-1" eventType="touchUpInside" id="hpw-hI-grN"/>
                     </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OLd-mr-1w3">
+                    <rect key="frame" x="194" y="432" width="63" height="48"/>
+                    <state key="normal" image="homeShare.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="homeShareSelected.png"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fbw-k5-O7c">
+                    <rect key="frame" x="257" y="432" width="63" height="48"/>
+                    <state key="normal" image="homeSocial.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="homeSocialSelected.png"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F7u-90-jDR">
+                    <rect key="frame" x="63" y="432" width="63" height="48"/>
+                    <state key="normal" image="homeSaved.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="homeSavedSelected.png"/>
                 </button>
             </subviews>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
