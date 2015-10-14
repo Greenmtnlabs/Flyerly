@@ -102,8 +102,64 @@ id lastShareBtnSender;
 
     [self.view bringSubviewToFront:bottomBar];
     [self.view bringSubviewToFront:btnCreateFlyer];
+    [self.view bringSubviewToFront:btnInvite];
+    [self.view bringSubviewToFront:btnSaved];
+    [self.view bringSubviewToFront:btnShared];
+    [self.view bringSubviewToFront:btnSocial];
+    [self setTabButtonsPosition];
 
 }
+/*
+ * This method sets tab buttons
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+
+
+-(void)setTabButtonsPosition{
+    
+    CGRect rectInvite, rectSaved, rectShared, rectSocial;
+    
+    if(IS_IPHONE_4){
+        
+        rectInvite = CGRectMake(0, 432, 63, 48);
+        rectSaved = CGRectMake(63, 432, 63, 48);
+        rectShared = CGRectMake(194, 432, 63, 48);
+        rectSocial = CGRectMake(257, 432, 63, 48);
+    
+    } else if(IS_IPHONE_5){
+        
+        rectInvite = CGRectMake(0, 520, 63, 48);
+        rectSaved = CGRectMake(63, 520, 63, 48);
+        rectShared = CGRectMake(194, 520, 63, 48);
+        rectSocial = CGRectMake(257, 520, 63, 48);
+        
+    } else if(IS_IPHONE_6){
+        
+        rectInvite = CGRectMake(0, 619, 75, 48);
+        rectSaved = CGRectMake(75, 520, 75, 48);
+        rectShared = CGRectMake(225, 520, 75, 48);
+        rectSocial = CGRectMake(300, 520, 75, 48);
+        
+    } else if(IS_IPHONE_6_PLUS){
+        
+        rectInvite = CGRectMake(0, 668, 86, 48);
+        rectSaved = CGRectMake(86, 668, 86, 48);
+        rectShared = CGRectMake(243, 668, 86, 48);
+        rectSocial = CGRectMake(328, 668, 86, 48);
+        
+    }
+    
+    [self.btnInvite setBounds:rectInvite];
+    [self.btnSaved setBounds:rectSaved];
+    [self.btnShared setBounds:rectShared];
+    [self.btnSocial setBounds:rectSocial];
+
+
+}
+
 
 /*
  * TextView to input and search
