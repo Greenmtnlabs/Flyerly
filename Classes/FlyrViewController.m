@@ -17,6 +17,7 @@
 @synthesize searchTextField;
 @synthesize flyerPaths;
 @synthesize flyer, signInAlert;
+@synthesize showUnsharedFlyers;
 
 id lastShareBtnSender;
 
@@ -271,19 +272,40 @@ id lastShareBtnSender;
  */
 -(NSMutableArray *)getFlyersPaths{
     
-    NSMutableArray *sortedList = [ Flyer recentFlyerPreview:0];
+    NSMutableArray *allFlyers = [ Flyer recentFlyerPreview:0];
     
-    for(int i = 0 ; i < [sortedList count];i++) {
-        
+    for(int i = 0 ; i < [allFlyers count];i++) {
         //Here we remove File Name from Path
-        NSString *pathWithoutFileName = [[sortedList objectAtIndex:i]
-                                         stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE] withString:@""];
-        [sortedList replaceObjectAtIndex:i withObject:pathWithoutFileName];
+        NSString *pathWithoutFileName = [[allFlyers objectAtIndex:i]
+                                         stringByReplacingOccurrencesOfString:[NSString
+                                                                               stringWithFormat:@"/flyer.%@",IMAGETYPE] withString:@""];
+        [allFlyers replaceObjectAtIndex:i withObject:pathWithoutFileName];
     }
     
+    NSMutableArray *sortedList = [[NSMutableArray alloc] initWithArray:allFlyers];
     
-    return sortedList;
-}
+    for (int i =0 ; i < [allFlyers count] ; i++)
+    {
+        Flyer *flyr = [[Flyer alloc] initWithPath:[allFlyers objectAtIndex:i] setDirectory:NO];
+        
+        for(int j =0 ; j < [flyr.socialArray count] ; j++){
+            
+            if(showUnsharedFlyers){ // unshared flyers
+                
+                if([flyr.socialArray[j] isEqualToString:@"1"]){
+                    [sortedList removeObjectAtIndex:i];
+                    break;
+                }
+            } else { //shared flyers
+                
+                if([flyr.socialArray[j] isEqualToString:@"0"]){
+                    [sortedList removeObjectAtIndex:i];
+                    break;
+                }
+            }
+        }
+    }
+    return sortedList;}
 
 
 #pragma mark Table view methods

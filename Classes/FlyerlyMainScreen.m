@@ -371,6 +371,30 @@ id lastShareBtnSender;
 }
 
 /*
+ * When invoked, shows unshared flyers
+ */
+
+- (IBAction)showUnsharedFlyers:(id)sender {
+    
+    FlyrViewController *flyrViewController = [[FlyrViewController alloc]initWithNibName:@"FlyrViewController" bundle:nil];
+    flyrViewController.showUnsharedFlyers = YES;
+    [self.navigationController pushViewController:flyrViewController animated:YES];
+
+}
+
+/*
+ * When invoked, shows shared flyers
+ */
+
+- (IBAction)showSharedFlyers:(id)sender {
+
+    FlyrViewController *flyrViewController = [[FlyrViewController alloc]initWithNibName:@"FlyrViewController" bundle:nil];
+    flyrViewController.showUnsharedFlyers = NO;
+    [self.navigationController pushViewController:flyrViewController animated:YES];
+
+}
+
+/*
  * Here we get All Flyers Directories
  * return
  *      Nsarray of Flyers Path

@@ -59,7 +59,7 @@
 @property ( nonatomic, strong ) Flyer *flyer;
 @property (nonatomic, strong) UIView *sharePanel;
 @property (nonatomic, strong) UIAlertView *signInAlert;
-
+@property (nonatomic, assign) BOOL showUnsharedFlyers;
 
 -(void)goBack;
 -(NSMutableArray *)getFlyersPaths;

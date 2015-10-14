@@ -70,6 +70,8 @@
 -(IBAction)doAbout:(id)sender;
 -(IBAction)doInvite:(id)sender;
 @property (strong, nonatomic) IBOutlet UITextField *txtSearch;
+- (IBAction)showUnsharedFlyers:(id)sender;
+- (IBAction)showSharedFlyers:(id)sender;
 
 -(NSMutableArray *)getFlyersPaths;
 
