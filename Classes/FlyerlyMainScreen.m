@@ -31,7 +31,7 @@
 
 @synthesize sharePanel,tView;
 @synthesize flyerPaths;
-@synthesize flyer, signInAlert,settingBtn,bottomBar;
+@synthesize flyer, signInAlert,bottomBar;
 @synthesize txtSearch;
 @synthesize btnCreateFlyer, btnInvite, btnSaved, btnShared, btnSocial;
 
@@ -351,12 +351,12 @@ id lastShareBtnSender;
     [logo setUserInteractionEnabled:YES];
     [logo addGestureRecognizer:singleTap];
     
-    // Create Button
-    createButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [createButton addTarget:self action:@selector(createFlyer:) forControlEvents:UIControlEventTouchUpInside];
-    [createButton setBackgroundImage:[UIImage imageNamed:@"createButton"] forState:UIControlStateNormal];
-    createButton.showsTouchWhenHighlighted = YES;
-    rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:createButton];
+    // Settings Button
+    btnSettings = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    [btnSettings addTarget:self action:@selector(doAbout:) forControlEvents:UIControlEventTouchUpInside];
+    [btnSettings setBackgroundImage:[UIImage imageNamed:@"createButton"] forState:UIControlStateNormal];
+    btnSettings.showsTouchWhenHighlighted = YES;
+    rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:btnSettings];
     
     return [NSMutableArray arrayWithObjects:rightUndoBarButton,nil];
 }
@@ -818,8 +818,7 @@ id lastShareBtnSender;
  */
 -(void)enableBtns:(BOOL)enable{
 
-    btnInvite.enabled = enable;
-    createButton.enabled = enable;
+    btnSettings.enabled = enable;
     rightUndoBarButton.enabled = enable;
     btnCreateFlyer.enabled = enable;
     
@@ -933,7 +932,7 @@ id lastShareBtnSender;
         shareviewcontroller.flyer = self.flyer;
         shareviewcontroller.imageFileName = shareImagePath;
         shareviewcontroller.rightUndoBarButton = rightUndoBarButton;
-        shareviewcontroller.shareButton = createButton;
+        shareviewcontroller.shareButton = btnSettings;
         shareviewcontroller.backButton = inviteButton;
         if( [shareviewcontroller.titleView.text isEqualToString:@"Flyer"] ) {
             shareviewcontroller.titleView.text = [flyer getFlyerTitle];

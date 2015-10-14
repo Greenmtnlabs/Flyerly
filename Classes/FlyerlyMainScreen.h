@@ -45,7 +45,7 @@
     NSArray *requestedProducts;
     RMStoreKeychainPersistence *_persistence;
     PrintViewController *printViewController;
-    UIButton *inviteButton,*createButton;
+    UIButton *inviteButton,*btnSettings;
     UIBarButtonItem *rightUndoBarButton;
     
 }
@@ -57,7 +57,6 @@
 @property ( nonatomic, strong ) Flyer *flyer;
 @property (nonatomic, strong) UIView *sharePanel;
 @property (nonatomic, strong) UIAlertView *signInAlert;
-@property (nonatomic, strong) IBOutlet UIButton *settingBtn;
 @property (nonatomic, strong) IBOutlet UIView *bottomBar;
 
 @property (strong, nonatomic) IBOutlet UIButton *btnCreateFlyer;
