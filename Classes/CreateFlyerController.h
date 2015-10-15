@@ -109,6 +109,7 @@
 @property (nonatomic, strong) UIView *bannerAddView;
 
 //-----
+@property (nonatomic, strong) UIView *giphyBgsView;
 @property (nonatomic, strong) ResourcesView *backgroundsView;
 @property (nonatomic, strong) ResourcesView *flyerBordersView;
 @property (nonatomic, strong) UIView *fontsView;
@@ -167,6 +168,7 @@
 @property (nonatomic, strong)IBOutlet UIButton *cameraTakePhoto;
 @property (nonatomic, strong)IBOutlet UIButton *cameraRoll;
 @property (nonatomic, strong)IBOutlet UIButton *flyerBorder;
+@property (nonatomic, strong)IBOutlet UIButton *giphyBgBtn;
 
 //These are LibText
 @property (nonatomic, strong)IBOutlet UIButton *fontTabButton;

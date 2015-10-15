@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment version="784" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateFlyerController">
@@ -35,6 +35,7 @@
                 <outlet property="fontBorderTabButton" destination="E2L-Wc-n71" id="qIM-iL-HJk"/>
                 <outlet property="fontEditButton" destination="Rgs-rs-7a8" id="E8j-if-9v8"/>
                 <outlet property="fontTabButton" destination="zu1-aU-CE3" id="4N8-mM-vZ8"/>
+                <outlet property="giphyBgBtn" destination="ofn-R7-Qk5" id="S2n-rn-s6Y"/>
                 <outlet property="heightTabButton" destination="5Ya-yN-kTr" id="RhP-af-MbU"/>
                 <outlet property="libArts" destination="weP-Ld-FsM" id="x98-Xu-7Y9"/>
                 <outlet property="libBackground" destination="wtn-Zi-MKo" id="Lbb-GH-gzo"/>
@@ -214,7 +215,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="WvZ-dV-5Fn">
-                    <rect key="frame" x="0.0" y="0.0" width="80" height="45"/>
+                    <rect key="frame" x="0.0" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Library"/>
                     <state key="normal" backgroundImage="addbg_library.png">
@@ -226,7 +227,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="TUU-ew-jcU">
-                    <rect key="frame" x="80" y="0.0" width="80" height="45"/>
+                    <rect key="frame" x="64" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="TakePhoto"/>
                     <state key="normal" backgroundImage="07_camera.png">
@@ -238,7 +239,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="t0N-7F-yOw">
-                    <rect key="frame" x="160" y="0.0" width="80" height="45"/>
+                    <rect key="frame" x="192" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="CameraRoll"/>
                     <state key="normal" backgroundImage="07_roll.png">
@@ -250,7 +251,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="rR0-dC-sak">
-                    <rect key="frame" x="240" y="0.0" width="80" height="45"/>
+                    <rect key="frame" x="256" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Border"/>
                     <state key="normal" backgroundImage="addbg_border.png">
@@ -261,11 +262,23 @@
                         <action selector="setlibBackgroundTabAction:" destination="-1" eventType="touchUpInside" id="fcs-Ef-1pq"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="ofn-R7-Qk5">
+                    <rect key="frame" x="128" y="0.0" width="64" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="Library"/>
+                    <state key="normal" backgroundImage="addbg_library.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" backgroundImage="addbg_library_selected.png"/>
+                    <connections>
+                        <action selector="setlibBackgroundTabAction:" destination="-1" eventType="touchUpInside" id="6f7-b5-v6O"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="342" y="1159.5"/>
+            <point key="canvasLocation" x="342" y="806.5"/>
         </view>
         <view contentMode="scaleToFill" id="8Ew-aX-Xah" userLabel="View - Font sub menu">
             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>

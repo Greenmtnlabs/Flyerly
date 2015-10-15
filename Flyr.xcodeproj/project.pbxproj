@@ -1183,6 +1183,7 @@
 		C33F80051B9F115500E7AFF9 /* FlyerlyMainScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33F80041B9F115500E7AFF9 /* FlyerlyMainScreen.xib */; };
 		C34E98531BA2E54F00692597 /* MainScreenAddsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C34E98511BA2E54F00692597 /* MainScreenAddsCell.m */; };
 		C34E98541BA2E54F00692597 /* MainScreenAddsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C34E98521BA2E54F00692597 /* MainScreenAddsCell.xib */; };
+		C352781A1BCE86C2002963F1 /* AnimatedGIFImageSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = C35278191BCE86C2002963F1 /* AnimatedGIFImageSerialization.m */; };
 		C35350941B60CF5D00CF68F9 /* emoticon276zeimusu-Recorder-and-music.png in Resources */ = {isa = PBXBuildFile; fileRef = C35350791B60CF5D00CF68F9 /* emoticon276zeimusu-Recorder-and-music.png */; };
 		C35350951B60CF5D00CF68F9 /* emoticon268purplecar.png in Resources */ = {isa = PBXBuildFile; fileRef = C353507A1B60CF5D00CF68F9 /* emoticon268purplecar.png */; };
 		C35350961B60CF5D00CF68F9 /* emoticon275yellowglass.png in Resources */ = {isa = PBXBuildFile; fileRef = C353507B1B60CF5D00CF68F9 /* emoticon275yellowglass.png */; };
@@ -2811,6 +2812,8 @@
 		C34E98501BA2E54F00692597 /* MainScreenAddsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScreenAddsCell.h; sourceTree = "<group>"; };
 		C34E98511BA2E54F00692597 /* MainScreenAddsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainScreenAddsCell.m; sourceTree = "<group>"; };
 		C34E98521BA2E54F00692597 /* MainScreenAddsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainScreenAddsCell.xib; sourceTree = "<group>"; };
+		C35278181BCE86C2002963F1 /* AnimatedGIFImageSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedGIFImageSerialization.h; sourceTree = "<group>"; };
+		C35278191BCE86C2002963F1 /* AnimatedGIFImageSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedGIFImageSerialization.m; sourceTree = "<group>"; };
 		C35350791B60CF5D00CF68F9 /* emoticon276zeimusu-Recorder-and-music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon276zeimusu-Recorder-and-music.png"; sourceTree = "<group>"; };
 		C353507A1B60CF5D00CF68F9 /* emoticon268purplecar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoticon268purplecar.png; sourceTree = "<group>"; };
 		C353507B1B60CF5D00CF68F9 /* emoticon275yellowglass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoticon275yellowglass.png; sourceTree = "<group>"; };
@@ -3148,6 +3151,7 @@
 		080E96DDFE201D6D7F000001 /* FlyerlyClasses */ = {
 			isa = PBXGroup;
 			children = (
+				C35278171BCE86C2002963F1 /* AnimatedGIFImageSerialization */,
 				2041D5A51BA07F4900EEFF83 /* IntroScreen */,
 				20F3597C1888DC8A001376B6 /* CreateFlyer */,
 				1D3623240D0F684500981E51 /* FlyrAppDelegate.h */,
@@ -5299,6 +5303,15 @@
 			name = GoogleAddCell;
 			sourceTree = "<group>";
 		};
+		C35278171BCE86C2002963F1 /* AnimatedGIFImageSerialization */ = {
+			isa = PBXGroup;
+			children = (
+				C35278181BCE86C2002963F1 /* AnimatedGIFImageSerialization.h */,
+				C35278191BCE86C2002963F1 /* AnimatedGIFImageSerialization.m */,
+			);
+			path = AnimatedGIFImageSerialization;
+			sourceTree = "<group>";
+		};
 		C3D8DD7C1B53DBE1006C2A9F /* Borders */ = {
 			isa = PBXGroup;
 			children = (
@@ -6852,6 +6865,7 @@
 				208C684F186DAA59004A74F2 /* FlyerlyConfigurator.m in Sources */,
 				2032DCD01871BDFF007036B2 /* CropViewController.m in Sources */,
 				242BFA7D1B29711800EF370B /* RMStoreTransactionReceiptVerificator.m in Sources */,
+				C352781A1BCE86C2002963F1 /* AnimatedGIFImageSerialization.m in Sources */,
 				49B8898A188652A2003766AD /* NSData+Extras.m in Sources */,
 				202C4803187D6E4B00FE0975 /* BitlyURLShortener.m in Sources */,
 				2002C89618888CD4005B18C9 /* SaveFlyerCell.m in Sources */,

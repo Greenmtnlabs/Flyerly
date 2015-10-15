@@ -1102,9 +1102,24 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     // Set to Master Dictionary
     [masterLayers setValue:imageDetailDictionary forKey:uid];
-
 }
 
+
+/*
+ * Set Template type ( gif / png )
+ */
+-(void)setTemplateImageType:(NSString *)type {
+    NSString *uid = @"Template";
+    NSMutableDictionary *imageDetailDictionary = [self getLayerFromMaster:uid];
+ 
+    if( [type isEqualToString:@"gif"] )
+    [imageDetailDictionary setValue:@"Template/template.gif" forKey:@"image"];
+    else
+    [imageDetailDictionary setValue:@"Template/template.png" forKey:@"image"];
+    
+    // Set to Master Dictionary
+    [masterLayers setValue:imageDetailDictionary forKey:uid];
+}
 
 /*
  * Return Image Tag

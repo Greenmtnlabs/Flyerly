@@ -65,10 +65,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert,signInAlert,waterMarkPurchasingAlert,spaceUnavailableAlert;
 @synthesize imgPickerFlag,layerScrollView,flyerPath;
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton,drawingMenueButton;
-@synthesize libText,libBackground,libArts,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder,libDrawing;
+@synthesize libText,libBackground,libArts,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder,giphyBgBtn,libDrawing;
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider,tempelateView;
 @synthesize durationLabel,durationChange,onFlyerBack,shouldShowAdd;
-@synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAddView,drawingPatternsView,drawingEraserMsgView;
+@synthesize backgroundsView,giphyBgsView,flyerBordersView,colorsView,sizesView,bannerAddView,drawingPatternsView,drawingEraserMsgView;
 
 @synthesize premiumBtnBg, premiumBtnBgBorder, premiumBtnEmoticons, premiumBtnCliparts, premiumBtnFonts;
 @synthesize premiumImgBg, premiumImgBgBorder, premiumImgEmoticons, premiumImgCliparts, premiumImgFonts;
@@ -165,6 +165,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     //245-feature-in-create-screen-when-user-is-creating-brand-new-flyer-have-the-background-button-selected-for-them-initially
     if( isNewFlyer )
     [self setAddMoreLayerTabAction:backgroundTabButton];
+    
+    [self selectGiphy:nil];
 }
 
 -(void) loadInterstitialAdd{
@@ -579,6 +581,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     [self.bannerAdd loadRequest:[self request]];
                 }
                 
+                [self loadGiphyImages];
+                
                 NSArray *flyerbackgroundsViewArray;
                 if ( IS_IPHONE_4) {
                      flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds-iPhone4" owner:self options:nil];
@@ -930,6 +934,48 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
             }
         }
+    });
+}
+
+/**
+ * Load giphy images from internet
+ */
+-(void)loadGiphyImages{
+    giphyBgsView  = [[ResourcesView alloc] init];
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 150, 150)];
+    btn.backgroundColor = [UIColor greenColor];
+    btn.alpha = 0.5;
+    [btn addTarget:self action:@selector(selectGiphy:) forControlEvents:UIControlEventTouchUpInside];
+    [giphyBgsView addSubview:btn];
+    
+    dispatch_async( dispatch_get_main_queue(), ^{
+        NSURL *url = [NSURL URLWithString:@"http://media0.giphy.com/media/QgcQLZa6glP2w/giphy.gif"];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        
+        UIImageView *imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 100, 100)];
+        imageView2.image = [UIImage imageWithData:data];
+        imageView2.backgroundColor = [UIColor redColor];
+        imageView2.userInteractionEnabled = YES;
+        imageView2.tag = 1;
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectGiphy:)];
+        [imageView2 addGestureRecognizer:tapGesture];
+        
+        
+        
+        [giphyBgsView addSubview:imageView2];
+    });
+}
+/**
+ * Add giphy photos in view, when user tap on giphy tab, then load all images in subview
+ */
+-(void)addGiphyInSubView{
+    dispatch_async( dispatch_get_main_queue(), ^{
+        //Delete SubViews From ScrollView
+        [self deleteSubviewsFromScrollView];
+        
+        [layerScrollView addSubview:giphyBgsView];
+        
+        [layerScrollView setContentSize:CGSizeMake(backgroundsView.frame.size.width, backgroundsView.frame.size.height)];
     });
 }
 
@@ -2293,6 +2339,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
                 //Set Image Tag in dictionary
                 [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",(int)view.tag]];
+                [flyer setTemplateImageType:@"png"];
                 
             }
             
@@ -2305,6 +2352,38 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     }
     
     [Flurry logEvent:@"Background Selected"];
+}
+
+/*
+ * When user select any giphy
+ */
+-(void)selectGiphy:(id)sender{
+    
+    //Here we Set Flyer Type
+    [flyer setFlyerTypeImage];
+    
+    // Create Symbol direcrory if not created
+    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    
+    NSString *FolderPath = [NSString stringWithFormat:@"%@/Template", currentpath];
+    NSString *imageFolderPath = [NSString stringWithFormat:@"%@/template.%@", FolderPath,@"mov"];
+    
+    
+    NSURL *url = [NSURL URLWithString:@"http://media0.giphy.com/media/QgcQLZa6glP2w/giphy.gif"];
+    NSData *imgData = [NSData dataWithContentsOfURL:url];
+   //copy giphy into template folder
+    //Create a Image Copy to Current Flyer Folder
+    [[NSFileManager defaultManager] createFileAtPath:imageFolderPath contents:imgData attributes:nil];
+    
+    //set gif in image flyimgView
+    [self.flyimgView setTemplate:@"Template/template.gif"];
+    
+    //update dictionary
+    [flyer setTemplateImageType:@"gif"];
+
+    //for removing selection
+    //[flyer setImageTag:@"Template" Tag:@""];
+    
 }
 
 /*
@@ -5042,6 +5121,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     //Un Selected State of Buttons
     [backtemplates setSelected:NO];
     [flyerBorder setSelected:NO];
+    [giphyBgBtn setSelected:NO];
     
     if( selectedButton == backtemplates ) {
         //HERE WE SET ANIMATION
@@ -5105,6 +5185,25 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         [flyerBorder setSelected:YES];
     }
+    else if(selectedButton == giphyBgBtn) {
+        
+        //HERE WE SET ANIMATION
+        [UIView animateWithDuration:0.4f
+                         animations:^{
+                             //Create ScrollView
+                             [self addGiphyInSubView];
+                         }
+                         completion:^(BOOL finished){
+                             [layerScrollView flashScrollIndicators];
+                         }];
+        //END ANIMATION
+        
+        //Add ContextView
+        [self addScrollView:layerScrollView];
+        
+        [giphyBgBtn setSelected:YES];
+    }
+    
 }
 
 /*
