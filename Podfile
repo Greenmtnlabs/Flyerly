@@ -25,3 +25,5 @@ platform :ios, '7.0'
 
     pod 'FBSDKCoreKit', '~> 4.6'
     pod 'FBSDKShareKit', '~> 4.6'
+
+    pod 'STTwitter', '~> 0.2'

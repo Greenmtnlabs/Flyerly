@@ -14,6 +14,9 @@
 #import "FlyerlyConfigurator.h"
 #import "MainScreenAddsCell.h"
 
+#import "STTwitterAPI.h"
+
+
 #define ADD_AFTER_FLYERS 4 //SHOW AD AFTER (ADD_AFTER_FLYERS - 1 ) => 3 FLYERS
 
 @interface FlyerlyMainScreen ()  {
@@ -1139,7 +1142,31 @@ id lastShareBtnSender;
  * When invoked, shows shared flyers with Hash Tags
  */
 - (IBAction)showHashTagFlyers:(id)sender {
-
+    
+    NSString *OAuthConsumerKey = [flyerConfigurator twitterConsumerKey];
+    NSString *OAuthConsumerSecrey = [flyerConfigurator twitterSecret];
+    
+    STTwitterAPI *twitter = [STTwitterAPI twitterAPIAppOnlyWithConsumerKey:OAuthConsumerKey
+                                                                    consumerSecret:OAuthConsumerSecrey];
+    
+    
+    [twitter verifyCredentialsWithSuccessBlock:^(NSString *bearerToken) {
+        NSLog(@"Access granted with %@", bearerToken);
+        
+        [twitter getSearchTweetsWithQuery:@"flyerly"
+                             successBlock:^(NSDictionary *searchMetadata, NSArray *statuses) {
+                                 // use the statuses here
+                             } errorBlock:^(NSError *error) {
+                                 // ...
+                             }];
+    } errorBlock:^(NSError *error) {
+        NSLog(@"-- error %@", error);
+    }];
+    
+   
+    
+    
+   
 }
 
 #pragma mark  Text Field Delegete
