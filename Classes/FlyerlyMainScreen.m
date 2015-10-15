@@ -33,7 +33,7 @@
 @synthesize flyerPaths;
 @synthesize flyer, signInAlert,bottomBar;
 @synthesize txtSearch;
-@synthesize btnCreateFlyer, btnInvite, btnSaved, btnShared, btnSocial;
+@synthesize btnCreateFlyer;
 
 id lastShareBtnSender;
 
@@ -99,89 +99,12 @@ id lastShareBtnSender;
     });
     
     [self loadAddTiles];
-
     
     [self.view bringSubviewToFront:bottomBar];
     [self.view bringSubviewToFront:btnCreateFlyer];
-    [self.view bringSubviewToFront:btnInvite];
-    [self.view bringSubviewToFront:btnSaved];
-    [self.view bringSubviewToFront:btnShared];
-    [self.view bringSubviewToFront:btnSocial];
     
-
-}
-/*
- * This method sets tab buttons
- * @params:
- *      void
- * @return:
- *      void
- */
-
--(void)setTabButtonsPosition{
-    
-    CGRect rectInvite, rectSaved, rectShared, rectSocial;
-    
-    if(IS_IPHONE_4){
-        
-        rectInvite = CGRectMake(0, 432, 63, 48);
-        rectSaved = CGRectMake(63, 432, 63, 48);
-        rectShared = CGRectMake(194, 432, 63, 48);
-        rectSocial = CGRectMake(257, 432, 63, 48);
-    
-    } else if(IS_IPHONE_5){
-        
-        rectInvite = CGRectMake(0, 520, 63, 48);
-        rectSaved = CGRectMake(63, 520, 63, 48);
-        rectShared = CGRectMake(194, 520, 63, 48);
-        rectSocial = CGRectMake(257, 520, 63, 48);
-        
-    } else if(IS_IPHONE_6){
-        
-        rectInvite = CGRectMake(0, 619, 75, 48);
-        rectSaved = CGRectMake(75, 520, 75, 48);
-        rectShared = CGRectMake(225, 520, 75, 48);
-        rectSocial = CGRectMake(300, 520, 75, 48);
-        
-    } else if(IS_IPHONE_6_PLUS){
-        
-        rectInvite = CGRectMake(0, 668, 86, 48);
-        rectSaved = CGRectMake(86, 668, 86, 48);
-        rectShared = CGRectMake(243, 668, 86, 48);
-        rectSocial = CGRectMake(328, 668, 86, 48);
-        
-    }
-    
-    btnInvite.frame = rectInvite;
-    
-//    [btnInvite setBounds:rectInvite];
-//    [btnSaved setBounds:rectSaved];
-//    [btnShared setBounds:rectShared];
-//    [btnSocial setBounds:rectSocial];
-
-
-}
-
-
-/*
- * TextView to input and search
- * @params:
- *      void
- * @return:
- *      void
- */
-
--(void) addSearchBox{
-    
-    txtSearch.font = [UIFont systemFontOfSize:12.0];
-    txtSearch.textAlignment = NSTextAlignmentLeft;
-    txtSearch.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    [txtSearch setBorderStyle:UITextBorderStyleRoundedRect];
-    [txtSearch setReturnKeyType:UIReturnKeyDone];
-    
-    [txtSearch addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingChanged];
-    txtSearch.borderStyle = nil;
-
+    // Adding tab buttons to the screen
+    [self setTabButtonsPosition];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -191,6 +114,7 @@ id lastShareBtnSender;
     txtSearch.text = @"";
     [self.tView reloadData];
     [self checkUserPurchases];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -201,7 +125,6 @@ id lastShareBtnSender;
         MainFlyerCell *cell = (MainFlyerCell *)[self.tView cellForRowAtIndexPath:indexPath];
         sizeRectForAdd = cell.containerView.frame;
     }
-    [self setTabButtonsPosition];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -234,6 +157,103 @@ id lastShareBtnSender;
 
 
 #pragma mark  custom Methods
+
+/*
+ * TextView to input and search
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+
+-(void) addSearchBox{
+    
+    txtSearch.font = [UIFont systemFontOfSize:12.0];
+    txtSearch.textAlignment = NSTextAlignmentLeft;
+    txtSearch.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    [txtSearch setBorderStyle:UITextBorderStyleRoundedRect];
+    [txtSearch setReturnKeyType:UIReturnKeyDone];
+    
+    [txtSearch addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingChanged];
+    txtSearch.borderStyle = nil;
+    
+}
+
+/*
+ * This method creates and sets tab buttons
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+
+-(void)setTabButtonsPosition{
+    
+    CGRect rectInvite, rectSaved, rectShared, rectSocial;
+    
+    if(IS_IPHONE_4){
+        
+        rectInvite = CGRectMake(0, 432, 63, 48);
+        rectSaved = CGRectMake(63, 432, 63, 48);
+        rectShared = CGRectMake(194, 432, 63, 48);
+        rectSocial = CGRectMake(257, 432, 63, 48);
+        
+    } else if(IS_IPHONE_5){
+        
+        rectInvite = CGRectMake(0, 520, 63, 48);
+        rectSaved = CGRectMake(63, 520, 63, 48);
+        rectShared = CGRectMake(194, 520, 63, 48);
+        rectSocial = CGRectMake(257, 520, 63, 48);
+        
+    } else if(IS_IPHONE_6){
+        
+        rectInvite = CGRectMake(0, 619, 75, 48);
+        rectSaved = CGRectMake(75, 619, 75, 48);
+        rectShared = CGRectMake(225, 619, 75, 48);
+        rectSocial = CGRectMake(300, 619, 75, 48);
+        
+    } else if(IS_IPHONE_6_PLUS){
+        
+        rectInvite = CGRectMake(0, 688, 86, 48);
+        rectSaved = CGRectMake(86, 688, 86, 48);
+        rectShared = CGRectMake(243, 688, 86, 48);
+        rectSocial = CGRectMake(328, 688, 86, 48);
+        
+    }
+    
+    // Creating Invite Button
+    btnInvite = [[UIButton alloc] initWithFrame:rectInvite];
+    [btnInvite setBackgroundImage:[UIImage imageNamed:@"homeInvite"] forState:UIControlStateNormal];
+    [btnInvite addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [btnInvite addTarget:self action:@selector(doInvite:) forControlEvents:UIControlEventTouchUpInside];
+    
+    // Creating Saved Button
+    btnSaved = [[UIButton alloc] initWithFrame:rectSaved];
+    [btnSaved setBackgroundImage:[UIImage imageNamed:@"homeSaved"] forState:UIControlStateNormal];
+    [btnSaved addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [btnSaved addTarget:self action:@selector(showUnsharedFlyers:) forControlEvents:UIControlEventTouchUpInside];
+    
+    // Creating Shared Button
+    btnShared = [[UIButton alloc] initWithFrame:rectShared];
+    [btnShared setBackgroundImage:[UIImage imageNamed:@"homeShare"] forState:UIControlStateNormal];
+    [btnShared addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [btnShared addTarget:self action:@selector(showSharedFlyers:) forControlEvents:UIControlEventTouchUpInside];
+    
+    // Creating Social Button
+    btnSocial = [[UIButton alloc] initWithFrame:rectSocial];
+    [btnSocial setBackgroundImage:[UIImage imageNamed:@"homeSocial"] forState:UIControlStateNormal];
+    [btnSocial addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [btnSocial addTarget:self action:@selector(showHashTagFlyers:) forControlEvents:UIControlEventTouchUpInside];
+    
+    // Adding buttons to view
+    [self.view addSubview:btnInvite];
+    [self.view addSubview:btnSaved];
+    [self.view addSubview:btnShared];
+    [self.view addSubview:btnSocial];
+    
+}
+
+
 /*
  * Inputs a string and searches it in the given data
  * @params:
@@ -329,16 +349,6 @@ id lastShareBtnSender;
 
 }
 
-//-(NSArray *)leftBarItems{
-//    inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-//    [inviteButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-//    [inviteButton setBackgroundImage:[UIImage imageNamed:@"invite_friend"] forState:UIControlStateNormal];
-//    [inviteButton addTarget:self action:@selector(doInvite:) forControlEvents:UIControlEventTouchUpInside];
-//    inviteButton.showsTouchWhenHighlighted = YES;
-//    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
-//
-//    return [NSMutableArray arrayWithObjects:backBarButton,nil];
-//}
 
 -(NSArray *)rightBarItems{
     
@@ -373,29 +383,7 @@ id lastShareBtnSender;
     [self.tView setContentOffset:CGPointZero animated:YES];
 }
 
-/*
- * When invoked, shows unshared flyers
- */
 
-- (IBAction)showUnsharedFlyers:(id)sender {
-    
-    FlyrViewController *flyrViewController = [[FlyrViewController alloc]initWithNibName:@"FlyrViewController" bundle:nil];
-    flyrViewController.showUnsharedFlyers = YES;
-    [self.navigationController pushViewController:flyrViewController animated:YES];
-
-}
-
-/*
- * When invoked, shows shared flyers
- */
-
-- (IBAction)showSharedFlyers:(id)sender {
-
-    FlyrViewController *flyrViewController = [[FlyrViewController alloc]initWithNibName:@"FlyrViewController" bundle:nil];
-    flyrViewController.showUnsharedFlyers = NO;
-    [self.navigationController pushViewController:flyrViewController animated:YES];
-
-}
 
 /*
  * Here we get All Flyers Directories
@@ -936,7 +924,7 @@ id lastShareBtnSender;
         shareviewcontroller.imageFileName = shareImagePath;
         shareviewcontroller.rightUndoBarButton = rightUndoBarButton;
         shareviewcontroller.shareButton = btnSettings;
-        shareviewcontroller.backButton = inviteButton;
+        
         if( [shareviewcontroller.titleView.text isEqualToString:@"Flyer"] ) {
             shareviewcontroller.titleView.text = [flyer getFlyerTitle];
         }
@@ -1099,6 +1087,9 @@ id lastShareBtnSender;
 }
 //End
 
+
+#pragma mark Tab Buttons Methods
+
 // Load invite friends
 -(IBAction)doInvite:(id)sender{
     
@@ -1120,6 +1111,36 @@ id lastShareBtnSender;
     
 }
 
+/*
+ * When invoked, shows unshared flyers
+ */
+
+- (IBAction)showUnsharedFlyers:(id)sender {
+    
+    FlyrViewController *flyrViewController = [[FlyrViewController alloc]initWithNibName:@"FlyrViewController" bundle:nil];
+    flyrViewController.showUnsharedFlyers = YES;
+    [self.navigationController pushViewController:flyrViewController animated:YES];
+    
+}
+
+/*
+ * When invoked, shows shared flyers
+ */
+
+- (IBAction)showSharedFlyers:(id)sender {
+    
+    FlyrViewController *flyrViewController = [[FlyrViewController alloc]initWithNibName:@"FlyrViewController" bundle:nil];
+    flyrViewController.showUnsharedFlyers = NO;
+    [self.navigationController pushViewController:flyrViewController animated:YES];
+    
+}
+
+/*
+ * When invoked, shows shared flyers with Hash Tags
+ */
+- (IBAction)showHashTagFlyers:(id)sender {
+
+}
 
 #pragma mark  Text Field Delegete
 
@@ -1175,7 +1196,5 @@ id lastShareBtnSender;
     }
     return YES;
 }
-
-
 
 @end

@@ -45,8 +45,11 @@
     NSArray *requestedProducts;
     RMStoreKeychainPersistence *_persistence;
     PrintViewController *printViewController;
-    UIButton *inviteButton,*btnSettings;
+    UIButton *btnSettings;
     UIBarButtonItem *rightUndoBarButton;
+    
+    // Tab buttons 
+    UIButton *btnInvite, *btnSaved, *btnShared, *btnSocial;
     
 }
 
@@ -59,18 +62,16 @@
 @property (nonatomic, strong) UIAlertView *signInAlert;
 @property (nonatomic, strong) IBOutlet UIView *bottomBar;
 
+@property (strong, nonatomic) IBOutlet UITextField *txtSearch;
 @property (strong, nonatomic) IBOutlet UIButton *btnCreateFlyer;
-@property (strong, nonatomic) IBOutlet UIButton *btnInvite;
-@property (strong, nonatomic) IBOutlet UIButton *btnSaved;
-@property (strong, nonatomic) IBOutlet UIButton *btnShared;
-@property (strong, nonatomic) IBOutlet UIButton *btnSocial;
+
 
 -(IBAction)createFlyer:(id)sender;
 -(IBAction)doAbout:(id)sender;
 -(IBAction)doInvite:(id)sender;
-@property (strong, nonatomic) IBOutlet UITextField *txtSearch;
 - (IBAction)showUnsharedFlyers:(id)sender;
 - (IBAction)showSharedFlyers:(id)sender;
+- (IBAction)showHashTagFlyers:(id)sender;
 
 -(NSMutableArray *)getFlyersPaths;
 
