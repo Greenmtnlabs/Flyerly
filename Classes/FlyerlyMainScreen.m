@@ -13,6 +13,8 @@
 #import "FlyrAppDelegate.h"
 #import "FlyerlyConfigurator.h"
 #import "MainScreenAddsCell.h"
+#import "WebViewViewController.h"
+
 
 #define ADD_AFTER_FLYERS 4 //SHOW AD AFTER (ADD_AFTER_FLYERS - 1 ) => 3 FLYERS
 
@@ -31,8 +33,9 @@
 
 @synthesize sharePanel,tView;
 @synthesize flyerPaths;
-@synthesize flyer, signInAlert,settingBtn,bottomBar;
+@synthesize flyer, signInAlert,bottomBar;
 @synthesize txtSearch;
+@synthesize btnCreateFlyer;
 
 id lastShareBtnSender;
 
@@ -98,31 +101,12 @@ id lastShareBtnSender;
     });
     
     [self loadAddTiles];
-
+    
     [self.view bringSubviewToFront:bottomBar];
-    [self.view bringSubviewToFront:settingBtn];
-
-}
-
-/*
- * TextView to input and search
- * @params:
- *      void
- * @return:
- *      void
- */
-
--(void) addSearchBox{
+    [self.view bringSubviewToFront:btnCreateFlyer];
     
-    txtSearch.font = [UIFont systemFontOfSize:12.0];
-    txtSearch.textAlignment = NSTextAlignmentLeft;
-    txtSearch.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    [txtSearch setBorderStyle:UITextBorderStyleRoundedRect];
-    [txtSearch setReturnKeyType:UIReturnKeyDone];
-    
-    [txtSearch addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingChanged];
-    txtSearch.borderStyle = nil;
-
+    // Adding tab buttons to the screen
+    [self setTabButtonsPosition];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -132,6 +116,7 @@ id lastShareBtnSender;
     txtSearch.text = @"";
     [self.tView reloadData];
     [self checkUserPurchases];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -174,6 +159,103 @@ id lastShareBtnSender;
 
 
 #pragma mark  custom Methods
+
+/*
+ * TextView to input and search
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+
+-(void) addSearchBox{
+    
+    txtSearch.font = [UIFont systemFontOfSize:12.0];
+    txtSearch.textAlignment = NSTextAlignmentLeft;
+    txtSearch.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    [txtSearch setBorderStyle:UITextBorderStyleRoundedRect];
+    [txtSearch setReturnKeyType:UIReturnKeyDone];
+    
+    [txtSearch addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingChanged];
+    txtSearch.borderStyle = nil;
+    
+}
+
+/*
+ * This method creates and sets tab buttons
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+
+-(void)setTabButtonsPosition{
+    
+    CGRect rectInvite, rectSaved, rectShared, rectSocial;
+    
+    if(IS_IPHONE_4){
+        
+        rectInvite = CGRectMake(0, 432, 63, 48);
+        rectSaved = CGRectMake(63, 432, 63, 48);
+        rectShared = CGRectMake(194, 432, 63, 48);
+        rectSocial = CGRectMake(257, 432, 63, 48);
+        
+    } else if(IS_IPHONE_5){
+        
+        rectInvite = CGRectMake(0, 520, 63, 48);
+        rectSaved = CGRectMake(63, 520, 63, 48);
+        rectShared = CGRectMake(194, 520, 63, 48);
+        rectSocial = CGRectMake(257, 520, 63, 48);
+        
+    } else if(IS_IPHONE_6){
+        
+        rectInvite = CGRectMake(0, 619, 75, 48);
+        rectSaved = CGRectMake(75, 619, 75, 48);
+        rectShared = CGRectMake(225, 619, 75, 48);
+        rectSocial = CGRectMake(300, 619, 75, 48);
+        
+    } else if(IS_IPHONE_6_PLUS){
+        
+        rectInvite = CGRectMake(0, 688, 86, 48);
+        rectSaved = CGRectMake(86, 688, 86, 48);
+        rectShared = CGRectMake(243, 688, 86, 48);
+        rectSocial = CGRectMake(328, 688, 86, 48);
+        
+    }
+    
+    // Creating Invite Button
+    btnInvite = [[UIButton alloc] initWithFrame:rectInvite];
+    [btnInvite setBackgroundImage:[UIImage imageNamed:@"homeInvite"] forState:UIControlStateNormal];
+    [btnInvite addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [btnInvite addTarget:self action:@selector(doInvite:) forControlEvents:UIControlEventTouchUpInside];
+    
+    // Creating Saved Button
+    btnSaved = [[UIButton alloc] initWithFrame:rectSaved];
+    [btnSaved setBackgroundImage:[UIImage imageNamed:@"homeSaved"] forState:UIControlStateNormal];
+    [btnSaved addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [btnSaved addTarget:self action:@selector(showUnsharedFlyers:) forControlEvents:UIControlEventTouchUpInside];
+    
+    // Creating Shared Button
+    btnShared = [[UIButton alloc] initWithFrame:rectShared];
+    [btnShared setBackgroundImage:[UIImage imageNamed:@"homeShare"] forState:UIControlStateNormal];
+    [btnShared addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [btnShared addTarget:self action:@selector(showSharedFlyers:) forControlEvents:UIControlEventTouchUpInside];
+    
+    // Creating Social Button
+    btnSocial = [[UIButton alloc] initWithFrame:rectSocial];
+    [btnSocial setBackgroundImage:[UIImage imageNamed:@"homeSocial"] forState:UIControlStateNormal];
+    [btnSocial addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [btnSocial addTarget:self action:@selector(showHashTagFlyers:) forControlEvents:UIControlEventTouchUpInside];
+    
+    // Adding buttons to view
+    [self.view addSubview:btnInvite];
+    [self.view addSubview:btnSaved];
+    [self.view addSubview:btnShared];
+    [self.view addSubview:btnSocial];
+    
+}
+
+
 /*
  * Inputs a string and searches it in the given data
  * @params:
@@ -269,16 +351,6 @@ id lastShareBtnSender;
 
 }
 
--(NSArray *)leftBarItems{
-    inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [inviteButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-    [inviteButton setBackgroundImage:[UIImage imageNamed:@"invite_friend"] forState:UIControlStateNormal];
-    [inviteButton addTarget:self action:@selector(doInvite:) forControlEvents:UIControlEventTouchUpInside];
-    inviteButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
-
-    return [NSMutableArray arrayWithObjects:backBarButton,nil];
-}
 
 -(NSArray *)rightBarItems{
     
@@ -294,12 +366,12 @@ id lastShareBtnSender;
     [logo setUserInteractionEnabled:YES];
     [logo addGestureRecognizer:singleTap];
     
-    // Create Button
-    createButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [createButton addTarget:self action:@selector(createFlyer:) forControlEvents:UIControlEventTouchUpInside];
-    [createButton setBackgroundImage:[UIImage imageNamed:@"createButton"] forState:UIControlStateNormal];
-    createButton.showsTouchWhenHighlighted = YES;
-    rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:createButton];
+    // Settings Button
+    btnSettings = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    [btnSettings addTarget:self action:@selector(doAbout:) forControlEvents:UIControlEventTouchUpInside];
+    [btnSettings setBackgroundImage:[UIImage imageNamed:@"settingsButton"] forState:UIControlStateNormal];
+    btnSettings.showsTouchWhenHighlighted = YES;
+    rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:btnSettings];
     
     return [NSMutableArray arrayWithObjects:rightUndoBarButton,nil];
 }
@@ -312,6 +384,8 @@ id lastShareBtnSender;
 -(void)tapDetected{
     [self.tView setContentOffset:CGPointZero animated:YES];
 }
+
+
 
 /*
  * Here we get All Flyers Directories
@@ -737,10 +811,9 @@ id lastShareBtnSender;
  */
 -(void)enableBtns:(BOOL)enable{
 
-    inviteButton.enabled = enable;
-    createButton.enabled = enable;
+    btnSettings.enabled = enable;
     rightUndoBarButton.enabled = enable;
-    settingBtn.enabled = enable;
+    btnCreateFlyer.enabled = enable;
     
     tView.userInteractionEnabled = enable;
     
@@ -755,9 +828,7 @@ id lastShareBtnSender;
  * Set navigation bar
  */
 -(void)setNavigation{
-    // Set left bar items
-    [self.navigationItem setLeftBarButtonItems: [self leftBarItems]];
-
+   
     // Set right bar items
     [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
 }
@@ -796,14 +867,14 @@ id lastShareBtnSender;
     UIButton *clickButton = sender;
     NSInteger row = clickButton.tag; ///will get it from button tag
     
+    if(row > (ADD_AFTER_FLYERS-1)){
+        row = row - floor(row/ADD_AFTER_FLYERS);
+    }
+    
     if([txtSearch.text isEqualToString:@""]) {
         flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:row] setDirectory:NO];
     } else{
         flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:row] setDirectory:NO];
-    }
-    
-    if(row > (ADD_AFTER_FLYERS-1)){
-        row = row - floor(row/ADD_AFTER_FLYERS);
     }
     
     if ( [[PFUser currentUser] sessionToken] ) {
@@ -852,8 +923,8 @@ id lastShareBtnSender;
         shareviewcontroller.flyer = self.flyer;
         shareviewcontroller.imageFileName = shareImagePath;
         shareviewcontroller.rightUndoBarButton = rightUndoBarButton;
-        shareviewcontroller.shareButton = createButton;
-        shareviewcontroller.backButton = inviteButton;
+        shareviewcontroller.shareButton = btnSettings;
+        
         if( [shareviewcontroller.titleView.text isEqualToString:@"Flyer"] ) {
             shareviewcontroller.titleView.text = [flyer getFlyerTitle];
         }
@@ -1016,6 +1087,9 @@ id lastShareBtnSender;
 }
 //End
 
+
+#pragma mark Tab Buttons Methods
+
 // Load invite friends
 -(IBAction)doInvite:(id)sender{
     
@@ -1037,6 +1111,40 @@ id lastShareBtnSender;
     
 }
 
+/*
+ * When invoked, shows unshared flyers
+ */
+
+- (IBAction)showUnsharedFlyers:(id)sender {
+    
+    FlyrViewController *flyrViewController = [[FlyrViewController alloc]initWithNibName:@"FlyrViewController" bundle:nil];
+    flyrViewController.showUnsharedFlyers = YES;
+    [self.navigationController pushViewController:flyrViewController animated:YES];
+    
+}
+
+/*
+ * When invoked, shows shared flyers
+ */
+
+- (IBAction)showSharedFlyers:(id)sender {
+    
+    FlyrViewController *flyrViewController = [[FlyrViewController alloc]initWithNibName:@"FlyrViewController" bundle:nil];
+    flyrViewController.showUnsharedFlyers = NO;
+    [self.navigationController pushViewController:flyrViewController animated:YES];
+    
+}
+
+
+/*
+ * When invoked, shows shared flyers with Hash Tags
+ */
+- (IBAction)showHashTagFlyers:(id)sender {
+    
+    WebViewViewController *webViewViewController = [[WebViewViewController alloc]initWithNibName:@"WebViewViewController" bundle:nil];
+    [self.navigationController pushViewController:webViewViewController animated:YES];
+   
+}
 
 #pragma mark  Text Field Delegete
 
@@ -1092,7 +1200,5 @@ id lastShareBtnSender;
     }
     return YES;
 }
-
-
 
 @end
