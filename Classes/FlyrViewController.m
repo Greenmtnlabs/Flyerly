@@ -64,6 +64,13 @@ id lastShareBtnSender;
     self.navigationController.navigationBarHidden=NO;
     self.navigationItem.leftItemsSupplementBackButton = YES;
     
+    // Setting Navigation Header
+    if(showUnsharedFlyers){
+        [self setNavigationTitle:@"SAVED"];
+    }else{
+        [self setNavigationTitle:@"SHARED"];
+    }
+    
     // Set left bar items
     [self.navigationItem setLeftBarButtonItems: [self leftBarItems]];
     
@@ -244,15 +251,7 @@ id lastShareBtnSender;
 
 
 -(NSArray *)rightBarItems{
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:TITLE_FONT size:18];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
-    label.text = @"SAVED";
-    self.navigationItem.titleView = label;
-
+   
     // Create Button
     createButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [createButton addTarget:self action:@selector(createFlyer:) forControlEvents:UIControlEventTouchUpInside];
@@ -262,8 +261,6 @@ id lastShareBtnSender;
     
     return [NSMutableArray arrayWithObjects:rightUndoBarButton,nil];
 }
-
-
 
 /*
  * Here we get All Flyers Directories
@@ -295,17 +292,32 @@ id lastShareBtnSender;
             }
         }
     }
-    
-    
+   
     if(showUnsharedFlyers){ // unshared flyers
         return unsharedFlyer;
     } else { //shared flyers
         [allFlyers removeObjectsInArray:unsharedFlyer];
         return allFlyers;
     }
-
-    
     return unsharedFlyer;
+}
+
+/*
+ * Method to set navigation title
+ * @params:
+ *      title: NSString
+ * @return:
+ *      void
+ */
+-(void)setNavigationTitle: (NSString *) title{
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+    label.text = title;
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
+    self.navigationItem.titleView = label;
 }
 
 
