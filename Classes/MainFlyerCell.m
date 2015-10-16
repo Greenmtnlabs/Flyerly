@@ -29,11 +29,6 @@
         flyerTitle = @"Add Title";
     }
     
-    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
-    [tap setNumberOfTapsRequired:1];
-    [self.lblFlyerTitle addGestureRecognizer:tap];
-    
-    
     [self.lblFlyerTitle setText: flyerTitle];
     NSString *updatedDate = [flyer getFlyerUpdateDateInAgoFormat];
     if ([updatedDate isEqualToString:@""]) {
@@ -91,10 +86,6 @@
         iconImage.image = [UIImage imageNamed:@"messenger_share_saved"];
         sharingCount++;
     }
-}
-
-- (void)tapAction {
-    NSLog(@"Tap action");
 }
 
 @end

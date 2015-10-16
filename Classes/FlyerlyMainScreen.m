@@ -33,7 +33,7 @@
 
 @synthesize sharePanel,tView;
 @synthesize flyerPaths;
-@synthesize flyer, signInAlert,bottomBar;
+@synthesize flyer, signInAlert, bottomBar;
 @synthesize txtSearch;
 @synthesize btnCreateFlyer;
 
@@ -571,6 +571,8 @@ id lastShareBtnSender;
     int rowNumber = (int)indexPath.row;
     NSString *showCell = @"MainFlyerCell";
     
+    
+    
     if( [self isAddvertiseRow:rowNumber] ) {
         showCell = @"MainScreenAddsCell";
     }
@@ -604,6 +606,12 @@ id lastShareBtnSender;
                 [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
                 cell.shareBtn.tag = indexPath.row;
                 [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
+                
+                UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onShare)];
+                cell.lblFlyerTitle.tag = indexPath.row;
+                cell.lblFlyerTitle.userInteractionEnabled = YES;
+                [tap setNumberOfTapsRequired:1];
+                [cell.lblFlyerTitle addGestureRecognizer:tap];
 
                 
             });
@@ -614,11 +622,21 @@ id lastShareBtnSender;
                 flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:flyerRow] setDirectory:NO];
                 [cell renderCell:flyer LockStatus:NO];
                 [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
+                
                 cell.shareBtn.tag = indexPath.row;
                 [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
+                
+                UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onShare)];
+                cell.lblFlyerTitle.tag = indexPath.row;
+                cell.lblFlyerTitle.userInteractionEnabled = YES;
+                [tap setNumberOfTapsRequired:1];
+                [cell.lblFlyerTitle addGestureRecognizer:tap];
+                
             });
             return cell;
         }
+        
+        
 
     }
     else {
@@ -865,6 +883,9 @@ id lastShareBtnSender;
 
 -(void)onShare:(id)sender {
     UIButton *clickButton = sender;
+    
+    
+    
     NSInteger row = clickButton.tag; ///will get it from button tag
     
     if(row > (ADD_AFTER_FLYERS-1)){
