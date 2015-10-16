@@ -185,6 +185,4 @@
 -(BOOL)canSaveInGallary;
 -(void)showAllowSaveInGallerySettingAlert;
 
--(void)setTemplateImageType:(NSString *)type;
-
 @end
