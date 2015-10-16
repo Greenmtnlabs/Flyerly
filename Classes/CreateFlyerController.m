@@ -1040,61 +1040,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
    
 }
 
-/*
- * When user select any giphy
- */
--(void)selectGiphy2:(id)sender{
-    
-    // HERE WE MOVE SOURCE FILE INTO FLYER FOLDER
-    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-    NSString *destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
-    
-    
-    NSURL *url = [NSURL URLWithString:@"http://media0.giphy.com/media/hXNFzEjfHipQ4/giphy.mp4"];
-    NSData *imgData = [NSData dataWithContentsOfURL:url];
-    //copy giphy into template folder
-    //Create a Image Copy to Current Flyer Folder
-    [[NSFileManager defaultManager] createFileAtPath:destination contents:imgData attributes:nil];
-    
-    
-    [flyer setOriginalVideoUrl:@"Template/template.mov"];
-    [flyer setFlyerTypeVideo];
-    
-    
-    // Render the movie player.
-    [self.flyimgView renderLayer:@"Template" layerDictionary:[flyer getLayerFromMaster:@"Template"]];
-}
-
-
--(void)loadGiphyImages2{
-    giphyBgsView  = [[ResourcesView alloc] init];
-    [giphyBgsView setSize:CGSizeMake(300,300)];
-    giphyBgsView.backgroundColor   = [UIColor redColor];
-//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    btn.frame =  CGRectMake(10, 10, 150, 150);
-//    btn.backgroundColor = [UIColor greenColor];
-//    btn.alpha = 0.5;
-//    [btn addTarget:self action:@selector(selectGiphy:) forControlEvents:UIControlEventTouchUpInside];
-//    [giphyBgsView addSubview:btn];
-//    giphyBgsView.userInteractionEnabled = YES;
-    
-   // dispatch_async( dispatch_get_main_queue(), ^{
-        NSURL *url = [NSURL URLWithString:@"http://media0.giphy.com/media/hXNFzEjfHipQ4/giphy.gif"];
-        NSData *data = [NSData dataWithContentsOfURL:url];
-        
-        UIImageView *imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 100, 100)];
-        imageView2.image = [UIImage imageWithData:data];
-        imageView2.backgroundColor = [UIColor redColor];
-        imageView2.userInteractionEnabled = YES;
-        imageView2.tag = 1;
-        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectGiphy:)];
-        [imageView2 addGestureRecognizer:tapGesture];
-        
-        
-        
-        [giphyBgsView addSubview:imageView2];
-    //});
-}
 /**
  * Add giphy photos in view, when user tap on giphy tab, then load all images in subview
  */
