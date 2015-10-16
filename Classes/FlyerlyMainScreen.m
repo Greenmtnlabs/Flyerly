@@ -546,7 +546,7 @@ id lastShareBtnSender;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if ( IS_IPHONE_4 || IS_IPHONE_5 ) {
-        return 363;
+        return 389;
     }
     else if ( IS_IPHONE_6 ) {
         return 426;
@@ -570,7 +570,7 @@ id lastShareBtnSender;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     int rowNumber = (int)indexPath.row;
     NSString *showCell = @"MainFlyerCell";
-
+    
     if( [self isAddvertiseRow:rowNumber] ) {
         showCell = @"MainScreenAddsCell";
     }
