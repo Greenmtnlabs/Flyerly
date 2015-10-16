@@ -948,55 +948,51 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     giphyBgsView.backgroundColor = [UIColor yellowColor];
     
     NSLog(@"layerScrollView.frame.size.width = %f",layerScrollView.frame.size.width);
-    
-
-    dispatch_async( dispatch_get_main_queue(), ^{
         
-        //send request to giphy api
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        [manager GET:@"http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    //send request to giphy api
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:@"http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"JSON: %@", responseObject);
+        
+        giphyData = responseObject[@"data"];
+        
+        if( giphyData != nil && giphyData.count > 0 ){
+            int i=0;
+            int row = 0, column = 0, showInRow = 3;
+            int defX = 10, defY = 10, defW = 100, defH = 100;
             
-            //NSLog(@"JSON: %@", responseObject);
-            giphyData = responseObject[@"data"];
-            
-            if( giphyData != nil && giphyData.count > 0 ){
-                int i=0;
-                int row = 0, column = 0, showInRow = 3;
-                int defX = 10, defY = 10, defW = 100, defH = 100;
+            for(NSDictionary *gif in giphyData ){
+                column = i % showInRow;
+                row = floor( i / showInRow );
+                int x = defX*column+defX + defW*column;
+                int y = defY*row+defY + defH*row;
                 
-                for(NSDictionary *gif in giphyData ){
-                    column = i % showInRow;
-                    row = floor( i / showInRow );
-                    int x = defX*column+defX + defW*column;
-                    int y = defY*row+defY + defH*row;
+                __block UIImageView *imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(x, y, defW, defH)];
+                imageView2.backgroundColor = [UIColor redColor];
+                imageView2.userInteractionEnabled = YES;
+                imageView2.tag = i++;
+                [giphyBgsView addSubview:imageView2];
+                
+                //load each giffy in separate block
+                NSURL *url = [NSURL URLWithString:[[gif[@"images"] objectForKey:@"original"] objectForKey:@"url"]];
+                NSURLRequest * request = [NSURLRequest requestWithURL:url];
+                [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                     
-                    __block UIImageView *imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(x, y, defW, defH)];
-                    imageView2.backgroundColor = [UIColor redColor];
-                    imageView2.userInteractionEnabled = YES;
-                    imageView2.tag = i++;
-                    [giphyBgsView addSubview:imageView2];
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        //set giphy in image view and hook tap gesture
+                        imageView2.image = [UIImage imageWithData:data];
+                        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectGiphy:)];
+                        [imageView2 addGestureRecognizer:tapGesture];
+                    }];
                     
-                    //load each giffy in separate block
-                    NSURL *url = [NSURL URLWithString:[[gif[@"images"] objectForKey:@"original"] objectForKey:@"url"]];
-                    NSURLRequest * request = [NSURLRequest requestWithURL:url];
-                    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                        
-                        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                            //set giphy in image view and hook tap gesture
-                            imageView2.image = [UIImage imageWithData:data];
-                            UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectGiphy:)];
-                            [imageView2 addGestureRecognizer:tapGesture];
-                        }];
-                        
-                    }] resume];
-                }
+                }] resume];
             }
-            
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error);
-        }];
+        }
         
-    });
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
 }
 
 /*
