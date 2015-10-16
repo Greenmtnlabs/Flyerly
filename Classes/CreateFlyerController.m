@@ -1031,6 +1031,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
             if ( player != nil ) {
                 [player play];
+                [self hidePlayerControlls:NO];
             }
             giphyLoading = NO; //giphy has been loaded in video player
         }];
