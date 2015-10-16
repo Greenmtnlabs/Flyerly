@@ -869,14 +869,14 @@ id lastShareBtnSender;
     UIButton *clickButton = sender;
     NSInteger row = clickButton.tag; ///will get it from button tag
     
+    if(row > (ADD_AFTER_FLYERS-1)){
+        row = row - floor(row/ADD_AFTER_FLYERS);
+    }
+    
     if([txtSearch.text isEqualToString:@""]) {
         flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:row] setDirectory:NO];
     } else{
         flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:row] setDirectory:NO];
-    }
-    
-    if(row > (ADD_AFTER_FLYERS-1)){
-        row = row - floor(row/ADD_AFTER_FLYERS);
     }
     
     if ( [[PFUser currentUser] sessionToken] ) {
