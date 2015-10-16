@@ -22,7 +22,19 @@
  */
 - (void)renderCell :(Flyer *)flyer LockStatus:(BOOL )status {
     
-    [self.lblFlyerTitle setText: [flyer getFlyerTitle]];
+    NSString *flyerTitle = [flyer getFlyerTitle];
+    
+    // If flyer has no title, set this text
+    if([flyerTitle isEqualToString:@""]){
+        flyerTitle = @"Add Title";
+    }
+    
+    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
+    [tap setNumberOfTapsRequired:1];
+    [self.lblFlyerTitle addGestureRecognizer:tap];
+    
+    
+    [self.lblFlyerTitle setText: flyerTitle];
     NSString *updatedDate = [flyer getFlyerUpdateDateInAgoFormat];
     if ([updatedDate isEqualToString:@""]) {
         self.lblCreatedAt.hidden = YES;
@@ -79,6 +91,10 @@
         iconImage.image = [UIImage imageNamed:@"messenger_share_saved"];
         sharingCount++;
     }
+}
+
+- (void)tapAction {
+    NSLog(@"Tap action");
 }
 
 @end
