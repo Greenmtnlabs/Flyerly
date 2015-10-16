@@ -44,6 +44,8 @@
     BOOL haveValidSubscription;
     BOOL saveToGallaryReqBeforeSharing;
     BOOL isNewFlyer;
+    NSArray *giphyData;
+    BOOL giphyLoading;
     
 }
 
@@ -163,10 +165,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     }
     
     //245-feature-in-create-screen-when-user-is-creating-brand-new-flyer-have-the-background-button-selected-for-them-initially
-    if( isNewFlyer )
-    [self setAddMoreLayerTabAction:backgroundTabButton];
-    
-    [self selectGiphy:nil];
+    if( isNewFlyer ){
+        [self setAddMoreLayerTabAction:backgroundTabButton];
+        //[self selectGiphy:nil];
+    }
 }
 
 -(void) loadInterstitialAdd{
@@ -942,14 +944,143 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  */
 -(void)loadGiphyImages{
     giphyBgsView  = [[ResourcesView alloc] init];
-    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 150, 150)];
-    btn.backgroundColor = [UIColor greenColor];
-    btn.alpha = 0.5;
-    [btn addTarget:self action:@selector(selectGiphy:) forControlEvents:UIControlEventTouchUpInside];
-    [giphyBgsView addSubview:btn];
+    giphyBgsView.size = CGSizeMake(layerScrollView.frame.size.width, 1120);
+    giphyBgsView.backgroundColor = [UIColor yellowColor];
     
+    NSLog(@"layerScrollView.frame.size.width = %f",layerScrollView.frame.size.width);
+    
+
     dispatch_async( dispatch_get_main_queue(), ^{
-        NSURL *url = [NSURL URLWithString:@"http://media0.giphy.com/media/QgcQLZa6glP2w/giphy.gif"];
+        
+        //send request to giphy api
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        [manager GET:@"http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            //NSLog(@"JSON: %@", responseObject);
+            giphyData = responseObject[@"data"];
+            
+            if( giphyData != nil && giphyData.count > 0 ){
+                int i=0;
+                int row = 0, column = 0, showInRow = 3;
+                int defX = 10, defY = 10, defW = 100, defH = 100;
+                
+                for(NSDictionary *gif in giphyData ){
+                    column = i % showInRow;
+                    row = floor( i / showInRow );
+                    int x = defX*column+defX + defW*column;
+                    int y = defY*row+defY + defH*row;
+                    
+                    __block UIImageView *imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(x, y, defW, defH)];
+                    imageView2.backgroundColor = [UIColor redColor];
+                    imageView2.userInteractionEnabled = YES;
+                    imageView2.tag = i++;
+                    [giphyBgsView addSubview:imageView2];
+                    
+                    //load each giffy in separate block
+                    NSURL *url = [NSURL URLWithString:[[gif[@"images"] objectForKey:@"original"] objectForKey:@"url"]];
+                    NSURLRequest * request = [NSURLRequest requestWithURL:url];
+                    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                        
+                        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                            //set giphy in image view and hook tap gesture
+                            imageView2.image = [UIImage imageWithData:data];
+                            UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectGiphy:)];
+                            [imageView2 addGestureRecognizer:tapGesture];
+                        }];
+                        
+                    }] resume];
+                }
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+        }];
+        
+    });
+}
+
+/*
+ * When user select any giphy, download mov file and play in the player
+ */
+-(void)selectGiphy:(id)sender{
+
+    //when a process in que dont start other
+    if( giphyLoading == YES ){
+        return;
+    }
+    
+    giphyLoading = YES;
+    
+    int tag = (int)[(UIGestureRecognizer *)sender view].tag;
+    NSDictionary *gif = giphyData[tag];
+    NSURL *url = [NSURL URLWithString:[[gif[@"images"] objectForKey:@"original"] objectForKey:@"mp4"]];
+    NSURLRequest * request = [NSURLRequest requestWithURL:url];
+    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            // HERE WE MOVE SOURCE FILE INTO FLYER FOLDER
+            NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+            NSString *destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
+            
+            //copy giphy into template folder
+            //Create a Image Copy to Current Flyer Folder
+            [[NSFileManager defaultManager] createFileAtPath:destination contents:data attributes:nil];
+            [flyer setOriginalVideoUrl:@"Template/template.mov"];
+            [flyer setFlyerTypeVideo];
+            
+            
+            // Render the movie player.
+            [self.flyimgView renderLayer:@"Template" layerDictionary:[flyer getLayerFromMaster:@"Template"]];
+            if ( player != nil ) {
+                [player play];
+            }
+            giphyLoading = NO; //giphy has been loaded in video player
+        }];
+        
+    }] resume];
+   
+}
+
+/*
+ * When user select any giphy
+ */
+-(void)selectGiphy2:(id)sender{
+    
+    // HERE WE MOVE SOURCE FILE INTO FLYER FOLDER
+    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    NSString *destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
+    
+    
+    NSURL *url = [NSURL URLWithString:@"http://media0.giphy.com/media/hXNFzEjfHipQ4/giphy.mp4"];
+    NSData *imgData = [NSData dataWithContentsOfURL:url];
+    //copy giphy into template folder
+    //Create a Image Copy to Current Flyer Folder
+    [[NSFileManager defaultManager] createFileAtPath:destination contents:imgData attributes:nil];
+    
+    
+    [flyer setOriginalVideoUrl:@"Template/template.mov"];
+    [flyer setFlyerTypeVideo];
+    
+    
+    // Render the movie player.
+    [self.flyimgView renderLayer:@"Template" layerDictionary:[flyer getLayerFromMaster:@"Template"]];
+}
+
+
+-(void)loadGiphyImages2{
+    giphyBgsView  = [[ResourcesView alloc] init];
+    [giphyBgsView setSize:CGSizeMake(300,300)];
+    giphyBgsView.backgroundColor   = [UIColor redColor];
+//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    btn.frame =  CGRectMake(10, 10, 150, 150);
+//    btn.backgroundColor = [UIColor greenColor];
+//    btn.alpha = 0.5;
+//    [btn addTarget:self action:@selector(selectGiphy:) forControlEvents:UIControlEventTouchUpInside];
+//    [giphyBgsView addSubview:btn];
+//    giphyBgsView.userInteractionEnabled = YES;
+    
+   // dispatch_async( dispatch_get_main_queue(), ^{
+        NSURL *url = [NSURL URLWithString:@"http://media0.giphy.com/media/hXNFzEjfHipQ4/giphy.gif"];
         NSData *data = [NSData dataWithContentsOfURL:url];
         
         UIImageView *imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 100, 100)];
@@ -963,7 +1094,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         
         [giphyBgsView addSubview:imageView2];
-    });
+    //});
 }
 /**
  * Add giphy photos in view, when user tap on giphy tab, then load all images in subview
@@ -975,7 +1106,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         [layerScrollView addSubview:giphyBgsView];
         
-        [layerScrollView setContentSize:CGSizeMake(backgroundsView.frame.size.width, backgroundsView.frame.size.height)];
+        [layerScrollView setContentSize:CGSizeMake(giphyBgsView.frame.size.width, giphyBgsView.frame.size.height)];
     });
 }
 
@@ -2352,38 +2483,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     }
     
     [Flurry logEvent:@"Background Selected"];
-}
-
-/*
- * When user select any giphy
- */
--(void)selectGiphy:(id)sender{
-    
-    //Here we Set Flyer Type
-    [flyer setFlyerTypeImage];
-    
-    // Create Symbol direcrory if not created
-    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-    
-    NSString *FolderPath = [NSString stringWithFormat:@"%@/Template", currentpath];
-    NSString *imageFolderPath = [NSString stringWithFormat:@"%@/template.%@", FolderPath,@"mov"];
-    
-    
-    NSURL *url = [NSURL URLWithString:@"http://media0.giphy.com/media/QgcQLZa6glP2w/giphy.gif"];
-    NSData *imgData = [NSData dataWithContentsOfURL:url];
-   //copy giphy into template folder
-    //Create a Image Copy to Current Flyer Folder
-    [[NSFileManager defaultManager] createFileAtPath:imageFolderPath contents:imgData attributes:nil];
-    
-    //set gif in image flyimgView
-    [self.flyimgView setTemplate:@"Template/template.gif"];
-    
-    //update dictionary
-    [flyer setTemplateImageType:@"gif"];
-
-    //for removing selection
-    //[flyer setImageTag:@"Template" Tag:@""];
-    
 }
 
 /*

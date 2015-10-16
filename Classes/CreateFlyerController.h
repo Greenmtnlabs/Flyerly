@@ -295,4 +295,5 @@
 //This variable was needed because When comming from cropview render flyer relaocating video flyer
 @property (assign) BOOL enableRenderFlyer;
 -(void)enableNavigation:(BOOL)enable;
+-(void)selectGiphy:(id)sender;
 @end
