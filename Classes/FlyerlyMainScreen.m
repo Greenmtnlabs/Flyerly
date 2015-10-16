@@ -607,8 +607,9 @@ id lastShareBtnSender;
                 cell.shareBtn.tag = indexPath.row;
                 [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
                 
-                UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onShare)];
-                cell.lblFlyerTitle.tag = indexPath.row;
+                // Adding UITapGestureRecognizer on UILable
+                UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onShare:)];
+                tap.view.tag = indexPath.row;
                 cell.lblFlyerTitle.userInteractionEnabled = YES;
                 [tap setNumberOfTapsRequired:1];
                 [cell.lblFlyerTitle addGestureRecognizer:tap];
@@ -622,16 +623,15 @@ id lastShareBtnSender;
                 flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:flyerRow] setDirectory:NO];
                 [cell renderCell:flyer LockStatus:NO];
                 [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
-                
                 cell.shareBtn.tag = indexPath.row;
                 [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
                 
-                UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onShare)];
-                cell.lblFlyerTitle.tag = indexPath.row;
+                // Adding UITapGestureRecognizer on UILable
+                UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onShare:)];
+                tap.view.tag = indexPath.row;
                 cell.lblFlyerTitle.userInteractionEnabled = YES;
                 [tap setNumberOfTapsRequired:1];
                 [cell.lblFlyerTitle addGestureRecognizer:tap];
-                
             });
             return cell;
         }
@@ -882,12 +882,19 @@ id lastShareBtnSender;
 }
 
 -(void)onShare:(id)sender {
-    UIButton *clickButton = sender;
     
+    NSInteger row;
     
-    
-    NSInteger row = clickButton.tag; ///will get it from button tag
-    
+    // check the kind of control that called it
+    if([sender isKindOfClass:[UIButton class]]){
+        UIButton *clickButton = sender;
+        row = clickButton.tag; //will get it from button tag
+    }
+    if([sender isKindOfClass:[UITapGestureRecognizer class]] ){
+        UILabel *label = sender;
+        row = label.tag; //will get it from label tag
+    }
+
     if(row > (ADD_AFTER_FLYERS-1)){
         row = row - floor(row/ADD_AFTER_FLYERS);
     }
