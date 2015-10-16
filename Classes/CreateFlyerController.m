@@ -1008,7 +1008,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     if( giphyLoading == YES ){
         return;
     }
-    
     giphyLoading = YES;
     
     int tag = (int)[(UIGestureRecognizer *)sender view].tag;
@@ -1021,16 +1020,15 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             // HERE WE MOVE SOURCE FILE INTO FLYER FOLDER
             NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
             NSString *destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
-            
-            //copy giphy into template folder
-            //Create a Image Copy to Current Flyer Folder
             [[NSFileManager defaultManager] createFileAtPath:destination contents:data attributes:nil];
+
+            //Update dictionary
             [flyer setOriginalVideoUrl:@"Template/template.mov"];
             [flyer setFlyerTypeVideo];
             
-            
             // Render the movie player.
             [self.flyimgView renderLayer:@"Template" layerDictionary:[flyer getLayerFromMaster:@"Template"]];
+            
             if ( player != nil ) {
                 [player play];
             }
