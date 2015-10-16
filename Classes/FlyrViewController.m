@@ -64,7 +64,7 @@ id lastShareBtnSender;
     self.navigationController.navigationBarHidden=NO;
     self.navigationItem.leftItemsSupplementBackButton = YES;
     
-    // Setting Navigation Header
+    // Setting Navigation Heneader
     if(showUnsharedFlyers){
         [self setNavigationTitle:@"SAVED"];
     }else{
@@ -309,15 +309,10 @@ id lastShareBtnSender;
  * @return:
  *      void
  */
--(void)setNavigationTitle: (NSString *) title{
+-(void)setNavigationTitle: (NSString *) headerTitle{
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    label.text = title;
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:TITLE_FONT size:18];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
-    self.navigationItem.titleView = label;
+    self.title = headerTitle;
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]};
 }
 
 

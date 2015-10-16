@@ -828,9 +828,7 @@ id lastShareBtnSender;
  * Set navigation bar
  */
 -(void)setNavigation{
-    // Set left bar items
-    //[self.navigationItem setLeftBarButtonItems: [self leftBarItems]];
-
+   
     // Set right bar items
     [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
 }
