@@ -15,8 +15,6 @@
 #import "MainScreenAddsCell.h"
 #import "WebViewViewController.h"
 
-#import "STTwitterAPI.h"
-
 
 #define ADD_AFTER_FLYERS 4 //SHOW AD AFTER (ADD_AFTER_FLYERS - 1 ) => 3 FLYERS
 
@@ -371,7 +369,7 @@ id lastShareBtnSender;
     // Settings Button
     btnSettings = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [btnSettings addTarget:self action:@selector(doAbout:) forControlEvents:UIControlEventTouchUpInside];
-    [btnSettings setBackgroundImage:[UIImage imageNamed:@"createButton"] forState:UIControlStateNormal];
+    [btnSettings setBackgroundImage:[UIImage imageNamed:@"settingsButton"] forState:UIControlStateNormal];
     btnSettings.showsTouchWhenHighlighted = YES;
     rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:btnSettings];
     

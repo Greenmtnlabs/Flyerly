@@ -199,6 +199,8 @@
 		204635651895F90000A94C42 /* FlyerImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 204635641895F90000A94C42 /* FlyerImageView.m */; };
 		20473E101BD0C71800433A7F /* WebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20473E0E1BD0C71800433A7F /* WebViewViewController.m */; };
 		20473E111BD0C71800433A7F /* WebViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20473E0F1BD0C71800433A7F /* WebViewViewController.xib */; };
+		20473E181BD0D8F300433A7F /* settingsButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20473E161BD0D8F300433A7F /* settingsButton@2x.png */; };
+		20473E191BD0D8F300433A7F /* settingsButton@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20473E171BD0D8F300433A7F /* settingsButton@3x.png */; };
 		204BC2DE1A10E67700FEB946 /* DrawingPatterns-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204BC2DD1A10E67700FEB946 /* DrawingPatterns-iPhone6-Plus.xib */; };
 		204BC2E01A10E87700FEB946 /* Fonts-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204BC2DF1A10E87700FEB946 /* Fonts-iPhone6-Plus.xib */; };
 		204BC2E21A10E99800FEB946 /* Sizes-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204BC2E11A10E99800FEB946 /* Sizes-iPhone6-Plus.xib */; };
@@ -1754,6 +1756,8 @@
 		20473E0D1BD0C71800433A7F /* WebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewViewController.h; sourceTree = "<group>"; };
 		20473E0E1BD0C71800433A7F /* WebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewViewController.m; sourceTree = "<group>"; };
 		20473E0F1BD0C71800433A7F /* WebViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewViewController.xib; sourceTree = "<group>"; };
+		20473E161BD0D8F300433A7F /* settingsButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settingsButton@2x.png"; sourceTree = "<group>"; };
+		20473E171BD0D8F300433A7F /* settingsButton@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settingsButton@3x.png"; sourceTree = "<group>"; };
 		204BC2DD1A10E67700FEB946 /* DrawingPatterns-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DrawingPatterns-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		204BC2DF1A10E87700FEB946 /* Fonts-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Fonts-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		204BC2E11A10E99800FEB946 /* Sizes-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Sizes-iPhone6-Plus.xib"; sourceTree = "<group>"; };
@@ -3233,6 +3237,8 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				20473E161BD0D8F300433A7F /* settingsButton@2x.png */,
+				20473E171BD0D8F300433A7F /* settingsButton@3x.png */,
 				204410E61BCE2A1400A63031 /* homeCreate@2x.png */,
 				204410E71BCE2A1400A63031 /* homeCreate@3x.png */,
 				204410E81BCE2A1400A63031 /* homeInvite@2x.png */,
@@ -5947,6 +5953,7 @@
 				C35351401B61014100CF68F9 /* icon119.jpg in Resources */,
 				246EF53D193C515D004539B2 /* emoticon90@2x.png in Resources */,
 				C31E92CC1B566207004DF193 /* bicon9.png in Resources */,
+				20473E181BD0D8F300433A7F /* settingsButton@2x.png in Resources */,
 				249F1FCA193F55E90072835E /* email_share_selected@2x.png in Resources */,
 				246EF528193C515D004539B2 /* emoticon71@2x.png in Resources */,
 				247858D5194878080062F1E4 /* ONRAMP-Regular.ttf in Resources */,
@@ -6797,6 +6804,7 @@
 				200A818818D32C9D0095AA3E /* filter.png in Resources */,
 				2433AC3F1A020E7200F7CF42 /* InviteFreindsCell-iPhone6.xib in Resources */,
 				249F1FAD193F55D50072835E /* clip_setting@2x.png in Resources */,
+				20473E191BD0D8F300433A7F /* settingsButton@3x.png in Resources */,
 				249F1FC4193F55E90072835E /* dfcontact@2x.jpg in Resources */,
 				C3766D771B56510200B7F5B2 /* icon43.jpg in Resources */,
 				20C98B341BB2F6DF00D3EC4B /* messenger_share_saved@2x.png in Resources */,
