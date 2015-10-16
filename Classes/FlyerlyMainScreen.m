@@ -13,6 +13,7 @@
 #import "FlyrAppDelegate.h"
 #import "FlyerlyConfigurator.h"
 #import "MainScreenAddsCell.h"
+#import "WebViewViewController.h"
 
 #import "STTwitterAPI.h"
 
@@ -1137,61 +1138,15 @@ id lastShareBtnSender;
     [self.navigationController pushViewController:flyrViewController animated:YES];
     
 }
-- (IBAction)close:(id)sender {
-    
-    [[self.view viewWithTag:55] removeFromSuperview];
-    
-    
-}
+
 
 /*
  * When invoked, shows shared flyers with Hash Tags
  */
 - (IBAction)showHashTagFlyers:(id)sender {
     
-    UIWebView *webView=[[UIWebView alloc] initWithFrame:CGRectMake(0,0,320,480)];
-    
-    NSURL *url = [NSURL URLWithString:@"https://twitter.com/hashtag/flyerly"];
-    
-    NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-    [webView loadRequest:requestObj];
-    
-    
-    
-    
-    
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [button addTarget:self action:@selector(aMethod:) forControlEvents:UIControlEventTouchDown];
-    [button setTitle:@"Close" forState:UIControlStateNormal];
-    button.frame = CGRectMake(80, 210, 160, 40);
-    [button addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
-    [webView addSubview:button];
-    
-    
-    [self.view addSubview:webView];
-//    NSString *OAuthConsumerKey = [flyerConfigurator twitterConsumerKey];
-//    NSString *OAuthConsumerSecrey = [flyerConfigurator twitterSecret];
-//    
-//    STTwitterAPI *twitter = [STTwitterAPI twitterAPIAppOnlyWithConsumerKey:OAuthConsumerKey
-//                                                                    consumerSecret:OAuthConsumerSecrey];
-//    
-//    
-//    [twitter verifyCredentialsWithSuccessBlock:^(NSString *bearerToken) {
-//        NSLog(@"Access granted with %@", bearerToken);
-//        
-//        [twitter getSearchTweetsWithQuery:@"flyerly"
-//                             successBlock:^(NSDictionary *searchMetadata, NSArray *statuses) {
-//                                 // use the statuses here
-//                             } errorBlock:^(NSError *error) {
-//                                 // ...
-//                             }];
-//    } errorBlock:^(NSError *error) {
-//        NSLog(@"-- error %@", error);
-//    }];
-//    
-   
-    
-    
+    WebViewViewController *webViewViewController = [[WebViewViewController alloc]initWithNibName:@"WebViewViewController" bundle:nil];
+    [self.navigationController pushViewController:webViewViewController animated:YES];
    
 }
 
