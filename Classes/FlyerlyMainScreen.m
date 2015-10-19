@@ -25,6 +25,7 @@
     int addsLoaded;
     CGRect sizeRectForAdd;
     BOOL isSearch;
+    UIImage *noAds;
 }
 
 @end
@@ -44,6 +45,8 @@ id lastShareBtnSender;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    [self setImage];
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     flyerConfigurator = appDelegate.flyerConfigurator;
@@ -159,6 +162,19 @@ id lastShareBtnSender;
 
 
 #pragma mark  custom Methods
+
+
+-(void) setDefaultAdsImage{
+    
+    NSString *imageName = @"noAdd_5.png";
+    
+    if (IS_IPHONE_6){
+        imageName = @"noAdd_6.png";
+    } else if (IS_IPHONE_6_PLUS){
+        imageName = @"noAdd_6Plus.png";
+    }
+    noAds = [[UIImage alloc] init:[UIImage imageNamed:imageName]];
+}
 
 /*
  * TextView to input and search
@@ -637,15 +653,21 @@ id lastShareBtnSender;
         MainScreenAddsCell *cell = (MainScreenAddsCell *)[tableView dequeueReusableCellWithIdentifier:MainScreenAddsCellId];
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainScreenAddsCell" owner:self options:nil];
         cell = (MainScreenAddsCell *)[nib objectAtIndex:0];
+       
+        if([FlyerlySingleton connected]){
 
-        int addRow = [self getIndexOfAdd:rowNumber];
-        GADBannerView *adView = self.bannerAdd[ addRow ];
-        adView.frame = CGRectMake(cell.frame.origin.x+10, cell.frame.origin.y+10, tView.frame.size.width-20, cell.frame.size.height-20);
-        if( sizeRectForAdd.size.width != 0 ){
-            adView.frame = sizeRectForAdd;
+            int addRow = [self getIndexOfAdd:rowNumber];
+            GADBannerView *adView = self.bannerAdd[ addRow ];
+            adView.frame = CGRectMake(cell.frame.origin.x+10, cell.frame.origin.y+10, tView.frame.size.width-20, cell.frame.size.height-20);
+            if( sizeRectForAdd.size.width != 0 ){
+                adView.frame = sizeRectForAdd;
+            }
+            self.bannerAdd[ addRow ] = adView;
+            [cell addSubview:self.bannerAdd[ addRow ]];
+            return cell;
         }
-        self.bannerAdd[ addRow ] = adView;
-        [cell addSubview:self.bannerAdd[ addRow ]];
+        
+        [cell addSubview: (UIView *)noAds];
         
         return cell;
     }
