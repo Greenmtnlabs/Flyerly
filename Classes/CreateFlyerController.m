@@ -385,6 +385,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         lsvRec = CGRectMake(0, 0,420,180);
     }else if ( IS_IPHONE_6_PLUS ){
         lsvRec = CGRectMake(0, 0,420,189);
+        self.contextView.size = CGSizeMake(self.contextView.frame.size.width, self.contextView.frame.size.height+10);
     }
     layerScrollView = [[UIScrollView alloc]initWithFrame:lsvRec];
     
@@ -944,7 +945,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  */
 -(void)loadGiphyImages{
     giphyBgsView  = [[ResourcesView alloc] init];
-    giphyBgsView.size = CGSizeMake(layerScrollView.frame.size.width, 1120);
+    giphyBgsView.size = CGSizeMake(layerScrollView.frame.size.width, 200);
     giphyBgsView.backgroundColor = [UIColor yellowColor];
     
     NSLog(@"layerScrollView.frame.size.width = %f",layerScrollView.frame.size.width);
@@ -958,15 +959,24 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         giphyData = responseObject[@"data"];
         
         if( giphyData != nil && giphyData.count > 0 ){
-            int i=0;
-            int row = 0, column = 0, showInRow = 3;
-            int defX = 10, defY = 10, defW = 100, defH = 100;
-            
+            int i=0, row = 0, column = 0;
+            int showInRow = 4, defX = 10, defY = 10 , defW = 91, defH = 91;
+            if( IS_IPHONE_4 ){
+                showInRow = 9999;//we will have only one row in iphone 4
+                defX = 10, defY = 5 , defW = 50, defH = 50;
+            } else if( IS_IPHONE_5 ){
+                showInRow = 4, defX = 8, defY = 8 , defW = 70, defH = 70;
+            } else if( IS_IPHONE_6 ){
+                showInRow = 4, defX = 10, defY = 10 , defW = 81, defH = 81;
+            } else if( IS_IPHONE_6_PLUS ){
+                showInRow = 4, defX = 10, defY = 10 , defW = 91, defH = 91;
+            }
+            int x = 0, y = 0;
             for(NSDictionary *gif in giphyData ){
                 column = i % showInRow;
                 row = floor( i / showInRow );
-                int x = defX*column+defX + defW*column;
-                int y = defY*row+defY + defH*row;
+                x = defX*column+defX + defW*column;
+                y = defY*row+defY + defH*row;
                 
                 __block UIImageView *imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(x, y, defW, defH)];
                 imageView2.backgroundColor = [UIColor redColor];
@@ -974,6 +984,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 imageView2.tag = i++;
                 [giphyBgsView addSubview:imageView2];
                 
+                /*
                 //load each giffy in separate block
                 NSURL *url = [NSURL URLWithString:[[gif[@"images"] objectForKey:@"original"] objectForKey:@"url"]];
                 NSURLRequest * request = [NSURLRequest requestWithURL:url];
@@ -987,7 +998,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     }];
                     
                 }] resume];
+                 */
             }
+            //GiphyBgsView will get height dynamically
+            giphyBgsView.size = CGSizeMake(layerScrollView.frame.size.width, y+defH+defX);
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
