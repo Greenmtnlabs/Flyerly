@@ -252,6 +252,8 @@
 		2099498D196E78DB0081B1BD /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2099498C196E78DB0081B1BD /* CoreTelephony.framework */; };
 		209BCFA81975433D006EC811 /* PrintViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 209BCFA61975433D006EC811 /* PrintViewController.m */; };
 		209BCFA91975433D006EC811 /* PrintViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 209BCFA71975433D006EC811 /* PrintViewController.xib */; };
+		209ED5781BD4EC000098CD97 /* sms_share_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 209ED5761BD4EC000098CD97 /* sms_share_saved@2x.png */; };
+		209ED5791BD4EC000098CD97 /* sms_share_saved@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 209ED5771BD4EC000098CD97 /* sms_share_saved@3x.png */; };
 		209F8E4119A47A4E00323559 /* DrawingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 209F8E4019A47A4E00323559 /* DrawingViewController.m */; };
 		209F8E4419A47B2200323559 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 209F8E4319A47B2200323559 /* SettingsViewController.m */; };
 		20A1CD6318EEF63200484391 /* SubNBUCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A1CD6218EEF63200484391 /* SubNBUCamera.m */; };
@@ -1819,6 +1821,8 @@
 		209BCFA51975433D006EC811 /* PrintViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintViewController.h; sourceTree = "<group>"; };
 		209BCFA61975433D006EC811 /* PrintViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintViewController.m; sourceTree = "<group>"; };
 		209BCFA71975433D006EC811 /* PrintViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrintViewController.xib; sourceTree = "<group>"; };
+		209ED5761BD4EC000098CD97 /* sms_share_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sms_share_saved@2x.png"; sourceTree = "<group>"; };
+		209ED5771BD4EC000098CD97 /* sms_share_saved@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sms_share_saved@3x.png"; sourceTree = "<group>"; };
 		209F8E3F19A47A4E00323559 /* DrawingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DrawingViewController.h; path = DrawingClass/DrawingViewController.h; sourceTree = "<group>"; };
 		209F8E4019A47A4E00323559 /* DrawingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DrawingViewController.m; path = DrawingClass/DrawingViewController.m; sourceTree = "<group>"; };
 		209F8E4219A47B2200323559 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -3237,6 +3241,8 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				209ED5761BD4EC000098CD97 /* sms_share_saved@2x.png */,
+				209ED5771BD4EC000098CD97 /* sms_share_saved@3x.png */,
 				20473E161BD0D8F300433A7F /* settingsButton@2x.png */,
 				20473E171BD0D8F300433A7F /* settingsButton@3x.png */,
 				204410E61BCE2A1400A63031 /* homeCreate@2x.png */,
@@ -6332,6 +6338,7 @@
 				20563E161962D64200C206FD /* Monoton-Regular.ttf in Resources */,
 				247858B4194875D20062F1E4 /* Jalane_light-Regular.ttf in Resources */,
 				20714DF1187F167A000D6838 /* Camerabottom.png in Resources */,
+				209ED5781BD4EC000098CD97 /* sms_share_saved@2x.png in Resources */,
 				20FA7E731872AAF50057C3F3 /* CameraViewController.xib in Resources */,
 				246EF513193C515D004539B2 /* emoticon52@2x.png in Resources */,
 				C31E92BB1B566207004DF193 /* bicon12.png in Resources */,
@@ -6350,6 +6357,7 @@
 				206068A71924FFEB00AB5230 /* Fonts-iPhone4.xib in Resources */,
 				242184B7194B4AEC00FDDA97 /* emoticon169@2x.png in Resources */,
 				2421847A194B4AEC00FDDA97 /* emoticon107@2x.png in Resources */,
+				209ED5791BD4EC000098CD97 /* sms_share_saved@3x.png in Resources */,
 				2433AC441A02113300F7CF42 /* SaveFlyerCell-iPhone6-Plus.xib in Resources */,
 				204411091BCE2A1400A63031 /* homeSocialSelected@3x.png in Resources */,
 				247858A51948757C0062F1E4 /* Gnuolane-Regular.ttf in Resources */,

@@ -549,7 +549,7 @@ id lastShareBtnSender;
         return 380;
     }
     else if ( IS_IPHONE_6 ) {
-        return 455;
+        return 445;
     }
     else{
         return 492;
