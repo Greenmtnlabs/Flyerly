@@ -25,7 +25,7 @@
     int addsLoaded;
     CGRect sizeRectForAdd;
     BOOL isSearch;
-    UIImage *noAds;
+    UIImageView *noAds;
 }
 
 @end
@@ -45,8 +45,6 @@ id lastShareBtnSender;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
-    [self setImage];
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     flyerConfigurator = appDelegate.flyerConfigurator;
@@ -103,7 +101,9 @@ id lastShareBtnSender;
         [self loadGoogleAdd];
     });
     
-    [self loadAddTiles];
+    // set default image
+    [self setNoAdsImage];
+    [self loadAdsTiles];
     
     [self.view bringSubviewToFront:bottomBar];
     [self.view bringSubviewToFront:btnCreateFlyer];
@@ -163,8 +163,15 @@ id lastShareBtnSender;
 
 #pragma mark  custom Methods
 
-
--(void) setDefaultAdsImage{
+/*
+ * Method to set default image instead of ads
+ * when internet is not available
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+-(void) setNoAdsImage{
     
     NSString *imageName = @"noAdd_5.png";
     
@@ -173,7 +180,7 @@ id lastShareBtnSender;
     } else if (IS_IPHONE_6_PLUS){
         imageName = @"noAdd_6Plus.png";
     }
-    noAds = [[UIImage alloc] init:[UIImage imageNamed:imageName]];
+    noAds = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
 }
 
 /*
@@ -340,7 +347,7 @@ id lastShareBtnSender;
         //HERE WE GET FLYERS
         weakSelf.flyerPaths = [weakSelf getFlyersPaths];
         
-        [weakSelf loadAddTiles];
+        [weakSelf loadAdsTiles];
         
         if( weakSelf.flyerPaths.count > 1 ){
          [weakSelf.tView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
@@ -513,7 +520,7 @@ id lastShareBtnSender;
 /**
  * Load addvertise tiles
  */
--(void)loadAddTiles{
+-(void)loadAdsTiles{
     __block int i=-1;
     addsLoaded = 0;
     
