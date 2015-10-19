@@ -891,8 +891,8 @@ id lastShareBtnSender;
         row = clickButton.tag; //will get it from button tag
     }
     if([sender isKindOfClass:[UITapGestureRecognizer class]] ){
-        UILabel *label = sender;
-        row = label.tag; //will get it from label tag
+        UITapGestureRecognizer *gesture = sender;
+        row = gesture.view.tag; //will get it from UITapGestureRecognizer tag
     }
 
     if(row > (ADD_AFTER_FLYERS-1)){
