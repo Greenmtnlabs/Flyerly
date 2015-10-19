@@ -897,6 +897,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     // Remove observers
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    giphyData = nil;
+    giphyBgsView = nil;
+    giphyStatus = nil;
+    layerScrollView = nil;
 }
 
 #pragma mark -  Add Content In ScrollViews
@@ -992,21 +997,25 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 imageView2.tag = i++;
                 [giphyBgsView addSubview:imageView2];
                 
-                /*
+                
                 //load each giffy in separate block
                 NSURL *url = [NSURL URLWithString:[[gif[@"images"] objectForKey:@"original"] objectForKey:@"url"]];
-                NSURLRequest * request = [NSURLRequest requestWithURL:url];
-                [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                    
-                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                        //set giphy in image view and hook tap gesture
+                dispatch_async(dispatch_get_global_queue(0,0), ^{
+                    if( giphyData == nil || giphyData.count < 1 ) return;
+                    NSLog(@"image data loaded");
+                    NSData * data = [[NSData alloc] initWithContentsOfURL: url];
+                    if( giphyData == nil || giphyData.count < 1 || data == nil ) return;
+
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if( giphyData == nil || giphyData.count < 1 ) return;
+                        
+                        NSLog(@"render image on view");
                         imageView2.image = [UIImage imageWithData:data];
                         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectGiphy:)];
                         [imageView2 addGestureRecognizer:tapGesture];
-                    }];
-                    
-                }] resume];
-                 */
+                    });
+                });
+                
             }
             //GiphyBgsView will get height dynamically
             int gbvH = y+defH+defY+heightHandlerForMainView;

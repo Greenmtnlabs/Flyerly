@@ -233,7 +233,8 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
  * Here we check following tasks before save
  * if its video flyer then add in gallary after interstiall add hide and merging done
  */
--(void)saveAfterCheck{
+-(BOOL)saveAfterCheck{
+    BOOL saved = NO;
     saveInGallaryAfterNumberOfTasks++;
     
     if( saveInGallaryAfterNumberOfTasks > 0 ){
@@ -241,12 +242,15 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
             if( saveInGallaryAfterNumberOfTasks > 1 ){
                 [self resetSaveGallaryTasks];
                 [self saveIntoGallery];
+                saved = YES;
             }
         } else{
                 [self resetSaveGallaryTasks];
                 [self saveIntoGallery];
+                saved = YES;
         }
     }
+    return saved;
 }
 /**
  * Save in gallary after checking userdefaults, without data
