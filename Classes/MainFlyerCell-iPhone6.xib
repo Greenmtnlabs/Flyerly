@@ -64,7 +64,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WJK-5t-1NB" userLabel="btnsView">
-                        <rect key="frame" x="8" y="414" width="148" height="34"/>
+                        <rect key="frame" x="206" y="414" width="169" height="34"/>
                         <subviews>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Vl-o4-2p6" userLabel="flyerLock">
                                 <rect key="frame" x="26" y="124" width="0.0" height="0.0"/>
@@ -98,6 +98,10 @@
                                 <rect key="frame" x="118" y="5" width="24" height="24"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mmX-8K-RYj">
+                                <rect key="frame" x="141" y="5" width="24" height="24"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
@@ -119,6 +123,7 @@
                 <outletCollection property="socialStatus" destination="Une-hz-JhI" id="ZbY-Uz-rlz"/>
                 <outletCollection property="socialStatus" destination="Co7-rf-eSD" id="dN9-5h-1ld"/>
                 <outletCollection property="socialStatus" destination="GfU-pr-kJT" id="Gjg-Um-tsb"/>
+                <outletCollection property="socialStatus" destination="mmX-8K-RYj" id="Vrm-kU-dLA"/>
             </connections>
             <point key="canvasLocation" x="68.5" y="-179.5"/>
         </tableViewCell>

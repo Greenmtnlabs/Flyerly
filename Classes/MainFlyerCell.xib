@@ -30,7 +30,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9BH-EE-Cfw">
-                                <rect key="frame" x="20" y="355" width="142" height="25"/>
+                                <rect key="frame" x="156" y="355" width="164" height="25"/>
                                 <subviews>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tr4-sN-ZUc" userLabel="flyerLock">
                                         <rect key="frame" x="0.0" y="8" width="0.0" height="1"/>
@@ -40,22 +40,25 @@
                                         </state>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vu7-BD-USu">
-                                        <rect key="frame" x="23" y="3" width="20" height="20"/>
+                                        <rect key="frame" x="26" y="3" width="20" height="20"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5dI-Oq-C7c">
-                                        <rect key="frame" x="46" y="3" width="20" height="20"/>
+                                        <rect key="frame" x="49" y="3" width="20" height="20"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I2a-9L-hhr">
-                                        <rect key="frame" x="69" y="3" width="20" height="20"/>
+                                        <rect key="frame" x="72" y="3" width="20" height="20"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ewT-nG-9kd">
-                                        <rect key="frame" x="92" y="3" width="20" height="20"/>
+                                        <rect key="frame" x="95" y="3" width="20" height="20"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XBk-Dh-0EO">
-                                        <rect key="frame" x="115" y="3" width="20" height="20"/>
+                                        <rect key="frame" x="118" y="3" width="20" height="20"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z79-gJ-DMF">
-                                        <rect key="frame" x="0.0" y="3" width="20" height="20"/>
+                                        <rect key="frame" x="3" y="3" width="20" height="20"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gY0-bv-4go">
+                                        <rect key="frame" x="141" y="3" width="20" height="20"/>
                                     </imageView>
                                 </subviews>
                             </view>
@@ -109,6 +112,7 @@
                 <outletCollection property="socialStatus" destination="5dI-Oq-C7c" id="8d5-Im-EPZ"/>
                 <outletCollection property="socialStatus" destination="XBk-Dh-0EO" id="xfc-zv-LLj"/>
                 <outletCollection property="socialStatus" destination="z79-gJ-DMF" id="Qdy-IF-W8M"/>
+                <outletCollection property="socialStatus" destination="gY0-bv-4go" id="JVL-7h-cUH"/>
             </connections>
             <point key="canvasLocation" x="268" y="-55"/>
         </tableViewCell>
