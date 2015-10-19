@@ -51,6 +51,10 @@
     NSInteger sharingCount = _socialStatus.count - 1;
     UIImageView *iconImage;
     
+    // Here sharingCount starts from _socialStatus.count - 1
+    // and decrements by 1
+    // in order to create images from right to left
+    
     iconImage = [_socialStatus objectAtIndex:sharingCount];
     if ( [[flyer getFacebookStatus] isEqualToString:@"1"] ) {
         iconImage.image = [UIImage imageNamed:@"facebook_share_saved"];
