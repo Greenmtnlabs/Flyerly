@@ -22,7 +22,14 @@
  */
 - (void)renderCell :(Flyer *)flyer LockStatus:(BOOL )status {
     
-    [self.lblFlyerTitle setText: [flyer getFlyerTitle]];
+    NSString *flyerTitle = [flyer getFlyerTitle];
+    
+    // If flyer has no title, set this text
+    if([flyerTitle isEqualToString:@""]){
+        flyerTitle = @"Add Title";
+    }
+    
+    [self.lblFlyerTitle setText: flyerTitle];
     NSString *updatedDate = [flyer getFlyerUpdateDateInAgoFormat];
     if ([updatedDate isEqualToString:@""]) {
         self.lblCreatedAt.hidden = YES;

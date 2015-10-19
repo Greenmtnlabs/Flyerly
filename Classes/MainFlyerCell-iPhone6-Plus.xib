@@ -7,7 +7,6 @@
     <customFonts key="customFonts">
         <mutableArray key="Entypo.otf">
             <string>Entypo</string>
-            <string>Entypo</string>
         </mutableArray>
         <mutableArray key="HelveticaRoundedLTStd-BdCn_0.otf">
             <string>HelveticaRoundedLTStd-BdCn</string>
@@ -16,85 +15,74 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleAspectFit" selectionStyle="default" indentationWidth="10" rowHeight="451" id="Gn8-a9-RsV" customClass="MainFlyerCell">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="451"/>
+        <tableViewCell contentMode="scaleAspectFit" selectionStyle="default" indentationWidth="10" rowHeight="493" id="Gn8-a9-RsV" customClass="MainFlyerCell">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="493"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gn8-a9-RsV" id="CJj-La-hyp">
                 <rect key="frame" x="0.0" y="0.0" width="314" height="103"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zow-th-S9P" userLabel="containerView">
-                        <rect key="frame" x="13" y="13" width="388" height="438"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="492"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                     </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Egv-eR-2IJ" userLabel="topLabelsView">
-                        <rect key="frame" x="32" y="13" width="350" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="45"/>
                         <subviews>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="crQ-8M-MRO" userLabel="editBtn">
-                                <rect key="frame" x="1" y="5" width="34" height="36"/>
-                                <fontDescription key="fontDescription" name="Entypo" family="Entypo" pointSize="43"/>
-                                <state key="normal" title="✎">
-                                    <color key="titleColor" red="0.01176470588" green="0.56862745100000001" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="25mint" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xuC-dF-jkn">
-                                <rect key="frame" x="297" y="13" width="50" height="20"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <rect key="frame" x="354" y="13" width="56" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="separator_vertical.png" translatesAutoresizingMaskIntoConstraints="NO" id="I1r-T8-ELG">
-                                <rect key="frame" x="29" y="6" width="15" height="34"/>
+                                <rect key="frame" x="25" y="5" width="15" height="36"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Flyer Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O2r-vZ-OBa">
-                                <rect key="frame" x="44" y="12" width="250" height="20"/>
-                                <fontDescription key="fontDescription" name="HelveticaRoundedLTStd-BdCn" family="Helvetica Rounded LT Std" pointSize="17"/>
+                                <rect key="frame" x="41" y="13" width="305" height="20"/>
+                                <fontDescription key="fontDescription" name="HelveticaRoundedLTStd-BdCn" family="Helvetica Rounded LT Std" pointSize="20"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wTy-hl-yka" userLabel="shareBtn">
+                                <rect key="frame" x="0.0" y="0.0" width="30" height="44"/>
+                                <fontDescription key="fontDescription" name="Entypo" family="Entypo" pointSize="45"/>
+                                <state key="normal" title="">
+                                    <color key="titleColor" red="0.01176470588" green="0.56862745100000001" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fok-5k-MZh" userLabel="cellImage">
-                        <rect key="frame" x="32" y="56" width="350" height="350"/>
+                        <rect key="frame" x="0.0" y="45" width="414" height="414"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </imageView>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5uu-x6-1xh" userLabel="bottomLabelsView">
-                        <rect key="frame" x="32" y="406" width="350" height="44"/>
+                        <rect key="frame" x="10" y="459" width="152" height="40"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y64-mj-4z1" userLabel="socialStatus">
-                                <rect key="frame" x="0.0" y="12" width="20" height="20"/>
+                                <rect key="frame" x="0.0" y="7" width="26" height="26"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o6V-Sf-fdg" userLabel="socialStatus">
-                                <rect key="frame" x="25" y="12" width="20" height="20"/>
+                                <rect key="frame" x="25" y="7" width="26" height="26"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yNg-Fz-MYV" userLabel="socialStatus">
-                                <rect key="frame" x="50" y="12" width="20" height="20"/>
+                                <rect key="frame" x="50" y="7" width="26" height="26"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ct7-Mz-Iqq" userLabel="socialStatus">
-                                <rect key="frame" x="75" y="12" width="20" height="20"/>
+                                <rect key="frame" x="75" y="7" width="26" height="26"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CnC-Z6-yhJ" userLabel="socialStatus">
-                                <rect key="frame" x="100" y="12" width="20" height="20"/>
+                                <rect key="frame" x="100" y="7" width="26" height="26"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XMz-bs-DWZ" userLabel="socialStatus">
-                                <rect key="frame" x="125" y="12" width="20" height="20"/>
+                                <rect key="frame" x="125" y="7" width="26" height="26"/>
                             </imageView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XBs-Lj-INJ" userLabel="flyerLock">
                                 <state key="normal">
                                     <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="separator_vertical.png" translatesAutoresizingMaskIntoConstraints="NO" id="GvK-ho-asG">
-                                <rect key="frame" x="311" y="5" width="15" height="34"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wTy-hl-yka" userLabel="shareBtn">
-                                <rect key="frame" x="320" y="0.0" width="30" height="44"/>
-                                <fontDescription key="fontDescription" name="Entypo" family="Entypo" pointSize="45"/>
-                                <state key="normal" title="">
-                                    <color key="titleColor" red="0.01176470588" green="0.56862745100000001" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -120,7 +108,7 @@
                 <outletCollection property="socialStatus" destination="CnC-Z6-yhJ" id="TO2-ee-hcF"/>
                 <outletCollection property="socialStatus" destination="XMz-bs-DWZ" id="36k-Kc-dON"/>
             </connections>
-            <point key="canvasLocation" x="271" y="0.5"/>
+            <point key="canvasLocation" x="271" y="21.5"/>
         </tableViewCell>
     </objects>
     <resources>

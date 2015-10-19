@@ -33,7 +33,7 @@
 
 @synthesize sharePanel,tView;
 @synthesize flyerPaths;
-@synthesize flyer, signInAlert,bottomBar;
+@synthesize flyer, signInAlert, bottomBar;
 @synthesize txtSearch;
 @synthesize btnCreateFlyer;
 
@@ -546,13 +546,13 @@ id lastShareBtnSender;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if ( IS_IPHONE_4 || IS_IPHONE_5 ) {
-        return 363;
+        return 380;
     }
     else if ( IS_IPHONE_6 ) {
-        return 426;
+        return 455;
     }
     else{
-        return 451;
+        return 492;
     }
     
 }
@@ -570,7 +570,9 @@ id lastShareBtnSender;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     int rowNumber = (int)indexPath.row;
     NSString *showCell = @"MainFlyerCell";
-
+    
+    
+    
     if( [self isAddvertiseRow:rowNumber] ) {
         showCell = @"MainScreenAddsCell";
     }
@@ -604,6 +606,13 @@ id lastShareBtnSender;
                 [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
                 cell.shareBtn.tag = indexPath.row;
                 [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
+                
+                // Adding UITapGestureRecognizer on UILable
+                UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onShare:)];
+                tap.view.tag = indexPath.row;
+                cell.lblFlyerTitle.userInteractionEnabled = YES;
+                [tap setNumberOfTapsRequired:1];
+                [cell.lblFlyerTitle addGestureRecognizer:tap];
 
                 
             });
@@ -616,9 +625,18 @@ id lastShareBtnSender;
                 [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
                 cell.shareBtn.tag = indexPath.row;
                 [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
+                
+                // Adding UITapGestureRecognizer on UILable
+                UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onShare:)];
+                tap.view.tag = indexPath.row;
+                cell.lblFlyerTitle.userInteractionEnabled = YES;
+                [tap setNumberOfTapsRequired:1];
+                [cell.lblFlyerTitle addGestureRecognizer:tap];
             });
             return cell;
         }
+        
+        
 
     }
     else {
@@ -864,9 +882,19 @@ id lastShareBtnSender;
 }
 
 -(void)onShare:(id)sender {
-    UIButton *clickButton = sender;
-    NSInteger row = clickButton.tag; ///will get it from button tag
     
+    NSInteger row;
+    
+    // check the kind of control that called it
+    if([sender isKindOfClass:[UIButton class]]){
+        UIButton *clickButton = sender;
+        row = clickButton.tag; //will get it from button tag
+    }
+    if([sender isKindOfClass:[UITapGestureRecognizer class]] ){
+        UITapGestureRecognizer *gesture = sender;
+        row = gesture.view.tag; //will get it from UITapGestureRecognizer tag
+    }
+
     if(row > (ADD_AFTER_FLYERS-1)){
         row = row - floor(row/ADD_AFTER_FLYERS);
     }
