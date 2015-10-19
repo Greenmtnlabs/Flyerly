@@ -1002,7 +1002,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                  */
             }
             //GiphyBgsView will get height dynamically
-            giphyBgsView.size = CGSizeMake(layerScrollView.frame.size.width, y+defH+defX+heightHandlerForMainView);
+            int gbvH = y+defH+defY+heightHandlerForMainView;
+            int gbvW = layerScrollView.frame.size.width;
+            if( IS_IPHONE_4 ){
+                gbvW = x+defW+defX+10;
+            }
+            giphyBgsView.size = CGSizeMake(gbvW, gbvH);
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
