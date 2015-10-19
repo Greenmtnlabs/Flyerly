@@ -181,6 +181,12 @@ id lastShareBtnSender;
         imageName = @"noAdd_6Plus.png";
     }
     noAds = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
+    
+    // to apply gesture recognizer on image
+    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openPanel)];
+    noAds.userInteractionEnabled = YES;
+    [tap setNumberOfTapsRequired:1];
+    [noAds addGestureRecognizer:tap];
 }
 
 /*
