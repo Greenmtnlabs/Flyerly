@@ -675,10 +675,12 @@ id lastShareBtnSender;
             if( sizeRectForAdd.size.width != 0 ){
                 adView.frame = sizeRectForAdd;
             }
+           
             self.bannerAdd[ addRow ] = adView;
             [cell addSubview:self.bannerAdd[ addRow ]];
             return cell;
         }
+        
         
         [cell addSubview: (UIView *)noAds];
         
