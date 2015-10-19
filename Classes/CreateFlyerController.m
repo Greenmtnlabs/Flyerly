@@ -991,12 +991,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 x = defX*column+defX + defW*column;
                 y = defY*row+defY + defH*row;
                 
+                if( i > 3 ) return; //show only 4 flyers
+                
                 __block UIImageView *imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(x, y, defW, defH)];
                 imageView2.backgroundColor = [UIColor redColor];
                 imageView2.userInteractionEnabled = YES;
                 imageView2.tag = i++;
                 [giphyBgsView addSubview:imageView2];
-                
                 
                 //load each giffy in separate block
                 NSURL *url = [NSURL URLWithString:[[gif[@"images"] objectForKey:@"original"] objectForKey:@"url"]];
