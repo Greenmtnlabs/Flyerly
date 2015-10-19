@@ -384,8 +384,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     } else if ( IS_IPHONE_6 ){
         lsvRec = CGRectMake(0, 0,420,180);
     }else if ( IS_IPHONE_6_PLUS ){
-        lsvRec = CGRectMake(0, 0,420,189);
         self.contextView.size = CGSizeMake(self.contextView.frame.size.width, self.contextView.frame.size.height+10);
+        lsvRec = CGRectMake(0, 0,420,189);
     }
     layerScrollView = [[UIScrollView alloc]initWithFrame:lsvRec];
     
@@ -959,13 +959,14 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         giphyData = responseObject[@"data"];
         
         if( giphyData != nil && giphyData.count > 0 ){
+            int heightHandlerForMainView = 0;
             int i=0, row = 0, column = 0;
             int showInRow = 4, defX = 10, defY = 10 , defW = 91, defH = 91;
             if( IS_IPHONE_4 ){
                 showInRow = 9999;//we will have only one row in iphone 4
                 defX = 10, defY = 5 , defW = 50, defH = 50;
             } else if( IS_IPHONE_5 ){
-                showInRow = 4, defX = 8, defY = 8 , defW = 70, defH = 70;
+                showInRow = 4, defX = 8, defY = 8 , defW = 70, defH = 70; heightHandlerForMainView = 20;
             } else if( IS_IPHONE_6 ){
                 showInRow = 4, defX = 10, defY = 10 , defW = 81, defH = 81;
             } else if( IS_IPHONE_6_PLUS ){
@@ -1001,7 +1002,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                  */
             }
             //GiphyBgsView will get height dynamically
-            giphyBgsView.size = CGSizeMake(layerScrollView.frame.size.width, y+defH+defX);
+            giphyBgsView.size = CGSizeMake(layerScrollView.frame.size.width, y+defH+defX+heightHandlerForMainView);
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
