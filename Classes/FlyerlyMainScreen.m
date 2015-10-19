@@ -571,12 +571,9 @@ id lastShareBtnSender;
     int rowNumber = (int)indexPath.row;
     NSString *showCell = @"MainFlyerCell";
     
-    
-    
     if( [self isAddvertiseRow:rowNumber] ) {
         showCell = @"MainScreenAddsCell";
     }
-    
     
     if( [showCell isEqualToString:@"MainFlyerCell"] ){
         static NSString *MainFlyerCellId = @"MainFlyerCellId";
@@ -613,8 +610,7 @@ id lastShareBtnSender;
                 cell.lblFlyerTitle.userInteractionEnabled = YES;
                 [tap setNumberOfTapsRequired:1];
                 [cell.lblFlyerTitle addGestureRecognizer:tap];
-
-                
+        
             });
             return cell;
           } else {
@@ -635,9 +631,6 @@ id lastShareBtnSender;
             });
             return cell;
         }
-        
-        
-
     }
     else {
         static NSString *MainScreenAddsCellId = @"MainScreenAddsCell";
