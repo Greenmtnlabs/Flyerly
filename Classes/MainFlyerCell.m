@@ -48,43 +48,49 @@
     
     
     // HERE WE SET SOCIAL NETWORK STATUS OF FLYER
-    NSInteger sharingCount = 0;
+    NSInteger sharingCount = _socialStatus.count - 1;
     UIImageView *iconImage;
     
     iconImage = [_socialStatus objectAtIndex:sharingCount];
     if ( [[flyer getFacebookStatus] isEqualToString:@"1"] ) {
         iconImage.image = [UIImage imageNamed:@"facebook_share_saved"];
-        sharingCount++;
+        sharingCount--;
     }
     
 	iconImage = [_socialStatus objectAtIndex:sharingCount];
     if ( [[flyer getTwitterStatus] isEqualToString:@"1"] ) {
         iconImage.image = [UIImage imageNamed:@"twitter_share_saved"];
-        sharingCount++;
+        sharingCount--;
     }
 	
     iconImage = [_socialStatus objectAtIndex:sharingCount];
     if ( [[flyer getEmailStatus] isEqualToString:@"1"] ) {
         iconImage.image = [UIImage imageNamed:@"email_share_saved"];
-        sharingCount++;
+        sharingCount--;
     }
     
     iconImage = [_socialStatus objectAtIndex:sharingCount];
     if ( [[flyer getInstagaramStatus] isEqualToString:@"1"] ) {
         iconImage.image = [UIImage imageNamed:@"instagram_share_saved"];
-        sharingCount++;
+        sharingCount--;
     }
     
     iconImage = [_socialStatus objectAtIndex:sharingCount];
     if ( [[flyer getYouTubeStatus] isEqualToString:@"1"] ) {
         iconImage.image = [UIImage imageNamed:@"youtube_share_saved"];
-        sharingCount++;
+        sharingCount--;
     }
     
     iconImage = [_socialStatus objectAtIndex:sharingCount];
     if ( [[flyer getMessengerStatus] isEqualToString:@"1"] ) {
         iconImage.image = [UIImage imageNamed:@"messenger_share_saved"];
-        sharingCount++;
+        sharingCount--;
+    }
+    
+    iconImage = [_socialStatus objectAtIndex:sharingCount];
+    if ( [[flyer getSmsStatus] isEqualToString:@"1"] ) {
+        iconImage.image = [UIImage imageNamed:@"sms_share_saved"];
+        sharingCount--;
     }
 }
 
