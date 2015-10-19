@@ -46,6 +46,7 @@
     BOOL isNewFlyer;
     NSArray *giphyData;
     BOOL giphyLoading;
+    UILabel *giphyStatus;
     
 }
 
@@ -945,15 +946,21 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  */
 -(void)loadGiphyImages{
     giphyBgsView  = [[ResourcesView alloc] init];
-    giphyBgsView.size = CGSizeMake(layerScrollView.frame.size.width, 200);
+    giphyBgsView.size = CGSizeMake(layerScrollView.frame.size.width, layerScrollView.frame.size.height);
     giphyBgsView.backgroundColor = [UIColor yellowColor];
+
+    giphyStatus = [[UILabel alloc] init];
+    giphyStatus.text = @"Loading..";
+    giphyStatus.backgroundColor = [UIColor grayColor];
+    [giphyStatus sizeToFit];
+    [giphyBgsView addSubview:giphyStatus];
     
     NSLog(@"layerScrollView.frame.size.width = %f",layerScrollView.frame.size.width);
         
     //send request to giphy api
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:@"http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
+        giphyStatus.text = @"";
         NSLog(@"JSON: %@", responseObject);
         
         giphyData = responseObject[@"data"];
@@ -1012,6 +1019,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
+        giphyStatus.text = @"Error occured while loadig Giphy, please try again later.";
     }];
 }
 
