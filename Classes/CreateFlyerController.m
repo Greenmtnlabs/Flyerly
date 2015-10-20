@@ -17,6 +17,7 @@
 #import "PrintViewController.h"
 #import "InviteForPrint.h"
 #import "ImageLayer.h"
+#import "GiphyViewController.h"
 
 #define IMAGEPICKER_TEMPLATE 1
 #define IMAGEPICKER_PHOTO 2
@@ -44,9 +45,8 @@
     BOOL haveValidSubscription;
     BOOL saveToGallaryReqBeforeSharing;
     BOOL isNewFlyer;
-    NSArray *giphyData;
-    BOOL giphyLoading;
-    UILabel *giphyStatus;
+
+
     
 }
 
@@ -54,7 +54,7 @@
 
 @implementation CreateFlyerController
 
-@synthesize sharingPannelIsHidden;
+@synthesize sharingPannelIsHidden,tasksAfterGiphySelect;
 
 //Outlets form zoom
 @synthesize zoomScrollView,zoomScreenShot,zoomMagnifyingGlass,zoomScreenShotForVideo;
@@ -71,7 +71,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize libText,libBackground,libArts,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder,giphyBgBtn,libDrawing;
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider,tempelateView;
 @synthesize durationLabel,durationChange,onFlyerBack,shouldShowAdd;
-@synthesize backgroundsView,giphyBgsView,flyerBordersView,colorsView,sizesView,bannerAddView,drawingPatternsView,drawingEraserMsgView;
+@synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAddView,drawingPatternsView,drawingEraserMsgView;
 
 @synthesize premiumBtnBg, premiumBtnBgBorder, premiumBtnEmoticons, premiumBtnCliparts, premiumBtnFonts;
 @synthesize premiumImgBg, premiumImgBgBorder, premiumImgEmoticons, premiumImgCliparts, premiumImgFonts;
@@ -168,8 +168,15 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     //245-feature-in-create-screen-when-user-is-creating-brand-new-flyer-have-the-background-button-selected-for-them-initially
     if( isNewFlyer ){
         [self setAddMoreLayerTabAction:backgroundTabButton];
-        //[self selectGiphy:nil];
     }
+    
+    if( tasksAfterGiphySelect != nil ){
+        if ([tasksAfterGiphySelect isEqual:@"play"] && player != nil ) {
+            [player play];
+            [self hidePlayerControlls:NO];
+        }
+    }
+    tasksAfterGiphySelect = nil;
 }
 
 -(void) loadInterstitialAdd{
@@ -585,8 +592,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     [self.bannerAdd loadRequest:[self request]];
                 }
                 
-                [self loadGiphyImages];
-                
                 NSArray *flyerbackgroundsViewArray;
                 if ( IS_IPHONE_4) {
                      flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds-iPhone4" owner:self options:nil];
@@ -898,9 +903,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     // Remove observers
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    giphyData = nil;
-    giphyBgsView = nil;
-    giphyStatus = nil;
     layerScrollView = nil;
 }
 
@@ -943,148 +945,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
             }
         }
-    });
-}
-
-/**
- * Load giphy images from internet
- */
--(void)loadGiphyImages{
-    giphyBgsView  = [[ResourcesView alloc] init];
-    giphyBgsView.size = CGSizeMake(layerScrollView.frame.size.width, layerScrollView.frame.size.height);
-
-
-    giphyStatus = [[UILabel alloc] init];
-    giphyStatus.text = @"Loading..";
-    [giphyStatus sizeToFit];
-    [giphyBgsView addSubview:giphyStatus];
-    
-    //send request to giphy api
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        giphyStatus.text = @"";
-        NSLog(@"JSON: %@", responseObject);
-        
-        giphyData = responseObject[@"data"];
-        
-        if( giphyData != nil && giphyData.count > 0 ){
-            int heightHandlerForMainView = 0;
-            int i=0, row = 0, column = 0;
-            int showInRow = 4, defX = 10, defY = 10 , defW = 91, defH = 91;
-            if( IS_IPHONE_4 ){
-                showInRow = 9999;//we will have only one row in iphone 4
-                defX = 10, defY = 5 , defW = 50, defH = 50;
-            } else if( IS_IPHONE_5 ){
-                showInRow = 4, defX = 8, defY = 8 , defW = 70, defH = 70; heightHandlerForMainView = 20;
-            } else if( IS_IPHONE_6 ){
-                showInRow = 4, defX = 10, defY = 10 , defW = 81, defH = 81;
-            } else if( IS_IPHONE_6_PLUS ){
-                showInRow = 4, defX = 10, defY = 10 , defW = 91, defH = 91;
-            }
-            int x = 0, y = 0;
-            for(NSDictionary *gif in giphyData ){
-                column = i % showInRow;
-                row = floor( i / showInRow );
-                x = defX*column+defX + defW*column;
-                y = defY*row+defY + defH*row;
-                
-                if( i > 3 ) return; //show only 4 flyers
-                
-                __block UIImageView *imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(x, y, defW, defH)];
-                imageView2.backgroundColor = [UIColor redColor];
-                imageView2.userInteractionEnabled = YES;
-                imageView2.tag = i++;
-                [giphyBgsView addSubview:imageView2];
-                
-                //load each giffy in separate block
-                NSURL *url = [NSURL URLWithString:[[gif[@"images"] objectForKey:@"original"] objectForKey:@"url"]];
-                dispatch_async(dispatch_get_global_queue(0,0), ^{
-                    if( giphyData == nil || giphyData.count < 1 ) return;
-                    NSLog(@"image data loaded");
-                    NSData * data = [[NSData alloc] initWithContentsOfURL: url];
-                    if( giphyData == nil || giphyData.count < 1 || data == nil ) return;
-
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        if( giphyData == nil || giphyData.count < 1 ) return;
-                        
-                        NSLog(@"render image on view");
-                        imageView2.image = [UIImage imageWithData:data];
-                        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectGiphy:)];
-                        [imageView2 addGestureRecognizer:tapGesture];
-                    });
-                });
-                
-            }
-            //GiphyBgsView will get height dynamically
-            int gbvH = y+defH+defY+heightHandlerForMainView;
-            int gbvW = layerScrollView.frame.size.width;
-            if( IS_IPHONE_4 ){
-                gbvW = x+defW+defX+10;
-            }
-            giphyBgsView.size = CGSizeMake(gbvW, gbvH);
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-        giphyStatus.text = @"Error occured while loadig Giphy, please try again later.";
-    }];
-}
-
-/*
- * When user select any giphy, download mov file and play in the player
- */
--(void)selectGiphy:(id)sender{
-
-    //when a process in que dont start other
-    if( giphyLoading == YES ){
-        return;
-    }
-    giphyLoading = YES;
-    
-    int tag = (int)[(UIGestureRecognizer *)sender view].tag;
-    NSDictionary *gif = giphyData[tag];
-    NSURL *url = [NSURL URLWithString:[[gif[@"images"] objectForKey:@"original"] objectForKey:@"mp4"]];
-    NSURLRequest * request = [NSURLRequest requestWithURL:url];
-    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            // HERE WE MOVE SOURCE FILE INTO FLYER FOLDER
-            NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-            NSString *destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
-            [[NSFileManager defaultManager] createFileAtPath:destination contents:data attributes:nil];
-            
-            int width = [[[gif[@"images"] objectForKey:@"original"] objectForKey:@"width"] integerValue];
-            int height = [[[gif[@"images"] objectForKey:@"original"] objectForKey:@"height"] integerValue];
-            
-            //Update dictionary
-            [flyer setOriginalVideoUrl:@"Template/template.mov"];
-            [flyer setFlyerTypeVideoWithSize:width height:height videoSoure:@"giphy"];
-            
-            // Render the movie player.
-            [self.flyimgView renderLayer:@"Template" layerDictionary:[flyer getLayerFromMaster:@"Template"]];
-            
-            if ( player != nil ) {
-                [player play];
-                [self hidePlayerControlls:NO];
-            }
-            giphyLoading = NO; //giphy has been loaded in video player
-        }];
-        
-    }] resume];
-   
-}
-
-/**
- * Add giphy photos in view, when user tap on giphy tab, then load all images in subview
- */
--(void)addGiphyInSubView{
-    dispatch_async( dispatch_get_main_queue(), ^{
-        //Delete SubViews From ScrollView
-        [self deleteSubviewsFromScrollView];
-        
-        [layerScrollView addSubview:giphyBgsView];
-        
-        [layerScrollView setContentSize:CGSizeMake(giphyBgsView.frame.size.width, giphyBgsView.frame.size.height)];
     });
 }
 
@@ -5258,22 +5118,11 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [flyerBorder setSelected:YES];
     }
     else if(selectedButton == giphyBgBtn) {
-        
-        //HERE WE SET ANIMATION
-        [UIView animateWithDuration:0.4f
-                         animations:^{
-                             //Create ScrollView
-                             [self addGiphyInSubView];
-                         }
-                         completion:^(BOOL finished){
-                             [layerScrollView flashScrollIndicators];
-                         }];
-        //END ANIMATION
-        
-        //Add ContextView
-        [self addScrollView:layerScrollView];
-        
-        [giphyBgBtn setSelected:YES];
+       tasksAfterGiphySelect = @"goingToGiphy";
+       GiphyViewController *giphyViewController = [[GiphyViewController alloc]initWithNibName:@"GiphyViewController" bundle:nil];
+        giphyViewController.flyer = flyer;
+        giphyViewController.tasksAfterGiphySelect = tasksAfterGiphySelect;
+       [self.navigationController pushViewController:giphyViewController animated:YES];
     }
     
 }

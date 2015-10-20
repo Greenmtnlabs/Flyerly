@@ -1091,7 +1091,6 @@
 		654B255317202B360047C8F6 /* AfterUpdateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 654B255217202B360047C8F6 /* AfterUpdateController.m */; };
 		6560C1C51727FAF9005BE8DD /* grids.png in Resources */ = {isa = PBXBuildFile; fileRef = 6560C1C31727FAF9005BE8DD /* grids.png */; };
 		65A212461729496F00ED0B9A /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A212451729496F00ED0B9A /* AssetsLibrary.framework */; };
-		65A21268172981A000ED0B9A /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A212671729819F00ED0B9A /* ImageIO.framework */; };
 		65A2CEFA1725494F005C03B7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A2CEF8172548D6005C03B7 /* AVFoundation.framework */; };
 		65A2CFC117257480005C03B7 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A2CFC01725747F005C03B7 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		65A464E41726CBA2002C32FB /* ALGER.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 65A464D21726CBA2002C32FB /* ALGER.TTF */; };
@@ -1123,6 +1122,9 @@
 		65E2615D171C2FA800C485B5 /* InviteFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E2615C171C2FA800C485B5 /* InviteFriendsController.m */; };
 		65F1BEAE173AA13400EE6F9F /* twitter_share_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE8B173AA13400EE6F9F /* twitter_share_saved@2x.png */; };
 		65F41C8B173BDC03000BA8CB /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F41C8A173BDC02000BA8CB /* libxml2.2.dylib */; };
+		C306CC561BD657D100F9D34D /* GiphyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C306CC541BD657D100F9D34D /* GiphyViewController.m */; };
+		C306CC571BD657D100F9D34D /* GiphyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C306CC551BD657D100F9D34D /* GiphyViewController.xib */; };
+		C306CC5D1BD68E1B00F9D34D /* AnimatedGIFImageSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = C306CC5C1BD68E1B00F9D34D /* AnimatedGIFImageSerialization.m */; };
 		C31519C31BB18708001D6B8D /* intro-1-screen-iPhone6p.png in Resources */ = {isa = PBXBuildFile; fileRef = C31519B71BB18708001D6B8D /* intro-1-screen-iPhone6p.png */; };
 		C31519C41BB18708001D6B8D /* intro-1-screen-iPhone4.png in Resources */ = {isa = PBXBuildFile; fileRef = C31519B81BB18708001D6B8D /* intro-1-screen-iPhone4.png */; };
 		C31519C51BB18708001D6B8D /* intro-1-screen-iPhone5.png in Resources */ = {isa = PBXBuildFile; fileRef = C31519B91BB18708001D6B8D /* intro-1-screen-iPhone5.png */; };
@@ -1183,7 +1185,6 @@
 		C33F80051B9F115500E7AFF9 /* FlyerlyMainScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33F80041B9F115500E7AFF9 /* FlyerlyMainScreen.xib */; };
 		C34E98531BA2E54F00692597 /* MainScreenAddsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C34E98511BA2E54F00692597 /* MainScreenAddsCell.m */; };
 		C34E98541BA2E54F00692597 /* MainScreenAddsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C34E98521BA2E54F00692597 /* MainScreenAddsCell.xib */; };
-		C352781A1BCE86C2002963F1 /* AnimatedGIFImageSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = C35278191BCE86C2002963F1 /* AnimatedGIFImageSerialization.m */; };
 		C35350941B60CF5D00CF68F9 /* emoticon276zeimusu-Recorder-and-music.png in Resources */ = {isa = PBXBuildFile; fileRef = C35350791B60CF5D00CF68F9 /* emoticon276zeimusu-Recorder-and-music.png */; };
 		C35350951B60CF5D00CF68F9 /* emoticon268purplecar.png in Resources */ = {isa = PBXBuildFile; fileRef = C353507A1B60CF5D00CF68F9 /* emoticon268purplecar.png */; };
 		C35350961B60CF5D00CF68F9 /* emoticon275yellowglass.png in Resources */ = {isa = PBXBuildFile; fileRef = C353507B1B60CF5D00CF68F9 /* emoticon275yellowglass.png */; };
@@ -2747,6 +2748,11 @@
 		803DE6526A023A0BC5462D37 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Flyr-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Flyr-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		C30043241AB6ED9300866385 /* lob-ios.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "lob-ios.xcodeproj"; path = "Classes/lob-ios/lob-ios.xcodeproj"; sourceTree = "<group>"; };
+		C306CC531BD657D100F9D34D /* GiphyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiphyViewController.h; sourceTree = "<group>"; };
+		C306CC541BD657D100F9D34D /* GiphyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiphyViewController.m; sourceTree = "<group>"; };
+		C306CC551BD657D100F9D34D /* GiphyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GiphyViewController.xib; sourceTree = "<group>"; };
+		C306CC5B1BD68E1B00F9D34D /* AnimatedGIFImageSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedGIFImageSerialization.h; sourceTree = "<group>"; };
+		C306CC5C1BD68E1B00F9D34D /* AnimatedGIFImageSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedGIFImageSerialization.m; sourceTree = "<group>"; };
 		C31519B71BB18708001D6B8D /* intro-1-screen-iPhone6p.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro-1-screen-iPhone6p.png"; sourceTree = "<group>"; };
 		C31519B81BB18708001D6B8D /* intro-1-screen-iPhone4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro-1-screen-iPhone4.png"; sourceTree = "<group>"; };
 		C31519B91BB18708001D6B8D /* intro-1-screen-iPhone5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro-1-screen-iPhone5.png"; sourceTree = "<group>"; };
@@ -2812,8 +2818,6 @@
 		C34E98501BA2E54F00692597 /* MainScreenAddsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScreenAddsCell.h; sourceTree = "<group>"; };
 		C34E98511BA2E54F00692597 /* MainScreenAddsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainScreenAddsCell.m; sourceTree = "<group>"; };
 		C34E98521BA2E54F00692597 /* MainScreenAddsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainScreenAddsCell.xib; sourceTree = "<group>"; };
-		C35278181BCE86C2002963F1 /* AnimatedGIFImageSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedGIFImageSerialization.h; sourceTree = "<group>"; };
-		C35278191BCE86C2002963F1 /* AnimatedGIFImageSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedGIFImageSerialization.m; sourceTree = "<group>"; };
 		C35350791B60CF5D00CF68F9 /* emoticon276zeimusu-Recorder-and-music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon276zeimusu-Recorder-and-music.png"; sourceTree = "<group>"; };
 		C353507A1B60CF5D00CF68F9 /* emoticon268purplecar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoticon268purplecar.png; sourceTree = "<group>"; };
 		C353507B1B60CF5D00CF68F9 /* emoticon275yellowglass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoticon275yellowglass.png; sourceTree = "<group>"; };
@@ -3129,7 +3133,6 @@
 				0F734B5617427B790084A2F4 /* Accounts.framework in Frameworks */,
 				65F41C8B173BDC03000BA8CB /* libxml2.2.dylib in Frameworks */,
 				0D335121109ABB6A0082810A /* libxml2.dylib in Frameworks */,
-				65A21268172981A000ED0B9A /* ImageIO.framework in Frameworks */,
 				65A212461729496F00ED0B9A /* AssetsLibrary.framework in Frameworks */,
 				65A2CFC117257480005C03B7 /* Social.framework in Frameworks */,
 				65C7A50517216E71003F1A84 /* MobileCoreServices.framework in Frameworks */,
@@ -4171,6 +4174,7 @@
 		20F3597C1888DC8A001376B6 /* CreateFlyer */ = {
 			isa = PBXGroup;
 			children = (
+				C306CC511BD657AF00F9D34D /* Giphy */,
 				209F8E3E19A479B800323559 /* DrawingClass */,
 				2405D3441990ABD8007F2596 /* BuyImagesController */,
 				2075A9921899EAB600F410FB /* FlyerlyCustomClasses */,
@@ -5265,6 +5269,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		C306CC511BD657AF00F9D34D /* Giphy */ = {
+			isa = PBXGroup;
+			children = (
+				C306CC531BD657D100F9D34D /* GiphyViewController.h */,
+				C306CC541BD657D100F9D34D /* GiphyViewController.m */,
+				C306CC551BD657D100F9D34D /* GiphyViewController.xib */,
+			);
+			name = Giphy;
+			sourceTree = "<group>";
+		};
 		C31E92A21B566207004DF193 /* BordersIcons */ = {
 			isa = PBXGroup;
 			children = (
@@ -5306,8 +5320,8 @@
 		C35278171BCE86C2002963F1 /* AnimatedGIFImageSerialization */ = {
 			isa = PBXGroup;
 			children = (
-				C35278181BCE86C2002963F1 /* AnimatedGIFImageSerialization.h */,
-				C35278191BCE86C2002963F1 /* AnimatedGIFImageSerialization.m */,
+				C306CC5B1BD68E1B00F9D34D /* AnimatedGIFImageSerialization.h */,
+				C306CC5C1BD68E1B00F9D34D /* AnimatedGIFImageSerialization.m */,
 			);
 			path = AnimatedGIFImageSerialization;
 			sourceTree = "<group>";
@@ -6748,6 +6762,7 @@
 				2012ECB1192612A000D5EA58 /* a_bg@2x.png in Resources */,
 				24861F4F19F9147100670F6D /* star@3x.png in Resources */,
 				24861F1419F9147100670F6D /* instagram_share_selected@3x.png in Resources */,
+				C306CC571BD657D100F9D34D /* GiphyViewController.xib in Resources */,
 				C35351311B61008200CF68F9 /* icon4.jpg in Resources */,
 				C3766CFB1B5650B000B7F5B2 /* Template63.jpg in Resources */,
 				24861F3F19F9147100670F6D /* save_gallery@3x.png in Resources */,
@@ -6865,7 +6880,6 @@
 				208C684F186DAA59004A74F2 /* FlyerlyConfigurator.m in Sources */,
 				2032DCD01871BDFF007036B2 /* CropViewController.m in Sources */,
 				242BFA7D1B29711800EF370B /* RMStoreTransactionReceiptVerificator.m in Sources */,
-				C352781A1BCE86C2002963F1 /* AnimatedGIFImageSerialization.m in Sources */,
 				49B8898A188652A2003766AD /* NSData+Extras.m in Sources */,
 				202C4803187D6E4B00FE0975 /* BitlyURLShortener.m in Sources */,
 				2002C89618888CD4005B18C9 /* SaveFlyerCell.m in Sources */,
@@ -6920,6 +6934,7 @@
 				204635621895E4AF00A94C42 /* Flyer.m in Sources */,
 				20E38AA4197FB39200D1CFA9 /* SendingPrintViewController.m in Sources */,
 				C34E98531BA2E54F00692597 /* MainScreenAddsCell.m in Sources */,
+				C306CC5D1BD68E1B00F9D34D /* AnimatedGIFImageSerialization.m in Sources */,
 				2044FF96185088ED00A26B42 /* MainSettingCell.m in Sources */,
 				2478E5E3192C7A6E0081B31B /* InAppViewController.m in Sources */,
 				2022C63518D1BAF000BCD5F7 /* RMStoreKeychainPersistence.m in Sources */,
@@ -6929,6 +6944,7 @@
 				49997FF717DF786400CF1038 /* ParentViewController.m in Sources */,
 				2405D3481990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.m in Sources */,
 				209F8E4419A47B2200323559 /* SettingsViewController.m in Sources */,
+				C306CC561BD657D100F9D34D /* GiphyViewController.m in Sources */,
 				2478E5ED192C8C0A0081B31B /* FreeFeatureCell.m in Sources */,
 				4986857018B4FFC7002113E4 /* LibraryViewController.m in Sources */,
 				49997FFB17E07FA100CF1038 /* SKProduct+LocalPrice.m in Sources */,

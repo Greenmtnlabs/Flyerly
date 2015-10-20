@@ -109,7 +109,6 @@
 @property (nonatomic, strong) UIView *bannerAddView;
 
 //-----
-@property (nonatomic, strong) UIView *giphyBgsView;
 @property (nonatomic, strong) ResourcesView *backgroundsView;
 @property (nonatomic, strong) ResourcesView *flyerBordersView;
 @property (nonatomic, strong) UIView *fontsView;
@@ -215,6 +214,7 @@
 
 @property (nonatomic,strong)MPMoviePlayerController *player;
 @property (nonatomic,strong) Flyer *flyer;
+@property (nonatomic,strong) NSString *tasksAfterGiphySelect;
 @property(strong,nonatomic) NSString *currentLayer;
 @property(strong,nonatomic) NSMutableDictionary *layersDic;
 @property (nonatomic, copy) void (^onFlyerBack)(NSString *);
