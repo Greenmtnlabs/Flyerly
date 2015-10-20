@@ -21,17 +21,28 @@
 
 
 // Untech Options
-"Spending time with family" = "Spending time with family";
-"Driving" = "Driving";
-"Spending time outdoors" = "Spending time outdoors";
-"At the beach" = "At the beach";
-"Enjoying the holidays" = "Enjoying the holidays";
-"Just needed a break" = "Just needed a break";
-"Running" = "Running";
-"On vacation" = "On vacation";
-"Finding my inner peace" = "Finding my inner peace";
-"Removing myself from technology" = "Removing myself from technology";
-"Custom" = "Custom";
+"spending time with family" = "spending time with family";
+"driving" = "driving";
+"spending time outdoors" = "spending time outdoors";
+"at the beach" = "at the beach";
+"enjoying the holidays" = "enjoying the holidays";
+"just needed a break" = "just needed a break";
+"running" = "running";
+"on vacation" = "on vacation";
+"finding my inner peace" = "finding my inner peace";
+"removing myself from technology" = "removing myself from technology";
+"in a meeting" = "in a meeting";
+"biking" = "biking";
+"playing sports" = "playing sports";
+"hiking" = "hiking";
+"yoga" = "yoga";
+"relaxing" = "relaxing";
+"eating" = "eating";
+"drinking" = "drinking";
+"spending time with friends" = "spending time with friends";
+"custom" = "custom";
+
+
 
 
 // SetupGuide Screen 1
@@ -48,11 +59,15 @@
 // SetupGuide Screen 2
 "When you take time away from technology, what do you typically do or hope to do more of?" = "When you take time away from technology, what do you typically do or hope to do more of?";
 
-"Did you know that based on a study, people %@ have better relationships, better quality of sleep and in general are more emotionally balanced." = "Did you know that based on a study, people %@ have better relationships, better quality of sleep and in general are more emotionally balanced.";
+"When you take a break from technology, what do you typically do or hope to do more of by taking Untech time?" = "When you take a break from technology, what do you typically do or hope to do more of by taking Untech time?";
 
 "e.g. Spending time with family" = "e.g. Spending time with family";
 "Add Your Own Custom Untech Message" = "Add Your Own Custom Untech Message";
 "Cancel" = "Cancel";
+
+"Select one for now (you can always change it later)" = "Select one for now (you can always change it later)";
+
+"\"Disconnecting from technology to reconnect with ourselves is absolutely essential for wisdom.\" -Arianna Huffington" = "\"Disconnecting from technology to reconnect with ourselves is absolutely essential for wisdom.\" -Arianna Huffington";
 
 
 // SetupGuide Screen 3

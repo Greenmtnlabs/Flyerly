@@ -19,17 +19,26 @@
 "Edit" = "Editar";
 
 // Untech Options
-"Spending time with family" = "Pasar tiempo con la familia";
-"Driving" = "Conducir";
-"Spending time outdoors" = "Pasar tiempo al aire libre";
-"At the beach" = "En la playa";
-"Enjoying the holidays" = "Disfrutando de las vacaciones";
-"Just needed a break" = "Sólo necesitaba un descanso";
-"Running" = "Corriendo";
-"On vacation" = "De vacaciones";
-"Finding my inner peace" = "Encontrar a mi paz interna";
-"Removing myself from technology" = "Extracción de mí mismo de la tecnología";
-"Custom" = "Personalizado";
+"spending time with family" = "pasar tiempo con la familia";
+"driving" = "conducción";
+"spending time outdoors" = "pasar tiempo al aire libre";
+"at the beach" = "en la playa";
+"enjoying the holidays" = "disfrutando de las vacaciones";
+"just needed a break" = "sólo necesitaba un descanso";
+"running" = "corriendo";
+"on vacation" = "de vacaciones";
+"finding my inner peace" = "encontrar mi paz interior";
+"removing myself from technology" = "eliminar a mí mismo de la tecnología";
+"in a meeting" = "en una reunion";
+"biking" = "ciclismo";
+"playing sports" = "hacer deporte";
+"hiking" = "excursionismo";
+"yoga" = "yoga";
+"relaxing" = "relajante";
+"eating" = "comiendo";
+"drinking" = "el beber";
+"spending time with friends" = "pasar tiempo con los amigos";
+"custom" = "personalizado";
 
 
 // SetupGuide Screen 1
@@ -47,11 +56,15 @@
 // SetupGuide Screen 2
 "When you take time away from technology, what do you typically do or hope to do more of?" = "Cuando te tomas el tiempo lejos de la tecnología , ¿qué lo hace normalmente o la esperanza de hacer más de";
 
-"Did you know that based on a study, people %@ have better relationships, better quality of sleep and in general are more emotionally balanced." = "¿Sabía usted que en base a un estudio , las personas %@ tener mejores relaciones, mejor calidad del sueño y en general son más emocionalmente equilibrado.";
+"When you take a break from technology, what do you typically do or hope to do more of by taking Untech time?" = "Cuando usted toma un descanso de la tecnología, ¿qué es lo que normalmente hace o espera hacer más por tomarse el tiempo Untech?";
 
 "e.g. Spending time with family" = "por ejemplo Pasar tiempo con la familia";
 "Add Your Own Custom Untech Message" = "Añadir su propio mensaje personalizado Untech";
 "Cancel" = "Cancelar";
+
+"Select one for now (you can always change it later)" = "Seleccione uno de momento (siempre se puede cambiar más adelante)";
+
+"\"Disconnecting from technology to reconnect with ourselves is absolutely essential for wisdom.\" -Arianna Huffington" = "\"Desconectar de la tecnología para volver a conectar con nosotros mismos es absolutamente esencial para la sabiduría.\" -Arianna Huffington";
 
 // SetupGuide Screen 3
 "Search contacts to notify of untech time" = "Buscar contactos para notificar de tiempo untech";

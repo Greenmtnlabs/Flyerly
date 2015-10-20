@@ -35,10 +35,6 @@
     [self applyLocalization];
 }
 
--(void)applyLocalization{
-    [_lblUntechQuestion setText:NSLocalizedString(@"When you take time away from technology, what do you typically do or hope to do more of?", nil)];
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -57,19 +53,11 @@
     
     customSpendingTextAry = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"]];
     
-    NSString *temStr = ( [untechable.spendingTimeTxt isEqualToString:@""] ) ? NSLocalizedString(@"e.g. Spending time with family", nil) : untechable.spendingTimeTxt;
-    [self setupDoctorsResearchLabel:temStr];
-    
     self.setupSpendingTimeText.dataSource = self;
     self.setupSpendingTimeText.delegate = self;
 }
 
-/**
- Setting up Doctors Research Label to be shown
- **/
--(void) setupDoctorsResearchLabel:(NSString *)msg {
-    _doctorsResearchLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Did you know that based on a study, people %@ have better relationships, better quality of sleep and in general are more emotionally balanced.", nil), msg];
-}
+
 
 #pragma - Mark UI PICKER VIEW Delegate Methods
 // The number of columns of data
@@ -95,7 +83,6 @@
     if( [[customSpendingTextAry objectAtIndex:row] isEqualToString:[customSpendingTextAry objectAtIndex:customSpendingTextAry.count-1]] ) {
         [self showAddFieldPopUp];
     } else  {
-        [self setupDoctorsResearchLabel:[customSpendingTextAry objectAtIndex:row]];
         untechable.spendingTimeTxt = [customSpendingTextAry objectAtIndex:row];
     }
 }
@@ -147,9 +134,6 @@
         // inserting values in data source of picker view.
         [[NSUserDefaults standardUserDefaults] setObject:customSpendingTextAry forKey:@"cutomSpendingTimeTextAry"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        //Update new msg in doctors research string
-        [self setupDoctorsResearchLabel:newMsg];
         
         // save new Custom message to model 
         untechable.spendingTimeTxt = [customSpendingTextAry objectAtIndex:position];
@@ -264,5 +248,27 @@
     }
     [self.setupSpendingTimeText selectRow:positionToShow inComponent:0 animated:NO];
 }
+
+
+#pragma mark -  Localization Functions
+
+/*
+ * Method to apply localization
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+
+-(void)applyLocalization{
+    
+    // label to show question
+    _lblUntechQuestion.text = NSLocalizedString(@"When you take a break from technology, what do you typically do or hope to do more of by taking Untech time?", nil);
+    // label to show qoute
+    _lblQoute.text = NSLocalizedString(@"\"Disconnecting from technology to reconnect with ourselves is absolutely essential for wisdom.\" -Arianna Huffington", nil);
+    // label to untech options heading
+    _lblUntechOpsHeading.text = NSLocalizedString(@"Select one for now (you can always change it later)",nil);
+}
+
 
 @end
