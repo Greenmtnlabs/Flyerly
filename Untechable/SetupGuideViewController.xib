@@ -21,119 +21,80 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIc-ml-s9P" userLabel="Button - btnLblWwud">
-                    <rect key="frame" x="0.0" y="121" width="320" height="55"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="55" id="wBX-3T-B4c"/>
-                    </constraints>
+                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIc-ml-s9P" userLabel="Button - btnLblWwud">
+                    <rect key="frame" x="0.0" y="196" width="320" height="55"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
                     <state key="normal" title="Name">
                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ZZU-eQ-ydF">
-                    <rect key="frame" x="0.0" y="191" width="320" height="31"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ZZU-eQ-ydF">
+                    <rect key="frame" x="0.0" y="256" width="320" height="31"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="31" id="6LF-vx-p9o"/>
-                    </constraints>
                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                     <color key="textColor" red="0.25882352939999997" green="0.96862745100000003" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="next"/>
                 </textView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Your Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RK5-oC-JgK">
-                    <rect key="frame" x="0.0" y="197" width="320" height="22"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter Your Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RK5-oC-JgK">
+                    <rect key="frame" x="0.0" y="262" width="320" height="22"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FSA-BZ-uNp">
-                    <rect key="frame" x="5" y="227" width="306" height="1"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FSA-BZ-uNp">
+                    <rect key="frame" x="5" y="292" width="306" height="1"/>
                     <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="1" id="uxW-31-T53"/>
-                    </constraints>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HuL-mv-7cf" userLabel="Button - btnLblWwud">
-                    <rect key="frame" x="0.0" y="309" width="320" height="42"/>
+                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HuL-mv-7cf" userLabel="Button - btnLblWwud">
+                    <rect key="frame" x="0.0" y="319" width="320" height="42"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
                     <state key="normal" title="Phone Number">
                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YmA-Gd-Mzy">
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" fixedFrame="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YmA-Gd-Mzy">
                     <rect key="frame" x="0.0" y="366" width="320" height="31"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="31" id="h3N-1q-SQj"/>
-                    </constraints>
                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                     <color key="textColor" red="0.25882352939999997" green="0.96862745100000003" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Your Number" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fN1-Ji-IMy">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter Your Number" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fN1-Ji-IMy">
                     <rect key="frame" x="0.0" y="373" width="320" height="21"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="21" id="zlf-Zq-FKq"/>
-                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T6g-jg-Slb">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T6g-jg-Slb">
                     <rect key="frame" x="5" y="416" width="306" height="1"/>
                     <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="1" id="dvg-Iu-AkT"/>
-                    </constraints>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigation1.png" translatesAutoresizingMaskIntoConstraints="NO" id="DDG-Wz-6Op">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="navigation1.png" translatesAutoresizingMaskIntoConstraints="NO" id="DDG-Wz-6Op">
                     <rect key="frame" x="76" y="75" width="169" height="27"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter your name and phone number.  This will only be shared with selected contacts when you are away from technology." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGm-Am-cTt">
+                    <rect key="frame" x="10" y="109" width="300" height="80"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                    <color key="textColor" red="0.25882352939999997" green="0.96862745100000003" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                    <size key="shadowOffset" width="0.0" height="0.0"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstAttribute="trailing" secondItem="FSA-BZ-uNp" secondAttribute="trailing" constant="9" id="50d-4r-s18"/>
-                <constraint firstItem="HuL-mv-7cf" firstAttribute="top" secondItem="FSA-BZ-uNp" secondAttribute="bottom" constant="81" id="5ah-9E-8F0"/>
-                <constraint firstItem="DDG-Wz-6Op" firstAttribute="centerX" secondItem="gIc-ml-s9P" secondAttribute="centerX" id="8AF-Ug-Flt"/>
-                <constraint firstItem="YmA-Gd-Mzy" firstAttribute="trailing" secondItem="HuL-mv-7cf" secondAttribute="trailing" id="98J-66-i3X"/>
-                <constraint firstItem="T6g-jg-Slb" firstAttribute="top" secondItem="YmA-Gd-Mzy" secondAttribute="bottom" constant="19" id="AOm-6c-vyH"/>
-                <constraint firstItem="fN1-Ji-IMy" firstAttribute="top" secondItem="HuL-mv-7cf" secondAttribute="bottom" constant="22" id="BC9-4S-1cA"/>
-                <constraint firstItem="ZZU-eQ-ydF" firstAttribute="leading" secondItem="RK5-oC-JgK" secondAttribute="leading" id="BY3-Am-0yP"/>
-                <constraint firstItem="RK5-oC-JgK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="BnW-AE-zB4"/>
-                <constraint firstItem="ZZU-eQ-ydF" firstAttribute="top" secondItem="gIc-ml-s9P" secondAttribute="bottom" constant="15" id="CWm-FS-Pdv"/>
-                <constraint firstItem="gIc-ml-s9P" firstAttribute="trailing" secondItem="RK5-oC-JgK" secondAttribute="trailing" id="DCY-ni-YR2"/>
-                <constraint firstItem="RK5-oC-JgK" firstAttribute="top" secondItem="ZZU-eQ-ydF" secondAttribute="bottom" constant="-25" id="GdR-Do-gzI"/>
-                <constraint firstItem="ZZU-eQ-ydF" firstAttribute="trailing" secondItem="RK5-oC-JgK" secondAttribute="trailing" id="LPd-YW-wUR"/>
-                <constraint firstItem="ZZU-eQ-ydF" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="191" id="LxX-BT-wIv"/>
-                <constraint firstItem="gIc-ml-s9P" firstAttribute="leading" secondItem="RK5-oC-JgK" secondAttribute="leading" id="Oxi-8q-D62"/>
-                <constraint firstAttribute="trailing" secondItem="RK5-oC-JgK" secondAttribute="trailing" id="Z4H-CO-Eai"/>
-                <constraint firstAttribute="trailing" secondItem="HuL-mv-7cf" secondAttribute="trailing" id="ZXQ-no-Szy"/>
-                <constraint firstItem="YmA-Gd-Mzy" firstAttribute="leading" secondItem="HuL-mv-7cf" secondAttribute="leading" id="ZlV-Ck-WCs"/>
-                <constraint firstItem="YmA-Gd-Mzy" firstAttribute="leading" secondItem="fN1-Ji-IMy" secondAttribute="leading" id="eTq-Fa-zbK"/>
-                <constraint firstItem="YmA-Gd-Mzy" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="366" id="eW8-0h-f8R"/>
-                <constraint firstItem="gIc-ml-s9P" firstAttribute="top" secondItem="DDG-Wz-6Op" secondAttribute="bottom" constant="19" id="fw0-ns-HZV"/>
-                <constraint firstItem="FSA-BZ-uNp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="5" id="ggf-JT-79k"/>
-                <constraint firstItem="HuL-mv-7cf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="mP6-3u-pUE"/>
-                <constraint firstItem="YmA-Gd-Mzy" firstAttribute="trailing" secondItem="fN1-Ji-IMy" secondAttribute="trailing" id="nkw-Ut-f8N"/>
-                <constraint firstItem="FSA-BZ-uNp" firstAttribute="top" secondItem="RK5-oC-JgK" secondAttribute="bottom" constant="8" symbolic="YES" id="nlv-rO-oVS"/>
-                <constraint firstItem="T6g-jg-Slb" firstAttribute="trailing" secondItem="FSA-BZ-uNp" secondAttribute="trailing" id="uyp-22-sZE"/>
-                <constraint firstItem="T6g-jg-Slb" firstAttribute="leading" secondItem="FSA-BZ-uNp" secondAttribute="leading" id="vku-dm-3jk"/>
-            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
