@@ -39,13 +39,15 @@
 -(void)setScrollView{
     
     
-    UIScrollView *scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    UIScrollView *scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 75, self.view.frame.size.width, self.view.frame.size.height)];
     
-    [self.view addSubview:_fullView];
+    
     
     [scroller addSubview:_fullView];
     
-    scroller.contentSize = CGSizeMake(self.view.frame.size.width*_fullView.frame.size.width, self.view.frame.size.height);
+    [self.view addSubview:scroller];
+    
+    scroller.contentSize = CGSizeMake(self.view.frame.size.width, _fullView.frame.size.height);
     [self.view addSubview:scroller];
     
 //    if ([[UIScreen mainScreen] bounds].size.height >= 568) //iphone 5/5c/5s/6/6 plus
