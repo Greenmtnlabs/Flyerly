@@ -25,7 +25,7 @@
     int addsLoaded;
     CGRect sizeRectForAdd;
     BOOL isSearch;
-    UIImageView *noAds;
+    UIImageView *noAdsImage;
 }
 
 @end
@@ -180,13 +180,13 @@ id lastShareBtnSender;
     } else if (IS_IPHONE_6_PLUS){
         imageName = @"noAdd_6Plus.png";
     }
-    noAds = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
+    noAdsImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
     
     // to apply gesture recognizer on image
     UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openPanel)];
-    noAds.userInteractionEnabled = YES;
+    noAdsImage.userInteractionEnabled = YES;
     [tap setNumberOfTapsRequired:1];
-    [noAds addGestureRecognizer:tap];
+    [noAdsImage addGestureRecognizer:tap];
 }
 
 /*
@@ -682,7 +682,7 @@ id lastShareBtnSender;
         }
         
         
-        [cell addSubview: (UIView *)noAds];
+        [cell addSubview: noAdsImage];
         
         return cell;
     }
