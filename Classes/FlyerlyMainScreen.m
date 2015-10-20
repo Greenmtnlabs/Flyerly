@@ -25,6 +25,7 @@
     int addsLoaded;
     CGRect sizeRectForAdd;
     BOOL isSearch;
+    UIImageView *noAdsImage;
 }
 
 @end
@@ -100,7 +101,9 @@ id lastShareBtnSender;
         [self loadGoogleAdd];
     });
     
-    [self loadAddTiles];
+    // set default image
+    [self setNoAdsImage];
+    [self loadAdsTiles];
     
     [self.view bringSubviewToFront:bottomBar];
     [self.view bringSubviewToFront:btnCreateFlyer];
@@ -159,6 +162,32 @@ id lastShareBtnSender;
 
 
 #pragma mark  custom Methods
+
+/*
+ * Method to set default image instead of ads
+ * when internet is not available
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+-(void) setNoAdsImage{
+    
+    NSString *imageName = @"noAdd_5.png";
+    
+    if (IS_IPHONE_6){
+        imageName = @"noAdd_6.png";
+    } else if (IS_IPHONE_6_PLUS){
+        imageName = @"noAdd_6Plus.png";
+    }
+    noAdsImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
+    
+    // to apply gesture recognizer on image
+    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openPanel)];
+    noAdsImage.userInteractionEnabled = YES;
+    [tap setNumberOfTapsRequired:1];
+    [noAdsImage addGestureRecognizer:tap];
+}
 
 /*
  * TextView to input and search
@@ -324,7 +353,7 @@ id lastShareBtnSender;
         //HERE WE GET FLYERS
         weakSelf.flyerPaths = [weakSelf getFlyersPaths];
         
-        [weakSelf loadAddTiles];
+        [weakSelf loadAdsTiles];
         
         if( weakSelf.flyerPaths.count > 1 ){
          [weakSelf.tView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
@@ -497,7 +526,7 @@ id lastShareBtnSender;
 /**
  * Load addvertise tiles
  */
--(void)loadAddTiles{
+-(void)loadAdsTiles{
     __block int i=-1;
     addsLoaded = 0;
     
@@ -571,12 +600,9 @@ id lastShareBtnSender;
     int rowNumber = (int)indexPath.row;
     NSString *showCell = @"MainFlyerCell";
     
-    
-    
     if( [self isAddvertiseRow:rowNumber] ) {
         showCell = @"MainScreenAddsCell";
     }
-    
     
     if( [showCell isEqualToString:@"MainFlyerCell"] ){
         static NSString *MainFlyerCellId = @"MainFlyerCellId";
@@ -613,8 +639,7 @@ id lastShareBtnSender;
                 cell.lblFlyerTitle.userInteractionEnabled = YES;
                 [tap setNumberOfTapsRequired:1];
                 [cell.lblFlyerTitle addGestureRecognizer:tap];
-
-                
+        
             });
             return cell;
           } else {
@@ -635,24 +660,29 @@ id lastShareBtnSender;
             });
             return cell;
         }
-        
-        
-
     }
     else {
         static NSString *MainScreenAddsCellId = @"MainScreenAddsCell";
         MainScreenAddsCell *cell = (MainScreenAddsCell *)[tableView dequeueReusableCellWithIdentifier:MainScreenAddsCellId];
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainScreenAddsCell" owner:self options:nil];
         cell = (MainScreenAddsCell *)[nib objectAtIndex:0];
+       
+        if([FlyerlySingleton connected]){
 
-        int addRow = [self getIndexOfAdd:rowNumber];
-        GADBannerView *adView = self.bannerAdd[ addRow ];
-        adView.frame = CGRectMake(cell.frame.origin.x+10, cell.frame.origin.y+10, tView.frame.size.width-20, cell.frame.size.height-20);
-        if( sizeRectForAdd.size.width != 0 ){
-            adView.frame = sizeRectForAdd;
+            int addRow = [self getIndexOfAdd:rowNumber];
+            GADBannerView *adView = self.bannerAdd[ addRow ];
+            adView.frame = CGRectMake(cell.frame.origin.x+10, cell.frame.origin.y+10, tView.frame.size.width-20, cell.frame.size.height-20);
+            if( sizeRectForAdd.size.width != 0 ){
+                adView.frame = sizeRectForAdd;
+            }
+           
+            self.bannerAdd[ addRow ] = adView;
+            [cell addSubview:self.bannerAdd[ addRow ]];
+            return cell;
         }
-        self.bannerAdd[ addRow ] = adView;
-        [cell addSubview:self.bannerAdd[ addRow ]];
+        
+        
+        [cell addSubview: noAdsImage];
         
         return cell;
     }
