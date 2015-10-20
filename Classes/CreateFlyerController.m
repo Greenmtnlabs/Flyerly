@@ -1055,10 +1055,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
             NSString *destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
             [[NSFileManager defaultManager] createFileAtPath:destination contents:data attributes:nil];
-
+            
+            int width = [[[gif[@"images"] objectForKey:@"original"] objectForKey:@"width"] integerValue];
+            int height = [[[gif[@"images"] objectForKey:@"original"] objectForKey:@"height"] integerValue];
+            
             //Update dictionary
             [flyer setOriginalVideoUrl:@"Template/template.mov"];
-            [flyer setFlyerTypeVideo];
+            [flyer setFlyerTypeVideoWithSize:width height:height videoSoure:@"giphy"];
             
             // Render the movie player.
             [self.flyimgView renderLayer:@"Template" layerDictionary:[flyer getLayerFromMaster:@"Template"]];

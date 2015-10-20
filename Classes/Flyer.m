@@ -1591,12 +1591,24 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  * Here we Set Flyer Type to Video Flyer
  */
 -(void)setFlyerTypeVideo {
+    [self setFlyerTypeVideoWithSize:flyerlyWidth height:flyerlyHeight videoSoure:@"flyerly"];
+}
+/*
+ * Here we Set Flyer Type to Video Flyer with size
+  @return: void
+  @parms:
+   @width: integer value
+   @height: integer value
+   @videoSoure: String type ( Possible values would be @"giphy" / @"flyerly"
+ */
+-(void)setFlyerTypeVideoWithSize:(int)width height:(int)height videoSoure:(NSString *)videoSoure {
 
     NSMutableDictionary *templateDictionary = [self getLayerFromMaster:@"Template"];
     
     [templateDictionary setValue:@"video" forKey:@"FlyerType"];
-    [templateDictionary setValue:[NSString stringWithFormat:@"%i",flyerlyWidth] forKey:@"videoWidth"];
-    [templateDictionary setValue:[NSString stringWithFormat:@"%i",flyerlyWidth] forKey:@"videoHeight"];
+    [templateDictionary setValue:[NSString stringWithFormat:@"%i",width] forKey:@"videoWidth"];
+    [templateDictionary setValue:[NSString stringWithFormat:@"%i",height] forKey:@"videoHeight"];
+    [templateDictionary setValue:videoSoure forKey:@"videoSoure"];
     
     
     // Set timeStamp
