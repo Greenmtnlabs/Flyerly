@@ -33,6 +33,46 @@
     [self initializePickerData];
 
     [self applyLocalization];
+    [self setScrollView];
+}
+
+-(void)setScrollView{
+    
+    
+    UIScrollView *scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    
+    [self.view addSubview:_fullView];
+    
+    [scroller addSubview:_fullView];
+    
+    scroller.contentSize = CGSizeMake(self.view.frame.size.width*_fullView.frame.size.width, self.view.frame.size.height);
+    [self.view addSubview:scroller];
+    
+//    if ([[UIScreen mainScreen] bounds].size.height >= 568) //iphone 5/5c/5s/6/6 plus
+//    {
+//        //making ContentSize and frame's height same as not need of scrolling
+//        //make changes in height if necessary
+//        [_scroller setContentSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height-64)];
+//        //make changes in height if necessary
+//        _scroller.frame = CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height-64);
+//    }
+//    else //iphone 4/4s
+//    {
+//        //making ContentSize greater than frame's height as we need scrolling
+//        //make changes in height if necessary
+//        [_scroller setContentSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height+64)];
+//        if([[UIDevice currentDevice].systemVersion hasPrefix:@"7"]) //iOS 7.0 >
+//        {
+//            //made changes in y as status bar height is counted
+//            _scroller.frame = CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height-64);
+//        }
+//        else //iOS 6.1 <
+//        {
+//            //made changes in y as status bar height not counted
+//            _scroller.frame = CGRectMake(0, 44, self.view.bounds.size.width, self.view.bounds.size.height-64);
+//        }
+//    }
+
 }
 
 -(void)applyLocalization{

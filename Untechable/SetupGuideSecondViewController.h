@@ -16,6 +16,7 @@
     UIButton *nextButton;
 }
 
+@property (strong, nonatomic) IBOutlet UIView *fullView;
 
 //Properties
 @property (nonatomic,strong)  Untechable *untechable;
@@ -24,4 +25,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *doctorsResearchLabel;
 
 @property (strong, nonatomic) IBOutlet UILabel *lblUntechQuestion;
+@property (strong, nonatomic) IBOutlet UIScrollView *scroller;
 @end
