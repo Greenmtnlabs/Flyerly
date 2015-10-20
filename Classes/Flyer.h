@@ -170,6 +170,7 @@
 -(CGFloat)getTvDefPosX;
 -(CGFloat)getTvDefPosY;
 -(BOOL)canIncreaseVideoSize;
+-(CGSize)getSizeOfFlyer;
 -(BOOL)saveAfterCheck;
 
 @property (strong, readonly) NSMutableDictionary *masterLayers;

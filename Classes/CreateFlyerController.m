@@ -3676,11 +3676,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 #pragma mark - Screenshot funcs
 //Here we Getting Snap Shot of Flyer Image View Context
 -(UIImage *)getFlyerSnapShot {
+    CGSize size = [self.flyer getSizeOfFlyer];
     // Declare your local data outside the block.
     // `__block` specifies that the variable can be modified from within the block.
     __block UIImage *uiImage = [self getFlyerSnapshotWithSize:self.flyimgView.size];
-    if( [flyer canIncreaseVideoSize] == YES )
-    uiImage = [self updateImageSize:uiImage scaledToSize:CGSizeMake(uiImage.size.width*2, uiImage.size.height*2)];
+    uiImage = [self updateImageSize:uiImage scaledToSize:size];//CGSizeMake(uiImage.size.width*2, uiImage.size.height*2)];
     
     return uiImage;
 }
@@ -3972,15 +3972,12 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     // Export the URL
     NSURL *exportURL = [NSURL fileURLWithPath:destination];
-    
-    int vWidth = flyerlyWidth;
-    int vHeight = flyerlyHeight;
-    if( [self.flyer canIncreaseVideoSize] == NO ){
-        vWidth = OldFlyerlyWidth;
-        vHeight = OldFlyerlyHeight;
-    }
+    CGSize size = [self.flyer getSizeOfFlyer];
+    int vWidth = size.width;
+    int vHeight = size.height;
+
     self.flyer.saveInGallaryRequired = -1;//video merging starts now
-    [self modifyVideo:firstURL destination:exportURL crop:CGRectMake(0, 0, vHeight, vHeight ) scale:1 overlay:image completion:^(NSInteger status, NSError *error) {
+    [self modifyVideo:firstURL destination:exportURL crop:CGRectMake(0, 0, vWidth, vHeight ) scale:1 overlay:image completion:^(NSInteger status, NSError *error) {
         switch ( status ) {
             case AVAssetExportSessionStatusFailed:{
                 NSLog (@"FAIL = %@", error );

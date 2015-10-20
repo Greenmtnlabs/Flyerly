@@ -1631,13 +1631,43 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     }
     else if( [[templateDictionary objectForKey:@"FlyerType"] isEqualToString:@"video"] && [templateDictionary objectForKey:@"videoWidth"] != nil ){
         int videoWidth = [[templateDictionary objectForKey:@"videoWidth"] intValue];
-        if( videoWidth == flyerlyWidth ){
+        if( videoWidth == flyerlyWidth && [[templateDictionary objectForKey:@"videoHeight"] intValue] == flyerlyHeight ){
             resizeImageRequired = YES;
         }
     }
     
     return resizeImageRequired;
 }
+
+/**
+ * Basically this is the supportive function for old video flyers, new flyers have double size(1240x1240)
+ */
+-(CGSize)getSizeOfFlyer {
+    CGSize size = CGSizeMake(OldFlyerlyWidth, OldFlyerlyHeight);
+    
+    NSMutableDictionary *templateDictionary = [self getLayerFromMaster:@"Template"];
+    BOOL flyerTypeIsVide = ([[templateDictionary objectForKey:@"FlyerType"] isEqualToString:@"video"]);
+    
+    if( flyerTypeIsVide == NO ){
+        size = CGSizeMake(flyerlyWidth, flyerlyHeight);
+    }
+    else if( flyerTypeIsVide && [templateDictionary objectForKey:@"videoWidth"] != nil ){
+        int videoWidth = [[templateDictionary objectForKey:@"videoWidth"] intValue];
+        int videoHeight = [[templateDictionary objectForKey:@"videoHeight"] intValue];
+        
+        if( videoWidth == flyerlyWidth && videoHeight == flyerlyHeight ){
+            size = CGSizeMake(flyerlyWidth, flyerlyHeight);
+        } else if( videoWidth == OldFlyerlyWidth && videoHeight == OldFlyerlyHeight ){
+            size = CGSizeMake(flyerlyWidth, flyerlyHeight);
+        } else{
+            size = CGSizeMake(videoWidth, videoHeight);
+        }
+    }
+    
+    return size;
+}
+
+
 
 /*
  * Here we Get Flyer Type for Video Flyer
@@ -1715,11 +1745,11 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 }
 
 /*
- * Here we Return Over generated Video Snap Shot For Main screen
+ * Here we Return Over merged Video Snap Shot For Main screen
  */
 -(UIImage *)getSharingVideoCover {
 
-    NSString* filePath = [self getSharingVideoPath];
+    NSString* filePath = [self getSharingVideoPath];//merged video
    return [self getSnapShotOfVideoPath:filePath];
 }
 
@@ -1732,6 +1762,9 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     return [self getSnapShotOfVideoPath:filePath];
 }
 
+/**
+ * Get first frame from the video
+ */
 -(UIImage *)getSnapShotOfVideoPath:(NSString *) filePath {
     UIImage *img;
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:NULL]) {
@@ -1785,22 +1818,17 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  */
 -(UIImage *)getImageForVideo {
     
-    UIImage *bottomImage = [self  getSharingVideoCover];
+    UIImage *bottomImage = [self  getSharingVideoCover];//this is merged video first frame
     
     UIImage *imgPlayIcon = [UIImage imageNamed:@"play_icon"];
 
-    int vWidth = flyerlyWidth;
-    int vHeight = flyerlyHeight;
-    int sizeIncreased = 2;
-    if( [self canIncreaseVideoSize] == NO ){
-        vWidth = OldFlyerlyWidth;
-        vHeight = OldFlyerlyHeight;
-        sizeIncreased = 1;
-    }
+    CGSize size = [self getSizeOfFlyer];
+    int vWidth = size.width;
+    int vHeight = size.height;
     
     // play icon width and height
-    CGFloat playIconWidth = 180*sizeIncreased;
-    CGFloat playIconHeight = 180*sizeIncreased;
+    CGFloat playIconWidth = floor(vWidth/3.5); //in 620 flyer height of expected height for icon 177
+    CGFloat playIconHeight = floor(vWidth/3.5); //in 1240 flyer height of expected height for icon 354
     
     CGSize newSize = CGSizeMake( vWidth, vHeight );
     UIGraphicsBeginImageContext( newSize );
