@@ -43,7 +43,9 @@
     [self.navigationItem setLeftBarButtonItem:leftBarButton];
     
     // Set the title view.
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"giphyLogo1.jpg"]];
+    UIImageView *titleImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"giphyLogo1.jpg"]];
+    titleImg.frame = CGRectMake(titleImg.frame.origin.x, titleImg.frame.origin.y, 82, 40);
+    self.navigationItem.titleView = titleImg;
 
     
     [self loadGiphyImages:@"http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC"];
@@ -84,10 +86,14 @@
     [giphyStatus sizeToFit];
     [giphyBgsView addSubview:giphyStatus];
     
+     __weak GiphyViewController *weakSelf = self;
+    
     //send request to giphy api
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         reqGiphyApiInProccess = NO;
+        [weakSelf hideLoadingIndicator];
+        
         giphyStatus.text = @"";
         NSLog(@"JSON: %@", responseObject);
         
@@ -113,7 +119,7 @@
                 x = defX*column+defX + defW*column;
                 y = defY*row+defY + defH*row;
                 
-                if( i > 5 ) return; //show only 6 flyers
+                if( i > 3 ) return; //show only 4 flyers
                 
                 __block UIImageView *imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(x, y, defW, defH)];
                 [imageView2.layer setBorderColor:(__bridge CGColorRef)([UIColor blackColor])];
@@ -214,7 +220,8 @@
     // hiding the keyboard
     [searchBar resignFirstResponder];
     
-    [self loadGiphyImages:@"http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC"];
+    //[self loadGiphyImages:@"http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC"];
+    [self loadGiphyImages:[NSString stringWithFormat:@"%@%@",@"http://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=",searchBar.text]];
 }
 
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller
