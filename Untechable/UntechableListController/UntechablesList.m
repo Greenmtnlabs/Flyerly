@@ -543,8 +543,8 @@
     
     if( !internetReachable.isReachable ){
         // show alert
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No network connection", nil)
-                                                        message:NSLocalizedString(@"You must be connected to the internet to use this app.", nil)
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No internet connection", nil)
+                                                        message:NSLocalizedString(@"Please connect and try again.", nil)
                                                        delegate:nil
                                               cancelButtonTitle:NSLocalizedString(OK, nil)
                                               otherButtonTitles:nil];

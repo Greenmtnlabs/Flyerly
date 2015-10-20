@@ -94,8 +94,9 @@
 "#Untech for %@ %@ " = "#Untech para %@ %@ ";
 "Unable to delete, please try agin later!" = "No se puede eliminar, por favor intente más tarde volveré!";
 
-"No network connection" = "No hay conexión a la red";
-"You must be connected to the internet to sync your untechable on server." = "Usted debe estar conectado a Internet para sincronizar tu untechable en el servidor.";
+"No internet connection" = "Sin conexión a Internet";
+"Please try again later." = "Por favor, inténtelo de nuevo más tarde.";
+"Please connect and try again." = "Por favor, vuelva a conectar e inténtelo de nuevo.";
 
 "Future time away:" = "Momento en el futuro inmediato:";
 "Current time away:" = "Hora de distancia:";

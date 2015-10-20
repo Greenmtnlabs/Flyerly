@@ -98,8 +98,9 @@
 "Untechable created successfully" = "Untechable created successfully";
 "Unable to delete, please try agin later!" = "Unable to delete, please try agin later!";
 
-"No network connection" = "No network connection";
-"You must be connected to the internet to sync your untechable on server." = "You must be connected to the internet to sync your untechable on server.";
+"No internet connection" = "No internet connection";
+"Please try again later." = "Please try again later.";
+"Please connect and try again." = "Please connect and try again.";
 
 "Future time away:" = "Future time away:";
 "Current time away:" = "Current time away:";

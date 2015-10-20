@@ -211,8 +211,8 @@
 
     if( !internetReachable.isReachable && !([UNT_ENVIRONMENT isEqualToString:TESTING]) ){
         //Show alert if internet is not avaialble...
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No network connection", nil)
-                                                        message:NSLocalizedString(@"You must be connected to the internet to sync your untechable on server.", nil)
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No internet connection", nil)
+                                                        message:NSLocalizedString(@"Please connect and try again.", nil)
                                                        delegate:nil
                                               cancelButtonTitle:NSLocalizedString(OK, nil)
                                               otherButtonTitles:nil];
@@ -584,8 +584,8 @@
         [alert show];
     } else if (tag == 3){
         
-        alert = [[UIAlertView alloc] initWithTitle:nil
-                                           message:@"No internet connection. Please try again later."
+        alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No internet connection", nil)
+                                           message:NSLocalizedString(@"Please try again later.", nil)
                                           delegate:self
                                  cancelButtonTitle:nil
                                  otherButtonTitles: OK, nil];
