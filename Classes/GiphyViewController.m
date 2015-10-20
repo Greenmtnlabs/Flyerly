@@ -36,12 +36,12 @@
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
     backButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    [self.navigationItem setLeftBarButtonItem:leftBarButton];
+    leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    [self.navigationItem setLeftBarButtonItem:leftBarButtonItem];
     
     // Set the title view.
     UIImageView *titleImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"giphyLogo1.jpg"]];
-    titleImg.frame = CGRectMake(titleImg.frame.origin.x, titleImg.frame.origin.y, 50, 40);
+    titleImg.frame = CGRectMake(titleImg.frame.origin.x, titleImg.frame.origin.y, 40, 40);
     self.navigationItem.titleView = titleImg;
 
     //load trending giphy default
@@ -165,9 +165,8 @@
         giphyDownloading = YES;
         //showing the laoding indicator on the top right corner
         [self showLoadingIndicator];
+        [leftBarButtonItem setEnabled:NO];
     }
-    
-    __weak GiphyViewController *weakSelf = self;
     
     int tag = (int)[(UIGestureRecognizer *)sender view].tag;
     NSDictionary *gif = giphyData[tag];
@@ -176,7 +175,8 @@
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 
         if( data == nil ){
-            [weakSelf hideLoadingIndicator];
+            [self hideLoadingIndicator];
+            [leftBarButtonItem setEnabled:YES];
             return;
         }
             

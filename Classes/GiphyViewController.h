@@ -11,6 +11,7 @@
 
 @interface GiphyViewController : UIViewController{
     UIBarButtonItem  *rightBarButtonItem;
+    UIBarButtonItem  *leftBarButtonItem;
 }
 
 @property (strong, nonatomic) IBOutlet UIScrollView *layerScrollView;
