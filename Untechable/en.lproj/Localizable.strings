@@ -92,8 +92,8 @@
 "Outgoing Mail Server" = "Outgoing Mail Server";
 
 // SetupGuide Screen 4
-"Congratulations!" = "Congratulations!";
-"Thank you! Now easily Untech from technology and spend quality time with people while experiencing things that are important." = "Thank you! Now easily Untech from technology and spend quality time with people while experiencing things that are important.";
+"Untech Now Setup!" = "Untech Now Setup!";
+"Using these settings, in the future you can easily take a break from technology with the tap of the 'Untech Now' button from the main screen. Namaste!" = "Using these settings, in the future you can easily take a break from technology with the tap of the 'Untech Now' button from the main screen. Namaste!";
 
 "The above message will be posted on %@ to the networks you selected below" = "The above message will be posted on %@ to the networks you selected below";
 
