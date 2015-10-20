@@ -209,7 +209,7 @@
 
 -(void)onNext{
 
-    if( !internetReachable.isReachable && !([UNT_ENVIRONMENT isEqualToString:TESTING]) ){
+    if( !internetReachable.isReachable){
         //Show alert if internet is not avaialble...
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No internet connection", nil)
                                                         message:NSLocalizedString(@"Please connect and try again.", nil)
@@ -366,7 +366,7 @@
     [self storeScreenVarsInDic];
     
     // Checking internet connectivity and shows error message if not connected
-    if(!internetReachable.isReachable && !([UNT_ENVIRONMENT isEqualToString:TESTING])){
+    if(!internetReachable.isReachable ){
     
         [self showAlert:3];
     
