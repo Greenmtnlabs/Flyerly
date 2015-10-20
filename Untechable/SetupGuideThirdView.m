@@ -46,7 +46,7 @@
 
 -(void)setupContactView {
     
-     viewControllerToAdd = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
+    viewControllerToAdd = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
     
     viewControllerToAdd.untechable = untechable;
     

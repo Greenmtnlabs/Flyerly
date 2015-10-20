@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContactsListControllerViewController">
             <connections>
                 <outlet property="contactsTable" destination="Iqn-yo-yr9" id="ZEF-Ir-R6W"/>
+                <outlet property="lblMessage" destination="TOe-OP-XN9" id="D3o-4H-o4s"/>
                 <outlet property="searchTextField" destination="KCr-rl-5dq" id="4G5-yS-Qsi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -17,32 +18,41 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mFg-Cr-7AC" userLabel="line1">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mFg-Cr-7AC" userLabel="line1">
                     <rect key="frame" x="0.0" y="66" width="320" height="2"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="2" id="TdM-lq-Lc9"/>
+                    </constraints>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="E4J-KF-baP" userLabel="line2">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4J-KF-baP" userLabel="line2">
                     <rect key="frame" x="0.0" y="66" width="320" height="2"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="2" id="zZZ-aS-9Ro"/>
+                    </constraints>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" image="searchicon.png" id="Hew-dP-68I">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" image="searchicon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Hew-dP-68I">
                     <rect key="frame" x="8" y="77" width="13" height="13"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="13" id="4SW-iS-UnN"/>
+                        <constraint firstAttribute="height" constant="13" id="H4m-3h-1Ub"/>
+                    </constraints>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                 </imageView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search contacts to notify of untech time" minimumFontSize="17" id="KCr-rl-5dq">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search contacts to share your untech time with" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KCr-rl-5dq">
                     <rect key="frame" x="30" y="69" width="290" height="30"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="tLH-gF-BeY"/>
+                    </constraints>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no"/>
@@ -50,18 +60,30 @@
                         <outlet property="delegate" destination="-1" id="I1b-4K-ZVW"/>
                     </connections>
                 </textField>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uTQ-3O-l9t" userLabel="line3">
-                    <rect key="frame" x="0.0" y="103" width="414" height="2"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uTQ-3O-l9t" userLabel="line3">
+                    <rect key="frame" x="0.0" y="103" width="320" height="2"/>
                     <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="2" id="ATB-pZ-PjG"/>
+                    </constraints>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="80" sectionHeaderHeight="1" sectionFooterHeight="1" id="Iqn-yo-yr9" userLabel="contactsTable">
-                    <rect key="frame" x="0.0" y="107" width="320" height="372"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TOe-OP-XN9">
+                    <rect key="frame" x="10" y="103" width="300" height="64"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="64" id="m2H-mx-Lz1"/>
+                    </constraints>
+                    <string key="text">Select contacts to inform of your untech time. Choose SMS or Phone icons.  A text will be sent or call made sharing news of your untech time.</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="80" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Iqn-yo-yr9" userLabel="contactsTable">
+                    <rect key="frame" x="0.0" y="167" width="320" height="313"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
@@ -71,6 +93,29 @@
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="uTQ-3O-l9t" firstAttribute="top" secondItem="KCr-rl-5dq" secondAttribute="bottom" constant="4" id="1Pi-tT-jra"/>
+                <constraint firstItem="Hew-dP-68I" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="1ZV-i0-a0b"/>
+                <constraint firstItem="TOe-OP-XN9" firstAttribute="top" secondItem="uTQ-3O-l9t" secondAttribute="bottom" constant="-2" id="1d9-kS-z98"/>
+                <constraint firstAttribute="trailing" secondItem="Iqn-yo-yr9" secondAttribute="trailing" id="2R5-bd-6Jq"/>
+                <constraint firstItem="KCr-rl-5dq" firstAttribute="leading" secondItem="Hew-dP-68I" secondAttribute="trailing" constant="9" id="3ac-jW-cS6"/>
+                <constraint firstItem="mFg-Cr-7AC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="7sr-Kp-7f8"/>
+                <constraint firstItem="Iqn-yo-yr9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="AIC-lV-RRG"/>
+                <constraint firstAttribute="bottom" secondItem="Iqn-yo-yr9" secondAttribute="bottom" id="DBs-GJ-Fl4"/>
+                <constraint firstAttribute="trailing" secondItem="uTQ-3O-l9t" secondAttribute="trailing" id="GkF-Ox-AmW"/>
+                <constraint firstItem="E4J-KF-baP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="66" id="LIa-Gq-FSi"/>
+                <constraint firstItem="mFg-Cr-7AC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="66" id="SEL-2b-fEJ"/>
+                <constraint firstItem="uTQ-3O-l9t" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="SXR-Ww-duG"/>
+                <constraint firstItem="KCr-rl-5dq" firstAttribute="top" secondItem="E4J-KF-baP" secondAttribute="bottom" constant="1" id="TFe-xu-doj"/>
+                <constraint firstAttribute="trailing" secondItem="E4J-KF-baP" secondAttribute="trailing" id="Vod-Bf-qW1"/>
+                <constraint firstItem="Hew-dP-68I" firstAttribute="top" secondItem="E4J-KF-baP" secondAttribute="bottom" constant="9" id="Wqh-rL-pZQ"/>
+                <constraint firstAttribute="trailing" secondItem="TOe-OP-XN9" secondAttribute="trailing" constant="10" id="faz-w8-KmR"/>
+                <constraint firstItem="Iqn-yo-yr9" firstAttribute="top" secondItem="TOe-OP-XN9" secondAttribute="bottom" id="hZN-QA-tyg"/>
+                <constraint firstAttribute="trailing" secondItem="KCr-rl-5dq" secondAttribute="trailing" id="nji-Bf-mAv"/>
+                <constraint firstItem="E4J-KF-baP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="oRG-fv-Dmz"/>
+                <constraint firstItem="TOe-OP-XN9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="uYn-JY-Bkt"/>
+                <constraint firstAttribute="trailing" secondItem="mFg-Cr-7AC" secondAttribute="trailing" id="xy9-Yf-GtF"/>
+            </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="125" y="-20"/>
