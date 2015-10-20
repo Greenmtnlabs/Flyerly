@@ -89,8 +89,8 @@
 
 
 // SetupGuide Screen 4
-"Congratulations!" = "¡Felicidades!";
-"Thank you! Now easily Untech from technology and spend quality time with people while experiencing things that are important." = "¡Gracias! Ahora fácilmente Untech de la tecnología y pasar tiempo de calidad con la gente, mientras que experimentan las cosas que son importantes.";
+"Untech Now Setup!" = "Configuración Untech Ahora!";
+"Using these settings, in the future you can easily take a break from technology with the tap of the 'Untech Now' button from the main screen. Namaste!" = "El uso de estos ajustes, en el futuro, usted puede fácilmente tomar un descanso de la tecnología con el toque del botón 'Untech ahora' desde la pantalla principal. Namaste!";
 
 "The above message will be posted on %@ to the networks you selected below" = "El mensaje anterior se publicará en % @ a las redes que ha seleccionado a continuación";
 
