@@ -543,8 +543,8 @@
     
     if( !internetReachable.isReachable ){
         // show alert
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No network connection", nil)
-                                                        message:NSLocalizedString(@"You must be connected to the internet to use this app.", nil)
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No internet connection", nil)
+                                                        message:NSLocalizedString(@"Please connect and try again.", nil)
                                                        delegate:nil
                                               cancelButtonTitle:NSLocalizedString(OK, nil)
                                               otherButtonTitles:nil];
@@ -608,11 +608,11 @@
     label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, tableView.bounds.size.width - 10, 18)];
 
     if (section == sectionCurrentUntech ){
-        label.text = NSLocalizedString(@"Current Untechs:", nil);
+        label.text = NSLocalizedString(@"Current time away:", nil);
     }else if(section == sectionUpcomingUntech){
-        label.text = NSLocalizedString(@"Upcoming Untechs:", nil);
+        label.text = NSLocalizedString(@"Future time away:", nil);
     } else if (section == sectionPastUntech){
-        label.text = NSLocalizedString(@"Past Untechs:", nil);
+        label.text = NSLocalizedString(@"Past time away:", nil);
     }
     
     label.textColor = DEF_GRAY;
@@ -686,11 +686,11 @@
 {
     NSString *sectionHeader;
     if ( section == sectionCurrentUntech ){
-        sectionHeader = NSLocalizedString(@"Current Untechs", nil);
+        sectionHeader = NSLocalizedString(@"Current time away:", nil);
     } else if ( section == sectionUpcomingUntech ){
-        sectionHeader = NSLocalizedString(@"Upcoming Untechs", nil);
+        sectionHeader = NSLocalizedString(@"Future time away:", nil);
     }else if ( section == sectionPastUntech ){
-        sectionHeader = NSLocalizedString(@"Past Untechs:", nil);
+        sectionHeader = NSLocalizedString(@"Past time away:", nil);
     } 
     return sectionHeader;
 }
