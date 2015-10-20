@@ -7,10 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SetupGuideSecondViewController">
             <connections>
-                <outlet property="doctorsResearchLabel" destination="Oza-5Y-MF3" id="OY5-KY-M0R"/>
-                <outlet property="fullView" destination="aXL-sh-GeK" id="BIa-Mw-ouw"/>
+                <outlet property="lblQoute" destination="Oza-5Y-MF3" id="7oi-KO-q0G"/>
+                <outlet property="lblUntechOpsHeading" destination="cfJ-6y-Qbk" id="hiG-op-XOa"/>
                 <outlet property="lblUntechQuestion" destination="beE-63-vlL" id="v3W-aU-Au5"/>
-                <outlet property="scroller" destination="Dkc-3n-kMB" id="IqD-4Q-EUn"/>
                 <outlet property="setupSpendingTimeText" destination="XGp-dh-10q" id="ykm-Xm-SgO"/>
                 <outlet property="view" destination="79C-fk-0Vv" id="zTg-NE-HuQ"/>
             </connections>
@@ -20,51 +19,67 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dkc-3n-kMB">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                </scrollView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigation2.png" translatesAutoresizingMaskIntoConstraints="NO" id="UNA-AN-XXL">
+                    <rect key="frame" x="76" y="75" width="169" height="27"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </imageView>
+                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XGp-dh-10q">
+                    <rect key="frame" x="0.0" y="227" width="320" height="162"/>
+                    <color key="backgroundColor" red="0.69040464743589736" green="0.66666666666666663" blue="0.66666666666666663" alpha="0.13" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="162" id="vCm-U6-ekG"/>
+                    </constraints>
+                </pickerView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;Disconnecting from technology to reconnect with ourselves is absolutely essential for wisdom.&quot; -Arianna Huffington" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oza-5Y-MF3" userLabel="lblQoute">
+                    <rect key="frame" x="10" y="389" width="300" height="91"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="91" id="IVb-jt-vOM"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.25882352939999997" green="0.96862745100000003" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When you take a break from technology, what do you typically do or hope to do more of by taking Untech time?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="beE-63-vlL">
+                    <rect key="frame" x="10" y="105" width="300" height="84"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="84" id="NWL-8p-SBP"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.25882352939999997" green="0.96862745100000003" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select one for now (you can always change it later)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfJ-6y-Qbk" userLabel="lblUntechOpsHeading">
+                    <rect key="frame" x="0.0" y="195" width="320" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="32" id="8So-wL-Dpr"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="Dkc-3n-kMB" secondAttribute="trailing" id="Gtg-qJ-TDh"/>
-                <constraint firstAttribute="bottom" secondItem="Dkc-3n-kMB" secondAttribute="bottom" id="f5r-E5-enW"/>
-                <constraint firstItem="Dkc-3n-kMB" firstAttribute="leading" secondItem="79C-fk-0Vv" secondAttribute="leading" id="km1-7Q-01a"/>
-                <constraint firstItem="Dkc-3n-kMB" firstAttribute="top" secondItem="79C-fk-0Vv" secondAttribute="top" id="yWo-Nv-MeL"/>
+                <constraint firstItem="beE-63-vlL" firstAttribute="top" secondItem="UNA-AN-XXL" secondAttribute="bottom" constant="3" id="1EJ-4R-BWD"/>
+                <constraint firstAttribute="centerX" secondItem="UNA-AN-XXL" secondAttribute="centerX" id="1aK-2s-q0C"/>
+                <constraint firstItem="XGp-dh-10q" firstAttribute="leading" secondItem="79C-fk-0Vv" secondAttribute="leading" id="4ZM-12-Jcx"/>
+                <constraint firstItem="UNA-AN-XXL" firstAttribute="top" secondItem="79C-fk-0Vv" secondAttribute="top" constant="75" id="GTA-bW-oM1"/>
+                <constraint firstAttribute="trailing" secondItem="XGp-dh-10q" secondAttribute="trailing" id="Xca-Th-dkQ"/>
+                <constraint firstItem="XGp-dh-10q" firstAttribute="top" secondItem="cfJ-6y-Qbk" secondAttribute="bottom" id="cXD-SN-d2K"/>
+                <constraint firstAttribute="trailing" secondItem="beE-63-vlL" secondAttribute="trailing" constant="10" id="cvu-fe-bdT"/>
+                <constraint firstAttribute="trailing" secondItem="Oza-5Y-MF3" secondAttribute="trailing" constant="10" id="dBe-Se-Hg1"/>
+                <constraint firstItem="beE-63-vlL" firstAttribute="leading" secondItem="79C-fk-0Vv" secondAttribute="leading" constant="10" id="fOE-wp-lHE"/>
+                <constraint firstItem="cfJ-6y-Qbk" firstAttribute="leading" secondItem="79C-fk-0Vv" secondAttribute="leading" id="kGr-Th-gix"/>
+                <constraint firstItem="cfJ-6y-Qbk" firstAttribute="top" secondItem="beE-63-vlL" secondAttribute="bottom" constant="6" id="tqb-gX-3hT"/>
+                <constraint firstItem="Oza-5Y-MF3" firstAttribute="leading" secondItem="79C-fk-0Vv" secondAttribute="leading" constant="10" id="wb5-QA-J7n"/>
+                <constraint firstItem="Oza-5Y-MF3" firstAttribute="top" secondItem="XGp-dh-10q" secondAttribute="bottom" id="yMT-r0-fmW"/>
+                <constraint firstAttribute="trailing" secondItem="cfJ-6y-Qbk" secondAttribute="trailing" id="zWR-73-zBu"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="1094" y="198"/>
-        </view>
-        <view contentMode="scaleToFill" id="aXL-sh-GeK">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="navigation2.png" translatesAutoresizingMaskIntoConstraints="NO" id="UNA-AN-XXL">
-                    <rect key="frame" x="67" y="45" width="169" height="27"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oza-5Y-MF3">
-                    <rect key="frame" x="12" y="426" width="300" height="113"/>
-                    <string key="text">Did you know that based on a study, people who remove themselves from technology have better relationships, better quality of sleep and in general are more emotionally balanced.</string>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.25882352939999997" green="0.96862745100000003" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="When you take a break from technology, what do you typically do or hope to do more of by taking Untech time?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="beE-63-vlL">
-                    <rect key="frame" x="10" y="80" width="300" height="84"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.25882352939999997" green="0.96862745100000003" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XGp-dh-10q">
-                    <rect key="frame" x="0.0" y="241" width="320" height="162"/>
-                    <color key="backgroundColor" red="0.69040464743589736" green="0.66666666666666663" blue="0.66666666666666663" alpha="0.13" colorSpace="calibratedRGB"/>
-                </pickerView>
-            </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="1454" y="242"/>
+            <point key="canvasLocation" x="236" y="118"/>
         </view>
     </objects>
     <resources>

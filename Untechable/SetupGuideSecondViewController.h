@@ -16,14 +16,14 @@
     UIButton *nextButton;
 }
 
-@property (strong, nonatomic) IBOutlet UIView *fullView;
 
 //Properties
 @property (nonatomic,strong)  Untechable *untechable;
 
 @property (weak, nonatomic) IBOutlet UIPickerView *setupSpendingTimeText;
-@property (weak, nonatomic) IBOutlet UILabel *doctorsResearchLabel;
+@property (strong, nonatomic) IBOutlet UILabel *lblQoute;
 
 @property (strong, nonatomic) IBOutlet UILabel *lblUntechQuestion;
-@property (strong, nonatomic) IBOutlet UIScrollView *scroller;
+
+@property (strong, nonatomic) IBOutlet UILabel *lblUntechOpsHeading;
 @end

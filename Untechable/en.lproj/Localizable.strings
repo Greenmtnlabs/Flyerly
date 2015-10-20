@@ -48,11 +48,15 @@
 // SetupGuide Screen 2
 "When you take time away from technology, what do you typically do or hope to do more of?" = "When you take time away from technology, what do you typically do or hope to do more of?";
 
-"Did you know that based on a study, people %@ have better relationships, better quality of sleep and in general are more emotionally balanced." = "Did you know that based on a study, people %@ have better relationships, better quality of sleep and in general are more emotionally balanced.";
+"When you take a break from technology, what do you typically do or hope to do more of by taking Untech time?" = "When you take a break from technology, what do you typically do or hope to do more of by taking Untech time?";
 
 "e.g. Spending time with family" = "e.g. Spending time with family";
 "Add Your Own Custom Untech Message" = "Add Your Own Custom Untech Message";
 "Cancel" = "Cancel";
+
+"Select one for now (you can always change it later)" = "Select one for now (you can always change it later)";
+
+"\"Disconnecting from technology to reconnect with ourselves is absolutely essential for wisdom.\" -Arianna Huffington" = "\"Disconnecting from technology to reconnect with ourselves is absolutely essential for wisdom.\" -Arianna Huffington";
 
 
 // SetupGuide Screen 3
