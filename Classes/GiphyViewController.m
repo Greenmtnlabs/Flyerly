@@ -44,12 +44,11 @@
     
     // Set the title view.
     UIImageView *titleImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"giphyLogo1.jpg"]];
-    titleImg.frame = CGRectMake(titleImg.frame.origin.x, titleImg.frame.origin.y, 82, 40);
+    titleImg.frame = CGRectMake(titleImg.frame.origin.x, titleImg.frame.origin.y, 65, 40);
     self.navigationItem.titleView = titleImg;
 
-    
+    //load trending giphy default
     [self loadGiphyImages:@"http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC"];
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,11 +65,10 @@
     if( reqGiphyApiInProccess ){
         return;
     } else{
+        //showing the laoding indicator on the top right corner
+        [self showLoadingIndicator];
         reqGiphyApiInProccess = YES;
     }
-    
-    //showing the laoding indicator on the top right corner
-    [self showLoadingIndicator];
     
     giphyBgsView  = [[UIView alloc] initWithFrame:CGRectMake(0,0,layerScrollView.frame.size.width, layerScrollView.frame.size.height)];
     
@@ -177,15 +175,25 @@
     //when a process in que dont start other
     if( giphyDownloading == YES ){
         return;
+    } else {
+        giphyDownloading = YES;
+        //showing the laoding indicator on the top right corner
+        [self showLoadingIndicator];
     }
-    giphyDownloading = YES;
+    
+    __weak GiphyViewController *weakSelf = self;
     
     int tag = (int)[(UIGestureRecognizer *)sender view].tag;
     NSDictionary *gif = giphyData[tag];
     NSURL *url = [NSURL URLWithString:[[gif[@"images"] objectForKey:@"original"] objectForKey:@"mp4"]];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        
+
+        if( data == nil ){
+            [weakSelf hideLoadingIndicator];
+            return;
+        }
+            
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             // HERE WE MOVE SOURCE FILE INTO FLYER FOLDER
             NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
@@ -204,9 +212,6 @@
             giphyStatus = nil;
             giphyBgsView = nil;
             layerScrollView = nil;
-            
-            
-            
             tasksAfterGiphySelect = @"play";
             [self.navigationController popViewControllerAnimated:YES];
 
