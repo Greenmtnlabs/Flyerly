@@ -35,12 +35,21 @@
     [self applyLocalization];
 }
 
-
+/*
+ * Method to apply localization
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
 
 -(void)applyLocalization{
     
+    // label to show question
     _lblUntechQuestion.text = NSLocalizedString(@"When you take a break from technology, what do you typically do or hope to do more of by taking Untech time?", nil);
+    // label to show qoute
     _lblQoute.text = NSLocalizedString(@"\"Disconnecting from technology to reconnect with ourselves is absolutely essential for wisdom.\" -Arianna Huffington", nil);
+    // label to untech options heading
     _lblUntechOpsHeading.text = NSLocalizedString(@"Select one for now (you can always change it later)",nil);
 }
 
