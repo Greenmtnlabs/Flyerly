@@ -40,6 +40,9 @@
 "Error" = "Error";
 "Please Enter Your Name and Number" = "Por favor, introduzca su nombre y número";
 "OK" = "OK";
+"Enter your name and phone number. This will only be shared with selected contacts when you are away from technology." = "Escriba su nombre y número de teléfono. Esto sólo será compartida con los contactos seleccionados cuando usted está ausente de la tecnología.";
+"Technology is best when it brings people together. You're on your way to enjoying some untech time." = "La tecnología es mejor cuando se une a la gente. Usted está en su manera de disfrutar de algún tiempo untech.";
+
 
 // SetupGuide Screen 2
 "When you take time away from technology, what do you typically do or hope to do more of?" = "Cuando te tomas el tiempo lejos de la tecnología , ¿qué lo hace normalmente o la esperanza de hacer más de";

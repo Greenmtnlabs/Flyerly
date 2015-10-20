@@ -42,6 +42,8 @@
 "Error" = "Error";
 "Please Enter Your Name and Number" = "Please Enter Your Name and Number";
 "OK" = "OK";
+"Enter your name and phone number. This will only be shared with selected contacts when you are away from technology." = "Enter your name and phone number. This will only be shared with selected contacts when you are away from technology.";
+"Technology is best when it brings people together. You're on your way to enjoying some untech time." = "Technology is best when it brings people together. You're on your way to enjoying some untech time.";
 
 // SetupGuide Screen 2
 "When you take time away from technology, what do you typically do or hope to do more of?" = "When you take time away from technology, what do you typically do or hope to do more of?";
