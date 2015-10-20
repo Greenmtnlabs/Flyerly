@@ -19,9 +19,6 @@
     NSArray *giphyData;
     BOOL reqGiphyApiInProccess;
     BOOL giphyDownloading;
-    UILabel *giphyStatus;
-    
-    
 }
 
 
@@ -44,7 +41,7 @@
     
     // Set the title view.
     UIImageView *titleImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"giphyLogo1.jpg"]];
-    titleImg.frame = CGRectMake(titleImg.frame.origin.x, titleImg.frame.origin.y, 65, 40);
+    titleImg.frame = CGRectMake(titleImg.frame.origin.x, titleImg.frame.origin.y, 50, 40);
     self.navigationItem.titleView = titleImg;
 
     //load trending giphy default
@@ -71,31 +68,21 @@
     }
     
     giphyBgsView  = [[UIView alloc] initWithFrame:CGRectMake(0,0,layerScrollView.frame.size.width, layerScrollView.frame.size.height)];
-    
-    giphyBgsView.backgroundColor = [UIColor yellowColor];
-
+//    giphyBgsView.backgroundColor = [UIColor yellowColor];
     
     [layerScrollView addSubview:giphyBgsView];
-
     
-    
-    giphyStatus = [[UILabel alloc] init];
-    giphyStatus.text = @"Loading..";
-    [giphyStatus sizeToFit];
-    [giphyBgsView addSubview:giphyStatus];
-    
-     __weak GiphyViewController *weakSelf = self;
+    __weak GiphyViewController *weakSelf = self;
     
     //send request to giphy api
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
         reqGiphyApiInProccess = NO;
         [weakSelf hideLoadingIndicator];
-        
-        giphyStatus.text = @"";
-        NSLog(@"JSON: %@", responseObject);
-        
         giphyData = responseObject[@"data"];
+        
+        NSLog(@"JSON: %@", responseObject);
         
         if( giphyData != nil && giphyData.count > 0 ){
             int heightHandlerForMainView = 0;
@@ -161,7 +148,6 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-        giphyStatus.text = @"Error occured while loadig Giphy, please try again later.";
     }];
 }
 
@@ -209,7 +195,6 @@
             
             giphyDownloading = NO; //giphy has been loaded in video player
             giphyData = nil;
-            giphyStatus = nil;
             giphyBgsView = nil;
             layerScrollView = nil;
             tasksAfterGiphySelect = @"play";
