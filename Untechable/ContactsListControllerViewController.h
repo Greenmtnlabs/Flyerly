@@ -34,6 +34,7 @@
 - (void) showEmailSetupScreen : ( BOOL ) calledFromSetupScreen;
 
 @property(nonatomic,strong) IBOutlet UITextField *searchTextField;
+@property (strong, nonatomic) IBOutlet UILabel *lblMessage;
 
 -(void)onNext;
 @end

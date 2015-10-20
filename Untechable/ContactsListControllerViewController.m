@@ -28,7 +28,7 @@
 
 @implementation ContactsListControllerViewController
 
-@synthesize mobileContactsArray,mobileContactBackupArray,searchTextField,untechable, selectedAnyEmail;
+@synthesize mobileContactsArray,mobileContactBackupArray,searchTextField,untechable, selectedAnyEmail, lblMessage;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,7 +52,8 @@
 }
 
 -(void)applyLocalization{
-    [searchTextField setPlaceholder:NSLocalizedString(@"Search contacts to notify of untech time", nil)];
+    [searchTextField setPlaceholder:NSLocalizedString(@"Search contacts to share your untech time with", nil)];
+    [lblMessage setText:NSLocalizedString(@"Select contacts to inform of your untech time. Choose SMS or Phone icons.  A text will be sent or call made sharing news of your untech time.", nil)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

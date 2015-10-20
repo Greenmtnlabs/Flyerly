@@ -67,10 +67,12 @@
 "\"Disconnecting from technology to reconnect with ourselves is absolutely essential for wisdom.\" -Arianna Huffington" = "\"Desconectar de la tecnología para volver a conectar con nosotros mismos es absolutamente esencial para la sabiduría.\" -Arianna Huffington";
 
 // SetupGuide Screen 3
-"Search contacts to notify of untech time" = "Buscar contactos para notificar de tiempo untech";
+"Search contacts to share your untech time with" = "Buscar contactos para compartir su tiempo con untech";
 
 "How to notify?" = "Cómo notificar?";
 "Message to %@:" = "Mensaje a %@:";
+
+"Select contacts to inform of your untech time. Choose SMS or Phone icons.  A text will be sent or call made sharing news of your untech time." = "Select contacts to inform of your untech time. Choose SMS or Phone icons.  A text will be sent or call made sharing news of your untech time.";
 
 // Email Settings related
 "Select your email service to let your contacts know you will be untechable." = "Seleccione su servicio de correo electrónico y deja que tus contactos sepan que será untechable.";

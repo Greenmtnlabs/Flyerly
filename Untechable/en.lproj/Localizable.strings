@@ -71,10 +71,12 @@
 
 
 // SetupGuide Screen 3
-"Search contacts to notify of untech time" = "Search contacts to notify of untech time";
+"Search contacts to share your untech time with" = "Search contacts to share your untech time with";
 
 "How to notify?" = "How to notify?";
 "Message to %@:" = "Message to %@:";
+
+"Select contacts to inform of your untech time. Choose SMS or Phone icons.  A text will be sent or call made sharing news of your untech time." = "Select contacts to inform of your untech time. Choose SMS or Phone icons.  A text will be sent or call made sharing news of your untech time.";
 
 // Email Settings related
 "Select your email service to let your contacts know you will be untechable." = "Select your email service to let your contacts know you will be untechable.";
