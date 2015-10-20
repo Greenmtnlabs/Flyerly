@@ -97,8 +97,8 @@
 "No network connection" = "No hay conexión a la red";
 "You must be connected to the internet to sync your untechable on server." = "Usted debe estar conectado a Internet para sincronizar tu untechable en el servidor.";
 
-"Upcoming Untechs:" = "Próximas Tiempo Untechs:";
-"Current Untechs:" = "Hora actual Untechs:";
+"Future time away:" = "Momento en el futuro inmediato:";
+"Current time away:" = "Hora de distancia:";
 "Past Untechs:" = "Pasado Tiempo Untechs:";
 
 

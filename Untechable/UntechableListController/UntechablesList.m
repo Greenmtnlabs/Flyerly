@@ -608,9 +608,9 @@
     label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, tableView.bounds.size.width - 10, 18)];
 
     if (section == sectionCurrentUntech ){
-        label.text = NSLocalizedString(@"Current Untechs:", nil);
+        label.text = NSLocalizedString(@"Current time away:", nil);
     }else if(section == sectionUpcomingUntech){
-        label.text = NSLocalizedString(@"Upcoming Untechs:", nil);
+        label.text = NSLocalizedString(@"Future time away:", nil);
     } else if (section == sectionPastUntech){
         label.text = NSLocalizedString(@"Past Untechs:", nil);
     }
@@ -686,9 +686,9 @@
 {
     NSString *sectionHeader;
     if ( section == sectionCurrentUntech ){
-        sectionHeader = NSLocalizedString(@"Current Untechs", nil);
+        sectionHeader = NSLocalizedString(@"Current time away:", nil);
     } else if ( section == sectionUpcomingUntech ){
-        sectionHeader = NSLocalizedString(@"Upcoming Untechs", nil);
+        sectionHeader = NSLocalizedString(@"Future time away:", nil);
     }else if ( section == sectionPastUntech ){
         sectionHeader = NSLocalizedString(@"Past Untechs:", nil);
     } 

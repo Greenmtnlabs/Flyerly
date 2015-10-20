@@ -101,8 +101,8 @@
 "No network connection" = "No network connection";
 "You must be connected to the internet to sync your untechable on server." = "You must be connected to the internet to sync your untechable on server.";
 
-"Upcoming Untechs:" = "Upcoming Untechs:";
-"Current Untechs:" = "Current Untechs:";
+"Future time away:" = "Future time away:";
+"Current time away:" = "Current time away:";
 "Past Untechs:" = "Past Untechs:";
 
 "Untech Custom" = "Untech Custom";
