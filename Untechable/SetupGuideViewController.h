@@ -26,4 +26,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnLblWwud;
 
 @property (strong, nonatomic) IBOutlet UIButton *btnLblPhoneNumber;
+@property (strong, nonatomic) IBOutlet UILabel *lblMessageTop;
+@property (strong, nonatomic) IBOutlet UILabel *lblMessageBottom;
 @end

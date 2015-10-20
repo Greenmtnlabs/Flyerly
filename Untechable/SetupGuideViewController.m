@@ -39,6 +39,8 @@
     [_usernameHintText setText:NSLocalizedString(@"Enter Your Name", nil) ];
     [_btnLblPhoneNumber setTitle: NSLocalizedString(@"Phone Number", nil) forState:normal];
     [_phoneNumberHintText setText:NSLocalizedString(@"Enter Your Number", nil)];
+    [_lblMessageTop setText:NSLocalizedString(@"Enter your name and phone number. This will only be shared with selected contacts when you are away from technology.", nil)];
+    [_lblMessageBottom setText:NSLocalizedString(@"Technology is best when it brings people together. You're on your way to enjoying some untech time.", nil)];
     
 }
 
