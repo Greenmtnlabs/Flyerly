@@ -365,50 +365,59 @@
     
     [self storeScreenVarsInDic];
     
-    if(sender == self.btnFacebook){
+    // Checking internet connectivity and shows error message if not connected
+    if(!internetReachable.isReachable && !([UNT_ENVIRONMENT isEqualToString:TESTING])){
+    
+        [self showAlert:3];
+    
+    }else{
+    
+        if(sender == self.btnFacebook){
         
-        untechable.socialStatus = inputSetSocialStatus.text;
+            untechable.socialStatus = inputSetSocialStatus.text;
+            if ( [untechable.fbAuth isEqualToString:@""] ){
+                if ( [untechable.socialNetworksStatusModal.mFbAuth isEqualToString:@""] ) {
+                    [untechable.socialNetworksStatusModal loginFacebook:sender Controller:self];
+                }else{
+                    untechable.fbAuth = untechable.socialNetworksStatusModal.mFbAuth;
+                    untechable.fbAuthExpiryTs = untechable.socialNetworksStatusModal.mFbAuthExpiryTs;
+                    [self btnActivate:self.btnFacebook active:YES];
+                }
+            }else {
+                untechable.fbAuth = @"";
+                untechable.fbAuthExpiryTs = @"";
+                [self btnActivate:self.btnFacebook active:NO];
+            }
+            
+        }else if(sender == self.btnTwitter){
+            
+            if ( [untechable.twitterAuth isEqualToString:@""] || [untechable.twOAuthTokenSecret isEqualToString:@""] ){
+                if ( [untechable.socialNetworksStatusModal.mTwitterAuth isEqualToString:@""] || [untechable.socialNetworksStatusModal.mTwOAuthTokenSecret isEqualToString:@""] ){
+                    [untechable.socialNetworksStatusModal loginTwitter:sender Controller:self];
+                }else {
+                    untechable.twitterAuth = untechable.socialNetworksStatusModal.mTwitterAuth;
+                    untechable.twOAuthTokenSecret = untechable.socialNetworksStatusModal.mTwOAuthTokenSecret;
+                    [self btnActivate:self.btnTwitter active:YES];
+                }
+            }else {
+                untechable.twitterAuth = @"";
+                untechable.twOAuthTokenSecret = @"";
+                [self btnActivate:self.btnTwitter active:NO];
+            }
+
+        }else if(sender == self.btnLinkedin){
         
-
-        if ( [untechable.fbAuth isEqualToString:@""] ){
-            if ( [untechable.socialNetworksStatusModal.mFbAuth isEqualToString:@""] ) {
-                [untechable.socialNetworksStatusModal loginFacebook:sender Controller:self];
+            if ( [untechable.linkedinAuth isEqualToString:@""] ){
+                if ( [untechable.socialNetworksStatusModal.mLinkedinAuth isEqualToString:@""] ) {
+                    [untechable.socialNetworksStatusModal loginLinkedIn:sender Controller:self];
+                }else {
+                    untechable.linkedinAuth = untechable.socialNetworksStatusModal.mLinkedinAuth;
+                    [self btnActivate:self.btnLinkedin active:YES];
+                }
             }else {
-                untechable.fbAuth = untechable.socialNetworksStatusModal.mFbAuth;
-                untechable.fbAuthExpiryTs = untechable.socialNetworksStatusModal.mFbAuthExpiryTs;
-                [self btnActivate:self.btnFacebook active:YES];
+                untechable.linkedinAuth = @"";
+                [self btnActivate:self.btnLinkedin active:NO];
             }
-        }else {
-            untechable.fbAuth = @"";
-            untechable.fbAuthExpiryTs = @"";
-            [self btnActivate:self.btnFacebook active:NO];
-        }
-    }else if(sender == self.btnTwitter){
-        if ( [untechable.twitterAuth isEqualToString:@""] || [untechable.twOAuthTokenSecret isEqualToString:@""] ){
-            if ( [untechable.socialNetworksStatusModal.mTwitterAuth isEqualToString:@""] || [untechable.socialNetworksStatusModal.mTwOAuthTokenSecret isEqualToString:@""] ){
-                [untechable.socialNetworksStatusModal loginTwitter:sender Controller:self];
-            }else {
-                untechable.twitterAuth = untechable.socialNetworksStatusModal.mTwitterAuth;
-                untechable.twOAuthTokenSecret = untechable.socialNetworksStatusModal.mTwOAuthTokenSecret;
-                [self btnActivate:self.btnTwitter active:YES];
-            }
-        }else {
-            untechable.twitterAuth = @"";
-            untechable.twOAuthTokenSecret = @"";
-            [self btnActivate:self.btnTwitter active:NO];
-        }
-
-    }else if(sender == self.btnLinkedin){
-        if ( [untechable.linkedinAuth isEqualToString:@""] ){
-            if ( [untechable.socialNetworksStatusModal.mLinkedinAuth isEqualToString:@""] ) {
-                [untechable.socialNetworksStatusModal loginLinkedIn:sender Controller:self];
-            }else {
-                untechable.linkedinAuth = untechable.socialNetworksStatusModal.mLinkedinAuth;
-                [self btnActivate:self.btnLinkedin active:YES];
-            }
-        }else {
-            untechable.linkedinAuth = @"";
-            [self btnActivate:self.btnLinkedin active:NO];
         }
     }
 }
@@ -542,6 +551,7 @@
  */
 -(void)showAlert:(int)tag{
     
+    UIAlertView *alert;
     //Show products in alert
     if( tag == 1 ){
         NSMutableDictionary *prodDic = userPurchases.productArray[0];
@@ -555,7 +565,7 @@
                                 [prodDic objectForKey:@"packageprice"]];
         
         // Show alert before start of match to purchase our product
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchase Subscription"
+        alert = [[UIAlertView alloc] initWithTitle:@"Purchase Subscription"
                                                         message:@"You can purchase monthly and yearly subscription"
                                                        delegate:self
                                               cancelButtonTitle:@"Not now"
@@ -565,13 +575,23 @@
     }
     //Show create Untechable in free without sms/call, offer in alert
     else if( tag == 2 ){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Note"
+        alert = [[UIAlertView alloc] initWithTitle:@"Note"
                                                         message:@"App will not allow Call/SMS to your selected contact without premium subscription but Social Media Status and email we will be sent to your contacts"
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
-                                              otherButtonTitles: @"Ok", nil];
+                                              otherButtonTitles: OK, nil];
         alert.tag = tag;
         [alert show];
+    } else if (tag == 3){
+        
+        alert = [[UIAlertView alloc] initWithTitle:nil
+                                           message:@"No internet connection. Please try again later."
+                                          delegate:self
+                                 cancelButtonTitle:nil
+                                 otherButtonTitles: OK, nil];
+        alert.tag = tag;
+        [alert show];
+    
     }
     
 }

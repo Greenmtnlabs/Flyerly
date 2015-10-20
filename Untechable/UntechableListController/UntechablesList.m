@@ -612,7 +612,7 @@
     }else if(section == sectionUpcomingUntech){
         label.text = NSLocalizedString(@"Future time away:", nil);
     } else if (section == sectionPastUntech){
-        label.text = NSLocalizedString(@"Past Untechs:", nil);
+        label.text = NSLocalizedString(@"Past time away:", nil);
     }
     
     label.textColor = DEF_GRAY;
@@ -690,7 +690,7 @@
     } else if ( section == sectionUpcomingUntech ){
         sectionHeader = NSLocalizedString(@"Future time away:", nil);
     }else if ( section == sectionPastUntech ){
-        sectionHeader = NSLocalizedString(@"Past Untechs:", nil);
+        sectionHeader = NSLocalizedString(@"Past time away:", nil);
     } 
     return sectionHeader;
 }
