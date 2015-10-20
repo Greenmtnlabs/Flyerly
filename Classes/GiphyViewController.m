@@ -17,8 +17,11 @@
 @implementation GiphyViewController{
     UIView *giphyBgsView;
     NSArray *giphyData;
-    BOOL giphyLoading;
+    BOOL reqGiphyApiInProccess;
+    BOOL giphyDownloading;
     UILabel *giphyStatus;
+    
+    
 }
 
 
@@ -26,7 +29,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadGiphyImages];
+
+    [self.view bringSubviewToFront:_searchTextField];
+    
+    // Navigation buttons
+    // BackButton
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    backButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+    backButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    [self.navigationItem setLeftBarButtonItem:leftBarButton];
+    
+    // Set the title view.
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"giphyLogo1.jpg"]];
+
+    
+    [self loadGiphyImages:@"http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC"];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -38,7 +58,18 @@
 /**
  * Load giphy images from internet
  */
--(void)loadGiphyImages{
+-(void)loadGiphyImages:(NSString *)urlStr{
+    
+    //when request is in process
+    if( reqGiphyApiInProccess ){
+        return;
+    } else{
+        reqGiphyApiInProccess = YES;
+    }
+    
+    //showing the laoding indicator on the top right corner
+    [self showLoadingIndicator];
+    
     giphyBgsView  = [[UIView alloc] initWithFrame:CGRectMake(0,0,layerScrollView.frame.size.width, layerScrollView.frame.size.height)];
     
     giphyBgsView.backgroundColor = [UIColor yellowColor];
@@ -55,7 +86,8 @@
     
     //send request to giphy api
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        reqGiphyApiInProccess = NO;
         giphyStatus.text = @"";
         NSLog(@"JSON: %@", responseObject);
         
@@ -64,12 +96,11 @@
         if( giphyData != nil && giphyData.count > 0 ){
             int heightHandlerForMainView = 0;
             int i=0, row = 0, column = 0;
-            int showInRow = 2, defX = 10, defY = 10 , defW = 182, defH = 182;
+            int showInRow = 2, defX = 17, defY = 17 , defW = 162, defH = 162;
             if( IS_IPHONE_4 ){
-                showInRow = 9999;//we will have only one row in iphone 4
-                defX = 10, defY = 5 , defW = 50, defH = 50;
+                showInRow = 2, defX = 14, defY = 14 , defW = 140, defH = 140;
             } else if( IS_IPHONE_5 ){
-                showInRow = 2, defX = 14, defY = 14 , defW = 140, defH = 140; heightHandlerForMainView = 20;
+                showInRow = 2, defX = 14, defY = 14 , defW = 140, defH = 140;
             } else if( IS_IPHONE_6 ){
                 showInRow = 2, defX = 17, defY = 17 , defW = 162, defH = 162;
             } else if( IS_IPHONE_6_PLUS ){
@@ -138,10 +169,10 @@
 -(void)selectGiphy:(id)sender{
     
     //when a process in que dont start other
-    if( giphyLoading == YES ){
+    if( giphyDownloading == YES ){
         return;
     }
-    giphyLoading = YES;
+    giphyDownloading = YES;
     
     int tag = (int)[(UIGestureRecognizer *)sender view].tag;
     NSDictionary *gif = giphyData[tag];
@@ -162,7 +193,7 @@
             [flyer setOriginalVideoUrl:@"Template/template.mov"];
             [flyer setFlyerTypeVideoWithSize:width height:height videoSoure:@"giphy"];
             
-            giphyLoading = NO; //giphy has been loaded in video player
+            giphyDownloading = NO; //giphy has been loaded in video player
             giphyData = nil;
             giphyStatus = nil;
             giphyBgsView = nil;
@@ -176,8 +207,48 @@
         }];
         
     }] resume];
-    
 }
 
+#pragma mark - Button Handlers
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    // hiding the keyboard
+    [searchBar resignFirstResponder];
+    
+    [self loadGiphyImages:@"http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC"];
+}
 
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller
+shouldReloadTableForSearchString:(NSString *)searchString {
+    return YES;
+}
+
+/**
+ * Show a loding indicator in the right bar button.
+ */
+- (void)showLoadingIndicator {
+    // Remember the right bar button item.
+    rightBarButtonItem = self.navigationItem.rightBarButtonItem;
+    
+    UIActivityIndicatorView *uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
+    uiBusy.hidesWhenStopped = YES;
+    [uiBusy startAnimating];
+    
+    UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithCustomView:uiBusy];
+    [self.navigationItem setRightBarButtonItem:btn animated:NO];
+}
+
+/**
+ * Hide previously shown indicator.
+ */
+- (void)hideLoadingIndicator {
+    [self.navigationItem setRightBarButtonItem:rightBarButtonItem animated:NO];
+}
+
+/**
+ * Cancel and go back.
+ */
+- (void)goBack {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 @end

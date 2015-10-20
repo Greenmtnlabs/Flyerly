@@ -193,62 +193,62 @@
                     <rect key="frame" x="0.0" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Library"/>
-                    <state key="normal" backgroundImage="addbg_library.png">
+                    <state key="normal" backgroundImage="5tab_1_library.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="disabled" image="addbg_library_selected.png"/>
-                    <state key="selected" backgroundImage="addbg_library_selected.png"/>
+                    <state key="selected" backgroundImage="5tab_1_library_selected.png"/>
                     <connections>
                         <action selector="setlibBackgroundTabAction:" destination="-1" eventType="touchUpInside" id="9Ej-0F-waq"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="iTu-ga-azu">
-                    <rect key="frame" x="128" y="0.0" width="64" height="45"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="Library"/>
-                    <state key="normal" backgroundImage="addbg_library.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="disabled" image="addbg_library_selected.png"/>
-                    <state key="selected" backgroundImage="addbg_library_selected.png"/>
-                    <connections>
-                        <action selector="setlibBackgroundTabAction:" destination="-1" eventType="touchUpInside" id="bre-ng-ycb"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="TUU-ew-jcU">
                     <rect key="frame" x="64" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="TakePhoto"/>
-                    <state key="normal" backgroundImage="07_camera.png">
+                    <state key="normal" backgroundImage="5tab_2_camera.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" backgroundImage="addbg_takephoto_selected.png"/>
+                    <state key="selected" backgroundImage="5tab_2_camera_selected.png"/>
                     <connections>
                         <action selector="setlibBackgroundTabAction:" destination="-1" eventType="touchUpInside" id="C5c-5U-w3S"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="rR0-dC-sak">
-                    <rect key="frame" x="256" y="0.0" width="64" height="45"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="iTu-ga-azu">
+                    <rect key="frame" x="128" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="Border"/>
-                    <state key="normal" backgroundImage="addbg_border.png">
+                    <accessibility key="accessibilityConfiguration" label="Library"/>
+                    <state key="normal" backgroundImage="5tab_3_giphy.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" backgroundImage="addbg_border_selected.png"/>
+                    <state key="disabled" image="addbg_library_selected.png"/>
+                    <state key="selected" backgroundImage="5tab_3_giphy_selected.png"/>
                     <connections>
-                        <action selector="setlibBackgroundTabAction:" destination="-1" eventType="touchUpInside" id="fcs-Ef-1pq"/>
+                        <action selector="setlibBackgroundTabAction:" destination="-1" eventType="touchUpInside" id="bre-ng-ycb"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="t0N-7F-yOw">
                     <rect key="frame" x="192" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="CameraRoll"/>
-                    <state key="normal" backgroundImage="07_roll.png">
+                    <state key="normal" backgroundImage="5tab_4_gallery.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" backgroundImage="addbg_cameraroll_selected.png"/>
+                    <state key="selected" backgroundImage="5tab_4_gallery_selected.png"/>
                     <connections>
                         <action selector="setlibBackgroundTabAction:" destination="-1" eventType="touchUpInside" id="523-Qy-Wyn"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="rR0-dC-sak">
+                    <rect key="frame" x="256" y="0.0" width="64" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="Border"/>
+                    <state key="normal" backgroundImage="5tab_5_border.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" backgroundImage="5tab_5_border_selected.png"/>
+                    <connections>
+                        <action selector="setlibBackgroundTabAction:" destination="-1" eventType="touchUpInside" id="fcs-Ef-1pq"/>
                     </connections>
                 </button>
             </subviews>
@@ -612,12 +612,17 @@
         <image name="07_roll_selected.png" width="80" height="45"/>
         <image name="07_width.png" width="80" height="45"/>
         <image name="07_width_selected.png" width="80" height="45"/>
-        <image name="addbg_border.png" width="80" height="45"/>
-        <image name="addbg_border_selected.png" width="80" height="45"/>
-        <image name="addbg_cameraroll_selected.png" width="80" height="45"/>
-        <image name="addbg_library.png" width="80" height="45"/>
+        <image name="5tab_1_library.png" width="64" height="45"/>
+        <image name="5tab_1_library_selected.png" width="64" height="45"/>
+        <image name="5tab_2_camera.png" width="64" height="45"/>
+        <image name="5tab_2_camera_selected.png" width="64" height="45"/>
+        <image name="5tab_3_giphy.png" width="64" height="45"/>
+        <image name="5tab_3_giphy_selected.png" width="64" height="45"/>
+        <image name="5tab_4_gallery.png" width="64" height="45"/>
+        <image name="5tab_4_gallery_selected.png" width="64" height="45"/>
+        <image name="5tab_5_border.png" width="64" height="45"/>
+        <image name="5tab_5_border_selected.png" width="64" height="45"/>
         <image name="addbg_library_selected.png" width="80" height="45"/>
-        <image name="addbg_takephoto_selected.png" width="80" height="45"/>
         <image name="art_tab.png" width="64" height="45"/>
         <image name="bg_tab.png" width="64" height="45"/>
         <image name="blue_bar.png" width="320" height="45"/>
