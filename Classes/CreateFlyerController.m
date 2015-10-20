@@ -171,6 +171,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     }
     
     if( tasksAfterGiphySelect != nil ){
+        [self callAddMoreLayers];
         if ([tasksAfterGiphySelect isEqual:@"play"] && player != nil ) {
             [player play];
             [self hidePlayerControlls:NO];
