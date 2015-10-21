@@ -46,6 +46,7 @@
 @implementation AddUntechableController
 
 @synthesize totalUntechables,callReset,untechable,openPickerButton;
+@synthesize lblQoute;
 
 
 #pragma mark -  Default functions
@@ -446,6 +447,7 @@
         [_picker setFrame:CGRectMake(0, 510, 0, 500)];
     }
     
+    lblQoute.hidden = showHide;
     float alpha = (showHide) ? 1.0 : 0.0;
     [self addUpperBorder];
     _picker.alpha = alpha;
@@ -483,9 +485,8 @@
 #pragma mark -  UI functions
 -(void)updateUI{
     
-    [_btnLblWwud setTitle:NSLocalizedString(@"Going Untech and..", nil) forState:normal];
+    [_btnLblWwud setTitle:NSLocalizedString(@"This is what I will be doing when I untech...", nil) forState:normal];
     [_btnLblWwud setTitleColor:DEF_GRAY forState:UIControlStateNormal];
-    _btnLblWwud.titleLabel.font = [UIFont fontWithName:APP_FONT size:25];
  
     _inputSpendingTimeText.text = untechable.spendingTimeTxt;
     if ( [untechable.spendingTimeTxt isEqualToString:@""] ){
@@ -495,18 +496,16 @@
     }
     _inputSpendingTimeText.font = [UIFont fontWithName:APP_FONT size:18];
     
-    [_btnLblStartTime setTitle:NSLocalizedString(@"Start", nil) forState:normal];
+    [_btnLblStartTime setTitle:NSLocalizedString(@"Start (when will you begin your untech time?)", nil) forState:normal];
     [_btnLblStartTime setTitleColor:DEF_GRAY forState:UIControlStateNormal];
-    _btnLblStartTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:25];
     
     [_btnStartTime setTitleColor:DEF_GREEN forState:UIControlStateNormal];
     _btnStartTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
     [_btnStartTime setTitle:[untechable.commonFunctions convertTimestampToAppDate:untechable.startDate] forState:UIControlStateNormal];
     
     
-    [_btnLblEndTime setTitle:NSLocalizedString(@"End", nil) forState:normal];
+    [_btnLblEndTime setTitle:NSLocalizedString(@"End (this is when you come crawling back to technology)", nil) forState:normal];
     [_btnLblEndTime setTitleColor:DEF_GRAY forState:UIControlStateNormal];
-    _btnLblEndTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:25];
     
     [_btnEndTime setTitleColor:DEF_GREEN forState:UIControlStateNormal];
     _btnEndTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
@@ -692,6 +691,21 @@
 - (IBAction)openPicker:(id)sender {
     
     [self.view addSubview:_spendingTimeTextPicker];
+}
+
+#pragma mark -  Localization Functions
+
+/*
+ * Method to apply localization
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+-(void)applyLocalization{
+    lblQoute.text = NSLocalizedString(@"Take this untech time and enjoy to the fullest the people, experiences and life around you.", nil);
+    
+    
 }
 
 @end

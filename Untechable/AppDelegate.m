@@ -90,7 +90,7 @@
     }
     
     int lastIndex = (int)customSpendingTextArray.count - 1;
-    [customSpendingTextArray replaceObjectAtIndex: lastIndex withObject:NSLocalizedString(@"Custom", nil)];
+    [customSpendingTextArray replaceObjectAtIndex: lastIndex withObject:NSLocalizedString(@"custom", nil)];
     
     [[NSUserDefaults standardUserDefaults] setObject:customSpendingTextArray forKey:@"cutomSpendingTimeTextAry"];
     [[NSUserDefaults standardUserDefaults] synchronize];

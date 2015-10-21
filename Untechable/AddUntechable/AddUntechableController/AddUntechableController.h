@@ -25,6 +25,7 @@
 
 -(void)setDefaultModel;
 
+@property (strong, nonatomic) IBOutlet UILabel *lblQoute;
 @property (nonatomic,strong)  Untechable *untechable;
 
 @property int totalUntechables;
