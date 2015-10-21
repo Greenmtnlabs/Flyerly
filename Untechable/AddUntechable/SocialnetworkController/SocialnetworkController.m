@@ -92,18 +92,27 @@
 }
 
 
+/*
+ * Method to apply localization on strings
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+
 -(void)applyLocalization{
     
+    // default message if there is no text
     defaultStatus = NSLocalizedString(@"Enter default status", nil);
   
+    // label to show message to user
     showMsgToUser = NSLocalizedString(@"A message similar to the one you see above will be posted to the networks you select when your untech time starts.", nil);
     
+    // label to show tip
     lblUntechTip.text = NSLocalizedString(@"Untech Tip: 'Untech Now' is for setting quick moments away from technology. 'Untech Custom' is for setting a more specific long-term period.", nil);
     
+    // label to show message to user
     lblMessage.text = NSLocalizedString(@"Choose the networks you would like to inform every time you are untech. These will be pre-selected for future Untech Now moments.", nil);
-    
-
-
 }
 
 // Custom functions
