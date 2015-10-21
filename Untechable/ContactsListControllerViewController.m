@@ -46,8 +46,7 @@
     [searchTextField resignFirstResponder];
 
     //Hock tap gesture, when user tap on selectContactLable then open keyboard for search contact field
-    UITapGestureRecognizer *tapGesture =
-    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSearchContactKeyBoard)];
+    UITapGestureRecognizer *tapGesture =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSearchContactKeyBoard)];
 
 }
 
@@ -216,21 +215,10 @@
             [self showEmailSetupScreen:NO]; //calledFromSetupScreen is NO
         }else {
             
-//            SocialnetworkController *socialnetwork;
-//            socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
-//            socialnetwork.untechable = untechable;
-//            [self.navigationController pushViewController:socialnetwork animated:YES];
-            
-            SocialnetworkController *viewControllerToAdd = [[SocialnetworkController alloc] initWithNibName:@"SocialnetworkController" bundle:nil];
-            
-            viewControllerToAdd.untechable = untechable;
-            
-            [viewControllerToAdd willMoveToParentViewController:self];
-            [self.viewForShareScreen addSubview:viewControllerToAdd.view];
-            [self addChildViewController:viewControllerToAdd];
-            
-            [viewControllerToAdd didMoveToParentViewController:self];
-
+            SocialnetworkController *socialnetwork;
+            socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
+            socialnetwork.untechable = untechable;
+            [self.navigationController pushViewController:socialnetwork animated:YES];
         }
     }
      //hides the keyboard when navigating to the next views
