@@ -131,9 +131,12 @@
 "You must specify what you'll be doing with your time away from technology before proceeding." = "Debe especificar lo que va a hacer con su tiempo lejos de la tecnología antes de proceder.";
 "NOW" = "AHORA";
 "Never" = "Nunca";
-"Start" = "Empezar";
-"End" = "Fin";
+
 "No End Date" = "Sin fecha de finalización";
+
+"Start (when will you begin your untech time?)" = "Empezar (cuándo va a comenzar su tiempo untech?)";
+"End (this is when you come crawling back to technology)" = "Fin (esto es cuando usted viene arrastrándose de nuevo a la tecnología)";
+
 
 // ThankyouController
 "You will be untechable from" = "Usted será untechable de";

@@ -135,9 +135,10 @@
 "You must specify what you'll be doing with your time away from technology before proceeding." = "You must specify what you'll be doing with your time away from technology before proceeding.";
 "NOW" = "NOW";
 "Never" = "Never";
-"Start" = "Start";
-"End" = "End";
 "No End Date" = "No End Date";
+
+"Start (when will you begin your untech time?)" = "Start (when will you begin your untech time?)";
+"End (this is when you come crawling back to technology)" = "End (this is when you come crawling back to technology)";
 
 // ThankyouController
 "You will be untechable from" = "You will be untechable from";
