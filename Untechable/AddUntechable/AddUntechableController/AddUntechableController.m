@@ -483,7 +483,7 @@
 #pragma mark -  UI functions
 -(void)updateUI{
     
-    [_btnLblWwud setTitle:NSLocalizedString(@"Going Untech and..", nil) forState:normal];
+    [_btnLblWwud setTitle:NSLocalizedString(@"This is what I will be doing when I untech...", nil) forState:normal];
     [_btnLblWwud setTitleColor:DEF_GRAY forState:UIControlStateNormal];
     _btnLblWwud.titleLabel.font = [UIFont fontWithName:APP_FONT size:25];
  

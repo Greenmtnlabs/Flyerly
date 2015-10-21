@@ -124,7 +124,7 @@
 "Untech Now" = "Untech Ahora";
 
 // AddUntechableController
-"Going Untech and.." = "Yendo Untech y..";
+"This is what I will be doing when I untech..." = "Esto es lo que voy a hacer cuando me untech ...";
 "Invalid Dates" = "Fechas no válidas";
 "End date should be greater than start date." = "Fecha de finalización debe ser mayor que la fecha de inicio.";
 "What are you going Untech for?" = "¿Qué vas Untech buscas?";
