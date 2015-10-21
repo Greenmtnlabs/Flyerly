@@ -93,7 +93,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" adjustsFontSizeToFit="NO" id="npd-0X-r1t">
-                    <rect key="frame" x="10" y="404" width="300" height="68"/>
+                    <rect key="frame" x="10" y="408" width="300" height="68"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <string key="text">Untech Tip: 'Untech Now' is for setting quick moments away from technology. 'Untech Custom' is for setting a more specific long-term period.</string>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
