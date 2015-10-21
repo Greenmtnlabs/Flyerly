@@ -87,15 +87,15 @@
         if( giphyData != nil && giphyData.count > 0 ){
             int heightHandlerForMainView = 0;
             int i=0, row = 0, column = 0;
-            int showInRow = 2, defX = 17, defY = 17 , defW = 162, defH = 162;
+            int showInRow = 2, defX = 16, defY = 16 , defW = 182, defH = 182;//414 full width
             if( IS_IPHONE_4 ){
-                showInRow = 2, defX = 14, defY = 14 , defW = 140, defH = 140;
+                showInRow = 2, defX = 13, defY = 13 , defW = 141, defH = 141;//320 full width
             } else if( IS_IPHONE_5 ){
-                showInRow = 2, defX = 14, defY = 14 , defW = 140, defH = 140;
+                showInRow = 2, defX = 13, defY = 13 , defW = 141, defH = 141;//320 full width
             } else if( IS_IPHONE_6 ){
-                showInRow = 2, defX = 17, defY = 17 , defW = 162, defH = 162;
+                showInRow = 2, defX = 17, defY = 17 , defW = 162, defH = 162;//375 full width
             } else if( IS_IPHONE_6_PLUS ){
-                showInRow = 2, defX = 12, defY = 12 , defW = 182, defH = 182;
+                showInRow = 2, defX = 16, defY = 16 , defW = 182, defH = 182;//414 full width
             }
             int x = 0, y = 0;
             for(NSDictionary *gif in giphyData ){
