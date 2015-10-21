@@ -216,10 +216,21 @@
             [self showEmailSetupScreen:NO]; //calledFromSetupScreen is NO
         }else {
             
-            SocialnetworkController *socialnetwork;
-            socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
-            socialnetwork.untechable = untechable;
-            [self.navigationController pushViewController:socialnetwork animated:YES];
+//            SocialnetworkController *socialnetwork;
+//            socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
+//            socialnetwork.untechable = untechable;
+//            [self.navigationController pushViewController:socialnetwork animated:YES];
+            
+            SocialnetworkController *viewControllerToAdd = [[SocialnetworkController alloc] initWithNibName:@"SocialnetworkController" bundle:nil];
+            
+            viewControllerToAdd.untechable = untechable;
+            
+            [viewControllerToAdd willMoveToParentViewController:self];
+            [self.viewForShareScreen addSubview:viewControllerToAdd.view];
+            [self addChildViewController:viewControllerToAdd];
+            
+            [viewControllerToAdd didMoveToParentViewController:self];
+
         }
     }
      //hides the keyboard when navigating to the next views
