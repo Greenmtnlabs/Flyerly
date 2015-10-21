@@ -92,7 +92,6 @@
 "Untech Now Setup!" = "Configuración Untech Ahora!";
 "Using these settings, in the future you can easily take a break from technology with the tap of the 'Untech Now' button from the main screen. Namaste!" = "El uso de estos ajustes, en el futuro, usted puede fácilmente tomar un descanso de la tecnología con el toque del botón 'Untech ahora' desde la pantalla principal. Namaste!";
 
-"The above message will be posted on %@ to the networks you selected below" = "El mensaje anterior se publicará en % @ a las redes que ha seleccionado a continuación";
 
 "%i day" = "%i día";
 "%i days" = "%i días";
@@ -109,7 +108,7 @@
 "1 Day" = "1 Día";
 "2 Days" = "2 Días";
 
-"#Untech for %@ %@ " = "#Untech para %@ %@ ";
+"#untech for %@ and %@" = "#untech para% @ y% @";
 "Unable to delete, please try agin later!" = "No se puede eliminar, por favor intente más tarde volveré!";
 
 "No internet connection" = "Sin conexión a Internet";
@@ -155,3 +154,10 @@
 // Socialnetwork
 "Enter default status" = "Introduzca estado por defecto";
 "Close" = "Cerrar";
+
+"Choose the networks you would like to inform every time you are untech. These will be pre-selected for future Untech Now moments." = "Elija las redes que le gustaría informar cada vez que están untech. Estos serán pre-seleccionados para futuras Untech Ahora momentos.";
+
+"A message similar to the one you see above will be posted to the networks you select when your untech time starts." = "Un mensaje similar al que ves arriba se envió a las redes que seleccione al iniciar su tiempo untech.";
+
+"Untech Tip: 'Untech Now' is for setting quick moments away from technology. 'Untech Custom' is for setting a more specific long-term period." = "Sugerencia Untech: 'Untech ahora' sirve para configurar momentos rápidos lejos de la tecnología. 'Untech personalizado' es para establecer un período más específica a largo plazo.";
+

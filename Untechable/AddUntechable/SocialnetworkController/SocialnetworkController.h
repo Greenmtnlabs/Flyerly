@@ -31,6 +31,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnTwitter;
 
 @property (strong, nonatomic) IBOutlet UIButton *btnLinkedin;
+@property (strong, nonatomic) IBOutlet UILabel *lblUntechTip;
+@property (strong, nonatomic) IBOutlet UILabel *lblMessage;
 
 @property (nonatomic, strong) BSKeyboardControls *keyboardControls;
 

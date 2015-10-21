@@ -289,7 +289,7 @@
         
         if( goToNext ) {
             NSString *getDaysOrHours = [untechable calculateHoursDays:untechable.startDate  endTime: untechable.endDate];
-            untechable.socialStatus = [NSString stringWithFormat:NSLocalizedString(@"#Untech for %@ %@ ", nil), getDaysOrHours,untechable.spendingTimeTxt];
+            untechable.socialStatus = [NSString stringWithFormat:NSLocalizedString(@"#untech for %@ and %@ ", nil), getDaysOrHours,untechable.spendingTimeTxt];
             ContactsListControllerViewController *listController = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
             listController.untechable = untechable;
             [self.navigationController pushViewController:listController animated:YES];
