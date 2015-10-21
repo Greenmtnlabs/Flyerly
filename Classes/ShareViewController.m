@@ -871,7 +871,7 @@ UIAlertView *saveCurrentFlyerAlert;
         [self.flyer setEmailStatus:1];
         [Flurry logEvent:@"Shared Email"];
 
-    } else if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
+    } else if ([sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
         
         smsButton.enabled = YES;
         [self.flyer setSmsStatus:1];

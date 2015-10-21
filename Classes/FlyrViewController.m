@@ -17,6 +17,7 @@
 @synthesize searchTextField;
 @synthesize flyerPaths;
 @synthesize flyer, signInAlert;
+@synthesize showUnsharedFlyers;
 
 id lastShareBtnSender;
 
@@ -62,6 +63,13 @@ id lastShareBtnSender;
     //set Navigation
     self.navigationController.navigationBarHidden=NO;
     self.navigationItem.leftItemsSupplementBackButton = YES;
+    
+    // Setting Navigation Heneader
+    if(showUnsharedFlyers){
+        [self setNavigationTitle:@"SAVED"];
+    }else{
+        [self setNavigationTitle:@"SHARED"];
+    }
     
     // Set left bar items
     [self.navigationItem setLeftBarButtonItems: [self leftBarItems]];
@@ -243,15 +251,7 @@ id lastShareBtnSender;
 
 
 -(NSArray *)rightBarItems{
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:TITLE_FONT size:18];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
-    label.text = @"SAVED";
-    self.navigationItem.titleView = label;
-
+   
     // Create Button
     createButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [createButton addTarget:self action:@selector(createFlyer:) forControlEvents:UIControlEventTouchUpInside];
@@ -262,8 +262,6 @@ id lastShareBtnSender;
     return [NSMutableArray arrayWithObjects:rightUndoBarButton,nil];
 }
 
-
-
 /*
  * Here we get All Flyers Directories
  * return
@@ -271,18 +269,50 @@ id lastShareBtnSender;
  */
 -(NSMutableArray *)getFlyersPaths{
     
-    NSMutableArray *sortedList = [ Flyer recentFlyerPreview:0];
+    NSMutableArray *allFlyers = [ Flyer recentFlyerPreview:0];
     
-    for(int i = 0 ; i < [sortedList count];i++) {
-        
+    for(int i = 0 ; i < [allFlyers count];i++) {
         //Here we remove File Name from Path
-        NSString *pathWithoutFileName = [[sortedList objectAtIndex:i]
-                                         stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE] withString:@""];
-        [sortedList replaceObjectAtIndex:i withObject:pathWithoutFileName];
+        NSString *pathWithoutFileName = [[allFlyers objectAtIndex:i]
+                                         stringByReplacingOccurrencesOfString:[NSString
+                                                                               stringWithFormat:@"/flyer.%@",IMAGETYPE] withString:@""];
+        [allFlyers replaceObjectAtIndex:i withObject:pathWithoutFileName];
     }
     
+    NSMutableArray *unsharedFlyer = [[NSMutableArray alloc] initWithArray:allFlyers];
+    // Finding unshared flyers
+    for (int i =0 ; i < [allFlyers count] ; i++)
+    {
+        Flyer *flyr = [[Flyer alloc] initWithPath:[allFlyers objectAtIndex:i] setDirectory:NO];
+        
+        for(int j =0 ; j < [flyr.socialArray count] ; j++){
+            if([flyr.socialArray[j] isEqualToString:@"1"]){
+                [unsharedFlyer removeObjectAtIndex:i];
+                break;
+            }
+        }
+    }
+   
+    if(showUnsharedFlyers){ // unshared flyers
+        return unsharedFlyer;
+    } else { //shared flyers
+        [allFlyers removeObjectsInArray:unsharedFlyer];
+        return allFlyers;
+    }
+    return unsharedFlyer;
+}
+
+/*
+ * Method to set navigation title
+ * @params:
+ *      title: NSString
+ * @return:
+ *      void
+ */
+-(void)setNavigationTitle: (NSString *) headerTitle{
     
-    return sortedList;
+    self.title = headerTitle;
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]};
 }
 
 
