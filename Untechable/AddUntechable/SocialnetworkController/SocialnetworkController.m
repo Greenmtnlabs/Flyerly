@@ -24,6 +24,7 @@
 @interface SocialnetworkController(){
     UserPurchases *userPurchases;
     NSString *defaultStatus;
+    NSString *showMsgToUser;
     
 }
 @end
@@ -31,6 +32,7 @@
 @implementation SocialnetworkController
 
 @synthesize untechable,comingFromContactsListScreen,char_Limit,inputSetSocialStatus,btnFacebook,btnTwitter,btnLinkedin,keyboardControls;
+@synthesize lblMessage, lblUntechTip;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -44,7 +46,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
  
-    defaultStatus = NSLocalizedString(@"Enter default status", nil);
+   
     userPurchases = [UserPurchases getInstance];
     
     [self setNavigationDefaults];
@@ -54,10 +56,8 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd MMMM yyyy, hh:mm a"];
   
-    //showing start date on fields
-    NSDate *startDate  =   [untechable.commonFunctions convertTimestampToNSDate:untechable.startDate];
-    NSString *newDateStr    =   [dateFormat stringFromDate:startDate];
-    NSString *showMsgToUser = NSLocalizedString(@"A message similar to the one you see above will be posted to the networks you select when your untech time starts.", nil);
+    // to aplly localization on strings
+    [self applyLocalization];
     
     _showMessageBeforeSending.text = showMsgToUser;
     _showMessageBeforeSending.textColor = DEF_GRAY;
@@ -89,6 +89,21 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return NO;
+}
+
+
+-(void)applyLocalization{
+    
+    defaultStatus = NSLocalizedString(@"Enter default status", nil);
+  
+    showMsgToUser = NSLocalizedString(@"A message similar to the one you see above will be posted to the networks you select when your untech time starts.", nil);
+    
+    lblUntechTip.text = NSLocalizedString(@"Untech Tip: 'Untech Now' is for setting quick moments away from technology. 'Untech Custom' is for setting a more specific long-term period.", nil);
+    
+    lblMessage.text = NSLocalizedString(@"Choose the networks you would like to inform every time you are untech. These will be pre-selected for future Untech Now moments.", nil);
+    
+
+
 }
 
 // Custom functions

@@ -12,6 +12,8 @@
                 <outlet property="btnTwitter" destination="dbk-O8-ECJ" id="jD6-ec-urO"/>
                 <outlet property="char_Limit" destination="hI9-s2-bZR" id="I2q-pS-jJ5"/>
                 <outlet property="inputSetSocialStatus" destination="DZM-9F-lo2" id="sgg-FX-Ovf"/>
+                <outlet property="lblMessage" destination="uAv-kE-pcE" id="8vo-s9-Jsz"/>
+                <outlet property="lblUntechTip" destination="npd-0X-r1t" id="bft-Wj-oR1"/>
                 <outlet property="showMessageBeforeSending" destination="p0q-Er-ztt" id="UxK-jQ-QgW"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
