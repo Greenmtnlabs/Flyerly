@@ -16,6 +16,7 @@
                 <outlet property="char_Limit" destination="kOe-EX-0y4" id="NW3-MK-f1Y"/>
                 <outlet property="inputSpendingTimeText" destination="l1K-xt-eaJ" id="oCG-mT-uAb"/>
                 <outlet property="lblNoEndDate" destination="O1D-ef-E0V" id="2If-Ch-IkZ"/>
+                <outlet property="lblQoute" destination="sSK-O9-2mv" id="gPs-TN-pSP"/>
                 <outlet property="openPickerButton" destination="dk8-lO-eoD" id="CC6-BW-Ydi"/>
                 <outlet property="picker" destination="UgT-lF-nUB" id="0Lu-c7-Rgo"/>
                 <outlet property="pickerCloseBtn" destination="4WI-fT-DHK" id="dsW-4t-w1M"/>
@@ -115,7 +116,7 @@
                     </connections>
                 </button>
                 <datePicker alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" id="UgT-lF-nUB" userLabel="Picker - dateTimePicker">
-                    <rect key="frame" x="0.0" y="395" width="320" height="162"/>
+                    <rect key="frame" x="1" y="395" width="320" height="162"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <date key="date" timeIntervalSinceReferenceDate="433258804.56971502">
                         <!--2014-09-24 13:40:04 +0000-->
@@ -131,6 +132,13 @@
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Take this untech time and enjoy to the fullest the people, experiences and life around you." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sSK-O9-2mv">
+                    <rect key="frame" x="10" y="492" width="300" height="64"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.25882352939999997" green="0.96862745100000003" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dk8-lO-eoD">

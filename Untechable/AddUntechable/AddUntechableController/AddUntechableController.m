@@ -46,6 +46,7 @@
 @implementation AddUntechableController
 
 @synthesize totalUntechables,callReset,untechable,openPickerButton;
+@synthesize lblQoute;
 
 
 #pragma mark -  Default functions
@@ -446,6 +447,7 @@
         [_picker setFrame:CGRectMake(0, 510, 0, 500)];
     }
     
+    lblQoute.hidden = showHide;
     float alpha = (showHide) ? 1.0 : 0.0;
     [self addUpperBorder];
     _picker.alpha = alpha;
@@ -689,6 +691,21 @@
 - (IBAction)openPicker:(id)sender {
     
     [self.view addSubview:_spendingTimeTextPicker];
+}
+
+#pragma mark -  Localization Functions
+
+/*
+ * Method to apply localization
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+-(void)applyLocalization{
+    lblQoute.text = NSLocalizedString(@"Take this untech time and enjoy to the fullest the people, experiences and life around you.", nil);
+    
+    
 }
 
 @end
