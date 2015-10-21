@@ -589,22 +589,21 @@
                                 [prodDic objectForKey:@"packageprice"]];
         
         // Show alert before start of match to purchase our product
-        alert = [[UIAlertView alloc] initWithTitle:@"Purchase Subscription"
-                                                        message:@"You can purchase monthly and yearly subscription"
+        alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Purchase Subscription", nil)
+                                                        message:NSLocalizedString(@"You can purchase the SMS/phone option to send unlimited text and automated calls to your contacts.", nil)
                                                        delegate:self
-                                              cancelButtonTitle:@"Not now"
-                                              otherButtonTitles: monthlySubs, yearlySubs , @"Restore", nil];
+                                              cancelButtonTitle:NSLocalizedString(@"Not now", nil)
+                                              otherButtonTitles: monthlySubs, yearlySubs ,NSLocalizedString(@"Restore", nil), nil];
         alert.tag = tag;
         [alert show];
     }
     //Show create Untechable in free without sms/call, offer in alert
     else if( tag == 2 ){
-        alert = [[UIAlertView alloc] initWithTitle:@"Note"
-                                                        message:@"App will not allow Call/SMS to your selected contact without premium subscription but Social Media Status and email we will be sent to your contacts"
-                                                       delegate:self
-                                              cancelButtonTitle:@"Cancel"
-                                              otherButtonTitles: OK, nil];
-        alert.tag = tag;
+        alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Untech Call/SMS", nil)
+                                           message:NSLocalizedString(@"With the standard package, Untech will only have social media and email status features enables.  If you choose to add premium untech features, select in settings screen.", nil)
+                                          delegate:self
+                                 cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                 otherButtonTitles: OK, nil];        alert.tag = tag;
         [alert show];
     } else if (tag == 3){
         

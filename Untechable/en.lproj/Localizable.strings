@@ -168,3 +168,12 @@
 "A message similar to the one you see above will be posted to the networks you select when your untech time starts." = "A message similar to the one you see above will be posted to the networks you select when your untech time starts.";
 
 "Untech Tip: 'Untech Now' is for setting quick moments away from technology. 'Untech Custom' is for setting a more specific long-term period." = "Untech Tip: 'Untech Now' is for setting quick moments away from technology. 'Untech Custom' is for setting a more specific long-term period.";
+
+// Purchase Dialogues
+"Purchase Subscription" = "Purchase Subscription";
+"You can purchase the SMS/phone option to send unlimited text and automated calls to your contacts." = "You can purchase the SMS/phone option to send unlimited text and automated calls to your contacts.";
+"Not now" = "Not now";
+"Restore" = "Restore";
+
+"Untech Call/SMS" = "Untech Call/SMS";
+"With the standard package, Untech will only have social media and email status features enables.  If you choose to add premium untech features, select in settings screen." = "With the standard package, Untech will only have social media and email status features enables.  If you choose to add premium untech features, select in settings screen.";
