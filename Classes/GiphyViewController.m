@@ -67,6 +67,8 @@
         reqGiphyApiInProccess = YES;
     }
     
+    [self deleteSubviewsFromView:giphyBgsView];
+    
     giphyBgsView  = [[UIView alloc] initWithFrame:CGRectMake(0,0,layerScrollView.frame.size.width, layerScrollView.frame.size.height)];
 //    giphyBgsView.backgroundColor = [UIColor yellowColor];
     
@@ -109,10 +111,17 @@
                 __block UIImageView *imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(x, y, defW, defH)];
                 [imageView2.layer setBorderColor:(__bridge CGColorRef)([UIColor blackColor])];
                 [imageView2.layer setBorderWidth:3.0];
+                //imageView2.backgroundColor = [UIColor redColor];
                 
-                imageView2.backgroundColor = [UIColor redColor];
                 imageView2.userInteractionEnabled = YES;
                 imageView2.tag = i++;
+                
+                
+                __block UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+                [indicator startAnimating];
+                [indicator setCenter:imageView2.center];
+                [giphyBgsView addSubview:indicator];
+                
                 [giphyBgsView addSubview:imageView2];
                 
                 //load each giffy in separate block
@@ -122,15 +131,22 @@
                     if( giphyData == nil || giphyData.count < 1 ) return;
                     NSLog(@"image data loaded");
                     NSData * data = [[NSData alloc] initWithContentsOfURL: url];
-                    if( giphyData == nil || giphyData.count < 1 || data == nil ) return;
+                    if( giphyData == nil || giphyData.count < 1 || data == nil ) {
+                        [indicator removeFromSuperview];
+                        return;
+                    }
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        if( giphyData == nil || giphyData.count < 1 ) return;
+                        if( giphyData == nil || giphyData.count < 1 ) {
+                            [indicator removeFromSuperview];
+                            return;
+                        }
                         
                         NSLog(@"render image on view");
                         imageView2.image = [UIImage imageWithData:data];
                         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectGiphy:)];
                         [imageView2 addGestureRecognizer:tapGesture];
+                        [indicator removeFromSuperview];
                     });
                 });
                 
@@ -186,8 +202,8 @@
             NSString *destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
             [[NSFileManager defaultManager] createFileAtPath:destination contents:data attributes:nil];
             
-            int width = [[[gif[@"images"] objectForKey:@"original"] objectForKey:@"width"] integerValue];
-            int height = [[[gif[@"images"] objectForKey:@"original"] objectForKey:@"height"] integerValue];
+            int width = (int)[[[gif[@"images"] objectForKey:@"original"] objectForKey:@"width"] integerValue];
+            int height = (int)[[[gif[@"images"] objectForKey:@"original"] objectForKey:@"height"] integerValue];
             
             //Update dictionary
             [flyer setOriginalVideoUrl:@"Template/template.mov"];
@@ -247,5 +263,15 @@ shouldReloadTableForSearchString:(NSString *)searchString {
  */
 - (void)goBack {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+/*
+ *Here we Remove all Subviews of ScrollViews
+ */
+-(void)deleteSubviewsFromView:(UIView *)view{
+    NSArray *ChildViews = [view subviews];
+    for (UIView *child in ChildViews) {
+            [child removeFromSuperview];
+    }    
 }
 @end
