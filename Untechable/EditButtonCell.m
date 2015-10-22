@@ -32,7 +32,7 @@
 -(void)updateUI{
     
     btnChangeUntechNowSettings.layer.cornerRadius = 10;
-    [btnChangeUntechNowSettings setTitle:NSLocalizedString(@"Untech Custom", nil) forState:normal];
+    [btnChangeUntechNowSettings setTitle:NSLocalizedString(@"Change Untech Now Settings", nil) forState:normal];
     [btnChangeUntechNowSettings setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnChangeUntechNowSettings setBackgroundColor:DEF_GRAY];
 
