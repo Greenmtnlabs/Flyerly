@@ -92,10 +92,11 @@
         // Right Navigation ______________________________________________
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         nextButton.titleLabel.shadowColor = [UIColor clearColor];
-        [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
+       
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [nextButton setTitle:NSLocalizedString(TITLE_EDIT_TEXT, nil) forState:normal];
+        [nextButton setTitle:NSLocalizedString(TITLE_HELP_TXT, nil) forState:normal];
         [nextButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
+        [nextButton addTarget:self action:@selector(emailComposer) forControlEvents:UIControlEventTouchUpInside];
         [nextButton addTarget:self action:@selector(btnTouchStart:) forControlEvents:UIControlEventTouchDown];
         [nextButton addTarget:self action:@selector(btnTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -136,12 +137,34 @@
     (highlighted) ? [button setBackgroundColor:DEF_GREEN] : [button setBackgroundColor:[UIColor clearColor]];
 }
 
--(void)onNext{
+-(void)changeSettings{
     
     SetupGuideViewController *secondSetupScreen = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
     secondSetupScreen.untechable = untechable;
     [self.navigationController pushViewController:secondSetupScreen animated:YES];
     
+}
+
+/*
+ * This method sends email
+ * to support team
+ */
+- (IBAction)emailComposer {
+    
+    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+    
+    if([MFMailComposeViewController canSendMail]){
+        
+        picker.mailComposeDelegate = self;
+        [picker setSubject:@"Untech Email Feedback..."];
+        
+        // Set up recipients
+        NSMutableArray *toRecipients = [[NSMutableArray alloc]init];
+        [toRecipients addObject:@"support@greenmtnlabs.com"];
+        [picker setToRecipients:toRecipients];
+        
+        [self presentViewController:picker animated:YES completion:nil];
+    }
 }
 
 

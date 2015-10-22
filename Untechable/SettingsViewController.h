@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "Untechable.h"
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
-@interface SettingsViewController : UIViewController <UITableViewDelegate,UITableViewDataSource>{
+@interface SettingsViewController : UIViewController <UITableViewDelegate,UITableViewDataSource, MFMailComposeViewControllerDelegate>{
     UIButton *backButton;
     UIButton *nextButton;
 }
@@ -19,5 +21,7 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *socialNetworksTable;
 @property (strong, nonatomic) UIAlertView *editNameAlert;
+- (IBAction)emailComposer;
+
 
 @end
