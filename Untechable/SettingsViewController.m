@@ -221,7 +221,7 @@
             [cell.socialNetworkButton addTarget:self action:@selector(emailLogin:) forControlEvents:UIControlEventTouchUpInside];
             
       }
-        else if(indexPath.row == 5){
+        else if(indexPath.row == 5){ // EmailCellButton
             
             if (cellEditButton == nil) {
                 
@@ -231,10 +231,12 @@
             
             [cellEditButton updateUI];
             
+            cellEditButton.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cellEditButton.btnChangeUntechNowSettings addTarget:self action:@selector(changeSettings) forControlEvents:UIControlEventTouchUpInside];
             [cellEditButton.btnChangeUntechNowSettings addTarget:self action:@selector(btnUntechTouchStart:) forControlEvents:UIControlEventTouchDown];
             [cellEditButton.btnChangeUntechNowSettings addTarget:self action:@selector(btnUntechTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
             
-            [cellEditButton.btnChangeUntechNowSettings addTarget:self action:@selector(changeSettings) forControlEvents:UIControlEventTouchUpInside];
+            
             return cellEditButton;
         }
     }
