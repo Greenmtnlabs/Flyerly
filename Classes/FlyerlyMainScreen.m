@@ -678,7 +678,7 @@ id lastShareBtnSender;
             }
             
             // Setting background image while ad is loading
-            //adView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:imageName]];
+            adView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:imageName]];
             self.bannerAdd[ addRow ] = adView;
             [cell addSubview:self.bannerAdd[ addRow ]];
             return cell;
