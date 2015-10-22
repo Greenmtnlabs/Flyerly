@@ -11,4 +11,6 @@
 @interface EditButtonCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIButton *btnChangeUntechNowSettings;
 
+
+-(void)updateUI;
 @end

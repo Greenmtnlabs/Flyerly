@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,13 +15,23 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oEC-Bo-apR">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oEC-Bo-apR">
                         <rect key="frame" x="10" y="18" width="300" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="OmR-IL-t7m"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                         <state key="normal" title="Change Untech Now Settings">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="oEC-Bo-apR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="OfE-VT-73E"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="oEC-Bo-apR" secondAttribute="trailing" constant="2" id="g4e-aP-DjM"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="oEC-Bo-apR" secondAttribute="bottom" constant="9" id="lao-E0-hGH"/>
+                    <constraint firstItem="oEC-Bo-apR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="wlu-LL-S4P"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="btnChangeUntechNowSettings" destination="oEC-Bo-apR" id="ASP-YQ-yW4"/>

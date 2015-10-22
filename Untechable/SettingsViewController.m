@@ -229,6 +229,11 @@
                 cellEditButton = (EditButtonCell *)[nib objectAtIndex:0];
             }
             
+            [cellEditButton updateUI];
+            
+            [cellEditButton.btnChangeUntechNowSettings addTarget:self action:@selector(btnUntechTouchStart:) forControlEvents:UIControlEventTouchDown];
+            [cellEditButton.btnChangeUntechNowSettings addTarget:self action:@selector(btnUntechTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
+            
             [cellEditButton.btnChangeUntechNowSettings addTarget:self action:@selector(changeSettings) forControlEvents:UIControlEventTouchUpInside];
             return cellEditButton;
         }
@@ -330,4 +335,17 @@
     }
 }
 
+
+#pragma mark -  Highlighting Functions
+
+-(void)btnUntechTouchStart :(id)button{
+    [self setUntechHighlighted:YES sender:button];
+}
+-(void)btnUntechTouchEnd :(id)button{
+    [self setUntechHighlighted:NO sender:button];
+}
+- (void)setUntechHighlighted:(BOOL)highlighted sender:(id)button {
+    (highlighted) ? [button setBackgroundColor:DEF_GREEN] : [button setBackgroundColor:DEF_GRAY];
+    (highlighted) ? [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal] : [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+}
 @end
