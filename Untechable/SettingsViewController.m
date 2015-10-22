@@ -14,6 +14,7 @@
 #import "EmailSettingController.h"
 #import "SocialNetworksStatusModal.h"
 #import "SetupGuideViewController.h"
+#import "EditButtonCell.h"
 
 @interface SettingsViewController () {
     
@@ -35,7 +36,7 @@
     [self setNavigation:@"viewDidLoad"];
     [self updateUI];
 
-    socialNetworksName = [[NSMutableArray alloc] initWithObjects: @"Facebook",@"Twitter",@"LinkedIn",@"Email", nil];
+    socialNetworksName = [[NSMutableArray alloc] initWithObjects: @"Facebook",@"Twitter",@"LinkedIn",@"Email", @"", nil];
     
     socialIcons = [[NSMutableArray alloc] init];
     
@@ -92,10 +93,11 @@
         // Right Navigation ______________________________________________
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         nextButton.titleLabel.shadowColor = [UIColor clearColor];
-        [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
+       
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [nextButton setTitle:NSLocalizedString(TITLE_EDIT_TEXT, nil) forState:normal];
+        [nextButton setTitle:NSLocalizedString(TITLE_HELP_TXT, nil) forState:normal];
         [nextButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
+        [nextButton addTarget:self action:@selector(emailComposer) forControlEvents:UIControlEventTouchUpInside];
         [nextButton addTarget:self action:@selector(btnTouchStart:) forControlEvents:UIControlEventTouchDown];
         [nextButton addTarget:self action:@selector(btnTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -136,7 +138,7 @@
     (highlighted) ? [button setBackgroundColor:DEF_GREEN] : [button setBackgroundColor:[UIColor clearColor]];
 }
 
--(void)onNext{
+-(void)changeSettings{
     
     SetupGuideViewController *secondSetupScreen = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
     secondSetupScreen.untechable = untechable;
@@ -144,23 +146,25 @@
     
 }
 
-
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     //return number of rows;
-    return  5;
+    return  6;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *cellId = @"SettingsCellView";
     SettingsCellView *cell = (SettingsCellView *)[tableView dequeueReusableCellWithIdentifier:cellId];
+
+    EditButtonCell *cellEditButton = (EditButtonCell *)[tableView dequeueReusableCellWithIdentifier:@"EditButtonCell"];
     
     if (cell == nil) {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SettingsCellView" owner:self options:nil];
-            cell = (SettingsCellView *)[nib objectAtIndex:0];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SettingsCellView" owner:self options:nil];
+        cell = (SettingsCellView *)[nib objectAtIndex:0];
     }
     
+
     if( indexPath.row == 0 ){
         
         // set first cell to show user name
@@ -168,15 +172,12 @@
         cell.socialNetworkImage.image = [UIImage imageNamed:@"user_img"];
         cell.loginStatus.text = untechable.userName;
         [cell.socialNetworkButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
-        [cell.socialNetworkButton addTarget:self action:@selector(onEditName)
-                           forControlEvents:UIControlEventTouchUpInside];
-        
+        [cell.socialNetworkButton addTarget:self action:@selector(onEditName) forControlEvents:UIControlEventTouchUpInside];
         return cell;
         
     } else {
 
-        NSString *sNetworksName = [socialNetworksName objectAtIndex:(indexPath.row-1)];
-        
+        NSString *sNetworksName = [socialNetworksName objectAtIndex:(indexPath.row - 1)];
         if ( indexPath.row == 1 ){
             
             if ( [untechable.socialNetworksStatusModal.mFbAuth isEqualToString:@""] ||
@@ -218,9 +219,30 @@
             }
             
             [cell.socialNetworkButton addTarget:self action:@selector(emailLogin:) forControlEvents:UIControlEventTouchUpInside];
+            
+      }
+        else if(indexPath.row == 5){ // EmailCellButton
+            
+            if (cellEditButton == nil) {
+                
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EditButtonCell" owner:self options:nil];
+                cellEditButton = (EditButtonCell *)[nib objectAtIndex:0];
+            }
+            
+            [cellEditButton updateUI];
+            
+            cellEditButton.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cellEditButton.btnChangeUntechNowSettings addTarget:self action:@selector(changeSettings) forControlEvents:UIControlEventTouchUpInside];
+            [cellEditButton.btnChangeUntechNowSettings addTarget:self action:@selector(btnUntechTouchStart:) forControlEvents:UIControlEventTouchDown];
+            [cellEditButton.btnChangeUntechNowSettings addTarget:self action:@selector(btnUntechTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
+            
+            
+            return cellEditButton;
         }
     }
     return cell;
+    
+    
 }
 
 -(IBAction)emailLogin:(id)sender {
@@ -293,4 +315,55 @@
     }
 }
 
+/*
+ * This method sends email
+ * to support team
+ */
+- (IBAction)emailComposer {
+    
+    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+    
+    if([MFMailComposeViewController canSendMail]){
+        
+        picker.mailComposeDelegate = self;
+        [picker setSubject:@"Untech Email Feedback..."];
+        
+        // Set up recipients
+        NSMutableArray *toRecipients = [[NSMutableArray alloc]init];
+        [toRecipients addObject:@"support@greenmtnlabs.com"];
+        [picker setToRecipients:toRecipients];
+        
+        [self presentViewController:picker animated:YES completion:nil];
+    }
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+    switch (result) {
+        case MFMailComposeResultCancelled:
+            break;
+        case MFMailComposeResultSaved:
+            break;
+        case MFMailComposeResultSent:
+            break;
+        case MFMailComposeResultFailed:
+            break;
+    }
+    
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+
+#pragma mark -  Highlighting Functions
+
+-(void)btnUntechTouchStart :(id)button{
+    [self setUntechHighlighted:YES sender:button];
+}
+-(void)btnUntechTouchEnd :(id)button{
+    [self setUntechHighlighted:NO sender:button];
+}
+- (void)setUntechHighlighted:(BOOL)highlighted sender:(id)button {
+    (highlighted) ? [button setBackgroundColor:DEF_GREEN] : [button setBackgroundColor:DEF_GRAY];
+    (highlighted) ? [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal] : [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+}
 @end
