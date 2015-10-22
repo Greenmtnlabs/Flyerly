@@ -53,9 +53,6 @@
     [self setNavigation:@"viewDidLoad"];
     [self updateUI];
     
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"dd MMMM yyyy, hh:mm a"];
-  
     // to aplly localization on strings
     [self applyLocalization];
     
@@ -68,14 +65,15 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self updateUI];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 /**
  * Update the view once it appears.
@@ -104,9 +102,14 @@
     
     // default message if there is no text
     defaultStatus = NSLocalizedString(@"Enter default status", nil);
-  
+ 
+    // Getting date
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MMM dd, yyyy, hh:mm a"];
+    NSString *stringDate = [dateFormatter stringFromDate:[untechable.commonFunctions convertTimestampToNSDate:untechable.startDate]];
+    
     // label to show message to user
-    showMsgToUser = NSLocalizedString(@"A message similar to the one you see above will be posted to the networks you select when your untech time starts.", nil);
+    showMsgToUser = [NSString stringWithFormat:NSLocalizedString(@"The above message will be posted on %@ to the networks you have selected below.", nil), stringDate];
     
     // label to show tip
     lblUntechTip.text = NSLocalizedString(@"Untech Tip: 'Untech Now' is for setting quick moments away from technology. 'Untech Custom' is for setting a more specific long-term period.", nil);

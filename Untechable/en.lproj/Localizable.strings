@@ -112,7 +112,7 @@
 "1 Day" = "1 Day";
 "2 Days" = "2 Days";
 
-"#untech for %@ and %@" = "#untech for %@ and %@";
+"#untech for %@ %@ - Reconnect with life: http://www.unte.ch" = "#untech for %@ %@ - Reconnect with life: http://www.unte.ch";
 "Untechable created successfully" = "Untechable created successfully";
 "Unable to delete, please try agin later!" = "Unable to delete, please try agin later!";
 
@@ -165,7 +165,7 @@
 
 "Choose the networks you would like to inform every time you are untech. These will be pre-selected for future Untech Now moments." = "Choose the networks you would like to inform every time you are untech. These will be pre-selected for future Untech Now moments.";
 
-"A message similar to the one you see above will be posted to the networks you select when your untech time starts." = "A message similar to the one you see above will be posted to the networks you select when your untech time starts.";
+"The above message will be posted on %@ to the networks you have selected below." = "The above message will be posted on %@ to the networks you have selected below.";
 
 "Untech Tip: 'Untech Now' is for setting quick moments away from technology. 'Untech Custom' is for setting a more specific long-term period." = "Untech Tip: 'Untech Now' is for setting quick moments away from technology. 'Untech Custom' is for setting a more specific long-term period.";
 

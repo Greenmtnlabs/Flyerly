@@ -108,7 +108,7 @@
 "1 Day" = "1 Día";
 "2 Days" = "2 Días";
 
-"#untech for %@ and %@" = "#untech para% @ y% @";
+"#untech for %@ %@ - Reconnect with life: http://www.unte.ch" = "#untech para %@ %@ - Vuelva a conectar con la vida: http://www.unte.ch";
 "Unable to delete, please try agin later!" = "No se puede eliminar, por favor intente más tarde volveré!";
 
 "No internet connection" = "Sin conexión a Internet";
@@ -162,7 +162,7 @@
 
 "Choose the networks you would like to inform every time you are untech. These will be pre-selected for future Untech Now moments." = "Elija las redes que le gustaría informar cada vez que están untech. Estos serán pre-seleccionados para futuras Untech Ahora momentos.";
 
-"A message similar to the one you see above will be posted to the networks you select when your untech time starts." = "Un mensaje similar al que ves arriba se envió a las redes que seleccione al iniciar su tiempo untech.";
+"The above message will be posted on %@ to the networks you have selected below." = "El mensaje anterior se publicará en %@ de las redes que ha seleccionado a continuación.";
 
 "Untech Tip: 'Untech Now' is for setting quick moments away from technology. 'Untech Custom' is for setting a more specific long-term period." = "Sugerencia Untech: 'Untech ahora' sirve para configurar momentos rápidos lejos de la tecnología. 'Untech personalizado' es para establecer un período más específica a largo plazo.";
 

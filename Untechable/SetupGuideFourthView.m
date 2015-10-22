@@ -135,8 +135,13 @@
 -(void)setupShareScreen {
     
     SocialnetworkController *viewControllerToAdd = [[SocialnetworkController alloc] initWithNibName:@"SocialnetworkController" bundle:nil];
-    
     viewControllerToAdd.untechable = untechable;
+    
+    // Setting new frame for social newtwork controller 
+    CGRect newFrame = viewControllerToAdd.view.frame;
+    newFrame.size.width = viewControllerToAdd.view.frame.size.width;
+    newFrame.size.height = viewControllerToAdd.view.frame.size.height - 27;
+    [viewControllerToAdd.view setFrame:newFrame];
     
     [viewControllerToAdd willMoveToParentViewController:self];
     [self.viewForShareScreen addSubview:viewControllerToAdd.view];
