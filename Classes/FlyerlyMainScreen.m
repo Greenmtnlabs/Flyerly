@@ -26,6 +26,7 @@
     CGRect sizeRectForAdd;
     BOOL isSearch;
     UIImageView *noAdsImage;
+    NSString *imageName;
 }
 
 @end
@@ -173,7 +174,7 @@ id lastShareBtnSender;
  */
 -(void) setNoAdsImage{
     
-    NSString *imageName = @"noAdd_5.png";
+    imageName = @"noAdd_5.png";
     
     if (IS_IPHONE_6){
         imageName = @"noAdd_6.png";
@@ -675,7 +676,9 @@ id lastShareBtnSender;
             if( sizeRectForAdd.size.width != 0 ){
                 adView.frame = sizeRectForAdd;
             }
-           
+            
+            // Setting background image while ad is loading
+            //adView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:imageName]];
             self.bannerAdd[ addRow ] = adView;
             [cell addSubview:self.bannerAdd[ addRow ]];
             return cell;
