@@ -19,10 +19,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4J-KF-baP" userLabel="line1">
-                    <rect key="frame" x="0.0" y="65" width="320" height="2"/>
+                    <rect key="frame" x="0.0" y="64" width="320" height="2"/>
                     <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="2" id="lSb-4u-UfQ"/>
+                        <constraint firstAttribute="height" constant="2" id="wiG-SP-MHV"/>
                     </constraints>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -93,13 +93,12 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="E4J-KF-baP" secondAttribute="trailing" id="06c-LI-ci5"/>
                 <constraint firstAttribute="trailing" secondItem="mFg-Cr-7AC" secondAttribute="trailing" id="C1Q-kj-57W"/>
                 <constraint firstItem="KCr-rl-5dq" firstAttribute="leading" secondItem="Hew-dP-68I" secondAttribute="trailing" constant="10" id="Hqe-t5-Vxb"/>
-                <constraint firstItem="E4J-KF-baP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="65" id="NFy-Mj-ZgO"/>
-                <constraint firstItem="E4J-KF-baP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="NoT-3s-yKs"/>
                 <constraint firstItem="Hew-dP-68I" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="7" id="OEr-rn-Xxx"/>
                 <constraint firstItem="Iqn-yo-yr9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="OpM-tD-HsV"/>
+                <constraint firstAttribute="trailing" secondItem="E4J-KF-baP" secondAttribute="trailing" id="RRd-CG-sAQ"/>
+                <constraint firstItem="E4J-KF-baP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="TJx-MU-mYn"/>
                 <constraint firstItem="KCr-rl-5dq" firstAttribute="top" secondItem="mFg-Cr-7AC" secondAttribute="bottom" id="ViL-2J-ijs"/>
                 <constraint firstItem="mFg-Cr-7AC" firstAttribute="top" secondItem="TOe-OP-XN9" secondAttribute="bottom" id="YKQ-H9-YAR"/>
                 <constraint firstAttribute="trailing" secondItem="KCr-rl-5dq" secondAttribute="trailing" id="ZDN-Zr-MW1"/>
@@ -111,6 +110,7 @@
                 <constraint firstAttribute="trailing" secondItem="TOe-OP-XN9" secondAttribute="trailing" constant="10" id="lfm-iK-KAA"/>
                 <constraint firstItem="Hew-dP-68I" firstAttribute="top" secondItem="mFg-Cr-7AC" secondAttribute="bottom" constant="8" id="q1C-BG-c1E"/>
                 <constraint firstAttribute="trailing" secondItem="uTQ-3O-l9t" secondAttribute="trailing" id="qwM-re-UOC"/>
+                <constraint firstItem="E4J-KF-baP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="tU1-cD-mx8"/>
                 <constraint firstItem="TOe-OP-XN9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="65" id="vV3-eU-Uv3"/>
                 <constraint firstItem="Iqn-yo-yr9" firstAttribute="top" secondItem="uTQ-3O-l9t" secondAttribute="bottom" id="vxO-Hh-XrU"/>
                 <constraint firstItem="TOe-OP-XN9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="y8w-9S-YrQ"/>
