@@ -36,7 +36,7 @@
     [self setNavigation:@"viewDidLoad"];
     [self updateUI];
 
-    socialNetworksName = [[NSMutableArray alloc] initWithObjects: @"Facebook",@"Twitter",@"LinkedIn",@"Email", nil];
+    socialNetworksName = [[NSMutableArray alloc] initWithObjects: @"Facebook",@"Twitter",@"LinkedIn",@"Email", @"", nil];
     
     socialIcons = [[NSMutableArray alloc] init];
     
@@ -177,7 +177,7 @@
         
     } else {
 
-        NSString *sNetworksName = [socialNetworksName objectAtIndex:(indexPath.row)];
+        NSString *sNetworksName = [socialNetworksName objectAtIndex:(indexPath.row - 1)];
         if ( indexPath.row == 1 ){
             
             if ( [untechable.socialNetworksStatusModal.mFbAuth isEqualToString:@""] ||
