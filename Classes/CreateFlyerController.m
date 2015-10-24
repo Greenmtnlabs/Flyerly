@@ -2309,6 +2309,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
                 //Set Image Tag in dictionary
                 [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",(int)view.tag]];
+                
+                if( player != nil ){
+                    player.repeatMode = NO;
+                    [player stop];
+                }
             }
             
             // Add border to selected layer thumbnail
