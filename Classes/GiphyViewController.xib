@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GiphyViewController">
             <connections>
                 <outlet property="layerScrollView" destination="dWV-qK-9pD" id="bDk-BD-WbY"/>
+                <outlet property="searchField" destination="pzi-xO-u8q" id="y7Q-NV-VAP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

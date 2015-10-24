@@ -9,20 +9,24 @@
 #import "GiphyViewController.h"
 #import "AFNetworking.h"
 #import "Common.h"
-
+#import "FlyrAppDelegate.h"
+#import "FlyerlyConfigurator.h"
 
 @interface GiphyViewController ()
+@property (strong, nonatomic) IBOutlet UISearchBar *searchField;
 @end
 
 @implementation GiphyViewController{
     UIView *giphyBgsView;
+    UIView *loadingOverly;
     NSArray *giphyData;
     BOOL reqGiphyApiInProccess;
     BOOL giphyDownloading;
+    NSString *giphyApiKey;
 }
 
 
-@synthesize layerScrollView, flyer, tasksAfterGiphySelect;
+@synthesize layerScrollView, flyer, tasksAfterGiphySelect, searchField;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -43,9 +47,17 @@
     UIImageView *titleImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"giphyLogo1.jpg"]];
     titleImg.frame = CGRectMake(titleImg.frame.origin.x, titleImg.frame.origin.y, 40, 40);
     self.navigationItem.titleView = titleImg;
-
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    FlyerlyConfigurator *flyerConfigurator = appDelegate.flyerConfigurator;
+    giphyApiKey = [[NSString alloc] initWithString:[flyerConfigurator giphyApiKey]];
+    
+    
+    giphyBgsView  = [[UIView alloc] initWithFrame:CGRectMake(0,0,layerScrollView.frame.size.width, layerScrollView.frame.size.height)];
+    [layerScrollView addSubview:giphyBgsView];
+    
     //load trending giphy default
-    [self loadGiphyImages:@"http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC"];
+    [self loadGiphyImages:[NSString stringWithFormat:@"http://api.giphy.com/v1/gifs/trending?api_key=%@",giphyApiKey]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,22 +81,14 @@
     
     [self deleteSubviewsFromView:giphyBgsView];
     
-    giphyBgsView  = [[UIView alloc] initWithFrame:CGRectMake(0,0,layerScrollView.frame.size.width, layerScrollView.frame.size.height)];
-//    giphyBgsView.backgroundColor = [UIColor yellowColor];
-    
-    [layerScrollView addSubview:giphyBgsView];
-    
-    __weak GiphyViewController *weakSelf = self;
-    
+
     //send request to giphy api
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         reqGiphyApiInProccess = NO;
-        [weakSelf hideLoadingIndicator];
+        [self hideLoadingIndicator];
         giphyData = responseObject[@"data"];
-        
-        NSLog(@"JSON: %@", responseObject);
         
         if( giphyData != nil && giphyData.count > 0 ){
             int heightHandlerForMainView = 0;
@@ -105,59 +109,31 @@
                 row = floor( i / showInRow );
                 x = defX*column+defX + defW*column;
                 y = defY*row+defY + defH*row;
-                
-                if( i > 3 ) return; //show only 4 flyers
-                
-                __block UIImageView *imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(x, y, defW, defH)];
-                [imageView2.layer setBorderColor:(__bridge CGColorRef)([UIColor blackColor])];
-                [imageView2.layer setBorderWidth:3.0];
-                //imageView2.backgroundColor = [UIColor redColor];
-                
-                imageView2.userInteractionEnabled = YES;
-                imageView2.tag = i++;
-                
-                
-                __block UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-                [indicator startAnimating];
-                [indicator setCenter:imageView2.center];
-                [giphyBgsView addSubview:indicator];
-                
-                [giphyBgsView addSubview:imageView2];
-                
-                //load each giffy in separate block
-                NSURL *url = [NSURL URLWithString:[[gif[@"images"] objectForKey:@"original"] objectForKey:@"url"]];
 
-                dispatch_async(dispatch_get_global_queue(0,0), ^{
-                    if( giphyData == nil || giphyData.count < 1 ) return;
-                    NSLog(@"image data loaded");
-                    NSData * data = [[NSData alloc] initWithContentsOfURL: url];
-                    if( giphyData == nil || giphyData.count < 1 || data == nil ) {
-                        [indicator removeFromSuperview];
-                        return;
-                    }
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        if( giphyData == nil || giphyData.count < 1 ) {
-                            [indicator removeFromSuperview];
-                            return;
-                        }
-                        
-                        NSLog(@"render image on view");
-                        imageView2.image = [UIImage imageWithData:data];
-                        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectGiphy:)];
-                        [imageView2 addGestureRecognizer:tapGesture];
-                        [indicator removeFromSuperview];
-                    });
-                });
+
+                UIView *viewForGiphy = [[UIView alloc]initWithFrame:CGRectMake(x-4, y-4, defW+4, defH+4)];
+                UIWebView *webview=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, defW+4, defH+4)];
+                webview.userInteractionEnabled = NO;
+                webview.scrollView.scrollEnabled = NO;
+                
+                NSString *giphyUrlStr = [[gif[@"images"] objectForKey:@"original"] objectForKey:@"url"];
+                NSString *spinnerImagePath = [[NSBundle mainBundle] pathForResource:@"spinner" ofType:@"gif"];
+                NSString* htmlContent = [NSString stringWithFormat:@"<html><head><title></title></head><body style='margin:0px; padding:0px;'><img src='%@' style='border:1px solid black; width:%ipx; height:%ipx; background:url(%@) no-repeat center center; '></body></html>",giphyUrlStr,defW,defH,spinnerImagePath];
+                [webview loadHTMLString:htmlContent baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
+
+                viewForGiphy.tag = i++;
+                UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectGiphy:)];
+                [viewForGiphy addGestureRecognizer:tapGesture];
+                [viewForGiphy addSubview:webview];
+                [giphyBgsView addSubview:viewForGiphy];
                 
             }
+            
             //GiphyBgsView will get height dynamically
             int gbvH = y+defH+defY+heightHandlerForMainView;
             int gbvW = layerScrollView.frame.size.width;
-            if( IS_IPHONE_4 ){
-                gbvW = x+defW+defX+10;
-            }
             giphyBgsView.frame = CGRectMake(giphyBgsView.frame.origin.x, giphyBgsView.frame.origin.y, gbvW, gbvH);
+            
             [layerScrollView addSubview:giphyBgsView];
             [layerScrollView setContentSize:CGSizeMake(giphyBgsView.frame.size.width,giphyBgsView.frame.size.height)];
         }
@@ -168,6 +144,9 @@
 }
 
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer    shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
 
 /*
  * When user select any giphy, download mov file and play in the player
@@ -178,10 +157,8 @@
     if( giphyDownloading == YES ){
         return;
     } else {
-        giphyDownloading = YES;
         //showing the laoding indicator on the top right corner
-        [self showLoadingIndicator];
-        [leftBarButtonItem setEnabled:NO];
+        [self onSelectGiphyShowLoadingIndicator:YES];
     }
     
     int tag = (int)[(UIGestureRecognizer *)sender view].tag;
@@ -189,10 +166,9 @@
     NSURL *url = [NSURL URLWithString:[[gif[@"images"] objectForKey:@"original"] objectForKey:@"mp4"]];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-
+        
         if( data == nil ){
-            [self hideLoadingIndicator];
-            [leftBarButtonItem setEnabled:YES];
+            [self onSelectGiphyShowLoadingIndicator:NO];
             return;
         }
             
@@ -208,13 +184,10 @@
             //Update dictionary
             [flyer setOriginalVideoUrl:@"Template/template.mov"];
             [flyer setFlyerTypeVideoWithSize:width height:height videoSoure:@"giphy"];
-            
-            giphyDownloading = NO; //giphy has been loaded in video player
-            giphyData = nil;
-            giphyBgsView = nil;
-            layerScrollView = nil;
+
             tasksAfterGiphySelect = @"play";
-            [self.navigationController popViewControllerAnimated:YES];
+            [self onSelectGiphyShowLoadingIndicator:NO];
+            [self goBack];
 
         }];
         
@@ -225,15 +198,60 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     // hiding the keyboard
     [searchBar resignFirstResponder];
-    
-    //[self loadGiphyImages:@"http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC"];
-    [self loadGiphyImages:[NSString stringWithFormat:@"%@%@",@"http://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=",searchBar.text]];
+    //send search giphies request
+    [self loadGiphyImages:[NSString stringWithFormat:@"http://api.giphy.com/v1/gifs/search?api_key=%@&q=%@",giphyApiKey,searchBar.text]];
 }
 
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller
 shouldReloadTableForSearchString:(NSString *)searchString {
     return YES;
 }
+
+/**
+ * Go Back
+ */
+-(void)goBack{
+    
+    [self deleteSubviewsFromView:giphyBgsView];
+    [self deleteSubviewsFromView:layerScrollView];
+    
+    [giphyBgsView removeFromSuperview];
+    [loadingOverly removeFromSuperview];
+    [layerScrollView removeFromSuperview];
+    
+    giphyBgsView = nil;
+    loadingOverly = nil;
+    layerScrollView = nil;
+    giphyData = nil;
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+/**
+ * Show/hide a loding indicator on select giphy
+ */
+- (void)onSelectGiphyShowLoadingIndicator:(BOOL)showHide {
+    giphyDownloading = showHide;
+    if( showHide ){
+        layerScrollView.alpha = 0.7;
+        searchField.userInteractionEnabled = NO;
+        [leftBarButtonItem setEnabled:NO];
+        [self showLoadingIndicator];
+        
+        loadingOverly = [[UIView alloc] initWithFrame:layerScrollView.frame];
+        loadingOverly.backgroundColor = [UIColor whiteColor];
+        loadingOverly.alpha = 0.5;
+        [self.view addSubview:loadingOverly];
+    }
+    else{
+        [layerScrollView removeFromSuperview];
+        layerScrollView.alpha = 1;
+        searchField.userInteractionEnabled = YES;
+        [leftBarButtonItem setEnabled:YES];
+        [self hideLoadingIndicator];
+    }
+}
+
 
 /**
  * Show a loding indicator in the right bar button.
@@ -256,13 +274,6 @@ shouldReloadTableForSearchString:(NSString *)searchString {
  */
 - (void)hideLoadingIndicator {
     [self.navigationItem setRightBarButtonItem:rightBarButtonItem animated:NO];
-}
-
-/**
- * Cancel and go back.
- */
-- (void)goBack {
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*

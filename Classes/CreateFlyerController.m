@@ -3002,6 +3002,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     player.scalingMode = MPMovieScalingModeAspectFill;
     player.backgroundView.backgroundColor = [UIColor whiteColor];
     [player prepareToPlay];
+    
+    NSString *videoSoure = [[flyer getLayerFromMaster:@"Template"] objectForKey:@"videoSoure"];
+    if( videoSoure != nil && [videoSoure isEqualToString:@"giphy"] ){
+        [player play];
+        player.repeatMode = YES;
+    }
 }
 
 

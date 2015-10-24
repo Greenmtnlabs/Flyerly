@@ -1152,6 +1152,7 @@
 		C306CC561BD657D100F9D34D /* GiphyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C306CC541BD657D100F9D34D /* GiphyViewController.m */; };
 		C306CC571BD657D100F9D34D /* GiphyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C306CC551BD657D100F9D34D /* GiphyViewController.xib */; };
 		C306CC5D1BD68E1B00F9D34D /* AnimatedGIFImageSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = C306CC5C1BD68E1B00F9D34D /* AnimatedGIFImageSerialization.m */; };
+		C30E29D61BDB64DE00A5D160 /* spinner.gif in Resources */ = {isa = PBXBuildFile; fileRef = C30E29D51BDB64DE00A5D160 /* spinner.gif */; };
 		C31519C31BB18708001D6B8D /* intro-1-screen-iPhone6p.png in Resources */ = {isa = PBXBuildFile; fileRef = C31519B71BB18708001D6B8D /* intro-1-screen-iPhone6p.png */; };
 		C31519C41BB18708001D6B8D /* intro-1-screen-iPhone4.png in Resources */ = {isa = PBXBuildFile; fileRef = C31519B81BB18708001D6B8D /* intro-1-screen-iPhone4.png */; };
 		C31519C51BB18708001D6B8D /* intro-1-screen-iPhone5.png in Resources */ = {isa = PBXBuildFile; fileRef = C31519B91BB18708001D6B8D /* intro-1-screen-iPhone5.png */; };
@@ -2829,6 +2830,7 @@
 		C306CC551BD657D100F9D34D /* GiphyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GiphyViewController.xib; sourceTree = "<group>"; };
 		C306CC5B1BD68E1B00F9D34D /* AnimatedGIFImageSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedGIFImageSerialization.h; sourceTree = "<group>"; };
 		C306CC5C1BD68E1B00F9D34D /* AnimatedGIFImageSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedGIFImageSerialization.m; sourceTree = "<group>"; };
+		C30E29D51BDB64DE00A5D160 /* spinner.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = spinner.gif; sourceTree = "<group>"; };
 		C31519B71BB18708001D6B8D /* intro-1-screen-iPhone6p.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro-1-screen-iPhone6p.png"; sourceTree = "<group>"; };
 		C31519B81BB18708001D6B8D /* intro-1-screen-iPhone4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro-1-screen-iPhone4.png"; sourceTree = "<group>"; };
 		C31519B91BB18708001D6B8D /* intro-1-screen-iPhone5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro-1-screen-iPhone5.png"; sourceTree = "<group>"; };
@@ -3296,6 +3298,7 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				C30E29D51BDB64DE00A5D160 /* spinner.gif */,
 				C337ED4A1BD69DBA0038B82E /* 5tab_3_giphy@3x.png */,
 				C337ED4B1BD69DBA0038B82E /* 5tab_3_giphy_selected@3x.png */,
 				C337ED4C1BD69DBA0038B82E /* 5tab_3_giphy_selected@2x.png */,
@@ -7015,6 +7018,7 @@
 				249F205A193F562C0072835E /* tumblr_share_selected@2x.png in Resources */,
 				242184B9194B4AEC00FDDA97 /* emoticon171@2x.png in Resources */,
 				C35351141B60F68600CF68F9 /* Template97.jpg in Resources */,
+				C30E29D61BDB64DE00A5D160 /* spinner.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

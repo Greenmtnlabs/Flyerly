@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Flyer.h"
 
-@interface GiphyViewController : UIViewController{
+@interface GiphyViewController : UIViewController<UIGestureRecognizerDelegate>{
     UIBarButtonItem  *rightBarButtonItem;
     UIBarButtonItem  *leftBarButtonItem;
 }
