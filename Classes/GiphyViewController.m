@@ -173,13 +173,21 @@
         }
             
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            // HERE WE MOVE SOURCE FILE INTO FLYER FOLDER
+
             NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-            NSString *destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
-            [[NSFileManager defaultManager] createFileAtPath:destination contents:data attributes:nil];
             
+            //File will be save here
+            NSString *destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
+            [self deleteFile:destination];
             NSURL *mediaURL = [NSURL fileURLWithPath:destination];
-            AVURLAsset *asset = [AVURLAsset URLAssetWithURL:mediaURL options:nil];
+            
+            //Temporary video we will crop from it then delete it
+            NSString *destinationTemp = [NSString stringWithFormat:@"%@/Template/templateTemp.mov",currentpath];
+            [[NSFileManager defaultManager] createFileAtPath:destinationTemp contents:data attributes:nil];
+            NSURL *mediaURLTemp = [NSURL fileURLWithPath:destinationTemp];
+            
+            //Get video width/height
+            AVURLAsset *asset = [AVURLAsset URLAssetWithURL:mediaURLTemp options:nil];
             NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
             AVAssetTrack *track = [tracks objectAtIndex:0];
             CGSize mediaSize = track.naturalSize;
@@ -187,18 +195,160 @@
             int width = mediaSize.width;
             int height = mediaSize.height;
             
-            //Update dictionary
-            [flyer setOriginalVideoUrl:@"Template/template.mov"];
-            [flyer setFlyerTypeVideoWithSize:width height:height videoSoure:@"giphy"];
+            //Video must be squire, othere wise merge video will not map layer on exact points
+            int squireWH = (width < height) ? width : height;
+            width = height = squireWH;
+            
+            //store squired video then delete temporary video
+            [self modifyVideo:mediaURLTemp destination:mediaURL crop:CGRectMake(0,0,squireWH,squireWH) scale:1 overlay:nil completion:^(NSInteger status, NSError *error) {
+                
+                switch ( status ) {
+                    case AVAssetExportSessionStatusFailed:
+                        NSLog (@"FAIL = %@", error );
+                        break;
+                    case AVAssetExportSessionStatusCompleted:
+                        //Update dictionary
+                        [flyer setOriginalVideoUrl:@"Template/template.mov"];
+                        [flyer setFlyerTypeVideoWithSize:width height:height videoSoure:@"giphy"];
+                        
+                        tasksAfterGiphySelect = @"play";
+                        break;
+                }
+                
+                //Delete temporary file
+                [self deleteFile:destinationTemp];
+                
+                // Perform ui related things in main thread
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    [self onSelectGiphyShowLoadingIndicator:NO];
+                    [self goBack];
+                });
 
-            tasksAfterGiphySelect = @"play";
-            [self onSelectGiphyShowLoadingIndicator:NO];
-            [self goBack];
-
+            }];
+            
         }];
         
     }] resume];
 }
+
+/**
+ * Delete file
+ */
+-(void)deleteFile:(NSString *)destination{
+    // Make sure the video does not exist already. If it does, delete it.
+    if ([[NSFileManager defaultManager] fileExistsAtPath:destination isDirectory:NULL]) {
+        [[NSFileManager defaultManager] removeItemAtPath:destination error:nil];
+    }
+}
+
+
+# pragma mark - Video editing
+
+/**
+ * Video cropping function
+ * Export video to given destination, from given source, cropped and scaled to specified
+ * rect with the given overlay.
+ */
+- (void)modifyVideo:(NSURL *)src destination:(NSURL *)dest crop:(CGRect)crop
+              scale:(CGFloat)scale overlay:(UIImage *)image
+         completion:(void (^)(NSInteger, NSError *))callback {
+    
+    // Get a pointer to the asset
+    AVURLAsset* firstAsset = [AVURLAsset URLAssetWithURL:src options:nil];
+    
+    // Make an instance of avmutablecomposition so that we can edit this asset:
+    AVMutableComposition* mixComposition = [AVMutableComposition composition];
+    
+    // Add tracks to this composition
+    AVMutableCompositionTrack *videoTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
+    
+    
+    // Image video is always 30 seconds. So we use that unless the background video is smaller.
+    CMTime inTime = CMTimeMake( MAX_VIDEO_LENGTH * VIDEOFRAME, VIDEOFRAME );
+    if ( CMTimeCompare( firstAsset.duration, inTime ) < 0 ) {
+        inTime = firstAsset.duration;
+    }
+    
+    // Add to the video track.
+    NSArray *videos = [firstAsset tracksWithMediaType:AVMediaTypeVideo];
+    CGAffineTransform transform;
+    if ( videos.count > 0 ) {
+        AVAssetTrack *track = [videos objectAtIndex:0];
+        [videoTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:track atTime:kCMTimeZero error:nil];
+        transform = track.preferredTransform;
+        videoTrack.preferredTransform = transform;
+    }
+    
+    NSLog(@"Natural size: %.2f x %.2f", videoTrack.naturalSize.width, videoTrack.naturalSize.height);
+    
+    // Set the mix composition size.
+    mixComposition.naturalSize = crop.size;
+    
+    // Set up the composition parameters.
+    AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
+    videoComposition.frameDuration = CMTimeMake(1, VIDEOFRAME );
+    videoComposition.renderSize = crop.size;
+    videoComposition.renderScale = 1.0;
+    
+    // Pass through parameters for animation.
+    AVMutableVideoCompositionInstruction *passThroughInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
+    passThroughInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, inTime);
+    
+    // Layer instructions
+    AVMutableVideoCompositionLayerInstruction *passThroughLayer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:videoTrack];
+    
+    // Set the transform to maintain orientation
+    if ( scale != 1.0 ) {
+        CGAffineTransform scaleTransform = CGAffineTransformMakeScale( scale, scale);
+        CGAffineTransform translateTransform = CGAffineTransformTranslate( CGAffineTransformIdentity,
+                                                                          -crop.origin.x,
+                                                                          -crop.origin.y);
+        transform = CGAffineTransformConcat( transform, scaleTransform );
+        transform = CGAffineTransformConcat( transform, translateTransform);
+    }
+    
+    [passThroughLayer setTransform:transform atTime:kCMTimeZero];
+    
+    passThroughInstruction.layerInstructions = @[ passThroughLayer ];
+    videoComposition.instructions = @[passThroughInstruction];
+    
+    // If an image is given, then put that in the animation.
+    if ( image != nil ) {
+        
+        // Layer that merges the video and image
+        CALayer *parentLayer = [CALayer layer];
+        parentLayer.frame = CGRectMake( 0, 0, crop.size.width, crop.size.height);
+        
+        // Layer that renders the video.
+        CALayer *videoLayer = [CALayer layer];
+        videoLayer.frame = CGRectMake(0, 0, crop.size.width, crop.size.height );
+        [parentLayer addSublayer:videoLayer];
+        
+        // Layer that renders flyerly image.
+        CALayer *imageLayer = [CALayer layer];
+        imageLayer.frame = CGRectMake(0, 0, crop.size.width, crop.size.height );
+        imageLayer.contents = (id)image.CGImage;
+        [imageLayer setMasksToBounds:YES];
+        
+        [parentLayer addSublayer:imageLayer];
+        
+        // Setup the animation tool
+        videoComposition.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
+    }
+    
+    // Now export the movie
+    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
+    exportSession.videoComposition = videoComposition;
+    
+    // Export the URL
+    exportSession.outputURL = dest;
+    exportSession.outputFileType = AVFileTypeQuickTimeMovie;
+    exportSession.shouldOptimizeForNetworkUse = YES;
+    [exportSession exportAsynchronouslyWithCompletionHandler:^{
+        callback( exportSession.status, exportSession.error );
+    }];
+}
+
 
 #pragma mark - Button Handlers
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
