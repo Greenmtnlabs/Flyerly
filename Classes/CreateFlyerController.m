@@ -2964,10 +2964,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     player =[[MPMoviePlayerController alloc] initWithContentURL:movieURL];
     
-
-    CGRect frame = self.playerView.bounds;
-//    frame.size = [self.flyer getSizeOfFlyer];
-    [player.view setFrame:frame];
+    [player.view setFrame:self.playerView.bounds];
     
     if( playerIsNil ){
         [[NSNotificationCenter defaultCenter]
