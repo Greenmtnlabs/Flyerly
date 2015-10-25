@@ -187,11 +187,10 @@ id lastShareBtnSender;
     [createFlyer tasksOnCreateNewFlyer];
     
     __weak FlyrViewController *weakSelf = self;
-    __weak CreateFlyerController *weakCreate = createFlyer;
     
     //Here we Manage Block for Update
     [createFlyer setOnFlyerBack:^(NSString *nothing) {
-        [weakCreate.flyer saveAfterCheck];
+        [weakSelf saveAndRelease];
         
         [weakSelf enableBtns:YES];
         
@@ -206,7 +205,7 @@ id lastShareBtnSender;
             if (haveValidSubscription == NO && ([weakSelf.interstitial isReady] && ![weakSelf.interstitial hasBeenUsed]) ){
                 [weakSelf.interstitial presentFromRootViewController:weakSelf];
             }  else{
-                [weakCreate.flyer saveAfterCheck];
+                [weakSelf saveAndRelease];
             }
         });
     }];
@@ -411,7 +410,7 @@ id lastShareBtnSender;
         // Here we setCurrent Flyer is Most Recent Flyer
         [weakCreate.flyer setRecentFlyer];
         
-        [weakCreate.flyer saveAfterCheck];
+        [weakSelf saveAndRelease];
 
         [weakSelf enableBtns:YES];
         
@@ -426,7 +425,7 @@ id lastShareBtnSender;
             if (haveValidSubscription == NO && ([weakSelf.interstitial isReady] && ![weakSelf.interstitial hasBeenUsed]) ){
                 [weakSelf.interstitial presentFromRootViewController:weakSelf];
             } else{
-                [weakCreate.flyer saveAfterCheck];
+                [weakSelf saveAndRelease];
             }
         });
     }];
@@ -435,9 +434,34 @@ id lastShareBtnSender;
 }
 - (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
     //on add dismiss && after merging video process, save in gallery
-    [createFlyer.flyer saveAfterCheck];
+    [self releaseExtras];
 }
 
+
+/**
+ * Save flyer and release extras
+ */
+-(void)saveAndRelease{
+    BOOL condition1 = (createFlyer.flyer.saveInGallaryAfterNumberOfTasks == -1);
+    BOOL condition2 = [createFlyer.flyer saveAfterCheck];
+
+    if( condition1 || condition2 ){
+        [self releaseExtras];
+    }
+}
+
+/**
+ * Release extras
+ */
+-(void)releaseExtras{
+    return; //didn't get and advantage of bellow work, will check it
+    if( createFlyer != nil ){
+        if( createFlyer.flyer != nil ){
+                createFlyer = nil;
+                flyer = nil;
+        }
+    }
+}
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
