@@ -1622,26 +1622,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 /**
  * Basically this is the supportive function for old video flyers, new flyers have double size(1240x1240)
  */
--(BOOL)canIncreaseVideoSize {
-    BOOL resizeImageRequired = NO;
-    
-    NSMutableDictionary *templateDictionary = [self getLayerFromMaster:@"Template"];
-    if( [[templateDictionary objectForKey:@"FlyerType"] isEqualToString:@"video"] == NO ){
-        resizeImageRequired = YES;
-    }
-    else if( [[templateDictionary objectForKey:@"FlyerType"] isEqualToString:@"video"] && [templateDictionary objectForKey:@"videoWidth"] != nil ){
-        int videoWidth = [[templateDictionary objectForKey:@"videoWidth"] intValue];
-        if( videoWidth == flyerlyWidth && [[templateDictionary objectForKey:@"videoHeight"] intValue] == flyerlyHeight ){
-            resizeImageRequired = YES;
-        }
-    }
-    
-    return resizeImageRequired;
-}
-
-/**
- * Basically this is the supportive function for old video flyers, new flyers have double size(1240x1240)
- */
 -(CGSize)getSizeOfFlyer {
     CGSize size = CGSizeMake(OldFlyerlyWidth, OldFlyerlyHeight);
     
@@ -1654,14 +1634,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     else if( flyerTypeIsVide && [templateDictionary objectForKey:@"videoWidth"] != nil ){
         int videoWidth = [[templateDictionary objectForKey:@"videoWidth"] intValue];
         int videoHeight = [[templateDictionary objectForKey:@"videoHeight"] intValue];
-        
-        if( videoWidth == flyerlyWidth && videoHeight == flyerlyHeight ){
-            size = CGSizeMake(flyerlyWidth, flyerlyHeight);
-        } else if( videoWidth == OldFlyerlyWidth && videoHeight == OldFlyerlyHeight ){
-            size = CGSizeMake(flyerlyWidth, flyerlyHeight);
-        } else{
-            size = CGSizeMake(videoWidth, videoHeight);
-        }
+        size = CGSizeMake(videoWidth, videoHeight);
     }
     
     return size;

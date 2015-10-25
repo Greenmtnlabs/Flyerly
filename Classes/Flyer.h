@@ -169,7 +169,6 @@
 
 -(CGFloat)getTvDefPosX;
 -(CGFloat)getTvDefPosY;
--(BOOL)canIncreaseVideoSize;
 -(CGSize)getSizeOfFlyer;
 -(BOOL)saveAfterCheck;
 
