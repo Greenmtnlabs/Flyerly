@@ -1709,7 +1709,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
 
 /*
- * Here we Return Sharing Video Path
+ * Here we Return Sharing Video( merged video ) Path
  */
 -(NSString *)getSharingVideoPath{
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];

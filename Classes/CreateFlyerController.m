@@ -2964,7 +2964,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     player =[[MPMoviePlayerController alloc] initWithContentURL:movieURL];
     
-    [player.view setFrame:self.playerView.bounds];
+
+    CGRect frame = self.playerView.bounds;
+//    frame.size = [self.flyer getSizeOfFlyer];
+    [player.view setFrame:frame];
     
     if( playerIsNil ){
         [[NSNotificationCenter defaultCenter]
@@ -3553,10 +3556,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 #pragma mark - Screenshot funcs
 //Here we Getting Snap Shot of Flyer Image View Context
 -(UIImage *)getFlyerSnapShot {
+    UIImage *uiImage = [self getFlyerSnapshotWithSize:self.flyimgView.size];
     CGSize size = [self.flyer getSizeOfFlyer];
-    // Declare your local data outside the block.
-    // `__block` specifies that the variable can be modified from within the block.
-    __block UIImage *uiImage = [self getFlyerSnapshotWithSize:self.flyimgView.size];
     uiImage = [self updateImageSize:uiImage scaledToSize:size];//CGSizeMake(uiImage.size.width*2, uiImage.size.height*2)];
     
     return uiImage;
@@ -3833,7 +3834,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
  */
 -(void)mergeVideoWithOverlay:(NSURL *)firstURL image:(UIImage *)image {
     
-    // Export path
+    // Sharing Video( merged video ) path
     NSString *destination = [self.flyer getSharingVideoPath];
     
     // Delete Old File if they exist

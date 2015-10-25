@@ -178,8 +178,14 @@
             NSString *destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
             [[NSFileManager defaultManager] createFileAtPath:destination contents:data attributes:nil];
             
-            int width = (int)[[[gif[@"images"] objectForKey:@"original"] objectForKey:@"width"] integerValue];
-            int height = (int)[[[gif[@"images"] objectForKey:@"original"] objectForKey:@"height"] integerValue];
+            NSURL *mediaURL = [NSURL fileURLWithPath:destination];
+            AVURLAsset *asset = [AVURLAsset URLAssetWithURL:mediaURL options:nil];
+            NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
+            AVAssetTrack *track = [tracks objectAtIndex:0];
+            CGSize mediaSize = track.naturalSize;
+            
+            int width = mediaSize.width;
+            int height = mediaSize.height;
             
             //Update dictionary
             [flyer setOriginalVideoUrl:@"Template/template.mov"];
