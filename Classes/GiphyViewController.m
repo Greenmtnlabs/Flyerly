@@ -44,9 +44,11 @@
     [self.navigationItem setLeftBarButtonItem:leftBarButtonItem];
     
     // Set the title view.
-    UIImageView *titleImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"giphyLogo1.jpg"]];
+    UIImageView *titleImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"giphyLogo1.png"]];
     titleImg.frame = CGRectMake(titleImg.frame.origin.x, titleImg.frame.origin.y, 40, 40);
     self.navigationItem.titleView = titleImg;
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor lightGrayColor];
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     FlyerlyConfigurator *flyerConfigurator = appDelegate.flyerConfigurator;

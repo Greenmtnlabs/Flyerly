@@ -1209,7 +1209,6 @@
 		C31F67481B676E6F0025FBBF /* Zwelcome_bg@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C31F67461B676E6F0025FBBF /* Zwelcome_bg@2x.jpg */; };
 		C31F67491B676E6F0025FBBF /* Zwelcome_bg@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C31F67471B676E6F0025FBBF /* Zwelcome_bg@3x.jpg */; };
 		C32139D61A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32139D51A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib */; };
-		C337ED481BD69A100038B82E /* giphyLogo1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C337ED471BD69A100038B82E /* giphyLogo1.jpg */; };
 		C337ED5E1BD69DBA0038B82E /* 5tab_3_giphy@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C337ED4A1BD69DBA0038B82E /* 5tab_3_giphy@3x.png */; };
 		C337ED5F1BD69DBA0038B82E /* 5tab_3_giphy_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C337ED4B1BD69DBA0038B82E /* 5tab_3_giphy_selected@3x.png */; };
 		C337ED601BD69DBA0038B82E /* 5tab_3_giphy_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C337ED4C1BD69DBA0038B82E /* 5tab_3_giphy_selected@2x.png */; };
@@ -1489,6 +1488,7 @@
 		C3766D941B56510200B7F5B2 /* icon72.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3766D4C1B56510100B7F5B2 /* icon72.jpg */; };
 		C3766D951B56510200B7F5B2 /* icon73.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3766D4D1B56510100B7F5B2 /* icon73.jpg */; };
 		C3766D961B56510200B7F5B2 /* old_icon8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3766D4E1B56510200B7F5B2 /* old_icon8.jpg */; };
+		C38146461BDD30D900240375 /* giphyLogo1.png in Resources */ = {isa = PBXBuildFile; fileRef = C38146451BDD30D900240375 /* giphyLogo1.png */; };
 		C3A30DA61AB7F8BD00B0F1CF /* liblob-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C300432A1AB6ED9300866385 /* liblob-ios.a */; };
 		C3D8DD911B53DBE1006C2A9F /* b1.png in Resources */ = {isa = PBXBuildFile; fileRef = C3D8DD7D1B53DBE1006C2A9F /* b1.png */; };
 		C3D8DD921B53DBE1006C2A9F /* b10.png in Resources */ = {isa = PBXBuildFile; fileRef = C3D8DD7E1B53DBE1006C2A9F /* b10.png */; };
@@ -2889,7 +2889,6 @@
 		C31F674C1B67855F0025FBBF /* Zmain_screenbg@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Zmain_screenbg@3x.jpg"; sourceTree = "<group>"; };
 		C31F674D1B67855F0025FBBF /* Zmain_screenbg-568h@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Zmain_screenbg-568h@2x.jpg"; sourceTree = "<group>"; };
 		C32139D51A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CropVideoViewController-iPhone6-Plus.xib"; sourceTree = "<group>"; };
-		C337ED471BD69A100038B82E /* giphyLogo1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = giphyLogo1.jpg; sourceTree = "<group>"; };
 		C337ED4A1BD69DBA0038B82E /* 5tab_3_giphy@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5tab_3_giphy@3x.png"; sourceTree = "<group>"; };
 		C337ED4B1BD69DBA0038B82E /* 5tab_3_giphy_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5tab_3_giphy_selected@3x.png"; sourceTree = "<group>"; };
 		C337ED4C1BD69DBA0038B82E /* 5tab_3_giphy_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5tab_3_giphy_selected@2x.png"; sourceTree = "<group>"; };
@@ -3170,6 +3169,7 @@
 		C3766D4C1B56510100B7F5B2 /* icon72.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon72.jpg; sourceTree = "<group>"; };
 		C3766D4D1B56510100B7F5B2 /* icon73.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon73.jpg; sourceTree = "<group>"; };
 		C3766D4E1B56510200B7F5B2 /* old_icon8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = old_icon8.jpg; sourceTree = "<group>"; };
+		C38146451BDD30D900240375 /* giphyLogo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = giphyLogo1.png; sourceTree = "<group>"; };
 		C3D8DD7D1B53DBE1006C2A9F /* b1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b1.png; sourceTree = "<group>"; };
 		C3D8DD7E1B53DBE1006C2A9F /* b10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b10.png; sourceTree = "<group>"; };
 		C3D8DD7F1B53DBE1006C2A9F /* b11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b11.png; sourceTree = "<group>"; };
@@ -3294,6 +3294,7 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				C38146451BDD30D900240375 /* giphyLogo1.png */,
 				C30E29D51BDB64DE00A5D160 /* spinner.gif */,
 				C337ED4A1BD69DBA0038B82E /* 5tab_3_giphy@3x.png */,
 				C337ED4B1BD69DBA0038B82E /* 5tab_3_giphy_selected@3x.png */,
@@ -3315,7 +3316,6 @@
 				C337ED5B1BD69DBA0038B82E /* 5tab_4_gallery@3x.png */,
 				C337ED5C1BD69DBA0038B82E /* 5tab_4_gallery_selected@2x.png */,
 				C337ED5D1BD69DBA0038B82E /* 5tab_4_gallery_selected@3x.png */,
-				C337ED471BD69A100038B82E /* giphyLogo1.jpg */,
 				209ED57D1BD5095E0098CD97 /* noAdd_5.png */,
 				209ED57E1BD5095E0098CD97 /* noAdd_6.png */,
 				209ED57F1BD5095E0098CD97 /* noAdd_6Plus.png */,
@@ -6246,6 +6246,7 @@
 				246EF509193C515D004539B2 /* emoticon43@2x.png in Resources */,
 				246EF51F193C515D004539B2 /* emoticon63@2x.png in Resources */,
 				C31F67491B676E6F0025FBBF /* Zwelcome_bg@3x.jpg in Resources */,
+				C38146461BDD30D900240375 /* giphyLogo1.png in Resources */,
 				C32139D61A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib in Resources */,
 				2421849A194B4AEC00FDDA97 /* emoticon139@2x.png in Resources */,
 				202978AE1B4CFBE700F35E40 /* emoticon198-waaaht@2x.png in Resources */,
@@ -6323,7 +6324,6 @@
 				242184FB194B4AEC00FDDA97 /* Skiing-icon.png in Resources */,
 				2029787E1B4CFBE700F35E40 /* emoticon203-choler@2x.png in Resources */,
 				24861EB019F9147100670F6D /* 07_height@3x.png in Resources */,
-				C337ED481BD69A100038B82E /* giphyLogo1.jpg in Resources */,
 				24861F1219F9147100670F6D /* inAppPurchaseViewBg@3x.png in Resources */,
 				C3766D681B56510200B7F5B2 /* icon28.jpg in Resources */,
 				C3D8DD971B53DBE1006C2A9F /* b15.png in Resources */,
