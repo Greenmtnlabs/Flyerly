@@ -168,16 +168,16 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     //245-feature-in-create-screen-when-user-is-creating-brand-new-flyer-have-the-background-button-selected-for-them-initially
     if( isNewFlyer ){
         [self setAddMoreLayerTabAction:backgroundTabButton];
+        isNewFlyer = NO;
     }
     
     if( tasksAfterGiphySelect != nil ){
         [self callAddMoreLayers];
         if ([tasksAfterGiphySelect isEqual:@"play"] && player != nil ) {
-            [player play];
-            [self hidePlayerControlls:NO];
+            [self videoPlay:YES repeat:YES];
         }
+        tasksAfterGiphySelect = nil;
     }
-    tasksAfterGiphySelect = nil;
 }
 
 -(void) loadInterstitialAdd{
@@ -844,12 +844,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     userPurchases.delegate = nil;
     
+    [self videoPlay:NO repeat:NO];
+    
     // This work will be done in the background to prevent the UI from being
     // stuck.
     dispatch_async( dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-        
-        isPlaying = NO;
-        [player pause];
         
         if( [flyer isSaveRequired] == YES ) {
             // Save flyer to disk
@@ -2310,10 +2309,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 //Set Image Tag in dictionary
                 [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",(int)view.tag]];
                 
-                if( player != nil ){
-                    player.repeatMode = NO;
-                    [player stop];
-                }
+                [self videoPlay:NO repeat:NO];
             }
             
             // Add border to selected layer thumbnail
@@ -3010,26 +3006,38 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     NSString *videoSoure = [[flyer getLayerFromMaster:@"Template"] objectForKey:@"videoSoure"];
     if( videoSoure != nil && [videoSoure isEqualToString:@"giphy"] ){
-        [player play];
-        player.repeatMode = YES;
+        [self videoPlay:YES repeat:YES];
     }
 }
 
 
 -(IBAction)play:(id)sender {
+    BOOL playOrStop = ([playButton isSelected] == NO);
+    [self videoPlay:playOrStop repeat:NO];
     
-    if ([playButton isSelected] == YES) {
+}
+
+-(void)videoPlay:(BOOL)playOrStop repeat:(BOOL)repeat{
+    
+    if ( playOrStop ) {
+        if(player != nil ){
+            [playButton setSelected:YES];
+            isPlaying = YES;
+            [playerToolBar setHidden:NO];
+            [player play];
+            player.repeatMode = repeat;
+            player.currentPlaybackTime = playerSlider.value;
+            [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTime:) userInfo:nil repeats:NO];
+        }
+        
+    } else{
         [playButton setSelected:NO];
-        isPlaying = NO;
-        [player pause];
-        
-    }else {
-        [playButton setSelected:YES];
-        isPlaying = YES;
-        player.currentPlaybackTime = playerSlider.value;
-        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTime:) userInfo:nil repeats:NO];
-        [player play];
-        
+        [playerToolBar setHidden:YES];
+        if(player != nil ){
+            isPlaying = NO;
+            [player pause];
+            player.repeatMode = repeat;            
+        }
     }
 }
 
@@ -3797,18 +3805,13 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         callback( exportSession.status, exportSession.error );
     }];
 }
--(void)hidePlayerControlls:(BOOL)showHide {
-    // Make sure we hide the play bar.
-    [playerToolBar setHidden:showHide];
-
-}
 
 /*
  * Here we Merge Video
  */
 -(void)videoMergeProcess {
     
-    [self hidePlayerControlls:YES];
+    [self videoPlay:NO repeat:NO];
     
     // CREATING PATH FOR FLYER OVERLAY VIDEO
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
@@ -6282,7 +6285,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         CGFloat height = size.height;
         
         if ( [flyer isVideoFlyer] ){
-            [self hidePlayerControlls:YES];
+            [self videoPlay:NO repeat:NO];
             
             UIImage *videoImg = [flyer getVideoWithoutMergeSnapshot]; //get a framof video
             zoomScreenShot.image = [self getVideoWithMergeSnapshot:size videoFramImg:videoImg];
