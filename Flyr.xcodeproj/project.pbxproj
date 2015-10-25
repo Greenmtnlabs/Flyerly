@@ -1151,7 +1151,6 @@
 		65F41C8B173BDC03000BA8CB /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F41C8A173BDC02000BA8CB /* libxml2.2.dylib */; };
 		C306CC561BD657D100F9D34D /* GiphyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C306CC541BD657D100F9D34D /* GiphyViewController.m */; };
 		C306CC571BD657D100F9D34D /* GiphyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C306CC551BD657D100F9D34D /* GiphyViewController.xib */; };
-		C306CC5D1BD68E1B00F9D34D /* AnimatedGIFImageSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = C306CC5C1BD68E1B00F9D34D /* AnimatedGIFImageSerialization.m */; };
 		C30E29D61BDB64DE00A5D160 /* spinner.gif in Resources */ = {isa = PBXBuildFile; fileRef = C30E29D51BDB64DE00A5D160 /* spinner.gif */; };
 		C31519C31BB18708001D6B8D /* intro-1-screen-iPhone6p.png in Resources */ = {isa = PBXBuildFile; fileRef = C31519B71BB18708001D6B8D /* intro-1-screen-iPhone6p.png */; };
 		C31519C41BB18708001D6B8D /* intro-1-screen-iPhone4.png in Resources */ = {isa = PBXBuildFile; fileRef = C31519B81BB18708001D6B8D /* intro-1-screen-iPhone4.png */; };
@@ -2828,8 +2827,6 @@
 		C306CC531BD657D100F9D34D /* GiphyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiphyViewController.h; sourceTree = "<group>"; };
 		C306CC541BD657D100F9D34D /* GiphyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiphyViewController.m; sourceTree = "<group>"; };
 		C306CC551BD657D100F9D34D /* GiphyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GiphyViewController.xib; sourceTree = "<group>"; };
-		C306CC5B1BD68E1B00F9D34D /* AnimatedGIFImageSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedGIFImageSerialization.h; sourceTree = "<group>"; };
-		C306CC5C1BD68E1B00F9D34D /* AnimatedGIFImageSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedGIFImageSerialization.m; sourceTree = "<group>"; };
 		C30E29D51BDB64DE00A5D160 /* spinner.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = spinner.gif; sourceTree = "<group>"; };
 		C31519B71BB18708001D6B8D /* intro-1-screen-iPhone6p.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro-1-screen-iPhone6p.png"; sourceTree = "<group>"; };
 		C31519B81BB18708001D6B8D /* intro-1-screen-iPhone4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro-1-screen-iPhone4.png"; sourceTree = "<group>"; };
@@ -3253,7 +3250,6 @@
 		080E96DDFE201D6D7F000001 /* FlyerlyClasses */ = {
 			isa = PBXGroup;
 			children = (
-				C35278171BCE86C2002963F1 /* AnimatedGIFImageSerialization */,
 				2041D5A51BA07F4900EEFF83 /* IntroScreen */,
 				20F3597C1888DC8A001376B6 /* CreateFlyer */,
 				1D3623240D0F684500981E51 /* FlyrAppDelegate.h */,
@@ -5474,15 +5470,6 @@
 			name = GoogleAddCell;
 			sourceTree = "<group>";
 		};
-		C35278171BCE86C2002963F1 /* AnimatedGIFImageSerialization */ = {
-			isa = PBXGroup;
-			children = (
-				C306CC5B1BD68E1B00F9D34D /* AnimatedGIFImageSerialization.h */,
-				C306CC5C1BD68E1B00F9D34D /* AnimatedGIFImageSerialization.m */,
-			);
-			path = AnimatedGIFImageSerialization;
-			sourceTree = "<group>";
-		};
 		C3D8DD7C1B53DBE1006C2A9F /* Borders */ = {
 			isa = PBXGroup;
 			children = (
@@ -7140,7 +7127,6 @@
 				204635621895E4AF00A94C42 /* Flyer.m in Sources */,
 				20E38AA4197FB39200D1CFA9 /* SendingPrintViewController.m in Sources */,
 				C34E98531BA2E54F00692597 /* MainScreenAddsCell.m in Sources */,
-				C306CC5D1BD68E1B00F9D34D /* AnimatedGIFImageSerialization.m in Sources */,
 				2044FF96185088ED00A26B42 /* MainSettingCell.m in Sources */,
 				2478E5E3192C7A6E0081B31B /* InAppViewController.m in Sources */,
 				2022C63518D1BAF000BCD5F7 /* RMStoreKeychainPersistence.m in Sources */,
