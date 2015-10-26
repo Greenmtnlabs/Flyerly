@@ -192,11 +192,7 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
         NSTimeInterval secondsBetween = [endDate timeIntervalSinceDate:startDate];
         int minute  = floor(secondsBetween/(60));
         int hour  = secondsBetween/(60*60);
-//        int day  = secondsBetween/(60*60*24);
-//        int month = secondsBetween/(60*60*24*30);
-//        int year  = secondsBetween/(60*60*24*30*12);
-        
-        
+
         if( hour > 23 ){
             NSDateFormatter *dateformate=[[NSDateFormatter alloc]init];
             [dateformate setDateFormat:@"yyyy-MM-dd"];
@@ -210,8 +206,6 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     }
     return updatedDate;
 }
-
-
 
 
 /*
