@@ -17,6 +17,7 @@
 #import "PrintViewController.h"
 #import "InviteForPrint.h"
 #import "ImageLayer.h"
+#import "GiphyViewController.h"
 
 #define IMAGEPICKER_TEMPLATE 1
 #define IMAGEPICKER_PHOTO 2
@@ -44,6 +45,8 @@
     BOOL haveValidSubscription;
     BOOL saveToGallaryReqBeforeSharing;
     BOOL isNewFlyer;
+
+
     
 }
 
@@ -51,7 +54,7 @@
 
 @implementation CreateFlyerController
 
-@synthesize sharingPannelIsHidden;
+@synthesize sharingPannelIsHidden,tasksAfterGiphySelect;
 
 //Outlets form zoom
 @synthesize zoomScrollView,zoomScreenShot,zoomMagnifyingGlass,zoomScreenShotForVideo;
@@ -65,7 +68,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert,signInAlert,waterMarkPurchasingAlert,spaceUnavailableAlert;
 @synthesize imgPickerFlag,layerScrollView,flyerPath;
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton,drawingMenueButton;
-@synthesize libText,libBackground,libArts,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder,libDrawing;
+@synthesize libText,libBackground,libArts,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder,giphyBgBtn,libDrawing;
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider,tempelateView;
 @synthesize durationLabel,durationChange,onFlyerBack,shouldShowAdd;
 @synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAddView,drawingPatternsView,drawingEraserMsgView;
@@ -163,8 +166,18 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     }
     
     //245-feature-in-create-screen-when-user-is-creating-brand-new-flyer-have-the-background-button-selected-for-them-initially
-    if( isNewFlyer )
-    [self setAddMoreLayerTabAction:backgroundTabButton];
+    if( isNewFlyer ){
+        [self setAddMoreLayerTabAction:backgroundTabButton];
+        isNewFlyer = NO;
+    }
+    
+    if( tasksAfterGiphySelect != nil ){
+        [self callAddMoreLayers];
+        if ([tasksAfterGiphySelect isEqual:@"play"] && player != nil ) {
+            [self videoPlay:YES repeat:YES];
+        }
+        tasksAfterGiphySelect = nil;
+    }
 }
 
 -(void) loadInterstitialAdd{
@@ -380,6 +393,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     } else if ( IS_IPHONE_6 ){
         lsvRec = CGRectMake(0, 0,420,180);
     }else if ( IS_IPHONE_6_PLUS ){
+        self.contextView.size = CGSizeMake(self.contextView.frame.size.width, self.contextView.frame.size.height+10);
         lsvRec = CGRectMake(0, 0,420,189);
     }
     layerScrollView = [[UIScrollView alloc]initWithFrame:lsvRec];
@@ -830,12 +844,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     userPurchases.delegate = nil;
     
+    [self videoPlay:NO repeat:NO];
+    
     // This work will be done in the background to prevent the UI from being
     // stuck.
     dispatch_async( dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-        
-        isPlaying = NO;
-        [player pause];
         
         if( [flyer isSaveRequired] == YES ) {
             // Save flyer to disk
@@ -889,6 +902,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     // Remove observers
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    layerScrollView = nil;
 }
 
 #pragma mark -  Add Content In ScrollViews
@@ -2294,6 +2309,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 //Set Image Tag in dictionary
                 [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",(int)view.tag]];
                 
+                [self videoPlay:NO repeat:NO];
             }
             
             // Add border to selected layer thumbnail
@@ -2987,23 +3003,41 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     player.scalingMode = MPMovieScalingModeAspectFill;
     player.backgroundView.backgroundColor = [UIColor whiteColor];
     [player prepareToPlay];
+    
+    NSString *videoSoure = [[flyer getLayerFromMaster:@"Template"] objectForKey:@"videoSoure"];
+    if( videoSoure != nil && [videoSoure isEqualToString:@"giphy"] ){
+        [self videoPlay:YES repeat:YES];
+    }
 }
 
 
 -(IBAction)play:(id)sender {
+    BOOL playOrStop = ([playButton isSelected] == NO);
+    [self videoPlay:playOrStop repeat:NO];
     
-    if ([playButton isSelected] == YES) {
+}
+
+-(void)videoPlay:(BOOL)playOrStop repeat:(BOOL)repeat{
+    
+    if ( playOrStop ) {
+        if(player != nil ){
+            [playButton setSelected:YES];
+            isPlaying = YES;
+            [playerToolBar setHidden:NO];
+            [player play];
+            player.repeatMode = repeat;
+            player.currentPlaybackTime = playerSlider.value;
+            [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTime:) userInfo:nil repeats:NO];
+        }
+        
+    } else{
         [playButton setSelected:NO];
-        isPlaying = NO;
-        [player pause];
-        
-    }else {
-        [playButton setSelected:YES];
-        isPlaying = YES;
-        player.currentPlaybackTime = playerSlider.value;
-        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTime:) userInfo:nil repeats:NO];
-        [player play];
-        
+        [playerToolBar setHidden:YES];
+        if(player != nil ){
+            isPlaying = NO;
+            [player pause];
+            player.repeatMode = repeat;            
+        }
     }
 }
 
@@ -3519,11 +3553,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 #pragma mark - Screenshot funcs
 //Here we Getting Snap Shot of Flyer Image View Context
 -(UIImage *)getFlyerSnapShot {
-    // Declare your local data outside the block.
-    // `__block` specifies that the variable can be modified from within the block.
-    __block UIImage *uiImage = [self getFlyerSnapshotWithSize:self.flyimgView.size];
-    if( [flyer canIncreaseVideoSize] == YES )
-    uiImage = [self updateImageSize:uiImage scaledToSize:CGSizeMake(uiImage.size.width*2, uiImage.size.height*2)];
+    UIImage *uiImage = [self getFlyerSnapshotWithSize:self.flyimgView.size];
+    CGSize size = [self.flyer getSizeOfFlyer];
+    uiImage = [self updateImageSize:uiImage scaledToSize:size];//CGSizeMake(uiImage.size.width*2, uiImage.size.height*2)];
     
     return uiImage;
 }
@@ -3771,18 +3803,13 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         callback( exportSession.status, exportSession.error );
     }];
 }
--(void)hidePlayerControlls:(BOOL)showHide {
-    // Make sure we hide the play bar.
-    [playerToolBar setHidden:showHide];
-
-}
 
 /*
  * Here we Merge Video
  */
 -(void)videoMergeProcess {
     
-    [self hidePlayerControlls:YES];
+    [self videoPlay:NO repeat:NO];
     
     // CREATING PATH FOR FLYER OVERLAY VIDEO
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
@@ -3804,7 +3831,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
  */
 -(void)mergeVideoWithOverlay:(NSURL *)firstURL image:(UIImage *)image {
     
-    // Export path
+    // Sharing Video( merged video ) path
     NSString *destination = [self.flyer getSharingVideoPath];
     
     // Delete Old File if they exist
@@ -3815,15 +3842,12 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     // Export the URL
     NSURL *exportURL = [NSURL fileURLWithPath:destination];
-    
-    int vWidth = flyerlyWidth;
-    int vHeight = flyerlyHeight;
-    if( [self.flyer canIncreaseVideoSize] == NO ){
-        vWidth = OldFlyerlyWidth;
-        vHeight = OldFlyerlyHeight;
-    }
+    CGSize size = [self.flyer getSizeOfFlyer];
+    int vWidth = size.width;
+    int vHeight = size.height;
+
     self.flyer.saveInGallaryRequired = -1;//video merging starts now
-    [self modifyVideo:firstURL destination:exportURL crop:CGRectMake(0, 0, vHeight, vHeight ) scale:1 overlay:image completion:^(NSInteger status, NSError *error) {
+    [self modifyVideo:firstURL destination:exportURL crop:CGRectMake(0, 0, vWidth, vHeight ) scale:1 overlay:image completion:^(NSInteger status, NSError *error) {
         switch ( status ) {
             case AVAssetExportSessionStatusFailed:{
                 NSLog (@"FAIL = %@", error );
@@ -5042,6 +5066,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     //Un Selected State of Buttons
     [backtemplates setSelected:NO];
     [flyerBorder setSelected:NO];
+    [giphyBgBtn setSelected:NO];
     
     if( selectedButton == backtemplates ) {
         //HERE WE SET ANIMATION
@@ -5105,6 +5130,14 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         [flyerBorder setSelected:YES];
     }
+    else if(selectedButton == giphyBgBtn) {
+       tasksAfterGiphySelect = @"goingToGiphy";
+       GiphyViewController *giphyViewController = [[GiphyViewController alloc]initWithNibName:@"GiphyViewController" bundle:nil];
+        giphyViewController.flyer = flyer;
+        giphyViewController.tasksAfterGiphySelect = tasksAfterGiphySelect;
+       [self.navigationController pushViewController:giphyViewController animated:YES];
+    }
+    
 }
 
 /*
@@ -6250,7 +6283,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         CGFloat height = size.height;
         
         if ( [flyer isVideoFlyer] ){
-            [self hidePlayerControlls:YES];
+            [self videoPlay:NO repeat:NO];
             
             UIImage *videoImg = [flyer getVideoWithoutMergeSnapshot]; //get a framof video
             zoomScreenShot.image = [self getVideoWithMergeSnapshot:size videoFramImg:videoImg];

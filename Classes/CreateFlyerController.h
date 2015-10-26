@@ -167,6 +167,7 @@
 @property (nonatomic, strong)IBOutlet UIButton *cameraTakePhoto;
 @property (nonatomic, strong)IBOutlet UIButton *cameraRoll;
 @property (nonatomic, strong)IBOutlet UIButton *flyerBorder;
+@property (nonatomic, strong)IBOutlet UIButton *giphyBgBtn;
 
 //These are LibText
 @property (nonatomic, strong)IBOutlet UIButton *fontTabButton;
@@ -213,6 +214,7 @@
 
 @property (nonatomic,strong)MPMoviePlayerController *player;
 @property (nonatomic,strong) Flyer *flyer;
+@property (nonatomic,strong) NSString *tasksAfterGiphySelect;
 @property(strong,nonatomic) NSString *currentLayer;
 @property(strong,nonatomic) NSMutableDictionary *layersDic;
 @property (nonatomic, copy) void (^onFlyerBack)(NSString *);
@@ -293,4 +295,5 @@
 //This variable was needed because When comming from cropview render flyer relaocating video flyer
 @property (assign) BOOL enableRenderFlyer;
 -(void)enableNavigation:(BOOL)enable;
+-(void)selectGiphy:(id)sender;
 @end

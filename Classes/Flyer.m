@@ -233,7 +233,8 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
  * Here we check following tasks before save
  * if its video flyer then add in gallary after interstiall add hide and merging done
  */
--(void)saveAfterCheck{
+-(BOOL)saveAfterCheck{
+    BOOL saved = NO;
     saveInGallaryAfterNumberOfTasks++;
     
     if( saveInGallaryAfterNumberOfTasks > 0 ){
@@ -241,12 +242,15 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
             if( saveInGallaryAfterNumberOfTasks > 1 ){
                 [self resetSaveGallaryTasks];
                 [self saveIntoGallery];
+                saved = YES;
             }
         } else{
                 [self resetSaveGallaryTasks];
                 [self saveIntoGallery];
+                saved = YES;
         }
     }
+    return saved;
 }
 /**
  * Save in gallary after checking userdefaults, without data
@@ -1102,9 +1106,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     // Set to Master Dictionary
     [masterLayers setValue:imageDetailDictionary forKey:uid];
-
 }
-
 
 /*
  * Return Image Tag
@@ -1589,12 +1591,24 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  * Here we Set Flyer Type to Video Flyer
  */
 -(void)setFlyerTypeVideo {
+    [self setFlyerTypeVideoWithSize:flyerlyWidth height:flyerlyHeight videoSoure:@"flyerly"];
+}
+/*
+ * Here we Set Flyer Type to Video Flyer with size
+  @return: void
+  @parms:
+   @width: integer value
+   @height: integer value
+   @videoSoure: String type ( Possible values would be @"giphy" / @"flyerly"
+ */
+-(void)setFlyerTypeVideoWithSize:(int)width height:(int)height videoSoure:(NSString *)videoSoure {
 
     NSMutableDictionary *templateDictionary = [self getLayerFromMaster:@"Template"];
     
     [templateDictionary setValue:@"video" forKey:@"FlyerType"];
-    [templateDictionary setValue:[NSString stringWithFormat:@"%i",flyerlyWidth] forKey:@"videoWidth"];
-    [templateDictionary setValue:[NSString stringWithFormat:@"%i",flyerlyWidth] forKey:@"videoHeight"];
+    [templateDictionary setValue:[NSString stringWithFormat:@"%i",width] forKey:@"videoWidth"];
+    [templateDictionary setValue:[NSString stringWithFormat:@"%i",height] forKey:@"videoHeight"];
+    [templateDictionary setValue:videoSoure forKey:@"videoSoure"];
     
     
     // Set timeStamp
@@ -1608,22 +1622,25 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 /**
  * Basically this is the supportive function for old video flyers, new flyers have double size(1240x1240)
  */
--(BOOL)canIncreaseVideoSize {
-    BOOL resizeImageRequired = NO;
+-(CGSize)getSizeOfFlyer {
+    CGSize size = CGSizeMake(OldFlyerlyWidth, OldFlyerlyHeight);
     
     NSMutableDictionary *templateDictionary = [self getLayerFromMaster:@"Template"];
-    if( [[templateDictionary objectForKey:@"FlyerType"] isEqualToString:@"video"] == NO ){
-        resizeImageRequired = YES;
+    BOOL flyerTypeIsVide = ([[templateDictionary objectForKey:@"FlyerType"] isEqualToString:@"video"]);
+    
+    if( flyerTypeIsVide == NO ){
+        size = CGSizeMake(flyerlyWidth, flyerlyHeight);
     }
-    else if( [[templateDictionary objectForKey:@"FlyerType"] isEqualToString:@"video"] && [templateDictionary objectForKey:@"videoWidth"] != nil ){
+    else if( flyerTypeIsVide && [templateDictionary objectForKey:@"videoWidth"] != nil ){
         int videoWidth = [[templateDictionary objectForKey:@"videoWidth"] intValue];
-        if( videoWidth == flyerlyWidth ){
-            resizeImageRequired = YES;
-        }
+        int videoHeight = [[templateDictionary objectForKey:@"videoHeight"] intValue];
+        size = CGSizeMake(videoWidth, videoHeight);
     }
     
-    return resizeImageRequired;
+    return size;
 }
+
+
 
 /*
  * Here we Get Flyer Type for Video Flyer
@@ -1692,7 +1709,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
 
 /*
- * Here we Return Sharing Video Path
+ * Here we Return Sharing Video( merged video ) Path
  */
 -(NSString *)getSharingVideoPath{
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
@@ -1701,11 +1718,11 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 }
 
 /*
- * Here we Return Over generated Video Snap Shot For Main screen
+ * Here we Return Over merged Video Snap Shot For Main screen
  */
 -(UIImage *)getSharingVideoCover {
 
-    NSString* filePath = [self getSharingVideoPath];
+    NSString* filePath = [self getSharingVideoPath];//merged video
    return [self getSnapShotOfVideoPath:filePath];
 }
 
@@ -1718,6 +1735,9 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     return [self getSnapShotOfVideoPath:filePath];
 }
 
+/**
+ * Get first frame from the video
+ */
 -(UIImage *)getSnapShotOfVideoPath:(NSString *) filePath {
     UIImage *img;
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:NULL]) {
@@ -1771,22 +1791,17 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  */
 -(UIImage *)getImageForVideo {
     
-    UIImage *bottomImage = [self  getSharingVideoCover];
+    UIImage *bottomImage = [self  getSharingVideoCover];//this is merged video first frame
     
     UIImage *imgPlayIcon = [UIImage imageNamed:@"play_icon"];
 
-    int vWidth = flyerlyWidth;
-    int vHeight = flyerlyHeight;
-    int sizeIncreased = 2;
-    if( [self canIncreaseVideoSize] == NO ){
-        vWidth = OldFlyerlyWidth;
-        vHeight = OldFlyerlyHeight;
-        sizeIncreased = 1;
-    }
+    CGSize size = [self getSizeOfFlyer];
+    int vWidth = size.width;
+    int vHeight = size.height;
     
     // play icon width and height
-    CGFloat playIconWidth = 180*sizeIncreased;
-    CGFloat playIconHeight = 180*sizeIncreased;
+    CGFloat playIconWidth = floor(vWidth/3.5); //in 620 flyer height of expected height for icon 177
+    CGFloat playIconHeight = floor(vWidth/3.5); //in 1240 flyer height of expected height for icon 354
     
     CGSize newSize = CGSizeMake( vWidth, vHeight );
     UIGraphicsBeginImageContext( newSize );

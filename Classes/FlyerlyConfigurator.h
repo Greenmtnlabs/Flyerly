@@ -125,4 +125,5 @@
 -(NSNumber *)dropboxShouldOverwriteExistedFile;
 //SHKBuffer
 - (NSNumber *)bufferShouldShortenURLS;
+- (NSString*)giphyApiKey;
 @end

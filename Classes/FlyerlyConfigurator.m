@@ -746,4 +746,14 @@
     return NSStringFromCGRect(CGRectZero);
 }
 
+
+//Giphy Api Key
+- (NSString*)giphyApiKey{    
+#ifdef DEBUG
+    return @"dc6zaTOxFJmzC"; //testing key
+    
+#else
+    return @"dc6zaTOxFJmzC"; //testing key
+#endif
+}
 @end
