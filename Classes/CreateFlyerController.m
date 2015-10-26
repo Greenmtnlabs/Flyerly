@@ -134,6 +134,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     }
 }
 
+
 /**
  * Update the view once it appears.
  */

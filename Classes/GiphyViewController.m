@@ -67,6 +67,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    // To clear navigation bar color
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+}
+
+
+
 /**
  * Load giphy images from internet
  */

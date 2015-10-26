@@ -120,7 +120,7 @@ id lastShareBtnSender;
     txtSearch.text = @"";
     [self.tView reloadData];
     [self checkUserPurchases];
-    
+
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -135,7 +135,6 @@ id lastShareBtnSender;
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    self.navigationController.navigationBar.alpha = 1.0;
 }
 
 
