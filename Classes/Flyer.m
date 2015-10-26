@@ -197,7 +197,7 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
 //        int year  = secondsBetween/(60*60*24*30*12);
         
         
-        if( hour > 20 ){
+        if( hour > 23 ){
             NSDateFormatter *dateformate=[[NSDateFormatter alloc]init];
             [dateformate setDateFormat:@"yyyy-MM-dd"];
             NSString *date = [dateformate stringFromDate:startDate];
