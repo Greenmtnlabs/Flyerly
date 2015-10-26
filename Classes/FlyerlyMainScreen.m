@@ -779,13 +779,6 @@ id lastShareBtnSender;
  * Release extras
  */
 -(void)releaseExtras{
-    return; //didn't get and advantage of bellow work, will check it
-    if( createFlyer != nil ){
-        if( createFlyer.flyer != nil ){
-                createFlyer = nil;
-                flyer = nil;
-        }
-    }
 }
 
 /**
