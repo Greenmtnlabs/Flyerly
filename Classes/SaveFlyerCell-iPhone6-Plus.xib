@@ -81,6 +81,9 @@
                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XMz-bs-DWZ">
                         <rect key="frame" x="224" y="74" width="20" height="20"/>
                     </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bar-If-W7E">
+                        <rect key="frame" x="248" y="74" width="20" height="20"/>
+                    </imageView>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XBs-Lj-INJ">
                         <rect key="frame" x="0.0" y="0.0" width="314" height="104"/>
                         <state key="normal">
@@ -123,6 +126,7 @@
                 <outletCollection property="socialStatus" destination="ct7-Mz-Iqq" id="WBg-pN-zS5"/>
                 <outletCollection property="socialStatus" destination="CnC-Z6-yhJ" id="TO2-ee-hcF"/>
                 <outletCollection property="socialStatus" destination="XMz-bs-DWZ" id="36k-Kc-dON"/>
+                <outletCollection property="socialStatus" destination="Bar-If-W7E" id="1zA-gG-8DU"/>
             </connections>
             <point key="canvasLocation" x="268" y="-139"/>
         </tableViewCell>

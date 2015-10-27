@@ -283,6 +283,7 @@ id lastShareBtnSender;
     for (int i =0 ; i < [allFlyers count] ; i++)
     {
         Flyer *flyr = [[Flyer alloc] initWithPath:[allFlyers objectAtIndex:i] setDirectory:NO];
+        NSLog(@"%lu", [flyr.socialArray count]);
         
         for(int j =0 ; j < [flyr.socialArray count] ; j++){
             if([flyr.socialArray[j] isEqualToString:@"1"]){
