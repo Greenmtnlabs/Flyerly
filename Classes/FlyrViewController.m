@@ -283,7 +283,7 @@ id lastShareBtnSender;
     for (int i =0 ; i < [allFlyers count] ; i++)
     {
         Flyer *flyr = [[Flyer alloc] initWithPath:[allFlyers objectAtIndex:i] setDirectory:NO];
-        
+               
         for(int j =0 ; j < [flyr.socialArray count] ; j++){
             if([flyr.socialArray[j] isEqualToString:@"1"]){
                 [unsharedFlyer removeObjectAtIndex:i];
@@ -454,13 +454,6 @@ id lastShareBtnSender;
  * Release extras
  */
 -(void)releaseExtras{
-    return; //didn't get and advantage of bellow work, will check it
-    if( createFlyer != nil ){
-        if( createFlyer.flyer != nil ){
-                createFlyer = nil;
-                flyer = nil;
-        }
-    }
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -147,18 +147,17 @@ UIAlertView *saveCurrentFlyerAlert;
 }
 /*
  * When video is edited
- * all buttons except for facebookButton and youTubeButton
  * set as unselected
  */
 -(void) setAllButtonStatus{
-    
+  
+    [self.flyer setFacebookStatus:0];
+    [self.flyer setYouTubeStatus:0];
     [self.flyer setMessengerStatus:0];
     [self.flyer setEmailStatus:0];
     [self.flyer setSmsStatus:0];
     [self.flyer setTwitterStatus:0];
     [self.flyer setClipboardStatus:0];
-    
-    
 }
 
 /*

@@ -44,9 +44,9 @@
     [self.navigationItem setLeftBarButtonItem:leftBarButtonItem];
     
     // Set the title view.
-    UIImageView *titleImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"giphyLogo1.png"]];
-    titleImg.frame = CGRectMake(titleImg.frame.origin.x, titleImg.frame.origin.y, 40, 40);
-    self.navigationItem.titleView = titleImg;
+    UIImageView *logo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 102, 38)];
+    [logo setImage:[UIImage imageNamed:@"giphyLogo"]];
+    self.navigationItem.titleView = logo;
     
     self.navigationController.navigationBar.barTintColor = [UIColor lightGrayColor];
     
@@ -66,6 +66,15 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    // To clear navigation bar color
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+}
+
+
 
 /**
  * Load giphy images from internet

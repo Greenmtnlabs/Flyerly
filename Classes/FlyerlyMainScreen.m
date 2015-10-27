@@ -120,7 +120,7 @@ id lastShareBtnSender;
     txtSearch.text = @"";
     [self.tView reloadData];
     [self checkUserPurchases];
-    
+
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -135,7 +135,6 @@ id lastShareBtnSender;
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    self.navigationController.navigationBar.alpha = 1.0;
 }
 
 
@@ -780,13 +779,6 @@ id lastShareBtnSender;
  * Release extras
  */
 -(void)releaseExtras{
-    return; //didn't get and advantage of bellow work, will check it
-    if( createFlyer != nil ){
-        if( createFlyer.flyer != nil ){
-                createFlyer = nil;
-                flyer = nil;
-        }
-    }
 }
 
 /**

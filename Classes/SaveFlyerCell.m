@@ -22,7 +22,6 @@
  */
 - (void)renderCell :(Flyer *)flyer LockStatus:(BOOL )status {
     
-
     //HERE WE LOCK FLYER CELL
     if (status) {
         flyerLock.hidden = NO;
@@ -31,13 +30,19 @@
     // HERE WE SET FLYER INFORMATION FORM .TXT FILE
     [self.nameLabel setText: [flyer getFlyerTitle]];
     [self.description setText:[flyer getFlyerDescription]];
-    [self.dateLabel setText:[flyer getFlyerDate]];
+    
+    [self.dateLabel setText: [self dateFormatter:[flyer getFlyerDate]]];
+    
     NSString *updatedDate = [flyer getFlyerUpdateDate];
-    if ([updatedDate isEqualToString:@""]) {
+   
+
+    if (![updatedDate isEqualToString:@""]) {
+        // To format date
+    self.updatedDateLabel.text = [self dateFormatter:[flyer getFlyerUpdateDate]];
+    
+    }else {
         self.updatedLabel.hidden = YES ;
         self.updatedDateLabel.hidden = YES;
-    }else {
-        self.updatedDateLabel.text = updatedDate;
     }
     
     
@@ -85,6 +90,38 @@
         iconImage.image = [UIImage imageNamed:@"messenger_share_saved"];
         sharingCount++;
     }
+    
+    iconImage = [_socialStatus objectAtIndex:sharingCount];
+    if ( [[flyer getYouTubeStatus] isEqualToString:@"1"] ) {
+        iconImage.image = [UIImage imageNamed:@"youtube_share_saved"];
+        sharingCount++;
+    }
+}
+
+
+/*
+ * Formats Date
+ * @params:
+ *      date: NSString
+ * @return:
+ *      strDate: NString
+ */
+
+-(NSString *) dateFormatter: (NSString *) date{
+
+    NSDateFormatter* dateFormatter, *formatter;
+    NSDate *newDate;
+    NSString *strDate;
+    // To format date
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"];
+    newDate = [dateFormatter dateFromString:date];
+    
+    formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    strDate = [formatter stringFromDate:newDate];
+    
+    return strDate;
 }
 
 @end

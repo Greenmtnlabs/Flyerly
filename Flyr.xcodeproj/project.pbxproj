@@ -169,6 +169,8 @@
 		2036661C188DB67300C71EAA /* FlyerUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2036661B188DB67300C71EAA /* FlyerUser.m */; };
 		203E0B7617DDDD720039C3A7 /* InputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 203E0B7417DDDD720039C3A7 /* InputViewController.m */; };
 		203E0B7717DDDD720039C3A7 /* InputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 203E0B7517DDDD720039C3A7 /* InputViewController.xib */; };
+		203FC4981BDE4EB200E10421 /* giphyLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 203FC4961BDE4EB200E10421 /* giphyLogo@2x.png */; };
+		203FC4991BDE4EB200E10421 /* giphyLogo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 203FC4971BDE4EB200E10421 /* giphyLogo@3x.png */; };
 		2041D5AA1BA07F9600EEFF83 /* IntroScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2041D5A81BA07F9600EEFF83 /* IntroScreenViewController.m */; };
 		2041D5AB1BA07F9600EEFF83 /* IntroScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2041D5A91BA07F9600EEFF83 /* IntroScreenViewController.xib */; };
 		204231601A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2042315F1A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib */; };
@@ -1488,7 +1490,6 @@
 		C3766D941B56510200B7F5B2 /* icon72.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3766D4C1B56510100B7F5B2 /* icon72.jpg */; };
 		C3766D951B56510200B7F5B2 /* icon73.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3766D4D1B56510100B7F5B2 /* icon73.jpg */; };
 		C3766D961B56510200B7F5B2 /* old_icon8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3766D4E1B56510200B7F5B2 /* old_icon8.jpg */; };
-		C38146461BDD30D900240375 /* giphyLogo1.png in Resources */ = {isa = PBXBuildFile; fileRef = C38146451BDD30D900240375 /* giphyLogo1.png */; };
 		C3A30DA61AB7F8BD00B0F1CF /* liblob-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C300432A1AB6ED9300866385 /* liblob-ios.a */; };
 		C3D8DD911B53DBE1006C2A9F /* b1.png in Resources */ = {isa = PBXBuildFile; fileRef = C3D8DD7D1B53DBE1006C2A9F /* b1.png */; };
 		C3D8DD921B53DBE1006C2A9F /* b10.png in Resources */ = {isa = PBXBuildFile; fileRef = C3D8DD7E1B53DBE1006C2A9F /* b10.png */; };
@@ -1749,6 +1750,8 @@
 		203E0B7317DDDD720039C3A7 /* InputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputViewController.h; sourceTree = "<group>"; };
 		203E0B7417DDDD720039C3A7 /* InputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputViewController.m; sourceTree = "<group>"; };
 		203E0B7517DDDD720039C3A7 /* InputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputViewController.xib; sourceTree = "<group>"; };
+		203FC4961BDE4EB200E10421 /* giphyLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "giphyLogo@2x.png"; sourceTree = "<group>"; };
+		203FC4971BDE4EB200E10421 /* giphyLogo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "giphyLogo@3x.png"; sourceTree = "<group>"; };
 		2041D5A71BA07F9600EEFF83 /* IntroScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroScreenViewController.h; sourceTree = "<group>"; };
 		2041D5A81BA07F9600EEFF83 /* IntroScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroScreenViewController.m; sourceTree = "<group>"; };
 		2041D5A91BA07F9600EEFF83 /* IntroScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroScreenViewController.xib; sourceTree = "<group>"; };
@@ -3169,7 +3172,6 @@
 		C3766D4C1B56510100B7F5B2 /* icon72.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon72.jpg; sourceTree = "<group>"; };
 		C3766D4D1B56510100B7F5B2 /* icon73.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon73.jpg; sourceTree = "<group>"; };
 		C3766D4E1B56510200B7F5B2 /* old_icon8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = old_icon8.jpg; sourceTree = "<group>"; };
-		C38146451BDD30D900240375 /* giphyLogo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = giphyLogo1.png; sourceTree = "<group>"; };
 		C3D8DD7D1B53DBE1006C2A9F /* b1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b1.png; sourceTree = "<group>"; };
 		C3D8DD7E1B53DBE1006C2A9F /* b10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b10.png; sourceTree = "<group>"; };
 		C3D8DD7F1B53DBE1006C2A9F /* b11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b11.png; sourceTree = "<group>"; };
@@ -3294,7 +3296,8 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				C38146451BDD30D900240375 /* giphyLogo1.png */,
+				203FC4961BDE4EB200E10421 /* giphyLogo@2x.png */,
+				203FC4971BDE4EB200E10421 /* giphyLogo@3x.png */,
 				C30E29D51BDB64DE00A5D160 /* spinner.gif */,
 				C337ED4A1BD69DBA0038B82E /* 5tab_3_giphy@3x.png */,
 				C337ED4B1BD69DBA0038B82E /* 5tab_3_giphy_selected@3x.png */,
@@ -6246,7 +6249,6 @@
 				246EF509193C515D004539B2 /* emoticon43@2x.png in Resources */,
 				246EF51F193C515D004539B2 /* emoticon63@2x.png in Resources */,
 				C31F67491B676E6F0025FBBF /* Zwelcome_bg@3x.jpg in Resources */,
-				C38146461BDD30D900240375 /* giphyLogo1.png in Resources */,
 				C32139D61A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib in Resources */,
 				2421849A194B4AEC00FDDA97 /* emoticon139@2x.png in Resources */,
 				202978AE1B4CFBE700F35E40 /* emoticon198-waaaht@2x.png in Resources */,
@@ -6416,6 +6418,7 @@
 				247858C61948764D0062F1E4 /* Lavanderia-Regular.otf in Resources */,
 				C35351061B60F68600CF68F9 /* Template116.jpg in Resources */,
 				20563E131962D64200C206FD /* CutiveMono-Regular.ttf in Resources */,
+				203FC4981BDE4EB200E10421 /* giphyLogo@2x.png in Resources */,
 				249F1FAE193F55D50072835E /* close_button@2x.png in Resources */,
 				C337ED621BD69DBA0038B82E /* 5tab_5_border@2x.png in Resources */,
 				20F73718195D4AD800B24C1D /* Oswald-Regular.ttf in Resources */,
@@ -6715,6 +6718,7 @@
 				C3F98D971BA065D000CBADCC /* MainFlyerCell.xib in Resources */,
 				24218501194B4AEC00FDDA97 /* Surfing-icon.png in Resources */,
 				2479A29C19658ABF00B57F86 /* Sofia-Regular.otf in Resources */,
+				203FC4991BDE4EB200E10421 /* giphyLogo@3x.png in Resources */,
 				C3766CEA1B5650B000B7F5B2 /* Template46.jpg in Resources */,
 				242184BA194B4AEC00FDDA97 /* emoticon172@2x.png in Resources */,
 				24861ED119F9147100670F6D /* checkBlue@3x.png in Resources */,
