@@ -22,6 +22,9 @@
  */
 - (void)renderCell :(Flyer *)flyer LockStatus:(BOOL )status {
     
+    NSDateFormatter* dateFormatter, *formatter;
+    NSDate *date;
+    NSString *newDate;
 
     //HERE WE LOCK FLYER CELL
     if (status) {
@@ -31,13 +34,38 @@
     // HERE WE SET FLYER INFORMATION FORM .TXT FILE
     [self.nameLabel setText: [flyer getFlyerTitle]];
     [self.description setText:[flyer getFlyerDescription]];
-    [self.dateLabel setText:[flyer getFlyerDate]];
+    
+    // To format date
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"];
+    date = [dateFormatter dateFromString:[flyer getFlyerDate]];
+    
+    formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    newDate = [formatter stringFromDate:date];
+
+    
+    [self.dateLabel setText:newDate];
+    
     NSString *updatedDate = [flyer getFlyerUpdateDate];
-    if ([updatedDate isEqualToString:@""]) {
+   
+
+    if (![updatedDate isEqualToString:@""]) {
+        
+        // To format date
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"];
+        date = [dateFormatter dateFromString:updatedDate];
+        
+        formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd"];
+        newDate = [formatter stringFromDate:date];
+        
+       self.updatedDateLabel.text = newDate;
+    
+    }else {
         self.updatedLabel.hidden = YES ;
         self.updatedDateLabel.hidden = YES;
-    }else {
-        self.updatedDateLabel.text = updatedDate;
     }
     
     
