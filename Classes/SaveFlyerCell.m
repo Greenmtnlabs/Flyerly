@@ -22,10 +22,6 @@
  */
 - (void)renderCell :(Flyer *)flyer LockStatus:(BOOL )status {
     
-    NSDateFormatter* dateFormatter, *formatter;
-    NSDate *date;
-    NSString *newDate;
-
     //HERE WE LOCK FLYER CELL
     if (status) {
         flyerLock.hidden = NO;
@@ -35,33 +31,14 @@
     [self.nameLabel setText: [flyer getFlyerTitle]];
     [self.description setText:[flyer getFlyerDescription]];
     
-    // To format date
-    dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"];
-    date = [dateFormatter dateFromString:[flyer getFlyerDate]];
-    
-    formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
-    newDate = [formatter stringFromDate:date];
-
-    
-    [self.dateLabel setText:newDate];
+    [self.dateLabel setText: [self dateFormatter:[flyer getFlyerDate]]];
     
     NSString *updatedDate = [flyer getFlyerUpdateDate];
    
 
     if (![updatedDate isEqualToString:@""]) {
-        
         // To format date
-        dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"];
-        date = [dateFormatter dateFromString:updatedDate];
-        
-        formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"yyyy-MM-dd"];
-        newDate = [formatter stringFromDate:date];
-        
-       self.updatedDateLabel.text = newDate;
+    self.updatedDateLabel.text = [self dateFormatter:[flyer getFlyerUpdateDate]];
     
     }else {
         self.updatedLabel.hidden = YES ;
@@ -119,6 +96,32 @@
         iconImage.image = [UIImage imageNamed:@"youtube_share_saved"];
         sharingCount++;
     }
+}
+
+
+/*
+ * Formats Date
+ * @params:
+ *      date: NSString
+ * @return:
+ *      strDate: NString
+ */
+
+-(NSString *) dateFormatter: (NSString *) date{
+
+    NSDateFormatter* dateFormatter, *formatter;
+    NSDate *newDate;
+    NSString *strDate;
+    // To format date
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"];
+    newDate = [dateFormatter dateFromString:date];
+    
+    formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    strDate = [formatter stringFromDate:newDate];
+    
+    return strDate;
 }
 
 @end
