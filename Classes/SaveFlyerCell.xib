@@ -95,10 +95,6 @@
                         <rect key="frame" x="224" y="74" width="20" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="KXB-j0-LeB">
-                        <rect key="frame" x="248" y="74" width="20" height="20"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qP4-jY-AaV">
                         <rect key="frame" x="267" y="56" width="45" height="46"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -144,7 +140,6 @@
                 <outletCollection property="socialStatus" destination="I2a-9L-hhr" id="NtQ-MB-5rq"/>
                 <outletCollection property="socialStatus" destination="ewT-nG-9kd" id="wHR-Lm-AK8"/>
                 <outletCollection property="socialStatus" destination="XBk-Dh-0EO" id="xfc-zv-LLj"/>
-                <outletCollection property="socialStatus" destination="KXB-j0-LeB" id="ZNZ-7G-DHA"/>
             </connections>
             <point key="canvasLocation" x="268" y="-139"/>
         </tableViewCell>
