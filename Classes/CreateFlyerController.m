@@ -76,6 +76,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize premiumBtnBg, premiumBtnBgBorder, premiumBtnEmoticons, premiumBtnCliparts, premiumBtnFonts;
 @synthesize premiumImgBg, premiumImgBgBorder, premiumImgEmoticons, premiumImgCliparts, premiumImgFonts;
 
+@synthesize shareViewController;
+@synthesize saveToGallaryReqBeforeSharing;
+
 #pragma mark -  View Appear Methods
 - (void)viewWillAppear:(BOOL)animated{
     
@@ -89,6 +92,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [libText setFrame:newFrame];
     [libPhoto setFrame:newFrame];
     [libDrawing setFrame:newFrame];
+    
     saveToGallaryReqBeforeSharing = NO;
 }
 
@@ -344,7 +348,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     isNewText   =   NO;
     bannerAddClosed = NO;
     bannerShowed = NO;
-    
     selectedAddMoreLayerTab = -1;
     
     //DrawingClass required vars
@@ -871,6 +874,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
                 // Here we Merge All Layers in Video File
                 [self videoMergeProcess];
+                [self.shareViewController resetAllButtonStatus];
                 
             } else {
                 // Here we take Snap shot of Flyer and
@@ -4335,9 +4339,13 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         //Here we Merge Video for Sharing
         if ([flyer isVideoFlyer]) {
+            
+            [self.shareViewController resetAllButtonStatus];
+            [self.shareViewController setAllButtonSelected:NO];
 
             //Background Thread
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+                
                 //Here we Merge All Layers in Video File
                 [self videoMergeProcess];
             });
@@ -4485,14 +4493,14 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         // Any Uploaded Video Link Available of Youtube
         // then we Enable Other Sharing Options
         if (![isAnyVideoUploadOnYoutube isEqualToString:@""]) {
-            [shareviewcontroller enableAllShareOptions: YES];
+            [shareviewcontroller enableAllShareOptions: [[self.flyer getYouTubeStatus] isEqualToString: @"1"]];
         }
         //enable facebook button if save to gallary not required
         if ( [flyer isVideoFlyer] ){
-            [shareviewcontroller enableFacebook:!(saveToGallaryReqBeforeSharing)];
-            [shareviewcontroller enableYoutube:!(saveToGallaryReqBeforeSharing)];
+            [shareviewcontroller enableShareOptions:!(saveToGallaryReqBeforeSharing)];
             [shareviewcontroller saveButtonSelected:!(saveToGallaryReqBeforeSharing)];
-            [shareviewcontroller enableAllShareOptions:!(saveToGallaryReqBeforeSharing)];
+            
+            [shareviewcontroller enableAllShareOptions:[[self.flyer getYouTubeStatus] isEqualToString:@"1"]];
         }
         //Create Animation Here
         [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,475 )];

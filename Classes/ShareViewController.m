@@ -92,8 +92,7 @@ UIAlertView *saveCurrentFlyerAlert;
     
     descTextAreaImg.frame = descriptionView.frame;
     
-    [self enableFacebook:!(saveToGallaryReqBeforeSharing)];
-    [self enableYoutube:!(saveToGallaryReqBeforeSharing)];
+    [self enableShareOptions:!(saveToGallaryReqBeforeSharing)];
     [self saveButtonSelected:!(saveToGallaryReqBeforeSharing)];
 }
 
@@ -107,6 +106,7 @@ UIAlertView *saveCurrentFlyerAlert;
     descriptionView.text = [flyer getFlyerDescription];
     
     [self updateDescription];
+    
 }
 
 //Set user input value in class level variable.
@@ -120,6 +120,7 @@ UIAlertView *saveCurrentFlyerAlert;
 	[super viewWillDisappear:animated];
 	
     [[NSNotificationCenter defaultCenter] removeObserver: self];
+    saveToGallaryReqBeforeSharing = NO;
 }
 
 
@@ -149,7 +150,7 @@ UIAlertView *saveCurrentFlyerAlert;
  * When video is edited
  * set as unselected
  */
--(void) setAllButtonStatus{
+-(void) resetAllButtonStatus{
   
     [self.flyer setFacebookStatus:0];
     [self.flyer setYouTubeStatus:0];
@@ -368,23 +369,21 @@ UIAlertView *saveCurrentFlyerAlert;
     [twitterButton setEnabled:enable];
     [emailButton setEnabled:enable];
     [smsButton setEnabled:enable];
-    [instagramButton setEnabled:enable];
     [clipboardButton setEnabled:enable];
-    [messengerButton setEnabled:enable];
-}
--(void)enableFacebook:(BOOL)enable{
-    [facebookButton setEnabled:enable];
-}
-
--(void)enableYoutube:(BOOL)enable{
-    [youTubeButton setEnabled:enable];
 }
 
 -(void)saveButtonSelected:(BOOL)enable{
     [flickrButton setSelected:enable];
 }
 
+-(void)enableShareOptions:(BOOL) enable {
 
+    [instagramButton setEnabled:enable];
+    [messengerButton setEnabled:enable];
+    [facebookButton setEnabled:enable];
+    [youTubeButton setEnabled:enable];
+
+}
 #pragma mark  Text Field Delegate
 
 - (BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
@@ -577,6 +576,10 @@ UIAlertView *saveCurrentFlyerAlert;
  * Called when flickr button is pressed
  */
 -(IBAction)onClickFlickrButton{
+    
+    self.cfController.saveToGallaryReqBeforeSharing = NO;
+    NSLog(@"%i",self.cfController.saveToGallaryReqBeforeSharing);
+    
     if( [self.flyer canSaveInGallary] == NO){
       [self.flyer showAllowSaveInGallerySettingAlert];
     }
@@ -592,9 +595,8 @@ UIAlertView *saveCurrentFlyerAlert;
                                                      otherButtonTitles:nil, nil];
        
         [saveCurrentFlyerAlert show];
-        [self enableFacebook:YES];
-        [self enableYoutube:YES];
-        
+        [self enableShareOptions:YES];
+        [self resetAllButtonStatus];
         [self setAllButtonSelected:NO];
         
     }
@@ -888,11 +890,6 @@ UIAlertView *saveCurrentFlyerAlert;
         [self.flyer setYouTubeStatus:1];
         [Flurry logEvent:@"Shared Youtube"];
         [self enableAllShareOptions:YES];
-        
-        if(saveToGallaryReqBeforeSharing){
-            [self setAllButtonStatus];
-        }
-        
     }
     
     //Here we set the set selected state of buttons.

@@ -34,6 +34,7 @@
 #import "YouTubeSubClass.h"
 #import "CreateFlyerController.h"
 #import "FBSDKSharing.h"
+#import "CreateFlyerController.h"
 
 
 
@@ -91,7 +92,7 @@
 @property (strong, nonatomic) SHKActivityIndicator *activityIndicator;
 @property (nonatomic,strong) Flyer *flyer;
 @property (weak, nonatomic) id<SHKSharerDelegate> delegate;
-@property BOOL saveToGallaryReqBeforeSharing;
+@property (nonatomic, assign) BOOL saveToGallaryReqBeforeSharing;
 
 @property (strong, nonatomic) NSTimer *timer;
 @property (strong, nonatomic) IBOutlet UITextView *tempTxtArea;
@@ -116,9 +117,11 @@
 -(void)shareOnInstagram;
 -(void)setSocialStatus;
 -(void)enableAllShareOptions:(BOOL)enable;
--(void)enableFacebook:(BOOL)enable;
--(void)enableYoutube:(BOOL)enable;
+-(void)enableShareOptions:(BOOL) enable;
 -(void)saveButtonSelected:(BOOL)enable;
 -(void)setStarsofShareScreen :(NSString *)rate;
+
+-(void)setAllButtonSelected:(BOOL)selected;
+-(void)resetAllButtonStatus;
 
 @end

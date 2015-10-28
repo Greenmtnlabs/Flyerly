@@ -38,6 +38,7 @@
 
 //DrawingClass required files
 #import "SettingsViewController.h"
+#import "ShareViewController.h"
 
 
 
@@ -136,6 +137,8 @@
 @property (nonatomic, strong) NSString *flyerPath;
 @property (nonatomic, strong) IBOutlet FlyerImageView *flyimgView;
 @property (nonatomic, strong) UIView *sharePanel;
+
+@property (nonatomic, assign) BOOL saveToGallaryReqBeforeSharing;
 
 // These are ContextViews Library
 @property(nonatomic, strong) IBOutlet UIView *contextView;
@@ -296,4 +299,6 @@
 @property (assign) BOOL enableRenderFlyer;
 -(void)enableNavigation:(BOOL)enable;
 -(void)selectGiphy:(id)sender;
+@property (weak, nonatomic) ShareViewController *shareViewController;
+
 @end
