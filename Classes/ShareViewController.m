@@ -90,7 +90,8 @@ UIAlertView *saveCurrentFlyerAlert;
     
     [self.view addSubview:descriptionView];
     
-    descTextAreaImg.frame = descriptionView.frame;    
+    descTextAreaImg.frame = descriptionView.frame;
+
     
 }
 
@@ -133,6 +134,7 @@ UIAlertView *saveCurrentFlyerAlert;
     
 }
 
+// this function will change white/blac select/unselected buttons
 -(void) setAllButtonSelected:(BOOL)selected{
     
     [messengerButton setSelected:selected];
@@ -144,20 +146,7 @@ UIAlertView *saveCurrentFlyerAlert;
     [clipboardButton setSelected:selected];
 
 }
-/*
- * When video is edited
- * set as unselected
- */
--(void) resetAllButtonStatus{
-  
-    [self.flyer setFacebookStatus:0];
-    [self.flyer setYouTubeStatus:0];
-    [self.flyer setMessengerStatus:0];
-    [self.flyer setEmailStatus:0];
-    [self.flyer setSmsStatus:0];
-    [self.flyer setTwitterStatus:0];
-    [self.flyer setClipboardStatus:0];
-}
+
 
 /*
  * Share on Instagram
@@ -326,6 +315,22 @@ UIAlertView *saveCurrentFlyerAlert;
     }
     
     
+    
+    //enable buttons if save to gallary not required
+    if ( [flyer isVideoFlyer] ){
+        
+        if([[self.flyer getYouTubeStatus] isEqualToString: @"1"]){
+            [self haveVideoLinkEnableAllShareOptions: YES];
+        } else {
+            [self setAllButtonSelected:NO];
+            [self haveVideoLinkEnableAllShareOptions:NO];
+        }
+        //save dependent
+        [self enableShareOptions:( [[flyer getFlickerStatus] isEqualToString:@"1"] )];
+        
+        
+    }
+    
 }
 
 
@@ -363,7 +368,8 @@ UIAlertView *saveCurrentFlyerAlert;
     [self.cfController enableHome:YES];
 }
 
--(void)enableAllShareOptions:(BOOL) enable {
+//This will disable the touch of buttons
+-(void)haveVideoLinkEnableAllShareOptions:(BOOL) enable {
     [twitterButton setEnabled:enable];
     [emailButton setEnabled:enable];
     [smsButton setEnabled:enable];
@@ -579,18 +585,17 @@ UIAlertView *saveCurrentFlyerAlert;
 }
 
 /*
- * Called when flickr button is pressed
+ * Called when saved button is pressed
  */
 -(IBAction)onClickFlickrButton{
     
-    self.cfController.saveToGallaryReqBeforeSharing = NO;
+    //self.cfController.saveToGallaryReqBeforeSharing = NO;
     
     if( [self.flyer canSaveInGallary] == NO){
       [self.flyer showAllowSaveInGallerySettingAlert];
     }
     //video merging is in process please wait
     else if( self.flyer.saveInGallaryRequired == 1 ) {
-        [flickrButton setSelected:YES];
        
         [self updateDescription];
         saveCurrentFlyerAlert = [[UIAlertView alloc] initWithTitle:@"Success"
@@ -600,9 +605,17 @@ UIAlertView *saveCurrentFlyerAlert;
                                                      otherButtonTitles:nil, nil];
        
         [saveCurrentFlyerAlert show];
+
+        [self.flyer resetAllButtonStatus]; //reset all database
+        [self setAllButtonSelected:NO]; //view reset
+        [self haveVideoLinkEnableAllShareOptions:NO];
+        
+        [flickrButton setSelected:YES]; //view
+        [self.flyer setFlickerStatus:1]; //database
+        
+        //enable those button, those not required youtube link
         [self enableShareOptions:YES];
-        [self resetAllButtonStatus];
-        [self setAllButtonSelected:NO];
+
         
     }
 }
@@ -893,7 +906,7 @@ UIAlertView *saveCurrentFlyerAlert;
         
         // Mark Social Status In .soc File of Flyer
         [self.flyer setYouTubeStatus:1];
-        [self enableAllShareOptions: [[self.flyer getYouTubeStatus] isEqualToString: @"1"]];
+        [self haveVideoLinkEnableAllShareOptions: [[self.flyer getYouTubeStatus] isEqualToString: @"1"]];
         
         [Flurry logEvent:@"Shared Youtube"];
     }

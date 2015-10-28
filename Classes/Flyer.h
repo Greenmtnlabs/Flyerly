@@ -186,4 +186,5 @@
 -(BOOL)canSaveInGallary;
 -(void)showAllowSaveInGallerySettingAlert;
 
+-(void)resetAllButtonStatus;
 @end

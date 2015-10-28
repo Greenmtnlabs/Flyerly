@@ -660,7 +660,7 @@ id lastShareBtnSender;
         // Any Uploaded Video Link Available of Youtube
         // then we Enable Other Sharing Options
         if (![isAnyVideoUploadOnYoutube isEqualToString:@""]) {
-            [shareviewcontroller enableAllShareOptions : YES];
+            [shareviewcontroller haveVideoLinkEnableAllShareOptions : YES];
         }
         
         //Create Animation Here

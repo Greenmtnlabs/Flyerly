@@ -2358,6 +2358,21 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 -(CGFloat)getTvDefPosY { return [TEXTyPOS floatValue]; }
 
 
+/*
+ * When video is edited
+ * set as unselected
+ */
+-(void)resetAllButtonStatus{
+    
+    [self setFacebookStatus:0];
+    [self setYouTubeStatus:0];
+    [self setMessengerStatus:0];
+    [self setEmailStatus:0];
+    [self setSmsStatus:0];
+    [self setTwitterStatus:0];
+    [self setClipboardStatus:0];
+}
+
 @end
 
 	

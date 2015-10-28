@@ -913,7 +913,7 @@ id lastShareBtnSender;
     if ( [flyer isVideoFlyer] ){
             [shareviewcontroller enableShareOptions:[[self.flyer getYouTubeStatus] isEqualToString:@"1"]];
             [shareviewcontroller saveButtonSelected:[[self.flyer getYouTubeStatus] isEqualToString:@"1"]];
-            [shareviewcontroller enableAllShareOptions:[[self.flyer getYouTubeStatus] isEqualToString:@"1"]];
+            [shareviewcontroller haveVideoLinkEnableAllShareOptions:[[self.flyer getYouTubeStatus] isEqualToString:@"1"]];
     }
     
     [self presentViewController:introScreenViewController animated:YES completion:nil];
@@ -1053,10 +1053,10 @@ id lastShareBtnSender;
         
         // Any Uploaded Video Link Available of Youtube
         // then we Enable Other Sharing Options
-        [shareviewcontroller enableShareOptions: YES];
+        [shareviewcontroller enableShareOptions: [[self.flyer getFlickerStatus] isEqualToString: @"1"]];
         
         if (![isAnyVideoUploadOnYoutube isEqualToString:@""]) {
-            [shareviewcontroller enableAllShareOptions : [[self.flyer getYouTubeStatus] isEqualToString:@"1"]];
+            [shareviewcontroller haveVideoLinkEnableAllShareOptions : [[self.flyer getYouTubeStatus] isEqualToString:@"1"]];
         }
         
         //Create Animation Here

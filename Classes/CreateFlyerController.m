@@ -785,13 +785,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         [self zoomEnd];
     }
     
-    if( [flyer isSaveRequired] == YES ){
-        // set all share options status to 0
-        [shareviewcontroller resetAllButtonStatus];
-        [shareviewcontroller setAllButtonSelected:NO];
-        
-    }
-    
     //Delete extra layers
     [self deSelectPreviousLayer];
     
@@ -852,6 +845,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         [self.flyimgView layerStoppedEditing:currentLayer];
     }
     
+    
     userPurchases.delegate = nil;
     
     [self videoPlay:NO repeat:NO];
@@ -861,6 +855,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     dispatch_async( dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         
         if( [flyer isSaveRequired] == YES ) {
+            
             // Save flyer to disk
             [flyer saveFlyer]; //
             
@@ -873,6 +868,14 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             // If this is a video flyer, then merge the video.
             if ( [flyer isVideoFlyer] ) {
                 
+                // set all share options status to 0
+                [flyer resetAllButtonStatus]; //reset all database
+                [shareviewcontroller setAllButtonSelected:NO];
+                [shareviewcontroller enableShareOptions:NO];
+                [shareviewcontroller haveVideoLinkEnableAllShareOptions:NO];
+                //WE are doing yes for save button, because we are auto saving on back
+                [flyer setFlickerStatus:1]; //show black button for save button
+                [shareviewcontroller.flickrButton setSelected:YES]; //view
                 
                 self.shouldShowAdd ( @"", haveValidSubscription );
                 
@@ -880,8 +883,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
                 // Here we Merge All Layers in Video File
                 [self videoMergeProcess];
-                // set all share options status to 0
-                [shareviewcontroller resetAllButtonStatus];
+               
                 
             } else {
                 // Here we take Snap shot of Flyer and
@@ -4351,8 +4353,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         if ([flyer isVideoFlyer]) {
 
             // set all share options status to 0
-            [shareviewcontroller resetAllButtonStatus];
-            [shareviewcontroller setAllButtonSelected:NO];
+            [flyer resetAllButtonStatus]; //reset all database
+            [flyer setFlickerStatus:0]; //show black button for save button
 
             //Background Thread
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
@@ -4495,27 +4497,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             [shareviewcontroller setStarsofShareScreen:user[@"appStarRate"]];
         
         [user saveInBackground];
+        [shareviewcontroller setSocialStatus];        
         
-        [shareviewcontroller setSocialStatus];
-        
-        //Here we Get youtube Link
-        NSString *isAnyVideoUploadOnYoutube = [self.flyer getYoutubeLink];
-    
-        // Any Uploaded Video Link Available of Youtube
-        // then we Enable Other Sharing Options
-        if (![isAnyVideoUploadOnYoutube isEqualToString:@""]) {
-            
-            if([[self.flyer getYouTubeStatus] isEqualToString: @"1"]){
-                [shareviewcontroller enableAllShareOptions: YES];
-            }
-        }
-        //enable buttons if save to gallary not required
-        if ( [flyer isVideoFlyer] ){
-            [shareviewcontroller enableShareOptions:!(saveToGallaryReqBeforeSharing)];
-            [shareviewcontroller saveButtonSelected:!(saveToGallaryReqBeforeSharing)];
-            
-            [shareviewcontroller enableAllShareOptions:[[self.flyer getYouTubeStatus] isEqualToString:@"1"]];
-        }
         //Create Animation Here
         [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,475 )];
         if ( IS_IPHONE_6) {

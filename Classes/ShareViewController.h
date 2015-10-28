@@ -116,12 +116,11 @@
 
 -(void)shareOnInstagram;
 -(void)setSocialStatus;
--(void)enableAllShareOptions:(BOOL)enable;
+-(void)haveVideoLinkEnableAllShareOptions:(BOOL)enable;
 -(void)enableShareOptions:(BOOL) enable;
 -(void)saveButtonSelected:(BOOL)enable;
 -(void)setStarsofShareScreen :(NSString *)rate;
 
 -(void)setAllButtonSelected:(BOOL)selected;
--(void)resetAllButtonStatus;
 
 @end
