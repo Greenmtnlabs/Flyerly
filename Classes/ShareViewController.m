@@ -314,8 +314,6 @@ UIAlertView *saveCurrentFlyerAlert;
         [flickrButton setSelected:NO];
     }
     
-    
-    
     //enable buttons if save to gallary not required
     if ( [flyer isVideoFlyer] ){
         
@@ -327,10 +325,7 @@ UIAlertView *saveCurrentFlyerAlert;
         }
         //save dependent
         [self enableShareOptions:( [[flyer getFlickerStatus] isEqualToString:@"1"] )];
-        
-        
     }
-    
 }
 
 
