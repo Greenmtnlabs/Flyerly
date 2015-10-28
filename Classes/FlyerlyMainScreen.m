@@ -13,9 +13,8 @@
 #import "FlyrAppDelegate.h"
 #import "FlyerlyConfigurator.h"
 #import "MainScreenAddsCell.h"
-#import "WebViewViewController.h"
 
-
+0
 #define ADD_AFTER_FLYERS 4 //SHOW AD AFTER (ADD_AFTER_FLYERS - 1 ) => 3 FLYERS
 
 @interface FlyerlyMainScreen ()  {
@@ -1228,8 +1227,12 @@ id lastShareBtnSender;
  */
 - (IBAction)showHashTagFlyers:(id)sender {
     
-    WebViewViewController *webViewViewController = [[WebViewViewController alloc]initWithNibName:@"WebViewViewController" bundle:nil];
-    [self.navigationController pushViewController:webViewViewController animated:YES];
+    
+    NSURL *url = [NSURL URLWithString:@"https://twitter.com/hashtag/flyerly"];
+    
+    if (![[UIApplication sharedApplication] openURL:url]) {
+        NSLog(@"%@%@",@"Failed to open url:",[url description]);
+    }
    
 }
 

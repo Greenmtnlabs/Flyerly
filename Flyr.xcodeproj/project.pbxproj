@@ -199,8 +199,6 @@
 		2044FF97185088ED00A26B42 /* MainSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2044FF95185088ED00A26B42 /* MainSettingCell.xib */; };
 		204635621895E4AF00A94C42 /* Flyer.m in Sources */ = {isa = PBXBuildFile; fileRef = 204635611895E4AF00A94C42 /* Flyer.m */; };
 		204635651895F90000A94C42 /* FlyerImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 204635641895F90000A94C42 /* FlyerImageView.m */; };
-		20473E101BD0C71800433A7F /* WebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20473E0E1BD0C71800433A7F /* WebViewViewController.m */; };
-		20473E111BD0C71800433A7F /* WebViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20473E0F1BD0C71800433A7F /* WebViewViewController.xib */; };
 		20473E181BD0D8F300433A7F /* settingsButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20473E161BD0D8F300433A7F /* settingsButton@2x.png */; };
 		20473E191BD0D8F300433A7F /* settingsButton@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20473E171BD0D8F300433A7F /* settingsButton@3x.png */; };
 		204BC2DE1A10E67700FEB946 /* DrawingPatterns-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204BC2DD1A10E67700FEB946 /* DrawingPatterns-iPhone6-Plus.xib */; };
@@ -1784,9 +1782,6 @@
 		204635611895E4AF00A94C42 /* Flyer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Flyer.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		204635631895F90000A94C42 /* FlyerImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyerImageView.h; sourceTree = "<group>"; };
 		204635641895F90000A94C42 /* FlyerImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyerImageView.m; sourceTree = "<group>"; };
-		20473E0D1BD0C71800433A7F /* WebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewViewController.h; sourceTree = "<group>"; };
-		20473E0E1BD0C71800433A7F /* WebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewViewController.m; sourceTree = "<group>"; };
-		20473E0F1BD0C71800433A7F /* WebViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewViewController.xib; sourceTree = "<group>"; };
 		20473E161BD0D8F300433A7F /* settingsButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settingsButton@2x.png"; sourceTree = "<group>"; };
 		20473E171BD0D8F300433A7F /* settingsButton@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settingsButton@3x.png"; sourceTree = "<group>"; };
 		204BC2DD1A10E67700FEB946 /* DrawingPatterns-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DrawingPatterns-iPhone6-Plus.xib"; sourceTree = "<group>"; };
@@ -4086,16 +4081,6 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
-		20473E0C1BD0C6D200433A7F /* WebViews */ = {
-			isa = PBXGroup;
-			children = (
-				20473E0D1BD0C71800433A7F /* WebViewViewController.h */,
-				20473E0E1BD0C71800433A7F /* WebViewViewController.m */,
-				20473E0F1BD0C71800433A7F /* WebViewViewController.xib */,
-			);
-			name = WebViews;
-			sourceTree = "<group>";
-		};
 		2075A9921899EAB600F410FB /* FlyerlyCustomClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -4320,7 +4305,6 @@
 				0DF3A2C1108DF1D200D6C887 /* FlyerlyMainScreen.h */,
 				0DF3A2C2108DF1D200D6C887 /* FlyerlyMainScreen.m */,
 				C33F80041B9F115500E7AFF9 /* FlyerlyMainScreen.xib */,
-				20473E0C1BD0C6D200433A7F /* WebViews */,
 				C3F98D8D1BA065A300CBADCC /* MainFlyerCells */,
 				C34E984E1BA2D43300692597 /* GoogleAddCell */,
 			);
@@ -6938,7 +6922,6 @@
 				246EF52E193C515D004539B2 /* emoticon77@2x.png in Resources */,
 				20563E1A1962D64200C206FD /* YanoneKaffeesatz-Light.ttf in Resources */,
 				24861F7019F9147100670F6D /* Zregister_flyer@3x.png in Resources */,
-				20473E111BD0C71800433A7F /* WebViewViewController.xib in Resources */,
 				24861F2819F9147100670F6D /* ModeVideo@3x.png in Resources */,
 				C3766D911B56510200B7F5B2 /* icon69.jpg in Resources */,
 				490FBB16192B4E0500AA3C18 /* AssetsGroupViewController.xib in Resources */,
@@ -7110,7 +7093,6 @@
 				242BFA7E1B29711800EF370B /* RMStoreUserDefaultsPersistence.m in Sources */,
 				243EA07119BF4ABB0047D0E1 /* ImageLayer.m in Sources */,
 				0F80C38B178578CB00D36795 /* RegisterController.m in Sources */,
-				20473E101BD0C71800433A7F /* WebViewViewController.m in Sources */,
 				0F80C3901785813E00D36795 /* SigninController.m in Sources */,
 				2099301118BF0C5000A177A4 /* ContactsModel.m in Sources */,
 				49F109D1192C7926002B0CD4 /* CropVideoViewController.m in Sources */,
