@@ -578,7 +578,6 @@ UIAlertView *saveCurrentFlyerAlert;
 -(IBAction)onClickFlickrButton{
     
     self.cfController.saveToGallaryReqBeforeSharing = NO;
-    NSLog(@"%i",self.cfController.saveToGallaryReqBeforeSharing);
     
     if( [self.flyer canSaveInGallary] == NO){
       [self.flyer showAllowSaveInGallerySettingAlert];

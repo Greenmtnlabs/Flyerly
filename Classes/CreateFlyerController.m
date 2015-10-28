@@ -902,6 +902,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }
     });
     
+    
+    [shareviewcontroller resetAllButtonStatus];
+    [shareviewcontroller setAllButtonSelected:NO];
+    
     [self.navigationController popViewControllerAnimated:YES];
     
     // Remove observers
