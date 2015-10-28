@@ -76,7 +76,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize premiumBtnBg, premiumBtnBgBorder, premiumBtnEmoticons, premiumBtnCliparts, premiumBtnFonts;
 @synthesize premiumImgBg, premiumImgBgBorder, premiumImgEmoticons, premiumImgCliparts, premiumImgFonts;
 
-@synthesize shareViewController;
 @synthesize saveToGallaryReqBeforeSharing;
 
 #pragma mark -  View Appear Methods
@@ -874,7 +873,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
                 // Here we Merge All Layers in Video File
                 [self videoMergeProcess];
-                [self.shareViewController resetAllButtonStatus];
+                [shareviewcontroller resetAllButtonStatus];
                 
             } else {
                 // Here we take Snap shot of Flyer and
@@ -4340,8 +4339,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         //Here we Merge Video for Sharing
         if ([flyer isVideoFlyer]) {
             
-            [self.shareViewController resetAllButtonStatus];
-            [self.shareViewController setAllButtonSelected:NO];
+            [shareviewcontroller resetAllButtonStatus];
+            [shareviewcontroller setAllButtonSelected:NO];
 
             //Background Thread
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){

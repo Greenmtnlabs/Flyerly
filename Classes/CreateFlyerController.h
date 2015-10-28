@@ -38,7 +38,6 @@
 
 //DrawingClass required files
 #import "SettingsViewController.h"
-#import "ShareViewController.h"
 
 
 
@@ -299,6 +298,5 @@
 @property (assign) BOOL enableRenderFlyer;
 -(void)enableNavigation:(BOOL)enable;
 -(void)selectGiphy:(id)sender;
-@property (weak, nonatomic) ShareViewController *shareViewController;
 
 @end
