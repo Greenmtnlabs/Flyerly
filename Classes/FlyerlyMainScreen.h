@@ -26,7 +26,6 @@
 #import "IntroScreenViewController.h"
 #import "GADBannerView.h"
 
-
 @class MainFlyerCell, Flyer, SigninController, RegisterController, InAppViewController, IntroScreenViewController, CreateFlyerController,ShareViewController,PrintViewController;
 
 @interface FlyerlyMainScreen : ParentViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,RMStoreObserver,InAppPurchasePanelButtonProtocol, UserPurchasesDelegate ,GADInterstitialDelegate, GADBannerViewDelegate>{

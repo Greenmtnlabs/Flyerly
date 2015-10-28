@@ -873,6 +873,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
                 // Here we Merge All Layers in Video File
                 [self videoMergeProcess];
+                // set all share options status to 0
                 [shareviewcontroller resetAllButtonStatus];
                 
             } else {
@@ -902,9 +903,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }
     });
     
+    if( [flyer isSaveRequired] == YES ){
+        // set all share options status to 0
+        [shareviewcontroller resetAllButtonStatus];
+        [shareviewcontroller setAllButtonSelected:NO];
+        
+    }
     
-    [shareviewcontroller resetAllButtonStatus];
-    [shareviewcontroller setAllButtonSelected:NO];
     
     [self.navigationController popViewControllerAnimated:YES];
     
@@ -4342,7 +4347,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         //Here we Merge Video for Sharing
         if ([flyer isVideoFlyer]) {
-            
+
+            // set all share options status to 0
             [shareviewcontroller resetAllButtonStatus];
             [shareviewcontroller setAllButtonSelected:NO];
 
@@ -4496,9 +4502,12 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         // Any Uploaded Video Link Available of Youtube
         // then we Enable Other Sharing Options
         if (![isAnyVideoUploadOnYoutube isEqualToString:@""]) {
-            [shareviewcontroller enableAllShareOptions: [[self.flyer getYouTubeStatus] isEqualToString: @"1"]];
+            
+            if([[self.flyer getYouTubeStatus] isEqualToString: @"1"]){
+                [shareviewcontroller enableAllShareOptions: YES];
+            }
         }
-        //enable facebook button if save to gallary not required
+        //enable buttons if save to gallary not required
         if ( [flyer isVideoFlyer] ){
             [shareviewcontroller enableShareOptions:!(saveToGallaryReqBeforeSharing)];
             [shareviewcontroller saveButtonSelected:!(saveToGallaryReqBeforeSharing)];

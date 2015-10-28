@@ -90,10 +90,8 @@ UIAlertView *saveCurrentFlyerAlert;
     
     [self.view addSubview:descriptionView];
     
-    descTextAreaImg.frame = descriptionView.frame;
+    descTextAreaImg.frame = descriptionView.frame;    
     
-    [self enableShareOptions:!(saveToGallaryReqBeforeSharing)];
-    [self saveButtonSelected:!(saveToGallaryReqBeforeSharing)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -375,6 +373,14 @@ UIAlertView *saveCurrentFlyerAlert;
 -(void)saveButtonSelected:(BOOL)enable{
     [flickrButton setSelected:enable];
 }
+
+/*
+ * Enables all share options, specified below
+ * @params:
+ *      enable: BOOL
+ * @return:
+ *      void
+ */
 
 -(void)enableShareOptions:(BOOL) enable {
 
@@ -888,7 +894,6 @@ UIAlertView *saveCurrentFlyerAlert;
         // Mark Social Status In .soc File of Flyer
         [self.flyer setYouTubeStatus:1];
         [Flurry logEvent:@"Shared Youtube"];
-        [self enableAllShareOptions:YES];
     }
     
     //Here we set the set selected state of buttons.
