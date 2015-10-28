@@ -345,7 +345,9 @@ UIAlertView *saveCurrentFlyerAlert;
 -(void)saveInGallaryIfNeeded {
     if( hasSavedInGallary != YES ){
         if( self.flyer.saveInGallaryRequired == 1){
-            hasSavedInGallary = YES;            
+            hasSavedInGallary = YES;
+            [flyer setFlickerStatus:1]; //show black button for save button
+            [flickrButton setSelected:YES]; //view
             [self.flyer saveIntoGallery];
             self.flyer.saveInGallaryRequired = 0;
         }
