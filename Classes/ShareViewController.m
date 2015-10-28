@@ -91,10 +91,8 @@ UIAlertView *saveCurrentFlyerAlert;
     [self.view addSubview:descriptionView];
     
     descTextAreaImg.frame = descriptionView.frame;
+
     
-    [self enableFacebook:!(saveToGallaryReqBeforeSharing)];
-    [self enableYoutube:!(saveToGallaryReqBeforeSharing)];
-    [self saveButtonSelected:!(saveToGallaryReqBeforeSharing)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -107,6 +105,7 @@ UIAlertView *saveCurrentFlyerAlert;
     descriptionView.text = [flyer getFlyerDescription];
     
     [self updateDescription];
+    
 }
 
 //Set user input value in class level variable.
@@ -120,6 +119,7 @@ UIAlertView *saveCurrentFlyerAlert;
 	[super viewWillDisappear:animated];
 	
     [[NSNotificationCenter defaultCenter] removeObserver: self];
+    saveToGallaryReqBeforeSharing = NO;
 }
 
 
@@ -134,6 +134,7 @@ UIAlertView *saveCurrentFlyerAlert;
     
 }
 
+// this function will change white/blac select/unselected buttons
 -(void) setAllButtonSelected:(BOOL)selected{
     
     [messengerButton setSelected:selected];
@@ -145,20 +146,7 @@ UIAlertView *saveCurrentFlyerAlert;
     [clipboardButton setSelected:selected];
 
 }
-/*
- * When video is edited
- * set as unselected
- */
--(void) setAllButtonStatus{
-  
-    [self.flyer setFacebookStatus:0];
-    [self.flyer setYouTubeStatus:0];
-    [self.flyer setMessengerStatus:0];
-    [self.flyer setEmailStatus:0];
-    [self.flyer setSmsStatus:0];
-    [self.flyer setTwitterStatus:0];
-    [self.flyer setClipboardStatus:0];
-}
+
 
 /*
  * Share on Instagram
@@ -326,7 +314,18 @@ UIAlertView *saveCurrentFlyerAlert;
         [flickrButton setSelected:NO];
     }
     
-    
+    //enable buttons if save to gallary not required
+    if ( [flyer isVideoFlyer] ){
+        
+        if([[self.flyer getYouTubeStatus] isEqualToString: @"1"]){
+            [self haveVideoLinkEnableAllShareOptions: YES];
+        } else {
+            [self setAllButtonSelected:NO];
+            [self haveVideoLinkEnableAllShareOptions:NO];
+        }
+        //save dependent
+        [self enableShareOptions:( [[flyer getFlickerStatus] isEqualToString:@"1"] )];
+    }
 }
 
 
@@ -346,7 +345,9 @@ UIAlertView *saveCurrentFlyerAlert;
 -(void)saveInGallaryIfNeeded {
     if( hasSavedInGallary != YES ){
         if( self.flyer.saveInGallaryRequired == 1){
-            hasSavedInGallary = YES;            
+            hasSavedInGallary = YES;
+            [flyer setFlickerStatus:1]; //show black button for save button
+            [flickrButton setSelected:YES]; //view
             [self.flyer saveIntoGallery];
             self.flyer.saveInGallaryRequired = 0;
         }
@@ -364,27 +365,34 @@ UIAlertView *saveCurrentFlyerAlert;
     [self.cfController enableHome:YES];
 }
 
--(void)enableAllShareOptions:(BOOL) enable {
+//This will disable the touch of buttons
+-(void)haveVideoLinkEnableAllShareOptions:(BOOL) enable {
     [twitterButton setEnabled:enable];
     [emailButton setEnabled:enable];
     [smsButton setEnabled:enable];
-    [instagramButton setEnabled:enable];
     [clipboardButton setEnabled:enable];
-    [messengerButton setEnabled:enable];
-}
--(void)enableFacebook:(BOOL)enable{
-    [facebookButton setEnabled:enable];
-}
-
--(void)enableYoutube:(BOOL)enable{
-    [youTubeButton setEnabled:enable];
 }
 
 -(void)saveButtonSelected:(BOOL)enable{
     [flickrButton setSelected:enable];
 }
 
+/*
+ * Enables all share options, specified below
+ * @params:
+ *      enable: BOOL
+ * @return:
+ *      void
+ */
 
+-(void)enableShareOptions:(BOOL) enable {
+
+    [instagramButton setEnabled:enable];
+    [messengerButton setEnabled:enable];
+    [facebookButton setEnabled:enable];
+    [youTubeButton setEnabled:enable];
+
+}
 #pragma mark  Text Field Delegate
 
 - (BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
@@ -574,15 +582,17 @@ UIAlertView *saveCurrentFlyerAlert;
 }
 
 /*
- * Called when flickr button is pressed
+ * Called when saved button is pressed
  */
 -(IBAction)onClickFlickrButton{
+    
+    //self.cfController.saveToGallaryReqBeforeSharing = NO;
+    
     if( [self.flyer canSaveInGallary] == NO){
       [self.flyer showAllowSaveInGallerySettingAlert];
     }
     //video merging is in process please wait
     else if( self.flyer.saveInGallaryRequired == 1 ) {
-        [flickrButton setSelected:YES];
        
         [self updateDescription];
         saveCurrentFlyerAlert = [[UIAlertView alloc] initWithTitle:@"Success"
@@ -592,10 +602,17 @@ UIAlertView *saveCurrentFlyerAlert;
                                                      otherButtonTitles:nil, nil];
        
         [saveCurrentFlyerAlert show];
-        [self enableFacebook:YES];
-        [self enableYoutube:YES];
+
+        [self.flyer resetAllButtonStatus]; //reset all database
+        [self setAllButtonSelected:NO]; //view reset
+        [self haveVideoLinkEnableAllShareOptions:NO];
         
-        [self setAllButtonSelected:NO];
+        [flickrButton setSelected:YES]; //view
+        [self.flyer setFlickerStatus:1]; //database
+        
+        //enable those button, those not required youtube link
+        [self enableShareOptions:YES];
+
         
     }
 }
@@ -886,13 +903,9 @@ UIAlertView *saveCurrentFlyerAlert;
         
         // Mark Social Status In .soc File of Flyer
         [self.flyer setYouTubeStatus:1];
+        [self haveVideoLinkEnableAllShareOptions: [[self.flyer getYouTubeStatus] isEqualToString: @"1"]];
+        
         [Flurry logEvent:@"Shared Youtube"];
-        [self enableAllShareOptions:YES];
-        
-        if(saveToGallaryReqBeforeSharing){
-            [self setAllButtonStatus];
-        }
-        
     }
     
     //Here we set the set selected state of buttons.

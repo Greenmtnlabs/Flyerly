@@ -909,6 +909,13 @@ id lastShareBtnSender;
     [introScreenViewController setModalPresentationStyle:UIModalPresentationFullScreen];
     introScreenViewController.buttonDelegate = self;
     
+    //enable buttons if save to gallary not required
+    if ( [flyer isVideoFlyer] ){
+            [shareviewcontroller enableShareOptions:[[self.flyer getYouTubeStatus] isEqualToString:@"1"]];
+            [shareviewcontroller saveButtonSelected:[[self.flyer getYouTubeStatus] isEqualToString:@"1"]];
+            [shareviewcontroller haveVideoLinkEnableAllShareOptions:[[self.flyer getYouTubeStatus] isEqualToString:@"1"]];
+    }
+    
     [self presentViewController:introScreenViewController animated:YES completion:nil];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];    
 }
@@ -923,6 +930,7 @@ id lastShareBtnSender;
     } else {
         inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
     }
+    
     
     [self presentViewController:inappviewcontroller animated:NO completion:nil];
     
@@ -1045,8 +1053,10 @@ id lastShareBtnSender;
         
         // Any Uploaded Video Link Available of Youtube
         // then we Enable Other Sharing Options
+        [shareviewcontroller enableShareOptions: [[self.flyer getFlickerStatus] isEqualToString: @"1"]];
+        
         if (![isAnyVideoUploadOnYoutube isEqualToString:@""]) {
-            [shareviewcontroller enableAllShareOptions : YES];
+            [shareviewcontroller haveVideoLinkEnableAllShareOptions : [[self.flyer getYouTubeStatus] isEqualToString:@"1"]];
         }
         
         //Create Animation Here

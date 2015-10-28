@@ -45,9 +45,6 @@
     BOOL haveValidSubscription;
     BOOL saveToGallaryReqBeforeSharing;
     BOOL isNewFlyer;
-
-
-    
 }
 
 @end
@@ -76,6 +73,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize premiumBtnBg, premiumBtnBgBorder, premiumBtnEmoticons, premiumBtnCliparts, premiumBtnFonts;
 @synthesize premiumImgBg, premiumImgBgBorder, premiumImgEmoticons, premiumImgCliparts, premiumImgFonts;
 
+
 #pragma mark -  View Appear Methods
 - (void)viewWillAppear:(BOOL)animated{
     
@@ -89,6 +87,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [libText setFrame:newFrame];
     [libPhoto setFrame:newFrame];
     [libDrawing setFrame:newFrame];
+    
     saveToGallaryReqBeforeSharing = NO;
 }
 
@@ -344,7 +343,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     isNewText   =   NO;
     bannerAddClosed = NO;
     bannerShowed = NO;
-    
     selectedAddMoreLayerTab = -1;
     
     //DrawingClass required vars
@@ -843,6 +841,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         [self.flyimgView layerStoppedEditing:currentLayer];
     }
     
+    
     userPurchases.delegate = nil;
     
     [self videoPlay:NO repeat:NO];
@@ -852,6 +851,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     dispatch_async( dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         
         if( [flyer isSaveRequired] == YES ) {
+            
             // Save flyer to disk
             [flyer saveFlyer]; //
             
@@ -864,6 +864,18 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             // If this is a video flyer, then merge the video.
             if ( [flyer isVideoFlyer] ) {
                 
+                // Set all share options status to 0
+                [flyer resetAllButtonStatus];
+                
+                // Set all button selected state
+                [shareviewcontroller setAllButtonSelected:NO];
+                
+                [shareviewcontroller enableShareOptions:NO];
+                [shareviewcontroller haveVideoLinkEnableAllShareOptions:NO];
+                
+                //WE are doing yes for save button, because we are auto saving on back
+                [flyer setFlickerStatus:1]; //show black button for save button
+                [shareviewcontroller.flickrButton setSelected:YES]; //view
                 
                 self.shouldShowAdd ( @"", haveValidSubscription );
                 
@@ -871,6 +883,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
                 // Here we Merge All Layers in Video File
                 [self videoMergeProcess];
+               
                 
             } else {
                 // Here we take Snap shot of Flyer and
@@ -898,6 +911,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             });
         }
     });
+    
+    
+    
     
     [self.navigationController popViewControllerAnimated:YES];
     
@@ -4336,8 +4352,13 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         //Here we Merge Video for Sharing
         if ([flyer isVideoFlyer]) {
 
+            // set all share options status to 0
+            [flyer resetAllButtonStatus]; //reset all database
+            [flyer setFlickerStatus:0]; //show black button for save button
+
             //Background Thread
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+                
                 //Here we Merge All Layers in Video File
                 [self videoMergeProcess];
             });
@@ -4476,24 +4497,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             [shareviewcontroller setStarsofShareScreen:user[@"appStarRate"]];
         
         [user saveInBackground];
+        [shareviewcontroller setSocialStatus];        
         
-        [shareviewcontroller setSocialStatus];
-        
-        //Here we Get youtube Link
-        NSString *isAnyVideoUploadOnYoutube = [self.flyer getYoutubeLink];
-    
-        // Any Uploaded Video Link Available of Youtube
-        // then we Enable Other Sharing Options
-        if (![isAnyVideoUploadOnYoutube isEqualToString:@""]) {
-            [shareviewcontroller enableAllShareOptions: YES];
-        }
-        //enable facebook button if save to gallary not required
-        if ( [flyer isVideoFlyer] ){
-            [shareviewcontroller enableFacebook:!(saveToGallaryReqBeforeSharing)];
-            [shareviewcontroller enableYoutube:!(saveToGallaryReqBeforeSharing)];
-            [shareviewcontroller saveButtonSelected:!(saveToGallaryReqBeforeSharing)];
-            [shareviewcontroller enableAllShareOptions:!(saveToGallaryReqBeforeSharing)];
-        }
         //Create Animation Here
         [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,475 )];
         if ( IS_IPHONE_6) {

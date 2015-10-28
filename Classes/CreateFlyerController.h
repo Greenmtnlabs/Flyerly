@@ -137,6 +137,7 @@
 @property (nonatomic, strong) IBOutlet FlyerImageView *flyimgView;
 @property (nonatomic, strong) UIView *sharePanel;
 
+
 // These are ContextViews Library
 @property(nonatomic, strong) IBOutlet UIView *contextView;
 @property(nonatomic, strong) IBOutlet UIView *libraryContextView;
@@ -296,4 +297,5 @@
 @property (assign) BOOL enableRenderFlyer;
 -(void)enableNavigation:(BOOL)enable;
 -(void)selectGiphy:(id)sender;
+
 @end
