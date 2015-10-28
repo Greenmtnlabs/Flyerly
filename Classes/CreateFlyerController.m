@@ -785,6 +785,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         [self zoomEnd];
     }
     
+    if( [flyer isSaveRequired] == YES ){
+        // set all share options status to 0
+        [shareviewcontroller resetAllButtonStatus];
+        [shareviewcontroller setAllButtonSelected:NO];
+        
+    }
+    
     //Delete extra layers
     [self deSelectPreviousLayer];
     
@@ -903,12 +910,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }
     });
     
-    if( [flyer isSaveRequired] == YES ){
-        // set all share options status to 0
-        [shareviewcontroller resetAllButtonStatus];
-        [shareviewcontroller setAllButtonSelected:NO];
-        
-    }
+    
     
     
     [self.navigationController popViewControllerAnimated:YES];

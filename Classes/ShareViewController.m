@@ -893,6 +893,8 @@ UIAlertView *saveCurrentFlyerAlert;
         
         // Mark Social Status In .soc File of Flyer
         [self.flyer setYouTubeStatus:1];
+        [self enableAllShareOptions: [[self.flyer getYouTubeStatus] isEqualToString: @"1"]];
+        
         [Flurry logEvent:@"Shared Youtube"];
     }
     
