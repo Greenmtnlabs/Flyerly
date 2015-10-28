@@ -868,11 +868,15 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             // If this is a video flyer, then merge the video.
             if ( [flyer isVideoFlyer] ) {
                 
-                // set all share options status to 0
-                [flyer resetAllButtonStatus]; //reset all database
+                // Set all share options status to 0
+                [flyer resetAllButtonStatus];
+                
+                // Set all button selected state
                 [shareviewcontroller setAllButtonSelected:NO];
+                
                 [shareviewcontroller enableShareOptions:NO];
                 [shareviewcontroller haveVideoLinkEnableAllShareOptions:NO];
+                
                 //WE are doing yes for save button, because we are auto saving on back
                 [flyer setFlickerStatus:1]; //show black button for save button
                 [shareviewcontroller.flickrButton setSelected:YES]; //view
