@@ -45,9 +45,6 @@
     BOOL haveValidSubscription;
     BOOL saveToGallaryReqBeforeSharing;
     BOOL isNewFlyer;
-
-
-    
 }
 
 @end
@@ -76,7 +73,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize premiumBtnBg, premiumBtnBgBorder, premiumBtnEmoticons, premiumBtnCliparts, premiumBtnFonts;
 @synthesize premiumImgBg, premiumImgBgBorder, premiumImgEmoticons, premiumImgCliparts, premiumImgFonts;
 
-@synthesize saveToGallaryReqBeforeSharing;
 
 #pragma mark -  View Appear Methods
 - (void)viewWillAppear:(BOOL)animated{

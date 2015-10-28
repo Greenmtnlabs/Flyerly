@@ -137,7 +137,6 @@
 @property (nonatomic, strong) IBOutlet FlyerImageView *flyimgView;
 @property (nonatomic, strong) UIView *sharePanel;
 
-@property (nonatomic, assign) BOOL saveToGallaryReqBeforeSharing;
 
 // These are ContextViews Library
 @property(nonatomic, strong) IBOutlet UIView *contextView;
