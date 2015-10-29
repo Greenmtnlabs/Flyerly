@@ -985,7 +985,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     NSString *uniqueId = FLYER_LAYER_GIPHY_LOGO;
     imageDetailDictionary[@"type"] = FLYER_LAYER_GIPHY_LOGO;
     imageDetailDictionary[@"isEditable"] = @"NO";
-    imageDetailDictionary[@"image"] = @"Photo/giphyLogo.png";
+    imageDetailDictionary[@"image"] = @"Photo/powerdByGiphyLogo.png";
     imageDetailDictionary[@"imageTag"] = @"";
     imageDetailDictionary[@"x"] = @"5";
     imageDetailDictionary[@"y"] = @"10";
