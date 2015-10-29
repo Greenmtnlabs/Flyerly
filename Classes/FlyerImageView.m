@@ -205,16 +205,24 @@ CGAffineTransform previuosTransform;
         }
     }
     
-    
-    //Apply Gestures[move/resize...etc]
-    if ([layDic objectForKey:@"type"] != nil && [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_DRAWING]) {
-        //we hooked the events(Gesture) of drawing in createFlyerController.h in function: drawingLayerMoved
-        if( self.addUiImgForDrawingLayer ){
+    BOOL hookGuestures = YES;
+    //Dont Apply Gestures[move/resize...etc]
+    if ([layDic objectForKey:@"type"] != nil) {
+        if( [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_DRAWING] ){
+            hookGuestures = NO;
+            //we hooked the events(Gesture) of drawing in createFlyerController.h in function: drawingLayerMoved
+            if( self.addUiImgForDrawingLayer ){
+            }
+        } else if( [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_GIPHY_LOGO] ){
+            hookGuestures = NO;
         }
     }
+    
+    
+    //Apply Gestures[move/resize...etc]
     // Do the generic stuff that needs to happen for all views. For now,
     // we add support for drag.
-    else if ( view != nil ) {
+    if ( hookGuestures && view != nil ) {
         view.userInteractionEnabled = YES;
 
         // Gesture for moving layers

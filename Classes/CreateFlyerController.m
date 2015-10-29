@@ -96,7 +96,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  * Note: This function will only run when flyer is opening first time
  */
 -(void)setWaterMarkLayerPosition {
-    
     if ( IS_IPHONE_4 ||  IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
         NSArray *sortedLayers = [flyer allKeys];
         if ( sortedLayers.count >= 2 ){
@@ -130,7 +129,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 }
             }
         }
-    }
+    }    
+    [flyer addGiphyWatermark];
 }
 
 

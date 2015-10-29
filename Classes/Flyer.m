@@ -971,31 +971,45 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [masterLayers setValue:imageDetailDictionary forKey:uniqueId];
     return uniqueId;
 }
--(NSString *)addWatermark{
+-(void)addGiphyWatermark{
     
-    NSString *uniqueId = [Flyer getUniqueId];
+    //Add giphy water mark only if we haven't giphyWatermark layer
+    if( [self getLayerFromMaster:FLYER_LAYER_GIPHY_LOGO] != nil ){
+        //return;
+        [self deleteLayer:FLYER_LAYER_GIPHY_LOGO];
+    }
     
     //Create Dictionary for Symbol
     NSMutableDictionary *imageDetailDictionary = [[NSMutableDictionary alloc] init];
-    imageDetailDictionary[@"isEditable"] = @"NO";
-    imageDetailDictionary[@"image"] = @"Photo/watermark.png";
-    imageDetailDictionary[@"imageTag"] = @"";
-    imageDetailDictionary[@"x"] = @"10";
-    imageDetailDictionary[@"y"] = @"10";
-    imageDetailDictionary[@"width"] = @"102";
-    imageDetailDictionary[@"height"] = @"38";
 
-    
-    imageDetailDictionary[@"type"] = FLYER_LAYER_WATER_MARK;
-    imageDetailDictionary[@"tx"] = @"193.75";
-    imageDetailDictionary[@"ty"] = @"256.50";
+    NSString *uniqueId = FLYER_LAYER_GIPHY_LOGO;
+    imageDetailDictionary[@"type"] = FLYER_LAYER_GIPHY_LOGO;
+    imageDetailDictionary[@"isEditable"] = @"NO";
+    imageDetailDictionary[@"image"] = @"Photo/giphyLogo.png";
+    imageDetailDictionary[@"imageTag"] = @"";
+    imageDetailDictionary[@"x"] = @"5";
+    imageDetailDictionary[@"y"] = @"10";
+    imageDetailDictionary[@"width"] = @"100";
+    imageDetailDictionary[@"height"] = @"80";
+
+    if( IS_IPHONE_4 || IS_IPHONE_5 ) {
+        [imageDetailDictionary setObject:@"20" forKey:@"tx"];
+        [imageDetailDictionary setObject:@"270" forKey:@"ty"];
+    }
+    else if( IS_IPHONE_6 ) {
+        [imageDetailDictionary setObject:@"0.0" forKey:@"tx"];
+        [imageDetailDictionary setObject:@"280.0" forKey:@"ty"];
+    }
+    else if( IS_IPHONE_6_PLUS ) {
+        [imageDetailDictionary setObject:@"20.0" forKey:@"tx"];
+        [imageDetailDictionary setObject:@"300.0" forKey:@"ty"];
+    }
     imageDetailDictionary[@"a"] = @"1.00";
     imageDetailDictionary[@"b"] = @"0.00";
     imageDetailDictionary[@"c"] = @"0.00";
     imageDetailDictionary[@"d"] = @"1.00";
     
     [masterLayers setValue:imageDetailDictionary forKey:uniqueId];
-    return uniqueId;
 }
 
 /*
