@@ -875,8 +875,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
                 // Set saveButton status to 0, i.e. this flyer not saved
                 [flyer setSaveButtonStatus:0];
-                
-                [shareviewcontroller.saveButton setSelected:YES]; //view
+                // Set SaveButton visual state selected
+                [shareviewcontroller.saveButton setSelected:YES]; 
                 
                 self.shouldShowAdd ( @"", haveValidSubscription );
                 

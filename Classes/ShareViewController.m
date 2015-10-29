@@ -840,8 +840,6 @@ UIAlertView *saveCurrentFlyerAlert;
         twitterButton.enabled = NO;
         
     } else if ( [sharer isKindOfClass:[SHKTumblr class]] == YES ) {
-        // If
-        
         
     } else if ( [sharer isKindOfClass:[SHKFlickr class]] == YES ) {
         
