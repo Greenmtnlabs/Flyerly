@@ -255,7 +255,7 @@
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="onClickFlickrButton" destination="-1" eventType="touchUpInside" id="dVu-PT-Ziq"/>
+                                <action selector="onClickSaveButton" destination="-1" eventType="touchUpInside" id="aX7-rT-avO"/>
                             </connections>
                         </button>
                     </subviews>

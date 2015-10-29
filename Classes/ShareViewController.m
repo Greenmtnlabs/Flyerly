@@ -346,7 +346,10 @@ UIAlertView *saveCurrentFlyerAlert;
     if( hasSavedInGallary != YES ){
         if( self.flyer.saveInGallaryRequired == 1){
             hasSavedInGallary = YES;
-            [flyer setFlickerStatus:1]; //show black button for save button
+            
+            // Set SaveButton status to 1, i.e. this flyer's been saved
+            [flyer setSaveButtonStatus:1];
+            
             [flickrButton setSelected:YES]; //view
             [self.flyer saveIntoGallery];
             self.flyer.saveInGallaryRequired = 0;
@@ -584,7 +587,7 @@ UIAlertView *saveCurrentFlyerAlert;
 /*
  * Called when saved button is pressed
  */
--(IBAction)onClickFlickrButton{
+-(IBAction)onClickSaveButton{
     
     //self.cfController.saveToGallaryReqBeforeSharing = NO;
     
@@ -608,7 +611,9 @@ UIAlertView *saveCurrentFlyerAlert;
         [self haveVideoLinkEnableAllShareOptions:NO];
         
         [flickrButton setSelected:YES]; //view
-        [self.flyer setFlickerStatus:1]; //database
+        
+        // Set SaveButton status to 1, i.e. this flyer's been saved
+        [flyer setSaveButtonStatus:1];
         
         //enable those button, those not required youtube link
         [self enableShareOptions:YES];
@@ -877,7 +882,8 @@ UIAlertView *saveCurrentFlyerAlert;
     } else if ( [sharer isKindOfClass:[SHKFlickr class]] == YES ) {
         
         flickrButton.enabled = YES;
-        [self.flyer setFlickerStatus:1];
+        // Set SaveButton status to 1, i.e. this flyer's been saved
+        [flyer setSaveButtonStatus:1];
         [Flurry logEvent:@"Shared Flickr"];
 
         

@@ -1911,8 +1911,15 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
 }
 
+/*
+ * This method sets status of SaveButton (used in ShareViewController)
+ * @params:
+ *      status: int
+ * @return:
+ *      void
+ */
 
--(void)setFlickerStatus :(int)status {
+-(void)setSaveButtonStatus :(int)status {
     
     [socialArray replaceObjectAtIndex:4 withObject:[NSString stringWithFormat:@"%d",status]];
     

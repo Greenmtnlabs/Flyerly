@@ -873,8 +873,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [shareviewcontroller enableShareOptions:NO];
                 [shareviewcontroller haveVideoLinkEnableAllShareOptions:NO];
                 
-                //WE are doing yes for save button, because we are auto saving on back
-                [flyer setFlickerStatus:1]; //show black button for save button
+                // Set SaveButton status to 0, i.e. this flyer not saved
+                [flyer setSaveButtonStatus:0];
+                
                 [shareviewcontroller.flickrButton setSelected:YES]; //view
                 
                 self.shouldShowAdd ( @"", haveValidSubscription );
@@ -4352,9 +4353,10 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         //Here we Merge Video for Sharing
         if ([flyer isVideoFlyer]) {
 
-            // set all share options status to 0
-            [flyer resetAllButtonStatus]; //reset all database
-            [flyer setFlickerStatus:0]; //show black button for save button
+            // Set all share options status to 0, i.e. this flyer never shared
+            [flyer resetAllButtonStatus];
+            // Set SaveButton status to 0, i.e. this flyer not saved
+            [flyer setSaveButtonStatus:0];
 
             //Background Thread
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){

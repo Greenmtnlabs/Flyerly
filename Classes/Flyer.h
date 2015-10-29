@@ -107,7 +107,9 @@
 -(void)setFacebookStatus :(int)status;
 -(void)setTwitterStatus :(int)status;
 -(void)setInstagaramStatus :(int)status;
--(void)setFlickerStatus :(int)status;
+
+// Sets status of SaveButton
+-(void)setSaveButtonStatus :(int)status;
 -(void)setMessengerStatus :(int)status;
 -(void)setEmailStatus :(int)status;
 -(void)setSmsStatus :(int)status;

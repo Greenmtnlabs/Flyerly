@@ -14,7 +14,7 @@
 #import "FlyerlyConfigurator.h"
 #import "MainScreenAddsCell.h"
 
-0
+
 #define ADD_AFTER_FLYERS 4 //SHOW AD AFTER (ADD_AFTER_FLYERS - 1 ) => 3 FLYERS
 
 @interface FlyerlyMainScreen ()  {

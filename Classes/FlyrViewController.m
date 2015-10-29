@@ -263,9 +263,12 @@ id lastShareBtnSender;
 
 /*
  * Here we get All Flyers Directories
- * return
- *      Nsarray of Flyers Path
+ * @params:
+ *      void
+ * @return
+ *      Nsarray of Flyers Path (Shared/Unshared)
  */
+
 -(NSMutableArray *)getFlyersPaths{
     
     NSMutableArray *allFlyers = [ Flyer recentFlyerPreview:0];
@@ -279,6 +282,7 @@ id lastShareBtnSender;
     }
     
     NSMutableArray *unsharedFlyer = [[NSMutableArray alloc] initWithArray:allFlyers];
+    
     // Finding unshared flyers
     for (int i =0 ; i < [allFlyers count] ; i++)
     {
@@ -286,6 +290,13 @@ id lastShareBtnSender;
                
         for(int j =0 ; j < [flyr.socialArray count] ; j++){
             if([flyr.socialArray[j] isEqualToString:@"1"]){
+                
+                // N.B.: In "flyr.socialArray" index '4' is SaveButton Status
+                // So, we skip it because it does not show any social status
+                if(flyr.socialArray[4]){
+                    continue;
+                }
+                
                 [unsharedFlyer removeObjectAtIndex:i];
                 break;
             }

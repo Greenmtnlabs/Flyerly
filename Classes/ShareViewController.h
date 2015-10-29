@@ -104,7 +104,7 @@
 -(IBAction)onClickTwitterButton;
 -(IBAction)onClickInstagramButton;
 -(IBAction)onClickEmailButton;
--(IBAction)onClickFlickrButton;
+-(IBAction)onClickSaveButton;
 -(IBAction)onPrintFlyerButton;
 -(IBAction)onClickSMSButton;
 -(IBAction)onClickClipboardButton;
