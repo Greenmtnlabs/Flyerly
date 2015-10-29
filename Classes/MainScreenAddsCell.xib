@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainScreenAddsCell"/>
@@ -12,16 +12,7 @@
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7Hr-l9-4mG" id="knb-hH-zgY">
                 <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="WQM-IF-x6i">
-                        <rect key="frame" x="150" y="125" width="20" height="20"/>
-                    </activityIndicatorView>
-                </subviews>
                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
-                <constraints>
-                    <constraint firstAttribute="centerX" secondItem="WQM-IF-x6i" secondAttribute="centerX" id="WPb-0d-yA9"/>
-                    <constraint firstAttribute="centerY" secondItem="WQM-IF-x6i" secondAttribute="centerY" id="olK-Bp-uy4"/>
-                </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.61960784310000006" green="0.59215686270000001" blue="0.39607843139999999" alpha="0.050000000000000003" colorSpace="calibratedRGB"/>
             <point key="canvasLocation" x="313" y="129"/>
