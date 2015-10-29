@@ -62,7 +62,7 @@
 @property(nonatomic,strong) IBOutlet UIButton *twitterButton;
 @property(nonatomic,strong) IBOutlet UIButton *emailButton;
 @property(nonatomic,strong) IBOutlet UIButton *messengerButton;
-@property(nonatomic,strong) IBOutlet UIButton *flickrButton;
+@property(nonatomic,strong) IBOutlet UIButton *saveButton;
 @property(nonatomic,strong) IBOutlet UIButton *printFlyerButton;
 @property(nonatomic,strong) IBOutlet UIButton *instagramButton;
 @property(nonatomic,strong) IBOutlet UIButton *smsButton;
@@ -104,7 +104,7 @@
 -(IBAction)onClickTwitterButton;
 -(IBAction)onClickInstagramButton;
 -(IBAction)onClickEmailButton;
--(IBAction)onClickFlickrButton;
+-(IBAction)onClickSaveButton;
 -(IBAction)onPrintFlyerButton;
 -(IBAction)onClickSMSButton;
 -(IBAction)onClickClipboardButton;

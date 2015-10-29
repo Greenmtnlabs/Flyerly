@@ -64,7 +64,7 @@ id lastShareBtnSender;
     self.navigationController.navigationBarHidden=NO;
     self.navigationItem.leftItemsSupplementBackButton = YES;
     
-    // Setting Navigation Heneader
+    // Setting Navigation Header Title
     if(showUnsharedFlyers){
         [self setNavigationTitle:@"SAVED"];
     }else{
@@ -263,9 +263,12 @@ id lastShareBtnSender;
 
 /*
  * Here we get All Flyers Directories
- * return
- *      Nsarray of Flyers Path
+ * @params:
+ *      void
+ * @return
+ *      Nsarray of Flyers Path (Shared/Unshared)
  */
+
 -(NSMutableArray *)getFlyersPaths{
     
     NSMutableArray *allFlyers = [ Flyer recentFlyerPreview:0];
@@ -279,15 +282,26 @@ id lastShareBtnSender;
     }
     
     NSMutableArray *unsharedFlyer = [[NSMutableArray alloc] initWithArray:allFlyers];
+    
+    int count = (int) [allFlyers count] - 1;
+    
     // Finding unshared flyers
-    for (int i =0 ; i < [allFlyers count] ; i++)
+    for (int i = count ; i>=0 ; i--)
     {
         Flyer *flyr = [[Flyer alloc] initWithPath:[allFlyers objectAtIndex:i] setDirectory:NO];
                
         for(int j =0 ; j < [flyr.socialArray count] ; j++){
+            
             if([flyr.socialArray[j] isEqualToString:@"1"]){
-                [unsharedFlyer removeObjectAtIndex:i];
-                break;
+                
+                // N.B.: In "flyr.socialArray" index '4' is saveButton Status
+                // So, we skip it because it does not show any social status
+                if(j == 4){
+                    continue;
+                }else {
+                    [unsharedFlyer removeObjectAtIndex:i];
+                    break;
+                }
             }
         }
     }

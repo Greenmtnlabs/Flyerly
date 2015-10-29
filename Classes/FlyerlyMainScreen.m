@@ -13,7 +13,6 @@
 #import "FlyrAppDelegate.h"
 #import "FlyerlyConfigurator.h"
 #import "MainScreenAddsCell.h"
-#import "WebViewViewController.h"
 
 
 #define ADD_AFTER_FLYERS 4 //SHOW AD AFTER (ADD_AFTER_FLYERS - 1 ) => 3 FLYERS
@@ -1051,10 +1050,13 @@ id lastShareBtnSender;
         //Here we Get youtube Link
         NSString *isAnyVideoUploadOnYoutube = [self.flyer getYoutubeLink];
         
-        // Any Uploaded Video Link Available of Youtube
-        // then we Enable Other Sharing Options
-        [shareviewcontroller enableShareOptions: [[self.flyer getFlickerStatus] isEqualToString: @"1"]];
         
+        // If video flyer has been saved,
+        // enable share options (independent of Youtube Link)
+        [shareviewcontroller enableShareOptions: YES];
+        
+        // If uploaded video link of Youtube available,
+        // enable other sharing options (dependent on Youtube Link)
         if (![isAnyVideoUploadOnYoutube isEqualToString:@""]) {
             [shareviewcontroller haveVideoLinkEnableAllShareOptions : [[self.flyer getYouTubeStatus] isEqualToString:@"1"]];
         }
@@ -1228,8 +1230,12 @@ id lastShareBtnSender;
  */
 - (IBAction)showHashTagFlyers:(id)sender {
     
-    WebViewViewController *webViewViewController = [[WebViewViewController alloc]initWithNibName:@"WebViewViewController" bundle:nil];
-    [self.navigationController pushViewController:webViewViewController animated:YES];
+    
+    NSURL *url = [NSURL URLWithString:@"https://twitter.com/hashtag/flyerly"];
+    
+    if (![[UIApplication sharedApplication] openURL:url]) {
+        NSLog(@"%@%@",@"Failed to open url:",[url description]);
+    }
    
 }
 

@@ -11,9 +11,9 @@
                 <outlet property="descTextAreaImg" destination="ceQ-71-3qA" id="pmP-jB-x8d"/>
                 <outlet property="emailButton" destination="99N-id-PIK" id="y20-Na-AiM"/>
                 <outlet property="facebookButton" destination="FdQ-7T-iT1" id="RVl-wO-WaY"/>
-                <outlet property="flickrButton" destination="GVr-7i-SKr" id="8iN-g4-nuk"/>
                 <outlet property="flyerShareType" destination="cNj-7M-s9Z" id="p6l-Kw-XDg"/>
                 <outlet property="messengerButton" destination="jsX-A7-yv3" id="TOk-2H-MAY"/>
+                <outlet property="saveButton" destination="GVr-7i-SKr" id="6xs-4s-KLL"/>
                 <outlet property="smsButton" destination="vnx-CM-GUx" id="cKm-PL-KB1"/>
                 <outlet property="star1" destination="7OZ-LA-8cx" id="t9I-Dw-vVA"/>
                 <outlet property="star2" destination="m9Y-2i-uBl" id="PId-rw-KaN"/>
@@ -255,7 +255,7 @@
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="onClickFlickrButton" destination="-1" eventType="touchUpInside" id="dVu-PT-Ziq"/>
+                                <action selector="onClickSaveButton" destination="-1" eventType="touchUpInside" id="aX7-rT-avO"/>
                             </connections>
                         </button>
                     </subviews>
