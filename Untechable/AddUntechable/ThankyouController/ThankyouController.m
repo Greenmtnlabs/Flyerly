@@ -20,8 +20,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblEndDateTime;
 @property (strong, nonatomic) IBOutlet UILabel *lblForwadingNumber;
 
-@property (strong, nonatomic) IBOutlet UILabel *lblPlay1;
-
 @end
 
 @implementation ThankyouController
@@ -111,10 +109,6 @@
     NSLog(@"twillioNumber1: %@", twillioNumber);
     twillioNumber   =   [untechable.commonFunctions standarizePhoneNumber:twillioNumber];
     NSLog(@"twillioNumber2: %@", twillioNumber);
-    
-    [_lblPlay1 setTextColor:DEF_GRAY];
-    _lblPlay1.font = [UIFont fontWithName:APP_FONT size:19];
-    
    
 }
 
