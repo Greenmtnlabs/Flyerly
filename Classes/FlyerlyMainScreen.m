@@ -180,12 +180,19 @@ id lastShareBtnSender;
         imageName = @"noAdd_6Plus.png";
     }
     noAdsImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
+    noAdsImage.userInteractionEnabled = NO;
     
-    // to apply gesture recognizer on image
-    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openPanel)];
-    noAdsImage.userInteractionEnabled = YES;
-    [tap setNumberOfTapsRequired:1];
-    [noAdsImage addGestureRecognizer:tap];
+    if(![FlyerlySingleton connected]){
+        
+        // If not connected to internet, enables image user interaction
+        noAdsImage.userInteractionEnabled = YES;
+        
+        // and applies gesture recognizer on image
+        UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openPanel)];
+        noAdsImage.userInteractionEnabled = YES;
+        [tap setNumberOfTapsRequired:1];
+        [noAdsImage addGestureRecognizer:tap];
+    }
 }
 
 /*
@@ -542,7 +549,7 @@ id lastShareBtnSender;
         CGPoint origin;
         origin = CGPointMake(0.0,0.0);
         GADAdSize customAdSize;
-        customAdSize = GADAdSizeFromCGSize(CGSizeMake(300,250));
+        customAdSize = GADAdSizeFromCGSize(CGSizeMake(320,480));
         
         if( j >= self.bannerAdd.count  )
             self.bannerAdd[j] = [[GADBannerView alloc] initWithAdSize:customAdSize origin:origin];
