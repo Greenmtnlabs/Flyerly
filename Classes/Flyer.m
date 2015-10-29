@@ -1912,13 +1912,12 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 }
 
 /*
- * This method sets status of SaveButton (used in ShareViewController)
+ * This method sets status of saveButton (used in ShareViewController)
  * @params:
  *      status: int
  * @return:
  *      void
  */
-
 -(void)setSaveButtonStatus :(int)status {
     
     [socialArray replaceObjectAtIndex:4 withObject:[NSString stringWithFormat:@"%d",status]];
@@ -2007,9 +2006,13 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 }
 
 /*
- * Here we Return Flicker Share Status of Flyer
+ * This method tells if the flyer saved or not
+ * @params:
+ *      void
+ * @return:
+ *      NSString containing status (0 or 1)
  */
--(NSString *)getFlickerStatus {
+-(NSString *)getSaveButtonStatus {
     return [socialArray objectAtIndex:4];
     
 }

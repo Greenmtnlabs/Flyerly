@@ -108,7 +108,7 @@
 -(void)setTwitterStatus :(int)status;
 -(void)setInstagaramStatus :(int)status;
 
-// Sets status of SaveButton
+// Sets status of saveButton
 -(void)setSaveButtonStatus :(int)status;
 -(void)setMessengerStatus :(int)status;
 -(void)setEmailStatus :(int)status;
@@ -123,7 +123,9 @@
 -(NSString *)getFacebookStatus;
 -(NSString *)getTwitterStatus;
 -(NSString *)getInstagaramStatus;
--(NSString *)getFlickerStatus;
+
+// Method to return saveButton Status
+-(NSString *)getSaveButtonStatus;
 -(NSString *)getMessengerStatus;
 -(NSString *)getEmailStatus;
 -(NSString *)getSmsStatus;

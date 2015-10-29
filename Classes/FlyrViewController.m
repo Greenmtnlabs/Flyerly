@@ -291,7 +291,7 @@ id lastShareBtnSender;
         for(int j =0 ; j < [flyr.socialArray count] ; j++){
             if([flyr.socialArray[j] isEqualToString:@"1"]){
                 
-                // N.B.: In "flyr.socialArray" index '4' is SaveButton Status
+                // N.B.: In "flyr.socialArray" index '4' is saveButton Status
                 // So, we skip it because it does not show any social status
                 if(flyr.socialArray[4]){
                     continue;

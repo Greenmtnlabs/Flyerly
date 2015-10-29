@@ -11,9 +11,9 @@
                 <outlet property="descTextAreaImg" destination="cXJ-PV-xl2" id="D6e-RQ-QMI"/>
                 <outlet property="emailButton" destination="12" id="24"/>
                 <outlet property="facebookButton" destination="11" id="23"/>
-                <outlet property="flickrButton" destination="13" id="25"/>
                 <outlet property="flyerShareType" destination="02X-0M-pgw" id="RRD-OV-hAp"/>
                 <outlet property="messengerButton" destination="j8Y-Ly-dUY" id="MJT-sB-ElR"/>
+                <outlet property="saveButton" destination="13" id="hoa-qF-M6i"/>
                 <outlet property="smsButton" destination="14" id="26"/>
                 <outlet property="star1" destination="D0f-Ce-0gF" id="Qb0-gF-RHV"/>
                 <outlet property="star2" destination="mVn-Rd-jbl" id="CSS-K6-EAK"/>

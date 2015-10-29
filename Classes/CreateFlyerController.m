@@ -873,10 +873,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [shareviewcontroller enableShareOptions:NO];
                 [shareviewcontroller haveVideoLinkEnableAllShareOptions:NO];
                 
-                // Set SaveButton status to 0, i.e. this flyer not saved
+                // Set saveButton status to 0, i.e. this flyer not saved
                 [flyer setSaveButtonStatus:0];
                 
-                [shareviewcontroller.flickrButton setSelected:YES]; //view
+                [shareviewcontroller.saveButton setSelected:YES]; //view
                 
                 self.shouldShowAdd ( @"", haveValidSubscription );
                 
@@ -4355,7 +4355,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 
             // Set all share options status to 0, i.e. this flyer never shared
             [flyer resetAllButtonStatus];
-            // Set SaveButton status to 0, i.e. this flyer not saved
+            // Set saveButton status to 0, i.e. this flyer not saved
             [flyer setSaveButtonStatus:0];
 
             //Background Thread

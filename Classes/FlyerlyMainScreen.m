@@ -1050,10 +1050,13 @@ id lastShareBtnSender;
         //Here we Get youtube Link
         NSString *isAnyVideoUploadOnYoutube = [self.flyer getYoutubeLink];
         
-        // Any Uploaded Video Link Available of Youtube
-        // then we Enable Other Sharing Options
-        [shareviewcontroller enableShareOptions: [[self.flyer getFlickerStatus] isEqualToString: @"1"]];
         
+        // If video flyer has been saved,
+        // enable share options (independent of Youtube Link)
+        [shareviewcontroller enableShareOptions: [[self.flyer getSaveButtonStatus] isEqualToString: @"1"]];
+        
+        // If uploaded video link of Youtube available,
+        // enable other sharing options (dependent on Youtube Link)
         if (![isAnyVideoUploadOnYoutube isEqualToString:@""]) {
             [shareviewcontroller haveVideoLinkEnableAllShareOptions : [[self.flyer getYouTubeStatus] isEqualToString:@"1"]];
         }

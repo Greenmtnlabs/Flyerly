@@ -13,7 +13,7 @@
     NSString *fbShareType; // 4 possible values to assign: fb-photo-wall | fb-photo-messenger | fb-video-wall | fb-video-messenger
 }
 
-@synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,flickrButton,printFlyerButton,facebookButton,twitterButton,instagramButton,messengerButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,tempTxtArea,saveToGallaryReqBeforeSharing;
+@synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,saveButton,printFlyerButton,facebookButton,twitterButton,instagramButton,messengerButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,tempTxtArea,saveToGallaryReqBeforeSharing;
 
 @synthesize flyerShareType,star1,star2,star3,star4,star5;
 
@@ -306,15 +306,15 @@ UIAlertView *saveCurrentFlyerAlert;
         [messengerButton setSelected:NO];
     }
     
-    // Set Flicker Sharing Status From Social File
-    status = [flyer getFlickerStatus];
+    // Set saveButton status
+    status = [flyer getSaveButtonStatus];
     if([status isEqualToString:@"1"]){
-        [flickrButton setSelected:YES];
+        [saveButton setSelected:YES];
     }else{
-        [flickrButton setSelected:NO];
+        [saveButton setSelected:NO];
     }
     
-    //enable buttons if save to gallary not required
+    //Enable buttons if save to gallary not required
     if ( [flyer isVideoFlyer] ){
         
         if([[self.flyer getYouTubeStatus] isEqualToString: @"1"]){
@@ -323,8 +323,10 @@ UIAlertView *saveCurrentFlyerAlert;
             [self setAllButtonSelected:NO];
             [self haveVideoLinkEnableAllShareOptions:NO];
         }
-        //save dependent
-        [self enableShareOptions:( [[flyer getFlickerStatus] isEqualToString:@"1"] )];
+
+        // If video flyer has been saved,
+        // enable share options (independent of Youtube Link)
+        [self enableShareOptions:( [[flyer getSaveButtonStatus] isEqualToString:@"1"] )];
     }
 }
 
@@ -350,7 +352,9 @@ UIAlertView *saveCurrentFlyerAlert;
             // Set SaveButton status to 1, i.e. this flyer's been saved
             [flyer setSaveButtonStatus:1];
             
-            [flickrButton setSelected:YES]; //view
+            // Set SaveButton visual state selected
+            [saveButton setSelected:YES];
+            
             [self.flyer saveIntoGallery];
             self.flyer.saveInGallaryRequired = 0;
         }
@@ -376,8 +380,15 @@ UIAlertView *saveCurrentFlyerAlert;
     [clipboardButton setEnabled:enable];
 }
 
+/*
+ * Method to set status of saveButton
+ * @params:
+ *      enable: BOOL
+ * @return:
+ *      void
+ */
 -(void)saveButtonSelected:(BOOL)enable{
-    [flickrButton setSelected:enable];
+    [saveButton setSelected:enable];
 }
 
 /*
@@ -610,7 +621,8 @@ UIAlertView *saveCurrentFlyerAlert;
         [self setAllButtonSelected:NO]; //view reset
         [self haveVideoLinkEnableAllShareOptions:NO];
         
-        [flickrButton setSelected:YES]; //view
+        // Set SaveButton visual state selected
+        [saveButton setSelected:YES];
         
         // Set SaveButton status to 1, i.e. this flyer's been saved
         [flyer setSaveButtonStatus:1];
@@ -828,12 +840,11 @@ UIAlertView *saveCurrentFlyerAlert;
         twitterButton.enabled = NO;
         
     } else if ( [sharer isKindOfClass:[SHKTumblr class]] == YES ) {
+        // If
         
-        messengerButton.enabled = NO;
         
     } else if ( [sharer isKindOfClass:[SHKFlickr class]] == YES ) {
         
-        flickrButton.enabled = NO;
         
     } else if ( [sharer isKindOfClass:[SHKMail class]] == YES ) {
         
@@ -846,6 +857,7 @@ UIAlertView *saveCurrentFlyerAlert;
     
         youTubeButton.enabled = NO;
     }
+    
     
 	if (!sharer.quiet)
 		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(@"Sharing to %@", [[sharer class] sharerTitle]) forSharer:sharer];
@@ -875,17 +887,11 @@ UIAlertView *saveCurrentFlyerAlert;
         
     } else if ( [sharer isKindOfClass:[SHKTumblr class]] == YES ) {
         
-        messengerButton.enabled = YES;
-        [self.flyer setMessengerStatus:1];
-        [Flurry logEvent:@"Shared on Messenger"];
+        [Flurry logEvent:@"Shared on Tumblr"];
        
     } else if ( [sharer isKindOfClass:[SHKFlickr class]] == YES ) {
-        
-        flickrButton.enabled = YES;
-        // Set SaveButton status to 1, i.e. this flyer's been saved
-        [flyer setSaveButtonStatus:1];
-        [Flurry logEvent:@"Shared Flickr"];
-
+       
+        [Flurry logEvent:@"Shared on Flickr"];
         
     } else if ( [sharer isKindOfClass:[SHKMail class]] == YES ) {
         
