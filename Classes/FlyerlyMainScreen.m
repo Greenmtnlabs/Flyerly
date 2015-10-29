@@ -1053,7 +1053,7 @@ id lastShareBtnSender;
         
         // If video flyer has been saved,
         // enable share options (independent of Youtube Link)
-        [shareviewcontroller enableShareOptions: [[self.flyer getSaveButtonStatus] isEqualToString: @"1"]];
+        [shareviewcontroller enableShareOptions: YES];
         
         // If uploaded video link of Youtube available,
         // enable other sharing options (dependent on Youtube Link)

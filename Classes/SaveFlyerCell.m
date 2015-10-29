@@ -90,6 +90,12 @@
         iconImage.image = [UIImage imageNamed:@"youtube_share_saved"];
         sharingCount++;
     }
+    
+    iconImage = [_socialStatus objectAtIndex:sharingCount];
+    if ( [[flyer getSmsStatus] isEqualToString:@"1"] ) {
+        iconImage.image = [UIImage imageNamed:@"sms_share_saved"];
+        sharingCount++;
+    }
 }
 
 
