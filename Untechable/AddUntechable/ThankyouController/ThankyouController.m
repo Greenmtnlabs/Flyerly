@@ -18,19 +18,15 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblStartDateTime;
 @property (strong, nonatomic) IBOutlet UILabel *lblEnd;
 @property (strong, nonatomic) IBOutlet UILabel *lblEndDateTime;
-@property (strong, nonatomic) IBOutlet UILabel *lblTwillioNumber;
 @property (strong, nonatomic) IBOutlet UILabel *lblForwadingNumber;
 
 @property (strong, nonatomic) IBOutlet UILabel *lblPlay1;
-@property (strong, nonatomic) IBOutlet UIButton *playVideoBtn;
-@property (strong, nonatomic) IBOutlet UIButton *btnCopy;
 
 @end
 
 @implementation ThankyouController
 
 @synthesize untechable;
-@synthesize  moviePlayerController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -111,23 +107,15 @@
     _lblForwadingNumber.font = [UIFont fontWithName:APP_FONT size:20];
     
     NSString *twillioNumber = untechable.twillioNumber;
-    [_lblTwillioNumber setTextColor:DEF_GREEN];
-    _lblTwillioNumber.font = [UIFont fontWithName:APP_FONT size:20];
-    _lblTwillioNumber.text = twillioNumber;
+   
     NSLog(@"twillioNumber1: %@", twillioNumber);
     twillioNumber   =   [untechable.commonFunctions standarizePhoneNumber:twillioNumber];
     NSLog(@"twillioNumber2: %@", twillioNumber);
-    _lblTwillioNumber.text = twillioNumber;
     
     [_lblPlay1 setTextColor:DEF_GRAY];
     _lblPlay1.font = [UIFont fontWithName:APP_FONT size:19];
     
-    [_btnCopy setTitleColor:DEF_GRAY forState:UIControlStateNormal];
-    _btnCopy.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
-    
-    [[_playVideoBtn layer] setBorderWidth:2.0f];
-    [[_playVideoBtn layer] setBorderColor:DEF_GREEN.CGColor];
-
+   
 }
 
 #pragma mark -  Navigation functions
@@ -192,46 +180,5 @@
     }
 }
 
--(IBAction)playVideo:(id)sender{
-
-    NSURL *fileURL = [[NSBundle mainBundle] URLForResource:@"untechable" withExtension:@"mov"];
-    self.moviePlayerController = [[MPMoviePlayerViewController alloc] initWithContentURL:fileURL];
-    
-    [moviePlayerController.moviePlayer prepareToPlay];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(moviePlaybackComplete:)
-                                                 name:MPMoviePlayerPlaybackDidFinishNotification
-                                               object:nil];
-    
-    [self presentViewController:moviePlayerController animated:YES completion:nil];
-
-}
-
-/**
- * It is called when 
- * video is stopped
- * either by user or when finished
- */
-
-- (void)moviePlaybackComplete:(NSNotification *)notification {
-    NSLog(@"I am in movie playback complete!!!");
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:MPMoviePlayerPlaybackDidFinishNotification
-                                                  object:nil];
-}
-
-
-- (IBAction)copyNumer:(id)sender {
-    
-    [_btnCopy setSelected:YES];
-    
-    UIPasteboard *pb = [UIPasteboard generalPasteboard];
-    // This code assumes that you have created the outlet for UITextField as 'textField1'.
-    // Update the below code, if you have given different name
-    [pb setString:_lblTwillioNumber.text];
-    
-}
 
 @end
