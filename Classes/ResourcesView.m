@@ -59,7 +59,10 @@
         [deselectResource.layer setCornerRadius:0];
         highlightedResourceTag = -1;
     }
+}
 
+-(void)setHighlightedResourceTag:(NSInteger) tag{
+    highlightedResourceTag = tag;
 }
 
 @end

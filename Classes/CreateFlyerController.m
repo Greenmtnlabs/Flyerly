@@ -129,8 +129,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 }
             }
         }
-    }    
-    [flyer addGiphyWatermark];
+    }
 }
 
 
@@ -2315,7 +2314,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             if (lstTag != view.tag || view.tag == 0) {
                 
                 //Here we Set Flyer Type
-                [flyer setFlyerTypeImage];
+                [self setFlyerTypeImage];
                 
                 //Getting Image Path
                 NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"Template%d",(int)view.tag]];
@@ -2325,8 +2324,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
                 //Set Image Tag in dictionary
                 [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",(int)view.tag]];
-                
-                [self videoPlay:NO repeat:NO];
             }
             
             // Add border to selected layer thumbnail
@@ -2718,7 +2715,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             }else{
                 
                 //Here we Set Flyer Type
-                [weakSelf.flyer setFlyerTypeImage];
+                [weakSelf setFlyerTypeImage];
                 
                 //Create Copy of Image
                 [weakSelf copyImageToTemplate:img];
@@ -2740,7 +2737,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         NSError *error = nil;
         
-        [weakSelf.flyer setFlyerTypeVideo];
+        [weakSelf setFlyerTypeVideo];
         
         // HERE WE MOVE SOURCE FILE INTO FLYER FOLDER
         NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
@@ -2882,7 +2879,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             } else {
                 
                 //Here we Set Flyer Type
-                [weakSelf.flyer setFlyerTypeImage];
+                [weakSelf setFlyerTypeImage];
                 
                 //Create Copy of Image
                 [weakSelf copyImageToTemplate:img];
@@ -2909,7 +2906,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         NSError *error = nil;
         
         [weakSelf.view addSubview:weakSelf.flyimgView];
-        [weakSelf.flyer setFlyerTypeVideo];
+        [weakSelf setFlyerTypeVideo];
         
         // Move video in to the sour flyer.
         NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
@@ -3005,8 +3002,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     self.flyimgView.image = nil;
     
     [self.playerView addSubview:player.view];
-    
-    [playerToolBar setFrame:CGRectMake(0, self.playerView.frame.size.height - 40, 306, 40)];
+    NSLog(@"%f",self.playerView.frame.size.width);
+    [playerToolBar setFrame:CGRectMake(0, self.playerView.frame.size.height - 40, self.playerView.frame.size.width, 40)];
     if ( IS_IPHONE_6 ) {
         [playerToolBar setFrame:CGRectMake(0, self.playerView.frame.size.height - 40, 360, 40)];
     }
@@ -3030,30 +3027,40 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 -(IBAction)play:(id)sender {
     BOOL playOrStop = ([playButton isSelected] == NO);
-    [self videoPlay:playOrStop repeat:NO];
-    
+    [self videoPlay:playOrStop repeat:NO changeAlph:NO];
 }
 
 -(void)videoPlay:(BOOL)playOrStop repeat:(BOOL)repeat{
+        [self videoPlay:playOrStop repeat:repeat changeAlph:YES];
+}
+-(void)videoPlay:(BOOL)playOrStop repeat:(BOOL)repeat  changeAlph:(BOOL)changeAlph{
     
     if ( playOrStop ) {
         if(player != nil ){
             [playButton setSelected:YES];
             isPlaying = YES;
-            [playerToolBar setHidden:NO];
             [player play];
             player.repeatMode = repeat;
             player.currentPlaybackTime = playerSlider.value;
             [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTime:) userInfo:nil repeats:NO];
+            
+            if( changeAlph ){
+                playerToolBar.alpha = 1;
+                [playerToolBar setHidden:NO];
+            }
         }
         
     } else{
-        [playButton setSelected:NO];
-        [playerToolBar setHidden:YES];
         if(player != nil ){
             isPlaying = NO;
             [player pause];
             player.repeatMode = repeat;            
+        }
+        [playButton setSelected:NO];
+        
+        if( changeAlph ){
+            playerToolBar.alpha = 0;
+           [playerToolBar setHidden:YES];
         }
     }
 }
@@ -4000,7 +4007,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [playerToolBar setHidden:YES];
         
         //Here we Set Flyer Type
-        [flyer setFlyerTypeImage];
+        [self setFlyerTypeImage];
         
         // Get path of current flyer background and remove it
         NSString *currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
@@ -5137,6 +5144,10 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [flyerBorder setSelected:YES];
     }
     else if(selectedButton == giphyBgBtn) {
+       NSMutableDictionary *templateDictionary = [flyer getLayerFromMaster:@"Template"];
+      [backgroundsView setHighlightedResourceTag:[[templateDictionary objectForKey:@"imageTag"] intValue]];
+      [backgroundsView dehighlightResource];
+        
        tasksAfterGiphySelect = @"goingToGiphy";
        GiphyViewController *giphyViewController = [[GiphyViewController alloc]initWithNibName:@"GiphyViewController" bundle:nil];
         giphyViewController.flyer = flyer;
@@ -6573,5 +6584,17 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 
 -(UIColor *) getPremiumBgColor{
     return [UIColor colorWithRed:0 green:0 blue:255 alpha:0.5];
+}
+
+-(void)setFlyerTypeVideo{
+    [flyer setFlyerTypeVideo];
+    [flyimgView deleteLayer:FLYER_LAYER_GIPHY_LOGO];
+    playerToolBar.alpha = 1;
+}
+
+-(void)setFlyerTypeImage{
+    [flyer setFlyerTypeImage];
+    [flyimgView deleteLayer:FLYER_LAYER_GIPHY_LOGO];
+    [self videoPlay:NO repeat:NO];
 }
 @end

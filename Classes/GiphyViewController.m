@@ -221,6 +221,8 @@
                         //Update dictionary
                         [flyer setOriginalVideoUrl:@"Template/template.mov"];
                         [flyer setFlyerTypeVideoWithSize:width height:height videoSoure:@"giphy"];
+                        [flyer setImageTag:@"Template" Tag:nil];
+                        [flyer addGiphyWatermark];
                         
                         tasksAfterGiphySelect = @"play";
                         break;

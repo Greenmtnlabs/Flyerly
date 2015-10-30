@@ -971,13 +971,17 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [masterLayers setValue:imageDetailDictionary forKey:uniqueId];
     return uniqueId;
 }
--(void)addGiphyWatermark{
-    
+
+-(void)deleteGiphyWatermarkLayerIfExist{
     //Add giphy water mark only if we haven't giphyWatermark layer
     if( [self getLayerFromMaster:FLYER_LAYER_GIPHY_LOGO] != nil ){
-        //return;
         [self deleteLayer:FLYER_LAYER_GIPHY_LOGO];
     }
+}
+
+-(void)addGiphyWatermark{
+    
+    [self deleteGiphyWatermarkLayerIfExist];
     
     //Create Dictionary for Symbol
     NSMutableDictionary *imageDetailDictionary = [[NSMutableDictionary alloc] init];
@@ -1599,6 +1603,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  * Here we Set Flyer Type to Video Flyer
  */
 -(void)setFlyerTypeVideo {
+    [self deleteGiphyWatermarkLayerIfExist];
     [self setFlyerTypeVideoWithSize:flyerlyWidth height:flyerlyHeight videoSoure:@"flyerly"];
 }
 /*
@@ -1664,6 +1669,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  * Here we Set Flyer Type to Image Flyer
  */
 -(void)setFlyerTypeImage {
+   [self deleteGiphyWatermarkLayerIfExist];
     NSMutableDictionary *templateDictionary = [self getLayerFromMaster:@"Template"];
     
     [templateDictionary setValue:@"image" forKey:@"FlyerType"];
