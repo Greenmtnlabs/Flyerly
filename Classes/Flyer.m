@@ -998,7 +998,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
     if( IS_IPHONE_4 || IS_IPHONE_5 ) {
         [imageDetailDictionary setObject:@"0" forKey:@"tx"];
-        [imageDetailDictionary setObject:@"221" forKey:@"ty"];
+        [imageDetailDictionary setObject:@"215" forKey:@"ty"];
     }
     else if( IS_IPHONE_6 ) {
         [imageDetailDictionary setObject:@"0.0" forKey:@"tx"];
