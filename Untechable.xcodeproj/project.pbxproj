@@ -33,6 +33,8 @@
 		2061886A1BC519CE004D2071 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 206188691BC519CE004D2071 /* MessageUI.framework */; };
 		2065E8DA1B8C94F60005D184 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2065E8DC1B8C94F60005D184 /* Localizable.strings */; };
 		20ABF6B71BE34556008EB04A /* untechLoadScreen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 20ABF6B61BE34556008EB04A /* untechLoadScreen.jpg */; };
+		20ABF6BE1BE3AA8C008EB04A /* ContactsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 20ABF6BD1BE3AA8C008EB04A /* ContactsModel.m */; };
+		20ABF6C11BE3AEFB008EB04A /* TwitterFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 20ABF6C01BE3AEFB008EB04A /* TwitterFriends.m */; };
 		20BD85231BE26B1200F7EB9E /* IntroScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BD85211BE26B1200F7EB9E /* IntroScreenViewController.m */; };
 		20BD85241BE26B1200F7EB9E /* IntroScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20BD85221BE26B1200F7EB9E /* IntroScreenViewController.xib */; };
 		20CD72D51BD8C57F000F8FBA /* EditButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20CD72D31BD8C57F000F8FBA /* EditButtonCell.m */; };
@@ -282,6 +284,10 @@
 		2065E8DB1B8C94F60005D184 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2065E8DD1B8C95290005D184 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		20ABF6B61BE34556008EB04A /* untechLoadScreen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = untechLoadScreen.jpg; sourceTree = "<group>"; };
+		20ABF6BC1BE3AA8C008EB04A /* ContactsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsModel.h; sourceTree = "<group>"; };
+		20ABF6BD1BE3AA8C008EB04A /* ContactsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsModel.m; sourceTree = "<group>"; };
+		20ABF6BF1BE3AEFB008EB04A /* TwitterFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterFriends.h; sourceTree = "<group>"; };
+		20ABF6C01BE3AEFB008EB04A /* TwitterFriends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterFriends.m; sourceTree = "<group>"; };
 		20BD85201BE26B1200F7EB9E /* IntroScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroScreenViewController.h; sourceTree = "<group>"; };
 		20BD85211BE26B1200F7EB9E /* IntroScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroScreenViewController.m; sourceTree = "<group>"; };
 		20BD85221BE26B1200F7EB9E /* IntroScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroScreenViewController.xib; sourceTree = "<group>"; };
@@ -577,6 +583,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		20ABF6B91BE3A7CA008EB04A /* AppInvite */ = {
+			isa = PBXGroup;
+			children = (
+				20ABF6BB1BE3A8C6008EB04A /* ContactsModel */,
+				20ABF6BA1BE3A8A9008EB04A /* CustomClasses */,
+			);
+			name = AppInvite;
+			sourceTree = "<group>";
+		};
+		20ABF6BA1BE3A8A9008EB04A /* CustomClasses */ = {
+			isa = PBXGroup;
+			children = (
+				20ABF6BF1BE3AEFB008EB04A /* TwitterFriends.h */,
+				20ABF6C01BE3AEFB008EB04A /* TwitterFriends.m */,
+			);
+			name = CustomClasses;
+			sourceTree = "<group>";
+		};
+		20ABF6BB1BE3A8C6008EB04A /* ContactsModel */ = {
+			isa = PBXGroup;
+			children = (
+				20ABF6BC1BE3AA8C008EB04A /* ContactsModel.h */,
+				20ABF6BD1BE3AA8C008EB04A /* ContactsModel.m */,
+			);
+			name = ContactsModel;
+			sourceTree = "<group>";
+		};
 		20BD851F1BE26AC600F7EB9E /* IntroScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -752,6 +785,7 @@
 				2474023E1B33CB7900459759 /* SetupGuide */,
 				2402BB7F1A1DBEF800255A73 /* UntechableListController */,
 				366ECD7519D2D24600F71A11 /* AddUntechable */,
+				20ABF6B91BE3A7CA008EB04A /* AppInvite */,
 				36561D7D19D2C8A40069D897 /* Images.xcassets */,
 			);
 			path = Untechable;
@@ -1505,12 +1539,14 @@
 				20CD72D51BD8C57F000F8FBA /* EditButtonCell.m in Sources */,
 				243C59E01A4D3A910020350C /* ContactCustomizeDetailsControllerViewController.m in Sources */,
 				36FD975519E694AC00427507 /* BSKeyboardControls.m in Sources */,
+				20ABF6BE1BE3AA8C008EB04A /* ContactsModel.m in Sources */,
 				C3DC2E271B8C77070091CCF4 /* RMStoreUserDefaultsPersistence.m in Sources */,
 				C3CA4DD51A80CE0700B03A23 /* SocialNetworksStatusModal.m in Sources */,
 				248E06B71A4ACD6E0099846A /* ContactsCustomizedModal.m in Sources */,
 				20BD85231BE26B1200F7EB9E /* IntroScreenViewController.m in Sources */,
 				36524AF119D940F4006DCAAF /* SocialnetworkController.m in Sources */,
 				C372098D1B7767AA003A40F2 /* RUntechable.m in Sources */,
+				20ABF6C11BE3AEFB008EB04A /* TwitterFriends.m in Sources */,
 				24A65BEC1A30451E00BE83C6 /* SSLCell.m in Sources */,
 				24354D701A499F4F000EC781 /* ContactListCell.m in Sources */,
 				36561D7819D2C8A40069D897 /* main.m in Sources */,
