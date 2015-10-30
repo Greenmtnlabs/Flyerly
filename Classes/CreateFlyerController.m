@@ -3002,11 +3002,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     self.flyimgView.image = nil;
     
     [self.playerView addSubview:player.view];
-    NSLog(@"%f",self.playerView.frame.size.width);
     [playerToolBar setFrame:CGRectMake(0, self.playerView.frame.size.height - 40, self.playerView.frame.size.width, 40)];
-    if ( IS_IPHONE_6 ) {
-        [playerToolBar setFrame:CGRectMake(0, self.playerView.frame.size.height - 40, 360, 40)];
-    }
     [self.flyimgView addSubview:playerToolBar];
     
     player.accessibilityElementsHidden = YES;
