@@ -915,6 +915,14 @@ id lastShareBtnSender;
     [introScreenViewController setModalPresentationStyle:UIModalPresentationFullScreen];
     introScreenViewController.buttonDelegate = self;
     
+            //enable buttons if save to gallary not required
+            if ( [flyer isVideoFlyer] ){
+                [shareviewcontroller enableShareOptions:YES];
+                [shareviewcontroller saveButtonSelected:YES];
+                [shareviewcontroller haveVideoLinkEnableAllShareOptions:[[self.flyer getYouTubeStatus] isEqualToString:@"1"]];
+            }
+
+    
         
     [self presentViewController:introScreenViewController animated:YES completion:nil];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];    
@@ -1048,27 +1056,20 @@ id lastShareBtnSender;
         
         [shareviewcontroller setSocialStatus];
         
-//        //Here we Get youtube Link
-//        NSString *isAnyVideoUploadOnYoutube = [self.flyer getYoutubeLink];
+        //Here we Get youtube Link
+        NSString *isAnyVideoUploadOnYoutube = [self.flyer getYoutubeLink];
         
         
-//        // If video flyer has been saved,
-//        // enable share options (independent of Youtube Link)
-//        [shareviewcontroller enableShareOptions: YES];
-//        
-//        // If uploaded video link of Youtube available,
-//        // enable other sharing options (dependent on Youtube Link)
-//        if (![isAnyVideoUploadOnYoutube isEqualToString:@""]) {
-//            [shareviewcontroller haveVideoLinkEnableAllShareOptions : [[self.flyer getYouTubeStatus] isEqualToString:@"1"]];
-//        }
+        // If video flyer has been saved,
+        // enable share options (independent of Youtube Link)
+        [shareviewcontroller enableShareOptions: YES];
+        [shareviewcontroller saveButtonSelected: YES];
         
-        //enable buttons if save to gallary not required
-        if ( [flyer isVideoFlyer] ){
-            [shareviewcontroller enableShareOptions:YES];
-            [shareviewcontroller saveButtonSelected:YES];
-            [shareviewcontroller haveVideoLinkEnableAllShareOptions:[[self.flyer getYouTubeStatus] isEqualToString:@"1"]];
+        // If uploaded video link of Youtube available,
+        // enable other sharing options (dependent on Youtube Link)
+        if (![isAnyVideoUploadOnYoutube isEqualToString:@""]) {
+            [shareviewcontroller haveVideoLinkEnableAllShareOptions : [[self.flyer getYouTubeStatus] isEqualToString:@"1"]];
         }
-
         
         
         //Create Animation Here

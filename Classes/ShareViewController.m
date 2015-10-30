@@ -320,7 +320,6 @@ UIAlertView *saveCurrentFlyerAlert;
         if([[self.flyer getYouTubeStatus] isEqualToString: @"1"]){
             [self haveVideoLinkEnableAllShareOptions: YES];
         } else {
-            [self setAllButtonSelected:NO];
             [self haveVideoLinkEnableAllShareOptions:NO];
         }
 
