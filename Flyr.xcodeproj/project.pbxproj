@@ -169,8 +169,6 @@
 		2036661C188DB67300C71EAA /* FlyerUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2036661B188DB67300C71EAA /* FlyerUser.m */; };
 		203E0B7617DDDD720039C3A7 /* InputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 203E0B7417DDDD720039C3A7 /* InputViewController.m */; };
 		203E0B7717DDDD720039C3A7 /* InputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 203E0B7517DDDD720039C3A7 /* InputViewController.xib */; };
-		203FC4981BDE4EB200E10421 /* giphyLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 203FC4961BDE4EB200E10421 /* giphyLogo@2x.png */; };
-		203FC4991BDE4EB200E10421 /* giphyLogo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 203FC4971BDE4EB200E10421 /* giphyLogo@3x.png */; };
 		2041D5AA1BA07F9600EEFF83 /* IntroScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2041D5A81BA07F9600EEFF83 /* IntroScreenViewController.m */; };
 		2041D5AB1BA07F9600EEFF83 /* IntroScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2041D5A91BA07F9600EEFF83 /* IntroScreenViewController.xib */; };
 		204231601A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2042315F1A10BB1F002F93D7 /* Backgrounds-iPhone6-Plus.xib */; };
@@ -1336,6 +1334,7 @@
 		C35D49261B3A75370021A0E9 /* save_share_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C35D49231B3A75370021A0E9 /* save_share_selected@3x.png */; };
 		C35DDF8D1B57C6F400615E92 /* premiumImg.png in Resources */ = {isa = PBXBuildFile; fileRef = C35DDF8C1B57C6F300615E92 /* premiumImg.png */; };
 		C366514B1B551DEE003D0252 /* b21.png in Resources */ = {isa = PBXBuildFile; fileRef = C366514A1B551DEE003D0252 /* b21.png */; };
+		C36AD2131BE37BAF0077B2CA /* giphyLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = C36AD2121BE37BAF0077B2CA /* giphyLogo.png */; };
 		C3766CA71B5650B000B7F5B2 /* Template93.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3766C471B5650AE00B7F5B2 /* Template93.jpg */; };
 		C3766CA81B5650B000B7F5B2 /* Template94.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3766C481B5650AE00B7F5B2 /* Template94.jpg */; };
 		C3766CA91B5650B000B7F5B2 /* Template90.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3766C491B5650AE00B7F5B2 /* Template90.jpg */; };
@@ -1750,8 +1749,6 @@
 		203E0B7317DDDD720039C3A7 /* InputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputViewController.h; sourceTree = "<group>"; };
 		203E0B7417DDDD720039C3A7 /* InputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputViewController.m; sourceTree = "<group>"; };
 		203E0B7517DDDD720039C3A7 /* InputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputViewController.xib; sourceTree = "<group>"; };
-		203FC4961BDE4EB200E10421 /* giphyLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "giphyLogo@2x.png"; sourceTree = "<group>"; };
-		203FC4971BDE4EB200E10421 /* giphyLogo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "giphyLogo@3x.png"; sourceTree = "<group>"; };
 		2041D5A71BA07F9600EEFF83 /* IntroScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroScreenViewController.h; sourceTree = "<group>"; };
 		2041D5A81BA07F9600EEFF83 /* IntroScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroScreenViewController.m; sourceTree = "<group>"; };
 		2041D5A91BA07F9600EEFF83 /* IntroScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroScreenViewController.xib; sourceTree = "<group>"; };
@@ -3018,6 +3015,7 @@
 		C35D49231B3A75370021A0E9 /* save_share_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save_share_selected@3x.png"; sourceTree = "<group>"; };
 		C35DDF8C1B57C6F300615E92 /* premiumImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = premiumImg.png; sourceTree = "<group>"; };
 		C366514A1B551DEE003D0252 /* b21.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b21.png; sourceTree = "<group>"; };
+		C36AD2121BE37BAF0077B2CA /* giphyLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = giphyLogo.png; sourceTree = "<group>"; };
 		C3766C471B5650AE00B7F5B2 /* Template93.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Template93.jpg; sourceTree = "<group>"; };
 		C3766C481B5650AE00B7F5B2 /* Template94.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Template94.jpg; sourceTree = "<group>"; };
 		C3766C491B5650AE00B7F5B2 /* Template90.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Template90.jpg; sourceTree = "<group>"; };
@@ -3296,8 +3294,7 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				203FC4961BDE4EB200E10421 /* giphyLogo@2x.png */,
-				203FC4971BDE4EB200E10421 /* giphyLogo@3x.png */,
+				C36AD2121BE37BAF0077B2CA /* giphyLogo.png */,
 				C30E29D51BDB64DE00A5D160 /* spinner.gif */,
 				C337ED4A1BD69DBA0038B82E /* 5tab_3_giphy@3x.png */,
 				C337ED4B1BD69DBA0038B82E /* 5tab_3_giphy_selected@3x.png */,
@@ -6312,6 +6309,7 @@
 				2098BDBA1AB2FEC300CDE1A4 /* tnc@2x.png in Resources */,
 				24861EB119F9147100670F6D /* 07_roll_selected@3x.png in Resources */,
 				246EF51C193C515D004539B2 /* emoticon60@2x.png in Resources */,
+				C36AD2131BE37BAF0077B2CA /* giphyLogo.png in Resources */,
 				24861EC519F9147100670F6D /* bg_tab@3x.png in Resources */,
 				24218394194B02B500FDDA97 /* Emoticons.plist in Resources */,
 				C3766CDA1B5650B000B7F5B2 /* Template30.jpg in Resources */,
@@ -6418,7 +6416,6 @@
 				247858C61948764D0062F1E4 /* Lavanderia-Regular.otf in Resources */,
 				C35351061B60F68600CF68F9 /* Template116.jpg in Resources */,
 				20563E131962D64200C206FD /* CutiveMono-Regular.ttf in Resources */,
-				203FC4981BDE4EB200E10421 /* giphyLogo@2x.png in Resources */,
 				249F1FAE193F55D50072835E /* close_button@2x.png in Resources */,
 				C337ED621BD69DBA0038B82E /* 5tab_5_border@2x.png in Resources */,
 				20F73718195D4AD800B24C1D /* Oswald-Regular.ttf in Resources */,
@@ -6718,7 +6715,6 @@
 				C3F98D971BA065D000CBADCC /* MainFlyerCell.xib in Resources */,
 				24218501194B4AEC00FDDA97 /* Surfing-icon.png in Resources */,
 				2479A29C19658ABF00B57F86 /* Sofia-Regular.otf in Resources */,
-				203FC4991BDE4EB200E10421 /* giphyLogo@3x.png in Resources */,
 				C3766CEA1B5650B000B7F5B2 /* Template46.jpg in Resources */,
 				242184BA194B4AEC00FDDA97 /* emoticon172@2x.png in Resources */,
 				24861ED119F9147100670F6D /* checkBlue@3x.png in Resources */,
