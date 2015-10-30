@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IntroScreenViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="untechLoadScreen.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="PbF-Z1-Qkc">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4eg-8k-S2S">
+                    <rect key="frame" x="266" y="8" width="46" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="b0y-s9-o78"/>
+                        <constraint firstAttribute="width" constant="46" id="bGn-Bb-ULL"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <state key="normal" title="Next">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onClickNext:" destination="-1" eventType="touchUpInside" id="cVb-aP-idz"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="4eg-8k-S2S" secondAttribute="trailing" constant="8" id="AfJ-ej-IZP"/>
+                <constraint firstItem="PbF-Z1-Qkc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="JjZ-t3-pG4"/>
+                <constraint firstAttribute="trailing" secondItem="PbF-Z1-Qkc" secondAttribute="trailing" id="Ufh-xz-IS5"/>
+                <constraint firstItem="4eg-8k-S2S" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="okH-am-YS9"/>
+                <constraint firstItem="PbF-Z1-Qkc" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="uJp-cg-5ty"/>
+                <constraint firstAttribute="bottom" secondItem="PbF-Z1-Qkc" secondAttribute="bottom" id="zbk-HI-OTu"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="untechLoadScreen.jpg" width="750" height="1024"/>
+    </resources>
+</document>

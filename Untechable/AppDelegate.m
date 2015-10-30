@@ -11,9 +11,9 @@
 #import "Crittercism.h"
 #import "Common.h"
 #import "UntechablesList.h"
-#import "SetupGuideViewController.h"
 #import "RSetUntechable.h"
 #import "UserPurchases.h"
+#import "IntroScreenViewController.h"
 
 @implementation AppDelegate
 
@@ -36,7 +36,7 @@
 
     RLMResults *unsortedObjects = [RSetUntechable objectsWhere:@"rUId == '1'"];
     //If we have default Untechable then go to UntechablesList screen
-     if ( unsortedObjects.count > 0){
+     if (unsortedObjects.count > 0){
          UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
          navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
      } else {
@@ -47,10 +47,10 @@
          
          Untechable *untechable  = [[Untechable alloc] initWithCommonFunctions];
          [untechable addOrUpdateInModel:UPDATE dictionary:dic];
-
-         SetupGuideViewController *mainViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
-         mainViewController.untechable = untechable;
-         navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+         
+         IntroScreenViewController *introScreenViewController = [[IntroScreenViewController alloc] initWithNibName:@"IntroScreenViewController" bundle:nil];
+         introScreenViewController.untechable = untechable;
+         navigationController = [[UINavigationController alloc] initWithRootViewController:introScreenViewController];
      }
     
     [self setLocalizedSpendingTimeText];
@@ -65,8 +65,6 @@
  * according to the selected language of iPhone
  * and lets user added texts remains same
  */
-
-
 -(void)setLocalizedSpendingTimeText{
     
     NSMutableArray *customSpendingTextArray = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"]];
