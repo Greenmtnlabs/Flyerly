@@ -915,13 +915,15 @@ id lastShareBtnSender;
     [introScreenViewController setModalPresentationStyle:UIModalPresentationFullScreen];
     introScreenViewController.buttonDelegate = self;
     
-    //enable buttons if save to gallary not required
-    if ( [flyer isVideoFlyer] ){
-            [shareviewcontroller enableShareOptions:[[self.flyer getYouTubeStatus] isEqualToString:@"1"]];
-            [shareviewcontroller saveButtonSelected:[[self.flyer getYouTubeStatus] isEqualToString:@"1"]];
-            [shareviewcontroller haveVideoLinkEnableAllShareOptions:[[self.flyer getYouTubeStatus] isEqualToString:@"1"]];
-    }
+            //enable buttons if save to gallary not required
+            if ( [flyer isVideoFlyer] ){
+                [shareviewcontroller enableShareOptions:YES];
+                [shareviewcontroller saveButtonSelected:YES];
+                [shareviewcontroller haveVideoLinkEnableAllShareOptions:[[self.flyer getYouTubeStatus] isEqualToString:@"1"]];
+            }
+
     
+        
     [self presentViewController:introScreenViewController animated:YES completion:nil];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];    
 }
@@ -1061,12 +1063,14 @@ id lastShareBtnSender;
         // If video flyer has been saved,
         // enable share options (independent of Youtube Link)
         [shareviewcontroller enableShareOptions: YES];
+        [shareviewcontroller saveButtonSelected: YES];
         
         // If uploaded video link of Youtube available,
         // enable other sharing options (dependent on Youtube Link)
         if (![isAnyVideoUploadOnYoutube isEqualToString:@""]) {
             [shareviewcontroller haveVideoLinkEnableAllShareOptions : [[self.flyer getYouTubeStatus] isEqualToString:@"1"]];
         }
+        
         
         //Create Animation Here
         [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,475 )];

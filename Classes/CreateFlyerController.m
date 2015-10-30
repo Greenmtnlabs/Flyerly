@@ -873,8 +873,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [shareviewcontroller enableShareOptions:NO];
                 [shareviewcontroller haveVideoLinkEnableAllShareOptions:NO];
                 
-                // Set saveButton status to 0, i.e. this flyer not saved
-                [flyer setSaveButtonStatus:0];
+                // Set saveButton status to 1, i.e. this flyer's been saved
+                [flyer setSaveButtonStatus:1];
                 // Set SaveButton visual state selected
                 [shareviewcontroller.saveButton setSelected:YES]; 
                 
