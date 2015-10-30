@@ -32,6 +32,9 @@
 		203FD2801BBD4C9000CF598B /* EmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 203FD27E1BBD4C9000CF598B /* EmailCell.xib */; };
 		2061886A1BC519CE004D2071 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 206188691BC519CE004D2071 /* MessageUI.framework */; };
 		2065E8DA1B8C94F60005D184 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2065E8DC1B8C94F60005D184 /* Localizable.strings */; };
+		20ABF6B71BE34556008EB04A /* untechLoadScreen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 20ABF6B61BE34556008EB04A /* untechLoadScreen.jpg */; };
+		20BD85231BE26B1200F7EB9E /* IntroScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BD85211BE26B1200F7EB9E /* IntroScreenViewController.m */; };
+		20BD85241BE26B1200F7EB9E /* IntroScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20BD85221BE26B1200F7EB9E /* IntroScreenViewController.xib */; };
 		20CD72D51BD8C57F000F8FBA /* EditButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20CD72D31BD8C57F000F8FBA /* EditButtonCell.m */; };
 		20CD72D61BD8C57F000F8FBA /* EditButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20CD72D41BD8C57F000F8FBA /* EditButtonCell.xib */; };
 		2402BB831A1DBF6A00255A73 /* UntechablesList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402BB811A1DBF6A00255A73 /* UntechablesList.m */; };
@@ -278,6 +281,10 @@
 		206188691BC519CE004D2071 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		2065E8DB1B8C94F60005D184 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2065E8DD1B8C95290005D184 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		20ABF6B61BE34556008EB04A /* untechLoadScreen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = untechLoadScreen.jpg; sourceTree = "<group>"; };
+		20BD85201BE26B1200F7EB9E /* IntroScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroScreenViewController.h; sourceTree = "<group>"; };
+		20BD85211BE26B1200F7EB9E /* IntroScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroScreenViewController.m; sourceTree = "<group>"; };
+		20BD85221BE26B1200F7EB9E /* IntroScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroScreenViewController.xib; sourceTree = "<group>"; };
 		20CD72D21BD8C57F000F8FBA /* EditButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditButtonCell.h; sourceTree = "<group>"; };
 		20CD72D31BD8C57F000F8FBA /* EditButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditButtonCell.m; sourceTree = "<group>"; };
 		20CD72D41BD8C57F000F8FBA /* EditButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditButtonCell.xib; sourceTree = "<group>"; };
@@ -570,6 +577,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		20BD851F1BE26AC600F7EB9E /* IntroScreen */ = {
+			isa = PBXGroup;
+			children = (
+				20BD85201BE26B1200F7EB9E /* IntroScreenViewController.h */,
+				20BD85211BE26B1200F7EB9E /* IntroScreenViewController.m */,
+				20BD85221BE26B1200F7EB9E /* IntroScreenViewController.xib */,
+			);
+			name = IntroScreen;
+			sourceTree = "<group>";
+		};
 		2402BB7F1A1DBEF800255A73 /* UntechableListController */ = {
 			isa = PBXGroup;
 			children = (
@@ -731,6 +748,7 @@
 				366ECD7B19D312BE00F71A11 /* Models */,
 				C3DC2E0F1B8C73620091CCF4 /* Purchases */,
 				C36D2E4F1A79196E000537C5 /* PreferencesController */,
+				20BD851F1BE26AC600F7EB9E /* IntroScreen */,
 				2474023E1B33CB7900459759 /* SetupGuide */,
 				2402BB7F1A1DBEF800255A73 /* UntechableListController */,
 				366ECD7519D2D24600F71A11 /* AddUntechable */,
@@ -887,6 +905,7 @@
 		36B0369A19DAD2AB00E8CD21 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				20ABF6B61BE34556008EB04A /* untechLoadScreen.jpg */,
 				2465A5FB1B4BE1C400B3E22C /* navigation1@2x.png */,
 				2465A5FC1B4BE1C400B3E22C /* navigation1@3x.png */,
 				2465A5FD1B4BE1C400B3E22C /* navigation1.png */,
@@ -1263,6 +1282,7 @@
 				36BB7B8A19FFD98C00562069 /* ThankyouController.xib in Resources */,
 				C346D1841A7FD13B00856A58 /* facebook@3x.png in Resources */,
 				2448343C1A5D776200E6F173 /* email_selected@3x.png in Resources */,
+				20BD85241BE26B1200F7EB9E /* IntroScreenViewController.xib in Resources */,
 				C346D1791A7FD13B00856A58 /* login@3x.png in Resources */,
 				366EAF9D1A14C3530011D6C6 /* icon@1024.png in Resources */,
 				36B2767C1A0124E800ED58AD /* right_arrow@2x.png in Resources */,
@@ -1341,6 +1361,7 @@
 				24A65BED1A30451E00BE83C6 /* SSLCell.xib in Resources */,
 				C346D1851A7FD13B00856A58 /* linkedin.png in Resources */,
 				366EAF951A14C3530011D6C6 /* icon-60@2x.png in Resources */,
+				20ABF6B71BE34556008EB04A /* untechLoadScreen.jpg in Resources */,
 				24354D711A499F4F000EC781 /* ContactListCell.xib in Resources */,
 				2499521D1A56F260001AEB84 /* email.png in Resources */,
 				244211F51B3D5B4400A4EE71 /* SetupGuideThirdView.xib in Resources */,
@@ -1487,6 +1508,7 @@
 				C3DC2E271B8C77070091CCF4 /* RMStoreUserDefaultsPersistence.m in Sources */,
 				C3CA4DD51A80CE0700B03A23 /* SocialNetworksStatusModal.m in Sources */,
 				248E06B71A4ACD6E0099846A /* ContactsCustomizedModal.m in Sources */,
+				20BD85231BE26B1200F7EB9E /* IntroScreenViewController.m in Sources */,
 				36524AF119D940F4006DCAAF /* SocialnetworkController.m in Sources */,
 				C372098D1B7767AA003A40F2 /* RUntechable.m in Sources */,
 				24A65BEC1A30451E00BE83C6 /* SSLCell.m in Sources */,

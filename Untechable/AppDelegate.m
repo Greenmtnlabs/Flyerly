@@ -11,9 +11,10 @@
 #import "Crittercism.h"
 #import "Common.h"
 #import "UntechablesList.h"
-#import "SetupGuideViewController.h"
 #import "RSetUntechable.h"
 #import "UserPurchases.h"
+#import "IntroScreenViewController.h"
+#import "SetupGuideViewController.h"
 
 @implementation AppDelegate
 
@@ -36,7 +37,7 @@
 
     RLMResults *unsortedObjects = [RSetUntechable objectsWhere:@"rUId == '1'"];
     //If we have default Untechable then go to UntechablesList screen
-     if ( unsortedObjects.count > 0){
+     if (unsortedObjects.count > 0){
          UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
          navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
      } else {
@@ -47,10 +48,25 @@
          
          Untechable *untechable  = [[Untechable alloc] initWithCommonFunctions];
          [untechable addOrUpdateInModel:UPDATE dictionary:dic];
-
-         SetupGuideViewController *mainViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
-         mainViewController.untechable = untechable;
-         navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+         
+         // Determine if the user has been greeted?
+         NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
+         
+         if(greeted == nil){
+             // Load untechLoadScreen
+             IntroScreenViewController *introScreenViewController = [[IntroScreenViewController alloc] initWithNibName:@"IntroScreenViewController" bundle:nil];
+             introScreenViewController.untechable = untechable;
+             navigationController = [[UINavigationController alloc] initWithRootViewController:introScreenViewController];
+             
+         } else {
+             
+             // Load SetupGuideViewController
+             SetupGuideViewController *setupGuideViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
+             setupGuideViewController.untechable = untechable;
+             navigationController = [[UINavigationController alloc] initWithRootViewController:setupGuideViewController];
+         }
+         
+         [[NSUserDefaults standardUserDefaults] setObject:@"greeted" forKey:@"greeted"];
      }
     
     [self setLocalizedSpendingTimeText];
@@ -65,8 +81,6 @@
  * according to the selected language of iPhone
  * and lets user added texts remains same
  */
-
-
 -(void)setLocalizedSpendingTimeText{
     
     NSMutableArray *customSpendingTextArray = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"cutomSpendingTimeTextAry"]];
