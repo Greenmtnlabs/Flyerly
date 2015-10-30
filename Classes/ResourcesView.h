@@ -17,6 +17,7 @@
 
 - (void) highlightResource:(NSInteger) tag;
 - (UIButton*) getHighlightedResource;
+- (void)setHighlightedResourceTag:(NSInteger) tag;
 - (void) dehighlightResource;
 
 @end

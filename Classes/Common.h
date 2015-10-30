@@ -273,6 +273,7 @@ nil]
 #define FLYER_LAYER_EMOTICON  @"3"
 #define FLYER_LAYER_DRAWING  @"DrawingImgLayer"
 #define FLYER_LAYER_WATER_MARK  @"WATER_MARK"
+#define FLYER_LAYER_GIPHY_LOGO  @"GIPHY_LOGO"
 #define DRAWING_LAYER_H  612
 #define DRAWING_LAYER_W  612
 #define DRAWING_PLANE_LINE @"line_plane"
