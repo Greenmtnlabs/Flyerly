@@ -14,6 +14,7 @@
 #import "RSetUntechable.h"
 #import "UserPurchases.h"
 #import "IntroScreenViewController.h"
+#import "SetupGuideViewController.h"
 
 @implementation AppDelegate
 
@@ -48,10 +49,24 @@
          Untechable *untechable  = [[Untechable alloc] initWithCommonFunctions];
          [untechable addOrUpdateInModel:UPDATE dictionary:dic];
          
-         // Load untechLoadScreen
-         IntroScreenViewController *introScreenViewController = [[IntroScreenViewController alloc] initWithNibName:@"IntroScreenViewController" bundle:nil];
-         introScreenViewController.untechable = untechable;
-         navigationController = [[UINavigationController alloc] initWithRootViewController:introScreenViewController];
+         // Determine if the user has been greeted?
+         NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
+         
+         if(greeted == nil){
+             // Load untechLoadScreen
+             IntroScreenViewController *introScreenViewController = [[IntroScreenViewController alloc] initWithNibName:@"IntroScreenViewController" bundle:nil];
+             introScreenViewController.untechable = untechable;
+             navigationController = [[UINavigationController alloc] initWithRootViewController:introScreenViewController];
+             
+         } else {
+             
+             // Load SetupGuideViewController
+             SetupGuideViewController *setupGuideViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
+             setupGuideViewController.untechable = untechable;
+             navigationController = [[UINavigationController alloc] initWithRootViewController:setupGuideViewController];
+         }
+         
+         [[NSUserDefaults standardUserDefaults] setObject:@"greeted" forKey:@"greeted"];
      }
     
     [self setLocalizedSpendingTimeText];
