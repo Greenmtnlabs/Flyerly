@@ -36,7 +36,6 @@
     SetupGuideViewController *setupGuideViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
     setupGuideViewController.untechable = untechable;
     [self.navigationController pushViewController:setupGuideViewController animated:YES];
-    
 
 }
 @end

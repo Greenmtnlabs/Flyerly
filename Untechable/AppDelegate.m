@@ -48,6 +48,7 @@
          Untechable *untechable  = [[Untechable alloc] initWithCommonFunctions];
          [untechable addOrUpdateInModel:UPDATE dictionary:dic];
          
+         // Load untechLoadScreen
          IntroScreenViewController *introScreenViewController = [[IntroScreenViewController alloc] initWithNibName:@"IntroScreenViewController" bundle:nil];
          introScreenViewController.untechable = untechable;
          navigationController = [[UINavigationController alloc] initWithRootViewController:introScreenViewController];

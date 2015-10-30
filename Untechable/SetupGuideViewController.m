@@ -22,8 +22,6 @@
 
 @synthesize untechable;
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initializeTextViews];
@@ -87,6 +85,9 @@
     
     _userNameTextView.delegate = self;
     _userNameTextView.tag = 101;
+    [_userNameTextView setKeyboardType:UIKeyboardTypeAlphabet];
+    [_userNameTextView reloadInputViews];
+
     
     _userPhoneNumber.delegate = self;
     _userPhoneNumber.tag = 102;
@@ -104,8 +105,8 @@
          _usernameHintText.hidden = YES;
     } else {
         _phoneNumberHintText.hidden =  YES;
-        [self animateTextField:textView up:YES];
     }
+    [self animateTextField:textView up:YES];
 }
 
 -(void) textViewDidEndEditing:(UITextView *)textView {
@@ -141,6 +142,7 @@
     if (newSize.height > aTextView.frame.size.height || [aTextView.text isEqualToString:@"\n"])
     {
         // if next button is pressed then take user to next textfield which is in this case is user phone number field
+        
         [_userPhoneNumber becomeFirstResponder];
         return NO;
     }
