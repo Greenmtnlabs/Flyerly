@@ -389,6 +389,8 @@ id lastShareBtnSender;
 
         dispatch_async(dispatch_get_main_queue(), ^{
             
+            // Load the flyers again so that flyer can be loaded if user logs in from here
+            flyerPaths = [self getFlyersPaths];
             flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:indexPath.row] setDirectory:NO];
             [cell renderCell:flyer LockStatus:lockFlyer];
             [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
