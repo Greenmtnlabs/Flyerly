@@ -117,6 +117,10 @@ id lastShareBtnSender;
     // Load the flyers.
     isSearch = NO;
     txtSearch.text = @"";
+    
+    // Load the flyers.
+    flyerPaths = [self getFlyersPaths];
+    
     [self.tView reloadData];
     [self checkUserPurchases];
 
@@ -449,6 +453,7 @@ id lastShareBtnSender;
  *
  */
 -(int)getRowsCountWithAdds{
+   
     int flyersCount = (int)flyerPaths.count;
     addsCount = floor(flyersCount/ (ADD_AFTER_FLYERS -1) );
     int total = flyersCount + addsCount;
@@ -650,6 +655,8 @@ id lastShareBtnSender;
           } else {
             dispatch_async(dispatch_get_main_queue(), ^{
                 int flyerRow = [self getIndexOfFlyer:rowNumber];
+                // Load the flyers.
+                flyerPaths = [self getFlyersPaths];
                 flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:flyerRow] setDirectory:NO];
                 [cell renderCell:flyer LockStatus:NO];
                 [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
@@ -706,9 +713,11 @@ id lastShareBtnSender;
         [self enableBtns:NO];
         
         if(isSearch){
-             flyer = [[Flyer alloc]initWithPath:[searchFlyerPaths objectAtIndex:rowNumberSelectedFlyer] setDirectory:YES];
+            flyer = [[Flyer alloc]initWithPath:[searchFlyerPaths objectAtIndex:rowNumberSelectedFlyer] setDirectory:YES];
         } else {
-             flyer = [[Flyer alloc]initWithPath:[flyerPaths objectAtIndex:rowNumber] setDirectory:YES];
+            // Load the flyers.
+            flyerPaths = [self getFlyersPaths];
+            flyer = [[Flyer alloc]initWithPath:[flyerPaths objectAtIndex:rowNumber] setDirectory:YES];
         }
         
         createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
