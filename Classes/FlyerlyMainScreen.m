@@ -103,7 +103,7 @@ id lastShareBtnSender;
     
     // set default image
     [self setNoAdsImage];
-    [self loadAdsTiles];
+    //[self loadAdsTiles];
     
     [self.view bringSubviewToFront:bottomBar];
     [self.view bringSubviewToFront:btnCreateFlyer];

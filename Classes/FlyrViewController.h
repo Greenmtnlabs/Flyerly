@@ -24,6 +24,8 @@
 #import "InviteForPrint.h"
 #import "PrintViewController.h"
 #import "UserPurchases.h"
+#import "GADBannerView.h"
+
 
 
 @class SaveFlyerCell, Flyer, SigninController, RegisterController, InAppViewController, CreateFlyerController,ShareViewController,PrintViewController;
@@ -60,6 +62,10 @@
 @property (nonatomic, strong) UIView *sharePanel;
 @property (nonatomic, strong) UIAlertView *signInAlert;
 @property (nonatomic, assign) BOOL showUnsharedFlyers;
+
+//Add view for injecting in cells
+@property(nonatomic, strong) IBOutletCollection(GADBannerView) NSMutableArray *bannerAdd;
+
 
 -(void)goBack;
 -(NSMutableArray *)getFlyersPaths;
