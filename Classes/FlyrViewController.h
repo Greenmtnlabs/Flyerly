@@ -62,9 +62,11 @@
 @property (nonatomic, strong) UIView *sharePanel;
 @property (nonatomic, strong) UIAlertView *signInAlert;
 @property (nonatomic, assign) BOOL showUnsharedFlyers;
+@property(nonatomic, strong) GADInterstitial *gadInterstitial;
+
 
 //Add view for injecting in cells
-@property(nonatomic, strong) IBOutletCollection(GADBannerView) NSMutableArray *bannerAdd;
+@property(nonatomic, strong) IBOutletCollection(GADBannerView) NSMutableArray *gadAdsBanner;
 
 
 -(void)goBack;

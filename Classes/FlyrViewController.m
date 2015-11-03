@@ -90,6 +90,17 @@ id lastShareBtnSender;
     
     // Set right bar items
     [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
+    
+    
+    dispatch_async( dispatch_get_main_queue(), ^{
+        //full screen adds
+        [self loadGoogleAds];
+    });
+    
+    // set default image
+    [self setNoAdsImage];
+    [self loadAdsTiles];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -146,6 +157,148 @@ id lastShareBtnSender;
     return YES;
 }
 
+#pragma mark Ads Handling Methods
+
+/**
+ * Invoked when Interstitial ad received
+ * @params:
+ *      ad: GADInterstitial
+ * @return:
+ *      void
+ */
+- (void)interstitialDidReceiveAd:(GADInterstitial *)ad {
+}
+
+/**
+ * After dismiss of interstial add
+ * @params:
+ *      ad: GADInterstitial
+ * @return:
+ *      void
+ */
+- (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
+    //on add dismiss && after merging video process, save in gallery
+    [self saveAndRelease];
+}
+
+/**
+ * Request for google ads
+ * @params:
+ *      void
+ * @return:
+ *      GADRequest
+ */
+- (GADRequest *)request {
+    GADRequest *request = [GADRequest request];
+    // Make the request for a test ad. Put in an identifier for the simulator as well as any devices
+    // you want to receive test ads.
+    request.testDevices = @[
+                            // TODO: Add your device/simulator test identifiers here. Your device identifier is printed to
+                            // the console when the app is launched.
+                            //NSString *udid = [UIDevice currentDevice].uniqueIdentifier;
+                            GAD_SIMULATOR_ID
+                            ];
+    return request;
+}
+
+/**
+ * Method to load google ads
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+-(void)loadGoogleAds{
+    self.gadInterstitial = [[GADInterstitial alloc] init];
+    self.gadInterstitial.delegate = self;
+    
+    // Note: Edit SampleConstants.h to update kSampleAdUnitId with your addInterstialFms ad unit id.
+    self.gadInterstitial.adUnitID = [flyerConfigurator interstitialAdID];
+    [self.gadInterstitial loadRequest:[self request]];
+}
+
+/**
+ * Load advertise tiles
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+-(void)loadAdsTiles{
+    __block int i=-1;
+    adsLoaded = 0;
+    
+    if( self.gadAdsBanner == nil )
+        self.gadAdsBanner = [[NSMutableArray alloc] init];
+    
+    [self getRowsCountWithAds]; // adsCount will be set in this function
+    
+    if( self.gadAdsBanner.count >= adsCount )
+        return; //dont load adds if we already have
+    
+    for(int j=0;j<adsCount; j++){
+        //add strip
+        // Initialize the banner at the bottom of the screen.
+        CGPoint origin;
+        origin = CGPointMake(0.0,0.0);
+        GADAdSize customAdSize;
+        // define size of ad
+        customAdSize = GADAdSizeFromCGSize(CGSizeMake(300,250));
+        
+        if( j >= self.gadAdsBanner.count  )
+            self.gadAdsBanner[j] = [[GADBannerView alloc] initWithAdSize:customAdSize origin:origin];
+        
+        dispatch_async( dispatch_get_main_queue(), ^{
+            i++;
+            GADBannerView *tempAdsBanner = self.gadAdsBanner[i];
+            
+            // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID before compiling.
+            tempAdsBanner.adUnitID = [flyerConfigurator bannerAdID];
+            tempAdsBanner.delegate = (id)self;
+            tempAdsBanner.rootViewController = self;
+            
+            self.gadAdsBanner[i] = tempAdsBanner;
+            
+            [self.gadAdsBanner[i] loadRequest:[self request]];
+        });
+    }
+}
+
+
+#pragma mark Default NoAdsImage Methods
+/*
+ * Method to set default image instead of ads
+ * when internet is not available
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+-(void) setNoAdsImage{
+    
+    imageName = @"noAdd_5.png";
+    
+    if (IS_IPHONE_6){
+        imageName = @"noAdd_6.png";
+    } else if (IS_IPHONE_6_PLUS){
+        imageName = @"noAdd_6Plus.png";
+    }
+    noAdsImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
+    noAdsImage.userInteractionEnabled = NO;
+    
+    if(![FlyerlySingleton connected]){
+        
+        // If not connected to internet, enables image user interaction
+        noAdsImage.userInteractionEnabled = YES;
+        
+        // and applies gesture recognizer on image
+        UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openPanel)];
+        noAdsImage.userInteractionEnabled = YES;
+        [tap setNumberOfTapsRequired:1];
+        [noAdsImage addGestureRecognizer:tap];
+    }
+}
+
 
 #pragma mark  custom Methods
 
@@ -157,7 +310,7 @@ id lastShareBtnSender;
  *      total(number of rows with ads): int
  *
  */
--(int)getRowsCountWithAdds{
+-(int)getRowsCountWithAds{
     
     int flyersCount = (int)flyerPaths.count;
     adsCount = floor(flyersCount/ (ADD_AFTER_FLYERS -1) );
@@ -174,7 +327,7 @@ id lastShareBtnSender;
  *      total(number of rows with ads): int
  *
  */
--(int)getRowsCountWithAddsInSeleceted{
+-(int)getRowsCountWithAdsInSeleceted{
     int flyersCount = (int)searchFlyerPaths.count;
     adsCount = floor(flyersCount/ (ADD_AFTER_FLYERS -1) );
     int total = flyersCount + adsCount;
@@ -183,9 +336,16 @@ id lastShareBtnSender;
 }
 
 /**
- * Get index of add row
+ * Get index of Ads row
+ * because of ads
+ * indices of flyers are not in proper order
+ *
+ * @params:
+ *      rowNumber: int
+ * @return:
+ *      row (index of flyer): int
  */
--(int)getIndexOfAdd:(int)rowNumber{
+-(int)getIndexOfAd:(int)rowNumber{
     rowNumber++;
     int row = floor(rowNumber / ADD_AFTER_FLYERS ) - 1;
     return  row;
@@ -229,11 +389,11 @@ id lastShareBtnSender;
 // We've received an Banner ad successfully.
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
     //Adding ad in custom view
-    if( adsLoaded < self.bannerAdd.count ){
+    if( adsLoaded < self.gadAdsBanner.count ){
         if( sizeRectForAdd.size.width != 0 ){
             adView.frame = sizeRectForAdd;
         }
-        self.bannerAdd[adsLoaded] = adView;
+        self.gadAdsBanner[adsLoaded] = adView;
     }
     adsLoaded++;
 }
@@ -256,7 +416,7 @@ id lastShareBtnSender;
     
     searchFlyerPaths = [[NSMutableArray alloc] init];
     
-    // To get Flyer Title,, Description and Date to search
+    // To get Flyer Title, Description and Date to search
     for (int i =0 ; i < [flyerPaths count] ; i++)
     {
         Flyer *fly = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:i] setDirectory:NO];
@@ -277,40 +437,6 @@ id lastShareBtnSender;
     
     [self.tView reloadData];
 }
-
-
-//- (void) searchTableView:(NSString *)schTxt {
-//	NSString *sTemp;
-//    NSString *sTemp1;
-//	NSString *sTemp2;
-//
-//	NSString *searchText = searchTextField.text;
-//   
-//	searchFlyerPaths = [[NSMutableArray alloc] init];
-//	
-//	for (int i =0 ; i < [flyerPaths count] ; i++)
-//	{
-//		
-//        Flyer *fly = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:i] setDirectory:NO];
-//        
-// 		sTemp = [fly getFlyerTitle];
-//        sTemp1 = [fly getFlyerDescription];
-//        sTemp2 = [fly getFlyerDate];
-//
-//        
-//        NSRange titleResultsRange = [sTemp rangeOfString:searchText options:NSCaseInsensitiveSearch];
-//        NSRange titleResultsRange1 = [sTemp1 rangeOfString:searchText options:NSCaseInsensitiveSearch];
-//        NSRange titleResultsRange2 = [sTemp2 rangeOfString:searchText options:NSCaseInsensitiveSearch];
-//
-//        if (titleResultsRange.length > 0 || titleResultsRange1.length > 0 || titleResultsRange2.length > 0){
-//
-//            [searchFlyerPaths addObject:[flyerPaths objectAtIndex:i]];
-//        }
-//        
-//
-//	}
-//    [self.tView reloadData];
-//}
 
 //when user tap on create new flyer(from saved flyer)
 -(IBAction)createFlyer:(id)sender {
@@ -412,11 +538,9 @@ id lastShareBtnSender;
  * @return
  *      Nsarray of Flyers Path (Shared/Unshared)
  */
-
 -(NSMutableArray *)getFlyersPaths{
-    
+
     NSMutableArray *allFlyers = [ Flyer recentFlyerPreview:0];
-    
     for(int i = 0 ; i < [allFlyers count];i++) {
         //Here we remove File Name from Path
         NSString *pathWithoutFileName = [[allFlyers objectAtIndex:i]
@@ -426,9 +550,7 @@ id lastShareBtnSender;
     }
     
     NSMutableArray *unsharedFlyer = [[NSMutableArray alloc] initWithArray:allFlyers];
-    
     int count = (int) [allFlyers count] - 1;
-    
     // Finding unshared flyers
     for (int i = count ; i>=0 ; i--)
     {
@@ -437,7 +559,6 @@ id lastShareBtnSender;
         for(int j =0 ; j < [flyr.socialArray count] ; j++){
             
             if([flyr.socialArray[j] isEqualToString:@"1"]){
-                
                 // N.B.: In "flyr.socialArray" index '4' is saveButton Status
                 // So, we skip it because it does not show any social status
                 if(j == 4){
@@ -484,9 +605,9 @@ id lastShareBtnSender;
 
     // If searching, the number of rows may be different
     if (searching){
-        return  [self getRowsCountWithAddsInSeleceted];
+        return  [self getRowsCountWithAdsInSeleceted];
     }else{
-        return [self getRowsCountWithAdds];
+        return [self getRowsCountWithAds];
     }
 }
 
@@ -553,15 +674,20 @@ id lastShareBtnSender;
         cell = (AdMobCell *)[nib objectAtIndex:0];
         
         if([FlyerlySingleton connected]){
-            int addRow = [self getIndexOfAdd:rowNumber];
-            GADBannerView *adView = self.bannerAdd[ addRow ];
-            adView.frame = CGRectMake(cell.frame.origin.x+10, cell.frame.origin.y+10, tView.frame.size.width-20, cell.frame.size.height-20);
+            int addRow = [self getIndexOfAd:rowNumber];
+            GADBannerView *adView = self.gadAdsBanner[addRow];
+            adView.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, tView.frame.size.width, cell.frame.size.height - 5);
             if( sizeRectForAdd.size.width != 0 ){
                 adView.frame = sizeRectForAdd;
             }
+            // Setting background image while ad is loading
+            adView.backgroundColor = [UIColor lightGrayColor];
+            
+            self.gadAdsBanner[addRow] = adView;
+            [cell addSubview:self.gadAdsBanner[addRow]];
+            
             return cell;
         }
-        //[cell addSubview: noAdsImage];
         return cell;
     }
 }
@@ -608,10 +734,6 @@ id lastShareBtnSender;
     
 	[self.navigationController pushViewController:createFlyer animated:YES];
 }
-- (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
-    //on add dismiss && after merging video process, save in gallery
-    [self releaseExtras];
-}
 
 
 /**
@@ -638,23 +760,17 @@ id lastShareBtnSender;
 	[tableView setEditing:YES animated:YES];
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        
         [tableView deleteRowsAtIndexPaths:
         @[[NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section]]
                          withRowAnimation:UITableViewRowAnimationLeft];
-        
         // HERE WE REMOVE FLYER FROM DIRECTORY
         if ( searching ) {
-            
             [[NSFileManager defaultManager] removeItemAtPath:[searchFlyerPaths objectAtIndex:indexPath.row] error:nil];
             [searchFlyerPaths removeObjectAtIndex:indexPath.row];
-
         } else {
-            
             [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:indexPath.row] error:nil];
             [flyerPaths removeObjectAtIndex:indexPath.row];
         }
-
 	}
     
     [tableView setEditing:NO animated:YES];
@@ -764,7 +880,7 @@ id lastShareBtnSender;
             }
             
         }
-        shareviewcontroller.cfController = self;
+        shareviewcontroller.cfController = (id)self;
         
         sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
         if ( IS_IPHONE_6) {
