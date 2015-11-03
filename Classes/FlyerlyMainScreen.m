@@ -176,12 +176,12 @@ id lastShareBtnSender;
  */
 -(void) setNoAdsImage{
     
-    imageName = @"noAdd_5.png";
+    imageName = @"noAds_5_HomeScreen.png";
     
     if (IS_IPHONE_6){
-        imageName = @"noAdd_6.png";
+        imageName = @"noAds_6_HomeScreen.png";
     } else if (IS_IPHONE_6_PLUS){
-        imageName = @"noAdd_6Plus.png";
+        imageName = @"noAds_6Plus_HomeScreen.png";
     }
     noAdsImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
     noAdsImage.userInteractionEnabled = NO;

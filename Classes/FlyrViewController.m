@@ -160,6 +160,8 @@ id lastShareBtnSender;
     return YES;
 }
 
+
+
 #pragma mark Ads Handling Methods
 
 /**
@@ -279,12 +281,12 @@ id lastShareBtnSender;
  */
 -(void) setNoAdsImage{
     
-    imageName = @"noAdd_5.png";
+    imageName = @"noAds_5.png";
     
     if (IS_IPHONE_6){
-        imageName = @"noAdd_6.png";
+        imageName = @"noAds_6.png";
     } else if (IS_IPHONE_6_PLUS){
-        imageName = @"noAdd_6Plus.png";
+        imageName = @"noAds_6Plus.png";
     }
     noAdsImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
     noAdsImage.userInteractionEnabled = NO;
