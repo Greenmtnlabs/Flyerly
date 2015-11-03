@@ -523,7 +523,8 @@ id lastShareBtnSender;
     
         if( searching ){
             dispatch_async(dispatch_get_main_queue(), ^{
-                flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:indexPath.row] setDirectory:NO];
+                int flyerRow = [self getIndexOfSelectedFlyer:rowNumber];
+                flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:flyerRow] setDirectory:NO];
                 [cell renderCell:flyer LockStatus:lockFlyer];
                 [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
                 cell.shareBtn.tag = indexPath.row;
@@ -534,7 +535,8 @@ id lastShareBtnSender;
             dispatch_async(dispatch_get_main_queue(), ^{
                 // Load the flyers again so that flyer can be loaded if user logs in from here
                 flyerPaths = [self getFlyersPaths];
-                flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:indexPath.row] setDirectory:NO];
+                int flyerRow = [self getIndexOfFlyer:rowNumber];
+                flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:flyerRow] setDirectory:NO];
                 [cell renderCell:flyer LockStatus:lockFlyer];
                 [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
                 cell.shareBtn.tag = indexPath.row;
