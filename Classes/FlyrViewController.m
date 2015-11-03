@@ -19,7 +19,6 @@
     int adsCount;
     int adsLoaded;
     CGRect sizeRectForAdd;
-    BOOL isSearch;
     UIImageView *noAdsImage;
     NSString *imageName;
 }
@@ -240,39 +239,78 @@ id lastShareBtnSender;
 }
 
 
-
-- (void) searchTableView:(NSString *)schTxt {
-	NSString *sTemp;
-    NSString *sTemp1;
-	NSString *sTemp2;
-
-	NSString *searchText = searchTextField.text;
-   
-	searchFlyerPaths = [[NSMutableArray alloc] init];
-	
-	for (int i =0 ; i < [flyerPaths count] ; i++)
-	{
-		
+/*
+ * Inputs a string and searches it in the given data
+ * @params:
+ *      textToSearch: String
+ * @return:
+ *      void
+ */
+- (void) searchTableView: (NSString *) textToSearch {
+    
+    NSString *tempFlyerTitle;
+    NSString *tempFlyerDescription;
+    NSString *tempFlyerDate;
+    
+    NSString *searchText = textToSearch;
+    
+    searchFlyerPaths = [[NSMutableArray alloc] init];
+    
+    // To get Flyer Title,, Description and Date to search
+    for (int i =0 ; i < [flyerPaths count] ; i++)
+    {
         Flyer *fly = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:i] setDirectory:NO];
         
- 		sTemp = [fly getFlyerTitle];
-        sTemp1 = [fly getFlyerDescription];
-        sTemp2 = [fly getFlyerDate];
-
+        tempFlyerTitle = [fly getFlyerTitle];
+        tempFlyerDescription = [fly getFlyerDescription];
+        tempFlyerDate = [fly getFlyerDate];
         
-        NSRange titleResultsRange = [sTemp rangeOfString:searchText options:NSCaseInsensitiveSearch];
-        NSRange titleResultsRange1 = [sTemp1 rangeOfString:searchText options:NSCaseInsensitiveSearch];
-        NSRange titleResultsRange2 = [sTemp2 rangeOfString:searchText options:NSCaseInsensitiveSearch];
-
-        if (titleResultsRange.length > 0 || titleResultsRange1.length > 0 || titleResultsRange2.length > 0){
-
+        NSRange flyerTitileRange = [tempFlyerTitle rangeOfString:searchText options:NSCaseInsensitiveSearch];
+        NSRange flyerDescriptionRange = [tempFlyerDescription rangeOfString:searchText options:NSCaseInsensitiveSearch];
+        NSRange flyerDateRange = [tempFlyerDate rangeOfString:searchText options:NSCaseInsensitiveSearch];
+        
+        if (flyerTitileRange.length > 0 || flyerDescriptionRange.length > 0 || flyerDateRange.length > 0){
+            
             [searchFlyerPaths addObject:[flyerPaths objectAtIndex:i]];
         }
-        
-
-	}
+    }
+    
     [self.tView reloadData];
 }
+
+
+//- (void) searchTableView:(NSString *)schTxt {
+//	NSString *sTemp;
+//    NSString *sTemp1;
+//	NSString *sTemp2;
+//
+//	NSString *searchText = searchTextField.text;
+//   
+//	searchFlyerPaths = [[NSMutableArray alloc] init];
+//	
+//	for (int i =0 ; i < [flyerPaths count] ; i++)
+//	{
+//		
+//        Flyer *fly = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:i] setDirectory:NO];
+//        
+// 		sTemp = [fly getFlyerTitle];
+//        sTemp1 = [fly getFlyerDescription];
+//        sTemp2 = [fly getFlyerDate];
+//
+//        
+//        NSRange titleResultsRange = [sTemp rangeOfString:searchText options:NSCaseInsensitiveSearch];
+//        NSRange titleResultsRange1 = [sTemp1 rangeOfString:searchText options:NSCaseInsensitiveSearch];
+//        NSRange titleResultsRange2 = [sTemp2 rangeOfString:searchText options:NSCaseInsensitiveSearch];
+//
+//        if (titleResultsRange.length > 0 || titleResultsRange1.length > 0 || titleResultsRange2.length > 0){
+//
+//            [searchFlyerPaths addObject:[flyerPaths objectAtIndex:i]];
+//        }
+//        
+//
+//	}
+//    [self.tView reloadData];
+//}
 
 //when user tap on create new flyer(from saved flyer)
 -(IBAction)createFlyer:(id)sender {
@@ -443,10 +481,12 @@ id lastShareBtnSender;
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+
+    // If searching, the number of rows may be different
     if (searching){
-        return  [searchFlyerPaths count];
+        return  [self getRowsCountWithAddsInSeleceted];
     }else{
-        return  [flyerPaths count];
+        return [self getRowsCountWithAdds];
     }
 }
 
@@ -461,59 +501,49 @@ id lastShareBtnSender;
     }
     
     if( [showCell isEqualToString:@"SaveFlyerCell"] ){
-        static NSString *SaveFlyerCellId = @"SaveFlyerCellId";
-        SaveFlyerCell *cell = (SaveFlyerCell *)[tableView dequeueReusableCellWithIdentifier:SaveFlyerCellId];
-        if (cell == nil) {
-            NSArray *nib;
-            if ( IS_IPHONE_4 || IS_IPHONE_5 ) {
-                nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell" owner:self options:nil];
-            } else if ( IS_IPHONE_6 ) {
-                nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell-iPhone6" owner:self options:nil];
-            } else if ( IS_IPHONE_6_PLUS ) {
-                nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell-iPhone6-Plus" owner:self options:nil];
-            }
-            cell = (SaveFlyerCell *)[nib objectAtIndex:0];
-        }
+        static NSString *cellId = @"Cell";
+        SaveFlyerCell *cell = (SaveFlyerCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
+    
         [cell setAccessoryType:UITableViewCellAccessoryNone];
-        
-        // If searching, it will load selected flyers else all flyers
-        // To perform it asynchronously, dispatch_async is used
-        
-        if( searching ){
-            
-                    dispatch_async(dispatch_get_main_queue(), ^{
-            
-                        flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:indexPath.row] setDirectory:NO];
-                        [cell renderCell:flyer LockStatus:lockFlyer];
-                        [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
-                        cell.shareBtn.tag = indexPath.row;
-                        [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
-            
-                    });
-            
-            
-                    return cell;
-            
-            
-            }else{
-            
-                dispatch_async(dispatch_get_main_queue(), ^{
-            
-                    // Load the flyers again so that flyer can be loaded if user logs in from here
-                    flyerPaths = [self getFlyersPaths];
-                       flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:indexPath.row] setDirectory:NO];
-                        [cell renderCell:flyer LockStatus:lockFlyer];
-                        [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
-                        cell.shareBtn.tag = indexPath.row;
-                        [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
-                        
-                    });
-            
-            
-                     return cell;
-                    
-                }
+        if (cell == nil) {
+            if( IS_IPHONE_5 || IS_IPHONE_4){
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell" owner:self options:nil];
+                cell = (SaveFlyerCell *)[nib objectAtIndex:0];
+            } else if ( IS_IPHONE_6 ){
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell-iPhone6" owner:self options:nil];
+                cell = (SaveFlyerCell *)[nib objectAtIndex:0];
+            } else if ( IS_IPHONE_6_PLUS ) {
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell-iPhone6-Plus" owner:self options:nil];
+                cell = (SaveFlyerCell *)[nib objectAtIndex:0];
+            } else {
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell" owner:self options:nil];
+                cell = (SaveFlyerCell *)[nib objectAtIndex:0];
+            }
         }
+    
+        if( searching ){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:indexPath.row] setDirectory:NO];
+                [cell renderCell:flyer LockStatus:lockFlyer];
+                [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
+                cell.shareBtn.tag = indexPath.row;
+                [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
+            });
+            return cell;
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // Load the flyers again so that flyer can be loaded if user logs in from here
+                flyerPaths = [self getFlyersPaths];
+                flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:indexPath.row] setDirectory:NO];
+                [cell renderCell:flyer LockStatus:lockFlyer];
+                [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
+                cell.shareBtn.tag = indexPath.row;
+                [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
+            });
+            return cell;
+        }
+    }
+
     else {
         static NSString *SaveFlyerAdMobCellId = @"SaveFlyerAdMobCellId";
         AdMobCell *cell = (AdMobCell *)[tableView dequeueReusableCellWithIdentifier:SaveFlyerAdMobCellId];
@@ -521,29 +551,17 @@ id lastShareBtnSender;
         cell = (AdMobCell *)[nib objectAtIndex:0];
         
         if([FlyerlySingleton connected]){
-            
             int addRow = [self getIndexOfAdd:rowNumber];
             GADBannerView *adView = self.bannerAdd[ addRow ];
             adView.frame = CGRectMake(cell.frame.origin.x+10, cell.frame.origin.y+10, tView.frame.size.width-20, cell.frame.size.height-20);
             if( sizeRectForAdd.size.width != 0 ){
                 adView.frame = sizeRectForAdd;
             }
-            
-            // Setting background image while ad is loading
-            adView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:imageName]];
-            self.bannerAdd[ addRow ] = adView;
-            [cell addSubview:self.bannerAdd[ addRow ]];
             return cell;
         }
-        
-        
         //[cell addSubview: noAdsImage];
-        
         return cell;
     }
-
-    
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
