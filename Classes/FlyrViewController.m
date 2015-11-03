@@ -668,7 +668,6 @@ id lastShareBtnSender;
             return cell;
         }
     }
-
     else {
         static NSString *SaveFlyerAdMobCellId = @"SaveFlyerAdMobCellId";
         AdMobCell *cell = (AdMobCell *)[tableView dequeueReusableCellWithIdentifier:SaveFlyerAdMobCellId];
@@ -684,7 +683,6 @@ id lastShareBtnSender;
             }
             // Setting background image while ad is loading
             adView.backgroundColor = [UIColor lightGrayColor];
-            
             self.gadAdsBanner[addRow] = adView;
             [cell addSubview:self.gadAdsBanner[addRow]];
             
@@ -696,45 +694,56 @@ id lastShareBtnSender;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    [self enableBtns:NO];
+    int rowNumber = (int)indexPath.row;
+    int rowNumberSelectedFlyer = (int)indexPath.row;
     
-    flyer = [[Flyer alloc]initWithPath:[flyerPaths objectAtIndex:indexPath.row] setDirectory:YES];
-    
-    createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
-    
-    // Set CreateFlyer Screen
-    createFlyer.flyer = flyer;
-    
-    __weak FlyrViewController *weakSelf = self;
-    __weak CreateFlyerController *weakCreate = createFlyer;
-    
-    //Here we Manage Block for Update
-    [createFlyer setOnFlyerBack:^(NSString *nothing) {
+    if( [self isAddvertiseRow:rowNumber] == NO ) {
+        rowNumber = [self getIndexOfFlyer:rowNumber];
+        rowNumberSelectedFlyer = [self getIndexOfSelectedFlyer:rowNumberSelectedFlyer];
         
-        // Here we setCurrent Flyer is Most Recent Flyer
-        [weakCreate.flyer setRecentFlyer];
+        [self enableBtns:NO];
         
-        [weakSelf saveAndRelease];
-
-        [weakSelf enableBtns:YES];
+        if(searching){
+            flyer = [[Flyer alloc]initWithPath:[searchFlyerPaths objectAtIndex:rowNumberSelectedFlyer] setDirectory:YES];
+        } else {
+            // Load the flyers.
+            flyerPaths = [self getFlyersPaths];
+            flyer = [[Flyer alloc]initWithPath:[flyerPaths objectAtIndex:rowNumber] setDirectory:YES];
+        }
         
-        // HERE WE GET FLYERS
-        weakSelf.flyerPaths = [weakSelf getFlyersPaths];
-        [weakSelf.tView reloadData];
+        createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
         
-    }];
-    
-    [createFlyer setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
-        dispatch_async( dispatch_get_main_queue(), ^{
-            if (haveValidSubscription == NO && ([weakSelf.interstitial isReady] && ![weakSelf.interstitial hasBeenUsed]) ){
-                [weakSelf.interstitial presentFromRootViewController:weakSelf];
-            } else{
-                [weakSelf saveAndRelease];
+        // Set CreateFlyer Screen
+        createFlyer.flyer = flyer;
+        __weak FlyrViewController *weakSelf = self;
+        __weak CreateFlyerController *weakCreate = createFlyer;
+        
+        //Here we Manage Block for Update
+        [createFlyer setOnFlyerBack:^(NSString *nothing) {
+            // Here we setCurrent Flyer is Most Recent Flyer
+            [weakCreate.flyer setRecentFlyer];
+            [weakSelf saveAndRelease];
+            [weakSelf enableBtns:YES];
+            
+            // HERE WE GET FLYERS
+            weakSelf.flyerPaths = [weakSelf getFlyersPaths];
+            if( weakSelf.flyerPaths.count > 1 ){
+                [weakSelf.tView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
             }
-        });
-    }];
-    
-	[self.navigationController pushViewController:createFlyer animated:YES];
+            [weakSelf.tView reloadData];
+        }];
+        
+        [createFlyer setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
+            dispatch_async( dispatch_get_main_queue(), ^{
+                if ( haveValidSubscription == NO && ([weakSelf.gadInterstitial isReady] && ![weakSelf.gadInterstitial hasBeenUsed]) ){
+                    [weakSelf.gadInterstitial presentFromRootViewController:weakSelf];
+                } else{
+                    [weakSelf saveAndRelease];
+                }
+            });
+        }];
+        [self.navigationController pushViewController:createFlyer animated:YES];
+    }
 }
 
 
