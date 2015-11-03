@@ -42,6 +42,9 @@ id lastShareBtnSender;
     [super viewDidLoad];
     lastShareBtnSender = nil;
     
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    flyerConfigurator = appDelegate.flyerConfigurator;
+    
     UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
     [UserVoice initialize:config];
     
@@ -254,7 +257,7 @@ id lastShareBtnSender;
             
             // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID before compiling.
             tempAdsBanner.adUnitID = [flyerConfigurator bannerAdID];
-            tempAdsBanner.delegate = (id)self;
+            tempAdsBanner.delegate = self;
             tempAdsBanner.rootViewController = self;
             
             self.gadAdsBanner[i] = tempAdsBanner;
@@ -536,7 +539,7 @@ id lastShareBtnSender;
  * @params:
  *      void
  * @return
- *      Nsarray of Flyers Path (Shared/Unshared)
+ *      unsharedFlyer/unsharedFlyer: NSarray of Flyers Path
  */
 -(NSMutableArray *)getFlyersPaths{
 
@@ -610,7 +613,6 @@ id lastShareBtnSender;
         return [self getRowsCountWithAds];
     }
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -880,7 +882,7 @@ id lastShareBtnSender;
             }
             
         }
-        shareviewcontroller.cfController = (id)self;
+        shareviewcontroller.cfController = self;
         
         sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
         if ( IS_IPHONE_6) {
