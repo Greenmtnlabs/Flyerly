@@ -12,4 +12,5 @@
 
 @synthesize imgAds;
 
+
 @end

@@ -19,8 +19,7 @@
     int adsCount;
     int adsLoaded;
     CGRect sizeRectForAdd;
-    UIImageView *noAdsImage;
-    NSString *imageName;
+    
 }
 @end
 
@@ -100,8 +99,6 @@ id lastShareBtnSender;
         [self loadGoogleAds];
     });
     
-    // set default image
-    [self setNoAdsImage];
     [self loadAdsTiles];
     
 }
@@ -270,17 +267,19 @@ id lastShareBtnSender;
 }
 
 
-#pragma mark Default NoAdsImage Methods
+#pragma mark Default NoAdsImage GetName Methods
 /*
- * Method to set default image instead of ads
+ * Method to get default image instead of ads
  * when internet is not available
  * @params:
  *      void
  * @return:
- *      void
+ *      imageName: NSString
  */
--(void) setNoAdsImage{
+-(NSString *) getNoAdsImage{
     
+    NSString *imageName;
+
     imageName = @"noAds_5.png";
     
     if (IS_IPHONE_6){
@@ -288,20 +287,7 @@ id lastShareBtnSender;
     } else if (IS_IPHONE_6_PLUS){
         imageName = @"noAds_6Plus.png";
     }
-    noAdsImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
-    noAdsImage.userInteractionEnabled = NO;
-    
-    if(![FlyerlySingleton connected]){
-        
-        // If not connected to internet, enables image user interaction
-        noAdsImage.userInteractionEnabled = YES;
-        
-        // and applies gesture recognizer on image
-        UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openPanel)];
-        noAdsImage.userInteractionEnabled = YES;
-        [tap setNumberOfTapsRequired:1];
-        [noAdsImage addGestureRecognizer:tap];
-    }
+    return imageName;
 }
 
 
@@ -675,21 +661,36 @@ id lastShareBtnSender;
         AdMobCell *cell = (AdMobCell *)[tableView dequeueReusableCellWithIdentifier:SaveFlyerAdMobCellId];
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"AdMobCell" owner:self options:nil];
         cell = (AdMobCell *)[nib objectAtIndex:0];
+       
+        int addRow = [self getIndexOfAd:rowNumber];
+        GADBannerView *adView = self.gadAdsBanner[addRow];
+
+        NSString *imgName = [self getNoAdsImage];
+        UIImageView *noAdsImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imgName]];
+        noAdsImage.userInteractionEnabled = NO;
         
         if([FlyerlySingleton connected]){
-            int addRow = [self getIndexOfAd:rowNumber];
-            GADBannerView *adView = self.gadAdsBanner[addRow];
             adView.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, tView.frame.size.width, cell.frame.size.height - 5);
             if( sizeRectForAdd.size.width != 0 ){
                 adView.frame = sizeRectForAdd;
             }
-            // Setting background image while ad is loading
-            adView.backgroundColor = [UIColor lightGrayColor];
-            self.gadAdsBanner[addRow] = adView;
-            [cell addSubview:self.gadAdsBanner[addRow]];
             
+            // Setting background image while ad is loading
+            adView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:imgName]];
+            self.gadAdsBanner[ addRow ] = adView;
+            [cell addSubview:self.gadAdsBanner[ addRow ]];
             return cell;
+        } else {
+            // If not connected to internet, enables image user interaction
+            noAdsImage.userInteractionEnabled = YES;
+            // and applies gesture recognizer on image
+            UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openPanel)];
+            noAdsImage.userInteractionEnabled = YES;
+            [tap setNumberOfTapsRequired:1];
+            [noAdsImage addGestureRecognizer:tap];
+        
         }
+        [cell addSubview: noAdsImage];
         return cell;
     }
 }
