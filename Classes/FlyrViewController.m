@@ -801,11 +801,11 @@ id lastShareBtnSender;
                 [flyerPaths removeObjectAtIndex:indexPath.row];
             }
         }
+        [tableView reloadData];
     }
- 
     [tableView setEditing:NO animated:YES];
-	[tableView endUpdates];
-	[tableView reloadData];
+    [tableView endUpdates];
+
 }
 
 
