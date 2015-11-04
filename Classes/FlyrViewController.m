@@ -672,36 +672,35 @@ id lastShareBtnSender;
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"AdMobCell" owner:self options:nil];
         cell = (AdMobCell *)[nib objectAtIndex:0];
        
-        int addRow = [self getIndexOfAd:rowNumber];
-        GADBannerView *adView = self.gadAdsBanner[addRow];
-
+        
         NSString *imgName = [self getNoAdsImage];
+        // Setting background image while ad is loading
         UIImageView *noAdsImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imgName]];
-        noAdsImage.userInteractionEnabled = NO;
+        
+        int addRow = [self getIndexOfAd:rowNumber];
+        GADBannerView *adView = self.gadAdsBanner[ addRow ];
         
         if([FlyerlySingleton connected]){
-            adView.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, tView.frame.size.width, cell.frame.size.height - 5);
+            adView.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, tView.frame.size.width, cell.frame.size.height - 15);
             if( sizeRectForAdd.size.width != 0 ){
                 adView.frame = sizeRectForAdd;
             }
-            
             // Setting background image while ad is loading
+            imgName = [self getNoAdsImage];
             adView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:imgName]];
             self.gadAdsBanner[ addRow ] = adView;
             [cell addSubview:self.gadAdsBanner[ addRow ]];
             return cell;
-        } else {
+        }else{
             // If not connected to internet, enables image user interaction
             noAdsImage.userInteractionEnabled = YES;
             // and applies gesture recognizer on image
             UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openPanel)];
-            noAdsImage.userInteractionEnabled = YES;
             [tap setNumberOfTapsRequired:1];
             [noAdsImage addGestureRecognizer:tap];
-        
+            [cell addSubview: noAdsImage];
+            return cell;
         }
-        [cell addSubview: noAdsImage];
-        return cell;
     }
 }
 
@@ -780,26 +779,33 @@ id lastShareBtnSender;
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    int rowNumber = (int)indexPath.row;
+    int rowNumberSelectedFlyer = (int)indexPath.row;
+    
 	[tableView beginUpdates];
 	[tableView setEditing:YES animated:YES];
     
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [tableView deleteRowsAtIndexPaths:
-        @[[NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section]]
+    if( [self isAddvertiseRow:rowNumber] == NO ) {
+        rowNumber = [self getIndexOfFlyer:rowNumber];
+        rowNumberSelectedFlyer = [self getIndexOfFlyer:rowNumberSelectedFlyer];
+        if (editingStyle == UITableViewCellEditingStyleDelete) {
+            [tableView deleteRowsAtIndexPaths:
+            @[[NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section]]
                          withRowAnimation:UITableViewRowAnimationLeft];
-        // HERE WE REMOVE FLYER FROM DIRECTORY
-        if ( searching ) {
-            [[NSFileManager defaultManager] removeItemAtPath:[searchFlyerPaths objectAtIndex:indexPath.row] error:nil];
-            [searchFlyerPaths removeObjectAtIndex:indexPath.row];
-        } else {
-            [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:indexPath.row] error:nil];
-            [flyerPaths removeObjectAtIndex:indexPath.row];
+            // HERE WE REMOVE FLYER FROM DIRECTORY
+            if ( searching ) {
+                [[NSFileManager defaultManager] removeItemAtPath:[searchFlyerPaths objectAtIndex:indexPath.row] error:nil];
+                [searchFlyerPaths removeObjectAtIndex:indexPath.row];
+            } else {
+                [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:indexPath.row] error:nil];
+                [flyerPaths removeObjectAtIndex:indexPath.row];
+            }
         }
-	}
-    
+        [tableView reloadData];
+    }
     [tableView setEditing:NO animated:YES];
-	[tableView endUpdates];
-	[tableView reloadData];
+    [tableView endUpdates];
+
 }
 
 
@@ -821,6 +827,12 @@ id lastShareBtnSender;
 }
 
 #pragma mark - UIAlertView delegate
+
+-(void)enableHome:(BOOL)enable{
+    [self.tView reloadData];
+    [self enableBtns:YES];
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     if(alertView == signInAlert && buttonIndex == 0) {
@@ -882,7 +894,8 @@ id lastShareBtnSender;
                 shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController-iPhone6" bundle:nil];
             }
         }
-        shareviewcontroller.cfController = self;
+        shareviewcontroller.cfController = (id)self;
+
         
         sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
         if ( IS_IPHONE_6) {

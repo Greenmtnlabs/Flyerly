@@ -367,7 +367,7 @@ UIAlertView *saveCurrentFlyerAlert;
     [UIView commitAnimations];
     [self.titleView resignFirstResponder];
     [self.descriptionView resignFirstResponder];
-
+    
     [self.cfController enableHome:YES];
 }
 

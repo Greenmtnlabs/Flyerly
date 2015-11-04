@@ -265,6 +265,8 @@
 		20A1CD6F18EF19B400484391 /* YouTubeSubClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A1CD6E18EF19B400484391 /* YouTubeSubClass.m */; };
 		20AB0B821BC53411005D4CB3 /* separator_vertical@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20AB0B801BC53411005D4CB3 /* separator_vertical@2x.png */; };
 		20AB0B831BC53411005D4CB3 /* separator_vertical@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20AB0B811BC53411005D4CB3 /* separator_vertical@3x.png */; };
+		20ACDCE91BE9DA3400847489 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20ACDCE71BE9DA3400847489 /* WebViewController.m */; };
+		20ACDCEA1BE9DA3400847489 /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20ACDCE81BE9DA3400847489 /* WebViewController.xib */; };
 		20B099351AC58D1900F19836 /* send@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B099341AC58D1900F19836 /* send@2x.png */; };
 		20B099371AC58D2900F19836 /* send@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B099361AC58D2800F19836 /* send@3x.png */; };
 		20B4AF411AB038FD00360B3C /* PrivicyPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20B4AF3F1AB038FD00360B3C /* PrivicyPolicyViewController.m */; };
@@ -1866,6 +1868,9 @@
 		20A1CD6E18EF19B400484391 /* YouTubeSubClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouTubeSubClass.m; sourceTree = "<group>"; };
 		20AB0B801BC53411005D4CB3 /* separator_vertical@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "separator_vertical@2x.png"; sourceTree = "<group>"; };
 		20AB0B811BC53411005D4CB3 /* separator_vertical@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "separator_vertical@3x.png"; sourceTree = "<group>"; };
+		20ACDCE61BE9DA3400847489 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		20ACDCE71BE9DA3400847489 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		20ACDCE81BE9DA3400847489 /* WebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
 		20B099341AC58D1900F19836 /* send@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send@2x.png"; sourceTree = "<group>"; };
 		20B099361AC58D2800F19836 /* send@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send@3x.png"; sourceTree = "<group>"; };
 		20B4AF3E1AB038FD00360B3C /* PrivicyPolicyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivicyPolicyViewController.h; sourceTree = "<group>"; };
@@ -4180,6 +4185,16 @@
 			name = DrawingClass;
 			sourceTree = "<group>";
 		};
+		20ACDCE41BE9D9D900847489 /* SocialFlyers */ = {
+			isa = PBXGroup;
+			children = (
+				20ACDCE61BE9DA3400847489 /* WebViewController.h */,
+				20ACDCE71BE9DA3400847489 /* WebViewController.m */,
+				20ACDCE81BE9DA3400847489 /* WebViewController.xib */,
+			);
+			name = SocialFlyers;
+			sourceTree = "<group>";
+		};
 		20B4AF3D1AB038A000360B3C /* PrivicyPolicy */ = {
 			isa = PBXGroup;
 			children = (
@@ -4327,6 +4342,7 @@
 				0DF3A2C1108DF1D200D6C887 /* FlyerlyMainScreen.h */,
 				0DF3A2C2108DF1D200D6C887 /* FlyerlyMainScreen.m */,
 				C33F80041B9F115500E7AFF9 /* FlyerlyMainScreen.xib */,
+				20ACDCE41BE9D9D900847489 /* SocialFlyers */,
 				C3F98D8D1BA065A300CBADCC /* MainFlyerCells */,
 				C34E984E1BA2D43300692597 /* GoogleAddCell */,
 			);
@@ -6947,6 +6963,7 @@
 				246EF52E193C515D004539B2 /* emoticon77@2x.png in Resources */,
 				20563E1A1962D64200C206FD /* YanoneKaffeesatz-Light.ttf in Resources */,
 				24861F7019F9147100670F6D /* Zregister_flyer@3x.png in Resources */,
+				20ACDCEA1BE9DA3400847489 /* WebViewController.xib in Resources */,
 				24861F2819F9147100670F6D /* ModeVideo@3x.png in Resources */,
 				C3766D911B56510200B7F5B2 /* icon69.jpg in Resources */,
 				490FBB16192B4E0500AA3C18 /* AssetsGroupViewController.xib in Resources */,
@@ -7107,6 +7124,7 @@
 				209BCFA81975433D006EC811 /* PrintViewController.m in Sources */,
 				242BFA7A1B29711800EF370B /* RMAppReceipt.m in Sources */,
 				20A1CD6F18EF19B400484391 /* YouTubeSubClass.m in Sources */,
+				20ACDCE91BE9DA3400847489 /* WebViewController.m in Sources */,
 				2466983D1B1331F100715784 /* FlyerlyTwitterFriends.m in Sources */,
 				0F7FC386175CE26B009DEB08 /* AsyncImageView.m in Sources */,
 				200D1937197CF4CC00CFE04B /* PaypalViewController.m in Sources */,
