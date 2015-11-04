@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WebViewController : UIViewController{
+@interface WebViewController : UIViewController <UIWebViewDelegate>{
     UIButton *btnHome;
     UIBarButtonItem *leftBarButton;
+    UIView *loadingView;
 }
 
 @property (nonatomic, strong) UIAlertView *popupAlert;

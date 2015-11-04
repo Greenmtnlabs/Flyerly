@@ -24,6 +24,7 @@
     // Setting navigation bar
     [self setNavigation];
     
+    webView.delegate = self;
     // Setting selected segment
     self.segmentedButton.selectedSegmentIndex = 0;
     
@@ -58,6 +59,25 @@
     // Set right bar items
     [self.navigationItem setLeftBarButtonItem:leftBarButton];
 }
+
+#pragma mark WebView Delegate Methods
+
+/*
+ * Invokes when webview statrts loading
+ */
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    [self showLoadingView];
+    [loadingView setHidden:NO];
+}
+
+/*
+ * Invokes when webview finishes loading
+ */
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [loadingView setHidden:YES];
+}
+
 
 #pragma mark Custom Methods
 
@@ -113,6 +133,37 @@
         urlAddress  = @"https://instagram.com/explore/tags/flyerly/";
     }
     [self openWebView:urlAddress];
+}
+
+/*
+ * Shows loading view while webview loads
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+-(void) showLoadingView{
+    
+    double x = self.view.frame.size.width - 80;
+    double y = self.view.frame.size.height;
+    loadingView = [[UIView alloc]initWithFrame:CGRectMake(x/2, y/2, 80, 80)];
+    loadingView.backgroundColor = [UIColor colorWithWhite:0. alpha:0.6];
+    loadingView.layer.cornerRadius = 5;
+    
+    UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    activityView.center = CGPointMake(loadingView.frame.size.width / 2.0, 35);
+    [activityView startAnimating];
+    activityView.tag = 100;
+    [loadingView addSubview:activityView];
+    
+    UILabel* lblLoading = [[UILabel alloc]initWithFrame:CGRectMake(0, 48, 80, 30)];
+    lblLoading.text = @"Loading...";
+    lblLoading.textColor = [UIColor whiteColor];
+    lblLoading.font = [UIFont fontWithName:lblLoading.font.fontName size:15];
+    lblLoading.textAlignment = NSTextAlignmentCenter;
+    [loadingView addSubview:lblLoading];
+    
+    [self.view addSubview:loadingView];
 }
 
 @end
