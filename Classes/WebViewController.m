@@ -7,6 +7,7 @@
 //
 
 #import "WebViewController.h"
+#import "FlyerlySingleton.h"
 
 @interface WebViewController ()
 
@@ -14,7 +15,7 @@
 
 @implementation WebViewController
 @synthesize webView;
-@synthesize segmentedButton;
+@synthesize segmentedButton, popupAlert;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,6 +26,7 @@
     
     // Setting selected segment
     self.segmentedButton.selectedSegmentIndex = 0;
+    
     // Setting default URL
     [self openWebView:@"https://twitter.com/hashtag/flyerly"];
 }
@@ -79,12 +81,22 @@
  */
 -(void)openWebView:(NSString *) stringURL{
     
-    //Create a URL Object.
-    NSURL *url = [NSURL URLWithString:stringURL];
-    //URL Requst Object
-    NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-    //Load the request in the UIWebView.
-    [self.webView loadRequest:requestObj];
+    if([FlyerlySingleton connected]){
+        //Create a URL Object
+        NSURL *url = [NSURL URLWithString:stringURL];
+        //URL Requst Object
+        NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+        //Load the request in the UIWebView.
+        [self.webView loadRequest:requestObj];
+     }else {
+         // Alert when no internet
+         popupAlert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                 message:@"Check your internet connection."
+                                                delegate:self
+                                       cancelButtonTitle:@"OK"
+                                       otherButtonTitles:nil];
+         [popupAlert show];
+     }
 }
 
 /*
