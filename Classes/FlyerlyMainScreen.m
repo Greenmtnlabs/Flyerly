@@ -176,12 +176,12 @@ id lastShareBtnSender;
  */
 -(void) setNoAdsImage{
     
-    imageName = @"noAdd_5.png";
+    imageName = @"noAds_5_HomeScreen.png";
     
     if (IS_IPHONE_6){
-        imageName = @"noAdd_6.png";
+        imageName = @"noAds_6_HomeScreen.png";
     } else if (IS_IPHONE_6_PLUS){
-        imageName = @"noAdd_6Plus.png";
+        imageName = @"noAds_6Plus_HomeScreen.png";
     }
     noAdsImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
     noAdsImage.userInteractionEnabled = NO;
@@ -319,7 +319,7 @@ id lastShareBtnSender;
         
         tempFlyerTitle = [fly getFlyerTitle];
         tempFlyerDescription = [fly getFlyerDescription];
-        tempFlyerDate = [fly getFlyerDate];
+        tempFlyerDate = [flyer dateFormatter:[fly getFlyerDate]];
     
         NSRange flyerTitileRange = [tempFlyerTitle rangeOfString:searchText options:NSCaseInsensitiveSearch];
         NSRange flyerDescriptionRange = [tempFlyerDescription rangeOfString:searchText options:NSCaseInsensitiveSearch];
@@ -452,7 +452,7 @@ id lastShareBtnSender;
  *      total(number of rows with ads): int
  *
  */
--(int)getRowsCountWithAdds{
+-(int)getRowsCountWithAds{
    
     int flyersCount = (int)flyerPaths.count;
     addsCount = floor(flyersCount/ (ADD_AFTER_FLYERS -1) );
@@ -469,7 +469,7 @@ id lastShareBtnSender;
  *      total(number of rows with ads): int
  *
  */
--(int)getRowsCountWithAddsInSeleceted{
+-(int)getRowsCountWithAdsInSeleceted{
     int flyersCount = (int)searchFlyerPaths.count;
     addsCount = floor(flyersCount/ (ADD_AFTER_FLYERS -1) );
     int total = flyersCount + addsCount;
@@ -480,7 +480,7 @@ id lastShareBtnSender;
 /**
  * Get index of add row
  */
--(int)getIndexOfAdd:(int)rowNumber{
+-(int)getIndexOfAd:(int)rowNumber{
     rowNumber++;
     int row = floor(rowNumber / ADD_AFTER_FLYERS ) - 1;
     return  row;
@@ -543,7 +543,7 @@ id lastShareBtnSender;
     if( self.bannerAdd == nil )
         self.bannerAdd = [[NSMutableArray alloc] init];
     
-    [self getRowsCountWithAdds]; // addsCount will be set in this function
+    [self getRowsCountWithAds]; // addsCount will be set in this function
     
     if( self.bannerAdd.count >= addsCount )
     return; //dont load adds if we already have
@@ -554,7 +554,7 @@ id lastShareBtnSender;
         CGPoint origin;
         origin = CGPointMake(0.0,0.0);
         GADAdSize customAdSize;
-        customAdSize = GADAdSizeFromCGSize(CGSizeMake(320,480));
+        customAdSize = GADAdSizeFromCGSize(CGSizeMake(300,250));
         
         if( j >= self.bannerAdd.count  )
             self.bannerAdd[j] = [[GADBannerView alloc] initWithAdSize:customAdSize origin:origin];
@@ -601,9 +601,9 @@ id lastShareBtnSender;
     
     // If searching, the number of rows may be different
     if (isSearch){
-        return  [self getRowsCountWithAddsInSeleceted];
+        return  [self getRowsCountWithAdsInSeleceted];
     }else{
-        return [self getRowsCountWithAdds];
+        return [self getRowsCountWithAds];
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -681,7 +681,7 @@ id lastShareBtnSender;
        
         if([FlyerlySingleton connected]){
 
-            int addRow = [self getIndexOfAdd:rowNumber];
+            int addRow = [self getIndexOfAd:rowNumber];
             GADBannerView *adView = self.bannerAdd[ addRow ];
             adView.frame = CGRectMake(cell.frame.origin.x+10, cell.frame.origin.y+10, tView.frame.size.width-20, cell.frame.size.height-20);
             if( sizeRectForAdd.size.width != 0 ){

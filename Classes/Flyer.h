@@ -191,4 +191,6 @@
 -(void)showAllowSaveInGallerySettingAlert;
 
 -(void)resetAllButtonStatus;
+
+-(NSString *)dateFormatter: (NSString *) dateString;
 @end

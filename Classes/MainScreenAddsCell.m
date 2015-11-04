@@ -14,5 +14,4 @@
 
 @implementation MainScreenAddsCell
 
-@synthesize addvImage;
 @end
