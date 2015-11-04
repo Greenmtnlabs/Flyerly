@@ -1000,7 +1000,7 @@ id lastShareBtnSender;
             }
             
         }
-        shareviewcontroller.cfController = self;
+        shareviewcontroller.cfController = (id)self;
         
         sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
         if ( IS_IPHONE_6) {

@@ -821,6 +821,12 @@ id lastShareBtnSender;
 }
 
 #pragma mark - UIAlertView delegate
+
+-(void)enableHome:(BOOL)enable{
+    [self.tView reloadData];
+    [self enableBtns:YES];
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     if(alertView == signInAlert && buttonIndex == 0) {
@@ -882,7 +888,8 @@ id lastShareBtnSender;
                 shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController-iPhone6" bundle:nil];
             }
         }
-        shareviewcontroller.cfController = self;
+        shareviewcontroller.cfController = (id)self;
+
         
         sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
         if ( IS_IPHONE_6) {
