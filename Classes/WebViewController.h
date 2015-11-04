@@ -14,5 +14,9 @@
     UIBarButtonItem *leftBarButton;
 
 }
+@property (strong, nonatomic) IBOutlet UIWebView *webView;
+
+@property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedButton;
+- (IBAction)segmentedControlAction:(id)sender;
 
 @end

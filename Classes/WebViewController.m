@@ -13,7 +13,8 @@
 @end
 
 @implementation WebViewController
-
+@synthesize webView;
+@synthesize segmentedButton;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,6 +23,10 @@
     // Setting navigation bar
     [self setNavigation];
     
+    // Setting selected segment
+    self.segmentedButton.selectedSegmentIndex = 0;
+    // Setting default URL
+    [self openWebView:@"https://twitter.com/hashtag/flyerly"];
 }
 
 #pragma mark Navigation/UI Related Methods
@@ -50,7 +55,6 @@
     
     // Set right bar items
     [self.navigationItem setLeftBarButtonItem:leftBarButton];
-    
 }
 
 #pragma mark Custom Methods
@@ -66,7 +70,37 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+/*
+ * Opens WebView
+ * @params:
+ *      stringURL: NSString
+ * @return:
+ *      void
+ */
+-(void)openWebView:(NSString *) stringURL{
+    
+    //Create a URL Object.
+    NSURL *url = [NSURL URLWithString:stringURL];
+    //URL Requst Object
+    NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+    //Load the request in the UIWebView.
+    [self.webView loadRequest:requestObj];
+}
 
-
+/*
+ * Invokes when segment changes
+ */
+- (IBAction)segmentedControlAction:(id)sender {
+    
+    NSString *urlAddress;
+    
+    if (segmentedButton.selectedSegmentIndex == 0) {
+        urlAddress  = @"https://twitter.com/hashtag/flyerly";
+    }
+    else if(segmentedButton.selectedSegmentIndex == 1){
+        urlAddress  = @"https://instagram.com/explore/tags/flyerly/";
+    }
+    [self openWebView:urlAddress];
+}
 
 @end
