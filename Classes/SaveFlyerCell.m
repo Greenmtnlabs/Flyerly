@@ -98,30 +98,4 @@
     }
 }
 
-
-///*
-// * Formats Date
-// * @params:
-// *      date: NSString
-// * @return:
-// *      strDate: NString
-// */
-//
-//-(NSString *) dateFormatter: (NSString *) date{
-//
-//    NSDateFormatter* dateFormatter, *formatter;
-//    NSDate *newDate;
-//    NSString *strDate;
-//    // To format date
-//    dateFormatter = [[NSDateFormatter alloc] init];
-//    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"];
-//    newDate = [dateFormatter dateFromString:date];
-//    
-//    formatter = [[NSDateFormatter alloc] init];
-//    [formatter setDateFormat:@"yyyy-MM-dd"];
-//    strDate = [formatter stringFromDate:newDate];
-//    
-//    return strDate;
-//}
-
 @end
