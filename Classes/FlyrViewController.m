@@ -779,23 +779,30 @@ id lastShareBtnSender;
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    int rowNumber = (int)indexPath.row;
+    int rowNumberSelectedFlyer = (int)indexPath.row;
+    
 	[tableView beginUpdates];
 	[tableView setEditing:YES animated:YES];
     
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [tableView deleteRowsAtIndexPaths:
-        @[[NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section]]
+    if( [self isAddvertiseRow:rowNumber] == NO ) {
+        rowNumber = [self getIndexOfFlyer:rowNumber];
+        rowNumberSelectedFlyer = [self getIndexOfFlyer:rowNumberSelectedFlyer];
+        if (editingStyle == UITableViewCellEditingStyleDelete) {
+            [tableView deleteRowsAtIndexPaths:
+            @[[NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section]]
                          withRowAnimation:UITableViewRowAnimationLeft];
-        // HERE WE REMOVE FLYER FROM DIRECTORY
-        if ( searching ) {
-            [[NSFileManager defaultManager] removeItemAtPath:[searchFlyerPaths objectAtIndex:indexPath.row] error:nil];
-            [searchFlyerPaths removeObjectAtIndex:indexPath.row];
-        } else {
-            [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:indexPath.row] error:nil];
-            [flyerPaths removeObjectAtIndex:indexPath.row];
+            // HERE WE REMOVE FLYER FROM DIRECTORY
+            if ( searching ) {
+                [[NSFileManager defaultManager] removeItemAtPath:[searchFlyerPaths objectAtIndex:indexPath.row] error:nil];
+                [searchFlyerPaths removeObjectAtIndex:indexPath.row];
+            } else {
+                [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:indexPath.row] error:nil];
+                [flyerPaths removeObjectAtIndex:indexPath.row];
+            }
         }
-	}
-    
+    }
+ 
     [tableView setEditing:NO animated:YES];
 	[tableView endUpdates];
 	[tableView reloadData];
