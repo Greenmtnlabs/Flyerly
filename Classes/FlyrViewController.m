@@ -672,36 +672,35 @@ id lastShareBtnSender;
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"AdMobCell" owner:self options:nil];
         cell = (AdMobCell *)[nib objectAtIndex:0];
        
-        int addRow = [self getIndexOfAd:rowNumber];
-        GADBannerView *adView = self.gadAdsBanner[addRow];
-
+        
         NSString *imgName = [self getNoAdsImage];
+        // Setting background image while ad is loading
         UIImageView *noAdsImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imgName]];
-        noAdsImage.userInteractionEnabled = NO;
+        
+        int addRow = [self getIndexOfAd:rowNumber];
+        GADBannerView *adView = self.gadAdsBanner[ addRow ];
         
         if([FlyerlySingleton connected]){
-            adView.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, tView.frame.size.width, cell.frame.size.height - 5);
+            adView.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, tView.frame.size.width, cell.frame.size.height - 15);
             if( sizeRectForAdd.size.width != 0 ){
                 adView.frame = sizeRectForAdd;
             }
-            
             // Setting background image while ad is loading
+            imgName = [self getNoAdsImage];
             adView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:imgName]];
             self.gadAdsBanner[ addRow ] = adView;
             [cell addSubview:self.gadAdsBanner[ addRow ]];
             return cell;
-        } else {
+        }else{
             // If not connected to internet, enables image user interaction
             noAdsImage.userInteractionEnabled = YES;
             // and applies gesture recognizer on image
             UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openPanel)];
-            noAdsImage.userInteractionEnabled = YES;
             [tap setNumberOfTapsRequired:1];
             [noAdsImage addGestureRecognizer:tap];
-        
+            [cell addSubview: noAdsImage];
+            return cell;
         }
-        [cell addSubview: noAdsImage];
-        return cell;
     }
 }
 
