@@ -864,15 +864,20 @@ id lastShareBtnSender;
 }
 
 -(void)onShare:(id)sender {
+    
     UIButton *clickButton = sender;
     NSInteger row = clickButton.tag; ///will get it from button tag
+    
+    if(row > (ADD_AFTER_FLYERS-1)){
+        row = row - floor(row/ADD_AFTER_FLYERS);
+    }
+    
     if([searchTextField.text isEqualToString:@""]) {
         flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:row] setDirectory:NO];
     } else{
         flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:row] setDirectory:NO];
     }
-    
-    
+
     if ( [[PFUser currentUser] sessionToken] ) {
         [self enableBtns:NO];
         sharePanel.hidden = NO;
@@ -884,15 +889,12 @@ id lastShareBtnSender;
             }else if ( IS_IPHONE_6 || IS_IPHONE_6_PLUS ) {
                 shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareVideoViewController-iPhone6" bundle:nil];
             }
-            
         } else {
-            
             if ( IS_IPHONE_5 || IS_IPHONE_4) {
                 shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
             }else if ( IS_IPHONE_6  || IS_IPHONE_6_PLUS ) {
                 shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController-iPhone6" bundle:nil];
             }
-            
         }
         shareviewcontroller.cfController = self;
         
@@ -994,13 +996,10 @@ id lastShareBtnSender;
                                                 delegate:self
                                        cancelButtonTitle:@"Later"
                                        otherButtonTitles:@"Sign In",nil];
-        
-        
         if ( !self.interstitial.hasBeenUsed )
             [signInAlert show];
     }
-    
-}
+ }
 
 
 - (void)printFlyer {
