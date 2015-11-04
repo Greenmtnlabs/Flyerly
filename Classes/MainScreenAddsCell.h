@@ -10,5 +10,4 @@
 
 @interface MainScreenAddsCell : UITableViewCell
 
-@property(nonatomic, strong)IBOutlet UIImageView *addvImage;
 @end

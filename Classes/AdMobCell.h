@@ -10,7 +10,4 @@
 
 @interface AdMobCell : UITableViewCell
 
-@property(nonatomic, strong)IBOutlet UIImageView *imgAds;
-
-
 @end
