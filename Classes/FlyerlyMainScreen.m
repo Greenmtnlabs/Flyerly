@@ -1249,17 +1249,8 @@ id lastShareBtnSender;
  * When invoked, shows shared flyers with Hash Tags
  */
 - (IBAction)showHashTagFlyers:(id)sender {
-    
-    
     WebViewController *webViewController = [[WebViewController alloc]initWithNibName:@"WebViewController" bundle:nil];
     [self.navigationController pushViewController:webViewController animated:YES];
-    
-//    NSURL *url = [NSURL URLWithString:@"https://twitter.com/hashtag/flyerly"];
-//    
-//    if (![[UIApplication sharedApplication] openURL:url]) {
-//        NSLog(@"%@%@",@"Failed to open url:",[url description]);
-//    }
-   
 }
 
 #pragma mark  Text Field Delegete
