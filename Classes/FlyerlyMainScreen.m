@@ -319,7 +319,7 @@ id lastShareBtnSender;
         
         tempFlyerTitle = [fly getFlyerTitle];
         tempFlyerDescription = [fly getFlyerDescription];
-        tempFlyerDate = [fly getFlyerDate];
+        tempFlyerDate = [flyer dateFormatter:[fly getFlyerDate]];
     
         NSRange flyerTitileRange = [tempFlyerTitle rangeOfString:searchText options:NSCaseInsensitiveSearch];
         NSRange flyerDescriptionRange = [tempFlyerDescription rangeOfString:searchText options:NSCaseInsensitiveSearch];

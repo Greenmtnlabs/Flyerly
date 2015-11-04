@@ -2194,6 +2194,37 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
 }
 
+#pragma mark Date Formating Methods
+
+/*
+ * Formats Date
+ * @params:
+ *      dateString: NSString
+ * @return:
+ *      date: NString
+ */
+
+
+-(NSString *)dateFormatter: (NSString *) dateString{
+
+    NSDateFormatter* dateFormatter, *formatter;
+    NSDate *newDate;
+    NSString *date;
+    // To format date
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"];
+    newDate = [dateFormatter dateFromString:dateString];
+    
+    formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    date = [formatter stringFromDate:newDate];
+    return date;
+}
+
+
+
+
+
 #pragma mark  Flyer Text File SET
 
 

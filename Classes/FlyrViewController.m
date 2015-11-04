@@ -137,14 +137,7 @@ id lastShareBtnSender;
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
 
-    if([string isEqualToString:@"\n"]){
-        if([searchTextField canResignFirstResponder])
-        {
-            [searchTextField resignFirstResponder];
-        }
-        return NO;
-    }
-    
+    searching = YES;
     if(searching){
         if([string isEqualToString:@"\n"]){
             
@@ -181,6 +174,24 @@ id lastShareBtnSender;
 - (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
     //on add dismiss && after merging video process, save in gallery
     [self saveAndRelease];
+}
+
+/*
+ * Invoked when Ad is received
+ * @params:
+ *      adView: GADBannerView
+ * @return:
+ *      void
+ */
+- (void)adViewDidReceiveAd:(GADBannerView *)adView {
+    //Adding ad in custom view
+    if( adsLoaded < self.gadAdsBanner.count ){
+        if( sizeRectForAdd.size.width != 0 ){
+            adView.frame = sizeRectForAdd;
+        }
+        self.gadAdsBanner[adsLoaded] = adView;
+    }
+    adsLoaded++;
 }
 
 /**
@@ -290,8 +301,28 @@ id lastShareBtnSender;
     return imageName;
 }
 
+#pragma mark UI Related Methods
 
-#pragma mark  custom Methods
+/**
+ * Enable touche on table view and buttons,
+ * It was required when mergin process takes time, so prevent user to do any action
+ */
+-(void)enableBtns:(BOOL)enable{
+    
+    backButton.enabled = enable;
+    helpButton.enabled = enable;
+    createButton.enabled = enable;
+    rightUndoBarButton.enabled = enable;
+    
+    tView.userInteractionEnabled = enable;
+    
+    if( enable ){
+        // Set right bar items
+        [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
+    }
+}
+
+#pragma mark  Custom Methods
 
 /**
  * Return incremented number of rows with respect to ads
@@ -302,11 +333,9 @@ id lastShareBtnSender;
  *
  */
 -(int)getRowsCountWithAds{
-    
     int flyersCount = (int)flyerPaths.count;
     adsCount = floor(flyersCount/ (ADD_AFTER_FLYERS -1) );
     int total = flyersCount + adsCount;
-    
     return  total;
 }
 
@@ -322,7 +351,6 @@ id lastShareBtnSender;
     int flyersCount = (int)searchFlyerPaths.count;
     adsCount = floor(flyersCount/ (ADD_AFTER_FLYERS -1) );
     int total = flyersCount + adsCount;
-    
     return  total;
 }
 
@@ -377,19 +405,6 @@ id lastShareBtnSender;
     return isAddRow;
 }
 
-// We've received an Banner ad successfully.
-- (void)adViewDidReceiveAd:(GADBannerView *)adView {
-    //Adding ad in custom view
-    if( adsLoaded < self.gadAdsBanner.count ){
-        if( sizeRectForAdd.size.width != 0 ){
-            adView.frame = sizeRectForAdd;
-        }
-        self.gadAdsBanner[adsLoaded] = adView;
-    }
-    adsLoaded++;
-}
-
-
 /*
  * Inputs a string and searches it in the given data
  * @params:
@@ -402,7 +417,6 @@ id lastShareBtnSender;
     NSString *tempFlyerTitle;
     NSString *tempFlyerDescription;
     NSString *tempFlyerDate;
-    
     NSString *searchText = textToSearch;
     
     searchFlyerPaths = [[NSMutableArray alloc] init];
@@ -414,18 +428,16 @@ id lastShareBtnSender;
         
         tempFlyerTitle = [fly getFlyerTitle];
         tempFlyerDescription = [fly getFlyerDescription];
-        tempFlyerDate = [fly getFlyerDate];
+        tempFlyerDate = [flyer dateFormatter:[fly getFlyerDate]];
         
         NSRange flyerTitileRange = [tempFlyerTitle rangeOfString:searchText options:NSCaseInsensitiveSearch];
         NSRange flyerDescriptionRange = [tempFlyerDescription rangeOfString:searchText options:NSCaseInsensitiveSearch];
         NSRange flyerDateRange = [tempFlyerDate rangeOfString:searchText options:NSCaseInsensitiveSearch];
         
         if (flyerTitileRange.length > 0 || flyerDescriptionRange.length > 0 || flyerDateRange.length > 0){
-            
             [searchFlyerPaths addObject:[flyerPaths objectAtIndex:i]];
         }
     }
-    
     [self.tView reloadData];
 }
 
@@ -452,7 +464,6 @@ id lastShareBtnSender;
     //Here we Manage Block for Update
     [createFlyer setOnFlyerBack:^(NSString *nothing) {
         [weakSelf saveAndRelease];
-        
         [weakSelf enableBtns:YES];
         
         //HERE WE GET FLYERS
@@ -470,9 +481,8 @@ id lastShareBtnSender;
             }
         });
     }];
-    
-	[self.navigationController pushViewController:createFlyer animated:YES];
-    
+
+    [self.navigationController pushViewController:createFlyer animated:YES];
 }
 
 - (void)inAppPanelDismissed {
@@ -821,30 +831,6 @@ id lastShareBtnSender;
     }
 }
 
-
--(void)enableHome:(BOOL)enable{
-    [self.tView reloadData];
-    [self enableBtns:YES];
-}
-
-/**
- * Enable touche on table view and buttons,
- * It was required when mergin process takes time, so prevent user to do any action
- */
--(void)enableBtns:(BOOL)enable{
-
-    backButton.enabled = enable;
-    helpButton.enabled = enable;
-    createButton.enabled = enable;
-    rightUndoBarButton.enabled = enable;
-    
-    tView.userInteractionEnabled = enable;
-    
-    if( enable ){
-        // Set right bar items
-        [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
-    }
-}
 
 /*
  * Here we Open InAppPurchase Panel
