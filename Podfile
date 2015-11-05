@@ -12,3 +12,5 @@ pod 'OpenSSL', '~> 1.0.201'
 
 pod 'ShareKit', '~> 4.0.4'
 pod 'FBSDKShareKit', '~> 4.7'
+
+pod 'AsyncImageView', '~> 1.5'
