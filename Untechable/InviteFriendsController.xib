@@ -9,6 +9,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InviteFriendsController">
             <connections>
+                <outlet property="ContactsTableView" destination="kB3-pv-X7M" id="8AA-tF-OQR"/>
+                <outlet property="btnFBContacts" destination="6cc-HO-ZjA" id="ljL-nf-hX7"/>
+                <outlet property="btnLocalContactsEmail" destination="Fww-nQ-CjM" id="VJ3-f1-6sH"/>
+                <outlet property="btnLocalContactsText" destination="Kax-W7-uUJ" id="LUv-z3-5rB"/>
+                <outlet property="btnTwitterContacts" destination="1fK-Fc-0Sg" id="ExP-4l-aIz"/>
+                <outlet property="txtSearch" destination="sTS-dL-iwL" id="SRh-FP-0ex"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -82,17 +88,11 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="0.0"/>
                     <color key="sectionIndexTrackingBackgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="28i-J8-SpM"/>
+                        <outlet property="delegate" destination="-1" id="JUD-in-YXA"/>
+                    </connections>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6cc-HO-ZjA">
-                    <rect key="frame" x="80" y="435" width="80" height="45"/>
-                    <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="45" id="lHw-tc-1ns"/>
-                    </constraints>
-                    <state key="normal" title="Facebook">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1fK-Fc-0Sg">
                     <rect key="frame" x="160" y="435" width="80" height="45"/>
                     <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -120,6 +120,16 @@
                         <constraint firstAttribute="width" constant="80" id="pEg-lw-hvs"/>
                     </constraints>
                     <state key="normal" title="Text">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6cc-HO-ZjA">
+                    <rect key="frame" x="80" y="435" width="80" height="45"/>
+                    <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="lHw-tc-1ns"/>
+                    </constraints>
+                    <state key="normal" title="Facebook">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
