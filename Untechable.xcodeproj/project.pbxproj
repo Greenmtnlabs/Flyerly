@@ -25,6 +25,8 @@
 		200ACE331A3874B200DC7047 /* YahooIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE211A3874B200DC7047 /* YahooIcon.png */; };
 		200ACE341A3874B200DC7047 /* YahooIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE221A3874B200DC7047 /* YahooIcon@2x.png */; };
 		200ACE351A3874B200DC7047 /* YahooIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE231A3874B200DC7047 /* YahooIcon@3x.png */; };
+		2015F10C1BEB21CA006EC4C4 /* InviteFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2015F10A1BEB21CA006EC4C4 /* InviteFriendsController.m */; };
+		2015F10D1BEB21CA006EC4C4 /* InviteFriendsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2015F10B1BEB21CA006EC4C4 /* InviteFriendsController.xib */; };
 		203A2A281B7A2A29009949AA /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 203A2A251B7A2A29009949AA /* logo.png */; };
 		203A2A291B7A2A29009949AA /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 203A2A261B7A2A29009949AA /* logo@2x.png */; };
 		203A2A2A1B7A2A29009949AA /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 203A2A271B7A2A29009949AA /* logo@3x.png */; };
@@ -274,6 +276,9 @@
 		200ACE211A3874B200DC7047 /* YahooIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YahooIcon.png; sourceTree = "<group>"; };
 		200ACE221A3874B200DC7047 /* YahooIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YahooIcon@2x.png"; sourceTree = "<group>"; };
 		200ACE231A3874B200DC7047 /* YahooIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YahooIcon@3x.png"; sourceTree = "<group>"; };
+		2015F1091BEB21CA006EC4C4 /* InviteFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendsController.h; sourceTree = "<group>"; };
+		2015F10A1BEB21CA006EC4C4 /* InviteFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsController.m; sourceTree = "<group>"; };
+		2015F10B1BEB21CA006EC4C4 /* InviteFriendsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendsController.xib; sourceTree = "<group>"; };
 		203A2A251B7A2A29009949AA /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		203A2A261B7A2A29009949AA /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		203A2A271B7A2A29009949AA /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
@@ -588,6 +593,9 @@
 			children = (
 				20ABF6BB1BE3A8C6008EB04A /* ContactsModel */,
 				20ABF6BA1BE3A8A9008EB04A /* CustomClasses */,
+				2015F1091BEB21CA006EC4C4 /* InviteFriendsController.h */,
+				2015F10A1BEB21CA006EC4C4 /* InviteFriendsController.m */,
+				2015F10B1BEB21CA006EC4C4 /* InviteFriendsController.xib */,
 			);
 			name = AppInvite;
 			sourceTree = "<group>";
@@ -1409,6 +1417,7 @@
 				2486CBB11A5A7B1000AC125E /* phone_selected@2x.png in Resources */,
 				366EAF9A1A14C3530011D6C6 /* icon-small.png in Resources */,
 				2465A60D1B4BE1C400B3E22C /* navigation3@2x.png in Resources */,
+				2015F10D1BEB21CA006EC4C4 /* InviteFriendsController.xib in Resources */,
 				366EAF9E1A14C3530011D6C6 /* icon@2x.png in Resources */,
 				2486CBB21A5A7B1000AC125E /* phone@2x.png in Resources */,
 				2465A60F1B4BE1C400B3E22C /* navigation3.png in Resources */,
@@ -1545,6 +1554,7 @@
 				248E06B71A4ACD6E0099846A /* ContactsCustomizedModal.m in Sources */,
 				20BD85231BE26B1200F7EB9E /* IntroScreenViewController.m in Sources */,
 				36524AF119D940F4006DCAAF /* SocialnetworkController.m in Sources */,
+				2015F10C1BEB21CA006EC4C4 /* InviteFriendsController.m in Sources */,
 				C372098D1B7767AA003A40F2 /* RUntechable.m in Sources */,
 				20ABF6C11BE3AEFB008EB04A /* TwitterFriends.m in Sources */,
 				24A65BEC1A30451E00BE83C6 /* SSLCell.m in Sources */,
