@@ -63,8 +63,8 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="imgCheckBox" destination="UZA-1U-t2h" id="mWa-6s-kBR"/>
                 <outlet property="imgProfilePic" destination="vVG-0N-6YA" id="P8M-mb-zV0"/>
-                <outlet property="lblCheckBox" destination="UZA-1U-t2h" id="aeM-rk-ze4"/>
                 <outlet property="lblDescription" destination="aJe-JB-dIq" id="jK9-KW-WeJ"/>
                 <outlet property="lblName" destination="8kQ-33-GeB" id="ssg-ez-Wxt"/>
             </connections>
