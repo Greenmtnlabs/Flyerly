@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SHKSharer.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
 
-@interface InviteFriendsController : UIViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
+@interface InviteFriendsController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, SHKSharerDelegate, FBSDKAppInviteDialogDelegate>
 
 
 @property (strong, nonatomic) IBOutlet UIButton *btnLocalContactsText;

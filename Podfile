@@ -11,3 +11,4 @@ pod 'libPhoneNumber-iOS', '~> 0.8'
 pod 'OpenSSL', '~> 1.0.201'
 
 pod 'ShareKit', '~> 4.0.4'
+pod 'FBSDKShareKit', '~> 4.7'
