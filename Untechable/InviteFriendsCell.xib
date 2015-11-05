@@ -21,7 +21,7 @@
                             <constraint firstAttribute="height" constant="72" id="haR-Az-e4H"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8kQ-33-GeB">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8kQ-33-GeB">
                         <rect key="frame" x="92" y="23" width="180" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="bjk-x0-wAX"/>
@@ -30,7 +30,7 @@
                         <color key="textColor" red="0.25882352939999997" green="0.96862745100000003" blue="0.80784313730000001" alpha="1" colorSpace="deviceRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJe-JB-dIq">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJe-JB-dIq">
                         <rect key="frame" x="92" y="52" width="180" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="mHO-75-m6q"/>
@@ -62,6 +62,12 @@
                     <constraint firstItem="8kQ-33-GeB" firstAttribute="leading" secondItem="vVG-0N-6YA" secondAttribute="trailing" constant="10" id="zbH-B5-jYN"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="imgProfilePic" destination="vVG-0N-6YA" id="P8M-mb-zV0"/>
+                <outlet property="lblCheckBox" destination="UZA-1U-t2h" id="aeM-rk-ze4"/>
+                <outlet property="lblDescription" destination="aJe-JB-dIq" id="jK9-KW-WeJ"/>
+                <outlet property="lblName" destination="8kQ-33-GeB" id="ssg-ez-Wxt"/>
+            </connections>
             <point key="canvasLocation" x="368" y="140"/>
         </tableViewCell>
     </objects>

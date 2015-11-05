@@ -227,7 +227,7 @@
         <image name="invite_facebook.png" width="311" height="100"/>
         <image name="invite_facebook_selected.png" width="311" height="100"/>
         <image name="invite_sms.png" width="311" height="100"/>
-        <image name="invite_sms_selected.png" width="311" height="100"/>
+        <image name="invite_sms_selected.png" width="750" height="1024"/>
         <image name="invite_twitter.png" width="311" height="100"/>
         <image name="invite_twitter_selected.png" width="311" height="100"/>
         <image name="searchicon.png" width="13" height="13"/>

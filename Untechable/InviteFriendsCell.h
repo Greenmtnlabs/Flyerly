@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface InviteFriendsCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UIImageView *imgProfilePic;
+@property (strong, nonatomic) IBOutlet UILabel *lblName;
+@property (strong, nonatomic) IBOutlet UILabel *lblDescription;
+@property (strong, nonatomic) IBOutlet UIImageView *lblCheckBox;
 
 @end
