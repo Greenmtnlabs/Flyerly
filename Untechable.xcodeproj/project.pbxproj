@@ -140,11 +140,6 @@
 		36561D7819D2C8A40069D897 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 36561D7719D2C8A40069D897 /* main.m */; };
 		36561D7C19D2C8A40069D897 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 36561D7B19D2C8A40069D897 /* AppDelegate.m */; };
 		36561D7E19D2C8A40069D897 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36561D7D19D2C8A40069D897 /* Images.xcassets */; };
-		36561D8519D2C8A40069D897 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36561D8419D2C8A40069D897 /* XCTest.framework */; };
-		36561D8619D2C8A40069D897 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36561D6B19D2C8A40069D897 /* Foundation.framework */; };
-		36561D8719D2C8A40069D897 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36561D6F19D2C8A40069D897 /* UIKit.framework */; };
-		36561D8F19D2C8A40069D897 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36561D8D19D2C8A40069D897 /* InfoPlist.strings */; };
-		36561D9119D2C8A40069D897 /* UntechableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 36561D9019D2C8A40069D897 /* UntechableTests.m */; };
 		3663932519D6A0A700512965 /* CommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3663932419D6A0A700512965 /* CommonFunctions.m */; };
 		366EAF901A14C3530011D6C6 /* icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAF771A14C3530011D6C6 /* icon-40.png */; };
 		366EAF911A14C3530011D6C6 /* icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 366EAF781A14C3530011D6C6 /* icon-40@2x.png */; };
@@ -206,7 +201,6 @@
 		36BB7B8A19FFD98C00562069 /* ThankyouController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36BB7B8819FFD98C00562069 /* ThankyouController.xib */; };
 		36FD975519E694AC00427507 /* BSKeyboardControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FD974B19E694AC00427507 /* BSKeyboardControls.m */; };
 		36FD975619E694AC00427507 /* BSKeyboardControls.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36FD974C19E694AC00427507 /* BSKeyboardControls.strings */; };
-		5D79B096E56438180F2DF221 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC11B82CE184AE8B063B3995 /* libPods.a */; };
 		B25028EEA7EDED382B05805D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC11B82CE184AE8B063B3995 /* libPods.a */; };
 		C334E60B1A777472005539B4 /* logo-Other@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C334E6081A777472005539B4 /* logo-Other@3x.png */; };
 		C334E60C1A777472005539B4 /* logo-Other.png in Resources */ = {isa = PBXBuildFile; fileRef = C334E6091A777472005539B4 /* logo-Other.png */; };
@@ -262,16 +256,6 @@
 		C3DC2E271B8C77070091CCF4 /* RMStoreUserDefaultsPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DC2E201B8C77070091CCF4 /* RMStoreUserDefaultsPersistence.m */; };
 		C3DC2E2A1B8C8B6A0091CCF4 /* SKProduct+LocalPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DC2E291B8C8B6A0091CCF4 /* SKProduct+LocalPrice.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		36561D8819D2C8A40069D897 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 36561D6019D2C8A40069D897 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 36561D6719D2C8A40069D897;
-			remoteInfo = Untechable;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		200ACE121A3874B200DC7047 /* aolIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aolIcon.png; sourceTree = "<group>"; };
@@ -438,7 +422,6 @@
 		36561D7A19D2C8A40069D897 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		36561D7B19D2C8A40069D897 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		36561D7D19D2C8A40069D897 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		36561D8319D2C8A40069D897 /* UntechableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UntechableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		36561D8419D2C8A40069D897 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		36561D8C19D2C8A40069D897 /* UntechableTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UntechableTests-Info.plist"; sourceTree = "<group>"; };
 		36561D8E19D2C8A40069D897 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -610,17 +593,6 @@
 				36561D7019D2C8A40069D897 /* UIKit.framework in Frameworks */,
 				36561D6C19D2C8A40069D897 /* Foundation.framework in Frameworks */,
 				B25028EEA7EDED382B05805D /* libPods.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		36561D8019D2C8A40069D897 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				36561D8519D2C8A40069D897 /* XCTest.framework in Frameworks */,
-				36561D8719D2C8A40069D897 /* UIKit.framework in Frameworks */,
-				36561D8619D2C8A40069D897 /* Foundation.framework in Frameworks */,
-				5D79B096E56438180F2DF221 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -810,7 +782,6 @@
 			isa = PBXGroup;
 			children = (
 				36561D6819D2C8A40069D897 /* Untechable.app */,
-				36561D8319D2C8A40069D897 /* UntechableTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1257,26 +1228,6 @@
 			productReference = 36561D6819D2C8A40069D897 /* Untechable.app */;
 			productType = "com.apple.product-type.application";
 		};
-		36561D8219D2C8A40069D897 /* UntechableTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 36561D9719D2C8A40069D897 /* Build configuration list for PBXNativeTarget "UntechableTests" */;
-			buildPhases = (
-				429261A944D7928F70F145DA /* Check Pods Manifest.lock */,
-				36561D7F19D2C8A40069D897 /* Sources */,
-				36561D8019D2C8A40069D897 /* Frameworks */,
-				36561D8119D2C8A40069D897 /* Resources */,
-				35C0E96306A2EDCF512B1D0E /* Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				36561D8919D2C8A40069D897 /* PBXTargetDependency */,
-			);
-			name = UntechableTests;
-			productName = UntechableTests;
-			productReference = 36561D8319D2C8A40069D897 /* UntechableTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1293,10 +1244,6 @@
 								enabled = 1;
 							};
 						};
-					};
-					36561D8219D2C8A40069D897 = {
-						DevelopmentTeam = F988S9J47K;
-						TestTargetID = 36561D6719D2C8A40069D897;
 					};
 				};
 			};
@@ -1320,7 +1267,6 @@
 			projectRoot = "";
 			targets = (
 				36561D6719D2C8A40069D897 /* Untechable */,
-				36561D8219D2C8A40069D897 /* UntechableTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1519,47 +1465,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		36561D8119D2C8A40069D897 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				36561D8F19D2C8A40069D897 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		35C0E96306A2EDCF512B1D0E /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		429261A944D7928F70F145DA /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 		453E9082471B3D2E3B943517 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1651,23 +1559,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		36561D7F19D2C8A40069D897 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				36561D9119D2C8A40069D897 /* UntechableTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		36561D8919D2C8A40069D897 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 36561D6719D2C8A40069D897 /* Untechable */;
-			targetProxy = 36561D8819D2C8A40069D897 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		2065E8DC1B8C94F60005D184 /* Localizable.strings */ = {
@@ -1748,7 +1640,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "8574bbea-baf8-46b5-bbbd-daa3f60313c7";
+				PROVISIONING_PROFILE = "d47ad45a-8978-43b1-aea9-4efac12eb4a6";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1781,7 +1673,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PROVISIONING_PROFILE = "dba51228-f824-4197-b504-5c93cdb064bb";
+				PROVISIONING_PROFILE = "ae551082-6625-4075-a900-27914b5b9a6b";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1793,7 +1685,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				"CODE_SIGN_RESOURCE_RULES_PATH[sdk=*]" = "$(SDKROOT)/ResourceRules.plist";
@@ -1802,7 +1694,7 @@
 				INFOPLIST_FILE = "Untechable/Untechable-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8574bbea-baf8-46b5-bbbd-daa3f60313c7";
+				PROVISIONING_PROFILE = "d47ad45a-8978-43b1-aea9-4efac12eb4a6";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1813,7 +1705,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				"CODE_SIGN_RESOURCE_RULES_PATH[sdk=*]" = "$(SDKROOT)/ResourceRules.plist";
@@ -1823,56 +1715,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "dba51228-f824-4197-b504-5c93cdb064bb";
+				PROVISIONING_PROFILE = "ae551082-6625-4075-a900-27914b5b9a6b";
 				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		36561D9819D2C8A40069D897 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 72C191FD26DBEFE2614E002A /* Pods.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Untechable.app/Untechable";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Untechable/Untechable-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "UntechableTests/UntechableTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		36561D9919D2C8A40069D897 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A7C0CDC4AAAC5466484B8C12 /* Pods.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Untechable.app/Untechable";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Untechable/Untechable-Prefix.pch";
-				INFOPLIST_FILE = "UntechableTests/UntechableTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
@@ -1893,15 +1737,6 @@
 			buildConfigurations = (
 				36561D9519D2C8A40069D897 /* Debug */,
 				36561D9619D2C8A40069D897 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		36561D9719D2C8A40069D897 /* Build configuration list for PBXNativeTarget "UntechableTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				36561D9819D2C8A40069D897 /* Debug */,
-				36561D9919D2C8A40069D897 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

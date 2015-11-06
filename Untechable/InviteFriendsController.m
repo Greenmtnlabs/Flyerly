@@ -22,6 +22,8 @@
 #import <Foundation/Foundation.h>
 #import "SHKSharer.h"
 #import <MessageUI/MessageUI.h>
+#import "UntechableConfigurator.h"
+#import "AppDelegate.h"
 
 
 
@@ -39,6 +41,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     NSMutableArray *usernames;
     NSArray *availableAccounts;
     ACAccount *selectedAccount;
+    UntechableConfigurator *untechableConfigurator;
 }
 
 @synthesize uiTableView, emailsArray, contactsArray, selectedIdentifiers, emailButton, contactsButton, facebookButton, twitterButton,  searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited, emailInvited;
@@ -61,6 +64,10 @@ const int CONTACTS_TAB = 0;
     
     self.selectedIdentifiers = [[NSMutableArray alloc] init];
     globle = [UntechableSingleton RetrieveSingleton];
+    
+    AppDelegate *appDelegate = (AppDelegate*) [[UIApplication sharedApplication]delegate];
+    untechableConfigurator = appDelegate.untechableConfigurator;
+
 
     self.navigationItem.hidesBackButton = YES;
     [self.view setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1]];
@@ -237,7 +244,7 @@ const int CONTACTS_TAB = 0;
     identifiers = selectedIdentifiers;
     NSLog(@"identifiers = %@,  selectedTab = %i",identifiers, selectedTab);
 
-    NSString *sharingText = @"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? http://app.flyerly.com/cs?i=qf6mv6pSwc";
+    NSString *sharingText = @"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try?";
     
     if([identifiers count] > 0){
         
@@ -282,13 +289,13 @@ const int CONTACTS_TAB = 0;
             
             [[SHK currentHelper] showViewController:rootView];
         } else if (selectedTab == 3) { // for Email
-            NSURL *url;
-            //NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"", ]];
+            
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",untechableConfigurator.referralURL]];
             item = [SHKItem URL:url title:@"Invite Friends" contentType:SHKURLContentTypeUndefined];
             [item setMailToRecipients:identifiers];
             item.text = @"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try?";
             // Share the item with my custom class
-            //[SHKMail shareItem:item];
+            [SHKMail shareItem:item];
         }
     } else {
         [self showAlert:@"Please select any contact to invite !" message:@""];
@@ -510,9 +517,10 @@ const int CONTACTS_TAB = 0;
  */
 - (IBAction)loadFacebookContacts:(UIButton *)sender{
     FBSDKAppInviteContent *content =[[FBSDKAppInviteContent alloc] init];
-    //content.appLinkURL = [NSURL URLWithString:flyerConfigurator.appLinkURL];
+    content.appLinkURL = [NSURL URLWithString:untechableConfigurator.appLinkURL];
+    
     //optionally set previewImageURL
-    //content.appInvitePreviewImageURL = [NSURL URLWithString:flyerConfigurator.appInvitePreviewImageURL];
+    content.appInvitePreviewImageURL = [NSURL URLWithString:untechableConfigurator.appInvitePreviewImageURL];
 
     // present the dialog. Assumes self implements protocol `FBSDKAppInviteDialogDelegate`
     [FBSDKAppInviteDialog showFromViewController:self withContent:content delegate:self];
