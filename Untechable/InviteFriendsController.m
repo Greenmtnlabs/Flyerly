@@ -15,7 +15,8 @@
 #import "SHKSharer.h"
 #import "SHKTextMessage.h"
 #import "SHKConfiguration.h"
-
+#import "FBRequest.h"
+#import "FacebookSDK.h"
 
 
 
