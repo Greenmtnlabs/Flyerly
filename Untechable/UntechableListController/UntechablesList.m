@@ -16,6 +16,7 @@
 #import "RUntechable.h"
 #import "RSetUntechable.h"
 #import "UserPurchases.h"
+#import "InviteFriendsController.h"
 
 
 @interface UntechablesList () {
@@ -168,21 +169,27 @@
  * to support team
  */
 - (IBAction)emailComposer {
+  
+    InviteFriendsController *inviteFriendsController = [[InviteFriendsController alloc] initWithNibName:@"InviteFriendsController" bundle:nil];
+    [self.navigationController pushViewController:inviteFriendsController animated:YES];
+
     
-    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
     
-    if([MFMailComposeViewController canSendMail]){
-        
-        picker.mailComposeDelegate = self;
-        [picker setSubject:@"Untech Email Feedback..."];
-        
-        // Set up recipients
-        NSMutableArray *toRecipients = [[NSMutableArray alloc]init];
-        [toRecipients addObject:@"support@greenmtnlabs.com"];
-        [picker setToRecipients:toRecipients];
-        
-        [self presentViewController:picker animated:YES completion:nil];
-    }
+    
+//    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+//    
+//    if([MFMailComposeViewController canSendMail]){
+//        
+//        picker.mailComposeDelegate = self;
+//        [picker setSubject:@"Untech Email Feedback..."];
+//        
+//        // Set up recipients
+//        NSMutableArray *toRecipients = [[NSMutableArray alloc]init];
+//        [toRecipients addObject:@"support@greenmtnlabs.com"];
+//        [picker setToRecipients:toRecipients];
+//        
+//        [self presentViewController:picker animated:YES completion:nil];
+//    }
 }
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
