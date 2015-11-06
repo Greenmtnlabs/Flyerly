@@ -49,6 +49,12 @@
 		20BD85241BE26B1200F7EB9E /* IntroScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20BD85221BE26B1200F7EB9E /* IntroScreenViewController.xib */; };
 		20CD72D51BD8C57F000F8FBA /* EditButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20CD72D31BD8C57F000F8FBA /* EditButtonCell.m */; };
 		20CD72D61BD8C57F000F8FBA /* EditButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20CD72D41BD8C57F000F8FBA /* EditButtonCell.xib */; };
+		20CF6FC91BECADA60048C42F /* checkBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CF6FC31BECADA60048C42F /* checkBlue@2x.png */; };
+		20CF6FCA1BECADA70048C42F /* checkBlue@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CF6FC41BECADA60048C42F /* checkBlue@3x.png */; };
+		20CF6FCB1BECADA70048C42F /* checkDouble@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CF6FC51BECADA60048C42F /* checkDouble@2x.png */; };
+		20CF6FCC1BECADA70048C42F /* checkDouble@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CF6FC61BECADA60048C42F /* checkDouble@3x.png */; };
+		20CF6FCD1BECADA70048C42F /* checkgray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CF6FC71BECADA60048C42F /* checkgray@2x.png */; };
+		20CF6FCE1BECADA70048C42F /* checkgray@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CF6FC81BECADA60048C42F /* checkgray@3x.png */; };
 		2402BB831A1DBF6A00255A73 /* UntechablesList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402BB811A1DBF6A00255A73 /* UntechablesList.m */; };
 		2402BB841A1DBF6A00255A73 /* UntechablesList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2402BB821A1DBF6A00255A73 /* UntechablesList.xib */; };
 		2402BB881A1DC3A200255A73 /* UntechableTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402BB861A1DC3A200255A73 /* UntechableTableCell.m */; };
@@ -317,6 +323,12 @@
 		20CD72D21BD8C57F000F8FBA /* EditButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditButtonCell.h; sourceTree = "<group>"; };
 		20CD72D31BD8C57F000F8FBA /* EditButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditButtonCell.m; sourceTree = "<group>"; };
 		20CD72D41BD8C57F000F8FBA /* EditButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditButtonCell.xib; sourceTree = "<group>"; };
+		20CF6FC31BECADA60048C42F /* checkBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkBlue@2x.png"; sourceTree = "<group>"; };
+		20CF6FC41BECADA60048C42F /* checkBlue@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkBlue@3x.png"; sourceTree = "<group>"; };
+		20CF6FC51BECADA60048C42F /* checkDouble@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkDouble@2x.png"; sourceTree = "<group>"; };
+		20CF6FC61BECADA60048C42F /* checkDouble@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkDouble@3x.png"; sourceTree = "<group>"; };
+		20CF6FC71BECADA60048C42F /* checkgray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkgray@2x.png"; sourceTree = "<group>"; };
+		20CF6FC81BECADA60048C42F /* checkgray@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkgray@3x.png"; sourceTree = "<group>"; };
 		2402BB801A1DBF6A00255A73 /* UntechablesList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UntechablesList.h; path = UntechableListController/UntechablesList.h; sourceTree = "<group>"; };
 		2402BB811A1DBF6A00255A73 /* UntechablesList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UntechablesList.m; path = UntechableListController/UntechablesList.m; sourceTree = "<group>"; };
 		2402BB821A1DBF6A00255A73 /* UntechablesList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UntechablesList.xib; path = UntechableListController/UntechablesList.xib; sourceTree = "<group>"; };
@@ -985,6 +997,12 @@
 		36B0369A19DAD2AB00E8CD21 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				20CF6FC31BECADA60048C42F /* checkBlue@2x.png */,
+				20CF6FC41BECADA60048C42F /* checkBlue@3x.png */,
+				20CF6FC51BECADA60048C42F /* checkDouble@2x.png */,
+				20CF6FC61BECADA60048C42F /* checkDouble@3x.png */,
+				20CF6FC71BECADA60048C42F /* checkgray@2x.png */,
+				20CF6FC81BECADA60048C42F /* checkgray@3x.png */,
 				20ABF6B61BE34556008EB04A /* untechLoadScreen.jpg */,
 				2465A5FB1B4BE1C400B3E22C /* navigation1@2x.png */,
 				2465A5FC1B4BE1C400B3E22C /* navigation1@3x.png */,
@@ -1318,6 +1336,7 @@
 				249952191A56C905001AEB84 /* Entypo-Social.otf in Resources */,
 				2465A6071B4BE1C400B3E22C /* navigation1@2x.png in Resources */,
 				36474F2619D9780100084F34 /* Pigiarniq Regular.ttf in Resources */,
+				20CF6FCC1BECADA70048C42F /* checkDouble@3x.png in Resources */,
 				C33C1EF31A727A690064DBE8 /* SSLCell-iPhone6.xib in Resources */,
 				2065E8DA1B8C94F60005D184 /* Localizable.strings in Resources */,
 				C346D1801A7FD13B00856A58 /* twitter.png in Resources */,
@@ -1346,9 +1365,11 @@
 				36B276741A0124E800ED58AD /* play_gray@2x.png in Resources */,
 				249952161A56C8A1001AEB84 /* Cliparts.plist in Resources */,
 				C36D2E591A7919C2000537C5 /* SettingsCellView.xib in Resources */,
+				20CF6FCD1BECADA70048C42F /* checkgray@2x.png in Resources */,
 				36B276761A0124E800ED58AD /* play@2x.png in Resources */,
 				2402BB841A1DBF6A00255A73 /* UntechablesList.xib in Resources */,
 				200ACE281A3874B200DC7047 /* exchangeIcon@2x.png in Resources */,
+				20CF6FCB1BECADA70048C42F /* checkDouble@2x.png in Resources */,
 				247C72D31A5C0968005C9693 /* user_img.png in Resources */,
 				C37F755D1A7F50D100B5AC71 /* fb_Like@2x.png in Resources */,
 				C346D17E1A7FD13B00856A58 /* emailic@2x.png in Resources */,
@@ -1420,10 +1441,12 @@
 				36B2765D1A0124E800ED58AD /* CHECKBOX_EMPTY@2x.png in Resources */,
 				366ECD9719D323DA00F71A11 /* AddUntechableController.xib in Resources */,
 				C39C31A51A77D6D0003CE153 /* downArrow@2x.png in Resources */,
+				20CF6FC91BECADA60048C42F /* checkBlue@2x.png in Resources */,
 				2465A6101B4BE1C400B3E22C /* navigation4@2x.png in Resources */,
 				2465A60E1B4BE1C400B3E22C /* navigation3@3x.png in Resources */,
 				200ACE2E1A3874B200DC7047 /* icloudIcon@2x.png in Resources */,
 				2486CBAB1A5A79F500AC125E /* email_selected@2x.png in Resources */,
+				20CF6FCA1BECADA70048C42F /* checkBlue@3x.png in Resources */,
 				C346D1771A7FD13B00856A58 /* logout@3x.png in Resources */,
 				366EAF981A14C3530011D6C6 /* icon-76.png in Resources */,
 				C36D2E601A791ADA000537C5 /* SettingsCellView-iPhone6.xib in Resources */,
@@ -1463,6 +1486,7 @@
 				2465A60F1B4BE1C400B3E22C /* navigation3.png in Resources */,
 				C33C1EF51A727A7B0064DBE8 /* SSLCell-iPhone6-Plus.xib in Resources */,
 				200ACE351A3874B200DC7047 /* YahooIcon@3x.png in Resources */,
+				20CF6FCE1BECADA70048C42F /* checkgray@3x.png in Resources */,
 				366EAF901A14C3530011D6C6 /* icon-40.png in Resources */,
 				36B276731A0124E800ED58AD /* play_gray.png in Resources */,
 				36B276751A0124E800ED58AD /* play.png in Resources */,
