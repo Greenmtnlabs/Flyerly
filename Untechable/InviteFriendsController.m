@@ -10,13 +10,18 @@
 #import "Common.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UserVoice.h"
-#import "SHKSharer.h"
 #import <Parse/Parse.h>
-#import "SHKSharer.h"
 #import "SHKTextMessage.h"
 #import "SHKConfiguration.h"
 #import "FBRequest.h"
 #import "FacebookSDK.h"
+#import "SHKiOSSharer.h"
+#import "SHKiOSTwitter.h"
+#import "SHKSharer.h"
+
+#import <Foundation/Foundation.h>
+#import "SHKSharer.h"
+#import <MessageUI/MessageUI.h>
 
 
 
@@ -878,7 +883,7 @@ const int CONTACTS_TAB = 0;
         
         // GETTING DATA FROM RECEIVED DICTIONARY
         // SET OVER MODEL FROM DATA
-        NSLog(@"selectedTab = %i, indexPath.row = %i",selectedTab, indexPath.row);
+        NSLog(@"selectedTab = %i, indexPath.row = %li",selectedTab, (long)indexPath.row);
        
         receivedDic = [self getArrayOfSelectedTab ][(indexPath.row)];
     }
@@ -1131,12 +1136,13 @@ const int CONTACTS_TAB = 0;
         user[@"iphoneinvited"] = iPhoneinvited;
         [self friendsInvited];
 
-    } else if ([sharer isKindOfClass:[SHKMail class]] == YES){
-        // HERE WE GET AND SET SELECTED EMAIL LIST
-        [emailInvited  addObjectsFromArray:selectedIdentifiers];
-        user[@"emailinvited"] = emailInvited;
-        [self friendsInvited];
     }
+//    else if ([sharer isKindOfClass:[SHKMail class]] == YES){
+//        // HERE WE GET AND SET SELECTED EMAIL LIST
+//        [emailInvited  addObjectsFromArray:selectedIdentifiers];
+//        user[@"emailinvited"] = emailInvited;
+//        [self friendsInvited];
+//    }
 
 
     // HERE WE UPDATE PARSE ACCOUNT FOR REMEMBER INVITED FRIENDS LIST
@@ -1162,7 +1168,7 @@ const int CONTACTS_TAB = 0;
 {
     
     if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ||
-        [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
+        [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ) {
         [selectedIdentifiers   removeAllObjects];
     }
 
@@ -1240,7 +1246,6 @@ const int CONTACTS_TAB = 0;
 #pragma mark Flurry Methods
 
 -(void) friendsInvited {
-    [Flurry logEvent:@"Friends Invited"];
 }
 
 @end

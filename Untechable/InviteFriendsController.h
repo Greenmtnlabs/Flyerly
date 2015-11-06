@@ -19,16 +19,28 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 #import "AsyncImageView.h"
 #import "InviteFriendsCell.h"
-#import "SHKSharer.h"
+
 #import <SHKFormController.h>
 #import "SHKFacebookCommon.h"
 #import "ContactsModel.h"
 #import "FlyerlyTwitterFriends.h"
-#import "SHKSharerDelegate.h"
-#import "UntechableSingleton.h"
+
+
+#import "SHKActivityIndicator.h"
+
+#import <QuartzCore/QuartzCore.h>
+#import "Singleton.h"
+#import "SHKSharer.h"
+#import "SHKMBRoundProgressView.h"
+#import "SHK.h"
+
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
+#import "UntechableSingleton.h"
+
+
+
 
 @class SHKSharer;
 
@@ -61,10 +73,10 @@
 @property(nonatomic,strong) NSMutableArray *contactBackupArray;
 @property(nonatomic,strong) NSMutableArray *facebookBackupArray;
 @property(nonatomic,strong) NSMutableArray *twitterBackupArray;
-@property(nonatomic,strong) NSMutableArray *selectedIdentifiers;
+@property(nonatomic,weak) NSMutableArray *selectedIdentifiers;
 @property(nonatomic,strong) NSMutableArray *fbinvited;
 @property(nonatomic,strong) NSMutableArray *twitterInvited;
-@property(nonatomic,strong) NSMutableArray *iPhoneinvited;
+@property(nonatomic,weak) NSMutableArray *iPhoneinvited;
 @property(nonatomic,strong) NSMutableArray *emailInvited;
 
 @property(nonatomic,strong)NSString  *fbText;
