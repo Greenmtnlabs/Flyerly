@@ -57,6 +57,7 @@
 		20CF6FCE1BECADA70048C42F /* checkgray@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CF6FC81BECADA60048C42F /* checkgray@3x.png */; };
 		20CF6FD11BECAF530048C42F /* invite_friend@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CF6FCF1BECAF530048C42F /* invite_friend@2x.png */; };
 		20CF6FD21BECAF530048C42F /* invite_friend@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CF6FD01BECAF530048C42F /* invite_friend@3x.png */; };
+		20CF6FD51BECD0C90048C42F /* UntechableConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 20CF6FD41BECD0C90048C42F /* UntechableConfigurator.m */; };
 		2402BB831A1DBF6A00255A73 /* UntechablesList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402BB811A1DBF6A00255A73 /* UntechablesList.m */; };
 		2402BB841A1DBF6A00255A73 /* UntechablesList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2402BB821A1DBF6A00255A73 /* UntechablesList.xib */; };
 		2402BB881A1DC3A200255A73 /* UntechableTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402BB861A1DC3A200255A73 /* UntechableTableCell.m */; };
@@ -333,6 +334,8 @@
 		20CF6FC81BECADA60048C42F /* checkgray@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkgray@3x.png"; sourceTree = "<group>"; };
 		20CF6FCF1BECAF530048C42F /* invite_friend@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_friend@2x.png"; sourceTree = "<group>"; };
 		20CF6FD01BECAF530048C42F /* invite_friend@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_friend@3x.png"; sourceTree = "<group>"; };
+		20CF6FD31BECD0C90048C42F /* UntechableConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UntechableConfigurator.h; sourceTree = "<group>"; };
+		20CF6FD41BECD0C90048C42F /* UntechableConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UntechableConfigurator.m; sourceTree = "<group>"; };
 		2402BB801A1DBF6A00255A73 /* UntechablesList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UntechablesList.h; path = UntechableListController/UntechablesList.h; sourceTree = "<group>"; };
 		2402BB811A1DBF6A00255A73 /* UntechablesList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UntechablesList.m; path = UntechableListController/UntechablesList.m; sourceTree = "<group>"; };
 		2402BB821A1DBF6A00255A73 /* UntechablesList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UntechablesList.xib; path = UntechableListController/UntechablesList.xib; sourceTree = "<group>"; };
@@ -973,6 +976,8 @@
 				366F9DA51A124FC7006602E1 /* FHSTwitterEngine */,
 				36FD974919E694AC00427507 /* BSKeyboardControls */,
 				366ECD8019D3181000F71A11 /* Common.h */,
+				20CF6FD31BECD0C90048C42F /* UntechableConfigurator.h */,
+				20CF6FD41BECD0C90048C42F /* UntechableConfigurator.m */,
 			);
 			name = Config;
 			sourceTree = "<group>";
@@ -1608,6 +1613,7 @@
 				2402BB831A1DBF6A00255A73 /* UntechablesList.m in Sources */,
 				2402BB881A1DC3A200255A73 /* UntechableTableCell.m in Sources */,
 				3663932519D6A0A700512965 /* CommonFunctions.m in Sources */,
+				20CF6FD51BECD0C90048C42F /* UntechableConfigurator.m in Sources */,
 				2015F1351BEB73BF006EC4C4 /* FlyerlyTwitterFriends.m in Sources */,
 				36B036A619DAF44D00E8CD21 /* EmailSettingController.m in Sources */,
 				24AFE79B1B38086A00CC8230 /* SetupGuideThirdView.m in Sources */,

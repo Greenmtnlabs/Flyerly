@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import "UntechableConfigurator.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, strong) UntechableConfigurator *untechableConfigurator;
+
+
 @end

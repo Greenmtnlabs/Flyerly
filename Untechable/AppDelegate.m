@@ -15,13 +15,21 @@
 #import "UserPurchases.h"
 #import "IntroScreenViewController.h"
 #import "SetupGuideViewController.h"
+#import "UntechableSingleton.h"
+#import "SHKConfiguration.h"
+
 
 @implementation AppDelegate
-
+@synthesize untechableConfigurator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     NSLog( @"homeDirectoryPath this will help us in finding realm file: %@", NSHomeDirectory() );
+    
+    // Configurator initialization
+    untechableConfigurator = [[UntechableConfigurator alloc] init];
+    DefaultSHKConfigurator  *configurator = untechableConfigurator;
+    [SHKConfiguration sharedInstanceWithConfigurator:configurator];
     
     UserPurchases *userPurchases = [UserPurchases getInstance];
     [userPurchases loadAllProducts:^(NSString *errorMsg){}];
@@ -126,7 +134,6 @@
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
-
 
 // During the Facebook login flow, your app passes control to the Facebook iOS app or Facebook in a mobile browser.
 // After authentication, your app will be called back with the session information.
