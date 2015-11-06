@@ -25,14 +25,12 @@
 #import "ContactsModel.h"
 #import "FlyerlyTwitterFriends.h"
 
-
 #import "SHKActivityIndicator.h"
 
 #import <QuartzCore/QuartzCore.h>
 #import "Singleton.h"
 #import "SHKSharer.h"
 #import "SHKMBRoundProgressView.h"
-#import "SHK.h"
 
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
@@ -42,7 +40,7 @@
 
 
 
-@class SHKSharer;
+@class UntechableSingleton, SHKSharer;
 
 @interface InviteFriendsController : UIViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate, SHKSharerDelegate, FBSDKAppInviteDialogDelegate>{
     

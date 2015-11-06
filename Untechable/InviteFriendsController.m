@@ -35,7 +35,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 @implementation InviteFriendsController {
 
-    NSString *userUniqueObjectId;
     NSString *cellDescriptionForRefrelFeature;
     NSMutableArray *usernames;
     NSArray *availableAccounts;
@@ -156,51 +155,11 @@ const int CONTACTS_TAB = 0;
              }
          }];
     }else {
-        
         cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to flyerly and unlock Design Bundle feature for FREE!"];
     }
     
     
-    
-    if ( [[PFUser currentUser] sessionToken].length != 0 )
-    {
         
-        PFQuery *query = [PFUser query];
-        [query whereKey:@"username" equalTo:[[PFUser currentUser] objectForKey:@"username"]];
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            if (!error) {
-                if (objects.count) {
-                    for (PFObject *object in objects){
-                        NSLog(@"Object ID: %@", object.objectId);
-                        userUniqueObjectId = object.objectId;
-                        
-                        
-                    }
-                }
-            }
-        }];
-    }
-    
-    //HERE WE GET ALREADY INVITED FRIENDS
-    PFUser *user = [PFUser currentUser];
-    
-    self.iPhoneinvited = [[NSMutableArray alloc] init];
-    self.fbinvited = [[NSMutableArray alloc] init];
-    self.twitterInvited = [[NSMutableArray alloc] init];
-    self.emailInvited = [[NSMutableArray alloc] init];
-
-    if (user[@"iphoneinvited"])
-        self.iPhoneinvited  = user[@"iphoneinvited"];
-
-    if (user[@"fbinvited"])
-        self.fbinvited  = user[@"fbinvited"];
-
-    if (user[@"tweetinvited"])
-        twitterInvited = user[@"tweetinvited"];
-    if(user [@"emailinvited"])
-        self.emailInvited = user[@"emailinvited"];
-   
-    
     // Load device contacts
     [self loadLocalContacts:self.contactsButton];
     
@@ -274,11 +233,12 @@ const int CONTACTS_TAB = 0;
 -(IBAction)invite{
     
     SHKItem *item;
+    item = [SHKItem text:@"abcd"];
     NSMutableArray *identifiers = [[NSMutableArray alloc] init];
     identifiers = selectedIdentifiers;
     NSLog(@"identifiers = %@,  selectedTab = %i",identifiers, selectedTab);
 
-    NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? %@", userUniqueObjectId];
+    NSString *sharingText = @"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? http://app.flyerly.com/cs?i=qf6mv6pSwc";
     
     if([identifiers count] > 0){
         
@@ -323,7 +283,8 @@ const int CONTACTS_TAB = 0;
             
             [[SHK currentHelper] showViewController:rootView];
         } else if (selectedTab == 3) { // for Email
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", userUniqueObjectId]];
+            NSURL *url;
+            //NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"", ]];
             item = [SHKItem URL:url title:@"Invite Friends" contentType:SHKURLContentTypeUndefined];
             [item setMailToRecipients:identifiers];
             item.text = @"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try?";
@@ -571,10 +532,10 @@ const int CONTACTS_TAB = 0;
     SHKItem *item;
     
     // text to be share.
-    NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? %@",  userUniqueObjectId];
+    NSString *sharingText = @"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try?";
     
     // app URL with user id.
-    NSString *urlToShare = [NSString stringWithFormat:@"%@",  userUniqueObjectId];
+    NSString *urlToShare = @"";
     
     //item to be share
     item = [SHKItem URL:[NSURL URLWithString:urlToShare] title:sharingText contentType:SHKShareTypeURL];
@@ -983,7 +944,7 @@ const int CONTACTS_TAB = 0;
         
         ContactsModel *model = [self getArrayOfSelectedTab][(indexPath.row)];
         
-        NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! %@",  userUniqueObjectId];
+        NSString *sharingText = @"I'm using the Flyerly app to create and share flyers on the go!";
         
         //CHECK FOR ALREADY SELECTED
         if (model.status == 0) {
