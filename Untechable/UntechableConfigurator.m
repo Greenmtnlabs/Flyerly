@@ -152,7 +152,7 @@
      //only for rehan's testing MUST enable after RELEASING on app store, other wise preston a/c will be sucked...
      return PayPalEnvironmentSandbox;
      */
-    return @""; //live paypal a/c
+    return @""; //live paypal a/c
     
 #endif
     
