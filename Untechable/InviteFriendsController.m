@@ -61,6 +61,8 @@ const int CONTACTS_TAB = 0;
     [UserVoice initialize:config];
     
     self.selectedIdentifiers = [[NSMutableArray alloc] init];
+    globle = [UntechableSingleton RetrieveSingleton];
+
     self.navigationItem.hidesBackButton = YES;
     [self.view setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1]];
     
@@ -321,12 +323,12 @@ const int CONTACTS_TAB = 0;
             
             [[SHK currentHelper] showViewController:rootView];
         } else if (selectedTab == 3) { // for Email
-//            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",flyerConfigurator.referralURL, userUniqueObjectId]];
-//            item = [SHKItem URL:url title:@"Invite Friends" contentType:SHKURLContentTypeUndefined];
-//            [item setMailToRecipients:identifiers];
-//            item.text = @"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try?";
-//            // Share the item with my custom class
-//            [SHKMail shareItem:item];
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", userUniqueObjectId]];
+            item = [SHKItem URL:url title:@"Invite Friends" contentType:SHKURLContentTypeUndefined];
+            [item setMailToRecipients:identifiers];
+            item.text = @"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try?";
+            // Share the item with my custom class
+            //[SHKMail shareItem:item];
         }
     } else {
         [self showAlert:@"Please select any contact to invite !" message:@""];

@@ -73,7 +73,7 @@
 @property(nonatomic,strong) NSMutableArray *contactBackupArray;
 @property(nonatomic,strong) NSMutableArray *facebookBackupArray;
 @property(nonatomic,strong) NSMutableArray *twitterBackupArray;
-@property(nonatomic,weak) NSMutableArray *selectedIdentifiers;
+@property(nonatomic,strong) NSMutableArray *selectedIdentifiers;
 @property(nonatomic,strong) NSMutableArray *fbinvited;
 @property(nonatomic,strong) NSMutableArray *twitterInvited;
 @property(nonatomic,weak) NSMutableArray *iPhoneinvited;

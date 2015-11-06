@@ -55,6 +55,8 @@
 		20CF6FCC1BECADA70048C42F /* checkDouble@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CF6FC61BECADA60048C42F /* checkDouble@3x.png */; };
 		20CF6FCD1BECADA70048C42F /* checkgray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CF6FC71BECADA60048C42F /* checkgray@2x.png */; };
 		20CF6FCE1BECADA70048C42F /* checkgray@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CF6FC81BECADA60048C42F /* checkgray@3x.png */; };
+		20CF6FD11BECAF530048C42F /* invite_friend@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CF6FCF1BECAF530048C42F /* invite_friend@2x.png */; };
+		20CF6FD21BECAF530048C42F /* invite_friend@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CF6FD01BECAF530048C42F /* invite_friend@3x.png */; };
 		2402BB831A1DBF6A00255A73 /* UntechablesList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402BB811A1DBF6A00255A73 /* UntechablesList.m */; };
 		2402BB841A1DBF6A00255A73 /* UntechablesList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2402BB821A1DBF6A00255A73 /* UntechablesList.xib */; };
 		2402BB881A1DC3A200255A73 /* UntechableTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402BB861A1DC3A200255A73 /* UntechableTableCell.m */; };
@@ -329,6 +331,8 @@
 		20CF6FC61BECADA60048C42F /* checkDouble@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkDouble@3x.png"; sourceTree = "<group>"; };
 		20CF6FC71BECADA60048C42F /* checkgray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkgray@2x.png"; sourceTree = "<group>"; };
 		20CF6FC81BECADA60048C42F /* checkgray@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkgray@3x.png"; sourceTree = "<group>"; };
+		20CF6FCF1BECAF530048C42F /* invite_friend@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_friend@2x.png"; sourceTree = "<group>"; };
+		20CF6FD01BECAF530048C42F /* invite_friend@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_friend@3x.png"; sourceTree = "<group>"; };
 		2402BB801A1DBF6A00255A73 /* UntechablesList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UntechablesList.h; path = UntechableListController/UntechablesList.h; sourceTree = "<group>"; };
 		2402BB811A1DBF6A00255A73 /* UntechablesList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UntechablesList.m; path = UntechableListController/UntechablesList.m; sourceTree = "<group>"; };
 		2402BB821A1DBF6A00255A73 /* UntechablesList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UntechablesList.xib; path = UntechableListController/UntechablesList.xib; sourceTree = "<group>"; };
@@ -997,6 +1001,8 @@
 		36B0369A19DAD2AB00E8CD21 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				20CF6FCF1BECAF530048C42F /* invite_friend@2x.png */,
+				20CF6FD01BECAF530048C42F /* invite_friend@3x.png */,
 				20CF6FC31BECADA60048C42F /* checkBlue@2x.png */,
 				20CF6FC41BECADA60048C42F /* checkBlue@3x.png */,
 				20CF6FC51BECADA60048C42F /* checkDouble@2x.png */,
@@ -1351,7 +1357,9 @@
 				247C72D51A5C0968005C9693 /* user_img@3x.png in Resources */,
 				36474F2219D9780100084F34 /* Pigiarniq Bold.ttf in Resources */,
 				2015F12B1BEB711F006EC4C4 /* InviteFreindsCell-iPhone6.xib in Resources */,
+				20CF6FD21BECAF530048C42F /* invite_friend@3x.png in Resources */,
 				366EAF921A14C3530011D6C6 /* icon-50.png in Resources */,
+				20CF6FD11BECAF530048C42F /* invite_friend@2x.png in Resources */,
 				C36D2E621A791AEA000537C5 /* SettingsCellView-iPhone6-Plus.xib in Resources */,
 				248E06BD1A4AD9180099846A /* ContactListCell-iPhone6-Plus.xib in Resources */,
 				C346D17C1A7FD13B00856A58 /* emailic@3x.png in Resources */,
