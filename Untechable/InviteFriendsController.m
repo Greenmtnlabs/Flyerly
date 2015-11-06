@@ -233,7 +233,6 @@ const int CONTACTS_TAB = 0;
 -(IBAction)invite{
     
     SHKItem *item;
-    item = [SHKItem text:@"abcd"];
     NSMutableArray *identifiers = [[NSMutableArray alloc] init];
     identifiers = selectedIdentifiers;
     NSLog(@"identifiers = %@,  selectedTab = %i",identifiers, selectedTab);

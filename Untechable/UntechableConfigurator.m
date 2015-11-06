@@ -71,6 +71,92 @@
     
 }
 
+//BannerAd Id
+- (NSString*)bannerAdID {
+    
+#ifdef DEBUG
+    
+    //ozair's account
+    //return @"ca-app-pub-5409664730066465/8030978831";
+    
+    //Rehan's a/c
+    return @"ca-app-pub-1703558915514520/6691113092";
+    
+#else
+    
+    //Live Jen'account
+    return @"ca-app-pub-3218409375181552/2458746629";
+    
+#endif
+    
+}
+
+//InterstitialAdd Id
+- (NSString*)interstitialAdID {
+    
+#ifdef DEBUG
+    
+    //ozair's account
+    //return @"ca-app-pub-5409664730066465/9926514430";
+    //Rehan's a/c
+    return @"ca-app-pub-1703558915514520/8955078699";
+    
+#else
+    
+    //Live Jen'account
+    return @"ca-app-pub-3218409375181552/5412213028";
+    
+#endif
+    
+}
+
+
+- (NSString*)bigstockAccountId {
+    
+#ifdef DEBUG
+    
+    //ozair.nazir@riksof.com / riksof123
+    return @"862265";
+    
+#else
+    
+    return @"328312";
+    
+#endif
+    
+}
+
+- (NSString*)bigstockSecretKey {
+    
+#ifdef DEBUG
+    
+    return @"e84301b7de141bc89517fc708de3285c825bb648";
+    
+#else
+    
+    return @"f5d82349baeb5243b61599591536b97d95950d72";
+    
+#endif
+    
+}
+
+- (NSString *const)paypalEnvironment {
+    
+#ifdef DEBUG
+    
+    return @"";//testing send box
+    
+#else
+    /*
+     //    return PayPalEnvironmentProduction;
+     //only for rehan's testing MUST enable after RELEASING on app store, other wise preston a/c will be sucked...
+     return PayPalEnvironmentSandbox;
+     */
+    return @""; //live paypal a/c
+    
+#endif
+    
+}
 
 
 
