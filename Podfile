@@ -22,3 +22,4 @@ pod 'Parse', '~> 1.7.3'
 pod 'ParseFacebookUtils', '~> 1.7.4'
 
 pod 'gtm-logger', '~> 0.0'
+

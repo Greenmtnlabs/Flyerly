@@ -18,6 +18,7 @@
 #import "SHKiOSSharer.h"
 #import "SHKiOSTwitter.h"
 #import "SHKSharer.h"
+#import "SHKMail.h"
 
 #import <Foundation/Foundation.h>
 #import "SHKSharer.h"
@@ -244,7 +245,7 @@ const int CONTACTS_TAB = 0;
     identifiers = selectedIdentifiers;
     NSLog(@"identifiers = %@,  selectedTab = %i",identifiers, selectedTab);
 
-    NSString *sharingText = @"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try?";
+    NSString *sharingText = @"Take a break from technology. Untech & Reconnect with life: http://www.unte.ch";
     
     if([identifiers count] > 0){
         
@@ -293,7 +294,7 @@ const int CONTACTS_TAB = 0;
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",untechableConfigurator.referralURL]];
             item = [SHKItem URL:url title:@"Invite Friends" contentType:SHKURLContentTypeUndefined];
             [item setMailToRecipients:identifiers];
-            item.text = @"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try?";
+            item.text = @"Take a break from technology. Untech & Reconnect with life: http://www.unte.ch";
             // Share the item with my custom class
             [SHKMail shareItem:item];
         }
@@ -1107,12 +1108,12 @@ const int CONTACTS_TAB = 0;
         [self friendsInvited];
 
     }
-//    else if ([sharer isKindOfClass:[SHKMail class]] == YES){
-//        // HERE WE GET AND SET SELECTED EMAIL LIST
-//        [emailInvited  addObjectsFromArray:selectedIdentifiers];
-//        user[@"emailinvited"] = emailInvited;
-//        [self friendsInvited];
-//    }
+    else if ([sharer isKindOfClass:[SHKMail class]] == YES){
+        // HERE WE GET AND SET SELECTED EMAIL LIST
+        [emailInvited  addObjectsFromArray:selectedIdentifiers];
+        user[@"emailinvited"] = emailInvited;
+        [self friendsInvited];
+    }
 
 
     // HERE WE UPDATE PARSE ACCOUNT FOR REMEMBER INVITED FRIENDS LIST
