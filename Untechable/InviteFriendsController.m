@@ -822,22 +822,21 @@ const int CONTACTS_TAB = 0;
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InviteFriendsCell" owner:self options:nil];
         cell = (InviteFriendsCell *)[nib objectAtIndex:0];
         
-        //cell.contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-        //[cell setFrame:newFrame];
+       
         
-        if( IS_IPHONE_5 || IS_IPHONE_4){
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InviteFriendsCell" owner:self options:nil];
-        cell = (InviteFriendsCell *)[nib objectAtIndex:0];
-        } else if ( IS_IPHONE_6 ){
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InviteFreindsCell-iPhone6" owner:self options:nil];
-            cell = (InviteFriendsCell *)[nib objectAtIndex:0];
-        } else if ( IS_IPHONE_6_PLUS ) {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InviteFreindsCell-iPhone6-Plus" owner:self options:nil];
-            cell = (InviteFriendsCell *)[nib objectAtIndex:0];
-        } else {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InviteFriendsCell" owner:self options:nil];
-            cell = (InviteFriendsCell *)[nib objectAtIndex:0];
-        }
+//        if( IS_IPHONE_5 || IS_IPHONE_4){
+//        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InviteFriendsCell" owner:self options:nil];
+//        cell = (InviteFriendsCell *)[nib objectAtIndex:0];
+//        } else if ( IS_IPHONE_6 ){
+//            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InviteFreindsCell-iPhone6" owner:self options:nil];
+//            cell = (InviteFriendsCell *)[nib objectAtIndex:0];
+//        } else if ( IS_IPHONE_6_PLUS ) {
+//            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InviteFreindsCell-iPhone6-Plus" owner:self options:nil];
+//            cell = (InviteFriendsCell *)[nib objectAtIndex:0];
+//        } else {
+//            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InviteFriendsCell" owner:self options:nil];
+//            cell = (InviteFriendsCell *)[nib objectAtIndex:0];
+//        }
     }
         
     

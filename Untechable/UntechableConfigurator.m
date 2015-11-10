@@ -28,7 +28,7 @@
 }
 
 - (NSString*)referralURL{
-    return @"http://app.flyerly.com/cs?i=";
+    return @"http://app.flyerly.com/cs";
 }
 
 - (NSString*)appLinkURL{
@@ -71,162 +71,7 @@
     
 }
 
-//BannerAd Id
-- (NSString*)bannerAdID {
-    
-#ifdef DEBUG
-    
-    //ozair's account
-    //return @"ca-app-pub-5409664730066465/8030978831";
-    
-    //Rehan's a/c
-    return @"ca-app-pub-1703558915514520/6691113092";
-    
-#else
-    
-    //Live Jen'account
-    return @"ca-app-pub-3218409375181552/2458746629";
-    
-#endif
-    
-}
 
-//InterstitialAdd Id
-- (NSString*)interstitialAdID {
-    
-#ifdef DEBUG
-    
-    //ozair's account
-    //return @"ca-app-pub-5409664730066465/9926514430";
-    //Rehan's a/c
-    return @"ca-app-pub-1703558915514520/8955078699";
-    
-#else
-    
-    //Live Jen'account
-    return @"ca-app-pub-3218409375181552/5412213028";
-    
-#endif
-    
-}
-
-
-- (NSString*)bigstockAccountId {
-    
-#ifdef DEBUG
-    
-    //ozair.nazir@riksof.com / riksof123
-    return @"862265";
-    
-#else
-    
-    return @"328312";
-    
-#endif
-    
-}
-
-- (NSString*)bigstockSecretKey {
-    
-#ifdef DEBUG
-    
-    return @"e84301b7de141bc89517fc708de3285c825bb648";
-    
-#else
-    
-    return @"f5d82349baeb5243b61599591536b97d95950d72";
-    
-#endif
-    
-}
-
-- (NSString *const)paypalEnvironment {
-    
-#ifdef DEBUG
-    
-    return @"";//testing send box
-    
-#else
-    /*
-     //    return PayPalEnvironmentProduction;
-     //only for rehan's testing MUST enable after RELEASING on app store, other wise preston a/c will be sucked...
-     return PayPalEnvironmentSandbox;
-     */
-    return @""; //live paypal a/c
-    
-#endif
-    
-}
-
-
-
-//Lob ApiKey
-- (NSString*)lobAppId {
-    
-#ifdef DEBUG
-    
-    //return @"test_b5d690f19a73468edc528b5a4c63f9875c8"; //preston a/c test details
-    //Key extracted from [https://dashboard.lob.com/account] using [ ozair.nazir@riksof.com] a/c test details
-    //return @"test_13fb536c2d9e23b0e25657d9f923261b03b";//test a/c [ ozair.nazir@riksof.com ]
-    return @"test_964f662f2e4739cf7e485d85cf3b143052e";//test a/c of [ abdul.rauf@riksof.com ]
-    
-#else
-    return @"live_889eeb7a75372e642ceaece3aa9d2ac0dfc"; //greenmtnlabs@gmail.com a/c live details
-    
-#endif
-    
-}
-
-
-- (NSString*)paypalEnvironmentId {
-    
-#ifdef DEBUG
-    
-    return @"AWGYCRB32qMlpNyIY9_kKXXsDIZN7UG5JNM5zjCWwXWvLu66SQP3WjbU9v-A";
-    
-#else
-    
-    return @"AYxR7BCKR4RGcyfH0zKMtZFJbMsXSD5SN6tcJ20nu_CQA32DClzD78XvZjXx";
-    
-#endif
-    
-}
-
-//Crittercism ApiKey
-- (NSString*)crittercismAppId {
-    return @"519a14f897c8f27969000019";
-}
-
-//Parse Online Keys
-- (NSString*)parseOnlineAppId{
-    return @"rrU7ilSR4TZNQD9xlDtH8wFoQNK4st5AaITq6Fan";
-}
-- (NSString*)parseOnlineClientKey{
-    return @"P0FxBvDvw0eDYYT01cx8nhaDQdl90BdHGc22jPLn";
-}
-
-//Parse Offline Keys
-- (NSString*)parseOfflineAppId{
-    return @"1zE9CnuScHj4l7dGFbT8NG15uTNb8VazMpsdoCis";
-    //---oziar's account---//q9bK4kuAV7se1SPuNJ4wvffTSVU5k4MLDnVgJpbI
-}
-
-- (NSString*)parseOfflineClientKey{
-    return @"rFdNdJfzWt8YIf66G7twr0D5zp9uVsWuAkMEnkpc";
-    //----//fXPKQXaId9M2qz3Xd74iUo7LDt8gHEbMVJUM2dYt
-}
-
-//Flurry SessionKey
-- (NSString*)flurrySessionId{
-    return @"ZWXZFGSQZ4GMYZBVZYN3";
-}
-
-
-// Vkontakte
-// SHKVkontakteAppID is the Application ID provided by Vkontakte
-- (NSString*)vkontakteAppId {
-    return @"";
-}
 
 // Facebook - https://developers.facebook.com/apps
 // SHKFacebookAppID is the Application ID provided by Facebook
@@ -239,7 +84,7 @@
 //
 //    Your CFBundleURLSchemes entry: fb555lite
 - (NSString*)facebookAppId {
-    return @"136691489852349";
+    return @"988650031150166";
 }
 
 - (NSString*)facebookLocalAppId {
@@ -283,17 +128,6 @@
     return @"144370279359-lsst3ttqhr7nrj1krv21hk3urfsou6ic.apps.googleusercontent.com";
 }
 
-//Pocket v3 consumer key. http://getpocket.com/developer/apps/. If you have old read it later app, you should obtain new key.
-- (NSString *)pocketConsumerKey {
-    
-    return @"";
-}
-
-// Diigo - http://www.diigo.com/api_keys/new/
-- (NSString*)diigoKey {
-    return @"";
-}
-
 // Twitter
 
 /*
@@ -321,12 +155,12 @@
  */
 
 - (NSString*)twitterConsumerKey {
-    return @"xYlRtbesxU0Qrxulx5kjdA";
+    return @"7tjZJkglNhkqjSXa8usgt22z6";
     
 }
 
 - (NSString*)twitterSecret {
-    return @"v8j6WWLoRDBCIkUQtapbhuOoYOZ4sWjMJovJLIPgO0";
+    return @"AEEYzqZMWEwFTZFrQ1ntSormoB5ttG7lEET1dd23mKGtLtXBwF";
 }
 // You need to set this if using OAuth, see note above (xAuth users can skip it)
 - (NSString*)twitterCallbackUrl {
@@ -338,62 +172,9 @@
 }
 // Enter your app's twitter account if you'd like to ask the user to follow it when logging in. (Only for xAuth)
 - (NSString*)twitterUsername {
-    return @"flyerlyapp";
+    return @"gountech";
 }
 
-// Evernote - http://www.evernote.com/about/developer/api/
-/*	You need to set to sandbox until you get approved by evernote. If you use sandbox, you can use it with special sandbox user account only. You can create it here: https://sandbox.evernote.com/Registration.action
- If you already have a consumer-key and secret which have been created with the old username/password authentication system
- (created before May 2012) you have to get a new consumer-key and secret, as the old one is not accepted by the new authentication
- system.
- // Sandbox
- #define SHKEvernoteHost    @"sandbox.evernote.com"
- 
- // Or production
- #define SHKEvernoteHost    @"www.evernote.com"
- */
-
-- (NSString*)evernoteHost {
-    return @"";
-}
-
-- (NSString*)evernoteConsumerKey {
-    return @"";
-}
-
-- (NSString*)evernoteSecret {
-    return @"";
-}
-// Flickr - http://www.flickr.com/services/apps/create/
-/*
- 1 - This requires the CFNetwork.framework
- 2 - One needs to setup the flickr app as a "web service" on the flickr authentication flow settings, and enter in your app's custom callback URL scheme.
- 3 - make sure you define and create the same URL scheme in your app description on Flickr. It can be as simple as yourapp://flickr
- 4 - do not override this, unless you subclass the sharer and need more privileges for custom added functionality.*/
-- (NSString*)flickrConsumerKey {
-    return @"e5ddcf40695fd20da9286b2ad059a315";
-}
-
-- (NSString*)flickrSecretKey {
-    return @"7143d033fedaff2f";
-}
-// The user defined callback url
-- (NSString*)flickrCallbackUrl{
-    return @"https://www.google.com.pk/";
-}
-
-- (NSString *)flickrPermissions {
-    return @"write";
-}
-
-// Bit.ly for shortening URLs, used by some sharers (e.g. Buffer). http://bit.ly/account/register - after signup: http://bit.ly/a/your_api_key If you do not enter bit.ly credentials, URL will be shared unshortened.
-- (NSString*)bitLyLogin {
-    return @"flyerly";
-}
-
-- (NSString*)bitLyKey {
-    return @"R_3bdc6f8e82d260965325510421c980a0";
-}
 
 // LinkedIn - https://www.linkedin.com/secure/developer
 - (NSString*)linkedInConsumerKey {
@@ -408,140 +189,6 @@
     return @"";
 }
 
-// Readability - http://www.readability.com/publishers/api/
-- (NSString*)readabilityConsumerKey {
-    return @"";
-}
-
-- (NSString*)readabilitySecret {
-    return @"";
-}
-// To use xAuth, set to 1, Currently ONLY supports XAuth
-- (NSNumber*)readabilityUseXAuth {
-    return [NSNumber numberWithInt:1];
-}
-
-// Foursquare V2 - https://developer.foursquare.com
-- (NSString*)foursquareV2ClientId {
-    return @"";
-}
-
-- (NSString*)foursquareV2RedirectURI {
-    return @"";
-}
-
-// Tumblr - http://www.tumblr.com/docs/en/api/v2
-- (NSString*)tumblrConsumerKey {
-    return @"02d5PRV1F7FBSC8gTFzMzrnv8fwuIfFBVcrvCDVMtaV0fk7ZmN";
-    //return @"7g8ugn9opLIb2oKLQBlnbDjBoYKQHbVd9TgtVZRMz5NK1GXgXS";
-    
-}
-
-- (NSString*)tumblrSecret {
-    return @"fvCuTzmDPClRuhGCYLsfevDebgwFKYZy0wDJOvNQr2ngKYjHZ2";
-    //return @"7g8ugn9opLIb2oKLQBlnbDjBoYKQHbVd9TgtVZRMz5NK1GXgXS";
-    
-}
-
-//you can put whatever here. It must be the same you entered in tumblr app registration, eg tumblr.sharekit.com
-- (NSString*)tumblrCallbackUrl {
-    return @"http://www.google.com";
-}
-
-// Hatena - https://www.hatena.com/yours12345/config/auth/develop
-- (NSString*)hatenaConsumerKey {
-    return @"";
-}
-
-- (NSString*)hatenaSecret {
-    return @"";
-}
-
-//required permissions. You do not need change these - but it must correspond with what you set during app registration on Hatena.
-- (NSString *)hatenaScope {
-    return @"write_public,read_public";
-}
-
-// Plurk - http://www.plurk.com/API
-- (NSString *)plurkAppKey {
-    return @"";
-}
-
-- (NSString *)plurkAppSecret {
-    return @"";
-}
-
-- (NSString *)plurkCallbackURL {
-    return @"";
-}
-
-// Instagram
-
-// Instagram crops images by default
-- (NSNumber*)instagramLetterBoxImages {
-    return [NSNumber numberWithBool:YES];
-}
-
-- (UIColor *)instagramLetterBoxColor
-{
-    return [UIColor whiteColor];
-}
-
-///only show instagram in the application list (instead of Instagram plus any other public/jpeg-conforming apps)
-- (NSNumber *)instagramOnly {
-    return [NSNumber numberWithBool:YES];
-}
-
-// YouTube - https://developers.google.com/youtube/v3/guides/authentication#OAuth2_Register
-- (NSString*)youTubeConsumerKey {
-    return @"144370279359-lsst3ttqhr7nrj1krv21hk3urfsou6ic.apps.googleusercontent.com";
-}
-
-- (NSString*)youTubeSecret {
-    return @"tSn0qB7etxqNv59PZE10oU5d";
-}
-
-// Dropbox - https://www.dropbox.com/developers/apps
-- (NSString *) dropboxAppKey {
-    return @"";
-}
-- (NSString *) dropboxAppSecret {
-    return @"";
-}
-/*
- This setting should correspond with permission type set during your app registration with Dropbox. You can choose from these two values:
- @"sandbox" (set if you chose permission type "App folder" == kDBRootAppFolder. You will have access only to the app folder you set in  https://www.dropbox.com/developers/apps)
- @"dropbox" (set if you chose permission type "Full dropbox" == kDBRootDropbox)
- */
-- (NSString *) dropboxRootFolder {
-    return @"sandbox";
-}
-
-// if you set NO, a dialogue will appear where user can choose different filename, otherwise the file is silently overwritten.
-- (NSNumber *)dropboxShouldOverwriteExistedFile {
-    return [NSNumber numberWithBool:YES];
-}
-
-// Buffer
-/*
- 1 - Set up an app at https://bufferapp.com/developers/apps/create
- 2 - Once the app is set up this requires a URL Scheme to be set up within your apps info.plist. bufferXXXX where XXXX is your client ID, this will enable Buffer authentication.
- 3 - Set bufferShouldShortenURLS. NO will use ShareKit's shortening (if available). YES will use Buffer's shortener once the sheet is autheorised and presented.
- */
-
-- (NSString*)bufferClientID
-{
-    return @"";
-}
-
-- (NSString*)bufferClientSecret
-{
-    return @"";
-}
-
-- (NSNumber *)bufferShouldShortenURLS {
-    return [NSNumber numberWithBool:YES];
-}
 
 /*
  UI Configuration : Basic
@@ -747,15 +394,5 @@
     return NSStringFromCGRect(CGRectZero);
 }
 
-
-//Giphy Api Key
-- (NSString*)giphyApiKey{    
-#ifdef DEBUG
-    return @"dc6zaTOxFJmzC"; //testing key
-    
-#else
-    return @"PPOlBY3exNJQI"; //live key
-#endif
-}
 
 @end
