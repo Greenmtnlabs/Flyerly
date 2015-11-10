@@ -139,7 +139,7 @@
         
         // Right Navigation ______________________________________________
         
-        btnInvite = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        btnInvite = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 43, 42)];
         btnInvite.titleLabel.shadowColor = [UIColor clearColor];
         btnInvite.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [btnInvite setTitle:NSLocalizedString(TITLE_INVITE_TXT, nil) forState:normal];
@@ -149,7 +149,7 @@
         [btnInvite addTarget:self action:@selector(btnTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
         btnInvite.showsTouchWhenHighlighted = YES;
         
-        btnHelp = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        btnHelp = [[UIButton alloc] initWithFrame:CGRectMake(43, 0, 43, 42)];
         btnHelp.titleLabel.shadowColor = [UIColor clearColor];
         btnHelp.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [btnHelp setTitle:NSLocalizedString(TITLE_HELP_TXT, nil) forState:normal];

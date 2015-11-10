@@ -87,7 +87,7 @@ const int CONTACTS_TAB = 0;
     
     // Create left bar help button
     
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 33, 42)];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
     
     backButton.titleLabel.shadowColor = [UIColor clearColor];
     backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
@@ -102,7 +102,7 @@ const int CONTACTS_TAB = 0;
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,nil]];
     
     // INVITE BAR BUTTON
-    UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(33, 0, 33, 42)];
+    UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
     
     inviteButton.titleLabel.shadowColor = [UIColor clearColor];
     inviteButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
