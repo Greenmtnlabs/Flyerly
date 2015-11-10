@@ -13,6 +13,7 @@
 #import <MessageUI/MFMailComposeViewController.h>
 
 @interface UntechablesList : UIViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate, MFMailComposeViewControllerDelegate> {
+    UIButton *btnInvite;
     UIButton *btnHelp;
     UIButton *settingsButton;
     Untechable *untechable;
@@ -31,5 +32,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *doneButtonView;
 
 - (IBAction)emailComposer;
+- (IBAction)goToInvite;
 
 @end

@@ -1,6 +1,6 @@
 //
-//  AddFriendsController.h
-//  Flyr
+//  InviteFriendsController.h
+//  Untechable
 //
 //  Created by Riksof on 4/15/13.
 //
@@ -77,14 +77,12 @@
 @property(nonatomic,strong) NSMutableArray *emailInvited;
 
 @property(nonatomic,strong)NSString  *fbText;
-- (void)fbSend;
 - (void)fbCancel;
 
 
 - (IBAction)loadLocalContacts:(UIButton *)sender;
 - (IBAction)loadFacebookContacts:(UIButton *)sender;
 - (IBAction)loadTwitterContacts:(UIButton *)sender;
-- (IBAction)loadEmailContacts:(id)sender;
 - (IBAction)onSearchClick:(UIButton *)sender;
 -(IBAction)goBack;
 -(IBAction)invite;

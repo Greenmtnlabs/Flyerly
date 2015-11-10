@@ -138,6 +138,17 @@
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
         // Right Navigation ______________________________________________
+        
+        btnInvite = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        btnInvite.titleLabel.shadowColor = [UIColor clearColor];
+        btnInvite.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [btnInvite setTitle:NSLocalizedString(TITLE_INVITE_TXT, nil) forState:normal];
+        [btnInvite setTitleColor:DEF_GRAY forState:UIControlStateNormal];
+        [btnInvite addTarget:self action:@selector(goToInvite) forControlEvents:UIControlEventTouchUpInside];
+        [btnInvite addTarget:self action:@selector(btnTouchStart:) forControlEvents:UIControlEventTouchDown];
+        [btnInvite addTarget:self action:@selector(btnTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
+        btnInvite.showsTouchWhenHighlighted = YES;
+        
         btnHelp = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         btnHelp.titleLabel.shadowColor = [UIColor clearColor];
         btnHelp.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
@@ -147,8 +158,11 @@
         [btnHelp addTarget:self action:@selector(btnTouchStart:) forControlEvents:UIControlEventTouchDown];
         [btnHelp addTarget:self action:@selector(btnTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
         btnHelp.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:btnHelp];
-        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
+        
+        
+        UIBarButtonItem *rightBarButton1 = [[UIBarButtonItem alloc] initWithCustomView:btnInvite];
+        UIBarButtonItem *rightBarButton2 = [[UIBarButtonItem alloc] initWithCustomView:btnHelp];
+        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton1,rightBarButton2,nil];
         
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
     }
@@ -162,7 +176,13 @@
     [self.navigationController pushViewController:settingsController animated:YES];
 }
 
-
+/*
+ * This method opens Invite Screen
+ */
+- (IBAction)goToInvite{
+    InviteFriendsController *inviteFriendsController = [[InviteFriendsController alloc] initWithNibName:@"InviteFriendsController" bundle:nil];
+    [self.navigationController pushViewController:inviteFriendsController animated:YES];
+}
 
 /*
  * This method sends email
@@ -170,26 +190,20 @@
  */
 - (IBAction)emailComposer {
   
-    InviteFriendsController *inviteFriendsController = [[InviteFriendsController alloc] initWithNibName:@"InviteFriendsController" bundle:nil];
-    [self.navigationController pushViewController:inviteFriendsController animated:YES];
-
+    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
     
-    
-    
-//    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
-//    
-//    if([MFMailComposeViewController canSendMail]){
-//        
-//        picker.mailComposeDelegate = self;
-//        [picker setSubject:@"Untech Email Feedback..."];
-//        
-//        // Set up recipients
-//        NSMutableArray *toRecipients = [[NSMutableArray alloc]init];
-//        [toRecipients addObject:@"support@greenmtnlabs.com"];
-//        [picker setToRecipients:toRecipients];
-//        
-//        [self presentViewController:picker animated:YES completion:nil];
-//    }
+    if([MFMailComposeViewController canSendMail]){
+        
+        picker.mailComposeDelegate = self;
+        [picker setSubject:@"Untech Email Feedback..."];
+        
+        // Set up recipients
+        NSMutableArray *toRecipients = [[NSMutableArray alloc]init];
+        [toRecipients addObject:@"support@greenmtnlabs.com"];
+        [picker setToRecipients:toRecipients];
+        
+        [self presentViewController:picker animated:YES completion:nil];
+    }
 }
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
