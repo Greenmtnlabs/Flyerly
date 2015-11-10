@@ -21,11 +21,8 @@
 #import "SHKMail.h"
 
 #import <Foundation/Foundation.h>
-#import "SHKSharer.h"
-#import <MessageUI/MessageUI.h>
 #import "UntechableConfigurator.h"
 #import "AppDelegate.h"
-
 
 
 NSString *kCheckTokenStep1 = @"kCheckTokenStep";
