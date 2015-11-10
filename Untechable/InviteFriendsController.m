@@ -120,58 +120,6 @@ const int CONTACTS_TAB = 0;
     
     [self.uiTableView  setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
     [searchTextField setReturnKeyType:UIReturnKeyDone];
-    
-    if ([[PFUser currentUser] sessionToken].length != 0) {
-        
-        PFQuery *query = [PFUser query];
-        [query whereKey:@"username" equalTo:[[PFUser currentUser] objectForKey:@"username"]];
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
-         {
-             if (!error)
-             {
-                 if (objects.count)
-                 {
-                     for (PFObject *object in objects)
-                     {
-                         NSLog(@"ParseUser unique object ID: %@", object.objectId);
-                         
-                         PFQuery *query = [PFUser  query];
-                         [query whereKey:@"objectId" equalTo:object.objectId];
-                         [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error)
-                          {
-                              if (!error)
-                              {
-                                  NSMutableDictionary *counterDictionary = [object valueForKey:@"estimatedData"];
-                                  int refrelCounter = [[counterDictionary objectForKey:@"inviteCounter"] intValue];
-                                  
-                                  if ( refrelCounter >= 20 )
-                                  {
-                                      //Setting the feature name,feature description values for cell view using plist
-                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"You have sucessfully unlocked Design Bundle feature by referring friends. Enjoy!"];
-                                      
-                                  }else if ( refrelCounter <= 0 ){
-                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to flyerly and unlock Design Bundle feature for FREE!"];
-                                  }
-                                  else if ( refrelCounter > 0 && refrelCounter < 20 )
-                                  {
-                                      int moreToInvite = 20 - refrelCounter;
-                                      //Setting the feature name,feature description values for cell view using plist
-                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite %d more people to flyerly and unlock Design Bundle feature for FREE!",moreToInvite];
-                                      
-                                  }
-                                  
-                                  [refrelText setText:cellDescriptionForRefrelFeature];
-                            }
-                          }];
-                     }
-                 }
-             }
-         }];
-    }else {
-        cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to flyerly and unlock Design Bundle feature for FREE!"];
-    }
-    
-    
         
     // Load device contacts
     [self loadLocalContacts:self.contactsButton];
@@ -328,7 +276,6 @@ const int CONTACTS_TAB = 0;
         // INVITE BAR BUTTON
         UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
         [inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
-        [inviteButton setBackgroundImage:[UIImage imageNamed:@"invite_friend"] forState:UIControlStateNormal];
         inviteButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
@@ -655,47 +602,46 @@ const int CONTACTS_TAB = 0;
     [accountStore requestAccessToAccountsWithType:twitterAccountType
                                           options:nil
                                        completion:^(BOOL granted, NSError *error) {
-    if ( granted ) {
-        availableAccounts = [accountStore accountsWithAccountType:twitterAccountType];
-        
-        if ([availableAccounts count] > 1) {
-            
-            usernames = [NSMutableArray arrayWithCapacity:[availableAccounts count]];
-            
-            for (ACAccount *acc in availableAccounts) {
-                [usernames addObject:acc.username];
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"Choose Twitter Account" message:nil delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:nil];
-                
-                for( NSString* number in usernames )
-                    [view addButtonWithTitle:number];
-                
-                [view show];
-            });
-            
-        } else if ([availableAccounts count] > 0 ) {
-            
-             dispatch_async(dispatch_get_main_queue(), ^{
-                // Just use the single account.
-                selectedAccount = [availableAccounts objectAtIndex:0];
-                [self afterTwitterSelected:selectedAccount];
-             });
-        } else {
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self afterTwitterSelected:nil];
-            });
-        }
-        
-    } else {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self afterTwitterSelected:nil];
-        });
-    }
-}];
-    
+                                           if ( granted ) {
+                                               availableAccounts = [accountStore accountsWithAccountType:twitterAccountType];
+                                               
+                                               if ([availableAccounts count] > 1) {
+                                                   
+                                                   usernames = [NSMutableArray arrayWithCapacity:[availableAccounts count]];
+                                                   
+                                                   for (ACAccount *acc in availableAccounts) {
+                                                       [usernames addObject:acc.username];
+                                                   }
+                                                   
+                                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                                       UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"Choose Twitter Account" message:nil delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:nil];
+                                                       
+                                                       for( NSString* number in usernames )
+                                                           [view addButtonWithTitle:number];
+                                                       
+                                                       [view show];
+                                                   });
+                                                   
+                                               } else if ([availableAccounts count] > 0 ) {
+                                                   
+                                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                                       // Just use the single account.
+                                                       selectedAccount = [availableAccounts objectAtIndex:0];
+                                                       [self afterTwitterSelected:selectedAccount];
+                                                   });
+                                               } else {
+                                                   
+                                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                                       [self afterTwitterSelected:nil];
+                                                   });
+                                               }
+                                               
+                                           } else {
+                                               dispatch_async(dispatch_get_main_queue(), ^{
+                                                   [self afterTwitterSelected:nil];
+                                               });
+                                           }
+                                       }];
 }
 
 /**
@@ -1076,36 +1022,6 @@ const int CONTACTS_TAB = 0;
         return;
     }
     
-    PFUser *user = [PFUser currentUser];
-    
-    // Here we Check Sharer for
-    // Update PARSE
-    if ( [sharer isKindOfClass:[SHKTwitter class]] == YES ||
-        [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
-        
-        // HERE WE GET AND SET SELECTED FOLLOWER
-        [twitterInvited  addObjectsFromArray:selectedIdentifiers];
-        user[@"tweetinvited"] = twitterInvited;
-        [self friendsInvited];
- 
-    } else if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
-        
-        // HERE WE GET AND SET SELECTED CONTACT LIST
-        [iPhoneinvited  addObjectsFromArray:selectedIdentifiers];
-        user[@"iphoneinvited"] = iPhoneinvited;
-        [self friendsInvited];
-
-    }
-    else if ([sharer isKindOfClass:[SHKMail class]] == YES){
-        // HERE WE GET AND SET SELECTED EMAIL LIST
-        [emailInvited  addObjectsFromArray:selectedIdentifiers];
-        user[@"emailinvited"] = emailInvited;
-        [self friendsInvited];
-    }
-
-
-    // HERE WE UPDATE PARSE ACCOUNT FOR REMEMBER INVITED FRIENDS LIST
-    [user saveInBackground];
     
     [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
     [selectedIdentifiers   removeAllObjects];

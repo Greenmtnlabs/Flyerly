@@ -155,12 +155,12 @@
  */
 
 - (NSString*)twitterConsumerKey {
-    return @"7tjZJkglNhkqjSXa8usgt22z6";
+    return @"ByW548OF9AiFed5GeBNtVXkL7";
     
 }
 
 - (NSString*)twitterSecret {
-    return @"AEEYzqZMWEwFTZFrQ1ntSormoB5ttG7lEET1dd23mKGtLtXBwF";
+    return @"tamE3ZQzsdYCoxFVttnSaNygRZedY76LXmefx0ul4ubsJGHNzn";
 }
 // You need to set this if using OAuth, see note above (xAuth users can skip it)
 - (NSString*)twitterCallbackUrl {
