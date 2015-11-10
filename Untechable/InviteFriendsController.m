@@ -57,9 +57,6 @@ const int CONTACTS_TAB = 0;
     
     [super viewDidLoad];
     
-    UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
-    [UserVoice initialize:config];
-    
     self.selectedIdentifiers = [[NSMutableArray alloc] init];
     globle = [UntechableSingleton RetrieveSingleton];
     
@@ -200,8 +197,7 @@ const int CONTACTS_TAB = 0;
     identifiers = selectedIdentifiers;
     NSLog(@"identifiers = %@,  selectedTab = %i",identifiers, selectedTab);
 
-    NSString *sharingText = @"Take a break from technology. Untech & Reconnect with life: http://www.unte.ch";
-    
+    NSString *sharingText = [NSString stringWithFormat:@"Take a break from technology. Untech & Reconnect with life: %@",untechableConfigurator.appURL];
     if([identifiers count] > 0){
         
         // Send invitations
@@ -248,7 +244,7 @@ const int CONTACTS_TAB = 0;
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",untechableConfigurator.referralURL]];
             item = [SHKItem URL:url title:@"Invite Friends" contentType:SHKURLContentTypeUndefined];
             [item setMailToRecipients:identifiers];
-            item.text = @"Take a break from technology. Untech & Reconnect with life: http://www.unte.ch";
+            item.text =  [NSString stringWithFormat:@"Take a break from technology. Untech & Reconnect with life:%@",untechableConfigurator.referralURL];
             // Share the item with my custom class
             [SHKMail shareItem:item];
         }
@@ -493,10 +489,10 @@ const int CONTACTS_TAB = 0;
     SHKItem *item;
     
     // text to be share.
-    NSString *sharingText = @"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try?";
+    NSString *sharingText = @"Take a break from technology. Untech & Reconnect with life";
     
     // app URL with user id.
-    NSString *urlToShare = @"";
+    NSString *urlToShare = untechableConfigurator.appURL;
     
     //item to be share
     item = [SHKItem URL:[NSURL URLWithString:urlToShare] title:sharingText contentType:SHKShareTypeURL];
@@ -884,7 +880,7 @@ const int CONTACTS_TAB = 0;
         
         ContactsModel *model = [self getArrayOfSelectedTab][(indexPath.row)];
         
-        NSString *sharingText = @"I'm using the Flyerly app to create and share flyers on the go!";
+        NSString *sharingText = [NSString stringWithFormat:@"Take a break from technology. Untech & Reconnect with life: %@",untechableConfigurator.appURL];
         
         //CHECK FOR ALREADY SELECTED
         if (model.status == 0) {
@@ -894,7 +890,7 @@ const int CONTACTS_TAB = 0;
             
             //Calling ShareKit for Sharing
             iosSharer = [[ SHKTwitter alloc] init];
-            NSString *tweet = [NSString stringWithFormat:@"%@ @%@ #flyerly",sharingText,model.description];
+            NSString *tweet = [NSString stringWithFormat:@"%@ @%@ #gountech",sharingText,model.description];
             SHKItem *item;
             
             item = [SHKItem text:tweet];
@@ -1021,7 +1017,7 @@ const int CONTACTS_TAB = 0;
     }
     
     
-    [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
+    [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join untech."];
     [selectedIdentifiers   removeAllObjects];
     [self.uiTableView reloadData ];
     
