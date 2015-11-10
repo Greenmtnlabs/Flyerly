@@ -66,9 +66,7 @@ const int CONTACTS_TAB = 0;
     AppDelegate *appDelegate = (AppDelegate*) [[UIApplication sharedApplication]delegate];
     untechableConfigurator = appDelegate.untechableConfigurator;
 
-
     self.navigationItem.hidesBackButton = YES;
-    //[self.view setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1]];
     
     // Register notification for facebook login
     [[NSNotificationCenter defaultCenter] removeObserver:self name:FacebookDidLoginNotification object:nil];
