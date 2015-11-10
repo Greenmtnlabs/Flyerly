@@ -22,6 +22,7 @@
 #define EMAIL_KEY @"emailAddress"
 #define PASSWORD_KEY @"emailPassword"
 
+#define TITLE_INVITE_TXT @"INVITE"
 #define TITLE_HELP_TXT @"HELP"
 #define TITLE_SKIP_TXT @"SKIP"
 #define TITLE_SAVE_TXT @"SAVE"

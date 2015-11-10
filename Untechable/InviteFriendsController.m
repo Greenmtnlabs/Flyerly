@@ -68,7 +68,7 @@ const int CONTACTS_TAB = 0;
 
 
     self.navigationItem.hidesBackButton = YES;
-    [self.view setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1]];
+    //[self.view setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1]];
     
     // Register notification for facebook login
     [[NSNotificationCenter defaultCenter] removeObserver:self name:FacebookDidLoginNotification object:nil];
@@ -81,34 +81,42 @@ const int CONTACTS_TAB = 0;
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
-    label.text = @"INVITE";
+    label.textColor = DEF_GRAY;
+    label.text = NSLocalizedString(TITLE_INVITE_TXT, nil);
     self.navigationItem.titleView = label;
     
     // Create left bar help button
-    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
-    [helpButton setImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
-    helpButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
-    
     
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"home_button"] forState:UIControlStateNormal];
-    [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-    backButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,leftBarButton,nil]];
     
+    backButton.titleLabel.shadowColor = [UIColor clearColor];
+    backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
+    [backButton setTitle:NSLocalizedString(TITLE_BACK_TXT, nil) forState:normal];
+    [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [backButton addTarget:self action:@selector(btnTouchStart:) forControlEvents:UIControlEventTouchDown];
+    [backButton addTarget:self action:@selector(btnTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
+    backButton.showsTouchWhenHighlighted = YES;
+
+    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,nil]];
     
     // INVITE BAR BUTTON
     UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-	[inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
-    [inviteButton setBackgroundImage:[UIImage imageNamed:@"invite_friend"] forState:UIControlStateNormal];
+    
+    inviteButton.titleLabel.shadowColor = [UIColor clearColor];
+    inviteButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+    [inviteButton setTitle:NSLocalizedString(TITLE_INVITE_TXT, nil) forState:normal];
+    [inviteButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
+   [inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
+    [inviteButton addTarget:self action:@selector(btnTouchStart:) forControlEvents:UIControlEventTouchDown];
+    [inviteButton addTarget:self action:@selector(btnTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
     inviteButton.showsTouchWhenHighlighted = YES;
+   
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
+    inviteButton.showsTouchWhenHighlighted = YES;
+    
     
     [self.uiTableView  setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
     [searchTextField setReturnKeyType:UIReturnKeyDone];
@@ -171,26 +179,30 @@ const int CONTACTS_TAB = 0;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    
     self.navigationItem.leftItemsSupplementBackButton = YES;
 }
-
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];    
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark  Custom Methods
+#pragma mark -  Highlighting Functions
 
--(void)loadHelpController{
-    
-    [UserVoice presentUserVoiceInterfaceForParentViewController:self];
+-(void)btnTouchStart :(id)button{
+    [self setHighlighted:YES sender:button];
 }
+-(void)btnTouchEnd :(id)button{
+    [self setHighlighted:NO sender:button];
+}
+- (void)setHighlighted:(BOOL)highlighted sender:(id)button {
+    (highlighted) ? [button setBackgroundColor:DEF_GREEN] : [button setBackgroundColor:[UIColor clearColor]];
+}
+
+#pragma mark  Custom Methods
 
 -(IBAction)goBack{
     [self.navigationController popViewControllerAnimated:YES];
@@ -821,24 +833,7 @@ const int CONTACTS_TAB = 0;
         
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InviteFriendsCell" owner:self options:nil];
         cell = (InviteFriendsCell *)[nib objectAtIndex:0];
-        
-       
-        
-//        if( IS_IPHONE_5 || IS_IPHONE_4){
-//        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InviteFriendsCell" owner:self options:nil];
-//        cell = (InviteFriendsCell *)[nib objectAtIndex:0];
-//        } else if ( IS_IPHONE_6 ){
-//            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InviteFreindsCell-iPhone6" owner:self options:nil];
-//            cell = (InviteFriendsCell *)[nib objectAtIndex:0];
-//        } else if ( IS_IPHONE_6_PLUS ) {
-//            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InviteFreindsCell-iPhone6-Plus" owner:self options:nil];
-//            cell = (InviteFriendsCell *)[nib objectAtIndex:0];
-//        } else {
-//            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InviteFriendsCell" owner:self options:nil];
-//            cell = (InviteFriendsCell *)[nib objectAtIndex:0];
-//        }
     }
-        
     
     if(!self.selectedIdentifiers){
         self.selectedIdentifiers = [[NSMutableArray alloc] init];
@@ -858,8 +853,6 @@ const int CONTACTS_TAB = 0;
     if (receivedDic.img == nil) {
         receivedDic.img =[[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"dfcontact" ofType:@"jpg"]];
     }
-    
-    
     
     //HERE WE LOAD IMAGE FROM URL FOR FACEBOOK AND TWITTER FRIENDS
     if( selectedTab == FACEBOOK_TAB || selectedTab == TWITTER_TAB ){
