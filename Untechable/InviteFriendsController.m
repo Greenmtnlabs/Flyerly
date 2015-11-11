@@ -889,7 +889,7 @@ const int CONTACTS_TAB = 0;
             [selectedIdentifiers addObject:model.description];
             
             //Calling ShareKit for Sharing
-            iosSharer = [[ SHKTwitter alloc] init];
+            iosSharer = [[ SHKiOSTwitter alloc] init];
             NSString *tweet = [NSString stringWithFormat:@"%@ @%@ #gountech",sharingText,model.description];
             SHKItem *item;
             
@@ -897,7 +897,7 @@ const int CONTACTS_TAB = 0;
             [selectedIdentifiers addObject:model.description];
             
             if ( availableAccounts.count > 0 ) {
-                iosSharer = [SHKTwitter shareItem:item];
+                iosSharer = [SHKiOSTwitter shareItem:item];
             } else {
                 iosSharer = [SHKTwitter shareItem:item];
             }
@@ -912,7 +912,6 @@ const int CONTACTS_TAB = 0;
             [selectedIdentifiers removeObject:model.description];
             
         }
-        
     }
     
     
