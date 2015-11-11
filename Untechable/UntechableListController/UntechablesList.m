@@ -16,6 +16,7 @@
 #import "RUntechable.h"
 #import "RSetUntechable.h"
 #import "UserPurchases.h"
+#import "InviteFriendsController.h"
 
 
 @interface UntechablesList () {
@@ -137,7 +138,18 @@
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
         // Right Navigation ______________________________________________
-        btnHelp = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        
+        btnInvite = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 43, 42)];
+        btnInvite.titleLabel.shadowColor = [UIColor clearColor];
+        btnInvite.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [btnInvite setTitle:NSLocalizedString(TITLE_INVITE_TXT, nil) forState:normal];
+        [btnInvite setTitleColor:DEF_GRAY forState:UIControlStateNormal];
+        [btnInvite addTarget:self action:@selector(goToInvite) forControlEvents:UIControlEventTouchUpInside];
+        [btnInvite addTarget:self action:@selector(btnTouchStart:) forControlEvents:UIControlEventTouchDown];
+        [btnInvite addTarget:self action:@selector(btnTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
+        btnInvite.showsTouchWhenHighlighted = YES;
+        
+        btnHelp = [[UIButton alloc] initWithFrame:CGRectMake(43, 0, 43, 42)];
         btnHelp.titleLabel.shadowColor = [UIColor clearColor];
         btnHelp.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [btnHelp setTitle:NSLocalizedString(TITLE_HELP_TXT, nil) forState:normal];
@@ -146,8 +158,11 @@
         [btnHelp addTarget:self action:@selector(btnTouchStart:) forControlEvents:UIControlEventTouchDown];
         [btnHelp addTarget:self action:@selector(btnTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
         btnHelp.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:btnHelp];
-        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
+        
+        
+        UIBarButtonItem *rightBarButton1 = [[UIBarButtonItem alloc] initWithCustomView:btnInvite];
+        UIBarButtonItem *rightBarButton2 = [[UIBarButtonItem alloc] initWithCustomView:btnHelp];
+        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton1,rightBarButton2,nil];
         
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
     }
@@ -161,14 +176,20 @@
     [self.navigationController pushViewController:settingsController animated:YES];
 }
 
-
+/*
+ * This method opens Invite Screen
+ */
+- (IBAction)goToInvite{
+    InviteFriendsController *inviteFriendsController = [[InviteFriendsController alloc] initWithNibName:@"InviteFriendsController" bundle:nil];
+    [self.navigationController pushViewController:inviteFriendsController animated:YES];
+}
 
 /*
  * This method sends email
  * to support team
  */
 - (IBAction)emailComposer {
-    
+  
     MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
     
     if([MFMailComposeViewController canSendMail]){

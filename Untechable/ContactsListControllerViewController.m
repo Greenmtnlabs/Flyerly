@@ -109,9 +109,8 @@
         [self.navigationItem setLeftBarButtonItem:leftBarButton];
         
         // Right Navigation
-        nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-        nextButton.titleLabel.shadowColor = [UIColor clearColor];
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 33, 42)];
+        nextButton.titleLabel.shadowColor = [UIColor clearColor];
         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
         [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
