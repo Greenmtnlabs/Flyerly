@@ -171,7 +171,7 @@ SocialStatusCron.setup = function(app) {
 		var smsBody = eventObj.userName + " is untech for " + totalDaysHours + " with this reason "; 
 
 		//Call body
-		var callBody = "You have a message from someone using untechable." + eventObj.userName + " is untech for " + totalDaysHours + " with this reason ";
+		var callBody = "You have a message from someone using untech." + eventObj.userName + " is untech for " + totalDaysHours + " with this reason ";
 
 		//Untech Text and URL 
 		var untechCallText = "Reconnect with life. Download at http://www.unte.ch."; 
@@ -320,7 +320,7 @@ SocialStatusCron.setup = function(app) {
 
 		if( customizedContactsLength > 0 && eventObj.email != "" && eventObj.password != "" ){					
 			var totalDaysHours = calculateHoursDays(eventObj.startTime, eventObj.endTime);
-			var mySubject = "I am untechable for " + totalDaysHours;
+			var mySubject = "I am untech for " + totalDaysHours;
 			var myEmail = eventObj.email;
 			var myName  = eventObj.userName;
 			var reason = eventObj.spendingTimeTxt;
