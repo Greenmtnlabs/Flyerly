@@ -37,7 +37,6 @@
 		2015F13D1BEB9907006EC4C4 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2015F13C1BEB9907006EC4C4 /* Accounts.framework */; };
 		2015F1401BEB9929006EC4C4 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2015F13E1BEB9929006EC4C4 /* AddressBook.framework */; };
 		2015F1411BEB9929006EC4C4 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2015F13F1BEB9929006EC4C4 /* AddressBookUI.framework */; };
-		202F27781BF1C2B20052C9DA /* Podspecs in Resources */ = {isa = PBXBuildFile; fileRef = 202F27771BF1C2B20052C9DA /* Podspecs */; };
 		203A2A281B7A2A29009949AA /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 203A2A251B7A2A29009949AA /* logo.png */; };
 		203A2A291B7A2A29009949AA /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 203A2A261B7A2A29009949AA /* logo@2x.png */; };
 		203A2A2A1B7A2A29009949AA /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 203A2A271B7A2A29009949AA /* logo@3x.png */; };
@@ -309,7 +308,6 @@
 		2015F13C1BEB9907006EC4C4 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		2015F13E1BEB9929006EC4C4 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		2015F13F1BEB9929006EC4C4 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
-		202F27771BF1C2B20052C9DA /* Podspecs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Podspecs; sourceTree = "<group>"; };
 		203A2A251B7A2A29009949AA /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		203A2A261B7A2A29009949AA /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		203A2A271B7A2A29009949AA /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
@@ -798,7 +796,6 @@
 		36561D5F19D2C8A40069D897 = {
 			isa = PBXGroup;
 			children = (
-				202F27771BF1C2B20052C9DA /* Podspecs */,
 				36561D7119D2C8A40069D897 /* Untechable */,
 				36B0369A19DAD2AB00E8CD21 /* images */,
 				36561D7219D2C8A40069D897 /* Supporting Files */,
@@ -1361,7 +1358,6 @@
 				248E06BD1A4AD9180099846A /* ContactListCell-iPhone6-Plus.xib in Resources */,
 				C346D17C1A7FD13B00856A58 /* emailic@3x.png in Resources */,
 				203FD2801BBD4C9000CF598B /* EmailCell.xib in Resources */,
-				202F27781BF1C2B20052C9DA /* Podspecs in Resources */,
 				366EAFAB1A14E5370011D6C6 /* playvideo@2x.png in Resources */,
 				200ACE321A3874B200DC7047 /* outlookIcon@3x.png in Resources */,
 				200ACE2A1A3874B200DC7047 /* GoogleIcon.png in Resources */,

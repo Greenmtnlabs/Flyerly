@@ -2,7 +2,7 @@ platform :ios, '7.0'
 
 link_with 'Untechable', 'UntechableTests'
 
-pod 'AFNetworking', '~> 2.5.4'
+pod 'AFNetworking', '= 2.5.3'
 pod 'uservoice-iphone-sdk', '~> 3.2.3'
 pod 'Facebook-iOS-SDK', '3.23.2'
 pod 'IOSLinkedInAPI', '2.0.0'
@@ -10,7 +10,6 @@ pod 'CrittercismSDK', '5.2.4'
 pod 'Realm', '0.93.2'
 pod 'libPhoneNumber-iOS', '~> 0.8'
 
-#pod 'ShareKit', :podspec => "Podspecs/ShareKit.podspec"
 pod 'ShareKit', '~> 4.0'
 
 pod 'Parse', '~> 1.7.3'
