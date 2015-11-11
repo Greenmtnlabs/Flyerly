@@ -179,3 +179,14 @@
 
 // EditButtonCell
 "Change Untech Now Settings" = "Cambiar Ajustes Untech ahora";
+
+// AppInvite
+"Take a break from technology. Untech & Reconnect with life: %@" = "Tome un descanso de la tecnología. Untech y reconexión con la vida: %@";
+"Invite Friends" = "Invitar a amigos";
+"Please select any contact to invite!" = "Por favor, seleccione cualquier contacto invitar!";
+"Take a break from technology. Untech & Reconnect with life." = "Tome un descanso de la tecnología. Untech y reconexión con la vida.";
+"Choose Twitter Account" = "Elija Cuenta Twitter";
+"You're not connected to the internet. Please connect and retry." = "Usted no está conectado a Internet. Por favor, conecte y vuelva a intentarlo.";
+"Saving to %@" = "Salvando a %@";
+"Invitation Sent!" = "¡Invitación enviada!";
+"You have successfully invited your friends to join untech." = "Has invitado exitosamente a tus amigos a unirse a untech.";

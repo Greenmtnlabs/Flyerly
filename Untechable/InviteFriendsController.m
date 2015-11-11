@@ -197,7 +197,7 @@ const int CONTACTS_TAB = 0;
     identifiers = selectedIdentifiers;
     NSLog(@"identifiers = %@,  selectedTab = %i",identifiers, selectedTab);
 
-    NSString *sharingText = [NSString stringWithFormat:@"Take a break from technology. Untech & Reconnect with life: %@",untechableConfigurator.appURL];
+    NSString *sharingText = [NSString stringWithFormat:NSLocalizedString(@"Take a break from technology. Untech & Reconnect with life: %@", nil),untechableConfigurator.appURL];
     if([identifiers count] > 0){
         
         // Send invitations
@@ -242,14 +242,14 @@ const int CONTACTS_TAB = 0;
         } else if (selectedTab == 3) { // for Email
             
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",untechableConfigurator.referralURL]];
-            item = [SHKItem URL:url title:@"Invite Friends" contentType:SHKURLContentTypeUndefined];
+            item = [SHKItem URL:url title: NSLocalizedString(@"Invite Friends",nil) contentType:SHKURLContentTypeUndefined];
             [item setMailToRecipients:identifiers];
-            item.text =  [NSString stringWithFormat:@"Take a break from technology. Untech & Reconnect with life:%@",untechableConfigurator.referralURL];
+            item.text =  [NSString stringWithFormat:NSLocalizedString(@"Take a break from technology. Untech & Reconnect with life: %@", nil),untechableConfigurator.referralURL];
             // Share the item with my custom class
             [SHKMail shareItem:item];
         }
     } else {
-        [self showAlert:@"Please select any contact to invite !" message:@""];
+        [self showAlert:NSLocalizedString(@"Please select any contact to invite!", nil) message:@""];
     }
     
 }
@@ -489,7 +489,7 @@ const int CONTACTS_TAB = 0;
     SHKItem *item;
     
     // text to be share.
-    NSString *sharingText = @"Take a break from technology. Untech & Reconnect with life";
+    NSString *sharingText = NSLocalizedString(@"Take a break from technology. Untech & Reconnect with life.", nil);
     
     // app URL with user id.
     NSString *urlToShare = untechableConfigurator.appURL;
@@ -608,7 +608,7 @@ const int CONTACTS_TAB = 0;
                                                    }
                                                    
                                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                                       UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"Choose Twitter Account" message:nil delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:nil];
+                                                       UIAlertView *view = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Choose Twitter Account", nil) message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel" ,nil) otherButtonTitles:nil];
                                                        
                                                        for( NSString* number in usernames )
                                                            [view addButtonWithTitle:number];
@@ -683,7 +683,7 @@ const int CONTACTS_TAB = 0;
         }
         
     }else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"You're not connected to the internet. Please connect and retry.", nil) message:@"" delegate:self cancelButtonTitle:NSLocalizedString(OK, nil) otherButtonTitles:nil, nil];
         
         [alert show];
     }
@@ -880,7 +880,7 @@ const int CONTACTS_TAB = 0;
         
         ContactsModel *model = [self getArrayOfSelectedTab][(indexPath.row)];
         
-        NSString *sharingText = [NSString stringWithFormat:@"Take a break from technology. Untech & Reconnect with life: %@",untechableConfigurator.appURL];
+        NSString *sharingText = [NSString stringWithFormat:NSLocalizedString(@"Take a break from technology. Untech & Reconnect with life: %@", nil),untechableConfigurator.appURL];
         
         //CHECK FOR ALREADY SELECTED
         if (model.status == 0) {
@@ -995,7 +995,7 @@ const int CONTACTS_TAB = 0;
 {
     
 	if (!sharer.quiet)
-		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(@"Saving to %@", [[sharer class] sharerTitle]) forSharer:sharer];
+		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(NSLocalizedString(@"Saving to %@", nil), [[sharer class] sharerTitle]) forSharer:sharer];
 }
 
 - (void)sharerFinishedSending:(SHKSharer *)sharer
@@ -1010,14 +1010,14 @@ const int CONTACTS_TAB = 0;
         [self makeTwitterArray:twitter.friendsList ];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-           [self.uiTableView reloadData]; 
+            [self.uiTableView reloadData];
         });
         
         return;
     }
     
     
-    [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join untech."];
+    [self showAlert: NSLocalizedString(@"Invitation Sent!", nil) message: NSLocalizedString(@"You have successfully invited your friends to join untech.", nil)];
     [selectedIdentifiers   removeAllObjects];
     [self.uiTableView reloadData ];
     

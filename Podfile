@@ -10,7 +10,8 @@ pod 'CrittercismSDK', '5.2.4'
 pod 'Realm', '0.93.2'
 pod 'libPhoneNumber-iOS', '~> 0.8'
 
-pod 'ShareKit', :podspec => "Podspecs/ShareKit.podspec"
+#pod 'ShareKit', :podspec => "Podspecs/ShareKit.podspec"
+pod 'ShareKit', '~> 4.0'
 
 pod 'Parse', '~> 1.7.3'
 pod 'ParseFacebookUtils', '~> 1.7.4'

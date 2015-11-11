@@ -25,7 +25,6 @@
 
 - (NSString*)appURL {
     return @"http://www.unte.ch";
-    //return @"http://www.flyer.ly";
 }
 
 - (NSString*)referralURL{
