@@ -171,7 +171,7 @@ SocialStatusCron.setup = function(app) {
 		var smsBody = eventObj.userName + " is untech for " + totalDaysHours + " with this reason "; 
 
 		//Call body
-		var callBody = "You have a message from someone using untech." + eventObj.userName + " is untech for " + totalDaysHours + " with this reason ";
+		var callBody = "You have a message from someone using untech. " + eventObj.userName + " is untech for " + totalDaysHours + " with this reason ";
 
 		//Untech Text and URL 
 		var untechCallText = "Reconnect with life. Download at http://www.unte.ch."; 
