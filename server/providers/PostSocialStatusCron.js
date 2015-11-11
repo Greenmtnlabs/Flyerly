@@ -168,11 +168,15 @@ SocialStatusCron.setup = function(app) {
 		}
 	    var totalDaysHours = calculateHoursDays(eventObj.startTime, eventObj.endTime);
 		//SMS body
-		var smsBody = "Your contact " + eventObj.userName + " is #Untechable for " + totalDaysHours + " with this reason: "; 
+		var smsBody = eventObj.userName + " is untech for " + totalDaysHours + " with this reason "; 
 
 		//Call body
-		var callBody = "Your contact " + eventObj.userName + " is untechable for " + totalDaysHours + " with this reason "; 
+		var callBody = "You have a message from someone using untechable." + eventObj.userName + " is untech for " + totalDaysHours + " with this reason ";
 
+		//Untech Text and URL 
+		var untechCallText = "Reconnect with life. Download at http://www.unte.ch."; 
+
+		var untechSMSText = "Reconnect with life at http://www.unte.ch today."; 
 
 		for (var i in contacts) {
 			var smsText =   smsBody + " " + contacts[i].customTextForContact;
@@ -189,12 +193,12 @@ SocialStatusCron.setup = function(app) {
 				var toNumber = toNumber.replace(/[^\+\d]/g,"");
 				// send sms only if the given number is mobile and sms status is 1
 				if ( smsStatus == '1' && type == "Mobile" ) {
-					doSms( smsText, toNumber, fromNumber );
+					doSms( smsText + untechSMSText, toNumber, fromNumber );
 				}
 
 				// send call if call status is 1
 				if ( callStatus == '1' ) {
-					doCall( callText, toNumber, fromNumber );
+					doCall( callText + untechCallText, toNumber, fromNumber );
 				}
 
 			} // loop phones
@@ -330,7 +334,8 @@ SocialStatusCron.setup = function(app) {
 				for(var j=0; j<emailAddresses.length; j++ ){
 					//send this user email
 					var toEmail = emailAddresses[j];
-					var body = "Hello " + toName + ", \n\n" + "Your contact " + myName + " is untechable for " + totalDaysHours + " with this reason:\n\n" + reason + "\n\nThank you,\nTeam Untechable \n\nGet the untechable app to easily manage your offline time: http://Unte.ch";
+					var body = "Hello " + toName + ", \n\n" + "Your contact " + myName + " is untech for " + totalDaysHours + " with this reason:\n\n" + reason + "\n\nThank you,\nUntech Team\n\nReconnect with life. Get the untech app to easily manage your offline time: http://unte.ch";
+
 					logger.info("Sending email to: " + toEmail);
 					var mailOptions = {
 					    from: myName+" < "+myEmail+" >", // sender address
