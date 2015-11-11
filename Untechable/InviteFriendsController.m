@@ -241,10 +241,10 @@ const int CONTACTS_TAB = 0;
             [[SHK currentHelper] showViewController:rootView];
         } else if (selectedTab == 3) { // for Email
             
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",untechableConfigurator.referralURL]];
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",untechableConfigurator.appLinkURL]];
             item = [SHKItem URL:url title: NSLocalizedString(@"Invite Friends",nil) contentType:SHKURLContentTypeUndefined];
             [item setMailToRecipients:identifiers];
-            item.text =  [NSString stringWithFormat:NSLocalizedString(@"Take a break from technology. Untech & Reconnect with life: %@", nil),untechableConfigurator.referralURL];
+            item.text =  [NSString stringWithFormat:NSLocalizedString(@"Take a break from technology. Untech & Reconnect with life: %@", nil),untechableConfigurator.appLinkURL];
             // Share the item with my custom class
             [SHKMail shareItem:item];
         }
