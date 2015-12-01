@@ -125,6 +125,7 @@
  */
 -(void)viewWillAppear:(BOOL)animated {
     [self setNavigation:@"viewDidLoad"];
+    [self hideAllControlls];
 }
 // ________________________     Custom functions    ___________________________
 #pragma mark - Text Field Delegate
