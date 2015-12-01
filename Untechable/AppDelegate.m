@@ -10,11 +10,8 @@
 #import "AppDelegate.h"
 #import "Crittercism.h"
 #import "Common.h"
-#import "UntechablesList.h"
-#import "RSetUntechable.h"
 #import "UserPurchases.h"
 #import "IntroScreenViewController.h"
-#import "SetupGuideViewController.h"
 #import "UntechableSingleton.h"
 #import "SHKConfiguration.h"
 

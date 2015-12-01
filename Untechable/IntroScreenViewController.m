@@ -12,10 +12,8 @@
 #import "Common.h"
 #import "UntechablesList.h"
 #import "RSetUntechable.h"
-#import "UserPurchases.h"
 #import "IntroScreenViewController.h"
 #import "SetupGuideViewController.h"
-#import "UntechableSingleton.h"
 
 
 @interface IntroScreenViewController ()
