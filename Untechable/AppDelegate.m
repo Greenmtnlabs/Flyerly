@@ -52,15 +52,13 @@
     Untechable *untechable  = [[Untechable alloc] initWithCommonFunctions];
     [untechable addOrUpdateInModel:UPDATE dictionary:dic];
 
+    [self setLocalizedSpendingTimeText];
+    
+    // Load Intro Screen
     UINavigationController *navigationController;
-    // Load untechLoadScreen
     IntroScreenViewController *introScreenViewController = [[IntroScreenViewController alloc] initWithNibName:@"IntroScreenViewController" bundle:nil];
     introScreenViewController.untechable = untechable;
     navigationController = [[UINavigationController alloc] initWithRootViewController:introScreenViewController];
-    
-
-    
-    [self setLocalizedSpendingTimeText];
     
     self.window.rootViewController = navigationController;
     

@@ -42,23 +42,16 @@
 
 - (IBAction)onClickNext:(id)sender {
     
-    UINavigationController *navigationController;
     RLMResults *unsortedObjects = [RSetUntechable objectsWhere:@"rUId == '1'"];
     //If we have default Untechable then go to UntechablesList screen
     if (unsortedObjects.count > 0){
         UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
-        navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
         [self.navigationController pushViewController:mainViewController animated:YES];
     } else {
         // Load SetupGuideViewController
         SetupGuideViewController *setupGuideViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
         setupGuideViewController.untechable = untechable;
-        navigationController = [[UINavigationController alloc] initWithRootViewController:setupGuideViewController];
         [self.navigationController pushViewController:setupGuideViewController animated:YES];
     }
-    
-  
-
-
 }
 @end
