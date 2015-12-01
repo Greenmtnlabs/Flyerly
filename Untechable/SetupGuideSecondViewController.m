@@ -216,7 +216,7 @@
     
     // Setting social status
     NSString *getDaysOrHours = [untechable calculateHoursDays:untechable.startDate  endTime: untechable.endDate];
-    untechable.socialStatus = [NSString stringWithFormat:NSLocalizedString(@"#untechable for %@ %@ - Reconnect with life: http://www.unte.ch", nil), getDaysOrHours,untechable.spendingTimeTxt];
+    untechable.socialStatus = [NSString stringWithFormat:NSLocalizedString(@"#untechable for selected time period - Reconnect with life: http://www.unte.ch", nil), getDaysOrHours,untechable.spendingTimeTxt];
     
     thirdSetupScreen.untechable = untechable;
     [self.navigationController pushViewController:thirdSetupScreen animated:YES];
