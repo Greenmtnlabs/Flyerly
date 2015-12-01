@@ -9,6 +9,13 @@
 #import "IntroScreenViewController.h"
 #import "SetupGuideViewController.h"
 
+#import "Common.h"
+#import "UntechablesList.h"
+#import "RSetUntechable.h"
+#import "IntroScreenViewController.h"
+#import "SetupGuideViewController.h"
+
+
 @interface IntroScreenViewController ()
 
 @end
@@ -33,9 +40,25 @@
 
 - (IBAction)onClickNext:(id)sender {
     
-    SetupGuideViewController *setupGuideViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
-    setupGuideViewController.untechable = untechable;
-    [self.navigationController pushViewController:setupGuideViewController animated:YES];
-
+    RLMResults *unsortedObjects = [RSetUntechable objectsWhere:@"rUId == '1'"];
+    
+    //If we have default Untechable then go to UntechablesList screen
+    if (unsortedObjects.count > 0){
+        UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
+        [self.navigationController pushViewController:mainViewController animated:YES];
+    } else {
+        RSetUntechable *rSetUntechable = [[RSetUntechable alloc] init];
+        [rSetUntechable setDefault];
+        rSetUntechable.rUId = @"1";
+        NSMutableDictionary *dic = [rSetUntechable getModelDic];
+    
+        untechable  = [[Untechable alloc] initWithCommonFunctions];
+        [untechable addOrUpdateInModel:UPDATE dictionary:dic];
+     
+        // Load SetupGuideViewController
+        SetupGuideViewController *setupGuideViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
+        setupGuideViewController.untechable = untechable;
+        [self.navigationController pushViewController:setupGuideViewController animated:YES];
+    }
 }
 @end

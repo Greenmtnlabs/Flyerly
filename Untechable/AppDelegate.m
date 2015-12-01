@@ -10,11 +10,8 @@
 #import "AppDelegate.h"
 #import "Crittercism.h"
 #import "Common.h"
-#import "UntechablesList.h"
-#import "RSetUntechable.h"
 #import "UserPurchases.h"
 #import "IntroScreenViewController.h"
-#import "SetupGuideViewController.h"
 #import "UntechableSingleton.h"
 #import "SHKConfiguration.h"
 
@@ -41,43 +38,13 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     
-    UINavigationController *navigationController;
-
-    RLMResults *unsortedObjects = [RSetUntechable objectsWhere:@"rUId == '1'"];
-    //If we have default Untechable then go to UntechablesList screen
-     if (unsortedObjects.count > 0){
-         UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
-         navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
-     } else {
-         RSetUntechable *rSetUntechable = [[RSetUntechable alloc] init];
-         [rSetUntechable setDefault];
-         rSetUntechable.rUId = @"1";
-         NSMutableDictionary *dic = [rSetUntechable getModelDic];
-         
-         Untechable *untechable  = [[Untechable alloc] initWithCommonFunctions];
-         [untechable addOrUpdateInModel:UPDATE dictionary:dic];
-         
-         // Determine if the user has been greeted?
-         NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
-         
-         if(greeted == nil){
-             // Load untechLoadScreen
-             IntroScreenViewController *introScreenViewController = [[IntroScreenViewController alloc] initWithNibName:@"IntroScreenViewController" bundle:nil];
-             introScreenViewController.untechable = untechable;
-             navigationController = [[UINavigationController alloc] initWithRootViewController:introScreenViewController];
-             
-         } else {
-             
-             // Load SetupGuideViewController
-             SetupGuideViewController *setupGuideViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
-             setupGuideViewController.untechable = untechable;
-             navigationController = [[UINavigationController alloc] initWithRootViewController:setupGuideViewController];
-         }
-         
-         [[NSUserDefaults standardUserDefaults] setObject:@"greeted" forKey:@"greeted"];
-     }
-    
+    // Apply localization
     [self setLocalizedSpendingTimeText];
+    
+    // Load Intro Screen
+    UINavigationController *navigationController;
+    IntroScreenViewController *introScreenViewController = [[IntroScreenViewController alloc] initWithNibName:@"IntroScreenViewController" bundle:nil];
+    navigationController = [[UINavigationController alloc] initWithRootViewController:introScreenViewController];
     
     self.window.rootViewController = navigationController;
     
