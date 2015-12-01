@@ -13,7 +13,6 @@
 #import "ContactsListControllerViewController.h"
 #import "UntechablesList.h"
 
-
 @interface AddUntechableController (){
     
     NSMutableArray *_pickerData;
@@ -127,6 +126,7 @@
     [self setNavigation:@"viewDidLoad"];
     [self hideAllControlls];
 }
+
 // ________________________     Custom functions    ___________________________
 #pragma mark - Text Field Delegate
 
@@ -180,39 +180,18 @@
         // Center title __________________________________________________
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
 
-        if ( totalUntechables > 0 ) {
-            // Back Navigation button
-            backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-            backButton.titleLabel.shadowColor = [UIColor clearColor];
-            backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-            [backButton setTitle:TITLE_BACK_TXT forState:normal];
-            [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
-            [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
-            [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-            backButton.showsTouchWhenHighlighted = YES;
-            
-            UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-            
-            [self.navigationItem setLeftBarButtonItem:leftBarButton];//Left button ___________
-        }else {
-            
-            // Setting left Navigation button "Settings"
-            settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 86, 42)];
-            settingsButton.titleLabel.shadowColor = [UIColor clearColor];
-            settingsButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-            [settingsButton setTitle:NSLocalizedString(TITLE_SETTINGS_TXT, nil) forState:normal];
-            [settingsButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
-            [settingsButton addTarget:self action:@selector(goToSettings) forControlEvents:UIControlEventTouchUpInside];
-            [settingsButton addTarget:self action:@selector(btnSettingsTouchEnd) forControlEvents:UIControlEventTouchUpInside];
-            [settingsButton addTarget:self action:@selector(btnSettingsTouchStart) forControlEvents:UIControlEventTouchDown];
-            settingsButton.showsTouchWhenHighlighted = YES;
-            
-            
-            
-            UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
-            
-            [self.navigationItem setLeftBarButtonItem:leftBarButton];//Left button ___________
-        }
+        // Back Navigation button
+        backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        backButton.titleLabel.shadowColor = [UIColor clearColor];
+        backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
+        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
+        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+        backButton.showsTouchWhenHighlighted = YES;
+        
+        UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        [self.navigationItem setLeftBarButtonItem:leftBarButton];//Left button ___________
         
         // Right Navigation ______________________________________________
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
@@ -232,13 +211,6 @@
     }
 }
 
--(IBAction)goToSettings{
-    SettingsViewController *settingsController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil];
-    untechable.rUId = @"1";
-    untechable.dic[@"rUId"] = @"1";
-    settingsController.untechable = untechable;
-    [self.navigationController pushViewController:settingsController animated:YES];
-}
 
 -(void) goBack {
     [self.navigationController popViewControllerAnimated:YES];
