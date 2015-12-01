@@ -852,6 +852,10 @@
 
 - (IBAction)untechCustomClick:(id)sender {
     AddUntechableController *addUntechable = [[AddUntechableController alloc]initWithNibName:@"AddUntechableController" bundle:nil];
+    
+    untechable.startDate = [untechable.commonFunctions convertNSDateToTimestamp: [[NSDate date] dateByAddingTimeInterval:(0)] ]; // current time
+    untechable.endDate = [untechable.commonFunctions convertNSDateToTimestamp: [[NSDate date] dateByAddingTimeInterval:(0)] ];
+    
     addUntechable.untechable = untechable;
     addUntechable.totalUntechables = (int)allUntechables.count;
     [self.navigationController pushViewController:addUntechable animated:YES];
@@ -875,8 +879,8 @@
 }
 -( void )setTimeAcToCurVars {
     
-    untechable.startDate  = [untechable.commonFunctions convertNSDateToTimestamp: [[NSDate date] dateByAddingTimeInterval:(0)] ]; // current time
-    untechable.endDate  = [untechable.commonFunctions convertNSDateToTimestamp: [[NSDate date] dateByAddingTimeInterval:(timeDuration)] ]; // start time + selected time duration
+    untechable.startDate = [untechable.commonFunctions convertNSDateToTimestamp: [[NSDate date] dateByAddingTimeInterval:(0)] ]; // current time
+    untechable.endDate = [untechable.commonFunctions convertNSDateToTimestamp: [[NSDate date] dateByAddingTimeInterval:(timeDuration)] ]; // start time + selected time duration
     
     // the selected status from the setup screen would be set as default status on unetch now option
     NSArray *customArrayOfStatuses = [[NSUserDefaults standardUserDefaults]objectForKey:@"cutomSpendingTimeTextAry"];

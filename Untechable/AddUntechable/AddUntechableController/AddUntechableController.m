@@ -476,7 +476,6 @@
     _btnStartTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
     [_btnStartTime setTitle:[untechable.commonFunctions convertTimestampToAppDate:untechable.startDate] forState:UIControlStateNormal];
     
-    
     [_btnLblEndTime setTitle:NSLocalizedString(@"End (this is when you come crawling back to technology)", nil) forState:normal];
     [_btnLblEndTime setTitleColor:DEF_GRAY forState:UIControlStateNormal];
     
@@ -494,6 +493,37 @@
     [_pickerCloseBtn setTitleColor:DEF_GRAY forState:UIControlStateNormal];
     _pickerCloseBtn.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
     
+    [self setDefaultTimeDuration];
+    
+}
+
+/*
+ * This method sets default time duration (24 hr)
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+-(void) setDefaultTimeDuration{
+    
+    NSDate *startD = [untechable.commonFunctions convertTimestampToNSDate:untechable.startDate];
+    NSDate *endD = [untechable.commonFunctions convertTimestampToNSDate:untechable.endDate];
+    
+    if( [untechable.commonFunctions isEndDateGreaterThanStartDate:endD endDate: startD] ){
+        startD = [startD dateByAddingTimeInterval:(0)];
+        endD = [startD dateByAddingTimeInterval:(60*60*24)];
+        
+        untechable.startDate = [untechable.commonFunctions convertNSDateToTimestamp:startD]; //current time
+        untechable.endDate = [untechable.commonFunctions convertNSDateToTimestamp:endD]; //current time +1 day
+        
+        NSString *startDateTime = [untechable.dateFormatter stringFromDate:startD];
+        NSString *endDateTime = [untechable.dateFormatter stringFromDate:endD];
+        
+        [_btnStartTime setTitle:startDateTime forState:UIControlStateNormal];
+        [_btnEndTime setTitle:endDateTime forState:UIControlStateNormal];
+    }
+
+
 }
 
 - (IBAction)noEndDate:(id)sender {
