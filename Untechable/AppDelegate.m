@@ -41,23 +41,12 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     
-   
-    
-    
-    RSetUntechable *rSetUntechable = [[RSetUntechable alloc] init];
-    [rSetUntechable setDefault];
-    rSetUntechable.rUId = @"1";
-    NSMutableDictionary *dic = [rSetUntechable getModelDic];
-    
-    Untechable *untechable  = [[Untechable alloc] initWithCommonFunctions];
-    [untechable addOrUpdateInModel:UPDATE dictionary:dic];
-
+    // Apply localization
     [self setLocalizedSpendingTimeText];
     
     // Load Intro Screen
     UINavigationController *navigationController;
     IntroScreenViewController *introScreenViewController = [[IntroScreenViewController alloc] initWithNibName:@"IntroScreenViewController" bundle:nil];
-    introScreenViewController.untechable = untechable;
     navigationController = [[UINavigationController alloc] initWithRootViewController:introScreenViewController];
     
     self.window.rootViewController = navigationController;
