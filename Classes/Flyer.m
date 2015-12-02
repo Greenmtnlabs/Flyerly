@@ -993,20 +993,20 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     imageDetailDictionary[@"imageTag"] = @"";
     imageDetailDictionary[@"x"] = @"5";
     imageDetailDictionary[@"y"] = @"10";
-    imageDetailDictionary[@"width"] = @"100";
-    imageDetailDictionary[@"height"] = @"80";
+    imageDetailDictionary[@"width"] = @"50";
+    imageDetailDictionary[@"height"] = @"18";
 
     if( IS_IPHONE_4 || IS_IPHONE_5 ) {
         [imageDetailDictionary setObject:@"0" forKey:@"tx"];
-        [imageDetailDictionary setObject:@"215" forKey:@"ty"];
+        [imageDetailDictionary setObject:@"282.5" forKey:@"ty"];
     }
     else if( IS_IPHONE_6 ) {
         [imageDetailDictionary setObject:@"0.0" forKey:@"tx"];
-        [imageDetailDictionary setObject:@"280.0" forKey:@"ty"];
+        [imageDetailDictionary setObject:@"337.5" forKey:@"ty"];
     }
     else if( IS_IPHONE_6_PLUS ) {
         [imageDetailDictionary setObject:@"0.0" forKey:@"tx"];
-        [imageDetailDictionary setObject:@"327.0" forKey:@"ty"];
+        [imageDetailDictionary setObject:@"376.5" forKey:@"ty"];
     }
     imageDetailDictionary[@"a"] = @"1.00";
     imageDetailDictionary[@"b"] = @"0.00";
