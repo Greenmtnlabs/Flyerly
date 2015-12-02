@@ -70,6 +70,7 @@
 
 "\"Disconnecting from technology to reconnect with ourselves is absolutely essential for wisdom.\" -Arianna Huffington" = "\"Disconnecting from technology to reconnect with ourselves is absolutely essential for wisdom.\" -Arianna Huffington";
 
+"#untechable for selected time period - Reconnect with life: http://www.unte.ch" = "#untechable for selected time period - Reconnect with life: http://www.unte.ch";
 
 // SetupGuide Screen 3
 "Search contacts to share your untech time with" = "Search contacts to share your untech time with";
@@ -113,7 +114,7 @@
 "1 Day" = "1 Day";
 "2 Days" = "2 Days";
 
-"#untech for %@ %@ - Reconnect with life: http://www.unte.ch" = "#untech for %@ %@ - Reconnect with life: http://www.unte.ch";
+"#untechable for %@ %@ - Reconnect with life: http://www.unte.ch" = "#untechable for %@ %@ - Reconnect with life: http://www.unte.ch";
 "Untechable created successfully" = "Untechable created successfully";
 "Unable to delete, please try agin later!" = "Unable to delete, please try agin later!";
 
@@ -166,7 +167,7 @@
 
 "Choose the networks you would like to inform every time you are untech. These will be pre-selected for future Untech Now moments." = "Choose the networks you would like to inform every time you are untech. These will be pre-selected for future Untech Now moments.";
 
-"The above message will be posted on %@ to the networks you have selected below." = "The above message will be posted on %@ to the networks you have selected below.";
+"The above message will be posted on %@ to the networks you have selected." = "The above message will be posted on %@ to the networks you have selected.";
 
 "Untech Tip: 'Untech Now' is for setting quick moments away from technology. 'Untech Custom' is for setting a more specific long-term period." = "Untech Tip: 'Untech Now' is for setting quick moments away from technology. 'Untech Custom' is for setting a more specific long-term period.";
 

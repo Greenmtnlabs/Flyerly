@@ -108,8 +108,16 @@
     [dateFormatter setDateFormat:@"MMM dd, yyyy, hh:mm a"];
     NSString *stringDate = [dateFormatter stringFromDate:[untechable.commonFunctions convertTimestampToNSDate:untechable.startDate]];
     
+    // Message to show to the user, if customizing untech
+    NSString *messageToShow = [NSString stringWithFormat:NSLocalizedString(@"The above message will be posted on %@ to the networks you have selected.", nil), stringDate];
+    
+    // Message to show to the user, if setting up untech
+    if([untechable.rUId isEqualToString:@"1"]){
+        messageToShow = NSLocalizedString(@"The above message will be posted at selected time and date to the networks you have selected.", nil);
+    }
+    
     // label to show message to user
-    showMsgToUser = [NSString stringWithFormat:NSLocalizedString(@"The above message will be posted on %@ to the networks you have selected below.", nil), stringDate];
+    showMsgToUser = messageToShow;
     
     // label to show tip
     lblUntechTip.text = NSLocalizedString(@"Untech Tip: 'Untech Now' is for setting quick moments away from technology. 'Untech Custom' is for setting a more specific long-term period.", nil);

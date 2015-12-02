@@ -13,7 +13,6 @@
 #import "ContactsListControllerViewController.h"
 #import "UntechablesList.h"
 
-
 @interface AddUntechableController (){
     
     NSMutableArray *_pickerData;
@@ -125,7 +124,9 @@
  */
 -(void)viewWillAppear:(BOOL)animated {
     [self setNavigation:@"viewDidLoad"];
+    [self hideAllControlls];
 }
+
 // ________________________     Custom functions    ___________________________
 #pragma mark - Text Field Delegate
 
@@ -179,39 +180,18 @@
         // Center title __________________________________________________
         self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
 
-        if ( totalUntechables > 0 ) {
-            // Back Navigation button
-            backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-            backButton.titleLabel.shadowColor = [UIColor clearColor];
-            backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-            [backButton setTitle:TITLE_BACK_TXT forState:normal];
-            [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
-            [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
-            [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-            backButton.showsTouchWhenHighlighted = YES;
-            
-            UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-            
-            [self.navigationItem setLeftBarButtonItem:leftBarButton];//Left button ___________
-        }else {
-            
-            // Setting left Navigation button "Settings"
-            settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 86, 42)];
-            settingsButton.titleLabel.shadowColor = [UIColor clearColor];
-            settingsButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-            [settingsButton setTitle:NSLocalizedString(TITLE_SETTINGS_TXT, nil) forState:normal];
-            [settingsButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
-            [settingsButton addTarget:self action:@selector(goToSettings) forControlEvents:UIControlEventTouchUpInside];
-            [settingsButton addTarget:self action:@selector(btnSettingsTouchEnd) forControlEvents:UIControlEventTouchUpInside];
-            [settingsButton addTarget:self action:@selector(btnSettingsTouchStart) forControlEvents:UIControlEventTouchDown];
-            settingsButton.showsTouchWhenHighlighted = YES;
-            
-            
-            
-            UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
-            
-            [self.navigationItem setLeftBarButtonItem:leftBarButton];//Left button ___________
-        }
+        // Back Navigation button
+        backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        backButton.titleLabel.shadowColor = [UIColor clearColor];
+        backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
+        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
+        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+        backButton.showsTouchWhenHighlighted = YES;
+        
+        UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        [self.navigationItem setLeftBarButtonItem:leftBarButton];//Left button ___________
         
         // Right Navigation ______________________________________________
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
@@ -231,13 +211,6 @@
     }
 }
 
--(IBAction)goToSettings{
-    SettingsViewController *settingsController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil];
-    untechable.rUId = @"1";
-    untechable.dic[@"rUId"] = @"1";
-    settingsController.untechable = untechable;
-    [self.navigationController pushViewController:settingsController animated:YES];
-}
 
 -(void) goBack {
     [self.navigationController popViewControllerAnimated:YES];
@@ -290,7 +263,7 @@
         
         if( goToNext ) {
             NSString *getDaysOrHours = [untechable calculateHoursDays:untechable.startDate  endTime: untechable.endDate];
-            untechable.socialStatus = [NSString stringWithFormat:NSLocalizedString(@"#untech for %@ %@ - Reconnect with life: http://www.unte.ch", nil), getDaysOrHours,untechable.spendingTimeTxt];
+            untechable.socialStatus = [NSString stringWithFormat:NSLocalizedString(@"#untechable for %@ %@ - Reconnect with life: http://www.unte.ch", nil), getDaysOrHours,untechable.spendingTimeTxt];
             ContactsListControllerViewController *listController = [[ContactsListControllerViewController alloc] initWithNibName:@"ContactsListControllerViewController" bundle:nil];
             listController.untechable = untechable;
             [self.navigationController pushViewController:listController animated:YES];
@@ -503,7 +476,6 @@
     _btnStartTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
     [_btnStartTime setTitle:[untechable.commonFunctions convertTimestampToAppDate:untechable.startDate] forState:UIControlStateNormal];
     
-    
     [_btnLblEndTime setTitle:NSLocalizedString(@"End (this is when you come crawling back to technology)", nil) forState:normal];
     [_btnLblEndTime setTitleColor:DEF_GRAY forState:UIControlStateNormal];
     
@@ -521,6 +493,37 @@
     [_pickerCloseBtn setTitleColor:DEF_GRAY forState:UIControlStateNormal];
     _pickerCloseBtn.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
     
+    [self setDefaultTimeDuration];
+    
+}
+
+/*
+ * This method sets default time duration (24 hr)
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+-(void) setDefaultTimeDuration{
+    
+    NSDate *startD = [untechable.commonFunctions convertTimestampToNSDate:untechable.startDate];
+    NSDate *endD = [untechable.commonFunctions convertTimestampToNSDate:untechable.endDate];
+    
+    if( [untechable.commonFunctions isEndDateGreaterThanStartDate:endD endDate: startD] ){
+        startD = [startD dateByAddingTimeInterval:(0)];
+        endD = [startD dateByAddingTimeInterval:(60*60*24)];
+        
+        untechable.startDate = [untechable.commonFunctions convertNSDateToTimestamp:startD]; //current time
+        untechable.endDate = [untechable.commonFunctions convertNSDateToTimestamp:endD]; //current time +1 day
+        
+        NSString *startDateTime = [untechable.dateFormatter stringFromDate:startD];
+        NSString *endDateTime = [untechable.dateFormatter stringFromDate:endD];
+        
+        [_btnStartTime setTitle:startDateTime forState:UIControlStateNormal];
+        [_btnEndTime setTitle:endDateTime forState:UIControlStateNormal];
+    }
+
+
 }
 
 - (IBAction)noEndDate:(id)sender {
