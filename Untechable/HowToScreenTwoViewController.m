@@ -7,12 +7,16 @@
 //
 
 #import "HowToScreenTwoViewController.h"
+#import "HowToScreenThreeViewController.h"
+
 
 @interface HowToScreenTwoViewController ()
 
 @end
 
 @implementation HowToScreenTwoViewController
+
+@synthesize  untechable;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,14 +28,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)onClickNext:(id)sender {
+    
+    HowToScreenThreeViewController *howToScreenThreeViewController = [[HowToScreenThreeViewController alloc] initWithNibName:@"HowToScreenThreeViewController" bundle:nil];
+    howToScreenThreeViewController.untechable = untechable;
+    [self.navigationController pushViewController:howToScreenThreeViewController animated:YES];
+    
 }
-*/
-
 @end

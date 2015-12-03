@@ -7,12 +7,15 @@
 //
 
 #import "HowToScreenThreeViewController.h"
+#import "SetupGuideViewController.h"
 
 @interface HowToScreenThreeViewController ()
 
 @end
 
 @implementation HowToScreenThreeViewController
+
+@synthesize untechable;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,14 +27,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+- (IBAction)onClickDone:(id)sender {
+    
+    // Load SetupGuideViewController
+    SetupGuideViewController *setupGuideViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
+    setupGuideViewController.untechable = untechable;
+    [self.navigationController pushViewController:setupGuideViewController animated:YES];
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
 }
-*/
-
 @end

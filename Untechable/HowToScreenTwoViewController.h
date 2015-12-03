@@ -13,5 +13,7 @@
 
 @property (nonatomic,strong)  Untechable *untechable;
 
+- (IBAction)onClickNext:(id)sender;
+
 
 @end

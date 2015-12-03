@@ -62,7 +62,7 @@
     [self.audioPlayer prepareToPlay];
     [self.audioPlayer play];
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:0
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                   target:self
                                                 selector:@selector(updateTime)
                                                 userInfo:nil
@@ -85,6 +85,15 @@
     if(seconds == 0){
         
         self.audioPlayer = nil;
+        
+        HowToScreenOneViewController *howToScreenOneViewController = [[HowToScreenOneViewController alloc] initWithNibName:@"HowToScreenOneViewController" bundle:nil];
+        howToScreenOneViewController.untechable = untechable;
+        [self.navigationController pushViewController:howToScreenOneViewController animated:YES];
+        
+        return;
+
+        
+        
         RLMResults *unsortedObjects = [RSetUntechable objectsWhere:@"rUId == '1'"];
         
         //If we have default Untechable then go to UntechablesList screen
@@ -100,10 +109,22 @@
             untechable  = [[Untechable alloc] initWithCommonFunctions];
             [untechable addOrUpdateInModel:UPDATE dictionary:dic];
             
-            // Load SetupGuideViewController
-            SetupGuideViewController *setupGuideViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
-            setupGuideViewController.untechable = untechable;
-            [self.navigationController pushViewController:setupGuideViewController animated:YES];
+            // Determine if the user has been greeted?
+            NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
+            
+            if(greeted == nil){
+                // Load untechLoadScreen
+                HowToScreenOneViewController *howToScreenOneViewController = [[HowToScreenOneViewController alloc] initWithNibName:@"HowToScreenOneViewController" bundle:nil];
+                howToScreenOneViewController.untechable = untechable;
+               [self.navigationController pushViewController:howToScreenOneViewController animated:YES];
+            } else {
+                // Load SetupGuideViewController
+                SetupGuideViewController *setupGuideViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
+                setupGuideViewController.untechable = untechable;
+                [self.navigationController pushViewController:setupGuideViewController animated:YES];
+            }
+            
+            [[NSUserDefaults standardUserDefaults] setObject:@"greeted" forKey:@"greeted"];
         }
     }
 }
