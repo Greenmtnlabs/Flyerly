@@ -26,6 +26,14 @@
 		200ACE341A3874B200DC7047 /* YahooIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE221A3874B200DC7047 /* YahooIcon@2x.png */; };
 		200ACE351A3874B200DC7047 /* YahooIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200ACE231A3874B200DC7047 /* YahooIcon@3x.png */; };
 		200DB74B1C1048F40065036A /* untech.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 200DB74A1C1048F40065036A /* untech.mp3 */; };
+		200DB7521C1080A60065036A /* HowToScreenOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 200DB7501C1080A60065036A /* HowToScreenOneViewController.m */; };
+		200DB7531C1080A60065036A /* HowToScreenOneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 200DB7511C1080A60065036A /* HowToScreenOneViewController.xib */; };
+		200DB7561C1081D50065036A /* howToScreen_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200DB7551C1081D50065036A /* howToScreen_1@2x.png */; };
+		200DB75C1C1081E30065036A /* howToScreen_1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200DB7571C1081E30065036A /* howToScreen_1@3x.png */; };
+		200DB75D1C1081E30065036A /* howToScreen_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200DB7581C1081E30065036A /* howToScreen_2@2x.png */; };
+		200DB75E1C1081E30065036A /* howToScreen_2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200DB7591C1081E30065036A /* howToScreen_2@3x.png */; };
+		200DB75F1C1081E30065036A /* howToScreen_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200DB75A1C1081E30065036A /* howToScreen_3@2x.png */; };
+		200DB7601C1081E30065036A /* howToScreen_3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200DB75B1C1081E30065036A /* howToScreen_3@3x.png */; };
 		2015F1231BEB7077006EC4C4 /* InviteFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2015F1211BEB7077006EC4C4 /* InviteFriendsController.m */; };
 		2015F1241BEB7077006EC4C4 /* InviteFriendsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2015F1221BEB7077006EC4C4 /* InviteFriendsController.xib */; };
 		2015F12A1BEB711F006EC4C4 /* InviteFreindsCell-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2015F1251BEB711F006EC4C4 /* InviteFreindsCell-iPhone6-Plus.xib */; };
@@ -292,6 +300,15 @@
 		200ACE221A3874B200DC7047 /* YahooIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YahooIcon@2x.png"; sourceTree = "<group>"; };
 		200ACE231A3874B200DC7047 /* YahooIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YahooIcon@3x.png"; sourceTree = "<group>"; };
 		200DB74A1C1048F40065036A /* untech.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = untech.mp3; sourceTree = "<group>"; };
+		200DB74F1C1080A60065036A /* HowToScreenOneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HowToScreenOneViewController.h; sourceTree = "<group>"; };
+		200DB7501C1080A60065036A /* HowToScreenOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HowToScreenOneViewController.m; sourceTree = "<group>"; };
+		200DB7511C1080A60065036A /* HowToScreenOneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HowToScreenOneViewController.xib; sourceTree = "<group>"; };
+		200DB7551C1081D50065036A /* howToScreen_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "howToScreen_1@2x.png"; sourceTree = "<group>"; };
+		200DB7571C1081E30065036A /* howToScreen_1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "howToScreen_1@3x.png"; sourceTree = "<group>"; };
+		200DB7581C1081E30065036A /* howToScreen_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "howToScreen_2@2x.png"; sourceTree = "<group>"; };
+		200DB7591C1081E30065036A /* howToScreen_2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "howToScreen_2@3x.png"; sourceTree = "<group>"; };
+		200DB75A1C1081E30065036A /* howToScreen_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "howToScreen_3@2x.png"; sourceTree = "<group>"; };
+		200DB75B1C1081E30065036A /* howToScreen_3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "howToScreen_3@3x.png"; sourceTree = "<group>"; };
 		2015F1201BEB7077006EC4C4 /* InviteFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendsController.h; sourceTree = "<group>"; };
 		2015F1211BEB7077006EC4C4 /* InviteFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsController.m; sourceTree = "<group>"; };
 		2015F1221BEB7077006EC4C4 /* InviteFriendsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendsController.xib; sourceTree = "<group>"; };
@@ -629,6 +646,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		200DB74E1C1080380065036A /* HowToScreens */ = {
+			isa = PBXGroup;
+			children = (
+				200DB74F1C1080A60065036A /* HowToScreenOneViewController.h */,
+				200DB7501C1080A60065036A /* HowToScreenOneViewController.m */,
+				200DB7511C1080A60065036A /* HowToScreenOneViewController.xib */,
+			);
+			name = HowToScreens;
+			sourceTree = "<group>";
+		};
 		2015F11F1BEB6DFF006EC4C4 /* AppInvite */ = {
 			isa = PBXGroup;
 			children = (
@@ -676,6 +703,7 @@
 		20BD851F1BE26AC600F7EB9E /* IntroScreen */ = {
 			isa = PBXGroup;
 			children = (
+				200DB74E1C1080380065036A /* HowToScreens */,
 				20BD85201BE26B1200F7EB9E /* IntroScreenViewController.h */,
 				20BD85211BE26B1200F7EB9E /* IntroScreenViewController.m */,
 				20BD85221BE26B1200F7EB9E /* IntroScreenViewController.xib */,
@@ -1008,6 +1036,12 @@
 		36B0369A19DAD2AB00E8CD21 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				200DB7571C1081E30065036A /* howToScreen_1@3x.png */,
+				200DB7581C1081E30065036A /* howToScreen_2@2x.png */,
+				200DB7591C1081E30065036A /* howToScreen_2@3x.png */,
+				200DB75A1C1081E30065036A /* howToScreen_3@2x.png */,
+				200DB75B1C1081E30065036A /* howToScreen_3@3x.png */,
+				200DB7551C1081D50065036A /* howToScreen_1@2x.png */,
 				209994891BF1EB3300E20068 /* invite_sms_selected@2x.png */,
 				2099948A1BF1EB3300E20068 /* invite_sms_selected@3x.png */,
 				2099948B1BF1EB3300E20068 /* invite_sms@2x.png */,
@@ -1332,6 +1366,7 @@
 				36B2767D1A0124E800ED58AD /* searchicon@2x.png in Resources */,
 				36B276711A0124E800ED58AD /* pause.png in Resources */,
 				243C59FA1A4D984B0020350C /* PhoneNumberCell.xib in Resources */,
+				200DB75C1C1081E30065036A /* howToScreen_1@3x.png in Resources */,
 				244834371A5D76F800E6F173 /* email@3x.png in Resources */,
 				366EAF9C1A14C3530011D6C6 /* icon.png in Resources */,
 				C346D1871A7FD13B00856A58 /* linkedin@3x.png in Resources */,
@@ -1345,10 +1380,12 @@
 				2499521E1A56F260001AEB84 /* phone.png in Resources */,
 				36B276791A0124E800ED58AD /* record.png in Resources */,
 				366EAF961A14C3530011D6C6 /* icon-72.png in Resources */,
+				200DB75F1C1081E30065036A /* howToScreen_3@2x.png in Resources */,
 				36B4E53F1A28BBD400CC18B0 /* EmailTableViewCell.xib in Resources */,
 				36B2767A1A0124E800ED58AD /* record@2x.png in Resources */,
 				24354D6C1A499EC5000EC781 /* ContactsListControllerViewController.xib in Resources */,
 				36B2765F1A0124E800ED58AD /* CHECKBOX_FILLED@2x.png in Resources */,
+				200DB7531C1080A60065036A /* HowToScreenOneViewController.xib in Resources */,
 				24A4B7A81A5126410029C8DF /* CustomTextTableViewCell.xib in Resources */,
 				247C72D51A5C0968005C9693 /* user_img@3x.png in Resources */,
 				209994841BF1CDD800E20068 /* invite_facebook_selected@3x.png in Resources */,
@@ -1371,6 +1408,7 @@
 				209994921BF1EB3300E20068 /* invite_sms_selected@3x.png in Resources */,
 				249952161A56C8A1001AEB84 /* Cliparts.plist in Resources */,
 				C36D2E591A7919C2000537C5 /* SettingsCellView.xib in Resources */,
+				200DB7601C1081E30065036A /* howToScreen_3@3x.png in Resources */,
 				20CF6FCD1BECADA70048C42F /* checkgray@2x.png in Resources */,
 				36B276761A0124E800ED58AD /* play@2x.png in Resources */,
 				2402BB841A1DBF6A00255A73 /* UntechablesList.xib in Resources */,
@@ -1395,6 +1433,7 @@
 				C346D1791A7FD13B00856A58 /* login@3x.png in Resources */,
 				366EAF9D1A14C3530011D6C6 /* icon@1024.png in Resources */,
 				36B2767C1A0124E800ED58AD /* right_arrow@2x.png in Resources */,
+				200DB75D1C1081E30065036A /* howToScreen_2@2x.png in Resources */,
 				200ACE331A3874B200DC7047 /* YahooIcon.png in Resources */,
 				36474F2519D9780100084F34 /* Pigiarniq Light.ttf in Resources */,
 				366EAFA21A14C3530011D6C6 /* Default-Portrait-736h@3x.png in Resources */,
@@ -1500,7 +1539,9 @@
 				2015F1241BEB7077006EC4C4 /* InviteFriendsController.xib in Resources */,
 				366EAF9E1A14C3530011D6C6 /* icon@2x.png in Resources */,
 				2486CBB21A5A7B1000AC125E /* phone@2x.png in Resources */,
+				200DB75E1C1081E30065036A /* howToScreen_2@3x.png in Resources */,
 				2015F12D1BEB711F006EC4C4 /* InviteFriendsCell.xib in Resources */,
+				200DB7561C1081D50065036A /* howToScreen_1@2x.png in Resources */,
 				2465A60F1B4BE1C400B3E22C /* navigation3.png in Resources */,
 				C33C1EF51A727A7B0064DBE8 /* SSLCell-iPhone6-Plus.xib in Resources */,
 				200ACE351A3874B200DC7047 /* YahooIcon@3x.png in Resources */,
@@ -1592,6 +1633,7 @@
 				24848FE71A30403600BF1138 /* ServerAccountDetailsViewCell.m in Sources */,
 				C36D2E581A7919C2000537C5 /* SettingsCellView.m in Sources */,
 				24A0EA6D1B42522C0008081A /* SetupGuideFourthView.m in Sources */,
+				200DB7521C1080A60065036A /* HowToScreenOneViewController.m in Sources */,
 				2015F1391BEB85CA006EC4C4 /* UntechableSingleton.m in Sources */,
 				C3DC2E211B8C77070091CCF4 /* RMAppReceipt.m in Sources */,
 				2015F1321BEB7308006EC4C4 /* ContactsModel.m in Sources */,
