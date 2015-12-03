@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Untechable.h"
 
 @interface HowToScreenThreeViewController : UIViewController
+
+@property (nonatomic,strong)  Untechable *untechable;
 
 @end

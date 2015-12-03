@@ -15,6 +15,8 @@
 #import "IntroScreenViewController.h"
 #import "SetupGuideViewController.h"
 
+#import "HowToScreenOneViewController.h"
+
 
 @interface IntroScreenViewController ()
 

@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Untechable.h"
 
 @interface HowToScreenTwoViewController : UIViewController
+
+@property (nonatomic,strong)  Untechable *untechable;
+
 
 @end
