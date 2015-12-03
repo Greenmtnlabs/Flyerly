@@ -153,7 +153,6 @@ UIAlertView *saveCurrentFlyerAlert;
  */
 -(void)shareOnInstagram{
     
-
     if ([self.flyer isVideoFlyer]) {
         NSURL *instagramURL = [NSURL URLWithString:@"instagram://app"];
         if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
@@ -161,7 +160,6 @@ UIAlertView *saveCurrentFlyerAlert;
         }
         return;
     }
-    
     
     CGRect rect = CGRectMake(0 ,0 , 0, 0);
     UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, self.view.opaque, 0.0);
@@ -178,7 +176,6 @@ UIAlertView *saveCurrentFlyerAlert;
     
     self.dicController=[UIDocumentInteractionController interactionControllerWithURL:igImageHookFile];
     self.dicController.UTI = @"com.instagram.photo";
-    self.dicController.annotation = @{@"InstagramCaption": [NSString stringWithFormat:@"%@ #flyerly", descriptionView.text]};
     
     BOOL displayed = [self.dicController presentOpenInMenuFromRect:rect inView: self.view animated:YES];
     
@@ -189,7 +186,6 @@ UIAlertView *saveCurrentFlyerAlert;
         // Update Flyer Share Info in Social File
         [self.flyer setInstagaramStatus:1];
         [Flurry logEvent:@"Shared Instagram"];
-
     }
 }
 
