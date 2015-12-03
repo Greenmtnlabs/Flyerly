@@ -23,13 +23,18 @@
 @implementation IntroScreenViewController
 
 @synthesize untechable;
+@synthesize audioPlayer, timer;
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self.navigationController setNavigationBarHidden:YES]; 
+    [self.navigationController setNavigationBarHidden:YES];
+    
+    // Plays playback sound
+    [self startPlayback];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,28 +42,70 @@
     // Dispose of any resources that can be recreated.
 }
 
+/*
+ * This method plays sound
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+-(void)startPlayback{
+    
+    NSBundle *mainBundle = [NSBundle mainBundle];
+    NSString *filePath = [mainBundle pathForResource:@"untech" ofType:@"mp3"];
+    NSData *fileData = [NSData dataWithContentsOfFile:filePath];
+    NSError *error = nil;
+    
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithData:fileData error:&error];
+    [self.audioPlayer prepareToPlay];
+    [self.audioPlayer play];
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0
+                                                  target:self
+                                                selector:@selector(updateTime)
+                                                userInfo:nil
+                                                 repeats:NO];
+}
 
-- (IBAction)onClickNext:(id)sender {
+/*
+ * This method updates time
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+- (void)updateTime {
+    NSTimeInterval currentTime = self.audioPlayer.currentTime;
     
-    RLMResults *unsortedObjects = [RSetUntechable objectsWhere:@"rUId == '1'"];
+    NSInteger minutes = floor(currentTime/60);
+    NSInteger seconds = trunc(currentTime - minutes * 60);
     
-    //If we have default Untechable then go to UntechablesList screen
-    if (unsortedObjects.count > 0){
-        UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
-        [self.navigationController pushViewController:mainViewController animated:YES];
-    } else {
-        RSetUntechable *rSetUntechable = [[RSetUntechable alloc] init];
-        [rSetUntechable setDefault];
-        rSetUntechable.rUId = @"1";
-        NSMutableDictionary *dic = [rSetUntechable getModelDic];
-    
-        untechable  = [[Untechable alloc] initWithCommonFunctions];
-        [untechable addOrUpdateInModel:UPDATE dictionary:dic];
-     
-        // Load SetupGuideViewController
-        SetupGuideViewController *setupGuideViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
-        setupGuideViewController.untechable = untechable;
-        [self.navigationController pushViewController:setupGuideViewController animated:YES];
+    if(seconds == 0){
+        
+        self.audioPlayer = nil;
+        RLMResults *unsortedObjects = [RSetUntechable objectsWhere:@"rUId == '1'"];
+        
+        //If we have default Untechable then go to UntechablesList screen
+        if (unsortedObjects.count > 0){
+            UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
+            [self.navigationController pushViewController:mainViewController animated:YES];
+        } else {
+            RSetUntechable *rSetUntechable = [[RSetUntechable alloc] init];
+            [rSetUntechable setDefault];
+            rSetUntechable.rUId = @"1";
+            NSMutableDictionary *dic = [rSetUntechable getModelDic];
+            
+            untechable  = [[Untechable alloc] initWithCommonFunctions];
+            [untechable addOrUpdateInModel:UPDATE dictionary:dic];
+            
+            // Load SetupGuideViewController
+            SetupGuideViewController *setupGuideViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
+            setupGuideViewController.untechable = untechable;
+            [self.navigationController pushViewController:setupGuideViewController animated:YES];
+        }
     }
 }
+
+
+
 @end
