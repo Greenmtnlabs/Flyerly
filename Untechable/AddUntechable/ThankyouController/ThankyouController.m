@@ -77,6 +77,10 @@
 #pragma mark -  UI functions
 -(void)updateUI
 {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MMM dd, yyyy, hh:mm a"];
+
+    
     [btnEnjoyLife setTitle: NSLocalizedString(@"Enjoy Life", nil) forState: UIControlStateNormal];
     [btnInviteOthers setTitle: NSLocalizedString(@"Invite Others", nil) forState: UIControlStateNormal];
     
@@ -84,10 +88,9 @@
     [_lblStartsFrom setTextColor:DEF_GRAY];
     _lblStartsFrom.font = [UIFont fontWithName:APP_FONT size:20];
     
-    
     [_lblStartDateTime setTextColor:DEF_GREEN];
     _lblStartDateTime.font = [UIFont fontWithName:APP_FONT size:20];
-    _lblStartDateTime.text = [untechable.commonFunctions convertTimestampToAppDate:untechable.startDate];
+    _lblStartDateTime.text = [dateFormatter stringFromDate:[untechable.commonFunctions convertTimestampToNSDate:untechable.startDate]];
     
     
     [_lblEnd setText:NSLocalizedString(@"To", nil)];
@@ -97,7 +100,7 @@
     
     [_lblEndDateTime setTextColor:DEF_GREEN];
     _lblEndDateTime.font = [UIFont fontWithName:APP_FONT size:20];
-    _lblEndDateTime.text = [untechable.commonFunctions convertTimestampToAppDate:untechable.endDate];
+    _lblEndDateTime.text = [dateFormatter stringFromDate:[untechable.commonFunctions convertTimestampToNSDate:untechable.endDate]];
     
     [_lblForwadingNumber setTextColor:DEF_GRAY];
     _lblForwadingNumber.font = [UIFont fontWithName:APP_FONT size:20];
