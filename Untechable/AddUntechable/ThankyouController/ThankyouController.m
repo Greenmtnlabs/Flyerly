@@ -11,6 +11,8 @@
 #import "Common.h"
 #import "SettingsViewController.h"
 #import "HowToScreenThreeViewController.h"
+#import "UntechablesList.h"
+#import "InviteFriendsController.h"
 
 @interface ThankyouController ()
 
@@ -25,6 +27,7 @@
 @implementation ThankyouController
 
 @synthesize untechable;
+@synthesize btnEnjoyLife, btnInviteOthers;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -70,17 +73,24 @@
 }
 
 
+
 #pragma mark -  UI functions
 -(void)updateUI
 {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MMM dd, yyyy, hh:mm a"];
+
+    
+    [btnEnjoyLife setTitle: NSLocalizedString(@"Enjoy Life", nil) forState: UIControlStateNormal];
+    [btnInviteOthers setTitle: NSLocalizedString(@"Invite Others", nil) forState: UIControlStateNormal];
+    
     [_lblStartsFrom setText:NSLocalizedString(@"You will be untechable from", nil)];
     [_lblStartsFrom setTextColor:DEF_GRAY];
     _lblStartsFrom.font = [UIFont fontWithName:APP_FONT size:20];
     
-    
     [_lblStartDateTime setTextColor:DEF_GREEN];
     _lblStartDateTime.font = [UIFont fontWithName:APP_FONT size:20];
-    _lblStartDateTime.text = [untechable.commonFunctions convertTimestampToAppDate:untechable.startDate];
+    _lblStartDateTime.text = [dateFormatter stringFromDate:[untechable.commonFunctions convertTimestampToNSDate:untechable.startDate]];
     
     
     [_lblEnd setText:NSLocalizedString(@"To", nil)];
@@ -90,7 +100,7 @@
     
     [_lblEndDateTime setTextColor:DEF_GREEN];
     _lblEndDateTime.font = [UIFont fontWithName:APP_FONT size:20];
-    _lblEndDateTime.text = [untechable.commonFunctions convertTimestampToAppDate:untechable.endDate];
+    _lblEndDateTime.text = [dateFormatter stringFromDate:[untechable.commonFunctions convertTimestampToNSDate:untechable.endDate]];
     
     [_lblForwadingNumber setTextColor:DEF_GRAY];
     _lblForwadingNumber.font = [UIFont fontWithName:APP_FONT size:20];
@@ -166,4 +176,15 @@
 }
 
 
+- (IBAction)onClickInviteOthers:(id)sender {
+    //Load Invite Screen
+    InviteFriendsController *inviteFriendsController = [[InviteFriendsController alloc] initWithNibName:@"InviteFriendsController" bundle:nil];
+    [self.navigationController pushViewController:inviteFriendsController animated:YES];
+}
+
+- (IBAction)onClickEnjoyLife:(id)sender {
+    // Load Home Screen
+    UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
+    [self.navigationController pushViewController:mainViewController animated:YES];
+}
 @end
