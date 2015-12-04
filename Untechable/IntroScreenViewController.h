@@ -9,10 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "Untechable.h"
 
-@interface IntroScreenViewController : UIViewController{
+#import <AVFoundation/AVFoundation.h>
+
+@interface IntroScreenViewController : UIViewController <AVAudioPlayerDelegate>{
+      
 }
 
 @property (nonatomic,strong)  Untechable *untechable;
-- (IBAction)onClickNext:(id)sender;
+
+@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
+@property (nonatomic, strong) NSTimer *timer;
+
+
 
 @end
