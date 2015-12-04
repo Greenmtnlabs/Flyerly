@@ -17,4 +17,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnDone;
 @property (strong, nonatomic) IBOutlet UILabel *lblMessage;
 
+@property (nonatomic, assign) BOOL isComingFromThankYou;
+@property (strong, nonatomic) IBOutlet UIPageControl *pageView;
 @end

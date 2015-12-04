@@ -8,6 +8,7 @@
 
 #import "HowToScreenThreeViewController.h"
 #import "SetupGuideViewController.h"
+#import "UntechablesList.h"
 
 @interface HowToScreenThreeViewController ()
 
@@ -16,11 +17,17 @@
 @implementation HowToScreenThreeViewController
 
 @synthesize untechable;
-@synthesize lblMessage;
+@synthesize lblMessage, isComingFromThankYou, pageView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    [self.navigationController setNavigationBarHidden:YES];
+    
+    if(isComingFromThankYou){
+        self.pageView.hidden = YES;
+    }
     
     // to apply localization
     [self applyLocalization];
@@ -44,10 +51,13 @@
 
 - (IBAction)onClickDone:(id)sender {
     
-    // Load SetupGuideViewController
-    SetupGuideViewController *setupGuideViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
-    setupGuideViewController.untechable = untechable;
-    [self.navigationController pushViewController:setupGuideViewController animated:YES];
-
+    if(isComingFromThankYou){ // If coming from ThankYou Screen, load UntechablesList
+        UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
+        [self.navigationController pushViewController:mainViewController animated:YES];
+    }else{ // otherwise, load SetupGuideViewController
+        SetupGuideViewController *setupGuideViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
+        setupGuideViewController.untechable = untechable;
+        [self.navigationController pushViewController:setupGuideViewController animated:YES];
+    }
 }
 @end
