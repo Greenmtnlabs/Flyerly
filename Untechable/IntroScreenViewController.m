@@ -80,30 +80,26 @@
     
     [NSThread sleepForTimeInterval:2];
 
-    HowToScreenOneViewController *howToScreenOneViewController = [[HowToScreenOneViewController alloc] initWithNibName:@"HowToScreenOneViewController" bundle:nil];
-        howToScreenOneViewController.untechable = untechable;
-        [self.navigationController pushViewController:howToScreenOneViewController animated:YES];
-        
-        return;
+    RLMResults *unsortedObjects = [RSetUntechable objectsWhere:@"rUId == '1'"];
     
-        RLMResults *unsortedObjects = [RSetUntechable objectsWhere:@"rUId == '1'"];
+    //If we have default Untechable then go to UntechablesList screen
+    if (unsortedObjects.count > 0){
+        UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
+        [self.navigationController pushViewController:mainViewController animated:YES];
+    } else {
+       
+        RSetUntechable *rSetUntechable = [[RSetUntechable alloc] init];
+        [rSetUntechable setDefault];
+        rSetUntechable.rUId = @"1";
+        NSMutableDictionary *dic = [rSetUntechable getModelDic];
+    
+        untechable  = [[Untechable alloc] initWithCommonFunctions];
+        [untechable addOrUpdateInModel:UPDATE dictionary:dic];
+            
         
-        //If we have default Untechable then go to UntechablesList screen
-        if (unsortedObjects.count > 0){
-            UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
-            [self.navigationController pushViewController:mainViewController animated:YES];
-        } else {
-            RSetUntechable *rSetUntechable = [[RSetUntechable alloc] init];
-            [rSetUntechable setDefault];
-            rSetUntechable.rUId = @"1";
-            NSMutableDictionary *dic = [rSetUntechable getModelDic];
-            
-            untechable  = [[Untechable alloc] initWithCommonFunctions];
-            [untechable addOrUpdateInModel:UPDATE dictionary:dic];
-            
-            // Determine if the user has been greeted?
-            NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
-            
+        // Determine if the user has been greeted?
+        NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
+        
             if(greeted == nil){
                 // Load untechLoadScreen
                 HowToScreenOneViewController *howToScreenOneViewController = [[HowToScreenOneViewController alloc] initWithNibName:@"HowToScreenOneViewController" bundle:nil];
