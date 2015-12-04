@@ -74,6 +74,7 @@
 		209994971BF1EB3300E20068 /* invite_twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2099948F1BF1EB3300E20068 /* invite_twitter@2x.png */; };
 		209994981BF1EB3300E20068 /* invite_twitter@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 209994901BF1EB3300E20068 /* invite_twitter@3x.png */; };
 		20ABF6B71BE34556008EB04A /* untechLoadScreen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 20ABF6B61BE34556008EB04A /* untechLoadScreen.jpg */; };
+		20B790921C11756000C46269 /* arrow-next.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20B790911C11756000C46269 /* arrow-next.ttf */; };
 		20BD85231BE26B1200F7EB9E /* IntroScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BD85211BE26B1200F7EB9E /* IntroScreenViewController.m */; };
 		20BD85241BE26B1200F7EB9E /* IntroScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20BD85221BE26B1200F7EB9E /* IntroScreenViewController.xib */; };
 		20CD72D51BD8C57F000F8FBA /* EditButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20CD72D31BD8C57F000F8FBA /* EditButtonCell.m */; };
@@ -363,6 +364,7 @@
 		2099948F1BF1EB3300E20068 /* invite_twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_twitter@2x.png"; sourceTree = "<group>"; };
 		209994901BF1EB3300E20068 /* invite_twitter@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_twitter@3x.png"; sourceTree = "<group>"; };
 		20ABF6B61BE34556008EB04A /* untechLoadScreen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = untechLoadScreen.jpg; sourceTree = "<group>"; };
+		20B790911C11756000C46269 /* arrow-next.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "arrow-next.ttf"; sourceTree = "<group>"; };
 		20BD85201BE26B1200F7EB9E /* IntroScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroScreenViewController.h; sourceTree = "<group>"; };
 		20BD85211BE26B1200F7EB9E /* IntroScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroScreenViewController.m; sourceTree = "<group>"; };
 		20BD85221BE26B1200F7EB9E /* IntroScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroScreenViewController.xib; sourceTree = "<group>"; };
@@ -818,6 +820,7 @@
 		36474F0719D96E9800084F34 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				20B790911C11756000C46269 /* arrow-next.ttf */,
 				249952171A56C905001AEB84 /* Entypo-Social.otf */,
 				249952181A56C905001AEB84 /* Entypo.otf */,
 				36474F1D19D9780100084F34 /* Pigiarniq Bold.ttf */,
@@ -1440,6 +1443,7 @@
 				203A2A291B7A2A29009949AA /* logo@2x.png in Resources */,
 				2465A6121B4BE1C400B3E22C /* navigation4.png in Resources */,
 				203A2A281B7A2A29009949AA /* logo.png in Resources */,
+				20B790921C11756000C46269 /* arrow-next.ttf in Resources */,
 				366EAF911A14C3530011D6C6 /* icon-40@2x.png in Resources */,
 				36BB7B8A19FFD98C00562069 /* ThankyouController.xib in Resources */,
 				C346D1841A7FD13B00856A58 /* facebook@3x.png in Resources */,

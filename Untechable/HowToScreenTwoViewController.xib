@@ -4,6 +4,11 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="arrow-next.ttf">
+            <string>arrow-next</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HowToScreenTwoViewController">
             <connections>
@@ -12,40 +17,41 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="howToScreen_2.png" translatesAutoresizingMaskIntoConstraints="NO" id="x02-9l-4JM">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="howToScreen_2.png" translatesAutoresizingMaskIntoConstraints="NO" id="x02-9l-4JM">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CxC-G4-BEM">
-                    <rect key="frame" x="10" y="127" width="300" height="50"/>
+                    <rect key="frame" x="37" y="182" width="300" height="68"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="50" id="4AT-RB-7bS"/>
-                        <constraint firstAttribute="width" constant="300" id="ygy-hk-oPQ"/>
+                        <constraint firstAttribute="height" constant="68" id="TmE-53-0Xo"/>
+                        <constraint firstAttribute="width" constant="300" id="hht-cJ-svH"/>
                     </constraints>
                     <string key="text">Select 'Untech Custom' to manually choose what you'll be doing during your untechable peroid of time &amp; who you'd like to inform.</string>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select 'Untech Now' using your pre-selected settings(What you'll be doing, who to inform &amp; for how long)." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hzv-7Z-gb1">
-                    <rect key="frame" x="10" y="50" width="300" height="50"/>
+                    <rect key="frame" x="37" y="60" width="300" height="82"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="300" id="PAX-z6-J3C"/>
-                        <constraint firstAttribute="height" constant="50" id="pGy-oT-sOw"/>
+                        <constraint firstAttribute="height" constant="82" id="0wD-8U-oJT"/>
+                        <constraint firstAttribute="width" constant="300" id="XYx-CN-FOB"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     <color key="textColor" red="0.20143138111888112" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pye-rh-REz">
-                    <rect key="frame" x="264" y="440" width="46" height="30"/>
+                    <rect key="frame" x="285" y="627" width="80" height="30"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="LgR-9P-gKG"/>
-                        <constraint firstAttribute="width" constant="46" id="bUX-HI-8xD"/>
+                        <constraint firstAttribute="width" constant="80" id="j2w-gs-Nfz"/>
+                        <constraint firstAttribute="height" constant="30" id="p1H-fS-3as"/>
                     </constraints>
-                    <state key="normal" title="next">
+                    <fontDescription key="fontDescription" name="arrow-next" family="arrow-next" pointSize="15"/>
+                    <state key="normal" title="next ">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -55,19 +61,14 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="CxC-G4-BEM" secondAttribute="trailing" constant="10" id="33k-GH-WoD"/>
-                <constraint firstItem="Hzv-7Z-gb1" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="3Pl-Ir-pfI"/>
-                <constraint firstItem="CxC-G4-BEM" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="7W9-uN-JaM"/>
-                <constraint firstItem="x02-9l-4JM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Clh-AU-7Hd"/>
-                <constraint firstAttribute="trailing" secondItem="pye-rh-REz" secondAttribute="trailing" constant="10" id="ErQ-Ms-9XV"/>
-                <constraint firstAttribute="bottom" secondItem="pye-rh-REz" secondAttribute="bottom" constant="10" id="SR1-aw-Gni"/>
-                <constraint firstAttribute="bottom" secondItem="x02-9l-4JM" secondAttribute="bottom" id="Ybn-mh-8g0"/>
-                <constraint firstItem="Hzv-7Z-gb1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="bKF-Po-I0F"/>
-                <constraint firstAttribute="trailing" secondItem="x02-9l-4JM" secondAttribute="trailing" id="giA-N6-hlS"/>
-                <constraint firstItem="x02-9l-4JM" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="uPy-C6-ymH"/>
-                <constraint firstItem="CxC-G4-BEM" firstAttribute="top" secondItem="Hzv-7Z-gb1" secondAttribute="bottom" constant="27" id="zFR-Nc-DWc"/>
+                <constraint firstItem="Hzv-7Z-gb1" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="60" id="37N-jI-8wf"/>
+                <constraint firstAttribute="centerX" secondItem="Hzv-7Z-gb1" secondAttribute="centerX" id="LuC-Hq-l4y"/>
+                <constraint firstAttribute="bottom" secondItem="pye-rh-REz" secondAttribute="bottom" constant="10" id="WIP-HL-Q0s"/>
+                <constraint firstAttribute="trailing" secondItem="pye-rh-REz" secondAttribute="trailing" constant="10" id="Zoh-vW-V2z"/>
+                <constraint firstAttribute="centerX" secondItem="CxC-G4-BEM" secondAttribute="centerX" id="c2C-Zd-ftD"/>
+                <constraint firstItem="CxC-G4-BEM" firstAttribute="top" secondItem="Hzv-7Z-gb1" secondAttribute="bottom" constant="40" id="owL-Lg-XBa"/>
             </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
         </view>
     </objects>
     <resources>
