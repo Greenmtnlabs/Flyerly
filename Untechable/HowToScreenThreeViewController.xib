@@ -26,7 +26,7 @@
                     </constraints>
                     <attributedString key="attributedText">
                         <fragment>
-                            <string key="content">Once you've completed your Untech selection, go enjoy your time away from technology. Untech &amp; reconnect with life. Don't forget to invite others to untech so thay can do the same.  </string>
+                            <string key="content">Once you've completed your Untech selection, go enjoy your time away from technology. Untech &amp; reconnect with life. Don't forget to invite others to untech so thay can do the same. </string>
                             <attributes>
                                 <color key="NSColor" red="0.0" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <font key="NSFont" size="17" name="HelveticaNeue"/>

@@ -23,7 +23,7 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="howToScreen_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="d8I-Ia-yO8">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Setup your Untech account &amp; settings to make taking a break from technology as easy as 1, 2, 3. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Gk-6v-duv">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Setup your Untech account &amp; settings to make taking a break from technology as easy as 1, 2, 3." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Gk-6v-duv">
                     <rect key="frame" x="37" y="65" width="300" height="82"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="82" id="R1l-Y3-wdI"/>
