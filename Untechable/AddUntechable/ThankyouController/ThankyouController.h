@@ -11,7 +11,7 @@
 
 @interface ThankyouController : UIViewController {
     UILabel *titleLabel;
-    UIButton *startNewUntechable;
+    UIButton *btnNext;
     UIButton *settingsButton;
     UIButton *editUntechable;
 }

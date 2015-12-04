@@ -9,8 +9,8 @@
 #import "ThankyouController.h"
 #import "AddUntechableController.h"
 #import "Common.h"
-#import "UntechablesList.h"
 #import "SettingsViewController.h"
+#import "HowToScreenThreeViewController.h"
 
 @interface ThankyouController ()
 
@@ -63,19 +63,10 @@
     [self.navigationController pushViewController:settingsController animated:YES];
 }
 
-- (IBAction)onNew:(id)sender {
-    [self goToUntechablesTableScreen];
-}
-
--(void)goToUntechablesTableScreen{
-    
-    UntechablesList *untechableTableController;
-    untechableTableController = [[UntechablesList alloc]initWithNibName:@"UntechablesList" bundle:nil];
-    [self.navigationController pushViewController:untechableTableController animated:YES];    
-}
-
-- (IBAction)onEdit:(id)sender {
-    [self goToUntechablesTableScreen];
+- (IBAction)onNext:(id)sender {
+    HowToScreenThreeViewController *howToScreenThreeViewController = [[HowToScreenThreeViewController alloc]initWithNibName:@"HowToScreenThreeViewController" bundle:nil];
+    howToScreenThreeViewController.isComingFromThankYou = YES;
+    [self.navigationController pushViewController:howToScreenThreeViewController animated:YES];
 }
 
 
@@ -159,15 +150,15 @@
         
         [self.navigationItem setLeftBarButtonItem:leftBarButton];//Left button ___________
         
-        startNewUntechable = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-        [startNewUntechable addTarget:self action:@selector(onNew:) forControlEvents:UIControlEventTouchUpInside];
-        startNewUntechable.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [startNewUntechable setTitle:NSLocalizedString(@"HOME", nil) forState:normal];
-        [startNewUntechable setTitleColor:DEF_GRAY forState:UIControlStateNormal];
-        startNewUntechable.showsTouchWhenHighlighted = YES;
+        btnNext = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        [btnNext addTarget:self action:@selector(onNext:) forControlEvents:UIControlEventTouchUpInside];
+        btnNext.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [btnNext setTitle:NSLocalizedString(TITLE_NEXT_TXT, nil) forState:normal];
+        [btnNext setTitleColor:DEF_GRAY forState:UIControlStateNormal];
+        btnNext.showsTouchWhenHighlighted = YES;
         
-        UIBarButtonItem *startNewUntechableBarBtn = [[UIBarButtonItem alloc] initWithCustomView:startNewUntechable];
-        rightNavItems  = [NSMutableArray arrayWithObjects:startNewUntechableBarBtn,nil];
+        UIBarButtonItem *btnNextBar = [[UIBarButtonItem alloc] initWithCustomView:btnNext];
+        rightNavItems  = [NSMutableArray arrayWithObjects:btnNextBar,nil];
         
         // adds right button to navigation bar
         [self.navigationItem setRightBarButtonItems:rightNavItems];
