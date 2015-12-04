@@ -99,7 +99,7 @@
 
 #define DEF_ARAY_SPLITER @"-ary-spliter-"
 
-#define DEF_GREEN [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0]
+#define DEF_GREEN [UIColor colorWithRed:0.0/255.0 green:180.0/255.0 blue:1002.0/255.0 alpha:1.0]
 #define DEF_GRAY [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0]
 #define DEF_SPENDING_TIME_ARY @[@"spending time with family", @"driving", @"spending time outdoors", @"at the beach", @"enjoying the holidays", @"just needed a break", @"running", @"on vacation", @"finding my inner peace", @"removing myself from technology", @"in a meeting", @"biking",@"playing sports",@"hiking", @"yoga", @"relaxing", @"eating", @"drinking", @"spending time with friends", @"custom"]
 

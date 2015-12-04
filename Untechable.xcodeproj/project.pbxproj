@@ -40,8 +40,6 @@
 		200DB76A1C1085430065036A /* HowToScreenTwoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 200DB7681C1085430065036A /* HowToScreenTwoViewController.xib */; };
 		2015F1231BEB7077006EC4C4 /* InviteFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2015F1211BEB7077006EC4C4 /* InviteFriendsController.m */; };
 		2015F1241BEB7077006EC4C4 /* InviteFriendsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2015F1221BEB7077006EC4C4 /* InviteFriendsController.xib */; };
-		2015F12A1BEB711F006EC4C4 /* InviteFreindsCell-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2015F1251BEB711F006EC4C4 /* InviteFreindsCell-iPhone6-Plus.xib */; };
-		2015F12B1BEB711F006EC4C4 /* InviteFreindsCell-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2015F1261BEB711F006EC4C4 /* InviteFreindsCell-iPhone6.xib */; };
 		2015F12C1BEB711F006EC4C4 /* InviteFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2015F1281BEB711F006EC4C4 /* InviteFriendsCell.m */; };
 		2015F12D1BEB711F006EC4C4 /* InviteFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2015F1291BEB711F006EC4C4 /* InviteFriendsCell.xib */; };
 		2015F1321BEB7308006EC4C4 /* ContactsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2015F1311BEB7308006EC4C4 /* ContactsModel.m */; };
@@ -326,8 +324,6 @@
 		2015F1201BEB7077006EC4C4 /* InviteFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendsController.h; sourceTree = "<group>"; };
 		2015F1211BEB7077006EC4C4 /* InviteFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsController.m; sourceTree = "<group>"; };
 		2015F1221BEB7077006EC4C4 /* InviteFriendsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendsController.xib; sourceTree = "<group>"; };
-		2015F1251BEB711F006EC4C4 /* InviteFreindsCell-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "InviteFreindsCell-iPhone6-Plus.xib"; sourceTree = "<group>"; };
-		2015F1261BEB711F006EC4C4 /* InviteFreindsCell-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "InviteFreindsCell-iPhone6.xib"; sourceTree = "<group>"; };
 		2015F1271BEB711F006EC4C4 /* InviteFriendsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendsCell.h; sourceTree = "<group>"; };
 		2015F1281BEB711F006EC4C4 /* InviteFriendsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsCell.m; sourceTree = "<group>"; };
 		2015F1291BEB711F006EC4C4 /* InviteFriendsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendsCell.xib; sourceTree = "<group>"; };
@@ -691,8 +687,6 @@
 				2015F1271BEB711F006EC4C4 /* InviteFriendsCell.h */,
 				2015F1281BEB711F006EC4C4 /* InviteFriendsCell.m */,
 				2015F1291BEB711F006EC4C4 /* InviteFriendsCell.xib */,
-				2015F1261BEB711F006EC4C4 /* InviteFreindsCell-iPhone6.xib */,
-				2015F1251BEB711F006EC4C4 /* InviteFreindsCell-iPhone6-Plus.xib */,
 			);
 			name = AppInvite;
 			sourceTree = "<group>";
@@ -1418,7 +1412,6 @@
 				247C72D51A5C0968005C9693 /* user_img@3x.png in Resources */,
 				209994841BF1CDD800E20068 /* invite_facebook_selected@3x.png in Resources */,
 				36474F2219D9780100084F34 /* Pigiarniq Bold.ttf in Resources */,
-				2015F12B1BEB711F006EC4C4 /* InviteFreindsCell-iPhone6.xib in Resources */,
 				209994801BF1CDD800E20068 /* invite_email_selected@3x.png in Resources */,
 				366EAF921A14C3530011D6C6 /* icon-50.png in Resources */,
 				209994821BF1CDD800E20068 /* invite_email@3x.png in Resources */,
@@ -1508,7 +1501,6 @@
 				C33C1EDD1A72277C0064DBE8 /* EmailTableViewCell-iPhone6-Plus.xib in Resources */,
 				36B006481A161B92005C3791 /* untechable.mov in Resources */,
 				20CD72D61BD8C57F000F8FBA /* EditButtonCell.xib in Resources */,
-				2015F12A1BEB711F006EC4C4 /* InviteFreindsCell-iPhone6-Plus.xib in Resources */,
 				200ACE2F1A3874B200DC7047 /* icloudIcon@3x.png in Resources */,
 				200DB7651C1085270065036A /* HowToScreenThreeViewController.xib in Resources */,
 				2486CBA31A5A79AC00AC125E /* sms_selected.png in Resources */,
