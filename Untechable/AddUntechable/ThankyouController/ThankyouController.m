@@ -85,7 +85,6 @@
     [btnInviteOthers setTitle: NSLocalizedString(@"Invite Others", nil) forState: UIControlStateNormal];
     
     [_lblStartsFrom setText:NSLocalizedString(@"You will be untechable from", nil)];
-    [_lblStartsFrom setTextColor:DEF_GRAY];
     _lblStartsFrom.font = [UIFont fontWithName:APP_FONT size:20];
     
     [_lblStartDateTime setTextColor:DEF_GREEN];
@@ -94,7 +93,6 @@
     
     
     [_lblEnd setText:NSLocalizedString(@"To", nil)];
-    [_lblEnd setTextColor:DEF_GRAY];
     _lblEnd.font = [UIFont fontWithName:APP_FONT size:20];
     
     
