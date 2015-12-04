@@ -16,10 +16,14 @@
 @implementation HowToScreenOneViewController
 
 @synthesize untechable;
+@synthesize btnNext, lblMessage1, lblMessage2;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    // to apply localization
+    [self applyLocalization];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -27,6 +31,20 @@
     // Dispose of any resources that can be recreated.
 }
 
+/*
+ * This method applies localization
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+-(void) applyLocalization{
+    
+    [btnNext setTitle: NSLocalizedString(@"next ", nil) forState: UIControlStateNormal];
+    self.lblMessage1.text = NSLocalizedString(@"Setup your Untech account & settings to make taking a break from technology as easy as 1, 2, 3.", nil);
+    self.lblMessage2.text = NSLocalizedString(@"Note: You can always adjust these in the settings screen.", nil);
+    
+}
 
 - (IBAction)onClickNext:(id)sender {
     

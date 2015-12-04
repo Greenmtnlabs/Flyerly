@@ -12,6 +12,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HowToScreenTwoViewController">
             <connections>
+                <outlet property="btnNext" destination="pye-rh-REz" id="VgQ-cA-laU"/>
+                <outlet property="lblMessage1" destination="Hzv-7Z-gb1" id="6pR-9d-0Y4"/>
+                <outlet property="lblMessage2" destination="CxC-G4-BEM" id="ebs-EN-DQm"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -45,10 +48,10 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pye-rh-REz">
-                    <rect key="frame" x="285" y="627" width="80" height="30"/>
+                    <rect key="frame" x="283" y="624" width="82" height="30"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="80" id="j2w-gs-Nfz"/>
-                        <constraint firstAttribute="height" constant="30" id="p1H-fS-3as"/>
+                        <constraint firstAttribute="height" constant="30" id="rIK-fW-0ka"/>
+                        <constraint firstAttribute="width" constant="82" id="uh0-mG-qNp"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="arrow-next" family="arrow-next" pointSize="15"/>
                     <state key="normal" title="next ">
@@ -71,13 +74,13 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="pye-rh-REz" secondAttribute="bottom" constant="13" id="1KI-It-j81"/>
                 <constraint firstItem="Hzv-7Z-gb1" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="60" id="37N-jI-8wf"/>
                 <constraint firstAttribute="centerX" secondItem="Hzv-7Z-gb1" secondAttribute="centerX" id="LuC-Hq-l4y"/>
-                <constraint firstAttribute="bottom" secondItem="pye-rh-REz" secondAttribute="bottom" constant="10" id="WIP-HL-Q0s"/>
-                <constraint firstAttribute="trailing" secondItem="pye-rh-REz" secondAttribute="trailing" constant="10" id="Zoh-vW-V2z"/>
                 <constraint firstItem="am0-Aj-iZR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="18" id="a3S-zT-D7W"/>
                 <constraint firstAttribute="bottom" secondItem="am0-Aj-iZR" secondAttribute="bottom" constant="10" id="bhp-ZQ-Huc"/>
                 <constraint firstAttribute="centerX" secondItem="CxC-G4-BEM" secondAttribute="centerX" id="c2C-Zd-ftD"/>
+                <constraint firstAttribute="trailing" secondItem="pye-rh-REz" secondAttribute="trailing" constant="10" id="eDX-wt-2yC"/>
                 <constraint firstItem="CxC-G4-BEM" firstAttribute="top" secondItem="Hzv-7Z-gb1" secondAttribute="bottom" constant="40" id="owL-Lg-XBa"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>

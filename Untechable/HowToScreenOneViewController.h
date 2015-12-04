@@ -13,5 +13,8 @@
 
 @property (nonatomic,strong)  Untechable *untechable;
 - (IBAction)onClickNext:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *btnNext;
+@property (strong, nonatomic) IBOutlet UILabel *lblMessage1;
+@property (strong, nonatomic) IBOutlet UILabel *lblMessage2;
 
 @end

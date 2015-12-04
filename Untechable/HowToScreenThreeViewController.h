@@ -14,5 +14,7 @@
 @property (nonatomic,strong)  Untechable *untechable;
 
 - (IBAction)onClickDone:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *btnDone;
+@property (strong, nonatomic) IBOutlet UILabel *lblMessage;
 
 @end

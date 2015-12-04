@@ -16,15 +16,30 @@
 @implementation HowToScreenThreeViewController
 
 @synthesize untechable;
+@synthesize lblMessage;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    // to apply localization
+    [self applyLocalization];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+/*
+ * This method applies localization
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+-(void) applyLocalization{
+    self.lblMessage.text = NSLocalizedString(@"Once you've completed your Untech selection, go enjoy your time away from technology. Untech & reconnect with life. Don't forget to invite others to untech so thay can do the same. Namaste!", nil);
 }
 
 - (IBAction)onClickDone:(id)sender {
