@@ -52,15 +52,26 @@
                     </constraints>
                     <fontDescription key="fontDescription" name="arrow-next" family="arrow-next" pointSize="15"/>
                     <state key="normal" title="next ">
+                        <color key="titleColor" red="0.0" green="0.25098039215686274" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="onClickNext:" destination="-1" eventType="touchUpInside" id="dC5-s9-sg9"/>
                     </connections>
                 </button>
+                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="AKf-8y-xha">
+                    <rect key="frame" x="18" y="620" width="39" height="37"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="37" id="SVY-yc-hoQ"/>
+                        <constraint firstAttribute="width" constant="39" id="qPi-qk-PrS"/>
+                    </constraints>
+                    <color key="pageIndicatorTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="currentPageIndicatorTintColor" red="0.0" green="0.25098039215686274" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </pageControl>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="AKf-8y-xha" secondAttribute="bottom" constant="10" id="43A-px-Gy1"/>
                 <constraint firstItem="fSY-uP-PF1" firstAttribute="top" secondItem="3Gk-6v-duv" secondAttribute="bottom" constant="4" id="5dr-lp-xYk"/>
                 <constraint firstItem="3Gk-6v-duv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="65" id="7Eq-cO-u7a"/>
                 <constraint firstItem="d8I-Ia-yO8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="CI7-IQ-4Hy"/>
@@ -70,6 +81,7 @@
                 <constraint firstAttribute="bottom" secondItem="d8I-Ia-yO8" secondAttribute="bottom" id="WOF-8t-gC6"/>
                 <constraint firstAttribute="bottom" secondItem="wvY-Ml-2Aw" secondAttribute="bottom" constant="10" id="ZXx-ih-6rA"/>
                 <constraint firstAttribute="trailing" secondItem="wvY-Ml-2Aw" secondAttribute="trailing" constant="10" id="dPf-ME-lz0"/>
+                <constraint firstItem="AKf-8y-xha" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="18" id="uos-AI-oMs"/>
                 <constraint firstAttribute="trailing" secondItem="d8I-Ia-yO8" secondAttribute="trailing" id="xB1-d7-GBm"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>

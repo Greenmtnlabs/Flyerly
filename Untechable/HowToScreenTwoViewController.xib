@@ -52,12 +52,22 @@
                     </constraints>
                     <fontDescription key="fontDescription" name="arrow-next" family="arrow-next" pointSize="15"/>
                     <state key="normal" title="next ">
+                        <color key="titleColor" red="0.0" green="0.25098039220000001" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="onClickNext:" destination="-1" eventType="touchUpInside" id="ugd-Yy-hQz"/>
                     </connections>
                 </button>
+                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" currentPage="1" translatesAutoresizingMaskIntoConstraints="NO" id="am0-Aj-iZR">
+                    <rect key="frame" x="18" y="620" width="39" height="37"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="37" id="Lmg-oD-dYY"/>
+                        <constraint firstAttribute="width" constant="39" id="cJB-qV-Tfg"/>
+                    </constraints>
+                    <color key="pageIndicatorTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="currentPageIndicatorTintColor" red="0.0" green="0.25098039220000001" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </pageControl>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -65,6 +75,8 @@
                 <constraint firstAttribute="centerX" secondItem="Hzv-7Z-gb1" secondAttribute="centerX" id="LuC-Hq-l4y"/>
                 <constraint firstAttribute="bottom" secondItem="pye-rh-REz" secondAttribute="bottom" constant="10" id="WIP-HL-Q0s"/>
                 <constraint firstAttribute="trailing" secondItem="pye-rh-REz" secondAttribute="trailing" constant="10" id="Zoh-vW-V2z"/>
+                <constraint firstItem="am0-Aj-iZR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="18" id="a3S-zT-D7W"/>
+                <constraint firstAttribute="bottom" secondItem="am0-Aj-iZR" secondAttribute="bottom" constant="10" id="bhp-ZQ-Huc"/>
                 <constraint firstAttribute="centerX" secondItem="CxC-G4-BEM" secondAttribute="centerX" id="c2C-Zd-ftD"/>
                 <constraint firstItem="CxC-G4-BEM" firstAttribute="top" secondItem="Hzv-7Z-gb1" secondAttribute="bottom" constant="40" id="owL-Lg-XBa"/>
             </constraints>
