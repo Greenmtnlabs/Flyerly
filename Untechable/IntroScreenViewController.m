@@ -62,38 +62,30 @@
     [self.audioPlayer prepareToPlay];
     [self.audioPlayer play];
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0
                                                   target:self
-                                                selector:@selector(updateTime)
+                                                selector:@selector(goToNextScreen)
                                                 userInfo:nil
                                                  repeats:NO];
 }
 
 /*
- * This method updates time
+ * This method changes screen
  * @params:
  *      void
  * @return:
  *      void
  */
-- (void)updateTime {
-    NSTimeInterval currentTime = self.audioPlayer.currentTime;
+- (void)goToNextScreen {
     
-    NSInteger minutes = floor(currentTime/60);
-    NSInteger seconds = trunc(currentTime - minutes * 60);
-    
-    if(seconds == 0){
-        
-        self.audioPlayer = nil;
-        
-        HowToScreenOneViewController *howToScreenOneViewController = [[HowToScreenOneViewController alloc] initWithNibName:@"HowToScreenOneViewController" bundle:nil];
+    [NSThread sleepForTimeInterval:2];
+
+    HowToScreenOneViewController *howToScreenOneViewController = [[HowToScreenOneViewController alloc] initWithNibName:@"HowToScreenOneViewController" bundle:nil];
         howToScreenOneViewController.untechable = untechable;
         [self.navigationController pushViewController:howToScreenOneViewController animated:YES];
         
         return;
-
-        
-        
+    
         RLMResults *unsortedObjects = [RSetUntechable objectsWhere:@"rUId == '1'"];
         
         //If we have default Untechable then go to UntechablesList screen
@@ -126,7 +118,6 @@
             
             [[NSUserDefaults standardUserDefaults] setObject:@"greeted" forKey:@"greeted"];
         }
-    }
 }
 
 
