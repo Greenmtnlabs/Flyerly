@@ -11,6 +11,8 @@
 #import "Common.h"
 #import "SettingsViewController.h"
 #import "HowToScreenThreeViewController.h"
+#import "UntechablesList.h"
+#import "InviteFriendsController.h"
 
 @interface ThankyouController ()
 
@@ -77,8 +79,6 @@
 {
     [btnEnjoyLife setTitle: NSLocalizedString(@"Enjoy Life", nil) forState: UIControlStateNormal];
     [btnInviteOthers setTitle: NSLocalizedString(@"Invite Others", nil) forState: UIControlStateNormal];
-    
-    
     
     [_lblStartsFrom setText:NSLocalizedString(@"You will be untechable from", nil)];
     [_lblStartsFrom setTextColor:DEF_GRAY];
@@ -174,8 +174,14 @@
 
 
 - (IBAction)onClickInviteOthers:(id)sender {
+    //Load Invite Screen
+    InviteFriendsController *inviteFriendsController = [[InviteFriendsController alloc] initWithNibName:@"InviteFriendsController" bundle:nil];
+    [self.navigationController pushViewController:inviteFriendsController animated:YES];
 }
 
 - (IBAction)onClickEnjoyLife:(id)sender {
+    // Load Home Screen
+    UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
+    [self.navigationController pushViewController:mainViewController animated:YES];
 }
 @end
