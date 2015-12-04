@@ -25,6 +25,7 @@
 @implementation ThankyouController
 
 @synthesize untechable;
+@synthesize btnEnjoyLife, btnInviteOthers;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -70,9 +71,15 @@
 }
 
 
+
 #pragma mark -  UI functions
 -(void)updateUI
 {
+    [btnEnjoyLife setTitle: NSLocalizedString(@"Enjoy Life", nil) forState: UIControlStateNormal];
+    [btnInviteOthers setTitle: NSLocalizedString(@"Invite Others", nil) forState: UIControlStateNormal];
+    
+    
+    
     [_lblStartsFrom setText:NSLocalizedString(@"You will be untechable from", nil)];
     [_lblStartsFrom setTextColor:DEF_GRAY];
     _lblStartsFrom.font = [UIFont fontWithName:APP_FONT size:20];
