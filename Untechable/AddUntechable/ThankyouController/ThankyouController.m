@@ -166,4 +166,9 @@
 }
 
 
+- (IBAction)onClickInviteOthers:(id)sender {
+}
+
+- (IBAction)onClickEnjoyLife:(id)sender {
+}
 @end
