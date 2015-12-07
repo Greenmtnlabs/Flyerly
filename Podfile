@@ -1,6 +1,6 @@
 platform :ios, '7.0'
 
-link_with 'Untechable', 'UntechableTests'
+link_with 'Untechable'
 
 pod 'AFNetworking', '= 2.5.3'
 pod 'uservoice-iphone-sdk', '~> 3.2.3'
