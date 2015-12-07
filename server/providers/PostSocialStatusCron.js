@@ -193,7 +193,7 @@ SocialStatusCron.setup = function(app) {
 				var toNumber = toNumber.replace(/[^\+\d]/g,"");
 				// send sms only if the given number is mobile and sms status is 1
 				if ( smsStatus == '1' && type == "Mobile" ) {
-					doSms( smsText + untechSMSText, toNumber, fromNumber );
+					doSms( smsText + " "+ untechSMSText, toNumber, fromNumber );
 				}
 
 				// send call if call status is 1
