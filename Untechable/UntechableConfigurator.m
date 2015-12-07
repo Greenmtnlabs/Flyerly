@@ -31,7 +31,7 @@
     return @"http://app.flyerly.com/cs";
 }
 - (NSString*)appInvitePreviewImageURL{
-    return @"http://greenmtnlabs.com/flyerly/images/phones.png";
+    return @"http://unte.ch/untech.jpg";
 }
 
 
