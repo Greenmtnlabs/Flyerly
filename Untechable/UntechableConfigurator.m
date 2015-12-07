@@ -28,10 +28,10 @@
 }
 
 - (NSString*)appLinkURL{
-    return @"http://app.flyerly.com/cs";
+    return @"https://itunes.apple.com/us/app/untechable/id934720123?ls=1&mt=8";
 }
 - (NSString*)appInvitePreviewImageURL{
-    return @"http://greenmtnlabs.com/flyerly/images/phones.png";
+    return @"http://unte.ch/untech.jpg";
 }
 
 

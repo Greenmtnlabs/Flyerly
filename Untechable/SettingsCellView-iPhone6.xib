@@ -21,13 +21,10 @@
                             <constraint firstAttribute="width" constant="30" id="HXP-xl-ogF"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Social Network Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HhY-Os-Ipd">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Social Network Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HhY-Os-Ipd">
                         <rect key="frame" x="46" y="11" width="165" height="32"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="165" id="J4z-qn-F86"/>
-                        </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                        <color key="textColor" red="0.25882352939999997" green="0.96862745100000003" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.0" green="0.70588235294117652" blue="0.39215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wlt-MX-cXf">
@@ -39,27 +36,25 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Logged Out" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VW3-m3-t8d">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logged Out" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VW3-m3-t8d">
                         <rect key="frame" x="46" y="34" width="75" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="75" id="l31-kG-EZ4"/>
-                        </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                         <color key="textColor" red="0.72156862749999995" green="0.72156862749999995" blue="0.72156862749999995" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="wlt-MX-cXf" firstAttribute="leading" secondItem="HhY-Os-Ipd" secondAttribute="trailing" constant="4" id="5DM-ro-abx"/>
-                    <constraint firstItem="VW3-m3-t8d" firstAttribute="leading" secondItem="v0s-4V-4yg" secondAttribute="trailing" constant="8" id="CL5-YP-aY8"/>
+                    <constraint firstItem="HhY-Os-Ipd" firstAttribute="leading" secondItem="v0s-4V-4yg" secondAttribute="trailing" constant="8" symbolic="YES" id="B3L-rT-yuB"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="HhY-Os-Ipd" secondAttribute="bottom" constant="14" id="DBQ-JJ-rwO"/>
+                    <constraint firstItem="VW3-m3-t8d" firstAttribute="top" secondItem="SHc-1n-A7G" secondAttribute="topMargin" constant="26" id="DJd-cc-vaf"/>
                     <constraint firstAttribute="trailingMargin" secondItem="wlt-MX-cXf" secondAttribute="trailing" constant="1" id="DPS-qD-W7a"/>
-                    <constraint firstItem="HhY-Os-Ipd" firstAttribute="leading" secondItem="v0s-4V-4yg" secondAttribute="trailing" constant="8" id="Ek5-tk-hu2"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="VW3-m3-t8d" secondAttribute="bottom" constant="2" id="EsX-kA-8tM"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="VW3-m3-t8d" secondAttribute="bottom" constant="2" id="JXN-19-7JU"/>
                     <constraint firstAttribute="bottomMargin" secondItem="v0s-4V-4yg" secondAttribute="bottom" constant="9" id="Jaa-FL-g22"/>
                     <constraint firstItem="wlt-MX-cXf" firstAttribute="top" secondItem="SHc-1n-A7G" secondAttribute="topMargin" constant="10" id="NHG-ij-dpq"/>
                     <constraint firstItem="v0s-4V-4yg" firstAttribute="leading" secondItem="SHc-1n-A7G" secondAttribute="leadingMargin" id="OH9-Uz-Md1"/>
+                    <constraint firstItem="HhY-Os-Ipd" firstAttribute="top" secondItem="SHc-1n-A7G" secondAttribute="topMargin" constant="3" id="Rf8-9r-ush"/>
                     <constraint firstAttribute="bottomMargin" secondItem="wlt-MX-cXf" secondAttribute="bottom" constant="9" id="fM5-j0-8Ha"/>
-                    <constraint firstItem="HhY-Os-Ipd" firstAttribute="top" secondItem="SHc-1n-A7G" secondAttribute="topMargin" id="qCJ-MC-3OK"/>
+                    <constraint firstItem="HhY-Os-Ipd" firstAttribute="leading" secondItem="VW3-m3-t8d" secondAttribute="leading" id="koT-Fm-r2K"/>
                     <constraint firstItem="v0s-4V-4yg" firstAttribute="top" secondItem="SHc-1n-A7G" secondAttribute="topMargin" constant="10" id="qrE-C8-VWx"/>
                 </constraints>
             </tableViewCellContentView>

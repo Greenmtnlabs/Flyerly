@@ -46,7 +46,11 @@
  *      void
  */
 -(void) applyLocalization{
-    self.lblMessage.text = NSLocalizedString(@"Once you've completed your Untech selection, go enjoy your time away from technology. Untech & reconnect with life. Don't forget to invite others to untech so thay can do the same. Namaste!", nil);
+    
+    NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Once you've completed your Untech selection, go enjoy your time away from technology. Untech & reconnect with life. Don't forget to invite others to untech so thay can do the same. Namaste!", nil)];
+    
+    [text addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:254.0/255.0 green:138.0/255.0 blue:51.0/255.0 alpha:1.0] range:(NSRange){text.length - 9,9}];
+    self.lblMessage.attributedText=text;
 }
 
 - (IBAction)onClickDone:(id)sender {
