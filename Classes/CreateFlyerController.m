@@ -3271,7 +3271,17 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 -(void)addButtonsInRightNavigation:(NSString *)callFrom {
     
     NSMutableArray  *barItems   =   [NSMutableArray arrayWithObjects:nil];
+    
+    // enable user interaction of Home and Help button in every condition
+    backButton.userInteractionEnabled = YES;
+    helpButton.userInteractionEnabled = YES;
+    
     if( [callFrom isEqualToString:@"callWrite"] ){
+        
+        // disable user interaction of Home and Help button when editing
+        backButton.userInteractionEnabled = NO;
+        helpButton.userInteractionEnabled = NO;
+        
         UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
         [nextButton addTarget:self action:@selector(nextForFont) forControlEvents:UIControlEventTouchUpInside];
         [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
@@ -3280,6 +3290,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         barItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
     }
     if( [callFrom isEqualToString:@"viewDidLoad"] ){
+        
         //Right ShareButton
         shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
         shareButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
