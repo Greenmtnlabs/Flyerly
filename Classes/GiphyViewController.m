@@ -206,12 +206,18 @@
             int width = mediaSize.width;
             int height = mediaSize.height;
             
+            CGFloat x = 0;
+            
+            if(width > height){
+                x = (width-height)/2;
+            }
+            
             //Video must be squire, othere wise merge video will not map layer on exact points
             int squireWH = (width < height) ? width : height;
             width = height = squireWH;
             
             //store squired video then delete temporary video
-            [self modifyVideo:mediaURLTemp destination:mediaURL crop:CGRectMake(0,0,squireWH,squireWH) scale:1 overlay:nil completion:^(NSInteger status, NSError *error) {
+            [self modifyVideo:mediaURLTemp destination:mediaURL crop:CGRectMake(x,0,squireWH,squireWH) scale:1 overlay:nil completion:^(NSInteger status, NSError *error) {
                 
                 switch ( status ) {
                     case AVAssetExportSessionStatusFailed:
