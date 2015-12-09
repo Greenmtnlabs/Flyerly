@@ -362,7 +362,7 @@
    
     // Here we Check Selection For Photo or Background
     if ( _videoAllow ) {
-        totalCount = self.assetsGroup.assetsCount;
+        totalCount = self.assetsGroup.videoAssetsCount;
     } else {
         totalCount = self.assetsGroup.imageAssetsCount;
     }
@@ -413,7 +413,7 @@
 
         // Here we Check Selection For Photo or Background
         if ( _videoAllow ) {
-            contentType = NBUAssetTypeAny;
+            contentType = NBUAssetTypeVideo;
         } else {
             contentType = NBUAssetTypeImage;
         }
