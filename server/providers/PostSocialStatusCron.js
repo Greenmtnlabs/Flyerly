@@ -320,7 +320,7 @@ SocialStatusCron.setup = function(app) {
 
 		if( customizedContactsLength > 0 && eventObj.email != "" && eventObj.password != "" ){					
 			var totalDaysHours = calculateHoursDays(eventObj.startTime, eventObj.endTime);
-			var mySubject = "I am untech for " + totalDaysHours;
+			var mySubject = "I am unteching for " + totalDaysHours;
 			var myEmail = eventObj.email;
 			var myName  = eventObj.userName;
 			var reason = eventObj.spendingTimeTxt;
