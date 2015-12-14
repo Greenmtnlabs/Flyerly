@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HowToScreenThreeViewController">
             <connections>
                 <outlet property="btnDone" destination="GgC-je-P0e" id="3OW-oS-158"/>
+                <outlet property="btnInviteOthers" destination="g4j-oz-txe" id="aHt-wD-ya9"/>
                 <outlet property="lblMessage" destination="cnG-Wd-WyA" id="8iC-fH-pEG"/>
                 <outlet property="pageView" destination="QeL-RD-9up" id="bLp-ID-UAa"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -70,12 +71,28 @@
                     <color key="pageIndicatorTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="currentPageIndicatorTintColor" red="0.0" green="0.25098039220000001" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </pageControl>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g4j-oz-txe">
+                    <rect key="frame" x="132" y="319" width="110" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="RuB-Nq-Ev1"/>
+                        <constraint firstAttribute="width" constant="110" id="vnV-bV-nMu"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                    <state key="normal" title="Invite Others">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onClickInviteOthers:" destination="-1" eventType="touchUpInside" id="Jwa-NQ-EnL"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="QeL-RD-9up" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="18" id="7AZ-Pc-Bdh"/>
+                <constraint firstAttribute="centerX" secondItem="g4j-oz-txe" secondAttribute="centerX" id="8Rh-mq-b16"/>
                 <constraint firstItem="U2h-TN-C2y" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="AAy-5A-ccq"/>
                 <constraint firstAttribute="bottom" secondItem="QeL-RD-9up" secondAttribute="bottom" constant="10" id="ECg-MF-Hc9"/>
+                <constraint firstItem="g4j-oz-txe" firstAttribute="top" secondItem="cnG-Wd-WyA" secondAttribute="bottom" constant="22" id="PN9-EH-xjI"/>
                 <constraint firstAttribute="trailing" secondItem="GgC-je-P0e" secondAttribute="trailing" constant="10" id="RZe-DT-hPR"/>
                 <constraint firstAttribute="bottom" secondItem="GgC-je-P0e" secondAttribute="bottom" constant="13" id="Si3-w7-Uaq"/>
                 <constraint firstAttribute="bottom" secondItem="U2h-TN-C2y" secondAttribute="bottom" id="XOU-EI-t4u"/>

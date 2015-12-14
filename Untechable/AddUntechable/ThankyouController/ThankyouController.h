@@ -18,9 +18,6 @@
 //Properties
 @property (nonatomic,strong)  Untechable *untechable;
 
-@property (strong, nonatomic) IBOutlet UIButton *btnEnjoyLife;
-@property (strong, nonatomic) IBOutlet UIButton *btnInviteOthers;
-- (IBAction)onClickInviteOthers:(id)sender;
-- (IBAction)onClickEnjoyLife:(id)sender;
-
 @end
+
+

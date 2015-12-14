@@ -10,6 +10,7 @@
 #import "SetupGuideViewController.h"
 #import "UntechablesList.h"
 #import "SettingsViewController.h"
+#import "InviteFriendsController.h"
 
 
 @interface HowToScreenThreeViewController ()
@@ -21,6 +22,7 @@
 @synthesize untechable;
 @synthesize lblMessage, isComingFromThankYou, pageView;
 @synthesize isComingFromSettings;
+@synthesize btnInviteOthers;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -54,6 +56,9 @@
     
     [text addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:254.0/255.0 green:138.0/255.0 blue:51.0/255.0 alpha:1.0] range:(NSRange){text.length - 9,9}];
     self.lblMessage.attributedText=text;
+    
+    [btnInviteOthers setTitle: NSLocalizedString(@"Invite Others", nil) forState: UIControlStateNormal];
+    
 }
 
 - (IBAction)onClickDone:(id)sender {
@@ -74,5 +79,11 @@
         setupGuideViewController.untechable = untechable;
         [self.navigationController pushViewController:setupGuideViewController animated:YES];
     }
+}
+- (IBAction)onClickInviteOthers:(id)sender {
+    
+    //Load Invite Screen
+    InviteFriendsController *inviteFriendsController = [[InviteFriendsController alloc] initWithNibName:@"InviteFriendsController" bundle:nil];
+    [self.navigationController pushViewController:inviteFriendsController animated:YES];
 }
 @end

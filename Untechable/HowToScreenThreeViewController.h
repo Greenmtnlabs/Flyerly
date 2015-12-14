@@ -19,7 +19,9 @@
 
 @property (nonatomic, assign) BOOL isComingFromThankYou;
 @property (strong, nonatomic) IBOutlet UIPageControl *pageView;
+@property (strong, nonatomic) IBOutlet UIButton *btnInviteOthers;
 
 @property (nonatomic,assign) BOOL isComingFromSettings;
+- (IBAction)onClickInviteOthers:(id)sender;
 
 @end

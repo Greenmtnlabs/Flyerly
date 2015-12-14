@@ -12,7 +12,6 @@
 #import "SettingsViewController.h"
 #import "HowToScreenThreeViewController.h"
 #import "UntechablesList.h"
-#import "InviteFriendsController.h"
 
 @interface ThankyouController ()
 
@@ -27,7 +26,6 @@
 @implementation ThankyouController
 
 @synthesize untechable;
-@synthesize btnEnjoyLife, btnInviteOthers;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -80,9 +78,6 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MMM dd, yyyy, hh:mm a"];
 
-    
-    [btnEnjoyLife setTitle: NSLocalizedString(@"Enjoy Life", nil) forState: UIControlStateNormal];
-    [btnInviteOthers setTitle: NSLocalizedString(@"Invite Others", nil) forState: UIControlStateNormal];
     
     [_lblStartsFrom setText:NSLocalizedString(@"You will be untechable from", nil)];
     _lblStartsFrom.font = [UIFont fontWithName:APP_FONT size:20];
@@ -173,16 +168,4 @@
     }
 }
 
-
-- (IBAction)onClickInviteOthers:(id)sender {
-    //Load Invite Screen
-    InviteFriendsController *inviteFriendsController = [[InviteFriendsController alloc] initWithNibName:@"InviteFriendsController" bundle:nil];
-    [self.navigationController pushViewController:inviteFriendsController animated:YES];
-}
-
-- (IBAction)onClickEnjoyLife:(id)sender {
-    // Load Home Screen
-    UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
-    [self.navigationController pushViewController:mainViewController animated:YES];
-}
 @end
