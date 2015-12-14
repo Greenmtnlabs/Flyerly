@@ -265,8 +265,6 @@
 		C36D2E591A7919C2000537C5 /* SettingsCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C36D2E571A7919C2000537C5 /* SettingsCellView.xib */; };
 		C36D2E5D1A7919DC000537C5 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C36D2E5B1A7919DC000537C5 /* SettingsViewController.m */; };
 		C36D2E5E1A7919DC000537C5 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C36D2E5C1A7919DC000537C5 /* SettingsViewController.xib */; };
-		C36D2E601A791ADA000537C5 /* SettingsCellView-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = C36D2E5F1A791ADA000537C5 /* SettingsCellView-iPhone6.xib */; };
-		C36D2E621A791AEA000537C5 /* SettingsCellView-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = C36D2E611A791AEA000537C5 /* SettingsCellView-iPhone6-Plus.xib */; };
 		C372098D1B7767AA003A40F2 /* RUntechable.m in Sources */ = {isa = PBXBuildFile; fileRef = C37209891B7767AA003A40F2 /* RUntechable.m */; };
 		C372098E1B7767AA003A40F2 /* RSetUntechable.m in Sources */ = {isa = PBXBuildFile; fileRef = C372098A1B7767AA003A40F2 /* RSetUntechable.m */; };
 		C37F755B1A7F50D100B5AC71 /* twt_follow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C37F75571A7F50D100B5AC71 /* twt_follow@2x.png */; };
@@ -604,8 +602,6 @@
 		C36D2E5A1A7919DC000537C5 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		C36D2E5B1A7919DC000537C5 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		C36D2E5C1A7919DC000537C5 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
-		C36D2E5F1A791ADA000537C5 /* SettingsCellView-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SettingsCellView-iPhone6.xib"; sourceTree = "<group>"; };
-		C36D2E611A791AEA000537C5 /* SettingsCellView-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SettingsCellView-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		C37209881B7767AA003A40F2 /* RUntechable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RUntechable.h; path = AddUntechable/Models/RUntechable.h; sourceTree = "<group>"; };
 		C37209891B7767AA003A40F2 /* RUntechable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RUntechable.m; path = AddUntechable/Models/RUntechable.m; sourceTree = "<group>"; };
 		C372098A1B7767AA003A40F2 /* RSetUntechable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSetUntechable.m; path = AddUntechable/Models/RSetUntechable.m; sourceTree = "<group>"; };
@@ -1273,8 +1269,6 @@
 				C36D2E551A7919C2000537C5 /* SettingsCellView.h */,
 				C36D2E561A7919C2000537C5 /* SettingsCellView.m */,
 				C36D2E571A7919C2000537C5 /* SettingsCellView.xib */,
-				C36D2E5F1A791ADA000537C5 /* SettingsCellView-iPhone6.xib */,
-				C36D2E611A791AEA000537C5 /* SettingsCellView-iPhone6-Plus.xib */,
 				20CD72D21BD8C57F000F8FBA /* EditButtonCell.h */,
 				20CD72D31BD8C57F000F8FBA /* EditButtonCell.m */,
 				20CD72D41BD8C57F000F8FBA /* EditButtonCell.xib */,
@@ -1415,7 +1409,6 @@
 				209994801BF1CDD800E20068 /* invite_email_selected@3x.png in Resources */,
 				366EAF921A14C3530011D6C6 /* icon-50.png in Resources */,
 				209994821BF1CDD800E20068 /* invite_email@3x.png in Resources */,
-				C36D2E621A791AEA000537C5 /* SettingsCellView-iPhone6-Plus.xib in Resources */,
 				248E06BD1A4AD9180099846A /* ContactListCell-iPhone6-Plus.xib in Resources */,
 				C346D17C1A7FD13B00856A58 /* emailic@3x.png in Resources */,
 				203FD2801BBD4C9000CF598B /* EmailCell.xib in Resources */,
@@ -1525,7 +1518,6 @@
 				209994811BF1CDD800E20068 /* invite_email@2x.png in Resources */,
 				C346D1771A7FD13B00856A58 /* logout@3x.png in Resources */,
 				366EAF981A14C3530011D6C6 /* icon-76.png in Resources */,
-				C36D2E601A791ADA000537C5 /* SettingsCellView-iPhone6.xib in Resources */,
 				C346D1761A7FD13B00856A58 /* logout.png in Resources */,
 				2465A60A1B4BE1C400B3E22C /* navigation2@2x.png in Resources */,
 				C33A87B41A7BCDB4000B9DAE /* EmailChangingController.xib in Resources */,
