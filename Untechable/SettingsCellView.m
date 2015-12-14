@@ -42,7 +42,7 @@
     
     [socialNetworkButton setTitle:@"" forState:UIControlStateNormal];
     socialNetworkButton.enabled = NO;
-    [loginStatus setText: NSLocalizedString(subHeading, nil)];
+    [loginStatus setText: subHeading];
     
     
     UIImage *socialIocn = [UIImage imageNamed:ImageName];

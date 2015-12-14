@@ -176,10 +176,13 @@
 - (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) indexPath {
    
     NSString *appStoreURL = NULL;
-    if(indexPath.row == 6){
+    
+    if(indexPath.row == 5){
+        [self showHowToScreens];
+    }else if(indexPath.row == 7){
        appStoreURL = @"itms://itunes.apple.com/us/app/apple-store/id375380948?mt=8";
        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appStoreURL]];
-    } else if(indexPath.row == 7){
+    } else if(indexPath.row == 8){
         appStoreURL = @"itms://itunes.apple.com/us/app/apple-store/id375380948?mt=8";
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appStoreURL]];
     }
@@ -260,9 +263,7 @@
             
         } else if(indexPath.row == 5){
             
-            [cell setCellValueswithSocialNetworkName :cellName subHeading:@"How to use Untech" NetworkImage:@"emailic@2x.png"];
-            
-            [cell.socialNetworkButton addTarget:self action:@selector(emailLogin:) forControlEvents:UIControlEventTouchUpInside];
+            [cell setCellValueswithSocialNetworkName :NSLocalizedString(cellName, nil) subHeading:NSLocalizedString(@"How to use Untech", nil) NetworkImage:@"emailic@2x.png"];
             
         } else if(indexPath.row == 6){ // EmailCellButton
             
