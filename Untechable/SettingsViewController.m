@@ -15,6 +15,7 @@
 #import "SocialNetworksStatusModal.h"
 #import "SetupGuideViewController.h"
 #import "EditButtonCell.h"
+#import "HowToButtonCell.h"
 
 @interface SettingsViewController () {
     
@@ -36,7 +37,7 @@
     [self setNavigation:@"viewDidLoad"];
     [self updateUI];
 
-    socialNetworksName = [[NSMutableArray alloc] initWithObjects: @"Facebook",@"Twitter",@"LinkedIn",@"Email", @"", nil];
+    socialNetworksName = [[NSMutableArray alloc] initWithObjects: @"Facebook",@"Twitter",@"LinkedIn",@"Email", @"", @"", nil];
     
     socialIcons = [[NSMutableArray alloc] init];
     
@@ -150,13 +151,14 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     //return number of rows;
-    return  6;
+    return  7;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *cellId = @"SettingsCellView";
     SettingsCellView *cell = (SettingsCellView *)[tableView dequeueReusableCellWithIdentifier:cellId];
 
+    HowToButtonCell *cellHowToButton = (HowToButtonCell *)[tableView dequeueReusableCellWithIdentifier:@"HowToButtonCell"];
     EditButtonCell *cellEditButton = (EditButtonCell *)[tableView dequeueReusableCellWithIdentifier:@"EditButtonCell"];
     
     if (cell == nil) {
@@ -209,8 +211,7 @@
             }
             
             [cell.socialNetworkButton addTarget:self action:@selector(loginLinkedIn:) forControlEvents:UIControlEventTouchUpInside];
-        }
-        else if ( indexPath.row == 4){
+        }else if ( indexPath.row == 4){
             
             if (  [untechable.email isEqualToString:@""]  || [untechable.password isEqualToString:@""] ){
                 [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:0 NetworkImage:@"emailic@2x.png"];
@@ -220,8 +221,24 @@
             
             [cell.socialNetworkButton addTarget:self action:@selector(emailLogin:) forControlEvents:UIControlEventTouchUpInside];
             
-      }
-        else if(indexPath.row == 5){ // EmailCellButton
+        } else if(indexPath.row == 5){ // HowToButtonCell
+            
+            if (cellHowToButton == nil) {
+                
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"HowToButtonCell" owner:self options:nil];
+                cellHowToButton = (HowToButtonCell *)[nib objectAtIndex:0];
+            }
+            
+            [cellHowToButton updateUI];
+            
+            cellHowToButton.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cellHowToButton.btnHowTo addTarget:self action:@selector(changeSettings) forControlEvents:UIControlEventTouchUpInside];
+            [cellHowToButton.btnHowTo addTarget:self action:@selector(btnUntechTouchStart:) forControlEvents:UIControlEventTouchDown];
+            [cellHowToButton.btnHowTo addTarget:self action:@selector(btnUntechTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
+            
+            
+            return cellHowToButton;
+        } else if(indexPath.row == 6){ // EmailCellButton
             
             if (cellEditButton == nil) {
                 
