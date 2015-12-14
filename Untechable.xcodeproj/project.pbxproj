@@ -60,6 +60,8 @@
 		2077C4A51C1ED04D00DD12CF /* icon_eyespot.png in Resources */ = {isa = PBXBuildFile; fileRef = 2077C4A31C1ED04D00DD12CF /* icon_eyespot.png */; };
 		2077C4A61C1ED04D00DD12CF /* icon_flyerly.png in Resources */ = {isa = PBXBuildFile; fileRef = 2077C4A41C1ED04D00DD12CF /* icon_flyerly.png */; };
 		2077C4A81C1EE3C400DD12CF /* howTo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2077C4A71C1EE3C400DD12CF /* howTo.png */; };
+		2077C4AD1C1EEAC400DD12CF /* PartnerAppHeadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2077C4AB1C1EEAC400DD12CF /* PartnerAppHeadingCell.m */; };
+		2077C4AE1C1EEAC400DD12CF /* PartnerAppHeadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2077C4AC1C1EEAC400DD12CF /* PartnerAppHeadingCell.xib */; };
 		2099947F1BF1CDD800E20068 /* invite_email_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 209994771BF1CDD800E20068 /* invite_email_selected@2x.png */; };
 		209994801BF1CDD800E20068 /* invite_email_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 209994781BF1CDD800E20068 /* invite_email_selected@3x.png */; };
 		209994811BF1CDD800E20068 /* invite_email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 209994791BF1CDD800E20068 /* invite_email@2x.png */; };
@@ -355,6 +357,9 @@
 		2077C4A31C1ED04D00DD12CF /* icon_eyespot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_eyespot.png; sourceTree = "<group>"; };
 		2077C4A41C1ED04D00DD12CF /* icon_flyerly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_flyerly.png; sourceTree = "<group>"; };
 		2077C4A71C1EE3C400DD12CF /* howTo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = howTo.png; sourceTree = "<group>"; };
+		2077C4AA1C1EEAC400DD12CF /* PartnerAppHeadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartnerAppHeadingCell.h; sourceTree = "<group>"; };
+		2077C4AB1C1EEAC400DD12CF /* PartnerAppHeadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartnerAppHeadingCell.m; sourceTree = "<group>"; };
+		2077C4AC1C1EEAC400DD12CF /* PartnerAppHeadingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PartnerAppHeadingCell.xib; sourceTree = "<group>"; };
 		209994771BF1CDD800E20068 /* invite_email_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_email_selected@2x.png"; sourceTree = "<group>"; };
 		209994781BF1CDD800E20068 /* invite_email_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_email_selected@3x.png"; sourceTree = "<group>"; };
 		209994791BF1CDD800E20068 /* invite_email@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_email@2x.png"; sourceTree = "<group>"; };
@@ -747,6 +752,9 @@
 		2077C4A91C1EEA7400DD12CF /* PartnerAppHeadingCell */ = {
 			isa = PBXGroup;
 			children = (
+				2077C4AA1C1EEAC400DD12CF /* PartnerAppHeadingCell.h */,
+				2077C4AB1C1EEAC400DD12CF /* PartnerAppHeadingCell.m */,
+				2077C4AC1C1EEAC400DD12CF /* PartnerAppHeadingCell.xib */,
 			);
 			name = PartnerAppHeadingCell;
 			sourceTree = "<group>";
@@ -1443,6 +1451,7 @@
 				2077C4A51C1ED04D00DD12CF /* icon_eyespot.png in Resources */,
 				24354D6C1A499EC5000EC781 /* ContactsListControllerViewController.xib in Resources */,
 				36B2765F1A0124E800ED58AD /* CHECKBOX_FILLED@2x.png in Resources */,
+				2077C4AE1C1EEAC400DD12CF /* PartnerAppHeadingCell.xib in Resources */,
 				200DB7531C1080A60065036A /* HowToScreenOneViewController.xib in Resources */,
 				24A4B7A81A5126410029C8DF /* CustomTextTableViewCell.xib in Resources */,
 				247C72D51A5C0968005C9693 /* user_img@3x.png in Resources */,
@@ -1684,6 +1693,7 @@
 				366F9DAB1A124FC7006602E1 /* FHSTwitterEngine.m in Sources */,
 				203FD27F1BBD4C9000CF598B /* EmailCell.m in Sources */,
 				2402BB831A1DBF6A00255A73 /* UntechablesList.m in Sources */,
+				2077C4AD1C1EEAC400DD12CF /* PartnerAppHeadingCell.m in Sources */,
 				2402BB881A1DC3A200255A73 /* UntechableTableCell.m in Sources */,
 				3663932519D6A0A700512965 /* CommonFunctions.m in Sources */,
 				20CF6FD51BECD0C90048C42F /* UntechableConfigurator.m in Sources */,

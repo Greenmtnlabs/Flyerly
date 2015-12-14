@@ -17,6 +17,7 @@
 #import "EditButtonCell.h"
 #import "HowToScreenOneViewController.h"
 #import "PartnerAppCell.h"
+#import "PartnerAppHeadingCell.h"
 
 @interface SettingsViewController () {
     
@@ -41,7 +42,7 @@
     
     [self updateUI];
 
-    cellNames = [[NSMutableArray alloc] initWithObjects: @"Facebook",@"Twitter",@"LinkedIn",@"Email", @"How To", @"", @"Flyerly", @"eyeSPOT", nil];
+    cellNames = [[NSMutableArray alloc] initWithObjects: @"Facebook",@"Twitter",@"LinkedIn",@"Email", @"How To", @"", @"Partner Apps", @"Flyerly", @"eyeSPOT", nil];
     
     socialIcons = [[NSMutableArray alloc] init];
     
@@ -182,10 +183,10 @@
     
     if(indexPath.row == 5){
         [self showHowToScreens];
-    }else if(indexPath.row == 7){
+    }else if(indexPath.row == 8){
        appStoreURL = @"https://itunes.apple.com/us/app/flyerly-create-share-flyers/id344130515?mt=8";
        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appStoreURL]];
-    } else if(indexPath.row == 8){
+    } else if(indexPath.row == 9){
         appStoreURL = @"https://itunes.apple.com/us/app/eyespot/id611525338?mt=8";
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appStoreURL]];
     }
@@ -195,7 +196,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     //return number of rows;
-    return  9;
+    return  10;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -203,6 +204,9 @@
     SettingsCellView *cell = (SettingsCellView *)[tableView dequeueReusableCellWithIdentifier:cellId];
 
     EditButtonCell *cellEditButton = (EditButtonCell *)[tableView dequeueReusableCellWithIdentifier:@"EditButtonCell"];
+    
+    PartnerAppHeadingCell *cellPartnerAppHeading = (PartnerAppHeadingCell *)[tableView dequeueReusableCellWithIdentifier:@"PartnerAppHeadingCell"];
+    
     PartnerAppCell *cellPartnerApp = (PartnerAppCell *)[tableView dequeueReusableCellWithIdentifier:@"PartnerAppCell"];
     
     if (cell == nil) {
@@ -285,6 +289,16 @@
             return cellEditButton;
         } else if(indexPath.row == 7){ // PartnerAppCell
             
+            if (cellPartnerAppHeading == nil) {
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PartnerAppHeadingCell" owner:self options:nil];
+                cellPartnerAppHeading = (PartnerAppHeadingCell *)[nib objectAtIndex:0];
+            }
+            
+            cellPartnerAppHeading.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cellPartnerAppHeading setLabelTitle:NSLocalizedString([cellNames objectAtIndex:6], nil)];
+            return cellPartnerAppHeading;
+        } else if(indexPath.row == 8){ // PartnerAppCell
+            
             if (cellPartnerApp == nil) {
                 NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PartnerAppCell" owner:self options:nil];
                 cellPartnerApp = (PartnerAppCell *)[nib objectAtIndex:0];
@@ -292,10 +306,10 @@
             
             cellPartnerApp.selectionStyle = UITableViewCellSelectionStyleNone;
             [cellPartnerApp.imgAppIcon setImage:[UIImage imageNamed: @"icon_flyerly.png"]];
-            [cellPartnerApp.lblAppName setText:[cellNames objectAtIndex:6]];
+            [cellPartnerApp.lblAppName setText:[cellNames objectAtIndex:7]];
             
             return cellPartnerApp;
-        } else if(indexPath.row == 8){ // PartnerAppCell
+        } else if(indexPath.row == 9){ // PartnerAppCell
             
             if (cellPartnerApp == nil) {
                 NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PartnerAppCell" owner:self options:nil];
@@ -304,7 +318,7 @@
             cellPartnerApp.selectionStyle = UITableViewCellSelectionStyleNone;
             [cellPartnerApp.imgAppIcon setImage:[UIImage imageNamed: @"icon_eyespot.png"]];
             
-            [cellPartnerApp.lblAppName setText:[cellNames objectAtIndex:7]];
+            [cellPartnerApp.lblAppName setText:[cellNames objectAtIndex:8]];
             
             return cellPartnerApp;
         }
