@@ -184,6 +184,9 @@
 // EditButtonCell
 "Change Untech Now Settings" = "Change Untech Now Settings";
 
+// HowToButtonCell 
+"How To" = "How To";
+
 // AppInvite
 "Take a break from technology. Untech & Reconnect with life: %@" = "Take a break from technology. Untech & Reconnect with life: %@";
 "Take a break from technology. Untech & Reconnect with life:" = "Take a break from technology. Untech & Reconnect with life:";
@@ -207,5 +210,7 @@
 
 "DONE" = "DONE";
 "next " = "next ";
+
+
 
 
