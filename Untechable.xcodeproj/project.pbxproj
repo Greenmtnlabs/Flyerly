@@ -55,12 +55,11 @@
 		203FD2801BBD4C9000CF598B /* EmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 203FD27E1BBD4C9000CF598B /* EmailCell.xib */; };
 		2061886A1BC519CE004D2071 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 206188691BC519CE004D2071 /* MessageUI.framework */; };
 		2065E8DA1B8C94F60005D184 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2065E8DC1B8C94F60005D184 /* Localizable.strings */; };
-		2077C49A1C1EA80D00DD12CF /* HowToButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2077C4981C1EA80D00DD12CF /* HowToButtonCell.m */; };
-		2077C49B1C1EA80D00DD12CF /* HowToButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2077C4991C1EA80D00DD12CF /* HowToButtonCell.xib */; };
 		2077C4A01C1EC5C800DD12CF /* PartnerAppCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2077C49E1C1EC5C800DD12CF /* PartnerAppCell.m */; };
 		2077C4A11C1EC5C800DD12CF /* PartnerAppCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2077C49F1C1EC5C800DD12CF /* PartnerAppCell.xib */; };
 		2077C4A51C1ED04D00DD12CF /* icon_eyespot.png in Resources */ = {isa = PBXBuildFile; fileRef = 2077C4A31C1ED04D00DD12CF /* icon_eyespot.png */; };
 		2077C4A61C1ED04D00DD12CF /* icon_flyerly.png in Resources */ = {isa = PBXBuildFile; fileRef = 2077C4A41C1ED04D00DD12CF /* icon_flyerly.png */; };
+		2077C4A81C1EE3C400DD12CF /* howTo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2077C4A71C1EE3C400DD12CF /* howTo.png */; };
 		2099947F1BF1CDD800E20068 /* invite_email_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 209994771BF1CDD800E20068 /* invite_email_selected@2x.png */; };
 		209994801BF1CDD800E20068 /* invite_email_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 209994781BF1CDD800E20068 /* invite_email_selected@3x.png */; };
 		209994811BF1CDD800E20068 /* invite_email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 209994791BF1CDD800E20068 /* invite_email@2x.png */; };
@@ -350,14 +349,12 @@
 		206188691BC519CE004D2071 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		2065E8DB1B8C94F60005D184 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2065E8DD1B8C95290005D184 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		2077C4971C1EA80D00DD12CF /* HowToButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HowToButtonCell.h; sourceTree = "<group>"; };
-		2077C4981C1EA80D00DD12CF /* HowToButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HowToButtonCell.m; sourceTree = "<group>"; };
-		2077C4991C1EA80D00DD12CF /* HowToButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HowToButtonCell.xib; sourceTree = "<group>"; };
 		2077C49D1C1EC5C800DD12CF /* PartnerAppCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartnerAppCell.h; sourceTree = "<group>"; };
 		2077C49E1C1EC5C800DD12CF /* PartnerAppCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartnerAppCell.m; sourceTree = "<group>"; };
 		2077C49F1C1EC5C800DD12CF /* PartnerAppCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PartnerAppCell.xib; sourceTree = "<group>"; };
 		2077C4A31C1ED04D00DD12CF /* icon_eyespot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_eyespot.png; sourceTree = "<group>"; };
 		2077C4A41C1ED04D00DD12CF /* icon_flyerly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_flyerly.png; sourceTree = "<group>"; };
+		2077C4A71C1EE3C400DD12CF /* howTo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = howTo.png; sourceTree = "<group>"; };
 		209994771BF1CDD800E20068 /* invite_email_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_email_selected@2x.png"; sourceTree = "<group>"; };
 		209994781BF1CDD800E20068 /* invite_email_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_email_selected@3x.png"; sourceTree = "<group>"; };
 		209994791BF1CDD800E20068 /* invite_email@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_email@2x.png"; sourceTree = "<group>"; };
@@ -728,16 +725,6 @@
 			name = GlobalClass;
 			sourceTree = "<group>";
 		};
-		2077C4961C1EA7D100DD12CF /* HowToButtonCell */ = {
-			isa = PBXGroup;
-			children = (
-				2077C4971C1EA80D00DD12CF /* HowToButtonCell.h */,
-				2077C4981C1EA80D00DD12CF /* HowToButtonCell.m */,
-				2077C4991C1EA80D00DD12CF /* HowToButtonCell.xib */,
-			);
-			name = HowToButtonCell;
-			sourceTree = "<group>";
-		};
 		2077C49C1C1EC58800DD12CF /* PartnerAppCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -755,6 +742,13 @@
 				2077C4A41C1ED04D00DD12CF /* icon_flyerly.png */,
 			);
 			name = partnerAppIcons;
+			sourceTree = "<group>";
+		};
+		2077C4A91C1EEA7400DD12CF /* PartnerAppHeadingCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = PartnerAppHeadingCell;
 			sourceTree = "<group>";
 		};
 		20BD851F1BE26AC600F7EB9E /* IntroScreen */ = {
@@ -1097,6 +1091,7 @@
 		36B0369A19DAD2AB00E8CD21 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				2077C4A71C1EE3C400DD12CF /* howTo.png */,
 				2077C4A21C1ED02800DD12CF /* partnerAppIcons */,
 				200DB7571C1081E30065036A /* howToScreen_1@3x.png */,
 				200DB7581C1081E30065036A /* howToScreen_2@2x.png */,
@@ -1307,8 +1302,8 @@
 		C36D2E4F1A79196E000537C5 /* PreferencesController */ = {
 			isa = PBXGroup;
 			children = (
+				2077C4A91C1EEA7400DD12CF /* PartnerAppHeadingCell */,
 				2077C49C1C1EC58800DD12CF /* PartnerAppCell */,
-				2077C4961C1EA7D100DD12CF /* HowToButtonCell */,
 				C36D2E5A1A7919DC000537C5 /* SettingsViewController.h */,
 				C36D2E5B1A7919DC000537C5 /* SettingsViewController.m */,
 				C36D2E5C1A7919DC000537C5 /* SettingsViewController.xib */,
@@ -1453,7 +1448,6 @@
 				247C72D51A5C0968005C9693 /* user_img@3x.png in Resources */,
 				209994841BF1CDD800E20068 /* invite_facebook_selected@3x.png in Resources */,
 				36474F2219D9780100084F34 /* Pigiarniq Bold.ttf in Resources */,
-				2077C49B1C1EA80D00DD12CF /* HowToButtonCell.xib in Resources */,
 				209994801BF1CDD800E20068 /* invite_email_selected@3x.png in Resources */,
 				366EAF921A14C3530011D6C6 /* icon-50.png in Resources */,
 				209994821BF1CDD800E20068 /* invite_email@3x.png in Resources */,
@@ -1594,6 +1588,7 @@
 				244211F51B3D5B4400A4EE71 /* SetupGuideThirdView.xib in Resources */,
 				244834401A5D915D00E6F173 /* sms@3x.png in Resources */,
 				366EAFA01A14C3530011D6C6 /* Default-667h@2x.png in Resources */,
+				2077C4A81C1EE3C400DD12CF /* howTo.png in Resources */,
 				248E06BB1A4AD8BA0099846A /* ContactListCell-iPhone6.xib in Resources */,
 				2465A60C1B4BE1C400B3E22C /* navigation2.png in Resources */,
 				2448343E1A5D776200E6F173 /* sms_selected@3x.png in Resources */,
@@ -1674,7 +1669,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2077C49A1C1EA80D00DD12CF /* HowToButtonCell.m in Sources */,
 				C36D2E5D1A7919DC000537C5 /* SettingsViewController.m in Sources */,
 				36BB7B8919FFD98C00562069 /* ThankyouController.m in Sources */,
 				366ECD9619D323DA00F71A11 /* AddUntechableController.m in Sources */,

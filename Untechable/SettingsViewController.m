@@ -36,9 +36,12 @@
     // Do any additional setup after loading the view from its nib.
     
     [self setNavigation:@"viewDidLoad"];
+    
+    [self.navigationController setNavigationBarHidden:NO];
+    
     [self updateUI];
 
-    cellNames = [[NSMutableArray alloc] initWithObjects: @"Facebook",@"Twitter",@"LinkedIn",@"Email", @"How To", @"", @"Flyerly", @"Eyespot", nil];
+    cellNames = [[NSMutableArray alloc] initWithObjects: @"Facebook",@"Twitter",@"LinkedIn",@"Email", @"How To", @"", @"Flyerly", @"eyeSPOT", nil];
     
     socialIcons = [[NSMutableArray alloc] init];
     
@@ -180,10 +183,10 @@
     if(indexPath.row == 5){
         [self showHowToScreens];
     }else if(indexPath.row == 7){
-       appStoreURL = @"itms://itunes.apple.com/us/app/apple-store/id375380948?mt=8";
+       appStoreURL = @"https://itunes.apple.com/us/app/flyerly-create-share-flyers/id344130515?mt=8";
        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appStoreURL]];
     } else if(indexPath.row == 8){
-        appStoreURL = @"itms://itunes.apple.com/us/app/apple-store/id375380948?mt=8";
+        appStoreURL = @"https://itunes.apple.com/us/app/eyespot/id611525338?mt=8";
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appStoreURL]];
     }
 }
@@ -263,7 +266,7 @@
             
         } else if(indexPath.row == 5){
             
-            [cell setCellValueswithSocialNetworkName :NSLocalizedString(cellName, nil) subHeading:NSLocalizedString(@"How to use Untech", nil) NetworkImage:@"emailic@2x.png"];
+            [cell setCellValueswithSocialNetworkName :NSLocalizedString(cellName, nil) subHeading:NSLocalizedString(@"How to use Untech", nil) NetworkImage:@"howTo.png"];
             
         } else if(indexPath.row == 6){ // EmailCellButton
             
