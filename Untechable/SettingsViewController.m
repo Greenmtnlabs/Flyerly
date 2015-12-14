@@ -16,6 +16,7 @@
 #import "SetupGuideViewController.h"
 #import "EditButtonCell.h"
 #import "HowToButtonCell.h"
+#import "HowToScreenOneViewController.h"
 
 @interface SettingsViewController () {
     
@@ -139,13 +140,37 @@
     (highlighted) ? [button setBackgroundColor:DEF_GREEN] : [button setBackgroundColor:[UIColor clearColor]];
 }
 
+#pragma Custom Methods
+
+/*
+ * Method to launch SetupGuide Screen
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+
 -(void)changeSettings{
-    
     SetupGuideViewController *secondSetupScreen = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
     secondSetupScreen.untechable = untechable;
     [self.navigationController pushViewController:secondSetupScreen animated:YES];
-    
 }
+
+/*
+ * Method to launch HowToScreen
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+-(void)showHowToScreens{
+    HowToScreenOneViewController *howToScreenOneViewController = [[HowToScreenOneViewController alloc] initWithNibName:@"HowToScreenOneViewController" bundle:nil];
+    howToScreenOneViewController.untechable = untechable;
+    [self.navigationController pushViewController:howToScreenOneViewController animated:YES];
+}
+
+
+
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -232,9 +257,9 @@
             [cellHowToButton updateUI];
             
             cellHowToButton.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cellHowToButton.btnHowTo addTarget:self action:@selector(changeSettings) forControlEvents:UIControlEventTouchUpInside];
-            [cellHowToButton.btnHowTo addTarget:self action:@selector(btnUntechTouchStart:) forControlEvents:UIControlEventTouchDown];
-            [cellHowToButton.btnHowTo addTarget:self action:@selector(btnUntechTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
+            [cellHowToButton.btnHowTo addTarget:self action:@selector(showHowToScreens) forControlEvents:UIControlEventTouchUpInside];
+            [cellHowToButton.btnHowTo addTarget:self action:@selector(btnTouchStart:) forControlEvents:UIControlEventTouchDown];
+            [cellHowToButton.btnHowTo addTarget:self action:@selector(btnTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
             
             
             return cellHowToButton;
