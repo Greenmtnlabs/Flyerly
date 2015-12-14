@@ -64,6 +64,9 @@
     }else if(isComingFromSettings){
         
         SettingsViewController *settingsViewController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil];
+        untechable.rUId = @"1";
+        untechable.dic[@"rUId"] = @"1";
+        settingsViewController.untechable = untechable;
         [self.navigationController pushViewController:settingsViewController animated:YES];
         
     } else{ // otherwise, load SetupGuideViewController
