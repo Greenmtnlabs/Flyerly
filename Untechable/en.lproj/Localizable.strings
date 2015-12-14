@@ -186,6 +186,7 @@
 
 // AppInvite
 "Take a break from technology. Untech & Reconnect with life: %@" = "Take a break from technology. Untech & Reconnect with life: %@";
+"Take a break from technology. Untech & Reconnect with life:" = "Take a break from technology. Untech & Reconnect with life:";
 "Invite Friends" = "Invite Friends";
 "Please select any contact to invite!" = "Please select any contact to invite!";
 "Take a break from technology. Untech & Reconnect with life." = "Take a break from technology. Untech & Reconnect with life.";
@@ -199,7 +200,7 @@
 "Setup your Untech account & settings to make taking a break from technology as easy as 1, 2, 3." = "Setup your Untech account & settings to make taking a break from technology as easy as 1, 2, 3.";
 "Note: You can always adjust these in the settings screen." = "Note: You can always adjust these in the settings screen.";
 
-"Select 'Untech Now' using your pre-selected settings(What you'll be doing, who to inform & for how long)." = "Select 'Untech Now' using your pre-selected settings(What you'll be doing, who to inform & for how long).";
+"Select 'Untech Now' using your pre-selected settings (what you'll be doing, who to inform & for how long)." = "Select 'Untech Now' using your pre-selected settings (what you'll be doing, who to inform & for how long).";
 "Select 'Untech Custom' to manually choose what you'll be doing during your untechable peroid of time & who you'd like to inform." = "Select 'Untech Custom' to manually choose what you'll be doing during your untechable peroid of time & who you'd like to inform.";
 
 "Once you've completed your Untech selection, go enjoy your time away from technology. Untech & reconnect with life. Don't forget to invite others to untech so thay can do the same. Namaste!" = "Once you've completed your Untech selection, go enjoy your time away from technology. Untech & reconnect with life. Don't forget to invite others to untech so thay can do the same. Namaste!";
