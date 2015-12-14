@@ -41,6 +41,10 @@
                     <constraint firstItem="r6z-1N-gmy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="9" id="yI9-6W-Ucd"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="imgAppIcon" destination="G9G-0c-x9P" id="o1A-fL-hZi"/>
+                <outlet property="lblAppName" destination="r6z-1N-gmy" id="Gcx-SS-KK2"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>

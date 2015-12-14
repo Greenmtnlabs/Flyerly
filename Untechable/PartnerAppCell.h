@@ -10,4 +10,7 @@
 
 @interface PartnerAppCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UILabel *lblAppName;
+@property (strong, nonatomic) IBOutlet UIImageView *imgAppIcon;
+
 @end

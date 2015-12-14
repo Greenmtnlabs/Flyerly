@@ -35,6 +35,21 @@
     [socialNetworkImage setImage:socialIocn];
 }
 
+-(void) setCellValueswithSocialNetworkName:(NSString *)networkName subHeading:(NSString *)subHeading NetworkImage:(NSString *)ImageName{
+    
+    socialNetworkName.font = [UIFont fontWithName:APP_FONT size:19];
+    [socialNetworkName setText:networkName];
+    
+    [socialNetworkButton setTitle:@"" forState:UIControlStateNormal];
+    socialNetworkButton.enabled = NO;
+    [loginStatus setText: NSLocalizedString(subHeading, nil)];
+    
+    
+    UIImage *socialIocn = [UIImage imageNamed:ImageName];
+    [socialNetworkImage setImage:socialIocn];
+}
+
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

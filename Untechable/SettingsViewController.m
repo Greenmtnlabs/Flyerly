@@ -15,7 +15,6 @@
 #import "SocialNetworksStatusModal.h"
 #import "SetupGuideViewController.h"
 #import "EditButtonCell.h"
-#import "HowToButtonCell.h"
 #import "HowToScreenOneViewController.h"
 #import "PartnerAppCell.h"
 
@@ -39,7 +38,7 @@
     [self setNavigation:@"viewDidLoad"];
     [self updateUI];
 
-    cellNames = [[NSMutableArray alloc] initWithObjects: @"Facebook",@"Twitter",@"LinkedIn",@"Email", @"", @"", @"", @"", nil];
+    cellNames = [[NSMutableArray alloc] initWithObjects: @"Facebook",@"Twitter",@"LinkedIn",@"Email", @"How To", @"", @"Flyerly", @"Eyespot", nil];
     
     socialIcons = [[NSMutableArray alloc] init];
     
@@ -175,8 +174,15 @@
 
 // Tap on table Row
 - (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) indexPath {
-    long i =  indexPath.row;
-
+   
+    NSString *appStoreURL = NULL;
+    if(indexPath.row == 6){
+       appStoreURL = @"itms://itunes.apple.com/us/app/apple-store/id375380948?mt=8";
+       [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appStoreURL]];
+    } else if(indexPath.row == 7){
+        appStoreURL = @"itms://itunes.apple.com/us/app/apple-store/id375380948?mt=8";
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appStoreURL]];
+    }
 }
 
 // Customize the number of rows in the table view.
@@ -190,7 +196,6 @@
     static NSString *cellId = @"SettingsCellView";
     SettingsCellView *cell = (SettingsCellView *)[tableView dequeueReusableCellWithIdentifier:cellId];
 
-    HowToButtonCell *cellHowToButton = (HowToButtonCell *)[tableView dequeueReusableCellWithIdentifier:@"HowToButtonCell"];
     EditButtonCell *cellEditButton = (EditButtonCell *)[tableView dequeueReusableCellWithIdentifier:@"EditButtonCell"];
     PartnerAppCell *cellPartnerApp = (PartnerAppCell *)[tableView dequeueReusableCellWithIdentifier:@"PartnerAppCell"];
     
@@ -253,21 +258,12 @@
             
             [cell.socialNetworkButton addTarget:self action:@selector(emailLogin:) forControlEvents:UIControlEventTouchUpInside];
             
-        } else if(indexPath.row == 5){ // HowToButtonCell
+        } else if(indexPath.row == 5){
             
-            if (cellHowToButton == nil) {
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"HowToButtonCell" owner:self options:nil];
-                cellHowToButton = (HowToButtonCell *)[nib objectAtIndex:0];
-            }
+            [cell setCellValueswithSocialNetworkName :cellName subHeading:@"How to use Untech" NetworkImage:@"emailic@2x.png"];
             
-            [cellHowToButton updateUI];
+            [cell.socialNetworkButton addTarget:self action:@selector(emailLogin:) forControlEvents:UIControlEventTouchUpInside];
             
-            cellHowToButton.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cellHowToButton.btnHowTo addTarget:self action:@selector(showHowToScreens) forControlEvents:UIControlEventTouchUpInside];
-            [cellHowToButton.btnHowTo addTarget:self action:@selector(btnTouchStart:) forControlEvents:UIControlEventTouchDown];
-            [cellHowToButton.btnHowTo addTarget:self action:@selector(btnTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
-            
-            return cellHowToButton;
         } else if(indexPath.row == 6){ // EmailCellButton
             
             if (cellEditButton == nil) {
@@ -290,27 +286,21 @@
                 cellPartnerApp = (PartnerAppCell *)[nib objectAtIndex:0];
             }
             
-//            [cellEditButton updateUI];
-//            
-//            cellEditButton.selectionStyle = UITableViewCellSelectionStyleNone;
-//            [cellEditButton.btnChangeUntechNowSettings addTarget:self action:@selector(changeSettings) forControlEvents:UIControlEventTouchUpInside];
-//            [cellEditButton.btnChangeUntechNowSettings addTarget:self action:@selector(btnUntechTouchStart:) forControlEvents:UIControlEventTouchDown];
-//            [cellEditButton.btnChangeUntechNowSettings addTarget:self action:@selector(btnUntechTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
+            cellPartnerApp.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cellPartnerApp.imgAppIcon setImage:[UIImage imageNamed: @"icon_flyerly.png"]];
+            [cellPartnerApp.lblAppName setText:[cellNames objectAtIndex:6]];
             
             return cellPartnerApp;
         } else if(indexPath.row == 8){ // PartnerAppCell
             
-            if (cellEditButton == nil) {
+            if (cellPartnerApp == nil) {
                 NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PartnerAppCell" owner:self options:nil];
                 cellPartnerApp = (PartnerAppCell *)[nib objectAtIndex:0];
             }
+            cellPartnerApp.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cellPartnerApp.imgAppIcon setImage:[UIImage imageNamed: @"icon_eyespot.png"]];
             
-//            [cellEditButton updateUI];
-//            
-//            cellEditButton.selectionStyle = UITableViewCellSelectionStyleNone;
-//            [cellEditButton.btnChangeUntechNowSettings addTarget:self action:@selector(changeSettings) forControlEvents:UIControlEventTouchUpInside];
-//            [cellEditButton.btnChangeUntechNowSettings addTarget:self action:@selector(btnUntechTouchStart:) forControlEvents:UIControlEventTouchDown];
-//            [cellEditButton.btnChangeUntechNowSettings addTarget:self action:@selector(btnUntechTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
+            [cellPartnerApp.lblAppName setText:[cellNames objectAtIndex:7]];
             
             return cellPartnerApp;
         }
