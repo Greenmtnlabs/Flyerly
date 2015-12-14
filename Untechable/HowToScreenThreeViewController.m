@@ -9,6 +9,8 @@
 #import "HowToScreenThreeViewController.h"
 #import "SetupGuideViewController.h"
 #import "UntechablesList.h"
+#import "SettingsViewController.h"
+
 
 @interface HowToScreenThreeViewController ()
 
@@ -18,6 +20,7 @@
 
 @synthesize untechable;
 @synthesize lblMessage, isComingFromThankYou, pageView;
+@synthesize isComingFromSettings;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -58,7 +61,12 @@
     if(isComingFromThankYou){ // If coming from ThankYou Screen, load UntechablesList
         UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
         [self.navigationController pushViewController:mainViewController animated:YES];
-    }else{ // otherwise, load SetupGuideViewController
+    }else if(isComingFromSettings){
+        
+        SettingsViewController *settingsViewController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil];
+        [self.navigationController pushViewController:settingsViewController animated:YES];
+        
+    } else{ // otherwise, load SetupGuideViewController
         SetupGuideViewController *setupGuideViewController = [[SetupGuideViewController alloc] initWithNibName:@"SetupGuideViewController" bundle:nil];
         setupGuideViewController.untechable = untechable;
         [self.navigationController pushViewController:setupGuideViewController animated:YES];

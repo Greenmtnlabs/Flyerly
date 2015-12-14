@@ -17,4 +17,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblMessage1;
 @property (strong, nonatomic) IBOutlet UILabel *lblMessage2;
 
+@property (nonatomic,assign) BOOL isComingFromSettings;
+
 @end

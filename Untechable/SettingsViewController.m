@@ -166,6 +166,7 @@
 -(void)showHowToScreens{
     HowToScreenOneViewController *howToScreenOneViewController = [[HowToScreenOneViewController alloc] initWithNibName:@"HowToScreenOneViewController" bundle:nil];
     howToScreenOneViewController.untechable = untechable;
+    howToScreenOneViewController.isComingFromSettings = YES;
     [self.navigationController pushViewController:howToScreenOneViewController animated:YES];
 }
 

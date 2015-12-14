@@ -17,12 +17,14 @@
 
 @synthesize untechable;
 @synthesize btnNext, lblMessage1, lblMessage2;
+@synthesize isComingFromSettings;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
     [self.navigationController setNavigationBarHidden:YES];
+    
     
     // to apply localization
     [self applyLocalization];
@@ -52,6 +54,7 @@
     
     HowToScreenTwoViewController *howToScreenTwoViewController = [[HowToScreenTwoViewController alloc] initWithNibName:@"HowToScreenTwoViewController" bundle:nil];
     howToScreenTwoViewController.untechable = untechable;
+    howToScreenTwoViewController.isComingFromSettings = isComingFromSettings;
     [self.navigationController pushViewController:howToScreenTwoViewController animated:YES];
     
 }

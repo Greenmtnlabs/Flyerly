@@ -19,4 +19,7 @@
 
 @property (nonatomic, assign) BOOL isComingFromThankYou;
 @property (strong, nonatomic) IBOutlet UIPageControl *pageView;
+
+@property (nonatomic,assign) BOOL isComingFromSettings;
+
 @end
