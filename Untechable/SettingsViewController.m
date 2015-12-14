@@ -17,11 +17,12 @@
 #import "EditButtonCell.h"
 #import "HowToButtonCell.h"
 #import "HowToScreenOneViewController.h"
+#import "PartnerAppCell.h"
 
 @interface SettingsViewController () {
     
     NSMutableArray *socialIcons;
-    NSMutableArray *socialNetworksName;
+    NSMutableArray *cellNames;
 }
 
 @end
@@ -38,7 +39,7 @@
     [self setNavigation:@"viewDidLoad"];
     [self updateUI];
 
-    socialNetworksName = [[NSMutableArray alloc] initWithObjects: @"Facebook",@"Twitter",@"LinkedIn",@"Email", @"", @"", nil];
+    cellNames = [[NSMutableArray alloc] initWithObjects: @"Facebook",@"Twitter",@"LinkedIn",@"Email", @"", @"", @"", @"", nil];
     
     socialIcons = [[NSMutableArray alloc] init];
     
@@ -170,14 +171,19 @@
     [self.navigationController pushViewController:howToScreenOneViewController animated:YES];
 }
 
+#pragma TableView Methods
 
+// Tap on table Row
+- (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) indexPath {
+    long i =  indexPath.row;
 
+}
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     //return number of rows;
-    return  7;
+    return  9;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -186,13 +192,13 @@
 
     HowToButtonCell *cellHowToButton = (HowToButtonCell *)[tableView dequeueReusableCellWithIdentifier:@"HowToButtonCell"];
     EditButtonCell *cellEditButton = (EditButtonCell *)[tableView dequeueReusableCellWithIdentifier:@"EditButtonCell"];
+    PartnerAppCell *cellPartnerApp = (PartnerAppCell *)[tableView dequeueReusableCellWithIdentifier:@"PartnerAppCell"];
     
     if (cell == nil) {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SettingsCellView" owner:self options:nil];
         cell = (SettingsCellView *)[nib objectAtIndex:0];
     }
-    
-
+   
     if( indexPath.row == 0 ){
         
         // set first cell to show user name
@@ -205,14 +211,14 @@
         
     } else {
 
-        NSString *sNetworksName = [socialNetworksName objectAtIndex:(indexPath.row - 1)];
+        NSString *cellName = [cellNames objectAtIndex:(indexPath.row - 1)];
         if ( indexPath.row == 1 ){
             
             if ( [untechable.socialNetworksStatusModal.mFbAuth isEqualToString:@""] ||
                  [untechable.socialNetworksStatusModal.mFbAuthExpiryTs isEqualToString:@""] ) {
-                [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:0 NetworkImage:@"facebook@2x.png"];
+                [cell setCellValueswithSocialNetworkName :cellName LoginStatus:0 NetworkImage:@"facebook@2x.png"];
             } else {
-                [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:1 NetworkImage:@"facebook@2x.png"];
+                [cell setCellValueswithSocialNetworkName :cellName LoginStatus:1 NetworkImage:@"facebook@2x.png"];
             }
             
             [cell.socialNetworkButton addTarget:self action:@selector(loginFacebook:) forControlEvents:UIControlEventTouchUpInside];
@@ -221,9 +227,9 @@
             
            if ( [untechable.socialNetworksStatusModal.mTwitterAuth isEqualToString:@""] ||
                 [untechable.socialNetworksStatusModal.mTwOAuthTokenSecret isEqualToString:@""]  ){
-                [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:0 NetworkImage:@"twitter@2x.png"];
+                [cell setCellValueswithSocialNetworkName :cellName LoginStatus:0 NetworkImage:@"twitter@2x.png"];
             } else {
-                [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:1 NetworkImage:@"twitter@2x.png"];
+                [cell setCellValueswithSocialNetworkName :cellName LoginStatus:1 NetworkImage:@"twitter@2x.png"];
             }
             
             [cell.socialNetworkButton addTarget:self action:@selector(loginTwitter:) forControlEvents:UIControlEventTouchUpInside];
@@ -231,18 +237,18 @@
         }else if ( indexPath.row == 3 ){
             
             if ( [untechable.socialNetworksStatusModal.mLinkedinAuth isEqualToString:@""] ) {
-                [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:0 NetworkImage:@"linkedin@2x.png"];
+                [cell setCellValueswithSocialNetworkName :cellName LoginStatus:0 NetworkImage:@"linkedin@2x.png"];
             } else {
-                 [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:1 NetworkImage:@"linkedin@2x.png"];
+                 [cell setCellValueswithSocialNetworkName :cellName LoginStatus:1 NetworkImage:@"linkedin@2x.png"];
             }
             
             [cell.socialNetworkButton addTarget:self action:@selector(loginLinkedIn:) forControlEvents:UIControlEventTouchUpInside];
         }else if ( indexPath.row == 4){
             
             if (  [untechable.email isEqualToString:@""]  || [untechable.password isEqualToString:@""] ){
-                [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:0 NetworkImage:@"emailic@2x.png"];
+                [cell setCellValueswithSocialNetworkName :cellName LoginStatus:0 NetworkImage:@"emailic@2x.png"];
             }else {
-                [cell setCellValueswithSocialNetworkName :sNetworksName LoginStatus:1 NetworkImage:@"emailic@2x.png"];
+                [cell setCellValueswithSocialNetworkName :cellName LoginStatus:1 NetworkImage:@"emailic@2x.png"];
             }
             
             [cell.socialNetworkButton addTarget:self action:@selector(emailLogin:) forControlEvents:UIControlEventTouchUpInside];
@@ -250,7 +256,6 @@
         } else if(indexPath.row == 5){ // HowToButtonCell
             
             if (cellHowToButton == nil) {
-                
                 NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"HowToButtonCell" owner:self options:nil];
                 cellHowToButton = (HowToButtonCell *)[nib objectAtIndex:0];
             }
@@ -262,12 +267,10 @@
             [cellHowToButton.btnHowTo addTarget:self action:@selector(btnTouchStart:) forControlEvents:UIControlEventTouchDown];
             [cellHowToButton.btnHowTo addTarget:self action:@selector(btnTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
             
-            
             return cellHowToButton;
         } else if(indexPath.row == 6){ // EmailCellButton
             
             if (cellEditButton == nil) {
-                
                 NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EditButtonCell" owner:self options:nil];
                 cellEditButton = (EditButtonCell *)[nib objectAtIndex:0];
             }
@@ -279,14 +282,59 @@
             [cellEditButton.btnChangeUntechNowSettings addTarget:self action:@selector(btnUntechTouchStart:) forControlEvents:UIControlEventTouchDown];
             [cellEditButton.btnChangeUntechNowSettings addTarget:self action:@selector(btnUntechTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
             
-            
             return cellEditButton;
+        } else if(indexPath.row == 7){ // PartnerAppCell
+            
+            if (cellPartnerApp == nil) {
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PartnerAppCell" owner:self options:nil];
+                cellPartnerApp = (PartnerAppCell *)[nib objectAtIndex:0];
+            }
+            
+//            [cellEditButton updateUI];
+//            
+//            cellEditButton.selectionStyle = UITableViewCellSelectionStyleNone;
+//            [cellEditButton.btnChangeUntechNowSettings addTarget:self action:@selector(changeSettings) forControlEvents:UIControlEventTouchUpInside];
+//            [cellEditButton.btnChangeUntechNowSettings addTarget:self action:@selector(btnUntechTouchStart:) forControlEvents:UIControlEventTouchDown];
+//            [cellEditButton.btnChangeUntechNowSettings addTarget:self action:@selector(btnUntechTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
+            
+            return cellPartnerApp;
+        } else if(indexPath.row == 8){ // PartnerAppCell
+            
+            if (cellEditButton == nil) {
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PartnerAppCell" owner:self options:nil];
+                cellPartnerApp = (PartnerAppCell *)[nib objectAtIndex:0];
+            }
+            
+//            [cellEditButton updateUI];
+//            
+//            cellEditButton.selectionStyle = UITableViewCellSelectionStyleNone;
+//            [cellEditButton.btnChangeUntechNowSettings addTarget:self action:@selector(changeSettings) forControlEvents:UIControlEventTouchUpInside];
+//            [cellEditButton.btnChangeUntechNowSettings addTarget:self action:@selector(btnUntechTouchStart:) forControlEvents:UIControlEventTouchDown];
+//            [cellEditButton.btnChangeUntechNowSettings addTarget:self action:@selector(btnUntechTouchEnd:) forControlEvents:UIControlEventTouchUpInside];
+            
+            return cellPartnerApp;
         }
     }
     return cell;
     
     
 }
+
+
+
+#pragma mark -  Highlighting Functions
+
+-(void)btnUntechTouchStart :(id)button{
+    [self setUntechHighlighted:YES sender:button];
+}
+-(void)btnUntechTouchEnd :(id)button{
+    [self setUntechHighlighted:NO sender:button];
+}
+- (void)setUntechHighlighted:(BOOL)highlighted sender:(id)button {
+    (highlighted) ? [button setBackgroundColor:DEF_GREEN] : [button setBackgroundColor:DEF_GRAY];
+    (highlighted) ? [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal] : [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+}
+
 
 -(IBAction)emailLogin:(id)sender {
     
@@ -324,25 +372,25 @@
     [untechable.socialNetworksStatusModal loginTwitter:sender Controller:self];
 }
 
--(IBAction)loginFacebook:(id) sender {    
+-(IBAction)loginFacebook:(id) sender {
     [untechable.socialNetworksStatusModal loginFacebook:sender Controller:self];
 }
 
 
 -(void)onEditName{
     editNameAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Put in your name below. This will be used to identify yourself to friends.", nil)
-                                                 message:@""
-                                                delegate:self
-                                       cancelButtonTitle:NSLocalizedString(TITLE_DONE_TXT, nil)
-                                       otherButtonTitles:nil, nil];
-
+                                               message:@""
+                                              delegate:self
+                                     cancelButtonTitle:NSLocalizedString(TITLE_DONE_TXT, nil)
+                                     otherButtonTitles:nil, nil];
+    
     editNameAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
     //Name field
     UITextField * nameField = [editNameAlert textFieldAtIndex:0];
     nameField.text = untechable.userName;
     nameField.keyboardType = UIKeyboardTypeTwitter;
     nameField.placeholder = NSLocalizedString(@"Enter Name", nil);
-
+    
     [editNameAlert show];
 }
 
@@ -395,18 +443,4 @@
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
-
-
-#pragma mark -  Highlighting Functions
-
--(void)btnUntechTouchStart :(id)button{
-    [self setUntechHighlighted:YES sender:button];
-}
--(void)btnUntechTouchEnd :(id)button{
-    [self setUntechHighlighted:NO sender:button];
-}
-- (void)setUntechHighlighted:(BOOL)highlighted sender:(id)button {
-    (highlighted) ? [button setBackgroundColor:DEF_GREEN] : [button setBackgroundColor:DEF_GRAY];
-    (highlighted) ? [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal] : [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-}
 @end
