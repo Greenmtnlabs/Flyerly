@@ -334,7 +334,7 @@ SocialStatusCron.setup = function(app) {
 				for(var j=0; j<emailAddresses.length; j++ ){
 					//send this user email
 					var toEmail = emailAddresses[j];
-					var body = "Hello " + toName + ", \n\n" + "Your contact " + myName + " is untech for " + totalDaysHours + " with this reason:\n\n" + reason + "\n\nThank you,\nUntech Team\n\nReconnect with life. Get the untech app to easily manage your offline time: http://unte.ch";
+					var body = "Your contact " + myName + " is unteching for " + totalDaysHours + ", with this reason:\n\n" + reason + "\n\nThank you,\nUntech Team\n\nReconnect with life. Get the untech app to easily manage your offline time: http://unte.ch";
 
 					logger.info("Sending email to: " + toEmail);
 					var mailOptions = {
