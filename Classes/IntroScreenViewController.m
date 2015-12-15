@@ -95,7 +95,7 @@
         leftImage = imgsArray[1];
         rightImage = imgsArray[2];
     } else if(countSwipe == 4){
-        leftImage = imgsArray[3];
+        rightImage = imgsArray[3];
     }
     
     if ([direction isEqualToString:@"right"] ) {
@@ -104,9 +104,11 @@
             imageView.image = [UIImage imageNamed:rightImage];
         } else if(countSwipe == 3){
             imageView.image = [UIImage imageNamed:rightImage];
+        } else if(countSwipe == 4){
+            imageView.image = [UIImage imageNamed:rightImage];
         }
         
-        [self performAnimation:@"RIGHT"];
+        [self performAnimation:@"LEFT"];
     }
 //    else if ([direction isEqualToString:@"right"] && countSwipe == 3) {
 //        
