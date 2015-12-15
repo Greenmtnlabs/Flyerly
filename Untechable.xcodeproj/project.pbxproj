@@ -50,6 +50,7 @@
 		2015F1411BEB9929006EC4C4 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2015F13F1BEB9929006EC4C4 /* AddressBookUI.framework */; };
 		201F7A051C1FE80B00520E7C /* howTo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 201F7A031C1FE80B00520E7C /* howTo@2x.png */; };
 		201F7A061C1FE80B00520E7C /* howTo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 201F7A041C1FE80B00520E7C /* howTo@3x.png */; };
+		201F7A3C1C204BFF00520E7C /* thankYouScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 201F7A3B1C204BFF00520E7C /* thankYouScreen.png */; };
 		203A2A281B7A2A29009949AA /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 203A2A251B7A2A29009949AA /* logo.png */; };
 		203A2A291B7A2A29009949AA /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 203A2A261B7A2A29009949AA /* logo@2x.png */; };
 		203A2A2A1B7A2A29009949AA /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 203A2A271B7A2A29009949AA /* logo@3x.png */; };
@@ -346,6 +347,7 @@
 		2015F13F1BEB9929006EC4C4 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		201F7A031C1FE80B00520E7C /* howTo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "howTo@2x.png"; sourceTree = "<group>"; };
 		201F7A041C1FE80B00520E7C /* howTo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "howTo@3x.png"; sourceTree = "<group>"; };
+		201F7A3B1C204BFF00520E7C /* thankYouScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thankYouScreen.png; sourceTree = "<group>"; };
 		203A2A251B7A2A29009949AA /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		203A2A261B7A2A29009949AA /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		203A2A271B7A2A29009949AA /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
@@ -1103,6 +1105,7 @@
 		36B0369A19DAD2AB00E8CD21 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				201F7A3B1C204BFF00520E7C /* thankYouScreen.png */,
 				201F7A031C1FE80B00520E7C /* howTo@2x.png */,
 				201F7A041C1FE80B00520E7C /* howTo@3x.png */,
 				2077C4A71C1EE3C400DD12CF /* howTo.png */,
@@ -1456,6 +1459,7 @@
 				36B2767A1A0124E800ED58AD /* record@2x.png in Resources */,
 				2077C4A51C1ED04D00DD12CF /* icon_eyespot.png in Resources */,
 				24354D6C1A499EC5000EC781 /* ContactsListControllerViewController.xib in Resources */,
+				201F7A3C1C204BFF00520E7C /* thankYouScreen.png in Resources */,
 				36B2765F1A0124E800ED58AD /* CHECKBOX_FILLED@2x.png in Resources */,
 				2077C4AE1C1EEAC400DD12CF /* PartnerAppHeadingCell.xib in Resources */,
 				201F7A061C1FE80B00520E7C /* howTo@3x.png in Resources */,

@@ -18,6 +18,8 @@
 //Properties
 @property (nonatomic,strong)  Untechable *untechable;
 
+@property (strong, nonatomic) IBOutlet UILabel *lblSentence;
+
 @end
 
 
