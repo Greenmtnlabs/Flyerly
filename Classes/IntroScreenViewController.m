@@ -34,18 +34,11 @@
     self.navigationController.navigationBarHidden = NO;
     
     countSwipe = 1;
-    if( IS_IPHONE_4 ){
-        imgsArray = [NSArray arrayWithObjects:@"intro-1-screen-iPhone4.png",@"intro-2-screen-iPhone4.png",@"intro-3-screen-iPhone4.png",nil];
-    } else if( IS_IPHONE_5 ){
-        imgsArray = [NSArray arrayWithObjects:@"intro-1-screen-iPhone5.png",@"intro-2-screen-iPhone5.png",@"intro-3-screen-iPhone5.png",nil];
-    } else if( IS_IPHONE_6 ){
-        imgsArray = [NSArray arrayWithObjects:@"intro-1-screen-iPhone6.png",@"intro-2-screen-iPhone6.png",@"intro-3-screen-iPhone6.png",nil];
-    } else {
-        imgsArray = [NSArray arrayWithObjects:@"intro-1-screen-iPhone6p.png",@"intro-2-screen-iPhone6p.png",@"intro-3-screen-iPhone6p.png",nil];
-    }
-
+    
+    imgsArray = [NSArray arrayWithObjects:@"introScreen1.jpg", @"introScreen2.jpg", @"introScreen3.jpg", @"introScreen4.jpg",nil];
     
     imageView.image = [UIImage imageNamed:imgsArray[0]];
+   
     [imageView setUserInteractionEnabled:YES];
     swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];

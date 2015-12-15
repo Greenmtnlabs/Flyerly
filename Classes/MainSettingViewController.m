@@ -8,6 +8,7 @@
 
 #import "MainSettingViewController.h"
 #import "UserVoice.h"
+#import "IntroScreenViewController.h"
 
 @interface MainSettingViewController () {
     
@@ -329,8 +330,11 @@
             //privicy policy
             privicyPolicyView = [[PrivicyPolicyViewController alloc]initWithNibName:@"PrivicyPolicyViewController" bundle:nil];
             [self.navigationController pushViewController:privicyPolicyView animated:YES];
-        
-        } else if (indexPath.row == 12){
+            
+        } else if (indexPath.row == 10){
+            [self openIntroScreen];
+            
+        }else if (indexPath.row == 12){
             [self openITunes:@"flyerly-create-share-flyers/id344130515?mt=8"]; //Flyerly
         
         } else if (indexPath.row == 13){
@@ -389,6 +393,9 @@
             //privicy policy
             privicyPolicyView = [[PrivicyPolicyViewController alloc]initWithNibName:@"PrivicyPolicyViewController" bundle:nil];
             [self.navigationController pushViewController:privicyPolicyView animated:YES];
+        } else if (indexPath.row == 8){
+            [self openIntroScreen];
+            
         } else if (indexPath.row == 10){
             [self openITunes:@"flyerly-create-share-flyers/id344130515?mt=8"]; //Flyerly
             
@@ -396,6 +403,30 @@
             [self openITunes:@"eyespot/id611525338?mt=8"]; //eyeSPOT
         }
     }
+}
+
+/*
+ * Opens Intro screens
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+-(void)openIntroScreen {
+    
+    IntroScreenViewController *introScreenViewController = [[IntroScreenViewController alloc] initWithNibName:@"IntroScreenViewController" bundle:nil];
+    [introScreenViewController setModalPresentationStyle:UIModalPresentationFullScreen];
+    introScreenViewController.buttonDelegate = self;
+    
+    //enable buttons if save to gallary not required
+//    if ( [flyer isVideoFlyer] ){
+//        [shareviewcontroller enableShareOptions:YES];
+//        [shareviewcontroller saveButtonSelected:YES];
+//        [shareviewcontroller haveVideoLinkEnableAllShareOptions:[[self.flyer getYouTubeStatus] isEqualToString:@"1"]];
+//    }
+    
+    [self presentViewController:introScreenViewController animated:YES completion:nil];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
 }
 
 /*

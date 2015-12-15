@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IntroScreenViewController">
@@ -50,11 +50,10 @@
                         <action selector="signIn:" destination="-1" eventType="touchUpInside" id="kO1-0m-dbU"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro-1-screen-iPhone4.png" translatesAutoresizingMaskIntoConstraints="NO" id="Zkd-8U-b7v">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="introScreen1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Zkd-8U-b7v">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" red="0.78898185489999995" green="0.34580323099999999" blue="0.26904308799999999" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Zkd-8U-b7v" secondAttribute="bottom" id="6tj-bz-ggu"/>
                 <constraint firstItem="gz3-El-eFF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="60" id="Cq4-hb-4eT"/>
@@ -70,7 +69,7 @@
         </view>
     </objects>
     <resources>
-        <image name="intro-1-screen-iPhone4.png" width="640" height="960"/>
+        <image name="introScreen1.jpg" width="1241" height="2208"/>
         <image name="panel_close_button.png" width="320" height="37"/>
     </resources>
 </document>
