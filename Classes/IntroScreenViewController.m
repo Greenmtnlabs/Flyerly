@@ -38,6 +38,8 @@
     imgsArray = [NSArray arrayWithObjects:@"introScreen1.jpg", @"introScreen2.jpg", @"introScreen3.jpg", @"introScreen4.jpg",nil];
     
     imageView.image = [UIImage imageNamed:imgsArray[0]];
+    
+    return;
    
     [imageView setUserInteractionEnabled:YES];
     swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
@@ -80,6 +82,45 @@
     [[self.view layer] addAnimation:animation forKey:@"abc"];
 }
 
+-(void)changeViews: (NSString *) direction{
+    
+    NSString *leftImage, *rightImage;
+    
+    if(countSwipe == 1){
+        rightImage = imgsArray[0];
+    } else if (countSwipe == 2) {
+        leftImage = imgsArray[0];
+        rightImage = imgsArray[1];
+    } else if (countSwipe == 3){
+        leftImage = imgsArray[1];
+        rightImage = imgsArray[2];
+    } else if(countSwipe == 4){
+        leftImage = imgsArray[3];
+    }
+    
+    if ([direction isEqualToString:@"right"] ) {
+        
+        if(countSwipe == 2){
+            imageView.image = [UIImage imageNamed:rightImage];
+        } else if(countSwipe == 3){
+            imageView.image = [UIImage imageNamed:rightImage];
+        }
+        
+        [self performAnimation:@"RIGHT"];
+    }
+//    else if ([direction isEqualToString:@"right"] && countSwipe == 3) {
+//        
+//        [self performAnimation:@"RIGHT"];
+//    }
+//    //On forth slide
+//    else if(countSwipe >= 3 ){
+//        //[self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+//        //[self.buttonDelegate openPanel];
+//    }
+
+}
+
+
 
 /**
  * Hook swipe functions
@@ -93,8 +134,11 @@
     } else if (countSwipe == 2) {
         leftImage = imgsArray[0];
         rightImage = imgsArray[2];
-    } else if (countSwipe >= 3){
+    } else if (countSwipe == 3){
         leftImage = imgsArray[1];
+        rightImage = imgsArray[3];
+    } else if(countSwipe >= 4){
+        leftImage = imgsArray[2];
     }
     
     //Dont go beside first slide
@@ -134,5 +178,15 @@
  */
 - (IBAction)hideTray:(id)sender {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)onClickBack:(id)sender {
+    countSwipe--;
+    [self changeViews:@"left"];
+}
+
+- (IBAction)onClickNext:(id)sender {
+    countSwipe++;
+    [self changeViews:@"right"];
 }
 @end
