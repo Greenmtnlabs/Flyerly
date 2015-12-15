@@ -19,4 +19,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblMessage2;
 @property (strong, nonatomic) IBOutlet UIButton *btnNext;
 
+@property (nonatomic,assign) BOOL isComingFromSettings;
+
 @end

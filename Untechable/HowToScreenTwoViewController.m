@@ -18,6 +18,7 @@
 
 @synthesize  untechable;
 @synthesize btnNext, lblMessage1, lblMessage2;
+@synthesize isComingFromSettings;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -51,6 +52,7 @@
     
     HowToScreenThreeViewController *howToScreenThreeViewController = [[HowToScreenThreeViewController alloc] initWithNibName:@"HowToScreenThreeViewController" bundle:nil];
     howToScreenThreeViewController.untechable = untechable;
+    howToScreenThreeViewController.isComingFromSettings = isComingFromSettings;
     [self.navigationController pushViewController:howToScreenThreeViewController animated:YES];
     
 }

@@ -150,6 +150,7 @@
 "To" = "To";
 "Enjoy Life" = "Enjoy Life";
 "Invite Others" = "Invite Others";
+"RECONNECT WITH LIFE." = "RECONNECT WITH LIFE.";
 
 // ContactCustomizeDetailsControllerViewController
 "Calls and text require premium subscription." = "Calls and text require premium subscription.";
@@ -161,6 +162,9 @@
 "Logged In" = "Logged In";
 "Put in your name below. This will be used to identify yourself to friends." = "Put in your name below. This will be used to identify yourself to friends.";
 "Enter Name" = "Enter Name";
+"How To" = "How To";
+"How to use Untech" = "How to use Untech";
+"Partner Apps" = "Partner Apps";
 
 // Socialnetwork
 "Enter default status" = "Enter default status";
@@ -183,6 +187,9 @@
 
 // EditButtonCell
 "Change Untech Now Settings" = "Change Untech Now Settings";
+
+// HowToButtonCell 
+"How To" = "How To";
 
 // AppInvite
 "Take a break from technology. Untech & Reconnect with life: %@" = "Take a break from technology. Untech & Reconnect with life: %@";
@@ -207,5 +214,7 @@
 
 "DONE" = "DONE";
 "next " = "next ";
+
+
 
 

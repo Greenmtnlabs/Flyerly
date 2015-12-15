@@ -21,4 +21,6 @@
 
 -(void)setCellValueswithSocialNetworkName :(NSString *)networkName LoginStatus:(BOOL)LoginStatus NetworkImage:(NSString *)ImageName;
 
+-(void)setCellValueswithSocialNetworkName :(NSString *)networkName subHeading:(NSString *)subHeading NetworkImage:(NSString *)ImageName;
+
 @end

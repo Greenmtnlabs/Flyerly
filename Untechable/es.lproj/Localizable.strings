@@ -149,6 +149,7 @@
 "To" = "para";
 "Enjoy Life" = "Disfruta la vida";
 "Invite Others" = "Invitar a otros";
+"RECONNECT WITH LIFE." = "VUELVA A CONECTAR CON VIDA.";
 
 // ContactCustomizeDetailsControllerViewController
 "Calls and text require premium subscription." = "Llamadas y texto requieren suscripción premium.";
@@ -160,6 +161,9 @@
 "Logged In" = "Conectado";
 "Put in your name below. This will be used to identify yourself to friends." = "Ponga en su nombre a continuación. Esto se utilizará para identificarse ante los amigos.";
 "Enter Name" = "Ingrese su nombre";
+"How To" = "Cómo";
+"How to use Untech" = "Cómo utilizar Untech";
+"Partner Apps" = "Aplicaciones socio";
 
 // Socialnetwork
 "Enter default status" = "Introduzca estado por defecto";
