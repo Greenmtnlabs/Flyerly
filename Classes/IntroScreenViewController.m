@@ -26,6 +26,7 @@
 
 @synthesize imageView;
 @synthesize buttonDelegate;
+@synthesize btnBack;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -84,41 +85,45 @@
 
 -(void)changeViews: (NSString *) direction{
     
-    NSString *leftImage, *rightImage;
+    btnBack.enabled = YES;
+    
+    NSString *imageName;
     
     if(countSwipe == 1){
-        rightImage = imgsArray[0];
+        btnBack.enabled = NO;
+        imageName = imgsArray[0];
     } else if (countSwipe == 2) {
-        leftImage = imgsArray[0];
-        rightImage = imgsArray[1];
+        imageName = imgsArray[1];
     } else if (countSwipe == 3){
-        leftImage = imgsArray[1];
-        rightImage = imgsArray[2];
+        imageName = imgsArray[2];
     } else if(countSwipe == 4){
-        rightImage = imgsArray[3];
+        imageName = imgsArray[3];
     }
     
     if ([direction isEqualToString:@"right"] ) {
         
         if(countSwipe == 2){
-            imageView.image = [UIImage imageNamed:rightImage];
+            imageView.image = [UIImage imageNamed:imageName];
         } else if(countSwipe == 3){
-            imageView.image = [UIImage imageNamed:rightImage];
+            imageView.image = [UIImage imageNamed:imageName];
         } else if(countSwipe == 4){
-            imageView.image = [UIImage imageNamed:rightImage];
+            imageView.image = [UIImage imageNamed:imageName];
         }
         
         [self performAnimation:@"LEFT"];
     }
-//    else if ([direction isEqualToString:@"right"] && countSwipe == 3) {
-//        
-//        [self performAnimation:@"RIGHT"];
-//    }
-//    //On forth slide
-//    else if(countSwipe >= 3 ){
-//        //[self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-//        //[self.buttonDelegate openPanel];
-//    }
+    else if ([direction isEqualToString:@"left"] ) {
+        
+        if(countSwipe == 1){
+            imageView.image = [UIImage imageNamed:imageName];
+        } else if(countSwipe == 2){
+            imageView.image = [UIImage imageNamed:imageName];
+        } else if(countSwipe == 3){
+            imageView.image = [UIImage imageNamed:imageName];
+        }
+        
+        [self performAnimation:@"RIGHT"];
+    }
 
 }
 
