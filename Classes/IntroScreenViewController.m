@@ -37,32 +37,24 @@
     countSwipe = 1;
     
     imgsArray = [NSArray arrayWithObjects:@"introScreen1.jpg", @"introScreen2.jpg", @"introScreen3.jpg", @"introScreen4.jpg",nil];
-    
     imageView.image = [UIImage imageNamed:imgsArray[0]];
     
-    return;
-   
-    [imageView setUserInteractionEnabled:YES];
-    swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-    swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-    
-    // Setting the swipe direction.
-    [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
-    [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
-    
-    // Adding the swipe gesture on image view
-    [imageView addGestureRecognizer:swipeLeft];
-    [imageView addGestureRecognizer:swipeRight];
-    
     [self.view bringSubviewToFront:_btnHideMe];
-    [self.view bringSubviewToFront:_btnSignIn];
+    //[self.view bringSubviewToFront:_btnSignIn];
     
+    _btnSignIn.enabled = NO;
     //Remove signin button if user already logged in
     if ([[PFUser currentUser] sessionToken].length != 0) {
         [_btnSignIn removeFromSuperview];
     }
     
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 
 /**
  * Perform animmation
@@ -83,6 +75,8 @@
     [[self.view layer] addAnimation:animation forKey:@"abc"];
 }
 
+
+
 -(void)changeViews: (NSString *) direction{
     
     btnBack.enabled = YES;
@@ -98,81 +92,21 @@
         imageName = imgsArray[2];
     } else if(countSwipe == 4){
         imageName = imgsArray[3];
+    } else if(countSwipe > 4){
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
     
     if ([direction isEqualToString:@"right"] ) {
-        
-        if(countSwipe == 2){
-            imageView.image = [UIImage imageNamed:imageName];
-        } else if(countSwipe == 3){
-            imageView.image = [UIImage imageNamed:imageName];
-        } else if(countSwipe == 4){
-            imageView.image = [UIImage imageNamed:imageName];
-        }
-        
+        imageView.image = [UIImage imageNamed:imageName];
         [self performAnimation:@"LEFT"];
     }
     else if ([direction isEqualToString:@"left"] ) {
-        
-        if(countSwipe == 1){
-            imageView.image = [UIImage imageNamed:imageName];
-        } else if(countSwipe == 2){
-            imageView.image = [UIImage imageNamed:imageName];
-        } else if(countSwipe == 3){
-            imageView.image = [UIImage imageNamed:imageName];
-        }
-        
+        imageView.image = [UIImage imageNamed:imageName];
         [self performAnimation:@"RIGHT"];
     }
 
 }
 
-
-
-/**
- * Hook swipe functions
- */
-- (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
-    
-    NSString *leftImage, *rightImage;
-    
-    if(countSwipe == 1){
-        rightImage = imgsArray[1];
-    } else if (countSwipe == 2) {
-        leftImage = imgsArray[0];
-        rightImage = imgsArray[2];
-    } else if (countSwipe == 3){
-        leftImage = imgsArray[1];
-        rightImage = imgsArray[3];
-    } else if(countSwipe >= 4){
-        leftImage = imgsArray[2];
-    }
-    
-    //Dont go beside first slide
-    if (swipe.direction == UISwipeGestureRecognizerDirectionRight && countSwipe > 1) {
-        imageView.image = [UIImage imageNamed:leftImage];
-        [self performAnimation:@"RIGHT"];
-        countSwipe--;
-    }
-    //Max is third slid
-    else if (swipe.direction == UISwipeGestureRecognizerDirectionLeft && countSwipe < 3) {
-        imageView.image = [UIImage imageNamed:rightImage];
-        [self performAnimation:@"LEFT"];
-        countSwipe++;
-    }
-    //On forth slide
-    else if(countSwipe >= 3 ){
-        //[self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-        //[self.buttonDelegate openPanel];
-    }
-    
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 
 - (IBAction)signIn:(id)sender {
