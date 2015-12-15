@@ -48,6 +48,8 @@
 		2015F13D1BEB9907006EC4C4 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2015F13C1BEB9907006EC4C4 /* Accounts.framework */; };
 		2015F1401BEB9929006EC4C4 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2015F13E1BEB9929006EC4C4 /* AddressBook.framework */; };
 		2015F1411BEB9929006EC4C4 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2015F13F1BEB9929006EC4C4 /* AddressBookUI.framework */; };
+		201F7A051C1FE80B00520E7C /* howTo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 201F7A031C1FE80B00520E7C /* howTo@2x.png */; };
+		201F7A061C1FE80B00520E7C /* howTo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 201F7A041C1FE80B00520E7C /* howTo@3x.png */; };
 		203A2A281B7A2A29009949AA /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 203A2A251B7A2A29009949AA /* logo.png */; };
 		203A2A291B7A2A29009949AA /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 203A2A261B7A2A29009949AA /* logo@2x.png */; };
 		203A2A2A1B7A2A29009949AA /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 203A2A271B7A2A29009949AA /* logo@3x.png */; };
@@ -342,6 +344,8 @@
 		2015F13C1BEB9907006EC4C4 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		2015F13E1BEB9929006EC4C4 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		2015F13F1BEB9929006EC4C4 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		201F7A031C1FE80B00520E7C /* howTo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "howTo@2x.png"; sourceTree = "<group>"; };
+		201F7A041C1FE80B00520E7C /* howTo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "howTo@3x.png"; sourceTree = "<group>"; };
 		203A2A251B7A2A29009949AA /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		203A2A261B7A2A29009949AA /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		203A2A271B7A2A29009949AA /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
@@ -1099,6 +1103,8 @@
 		36B0369A19DAD2AB00E8CD21 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				201F7A031C1FE80B00520E7C /* howTo@2x.png */,
+				201F7A041C1FE80B00520E7C /* howTo@3x.png */,
 				2077C4A71C1EE3C400DD12CF /* howTo.png */,
 				2077C4A21C1ED02800DD12CF /* partnerAppIcons */,
 				200DB7571C1081E30065036A /* howToScreen_1@3x.png */,
@@ -1452,6 +1458,7 @@
 				24354D6C1A499EC5000EC781 /* ContactsListControllerViewController.xib in Resources */,
 				36B2765F1A0124E800ED58AD /* CHECKBOX_FILLED@2x.png in Resources */,
 				2077C4AE1C1EEAC400DD12CF /* PartnerAppHeadingCell.xib in Resources */,
+				201F7A061C1FE80B00520E7C /* howTo@3x.png in Resources */,
 				200DB7531C1080A60065036A /* HowToScreenOneViewController.xib in Resources */,
 				24A4B7A81A5126410029C8DF /* CustomTextTableViewCell.xib in Resources */,
 				247C72D51A5C0968005C9693 /* user_img@3x.png in Resources */,
@@ -1550,6 +1557,7 @@
 				200DB7651C1085270065036A /* HowToScreenThreeViewController.xib in Resources */,
 				2486CBA31A5A79AC00AC125E /* sms_selected.png in Resources */,
 				366EAFB71A14EDA30011D6C6 /* copy_selected.png in Resources */,
+				201F7A051C1FE80B00520E7C /* howTo@2x.png in Resources */,
 				244834381A5D76F800E6F173 /* phone@3x.png in Resources */,
 				366EAF9F1A14C3530011D6C6 /* Default-568h@2x.png in Resources */,
 				209994951BF1EB3300E20068 /* invite_twitter_selected@2x.png in Resources */,
