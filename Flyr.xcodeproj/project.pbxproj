@@ -64,6 +64,8 @@
 		2012ECBB19261D0B00D5EA58 /* Colours-iPhone4s.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2012ECBA19261D0B00D5EA58 /* Colours-iPhone4s.xib */; };
 		20142EDE18F437E10069FBDE /* flyerbundle in Resources */ = {isa = PBXBuildFile; fileRef = 20142EDD18F437E10069FBDE /* flyerbundle */; };
 		2018AF8F195AF14C00188F8E /* image_icon_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2018AF8E195AF14C00188F8E /* image_icon_selected@2x.png */; };
+		201F7A0C1C1FFDDF00520E7C /* icon_eyespot.png in Resources */ = {isa = PBXBuildFile; fileRef = 201F7A0A1C1FFDDF00520E7C /* icon_eyespot.png */; };
+		201F7A0D1C1FFDDF00520E7C /* icon_untech.png in Resources */ = {isa = PBXBuildFile; fileRef = 201F7A0B1C1FFDDF00520E7C /* icon_untech.png */; };
 		2022C63518D1BAF000BCD5F7 /* RMStoreKeychainPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = 2022C63418D1BAF000BCD5F7 /* RMStoreKeychainPersistence.m */; };
 		2025FAB51860742700CC9188 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2025FAB41860742700CC9188 /* CoreMedia.framework */; };
 		2025FAB7186074D100CC9188 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2025FAB6186074D100CC9188 /* CoreText.framework */; };
@@ -1627,6 +1629,8 @@
 		20142EDD18F437E10069FBDE /* flyerbundle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = flyerbundle; sourceTree = "<group>"; };
 		2018AF8E195AF14C00188F8E /* image_icon_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image_icon_selected@2x.png"; sourceTree = "<group>"; };
 		201D647118C4832300F0D7D8 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		201F7A0A1C1FFDDF00520E7C /* icon_eyespot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_eyespot.png; sourceTree = "<group>"; };
+		201F7A0B1C1FFDDF00520E7C /* icon_untech.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_untech.png; sourceTree = "<group>"; };
 		2022C63318D1BAF000BCD5F7 /* RMStoreKeychainPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStoreKeychainPersistence.h; sourceTree = "<group>"; };
 		2022C63418D1BAF000BCD5F7 /* RMStoreKeychainPersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStoreKeychainPersistence.m; sourceTree = "<group>"; };
 		2025FAB41860742700CC9188 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -3307,6 +3311,7 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				201F7A081C1FFD9400520E7C /* PartnerAppIcons */,
 				20B5A3F41BEA48D1005622FD /* giphyLogo@2x.png */,
 				20B5A3F51BEA48D1005622FD /* giphyLogo@3x.png */,
 				203A1BF91BE8E728008E3E94 /* noAds_5_HomeScreen.png */,
@@ -3912,6 +3917,15 @@
 				201D647118C4832300F0D7D8 /* Flurry.h */,
 			);
 			path = Flurry;
+			sourceTree = "<group>";
+		};
+		201F7A081C1FFD9400520E7C /* PartnerAppIcons */ = {
+			isa = PBXGroup;
+			children = (
+				201F7A0A1C1FFDDF00520E7C /* icon_eyespot.png */,
+				201F7A0B1C1FFDDF00520E7C /* icon_untech.png */,
+			);
+			name = PartnerAppIcons;
 			sourceTree = "<group>";
 		};
 		2026992818CED69600945218 /* Purchase */ = {
@@ -6518,6 +6532,7 @@
 				24218456194B4AEC00FDDA97 /* anchor-icon.png in Resources */,
 				24861ED719F9147100670F6D /* clipart_tab@3x.png in Resources */,
 				C35350DF1B60F66B00CF68F9 /* icon113.jpg in Resources */,
+				201F7A0C1C1FFDDF00520E7C /* icon_eyespot.png in Resources */,
 				24861F0019F9147100670F6D /* fb_setting_selected@3x.png in Resources */,
 				0FBC37F9174F980600004F21 /* twt_setting@2x.png in Resources */,
 				246EF538193C515D004539B2 /* emoticon86@2x.png in Resources */,
@@ -6913,6 +6928,7 @@
 				C3D8DD941B53DBE1006C2A9F /* b12.png in Resources */,
 				24861F5B19F9147100670F6D /* tumblr_share_saved@3x.png in Resources */,
 				2060689D1924CCE400AB5230 /* Backgrounds-iPhone4.xib in Resources */,
+				201F7A0D1C1FFDDF00520E7C /* icon_untech.png in Resources */,
 				249F2065193F562C0072835E /* Zsignup_button@2x.png in Resources */,
 				246EF51D193C515D004539B2 /* emoticon61@2x.png in Resources */,
 				C337ED711BD69DBA0038B82E /* 5tab_4_gallery_selected@3x.png in Resources */,

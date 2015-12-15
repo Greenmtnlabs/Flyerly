@@ -86,6 +86,7 @@
     [category addObject:@"Autosave to Gallery"];
     [category addObject:@"Flyers are public"];
     
+    
     //Checking if the user is valid or anonymous
     if ([[PFUser currentUser] sessionToken].length != 0) {
         //GET UPDATED USER PUCHASES INFO
@@ -110,6 +111,10 @@
         [category addObject:@"Terms of Service"];
         [category addObject:@"Privacy Policy"];
     }
+    [category addObject:@"How To"];
+    [category addObject:@"Partner Apps"];
+    [category addObject:@"Untech"];
+    [category addObject:@"eyeSPOT"];
    
 }
 
@@ -215,7 +220,9 @@
         if (indexPath.row == 7)imgname = @"privacy";
     }
     
-    
+    if(indexPath.row == 12){
+        imgname = @"icon_untech";
+    }
    
     
     
