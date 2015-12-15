@@ -60,18 +60,17 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UNTECH." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4AQ-8m-8Rj">
                     <rect key="frame" x="56" y="288" width="102" height="24"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="24" id="s0n-5Z-A9r"/>
-                        <constraint firstAttribute="width" constant="102" id="w5q-EM-2mI"/>
+                        <constraint firstAttribute="width" constant="102" id="6nx-uT-0yW"/>
+                        <constraint firstAttribute="height" constant="24" id="QyY-Us-4UW"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RECONNECT WITH LIFE." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sC0-5S-VKR">
-                    <rect key="frame" x="56" y="320" width="264" height="56"/>
+                    <rect key="frame" x="56" y="311" width="264" height="56"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="264" id="gw9-nu-Yw6"/>
-                        <constraint firstAttribute="height" constant="56" id="qLD-nZ-wlq"/>
+                        <constraint firstAttribute="height" constant="56" id="LGS-zh-NHe"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -81,25 +80,26 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="RYX-ce-j5a" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="75" id="09I-67-aaU"/>
-                <constraint firstAttribute="centerX" secondItem="sC0-5S-VKR" secondAttribute="centerX" id="0h8-Va-mG0"/>
                 <constraint firstItem="a5W-Jn-QfT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2z7-gg-NXV"/>
+                <constraint firstItem="sC0-5S-VKR" firstAttribute="leading" secondItem="4AQ-8m-8Rj" secondAttribute="leading" id="5n2-ct-NN3"/>
                 <constraint firstItem="Uz9-tr-Wyn" firstAttribute="top" secondItem="gOx-HT-gVw" secondAttribute="bottom" id="AMO-w7-dac"/>
-                <constraint firstItem="sC0-5S-VKR" firstAttribute="top" secondItem="4AQ-8m-8Rj" secondAttribute="bottom" constant="8" symbolic="YES" id="Bsc-g9-99A"/>
                 <constraint firstAttribute="trailing" secondItem="tWZ-Xf-L5t" secondAttribute="trailing" id="DGz-Nw-81b"/>
                 <constraint firstItem="tWZ-Xf-L5t" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="FMR-8E-ndk"/>
                 <constraint firstItem="a5W-Jn-QfT" firstAttribute="top" secondItem="RYX-ce-j5a" secondAttribute="bottom" constant="15" id="FcH-wT-Tlg"/>
                 <constraint firstAttribute="trailing" secondItem="Uz9-tr-Wyn" secondAttribute="trailing" id="LyG-eH-Xor"/>
-                <constraint firstItem="4AQ-8m-8Rj" firstAttribute="leading" secondItem="sC0-5S-VKR" secondAttribute="leading" id="NxH-Rb-0dY"/>
                 <constraint firstItem="gOx-HT-gVw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="PhU-h9-SxM"/>
                 <constraint firstItem="Uz9-tr-Wyn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="RA7-Kf-csW"/>
+                <constraint firstItem="sC0-5S-VKR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="311" id="RJl-yq-Db4"/>
                 <constraint firstItem="gOx-HT-gVw" firstAttribute="top" secondItem="a5W-Jn-QfT" secondAttribute="bottom" constant="5" id="U8N-xt-eIs"/>
                 <constraint firstAttribute="trailing" secondItem="RYX-ce-j5a" secondAttribute="trailing" id="WxV-6J-OAo"/>
+                <constraint firstItem="4AQ-8m-8Rj" firstAttribute="top" secondItem="Uz9-tr-Wyn" secondAttribute="bottom" constant="78" id="Xv2-dN-Soi"/>
                 <constraint firstItem="RYX-ce-j5a" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ZIA-JZ-maO"/>
                 <constraint firstAttribute="bottom" secondItem="tWZ-Xf-L5t" secondAttribute="bottom" id="atB-4e-Mce"/>
                 <constraint firstAttribute="trailing" secondItem="gOx-HT-gVw" secondAttribute="trailing" id="bQA-1K-4wT"/>
                 <constraint firstAttribute="trailing" secondItem="a5W-Jn-QfT" secondAttribute="trailing" id="cru-U7-Ekf"/>
                 <constraint firstItem="tWZ-Xf-L5t" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="65" id="hPE-Bj-cHG"/>
-                <constraint firstItem="4AQ-8m-8Rj" firstAttribute="top" secondItem="Uz9-tr-Wyn" secondAttribute="bottom" constant="78" id="w9h-0j-iYb"/>
+                <constraint firstAttribute="trailing" secondItem="sC0-5S-VKR" secondAttribute="trailing" constant="55" id="lXI-yK-g5L"/>
+                <constraint firstItem="sC0-5S-VKR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="56" id="rlI-Wp-CPn"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="452.5" y="281.5"/>
