@@ -129,7 +129,9 @@
     untechable.linkedinAuth = untechable.socialNetworksStatusModal.mLinkedinAuth;
     [untechable addOrUpdateInDatabase];
     
-    [self.navigationController popViewControllerAnimated:YES];
+    // To pop UntechablesList
+    NSArray *array = [self.navigationController viewControllers];
+    [self.navigationController popToViewController:[array objectAtIndex:1] animated:YES];
 }
 
 #pragma mark -  Highlighting Functions
