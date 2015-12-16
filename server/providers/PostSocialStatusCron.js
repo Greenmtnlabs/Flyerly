@@ -13,7 +13,7 @@ SocialStatusCron = module.exports = {};
  */
 SocialStatusCron.setup = function(app) {
 
-    // Get the configurations
+	// Get the configurations
     var config = require(__dirname + '/../config');
     var CommonFunctions = require( __dirname + '/CommonFunctions' );
 	var notifier = require('mail-notifier');
@@ -21,7 +21,7 @@ SocialStatusCron.setup = function(app) {
     // Our logger for logging to file and console
     var logger = require(__dirname + '/../logger');
 	var FB = require('fb');
-	var twitter = require('ntwitter');
+	var Twitter = require('node-twitter');
 	
 	var https = require('https');
 	//var request = require('request');
@@ -33,6 +33,9 @@ SocialStatusCron.setup = function(app) {
 	
 	// Global twilio object
 	var twilio = null;
+
+	// Image path
+	var imagePath = config.http.host + "/images/untech-social-share-image.jpg";
 	
     function setTimeInGlobalVars() {
 	    today = new Date();
@@ -372,7 +375,7 @@ SocialStatusCron.setup = function(app) {
 		else{
 			FB.setAccessToken( fbAuth );
 
-			FB.api('me/feed', 'post', { message: socialStatus}, function (res2) {
+			FB.api('me/feed', 'post', { message: socialStatus, picture: imagePath}, function (res2) {
 			
 			  if(!res2 || res2.error) {
 				  var msg = (!res2) ? ( {a:"Fb posting error occurred."} ) : ( {a:"Fb posting error occurred: ", b:res2.error} );
@@ -394,31 +397,29 @@ SocialStatusCron.setup = function(app) {
 			logMsg({line:__line, eIdTxt:eIdTxt, msg: "twitterAuth and twOAuthTokenSecret shouldnot be empty!", twitterAuth:access_token_key, twOAuthTokenSecret:access_token_secret} );
         }
 		else {
-			var twit = new twitter({
-			  consumer_key: config.twitter.consumer_key,
-			  consumer_secret: config.twitter.consumer_secret,
+			
+			var twitterRestClient = new Twitter.RestClient(
+    			config.twitter.consumer_key,
+    			config.twitter.consumer_secret,
+    			access_token_key,
+    			access_token_secret
+			);
 
-			  access_token_key: access_token_key,
-			  access_token_secret: access_token_secret
-			});
-
-		  	twit.verifyCredentials(function (err, data) {
-
-		        if ( err ) {
-		          callBack(__line+"=line"+eIdTxt+" ,Twitter Error verifying credentials: " + err);
-  
-		        } else {
-		          twit.updateStatus(str, function (err, data) {
-  
-		                if (err) {
-		                  callBack(__line+"=line"+eIdTxt+" ,Tweeting failed:"+ err);
-		                } else {
-						  callBack(__line+"=line"+eIdTxt+" ,Twitter Success!");
-		                }
-		          });
-		        }
-		
-			});
+			twitterRestClient.statusesUpdateWithMedia(
+	    		{
+	        		'status': str,
+	        		'media[]': imagePath
+	    		},
+	    		
+	    		function(error, result) {
+		        	if (error) {
+		            	console.log('Error: ' + (error.code ? error.code + ' ' + error.message : error.message));
+		        	}
+			        if (result){
+		        	    console.log(result);
+		        	}
+	    		}
+	    	 );
 		}	
 	}//twitter post fn end
 	
@@ -431,7 +432,7 @@ SocialStatusCron.setup = function(app) {
 		else{
 			str = str.replace("&","&amp;");
 			var body = '<share>';
-				    body += '<comment>'+str+'</comment>';
+				    body += '<comment>'+str + imagePath +'</comment>';
 				    body += '<visibility>';
 						body += '<code>anyone</code>';
 					body += '</visibility>';
