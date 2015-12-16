@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="btnDone" destination="GgC-je-P0e" id="3OW-oS-158"/>
                 <outlet property="btnInviteOthers" destination="g4j-oz-txe" id="aHt-wD-ya9"/>
+                <outlet property="imgHowTo" destination="U2h-TN-C2y" id="plE-vc-qzQ"/>
                 <outlet property="lblMessage" destination="cnG-Wd-WyA" id="8iC-fH-pEG"/>
                 <outlet property="pageView" destination="QeL-RD-9up" id="bLp-ID-UAa"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

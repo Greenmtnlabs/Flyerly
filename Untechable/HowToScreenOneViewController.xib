@@ -19,6 +19,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HowToScreenOneViewController">
             <connections>
                 <outlet property="btnNext" destination="wvY-Ml-2Aw" id="4lM-CS-VV5"/>
+                <outlet property="imgHowTo" destination="d8I-Ia-yO8" id="fxL-s4-pQq"/>
                 <outlet property="lblMessage1" destination="3Gk-6v-duv" id="HmR-so-RzZ"/>
                 <outlet property="lblMessage2" destination="fSY-uP-PF1" id="Pd3-Fd-REb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

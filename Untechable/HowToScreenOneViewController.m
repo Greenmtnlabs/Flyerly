@@ -9,15 +9,22 @@
 #import "HowToScreenOneViewController.h"
 #import "HowToScreenTwoViewController.h"
 
-@interface HowToScreenOneViewController ()
+@interface HowToScreenOneViewController ()<UIGestureRecognizerDelegate> {
+}
 
 @end
 
-@implementation HowToScreenOneViewController
+@implementation HowToScreenOneViewController{
+
+UISwipeGestureRecognizer *swipeLeft;
+UISwipeGestureRecognizer *swipeRight;
+
+}
 
 @synthesize untechable;
 @synthesize btnNext, lblMessage1, lblMessage2;
 @synthesize isComingFromSettings;
+@synthesize imgHowTo;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,14 +32,37 @@
     
     [self.navigationController setNavigationBarHidden:YES];
     
-    
     // to apply localization
     [self applyLocalization];
+    
+    [imgHowTo setUserInteractionEnabled:YES];
+    swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    
+    // Setting the swipe direction.
+    [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
+    
+    // Adding the swipe gesture on image view
+    [imgHowTo addGestureRecognizer:swipeLeft];
+    [imgHowTo addGestureRecognizer:swipeRight];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+/**
+ * Hook swipe functions
+ */
+- (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
+    
+    //Dont go beside first slide
+    if (swipe.direction == UISwipeGestureRecognizerDirectionLeft){
+        [self goToNextScreen];
+    }
 }
 
 /*
@@ -50,12 +80,21 @@
     
 }
 
-- (IBAction)onClickNext:(id)sender {
-    
+/*
+ * Navigates to next screen
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+-(void) goToNextScreen{
     HowToScreenTwoViewController *howToScreenTwoViewController = [[HowToScreenTwoViewController alloc] initWithNibName:@"HowToScreenTwoViewController" bundle:nil];
     howToScreenTwoViewController.untechable = untechable;
     howToScreenTwoViewController.isComingFromSettings = isComingFromSettings;
     [self.navigationController pushViewController:howToScreenTwoViewController animated:YES];
-    
+}
+
+- (IBAction)onClickNext:(id)sender {
+    [self goToNextScreen];
 }
 @end

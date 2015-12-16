@@ -19,6 +19,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HowToScreenTwoViewController">
             <connections>
                 <outlet property="btnNext" destination="pye-rh-REz" id="VgQ-cA-laU"/>
+                <outlet property="imgHowTo" destination="x02-9l-4JM" id="qnS-cj-iak"/>
                 <outlet property="lblMessage1" destination="Hzv-7Z-gb1" id="6pR-9d-0Y4"/>
                 <outlet property="lblMessage2" destination="CxC-G4-BEM" id="ebs-EN-DQm"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
