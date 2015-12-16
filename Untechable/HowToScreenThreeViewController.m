@@ -82,6 +82,7 @@
 }
 - (IBAction)onClickInviteOthers:(id)sender {
     
+    [self.navigationController setNavigationBarHidden:NO];
     //Load Invite Screen
     InviteFriendsController *inviteFriendsController = [[InviteFriendsController alloc] initWithNibName:@"InviteFriendsController" bundle:nil];
     [self.navigationController pushViewController:inviteFriendsController animated:YES];
