@@ -19,4 +19,5 @@
 
 @property (nonatomic,assign) BOOL isComingFromSettings;
 
+@property (strong, nonatomic) IBOutlet UIImageView *imgHowTo;
 @end

@@ -22,6 +22,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnInviteOthers;
 
 @property (nonatomic,assign) BOOL isComingFromSettings;
+
+@property (strong, nonatomic) IBOutlet UIImageView *imgHowTo;
+
 - (IBAction)onClickInviteOthers:(id)sender;
 
 @end
