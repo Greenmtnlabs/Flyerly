@@ -148,7 +148,9 @@ const int CONTACTS_TAB = 0;
 #pragma mark  Custom Methods
 
 -(IBAction)goBack{
-    [self.navigationController popViewControllerAnimated:YES];
+    // To pop UntechablesList
+    NSArray *array = [self.navigationController viewControllers];
+    [self.navigationController popToViewController:[array objectAtIndex:1] animated:YES];
     
 }
 
