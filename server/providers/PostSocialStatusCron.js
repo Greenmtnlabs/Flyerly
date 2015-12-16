@@ -13,10 +13,7 @@ SocialStatusCron = module.exports = {};
  */
 SocialStatusCron.setup = function(app) {
 
-	// Image path
-	var imagePath = config.http.host + "/images/untech-social-share-image.jpg";
-
-    // Get the configurations
+	// Get the configurations
     var config = require(__dirname + '/../config');
     var CommonFunctions = require( __dirname + '/CommonFunctions' );
 	var notifier = require('mail-notifier');
@@ -36,6 +33,9 @@ SocialStatusCron.setup = function(app) {
 	
 	// Global twilio object
 	var twilio = null;
+
+	// Image path
+	var imagePath = config.http.host + "/images/untech-social-share-image.jpg";
 	
     function setTimeInGlobalVars() {
 	    today = new Date();
@@ -406,22 +406,20 @@ SocialStatusCron.setup = function(app) {
 			);
 
 			twitterRestClient.statusesUpdateWithMedia(
-    		{
-        		'status': str,
-        		'media[]': imagePath
-    		},
-    		
-    		function(error, result) {
-	        	if (error)
-	        	{
-	            	console.log('Error: ' + (error.code ? error.code + ' ' + error.message : error.message));
-	        	}
-		        if (result)
-	    	    {
-	        	    console.log(result);
-	        	}
-    		};
-			);
+	    		{
+	        		'status': str,
+	        		'media[]': imagePath
+	    		},
+	    		
+	    		function(error, result) {
+		        	if (error) {
+		            	console.log('Error: ' + (error.code ? error.code + ' ' + error.message : error.message));
+		        	}
+			        if (result){
+		        	    console.log(result);
+		        	}
+	    		}
+	    	 );
 		}	
 	}//twitter post fn end
 	
