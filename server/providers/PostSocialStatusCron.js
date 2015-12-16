@@ -434,7 +434,7 @@ SocialStatusCron.setup = function(app) {
 		else{
 			str = str.replace("&","&amp;");
 			var body = '<share>';
-				    body += '<comment>'+str+'</comment>';
+				    body += '<comment>'+str + imagePath +'</comment>';
 				    body += '<visibility>';
 						body += '<code>anyone</code>';
 					body += '</visibility>';
