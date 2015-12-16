@@ -372,7 +372,7 @@ SocialStatusCron.setup = function(app) {
 		else{
 			FB.setAccessToken( fbAuth );
 
-			var imagePath = __dirname + "../../assets/images/socialMedialImage.jpg";
+			var imagePath = config.http.host + "/images/socialMediaImage.jpg";
 
 			FB.api('me/feed', 'post', { message: socialStatus, picture: imagePath}, function (res2) {
 			
