@@ -14,7 +14,7 @@ SocialStatusCron = module.exports = {};
 SocialStatusCron.setup = function(app) {
 
 	// Image path
-	var imagePath = config.http.host + "/images/socialMediaImage.jpg";
+	var imagePath = config.http.host + "/images/untech-social-share-image.jpg";
 
     // Get the configurations
     var config = require(__dirname + '/../config');
