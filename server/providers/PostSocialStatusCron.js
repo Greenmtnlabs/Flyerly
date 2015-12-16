@@ -372,7 +372,9 @@ SocialStatusCron.setup = function(app) {
 		else{
 			FB.setAccessToken( fbAuth );
 
-			FB.api('me/feed', 'post', { message: socialStatus}, function (res2) {
+			var imagePath = __dirname + "../../assets/images/socialMedialImage.jpg";
+
+			FB.api('me/feed', 'post', { message: socialStatus, picture: imagePath}, function (res2) {
 			
 			  if(!res2 || res2.error) {
 				  var msg = (!res2) ? ( {a:"Fb posting error occurred."} ) : ( {a:"Fb posting error occurred: ", b:res2.error} );
