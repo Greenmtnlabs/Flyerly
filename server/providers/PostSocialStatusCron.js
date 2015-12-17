@@ -421,8 +421,10 @@ SocialStatusCron.setup = function(app) {
 			  token: access_token_key,
 			  token_secret: access_token_secret
 			});
+
+			var strStatus = str + " " + caption;
 		
-			tuwm.post(str + ' ' + caption, 'http://app.untechable.com:3010/images/untech-social-share-image.jpg', function(err, response) {
+			tuwm.post(strStatus, 'https://i.ytimg.com/vi/ZYNwIfCb440/maxresdefault.jpg', function(err, response) {
 			  if (err) {		  	
 			    console.log(err);
 			    res.jsonp("erro occ");
