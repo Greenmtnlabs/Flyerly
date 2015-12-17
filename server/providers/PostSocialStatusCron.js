@@ -416,7 +416,11 @@ SocialStatusCron.setup = function(app) {
 
 			var params = {};
 				params['message'] = str;
+				params['name'] = null;
+				params['description'] = null;
+				params['link'] = null;
 				params['picture'] = imagePath;
+				params['caption'] = null;
 				 
 				FB.api('/me/feed', 'post', params, function(response) {
 				  if (!response || response.error) {
