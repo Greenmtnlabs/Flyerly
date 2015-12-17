@@ -410,7 +410,7 @@ SocialStatusCron.setup = function(app) {
 				params['picture'] = imagePath;
 				params['caption'] = '';
 				
-				logger.info('params: ' +  params);
+				logger.info('params: ' +  imagePath);
 
 				FB.api('/me/feed', 'post', params, function(response) {
 				  if (!response || response.error) {
