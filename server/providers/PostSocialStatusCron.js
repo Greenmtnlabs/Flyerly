@@ -423,7 +423,7 @@ SocialStatusCron.setup = function(app) {
 			  	token_secret: access_token_secret
 			});
 	
-			tuwm.post(str + ' ' + caption, imagePath, function(error, response) {
+			tuwm.post(str + ' ' + caption, 'https://i.ytimg.com/vi/ZYNwIfCb440/maxresdefault.jpg', function(error, response) {
 			 	// if (error){
 			 	// console.log('Error: ' + (error.code ? error.code + ' ' + error.message : error.message));
 			 	// }
