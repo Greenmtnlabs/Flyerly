@@ -415,7 +415,7 @@ SocialStatusCron.setup = function(app) {
 			// });
 
 			var params = {};
-			params['message'] = 'The message' + str ;
+			params['message'] = 'The message';
 			params['name'] = 'Name';
 			params['description'] = 'this is a description';
 			params['link'] = 'http://www.somelink.com/page.htm';
