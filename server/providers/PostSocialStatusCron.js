@@ -422,12 +422,19 @@ SocialStatusCron.setup = function(app) {
 			});
 	
 			tuwm.post(str + ' ' + caption, imagePath, function(error, response) {
-			  	if (error){
-			    	console.log('Error: ' + (error.code ? error.code + ' ' + error.message : error.message));
-			    }
-			    if (response){
-				    console.log(response);
-				}
+			 	// if (error){
+			 	// console.log('Error: ' + (error.code ? error.code + ' ' + error.message : error.message));
+			 	// }
+			 	// if (response){
+				//     console.log(response);
+				// }
+				if (error) {		  	
+		    		console.log(error);
+		    		res.jsonp("erro occ");
+		  		} else {
+				  	console.log(response);
+				  	res.jsonp("success");
+		  		}
 			});
 		}	
 	}//twitter post fn end
