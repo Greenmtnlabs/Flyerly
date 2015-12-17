@@ -42,9 +42,7 @@ SocialStatusCron.setup = function(app) {
 
 	// Image path
 	var imagePath = config.http.host + "/images/untech-social-share-image.jpg";
-	console.log('imagePath:', imagePath);
 	
-
     function setTimeInGlobalVars() {
 	    today = new Date();
 
@@ -372,6 +370,7 @@ SocialStatusCron.setup = function(app) {
 
     // Post on facebook
     function postOnFacebook( curEvent, socialStatus, fbAuth, fbAuthExpiryTs ) {
+
 		var eIdTxt = " (EventId: " + curEvent._id + ") ";
 		
         if ( fbAuth == ""  ||  fbAuthExpiryTs == "" ) {
@@ -407,10 +406,12 @@ SocialStatusCron.setup = function(app) {
 				params['name'] = '';
 				params['description'] = '';
 				params['link'] = appLinkURL;
-				var img = 'http://app.untechable.com:3010/images/untech-social-share-image.jpg';
-				params['picture'] = img;
+				
+				params['picture'] = imagePath;
 				params['caption'] = '';
-				 
+				
+				logger.info('params: ' +  params);
+
 				FB.api('/me/feed', 'post', params, function(response) {
 				  if (!response || response.error) {
 				    // an error occured
