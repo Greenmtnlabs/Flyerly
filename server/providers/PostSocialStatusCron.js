@@ -34,9 +34,12 @@ SocialStatusCron.setup = function(app) {
 	// Global twilio object
 	var twilio = null;
 	
+	// Social Media Caption
+	var caption = "I just setup #untech time using the Untech app.";
+
 	// Image path
 	var imagePath = config.http.host + "/images/untech-social-share-image.jpg";
-	console.log('imagePath :', imagePath );
+	
 
     function setTimeInGlobalVars() {
 	    today = new Date();
@@ -395,11 +398,11 @@ SocialStatusCron.setup = function(app) {
 
 			var params = {};
 				params['message'] = socialStatus;
-				params['name'] = 'Name';
+				params['name'] = '';
 				params['description'] = 'this is a description';
 				params['link'] = 'http://networkstatic.net/wp-content/uploads/2012/12/Google-tape-robot.jpg';
-				params['picture'] = 'http://app.untechable.com:3010/images/untech-social-share-image.jpg';
-				params['caption'] = 'Caption of the Post';
+				params['picture'] = imagePath; //'http://app.untechable.com:3010/images/untech-social-share-image.jpg';
+				params['caption'] = caption;
 				 
 				FB.api('/me/feed', 'post', params, function(response) {
 				  if (!response || response.error) {
