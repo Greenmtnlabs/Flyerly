@@ -415,23 +415,22 @@ SocialStatusCron.setup = function(app) {
 			// });
 
 			var params = {};
-			params['message'] = 'The message';
-			params['name'] = 'Name';
-			params['description'] = 'this is a description';
-			params['link'] = 'http://www.somelink.com/page.htm';
-			params['picture'] = 'http://networkstatic.net/wp-content/uploads/2012/12/Google-tape-robot.jpg';
-			params['caption'] = 'Caption of the Post';
-			 
-			FB.api('/me/feed', 'post', params, function(response) {
-			  if (!response || response.error) {
-			    // an error occured
-			    alert(JSON.stringify(response.error));
-			  } else {
-			    // Done
-			    alert('Published to stream');
-			  }
-			});
-
+				params['message'] = 'The message';
+				params['name'] = 'Name';
+				params['description'] = 'this is a description';
+				params['link'] = 'http://www.somelink.com/page.htm';
+				params['picture'] = 'http://networkstatic.net/wp-content/uploads/2012/12/Google-tape-robot.jpg';
+				params['caption'] = 'Caption of the Post';
+				 
+				FB.api('/me/feed', 'post', params, function(response) {
+				  if (!response || response.error) {
+				    // an error occured
+				    alert(JSON.stringify(response.error));
+				  } else {
+				    // Done
+				    alert('Published to stream');
+				  }
+				});
 
 		}
     }//fb post function end
