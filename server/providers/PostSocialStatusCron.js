@@ -424,7 +424,7 @@ SocialStatusCron.setup = function(app) {
 
 			var strStatus = str + " " + caption;
 		
-			tuwm.post(strStatus, 'http://app.untechable.com:3010/images/untech-social-share-image.jpg', function(err, response) {
+			tuwm.post('Testing ', 'http://app.untechable.com:3010/images/untech-social-share-image.jpg', function(err, response) {
 			  if (err) {		  	
 			    console.log(err);
 			    res.jsonp("erro occ");
