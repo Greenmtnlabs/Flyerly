@@ -375,7 +375,7 @@ SocialStatusCron.setup = function(app) {
 		else{
 
 			imagePath = config.http.host + "/images/untech-social-share-image.jpg";
-			
+
 			FB.setAccessToken( fbAuth );
 			
 			// Old Code	
@@ -397,7 +397,7 @@ SocialStatusCron.setup = function(app) {
 				params['name'] = 'Name';
 				params['description'] = 'this is a description';
 				params['link'] = 'http://www.somelink.com/page.htm';
-				params['picture'] = 'http://networkstatic.net/wp-content/uploads/2012/12/Google-tape-robot.jpg';
+				params['picture'] = imagePath;
 				params['caption'] = 'Caption of the Post';
 				 
 				FB.api('/me/feed', 'post', params, function(response) {
