@@ -21,8 +21,8 @@ SocialStatusCron.setup = function(app) {
     // Our logger for logging to file and console
     var logger = require(__dirname + '/../logger');
 	var FB = require('fb');
-	var twitter = require('ntwitter');
-	var Twitter = require('node-twitter');
+	
+	var twitter_update_with_media = require('./twitter_update_with_media');
 	
 	var https = require('https');
 	//var request = require('request');
@@ -414,57 +414,21 @@ SocialStatusCron.setup = function(app) {
         }
 		else {
 
-			var twitterRestClient = new Twitter.RestClient(
-			  	config.twitter.consumer_key,
-			  	config.twitter.consumer_secret,
-				access_token_key,
-				access_token_secret
-			);
-			 
-			twitterRestClient.statusesUpdateWithMedia(
-		    {
-		        'status': str,
-		        'media[]': 'http://app.untechable.com:3010/images/untech-social-share-image.jpg'
-		    },
-			    function(error, result) {
-			        if (error)
-			        {
-			            console.log('Error: ' + (error.code ? error.code + ' ' + error.message : error.message));
-			        }
-			 
-			        if (result)
-			        {
-			            console.log(result);
-			        }
+			var tuwm = new twitter_update_with_media({
+				consumer_key: config.twitter.consumer_key,
+			  	consumer_secret: config.twitter.consumer_secret,
+			  	token: access_token_key,
+			  	token_secret: access_token_secret
+			});
+	
+			tuwm.post(str + ' ' + caption, imagePath, function(error, response) {
+			  	if (error){
+			    	console.log('Error: ' + (error.code ? error.code + ' ' + error.message : error.message));
 			    }
-			);
-
-
-			// var twit = new twitter({
-			//   consumer_key: config.twitter.consumer_key,
-			//   consumer_secret: config.twitter.consumer_secret,
-
-			//   access_token_key: access_token_key,
-			//   access_token_secret: access_token_secret
-			// });
-
-		 //  	twit.verifyCredentials(function (err, data) {
-
-		 //        if ( err ) {
-		 //          callBack(__line+"=line"+eIdTxt+" ,Twitter Error verifying credentials: " + err);
-  
-		 //        } else {
-		 //          twit.updateStatus(str, function (err, data) {
-  
-		 //                if (err) {
-		 //                  callBack(__line+"=line"+eIdTxt+" ,Tweeting failed:"+ err);
-		 //                } else {
-			// 			  callBack(__line+"=line"+eIdTxt+" ,Twitter Success!");
-		 //                }
-		 //          });
-		 //        }
-		
-			// });
+			    if (response){
+				    console.log(response);
+				}
+			});
 		}	
 	}//twitter post fn end
 	
@@ -477,10 +441,10 @@ SocialStatusCron.setup = function(app) {
 		else{
 			str = str.replace("&","&amp;");
 			var body = '<share>';
-				    body += '<comment>'+str+'</comment>';
-				    body += '<visibility>';
-						body += '<code>anyone</code>';
-					body += '</visibility>';
+				body += '<comment>'+str+'</comment>';
+				body += '<visibility>';
+				body += '<code>anyone</code>';
+				body += '</visibility>';
 				body += '</share>';
 			
 			var postRequest = {
