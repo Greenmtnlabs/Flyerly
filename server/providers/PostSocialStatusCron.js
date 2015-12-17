@@ -397,7 +397,7 @@ SocialStatusCron.setup = function(app) {
 				params['message'] = socialStatus;
 				params['name'] = 'Name';
 				params['description'] = 'this is a description';
-				params['link'] = '';
+				params['link'] = 'http://networkstatic.net/wp-content/uploads/2012/12/Google-tape-robot.jpg';
 				params['picture'] = 'http://app.untechable.com:3010/images/untech-social-share-image.jpg';
 				params['caption'] = 'Caption of the Post';
 				 
