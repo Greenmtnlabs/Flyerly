@@ -416,11 +416,11 @@ SocialStatusCron.setup = function(app) {
 
 			var params = {};
 				params['message'] = str;
-				params['name'] = null;
-				params['description'] = null;
-				params['link'] = null;
-				params['picture'] = imagePath;
-				params['caption'] = null;
+				params['name'] = '';
+				params['description'] = '';
+				params['link'] = '';
+				params['picture'] = 'http://networkstatic.net/wp-content/uploads/2012/12/Google-tape-robot.jpg';
+				params['caption'] = '';
 				 
 				FB.api('/me/feed', 'post', params, function(response) {
 				  if (!response || response.error) {
