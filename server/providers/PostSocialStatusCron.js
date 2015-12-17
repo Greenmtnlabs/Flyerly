@@ -22,7 +22,7 @@ SocialStatusCron.setup = function(app) {
     var logger = require(__dirname + '/../logger');
 	var FB = require('fb');
 	
-	var twitter_update_with_media = require('./twitter_update_with_media');
+	
 	
 	var https = require('https');
 	//var request = require('request');
@@ -413,6 +413,8 @@ SocialStatusCron.setup = function(app) {
 			logMsg({line:__line, eIdTxt:eIdTxt, msg: "twitterAuth and twOAuthTokenSecret shouldnot be empty!", twitterAuth:access_token_key, twOAuthTokenSecret:access_token_secret} );
         }
 		else {
+
+			var twitter_update_with_media = require('./twitter_update_with_media');
 
 			var tuwm = new twitter_update_with_media({
 				consumer_key: config.twitter.consumer_key,
