@@ -42,7 +42,7 @@ SocialStatusCron.setup = function(app) {
 
 	// Image path
 	var imagePath = config.http.host + "/images/untech-social-share-image.jpg";
-	
+
     function setTimeInGlobalVars() {
 	    today = new Date();
 
@@ -385,43 +385,26 @@ SocialStatusCron.setup = function(app) {
 
 			FB.setAccessToken( fbAuth );
 			
-			// Old Code	
-			// FB.api('me/feed', 'post', {message: socialStatus}, function (res2) {
-			
-			//   if(!res2 || res2.error) {
-			// 	  var msg = (!res2) ? ( {a:"Fb posting error occurred."} ) : ( {a:"Fb posting error occurred: ", b:res2.error} );
-			// 	  msg.eidTxt = eIdTxt;
-			//   }
-			//   else{
-			// 	  var msg = 'Fb Post Id: ' + res2.id;
-			//   }
-			  
-			//   logMsg( {line:__line, msg: msg} );
-			// });
-			
-			caption = "I just setup #untech time using the Untech app.";
-
 			var params = {};
 				params['message'] = socialStatus + " " + caption;
 				params['name'] = '';
 				params['description'] = '';
 				params['link'] = appLinkURL;
-				
 				params['picture'] = imagePath;
 				params['caption'] = '';
 				
-				logger.info('params: ' +  imagePath);
-
-				FB.api('/me/feed', 'post', params, function(response) {
-				  if (!response || response.error) {
-				    // an error occured
-				    alert(JSON.stringify(response.error));
-				  } else {
-				    // Done
-				    alert('Published to stream');
-				  }
+				FB.api('/me/feed', 'post', params, function(res2) {
+				    if(!res2 || res2.error) {
+				  		var msg = (!res2) ? ( {a:"Fb posting error occurred."} ) : ( {a:"Fb posting error occurred: ", b:res2.error} );
+					  	msg.eidTxt = eIdTxt;
+			  		}
+			  		else{
+				  		var msg = 'Fb Post Id: ' + res2.id;
+			  		}
+			  
+			  		logMsg( {line:__line, msg: msg} );
 				});
-		}
+			}
     }//fb post function end
     
     // Post on twitter
