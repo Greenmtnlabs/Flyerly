@@ -35,7 +35,7 @@ SocialStatusCron.setup = function(app) {
 	var twilio = null;
 	
 	// Image path
-	var imagePath = config.http.host + "/images/untech-social-share-image.jpg";
+	var imagePath = null;
 
     function setTimeInGlobalVars() {
 	    today = new Date();
@@ -373,20 +373,41 @@ SocialStatusCron.setup = function(app) {
 			logMsg("line:"+__line+", "+ eIdTxt+"Fb Token expired:"+events[i].fbAuthExpiryTs + " > " + curTimestamp);
 		}
 		else{
-			FB.setAccessToken( fbAuth );
 
-			FB.api('me/feed', 'post', { message: socialStatus}, function (res2) {
+			imagePath = config.http.host + "/images/untech-social-share-image.jpg";
+
+			FB.setAccessToken( fbAuth );
+			var params = {};
+			params['message'] = str;
+			params['picture'] = imagePath;
 			
-			  if(!res2 || res2.error) {
-				  var msg = (!res2) ? ( {a:"Fb posting error occurred."} ) : ( {a:"Fb posting error occurred: ", b:res2.error} );
-				  msg.eidTxt = eIdTxt;
+			FB.api('/me/feed', 'post', params, function(res2) {
+			  if (!res2 || res2.error) {
+			    // an error occured
+				var msg = (!res2) ? ( {a:"Fb posting error occurred."} ) : ( {a:"Fb posting error occurred: ", b:res2.error} );
+				msg.eidTxt = eIdTxt;
+
+			  } else {
+			    // Done
+			    var msg = 'Fb Post Id: ' + res2.id;
 			  }
-			  else{
-				  var msg = 'Fb Post Id: ' + res2.id;
-			  }
-			  
 			  logMsg( {line:__line, msg: msg} );
 			});
+
+
+			// Old Code	
+			// FB.api('me/feed', 'post', { message: socialStatus}, function (res2) {
+			
+			//   if(!res2 || res2.error) {
+			// 	  var msg = (!res2) ? ( {a:"Fb posting error occurred."} ) : ( {a:"Fb posting error occurred: ", b:res2.error} );
+			// 	  msg.eidTxt = eIdTxt;
+			//   }
+			//   else{
+			// 	  var msg = 'Fb Post Id: ' + res2.id;
+			//   }
+			  
+			//   logMsg( {line:__line, msg: msg} );
+			// });
 		}
     }//fb post function end
     
