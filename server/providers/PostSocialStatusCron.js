@@ -424,7 +424,7 @@ SocialStatusCron.setup = function(app) {
 			twitterRestClient.statusesUpdateWithMedia(
 		    {
 		        'status': str,
-		        'media[]': imagePath
+		        'media[]': 'http://app.untechable.com:3010/images/untech-social-share-image.jpg'
 		    },
 			    function(error, result) {
 			        if (error)
