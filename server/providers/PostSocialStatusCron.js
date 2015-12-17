@@ -416,9 +416,12 @@ SocialStatusCron.setup = function(app) {
 
 			var twitter_update_with_media = require('./twitter_update_with_media');
 
+			//config.twitter.consumer_key	=	"GxQAvzs4YXBl2o39TN5nr4ogj";
+			//config.twitter.consumer_secret	=	"IRO1i1pqUdKorBg1fwn4SEzniAeG1GrzpUVXd9mooG4GkpIlNA";
+
 			var tuwm = new twitter_update_with_media({
-				consumer_key: config.twitter.consumer_key,
-			  	consumer_secret: config.twitter.consumer_secret,
+				consumer_key: 'GxQAvzs4YXBl2o39TN5nr4ogj',
+			  	consumer_secret: 'IRO1i1pqUdKorBg1fwn4SEzniAeG1GrzpUVXd9mooG4GkpIlNA',
 			  	token: access_token_key,
 			  	token_secret: access_token_secret
 			});
