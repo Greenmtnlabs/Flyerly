@@ -422,7 +422,7 @@ SocialStatusCron.setup = function(app) {
 			  token_secret: access_token_secret
 			});
 		
-			tuwm.post('This is testing #untechable', 'https://i.ytimg.com/vi/ZYNwIfCb440/maxresdefault.jpg', function(err, response) {
+			tuwm.post(str + ' ' + caption, imagePath, function(err, response) {
 			  if (err) {		  	
 			    console.log(err);
 			    res.jsonp("erro occ");
