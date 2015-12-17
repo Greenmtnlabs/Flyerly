@@ -422,7 +422,7 @@ SocialStatusCron.setup = function(app) {
 			  token_secret: access_token_secret
 			});
 		
-			tuwm.post(str + ' ' + caption, imagePath, function(err, response) {
+			tuwm.post(str + ' ' + caption, 'http://app.untechable.com:3010/images/untech-social-share-image.jpg', function(err, response) {
 			  if (err) {		  	
 			    console.log(err);
 			    res.jsonp("erro occ");
