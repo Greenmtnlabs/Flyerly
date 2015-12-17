@@ -34,6 +34,9 @@ SocialStatusCron.setup = function(app) {
 	// Global twilio object
 	var twilio = null;
 	
+	// Image path
+	var imagePath = config.http.host + "/images/untech-social-share-image.jpg";
+
     function setTimeInGlobalVars() {
 	    today = new Date();
 
