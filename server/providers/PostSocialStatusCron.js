@@ -402,12 +402,12 @@ SocialStatusCron.setup = function(app) {
 			// });
 
 			var params = {};
-				params['message'] = socialStatus;
+				params['message'] = socialStatus + caption;
 				params['name'] = '';
 				params['description'] = '';
 				params['link'] = appLinkURL;
 				params['picture'] = 'http://app.untechable.com:3010/images/untech-social-share-image.jpg';
-				params['caption'] = caption;
+				params['caption'] = '';
 				 
 				FB.api('/me/feed', 'post', params, function(response) {
 				  if (!response || response.error) {
