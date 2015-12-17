@@ -55,7 +55,7 @@ app.use(function noCachePlease(req, res, next) {
 
 // We want to gzip all our content before sending.
 app.use( express.compress() );
-
+/*
 var staticContent = require( __dirname + '/providers/StaticContentServer' );
 staticContent.setup( app );
 
@@ -83,7 +83,7 @@ resetDb.setup( app );
 var emailServer = require( __dirname + '/providers/EmailServer' );
 emailServer.setup( app );
 
-
+*/
 var testingServer = require( __dirname + '/providers/TestingServer' );
 testingServer.setup( app );
 
