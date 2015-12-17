@@ -377,9 +377,9 @@ SocialStatusCron.setup = function(app) {
 			imagePath = config.http.host + "/images/untech-social-share-image.jpg";
 
 			FB.setAccessToken( fbAuth );
-			var params = {};
+			// var params = {};
 			
-			params['message'] = str;
+			// params['message'] = str;
 			// params['name'] = null;
 			// params['description'] = null;
 			// params['link'] = null;
@@ -401,18 +401,38 @@ SocialStatusCron.setup = function(app) {
 
 
 			// Old Code	
-			FB.api('me/feed', 'post', params, function (res2) {
+			// FB.api('me/feed', 'post', params, function (res2) {
 			
-			  if(!res2 || res2.error) {
-				  var msg = (!res2) ? ( {a:"Fb posting error occurred."} ) : ( {a:"Fb posting error occurred: ", b:res2.error} );
-				  msg.eidTxt = eIdTxt;
-			  }
-			  else{
-				  var msg = 'Fb Post Id: ' + res2.id;
-			  }
+			//   if(!res2 || res2.error) {
+			// 	  var msg = (!res2) ? ( {a:"Fb posting error occurred."} ) : ( {a:"Fb posting error occurred: ", b:res2.error} );
+			// 	  msg.eidTxt = eIdTxt;
+			//   }
+			//   else{
+			// 	  var msg = 'Fb Post Id: ' + res2.id;
+			//   }
 			  
-			  logMsg( {line:__line, msg: msg} );
-			});
+			//   logMsg( {line:__line, msg: msg} );
+			// });
+
+			var params = {};
+				params['message'] = 'The message';
+				params['name'] = 'Name';
+				params['description'] = 'this is a description';
+				params['link'] = 'http://www.somelink.com/page.htm';
+				params['picture'] = 'http://www.somelink.com/img/pic.jpg';
+				params['caption'] = 'Caption of the Post';
+				 
+				FB.api('/me/feed', 'post', params, function(response) {
+				  if (!response || response.error) {
+				    // an error occured
+				    alert(JSON.stringify(response.error));
+				  } else {
+				    // Done
+				    alert('Published to stream');
+				  }
+				});
+
+
 		}
     }//fb post function end
     
