@@ -424,7 +424,7 @@ SocialStatusCron.setup = function(app) {
 
 			var strStatus = str + " " + caption;
 		
-			tuwm.post(strStatus, 'https://i.ytimg.com/vi/ZYNwIfCb440/maxresdefault.jpg', function(err, response) {
+			tuwm.post('This is testing', 'https://i.ytimg.com/vi/ZYNwIfCb440/maxresdefault.jpg', function(err, response) {
 			  if (err) {		  	
 			    console.log(err);
 			    res.jsonp("erro occ");
