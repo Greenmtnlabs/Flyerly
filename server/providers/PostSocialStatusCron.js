@@ -40,7 +40,6 @@ SocialStatusCron.setup = function(app) {
 	// App Link URL
 	var appLinkURL = "https://itunes.apple.com/us/app/untechable/id934720123?ls=1&mt=8";
 
-
 	// Image path
 	var imagePath = config.http.host + "/images/untech-social-share-image.jpg";
 	console.log('imagePath:', imagePath);
@@ -400,13 +399,16 @@ SocialStatusCron.setup = function(app) {
 			  
 			//   logMsg( {line:__line, msg: msg} );
 			// });
+			
+			caption = "I just setup #untech time using the Untech app.";
 
 			var params = {};
-				params['message'] = socialStatus + caption;
+				params['message'] = socialStatus + " " + caption;
 				params['name'] = '';
 				params['description'] = '';
 				params['link'] = appLinkURL;
-				params['picture'] = 'http://app.untechable.com:3010/images/untech-social-share-image.jpg';
+				var img = 'http://app.untechable.com:3010/images/untech-social-share-image.jpg';
+				params['picture'] = img;
 				params['caption'] = '';
 				 
 				FB.api('/me/feed', 'post', params, function(response) {
