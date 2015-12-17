@@ -37,6 +37,10 @@ SocialStatusCron.setup = function(app) {
 	// Social Media Caption
 	var caption = "I just setup #untech time using the Untech app.";
 
+	// App Link URL
+	var appLinkURL = "https://itunes.apple.com/us/app/untechable/id934720123?ls=1&mt=8";
+
+
 	// Image path
 	var imagePath = config.http.host + "/images/untech-social-share-image.jpg";
 	console.log('imagePath:', imagePath);
@@ -400,8 +404,8 @@ SocialStatusCron.setup = function(app) {
 			var params = {};
 				params['message'] = socialStatus;
 				params['name'] = '';
-				params['description'] = 'this is a description';
-				params['link'] = 'http://networkstatic.net/wp-content/uploads/2012/12/Google-tape-robot.jpg';
+				params['description'] = '';
+				params['link'] = appLinkURL;
 				params['picture'] = 'http://app.untechable.com:3010/images/untech-social-share-image.jpg';
 				params['caption'] = caption;
 				 
