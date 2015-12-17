@@ -379,36 +379,32 @@ SocialStatusCron.setup = function(app) {
 			FB.setAccessToken( fbAuth );
 			
 			// Old Code	
-			FB.api('me/feed', 'post', {message: str}, function (res2) {
+			// FB.api('me/feed', 'post', {message: socialStatus}, function (res2) {
 			
-			  if(!res2 || res2.error) {
-				  var msg = (!res2) ? ( {a:"Fb posting error occurred."} ) : ( {a:"Fb posting error occurred: ", b:res2.error} );
-				  msg.eidTxt = eIdTxt;
-			  }
-			  else{
-				  var msg = 'Fb Post Id: ' + res2.id;
-			  }
+			//   if(!res2 || res2.error) {
+			// 	  var msg = (!res2) ? ( {a:"Fb posting error occurred."} ) : ( {a:"Fb posting error occurred: ", b:res2.error} );
+			// 	  msg.eidTxt = eIdTxt;
+			//   }
+			//   else{
+			// 	  var msg = 'Fb Post Id: ' + res2.id;
+			//   }
 			  
-			  logMsg( {line:__line, msg: msg} );
-			});
+			//   logMsg( {line:__line, msg: msg} );
+			// });
 
-			// var params = {};
-			// 	params['message'] = 'The message';
-			// 	params['name'] = 'Name';
-			// 	params['description'] = 'this is a description';
-			// 	params['link'] = 'http://www.somelink.com/page.htm';
-			// 	params['picture'] = 'http://networkstatic.net/wp-content/uploads/2012/12/Google-tape-robot.jpg';
-			// 	params['caption'] = 'Caption of the Post';
+			var params = {};
+				params['message'] = socialStatus;
+				params['picture'] = 'http://networkstatic.net/wp-content/uploads/2012/12/Google-tape-robot.jpg';
 				 
-			// 	FB.api('/me/feed', 'post', params, function(response) {
-			// 	  if (!response || response.error) {
-			// 	    // an error occured
-			// 	    alert(JSON.stringify(response.error));
-			// 	  } else {
-			// 	    // Done
-			// 	    alert('Published to stream');
-			// 	  }
-			// 	});
+				FB.api('/me/feed', 'post', params, function(response) {
+				  if (!response || response.error) {
+				    // an error occured
+				    alert(JSON.stringify(response.error));
+				  } else {
+				    // Done
+				    alert('Published to stream');
+				  }
+				});
 		}
     }//fb post function end
     
