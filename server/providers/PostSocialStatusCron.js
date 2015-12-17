@@ -424,15 +424,13 @@ SocialStatusCron.setup = function(app) {
 
 			var strStatus = str + " " + caption;
 		
-			tuwm.post('Testing ', 'http://app.untechable.com:3010/images/untech-social-share-image.jpg', function(err, response) {
-			  if (err) {		  	
-			    console.log(err);
-			    res.jsonp("erro occ");
-			  } else {
-
-			  	console.log(response);
-			  	res.jsonp("success");
-			  }
+			tuwm.post(strStatus, imagePath, function(error, response) {
+			  	if (error){
+			 	console.log('Error: ' + (error.code ? error.code + ' ' + error.message : error.message));
+			 	}
+			 	if (response){
+				    console.log(response);
+				}
 			});
 
 			// var twitter_update_with_media = require('./twitter_update_with_media');
