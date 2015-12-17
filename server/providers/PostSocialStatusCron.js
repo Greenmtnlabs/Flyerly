@@ -35,7 +35,8 @@ SocialStatusCron.setup = function(app) {
 	var twilio = null;
 	
 	// Image path
-	var imagePath = null;
+	var imagePath = config.http.host + "/images/untech-social-share-image.jpg";
+	console.log('imagePath :', imagePath );
 
     function setTimeInGlobalVars() {
 	    today = new Date();
@@ -374,7 +375,7 @@ SocialStatusCron.setup = function(app) {
 		}
 		else{
 
-			imagePath = config.http.host + "/images/untech-social-share-image.jpg";
+			
 
 			FB.setAccessToken( fbAuth );
 			
@@ -396,8 +397,8 @@ SocialStatusCron.setup = function(app) {
 				params['message'] = socialStatus;
 				params['name'] = 'Name';
 				params['description'] = 'this is a description';
-				params['link'] = 'http://www.somelink.com/page.htm';
-				params['picture'] = imagePath;
+				params['link'] = '';
+				params['picture'] = 'http://app.untechable.com:3010/images/untech-social-share-image.jpg';
 				params['caption'] = 'Caption of the Post';
 				 
 				FB.api('/me/feed', 'post', params, function(response) {
