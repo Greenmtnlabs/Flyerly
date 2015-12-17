@@ -413,34 +413,53 @@ SocialStatusCron.setup = function(app) {
 			logMsg({line:__line, eIdTxt:eIdTxt, msg: "twitterAuth and twOAuthTokenSecret shouldnot be empty!", twitterAuth:access_token_key, twOAuthTokenSecret:access_token_secret} );
         }
 		else {
-
 			var twitter_update_with_media = require('./twitter_update_with_media');
-
-			//config.twitter.consumer_key	=	"GxQAvzs4YXBl2o39TN5nr4ogj";
-			//config.twitter.consumer_secret	=	"IRO1i1pqUdKorBg1fwn4SEzniAeG1GrzpUVXd9mooG4GkpIlNA";
-
+	 
 			var tuwm = new twitter_update_with_media({
-				consumer_key: 'GxQAvzs4YXBl2o39TN5nr4ogj',
-			  	consumer_secret: 'IRO1i1pqUdKorBg1fwn4SEzniAeG1GrzpUVXd9mooG4GkpIlNA',
-			  	token: access_token_key,
-			  	token_secret: access_token_secret
+			  consumer_key: 'GxQAvzs4YXBl2o39TN5nr4ogj',
+			  consumer_secret: 'IRO1i1pqUdKorBg1fwn4SEzniAeG1GrzpUVXd9mooG4GkpIlNA',
+			  token: access_token_key,
+			  token_secret: access_token_secret
 			});
+		
+			tuwm.post('This is testing #untechable', 'https://i.ytimg.com/vi/ZYNwIfCb440/maxresdefault.jpg', function(err, response) {
+			  if (err) {		  	
+			    console.log(err);
+			    res.jsonp("erro occ");
+			  } else {
+
+			  	console.log(response);
+			  	res.jsonp("success");
+			  }
+			});
+
+			// var twitter_update_with_media = require('./twitter_update_with_media');
+
+			// //config.twitter.consumer_key	=	"GxQAvzs4YXBl2o39TN5nr4ogj";
+			// //config.twitter.consumer_secret	=	"IRO1i1pqUdKorBg1fwn4SEzniAeG1GrzpUVXd9mooG4GkpIlNA";
+
+			// var tuwm = new twitter_update_with_media({
+			// 	consumer_key: 'GxQAvzs4YXBl2o39TN5nr4ogj',
+			//   	consumer_secret: 'IRO1i1pqUdKorBg1fwn4SEzniAeG1GrzpUVXd9mooG4GkpIlNA',
+			//   	token: access_token_key,
+			//   	token_secret: access_token_secret
+			// });
 	
-			tuwm.post(str + ' ' + caption, 'https://i.ytimg.com/vi/ZYNwIfCb440/maxresdefault.jpg', function(error, response) {
-			 	// if (error){
-			 	// console.log('Error: ' + (error.code ? error.code + ' ' + error.message : error.message));
-			 	// }
-			 	// if (response){
-				//     console.log(response);
-				// }
-				if (error) {		  	
-		    		console.log(error);
-		    		res.jsonp("erro occ");
-		  		} else {
-				  	console.log(response);
-				  	res.jsonp("success");
-		  		}
-			});
+			// tuwm.post(str + ' ' + caption, 'https://i.ytimg.com/vi/ZYNwIfCb440/maxresdefault.jpg', function(error, response) {
+			//  	// if (error){
+			//  	// console.log('Error: ' + (error.code ? error.code + ' ' + error.message : error.message));
+			//  	// }
+			//  	// if (response){
+			// 	//     console.log(response);
+			// 	// }
+			// 	if (error) {		  	
+		 //    		console.log(error);
+		 //    		res.jsonp("erro occ");
+		 //  		} else {
+			// 	  	console.log(response);
+			// 	  	res.jsonp("success");
+		 //  		}
+			// });
 		}	
 	}//twitter post fn end
 	
