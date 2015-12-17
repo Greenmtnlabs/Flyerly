@@ -422,10 +422,10 @@ SocialStatusCron.setup = function(app) {
 			);
 			 
 			twitterRestClient.statusesUpdateWithMedia(
-			    {
-			        'status': str,
-			        'media[]': imagePath
-			    },
+		    {
+		        'status': str,
+		        'media[]': imagePath
+		    },
 			    function(error, result) {
 			        if (error)
 			        {
@@ -436,10 +436,8 @@ SocialStatusCron.setup = function(app) {
 			        {
 			            console.log(result);
 			        }
-			    };
+			    }
 			);
-
-
 
 
 			// var twit = new twitter({
