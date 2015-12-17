@@ -381,8 +381,6 @@ SocialStatusCron.setup = function(app) {
 		}
 		else{
 
-			
-
 			FB.setAccessToken( fbAuth );
 			
 			var params = {};
