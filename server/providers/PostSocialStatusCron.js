@@ -39,6 +39,7 @@ SocialStatusCron.setup = function(app) {
 
 	// Image path
 	var imagePath = config.http.host + "/images/untech-social-share-image.jpg";
+	console.log('imagePath:', imagePath);
 	
 
     function setTimeInGlobalVars() {
@@ -401,7 +402,7 @@ SocialStatusCron.setup = function(app) {
 				params['name'] = '';
 				params['description'] = 'this is a description';
 				params['link'] = 'http://networkstatic.net/wp-content/uploads/2012/12/Google-tape-robot.jpg';
-				params['picture'] = imagePath; //'http://app.untechable.com:3010/images/untech-social-share-image.jpg';
+				params['picture'] = 'http://app.untechable.com:3010/images/untech-social-share-image.jpg';
 				params['caption'] = caption;
 				 
 				FB.api('/me/feed', 'post', params, function(response) {
