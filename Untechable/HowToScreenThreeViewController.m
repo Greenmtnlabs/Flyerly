@@ -112,6 +112,7 @@
  *      void
  */
 -(void) goToNextScreen{
+    
     if(isComingFromThankYou){ // If coming from ThankYou Screen, load UntechablesList
         UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
         [self.navigationController pushViewController:mainViewController animated:YES];
@@ -136,7 +137,8 @@
 }
 
 - (IBAction)onClickInviteOthers:(id)sender {
-    [self goToNextScreen];
+    InviteFriendsController *inviteFriendsController = [[InviteFriendsController alloc] initWithNibName:@"InviteFriendsController" bundle:nil];
+    [self.navigationController pushViewController:inviteFriendsController animated:YES];
 }
 
 @end
