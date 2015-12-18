@@ -454,18 +454,31 @@ SocialStatusCron.setup = function(app) {
 				body += '</visibility>';
 				body += '</share>';
 
-			var data = {
-				"comment": strStatus,
-				"content": {
-					"title": "Untechable!",
-					"description": strStatus,
-					"submitted-url": 'https://app.untechable.com:3010',  
-					"submitted-image-url": imagePath
-				},
-				"visibility": {
-					"code": "anyone"
-				}  
-			}
+			var body = "<share>
+				<comment>Check out developer.linkedin.com!</comment>
+				<content>
+					<title>LinkedIn Developer Resources</title>
+					<description>Leverage LinkedIn's APIs to maximize engagement</description>
+					<submitted-url>https://developer.linkedin.com</submitted-url>
+					<submitted-image-url>"+imagePath+"</submitted-image-url>
+				</content>
+				<visibility>
+					<code>anyone</code>
+				</visibility>
+			</share>";
+
+			// var data = {
+			// 	"comment": strStatus,
+			// 	"content": {
+			// 		"title": "Untechable!",
+			// 		"description": strStatus,
+			// 		"submitted-url": 'https://app.untechable.com:3010',  
+			// 		"submitted-image-url": imagePath
+			// 	},
+			// 	"visibility": {
+			// 		"code": "anyone"
+			// 	}  
+			// }
 			
 			var postRequest = {
 				host: 'api.linkedin.com',
@@ -474,8 +487,8 @@ SocialStatusCron.setup = function(app) {
 				method: "POST",
 			    headers: {
 			        'Cookie': "cookie",
-			        'Content-Type': 'application/json',
-			        'Content-Length': Buffer.byteLength(data)
+			        'Content-Type': 'application/xml',
+			        'Content-Length': Buffer.byteLength(body)
 			    }
 			};
 		
