@@ -57,6 +57,8 @@ const int CONTACTS_TAB = 0;
     
     [super viewDidLoad];
     
+    [self.navigationController setNavigationBarHidden:NO];
+    
     self.selectedIdentifiers = [[NSMutableArray alloc] init];
     globle = [UntechableSingleton RetrieveSingleton];
     
