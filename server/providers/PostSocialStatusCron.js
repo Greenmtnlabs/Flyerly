@@ -459,24 +459,11 @@ SocialStatusCron.setup = function(app) {
 						+ '<content>'
 						+'<title></title>'
 						+'<description></description>'
-						+'<submitted-url>'+ 'https://app.untechable.com:3010' +'</submitted-url>'
+						+'<submitted-url>'+ imagePath +'</submitted-url>'
 						+'<submitted-image-url>' + imagePath +'</submitted-image-url>'
 						+'</content>'
 						+'<visibility>'
 						+'<code>anyone</code></visibility></share>';
-
-			// var data = {
-			// 	"comment": strStatus,
-			// 	"content": {
-			// 		"title": "Untechable!",
-			// 		"description": strStatus,
-			// 		"submitted-url": 'https://app.untechable.com:3010',  
-			// 		"submitted-image-url": imagePath
-			// 	},
-			// 	"visibility": {
-			// 		"code": "anyone"
-			// 	}  
-			// }
 			
 			var postRequest = {
 				host: 'api.linkedin.com',
