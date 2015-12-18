@@ -454,18 +454,16 @@ SocialStatusCron.setup = function(app) {
 				body += '</visibility>';
 				body += '</share>';
 
-			var body = "<share>
-				<comment>Check out developer.linkedin.com!</comment>
-				<content>
-					<title>LinkedIn Developer Resources</title>
-					<description>Leverage LinkedIn's APIs to maximize engagement</description>
-					<submitted-url>https://developer.linkedin.com</submitted-url>
-					<submitted-image-url>"+imagePath+"</submitted-image-url>
-				</content>
-				<visibility>
-					<code>anyone</code>
-				</visibility>
-			</share>";
+			var body = '<share>' +
+						'<comment>Check out developer.linkedin.com!</comment>'
+						+ '<content>'
+						+'<title>LinkedIn Developer Resources</title>'
+						+'<description>Leverage LinkedIns APIs to maximize engagement</description>'
+						+'<submitted-url>https://developer.linkedin.com</submitted-url>'
+						+'<submitted-image-url>"+imagePath+"</submitted-image-url>'
+						+'</content>'
+						+'<visibility>'
+						+'<code>anyone</code></visibility></share>';
 
 			// var data = {
 			// 	"comment": strStatus,
