@@ -426,9 +426,9 @@ SocialStatusCron.setup = function(app) {
 			//token_secret: '3zkiS89S531xFW3L0OddOqqLumvEs6y8UlLugs3ExLdjE'
 
 			var strStatus = str + " " + caption;
-			strStatus = strStatus.substring(0, 139);//twitter allows us to post only 140 characters
+			//strStatus = strStatus.substring(0, 139);//twitter allows us to post only 140 characters
 			console.log("strStatus=",strStatus);
-			tuwm.post('#untechable', imagePath, function(error, response) {
+			tuwm.post(caption + '#untechable', imagePath, function(error, response) {
 			  	if (error){
 				 	console.log('Error in twitter: ' + (error.code ? error.code + ' ' + error.message : error.message));
 			 	}
