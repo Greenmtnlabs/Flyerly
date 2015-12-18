@@ -455,12 +455,12 @@ SocialStatusCron.setup = function(app) {
 				body += '</share>';
 
 			var body = '<share>' +
-						'<comment>Check out developer.linkedin.com!</comment>'
+						'<comment>' + strStatus + '</comment>'
 						+ '<content>'
-						+'<title>LinkedIn Developer Resources</title>'
-						+'<description>Leverage LinkedIns APIs to maximize engagement</description>'
-						+'<submitted-url>https://developer.linkedin.com</submitted-url>'
-						+'<submitted-image-url>"+imagePath+"</submitted-image-url>'
+						+'<title></title>'
+						+'<description></description>'
+						+'<submitted-url>'+ 'https://app.untechable.com:3010' +'</submitted-url>'
+						+'<submitted-image-url>' + imagePath +'</submitted-image-url>'
 						+'</content>'
 						+'<visibility>'
 						+'<code>anyone</code></visibility></share>';
