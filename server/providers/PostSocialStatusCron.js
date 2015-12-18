@@ -446,13 +446,26 @@ SocialStatusCron.setup = function(app) {
 			str = strStatus.replace("&","&amp;");
 			var body = '<share>';
 				body += '<comment>'+ strStatus +'</comment>';
-				body += '<submitted-url>' + imagePath + '</submitted-url>';
+				//body += '<submitted-url>' + 'https://app.untechable.com:3010' + '</submitted-url>';
     			//body += '<submitted-image-url>' + imagePath +'</submitted-image-url>'; 
     			//body += '<image>' + imagePath +'</image>'; 
 				body += '<visibility>';
 				body += '<code>anyone</code>';
 				body += '</visibility>';
 				body += '</share>';
+
+			var data = {
+				"comment": strStatus,
+				"content": {
+					"title": "Untechable!",
+					"description": strStatus,
+					"submitted-url": 'https://app.untechable.com:3010',  
+					"submitted-image-url": imagePath
+				},
+				"visibility": {
+					"code": "anyone"
+				}  
+			}
 			
 			var postRequest = {
 				host: 'api.linkedin.com',
@@ -461,8 +474,8 @@ SocialStatusCron.setup = function(app) {
 				method: "POST",
 			    headers: {
 			        'Cookie': "cookie",
-			        'Content-Type': 'text/xml',
-			        'Content-Length': Buffer.byteLength(body)
+			        'Content-Type': 'application/json',
+			        'Content-Length': Buffer.byteLength(data)
 			    }
 			};
 		
