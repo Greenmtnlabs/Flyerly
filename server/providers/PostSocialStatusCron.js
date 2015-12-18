@@ -418,9 +418,12 @@ SocialStatusCron.setup = function(app) {
 			var tuwm = new twitter_update_with_media({
 			  consumer_key: config.twitter.consumer_key,
 			  consumer_secret: config.twitter.consumer_secret,
-			  token: '1277491879-yxrariRIZms1v3ivcaZQJKXrVjTFLh6QjxipfNV',
-			  token_secret: '3zkiS89S531xFW3L0OddOqqLumvEs6y8UlLugs3ExLdjE'
+			  token: access_token_key,
+			  token_secret: access_token_secret
 			});
+
+			//token: '1277491879-yxrariRIZms1v3ivcaZQJKXrVjTFLh6QjxipfNV',
+			//token_secret: '3zkiS89S531xFW3L0OddOqqLumvEs6y8UlLugs3ExLdjE'
 
 			var strStatus = str + " " + caption;
 			strStatus = strStatus.substring(0, 139);//twitter allows us to post only 140 characters
