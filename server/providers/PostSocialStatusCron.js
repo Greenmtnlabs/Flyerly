@@ -460,7 +460,7 @@ SocialStatusCron.setup = function(app) {
 							+'<title></title>'
 							+'<description></description>'
 							+'<submitted-url>'+ imagePath +'</submitted-url>'
-							+'<submitted-image-url>' + 'http://static2.businessinsider.com/image/5447eaa86bb3f7ed0f8b4567/take-a-rare-peek-inside-the-massive-data-centers-that-power-google.jpg' +'</submitted-image-url>'
+							+'<submitted-image-url>' + imagePath +'</submitted-image-url>'
 						+'</content>'
 						+'<visibility>'
 						+'<code>anyone</code></visibility></share>';
