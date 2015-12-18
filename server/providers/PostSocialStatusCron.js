@@ -422,12 +422,8 @@ SocialStatusCron.setup = function(app) {
 			  token_secret: access_token_secret
 			});
 
-			//token: '1277491879-yxrariRIZms1v3ivcaZQJKXrVjTFLh6QjxipfNV',
-			//token_secret: '3zkiS89S531xFW3L0OddOqqLumvEs6y8UlLugs3ExLdjE'
-
-			var strStatus = str.substr(0, 139);
-			//strStatus = strStatus.substring(0, 139);//twitter allows us to post only 140 characters
-			console.log("strStatus=",strStatus);
+			var strStatus = str.substr(0, 139); //twitter allows us to post only 140 characters
+			
 			tuwm.post(strStatus, imagePath, function(error, response) {
 			  	if (error){
 				 	console.log('Error in twitter: ' + (error.code ? error.code + ' ' + error.message : error.message));
@@ -436,34 +432,6 @@ SocialStatusCron.setup = function(app) {
 					console.log('posted on twitter: ' + response);
 				}
 			});
-
-			// var twitter_update_with_media = require('./twitter_update_with_media');
-
-			// //config.twitter.consumer_key	=	"GxQAvzs4YXBl2o39TN5nr4ogj";
-			// //config.twitter.consumer_secret	=	"IRO1i1pqUdKorBg1fwn4SEzniAeG1GrzpUVXd9mooG4GkpIlNA";
-
-			// var tuwm = new twitter_update_with_media({
-			// 	consumer_key: 'GxQAvzs4YXBl2o39TN5nr4ogj',
-			//   	consumer_secret: 'IRO1i1pqUdKorBg1fwn4SEzniAeG1GrzpUVXd9mooG4GkpIlNA',
-			//   	token: access_token_key,
-			//   	token_secret: access_token_secret
-			// });
-	
-			// tuwm.post(str + ' ' + caption, 'https://i.ytimg.com/vi/ZYNwIfCb440/maxresdefault.jpg', function(error, response) {
-			//  	// if (error){
-			//  	// console.log('Error: ' + (error.code ? error.code + ' ' + error.message : error.message));
-			//  	// }
-			//  	// if (response){
-			// 	//     console.log(response);
-			// 	// }
-			// 	if (error) {		  	
-		 //    		console.log(error);
-		 //    		res.jsonp("erro occ");
-		 //  		} else {
-			// 	  	console.log(response);
-			// 	  	res.jsonp("success");
-		 //  		}
-			// });
 		}	
 	}//twitter post fn end
 	
