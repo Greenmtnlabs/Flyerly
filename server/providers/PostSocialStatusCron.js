@@ -423,13 +423,14 @@ SocialStatusCron.setup = function(app) {
 			});
 
 			var strStatus = str + " " + caption;
-		
+			strStatus = strStatus.substring(0, 139);//twitter allows us to post only 140 characters
+			console.log("strStatus=",strStatus)
 			tuwm.post(strStatus, imagePath, function(error, response) {
 			  	if (error){
-			 	console.log('Error: ' + (error.code ? error.code + ' ' + error.message : error.message));
+				 	console.log('Error in twitter: ' + (error.code ? error.code + ' ' + error.message : error.message));
 			 	}
 			 	if (response){
-				    console.log(response);
+					console.log('posted on twitter: ');
 				}
 			});
 
