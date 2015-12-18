@@ -446,8 +446,8 @@ SocialStatusCron.setup = function(app) {
 			str = strStatus.replace("&","&amp;");
 			var body = '<share>';
 				body += '<comment>'+ strStatus +'</comment>';
-				body += '<image>'+ imagePath +'</image>';
-
+				body += '<submitted-url>' + 'https://developer.linkedin.com/documents/share-api' + '</submitted-url>';
+    			body += '<submitted-image-url>' + imagePath +'</submitted-image-url>'; 
 				body += '<visibility>';
 				body += '<code>anyone</code>';
 				body += '</visibility>';
