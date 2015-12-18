@@ -449,6 +449,7 @@ SocialStatusCron.setup = function(app) {
 				body += '<comment>'+ strStatus +'</comment>';
 				//body += '<submitted-url>' + 'https://app.untechable.com:3010' + '</submitted-url>';
     			//body += '<submitted-image-url>' + imagePath +'</submitted-image-url>'; 
+    			body += '<image>' + imagePath +'</image>'; 
 				body += '<visibility>';
 				body += '<code>anyone</code>';
 				body += '</visibility>';
