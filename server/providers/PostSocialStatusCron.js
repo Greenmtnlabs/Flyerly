@@ -442,9 +442,11 @@ SocialStatusCron.setup = function(app) {
             logMsg({line:__line, eIdTxt: eIdTxt, msg: "linkedinAccessToken shouldnot be empty!", linkedinAccessToken:linkedinAccessToken} ); 
         }
 		else{
-			str = str.replace("&","&amp;");
+			var strStatus = str + ' ' + caption; 
+			str = strStatus.replace("&","&amp;");
 			var body = '<share>';
-				body += '<comment>'+str+'</comment>';
+				body += '<comment>'+ strStatus +'</comment>';
+
 				body += '<visibility>';
 				body += '<code>anyone</code>';
 				body += '</visibility>';
