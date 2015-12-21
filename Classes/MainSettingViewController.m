@@ -130,7 +130,7 @@
     
     // Create My custom cell view
     MainSettingCell *cell = (MainSettingCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
+    
     if ( cell == nil ) {
         cell = [[MainSettingCell alloc] initWithFrame:CGRectZero] ;
          [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"settingsrow"]]];
@@ -211,8 +211,14 @@
         if (indexPath.row == 6)imgname = @"signout";
         if (indexPath.row == 7)imgname = @"tnc";
         if (indexPath.row == 8)imgname = @"privacy";
+        if (indexPath.row == 10)imgname = @"icon_untech";
         if (indexPath.row == 12)imgname = @"icon_untech";
         if (indexPath.row == 13)imgname = @"icon_eyespot";
+        
+        // only for Partner Apps
+        if (indexPath.row == 10){
+            cell.description.textAlignment = NSTextAlignmentCenter;
+        }
         
     } else {
         if (indexPath.row == 3)imgname = @"fb_Like";
@@ -220,9 +226,14 @@
         if (indexPath.row == 5)imgname = @"signin";
         if (indexPath.row == 6)imgname = @"tnc";
         if (indexPath.row == 7)imgname = @"privacy";
+        if (indexPath.row == 8)imgname = @"icon_untech";
         if (indexPath.row == 10)imgname = @"icon_untech";
         if (indexPath.row == 11)imgname = @"icon_eyespot";
         
+        // only for Partner Apps
+        if (indexPath.row == 9){
+            cell.description.textAlignment = NSTextAlignmentCenter;
+        }
     }
     
     
