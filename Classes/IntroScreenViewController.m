@@ -68,6 +68,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+/*
+ * This method handles swipe
+ * @params:
+ *      swipe: UISwipeGestureRecognizer
+ * @return:
+ *      void
+ */
 - (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
     
     //Slide to right
@@ -80,7 +87,6 @@
         countSwipe++;
         [self changeViews:@"right"];
     }
-    
 }
 
 /*
@@ -90,7 +96,6 @@
  * @return:
  *      void
  */
-
 -(void)changeViews: (NSString *) direction{
     
     btnBack.enabled = YES;
@@ -122,7 +127,6 @@
             [self performAnimation:@"RIGHT"];
         }
     }
-
 }
 
 
