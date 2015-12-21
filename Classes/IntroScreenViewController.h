@@ -27,5 +27,11 @@
 - (IBAction)signIn:(id)sender;
 - (IBAction)hideTray:(id)sender;
 
+@property (strong, nonatomic) IBOutlet UIButton *btnBack;
+@property (strong, nonatomic) IBOutlet UIButton *btnNext;
+
+- (IBAction)onClickBack:(id)sender;
+- (IBAction)onClickNext:(id)sender;
+
 
 @end

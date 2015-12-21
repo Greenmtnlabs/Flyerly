@@ -26,6 +26,7 @@
 
 @synthesize imageView;
 @synthesize buttonDelegate;
+@synthesize btnBack;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,18 +35,10 @@
     self.navigationController.navigationBarHidden = NO;
     
     countSwipe = 1;
-    if( IS_IPHONE_4 ){
-        imgsArray = [NSArray arrayWithObjects:@"intro-1-screen-iPhone4.png",@"intro-2-screen-iPhone4.png",@"intro-3-screen-iPhone4.png",nil];
-    } else if( IS_IPHONE_5 ){
-        imgsArray = [NSArray arrayWithObjects:@"intro-1-screen-iPhone5.png",@"intro-2-screen-iPhone5.png",@"intro-3-screen-iPhone5.png",nil];
-    } else if( IS_IPHONE_6 ){
-        imgsArray = [NSArray arrayWithObjects:@"intro-1-screen-iPhone6.png",@"intro-2-screen-iPhone6.png",@"intro-3-screen-iPhone6.png",nil];
-    } else {
-        imgsArray = [NSArray arrayWithObjects:@"intro-1-screen-iPhone6p.png",@"intro-2-screen-iPhone6p.png",@"intro-3-screen-iPhone6p.png",nil];
-    }
-
     
+    imgsArray = [NSArray arrayWithObjects:@"introScreen1.jpg", @"introScreen2.jpg", @"introScreen3.jpg", @"introScreen4.jpg",nil];
     imageView.image = [UIImage imageNamed:imgsArray[0]];
+    
     [imageView setUserInteractionEnabled:YES];
     swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
@@ -58,15 +51,84 @@
     [imageView addGestureRecognizer:swipeLeft];
     [imageView addGestureRecognizer:swipeRight];
     
-    [self.view bringSubviewToFront:_btnHideMe];
-    [self.view bringSubviewToFront:_btnSignIn];
     
+    [self.view bringSubviewToFront:_btnHideMe];
+    //[self.view bringSubviewToFront:_btnSignIn];
+    
+    _btnSignIn.enabled = NO;
     //Remove signin button if user already logged in
     if ([[PFUser currentUser] sessionToken].length != 0) {
         [_btnSignIn removeFromSuperview];
     }
     
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+ * This method handles swipe
+ * @params:
+ *      swipe: UISwipeGestureRecognizer
+ * @return:
+ *      void
+ */
+- (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
+    
+    //Slide to right
+    if (swipe.direction == UISwipeGestureRecognizerDirectionRight) {
+        countSwipe--;
+        [self changeViews:@"left"];
+    }
+    //Slide to left
+    else if (swipe.direction == UISwipeGestureRecognizerDirectionLeft) {
+        countSwipe++;
+        [self changeViews:@"right"];
+    }
+}
+
+/*
+ * This method changes views
+ * @params:
+ *      direction: NSString
+ * @return:
+ *      void
+ */
+-(void)changeViews: (NSString *) direction{
+    
+    btnBack.enabled = YES;
+    
+    NSString *imageName;
+    
+    if(countSwipe == 1){
+        btnBack.enabled = NO;
+        imageName = imgsArray[0];
+    } else if (countSwipe == 2) {
+        imageName = imgsArray[1];
+    } else if (countSwipe == 3){
+        imageName = imgsArray[2];
+    } else if(countSwipe == 4){
+        imageName = imgsArray[3];
+    } else if(countSwipe == 0 || countSwipe > 4){
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+    
+    if(countSwipe != 0){
+        if ([direction isEqualToString:@"right"] ) {
+        
+            imageView.image = [UIImage imageNamed:imageName];
+            [self performAnimation:@"LEFT"];
+        
+        }else if ([direction isEqualToString:@"left"] ) {
+        
+            imageView.image = [UIImage imageNamed:imageName];
+            [self performAnimation:@"RIGHT"];
+        }
+    }
+}
+
 
 /**
  * Perform animmation
@@ -88,47 +150,8 @@
 }
 
 
-/**
- * Hook swipe functions
- */
-- (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
-    
-    NSString *leftImage, *rightImage;
-    
-    if(countSwipe == 1){
-        rightImage = imgsArray[1];
-    } else if (countSwipe == 2) {
-        leftImage = imgsArray[0];
-        rightImage = imgsArray[2];
-    } else if (countSwipe >= 3){
-        leftImage = imgsArray[1];
-    }
-    
-    //Dont go beside first slide
-    if (swipe.direction == UISwipeGestureRecognizerDirectionRight && countSwipe > 1) {
-        imageView.image = [UIImage imageNamed:leftImage];
-        [self performAnimation:@"RIGHT"];
-        countSwipe--;
-    }
-    //Max is third slid
-    else if (swipe.direction == UISwipeGestureRecognizerDirectionLeft && countSwipe < 3) {
-        imageView.image = [UIImage imageNamed:rightImage];
-        [self performAnimation:@"LEFT"];
-        countSwipe++;
-    }
-    //On forth slide
-    else if(countSwipe >= 3 ){
-        //[self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-        //[self.buttonDelegate openPanel];
-    }
-    
-}
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 
 - (IBAction)signIn:(id)sender {
@@ -141,5 +164,15 @@
  */
 - (IBAction)hideTray:(id)sender {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)onClickBack:(id)sender {
+    countSwipe--;
+    [self changeViews:@"left"];
+}
+
+- (IBAction)onClickNext:(id)sender {
+    countSwipe++;
+    [self changeViews:@"right"];
 }
 @end

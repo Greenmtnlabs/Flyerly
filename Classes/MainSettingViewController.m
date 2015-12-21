@@ -8,6 +8,7 @@
 
 #import "MainSettingViewController.h"
 #import "UserVoice.h"
+#import "IntroScreenViewController.h"
 
 @interface MainSettingViewController () {
     
@@ -86,6 +87,7 @@
     [category addObject:@"Autosave to Gallery"];
     [category addObject:@"Flyers are public"];
     
+    
     //Checking if the user is valid or anonymous
     if ([[PFUser currentUser] sessionToken].length != 0) {
         //GET UPDATED USER PUCHASES INFO
@@ -110,6 +112,10 @@
         [category addObject:@"Terms of Service"];
         [category addObject:@"Privacy Policy"];
     }
+    [category addObject:@"How To"];
+    [category addObject:@"Partner Apps"];
+    [category addObject:@"Untech"];
+    [category addObject:@"eyeSPOT"];
    
 }
 
@@ -124,7 +130,7 @@
     
     // Create My custom cell view
     MainSettingCell *cell = (MainSettingCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
+    
     if ( cell == nil ) {
         cell = [[MainSettingCell alloc] initWithFrame:CGRectZero] ;
          [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"settingsrow"]]];
@@ -205,7 +211,14 @@
         if (indexPath.row == 6)imgname = @"signout";
         if (indexPath.row == 7)imgname = @"tnc";
         if (indexPath.row == 8)imgname = @"privacy";
+        if (indexPath.row == 10)imgname = @"icon_untech";
+        if (indexPath.row == 12)imgname = @"icon_untech";
+        if (indexPath.row == 13)imgname = @"icon_eyespot";
         
+        // only for Partner Apps
+        if (indexPath.row == 10){
+            cell.description.textAlignment = NSTextAlignmentCenter;
+        }
         
     } else {
         if (indexPath.row == 3)imgname = @"fb_Like";
@@ -213,10 +226,15 @@
         if (indexPath.row == 5)imgname = @"signin";
         if (indexPath.row == 6)imgname = @"tnc";
         if (indexPath.row == 7)imgname = @"privacy";
+        if (indexPath.row == 8)imgname = @"icon_untech";
+        if (indexPath.row == 10)imgname = @"icon_untech";
+        if (indexPath.row == 11)imgname = @"icon_eyespot";
+        
+        // only for Partner Apps
+        if (indexPath.row == 9){
+            cell.description.textAlignment = NSTextAlignmentCenter;
+        }
     }
-    
-    
-   
     
     
     // Set cell Values
@@ -282,28 +300,21 @@
 
 - (void)tableView:(UITableView *)tView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
    
-    
     //Opening InApp Panel when click on Premium Features row
     if (indexPath.row == 0){
-        
         [self openPanel];
-        
     }
-    
     
     // Checking if the user is valid
     if ([[PFUser currentUser] sessionToken].length != 0) {
         if(indexPath.row == 3) {
-            
             accountUpdater = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
             [self.navigationController pushViewController:accountUpdater animated:YES];
-            
+        
         }else if(indexPath.row == 4){
-            
             [ self likeFacebook ];
-            
+        
         }else if(indexPath.row == 5){
-            
             [self likeTwitter];
             
         }else if(indexPath.row == 6){
@@ -330,7 +341,18 @@
             //privicy policy
             privicyPolicyView = [[PrivicyPolicyViewController alloc]initWithNibName:@"PrivicyPolicyViewController" bundle:nil];
             [self.navigationController pushViewController:privicyPolicyView animated:YES];
+            
+        } else if (indexPath.row == 10){
+            [self openIntroScreen];
+            
+        }else if (indexPath.row == 12){
+            [self openITunes:@"flyerly-create-share-flyers/id344130515?mt=8"]; //Flyerly
+        
+        } else if (indexPath.row == 13){
+           [self openITunes:@"eyespot/id611525338?mt=8"]; //eyeSPOT
         }
+        
+        
         //-------
         [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
     
@@ -382,12 +404,45 @@
             //privicy policy
             privicyPolicyView = [[PrivicyPolicyViewController alloc]initWithNibName:@"PrivicyPolicyViewController" bundle:nil];
             [self.navigationController pushViewController:privicyPolicyView animated:YES];
+        } else if (indexPath.row == 8){
+            [self openIntroScreen];
+            
+        } else if (indexPath.row == 10){
+            [self openITunes:@"flyerly-create-share-flyers/id344130515?mt=8"]; //Flyerly
+            
+        } else if (indexPath.row == 11){
+            [self openITunes:@"eyespot/id611525338?mt=8"]; //eyeSPOT
         }
-
     }
+}
+
+/*
+ * Opens Intro screens
+ * @params:
+ *      void
+ * @return:
+ *      void
+ */
+-(void)openIntroScreen {
     
+    IntroScreenViewController *introScreenViewController = [[IntroScreenViewController alloc] initWithNibName:@"IntroScreenViewController" bundle:nil];
+    [introScreenViewController setModalPresentationStyle:UIModalPresentationFullScreen];
+    introScreenViewController.buttonDelegate = self;
     
-    
+    [self presentViewController:introScreenViewController animated:YES completion:nil];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
+}
+
+/*
+ * This method opens iTune
+ * @params:
+ *      appID: NSString
+ * @return:
+ *      void
+ */
+-(void) openITunes : (NSString *) appID{
+    NSString *urlString = [NSString stringWithFormat:@"http://itunes.apple.com/app/%@",appID];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
 }
 
 
