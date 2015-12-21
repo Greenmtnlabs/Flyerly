@@ -15,19 +15,19 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Partner Apps" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pem-h3-gFZ">
-                        <rect key="frame" x="10" y="18" width="300" height="30"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Partner Apps" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pem-h3-gFZ">
+                        <rect key="frame" x="10" y="39" width="300" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="Y7U-Dl-P4U"/>
+                            <constraint firstAttribute="height" constant="20" id="Y7U-Dl-P4U"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="pem-h3-gFZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="84z-vt-VM2"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="pem-h3-gFZ" secondAttribute="bottom" constant="9" id="Wnp-qO-kp7"/>
+                    <constraint firstItem="pem-h3-gFZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="31" id="84z-vt-VM2"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="pem-h3-gFZ" secondAttribute="bottom" constant="-2" id="Wnp-qO-kp7"/>
                     <constraint firstItem="pem-h3-gFZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="bKr-XG-gtg"/>
                     <constraint firstAttribute="trailingMargin" secondItem="pem-h3-gFZ" secondAttribute="trailing" constant="2" id="rd2-S2-QLh"/>
                 </constraints>
