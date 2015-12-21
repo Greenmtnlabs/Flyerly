@@ -5153,17 +5153,38 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [flyerBorder setSelected:YES];
     }
     else if(selectedButton == giphyBgBtn) {
-       NSMutableDictionary *templateDictionary = [flyer getLayerFromMaster:@"Template"];
-      [backgroundsView setHighlightedResourceTag:[[templateDictionary objectForKey:@"imageTag"] intValue]];
-      [backgroundsView dehighlightResource];
         
-       tasksAfterGiphySelect = @"goingToGiphy";
-       GiphyViewController *giphyViewController = [[GiphyViewController alloc]initWithNibName:@"GiphyViewController" bundle:nil];
-        giphyViewController.flyer = flyer;
-        giphyViewController.tasksAfterGiphySelect = tasksAfterGiphySelect;
-       [self.navigationController pushViewController:giphyViewController animated:YES];
+        Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+        NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+        if (networkStatus == NotReachable) {
+            [self showAlert:@"No internet available,please connect to the internet first" message:@""];
+        } else {
+            [self goToGiphyScreen];
+        }
     }
+}
+
+// show message in alert
+-(void)showAlert:(NSString *)title message:(NSString *)message{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
+// Go to Giphy screen
+-(void)goToGiphyScreen{
+    NSMutableDictionary *templateDictionary = [flyer getLayerFromMaster:@"Template"];
+    [backgroundsView setHighlightedResourceTag:[[templateDictionary objectForKey:@"imageTag"] intValue]];
+    [backgroundsView dehighlightResource];
     
+    tasksAfterGiphySelect = @"goingToGiphy";
+    GiphyViewController *giphyViewController = [[GiphyViewController alloc]initWithNibName:@"GiphyViewController" bundle:nil];
+    giphyViewController.flyer = flyer;
+    giphyViewController.tasksAfterGiphySelect = tasksAfterGiphySelect;
+    [self.navigationController pushViewController:giphyViewController animated:YES];
 }
 
 /*
