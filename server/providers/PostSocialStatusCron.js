@@ -13,7 +13,7 @@ SocialStatusCron = module.exports = {};
  */
 SocialStatusCron.setup = function(app) {
 
-    // Get the configurations
+	// Get the configurations
     var config = require(__dirname + '/../config');
     var CommonFunctions = require( __dirname + '/CommonFunctions' );
 	var notifier = require('mail-notifier');
@@ -21,8 +21,12 @@ SocialStatusCron.setup = function(app) {
     // Our logger for logging to file and console
     var logger = require(__dirname + '/../logger');
 	var FB = require('fb');
+<<<<<<< HEAD
 	
 	
+=======
+	var Twitter = require('node-twitter');
+>>>>>>> UntechableApis
 	
 	var https = require('https');
 	//var request = require('request');
@@ -34,6 +38,9 @@ SocialStatusCron.setup = function(app) {
 	
 	// Global twilio object
 	var twilio = null;
+
+	// Image path
+	var imagePath = config.http.host + "/images/untech-social-share-image.jpg";
 	
 	// Social Media Caption
 	var caption = "I just setup #untech time using the Untech app.";
@@ -382,7 +389,11 @@ SocialStatusCron.setup = function(app) {
 		}
 		else{
 
+<<<<<<< HEAD
 			FB.setAccessToken( fbAuth );
+=======
+			FB.api('me/feed', 'post', { message: socialStatus, picture: imagePath}, function (res2) {
+>>>>>>> UntechableApis
 			
 			var params = {};
 				params['message'] = socialStatus + " " + caption;
@@ -413,6 +424,7 @@ SocialStatusCron.setup = function(app) {
 			logMsg({line:__line, eIdTxt:eIdTxt, msg: "twitterAuth and twOAuthTokenSecret shouldnot be empty!", twitterAuth:access_token_key, twOAuthTokenSecret:access_token_secret} );
         }
 		else {
+<<<<<<< HEAD
 			var twitter_update_with_media = require('./twitter_update_with_media');
 	 
 			var tuwm = new twitter_update_with_media({
@@ -432,6 +444,31 @@ SocialStatusCron.setup = function(app) {
 					console.log('posted on twitter: ' + response);
 				}
 			});
+=======
+			
+			var twitterRestClient = new Twitter.RestClient(
+    			config.twitter.consumer_key,
+    			config.twitter.consumer_secret,
+    			access_token_key,
+    			access_token_secret
+			);
+
+			twitterRestClient.statusesUpdateWithMedia(
+	    		{
+	        		'status': str,
+	        		'media[]': imagePath
+	    		},
+	    		
+	    		function(error, result) {
+		        	if (error) {
+		            	console.log('Error: ' + (error.code ? error.code + ' ' + error.message : error.message));
+		        	}
+			        if (result){
+		        	    console.log(result);
+		        	}
+	    		}
+	    	 );
+>>>>>>> UntechableApis
 		}	
 	}//twitter post fn end
 	
@@ -445,6 +482,7 @@ SocialStatusCron.setup = function(app) {
 			var strStatus = str + ' ' + caption; 
 			str = strStatus.replace("&","&amp;");
 			var body = '<share>';
+<<<<<<< HEAD
 				body += '<comment>'+ strStatus +'</comment>';
 				//body += '<submitted-url>' + 'https://app.untechable.com:3010' + '</submitted-url>';
     			//body += '<submitted-image-url>' + imagePath +'</submitted-image-url>'; 
@@ -452,6 +490,12 @@ SocialStatusCron.setup = function(app) {
 				body += '<visibility>';
 				body += '<code>anyone</code>';
 				body += '</visibility>';
+=======
+				    body += '<comment>'+str + imagePath +'</comment>';
+				    body += '<visibility>';
+						body += '<code>anyone</code>';
+					body += '</visibility>';
+>>>>>>> UntechableApis
 				body += '</share>';
 
 			var body = '<share>' +

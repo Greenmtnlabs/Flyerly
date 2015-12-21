@@ -31,6 +31,8 @@ contentServer.setup = function( app ) {
 
 	// Serve audio files
 	app.use( '/recordings', express.static( __dirname + '/../../recordings' ));
+
+	app.use( '/images', express.static( __dirname + '/../../assets/images' ));
 	
 	app.use( '/images', express.static( __dirname + '/../../assets/images' ));
 	
