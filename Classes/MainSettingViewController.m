@@ -83,40 +83,43 @@
     self.navigationItem.titleView = label;
     
     category = [[NSMutableArray alloc] init];
-    [category addObject:@"Premium Features"];
-    [category addObject:@"Autosave to Gallery"];
-    [category addObject:@"Flyers are public"];
+    [category addObject:@"Premium Features"];//0
+    [category addObject:@"Autosave to Gallery"];//1
+    [category addObject:@"Flyers are public"];//2
     
-    
+    BOOL IS_LOGIN = [self isLogin];
     //Checking if the user is valid or anonymous
-    if ([[PFUser currentUser] sessionToken].length != 0) {
+    if ( IS_LOGIN ) {
         //GET UPDATED USER PUCHASES INFO
-        [category addObject:@"Account Setting"];
+        [category addObject:@"Account Setting"];//3
     }
     
-    [category addObject:@"Like us on Facebook"];
-    [category addObject:@"Follow us on Twitter"];
+    [category addObject:@"Like us on Facebook"];//4/3
+    [category addObject:@"Follow us on Twitter"];//5/4
     
-    
+
     //Checking if the user is valid or anonymus
-    if ([[PFUser currentUser] sessionToken].length != 0) {
-        [category addObject:@"Sign Out"];
-        [category addObject:@"Terms of Service"];
-        [category addObject:@"Privacy Policy"];
-        // will remove in production build
-        if ( [flyerConfigurator currentDebugMood] ){
-            [category addObject:@"Clear Purchases"];
-        }
+    if ( IS_LOGIN ) {
+        [category addObject:@"Sign Out"];//6
     } else {
-        [category addObject:@"Sign In"];
-        [category addObject:@"Terms of Service"];
-        [category addObject:@"Privacy Policy"];
+        [category addObject:@"Sign In"];//5
     }
-    [category addObject:@"How To"];
-    [category addObject:@"Partner Apps"];
-    [category addObject:@"Untech"];
-    [category addObject:@"eyeSPOT"];
-   
+    [category addObject:@"Terms of Service"];//7,6
+    [category addObject:@"Privacy Policy"];//8,7
+    [category addObject:@"How To"];//9,8
+    [category addObject:@"Partner Apps"];//10,9 -- 
+    [category addObject:@"Untech"];//11,10
+    [category addObject:@"eyeSPOT"];//12,11
+
+    // will remove in production build
+    if ( IS_LOGIN && [flyerConfigurator currentDebugMood] ){
+        [category addObject:@"Clear Purchases"];//13
+    }
+}
+
+//return flag is login
+- (BOOL)isLogin{
+    return ([[PFUser currentUser] sessionToken].length != 0);
 }
 
 #pragma TableView Events
@@ -168,8 +171,7 @@
                 [mSwitch setOn:YES];
             }
     }
-    
-    if (indexPath.row == 2){
+    else if (indexPath.row == 2){
         UISwitch *mSwitch;
         if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
             mSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(263, 4, 0, 0)] ;
@@ -194,8 +196,7 @@
         imgname = @"privacy_icon";
         
     }
-    
-    if (indexPath.row == 3){
+    else if (indexPath.row == 3){
         //Checking if the user is valid or anonymus
         if ([[PFUser currentUser] sessionToken].length != 0) {
             //account setting row clicked
@@ -205,15 +206,15 @@
         
     }
     
-    if ([[PFUser currentUser] sessionToken].length != 0) {
+    if ( [self isLogin] ) {
         if (indexPath.row == 4)imgname = @"fb_Like";
         if (indexPath.row == 5)imgname = @"twt_follow";
         if (indexPath.row == 6)imgname = @"signout";
         if (indexPath.row == 7)imgname = @"tnc";
         if (indexPath.row == 8)imgname = @"privacy";
-        if (indexPath.row == 10)imgname = @"icon_untech";
-        if (indexPath.row == 12)imgname = @"icon_untech";
-        if (indexPath.row == 13)imgname = @"icon_eyespot";
+        if (indexPath.row == 9)imgname = @"icon_untech"; //howto
+        if (indexPath.row == 11)imgname = @"icon_untech";//untech
+        if (indexPath.row == 12)imgname = @"icon_eyespot";//eyespot
         
         // only for Partner Apps
         if (indexPath.row == 10){
@@ -226,9 +227,9 @@
         if (indexPath.row == 5)imgname = @"signin";
         if (indexPath.row == 6)imgname = @"tnc";
         if (indexPath.row == 7)imgname = @"privacy";
-        if (indexPath.row == 8)imgname = @"icon_untech";
-        if (indexPath.row == 10)imgname = @"icon_untech";
-        if (indexPath.row == 11)imgname = @"icon_eyespot";
+        if (indexPath.row == 8)imgname = @"icon_untech";//howto
+        if (indexPath.row == 10)imgname = @"icon_untech";//untech
+        if (indexPath.row == 11)imgname = @"icon_eyespot";//eyespot
         
         // only for Partner Apps
         if (indexPath.row == 9){
@@ -306,64 +307,64 @@
     }
     
     // Checking if the user is valid
-    if ([[PFUser currentUser] sessionToken].length != 0) {
+    if ( [self isLogin]) {
         if(indexPath.row == 3) {
             accountUpdater = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
             [self.navigationController pushViewController:accountUpdater animated:YES];
         
-        }else if(indexPath.row == 4){
+        }
+        else if(indexPath.row == 4){
             [ self likeFacebook ];
         
-        }else if(indexPath.row == 5){
+        }
+        else if(indexPath.row == 5){
             [self likeTwitter];
             
-        }else if(indexPath.row == 6){
+        }
+        else if(indexPath.row == 6){
             
             warningAlert = [[UIAlertView  alloc]initWithTitle:@"Are you sure?" message:@"" delegate:self cancelButtonTitle:@"Sign out" otherButtonTitles:@"Cancel",nil];
             [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
-         
-        //------
-        //This code will not called in Production,as this row is not adding in view
-        }else if(indexPath.row == 9){
-        
-            _persistence = [[RMStoreKeychainPersistence alloc] init];
-            [RMStore defaultStore].transactionPersistor = _persistence;
-            
-             //Uncomment this line if you want to remove transactions from the phone.
-             [_persistence removeTransactions];
-            
-        }else if (indexPath.row == 7){
+        }
+        else if (indexPath.row == 7){
             //terms of service
             termOfServiceView = [[TermsOfServiceViewController alloc]initWithNibName:@"TermsOfServiceViewController" bundle:nil];
             [self.navigationController pushViewController:termOfServiceView animated:YES];
             
-        } else if (indexPath.row == 8){
+        }
+        else if (indexPath.row == 8){
             //privicy policy
             privicyPolicyView = [[PrivicyPolicyViewController alloc]initWithNibName:@"PrivicyPolicyViewController" bundle:nil];
             [self.navigationController pushViewController:privicyPolicyView animated:YES];
             
-        } else if (indexPath.row == 10){
+        }
+        else if (indexPath.row == 9){
             [self openIntroScreen];
             
-        }else if (indexPath.row == 12){
+        }
+        else if (indexPath.row == 11){
             [self openITunes:@"flyerly-create-share-flyers/id344130515?mt=8"]; //Flyerly
         
-        } else if (indexPath.row == 13){
+        }
+        else if (indexPath.row == 12){
            [self openITunes:@"eyespot/id611525338?mt=8"]; //eyeSPOT
         }
-        
-        
-        //-------
-        [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
-    
-        // Otherwise the user is anonymous
-    } else {
-        if(indexPath.row == 3) {
+        else if(indexPath.row == 13){//clear purchasis
+            _persistence = [[RMStoreKeychainPersistence alloc] init];
+            [RMStore defaultStore].transactionPersistor = _persistence;
             
+            //Uncomment this line if you want to remove transactions from the phone.
+            [_persistence removeTransactions];
+            
+        }
+
+        [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+        
+    } else { // Otherwise the user is anonymous
+        if(indexPath.row == 3) {
             [ self likeFacebook ];
             
         }else if(indexPath.row == 4){
-            
             [self likeTwitter];
             
         }else if(indexPath.row == 5){
