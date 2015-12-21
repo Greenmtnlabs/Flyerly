@@ -429,13 +429,6 @@
     [introScreenViewController setModalPresentationStyle:UIModalPresentationFullScreen];
     introScreenViewController.buttonDelegate = self;
     
-    //enable buttons if save to gallary not required
-//    if ( [flyer isVideoFlyer] ){
-//        [shareviewcontroller enableShareOptions:YES];
-//        [shareviewcontroller saveButtonSelected:YES];
-//        [shareviewcontroller haveVideoLinkEnableAllShareOptions:[[self.flyer getYouTubeStatus] isEqualToString:@"1"]];
-//    }
-    
     [self presentViewController:introScreenViewController animated:YES completion:nil];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
 }
