@@ -63,8 +63,7 @@
     if (swipe.direction == UISwipeGestureRecognizerDirectionLeft){
         [self goToNextScreen];
     }
-    
-    if (swipe.direction == UISwipeGestureRecognizerDirectionRight){
+    else if (swipe.direction == UISwipeGestureRecognizerDirectionRight){
         int i = 0;
         NSArray *array = [self.navigationController viewControllers];
         for(i=0; i<array.count; i++){

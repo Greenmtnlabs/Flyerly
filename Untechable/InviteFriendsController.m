@@ -151,9 +151,7 @@ const int CONTACTS_TAB = 0;
 
 -(IBAction)goBack{
     // To pop UntechablesList
-    NSArray *array = [self.navigationController viewControllers];
-    [self.navigationController popToViewController:[array objectAtIndex:1] animated:YES];
-    
+    [self.navigationController popViewControllerAnimated:YES];    
 }
 
 -(void)showAlert:(NSString *)title message:(NSString *)message{

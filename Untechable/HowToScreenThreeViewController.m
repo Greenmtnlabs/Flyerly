@@ -36,8 +36,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self.navigationController setNavigationBarHidden:YES];
-    
     if(isComingFromThankYou){
         self.pageView.hidden = YES;
     }
@@ -56,6 +54,12 @@
     // Adding the swipe gesture on image view
     [imgHowTo addGestureRecognizer:swipeLeft];
     [imgHowTo addGestureRecognizer:swipeRight];
+}
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    //hide navigation bar
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning {
