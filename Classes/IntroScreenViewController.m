@@ -39,6 +39,19 @@
     imgsArray = [NSArray arrayWithObjects:@"introScreen1.jpg", @"introScreen2.jpg", @"introScreen3.jpg", @"introScreen4.jpg",nil];
     imageView.image = [UIImage imageNamed:imgsArray[0]];
     
+    [imageView setUserInteractionEnabled:YES];
+    swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    
+    // Setting the swipe direction.
+    [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
+    
+    // Adding the swipe gesture on image view
+    [imageView addGestureRecognizer:swipeLeft];
+    [imageView addGestureRecognizer:swipeRight];
+    
+    
     [self.view bringSubviewToFront:_btnHideMe];
     //[self.view bringSubviewToFront:_btnSignIn];
     
@@ -53,6 +66,63 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
+    
+    //Slide to right
+    if (swipe.direction == UISwipeGestureRecognizerDirectionRight) {
+        countSwipe--;
+        [self changeViews:@"left"];
+    }
+    //Slide to left
+    else if (swipe.direction == UISwipeGestureRecognizerDirectionLeft) {
+        countSwipe++;
+        [self changeViews:@"right"];
+    }
+    
+}
+
+/*
+ * This method changes views
+ * @params:
+ *      direction: NSString
+ * @return:
+ *      void
+ */
+
+-(void)changeViews: (NSString *) direction{
+    
+    btnBack.enabled = YES;
+    
+    NSString *imageName;
+    
+    if(countSwipe == 1){
+        btnBack.enabled = NO;
+        imageName = imgsArray[0];
+    } else if (countSwipe == 2) {
+        imageName = imgsArray[1];
+    } else if (countSwipe == 3){
+        imageName = imgsArray[2];
+    } else if(countSwipe == 4){
+        imageName = imgsArray[3];
+    } else if(countSwipe == 0 || countSwipe > 4){
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+    
+    if(countSwipe != 0){
+        if ([direction isEqualToString:@"right"] ) {
+        
+            imageView.image = [UIImage imageNamed:imageName];
+            [self performAnimation:@"LEFT"];
+        
+        }else if ([direction isEqualToString:@"left"] ) {
+        
+            imageView.image = [UIImage imageNamed:imageName];
+            [self performAnimation:@"RIGHT"];
+        }
+    }
+
 }
 
 
@@ -77,35 +147,6 @@
 
 
 
--(void)changeViews: (NSString *) direction{
-    
-    btnBack.enabled = YES;
-    
-    NSString *imageName;
-    
-    if(countSwipe == 1){
-        btnBack.enabled = NO;
-        imageName = imgsArray[0];
-    } else if (countSwipe == 2) {
-        imageName = imgsArray[1];
-    } else if (countSwipe == 3){
-        imageName = imgsArray[2];
-    } else if(countSwipe == 4){
-        imageName = imgsArray[3];
-    } else if(countSwipe > 4){
-        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    }
-    
-    if ([direction isEqualToString:@"right"] ) {
-        imageView.image = [UIImage imageNamed:imageName];
-        [self performAnimation:@"LEFT"];
-    }
-    else if ([direction isEqualToString:@"left"] ) {
-        imageView.image = [UIImage imageNamed:imageName];
-        [self performAnimation:@"RIGHT"];
-    }
-
-}
 
 
 
