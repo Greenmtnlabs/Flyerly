@@ -83,7 +83,7 @@
     self.navigationItem.titleView = label;
     
     category = [[NSMutableArray alloc] init];
-    [category addObject:@"Premium Features"];//0
+    [category addObject:@"Premium Features"];//0 -- category - array index number, it will help when we ask for cellForRowAtIndex
     [category addObject:@"Autosave to Gallery"];//1
     [category addObject:@"Flyers are public"];//2
     
@@ -107,11 +107,11 @@
     [category addObject:@"Terms of Service"];//7,6
     [category addObject:@"Privacy Policy"];//8,7
     [category addObject:@"How To"];//9,8
-    [category addObject:@"Partner Apps"];//10,9 -- 
+    [category addObject:@"Partner Apps"];//10,9 --
     [category addObject:@"Untech"];//11,10
     [category addObject:@"eyeSPOT"];//12,11
 
-    // will remove in production build
+    // will remove in production build, this row must be in the end of table view
     if ( IS_LOGIN && [flyerConfigurator currentDebugMood] ){
         [category addObject:@"Clear Purchases"];//13
     }
