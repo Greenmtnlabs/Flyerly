@@ -48,6 +48,11 @@
     [imgHowTo addGestureRecognizer:swipeRight];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    //hide navigation bar
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -64,13 +69,7 @@
         [self goToNextScreen];
     }
     else if (swipe.direction == UISwipeGestureRecognizerDirectionRight){
-        int i = 0;
-        NSArray *array = [self.navigationController viewControllers];
-        for(i=0; i<array.count; i++){
-            if([array[i] isMemberOfClass:NSClassFromString(@"HowToScreenOneViewController")]){
-               [self.navigationController popToViewController:[array objectAtIndex:i] animated:YES];
-            }
-        }
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
@@ -85,7 +84,7 @@
     
     [btnNext setTitle: NSLocalizedString(@"next ", nil) forState: UIControlStateNormal];
     self.lblMessage1.text = NSLocalizedString(@"Select 'Untech Now' using your pre-selected settings (what you'll be doing, who to inform & for how long).", nil);
-    self.lblMessage2.text = NSLocalizedString(@"Select 'Untech Custom' to manually choose what you'll be doing during your untechable peroid of time & who you'd like to inform.", nil);
+    self.lblMessage2.text = NSLocalizedString(@"Select 'Untech Custom' to manually choose what you'll be doing during your untechable period of time & who you'd like to inform.", nil);
     
 }
 

@@ -79,14 +79,8 @@
     }
     
     if (swipe.direction == UISwipeGestureRecognizerDirectionRight){
-        
-        int i = 0;
-        NSArray *array = [self.navigationController viewControllers];
-        for(i=0; i<array.count; i++){
-            if([array[i] isMemberOfClass:NSClassFromString(@"HowToScreenTwoViewController")]){
-                [self.navigationController popToViewController:[array objectAtIndex:i] animated:YES];
-            }
-        }
+        if( isComingFromThankYou != YES )
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
@@ -117,15 +111,14 @@
  */
 -(void) goToNextScreen{
     
-    if(isComingFromThankYou){ // If coming from ThankYou Screen, load UntechablesList
+    if( isComingFromThankYou ){ // If coming from ThankYou Screen, load UntechablesList
         UntechablesList *mainViewController = [[UntechablesList alloc] initWithNibName:@"UntechablesList" bundle:nil];
         [self.navigationController pushViewController:mainViewController animated:YES];
-    }else if(isComingFromSettings){
+    } else if( isComingFromSettings ){
         
         SettingsViewController *settingsViewController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil];
-        untechable.rUId = @"1";
-        untechable.dic[@"rUId"] = @"1";
-        settingsViewController.untechable = untechable;
+        settingsViewController.untechable = [[Untechable alloc] initWithSettingUntechable];
+        settingsViewController.comingFrom = @"UntechablesList";
         [self.navigationController pushViewController:settingsViewController animated:YES];
         
     } else{ // otherwise, load SetupGuideViewController
@@ -134,7 +127,6 @@
         [self.navigationController pushViewController:setupGuideViewController animated:YES];
     }
 }
-
 
 - (IBAction)onClickDone:(id)sender {
     [self goToNextScreen];

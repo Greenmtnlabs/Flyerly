@@ -22,6 +22,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *socialNetworksTable;
 @property (strong, nonatomic) UIAlertView *editNameAlert;
 - (IBAction)emailComposer;
+@property (nonatomic,assign) NSString *comingFrom;
 
 
 @end
