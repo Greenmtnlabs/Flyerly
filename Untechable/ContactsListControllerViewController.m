@@ -478,27 +478,13 @@
             
             mobileLabel = (NSString*)CFBridgingRelease(ABMultiValueCopyLabelAtIndex(phones, i));
             
-            NSString *numberType;
-            
-            if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMainLabel]) {
-                numberType = @"Main";
+            CFStringRef locLabel1 = ABMultiValueCopyLabelAtIndex(phones, i);
+            NSString *numberType =(__bridge NSString*) ABAddressBookCopyLocalizedLabel(locLabel1);
+            NSLog(@"firstname=%@, numberType=%@",firstName, numberType);
+            if( [numberType isEqualToString:@""] ){
+                numberType = @"Phone";
             }
             
-            if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel]) {
-                numberType = @"Mobile";
-            }
-            
-            if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel]) {
-                numberType = @"iPhoneNumber";
-            }
-            
-            if ([mobileLabel isEqualToString:(NSString*)kABHomeLabel]) {
-                numberType = @"Home";
-            }
-            
-            if ([mobileLabel isEqualToString:(NSString*)kABWorkLabel]) {
-                numberType = @"Work";
-            }
             
             if ( numberType != nil ){
                 phoneUtilError = nil;
