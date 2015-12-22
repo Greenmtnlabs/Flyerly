@@ -34,23 +34,23 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CxC-G4-BEM">
-                    <rect key="frame" x="37" y="182" width="300" height="68"/>
+                    <rect key="frame" x="37" y="153" width="300" height="87"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="68" id="TmE-53-0Xo"/>
+                        <constraint firstAttribute="height" constant="87" id="TmE-53-0Xo"/>
                         <constraint firstAttribute="width" constant="300" id="hht-cJ-svH"/>
                     </constraints>
                     <string key="text">Select 'Untech Custom' to manually choose what you'll be doing during your untechable peroid of time &amp; who you'd like to inform.</string>
-                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="14"/>
+                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select 'Untech Now' using your pre-selected settings (what you'll be doing, who to inform &amp; for how long)." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hzv-7Z-gb1">
-                    <rect key="frame" x="37" y="60" width="300" height="82"/>
+                    <rect key="frame" x="37" y="42" width="300" height="86"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="82" id="0wD-8U-oJT"/>
+                        <constraint firstAttribute="height" constant="86" id="0wD-8U-oJT"/>
                         <constraint firstAttribute="width" constant="300" id="XYx-CN-FOB"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="17"/>
+                    <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="18"/>
                     <color key="textColor" red="0.20000000000000001" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -82,13 +82,13 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="pye-rh-REz" secondAttribute="bottom" constant="13" id="1KI-It-j81"/>
-                <constraint firstItem="Hzv-7Z-gb1" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="60" id="37N-jI-8wf"/>
+                <constraint firstItem="Hzv-7Z-gb1" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="42" id="37N-jI-8wf"/>
                 <constraint firstAttribute="centerX" secondItem="Hzv-7Z-gb1" secondAttribute="centerX" id="LuC-Hq-l4y"/>
                 <constraint firstItem="am0-Aj-iZR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="18" id="a3S-zT-D7W"/>
                 <constraint firstAttribute="bottom" secondItem="am0-Aj-iZR" secondAttribute="bottom" constant="10" id="bhp-ZQ-Huc"/>
                 <constraint firstAttribute="centerX" secondItem="CxC-G4-BEM" secondAttribute="centerX" id="c2C-Zd-ftD"/>
                 <constraint firstAttribute="trailing" secondItem="pye-rh-REz" secondAttribute="trailing" constant="10" id="eDX-wt-2yC"/>
-                <constraint firstItem="CxC-G4-BEM" firstAttribute="top" secondItem="Hzv-7Z-gb1" secondAttribute="bottom" constant="40" id="owL-Lg-XBa"/>
+                <constraint firstItem="CxC-G4-BEM" firstAttribute="top" secondItem="Hzv-7Z-gb1" secondAttribute="bottom" constant="25" id="owL-Lg-XBa"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
         </view>

@@ -33,24 +33,13 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="howToScreen_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="d8I-Ia-yO8">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Setup your Untech account &amp; settings to make taking a break from technology as easy as 1, 2, 3." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Gk-6v-duv">
-                    <rect key="frame" x="37" y="65" width="300" height="82"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="82" id="R1l-Y3-wdI"/>
-                        <constraint firstAttribute="width" constant="300" id="vme-IX-5s9"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="17"/>
-                    <color key="textColor" red="0.27843137254901962" green="0.27058823529411763" blue="0.42745098039215684" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note: You can always adjust these in the settings screen." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fSY-uP-PF1">
-                    <rect key="frame" x="37" y="151" width="300" height="42"/>
+                    <rect key="frame" x="37" y="153" width="300" height="69"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="42" id="IPO-4E-YVc"/>
+                        <constraint firstAttribute="height" constant="69" id="IPO-4E-YVc"/>
                         <constraint firstAttribute="width" constant="300" id="MBO-oD-x80"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
+                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="19"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -78,12 +67,23 @@
                     <color key="pageIndicatorTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="currentPageIndicatorTintColor" red="0.0" green="0.2627450980392157" blue="0.34509803921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </pageControl>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Setup your Untech account &amp; settings to make taking a break from technology as easy as 1, 2, 3." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Gk-6v-duv">
+                    <rect key="frame" x="37" y="44" width="300" height="90"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="90" id="R1l-Y3-wdI"/>
+                        <constraint firstAttribute="width" constant="300" id="vme-IX-5s9"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="19"/>
+                    <color key="textColor" red="0.27843137254901962" green="0.27058823529411763" blue="0.42745098039215684" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                    <size key="shadowOffset" width="0.0" height="0.0"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="AKf-8y-xha" secondAttribute="bottom" constant="10" id="43A-px-Gy1"/>
-                <constraint firstItem="fSY-uP-PF1" firstAttribute="top" secondItem="3Gk-6v-duv" secondAttribute="bottom" constant="4" id="5dr-lp-xYk"/>
-                <constraint firstItem="3Gk-6v-duv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="65" id="7Eq-cO-u7a"/>
+                <constraint firstItem="fSY-uP-PF1" firstAttribute="top" secondItem="3Gk-6v-duv" secondAttribute="bottom" constant="19" id="5dr-lp-xYk"/>
+                <constraint firstItem="3Gk-6v-duv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="44" id="7Eq-cO-u7a"/>
                 <constraint firstAttribute="trailing" secondItem="wvY-Ml-2Aw" secondAttribute="trailing" constant="10" id="8YL-f5-m37"/>
                 <constraint firstItem="d8I-Ia-yO8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="CI7-IQ-4Hy"/>
                 <constraint firstAttribute="centerX" secondItem="fSY-uP-PF1" secondAttribute="centerX" id="Ij8-qe-ntc"/>
