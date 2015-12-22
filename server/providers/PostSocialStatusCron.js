@@ -21,7 +21,6 @@ SocialStatusCron.setup = function(app) {
     // Our logger for logging to file and console
     var logger = require(__dirname + '/../logger');
 	var FB = require('fb');
-	var Twitter = require('node-twitter');
 	
 	var https = require('https');
 	//var request = require('request');
@@ -37,6 +36,15 @@ SocialStatusCron.setup = function(app) {
 	// Image path
 	var imagePath = config.http.host + "/images/untech-social-share-image.jpg";
 	
+	// Social Media Caption
+	var caption = "I just setup #untech time using the Untech app.";
+
+	// App Link URL
+	var appLinkURL = "https://itunes.apple.com/us/app/untechable/id934720123?ls=1&mt=8";
+
+	// Image path
+	var imagePath = config.http.host + "/images/untech-social-share-image.jpg";
+
     function setTimeInGlobalVars() {
 	    today = new Date();
 
@@ -364,6 +372,7 @@ SocialStatusCron.setup = function(app) {
 
     // Post on facebook
     function postOnFacebook( curEvent, socialStatus, fbAuth, fbAuthExpiryTs ) {
+
 		var eIdTxt = " (EventId: " + curEvent._id + ") ";
 		
         if ( fbAuth == ""  ||  fbAuthExpiryTs == "" ) {
@@ -373,21 +382,28 @@ SocialStatusCron.setup = function(app) {
 			logMsg("line:"+__line+", "+ eIdTxt+"Fb Token expired:"+events[i].fbAuthExpiryTs + " > " + curTimestamp);
 		}
 		else{
-			FB.setAccessToken( fbAuth );
 
-			FB.api('me/feed', 'post', { message: socialStatus, picture: imagePath}, function (res2) {
-			
-			  if(!res2 || res2.error) {
-				  var msg = (!res2) ? ( {a:"Fb posting error occurred."} ) : ( {a:"Fb posting error occurred: ", b:res2.error} );
-				  msg.eidTxt = eIdTxt;
-			  }
-			  else{
-				  var msg = 'Fb Post Id: ' + res2.id;
-			  }
+			FB.setAccessToken( fbAuth );
+			var params = {};
+				params['message'] = socialStatus + " " + caption;
+				params['name'] = '';
+				params['description'] = '';
+				params['link'] = appLinkURL;
+				params['picture'] = imagePath;
+				params['caption'] = '';
+				
+				FB.api('/me/feed', 'post', params, function(res2) {
+				    if(!res2 || res2.error) {
+				  		var msg = (!res2) ? ( {a:"Fb posting error occurred."} ) : ( {a:"Fb posting error occurred: ", b:res2.error} );
+					  	msg.eidTxt = eIdTxt;
+			  		}
+			  		else{
+				  		var msg = 'Fb Post Id: ' + res2.id;
+			  		}
 			  
-			  logMsg( {line:__line, msg: msg} );
-			});
-		}
+			  		logMsg( {line:__line, msg: msg} );
+				});
+			}
     }//fb post function end
     
     // Post on twitter
@@ -397,29 +413,25 @@ SocialStatusCron.setup = function(app) {
 			logMsg({line:__line, eIdTxt:eIdTxt, msg: "twitterAuth and twOAuthTokenSecret shouldnot be empty!", twitterAuth:access_token_key, twOAuthTokenSecret:access_token_secret} );
         }
 		else {
-			
-			var twitterRestClient = new Twitter.RestClient(
-    			config.twitter.consumer_key,
-    			config.twitter.consumer_secret,
-    			access_token_key,
-    			access_token_secret
-			);
+			var twitter_update_with_media = require('./twitter_update_with_media');
+	 
+			var tuwm = new twitter_update_with_media({
+			  consumer_key: config.twitter.consumer_key,
+			  consumer_secret: config.twitter.consumer_secret,
+			  token: access_token_key,
+			  token_secret: access_token_secret
+			});
 
-			twitterRestClient.statusesUpdateWithMedia(
-	    		{
-	        		'status': str,
-	        		'media[]': imagePath
-	    		},
-	    		
-	    		function(error, result) {
-		        	if (error) {
-		            	console.log('Error: ' + (error.code ? error.code + ' ' + error.message : error.message));
-		        	}
-			        if (result){
-		        	    console.log(result);
-		        	}
-	    		}
-	    	 );
+			var strStatus = str.substr(0, 139); //twitter allows us to post only 140 characters
+			
+			tuwm.post(strStatus, imagePath, function(error, response) {
+			  	if (error){
+				 	console.log('Error in twitter: ' + (error.code ? error.code + ' ' + error.message : error.message));
+			 	}
+			 	if (response){
+					console.log('posted on twitter: ' + response);
+				}
+			});
 		}	
 	}//twitter post fn end
 	
@@ -430,13 +442,18 @@ SocialStatusCron.setup = function(app) {
             logMsg({line:__line, eIdTxt: eIdTxt, msg: "linkedinAccessToken shouldnot be empty!", linkedinAccessToken:linkedinAccessToken} ); 
         }
 		else{
-			str = str.replace("&","&amp;");
-			var body = '<share>';
-				    body += '<comment>'+str + imagePath +'</comment>';
-				    body += '<visibility>';
-						body += '<code>anyone</code>';
-					body += '</visibility>';
-				body += '</share>';
+			var strStatus = str + ' ' + caption; 
+			str = strStatus.replace("&","&amp;");
+			var body = '<share>' +
+						'<comment>' + strStatus + '</comment>'
+						+'<content>'
+							+'<title></title>'
+							+'<description></description>'
+							+'<submitted-url>'+ imagePath +'</submitted-url>'
+							+'<submitted-image-url>' + imagePath +'</submitted-image-url>'
+						+'</content>'
+						+'<visibility>'
+						+'<code>anyone</code></visibility></share>';
 			
 			var postRequest = {
 				host: 'api.linkedin.com',
@@ -445,7 +462,7 @@ SocialStatusCron.setup = function(app) {
 				method: "POST",
 			    headers: {
 			        'Cookie': "cookie",
-			        'Content-Type': 'text/xml',
+			        'Content-Type': 'application/xml',
 			        'Content-Length': Buffer.byteLength(body)
 			    }
 			};

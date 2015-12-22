@@ -83,9 +83,8 @@ resetDb.setup( app );
 var emailServer = require( __dirname + '/providers/EmailServer' );
 emailServer.setup( app );
 
-
-var testingServer = require( __dirname + '/providers/TestingServer' );
-testingServer.setup( app );
+// var testingServer = require( __dirname + '/providers/TestingServer' );
+// testingServer.setup( app );
 
 // Start the http server
 var httpServer;

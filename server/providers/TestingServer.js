@@ -10,8 +10,5 @@ TestingServer = module.exports = {};
  * it to handle errors.
  */
 TestingServer.setup = function( app ) {
-	
-   	
-		
-	    
+		    
 }
