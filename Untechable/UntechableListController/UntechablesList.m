@@ -170,9 +170,7 @@
 
 - (IBAction)goToSettings {
     SettingsViewController *settingsController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil];
-    untechable.rUId = @"1";
-    untechable.dic[@"rUId"] = @"1";
-    settingsController.untechable = untechable;
+    settingsController.untechable = [[Untechable alloc] initWithSettingUntechable];
     [self.navigationController pushViewController:settingsController animated:YES];
 }
 
@@ -221,27 +219,12 @@
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
-/**
- * Variable we must need in model, for testing we can use these vars
- */
-
--(void) setUserData{
-    untechable.userId   = TEST_UID;
-}
-
 #pragma mark -  Model functions
 -(void)setDefaultUntech{
-    untechable  = [[Untechable alloc] initWithCommonFunctions];
-    
-    RLMResults *unsortedSetObjects = [RSetUntechable objectsWhere:@"rUId == '1'"];
-    RSetUntechable *rSetUntechable = unsortedSetObjects[0];
-    NSMutableDictionary *dic = [rSetUntechable getModelDic];
-    dic[@"rUId"] = [untechable generateUniqueId];
-    
-    [untechable addOrUpdateInModel:UPDATE dictionary:dic];
+    untechable  = [[Untechable alloc] initWithSettingUntechable];
+    untechable.rUId = [untechable generateUniqueId];
     
     [self setTimeAcToCurVars];
-    [self setUserData];
 }
 
 // set default vaules in model

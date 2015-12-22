@@ -30,6 +30,7 @@
 @implementation SettingsViewController
 
 @synthesize untechable, socialNetworksTable, editNameAlert;
+@synthesize comingFrom;
 
 
 - (void)viewDidLoad {
@@ -129,13 +130,17 @@
     untechable.linkedinAuth = untechable.socialNetworksStatusModal.mLinkedinAuth;
     [untechable addOrUpdateInDatabase];
     
-    // To pop UntechablesList
-    int i = 0;
-    NSArray *array = [self.navigationController viewControllers];
-    for(i=0; i<array.count; i++){
-        if([array[i] isMemberOfClass:NSClassFromString(@"UntechablesList")]){
-            [self.navigationController popToViewController:[array objectAtIndex:i] animated:YES];
+    //Go to UntechablesList on back
+    if( [comingFrom isEqualToString:@"SettingsViewController"] ){
+        int i = 0;
+        NSArray *array = [self.navigationController viewControllers];
+        for(i=0; i<array.count; i++){
+            if([array[i] isMemberOfClass:NSClassFromString(@"UntechablesList")]){
+                [self.navigationController popToViewController:[array objectAtIndex:i] animated:YES];
+            }
         }
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 

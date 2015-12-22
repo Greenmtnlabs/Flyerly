@@ -38,8 +38,35 @@
     self = [super init];
     commonFunctions = [[CommonFunctions alloc] init];
     socialNetworksStatusModal = [SocialNetworksStatusModal sharedInstance];
+    [self setUserData];
+    
     return self;
 }
+
+/*
+ * Initialize untechable object with required models initialization
+ */
+- (id)initWithSettingUntechable{
+    self = [super init];
+    commonFunctions = [[CommonFunctions alloc] init];
+    socialNetworksStatusModal = [SocialNetworksStatusModal sharedInstance];
+    
+    RLMResults *unsortedSetObjects = [RSetUntechable objectsWhere:@"rUId == '1'"];
+    RSetUntechable *rSetUntechable = unsortedSetObjects[0];
+    [self addOrUpdateInModel:UPDATE dictionary:[rSetUntechable getModelDic]];
+    [self setUserData];
+    
+    return self;
+}
+
+/**
+ * Variable we must need in model, for testing we can use these vars
+ */
+
+-(void) setUserData{
+    self.userId   = TEST_UID;
+}
+
 
 /**
  * Common function for going back to previous screen

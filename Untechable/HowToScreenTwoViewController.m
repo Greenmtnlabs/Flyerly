@@ -69,13 +69,7 @@
         [self goToNextScreen];
     }
     else if (swipe.direction == UISwipeGestureRecognizerDirectionRight){
-        int i = 0;
-        NSArray *array = [self.navigationController viewControllers];
-        for(i=0; i<array.count; i++){
-            if([array[i] isMemberOfClass:NSClassFromString(@"HowToScreenOneViewController")]){
-               [self.navigationController popToViewController:[array objectAtIndex:i] animated:YES];
-            }
-        }
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 

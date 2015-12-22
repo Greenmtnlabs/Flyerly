@@ -48,6 +48,7 @@
                                        *omsHostName, *omsPort;
 
 - (id)initWithCommonFunctions;
+- (id)initWithSettingUntechable;
 -(void)goBack:navigationControllerPointer;
 -(NSString *)generateUniqueId;
 -(void)addOrUpdateInModel:(NSString *)command dictionary:(NSMutableDictionary *)dictionary;
