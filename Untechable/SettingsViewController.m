@@ -87,7 +87,11 @@
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.shadowColor = [UIColor clearColor];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [backButton setTitle:NSLocalizedString(TITLE_HOME_TXT,  nil) forState:normal];
+        if( [comingFrom isEqualToString:@"UntechablesList"] ){
+            [backButton setTitle:NSLocalizedString(TITLE_HOME_TXT,  nil) forState:normal];
+        } else {
+            [backButton setTitle:NSLocalizedString(TITLE_BACK_TXT,  nil) forState:normal];
+        }
         [backButton setTitleColor:DEF_GRAY forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
         [backButton addTarget:self action:@selector(btnTouchStart:) forControlEvents:UIControlEventTouchDown];
@@ -131,7 +135,7 @@
     [untechable addOrUpdateInDatabase];
     
     //Go to UntechablesList on back
-    if( [comingFrom isEqualToString:@"SettingsViewController"] ){
+    if( [comingFrom isEqualToString:@"UntechablesList"] ){
         int i = 0;
         NSArray *array = [self.navigationController viewControllers];
         for(i=0; i<array.count; i++){

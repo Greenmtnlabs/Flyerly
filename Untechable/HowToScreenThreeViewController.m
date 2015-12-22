@@ -118,7 +118,7 @@
         
         SettingsViewController *settingsViewController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil];
         settingsViewController.untechable = [[Untechable alloc] initWithSettingUntechable];
-        settingsViewController.comingFrom = @"SettingsViewController";
+        settingsViewController.comingFrom = @"UntechablesList";
         [self.navigationController pushViewController:settingsViewController animated:YES];
         
     } else{ // otherwise, load SetupGuideViewController

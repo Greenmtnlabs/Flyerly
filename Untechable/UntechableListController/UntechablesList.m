@@ -170,6 +170,7 @@
 
 - (IBAction)goToSettings {
     SettingsViewController *settingsController = [[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil];
+    settingsController.comingFrom = @"UntechablesList";
     settingsController.untechable = [[Untechable alloc] initWithSettingUntechable];
     [self.navigationController pushViewController:settingsController animated:YES];
 }
