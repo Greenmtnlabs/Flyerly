@@ -69,7 +69,7 @@
 #define API_DELETE SERVER_URL@"/event/delete" // must pass parmeters{ eventId: 123 }
 
 
-#define TEST_UID @"0"
+#define TEST_UID @"1"
 #define TEST_EID @""
 #define TEST_TWILLIO_NUM @""
 //#define TEST_TWILLIO_NUM @"+16464551382"
