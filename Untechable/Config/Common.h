@@ -21,7 +21,7 @@
 // Keys for Email Address and Email password for setting screen
 #define EMAIL_KEY @"emailAddress"
 #define PASSWORD_KEY @"emailPassword"
-
+#define TITLE_HOME_TXT @"HOME"
 #define TITLE_INVITE_TXT @"INVITE"
 #define TITLE_HELP_TXT @"HELP"
 #define TITLE_SKIP_TXT @"SKIP"

@@ -90,7 +90,7 @@
     
     [btnNext setTitle: NSLocalizedString(@"next ", nil) forState: UIControlStateNormal];
     self.lblMessage1.text = NSLocalizedString(@"Select 'Untech Now' using your pre-selected settings (what you'll be doing, who to inform & for how long).", nil);
-    self.lblMessage2.text = NSLocalizedString(@"Select 'Untech Custom' to manually choose what you'll be doing during your untechable peroid of time & who you'd like to inform.", nil);
+    self.lblMessage2.text = NSLocalizedString(@"Select 'Untech Custom' to manually choose what you'll be doing during your untechable period of time & who you'd like to inform.", nil);
     
 }
 
