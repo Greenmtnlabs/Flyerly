@@ -130,8 +130,13 @@
     [untechable addOrUpdateInDatabase];
     
     // To pop UntechablesList
+    int i = 0;
     NSArray *array = [self.navigationController viewControllers];
-    [self.navigationController popToViewController:[array objectAtIndex:1] animated:YES];
+    for(i=0; i<array.count; i++){
+        if([array[i] isMemberOfClass:NSClassFromString(@"UntechablesList")]){
+            [self.navigationController popToViewController:[array objectAtIndex:i] animated:YES];
+        }
+    }
 }
 
 #pragma mark -  Highlighting Functions
