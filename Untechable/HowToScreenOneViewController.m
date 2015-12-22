@@ -48,6 +48,11 @@ UISwipeGestureRecognizer *swipeRight;
     [imgHowTo addGestureRecognizer:swipeRight];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    //hide navigation bar
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
