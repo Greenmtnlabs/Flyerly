@@ -168,27 +168,9 @@ id lastShareBtnSender;
 
 -(void) updateCellTitle :(int)index text:(NSString *) text{
     
-    // Build the index
-    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    // Add them in an index path array
-    NSArray* indexArray = [NSArray arrayWithObjects:indexPath, nil];
-    // Launch reload for the index path
-    
-    
-//    static NSString *MainFlyerCellId = @"MainFlyerCellId";
-//    MainFlyerCell *cell = (MainFlyerCell *)[self.tView dequeueReusableCellWithIdentifier:MainFlyerCellId];
-    //flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:index] setDirectory:NO];
-    
-    //[cell.lblFlyerTitle setText: text];
-
-    
-//    [cell renderCell:flyer LockStatus:NO];
-//    [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
-//    cell.shareBtn.tag = indexPath.row;
-//    [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
-
-    [self.tView reloadRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationFade];
-
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    MainFlyerCell *cell = (MainFlyerCell *)[self.tView  cellForRowAtIndexPath:indexPath];
+    cell.lblFlyerTitle.text = text;
 }
 
 
