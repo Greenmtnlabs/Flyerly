@@ -166,6 +166,14 @@ id lastShareBtnSender;
 
 #pragma mark  custom Methods
 
+/*
+ * This method changes flyer title during editing
+ * @params:
+ *      index: int
+ *      text: NSString
+ * @return:
+ *      void
+ */
 -(void) updateCellTitle :(int)index text:(NSString *) text{
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
