@@ -57,6 +57,8 @@
 		200D196818998BEB00EAD645 /* LayerTileButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 200D196718998BEA00EAD645 /* LayerTileButton.m */; };
 		200E6764191B6318003849D4 /* UserPurchases.m in Sources */ = {isa = PBXBuildFile; fileRef = 200E6763191B6318003849D4 /* UserPurchases.m */; };
 		200FA574187FEB01003576DA /* galleryicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 200FA572187FEB01003576DA /* galleryicon.png */; };
+		201245F31C2A8120007842FA /* howto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 201245F11C2A8120007842FA /* howto@2x.png */; };
+		201245F41C2A8120007842FA /* howto@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 201245F21C2A8120007842FA /* howto@3x.png */; };
 		2012ECAD1926077800D5EA58 /* Sizes.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2012ECAC1926077800D5EA58 /* Sizes.xib */; };
 		2012ECAF1926078E00D5EA58 /* Sizes-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2012ECAE1926078E00D5EA58 /* Sizes-iPhone4.xib */; };
 		2012ECB1192612A000D5EA58 /* a_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2012ECB0192612A000D5EA58 /* a_bg@2x.png */; };
@@ -1613,6 +1615,8 @@
 		200E6762191B6318003849D4 /* UserPurchases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPurchases.h; sourceTree = "<group>"; };
 		200E6763191B6318003849D4 /* UserPurchases.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPurchases.m; sourceTree = "<group>"; };
 		200FA572187FEB01003576DA /* galleryicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = galleryicon.png; path = ../Classes/galleryicon.png; sourceTree = "<group>"; };
+		201245F11C2A8120007842FA /* howto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "howto@2x.png"; sourceTree = "<group>"; };
+		201245F21C2A8120007842FA /* howto@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "howto@3x.png"; sourceTree = "<group>"; };
 		2012ECAC1926077800D5EA58 /* Sizes.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Sizes.xib; sourceTree = "<group>"; };
 		2012ECAE1926078E00D5EA58 /* Sizes-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Sizes-iPhone4.xib"; sourceTree = "<group>"; };
 		2012ECB0192612A000D5EA58 /* a_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "a_bg@2x.png"; sourceTree = "<group>"; };
@@ -3295,6 +3299,8 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				201245F11C2A8120007842FA /* howto@2x.png */,
+				201245F21C2A8120007842FA /* howto@3x.png */,
 				201F7A321C20231600520E7C /* IntroScreenImages */,
 				201F7A081C1FFD9400520E7C /* PartnerAppIcons */,
 				20B5A3F41BEA48D1005622FD /* giphyLogo@2x.png */,
@@ -5724,6 +5730,7 @@
 				247858D9194878080062F1E4 /* Pinstripe Limo-Regular.ttf in Resources */,
 				24597CE01A1213B000CE1061 /* InAppPurchaseCell-iPhone6.xib in Resources */,
 				24861F1F19F9147100670F6D /* line_dotted@3x.png in Resources */,
+				201245F41C2A8120007842FA /* howto@3x.png in Resources */,
 				2421849D194B4AEC00FDDA97 /* emoticon142@2x.png in Resources */,
 				204410F81BCE2A1400A63031 /* homeCreate@2x.png in Resources */,
 				2098BDBC1AB2FEDB00CDE1A4 /* tnc@3x.png in Resources */,
@@ -6971,6 +6978,7 @@
 				246EF4ED193C515D004539B2 /* emoticon18@2x.png in Resources */,
 				246EF525193C515D004539B2 /* emoticon69@2x.png in Resources */,
 				242184B4194B4AEC00FDDA97 /* emoticon166@2x.png in Resources */,
+				201245F31C2A8120007842FA /* howto@2x.png in Resources */,
 				C31E92B81B566207004DF193 /* bicon1.png in Resources */,
 				C31E92BE1B566207004DF193 /* bicon15.png in Resources */,
 				C31E92ED1B566229004DF193 /* icon86.jpg in Resources */,
