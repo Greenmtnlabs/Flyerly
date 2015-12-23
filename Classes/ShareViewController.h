@@ -35,10 +35,9 @@
 #import "CreateFlyerController.h"
 #import "FBSDKSharing.h"
 #import "CreateFlyerController.h"
+#import "FlyerlyMainScreen.h"
 
-
-
-@class FlyrViewController,FlyerlySingleton, CreateFlyerController;
+@class FlyrViewController,FlyerlySingleton, CreateFlyerController, FlyerlyMainScreen;
 @class SHKSharer;
 @class SHKActivityIndicator;
 
@@ -97,6 +96,9 @@
 @property (strong, nonatomic) NSTimer *timer;
 @property (strong, nonatomic) IBOutlet UITextView *tempTxtArea;
 
+@property (nonatomic,weak) FlyerlyMainScreen *fmController;
+
+@property (nonatomic,assign) NSInteger *indexRow;
 
 - (IBAction)onClickMessengerButton:(id)sender;
 
