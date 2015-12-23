@@ -135,8 +135,21 @@
     MainSettingCell *cell = (MainSettingCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if ( cell == nil ) {
-        cell = [[MainSettingCell alloc] initWithFrame:CGRectZero] ;
-         [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"settingsrow"]]];
+        cell = [[MainSettingCell alloc] init] ;
+        // Create Imageview for image
+        cell.imgview = [[UIImageView alloc]init];
+        [cell.imgview setFrame:CGRectMake(4, 7, 25, 25)];
+        [cell.contentView addSubview:cell.imgview];
+        
+        // Create Labels for text
+        cell.description = [[UILabel alloc]initWithFrame:CGRectMake(35, 9, 250, 21)];
+        [cell.description setBackgroundColor:[UIColor clearColor]];
+        [cell.description setTextColor:[UIColor darkGrayColor]];
+        [cell.description setFont:[UIFont fontWithName:@"AvenirNext-Bold" size:14]];
+        [cell.description setTextAlignment:NSTextAlignmentLeft];
+        [cell.contentView addSubview:cell.description];
+
+        [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"settingsrow"]]];
     }
 
     NSString *title =[NSString stringWithFormat:@"%@",category[indexPath.row]];
@@ -212,13 +225,26 @@
         if (indexPath.row == 6)imgname = @"signout";
         if (indexPath.row == 7)imgname = @"tnc";
         if (indexPath.row == 8)imgname = @"privacy";
-        if (indexPath.row == 9)imgname = @"icon_untech"; //howto
+        if (indexPath.row == 9)imgname = @"howTo"; //howto
         if (indexPath.row == 11)imgname = @"icon_untech";//untech
         if (indexPath.row == 12)imgname = @"icon_eyespot";//eyespot
         
         // only for Partner Apps
         if (indexPath.row == 10){
-            cell.description.textAlignment = NSTextAlignmentCenter;
+            // Create Imageview for image
+            cell.imgview = [[UIImageView alloc]init];
+            [cell.imgview setFrame:CGRectMake(4, 7, 25, 25)];
+            [cell.contentView addSubview:cell.imgview];
+            
+            // Create Labels for text
+            cell.description = [[UILabel alloc]initWithFrame:CGRectMake(5, 17, 250, 21)];
+            [cell.description setBackgroundColor:[UIColor clearColor]];
+            [cell.description setTextColor:[UIColor darkGrayColor]];
+            [cell.description setFont:[UIFont fontWithName:@"AvenirNext-Bold" size:14]];
+            [cell.description setTextAlignment:NSTextAlignmentLeft];
+            [cell.contentView addSubview:cell.description];
+            
+            [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"settingsrow"]]];
         }
         
     } else {
@@ -227,13 +253,26 @@
         if (indexPath.row == 5)imgname = @"signin";
         if (indexPath.row == 6)imgname = @"tnc";
         if (indexPath.row == 7)imgname = @"privacy";
-        if (indexPath.row == 8)imgname = @"icon_untech";//howto
+        if (indexPath.row == 8)imgname = @"howTo";//howto
         if (indexPath.row == 10)imgname = @"icon_untech";//untech
         if (indexPath.row == 11)imgname = @"icon_eyespot";//eyespot
         
         // only for Partner Apps
         if (indexPath.row == 9){
-            cell.description.textAlignment = NSTextAlignmentCenter;
+            // Create Imageview for image
+            cell.imgview = [[UIImageView alloc]init];
+            [cell.imgview setFrame:CGRectMake(4, 7, 25, 25)];
+            [cell.contentView addSubview:cell.imgview];
+            
+            // Create Labels for text
+            cell.description = [[UILabel alloc]initWithFrame:CGRectMake(5, 17, 250, 21)];
+            [cell.description setBackgroundColor:[UIColor clearColor]];
+            [cell.description setTextColor:[UIColor darkGrayColor]];
+            [cell.description setFont:[UIFont fontWithName:@"AvenirNext-Bold" size:14]];
+            [cell.description setTextAlignment:NSTextAlignmentLeft];
+            [cell.contentView addSubview:cell.description];
+            
+            [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"settingsrow"]]];
         }
     }
     
