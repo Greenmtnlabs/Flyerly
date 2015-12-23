@@ -26,7 +26,6 @@ UIAlertView *saveCurrentFlyerAlert;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
     hasSavedInGallary = NO;
     
     UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
@@ -108,6 +107,11 @@ UIAlertView *saveCurrentFlyerAlert;
     
     [self updateDescription];
     
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    
+    [titleView becomeFirstResponder];
 }
 
 //Set user input value in class level variable.
