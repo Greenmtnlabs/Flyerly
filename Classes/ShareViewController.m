@@ -14,7 +14,7 @@
     int cellIndex;
 }
 
-@synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,saveButton,printFlyerButton,facebookButton,twitterButton,instagramButton,messengerButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,tempTxtArea,saveToGallaryReqBeforeSharing;
+@synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,saveButton,printFlyerButton,facebookButton,twitterButton,instagramButton,messengerButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,tempTxtArea,saveToGallaryReqBeforeSharing, fmController;
 
 @synthesize flyerShareType,star1,star2,star3,star4,star5;
 
@@ -411,7 +411,7 @@ UIAlertView *saveCurrentFlyerAlert;
 -(void)textFieldDidChange :(UITextField *)theTextField{
     NSLog( @"text changed: %@", theTextField.text);
     
-    //[self.cfController updateTitle:theTextField.text];
+    [self.fmController updateCellTitle:0 text:theTextField.text];
  
 }
 
