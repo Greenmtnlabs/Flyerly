@@ -166,6 +166,22 @@ id lastShareBtnSender;
 
 #pragma mark  custom Methods
 
+-(void) sitle : (NSString *) input{
+    
+    //    [self.tableView beginUpdates];
+    //    [self.tableView reloadRowsAtIndexPaths:@[indexPathOfYourCell] withRowAnimation:UITableViewRowAnimationNone];
+    //    [self.tableView endUpdates];
+    
+    // Build the two index paths
+    NSIndexPath* indexPath1 = [NSIndexPath indexPathForRow:0 inSection:0];
+    // Add them in an index path array
+    NSArray* indexArray = [NSArray arrayWithObjects:indexPath1, nil];
+    // Launch reload for the two index path
+    [self.tView reloadRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationFade];
+
+}
+
+
 /*
  * Method to set default image instead of ads
  * when internet is not available

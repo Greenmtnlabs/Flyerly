@@ -37,7 +37,6 @@
 #import "CreateFlyerController.h"
 
 
-
 @class FlyrViewController,FlyerlySingleton, CreateFlyerController;
 @class SHKSharer;
 @class SHKActivityIndicator;

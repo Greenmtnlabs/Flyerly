@@ -80,4 +80,6 @@
 //Add view for injecting in cells
 @property(nonatomic, strong) IBOutletCollection(GADBannerView) NSMutableArray *bannerAdd;
 
+-(void) updateTitle : (NSString *) input;
+
 @end

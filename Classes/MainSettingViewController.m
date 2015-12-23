@@ -265,7 +265,6 @@
         if (indexPath.row == 11)imgname = @"icon_eyespot";//eyespot
     }
     
-    
     // Set cell Values
     [cell setCellObjects:title leftimage:imgname];
     return cell;
