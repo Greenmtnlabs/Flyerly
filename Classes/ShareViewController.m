@@ -11,14 +11,13 @@
 
 @implementation ShareViewController{
     NSString *fbShareType; // 4 possible values to assign: fb-photo-wall | fb-photo-messenger | fb-video-wall | fb-video-messenger
-    int cellIndex;
 }
 
 @synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,saveButton,printFlyerButton,facebookButton,twitterButton,instagramButton,messengerButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,tempTxtArea,saveToGallaryReqBeforeSharing, fmController;
 
 @synthesize flyerShareType,star1,star2,star3,star4,star5;
 
-@synthesize descriptionView, titlePlaceHolderImg, titleView, descTextAreaImg;
+@synthesize descriptionView, titlePlaceHolderImg, titleView, descTextAreaImg, indexRow;
 
 UIAlertView *saveCurrentFlyerAlert;
 
@@ -27,7 +26,6 @@ UIAlertView *saveCurrentFlyerAlert;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    cellIndex = -1;
     
     hasSavedInGallary = NO;
     
@@ -411,8 +409,8 @@ UIAlertView *saveCurrentFlyerAlert;
 -(void)textFieldDidChange :(UITextField *)theTextField{
     NSLog( @"text changed: %@", theTextField.text);
     
-    [self.fmController updateCellTitle:0 text:theTextField.text];
- 
+    [self.fmController updateCellTitle:indexRow text:theTextField.text];
+    
 }
 
 - (BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {

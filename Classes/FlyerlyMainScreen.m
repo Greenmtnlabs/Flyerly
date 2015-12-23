@@ -965,7 +965,7 @@ id lastShareBtnSender;
 
 -(void)onShare:(id)sender {
     
-    NSInteger row;
+    NSInteger row, index;
     
     // check the kind of control that called it
     if([sender isKindOfClass:[UIButton class]]){
@@ -976,6 +976,7 @@ id lastShareBtnSender;
         UITapGestureRecognizer *gesture = sender;
         row = gesture.view.tag; //will get it from UITapGestureRecognizer tag
     }
+    index = row;
 
     if(row > (ADD_AFTER_FLYERS-1)){
         row = row - floor(row/ADD_AFTER_FLYERS);
@@ -1008,8 +1009,10 @@ id lastShareBtnSender;
             }
             
         }
+       
         shareviewcontroller.cfController = (id)self;
         shareviewcontroller.fmController = (id) self;
+        shareviewcontroller.indexRow = index;
         
         sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
         if ( IS_IPHONE_6) {

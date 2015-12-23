@@ -98,6 +98,8 @@
 
 @property (nonatomic,weak) FlyerlyMainScreen *fmController;
 
+@property (nonatomic,assign) NSInteger *indexRow;
+
 - (IBAction)onClickMessengerButton:(id)sender;
 
 -(IBAction)onClickFacebookButton;
