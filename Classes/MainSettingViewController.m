@@ -226,13 +226,14 @@
         if (indexPath.row == 7)imgname = @"tnc";
         if (indexPath.row == 8)imgname = @"privacy";
         if (indexPath.row == 9)imgname = @"howto"; // How To
+        
         // only for Partner Apps
         if (indexPath.row == 10){
             // Create Labels for text
             cell.description = [[UILabel alloc]initWithFrame:CGRectMake(5, 17, 250, 21)];
             [cell.description setBackgroundColor:[UIColor clearColor]];
-            [cell.description setTextColor:[UIColor darkGrayColor]];
-            [cell.description setFont:[UIFont fontWithName:@"AvenirNext-Bold" size:14]];
+            [cell.description setTextColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
+            [cell.description setFont:[UIFont fontWithName:@"AvenirNext-Bold" size:16]];
             [cell.description setTextAlignment:NSTextAlignmentLeft];
             [cell.contentView addSubview:cell.description];
             [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"settingsrow"]]];
@@ -253,8 +254,9 @@
             // Create Labels for text
             cell.description = [[UILabel alloc]initWithFrame:CGRectMake(5, 17, 250, 21)];
             [cell.description setBackgroundColor:[UIColor clearColor]];
-            [cell.description setTextColor:[UIColor darkGrayColor]];
-            [cell.description setFont:[UIFont fontWithName:@"AvenirNext-Bold" size:14]];
+            //[cell.description setTextColor:[UIColor darkGrayColor]];
+            [cell.description setTextColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
+            [cell.description setFont:[UIFont fontWithName:@"AvenirNext-Bold" size:16]];
             [cell.description setTextAlignment:NSTextAlignmentLeft];
             [cell.contentView addSubview:cell.description];
             [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"settingsrow"]]];
