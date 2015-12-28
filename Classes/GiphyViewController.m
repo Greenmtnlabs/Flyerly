@@ -11,6 +11,7 @@
 #import "Common.h"
 #import "FlyrAppDelegate.h"
 #import "FlyerlyConfigurator.h"
+#import "CropVideoViewController.h"
 
 @interface GiphyViewController ()
 @property (strong, nonatomic) IBOutlet UISearchBar *searchField;
@@ -256,6 +257,39 @@
 
 
 # pragma mark - Video editing
+
+/**
+ * Crop video using crop video view controller.
+ */
+-(void) cropVideo:(NSURL *)movieUrl {
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    
+    //Background Thread
+    CropVideoViewController *cropVideo;
+    if( IS_IPHONE_4 ) {
+        cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
+    } else if ( IS_IPHONE_5) {
+        cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
+    }else if ( IS_IPHONE_6){
+        cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController-iPhone6" bundle:nil];
+    }else if ( IS_IPHONE_6_PLUS){
+        cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController-iPhone6-Plus" bundle:nil];
+    } else{
+        cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
+    }
+    
+    cropVideo.desiredVideoSize = CGSizeMake(1280, 1280);
+    cropVideo.url = movieUrl;
+    cropVideo.onVideoFinished = _onVideoFinished;
+    cropVideo.onVideoCancel = _onVideoCancel;
+    cropVideo.fromCamera = YES;
+    
+    // Pop the current view, and push the crop view.
+    NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
+    [viewControllers removeLastObject];
+    [viewControllers addObject:cropVideo];
+    [[self navigationController] setViewControllers:viewControllers animated:YES];
+}
 
 /**
  * Video cropping function

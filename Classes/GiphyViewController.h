@@ -21,4 +21,7 @@
 //A text feild to search images on shutterstock
 @property ( nonatomic, strong ) IBOutlet UISearchBar *searchTextField;
 
+@property (nonatomic, copy) void (^onVideoFinished)(NSURL *, CGRect, CGFloat);
+@property (nonatomic, copy) void (^onVideoCancel)();
+
 @end
