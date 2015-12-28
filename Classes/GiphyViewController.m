@@ -24,6 +24,7 @@
     BOOL reqGiphyApiInProccess;
     BOOL giphyDownloading;
     NSString *giphyApiKey;
+    NSURL *tempMediaURL;
 }
 
 
@@ -197,7 +198,7 @@
             NSString *destinationTemp = [NSString stringWithFormat:@"%@/Template/templateTemp.mov",currentpath];
             [[NSFileManager defaultManager] createFileAtPath:destinationTemp contents:data attributes:nil];
             NSURL *mediaURLTemp = [NSURL fileURLWithPath:destinationTemp];
-            
+            tempMediaURL = mediaURLTemp;
             
             //Get video width/height
             AVURLAsset *asset = [AVURLAsset URLAssetWithURL:mediaURLTemp options:nil];
@@ -211,12 +212,6 @@
             //Video must be squire, othere wise merge video will not map layer on exact points
             int squireWH = (width < height) ? width : height;
             width = height = squireWH;
-            
-            
-            [flyer setOriginalVideoUrl:@"Template/template.mov"];
-            [flyer setFlyerTypeVideoWithSize:width height:height videoSoure:@"giphy"];
-            [flyer setImageTag:@"Template" Tag:nil];
-            [flyer addGiphyWatermark];
             
             [self cropVideo: mediaURLTemp];
            
@@ -291,8 +286,34 @@
     cropVideo.desiredVideoSize = CGSizeMake(1024, 1024);
     cropVideo.url = movieUrl;
 //    cropVideo.onVideoFinished = _onVideoFinished;
+
     [cropVideo setOnVideoFinished:^(NSURL *recvUrl, CGRect cropRect, CGFloat scale ) {
-        NSLog(@"hello");
+        
+        [self modifyVideo:tempMediaURL destination:movieUrl crop:cropRect scale:1 overlay:nil completion:^(NSInteger status, NSError *error) {
+            switch ( status ) {
+                case AVAssetExportSessionStatusFailed:
+                    NSLog (@"FAIL = %@", error );
+                    break;
+                    
+                case AVAssetExportSessionStatusCompleted:
+                        //Update dictionary
+                        [flyer setOriginalVideoUrl:@"Template/template.mov"];
+                        [flyer setFlyerTypeVideoWithSize:cropRect.size.width height:cropRect.size.height videoSoure:@"giphy"];
+                        [flyer setImageTag:@"Template" Tag:nil];
+                        [flyer addGiphyWatermark];
+                        tasksAfterGiphySelect = @"play";
+                break;
+            }
+            
+            //Delete temporary file
+            [self deleteFile:[movieUrl absoluteString]];
+                // Perform ui related things in main thread
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    [self onSelectGiphyShowLoadingIndicator:NO];
+                    [self goBack];
+                });
+        
+        }];
     }];
     cropVideo.onVideoCancel = _onVideoCancel;
     cropVideo.fromCamera = YES;
