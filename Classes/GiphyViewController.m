@@ -198,6 +198,7 @@
             [[NSFileManager defaultManager] createFileAtPath:destinationTemp contents:data attributes:nil];
             NSURL *mediaURLTemp = [NSURL fileURLWithPath:destinationTemp];
             
+            
             //Get video width/height
             AVURLAsset *asset = [AVURLAsset URLAssetWithURL:mediaURLTemp options:nil];
             NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
@@ -211,9 +212,15 @@
             int squireWH = (width < height) ? width : height;
             width = height = squireWH;
             
-            [self cropVideo:mediaURLTemp];
             
-            //store squared video then delete temporary video
+            [flyer setOriginalVideoUrl:@"Template/template.mov"];
+            [flyer setFlyerTypeVideoWithSize:width height:height videoSoure:@"giphy"];
+            [flyer setImageTag:@"Template" Tag:nil];
+            [flyer addGiphyWatermark];
+            
+            [self cropVideo: mediaURLTemp];
+           
+//            //store squared video then delete temporary video
 //            [self modifyVideo:mediaURLTemp destination:mediaURL crop:CGRectMake(0,0,squireWH,squireWH) scale:1 overlay:nil completion:^(NSInteger status, NSError *error) {
 //                
 //                switch ( status ) {
@@ -283,7 +290,10 @@
     
     cropVideo.desiredVideoSize = CGSizeMake(1024, 1024);
     cropVideo.url = movieUrl;
-    cropVideo.onVideoFinished = _onVideoFinished;
+//    cropVideo.onVideoFinished = _onVideoFinished;
+    [cropVideo setOnVideoFinished:^(NSURL *recvUrl, CGRect cropRect, CGFloat scale ) {
+        NSLog(@"hello");
+    }];
     cropVideo.onVideoCancel = _onVideoCancel;
     cropVideo.fromCamera = YES;
     
