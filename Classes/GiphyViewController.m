@@ -106,15 +106,13 @@
             int heightHandlerForMainView = 0;
             int i=0, row = 0, column = 0;
             int showInRow = 2, defX = 16, defY = 16 , defW = 182, defH = 182;//414 full width
-            if( IS_IPHONE_4 ){
-                showInRow = 2, defX = 13, defY = 13 , defW = 141, defH = 141;//320 full width
-            } else if( IS_IPHONE_5 ){
+            
+            if( IS_IPHONE_4 || IS_IPHONE_5  ){
                 showInRow = 2, defX = 13, defY = 13 , defW = 141, defH = 141;//320 full width
             } else if( IS_IPHONE_6 ){
                 showInRow = 2, defX = 17, defY = 17 , defW = 162, defH = 162;//375 full width
-            } else if( IS_IPHONE_6_PLUS ){
-                showInRow = 2, defX = 16, defY = 16 , defW = 182, defH = 182;//414 full width
             }
+            
             int x = 0, y = 0;
             for(NSDictionary *gif in giphyData ){
                 column = i % showInRow;
@@ -148,6 +146,8 @@
             
             [layerScrollView addSubview:giphyBgsView];
             [layerScrollView setContentSize:CGSizeMake(giphyBgsView.frame.size.width,giphyBgsView.frame.size.height)];
+            
+            
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -211,34 +211,37 @@
             int squireWH = (width < height) ? width : height;
             width = height = squireWH;
             
-            //store squired video then delete temporary video
-            [self modifyVideo:mediaURLTemp destination:mediaURL crop:CGRectMake(0,0,squireWH,squireWH) scale:1 overlay:nil completion:^(NSInteger status, NSError *error) {
-                
-                switch ( status ) {
-                    case AVAssetExportSessionStatusFailed:
-                        NSLog (@"FAIL = %@", error );
-                        break;
-                    case AVAssetExportSessionStatusCompleted:
-                        //Update dictionary
-                        [flyer setOriginalVideoUrl:@"Template/template.mov"];
-                        [flyer setFlyerTypeVideoWithSize:width height:height videoSoure:@"giphy"];
-                        [flyer setImageTag:@"Template" Tag:nil];
-                        [flyer addGiphyWatermark];
-                        
-                        tasksAfterGiphySelect = @"play";
-                        break;
-                }
-                
-                //Delete temporary file
-                [self deleteFile:destinationTemp];
-                
-                // Perform ui related things in main thread
-                dispatch_async( dispatch_get_main_queue(), ^{
-                    [self onSelectGiphyShowLoadingIndicator:NO];
-                    [self goBack];
-                });
-
-            }];
+            [self cropVideo:mediaURLTemp];
+            
+            //store squared video then delete temporary video
+//            [self modifyVideo:mediaURLTemp destination:mediaURL crop:CGRectMake(0,0,squireWH,squireWH) scale:1 overlay:nil completion:^(NSInteger status, NSError *error) {
+//                
+//                switch ( status ) {
+//                    case AVAssetExportSessionStatusFailed:
+//                        NSLog (@"FAIL = %@", error );
+//                        break;
+//                    case AVAssetExportSessionStatusCompleted:
+//                        //Update dictionary
+//                        [flyer setOriginalVideoUrl:@"Template/template.mov"];
+//                        [flyer setFlyerTypeVideoWithSize:width height:height videoSoure:@"giphy"];
+//                        [flyer setImageTag:@"Template" Tag:nil];
+//                        [flyer addGiphyWatermark];
+//                        
+//                        tasksAfterGiphySelect = @"play";
+//                        break;
+//                }
+//                
+//                //Delete temporary file
+//                [self deleteFile:destinationTemp];
+//                
+//                // Perform ui related things in main thread
+//                dispatch_async( dispatch_get_main_queue(), ^{
+//                    [self onSelectGiphyShowLoadingIndicator:NO];
+//                    [self goBack];
+//                });
+//
+//            }];
+            
             
         }];
         
@@ -278,7 +281,7 @@
         cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
     }
     
-    cropVideo.desiredVideoSize = CGSizeMake(1280, 1280);
+    cropVideo.desiredVideoSize = CGSizeMake(1024, 1024);
     cropVideo.url = movieUrl;
     cropVideo.onVideoFinished = _onVideoFinished;
     cropVideo.onVideoCancel = _onVideoCancel;
