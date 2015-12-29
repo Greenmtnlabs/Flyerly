@@ -214,7 +214,7 @@
             width = height = squireWH;
             
             
-            [self cropVideo: mediaURLTemp];
+            [self videoCrop: mediaURLTemp];
            
             //store squared video then delete temporary video
 //            [self modifyVideo:mediaURLTemp destination:mediaURL crop:CGRectMake(0,0,squireWH,squireWH) scale:1 overlay:nil completion:^(NSInteger status, NSError *error) {
@@ -267,7 +267,7 @@
 /**
  * Crop video using crop video view controller.
  */
--(void) cropVideo:(NSURL *)movieUrl {
+-(void) videoCrop:(NSURL *)movieUrl {
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     
     //Background Thread
@@ -282,14 +282,12 @@
         cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
     }
     
-    cropVideo.giphyRect = CGRectMake(0, 0, width, height);
-    cropVideo.desiredVideoSize = CGSizeMake(width, height);
-    cropVideo.url = movieUrl;
-    cropVideo.onVideoFinished = _onVideoFinished;
+    __weak GiphyViewController *weakSelf = self;
+
 
     [cropVideo setOnVideoFinished:^(NSURL *recvUrl, CGRect cropRect, CGFloat scale ) {
         
-        [self modifyVideo:mediaURLTemp destination:mediaURL crop:cropRect scale:1 overlay:nil completion:^(NSInteger status, NSError *error) {
+        [weakSelf modifyVideo:mediaURLTemp destination:mediaURL crop:cropRect scale:1 overlay:nil completion:^(NSInteger status, NSError *error) {
             
             switch ( status ) {
                 case AVAssetExportSessionStatusFailed:
@@ -307,16 +305,22 @@
             }
             
             //Delete temporary file
-            [self deleteFile:[mediaURLTemp absoluteString]];
+            [weakSelf deleteFile:[mediaURLTemp absoluteString]];
             
             // Perform ui related things in main thread
             dispatch_async( dispatch_get_main_queue(), ^{
-                [self onSelectGiphyShowLoadingIndicator:NO];
-                [self goBack];
+                [weakSelf onSelectGiphyShowLoadingIndicator:NO];
+                [weakSelf goBack];
             });
             
         }];
     }];
+    
+    
+    
+    cropVideo.giphyRect = CGRectMake(0, 0, width, height);
+    cropVideo.desiredVideoSize = CGSizeMake(width, height);
+    cropVideo.url = movieUrl;
     cropVideo.onVideoCancel = _onVideoCancel;
     cropVideo.fromCamera = YES;
     

@@ -185,8 +185,6 @@
             maxHeight = 480;
         }
         
-        //maxHeight = 270;
-        
         cropRect = CGRectMake(
                 player.naturalSize.width / _playerView.frame.size.width +
                               ( _cropView.origin.x * maxHeight / _playerView.frame.size.width )  ,
