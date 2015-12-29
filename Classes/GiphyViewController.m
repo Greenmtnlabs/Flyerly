@@ -316,8 +316,6 @@
         }];
     }];
     
-    
-    
     cropVideo.giphyRect = CGRectMake(0, 0, width, height);
     cropVideo.desiredVideoSize = CGSizeMake(width, height);
     cropVideo.url = movieUrl;
