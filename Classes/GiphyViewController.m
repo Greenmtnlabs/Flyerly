@@ -317,7 +317,7 @@
     }];
     
     cropVideo.giphyRect = CGRectMake(0, 0, squareWH, squareWH);
-    cropVideo.desiredVideoSize = CGSizeMake(width, height);
+    cropVideo.desiredVideoSize = CGSizeMake(squareWH, squareWH);
     cropVideo.url = movieUrl;
     cropVideo.onVideoCancel = _onVideoCancel;
     cropVideo.fromCamera = YES;

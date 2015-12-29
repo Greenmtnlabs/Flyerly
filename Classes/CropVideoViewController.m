@@ -195,6 +195,12 @@
     
     [player stop];
     
+//    cropRect = CGRectMake(
+//                          250,
+//                          100,
+//                          150,
+//                          150 );
+//    
     _onVideoFinished( _url, cropRect, scaleRatio );
     
     // Go back to the last screen.
