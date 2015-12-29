@@ -14,6 +14,7 @@
 @end
 
 @implementation CropVideoViewController
+@synthesize giphyRect;
 
 /**
  * Initialize the view.
@@ -96,7 +97,13 @@
     aspectRatio = player.naturalSize.width / player.naturalSize.height;
     
     // Remember the untranslated crop size.
+    
     originalConceptualFrame = _cropView.frame;
+    
+    if(!CGRectIsEmpty(giphyRect)){
+        originalConceptualFrame = giphyRect;
+    }
+    
     
     // Get the scale ratio.
     if ( player.naturalSize.width < player.naturalSize.height ) {

@@ -25,6 +25,7 @@
     BOOL giphyDownloading;
     NSString *giphyApiKey;
     NSURL *mediaURL, *mediaURLTemp;
+    int width, height;
 }
 
 
@@ -205,12 +206,13 @@
             AVAssetTrack *track = [tracks objectAtIndex:0];
             CGSize mediaSize = track.naturalSize;
             
-//            int width = mediaSize.width;
-//            int height = mediaSize.height;
-//            
-//            //Video must be squire, othere wise merge video will not map layer on exact points
-//            int squireWH = (width < height) ? width : height;
-//            width = height = squireWH;
+            width = mediaSize.width;
+            height = mediaSize.height;
+            
+            //Video must be squire, othere wise merge video will not map layer on exact points
+            int squireWH = (width < height) ? width : height;
+            width = height = squireWH;
+            
             
             [self cropVideo: mediaURLTemp];
            
@@ -280,9 +282,10 @@
         cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
     }
     
-    cropVideo.desiredVideoSize = CGSizeMake(1024, 1024);
+    cropVideo.giphyRect = CGRectMake(0, 0, width, height);
+    cropVideo.desiredVideoSize = CGSizeMake(width, height);
     cropVideo.url = movieUrl;
-//    cropVideo.onVideoFinished = _onVideoFinished;
+    cropVideo.onVideoFinished = _onVideoFinished;
 
     [cropVideo setOnVideoFinished:^(NSURL *recvUrl, CGRect cropRect, CGFloat scale ) {
         

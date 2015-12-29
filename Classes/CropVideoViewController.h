@@ -18,6 +18,7 @@
     CGRect                      originalCropFrame;
 }
 
+@property CGRect giphyRect;
 @property CGSize desiredVideoSize;
 @property (nonatomic, strong) NSURL *url;
 @property (nonatomic, copy) void (^onVideoFinished)(NSURL *, CGRect, CGFloat);
