@@ -131,10 +131,10 @@
         _cropView.fixedY = YES;
     }
     
-        if(!CGRectIsEmpty(giphyRect)){
-            int newWidth = [self getNewWidth:giphyRect.size.height :giphyRect.size.width :_playerView.size.width];
-            _cropView.size = CGSizeMake(newWidth,newWidth);
-        }
+    if(!CGRectIsEmpty(giphyRect)){
+        int newWidth = [self getNewWidth:giphyRect.size.height :giphyRect.size.width :_playerView.size.width];
+        _cropView.size = CGSizeMake(newWidth,newWidth);
+    }
     
     // Remember the translated crop size.
     originalCropFrame = _cropView.frame;
@@ -178,6 +178,7 @@
     CGRect cropRect;
     
     
+    
     // If this is portrait, then do not allow x translations
     if ( player.naturalSize.width < player.naturalSize.height ) {
         cropRect = CGRectMake(
@@ -187,24 +188,20 @@
                 _desiredVideoSize.height );
     } else {
         CGFloat maxHeight = 568.0;
-        
         if ( IS_IPHONE_4 ) {
             maxHeight = 480;
         }
         
+        int a = player.naturalSize.width / _playerView.frame.size.width + ( _cropView.origin.x * maxHeight / _playerView.frame.size.width );
         
-//        int a = player.naturalSize.width;
-//        int b = _playerView.frame.size.width;
-//        int c = _cropView.origin.x * maxHeight;
-//        int d = _playerView.frame.size.height;
-//        int e = _cropView.origin.x * maxHeight / _playerView.frame.size.width;
-        
+        int newWidth = [self getNewWidth:_playerView.frame.size.width :a :giphyRect.size.height];
         
         cropRect = CGRectMake(
-                player.naturalSize.width / _playerView.frame.size.width + ( _cropView.origin.x * maxHeight / _playerView.frame.size.width ),
-                0,
-                _desiredVideoSize.width,
-                _desiredVideoSize.height);
+                          //(player.naturalSize.width / _playerView.frame.size.width + ( _cropView.origin.x * maxHeight / _playerView.frame.size.width ))/x,
+                              newWidth,
+                          0,
+                          _desiredVideoSize.width,
+                          _desiredVideoSize.height);
     }
     
     [player stop];
