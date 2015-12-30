@@ -100,10 +100,6 @@
     
     originalConceptualFrame = _cropView.frame;
     
-    if(!CGRectIsEmpty(giphyRect)){
-        originalConceptualFrame = giphyRect;
-    }
-    
     
     // Get the scale ratio.
     if ( player.naturalSize.width < player.naturalSize.height ) {
@@ -134,6 +130,10 @@
         // Do not allow moving on y axis
         _cropView.fixedY = YES;
     }
+    
+//        if(!CGRectIsEmpty(giphyRect)){
+//            _cropView.size = giphyRect.size;
+//        }
     
     // Remember the translated crop size.
     originalCropFrame = _cropView.frame;
@@ -185,22 +185,29 @@
             maxHeight = 480;
         }
         
+        
+        int a = player.naturalSize.width;
+        int b = _playerView.frame.size.width;
+        int c = _cropView.origin.x * maxHeight;
+        int d = _playerView.frame.size.height;
+        int e = _cropView.origin.x * maxHeight / _playerView.frame.size.width;
+                                                                   
+        
         cropRect = CGRectMake(
-                player.naturalSize.width / _playerView.frame.size.width +
-                              ( _cropView.origin.x * maxHeight / _playerView.frame.size.width )  ,
+                player.naturalSize.width / _playerView.frame.size.width + ( _cropView.origin.x * maxHeight / _playerView.frame.size.width ),
                 0,
                 _desiredVideoSize.width,
-                _desiredVideoSize.height );
+                _desiredVideoSize.height);
     }
     
     [player stop];
     
 //    cropRect = CGRectMake(
-//                          250,
-//                          100,
-//                          150,
-//                          150 );
-//    
+//                          212,
+//                          0,
+//                          268,
+//                          268);
+
     _onVideoFinished( _url, cropRect, scaleRatio );
     
     // Go back to the last screen.

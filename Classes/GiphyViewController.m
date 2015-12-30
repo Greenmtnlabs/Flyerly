@@ -24,8 +24,8 @@
     BOOL reqGiphyApiInProccess;
     BOOL giphyDownloading;
     NSString *giphyApiKey;
-    NSURL *mediaURL, *mediaURLTemp;
-    int width, height, squareWH;
+    NSURL *mediaURL, *mediaURLTemp,*mediaURLTemp2;
+    int width, height, squareWH, square;
 }
 
 
@@ -201,7 +201,7 @@
             mediaURLTemp = [NSURL fileURLWithPath:destinationTemp];
             
             //Get video width/height
-            AVURLAsset *asset = [AVURLAsset URLAssetWithURL:mediaURLTemp options:nil];
+            AVURLAsset *asset = [AVURLAsset URLAssetWithURL:mediaURLTemp2 options:nil];
             NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
             AVAssetTrack *track = [tracks objectAtIndex:0];
             CGSize mediaSize = track.naturalSize;
@@ -211,40 +211,8 @@
             
             //Video must be squire, othere wise merge video will not map layer on exact points
             squareWH = (width < height) ? width : height;
-            //width = height = squireWH;
-            
-            
-            [self videoCrop: mediaURLTemp];
-           
-            //store squared video then delete temporary video
-//            [self modifyVideo:mediaURLTemp destination:mediaURL crop:CGRectMake(0,0,squireWH,squireWH) scale:1 overlay:nil completion:^(NSInteger status, NSError *error) {
-//                
-//                switch ( status ) {
-//                    case AVAssetExportSessionStatusFailed:
-//                        NSLog (@"FAIL = %@", error );
-//                        break;
-//                    case AVAssetExportSessionStatusCompleted:
-//                        //Update dictionary
-//                        [flyer setOriginalVideoUrl:@"Template/template.mov"];
-//                        [flyer setFlyerTypeVideoWithSize:width height:height videoSoure:@"giphy"];
-//                        [flyer setImageTag:@"Template" Tag:nil];
-//                        [flyer addGiphyWatermark];
-//                        
-//                        tasksAfterGiphySelect = @"play";
-//                        break;
-//                }
-//                
-//                //Delete temporary file
-//                [self deleteFile:destinationTemp];
-//                
-//                // Perform ui related things in main thread
-//                dispatch_async( dispatch_get_main_queue(), ^{
-//                    [self onSelectGiphyShowLoadingIndicator:NO];
-//                    [self goBack];
-//                });
-//
-//            }];
-            
+
+            [self videoCrop:mediaURLTemp];
             
         }];
         
@@ -287,7 +255,7 @@
 
     [cropVideo setOnVideoFinished:^(NSURL *recvUrl, CGRect cropRect, CGFloat scale ) {
         
-        [weakSelf modifyVideo:mediaURLTemp destination:mediaURL crop:cropRect scale:1 overlay:nil completion:^(NSInteger status, NSError *error) {
+        [weakSelf modifyVideo:recvUrl destination:mediaURL crop:cropRect scale:scale overlay:nil completion:^(NSInteger status, NSError *error) {
             
             switch ( status ) {
                 case AVAssetExportSessionStatusFailed:
@@ -327,6 +295,7 @@
     [viewControllers removeLastObject];
     [viewControllers addObject:cropVideo];
     [[self navigationController] setViewControllers:viewControllers animated:YES];
+//    [[self navigationController] pushViewController:cropVideo animated:YES];
 }
 
 /**
@@ -383,14 +352,14 @@
     AVMutableVideoCompositionLayerInstruction *passThroughLayer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:videoTrack];
     
     // Set the transform to maintain orientation
-    if ( scale != 1.0 ) {
+    //if ( scale != 1.0 ) {
         CGAffineTransform scaleTransform = CGAffineTransformMakeScale( scale, scale);
         CGAffineTransform translateTransform = CGAffineTransformTranslate( CGAffineTransformIdentity,
                                                                           -crop.origin.x,
                                                                           -crop.origin.y);
         transform = CGAffineTransformConcat( transform, scaleTransform );
         transform = CGAffineTransformConcat( transform, translateTransform);
-    }
+    //}
     
     [passThroughLayer setTransform:transform atTime:kCMTimeZero];
     
