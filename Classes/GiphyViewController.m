@@ -24,7 +24,7 @@
     BOOL reqGiphyApiInProccess;
     BOOL giphyDownloading;
     NSString *giphyApiKey;
-    NSURL *mediaURL, *mediaURLTemp,*mediaURLTemp2;
+    NSURL *mediaURL, *mediaURLTemp;
     int width, height, squareWH, square;
 }
 
@@ -201,7 +201,7 @@
             mediaURLTemp = [NSURL fileURLWithPath:destinationTemp];
             
             //Get video width/height
-            AVURLAsset *asset = [AVURLAsset URLAssetWithURL:mediaURLTemp2 options:nil];
+            AVURLAsset *asset = [AVURLAsset URLAssetWithURL:mediaURLTemp options:nil];
             NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
             AVAssetTrack *track = [tracks objectAtIndex:0];
             CGSize mediaSize = track.naturalSize;
@@ -367,28 +367,28 @@
     videoComposition.instructions = @[passThroughInstruction];
     
     // If an image is given, then put that in the animation.
-    if ( image != nil ) {
-        
-        // Layer that merges the video and image
-        CALayer *parentLayer = [CALayer layer];
-        parentLayer.frame = CGRectMake( 0, 0, crop.size.width, crop.size.height);
-        
-        // Layer that renders the video.
-        CALayer *videoLayer = [CALayer layer];
-        videoLayer.frame = CGRectMake(0, 0, crop.size.width, crop.size.height );
-        [parentLayer addSublayer:videoLayer];
-        
-        // Layer that renders flyerly image.
-        CALayer *imageLayer = [CALayer layer];
-        imageLayer.frame = CGRectMake(0, 0, crop.size.width, crop.size.height );
-        imageLayer.contents = (id)image.CGImage;
-        [imageLayer setMasksToBounds:YES];
-        
-        [parentLayer addSublayer:imageLayer];
-        
-        // Setup the animation tool
-        videoComposition.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
-    }
+//    if ( image != nil ) {
+//        
+//        // Layer that merges the video and image
+//        CALayer *parentLayer = [CALayer layer];
+//        parentLayer.frame = CGRectMake( 0, 0, crop.size.width, crop.size.height);
+//        
+//        // Layer that renders the video.
+//        CALayer *videoLayer = [CALayer layer];
+//        videoLayer.frame = CGRectMake(0, 0, crop.size.width, crop.size.height );
+//        [parentLayer addSublayer:videoLayer];
+//        
+//        // Layer that renders flyerly image.
+//        CALayer *imageLayer = [CALayer layer];
+//        imageLayer.frame = CGRectMake(0, 0, crop.size.width, crop.size.height );
+//        imageLayer.contents = (id)image.CGImage;
+//        [imageLayer setMasksToBounds:YES];
+//        
+//        [parentLayer addSublayer:imageLayer];
+//        
+//        // Setup the animation tool
+//        videoComposition.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
+//    }
     
     // Now export the movie
     AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
