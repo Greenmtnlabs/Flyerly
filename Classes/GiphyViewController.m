@@ -25,7 +25,7 @@
     BOOL giphyDownloading;
     NSString *giphyApiKey;
     NSURL *mediaURL, *mediaURLTemp;
-    int width, height, squareWH, square;
+    int width, height, squareWH, squareWHMax;
 }
 
 
@@ -211,6 +211,7 @@
             
             //Video must be squire, othere wise merge video will not map layer on exact points
             squareWH = (width < height) ? width : height;
+            squareWHMax = (width > height) ? width : height;
 
             [self videoCrop:mediaURLTemp];
             
@@ -284,7 +285,7 @@
         }];
     }];
     
-    cropVideo.giphyRect = CGRectMake(0, 0, squareWH, squareWH);
+    cropVideo.giphyRect = CGRectMake(0, 0, squareWH, squareWHMax);
     cropVideo.desiredVideoSize = CGSizeMake(squareWH, squareWH);
     cropVideo.url = movieUrl;
     cropVideo.onVideoCancel = _onVideoCancel;

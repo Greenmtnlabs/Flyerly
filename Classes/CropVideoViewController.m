@@ -131,9 +131,10 @@
         _cropView.fixedY = YES;
     }
     
-//        if(!CGRectIsEmpty(giphyRect)){
-//            _cropView.size = giphyRect.size;
-//        }
+        if(!CGRectIsEmpty(giphyRect)){
+            int newWidth = [self getNewWidth:giphyRect.size.height :giphyRect.size.width :_playerView.size.width];
+            _cropView.size = CGSizeMake(newWidth,newWidth);
+        }
     
     // Remember the translated crop size.
     originalCropFrame = _cropView.frame;
@@ -163,6 +164,11 @@
     }
 }
 
+-(int)getNewWidth: (CGFloat)oldParentWidth :(CGFloat)oldChildWidth :(CGFloat)newParentWidth{
+    int newChildWidth = (oldChildWidth/oldParentWidth)*newParentWidth;
+    return newChildWidth;
+}
+
 /**
  * We are done, use the cropped and filtered image.
  */
@@ -170,6 +176,7 @@
     // Crop rect to use will differ based on whether this is from gallery
     // or camera. Camera has the video rotated.
     CGRect cropRect;
+    
     
     // If this is portrait, then do not allow x translations
     if ( player.naturalSize.width < player.naturalSize.height ) {
@@ -186,12 +193,12 @@
         }
         
         
-        int a = player.naturalSize.width;
-        int b = _playerView.frame.size.width;
-        int c = _cropView.origin.x * maxHeight;
-        int d = _playerView.frame.size.height;
-        int e = _cropView.origin.x * maxHeight / _playerView.frame.size.width;
-                                                                   
+//        int a = player.naturalSize.width;
+//        int b = _playerView.frame.size.width;
+//        int c = _cropView.origin.x * maxHeight;
+//        int d = _playerView.frame.size.height;
+//        int e = _cropView.origin.x * maxHeight / _playerView.frame.size.width;
+        
         
         cropRect = CGRectMake(
                 player.naturalSize.width / _playerView.frame.size.width + ( _cropView.origin.x * maxHeight / _playerView.frame.size.width ),
@@ -201,12 +208,6 @@
     }
     
     [player stop];
-    
-//    cropRect = CGRectMake(
-//                          212,
-//                          0,
-//                          268,
-//                          268);
 
     _onVideoFinished( _url, cropRect, scaleRatio );
     
