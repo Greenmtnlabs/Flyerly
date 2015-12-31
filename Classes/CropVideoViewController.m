@@ -132,10 +132,15 @@
     }
     
     if(!CGRectIsEmpty(giphyRect)){
-        int newWidth = [self getNewWidth:giphyRect.size.height :giphyRect.size.width :_playerView.size.width];
-        _cropView.size = CGSizeMake(newWidth,newWidth);
+        
+        CGFloat newXY;
+        if ( player.naturalSize.width < player.naturalSize.height ){
+            newXY = [self getNewWidth:giphyRect.size.width :giphyRect.size.height :_playerView.size.height];
+        } else {
+            newXY = [self getNewWidth:giphyRect.size.height :giphyRect.size.width :_playerView.size.width];
+        }
+         _cropView.size = CGSizeMake(newXY,newXY);
     }
-    
     // Remember the translated crop size.
     originalCropFrame = _cropView.frame;
     
@@ -177,13 +182,17 @@
     // or camera. Camera has the video rotated.
     CGRect cropRect;
     
-    
-    
     // If this is portrait, then do not allow x translations
     if ( player.naturalSize.width < player.naturalSize.height ) {
+        
+        CGFloat y = _cropView.origin.y * player.naturalSize.width / _playerView.frame.size.height;
+        
+        if(!CGRectIsEmpty(giphyRect)){
+            y = [self getNewWidth:_playerView.frame.size.height :_cropView.origin.y :giphyRect.size.width];
+        }
         cropRect = CGRectMake(
                 0,
-                _cropView.origin.y * player.naturalSize.width / _playerView.frame.size.height,
+                y,
                 _desiredVideoSize.width,
                 _desiredVideoSize.height );
     } else {
@@ -192,14 +201,10 @@
             maxHeight = 480;
         }
         
-        CGFloat currentX = player.naturalSize.width / _playerView.frame.size.width + (_cropView.origin.x * maxHeight / _playerView.frame.size.width);
-        
-        CGFloat newX = [self getNewWidth:_playerView.frame.size.width :_cropView.origin.x :giphyRect.size.height];
-        
-        CGFloat x = currentX;
+        CGFloat x = player.naturalSize.width / _playerView.frame.size.width + (_cropView.origin.x * maxHeight / _playerView.frame.size.width);
         
         if(!CGRectIsEmpty(giphyRect)){
-            x = newX;
+            x = [self getNewWidth:_playerView.frame.size.width :_cropView.origin.x :giphyRect.size.height];
         }
         
         cropRect = CGRectMake(
