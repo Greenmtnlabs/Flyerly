@@ -97,9 +97,7 @@
     aspectRatio = player.naturalSize.width / player.naturalSize.height;
     
     // Remember the untranslated crop size.
-    
     originalConceptualFrame = _cropView.frame;
-    
     
     // Get the scale ratio.
     if ( player.naturalSize.width < player.naturalSize.height ) {
@@ -108,8 +106,8 @@
         
         // Adjust the cropview to match current width of portrait. Keep view centered.
         CGFloat width = _playerView.frame.size.height * aspectRatio;
-        _cropView.frame = CGRectMake( ( _playerView.size.width - width) / 2.0,
-                                     ( _playerView.size.height - width) / 2.0,
+        _cropView.frame = CGRectMake((_playerView.size.width - width) / 2.0,
+                                     (_playerView.size.height - width) / 2.0,
                                      width,
                                      width );
         
@@ -134,12 +132,26 @@
     if(!CGRectIsEmpty(giphyRect)){
         
         CGFloat newXY;
+        
         if ( player.naturalSize.width < player.naturalSize.height ){
+            
             newXY = [self getNewWidth:giphyRect.size.width :giphyRect.size.height :_playerView.size.height];
+            
+            if(_cropView.frame.size.height > 300){
+                CGFloat width = _playerView.frame.size.width * aspectRatio;
+                _cropView.frame = CGRectMake(10,
+                                         (self.view.size.height - width) / 2.0,
+                                         320,
+                                         320);
+                newXY = 320;
+            }
+            
+            
         } else {
             newXY = [self getNewWidth:giphyRect.size.height :giphyRect.size.width :_playerView.size.width];
         }
-         _cropView.size = CGSizeMake(newXY,newXY);
+        _cropView.size = CGSizeMake(newXY,newXY);
+        //_cropView.size = CGSizeMake(300,300);
     }
     // Remember the translated crop size.
     originalCropFrame = _cropView.frame;
