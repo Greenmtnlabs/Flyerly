@@ -137,13 +137,14 @@
             
             newXY = [self getNewWidth:giphyRect.size.width :giphyRect.size.height :_playerView.size.height];
             
-            if(_cropView.frame.size.height > 300){
-                CGFloat width = _playerView.frame.size.width * aspectRatio;
-                _cropView.frame = CGRectMake(10,
-                                         (self.view.size.height - width) / 2.0,
-                                         320,
-                                         320);
+            if(_cropView.frame.size.height > 320){
+                CGFloat height = _playerView.frame.size.height * aspectRatio;
                 newXY = 320;
+                _cropView.frame = CGRectMake(0,
+                                         (self.view.size.height - height) / 2.0,
+                                         newXY,
+                                         newXY);
+                
             }
             
             
@@ -151,7 +152,6 @@
             newXY = [self getNewWidth:giphyRect.size.height :giphyRect.size.width :_playerView.size.width];
         }
         _cropView.size = CGSizeMake(newXY,newXY);
-        //_cropView.size = CGSizeMake(300,300);
     }
     // Remember the translated crop size.
     originalCropFrame = _cropView.frame;
@@ -200,8 +200,9 @@
         CGFloat y = _cropView.origin.y * player.naturalSize.width / _playerView.frame.size.height;
         
         if(!CGRectIsEmpty(giphyRect)){
-            y = [self getNewWidth:_playerView.frame.size.height :_cropView.origin.y :giphyRect.size.width];
+            y = [self getNewWidth:_playerView.frame.size.height :_cropView.origin.y :giphyRect.size.width] - 80;
         }
+        
         cropRect = CGRectMake(
                 0,
                 y,
