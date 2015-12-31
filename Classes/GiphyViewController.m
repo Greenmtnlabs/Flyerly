@@ -51,7 +51,7 @@
     [logo setImage:[UIImage imageNamed:@"giphyLogo"]];
     self.navigationItem.titleView = logo;
     
-    self.navigationController.navigationBar.barTintColor = [UIColor lightGrayColor];
+    //self.navigationController.navigationBar.barTintColor = [UIColor lightGrayColor];
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     FlyerlyConfigurator *flyerConfigurator = appDelegate.flyerConfigurator;

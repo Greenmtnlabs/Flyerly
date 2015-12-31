@@ -192,13 +192,18 @@
             maxHeight = 480;
         }
         
-        CGFloat currentX = player.naturalSize.width / _playerView.frame.size.width + ( _cropView.origin.x * maxHeight / _playerView.frame.size.width );
-        
+        CGFloat currentX = player.naturalSize.width / _playerView.frame.size.width + (_cropView.origin.x * maxHeight / _playerView.frame.size.width);
         
         CGFloat newX = [self getNewWidth:_playerView.frame.size.width :_cropView.origin.x :giphyRect.size.height];
         
+        CGFloat x = currentX;
+        
+        if(!CGRectIsEmpty(giphyRect)){
+            x = newX;
+        }
+        
         cropRect = CGRectMake(
-                          newX,
+                          x,
                           0,
                           _desiredVideoSize.width,
                           _desiredVideoSize.height);
