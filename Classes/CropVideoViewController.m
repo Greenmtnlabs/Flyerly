@@ -9,7 +9,10 @@
 #import "CropVideoViewController.h"
 #import "FlyerlySingleton.h"
 
-@interface CropVideoViewController ()
+@interface CropVideoViewController (){
+    BOOL isGiphy, isSizeGreater;
+
+}
 
 @end
 
@@ -130,6 +133,10 @@
     }
     
     if(!CGRectIsEmpty(giphyRect)){
+        isGiphy = YES;
+    }
+    
+    if(isGiphy){
         
         CGFloat newXY;
         
@@ -144,7 +151,7 @@
                                          (self.view.size.height - height) / 2.0,
                                          newXY,
                                          newXY);
-                
+                isSizeGreater = YES;
             }
             
             
@@ -199,13 +206,17 @@
         
         CGFloat y = _cropView.origin.y * player.naturalSize.width / _playerView.frame.size.height;
         
-        if(!CGRectIsEmpty(giphyRect)){
-            y = [self getNewWidth:_playerView.frame.size.height :_cropView.origin.y :giphyRect.size.width] - 80;
-        }
+//        if(isGiphy){
+//            y = [self getNewWidth:_playerView.frame.size.height :_cropView.origin.y :giphyRect.size.width];
+//            
+//            if(isSizeGreater){
+//                y = [self getNewWidth:_playerView.frame.size.height :_cropView.origin.y :giphyRect.size.width] - 80;
+//            }
+//        }
         
         cropRect = CGRectMake(
                 0,
-                y,
+                 y,
                 _desiredVideoSize.width,
                 _desiredVideoSize.height );
     } else {
@@ -216,7 +227,7 @@
         
         CGFloat x = player.naturalSize.width / _playerView.frame.size.width + (_cropView.origin.x * maxHeight / _playerView.frame.size.width);
         
-        if(!CGRectIsEmpty(giphyRect)){
+        if(isGiphy){
             x = [self getNewWidth:_playerView.frame.size.width :_cropView.origin.x :giphyRect.size.height];
         }
         
