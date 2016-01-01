@@ -292,8 +292,13 @@
         }];
     }];
     
-    cropVideo.giphyRect = CGRectMake(0, 0, squareWH, squareWHMax);
-    cropVideo.desiredVideoSize = CGSizeMake(squareWH, squareWH);
+    cropVideo.giphyDic = [[NSMutableDictionary alloc] init];
+    [cropVideo.giphyDic setObject: [NSNumber numberWithInteger:squareWH] forKey:@"minWH"];
+    [cropVideo.giphyDic setObject: [NSNumber numberWithInteger:squareWHMax] forKey:@"maxWH"];
+    [cropVideo.giphyDic setObject: [NSNumber numberWithInteger:squareWH] forKey:@"desiredWidth"];
+    [cropVideo.giphyDic setObject: [NSNumber numberWithInteger:squareWH] forKey:@"desiredHeight"];
+    
+
     cropVideo.url = movieUrl;
     cropVideo.onVideoCancel = _onVideoCancel;
     cropVideo.fromCamera = YES;
@@ -302,7 +307,6 @@
     NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
     [viewControllers removeLastObject];
     [viewControllers addObject:cropVideo];
-    //[[self navigationController] setViewControllers:viewControllers animated:YES];
     [[self navigationController] pushViewController:cropVideo animated:YES];
 }
 

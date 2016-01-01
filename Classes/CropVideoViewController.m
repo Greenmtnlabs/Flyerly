@@ -17,7 +17,7 @@
 @end
 
 @implementation CropVideoViewController
-@synthesize giphyRect;
+@synthesize giphyDic;
 
 /**
  * Initialize the view.
@@ -96,6 +96,10 @@
  */
 -(void)calculateDimension:(NSNotification *)n {
     
+    if(giphyDic != NULL){
+        isGiphy = YES;
+    }
+    
     // Get aspect ratio of video
     aspectRatio = player.naturalSize.width / player.naturalSize.height;
     
@@ -107,12 +111,14 @@
         // If the video is in portrait mode.
         scaleRatio = _desiredVideoSize.width / player.naturalSize.width;
         
+        if(isGiphy){
+            scaleRatio = [[giphyDic objectForKey:@"desiredWidth"] integerValue] / player.naturalSize.width;
+        }
+        
+        
         // Adjust the cropview to match current width of portrait. Keep view centered.
         CGFloat width = _playerView.frame.size.height * aspectRatio;
-        _cropView.frame = CGRectMake((_playerView.size.width - width) / 2.0,
-                                     (_playerView.size.height - width) / 2.0,
-                                     width,
-                                     width );
+        _cropView.frame = CGRectMake((_playerView.size.width - width) / 2.0, (_playerView.size.height - width) / 2.0, width, width );
         
         // Do not allowing moving on x axis
         _cropView.fixedX = YES;
@@ -121,20 +127,19 @@
         // If the video is landscape or square.
         scaleRatio = _desiredVideoSize.height / player.naturalSize.height;
         
+        if(isGiphy){
+            scaleRatio = [[giphyDic objectForKey:@"desiredHeight"] integerValue] / player.naturalSize.height;
+        }
+        
         // Adjust the cropview to match current width of portrait. Keep view centered.
         CGFloat height = _playerView.frame.size.width / aspectRatio;
-        _cropView.frame = CGRectMake( ( _playerView.size.width - height) / 2.0,
-                                     ( _playerView.size.height - height) / 2.0,
-                                     height,
-                                     height );
+        _cropView.frame = CGRectMake( ( _playerView.size.width - height) / 2.0, ( _playerView.size.height - height) / 2.0, height, height );
         
         // Do not allow moving on y axis
         _cropView.fixedY = YES;
     }
     
-    if(!CGRectIsEmpty(giphyRect)){
-        isGiphy = YES;
-    }
+    
     
     if(isGiphy){
         
@@ -142,11 +147,10 @@
         
         if ( player.naturalSize.width < player.naturalSize.height ){
             
-            newWH = [self getNewWidth:giphyRect.size.width :giphyRect.size.height :_playerView.size.height];
+            newWH = [self getNewWidth:[[giphyDic objectForKey:@"minWH"] integerValue]  :[[giphyDic objectForKey:@"maxWH"] integerValue] :_playerView.size.height];
             
             if( _cropView.frame.size.width > _playerView.size.width){
                 CGFloat height = _playerView.frame.size.height * aspectRatio;
-                //newWH = [self getNewWidth:giphyRect.size.height :giphyRect.size.width :_playerView.size.width];
                 newWH = 320;
                 _cropView.frame = CGRectMake(0, (self.view.size.height - height) / 2.0, newWH, newWH);
                 isSizeGreater = YES;
@@ -154,7 +158,7 @@
             
             
         } else {
-            newWH = [self getNewWidth:giphyRect.size.height :giphyRect.size.width :_playerView.size.width];
+            newWH = [self getNewWidth:[[giphyDic objectForKey:@"maxWH"] integerValue]  :[[giphyDic objectForKey:@"minWH"] integerValue] :_playerView.size.width];
         }
         _cropView.size = CGSizeMake(newWH,newWH);
     }
@@ -169,6 +173,9 @@
     NSLog(@"Scale ratio: %.2f", scaleRatio );
     NSLog(@"Aspect ratio: %.2f", scaleRatio );
     NSLog(@"Crop size: %.2f x %.2f", _desiredVideoSize.width, _desiredVideoSize.height );
+    if(isGiphy){
+        NSLog(@"Giphy Crop size: %d x %d", [[giphyDic objectForKey:@"desiredWidth"] integerValue], [[giphyDic objectForKey:@"desiredHeight"] integerValue] );
+    }
 }
 
 #pragma mark - Button Event Handlers
@@ -204,32 +211,12 @@
         
         CGFloat y = _cropView.origin.y * player.naturalSize.width / _playerView.frame.size.height;
         
-        if(isGiphy){
-            y = [self getNewWidth:_playerView.frame.size.height :_cropView.origin.y :giphyRect.size.width];
-            
-            if(isSizeGreater){
-//                int h = 40;
-//                if(IS_IPHONE_4 || IS_IPHONE_5){
-//                    h = 30;
-//                } else if(IS_IPHONE_6){
-//                    h = 80;
-//                } else if (IS_IPHONE_6_PLUS){
-//                    h = 120;
-//                }
-                
-               
-                //y = [self getNewWidth:_playerView.frame.size.height :_cropView.origin.y :1000];
-                //y = [self getNewWidth:giphyRect.size.height :giphyRect.size.width :_playerView.frame.size.height];
-                _desiredVideoSize.width = 320;
-                _desiredVideoSize.height = 320;
-            }
-        }
+        cropRect = CGRectMake(0, y, _desiredVideoSize.width, _desiredVideoSize.height );
         
-        cropRect = CGRectMake(
-                0,
-                 y,
-                _desiredVideoSize.width,
-                _desiredVideoSize.height );
+        if(isGiphy){
+            y = [self getNewWidth:_playerView.frame.size.height :_cropView.origin.y :[[giphyDic objectForKey:@"minWH"] integerValue]];
+            cropRect = CGRectMake(0, y, [[giphyDic objectForKey:@"desiredWidth"] integerValue], [[giphyDic objectForKey:@"desiredHeight"] integerValue] );
+        }
     } else {
         CGFloat maxHeight = 568.0;
         if ( IS_IPHONE_4 ) {
@@ -237,16 +224,14 @@
         }
         
         CGFloat x = player.naturalSize.width / _playerView.frame.size.width + (_cropView.origin.x * maxHeight / _playerView.frame.size.width);
+        cropRect = CGRectMake(x, 0, _desiredVideoSize.width, _desiredVideoSize.height);
+
         
         if(isGiphy){
-            x = [self getNewWidth:_playerView.frame.size.width :_cropView.origin.x :giphyRect.size.height];
+            x = [self getNewWidth:_playerView.frame.size.width :_cropView.origin.x :[[giphyDic objectForKey:@"maxWH"] integerValue]];
+            cropRect = CGRectMake(x, 0, [[giphyDic objectForKey:@"desiredWidth"] integerValue], [[giphyDic objectForKey:@"desiredHeight"] integerValue] );
         }
         
-        cropRect = CGRectMake(
-                          x,
-                          0,
-                          _desiredVideoSize.width,
-                          _desiredVideoSize.height);
     }
     
     [player stop];
