@@ -51,25 +51,31 @@
     [logo setImage:[UIImage imageNamed:@"giphyLogo"]];
     self.navigationItem.titleView = logo;
     
-    //self.navigationController.navigationBar.barTintColor = [UIColor lightGrayColor];
-    
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    FlyerlyConfigurator *flyerConfigurator = appDelegate.flyerConfigurator;
-    giphyApiKey = [[NSString alloc] initWithString:[flyerConfigurator giphyApiKey]];
-    
-    
-    giphyBgsView  = [[UIView alloc] initWithFrame:CGRectMake(0,0,layerScrollView.frame.size.width, layerScrollView.frame.size.height)];
-    [layerScrollView addSubview:giphyBgsView];
-    
+//    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+//    FlyerlyConfigurator *flyerConfigurator = appDelegate.flyerConfigurator;
+//    giphyApiKey = [[NSString alloc] initWithString:[flyerConfigurator giphyApiKey]];
+//    
+//    giphyBgsView  = [[UIView alloc] initWithFrame:CGRectMake(0,0,layerScrollView.frame.size.width, layerScrollView.frame.size.height)];
+//    [layerScrollView addSubview:giphyBgsView];
+//    
 //    //load trending giphy default
 //    [self loadGiphyImages:[NSString stringWithFormat:@"http://api.giphy.com/v1/gifs/trending?api_key=%@",giphyApiKey]];
 }
 
 -(void) viewWillAppear: (BOOL) animated{
     
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    FlyerlyConfigurator *flyerConfigurator = appDelegate.flyerConfigurator;
+    giphyApiKey = [[NSString alloc] initWithString:[flyerConfigurator giphyApiKey]];
+    
+    giphyBgsView  = [[UIView alloc] initWithFrame:CGRectMake(0,0,layerScrollView.frame.size.width, layerScrollView.frame.size.height)];
+    [layerScrollView addSubview:giphyBgsView];
     //load trending giphy default
     [self loadGiphyImages:[NSString stringWithFormat:@"http://api.giphy.com/v1/gifs/trending?api_key=%@",giphyApiKey]];
+    
     [leftBarButtonItem setEnabled:YES];
+    
+  
 }
 
 - (void)didReceiveMemoryWarning {
@@ -438,6 +444,7 @@ shouldReloadTableForSearchString:(NSString *)searchString {
         loadingOverly.backgroundColor = [UIColor whiteColor];
         loadingOverly.alpha = 0.5;
         [self.view addSubview:loadingOverly];
+        
     }
     else{
         [layerScrollView removeFromSuperview];
