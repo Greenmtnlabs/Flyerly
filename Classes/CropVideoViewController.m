@@ -138,27 +138,25 @@
     
     if(isGiphy){
         
-        CGFloat newXY;
+        CGFloat newWH;
         
         if ( player.naturalSize.width < player.naturalSize.height ){
             
-            newXY = [self getNewWidth:giphyRect.size.width :giphyRect.size.height :_playerView.size.height];
+            newWH = [self getNewWidth:giphyRect.size.width :giphyRect.size.height :_playerView.size.height];
             
-            if(_cropView.frame.size.height > 320){
+            if( _cropView.frame.size.width > _playerView.size.width){
                 CGFloat height = _playerView.frame.size.height * aspectRatio;
-                newXY = 320;
-                _cropView.frame = CGRectMake(0,
-                                         (self.view.size.height - height) / 2.0,
-                                         newXY,
-                                         newXY);
+                //newWH = [self getNewWidth:giphyRect.size.height :giphyRect.size.width :_playerView.size.width];
+                newWH = 320;
+                _cropView.frame = CGRectMake(0, (self.view.size.height - height) / 2.0, newWH, newWH);
                 isSizeGreater = YES;
             }
             
             
         } else {
-            newXY = [self getNewWidth:giphyRect.size.height :giphyRect.size.width :_playerView.size.width];
+            newWH = [self getNewWidth:giphyRect.size.height :giphyRect.size.width :_playerView.size.width];
         }
-        _cropView.size = CGSizeMake(newXY,newXY);
+        _cropView.size = CGSizeMake(newWH,newWH);
     }
     // Remember the translated crop size.
     originalCropFrame = _cropView.frame;
@@ -188,8 +186,8 @@
     }
 }
 
--(int)getNewWidth: (CGFloat)oldParentWidth :(CGFloat)oldChildWidth :(CGFloat)newParentWidth{
-    int newChildWidth = (oldChildWidth/oldParentWidth)*newParentWidth;
+-(int)getNewWidth: (CGFloat)originalVideoWH :(CGFloat)cropXY :(CGFloat)playerWH{
+    int newChildWidth = (cropXY/originalVideoWH)*playerWH;
     return newChildWidth;
 }
 
@@ -210,16 +208,20 @@
             y = [self getNewWidth:_playerView.frame.size.height :_cropView.origin.y :giphyRect.size.width];
             
             if(isSizeGreater){
-                int h = 80;
-                if(IS_IPHONE_4 || IS_IPHONE_5){
-                    h = 25;
-                } else if(IS_IPHONE_6){
-                    h = 80;
-                } else if (IS_IPHONE_6_PLUS){
-                    h = 120;
-                }
+//                int h = 40;
+//                if(IS_IPHONE_4 || IS_IPHONE_5){
+//                    h = 30;
+//                } else if(IS_IPHONE_6){
+//                    h = 80;
+//                } else if (IS_IPHONE_6_PLUS){
+//                    h = 120;
+//                }
                 
-                y = [self getNewWidth:_playerView.frame.size.height :_cropView.origin.y :giphyRect.size.width] - h;
+               
+                //y = [self getNewWidth:_playerView.frame.size.height :_cropView.origin.y :1000];
+                //y = [self getNewWidth:giphyRect.size.height :giphyRect.size.width :_playerView.frame.size.height];
+                _desiredVideoSize.width = 320;
+                _desiredVideoSize.height = 320;
             }
         }
         

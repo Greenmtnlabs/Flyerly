@@ -61,14 +61,15 @@
     giphyBgsView  = [[UIView alloc] initWithFrame:CGRectMake(0,0,layerScrollView.frame.size.width, layerScrollView.frame.size.height)];
     [layerScrollView addSubview:giphyBgsView];
     
-    //load trending giphy default
-    [self loadGiphyImages:[NSString stringWithFormat:@"http://api.giphy.com/v1/gifs/trending?api_key=%@",giphyApiKey]];
+//    //load trending giphy default
+//    [self loadGiphyImages:[NSString stringWithFormat:@"http://api.giphy.com/v1/gifs/trending?api_key=%@",giphyApiKey]];
 }
 
 -(void) viewWillAppear: (BOOL) animated{
-    [leftBarButtonItem setEnabled:YES];
+    
     //load trending giphy default
     [self loadGiphyImages:[NSString stringWithFormat:@"http://api.giphy.com/v1/gifs/trending?api_key=%@",giphyApiKey]];
+    [leftBarButtonItem setEnabled:YES];
 }
 
 - (void)didReceiveMemoryWarning {
