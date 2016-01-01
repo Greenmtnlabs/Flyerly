@@ -206,13 +206,13 @@
         
         CGFloat y = _cropView.origin.y * player.naturalSize.width / _playerView.frame.size.height;
         
-//        if(isGiphy){
-//            y = [self getNewWidth:_playerView.frame.size.height :_cropView.origin.y :giphyRect.size.width];
-//            
-//            if(isSizeGreater){
-//                y = [self getNewWidth:_playerView.frame.size.height :_cropView.origin.y :giphyRect.size.width] - 80;
-//            }
-//        }
+        if(isGiphy){
+            y = [self getNewWidth:_playerView.frame.size.height :_cropView.origin.y :giphyRect.size.width];
+            
+            if(isSizeGreater){
+                y = [self getNewWidth:_playerView.frame.size.height :_cropView.origin.y :giphyRect.size.width] - 80;
+            }
+        }
         
         cropRect = CGRectMake(
                 0,

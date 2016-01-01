@@ -65,6 +65,10 @@
     [self loadGiphyImages:[NSString stringWithFormat:@"http://api.giphy.com/v1/gifs/trending?api_key=%@",giphyApiKey]];
 }
 
+-(void) viewWillAppear: (BOOL) animated{
+    [leftBarButtonItem setEnabled:YES];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -295,8 +299,8 @@
     NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
     [viewControllers removeLastObject];
     [viewControllers addObject:cropVideo];
-    [[self navigationController] setViewControllers:viewControllers animated:YES];
-//    [[self navigationController] pushViewController:cropVideo animated:YES];
+    //[[self navigationController] setViewControllers:viewControllers animated:YES];
+    [[self navigationController] pushViewController:cropVideo animated:YES];
 }
 
 /**
@@ -353,43 +357,17 @@
     AVMutableVideoCompositionLayerInstruction *passThroughLayer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:videoTrack];
     
     // Set the transform to maintain orientation
-    //if ( scale != 1.0 ) {
-        CGAffineTransform scaleTransform = CGAffineTransformMakeScale( scale, scale);
-        CGAffineTransform translateTransform = CGAffineTransformTranslate( CGAffineTransformIdentity,
+    CGAffineTransform scaleTransform = CGAffineTransformMakeScale( scale, scale);
+    CGAffineTransform translateTransform = CGAffineTransformTranslate( CGAffineTransformIdentity,
                                                                           -crop.origin.x,
                                                                           -crop.origin.y);
-        transform = CGAffineTransformConcat( transform, scaleTransform );
-        transform = CGAffineTransformConcat( transform, translateTransform);
-    //}
+    transform = CGAffineTransformConcat( transform, scaleTransform );
+    transform = CGAffineTransformConcat( transform, translateTransform);
     
     [passThroughLayer setTransform:transform atTime:kCMTimeZero];
     
     passThroughInstruction.layerInstructions = @[ passThroughLayer ];
     videoComposition.instructions = @[passThroughInstruction];
-    
-    // If an image is given, then put that in the animation.
-//    if ( image != nil ) {
-//        
-//        // Layer that merges the video and image
-//        CALayer *parentLayer = [CALayer layer];
-//        parentLayer.frame = CGRectMake( 0, 0, crop.size.width, crop.size.height);
-//        
-//        // Layer that renders the video.
-//        CALayer *videoLayer = [CALayer layer];
-//        videoLayer.frame = CGRectMake(0, 0, crop.size.width, crop.size.height );
-//        [parentLayer addSublayer:videoLayer];
-//        
-//        // Layer that renders flyerly image.
-//        CALayer *imageLayer = [CALayer layer];
-//        imageLayer.frame = CGRectMake(0, 0, crop.size.width, crop.size.height );
-//        imageLayer.contents = (id)image.CGImage;
-//        [imageLayer setMasksToBounds:YES];
-//        
-//        [parentLayer addSublayer:imageLayer];
-//        
-//        // Setup the animation tool
-//        videoComposition.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
-//    }
     
     // Now export the movie
     AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
