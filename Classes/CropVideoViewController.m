@@ -210,7 +210,16 @@
             y = [self getNewWidth:_playerView.frame.size.height :_cropView.origin.y :giphyRect.size.width];
             
             if(isSizeGreater){
-                y = [self getNewWidth:_playerView.frame.size.height :_cropView.origin.y :giphyRect.size.width] - 80;
+                int h = 80;
+                if(IS_IPHONE_4 || IS_IPHONE_5){
+                    h = 25;
+                } else if(IS_IPHONE_6){
+                    h = 80;
+                } else if (IS_IPHONE_6_PLUS){
+                    h = 120;
+                }
+                
+                y = [self getNewWidth:_playerView.frame.size.height :_cropView.origin.y :giphyRect.size.width] - h;
             }
         }
         

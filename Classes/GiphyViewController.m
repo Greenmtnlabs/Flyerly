@@ -67,6 +67,8 @@
 
 -(void) viewWillAppear: (BOOL) animated{
     [leftBarButtonItem setEnabled:YES];
+    //load trending giphy default
+    [self loadGiphyImages:[NSString stringWithFormat:@"http://api.giphy.com/v1/gifs/trending?api_key=%@",giphyApiKey]];
 }
 
 - (void)didReceiveMemoryWarning {
