@@ -166,15 +166,6 @@
     
     // Bring this view to front.
     [_playerView bringSubviewToFront:_cropView];
-    
-    // Get the naturatl size and log it
-    NSLog(@"Natural size: %.2f x %.2f", player.naturalSize.width, player.naturalSize.height );
-    NSLog(@"Scale ratio: %.2f", scaleRatio );
-    NSLog(@"Aspect ratio: %.2f", scaleRatio );
-    NSLog(@"Crop size: %.2f x %.2f", _desiredVideoSize.width, _desiredVideoSize.height );
-    if(isGiphy){
-        NSLog(@"Giphy Crop size: %d x %d", [[giphyDic objectForKey:@"desiredWidth"] integerValue], [[giphyDic objectForKey:@"desiredHeight"] integerValue] );
-    }
 }
 
 #pragma mark - Button Event Handlers
@@ -193,7 +184,7 @@
 }
 
 /*
- * Determines new width/height and x/y axes
+ * Determines new width/height and x/y axes (w.r.t. ratio)
  * @params:
  *      originalVideoWH: CGFloat
  *      cropXY: CGFloat

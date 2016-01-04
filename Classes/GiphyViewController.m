@@ -25,7 +25,8 @@
     BOOL giphyDownloading;
     NSString *giphyApiKey;
     NSURL *mediaURL, *mediaURLTemp;
-    int width, height, squareWH, squareWHMax;
+    int width, height; // to hold original width and height of a giphy
+    int squareWH, squareWHMax; // to hold minimum and miximum between width and height of a giphy
 }
 
 
@@ -60,10 +61,6 @@
     
     //load trending giphy default
     [self loadGiphyImages:[NSString stringWithFormat:@"http://api.giphy.com/v1/gifs/trending?api_key=%@",giphyApiKey]];
-}
-
--(void) viewWillAppear: (BOOL) animated{
-    [leftBarButtonItem setEnabled:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -107,7 +104,9 @@
             int i=0, row = 0, column = 0;
             int showInRow = 2, defX = 16, defY = 16 , defW = 182, defH = 182;//414 full width
             
-            if( IS_IPHONE_4 || IS_IPHONE_5  ){
+            if( IS_IPHONE_4 ){
+                showInRow = 2, defX = 13, defY = 13 , defW = 141, defH = 141;//320 full width
+            } else if(IS_IPHONE_5 ){
                 showInRow = 2, defX = 13, defY = 13 , defW = 141, defH = 141;//320 full width
             } else if( IS_IPHONE_6 ){
                 showInRow = 2, defX = 17, defY = 17 , defW = 162, defH = 162;//375 full width
@@ -216,6 +215,8 @@
 
     // This clears white overlay from superview
     [loadingOverly removeFromSuperview];
+    // To enable Home button
+    [leftBarButtonItem setEnabled:YES];
 }
 
 /**
