@@ -51,31 +51,19 @@
     [logo setImage:[UIImage imageNamed:@"giphyLogo"]];
     self.navigationItem.titleView = logo;
     
-//    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-//    FlyerlyConfigurator *flyerConfigurator = appDelegate.flyerConfigurator;
-//    giphyApiKey = [[NSString alloc] initWithString:[flyerConfigurator giphyApiKey]];
-//    
-//    giphyBgsView  = [[UIView alloc] initWithFrame:CGRectMake(0,0,layerScrollView.frame.size.width, layerScrollView.frame.size.height)];
-//    [layerScrollView addSubview:giphyBgsView];
-//    
-//    //load trending giphy default
-//    [self loadGiphyImages:[NSString stringWithFormat:@"http://api.giphy.com/v1/gifs/trending?api_key=%@",giphyApiKey]];
-}
-
--(void) viewWillAppear: (BOOL) animated{
-    
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     FlyerlyConfigurator *flyerConfigurator = appDelegate.flyerConfigurator;
     giphyApiKey = [[NSString alloc] initWithString:[flyerConfigurator giphyApiKey]];
     
     giphyBgsView  = [[UIView alloc] initWithFrame:CGRectMake(0,0,layerScrollView.frame.size.width, layerScrollView.frame.size.height)];
     [layerScrollView addSubview:giphyBgsView];
+    
     //load trending giphy default
     [self loadGiphyImages:[NSString stringWithFormat:@"http://api.giphy.com/v1/gifs/trending?api_key=%@",giphyApiKey]];
-    
+}
+
+-(void) viewWillAppear: (BOOL) animated{
     [leftBarButtonItem setEnabled:YES];
-    
-  
 }
 
 - (void)didReceiveMemoryWarning {
@@ -89,8 +77,6 @@
     // To clear navigation bar color
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
 }
-
-
 
 /**
  * Load giphy images from internet
@@ -107,7 +93,6 @@
     }
     
     [self deleteSubviewsFromView:giphyBgsView];
-    
 
     //send request to giphy api
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -135,7 +120,6 @@
                 x = defX*column+defX + defW*column;
                 y = defY*row+defY + defH*row;
 
-
                 UIView *viewForGiphy = [[UIView alloc]initWithFrame:CGRectMake(x-4, y-4, defW+4, defH+4)];
                 UIWebView *webview=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, defW+4, defH+4)];
                 webview.userInteractionEnabled = NO;
@@ -161,8 +145,6 @@
             
             [layerScrollView addSubview:giphyBgsView];
             [layerScrollView setContentSize:CGSizeMake(giphyBgsView.frame.size.width,giphyBgsView.frame.size.height)];
-            
-            
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -231,6 +213,9 @@
         }];
         
     }] resume];
+
+    // This clears white overlay from superview
+    [loadingOverly removeFromSuperview];
 }
 
 /**
