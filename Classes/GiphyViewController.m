@@ -11,6 +11,7 @@
 #import "Common.h"
 #import "FlyrAppDelegate.h"
 #import "FlyerlyConfigurator.h"
+#import "CropVideoViewController.h"
 
 @interface GiphyViewController ()
 @property (strong, nonatomic) IBOutlet UISearchBar *searchField;
@@ -23,6 +24,9 @@
     BOOL reqGiphyApiInProccess;
     BOOL giphyDownloading;
     NSString *giphyApiKey;
+    NSURL *mediaURL, *mediaURLTemp;
+    int width, height; // to hold original width and height of a giphy
+    int squareWH, squareWHMax; // to hold minimum and miximum between width and height of a giphy
 }
 
 
@@ -48,12 +52,9 @@
     [logo setImage:[UIImage imageNamed:@"giphyLogo"]];
     self.navigationItem.titleView = logo;
     
-    self.navigationController.navigationBar.barTintColor = [UIColor lightGrayColor];
-    
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     FlyerlyConfigurator *flyerConfigurator = appDelegate.flyerConfigurator;
     giphyApiKey = [[NSString alloc] initWithString:[flyerConfigurator giphyApiKey]];
-    
     
     giphyBgsView  = [[UIView alloc] initWithFrame:CGRectMake(0,0,layerScrollView.frame.size.width, layerScrollView.frame.size.height)];
     [layerScrollView addSubview:giphyBgsView];
@@ -74,8 +75,6 @@
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
 }
 
-
-
 /**
  * Load giphy images from internet
  */
@@ -91,7 +90,6 @@
     }
     
     [self deleteSubviewsFromView:giphyBgsView];
-    
 
     //send request to giphy api
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -105,22 +103,21 @@
             int heightHandlerForMainView = 0;
             int i=0, row = 0, column = 0;
             int showInRow = 2, defX = 16, defY = 16 , defW = 182, defH = 182;//414 full width
+            
             if( IS_IPHONE_4 ){
                 showInRow = 2, defX = 13, defY = 13 , defW = 141, defH = 141;//320 full width
-            } else if( IS_IPHONE_5 ){
+            } else if(IS_IPHONE_5 ){
                 showInRow = 2, defX = 13, defY = 13 , defW = 141, defH = 141;//320 full width
             } else if( IS_IPHONE_6 ){
                 showInRow = 2, defX = 17, defY = 17 , defW = 162, defH = 162;//375 full width
-            } else if( IS_IPHONE_6_PLUS ){
-                showInRow = 2, defX = 16, defY = 16 , defW = 182, defH = 182;//414 full width
             }
+            
             int x = 0, y = 0;
             for(NSDictionary *gif in giphyData ){
                 column = i % showInRow;
                 row = floor( i / showInRow );
                 x = defX*column+defX + defW*column;
                 y = defY*row+defY + defH*row;
-
 
                 UIView *viewForGiphy = [[UIView alloc]initWithFrame:CGRectMake(x-4, y-4, defW+4, defH+4)];
                 UIWebView *webview=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, defW+4, defH+4)];
@@ -187,15 +184,15 @@
 
             NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
             
-            //File will be save here
+            //File will be saved here
             NSString *destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
             [self deleteFile:destination];
-            NSURL *mediaURL = [NSURL fileURLWithPath:destination];
+            mediaURL = [NSURL fileURLWithPath:destination];
             
             //Temporary video we will crop from it then delete it
             NSString *destinationTemp = [NSString stringWithFormat:@"%@/Template/templateTemp.mov",currentpath];
             [[NSFileManager defaultManager] createFileAtPath:destinationTemp contents:data attributes:nil];
-            NSURL *mediaURLTemp = [NSURL fileURLWithPath:destinationTemp];
+            mediaURLTemp = [NSURL fileURLWithPath:destinationTemp];
             
             //Get video width/height
             AVURLAsset *asset = [AVURLAsset URLAssetWithURL:mediaURLTemp options:nil];
@@ -203,45 +200,23 @@
             AVAssetTrack *track = [tracks objectAtIndex:0];
             CGSize mediaSize = track.naturalSize;
             
-            int width = mediaSize.width;
-            int height = mediaSize.height;
+            width = mediaSize.width;
+            height = mediaSize.height;
             
             //Video must be squire, othere wise merge video will not map layer on exact points
-            int squireWH = (width < height) ? width : height;
-            width = height = squireWH;
-            
-            //store squired video then delete temporary video
-            [self modifyVideo:mediaURLTemp destination:mediaURL crop:CGRectMake(0,0,squireWH,squireWH) scale:1 overlay:nil completion:^(NSInteger status, NSError *error) {
-                
-                switch ( status ) {
-                    case AVAssetExportSessionStatusFailed:
-                        NSLog (@"FAIL = %@", error );
-                        break;
-                    case AVAssetExportSessionStatusCompleted:
-                        //Update dictionary
-                        [flyer setOriginalVideoUrl:@"Template/template.mov"];
-                        [flyer setFlyerTypeVideoWithSize:width height:height videoSoure:@"giphy"];
-                        [flyer setImageTag:@"Template" Tag:nil];
-                        [flyer addGiphyWatermark];
-                        
-                        tasksAfterGiphySelect = @"play";
-                        break;
-                }
-                
-                //Delete temporary file
-                [self deleteFile:destinationTemp];
-                
-                // Perform ui related things in main thread
-                dispatch_async( dispatch_get_main_queue(), ^{
-                    [self onSelectGiphyShowLoadingIndicator:NO];
-                    [self goBack];
-                });
+            squareWH = (width < height) ? width : height;
+            squareWHMax = (width > height) ? width : height;
 
-            }];
+            [self videoCrop:mediaURLTemp];
             
         }];
         
     }] resume];
+
+    // This clears white overlay from superview
+    [loadingOverly removeFromSuperview];
+    // To enable Home button
+    [leftBarButtonItem setEnabled:YES];
 }
 
 /**
@@ -256,6 +231,76 @@
 
 
 # pragma mark - Video editing
+
+/**
+ * Crop video using crop video view controller.
+ */
+-(void) videoCrop:(NSURL *)movieUrl {
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    
+    //Background Thread
+    CropVideoViewController *cropVideo;
+    if( IS_IPHONE_4 || IS_IPHONE_5) {
+        cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
+    }else if ( IS_IPHONE_6){
+        cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController-iPhone6" bundle:nil];
+    }else if ( IS_IPHONE_6_PLUS){
+        cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController-iPhone6-Plus" bundle:nil];
+    } else{
+        cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
+    }
+    
+    __weak GiphyViewController *weakSelf = self;
+
+
+    [cropVideo setOnVideoFinished:^(NSURL *recvUrl, CGRect cropRect, CGFloat scale ) {
+        
+        [weakSelf modifyVideo:recvUrl destination:mediaURL crop:cropRect scale:scale overlay:nil completion:^(NSInteger status, NSError *error) {
+            
+            switch ( status ) {
+                case AVAssetExportSessionStatusFailed:
+                    NSLog (@"FAIL = %@", error );
+                    break;
+                case AVAssetExportSessionStatusCompleted:
+                    //Update dictionary
+                    [flyer setOriginalVideoUrl:@"Template/template.mov"];
+                    [flyer setFlyerTypeVideoWithSize:cropRect.size.width height:cropRect.size.height videoSoure:@"giphy"];
+                    [flyer setImageTag:@"Template" Tag:nil];
+                    [flyer addGiphyWatermark];
+                    
+                    tasksAfterGiphySelect = @"play";
+                    break;
+            }
+            
+            //Delete temporary file
+            [weakSelf deleteFile:[mediaURLTemp absoluteString]];
+            
+            // Perform ui related things in main thread
+            dispatch_async( dispatch_get_main_queue(), ^{
+                [weakSelf onSelectGiphyShowLoadingIndicator:NO];
+                [weakSelf goBack];
+            });
+            
+        }];
+    }];
+    
+    cropVideo.giphyDic = [[NSMutableDictionary alloc] init];
+    [cropVideo.giphyDic setObject: [NSNumber numberWithInteger:squareWH] forKey:@"minWH"];
+    [cropVideo.giphyDic setObject: [NSNumber numberWithInteger:squareWHMax] forKey:@"maxWH"];
+    [cropVideo.giphyDic setObject: [NSNumber numberWithInteger:squareWH] forKey:@"desiredWidth"];
+    [cropVideo.giphyDic setObject: [NSNumber numberWithInteger:squareWH] forKey:@"desiredHeight"];
+    
+
+    cropVideo.url = movieUrl;
+    cropVideo.onVideoCancel = _onVideoCancel;
+    cropVideo.fromCamera = YES;
+    
+    // Pop the current view, and push the crop view.
+    NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
+    [viewControllers removeLastObject];
+    [viewControllers addObject:cropVideo];
+    [[self navigationController] pushViewController:cropVideo animated:YES];
+}
 
 /**
  * Video cropping function
@@ -311,43 +356,17 @@
     AVMutableVideoCompositionLayerInstruction *passThroughLayer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:videoTrack];
     
     // Set the transform to maintain orientation
-    if ( scale != 1.0 ) {
-        CGAffineTransform scaleTransform = CGAffineTransformMakeScale( scale, scale);
-        CGAffineTransform translateTransform = CGAffineTransformTranslate( CGAffineTransformIdentity,
+    CGAffineTransform scaleTransform = CGAffineTransformMakeScale( scale, scale);
+    CGAffineTransform translateTransform = CGAffineTransformTranslate( CGAffineTransformIdentity,
                                                                           -crop.origin.x,
                                                                           -crop.origin.y);
-        transform = CGAffineTransformConcat( transform, scaleTransform );
-        transform = CGAffineTransformConcat( transform, translateTransform);
-    }
+    transform = CGAffineTransformConcat( transform, scaleTransform );
+    transform = CGAffineTransformConcat( transform, translateTransform);
     
     [passThroughLayer setTransform:transform atTime:kCMTimeZero];
     
     passThroughInstruction.layerInstructions = @[ passThroughLayer ];
     videoComposition.instructions = @[passThroughInstruction];
-    
-    // If an image is given, then put that in the animation.
-    if ( image != nil ) {
-        
-        // Layer that merges the video and image
-        CALayer *parentLayer = [CALayer layer];
-        parentLayer.frame = CGRectMake( 0, 0, crop.size.width, crop.size.height);
-        
-        // Layer that renders the video.
-        CALayer *videoLayer = [CALayer layer];
-        videoLayer.frame = CGRectMake(0, 0, crop.size.width, crop.size.height );
-        [parentLayer addSublayer:videoLayer];
-        
-        // Layer that renders flyerly image.
-        CALayer *imageLayer = [CALayer layer];
-        imageLayer.frame = CGRectMake(0, 0, crop.size.width, crop.size.height );
-        imageLayer.contents = (id)image.CGImage;
-        [imageLayer setMasksToBounds:YES];
-        
-        [parentLayer addSublayer:imageLayer];
-        
-        // Setup the animation tool
-        videoComposition.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
-    }
     
     // Now export the movie
     AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
@@ -411,6 +430,7 @@ shouldReloadTableForSearchString:(NSString *)searchString {
         loadingOverly.backgroundColor = [UIColor whiteColor];
         loadingOverly.alpha = 0.5;
         [self.view addSubview:loadingOverly];
+        
     }
     else{
         [layerScrollView removeFromSuperview];

@@ -5328,11 +5328,11 @@
 		49F109CD192C78F6002B0CD4 /* CropVideo */ = {
 			isa = PBXGroup;
 			children = (
-				C32139D51A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib */,
 				49F109CE192C7926002B0CD4 /* CropVideoViewController.h */,
 				49F109CF192C7926002B0CD4 /* CropVideoViewController.m */,
 				49F109D0192C7926002B0CD4 /* CropVideoViewController.xib */,
 				24E31FDD1A03B398004E3ABD /* CropVideoViewController-iPhone6.xib */,
+				C32139D51A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib */,
 				49F5CA01192E11C200681C6E /* CropView.h */,
 				49F5CA02192E11C200681C6E /* CropView.m */,
 			);
