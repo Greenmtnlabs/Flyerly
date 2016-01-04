@@ -10,8 +10,8 @@
 #import "FlyerlySingleton.h"
 
 @interface CropVideoViewController (){
-    BOOL isGiphy, isSizeGreater;
-
+    BOOL isGiphy; // sets to YES if Giphy is given
+    BOOL isSizeGreater; // sets to YES if Giphy rect is greater than standard size
 }
 
 @end
@@ -145,7 +145,7 @@
         
         CGFloat newWH;
         
-        if ( player.naturalSize.width < player.naturalSize.height ){
+        if ( player.naturalSize.width < player.naturalSize.height ){ // for Portrait
             
             newWH = [self getNewWidth:[[giphyDic objectForKey:@"minWH"] integerValue]  :[[giphyDic objectForKey:@"maxWH"] integerValue] :_playerView.size.height];
             
@@ -156,8 +156,7 @@
                 isSizeGreater = YES;
             }
             
-            
-        } else {
+        } else { // for Landescape
             newWH = [self getNewWidth:[[giphyDic objectForKey:@"maxWH"] integerValue]  :[[giphyDic objectForKey:@"minWH"] integerValue] :_playerView.size.width];
         }
         _cropView.size = CGSizeMake(newWH,newWH);
@@ -193,6 +192,15 @@
     }
 }
 
+/*
+ * Determines new width/height and x/y axes
+ * @params:
+ *      originalVideoWH: CGFloat
+ *      cropXY: CGFloat
+ *      playerWH: CGFloat
+ * @return:
+ *      newChildWidth: int
+ */
 -(int)getNewWidth: (CGFloat)originalVideoWH :(CGFloat)cropXY :(CGFloat)playerWH{
     int newChildWidth = (cropXY/originalVideoWH)*playerWH;
     return newChildWidth;
