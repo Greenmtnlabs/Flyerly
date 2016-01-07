@@ -52,7 +52,7 @@
 
 -(void)applyLocalization{
     [searchTextField setPlaceholder:NSLocalizedString(@"Search contacts to share your untech time with", nil)];
-    [lblMessage setText:NSLocalizedString(@"Select contacts to inform of your untech time. Choose SMS or Phone icons.  A text will be sent or call made sharing news of your untech time.", nil)];
+    [lblMessage setText:NSLocalizedString(@"Select contacts to inform of your Untech time. Choose email, text or phone icons. An email or text will be sent or call made sharing the news of your time away from technology.", nil)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
