@@ -33,17 +33,15 @@ SocialStatusCron.setup = function(app) {
 	// Global twilio object
 	var twilio = null;
 
+	var imageHost = config.http.host;
 	// Image path
-	var imagePath = config.http.host + "/images/untech-social-share-image.jpg";
+	var imagePath = imageHost.replace(":3010", "") + "/images/untech-social-share-image.jpg";
 	
 	// Social Media Caption
 	var caption = "I just setup #untech time using the Untech app.";
 
 	// App Link URL
 	var appLinkURL = "https://itunes.apple.com/us/app/untechable/id934720123?ls=1&mt=8";
-
-	// Image path
-	var imagePath = config.http.host + "/images/untech-social-share-image.jpg";
 
     function setTimeInGlobalVars() {
 	    today = new Date();
