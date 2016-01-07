@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
@@ -30,7 +30,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="howToScreen_2.png" translatesAutoresizingMaskIntoConstraints="NO" id="x02-9l-4JM">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="howToScreen_2.png" translatesAutoresizingMaskIntoConstraints="NO" id="x02-9l-4JM">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CxC-G4-BEM">
@@ -83,7 +83,11 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="pye-rh-REz" secondAttribute="bottom" constant="13" id="1KI-It-j81"/>
                 <constraint firstItem="Hzv-7Z-gb1" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="42" id="37N-jI-8wf"/>
+                <constraint firstItem="x02-9l-4JM" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="C1i-RA-nxv"/>
+                <constraint firstAttribute="trailing" secondItem="x02-9l-4JM" secondAttribute="trailing" id="HqL-tE-OxH"/>
                 <constraint firstAttribute="centerX" secondItem="Hzv-7Z-gb1" secondAttribute="centerX" id="LuC-Hq-l4y"/>
+                <constraint firstAttribute="bottom" secondItem="x02-9l-4JM" secondAttribute="bottom" id="O1A-md-VZv"/>
+                <constraint firstItem="x02-9l-4JM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="XdI-b8-IRm"/>
                 <constraint firstItem="am0-Aj-iZR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="18" id="a3S-zT-D7W"/>
                 <constraint firstAttribute="bottom" secondItem="am0-Aj-iZR" secondAttribute="bottom" constant="10" id="bhp-ZQ-Huc"/>
                 <constraint firstAttribute="centerX" secondItem="CxC-G4-BEM" secondAttribute="centerX" id="c2C-Zd-ftD"/>

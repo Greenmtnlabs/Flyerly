@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
@@ -22,55 +22,25 @@
                     <rect key="frame" x="0.0" y="64" width="320" height="2"/>
                     <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="2" id="wiG-SP-MHV"/>
+                        <constraint firstAttribute="height" constant="2" id="jA7-of-lRZ"/>
                     </constraints>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mFg-Cr-7AC" userLabel="line2">
-                    <rect key="frame" x="0.0" y="129" width="320" height="2"/>
-                    <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="2" id="WEP-is-uRu"/>
-                    </constraints>
-                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" image="searchicon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Hew-dP-68I">
-                    <rect key="frame" x="7" y="139" width="13" height="13"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="13" id="klg-I5-nMn"/>
-                        <constraint firstAttribute="width" constant="13" id="mtf-ZW-mtN"/>
-                    </constraints>
-                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
-                </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uTQ-3O-l9t" userLabel="line3">
-                    <rect key="frame" x="0.0" y="161" width="320" height="2"/>
-                    <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="2" id="782-Bv-ica"/>
-                    </constraints>
-                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TOe-OP-XN9">
-                    <rect key="frame" x="10" y="65" width="300" height="64"/>
+                    <rect key="frame" x="10" y="65" width="300" height="78"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="64" id="uv7-Xd-w2M"/>
+                        <constraint firstAttribute="height" constant="78" id="nYy-v7-pBf"/>
                     </constraints>
-                    <string key="text">Select contacts to inform of your untech time. Choose SMS or Phone icons.  A text will be sent or call made sharing news of your untech time.</string>
+                    <string key="text">Select contacts to inform of your Untech time. Choose email, text or phone icons. An email or text will be sent or call made sharing the news of your time away from technology.</string>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="80" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Iqn-yo-yr9" userLabel="contactsTable">
-                    <rect key="frame" x="0.0" y="163" width="320" height="317"/>
+                    <rect key="frame" x="0.0" y="177" width="320" height="303"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
@@ -78,10 +48,39 @@
                         <outlet property="delegate" destination="-1" id="aYF-eN-Lj2"/>
                     </connections>
                 </tableView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search contacts to share your untech time with" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KCr-rl-5dq">
-                    <rect key="frame" x="30" y="131" width="290" height="30"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mFg-Cr-7AC" userLabel="line2">
+                    <rect key="frame" x="0.0" y="143" width="320" height="2"/>
+                    <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="3cP-sR-ESw"/>
+                        <constraint firstAttribute="height" constant="2" id="0vD-py-eMK"/>
+                    </constraints>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" image="searchicon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Hew-dP-68I">
+                    <rect key="frame" x="7" y="153" width="13" height="13"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="13" id="Xvi-LF-Feb"/>
+                    </constraints>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uTQ-3O-l9t" userLabel="line3">
+                    <rect key="frame" x="0.0" y="175" width="320" height="2"/>
+                    <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="2" id="jls-rH-Any"/>
+                    </constraints>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search contacts to share your untech time with" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KCr-rl-5dq">
+                    <rect key="frame" x="30" y="145" width="290" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="l67-w9-Vb2"/>
                     </constraints>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
@@ -93,27 +92,27 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="mFg-Cr-7AC" secondAttribute="trailing" id="C1Q-kj-57W"/>
-                <constraint firstItem="KCr-rl-5dq" firstAttribute="leading" secondItem="Hew-dP-68I" secondAttribute="trailing" constant="10" id="Hqe-t5-Vxb"/>
-                <constraint firstItem="Hew-dP-68I" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="7" id="OEr-rn-Xxx"/>
-                <constraint firstItem="Iqn-yo-yr9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="OpM-tD-HsV"/>
-                <constraint firstAttribute="trailing" secondItem="E4J-KF-baP" secondAttribute="trailing" id="RRd-CG-sAQ"/>
-                <constraint firstItem="E4J-KF-baP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="TJx-MU-mYn"/>
-                <constraint firstItem="KCr-rl-5dq" firstAttribute="top" secondItem="mFg-Cr-7AC" secondAttribute="bottom" id="ViL-2J-ijs"/>
-                <constraint firstItem="mFg-Cr-7AC" firstAttribute="top" secondItem="TOe-OP-XN9" secondAttribute="bottom" id="YKQ-H9-YAR"/>
-                <constraint firstAttribute="trailing" secondItem="KCr-rl-5dq" secondAttribute="trailing" id="ZDN-Zr-MW1"/>
-                <constraint firstAttribute="bottom" secondItem="Iqn-yo-yr9" secondAttribute="bottom" id="ZXa-eI-FVA"/>
-                <constraint firstItem="uTQ-3O-l9t" firstAttribute="top" secondItem="KCr-rl-5dq" secondAttribute="bottom" id="dgb-L7-6Gn"/>
-                <constraint firstItem="uTQ-3O-l9t" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="kGy-DH-Pex"/>
-                <constraint firstItem="mFg-Cr-7AC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="kin-X3-3ba"/>
-                <constraint firstAttribute="trailing" secondItem="Iqn-yo-yr9" secondAttribute="trailing" id="l0Y-rO-KAa"/>
-                <constraint firstAttribute="trailing" secondItem="TOe-OP-XN9" secondAttribute="trailing" constant="10" id="lfm-iK-KAA"/>
-                <constraint firstItem="Hew-dP-68I" firstAttribute="top" secondItem="mFg-Cr-7AC" secondAttribute="bottom" constant="8" id="q1C-BG-c1E"/>
-                <constraint firstAttribute="trailing" secondItem="uTQ-3O-l9t" secondAttribute="trailing" id="qwM-re-UOC"/>
-                <constraint firstItem="E4J-KF-baP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="tU1-cD-mx8"/>
-                <constraint firstItem="TOe-OP-XN9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="65" id="vV3-eU-Uv3"/>
-                <constraint firstItem="Iqn-yo-yr9" firstAttribute="top" secondItem="uTQ-3O-l9t" secondAttribute="bottom" id="vxO-Hh-XrU"/>
-                <constraint firstItem="TOe-OP-XN9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="y8w-9S-YrQ"/>
+                <constraint firstItem="E4J-KF-baP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="0qC-Xi-wfx"/>
+                <constraint firstItem="TOe-OP-XN9" firstAttribute="top" secondItem="E4J-KF-baP" secondAttribute="bottom" constant="-1" id="3dr-Nq-PuE"/>
+                <constraint firstItem="KCr-rl-5dq" firstAttribute="leading" secondItem="Hew-dP-68I" secondAttribute="trailing" constant="10" id="4VA-fu-zlB"/>
+                <constraint firstItem="Hew-dP-68I" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="7" id="5Nq-dg-lmQ"/>
+                <constraint firstItem="Iqn-yo-yr9" firstAttribute="top" secondItem="uTQ-3O-l9t" secondAttribute="bottom" id="7oB-Gf-PqP"/>
+                <constraint firstItem="KCr-rl-5dq" firstAttribute="top" secondItem="mFg-Cr-7AC" secondAttribute="bottom" id="Bkg-yx-LFN"/>
+                <constraint firstAttribute="trailing" secondItem="TOe-OP-XN9" secondAttribute="trailing" constant="10" id="GrA-Ac-vOY"/>
+                <constraint firstItem="uTQ-3O-l9t" firstAttribute="top" secondItem="KCr-rl-5dq" secondAttribute="bottom" id="JEk-IP-uL6"/>
+                <constraint firstAttribute="trailing" secondItem="uTQ-3O-l9t" secondAttribute="trailing" id="OMg-1V-ciw"/>
+                <constraint firstItem="uTQ-3O-l9t" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Q2T-Qh-nMU"/>
+                <constraint firstItem="mFg-Cr-7AC" firstAttribute="top" secondItem="TOe-OP-XN9" secondAttribute="bottom" id="QsP-zV-4rZ"/>
+                <constraint firstItem="TOe-OP-XN9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="TrS-UB-0VQ"/>
+                <constraint firstItem="Iqn-yo-yr9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="VF5-km-NbO"/>
+                <constraint firstItem="E4J-KF-baP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="XbC-xy-juO"/>
+                <constraint firstAttribute="bottom" secondItem="Iqn-yo-yr9" secondAttribute="bottom" id="Xpr-Cm-8ES"/>
+                <constraint firstItem="Hew-dP-68I" firstAttribute="top" secondItem="mFg-Cr-7AC" secondAttribute="bottom" constant="8" id="Ygf-Zt-R4j"/>
+                <constraint firstItem="mFg-Cr-7AC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="btu-NC-tSw"/>
+                <constraint firstAttribute="trailing" secondItem="mFg-Cr-7AC" secondAttribute="trailing" id="bv4-s9-GrP"/>
+                <constraint firstAttribute="trailing" secondItem="Iqn-yo-yr9" secondAttribute="trailing" id="cFu-9d-FjD"/>
+                <constraint firstAttribute="trailing" secondItem="E4J-KF-baP" secondAttribute="trailing" id="s2b-B2-3JU"/>
+                <constraint firstAttribute="trailing" secondItem="KCr-rl-5dq" secondAttribute="trailing" id="uGb-CT-d6b"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
