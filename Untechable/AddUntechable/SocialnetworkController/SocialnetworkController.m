@@ -258,7 +258,10 @@
         if( [APP_IN_MODE isEqualToString:TESTING] ){
             [self next:@"GO_TO_THANKYOU"];
         } else {
-            if( [inputSetSocialStatus.text isEqualToString:defaultStatus] || [inputSetSocialStatus.text isEqualToString:@""] ){
+            if([IN_APP_MODE isEqualToString: DISABLE]){
+                [self createUntechableAfterPaymentCheck];
+            }
+            else if( [inputSetSocialStatus.text isEqualToString:defaultStatus] || [inputSetSocialStatus.text isEqualToString:@""] ){
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(ERROR, nil)
                                                                 message:defaultStatus
                                                                delegate:nil
