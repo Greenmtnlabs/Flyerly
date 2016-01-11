@@ -487,8 +487,8 @@ UIAlertView *saveCurrentFlyerAlert;
     // Check to see if it's blank
     if([titleView.text isEqualToString:@""]) {
         // There's no text in the box.
-        [flyer setFlyerTitle:@"Flyer"];
-        topTitleLabel.text = @"Flyer";
+        [flyer setFlyerTitle:@"Untitled"];
+        topTitleLabel.text = @"Untitled";
     }
     
     
