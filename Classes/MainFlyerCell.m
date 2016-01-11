@@ -26,7 +26,7 @@
     
     // If flyer has no title, set this text
     if([flyerTitle isEqualToString:@""]){
-        flyerTitle = @"Add Title";
+        flyerTitle = @"Untitled";
     }
     
     [self.lblFlyerTitle setText: flyerTitle];
