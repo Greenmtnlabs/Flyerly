@@ -848,9 +848,13 @@
     
     [_timeDurationPicker setHidden:YES];
     [_doneButtonView setHidden:YES];
-    [self changeNavigation:@"ON_FINISH"];
-    
-    [self checkPayment];
+
+    if([IN_APP_MODE isEqualToString: DISABLE]){
+        [self createUntechableAfterPaymentCheck];
+    } else if([IN_APP_MODE isEqualToString: ENABLE]){
+        [self changeNavigation:@"ON_FINISH"];
+        [self checkPayment];
+    }
 }
 
 /**

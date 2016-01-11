@@ -52,6 +52,8 @@
 #define UPDATE @"UPDATE"
 
 #define TESTING @"TESTING"
+#define DISABLE @"DISABLE"
+#define ENABLE @"ENABLE"
 
 #define LOCALHOST @"LOCALHOST"
 #define DEVELOPMENT @"DEVELOPMENT"
@@ -77,7 +79,7 @@
 //PAID PRODUCTS
 #define PRODUCT_UntechableMessage @"com.greenmtnlabs.UntechableMessage"
 
-
+#define IN_APP_MODE DISABLE
 
 #define APP_IN_MODE PRODUCTION
 
