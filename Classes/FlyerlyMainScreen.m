@@ -985,7 +985,10 @@ id lastShareBtnSender;
         row = gesture.view.tag; //will get it from UITapGestureRecognizer tag
     }
     index = row;
-
+    
+    // To move cell to top
+    [self.tView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    
     if(row > (ADD_AFTER_FLYERS-1)){
         row = row - floor(row/ADD_AFTER_FLYERS);
     }
