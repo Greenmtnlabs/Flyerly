@@ -111,7 +111,12 @@ UIAlertView *saveCurrentFlyerAlert;
 
 - (void)viewDidAppear:(BOOL)animated{
     
-    [titleView becomeFirstResponder];
+    if([titleView.text isEqualToString:@""]){
+        [titleView becomeFirstResponder];
+    } else if( [descriptionView.text isEqualToString:@""] ){
+        [descriptionView becomeFirstResponder];
+    }
+    
 }
 
 //Set user input value in class level variable.
