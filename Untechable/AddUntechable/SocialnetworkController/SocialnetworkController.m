@@ -260,25 +260,24 @@
         } else {
             if([IN_APP_MODE isEqualToString: DISABLE]){
                 [self createUntechableAfterPaymentCheck];
-            }
-            else if( [inputSetSocialStatus.text isEqualToString:defaultStatus] || [inputSetSocialStatus.text isEqualToString:@""] ){
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(ERROR, nil)
-                                                                message:defaultStatus
-                                                               delegate:nil
-                                                      cancelButtonTitle:NSLocalizedString(@"Close", nil)
-                                                      otherButtonTitles: nil];
-                [alert show];
-            } else{
-                [self changeNavigation:@"ON_FINISH"];
-                
-                [self storeScreenVarsInDic];
-                
-                [self checkPayment];
+            } else if([IN_APP_MODE isEqualToString: ENABLE]){
+                if( [inputSetSocialStatus.text isEqualToString:defaultStatus] || [inputSetSocialStatus.text isEqualToString:@""] ){
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(ERROR, nil)
+                                                                    message:defaultStatus
+                                                                   delegate:nil
+                                                          cancelButtonTitle:NSLocalizedString(@"Close", nil)
+                                                          otherButtonTitles: nil];
+                    [alert show];
+                } else{
+                    [self changeNavigation:@"ON_FINISH"];
+                    
+                    [self storeScreenVarsInDic];
+                    
+                    [self checkPayment];
+                }
             }
         }
-             
     }
-
 }
 
 // Checks if we have an internet connection or not
