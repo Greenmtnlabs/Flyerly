@@ -848,9 +848,14 @@
     
     [_timeDurationPicker setHidden:YES];
     [_doneButtonView setHidden:YES];
-    [self changeNavigation:@"ON_FINISH"];
+
+    // Uncomment these two lines if you want to apply In-App Purchase
+    // and comment third one line
     
-    [self checkPayment];
+    //    [self changeNavigation:@"ON_FINISH"];
+    //    [self checkPayment];
+    
+    [self createUntechableAfterPaymentCheck];
 }
 
 /**
