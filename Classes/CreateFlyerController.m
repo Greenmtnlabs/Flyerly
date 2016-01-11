@@ -163,6 +163,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     } else {
         titleLabel.text = @"Untitled";
     }
+    // to add click event on Label to open share panel
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openPanel)];
+    tapGestureRecognizer.numberOfTapsRequired = 1;
+    [titleLabel addGestureRecognizer:tapGestureRecognizer];
+    titleLabel.userInteractionEnabled = YES;
     
     //245-feature-in-create-screen-when-user-is-creating-brand-new-flyer-have-the-background-button-selected-for-them-initially
     if( isNewFlyer ){
