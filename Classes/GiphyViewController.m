@@ -386,8 +386,12 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     // hiding the keyboard
     [searchBar resignFirstResponder];
+    
+    // To replace " " with '%20'
+    NSString * searchString = [searchBar.text stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    
     //send search giphies request
-    [self loadGiphyImages:[NSString stringWithFormat:@"http://api.giphy.com/v1/gifs/search?api_key=%@&q=%@",giphyApiKey,searchBar.text]];
+    [self loadGiphyImages:[NSString stringWithFormat:@"http://api.giphy.com/v1/gifs/search?api_key=%@&q=%@",giphyApiKey,searchString]];
 }
 
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller
