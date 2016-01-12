@@ -250,6 +250,12 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
  * Save in gallary after checking userdefaults, without data
  */
 -(void)saveIntoGallery{
+    
+    // If a flyer is Private, it will not be saved in Camera Roll
+    if ([[self getShareType] isEqualToString:@"Private"]){
+        return;
+    }
+    
     // HERE WE CHECK USER ALLOWED TO SAVE IN GALLERY FROM SETTING
     if([[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"]){
         
