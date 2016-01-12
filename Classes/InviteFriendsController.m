@@ -484,6 +484,7 @@ const int CONTACTS_TAB = 0;
             for(CFIndex i = 0; i < ABMultiValueGetCount(phones); i++) {
                 
                 mobileLabel = (NSString*)CFBridgingRelease(ABMultiValueCopyLabelAtIndex(phones, i));
+                
                 if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
                 {
                     model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
@@ -505,6 +506,10 @@ const int CONTACTS_TAB = 0;
                     model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
                     [contactsArray addObject:model];
                     break ;
+                } else{
+                    model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
+                    [contactsArray addObject:model];
+                    break;
                 }
             }
         
