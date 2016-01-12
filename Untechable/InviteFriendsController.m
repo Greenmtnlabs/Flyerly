@@ -426,6 +426,10 @@ const int CONTACTS_TAB = 0;
                     model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
                     [contactsArray addObject:model];
                     break ;
+                }else {
+                    model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
+                    [contactsArray addObject:model];
+                    break;
                 }
             }
         
