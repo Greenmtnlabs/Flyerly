@@ -177,15 +177,15 @@ SocialStatusCron.setup = function(app) {
 		}
 	    var totalDaysHours = calculateHoursDays(eventObj.startTime, eventObj.endTime);
 		//SMS body
-		var smsBody = eventObj.userName + " is untech for " + totalDaysHours + " with this reason "; 
-
+		var smsBody = eventObj.userName + " is taking untech time for " + totalDaysHours + " with this reason: ";
+		
 		//Call body
 		var callBody =  eventObj.userName + " is away from technology for "  + totalDaysHours + " with this reason: " ;
 
 		//Untech Text and URL 
 		var untechCallText = "Take Untech time today and Reconnect with life. Download at www dot Go Untech dot com."; 
 
-		var untechSMSText = "Reconnect with life at http://www.unte.ch today."; 
+		var untechSMSText = ". Reconnect with life at http://www.unte.ch today."; 
 
 		for (var i in contacts) {
 			var smsText =   smsBody + " " + contacts[i].customTextForContact;
