@@ -661,8 +661,7 @@ id lastShareBtnSender;
                 
                 // Adding UITapGestureRecognizer on UILable
                 UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onShare:)];
-                tap.view.tag = indexPath.row;
-                
+                cell.lblFlyerTitle.tag = indexPath.row;
                 cell.lblFlyerTitle.userInteractionEnabled = YES;
                 [tap setNumberOfTapsRequired:1];
                 [cell.lblFlyerTitle addGestureRecognizer:tap];
