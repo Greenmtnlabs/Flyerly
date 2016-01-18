@@ -661,7 +661,7 @@ id lastShareBtnSender;
                 
                 // Adding UITapGestureRecognizer on UILable
                 UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onShare:)];
-                tap.view.tag = indexPath.row;
+                cell.lblFlyerTitle.tag = indexPath.row;
                 cell.lblFlyerTitle.userInteractionEnabled = YES;
                 [tap setNumberOfTapsRequired:1];
                 [cell.lblFlyerTitle addGestureRecognizer:tap];
@@ -678,10 +678,10 @@ id lastShareBtnSender;
                 [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
                 cell.shareBtn.tag = indexPath.row;
                 [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
-                
+              
                 // Adding UITapGestureRecognizer on UILable
                 UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onShare:)];
-                tap.view.tag = indexPath.row;
+                cell.lblFlyerTitle.tag = indexPath.row;
                 cell.lblFlyerTitle.userInteractionEnabled = YES;
                 [tap setNumberOfTapsRequired:1];
                 [cell.lblFlyerTitle addGestureRecognizer:tap];
@@ -710,10 +710,7 @@ id lastShareBtnSender;
             [cell addSubview:self.bannerAdd[ addRow ]];
             return cell;
         }
-        
-        
         [cell addSubview: noAdsImage];
-        
         return cell;
     }
 }
@@ -985,7 +982,10 @@ id lastShareBtnSender;
         row = gesture.view.tag; //will get it from UITapGestureRecognizer tag
     }
     index = row;
-
+    
+    // To move cell to top
+    [self.tView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    
     if(row > (ADD_AFTER_FLYERS-1)){
         row = row - floor(row/ADD_AFTER_FLYERS);
     }

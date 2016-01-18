@@ -161,8 +161,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     if ( ![title isEqualToString:@""] ) {
         titleLabel.text = title;
     } else {
-        titleLabel.text = @"Flyer";
+        titleLabel.text = @"Untitled";
     }
+    // to add click event on Label to open share panel
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openPanel)];
+    tapGestureRecognizer.numberOfTapsRequired = 1;
+    [titleLabel addGestureRecognizer:tapGestureRecognizer];
+    titleLabel.userInteractionEnabled = YES;
     
     //245-feature-in-create-screen-when-user-is-creating-brand-new-flyer-have-the-background-button-selected-for-them-initially
     if( isNewFlyer ){
@@ -4478,7 +4483,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         shareviewcontroller.helpButton = helpButton;
         shareviewcontroller.backButton = backButton;
         shareviewcontroller.saveToGallaryReqBeforeSharing = saveToGallaryReqBeforeSharing;
-        if( [shareviewcontroller.titleView.text isEqualToString:@"Flyer"] ) {
+        if( [shareviewcontroller.titleView.text isEqualToString:@"Untitled"] ) {
             shareviewcontroller.titleView.text = [flyer getFlyerTitle];
         }
         

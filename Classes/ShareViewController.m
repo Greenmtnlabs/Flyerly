@@ -111,7 +111,12 @@ UIAlertView *saveCurrentFlyerAlert;
 
 - (void)viewDidAppear:(BOOL)animated{
     
-    [titleView becomeFirstResponder];
+    if([titleView.text isEqualToString:@""]){
+        [titleView becomeFirstResponder];
+    } else if( [descriptionView.text isEqualToString:@""] ){
+        [descriptionView becomeFirstResponder];
+    }
+    
 }
 
 //Set user input value in class level variable.
@@ -480,13 +485,10 @@ UIAlertView *saveCurrentFlyerAlert;
     [flyer setFlyerTitle:titleView.text];
     topTitleLabel.text = titleView.text;
     // Check to see if it's blank
-    if([titleView.text isEqualToString:@""]) {
+    if([[titleView.text stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]] isEqualToString:@""]) {
         // There's no text in the box.
-        [flyer setFlyerTitle:@"Flyer"];
-        topTitleLabel.text = @"Flyer";
+        titleView.placeholder = @"Flyerly Title (e.g. \"Parker's Party\")";
     }
-    
-    
 }
 
 

@@ -424,7 +424,6 @@ const int CONTACTS_TAB = 0;
 
 }
 
-
 /*
  * Mehod called to get contacts
  */
@@ -437,13 +436,10 @@ const int CONTACTS_TAB = 0;
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(m_addressbook);
     CFIndex nPeople = ABAddressBookGetPersonCount(m_addressbook);
     
-    for (int i=0;i < nPeople;i++) {
+    ContactsModel *model;
+    ContactsModel *modelForEmail;
     
-        ContactsModel *model = [[ContactsModel alloc] init];
-        ContactsModel *modelForEmail = [[ContactsModel alloc] init];
-        
-        model.others = @"";
-        modelForEmail.others = @"";
+    for (int i=0;i < nPeople;i++) {
         
         ABRecordRef ref = CFArrayGetValueAtIndex(allPeople,i);
         
@@ -459,63 +455,76 @@ const int CONTACTS_TAB = 0;
         if(!lastName)
             lastName = (CFStringRef) @"";
         
-        model.name = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
-        modelForEmail.name = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
-
         // For contact picture
         UIImage *contactPicture;
         
-        if (ref != nil && ABPersonHasImageData(ref)) {
-            if ( &ABPersonCopyImageDataWithFormat != nil ) {
-                // iOS >= 4.1
-                contactPicture = [UIImage imageWithData:(NSData *)CFBridgingRelease(ABPersonCopyImageDataWithFormat(ref, kABPersonImageFormatThumbnail))];
-                model.img = contactPicture;
-                modelForEmail.img = contactPicture;
-            } else {
-                // iOS < 4.1
-                contactPicture = [UIImage imageWithData:(NSData *)CFBridgingRelease(ABPersonCopyImageData(ref))];
-                model.img = contactPicture;
-                modelForEmail.img = contactPicture;
+        //For Phone number
+        NSString* mobileLabel;
+        for(CFIndex i = 0; i < ABMultiValueGetCount(phones); i++) {
+            model = [[ContactsModel alloc] init];
+            model.others = @"";
+            model.name = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+            
+            // For Picture
+            if (ref != nil && ABPersonHasImageData(ref)) {
+                if ( &ABPersonCopyImageDataWithFormat != nil ) {
+                    // iOS >= 4.1
+                    contactPicture = [UIImage imageWithData:(NSData *)CFBridgingRelease(ABPersonCopyImageDataWithFormat(ref, kABPersonImageFormatThumbnail))];
+                    model.img = contactPicture;
+                } else {
+                    // iOS < 4.1
+                    contactPicture = [UIImage imageWithData:(NSData *)CFBridgingRelease(ABPersonCopyImageData(ref))];
+                    model.img = contactPicture;
+                }
+            }
+            
+            mobileLabel = (NSString*)CFBridgingRelease(ABMultiValueCopyLabelAtIndex(phones, i));
+            if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel]) {
+                model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
+                [contactsArray addObject:model];
+                
+            }else if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel]) {
+                model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
+                [contactsArray addObject:model];
+                
+            }else if ([mobileLabel isEqualToString:(NSString*)kABHomeLabel]) {
+                model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
+                [contactsArray addObject:model];
+                
+            }else if ([mobileLabel isEqualToString:(NSString*)kABWorkLabel]) {
+                model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
+                [contactsArray addObject:model];
+                
+            }else {
+                model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
+                [contactsArray addObject:model];
+                
             }
         }
-
-            //For Phone number
-            NSString* mobileLabel;
-            for(CFIndex i = 0; i < ABMultiValueGetCount(phones); i++) {
-                
-                mobileLabel = (NSString*)CFBridgingRelease(ABMultiValueCopyLabelAtIndex(phones, i));
-                if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
-                {
-                    model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                    [contactsArray addObject:model];
-                    break ;
-                }
-                else if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel])
-                {
-                    model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                    [contactsArray addObject:model];
-                    break ;
-                }else if ([mobileLabel isEqualToString:(NSString*)kABHomeLabel])
-                {
-                    model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                    [contactsArray addObject:model];
-                    break ;
-                }else if ([mobileLabel isEqualToString:(NSString*)kABWorkLabel])
-                {
-                    model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                    [contactsArray addObject:model];
-                    break ;
+        
+        // For Email
+        for(CFIndex i = 0; i < ABMultiValueGetCount(emails); i++) {
+            modelForEmail = [[ContactsModel alloc] init];
+            modelForEmail.others = @"";
+            modelForEmail.name = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+            
+            // For Picture
+            if (ref != nil && ABPersonHasImageData(ref)) {
+                if ( &ABPersonCopyImageDataWithFormat != nil ) {
+                    // iOS >= 4.1
+                    contactPicture = [UIImage imageWithData:(NSData *)CFBridgingRelease(ABPersonCopyImageDataWithFormat(ref, kABPersonImageFormatThumbnail))];
+                    modelForEmail.img = contactPicture;
+                } else {
+                    // iOS < 4.1
+                    contactPicture = [UIImage imageWithData:(NSData *)CFBridgingRelease(ABPersonCopyImageData(ref))];
+                    modelForEmail.img = contactPicture;
                 }
             }
-        
-        
-            // For Email
-            for(CFIndex i = 0; i < ABMultiValueGetCount(emails); i++) {
-                modelForEmail.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(emails, i));
-                [emailsArray addObject:modelForEmail];
-                break;
-            }
-         }
+            
+            modelForEmail.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(emails, i));
+            [emailsArray addObject:modelForEmail];
+        }
+    }
     
     // Reload table data after all the contacts get loaded
     contactBackupArray = nil;
@@ -528,6 +537,7 @@ const int CONTACTS_TAB = 0;
     [self hideLoadingIndicator];
     
 }
+
 
 
 #pragma mark  Facebook Contact
