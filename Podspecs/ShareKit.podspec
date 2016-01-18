@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name          = 'ShareKit'
   s.version       = '4.0.4'
-  s.platform      = :ios, '6.0'
+  s.platform      = :ios, '7.0'
   s.summary       = 'Drop in sharing features for all iPhone and iPad apps.'
   s.homepage      = 'http://getsharekit.com/'
   s.author        = 'ShareKit Community'
@@ -39,11 +39,6 @@ Pod::Spec.new do |s|
     evernote.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2' }
   end
 
-  s.subspec 'Facebook' do |facebook|
-    facebook.source_files   = 'Classes/ShareKit/Sharers/Services/Facebook/**/*.{h,m}'
-    facebook.dependency 'Facebook-iOS-SDK', '~> 3.2'
-    facebook.dependency 'ShareKit/Core'
-  end
 
   s.subspec 'Flickr' do |flickr|
     flickr.source_files = 'Classes/ShareKit/Sharers/Services/Flickr/SHK*.{h,m}'
@@ -161,6 +156,8 @@ Pod::Spec.new do |s|
       whatsapp.source_files = 'Classes/ShareKit/Sharers/Services/WhatsApp/**/*.{h,m}'
       whatsapp.dependency 'ShareKit/Core'
   end
+
+  
 
 ### one note subspec removed because https://github.com/GeLoInc/GeLoSDK-iOS/issues/2
 
