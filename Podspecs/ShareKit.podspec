@@ -39,6 +39,11 @@ Pod::Spec.new do |s|
     evernote.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2' }
   end
 
+  s.subspec 'Facebook' do |facebook|
+    facebook.source_files   = 'Classes/ShareKit/Sharers/Services/Facebook/**/*.{h,m}'
+    facebook.dependency 'Facebook-iOS-SDK', '~> 3.2'
+    facebook.dependency 'ShareKit/Core'
+  end
 
   s.subspec 'Flickr' do |flickr|
     flickr.source_files = 'Classes/ShareKit/Sharers/Services/Flickr/SHK*.{h,m}'
@@ -67,12 +72,12 @@ Pod::Spec.new do |s|
     kippt.dependency 'ShareKit/Core'
   end
 
-   s.subspec 'Plurk' do |plurk|
+  s.subspec 'Plurk' do |plurk|
     plurk.source_files = 'Classes/ShareKit/Sharers/Services/Plurk/**/*.{h,m}'
     plurk.dependency 'ShareKit/Core'
   end
 
-   s.subspec 'Pocket' do |pocket|
+  s.subspec 'Pocket' do |pocket|
     pocket.source_files = 'Classes/ShareKit/Sharers/Services/Pocket/**/*.{h,m}'
     pocket.dependency 'ShareKit/Core'
     pocket.dependency 'PocketAPI', '~> 1.0.2'
