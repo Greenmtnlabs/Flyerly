@@ -64,12 +64,14 @@ To run Flyerly on OS X 10.10.5 and Xcode 7.1
 
 1. Paste the following code in "Pods/Facebook-iOS-SDK/FBSDKMacros.h":
 
-#define FBSDK_NO_DESIGNATED_INITIALIZER() \
+#
+define FBSDK_NO_DESIGNATED_INITIALIZER() \
 @throw [NSException exceptionWithName:NSInvalidArgumentException \
                                reason:[NSString stringWithFormat:@"unrecognized selector sent to instance %p", self] \
                              userInfo:nil]
 
-#define FBSDK_NOT_DESIGNATED_INITIALIZER(DESIGNATED_INITIALIZER) \
+#
+define FBSDK_NOT_DESIGNATED_INITIALIZER(DESIGNATED_INITIALIZER) \
 @throw [NSException exceptionWithName:NSInvalidArgumentException \
                                reason:[NSString stringWithFormat:@"Please use the designated initializer [%p %@]", \
                                        self, \
