@@ -187,7 +187,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     [SHKConfiguration sharedInstanceWithConfigurator:configurator];
 
     // Crittercism for crash reports.
-    //[Crittercism enableWithAppID:[flyerConfigurator crittercismAppId]];
+    [Crittercism enableWithAppID:[flyerConfigurator crittercismAppId]];
     
     // Setup paypal
     [PayPalMobile initializeWithClientIdsForEnvironments:
