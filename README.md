@@ -62,7 +62,7 @@ Reports need to be emailed to the QA team
 To run Flyerly on OS X 10.10.5 and Xcode 7.1
 --------------------------------------------
 
-1. Paste the following code in "Pods/FBSDKCoreKit/FBSDKMacros.h":
+1. Paste the following code in "Pods/Facebook-iOS-SDK/FBSDKMacros.h":
 
 #define FBSDK_NO_DESIGNATED_INITIALIZER() \
 @throw [NSException exceptionWithName:NSInvalidArgumentException \
@@ -76,11 +76,9 @@ To run Flyerly on OS X 10.10.5 and Xcode 7.1
                                        NSStringFromSelector(@selector(DESIGNATED_INITIALIZER))] \
                              userInfo:nil]
 
-2. Delete "libCrittercism_vx.a" from Linked Frameworks and Libraries.
+2. Set "iOS 7.0 and Later" in "Builds for" from Utility Area of all those .xibs that are for older iOS.
 
-3. Set "iOS 7.0 and Later" in "Builds for" from Utility Area of all those .xibs that are for older iOS.
-
-4. Set "Enable Bitcode" to "No" in Build Settings > Build Options
+3. Set "Enable Bitcode" to "No" in Build Settings > Build Options
 
 ### Release History
 
