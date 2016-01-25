@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name          = 'ShareKit'
   s.version       = '4.0.4'
-  s.platform      = :ios, '6.0'
+  s.platform      = :ios, '7.0'
   s.summary       = 'Drop in sharing features for all iPhone and iPad apps.'
   s.homepage      = 'http://getsharekit.com/'
   s.author        = 'ShareKit Community'
@@ -72,12 +72,12 @@ Pod::Spec.new do |s|
     kippt.dependency 'ShareKit/Core'
   end
 
-   s.subspec 'Plurk' do |plurk|
+  s.subspec 'Plurk' do |plurk|
     plurk.source_files = 'Classes/ShareKit/Sharers/Services/Plurk/**/*.{h,m}'
     plurk.dependency 'ShareKit/Core'
   end
 
-   s.subspec 'Pocket' do |pocket|
+  s.subspec 'Pocket' do |pocket|
     pocket.source_files = 'Classes/ShareKit/Sharers/Services/Pocket/**/*.{h,m}'
     pocket.dependency 'ShareKit/Core'
     pocket.dependency 'PocketAPI', '~> 1.0.2'

@@ -33,7 +33,8 @@
 #import "UIPlaceHolderTextView.h"
 #import "YouTubeSubClass.h"
 #import "CreateFlyerController.h"
-#import "FBSDKSharing.h"
+#import <FBSDKShareKit/FBSDKSharing.h>
+
 #import "CreateFlyerController.h"
 #import "FlyerlyMainScreen.h"
 
