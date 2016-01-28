@@ -123,7 +123,7 @@
     lblUntechTip.text = NSLocalizedString(@"Untech Tip: 'Untech Now' is for setting quick moments away from technology. 'Untech Custom' is for setting a more specific long-term period.", nil);
     
     // label to show message to user
-    lblMessage.text = NSLocalizedString(@"Choose the networks you would like to inform every time you are untech. These will be pre-selected for future Untech Now moments.", nil);
+    lblMessage.text = NSLocalizedString(@"Choose the networks you like to inform every time you untech. These will be pre-selected for future Untech Now moments.", nil);
 }
 
 // Custom functions

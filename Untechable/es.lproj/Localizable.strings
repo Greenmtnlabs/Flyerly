@@ -170,7 +170,7 @@
 "Enter default status" = "Introduzca estado por defecto";
 "Close" = "Cerrar";
 
-"Choose the networks you would like to inform every time you are untech. These will be pre-selected for future Untech Now moments." = "Elija las redes que le gustaría informar cada vez que están untech. Estos serán pre-seleccionados para futuras Untech Ahora momentos.";
+"Choose the networks you like to inform every time you untech. These will be pre-selected for future Untech Now moments." = "Elija las redes que le gustan a informar cada vez que Unitech. Estos serán pre-seleccionados para futuros momentos Unitech ahora.";
 
 "The above message will be posted on %@ to the networks you have selected." = "El mensaje anterior se publicará en %@ a las redes que ha seleccionado.";
 
@@ -207,7 +207,7 @@
 "Select 'Untech Now' using your pre-selected settings (what you'll be doing, who to inform & for how long)." = "Seleccione 'Untech Ahora' usando la configuración de preseleccionados (lo que va a hacer, que para informar y para cuánto tiempo).";
 "Select 'Untech Custom' to manually choose what you'll be doing during your untechable período of time & who you'd like to inform." = "Seleccione 'Untech personalizada' para elegir manualmente lo que va a hacer durante su período untechable de tiempo y que desea informar.";
 
-"Once you've completed your Untech selection, go enjoy your time away from technology. Untech & reconnect with life. Don't forget to invite others to untech so thay can do the same. Namaste!" = "Una vez que haya completado su selección Untech, vaya disfrutar de su tiempo fuera de la tecnología. Untech y vuelva a conectar con la vida. No te olvides de invitar a otros a untech pues creían puede hacer lo mismo. Namaste!";
+"Once you've completed your Untech selection, go enjoy your time away from technology. Untech & reconnect with life. Don't forget to invite others to untech so they can do the same. Namaste!" = "Una vez que haya completado su selección Unitech, vaya disfrutar de su tiempo fuera de la tecnología. Unitech y vuelva a conectar con la vida. No te olvides de invitar a otros a untech para que puedan hacer lo mismo. Namaste!";
 
 "DONE" = "HECHO";
 "next " = "siguiente ";
