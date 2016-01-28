@@ -170,7 +170,7 @@
 "Enter default status" = "Introduzca estado por defecto";
 "Close" = "Cerrar";
 
-"Choose the networks you would like to inform every time you are untech. These will be pre-selected for future Untech Now moments." = "Elija las redes que le gustaría informar cada vez que están untech. Estos serán pre-seleccionados para futuras Untech Ahora momentos.";
+"Choose the networks you like to inform every time you untech. These will be pre-selected for future Untech Now moments." = "Elija las redes que le gustan a informar cada vez que Unitech. Estos serán pre-seleccionados para futuros momentos Unitech ahora.";
 
 "The above message will be posted on %@ to the networks you have selected." = "El mensaje anterior se publicará en %@ a las redes que ha seleccionado.";
 
