@@ -587,6 +587,7 @@
         BOOL found = NO;
         for (int j = 0; j< untechable.customizedContactsForCurrentSession.count; j++) {
             ContactsCustomizedModal *sessionModel = untechable.customizedContactsForCurrentSession[j];
+            sessionModel.customTextForContact = untechable.spendingTimeTxt;
             
             if( [sessionModel.contactName isEqualToString:mobileContModel.contactName] ) {
                 mobileContModel = [self mapSingleSessionModelToSingleMobileModel:mobileContModel sessionModel:sessionModel];
