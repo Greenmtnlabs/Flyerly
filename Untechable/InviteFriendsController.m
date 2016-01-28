@@ -13,8 +13,8 @@
 #import <Parse/Parse.h>
 #import "SHKTextMessage.h"
 #import "SHKConfiguration.h"
-#import "FBRequest.h"
-#import "FacebookSDK.h"
+//#import "FBRequest.h"
+//#import "FacebookSDK.h"
 #import "SHKiOSSharer.h"
 #import "SHKiOSTwitter.h"
 #import "SHKSharer.h"
