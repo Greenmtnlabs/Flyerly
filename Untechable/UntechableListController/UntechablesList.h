@@ -11,7 +11,7 @@
 #import "Reachability.h"
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
-#import "Flurry.h"
+#import "FlurryLogging.h"
 
 
 @interface UntechablesList : UIViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate, MFMailComposeViewControllerDelegate> {
@@ -22,6 +22,7 @@
     Reachability *internetReachable;
     IBOutlet UIButton *btnUntechNow;
     IBOutlet UIButton *btnUntechCustom;
+    FlurryLogging *flurryLogging;
 }
 
 @property(nonatomic,strong) IBOutlet UITableView *untechablesTable;

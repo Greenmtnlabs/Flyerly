@@ -11,6 +11,7 @@
 #import "BSKeyboardControls.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "Reachability.h"
+#import "FlurryLogging.h"
 
 @interface SocialnetworkController : UIViewController < UITextViewDelegate , BSKeyboardControlsDelegate > {
     
@@ -19,6 +20,8 @@
     UIButton *backButton;
     UIButton *finishButton;
     Reachability *internetReachable;
+    FlurryLogging *flurryLogging;
+
 }
 
 //Properties

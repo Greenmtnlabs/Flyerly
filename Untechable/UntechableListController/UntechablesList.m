@@ -17,6 +17,7 @@
 #import "RSetUntechable.h"
 #import "UserPurchases.h"
 #import "InviteFriendsController.h"
+#import "FlurryLogging.h"
 
 
 @interface UntechablesList () {
@@ -938,7 +939,8 @@
             else{
                 dispatch_async( dispatch_get_main_queue(), ^{
                     [self changeNavigation:@"ON_FINISH_SUCCESS"];
-                    [self untechCreationFlurryLog];
+                    flurryLogging = [[FlurryLogging alloc] init];
+                    [flurryLogging untechCreationFlurryLog:@"Untech_Now" untechableModel:untechable];
                     [self goToThankyouScreen];
                 });
             }
@@ -1073,47 +1075,5 @@
         }
     }
 }
-
-
-/*
- * Method to log Flurry events
- * @params:
- *      void
- * @return:
- *      void
- */
--(void)untechCreationFlurryLog{
-    
-    NSString *fbSharing = ([untechable.fbAuth isEqualToString:@""] && [untechable.fbAuthExpiryTs isEqualToString:@""]) ? @"NO" : @"YES";
-    NSString *twitterSharing = ([untechable.twitterAuth isEqualToString:@""] && [untechable.twOAuthTokenSecret isEqualToString:@""]) ? @"NO" : @"YES";
-    NSString *linkedInSharing = [untechable.linkedinAuth isEqualToString:@""] ? @"NO" : @"YES";
-    
-    NSString *duration = [untechable calculateHoursDays:untechable.startDate  endTime: untechable.endDate];
-    
-    NSMutableArray *arr = [untechable.commonFunctions checkCallSMSEmail:untechable.customizedContactsForCurrentSession];
-    
-    NSMutableDictionary *untechParams = [[NSMutableDictionary alloc] init];
-    
-    [untechParams setValue:@"Untech_Now" forKey:@"Type"];
-    [untechParams setValue:untechable.spendingTimeTxt forKey:@"Title"];
-    [untechParams setValue:[untechable.commonFunctions convertTimestampToNSDate:untechable.startDate] forKey:@"Start_DateTime"];
-    [untechParams setValue:[untechable.commonFunctions convertTimestampToNSDate:untechable.endDate] forKey:@"End_DateTime"];
-    
-    [untechParams setValue:arr[0] forKey:@"Send_Email"];
-    [untechParams setValue:arr[1] forKey:@"Send_Call"];
-    [untechParams setValue:arr[2] forKey:@"Send_SMS"];
-    
-    [untechParams setValue:fbSharing forKey:@"Facebook_Sharing"];
-    [untechParams setValue:twitterSharing forKey:@"Twitter_Sharing"];
-    [untechParams setValue:linkedInSharing forKey:@"LinkedIn_Sharing"];
-    
-    [untechParams setValue:[NSDate date] forKey:@"Creation_Time"];
-    
-    [untechParams setValue:duration forKey:@"Untech_Duration"];
-    
-    [Flurry logEvent:@"Untech_Creation" withParameters:untechParams];
-
-}
-
 
 @end
