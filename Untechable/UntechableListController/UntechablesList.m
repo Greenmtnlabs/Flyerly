@@ -476,6 +476,8 @@
     else{
         dispatch_async( dispatch_get_main_queue(), ^{
             [self changeNavigation:@"ON_FINISH_SUCCESS"];
+            flurryLogging = [[FlurryLogging alloc] init];
+            [flurryLogging untechDeletionFlurryLog: untechable];
             [self deleteUntechable:indexToremoveOnSucess Section:section];
         });
     }
@@ -862,6 +864,9 @@
  * navigate to ThankyouController screen when untech is created successfully
  */
 -( void ) goToThankyouScreen {
+    
+    flurryLogging = [[FlurryLogging alloc] init];
+    [flurryLogging untechCreationFlurryLog:@"Untech_Now" untechableModel:untechable];
     ThankyouController *thankyouScreen = [[ThankyouController alloc] init];
     thankyouScreen.untechable = untechable;
     [self.navigationController pushViewController:thankyouScreen animated:YES];
@@ -939,8 +944,6 @@
             else{
                 dispatch_async( dispatch_get_main_queue(), ^{
                     [self changeNavigation:@"ON_FINISH_SUCCESS"];
-                    flurryLogging = [[FlurryLogging alloc] init];
-                    [flurryLogging untechCreationFlurryLog:@"Untech_Now" untechableModel:untechable];
                     [self goToThankyouScreen];
                 });
             }
