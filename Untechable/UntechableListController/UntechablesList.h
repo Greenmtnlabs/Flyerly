@@ -11,6 +11,8 @@
 #import "Reachability.h"
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
+#import "Flurry.h"
+
 
 @interface UntechablesList : UIViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate, MFMailComposeViewControllerDelegate> {
     UIButton *btnInvite;

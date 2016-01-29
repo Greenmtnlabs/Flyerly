@@ -823,6 +823,8 @@
 
 - (IBAction)untechNowClick:(id)sender {
     
+    [self untechCreationFlurryLog];
+    
     self.doneButtonView.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
     // changes the "CLOSE" button text color to black
     [_doneButtonView setTitle:NSLocalizedString(TITLE_DONE_TXT, nil) forState:normal];
@@ -848,7 +850,7 @@
     
     [_timeDurationPicker setHidden:YES];
     [_doneButtonView setHidden:YES];
-
+   
     if([IN_APP_MODE isEqualToString: DISABLE]){
         [self createUntechableAfterPaymentCheck];
     } else if([IN_APP_MODE isEqualToString: ENABLE]){
@@ -938,6 +940,7 @@
             else{
                 dispatch_async( dispatch_get_main_queue(), ^{
                     [self changeNavigation:@"ON_FINISH_SUCCESS"];
+                    //[self untechCreationFlurryLog];
                     [self goToThankyouScreen];
                 });
             }
@@ -1072,4 +1075,35 @@
         }
     }
 }
+
+-(void)untechCreationFlurryLog{
+    
+    NSString *fbSharing = [untechable.fbAuth isEqualToString:@""] ? @"NO" : @"YES";
+    NSString *twitterSharing = [untechable.twitterAuth isEqualToString:@""] ? @"NO" : @"YES";
+    NSString *linkedInSharing = [untechable.linkedinAuth isEqualToString:@""] ? @"NO" : @"YES";
+    
+    NSMutableArray *arr = [untechable.commonFunctions checkCallSMSEmail:untechable.customizedContactsForCurrentSession];
+    
+    NSMutableDictionary *untechParams = [[NSMutableDictionary alloc] init];
+    [untechParams setValue:@"Untech_Now" forKey:@"Type"];
+    [untechParams setValue:untechable.spendingTimeTxt forKey:@"Title"];
+    [untechParams setValue:[untechable.commonFunctions convertTimestampToNSDate:untechable.startDate] forKey:@"Start_DateTime"];
+    [untechParams setValue:[untechable.commonFunctions convertTimestampToNSDate:untechable.endDate] forKey:@"End_DateTime"];
+    
+    [untechParams setValue:arr[0] forKey:@"Send_Email"];
+    [untechParams setValue:arr[1] forKey:@"Send_Call"];
+    [untechParams setValue:linkedInSharing forKey:@"Send_SMS"];
+    
+    
+    
+    [untechParams setValue:fbSharing forKey:@"Facebook_Sharing"];
+    [untechParams setValue:twitterSharing forKey:@"Twitter_Sharing"];
+    [untechParams setValue:linkedInSharing forKey:@"LinkedIn_Sharing"];
+    
+    
+    [Flurry logEvent:@"Untech_Creation" withParameters:untechParams];
+
+}
+
+
 @end

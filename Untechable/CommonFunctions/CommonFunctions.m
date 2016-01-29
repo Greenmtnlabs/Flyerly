@@ -257,6 +257,56 @@
     return active;
 }
 
+/*
+ * This method checks if there are any Email, SMS and Call
+ * @params:
+ *      customizedContactsForCurrentSession: NSMutableArray
+ * @return:
+ *      array: NSMutableArray
+ */
+-(NSMutableArray *)checkCallSMSEmail:(NSMutableArray *)customizedContactsForCurrentSession{
+    
+    BOOL email = NO;
+    BOOL call = NO;
+    BOOL sms = NO;
+    
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    
+    for(int i=0; i<customizedContactsForCurrentSession.count; i++){
+        ContactsCustomizedModal *tempModal = [customizedContactsForCurrentSession objectAtIndex:i];
+
+        for(int j=0; j<tempModal.allPhoneNumbers.count; j++){
+            
+            if(!call){
+                call = ([[tempModal.allPhoneNumbers[j] objectAtIndex:3] isEqualToString:@"1"]);
+            }
+            if(!sms){
+                sms = ([[tempModal.allPhoneNumbers[j] objectAtIndex:2] isEqualToString:@"1"]);
+            }
+            if(call && sms){
+                break;
+            }
+        }
+        
+        for(int j=0; j<tempModal.allEmails.count; j++){
+            if(!email){
+                email = ([[tempModal.allEmails[j] objectAtIndex:1] isEqualToString:@"1"]);
+                break;
+            }
+        }
+        if(email && call && sms){
+            break;
+        }
+    }
+    
+    array[0] = email ? @"YES" : @"NO";
+    array[1] = call ? @"YES" : @"NO";
+    array[2] = sms ? @"YES" : @"NO";
+    
+    return  array;
+
+}
+
 /**
  * Count sms/call
  * @param customizedContactsForCurrentSession
