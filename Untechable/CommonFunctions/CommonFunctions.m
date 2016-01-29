@@ -275,6 +275,13 @@
     for(int i=0; i<customizedContactsForCurrentSession.count; i++){
         ContactsCustomizedModal *tempModal = [customizedContactsForCurrentSession objectAtIndex:i];
 
+        for(int j=0; j<tempModal.allEmails.count; j++){
+            if(!email){
+                email = ([[tempModal.allEmails[j] objectAtIndex:1] isEqualToString:@"1"]);
+                break;
+            }
+        }
+        
         for(int j=0; j<tempModal.allPhoneNumbers.count; j++){
             
             if(!call){
@@ -288,12 +295,7 @@
             }
         }
         
-        for(int j=0; j<tempModal.allEmails.count; j++){
-            if(!email){
-                email = ([[tempModal.allEmails[j] objectAtIndex:1] isEqualToString:@"1"]);
-                break;
-            }
-        }
+        
         if(email && call && sms){
             break;
         }
