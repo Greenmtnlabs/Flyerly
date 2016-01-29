@@ -25,6 +25,8 @@ pod 'FBSDKCoreKit', '~> 4.7'
 pod 'Bolts', '1.4.0'
 pod 'AsyncImageView', '~> 1.5'
 
+pod 'Flurry-iOS-SDK/FlurrySDK', '7.1.0'
+
 
 
 

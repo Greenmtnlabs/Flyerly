@@ -14,6 +14,7 @@
 #import "IntroScreenViewController.h"
 #import "UntechableSingleton.h"
 #import "SHKConfiguration.h"
+#import "Flurry.h"
 
 
 @implementation AppDelegate
@@ -31,6 +32,8 @@
     UserPurchases *userPurchases = [UserPurchases getInstance];
     [userPurchases loadAllProducts:^(NSString *errorMsg){}];
 
+    
+    [Flurry startSession: FLURRY_API_KEY];
     
     [Crittercism enableWithAppID: CRITTERCISM_APP_ID];
     
