@@ -864,9 +864,6 @@
  * navigate to ThankyouController screen when untech is created successfully
  */
 -( void ) goToThankyouScreen {
-    
-    flurryLogging = [[FlurryLogging alloc] init];
-    [flurryLogging untechCreationFlurryLog:@"Untech_Now" untechableModel:untechable];
     ThankyouController *thankyouScreen = [[ThankyouController alloc] init];
     thankyouScreen.untechable = untechable;
     [self.navigationController pushViewController:thankyouScreen animated:YES];
@@ -926,6 +923,10 @@
  * Create Untechable without payment
  */
 -(void)createUntechableAfterPaymentCheck{
+    
+    //UntechablesList* __weak weakSelf = untechable;
+    __weak typeof(untechable) weakSelf = untechable;
+    
     // Background work
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
@@ -944,6 +945,8 @@
             else{
                 dispatch_async( dispatch_get_main_queue(), ^{
                     [self changeNavigation:@"ON_FINISH_SUCCESS"];
+                    flurryLogging = [[FlurryLogging alloc] init];
+                    [flurryLogging untechCreationFlurryLog:@"Untech_Now" untechableModel:weakSelf];
                     [self goToThankyouScreen];
                 });
             }

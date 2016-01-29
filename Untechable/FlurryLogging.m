@@ -35,7 +35,6 @@
     
     [untechParams setValue:untechType forKey:@"Type"];
     
-    [untechParams setValue:untechableModel.eventId forKey:@"Event_ID"];
     [untechParams setValue:untechableModel.userName forKey:@"User_Name"];
     [untechParams setValue:untechableModel.userPhoneNumber forKey:@"User_PhoneNumber"];
     [untechParams setValue:untechableModel.email forKey:@"User_Email"];
@@ -81,7 +80,6 @@
     
     NSMutableDictionary *untechParams = [[NSMutableDictionary alloc] init];
     
-    [untechParams setValue:untechableModel.eventId forKey:@"Event_ID"];
     [untechParams setValue:untechableModel.userName forKey:@"User_Name"];
     [untechParams setValue:untechableModel.userPhoneNumber forKey:@"User_PhoneNumber"];
     [untechParams setValue:untechableModel.email forKey:@"User_Email"];
