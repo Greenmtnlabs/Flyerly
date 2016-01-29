@@ -292,6 +292,7 @@
 		C3DC2E261B8C77070091CCF4 /* RMStoreTransactionReceiptVerificator.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DC2E1E1B8C77070091CCF4 /* RMStoreTransactionReceiptVerificator.m */; };
 		C3DC2E271B8C77070091CCF4 /* RMStoreUserDefaultsPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DC2E201B8C77070091CCF4 /* RMStoreUserDefaultsPersistence.m */; };
 		C3DC2E2A1B8C8B6A0091CCF4 /* SKProduct+LocalPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DC2E291B8C8B6A0091CCF4 /* SKProduct+LocalPrice.m */; };
+		DBE319601C5B83E600FE0D21 /* FlurryLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE3195F1C5B83E600FE0D21 /* FlurryLogging.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -653,6 +654,8 @@
 		C3DC2E201B8C77070091CCF4 /* RMStoreUserDefaultsPersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStoreUserDefaultsPersistence.m; sourceTree = "<group>"; };
 		C3DC2E281B8C8B6A0091CCF4 /* SKProduct+LocalPrice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKProduct+LocalPrice.h"; sourceTree = "<group>"; };
 		C3DC2E291B8C8B6A0091CCF4 /* SKProduct+LocalPrice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKProduct+LocalPrice.m"; sourceTree = "<group>"; };
+		DBE3195E1C5B83E600FE0D21 /* FlurryLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryLogging.h; sourceTree = "<group>"; };
+		DBE3195F1C5B83E600FE0D21 /* FlurryLogging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlurryLogging.m; sourceTree = "<group>"; };
 		FC11B82CE184AE8B063B3995 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -936,6 +939,7 @@
 		36561D7119D2C8A40069D897 /* Untechable */ = {
 			isa = PBXGroup;
 			children = (
+				DBE3195D1C5B838F00FE0D21 /* FlurryEventsLoggingClass */,
 				2015F1361BEB859C006EC4C4 /* GlobalClass */,
 				2015F11F1BEB6DFF006EC4C4 /* AppInvite */,
 				36561D7A19D2C8A40069D897 /* AppDelegate.h */,
@@ -1359,6 +1363,15 @@
 			path = Purchases;
 			sourceTree = "<group>";
 		};
+		DBE3195D1C5B838F00FE0D21 /* FlurryEventsLoggingClass */ = {
+			isa = PBXGroup;
+			children = (
+				DBE3195E1C5B83E600FE0D21 /* FlurryLogging.h */,
+				DBE3195F1C5B83E600FE0D21 /* FlurryLogging.m */,
+			);
+			name = FlurryEventsLoggingClass;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1711,6 +1724,7 @@
 				366ECD9619D323DA00F71A11 /* AddUntechableController.m in Sources */,
 				C372098E1B7767AA003A40F2 /* RSetUntechable.m in Sources */,
 				36B4E53E1A28BBD400CC18B0 /* EmailTableViewCell.m in Sources */,
+				DBE319601C5B83E600FE0D21 /* FlurryLogging.m in Sources */,
 				200DB7691C1085430065036A /* HowToScreenTwoViewController.m in Sources */,
 				24A4B7A71A5126410029C8DF /* CustomTextTableViewCell.m in Sources */,
 				C3DC2E121B8C73620091CCF4 /* UserPurchases.m in Sources */,

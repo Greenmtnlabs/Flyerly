@@ -41,6 +41,8 @@
 
 -(BOOL)isFacebookLoggedIn:(NSString *)fbAuthExpiryTs;
 
+-(NSMutableArray *)checkCallSMSEmail:(NSMutableArray *)customizedContactsForCurrentSession;
+
 -(NSMutableArray *)countCallAndSms:(NSMutableArray *)customizedContactsForCurrentSession breakIfFound:(BOOL)breakIfFound;
 -(BOOL)haveCallOrSms:(NSMutableArray *)customizedContactsForCurrentSession;
 
