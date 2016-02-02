@@ -528,6 +528,8 @@
             }
             else{
                 dispatch_async( dispatch_get_main_queue(), ^{
+                    flurryLogging = [[FlurryLogging alloc] init];
+                    [flurryLogging untechCreationFlurryLog:@"Untech_Custom" untechableModel:untechable];
                     [self changeNavigation:@"GO_TO_THANKYOU"];
                 });
             }
