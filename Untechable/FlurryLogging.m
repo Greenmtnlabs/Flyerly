@@ -35,14 +35,8 @@
     
     [untechParams setValue:untechType forKey:@"Type"];
     
-    [untechParams setValue:untechableModel.userName forKey:@"User_Name"];
-    [untechParams setValue:untechableModel.userPhoneNumber forKey:@"User_PhoneNumber"];
-    [untechParams setValue:untechableModel.email forKey:@"User_Email"];
-    
     [untechParams setValue:untechableModel.spendingTimeTxt forKey:@"Title"];
-    [untechParams setValue:[untechable.commonFunctions convertTimestampToNSDate:untechableModel.startDate] forKey:@"Start_DateTime"];
-    [untechParams setValue:[untechable.commonFunctions convertTimestampToNSDate:untechableModel.endDate] forKey:@"End_DateTime"];
-    
+        
     [untechParams setValue:arr[0] forKey:@"Send_Email"];
     [untechParams setValue:arr[1] forKey:@"Send_Call"];
     [untechParams setValue:arr[2] forKey:@"Send_SMS"];
