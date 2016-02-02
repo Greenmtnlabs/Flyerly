@@ -15,6 +15,7 @@
  * Method to log Flurry events on Creation
  * @params:
  *      untechType: NSString
+ *      untechableModel: Untechable
  * @return:
  *      void
  */
@@ -50,6 +51,27 @@
     [untechParams setValue:duration forKey:@"Untech_Duration"];
     
     [Flurry logEvent:@"Untech_Creation_Details" withParameters:untechParams];
+}
+
+/*
+ * Method to log Flurry events on Creation (Log: Untech Duration)
+ * @params:
+ *      untechableModel: Untechable
+ * @return:
+ *      void
+ */
+-(void)untechDuration:(Untechable *)untechableModel{
+    
+    untechable = [[Untechable alloc] init];
+    untechable = [[Untechable alloc] initWithCommonFunctions];
+    
+    NSString *duration = [untechable calculateHoursDays:untechableModel.startDate  endTime: untechableModel.endDate];
+    
+    NSMutableDictionary *untechParams = [[NSMutableDictionary alloc] init];
+    
+    [untechParams setValue:duration forKey:@"Untech_Duration"];
+    
+    [Flurry logEvent:@"Untech_Duration" withParameters:untechParams];
 }
 
 /*

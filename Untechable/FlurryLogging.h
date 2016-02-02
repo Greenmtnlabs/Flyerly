@@ -17,6 +17,8 @@
 
 -(void)untechCreationFlurryLog: (NSString *) untechType untechableModel:(Untechable *)untechableModel;
 
+-(void)untechDuration:(Untechable *)untechableModel;
+
 -(void)untechDeletionFlurryLog: (Untechable *)untechableModel;
 
 @end
