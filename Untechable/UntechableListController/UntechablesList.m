@@ -942,6 +942,7 @@
                     [self changeNavigation:@"ON_FINISH_SUCCESS"];
                     flurryLogging = [[FlurryLogging alloc] init];
                     [flurryLogging untechCreationFlurryLog:@"Untech_Now" untechableModel:untechable];
+                    [flurryLogging untechDuration :untechable];
                     [self goToThankyouScreen];
                 });
             }
