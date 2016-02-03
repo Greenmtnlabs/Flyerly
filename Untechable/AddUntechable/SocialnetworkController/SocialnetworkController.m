@@ -511,6 +511,9 @@
  * Create Untechable without payment
  */
 -(void)createUntechableAfterPaymentCheck{
+    
+    [self changeNavigation:@"ON_FINISH"];
+    
     //Background work
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         [untechable sendToApiAfterTask:^(BOOL errorOnFinish,NSString *message){
@@ -536,7 +539,9 @@
             }
             
         }];
+        
     });
+
 }
 
 
