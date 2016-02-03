@@ -536,7 +536,15 @@
         }
     }
     
-
+    // Sorting contacts alphabetically
+    NSSortDescriptor *sortDescriptor;
+    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"contactFirstName" ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *sortedArray;
+    sortedArray = [mobileContactsArray sortedArrayUsingDescriptors:sortDescriptors];
+    
+    mobileContactsArray = [[NSMutableArray alloc] initWithArray:sortedArray];
+   
     [self mapAllSessionContactSelectionsOnMobileArray];
     
     // Reload table data after all the contacts get loaded
