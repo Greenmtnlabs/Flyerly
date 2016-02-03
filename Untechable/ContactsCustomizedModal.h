@@ -24,6 +24,7 @@
 
 // Model variables to be saved in database
 @property (nonatomic,strong)NSString *contactName;
+@property (nonatomic,strong)NSString *contactLastName;
 @property (nonatomic,strong)NSString *customTextForContact;
 @property (nonatomic,strong)NSMutableArray *allEmails;
 @property (nonatomic,strong)NSMutableArray *allPhoneNumbers;
