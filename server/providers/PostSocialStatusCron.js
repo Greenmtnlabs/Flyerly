@@ -35,7 +35,7 @@ SocialStatusCron.setup = function(app) {
 
 	var imageHost = config.http.host;
 	// Image path
-	var imagePath = imageHost.replace(":3010", "") + "/images/untech-social-share-image.png";
+	var imagePath = imageHost.replace(":3010", "") + "/images/untech-social-share-image.jpg";
 
 	// Social Media Caption
 	var caption = "I just setup #untech time using the Untech app.";
