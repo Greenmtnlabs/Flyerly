@@ -327,11 +327,16 @@ SocialStatusCron.setup = function(app) {
 
 		//console.log("postOnEmails-eventObj:",eventObj,", customizedContactsLength=",customizedContactsLength);
 
-		if( customizedContactsLength > 0 && eventObj.email != "" && eventObj.password != "" ){					
+		if( customizedContactsLength > 0 ){					
 			var totalDaysHours = calculateHoursDays(eventObj.startTime, eventObj.endTime);
 			var mySubject = "I am unteching for " + totalDaysHours;
 			var myEmail = eventObj.email;
 			var myName  = eventObj.userName;
+
+			if ( myEmail == "" ){
+				myEmail = config.email.emailAddress;
+			} 
+
 			var reason = eventObj.spendingTimeTxt;
 			for (var i = 0; i < customizedContactsLength; i++) {
 				var emailAddresses	=	eventObj.customizedContacts[i].emailAddresses;
