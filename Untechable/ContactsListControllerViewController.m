@@ -433,6 +433,7 @@
         
         currentltRenderingContactModal.contactName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
         currentltRenderingContactModal.contactFirstName = [NSString stringWithFormat:@"%@", firstName];
+        currentltRenderingContactModal.contactLastName = [NSString stringWithFormat:@"%@", lastName];
         
         // For contact picture
         UIImage *contactPicture;
@@ -538,7 +539,7 @@
     
     // Sorting contacts alphabetically
     NSSortDescriptor *sortDescriptor;
-    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"contactFirstName" ascending:YES];
+    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"contactLastName" ascending:YES];
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     NSArray *sortedArray;
     sortedArray = [mobileContactsArray sortedArrayUsingDescriptors:sortDescriptors];
