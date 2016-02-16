@@ -18,6 +18,7 @@
 #import "InviteForPrint.h"
 #import "ImageLayer.h"
 #import "GiphyViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 #define IMAGEPICKER_TEMPLATE 1
 #define IMAGEPICKER_PHOTO 2
@@ -3089,8 +3090,17 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
     if ((player.loadState & MPMovieLoadStatePlaythroughOK) == MPMovieLoadStatePlaythroughOK) {
         
-        videolastImage = [player thumbnailImageAtTime:player.duration /2
-                                           timeOption:MPMovieTimeOptionNearestKeyFrame];
+        //videolastImage = [player thumbnailImageAtTime:player.duration /2                                           timeOption:MPMovieTimeOptionNearestKeyFrame];
+        
+        AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:[NSURL URLWithString:[flyer getVideoAssetURL]] options:nil];
+        AVAssetImageGenerator *gen =  [AVAssetImageGenerator assetImageGeneratorWithAsset:asset];
+        
+        gen.appliesPreferredTrackTransform = YES;
+        CMTime time = CMTimeMakeWithSeconds(player.duration/2, 2);
+        NSError *error = nil;
+        
+        CGImageRef image = [gen copyCGImageAtTime:time actualTime:NULL error:&error];
+        videolastImage = [[UIImage alloc] initWithCGImage:image];
         
         playerSlider.maximumValue = player.duration;
         NSTimeInterval duration = player.duration;
@@ -3101,7 +3111,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         videoDuration = duration - minutes * 60;
         playerSlider.value = 0.0;
     } else {
-        NSLog(@"Unknown load state: %u", player.loadState);
+        NSLog(@"Unknown load state: %lu", (unsigned long)player.loadState);
     }
 }
 
