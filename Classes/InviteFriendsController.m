@@ -300,11 +300,9 @@ const int CONTACTS_TAB = 0;
         
             rootView.saveBlock = ^(SHKFormController *form) {
                 [self updateItemWithForm:form];
-                [self fbSend];
             };
             
             rootView.cancelBlock = ^(SHKFormController *form) {
-                [self fbCancel];
             };
             
             [[SHK currentHelper] showViewController:rootView];

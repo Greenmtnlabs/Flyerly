@@ -401,7 +401,7 @@
     }
     
     // Load assets
-    NBULogInfo(@"Loading %d images for group %@...", totalCount, self.assetsGroup.name);
+    NBULogInfo(@"Loading %lu images for group %@...", totalCount, self.assetsGroup.name);
     dispatch_async(dispatch_get_main_queue(), ^
                    {
                        self.loading = YES;
@@ -435,7 +435,7 @@
                      assets.count == 400 ||
                      assets.count == totalCount)
                  {
-                     NBULogVerbose(@"...%d images loaded", assets.count);
+                     NBULogVerbose(@"...%lu images loaded", (unsigned long)assets.count);
                      
                      
                      // Stop loading?

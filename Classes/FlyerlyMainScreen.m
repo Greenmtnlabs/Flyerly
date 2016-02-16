@@ -935,7 +935,7 @@ id lastShareBtnSender;
     
     introScreenViewController = [[IntroScreenViewController alloc] initWithNibName:@"IntroScreenViewController" bundle:nil];
     [introScreenViewController setModalPresentationStyle:UIModalPresentationFullScreen];
-    introScreenViewController.buttonDelegate = self;
+    //introScreenViewController.buttonDelegate = self;
     
             //enable buttons if save to gallary not required
             if ( [flyer isVideoFlyer] ){

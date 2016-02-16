@@ -277,11 +277,11 @@
 @property (weak, nonatomic) IBOutlet UIImageView *tempDrawImage;
 
 //DrawingClass required functions
-- (IBAction)pencilPressed:(id)sender;
-- (IBAction)eraserPressed:(id)sender;
-- (IBAction)reset:(id)sender;
-- (IBAction)settings:(id)sender;
-- (IBAction)save:(id)sender;
+//- (IBAction)pencilPressed:(id)sender;
+//- (IBAction)eraserPressed:(id)sender;
+//- (IBAction)reset:(id)sender;
+//- (IBAction)settings:(id)sender;
+//- (IBAction)save:(id)sender;
 
 - (IBAction)zoom:(id)sender;
 
