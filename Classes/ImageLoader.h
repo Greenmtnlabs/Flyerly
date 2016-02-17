@@ -22,15 +22,6 @@
                   size:(NBUImageSize)size
            resultBlock:(NBUImageLoaderResultBlock)resultBlock;
 
-
-/// Optionally the loader can provide captions for objects.
-/// @param object The reference object.
-- (NSString *)captionForObject:(id)object;
-
-/// TODO:
-/// @param object The reference object.
-- (void)unloadImageForObject:(id)object;
-
 /// The NBUImageLoader result block.
 typedef void (^ImageLoaderResultBlock)(UIImage * image,
                                           NSError * error);
