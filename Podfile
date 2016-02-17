@@ -1,4 +1,4 @@
-platform :ios, '7.0'
+platform :ios, '8.0'
 
     pod 'AFNetworking', '~> 2.5.4'
     pod 'uservoice-iphone-sdk', '~> 3.2.3'
@@ -16,11 +16,14 @@ platform :ios, '7.0'
     pod 'GPUImage', :head
     pod 'NBUKit', '~> 2.4.1'
     pod 'NBUImagePicker', '~> 1.5.3'
+
     pod 'Parse', '~> 1.7.3'
     pod 'ParseFacebookUtils', '~> 1.7.4'
 
+
     # Open SSL
-    pod 'OpenSSL', '~> 1.0.201'
+    #pod 'OpenSSL', '~> 1.0.201'
+    pod 'OpenSSL', '~> 1.0'
 
     pod 'FBSDKCoreKit', '~> 4.6'
     pod 'FBSDKShareKit', '~> 4.6'
