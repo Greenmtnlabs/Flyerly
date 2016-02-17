@@ -435,7 +435,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     // HERE WE SET BACK BUTTON IMAGE AS REQUIRED
     NSArray * arrayOfControllers =  self.navigationController.viewControllers;
-    int idx = [arrayOfControllers count] -2 ;
+    int idx = (int)[arrayOfControllers count] -2 ;
     id previous = [arrayOfControllers objectAtIndex:idx];
     if ([previous isKindOfClass:[FlyrViewController class]])
     {
@@ -1137,7 +1137,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 textLayer = [flyer getLayerFromMaster:currentLayer];
                 textFamily = [textLayer objectForKey:@"fontname"];
             }
-            int fontsArrayCount = [fontsArray count];
+            int fontsArrayCount = (int)[fontsArray count];
             for (int i = 1; i <=fontsArrayCount ; i++) {
                 UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
                 font.frame = CGRectMake(0, 0, widthValue, heightValue);
@@ -1162,7 +1162,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 } else if ( i == fontsArrayCount ){
                     if(curYLoc == fOPrem[1] ){ //iPhone4 landscap views
                         fOPrem[2] = (curXLoc + widthValue  ) - fOPrem[0];
-                        fOPrem[3] = heightValue;
+                        fOPrem[3] = (int)heightValue;
                     } else{ //square views
                         fOPrem[3] = ( curYLoc + heightValue) - fOPrem[1];
                     }
@@ -1492,7 +1492,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         
         NSArray *bodersArray = textBordersView.subviews;
-        int count = (bodersArray.count)/3;
+        int count = (int)(bodersArray.count)/3;
         
         int i=1;
         for (int index = 0; index < count; index++ )
@@ -1574,7 +1574,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 textLayer = [flyer getLayerFromMaster:currentLayer];
                 textFamily = [textLayer objectForKey:@"fontname"];
             }
-            int clipartsArrayCount = [clipartsArray count];
+            int clipartsArrayCount = (int)[clipartsArray count];
             for (int i = 1; i <=clipartsArrayCount ; i++) {
             
                 UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -1600,7 +1600,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 } else if ( i == clipartsArrayCount ){
                     if(curYLoc == fOPrem[1] ){ //iPhone4 landscap views
                         fOPrem[2] = (curXLoc + widthValue  ) - fOPrem[0];
-                        fOPrem[3] = heightValue;
+                        fOPrem[3] = (int)heightValue;
                     } else{ //square views
                         fOPrem[3] = ( curYLoc + heightValue) - fOPrem[1];
                     }

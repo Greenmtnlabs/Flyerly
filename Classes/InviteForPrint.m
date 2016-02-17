@@ -372,7 +372,7 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    int count = ([[self getArrayOfSelectedTab] count]);
+    int count = (int) ([[self getArrayOfSelectedTab] count]);
     return  count;
 }
 
