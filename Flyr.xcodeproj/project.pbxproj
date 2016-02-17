@@ -5570,7 +5570,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0720;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
 						DevelopmentTeam = 4MGKP9P5WH;
@@ -7286,6 +7286,7 @@
 					"-ObjC",
 					"-all_load",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.socialflyr.paid;
 				PRODUCT_NAME = Flyr;
 				PROVISIONING_PROFILE = "64a661da-126d-4bf0-85b9-fee9abf3aa65";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "64a661da-126d-4bf0-85b9-fee9abf3aa65";
@@ -7346,6 +7347,7 @@
 					"-ObjC",
 					"-all_load",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.socialflyr.paid;
 				PRODUCT_NAME = Flyr;
 				PROVISIONING_PROFILE = "0fa3dff2-ecfb-4d91-bbaf-ec80632f2898";
 				SDKROOT = iphoneos;
@@ -7401,6 +7403,7 @@
 					"-ObjC",
 					"-all_load",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.socialflyr.paid;
 				PRODUCT_NAME = Flyr;
 				PROVISIONING_PROFILE = "64a661da-126d-4bf0-85b9-fee9abf3aa65";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "64a661da-126d-4bf0-85b9-fee9abf3aa65";
@@ -7417,6 +7420,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
 				ENABLE_BITCODE = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;

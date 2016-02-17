@@ -3089,8 +3089,15 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
     if ((player.loadState & MPMovieLoadStatePlaythroughOK) == MPMovieLoadStatePlaythroughOK) {
         
-        videolastImage = [player thumbnailImageAtTime:player.duration /2
-                                           timeOption:MPMovieTimeOptionNearestKeyFrame];
+        //videolastImage = [player thumbnailImageAtTime:player.duration /2 timeOption:MPMovieTimeOptionNearestKeyFrame];
+        
+        AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:[NSURL URLWithString:[flyer getVideoAssetURL]] options:nil];
+        AVAssetImageGenerator *gen =  [AVAssetImageGenerator assetImageGeneratorWithAsset:asset];
+        gen.appliesPreferredTrackTransform = YES;
+        CMTime time = CMTimeMakeWithSeconds(player.duration/2, 2);
+        NSError *error = nil;
+        CGImageRef image = [gen copyCGImageAtTime:time actualTime:NULL error:&error];
+        videolastImage = [[UIImage alloc] initWithCGImage:image];
         
         playerSlider.maximumValue = player.duration;
         NSTimeInterval duration = player.duration;
@@ -3101,7 +3108,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         videoDuration = duration - minutes * 60;
         playerSlider.value = 0.0;
     } else {
-        NSLog(@"Unknown load state: %u", player.loadState);
+        NSLog(@"Unknown load state: %lu", (unsigned long)player.loadState);
     }
 }
 
@@ -3279,7 +3286,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 -(void)addButtonsInRightNavigation:(NSString *)callFrom {
     
-    NSMutableArray  *barItems   =   [NSMutableArray arrayWithObjects:nil];
+    NSMutableArray  *barItems;
     
     // enable user interaction of Home and Help button in every condition
     backButton.enabled = YES;
@@ -4008,7 +4015,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         //Delete From View
         [flyimgView deleteLayer:layerButton.uid];
         
-        NSLog(@"Delete Layer Tag: %d", layerButton.tag);
+        NSLog(@"Delete Layer Tag: %ld", (long)layerButton.tag);
         
         //Set Main View On Screen
         [self callAddMoreLayers];
@@ -4197,7 +4204,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     NSArray *flyerPiecesKeys = [flyer allKeys];
     
     // we need to loop layers in revers order because first non editable layer should be on top
-    int i = flyerPiecesKeys.count;
+    int i = (int)flyerPiecesKeys.count;
     while ( i > 0) {
         i--;
         //Getting Layers Detail from Master Dictionary
@@ -4564,7 +4571,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             NSString *fontName = btn.titleLabel.font.familyName;
             
             if ( [textFamily isEqualToString:fontName] ) {
-                return [NSString stringWithFormat: @"%d", btn.tag];
+                return [NSString stringWithFormat: @"%ld", (long)btn.tag];
             }
         }
     }
@@ -4578,7 +4585,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         if ([tempView isKindOfClass:[UIButton class]]) {
             UIButton *btn = (UIButton *) tempView;
             if ( [btn.currentTitle isEqualToString:clipart] ) {
-                return [NSString stringWithFormat: @"%d", btn.tag];
+                return [NSString stringWithFormat: @"%ld", (long)btn.tag];
             }
         }
     }
@@ -4634,7 +4641,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
             
             if ( [Flyer compareColor:buttonColor withColor:fontColor] ) {
-                tag = [NSString stringWithFormat: @"%d", color.tag];
+                tag = [NSString stringWithFormat: @"%ld", (long)color.tag];
                 break;
             }
         }
@@ -4663,7 +4670,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     UIColor *borderColor = [UIColor colorWithRed:[RGB[0] floatValue] green:[RGB[1] floatValue] blue:[RGB[2] floatValue] alpha:1.0];
     
     NSArray *bodersArray = textBordersView.subviews;
-    int count = (bodersArray.count)/3;
+    int count = (int)(bodersArray.count)/3;
     
     int i=1,j=1;
     for (int index = 0; index < count; index++ ) {
@@ -4677,7 +4684,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         UIColor* buttonColor = border.backgroundColor;
         
         if ( [Flyer compareColor:buttonColor withColor:borderColor] ) {
-            tag = [NSString stringWithFormat: @"%d", ((border.tag) - 1)];
+            tag = [NSString stringWithFormat: @"%ld", ((border.tag) - 1)];
             break;
         }
         i++;
@@ -4705,7 +4712,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             lineBtn = (UIButton *) drawingPatternsArrayInSV[i-1];
             
             if ( [DRAWING_PATTERNS_ARRAY[i-1] isEqualToString:line_type] ){
-                tag = [NSString stringWithFormat: @"%d", lineBtn.tag];
+                tag = [NSString stringWithFormat: @"%ld", (long)lineBtn.tag];
                 break;
             }
         }
@@ -4760,7 +4767,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         if ( [btnTitleToBeHighlighted isEqualToString:textSize] ){
             
-            tag = [NSString stringWithFormat: @"%d", size.tag];
+            tag = [NSString stringWithFormat: @"%ld", (long)size.tag];
             break;
         }
     }
@@ -5756,7 +5763,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         NSLog(@"Memory Capacity of %llu MiB with %llu MiB Free memory available.",totalSpace , totalFreeSpace);
     } else {
-        NSLog(@"Error Obtaining System Memory Info: Domain = %@, Code = %u", [error domain], [error code]);
+        NSLog(@"Error Obtaining System Memory Info: Domain = %@, Code = %ld", [error domain], (long)[error code]);
     }
     
     return totalFreeSpace;
