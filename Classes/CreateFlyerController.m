@@ -430,8 +430,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     // Left BackButton
     backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-	[backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     
     // HERE WE SET BACK BUTTON IMAGE AS REQUIRED
     NSArray * arrayOfControllers =  self.navigationController.viewControllers;
@@ -2447,7 +2446,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         [flyer setImagePath:currentLayer ImgPath:imgPath];
         
         //Set Image Tag
-        [flyer setImageTag:currentLayer Tag:[NSString stringWithFormat:@"%d",view.tag]];
+        [flyer setImageTag:currentLayer Tag:[NSString stringWithFormat:@"%ld",(long)view.tag]];
         
         [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
         

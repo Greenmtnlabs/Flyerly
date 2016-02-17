@@ -1791,7 +1791,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         UIImage *mergedImg = nil;
 
         CGSize newImageSize = CGSizeMake(width, height);
-        if (UIGraphicsBeginImageContextWithOptions != NULL) {
+        if (&UIGraphicsBeginImageContextWithOptions != NULL) {
             UIGraphicsBeginImageContextWithOptions(newImageSize, NO, [[UIScreen mainScreen] scale]);
         } else {
             UIGraphicsBeginImageContext(newImageSize);

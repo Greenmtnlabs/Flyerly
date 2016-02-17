@@ -73,7 +73,6 @@ const int CONTACTS_TAB = 0;
     
     
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"home_button"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     backButton.showsTouchWhenHighlighted = YES;
@@ -300,11 +299,9 @@ const int CONTACTS_TAB = 0;
         
             rootView.saveBlock = ^(SHKFormController *form) {
                 [self updateItemWithForm:form];
-                [self fbSend];
             };
             
             rootView.cancelBlock = ^(SHKFormController *form) {
-                [self fbCancel];
             };
             
             [[SHK currentHelper] showViewController:rootView];
@@ -346,7 +343,7 @@ const int CONTACTS_TAB = 0;
         return;
     }
     
-    selectedTab = sender.tag;//CONTACTS_TAB;
+    selectedTab = (int)sender.tag;//CONTACTS_TAB;
     
     [self showLoadingIndicator];
     
@@ -882,7 +879,7 @@ const int CONTACTS_TAB = 0;
         
         // GETTING DATA FROM RECEIVED DICTIONARY
         // SET OVER MODEL FROM DATA
-        NSLog(@"selectedTab = %i, indexPath.row = %i",selectedTab, indexPath.row);
+        NSLog(@"selectedTab = %i, indexPath.row = %li",selectedTab, (long)indexPath.row);
        
         receivedDic = [self getArrayOfSelectedTab ][(indexPath.row)];
     }
