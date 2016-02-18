@@ -3894,6 +3894,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         switch ( status ) {
             case AVAssetExportSessionStatusFailed:{
                 NSLog (@"FAIL = %@", error );
+                [self tasksAfterVideoMerging:0];
                 break;
             }
             case AVAssetExportSessionStatusCompleted: {
@@ -3913,15 +3914,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                         [self openPanel];
                     });
                 }else {
-                    
-                    // Main Thread
-                    dispatch_async( dispatch_get_main_queue(), ^{
-                        if( self.sharingPannelIsHidden == YES ){
-                            self.onFlyerBack(@"");
-                        } else {
-                            self.flyer.saveInGallaryRequired = 1;
-                        }
-                    });
+                    [self tasksAfterVideoMerging:1];
                 }
             }
         };
@@ -3929,6 +3922,17 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
         [appDelegate endAppBgTask];
     }];
+}
+
+-(void)tasksAfterVideoMerging:(int)sigr{
+    // Main Thread
+    dispatch_async( dispatch_get_main_queue(), ^{
+        if( self.sharingPannelIsHidden == YES ){
+            self.onFlyerBack(@"");
+        } else {
+            self.flyer.saveInGallaryRequired = sigr;
+        }
+    });
 }
 
 #pragma mark - Flyer Modified
