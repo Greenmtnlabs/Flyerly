@@ -33,7 +33,6 @@
     self.navigationItem.hidesBackButton = YES;
     
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 25)];
-    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"crop"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
     backButton.showsTouchWhenHighlighted = YES;
@@ -43,7 +42,6 @@
     [self.navigationItem setLeftBarButtonItem:backBarButton];
    
     UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 25)];
-    [editButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [editButton setBackgroundImage:[UIImage imageNamed:@"crop"] forState:UIControlStateNormal];
     [editButton addTarget:self action:@selector(post) forControlEvents:UIControlEventTouchUpInside];
     editButton.showsTouchWhenHighlighted = YES;

@@ -461,7 +461,7 @@
 		CE9F67F618773086006590CC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = Lob;
 			};
 			buildConfigurationList = CE9F67F918773086006590CC /* Build configuration list for PBXProject "lob-ios" */;
@@ -580,6 +580,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -674,6 +675,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "lob-iosTests/lob-iosTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lob.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -690,6 +692,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "lob-ios/lob-ios-Prefix.pch";
 				INFOPLIST_FILE = "lob-iosTests/lob-iosTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lob.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
 			};

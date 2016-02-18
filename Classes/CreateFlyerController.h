@@ -277,11 +277,11 @@
 @property (weak, nonatomic) IBOutlet UIImageView *tempDrawImage;
 
 //DrawingClass required functions
-- (IBAction)pencilPressed:(id)sender;
-- (IBAction)eraserPressed:(id)sender;
-- (IBAction)reset:(id)sender;
-- (IBAction)settings:(id)sender;
-- (IBAction)save:(id)sender;
+//- (IBAction)pencilPressed:(id)sender;
+//- (IBAction)eraserPressed:(id)sender;
+//- (IBAction)reset:(id)sender;
+//- (IBAction)settings:(id)sender;
+//- (IBAction)save:(id)sender;
 
 - (IBAction)zoom:(id)sender;
 
@@ -296,6 +296,6 @@
 //This variable was needed because When comming from cropview render flyer relaocating video flyer
 @property (assign) BOOL enableRenderFlyer;
 -(void)enableNavigation:(BOOL)enable;
--(void)selectGiphy:(id)sender;
+//-(void)selectGiphy:(id)sender;
 
 @end

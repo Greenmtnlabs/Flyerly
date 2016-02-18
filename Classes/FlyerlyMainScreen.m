@@ -281,25 +281,21 @@ id lastShareBtnSender;
     // Creating Invite Button
     btnInvite = [[UIButton alloc] initWithFrame:rectInvite];
     [btnInvite setBackgroundImage:[UIImage imageNamed:@"homeInvite"] forState:UIControlStateNormal];
-    [btnInvite addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [btnInvite addTarget:self action:@selector(doInvite:) forControlEvents:UIControlEventTouchUpInside];
     
     // Creating Saved Button
     btnSaved = [[UIButton alloc] initWithFrame:rectSaved];
     [btnSaved setBackgroundImage:[UIImage imageNamed:@"homeSaved"] forState:UIControlStateNormal];
-    [btnSaved addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [btnSaved addTarget:self action:@selector(showUnsharedFlyers:) forControlEvents:UIControlEventTouchUpInside];
     
     // Creating Shared Button
     btnShared = [[UIButton alloc] initWithFrame:rectShared];
     [btnShared setBackgroundImage:[UIImage imageNamed:@"homeShare"] forState:UIControlStateNormal];
-    [btnShared addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [btnShared addTarget:self action:@selector(showSharedFlyers:) forControlEvents:UIControlEventTouchUpInside];
     
     // Creating Social Button
     btnSocial = [[UIButton alloc] initWithFrame:rectSocial];
     [btnSocial setBackgroundImage:[UIImage imageNamed:@"homeSocial"] forState:UIControlStateNormal];
-    [btnSocial addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [btnSocial addTarget:self action:@selector(showHashTagFlyers:) forControlEvents:UIControlEventTouchUpInside];
     
     // Adding buttons to view
@@ -909,6 +905,11 @@ id lastShareBtnSender;
     btnSettings.enabled = enable;
     rightUndoBarButton.enabled = enable;
     btnCreateFlyer.enabled = enable;
+    
+    btnInvite.enabled = enable;
+    btnSaved.enabled = enable;
+    btnShared.enabled = enable;
+    btnSocial.enabled = enable;
     
     tView.userInteractionEnabled = enable;
     

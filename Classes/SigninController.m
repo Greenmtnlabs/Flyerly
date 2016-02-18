@@ -230,7 +230,7 @@
                 
                 // We keep an instance of navigation contrller since the completion block might pop us out of the
                 // navigation controller
-                UINavigationController *navigationController = self.navigationController;
+                //UINavigationController *navigationController = self.navigationController;
                 
                 [self onSignInSuccess];
                 

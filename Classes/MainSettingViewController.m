@@ -58,14 +58,12 @@
     self.navigationItem.hidesBackButton = YES;
     
     UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [helpButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
     [helpButton addTarget:self action:@selector(gohelp) forControlEvents:UIControlEventTouchUpInside];
     helpButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *helpBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
     
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"home_button"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     backButton.showsTouchWhenHighlighted = YES;
@@ -642,7 +640,7 @@
         // Current Item For Sharing
         SHKItem *item = [[SHKItem alloc] init];
     
-        SHKSharer  *iosSharer = [[ SHKSharer alloc] init];
+        iosSharer = [[ SHKSharer alloc] init];
         iosSharer = [FlyerlyTwitterLike shareItem:item];
     }else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];

@@ -364,7 +364,7 @@ UIButton *backButton;
 // function to handle character count for message text view
 -(void)textViewDidChange:(UITextView *)textView
 {
-    int len = textView.text.length;
+    int len = (int)textView.text.length;
     characterCountLabel.text=[NSString stringWithFormat:@"Remaining characters: %i",350-len];
 }
 
@@ -645,7 +645,7 @@ https://lob.com/docs#postcards
     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex: self.navigationController.viewControllers.count-viewsToPop-1] animated:YES];
 }
 -(int)getCountOfContacts{
-    int numberOfSelectContacts  = contactsArray.count;
+    int numberOfSelectContacts  = (int)contactsArray.count;
     int toContactsCount = 0;
     if( toContactVal == YES ){
         toContactsCount = 1;

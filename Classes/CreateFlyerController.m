@@ -430,12 +430,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     // Left BackButton
     backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-	[backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     
     // HERE WE SET BACK BUTTON IMAGE AS REQUIRED
     NSArray * arrayOfControllers =  self.navigationController.viewControllers;
-    int idx = [arrayOfControllers count] -2 ;
+    int idx = (int)[arrayOfControllers count] -2 ;
     id previous = [arrayOfControllers objectAtIndex:idx];
     if ([previous isKindOfClass:[FlyrViewController class]])
     {
@@ -1137,7 +1136,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 textLayer = [flyer getLayerFromMaster:currentLayer];
                 textFamily = [textLayer objectForKey:@"fontname"];
             }
-            int fontsArrayCount = [fontsArray count];
+            int fontsArrayCount = (int)[fontsArray count];
             for (int i = 1; i <=fontsArrayCount ; i++) {
                 UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
                 font.frame = CGRectMake(0, 0, widthValue, heightValue);
@@ -1162,7 +1161,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 } else if ( i == fontsArrayCount ){
                     if(curYLoc == fOPrem[1] ){ //iPhone4 landscap views
                         fOPrem[2] = (curXLoc + widthValue  ) - fOPrem[0];
-                        fOPrem[3] = heightValue;
+                        fOPrem[3] = (int)heightValue;
                     } else{ //square views
                         fOPrem[3] = ( curYLoc + heightValue) - fOPrem[1];
                     }
@@ -1492,7 +1491,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         
         NSArray *bodersArray = textBordersView.subviews;
-        int count = (bodersArray.count)/3;
+        int count = (int)(bodersArray.count)/3;
         
         int i=1;
         for (int index = 0; index < count; index++ )
@@ -1574,7 +1573,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 textLayer = [flyer getLayerFromMaster:currentLayer];
                 textFamily = [textLayer objectForKey:@"fontname"];
             }
-            int clipartsArrayCount = [clipartsArray count];
+            int clipartsArrayCount = (int)[clipartsArray count];
             for (int i = 1; i <=clipartsArrayCount ; i++) {
             
                 UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -1600,7 +1599,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 } else if ( i == clipartsArrayCount ){
                     if(curYLoc == fOPrem[1] ){ //iPhone4 landscap views
                         fOPrem[2] = (curXLoc + widthValue  ) - fOPrem[0];
-                        fOPrem[3] = heightValue;
+                        fOPrem[3] = (int)heightValue;
                     } else{ //square views
                         fOPrem[3] = ( curYLoc + heightValue) - fOPrem[1];
                     }
@@ -2447,7 +2446,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         [flyer setImagePath:currentLayer ImgPath:imgPath];
         
         //Set Image Tag
-        [flyer setImageTag:currentLayer Tag:[NSString stringWithFormat:@"%d",view.tag]];
+        [flyer setImageTag:currentLayer Tag:[NSString stringWithFormat:@"%ld",(long)view.tag]];
         
         [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
         
@@ -3089,8 +3088,15 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
     if ((player.loadState & MPMovieLoadStatePlaythroughOK) == MPMovieLoadStatePlaythroughOK) {
         
-        videolastImage = [player thumbnailImageAtTime:player.duration /2
-                                           timeOption:MPMovieTimeOptionNearestKeyFrame];
+        //videolastImage = [player thumbnailImageAtTime:player.duration /2 timeOption:MPMovieTimeOptionNearestKeyFrame];
+        
+        AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:[NSURL URLWithString:[flyer getVideoAssetURL]] options:nil];
+        AVAssetImageGenerator *gen =  [AVAssetImageGenerator assetImageGeneratorWithAsset:asset];
+        gen.appliesPreferredTrackTransform = YES;
+        CMTime time = CMTimeMakeWithSeconds(player.duration/2, 2);
+        NSError *error = nil;
+        CGImageRef image = [gen copyCGImageAtTime:time actualTime:NULL error:&error];
+        videolastImage = [[UIImage alloc] initWithCGImage:image];
         
         playerSlider.maximumValue = player.duration;
         NSTimeInterval duration = player.duration;
@@ -3101,7 +3107,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         videoDuration = duration - minutes * 60;
         playerSlider.value = 0.0;
     } else {
-        NSLog(@"Unknown load state: %u", player.loadState);
+        NSLog(@"Unknown load state: %lu", (unsigned long)player.loadState);
     }
 }
 
@@ -3279,7 +3285,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 -(void)addButtonsInRightNavigation:(NSString *)callFrom {
     
-    NSMutableArray  *barItems   =   [NSMutableArray arrayWithObjects:nil];
+    NSMutableArray  *barItems;
     
     // enable user interaction of Home and Help button in every condition
     backButton.enabled = YES;
@@ -3888,6 +3894,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         switch ( status ) {
             case AVAssetExportSessionStatusFailed:{
                 NSLog (@"FAIL = %@", error );
+                [self tasksAfterVideoMerging:0];
                 break;
             }
             case AVAssetExportSessionStatusCompleted: {
@@ -3907,15 +3914,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                         [self openPanel];
                     });
                 }else {
-                    
-                    // Main Thread
-                    dispatch_async( dispatch_get_main_queue(), ^{
-                        if( self.sharingPannelIsHidden == YES ){
-                            self.onFlyerBack(@"");
-                        } else {
-                            self.flyer.saveInGallaryRequired = 1;
-                        }
-                    });
+                    [self tasksAfterVideoMerging:1];
                 }
             }
         };
@@ -3923,6 +3922,17 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
         [appDelegate endAppBgTask];
     }];
+}
+
+-(void)tasksAfterVideoMerging:(int)sigr{
+    // Main Thread
+    dispatch_async( dispatch_get_main_queue(), ^{
+        if( self.sharingPannelIsHidden == YES ){
+            self.onFlyerBack(@"");
+        } else {
+            self.flyer.saveInGallaryRequired = sigr;
+        }
+    });
 }
 
 #pragma mark - Flyer Modified
@@ -4008,7 +4018,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         //Delete From View
         [flyimgView deleteLayer:layerButton.uid];
         
-        NSLog(@"Delete Layer Tag: %d", layerButton.tag);
+        NSLog(@"Delete Layer Tag: %ld", (long)layerButton.tag);
         
         //Set Main View On Screen
         [self callAddMoreLayers];
@@ -4197,7 +4207,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     NSArray *flyerPiecesKeys = [flyer allKeys];
     
     // we need to loop layers in revers order because first non editable layer should be on top
-    int i = flyerPiecesKeys.count;
+    int i = (int)flyerPiecesKeys.count;
     while ( i > 0) {
         i--;
         //Getting Layers Detail from Master Dictionary
@@ -4564,7 +4574,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             NSString *fontName = btn.titleLabel.font.familyName;
             
             if ( [textFamily isEqualToString:fontName] ) {
-                return [NSString stringWithFormat: @"%d", btn.tag];
+                return [NSString stringWithFormat: @"%ld", (long)btn.tag];
             }
         }
     }
@@ -4578,7 +4588,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         if ([tempView isKindOfClass:[UIButton class]]) {
             UIButton *btn = (UIButton *) tempView;
             if ( [btn.currentTitle isEqualToString:clipart] ) {
-                return [NSString stringWithFormat: @"%d", btn.tag];
+                return [NSString stringWithFormat: @"%ld", (long)btn.tag];
             }
         }
     }
@@ -4634,7 +4644,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
             
             if ( [Flyer compareColor:buttonColor withColor:fontColor] ) {
-                tag = [NSString stringWithFormat: @"%d", color.tag];
+                tag = [NSString stringWithFormat: @"%ld", (long)color.tag];
                 break;
             }
         }
@@ -4663,7 +4673,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     UIColor *borderColor = [UIColor colorWithRed:[RGB[0] floatValue] green:[RGB[1] floatValue] blue:[RGB[2] floatValue] alpha:1.0];
     
     NSArray *bodersArray = textBordersView.subviews;
-    int count = (bodersArray.count)/3;
+    int count = (int)(bodersArray.count)/3;
     
     int i=1,j=1;
     for (int index = 0; index < count; index++ ) {
@@ -4677,7 +4687,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         UIColor* buttonColor = border.backgroundColor;
         
         if ( [Flyer compareColor:buttonColor withColor:borderColor] ) {
-            tag = [NSString stringWithFormat: @"%d", ((border.tag) - 1)];
+            tag = [NSString stringWithFormat: @"%ld", ((border.tag) - 1)];
             break;
         }
         i++;
@@ -4705,7 +4715,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             lineBtn = (UIButton *) drawingPatternsArrayInSV[i-1];
             
             if ( [DRAWING_PATTERNS_ARRAY[i-1] isEqualToString:line_type] ){
-                tag = [NSString stringWithFormat: @"%d", lineBtn.tag];
+                tag = [NSString stringWithFormat: @"%ld", (long)lineBtn.tag];
                 break;
             }
         }
@@ -4760,7 +4770,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         if ( [btnTitleToBeHighlighted isEqualToString:textSize] ){
             
-            tag = [NSString stringWithFormat: @"%d", size.tag];
+            tag = [NSString stringWithFormat: @"%ld", (long)size.tag];
             break;
         }
     }
@@ -5756,7 +5766,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         NSLog(@"Memory Capacity of %llu MiB with %llu MiB Free memory available.",totalSpace , totalFreeSpace);
     } else {
-        NSLog(@"Error Obtaining System Memory Info: Domain = %@, Code = %u", [error domain], [error code]);
+        NSLog(@"Error Obtaining System Memory Info: Domain = %@, Code = %ld", [error domain], (long)[error code]);
     }
     
     return totalFreeSpace;
