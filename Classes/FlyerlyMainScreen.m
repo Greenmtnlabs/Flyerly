@@ -906,6 +906,11 @@ id lastShareBtnSender;
     rightUndoBarButton.enabled = enable;
     btnCreateFlyer.enabled = enable;
     
+    btnInvite.enabled = enable;
+    btnSaved.enabled = enable;
+    btnShared.enabled = enable;
+    btnSocial.enabled = enable;
+    
     tView.userInteractionEnabled = enable;
     
     if( enable ){
