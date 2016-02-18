@@ -1592,6 +1592,7 @@
 		0FEF2D99174E65B100FDD8C9 /* HelpController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HelpController.xib; path = ../HelpController.xib; sourceTree = "<group>"; };
 		0FEF2DA7174E66FC00FDD8C9 /* HelpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpController.h; sourceTree = "<group>"; };
 		0FEF2DA8174E66FC00FDD8C9 /* HelpController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpController.m; sourceTree = "<group>"; };
+		103FB4901C75F2EA0072CEFC /* FBSDKMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBSDKMacros.h; path = "ios-files/FBSDKMacros.h"; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* FlyrAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FlyrAppDelegate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		1D3623250D0F684500981E51 /* FlyrAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FlyrAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -3807,6 +3808,14 @@
 			name = Crittercism;
 			sourceTree = "<group>";
 		};
+		103FB48F1C75F2CB0072CEFC /* ios-files */ = {
+			isa = PBXGroup;
+			children = (
+				103FB4901C75F2EA0072CEFC /* FBSDKMacros.h */,
+			);
+			name = "ios-files";
+			sourceTree = "<group>";
+		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -4933,6 +4942,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				103FB48F1C75F2CB0072CEFC /* ios-files */,
 				C30043241AB6ED9300866385 /* lob-ios.xcodeproj */,
 				20B996D2180450CC007B616D /* iTunesArtwork */,
 				2061ED8B17FF212100E9BECA /* icon.png */,
