@@ -3742,6 +3742,14 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
               scale:(CGFloat)scale overlay:(UIImage *)image
          completion:(void (^)(NSInteger, NSError *))callback {
     
+    BOOL isVideo = false;
+    
+    // If it is video
+    if ( !([self.flyer getLayerFromMaster:FLYER_LAYER_GIPHY_LOGO] != nil)) {
+        isVideo = true;
+    }
+    
+    
     // Get a pointer to the asset
     AVURLAsset* firstAsset = [AVURLAsset URLAssetWithURL:src options:nil];
     
@@ -3751,8 +3759,13 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     // Add tracks to this composition
     AVMutableCompositionTrack *videoTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
     
+
     // Audio track
-    AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+    AVMutableCompositionTrack *audioTrack;
+    if ( isVideo ) {
+        audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+    }
+    
     
     
     // Image video is always 30 seconds. So we use that unless the background video is smaller.
@@ -3770,12 +3783,14 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         transform = track.preferredTransform;
         videoTrack.preferredTransform = transform;
     }
-    
-    // Add the audio track.
-    NSArray *audios = [firstAsset tracksWithMediaType:AVMediaTypeAudio];
-    if ( audios.count > 0 ) {
-        [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:[audios objectAtIndex:0] atTime:kCMTimeZero error:nil];
+    if(isVideo){
+        // Add the audio track.
+        NSArray *audios = [firstAsset tracksWithMediaType:AVMediaTypeAudio];
+        if ( audios.count > 0 ) {
+            [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:[audios objectAtIndex:0] atTime:kCMTimeZero error:nil];
+        }
     }
+    
     
     NSLog(@"Natural size: %.2f x %.2f", videoTrack.naturalSize.width, videoTrack.naturalSize.height);
     
@@ -3795,16 +3810,19 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     // Layer instructions
     AVMutableVideoCompositionLayerInstruction *passThroughLayer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:videoTrack];
     
-    // Set the transform to maintain orientation
-    if ( scale != 1.0 ) {
-        CGAffineTransform scaleTransform = CGAffineTransformMakeScale( scale, scale);
-        CGAffineTransform translateTransform = CGAffineTransformTranslate( CGAffineTransformIdentity,
-                                                                          -crop.origin.x,
-                                                                          -crop.origin.y);
-        transform = CGAffineTransformConcat( transform, scaleTransform );
-        transform = CGAffineTransformConcat( transform, translateTransform);
+    if(isVideo){
+        // Set the transform to maintain orientation
+        if ( scale != 1.0 ) {
+            CGAffineTransform scaleTransform = CGAffineTransformMakeScale( scale, scale);
+            CGAffineTransform translateTransform = CGAffineTransformTranslate( CGAffineTransformIdentity,
+                                                                              -crop.origin.x,
+                                                                              -crop.origin.y);
+            transform = CGAffineTransformConcat( transform, scaleTransform );
+            transform = CGAffineTransformConcat( transform, translateTransform);
+        }
     }
     
+
     [passThroughLayer setTransform:transform atTime:kCMTimeZero];
     
     passThroughInstruction.layerInstructions = @[ passThroughLayer ];
@@ -3833,6 +3851,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         // Setup the animation tool
         videoComposition.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
     }
+
+    
     
     // Now export the movie
     AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];

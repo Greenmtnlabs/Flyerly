@@ -232,7 +232,7 @@
 
 # pragma mark - Video editing
 
-/**
+/*
  * Crop video using crop video view controller.
  */
 -(void) videoCrop:(NSURL *)movieUrl {
@@ -302,7 +302,7 @@
     [[self navigationController] pushViewController:cropVideo animated:YES];
 }
 
-/**
+/*
  * Video cropping function
  * Export video to given destination, from given source, cropped and scaled to specified
  * rect with the given overlay.
