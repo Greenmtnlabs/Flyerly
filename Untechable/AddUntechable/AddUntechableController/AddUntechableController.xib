@@ -149,9 +149,12 @@
                         <action selector="onDateChange:" destination="-1" eventType="valueChanged" id="3YZ-X5-mgv"/>
                     </connections>
                 </datePicker>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TDC-AM-1QB">
-                    <rect key="frame" x="22" y="165" width="275" height="1"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TDC-AM-1QB">
+                    <rect key="frame" x="23" y="165" width="275" height="1"/>
                     <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="vC1-Fx-2FY"/>
+                    </constraints>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -226,6 +229,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="xaU-k5-wf6" firstAttribute="top" secondItem="iGK-8W-DFi" secondAttribute="bottom" id="1VB-3f-hM1"/>
+                <constraint firstItem="TDC-AM-1QB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="23" id="3fO-SA-Dol"/>
                 <constraint firstAttribute="bottom" secondItem="UgT-lF-nUB" secondAttribute="bottom" constant="8" id="4Rz-Sj-U64"/>
                 <constraint firstAttribute="trailing" secondItem="kOe-EX-0y4" secondAttribute="trailing" constant="14" id="5J3-5c-4Xx"/>
                 <constraint firstItem="4WI-fT-DHK" firstAttribute="leading" secondItem="UgT-lF-nUB" secondAttribute="trailing" constant="-77" id="5pe-sI-Dyl"/>
@@ -234,6 +238,7 @@
                 <constraint firstItem="dNT-CQ-SL1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Dba-LL-Qw4"/>
                 <constraint firstItem="O1D-ef-E0V" firstAttribute="top" secondItem="xaU-k5-wf6" secondAttribute="bottom" constant="3" id="FG4-dg-Sm9"/>
                 <constraint firstAttribute="trailing" secondItem="qhh-ZG-3hy" secondAttribute="trailing" id="Gu3-gr-QgF"/>
+                <constraint firstItem="dk8-lO-eoD" firstAttribute="leading" secondItem="l1K-xt-eaJ" secondAttribute="trailing" constant="-1" id="IWk-Y1-wQV"/>
                 <constraint firstAttribute="trailing" secondItem="sSK-O9-2mv" secondAttribute="trailing" constant="10" id="JPD-T4-KpY"/>
                 <constraint firstAttribute="trailing" secondItem="iGK-8W-DFi" secondAttribute="trailing" id="Jvv-sm-T6b"/>
                 <constraint firstItem="iGK-8W-DFi" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="L3R-w7-d57"/>
@@ -256,6 +261,7 @@
                 <constraint firstAttribute="trailing" secondItem="dk8-lO-eoD" secondAttribute="trailing" constant="4" id="ZEH-Ep-3hq"/>
                 <constraint firstItem="dNT-CQ-SL1" firstAttribute="top" secondItem="kn1-CB-IMT" secondAttribute="bottom" constant="-17" id="aH6-CT-Qki"/>
                 <constraint firstItem="qhh-ZG-3hy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ekx-KZ-31w"/>
+                <constraint firstAttribute="trailing" secondItem="TDC-AM-1QB" secondAttribute="trailing" constant="22" id="g4L-72-f3b"/>
                 <constraint firstItem="l1K-xt-eaJ" firstAttribute="top" secondItem="qhh-ZG-3hy" secondAttribute="bottom" constant="7" id="gcQ-Y5-Yqu"/>
                 <constraint firstAttribute="trailing" secondItem="F5f-DN-o70" secondAttribute="trailing" id="iK7-Oy-7kH"/>
                 <constraint firstAttribute="trailing" secondItem="UgT-lF-nUB" secondAttribute="trailing" id="j7q-jH-Qnc"/>
@@ -267,6 +273,7 @@
                 <constraint firstItem="kn1-CB-IMT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="rhG-lr-Dvj"/>
                 <constraint firstItem="5Rm-Y1-pCF" firstAttribute="leading" secondItem="O1D-ef-E0V" secondAttribute="trailing" constant="1" id="ro8-ud-AYe"/>
                 <constraint firstItem="xaU-k5-wf6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="umF-Mr-GvT"/>
+                <constraint firstItem="TDC-AM-1QB" firstAttribute="top" secondItem="l1K-xt-eaJ" secondAttribute="bottom" id="xfX-Mb-hBn"/>
                 <constraint firstAttribute="trailing" secondItem="xaU-k5-wf6" secondAttribute="trailing" id="zlF-di-hcB"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
