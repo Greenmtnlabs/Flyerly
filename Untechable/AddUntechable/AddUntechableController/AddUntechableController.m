@@ -393,6 +393,7 @@
     
     float alpha = (showHide) ? 1.0 : 0.0;
     
+    _uiViewLayer.alpha = alpha;
     _spendingTimeTextPicker.alpha = alpha;
     _pickerCloseBtn.alpha = alpha;
     [self addUpperBorder];
@@ -425,6 +426,7 @@
     [self addUpperBorder];
     _picker.alpha = alpha;
     _pickerCloseBtn.alpha = alpha;
+    _uiViewLayer.alpha = alpha;
     self.pickerCloseBtn.backgroundColor = [self colorFromHexString:@"#f1f1f1"];
   
     // changing the "CLOSE" button text color to black
@@ -688,7 +690,7 @@
     CALayer *upperBorder = [CALayer layer];
     upperBorder.backgroundColor = [[UIColor lightGrayColor] CGColor];
     upperBorder.frame = CGRectMake(0, 0, CGRectGetWidth(_pickerCloseBtn.frame), 1.0f);
-    [_pickerCloseBtn.layer addSublayer:upperBorder];
+    //[_pickerCloseBtn.layer addSublayer:upperBorder];
 }
 
 - (IBAction)openPicker:(id)sender {

@@ -27,6 +27,7 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *lblQoute;
 @property (nonatomic,strong)  Untechable *untechable;
+@property (strong, nonatomic) IBOutlet UIView *uiViewLayer;
 
 @property int totalUntechables;
 @property NSString *callReset;
