@@ -113,7 +113,8 @@
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
-    return [FBSession.activeSession handleOpenURL:url];
+    //return [FBSession.activeSession handleOpenURL:url]
+    return [FBAppCall handleOpenURL:url sourceApplication:nil];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
