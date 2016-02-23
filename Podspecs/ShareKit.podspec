@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name          = 'ShareKit'
-  s.version       = '4.0.4'
+  s.version       = '5.0.0'
   s.platform      = :ios, '7.0'
   s.summary       = 'Drop in sharing features for all iPhone and iPad apps.'
   s.homepage      = 'http://getsharekit.com/'
@@ -31,17 +31,17 @@ Pod::Spec.new do |s|
     reachability.requires_arc = false
   end
 
-  s.subspec 'Evernote' do |evernote|
+s.subspec 'Evernote' do |evernote|
     evernote.source_files = 'Classes/ShareKit/Sharers/Services/Evernote/**/*.{h,m}'
     evernote.dependency 'Evernote-SDK-iOS', '~> 1.3.1'
     evernote.dependency 'ShareKit/Core'
     evernote.libraries = 'xml2'
-    evernote.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2' }
+evernote.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2' }
   end
 
   s.subspec 'Facebook' do |facebook|
     facebook.source_files   = 'Classes/ShareKit/Sharers/Services/Facebook/**/*.{h,m}'
-    facebook.dependency 'Facebook-iOS-SDK', '~> 3.2'
+    facebook.dependency 'Facebook-iOS-SDK', '~> 3.0'
     facebook.dependency 'ShareKit/Core'
   end
 
@@ -72,12 +72,12 @@ Pod::Spec.new do |s|
     kippt.dependency 'ShareKit/Core'
   end
 
-  s.subspec 'Plurk' do |plurk|
+   s.subspec 'Plurk' do |plurk|
     plurk.source_files = 'Classes/ShareKit/Sharers/Services/Plurk/**/*.{h,m}'
     plurk.dependency 'ShareKit/Core'
   end
 
-  s.subspec 'Pocket' do |pocket|
+   s.subspec 'Pocket' do |pocket|
     pocket.source_files = 'Classes/ShareKit/Sharers/Services/Pocket/**/*.{h,m}'
     pocket.dependency 'ShareKit/Core'
     pocket.dependency 'PocketAPI', '~> 1.0.2'
@@ -87,11 +87,11 @@ Pod::Spec.new do |s|
     diigo.source_files = 'Classes/ShareKit/Sharers/Services/Diigo/**/*.{h,m}'
     diigo.dependency 'ShareKit/Core'
   end
-
+  
   s.subspec 'Dropbox' do |dropbox|
     dropbox.source_files = 'Classes/ShareKit/Sharers/Services/Dropbox/**/*.{h,m}'
     dropbox.dependency 'ShareKit/Core'
-    dropbox.dependency 'Dropbox-iOS-SDK', '~> 1.3.11'
+    dropbox.dependency 'Dropbox-iOS-SDK', '~> 1.3.13'
   end
 
   s.subspec 'Instapaper' do |instapaper|
@@ -112,11 +112,6 @@ Pod::Spec.new do |s|
   s.subspec 'Readability' do |readability|
     readability.source_files = 'Classes/ShareKit/Sharers/Services/Readability/**/*.{h,m}'
     readability.dependency 'ShareKit/Core'
-  end
-
-  s.subspec 'ReadItLater' do |readitlater|
-    readitlater.source_files = 'Classes/ShareKit/Sharers/Services/Read It Later/**/*.{h,m}'
-    readitlater.dependency 'ShareKit/Core'
   end
 
   s.subspec 'Tumblr' do |tumblr|
@@ -150,27 +145,24 @@ Pod::Spec.new do |s|
     imgur.source_files = 'Classes/ShareKit/Sharers/Services/Imgur/**/*.{h,m}'
     imgur.dependency 'ShareKit/Core'
   end
-
-  s.subspec 'Pinterest' do |pinterest|
-    pinterest.source_files = 'Classes/ShareKit/Sharers/Services/Pinterest/**/*.{h,m}'
-    pinterest.dependency 'Pinterest-iOS', '~> 2.3'
-    pinterest.dependency 'ShareKit/Core'
-  end
+  
+  #s.subspec 'Pinterest' do |pinterest|
+  #  pinterest.source_files = 'Classes/ShareKit/Sharers/Services/Pinterest/**/*.{h,m}'
+  #  pinterest.dependency 'PinterestSDK'
+  #  pinterest.dependency 'ShareKit/Core'
+  #end
   
   s.subspec 'WhatsApp' do |whatsapp|
       whatsapp.source_files = 'Classes/ShareKit/Sharers/Services/WhatsApp/**/*.{h,m}'
       whatsapp.dependency 'ShareKit/Core'
   end
 
-### one note subspec removed because https://github.com/GeLoInc/GeLoSDK-iOS/issues/2
-
-#  s.subspec 'OneNote' do |onenote|
-#   onenote.source_files = 'Classes/ShareKit/Sharers/Services/OneNote/**/*.{h,m}'
-#   onenote.dependency 'ShareKit/Core'
-#   onenote.dependency 'ISO8601DateFormatter'
-#   onenote.vendored_frameworks = 'Frameworks/LiveSDK.framework'
-#   onenote.resource = 'Frameworks/LiveSDK.framework'
-# end
+  s.subspec 'OneNote' do |onenote|
+   onenote.source_files = 'Classes/ShareKit/Sharers/Services/OneNote/**/*.{h,m}'
+   onenote.dependency 'ShareKit/Core'
+   onenote.dependency 'ISO8601DateFormatter'
+   onenote.dependency 'LiveSDK'
+  end
 
   s.subspec 'YouTube' do |youtube|
     youtube.source_files = 'Classes/ShareKit/Sharers/Services/YouTube/**/*.{h,m}'
@@ -187,6 +179,6 @@ Pod::Spec.new do |s|
     googleplus.dependency 'Google-API-Client/Plus'
     googleplus.dependency 'OpenInChrome'
     googleplus.dependency 'gtm-logger'
-  end
+    end
 
 end
