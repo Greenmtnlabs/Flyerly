@@ -38,6 +38,7 @@
 - (NSString*)twitterCallbackUrl;
 - (NSNumber*)twitterUseXAuth;
 - (NSString*)twitterUsername;
+
 - (NSString*)evernoteHost;
 - (NSString*)evernoteConsumerKey;
 - (NSString*)evernoteSecret;

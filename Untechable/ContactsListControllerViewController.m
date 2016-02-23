@@ -45,9 +45,6 @@
     
     [searchTextField resignFirstResponder];
 
-    //Hock tap gesture, when user tap on selectContactLable then open keyboard for search contact field
-    UITapGestureRecognizer *tapGesture =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSearchContactKeyBoard)];
-
 }
 
 -(void)applyLocalization{
