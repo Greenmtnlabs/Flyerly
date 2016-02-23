@@ -636,6 +636,7 @@
 		C39C31A41A77D6D0003CE153 /* downArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "downArrow@2x.png"; sourceTree = "<group>"; };
 		C3CA4DD31A80CE0700B03A23 /* SocialNetworksStatusModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialNetworksStatusModal.h; sourceTree = "<group>"; };
 		C3CA4DD41A80CE0700B03A23 /* SocialNetworksStatusModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialNetworksStatusModal.m; sourceTree = "<group>"; };
+		C3CA7CBF1C7C6337008AFFBA /* FBSDKMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKMacros.h; sourceTree = "<group>"; };
 		C3DC2E101B8C73620091CCF4 /* UserPurchases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPurchases.h; sourceTree = "<group>"; };
 		C3DC2E111B8C73620091CCF4 /* UserPurchases.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPurchases.m; sourceTree = "<group>"; };
 		C3DC2E131B8C77070091CCF4 /* RMAppReceipt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAppReceipt.h; sourceTree = "<group>"; };
@@ -898,6 +899,7 @@
 		36561D5F19D2C8A40069D897 = {
 			isa = PBXGroup;
 			children = (
+				C3CA7CBE1C7C6337008AFFBA /* ios-files */,
 				36561D7119D2C8A40069D897 /* Untechable */,
 				36B0369A19DAD2AB00E8CD21 /* images */,
 				36561D7219D2C8A40069D897 /* Supporting Files */,
@@ -1336,6 +1338,14 @@
 				20CD72D41BD8C57F000F8FBA /* EditButtonCell.xib */,
 			);
 			name = PreferencesController;
+			sourceTree = "<group>";
+		};
+		C3CA7CBE1C7C6337008AFFBA /* ios-files */ = {
+			isa = PBXGroup;
+			children = (
+				C3CA7CBF1C7C6337008AFFBA /* FBSDKMacros.h */,
+			);
+			path = "ios-files";
 			sourceTree = "<group>";
 		};
 		C3DC2E0F1B8C73620091CCF4 /* Purchases */ = {
