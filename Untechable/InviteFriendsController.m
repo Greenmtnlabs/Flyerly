@@ -69,7 +69,7 @@ const int CONTACTS_TAB = 0;
     
     // Register notification for facebook login
     [[NSNotificationCenter defaultCenter] removeObserver:self name:FacebookDidLoginNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fbDidLogin) name:FacebookDidLoginNotification object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fbDidLogin) name:FacebookDidLoginNotification object:nil];
     
     // By default first tab is selected 'Contacts'
     selectedTab = -1;
@@ -267,7 +267,7 @@ const int CONTACTS_TAB = 0;
     
     [selectedIdentifiers removeAllObjects];
     
-    selectedTab = sender.tag;//CONTACTS_TAB;
+    selectedTab = (int)sender.tag;//CONTACTS_TAB;
     
     //[self showLoadingIndicator];
     

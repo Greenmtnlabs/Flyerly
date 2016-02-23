@@ -331,10 +331,10 @@
             needToSendSms = ([[tempModal.allPhoneNumbers[j] objectAtIndex:3] isEqualToString:@"1"]);
             
             if( needToSendCall )
-                callAndSmsStatus[0] = [[NSNumber alloc]initWithInt:([callAndSmsStatus[0] integerValue]+1)];
+                callAndSmsStatus[0] = [[NSNumber alloc]initWithInt:((int)[callAndSmsStatus[0] integerValue]+1)];
 
             if( needToSendSms )
-                callAndSmsStatus[1] = [[NSNumber alloc]initWithInt:([callAndSmsStatus[1] integerValue]+1)];
+                callAndSmsStatus[1] = [[NSNumber alloc]initWithInt:((int)[callAndSmsStatus[1] integerValue]+1)];
             
             if( (needToSendCall || needToSendSms) && breakIfFound ){
                 break;
@@ -367,9 +367,9 @@
  */
 -(void)delCallAndSmsStatus:(NSMutableArray *)customizedContactsForCurrentSession{
     
-    for(int i=(customizedContactsForCurrentSession.count-1); i >= 0; i--){
+    for(int i=((int)customizedContactsForCurrentSession.count-1); i >= 0; i--){
         ContactsCustomizedModal *tempModal = [customizedContactsForCurrentSession objectAtIndex:i];
-        for(int j=(tempModal.allPhoneNumbers.count-1); j>=0; j--){
+        for(int j=((int)tempModal.allPhoneNumbers.count-1); j>=0; j--){
             [tempModal.allPhoneNumbers removeObjectAtIndex:j];
         }
         

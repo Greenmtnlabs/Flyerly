@@ -636,6 +636,7 @@
 		C39C31A41A77D6D0003CE153 /* downArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "downArrow@2x.png"; sourceTree = "<group>"; };
 		C3CA4DD31A80CE0700B03A23 /* SocialNetworksStatusModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialNetworksStatusModal.h; sourceTree = "<group>"; };
 		C3CA4DD41A80CE0700B03A23 /* SocialNetworksStatusModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialNetworksStatusModal.m; sourceTree = "<group>"; };
+		C3CA7CBF1C7C6337008AFFBA /* FBSDKMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKMacros.h; sourceTree = "<group>"; };
 		C3DC2E101B8C73620091CCF4 /* UserPurchases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPurchases.h; sourceTree = "<group>"; };
 		C3DC2E111B8C73620091CCF4 /* UserPurchases.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPurchases.m; sourceTree = "<group>"; };
 		C3DC2E131B8C77070091CCF4 /* RMAppReceipt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAppReceipt.h; sourceTree = "<group>"; };
@@ -898,6 +899,7 @@
 		36561D5F19D2C8A40069D897 = {
 			isa = PBXGroup;
 			children = (
+				C3CA7CBE1C7C6337008AFFBA /* ios-files */,
 				36561D7119D2C8A40069D897 /* Untechable */,
 				36B0369A19DAD2AB00E8CD21 /* images */,
 				36561D7219D2C8A40069D897 /* Supporting Files */,
@@ -1338,6 +1340,14 @@
 			name = PreferencesController;
 			sourceTree = "<group>";
 		};
+		C3CA7CBE1C7C6337008AFFBA /* ios-files */ = {
+			isa = PBXGroup;
+			children = (
+				C3CA7CBF1C7C6337008AFFBA /* FBSDKMacros.h */,
+			);
+			path = "ios-files";
+			sourceTree = "<group>";
+		};
 		C3DC2E0F1B8C73620091CCF4 /* Purchases */ = {
 			isa = PBXGroup;
 			children = (
@@ -1401,7 +1411,7 @@
 		36561D6019D2C8A40069D897 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Green MTN Labs Inc";
 				TargetAttributes = {
 					36561D6719D2C8A40069D897 = {
@@ -1844,6 +1854,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1858,7 +1869,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "d47ad45a-8978-43b1-aea9-4efac12eb4a6";
 				SDKROOT = iphoneos;
@@ -1892,7 +1903,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PROVISIONING_PROFILE = "ae551082-6625-4075-a900-27914b5b9a6b";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -1913,6 +1924,7 @@
 				GCC_PREFIX_HEADER = "Untechable/Untechable-Prefix.pch";
 				INFOPLIST_FILE = "Untechable/Untechable-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.greenmtnlabs.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d47ad45a-8978-43b1-aea9-4efac12eb4a6";
 				WRAPPER_EXTENSION = app;
@@ -1934,6 +1946,7 @@
 				INFOPLIST_FILE = "Untechable/Untechable-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.greenmtnlabs.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "ae551082-6625-4075-a900-27914b5b9a6b";
 				WRAPPER_EXTENSION = app;
