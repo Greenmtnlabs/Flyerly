@@ -348,7 +348,9 @@
     contactBackupArray = nil;
     contactBackupArray = contactsArray;
     [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-    [self hideLoadingIndicator];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self hideLoadingIndicator];
+    });
     
 }
 
