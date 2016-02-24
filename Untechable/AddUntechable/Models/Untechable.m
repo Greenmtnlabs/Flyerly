@@ -11,7 +11,6 @@
 #import "Common.h"
 #import "RSetUntechable.h"
 #import "AFNetworking.h"
-#import "SHKXMLResponseParser.h"
 
 @implementation Untechable
 
@@ -345,7 +344,6 @@
                     eventId = [returnData valueForKey:@"eventId"];
                     [self addOrUpdateInDatabase];
                 }
-                
                 errorOnFinish = YES;
             }
         }
@@ -359,8 +357,9 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
        
         NSString *message = @"";
+        BOOL errorOnFinish = YES;
         message = @"Error occurred, please try again later.";
-        callBack(error, message);
+        callBack(errorOnFinish, message);
         
     }];
     
