@@ -95,7 +95,7 @@
 
 // SetupGuide Screen 4
 "Untech Now Setup!" = "Configuración Untech Ahora!";
-"Using these settings, in the future you can easily take a break from technology with the tap of the 'Untech Now' button from the main screen. Namaste!" = "El uso de estos ajustes, en el futuro, usted puede fácilmente tomar un descanso de la tecnología con el toque del botón 'Untech ahora' desde la pantalla principal. Namaste!";
+"Using these settings, in the future you can easily %@ with the tap of the 'Untech Now' button from the main screen. Namaste!" = "El uso de estos ajustes, en el futuro, puede fácilmente %@ con el toque del botón 'Untech ahora' desde la pantalla principal. Namaste!";
 
 
 "%i day" = "%i día";
