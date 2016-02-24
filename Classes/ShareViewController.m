@@ -707,9 +707,9 @@ UIAlertView *saveCurrentFlyerAlert;
     
     [self updateDescription];
     
-    fbShareType = @"fb-photo-messenger";
     
     if([self.flyer isVideoFlyer]){
+        fbShareType = @"fb-video-messenger";
         /*
         //Dont remove this bellow code
         NSString *vUrl = [self.flyer getVideoAssetURL];
@@ -724,7 +724,7 @@ UIAlertView *saveCurrentFlyerAlert;
             //share on wall
             //[FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
          
-            //share in messanger, facing issue thats why things are commented, bellow are few asked questions link
+            //share in messanger, facing issue thats why things are commented
             //http://stackoverflow.com/questions/32720016/fbsdkmessagedialog-does-not-send-video-in-message-in-ios
             //http://stackoverflow.com/questions/32712098/send-video-in-message-to-facebook-friend-using-fbsdkmessagedialog
             //http://stackoverflow.com/questions/31968929/sharing-video-into-facebook-messenger
@@ -734,6 +734,7 @@ UIAlertView *saveCurrentFlyerAlert;
         if( ![[self.flyer getSharingVideoPath]  isEqual: @""] ){
             NSData *videoData = [NSData dataWithContentsOfFile:[self.flyer getSharingVideoPath]];
             [FBSDKMessengerSharer shareVideo:videoData withOptions:nil];
+            [self sharer:nil didCompleteWithResults:nil];
         }
     } else {
     
