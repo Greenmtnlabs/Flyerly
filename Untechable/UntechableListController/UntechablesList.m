@@ -465,7 +465,7 @@
     }
     else{
         errorOnFinish = YES;
-        message = NSLocalizedString(@"Unable to delete, please try agin later!", nil);
+        message = NSLocalizedString(@"Unable to delete, please try again later!", nil);
     }
     
     if( errorOnFinish ){
