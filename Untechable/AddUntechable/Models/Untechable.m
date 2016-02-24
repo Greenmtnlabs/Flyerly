@@ -10,6 +10,7 @@
 #import "Untechable.h"
 #import "Common.h"
 #import "RSetUntechable.h"
+#import "AFNetworking.h"
 
 @implementation Untechable
 
@@ -317,38 +318,51 @@
     // setting the body of the post to the reqeust
     [request setHTTPBody:body];
     
-    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    BOOL errorOnFinish = NO;
-    NSString *message = @"";
+       
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:API_SAVE]];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
-    if( returnData != nil ){
+    [manager POST:@"/event/save" parameters:request success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSData *returnData = responseObject;
         
-        NSDictionary *dict=[NSJSONSerialization JSONObjectWithData:returnData options:NSJSONReadingMutableLeaves error:nil];
+        BOOL errorOnFinish = NO;
+        NSString *message = @"";
         
-        if( [[dict valueForKey:@"status"] isEqualToString:@"OK"] ) {
+        if( returnData != nil ){
             
-            twillioNumber = [dict valueForKey:@"twillioNumber"];
-            eventId = [dict valueForKey:@"eventId"];
-            savedOnServer = YES;
-            hasFinished = YES;
-            [self addOrUpdateInDatabase];
-            
-        } else{
-            message = [dict valueForKey:@"message"];
-            if( !([[dict valueForKey:@"eventId"] isEqualToString:@"0"]) ) {
-                eventId = [dict valueForKey:@"eventId"];
+            if( [[returnData valueForKey:@"status"] isEqualToString:@"OK"] ) {
+                
+                twillioNumber = [returnData valueForKey:@"twillioNumber"];
+                eventId = [returnData valueForKey:@"eventId"];
+                savedOnServer = YES;
+                hasFinished = YES;
                 [self addOrUpdateInDatabase];
+                
+            } else{
+                message = [returnData valueForKey:@"message"];
+                if( !([[returnData valueForKey:@"eventId"] isEqualToString:@"0"]) ) {
+                    eventId = [returnData valueForKey:@"eventId"];
+                    [self addOrUpdateInDatabase];
+                }
+                errorOnFinish = YES;
             }
-            
-            errorOnFinish = YES;
         }
-    }
-    else{
-        errorOnFinish = YES;
-        message = @"Error occurred, please try again later.";        
-    }
+        else{
+            errorOnFinish = YES;
+            message = @"Error occurred, please try again later.";
+        }
+        
+        callBack(errorOnFinish, message);
+
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+       
+        NSString *message = @"";
+        BOOL errorOnFinish = YES;
+        message = @"Error occurred, please try again later.";
+        callBack(errorOnFinish, message);
+        
+    }];
     
-    callBack(errorOnFinish, message);
 }
 
 /**

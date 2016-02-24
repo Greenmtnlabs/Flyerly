@@ -2,8 +2,8 @@ platform :ios, '8.0'
 
 link_with 'Untechable'
 
-pod 'AFNetworking', '~> 2.5.3'
-#pod 'AFNetworking', '~> 3.0'
+#pod 'AFNetworking', '~> 2.5.3'
+pod 'AFNetworking', '~> 3.0'
 pod 'uservoice-iphone-sdk', '~> 3.2.3'
 #pod 'Facebook-iOS-SDK', '3.23.2'
 pod 'IOSLinkedInAPI', '2.0.0'

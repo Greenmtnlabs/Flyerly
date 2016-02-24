@@ -431,14 +431,12 @@
     
     if ( section == sectionCurrentUntech ){
         tempDict = [currentUntechs objectAtIndex:indexToremoveOnSucess];
-        apiDelete = [NSString stringWithFormat:@"%@?eventId=%@",API_DELETE,[tempDict valueForKey:@"eventId"]];
     }else if ( section == sectionUpcomingUntech ){
         tempDict = [upcomingUntechs objectAtIndex:indexToremoveOnSucess];
-        apiDelete = [NSString stringWithFormat:@"%@?eventId=%@",API_DELETE,[tempDict valueForKey:@"eventId"]];
     } else if ( section == sectionPastUntech ){
         tempDict = [pastUntechs objectAtIndex:indexToremoveOnSucess];
-        apiDelete = [NSString stringWithFormat:@"%@?eventId=%@",API_DELETE,[tempDict valueForKey:@"eventId"]];
     }
+    apiDelete = [NSString stringWithFormat:@"%@?eventId=%@",API_DELETE,[tempDict valueForKey:@"eventId"]];
 
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -465,7 +463,7 @@
     }
     else{
         errorOnFinish = YES;
-        message = NSLocalizedString(@"Unable to delete, please try agin later!", nil);
+        message = NSLocalizedString(@"Unable to delete, please try again later!", nil);
     }
     
     if( errorOnFinish ){
