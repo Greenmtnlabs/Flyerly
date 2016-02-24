@@ -491,11 +491,13 @@
     return [NSNumber numberWithBool:YES];
 }
 
+//clientid
 // YouTube - https://developers.google.com/youtube/v3/guides/authentication#OAuth2_Register
 - (NSString*)youTubeConsumerKey {
 	return @"144370279359-lsst3ttqhr7nrj1krv21hk3urfsou6ic.apps.googleusercontent.com";
 }
 
+//API key
 - (NSString*)youTubeSecret {
 	return @"tSn0qB7etxqNv59PZE10oU5d";
 }

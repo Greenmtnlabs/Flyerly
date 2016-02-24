@@ -707,15 +707,35 @@ UIAlertView *saveCurrentFlyerAlert;
     
     [self updateDescription];
     
-    fbShareType = @"fb-photo-messenger";
     
     if([self.flyer isVideoFlyer]){
-        FBSDKShareLinkContent *contentLink = [[FBSDKShareLinkContent alloc] init];
-        contentLink.contentURL = [NSURL URLWithString: [self.flyer getYoutubeLink]];
-        
-        [FBSDKMessageDialog showWithContent:contentLink delegate:self];
-        
- 
+        fbShareType = @"fb-video-messenger";
+        /*
+        //Dont remove this bellow code
+        NSString *vUrl = [self.flyer getVideoAssetURL];
+        if ( ![vUrl  isEqual: @""] ){
+            NSURL *videoURL = [NSURL URLWithString: vUrl];
+            FBSDKShareVideo *video = [[FBSDKShareVideo alloc] init];
+            video.videoURL = videoURL;
+            
+            FBSDKShareVideoContent *content = [[FBSDKShareVideoContent alloc] init];
+            content.video = video;
+            
+            //share on wall
+            //[FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
+         
+            //share in messanger, facing issue thats why things are commented
+            //http://stackoverflow.com/questions/32720016/fbsdkmessagedialog-does-not-send-video-in-message-in-ios
+            //http://stackoverflow.com/questions/32712098/send-video-in-message-to-facebook-friend-using-fbsdkmessagedialog
+            //http://stackoverflow.com/questions/31968929/sharing-video-into-facebook-messenger
+            [FBSDKMessageDialog showWithContent:content delegate:self];
+        }
+         */
+        if( ![[self.flyer getSharingVideoPath]  isEqual: @""] ){
+            NSData *videoData = [NSData dataWithContentsOfFile:[self.flyer getSharingVideoPath]];
+            [FBSDKMessengerSharer shareVideo:videoData withOptions:nil];
+            [self sharer:nil didCompleteWithResults:nil];
+        }
     } else {
     
         FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
@@ -727,6 +747,8 @@ UIAlertView *saveCurrentFlyerAlert;
   
     }
  }
+
+
 /*
  * Called when facebook button is pressed
  */

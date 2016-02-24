@@ -34,6 +34,7 @@
 #import "YouTubeSubClass.h"
 #import "CreateFlyerController.h"
 #import <FBSDKShareKit/FBSDKSharing.h>
+#import <FBSDKMessengerShareKit/FBSDKMessengerShareKit.h>
 
 #import "CreateFlyerController.h"
 #import "FlyerlyMainScreen.h"
