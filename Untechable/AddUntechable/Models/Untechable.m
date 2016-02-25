@@ -310,14 +310,14 @@
         }
         else{
             errorOnFinish = YES;
-            message = @"Error occurred, please try again later.";
+            message = NSLocalizedString(@"Error occurred, please try again later.", nil);
         }
         
         callBack(errorOnFinish, message);
 
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
        
-        NSString *message = @"Error occurred, please try again later.";
+        NSString *message = NSLocalizedString(@"Error occurred, please try again later.", nil);
         BOOL errorOnFinish = YES;
         callBack(errorOnFinish, message);
         
