@@ -279,50 +279,11 @@
         return;
     }
     
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:API_SAVE]];
-    [request setHTTPMethod:@"POST"];
-    
-    NSMutableData *body = [NSMutableData data];
-    NSString *boundary = @"---------------------------14737809831466499882746641449";
-    
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
-    [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
-    
-    NSArray *stringVarsAry = [[NSArray alloc] initWithObjects:@"eventId", @"userId", @"paid",
-                              @"timezoneOffset", @"spendingTimeTxt", @"startDate", @"endDate", @"hasEndDate"
-                              , @"location",@"twillioNumber"
-                              ,@"socialStatus", @"fbAuth", @"fbAuthExpiryTs" , @"twitterAuth",@"twOAuthTokenSecret",   @"linkedinAuth"
-                              ,@"acType", @"email", @"password", @"respondingEmail", @"iSsl", @"imsHostName", @"imsPort", @"oSsl", @"omsHostName", @"omsPort",@"customizedContacts",@"userName", @"userPhoneNumber"
-                              ,nil];
-
-    for (NSString* key in dic) {
-        BOOL sendIt =   NO;
-        id value    =   [dic objectForKey:key];
         
-        if( sendIt || [stringVarsAry containsObject:key]){
-            
-            [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-            [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n",key] dataUsingEncoding:NSUTF8StringEncoding]];
-            
-            [body appendData:[value dataUsingEncoding:NSUTF8StringEncoding]];
-            [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-        }
-        
-    }//for
-    
-    
-    // close form
-    [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    // setting the body of the post to the reqeust
-    [request setHTTPBody:body];
-    
-       
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:API_SAVE]];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
-    [manager POST:@"/event/save" parameters:request success:^(NSURLSessionDataTask *task, id responseObject) {
+    [manager POST:API_SAVE parameters:dic success:^(NSURLSessionDataTask *task, id responseObject) {
         NSData *returnData = responseObject;
         
         BOOL errorOnFinish = NO;
@@ -349,16 +310,15 @@
         }
         else{
             errorOnFinish = YES;
-            message = @"Error occurred, please try again later.";
+            message = NSLocalizedString(@"Error occurred, please try again later.", nil);
         }
         
         callBack(errorOnFinish, message);
 
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
        
-        NSString *message = @"";
+        NSString *message = NSLocalizedString(@"Error occurred, please try again later.", nil);
         BOOL errorOnFinish = YES;
-        message = @"Error occurred, please try again later.";
         callBack(errorOnFinish, message);
         
     }];

@@ -13,8 +13,6 @@
 #import <Parse/Parse.h>
 #import "SHKTextMessage.h"
 #import "SHKConfiguration.h"
-//#import "FBRequest.h"
-//#import "FacebookSDK.h"
 #import "SHKiOSSharer.h"
 #import "SHKiOSTwitter.h"
 #import "SHKSharer.h"
@@ -721,7 +719,6 @@ const int CONTACTS_TAB = 0;
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [uiTableView reloadData];
-        //[self hideLoadingIndicator];
     });
 }
 

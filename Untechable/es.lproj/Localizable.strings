@@ -211,3 +211,6 @@
 
 "DONE" = "HECHO";
 "next " = "siguiente ";
+
+// Untechable
+"Error occurred, please try again later." = "Ha producido un error, por favor intente de nuevo más tarde.";
