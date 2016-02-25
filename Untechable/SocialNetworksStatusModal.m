@@ -324,8 +324,20 @@
     else if( [self closeFbSessionIfOpen] == NO ) {
         // Open a session showing the user the login UI
         // You must ALWAYS ask for public_profile permissions when opening a session
+//        [FBSession openActiveSessionWithReadPermissions:@[@"publish_actions"]
+//                                           allowLoginUI:YES
+//                                      completionHandler:
+//         ^(FBSession *session, FBSessionState state, NSError *error) {
+//             
+//             // Call the app delegate's sessionStateChanged:state:error method to handle session state changes
+//             [self fbSessionStateChanged:session state:state error:error];
+//             
+//             [self setLoggedInStatusOnCell:sender Controller:Controller LoggedIn:YES calledFor:@"Facebook"];
+//         }];
+        
         [FBSession openActiveSessionWithReadPermissions:@[@"publish_actions"]
                                            allowLoginUI:YES
+                                     fromViewController:nil
                                       completionHandler:
          ^(FBSession *session, FBSessionState state, NSError *error) {
              
