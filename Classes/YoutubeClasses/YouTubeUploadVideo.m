@@ -45,15 +45,11 @@
                     [waitIndicator dismissWithClickedButtonIndex:0 animated:YES];
                     if (error == nil)
                     {
-//                        NSLog(@"File ID: %@", insertedVideo.identifier);
-//                        [Utils showAlert:@"YouTube" message:@"Video uploaded!"];
                         [self.delegate uploadYouTubeVideo:self didFinishWithResults:insertedVideo];
                         return;
                     }
                     else
                     {
-//                        NSLog(@"An error occurred: %@", error);
-//                        [Utils showAlert:@"YouTube" message:@"Sorry, an error occurred!"];
                         [self.delegate uploadYouTubeVideo:self didFinishWithResults:nil];
                         return;
                     }

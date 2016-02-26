@@ -20,6 +20,6 @@ static NSString *const kKeychainItemName = @"Flyerly";
 
 + (UIAlertView*)showWaitIndicator:(NSString *)title;
 + (void)showAlert:(NSString *)title message:(NSString *)message;
-+ (NSString *)humanReadableFromYouTubeTime:(NSString *)youTubeTimeFormat;
+
 
 @end

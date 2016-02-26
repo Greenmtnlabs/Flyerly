@@ -42,27 +42,4 @@
   [alert show];
 }
 
-+ (NSString *)humanReadableFromYouTubeTime:(NSString *)youTubeTimeFormat {
-  NSRange range = NSMakeRange(0, youTubeTimeFormat.length);
-  NSError *error = NULL;
-  NSRegularExpression *regex =
-      [NSRegularExpression regularExpressionWithPattern:@"PT(\\d*)M(\\d+)S"
-                                                options:NSRegularExpressionCaseInsensitive
-                                                  error:&error];
-  NSArray *matches = [regex matchesInString:youTubeTimeFormat options:0 range:range];
-  NSString *humanReadable = @"(Unknown)";
-  for (NSTextCheckingResult *match in matches) {
-    NSRange minuteRange = [match rangeAtIndex:1];
-    NSString *minuteString = [youTubeTimeFormat substringWithRange:minuteRange];
-    NSRange secRange = [match rangeAtIndex:2];
-    NSString *secString = [youTubeTimeFormat substringWithRange:secRange];
-    humanReadable =
-        [NSString stringWithFormat:@"%01d:%02d", [minuteString intValue], [secString intValue]];
-  }
-
-  NSLog(@"Translated %@ to %@", youTubeTimeFormat, humanReadable);
-  return humanReadable;
-
-}
-
 @end
