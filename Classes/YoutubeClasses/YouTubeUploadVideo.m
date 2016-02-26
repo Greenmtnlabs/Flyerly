@@ -8,7 +8,6 @@
 
 #import "YouTubeUploadVideo.h"
 #import "VideoData.h"
-#import "UploadController.h"
 #import "Utils.h"
 
 // Thumbnail image size.

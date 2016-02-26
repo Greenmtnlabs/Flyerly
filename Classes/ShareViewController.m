@@ -12,9 +12,11 @@
 #import "GTMOAuth2ViewControllerTouch.h"
 #import "VideoData.h"
 #import "Utils.h"
+#import "FlyerlyConfigurator.h"
 
 @implementation ShareViewController{
     NSString *fbShareType; // 4 possible values to assign: fb-photo-wall | fb-photo-messenger | fb-video-wall | fb-video-messenger
+    FlyerlyConfigurator *flyerConfigurator;
 }
 @synthesize youtubeService;
 @synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,saveButton,printFlyerButton,facebookButton,twitterButton,instagramButton,messengerButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,tempTxtArea,saveToGallaryReqBeforeSharing, fmController;
@@ -29,6 +31,9 @@ UIAlertView *saveCurrentFlyerAlert;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    flyerConfigurator = appDelegate.flyerConfigurator;
     
     hasSavedInGallary = NO;
     
@@ -502,9 +507,9 @@ UIAlertView *saveCurrentFlyerAlert;
     // Initialize the youtube service & load existing credentials from the keychain if available
     self.youtubeService = [[GTLServiceYouTube alloc] init];
     self.youtubeService.authorizer =
-    [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:kKeychainItemName
-                                                          clientID:kClientID
-                                                      clientSecret:kClientSecret];
+    [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:flyerConfigurator.appName
+                                                          clientID:flyerConfigurator.youTubeSecret
+                                                      clientSecret:flyerConfigurator.youTubeConsumerKey];
     
     
     _uploadVideo = [[YouTubeUploadVideo alloc] init];
@@ -563,9 +568,9 @@ UIAlertView *saveCurrentFlyerAlert;
     GTMOAuth2ViewControllerTouch *authController;
     
     authController = [[GTMOAuth2ViewControllerTouch alloc] initWithScope:kGTLAuthScopeYouTube
-                                                                clientID:kClientID
-                                                            clientSecret:kClientSecret
-                                                        keychainItemName:kKeychainItemName
+                                                                clientID:flyerConfigurator.youTubeConsumerKey
+                                                            clientSecret:flyerConfigurator.youTubeSecret
+                                                        keychainItemName:flyerConfigurator.appName
                                                                 delegate:self
                                                         finishedSelector:@selector(viewController:finishedWithAuth:error:)];
     return authController;
@@ -591,9 +596,9 @@ UIAlertView *saveCurrentFlyerAlert;
     
     viewController = [[GTMOAuth2ViewControllerTouch alloc]
                       initWithScope:kGTLAuthScopeYouTube
-                      clientID:kClientID
-                      clientSecret:kClientSecret
-                      keychainItemName:kKeychainItemName
+                      clientID:flyerConfigurator.youTubeConsumerKey
+                      clientSecret:flyerConfigurator.youTubeSecret
+                      keychainItemName:flyerConfigurator.appName
                       delegate:self
                       finishedSelector:@selector(viewController:finishedWithAuth:error:)];
     
@@ -602,7 +607,12 @@ UIAlertView *saveCurrentFlyerAlert;
 
 - (void)uploadYouTubeVideo:(YouTubeUploadVideo *)uploadVideo
       didFinishWithResults:(GTLYouTubeVideo *)video {
-    [Utils showAlert:@"Video Uploaded" message:video.identifier];
+    
+    NSString *videoUrl = [NSString stringWithFormat:@"https://www.youtube.com/watch?v=%@",video.identifier];
+    [self onYoutubeSFShare:videoUrl];
+    [self setSocialStatus];
+    
+    [Utils showAlert:@"Alert" message:@"Video uploaded successfully."];
 }
 
 /*
@@ -1047,33 +1057,46 @@ UIAlertView *saveCurrentFlyerAlert;
         [Flurry logEvent:@"Shared SMS"];
 
     } else if ( [sharer isKindOfClass:[YouTubeSubClass class]] == YES ) {
-        
-        youTubeButton.enabled = YES;
         YouTubeSubClass *youtube = (YouTubeSubClass *) sharer;
-        
-        // Save Link In .Text File of Flyer
-        [self.flyer setYoutubeLink:youtube.youTubeVideoURL];
-        
-        // Mark Social Status In .soc File of Flyer
-        [self.flyer setYouTubeStatus:1];
-        [self haveVideoLinkEnableAllShareOptions: [[self.flyer getYouTubeStatus] isEqualToString: @"1"]];
-        
-        [Flurry logEvent:@"Shared Youtube"];
+        [self onYoutubeSFShare:youtube.youTubeVideoURL];
     }
     
+    [self actionAfterSharing];
+    
+    if (!sharer.quiet)
+        [[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Flyer Posted!") forSharer:sharer];
+    
+}
+
+-(void)actionAfterSharing{
     //Here we set the set selected state of buttons.
     [self setSocialStatus];
     
-    if (!sharer.quiet)
-		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Flyer Posted!") forSharer:sharer];
+
     
     iosSharer.shareDelegate = nil;
     iosSharer = nil;
-
+    
     [self saveInGallaryIfNeeded];
     [self.cfController enableHome:YES];
-    
 }
+
+-(void)onYoutubeSFShare:(NSString *)youTubeVideoURL{
+    youTubeButton.enabled = YES;
+    
+    
+    // Save Link In .Text File of Flyer
+    [self.flyer setYoutubeLink:youTubeVideoURL];
+    
+    // Mark Social Status In .soc File of Flyer
+    [self.flyer setYouTubeStatus:1];
+    [self haveVideoLinkEnableAllShareOptions: [[self.flyer getYouTubeStatus] isEqualToString: @"1"]];
+    
+    [Flurry logEvent:@"Shared Youtube"];
+
+}
+
+
 
 - (void)sharer:(SHKSharer *)sharer failedWithError:(NSError *)error shouldRelogin:(BOOL)shouldRelogin
 {
