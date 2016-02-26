@@ -4408,8 +4408,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             [flyer setSaveButtonStatus:0];
 
             //Background Thread
-            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-                
+//            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+            dispatch_async( dispatch_get_main_queue(), ^{
                 //Here we Merge All Layers in Video File
                 [self videoMergeProcess];
             });

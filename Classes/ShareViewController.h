@@ -4,6 +4,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GTLYouTube.h"
+#import "VideoData.h"
+#import <MobileCoreServices/MobileCoreServices.h>
+#import "YouTubeUploadVideo.h"
+
 #import <Parse/Parse.h>
 #import "ShareKit.h"
 #import "SHK.h"
@@ -11,7 +16,6 @@
 #import "SHKMail.h"
 #import "SHKFacebook.h"
 #import "SHKiOSFacebook.h"
-#import <SHKYouTube.h>
 #import <SHKTwitter.h>
 #import <SHKiOSTwitter.h>
 #import "SHKTextMessage.h"
@@ -43,7 +47,7 @@
 @class SHKSharer;
 @class SHKActivityIndicator;
 
-@interface ShareViewController : UIViewController<FBSDKSharingDelegate, UIWebViewDelegate,UIDocumentInteractionControllerDelegate,UITextViewDelegate,UITextFieldDelegate, SHKSharerDelegate,MFMailComposeViewControllerDelegate> {
+@interface ShareViewController : UIViewController<FBSDKSharingDelegate, UIWebViewDelegate,UIDocumentInteractionControllerDelegate,UITextViewDelegate,UITextFieldDelegate, SHKSharerDelegate,MFMailComposeViewControllerDelegate,YouTubeUploadVideoDelegate, UITextFieldDelegate> {
 
     FlyerlySingleton *globle;
     NSArray *arrayOfAccounts;
@@ -52,6 +56,8 @@
 
 }
 
+@property (nonatomic, retain) GTLServiceYouTube *youtubeService;
+@property(nonatomic, strong) YouTubeUploadVideo *uploadVideo;
 
 @property(nonatomic,strong) IBOutlet UIPlaceHolderTextView *descriptionView;
 @property (strong, nonatomic) IBOutlet UIImageView *titlePlaceHolderImg;
