@@ -494,12 +494,12 @@
 //clientid
 // YouTube - https://developers.google.com/youtube/v3/guides/authentication#OAuth2_Register
 - (NSString*)youTubeConsumerKey {
-	return @"144370279359-lsst3ttqhr7nrj1krv21hk3urfsou6ic.apps.googleusercontent.com";
+    return @"688107532507-7nm1v37klc2vtfgcaer206k338ub9jqs.apps.googleusercontent.com";
 }
 
 //API key
 - (NSString*)youTubeSecret {
-	return @"tSn0qB7etxqNv59PZE10oU5d";
+	return @"lSn4qPwH3FOytNsqMkeZNYTP";
 }
 
 // Dropbox - https://www.dropbox.com/developers/apps

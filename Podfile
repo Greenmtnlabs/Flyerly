@@ -8,6 +8,7 @@ platform :ios, '8.0'
 
     #pod 'ShareKit', '~> 4.0.4'
     pod 'ShareKit', :podspec => "Podspecs/ShareKit.podspec"
+    #pod 'Google-API-Client' //its already inclued in sharekit thaty why it commented, but in case sharkit removed so enable it for youtube sharing
 
     pod 'Facebook-iOS-SDK', '~> 3.23.2'
 
