@@ -553,7 +553,7 @@ UIAlertView *saveCurrentFlyerAlert;
                                            fileData:fileData
                                               title:title
                                         description:description
-                                      privacyStatus: ( ([[flyer getShareType]  isEqual: @"Public"]) ? @"public" : @"private")
+                                      privacyStatus: ( ([[flyer getShareType]  isEqual: @"Private"]) ? @"private" : @"public")
                                         tags:[NSArray arrayWithObjects:@"#flyerly", nil]];
 }
 
