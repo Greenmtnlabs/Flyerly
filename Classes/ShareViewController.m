@@ -605,10 +605,6 @@ UIAlertView *saveCurrentFlyerAlert;
     [Utils showAlert:@"Video Uploaded" message:video.identifier];
 }
 
-
-
-
-
 /*
  * Called when Youtube button is pressed\
  */
