@@ -522,12 +522,12 @@ UIAlertView *saveCurrentFlyerAlert;
     [self updateDescription];
     
     if ([FlyerlySingleton connected]) {
-        if (![self isAuthorized]) {
+//        if (![self isAuthorized]) { //always ask for auth
             // Not yet authorized, request authorization and push the login UI onto the navigation stack.
             [self.cfController.navigationController pushViewController:[self createAuthController] animated:YES];
-        } else {
-            [self uploadYTDL];
-        }
+//        } else {
+//            [self uploadYTDL];
+//        }
     } else {
         [FlyerlySingleton showNotConnectedAlert];
     }
