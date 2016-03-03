@@ -2,7 +2,7 @@ platform :ios, '8.0'
 
     pod 'AFNetworking', '~> 2.5.4'
     pod 'uservoice-iphone-sdk', '~> 3.2.3'
-    pod 'PayPal-iOS-SDK'
+    pod 'PayPal-iOS-SDK', '~> 2.14.0'
 
     #pod 'Google-API-Client', '~> 1.0.422'
 

@@ -7265,7 +7265,12 @@
 				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-lc++",
+					"-ObjC",
+					"-all_load",
+				);
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "fa72cf3d-3eec-45db-801b-a724bce30ef3";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "fa72cf3d-3eec-45db-801b-a724bce30ef3";
@@ -7462,7 +7467,12 @@
 				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-lc++",
+					"-ObjC",
+					"-all_load",
+				);
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "e68eb1d6-7a19-4f37-8e3b-c797ca1c0c16";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "e68eb1d6-7a19-4f37-8e3b-c797ca1c0c16";
@@ -7486,7 +7496,12 @@
 				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-lc++",
+					"-ObjC",
+					"-all_load",
+				);
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "97bf5434-078b-4eb6-b558-2cb64dd5662d";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "97bf5434-078b-4eb6-b558-2cb64dd5662d";
