@@ -41,6 +41,9 @@
     int postReqTry;
     BOOL hasPaidForPostCard;
     BOOL toContactVal;
+    
+    UITextView *tempTextView;
+    UITextField *tempTextField;
 }
 
 @property (nonatomic, strong, readwrite) PayPalConfiguration *payPalConfiguration;
@@ -202,6 +205,7 @@ UIButton *backButton;
 
 -(void)textFieldDidBeginEditing:(UITextField *)sender
 {
+    tempTextField = sender;
     if ([sender isEqual:toName])
     {
         if (self.view.frame.origin.y >= 0){
@@ -349,6 +353,7 @@ UIButton *backButton;
 }
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+    tempTextView = textView;
     NSLog(@"textViewShouldBeginEditing:");
     if ( [textView.text isEqualToString:@"Enter message here..."]) {
     
@@ -358,6 +363,7 @@ UIButton *backButton;
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
+    tempTextView = textView;
     NSLog(@"textViewDidBeginEditing:");
 }
 
@@ -370,6 +376,7 @@ UIButton *backButton;
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
+    tempTextView = textView;
     if([text length] == 0)
     {
         if([textView.text length] != 0)
@@ -388,10 +395,9 @@ UIButton *backButton;
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
+    
     // Reseting the scrollview position
     //[scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-    
-    [textField resignFirstResponder];
     
     return YES;
 }
@@ -660,7 +666,11 @@ https://lob.com/docs#postcards
 -(void)sendrequestOnLob {
     
     if( testingSkipPaypal == NO && hasPaidForPostCard == NO ) {
-        [self openBuyPanel:[self getCountOfContacts]];
+        [tempTextView resignFirstResponder];
+        [tempTextField resignFirstResponder];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [self openBuyPanel:[self getCountOfContacts]];
+        });
     }
     else {
         [self showLoading:YES];
@@ -972,10 +982,11 @@ https://lob.com/docs#postcards
     if ( payment.processable ) {
         // If, for example, the amount was negative or the shortDescription was empty, then
         // this payment would not be processable. You would want to handle that here.
-        PayPalPaymentViewController *paymentViewController;
-        paymentViewController = [[PayPalPaymentViewController alloc] initWithPayment:payment
+        PayPalPaymentViewController *paymentViewController = [[PayPalPaymentViewController alloc] initWithPayment:payment
                                                                        configuration:self.payPalConfiguration
                                                                             delegate:self];
+        
+        
         
         // Present the PayPalPaymentViewController.
         [self presentViewController:paymentViewController animated:YES completion:nil];
