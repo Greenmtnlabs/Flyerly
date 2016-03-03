@@ -174,12 +174,16 @@
     NSURL *url = [NSURL URLWithString:[[gif[@"images"] objectForKey:@"original"] objectForKey:@"mp4"]];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+
+        //hide loading indicator
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self onSelectGiphyShowLoadingIndicator:NO];
+        });
         
         if( data == nil ){
-            [self onSelectGiphyShowLoadingIndicator:NO];
             return;
         }
-            
+        
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
 
             NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
@@ -277,7 +281,6 @@
             
             // Perform ui related things in main thread
             dispatch_async( dispatch_get_main_queue(), ^{
-                [weakSelf onSelectGiphyShowLoadingIndicator:NO];
                 [weakSelf goBack];
             });
             
@@ -437,7 +440,8 @@ shouldReloadTableForSearchString:(NSString *)searchString {
         
     }
     else{
-        [layerScrollView removeFromSuperview];
+        [loadingOverly removeFromSuperview];
+        
         layerScrollView.alpha = 1;
         searchField.userInteractionEnabled = YES;
         [leftBarButtonItem setEnabled:YES];
