@@ -175,11 +175,12 @@
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 
-        //hide loading indicator
+        //hide loading indicator in UI thread
         dispatch_async(dispatch_get_main_queue(), ^{
             [self onSelectGiphyShowLoadingIndicator:NO];
         });
-        
+
+        // when data is nil then stop going forward
         if( data == nil ){
             return;
         }
