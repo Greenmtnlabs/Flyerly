@@ -164,7 +164,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         titleLabel.text = @"Untitled";
     }
     // to add click event on Label to open share panel
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openPanel)];
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(share)];
     tapGestureRecognizer.numberOfTapsRequired = 1;
     [titleLabel addGestureRecognizer:tapGestureRecognizer];
     titleLabel.userInteractionEnabled = YES;
