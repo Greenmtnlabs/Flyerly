@@ -47,7 +47,7 @@ id lastShareBtnSender;
     UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
     [UserVoice initialize:config];
     
-    searching = NO;
+    isSearching = NO;
 
     [self.view setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
     
@@ -105,7 +105,7 @@ id lastShareBtnSender;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    searching = NO;
+    isSearching = NO;
     searchTextField.text = @"";
 }
 
@@ -126,19 +126,20 @@ id lastShareBtnSender;
     
     if (searchTextField.text == nil || [searchTextField.text isEqualToString:@""])
     {
-        searching = NO;
+        isSearching = NO;
         [self.tView reloadData];
         [searchTextField resignFirstResponder];
     }else{
-        searching = YES;
+        isSearching
+        = YES;
         [self searchTableView:[NSString stringWithFormat:@"%@", ((UITextField *)sender).text]];
     }
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
 
-    searching = YES;
-    if(searching){
+    isSearching = YES;
+    if(isSearching){
         if([string isEqualToString:@"\n"]){
             
             if([searchTextField canResignFirstResponder])
@@ -604,7 +605,7 @@ id lastShareBtnSender;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     // If searching, the number of rows may be different
-    if (searching){
+    if (isSearching){
         return  [self getRowsCountWithAdsInSeleceted];
     }else{
         return [self getRowsCountWithAds];
@@ -641,8 +642,9 @@ id lastShareBtnSender;
             }
         }
     
-        if( searching ){
+        if( isSearching ){
             dispatch_async(dispatch_get_main_queue(), ^{
+                
                 int flyerRow = [self getIndexOfSelectedFlyer:rowNumber];
                 flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:flyerRow] setDirectory:NO];
                 [cell renderCell:flyer LockStatus:lockFlyer];
@@ -653,9 +655,10 @@ id lastShareBtnSender;
             return cell;
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
+                
                 // Load the flyers again so that flyer can be loaded if user logs in from here
-                flyerPaths = [self getFlyersPaths];
                 int flyerRow = [self getIndexOfFlyer:rowNumber];
+                flyerPaths = [self getFlyersPaths];
                 flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:flyerRow] setDirectory:NO];
                 [cell renderCell:flyer LockStatus:lockFlyer];
                 [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
@@ -714,7 +717,7 @@ id lastShareBtnSender;
         
         [self enableBtns:NO];
         
-        if(searching){
+        if(isSearching){
             flyer = [[Flyer alloc]initWithPath:[searchFlyerPaths objectAtIndex:rowNumberSelectedFlyer] setDirectory:YES];
         } else {
             // Load the flyers.
@@ -781,30 +784,25 @@ id lastShareBtnSender;
     int rowNumber = (int)indexPath.row;
     int rowNumberSelectedFlyer = (int)indexPath.row;
     
-	[tableView beginUpdates];
-	[tableView setEditing:YES animated:YES];
-    
     if( [self isAddvertiseRow:rowNumber] == NO ) {
         rowNumber = [self getIndexOfFlyer:rowNumber];
         rowNumberSelectedFlyer = [self getIndexOfFlyer:rowNumberSelectedFlyer];
+        
         if (editingStyle == UITableViewCellEditingStyleDelete) {
-            [tableView deleteRowsAtIndexPaths:
-            @[[NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section]]
-                         withRowAnimation:UITableViewRowAnimationLeft];
             // HERE WE REMOVE FLYER FROM DIRECTORY
-            if ( searching ) {
-                [[NSFileManager defaultManager] removeItemAtPath:[searchFlyerPaths objectAtIndex:indexPath.row] error:nil];
-                [searchFlyerPaths removeObjectAtIndex:indexPath.row];
+            if ( isSearching ) {
+                [[NSFileManager defaultManager] removeItemAtPath:[searchFlyerPaths objectAtIndex:rowNumberSelectedFlyer] error:nil];
+                [searchFlyerPaths removeObjectAtIndex:rowNumberSelectedFlyer];
             } else {
-                [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:indexPath.row] error:nil];
-                [flyerPaths removeObjectAtIndex:indexPath.row];
+                [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:rowNumber] error:nil];
+                [flyerPaths removeObjectAtIndex:rowNumber];
             }
         }
+        
+        flyerPaths = [self getFlyersPaths];
+        
         [tableView reloadData];
     }
-    [tableView setEditing:NO animated:YES];
-    [tableView endUpdates];
-
 }
 
 
