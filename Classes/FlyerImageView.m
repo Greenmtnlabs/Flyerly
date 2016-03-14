@@ -55,7 +55,10 @@ CGAffineTransform previuosTransform;
         [view removeFromSuperview];
         
         // Also remove from dictionary.
-        [layers removeObjectForKey:uid];
+        
+        if( uid != nil ){
+            [layers removeObjectForKey:uid];
+        }
     }
 }
 
@@ -977,7 +980,9 @@ CGAffineTransform previuosTransform;
             
             // Update the layer dictionary with new key
             id l = [layers objectForKey:key];
-            [layers removeObjectForKey:key];
+            if( key != nil ){
+                [layers removeObjectForKey:key];
+            }
             [layers setObject:l forKey:newKey];
             
             [self.delegate bringLayerToFrontCf:key new:newKey updateSv:updateSv];
