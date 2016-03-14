@@ -839,8 +839,9 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
 -(void)deleteLayer :(NSString *)uid{
     NSLog(@"Deleting layer");
     //Delete From Dictionary
-    [masterLayers removeObjectForKey:uid];
-
+    if( uid != nil ){
+        [masterLayers removeObjectForKey:uid];
+    }
 }
 
 /**

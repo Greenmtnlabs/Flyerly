@@ -599,7 +599,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
                                               NSURL *groupURL = [group valueForProperty:ALAssetsGroupPropertyURL];
                                               
                                               //SAVING IN PREFERENCES .PLIST FOR FUTURE USE
-                                              [[NSUserDefaults standardUserDefaults]   setObject:groupURL.absoluteString forKey:@"FlyerlyPurchasedAlbum"];
+                                              [[NSUserDefaults standardUserDefaults] setObject:groupURL.absoluteString forKey:@"FlyerlyPurchasedAlbum"];
                                               
                                               
                                           }
@@ -615,7 +615,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
                                       NSURL *groupURL = [group valueForProperty:ALAssetsGroupPropertyURL];
                                       
                                       //SAVING IN PREFERENCES .PLIST FOR FUTURE USE
-                                      [[NSUserDefaults standardUserDefaults]   setObject:groupURL.absoluteString forKey:@"FlyerlyPuchasedAlbum"];
+                                      [[NSUserDefaults standardUserDefaults] setObject:groupURL.absoluteString forKey:@"FlyerlyPuchasedAlbum"];
                                   }
                               }
      

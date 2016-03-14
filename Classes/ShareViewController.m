@@ -858,7 +858,8 @@ UIAlertView *saveCurrentFlyerAlert;
             [self sharer:nil didCompleteWithResults:nil];
         }
     } else {
-    
+        
+        fbShareType = @"fb-photo-messenger";
         FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
         photo.image = selectedFlyerImage;
         photo.userGenerated = YES;
