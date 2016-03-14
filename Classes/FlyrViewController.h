@@ -33,7 +33,7 @@
 @interface FlyrViewController : ParentViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,RMStoreObserver,InAppPurchasePanelButtonProtocol, UserPurchasesDelegate ,GADInterstitialDelegate, GADBannerViewDelegate>{
 
     CreateFlyerController *createFlyer;
-    BOOL searching;
+    BOOL isSearching;
     BOOL lockFlyer;
     BOOL sheetAlreadyOpen;
     BOOL cancelRequest;

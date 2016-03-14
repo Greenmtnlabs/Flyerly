@@ -852,6 +852,7 @@ id lastShareBtnSender;
                 [flyerPaths removeObjectAtIndex:rowNumber];
             }
         }
+        flyerPaths = [self getFlyersPaths];
 
         [tableView reloadData];
     }
