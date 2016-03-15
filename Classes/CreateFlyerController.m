@@ -3790,7 +3790,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     NSLog(@"Natural size: %.2f x %.2f", videoTrack.naturalSize.width, videoTrack.naturalSize.height);
     
-    // if we have negative dimensions 
+    // if we have negative dimensions
     if(crop.size.width < 0){
         crop.size.width = -1 * crop.size.width;
     }
