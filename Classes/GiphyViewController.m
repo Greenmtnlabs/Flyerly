@@ -343,6 +343,14 @@
     
     NSLog(@"Natural size: %.2f x %.2f", videoTrack.naturalSize.width, videoTrack.naturalSize.height);
     
+    // if we have negative dimensions
+    if(crop.size.width < 0){
+        crop.size.width = -1 * crop.size.width;
+    }
+    if(crop.size.height < 0){
+        crop.size.height = -1 * crop.size.height;
+    }
+    
     // Set the mix composition size.
     mixComposition.naturalSize = crop.size;
     
