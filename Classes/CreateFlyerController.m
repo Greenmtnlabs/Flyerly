@@ -3759,14 +3759,11 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     // Add tracks to this composition
     AVMutableCompositionTrack *videoTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
     
-
     // Audio track
     AVMutableCompositionTrack *audioTrack;
     if ( isVideo ) {
         audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
     }
-    
-    
     
     // Image video is always 30 seconds. So we use that unless the background video is smaller.
     CMTime inTime = CMTimeMake( MAX_VIDEO_LENGTH * VIDEOFRAME, VIDEOFRAME );
@@ -3791,8 +3788,15 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         }
     }
     
-    
     NSLog(@"Natural size: %.2f x %.2f", videoTrack.naturalSize.width, videoTrack.naturalSize.height);
+    
+    // if we have negative dimensions 
+    if(crop.size.width < 0){
+        crop.size.width = -1 * crop.size.width;
+    }
+    if(crop.size.height < 0){
+        crop.size.height = -1 * crop.size.height;
+    }
     
     // Set the mix composition size.
     mixComposition.naturalSize = crop.size;
@@ -3800,6 +3804,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     // Set up the composition parameters.
     AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
     videoComposition.frameDuration = CMTimeMake(1, VIDEOFRAME );
+    
     videoComposition.renderSize = crop.size;
     videoComposition.renderScale = 1.0;
     
@@ -3852,8 +3857,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         videoComposition.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
     }
 
-    
-    
     // Now export the movie
     AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
     exportSession.videoComposition = videoComposition;
@@ -3908,7 +3911,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     CGSize size = [self.flyer getSizeOfFlyer];
     int vWidth = size.width;
     int vHeight = size.height;
-
+    
     self.flyer.saveInGallaryRequired = -1;//video merging starts now
     [self modifyVideo:firstURL destination:exportURL crop:CGRectMake(0, 0, vWidth, vHeight ) scale:1 overlay:image completion:^(NSInteger status, NSError *error) {
         switch ( status ) {
