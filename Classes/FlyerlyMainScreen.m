@@ -835,6 +835,7 @@ id lastShareBtnSender;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    int total;
     int rowNumber = (int)indexPath.row;
     int rowNumberSelectedFlyer = (int)indexPath.row;
 
@@ -845,11 +846,18 @@ id lastShareBtnSender;
         if (editingStyle == UITableViewCellEditingStyleDelete) {
             // HERE WE REMOVE FLYER FROM DIRECTORY
             if ( isSearch ) {
-                [[NSFileManager defaultManager] removeItemAtPath:[searchFlyerPaths objectAtIndex:rowNumberSelectedFlyer] error:nil];
-                [searchFlyerPaths removeObjectAtIndex:rowNumberSelectedFlyer];
+                total = [self getRowsCountWithAdsInSeleceted];
+                if (total > 0 && total > rowNumberSelectedFlyer){
+                    [[NSFileManager defaultManager] removeItemAtPath:[searchFlyerPaths objectAtIndex:rowNumberSelectedFlyer] error:nil];
+                    [searchFlyerPaths removeObjectAtIndex:rowNumberSelectedFlyer];
+                }
             } else {
-                [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:rowNumber] error:nil];
-                [flyerPaths removeObjectAtIndex:rowNumber];
+                total = [self getRowsCountWithAds];
+                if (total > 0 && total > rowNumber){
+                    [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:rowNumber] error:nil];
+                    [flyerPaths removeObjectAtIndex:rowNumber];
+                }
+                
             }
         }
         flyerPaths = [self getFlyersPaths];
