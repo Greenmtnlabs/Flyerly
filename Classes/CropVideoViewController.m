@@ -115,7 +115,6 @@
             scaleRatio = [[giphyDic objectForKey:@"desiredWidth"] integerValue] / player.naturalSize.width;
         }
         
-        
         // Adjust the cropview to match current width of portrait. Keep view centered.
         CGFloat width = _playerView.frame.size.height * aspectRatio;
         _cropView.frame = CGRectMake((_playerView.size.width - width) / 2.0, (_playerView.size.height - width) / 2.0, width, width );
@@ -139,8 +138,6 @@
         _cropView.fixedY = YES;
     }
     
-    
-    
     if(isGiphy){
         
         CGFloat newWH;
@@ -150,6 +147,14 @@
             newWH = [self getNewWidth:[[giphyDic objectForKey:@"minWH"] integerValue]  :[[giphyDic objectForKey:@"maxWH"] integerValue] :_playerView.size.height];
             
             if( _cropView.frame.size.width > _playerView.size.width){
+                
+                if(aspectRatio > 0.9){
+                    
+                   aspectRatio = 0.75;
+                   if(IS_IPHONE_6_PLUS){
+                       aspectRatio = 0.85;
+                   }
+                }
                 CGFloat height = _playerView.frame.size.height * aspectRatio;
                 newWH = 320;
                 _cropView.frame = CGRectMake(0, (self.view.size.height - height) / 2.0, newWH, newWH);
@@ -214,6 +219,13 @@
         
         if(isGiphy){
             y = [self getNewWidth:_playerView.frame.size.height :_cropView.origin.y :[[giphyDic objectForKey:@"minWH"] integerValue]];
+            
+            aspectRatio = player.naturalSize.width / player.naturalSize.height;
+            
+            if(aspectRatio > 0.9){
+                y = y/13;
+            }
+
             cropRect = CGRectMake(0, y, [[giphyDic objectForKey:@"desiredWidth"] integerValue], [[giphyDic objectForKey:@"desiredHeight"] integerValue] );
         }
     } else {
