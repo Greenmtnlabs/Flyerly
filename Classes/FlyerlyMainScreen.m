@@ -692,21 +692,24 @@ id lastShareBtnSender;
         cell = (MainScreenAddsCell *)[nib objectAtIndex:0];
        
         if([FlyerlySingleton connected]){
-
-            int addRow = [self getIndexOfAd:rowNumber];
-            GADBannerView *adView = self.bannerAdd[ addRow ];
-            adView.frame = CGRectMake(cell.frame.origin.x+10, cell.frame.origin.y+10, tView.frame.size.width-20, cell.frame.size.height-20);
-            if( sizeRectForAdd.size.width != 0 ){
-                adView.frame = sizeRectForAdd;
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                int addRow = [self getIndexOfAd:rowNumber];
+                GADBannerView *adView = self.bannerAdd[ addRow ];
+                adView.frame = CGRectMake(cell.frame.origin.x+10, cell.frame.origin.y+10, tView.frame.size.width-20, cell.frame.size.height-20);
+                if( sizeRectForAdd.size.width != 0 ){
+                    adView.frame = sizeRectForAdd;
+                }
+                // Setting background image while ad is loading
+                adView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:imageName]];
+                self.bannerAdd[ addRow ] = adView;
+                [cell addSubview:self.bannerAdd[ addRow ]];
             
-            // Setting background image while ad is loading
-            adView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:imageName]];
-            self.bannerAdd[ addRow ] = adView;
-            [cell addSubview:self.bannerAdd[ addRow ]];
+            });
             return cell;
         }
-        [cell addSubview: noAdsImage];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [cell addSubview: noAdsImage];
+        });
         return cell;
     }
 }
