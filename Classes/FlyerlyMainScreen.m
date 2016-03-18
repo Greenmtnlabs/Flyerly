@@ -879,6 +879,7 @@ id lastShareBtnSender;
 - (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
     //on add dismiss && after merging video process, save in gallery
     [self saveAndRelease];
+    [self loadGoogleAdd];
 }
 
 /**
