@@ -427,7 +427,7 @@ UIAlertView *saveCurrentFlyerAlert;
 
 -(void)textFieldDidChange :(UITextField *)theTextField{
     NSLog( @"text changed: %@", theTextField.text);
-    
+    int i = (int)indexRow;
     [self.fmController updateCellTitle:indexRow text:theTextField.text];
     
 }
