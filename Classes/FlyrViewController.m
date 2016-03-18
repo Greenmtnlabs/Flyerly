@@ -42,9 +42,6 @@ id lastShareBtnSender;
     
     [super viewDidLoad];
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    flyerConfigurator = appDelegate.flyerConfigurator;
-    
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
     haveValidSubscription = [userPurchases isSubscriptionValid];
@@ -706,8 +703,15 @@ id lastShareBtnSender;
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"AdMobCell" owner:self options:nil];
         cell = (AdMobCell *)[nib objectAtIndex:0];
         
+        // Setting background image while ad is loading
+        UIImageView *noAdsImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[self getNoAdsImage]]];
+        
         if([FlyerlySingleton connected]){
             int addRow = [self getIndexOfAd:rowNumber];
+            
+            // If not connected to internet, enables image user interaction
+            noAdsImage.userInteractionEnabled = NO;
+            
             GADBannerView *adView = self.gadAdsBanner[ addRow ];
             
             adView.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, tView.frame.size.width, cell.frame.size.height - 15);
@@ -726,8 +730,7 @@ id lastShareBtnSender;
             return cell;
         
         }else{
-            // Setting background image while ad is loading
-            UIImageView *noAdsImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[self getNoAdsImage]]];
+            
             // If not connected to internet, enables image user interaction
             noAdsImage.userInteractionEnabled = YES;
             // and applies gesture recognizer on image
@@ -790,8 +793,9 @@ id lastShareBtnSender;
                 }
             });
         }];
+        [self.navigationController pushViewController:createFlyer animated:YES];
         
-    } else {
+    } else if ([self isAddvertiseRow:rowNumber] == NO){
         
         [self enableBtns:NO];
         
@@ -834,8 +838,10 @@ id lastShareBtnSender;
                 }
             });
         }];
+        
+        [self.navigationController pushViewController:createFlyer animated:YES];
     }
-    [self.navigationController pushViewController:createFlyer animated:YES];
+    
 }
 
 

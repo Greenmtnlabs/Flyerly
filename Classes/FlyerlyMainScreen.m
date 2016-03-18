@@ -51,7 +51,9 @@ id lastShareBtnSender;
     flyerConfigurator = appDelegate.flyerConfigurator;
     txtSearch.delegate = self;
     
-    showAds = NO;
+    userPurchases = [UserPurchases getInstance];
+    userPurchases.delegate = self;
+    showAds = [userPurchases isSubscriptionValid];
     
     // setting isSearch to NO i.e. no search at first time
     isSearch = NO;
