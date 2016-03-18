@@ -612,7 +612,11 @@ id lastShareBtnSender;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     // If searching, the number of rows may be different
-    if (isSearch){
+    
+    if(YES){
+        int noOfFlyers = flyerPaths.count;
+        return noOfFlyers;
+    } else if (isSearch){
         return  [self getRowsCountWithAdsInSeleceted];
     }else{
         return [self getRowsCountWithAds];
@@ -622,7 +626,9 @@ id lastShareBtnSender;
     int rowNumber = (int)indexPath.row;
     NSString *showCell = @"MainFlyerCell";
     
-    if( [self isAddvertiseRow:rowNumber] ) {
+    bool showAds = NO;
+    
+    if(showAds && [self isAddvertiseRow:rowNumber] ) {
         showCell = @"MainScreenAddsCell";
     }
     
@@ -647,8 +653,11 @@ id lastShareBtnSender;
         
         if( isSearch ){
             dispatch_async(dispatch_get_main_queue(), ^{
+                int flyerRow = rowNumber;
+                if(showAds){
+                    flyerRow = [self getIndexOfSelectedFlyer:rowNumber];
+                }
                 
-                int flyerRow = [self getIndexOfSelectedFlyer:rowNumber];
                 flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:flyerRow] setDirectory:NO];
                 [cell renderCell:flyer LockStatus:NO];
                 [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
@@ -666,7 +675,11 @@ id lastShareBtnSender;
             return cell;
           } else {
             dispatch_async(dispatch_get_main_queue(), ^{
-                int flyerRow = [self getIndexOfFlyer:rowNumber];
+                int flyerRow = rowNumber;
+                if(showAds){
+                    flyerRow = [self getIndexOfFlyer:rowNumber];
+                }
+                
                 // Load the flyers.
                 flyerPaths = [self getFlyersPaths];
                 flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:flyerRow] setDirectory:NO];
