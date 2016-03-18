@@ -51,6 +51,8 @@ id lastShareBtnSender;
     flyerConfigurator = appDelegate.flyerConfigurator;
     txtSearch.delegate = self;
     
+    showAds = YES;
+    
     // setting isSearch to NO i.e. no search at first time
     isSearch = NO;
     
@@ -112,7 +114,6 @@ id lastShareBtnSender;
     // Adding tab buttons to the screen
     [self setTabButtonsPosition];
     
-    showAds = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -618,12 +619,12 @@ id lastShareBtnSender;
     
     if(showAds && isSearch){ // search flyers with no ads
         return searchFlyerPaths.count;
-    }else if (!showAds && isSearch){
-        return  [self getRowsCountWithAdsInSeleceted]; // search flyers with ads
-    }else if(!showAds){
-        return [self getRowsCountWithAds]; // all flyers with ads
-    } else{
-         return flyerPaths.count; // all flyers with no ads
+    }else if (!showAds && isSearch){ // search flyers with ads
+        return  [self getRowsCountWithAdsInSeleceted];
+    }else if(!showAds){ // all flyers with ads
+        return [self getRowsCountWithAds];
+    } else{ // all flyers with no ads
+         return flyerPaths.count;
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -786,7 +787,6 @@ id lastShareBtnSender;
             });
         }];
         
-        [self.navigationController pushViewController:createFlyer animated:YES];
     } else {
         
         [self enableBtns:NO];
@@ -836,10 +836,9 @@ id lastShareBtnSender;
                 }
             });
         }];
-        
-        [self.navigationController pushViewController:createFlyer animated:YES];
-
     }
+    [self.navigationController pushViewController:createFlyer animated:YES];
+
 }
 
 /**
