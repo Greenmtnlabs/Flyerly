@@ -26,6 +26,7 @@
     BOOL isSearch;
     UIImageView *noAdsImage;
     NSString *imageName;
+    bool showAds;
 }
 
 @end
@@ -110,6 +111,8 @@ id lastShareBtnSender;
     
     // Adding tab buttons to the screen
     [self setTabButtonsPosition];
+    
+    showAds = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -613,22 +616,21 @@ id lastShareBtnSender;
     
     // If searching, the number of rows may be different
     
-    if(YES){
-        int noOfFlyers = flyerPaths.count;
-        return noOfFlyers;
-    } else if (isSearch){
-        return  [self getRowsCountWithAdsInSeleceted];
-    }else{
-        return [self getRowsCountWithAds];
+    if(showAds && isSearch){ // search flyers with no ads
+        return searchFlyerPaths.count;
+    }else if (!showAds && isSearch){
+        return  [self getRowsCountWithAdsInSeleceted]; // search flyers with ads
+    }else if(!showAds){
+        return [self getRowsCountWithAds]; // all flyers with ads
+    } else{
+         return flyerPaths.count; // all flyers with no ads
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     int rowNumber = (int)indexPath.row;
     NSString *showCell = @"MainFlyerCell";
     
-    bool showAds = NO;
-    
-    if(showAds && [self isAddvertiseRow:rowNumber] ) {
+    if(!showAds && [self isAddvertiseRow:rowNumber] ) {
         showCell = @"MainScreenAddsCell";
     }
     
@@ -654,7 +656,7 @@ id lastShareBtnSender;
         if( isSearch ){
             dispatch_async(dispatch_get_main_queue(), ^{
                 int flyerRow = rowNumber;
-                if(showAds){
+                if(!showAds){
                     flyerRow = [self getIndexOfSelectedFlyer:rowNumber];
                 }
                 
@@ -666,7 +668,7 @@ id lastShareBtnSender;
                 
                 // Adding UITapGestureRecognizer on UILable
                 UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onShare:)];
-                cell.lblFlyerTitle.tag = indexPath.row;
+                cell.lblFlyerTitle.tag = flyerRow;
                 cell.lblFlyerTitle.userInteractionEnabled = YES;
                 [tap setNumberOfTapsRequired:1];
                 [cell.lblFlyerTitle addGestureRecognizer:tap];
@@ -676,7 +678,7 @@ id lastShareBtnSender;
           } else {
             dispatch_async(dispatch_get_main_queue(), ^{
                 int flyerRow = rowNumber;
-                if(showAds){
+                if(!showAds){
                     flyerRow = [self getIndexOfFlyer:rowNumber];
                 }
                 
@@ -690,7 +692,7 @@ id lastShareBtnSender;
               
                 // Adding UITapGestureRecognizer on UILable
                 UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onShare:)];
-                cell.lblFlyerTitle.tag = indexPath.row;
+                cell.lblFlyerTitle.tag = flyerRow;
                 cell.lblFlyerTitle.userInteractionEnabled = YES;
                 [tap setNumberOfTapsRequired:1];
                 [cell.lblFlyerTitle addGestureRecognizer:tap];
@@ -728,10 +730,11 @@ id lastShareBtnSender;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     int rowNumber = (int)indexPath.row;
     int rowNumberSelectedFlyer = (int)indexPath.row;
     
-    if( [self isAddvertiseRow:rowNumber] == NO ) {
+    if(!showAds && [self isAddvertiseRow:rowNumber] == NO ) {
         rowNumber = [self getIndexOfFlyer:rowNumber];
         rowNumberSelectedFlyer = [self getIndexOfSelectedFlyer:rowNumberSelectedFlyer];
         
@@ -784,6 +787,58 @@ id lastShareBtnSender;
         }];
         
         [self.navigationController pushViewController:createFlyer animated:YES];
+    } else {
+        
+        [self enableBtns:NO];
+        
+        if(isSearch){
+            flyer = [[Flyer alloc]initWithPath:[searchFlyerPaths objectAtIndex:rowNumberSelectedFlyer] setDirectory:YES];
+        } else {
+            // Load the flyers.
+            flyerPaths = [self getFlyersPaths];
+            flyer = [[Flyer alloc]initWithPath:[flyerPaths objectAtIndex:rowNumber] setDirectory:YES];
+        }
+        
+        createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
+        
+        // Set CreateFlyer Screen
+        createFlyer.flyer = flyer;
+        
+        __weak FlyerlyMainScreen *weakSelf = self;
+        __weak CreateFlyerController *weakCreate = createFlyer;
+        
+        //Here we Manage Block for Update
+        [createFlyer setOnFlyerBack:^(NSString *nothing) {
+            
+            // Here we setCurrent Flyer is Most Recent Flyer
+            [weakCreate.flyer setRecentFlyer];
+            
+            [weakSelf saveAndRelease];
+            
+            [weakSelf enableBtns:YES];
+            
+            // HERE WE GET FLYERS
+            weakSelf.flyerPaths = [weakSelf getFlyersPaths];
+            
+            if( weakSelf.flyerPaths.count > 1 ){
+                [weakSelf.tView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            }
+            [weakSelf.tView reloadData];
+            
+        }];
+        
+        [createFlyer setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
+            dispatch_async( dispatch_get_main_queue(), ^{
+                if ( haveValidSubscription == NO && ([weakSelf.addInterstialFms isReady] && ![weakSelf.addInterstialFms hasBeenUsed]) ){
+                    [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
+                } else{
+                    [weakSelf saveAndRelease];
+                }
+            });
+        }];
+        
+        [self.navigationController pushViewController:createFlyer animated:YES];
+
     }
 }
 
