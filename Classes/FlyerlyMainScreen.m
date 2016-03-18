@@ -112,7 +112,7 @@ id lastShareBtnSender;
     // Adding tab buttons to the screen
     [self setTabButtonsPosition];
     
-    showAds = NO;
+    showAds = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -1066,16 +1066,6 @@ id lastShareBtnSender;
     
     // To move cell to top
     [self.tView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    
-//    if(showAds && isSearch){ // search flyers with no ads
-//        return searchFlyerPaths.count;
-//    }else if (!showAds && isSearch){
-//        return  [self getRowsCountWithAdsInSeleceted]; // search flyers with ads
-//    }else if(!showAds){
-//        return [self getRowsCountWithAds]; // all flyers with ads
-//    } else{
-//        return flyerPaths.count; // all flyers with no ads
-//    }
     
     if(row > (ADD_AFTER_FLYERS-1)){
         row = row - floor(row/ADD_AFTER_FLYERS);
