@@ -881,8 +881,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 // Set SaveButton visual state selected
                 [shareviewcontroller.saveButton setSelected:YES]; 
                 
-                self.shouldShowAdd ( @"", haveValidSubscription );
-                
                 panelWillOpen = NO;
                 
                 // Here we Merge All Layers in Video File
@@ -917,7 +915,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     });
     
     
-    
+    self.shouldShowAdd ( @"", haveValidSubscription );
     
     [self.navigationController popViewControllerAnimated:YES];
     
