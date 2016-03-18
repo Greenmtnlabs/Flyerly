@@ -30,7 +30,7 @@
 
 @class SaveFlyerCell, Flyer, SigninController, RegisterController, InAppViewController, CreateFlyerController,ShareViewController,PrintViewController;
 
-@interface FlyrViewController : ParentViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,RMStoreObserver,InAppPurchasePanelButtonProtocol, UserPurchasesDelegate ,GADInterstitialDelegate, GADBannerViewDelegate>{
+@interface FlyrViewController : ParentViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,RMStoreObserver,InAppPurchasePanelButtonProtocol, UserPurchasesDelegate ,GADInterstitialDelegate, GADBannerViewDelegate> {
 
     CreateFlyerController *createFlyer;
     BOOL isSearching;
@@ -42,7 +42,6 @@
     RegisterController *signUpController;
     ShareViewController *shareviewcontroller;
     InAppViewController *inappviewcontroller;
-    UserPurchases *userPurchases;
     NSMutableArray *flyerPaths;
 
     NSMutableArray *searchFlyerPaths;
@@ -68,6 +67,9 @@
 //Add view for injecting in cells
 @property(nonatomic, strong) IBOutletCollection(GADBannerView) NSMutableArray *gadAdsBanner;
 
+
+@property (nonatomic, copy) void (^shouldShowAdd)(NSString *,BOOL);
+@property (nonatomic, copy) void (^onFlyerBack)(NSString *);
 
 -(void)goBack;
 -(NSMutableArray *)getFlyersPaths;

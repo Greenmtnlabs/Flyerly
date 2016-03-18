@@ -108,6 +108,7 @@
     [category addObject:@"Partner Apps"];//10,9 --
     [category addObject:@"Untech"];//11,10
     [category addObject:@"eyeSPOT"];//12,11
+    [category addObject:@"Flyerly Biz"];
 
     // will remove in production build, this row must be in the end of table view
     if ( IS_LOGIN && [flyerConfigurator currentDebugMood] ){
@@ -238,6 +239,7 @@
         }
         if (indexPath.row == 11)imgname = @"icon_untech";//untech
         if (indexPath.row == 12)imgname = @"icon_eyespot";//eyespot
+        if (indexPath.row == 13)imgname = @"icon_flyerly-biz"; // flyerly biz
         
     } else {
         if (indexPath.row == 3)imgname = @"fb_Like";
@@ -261,6 +263,7 @@
         }
         if (indexPath.row == 10)imgname = @"icon_untech";//untech
         if (indexPath.row == 11)imgname = @"icon_eyespot";//eyespot
+        if (indexPath.row == 12)imgname = @"icon_flyerly-biz"; // flyerly biz
     }
     
     // Set cell Values
@@ -368,13 +371,15 @@
             
         }
         else if (indexPath.row == 11){
-            [self openITunes:@"flyerly-create-share-flyers/id344130515?mt=8"]; //Flyerly
-        
+            [self openITunes:@"untech-reconnect-with-life/id934720123?mt=8"]; //Untech
         }
         else if (indexPath.row == 12){
            [self openITunes:@"eyespot/id611525338?mt=8"]; //eyeSPOT
         }
-        else if(indexPath.row == 13){//clear purchasis
+        else if (indexPath.row == 13){
+            [self openITunes:@"socialflyr-free/id344139192?mt=8"]; //Flyerly Biz
+        }
+        else if(indexPath.row == 14){//clear purchasis
             _persistence = [[RMStoreKeychainPersistence alloc] init];
             [RMStore defaultStore].transactionPersistor = _persistence;
             
@@ -434,10 +439,11 @@
             [self openIntroScreen];
             
         } else if (indexPath.row == 10){
-            [self openITunes:@"flyerly-create-share-flyers/id344130515?mt=8"]; //Flyerly
-            
+            [self openITunes:@"untech-reconnect-with-life/id934720123?mt=8"]; //Untech
         } else if (indexPath.row == 11){
             [self openITunes:@"eyespot/id611525338?mt=8"]; //eyeSPOT
+        } else if (indexPath.row == 12){
+            [self openITunes:@"socialflyr-free/id344139192?mt=8"]; //Flyerly Biz
         }
     }
 }
