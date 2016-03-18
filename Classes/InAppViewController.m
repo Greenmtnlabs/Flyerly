@@ -163,14 +163,16 @@
             NSString* productIdentifier= product[@"productidentifier"];
             
             if ( ! ([productIdentifier isEqualToString:@"com.flyerly.MonthlySubscription" ] ||
-                    [productIdentifier isEqualToString:@"com.flyerly.YearlySubscription1"]) &&
+                    [productIdentifier isEqualToString:@"com.flyerly.YearlySubscription1"] ||
+                    [productIdentifier isEqualToString:@"com.flyerly.RemoveAds"] ) &&
                     [userPurchases checkKeyExistsInPurchases:productIdentifier] )  {
                 
                 // show alert that item has already been purchased
                 [self showAlreadyPurchasedAlert];
                 
             } else if( ([productIdentifier isEqualToString:@"com.flyerly.MonthlySubscription" ] ||
-                       [productIdentifier isEqualToString:@"com.flyerly.YearlySubscription1"] ) &&
+                       [productIdentifier isEqualToString:@"com.flyerly.YearlySubscription1"] ||
+                        [productIdentifier isEqualToString:@"com.flyerly.RemoveAds"] ) &&
                        [userPurchases isSubscriptionValid]) {
                 
                 // show alert that item has already been purchased
@@ -356,7 +358,7 @@
         
         //Check For Crash Maintain
         cancelRequest = NO;
-        NSArray *productIdentifiersAry = @[@"com.flyerly.MonthlySubscription", @"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.YearlySubscription1"];
+        NSArray *productIdentifiersAry = @[@"com.flyerly.MonthlySubscription", @"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.YearlySubscription1", @"com.flyerly.RemoveAds"];
         //These are over Products on App Store
         NSSet *productIdentifiers = [NSSet setWithArray:productIdentifiersAry];
         
@@ -419,7 +421,7 @@
         
         //HERE WE GET SHARED INTANCE OF _persistence WHICH WE LINKED IN FlyrAppDelegate
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        NSArray *productIdentifiers = @[@"com.flyerly.MonthlySubscription", @"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.YearlySubscription1"];
+        NSArray *productIdentifiers = @[@"com.flyerly.MonthlySubscription", @"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.YearlySubscription1", @"com.flyerly.RemoveAds"];
         
         if (productIdentifiers.count >= 1) {
             
