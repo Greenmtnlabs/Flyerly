@@ -160,6 +160,7 @@ id lastShareBtnSender;
     if ([[PFUser currentUser] sessionToken]) {
         
         UserPurchases *userPurchases_ = [UserPurchases getInstance];
+        userPurchases_.delegate = nil;
         
         //GET UPDATED USER PUCHASES INFO
         [userPurchases_ setUserPurcahsesFromParse];
@@ -967,6 +968,7 @@ id lastShareBtnSender;
 - ( void )productSuccesfullyPurchased: (NSString *)productId {
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
+    userPurchases_.delegate = nil;
     
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
@@ -1269,7 +1271,6 @@ id lastShareBtnSender;
     __weak FlyerlyMainScreen *flyerlyMainScreen = self;
 
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
-
     userPurchases_.delegate = self;
 
     signInController.signInCompletion = ^void(void) {
@@ -1285,6 +1286,7 @@ id lastShareBtnSender;
 - (void) userPurchasesLoaded {
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
+    userPurchases_.delegate = nil;
     
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
          [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
@@ -1362,8 +1364,6 @@ id lastShareBtnSender;
         dispatch_async( dispatch_get_main_queue(), ^{
             if (haveValidSubscription == NO && ([weakSelf.addInterstialFms isReady] && ![weakSelf.addInterstialFms hasBeenUsed]) ){
                 [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
-            }  else{
-                [weakSelf saveAndRelease];
             }
         });
     }];

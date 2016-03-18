@@ -84,23 +84,19 @@ static UserPurchases *sharedSingleton = nil;
             if (!error) {
                 
                 if (objects.count >= 1) {
-                    
                     //Here we set User purchse details which returned from Parse
                     oldPurchases = [[objects objectAtIndex:0] valueForKey:@"json"];
                     
                     [[NSUserDefaults standardUserDefaults]setValue:oldPurchases forKey:@"InAppPurchases"];
-                    
                 } else {
                     
                     //Here we set User purchse details which returned from Parse
                     oldPurchases = nil;
                 }
-                
                 if ( delegate != nil ) {
                     [delegate userPurchasesLoaded];
                 }
-
-                
+ 
                 // The find succeeded. The first 100 objects are available in objects
             } else {
                 
