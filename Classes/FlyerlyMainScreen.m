@@ -1379,9 +1379,37 @@ id lastShareBtnSender;
 - (IBAction)showSharedFlyers:(id)sender {
     
     FlyrViewController *flyrViewController = [[FlyrViewController alloc]initWithNibName:@"FlyrViewController" bundle:nil];
+    
+    __weak FlyerlyMainScreen *weakSelf = self;
+    
+    //Here we Manage Block for Update
+    [flyrViewController setOnFlyerBack:^(NSString *nothing) {
+        //[weakSelf saveAndRelease];
+        
+        [weakSelf enableBtns:YES];
+        
+        //HERE WE GET FLYERS
+        weakSelf.flyerPaths = [weakSelf getFlyersPaths];
+        
+        [weakSelf loadAdsTiles];
+        
+        if( weakSelf.flyerPaths.count > 1 ){
+            [weakSelf.tView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
+        [weakSelf.tView reloadData];
+        
+    }];
+    
+    [flyrViewController setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
+        dispatch_async( dispatch_get_main_queue(), ^{
+            if (haveValidSubscription == NO && ([weakSelf.addInterstialFms isReady] && ![weakSelf.addInterstialFms hasBeenUsed]) ){
+                [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
+            }
+        });
+    }];
+    
     flyrViewController.showUnsharedFlyers = NO;
     [self.navigationController pushViewController:flyrViewController animated:YES];
-    
 }
 
 
@@ -1389,7 +1417,37 @@ id lastShareBtnSender;
  * When invoked, shows shared flyers with Hash Tags
  */
 - (IBAction)showHashTagFlyers:(id)sender {
+    
     WebViewController *webViewController = [[WebViewController alloc]initWithNibName:@"WebViewController" bundle:nil];
+    
+    __weak FlyerlyMainScreen *weakSelf = self;
+    
+    //Here we Manage Block for Update
+    [webViewController setOnFlyerBack:^(NSString *nothing) {
+        //[weakSelf saveAndRelease];
+        
+        [weakSelf enableBtns:YES];
+        
+        //HERE WE GET FLYERS
+        weakSelf.flyerPaths = [weakSelf getFlyersPaths];
+        
+        [weakSelf loadAdsTiles];
+        
+        if( weakSelf.flyerPaths.count > 1 ){
+            [weakSelf.tView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
+        [weakSelf.tView reloadData];
+        
+    }];
+    
+    [webViewController setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
+        dispatch_async( dispatch_get_main_queue(), ^{
+            if (haveValidSubscription == NO && ([weakSelf.addInterstialFms isReady] && ![weakSelf.addInterstialFms hasBeenUsed]) ){
+                [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
+            }
+        });
+    }];
+   
     [self.navigationController pushViewController:webViewController animated:YES];
 }
 

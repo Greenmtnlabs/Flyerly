@@ -9,13 +9,17 @@
 #import "WebViewController.h"
 #import "FlyerlySingleton.h"
 
-@interface WebViewController ()
+@interface WebViewController (){
+    BOOL haveValidSubscription;
+    UserPurchases *userPurchases;
+}
 
 @end
 
 @implementation WebViewController
 @synthesize webView;
 @synthesize segmentedButton, popupAlert;
+@synthesize shouldShowAdd;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -89,6 +93,11 @@
  *      void
  */
 - (void)goBack {
+    userPurchases = [UserPurchases getInstance];
+    userPurchases.delegate = self;
+    haveValidSubscription = [userPurchases isSubscriptionValid];
+    
+    self.shouldShowAdd ( @"", haveValidSubscription );
     [self.navigationController popViewControllerAnimated:YES];
 }
 
