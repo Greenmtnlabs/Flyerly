@@ -709,9 +709,9 @@ id lastShareBtnSender;
             return cell;
         
         }else{
-           // Setting background image while ad is loading
-           UIImageView *noAdsImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[self getNoAdsImage]]];
-           // If not connected to internet, enables image user interaction
+            // Setting background image while ad is loading
+            UIImageView *noAdsImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[self getNoAdsImage]]];
+            // If not connected to internet, enables image user interaction
             noAdsImage.userInteractionEnabled = YES;
             // and applies gesture recognizer on image
             UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openPanel)];

@@ -51,7 +51,7 @@ id lastShareBtnSender;
     flyerConfigurator = appDelegate.flyerConfigurator;
     txtSearch.delegate = self;
     
-    showAds = YES;
+    showAds = NO;
     
     // setting isSearch to NO i.e. no search at first time
     isSearch = NO;
@@ -722,6 +722,13 @@ id lastShareBtnSender;
             
             });
             return cell;
+        } else {
+            
+            UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openPanel)];
+            [tap setNumberOfTapsRequired:1];
+            [noAdsImage addGestureRecognizer:tap];
+            [cell addSubview: noAdsImage];
+        
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [cell addSubview: noAdsImage];
@@ -839,6 +846,23 @@ id lastShareBtnSender;
     }
     [self.navigationController pushViewController:createFlyer animated:YES];
 
+}
+
+/*
+ * Here we Open InAppPurchase Panel
+ */
+-(void)openPanel {
+    
+    if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
+        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
+    } else {
+        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
+    }
+    
+    [self presentViewController:inappviewcontroller animated:NO completion:nil];
+    
+    [inappviewcontroller requestProduct];
+    inappviewcontroller.buttondelegate = self;
 }
 
 /**
@@ -1028,24 +1052,6 @@ id lastShareBtnSender;
         
     [self presentViewController:introScreenViewController animated:YES completion:nil];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];    
-}
-
-/*
- * Here we Open InAppPurchase Panel
- */
--(void)openPanel {
-    
-    if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
-        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
-    } else {
-        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
-    }
-    
-    
-    [self presentViewController:inappviewcontroller animated:NO completion:nil];
-    
-    [inappviewcontroller requestProduct];
-    inappviewcontroller.buttondelegate = self;
 }
 
 -(void)onShare:(id)sender {
