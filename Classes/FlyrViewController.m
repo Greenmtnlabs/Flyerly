@@ -650,7 +650,7 @@ id lastShareBtnSender;
     
         [cell setAccessoryType:UITableViewCellAccessoryNone];
         if (cell == nil) {
-            if( IS_IPHONE_5 || IS_IPHONE_4){
+            if( IS_IPHONE_4 || IS_IPHONE_5){
                 NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell" owner:self options:nil];
                 cell = (SaveFlyerCell *)[nib objectAtIndex:0];
             } else if ( IS_IPHONE_6 ){
@@ -719,13 +719,14 @@ id lastShareBtnSender;
                 adView.frame = sizeRectForAdd;
             }
             
-            NSString *imgName = [self getNoAdsImage];
-            adView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:imgName]];
-            // Setting background image while ad is loading
             dispatch_async(dispatch_get_main_queue(), ^{
                 
+                NSString *imgName = [self getNoAdsImage];
+                adView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:imgName]];
+                // Setting background image while ad is loading
+
                 self.gadAdsBanner[ addRow ] = adView;
-                [cell addSubview:self.gadAdsBanner[ addRow ]];
+                [cell addSubview:self.gadAdsBanner[addRow]];
             });
             return cell;
         

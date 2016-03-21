@@ -548,6 +548,8 @@ id lastShareBtnSender;
             adView.frame = sizeRectForAdd;
         }
         self.bannerAdd[addsLoaded] = adView;
+        [self loadAdsTiles];
+        
     }
     addsLoaded++;
 }
