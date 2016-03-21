@@ -27,7 +27,7 @@
 
 @class InputViewController,FlyerlySingleton ;
 @class LaunchController,HelpController,ProfileViewController,TermsOfServiceViewController,PrivicyPolicyViewController,InAppViewController;
-@interface MainSettingViewController : UIViewController <UITableViewDelegate, MFMailComposeViewControllerDelegate,InAppPurchasePanelButtonProtocol,UserPurchasesDelegate,SHKSharerDelegate>{
+@interface MainSettingViewController : UIViewController <UITableViewDelegate, MFMailComposeViewControllerDelegate,InAppPurchasePanelButtonProtocol,UserPurchasesDelegate,SHKSharerDelegate, GADInterstitialDelegate, GADBannerViewDelegate>{
 
     NSMutableArray *category;
     NSMutableArray *groupCtg;
@@ -39,6 +39,8 @@
     InAppViewController *inappviewcontroller;
     PrivicyPolicyViewController * privicyPolicyView;
     TermsOfServiceViewController * termOfServiceView;
+    BOOL bannerAdClosed;
+    BOOL bannerShowed; 
 
 }
 @property (strong, nonatomic)IBOutlet UITableView *tableView;
@@ -52,6 +54,10 @@
 -(IBAction)rateApp:(id)sender;
 -(IBAction)gotwitter:(id)sender;
 -(IBAction)goemail:(id)sender;
+
+@property(nonatomic, strong) GADInterstitial *interstitialAds;
+@property(nonatomic, strong) GADBannerView *bannerAds;
+@property (nonatomic, strong) UIView *bannerAdsView;
 
 
 @end

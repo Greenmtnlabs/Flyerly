@@ -14,6 +14,7 @@
     
     SHKSharer *iosSharer;
     FlyerlyConfigurator *flyerConfigurator;
+    UIButton *bannerAdDismissBtn;
 }
 
 
@@ -21,6 +22,7 @@
 
 @implementation MainSettingViewController
 @synthesize tableView,_persistence;
+@synthesize bannerAdsView;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -800,5 +802,140 @@
     if (sharer.quiet) return;
     [[SHKActivityIndicator currentIndicator]  showProgress:progress forSharer:sharer];
 }
+
+#pragma Ads
+-(void) loadInterstitialAdd{
+    self.interstitialAds.delegate = nil;
+    
+    // Create a new GADInterstitial each time. A GADInterstitial will only show one request in its
+    // lifetime. The property will release the old one and set the new one.
+    self.interstitialAds = [[GADInterstitial alloc] init];
+    self.interstitialAds.delegate = self;
+    
+    // Note: Edit SampleConstants.h to update kSampleAdUnitId with your interstitial ad unit id.
+    self.interstitialAds.adUnitID = [flyerConfigurator interstitialAdID];
+    
+    [self.interstitialAds loadRequest:[self request]];
+    
+}
+- (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
+    
+    [self loadInterstitialAdd];
+    
+}
+
+- (GADRequest *)request {
+    GADRequest *request = [GADRequest request];
+    
+    // Make the request for a test ad. Put in an identifier for the simulator as well as any devices
+    // you want to receive test ads.
+    request.testDevices = @[
+                            // TODO: Add your device/simulator test identifiers here. Your device identifier is printed to
+                            // the console when the app is launched.
+                            //NSString *udid = [UIDevice currentDevice].uniqueIdentifier;
+                            GAD_SIMULATOR_ID
+                            ];
+    return request;
+}
+
+- (void)showTopBanner:(UIView *)banner{
+    
+    [UIView beginAnimations:@"bannerOn" context:NULL];
+    
+    banner.frame = CGRectOffset(banner.frame, 0, banner.frame.size.height);
+    
+    [UIView commitAnimations];
+    
+    banner.hidden = NO;
+    
+}
+
+
+// We've received an Banner ad successfully.
+- (void)adViewDidReceiveAd:(GADBannerView *)adView {
+    
+    
+    if ( bannerAdClosed == NO && bannerShowed == NO ) {
+        bannerShowed = YES;//keep bolean we have rendered banner or not ?
+        
+        // Device Check Maintain Size of ScrollView Because Scroll Indicator will show.
+        if ( IS_IPHONE_4 ) {
+            self.bannerAdsView = [[UIView alloc] initWithFrame:CGRectMake(0, 384.3, 310, 50)];
+            
+            if ( bannerAdDismissBtn == nil ){
+                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(270, 0, 52, 52)];
+            }
+        }
+        else if ( IS_IPHONE_5 ) {
+            self.bannerAdsView = [[UIView alloc] initWithFrame:CGRectMake(0, 473, 320, 50)];
+            
+            if ( bannerAdDismissBtn == nil ){
+                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(270, 0, 52, 52)];
+            }
+        } else if ( IS_IPHONE_6 ){
+            
+            self.bannerAdsView = [[UIView alloc] initWithFrame:CGRectMake(0, 564, 620, 50)];
+            
+            if ( bannerAdDismissBtn == nil ){
+                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(320, 0, 52, 52)];
+            }
+        }else if ( IS_IPHONE_6_PLUS ){
+            
+            self.bannerAdsView = [[UIView alloc] initWithFrame:CGRectMake(0, 628, 620, 50)];
+            
+            if ( bannerAdDismissBtn == nil ){
+                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(360, 0, 52, 52)];
+            }
+        }else {
+            self.bannerAdsView = [[UIView alloc] initWithFrame:CGRectMake(0, 310, 320, 50)];
+            
+            if ( bannerAdDismissBtn == nil ){
+                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(270, 0, 52, 52)];
+            }
+        }
+        
+        self.bannerAdsView.backgroundColor = [UIColor whiteColor];
+        
+        [bannerAdDismissBtn addTarget:self action:@selector(dissmisBannerAddOnTap) forControlEvents:UIControlEventTouchUpInside];
+        
+        [bannerAdDismissBtn setImage:[UIImage imageNamed:@"closeAd.png"] forState:UIControlStateNormal];
+        
+        bannerAdDismissBtn.tag = 999;
+        
+        [self.bannerAdsView addSubview:bannerAdDismissBtn];
+        
+        //Adding ad in custom view
+        [self.bannerAdsView addSubview:adView];
+        //Making dismiss button visible,and bring it to front
+        //bannerAdDismissBtn.alpha = 1.0;
+        [self.bannerAdsView bringSubviewToFront:bannerAdDismissBtn];
+        
+        return;
+    }
+}
+
+ 
+-(void)dissmisBannerAddOnTap{
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self dissmisBannerAdd:YES];
+    });
+    
+}
+// Dismiss action for banner ad
+-(void)dissmisBannerAdd:(BOOL)valForBannerClose{
+    
+    self.bannerAdsView.backgroundColor = [UIColor clearColor];
+    
+    UIView *viewToRemove = [bannerAdsView viewWithTag:999];
+    [viewToRemove removeFromSuperview];
+    //[bannerAdDismissBtn removeFromSuperview];
+    [self.bannerAdsView removeFromSuperview];
+    bannerAdDismissBtn = nil;
+    self.bannerAdsView = nil;
+    
+    bannerAdClosed = valForBannerClose;
+}
+
 
 @end
