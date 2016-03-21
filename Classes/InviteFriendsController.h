@@ -33,10 +33,14 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
 
+#import "GADInterstitialDelegate.h"
+#import "GADBannerView.h"
+#import "UserPurchases.h"
+
+
 @class FlyerlySingleton,SHKSharer;
 
-@interface InviteFriendsController : ParentViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate, SHKSharerDelegate, FBSDKAppInviteDialogDelegate>{
-    
+@interface InviteFriendsController : ParentViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate, SHKSharerDelegate, FBSDKAppInviteDialogDelegate, UserPurchasesDelegate, GADInterstitialDelegate, GADBannerViewDelegate>{
     
     FlyerlySingleton *globle;
     IBOutlet AsyncImageView *aview;
@@ -44,6 +48,9 @@
     int selectedTab;
     ACAccount *account;    
     SHKSharer *iosSharer;
+    
+    BOOL bannerAdClosed;
+    BOOL bannerShowed;
 }
 
 @property(nonatomic,strong) IBOutlet UILabel *refrelText;
@@ -83,5 +90,9 @@
 
 -(void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didCompleteWithResults:(NSDictionary *)results;
 -(void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didFailWithError:(NSError *)error;
+
+@property(nonatomic, strong) GADInterstitial *interstitialAds;
+@property(nonatomic, strong) GADBannerView *bannerAds;
+@property (weak, nonatomic) IBOutlet UIView *bannerAdsView;
 
 @end

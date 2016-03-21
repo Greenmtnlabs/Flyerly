@@ -14,7 +14,7 @@
     
     SHKSharer *iosSharer;
     FlyerlyConfigurator *flyerConfigurator;
-    UIButton *bannerAdDismissBtn;
+    UIButton *btnBannerAdsDismiss;
     BOOL hasValidSubscription;
     UserPurchases *userPurchases;
 }
@@ -40,7 +40,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    flyerConfigurator = appDelegate.flyerConfigurator;
     
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
@@ -48,9 +49,6 @@
     
     bannerAdClosed = NO;
     bannerShowed = NO;
-    
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    flyerConfigurator = appDelegate.flyerConfigurator;
     
     UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
     [UserVoice initialize:config];
@@ -140,16 +138,12 @@
             CGPoint origin;
             origin = CGPointMake(0.0,0.0);
             
-            GADAdSize customAdSize;
-            if ( IS_IPHONE_4 ) {
-                customAdSize = GADAdSizeFromCGSize(CGSizeMake(320, 50));
-            } else if ( IS_IPHONE_5 ) {
-                customAdSize = GADAdSizeFromCGSize(CGSizeMake(320, 50));
-            }else if ( IS_IPHONE_6 ){
+            GADAdSize customAdSize = GADAdSizeFromCGSize(CGSizeMake(320, 50));
+            if ( IS_IPHONE_6 ){
                 customAdSize = GADAdSizeFromCGSize(CGSizeMake(420, 50));
             }else if ( IS_IPHONE_6_PLUS ){
                 customAdSize = GADAdSizeFromCGSize(CGSizeMake(520, 50));
-            } else{
+            }else{
                 customAdSize = GADAdSizeFromCGSize(CGSizeMake(320, 50));
             }
             
@@ -161,13 +155,10 @@
                 self.bannerAds.adUnitID = [flyerConfigurator bannerAdID];
                 self.bannerAds.delegate = self;
                 self.bannerAds.rootViewController = self;
-                
                 [self.bannerAds loadRequest:[self request]];
             }
         }
     });
-    
-
 }
 
 //return flag is login
@@ -891,37 +882,36 @@
 // We've received a Banner ad successfully.
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
     
-    
     if ( bannerAdClosed == NO && bannerShowed == NO ) {
         bannerShowed = YES;//keep bolean we have rendered banner or not ?
         
         // Device Check Maintain Size of ScrollView Because Scroll Indicator will show.
-        if ( bannerAdDismissBtn == nil ){
+        if ( btnBannerAdsDismiss == nil ){
             if(IS_IPHONE_4 || IS_IPHONE_5) {
-                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(270, 0, 52, 52)];
+                btnBannerAdsDismiss = [[UIButton alloc] initWithFrame:CGRectMake(270, 0, 52, 52)];
             } else if (IS_IPHONE_6){
-                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(320, 0, 52, 52)];
+                btnBannerAdsDismiss = [[UIButton alloc] initWithFrame:CGRectMake(320, 0, 52, 52)];
             }else if(IS_IPHONE_6_PLUS){
-                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(360, 0, 52, 52)];
+                btnBannerAdsDismiss = [[UIButton alloc] initWithFrame:CGRectMake(360, 0, 52, 52)];
             }else {
-                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(270, 0, 52, 52)];
+                btnBannerAdsDismiss = [[UIButton alloc] initWithFrame:CGRectMake(270, 0, 52, 52)];
             }
         }
     
         self.bannerAdsView.backgroundColor = [UIColor clearColor];
         
-        [bannerAdDismissBtn addTarget:self action:@selector(dismissBannerAdsOnTap) forControlEvents:UIControlEventTouchUpInside];
+        [btnBannerAdsDismiss addTarget:self action:@selector(dismissBannerAdsOnTap) forControlEvents:UIControlEventTouchUpInside];
         
-        [bannerAdDismissBtn setImage:[UIImage imageNamed:@"closeAd.png"] forState:UIControlStateNormal];
+        [btnBannerAdsDismiss setImage:[UIImage imageNamed:@"closeAd.png"] forState:UIControlStateNormal];
         
-        bannerAdDismissBtn.tag = 999;
+        btnBannerAdsDismiss.tag = 999;
         
-        [self.bannerAdsView addSubview:bannerAdDismissBtn];
+        [self.bannerAdsView addSubview:btnBannerAdsDismiss];
         
         //Adding ad in custom view
         [self.bannerAdsView addSubview:adView];
         //Making dismiss button visible,and bring it to front
-        [self.bannerAdsView bringSubviewToFront:bannerAdDismissBtn];
+        [self.bannerAdsView bringSubviewToFront:btnBannerAdsDismiss];
         return;
     }
 }
@@ -929,31 +919,22 @@
 -(void)dismissBannerAdsOnTap{
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self dissmisBannerAds:YES];
+        [self dismissBannerAds:YES];
     });
 }
 
-
--(void)dissmisBannerAdsOnTap{
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self dissmisBannerAds:YES];
-    });
-    
-}
 // Dismiss action for banner ad
--(void)dissmisBannerAds:(BOOL)valForBannerClose{
+-(void)dismissBannerAds:(BOOL)valForBannerClose{
     
     self.bannerAdsView.backgroundColor = [UIColor clearColor];
     
     UIView *viewToRemove = [bannerAdsView viewWithTag:999];
     [viewToRemove removeFromSuperview];
     [self.bannerAdsView removeFromSuperview];
-    bannerAdDismissBtn = nil;
+    btnBannerAdsDismiss = nil;
     self.bannerAdsView = nil;
     
     bannerAdClosed = valForBannerClose;
 }
-
 
 @end

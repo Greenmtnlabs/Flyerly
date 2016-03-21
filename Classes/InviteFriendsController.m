@@ -24,11 +24,16 @@
     NSMutableArray *usernames;
     NSArray *availableAccounts;
     ACAccount *selectedAccount;
+    
+    UIButton *btnBannerAdsDismiss;
+    BOOL hasValidSubscription;
+    UserPurchases *userPurchases;
 }
 
 @synthesize uiTableView, emailsArray, contactsArray, selectedIdentifiers, emailButton, contactsButton, facebookButton, twitterButton,  searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited, emailInvited;
 @synthesize emailBackupArray, contactBackupArray, facebookBackupArray, twitterBackupArray,refrelText;
 @synthesize fbText;
+@synthesize bannerAdsView;
 
 const int EMAIL_TAB = 3;
 const int TWITTER_TAB = 2;
@@ -40,6 +45,13 @@ const int CONTACTS_TAB = 0;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    userPurchases = [UserPurchases getInstance];
+    userPurchases.delegate = self;
+    hasValidSubscription = [userPurchases isSubscriptionValid];
+    
+    bannerAdClosed = NO;
+    bannerShowed = NO;
     
     UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
     [UserVoice initialize:config];
@@ -173,7 +185,7 @@ const int CONTACTS_TAB = 0;
     self.fbinvited = [[NSMutableArray alloc] init];
     self.twitterInvited = [[NSMutableArray alloc] init];
     self.emailInvited = [[NSMutableArray alloc] init];
-
+    
     if (user[@"iphoneinvited"])
         self.iPhoneinvited  = user[@"iphoneinvited"];
 
@@ -185,9 +197,43 @@ const int CONTACTS_TAB = 0;
     if(user [@"emailinvited"])
         self.emailInvited = user[@"emailinvited"];
    
-    
     // Load device contacts
     [self loadLocalContacts:self.contactsButton];
+    
+    if( hasValidSubscription == NO ) {
+        [self loadInterstitialAdd];
+    }
+    
+    // Execute the rest of the stuff, a little delayed to speed up loading.
+    dispatch_async( dispatch_get_main_queue(), ^{
+        
+        if( IS_IPHONE_4 || IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
+            
+            // Initialize the banner at the bottom of the screen.
+            CGPoint origin;
+            origin = CGPointMake(0.0,0.0);
+            
+            GADAdSize customAdSize = GADAdSizeFromCGSize(CGSizeMake(320, 50));
+            if ( IS_IPHONE_6 ){
+                customAdSize = GADAdSizeFromCGSize(CGSizeMake(420, 50));
+            }else if ( IS_IPHONE_6_PLUS ){
+                customAdSize = GADAdSizeFromCGSize(CGSizeMake(520, 50));
+            }else{
+                customAdSize = GADAdSizeFromCGSize(CGSizeMake(320, 50));
+            }
+            
+            if( hasValidSubscription == NO ) {
+                // Use predefined GADAdSize constants to define the GADBannerView.
+                self.bannerAds = [[GADBannerView alloc] initWithAdSize:customAdSize origin:origin];
+                
+                // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID before compiling.
+                self.bannerAds.adUnitID = [flyerConfigurator bannerAdID];
+                self.bannerAds.delegate = self;
+                self.bannerAds.rootViewController = self;
+                [self.bannerAds loadRequest:[self request]];
+            }
+        }
+    });
     
 }
 
@@ -1243,5 +1289,99 @@ const int CONTACTS_TAB = 0;
 -(void) friendsInvited {
     [Flurry logEvent:@"Friends Invited"];
 }
+
+#pragma Ads
+-(void) loadInterstitialAdd{
+    self.interstitialAds.delegate = nil;
+    
+    // Create a new GADInterstitial each time. A GADInterstitial will only show one request in its
+    // lifetime. The property will release the old one and set the new one.
+    self.interstitialAds = [[GADInterstitial alloc] init];
+    self.interstitialAds.delegate = self;
+    
+    // Note: Edit SampleConstants.h to update kSampleAdUnitId with your interstitial ad unit id.
+    self.interstitialAds.adUnitID = [flyerConfigurator interstitialAdID];
+    
+    [self.interstitialAds loadRequest:[self request]];
+    
+}
+- (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
+    
+    [self loadInterstitialAdd];
+    
+}
+
+- (GADRequest *)request {
+    GADRequest *request = [GADRequest request];
+    
+    // Make the request for a test ad. Put in an identifier for the simulator as well as any devices
+    // you want to receive test ads.
+    request.testDevices = @[
+                            // TODO: Add your device/simulator test identifiers here. Your device identifier is printed to
+                            // the console when the app is launched.
+                            //NSString *udid = [UIDevice currentDevice].uniqueIdentifier;
+                            GAD_SIMULATOR_ID
+                            ];
+    return request;
+}
+
+// We've received a Banner ad successfully.
+- (void)adViewDidReceiveAd:(GADBannerView *)adView {
+    
+    if ( bannerAdClosed == NO && bannerShowed == NO ) {
+        bannerShowed = YES;//keep bolean we have rendered banner or not ?
+        
+        // Device Check Maintain Size of ScrollView Because Scroll Indicator will show.
+        if ( btnBannerAdsDismiss == nil ){
+            if(IS_IPHONE_4 || IS_IPHONE_5) {
+                btnBannerAdsDismiss = [[UIButton alloc] initWithFrame:CGRectMake(270, 0, 52, 52)];
+            } else if (IS_IPHONE_6){
+                btnBannerAdsDismiss = [[UIButton alloc] initWithFrame:CGRectMake(320, 0, 52, 52)];
+            }else if(IS_IPHONE_6_PLUS){
+                btnBannerAdsDismiss = [[UIButton alloc] initWithFrame:CGRectMake(360, 0, 52, 52)];
+            }else {
+                btnBannerAdsDismiss = [[UIButton alloc] initWithFrame:CGRectMake(270, 0, 52, 52)];
+            }
+        }
+        
+        self.bannerAdsView.backgroundColor = [UIColor clearColor];
+        
+        [btnBannerAdsDismiss addTarget:self action:@selector(dismissBannerAdsOnTap) forControlEvents:UIControlEventTouchUpInside];
+        
+        [btnBannerAdsDismiss setImage:[UIImage imageNamed:@"closeAd.png"] forState:UIControlStateNormal];
+        
+        btnBannerAdsDismiss.tag = 999;
+        
+        [self.bannerAdsView addSubview:btnBannerAdsDismiss];
+        
+        //Adding ad in custom view
+        [self.bannerAdsView addSubview:adView];
+        //Making dismiss button visible,and bring it to front
+        [self.bannerAdsView bringSubviewToFront:btnBannerAdsDismiss];
+        return;
+    }
+}
+
+-(void)dismissBannerAdsOnTap{
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self dismissBannerAds:YES];
+    });
+}
+
+// Dismiss action for banner ad
+-(void)dismissBannerAds:(BOOL)valForBannerClose{
+    
+    self.bannerAdsView.backgroundColor = [UIColor clearColor];
+    
+    UIView *viewToRemove = [bannerAdsView viewWithTag:999];
+    [viewToRemove removeFromSuperview];
+    [self.bannerAdsView removeFromSuperview];
+    btnBannerAdsDismiss = nil;
+    self.bannerAdsView = nil;
+    
+    bannerAdClosed = valForBannerClose;
+}
+
 
 @end
