@@ -162,17 +162,21 @@
             NSDictionary *product = [productArray objectAtIndex:rowIndex];
             NSString* productIdentifier= product[@"productidentifier"];
             
-            if ( ! ([productIdentifier isEqualToString:@"com.flyerly.MonthlySubscription" ] ||
-                    [productIdentifier isEqualToString:@"com.flyerly.YearlySubscription1"] ||
-                    [productIdentifier isEqualToString:@"com.flyerly.RemoveAds"] ) &&
+            if ( ! ([productIdentifier isEqualToString:@"com.flyerly.MonthlySubscription" ]
+                    || [productIdentifier isEqualToString:@"com.flyerly.YearlySubscription1"]
+                    || [productIdentifier isEqualToString:@"com.flyerly.RemoveAds"]
+                    || [productIdentifier isEqualToString:@"com.flyerly.YearlySubscription2"]
+                    ) &&
                     [userPurchases checkKeyExistsInPurchases:productIdentifier] )  {
                 
                 // show alert that item has already been purchased
                 [self showAlreadyPurchasedAlert];
                 
-            } else if( ([productIdentifier isEqualToString:@"com.flyerly.MonthlySubscription" ] ||
-                       [productIdentifier isEqualToString:@"com.flyerly.YearlySubscription1"] ||
-                        [productIdentifier isEqualToString:@"com.flyerly.RemoveAds"] ) &&
+            } else if( ([productIdentifier isEqualToString:@"com.flyerly.MonthlySubscription" ]
+                        || [productIdentifier isEqualToString:@"com.flyerly.YearlySubscription1"]
+                        || [productIdentifier isEqualToString:@"com.flyerly.RemoveAds"]
+                        || [productIdentifier isEqualToString:@"com.flyerly.YearlySubscription2"]
+                        ) &&
                        [userPurchases isSubscriptionValid]) {
                 
                 // show alert that item has already been purchased
@@ -309,6 +313,8 @@
             [completeDesignBundleButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
         } else if([[product objectForKey:@"productidentifier"] isEqualToString:@"com.flyerly.YearlySubscription1"]) {
             inAppCell.backgroundColor = [UIColor grayColor];//heighlight the Yearly subscription cell
+        } else if([[product objectForKey:@"productidentifier"] isEqualToString:@"com.flyerly.YearlySubscription2"]) {
+            inAppCell.backgroundColor = [UIColor grayColor];//heighlight the Yearly subscription cell
         }
         //Setting the packagename,packageprice,packagedesciption values for cell view
         [inAppCell setCellValueswithProductTitle:[product objectForKey:@"packagename"] ProductPrice:[product objectForKey:@"packageprice"] ProductDescription:[product objectForKey:@"packagedesciption"]];
@@ -358,7 +364,7 @@
         
         //Check For Crash Maintain
         cancelRequest = NO;
-        NSArray *productIdentifiersAry = @[@"com.flyerly.MonthlySubscription", @"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.YearlySubscription1", @"com.flyerly.RemoveAds"];
+        NSArray *productIdentifiersAry = @[@"com.flyerly.MonthlySubscription", @"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.YearlySubscription1", @"com.flyerly.RemoveAds", @"com.flyerly.YearlySubscription2"];
         //These are over Products on App Store
         NSSet *productIdentifiers = [NSSet setWithArray:productIdentifiersAry];
         
@@ -421,7 +427,7 @@
         
         //HERE WE GET SHARED INTANCE OF _persistence WHICH WE LINKED IN FlyrAppDelegate
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        NSArray *productIdentifiers = @[@"com.flyerly.MonthlySubscription", @"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.YearlySubscription1", @"com.flyerly.RemoveAds"];
+        NSArray *productIdentifiers = @[@"com.flyerly.MonthlySubscription", @"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.YearlySubscription1", @"com.flyerly.RemoveAds", @"com.flyerly.YearlySubscription2"];
         
         if (productIdentifiers.count >= 1) {
             
