@@ -719,7 +719,7 @@ id lastShareBtnSender;
                 adView.frame = sizeRectForAdd;
             }
             
-            //dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
                 
                 NSString *imgName = [self getNoAdsImage];
                 adView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:imgName]];
@@ -727,7 +727,7 @@ id lastShareBtnSender;
 
                 self.gadAdsBanner[ addRow ] = adView;
                 [cell addSubview:self.gadAdsBanner[addRow]];
-            //});
+            });
             return cell;
         
         }else{
