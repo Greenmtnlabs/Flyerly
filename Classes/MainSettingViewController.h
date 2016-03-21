@@ -57,7 +57,7 @@
 
 @property(nonatomic, strong) GADInterstitial *interstitialAds;
 @property(nonatomic, strong) GADBannerView *bannerAds;
-@property (nonatomic, strong) UIView *bannerAdsView;
+@property (weak, nonatomic) IBOutlet UIView *bannerAdsView;
 
 
 @end
