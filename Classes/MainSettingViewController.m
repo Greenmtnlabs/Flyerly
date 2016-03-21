@@ -888,19 +888,6 @@
     return request;
 }
 
-- (void)showTopBanner:(UIView *)banner{
-    
-    [UIView beginAnimations:@"bannerOn" context:NULL];
-    
-    banner.frame = CGRectOffset(banner.frame, 0, banner.frame.size.height);
-    
-    [UIView commitAnimations];
-    
-    banner.hidden = NO;
-    
-}
-
-
 // We've received a Banner ad successfully.
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
     
@@ -909,27 +896,21 @@
         bannerShowed = YES;//keep bolean we have rendered banner or not ?
         
         // Device Check Maintain Size of ScrollView Because Scroll Indicator will show.
-        if(IS_IPHONE_4 || IS_IPHONE_5) {
-            if ( bannerAdDismissBtn == nil ){
+        if ( bannerAdDismissBtn == nil ){
+            if(IS_IPHONE_4 || IS_IPHONE_5) {
                 bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(270, 0, 52, 52)];
-            }
-        } else if (IS_IPHONE_6){
-            if ( bannerAdDismissBtn == nil ){
+            } else if (IS_IPHONE_6){
                 bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(320, 0, 52, 52)];
-            }
-        }else if(IS_IPHONE_6_PLUS){
-            if ( bannerAdDismissBtn == nil ){
+            }else if(IS_IPHONE_6_PLUS){
                 bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(360, 0, 52, 52)];
-            }
-        }else {
-            if ( bannerAdDismissBtn == nil ){
+            }else {
                 bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(270, 0, 52, 52)];
             }
         }
-        
+    
         self.bannerAdsView.backgroundColor = [UIColor clearColor];
         
-        [bannerAdDismissBtn addTarget:self action:@selector(dissmisBannerAddOnTap) forControlEvents:UIControlEventTouchUpInside];
+        [bannerAdDismissBtn addTarget:self action:@selector(dismissBannerAdsOnTap) forControlEvents:UIControlEventTouchUpInside];
         
         [bannerAdDismissBtn setImage:[UIImage imageNamed:@"closeAd.png"] forState:UIControlStateNormal];
         
@@ -945,7 +926,14 @@
     }
 }
 
- 
+-(void)dismissBannerAdsOnTap{
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self dissmisBannerAds:YES];
+    });
+}
+
+
 -(void)dissmisBannerAdsOnTap{
     
     dispatch_async(dispatch_get_main_queue(), ^{
