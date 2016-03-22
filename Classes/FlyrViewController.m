@@ -259,6 +259,7 @@ id lastShareBtnSender;
     __block int i=-1;
     adsLoaded = 0;
     
+    //Load different adds for cells
     for(int j=0;j<adsCount; j++){
         //add strip
         // Initialize the banner at the bottom of the screen.
@@ -274,8 +275,6 @@ id lastShareBtnSender;
         dispatch_async( dispatch_get_main_queue(), ^{
             i++;
             GADBannerView *tempAdsBanner = self.gadAdsBanner[i];
-            
-            // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID before compiling.
             tempAdsBanner.adUnitID = [flyerConfigurator bannerAdID];
             tempAdsBanner.delegate = self;
             tempAdsBanner.rootViewController = self;
