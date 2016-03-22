@@ -181,6 +181,8 @@
     [self.view addSubview:loadingView];
 }
 
+# pragma In App Purchase
+
 /*
  * Opens InAppPurchase Panel
  */
@@ -192,12 +194,9 @@
             inAppViewController = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
         }
         [self presentViewController:inAppViewController animated:YES completion:nil];
-        
         [inAppViewController requestProduct];
-        //inAppViewController.buttondelegate = self;
     }else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        
         [alert show];
     }
 }

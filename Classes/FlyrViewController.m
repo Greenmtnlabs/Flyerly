@@ -317,7 +317,7 @@ id lastShareBtnSender;
     backButton.enabled = enable;
     helpButton.enabled = enable;
     createButton.enabled = enable;
-    rightUndoBarButton.enabled = enable;
+    btnInAppPurchase.enabled = enable;
     
     tView.userInteractionEnabled = enable;
     
@@ -532,23 +532,30 @@ id lastShareBtnSender;
     return [NSMutableArray arrayWithObjects:backBarButton,leftBarButton,nil];
 }
 
--(void)loadHelpController{
-    
-    [UserVoice presentUserVoiceInterfaceForParentViewController:self];
-}
-
-
 -(NSArray *)rightBarItems{
    
+    // InApp Purchase Button
+    btnInAppPurchase = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [btnInAppPurchase addTarget:self action:@selector(openInAppPurchasePanel) forControlEvents:UIControlEventTouchUpInside];
+    [btnInAppPurchase setBackgroundImage:[UIImage imageNamed:@"premium_features"] forState:UIControlStateNormal];
+    btnInAppPurchase.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *inAppPurchaseButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btnInAppPurchase];
+    
     // Create Button
     createButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [createButton addTarget:self action:@selector(createFlyer:) forControlEvents:UIControlEventTouchUpInside];
     [createButton setBackgroundImage:[UIImage imageNamed:@"createButton"] forState:UIControlStateNormal];
     createButton.showsTouchWhenHighlighted = YES;
+    
     rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:createButton];
     
-    return [NSMutableArray arrayWithObjects:rightUndoBarButton,nil];
+    return [NSMutableArray arrayWithObjects:inAppPurchaseButtonItem, rightUndoBarButton, nil];
 }
+
+-(void)loadHelpController{
+    [UserVoice presentUserVoiceInterfaceForParentViewController:self];
+}
+
 
 /*
  * Here we get All Flyers Directories
@@ -899,7 +906,28 @@ id lastShareBtnSender;
 }
 
 
-- ( void )productSuccesfullyPurchased: (NSString *)productId {
+# pragma In App Purchase
+
+/*
+ * Opens InAppPurchase Panel
+ */
+-(void)openInAppPurchasePanel {
+    if ([FlyerlySingleton connected]) {
+        if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
+            inAppViewController = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
+        }else {
+            inAppViewController = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
+        }
+        [self presentViewController:inAppViewController animated:YES completion:nil];
+        [inAppViewController requestProduct];
+    }else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+}
+
+
+- (void)productSuccesfullyPurchased: (NSString *)productId {
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
@@ -912,7 +940,8 @@ id lastShareBtnSender;
     }
     
 }
-- ( void )inAppPurchasePanelContent {
+
+- (void)inAppPurchasePanelContent {
     [inappviewcontroller inAppDataLoaded];
 }
 
