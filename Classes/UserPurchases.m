@@ -118,10 +118,10 @@ static UserPurchases *sharedSingleton = nil;
     RMAppReceipt* appReceipt = [RMAppReceipt bundleReceipt];
     
     // get monthly subscription validity
-    NSString *isMonthlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:@"com.flyerly.MonthlySubscription" forDate:[NSDate date]]];
+    NSString *isMonthlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:@"com.flyerly.MonthlyGold" forDate:[NSDate date]]];
     
     // get Yearly subscription validity
-    NSString *isYearlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:@"com.flyerly.YearlySubscription1" forDate:[NSDate date]]];
+    NSString *isYearlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:@"com.flyerly.YearlyPlatinum" forDate:[NSDate date]]];
     
     // check whether one of 'em is valid or not..
     if( [isMonthlySubValid isEqual:@"1"] || [isYearlySubValid isEqualToString:@"1"] ){
