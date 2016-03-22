@@ -68,37 +68,7 @@ const int CONTACTS_TAB = 0;
     // By default first tab is selected 'Contacts'
     selectedTab = -1;
 
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-28, -6, 50, 50)];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:TITLE_FONT size:18];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
-    label.text = @"INVITE";
-    self.navigationItem.titleView = label;
-    
-    // Create left bar help button
-    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
-    [helpButton setImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
-    helpButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
-    
-    
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"home_button"] forState:UIControlStateNormal];
-    [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-    backButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,leftBarButton,nil]];
-    
-    
-    // INVITE BAR BUTTON
-    UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-	[inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
-    [inviteButton setBackgroundImage:[UIImage imageNamed:@"invite_friend"] forState:UIControlStateNormal];
-    inviteButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
+    [self setNavigation];
     
     [self.uiTableView  setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
     [searchTextField setReturnKeyType:UIReturnKeyDone];
@@ -237,6 +207,51 @@ const int CONTACTS_TAB = 0;
     
 }
 
+-(void)setNavigation{
+
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-28, -6, 50, 50)];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
+    label.text = @"INVITE";
+    self.navigationItem.titleView = label;
+    
+    // Create left bar help button
+    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
+    [helpButton setImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
+    helpButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
+    
+    
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"home_button"] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    backButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,leftBarButton,nil]];
+    
+    
+    // INVITE BAR BUTTON
+    UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    [inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
+    [inviteButton setBackgroundImage:[UIImage imageNamed:@"invite_friend"] forState:UIControlStateNormal];
+    inviteButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *rightBarInviteButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
+    
+    
+    // InApp Purchase Button
+    UIButton *btnInAppPurchase = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [btnInAppPurchase addTarget:self action:@selector(openInAppPurchasePanel) forControlEvents:UIControlEventTouchUpInside];
+    [btnInAppPurchase setBackgroundImage:[UIImage imageNamed:@"premium_features"] forState:UIControlStateNormal];
+    btnInAppPurchase.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *rightBarInAppPurchaseButton = [[UIBarButtonItem alloc] initWithCustomView:btnInAppPurchase];
+    
+    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarInviteButton, rightBarInAppPurchaseButton,nil]];
+
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     
     self.navigationItem.leftItemsSupplementBackButton = YES;
@@ -251,6 +266,27 @@ const int CONTACTS_TAB = 0;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
+# pragma In App Purchase
+
+/*
+ * Opens InAppPurchase Panel
+ */
+-(void)openInAppPurchasePanel {
+    if ([FlyerlySingleton connected]) {
+        if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
+            inAppViewController = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
+        }else {
+            inAppViewController = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
+        }
+        [self presentViewController:inAppViewController animated:YES completion:nil];
+        [inAppViewController requestProduct];
+    }else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+}
+
 
 #pragma mark  Custom Methods
 
