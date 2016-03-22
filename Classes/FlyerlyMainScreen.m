@@ -103,7 +103,7 @@ id lastShareBtnSender;
     
     dispatch_async( dispatch_get_main_queue(), ^{
         //full screen adds
-        [self loadGoogleAdd];
+        [self loadFullScreenGoogleAdd];
     });
     
     // set default image
@@ -850,7 +850,7 @@ id lastShareBtnSender;
 - (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
     //on add dismiss && after merging video process, save in gallery
     [self saveAndRelease];
-    [self loadGoogleAdd];
+    [self loadFullScreenGoogleAdd];
 }
 
 /**
@@ -891,7 +891,7 @@ id lastShareBtnSender;
 /**
  * Load google add
  */
--(void)loadGoogleAdd{
+-(void)loadFullScreenGoogleAdd{
     self.addInterstialFms = [[GADInterstitial alloc] init];
     self.addInterstialFms.delegate = self;
     
