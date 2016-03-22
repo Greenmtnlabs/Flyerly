@@ -233,7 +233,7 @@
 
 -(void)onNext{
     
-    if ( !( userName == NULL || [userName isEqualToString:@"" ] ) && !( userphoneNumber == NULL || [userphoneNumber isEqualToString:@""]) ) {
+    if ( !( userName == NULL || [userName isEqualToString:@"" ] ) ) {
         
         untechable.userName = userName;
         untechable.userPhoneNumber = userphoneNumber;
@@ -246,7 +246,7 @@
     } else {
         
         UIAlertView *alert  = [[UIAlertView alloc] initWithTitle:NSLocalizedString(ERROR, nil)
-                                                         message:NSLocalizedString(@"Please Enter Your Name and Number", nil)
+                                                         message:NSLocalizedString(@"Please Enter Your Name", nil)
                                                         delegate:nil
                                                cancelButtonTitle:NSLocalizedString(OK, nil)
                                                otherButtonTitles:nil, nil];

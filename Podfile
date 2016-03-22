@@ -15,8 +15,6 @@ pod 'libPhoneNumber-iOS', '~> 0.8'
 pod 'ShareKit', '~> 4.0'
 #pod 'ShareKit', :podspec => "Podspecs/ShareKit.podspec"
 
-pod 'Parse', '~> 1.7.3'
-pod 'ParseFacebookUtils', '~> 1.7.4'
 
 # Open SSL, required for RMAppReceipt
 pod 'OpenSSL', '~> 1.0.201'
