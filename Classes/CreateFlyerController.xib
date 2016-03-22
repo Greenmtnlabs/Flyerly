@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment version="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateFlyerController">
@@ -218,7 +218,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Library"/>
-                    <state key="normal" backgroundImage="5tab_1_library@3x.png">
+                    <state key="normal" backgroundImage="5tab_1_library.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected" backgroundImage="5tab_1_library_selected@3x.png"/>
@@ -230,7 +230,7 @@
                     <rect key="frame" x="64" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="TakePhoto"/>
-                    <state key="normal" backgroundImage="5tab_2_camera@3x.png">
+                    <state key="normal" backgroundImage="5tab_2_camera.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected" backgroundImage="5tab_2_camera_selected@3x.png"/>
@@ -242,7 +242,7 @@
                     <rect key="frame" x="128" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Library"/>
-                    <state key="normal" backgroundImage="5tab_3_giphy@3x.png">
+                    <state key="normal" backgroundImage="5tab_3_giphy.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected" backgroundImage="5tab_3_giphy_selected@3x.png"/>
@@ -254,7 +254,7 @@
                     <rect key="frame" x="192" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="CameraRoll"/>
-                    <state key="normal" backgroundImage="5tab_4_gallery@3x.png">
+                    <state key="normal" backgroundImage="5tab_4_gallery.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected" backgroundImage="5tab_4_gallery_selected@3x.png"/>
@@ -266,7 +266,7 @@
                     <rect key="frame" x="256" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Border"/>
-                    <state key="normal" backgroundImage="5tab_5_border@3x.png">
+                    <state key="normal" backgroundImage="5tab_5_border.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected" backgroundImage="5tab_5_border_selected@3x.png"/>
@@ -499,7 +499,7 @@
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gqJ-fV-ZCI">
-                    <rect key="frame" x="263.99999972909688" y="10" width="36" height="21"/>
+                    <rect key="frame" x="263.99999958956835" y="10" width="36" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -635,15 +635,15 @@
         <image name="07_roll_selected.png" width="80" height="45"/>
         <image name="07_width.png" width="80" height="45"/>
         <image name="07_width_selected.png" width="80" height="45"/>
-        <image name="5tab_1_library@3x.png" width="192" height="135"/>
+        <image name="5tab_1_library.png" width="64" height="45"/>
         <image name="5tab_1_library_selected@3x.png" width="192" height="135"/>
-        <image name="5tab_2_camera@3x.png" width="192" height="135"/>
+        <image name="5tab_2_camera.png" width="64" height="45"/>
         <image name="5tab_2_camera_selected@3x.png" width="192" height="135"/>
-        <image name="5tab_3_giphy@3x.png" width="192" height="135"/>
+        <image name="5tab_3_giphy.png" width="64" height="45"/>
         <image name="5tab_3_giphy_selected@3x.png" width="192" height="135"/>
-        <image name="5tab_4_gallery@3x.png" width="192" height="135"/>
+        <image name="5tab_4_gallery.png" width="64" height="45"/>
         <image name="5tab_4_gallery_selected@3x.png" width="192" height="135"/>
-        <image name="5tab_5_border@3x.png" width="192" height="135"/>
+        <image name="5tab_5_border.png" width="64" height="45"/>
         <image name="5tab_5_border_selected@3x.png" width="192" height="135"/>
         <image name="art_tab.png" width="64" height="45"/>
         <image name="bg_tab.png" width="64" height="45"/>
@@ -670,7 +670,7 @@
         <image name="font_button_selected.png" width="64" height="45"/>
         <image name="image_icon.png" width="64" height="45"/>
         <image name="image_icon_selected" width="612" height="612"/>
-        <image name="magnifyingGlass.png" width="5" height="16"/>
+        <image name="magnifyingGlass.png" width="64" height="64"/>
         <image name="outline_button.png" width="64" height="45"/>
         <image name="outline_button_selected.png" width="64" height="45"/>
         <image name="pause_icon.png" width="40" height="40"/>

@@ -409,30 +409,6 @@ id lastShareBtnSender;
 }
 
 
--(NSArray *)rightBarItems{
-    
-    // for Navigation Bar logo
-    UIImageView *logo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 102, 38)];
-    
-    [logo setImage:[UIImage imageNamed:@"flyerlylogo"]];
-    self.navigationItem.titleView = logo;
-    
-    // to apply gesture recognizer on image(flyerlylogo)
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
-    singleTap.numberOfTapsRequired = 1;
-    [logo setUserInteractionEnabled:YES];
-    [logo addGestureRecognizer:singleTap];
-    
-    // Settings Button
-    btnSettings = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [btnSettings addTarget:self action:@selector(doAbout:) forControlEvents:UIControlEventTouchUpInside];
-    [btnSettings setBackgroundImage:[UIImage imageNamed:@"settingsButton"] forState:UIControlStateNormal];
-    btnSettings.showsTouchWhenHighlighted = YES;
-    rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:btnSettings];
-    
-    return [NSMutableArray arrayWithObjects:rightUndoBarButton,nil];
-}
-
 /*
  * This method is invoked
  * when the Flyerly Logo is tapped
@@ -857,17 +833,22 @@ id lastShareBtnSender;
  * Here we Open InAppPurchase Panel
  */
 -(void)openPanel {
-    
-    if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
-        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
-    } else {
-        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
+    if ([FlyerlySingleton connected]) {
+        if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
+            inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
+        }else {
+            inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
+        }
+        [self presentViewController:inappviewcontroller animated:YES completion:nil];
+        
+        [inappviewcontroller requestProduct];
+        inappviewcontroller.buttondelegate = self;
+    }else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        [alert show];
+        
     }
-    
-    [self presentViewController:inappviewcontroller animated:NO completion:nil];
-    
-    [inappviewcontroller requestProduct];
-    inappviewcontroller.buttondelegate = self;
 }
 
 /**
@@ -1013,7 +994,8 @@ id lastShareBtnSender;
 -(void)enableBtns:(BOOL)enable{
 
     btnSettings.enabled = enable;
-    rightUndoBarButton.enabled = enable;
+    rightBarButton.enabled = enable;
+    leftBarButton.enabled = enable;
     btnCreateFlyer.enabled = enable;
     
     btnInvite.enabled = enable;
@@ -1035,8 +1017,33 @@ id lastShareBtnSender;
  */
 -(void)setNavigation{
    
-    // Set right bar items
-    [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
+    // for Navigation Bar logo
+    UIImageView *logo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 102, 38)];
+    
+    [logo setImage:[UIImage imageNamed:@"flyerlylogo"]];
+    self.navigationItem.titleView = logo;
+    
+    // to apply gesture recognizer on image(flyerlylogo)
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
+    singleTap.numberOfTapsRequired = 1;
+    [logo setUserInteractionEnabled:YES];
+    [logo addGestureRecognizer:singleTap];
+    
+    // Settings Button
+    btnSettings = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    [btnSettings addTarget:self action:@selector(doAbout:) forControlEvents:UIControlEventTouchUpInside];
+    [btnSettings setBackgroundImage:[UIImage imageNamed:@"settingsButton"] forState:UIControlStateNormal];
+    btnSettings.showsTouchWhenHighlighted = YES;
+    rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:btnSettings];
+    self.navigationItem.rightBarButtonItem = rightBarButton;
+    
+    // InApp Purchase Button
+    btnInAppPurchase = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [btnInAppPurchase addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
+    [btnInAppPurchase setBackgroundImage:[UIImage imageNamed:@"premium_features"] forState:UIControlStateNormal];
+    btnInAppPurchase.showsTouchWhenHighlighted = YES;
+    leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:btnInAppPurchase];
+    self.navigationItem.leftBarButtonItem = leftBarButton;
 }
 
 /*
@@ -1137,7 +1144,7 @@ id lastShareBtnSender;
         shareviewcontroller.selectedFlyerImage = shareImage;
         shareviewcontroller.flyer = self.flyer;
         shareviewcontroller.imageFileName = shareImagePath;
-        shareviewcontroller.rightUndoBarButton = rightUndoBarButton;
+        shareviewcontroller.rightUndoBarButton = rightBarButton;
         shareviewcontroller.shareButton = btnSettings;
         
         if( [shareviewcontroller.titleView.text isEqualToString:@"Flyer"] ) {
