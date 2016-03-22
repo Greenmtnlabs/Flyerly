@@ -557,7 +557,7 @@ id lastShareBtnSender;
     
     rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:createButton];
     
-    return [NSMutableArray arrayWithObjects:inAppPurchaseButtonItem, rightUndoBarButton, nil];
+    return [NSMutableArray arrayWithObjects:rightUndoBarButton, inAppPurchaseButtonItem, nil];
 }
 
 -(void)loadHelpController{
