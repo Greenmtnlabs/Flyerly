@@ -1904,7 +1904,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PROVISIONING_PROFILE = "61bc6f2f-30e3-4c6c-9fa5-57cdc233468d";
+				PROVISIONING_PROFILE = "770c2e7a-0bf3-459a-b037-a94d7673fbfa";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1923,7 +1923,7 @@
 				GCC_PREFIX_HEADER = "Untechable/Untechable-Prefix.pch";
 				INFOPLIST_FILE = "Untechable/Untechable-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MACH_O_TYPE = mh_dylib;
+				MACH_O_TYPE = mh_execute;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.greenmtnlabs.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "29bd81a4-6a36-43bb-97af-309871f7cfdb";
@@ -1948,7 +1948,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.greenmtnlabs.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "61bc6f2f-30e3-4c6c-9fa5-57cdc233468d";
+				PROVISIONING_PROFILE = "770c2e7a-0bf3-459a-b037-a94d7673fbfa";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

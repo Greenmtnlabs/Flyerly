@@ -10,7 +10,6 @@
 #import "Common.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UserVoice.h"
-#import <Parse/Parse.h>
 #import "SHKTextMessage.h"
 #import "SHKConfiguration.h"
 #import "SHKiOSSharer.h"
