@@ -26,7 +26,7 @@
     ACAccount *selectedAccount;
     
     UIButton *btnBannerAdsDismiss;
-    BOOL hasValidSubscription;
+    BOOL haveValidSubscription;
     UserPurchases *userPurchases;
 }
 
@@ -34,6 +34,7 @@
 @synthesize emailBackupArray, contactBackupArray, facebookBackupArray, twitterBackupArray,refrelText;
 @synthesize fbText;
 @synthesize bannerAdsView;
+@synthesize shouldShowAdd;
 
 const int EMAIL_TAB = 3;
 const int TWITTER_TAB = 2;
@@ -48,7 +49,7 @@ const int CONTACTS_TAB = 0;
     
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
-    hasValidSubscription = [userPurchases isSubscriptionValid];
+    haveValidSubscription = [userPurchases isSubscriptionValid];
     
     bannerAdClosed = NO;
     bannerShowed = NO;
@@ -170,7 +171,7 @@ const int CONTACTS_TAB = 0;
     // Load device contacts
     [self loadLocalContacts:self.contactsButton];
     
-    if( hasValidSubscription == NO ) {
+    if( haveValidSubscription == NO ) {
         [self loadInterstitialAdd];
     }
     
@@ -192,7 +193,7 @@ const int CONTACTS_TAB = 0;
                 customAdSize = GADAdSizeFromCGSize(CGSizeMake(320, 50));
             }
             
-            if( hasValidSubscription == NO ) {
+            if( haveValidSubscription == NO ) {
                 // Use predefined GADAdSize constants to define the GADBannerView.
                 self.bannerAds = [[GADBannerView alloc] initWithAdSize:customAdSize origin:origin];
                 
@@ -278,6 +279,8 @@ const int CONTACTS_TAB = 0;
 }
 
 -(IBAction)goBack{
+    
+    self.shouldShowAdd ( @"", haveValidSubscription );
     [self.navigationController popViewControllerAnimated:YES];
     
 }
