@@ -103,7 +103,7 @@ id lastShareBtnSender;
     
     dispatch_async( dispatch_get_main_queue(), ^{
         //full screen adds
-        [self loadGoogleAdd];
+        [self loadFullScreenGoogleAdd];
     });
     
     // set default image
@@ -516,7 +516,7 @@ id lastShareBtnSender;
     return isAddRow;
 }
 
-// We've received an Banner ad successfully.
+// We've received an ad for cell successfully.
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
     //Adding ad in custom view
     if( addsLoaded < self.bannerAdd.count ){
@@ -526,16 +526,15 @@ id lastShareBtnSender;
         self.bannerAdd[addsLoaded] = adView;
         [self loadAdsTiles];
         
+        addsLoaded++;
     }
-    addsLoaded++;
+    
 }
 
 /**
  * Load addvertise tiles
  */
 -(void)loadAdsTiles{
-    __block int i=-1;
-    addsLoaded = 0;
     
     if( self.bannerAdd == nil )
         self.bannerAdd = [[NSMutableArray alloc] init];
@@ -544,6 +543,10 @@ id lastShareBtnSender;
     
     if( self.bannerAdd.count >= addsCount )
     return; //dont load adds if we already have
+    
+    //Start process if banner required to load
+    __block int i=-1;
+    addsLoaded = 0;
     
     for(int j=0;j<addsCount; j++){
         //add strip
@@ -850,7 +853,7 @@ id lastShareBtnSender;
 - (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
     //on add dismiss && after merging video process, save in gallery
     [self saveAndRelease];
-    [self loadGoogleAdd];
+    [self loadFullScreenGoogleAdd];
 }
 
 /**
@@ -891,7 +894,7 @@ id lastShareBtnSender;
 /**
  * Load google add
  */
--(void)loadGoogleAdd{
+-(void)loadFullScreenGoogleAdd{
     self.addInterstialFms = [[GADInterstitial alloc] init];
     self.addInterstialFms.delegate = self;
     

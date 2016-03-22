@@ -42,6 +42,9 @@ id lastShareBtnSender;
     
     [super viewDidLoad];
     
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    flyerConfigurator = appDelegate.flyerConfigurator;
+    
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
     haveValidSubscription = [userPurchases isSubscriptionValid];
@@ -195,8 +198,8 @@ id lastShareBtnSender;
             adView.frame = sizeRectForAdd;
         }
         self.gadAdsBanner[adsLoaded] = adView;
+      adsLoaded++;
     }
-    adsLoaded++;
 }
 
 /**
@@ -243,8 +246,6 @@ id lastShareBtnSender;
  *      void
  */
 -(void)loadAdsTiles{
-    __block int i=-1;
-    adsLoaded = 0;
     
     if( self.gadAdsBanner == nil )
         self.gadAdsBanner = [[NSMutableArray alloc] init];
@@ -254,6 +255,11 @@ id lastShareBtnSender;
     if( self.gadAdsBanner.count >= adsCount )
         return; //dont load adds if we already have
     
+    //Start process if banner required to load    
+    __block int i=-1;
+    adsLoaded = 0;
+    
+    //Load different adds for cells
     for(int j=0;j<adsCount; j++){
         //add strip
         // Initialize the banner at the bottom of the screen.
@@ -269,8 +275,6 @@ id lastShareBtnSender;
         dispatch_async( dispatch_get_main_queue(), ^{
             i++;
             GADBannerView *tempAdsBanner = self.gadAdsBanner[i];
-            
-            // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID before compiling.
             tempAdsBanner.adUnitID = [flyerConfigurator bannerAdID];
             tempAdsBanner.delegate = self;
             tempAdsBanner.rootViewController = self;
