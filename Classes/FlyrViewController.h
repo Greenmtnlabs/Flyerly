@@ -25,10 +25,10 @@
 #import "PrintViewController.h"
 #import "UserPurchases.h"
 #import "GADBannerView.h"
+#import "InAppViewController.h"
 
 
-
-@class SaveFlyerCell, Flyer, SigninController, RegisterController, InAppViewController, CreateFlyerController,ShareViewController,PrintViewController;
+@class SaveFlyerCell, Flyer, SigninController, RegisterController, InAppViewController, CreateFlyerController,ShareViewController,PrintViewController, InAppViewController;
 
 @interface FlyrViewController : ParentViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,RMStoreObserver,InAppPurchasePanelButtonProtocol, UserPurchasesDelegate ,GADInterstitialDelegate, GADBannerViewDelegate> {
 
@@ -48,7 +48,9 @@
     NSArray *requestedProducts;
     RMStoreKeychainPersistence *_persistence;
     PrintViewController *printViewController;
-    UIButton *helpButton, *backButton,*createButton;
+    UIButton *helpButton, *backButton,*createButton, *btnInAppPurchase;
+    
+    InAppViewController *inAppViewController;
     UIBarButtonItem *rightUndoBarButton;
 }
 

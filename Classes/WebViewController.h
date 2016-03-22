@@ -10,9 +10,11 @@
 #import "UserPurchases.h"
 
 
+@class InAppViewController;
 @interface WebViewController : UIViewController <UIWebViewDelegate, UserPurchasesDelegate>{
     UIButton *btnHome;
-    UIBarButtonItem *leftBarButton;
+    UIButton *btnInAppPurchase;
+    UIBarButtonItem *leftBarButton, *rightBarButton;
     UIView *loadingView;
 }
 

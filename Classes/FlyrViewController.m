@@ -317,7 +317,7 @@ id lastShareBtnSender;
     backButton.enabled = enable;
     helpButton.enabled = enable;
     createButton.enabled = enable;
-    rightUndoBarButton.enabled = enable;
+    btnInAppPurchase.enabled = enable;
     
     tView.userInteractionEnabled = enable;
     
@@ -498,6 +498,14 @@ id lastShareBtnSender;
     [self.navigationController pushViewController:createFlyer animated:YES];
 }
 
+/*
+ * Opens InAppPurchase Panel
+ */
+-(void) openInAppPanel{
+    [InAppPurchaseRelatedMethods openInAppPurchasePanel:self];
+}
+
+
 - (void)inAppPanelDismissed {
 
 }
@@ -532,22 +540,28 @@ id lastShareBtnSender;
     return [NSMutableArray arrayWithObjects:backBarButton,leftBarButton,nil];
 }
 
--(void)loadHelpController{
-    
-    [UserVoice presentUserVoiceInterfaceForParentViewController:self];
-}
-
-
 -(NSArray *)rightBarItems{
    
+    // InApp Purchase Button
+    btnInAppPurchase = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [btnInAppPurchase addTarget:self action:@selector(openInAppPanel) forControlEvents:UIControlEventTouchUpInside];
+    [btnInAppPurchase setBackgroundImage:[UIImage imageNamed:@"premium_features"] forState:UIControlStateNormal];
+    btnInAppPurchase.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *inAppPurchaseButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btnInAppPurchase];
+    
     // Create Button
     createButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [createButton addTarget:self action:@selector(createFlyer:) forControlEvents:UIControlEventTouchUpInside];
     [createButton setBackgroundImage:[UIImage imageNamed:@"createButton"] forState:UIControlStateNormal];
     createButton.showsTouchWhenHighlighted = YES;
+    
     rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:createButton];
     
-    return [NSMutableArray arrayWithObjects:rightUndoBarButton,nil];
+    return [NSMutableArray arrayWithObjects:inAppPurchaseButtonItem, rightUndoBarButton, nil];
+}
+
+-(void)loadHelpController{
+    [UserVoice presentUserVoiceInterfaceForParentViewController:self];
 }
 
 /*
@@ -674,7 +688,7 @@ id lastShareBtnSender;
                 }
                 flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:flyerRow] setDirectory:NO];
                 [cell renderCell:flyer LockStatus:lockFlyer];
-                [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
+                [cell.flyerLock addTarget:self action:@selector(openInAppPanel) forControlEvents:UIControlEventTouchUpInside];
                 cell.shareBtn.tag = indexPath.row;
                 [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
             });
@@ -690,7 +704,7 @@ id lastShareBtnSender;
                 flyerPaths = [self getFlyersPaths];
                 flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:flyerRow] setDirectory:NO];
                 [cell renderCell:flyer LockStatus:lockFlyer];
-                [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
+                [cell.flyerLock addTarget:self action:@selector(openInAppPanel) forControlEvents:UIControlEventTouchUpInside];
                 cell.shareBtn.tag = indexPath.row;
                 [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
             });
@@ -735,7 +749,7 @@ id lastShareBtnSender;
             // If not connected to internet, enables image user interaction
             noAdsImage.userInteractionEnabled = YES;
             // and applies gesture recognizer on image
-            UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openPanel)];
+            UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openInAppPanel)];
             [tap setNumberOfTapsRequired:1];
             [noAdsImage addGestureRecognizer:tap];
             [cell addSubview: noAdsImage];
@@ -899,7 +913,12 @@ id lastShareBtnSender;
 }
 
 
-- ( void )productSuccesfullyPurchased: (NSString *)productId {
+# pragma In App Purchase
+
+
+
+
+- (void)productSuccesfullyPurchased: (NSString *)productId {
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
@@ -912,7 +931,8 @@ id lastShareBtnSender;
     }
     
 }
-- ( void )inAppPurchasePanelContent {
+
+- (void)inAppPurchasePanelContent {
     [inappviewcontroller inAppDataLoaded];
 }
 
@@ -933,23 +953,6 @@ id lastShareBtnSender;
     }
 }
 
-
-/*
- * Here we Open InAppPurchase Panel
- */
--(void)openPanel {
-    
-    if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
-        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
-    } else {
-        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
-    }
-    
-    [self presentViewController:inappviewcontroller animated:NO completion:nil];
-    
-    [inappviewcontroller requestProduct];
-    inappviewcontroller.buttondelegate = self;
-}
 
 -(void)onShare:(id)sender {
     

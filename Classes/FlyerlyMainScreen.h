@@ -44,8 +44,8 @@
     NSArray *requestedProducts;
     RMStoreKeychainPersistence *_persistence;
     PrintViewController *printViewController;
-    UIButton *btnSettings;
-    UIBarButtonItem *rightUndoBarButton;
+    UIButton *btnSettings, *btnInAppPurchase;
+    UIBarButtonItem *rightBarButton, *leftBarButton;
     
     // Tab buttons 
     UIButton *btnInvite, *btnSaved, *btnShared, *btnSocial;

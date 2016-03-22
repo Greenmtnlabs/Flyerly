@@ -36,9 +36,10 @@
 #import "GADInterstitialDelegate.h"
 #import "GADBannerView.h"
 #import "UserPurchases.h"
+#import "InAppPurchaseRelatedMethods.h"
 
 
-@class FlyerlySingleton,SHKSharer;
+@class FlyerlySingleton, SHKSharer;
 
 @interface InviteFriendsController : ParentViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate, SHKSharerDelegate, FBSDKAppInviteDialogDelegate, UserPurchasesDelegate, GADInterstitialDelegate, GADBannerViewDelegate>{
     
@@ -51,6 +52,7 @@
     
     BOOL bannerAdClosed;
     BOOL bannerShowed;
+    
 }
 
 @property(nonatomic,strong) IBOutlet UILabel *refrelText;
