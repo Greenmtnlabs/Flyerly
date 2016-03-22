@@ -516,7 +516,7 @@ id lastShareBtnSender;
     return isAddRow;
 }
 
-// We've received an Banner ad successfully.
+// We've received an ad for cell successfully.
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
     //Adding ad in custom view
     if( addsLoaded < self.bannerAdd.count ){
@@ -526,16 +526,15 @@ id lastShareBtnSender;
         self.bannerAdd[addsLoaded] = adView;
         [self loadAdsTiles];
         
+        addsLoaded++;
     }
-    addsLoaded++;
+    
 }
 
 /**
  * Load addvertise tiles
  */
 -(void)loadAdsTiles{
-    __block int i=-1;
-    addsLoaded = 0;
     
     if( self.bannerAdd == nil )
         self.bannerAdd = [[NSMutableArray alloc] init];
@@ -544,6 +543,10 @@ id lastShareBtnSender;
     
     if( self.bannerAdd.count >= addsCount )
     return; //dont load adds if we already have
+    
+    //Start process if banner required to load
+    __block int i=-1;
+    addsLoaded = 0;
     
     for(int j=0;j<addsCount; j++){
         //add strip

@@ -42,6 +42,9 @@ id lastShareBtnSender;
     
     [super viewDidLoad];
     
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    flyerConfigurator = appDelegate.flyerConfigurator;
+    
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
     haveValidSubscription = [userPurchases isSubscriptionValid];
@@ -195,8 +198,8 @@ id lastShareBtnSender;
             adView.frame = sizeRectForAdd;
         }
         self.gadAdsBanner[adsLoaded] = adView;
+      adsLoaded++;
     }
-    adsLoaded++;
 }
 
 /**
@@ -243,8 +246,6 @@ id lastShareBtnSender;
  *      void
  */
 -(void)loadAdsTiles{
-    __block int i=-1;
-    adsLoaded = 0;
     
     if( self.gadAdsBanner == nil )
         self.gadAdsBanner = [[NSMutableArray alloc] init];
@@ -253,6 +254,10 @@ id lastShareBtnSender;
     
     if( self.gadAdsBanner.count >= adsCount )
         return; //dont load adds if we already have
+    
+    //Start process if banner required to load    
+    __block int i=-1;
+    adsLoaded = 0;
     
     for(int j=0;j<adsCount; j++){
         //add strip
