@@ -498,6 +498,14 @@ id lastShareBtnSender;
     [self.navigationController pushViewController:createFlyer animated:YES];
 }
 
+/*
+ * Opens InAppPurchase Panel
+ */
+-(void) openInAppPanel{
+    [InAppPurchaseRelatedMethods openInAppPurchasePanel:self];
+}
+
+
 - (void)inAppPanelDismissed {
 
 }
@@ -536,7 +544,7 @@ id lastShareBtnSender;
    
     // InApp Purchase Button
     btnInAppPurchase = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-    [btnInAppPurchase addTarget:self action:@selector(openInAppPurchasePanel) forControlEvents:UIControlEventTouchUpInside];
+    [btnInAppPurchase addTarget:self action:@selector(openInAppPanel) forControlEvents:UIControlEventTouchUpInside];
     [btnInAppPurchase setBackgroundImage:[UIImage imageNamed:@"premium_features"] forState:UIControlStateNormal];
     btnInAppPurchase.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *inAppPurchaseButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btnInAppPurchase];
@@ -555,7 +563,6 @@ id lastShareBtnSender;
 -(void)loadHelpController{
     [UserVoice presentUserVoiceInterfaceForParentViewController:self];
 }
-
 
 /*
  * Here we get All Flyers Directories
@@ -681,7 +688,7 @@ id lastShareBtnSender;
                 }
                 flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:flyerRow] setDirectory:NO];
                 [cell renderCell:flyer LockStatus:lockFlyer];
-                [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
+                [cell.flyerLock addTarget:self action:@selector(openInAppPanel) forControlEvents:UIControlEventTouchUpInside];
                 cell.shareBtn.tag = indexPath.row;
                 [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
             });
@@ -697,7 +704,7 @@ id lastShareBtnSender;
                 flyerPaths = [self getFlyersPaths];
                 flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:flyerRow] setDirectory:NO];
                 [cell renderCell:flyer LockStatus:lockFlyer];
-                [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
+                [cell.flyerLock addTarget:self action:@selector(openInAppPanel) forControlEvents:UIControlEventTouchUpInside];
                 cell.shareBtn.tag = indexPath.row;
                 [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
             });
@@ -742,7 +749,7 @@ id lastShareBtnSender;
             // If not connected to internet, enables image user interaction
             noAdsImage.userInteractionEnabled = YES;
             // and applies gesture recognizer on image
-            UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openPanel)];
+            UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openInAppPanel)];
             [tap setNumberOfTapsRequired:1];
             [noAdsImage addGestureRecognizer:tap];
             [cell addSubview: noAdsImage];
@@ -908,23 +915,7 @@ id lastShareBtnSender;
 
 # pragma In App Purchase
 
-/*
- * Opens InAppPurchase Panel
- */
--(void)openInAppPurchasePanel {
-    if ([FlyerlySingleton connected]) {
-        if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
-            inAppViewController = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
-        }else {
-            inAppViewController = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
-        }
-        [self presentViewController:inAppViewController animated:YES completion:nil];
-        [inAppViewController requestProduct];
-    }else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
-    }
-}
+
 
 
 - (void)productSuccesfullyPurchased: (NSString *)productId {
@@ -962,23 +953,6 @@ id lastShareBtnSender;
     }
 }
 
-
-/*
- * Here we Open InAppPurchase Panel
- */
--(void)openPanel {
-    
-    if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
-        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
-    } else {
-        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
-    }
-    
-    [self presentViewController:inappviewcontroller animated:NO completion:nil];
-    
-    [inappviewcontroller requestProduct];
-    inappviewcontroller.buttondelegate = self;
-}
 
 -(void)onShare:(id)sender {
     

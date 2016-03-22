@@ -232,7 +232,6 @@ const int CONTACTS_TAB = 0;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,leftBarButton,nil]];
     
-    
     // INVITE BAR BUTTON
     UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
@@ -243,13 +242,17 @@ const int CONTACTS_TAB = 0;
     
     // InApp Purchase Button
     UIButton *btnInAppPurchase = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-    [btnInAppPurchase addTarget:self action:@selector(openInAppPurchasePanel) forControlEvents:UIControlEventTouchUpInside];
+    [btnInAppPurchase addTarget:self action:@selector(openInAppPanel) forControlEvents:UIControlEventTouchUpInside];
     [btnInAppPurchase setBackgroundImage:[UIImage imageNamed:@"premium_features"] forState:UIControlStateNormal];
     btnInAppPurchase.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *rightBarInAppPurchaseButton = [[UIBarButtonItem alloc] initWithCustomView:btnInAppPurchase];
     
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarInviteButton, rightBarInAppPurchaseButton,nil]];
 
+}
+
+-(void) openInAppPanel{
+    [InAppPurchaseRelatedMethods openInAppPurchasePanel:self];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -266,27 +269,6 @@ const int CONTACTS_TAB = 0;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
-
-# pragma In App Purchase
-
-/*
- * Opens InAppPurchase Panel
- */
--(void)openInAppPurchasePanel {
-    if ([FlyerlySingleton connected]) {
-        if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
-            inAppViewController = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
-        }else {
-            inAppViewController = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
-        }
-        [self presentViewController:inAppViewController animated:YES completion:nil];
-        [inAppViewController requestProduct];
-    }else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
-    }
-}
-
 
 #pragma mark  Custom Methods
 
