@@ -45,6 +45,7 @@
     BOOL haveValidSubscription;
     BOOL saveToGallaryReqBeforeSharing;
     BOOL isNewFlyer;
+    BOOL firstTimeInViewDidAppear;
 }
 
 @end
@@ -146,6 +147,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [super viewDidAppear:animated];
     
     [self setFramesOfBtns];
+    if ( firstTimeInViewDidAppear ){
+        firstTimeInViewDidAppear = false;
+        //Set Context Tabs
+        [self addBottomTabs:libFlyer];
+    }
     
     if( appearingViewAfterInAppHide == YES ){
         appearingViewAfterInAppHide = NO;
@@ -349,6 +355,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         [[NSBundle mainBundle] loadNibNamed:@"CreateFlyerController-iPhone4" owner:self options:nil];
     }
 
+    firstTimeInViewDidAppear = YES;
     enableRenderFlyer = YES;
     sharingPannelIsHidden = YES;
     appearingViewAfterInAppHide = NO;
@@ -556,6 +563,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
         //Set Undo Bar Status
         [self setUndoStatus];
+        
         
         //Show paid xid for all with yellow overly ( open in app on tap ), we will hide it after user checking user purchases
         fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts-paid" ofType:@"plist"];
