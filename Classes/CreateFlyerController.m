@@ -77,6 +77,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 #pragma mark -  View Appear Methods
 - (void)viewWillAppear:(BOOL)animated{
     
+    [self setFramesOfBtns];
+    
+    saveToGallaryReqBeforeSharing = NO;
+}
+
+-(void) setFramesOfBtns{
+    
     CGRect newFrame = CGRectMake( 0, 0,
                                  libraryContextView.frame.size.width,
                                  libraryContextView.frame.size.height);
@@ -87,8 +94,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [libText setFrame:newFrame];
     [libPhoto setFrame:newFrame];
     [libDrawing setFrame:newFrame];
-    
-    saveToGallaryReqBeforeSharing = NO;
 }
 
 /**
@@ -139,6 +144,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 -(void)viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
+    
+    [self setFramesOfBtns];
+    
     if( appearingViewAfterInAppHide == YES ){
         appearingViewAfterInAppHide = NO;
         return;
@@ -366,7 +374,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     flyerConfigurator = appDelegate.flyerConfigurator;
     
-    
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
     haveValidSubscription = [userPurchases isSubscriptionValid];
@@ -547,12 +554,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         sharePanel.hidden = YES;
         [self.view addSubview:sharePanel];
 
-        
         //Set Undo Bar Status
         [self setUndoStatus];
-        
-        //Set Context Tabs
-        [self addBottomTabs:libFlyer];
         
         //Show paid xid for all with yellow overly ( open in app on tap ), we will hide it after user checking user purchases
         fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts-paid" ofType:@"plist"];
