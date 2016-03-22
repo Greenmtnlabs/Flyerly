@@ -81,7 +81,7 @@
 
 @property(nonatomic,strong)NSString  *fbText;
 
-
+@property (nonatomic, copy) void (^shouldShowAdd)(NSString *,BOOL);
 - (IBAction)loadLocalContacts:(UIButton *)sender;
 - (IBAction)loadFacebookContacts:(UIButton *)sender;
 - (IBAction)loadTwitterContacts:(UIButton *)sender;

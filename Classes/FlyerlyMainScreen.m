@@ -393,7 +393,7 @@ id lastShareBtnSender;
     [createFlyer setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
         dispatch_async( dispatch_get_main_queue(), ^{
             if (haveValidSubscription == NO && ([weakSelf.addInterstialFms isReady] && ![weakSelf.addInterstialFms hasBeenUsed]) ){
-                [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
+                //[weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
             }  else{
                 [weakSelf saveAndRelease];
             }
@@ -771,7 +771,7 @@ id lastShareBtnSender;
         [createFlyer setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
             dispatch_async( dispatch_get_main_queue(), ^{
                 if ( haveValidSubscription == NO && ([weakSelf.addInterstialFms isReady] && ![weakSelf.addInterstialFms hasBeenUsed]) ){
-                    [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
+                    //[weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
                 } else{
                     [weakSelf saveAndRelease];
                 }
@@ -821,7 +821,7 @@ id lastShareBtnSender;
         [createFlyer setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
             dispatch_async( dispatch_get_main_queue(), ^{
                 if ( haveValidSubscription == NO && ([weakSelf.addInterstialFms isReady] && ![weakSelf.addInterstialFms hasBeenUsed]) ){
-                    [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
+                    //[weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
                 } else{
                     [weakSelf saveAndRelease];
                 }
@@ -1314,8 +1314,18 @@ id lastShareBtnSender;
     
     //Checking if the user is valid or anonymous
     if ([[PFUser currentUser] sessionToken]) {
+
+        __weak FlyerlyMainScreen *weakSelf = self;
         
         InviteFriendsController *addFriendsController = [[InviteFriendsController alloc]initWithNibName:@"InviteFriendsController" bundle:nil];
+        
+        [addFriendsController setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
+            dispatch_async( dispatch_get_main_queue(), ^{
+                if (haveValidSubscription == NO && ([weakSelf.addInterstialFms isReady] && ![weakSelf.addInterstialFms hasBeenUsed]) ){
+                    [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
+                }
+            });
+        }];
         
         [self.navigationController pushViewController:addFriendsController animated:YES];
         
