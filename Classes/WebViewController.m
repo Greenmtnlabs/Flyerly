@@ -59,9 +59,15 @@
     [btnHome setBackgroundImage:[UIImage imageNamed:@"home_button"] forState:UIControlStateNormal];
     btnHome.showsTouchWhenHighlighted = YES;
     leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:btnHome];
-    
-    // Set right bar items
     [self.navigationItem setLeftBarButtonItem:leftBarButton];
+    
+    // InApp Purchase Button
+    btnInAppPurchase = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [btnInAppPurchase addTarget:self action:@selector(openInAppPurchasePanel) forControlEvents:UIControlEventTouchUpInside];
+    [btnInAppPurchase setBackgroundImage:[UIImage imageNamed:@"premium_features"] forState:UIControlStateNormal];
+    btnInAppPurchase.showsTouchWhenHighlighted = YES;
+    rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:btnInAppPurchase];
+    self.navigationItem.rightBarButtonItem = rightBarButton;
 }
 
 #pragma mark WebView Delegate Methods
@@ -175,4 +181,24 @@
     [self.view addSubview:loadingView];
 }
 
+/*
+ * Opens InAppPurchase Panel
+ */
+-(void)openInAppPurchasePanel {
+    if ([FlyerlySingleton connected]) {
+        if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
+            inAppViewController = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
+        }else {
+            inAppViewController = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
+        }
+        [self presentViewController:inAppViewController animated:YES completion:nil];
+        
+        [inAppViewController requestProduct];
+        //inAppViewController.buttondelegate = self;
+    }else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        [alert show];
+    }
+}
 @end
