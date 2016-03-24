@@ -28,6 +28,10 @@
     if ( ![title isEqualToString:@"Monthly Subscription"] ){
         [star removeFromSuperview];
     }
+    
+    if([price isEqualToString:@"US$6.99"]){
+        packageName.textColor = [UIColor redColor];
+    }
 
     
     packageName.text = title;
