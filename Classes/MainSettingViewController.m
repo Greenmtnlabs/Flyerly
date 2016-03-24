@@ -126,10 +126,14 @@
     }
     
     self.bannerAdsView.alpha = 0.0;
-    if( hasValidSubscription == NO ) {
-        self.bannerAdsView.alpha = 1.0;
-        [self loadInterstitialAdd];
+    
+    if([FlyerlySingleton connected]){
+        if( hasValidSubscription == NO ) {
+            self.bannerAdsView.alpha = 1.0;
+            [self loadInterstitialAdd];
+        }
     }
+    
     
     // Execute the rest of the stuff, a little delayed to speed up loading.
     dispatch_async( dispatch_get_main_queue(), ^{

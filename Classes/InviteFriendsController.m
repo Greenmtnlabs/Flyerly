@@ -171,8 +171,13 @@ const int CONTACTS_TAB = 0;
     // Load device contacts
     [self loadLocalContacts:self.contactsButton];
     
-    if( haveValidSubscription == NO ) {
-        [self loadInterstitialAdd];
+    self.bannerAdsView.alpha = 0.0;
+    
+    if([FlyerlySingleton connected]){
+        if( haveValidSubscription == NO ) {
+            self.bannerAdsView.alpha = 1.0;
+            [self loadInterstitialAdd];
+        }
     }
     
     // Execute the rest of the stuff, a little delayed to speed up loading.
