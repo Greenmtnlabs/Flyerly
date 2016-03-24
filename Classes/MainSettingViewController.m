@@ -125,7 +125,9 @@
         [category addObject:@"Clear Purchases"];//13
     }
     
+    self.bannerAdsView.alpha = 0.0;
     if( hasValidSubscription == NO ) {
+        self.bannerAdsView.alpha = 1.0;
         [self loadInterstitialAdd];
     }
     
@@ -159,6 +161,8 @@
             }
         }
     });
+    
+    
 }
 
 //return flag is login
@@ -897,6 +901,7 @@
             }
         }
     
+        self.bannerAdsView.alpha = 1.0;
         self.bannerAdsView.backgroundColor = [UIColor clearColor];
         
         [btnBannerAdsDismiss addTarget:self action:@selector(dismissBannerAdsOnTap) forControlEvents:UIControlEventTouchUpInside];
