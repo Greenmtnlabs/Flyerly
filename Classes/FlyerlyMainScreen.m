@@ -51,10 +51,6 @@ id lastShareBtnSender;
     flyerConfigurator = appDelegate.flyerConfigurator;
     txtSearch.delegate = self;
     
-    userPurchases = [UserPurchases getInstance];
-    userPurchases.delegate = self;
-    showAds = [userPurchases isSubscriptionValid];
-    
     // setting isSearch to NO i.e. no search at first time
     isSearch = NO;
     
@@ -126,6 +122,10 @@ id lastShareBtnSender;
     
     // Load the flyers.
     flyerPaths = [self getFlyersPaths];
+    
+    userPurchases = [UserPurchases getInstance];
+    userPurchases.delegate = self;
+    showAds = [userPurchases isSubscriptionValid];
     
     [self.tView reloadData];
     [self checkUserPurchases];
