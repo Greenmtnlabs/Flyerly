@@ -125,9 +125,15 @@
         [category addObject:@"Clear Purchases"];//13
     }
     
-    if( hasValidSubscription == NO ) {
-        [self loadInterstitialAdd];
+    self.bannerAdsView.alpha = 0.0;
+    
+    if([FlyerlySingleton connected]){
+        if( hasValidSubscription == NO ) {
+            self.bannerAdsView.alpha = 1.0;
+            [self loadInterstitialAdd];
+        }
     }
+    
     
     // Execute the rest of the stuff, a little delayed to speed up loading.
     dispatch_async( dispatch_get_main_queue(), ^{
@@ -159,6 +165,8 @@
             }
         }
     });
+    
+    
 }
 
 //return flag is login
@@ -897,6 +905,7 @@
             }
         }
     
+        self.bannerAdsView.alpha = 1.0;
         self.bannerAdsView.backgroundColor = [UIColor clearColor];
         
         [btnBannerAdsDismiss addTarget:self action:@selector(dismissBannerAdsOnTap) forControlEvents:UIControlEventTouchUpInside];
