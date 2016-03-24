@@ -126,7 +126,6 @@ id lastShareBtnSender;
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
     showAds = [userPurchases isSubscriptionValid];
-
     
     [self.tView reloadData];
     [self checkUserPurchases];
