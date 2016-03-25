@@ -17,7 +17,7 @@
  * Opens InAppPurchase Panel
  */
 +(InAppViewController *)openInAppPurchasePanel : (id) viewController {
-    NSLog(@"%@", viewController);
+   
     InAppViewController *inAppViewController;
     if ([FlyerlySingleton connected]) {
         if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
