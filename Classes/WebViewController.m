@@ -187,6 +187,6 @@
  * Opens InAppPurchase Panel
  */
 -(void) openInAppPanel{
-    [InAppPurchaseRelatedMethods openInAppPurchasePanel:self];
+    inAppViewController = [InAppPurchaseRelatedMethods openInAppPurchasePanel:self];
 }
 @end

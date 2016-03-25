@@ -53,6 +53,8 @@
     BOOL bannerAdClosed;
     BOOL bannerShowed;
     
+    InAppViewController *inAppViewController;
+    
 }
 
 @property(nonatomic,strong) IBOutlet UILabel *refrelText;

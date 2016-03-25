@@ -257,24 +257,69 @@ const int CONTACTS_TAB = 0;
 
 }
 
--(void) openInAppPanel{
-    [InAppPurchaseRelatedMethods openInAppPurchasePanel:self];
-}
-
 -(void)viewWillAppear:(BOOL)animated{
     
     self.navigationItem.leftItemsSupplementBackButton = YES;
 }
 
-
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];    
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
+#pragma InApp Purchase Methods
+
+-(void) openInAppPanel{
+    inAppViewController = [InAppPurchaseRelatedMethods openInAppPurchasePanel:self];
+}
+- (void)inAppPanelDismissed {
+    
+}
+
+- ( void )productSuccesfullyPurchased: (NSString *)productId {
+    
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
+    userPurchases_.delegate = nil;
+    
+    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
+        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+        [inAppViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+    
+}
+
+- ( void )inAppPurchasePanelContent {
+    [inAppViewController inAppDataLoaded];
+}
+
+
+- (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle {
+    
+    __weak InAppViewController *inappviewcontroller_ = inAppViewController;
+    if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Sign In")]) {
+        [inappviewcontroller_.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }else if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Restore Purchases")]){
+        [inappviewcontroller_ restorePurchase];
+    }
+}
+
+- (void) userPurchasesLoaded {
+    
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
+    userPurchases_.delegate = nil;
+    
+    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
+        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+        [inAppViewController.paidFeaturesTview reloadData];
+    }else {
+        
+        [self presentViewController:inAppViewController animated:NO completion:nil];
+    }
+}
+
 
 #pragma mark  Custom Methods
 

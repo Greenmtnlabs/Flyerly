@@ -49,7 +49,6 @@
     
     // Tab buttons 
     UIButton *btnInvite, *btnSaved, *btnShared, *btnSocial;
-    
 }
 
 

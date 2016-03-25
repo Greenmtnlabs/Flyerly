@@ -506,7 +506,7 @@ id lastShareBtnSender;
  * Opens InAppPurchase Panel
  */
 -(void) openInAppPanel{
-    [InAppPurchaseRelatedMethods openInAppPurchasePanel:self];
+    inappviewcontroller = [InAppPurchaseRelatedMethods openInAppPurchasePanel:self];
 }
 
 

@@ -16,9 +16,10 @@
 /*
  * Opens InAppPurchase Panel
  */
-+(void)openInAppPurchasePanel : (UIViewController *) viewController {
++(InAppViewController *)openInAppPurchasePanel : (id) viewController {
+    NSLog(@"%@", viewController);
+    InAppViewController *inAppViewController;
     if ([FlyerlySingleton connected]) {
-        InAppViewController *inAppViewController;
         if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
             inAppViewController = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
         }else {
@@ -26,10 +27,15 @@
         }
         [viewController presentViewController:inAppViewController animated:YES completion:nil];
         [inAppViewController requestProduct];
+        inAppViewController.buttondelegate = viewController;
     }else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
     }
+    
+    return inAppViewController;
 }
+
+
 
 @end
