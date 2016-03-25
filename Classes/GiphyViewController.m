@@ -61,6 +61,18 @@
     
     //load trending giphy default
     [self loadGiphyImages:[NSString stringWithFormat:@"http://api.giphy.com/v1/gifs/trending?api_key=%@",giphyApiKey]];
+    
+    double fontSize = 7.0;
+    
+    if(IS_IPHONE_6){
+        fontSize = 9.0;
+    } else if(IS_IPHONE_6_PLUS){
+        fontSize = 11.0;
+    }
+    
+    // Set font size of placeholder of UISearchBar
+    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setDefaultTextAttributes:@{                                                                                                 NSFontAttributeName: [UIFont systemFontOfSize:fontSize], }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

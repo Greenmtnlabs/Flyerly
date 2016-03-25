@@ -31,6 +31,8 @@
     
     if([productIdentifier isEqualToString:@"com.flyerly.MonthlyGold"]){
         packageName.textColor = [UIColor redColor];
+        packagePrice.textColor = [UIColor redColor];
+        packageDescription.textColor = [UIColor redColor];
     }
 
     
