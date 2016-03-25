@@ -29,7 +29,7 @@
         [star removeFromSuperview];
     }
     
-    if([price isEqualToString:@"US$6.99"]){
+    if([price isEqualToString:@"$6.99"]){
         packageName.textColor = [UIColor redColor];
     }
 
