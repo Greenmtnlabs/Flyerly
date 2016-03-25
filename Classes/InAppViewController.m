@@ -313,7 +313,7 @@
             inAppCell.backgroundColor = [UIColor grayColor];//heighlight the Yearly subscription cell
         }
         //Setting the packagename,packageprice,packagedesciption values for cell view
-        [inAppCell setCellValueswithProductTitle:[product objectForKey:@"packagename"] ProductPrice:[product objectForKey:@"packageprice"] ProductDescription:[product objectForKey:@"packagedesciption"]];
+        [inAppCell setCellValueswithProductTitle: [product objectForKey:@"productidentifier"] Title:[product objectForKey:@"packagename"] ProductPrice:[product objectForKey:@"packageprice"] ProductDescription:[product objectForKey:@"packagedesciption"]];
         
         [loadingIndicator stopAnimating];
         return inAppCell;

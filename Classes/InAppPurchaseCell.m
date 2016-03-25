@@ -19,7 +19,7 @@
     // Configure the view for the selected state
 }
 
--(void)setCellValueswithProductTitle :(NSString *)title ProductPrice:(NSString *)price ProductDescription: (NSString *)description{
+-(void)setCellValueswithProductTitle :(NSString *)productIdentifier Title:(NSString *)title ProductPrice:(NSString *)price ProductDescription: (NSString *)description{
     
     if ( ![title isEqualToString:@"Complete Bundle"] ){
         [discount removeFromSuperview];
@@ -29,7 +29,7 @@
         [star removeFromSuperview];
     }
     
-    if([price isEqualToString:@"$6.99"]){
+    if([productIdentifier isEqualToString:@"com.flyerly.MonthlyGold"]){
         packageName.textColor = [UIColor redColor];
     }
 
