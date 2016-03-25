@@ -284,3 +284,6 @@ nil]
 #define DRAWING_LAYER_MODE_ERASER @"DRAWING_LAYER_MODE_ERASER"
 
 
+#define WARNING @"WARNING"
+#define PLEASE_CREATE_M_T_3_VIDEO @"Please create more then 3 seconds video"
+#define OK @"Ok"
