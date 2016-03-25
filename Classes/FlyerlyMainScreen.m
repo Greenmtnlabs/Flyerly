@@ -699,24 +699,16 @@ id lastShareBtnSender;
                 if( sizeRectForAdd.size.width != 0 ){
                     adView.frame = sizeRectForAdd;
                 }
-                // Setting background image while ad is loading
-                adView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:imageName]];
                 self.bannerAdd[ addRow ] = adView;
                 [cell addSubview:self.bannerAdd[ addRow ]];
             
             });
             return cell;
         } else {
-            
-            UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openInAppPanel)];
-            [tap setNumberOfTapsRequired:1];
-            [noAdsImage addGestureRecognizer:tap];
             [cell addSubview: noAdsImage];
         
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [cell addSubview: noAdsImage];
-        });
+       
         return cell;
     }
 }

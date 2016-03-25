@@ -726,11 +726,6 @@ id lastShareBtnSender;
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                
-                NSString *imgName = [self getNoAdsImage];
-                adView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:imgName]];
-                // Setting background image while ad is loading
-
                 self.gadAdsBanner[ addRow ] = adView;
                 [cell addSubview:self.gadAdsBanner[addRow]];
             });
