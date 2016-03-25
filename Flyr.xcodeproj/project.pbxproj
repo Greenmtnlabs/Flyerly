@@ -1496,6 +1496,7 @@
 		C3766D951B56510200B7F5B2 /* icon73.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3766D4D1B56510100B7F5B2 /* icon73.jpg */; };
 		C3766D961B56510200B7F5B2 /* old_icon8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3766D4E1B56510200B7F5B2 /* old_icon8.jpg */; };
 		C3868B441CA54AF600EB0264 /* CommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = C3868B431CA54AF600EB0264 /* CommonFunctions.m */; };
+		C3868B471CA5624100EB0264 /* VideoFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = C3868B461CA5624100EB0264 /* VideoFunctions.m */; };
 		C3A30DA61AB7F8BD00B0F1CF /* liblob-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C300432A1AB6ED9300866385 /* liblob-ios.a */; };
 		C3D8DD911B53DBE1006C2A9F /* b1.png in Resources */ = {isa = PBXBuildFile; fileRef = C3D8DD7D1B53DBE1006C2A9F /* b1.png */; };
 		C3D8DD921B53DBE1006C2A9F /* b10.png in Resources */ = {isa = PBXBuildFile; fileRef = C3D8DD7E1B53DBE1006C2A9F /* b10.png */; };
@@ -3192,6 +3193,8 @@
 		C3766D4E1B56510200B7F5B2 /* old_icon8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = old_icon8.jpg; sourceTree = "<group>"; };
 		C3868B421CA54AF600EB0264 /* CommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonFunctions.h; sourceTree = "<group>"; };
 		C3868B431CA54AF600EB0264 /* CommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonFunctions.m; sourceTree = "<group>"; };
+		C3868B451CA5624100EB0264 /* VideoFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoFunctions.h; sourceTree = "<group>"; };
+		C3868B461CA5624100EB0264 /* VideoFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoFunctions.m; sourceTree = "<group>"; };
 		C3D8DD7D1B53DBE1006C2A9F /* b1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b1.png; sourceTree = "<group>"; };
 		C3D8DD7E1B53DBE1006C2A9F /* b10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b10.png; sourceTree = "<group>"; };
 		C3D8DD7F1B53DBE1006C2A9F /* b11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b11.png; sourceTree = "<group>"; };
@@ -5548,6 +5551,8 @@
 		C3868B401CA54AEA00EB0264 /* CommonFunctions */ = {
 			isa = PBXGroup;
 			children = (
+				C3868B451CA5624100EB0264 /* VideoFunctions.h */,
+				C3868B461CA5624100EB0264 /* VideoFunctions.m */,
 				C3868B421CA54AF600EB0264 /* CommonFunctions.h */,
 				C3868B431CA54AF600EB0264 /* CommonFunctions.m */,
 			);
@@ -7201,6 +7206,7 @@
 				2466983D1B1331F100715784 /* FlyerlyTwitterFriends.m in Sources */,
 				0F7FC386175CE26B009DEB08 /* AsyncImageView.m in Sources */,
 				C3868B441CA54AF600EB0264 /* CommonFunctions.m in Sources */,
+				C3868B471CA5624100EB0264 /* VideoFunctions.m in Sources */,
 				200D1937197CF4CC00CFE04B /* PaypalViewController.m in Sources */,
 				202C482A187D7A6B00FE0975 /* NSDictionary_JSONExtensions.m in Sources */,
 				202C4829187D7A6B00FE0975 /* CJSONSerializer.m in Sources */,

@@ -19,11 +19,15 @@
  * @return: seconds : int
  */
 +(int)videoDuration:(NSURL *)movieUrl{
-    AVURLAsset *avUrl = [AVURLAsset assetWithURL:movieUrl];
-    CMTime time = [avUrl duration];
-    int seconds = ceil(time.value/time.timescale);
-    NSLog(@"movie of seconds=%i",seconds);
-    return seconds;
+    if ( movieUrl == nil ) {
+        AVURLAsset *avUrl = [AVURLAsset assetWithURL:movieUrl];
+        CMTime time = [avUrl duration];
+        int seconds = ceil(time.value/time.timescale);
+        NSLog(@"movie of seconds=%i",seconds);
+        return seconds;
+    } else{
+        return 0;
+    }
 }
 
 +(void)showAlert:(NSString *)alertTitle :(NSString *)alertMessage :(NSString *)cancelButtonTitle {

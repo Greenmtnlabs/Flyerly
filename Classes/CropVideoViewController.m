@@ -208,10 +208,12 @@
  * We are done, use the cropped and filtered image.
  */
 -(void)onDone {
-    int videoDuration = [CommonFunctions videoDuration:_url];
-    if (videoDuration < 3 ){
-        [CommonFunctions showAlert:WARNING :PLEASE_CREATE_M_T_3_VIDEO :OK];
-        return;
+    if ( isGiphy == false ) {
+        int videoDuration = [CommonFunctions videoDuration:_url];
+        if (videoDuration < 3 ){
+            [CommonFunctions showAlert:WARNING :PLEASE_CREATE_M_T_3_VIDEO :OK];
+            return;
+        }
     }
     // Crop rect to use will differ based on whether this is from gallery
     // or camera. Camera has the video rotated.

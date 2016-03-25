@@ -12,6 +12,8 @@
 #import "FlyrAppDelegate.h"
 #import "FlyerlyConfigurator.h"
 #import "CropVideoViewController.h"
+#import "CommonFunctions.h"
+#import "VideoFunctions.h"
 
 @interface GiphyViewController ()
 @property (strong, nonatomic) IBOutlet UISearchBar *searchField;
@@ -24,7 +26,7 @@
     BOOL reqGiphyApiInProccess;
     BOOL giphyDownloading;
     NSString *giphyApiKey;
-    NSURL *mediaURL, *mediaURLTemp;
+    NSURL *mediaURL, *mediaURLTemp, *mediaURLTemp2;
     int width, height; // to hold original width and height of a giphy
     int squareWH, squareWHMax; // to hold minimum and miximum between width and height of a giphy
 }
@@ -174,14 +176,9 @@
     NSURL *url = [NSURL URLWithString:[[gif[@"images"] objectForKey:@"original"] objectForKey:@"mp4"]];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-
-        //hide loading indicator in UI thread
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self onSelectGiphyShowLoadingIndicator:NO];
-        });
-
         // when data is nil then stop going forward
         if( data == nil ){
+            [self showHideInThread:NO];
             return;
         }
         
@@ -211,8 +208,35 @@
             //Video must be squire, othere wise merge video will not map layer on exact points
             squareWH = (width < height) ? width : height;
             squareWHMax = (width > height) ? width : height;
+            
+            //If downloaded Giphy is less then 3 seconds then repeat it 3 times
+            int videoDuration = [CommonFunctions videoDuration:mediaURLTemp];
+            
+            if (videoDuration < 3 ){
 
-            [self videoCrop:mediaURLTemp];
+                //Create atleast 3 second video
+                NSString *destinationTemp2 = [NSString stringWithFormat:@"%@/Template/templateTemp2.mov",currentpath];
+                mediaURLTemp2 = [NSURL fileURLWithPath:destinationTemp2];
+                
+                __weak GiphyViewController *weakSelf = self;
+                NSMutableArray *urlArr = [[NSMutableArray alloc] initWithCapacity:0];
+                [urlArr addObject:mediaURLTemp];
+                [urlArr addObject:mediaURLTemp];
+                [urlArr addObject:mediaURLTemp];
+                VideoFunctions *vf = [[VideoFunctions alloc] init];
+
+                [vf mergeVideos:urlArr outputURL:mediaURLTemp2 width:width height:width completion:^(NSInteger status, NSError *error) {
+                     mediaURLTemp = mediaURLTemp2; //I am doing it because we are deleting file with mediaURLTemp in videoCrop
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [weakSelf onSelectGiphyShowLoadingIndicator:NO];
+                        [weakSelf videoCrop:mediaURLTemp2];
+                    });
+                }];
+                
+            } else {
+               [self videoCrop:mediaURLTemp];
+               [self showHideInThread:NO];
+            }
             
         }];
         
@@ -222,6 +246,13 @@
     [loadingOverly removeFromSuperview];
     // To enable Home button
     [leftBarButtonItem setEnabled:YES];
+}
+
+-(void)showHideInThread:showHide{
+    //hide loading indicator in UI thread
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self onSelectGiphyShowLoadingIndicator:showHide];
+    });
 }
 
 /**
