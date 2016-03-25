@@ -502,18 +502,6 @@ id lastShareBtnSender;
     [self.navigationController pushViewController:createFlyer animated:YES];
 }
 
-/*
- * Opens InAppPurchase Panel
- */
--(void) openInAppPanel{
-    inappviewcontroller = [InAppPurchaseRelatedMethods openInAppPurchasePanel:self];
-}
-
-
-- (void)inAppPanelDismissed {
-
-}
-
 -(void)goBack{
     
     userPurchases = [UserPurchases getInstance];
@@ -919,8 +907,17 @@ id lastShareBtnSender;
 
 # pragma In App Purchase
 
+/*
+ * Opens InAppPurchase Panel
+ */
+-(void) openInAppPanel{
+    inappviewcontroller = [InAppPurchaseRelatedMethods openInAppPurchasePanel:self];
+}
 
 
+- (void)inAppPanelDismissed {
+    
+}
 
 - (void)productSuccesfullyPurchased: (NSString *)productId {
     
@@ -933,7 +930,6 @@ id lastShareBtnSender;
         [self.tView reloadData];
         [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
-    
 }
 
 - (void)inAppPurchasePanelContent {

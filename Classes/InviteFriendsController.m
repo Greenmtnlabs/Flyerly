@@ -275,6 +275,11 @@ const int CONTACTS_TAB = 0;
 -(void) openInAppPanel{
     inAppViewController = [InAppPurchaseRelatedMethods openInAppPurchasePanel:self];
 }
+
+- ( void )inAppPurchasePanelContent {
+    [inAppViewController inAppDataLoaded];
+}
+
 - (void)inAppPanelDismissed {
     
 }
@@ -288,13 +293,7 @@ const int CONTACTS_TAB = 0;
         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
         [inAppViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
-    
 }
-
-- ( void )inAppPurchasePanelContent {
-    [inAppViewController inAppDataLoaded];
-}
-
 
 - (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle {
     
