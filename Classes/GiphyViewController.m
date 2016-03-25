@@ -29,6 +29,8 @@
     NSURL *mediaURL, *mediaURLTemp, *mediaURLTemp2;
     int width, height; // to hold original width and height of a giphy
     int squareWH, squareWHMax; // to hold minimum and miximum between width and height of a giphy
+    
+    int videoDuration;
 }
 
 
@@ -162,7 +164,7 @@
  * When user select any giphy, download mov file and play in the player
  */
 -(void)selectGiphy:(id)sender{
-    
+    videoDuration = 0;
     //when a process in que dont start other
     if( giphyDownloading == YES ){
         return;
@@ -183,7 +185,7 @@
         }
         
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-
+            
             NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
             
             //File will be saved here
@@ -196,11 +198,16 @@
             [[NSFileManager defaultManager] createFileAtPath:destinationTemp contents:data attributes:nil];
             mediaURLTemp = [NSURL fileURLWithPath:destinationTemp];
             
-            //Get video width/height
-            AVURLAsset *asset = [AVURLAsset URLAssetWithURL:mediaURLTemp options:nil];
-            NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
-            AVAssetTrack *track = [tracks objectAtIndex:0];
-            CGSize mediaSize = track.naturalSize;
+            
+            //will help when video is less then 3 second
+            NSString *destinationTemp2 = [NSString stringWithFormat:@"%@/Template/templateTemp2.mov",currentpath];
+            mediaURLTemp2 = [NSURL fileURLWithPath:destinationTemp2];
+            
+            //If downloaded Giphy is less then 3 seconds then repeat it 3 times
+            videoDuration = [CommonFunctions videoDuration:mediaURLTemp];
+            
+            
+            CGSize mediaSize = [self getMediaSize:mediaURLTemp];
             
             width = mediaSize.width;
             height = mediaSize.height;
@@ -209,34 +216,9 @@
             squareWH = (width < height) ? width : height;
             squareWHMax = (width > height) ? width : height;
             
-            //If downloaded Giphy is less then 3 seconds then repeat it 3 times
-            int videoDuration = [CommonFunctions videoDuration:mediaURLTemp];
+            [self videoCrop:mediaURLTemp];
+            [self showHideInThread:NO];
             
-            if (videoDuration < 3 ){
-
-                //Create atleast 3 second video
-                NSString *destinationTemp2 = [NSString stringWithFormat:@"%@/Template/templateTemp2.mov",currentpath];
-                mediaURLTemp2 = [NSURL fileURLWithPath:destinationTemp2];
-                
-                __weak GiphyViewController *weakSelf = self;
-                NSMutableArray *urlArr = [[NSMutableArray alloc] initWithCapacity:0];
-                [urlArr addObject:mediaURLTemp];
-                [urlArr addObject:mediaURLTemp];
-                [urlArr addObject:mediaURLTemp];
-                VideoFunctions *vf = [[VideoFunctions alloc] init];
-
-                [vf mergeVideos:urlArr outputURL:mediaURLTemp2 width:width height:width completion:^(NSInteger status, NSError *error) {
-                     mediaURLTemp = mediaURLTemp2; //I am doing it because we are deleting file with mediaURLTemp in videoCrop
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [weakSelf onSelectGiphyShowLoadingIndicator:NO];
-                        [weakSelf videoCrop:mediaURLTemp2];
-                    });
-                }];
-                
-            } else {
-               [self videoCrop:mediaURLTemp];
-               [self showHideInThread:NO];
-            }
             
         }];
         
@@ -246,6 +228,14 @@
     [loadingOverly removeFromSuperview];
     // To enable Home button
     [leftBarButtonItem setEnabled:YES];
+}
+
+-(CGSize)getMediaSize:(NSURL *)mediaFileUrl{
+    //Get video width/height
+    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:mediaFileUrl options:nil];
+    NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
+    AVAssetTrack *track = [tracks objectAtIndex:0];
+    return track.naturalSize;
 }
 
 -(void)showHideInThread:showHide{
@@ -290,8 +280,8 @@
 
 
     [cropVideo setOnVideoFinished:^(NSURL *recvUrl, CGRect cropRect, CGFloat scale ) {
-        
-        [weakSelf modifyVideo:recvUrl destination:mediaURL crop:cropRect scale:scale overlay:nil completion:^(NSInteger status, NSError *error) {
+        NSURL *destUrl = (videoDuration < 3 ) ? mediaURLTemp2 : mediaURL;
+        [weakSelf modifyVideo:recvUrl destination:destUrl crop:cropRect scale:scale overlay:nil completion:^(NSInteger status, NSError *error) {
             
             switch ( status ) {
                 case AVAssetExportSessionStatusFailed:
@@ -308,13 +298,27 @@
                     break;
             }
             
-            //Delete temporary file
-            [weakSelf deleteFile:[mediaURLTemp absoluteString]];
-            
-            // Perform ui related things in main thread
-            dispatch_async( dispatch_get_main_queue(), ^{
-                [weakSelf goBack];
-            });
+            if (videoDuration < 3 ){
+                __weak GiphyViewController *weakSelf2 = weakSelf;
+                NSMutableArray *urlArr = [[NSMutableArray alloc] initWithCapacity:0];
+                [urlArr addObject:mediaURLTemp2];
+                [urlArr addObject:mediaURLTemp2];
+                [urlArr addObject:mediaURLTemp2];
+                VideoFunctions *vf = [[VideoFunctions alloc] init];
+                
+                
+                CGSize mediaSize = [weakSelf getMediaSize:mediaURLTemp2];
+                [vf mergeVideos:urlArr outputURL:mediaURL width:mediaSize.width height:mediaSize.height completion:^(NSInteger status, NSError *error) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        //Delete temporary file
+                        [weakSelf2 deleteFile:[mediaURLTemp2 absoluteString]];
+                        [weakSelf2 goBackAfterCropping];
+                    });
+                }];
+                
+            } else {
+                [weakSelf goBackAfterCropping];
+            }
             
         }];
     }];
@@ -335,6 +339,16 @@
     [viewControllers removeLastObject];
     [viewControllers addObject:cropVideo];
     [[self navigationController] pushViewController:cropVideo animated:YES];
+}
+
+-(void)goBackAfterCropping{
+    //Delete temporary file
+    [self deleteFile:[mediaURLTemp absoluteString]];
+    
+    // Perform ui related things in main thread
+    dispatch_async( dispatch_get_main_queue(), ^{
+        [self goBack];
+    });
 }
 
 /*

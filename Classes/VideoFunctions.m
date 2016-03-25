@@ -29,8 +29,8 @@
     
     AVMutableVideoCompositionInstruction * MainInstruction =
     [AVMutableVideoCompositionInstruction videoCompositionInstruction];
-    AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio
-                                             preferredTrackID:kCMPersistentTrackID_Invalid];
+//    AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio
+//                                             preferredTrackID:kCMPersistentTrackID_Invalid];
     
     
     CMTime duration = kCMTimeZero;
@@ -42,13 +42,13 @@
         AVMutableCompositionTrack *currentTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
         [currentTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, currentAsset.duration) ofTrack:[[currentAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] atTime:duration error:nil];
         
-        @try {
-            [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, currentAsset.duration) ofTrack:[[currentAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0] atTime:duration error:nil];
-        } @catch (NSException * e) {
-        
-        } @finally {
-        
-        }
+//        @try {
+//            [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, currentAsset.duration) ofTrack:[[currentAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0] atTime:duration error:nil];
+//        } @catch (NSException * e) {
+//        
+//        } @finally {
+//        
+//        }
         
         
         AVMutableVideoCompositionLayerInstruction *currentAssetLayerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:currentTrack];
@@ -82,7 +82,7 @@
         
 
         aLayer  = [CALayer layer];
-        aLayer.frame = CGRectMake(width-100, 100, 20, 20);
+        aLayer.frame = CGRectMake(width- (width/6.4), (100/640*width), (20/640*width), (20/640*width));
         aLayer.opacity = 1;
 
         parentLayer = [CALayer layer];
