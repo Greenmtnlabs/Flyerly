@@ -8,14 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "UserPurchases.h"
-
+#import "InAppViewController.h"
 
 @class InAppViewController;
+
 @interface WebViewController : UIViewController <UIWebViewDelegate, UserPurchasesDelegate>{
     UIButton *btnHome;
     UIButton *btnInAppPurchase;
     UIBarButtonItem *leftBarButton, *rightBarButton;
     UIView *loadingView;
+    InAppViewController *inAppViewController;
+    
 }
 
 @property (nonatomic, strong) UIAlertView *popupAlert;

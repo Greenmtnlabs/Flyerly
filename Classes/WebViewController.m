@@ -181,12 +181,52 @@
     [self.view addSubview:loadingView];
 }
 
-# pragma In App Purchase
+#pragma InApp Purchase Methods
 
-/*
- * Opens InAppPurchase Panel
- */
 -(void) openInAppPanel{
-    [InAppPurchaseRelatedMethods openInAppPurchasePanel:self];
+    inAppViewController = [InAppPurchaseRelatedMethods openInAppPurchasePanel:self];
+}
+
+- ( void )inAppPurchasePanelContent {
+    [inAppViewController inAppDataLoaded];
+}
+
+- (void)inAppPanelDismissed {
+    
+}
+
+- ( void )productSuccesfullyPurchased: (NSString *)productId {
+    
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
+    userPurchases_.delegate = nil;
+    
+    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
+        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+        [inAppViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+- (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle {
+    
+    __weak InAppViewController *inappviewcontroller_ = inAppViewController;
+    if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Sign In")]) {
+        [inappviewcontroller_.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }else if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Restore Purchases")]){
+        [inappviewcontroller_ restorePurchase];
+    }
+}
+
+- (void) userPurchasesLoaded {
+    
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
+    userPurchases_.delegate = nil;
+    
+    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
+        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+        [inAppViewController.paidFeaturesTview reloadData];
+    }else {
+        
+        [self presentViewController:inAppViewController animated:NO completion:nil];
+    }
 }
 @end

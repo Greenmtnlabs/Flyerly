@@ -11,11 +11,12 @@
 #import "InAppViewController.h"
 
 
+@class InAppViewController;
+@interface InAppPurchaseRelatedMethods : NSObject <InAppPurchasePanelButtonProtocol>{
+    InAppViewController *inappviewcontroller;
+}
 
-@interface InAppPurchaseRelatedMethods : NSObject
++(InAppViewController *)openInAppPurchasePanel : (id) viewController;
 
-
-
-+(void)openInAppPurchasePanel : (UIViewController *) viewController;
 
 @end
