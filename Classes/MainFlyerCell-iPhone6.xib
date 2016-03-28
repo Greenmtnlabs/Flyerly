@@ -113,6 +113,7 @@
                 <outlet property="cellImage" destination="4Ai-qZ-EHD" id="AKm-70-7Bc"/>
                 <outlet property="containerView" destination="jRy-7f-bV9" id="xKs-ge-Plb"/>
                 <outlet property="flyerLock" destination="9Vl-o4-2p6" id="4n7-W2-0Zs"/>
+                <outlet property="imgSeperator" destination="HvV-zR-9HR" id="MNG-Vk-ZGd"/>
                 <outlet property="lblCreatedAt" destination="cKl-3r-ial" id="FUL-tS-Ywv"/>
                 <outlet property="lblFlyerTitle" destination="vVF-cl-udE" id="f8e-dH-L0B"/>
                 <outlet property="shareBtn" destination="prD-qy-qro" id="M63-Dm-aQE"/>

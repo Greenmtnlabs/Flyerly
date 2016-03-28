@@ -12,7 +12,6 @@
 #import "MainSettingViewController.h"
 #import "FlyrAppDelegate.h"
 #import "FlyerlyConfigurator.h"
-#import "MainScreenAddsCell.h"
 #import "WebViewController.h"
 
 #define ADD_AFTER_FLYERS 4 //SHOW AD AFTER (ADD_AFTER_FLYERS - 1 ) => 3 FLYERS
@@ -612,28 +611,52 @@ id lastShareBtnSender;
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     int rowNumber = (int)indexPath.row;
-    NSString *showCell = @"MainFlyerCell";
+    MainFlyerCell *cell = (MainFlyerCell *)[tableView dequeueReusableCellWithIdentifier:@"MainFlyerCellId"];
     
-    if(!showAds && [self isAddvertiseRow:rowNumber] ) {
-        showCell = @"MainScreenAddsCell";
-    }
-    
-    if( [showCell isEqualToString:@"MainFlyerCell"] ){
-        static NSString *MainFlyerCellId = @"MainFlyerCellId";
-        MainFlyerCell *cell = (MainFlyerCell *)[tableView dequeueReusableCellWithIdentifier:MainFlyerCellId];
-        if (cell == nil) {
-            NSArray *nib;
-            if ( IS_IPHONE_4 || IS_IPHONE_5 ) {
-                nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
-            } else if ( IS_IPHONE_6 ) {
-                nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6" owner:self options:nil];
-            } else if ( IS_IPHONE_6_PLUS ) {
-                nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6-Plus" owner:self options:nil];
-            }
-            cell = (MainFlyerCell *)[nib objectAtIndex:0];
+    if (cell == nil) {
+        NSArray *nib;
+        if ( IS_IPHONE_4 || IS_IPHONE_5 ) {
+            nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
+        } else if ( IS_IPHONE_6 ) {
+            nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6" owner:self options:nil];
+        } else if ( IS_IPHONE_6_PLUS ) {
+            nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6-Plus" owner:self options:nil];
         }
-        [cell setAccessoryType:UITableViewCellAccessoryNone];
+        cell = (MainFlyerCell *)[nib objectAtIndex:0];
+    }
+    [cell setAccessoryType:UITableViewCellAccessoryNone];
+    
+    if( !showAds && [self isAddvertiseRow:rowNumber] ){ // Shows ads
+        
+        cell.cellImage.alpha = 0.0;
+        cell.sideView.alpha = 0.0;
+        cell.shareBtn.alpha = 0.0;
+        cell.lblFlyerTitle.alpha = 0.0;
+        cell.lblFlyerTitle.alpha = 0.0;
+        cell.lblCreatedAt.alpha = 0.0;
+        cell.imgSeperator.alpha = 0.0;
+        
+        if([FlyerlySingleton connected]){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                int addRow = [self getIndexOfAd:rowNumber];
+                GADBannerView *adView = self.bannerAdd[ addRow ];
+                adView.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, tView.frame.size.width, cell.frame.size.height);
+                if( sizeRectForAdd.size.width != 0 ){
+                    adView.frame = sizeRectForAdd;
+                }
+                self.bannerAdd[ addRow ] = adView;
+                [cell addSubview:self.bannerAdd[ addRow ]];
+            });
+            return cell;
+        } else {
+            [cell addSubview: noAdsImage];
+        }
+        
+        return cell;
+        
+    } else { // Shows flyers
         
         // If searching, it will load selected flyers else all flyers
         // To perform it asynchronously, dispatch_async is used
@@ -657,10 +680,10 @@ id lastShareBtnSender;
                 cell.lblFlyerTitle.userInteractionEnabled = YES;
                 [tap setNumberOfTapsRequired:1];
                 [cell.lblFlyerTitle addGestureRecognizer:tap];
-        
+                
             });
             return cell;
-          } else {
+        } else {
             dispatch_async(dispatch_get_main_queue(), ^{
                 int flyerRow = rowNumber;
                 if(!showAds){
@@ -674,7 +697,7 @@ id lastShareBtnSender;
                 [cell.flyerLock addTarget:self action:@selector(openInAppPanel) forControlEvents:UIControlEventTouchUpInside];
                 cell.shareBtn.tag = indexPath.row;
                 [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
-              
+                
                 // Adding UITapGestureRecognizer on UILable
                 UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onShare:)];
                 cell.lblFlyerTitle.tag = indexPath.row;
@@ -684,32 +707,6 @@ id lastShareBtnSender;
             });
             return cell;
         }
-    }
-    else {
-        static NSString *MainScreenAddsCellId = @"MainScreenAddsCell";
-        MainScreenAddsCell *cell = (MainScreenAddsCell *)[tableView dequeueReusableCellWithIdentifier:MainScreenAddsCellId];
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainScreenAddsCell" owner:self options:nil];
-        cell = (MainScreenAddsCell *)[nib objectAtIndex:0];
-       
-        if([FlyerlySingleton connected]){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                int addRow = [self getIndexOfAd:rowNumber];
-                GADBannerView *adView = self.bannerAdd[ addRow ];
-                adView.frame = CGRectMake(cell.frame.origin.x+10, cell.frame.origin.y+10, tView.frame.size.width-20, cell.frame.size.height-20);
-                if( sizeRectForAdd.size.width != 0 ){
-                    adView.frame = sizeRectForAdd;
-                }
-                self.bannerAdd[ addRow ] = adView;
-                [cell addSubview:self.bannerAdd[ addRow ]];
-            
-            });
-            return cell;
-        } else {
-            [cell addSubview: noAdsImage];
-        
-        }
-       
-        return cell;
     }
 }
 
