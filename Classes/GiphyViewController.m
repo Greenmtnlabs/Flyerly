@@ -310,15 +310,15 @@
             }
             
             if (videoDuration < LESS_THEN_SECONDS ){
-                __weak GiphyViewController *weakSelf2 = weakSelf;
+                // Repeat/merge video till LESS_THEN_SECONDS
                 NSMutableArray *urlArr = [[NSMutableArray alloc] initWithCapacity:0];
-                [urlArr addObject:mediaURLTemp2];
-                [urlArr addObject:mediaURLTemp2];
-                [urlArr addObject:mediaURLTemp2];
-                VideoFunctions *vf = [[VideoFunctions alloc] init];
-                
+                for(int i=0;i<(LESS_THEN_SECONDS-videoDuration);i++){
+                    [urlArr addObject:mediaURLTemp2];
+                }
                 
                 CGSize mediaSize = [weakSelf getMediaSize:mediaURLTemp2];
+                __weak GiphyViewController *weakSelf2 = weakSelf;
+                VideoFunctions *vf = [[VideoFunctions alloc] init];
                 [vf mergeVideos:urlArr outputURL:mediaURL width:mediaSize.width height:mediaSize.height completion:^(NSInteger status, NSError *error) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         //Delete temporary file
