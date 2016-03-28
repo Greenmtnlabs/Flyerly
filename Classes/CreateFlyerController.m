@@ -6605,7 +6605,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     if( againAddInSubViews ){
         //When user have complete design bundle or any subscription dont show the premium button
-        if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || haveValidSubscription )
+        if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] && haveValidSubscription )
             [self premiumBtnHideAfterCheck:@"ALL"];
         else if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"] )
             [self premiumBtnHideAfterCheck:@"comflyerlyIconsBundle"];

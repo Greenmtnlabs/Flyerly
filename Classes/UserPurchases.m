@@ -36,7 +36,7 @@ static UserPurchases *sharedSingleton = nil;
 
 - (BOOL) checkKeyExistsInPurchases : (NSString *)productId {
     
-    if ( [oldPurchases objectForKey:@"comflyerlyAllDesignBundle"] || [self isSubscriptionValid] ) {
+    if ( [oldPurchases objectForKey:@"comflyerlyAllDesignBundle"] && [self isSubscriptionValid] ) {
         
         return YES;
         
