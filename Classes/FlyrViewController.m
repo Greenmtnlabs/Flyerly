@@ -631,10 +631,10 @@ id lastShareBtnSender;
     if(haveValidSubscription && isSearching){ // search flyers with no ads
         return searchFlyerPaths.count;
     }else if (!haveValidSubscription && isSearching){ // search flyers with ads
-        return  [self getRowsCountWithAdsInSeleceted];
+        return [self getRowsCountWithAdsInSeleceted];
     }else if(!haveValidSubscription){ // all flyers with ads
         return [self getRowsCountWithAds];
-    } else{ // all flyers with no ads
+    }else{ // all flyers with no ads
         return flyerPaths.count;
     }
     
