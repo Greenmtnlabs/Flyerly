@@ -255,7 +255,7 @@
     return track.naturalSize;
 }
 
--(void)onSelectGiphyShowLoadingIndicatorInThread:showHide{
+-(void)onSelectGiphyShowLoadingIndicatorInThread:(BOOL)showHide{
     //hide loading indicator in UI thread
     dispatch_async(dispatch_get_main_queue(), ^{
         [self onSelectGiphyShowLoadingIndicator:showHide];
@@ -300,6 +300,7 @@
         NSURL *destUrl = (videoDuration < LESS_THEN_3_SECONDS ) ? mediaURLTemp2 : mediaURL;
         
         [self deleteFile:destination];
+        [self onSelectGiphyShowLoadingIndicatorInThread:YES];
         
         [weakSelf modifyVideo:recvUrl destination:destUrl crop:cropRect scale:scale overlay:nil completion:^(NSInteger status, NSError *error) {
             
