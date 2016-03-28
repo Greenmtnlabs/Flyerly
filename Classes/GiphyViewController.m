@@ -12,6 +12,9 @@
 #import "FlyrAppDelegate.h"
 #import "FlyerlyConfigurator.h"
 #import "CropVideoViewController.h"
+#import "CommonFunctions.h"
+#import "VideoFunctions.h"
+#define LESS_THEN_SECONDS 3
 
 @interface GiphyViewController ()
 @property (strong, nonatomic) IBOutlet UISearchBar *searchField;
@@ -24,9 +27,13 @@
     BOOL reqGiphyApiInProccess;
     BOOL giphyDownloading;
     NSString *giphyApiKey;
-    NSURL *mediaURL, *mediaURLTemp;
+
+    NSString *destination, *destinationTemp, *destinationTemp2;
+    NSURL *mediaURL, *mediaURLTemp, *mediaURLTemp2;
     int width, height; // to hold original width and height of a giphy
     int squareWH, squareWHMax; // to hold minimum and miximum between width and height of a giphy
+    
+    int videoDuration;
 }
 
 
@@ -172,7 +179,7 @@
  * When user select any giphy, download mov file and play in the player
  */
 -(void)selectGiphy:(id)sender{
-    
+    videoDuration = 0;
     //when a process in que dont start other
     if( giphyDownloading == YES ){
         return;
@@ -186,36 +193,38 @@
     NSURL *url = [NSURL URLWithString:[[gif[@"images"] objectForKey:@"original"] objectForKey:@"mp4"]];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-
-        //hide loading indicator in UI thread
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self onSelectGiphyShowLoadingIndicator:NO];
-        });
-
         // when data is nil then stop going forward
         if( data == nil ){
+            [self onSelectGiphyShowLoadingIndicatorInThread:NO];
             return;
         }
         
+        //After download complete work for cropping in mainQueue thread
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-
+            
             NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
             
             //File will be saved here
-            NSString *destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
-            [self deleteFile:destination];
+            destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
             mediaURL = [NSURL fileURLWithPath:destination];
             
             //Temporary video we will crop from it then delete it
-            NSString *destinationTemp = [NSString stringWithFormat:@"%@/Template/templateTemp.mov",currentpath];
+            destinationTemp = [NSString stringWithFormat:@"%@/Template/templateTemp.mov",currentpath];
+            [self deleteFile:destinationTemp];//delete of file if exist
             [[NSFileManager defaultManager] createFileAtPath:destinationTemp contents:data attributes:nil];
             mediaURLTemp = [NSURL fileURLWithPath:destinationTemp];
             
-            //Get video width/height
-            AVURLAsset *asset = [AVURLAsset URLAssetWithURL:mediaURLTemp options:nil];
-            NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
-            AVAssetTrack *track = [tracks objectAtIndex:0];
-            CGSize mediaSize = track.naturalSize;
+            
+            //will help when video is less then 3 second
+            destinationTemp2 = [NSString stringWithFormat:@"%@/Template/templateTemp2.mov",currentpath];
+            [self deleteFile:destinationTemp2];//delete of file if exist
+            mediaURLTemp2 = [NSURL fileURLWithPath:destinationTemp2];
+            
+            //If downloaded Giphy is less then 3 seconds then repeat it 3 times
+            videoDuration = [CommonFunctions videoDuration:mediaURLTemp];
+            
+            
+            CGSize mediaSize = [self getMediaSize:mediaURLTemp];
             
             width = mediaSize.width;
             height = mediaSize.height;
@@ -223,8 +232,13 @@
             //Video must be squire, othere wise merge video will not map layer on exact points
             squareWH = (width < height) ? width : height;
             squareWHMax = (width > height) ? width : height;
-
+            //start cropping
             [self videoCrop:mediaURLTemp];
+            if ( videoDuration < LESS_THEN_SECONDS ){
+                [self onSelectGiphyShowLoadingIndicatorInThread:NO];
+            }
+            
+            
             
         }];
         
@@ -236,13 +250,28 @@
     [leftBarButtonItem setEnabled:YES];
 }
 
+-(CGSize)getMediaSize:(NSURL *)mediaFileUrl{
+    //Get video width/height
+    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:mediaFileUrl options:nil];
+    NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
+    AVAssetTrack *track = [tracks objectAtIndex:0];
+    return track.naturalSize;
+}
+
+-(void)onSelectGiphyShowLoadingIndicatorInThread:showHide{
+    //hide loading indicator in UI thread
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self onSelectGiphyShowLoadingIndicator:showHide];
+    });
+}
+
 /**
  * Delete file
  */
--(void)deleteFile:(NSString *)destination{
+-(void)deleteFile:(NSString *)fileDest{
     // Make sure the video does not exist already. If it does, delete it.
-    if ([[NSFileManager defaultManager] fileExistsAtPath:destination isDirectory:NULL]) {
-        [[NSFileManager defaultManager] removeItemAtPath:destination error:nil];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:fileDest isDirectory:NULL]) {
+        [[NSFileManager defaultManager] removeItemAtPath:fileDest error:nil];
     }
 }
 
@@ -268,11 +297,14 @@
     }
     
     __weak GiphyViewController *weakSelf = self;
-
-
+    
     [cropVideo setOnVideoFinished:^(NSURL *recvUrl, CGRect cropRect, CGFloat scale ) {
         
-        [weakSelf modifyVideo:recvUrl destination:mediaURL crop:cropRect scale:scale overlay:nil completion:^(NSInteger status, NSError *error) {
+        NSURL *destUrl = (videoDuration < LESS_THEN_SECONDS ) ? mediaURLTemp2 : mediaURL;
+        
+        [self deleteFile:destination];
+        
+        [weakSelf modifyVideo:recvUrl destination:destUrl crop:cropRect scale:scale overlay:nil completion:^(NSInteger status, NSError *error) {
             
             switch ( status ) {
                 case AVAssetExportSessionStatusFailed:
@@ -289,13 +321,27 @@
                     break;
             }
             
-            //Delete temporary file
-            [weakSelf deleteFile:[mediaURLTemp absoluteString]];
-            
-            // Perform ui related things in main thread
-            dispatch_async( dispatch_get_main_queue(), ^{
-                [weakSelf goBack];
-            });
+            if (videoDuration < LESS_THEN_SECONDS ){
+                // Repeat/merge video till LESS_THEN_SECONDS
+                NSMutableArray *urlArr = [[NSMutableArray alloc] initWithCapacity:0];
+                for(int i=0;i<LESS_THEN_SECONDS;i++){
+                    [urlArr addObject:mediaURLTemp2];
+                }
+                
+                CGSize mediaSize = [weakSelf getMediaSize:mediaURLTemp2];
+                __weak GiphyViewController *weakSelf2 = weakSelf;
+                VideoFunctions *vf = [[VideoFunctions alloc] init];
+                [vf mergeVideos:urlArr outputURL:mediaURL width:mediaSize.width height:mediaSize.height completion:^(NSInteger status, NSError *error) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        //Delete temporary file
+                        [weakSelf2 deleteFile:destinationTemp2];
+                        [weakSelf2 goBackAfterCropping];
+                    });
+                }];
+                
+            } else {
+                [weakSelf goBackAfterCropping];
+            }
             
         }];
     }];
@@ -316,6 +362,16 @@
     [viewControllers removeLastObject];
     [viewControllers addObject:cropVideo];
     [[self navigationController] pushViewController:cropVideo animated:YES];
+}
+
+-(void)goBackAfterCropping{
+    //Delete temporary file
+    [self deleteFile:destinationTemp];
+    
+    // Perform ui related things in main thread
+    dispatch_async( dispatch_get_main_queue(), ^{
+        [self goBack];
+    });
 }
 
 /*
