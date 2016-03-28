@@ -6586,8 +6586,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     userPurchases.delegate = self;
     haveValidSubscription = [userPurchases isSubscriptionValid];
     
-    if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-        [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ||
+    if ( ([userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
+        [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"]) &&
         haveValidSubscription ) {
         
         UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
