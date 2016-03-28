@@ -286,5 +286,4 @@ nil]
 
 #define WARNING @"WARNING"
 #define PLEASE_CREATE_M_T_3_VIDEO @"Please create more then 3 seconds video"
-#define PLEASE_CREATE_L_T_60_VIDEO @"Please create less then 60 seconds video"
-#define OK @"Ok"
+#define Ok @"Ok"
