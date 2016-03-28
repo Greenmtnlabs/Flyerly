@@ -312,7 +312,7 @@
             if (videoDuration < LESS_THEN_SECONDS ){
                 // Repeat/merge video till LESS_THEN_SECONDS
                 NSMutableArray *urlArr = [[NSMutableArray alloc] initWithCapacity:0];
-                for(int i=0;i<(LESS_THEN_SECONDS-videoDuration);i++){
+                for(int i=0;i<LESS_THEN_SECONDS;i++){
                     [urlArr addObject:mediaURLTemp2];
                 }
                 
