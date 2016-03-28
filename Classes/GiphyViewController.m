@@ -329,6 +329,9 @@
                 if (videoDuration < 2 ) {
                     [urlArr addObject:mediaURLTemp2];
                 }
+                if (videoDuration < 1 ) {
+                    [urlArr addObject:mediaURLTemp2];
+                }
                 
                 CGSize mediaSize = [weakSelf getMediaSize:mediaURLTemp2];
                 __weak GiphyViewController *weakSelf2 = weakSelf;
