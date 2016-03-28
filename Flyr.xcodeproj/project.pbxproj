@@ -5516,17 +5516,6 @@
 			path = BordersIcons;
 			sourceTree = "<group>";
 		};
-
-		C34E984E1BA2D43300692597 /* GoogleAddCell */ = {
-			isa = PBXGroup;
-			children = (
-				C34E98501BA2E54F00692597 /* MainScreenAddsCell.h */,
-				C34E98511BA2E54F00692597 /* MainScreenAddsCell.m */,
-				C34E98521BA2E54F00692597 /* MainScreenAddsCell.xib */,
-			);
-			name = GoogleAddCell;
-			sourceTree = "<group>";
-		};
 		C3868B401CA54AEA00EB0264 /* CommonFunctions */ = {
 			isa = PBXGroup;
 			children = (
