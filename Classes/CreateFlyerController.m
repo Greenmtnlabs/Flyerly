@@ -5739,7 +5739,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     userPurchases.delegate = self;
     haveValidSubscription = [userPurchases isSubscriptionValid];
 
-    if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || haveValidSubscription ){
+    if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] && haveValidSubscription ){
 
         [self premiumBtnHideAfterCheck:@"ALL"];
         [inappviewcontroller.paidFeaturesTview reloadData];
@@ -6586,8 +6586,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     userPurchases.delegate = self;
     haveValidSubscription = [userPurchases isSubscriptionValid];
     
-    if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-        [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ||
+    if ( ([userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
+        [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"]) &&
         haveValidSubscription ) {
         
         UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
@@ -6605,7 +6605,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     if( againAddInSubViews ){
         //When user have complete design bundle or any subscription dont show the premium button
-        if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || haveValidSubscription )
+        if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] && haveValidSubscription )
             [self premiumBtnHideAfterCheck:@"ALL"];
         else if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"] )
             [self premiumBtnHideAfterCheck:@"comflyerlyIconsBundle"];
