@@ -14,6 +14,7 @@
 #import "CropVideoViewController.h"
 #import "CommonFunctions.h"
 #import "VideoFunctions.h"
+#define LESS_THEN_SECONDS 3
 
 @interface GiphyViewController ()
 @property (strong, nonatomic) IBOutlet UISearchBar *searchField;
@@ -26,6 +27,8 @@
     BOOL reqGiphyApiInProccess;
     BOOL giphyDownloading;
     NSString *giphyApiKey;
+
+    NSString *destination, *destinationTemp, *destinationTemp2;
     NSURL *mediaURL, *mediaURLTemp, *mediaURLTemp2;
     int width, height; // to hold original width and height of a giphy
     int squareWH, squareWHMax; // to hold minimum and miximum between width and height of a giphy
@@ -180,27 +183,29 @@
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         // when data is nil then stop going forward
         if( data == nil ){
-            [self showHideInThread:NO];
+            [self onSelectGiphyShowLoadingIndicatorInThread:NO];
             return;
         }
         
+        //After download complete work for cropping in mainQueue thread
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             
             NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
             
             //File will be saved here
-            NSString *destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
-            [self deleteFile:destination];
+            destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
             mediaURL = [NSURL fileURLWithPath:destination];
             
             //Temporary video we will crop from it then delete it
-            NSString *destinationTemp = [NSString stringWithFormat:@"%@/Template/templateTemp.mov",currentpath];
+            destinationTemp = [NSString stringWithFormat:@"%@/Template/templateTemp.mov",currentpath];
+            [self deleteFile:destinationTemp];//delete of file if exist
             [[NSFileManager defaultManager] createFileAtPath:destinationTemp contents:data attributes:nil];
             mediaURLTemp = [NSURL fileURLWithPath:destinationTemp];
             
             
             //will help when video is less then 3 second
-            NSString *destinationTemp2 = [NSString stringWithFormat:@"%@/Template/templateTemp2.mov",currentpath];
+            destinationTemp2 = [NSString stringWithFormat:@"%@/Template/templateTemp2.mov",currentpath];
+            [self deleteFile:destinationTemp2];//delete of file if exist
             mediaURLTemp2 = [NSURL fileURLWithPath:destinationTemp2];
             
             //If downloaded Giphy is less then 3 seconds then repeat it 3 times
@@ -215,9 +220,12 @@
             //Video must be squire, othere wise merge video will not map layer on exact points
             squareWH = (width < height) ? width : height;
             squareWHMax = (width > height) ? width : height;
-            
+            //start cropping
             [self videoCrop:mediaURLTemp];
-            [self showHideInThread:NO];
+            if ( videoDuration < LESS_THEN_SECONDS ){
+                [self onSelectGiphyShowLoadingIndicatorInThread:NO];
+            }
+            
             
             
         }];
@@ -238,7 +246,7 @@
     return track.naturalSize;
 }
 
--(void)showHideInThread:showHide{
+-(void)onSelectGiphyShowLoadingIndicatorInThread:showHide{
     //hide loading indicator in UI thread
     dispatch_async(dispatch_get_main_queue(), ^{
         [self onSelectGiphyShowLoadingIndicator:showHide];
@@ -248,10 +256,10 @@
 /**
  * Delete file
  */
--(void)deleteFile:(NSString *)destination{
+-(void)deleteFile:(NSString *)fileDest{
     // Make sure the video does not exist already. If it does, delete it.
-    if ([[NSFileManager defaultManager] fileExistsAtPath:destination isDirectory:NULL]) {
-        [[NSFileManager defaultManager] removeItemAtPath:destination error:nil];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:fileDest isDirectory:NULL]) {
+        [[NSFileManager defaultManager] removeItemAtPath:fileDest error:nil];
     }
 }
 
@@ -277,10 +285,13 @@
     }
     
     __weak GiphyViewController *weakSelf = self;
-
-
+    
     [cropVideo setOnVideoFinished:^(NSURL *recvUrl, CGRect cropRect, CGFloat scale ) {
-        NSURL *destUrl = (videoDuration < 3 ) ? mediaURLTemp2 : mediaURL;
+        
+        NSURL *destUrl = (videoDuration < LESS_THEN_SECONDS ) ? mediaURLTemp2 : mediaURL;
+        
+        [self deleteFile:destination];
+        
         [weakSelf modifyVideo:recvUrl destination:destUrl crop:cropRect scale:scale overlay:nil completion:^(NSInteger status, NSError *error) {
             
             switch ( status ) {
@@ -298,7 +309,7 @@
                     break;
             }
             
-            if (videoDuration < 3 ){
+            if (videoDuration < LESS_THEN_SECONDS ){
                 __weak GiphyViewController *weakSelf2 = weakSelf;
                 NSMutableArray *urlArr = [[NSMutableArray alloc] initWithCapacity:0];
                 [urlArr addObject:mediaURLTemp2];
@@ -311,7 +322,7 @@
                 [vf mergeVideos:urlArr outputURL:mediaURL width:mediaSize.width height:mediaSize.height completion:^(NSInteger status, NSError *error) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         //Delete temporary file
-                        [weakSelf2 deleteFile:[mediaURLTemp2 absoluteString]];
+                        [weakSelf2 deleteFile:destinationTemp2];
                         [weakSelf2 goBackAfterCropping];
                     });
                 }];
@@ -343,7 +354,7 @@
 
 -(void)goBackAfterCropping{
     //Delete temporary file
-    [self deleteFile:[mediaURLTemp absoluteString]];
+    [self deleteFile:destinationTemp];
     
     // Perform ui related things in main thread
     dispatch_async( dispatch_get_main_queue(), ^{
