@@ -5739,7 +5739,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     userPurchases.delegate = self;
     haveValidSubscription = [userPurchases isSubscriptionValid];
 
-    if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || haveValidSubscription ){
+    if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] && haveValidSubscription ){
 
         [self premiumBtnHideAfterCheck:@"ALL"];
         [inappviewcontroller.paidFeaturesTview reloadData];

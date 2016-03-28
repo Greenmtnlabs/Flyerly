@@ -123,8 +123,11 @@ static UserPurchases *sharedSingleton = nil;
     // get Yearly subscription validity
     NSString *isYearlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:@"com.flyerly.YearlyPlatinum" forDate:[NSDate date]]];
     
+    // get Yearly subscription validity
+    NSString *isAdRemovalSubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:@"com.flyerly.AdRemovalMonthly" forDate:[NSDate date]]];
+    
     // check whether one of 'em is valid or not..
-    if( [isMonthlySubValid isEqual:@"1"] || [isYearlySubValid isEqualToString:@"1"] ){
+    if( [isMonthlySubValid isEqual:@"1"] || [isYearlySubValid isEqualToString:@"1"] || [isAdRemovalSubValid isEqualToString:@"1"] ){
         return YES;
     } else {
         return NO;
