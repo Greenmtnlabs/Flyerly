@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Entypo.otf">
@@ -19,7 +19,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="493"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gn8-a9-RsV" id="CJj-La-hyp">
-                <rect key="frame" x="0.0" y="0.0" width="314" height="103"/>
+                <rect key="frame" x="0.0" y="0.0" width="414" height="492"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zow-th-S9P" userLabel="containerView">
@@ -100,6 +100,7 @@
                 <outlet property="cellImage" destination="fok-5k-MZh" id="VLU-PY-U1B"/>
                 <outlet property="containerView" destination="Zow-th-S9P" id="JEQ-UN-1qp"/>
                 <outlet property="flyerLock" destination="XBs-Lj-INJ" id="R3a-Xy-Ltk"/>
+                <outlet property="imgSeperator" destination="I1r-T8-ELG" id="dDy-3z-7BV"/>
                 <outlet property="lblCreatedAt" destination="xuC-dF-jkn" id="EIF-o1-Z5a"/>
                 <outlet property="lblFlyerTitle" destination="O2r-vZ-OBa" id="siW-7s-Z1J"/>
                 <outlet property="shareBtn" destination="wTy-hl-yka" id="hMe-2m-9ao"/>
@@ -118,9 +119,4 @@
     <resources>
         <image name="separator_vertical.png" width="5" height="16"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

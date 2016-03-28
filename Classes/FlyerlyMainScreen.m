@@ -613,8 +613,7 @@ id lastShareBtnSender;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     int rowNumber = (int)indexPath.row;
     
-    static NSString *MainFlyerCellId = @"MainFlyerCellId";
-    MainFlyerCell *cell = (MainFlyerCell *)[tableView dequeueReusableCellWithIdentifier:MainFlyerCellId];
+    MainFlyerCell *cell = (MainFlyerCell *)[tableView dequeueReusableCellWithIdentifier:@"MainFlyerCellId"];
     if (cell == nil) {
         NSArray *nib;
         if ( IS_IPHONE_4 || IS_IPHONE_5 ) {

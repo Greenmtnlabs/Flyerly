@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Entypo.otf">
@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="406" height="104"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gn8-a9-RsV" id="CJj-La-hyp">
-                <rect key="frame" x="0.0" y="0.0" width="314" height="103"/>
+                <rect key="frame" x="0.0" y="0.0" width="406" height="103"/>
                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="invite_Bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="XXS-Cm-glb">
@@ -108,6 +108,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="backgroundImage" destination="XXS-Cm-glb" id="G1V-xZ-Xca"/>
+                <outlet property="btnEdit" destination="crQ-8M-MRO" id="REV-T2-2gP"/>
                 <outlet property="cellImage" destination="fok-5k-MZh" id="VLU-PY-U1B"/>
                 <outlet property="createLabel" destination="s7M-g7-31a" id="n7n-SY-Scg"/>
                 <outlet property="dateLabel" destination="bjQ-yJ-udf" id="DQc-no-jiK"/>

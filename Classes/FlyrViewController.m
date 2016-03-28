@@ -9,7 +9,6 @@
 #import "FlyrViewController.h"
 #import "UserPurchases.h"
 #import "UserVoice.h"
-#import "AdMobCell.h"
 
 #define ADD_AFTER_FLYERS 4 //SHOW AD AFTER (ADD_AFTER_FLYERS - 1 ) => 3 FLYERS
 
@@ -644,33 +643,25 @@ id lastShareBtnSender;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     int rowNumber = (int)indexPath.row;
-    NSString *showCell = @"SaveFlyerCell";
     
-    if(!haveValidSubscription && [self isAddvertiseRow:rowNumber] ) {
-        showCell = @"AdMobCell";
+    static NSString *cellId = @"Cell";
+    SaveFlyerCell *cell = (SaveFlyerCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
+    
+    [cell setAccessoryType:UITableViewCellAccessoryNone];
+    if (cell == nil) {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell" owner:self options:nil];
+        if( IS_IPHONE_4 || IS_IPHONE_5){
+            nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell" owner:self options:nil];
+        } else if ( IS_IPHONE_6 ){
+            nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell-iPhone6" owner:self options:nil];
+        } else if ( IS_IPHONE_6_PLUS ) {
+            nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell-iPhone6-Plus" owner:self options:nil];
+        }
+        cell = (SaveFlyerCell *)[nib objectAtIndex:0];
     }
     
-    if([showCell isEqualToString:@"SaveFlyerCell"] ){
-        static NSString *cellId = @"Cell";
-        SaveFlyerCell *cell = (SaveFlyerCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
-    
-        [cell setAccessoryType:UITableViewCellAccessoryNone];
-        if (cell == nil) {
-            if( IS_IPHONE_4 || IS_IPHONE_5){
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell" owner:self options:nil];
-                cell = (SaveFlyerCell *)[nib objectAtIndex:0];
-            } else if ( IS_IPHONE_6 ){
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell-iPhone6" owner:self options:nil];
-                cell = (SaveFlyerCell *)[nib objectAtIndex:0];
-            } else if ( IS_IPHONE_6_PLUS ) {
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell-iPhone6-Plus" owner:self options:nil];
-                cell = (SaveFlyerCell *)[nib objectAtIndex:0];
-            } else {
-                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell" owner:self options:nil];
-                cell = (SaveFlyerCell *)[nib objectAtIndex:0];
-            }
-        }
-    
+    if( !(!haveValidSubscription && [self isAddvertiseRow:rowNumber]) ){
+        
         if( isSearching ){
             dispatch_async(dispatch_get_main_queue(), ^{
                 
@@ -702,13 +693,17 @@ id lastShareBtnSender;
             });
             return cell;
         }
-    }
-    else {
-        static NSString *SaveFlyerAdMobCellId = @"SaveFlyerAdMobCellId";
-        AdMobCell *cell = (AdMobCell *)[tableView dequeueReusableCellWithIdentifier:SaveFlyerAdMobCellId];
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"AdMobCell" owner:self options:nil];
-        cell = (AdMobCell *)[nib objectAtIndex:0];
+    } else {
         
+        cell.createLabel.alpha = 0.0;
+        cell.updatedLabel.alpha = 0.0;
+        cell.shareBtn.alpha = 0.0;
+        cell.nameLabel.alpha = 0.0;
+        cell.description.alpha = 0.0;
+        cell.dateLabel.alpha = 0.0;
+        cell.updatedDateLabel.alpha = 0.0;
+        cell.btnEdit.alpha = 0.0;
+
         // Setting background image while ad is loading
         UIImageView *noAdsImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[self getNoAdsImage]]];
         

@@ -300,8 +300,6 @@
 		20D7474717BE7A9900966BA6 /* login_email_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D7474317BE7A9900966BA6 /* login_email_icon.png */; };
 		20E38AA4197FB39200D1CFA9 /* SendingPrintViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E38AA2197FB39200D1CFA9 /* SendingPrintViewController.m */; };
 		20E38AA5197FB39200D1CFA9 /* SendingPrintViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20E38AA3197FB39200D1CFA9 /* SendingPrintViewController.xib */; };
-		20E3C4E01BE7941000E71DD5 /* AdMobCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E3C4DE1BE7941000E71DD5 /* AdMobCell.m */; };
-		20E3C4E11BE7941000E71DD5 /* AdMobCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20E3C4DF1BE7941000E71DD5 /* AdMobCell.xib */; };
 		20E4638A197E3FB600473921 /* UIImagePDF.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E46388197E3FB600473921 /* UIImagePDF.m */; };
 		20E4638D197E688600473921 /* pdf_Bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E4638C197E688600473921 /* pdf_Bg.png */; };
 		20ECF9A918D6E1AD0035E3DE /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20ECF9A818D6E1AD0035E3DE /* UIPlaceHolderTextView.m */; };
@@ -1911,9 +1909,6 @@
 		20E38AA1197FB39200D1CFA9 /* SendingPrintViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendingPrintViewController.h; sourceTree = "<group>"; };
 		20E38AA2197FB39200D1CFA9 /* SendingPrintViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendingPrintViewController.m; sourceTree = "<group>"; };
 		20E38AA3197FB39200D1CFA9 /* SendingPrintViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SendingPrintViewController.xib; sourceTree = "<group>"; };
-		20E3C4DD1BE7941000E71DD5 /* AdMobCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobCell.h; sourceTree = "<group>"; };
-		20E3C4DE1BE7941000E71DD5 /* AdMobCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdMobCell.m; sourceTree = "<group>"; };
-		20E3C4DF1BE7941000E71DD5 /* AdMobCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdMobCell.xib; sourceTree = "<group>"; };
 		20E46387197E3FB600473921 /* UIImagePDF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImagePDF.h; sourceTree = "<group>"; };
 		20E46388197E3FB600473921 /* UIImagePDF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImagePDF.m; sourceTree = "<group>"; };
 		20E4638C197E688600473921 /* pdf_Bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pdf_Bg.png; sourceTree = "<group>"; };
@@ -3857,7 +3852,6 @@
 				2002C89518888CD4005B18C9 /* SaveFlyerCell.xib */,
 				2433AC411A0210E100F7CF42 /* SaveFlyerCell-iPhone6.xib */,
 				2433AC431A02113300F7CF42 /* SaveFlyerCell-iPhone6-Plus.xib */,
-				20E3C4DC1BE7939900E71DD5 /* AdsCell */,
 			);
 			name = SavedFlyers;
 			sourceTree = "<group>";
@@ -4276,16 +4270,6 @@
 				20E38AA3197FB39200D1CFA9 /* SendingPrintViewController.xib */,
 			);
 			name = SendingPrintViewController;
-			sourceTree = "<group>";
-		};
-		20E3C4DC1BE7939900E71DD5 /* AdsCell */ = {
-			isa = PBXGroup;
-			children = (
-				20E3C4DD1BE7941000E71DD5 /* AdMobCell.h */,
-				20E3C4DE1BE7941000E71DD5 /* AdMobCell.m */,
-				20E3C4DF1BE7941000E71DD5 /* AdMobCell.xib */,
-			);
-			name = AdsCell;
 			sourceTree = "<group>";
 		};
 		20E46386197E3F9900473921 /* PDF Views */ = {
@@ -6446,7 +6430,6 @@
 				24751A6A1938A3B300DF03B2 /* clipart_tab@2x.png in Resources */,
 				242184F4194B4AEC00FDDA97 /* sailing-icon.png in Resources */,
 				24CF67AE1A026D88003A5623 /* CropViewController-iPhone6.xib in Resources */,
-				20E3C4E11BE7941000E71DD5 /* AdMobCell.xib in Resources */,
 				C31E92C41B566207004DF193 /* bicon20.png in Resources */,
 				242184F6194B4AEC00FDDA97 /* sand-castle-icon.png in Resources */,
 				C3766D931B56510200B7F5B2 /* icon71.jpg in Resources */,
@@ -7209,7 +7192,6 @@
 				202C4825187D7A6B00FE0975 /* CDataScanner.m in Sources */,
 				2441584819A4E85B00F12FAD /* ImageLoader.m in Sources */,
 				49997FF717DF786400CF1038 /* ParentViewController.m in Sources */,
-				20E3C4E01BE7941000E71DD5 /* AdMobCell.m in Sources */,
 				2405D3481990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.m in Sources */,
 				209F8E4419A47B2200323559 /* SettingsViewController.m in Sources */,
 				C306CC561BD657D100F9D34D /* GiphyViewController.m in Sources */,
