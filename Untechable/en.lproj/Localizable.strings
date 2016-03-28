@@ -112,8 +112,8 @@
 // UntechablesList
 "30 minutes" = "30 minutes";
 "1 hour" = "1 hour";
-"1 Day" = "1 Day";
-"2 Days" = "2 Days";
+"1 day" = "1 day";
+"2 day" = "2 day";
 
 "#untechable for %@ %@ - Reconnect with life: http://www.unte.ch" = "#untechable for %@ %@ - Reconnect with life: http://www.unte.ch";
 "Untechable created successfully" = "Untechable created successfully";
