@@ -14,7 +14,7 @@
 #import "CropVideoViewController.h"
 #import "CommonFunctions.h"
 #import "VideoFunctions.h"
-#define LESS_THEN_SECONDS 3
+#define LESS_THEN_3_SECONDS 3
 
 @interface GiphyViewController ()
 @property (strong, nonatomic) IBOutlet UISearchBar *searchField;
@@ -223,6 +223,7 @@
             //If downloaded Giphy is less then 3 seconds then repeat it 3 times
             videoDuration = [CommonFunctions videoDuration:mediaURLTemp];
             
+            [self onSelectGiphyShowLoadingIndicatorInThread:NO];
             
             CGSize mediaSize = [self getMediaSize:mediaURLTemp];
             
@@ -232,14 +233,10 @@
             //Video must be squire, othere wise merge video will not map layer on exact points
             squareWH = (width < height) ? width : height;
             squareWHMax = (width > height) ? width : height;
+
             //start cropping
             [self videoCrop:mediaURLTemp];
-            if ( videoDuration < LESS_THEN_SECONDS ){
-                [self onSelectGiphyShowLoadingIndicatorInThread:NO];
-            }
-            
-            
-            
+
         }];
         
     }] resume];
@@ -300,7 +297,7 @@
     
     [cropVideo setOnVideoFinished:^(NSURL *recvUrl, CGRect cropRect, CGFloat scale ) {
         
-        NSURL *destUrl = (videoDuration < LESS_THEN_SECONDS ) ? mediaURLTemp2 : mediaURL;
+        NSURL *destUrl = (videoDuration < LESS_THEN_3_SECONDS ) ? mediaURLTemp2 : mediaURL;
         
         [self deleteFile:destination];
         
@@ -321,10 +318,14 @@
                     break;
             }
             
-            if (videoDuration < LESS_THEN_SECONDS ){
+            if (videoDuration < LESS_THEN_3_SECONDS ){
                 // Repeat/merge video till LESS_THEN_SECONDS
                 NSMutableArray *urlArr = [[NSMutableArray alloc] initWithCapacity:0];
-                for(int i=0;i<LESS_THEN_SECONDS;i++){
+                [urlArr addObject:mediaURLTemp2];
+                if (videoDuration < 3 ) {
+                    [urlArr addObject:mediaURLTemp2];
+                }
+                if (videoDuration < 2 ) {
                     [urlArr addObject:mediaURLTemp2];
                 }
                 
@@ -502,9 +503,9 @@ shouldReloadTableForSearchString:(NSString *)searchString {
 /**
  * Show/hide a loding indicator on select giphy
  */
-- (void)onSelectGiphyShowLoadingIndicator:(BOOL)showHide {
-    giphyDownloading = showHide;
-    if( showHide ){
+- (void)onSelectGiphyShowLoadingIndicator:(BOOL)show {
+    giphyDownloading = show;
+    if( show ){
         layerScrollView.alpha = 0.7;
         searchField.userInteractionEnabled = NO;
         [leftBarButtonItem setEnabled:NO];
