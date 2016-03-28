@@ -644,10 +644,10 @@ id lastShareBtnSender;
     
     int rowNumber = (int)indexPath.row;
     
-    static NSString *cellId = @"Cell";
-    SaveFlyerCell *cell = (SaveFlyerCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
+    SaveFlyerCell *cell = (SaveFlyerCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
     [cell setAccessoryType:UITableViewCellAccessoryNone];
+    
     if (cell == nil) {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell" owner:self options:nil];
         if( IS_IPHONE_4 || IS_IPHONE_5){
@@ -660,11 +660,54 @@ id lastShareBtnSender;
         cell = (SaveFlyerCell *)[nib objectAtIndex:0];
     }
     
-    if( !(!haveValidSubscription && [self isAddvertiseRow:rowNumber]) ){
+    if( !haveValidSubscription && [self isAddvertiseRow:rowNumber] ){ // Shows ads
         
-        if( isSearching ){
+        cell.createLabel.alpha = 0.0;
+        cell.updatedLabel.alpha = 0.0;
+        cell.shareBtn.alpha = 0.0;
+        cell.nameLabel.alpha = 0.0;
+        cell.description.alpha = 0.0;
+        cell.dateLabel.alpha = 0.0;
+        cell.updatedDateLabel.alpha = 0.0;
+        cell.btnEdit.alpha = 0.0;
+        
+        // Setting background image while ad is loading
+        UIImageView *noAdsImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[self getNoAdsImage]]];
+        
+        if([FlyerlySingleton connected]){
+            int addRow = [self getIndexOfAd:rowNumber];
+            
+            // If not connected to internet, enables image user interaction
+            noAdsImage.userInteractionEnabled = NO;
+            
+            GADBannerView *adView = self.gadAdsBanner[ addRow ];
+            adView.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, tView.frame.size.width, cell.frame.size.height);
+            if( sizeRectForAdd.size.width != 0 ){
+                adView.frame = sizeRectForAdd;
+            }
+            
             dispatch_async(dispatch_get_main_queue(), ^{
-                
+                self.gadAdsBanner[ addRow ] = adView;
+                [cell addSubview:self.gadAdsBanner[addRow]];
+            });
+            return cell;
+            
+        } else {
+            
+            // If not connected to internet, enables image user interaction
+            noAdsImage.userInteractionEnabled = YES;
+            // and applies gesture recognizer on image
+            UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openInAppPanel)];
+            [tap setNumberOfTapsRequired:1];
+            [noAdsImage addGestureRecognizer:tap];
+            [cell addSubview: noAdsImage];
+            return cell;
+        }
+        
+    } else { // Shows flyers
+        if( isSearching ){
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
                 int flyerRow = rowNumber;
                 if(!haveValidSubscription){
                     flyerRow = [self getIndexOfSelectedFlyer:rowNumber];
@@ -675,10 +718,11 @@ id lastShareBtnSender;
                 cell.shareBtn.tag = indexPath.row;
                 [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
             });
+            
             return cell;
         }else{
+            
             dispatch_async(dispatch_get_main_queue(), ^{
-                
                 // Load the flyers again so that flyer can be loaded if user logs in from here
                 int flyerRow = rowNumber;
                 if(!haveValidSubscription){
@@ -691,50 +735,7 @@ id lastShareBtnSender;
                 cell.shareBtn.tag = indexPath.row;
                 [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
             });
-            return cell;
-        }
-    } else {
-        
-        cell.createLabel.alpha = 0.0;
-        cell.updatedLabel.alpha = 0.0;
-        cell.shareBtn.alpha = 0.0;
-        cell.nameLabel.alpha = 0.0;
-        cell.description.alpha = 0.0;
-        cell.dateLabel.alpha = 0.0;
-        cell.updatedDateLabel.alpha = 0.0;
-        cell.btnEdit.alpha = 0.0;
-
-        // Setting background image while ad is loading
-        UIImageView *noAdsImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[self getNoAdsImage]]];
-        
-        if([FlyerlySingleton connected]){
-            int addRow = [self getIndexOfAd:rowNumber];
             
-            // If not connected to internet, enables image user interaction
-            noAdsImage.userInteractionEnabled = NO;
-            
-            GADBannerView *adView = self.gadAdsBanner[ addRow ];
-            
-            adView.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, tView.frame.size.width, cell.frame.size.height - 15);
-            if( sizeRectForAdd.size.width != 0 ){
-                adView.frame = sizeRectForAdd;
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.gadAdsBanner[ addRow ] = adView;
-                [cell addSubview:self.gadAdsBanner[addRow]];
-            });
-            return cell;
-        
-        }else{
-            
-            // If not connected to internet, enables image user interaction
-            noAdsImage.userInteractionEnabled = YES;
-            // and applies gesture recognizer on image
-            UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openInAppPanel)];
-            [tap setNumberOfTapsRequired:1];
-            [noAdsImage addGestureRecognizer:tap];
-            [cell addSubview: noAdsImage];
             return cell;
         }
     }

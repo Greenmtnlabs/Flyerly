@@ -611,9 +611,10 @@ id lastShareBtnSender;
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    int rowNumber = (int)indexPath.row;
     
+    int rowNumber = (int)indexPath.row;
     MainFlyerCell *cell = (MainFlyerCell *)[tableView dequeueReusableCellWithIdentifier:@"MainFlyerCellId"];
+    
     if (cell == nil) {
         NSArray *nib;
         if ( IS_IPHONE_4 || IS_IPHONE_5 ) {
@@ -626,60 +627,8 @@ id lastShareBtnSender;
         cell = (MainFlyerCell *)[nib objectAtIndex:0];
     }
     [cell setAccessoryType:UITableViewCellAccessoryNone];
-
     
-    if( !(!showAds && [self isAddvertiseRow:rowNumber]) ){
-        
-        // If searching, it will load selected flyers else all flyers
-        // To perform it asynchronously, dispatch_async is used
-        
-        if( isSearch ){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                int flyerRow = rowNumber;
-                if(!showAds){
-                    flyerRow = [self getIndexOfSelectedFlyer:rowNumber];
-                }
-                
-                flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:flyerRow] setDirectory:NO];
-                [cell renderCell:flyer LockStatus:NO];
-                [cell.flyerLock addTarget:self action:@selector(openInAppPanel) forControlEvents:UIControlEventTouchUpInside];
-                cell.shareBtn.tag = indexPath.row;
-                [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
-                
-                // Adding UITapGestureRecognizer on UILable
-                UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onShare:)];
-                cell.lblFlyerTitle.tag = indexPath.row;
-                cell.lblFlyerTitle.userInteractionEnabled = YES;
-                [tap setNumberOfTapsRequired:1];
-                [cell.lblFlyerTitle addGestureRecognizer:tap];
-        
-            });
-            return cell;
-          } else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                int flyerRow = rowNumber;
-                if(!showAds){
-                    flyerRow = [self getIndexOfFlyer:rowNumber];
-                }
-                
-                // Load the flyers.
-                flyerPaths = [self getFlyersPaths];
-                flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:flyerRow] setDirectory:NO];
-                [cell renderCell:flyer LockStatus:NO];
-                [cell.flyerLock addTarget:self action:@selector(openInAppPanel) forControlEvents:UIControlEventTouchUpInside];
-                cell.shareBtn.tag = indexPath.row;
-                [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
-              
-                // Adding UITapGestureRecognizer on UILable
-                UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onShare:)];
-                cell.lblFlyerTitle.tag = indexPath.row;
-                cell.lblFlyerTitle.userInteractionEnabled = YES;
-                [tap setNumberOfTapsRequired:1];
-                [cell.lblFlyerTitle addGestureRecognizer:tap];
-            });
-            return cell;
-        }
-    } else {
+    if( !showAds && [self isAddvertiseRow:rowNumber] ){ // Shows ads
         
         cell.cellImage.alpha = 0.0;
         cell.sideView.alpha = 0.0;
@@ -704,8 +653,60 @@ id lastShareBtnSender;
         } else {
             [cell addSubview: noAdsImage];
         }
-       
+        
         return cell;
+        
+    } else { // Shows flyers
+        
+        // If searching, it will load selected flyers else all flyers
+        // To perform it asynchronously, dispatch_async is used
+        
+        if( isSearch ){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                int flyerRow = rowNumber;
+                if(!showAds){
+                    flyerRow = [self getIndexOfSelectedFlyer:rowNumber];
+                }
+                
+                flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:flyerRow] setDirectory:NO];
+                [cell renderCell:flyer LockStatus:NO];
+                [cell.flyerLock addTarget:self action:@selector(openInAppPanel) forControlEvents:UIControlEventTouchUpInside];
+                cell.shareBtn.tag = indexPath.row;
+                [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
+                
+                // Adding UITapGestureRecognizer on UILable
+                UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onShare:)];
+                cell.lblFlyerTitle.tag = indexPath.row;
+                cell.lblFlyerTitle.userInteractionEnabled = YES;
+                [tap setNumberOfTapsRequired:1];
+                [cell.lblFlyerTitle addGestureRecognizer:tap];
+                
+            });
+            return cell;
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                int flyerRow = rowNumber;
+                if(!showAds){
+                    flyerRow = [self getIndexOfFlyer:rowNumber];
+                }
+                
+                // Load the flyers.
+                flyerPaths = [self getFlyersPaths];
+                flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:flyerRow] setDirectory:NO];
+                [cell renderCell:flyer LockStatus:NO];
+                [cell.flyerLock addTarget:self action:@selector(openInAppPanel) forControlEvents:UIControlEventTouchUpInside];
+                cell.shareBtn.tag = indexPath.row;
+                [cell.shareBtn addTarget:self action:@selector(onShare:) forControlEvents:UIControlEventTouchUpInside];
+                
+                // Adding UITapGestureRecognizer on UILable
+                UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onShare:)];
+                cell.lblFlyerTitle.tag = indexPath.row;
+                cell.lblFlyerTitle.userInteractionEnabled = YES;
+                [tap setNumberOfTapsRequired:1];
+                [cell.lblFlyerTitle addGestureRecognizer:tap];
+            });
+            return cell;
+        }
     }
 }
 
