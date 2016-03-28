@@ -213,6 +213,9 @@
         if (videoDuration < 3 ){
             [CommonFunctions showAlert:WARNING :PLEASE_CREATE_M_T_3_VIDEO :OK];
             return;
+        } else if (videoDuration > 60 ){
+            [CommonFunctions showAlert:WARNING :PLEASE_CREATE_L_T_60_VIDEO :OK];
+            return;
         }
     }
     // Crop rect to use will differ based on whether this is from gallery
