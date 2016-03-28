@@ -12,7 +12,6 @@
 #import "MainSettingViewController.h"
 #import "FlyrAppDelegate.h"
 #import "FlyerlyConfigurator.h"
-#import "MainScreenAddsCell.h"
 #import "WebViewController.h"
 
 #define ADD_AFTER_FLYERS 4 //SHOW AD AFTER (ADD_AFTER_FLYERS - 1 ) => 3 FLYERS
@@ -681,8 +680,7 @@ id lastShareBtnSender;
             });
             return cell;
         }
-    }
-    else {
+    } else {
         
         cell.cellImage.alpha = 0.0;
         cell.sideView.alpha = 0.0;
@@ -692,23 +690,20 @@ id lastShareBtnSender;
         cell.lblCreatedAt.alpha = 0.0;
         cell.imgSeperator.alpha = 0.0;
         
-        
         if([FlyerlySingleton connected]){
             dispatch_async(dispatch_get_main_queue(), ^{
                 int addRow = [self getIndexOfAd:rowNumber];
                 GADBannerView *adView = self.bannerAdd[ addRow ];
-                adView.frame = CGRectMake(cell.frame.origin.x+10, cell.frame.origin.y+10, tView.frame.size.width-20, cell.frame.size.height-20);
+                adView.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, tView.frame.size.width, cell.frame.size.height);
                 if( sizeRectForAdd.size.width != 0 ){
                     adView.frame = sizeRectForAdd;
                 }
                 self.bannerAdd[ addRow ] = adView;
                 [cell addSubview:self.bannerAdd[ addRow ]];
-            
             });
             return cell;
         } else {
             [cell addSubview: noAdsImage];
-        
         }
        
         return cell;
