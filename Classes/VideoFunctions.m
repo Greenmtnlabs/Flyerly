@@ -29,26 +29,27 @@
     
     AVMutableVideoCompositionInstruction * MainInstruction =
     [AVMutableVideoCompositionInstruction videoCompositionInstruction];
-//    AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio
-//                                             preferredTrackID:kCMPersistentTrackID_Invalid];
+    
+    BOOL haveAudio = NO;
+    AVMutableCompositionTrack *audioTrack;
+    if ( haveAudio ){
+        audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio
+                                                 preferredTrackID:kCMPersistentTrackID_Invalid];
+    }
     
     
     CMTime duration = kCMTimeZero;
     for(int i=0;i< aryVideosUrl.count;i++){
         AVAsset *currentAsset = [AVAsset assetWithURL:aryVideosUrl[i]]; // i take the for loop for geting the asset
         // Current Asset is the asset of the video From the Url Using AVAsset
-        
-        
         AVMutableCompositionTrack *currentTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
         [currentTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, currentAsset.duration) ofTrack:[[currentAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] atTime:duration error:nil];
-        
-//        @try {
-//            [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, currentAsset.duration) ofTrack:[[currentAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0] atTime:duration error:nil];
-//        } @catch (NSException * e) {
-//        
-//        } @finally {
-//        
-//        }
+
+
+        if ( haveAudio ){
+            [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, currentAsset.duration) ofTrack:[[currentAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0] atTime:duration error:nil];
+        }
+
         
         
         AVMutableVideoCompositionLayerInstruction *currentAssetLayerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:currentTrack];
@@ -61,7 +62,8 @@
         if(currentTransform.a == 0 && currentTransform.b == -1.0 && currentTransform.c == 1.0 && currentTransform.d == 0)  {currentAssetOrientation =  UIImageOrientationLeft; isCurrentAssetPortrait = YES;}
         if(currentTransform.a == 1.0 && currentTransform.b == 0 && currentTransform.c == 0 && currentTransform.d == 1.0)   {currentAssetOrientation =  UIImageOrientationUp;}
         if(currentTransform.a == -1.0 && currentTransform.b == 0 && currentTransform.c == 0 && currentTransform.d == -1.0) {currentAssetOrientation = UIImageOrientationDown;}
-        
+
+        //create ration using width , height
         CGFloat FirstAssetScaleToFitRatio = width/height;
         if(isCurrentAssetPortrait){
             FirstAssetScaleToFitRatio = height/width;
@@ -81,17 +83,18 @@
         
         
 
-        aLayer  = [CALayer layer];
-        aLayer.frame = CGRectMake(width- (width/6.4), (100/640*width), (20/640*width), (20/640*width));
-        aLayer.opacity = 1;
-
+        aLayer      = [CALayer layer];
         parentLayer = [CALayer layer];
         videoLayer  = [CALayer layer];
-        parentLayer.frame = CGRectMake(0, 0, width, height);
-        videoLayer.frame = CGRectMake(0, 0, width, height);
+        
+        aLayer.frame        = CGRectMake(0, 0, width, height);
+        parentLayer.frame   = CGRectMake(0, 0, width, height);
+        videoLayer.frame    = CGRectMake(0, 0, width, height);
+        
+        aLayer.opacity = 1;
+
         [parentLayer addSublayer:videoLayer];
         [parentLayer addSublayer:aLayer];
-        
     }
     
     MainInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, duration);
