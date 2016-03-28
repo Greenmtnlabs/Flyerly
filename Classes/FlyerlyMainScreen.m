@@ -613,27 +613,24 @@ id lastShareBtnSender;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     int rowNumber = (int)indexPath.row;
-    NSString *showCell = @"MainFlyerCell";
     
-    if(!showAds && [self isAddvertiseRow:rowNumber] ) {
-        showCell = @"MainScreenAddsCell";
-    }
-    
-    if( [showCell isEqualToString:@"MainFlyerCell"] ){
-        static NSString *MainFlyerCellId = @"MainFlyerCellId";
-        MainFlyerCell *cell = (MainFlyerCell *)[tableView dequeueReusableCellWithIdentifier:MainFlyerCellId];
-        if (cell == nil) {
-            NSArray *nib;
-            if ( IS_IPHONE_4 || IS_IPHONE_5 ) {
-                nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
-            } else if ( IS_IPHONE_6 ) {
-                nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6" owner:self options:nil];
-            } else if ( IS_IPHONE_6_PLUS ) {
-                nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6-Plus" owner:self options:nil];
-            }
-            cell = (MainFlyerCell *)[nib objectAtIndex:0];
+    static NSString *MainFlyerCellId = @"MainFlyerCellId";
+    MainFlyerCell *cell = (MainFlyerCell *)[tableView dequeueReusableCellWithIdentifier:MainFlyerCellId];
+    if (cell == nil) {
+        NSArray *nib;
+        if ( IS_IPHONE_4 || IS_IPHONE_5 ) {
+            nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell" owner:self options:nil];
+        } else if ( IS_IPHONE_6 ) {
+            nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6" owner:self options:nil];
+        } else if ( IS_IPHONE_6_PLUS ) {
+            nib = [[NSBundle mainBundle] loadNibNamed:@"MainFlyerCell-iPhone6-Plus" owner:self options:nil];
         }
-        [cell setAccessoryType:UITableViewCellAccessoryNone];
+        cell = (MainFlyerCell *)[nib objectAtIndex:0];
+    }
+    [cell setAccessoryType:UITableViewCellAccessoryNone];
+
+    
+    if( !(!showAds && [self isAddvertiseRow:rowNumber]) ){
         
         // If searching, it will load selected flyers else all flyers
         // To perform it asynchronously, dispatch_async is used
@@ -686,11 +683,16 @@ id lastShareBtnSender;
         }
     }
     else {
-        static NSString *MainScreenAddsCellId = @"MainScreenAddsCell";
-        MainScreenAddsCell *cell = (MainScreenAddsCell *)[tableView dequeueReusableCellWithIdentifier:MainScreenAddsCellId];
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MainScreenAddsCell" owner:self options:nil];
-        cell = (MainScreenAddsCell *)[nib objectAtIndex:0];
-       
+        
+        cell.cellImage.alpha = 0.0;
+        cell.sideView.alpha = 0.0;
+        cell.shareBtn.alpha = 0.0;
+        cell.lblFlyerTitle.alpha = 0.0;
+        cell.lblFlyerTitle.alpha = 0.0;
+        cell.lblCreatedAt.alpha = 0.0;
+        cell.imgSeperator.alpha = 0.0;
+        
+        
         if([FlyerlySingleton connected]){
             dispatch_async(dispatch_get_main_queue(), ^{
                 int addRow = [self getIndexOfAd:rowNumber];

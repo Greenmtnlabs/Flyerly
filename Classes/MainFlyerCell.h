@@ -21,6 +21,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *lblCreatedAt;
 
 @property (strong, nonatomic) IBOutlet UIView *containerView;
+@property (weak, nonatomic) IBOutlet UIImageView *imgSeperator;
 
 - (void)renderCell :(Flyer *)flyer LockStatus:(BOOL )status;
 @end
