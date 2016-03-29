@@ -351,13 +351,13 @@
     double end = [endTime doubleValue];
     
     NSString *daysOrHoursToBeShown;
-    int OneMinute = 60;
-    int OneHour =  60 * 60;
-    int OneDay  =  60 * 60 * 24;
+    int oneMinute = 60;
+    int oneHour =  60 * 60;
+    int oneDay  =  60 * 60 * 24;
     double diff = fabs(end  - start);
     
-    totalHoursDays = round(diff/OneHour);
-    totalMinutes = round(((diff/OneHour) * OneMinute));
+    totalHoursDays = floor(diff/oneHour);
+    totalMinutes = round((round(diff/oneHour) - (diff/oneHour)) * oneMinute);
     
     // calculating remaining minutes
     
@@ -371,7 +371,7 @@
     
     if(totalHoursDays>=24) {
         
-        totalHoursDays = round(diff/OneDay + 0.1);
+        totalHoursDays = round(diff/oneDay + 0.1);
         
         if( totalHoursDays == 1 ) {
             daysOrHoursToBeShown = [NSString stringWithFormat:@"%i day", totalHoursDays];
