@@ -47,7 +47,7 @@
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
     hasValidSubscription = [userPurchases isSubscriptionValid];
-    hasValidSubscription = NO;
+
     
     bannerAdClosed = NO;
     bannerShowed = NO;
@@ -716,6 +716,9 @@
         [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
     
+    if ( [productId isEqualToString:@"com.flyerly.AdRemovalMonthly"]) {
+        [self removeBAnnerAdd:YES];
+    }
 }
 
 - (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle {
@@ -940,6 +943,21 @@
     inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
     inappviewcontroller.buttondelegate = self;
     [inappviewcontroller purchaseProductByID:productIdentifier];
+}
+
+// Dismiss action for banner ad
+-(void)removeBAnnerAdd:(BOOL)valForBannerClose{
+    
+    self.bannerAdsView.backgroundColor = [UIColor clearColor];
+    
+    UIView *viewToRemove = [bannerAdsView viewWithTag:999];
+    [viewToRemove removeFromSuperview];
+    //[bannerAdDismissBtn removeFromSuperview];
+    [self.bannerAdsView removeFromSuperview];
+    btnBannerAdsDismiss = nil;
+    self.bannerAdsView = nil;
+    
+    bannerAdClosed = valForBannerClose;
 }
 
 @end
