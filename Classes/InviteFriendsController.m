@@ -28,6 +28,7 @@
     UIButton *btnBannerAdsDismiss;
     BOOL haveValidSubscription;
     UserPurchases *userPurchases;
+    NSString *productIdentifier;
 }
 
 @synthesize uiTableView, emailsArray, contactsArray, selectedIdentifiers, emailButton, contactsButton, facebookButton, twitterButton,  searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited, emailInvited;
@@ -1442,16 +1443,9 @@ const int CONTACTS_TAB = 0;
 // Dismiss action for banner ad
 -(void)dismissBannerAds:(BOOL)valForBannerClose{
     
-    self.bannerAdsView.backgroundColor = [UIColor clearColor];
-    
-    UIView *viewToRemove = [bannerAdsView viewWithTag:999];
-    [viewToRemove removeFromSuperview];
-    [self.bannerAdsView removeFromSuperview];
-    btnBannerAdsDismiss = nil;
-    self.bannerAdsView = nil;
-    
-    bannerAdClosed = valForBannerClose;
-}
+    productIdentifier = @"com.flyerly.AdRemovalMonthly";
+    inAppViewController = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
+    [inAppViewController purchaseProductByID:productIdentifier];}
 
 
 @end

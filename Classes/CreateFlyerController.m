@@ -46,6 +46,7 @@
     BOOL saveToGallaryReqBeforeSharing;
     BOOL isNewFlyer;
     BOOL firstTimeInViewDidAppear;
+    NSString *productIdentifier;
 }
 
 @end
@@ -332,13 +333,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 // Dismiss action for banner ad
 -(void)dissmisBannerAdd:(BOOL)valForBannerClose{
     
+    productIdentifier = @"com.flyerly.AdRemovalMonthly";
     inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
-    
-    [inappviewcontroller requestProduct];
     inappviewcontroller.buttondelegate = self;
-    
-    [inappviewcontroller purchaseProductByID:@"com.flyerly.AdRemovalMonthly"];
+    [inappviewcontroller purchaseProductByID:productIdentifier];
 }
+
+
 
 /**
  * View setup. This is done once per instance.
@@ -5759,7 +5760,9 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     if ( [sharePanel isHidden] && inappviewcontroller != nil &&
         ![[self presentedViewController] isKindOfClass:[InAppViewController class]])
     {
-        [self presentViewController:inappviewcontroller animated:YES completion:nil];
+        if([productIdentifier length] == 0){
+            [self presentViewController:inappviewcontroller animated:YES completion:nil];
+        }
     }
 
     

@@ -14,6 +14,7 @@
     NSMutableArray *productArray;
     NSArray *freeFeaturesArray;
     NSString *cellDescriptionForRefrelFeature;
+    NSString *productIdentifier;
 }
 
 @end
@@ -26,6 +27,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if([productIdentifier length] > 0){
+        return;
+    }
     [loginButton addTarget:self action:@selector(inAppPurchasePanelButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     paidFeaturesTview.dataSource = self;
 	paidFeaturesTview.delegate = self;
@@ -47,6 +51,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    if([productIdentifier length] > 0){
+        return;
+    }
     
     //Checking if the user is valid or anonymus
     if ([[PFUser currentUser] sessionToken].length != 0) {
@@ -212,8 +220,19 @@
 }
 
 -(void) purchaseProductByID:(NSString *) identifier{
+    
+    productIdentifier = identifier;
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Would you like to buy Ad Removal in app for $4.99?" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    
+    [alert show];
 
-    [self purchaseProductID:identifier];
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex == 1) {
+        [self purchaseProductID:productIdentifier];
+    }
 }
 
 /* HERE WE SHOWING DESELECT ANIMATION ON TABLEVIEW CELL
