@@ -46,6 +46,7 @@
     BOOL saveToGallaryReqBeforeSharing;
     BOOL isNewFlyer;
     BOOL firstTimeInViewDidAppear;
+    NSString *productIdentifier;
 }
 
 @end
@@ -332,6 +333,15 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 // Dismiss action for banner ad
 -(void)dissmisBannerAdd:(BOOL)valForBannerClose{
     
+    productIdentifier = @"com.flyerly.AdRemovalMonthly";
+    inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
+    inappviewcontroller.buttondelegate = self;
+    [inappviewcontroller purchaseProductByID:productIdentifier];
+}
+
+// Dismiss action for banner ad
+-(void)removeBAnnerAdd:(BOOL)valForBannerClose{
+    
     self.bannerAddView.backgroundColor = [UIColor clearColor];
     
     UIView *viewToRemove = [bannerAddView viewWithTag:999];
@@ -340,9 +350,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [self.bannerAddView removeFromSuperview];
     bannerAdDismissBtn = nil;
     self.bannerAddView = nil;
-
+    
     bannerAddClosed = valForBannerClose;
 }
+
+
 
 /**
  * View setup. This is done once per instance.
@@ -5693,6 +5705,9 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 - ( void )productSuccesfullyPurchased: (NSString *)productId {
     appearingViewAfterInAppHide = YES;
     [self loadXibsAfterInAppCheck:YES againAddInSubViews:YES];
+    if ( [productId isEqualToString:@"com.flyerly.AdRemovalMonthly"]) {
+        [self removeBAnnerAdd:YES];
+    }
 }
 
 - ( void )inAppPurchasePanelContent {
@@ -5763,7 +5778,9 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     if ( [sharePanel isHidden] && inappviewcontroller != nil &&
         ![[self presentedViewController] isKindOfClass:[InAppViewController class]])
     {
-        [self presentViewController:inappviewcontroller animated:YES completion:nil];
+        if([productIdentifier length] == 0){
+            [self presentViewController:inappviewcontroller animated:YES completion:nil];
+        }
     }
 
     

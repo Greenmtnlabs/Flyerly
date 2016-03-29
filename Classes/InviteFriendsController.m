@@ -28,6 +28,7 @@
     UIButton *btnBannerAdsDismiss;
     BOOL haveValidSubscription;
     UserPurchases *userPurchases;
+    NSString *productIdentifier;
 }
 
 @synthesize uiTableView, emailsArray, contactsArray, selectedIdentifiers, emailButton, contactsButton, facebookButton, twitterButton,  searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited, emailInvited;
@@ -292,6 +293,10 @@ const int CONTACTS_TAB = 0;
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
         [inAppViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+    
+    if ( [productId isEqualToString:@"com.flyerly.AdRemovalMonthly"]) {
+        [self removeBAnnerAdd:YES];
     }
 }
 
@@ -1432,6 +1437,8 @@ const int CONTACTS_TAB = 0;
     }
 }
 
+
+
 -(void)dismissBannerAdsOnTap{
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -1442,16 +1449,24 @@ const int CONTACTS_TAB = 0;
 // Dismiss action for banner ad
 -(void)dismissBannerAds:(BOOL)valForBannerClose{
     
+    productIdentifier = @"com.flyerly.AdRemovalMonthly";
+    inAppViewController = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
+    [inAppViewController purchaseProductByID:productIdentifier];
+}
+
+// Dismiss action for banner ad
+-(void)removeBAnnerAdd:(BOOL)valForBannerClose{
+    
     self.bannerAdsView.backgroundColor = [UIColor clearColor];
     
     UIView *viewToRemove = [bannerAdsView viewWithTag:999];
     [viewToRemove removeFromSuperview];
+    //[bannerAdDismissBtn removeFromSuperview];
     [self.bannerAdsView removeFromSuperview];
     btnBannerAdsDismiss = nil;
     self.bannerAdsView = nil;
     
     bannerAdClosed = valForBannerClose;
 }
-
 
 @end

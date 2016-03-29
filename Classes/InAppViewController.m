@@ -14,6 +14,7 @@
     NSMutableArray *productArray;
     NSArray *freeFeaturesArray;
     NSString *cellDescriptionForRefrelFeature;
+    NSString *productIdentifier;
 }
 
 @end
@@ -26,6 +27,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if([productIdentifier length] > 0){
+        return;
+    }
     [loginButton addTarget:self action:@selector(inAppPurchasePanelButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     paidFeaturesTview.dataSource = self;
 	paidFeaturesTview.delegate = self;
@@ -47,6 +51,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    if([productIdentifier length] > 0){
+        return;
+    }
     
     //Checking if the user is valid or anonymus
     if ([[PFUser currentUser] sessionToken].length != 0) {
@@ -160,20 +168,20 @@
             
             //Getting Selected Product
             NSDictionary *product = [productArray objectAtIndex:rowIndex];
-            NSString* productIdentifier = product[@"productidentifier"];
+            NSString* prodIdentifier = product[@"productidentifier"];
             
-            if ( ! ([productIdentifier isEqualToString:@"com.flyerly.MonthlyGold" ]
-                    || [productIdentifier isEqualToString:@"com.flyerly.YearlyPlatinum"]
-                    || [productIdentifier isEqualToString:@"com.flyerly.AdRemovalMonthly"]
+            if ( ! ([prodIdentifier isEqualToString:@"com.flyerly.MonthlyGold" ]
+                    || [prodIdentifier isEqualToString:@"com.flyerly.YearlyPlatinum"]
+                    || [prodIdentifier isEqualToString:@"com.flyerly.AdRemovalMonthly"]
                     ) &&
                     [userPurchases checkKeyExistsInPurchases:productIdentifier] )  {
                 
                 // show alert that item has already been purchased
                 [self showAlreadyPurchasedAlert];
                 
-            } else if( ([productIdentifier isEqualToString:@"com.flyerly.MonthlyGold" ]
-                        || [productIdentifier isEqualToString:@"com.flyerly.YearlyPlatinum"]
-                        || [productIdentifier isEqualToString:@"com.flyerly.AdRemovalMonthly"]
+            } else if( ([prodIdentifier isEqualToString:@"com.flyerly.MonthlyGold" ]
+                        || [prodIdentifier isEqualToString:@"com.flyerly.YearlyPlatinum"]
+                        || [prodIdentifier isEqualToString:@"com.flyerly.AdRemovalMonthly"]
                         ) &&
                        [userPurchases isSubscriptionValid]) {
                 
@@ -198,18 +206,33 @@
     [self performSelector:@selector(deselect) withObject:nil afterDelay:0.2f];
 }
 
-
-- (void) purchaseProductAtIndex:(int) index {
+- (void) purchaseProductAtIndex:(int) index{
     
     //This line pop up login screen if user not exist
     [[RMStore defaultStore] addStoreObserver:self];
     
     //Getting Selected Product
     NSDictionary *product = [productArray objectAtIndex:index];
-    NSString* productIdentifier= product[@"productidentifier"];
+    NSString* prodIdentifier= product[@"productidentifier"];
     
     //Purchasing the product on the basis of product identifier
-    [self purchaseProductID:productIdentifier];
+    [self purchaseProductID:prodIdentifier];
+}
+
+-(void) purchaseProductByID:(NSString *) identifier{
+    
+    productIdentifier = identifier;
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Would you like to buy Ad Removal in app for $4.99?" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    
+    [alert show];
+
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex == 1) {
+        [self purchaseProductID:productIdentifier];
+    }
 }
 
 /* HERE WE SHOWING DESELECT ANIMATION ON TABLEVIEW CELL

@@ -52,4 +52,6 @@
 -(void) restorePurchase;
 -(void) updateParse;
 
+-(void) purchaseProductByID:(NSString *) identifier;
+
 @end
