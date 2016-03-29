@@ -339,6 +339,21 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [inappviewcontroller purchaseProductByID:productIdentifier];
 }
 
+// Dismiss action for banner ad
+-(void)removeBAnnerAdd:(BOOL)valForBannerClose{
+    
+    self.bannerAddView.backgroundColor = [UIColor clearColor];
+    
+    UIView *viewToRemove = [bannerAddView viewWithTag:999];
+    [viewToRemove removeFromSuperview];
+    //[bannerAdDismissBtn removeFromSuperview];
+    [self.bannerAddView removeFromSuperview];
+    bannerAdDismissBtn = nil;
+    self.bannerAddView = nil;
+    
+    bannerAddClosed = valForBannerClose;
+}
+
 
 
 /**
@@ -5690,6 +5705,9 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 - ( void )productSuccesfullyPurchased: (NSString *)productId {
     appearingViewAfterInAppHide = YES;
     [self loadXibsAfterInAppCheck:YES againAddInSubViews:YES];
+    if ( [productId isEqualToString:@"com.flyerly.AdRemovalMonthly"]) {
+        [self removeBAnnerAdd:YES];
+    }
 }
 
 - ( void )inAppPurchasePanelContent {

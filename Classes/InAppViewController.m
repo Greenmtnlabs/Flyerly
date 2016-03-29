@@ -168,20 +168,20 @@
             
             //Getting Selected Product
             NSDictionary *product = [productArray objectAtIndex:rowIndex];
-            NSString* productIdentifier = product[@"productidentifier"];
+            NSString* prodIdentifier = product[@"productidentifier"];
             
-            if ( ! ([productIdentifier isEqualToString:@"com.flyerly.MonthlyGold" ]
-                    || [productIdentifier isEqualToString:@"com.flyerly.YearlyPlatinum"]
-                    || [productIdentifier isEqualToString:@"com.flyerly.AdRemovalMonthly"]
+            if ( ! ([prodIdentifier isEqualToString:@"com.flyerly.MonthlyGold" ]
+                    || [prodIdentifier isEqualToString:@"com.flyerly.YearlyPlatinum"]
+                    || [prodIdentifier isEqualToString:@"com.flyerly.AdRemovalMonthly"]
                     ) &&
                     [userPurchases checkKeyExistsInPurchases:productIdentifier] )  {
                 
                 // show alert that item has already been purchased
                 [self showAlreadyPurchasedAlert];
                 
-            } else if( ([productIdentifier isEqualToString:@"com.flyerly.MonthlyGold" ]
-                        || [productIdentifier isEqualToString:@"com.flyerly.YearlyPlatinum"]
-                        || [productIdentifier isEqualToString:@"com.flyerly.AdRemovalMonthly"]
+            } else if( ([prodIdentifier isEqualToString:@"com.flyerly.MonthlyGold" ]
+                        || [prodIdentifier isEqualToString:@"com.flyerly.YearlyPlatinum"]
+                        || [prodIdentifier isEqualToString:@"com.flyerly.AdRemovalMonthly"]
                         ) &&
                        [userPurchases isSubscriptionValid]) {
                 
@@ -213,10 +213,10 @@
     
     //Getting Selected Product
     NSDictionary *product = [productArray objectAtIndex:index];
-    NSString* productIdentifier= product[@"productidentifier"];
+    NSString* prodIdentifier= product[@"productidentifier"];
     
     //Purchasing the product on the basis of product identifier
-    [self purchaseProductID:productIdentifier];
+    [self purchaseProductID:prodIdentifier];
 }
 
 -(void) purchaseProductByID:(NSString *) identifier{
