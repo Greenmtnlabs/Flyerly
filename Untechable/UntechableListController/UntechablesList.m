@@ -79,7 +79,7 @@
     // Do any additional setup after loading the view from its nib.
     
 
-    arrayToBeAdded =  @[ NSLocalizedString(@"30 minutes", nil), NSLocalizedString(@"1 hour", nil), NSLocalizedString(@"1 Day", nil), NSLocalizedString(@"2 Days", nil)];
+    arrayToBeAdded =  @[ NSLocalizedString(@"30 minutes", nil), NSLocalizedString(@"1 hour", nil), NSLocalizedString(@"1 day", nil), NSLocalizedString(@"2 day", nil)];
     userPurchases = [UserPurchases getInstance];
 
     

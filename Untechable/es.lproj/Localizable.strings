@@ -110,8 +110,8 @@
 // UntechablesList
 "30 minutes" = "30 minutos";
 "1 hour" = "1 horas";
-"1 Day" = "1 Día";
-"2 Days" = "2 Días";
+"1 day" = "1 día";
+"2 day" = "2 días";
 
 "#untechable for %@ %@ - Reconnect with life: http://www.unte.ch" = "#untechable para %@ %@ - Vuelva a conectar con la vida: http://www.unte.ch";
 "Unable to delete, please try again later!" = "No se puede eliminar, por favor inténtelo de nuevo más tarde!";
