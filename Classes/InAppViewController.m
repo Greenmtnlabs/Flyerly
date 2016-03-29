@@ -198,8 +198,7 @@
     [self performSelector:@selector(deselect) withObject:nil afterDelay:0.2f];
 }
 
-
-- (void) purchaseProductAtIndex:(int) index {
+- (void) purchaseProductAtIndex:(int) index{
     
     //This line pop up login screen if user not exist
     [[RMStore defaultStore] addStoreObserver:self];
@@ -210,6 +209,11 @@
     
     //Purchasing the product on the basis of product identifier
     [self purchaseProductID:productIdentifier];
+}
+
+-(void) purchaseProductByID:(NSString *) identifier{
+
+    [self purchaseProductID:identifier];
 }
 
 /* HERE WE SHOWING DESELECT ANIMATION ON TABLEVIEW CELL

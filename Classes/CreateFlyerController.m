@@ -332,16 +332,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 // Dismiss action for banner ad
 -(void)dissmisBannerAdd:(BOOL)valForBannerClose{
     
-    self.bannerAddView.backgroundColor = [UIColor clearColor];
+    inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
     
-    UIView *viewToRemove = [bannerAddView viewWithTag:999];
-    [viewToRemove removeFromSuperview];
-    //[bannerAdDismissBtn removeFromSuperview];
-    [self.bannerAddView removeFromSuperview];
-    bannerAdDismissBtn = nil;
-    self.bannerAddView = nil;
-
-    bannerAddClosed = valForBannerClose;
+    [inappviewcontroller requestProduct];
+    inappviewcontroller.buttondelegate = self;
+    
+    [inappviewcontroller purchaseProductByID:@"com.flyerly.AdRemovalMonthly"];
 }
 
 /**
