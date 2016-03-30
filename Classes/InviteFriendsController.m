@@ -285,15 +285,23 @@ const int CONTACTS_TAB = 0;
     
 }
 
+//- ( void )productSuccesfullyPurchased: (NSString *)productId {
+//    appearingViewAfterInAppHide = YES;
+//    [self loadXibsAfterInAppCheck:YES againAddInSubViews:YES];
+//    if ( [productId isEqualToString:@"com.flyerly.AdRemovalMonthly"]) {
+//        [self removeBAnnerAdd:YES];
+//    }
+//}
+
 - ( void )productSuccesfullyPurchased: (NSString *)productId {
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     userPurchases_.delegate = nil;
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
-        [inAppViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    }
+//    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
+//        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+//        [inAppViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+//    }
     
     if ( [productId isEqualToString:@"com.flyerly.AdRemovalMonthly"]) {
         [self removeBAnnerAdd:YES];
@@ -1451,6 +1459,7 @@ const int CONTACTS_TAB = 0;
     
     productIdentifier = @"com.flyerly.AdRemovalMonthly";
     inAppViewController = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
+    [inAppViewController requestProduct];
     [inAppViewController purchaseProductByID:productIdentifier];
 }
 

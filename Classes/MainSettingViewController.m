@@ -942,6 +942,7 @@
     productIdentifier = @"com.flyerly.AdRemovalMonthly";
     inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
     inappviewcontroller.buttondelegate = self;
+    [inappviewcontroller requestProduct];
     [inappviewcontroller purchaseProductByID:productIdentifier];
 }
 

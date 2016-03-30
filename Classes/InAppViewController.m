@@ -221,6 +221,7 @@
 
 -(void) purchaseProductByID:(NSString *) identifier{
     
+    
     productIdentifier = identifier;
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Would you like to buy Ad Removal in app for $4.99?" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
     
@@ -231,7 +232,44 @@
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     
     if (buttonIndex == 1) {
-        [self purchaseProductID:productIdentifier];
+        
+        //Checking if the user is valid or anonymus
+        if ([[PFUser currentUser] sessionToken].length != 0) {
+            
+            //Getting Selected Product
+            NSDictionary *product = [productArray objectAtIndex:4];
+            NSString* prodIdentifier = product[@"productidentifier"];
+            
+            if ( ! ([prodIdentifier isEqualToString:@"com.flyerly.MonthlyGold" ]
+                    || [prodIdentifier isEqualToString:@"com.flyerly.YearlyPlatinum"]
+                    || [prodIdentifier isEqualToString:@"com.flyerly.AdRemovalMonthly"]
+                    ) &&
+                [userPurchases checkKeyExistsInPurchases:productIdentifier] )  {
+                
+                // show alert that item has already been purchased
+                [self showAlreadyPurchasedAlert];
+                
+            } else if( ([prodIdentifier isEqualToString:@"com.flyerly.MonthlyGold" ]
+                        || [prodIdentifier isEqualToString:@"com.flyerly.YearlyPlatinum"]
+                        || [prodIdentifier isEqualToString:@"com.flyerly.AdRemovalMonthly"]
+                        ) &&
+                      [userPurchases isSubscriptionValid]) {
+                
+                // show alert that item has already been purchased
+                [self showAlreadyPurchasedAlert];
+                
+            } else {
+                
+                [self purchaseProductID:productIdentifier];
+                
+            }
+            
+        }else {
+            UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"Please sign in first"
+                                                                message: @"To purchase any product, you need to sign in first."
+                                                               delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
+            [someError show];
+        }
     }
 }
 
