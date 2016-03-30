@@ -176,7 +176,6 @@ const int CONTACTS_TAB = 0;
     
     if([FlyerlySingleton connected]){
         if( haveValidSubscription == NO ) {
-            self.bannerAdsView.alpha = 1.0;
             [self loadInterstitialAdd];
         }
     }
@@ -285,35 +284,14 @@ const int CONTACTS_TAB = 0;
     
 }
 
-//- ( void )productSuccesfullyPurchased: (NSString *)productId {
-//    appearingViewAfterInAppHide = YES;
-//    [self loadXibsAfterInAppCheck:YES againAddInSubViews:YES];
-//    if ( [productId isEqualToString:@"com.flyerly.AdRemovalMonthly"]) {
-//        [self removeBAnnerAdd:YES];
-//    }
-//}
-
-
 - ( void )productSuccesfullyPurchased: (NSString *)productId {
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     userPurchases_.delegate = nil;
     
-//    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-//        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
-//        [inAppViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-//    }
-    
-//    if ( [productId isEqualToString:@"com.flyerly.AdRemovalMonthly"]) {
-//        [self removeBAnnerAdd:YES];
-//    }
-    
- 
-    
     if ( [productId isEqualToString:@"com.flyerly.AdRemovalMonthly"]) {
         [self removeBAnnerAdd:YES];
     }
-
 }
 
 - (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle {
@@ -1448,6 +1426,8 @@ const int CONTACTS_TAB = 0;
                 btnBannerAdsDismiss = [[UIButton alloc] initWithFrame:CGRectMake(270, 0, 52, 52)];
             }
         }
+        
+        self.bannerAdsView.alpha = 1.0;
         
         self.bannerAdsView.backgroundColor = [UIColor clearColor];
         

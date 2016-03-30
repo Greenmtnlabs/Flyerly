@@ -131,7 +131,6 @@
     
     if([FlyerlySingleton connected]){
         if( hasValidSubscription == NO ) {
-            self.bannerAdsView.alpha = 1.0;
             [self loadInterstitialAdd];
         }
     }
