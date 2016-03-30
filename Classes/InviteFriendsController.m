@@ -176,7 +176,6 @@ const int CONTACTS_TAB = 0;
     
     if([FlyerlySingleton connected]){
         if( haveValidSubscription == NO ) {
-            self.bannerAdsView.alpha = 1.0;
             [self loadInterstitialAdd];
         }
     }
@@ -290,11 +289,6 @@ const int CONTACTS_TAB = 0;
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     userPurchases_.delegate = nil;
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
-        [inAppViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    }
-    
     if ( [productId isEqualToString:@"com.flyerly.AdRemovalMonthly"]) {
         [self removeBAnnerAdd:YES];
     }
@@ -318,12 +312,26 @@ const int CONTACTS_TAB = 0;
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
         [inAppViewController.paidFeaturesTview reloadData];
-    }else {
-        
-        [self presentViewController:inAppViewController animated:NO completion:nil];
+    } else {
+        [self removeAdsBanner:YES];
     }
 }
 
+
+// Dismiss action for banner ad
+-(void)removeAdsBanner:(BOOL)valForBannerClose{
+    
+    self.bannerAdsView.backgroundColor = [UIColor clearColor];
+    
+    UIView *viewToRemove = [bannerAdsView viewWithTag:999];
+    [viewToRemove removeFromSuperview];
+    //[bannerAdDismissBtn removeFromSuperview];
+    [self.bannerAdsView removeFromSuperview];
+    btnBannerAdsDismiss = nil;
+    self.bannerAdsView = nil;
+    
+    bannerAdClosed = valForBannerClose;
+}
 
 #pragma mark  Custom Methods
 
@@ -1419,6 +1427,8 @@ const int CONTACTS_TAB = 0;
             }
         }
         
+        self.bannerAdsView.alpha = 1.0;
+        
         self.bannerAdsView.backgroundColor = [UIColor clearColor];
         
         [btnBannerAdsDismiss addTarget:self action:@selector(dismissBannerAdsOnTap) forControlEvents:UIControlEventTouchUpInside];
@@ -1451,6 +1461,7 @@ const int CONTACTS_TAB = 0;
     
     productIdentifier = @"com.flyerly.AdRemovalMonthly";
     inAppViewController = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
+    [inAppViewController requestProduct];
     [inAppViewController purchaseProductByID:productIdentifier];
 }
 

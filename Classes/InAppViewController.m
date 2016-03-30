@@ -171,7 +171,7 @@
             NSString* prodIdentifier = product[@"productidentifier"];
             
             if ( ! ([prodIdentifier isEqualToString:@"com.flyerly.MonthlyGold" ]
-                    || [prodIdentifier isEqualToString:@"com.flyerly.YearlyPlatinum"]
+                    || [prodIdentifier isEqualToString:@"com.flyerly.YearlyPlatinum1"]
                     || [prodIdentifier isEqualToString:@"com.flyerly.AdRemovalMonthly"]
                     ) &&
                     [userPurchases checkKeyExistsInPurchases:productIdentifier] )  {
@@ -180,7 +180,7 @@
                 [self showAlreadyPurchasedAlert];
                 
             } else if( ([prodIdentifier isEqualToString:@"com.flyerly.MonthlyGold" ]
-                        || [prodIdentifier isEqualToString:@"com.flyerly.YearlyPlatinum"]
+                        || [prodIdentifier isEqualToString:@"com.flyerly.YearlyPlatinum1"]
                         || [prodIdentifier isEqualToString:@"com.flyerly.AdRemovalMonthly"]
                         ) &&
                        [userPurchases isSubscriptionValid]) {
@@ -221,6 +221,7 @@
 
 -(void) purchaseProductByID:(NSString *) identifier{
     
+    
     productIdentifier = identifier;
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Would you like to buy Ad Removal in app for $4.99?" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
     
@@ -231,7 +232,44 @@
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     
     if (buttonIndex == 1) {
-        [self purchaseProductID:productIdentifier];
+        
+        //Checking if the user is valid or anonymus
+        if ([[PFUser currentUser] sessionToken].length != 0) {
+            
+            //Getting Selected Product
+            NSDictionary *product = [productArray objectAtIndex:4];
+            NSString* prodIdentifier = product[@"productidentifier"];
+            
+            if ( ! ([prodIdentifier isEqualToString:@"com.flyerly.MonthlyGold" ]
+                    || [prodIdentifier isEqualToString:@"com.flyerly.YearlyPlatinum1"]
+                    || [prodIdentifier isEqualToString:@"com.flyerly.AdRemovalMonthly"]
+                    ) &&
+                [userPurchases checkKeyExistsInPurchases:productIdentifier] )  {
+                
+                // show alert that item has already been purchased
+                [self showAlreadyPurchasedAlert];
+                
+            } else if( ([prodIdentifier isEqualToString:@"com.flyerly.MonthlyGold" ]
+                        || [prodIdentifier isEqualToString:@"com.flyerly.YearlyPlatinum1"]
+                        || [prodIdentifier isEqualToString:@"com.flyerly.AdRemovalMonthly"]
+                        ) &&
+                      [userPurchases isSubscriptionValid]) {
+                
+                // show alert that item has already been purchased
+                [self showAlreadyPurchasedAlert];
+                
+            } else {
+                
+                [self purchaseProductID:productIdentifier];
+                
+            }
+            
+        }else {
+            UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"Please sign in first"
+                                                                message: @"To purchase any product, you need to sign in first."
+                                                               delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
+            [someError show];
+        }
     }
 }
 
@@ -332,7 +370,7 @@
         if([[product objectForKey:@"productidentifier"] isEqualToString:@"com.flyerly.AllDesignBundle"]) {
             [completeDesignBundleButton setTitle:@"Help us grow Flyerly!"];
             [completeDesignBundleButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
-        } else if([[product objectForKey:@"productidentifier"] isEqualToString:@"com.flyerly.YearlyPlatinum"]) {
+        } else if([[product objectForKey:@"productidentifier"] isEqualToString:@"com.flyerly.YearlyPlatinum1"]) {
             inAppCell.backgroundColor = [UIColor grayColor];//heighlight the Yearly subscription cell
         }
         //Setting the packagename,packageprice,packagedesciption values for cell view
@@ -383,7 +421,7 @@
         
         //Check For Crash Maintain
         cancelRequest = NO;
-        NSArray *productIdentifiersAry = @[@"com.flyerly.MonthlyGold", @"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.YearlyPlatinum", @"com.flyerly.AdRemovalMonthly"];
+        NSArray *productIdentifiersAry = @[@"com.flyerly.MonthlyGold", @"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.YearlyPlatinum1", @"com.flyerly.AdRemovalMonthly"];
         //These are over Products on App Store
         NSSet *productIdentifiers = [NSSet setWithArray:productIdentifiersAry];
         
@@ -446,7 +484,7 @@
         
         //HERE WE GET SHARED INTANCE OF _persistence WHICH WE LINKED IN FlyrAppDelegate
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        NSArray *productIdentifiers = @[@"com.flyerly.MonthlyGold", @"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.YearlyPlatinum", @"com.flyerly.AdRemovalMonthly"];
+        NSArray *productIdentifiers = @[@"com.flyerly.MonthlyGold", @"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.YearlyPlatinum1", @"com.flyerly.AdRemovalMonthly"];
         
         if (productIdentifiers.count >= 1) {
             
