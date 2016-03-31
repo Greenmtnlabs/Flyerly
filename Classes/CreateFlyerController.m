@@ -47,6 +47,7 @@
     BOOL isNewFlyer;
     BOOL firstTimeInViewDidAppear;
     NSString *productIdentifier;
+    NSString *create_flyer_default_image;
 }
 
 @end
@@ -186,6 +187,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     //245-feature-in-create-screen-when-user-is-creating-brand-new-flyer-have-the-background-button-selected-for-them-initially
     if( isNewFlyer ){
+        create_flyer_default_image = @"create_flyer_default_image.png";
+        self.flyimgView.image = [UIImage imageNamed:create_flyer_default_image];
         [self setAddMoreLayerTabAction:backgroundTabButton];
         isNewFlyer = NO;
     }
@@ -3497,6 +3500,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 }
 
 -(void)deSelectPreviousLayer {
+    
     // Remove Border if Any Layer Selected check the entire layers in a flyer
     for ( NSString* key in self.flyimgView.layers ) {
         [self.flyimgView layerStoppedEditing:key];
