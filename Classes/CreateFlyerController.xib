@@ -80,7 +80,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <inset key="contentInset" minX="0.0" minY="5" maxX="0.0" maxY="65"/>
                 </scrollView>
-                <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Xaq-YE-kc7" userLabel="flyimgView" customClass="FlyerImageView">
+                <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="create_flyer_default_image.png" id="Xaq-YE-kc7" userLabel="flyimgView" customClass="FlyerImageView">
                     <rect key="frame" x="5" y="65" width="363" height="371"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -654,6 +654,7 @@
         <image name="color_button_selected.png" width="64" height="45"/>
         <image name="color_tab.png" width="64" height="45"/>
         <image name="color_tab_selected.png" width="64" height="45"/>
+        <image name="create_flyer_default_image.png" width="960" height="960"/>
         <image name="drawing_tab.png" width="64" height="45"/>
         <image name="drawing_tab_color.png" width="80" height="45"/>
         <image name="drawing_tab_color_selected.png" width="80" height="45"/>
