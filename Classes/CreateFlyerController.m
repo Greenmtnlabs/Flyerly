@@ -868,7 +868,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         [self.flyimgView layerStoppedEditing:currentLayer];
     }
     
-    
     userPurchases.delegate = nil;
     
     [self videoPlay:NO repeat:NO];
@@ -937,7 +936,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             });
         }
     });
-    
     
     self.shouldShowAdd ( @"", haveValidSubscription );
     
