@@ -26,6 +26,8 @@
     UIImageView *noAdsImage;
     NSString *imageName;
     bool showAds;
+    BOOL isComingFromCreateFlyer;
+    
 }
 
 @end
@@ -110,7 +112,6 @@ id lastShareBtnSender;
     
     // Adding tab buttons to the screen
     [self setTabButtonsPosition];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -392,12 +393,14 @@ id lastShareBtnSender;
     [createFlyer setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
         dispatch_async( dispatch_get_main_queue(), ^{
             if (haveValidSubscription == NO && ([weakSelf.addInterstialFms isReady] && ![weakSelf.addInterstialFms hasBeenUsed]) ){
-                //[weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
+                [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
             }  else{
                 [weakSelf saveAndRelease];
             }
         });
     }];
+    
+    isComingFromCreateFlyer = YES;
     
 	[self.navigationController pushViewController:createFlyer animated:YES];
     
@@ -840,8 +843,16 @@ id lastShareBtnSender;
  * After dismiss of interstial add
  */
 - (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
-    //on add dismiss && after merging video process, save in gallery
-    [self saveAndRelease];
+    
+    // When ad is closed, merge video or giphy and saves in gallery
+    // if coming from Create Flyer Screen
+    
+    if(isComingFromCreateFlyer){
+        isComingFromCreateFlyer = NO;
+        [self saveAndRelease];
+    }
+    
+    // To load (or reload) ads on home screen (FlyerlyMainScreen) after the full screen ad is closed
     [self loadFullScreenGoogleAdd];
 }
 
