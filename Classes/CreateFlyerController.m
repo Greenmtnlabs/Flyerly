@@ -3501,13 +3501,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 -(void)deSelectPreviousLayer {
     
-    if(create_flyer_default_image != nil){
-        self.flyimgView.image = nil;
-        self.flyimgView.backgroundColor = [UIColor whiteColor];
-        [self setWaterMarkLayerPosition];
-    
-    }
-    
     // Remove Border if Any Layer Selected check the entire layers in a flyer
     for ( NSString* key in self.flyimgView.layers ) {
         [self.flyimgView layerStoppedEditing:key];
