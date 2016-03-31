@@ -389,9 +389,10 @@ id lastShareBtnSender;
         [weakSelf.tView reloadData];
         
     }];
-
+    
     [createFlyer setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
         dispatch_async( dispatch_get_main_queue(), ^{
+            
             if (haveValidSubscription == NO && ([weakSelf.addInterstialFms isReady] && ![weakSelf.addInterstialFms hasBeenUsed]) ){
                 [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
             }  else{
@@ -401,9 +402,7 @@ id lastShareBtnSender;
     }];
     
     isComingFromCreateFlyer = YES;
-    
-	[self.navigationController pushViewController:createFlyer animated:YES];
-    
+    [self.navigationController pushViewController:createFlyer animated:YES];
 }
 
 - (void)inAppPanelDismissed {
@@ -844,14 +843,6 @@ id lastShareBtnSender;
  * After dismiss of interstial add
  */
 - (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
-    
-    // When ad is closed, merge video or giphy and saves in gallery
-    // if coming from Create Flyer Screen
-    
-    if(isComingFromCreateFlyer){
-        isComingFromCreateFlyer = NO;
-        [self saveAndRelease];
-    }
     
     // To load (or reload) ads on home screen (FlyerlyMainScreen) after the full screen ad is closed
     [self loadFullScreenGoogleAdd];

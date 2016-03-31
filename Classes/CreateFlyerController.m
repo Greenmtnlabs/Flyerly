@@ -940,7 +940,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }
     });
     
-    self.shouldShowAdd ( @"", haveValidSubscription );
+    self.shouldShowAdd ( @"", YES ); // in order not to show full screen ads
     
     [self.navigationController popViewControllerAnimated:YES];
     
