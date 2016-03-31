@@ -739,7 +739,7 @@ UIAlertView *saveCurrentFlyerAlert;
        
         [self updateDescription];
         saveCurrentFlyerAlert = [[UIAlertView alloc] initWithTitle:@"Success"
-                                                     message:@"The current Flyer has been saved successfully"
+                                                     message:@"Saved to Flyerly gallery & iOS gallery.  Share to YouTube, Messenger, Facebook in-app or create a new email or text message & attach flyer from iOS gallery."
                                                      delegate:self
                                                      cancelButtonTitle:@"OK"
                                                      otherButtonTitles:nil, nil];
