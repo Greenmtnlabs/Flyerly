@@ -39,6 +39,7 @@
 @synthesize flyer, signInAlert, bottomBar;
 @synthesize txtSearch;
 @synthesize btnCreateFlyer;
+@synthesize btnInvite, btnSaved, btnShared, btnSocial;
 
 id lastShareBtnSender;
 
@@ -110,8 +111,6 @@ id lastShareBtnSender;
     [self.view bringSubviewToFront:bottomBar];
     [self.view bringSubviewToFront:btnCreateFlyer];
     
-    // Adding tab buttons to the screen
-    [self setTabButtonsPosition];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -240,76 +239,6 @@ id lastShareBtnSender;
     
     [txtSearch addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingChanged];
     txtSearch.borderStyle = nil;
-    
-}
-
-/*
- * This method creates and sets tab buttons
- * @params:
- *      void
- * @return:
- *      void
- */
-
--(void)setTabButtonsPosition{
-    
-    CGRect rectInvite, rectSaved, rectShared, rectSocial;
-    
-    if(IS_IPHONE_4){
-        
-        rectInvite = CGRectMake(0, 432, 63, 48);
-        rectSaved = CGRectMake(63, 432, 63, 48);
-        rectShared = CGRectMake(194, 432, 63, 48);
-        rectSocial = CGRectMake(257, 432, 63, 48);
-        
-    } else if(IS_IPHONE_5){
-        
-        rectInvite = CGRectMake(0, 520, 63, 48);
-        rectSaved = CGRectMake(63, 520, 63, 48);
-        rectShared = CGRectMake(194, 520, 63, 48);
-        rectSocial = CGRectMake(257, 520, 63, 48);
-        
-    } else if(IS_IPHONE_6){
-        
-        rectInvite = CGRectMake(0, 619, 75, 48);
-        rectSaved = CGRectMake(75, 619, 75, 48);
-        rectShared = CGRectMake(225, 619, 75, 48);
-        rectSocial = CGRectMake(300, 619, 75, 48);
-        
-    } else if(IS_IPHONE_6_PLUS){
-        
-        rectInvite = CGRectMake(0, 688, 86, 48);
-        rectSaved = CGRectMake(86, 688, 86, 48);
-        rectShared = CGRectMake(243, 688, 86, 48);
-        rectSocial = CGRectMake(328, 688, 86, 48);
-        
-    }
-    
-    // Creating Invite Button
-    btnInvite = [[UIButton alloc] initWithFrame:rectInvite];
-    [btnInvite setBackgroundImage:[UIImage imageNamed:@"homeInvite"] forState:UIControlStateNormal];
-    [btnInvite addTarget:self action:@selector(doInvite:) forControlEvents:UIControlEventTouchUpInside];
-    
-    // Creating Saved Button
-    btnSaved = [[UIButton alloc] initWithFrame:rectSaved];
-    [btnSaved setBackgroundImage:[UIImage imageNamed:@"homeSaved"] forState:UIControlStateNormal];
-    [btnSaved addTarget:self action:@selector(showUnsharedFlyers:) forControlEvents:UIControlEventTouchUpInside];
-    
-    // Creating Shared Button
-    btnShared = [[UIButton alloc] initWithFrame:rectShared];
-    [btnShared setBackgroundImage:[UIImage imageNamed:@"homeShare"] forState:UIControlStateNormal];
-    [btnShared addTarget:self action:@selector(showSharedFlyers:) forControlEvents:UIControlEventTouchUpInside];
-    
-    // Creating Social Button
-    btnSocial = [[UIButton alloc] initWithFrame:rectSocial];
-    [btnSocial setBackgroundImage:[UIImage imageNamed:@"homeSocial"] forState:UIControlStateNormal];
-    [btnSocial addTarget:self action:@selector(showHashTagFlyers:) forControlEvents:UIControlEventTouchUpInside];
-    
-    // Adding buttons to view
-    [self.view addSubview:btnInvite];
-    [self.view addSubview:btnSaved];
-    [self.view addSubview:btnShared];
-    [self.view addSubview:btnSocial];
     
 }
 

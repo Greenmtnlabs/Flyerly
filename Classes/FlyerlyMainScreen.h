@@ -47,8 +47,7 @@
     UIButton *btnSettings, *btnInAppPurchase;
     UIBarButtonItem *rightBarButton, *leftBarButton;
     
-    // Tab buttons 
-    UIButton *btnInvite, *btnSaved, *btnShared, *btnSocial;
+    
 }
 
 
@@ -62,6 +61,11 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *txtSearch;
 @property (strong, nonatomic) IBOutlet UIButton *btnCreateFlyer;
+@property (strong, nonatomic) IBOutlet UIButton *btnInvite;
+@property (strong, nonatomic) IBOutlet UIButton *btnSaved;
+@property (strong, nonatomic) IBOutlet UIButton *btnShared;
+@property (strong, nonatomic) IBOutlet UIButton *btnSocial;
+
 
 
 -(IBAction)createFlyer:(id)sender;
