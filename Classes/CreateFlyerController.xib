@@ -16,6 +16,7 @@
                 <outlet property="artsSizeTabButton" destination="5Cl-rC-EDu" id="I6i-9N-PRr"/>
                 <outlet property="backgroundTabButton" destination="zoh-mW-4K3" id="jKZ-37-kHq"/>
                 <outlet property="backtemplates" destination="WvZ-dV-5Fn" id="5XB-pz-W0O"/>
+                <outlet property="bannerAdsView" destination="HqN-xE-zHB" id="FBd-9e-8or"/>
                 <outlet property="cameraRoll" destination="t0N-7F-yOw" id="jXi-au-Q5l"/>
                 <outlet property="cameraTabButton" destination="iEv-dA-2If" id="MFy-NX-MwQ"/>
                 <outlet property="cameraTakePhoto" destination="TUU-ew-jcU" id="4sp-iH-P0R"/>
@@ -81,7 +82,7 @@
                     <inset key="contentInset" minX="0.0" minY="5" maxX="0.0" maxY="65"/>
                 </scrollView>
                 <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Xaq-YE-kc7" userLabel="flyimgView" customClass="FlyerImageView">
-                    <rect key="frame" x="5" y="65" width="363" height="371"/>
+                    <rect key="frame" x="6" y="65" width="363" height="371"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
@@ -90,7 +91,7 @@
                     </connections>
                 </imageView>
                 <view contentMode="scaleToFill" id="rbq-e2-wbO" userLabel="contextView">
-                    <rect key="frame" x="0.0" y="441" width="376" height="171"/>
+                    <rect key="frame" x="0.0" y="441" width="376" height="174"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TAKE OR ADD PHOTO &amp; RESIZE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8pC-ir-3f6" userLabel="takeOrAddPhotoLabel">
@@ -102,7 +103,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SET PHOTO OR VIDEO AS BACKGROUND" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZrQ-EX-OBl" userLabel="videoLabel">
-                            <rect key="frame" x="0.0" y="6" width="310" height="43"/>
+                            <rect key="frame" x="62" y="6" width="310" height="43"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -118,13 +119,18 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingGlass.png" id="e7R-ga-ZuC" userLabel="MagnifyingGlassImg">
-                            <rect key="frame" x="133" y="54" width="64" height="64"/>
+                            <rect key="frame" x="133" y="57" width="64" height="64"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="koI-LW-qvU" userLabel="ScreenShotForZoom">
-                            <rect key="frame" x="103" y="18" width="130" height="130"/>
+                            <rect key="frame" x="103" y="20" width="130" height="130"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         </imageView>
+                        <view contentMode="scaleToFill" id="HqN-xE-zHB">
+                            <rect key="frame" x="0.0" y="125" width="376" height="50"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
@@ -137,7 +143,7 @@
             <color key="backgroundColor" red="0.96078431372549022" green="0.94509803921568625" blue="0.87058823529411766" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-            <point key="canvasLocation" x="-146" y="208"/>
+            <point key="canvasLocation" x="-146.5" y="207.5"/>
         </view>
         <view contentMode="scaleToFill" id="P8i-Fw-Gci" userLabel="View - Main menu buttons">
             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
