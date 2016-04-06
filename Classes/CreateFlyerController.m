@@ -71,7 +71,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize libText,libBackground,libArts,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder,giphyBgBtn,libDrawing;
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider,tempelateView;
 @synthesize durationLabel,durationChange,onFlyerBack,shouldShowAdd;
-@synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAddView,drawingPatternsView,drawingEraserMsgView;
+@synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAdsView,drawingPatternsView,drawingEraserMsgView;
 
 @synthesize premiumBtnBg, premiumBtnBgBorder, premiumBtnEmoticons, premiumBtnCliparts, premiumBtnFonts;
 @synthesize premiumImgBg, premiumImgBgBorder, premiumImgEmoticons, premiumImgCliparts, premiumImgFonts;
@@ -264,44 +264,21 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     if ( bannerAddClosed == NO && bannerShowed == NO ) {
         bannerShowed = YES;//keep bolean we have rendered banner or not ?
-    
+        
         // Device Check Maintain Size of ScrollView Because Scroll Indicator will show.
-        if ( IS_IPHONE_4 ) {
-            self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 384.3, 310, 50)];
-            
-            if ( bannerAdDismissBtn == nil ){
+        if ( bannerAdDismissBtn == nil ){
+            if(IS_IPHONE_4 || IS_IPHONE_5) {
                 bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(270, 0, 52, 52)];
-            }
-        }
-        else if ( IS_IPHONE_5 ) {
-            self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 473, 320, 50)];
-            
-            if ( bannerAdDismissBtn == nil ){
-                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(270, 0, 52, 52)];
-            }
-        } else if ( IS_IPHONE_6 ){
-            
-            self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 564, 620, 50)];
-            
-            if ( bannerAdDismissBtn == nil ){
+            } else if (IS_IPHONE_6){
                 bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(320, 0, 52, 52)];
-            }
-        }else if ( IS_IPHONE_6_PLUS ){
-            
-            self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 628, 620, 50)];
-            
-            if ( bannerAdDismissBtn == nil ){
+            }else if(IS_IPHONE_6_PLUS){
                 bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(360, 0, 52, 52)];
-            }
-        }else {
-            self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 310, 320, 50)];
-            
-            if ( bannerAdDismissBtn == nil ){
+            }else {
                 bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(270, 0, 52, 52)];
             }
         }
-    
-        self.bannerAddView.backgroundColor = [UIColor whiteColor];
+        
+        self.bannerAdsView.backgroundColor = [UIColor whiteColor];
     
         [bannerAdDismissBtn addTarget:self action:@selector(dissmisBannerAddOnTap) forControlEvents:UIControlEventTouchUpInside];
         
@@ -309,22 +286,20 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
         bannerAdDismissBtn.tag = 999;
     
-        [self.bannerAddView addSubview:bannerAdDismissBtn];
+        [self.bannerAdsView addSubview:bannerAdDismissBtn];
         
         //Adding ad in custom view
-        [self.bannerAddView addSubview:adView];
+        [self.bannerAdsView addSubview:adView];
         //Making dismiss button visible,and bring it to front
-        //bannerAdDismissBtn.alpha = 1.0;
-        [self.bannerAddView bringSubviewToFront:bannerAdDismissBtn];
+        [self.bannerAdsView bringSubviewToFront:bannerAdDismissBtn];
     
         if ( sharePanel.hidden ){
-            [self.view addSubview:self.bannerAddView];
+            bannerAdsView.alpha = 1.0;
+            [self.contextView addSubview:self.bannerAdsView];
         }
     
         return;
     }
-    
-    //[self dissmisBannerAdd:bannerAddClosed];
 }
 -(void)dissmisBannerAddOnTap{
     
@@ -346,14 +321,14 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 // Dismiss action for banner ad
 -(void)removeBAnnerAdd:(BOOL)valForBannerClose{
     
-    self.bannerAddView.backgroundColor = [UIColor clearColor];
+    self.bannerAdsView.backgroundColor = [UIColor clearColor];
     
-    UIView *viewToRemove = [bannerAddView viewWithTag:999];
+    UIView *viewToRemove = [bannerAdsView viewWithTag:999];
     [viewToRemove removeFromSuperview];
     //[bannerAdDismissBtn removeFromSuperview];
-    [self.bannerAddView removeFromSuperview];
+    [self.bannerAdsView removeFromSuperview];
     bannerAdDismissBtn = nil;
-    self.bannerAddView = nil;
+    self.bannerAdsView = nil;
     
     bannerAddClosed = valForBannerClose;
 }
@@ -366,6 +341,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 -(void)viewDidLoad{
     
     [self setWaterMarkLayerPosition];
+    
+    bannerAdsView.alpha = 0.0;
     
     if( IS_IPHONE_4 ){
         [[NSBundle mainBundle] loadNibNamed:@"CreateFlyerController-iPhone4" owner:self options:nil];
@@ -597,18 +574,14 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 CGPoint origin;
                 origin = CGPointMake(0.0,0.0);
                 
-                GADAdSize customAdSize;
-                if ( IS_IPHONE_4 ) {
-                    customAdSize = GADAdSizeFromCGSize(CGSizeMake(320, 50));
-                } else if ( IS_IPHONE_5 ) {
+                GADAdSize customAdSize = GADAdSizeFromCGSize(CGSizeMake(320, 50));
+                if ( IS_IPHONE_4 || IS_IPHONE_5 ) {
                     customAdSize = GADAdSizeFromCGSize(CGSizeMake(320, 50));
                 }else if ( IS_IPHONE_6 ){
                     customAdSize = GADAdSizeFromCGSize(CGSizeMake(420, 50));
                 }else if ( IS_IPHONE_6_PLUS ){
                     customAdSize = GADAdSizeFromCGSize(CGSizeMake(520, 50));
-                } else{
-                    customAdSize = GADAdSizeFromCGSize(CGSizeMake(320, 50));
-                }
+                } 
                 
                 if( haveValidSubscription == NO ) {
                     // Use predefined GADAdSize constants to define the GADBannerView.
@@ -3583,6 +3556,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     //Add ScrollViews
     [self.contextView addSubview:obj];
+    
+    if(haveValidSubscription == NO){
+        if ( sharePanel.hidden ){
+            bannerAdsView.alpha = bannerAdsView.alpha ? 1.0 : 0.0;
+            [self.contextView addSubview:self.bannerAdsView];
+        }
+    }
 }
 
 /*

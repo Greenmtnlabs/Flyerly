@@ -106,7 +106,7 @@
 
 @property(nonatomic, strong) GADInterstitial *interstitialAdd;
 @property(nonatomic, strong) GADBannerView *bannerAdd;
-@property (nonatomic, strong) UIView *bannerAddView;
+
 
 //-----
 @property (nonatomic, strong) ResourcesView *backgroundsView;
@@ -137,6 +137,7 @@
 @property (nonatomic, strong) IBOutlet FlyerImageView *flyimgView;
 @property (nonatomic, strong) UIView *sharePanel;
 
+@property (weak, nonatomic) IBOutlet UIView *bannerAdsView;
 
 // These are ContextViews Library
 @property(nonatomic, strong) IBOutlet UIView *contextView;
