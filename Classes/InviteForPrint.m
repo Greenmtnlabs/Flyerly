@@ -541,6 +541,7 @@
 - (void)sharerFinishedSending:(SHKSharer *)sharer
 {
 
+    NSString *msg;
     PFUser *user = [PFUser currentUser];
     
     // Here we Check Sharer for
@@ -558,7 +559,13 @@
     // HERE WE UPDATE PARSE ACCOUNT FOR REMEMBER INVITED FRIENDS LIST
     [user saveInBackground];
     
-    [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
+    #if defined(FLYERLY)
+        msg = @"You have successfully invited your friends to join Flyerly.";
+    #else
+        msg = @"You have successfully invited your friends to join Flyerly Biz.";
+    #endif
+    
+    [self showAlert:@"Invitation Sent!" message:msg];
     [selectedIdentifiers   removeAllObjects];
     [self.uiTableView reloadData ];
     

@@ -600,9 +600,15 @@
         }else{*/
             
             // Current Item For Sharing
-            //SHKItem *item = [SHKItem text:[NSString stringWithFormat:@"%@ @flyerlyapp",@" "]];
-            SHKItem *item = [SHKItem text:[NSString stringWithFormat:@"@flyerlyapp "]];
-            
+        NSString *str;
+        
+        #if defined(FLYERLY)
+            str = @"@flyerlyapp";
+        #else
+            str = @"@flyerlybiz";
+        #endif
+        SHKItem *item = [SHKItem text:str];
+        
             //Calling ShareKit for Sharing
             iosSharer = [[ SHKSharer alloc] init];
             iosSharer = [SHKTwitter shareItem:item];
@@ -622,8 +628,16 @@
     
     if([MFMailComposeViewController canSendMail]){
         
+        NSString *subject;
+        
+        #if defined(FLYERLY)
+            subject = @"Flyerly Email Feedback...";
+        #else
+            subject = @"Flyerly Biz Email Feedback...";
+        #endif
+        
         picker.mailComposeDelegate = self;
-        [picker setSubject:@"Flyerly Email Feedback..."];
+        [picker setSubject: subject];
         
         // Set up recipients
         NSMutableArray *toRecipients = [[NSMutableArray alloc]init];
@@ -674,8 +688,16 @@
             [[UIApplication sharedApplication] openURL:url];
         }
         else {
+            NSString *url_str;
+            
+            #if defined(FLYERLY)
+                url_str = @"https://www.facebook.com/flyerlyapp";
+            #else
+                url_str = @"https://www.facebook.com/flyerlyapp";
+            #endif
+            
             //Open the url as usual
-            url = [NSURL URLWithString:@"https://www.facebook.com/flyerlyapp"];
+            url = [NSURL URLWithString:url_str];
             [[UIApplication sharedApplication] openURL:url];
         }
     }else {
@@ -789,9 +811,15 @@
 
 - (void)sharerFinishedSending:(SHKSharer *)sharer
 {
+    NSString *strAlert;
     
+    #if defined(FLYERLY)
+        strAlert =@"Thank you. Your feedback has been sent to @flyerlyapp on Twitter.";
+    #else
+        strAlert = @"Thank you. Your feedback has been sent to @flyerlybiz on Twitter.";
+    #endif
     // Here we show Messege after Sending
-    [self showAlert:@"Thank you. Your feedback has been sent to @flyerlyapp on Twitter." message:@""];
+    [self showAlert:strAlert message:@""];
     
     if (!sharer.quiet)
 		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!") forSharer:sharer];

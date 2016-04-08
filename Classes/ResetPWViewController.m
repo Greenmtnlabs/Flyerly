@@ -11,7 +11,8 @@
 
 @implementation ResetPWViewController
 
-@synthesize username;
+@synthesize username, lblRecoverAccount;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -43,6 +44,12 @@
      backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
+    
+    #if defined(FLYERLY)
+        lblRecoverAccount.text = @"Recover Your Flyerly Account";
+    #else
+        lblRecoverAccount.text = @"Recover Your Flyerly Biz Account";
+    #endif
 
 }
 

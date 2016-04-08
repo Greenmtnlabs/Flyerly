@@ -14,7 +14,8 @@
 
 @implementation InputViewController
 
-@synthesize txtfield;
+@synthesize txtfield, lblTweetMsg;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -58,10 +59,16 @@
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
-    label.text = @"Flyerly";
+    
+    #if defined(FLYERLY)
+        label.text = @"Flyerly";
+        lblTweetMsg.text = @"Tweet comments to @flyerlyapp";
+    #else
+        label.text = @"Flyerly Biz";
+        lblTweetMsg.text = @"Tweet comments to @flyerlybiz";
+    #endif
     
     self.navigationItem.titleView = label;
-
 }
 
 -(IBAction)cancel{
@@ -83,9 +90,15 @@
         if ([txtfield.text isEqualToString:@""]) {
             [self showAlert:@"Please Enter Comments" message:@""];
         }else{
-            
+        
+            NSString *str;
+            #if defined(FLYERLY)
+                str = @"@flyerlyapp";
+            #else
+                str = @"@flyerlybiz";
+            #endif
             // Current Item For Sharing
-            SHKItem *item = [SHKItem text:[NSString stringWithFormat:@"%@ @flyerlyapp",txtfield.text]];
+            SHKItem *item = [SHKItem text:[NSString stringWithFormat:@"%@ %@",txtfield.text, str]];
             
             //Calling ShareKit for Sharing
             iosSharer = [[ SHKSharer alloc] init];
@@ -125,8 +138,15 @@
 - (void)sharerFinishedSending:(SHKSharer *)sharer
 {
     
+    NSString *msg;
+    #if defined(FLYERLY)
+        msg = @"Thank you. Your feedback has been sent to @flyerlyapp on Twitter.";
+    #else
+        msg = @"Thank you. Your feedback has been sent to @flyerlybiz on Twitter.";
+    #endif
+    
     // Here we show Messege after Sending
-    [self showAlert:@"Thank you. Your feedback has been sent to @flyerlyapp on Twitter." message:@""];
+    [self showAlert:msg message:@""];
 
     if (!sharer.quiet)
 		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!") forSharer:sharer];

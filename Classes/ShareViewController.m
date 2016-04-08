@@ -17,6 +17,8 @@
 @implementation ShareViewController{
     NSString *fbShareType; // 4 possible values to assign: fb-photo-wall | fb-photo-messenger | fb-video-wall | fb-video-messenger
     FlyerlyConfigurator *flyerConfigurator;
+    NSString *hashTag;
+    NSString *strPlaceHolder;
 }
 @synthesize youtubeService;
 @synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,saveButton,printFlyerButton,facebookButton,twitterButton,instagramButton,messengerButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,tempTxtArea,saveToGallaryReqBeforeSharing, fmController;
@@ -31,6 +33,14 @@ UIAlertView *saveCurrentFlyerAlert;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    #if defined(FLYERLY)
+        hashTag = @"#flyerly";
+        strPlaceHolder = @"Flyerly Title (e.g. \"Parker's Party\")";
+    #else
+        hashTag = @"#flyerlybiz";
+        strPlaceHolder =  @"Flyerly Biz Title (e.g. \"Parker's Party\")";
+    #endif
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     flyerConfigurator = appDelegate.flyerConfigurator;
@@ -52,7 +62,8 @@ UIAlertView *saveCurrentFlyerAlert;
     [titleView setReturnKeyType:UIReturnKeyDone];
     [titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
     [titleView addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
-    titleView.placeholder = @"Flyerly Title (e.g. \"Parker's Party\")";
+    
+    titleView.placeholder =strPlaceHolder;
     
     //Default iPhon4
     CGRect sizeForDesc = CGRectMake((titleView.frame.origin.x-6), (titleView.frame.origin.y+titleView.frame.size.height+4), (titleView.frame.size.width+6), 67);
@@ -104,6 +115,9 @@ UIAlertView *saveCurrentFlyerAlert;
     
     [titleView addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self initYoutubeService];
+    
+    titleView.placeholder = strPlaceHolder;
+   
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -495,7 +509,8 @@ UIAlertView *saveCurrentFlyerAlert;
     // Check to see if it's blank
     if([[titleView.text stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]] isEqualToString:@""]) {
         // There's no text in the box.
-        titleView.placeholder = @"Flyerly Title (e.g. \"Parker's Party\")";
+   
+    titleView.placeholder = strPlaceHolder;
     }
 }
 
@@ -538,13 +553,19 @@ UIAlertView *saveCurrentFlyerAlert;
     NSString *title = titleView.text;
     NSString *description = selectedFlyerDescription;
     
+    
     if ([title isEqualToString:@""]) {
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"'Direct Lite Uploaded File ('EEEE MMMM d, YYYY h:mm a, zzz')"];
         title = [dateFormat stringFromDate:[NSDate date]];
     }
     if ([description isEqualToString:@""]) {
-        description = @"Uploaded from Flyerly";
+        
+        #if defined(FLYERLY)
+            description = @"Uploaded from Flyerly";
+        #else
+            description = @"Uploaded from Flyerly Biz";
+        #endif
     }
     
     [self.uploadVideo uploadYouTubeVideoWithService:self.youtubeService
@@ -552,7 +573,7 @@ UIAlertView *saveCurrentFlyerAlert;
                                               title:title
                                         description:description
                                       privacyStatus: ( ([[flyer getShareType]  isEqual: @"Private"]) ? @"private" : @"public")
-                                        tags:[NSArray arrayWithObjects:@"#flyerly", nil]];
+                                        tags:[NSArray arrayWithObjects:hashTag, nil]];
 }
 
 // Helper to check if user is authorized
@@ -623,7 +644,7 @@ UIAlertView *saveCurrentFlyerAlert;
     if ([FlyerlySingleton connected]) {
         SHKItem *item = [SHKItem filePath:[self.flyer getSharingVideoPath] title:titleView.text];
         
-        item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
+        item.tags =[NSArray arrayWithObjects: hashTag, nil];
         item.text = selectedFlyerDescription;
         
         iosSharer = [YouTubeSubClass shareItem:item];
@@ -650,12 +671,12 @@ UIAlertView *saveCurrentFlyerAlert;
     if ([self.flyer isVideoFlyer]) {
         
         // Current Video Link For Sharing
-        item = [SHKItem text: [NSString stringWithFormat:@"%@ %@ #flyerly",[self.flyer getYoutubeLink], selectedFlyerDescription ]];
+        item = [SHKItem text: [NSString stringWithFormat:@"%@ %@ %@",[self.flyer getYoutubeLink], selectedFlyerDescription, hashTag ]];
         
     }else {
         
         // Current Image For Sharing
-        item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly", selectedFlyerDescription ]];
+        item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@", selectedFlyerDescription, hashTag ]];
     }
 
     // get the twitter accounts from the phone
@@ -768,6 +789,13 @@ UIAlertView *saveCurrentFlyerAlert;
  */
 -(IBAction)onClickEmailButton{
     
+    NSString *msg;
+    #if defined(FLYERLY)
+        msg = @"Flyerly for you!";
+    #else
+        msg = @"Flyerly Biz for you!";
+    #endif
+    
     // Current Item For Sharing
     SHKItem *item;
     if ([self.flyer isVideoFlyer]) {
@@ -775,10 +803,10 @@ UIAlertView *saveCurrentFlyerAlert;
         // Current Video Link For Sharing
         //        item = [SHKItem text: [NSString stringWithFormat:@"%@ Created & sent from Flyer.ly",[self.flyer getYoutubeLink]]];
         
-        item = [SHKItem URL:[NSURL URLWithString:[self.flyer getYoutubeLink]] title:@"Flyerly for you!" contentType:SHKURLContentTypeVideo];
+        item = [SHKItem URL:[NSURL URLWithString:[self.flyer getYoutubeLink]] title:msg contentType:SHKURLContentTypeVideo];
     }else {
         
-        item = [SHKItem image:selectedFlyerImage title:@"Flyerly for you!"];
+        item = [SHKItem image:selectedFlyerImage title:msg];
         item.text = @"Created & sent from Flyer.ly";
     }
     
@@ -1295,6 +1323,13 @@ UIAlertView *saveCurrentFlyerAlert;
     MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
   
     if([MFMailComposeViewController canSendMail]){
+        
+        NSString *msg;
+        #if defined(FLYERLY)
+            msg = @"Flyerly Email Feedback";
+        #else
+            msg = @"Flyerly Biz Email Feedback";
+        #endif
         
         picker.mailComposeDelegate = self;
         [picker setSubject:@"Flyerly Email Feedback"];
