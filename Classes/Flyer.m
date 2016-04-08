@@ -1320,6 +1320,14 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  */
 -(void)createFlyerlyAlbum {
     
+    NSString *albumName;
+    
+    #if defined(FLYERLY)
+        albumName = FLYER_ALBUM_NAME;
+    #else
+        albumName = FLYERLY_BIZ_ALBUM_NAME;
+    #endif
+    
     if ( _library == nil ) {
         _library = [[ALAssetsLibrary alloc] init];
     }
@@ -1327,7 +1335,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     __weak ALAssetsLibrary* library = _library;
     
     //HERE WE SEN REQUEST FOR CREATE ALBUM
-    [_library addAssetsGroupAlbumWithName:FLYER_ALBUM_NAME
+    [_library addAssetsGroupAlbumWithName:albumName
                              resultBlock:^(ALAssetsGroup *group) {
                                  
                                  //CHECKING ALBUM FOUND IN LIBRARY
@@ -1338,7 +1346,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
                                          
                                         NSString *existAlbumName = [group valueForProperty: ALAssetsGroupPropertyName];
                                          
-                                         if ([existAlbumName isEqualToString:FLYER_ALBUM_NAME]) {
+                                         if ([existAlbumName isEqualToString:albumName]) {
                                              *stop = YES;
                                              
                                              // GETTING CREATED URL OF ALBUM
@@ -1377,6 +1385,14 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  */
 -(void)createFlyerlyAlbum :(NSData *)imgdata {
     
+    NSString *albumName;
+    
+    #if defined(FLYERLY)
+        albumName = FLYER_ALBUM_NAME;
+    #else
+        albumName = FLYERLY_BIZ_ALBUM_NAME;
+    #endif
+    
     if ( _library == nil ) {
         _library = [[ALAssetsLibrary alloc] init];
     }
@@ -1384,7 +1400,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     
     //HERE WE SEN REQUEST FOR CREATE ALBUM
-    [_library addAssetsGroupAlbumWithName:FLYER_ALBUM_NAME
+    [_library addAssetsGroupAlbumWithName:albumName
                              resultBlock:^(ALAssetsGroup *group) {
                                  
                                  // GETTING CREATED URL OF ALBUM
