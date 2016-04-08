@@ -25,6 +25,7 @@
 
 -(IBAction)SearchBotton:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UILabel *lblRecoverAccount;
 -(void)removeLoadingView;
 -(void)showAlert:(NSString *)title message:(NSString *)message;
 @end

@@ -12,6 +12,7 @@
 @interface WebViewController (){
     BOOL haveValidSubscription;
     UserPurchases *userPurchases;
+    NSString *strURL_twitter;
 }
 
 @end
@@ -32,8 +33,14 @@
     // Setting selected segment
     self.segmentedButton.selectedSegmentIndex = 0;
     
+    #if defined(FLYERLY)
+        strURL_twitter = @"https://twitter.com/hashtag/flyerly";
+    #else
+        strURL_twitter = @"https://twitter.com/hashtag/flyerly"
+    #endif
+    
     // Setting default URL
-    [self openWebView:@"https://twitter.com/hashtag/flyerly"];
+    [self openWebView:strURL_twitter];
 }
 
 #pragma mark Navigation/UI Related Methods
@@ -142,10 +149,15 @@
     NSString *urlAddress;
     
     if (segmentedButton.selectedSegmentIndex == 0) {
-        urlAddress  = @"https://twitter.com/hashtag/flyerly";
+        urlAddress  = strURL_twitter;
     }
     else if(segmentedButton.selectedSegmentIndex == 1){
-        urlAddress  = @"https://instagram.com/explore/tags/flyerly/";
+        
+        #if defined(FLYERLY)
+            urlAddress  = @"https://instagram.com/explore/tags/flyerly/";
+        #else
+            urlAddress  = @"https://instagram.com/explore/tags/flyerly/";
+        #endif
     }
     [self openWebView:urlAddress];
 }

@@ -106,8 +106,17 @@
         [[UIApplication sharedApplication] openURL:url];
     }
     else {
+
+        NSString *url_string;
+        
+        #if defined(FLYERLY)
+            url_string = @"https://www.facebook.com/flyerlyapp";
+        #else
+            url_string = @"https://www.facebook.com/flyerlyapp";
+        #endif
+
         //Open the url as usual
-        url = [NSURL URLWithString:@"https://www.facebook.com/flyerlyapp"];
+        url = [NSURL URLWithString:url_string ];
         [[UIApplication sharedApplication] openURL:url];
     }
 }

@@ -95,6 +95,7 @@ const int CONTACTS_TAB = 0;
                           {
                               if (!error)
                               {
+                                  NSString *msg;
                                   NSMutableDictionary *counterDictionary = [object valueForKey:@"estimatedData"];
                                   int refrelCounter = [[counterDictionary objectForKey:@"inviteCounter"] intValue];
                                   
@@ -104,13 +105,27 @@ const int CONTACTS_TAB = 0;
                                       cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"You have sucessfully unlocked Design Bundle feature by referring friends. Enjoy!"];
                                       
                                   }else if ( refrelCounter <= 0 ){
+                                      
+                                    #if defined(FLYERLY)
+                                      msg = @"Invite 20 people to Flyerly and unlock Design Bundle feature for FREE!";
+                                    #else
+                                      msg = @"Invite 20 people to Flyerly Biz and unlock Design Bundle feature for FREE!";
+                                    #endif
+                                      
+                                      cellDescriptionForRefrelFeature = msg;
+                                      
                                       cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to flyerly and unlock Design Bundle feature for FREE!"];
                                   }
                                   else if ( refrelCounter > 0 && refrelCounter < 20 )
                                   {
                                       int moreToInvite = 20 - refrelCounter;
+                                    #if defined(FLYERLY)
+                                      msg = @"Invite %d more people to Flyerly and unlock Design Bundle feature for FREE!";
+                                    #else
+                                      msg = @"Invite %d more people to Flyerly Biz and unlock Design Bundle feature for FREE!";
+                                    #endif
                                       //Setting the feature name,feature description values for cell view using plist
-                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite %d more people to flyerly and unlock Design Bundle feature for FREE!",moreToInvite];
+                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:msg, moreToInvite];
                                       
                                   }
                                   
@@ -122,8 +137,15 @@ const int CONTACTS_TAB = 0;
              }
          }];
     }else {
+        NSString *msg;
+        #if defined(FLYERLY)
+            msg = @"Invite 20 more people to Flyerly and unlock Design Bundle feature for FREE!";
+        #else
+            msg = @"Invite 20 more people to Flyerly Biz and unlock Design Bundle feature for FREE!";
+        #endif
         
-        cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to flyerly and unlock Design Bundle feature for FREE!"];
+        cellDescriptionForRefrelFeature = msg;
+
     }
     
     

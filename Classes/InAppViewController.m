@@ -84,6 +84,7 @@
                       {
                           if (!error)
                           {
+                              NSString *msg;
                               NSMutableDictionary *counterDictionary = [object valueForKey:@"estimatedData"];
                               int refrelCounter = [[counterDictionary objectForKey:@"inviteCounter"] intValue];
                               
@@ -92,16 +93,27 @@
                                   //Setting the feature name,feature description values for cell view using plist
                                   cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"You have sucessfully unlocked Design Bundle feature by refreing friends.Enjoy!"];
                                   
-                                  
                               }else if ( refrelCounter <= 0 ){
-                                  cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to flyerly and unlock Design Bundle feature for FREE!"];
+                                  
+                                  #if defined(FLYERLY)
+                                    msg = @"Invite 20 people to Flyerly and unlock Design Bundle feature for FREE!";
+                                  #else
+                                    msg = @"Invite 20 people to Flyerly Biz and unlock Design Bundle feature for FREE!";
+                                  #endif
+                                  
+                                  cellDescriptionForRefrelFeature = msg;
                               }
                               else if ( refrelCounter > 0 && refrelCounter < 20 )
                               {
                                   int moreToInvite = 20 - refrelCounter;
-                                  //Setting the feature name,feature description values for cell view using plist
-                                  cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite %d more people to flyerly and unlock Design Bundle feature for FREE!",moreToInvite];
                                   
+                                  #if defined(FLYERLY)
+                                    msg = @"Invite %d more people to Flyerly and unlock Design Bundle feature for FREE!";
+                                  #else
+                                    msg = @"Invite %d more people to Flyerly Biz and unlock Design Bundle feature for FREE!";
+                                  #endif
+                                  //Setting the feature name,feature description values for cell view using plist
+                                  cellDescriptionForRefrelFeature = [NSString stringWithFormat:msg, moreToInvite];
                               }
                               
                               [freeFeaturesTview reloadData];
@@ -112,8 +124,13 @@
          }
      }];
     }else {
-        
-        cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to flyerly and unlock Design Bundle feature for FREE!"];
+        NSString *msg;
+        #if defined(FLYERLY)
+            msg = @"Invite 20 more people to Flyerly and unlock Design Bundle feature for FREE!";
+        #else
+            msg = @"Invite 20 more people to Flyerly Biz and unlock Design Bundle feature for FREE!";
+        #endif
+        cellDescriptionForRefrelFeature = msg;
     }
 }
 
@@ -368,7 +385,15 @@
         NSDictionary *product = [productArray objectAtIndex:indexPath.row];
         
         if([[product objectForKey:@"productidentifier"] isEqualToString:@"com.flyerly.AllDesignBundle"]) {
-            [completeDesignBundleButton setTitle:@"Help us grow Flyerly!"];
+            
+            NSString *title;
+            #if defined(FLYERLY)
+                title = @"Help us grow Flyerly!";
+            #else
+                title = @"Help us grow Flyerly Biz!";
+            #endif
+            
+            [completeDesignBundleButton setTitle: title];
             [completeDesignBundleButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
         } else if([[product objectForKey:@"productidentifier"] isEqualToString:@"com.flyerly.YearlyPlatinum1"]) {
             inAppCell.backgroundColor = [UIColor grayColor];//heighlight the Yearly subscription cell

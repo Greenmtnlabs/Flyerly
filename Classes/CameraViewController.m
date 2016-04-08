@@ -225,7 +225,13 @@
     //HERE WE CHECK USER DID ALLOWED TO ACESS PHOTO library
     if ([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusRestricted || [ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusDenied) {
         
-        UIAlertView *photoAlert = [[UIAlertView alloc ] initWithTitle:@"" message:@"Flyerly does not access to your photo album.To enable access go to the Settings app >> Privacy >> Photos and enable Flyerly" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        NSString *msg = @"Flyerly does not access to your photo album. To enable access go to the Settings app >> Privacy >> Photos and enable Flyerly";
+        
+        #if defined(FLYERLY_BIZ)
+            msg = @"Flyerly Biz does not access to your photo album. To enable access go to the Settings app >> Privacy >> Photos and enable Flyerly Biz";
+        #endif
+        
+        UIAlertView *photoAlert = [[UIAlertView alloc ] initWithTitle:@"" message: msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [photoAlert show];
         return;
         

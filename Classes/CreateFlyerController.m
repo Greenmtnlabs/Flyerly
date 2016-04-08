@@ -4335,7 +4335,11 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     NSString *title = [flyer getFlyerTitle];
     
     if ( [title isEqualToString:@""] ) {
-        label.text = @"Flyerly";
+        #if defined(FLYERLY)
+            label.text = @"Flyerly";
+        #else
+            label.text = @"Flyerly Biz";
+        #endif
     } else {
         label.text = title;
     }
@@ -5162,7 +5166,15 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         //HERE WE CHECK USER DID ALLOWED TO ACCESS PHOTO library
         if ([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusRestricted || [ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusDenied) {
             
-            UIAlertView *photoAlert = [[UIAlertView alloc ] initWithTitle:@"" message:@"Flyerly does not access to your photo album.To enable access goto the Setting app >> Privacy >> Photos and enable Flyerly" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            NSString *msg;
+            
+            #if defined(FLYERLY)
+                msg = @"Flyerly does not access to your photo album. To enable access goto the Setting app >> Privacy >> Photos and enable Flyerly";
+            #else
+                msg = @"Flyerly Biz does not access to your photo album. To enable access goto the Setting app >> Privacy >> Photos and enable Flyerly Biz";
+            #endif
+            
+            UIAlertView *photoAlert = [[UIAlertView alloc ] initWithTitle:@"" message: msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [photoAlert show];
             return;
         }
@@ -5249,7 +5261,15 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         //HERE WE CHECK USER DID ALLOWED TO ACESS PHOTO library
         if ([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusRestricted || [ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusDenied) {
             
-            UIAlertView *photoAlert = [[UIAlertView alloc ] initWithTitle:@"" message:@"Flyerly does not access to your photo album.To enable access goto the Setting app >> Privacy >> Photos and enable Flyerly" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            NSString *msg;
+            
+            #if defined(FLYERLY)
+                msg = @"Flyerly does not access to your photo album. To enable access goto the Setting app >> Privacy >> Photos and enable Flyerly";
+            #else
+                msg = @"Flyerly Biz does not access to your photo album. To enable access goto the Setting app >> Privacy >> Photos and enable Flyerly Biz";
+            #endif
+            
+            UIAlertView *photoAlert = [[UIAlertView alloc ] initWithTitle:@"" message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [photoAlert show];
             return;
             
