@@ -292,8 +292,17 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
 }
 
 -(void)showAllowSaveInGallerySettingAlert{
+    
+    NSString *msg;
+    
+    #if defined(FLYERLY)
+        msg = @"Please allow Flyerly to add photo in gallery( Settings -> Privacy -> Photos)";
+    #else
+        msg = @"Please allow Flyerly Biz to add photo in gallery( Settings -> Privacy -> Photos)";
+    #endif
+
     UIAlertView *permAlert = [[UIAlertView alloc] initWithTitle:@"Settings"
-                                                        message:@"Please allow flyerly to add photo in gallery( Settings -> Privacy -> Photos)"
+                                                        message:msg
                                                        delegate:nil
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil, nil];

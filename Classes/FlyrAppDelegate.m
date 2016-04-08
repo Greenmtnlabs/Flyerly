@@ -9,7 +9,6 @@
 #import "FlyrAppDelegate.h"
 #import "PaypalMobile.h"
 #import <ParseFacebookUtils/PFFacebookUtils.h>
-#import "Common.h"
 
 NSString *kCheckTokenStep1 = @"kCheckTokenStep";
 NSString *FlickrSharingSuccessNotification = @"FlickrSharingSuccessNotification";
@@ -175,10 +174,11 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     #if defined(FLYERLY)
-        NSLog(@"FLYERLY");
+        NSLog(@"Target Name = FLYERLY");
     #else 
-        NSLog(@"FLYERLY_BIZ");
+        NSLog(@"Target Name = FLYERLY_BIZ");
     #endif
+    
     _persistence = [[RMStoreKeychainPersistence alloc] init];
     [RMStore defaultStore].transactionPersistor = _persistence;
     
