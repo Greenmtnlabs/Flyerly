@@ -287,3 +287,7 @@ nil]
 #define WARNING @"WARNING"
 #define PLEASE_CREATE_M_T_3_VIDEO @"Please create more then 3 seconds video"
 #define Ok @"Ok"
+
+#define TARGET_NAME NSBundle.mainBundle().infoDictionary?["TargetName"] as String
+#define TARGET_FLYR @"Flyerly"
+#define TARGET_FLYERLYBIZ @"FlyerlyBiz"
