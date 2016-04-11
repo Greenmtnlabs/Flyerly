@@ -332,7 +332,7 @@
             #else
                 imgname = @"icon_flyerly"; // flyerly
             #endif
-        }
+        
     }
     
     // Set cell Values
@@ -445,7 +445,12 @@
            [self openITunes:@"eyespot/id611525338?mt=8"]; //eyeSPOT
         }
         else if (indexPath.row == 13){
-            [self openITunes:@"socialflyr-free/id344139192?mt=8"]; //Flyerly Biz
+            
+            #if defined(FLYERLY)
+                [self openITunes:@"socialflyr-free/id344139192?mt=8"]; //Flyerly Biz
+            #else
+                [self openITunes:@"socialflyr-free/flyerly-add-creativity-to/id344130515?mt=8"]; //Flyerly
+            #endif
         }
         else if(indexPath.row == 14){//clear purchasis
             _persistence = [[RMStoreKeychainPersistence alloc] init];
@@ -511,7 +516,11 @@
         } else if (indexPath.row == 11){
             [self openITunes:@"eyespot/id611525338?mt=8"]; //eyeSPOT
         } else if (indexPath.row == 12){
-            [self openITunes:@"socialflyr-free/id344139192?mt=8"]; //Flyerly Biz
+            #if defined(FLYERLY)
+                [self openITunes:@"socialflyr-free/id344139192?mt=8"]; //Flyerly Biz
+            #else
+                [self openITunes:@"socialflyr-free/flyerly-add-creativity-to/id344130515?mt=8"]; //Flyerly
+            #endif
         }
     }
 }
