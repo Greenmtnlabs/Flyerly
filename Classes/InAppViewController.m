@@ -15,6 +15,8 @@
     NSArray *freeFeaturesArray;
     NSString *cellDescriptionForRefrelFeature;
     NSString *productIdentifier;
+    NSArray *selectedInAppIDs;
+    NSArray *productIdentifiers;
 }
 
 @end
@@ -46,6 +48,15 @@
     loginButton.layer.borderWidth=1.0f;
     [loginButton.layer setCornerRadius:3.0];
     loginButton.layer.borderColor=[[UIColor whiteColor] CGColor];
+    
+    
+    #if defined(FLYERLY)
+        selectedInAppIDs = @[@"com.flyerly.MonthlyGold", @"com.flyerly.YearlyPlatinum1", @"com.flyerly.AdRemovalMonthly"];
+    #else
+        selectedInAppIDs = @[@"com.flyerlybiz.MonthlyGold", @"com.flyerlybiz.YearlyPlatinum", @"com.flyerlybiz.AdRemovalMonthly"];
+    #endif
+    
+    
 
 }
 
@@ -178,7 +189,7 @@
     int rowIndex = (int) indexPath.row;
     
     //if not cancel and Restore button presses
-    if(rowIndex == 0 || rowIndex == 1 || rowIndex == 2 || rowIndex == 3 || rowIndex == 4 || rowIndex == 5) {
+    if(rowIndex >= 0 || rowIndex <= 5) {
         
         //Checking if the user is valid or anonymus
         if ([[PFUser currentUser] sessionToken].length != 0) {
@@ -187,18 +198,18 @@
             NSDictionary *product = [productArray objectAtIndex:rowIndex];
             NSString* prodIdentifier = product[@"productidentifier"];
             
-            if ( ! ([prodIdentifier isEqualToString:@"com.flyerly.MonthlyGold" ]
-                    || [prodIdentifier isEqualToString:@"com.flyerly.YearlyPlatinum1"]
-                    || [prodIdentifier isEqualToString:@"com.flyerly.AdRemovalMonthly"]
+            if ( ! ([prodIdentifier isEqualToString: [selectedInAppIDs objectAtIndex: 0]]
+                    || [prodIdentifier isEqualToString: [selectedInAppIDs objectAtIndex: 1]]
+                    || [prodIdentifier isEqualToString: [selectedInAppIDs objectAtIndex: 2]]
                     ) &&
                     [userPurchases checkKeyExistsInPurchases:productIdentifier] )  {
                 
                 // show alert that item has already been purchased
                 [self showAlreadyPurchasedAlert];
                 
-            } else if( ([prodIdentifier isEqualToString:@"com.flyerly.MonthlyGold" ]
-                        || [prodIdentifier isEqualToString:@"com.flyerly.YearlyPlatinum1"]
-                        || [prodIdentifier isEqualToString:@"com.flyerly.AdRemovalMonthly"]
+            } else if( ([prodIdentifier isEqualToString: [selectedInAppIDs objectAtIndex: 0]]
+                        || [prodIdentifier isEqualToString: [selectedInAppIDs objectAtIndex: 1]]
+                        || [prodIdentifier isEqualToString: [selectedInAppIDs objectAtIndex: 2]]
                         ) &&
                        [userPurchases isSubscriptionValid]) {
                 
@@ -257,18 +268,18 @@
             NSDictionary *product = [productArray objectAtIndex:4];
             NSString* prodIdentifier = product[@"productidentifier"];
             
-            if ( ! ([prodIdentifier isEqualToString:@"com.flyerly.MonthlyGold" ]
-                    || [prodIdentifier isEqualToString:@"com.flyerly.YearlyPlatinum1"]
-                    || [prodIdentifier isEqualToString:@"com.flyerly.AdRemovalMonthly"]
+            if ( ! ([prodIdentifier isEqualToString: [selectedInAppIDs objectAtIndex: 0] ]
+                    || [prodIdentifier isEqualToString: [selectedInAppIDs objectAtIndex: 1]]
+                    || [prodIdentifier isEqualToString: [selectedInAppIDs objectAtIndex: 2]]
                     ) &&
                 [userPurchases checkKeyExistsInPurchases:productIdentifier] )  {
                 
                 // show alert that item has already been purchased
                 [self showAlreadyPurchasedAlert];
                 
-            } else if( ([prodIdentifier isEqualToString:@"com.flyerly.MonthlyGold" ]
-                        || [prodIdentifier isEqualToString:@"com.flyerly.YearlyPlatinum1"]
-                        || [prodIdentifier isEqualToString:@"com.flyerly.AdRemovalMonthly"]
+            } else if( ([prodIdentifier isEqualToString: [selectedInAppIDs objectAtIndex: 0]]
+                        || [prodIdentifier isEqualToString: [selectedInAppIDs objectAtIndex: 1]]
+                        || [prodIdentifier isEqualToString: [selectedInAppIDs objectAtIndex: 2]]
                         ) &&
                       [userPurchases isSubscriptionValid]) {
                 
@@ -446,11 +457,17 @@
         
         //Check For Crash Maintain
         cancelRequest = NO;
-        NSArray *productIdentifiersAry = @[@"com.flyerly.MonthlyGold", @"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.YearlyPlatinum1", @"com.flyerly.AdRemovalMonthly"];
-        //These are over Products on App Store
-        NSSet *productIdentifiers = [NSSet setWithArray:productIdentifiersAry];
         
-        [[RMStore defaultStore] requestProducts:productIdentifiers success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
+        #if defined(FLYERLY)
+            productIdentifiers = @[@"com.flyerly.MonthlyGold", @"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.YearlyPlatinum1", @"com.flyerly.AdRemovalMonthly"];
+        #else
+            productIdentifiers = @[@"com.flyerlybiz.AllDesignBundle", @"com.flyerlybiz.MonthlyGold",@"com.flyerlybiz.YearlyPlatinum",@"com.flyerlybiz.VideoFlyers", @"com.flyerlybiz.AdRemovalMonthly"];
+        #endif
+        
+        //These are over Products on App Store
+        NSSet *productIdentifiersSet = [NSSet setWithArray:productIdentifiers];
+        
+        [[RMStore defaultStore] requestProducts:productIdentifiersSet success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
             
             if (cancelRequest) return ;
             
@@ -467,7 +484,7 @@
             
             productArray = [[NSMutableArray alloc] init];
             
-            for(NSString *identifier in productIdentifiersAry){
+            for(NSString *identifier in productIdentifiers){
                     for(SKProduct *product in products)
                     {
                         if( [identifier isEqualToString:product.productIdentifier]){
@@ -509,7 +526,14 @@
         
         //HERE WE GET SHARED INTANCE OF _persistence WHICH WE LINKED IN FlyrAppDelegate
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        NSArray *productIdentifiers = @[@"com.flyerly.MonthlyGold", @"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.YearlyPlatinum1", @"com.flyerly.AdRemovalMonthly"];
+        
+        
+        #if defined(FLYERLY)
+            productIdentifiers = @[@"com.flyerly.MonthlyGold", @"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.YearlyPlatinum1", @"com.flyerly.AdRemovalMonthly"];
+        #else
+            productIdentifiers = @[@"com.flyerlybiz.AllDesignBundle", @"com.flyerlybiz.MonthlyGold",@"com.flyerlybiz.YearlyPlatinum",@"com.flyerlybiz.VideoFlyers", @"com.flyerlybiz.AdRemovalMonthly"];
+        #endif
+        
         
         if (productIdentifiers.count >= 1) {
             
