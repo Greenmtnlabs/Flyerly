@@ -169,6 +169,16 @@ nil]
 [UIFont fontWithName:@"HiraKakuProN-W6" size:16],\
 nil]
 
+
+
+
+#define FLYERLY_IN_APP_PRODUCT_IDENTIFIERS [NSArray arrayWithObjects: @"com.flyerly.MonthlyGold", @"com.flyerly.AllDesignBundle", @"com.flyerly.UnlockCreateVideoFlyerOption", @"com.flyerly.YearlyPlatinum1", @"com.flyerly.AdRemovalMonthly", nil];
+
+#define FLYERLY_BIZ_IN_APP_PRODUCT_IDENTIFIERS [NSArray arrayWithObjects: @"com.flyerlybiz.AllDesignBundle", @"com.flyerlybiz.MonthlyGold", @"com.flyerlybiz.YearlyPlatinum", @"com.flyerlybiz.VideoFlyers", @"com.flyerlybiz.AdRemovalMonthly", nil]
+
+#define FLYERLY_IN_APP_PRODUCT_SELECTED_IDENTIFIERS [NSArray arrayWithObjects: @"com.flyerly.MonthlyGold", @"com.flyerly.YearlyPlatinum1", @"com.flyerly.AdRemovalMonthly", @"com.flyerly.AllDesignBundle", nil]
+#define FLYERLYBIZ_IN_APP_PRODUCT_SELECTED_IDENTIFIERS [NSArray arrayWithObjects: @"com.flyerlybiz.MonthlyGold", @"com.flyerlybiz.YearlyPlatinum", @"com.flyerlybiz.AdRemovalMonthly", @"com.flyerlybiz.AllDesignBundle", nil]
+
 #define SIZE_ARRAY [NSArray arrayWithObjects: @"10", @"11" ,@"12",@"14",@"16",@"18",@"20",@"22",@"24",  @"26", @"28", @"30",@"36",@"42",@"48",@"52",@"60",@"72",@"74",@"80",@"90",nil]
 
 #define DRAWING_PATTERNS_ARRAY [NSArray arrayWithObjects: DRAWING_PLANE_LINE, DRAWING_DASHED_LINE ,DRAWING_DOTTED_LINE,nil]

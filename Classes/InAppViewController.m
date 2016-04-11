@@ -9,6 +9,7 @@
 
 #import "InAppViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "Common.h"
 
 @interface InAppViewController () {
     NSMutableArray *productArray;
@@ -51,13 +52,11 @@
     
     
     #if defined(FLYERLY)
-        selectedInAppIDs = @[@"com.flyerly.MonthlyGold", @"com.flyerly.YearlyPlatinum1", @"com.flyerly.AdRemovalMonthly", @"com.flyerly.AllDesignBundle"];
+        selectedInAppIDs = FLYERLY_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
     #else
-        selectedInAppIDs = @[@"com.flyerlybiz.MonthlyGold", @"com.flyerlybiz.YearlyPlatinum", @"com.flyerlybiz.AdRemovalMonthly", @"com.flyerlybiz.AllDesignBundle"];
+        selectedInAppIDs = FLYERLYBIZ_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
     #endif
-    
-    
-
+ 
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -95,7 +94,6 @@
                       {
                           if (!error)
                           {
-                              NSString *msg;
                               NSMutableDictionary *counterDictionary = [object valueForKey:@"estimatedData"];
                               int refrelCounter = [[counterDictionary objectForKey:@"inviteCounter"] intValue];
                               
@@ -107,24 +105,20 @@
                               }else if ( refrelCounter <= 0 ){
                                   
                                   #if defined(FLYERLY)
-                                    msg = @"Invite 20 people to Flyerly and unlock Design Bundle feature for FREE!";
+                                    cellDescriptionForRefrelFeature = @"Invite 20 people to Flyerly and unlock Design Bundle feature for FREE!";
                                   #else
-                                    msg = @"Invite 20 people to Flyerly Biz and unlock Design Bundle feature for FREE!";
+                                    cellDescriptionForRefrelFeature = @"Invite 20 people to Flyerly Biz and unlock Design Bundle feature for FREE!";
                                   #endif
-                                  
-                                  cellDescriptionForRefrelFeature = msg;
                               }
                               else if ( refrelCounter > 0 && refrelCounter < 20 )
                               {
                                   int moreToInvite = 20 - refrelCounter;
                                   
                                   #if defined(FLYERLY)
-                                    msg = @"Invite %d more people to Flyerly and unlock Design Bundle feature for FREE!";
+                                    cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite %d more people to Flyerly and unlock Design Bundle feature for FREE!", moreToInvite];
                                   #else
-                                    msg = @"Invite %d more people to Flyerly Biz and unlock Design Bundle feature for FREE!";
+                                    cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite %d more people to Flyerly Biz and unlock Design Bundle feature for FREE!", moreToInvite];
                                   #endif
-                                  //Setting the feature name,feature description values for cell view using plist
-                                  cellDescriptionForRefrelFeature = [NSString stringWithFormat:msg, moreToInvite];
                               }
                               
                               [freeFeaturesTview reloadData];
@@ -152,9 +146,9 @@
 -(void)reloadInAppProductIDsArray{
     
     #if defined(FLYERLY)
-        productIdentifiers = @[@"com.flyerly.MonthlyGold", @"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.YearlyPlatinum1", @"com.flyerly.AdRemovalMonthly"];
+        productIdentifiers = FLYERLY_IN_APP_PRODUCT_IDENTIFIERS;
     #else
-        productIdentifiers = @[@"com.flyerlybiz.AllDesignBundle", @"com.flyerlybiz.MonthlyGold",@"com.flyerlybiz.YearlyPlatinum",@"com.flyerlybiz.VideoFlyers", @"com.flyerlybiz.AdRemovalMonthly"];
+        productIdentifiers = FLYERLY_BIZ_IN_APP_PRODUCT_IDENTIFIERS;
     #endif
 }
 
