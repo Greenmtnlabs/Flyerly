@@ -19,7 +19,12 @@
  These values are used by any service that shows 'shared from XYZ'
  */
 - (NSString*)appName {
-	return @"Flyerly";
+	
+    #if defined(FLYERLY)
+        return @"Flyerly";
+    #else
+        return @"Flyerly Biz";
+    #endif
 }
 
 - (NSString*)appURL {
@@ -337,7 +342,12 @@
 }
 // Enter your app's twitter account if you'd like to ask the user to follow it when logging in. (Only for xAuth)
 - (NSString*)twitterUsername {
-	return @"flyerlyapp";
+    
+    #if defined(FLYERLY)
+        return @"flyerlyapp";
+    #else
+        return @"flyerlybiz";
+    #endif
 }
 
 // Evernote - http://www.evernote.com/about/developer/api/
@@ -387,7 +397,11 @@
 
 // Bit.ly for shortening URLs, used by some sharers (e.g. Buffer). http://bit.ly/account/register - after signup: http://bit.ly/a/your_api_key If you do not enter bit.ly credentials, URL will be shared unshortened.
 - (NSString*)bitLyLogin {
-	return @"flyerly";
+    #if defined(FLYERLY)
+        return @"flyerly";
+    #else
+        return @"flyerlybiz";
+    #endif
 }
 
 - (NSString*)bitLyKey {

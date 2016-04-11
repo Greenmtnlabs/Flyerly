@@ -38,7 +38,7 @@ UIAlertView *saveCurrentFlyerAlert;
         hashTag = @"#flyerly";
         strPlaceHolder = @"Flyerly Title (e.g. \"Parker's Party\")";
     #else
-        hashTag = @"#flyerlybiz";
+        hashTag = @"#FlyerlyBiz";
         strPlaceHolder =  @"Flyerly Biz Title (e.g. \"Parker's Party\")";
     #endif
     

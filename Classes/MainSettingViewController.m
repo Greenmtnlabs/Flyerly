@@ -693,7 +693,7 @@
             #if defined(FLYERLY)
                 url_str = @"https://www.facebook.com/flyerlyapp";
             #else
-                url_str = @"https://www.facebook.com/flyerlyapp";
+                url_str = @"https://www.facebook.com/flyerlybiz";
             #endif
             
             //Open the url as usual
