@@ -9,6 +9,7 @@
 #import "UserPurchases.h"
 #import "FlyerUser.h"
 #import "RMAppReceipt.h"
+#import "Common.h"
 
 @implementation UserPurchases
 
@@ -115,16 +116,24 @@ static UserPurchases *sharedSingleton = nil;
  **/
 -(BOOL)isSubscriptionValid{
     
+    NSArray *selectedInAppIDs;
+
+    #if defined(FLYERLY)
+        selectedInAppIDs = FLYERLY_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
+    #else
+        selectedInAppIDs = FLYERLYBIZ_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
+    #endif
+    
     RMAppReceipt* appReceipt = [RMAppReceipt bundleReceipt];
     
     // get monthly subscription validity
-    NSString *isMonthlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:@"com.flyerly.MonthlyGold" forDate:[NSDate date]]];
+    NSString *isMonthlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:[selectedInAppIDs objectAtIndex:0] forDate:[NSDate date]]]; // Monthly Subscription
     
     // get Yearly subscription validity
-    NSString *isYearlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:@"com.flyerly.YearlyPlatinum1" forDate:[NSDate date]]];
+    NSString *isYearlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:[selectedInAppIDs objectAtIndex:1] forDate:[NSDate date]]]; // Yearly Subscription
     
     // get Yearly subscription validity
-    NSString *isAdRemovalSubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:@"com.flyerly.AdRemovalMonthly" forDate:[NSDate date]]];
+    NSString *isAdRemovalSubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:[selectedInAppIDs objectAtIndex:2] forDate:[NSDate date]]]; // Ad Removal Subscription
     
     // check whether one of 'em is valid or not..
     if( [isMonthlySubValid isEqual:@"1"] || [isYearlySubValid isEqualToString:@"1"] || [isAdRemovalSubValid isEqualToString:@"1"] ){

@@ -9,6 +9,7 @@
 #import "MainSettingViewController.h"
 #import "UserVoice.h"
 #import "IntroScreenViewController.h"
+#import "Common.h"
 
 @interface MainSettingViewController () {
     
@@ -18,6 +19,7 @@
     BOOL hasValidSubscription;
     UserPurchases *userPurchases;
     NSString *productIdentifier;
+    NSArray *selectedInAppIDs;
 }
 
 
@@ -41,6 +43,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    #if defined(FLYERLY)
+        selectedInAppIDs = FLYERLY_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
+    #else
+        selectedInAppIDs = FLYERLYBIZ_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
+    #endif
+    
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     flyerConfigurator = appDelegate.flyerConfigurator;
     
@@ -763,7 +772,7 @@
         [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
     
-    if ( [productId isEqualToString:@"com.flyerly.AdRemovalMonthly"]) {
+    if ( [productId isEqualToString: [selectedInAppIDs objectAtIndex:2]]) { // Ad Removal Subscription
         [self removeBAnnerAdd:YES];
     }
 }
@@ -992,7 +1001,7 @@
 // Dismiss action for banner ad
 -(void)dismissBannerAds:(BOOL)valForBannerClose{
     
-    productIdentifier = @"com.flyerly.AdRemovalMonthly";
+    productIdentifier = [selectedInAppIDs objectAtIndex:2]; // Ad Removal Subscription
     inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
     inappviewcontroller.buttondelegate = self;
     [inappviewcontroller requestProduct];
