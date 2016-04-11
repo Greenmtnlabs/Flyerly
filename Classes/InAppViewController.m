@@ -145,6 +145,19 @@
     }
 }
 
+/*
+ * Reloads Array of In-App Purchase IDs
+ */
+
+-(void)reloadInAppProductIDsArray{
+    
+    #if defined(FLYERLY)
+        productIdentifiers = @[@"com.flyerly.MonthlyGold", @"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.YearlyPlatinum1", @"com.flyerly.AdRemovalMonthly"];
+    #else
+        productIdentifiers = @[@"com.flyerlybiz.AllDesignBundle", @"com.flyerlybiz.MonthlyGold",@"com.flyerlybiz.YearlyPlatinum",@"com.flyerlybiz.VideoFlyers", @"com.flyerlybiz.AdRemovalMonthly"];
+    #endif
+}
+
 
 /*
  * Here we hide the InAppViewController
@@ -455,14 +468,11 @@
     
     if ([FlyerlySingleton connected]) {
         
+        // reloads array of in-app purchase IDs
+        [self reloadInAppProductIDsArray];
+        
         //Check For Crash Maintain
         cancelRequest = NO;
-        
-        #if defined(FLYERLY)
-            productIdentifiers = @[@"com.flyerly.MonthlyGold", @"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.YearlyPlatinum1", @"com.flyerly.AdRemovalMonthly"];
-        #else
-            productIdentifiers = @[@"com.flyerlybiz.AllDesignBundle", @"com.flyerlybiz.MonthlyGold",@"com.flyerlybiz.YearlyPlatinum",@"com.flyerlybiz.VideoFlyers", @"com.flyerlybiz.AdRemovalMonthly"];
-        #endif
         
         //These are over Products on App Store
         NSSet *productIdentifiersSet = [NSSet setWithArray:productIdentifiers];
@@ -524,16 +534,11 @@
     
     [[RMStore defaultStore] restoreTransactionsOnSuccess:^{
         
+        // reloads array of in-app purchase IDs
+        [self reloadInAppProductIDsArray];
+        
         //HERE WE GET SHARED INTANCE OF _persistence WHICH WE LINKED IN FlyrAppDelegate
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        
-        
-        #if defined(FLYERLY)
-            productIdentifiers = @[@"com.flyerly.MonthlyGold", @"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.YearlyPlatinum1", @"com.flyerly.AdRemovalMonthly"];
-        #else
-            productIdentifiers = @[@"com.flyerlybiz.AllDesignBundle", @"com.flyerlybiz.MonthlyGold",@"com.flyerlybiz.YearlyPlatinum",@"com.flyerlybiz.VideoFlyers", @"com.flyerlybiz.AdRemovalMonthly"];
-        #endif
-        
         
         if (productIdentifiers.count >= 1) {
             
