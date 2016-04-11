@@ -51,9 +51,9 @@
     
     
     #if defined(FLYERLY)
-        selectedInAppIDs = @[@"com.flyerly.MonthlyGold", @"com.flyerly.YearlyPlatinum1", @"com.flyerly.AdRemovalMonthly"];
+        selectedInAppIDs = @[@"com.flyerly.MonthlyGold", @"com.flyerly.YearlyPlatinum1", @"com.flyerly.AdRemovalMonthly", @"com.flyerly.AllDesignBundle"];
     #else
-        selectedInAppIDs = @[@"com.flyerlybiz.MonthlyGold", @"com.flyerlybiz.YearlyPlatinum", @"com.flyerlybiz.AdRemovalMonthly"];
+        selectedInAppIDs = @[@"com.flyerlybiz.MonthlyGold", @"com.flyerlybiz.YearlyPlatinum", @"com.flyerlybiz.AdRemovalMonthly", @"com.flyerlybiz.AllDesignBundle"];
     #endif
     
     
@@ -395,7 +395,7 @@
         // Getting the product against tapped/selected cell
         NSDictionary *product = [productArray objectAtIndex:indexPath.row];
         
-        if([[product objectForKey:@"productidentifier"] isEqualToString:@"com.flyerly.AllDesignBundle"]) {
+        if([[product objectForKey:@"productidentifier"] isEqualToString: [selectedInAppIDs objectAtIndex: 3]]) {
             
             NSString *title;
             #if defined(FLYERLY)
@@ -406,7 +406,7 @@
             
             [completeDesignBundleButton setTitle: title];
             [completeDesignBundleButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
-        } else if([[product objectForKey:@"productidentifier"] isEqualToString:@"com.flyerly.YearlyPlatinum1"]) {
+        } else if([[product objectForKey:@"productidentifier"] isEqualToString: [selectedInAppIDs objectAtIndex: 1]]) {
             inAppCell.backgroundColor = [UIColor grayColor];//heighlight the Yearly subscription cell
         }
         //Setting the packagename,packageprice,packagedesciption values for cell view

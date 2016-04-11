@@ -29,7 +29,7 @@
         [star removeFromSuperview];
     }
     
-    if([productIdentifier isEqualToString:@"com.flyerly.MonthlyGold"]){
+    if([productIdentifier isEqualToString:@"com.flyerly.MonthlyGold"] || [productIdentifier isEqualToString:@"com.flyerlybiz.MonthlyGold"]){
         packageName.textColor = [UIColor redColor];
         packagePrice.textColor = [UIColor redColor];
         packageDescription.textColor = [UIColor redColor];
