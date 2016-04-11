@@ -38,7 +38,7 @@ UIAlertView *saveCurrentFlyerAlert;
         hashTag = @"#flyerly";
         strPlaceHolder = @"Flyerly Title (e.g. \"Parker's Party\")";
     #else
-        hashTag = @"#flyerlybiz";
+        hashTag = @"#FlyerlyBiz";
         strPlaceHolder =  @"Flyerly Biz Title (e.g. \"Parker's Party\")";
     #endif
     
@@ -1336,7 +1336,12 @@ UIAlertView *saveCurrentFlyerAlert;
         
         // Set up recipients
         NSMutableArray *toRecipients = [[NSMutableArray alloc]init];
-        [toRecipients addObject:@"hello@flyerly.com"];
+        #if defined(FLYERLY)
+            [toRecipients addObject:@"hello@flyerly.com"];
+        #else
+            [toRecipients addObject:@"biz@flyerly.com"];
+        #endif
+
         [picker setToRecipients:toRecipients];
       
     }

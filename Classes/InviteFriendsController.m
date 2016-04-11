@@ -1126,9 +1126,19 @@ const int CONTACTS_TAB = 0;
     // HERE WE WORK FOR TWITTER
     if (selectedTab == 2) {
         
+        NSString *hashTag;
+        NSString *sharingTxt;
+        #if defined(FLYERLY)
+            hashTag  = @"#flyerly";
+            sharingTxt = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
+        #else
+            hashTag  = @"#FlyerlyBiz";
+            sharingTxt = [NSString stringWithFormat:@"I'm using Flyerly Biz to create and share flyers on the go! %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
+        #endif
+        
         ContactsModel *model = [self getArrayOfSelectedTab][(indexPath.row)];
         
-        NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
+        NSString *sharingText = sharingTxt;
         
         //CHECK FOR ALREADY SELECTED
         if (model.status == 0) {
@@ -1138,7 +1148,7 @@ const int CONTACTS_TAB = 0;
             
             //Calling ShareKit for Sharing
             iosSharer = [[ SHKiOSTwitter alloc] init];
-            NSString *tweet = [NSString stringWithFormat:@"%@ @%@ #flyerly",sharingText,model.description];
+            NSString *tweet = [NSString stringWithFormat:@"%@ @%@ %@",sharingText,model.description, hashTag];
             SHKItem *item;
             
             item = [SHKItem text:tweet];

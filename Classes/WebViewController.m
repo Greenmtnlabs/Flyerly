@@ -36,7 +36,7 @@
     #if defined(FLYERLY)
         strURL_twitter = @"https://twitter.com/hashtag/flyerly";
     #else
-        strURL_twitter = @"https://twitter.com/hashtag/flyerly"
+        strURL_twitter = @"https://twitter.com/hashtag/flyerly";
     #endif
     
     // Setting default URL
