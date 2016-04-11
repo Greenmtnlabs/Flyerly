@@ -7195,6 +7195,9 @@
 			attributes = {
 				LastUpgradeCheck = 0720;
 				TargetAttributes = {
+					10C520581CB7C07E00A5805C = {
+						DevelopmentTeam = 4MGKP9P5WH;
+					};
 					1D6058900D05DD3D006BFB54 = {
 						DevelopmentTeam = 4MGKP9P5WH;
 					};
@@ -10538,7 +10541,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.socialflyr.flyrfree;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e68eb1d6-7a19-4f37-8e3b-c797ca1c0c16";
+				PROVISIONING_PROFILE = "5cfb1fe9-3734-4739-997d-2c18552ab367";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/**";
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -10599,8 +10602,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.socialflyr.flyrfree;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "97bf5434-078b-4eb6-b558-2cb64dd5662d";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "97bf5434-078b-4eb6-b558-2cb64dd5662d";
+				PROVISIONING_PROFILE = "547467d5-2714-4ca5-a5d9-7622afdf3208";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "547467d5-2714-4ca5-a5d9-7622afdf3208";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/**";
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -10662,8 +10665,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.socialflyr.flyrfree;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "fa72cf3d-3eec-45db-801b-a724bce30ef3";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "fa72cf3d-3eec-45db-801b-a724bce30ef3";
+				PROVISIONING_PROFILE = "c14aff95-0d8f-40f6-83aa-600e3bdff6a6";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "c14aff95-0d8f-40f6-83aa-600e3bdff6a6";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/**";
 				VALID_ARCHS = "armv7 armv7s arm64";
