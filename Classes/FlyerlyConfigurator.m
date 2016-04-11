@@ -90,10 +90,12 @@
     return @"ca-app-pub-1703558915514520/6691113092";
     
 #else
-    
     //Live Jen'account
-    return @"ca-app-pub-3218409375181552/2458746629";
-    
+    #if defined(FLYERLY) // Flyerly
+        return @"ca-app-pub-3218409375181552/2458746629";
+    #else // Flyerly Biz
+        return @"ca-app-pub-3218409375181552/2750207422";
+    #endif
 #endif
 
 }
@@ -109,10 +111,12 @@
     return @"ca-app-pub-1703558915514520/8955078699";
     
 #else
-    
     //Live Jen'account
-    return @"ca-app-pub-3218409375181552/5412213028";
-    
+    #if defined(FLYERLY) // Flyerly
+        return @"ca-app-pub-3218409375181552/5412213028";
+    #else // Flyerly Biz
+        return @"ca-app-pub-3218409375181552/7180407024";
+    #endif
 #endif
     
 }
@@ -414,11 +418,7 @@
 
 // Bit.ly for shortening URLs, used by some sharers (e.g. Buffer). http://bit.ly/account/register - after signup: http://bit.ly/a/your_api_key If you do not enter bit.ly credentials, URL will be shared unshortened.
 - (NSString*)bitLyLogin {
-    #if defined(FLYERLY)
-        return @"flyerly";
-    #else
-        return @"flyerlybiz";
-    #endif
+    return @"flyerly";
 }
 
 - (NSString*)bitLyKey {
