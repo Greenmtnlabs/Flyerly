@@ -332,7 +332,7 @@
             #else
                 imgname = @"icon_flyerly"; // flyerly
             #endif
-        
+        }
     }
     
     // Set cell Values
