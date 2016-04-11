@@ -312,7 +312,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 // Dismiss action for banner ad
 -(void)dissmisBannerAdd:(BOOL)valForBannerClose{
     
-    productIdentifier = [selectedInAppIDs objectAtIndex:2];
+    productIdentifier = [selectedInAppIDs objectAtIndex:2]; // Ad Removal Subscription 
     inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
     inappviewcontroller.buttondelegate = self;
     [inappviewcontroller requestProduct];

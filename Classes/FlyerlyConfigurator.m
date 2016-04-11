@@ -20,9 +20,9 @@
  */
 - (NSString*)appName {
 	
-    #if defined(FLYERLY)
+    #if defined(FLYERLY) // Flyerly
         return @"Flyerly";
-    #else
+    #else // Flyerly Biz
         return @"Flyerly Biz";
     #endif
 }
@@ -243,7 +243,12 @@
 //
 //    Your CFBundleURLSchemes entry: fb555lite
 - (NSString*)facebookAppId {
-	return @"136691489852349";
+    
+    #if defined(FLYERLY) // Flyerly
+        return @"136691489852349";
+    #else // Flyerly Biz
+        return @"1755119231374505";
+    #endif
 }
 
 - (NSString*)facebookLocalAppId {
@@ -325,12 +330,22 @@
  */
 
 - (NSString*)twitterConsumerKey {
-    return @"xYlRtbesxU0Qrxulx5kjdA";
     
+    #if defined(FLYERLY) // Flyerly
+        return @"xYlRtbesxU0Qrxulx5kjdA";
+    #else // Flyerly Biz
+        return @"JlAwXVRkwu0HvGwVmrPq8dAgz";
+    #endif
 }
 
 - (NSString*)twitterSecret {
-	return @"v8j6WWLoRDBCIkUQtapbhuOoYOZ4sWjMJovJLIPgO0";
+
+    #if defined(FLYERLY) // Flyerly
+        return @"v8j6WWLoRDBCIkUQtapbhuOoYOZ4sWjMJovJLIPgO0";
+    #else // Flyerly Biz
+        return @"5DoqmMkYaK7V4SqRITDCfDGBcgLWo2vDg5DAXcCNV0mPasWGSS";
+    #endif
+	
 }
 // You need to set this if using OAuth, see note above (xAuth users can skip it)
 - (NSString*)twitterCallbackUrl {
