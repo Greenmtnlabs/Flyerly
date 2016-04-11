@@ -38,7 +38,7 @@
         [star removeFromSuperview];
     }
     
-    if([productIdentifier isEqualToString:[selectedInAppIDs objectAtIndex:0] ]){
+    if([productIdentifier isEqualToString:[selectedInAppIDs objectAtIndex:0] ]){ // Monthly Subscription
         packageName.textColor = [UIColor redColor];
         packagePrice.textColor = [UIColor redColor];
         packageDescription.textColor = [UIColor redColor];

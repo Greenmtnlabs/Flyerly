@@ -5715,7 +5715,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 - ( void )productSuccesfullyPurchased: (NSString *)productId {
     appearingViewAfterInAppHide = YES;
     [self loadXibsAfterInAppCheck:YES againAddInSubViews:YES];
-    if ( [productId isEqualToString:[selectedInAppIDs objectAtIndex:2]]) {
+    if ( [productId isEqualToString:[selectedInAppIDs objectAtIndex:2]]) { // Ad Removal Subscription
         [self removeBAnnerAdd:YES];
     }
 }

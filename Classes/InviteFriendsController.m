@@ -320,7 +320,7 @@ const int CONTACTS_TAB = 0;
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     userPurchases_.delegate = nil;
     
-    if ( [productId isEqualToString: [selectedInAppIDs objectAtIndex:2]]) {
+    if ( [productId isEqualToString: [selectedInAppIDs objectAtIndex:2]]) { // Ad Removal Subscription
         [self removeBAnnerAdd:YES];
     }
 }

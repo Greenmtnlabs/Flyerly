@@ -772,7 +772,7 @@
         [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
     
-    if ( [productId isEqualToString: [selectedInAppIDs objectAtIndex:2]]) {
+    if ( [productId isEqualToString: [selectedInAppIDs objectAtIndex:2]]) { // Ad Removal Subscription
         [self removeBAnnerAdd:YES];
     }
 }
@@ -1001,7 +1001,7 @@
 // Dismiss action for banner ad
 -(void)dismissBannerAds:(BOOL)valForBannerClose{
     
-    productIdentifier = [selectedInAppIDs objectAtIndex:2];
+    productIdentifier = [selectedInAppIDs objectAtIndex:2]; // Ad Removal Subscription
     inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
     inappviewcontroller.buttondelegate = self;
     [inappviewcontroller requestProduct];
