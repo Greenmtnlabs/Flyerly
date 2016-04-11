@@ -15,6 +15,7 @@
 #import "Flurry.h"
 #import "UserVoice.h"
 #import "SHKSharer.h"
+#import "Common.h"
 
 @implementation InviteFriendsController {
 
@@ -29,6 +30,7 @@
     BOOL haveValidSubscription;
     UserPurchases *userPurchases;
     NSString *productIdentifier;
+    NSArray *selectedInAppIDs;
 }
 
 @synthesize uiTableView, emailsArray, contactsArray, selectedIdentifiers, emailButton, contactsButton, facebookButton, twitterButton,  searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited, emailInvited;
@@ -47,6 +49,13 @@ const int CONTACTS_TAB = 0;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    #if defined(FLYERLY)
+        selectedInAppIDs = FLYERLY_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
+    #else
+        selectedInAppIDs = FLYERLYBIZ_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
+    #endif
+    
     
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
@@ -311,7 +320,7 @@ const int CONTACTS_TAB = 0;
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     userPurchases_.delegate = nil;
     
-    if ( [productId isEqualToString:@"com.flyerly.AdRemovalMonthly"]) {
+    if ( [productId isEqualToString: [selectedInAppIDs objectAtIndex:2]]) {
         [self removeBAnnerAdd:YES];
     }
 }
@@ -1491,7 +1500,7 @@ const int CONTACTS_TAB = 0;
 // Dismiss action for banner ad
 -(void)dismissBannerAds:(BOOL)valForBannerClose{
     
-    productIdentifier = @"com.flyerly.AdRemovalMonthly";
+    productIdentifier = [selectedInAppIDs objectAtIndex:2];
     inAppViewController = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
     [inAppViewController requestProduct];
     [inAppViewController purchaseProductByID:productIdentifier];

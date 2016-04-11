@@ -48,6 +48,7 @@
     BOOL firstTimeInViewDidAppear;
     NSString *productIdentifier;
     NSString *create_flyer_default_image;
+    NSArray *selectedInAppIDs;
 }
 
 @end
@@ -311,7 +312,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 // Dismiss action for banner ad
 -(void)dissmisBannerAdd:(BOOL)valForBannerClose{
     
-    productIdentifier = @"com.flyerly.AdRemovalMonthly";
+    productIdentifier = [selectedInAppIDs objectAtIndex:2];
     inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
     inappviewcontroller.buttondelegate = self;
     [inappviewcontroller requestProduct];
@@ -341,6 +342,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 -(void)viewDidLoad{
     
     [self setWaterMarkLayerPosition];
+    
+    #if defined(FLYERLY)
+        selectedInAppIDs = FLYERLY_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
+    #else
+        selectedInAppIDs = FLYERLYBIZ_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
+    #endif
     
     bannerAdsView.alpha = 0.0;
     
@@ -5708,7 +5715,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 - ( void )productSuccesfullyPurchased: (NSString *)productId {
     appearingViewAfterInAppHide = YES;
     [self loadXibsAfterInAppCheck:YES againAddInSubViews:YES];
-    if ( [productId isEqualToString:@"com.flyerly.AdRemovalMonthly"]) {
+    if ( [productId isEqualToString:[selectedInAppIDs objectAtIndex:2]]) {
         [self removeBAnnerAdd:YES];
     }
 }
