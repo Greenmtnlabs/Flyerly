@@ -45,8 +45,8 @@
 		1008E1CF1C805330006ADFDA /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1008E1CC1C805330006ADFDA /* Utils.m */; };
 		1008E1D01C805330006ADFDA /* VideoData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1008E1CE1C805330006ADFDA /* VideoData.m */; };
 		1008E1D61C805924006ADFDA /* YouTubeUploadVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1008E1D51C805924006ADFDA /* YouTubeUploadVideo.m */; };
-		1054F94E1CBB7D6C00EF0A88 /* icon_flyerly.png in Resources */ = {isa = PBXBuildFile; fileRef = 1054F94D1CBB7D6C00EF0A88 /* icon_flyerly.png */; };
-		106AB83B1C9C35C300423B99 /* icon_flyerly-biz.png in Resources */ = {isa = PBXBuildFile; fileRef = 106AB83A1C9C35C300423B99 /* icon_flyerly-biz.png */; };
+		103A8C731CBB96620048A013 /* icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 103A8C721CBB96620048A013 /* icon-120.png */; };
+		106AB83B1C9C35C300423B99 /* icon_flyerly_biz.png in Resources */ = {isa = PBXBuildFile; fileRef = 106AB83A1C9C35C300423B99 /* icon_flyerly_biz.png */; };
 		10C5205D1CB7C07E00A5805C /* invite_twitter@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24861E5719F9147000670F6D /* invite_twitter@3x.png */; };
 		10C5205E1CB7C07E00A5805C /* FlyrViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D4903BA1091893B00855C30 /* FlyrViewController.xib */; };
 		10C5205F1CB7C07E00A5805C /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8A7347C1092CFF300661AAD /* ShareViewController.xib */; };
@@ -61,7 +61,7 @@
 		10C520681CB7C07E00A5805C /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858C31948764D0062F1E4 /* Montserrat-Regular.ttf */; };
 		10C520691CB7C07E00A5805C /* TextBorders-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204231631A10E1A1002F93D7 /* TextBorders-iPhone6-Plus.xib */; };
 		10C5206A1CB7C07E00A5805C /* Fonts-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F130CA1A0D163800464587 /* Fonts-iPhone6.xib */; };
-		10C5206B1CB7C07E00A5805C /* icon_flyerly-biz.png in Resources */ = {isa = PBXBuildFile; fileRef = 106AB83A1C9C35C300423B99 /* icon_flyerly-biz.png */; };
+		10C5206B1CB7C07E00A5805C /* icon_flyerly_biz.png in Resources */ = {isa = PBXBuildFile; fileRef = 106AB83A1C9C35C300423B99 /* icon_flyerly_biz.png */; };
 		10C5206C1CB7C07E00A5805C /* more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24556D8419EE7E65005FCDFE /* more@2x.png */; };
 		10C5206D1CB7C07E00A5805C /* drawing_tab_size@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24861E2A19F9146F00670F6D /* drawing_tab_size@3x.png */; };
 		10C5206E1CB7C07E00A5805C /* emoticon180@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24218403194B4AEC00FDDA97 /* emoticon180@2x.png */; };
@@ -3128,9 +3128,9 @@
 		1008E1CE1C805330006ADFDA /* VideoData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VideoData.m; path = YoutubeClasses/VideoData.m; sourceTree = "<group>"; };
 		1008E1D41C805924006ADFDA /* YouTubeUploadVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YouTubeUploadVideo.h; path = YoutubeClasses/YouTubeUploadVideo.h; sourceTree = "<group>"; };
 		1008E1D51C805924006ADFDA /* YouTubeUploadVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YouTubeUploadVideo.m; path = YoutubeClasses/YouTubeUploadVideo.m; sourceTree = "<group>"; };
+		103A8C721CBB96620048A013 /* icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-120.png"; sourceTree = "<group>"; };
 		103FB4901C75F2EA0072CEFC /* FBSDKMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBSDKMacros.h; path = "ios-files/FBSDKMacros.h"; sourceTree = "<group>"; };
-		1054F94D1CBB7D6C00EF0A88 /* icon_flyerly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_flyerly.png; sourceTree = "<group>"; };
-		106AB83A1C9C35C300423B99 /* icon_flyerly-biz.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_flyerly-biz.png"; sourceTree = "<group>"; };
+		106AB83A1C9C35C300423B99 /* icon_flyerly_biz.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_flyerly_biz.png; sourceTree = "<group>"; };
 		10C526501CB7C07E00A5805C /* FlyerlyBiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlyerlyBiz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10C526531CB7C45100A5805C /* FlyerlyBiz-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FlyerlyBiz-Info.plist"; sourceTree = "<group>"; };
 		10C818B41CAD23E0004116E0 /* create_flyer_default_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = create_flyer_default_image.png; sourceTree = "<group>"; };
@@ -5505,8 +5505,8 @@
 		201F7A081C1FFD9400520E7C /* PartnerAppIcons */ = {
 			isa = PBXGroup;
 			children = (
-				1054F94D1CBB7D6C00EF0A88 /* icon_flyerly.png */,
-				106AB83A1C9C35C300423B99 /* icon_flyerly-biz.png */,
+				103A8C721CBB96620048A013 /* icon-120.png */,
+				106AB83A1C9C35C300423B99 /* icon_flyerly_biz.png */,
 				201F7A0A1C1FFDDF00520E7C /* icon_eyespot.png */,
 				201F7A0B1C1FFDDF00520E7C /* icon_untech.png */,
 			);
@@ -7294,7 +7294,7 @@
 				10C520681CB7C07E00A5805C /* Montserrat-Regular.ttf in Resources */,
 				10C520691CB7C07E00A5805C /* TextBorders-iPhone6-Plus.xib in Resources */,
 				10C5206A1CB7C07E00A5805C /* Fonts-iPhone6.xib in Resources */,
-				10C5206B1CB7C07E00A5805C /* icon_flyerly-biz.png in Resources */,
+				10C5206B1CB7C07E00A5805C /* icon_flyerly_biz.png in Resources */,
 				10C5206C1CB7C07E00A5805C /* more@2x.png in Resources */,
 				10C5206D1CB7C07E00A5805C /* drawing_tab_size@3x.png in Resources */,
 				10C5206E1CB7C07E00A5805C /* emoticon180@2x.png in Resources */,
@@ -8683,7 +8683,7 @@
 				247858CD1948764D0062F1E4 /* Montserrat-Regular.ttf in Resources */,
 				204231641A10E1A1002F93D7 /* TextBorders-iPhone6-Plus.xib in Resources */,
 				24F130CB1A0D163800464587 /* Fonts-iPhone6.xib in Resources */,
-				106AB83B1C9C35C300423B99 /* icon_flyerly-biz.png in Resources */,
+				106AB83B1C9C35C300423B99 /* icon_flyerly_biz.png in Resources */,
 				24556D8519EE7E65005FCDFE /* more@2x.png in Resources */,
 				24861EF019F9147100670F6D /* drawing_tab_size@3x.png in Resources */,
 				242184C2194B4AEC00FDDA97 /* emoticon180@2x.png in Resources */,
@@ -9287,7 +9287,6 @@
 				249F1FB1193F55D50072835E /* cp_share_selected@2x.png in Resources */,
 				246EF509193C515D004539B2 /* emoticon43@2x.png in Resources */,
 				246EF51F193C515D004539B2 /* emoticon63@2x.png in Resources */,
-				1054F94E1CBB7D6C00EF0A88 /* icon_flyerly.png in Resources */,
 				C31F67491B676E6F0025FBBF /* Zwelcome_bg@3x.jpg in Resources */,
 				C32139D61A67FF530005DA71 /* CropVideoViewController-iPhone6-Plus.xib in Resources */,
 				2421849A194B4AEC00FDDA97 /* emoticon139@2x.png in Resources */,
@@ -9434,6 +9433,7 @@
 				249F203D193F562C0072835E /* public_on@2x.png in Resources */,
 				24751A6A1938A3B300DF03B2 /* clipart_tab@2x.png in Resources */,
 				242184F4194B4AEC00FDDA97 /* sailing-icon.png in Resources */,
+				103A8C731CBB96620048A013 /* icon-120.png in Resources */,
 				24CF67AE1A026D88003A5623 /* CropViewController-iPhone6.xib in Resources */,
 				C31E92C41B566207004DF193 /* bicon20.png in Resources */,
 				242184F6194B4AEC00FDDA97 /* sand-castle-icon.png in Resources */,

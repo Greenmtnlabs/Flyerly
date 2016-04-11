@@ -299,9 +299,9 @@
         if (indexPath.row == 12)imgname = @"icon_eyespot";//eyespot
         if (indexPath.row == 13){
             #if defined(FLYERLY)
-                imgname = @"icon_flyerly-biz"; // flyerly biz
+                imgname = @"icon_flyerly_biz"; // flyerly biz
             #else
-                imgname = @"icon_flyerly"; // flyerly
+                imgname = @"icon-120"; // flyerly
             #endif
         }
         
@@ -328,9 +328,9 @@
         if (indexPath.row == 11)imgname = @"icon_eyespot";//eyespot
         if (indexPath.row == 12){
             #if defined(FLYERLY)
-                imgname = @"icon_flyerly-biz"; // flyerly biz
+                imgname = @"icon_flyerly_biz"; // flyerly biz
             #else
-                imgname = @"icon_flyerly"; // flyerly
+                imgname = @"icon-120"; // flyerly
             #endif
         }
     }
