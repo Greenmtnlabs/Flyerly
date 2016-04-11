@@ -120,7 +120,13 @@
     [category addObject:@"Partner Apps"];//10,9 --
     [category addObject:@"Untech"];//11,10
     [category addObject:@"eyeSPOT"];//12,11
-    [category addObject:@"Flyerly Biz"];
+    
+    #if defined(FLYERLY)
+        [category addObject:@"Flyerly Biz"];
+    #else
+        [category addObject:@"Flyerly"];
+    #endif
+    
 
     // will remove in production build, this row must be in the end of table view
     if ( IS_LOGIN && [flyerConfigurator currentDebugMood] ){
@@ -291,7 +297,13 @@
         }
         if (indexPath.row == 11)imgname = @"icon_untech";//untech
         if (indexPath.row == 12)imgname = @"icon_eyespot";//eyespot
-        if (indexPath.row == 13)imgname = @"icon_flyerly-biz"; // flyerly biz
+        if (indexPath.row == 13){
+            #if defined(FLYERLY)
+                imgname = @"icon_flyerly-biz"; // flyerly biz
+            #else
+                imgname = @"icon_flyerly"; // flyerly
+            #endif
+        }
         
     } else {
         if (indexPath.row == 3)imgname = @"fb_Like";
@@ -306,7 +318,6 @@
             // Create Labels for text
             cell.description = [[UILabel alloc]initWithFrame:CGRectMake(5, 17, 250, 21)];
             [cell.description setBackgroundColor:[UIColor clearColor]];
-            //[cell.description setTextColor:[UIColor darkGrayColor]];
             [cell.description setTextColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
             [cell.description setFont:[UIFont fontWithName:@"AvenirNext-Bold" size:16]];
             [cell.description setTextAlignment:NSTextAlignmentLeft];
@@ -315,7 +326,13 @@
         }
         if (indexPath.row == 10)imgname = @"icon_untech";//untech
         if (indexPath.row == 11)imgname = @"icon_eyespot";//eyespot
-        if (indexPath.row == 12)imgname = @"icon_flyerly-biz"; // flyerly biz
+        if (indexPath.row == 12){
+            #if defined(FLYERLY)
+                imgname = @"icon_flyerly-biz"; // flyerly biz
+            #else
+                imgname = @"icon_flyerly"; // flyerly
+            #endif
+        }
     }
     
     // Set cell Values
