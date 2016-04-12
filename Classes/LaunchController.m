@@ -31,17 +31,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSString *imageName;
-    
     #if defined(FLYERLY) //Flyerly
-        imageName = @"flyerly_welcomescreen_bg.jpg";
-        //[imgBackground setImage:[UIImage imageNamed: @"flyerly_welcomescreen_bg.jpg"]];
+        [imgBackground setImage:[UIImage imageNamed: @"flyerly_welcomescreen_bg.jpg"]];
     #else // Flyerly Biz
-        imageName = @"flyerly_biz_welcomescreen_bg.jpg";
-        //[imgBackground setImage:[UIImage imageNamed: @"flyerly_biz_welcomescreen_bg.jpg"]];
+        [imgBackground setImage:[UIImage imageNamed: @"flyerly_biz_welcomescreen_bg.jpg"]];
     #endif
-    
-    [self.imgBackground setImage:[UIImage imageNamed: imageName]];
     
     globle = [FlyerlySingleton RetrieveSingleton];
 

@@ -56,7 +56,7 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="0.95686274510000002" green="0.48627450979999998" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
