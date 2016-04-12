@@ -24,6 +24,7 @@
 @property(nonatomic, strong) IBOutlet UIButton *registerButton;
 @property(nonatomic, strong) IBOutlet UIButton *signinButton;
 
+@property (weak, nonatomic) IBOutlet UIImageView *imgBackground;
 
 -(IBAction)onRegister;
 -(IBAction)onSignIn;
