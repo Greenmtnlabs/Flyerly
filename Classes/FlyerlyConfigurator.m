@@ -28,18 +28,37 @@
 }
 
 - (NSString*)appURL {
-	return @"http://www.flyer.ly";
+	
+    #if defined(FLYERLY) // Flyerly
+        return @"http://www.flyer.ly";
+    #else // Flyerly Biz
+        return @"http://www.flyerly.com/biz";
+    #endif
 }
 
 - (NSString*)referralURL{
-    return @"http://app.flyerly.com/cs?i=";
+    
+    #if defined(FLYERLY) // Flyerly
+        return @"http://app.flyerly.com/cs?i=";
+    #else // Flyerly Biz
+        return @"http://biz.flyerly.com/cs?i=";
+    #endif
 }
 
 - (NSString*)appLinkURL{
-    return @"http://app.flyerly.com/cs";
+    
+    #if defined(FLYERLY) // Flyerly
+        return @"http://app.flyerly.com/cs";
+    #else // Flyerly Biz
+        return @"http://biz.flyerly.com/cs";
+    #endif
 }
 - (NSString*)appInvitePreviewImageURL{
-    return @"http://greenmtnlabs.com/flyerly/images/phones.png";
+    #if defined(FLYERLY) // Flyerly
+        return @"http://greenmtnlabs.com/flyerly/images/phones.png";
+    #else // Flyerly Biz
+        return @"http://greenmtnlabs.com/flyerly/images/bizphone.png";
+    #endif
 }
 
 
@@ -83,8 +102,6 @@
     
     //ozair's account
 	//return @"ca-app-pub-5409664730066465/8030978831";
-
-    
     
     //Rehan's a/c
     return @"ca-app-pub-1703558915514520/6691113092";
@@ -107,6 +124,7 @@
     
     //ozair's account
 	//return @"ca-app-pub-5409664730066465/9926514430";
+    
     //Rehan's a/c
     return @"ca-app-pub-1703558915514520/8955078699";
     
