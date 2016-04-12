@@ -31,7 +31,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    #if defined(FLYERLY) //Flyerly
+    
+#if defined(FLYERLY) //Flyerly
         [imgBackground setImage:[UIImage imageNamed: @"flyerly_welcomescreen_bg.jpg"]];
     #else // Flyerly Biz
         [imgBackground setImage:[UIImage imageNamed: @"flyerly_biz_welcomescreen_bg.jpg"]];

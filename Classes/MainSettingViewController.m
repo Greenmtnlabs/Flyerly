@@ -337,9 +337,9 @@
         if (indexPath.row == 11)imgname = @"icon_eyespot";//eyespot
         if (indexPath.row == 12){
             #if defined(FLYERLY)
-                imgname = @"icon_flyerly_biz"; // flyerly biz
+                imgname = @"icon_flyerly_biz"; // flyerly biz icon
             #else
-                imgname = @"icon-120"; // flyerly
+                imgname = @"icon_flyerly"; // flyerly icon
             #endif
         }
     }
