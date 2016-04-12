@@ -20,9 +20,9 @@
  */
 - (NSString*)appName {
 	
-    #if defined(FLYERLY)
+    #if defined(FLYERLY) // Flyerly
         return @"Flyerly";
-    #else
+    #else // Flyerly Biz
         return @"Flyerly Biz";
     #endif
 }
@@ -84,14 +84,18 @@
     //ozair's account
 	//return @"ca-app-pub-5409664730066465/8030978831";
 
+    
+    
     //Rehan's a/c
     return @"ca-app-pub-1703558915514520/6691113092";
     
 #else
-    
     //Live Jen'account
-    return @"ca-app-pub-3218409375181552/2458746629";
-    
+    #if defined(FLYERLY) // Flyerly
+        return @"ca-app-pub-3218409375181552/2458746629";
+    #else // Flyerly Biz
+        return @"ca-app-pub-3218409375181552/2750207422";
+    #endif
 #endif
 
 }
@@ -107,10 +111,12 @@
     return @"ca-app-pub-1703558915514520/8955078699";
     
 #else
-    
     //Live Jen'account
-    return @"ca-app-pub-3218409375181552/5412213028";
-    
+    #if defined(FLYERLY) // Flyerly
+        return @"ca-app-pub-3218409375181552/5412213028";
+    #else // Flyerly Biz
+        return @"ca-app-pub-3218409375181552/7180407024";
+    #endif
 #endif
     
 }
@@ -243,7 +249,12 @@
 //
 //    Your CFBundleURLSchemes entry: fb555lite
 - (NSString*)facebookAppId {
-	return @"136691489852349";
+    
+    #if defined(FLYERLY) // Flyerly
+        return @"136691489852349";
+    #else // Flyerly Biz
+        return @"1755119231374505";
+    #endif
 }
 
 - (NSString*)facebookLocalAppId {
@@ -325,12 +336,22 @@
  */
 
 - (NSString*)twitterConsumerKey {
-    return @"xYlRtbesxU0Qrxulx5kjdA";
     
+    #if defined(FLYERLY) // Flyerly
+        return @"xYlRtbesxU0Qrxulx5kjdA";
+    #else // Flyerly Biz
+        return @"JlAwXVRkwu0HvGwVmrPq8dAgz";
+    #endif
 }
 
 - (NSString*)twitterSecret {
-	return @"v8j6WWLoRDBCIkUQtapbhuOoYOZ4sWjMJovJLIPgO0";
+
+    #if defined(FLYERLY) // Flyerly
+        return @"v8j6WWLoRDBCIkUQtapbhuOoYOZ4sWjMJovJLIPgO0";
+    #else // Flyerly Biz
+        return @"5DoqmMkYaK7V4SqRITDCfDGBcgLWo2vDg5DAXcCNV0mPasWGSS";
+    #endif
+	
 }
 // You need to set this if using OAuth, see note above (xAuth users can skip it)
 - (NSString*)twitterCallbackUrl {
@@ -397,11 +418,7 @@
 
 // Bit.ly for shortening URLs, used by some sharers (e.g. Buffer). http://bit.ly/account/register - after signup: http://bit.ly/a/your_api_key If you do not enter bit.ly credentials, URL will be shared unshortened.
 - (NSString*)bitLyLogin {
-    #if defined(FLYERLY)
-        return @"flyerly";
-    #else
-        return @"flyerlybiz";
-    #endif
+    return @"flyerly";
 }
 
 - (NSString*)bitLyKey {
