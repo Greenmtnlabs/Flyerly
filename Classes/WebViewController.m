@@ -57,7 +57,12 @@
     // for Navigation Bar logo
     UIImageView *logo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 102, 38)];
     
-    [logo setImage:[UIImage imageNamed:@"flyerlylogo"]];
+    #if defined(FLYERLY)
+        [logo setImage:[UIImage imageNamed:@"flyerlyLogo"]];
+    #else
+        [logo setImage:[UIImage imageNamed:@"flyerlyBizLogo"]];
+    #endif
+    
     self.navigationItem.titleView = logo;
     
      // Home Button
