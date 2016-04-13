@@ -45,6 +45,8 @@
 		1008E1CF1C805330006ADFDA /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1008E1CC1C805330006ADFDA /* Utils.m */; };
 		1008E1D01C805330006ADFDA /* VideoData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1008E1CE1C805330006ADFDA /* VideoData.m */; };
 		1008E1D61C805924006ADFDA /* YouTubeUploadVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1008E1D51C805924006ADFDA /* YouTubeUploadVideo.m */; };
+		100B592B1CBE4A3700003FBE /* flyerlyBizLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 100B59291CBE4A3700003FBE /* flyerlyBizLogo@2x.png */; };
+		100B592C1CBE4A3700003FBE /* flyerlyBizLogo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 100B592A1CBE4A3700003FBE /* flyerlyBizLogo@3x.png */; };
 		106AB83B1C9C35C300423B99 /* icon_flyerly_biz.png in Resources */ = {isa = PBXBuildFile; fileRef = 106AB83A1C9C35C300423B99 /* icon_flyerly_biz.png */; };
 		10AE8CE21CBCD8CE0022DBA7 /* flyerly_biz_welcomescreen_bg@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 10AE8CDE1CBCD8CE0022DBA7 /* flyerly_biz_welcomescreen_bg@2x.jpg */; };
 		10AE8CE31CBCD8CE0022DBA7 /* flyerly_biz_welcomescreen_bg@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 10AE8CDE1CBCD8CE0022DBA7 /* flyerly_biz_welcomescreen_bg@2x.jpg */; };
@@ -3133,6 +3135,8 @@
 		1008E1CE1C805330006ADFDA /* VideoData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VideoData.m; path = YoutubeClasses/VideoData.m; sourceTree = "<group>"; };
 		1008E1D41C805924006ADFDA /* YouTubeUploadVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YouTubeUploadVideo.h; path = YoutubeClasses/YouTubeUploadVideo.h; sourceTree = "<group>"; };
 		1008E1D51C805924006ADFDA /* YouTubeUploadVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YouTubeUploadVideo.m; path = YoutubeClasses/YouTubeUploadVideo.m; sourceTree = "<group>"; };
+		100B59291CBE4A3700003FBE /* flyerlyBizLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flyerlyBizLogo@2x.png"; sourceTree = "<group>"; };
+		100B592A1CBE4A3700003FBE /* flyerlyBizLogo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flyerlyBizLogo@3x.png"; sourceTree = "<group>"; };
 		103FB4901C75F2EA0072CEFC /* FBSDKMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBSDKMacros.h; path = "ios-files/FBSDKMacros.h"; sourceTree = "<group>"; };
 		106AB83A1C9C35C300423B99 /* icon_flyerly_biz.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_flyerly_biz.png; sourceTree = "<group>"; };
 		10AE8CDE1CBCD8CE0022DBA7 /* flyerly_biz_welcomescreen_bg@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "flyerly_biz_welcomescreen_bg@2x.jpg"; sourceTree = "<group>"; };
@@ -4887,6 +4891,8 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				100B59291CBE4A3700003FBE /* flyerlyBizLogo@2x.png */,
+				100B592A1CBE4A3700003FBE /* flyerlyBizLogo@3x.png */,
 				10AE8CDE1CBCD8CE0022DBA7 /* flyerly_biz_welcomescreen_bg@2x.jpg */,
 				10AE8CDF1CBCD8CE0022DBA7 /* flyerly_biz_welcomescreen_bg@3x.jpg */,
 				10AE8CE01CBCD8CE0022DBA7 /* flyerly_welcomescreen_bg@2x.jpg */,
@@ -7797,6 +7803,7 @@
 				10C522531CB7C07E00A5805C /* cocktail-icon.png in Resources */,
 				10C522541CB7C07E00A5805C /* Signika-Bold.otf in Resources */,
 				10C522551CB7C07E00A5805C /* My-world-icon.png in Resources */,
+				100B592B1CBE4A3700003FBE /* flyerlyBizLogo@2x.png in Resources */,
 				10C522561CB7C07E00A5805C /* cycling-track-icon.png in Resources */,
 				10C522571CB7C07E00A5805C /* icon63.jpg in Resources */,
 				10C522581CB7C07E00A5805C /* star_selected@3x.png in Resources */,
@@ -8222,6 +8229,7 @@
 				10C523FC1CB7C07E00A5805C /* icon45.jpg in Resources */,
 				10C523FD1CB7C07E00A5805C /* Template26.jpg in Resources */,
 				10C523FE1CB7C07E00A5805C /* emoticon165@2x.png in Resources */,
+				100B592C1CBE4A3700003FBE /* flyerlyBizLogo@3x.png in Resources */,
 				10C523FF1CB7C07E00A5805C /* AssetGroupViewControllerWithSearchFeild.xib in Resources */,
 				10C524001CB7C07E00A5805C /* Images.xcassets in Resources */,
 				10C524011CB7C07E00A5805C /* icon35.jpg in Resources */,

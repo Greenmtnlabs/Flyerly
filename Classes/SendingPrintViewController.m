@@ -621,7 +621,14 @@ https://lob.com/docs#postcards
     //You need to specify the frame of the view
     UIView *catView = [[UIView alloc] initWithFrame:CGRectMake(1620,1130,150,60)];
     
-    UIImage *image = [UIImage imageNamed:@"flyerlylogo.png"];
+    UIImage *image;
+    
+    #if defined(FLYERLY)
+        image = [UIImage imageNamed:@"flyerlyLogo.png"];
+    #else
+        image = [UIImage imageNamed:@"flyerlyBizLogo.png"];
+    #endif
+    
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     
     //specify the frame of the imageView in the superview , here it will fill the superview
