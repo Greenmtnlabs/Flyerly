@@ -246,7 +246,11 @@
 
 //Flurry SessionKey
 - (NSString*)flurrySessionId{
-    return @"ZWXZFGSQZ4GMYZBVZYN3";
+    #if defined(FLYERLY) // Flyerly
+        return @"ZWXZFGSQZ4GMYZBVZYN3";
+    #else // Flyerly Biz
+        return @"CFNHH68Y7DF4RVG8VVS5";
+    #endif
 }
 
 
