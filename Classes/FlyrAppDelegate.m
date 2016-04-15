@@ -174,9 +174,9 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     #if defined(FLYERLY)
-        NSLog(@"Target Name = FLYERLY");
+        NSLog(@"Selected Target = FLYERLY");
     #else 
-        NSLog(@"Target Name = FLYERLY_BIZ");
+        NSLog(@"Selected Target = FLYERLY_BIZ");
     #endif
     
     _persistence = [[RMStoreKeychainPersistence alloc] init];
