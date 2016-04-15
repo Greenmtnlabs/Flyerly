@@ -12,7 +12,8 @@
 @interface WebViewController (){
     BOOL haveValidSubscription;
     UserPurchases *userPurchases;
-    NSString *strURL_twitter;
+    NSString *url_twitter, *url_instagram;
+    NSString *logoImageName;
 }
 
 @end
@@ -26,6 +27,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    #if defined(FLYERLY)
+        logoImageName = @"flyerlyLogo";
+        url_twitter = @"https://twitter.com/hashtag/flyerly";
+        url_instagram = @"https://instagram.com/explore/tags/flyerly/";
+    #else
+        logoImageName = @"flyerlyBizLogo";
+        url_twitter = @"https://twitter.com/hashtag/flyerlybiz";
+        url_instagram = @"https://www.instagram.com/explore/tags/flyerlybiz/";
+    #endif
+    
     // Setting navigation bar
     [self setNavigation];
     
@@ -33,14 +44,8 @@
     // Setting selected segment
     self.segmentedButton.selectedSegmentIndex = 0;
     
-    #if defined(FLYERLY)
-        strURL_twitter = @"https://twitter.com/hashtag/flyerly";
-    #else
-        strURL_twitter = @"https://twitter.com/hashtag/flyerly";
-    #endif
-    
     // Setting default URL
-    [self openWebView:strURL_twitter];
+    [self openWebView:url_twitter];
 }
 
 #pragma mark Navigation/UI Related Methods
@@ -56,12 +61,7 @@
 
     // for Navigation Bar logo
     UIImageView *logo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 102, 38)];
-    
-    #if defined(FLYERLY)
-        [logo setImage:[UIImage imageNamed:@"flyerlyLogo"]];
-    #else
-        [logo setImage:[UIImage imageNamed:@"flyerlyBizLogo"]];
-    #endif
+    [logo setImage:[UIImage imageNamed:logoImageName]];
     
     self.navigationItem.titleView = logo;
     
@@ -151,20 +151,12 @@
  */
 - (IBAction)segmentedControlAction:(id)sender {
     
-    NSString *urlAddress;
-    
     if (segmentedButton.selectedSegmentIndex == 0) {
-        urlAddress  = strURL_twitter;
+        [self openWebView:url_twitter];
     }
     else if(segmentedButton.selectedSegmentIndex == 1){
-        
-        #if defined(FLYERLY)
-            urlAddress  = @"https://instagram.com/explore/tags/flyerly/";
-        #else
-            urlAddress  = @"https://instagram.com/explore/tags/flyerly/";
-        #endif
+        [self openWebView:url_instagram];
     }
-    [self openWebView:urlAddress];
 }
 
 /*
