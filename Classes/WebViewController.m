@@ -13,6 +13,8 @@
     BOOL haveValidSubscription;
     UserPurchases *userPurchases;
     NSString *strURL_twitter;
+    NSString *strURL_instagram;
+    NSString *logoImageName;
 }
 
 @end
@@ -26,18 +28,22 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    #if defined(FLYERLY)
+        logoImageName = @"flyerlyLogo";
+        strURL_twitter = @"https://twitter.com/hashtag/flyerly";
+        strURL_instagram = @"https://instagram.com/explore/tags/flyerly/";
+    #else
+        logoImageName = @"flyerlyBizLogo";
+        strURL_twitter = @"https://twitter.com/hashtag/flyerlybiz";
+        strURL_instagram = @"https://www.instagram.com/explore/tags/flyerlybiz/";
+    #endif
+    
     // Setting navigation bar
     [self setNavigation];
     
     webView.delegate = self;
     // Setting selected segment
     self.segmentedButton.selectedSegmentIndex = 0;
-    
-    #if defined(FLYERLY)
-        strURL_twitter = @"https://twitter.com/hashtag/flyerly";
-    #else
-        strURL_twitter = @"https://twitter.com/hashtag/flyerly";
-    #endif
     
     // Setting default URL
     [self openWebView:strURL_twitter];
@@ -56,12 +62,7 @@
 
     // for Navigation Bar logo
     UIImageView *logo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 102, 38)];
-    
-    #if defined(FLYERLY)
-        [logo setImage:[UIImage imageNamed:@"flyerlyLogo"]];
-    #else
-        [logo setImage:[UIImage imageNamed:@"flyerlyBizLogo"]];
-    #endif
+    [logo setImage:[UIImage imageNamed:logoImageName]];
     
     self.navigationItem.titleView = logo;
     
@@ -157,12 +158,7 @@
         urlAddress  = strURL_twitter;
     }
     else if(segmentedButton.selectedSegmentIndex == 1){
-        
-        #if defined(FLYERLY)
-            urlAddress  = @"https://instagram.com/explore/tags/flyerly/";
-        #else
-            urlAddress  = @"https://instagram.com/explore/tags/flyerly/";
-        #endif
+        urlAddress = strURL_instagram;
     }
     [self openWebView:urlAddress];
 }
