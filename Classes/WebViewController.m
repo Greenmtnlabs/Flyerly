@@ -12,8 +12,7 @@
 @interface WebViewController (){
     BOOL haveValidSubscription;
     UserPurchases *userPurchases;
-    NSString *strURL_twitter;
-    NSString *strURL_instagram;
+    NSString *url_twitter, *url_instagram;
     NSString *logoImageName;
 }
 
@@ -30,12 +29,12 @@
     
     #if defined(FLYERLY)
         logoImageName = @"flyerlyLogo";
-        strURL_twitter = @"https://twitter.com/hashtag/flyerly";
-        strURL_instagram = @"https://instagram.com/explore/tags/flyerly/";
+        url_twitter = @"https://twitter.com/hashtag/flyerly";
+        url_instagram = @"https://instagram.com/explore/tags/flyerly/";
     #else
         logoImageName = @"flyerlyBizLogo";
-        strURL_twitter = @"https://twitter.com/hashtag/flyerlybiz";
-        strURL_instagram = @"https://www.instagram.com/explore/tags/flyerlybiz/";
+        url_twitter = @"https://twitter.com/hashtag/flyerlybiz";
+        url_instagram = @"https://www.instagram.com/explore/tags/flyerlybiz/";
     #endif
     
     // Setting navigation bar
@@ -46,7 +45,7 @@
     self.segmentedButton.selectedSegmentIndex = 0;
     
     // Setting default URL
-    [self openWebView:strURL_twitter];
+    [self openWebView:url_twitter];
 }
 
 #pragma mark Navigation/UI Related Methods
@@ -152,15 +151,12 @@
  */
 - (IBAction)segmentedControlAction:(id)sender {
     
-    NSString *urlAddress;
-    
     if (segmentedButton.selectedSegmentIndex == 0) {
-        urlAddress  = strURL_twitter;
+        [self openWebView:url_twitter];
     }
     else if(segmentedButton.selectedSegmentIndex == 1){
-        urlAddress = strURL_instagram;
+        [self openWebView:url_instagram];
     }
-    [self openWebView:urlAddress];
 }
 
 /*
