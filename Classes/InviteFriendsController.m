@@ -31,6 +31,7 @@
     UserPurchases *userPurchases;
     NSString *productIdentifier;
     NSArray *selectedInAppIDs;
+    NSString *socialMediaSharingText;
 }
 
 @synthesize uiTableView, emailsArray, contactsArray, selectedIdentifiers, emailButton, contactsButton, facebookButton, twitterButton,  searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited, emailInvited;
@@ -52,9 +53,13 @@ const int CONTACTS_TAB = 0;
     
     #if defined(FLYERLY)
         selectedInAppIDs = FLYERLY_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
+        socialMediaSharingText = @"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try?";
     #else
         selectedInAppIDs = FLYERLYBIZ_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
+        socialMediaSharingText = @"I'm using the Flyerly Biz to create and share flyers on the go! Want to give it a try?";
     #endif
+    
+    
     
     
     userPurchases = [UserPurchases getInstance];
@@ -421,9 +426,8 @@ const int CONTACTS_TAB = 0;
     SHKItem *item;
     NSMutableArray *identifiers = [[NSMutableArray alloc] init];
     identifiers = selectedIdentifiers;
-    NSLog(@"identifiers = %@,  selectedTab = %i",identifiers, selectedTab);
-
-    NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
+    
+    NSString *sharingText = [NSString stringWithFormat:@"%@ %@%@", socialMediaSharingText, flyerConfigurator.referralURL, userUniqueObjectId];
     
     if([identifiers count] > 0){
         
@@ -469,7 +473,7 @@ const int CONTACTS_TAB = 0;
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",flyerConfigurator.referralURL, userUniqueObjectId]];
             item = [SHKItem URL:url title:@"Invite Friends" contentType:SHKURLContentTypeUndefined];
             [item setMailToRecipients:identifiers];
-            item.text = @"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try?";
+            item.text = socialMediaSharingText;
             // Share the item with my custom class
             [SHKMail shareItem:item];
         }
@@ -725,7 +729,7 @@ const int CONTACTS_TAB = 0;
     SHKItem *item;
     
     // text to be share.
-    NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
+    NSString *sharingText = [NSString stringWithFormat:@"%@ %@%@", socialMediaSharingText, flyerConfigurator.referralURL, userUniqueObjectId];
     
     // app URL with user id.
     NSString *urlToShare = [NSString stringWithFormat:@"%@%@", flyerConfigurator.referralURL, userUniqueObjectId];
@@ -1136,18 +1140,16 @@ const int CONTACTS_TAB = 0;
     if (selectedTab == 2) {
         
         NSString *hashTag;
-        NSString *sharingTxt;
+        NSString *sharingText;
         #if defined(FLYERLY)
             hashTag  = @"#flyerly";
-            sharingTxt = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
+            sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
         #else
             hashTag  = @"#FlyerlyBiz";
-            sharingTxt = [NSString stringWithFormat:@"I'm using Flyerly Biz to create and share flyers on the go! %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
+            sharingText = [NSString stringWithFormat:@"I'm using Flyerly Biz to create and share flyers on the go! %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
         #endif
         
         ContactsModel *model = [self getArrayOfSelectedTab][(indexPath.row)];
-        
-        NSString *sharingText = sharingTxt;
         
         //CHECK FOR ALREADY SELECTED
         if (model.status == 0) {
@@ -1179,10 +1181,7 @@ const int CONTACTS_TAB = 0;
             [selectedIdentifiers removeObject:model.description];
             
         }
-        
     }
-    
-    
 }
 
 - (IBAction)onSearchClick:(UIButton *)sender{

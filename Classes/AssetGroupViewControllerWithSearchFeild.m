@@ -302,7 +302,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
                 NSLog(@"Image error: %@", error);
             }];
             [requestOperation start];
-            NSLog(@"");
+            
         }
         
     } else{

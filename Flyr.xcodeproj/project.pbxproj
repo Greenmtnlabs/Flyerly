@@ -774,7 +774,6 @@
 		10C523281CB7C07E00A5805C /* Skating-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2421843B194B4AEC00FDDA97 /* Skating-icon.png */; };
 		10C523291CB7C07E00A5805C /* emoticon249-tire@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202978671B4CFBE700F35E40 /* emoticon249-tire@2x.png */; };
 		10C5232A1CB7C07E00A5805C /* delete_button@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24861E1F19F9146F00670F6D /* delete_button@3x.png */; };
-		10C5232B1CB7C07E00A5805C /* flyerlylogo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24861E4019F9146F00670F6D /* flyerlylogo@3x.png */; };
 		10C5232C1CB7C07E00A5805C /* Template98.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C35350FA1B60F68600CF68F9 /* Template98.jpg */; };
 		10C5232D1CB7C07E00A5805C /* invite_email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 204D69091B9EFB7600C6732E /* invite_email@2x.png */; };
 		10C5232E1CB7C07E00A5805C /* emoticon223-look_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2029784D1B4CFBE600F35E40 /* emoticon223-look_down@2x.png */; };
@@ -1110,7 +1109,6 @@
 		10C524781CB7C07E00A5805C /* b11.png in Resources */ = {isa = PBXBuildFile; fileRef = C3D8DD7F1B53DBE1006C2A9F /* b11.png */; };
 		10C524791CB7C07E00A5805C /* emoticon175@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 242183FE194B4AEC00FDDA97 /* emoticon175@2x.png */; };
 		10C5247A1CB7C07E00A5805C /* emoticon185-Adore1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202978271B4CFBE500F35E40 /* emoticon185-Adore1@2x.png */; };
-		10C5247B1CB7C07E00A5805C /* flyerlylogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2092FFCA184E00BF0034C4F6 /* flyerlylogo@2x.png */; };
 		10C5247C1CB7C07E00A5805C /* icon2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C35351211B61008200CF68F9 /* icon2.jpg */; };
 		10C5247D1CB7C07E00A5805C /* save_share_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C35D49221B3A75370021A0E9 /* save_share_selected@2x.png */; };
 		10C5247E1CB7C07E00A5805C /* Template52.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3766C901B5650AF00B7F5B2 /* Template52.jpg */; };
@@ -1573,6 +1571,8 @@
 		10C526491CB7C07E00A5805C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26D73E02307543D994C6C8BE /* libPods.a */; };
 		10C526541CB7C45100A5805C /* FlyerlyBiz-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10C526531CB7C45100A5805C /* FlyerlyBiz-Info.plist */; };
 		10C818B51CAD23E0004116E0 /* create_flyer_default_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 10C818B41CAD23E0004116E0 /* create_flyer_default_image.png */; };
+		10F2912B1CC50724007725EA /* flyerlyLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F291291CC50724007725EA /* flyerlyLogo@2x.png */; };
+		10F2912C1CC50724007725EA /* flyerlyLogo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F2912A1CC50724007725EA /* flyerlyLogo@3x.png */; };
 		1D3623260D0F684500981E51 /* FlyrAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* FlyrAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -1782,7 +1782,6 @@
 		208E35A417C20CC700CE54BE /* RegisterViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A317C20CC700CE54BE /* RegisterViewController_iPhone5.xib */; };
 		20920015184F40330034C4F6 /* InviteFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20920013184F40330034C4F6 /* InviteFriendsCell.m */; };
 		20920016184F40330034C4F6 /* InviteFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20920014184F40330034C4F6 /* InviteFriendsCell.xib */; };
-		2092FFCC184E00BF0034C4F6 /* flyerlylogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2092FFCA184E00BF0034C4F6 /* flyerlylogo@2x.png */; };
 		20930D7B19AB5F22004B9F93 /* drawing_tab_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20930D7919AB5F22004B9F93 /* drawing_tab_selected@2x.png */; };
 		20930D7C19AB5F22004B9F93 /* drawing_tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20930D7A19AB5F22004B9F93 /* drawing_tab@2x.png */; };
 		209460A31977AD1A0050B5DE /* InviteForPrint.m in Sources */ = {isa = PBXBuildFile; fileRef = 209460A11977AD1A0050B5DE /* InviteForPrint.m */; };
@@ -2355,7 +2354,6 @@
 		24861F0319F9147100670F6D /* flickr_share_saved@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24861E3D19F9146F00670F6D /* flickr_share_saved@3x.png */; };
 		24861F0419F9147100670F6D /* flickr_share_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24861E3E19F9146F00670F6D /* flickr_share_selected@3x.png */; };
 		24861F0519F9147100670F6D /* flickr_share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24861E3F19F9146F00670F6D /* flickr_share@3x.png */; };
-		24861F0619F9147100670F6D /* flyerlylogo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24861E4019F9146F00670F6D /* flyerlylogo@3x.png */; };
 		24861F0719F9147100670F6D /* font_button_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24861E4119F9146F00670F6D /* font_button_selected@3x.png */; };
 		24861F0819F9147100670F6D /* font_button@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24861E4219F9146F00670F6D /* font_button@3x.png */; };
 		24861F0919F9147100670F6D /* greenButton@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24861E4319F9146F00670F6D /* greenButton@3x.png */; };
@@ -3147,6 +3145,8 @@
 		10C526501CB7C07E00A5805C /* FlyerlyBiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlyerlyBiz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10C526531CB7C45100A5805C /* FlyerlyBiz-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FlyerlyBiz-Info.plist"; sourceTree = "<group>"; };
 		10C818B41CAD23E0004116E0 /* create_flyer_default_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = create_flyer_default_image.png; sourceTree = "<group>"; };
+		10F291291CC50724007725EA /* flyerlyLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flyerlyLogo@2x.png"; sourceTree = "<group>"; };
+		10F2912A1CC50724007725EA /* flyerlyLogo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flyerlyLogo@3x.png"; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* FlyrAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FlyrAppDelegate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		1D3623250D0F684500981E51 /* FlyrAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FlyrAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -3394,7 +3394,6 @@
 		20920012184F40330034C4F6 /* InviteFriendsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendsCell.h; sourceTree = "<group>"; };
 		20920013184F40330034C4F6 /* InviteFriendsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsCell.m; sourceTree = "<group>"; };
 		20920014184F40330034C4F6 /* InviteFriendsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendsCell.xib; sourceTree = "<group>"; };
-		2092FFCA184E00BF0034C4F6 /* flyerlylogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flyerlylogo@2x.png"; sourceTree = "<group>"; };
 		20930D7919AB5F22004B9F93 /* drawing_tab_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drawing_tab_selected@2x.png"; sourceTree = "<group>"; };
 		20930D7A19AB5F22004B9F93 /* drawing_tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drawing_tab@2x.png"; sourceTree = "<group>"; };
 		209460A01977AD1A0050B5DE /* InviteForPrint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteForPrint.h; sourceTree = "<group>"; };
@@ -4028,7 +4027,6 @@
 		24861E3D19F9146F00670F6D /* flickr_share_saved@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flickr_share_saved@3x.png"; sourceTree = "<group>"; };
 		24861E3E19F9146F00670F6D /* flickr_share_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flickr_share_selected@3x.png"; sourceTree = "<group>"; };
 		24861E3F19F9146F00670F6D /* flickr_share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flickr_share@3x.png"; sourceTree = "<group>"; };
-		24861E4019F9146F00670F6D /* flyerlylogo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flyerlylogo@3x.png"; sourceTree = "<group>"; };
 		24861E4119F9146F00670F6D /* font_button_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "font_button_selected@3x.png"; sourceTree = "<group>"; };
 		24861E4219F9146F00670F6D /* font_button@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "font_button@3x.png"; sourceTree = "<group>"; };
 		24861E4319F9146F00670F6D /* greenButton@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "greenButton@3x.png"; sourceTree = "<group>"; };
@@ -4891,6 +4889,8 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				10F291291CC50724007725EA /* flyerlyLogo@2x.png */,
+				10F2912A1CC50724007725EA /* flyerlyLogo@3x.png */,
 				100B59291CBE4A3700003FBE /* flyerlyBizLogo@2x.png */,
 				100B592A1CBE4A3700003FBE /* flyerlyBizLogo@3x.png */,
 				10AE8CDE1CBCD8CE0022DBA7 /* flyerly_biz_welcomescreen_bg@2x.jpg */,
@@ -5074,7 +5074,6 @@
 				24861E3D19F9146F00670F6D /* flickr_share_saved@3x.png */,
 				24861E3E19F9146F00670F6D /* flickr_share_selected@3x.png */,
 				24861E3F19F9146F00670F6D /* flickr_share@3x.png */,
-				24861E4019F9146F00670F6D /* flyerlylogo@3x.png */,
 				24861E4119F9146F00670F6D /* font_button_selected@3x.png */,
 				24861E4219F9146F00670F6D /* font_button@3x.png */,
 				24861E4319F9146F00670F6D /* greenButton@3x.png */,
@@ -5371,7 +5370,6 @@
 				200FA572187FEB01003576DA /* galleryicon.png */,
 				20714DF5187F2105000D6838 /* cancelcamera.png */,
 				20714DF2187F1B9D000D6838 /* cameraline.png */,
-				2092FFCA184E00BF0034C4F6 /* flyerlylogo@2x.png */,
 				0FD887001786C3810059BC54 /* current_location@2x.png */,
 				65C7A5271721B78D003F1A84 /* Default-568h@2x.png */,
 				6560C1C31727FAF9005BE8DD /* grids.png */,
@@ -8016,7 +8014,6 @@
 				10C523281CB7C07E00A5805C /* Skating-icon.png in Resources */,
 				10C523291CB7C07E00A5805C /* emoticon249-tire@2x.png in Resources */,
 				10C5232A1CB7C07E00A5805C /* delete_button@3x.png in Resources */,
-				10C5232B1CB7C07E00A5805C /* flyerlylogo@3x.png in Resources */,
 				10C5232C1CB7C07E00A5805C /* Template98.jpg in Resources */,
 				10C5232D1CB7C07E00A5805C /* invite_email@2x.png in Resources */,
 				10C5232E1CB7C07E00A5805C /* emoticon223-look_down@2x.png in Resources */,
@@ -8355,7 +8352,6 @@
 				10C524781CB7C07E00A5805C /* b11.png in Resources */,
 				10C524791CB7C07E00A5805C /* emoticon175@2x.png in Resources */,
 				10C5247A1CB7C07E00A5805C /* emoticon185-Adore1@2x.png in Resources */,
-				10C5247B1CB7C07E00A5805C /* flyerlylogo@2x.png in Resources */,
 				10C5247C1CB7C07E00A5805C /* icon2.jpg in Resources */,
 				10C5247D1CB7C07E00A5805C /* save_share_selected@2x.png in Resources */,
 				10C5247E1CB7C07E00A5805C /* Template52.jpg in Resources */,
@@ -9036,6 +9032,7 @@
 				24861F5419F9147100670F6D /* t_setting_button@3x.png in Resources */,
 				200FA574187FEB01003576DA /* galleryicon.png in Resources */,
 				248A3635193F231D0005FCAD /* size_tab@2x.png in Resources */,
+				10F2912B1CC50724007725EA /* flyerlyLogo@2x.png in Resources */,
 				246EF4EF193C515D004539B2 /* emoticon1@2x.png in Resources */,
 				2044FF97185088ED00A26B42 /* MainSettingCell.xib in Resources */,
 				24861F4619F9147100670F6D /* signout@3x.png in Resources */,
@@ -9411,7 +9408,6 @@
 				242184FA194B4AEC00FDDA97 /* Skating-icon.png in Resources */,
 				202978AC1B4CFBE700F35E40 /* emoticon249-tire@2x.png in Resources */,
 				24861EE519F9147100670F6D /* delete_button@3x.png in Resources */,
-				24861F0619F9147100670F6D /* flyerlylogo@3x.png in Resources */,
 				C35351151B60F68600CF68F9 /* Template98.jpg in Resources */,
 				204D690D1B9EFB7600C6732E /* invite_email@2x.png in Resources */,
 				202978921B4CFBE700F35E40 /* emoticon223-look_down@2x.png in Resources */,
@@ -9682,6 +9678,7 @@
 				242184F8194B4AEC00FDDA97 /* shell-icon.png in Resources */,
 				246EF500193C515D004539B2 /* emoticon35@2x.png in Resources */,
 				242184F5194B4AEC00FDDA97 /* sand-bucket-icon.png in Resources */,
+				10F2912C1CC50724007725EA /* flyerlyLogo@3x.png in Resources */,
 				24861F4019F9147100670F6D /* search_bg@3x.png in Resources */,
 				C337ED5F1BD69DBA0038B82E /* 5tab_3_giphy_selected@3x.png in Resources */,
 				C35351361B61008200CF68F9 /* icon11.jpg in Resources */,
@@ -9749,7 +9746,6 @@
 				C3D8DD931B53DBE1006C2A9F /* b11.png in Resources */,
 				242184BD194B4AEC00FDDA97 /* emoticon175@2x.png in Resources */,
 				2029786C1B4CFBE700F35E40 /* emoticon185-Adore1@2x.png in Resources */,
-				2092FFCC184E00BF0034C4F6 /* flyerlylogo@2x.png in Resources */,
 				C353512F1B61008200CF68F9 /* icon2.jpg in Resources */,
 				C35D49251B3A75370021A0E9 /* save_share_selected@2x.png in Resources */,
 				C3766CF01B5650B000B7F5B2 /* Template52.jpg in Resources */,
