@@ -33,8 +33,8 @@
         url_instagram = @"https://instagram.com/explore/tags/flyerly/";
     #else
         logoImageName = @"flyerlyBizLogo";
-        url_twitter = @"https://twitter.com/hashtag/flyerlybiz";
-        url_instagram = @"https://www.instagram.com/explore/tags/flyerlybiz/";
+        url_twitter = @"https://twitter.com/hashtag/FlyerlyBiz";
+        url_instagram = @"https://www.instagram.com/explore/tags/FlyerlyBiz/";
     #endif
     
     // Setting navigation bar

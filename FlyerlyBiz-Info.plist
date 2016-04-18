@@ -8,6 +8,8 @@
 	<string>Flyerly Biz</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>icon@2x.png</string>
@@ -41,9 +43,9 @@
 			<array>
 				<string>fb1755119231374505</string>
 				<string>oatransdemo</string>
-				<string>FlyerlyBiz</string>
+				<string>Flyerly Biz</string>
 				<string>fsqapi</string>
-				<string>flyerlyapp</string>
+				<string>FlyerlyBiz</string>
 			</array>
 		</dict>
 	</array>
