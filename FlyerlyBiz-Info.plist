@@ -36,12 +36,12 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.flyerly.greenmtnlabs</string>
+			<string>com.socialflyr.flyrfree</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb136691489852349</string>
+				<string>fb1755119231374505</string>
 				<string>oatransdemo</string>
-				<string>Flyerly</string>
+				<string>FlyerlyBiz</string>
 				<string>fsqapi</string>
 				<string>flyerlyapp</string>
 			</array>
@@ -68,6 +68,30 @@
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
+        <key>NSExceptionDomains</key>
+        <dict>
+            <key>facebook.com</key>
+            <dict>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <key>NSExceptionRequiresForwardSecrecy</key>
+                <false/>
+            </dict>
+            <key>fbcdn.net</key>
+            <dict>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <key>NSExceptionRequiresForwardSecrecy</key>
+                <false/>
+            </dict>
+            <key>akamaihd.net</key>
+            <dict>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <key>NSExceptionRequiresForwardSecrecy</key>
+                <false/>
+            </dict>
+        </dict>
 	</dict>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>

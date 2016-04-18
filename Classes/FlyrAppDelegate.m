@@ -428,24 +428,26 @@ if it exist then we call Merging Process
             // result is a dictionary with the user's Facebook data
             NSDictionary *userData = (NSDictionary *)result;
             NSString *email = userData[@"email"];
+            
+            if ( email != nil ){
+                //Checking Email Exist in Parse
+                PFQuery *query = [PFUser  query];
+                [query whereKey:@"email" equalTo:email];
+                [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
 
-            //Checking Email Exist in Parse
-            PFQuery *query = [PFUser  query];
-            [query whereKey:@"email" equalTo:email];
-            [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
-                if (error) {
-                    
-                    [lauchController hideLoadingIndicator];
-
-                }else{
-                    
-                    // Migrate Account For 3.0 Version
-                    [FlyerUser migrateUserto3dot0:object];
-                    
-                    [lauchController hideLoadingIndicator];
-                    
-                }
-            }];
+                    if (error) {
+                        [lauchController hideLoadingIndicator];
+                    }else{
+                        // Migrate Account For 3.0 Version
+                        [FlyerUser migrateUserto3dot0:object];
+                        
+                        [lauchController hideLoadingIndicator];
+                        
+                    }
+                }];
+            } else {
+                [lauchController hideLoadingIndicator];
+            }
         }
     }];
 }
