@@ -22,6 +22,8 @@
 	<dict/>
 	<key>CFBundleIdentifier</key>
 	<string>com.socialflyr.flyrfree</string>
+	<key>CLIENT_ID</key>
+	<string>688107532507-9keid69nu67bce493lmlp1bdl08ju8bs.apps.googleusercontent.com</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -207,4 +209,5 @@
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 </dict>
+	
 </plist>

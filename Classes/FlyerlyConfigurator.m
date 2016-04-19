@@ -318,7 +318,13 @@
  */
 - (NSString*)googlePlusClientId {
     
+#if defined(FLYERLY) // Flyerly
     return @"144370279359-lsst3ttqhr7nrj1krv21hk3urfsou6ic.apps.googleusercontent.com";
+#else // Flyerly Biz
+    return @"144370279359-lsst3ttqhr7nrj1krv21hk3urfsou6ic.apps.googleusercontent.com";
+#endif
+    
+    
     
 }
 
@@ -549,11 +555,10 @@
 //clientid
 // YouTube - https://developers.google.com/youtube/v3/guides/authentication#OAuth2_Register
 - (NSString*)youTubeConsumerKey {
-    
     #if defined(FLYERLY) // Flyerly
         return @"688107532507-7nm1v37klc2vtfgcaer206k338ub9jqs.apps.googleusercontent.com";
     #else // Flyerly Biz
-        return @"337741168191-60m58f2hv1gid15gpu6h0imq5s9n50ce.apps.googleusercontent.com";
+        return @"487252497579-jptpajrrht0lfaq0ig7h7mkkvfrh5eku.apps.googleusercontent.com"; // using id: abdulrauf618@gmail.com
     #endif
 }
 
@@ -563,7 +568,7 @@
     #if defined(FLYERLY)
         return @"lSn4qPwH3FOytNsqMkeZNYTP";
     #else
-        return @"AIzaSyAMD3ozT_-AOX52fFIN7bCEfOvi9aPYjqQ";
+        return @"wZCbdJC0fyonfizeoB_aNv_6"; // using id: abdulrauf618@gmail.com
     #endif
 }
 
