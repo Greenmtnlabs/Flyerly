@@ -95,17 +95,18 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
  * Set up the paths.
  */
 - (void)setupPaths:(NSString *)flyPath {
+    curFlyerPath = flyPath;
     //set Pieces Dictionary File for Update
-    piecesFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.pieces"]];
+    piecesFile = [curFlyerPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.pieces"]];
     
     //set Text File for Update
-    textFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.txt"]];
+    textFile = [curFlyerPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.txt"]];
     
     //set Share Status File for Update
-    socialFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/Social/flyer.soc"]];
+    socialFile = [curFlyerPath stringByAppendingString:[NSString stringWithFormat:@"/Social/flyer.soc"]];
     
     //set Flyer Image for Future Update
-    flyerImageFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE]];
+    flyerImageFile = [curFlyerPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE]];
 }
 
 
@@ -1764,6 +1765,9 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  */
 -(NSString *)getSharingVideoPath{
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    if ([currentpath isEqualToString:@"/"]) {
+        currentpath = [NSString stringWithFormat:@"/private%@",curFlyerPath];
+    }
     NSString *destination = [NSString stringWithFormat:@"%@/FlyerlyMovie.mov",currentpath];
     return destination;
 }

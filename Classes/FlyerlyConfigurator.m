@@ -317,6 +317,7 @@
  register the bundle ID of your application.
  */
 - (NSString*)googlePlusClientId {
+    
     return @"144370279359-lsst3ttqhr7nrj1krv21hk3urfsou6ic.apps.googleusercontent.com";
 }
 
@@ -547,12 +548,21 @@
 //clientid
 // YouTube - https://developers.google.com/youtube/v3/guides/authentication#OAuth2_Register
 - (NSString*)youTubeConsumerKey {
-    return @"688107532507-7nm1v37klc2vtfgcaer206k338ub9jqs.apps.googleusercontent.com";
+    #if defined(FLYERLY) // Flyerly
+        return @"688107532507-7nm1v37klc2vtfgcaer206k338ub9jqs.apps.googleusercontent.com";
+    #else // Flyerly Biz
+        return @"487252497579-jptpajrrht0lfaq0ig7h7mkkvfrh5eku.apps.googleusercontent.com"; // using id: abdulrauf618@gmail.com
+    #endif
 }
 
 //API key
 - (NSString*)youTubeSecret {
-	return @"lSn4qPwH3FOytNsqMkeZNYTP";
+	
+    #if defined(FLYERLY)
+        return @"lSn4qPwH3FOytNsqMkeZNYTP";
+    #else
+        return @"wZCbdJC0fyonfizeoB_aNv_6"; // using id: abdulrauf618@gmail.com
+    #endif
 }
 
 // Dropbox - https://www.dropbox.com/developers/apps
