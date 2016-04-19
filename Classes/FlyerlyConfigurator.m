@@ -317,7 +317,9 @@
  register the bundle ID of your application.
  */
 - (NSString*)googlePlusClientId {
+    
     return @"144370279359-lsst3ttqhr7nrj1krv21hk3urfsou6ic.apps.googleusercontent.com";
+    
 }
 
 //Pocket v3 consumer key. http://getpocket.com/developer/apps/. If you have old read it later app, you should obtain new key.
@@ -547,12 +549,22 @@
 //clientid
 // YouTube - https://developers.google.com/youtube/v3/guides/authentication#OAuth2_Register
 - (NSString*)youTubeConsumerKey {
-    return @"688107532507-7nm1v37klc2vtfgcaer206k338ub9jqs.apps.googleusercontent.com";
+    
+    #if defined(FLYERLY) // Flyerly
+        return @"688107532507-7nm1v37klc2vtfgcaer206k338ub9jqs.apps.googleusercontent.com";
+    #else // Flyerly Biz
+        return @"337741168191-60m58f2hv1gid15gpu6h0imq5s9n50ce.apps.googleusercontent.com";
+    #endif
 }
 
 //API key
 - (NSString*)youTubeSecret {
-	return @"lSn4qPwH3FOytNsqMkeZNYTP";
+	
+    #if defined(FLYERLY)
+        return @"lSn4qPwH3FOytNsqMkeZNYTP";
+    #else
+        return @"AIzaSyAMD3ozT_-AOX52fFIN7bCEfOvi9aPYjqQ";
+    #endif
 }
 
 // Dropbox - https://www.dropbox.com/developers/apps

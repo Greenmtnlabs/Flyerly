@@ -19,6 +19,7 @@
     FlyerlyConfigurator *flyerConfigurator;
     NSString *hashTag;
     NSString *strPlaceHolder;
+    NSString *appName;
 }
 @synthesize youtubeService;
 @synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,saveButton,printFlyerButton,facebookButton,twitterButton,instagramButton,messengerButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,tempTxtArea,saveToGallaryReqBeforeSharing, fmController;
@@ -35,9 +36,11 @@ UIAlertView *saveCurrentFlyerAlert;
     [super viewDidLoad];
     
     #if defined(FLYERLY)
+        appName = @"Flyerly";
         hashTag = @"#flyerly";
         strPlaceHolder = @"Flyerly Title (e.g. \"Parker's Party\")";
     #else
+        appName = @"Flyerly Biz";
         hashTag = @"#FlyerlyBiz";
         strPlaceHolder =  @"Flyerly Biz Title (e.g. \"Parker's Party\")";
     #endif
@@ -560,12 +563,7 @@ UIAlertView *saveCurrentFlyerAlert;
         title = [dateFormat stringFromDate:[NSDate date]];
     }
     if ([description isEqualToString:@""]) {
-        
-        #if defined(FLYERLY)
-            description = @"Uploaded from Flyerly";
-        #else
-            description = @"Uploaded from Flyerly Biz";
-        #endif
+        description = [NSString stringWithFormat:@"Uploaded from %@", appName ];
     }
     
     [self.uploadVideo uploadYouTubeVideoWithService:self.youtubeService
@@ -789,13 +787,6 @@ UIAlertView *saveCurrentFlyerAlert;
  */
 -(IBAction)onClickEmailButton{
     
-    NSString *msg;
-    #if defined(FLYERLY)
-        msg = @"Flyerly for you!";
-    #else
-        msg = @"Flyerly Biz for you!";
-    #endif
-    
     // Current Item For Sharing
     SHKItem *item;
     if ([self.flyer isVideoFlyer]) {
@@ -803,10 +794,10 @@ UIAlertView *saveCurrentFlyerAlert;
         // Current Video Link For Sharing
         //        item = [SHKItem text: [NSString stringWithFormat:@"%@ Created & sent from Flyer.ly",[self.flyer getYoutubeLink]]];
         
-        item = [SHKItem URL:[NSURL URLWithString:[self.flyer getYoutubeLink]] title:msg contentType:SHKURLContentTypeVideo];
+        item = [SHKItem URL:[NSURL URLWithString:[self.flyer getYoutubeLink]] title:[NSString stringWithFormat:@"%@ for you!", appName ] contentType:SHKURLContentTypeVideo];
     }else {
         
-        item = [SHKItem image:selectedFlyerImage title:msg];
+        item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ for you!", appName ]];
         item.text = @"Created & sent from Flyer.ly";
     }
     
@@ -1319,20 +1310,12 @@ UIAlertView *saveCurrentFlyerAlert;
 
 -(void)sendAlertEmail{
   
-    
     MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
   
     if([MFMailComposeViewController canSendMail]){
         
-        NSString *msg;
-        #if defined(FLYERLY)
-            msg = @"Flyerly Email Feedback";
-        #else
-            msg = @"Flyerly Biz Email Feedback";
-        #endif
-        
         picker.mailComposeDelegate = self;
-        [picker setSubject:@"Flyerly Email Feedback"];
+        [picker setSubject:[NSString stringWithFormat:@"%@ Email Feedback", appName ]];
         
         // Set up recipients
         NSMutableArray *toRecipients = [[NSMutableArray alloc]init];
