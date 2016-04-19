@@ -430,6 +430,13 @@ if it exist then we call Merging Process
             NSString *email = userData[@"email"];
             
             if ( email != nil ){
+                
+                // Store the current user's Facebook ID on the user
+                [[PFUser currentUser] setObject:[result objectForKey:@"email"] forKey:@"email"];
+                [[PFUser currentUser] setObject:[result objectForKey:@"name"] forKey:@"name"];
+                [[PFUser currentUser] setObject:[result objectForKey:@"contact"] forKey:@"contact"];                
+                [[PFUser currentUser] saveInBackground];
+                
                 //Checking Email Exist in Parse
                 PFQuery *query = [PFUser  query];
                 [query whereKey:@"email" equalTo:email];
