@@ -318,14 +318,7 @@
  */
 - (NSString*)googlePlusClientId {
     
-#if defined(FLYERLY) // Flyerly
     return @"144370279359-lsst3ttqhr7nrj1krv21hk3urfsou6ic.apps.googleusercontent.com";
-#else // Flyerly Biz
-    return @"144370279359-lsst3ttqhr7nrj1krv21hk3urfsou6ic.apps.googleusercontent.com";
-#endif
-    
-    
-    
 }
 
 //Pocket v3 consumer key. http://getpocket.com/developer/apps/. If you have old read it later app, you should obtain new key.
