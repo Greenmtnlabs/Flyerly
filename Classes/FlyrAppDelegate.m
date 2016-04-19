@@ -428,15 +428,18 @@ if it exist then we call Merging Process
             // result is a dictionary with the user's Facebook data
             NSDictionary *userData = (NSDictionary *)result;
             NSString *email = userData[@"email"];
+            NSString *name = userData[@"name"];
+            NSString *contact = userData[@"contact"];
+            BOOL canSave = false;
+            
+
+            // Store the current user's Facebook ID on the user
+            if ( email != nil ) { [[PFUser currentUser] setObject:email forKey:@"email"]; canSave = true; }
+            if ( name != nil ) { [[PFUser currentUser] setObject:name forKey:@"name"]; canSave = true;}
+            if ( contact != nil ) { [[PFUser currentUser] setObject:contact forKey:@"contact"]; canSave = true;}
+
             
             if ( email != nil ){
-                
-                // Store the current user's Facebook ID on the user
-                [[PFUser currentUser] setObject:[result objectForKey:@"email"] forKey:@"email"];
-                [[PFUser currentUser] setObject:[result objectForKey:@"name"] forKey:@"name"];
-                [[PFUser currentUser] setObject:[result objectForKey:@"contact"] forKey:@"contact"];                
-                [[PFUser currentUser] saveInBackground];
-                
                 //Checking Email Exist in Parse
                 PFQuery *query = [PFUser  query];
                 [query whereKey:@"email" equalTo:email];
@@ -454,6 +457,10 @@ if it exist then we call Merging Process
                 }];
             } else {
                 [lauchController hideLoadingIndicator];
+            }
+            
+            if (canSave){
+                [[PFUser currentUser] saveInBackground];
             }
         }
     }];

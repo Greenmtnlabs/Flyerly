@@ -182,6 +182,8 @@
             
             [self hideLoadingIndicator]; // Hide loading indicator
             
+             NSLog(@"email=%@ - Email=%@ - name=%@ - contact=%@", user.email, user[@"email"], user[@"name"], user[@"contact"]);
+            
             if ( !user ) {
 
                 //User denied to access fb account of Device
