@@ -57,6 +57,8 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     email.text = user.email;
     name.text = user[@"name"];
     phno.text = user[@"contact"];
+    
+//    NSLog(@"email=%@ - Email=%@ - name=%@ - contact=%@", user.email, user[@"email"], user[@"name"], user[@"contact"]);
 
     // HERE WE HIDE USER FIELD IF USER LOGIN WITH FACBOOK OR TWITTER
     if([[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyUser"]){
