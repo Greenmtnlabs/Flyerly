@@ -37,17 +37,15 @@ static UserPurchases *sharedSingleton = nil;
 
 - (BOOL) checkKeyExistsInPurchases : (NSString *)productId {
     
+    #if defined(FLYERLY)
+        inAppPurchaseKeys = FLYERLY_IN_APP_PURCHASE_KEYS;
+    #else
+        inAppPurchaseKeys = FLYERLY_BIZ_IN_APP_PURCHASE_KEYS;
+    #endif
+
     if ( [oldPurchases objectForKey:[inAppPurchaseKeys objectAtIndex:0]] && [self isSubscriptionValid] ) {
-        
         return YES;
-        
     } else {
-        
-        #if defined(FLYERLY)
-                inAppPurchaseKeys = FLYERLY_IN_APP_PURCHASE_KEYS;
-        #else
-                inAppPurchaseKeys = FLYERLY_BIZ_IN_APP_PURCHASE_KEYS;
-        #endif
         
         NSString *productId_ = [productId stringByReplacingOccurrencesOfString:@"." withString:@""];
         
