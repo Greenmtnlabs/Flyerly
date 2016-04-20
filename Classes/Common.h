@@ -169,6 +169,7 @@ nil]
 [UIFont fontWithName:@"HiraKakuProN-W6" size:16],\
 nil]
 
+#define NOT_FOUND_IN_APP @"NOT_FOUND_IN_APP"
 
 #if defined(FLYERLY)
     #define APP_NAME @"FLYERLY"
@@ -204,8 +205,8 @@ nil]
     #define IN_APP_ID_YEARLY_SUBSCRIPTION @"comflyerlybizYearlyPlatinum"
     #define IN_APP_ID_AD_REMOVAL @"comflyerlybizAdRemovalMonthly"
 
-    #define IN_APP_ID_SAVED_FLYERS @"NOT_FOUND"
-    #define IN_APP_ID_ICON_BUNDLE @"NOT_FOUND"
+    #define IN_APP_ID_SAVED_FLYERS NOT_FOUND_IN_APP
+    #define IN_APP_ID_ICON_BUNDLE NOT_FOUND_IN_APP
 
 #endif
 
