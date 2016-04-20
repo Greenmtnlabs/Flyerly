@@ -137,7 +137,7 @@
 
 -(void)reloadInAppProductIDsArray{
 
-    productIdentifiers = [NSMutableArray arrayWithObjects:BUNDLE_IDENTIFIER_ALL_DESIGN, BUNDLE_IDENTIFIER_UNLOCK_VIDEO, BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION, BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION, BUNDLE_IDENTIFIER_AD_REMOVAL, nil];
+    productIdentifiers = [[NSMutableArray alloc] initWithObjects:BUNDLE_IDENTIFIER_ALL_DESIGN, BUNDLE_IDENTIFIER_UNLOCK_VIDEO, BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION, BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION, BUNDLE_IDENTIFIER_AD_REMOVAL, nil];
 }
 
 
@@ -390,7 +390,7 @@
         // Getting the product against tapped/selected cell
         NSDictionary *product = [productArray objectAtIndex:indexPath.row];
         
-        if([[product objectForKey:@"productidentifier"] isEqualToString: BUNDLE_IDENTIFIER_ALL_DESIGN) { // All Design Subscription
+        if([[product objectForKey:@"productidentifier"] isEqualToString: BUNDLE_IDENTIFIER_ALL_DESIGN]) { // All Design Subscription
             
             NSString *title;
             #if defined(FLYERLY)
