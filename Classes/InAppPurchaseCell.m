@@ -21,15 +21,7 @@
 }
 
 -(void)setCellValueswithProductTitle :(NSString *)productIdentifier Title:(NSString *)title ProductPrice:(NSString *)price ProductDescription: (NSString *)description{
-    
-    NSArray *selectedInAppIDs;
-    
-    #if defined(FLYERLY)
-        selectedInAppIDs = FLYERLY_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
-    #else
-        selectedInAppIDs = FLYERLYBIZ_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
-    #endif
-    
+     
     if ( ![title isEqualToString:@"Complete Bundle"] ){
         [discount removeFromSuperview];
     }
@@ -38,7 +30,7 @@
         [star removeFromSuperview];
     }
     
-    if([productIdentifier isEqualToString:[selectedInAppIDs objectAtIndex:0] ]){ // Monthly Subscription
+    if([productIdentifier isEqualToString:BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION ]){ // Monthly Subscription
         packageName.textColor = [UIColor redColor];
         packagePrice.textColor = [UIColor redColor];
         packageDescription.textColor = [UIColor redColor];

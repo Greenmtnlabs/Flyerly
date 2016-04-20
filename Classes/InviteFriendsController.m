@@ -30,9 +30,6 @@
     BOOL haveValidSubscription;
     UserPurchases *userPurchases;
     NSString *productIdentifier;
-    NSArray *selectedInAppIDs;
-    NSString *socialMediaSharingText;
-    NSArray *inAppPurchaseKeys;
 }
 
 @synthesize uiTableView, emailsArray, contactsArray, selectedIdentifiers, emailButton, contactsButton, facebookButton, twitterButton,  searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited, emailInvited;
@@ -51,16 +48,6 @@ const int CONTACTS_TAB = 0;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
-    #if defined(FLYERLY)
-        inAppPurchaseKeys = FLYERLY_IN_APP_PURCHASE_KEYS;
-        selectedInAppIDs = FLYERLY_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
-        socialMediaSharingText = @"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try?";
-    #else
-        inAppPurchaseKeys = FLYERLY_BIZ_IN_APP_PURCHASE_KEYS;
-        selectedInAppIDs = FLYERLYBIZ_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
-        socialMediaSharingText = @"I'm using the Flyerly Biz to create and share flyers on the go! Want to give it a try?";
-    #endif
     
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
@@ -325,7 +312,7 @@ const int CONTACTS_TAB = 0;
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     userPurchases_.delegate = nil;
     
-    if ( [productId isEqualToString: [selectedInAppIDs objectAtIndex:2]]) { // Ad Removal Subscription
+    if ( [productId isEqualToString: BUNDLE_IDENTIFIER_AD_REMOVAL]) { // Ad Removal Subscription
         [self removeBAnnerAdd:YES];
     }
 }
@@ -345,8 +332,8 @@ const int CONTACTS_TAB = 0;
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     userPurchases_.delegate = nil;
     
-    if ( [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]]  ||
-        [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:1]] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION]  ||
+        [userPurchases_ checkKeyExistsInPurchases: BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION] ) {
         [inAppViewController.paidFeaturesTview reloadData];
     } else {
         [self removeAdsBanner:YES];
@@ -427,7 +414,7 @@ const int CONTACTS_TAB = 0;
     NSMutableArray *identifiers = [[NSMutableArray alloc] init];
     identifiers = selectedIdentifiers;
     
-    NSString *sharingText = [NSString stringWithFormat:@"%@ %@%@", socialMediaSharingText, flyerConfigurator.referralURL, userUniqueObjectId];
+    NSString *sharingText = [NSString stringWithFormat:@"I'm using the %@ app to create and share flyers on the go! Want to give it a try? %@%@", APP_NAME, flyerConfigurator.referralURL, userUniqueObjectId];
     
     if([identifiers count] > 0){
         
@@ -473,7 +460,7 @@ const int CONTACTS_TAB = 0;
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",flyerConfigurator.referralURL, userUniqueObjectId]];
             item = [SHKItem URL:url title:@"Invite Friends" contentType:SHKURLContentTypeUndefined];
             [item setMailToRecipients:identifiers];
-            item.text = socialMediaSharingText;
+            item.text = [NSString stringWithFormat:@"I'm using the %@ app to create and share flyers on the go! Want to give it a try?", APP_NAME];
             // Share the item with my custom class
             [SHKMail shareItem:item];
         }
@@ -729,7 +716,7 @@ const int CONTACTS_TAB = 0;
     SHKItem *item;
     
     // text to be share.
-    NSString *sharingText = [NSString stringWithFormat:@"%@ %@%@", socialMediaSharingText, flyerConfigurator.referralURL, userUniqueObjectId];
+    NSString *sharingText = [NSString stringWithFormat:@"I'm using the %@ app to create and share flyers on the go! Want to give it a try? %@%@", APP_NAME, flyerConfigurator.referralURL, userUniqueObjectId];;
     
     // app URL with user id.
     NSString *urlToShare = [NSString stringWithFormat:@"%@%@", flyerConfigurator.referralURL, userUniqueObjectId];
@@ -1499,7 +1486,7 @@ const int CONTACTS_TAB = 0;
 // Dismiss action for banner ad
 -(void)dismissBannerAds:(BOOL)valForBannerClose{
     
-    productIdentifier = [selectedInAppIDs objectAtIndex:2];
+    productIdentifier = BUNDLE_IDENTIFIER_AD_REMOVAL;
     inAppViewController = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
     [inAppViewController requestProduct];
     [inAppViewController purchaseProductByID:productIdentifier];
