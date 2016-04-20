@@ -187,7 +187,7 @@ nil]
     #define IN_APP_ID_YEARLY_SUBSCRIPTION @"comflyerlyYearlySubscription1"
     #define IN_APP_ID_AD_REMOVAL @"com.flyerly.AdRemovalMonthly"
 
-    #define IN_APP_ID_SAVEDFLYERS @"comflyerlyUnlockSavedFlyers"
+    #define IN_APP_ID_SAVED_FLYERS @"comflyerlyUnlockSavedFlyers"
     #define IN_APP_ID_ICON_BUNDLE @"comflyerlyIconsBundle"
 
 #else
