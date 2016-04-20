@@ -463,6 +463,9 @@ if it exist then we call Merging Process
                 [[PFUser currentUser] saveInBackground];
             }
         }
+        else {
+            [lauchController hideLoadingIndicator];
+        }
     }];
 }
 
