@@ -215,7 +215,15 @@ nil]
 
 #define FLYERLY_BIZ_IN_APP_PRODUCT_IDENTIFIERS [NSArray arrayWithObjects: @"com.flyerlybiz.AllDesignBundle", @"com.flyerlybiz.MonthlyGold", @"com.flyerlybiz.YearlyPlatinum", @"com.flyerlybiz.VideoFlyers", @"com.flyerlybiz.AdRemovalMonthly", nil]
 
+
+
+
 #define FLYERLY_IN_APP_PRODUCT_SELECTED_IDENTIFIERS [NSArray arrayWithObjects: @"com.flyerly.MonthlyGold", @"com.flyerly.YearlyPlatinum1", @"com.flyerly.AdRemovalMonthly", @"com.flyerly.AllDesignBundle", nil]
+
+
+
+
+
 #define FLYERLYBIZ_IN_APP_PRODUCT_SELECTED_IDENTIFIERS [NSArray arrayWithObjects: @"com.flyerlybiz.MonthlyGold", @"com.flyerlybiz.YearlyPlatinum", @"com.flyerlybiz.AdRemovalMonthly", @"com.flyerlybiz.AllDesignBundle", nil]
 
 
