@@ -221,7 +221,6 @@
             UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"Please sign in first"
                                                                 message: @"To purchase any product, you need to sign in first."
                                                                delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
-            
             [someError show];
         }
     }
