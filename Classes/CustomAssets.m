@@ -23,12 +23,6 @@
     
     [super setObject:asset];
     
-    #if defined(FLYERLY)
-        inAppPurchaseKeys = FLYERLY_IN_APP_PURCHASE_KEYS;
-    #else
-        inAppPurchaseKeys = FLYERLY_BIZ_IN_APP_PURCHASE_KEYS;
-    #endif
-    
     //Here we Check Content is Video Or Image
     if ( asset.type == NBUAssetTypeVideo) {
         videoIcon.alpha = 1;
@@ -36,21 +30,17 @@
         UserPurchases *userPurchases_ = [UserPurchases getInstance];
         if ([[PFUser currentUser] sessionToken].length != 0) {
             
-            if ( [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] ||
-                 [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:1]] ) {
+            if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ||
+                 [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO] ) {
                 
                 UIImage *image = [UIImage imageNamed: @"ModeVideo.png"];
                 videoIcon.image = image;
             }
             
         }
-        
-        
     }else {
         videoIcon.alpha = 0;
     }
-    
-    
 }
 
 @end

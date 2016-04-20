@@ -15,10 +15,7 @@
 
 @end
 
-@interface UserPurchases : NSObject{
-    
-    NSArray *inAppPurchaseKeys;
-}
+@interface UserPurchases : NSObject
 
 @property(nonatomic, strong)NSMutableDictionary *oldPurchases;
 @property (nonatomic, assign) id <UserPurchasesDelegate> delegate;

@@ -20,7 +20,6 @@
     CGRect sizeRectForAdd;
     BOOL haveValidSubscription;
     UserPurchases *userPurchases;
-    NSArray *inAppPurchaseKeys;
 }
 @end
 
@@ -41,12 +40,6 @@ id lastShareBtnSender;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
-    #if defined(FLYERLY)
-        inAppPurchaseKeys = FLYERLY_IN_APP_PURCHASE_KEYS;
-    #else
-        inAppPurchaseKeys = FLYERLY_BIZ_IN_APP_PURCHASE_KEYS;
-    #endif
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     flyerConfigurator = appDelegate.flyerConfigurator;
@@ -921,8 +914,8 @@ id lastShareBtnSender;
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] ||
-        [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:2]] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ||
+        [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS] ) {
         
         lockFlyer = NO;
         [self.tView reloadData];
@@ -1159,8 +1152,8 @@ id lastShareBtnSender;
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]]  ||
-         [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:2]] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN]  ||
+         [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS] ) {
 
         lockFlyer = NO;
         [self.tView reloadData];

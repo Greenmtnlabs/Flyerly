@@ -21,12 +21,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    #if defined(FLYERLY)
-        inAppPurchaseKeys = FLYERLY_IN_APP_PURCHASE_KEYS;
-    #else
-        inAppPurchaseKeys = FLYERLY_BIZ_IN_APP_PURCHASE_KEYS;
-    #endif
-    
     // Configure the camera view
     self.cameraView.shouldAutoRotateView = YES;
     self.cameraView.savePicturesToLibrary = NO;
@@ -54,8 +48,8 @@
    
     if ([[PFUser currentUser] sessionToken].length != 0) {
         
-        if ( [userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] ||
-             [userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:1]] ) {
+        if ( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ||
+             [userPurchases checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO] ) {
             
             [_mode setImage:[UIImage imageNamed:@"ModeVideo.png"]
                                 forState:UIControlStateNormal];
@@ -289,8 +283,8 @@
         _mode.selected = NO;
     
     if ([[PFUser currentUser] sessionToken].length != 0) {
-        if ( [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] ||
-             [userPurchases_ checkKeyExistsInPurchases:[inAppPurchaseKeys objectAtIndex:1]] ) {
+        if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ||
+             [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO] ) {
             
             if ( [_mode isSelected] == YES ) {
                 
@@ -446,11 +440,10 @@
 }
 
 - (void) userPurchasesLoaded {
-    
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]]  ||
-         [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:1]] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN]  ||
+         [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO] ) {
         
         [_mode setImage:[UIImage imageNamed:@"ModeVideo.png"] forState:UIControlStateNormal];
         [inappviewcontroller.paidFeaturesTview reloadData];
@@ -465,8 +458,8 @@
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] ||
-         [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:1]] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ||
+         [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO] ) {
         
         UIImage *buttonImage = [UIImage imageNamed:@"ModeVideo.png"];
         [_mode setImage:buttonImage forState:UIControlStateNormal];
@@ -482,8 +475,8 @@
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] ||
-        [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:1]] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ||
+        [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO] ) {
         
         UIImage *buttonImage = [UIImage imageNamed:@"ModeVideo.png"];
         [_mode setImage:buttonImage forState:UIControlStateNormal];

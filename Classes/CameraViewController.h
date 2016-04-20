@@ -24,7 +24,6 @@
     SigninController *signInController;
     BOOL productPurchased;
     UserPurchases *userPurchases;
-    NSArray *inAppPurchaseKeys;
 }
 
 @property CGSize desiredImageSize;
