@@ -9,6 +9,7 @@
 #import "CropViewController.h"
 #import "LibraryViewController.h"
 #import "CropVideoViewController.h"
+#import "Common.h"
 
 @implementation CameraViewController
 
@@ -19,6 +20,12 @@
  */
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    #if defined(FLYERLY)
+        inAppPurchaseKeys = FLYERLY_IN_APP_PURCHASE_KEYS;
+    #else
+        inAppPurchaseKeys = FLYERLY_BIZ_IN_APP_PURCHASE_KEYS;
+    #endif
     
     // Configure the camera view
     self.cameraView.shouldAutoRotateView = YES;
@@ -47,8 +54,8 @@
    
     if ([[PFUser currentUser] sessionToken].length != 0) {
         
-        if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-             [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+        if ( [userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] ||
+             [userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:1]] ) {
             
             [_mode setImage:[UIImage imageNamed:@"ModeVideo.png"]
                                 forState:UIControlStateNormal];
@@ -282,8 +289,8 @@
         _mode.selected = NO;
     
     if ([[PFUser currentUser] sessionToken].length != 0) {
-        if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-             [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+        if ( [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] ||
+             [userPurchases_ checkKeyExistsInPurchases:[inAppPurchaseKeys objectAtIndex:1]] ) {
             
             if ( [_mode isSelected] == YES ) {
                 
@@ -442,8 +449,8 @@
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
-         [userPurchases_ checkKeyExistsInPurchases:@"com.flyerly.UnlockCreateVideoFlyerOption"] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]]  ||
+         [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:1]] ) {
         
         [_mode setImage:[UIImage imageNamed:@"ModeVideo.png"] forState:UIControlStateNormal];
         [inappviewcontroller.paidFeaturesTview reloadData];
@@ -458,8 +465,8 @@
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-         [userPurchases_ checkKeyExistsInPurchases:@"com.flyerly.UnlockCreateVideoFlyerOption"] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] ||
+         [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:1]] ) {
         
         UIImage *buttonImage = [UIImage imageNamed:@"ModeVideo.png"];
         [_mode setImage:buttonImage forState:UIControlStateNormal];
@@ -475,8 +482,8 @@
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-        [userPurchases_ checkKeyExistsInPurchases:@"com.flyerly.UnlockCreateVideoFlyerOption"] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] ||
+        [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:1]] ) {
         
         UIImage *buttonImage = [UIImage imageNamed:@"ModeVideo.png"];
         [_mode setImage:buttonImage forState:UIControlStateNormal];

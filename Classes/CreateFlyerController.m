@@ -48,7 +48,8 @@
     BOOL firstTimeInViewDidAppear;
     NSString *productIdentifier;
     NSString *create_flyer_default_image;
-    NSArray *selectedInAppIDs;
+    NSArray *selectedInAppIDs, *inAppPurchaseKeys;
+    
 }
 
 @end
@@ -342,10 +343,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 -(void)viewDidLoad{
     
     [self setWaterMarkLayerPosition];
-    
+
     #if defined(FLYERLY)
+        inAppPurchaseKeys = FLYERLY_IN_APP_PURCHASE_KEYS;
         selectedInAppIDs = FLYERLY_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
     #else
+        inAppPurchaseKeys = FLYERLY_BIZ_IN_APP_PURCHASE_KEYS;
         selectedInAppIDs = FLYERLYBIZ_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
     #endif
     
@@ -1201,7 +1204,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
             
               //Checking if user valid purchases
-            if (  !([userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"])  ) {
+            if (  !([userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] || [userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:3]])  ) {
                 premiumBtnFonts = [UIButton buttonWithType:UIButtonTypeCustom];
                 premiumBtnFonts.frame = CGRectMake(fOPrem[0], fOPrem[1], fOPrem[2], fOPrem[3]);
                 
@@ -1647,7 +1650,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
             
             //Checking if user valid purchases
-            if (  !([userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"])  ) {
+            if (  !([userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] || [userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:3]])  ) {
 
                 //More button
                 premiumBtnCliparts = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -1791,7 +1794,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
           
             //Checking if user valid purchases
-            if (  !([userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] || [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"])  ) {
+            if (  !([userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] || [userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:3]])  ) {
                 
                 //More button
                 premiumBtnEmoticons = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -5430,8 +5433,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         userPurchases.delegate = self;
         
         if ([[PFUser currentUser] sessionToken].length != 0) {
-            if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-                [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+            if ( [userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] ||
+                [userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:1]] ) {
                 
                 [self openCustomCamera:YES];
                 _videoLabel.alpha = 1;
@@ -5764,22 +5767,22 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     userPurchases.delegate = self;
     haveValidSubscription = [userPurchases isSubscriptionValid];
 
-    if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] && haveValidSubscription ){
+    if( [userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] && haveValidSubscription ){
 
         [self premiumBtnHideAfterCheck:@"ALL"];
         [inappviewcontroller.paidFeaturesTview reloadData];
     } else{
         //check for videos
-        if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+        if ( [userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:1]] ) {
         
-            [self premiumBtnHideAfterCheck:@"comflyerlyUnlockCreateVideoFlyerOption"];
+            [self premiumBtnHideAfterCheck: [inAppPurchaseKeys objectAtIndex:1]];
             [inappviewcontroller.paidFeaturesTview reloadData];
             
         }
         //check for icons
-        if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"] ){
+        if( [userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:3]] ){
 
-            [self premiumBtnHideAfterCheck:@"comflyerlyIconsBundle"];
+            [self premiumBtnHideAfterCheck: [inAppPurchaseKeys objectAtIndex:3]];
             [inappviewcontroller.paidFeaturesTview reloadData];
             
         }
@@ -6542,7 +6545,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         userPurchases.delegate = self;
         
         if ([[PFUser currentUser] sessionToken].length != 0) {
-            if ( ![userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ) {
+            if ( ![userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] ) {
                 canPerformAct = NO;
             }
         } else{
@@ -6613,8 +6616,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     userPurchases.delegate = self;
     haveValidSubscription = [userPurchases isSubscriptionValid];
     
-    if ( ([userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-        [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"]) &&
+    if ( ([userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] ||
+        [userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:1]]) &&
         haveValidSubscription ) {
         
         UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
@@ -6632,10 +6635,10 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     if( againAddInSubViews ){
         //When user have complete design bundle or any subscription dont show the premium button
-        if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] && haveValidSubscription )
+        if( [userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] && haveValidSubscription )
             [self premiumBtnHideAfterCheck:@"ALL"];
-        else if( [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"] )
-            [self premiumBtnHideAfterCheck:@"comflyerlyIconsBundle"];
+        else if( [userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:3]] )
+            [self premiumBtnHideAfterCheck: [inAppPurchaseKeys objectAtIndex:3]];
     }
 }
 
@@ -6647,7 +6650,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 
 //Hide premium button from view
 -(void)premiumBtnHideAfterCheck:(NSString *)from{
-    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString:@"comflyerlyUnlockCreateVideoFlyerOption"]){
+    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString: [inAppPurchaseKeys objectAtIndex:1]]){
         UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
         [addVideoTabButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
     }
@@ -6660,7 +6663,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [premiumImgBgBorder removeFromSuperview];
     }
     
-    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString:@"comflyerlyIconsBundle"]){
+    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString: [inAppPurchaseKeys objectAtIndex:3]]){
         if(premiumBtnEmoticons != nil ){
             [premiumBtnEmoticons removeFromSuperview];
             [premiumImgEmoticons removeFromSuperview];
