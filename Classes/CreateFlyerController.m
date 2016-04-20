@@ -48,7 +48,6 @@
     BOOL firstTimeInViewDidAppear;
     NSString *productIdentifier;
     NSString *create_flyer_default_image;
-    NSArray *selectedInAppIDs, *inAppPurchaseKeys;
     
 }
 
@@ -313,7 +312,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 // Dismiss action for banner ad
 -(void)dissmisBannerAdd:(BOOL)valForBannerClose{
     
-    productIdentifier = [selectedInAppIDs objectAtIndex:2]; // Ad Removal Subscription 
+    productIdentifier = BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION; // Ad Removal Subscription
     inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
     inappviewcontroller.buttondelegate = self;
     [inappviewcontroller requestProduct];
@@ -343,14 +342,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 -(void)viewDidLoad{
     
     [self setWaterMarkLayerPosition];
-
-    #if defined(FLYERLY)
-        inAppPurchaseKeys = FLYERLY_IN_APP_PURCHASE_KEYS;
-        selectedInAppIDs = FLYERLY_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
-    #else
-        inAppPurchaseKeys = FLYERLY_BIZ_IN_APP_PURCHASE_KEYS;
-        selectedInAppIDs = FLYERLYBIZ_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
-    #endif
     
     bannerAdsView.alpha = 0.0;
     
@@ -1204,7 +1195,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
             
               //Checking if user valid purchases
-            if (  !([userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] || [userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:3]])  ) {
+            if (  !([userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] || [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE])  ) {
                 premiumBtnFonts = [UIButton buttonWithType:UIButtonTypeCustom];
                 premiumBtnFonts.frame = CGRectMake(fOPrem[0], fOPrem[1], fOPrem[2], fOPrem[3]);
                 
@@ -1650,7 +1641,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
             
             //Checking if user valid purchases
-            if (  !([userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] || [userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:3]])  ) {
+            if (  !([userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] || [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE])  ) {
 
                 //More button
                 premiumBtnCliparts = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -1794,7 +1785,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
           
             //Checking if user valid purchases
-            if (  !([userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] || [userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:3]])  ) {
+            if (  !([userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] || [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE])  ) {
                 
                 //More button
                 premiumBtnEmoticons = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -5433,8 +5424,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         userPurchases.delegate = self;
         
         if ([[PFUser currentUser] sessionToken].length != 0) {
-            if ( [userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] ||
-                [userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:1]] ) {
+            if ( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ||
+                [userPurchases checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO] ) {
                 
                 [self openCustomCamera:YES];
                 _videoLabel.alpha = 1;
@@ -5718,7 +5709,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 - ( void )productSuccesfullyPurchased: (NSString *)productId {
     appearingViewAfterInAppHide = YES;
     [self loadXibsAfterInAppCheck:YES againAddInSubViews:YES];
-    if ( [productId isEqualToString:[selectedInAppIDs objectAtIndex:2]]) { // Ad Removal Subscription
+    if ( [productId isEqualToString: BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION]) { // Ad Removal Subscription
         [self removeBAnnerAdd:YES];
     }
 }
@@ -5767,22 +5758,22 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     userPurchases.delegate = self;
     haveValidSubscription = [userPurchases isSubscriptionValid];
 
-    if( [userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] && haveValidSubscription ){
+    if( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] && haveValidSubscription ){
 
         [self premiumBtnHideAfterCheck:@"ALL"];
         [inappviewcontroller.paidFeaturesTview reloadData];
     } else{
         //check for videos
-        if ( [userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:1]] ) {
+        if ( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO] ) {
         
-            [self premiumBtnHideAfterCheck: [inAppPurchaseKeys objectAtIndex:1]];
+            [self premiumBtnHideAfterCheck: IN_APP_ID_UNLOCK_VIDEO];
             [inappviewcontroller.paidFeaturesTview reloadData];
             
         }
         //check for icons
-        if( [userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:3]] ){
+        if( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE] ){
 
-            [self premiumBtnHideAfterCheck: [inAppPurchaseKeys objectAtIndex:3]];
+            [self premiumBtnHideAfterCheck: IN_APP_ID_ICON_BUNDLE];
             [inappviewcontroller.paidFeaturesTview reloadData];
             
         }
@@ -6545,7 +6536,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         userPurchases.delegate = self;
         
         if ([[PFUser currentUser] sessionToken].length != 0) {
-            if ( ![userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] ) {
+            if ( ![userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ) {
                 canPerformAct = NO;
             }
         } else{
@@ -6616,8 +6607,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     userPurchases.delegate = self;
     haveValidSubscription = [userPurchases isSubscriptionValid];
     
-    if ( ([userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] ||
-        [userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:1]]) &&
+    if ( ([userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ||
+        [userPurchases checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO]) &&
         haveValidSubscription ) {
         
         UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
@@ -6635,10 +6626,10 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     if( againAddInSubViews ){
         //When user have complete design bundle or any subscription dont show the premium button
-        if( [userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] && haveValidSubscription )
+        if( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] && haveValidSubscription )
             [self premiumBtnHideAfterCheck:@"ALL"];
-        else if( [userPurchases checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:3]] )
-            [self premiumBtnHideAfterCheck: [inAppPurchaseKeys objectAtIndex:3]];
+        else if( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE] )
+            [self premiumBtnHideAfterCheck: IN_APP_ID_ICON_BUNDLE];
     }
 }
 
@@ -6650,7 +6641,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 
 //Hide premium button from view
 -(void)premiumBtnHideAfterCheck:(NSString *)from{
-    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString: [inAppPurchaseKeys objectAtIndex:1]]){
+    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString: IN_APP_ID_UNLOCK_VIDEO]){
         UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
         [addVideoTabButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
     }
@@ -6663,7 +6654,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [premiumImgBgBorder removeFromSuperview];
     }
     
-    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString: [inAppPurchaseKeys objectAtIndex:3]]){
+    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString: IN_APP_ID_ICON_BUNDLE]){
         if(premiumBtnEmoticons != nil ){
             [premiumBtnEmoticons removeFromSuperview];
             [premiumImgEmoticons removeFromSuperview];
