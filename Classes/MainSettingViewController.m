@@ -19,7 +19,7 @@
     BOOL hasValidSubscription;
     UserPurchases *userPurchases;
     NSString *productIdentifier;
-    NSArray *selectedInAppIDs;
+    NSArray *selectedInAppIDs, *inAppPurchaseKeys;
 }
 
 
@@ -45,8 +45,10 @@
     [super viewDidLoad];
     
     #if defined(FLYERLY)
+        inAppPurchaseKeys = FLYERLY_IN_APP_PURCHASE_KEYS;
         selectedInAppIDs = FLYERLY_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
     #else
+        inAppPurchaseKeys = FLYERLY_BIZ_IN_APP_PURCHASE_KEYS;
         selectedInAppIDs = FLYERLYBIZ_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
     #endif
     
@@ -766,8 +768,8 @@
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] ||
+        [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:2]] ) {
         
         [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
@@ -822,8 +824,8 @@
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
-         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]]  ||
+         [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:2]] ) {
         
         [inappviewcontroller.paidFeaturesTview reloadData];
     }else {

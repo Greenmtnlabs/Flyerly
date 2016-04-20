@@ -9,6 +9,7 @@
 
 #import "FlyrAppDelegate.h"
 #import "CustomAssets.h"
+#import "Common.h"
 
 @implementation CustomAssets
 
@@ -22,6 +23,12 @@
     
     [super setObject:asset];
     
+    #if defined(FLYERLY)
+        inAppPurchaseKeys = FLYERLY_IN_APP_PURCHASE_KEYS;
+    #else
+        inAppPurchaseKeys = FLYERLY_BIZ_IN_APP_PURCHASE_KEYS;
+    #endif
+    
     //Here we Check Content is Video Or Image
     if ( asset.type == NBUAssetTypeVideo) {
         videoIcon.alpha = 1;
@@ -29,8 +36,8 @@
         UserPurchases *userPurchases_ = [UserPurchases getInstance];
         if ([[PFUser currentUser] sessionToken].length != 0) {
             
-            if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-                 [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+            if ( [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] ||
+                 [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:1]] ) {
                 
                 UIImage *image = [UIImage imageNamed: @"ModeVideo.png"];
                 videoIcon.image = image;

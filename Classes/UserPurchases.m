@@ -37,15 +37,21 @@ static UserPurchases *sharedSingleton = nil;
 
 - (BOOL) checkKeyExistsInPurchases : (NSString *)productId {
     
-    if ( [oldPurchases objectForKey:@"comflyerlyAllDesignBundle"] && [self isSubscriptionValid] ) {
+    if ( [oldPurchases objectForKey:[inAppPurchaseKeys objectAtIndex:0]] && [self isSubscriptionValid] ) {
         
         return YES;
         
     } else {
         
+        #if defined(FLYERLY)
+                inAppPurchaseKeys = FLYERLY_IN_APP_PURCHASE_KEYS;
+        #else
+                inAppPurchaseKeys = FLYERLY_BIZ_IN_APP_PURCHASE_KEYS;
+        #endif
+        
         NSString *productId_ = [productId stringByReplacingOccurrencesOfString:@"." withString:@""];
         
-        if ( !([productId_ isEqualToString:@"comflyerlyMonthlySubscription"] || [productId_ isEqualToString:@"comflyerlyYearlySubscription1"]) && [oldPurchases objectForKey:productId_] ) {
+        if ( !([productId_ isEqualToString: [inAppPurchaseKeys objectAtIndex:4]] || [productId_ isEqualToString: [inAppPurchaseKeys objectAtIndex:5]]) && [oldPurchases objectForKey:productId_] ) {
             return YES;
         }
     }
@@ -118,6 +124,7 @@ static UserPurchases *sharedSingleton = nil;
     
     NSArray *selectedInAppIDs;
 
+    
     #if defined(FLYERLY)
         selectedInAppIDs = FLYERLY_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
     #else

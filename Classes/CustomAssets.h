@@ -10,7 +10,11 @@
 #import "NBUAsset.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 
-@interface CustomAssets : NBUAssetThumbnailView
+@interface CustomAssets : NBUAssetThumbnailView{
+
+    NSArray *inAppPurchaseKeys;
+
+}
 
 @property(nonatomic,strong) IBOutlet UIImageView *videoIcon;
 @end

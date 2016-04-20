@@ -14,6 +14,7 @@
     UserPurchases *userPurchases;
     NSString *url_twitter, *url_instagram;
     NSString *logoImageName;
+    NSArray *inAppPurchaseKeys;
 }
 
 @end
@@ -31,10 +32,12 @@
         logoImageName = @"flyerlyLogo";
         url_twitter = @"https://twitter.com/hashtag/flyerly";
         url_instagram = @"https://instagram.com/explore/tags/flyerly/";
+        inAppPurchaseKeys = FLYERLY_IN_APP_PURCHASE_KEYS;
     #else
         logoImageName = @"flyerlyBizLogo";
         url_twitter = @"https://twitter.com/hashtag/FlyerlyBiz";
         url_instagram = @"https://www.instagram.com/explore/tags/FlyerlyBiz/";
+        inAppPurchaseKeys = FLYERLY_BIZ_IN_APP_PURCHASE_KEYS;
     #endif
     
     // Setting navigation bar
@@ -209,8 +212,8 @@
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     userPurchases_.delegate = nil;
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] ||
+        [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:2]] ) {
         [inAppViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
 }
@@ -230,8 +233,8 @@
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     userPurchases_.delegate = nil;
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]]  ||
+        [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:2]] ) {
         [inAppViewController.paidFeaturesTview reloadData];
     }else {
         

@@ -27,6 +27,7 @@
     NSString *imageName;
     bool showAds;
     BOOL isComingFromCreateFlyer;
+    NSArray *inAppPurchaseKeys;
     
 }
 
@@ -48,6 +49,12 @@ id lastShareBtnSender;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    #if defined(FLYERLY)
+        inAppPurchaseKeys = FLYERLY_IN_APP_PURCHASE_KEYS;
+    #else
+        inAppPurchaseKeys = FLYERLY_BIZ_IN_APP_PURCHASE_KEYS;
+    #endif
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     flyerConfigurator = appDelegate.flyerConfigurator;
@@ -862,8 +869,8 @@ id lastShareBtnSender;
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     userPurchases_.delegate = nil;
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]] ||
+        [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:2]] ) {
         
         [self.tView reloadData];
         [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
@@ -1211,8 +1218,8 @@ id lastShareBtnSender;
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     userPurchases_.delegate = nil;
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
-         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]]  ||
+         [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:2]] ) {
 
         [self.tView reloadData];
         [inappviewcontroller.paidFeaturesTview reloadData];

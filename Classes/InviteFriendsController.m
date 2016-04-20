@@ -32,6 +32,7 @@
     NSString *productIdentifier;
     NSArray *selectedInAppIDs;
     NSString *socialMediaSharingText;
+    NSArray *inAppPurchaseKeys;
 }
 
 @synthesize uiTableView, emailsArray, contactsArray, selectedIdentifiers, emailButton, contactsButton, facebookButton, twitterButton,  searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited, emailInvited;
@@ -52,15 +53,14 @@ const int CONTACTS_TAB = 0;
     [super viewDidLoad];
     
     #if defined(FLYERLY)
+        inAppPurchaseKeys = FLYERLY_IN_APP_PURCHASE_KEYS;
         selectedInAppIDs = FLYERLY_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
         socialMediaSharingText = @"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try?";
     #else
+        inAppPurchaseKeys = FLYERLY_BIZ_IN_APP_PURCHASE_KEYS;
         selectedInAppIDs = FLYERLYBIZ_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
         socialMediaSharingText = @"I'm using the Flyerly Biz to create and share flyers on the go! Want to give it a try?";
     #endif
-    
-    
-    
     
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
@@ -345,8 +345,8 @@ const int CONTACTS_TAB = 0;
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     userPurchases_.delegate = nil;
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:0]]  ||
+        [userPurchases_ checkKeyExistsInPurchases: [inAppPurchaseKeys objectAtIndex:1]] ) {
         [inAppViewController.paidFeaturesTview reloadData];
     } else {
         [self removeAdsBanner:YES];
