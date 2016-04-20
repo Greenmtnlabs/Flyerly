@@ -24,6 +24,7 @@
 #import "FlyerlySingleton.h"
 #import "CropViewController.h"
 #import "CropVideoViewController.h"
+#import "Common.h"
 
 @implementation AssetsGroupViewController
 
@@ -43,6 +44,7 @@
     // Configure the grid view
     self.gridView.margin = CGSizeMake(5.0, 5.0);
     //self.gridView.sizeToFit;
+
     
     if( IS_IPHONE_4){
         self.gridView.nibNameForViews = @"CustomAssetThumbnailView";
@@ -172,8 +174,8 @@
         
         if ([[PFUser currentUser] sessionToken].length != 0) {
             
-            if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-                 [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+            if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ||
+                 [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO] ) {
                 
                 NSError *error = nil;
                 NSString *homeDirectoryPath = NSHomeDirectory();
@@ -262,8 +264,8 @@
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ||
+        [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS]) {
         
         //UIImage *buttonImage = [UIImage imageNamed:@"ModeVideo.png"];
         //[mode setImage:buttonImage forState:UIControlStateNormal];
@@ -276,8 +278,8 @@
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
-         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN]  ||
+         [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS] ) {
         
         [inappviewcontroller.paidFeaturesTview reloadData];
     }else {

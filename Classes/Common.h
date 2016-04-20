@@ -169,15 +169,47 @@ nil]
 [UIFont fontWithName:@"HiraKakuProN-W6" size:16],\
 nil]
 
+#define NOT_FOUND_IN_APP @"NOT_FOUND_IN_APP"
+
+#if defined(FLYERLY)
+    #define APP_NAME @"FLYERLY"
+
+    #define BUNDLE_IDENTIFIER_ALL_DESIGN @"com.flyerly.AllDesignBundle"
+    #define BUNDLE_IDENTIFIER_UNLOCK_VIDEO @"com.flyerly.UnlockCreateVideoFlyerOption"
+    #define BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION @"com.flyerly.MonthlyGold"
+    #define BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION @"com.flyerly.YearlyPlatinum1"
+    #define BUNDLE_IDENTIFIER_AD_REMOVAL @"com.flyerly.AdRemovalMonthly"
 
 
+    #define IN_APP_ID_ALL_DESIGN @"comflyerlyAllDesignBundle"
+    #define IN_APP_ID_UNLOCK_VIDEO @"comflyerlyUnlockCreateVideoFlyerOption"
+    #define IN_APP_ID_MONTHLY_SUBSCRIPTION @"comflyerlyMonthlySubscription"
+    #define IN_APP_ID_YEARLY_SUBSCRIPTION @"comflyerlyYearlySubscription1"
+    #define IN_APP_ID_AD_REMOVAL @"com.flyerly.AdRemovalMonthly"
 
-#define FLYERLY_IN_APP_PRODUCT_IDENTIFIERS [NSArray arrayWithObjects: @"com.flyerly.MonthlyGold", @"com.flyerly.AllDesignBundle", @"com.flyerly.UnlockCreateVideoFlyerOption", @"com.flyerly.YearlyPlatinum1", @"com.flyerly.AdRemovalMonthly", nil];
+    #define IN_APP_ID_SAVEDFLYERS @"comflyerlyUnlockSavedFlyers"
+    #define IN_APP_ID_ICON_BUNDLE @"comflyerlyIconsBundle"
 
-#define FLYERLY_BIZ_IN_APP_PRODUCT_IDENTIFIERS [NSArray arrayWithObjects: @"com.flyerlybiz.AllDesignBundle", @"com.flyerlybiz.MonthlyGold", @"com.flyerlybiz.YearlyPlatinum", @"com.flyerlybiz.VideoFlyers", @"com.flyerlybiz.AdRemovalMonthly", nil]
+#else
+    #define APP_NAME @"FLYERLY BIZ"
 
-#define FLYERLY_IN_APP_PRODUCT_SELECTED_IDENTIFIERS [NSArray arrayWithObjects: @"com.flyerly.MonthlyGold", @"com.flyerly.YearlyPlatinum1", @"com.flyerly.AdRemovalMonthly", @"com.flyerly.AllDesignBundle", nil]
-#define FLYERLYBIZ_IN_APP_PRODUCT_SELECTED_IDENTIFIERS [NSArray arrayWithObjects: @"com.flyerlybiz.MonthlyGold", @"com.flyerlybiz.YearlyPlatinum", @"com.flyerlybiz.AdRemovalMonthly", @"com.flyerlybiz.AllDesignBundle", nil]
+    #define BUNDLE_IDENTIFIER_ALL_DESIGN @"com.flyerlybiz.AllDesignBundle"
+    #define BUNDLE_IDENTIFIER_UNLOCK_VIDEO @"com.flyerlybiz.VideoFlyers"
+    #define BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION @"com.flyerlybiz.MonthlyGold"
+    #define BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION @"com.flyerlybiz.YearlyPlatinum"
+    #define BUNDLE_IDENTIFIER_AD_REMOVAL @"com.flyerlybiz.AdRemovalMonthly"
+
+    #define IN_APP_ID_ALL_DESIGN @"comflyerlybizAllDesignBundle"
+    #define IN_APP_ID_UNLOCK_VIDEO @"comflyerlybizVideoFlyers"
+    #define IN_APP_ID_MONTHLY_SUBSCRIPTION @"comflyerlybizMonthlyGold"
+    #define IN_APP_ID_YEARLY_SUBSCRIPTION @"comflyerlybizYearlyPlatinum"
+    #define IN_APP_ID_AD_REMOVAL @"comflyerlybizAdRemovalMonthly"
+
+    #define IN_APP_ID_SAVED_FLYERS NOT_FOUND_IN_APP
+    #define IN_APP_ID_ICON_BUNDLE NOT_FOUND_IN_APP
+
+#endif
+
 
 #define SIZE_ARRAY [NSArray arrayWithObjects: @"10", @"11" ,@"12",@"14",@"16",@"18",@"20",@"22",@"24",  @"26", @"28", @"30",@"36",@"42",@"48",@"52",@"60",@"72",@"74",@"80",@"90",nil]
 

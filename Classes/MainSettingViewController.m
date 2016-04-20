@@ -19,7 +19,6 @@
     BOOL hasValidSubscription;
     UserPurchases *userPurchases;
     NSString *productIdentifier;
-    NSArray *selectedInAppIDs;
 }
 
 
@@ -43,12 +42,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    #if defined(FLYERLY)
-        selectedInAppIDs = FLYERLY_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
-    #else
-        selectedInAppIDs = FLYERLYBIZ_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
-    #endif
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     flyerConfigurator = appDelegate.flyerConfigurator;
@@ -663,16 +656,8 @@
     
     if([MFMailComposeViewController canSendMail]){
         
-        NSString *subject;
-        
-        #if defined(FLYERLY)
-            subject = @"Flyerly Email Feedback...";
-        #else
-            subject = @"Flyerly Biz Email Feedback...";
-        #endif
-        
         picker.mailComposeDelegate = self;
-        [picker setSubject: subject];
+        [picker setSubject: [NSString stringWithFormat:@"%@ Email Feedback...", APP_NAME]];
         
         // Set up recipients
         NSMutableArray *toRecipients = [[NSMutableArray alloc]init];
@@ -766,13 +751,13 @@
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ||
+        [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS] ) {
         
         [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
     
-    if ( [productId isEqualToString: [selectedInAppIDs objectAtIndex:2]]) { // Ad Removal Subscription
+    if ( [productId isEqualToString: BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION]) { // Ad Removal Subscription
         [self removeBAnnerAdd:YES];
     }
 }
@@ -822,8 +807,8 @@
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
-         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN]  ||
+         [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS] ) {
         
         [inappviewcontroller.paidFeaturesTview reloadData];
     }else {
@@ -1001,7 +986,7 @@
 // Dismiss action for banner ad
 -(void)dismissBannerAds:(BOOL)valForBannerClose{
     
-    productIdentifier = [selectedInAppIDs objectAtIndex:2]; // Ad Removal Subscription
+    productIdentifier = BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION; // Ad Removal Subscription
     inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
     inappviewcontroller.buttondelegate = self;
     [inappviewcontroller requestProduct];

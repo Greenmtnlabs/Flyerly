@@ -16,8 +16,7 @@
     NSArray *freeFeaturesArray;
     NSString *cellDescriptionForRefrelFeature;
     NSString *productIdentifier;
-    NSArray *selectedInAppIDs;
-    NSArray *productIdentifiers;
+    NSMutableArray *productIdentifiers;
 }
 
 @end
@@ -50,13 +49,6 @@
     [loginButton.layer setCornerRadius:3.0];
     loginButton.layer.borderColor=[[UIColor whiteColor] CGColor];
     
-    
-    #if defined(FLYERLY)
-        selectedInAppIDs = FLYERLY_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
-    #else
-        selectedInAppIDs = FLYERLYBIZ_IN_APP_PRODUCT_SELECTED_IDENTIFIERS;
-    #endif
- 
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -144,12 +136,8 @@
  */
 
 -(void)reloadInAppProductIDsArray{
-    
-    #if defined(FLYERLY)
-        productIdentifiers = FLYERLY_IN_APP_PRODUCT_IDENTIFIERS;
-    #else
-        productIdentifiers = FLYERLY_BIZ_IN_APP_PRODUCT_IDENTIFIERS;
-    #endif
+
+    productIdentifiers = [[NSMutableArray alloc] initWithObjects:BUNDLE_IDENTIFIER_ALL_DESIGN, BUNDLE_IDENTIFIER_UNLOCK_VIDEO, BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION, BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION, BUNDLE_IDENTIFIER_AD_REMOVAL, nil];
 }
 
 
@@ -205,18 +193,18 @@
             NSDictionary *product = [productArray objectAtIndex:rowIndex];
             NSString* prodIdentifier = product[@"productidentifier"];
             
-            if ( ! ([prodIdentifier isEqualToString: [selectedInAppIDs objectAtIndex: 0]] // Monthly Subscription
-                    || [prodIdentifier isEqualToString: [selectedInAppIDs objectAtIndex: 1]] // Yearly Subscription
-                    || [prodIdentifier isEqualToString: [selectedInAppIDs objectAtIndex: 2]] // Ad Removal Subscription
+            if ( ! ([prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION] // Monthly Subscription
+                    || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION] // Yearly Subscription
+                    || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_AD_REMOVAL] // Ad Removal Subscription
                     ) &&
                     [userPurchases checkKeyExistsInPurchases:productIdentifier] )  {
                 
                 // show alert that item has already been purchased
                 [self showAlreadyPurchasedAlert];
                 
-            } else if( ([prodIdentifier isEqualToString: [selectedInAppIDs objectAtIndex: 0]] // Monthly Subscription
-                        || [prodIdentifier isEqualToString: [selectedInAppIDs objectAtIndex: 1]] // Yearly Subscription
-                        || [prodIdentifier isEqualToString: [selectedInAppIDs objectAtIndex: 2]] // Ad Removal Subscription
+            } else if( ([prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION] // Monthly Subscription
+                        || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION] // Yearly Subscription
+                        || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_AD_REMOVAL] // Ad Removal Subscription
                         ) &&
                        [userPurchases isSubscriptionValid]) {
                 
@@ -233,7 +221,6 @@
             UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"Please sign in first"
                                                                 message: @"To purchase any product, you need to sign in first."
                                                                delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
-            
             [someError show];
         }
     }
@@ -275,18 +262,18 @@
             NSDictionary *product = [productArray objectAtIndex:4];
             NSString* prodIdentifier = product[@"productidentifier"];
             
-            if ( ! ([prodIdentifier isEqualToString: [selectedInAppIDs objectAtIndex: 0] ] // Monthly Subscription
-                    || [prodIdentifier isEqualToString: [selectedInAppIDs objectAtIndex: 1]] // Yearly Subscription
-                    || [prodIdentifier isEqualToString: [selectedInAppIDs objectAtIndex: 2]] // Ad Removal Subscription
+            if ( ! ([prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION ] // Monthly Subscription
+                    || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION] // Yearly Subscription
+                    || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_AD_REMOVAL] // Ad Removal Subscription
                     ) &&
                 [userPurchases checkKeyExistsInPurchases:productIdentifier] )  {
                 
                 // show alert that item has already been purchased
                 [self showAlreadyPurchasedAlert];
                 
-            } else if( ([prodIdentifier isEqualToString: [selectedInAppIDs objectAtIndex: 0]] // Monthly Subscription
-                        || [prodIdentifier isEqualToString: [selectedInAppIDs objectAtIndex: 1]] // Yearly Subscription
-                        || [prodIdentifier isEqualToString: [selectedInAppIDs objectAtIndex: 2]] // Ad Removal Subscription
+            } else if( ([prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION] // Monthly Subscription
+                        || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION] // Yearly Subscription
+                        || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_AD_REMOVAL] // Ad Removal Subscription
                         ) &&
                       [userPurchases isSubscriptionValid]) {
                 
@@ -402,7 +389,7 @@
         // Getting the product against tapped/selected cell
         NSDictionary *product = [productArray objectAtIndex:indexPath.row];
         
-        if([[product objectForKey:@"productidentifier"] isEqualToString: [selectedInAppIDs objectAtIndex: 3]]) { // All Design Subscription
+        if([[product objectForKey:@"productidentifier"] isEqualToString: BUNDLE_IDENTIFIER_ALL_DESIGN]) { // All Design Subscription
             
             NSString *title;
             #if defined(FLYERLY)
@@ -413,7 +400,7 @@
             
             [completeDesignBundleButton setTitle: title];
             [completeDesignBundleButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
-        } else if([[product objectForKey:@"productidentifier"] isEqualToString: [selectedInAppIDs objectAtIndex: 1]]) { // Yearly Subscription
+        } else if([[product objectForKey:@"productidentifier"] isEqualToString: BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION]) { // Yearly Subscription
             inAppCell.backgroundColor = [UIColor grayColor];//heighlight the Yearly subscription cell
         }
         //Setting the packagename,packageprice,packagedesciption values for cell view

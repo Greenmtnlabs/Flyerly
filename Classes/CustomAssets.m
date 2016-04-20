@@ -9,6 +9,7 @@
 
 #import "FlyrAppDelegate.h"
 #import "CustomAssets.h"
+#import "Common.h"
 
 @implementation CustomAssets
 
@@ -29,21 +30,17 @@
         UserPurchases *userPurchases_ = [UserPurchases getInstance];
         if ([[PFUser currentUser] sessionToken].length != 0) {
             
-            if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-                 [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+            if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ||
+                 [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO] ) {
                 
                 UIImage *image = [UIImage imageNamed: @"ModeVideo.png"];
                 videoIcon.image = image;
             }
             
         }
-        
-        
     }else {
         videoIcon.alpha = 0;
     }
-    
-    
 }
 
 @end
