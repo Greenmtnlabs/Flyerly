@@ -1193,16 +1193,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 fOPrem[0] = fOPrem[4]; fOPrem[2] = fOPrem[5];
             }
             
-            
-            
-#if defined(FLYERLY)
-            if([userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE] )
-                [self premiumBtnHideAfterCheck: IN_APP_ID_ICON_BUNDLE];
-#else
-            [self premiumBtnHideAfterCheck: NOT_FOUND_IN_APP];
-#endif
-            
-            
               //Checking if user valid purchases
             if (  !([userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] || [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE])  ) {
                 premiumBtnFonts = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -4345,11 +4335,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     NSString *title = [flyer getFlyerTitle];
     
     if ( [title isEqualToString:@""] ) {
-        #if defined(FLYERLY)
-            label.text = @"Flyerly";
-        #else
-            label.text = @"Flyerly Biz";
-        #endif
+        label.text = APP_NAME;
     } else {
         label.text = title;
     }
@@ -5177,13 +5163,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         if ([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusRestricted || [ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusDenied) {
             
             NSString *msg;
-            
-            #if defined(FLYERLY)
-                msg = @"Flyerly does not access to your photo album. To enable access goto the Setting app >> Privacy >> Photos and enable Flyerly";
-            #else
-                msg = @"Flyerly Biz does not access to your photo album. To enable access goto the Setting app >> Privacy >> Photos and enable Flyerly Biz";
-            #endif
-            
+            msg = [NSString stringWithFormat:@"%@ does not access to your photo album. To enable access goto the Setting app >> Privacy >> Photos and enable %@", APP_NAME, APP_NAME] ;
             UIAlertView *photoAlert = [[UIAlertView alloc ] initWithTitle:@"" message: msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [photoAlert show];
             return;
@@ -5272,13 +5252,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         if ([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusRestricted || [ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusDenied) {
             
             NSString *msg;
-            
-            #if defined(FLYERLY)
-                msg = @"Flyerly does not access to your photo album. To enable access goto the Setting app >> Privacy >> Photos and enable Flyerly";
-            #else
-                msg = @"Flyerly Biz does not access to your photo album. To enable access goto the Setting app >> Privacy >> Photos and enable Flyerly Biz";
-            #endif
-            
+            msg = [NSString stringWithFormat:@"%@ does not access to your photo album. To enable access goto the Setting app >> Privacy >> Photos and enable %@", APP_NAME, APP_NAME] ;
             UIAlertView *photoAlert = [[UIAlertView alloc ] initWithTitle:@"" message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [photoAlert show];
             return;
@@ -5781,12 +5755,9 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         }
         //check for icons
         
-        #if defined(FLYERLY)
-            if([userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE] )
+        if([userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE] )
                 [self premiumBtnHideAfterCheck: IN_APP_ID_ICON_BUNDLE];
-        #else
-            [self premiumBtnHideAfterCheck: NOT_FOUND_IN_APP];
-        #endif
+        
         [inappviewcontroller.paidFeaturesTview reloadData];
     }
     
@@ -6639,12 +6610,10 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         if( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN]){
             [self premiumBtnHideAfterCheck:@"ALL"];
         }else{
-            #if defined(FLYERLY)
-                if([userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE] )
-                    [self premiumBtnHideAfterCheck: IN_APP_ID_ICON_BUNDLE];
-            #else
-                [self premiumBtnHideAfterCheck: NOT_FOUND_IN_APP];
-            #endif
+            if([userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE] )
+                [self premiumBtnHideAfterCheck: IN_APP_ID_ICON_BUNDLE];
+            [self premiumBtnHideAfterCheck: NOT_FOUND_IN_APP];
+            
         }
     }
 }
@@ -6661,11 +6630,11 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
         [addVideoTabButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
     }
-    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString:@"BACKGROUND"]){
+    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString:@"BACKGROUND"] || [from isEqualToString:NOT_FOUND_IN_APP]){
         [premiumBtnBg removeFromSuperview];
         [premiumImgBg removeFromSuperview];
     }
-    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString:@"BACKGROUND_BORDER"]){
+    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString:@"BACKGROUND_BORDER"] || [from isEqualToString:NOT_FOUND_IN_APP]){
         [premiumBtnBgBorder removeFromSuperview];
         [premiumImgBgBorder removeFromSuperview];
     }
