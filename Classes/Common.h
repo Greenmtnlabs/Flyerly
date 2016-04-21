@@ -171,7 +171,11 @@ nil]
 
 #define NOT_FOUND_IN_APP @"NOT_FOUND_IN_APP"
 
+
+
 #if defined(FLYERLY)
+
+    #define TARGET_NAME @"FLYERLY"
     #define APP_NAME @"FLYERLY"
 
     #define BUNDLE_IDENTIFIER_ALL_DESIGN @"com.flyerly.AllDesignBundle"
@@ -191,7 +195,9 @@ nil]
     #define IN_APP_ID_ICON_BUNDLE @"comflyerlyIconsBundle"
 
 #else
-    #define APP_NAME @"FLYERLY BIZ"
+
+    #define TARGET_NAME @"FLYERLY_BIZ"
+    #define APP_NAME @"FLYERLY_BIZ"
 
     #define BUNDLE_IDENTIFIER_ALL_DESIGN @"com.flyerlybiz.AllDesignBundle"
     #define BUNDLE_IDENTIFIER_UNLOCK_VIDEO @"com.flyerlybiz.VideoFlyers"

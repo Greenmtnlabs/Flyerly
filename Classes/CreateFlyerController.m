@@ -1194,6 +1194,15 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             }
             
             
+            
+#if defined(FLYERLY)
+            if([userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE] )
+                [self premiumBtnHideAfterCheck: IN_APP_ID_ICON_BUNDLE];
+#else
+            [self premiumBtnHideAfterCheck: NOT_FOUND_IN_APP];
+#endif
+            
+            
               //Checking if user valid purchases
             if (  !([userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] || [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE])  ) {
                 premiumBtnFonts = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -5758,7 +5767,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     userPurchases.delegate = self;
     haveValidSubscription = [userPurchases isSubscriptionValid];
 
-    if( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] && haveValidSubscription ){
+    if( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ){
 
         [self premiumBtnHideAfterCheck:@"ALL"];
         [inappviewcontroller.paidFeaturesTview reloadData];
@@ -5771,12 +5780,14 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             
         }
         //check for icons
-        if( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE] ){
-
-            [self premiumBtnHideAfterCheck: IN_APP_ID_ICON_BUNDLE];
-            [inappviewcontroller.paidFeaturesTview reloadData];
-            
-        }
+        
+        #if defined(FLYERLY)
+            if([userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE] )
+                [self premiumBtnHideAfterCheck: IN_APP_ID_ICON_BUNDLE];
+        #else
+            [self premiumBtnHideAfterCheck: NOT_FOUND_IN_APP];
+        #endif
+        [inappviewcontroller.paidFeaturesTview reloadData];
     }
     
     if ( [sharePanel isHidden] && inappviewcontroller != nil &&
@@ -6607,9 +6618,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     userPurchases.delegate = self;
     haveValidSubscription = [userPurchases isSubscriptionValid];
     
-    if ( ([userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ||
-        [userPurchases checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO]) &&
-        haveValidSubscription ) {
+    if ( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ||
+        [userPurchases checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO]) {
         
         UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
         [addVideoTabButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
@@ -6626,10 +6636,16 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     if( againAddInSubViews ){
         //When user have complete design bundle or any subscription dont show the premium button
-        if( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] && haveValidSubscription )
+        if( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN]){
             [self premiumBtnHideAfterCheck:@"ALL"];
-        else if( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE] )
-            [self premiumBtnHideAfterCheck: IN_APP_ID_ICON_BUNDLE];
+        }else{
+            #if defined(FLYERLY)
+                if([userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE] )
+                    [self premiumBtnHideAfterCheck: IN_APP_ID_ICON_BUNDLE];
+            #else
+                [self premiumBtnHideAfterCheck: NOT_FOUND_IN_APP];
+            #endif
+        }
     }
 }
 
@@ -6654,7 +6670,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [premiumImgBgBorder removeFromSuperview];
     }
     
-    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString: IN_APP_ID_ICON_BUNDLE]){
+    if( [from isEqualToString:@"ALL"] || [from isEqualToString: IN_APP_ID_ICON_BUNDLE] ){
         if(premiumBtnEmoticons != nil ){
             [premiumBtnEmoticons removeFromSuperview];
             [premiumImgEmoticons removeFromSuperview];
