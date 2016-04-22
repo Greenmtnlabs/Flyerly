@@ -178,13 +178,14 @@ nil]
     #define TARGET_NAME @"FLYERLY"
     #define APP_NAME @"FLYERLY"
 
+    //Packages for purchase
     #define BUNDLE_IDENTIFIER_ALL_DESIGN @"com.flyerly.AllDesignBundle"
     #define BUNDLE_IDENTIFIER_UNLOCK_VIDEO @"com.flyerly.UnlockCreateVideoFlyerOption"
     #define BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION @"com.flyerly.MonthlyGold"
     #define BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION @"com.flyerly.YearlyPlatinum1"
     #define BUNDLE_IDENTIFIER_AD_REMOVAL @"com.flyerly.AdRemovalMonthly"
 
-
+    //purchased bundles
     #define IN_APP_ID_ALL_DESIGN @"comflyerlyAllDesignBundle"
     #define IN_APP_ID_UNLOCK_VIDEO @"comflyerlyUnlockCreateVideoFlyerOption"
     #define IN_APP_ID_MONTHLY_SUBSCRIPTION @"comflyerlyMonthlySubscription"
@@ -199,12 +200,14 @@ nil]
     #define TARGET_NAME @"FLYERLY_BIZ"
     #define APP_NAME @"FLYERLY_BIZ"
 
+    //Packages for purchase
     #define BUNDLE_IDENTIFIER_ALL_DESIGN @"com.flyerlybiz.AllDesignBundle"
     #define BUNDLE_IDENTIFIER_UNLOCK_VIDEO @"com.flyerlybiz.VideoFlyers"
     #define BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION @"com.flyerlybiz.MonthlyGold"
     #define BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION @"com.flyerlybiz.YearlyPlatinum"
     #define BUNDLE_IDENTIFIER_AD_REMOVAL @"com.flyerlybiz.AdRemovalMonthly"
 
+    //purchased bundles
     #define IN_APP_ID_ALL_DESIGN @"comflyerlybizAllDesignBundle"
     #define IN_APP_ID_UNLOCK_VIDEO @"comflyerlybizVideoFlyers"
     #define IN_APP_ID_MONTHLY_SUBSCRIPTION @"comflyerlybizMonthlyGold"
