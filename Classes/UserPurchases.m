@@ -36,17 +36,14 @@ static UserPurchases *sharedSingleton = nil;
 }
 
 - (BOOL) checkKeyExistsInPurchases : (NSString *)productId {
-   
-    if([productId isEqualToString:NOT_FOUND_IN_APP]){
-        return  YES;
-    }
-    else if ( [oldPurchases objectForKey: IN_APP_ID_ALL_DESIGN] ) {
+   //If user have IN_APP_ID_ALL_DESIGN then return YES, Its is most power full bundle
+    if ( [oldPurchases objectForKey: IN_APP_ID_ALL_DESIGN] ) {
         return YES;
     } else {
         
         NSString *productId_ = [productId stringByReplacingOccurrencesOfString:@"." withString:@""];
-        
-        if ( !([productId_ isEqualToString: IN_APP_ID_MONTHLY_SUBSCRIPTION] || [productId_ isEqualToString: IN_APP_ID_YEARLY_SUBSCRIPTION]) && [oldPurchases objectForKey:productId_] ) {
+        //check old purchase have this product id and this id should not belonge from any kind of subscriptions
+        if ( [oldPurchases objectForKey:productId_] && !([productId_ isEqualToString: IN_APP_ID_MONTHLY_SUBSCRIPTION] || [productId_ isEqualToString: IN_APP_ID_YEARLY_SUBSCRIPTION]) ) {
             return YES;
         }
     }

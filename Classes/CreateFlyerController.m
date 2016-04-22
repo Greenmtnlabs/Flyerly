@@ -1194,7 +1194,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             }
             
               //Checking if user valid purchases
-            if (  !([userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] || [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE])  ) {
+            if (  [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] || [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE] ) {
                 premiumBtnFonts = [UIButton buttonWithType:UIButtonTypeCustom];
                 premiumBtnFonts.frame = CGRectMake(fOPrem[0], fOPrem[1], fOPrem[2], fOPrem[3]);
                 
@@ -1784,7 +1784,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
           
             //Checking if user valid purchases
-            if (  !([userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] || [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE])  ) {
+            if (  [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] || [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE]  ) {
                 
                 //More button
                 premiumBtnEmoticons = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -6518,15 +6518,13 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         userPurchases.delegate = self;
         
         if ([[PFUser currentUser] sessionToken].length != 0) {
-            if ( ![userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ) {
+            if ( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ) {
                 canPerformAct = NO;
             }
-        } else{
-           canPerformAct = NO;
         }
     }
     
-    if( !canPerformAct && !isInAppPanelAlreadyOpen ){
+    if( canPerformAct == NO && isInAppPanelAlreadyOpen == NO ){
         currentLayer = @"";
         [self deSelectPreviousLayer];
         
@@ -6607,13 +6605,10 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     if( againAddInSubViews ){
         //When user have complete design bundle or any subscription dont show the premium button
-        if( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN]){
+        if( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] || haveValidSubscription ){
             [self premiumBtnHideAfterCheck:@"ALL"];
-        }else{
-            if([userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE] )
-                [self premiumBtnHideAfterCheck: IN_APP_ID_ICON_BUNDLE];
-            [self premiumBtnHideAfterCheck: NOT_FOUND_IN_APP];
-            
+        }else if([userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE] ) {
+            [self premiumBtnHideAfterCheck: IN_APP_ID_ICON_BUNDLE];
         }
     }
 }
