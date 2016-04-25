@@ -374,7 +374,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
     //when have valid subscription or have ad removal bundle then dont show ad
-    if( [userPurchases canShowAdd] ) {
+    if( [userPurchases canShowAd] ) {
         [self loadInterstitialAdd];
     }
     
@@ -579,7 +579,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     customAdSize = GADAdSizeFromCGSize(CGSizeMake(520, 50));
                 } 
                 
-                if( [userPurchases canShowAdd] ) {
+                if( [userPurchases canShowAd] ) {
                     // Use predefined GADAdSize constants to define the GADBannerView.
                     self.bannerAdd = [[GADBannerView alloc] initWithAdSize:customAdSize origin:origin];
                     
@@ -3550,7 +3550,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     //Add ScrollViews
     [self.contextView addSubview:obj];
     
-    if( [userPurchases canShowAdd] ){
+    if( [userPurchases canShowAd] ){
         if ( sharePanel.hidden ){
             bannerAdsView.alpha = bannerAdsView.alpha ? 1.0 : 0.0;
             [self.contextView addSubview:self.bannerAdsView];

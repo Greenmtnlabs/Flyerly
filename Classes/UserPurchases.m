@@ -57,19 +57,48 @@ static UserPurchases *sharedSingleton = nil;
 }
 
 //return flag we can show ad or not
--(BOOL)canShowAdd{
+-(BOOL)canShowAd{
     BOOL showAdd = YES;
-    if ( [self isSubscriptionValid] ) {
+    if ( [oldPurchases objectForKey: IN_APP_ID_ALL_DESIGN]){
         showAdd = NO;
         
-    } else if ( [oldPurchases objectForKey: IN_APP_ID_ALL_DESIGN]){
-        showAdd = NO;
+    } else {
+        RMAppReceipt* appReceipt = [RMAppReceipt bundleReceipt];
         
-    } else if( [self haveProduct:BUNDLE_IDENTIFIER_AD_REMOVAL] ){
-        showAdd = NO;
+        // get monthly subscription validity
+        NSString *isMonthlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION forDate:[NSDate date]]]; // Monthly Subscription
         
+        // get Yearly subscription validity
+        NSString *isYearlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION forDate:[NSDate date]]]; // Yearly Subscription
+        
+        // check add removal validity
+        NSString *isAdRemovalSubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_AD_REMOVAL forDate:[NSDate date]]]; // Ad Removal Subscription
+        
+        // check whether one of 'em is valid or not..
+        if( [isMonthlySubValid isEqual:@"1"] || [isYearlySubValid isEqualToString:@"1"] || [isAdRemovalSubValid isEqualToString:@"1"] ){
+            showAdd = NO;
+        }
     }
     return showAdd;
+}
+
+//Return if monthly/yearly subscription is valid
+-(BOOL)isSubscriptionValid{
+    
+    RMAppReceipt* appReceipt = [RMAppReceipt bundleReceipt];
+    
+    // get monthly subscription validity
+    NSString *isMonthlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION forDate:[NSDate date]]]; // Monthly Subscription
+    
+    // get Yearly subscription validity
+    NSString *isYearlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION forDate:[NSDate date]]]; // Yearly Subscription
+    
+    // check whether one of 'em is valid or not..
+    if( [isMonthlySubValid isEqual:@"1"] || [isYearlySubValid isEqualToString:@"1"] ){
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 /*
@@ -127,26 +156,6 @@ static UserPurchases *sharedSingleton = nil;
         }];
     } else {
         oldPurchases = nil;
-    }
-    
-}
-
-//Return if monthly/yearly subscription is valid
--(BOOL)isSubscriptionValid{
-    
-    RMAppReceipt* appReceipt = [RMAppReceipt bundleReceipt];
-    
-    // get monthly subscription validity
-    NSString *isMonthlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION forDate:[NSDate date]]]; // Monthly Subscription
-    
-    // get Yearly subscription validity
-    NSString *isYearlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION forDate:[NSDate date]]]; // Yearly Subscription
-    
-    // check whether one of 'em is valid or not..
-    if( [isMonthlySubValid isEqual:@"1"] || [isYearlySubValid isEqualToString:@"1"] ){
-        return YES;
-    } else {
-        return NO;
     }
 }
 @end

@@ -113,7 +113,7 @@
 - (void)goBack {
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
-    haveValidSubscription = [userPurchases isSubscriptionValid];
+    haveValidSubscription = !([userPurchases canShowAd]);
     if ( self.shouldShowAdd != NULL ) {
         self.shouldShowAdd ( @"", haveValidSubscription );
     }

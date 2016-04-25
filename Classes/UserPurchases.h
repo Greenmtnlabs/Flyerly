@@ -25,6 +25,6 @@
 - (BOOL) checkKeyExistsInPurchases : (NSString *)productId;
 - (BOOL) haveProduct : (NSString *)productId;
 - (BOOL) isSubscriptionValid;
-- (BOOL) canShowAdd;
+- (BOOL) canShowAd;
 @end
 

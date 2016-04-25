@@ -51,7 +51,7 @@ const int CONTACTS_TAB = 0;
     
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
-    haveValidSubscription = [userPurchases isSubscriptionValid];
+    haveValidSubscription = !([userPurchases canShowAd]);
     
     bannerAdClosed = NO;
     bannerShowed = NO;
