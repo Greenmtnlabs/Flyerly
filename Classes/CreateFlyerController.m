@@ -910,7 +910,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     });
     
     if ( self.shouldShowAdd != NULL ) {
-        self.shouldShowAdd ( @"", YES ); // in order not to show full screen ads
+        if ( [self.flyer isVideoFlyer] ) {
+            self.shouldShowAdd ( @"", YES ); // in order not to show full screen ads
+        }
     }
     
     [self.navigationController popViewControllerAnimated:YES];
