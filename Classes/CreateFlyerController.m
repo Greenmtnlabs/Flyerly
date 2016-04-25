@@ -42,7 +42,6 @@
     BOOL isNewText;
     //Fix for: 162-create-flyer-screen-when-user-close-the-inapp-tabs-are-active-and-extra-layer-showing-when-it-comes-from-clipart
     BOOL appearingViewAfterInAppHide;
-    BOOL haveValidSubscription;
     BOOL saveToGallaryReqBeforeSharing;
     BOOL isNewFlyer;
     BOOL firstTimeInViewDidAppear;
@@ -377,9 +376,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
-    haveValidSubscription = [userPurchases isSubscriptionValid];
-    
-    if( haveValidSubscription == NO ) {
+    //when have valid subscription or have ad removal bundle then dont show ad
+    if( [userPurchases canShowAdd] ) {
         [self loadInterstitialAdd];
     }
     
@@ -584,7 +582,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     customAdSize = GADAdSizeFromCGSize(CGSizeMake(520, 50));
                 } 
                 
-                if( haveValidSubscription == NO ) {
+                if( [userPurchases canShowAdd] ) {
                     // Use predefined GADAdSize constants to define the GADBannerView.
                     self.bannerAdd = [[GADBannerView alloc] initWithAdSize:customAdSize origin:origin];
                     
@@ -3553,7 +3551,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     //Add ScrollViews
     [self.contextView addSubview:obj];
     
-    if(haveValidSubscription == NO){
+    if( [userPurchases canShowAdd] ){
         if ( sharePanel.hidden ){
             bannerAdsView.alpha = bannerAdsView.alpha ? 1.0 : 0.0;
             [self.contextView addSubview:self.bannerAdsView];
@@ -5734,7 +5732,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
-    haveValidSubscription = [userPurchases isSubscriptionValid];
 
     if( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ){
 
@@ -6580,8 +6577,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
  */
 -(void)loadXibsAfterInAppCheck:(BOOL)checkAndCloseInAppPanel againAddInSubViews:(BOOL)againAddInSubViews{
     userPurchases = [UserPurchases getInstance];
-    userPurchases.delegate = self;
-    haveValidSubscription = [userPurchases isSubscriptionValid];
+    userPurchases.delegate = self;    
     
     if ( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO] ) {
         
@@ -6600,7 +6596,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     if( againAddInSubViews ){
         //When user have complete design bundle or any subscription dont show the premium button
-        if( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] || haveValidSubscription ){
+        if( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] || [userPurchases isSubscriptionValid] ){
             [self premiumBtnHideAfterCheck:@"ALL"];
         }else if([userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE] ) {
             [self premiumBtnHideAfterCheck: IN_APP_ID_ICON_BUNDLE];

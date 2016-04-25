@@ -24,5 +24,6 @@
 - (void) setUserPurcahsesFromParse;
 - (BOOL) checkKeyExistsInPurchases : (NSString *)productId;
 - (BOOL) isSubscriptionValid;
+- (BOOL) canShowAdd;
 @end
 
