@@ -909,7 +909,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }
     });
     
-    self.shouldShowAdd ( @"", YES ); // in order not to show full screen ads
+    if ([self respondsToSelector: @selector(shouldShowAdd)]) {
+        self.shouldShowAdd ( @"", YES ); // in order not to show full screen ads
+    }
     
     [self.navigationController popViewControllerAnimated:YES];
     

@@ -364,8 +364,9 @@ const int CONTACTS_TAB = 0;
 }
 
 -(IBAction)goBack{
-    
-    self.shouldShowAdd ( @"", haveValidSubscription );
+    if ([self respondsToSelector: @selector(shouldShowAdd)]) {
+        self.shouldShowAdd( @"", haveValidSubscription );
+    }
     [self.navigationController popViewControllerAnimated:YES];
     
 }
