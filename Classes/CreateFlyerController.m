@@ -6614,17 +6614,22 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     return YES;
 }
 
-//Hide premium button from view
+//Hide premium button from view when have purchases
 -(void)premiumBtnHideAfterCheck:(NSString *)from{
+    
+    if ( [from isEqualToString:NOT_FOUND_IN_APP] ){
+        return; //don go further when bundle is NOT_FOUND_IN_APP
+    }
+    
     if( [from isEqualToString:@"ALL"] ||  [from isEqualToString: IN_APP_ID_UNLOCK_VIDEO]){
         UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
         [addVideoTabButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
     }
-    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString:@"BACKGROUND"] || [from isEqualToString:NOT_FOUND_IN_APP]){
+    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString:@"BACKGROUND"]){
         [premiumBtnBg removeFromSuperview];
         [premiumImgBg removeFromSuperview];
     }
-    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString:@"BACKGROUND_BORDER"] || [from isEqualToString:NOT_FOUND_IN_APP]){
+    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString:@"BACKGROUND_BORDER"] ){
         [premiumBtnBgBorder removeFromSuperview];
         [premiumImgBgBorder removeFromSuperview];
     }
