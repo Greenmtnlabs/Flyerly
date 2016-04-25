@@ -113,9 +113,10 @@
 - (void)goBack {
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
-    haveValidSubscription = [userPurchases isSubscriptionValid];
-    
-    self.shouldShowAdd ( @"", haveValidSubscription );
+    haveValidSubscription = !([userPurchases canShowAd]);
+    if ( self.shouldShowAdd != NULL ) {
+        self.shouldShowAdd ( @"", haveValidSubscription );
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -209,8 +210,7 @@
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     userPurchases_.delegate = nil;
     
-    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ||
-        [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS] ) {
         [inAppViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
 }
@@ -230,8 +230,7 @@
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     userPurchases_.delegate = nil;
     
-    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN]  ||
-        [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS] ) {
         [inAppViewController.paidFeaturesTview reloadData];
     }else {
         

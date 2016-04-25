@@ -751,8 +751,7 @@
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ||
-        [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS] ) {
         
         [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
@@ -807,8 +806,7 @@
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN]  ||
-         [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS] ) {
         
         [inappviewcontroller.paidFeaturesTview reloadData];
     }else {

@@ -174,8 +174,7 @@
         
         if ([[PFUser currentUser] sessionToken].length != 0) {
             
-            if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ||
-                 [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO] ) {
+            if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO] ) {
                 
                 NSError *error = nil;
                 NSString *homeDirectoryPath = NSHomeDirectory();
@@ -268,13 +267,12 @@
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN]  ||
-         [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS] ) {
-        
+    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS] ) {
         [inappviewcontroller.paidFeaturesTview reloadData];
-    }else {
         
+    }else {
         [self presentViewController:inappviewcontroller animated:YES completion:nil];
+        
     }
     
 }

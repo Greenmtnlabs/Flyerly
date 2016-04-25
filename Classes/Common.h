@@ -190,7 +190,7 @@ nil]
     #define IN_APP_ID_UNLOCK_VIDEO @"comflyerlyUnlockCreateVideoFlyerOption"
     #define IN_APP_ID_MONTHLY_SUBSCRIPTION @"comflyerlyMonthlySubscription"
     #define IN_APP_ID_YEARLY_SUBSCRIPTION @"comflyerlyYearlySubscription1"
-    #define IN_APP_ID_AD_REMOVAL @"com.flyerly.AdRemovalMonthly"
+    #define IN_APP_ID_AD_REMOVAL @"comflyerlyAdRemovalMonthly"
 
     #define IN_APP_ID_SAVED_FLYERS @"comflyerlyUnlockSavedFlyers"
     #define IN_APP_ID_ICON_BUNDLE @"comflyerlyIconsBundle"
