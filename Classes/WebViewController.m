@@ -114,8 +114,9 @@
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
     haveValidSubscription = [userPurchases isSubscriptionValid];
-    
-    self.shouldShowAdd ( @"", haveValidSubscription );
+    if ([self respondsToSelector: @selector(shouldShowAdd)]) {
+        self.shouldShowAdd ( @"", haveValidSubscription );
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
