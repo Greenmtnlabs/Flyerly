@@ -222,7 +222,12 @@
 
 //Crittercism ApiKey
 - (NSString*)crittercismAppId {
-	return @"519a14f897c8f27969000019";
+    #if defined(FLYERLY) // Flyerly
+        return @"519a14f897c8f27969000019";
+    #else // Flyerly Biz
+        return @"3a4fc035429242a383c9be5d7c032bdd00555300";
+    #endif
+	
 }
 
 //Parse Online Keys
