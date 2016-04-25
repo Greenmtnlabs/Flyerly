@@ -1242,13 +1242,13 @@ id lastShareBtnSender;
         
         InviteFriendsController *addFriendsController = [[InviteFriendsController alloc]initWithNibName:@"InviteFriendsController" bundle:nil];
         
-        [addFriendsController setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
-            dispatch_async( dispatch_get_main_queue(), ^{
-                if (haveValidSubscription == NO && ([weakSelf.addInterstialFms isReady] && ![weakSelf.addInterstialFms hasBeenUsed]) ){
-                    [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
-                }
-            });
-        }];
+//        [addFriendsController setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
+//            dispatch_async( dispatch_get_main_queue(), ^{
+//                if (haveValidSubscription == NO && ([weakSelf.addInterstialFms isReady] && ![weakSelf.addInterstialFms hasBeenUsed]) ){
+//                    [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
+//                }
+//            });
+//        }];
         
         [self.navigationController pushViewController:addFriendsController animated:YES];
         

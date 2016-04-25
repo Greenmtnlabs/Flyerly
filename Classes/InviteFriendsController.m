@@ -364,7 +364,7 @@ const int CONTACTS_TAB = 0;
 }
 
 -(IBAction)goBack{
-    if ([self respondsToSelector: @selector(shouldShowAdd)]) {
+    if ( self.shouldShowAdd != NULL ) {
         self.shouldShowAdd( @"", haveValidSubscription );
     }
     [self.navigationController popViewControllerAnimated:YES];
@@ -682,8 +682,11 @@ const int CONTACTS_TAB = 0;
     emailBackupArray = nil;
     emailBackupArray = emailsArray;
     
-    [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-    [self hideLoadingIndicator];
+    // Do in the main UI thread.
+    dispatch_async( dispatch_get_main_queue(), ^{
+        [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+        [self hideLoadingIndicator];
+    });
     
 }
 

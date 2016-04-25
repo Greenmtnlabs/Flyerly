@@ -909,7 +909,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }
     });
     
-    if ([self respondsToSelector: @selector(shouldShowAdd)]) {
+    if ( self.shouldShowAdd != NULL ) {
         self.shouldShowAdd ( @"", YES ); // in order not to show full screen ads
     }
     

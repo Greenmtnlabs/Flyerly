@@ -506,7 +506,7 @@ id lastShareBtnSender;
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
     haveValidSubscription = [userPurchases isSubscriptionValid];
-    if ([self respondsToSelector: @selector(shouldShowAdd)]) {
+    if ( self.shouldShowAdd != NULL ) {
         self.shouldShowAdd ( @"", haveValidSubscription );
     }
   	[self.navigationController popViewControllerAnimated:YES];
