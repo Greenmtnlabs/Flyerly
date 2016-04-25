@@ -259,9 +259,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 // We've received an Banner ad successfully.
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
     
-//    UserPurchases *userPurchases_ = [UserPurchases getInstance];
-//    if ( bannerAddClosed == NO && ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"])
-    
     if ( bannerAddClosed == NO && bannerShowed == NO ) {
         bannerShowed = YES;//keep bolean we have rendered banner or not ?
         
@@ -1192,7 +1189,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             }
             
               //if user has not subscription for fonts then show premium view
-            if ( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE] == NO ) {
+            if ( [userPurchases checkKeyExistsInPurchases:IN_APP_ID_ICON_BUNDLE] == NO ) {
                 premiumBtnFonts = [UIButton buttonWithType:UIButtonTypeCustom];
                 premiumBtnFonts.frame = CGRectMake(fOPrem[0], fOPrem[1], fOPrem[2], fOPrem[3]);
                 
@@ -6577,7 +6574,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
  */
 -(void)loadXibsAfterInAppCheck:(BOOL)checkAndCloseInAppPanel againAddInSubViews:(BOOL)againAddInSubViews{
     userPurchases = [UserPurchases getInstance];
-    userPurchases.delegate = self;    
+    userPurchases.delegate = self;
     
     if ( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO] ) {
         
@@ -6596,9 +6593,9 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     if( againAddInSubViews ){
         //When user have complete design bundle or any subscription dont show the premium button
-        if( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] || [userPurchases isSubscriptionValid] ){
+        if( [userPurchases haveProduct:IN_APP_ID_ALL_DESIGN] || [userPurchases isSubscriptionValid] ){
             [self premiumBtnHideAfterCheck:@"ALL"];
-        }else if([userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE] ) {
+        }else if([userPurchases haveProduct: IN_APP_ID_ICON_BUNDLE] ) {
             [self premiumBtnHideAfterCheck: IN_APP_ID_ICON_BUNDLE];
         }
     }
