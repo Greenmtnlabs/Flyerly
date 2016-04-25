@@ -48,11 +48,8 @@
    
     if ([[PFUser currentUser] sessionToken].length != 0) {
         
-        if ( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ||
-             [userPurchases checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO] ) {
-            
-            [_mode setImage:[UIImage imageNamed:@"ModeVideo.png"]
-                                forState:UIControlStateNormal];
+        if ( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO] ) {
+            [_mode setImage:[UIImage imageNamed:@"ModeVideo.png"] forState:UIControlStateNormal];
         }
         
     }

@@ -255,21 +255,11 @@
     }
 }
 
-- ( void )inAppPurchasePanelContent {
-    
+- ( void )inAppPurchasePanelContent {    
     [inappviewcontroller inAppDataLoaded];
 }
 
 - ( void )productSuccesfullyPurchased: (NSString *)productId {
-    
-    UserPurchases *userPurchases_ = [UserPurchases getInstance];
-    
-    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ||
-        [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS]) {
-        
-        //UIImage *buttonImage = [UIImage imageNamed:@"ModeVideo.png"];
-        //[mode setImage:buttonImage forState:UIControlStateNormal];
-    }
     
 }
 
