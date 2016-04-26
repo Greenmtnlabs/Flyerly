@@ -6512,7 +6512,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         userPurchases = [UserPurchases getInstance];
         userPurchases.delegate = self;
         if ([[PFUser currentUser] sessionToken].length != 0) {
-            if ( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ) {
+            //can move water mark layer when have valid subscription / IN_APP_ID_ALL_DESIGN
+            if ( [userPurchases isSubscriptionValid] || [userPurchases haveProduct:IN_APP_ID_ALL_DESIGN] ) {
                 canPerformAct = YES;
             }
         }

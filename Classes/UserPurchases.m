@@ -64,6 +64,8 @@ static UserPurchases *sharedSingleton = nil;
 - (BOOL)canCreateVideoFlyer {
     if ( [self isSubscriptionValid] ) {
         return YES;
+    } else if ( [oldPurchases objectForKey: IN_APP_ID_ALL_DESIGN]  ) {
+        return YES;
     } else {
         return [self haveProduct:IN_APP_ID_UNLOCK_VIDEO];
     }
@@ -84,8 +86,10 @@ static UserPurchases *sharedSingleton = nil;
         // check add removal validity
         NSString *isAdRemovalSubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_AD_REMOVAL forDate:[NSDate date]]]; // Ad Removal Subscription
         
+        BOOL haveVideoProduct = [self haveProduct:IN_APP_ID_UNLOCK_VIDEO];
+        
         // check whether one of 'em is valid or not..
-        if( [isMonthlySubValid isEqual:@"1"] || [isYearlySubValid isEqualToString:@"1"] || [isAdRemovalSubValid isEqualToString:@"1"] ){
+        if( [isMonthlySubValid isEqual:@"1"] || [isYearlySubValid isEqualToString:@"1"] || [isAdRemovalSubValid isEqualToString:@"1"] || haveVideoProduct ){
             showAdd = NO;
         }
     }
