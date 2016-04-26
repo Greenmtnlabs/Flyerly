@@ -6502,23 +6502,23 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 //When user perform action on watermark layer and has no complete design bundle then show in app panel
 - (BOOL)wmCanPerformAction:(NSString *)uid{
     BOOL canPerformAct = YES;
-    BOOL isInAppPanelAlreadyOpen = NO;
     
     NSMutableDictionary *dic = [flyer getLayerFromMaster:uid];
-    
-    if( [[dic objectForKey:@"type"] isEqualToString:FLYER_LAYER_WATER_MARK] ){
-
+    NSString* tempLayerType = [dic objectForKey:@"type"];
+    if( [tempLayerType isEqualToString:FLYER_LAYER_WATER_MARK] ){
+        //if layer type is watermark, then first check have permission of changing
+        canPerformAct = NO;
+        
         userPurchases = [UserPurchases getInstance];
         userPurchases.delegate = self;
-        
         if ([[PFUser currentUser] sessionToken].length != 0) {
             if ( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ) {
-                canPerformAct = NO;
+                canPerformAct = YES;
             }
         }
     }
     
-    if( canPerformAct == NO && isInAppPanelAlreadyOpen == NO ){
+    if( [tempLayerType isEqualToString:FLYER_LAYER_WATER_MARK]  && canPerformAct == NO ){
         currentLayer = @"";
         [self deSelectPreviousLayer];
         
