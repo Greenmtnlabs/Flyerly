@@ -56,13 +56,23 @@ static UserPurchases *sharedSingleton = nil;
     }
 }
 
+/**
+ * Purpose: check we can create video flyer ?
+ * @parm:void 
+ * @return:BOOL
+ */
+- (BOOL)canCreateVideoFlyer {
+    if ( [self isSubscriptionValid] ) {
+        return YES;
+    } else {
+        return [self haveProduct:IN_APP_ID_UNLOCK_VIDEO];
+    }
+}
+
 //return flag we can show ad or not
 -(BOOL)canShowAd{
     BOOL showAdd = YES;
-    if ( [oldPurchases objectForKey: IN_APP_ID_ALL_DESIGN]){
-        showAdd = NO;
-        
-    } else {
+    if ( YES ) {
         RMAppReceipt* appReceipt = [RMAppReceipt bundleReceipt];
         
         // get monthly subscription validity

@@ -5402,7 +5402,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         userPurchases.delegate = self;
         
         if ([[PFUser currentUser] sessionToken].length != 0) {
-            if ( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO] ) {
+            if ( [userPurchases canCreateVideoFlyer] ) {
                 
                 [self openCustomCamera:YES];
                 _videoLabel.alpha = 1;
@@ -5740,7 +5740,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [inappviewcontroller.paidFeaturesTview reloadData];
     } else{
         //check for videos
-        if ( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO] ) {
+        if ( [userPurchases canCreateVideoFlyer] ) {
         
             [self premiumBtnHideAfterCheck: IN_APP_ID_UNLOCK_VIDEO];
             [inappviewcontroller.paidFeaturesTview reloadData];
@@ -6580,7 +6580,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
     
-    if ( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO] ) {
+    if ( [userPurchases canCreateVideoFlyer] ) {
         
         UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
         [addVideoTabButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
