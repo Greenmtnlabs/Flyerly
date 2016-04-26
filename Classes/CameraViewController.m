@@ -48,7 +48,7 @@
    
     if ([[PFUser currentUser] sessionToken].length != 0) {
         
-        if ( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO] ) {
+        if ( [userPurchases canCreateVideoFlyer] ) {
             [_mode setImage:[UIImage imageNamed:@"ModeVideo.png"] forState:UIControlStateNormal];
         }
         
@@ -280,7 +280,7 @@
         _mode.selected = NO;
     
     if ([[PFUser currentUser] sessionToken].length != 0) {
-        if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO] ) {
+        if ( [userPurchases_ canCreateVideoFlyer] ) {
             
             if ( [_mode isSelected] == YES ) {
                 
@@ -438,7 +438,7 @@
 - (void) userPurchasesLoaded {
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO] ) {
+    if ( [userPurchases_ canCreateVideoFlyer] ) {
         
         [_mode setImage:[UIImage imageNamed:@"ModeVideo.png"] forState:UIControlStateNormal];
         [inappviewcontroller.paidFeaturesTview reloadData];
@@ -453,7 +453,7 @@
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO] ) {
+    if ( [userPurchases_ canCreateVideoFlyer] ) {
         
         UIImage *buttonImage = [UIImage imageNamed:@"ModeVideo.png"];
         [_mode setImage:buttonImage forState:UIControlStateNormal];
@@ -469,7 +469,7 @@
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO] ) {
+    if ( [userPurchases_ canCreateVideoFlyer] ) {
         
         UIImage *buttonImage = [UIImage imageNamed:@"ModeVideo.png"];
         [_mode setImage:buttonImage forState:UIControlStateNormal];

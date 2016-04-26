@@ -174,7 +174,7 @@
         
         if ([[PFUser currentUser] sessionToken].length != 0) {
             
-            if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_UNLOCK_VIDEO] ) {
+            if ( [userPurchases_ canCreateVideoFlyer] ) {
                 
                 NSError *error = nil;
                 NSString *homeDirectoryPath = NSHomeDirectory();
