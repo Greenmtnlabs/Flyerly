@@ -21,10 +21,11 @@
 }
 
 -(void)setCellValueswithProductTitle :(NSString *)productIdentifier Title:(NSString *)title ProductPrice:(NSString *)price ProductDescription: (NSString *)description{
-     
-    if ( ![title isEqualToString:@"Complete Bundle"] ){
+
+      //dont show discount view
+//    if ( ![title isEqualToString:@"Complete Bundle"] ){
         [discount removeFromSuperview];
-    }
+//    }
     
     if ( ![title isEqualToString:@"Monthly Subscription"] ){
         [star removeFromSuperview];
