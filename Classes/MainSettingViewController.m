@@ -750,13 +750,15 @@
 - ( void )productSuccesfullyPurchased: (NSString *)productId {
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
+    canShowAd = [userPurchases_ canShowAd];
     
     if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS] ) {
         
         [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
     
-    if ( [productId isEqualToString: BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION]) { // Ad Removal Subscription
+    //when purchased bundle is of ad removal or check can we remove banner add
+    if ( [productId isEqualToString: BUNDLE_IDENTIFIER_AD_REMOVAL] || canShowAd == NO) {
         [self removeBAnnerAdd:YES];
     }
 }
@@ -984,7 +986,7 @@
 // Dismiss action for banner ad
 -(void)dismissBannerAds:(BOOL)valForBannerClose{
     
-    productIdentifier = BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION; // Ad Removal Subscription
+    productIdentifier = BUNDLE_IDENTIFIER_AD_REMOVAL; // Ad Removal Subscription
     inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
     inappviewcontroller.buttondelegate = self;
     [inappviewcontroller requestProduct];
