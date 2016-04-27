@@ -833,9 +833,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [shareviewcontroller.saveButton setSelected:YES]; 
                 
                 panelWillOpen = NO;
-                
-                // Here we Merge All Layers in Video File
-                [self videoMergeProcess];
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    // Here we Merge All Layers in Video File
+                    [self videoMergeProcess];
+                });
                
                 
             } else {
