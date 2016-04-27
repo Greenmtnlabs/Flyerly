@@ -81,7 +81,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 - (void)viewWillAppear:(BOOL)animated{
     
     btnBannerAdsDismiss.alpha = 0.0;
-    
+    bannerAdsView.alpha = 0.0;
     [self setFramesOfBtns];
     
     saveToGallaryReqBeforeSharing = NO;
@@ -314,8 +314,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 -(void)viewDidLoad{
     
     [self setWaterMarkLayerPosition];
-    
-    bannerAdsView.alpha = 0.0;
     
     if( IS_IPHONE_4 ){
         [[NSBundle mainBundle] loadNibNamed:@"CreateFlyerController-iPhone4" owner:self options:nil];

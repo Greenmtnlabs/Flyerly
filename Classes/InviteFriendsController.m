@@ -173,7 +173,7 @@ const int CONTACTS_TAB = 0;
     // Load device contacts
     [self loadLocalContacts:self.contactsButton];
     
-    self.bannerAdsView.alpha = 0.0;
+    
     
     if([FlyerlySingleton connected]){
         if( haveValidSubscription == NO ) {
@@ -243,7 +243,8 @@ const int CONTACTS_TAB = 0;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    
+    self.btnBannerAdsDismiss.alpha = 0.0;
+    self.bannerAdsView.alpha = 0.0;
     self.navigationItem.leftItemsSupplementBackButton = YES;
 }
 
@@ -1406,8 +1407,8 @@ const int CONTACTS_TAB = 0;
     
     if ( bannerAdClosed == NO && bannerShowed == NO ) {
         bannerShowed = YES;//keep bolean we have rendered banner or not ?
-        
-        btnBannerAdsDismiss.alpha = 1.0;
+        self.bannerAdsView.alpha = 1.0;
+        self.btnBannerAdsDismiss.alpha = 1.0;
         [self.bannerAdsView addSubview:btnBannerAdsDismiss];
     }
 }

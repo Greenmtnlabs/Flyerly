@@ -134,8 +134,6 @@
         [category addObject:@"Clear Purchases"];//13
     }
     
-    self.bannerAdsView.alpha = 1.0;
-    
     if([FlyerlySingleton connected]){
         if( canShowAd ) {
             [self loadInterstitialAdd];
@@ -162,6 +160,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     btnBannerAdsDismiss.alpha = 0.0;
+    bannerAdsView.alpha = 0.0;
 }
 
 //return flag is login
@@ -932,6 +931,7 @@
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
     if ( bannerAdClosed == NO && bannerShowed == NO ) {
         bannerShowed = YES;//keep bolean we have rendered banner or not ?
+        bannerAdsView.alpha = 1.0;
         btnBannerAdsDismiss.alpha = 1.0;
         [self.bannerAdsView addSubview:btnBannerAdsDismiss];
     }
