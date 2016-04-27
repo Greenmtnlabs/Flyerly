@@ -106,28 +106,14 @@ const int CONTACTS_TAB = 0;
                                       cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"You have sucessfully unlocked Design Bundle feature by referring friends. Enjoy!"];
                                       
                                   }else if ( refrelCounter <= 0 ){
-                                      
-                                    #if defined(FLYERLY)
-                                      msg = @"Invite 20 people to Flyerly and unlock Design Bundle feature for FREE!";
-                                    #else
-                                      msg = @"Invite 20 people to Flyerly Biz and unlock Design Bundle feature for FREE!";
-                                    #endif
-                                      
-                                      cellDescriptionForRefrelFeature = msg;
-                                      
-                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to flyerly and unlock Design Bundle feature for FREE!"];
+                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to %@ and unlock Design Bundle feature for FREE!", APP_NAME];
                                   }
                                   else if ( refrelCounter > 0 && refrelCounter < 20 )
                                   {
                                       int moreToInvite = 20 - refrelCounter;
-                                    #if defined(FLYERLY)
-                                      msg = @"Invite %d more people to Flyerly and unlock Design Bundle feature for FREE!";
-                                    #else
-                                      msg = @"Invite %d more people to Flyerly Biz and unlock Design Bundle feature for FREE!";
-                                    #endif
+                                    
                                       //Setting the feature name,feature description values for cell view using plist
-                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:msg, moreToInvite];
-                                      
+                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite %d more people to %@ and unlock Design Bundle feature for FREE!",  moreToInvite, APP_NAME];
                                   }
                                   
                                   [refrelText setText:cellDescriptionForRefrelFeature];
@@ -138,14 +124,7 @@ const int CONTACTS_TAB = 0;
              }
          }];
     }else {
-        NSString *msg;
-        #if defined(FLYERLY)
-            msg = @"Invite 20 more people to Flyerly and unlock Design Bundle feature for FREE!";
-        #else
-            msg = @"Invite 20 more people to Flyerly Biz and unlock Design Bundle feature for FREE!";
-        #endif
-        
-        cellDescriptionForRefrelFeature = msg;
+        cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to %@ and unlock Design Bundle feature for FREE!", APP_NAME];;
 
     }
     
@@ -1134,11 +1113,11 @@ const int CONTACTS_TAB = 0;
         NSString *sharingText;
         #if defined(FLYERLY)
             hashTag  = @"#flyerly";
-            sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
         #else
             hashTag  = @"#FlyerlyBiz";
-            sharingText = [NSString stringWithFormat:@"I'm using Flyerly Biz to create and share flyers on the go! %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
         #endif
+        
+        sharingText = [NSString stringWithFormat:@"I'm using the %@ app to create and share flyers on the go! %@%@", APP_NAME, flyerConfigurator.referralURL, userUniqueObjectId];
         
         ContactsModel *model = [self getArrayOfSelectedTab][(indexPath.row)];
         
