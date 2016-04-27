@@ -86,6 +86,7 @@ static UserPurchases *sharedSingleton = nil;
         // check add removal validity
         NSString *isAdRemovalSubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_AD_REMOVAL forDate:[NSDate date]]]; // Ad Removal Subscription
         
+        //check have video bundle then don't show ad too
         BOOL haveVideoProduct = [self haveProduct:IN_APP_ID_UNLOCK_VIDEO];
         
         // check whether one of 'em is valid or not..

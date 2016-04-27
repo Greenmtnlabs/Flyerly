@@ -16,7 +16,7 @@
     SHKSharer *iosSharer;
     FlyerlyConfigurator *flyerConfigurator;
     UIButton *btnBannerAdsDismiss;
-    BOOL hasValidSubscription;
+    BOOL canShowAd;
     UserPurchases *userPurchases;
     NSString *productIdentifier;
 }
@@ -48,7 +48,7 @@
     
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
-    hasValidSubscription = [userPurchases isSubscriptionValid];
+    canShowAd = [userPurchases canShowAd];
 
     
     bannerAdClosed = NO;
@@ -138,7 +138,7 @@
     self.bannerAdsView.alpha = 0.0;
     
     if([FlyerlySingleton connected]){
-        if( hasValidSubscription == NO ) {
+        if( canShowAd ) {
             [self loadInterstitialAdd];
         }
     }
@@ -162,7 +162,7 @@
                 customAdSize = GADAdSizeFromCGSize(CGSizeMake(320, 50));
             }
             
-            if( hasValidSubscription == NO ) {
+            if( canShowAd ) {
                 // Use predefined GADAdSize constants to define the GADBannerView.
                 self.bannerAds = [[GADBannerView alloc] initWithAdSize:customAdSize origin:origin];
                 
