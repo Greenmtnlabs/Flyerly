@@ -930,8 +930,11 @@
 
 // We've received a Banner ad successfully.
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
-    btnBannerAdsDismiss.alpha = 1.0;
-    [self.bannerAdsView addSubview:btnBannerAdsDismiss];
+    if ( bannerAdClosed == NO && bannerShowed == NO ) {
+        bannerShowed = YES;//keep bolean we have rendered banner or not ?
+        btnBannerAdsDismiss.alpha = 1.0;
+        [self.bannerAdsView addSubview:btnBannerAdsDismiss];
+    }
 }
 
 
