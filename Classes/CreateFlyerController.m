@@ -6532,12 +6532,10 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [addVideoTabButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
         
         if( checkAndCloseInAppPanel ){
-            [inappviewcontroller.paidFeaturesTview reloadData];
+//            [inappviewcontroller.paidFeaturesTview reloadData];
             [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
         }
-    }
-
-    if( checkAndCloseInAppPanel ) {
+    }else if( checkAndCloseInAppPanel ) {
         [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
     
