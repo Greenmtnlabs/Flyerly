@@ -96,7 +96,8 @@
 -(void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didFailWithError:(NSError *)error;
 
 @property(nonatomic, strong) GADInterstitial *interstitialAds;
-@property(nonatomic, strong) GADBannerView *bannerAds;
-@property (weak, nonatomic) IBOutlet UIView *bannerAdsView;
+@property (weak, nonatomic) IBOutlet GADBannerView *bannerAdsView;
+@property (weak, nonatomic) IBOutlet UIButton *btnBannerAdsDismiss;
+- (IBAction)onClickBtnBannerAdsDismiss:(id)sender;
 
 @end

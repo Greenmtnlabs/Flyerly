@@ -54,10 +54,12 @@
 -(IBAction)rateApp:(id)sender;
 -(IBAction)gotwitter:(id)sender;
 -(IBAction)goemail:(id)sender;
+- (IBAction)onClickBtnDismissBannerAds:(id)sender;
 
 @property(nonatomic, strong) GADInterstitial *interstitialAds;
-@property(nonatomic, strong) GADBannerView *bannerAds;
-@property (weak, nonatomic) IBOutlet UIView *bannerAdsView;
+//@property(nonatomic, strong) GADBannerView *bannerAds;
+@property (weak, nonatomic) IBOutlet GADBannerView *bannerAdsView;
+@property (weak, nonatomic) IBOutlet UIButton *btnBannerAdsDismiss;
 
 
 @end

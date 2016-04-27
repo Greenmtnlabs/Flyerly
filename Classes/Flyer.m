@@ -296,11 +296,7 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     
     NSString *msg;
     
-    #if defined(FLYERLY)
-        msg = @"Please allow Flyerly to add photo in gallery( Settings -> Privacy -> Photos)";
-    #else
-        msg = @"Please allow Flyerly Biz to add photo in gallery( Settings -> Privacy -> Photos)";
-    #endif
+    msg = [NSString  stringWithFormat:@"Please allow %@ to add photo in gallery( Settings -> Privacy -> Photos)", APP_NAME] ;
 
     UIAlertView *permAlert = [[UIAlertView alloc] initWithTitle:@"Settings"
                                                         message:msg

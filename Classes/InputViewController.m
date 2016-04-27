@@ -8,7 +8,12 @@
 
 #import "InputViewController.h"
 
-@interface InputViewController ()
+@interface InputViewController (){
+    
+    NSString *userName;
+
+
+}
 
 @end
 
@@ -28,6 +33,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    #if defined(FLYERLY)
+        userName = @"@flyerlyapp";
+    #else
+        userName = @"@flyerlybiz";
+    #endif
+    
+    
     globle = [FlyerlySingleton RetrieveSingleton];
     // Do any additional setup after loading the view from its nib.
     self.navigationController.navigationBarHidden = NO;
@@ -59,14 +72,9 @@
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
-    
-    #if defined(FLYERLY)
-        label.text = @"Flyerly";
-        lblTweetMsg.text = @"Tweet comments to @flyerlyapp";
-    #else
-        label.text = @"Flyerly Biz";
-        lblTweetMsg.text = @"Tweet comments to @flyerlybiz";
-    #endif
+    label.text = APP_NAME;
+   
+    lblTweetMsg.text = [NSString stringWithFormat:@"Tweet comments to %@", userName];
     
     self.navigationItem.titleView = label;
 }
@@ -91,14 +99,8 @@
             [self showAlert:@"Please Enter Comments" message:@""];
         }else{
         
-            NSString *str;
-            #if defined(FLYERLY)
-                str = @"@flyerlyapp";
-            #else
-                str = @"@flyerlybiz";
-            #endif
             // Current Item For Sharing
-            SHKItem *item = [SHKItem text:[NSString stringWithFormat:@"%@ %@",txtfield.text, str]];
+            SHKItem *item = [SHKItem text:[NSString stringWithFormat:@"%@ %@",txtfield.text, userName]];
             
             //Calling ShareKit for Sharing
             iosSharer = [[ SHKSharer alloc] init];
@@ -139,14 +141,10 @@
 {
     
     NSString *msg;
-    #if defined(FLYERLY)
-        msg = @"Thank you. Your feedback has been sent to @flyerlyapp on Twitter.";
-    #else
-        msg = @"Thank you. Your feedback has been sent to @flyerlybiz on Twitter.";
-    #endif
+   
     
     // Here we show Messege after Sending
-    [self showAlert:msg message:@""];
+    [self showAlert:[NSString stringWithFormat:@"Thank you. Your feedback has been sent to %@ on Twitter.", userName] message:@""];
 
     if (!sharer.quiet)
 		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!") forSharer:sharer];

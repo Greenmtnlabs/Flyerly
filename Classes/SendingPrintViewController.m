@@ -193,11 +193,7 @@ UIButton *backButton;
             
         }
         
-        #if defined(FLYERLY)
-            toLabel.text = @"Flyerly printed flyer sent to:";
-        #else
-            toLabel.text = @"Flyerly Biz printed flyer sent to:";
-        #endif
+        toLabel.text = [NSString stringWithFormat:@"%@ printed flyer sent to:", APP_NAME];
         
         contactlistTextView.text = nameList;
         [contactlistTextView setFont:[UIFont systemFontOfSize:15]];
@@ -985,11 +981,7 @@ https://lob.com/docs#postcards
     payment.amount = totalAmount;
     payment.currencyCode = @"USD";
     
-    #if defined(FLYERLY)
-        payment.shortDescription = @"Print & Mail Flyerly Postcard.";
-    #else
-        payment.shortDescription = @"Print & Mail Flyerly Biz Postcard.";
-    #endif
+    payment.shortDescription = [NSString stringWithFormat:@"Print & Mail %@ Postcard.", APP_NAME];
     
     // Use the intent property to indicate that this is a "sale" payment,
     // meaning combined Authorization + Capture. To perform Authorization only,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainSettingViewController">
             <connections>
                 <outlet property="bannerAdsView" destination="Ybr-XB-Nps" id="fq4-2D-007"/>
+                <outlet property="btnBannerAdsDismiss" destination="bLJ-LT-lJV" id="yBZ-OQ-OWI"/>
                 <outlet property="tableView" destination="211" id="216"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
@@ -98,9 +99,19 @@
                         <action selector="gohelp" destination="-1" eventType="touchUpInside" id="363"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" id="Ybr-XB-Nps">
+                <view contentMode="scaleToFill" id="Ybr-XB-Nps" customClass="GADBannerView">
                     <rect key="frame" x="0.0" y="472" width="320" height="50"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bLJ-LT-lJV">
+                            <rect key="frame" x="270" y="0.0" width="50" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="closeAd.png"/>
+                            <connections>
+                                <action selector="onClickBtnDismissBannerAds:" destination="-1" eventType="touchUpInside" id="vay-J7-skh"/>
+                            </connections>
+                        </button>
+                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
@@ -112,6 +123,7 @@
     <resources>
         <image name="app_store.png" width="80" height="45"/>
         <image name="app_store_selected.png" width="80" height="45"/>
+        <image name="closeAd.png" width="72" height="72"/>
         <image name="h_setting_button.png" width="80" height="45"/>
         <image name="t_email_button.png" width="80" height="45"/>
         <image name="t_setting_button.png" width="80" height="45"/>

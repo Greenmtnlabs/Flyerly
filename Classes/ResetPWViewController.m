@@ -45,12 +45,7 @@
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
     
-    #if defined(FLYERLY)
-        lblRecoverAccount.text = @"Recover Your Flyerly Account";
-    #else
-        lblRecoverAccount.text = @"Recover Your Flyerly Biz Account";
-    #endif
-
+    lblRecoverAccount.text = [NSString stringWithFormat:@"Recover Your %@ Account", APP_NAME] ;
 }
 
 - (void)didReceiveMemoryWarning
