@@ -15,7 +15,7 @@
     
     SHKSharer *iosSharer;
     FlyerlyConfigurator *flyerConfigurator;
-    BOOL hasValidSubscription;
+    BOOL canShowAd;
     UserPurchases *userPurchases;
     NSString *productIdentifier;
 }
@@ -47,7 +47,7 @@
     
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
-    hasValidSubscription = [userPurchases isSubscriptionValid];
+    canShowAd = [userPurchases canShowAd];
 
     
     bannerAdClosed = NO;
@@ -137,7 +137,7 @@
     self.bannerAdsView.alpha = 1.0;
     
     if([FlyerlySingleton connected]){
-        if( hasValidSubscription == NO ) {
+        if( canShowAd ) {
             [self loadInterstitialAdd];
         }
     }
@@ -148,7 +148,7 @@
         
         if( IS_IPHONE_4 || IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
             
-            if( hasValidSubscription == NO ) {
+            if( canShowAd ) {
                 self.bannerAdsView.adUnitID = [flyerConfigurator bannerAdID];
                 self.bannerAdsView.delegate = self;
                 self.bannerAdsView.rootViewController = self;
