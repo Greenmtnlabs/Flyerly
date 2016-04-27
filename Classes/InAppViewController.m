@@ -96,21 +96,12 @@
                                   
                               }else if ( refrelCounter <= 0 ){
                                   
-                                  #if defined(FLYERLY)
-                                    cellDescriptionForRefrelFeature = @"Invite 20 people to Flyerly and unlock Design Bundle feature for FREE!";
-                                  #else
-                                    cellDescriptionForRefrelFeature = @"Invite 20 people to Flyerly Biz and unlock Design Bundle feature for FREE!";
-                                  #endif
+                                  cellDescriptionForRefrelFeature = [NSString stringWithFormat: @"Invite 20 people to %@ and unlock Design Bundle feature for FREE!", APP_NAME ] ;
                               }
                               else if ( refrelCounter > 0 && refrelCounter < 20 )
                               {
-                                  int moreToInvite = 20 - refrelCounter;
-                                  
-                                  #if defined(FLYERLY)
-                                    cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite %d more people to Flyerly and unlock Design Bundle feature for FREE!", moreToInvite];
-                                  #else
-                                    cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite %d more people to Flyerly Biz and unlock Design Bundle feature for FREE!", moreToInvite];
-                                  #endif
+                                 int moreToInvite = 20 - refrelCounter;
+                                 cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite %d more people to %@ and unlock Design Bundle feature for FREE!", moreToInvite, APP_NAME];
                               }
                               
                               [freeFeaturesTview reloadData];
@@ -121,13 +112,7 @@
          }
      }];
     }else {
-        NSString *msg;
-        #if defined(FLYERLY)
-            msg = @"Invite 20 more people to Flyerly and unlock Design Bundle feature for FREE!";
-        #else
-            msg = @"Invite 20 more people to Flyerly Biz and unlock Design Bundle feature for FREE!";
-        #endif
-        cellDescriptionForRefrelFeature = msg;
+       cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 more people to %@ and unlock Design Bundle feature for FREE!", APP_NAME];
     }
 }
 
@@ -390,15 +375,7 @@
         NSDictionary *product = [productArray objectAtIndex:indexPath.row];
         
         if([[product objectForKey:@"productidentifier"] isEqualToString: BUNDLE_IDENTIFIER_ALL_DESIGN]) { // All Design Subscription
-            
-            NSString *title;
-            #if defined(FLYERLY)
-                title = @"Help us grow Flyerly!";
-            #else
-                title = @"Help us grow Flyerly Biz!";
-            #endif
-            
-            [completeDesignBundleButton setTitle: title];
+            [completeDesignBundleButton setTitle: [NSString stringWithFormat:@"Help us grow %@!", APP_NAME]];
             [completeDesignBundleButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
         } else if([[product objectForKey:@"productidentifier"] isEqualToString: BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION]) { // Yearly Subscription
             inAppCell.backgroundColor = [UIColor grayColor];//heighlight the Yearly subscription cell

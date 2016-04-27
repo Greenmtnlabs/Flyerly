@@ -10,6 +10,7 @@
 #import "SHKFile.h"
 #import "PaypalMobile.h"
 #import <Social/Social.h>
+#import "Common.h"
 
 @implementation FlyerlyConfigurator
 
@@ -20,11 +21,7 @@
  */
 - (NSString*)appName {
 	
-    #if defined(FLYERLY) // Flyerly
-        return @"Flyerly";
-    #else // Flyerly Biz
-        return @"Flyerly Biz";
-    #endif
+    return APP_NAME;
 }
 
 - (NSString*)appURL {

@@ -37,7 +37,6 @@
     int selectedAddMoreLayerTab;
     FlyerlyConfigurator *flyerConfigurator;
     UserPurchases *userPurchases;
-    UIButton *bannerAdDismissBtn;
     
     BOOL isNewText;
     //Fix for: 162-create-flyer-screen-when-user-close-the-inapp-tabs-are-active-and-extra-layer-showing-when-it-comes-from-clipart
@@ -75,10 +74,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 @synthesize premiumBtnBg, premiumBtnBgBorder, premiumBtnEmoticons, premiumBtnCliparts, premiumBtnFonts;
 @synthesize premiumImgBg, premiumImgBgBorder, premiumImgEmoticons, premiumImgCliparts, premiumImgFonts;
+@synthesize btnBannerAdsDismiss;
 
 
 #pragma mark -  View Appear Methods
 - (void)viewWillAppear:(BOOL)animated{
+    
+    btnBannerAdsDismiss.alpha = 0.0;
     
     [self setFramesOfBtns];
     
@@ -261,35 +263,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     if ( bannerAddClosed == NO && bannerShowed == NO ) {
         bannerShowed = YES;//keep bolean we have rendered banner or not ?
-        
-        // Device Check Maintain Size of ScrollView Because Scroll Indicator will show.
-        if ( bannerAdDismissBtn == nil ){
-            if(IS_IPHONE_4 || IS_IPHONE_5) {
-                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(270, 0, 52, 52)];
-            } else if (IS_IPHONE_6){
-                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(320, 0, 52, 52)];
-            }else if(IS_IPHONE_6_PLUS){
-                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(360, 0, 52, 52)];
-            }else {
-                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(270, 0, 52, 52)];
-            }
-        }
-        
-        self.bannerAdsView.backgroundColor = [UIColor whiteColor];
     
-        [bannerAdDismissBtn addTarget:self action:@selector(dissmisBannerAddOnTap) forControlEvents:UIControlEventTouchUpInside];
+        btnBannerAdsDismiss.alpha = 1.0;
+        [self.bannerAdsView addSubview:btnBannerAdsDismiss];
         
-        [bannerAdDismissBtn setImage:[UIImage imageNamed:@"closeAd.png"] forState:UIControlStateNormal];
-    
-        bannerAdDismissBtn.tag = 999;
-    
-        [self.bannerAdsView addSubview:bannerAdDismissBtn];
-        
-        //Adding ad in custom view
-        [self.bannerAdsView addSubview:adView];
-        //Making dismiss button visible,and bring it to front
-        [self.bannerAdsView bringSubviewToFront:bannerAdDismissBtn];
-    
         if ( sharePanel.hidden ){
             bannerAdsView.alpha = 1.0;
             [self.contextView addSubview:self.bannerAdsView];
@@ -298,13 +275,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         return;
     }
 }
--(void)dissmisBannerAddOnTap{
-    
+
+- (IBAction)onClickBtnBannerAdsDismiss:(id)sender {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self dissmisBannerAdd:YES];
     });
-    
 }
+
 // Dismiss action for banner ad
 -(void)dissmisBannerAdd:(BOOL)valForBannerClose{
     
@@ -322,9 +299,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     UIView *viewToRemove = [bannerAdsView viewWithTag:999];
     [viewToRemove removeFromSuperview];
-    //[bannerAdDismissBtn removeFromSuperview];
     [self.bannerAdsView removeFromSuperview];
-    bannerAdDismissBtn = nil;
+    self.btnBannerAdsDismiss  = nil;
     self.bannerAdsView = nil;
     
     bannerAddClosed = valForBannerClose;
@@ -566,29 +542,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
             if( IS_IPHONE_4 || IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
                 
-                // Initialize the banner at the bottom of the screen.
-                CGPoint origin;
-                origin = CGPointMake(0.0,0.0);
-                
-                GADAdSize customAdSize = GADAdSizeFromCGSize(CGSizeMake(320, 50));
-                if ( IS_IPHONE_4 || IS_IPHONE_5 ) {
-                    customAdSize = GADAdSizeFromCGSize(CGSizeMake(320, 50));
-                }else if ( IS_IPHONE_6 ){
-                    customAdSize = GADAdSizeFromCGSize(CGSizeMake(420, 50));
-                }else if ( IS_IPHONE_6_PLUS ){
-                    customAdSize = GADAdSizeFromCGSize(CGSizeMake(520, 50));
-                } 
-                
                 if( [userPurchases canShowAd] ) {
-                    // Use predefined GADAdSize constants to define the GADBannerView.
-                    self.bannerAdd = [[GADBannerView alloc] initWithAdSize:customAdSize origin:origin];
-                    
-                    // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID before compiling.
-                    self.bannerAdd.adUnitID = [flyerConfigurator bannerAdID];
-                    self.bannerAdd.delegate = self;
-                    self.bannerAdd.rootViewController = self;
-                    
-                    [self.bannerAdd loadRequest:[self request]];
+                    self.bannerAdsView.adUnitID = [flyerConfigurator bannerAdID];
+                    self.bannerAdsView.delegate = self;
+                    self.bannerAdsView.rootViewController = self;
+                    [self.bannerAdsView loadRequest:[self request]];
                 }
                 
                 NSArray *flyerbackgroundsViewArray;
@@ -1236,10 +1194,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     fontsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), (layerScrollView.frame.origin.y+5), fontsView.frame.size.width, fontsView.frame.size.height);
                     
                 }
-
-            
-            
-            
             
             //Handling Select Unselect
             [self setSelectedItem:[flyer getLayerType:currentLayer] inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
@@ -1676,9 +1630,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
                     clipartsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), (layerScrollView.frame.origin.y+5), clipartsView.frame.size.width, clipartsView.frame.size.height);
                 }
-            
-            
-            
         });
     });
 }
@@ -1820,10 +1771,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     
                     emoticonsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), (layerScrollView.frame.origin.y-5), emoticonsView.frame.size.width, emoticonsView.frame.size.height);
                 }
-                
-          
-            
-        
             });
     });
 }
@@ -6673,4 +6620,5 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     [flyimgView deleteLayer:FLYER_LAYER_GIPHY_LOGO];
     [self videoPlay:NO repeat:NO];
 }
+
 @end

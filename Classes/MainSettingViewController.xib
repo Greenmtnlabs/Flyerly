@@ -104,7 +104,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bLJ-LT-lJV">
-                            <rect key="frame" x="268" y="0.0" width="50" height="50"/>
+                            <rect key="frame" x="270" y="0.0" width="50" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="closeAd.png"/>
                             <connections>

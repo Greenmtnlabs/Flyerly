@@ -105,8 +105,6 @@
 }
 
 @property(nonatomic, strong) GADInterstitial *interstitialAdd;
-@property(nonatomic, strong) GADBannerView *bannerAdd;
-
 
 //-----
 @property (nonatomic, strong) ResourcesView *backgroundsView;
@@ -137,7 +135,7 @@
 @property (nonatomic, strong) IBOutlet FlyerImageView *flyimgView;
 @property (nonatomic, strong) UIView *sharePanel;
 
-@property (weak, nonatomic) IBOutlet UIView *bannerAdsView;
+@property (weak, nonatomic) IBOutlet GADBannerView *bannerAdsView;
 
 // These are ContextViews Library
 @property(nonatomic, strong) IBOutlet UIView *contextView;
@@ -205,11 +203,15 @@
 @property (nonatomic,strong)IBOutlet UILabel *durationLabel;
 @property (nonatomic,strong)IBOutlet UILabel *durationChange;
 
+- (IBAction)onClickBtnBannerAdsDismiss:(id)sender;
+
 //Outlets form zoom
 @property (strong, nonatomic) IBOutlet UIScrollView *zoomScrollView;
 @property (strong, nonatomic) IBOutlet UIImageView *zoomScreenShot;
 @property (strong, nonatomic) IBOutlet UIImageView *zoomMagnifyingGlass;
 @property (strong, nonatomic) IBOutlet UIImageView *zoomScreenShotForVideo;
+@property (weak, nonatomic) IBOutlet UIButton *btnBannerAdsDismiss;
+
 
 @property (assign) BOOL sharingPannelIsHidden;
 

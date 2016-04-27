@@ -42,8 +42,6 @@
 {
     [super viewDidLoad];
     
-    btnBannerAdsDismiss.alpha = 0.0;
-    
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     flyerConfigurator = appDelegate.flyerConfigurator;
     
@@ -158,8 +156,12 @@
             }
         }
     });
-    
-    
+   
+}
+
+
+- (void)viewWillAppear:(BOOL)animated{
+    btnBannerAdsDismiss.alpha = 0.0;
 }
 
 //return flag is login
