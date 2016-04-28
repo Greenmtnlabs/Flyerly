@@ -313,7 +313,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 // Dismiss action for banner ad
 -(void)removeBAnnerAdd:(BOOL)valForBannerClose{
     
-    //self.bannerAdsView.backgroundColor = [UIColor clearColor];
+    self.bannerAdsView.backgroundColor = [UIColor clearColor];
     
     UIView *viewToRemove = [bannerAdsView viewWithTag:999];
     [viewToRemove removeFromSuperview];
