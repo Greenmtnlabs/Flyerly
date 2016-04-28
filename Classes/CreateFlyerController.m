@@ -112,6 +112,14 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
             NSMutableDictionary *dic = [flyer getLayerFromMaster:sortedLayers[1]];
             
+            #if defined(FLYERLY_BIZ)
+                if(isNewFlyer){
+                    dic[@"image"] = @"Photo/watermark_FlyerlyBiz.png";
+                    dic[@"height"] = @"25";
+                    dic[@"width"] = @"101";
+                }
+            #endif
+            
             if( [[dic objectForKey:@"type"] isEqualToString:FLYER_LAYER_WATER_MARK] ){
                 
                 if ( [[dic objectForKey:@"flyerOpenTime"] isEqualToString:@"0"] ) {
