@@ -127,21 +127,21 @@
                             <rect key="frame" x="103" y="20" width="130" height="130"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <view contentMode="scaleToFill" id="HqN-xE-zHB" customClass="GADBannerView">
-                            <rect key="frame" x="0.0" y="125" width="376" height="50"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uIg-oU-faY">
-                                    <rect key="frame" x="326" y="0.0" width="50" height="50"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" image="closeAd.png"/>
-                                    <connections>
-                                        <action selector="onClickBtnBannerAdsDismiss:" destination="-1" eventType="touchUpInside" id="dwQ-AK-Lab"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" id="HqN-xE-zHB" customClass="GADBannerView">
+                    <rect key="frame" x="0.0" y="564" width="376" height="50"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uIg-oU-faY">
+                            <rect key="frame" x="326" y="0.0" width="50" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="closeAd.png"/>
+                            <connections>
+                                <action selector="onClickBtnBannerAdsDismiss:" destination="-1" eventType="touchUpInside" id="dwQ-AK-Lab"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>

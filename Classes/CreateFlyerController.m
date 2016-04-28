@@ -80,6 +80,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 #pragma mark -  View Appear Methods
 - (void)viewWillAppear:(BOOL)animated{
     
+    if( [userPurchases canShowAd] ) {
+        self.bannerAdsView.adUnitID = [flyerConfigurator bannerAdID];
+        self.bannerAdsView.delegate = self;
+        self.bannerAdsView.rootViewController = self;
+        [self.bannerAdsView loadRequest:[self request]];
+    }
+    
     btnBannerAdsDismiss.alpha = 0.0;
     bannerAdsView.alpha = 0.0;
     [self setFramesOfBtns];
@@ -280,7 +287,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         if ( sharePanel.hidden ){
             bannerAdsView.alpha = 1.0;
-            [self.contextView addSubview:self.bannerAdsView];
+            [self.view addSubview:self.bannerAdsView];
         }
     
         return;
@@ -306,7 +313,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 // Dismiss action for banner ad
 -(void)removeBAnnerAdd:(BOOL)valForBannerClose{
     
-    self.bannerAdsView.backgroundColor = [UIColor clearColor];
+    //self.bannerAdsView.backgroundColor = [UIColor clearColor];
     
     UIView *viewToRemove = [bannerAdsView viewWithTag:999];
     [viewToRemove removeFromSuperview];
@@ -550,13 +557,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
             
             if( IS_IPHONE_4 || IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
-                
-                if( [userPurchases canShowAd] ) {
-                    self.bannerAdsView.adUnitID = [flyerConfigurator bannerAdID];
-                    self.bannerAdsView.delegate = self;
-                    self.bannerAdsView.rootViewController = self;
-                    [self.bannerAdsView loadRequest:[self request]];
-                }
                 
                 NSArray *flyerbackgroundsViewArray;
                 if ( IS_IPHONE_4) {
@@ -3512,7 +3512,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     if( [userPurchases canShowAd] ){
         if ( sharePanel.hidden ){
             bannerAdsView.alpha = bannerAdsView.alpha ? 1.0 : 0.0;
-            [self.contextView addSubview:self.bannerAdsView];
+            [self.view addSubview:self.bannerAdsView];
         }
     }
 }
