@@ -135,7 +135,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                         device_width = 414;
                     }
                     
-                    NSString *x = [NSString stringWithFormat:@"%f", (device_width - [dic[@"width"] doubleValue] - 34.25)];
+                    NSString *x = [NSString stringWithFormat:@"%f", (device_width - [dic[@"width"] doubleValue] - 29.25)];
                     NSString *y = [NSString stringWithFormat:@"%f", (device_width - [dic[@"height"] doubleValue] - 24.25)];
                     
                     [dic setObject:x forKey:@"tx"];
