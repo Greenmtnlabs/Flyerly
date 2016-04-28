@@ -46,11 +46,9 @@
     //self.gridView.sizeToFit;
 
     
-    if( IS_IPHONE_4){
+    if( IS_IPHONE_4 || IS_IPHONE_5){
         self.gridView.nibNameForViews = @"CustomAssetThumbnailView";
-    } else if ( IS_IPHONE_5) {
-        self.gridView.nibNameForViews = @"CustomAssetThumbnailView";
-    }else if ( IS_IPHONE_6){
+     }else if ( IS_IPHONE_6){
         self.gridView.nibNameForViews = @"CustomAssetThumbnailView-iPhone6";
     }else if ( IS_IPHONE_6_PLUS){
         self.gridView.nibNameForViews = @"CustomAssetThumbnailView-iPhone6-Plus"; //Files are in NBU/Gallery/
@@ -190,9 +188,7 @@
                 
                 //Background Thread
                 CropVideoViewController *cropVideo;
-                if( IS_IPHONE_4){
-                    cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
-                } else if ( IS_IPHONE_5) {
+                if( IS_IPHONE_4 || IS_IPHONE_5){
                     cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
                 }else if ( IS_IPHONE_6){
                     cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController-iPhone6" bundle:nil];
@@ -229,9 +225,7 @@
         
         CropViewController *nbuCrop;
         
-        if( IS_IPHONE_4){
-            nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
-        } else if ( IS_IPHONE_5) {
+        if( IS_IPHONE_4 || IS_IPHONE_5){
             nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
         }else if ( IS_IPHONE_6){
             nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController-iPhone6" bundle:nil];

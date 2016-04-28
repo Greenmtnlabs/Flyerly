@@ -131,9 +131,7 @@
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     
     CropViewController *nbuCrop;
-    if( IS_IPHONE_4 ) {
-        nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
-    } else if ( IS_IPHONE_5) {
+    if( IS_IPHONE_4 || IS_IPHONE_5) {
         nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
     }else if ( IS_IPHONE_6){
         nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController-iPhone6" bundle:nil];
@@ -142,8 +140,6 @@
     } else{
         nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
     }
-    
-    
     
     nbuCrop.desiredImageSize = _desiredImageSize;
     /*if ( IS_IPHONE_6 ){
@@ -168,9 +164,7 @@
     
     //Background Thread
     CropVideoViewController *cropVideo;
-    if( IS_IPHONE_4 ) {
-        cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
-    } else if ( IS_IPHONE_5) {
+    if( IS_IPHONE_4 || IS_IPHONE_5) {
         cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
     }else if ( IS_IPHONE_6){
         cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController-iPhone6" bundle:nil];
