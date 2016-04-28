@@ -285,7 +285,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 // Dismiss action for banner ad
 -(void)dissmisBannerAdd:(BOOL)valForBannerClose{
     
-    productIdentifier = BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION; // Ad Removal Subscription
+    productIdentifier = BUNDLE_IDENTIFIER_AD_REMOVAL; // Ad Removal Subscription
     inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
     inappviewcontroller.buttondelegate = self;
     [inappviewcontroller requestProduct];
@@ -833,9 +833,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [shareviewcontroller.saveButton setSelected:YES]; 
                 
                 panelWillOpen = NO;
-                
-                // Here we Merge All Layers in Video File
-                [self videoMergeProcess];
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    // Here we Merge All Layers in Video File
+                    [self videoMergeProcess];
+                });
                
                 
             } else {
