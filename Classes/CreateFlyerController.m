@@ -106,27 +106,38 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  * Note: This function will only run when flyer is opening first time
  */
 -(void)setWaterMarkLayerPosition {
-    if ( IS_IPHONE_4 ||  IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
+    if (isNewFlyer && (IS_IPHONE_4 ||  IS_IPHONE_6 || IS_IPHONE_6_PLUS) ){
         NSArray *sortedLayers = [flyer allKeys];
         if ( sortedLayers.count >= 2 ){
             
             NSMutableDictionary *dic = [flyer getLayerFromMaster:sortedLayers[1]];
             
+            double device_width = 0;
+            
+            #if defined(FLYERLY_BIZ)
+                dic[@"image"] = @"Photo/watermark_FlyerlyBiz.png";
+                dic[@"height"] = @"25";
+                dic[@"width"] = @"101";
+            #endif
+            
             if( [[dic objectForKey:@"type"] isEqualToString:FLYER_LAYER_WATER_MARK] ){
                 
                 if ( [[dic objectForKey:@"flyerOpenTime"] isEqualToString:@"0"] ) {
-                    if( IS_IPHONE_4 ) {
-                        [dic setObject:@"230" forKey:@"tx"];
-                        [dic setObject:@"270" forKey:@"ty"];
+                    if( IS_IPHONE_4 || IS_IPHONE_5 ) {
+                        device_width = 320;
                     }
                     else if( IS_IPHONE_6 ) {
-                        [dic setObject:@"280.0" forKey:@"tx"];
-                        [dic setObject:@"330.0" forKey:@"ty"];
+                        device_width = 375;
                     }
                     else if( IS_IPHONE_6_PLUS ) {
-                        [dic setObject:@"310.0" forKey:@"tx"];
-                        [dic setObject:@"375.0" forKey:@"ty"];
+                        device_width = 414;
                     }
+                    
+                    NSString *x = [NSString stringWithFormat:@"%f", (device_width - [dic[@"width"] doubleValue] - 29.25)];
+                    NSString *y = [NSString stringWithFormat:@"%f", (device_width - [dic[@"height"] doubleValue] - 24.25)];
+                    
+                    [dic setObject:x forKey:@"tx"];
+                    [dic setObject:y forKey:@"ty"];
                     
                     [dic setObject:@"1" forKey:@"flyerOpenTime"];
                     
