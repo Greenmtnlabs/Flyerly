@@ -79,7 +79,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 #pragma mark -  View Appear Methods
 - (void)viewWillAppear:(BOOL)animated{
-    [self setWaterMarkLayerPosition];
+    
     btnBannerAdsDismiss.alpha = 0.0;
     bannerAdsView.alpha = 0.0;
     [self setFramesOfBtns];
@@ -106,7 +106,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  * Note: This function will only run when flyer is opening first time
  */
 -(void)setWaterMarkLayerPosition {
-    if ( IS_IPHONE_4 ||  IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
+    if (isNewFlyer && (IS_IPHONE_4 ||  IS_IPHONE_6 || IS_IPHONE_6_PLUS) ){
         NSArray *sortedLayers = [flyer allKeys];
         if ( sortedLayers.count >= 2 ){
             
@@ -115,11 +115,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             double device_width = 0;
             
             #if defined(FLYERLY_BIZ)
-                if(isNewFlyer){
-                    dic[@"image"] = @"Photo/watermark_FlyerlyBiz.png";
-                    dic[@"height"] = @"25";
-                    dic[@"width"] = @"101";
-                }
+                dic[@"image"] = @"Photo/watermark_FlyerlyBiz.png";
+                dic[@"height"] = @"25";
+                dic[@"width"] = @"101";
             #endif
             
             if( [[dic objectForKey:@"type"] isEqualToString:FLYER_LAYER_WATER_MARK] ){
@@ -325,6 +323,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  * View setup. This is done once per instance.
  */
 -(void)viewDidLoad{
+    
+    [self setWaterMarkLayerPosition];
     
     if( IS_IPHONE_4 ){
         [[NSBundle mainBundle] loadNibNamed:@"CreateFlyerController-iPhone4" owner:self options:nil];
