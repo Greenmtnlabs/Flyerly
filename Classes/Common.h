@@ -22,8 +22,8 @@
 #define MAX_VIDEO_LENGTH 30
 #define FLYER_ALBUM_NAME @"Flyerly"
 #define FLYER_PURCHASED_ALBUM_NAME @"Flyerly Purchases"
-#define FLYERLY_BIZ_ALBUM_NAME @"Flyerly Biz"
-#define FLYERLY_BIZ_PURCHASED_ALBUM_NAME @"Flyerly Biz Purchases"
+#define FLYERLY_BIZ_ALBUM_NAME @"FlyerlyBiz"
+#define FLYERLY_BIZ_PURCHASED_ALBUM_NAME @"FlyerlyBiz Purchases"
 
 
 #define RADIANS(degrees) ((degrees * M_PI) / 180.0)
@@ -176,7 +176,7 @@ nil]
 #if defined(FLYERLY)
 
     #define TARGET_NAME @"FLYERLY"
-    #define APP_NAME @"FLYERLY"
+    #define APP_NAME @"Flyerly"
 
     //Packages for purchase
     #define BUNDLE_IDENTIFIER_ALL_DESIGN @"com.flyerly.AllDesignBundle"
@@ -198,7 +198,7 @@ nil]
 #else
 
     #define TARGET_NAME @"FLYERLY_BIZ"
-    #define APP_NAME @"FLYERLY_BIZ"
+    #define APP_NAME @"FlyerlyBiz"
 
     //Packages for purchase
     #define BUNDLE_IDENTIFIER_ALL_DESIGN @"com.flyerlybiz.AllDesignBundle"

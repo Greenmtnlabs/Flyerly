@@ -123,7 +123,7 @@
     [category addObject:@"eyeSPOT"];//12,11
     
     #if defined(FLYERLY)
-        [category addObject:@"Flyerly Biz"];
+        [category addObject:@"FlyerlyBiz"];
     #else
         [category addObject:@"Flyerly"];
     #endif
