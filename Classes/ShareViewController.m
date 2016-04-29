@@ -1262,13 +1262,18 @@ UIAlertView *saveCurrentFlyerAlert;
               
         //if 2 alert view selected having tag 1
           case 1:
-        if(buttonIndex == 1) {
-                NSString *url = [NSString stringWithFormat: @"itms-apps://itunes.apple.com/app/id344130515"];
-                [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
-            }
+              if(buttonIndex == 1) {
+                  NSString *url;
+                  #if defined(FLYERLY)
+                    url = [NSString stringWithFormat: @"itms-apps://itunes.apple.com/app/id344130515"];
+                  #else
+                    url = [NSString stringWithFormat: @"itms-apps://itunes.apple.com/app/id344139192"];
+                  #endif
+                  [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
+              }
         break;
         
-          }
+      }
     }
 }
 
