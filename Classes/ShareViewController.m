@@ -68,7 +68,7 @@ UIAlertView *saveCurrentFlyerAlert;
     if ( IS_IPHONE_4 || IS_IPHONE_5) {
         sizeForDesc = CGRectMake(10, 96, 298, 67);
     } else if ( IS_IPHONE_6 ) {
-        sizeForDesc = CGRectMake(10, 79, 353, 67);
+        sizeForDesc = CGRectMake(10, 79, 354, 67);
     } else if( IS_IPHONE_6_PLUS ) {
         sizeForDesc = CGRectMake(10, 79, 393, 67);
     } else {
