@@ -176,7 +176,7 @@ nil]
 #if defined(FLYERLY)
 
     #define TARGET_NAME @"FLYERLY"
-    #define APP_NAME @"FLYERLY"
+    #define APP_NAME @"Flyerly"
 
     //Packages for purchase
     #define BUNDLE_IDENTIFIER_ALL_DESIGN @"com.flyerly.AllDesignBundle"
@@ -198,7 +198,7 @@ nil]
 #else
 
     #define TARGET_NAME @"FLYERLY_BIZ"
-    #define APP_NAME @"FLYERLY_BIZ"
+    #define APP_NAME @"Flyerly Biz"
 
     //Packages for purchase
     #define BUNDLE_IDENTIFIER_ALL_DESIGN @"com.flyerlybiz.AllDesignBundle"
