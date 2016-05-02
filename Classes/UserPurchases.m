@@ -74,26 +74,26 @@ static UserPurchases *sharedSingleton = nil;
 //return flag we can show ad or not
 -(BOOL)canShowAd{
     BOOL showAdd = YES;
-    if ( YES ) {
-        RMAppReceipt* appReceipt = [RMAppReceipt bundleReceipt];
-        
-        // get monthly subscription validity
-        NSString *isMonthlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION forDate:[NSDate date]]]; // Monthly Subscription
-        
-        // get Yearly subscription validity
-        NSString *isYearlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION forDate:[NSDate date]]]; // Yearly Subscription
-        
-        // check add removal validity
-        NSString *isAdRemovalSubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_AD_REMOVAL forDate:[NSDate date]]]; // Ad Removal Subscription
-        
-        //check have video bundle then don't show ad too
-        BOOL haveVideoProduct = [self haveProduct:IN_APP_ID_UNLOCK_VIDEO];
-        
-        // check whether one of 'em is valid or not..
-        if( [isMonthlySubValid isEqual:@"1"] || [isYearlySubValid isEqualToString:@"1"] || [isAdRemovalSubValid isEqualToString:@"1"] || haveVideoProduct ){
-            showAdd = NO;
-        }
+    
+    RMAppReceipt* appReceipt = [RMAppReceipt bundleReceipt];
+    
+    // get monthly subscription validity
+    NSString *isMonthlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION forDate:[NSDate date]]]; // Monthly Subscription
+    
+    // get Yearly subscription validity
+    NSString *isYearlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION forDate:[NSDate date]]]; // Yearly Subscription
+    
+    // check add removal validity
+    NSString *isAdRemovalSubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_AD_REMOVAL forDate:[NSDate date]]]; // Ad Removal Subscription
+    
+    //check have video bundle then don't show ad too
+    BOOL haveVideoProduct = [self haveProduct:IN_APP_ID_UNLOCK_VIDEO];
+    
+    // check whether one of 'em is valid or not..
+    if( [isMonthlySubValid isEqual:@"1"] || [isYearlySubValid isEqualToString:@"1"] || [isAdRemovalSubValid isEqualToString:@"1"] || haveVideoProduct ){
+        showAdd = NO;
     }
+    
     return showAdd;
 }
 

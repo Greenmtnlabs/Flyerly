@@ -41,7 +41,7 @@
 
 @class FlyerlySingleton, SHKSharer;
 
-@interface InviteFriendsController : ParentViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate, SHKSharerDelegate, FBSDKAppInviteDialogDelegate, UserPurchasesDelegate, GADInterstitialDelegate, GADBannerViewDelegate>{
+@interface InviteFriendsController : ParentViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate, SHKSharerDelegate, FBSDKAppInviteDialogDelegate, UserPurchasesDelegate, GADInterstitialDelegate, GADBannerViewDelegate, InAppPurchasePanelButtonProtocol>{
     
     FlyerlySingleton *globle;
     IBOutlet AsyncImageView *aview;

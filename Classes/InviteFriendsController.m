@@ -274,8 +274,9 @@ const int CONTACTS_TAB = 0;
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     userPurchases_.delegate = nil;
-    
-    if ( [productId isEqualToString: BUNDLE_IDENTIFIER_AD_REMOVAL]) { // Ad Removal Subscription
+    inAppViewController.buttondelegate = self;
+    haveValidSubscription = !([userPurchases canShowAd]);
+    if ( haveValidSubscription ) {
         [self removeBAnnerAdd:YES];
     }
 }
@@ -1266,7 +1267,7 @@ const int CONTACTS_TAB = 0;
     // HERE WE UPDATE PARSE ACCOUNT FOR REMEMBER INVITED FRIENDS LIST
     [user saveInBackground];
     
-    [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
+    [self showAlert:@"Invitation Sent!" message:[NSString stringWithFormat:@"You have successfully invited your friends to join %@.", APP_NAME]];
     [selectedIdentifiers   removeAllObjects];
     [self.uiTableView reloadData ];
     
@@ -1418,6 +1419,7 @@ const int CONTACTS_TAB = 0;
     
     productIdentifier = BUNDLE_IDENTIFIER_AD_REMOVAL;
     inAppViewController = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
+    inAppViewController.buttondelegate = self;
     [inAppViewController requestProduct];
     [inAppViewController purchaseProductByID:productIdentifier];
 }
