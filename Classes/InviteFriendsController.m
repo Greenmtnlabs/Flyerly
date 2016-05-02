@@ -328,6 +328,7 @@ const int CONTACTS_TAB = 0;
 
 -(IBAction)goBack{
     if ( self.shouldShowAdd != NULL ) {
+        haveValidSubscription = !([userPurchases canShowAd]);
         self.shouldShowAdd( @"", haveValidSubscription );
     }
     [self.navigationController popViewControllerAnimated:YES];
