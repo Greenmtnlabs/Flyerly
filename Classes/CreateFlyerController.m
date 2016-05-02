@@ -5643,7 +5643,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 - ( void )productSuccesfullyPurchased: (NSString *)productId {
     appearingViewAfterInAppHide = YES;
     [self loadXibsAfterInAppCheck:YES againAddInSubViews:YES];
-    if ( [productId isEqualToString: BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION]) { // Ad Removal Subscription
+    if ([userPurchases isSubscriptionValid] || [productId isEqualToString: BUNDLE_IDENTIFIER_AD_REMOVAL]) { 
         [self removeBAnnerAdd:YES];
     }
 }

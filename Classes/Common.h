@@ -188,8 +188,8 @@ nil]
     //purchased bundles
     #define IN_APP_ID_ALL_DESIGN @"comflyerlyAllDesignBundle"
     #define IN_APP_ID_UNLOCK_VIDEO @"comflyerlyUnlockCreateVideoFlyerOption"
-    #define IN_APP_ID_MONTHLY_SUBSCRIPTION @"comflyerlyMonthlySubscription"
-    #define IN_APP_ID_YEARLY_SUBSCRIPTION @"comflyerlyYearlySubscription1"
+    #define IN_APP_ID_MONTHLY_SUBSCRIPTION @"comflyerlyMonthlyGold"
+    #define IN_APP_ID_YEARLY_SUBSCRIPTION @"comflyerlyYearlyPlatinum1"
     #define IN_APP_ID_AD_REMOVAL @"comflyerlyAdRemovalMonthly"
 
     #define IN_APP_ID_SAVED_FLYERS @"comflyerlyUnlockSavedFlyers"
