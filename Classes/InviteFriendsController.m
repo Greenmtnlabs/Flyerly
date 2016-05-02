@@ -274,8 +274,9 @@ const int CONTACTS_TAB = 0;
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     userPurchases_.delegate = nil;
+    inAppViewController.buttondelegate = self;
     haveValidSubscription = !([userPurchases canShowAd]);
-    if ( [userPurchases canShowAd] == NO ) { // Ad Removal Subscription
+    if ( haveValidSubscription ) {
         [self removeBAnnerAdd:YES];
     }
 }
@@ -1418,6 +1419,7 @@ const int CONTACTS_TAB = 0;
     
     productIdentifier = BUNDLE_IDENTIFIER_AD_REMOVAL;
     inAppViewController = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
+    inAppViewController.buttondelegate = self;
     [inAppViewController requestProduct];
     [inAppViewController purchaseProductByID:productIdentifier];
 }
