@@ -274,8 +274,8 @@ const int CONTACTS_TAB = 0;
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     userPurchases_.delegate = nil;
-    
-    if ( [productId isEqualToString: BUNDLE_IDENTIFIER_AD_REMOVAL]) { // Ad Removal Subscription
+    haveValidSubscription = !([userPurchases canShowAd]);
+    if ( [userPurchases canShowAd] == NO ) { // Ad Removal Subscription
         [self removeBAnnerAdd:YES];
     }
 }
@@ -328,7 +328,6 @@ const int CONTACTS_TAB = 0;
 
 -(IBAction)goBack{
     if ( self.shouldShowAdd != NULL ) {
-        haveValidSubscription = !([userPurchases canShowAd]);
         self.shouldShowAdd( @"", haveValidSubscription );
     }
     [self.navigationController popViewControllerAnimated:YES];
@@ -1267,7 +1266,7 @@ const int CONTACTS_TAB = 0;
     // HERE WE UPDATE PARSE ACCOUNT FOR REMEMBER INVITED FRIENDS LIST
     [user saveInBackground];
     
-    [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
+    [self showAlert:@"Invitation Sent!" message:[NSString stringWithFormat:@"You have successfully invited your friends to join %@.", APP_NAME]];
     [selectedIdentifiers   removeAllObjects];
     [self.uiTableView reloadData ];
     
