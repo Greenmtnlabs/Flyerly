@@ -750,8 +750,21 @@
     
     //when purchased bundle is of ad removal or check can we remove banner add
     if ( [productId isEqualToString: BUNDLE_IDENTIFIER_AD_REMOVAL] || canShowAd == NO) {
-        [self removeBAnnerAdd:YES];
+        [self removeBannerAds:YES];
     }
+}
+
+/*
+ * Hide ads (banner ads) temporarily
+ * @params:
+ *      void
+ *
+ * @return:
+ *      void
+ */
+
+-(void)hideAddTemoparily{
+    [self removeBannerAds:YES];
 }
 
 - (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle {
@@ -952,7 +965,7 @@
 }
 
 // Dismiss action for banner ad
--(void)removeBAnnerAdd:(BOOL)valForBannerClose{
+-(void)removeBannerAds:(BOOL)valForBannerClose{
     
     self.bannerAdsView.backgroundColor = [UIColor clearColor];
     

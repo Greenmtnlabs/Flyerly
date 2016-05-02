@@ -311,7 +311,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 }
 
 // Dismiss action for banner ad
--(void)removeBAnnerAdd:(BOOL)valForBannerClose{
+-(void)removeBannerAds:(BOOL)valForBannerClose{
     
     self.bannerAdsView.backgroundColor = [UIColor clearColor];
     
@@ -5644,9 +5644,23 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     appearingViewAfterInAppHide = YES;
     [self loadXibsAfterInAppCheck:YES againAddInSubViews:YES];
     if ( [userPurchases canShowAd] == NO ) {
-        [self removeBAnnerAdd:YES];
+        [self removeBannerAds:YES];
     }
 }
+
+/*
+ * Hide ads (banner ads) temporarily
+ * @params:
+ *      void
+ *
+ * @return:
+ *      void
+ */
+
+-(void)hideAddTemoparily{
+    [self removeBannerAds:YES];
+}
+
 
 - ( void )inAppPurchasePanelContent {
     [inappviewcontroller inAppDataLoaded];

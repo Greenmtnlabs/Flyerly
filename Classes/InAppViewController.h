@@ -15,6 +15,7 @@
 -(void)inAppPurchasePanelContent;
 
 -(void)productSuccesfullyPurchased:(NSString *)productId;
+-(void)hideAddTemoparily;
 
 @end
 

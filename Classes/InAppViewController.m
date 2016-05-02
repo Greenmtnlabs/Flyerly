@@ -230,7 +230,7 @@
     
     
     productIdentifier = identifier;
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Would you like to buy Ad Removal in app for $4.99?" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Would you like to buy Ad Removal in app for $4.99?" message:@"" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Buy Ad Removal", @"Not Now", nil];
     
     [alert show];
 
@@ -238,7 +238,7 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     
-    if (buttonIndex == 1) {
+    if (buttonIndex == 0) {
         
         //Checking if the user is valid or anonymus
         if ([[PFUser currentUser] sessionToken].length != 0) {
@@ -277,6 +277,9 @@
                                                                delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
             [someError show];
         }
+    } else if (buttonIndex == 1){
+        
+        [self.buttondelegate hideAddTemoparily];
     }
 }
 

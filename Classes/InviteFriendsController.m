@@ -277,8 +277,21 @@ const int CONTACTS_TAB = 0;
     inAppViewController.buttondelegate = self;
     haveValidSubscription = !([userPurchases canShowAd]);
     if ( haveValidSubscription ) {
-        [self removeBAnnerAdd:YES];
+        [self removeBannerAds:YES];
     }
+}
+
+/*
+ * Hide ads (banner ads) temporarily
+ * @params:
+ *      void
+ *
+ * @return:
+ *      void
+ */
+
+-(void)hideAddTemoparily{
+    [self removeBannerAds:YES];
 }
 
 - (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle {
@@ -1425,7 +1438,7 @@ const int CONTACTS_TAB = 0;
 }
 
 // Dismiss action for banner ad
--(void)removeBAnnerAdd:(BOOL)valForBannerClose{
+-(void)removeBannerAds:(BOOL)valForBannerClose{
     
     self.bannerAdsView.backgroundColor = [UIColor clearColor];
     
