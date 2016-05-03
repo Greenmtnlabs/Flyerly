@@ -82,7 +82,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     bannerHeight = 0;
     if( [userPurchases canShowAd] ) {
-        bannerHeight = bannerAdsView.frame.size.height;
+        
+        if(IS_IPHONE_4){
+        
+        } else {
+            bannerHeight = bannerAdsView.frame.size.height;
+        }
+        
         self.bannerAdsView.adUnitID = [flyerConfigurator bannerAdID];
         self.bannerAdsView.delegate = self;
         self.bannerAdsView.rootViewController = self;
@@ -913,16 +919,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         [self deleteSubviewsFromScrollView];
         
         if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
-            
             [layerScrollView addSubview:backgroundsView];
-            
             [layerScrollView setContentSize:CGSizeMake(backgroundsView.frame.size.width, backgroundsView.frame.size.height + bannerHeight)];
             
         } else {
-            
             [layerScrollView addSubview:backgroundsView];
             [layerScrollView setContentSize:CGSizeMake(backgroundsView.frame.size.width, [layerScrollView bounds].size.height + bannerHeight)];
-            
         }
         
         for (UIView *sub in backgroundsView.subviews) {
@@ -1256,21 +1258,15 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     dispatch_async( dispatch_get_main_queue(), ^{
         
         if(IS_IPHONE_5 || IS_IPHONE_6 ){
-            
-            [layerScrollView addSubview:colorsView];
             [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue + bannerHeight)];
-            
         } else if( IS_IPHONE_6_PLUS ){
             colorsView.frame = CGRectMake((layerScrollView.frame.origin.x+20), (layerScrollView.frame.origin.y+5), colorsView.frame.size.width, colorsView.frame.size.height);
-            
-            [layerScrollView addSubview:colorsView];
-            [layerScrollView setContentSize:colorsView.size];
-        
         } else {
-            
-            [layerScrollView addSubview:colorsView];
             [layerScrollView setContentSize:CGSizeMake(colorsView.frame.size.width, [layerScrollView bounds].size.height + bannerHeight)];
         }
+        
+        [layerScrollView addSubview:colorsView];
+        
         
         coloursArray = colorsView.subviews;
         
@@ -1338,24 +1334,16 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     // Load sizes xib asynchronously
     dispatch_async( dispatch_get_main_queue(), ^{
-        //For testing
-        //sizesView.backgroundColor = [UIColor greenColor];
         
         if(IS_IPHONE_5 || IS_IPHONE_6 ){
-            
-            [layerScrollView addSubview:sizesView];
             [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue + bannerHeight)];
-        }
-        else if( IS_IPHONE_6_PLUS ){
-            sizesView.frame = CGRectMake((layerScrollView.frame.origin.x+19), (layerScrollView.frame.origin.y+5), sizesView.frame.size.width, sizesView.frame.size.height);
-            
-            [layerScrollView addSubview:sizesView];
-            [layerScrollView setContentSize:sizesView.size];
-        }
-        else {
-            [layerScrollView addSubview:sizesView];
+        } else if( IS_IPHONE_6_PLUS ){
+            sizesView.frame = CGRectMake((layerScrollView.frame.origin.x+20), (layerScrollView.frame.origin.y+5), sizesView.frame.size.width, sizesView.frame.size.height);
+        } else {
             [layerScrollView setContentSize:CGSizeMake(sizesView.frame.size.width, [layerScrollView bounds].size.height + bannerHeight)];
         }
+        
+        [layerScrollView addSubview:sizesView];
         
         NSMutableDictionary *layerDic = [flyer getLayerFromMaster:currentLayer];
         
@@ -1429,24 +1417,19 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     // Load sizes xib asynchronously
     dispatch_async( dispatch_get_main_queue(), ^{
-         //textBordersView.backgroundColor = [UIColor redColor];
+        
         if(IS_IPHONE_5 || IS_IPHONE_6 ){
-            
-            [layerScrollView addSubview:textBordersView];
-            [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue + bannerHeight)];
+            textBordersView.frame = CGRectMake((layerScrollView.frame.origin.x), (layerScrollView.frame.origin.y), textBordersView.frame.size.width, textBordersView.frame.size.height + bannerHeight);
             
         } else if( IS_IPHONE_6_PLUS ){
-
-            textBordersView.frame = CGRectMake((layerScrollView.frame.origin.x+20), (layerScrollView.frame.origin.y+5), textBordersView.frame.size.width, textBordersView.frame.size.height);
-            
-            [layerScrollView addSubview:textBordersView];
-            [layerScrollView setContentSize:textBordersView.size];
+            textBordersView.frame = CGRectMake((layerScrollView.frame.origin.x+20), (layerScrollView.frame.origin.y+5), textBordersView.frame.size.width, textBordersView.frame.size.height + bannerHeight);
             
         } else {
-            
-            [layerScrollView addSubview:textBordersView];
+      
             [layerScrollView setContentSize:CGSizeMake(textBordersView.frame.size.width, [layerScrollView bounds].size.height + bannerHeight)];
         }
+        
+        [layerScrollView addSubview:textBordersView];
         
         
         NSArray *bodersArray = textBordersView.subviews;
@@ -4926,6 +4909,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                              animations:^{
                                  //Create ScrollView
                                  [self addColorsInSubView];
+                                 layerScrollView.scrollEnabled = YES;
                                  [layerScrollView setContentSize:CGSizeMake(colorsView.size.width , colorsView.size.height + bannerHeight)];
                              }
                              completion:^(BOOL finished){
@@ -5023,26 +5007,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                          animations:^{
                              
                              //Create ScrollView
-                             if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
-                                 
-                                 //Delete SubViews from ScrollView
-                                 [self deleteSubviewsFromScrollView];
-                                 [layerScrollView addSubview:fontsView];
-                                 [layerScrollView setContentSize:CGSizeMake(320 , colorsView.size.height + bannerHeight)];
-                                 
-                                 [self setSelectedItem:FLYER_LAYER_TEXT inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
-                                 
-                             } else {
-                                 
-                                 //Delete SubViews from ScrollView
-                                 [self deleteSubviewsFromScrollView];
-                                 [layerScrollView addSubview:fontsView];
-                                 [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , fontsView.size.height + bannerHeight)];
-                                 
-                                 [self setSelectedItem:FLYER_LAYER_TEXT inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
-                             }
-                             
-                             
                              [self addColorsInSubView];
                          }
                          completion:^(BOOL finished){
@@ -5067,7 +5031,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                              [layerScrollView flashScrollIndicators];
                          }];
         //END ANIMATION
-        [layerScrollView setContentSize:CGSizeMake(colorsView.size.width , colorsView.size.height + bannerHeight)];
         
         //Add ContextView
         [self addScrollView:layerScrollView];
@@ -5670,6 +5633,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     appearingViewAfterInAppHide = YES;
     [self loadXibsAfterInAppCheck:YES againAddInSubViews:YES];
     if ( [userPurchases canShowAd] == NO ) {
+        bannerHeight = 0;
         [self removeBAnnerAdd:YES];
     }
 }
