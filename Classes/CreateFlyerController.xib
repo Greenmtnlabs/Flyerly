@@ -631,7 +631,7 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="342" y="788.5"/>
+            <point key="canvasLocation" x="342" y="605.5"/>
         </view>
         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" id="AH5-Xr-weS">
             <rect key="frame" x="0.0" y="0.0" width="37" height="37"/>

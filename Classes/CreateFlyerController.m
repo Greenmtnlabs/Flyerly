@@ -1608,15 +1608,15 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 //clipartsView.backgroundColor = [UIColor redColor];
             
                 if ( IS_IPHONE_5 ) {
-                    clipartsView.size = CGSizeMake(320, curYLoc + 85);
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + 50 + bannerHeight)];
+                    clipartsView.size = CGSizeMake(320, curYLoc);
+                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + bannerHeight)];
                 } else if ( IS_IPHONE_6 ) {
-                    clipartsView.size = CGSizeMake(380, curYLoc + 85);
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + 50 + bannerHeight)];
+                    clipartsView.size = CGSizeMake(380, curYLoc);
+                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + bannerHeight)];
                     
                 }else if ( IS_IPHONE_6_PLUS ) {
-                    clipartsView.size = CGSizeMake(584, curYLoc + 85);
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + 50 + bannerHeight)];
+                    clipartsView.size = CGSizeMake(584, curYLoc );
+                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + bannerHeight)];
                     
                     clipartsView.frame = CGRectMake((layerScrollView.frame.origin.x+1), clipartsView.frame.origin.y, layerScrollView.size.width, clipartsView.size.height);
                 }else {
@@ -1749,19 +1749,19 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 //emoticonsView.backgroundColor = [UIColor redColor];
           
                 if(IS_IPHONE_5 ){
-                    emoticonsView.size = CGSizeMake(320, curYLoc + symbolScrollHeight + 75);
+                    emoticonsView.size = CGSizeMake(320, curYLoc + symbolScrollHeight );
                     [layerScrollView setContentSize:CGSizeMake(320, curYLoc + symbolScrollHeight + bannerHeight)];
                 } else if ( IS_IPHONE_6 ){
-                    emoticonsView.size = CGSizeMake(380, curYLoc + symbolScrollHeight + 75);
+                    emoticonsView.size = CGSizeMake(380, curYLoc + symbolScrollHeight);
                     [layerScrollView setContentSize:CGSizeMake(320, curYLoc + symbolScrollHeight + bannerHeight)];
                 } else if( IS_IPHONE_6_PLUS ){
 
-                    emoticonsView.size = CGSizeMake(584, curYLoc + symbolScrollHeight + 75);
+                    emoticonsView.size = CGSizeMake(584, curYLoc + symbolScrollHeight);
                     [layerScrollView setContentSize:CGSizeMake(emoticonsView.size.width, curYLoc + symbolScrollHeight + bannerHeight)];
                     
                     emoticonsView.frame = CGRectMake((layerScrollView.frame.origin.x+13), emoticonsView.frame.origin.y, emoticonsView.size.width, emoticonsView.size.height);
                 } else {
-                    emoticonsView.size = CGSizeMake(curXLoc + symbolScrollWidth + 60 , symbolScrollHeight + 5);
+                    emoticonsView.size = CGSizeMake(curXLoc + symbolScrollWidth, symbolScrollHeight + 5);
                     [layerScrollView setContentSize:CGSizeMake(emoticonsView.size.width , symbolScrollHeight + bannerHeight)];
                     
                     emoticonsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), (layerScrollView.frame.origin.y-5), emoticonsView.frame.size.width, emoticonsView.frame.size.height);
@@ -4909,7 +4909,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                              animations:^{
                                  //Create ScrollView
                                  [self addColorsInSubView];
-                                 layerScrollView.scrollEnabled = YES;
                                  [layerScrollView setContentSize:CGSizeMake(colorsView.size.width , colorsView.size.height + bannerHeight)];
                              }
                              completion:^(BOOL finished){
@@ -5845,7 +5844,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         drawingEraserMsg.text   = @"COLORS CANNOT BE APPLIED ON ERASER";
         
         [layerScrollView addSubview:drawingEraserMsgView];
-        [layerScrollView setContentSize:CGSizeMake(drawingEraserMsgView.frame.size.width, [drawingEraserMsgView bounds].size.height)];
+        [layerScrollView setContentSize:CGSizeMake(drawingEraserMsgView.frame.size.width, [drawingEraserMsgView bounds].size.height + bannerHeight)];
     }
 }
 
@@ -5972,9 +5971,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             [UIView animateWithDuration:0.4f
                              animations:^{
                                  //Create ScrollView
-
-                                 //[layerScrollView setContentSize:CGSizeMake(320 , colorsView.size.height + bannerHeight)];
-
                                  [self addColorsInSubView];
                              }
                              completion:^(BOOL finished){
