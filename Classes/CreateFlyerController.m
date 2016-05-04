@@ -1187,19 +1187,19 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
                 if ( IS_IPHONE_5 ) {
                     
-                    fontsView.size = CGSizeMake(320, curYLoc + heightValue + 50);
+                    fontsView.size = CGSizeMake(320, curYLoc + heightValue);
                     [layerScrollView setContentSize:CGSizeMake(fontsView.frame.size.width, fontsView.frame.size.height + bannerHeight)];
                     fontsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), (layerScrollView.frame.origin.y+5), fontsView.frame.size.width, fontsView.frame.size.height);
                     
                 } else if ( IS_IPHONE_6 ){
                     
-                    fontsView.size = CGSizeMake(380, curYLoc + heightValue + 30);
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue + bannerHeight)];
+                    fontsView.size = CGSizeMake(380, curYLoc + heightValue + 10);
+                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + bannerHeight)];
                     fontsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), (layerScrollView.frame.origin.y+5), fontsView.frame.size.width, fontsView.frame.size.height);
                     
                 } else if ( IS_IPHONE_6_PLUS ){
-                    fontsView.size = CGSizeMake(584, curYLoc + heightValue + 5);
-                    [layerScrollView setContentSize:CGSizeMake(584, curYLoc + heightValue + bannerHeight)];
+                    fontsView.size = CGSizeMake(584, curYLoc + heightValue);
+                    [layerScrollView setContentSize:CGSizeMake(584, curYLoc + bannerHeight)];
                     
                     fontsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), layerScrollView.frame.origin.y, fontsView.frame.size.width, fontsView.frame.size.height);
                     
@@ -1341,15 +1341,20 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     // Load sizes xib asynchronously
     dispatch_async( dispatch_get_main_queue(), ^{
         
-        if(IS_IPHONE_5 || IS_IPHONE_6 ){
-            sizesView.frame = CGRectMake((layerScrollView.frame.origin.x), (layerScrollView.frame.origin.y), sizesView.frame.size.width, sizesView.frame.size.height);
-        } else if( IS_IPHONE_6_PLUS ){
-            sizesView.frame = CGRectMake((layerScrollView.frame.origin.x+20), (layerScrollView.frame.origin.y+5), sizesView.frame.size.width, sizesView.frame.size.height);
+        if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+            
+            if( IS_IPHONE_6_PLUS ){
+                sizesView.frame = CGRectMake((layerScrollView.frame.origin.x+22), (layerScrollView.frame.origin.y), sizesView.frame.size.width, sizesView.frame.size.height);
+            }
+            [layerScrollView addSubview:sizesView];
+            [layerScrollView setContentSize:CGSizeMake(320, sizesView.frame.size.height + bannerHeight)];
+            
         } else {
-            sizesView.frame = CGRectMake((layerScrollView.frame.origin.x), (layerScrollView.frame.origin.y), sizesView.frame.size.width, sizesView.frame.size.height);
+            
+            [layerScrollView addSubview:sizesView];
+            [layerScrollView setContentSize:CGSizeMake(sizesView.frame.size.width, [layerScrollView bounds].size.height)];
         }
         
-        [layerScrollView addSubview:sizesView];
         
         NSMutableDictionary *layerDic = [flyer getLayerFromMaster:currentLayer];
         
@@ -1567,7 +1572,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     fOPrem[4] = 0; fOPrem[5] = 380;
                     if(curXLoc >= 350){
                         curXLoc = 18;
-                        curYLoc = curYLoc + widthValue + 7;
+                        curYLoc = curYLoc + widthValue;
                     }
                 }
                 
@@ -1610,31 +1615,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [clipartsView addSubview:premiumImgCliparts];
             }
             
-                //clipartsView.backgroundColor = [UIColor redColor];
-            
-//                if ( IS_IPHONE_5 ) {
-//                    clipartsView.size = CGSizeMake(320, 10 + curYLoc);
-//                    [layerScrollView setContentSize:CGSizeMake(320, heightValue + 85 + bannerHeight)];
-//                } else if ( IS_IPHONE_6 ) {
-//                    clipartsView.size = CGSizeMake(380, curYLoc);
-//                    [layerScrollView setContentSize:CGSizeMake(320, heightValue + 85 + bannerHeight)];
-//                    
-//                }else if ( IS_IPHONE_6_PLUS ) {
-//                    clipartsView.size = CGSizeMake(584, curYLoc );
-//                    [layerScrollView setContentSize:CGSizeMake(320, heightValue + 85 + bannerHeight)];
-//                }else {
-//                    clipartsView.size = CGSizeMake(curXLoc+ widthValue + 5 , heightValue + 85);
-//                    [layerScrollView setContentSize:CGSizeMake(clipartsView.size.width , heightValue + bannerHeight)];
-// 
-//                }
-            
-            
             if ( IS_IPHONE_5 ) {
                 clipartsView.size = CGSizeMake(320, curYLoc + 85);
                 [layerScrollView setContentSize:CGSizeMake(320, curYLoc + 50)];
             } else if ( IS_IPHONE_6 ) {
-                clipartsView.size = CGSizeMake(380, curYLoc + 85);
-                [layerScrollView setContentSize:CGSizeMake(320, curYLoc + 50)];
+                clipartsView.size = CGSizeMake(380, curYLoc);
+                [layerScrollView setContentSize:CGSizeMake(320, curYLoc + bannerHeight)];
                 
             }else if ( IS_IPHONE_6_PLUS ) {
                 clipartsView.size = CGSizeMake(584, curYLoc);
@@ -5006,7 +4992,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                                  //Delete SubViews from ScrollView
                                  [self deleteSubviewsFromScrollView];
                                  [layerScrollView addSubview:fontsView];
-                                 [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , fontsView.size.height + bannerHeight)];
+                                 [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , fontsView.size.height)];
                                  
                                  [self setSelectedItem:FLYER_LAYER_TEXT inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
                              }
