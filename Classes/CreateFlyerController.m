@@ -1259,16 +1259,20 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     // Load sizes xib asynchronously
     dispatch_async( dispatch_get_main_queue(), ^{
         
-        if(IS_IPHONE_5 || IS_IPHONE_6 ){
-            colorsView.frame = CGRectMake((layerScrollView.frame.origin.x), (layerScrollView.frame.origin.y), colorsView.frame.size.width, colorsView.frame.size.height);
-        } else if( IS_IPHONE_6_PLUS ){
-            colorsView.frame = CGRectMake((layerScrollView.frame.origin.x+20), (layerScrollView.frame.origin.y+5), colorsView.frame.size.width, colorsView.frame.size.height);
+        if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+            
+            if( IS_IPHONE_6_PLUS ){
+                colorsView.frame = CGRectMake((layerScrollView.frame.origin.x+22), (layerScrollView.frame.origin.y), colorsView.frame.size.width, colorsView.frame.size.height);
+            }
+            [layerScrollView addSubview:colorsView];
+            [layerScrollView setContentSize:CGSizeMake(320, colorsView.frame.size.height + bannerHeight)];
+            
         } else {
-            colorsView.frame = CGRectMake((layerScrollView.frame.origin.x), (layerScrollView.frame.origin.y), colorsView.frame.size.width, colorsView.frame.size.height);
+            
+            [layerScrollView addSubview:colorsView];
+            [layerScrollView setContentSize:CGSizeMake(colorsView.frame.size.width, [layerScrollView bounds].size.height)];
         }
-        
-        [layerScrollView addSubview:colorsView];
-        
+
         
         coloursArray = colorsView.subviews;
         
@@ -1571,7 +1575,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     fOPrem[4] = 0; fOPrem[5] = 584;
                     //if(curXLoc >= 300){
                         curXLoc = 13;
-                        curYLoc = curYLoc + widthValue + 7;
+                        curYLoc = curYLoc + widthValue;
                     //}
                 }
                    
@@ -1608,21 +1612,42 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
                 //clipartsView.backgroundColor = [UIColor redColor];
             
-                if ( IS_IPHONE_5 ) {
-                    clipartsView.size = CGSizeMake(320, 10 + curYLoc);
-                    [layerScrollView setContentSize:CGSizeMake(320, heightValue + 85 + bannerHeight)];
-                } else if ( IS_IPHONE_6 ) {
-                    clipartsView.size = CGSizeMake(380, curYLoc);
-                    [layerScrollView setContentSize:CGSizeMake(320, heightValue + 85 + bannerHeight)];
-                    
-                }else if ( IS_IPHONE_6_PLUS ) {
-                    clipartsView.size = CGSizeMake(584, curYLoc );
-                    [layerScrollView setContentSize:CGSizeMake(320, heightValue + 85 + bannerHeight)];
-                }else {
-                    clipartsView.size = CGSizeMake(curXLoc+ widthValue + 5 , heightValue + 85);
-                    [layerScrollView setContentSize:CGSizeMake(clipartsView.size.width , heightValue + bannerHeight)];
- 
-                }
+//                if ( IS_IPHONE_5 ) {
+//                    clipartsView.size = CGSizeMake(320, 10 + curYLoc);
+//                    [layerScrollView setContentSize:CGSizeMake(320, heightValue + 85 + bannerHeight)];
+//                } else if ( IS_IPHONE_6 ) {
+//                    clipartsView.size = CGSizeMake(380, curYLoc);
+//                    [layerScrollView setContentSize:CGSizeMake(320, heightValue + 85 + bannerHeight)];
+//                    
+//                }else if ( IS_IPHONE_6_PLUS ) {
+//                    clipartsView.size = CGSizeMake(584, curYLoc );
+//                    [layerScrollView setContentSize:CGSizeMake(320, heightValue + 85 + bannerHeight)];
+//                }else {
+//                    clipartsView.size = CGSizeMake(curXLoc+ widthValue + 5 , heightValue + 85);
+//                    [layerScrollView setContentSize:CGSizeMake(clipartsView.size.width , heightValue + bannerHeight)];
+// 
+//                }
+            
+            
+            if ( IS_IPHONE_5 ) {
+                clipartsView.size = CGSizeMake(320, curYLoc + 85);
+                [layerScrollView setContentSize:CGSizeMake(320, curYLoc + 50)];
+            } else if ( IS_IPHONE_6 ) {
+                clipartsView.size = CGSizeMake(380, curYLoc + 85);
+                [layerScrollView setContentSize:CGSizeMake(320, curYLoc + 50)];
+                
+            }else if ( IS_IPHONE_6_PLUS ) {
+                clipartsView.size = CGSizeMake(584, curYLoc);
+                [layerScrollView setContentSize:CGSizeMake(320, curYLoc + bannerHeight)];
+                
+                clipartsView.frame = CGRectMake((layerScrollView.frame.origin.x+1), clipartsView.frame.origin.y, layerScrollView.size.width, clipartsView.size.height - 20);
+            }else {
+                clipartsView.size = CGSizeMake(curXLoc+ widthValue + 5 , heightValue + 5);
+                [layerScrollView setContentSize:CGSizeMake(clipartsView.size.width , heightValue)];
+                
+                clipartsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), (layerScrollView.frame.origin.y+5), clipartsView.frame.size.width, clipartsView.frame.size.height);
+            }
+            
         });
     });
 }
