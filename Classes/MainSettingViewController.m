@@ -581,9 +581,12 @@
 
 
 -(IBAction)rateApp:(id)sender{
-     NSString *url = @"itms-apps://itunes.apple.com/app/id344130515";
-    //url = [NSString stringWithFormat: @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@", @"344130515"];
-    [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
+    
+    #if defined(FLYERLY)
+        [self openITunes:@"socialflyr-free/flyerly-add-creativity-to/id344130515?mt=8"]; //Flyerly
+    #else
+        [self openITunes:@"socialflyr-free/id344139192?mt=8"]; //Flyerly Biz
+    #endif
     
 }
 
