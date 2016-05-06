@@ -289,6 +289,8 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
             } else if (user.isNew) {
                 
                 NSLog(@"User signed up and logged in with Twitter!");
+                [[PFUser currentUser] setObject:APP_NAME forKey:@"appName"];
+                [[PFUser currentUser] saveInBackground];
                 
                 UINavigationController* navigationController = self.navigationController;
                 
@@ -380,25 +382,27 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
         user[@"name"] = name.text;
     if (phno.text != nil)
         user[@"contact"] = phno.text;
+
+    // When new user signup using username & password
+    user[@"appName"] = APP_NAME;
     
     //Saving User Info for again login
     [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];
     [[NSUserDefaults standardUserDefaults]  setBool:YES forKey:@"FlyerlyUser"];
 
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        
-        if (error) {
-            
-            NSString *errorValue = (error.userInfo)[@"error"];
-            [self showAlert:@"Warning!" message:errorValue];
-            [self removeLoadingView];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (error) {
+                NSString *errorValue = (error.userInfo)[@"error"];
+                [self showAlert:@"Warning!" message:errorValue];
+                [self removeLoadingView];
 
-        } else {
-            
-            [PFUser logInWithUsername:userName password:pwd];
-            [self onRegistrationSuccess];
-            
-        }
+            } else {
+                
+                [PFUser logInWithUsername:userName password:pwd];
+                [self onRegistrationSuccess];
+            }
+        });
         
         
     }];
