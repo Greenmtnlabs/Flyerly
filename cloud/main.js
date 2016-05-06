@@ -197,3 +197,18 @@ Parse.Cloud.define("addAppNameInOldUsers2", function(request, response) {
       });       
   });
 });
+
+Parse.Cloud.define("appNameNotExistCount", function(request, response) {
+    Parse.Cloud.useMasterKey();
+    var User = new Parse.Query("User");
+    User.doesNotExist("appName")  
+    User.count({
+      success: function(number) {           
+           response.success("appNameNotExistCount="+number);
+      },
+      error: function(error) {
+        console.log("appNameNotExistCount error occured",error)
+        response.success("appNameNotExistCount error occured");
+      }
+    });
+});
