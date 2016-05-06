@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "Flyerly": {
+      "applicationId": "rrU7ilSR4TZNQD9xlDtH8wFoQNK4st5AaITq6Fan"
+    },
+    "_default": {
+      "link": "Flyerly"
+    }
+  }
+}
