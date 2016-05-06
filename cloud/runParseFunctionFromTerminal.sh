@@ -1,14 +1,14 @@
-APPLICATION_ID="rrU7ilSR4TZNQD9xlDtH8wFoQNK4st5AaITq6Fan"
-REST_API_KEY="CUXUQEZ7O9Nu4FGFiNxQdvHcxE9VAi2lWNi3Y2V5"
+#you can find keys from: https://dashboard.parse.com/apps/flyerlytest/settings/keys
+APPLICATION_ID="EnterKeyHere"
+REST_API_KEY="EnterKeyHere"
 #-H "X-Parse-REST-API-Key: ${REST_API_KEY}" \
 # REST API, command line
 curl -X POST \
  -H "X-Parse-Application-Id: ${APPLICATION_ID}" \
- -H "X-Parse-Master-Key: xKx13OCFY1mSUOALjoPTMsIfGbRSAD12JlrdOFpY" \
+ -H "X-Parse-Master-Key: EnterKeyHere" \
  -H "Content-Type: application/json" \
  -d '{}' \
  https://api.parse.com/1/functions/addAppNameInOldUsers2
 
  #hit "bash runParseFunctionFromTerminal.sh" in terminal
 
- 
