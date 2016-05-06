@@ -428,6 +428,11 @@ if it exist then we call Merging Process
             NSString *contact = userData[@"contact"];
             BOOL canSave = false;
             
+            // when new user signup via facebook, then push appName to server
+            if ([[PFUser currentUser] isNew]) {
+                [[PFUser currentUser] setObject:APP_NAME forKey:@"appName"];
+                canSave = true;
+            }
 
             // Store the current user's Facebook ID on the user
             if ( email != nil ) { [[PFUser currentUser] setObject:email forKey:@"email"]; canSave = true; }
