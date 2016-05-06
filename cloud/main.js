@@ -170,3 +170,30 @@ Parse.Cloud.define(  "parseCloudeCodeIncreaseInviteCounter", function(request, r
 Parse.Cloud.define(  "parseCloudeCodeIncreaseInviteSessions", function(request, response) {
   increaseCounterOf( request, response, "inviteSessions" );
 });
+
+Parse.Cloud.define("addAppNameInOldUsers2", function(request, response) {
+  Parse.Cloud.useMasterKey();
+  var User = new Parse.Query("User");
+  User.doesNotExist("appName")
+  //User.equalTo("username","testuser1")
+  User.find().then(function(users) {
+      console.log("users.length ="+users.length)
+
+      var users1 = []
+      for (var i = 0; i < users.length ; i++) { 
+            users[i].set("appName","Flyerly");
+            users1.push(users[i]);
+      }
+
+      // save all the newly created objects
+      Parse.Object.saveAll(users1, { 
+          userMasterKey:true,
+          success:function(objects) {            
+            response.success("users updated.");            
+          }, 
+          error:function(error) {
+            console.log("error is =",error);            
+          }
+      });       
+  });
+});
