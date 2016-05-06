@@ -282,6 +282,8 @@
             } else if ( user.isNew ) {
                 
                 NSLog(@"User signed up and logged in with Twitter!");
+                [[PFUser currentUser] setObject:APP_NAME forKey:@"appName"];
+                [[PFUser currentUser] saveInBackground];
                 
                 // We keep an instance of navigation contrller since the completion block might pop us out of the
                 // navigation controller
