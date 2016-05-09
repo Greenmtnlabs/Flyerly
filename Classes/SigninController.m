@@ -290,9 +290,8 @@
         [self showLoader:YES];
         
         [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
-            
+
             [self showLoader:NO];
-            
             BOOL canSave = NO;
 
             if ( !user ) {
@@ -303,20 +302,32 @@
 
                 NSString *twitterUsername = [PFTwitterUtils twitter].screenName;
 
+                if(![twitterUsername isEqualToString:@""]) {
+                    if(user.isNew || (user.username == nil || [user.username isEqualToString:@""]) ){
+                        canSave = YES;
+                        user.username = twitterUsername;
+                        [[PFUser currentUser] setObject:twitterUsername forKey:@"username"];
+                    }
+                    
+                    if(user.isNew || (user[@"name"] == nil || [user[@"name"] isEqualToString:@""]) ){
+                        canSave = YES;
+                        user[@"name"] = twitterUsername;
+                        [[PFUser currentUser] setObject:twitterUsername forKey:@"name"];
+                    }
+                }
+
                 if (user.isNew) {
 
-                    NSLog(@"User signed up and logged in with Twitter!");
                     canSave = YES;
                     [[PFUser currentUser] setObject:APP_NAME forKey:@"appName"];
 
-                    // We keep an instance of navigation contrller since the completion block might pop us out of the
-                    // navigation controller
+                    // We keep an instance of navigation contrller since the completion block might pop us out of the navigation controller
                     UINavigationController *navigationController = self.navigationController;
 
                     [self onSignInSuccess];
 
                     //Saving User Info for again login
-                    [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
+                    [[NSUserDefaults standardUserDefaults]  setObject:[twitterUsername lowercaseString] forKey:@"User"];
 
                     // Login success Move to Flyerly
                     launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
@@ -330,10 +341,8 @@
                         launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
                         [navigationController pushViewController:launchController animated:YES];
                     }
-
                 }
                 else {
-                    NSLog(@"User logged in with Twitter!");
 
                     // We keep an instance of navigation contrller since the completion block might pop us out of the
                     // navigation controller
@@ -351,25 +360,12 @@
                         [navigationController pushViewController:launchController animated:YES];
                     }
                 }
-                
-                if(![twitterUsername isEqualToString:@""]) {
-                    if([user.username isEqualToString:@""]){
-                        canSave = YES;
-                        [[PFUser currentUser] setObject:twitterUsername forKey:@"username"];
-                    }
-                    if(user[@"username"] == nil || [user[@"name"] isEqualToString:@""]){
-                        canSave = YES;
-                        [[PFUser currentUser] setObject:twitterUsername forKey:@"name"];
-                    }
-                }
 
                 if(canSave) {
                     [[PFUser currentUser] saveInBackground];
                 }
             }
         }];
-    
-        
     }else{
         [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
     }
@@ -427,7 +423,7 @@
     [FlyerUser mergeAnonymousUser];
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
-    userPurchases_.delegate = nil;
+    userPurchases_.delegate = launchController;
     [userPurchases_ setUserPurcahsesFromParse];
     
     if (signInCompletion) {
