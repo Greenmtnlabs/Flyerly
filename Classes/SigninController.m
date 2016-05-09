@@ -9,7 +9,9 @@
 #import "SigninController.h"
 
 
-@interface SigninController ()
+@interface SigninController (){
+    UIBarButtonItem *leftBarButton, *righBarButton;
+}
 
 @end
 
@@ -64,7 +66,7 @@
     [backBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [backBtn setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
      backBtn.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
 
     // Done button
@@ -72,7 +74,7 @@
     DoneBtn.showsTouchWhenHighlighted = YES;
     [DoneBtn addTarget:self action:@selector(onSignIn) forControlEvents:UIControlEventTouchUpInside];
     [DoneBtn setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
-    UIBarButtonItem *righBarButton = [[UIBarButtonItem alloc] initWithCustomView:DoneBtn];
+    righBarButton = [[UIBarButtonItem alloc] initWithCustomView:DoneBtn];
     [self.navigationItem setRightBarButtonItem:righBarButton];
 }
 
@@ -81,14 +83,32 @@
     [self.navigationController pushViewController:passWordContrller animated:YES ];
 }
 
-
--(void)showLoadingView {
-    [self showLoadingIndicator];
+// Show Hide loader
+-(void)showLoader:(BOOL)show {
+    if(show) {
+        [self showLoadingIndicator];
+        [self enableLinks:NO];
+    } else {
+        [self hideLoadingIndicator];
+        [self enableLinks:YES];
+    }
 }
 
+// Enable link on screen
+-(void)enableLinks:(BOOL)enable {
+    
+    righBarButton.enabled = enable;
+    leftBarButton.enabled = enable;
 
--(void)removeLoadingView {
-    [self hideLoadingIndicator];
+    email.enabled = enable;
+    password.enabled = enable;
+
+    signIn.enabled = enable;
+    signUp.enabled = enable;
+
+    signInFacebook.enabled = enable;
+    signInTwitter.enabled = enable;
+    forgetPassword1.enabled = enable;
 }
 
 
@@ -99,7 +119,7 @@
        !password || [password.text isEqualToString:@""]){
         
         [self showAlert:@"Think you forgot something..." message:@""];
-        [self removeLoadingView];
+        [self showLoader:NO];
         return NO;
     }
     return YES;
@@ -109,7 +129,7 @@
 
     if ([FlyerlySingleton connected]) {
         globle.twitterUser = nil;
-        [self showLoadingView];
+        [self showLoader:YES];
         
         //Validation
         if([self validate]){
@@ -172,7 +192,7 @@
     //Internet Connectivity Check
     if([FlyerlySingleton connected]){
         
-        [self showLoadingView];
+        [self showLoader:YES];
         
         // The permissions requested from the user
         NSArray *permissionsArray = @[ @"email", @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
@@ -180,7 +200,7 @@
         // Login PFUser using Facebook
         [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
             
-            [self hideLoadingIndicator]; // Hide loading indicator
+            [self showLoader:NO]; // Hide loading indicator
             
 //             NSLog(@"email=%@ - Email=%@ - name=%@ - contact=%@", user.email, user[@"email"], user[@"name"], user[@"contact"]);
             
@@ -267,11 +287,11 @@
     
     if([FlyerlySingleton connected]){
         
-        [self showLoadingView];
+        [self showLoader:YES];
         
         [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
             
-            [self hideLoadingIndicator];
+            [self showLoader:NO];
             
             BOOL canSave = NO;
 
@@ -449,7 +469,7 @@
         [self.navigationController pushViewController:registerController animated:YES];
         
     }
-    [self hideLoadingIndicator];
+    [self showLoader:NO];
 }
 
 @end
