@@ -182,11 +182,11 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
         [self showLoader:YES];
         
         // The permissions requested from the user
-        NSArray *permissionsArray = @[ @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
+        NSArray *permissionsArray = @[ @"email", @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
         
         // Login PFUser using Facebook
         [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
-            [self hideLoadingIndicator]; // Hide loading indicator
+            [self showLoader:NO]; // Hide loading indicator
             
             if ( !user ) {
                 
@@ -210,12 +210,14 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
                     
                 }
                 
-            } else if (user.isNew) {
-                
-                NSLog(@"User with facebook signed up and logged in!");
-                
+            } else {
+
                 //Saving User Info for again login
                 [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
+
+                if (user.isNew) {
+                
+                NSLog(@"User with facebook signed up and logged in!");
                 
                 // Login success Move to Flyerly
                 launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
@@ -234,9 +236,6 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
                 
                 NSLog(@"User with facebook logged in!");
                 
-                //Saving User Info for again login
-                [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
-                
                 // Login success Move to Flyerly
                 launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
                 
@@ -253,6 +252,7 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
                 appDelegate.lauchController = launchController;
                 
                 [self onRegistrationSuccess];
+            }
             }
         }];
 
