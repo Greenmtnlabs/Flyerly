@@ -807,7 +807,7 @@
         [inappviewcontroller.paidFeaturesTview reloadData];
     }else {
         
-        if([productIdentifier length] == 0){
+        if([productIdentifier length] == 0 && inappviewcontroller != nil){
             [self presentViewController:inappviewcontroller animated:YES completion:nil];
         }
     }
