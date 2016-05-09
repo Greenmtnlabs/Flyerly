@@ -415,17 +415,18 @@ if it exist then we call Merging Process
     [lauchController showLoadingIndicator];
 
     // Create request for user's Facebook data
-    FBRequest *request = [FBRequest requestForMe];
+    //FBRequest *request = [FBRequest requestForMe];
     
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    [parameters setValue:@"id,email,name" forKey:@"fields"];
     // Send request to Facebook
-    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+    [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:parameters] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
         if (!error) {
             
             // result is a dictionary with the user's Facebook data
             NSDictionary *userData = (NSDictionary *)result;
             NSString *email = userData[@"email"];
             NSString *name = userData[@"name"];
-            NSString *contact = userData[@"contact"];
 
             BOOL canSave = false;
             BOOL isNew = [[PFUser currentUser] isNew];
@@ -440,11 +441,6 @@ if it exist then we call Merging Process
             // Store the current user's Facebook ID on the user
             if ( email != nil && (isNew || currentUser.email == nil || [currentUser.email isEqualToString:@""])) {
                 [[PFUser currentUser] setObject:email forKey:@"email"];
-                canSave = true;
-            }
-
-            if(contact != nil && (isNew || currentUser[@"contact"] == nil || [currentUser[@"contact"] isEqualToString:@""])) {
-                [[PFUser currentUser] setObject:contact forKey:@"contact"];
                 canSave = true;
             }
 
