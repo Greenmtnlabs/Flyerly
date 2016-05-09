@@ -225,54 +225,49 @@
                     }
                 }
                 
-            } else if (user.isNew) {
-                
-                NSLog(@"User with facebook signed up and logged in!");
-                
-                [self onSignInSuccess];
+            } else{
 
                 //Saving User Info for again login
                 [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
-                
-                // Login success Move to Flyerly
-                 launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
-                
-                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-                appDelegate.lauchController = launchController;
-                
-                // For Parse New User Merge to old Facebook User
 
-                [appDelegate fbChangeforNewVersion];
-                
-                [self performSelectorOnMainThread:@selector(pushViewController:) withObject: launchController waitUntilDone:YES];
+                if (user.isNew) {
 
-                
-            } else {
-                NSLog(@"User with facebook logged in!");
-                
-                // We keep an instance of navigation contrller since the completion block might pop us out of the
-                // navigation controller
-                //UINavigationController *navigationController = self.navigationController;
-                
-                [self onSignInSuccess];
-                
-                //Saving User Info for again login
-                [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
-                
-                // Login success Move to Flyerly
-                launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
-                
-                // Temp on for Testing here
-                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-                
-                appDelegate.lauchController = launchController;
-                [appDelegate fbChangeforNewVersion];
+                    NSLog(@"User with facebook signed up and logged in!");
 
-                if (launchController == nil) {
-                    launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
-                    //[navigationController pushViewController: launchController animated:YES];
+                    [self onSignInSuccess];
+                    
+                    // Login success Move to Flyerly
+                     launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
+                    
+                    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+                    appDelegate.lauchController = launchController;
+                    
+                    // For Parse New User Merge to old Facebook User
+
+                    [appDelegate fbChangeforNewVersion];
+                    
+                    [self performSelectorOnMainThread:@selector(pushViewController:) withObject: launchController waitUntilDone:YES];
+
+                    
+                } else {
+                    NSLog(@"User with facebook logged in!");
+                    
+                    [self onSignInSuccess];
+                    
+                    // Login success Move to Flyerly
+                    launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
+                    
+                    // Temp on for Testing here
+                    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+                    
+                    appDelegate.lauchController = launchController;
+                    [appDelegate fbChangeforNewVersion];
+
+                    if (launchController == nil) {
+                        launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
+                    }
+
                 }
-
             }
         }];
     }else {
