@@ -54,7 +54,7 @@
     #if defined(FLYERLY) // Flyerly
         return @"http://greenmtnlabs.com/flyerly/images/phones.png";
     #else // Flyerly Biz
-        return @"http://greenmtnlabs.com/flyerly/images/bizphone.png";
+        return @"http://greenmtnlabs.com/images/bizphone.png";
     #endif
 }
 

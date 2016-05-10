@@ -415,30 +415,45 @@ if it exist then we call Merging Process
     [lauchController showLoadingIndicator];
 
     // Create request for user's Facebook data
-    FBRequest *request = [FBRequest requestForMe];
-    
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    [parameters setValue:@"id,email,name" forKey:@"fields"];
     // Send request to Facebook
-    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+    [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:parameters] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
         if (!error) {
             
             // result is a dictionary with the user's Facebook data
             NSDictionary *userData = (NSDictionary *)result;
             NSString *email = userData[@"email"];
             NSString *name = userData[@"name"];
-            NSString *contact = userData[@"contact"];
+
             BOOL canSave = false;
-            
+            BOOL isNew = [[PFUser currentUser] isNew];
+            PFUser *currentUser = [PFUser currentUser];
+
             // when new user signup via facebook, then push appName to server
-            if ([[PFUser currentUser] isNew]) {
+            if (isNew) {
                 [[PFUser currentUser] setObject:APP_NAME forKey:@"appName"];
                 canSave = true;
             }
 
             // Store the current user's Facebook ID on the user
-            if ( email != nil ) { [[PFUser currentUser] setObject:email forKey:@"email"]; canSave = true; }
-            if ( name != nil ) { [[PFUser currentUser] setObject:name forKey:@"name"]; canSave = true;}
-            if ( contact != nil ) { [[PFUser currentUser] setObject:contact forKey:@"contact"]; canSave = true;}
+            if ( email != nil && (isNew || currentUser.email == nil || [currentUser.email isEqualToString:@""])) {
+                [[PFUser currentUser] setObject:email forKey:@"email"];
+                canSave = true;
+            }
 
+            if (name != nil ){
+                if(isNew || currentUser.username == nil || [currentUser.username isEqualToString:@""]) {
+                    [[NSUserDefaults standardUserDefaults]  setObject:[name lowercaseString] forKey:@"User"];
+                    [[PFUser currentUser] setObject:name forKey:@"username"];
+                    canSave = true;
+                }
+
+                if(isNew || currentUser[@"name"] == nil || [currentUser[@"name"] isEqualToString:@""]) {
+                    [[PFUser currentUser] setObject:name forKey:@"name"];
+                    canSave = true;
+                }
+            }
             
             if ( email != nil ){
                 //Checking Email Exist in Parse
