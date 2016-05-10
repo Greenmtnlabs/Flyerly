@@ -415,8 +415,6 @@ if it exist then we call Merging Process
     [lauchController showLoadingIndicator];
 
     // Create request for user's Facebook data
-    //FBRequest *request = [FBRequest requestForMe];
-    
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     [parameters setValue:@"id,email,name" forKey:@"fields"];
     // Send request to Facebook
