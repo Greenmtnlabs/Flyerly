@@ -47,7 +47,7 @@
     #if defined(FLYERLY) // Flyerly
         return @"http://app.flyerly.com/cs";
     #else // Flyerly Biz
-        return @"http://biz.flyerly.com/cs";
+        return @"http://flyerly.com/biz/";
     #endif
 }
 - (NSString*)appInvitePreviewImageURL{
