@@ -205,14 +205,14 @@ nil]
     #define BUNDLE_IDENTIFIER_UNLOCK_VIDEO @"com.flyerlybiz.VideoFlyers"
     #define BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION @"com.flyerlybiz.MonthlyGold"
     #define BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION @"com.flyerlybiz.YearlyPlatinum"
-    #define BUNDLE_IDENTIFIER_AD_REMOVAL @"com.flyerlybiz.AdRemovalMonthly"
+    #define BUNDLE_IDENTIFIER_AD_REMOVAL @"com.flyerlybiz.AdsRemoval"
 
     //purchased bundles
     #define IN_APP_ID_ALL_DESIGN @"comflyerlybizAllDesignBundle"
     #define IN_APP_ID_UNLOCK_VIDEO @"comflyerlybizVideoFlyers"
     #define IN_APP_ID_MONTHLY_SUBSCRIPTION @"comflyerlybizMonthlyGold"
     #define IN_APP_ID_YEARLY_SUBSCRIPTION @"comflyerlybizYearlyPlatinum"
-    #define IN_APP_ID_AD_REMOVAL @"comflyerlybizAdRemovalMonthly"
+    #define IN_APP_ID_AD_REMOVAL @"comflyerlybizAdsRemoval"
 
     #define IN_APP_ID_SAVED_FLYERS NOT_FOUND_IN_APP
     #define IN_APP_ID_ICON_BUNDLE NOT_FOUND_IN_APP

@@ -83,8 +83,16 @@ static UserPurchases *sharedSingleton = nil;
     // get Yearly subscription validity
     NSString *isYearlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION forDate:[NSDate date]]]; // Yearly Subscription
     
+    
     // check add removal validity
-    NSString *isAdRemovalSubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_AD_REMOVAL forDate:[NSDate date]]]; // Ad Removal Subscription
+    NSString *isAdRemovalSubValid;
+    
+    #if defined(FLYERLY)
+        // check add removal validity
+        isAdRemovalSubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_AD_REMOVAL forDate:[NSDate date]]]; // Ad Removal Subscription
+    #else
+        isAdRemovalSubValid = @"1";
+    #endif
     
     //check have video bundle then don't show ad too
     BOOL haveVideoProduct = [self haveProduct:IN_APP_ID_UNLOCK_VIDEO];
