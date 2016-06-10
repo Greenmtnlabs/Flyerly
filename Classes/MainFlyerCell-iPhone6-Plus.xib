@@ -10,6 +10,7 @@
         </mutableArray>
         <mutableArray key="HelveticaRoundedLTStd-BdCn_0.otf">
             <string>HelveticaRoundedLTStd-BdCn</string>
+            <string>HelveticaRoundedLTStd-BdCn</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -33,7 +34,7 @@
                                 <rect key="frame" x="25" y="6" width="15" height="34"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O2r-vZ-OBa">
-                                <rect key="frame" x="41" y="14" width="272" height="18"/>
+                                <rect key="frame" x="41" y="12" width="272" height="22"/>
                                 <fontDescription key="fontDescription" name="HelveticaRoundedLTStd-BdCn" family="Helvetica Rounded LT Std" pointSize="20"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -47,8 +48,8 @@
                                 </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xuC-dF-jkn">
-                                <rect key="frame" x="316" y="14" width="94" height="18"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <rect key="frame" x="316" y="12" width="94" height="22"/>
+                                <fontDescription key="fontDescription" name="HelveticaRoundedLTStd-BdCn" family="Helvetica Rounded LT Std" pointSize="15"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
