@@ -1568,7 +1568,6 @@
 		10C526461CB7C07E00A5805C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DEE019F108ED97400967DA5 /* QuartzCore.framework */; };
 		10C526471CB7C07E00A5805C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D33511E109ABB6A0082810A /* CFNetwork.framework */; };
 		10C526481CB7C07E00A5805C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30D58E3410FB260200E0C7E8 /* MediaPlayer.framework */; };
-		10C526491CB7C07E00A5805C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26D73E02307543D994C6C8BE /* libPods.a */; };
 		10C526541CB7C45100A5805C /* FlyerlyBiz-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10C526531CB7C45100A5805C /* FlyerlyBiz-Info.plist */; };
 		10C818B51CAD23E0004116E0 /* create_flyer_default_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 10C818B41CAD23E0004116E0 /* create_flyer_default_image.png */; };
 		10F2912B1CC50724007725EA /* flyerlyLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F291291CC50724007725EA /* flyerlyLogo@2x.png */; };
@@ -2636,6 +2635,7 @@
 		36AECB9719B99D9C007763B9 /* magnifyingGlass.png in Resources */ = {isa = PBXBuildFile; fileRef = 36AECB9619B99D9C007763B9 /* magnifyingGlass.png */; };
 		36AF4CAD19BF21D4003C9FE3 /* magnifyingGlass2.png in Resources */ = {isa = PBXBuildFile; fileRef = 36AF4CAB19BF21D4003C9FE3 /* magnifyingGlass2.png */; };
 		36AF4CAE19BF21D4003C9FE3 /* magnifyingGlass3.png in Resources */ = {isa = PBXBuildFile; fileRef = 36AF4CAC19BF21D4003C9FE3 /* magnifyingGlass3.png */; };
+		48C243D180816F894E5B9BAA /* libPods-Flyr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F30BA05813D06F7B3FEC02D0 /* libPods-Flyr.a */; };
 		490FBB16192B4E0500AA3C18 /* AssetsGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490FBB15192B4E0400AA3C18 /* AssetsGroupViewController.xib */; };
 		4977B1DD193C90CC0024A209 /* delete_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4977B1DC193C90CC0024A209 /* delete_button@2x.png */; };
 		4977B1DF193C90FA0024A209 /* tick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4977B1DE193C90FA0024A209 /* tick@2x.png */; };
@@ -2655,6 +2655,7 @@
 		49F109D1192C7926002B0CD4 /* CropVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F109CF192C7926002B0CD4 /* CropVideoViewController.m */; };
 		49F109D2192C7926002B0CD4 /* CropVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F109D0192C7926002B0CD4 /* CropVideoViewController.xib */; };
 		49F5CA03192E11C200681C6E /* CropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F5CA02192E11C200681C6E /* CropView.m */; };
+		613F960EF82E0D612D6D2591 /* libPods-FlyerlyBiz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFDCB028AF02AF28551D083 /* libPods-FlyerlyBiz.a */; };
 		6501CAF0173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6501CAEF173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf */; };
 		654B255017202B1C0047C8F6 /* AfterUpdateController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 654B254F17202B1C0047C8F6 /* AfterUpdateController.xib */; };
 		654B255317202B360047C8F6 /* AfterUpdateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 654B255217202B360047C8F6 /* AfterUpdateController.m */; };
@@ -3043,7 +3044,6 @@
 		C3F98D971BA065D000CBADCC /* MainFlyerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3F98D931BA065D000CBADCC /* MainFlyerCell.xib */; };
 		E8A7347D1092CFF300661AAD /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A7347B1092CFF300661AAD /* ShareViewController.m */; };
 		E8A7347E1092CFF300661AAD /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8A7347C1092CFF300661AAD /* ShareViewController.xib */; };
-		E8E424ACA7CB4913890F4F3B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26D73E02307543D994C6C8BE /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -3099,7 +3099,6 @@
 		0DF3A541108E0E5C00D6C887 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		0DFC5319109576AB00B18478 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = Classes/MainWindow.xib; sourceTree = "<group>"; };
 		0DFC531A109576AB00B18478 /* CreateFlyerController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateFlyerController.xib; sourceTree = "<group>"; };
-		0EC8D4AEE2F4DFFC0B0A6978 /* Pods.ad hoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods.ad hoc.xcconfig"; path = "Pods/Target Support Files/Pods/Pods.ad hoc.xcconfig"; sourceTree = "<group>"; };
 		0F7FC384175CE26B009DEB08 /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AsyncImageView.h; path = AsyncImageView/AsyncImageView.h; sourceTree = "<group>"; };
 		0F7FC385175CE26B009DEB08 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AsyncImageView.m; path = AsyncImageView/AsyncImageView.m; sourceTree = "<group>"; };
 		0F80C384178561C200D36795 /* LaunchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchController.h; sourceTree = "<group>"; };
@@ -3475,6 +3474,7 @@
 		20F93DD217B2262200F6F88C /* MainSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainSettingViewController.xib; sourceTree = "<group>"; };
 		20FA7E6F1872AAF50057C3F3 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		20FA7E711872AAF50057C3F3 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
+		225553EF5FF01488EE5F785A /* Pods-FlyerlyBiz.ad hoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlyerlyBiz.ad hoc.xcconfig"; path = "Pods/Target Support Files/Pods-FlyerlyBiz/Pods-FlyerlyBiz.ad hoc.xcconfig"; sourceTree = "<group>"; };
 		2404CDD619AF506600139E52 /* BigStockThumbnailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigStockThumbnailView.h; sourceTree = "<group>"; };
 		2404CDD719AF506600139E52 /* BigStockThumbnailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BigStockThumbnailView.m; sourceTree = "<group>"; };
 		2404CDD919AF514B00139E52 /* CustomThumbnailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomThumbnailView.xib; sourceTree = "<group>"; };
@@ -4290,12 +4290,10 @@
 		24F130C81A0D159600464587 /* DrawingPatterns-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DrawingPatterns-iPhone6.xib"; sourceTree = "<group>"; };
 		24F130CA1A0D163800464587 /* Fonts-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Fonts-iPhone6.xib"; sourceTree = "<group>"; };
 		24F9928019AF78FB005C478B /* post@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "post@2x.png"; sourceTree = "<group>"; };
-		26D73E02307543D994C6C8BE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AAE50D9B0CCF005BE974 /* Flyr_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flyr_Prefix.pch; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		30D58E3410FB260200E0C7E8 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		3348DE7C95C67A57CB3676F1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		365A9D0919AF697300E284B5 /* drawing_tab_color_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drawing_tab_color_selected@2x.png"; sourceTree = "<group>"; };
 		365A9D0A19AF697300E284B5 /* drawing_tab_color@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drawing_tab_color@2x.png"; sourceTree = "<group>"; };
 		365A9D0B19AF697300E284B5 /* drawing_tab_eraser_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drawing_tab_eraser_selected@2x.png"; sourceTree = "<group>"; };
@@ -4315,6 +4313,7 @@
 		36AECB9619B99D9C007763B9 /* magnifyingGlass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magnifyingGlass.png; sourceTree = "<group>"; };
 		36AF4CAB19BF21D4003C9FE3 /* magnifyingGlass2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magnifyingGlass2.png; sourceTree = "<group>"; };
 		36AF4CAC19BF21D4003C9FE3 /* magnifyingGlass3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magnifyingGlass3.png; sourceTree = "<group>"; };
+		3E4B8E2D536F854DEA486990 /* Pods-FlyerlyBiz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlyerlyBiz.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlyerlyBiz/Pods-FlyerlyBiz.release.xcconfig"; sourceTree = "<group>"; };
 		490FBB15192B4E0400AA3C18 /* AssetsGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssetsGroupViewController.xib; sourceTree = "<group>"; };
 		4977B1DC193C90CC0024A209 /* delete_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "delete_button@2x.png"; path = "Data/delete_button@2x.png"; sourceTree = "<group>"; };
 		4977B1DE193C90FA0024A209 /* tick@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tick@2x.png"; path = "Data/tick@2x.png"; sourceTree = "<group>"; };
@@ -4345,6 +4344,7 @@
 		49F109D0192C7926002B0CD4 /* CropVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CropVideoViewController.xib; sourceTree = "<group>"; };
 		49F5CA01192E11C200681C6E /* CropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropView.h; sourceTree = "<group>"; };
 		49F5CA02192E11C200681C6E /* CropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropView.m; sourceTree = "<group>"; };
+		4CFDCB028AF02AF28551D083 /* libPods-FlyerlyBiz.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FlyerlyBiz.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6501CAEF173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Swiss_721_Black_Extended_BT.ttf; path = Data/fonts/Swiss_721_Black_Extended_BT.ttf; sourceTree = "<group>"; };
 		654B254F17202B1C0047C8F6 /* AfterUpdateController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AfterUpdateController.xib; path = ../AfterUpdateController.xib; sourceTree = "<group>"; };
 		654B255117202B360047C8F6 /* AfterUpdateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfterUpdateController.h; sourceTree = "<group>"; };
@@ -4388,8 +4388,9 @@
 		65F1BE8B173AA13400EE6F9F /* twitter_share_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter_share_saved@2x.png"; sourceTree = "<group>"; };
 		65F41C02173BCB2E000BA8CB /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		65F41C8A173BDC02000BA8CB /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
-		803DE6526A023A0BC5462D37 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		6FD9DF945CC94B3E0854F38D /* Pods-Flyr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flyr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flyr/Pods-Flyr.release.xcconfig"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Flyr-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Flyr-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		915DBB2EB4E50EE1946C985B /* Pods-Flyr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flyr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flyr/Pods-Flyr.debug.xcconfig"; sourceTree = "<group>"; };
 		C30043241AB6ED9300866385 /* lob-ios.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "lob-ios.xcodeproj"; path = "Classes/lob-ios/lob-ios.xcodeproj"; sourceTree = "<group>"; };
 		C306CC531BD657D100F9D34D /* GiphyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiphyViewController.h; sourceTree = "<group>"; };
 		C306CC541BD657D100F9D34D /* GiphyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiphyViewController.m; sourceTree = "<group>"; };
@@ -4748,9 +4749,12 @@
 		C3F98D911BA065D000CBADCC /* MainFlyerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainFlyerCell.h; sourceTree = "<group>"; };
 		C3F98D921BA065D000CBADCC /* MainFlyerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainFlyerCell.m; sourceTree = "<group>"; };
 		C3F98D931BA065D000CBADCC /* MainFlyerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainFlyerCell.xib; sourceTree = "<group>"; };
+		C77A56F0853B5D206189BCC3 /* Pods-Flyr.ad hoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flyr.ad hoc.xcconfig"; path = "Pods/Target Support Files/Pods-Flyr/Pods-Flyr.ad hoc.xcconfig"; sourceTree = "<group>"; };
+		E28A4E3CDB90C26C1A175BFE /* Pods-FlyerlyBiz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlyerlyBiz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlyerlyBiz/Pods-FlyerlyBiz.debug.xcconfig"; sourceTree = "<group>"; };
 		E8A7347A1092CFF300661AAD /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		E8A7347B1092CFF300661AAD /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		E8A7347C1092CFF300661AAD /* ShareViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
+		F30BA05813D06F7B3FEC02D0 /* libPods-Flyr.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Flyr.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -4792,7 +4796,7 @@
 				10C526461CB7C07E00A5805C /* QuartzCore.framework in Frameworks */,
 				10C526471CB7C07E00A5805C /* CFNetwork.framework in Frameworks */,
 				10C526481CB7C07E00A5805C /* MediaPlayer.framework in Frameworks */,
-				10C526491CB7C07E00A5805C /* libPods.a in Frameworks */,
+				613F960EF82E0D612D6D2591 /* libPods-FlyerlyBiz.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4834,7 +4838,7 @@
 				0DEE01A0108ED97400967DA5 /* QuartzCore.framework in Frameworks */,
 				0D33511F109ABB6A0082810A /* CFNetwork.framework in Frameworks */,
 				30D58E3510FB260200E0C7E8 /* MediaPlayer.framework in Frameworks */,
-				E8E424ACA7CB4913890F4F3B /* libPods.a in Frameworks */,
+				48C243D180816F894E5B9BAA /* libPods-Flyr.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6559,8 +6563,8 @@
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				207AB32918ED471100945924 /* Podspecs */,
-				AC2AC46EC9D2E4BC8915F4F4 /* Pods */,
 				10C526531CB7C45100A5805C /* FlyerlyBiz-Info.plist */,
+				385E6ABA85473B0A4E4743B7 /* Pods */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -6634,7 +6638,8 @@
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
-				26D73E02307543D994C6C8BE /* libPods.a */,
+				4CFDCB028AF02AF28551D083 /* libPods-FlyerlyBiz.a */,
+				F30BA05813D06F7B3FEC02D0 /* libPods-Flyr.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -6898,6 +6903,19 @@
 			path = Templates;
 			sourceTree = "<group>";
 		};
+		385E6ABA85473B0A4E4743B7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E28A4E3CDB90C26C1A175BFE /* Pods-FlyerlyBiz.debug.xcconfig */,
+				3E4B8E2D536F854DEA486990 /* Pods-FlyerlyBiz.release.xcconfig */,
+				225553EF5FF01488EE5F785A /* Pods-FlyerlyBiz.ad hoc.xcconfig */,
+				915DBB2EB4E50EE1946C985B /* Pods-Flyr.debug.xcconfig */,
+				6FD9DF945CC94B3E0854F38D /* Pods-Flyr.release.xcconfig */,
+				C77A56F0853B5D206189BCC3 /* Pods-Flyr.ad hoc.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		49997FF817E07F7300CF1038 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -7047,16 +7065,6 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
-		AC2AC46EC9D2E4BC8915F4F4 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				3348DE7C95C67A57CB3676F1 /* Pods.debug.xcconfig */,
-				803DE6526A023A0BC5462D37 /* Pods.release.xcconfig */,
-				0EC8D4AEE2F4DFFC0B0A6978 /* Pods.ad hoc.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		C30043251AB6ED9300866385 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -7162,12 +7170,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 10C5264C1CB7C07E00A5805C /* Build configuration list for PBXNativeTarget "FlyerlyBiz" */;
 			buildPhases = (
-				10C5205B1CB7C07E00A5805C /* Check Pods Manifest.lock */,
+				DE0DD009FBAF968A905CC30B /* [CP] Check Pods Manifest.lock */,
 				10C5205C1CB7C07E00A5805C /* Resources */,
 				10C525C31CB7C07E00A5805C /* Sources */,
 				10C526261CB7C07E00A5805C /* Frameworks */,
-				10C5264A1CB7C07E00A5805C /* Copy Pods Resources */,
-				10C5264B1CB7C07E00A5805C /* Embed Pods Frameworks */,
+				DB44238CD62D725F610D63B8 /* [CP] Embed Pods Frameworks */,
+				A8492DDA8A0D35439AD5D416 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -7183,12 +7191,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Flyr" */;
 			buildPhases = (
-				242E0940562846EDAFAD73A7 /* Check Pods Manifest.lock */,
+				E5D60068C19D28C8F031BCB4 /* [CP] Check Pods Manifest.lock */,
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
-				D318D36C8FDA4719900E99BC /* Copy Pods Resources */,
-				32623F5609E801B711885525 /* Embed Pods Frameworks */,
+				EFA897505ED0BDC6038EF37B /* [CP] Embed Pods Frameworks */,
+				D62E890D1F63E6032EAC8631 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -10080,14 +10088,59 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		10C5205B1CB7C07E00A5805C /* Check Pods Manifest.lock */ = {
+		A8492DDA8A0D35439AD5D416 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlyerlyBiz/Pods-FlyerlyBiz-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D62E890D1F63E6032EAC8631 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Flyr/Pods-Flyr-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DB44238CD62D725F610D63B8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlyerlyBiz/Pods-FlyerlyBiz-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DE0DD009FBAF968A905CC30B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -10095,43 +10148,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		10C5264A1CB7C07E00A5805C /* Copy Pods Resources */ = {
+		E5D60068C19D28C8F031BCB4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-		};
-		10C5264B1CB7C07E00A5805C /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		242E0940562846EDAFAD73A7 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -10139,34 +10163,20 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		32623F5609E801B711885525 /* Embed Pods Frameworks */ = {
+		EFA897505ED0BDC6038EF37B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Flyr/Pods-Flyr-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		D318D36C8FDA4719900E99BC /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -10439,7 +10449,7 @@
 		};
 		0DEE02C3108F097600967DA5 /* Ad Hoc */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0EC8D4AEE2F4DFFC0B0A6978 /* Pods.ad hoc.xcconfig */;
+			baseConfigurationReference = C77A56F0853B5D206189BCC3 /* Pods-Flyr.ad hoc.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -10502,7 +10512,7 @@
 		};
 		10C5264D1CB7C07E00A5805C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3348DE7C95C67A57CB3676F1 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = E28A4E3CDB90C26C1A175BFE /* Pods-FlyerlyBiz.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_FlyerlyBiz;
@@ -10568,7 +10578,7 @@
 		};
 		10C5264E1CB7C07E00A5805C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 803DE6526A023A0BC5462D37 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 3E4B8E2D536F854DEA486990 /* Pods-FlyerlyBiz.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_FlyerlyBiz;
@@ -10630,7 +10640,7 @@
 		};
 		10C5264F1CB7C07E00A5805C /* Ad Hoc */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0EC8D4AEE2F4DFFC0B0A6978 /* Pods.ad hoc.xcconfig */;
+			baseConfigurationReference = 225553EF5FF01488EE5F785A /* Pods-FlyerlyBiz.ad hoc.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_FlyerlyBiz;
@@ -10693,7 +10703,7 @@
 		};
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3348DE7C95C67A57CB3676F1 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 915DBB2EB4E50EE1946C985B /* Pods-Flyr.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -10759,7 +10769,7 @@
 		};
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 803DE6526A023A0BC5462D37 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 6FD9DF945CC94B3E0854F38D /* Pods-Flyr.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
