@@ -23,14 +23,16 @@ platform :ios, '8.0'
 
 
     # Open SSL
-    #pod 'OpenSSL', '~> 1.0.201'
     pod 'OpenSSL', '~> 1.0'
 
     pod 'FBSDKCoreKit', '~> 4.6'
     pod 'FBSDKShareKit', '~> 4.6'
     pod 'FBSDKMessengerShareKit', '~> 1.3.2'
     pod 'CrittercismSDK'
-
+    pod 'GTMHTTPFetcher'
+    pod 'GTMSessionFetcher'
+    pod 'GTMOAuth2'
+    
 
 
 post_install do |installer_representation|
