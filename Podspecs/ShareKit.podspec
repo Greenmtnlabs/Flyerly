@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name          = 'ShareKit'
   s.version       = '5.0.0'
-  s.platform      = :ios, '7.0'
+  s.platform      = :ios, '8.0'
   s.summary       = 'Drop in sharing features for all iPhone and iPad apps.'
   s.homepage      = 'http://getsharekit.com/'
   s.author        = 'ShareKit Community'
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
     core.requires_arc = 'Classes/ShareKit/{Configuration,Core,UI}/**/*.{h,m,c}', 'Classes/ShareKit/Sharers/Actions/**/*.{h,m,c}'
     core.frameworks    = 'SystemConfiguration', 'Security', 'MessageUI', 'AVFoundation', 'MobileCoreServices', 'CoreMedia', 'Social'
     core.weak_frameworks = 'SafariServices' #for Add to Safari reading list
-    core.dependency 'SSKeychain', '~> 1.2.2'
+    core.dependency 'SSKeychain', '~> 1.4'
     core.dependency 'SAMTextView', '~> 0.2.1'
     core.dependency 'ShareKit/Reachability'
     core.dependency 'SDWebImage', '~> 3.7'
@@ -29,14 +29,6 @@ Pod::Spec.new do |s|
   s.subspec 'Reachability' do |reachability|
     reachability.source_files = 'Classes/ShareKit/Reachability/**/*.{h,m}'
     reachability.requires_arc = false
-  end
-
-s.subspec 'Evernote' do |evernote|
-    evernote.source_files = 'Classes/ShareKit/Sharers/Services/Evernote/**/*.{h,m}'
-    evernote.dependency 'Evernote-SDK-iOS', '~> 1.3.1'
-    evernote.dependency 'ShareKit/Core'
-    evernote.libraries = 'xml2'
-evernote.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2' }
   end
 
   s.subspec 'Facebook' do |facebook|
@@ -167,7 +159,7 @@ evernote.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2' 
   s.subspec 'YouTube' do |youtube|
     youtube.source_files = 'Classes/ShareKit/Sharers/Services/YouTube/**/*.{h,m}'
     youtube.dependency 'ShareKit/Core'
-    youtube.dependency 'Google-API-Client/YouTube'
+    youtube.dependency 'GoogleAPIClient/YouTube'
   end
 
   s.subspec 'GooglePlus' do |googleplus|
@@ -176,7 +168,7 @@ evernote.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2' 
     googleplus.resource = "Frameworks/GooglePlus.bundle"
     googleplus.framework = 'AssetsLibrary', 'CoreLocation', 'CoreMotion', 'CoreGraphics', 'CoreText', 'MediaPlayer', 'Security', 'SystemConfiguration', 'AddressBook'
     googleplus.dependency 'ShareKit/Core'
-    googleplus.dependency 'Google-API-Client/Plus'
+    googleplus.dependency 'GoogleAPIClient/Plus'
     googleplus.dependency 'OpenInChrome'
     googleplus.dependency 'gtm-logger'
     end
