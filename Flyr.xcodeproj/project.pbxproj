@@ -47,8 +47,6 @@
 		1008E1D61C805924006ADFDA /* YouTubeUploadVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1008E1D51C805924006ADFDA /* YouTubeUploadVideo.m */; };
 		100B592B1CBE4A3700003FBE /* flyerlyBizLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 100B59291CBE4A3700003FBE /* flyerlyBizLogo@2x.png */; };
 		100B592C1CBE4A3700003FBE /* flyerlyBizLogo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 100B592A1CBE4A3700003FBE /* flyerlyBizLogo@3x.png */; };
-		10396A4F1D1C08150065EDF0 /* review_appStore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10396A4D1D1C08150065EDF0 /* review_appStore@2x.png */; };
-		10396A501D1C08150065EDF0 /* review_appStore@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10396A4E1D1C08150065EDF0 /* review_appStore@3x.png */; };
 		106AB83B1C9C35C300423B99 /* icon_flyerly_biz.png in Resources */ = {isa = PBXBuildFile; fileRef = 106AB83A1C9C35C300423B99 /* icon_flyerly_biz.png */; };
 		10AE8CE21CBCD8CE0022DBA7 /* flyerly_biz_welcomescreen_bg@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 10AE8CDE1CBCD8CE0022DBA7 /* flyerly_biz_welcomescreen_bg@2x.jpg */; };
 		10AE8CE31CBCD8CE0022DBA7 /* flyerly_biz_welcomescreen_bg@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 10AE8CDE1CBCD8CE0022DBA7 /* flyerly_biz_welcomescreen_bg@2x.jpg */; };
@@ -1572,6 +1570,10 @@
 		10C818B51CAD23E0004116E0 /* create_flyer_default_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 10C818B41CAD23E0004116E0 /* create_flyer_default_image.png */; };
 		10F2912B1CC50724007725EA /* flyerlyLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F291291CC50724007725EA /* flyerlyLogo@2x.png */; };
 		10F2912C1CC50724007725EA /* flyerlyLogo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F2912A1CC50724007725EA /* flyerlyLogo@3x.png */; };
+		10F6B3391D2116AE00E15A88 /* review_appStore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F6B3371D2116AE00E15A88 /* review_appStore@2x.png */; };
+		10F6B33A1D2116AE00E15A88 /* review_appStore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F6B3371D2116AE00E15A88 /* review_appStore@2x.png */; };
+		10F6B33B1D2116AE00E15A88 /* review_appStore@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F6B3381D2116AE00E15A88 /* review_appStore@3x.png */; };
+		10F6B33C1D2116AE00E15A88 /* review_appStore@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F6B3381D2116AE00E15A88 /* review_appStore@3x.png */; };
 		1D3623260D0F684500981E51 /* FlyrAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* FlyrAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -3132,8 +3134,6 @@
 		1008E1D51C805924006ADFDA /* YouTubeUploadVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YouTubeUploadVideo.m; path = YoutubeClasses/YouTubeUploadVideo.m; sourceTree = "<group>"; };
 		100B59291CBE4A3700003FBE /* flyerlyBizLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flyerlyBizLogo@2x.png"; sourceTree = "<group>"; };
 		100B592A1CBE4A3700003FBE /* flyerlyBizLogo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flyerlyBizLogo@3x.png"; sourceTree = "<group>"; };
-		10396A4D1D1C08150065EDF0 /* review_appStore@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "review_appStore@2x.png"; sourceTree = "<group>"; };
-		10396A4E1D1C08150065EDF0 /* review_appStore@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "review_appStore@3x.png"; sourceTree = "<group>"; };
 		103FB4901C75F2EA0072CEFC /* FBSDKMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBSDKMacros.h; path = "ios-files/FBSDKMacros.h"; sourceTree = "<group>"; };
 		106AB83A1C9C35C300423B99 /* icon_flyerly_biz.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_flyerly_biz.png; sourceTree = "<group>"; };
 		10AE8CDE1CBCD8CE0022DBA7 /* flyerly_biz_welcomescreen_bg@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "flyerly_biz_welcomescreen_bg@2x.jpg"; sourceTree = "<group>"; };
@@ -3146,6 +3146,8 @@
 		10C818B41CAD23E0004116E0 /* create_flyer_default_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = create_flyer_default_image.png; sourceTree = "<group>"; };
 		10F291291CC50724007725EA /* flyerlyLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flyerlyLogo@2x.png"; sourceTree = "<group>"; };
 		10F2912A1CC50724007725EA /* flyerlyLogo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flyerlyLogo@3x.png"; sourceTree = "<group>"; };
+		10F6B3371D2116AE00E15A88 /* review_appStore@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "review_appStore@2x.png"; sourceTree = "<group>"; };
+		10F6B3381D2116AE00E15A88 /* review_appStore@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "review_appStore@3x.png"; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* FlyrAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FlyrAppDelegate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		1D3623250D0F684500981E51 /* FlyrAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FlyrAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -4891,8 +4893,8 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				10396A4D1D1C08150065EDF0 /* review_appStore@2x.png */,
-				10396A4E1D1C08150065EDF0 /* review_appStore@3x.png */,
+				10F6B3371D2116AE00E15A88 /* review_appStore@2x.png */,
+				10F6B3381D2116AE00E15A88 /* review_appStore@3x.png */,
 				10F291291CC50724007725EA /* flyerlyLogo@2x.png */,
 				10F2912A1CC50724007725EA /* flyerlyLogo@3x.png */,
 				100B59291CBE4A3700003FBE /* flyerlyBizLogo@2x.png */,
@@ -7903,6 +7905,7 @@
 				10C522B31CB7C07E00A5805C /* emoticon213-dribble@2x.png in Resources */,
 				10C522B41CB7C07E00A5805C /* Fonts.plist in Resources */,
 				10C522B51CB7C07E00A5805C /* emoticon70@2x.png in Resources */,
+				10F6B33C1D2116AE00E15A88 /* review_appStore@3x.png in Resources */,
 				10C522B61CB7C07E00A5805C /* icon52.jpg in Resources */,
 				10C522B81CB7C07E00A5805C /* twitter_share_saved@2x.png in Resources */,
 				10C522B91CB7C07E00A5805C /* Template117.jpg in Resources */,
@@ -8264,6 +8267,7 @@
 				10C5241D1CB7C07E00A5805C /* emoticon189-angry@2x.png in Resources */,
 				10C5241E1CB7C07E00A5805C /* youtube_share@3x.png in Resources */,
 				10C5241F1CB7C07E00A5805C /* icon25.jpg in Resources */,
+				10F6B33A1D2116AE00E15A88 /* review_appStore@2x.png in Resources */,
 				10C524201CB7C07E00A5805C /* quatchi-icon.png in Resources */,
 				10C524211CB7C07E00A5805C /* register-bg-iPhone5@2x.png in Resources */,
 				10C524221CB7C07E00A5805C /* stop_button@3x.png in Resources */,
@@ -9119,6 +9123,7 @@
 				C31E92CC1B566207004DF193 /* bicon9.png in Resources */,
 				20473E181BD0D8F300433A7F /* settingsButton@2x.png in Resources */,
 				249F1FCA193F55E90072835E /* email_share_selected@2x.png in Resources */,
+				10F6B33B1D2116AE00E15A88 /* review_appStore@3x.png in Resources */,
 				246EF528193C515D004539B2 /* emoticon71@2x.png in Resources */,
 				247858D5194878080062F1E4 /* ONRAMP-Regular.ttf in Resources */,
 				200D1938197CF4CC00CFE04B /* PaypalViewController.xib in Resources */,
@@ -9240,7 +9245,6 @@
 				24861F4219F9147100670F6D /* settings2@3x.png in Resources */,
 				249F1FC9193F55E90072835E /* email_share_saved@2x.png in Resources */,
 				2012ECB319261B0F00D5EA58 /* Colours.xib in Resources */,
-				10396A501D1C08150065EDF0 /* review_appStore@3x.png in Resources */,
 				246EF51A193C515D004539B2 /* emoticon59@2x.png in Resources */,
 				65A464FE1726D703002C32FB /* ITC Avant Garde CE Gothic Book.ttf in Resources */,
 				24218477194B4AEC00FDDA97 /* eMail-icon.png in Resources */,
@@ -9455,6 +9459,7 @@
 				24218490194B4AEC00FDDA97 /* emoticon129@2x.png in Resources */,
 				249F203D193F562C0072835E /* public_on@2x.png in Resources */,
 				24751A6A1938A3B300DF03B2 /* clipart_tab@2x.png in Resources */,
+				10F6B3391D2116AE00E15A88 /* review_appStore@2x.png in Resources */,
 				242184F4194B4AEC00FDDA97 /* sailing-icon.png in Resources */,
 				24CF67AE1A026D88003A5623 /* CropViewController-iPhone6.xib in Resources */,
 				C31E92C41B566207004DF193 /* bicon20.png in Resources */,
@@ -9812,7 +9817,6 @@
 				C35350AC1B60CF5D00CF68F9 /* emoticon272sweet-kids.png in Resources */,
 				242184A0194B4AEC00FDDA97 /* emoticon145@2x.png in Resources */,
 				246EF53F193C515D004539B2 /* emoticon92@2x.png in Resources */,
-				10396A4F1D1C08150065EDF0 /* review_appStore@2x.png in Resources */,
 				24861F3D19F9147100670F6D /* register-bg-iPhone5@3x.png in Resources */,
 				249F1FB3193F55D50072835E /* createButton@2x.png in Resources */,
 				242184F9194B4AEC00FDDA97 /* shooting-icon.png in Resources */,
