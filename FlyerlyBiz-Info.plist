@@ -6,6 +6,8 @@
 	<string>English</string>
 	<key>CFBundleDisplayName</key>
 	<string>FlyerlyBiz</string>
+	<key>CFBundleExecutable</key>
+	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>icon@2x.png</string>
@@ -46,7 +48,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>24</string>
+	<string>25</string>
 	<key>FacebookAppID</key>
 	<string>1755119231374505</string>
 	<key>FacebookDisplayName</key>
@@ -202,7 +204,5 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-    <key>CFBundleExecutable</key>
-    <string>${EXECUTABLE_NAME}</string>
 </dict>
 </plist>
