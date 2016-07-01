@@ -421,6 +421,9 @@
     userPurchases_.delegate = launchController;
     [userPurchases_ setUserPurcahsesFromParse];
     
+    InAppViewController *controller = [[InAppViewController alloc] init];
+    [controller updateParse];
+    
     if (signInCompletion) {
         signInCompletion();
     }
