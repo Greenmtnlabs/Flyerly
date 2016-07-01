@@ -169,9 +169,11 @@ nil]
 [UIFont fontWithName:@"HiraKakuProN-W6" size:16],\
 nil]
 
+
+#define REGISTERED @"Registered"
+#define ANONYMOUS @"Anonymous"
+
 #define NOT_FOUND_IN_APP @"NOT_FOUND_IN_APP"
-
-
 
 #if defined(FLYERLY)
 

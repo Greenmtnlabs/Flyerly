@@ -173,14 +173,14 @@
         
         //Checking if the user is valid or anonymus
         if ([[PFUser currentUser] sessionToken].length != 0) {
-            [[NSUserDefaults standardUserDefaults]setValue: @"Registered" forKey: @"UserType"];
+            [[NSUserDefaults standardUserDefaults]setValue: REGISTERED forKey: @"UserType"];
         } else {
 //            UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"Please sign in first"
 //                                                                message: @"To purchase any product, you need to sign in first."
 //                                                               delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
 //            [someError show];
             
-            [[NSUserDefaults standardUserDefaults]setValue: @"Anonymous" forKey: @"UserType"];
+            [[NSUserDefaults standardUserDefaults]setValue: ANONYMOUS forKey: @"UserType"];
         }
         
         //Getting Selected Product
@@ -245,7 +245,7 @@
         
         //Checking if the user is valid or anonymus
         if ([[PFUser currentUser] sessionToken].length != 0) {
-            [[NSUserDefaults standardUserDefaults]setValue: @"Registered" forKey: @"UserType"];
+            [[NSUserDefaults standardUserDefaults]setValue: REGISTERED forKey: @"UserType"];
             
         }else {
 //            UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"Please sign in first"
@@ -253,7 +253,7 @@
 //                                                               delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
 //            [someError show];
             
-            [[NSUserDefaults standardUserDefaults]setValue: @"Anonymous" forKey: @"UserType"];
+            [[NSUserDefaults standardUserDefaults]setValue: ANONYMOUS forKey: @"UserType"];
         }
         
         //Getting Selected Product
@@ -310,7 +310,7 @@
         
         if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
             NSMutableDictionary *userPurchase;
-            if([[[NSUserDefaults standardUserDefaults] stringForKey:@"UserType"] isEqualToString: @"Registered"]){
+            if([[[NSUserDefaults standardUserDefaults] stringForKey:@"UserType"] isEqualToString: REGISTERED]){
                 userPurchase = [[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults]valueForKey:@"InAppPurchases"]];
             } else {
                 userPurchase = [[NSMutableDictionary alloc] init];
@@ -325,7 +325,7 @@
             [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
             
         }
-        if([[[NSUserDefaults standardUserDefaults] stringForKey:@"UserType"] isEqualToString: @"Registered"]){
+        if([[[NSUserDefaults standardUserDefaults] stringForKey:@"UserType"] isEqualToString: REGISTERED]){
             //Saved in Parse Account
             [self updateParse];
             // Showing action sheet after succesfull sign in
@@ -530,7 +530,7 @@
             }
             
             [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
-            if([[[NSUserDefaults standardUserDefaults] stringForKey:@"UserType"] isEqualToString: @"Registered"]){
+            if([[[NSUserDefaults standardUserDefaults] stringForKey:@"UserType"] isEqualToString: REGISTERED]){
                 [self updateParse];
             }
         }
