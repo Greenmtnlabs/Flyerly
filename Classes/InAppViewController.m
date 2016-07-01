@@ -173,41 +173,44 @@
         
         //Checking if the user is valid or anonymus
         if ([[PFUser currentUser] sessionToken].length != 0) {
+            [[NSUserDefaults standardUserDefaults]setValue: @"Registered" forKey: @"UserType"];
+        } else {
+//            UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"Please sign in first"
+//                                                                message: @"To purchase any product, you need to sign in first."
+//                                                               delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
+//            [someError show];
             
-            //Getting Selected Product
-            NSDictionary *product = [productArray objectAtIndex:rowIndex];
-            NSString* prodIdentifier = product[@"productidentifier"];
+            [[NSUserDefaults standardUserDefaults]setValue: @"Anonymous" forKey: @"UserType"];
+        }
+        
+        //Getting Selected Product
+        NSDictionary *product = [productArray objectAtIndex:rowIndex];
+        NSString* prodIdentifier = product[@"productidentifier"];
+        
+        if ( ! ([prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION] // Monthly Subscription
+                || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION] // Yearly Subscription
+                || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_AD_REMOVAL] // Ad Removal Subscription
+                ) &&
+            [userPurchases checkKeyExistsInPurchases:productIdentifier] )  {
             
-            if ( ! ([prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION] // Monthly Subscription
+            // show alert that item has already been purchased
+            [self showAlreadyPurchasedAlert];
+            
+        } else if( ([prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION] // Monthly Subscription
                     || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION] // Yearly Subscription
                     || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_AD_REMOVAL] // Ad Removal Subscription
                     ) &&
-                    [userPurchases checkKeyExistsInPurchases:productIdentifier] )  {
-                
-                // show alert that item has already been purchased
-                [self showAlreadyPurchasedAlert];
-                
-            } else if( ([prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION] // Monthly Subscription
-                        || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION] // Yearly Subscription
-                        || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_AD_REMOVAL] // Ad Removal Subscription
-                        ) &&
-                       [userPurchases isSubscriptionValid]) {
-                
-                // show alert that item has already been purchased
-                [self showAlreadyPurchasedAlert];
-                
-            } else {
-                
-                [self purchaseProductAtIndex:rowIndex];
+                  [userPurchases isSubscriptionValid]) {
             
-            }
+            // show alert that item has already been purchased
+            [self showAlreadyPurchasedAlert];
             
-        }else {
-            UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"Please sign in first"
-                                                                message: @"To purchase any product, you need to sign in first."
-                                                               delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
-            [someError show];
+        } else {
+            
+            [self purchaseProductAtIndex:rowIndex];
+            
         }
+
     }
     
     [self performSelector:@selector(deselect) withObject:nil afterDelay:0.2f];
@@ -242,41 +245,45 @@
         
         //Checking if the user is valid or anonymus
         if ([[PFUser currentUser] sessionToken].length != 0) {
+            [[NSUserDefaults standardUserDefaults]setValue: @"Registered" forKey: @"UserType"];
             
-            //Getting Selected Product
-            NSDictionary *product = [productArray objectAtIndex:4];
-            NSString* prodIdentifier = product[@"productidentifier"];
+        }else {
+//            UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"Please sign in first"
+//                                                                message: @"To purchase any product, you need to sign in first."
+//                                                               delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
+//            [someError show];
             
-            if ( ! ([prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION ] // Monthly Subscription
+            [[NSUserDefaults standardUserDefaults]setValue: @"Anonymous" forKey: @"UserType"];
+        }
+        
+        //Getting Selected Product
+        NSDictionary *product = [productArray objectAtIndex:4];
+        NSString* prodIdentifier = product[@"productidentifier"];
+        
+        if ( ! ([prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION ] // Monthly Subscription
+                || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION] // Yearly Subscription
+                || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_AD_REMOVAL] // Ad Removal Subscription
+                ) &&
+            [userPurchases checkKeyExistsInPurchases:productIdentifier] )  {
+            
+            // show alert that item has already been purchased
+            [self showAlreadyPurchasedAlert];
+            
+        } else if( ([prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION] // Monthly Subscription
                     || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION] // Yearly Subscription
                     || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_AD_REMOVAL] // Ad Removal Subscription
                     ) &&
-                [userPurchases checkKeyExistsInPurchases:productIdentifier] )  {
-                
-                // show alert that item has already been purchased
-                [self showAlreadyPurchasedAlert];
-                
-            } else if( ([prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION] // Monthly Subscription
-                        || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION] // Yearly Subscription
-                        || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_AD_REMOVAL] // Ad Removal Subscription
-                        ) &&
-                      [userPurchases isSubscriptionValid]) {
-                
-                // show alert that item has already been purchased
-                [self showAlreadyPurchasedAlert];
-                
-            } else {
-                
-                [self purchaseProductID:productIdentifier];
-                
-            }
+                  [userPurchases isSubscriptionValid]) {
             
-        }else {
-            UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"Please sign in first"
-                                                                message: @"To purchase any product, you need to sign in first."
-                                                               delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
-            [someError show];
+            // show alert that item has already been purchased
+            [self showAlreadyPurchasedAlert];
+            
+        } else {
+            
+            [self purchaseProductID:productIdentifier];
+            
         }
+
     }
 }
 
@@ -302,8 +309,12 @@
         NSString *strWithOutDot = [pid stringByReplacingOccurrencesOfString:@"." withString:@""];
         
         if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
-            
-            NSMutableDictionary *userPurchase =[[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults]valueForKey:@"InAppPurchases"]];
+            NSMutableDictionary *userPurchase;
+            if([[[NSUserDefaults standardUserDefaults] stringForKey:@"UserType"] isEqualToString: @"Registered"]){
+                userPurchase = [[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults]valueForKey:@"InAppPurchases"]];
+            } else {
+                userPurchase = [[NSMutableDictionary alloc] init];
+            }
             
             [userPurchase setValue:@"1" forKey:strWithOutDot];
             [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
@@ -314,11 +325,12 @@
             [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
             
         }
-        
-        //Saved in Parse Account
-        [self updateParse];
-        // Showing action sheet after succesfull sign in
-        [userPurchases setUserPurcahsesFromParse];
+        if([[[NSUserDefaults standardUserDefaults] stringForKey:@"UserType"] isEqualToString: @"Registered"]){
+            //Saved in Parse Account
+            [self updateParse];
+            // Showing action sheet after succesfull sign in
+            [userPurchases setUserPurcahsesFromParse];
+        }
         [self.buttondelegate productSuccesfullyPurchased:pid];
         
             
@@ -518,7 +530,9 @@
             }
             
             [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
-            [self updateParse];
+            if([[[NSUserDefaults standardUserDefaults] stringForKey:@"UserType"] isEqualToString: @"Registered"]){
+                [self updateParse];
+            }
         }
         
         NSLog(@"Transactions restored");
