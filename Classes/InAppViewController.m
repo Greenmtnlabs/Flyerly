@@ -58,13 +58,8 @@
         return;
     }
     
-    //Checking if the user is valid or anonymus
-    if ([[PFUser currentUser] sessionToken].length != 0) {
-        [loginButton setTitle:(@"Restore Purchases")];
-        loginButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    }else {
-        [loginButton setTitle:(@"Sign In")];
-    }
+    [loginButton setTitle:(@"Restore Purchases")];
+    loginButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     
     if ([[PFUser currentUser] sessionToken].length != 0) {
         
@@ -446,12 +441,6 @@
             
             requestedProducts = products;
             bool disablePurchase = ([[PFUser currentUser] sessionToken].length == 0);
-            
-            NSString *sheetTitle = @"Choose Product";
-            
-            if (disablePurchase) {
-                sheetTitle = @"This feature requires Sign In";
-            }
             
             productArray = [[NSMutableArray alloc] init];
             

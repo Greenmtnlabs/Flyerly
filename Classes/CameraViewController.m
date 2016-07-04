@@ -269,46 +269,31 @@
     if ( self.isVideoFlyer && _videoAllow)
         _mode.selected = NO;
     
-    if ([[PFUser currentUser] sessionToken].length != 0) {
-        if ( [userPurchases_ canCreateVideoFlyer] ) {
-            
-            if ( [_mode isSelected] == YES ) {
-                
-                //Enable Camera Mode
-                [_mode setSelected:NO];
-                [shoot setImage:[UIImage imageNamed:@"camera_button"] forState:UIControlStateNormal];
-                [shoot setImage:[UIImage imageNamed:@"camera_button"] forState:UIControlStateSelected];
-                [flash setHidden:NO];
-                tapAndHoldLabel.alpha = 0;
-                _progressView.hidden = YES;
-            }else {
-                
-                //Enable Video Mode
-                [_mode setSelected:YES];
-                [shoot setImage:[UIImage imageNamed:@"recording_button"] forState:UIControlStateNormal];
-                [shoot setImage:[UIImage imageNamed:@"stop_button"] forState:UIControlStateSelected];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [flash setHidden:YES];//works
-                });
-                
-                tapAndHoldLabel.alpha = 1;
-                _progressView.hidden = NO;
-            }
-        }else {
-            if ( [_mode isSelected] == NO) {
-                [self openPanel];
-            }
-            
-            //Enable Camera Mode
+    if ( [userPurchases_ canCreateVideoFlyer] ) {
+    
+        if ( [_mode isSelected] == YES ) {
+            // Enable Camera Mode
             [_mode setSelected:NO];
             [shoot setImage:[UIImage imageNamed:@"camera_button"] forState:UIControlStateNormal];
             [shoot setImage:[UIImage imageNamed:@"camera_button"] forState:UIControlStateSelected];
             [flash setHidden:NO];
+            tapAndHoldLabel.alpha = 0;
             _progressView.hidden = YES;
+        }else {
+            // Enable Video Mode
+            [_mode setSelected:YES];
+            [shoot setImage:[UIImage imageNamed:@"recording_button"] forState:UIControlStateNormal];
+            [shoot setImage:[UIImage imageNamed:@"stop_button"] forState:UIControlStateSelected];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [flash setHidden:YES];//works
+            });
+                
+            tapAndHoldLabel.alpha = 1;
+            _progressView.hidden = NO;
         }
     
     }else {
-       
+    
         if ( [_mode isSelected] == NO) {
             [self openPanel];
         }

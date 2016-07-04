@@ -5355,25 +5355,20 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         userPurchases = [UserPurchases getInstance];
         userPurchases.delegate = self;
         
-        if ([[PFUser currentUser] sessionToken].length != 0) {
-            if ( [userPurchases canCreateVideoFlyer] ) {
-                
-                [self openCustomCamera:YES];
-                _videoLabel.alpha = 1;
-                
-                _addMoreLayerOrSaveFlyerLabel.alpha = 0;
-                _takeOrAddPhotoLabel.alpha = 0;
-                
-                nbuCamera.isVideoFlyer = YES;
-            }else {
-                [self openInAppPanel];
-            }
+        if ( [userPurchases canCreateVideoFlyer] ) {
             
+            [self openCustomCamera:YES];
+            _videoLabel.alpha = 1;
+            
+            _addMoreLayerOrSaveFlyerLabel.alpha = 0;
+            _takeOrAddPhotoLabel.alpha = 0;
+            
+            nbuCamera.isVideoFlyer = YES;
         }else {
             [self openInAppPanel];
         }
-	}
-    else if(selectedButton == backgroundTabButton) {
+        
+  	} else if (selectedButton == backgroundTabButton) {
         currentLayer = nil;
         
         NSMutableDictionary *templateDictionary = [flyer getLayerFromMaster:@"Template"];
