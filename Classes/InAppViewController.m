@@ -175,11 +175,6 @@
         if ([[PFUser currentUser] sessionToken].length != 0) {
             [[NSUserDefaults standardUserDefaults]setValue: REGISTERED forKey: @"UserType"];
         } else {
-//            UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"Please sign in first"
-//                                                                message: @"To purchase any product, you need to sign in first."
-//                                                               delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
-//            [someError show];
-            
             [[NSUserDefaults standardUserDefaults]setValue: ANONYMOUS forKey: @"UserType"];
         }
         
@@ -248,11 +243,6 @@
             [[NSUserDefaults standardUserDefaults]setValue: REGISTERED forKey: @"UserType"];
             
         }else {
-//            UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"Please sign in first"
-//                                                                message: @"To purchase any product, you need to sign in first."
-//                                                               delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
-//            [someError show];
-            
             [[NSUserDefaults standardUserDefaults]setValue: ANONYMOUS forKey: @"UserType"];
         }
         
@@ -319,7 +309,7 @@
             [userPurchase setValue:@"1" forKey:strWithOutDot];
             [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
             
-        }else {
+        } else {
             NSMutableDictionary *userPurchase =[[NSMutableDictionary alloc] init];
             [userPurchase setValue:@"1" forKey:strWithOutDot];
             [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
@@ -353,7 +343,9 @@
     
     PFObject *inApp = [[PFObject alloc] initWithClassName:@"InApp"];
     [inApp setObject:user forKey:@"user"];
-    inApp[@"json"] = [[NSUserDefaults standardUserDefaults]objectForKey:@"InAppPurchases"];
+    if([[NSUserDefaults standardUserDefaults]objectForKey:@"InAppPurchases"]) {
+        inApp[@"json"] = [[NSUserDefaults standardUserDefaults]objectForKey:@"InAppPurchases"];
+    }
     [inApp saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         
         if( succeeded ) {
@@ -363,6 +355,10 @@
     
     [[RMStore defaultStore] removeStoreObserver:self];
     
+}
+
+-(void) clearPurchases {
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
