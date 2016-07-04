@@ -259,7 +259,7 @@
             // show alert that item has already been purchased
             [self showAlreadyPurchasedAlert];
             
-        } else if( ([prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION] // Monthly Subscription
+        } else if(! ([prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION] // Monthly Subscription
                     || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION] // Yearly Subscription
                     || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_AD_REMOVAL] // Ad Removal Subscription
                     ) &&
@@ -363,7 +363,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if ( [tableView isEqual:self.paidFeaturesTview] ){
+    if ([tableView isEqual:self.paidFeaturesTview] ){
         
         static NSString *cellId = @"InAppPurchaseCell";
         InAppPurchaseCell *inAppCell = (InAppPurchaseCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
