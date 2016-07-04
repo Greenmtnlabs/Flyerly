@@ -174,7 +174,7 @@
         // Checking if the user is valid or anonymus
         if ([[PFUser currentUser] sessionToken].length != 0) { // UserType = REGISTERED for logged in user
             [[NSUserDefaults standardUserDefaults]setValue: REGISTERED forKey: @"UserType"];
-        } else { // UserType = REGISTERED for not logged in user
+        } else { // UserType = ANONYMOUS for not logged in user
             [[NSUserDefaults standardUserDefaults]setValue: ANONYMOUS forKey: @"UserType"];
         }
         
@@ -241,7 +241,7 @@
         //Checking if the user is valid or anonymus
         if ([[PFUser currentUser] sessionToken].length != 0) { // UserType = REGISTERED for logged in user
             [[NSUserDefaults standardUserDefaults]setValue: REGISTERED forKey: @"UserType"];
-        } else { // UserType = REGISTERED for not logged in user
+        } else { // UserType = ANONYMOUS for not logged in user
             [[NSUserDefaults standardUserDefaults]setValue: ANONYMOUS forKey: @"UserType"];
         }
         
