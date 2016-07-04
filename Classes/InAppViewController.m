@@ -357,10 +357,6 @@
     
 }
 
--(void) clearPurchases {
-
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if ([tableView isEqual:self.paidFeaturesTview] ){

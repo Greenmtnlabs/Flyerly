@@ -51,8 +51,6 @@
 -(void) inAppDataLoaded;
 -(void) restorePurchase;
 -(void) updateParse;
--(void) clearPurchases;
-
 -(void) purchaseProductByID:(NSString *) identifier;
 
 @end
