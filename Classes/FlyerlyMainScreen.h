@@ -74,7 +74,6 @@
 - (IBAction)showUnsharedFlyers:(id)sender;
 - (IBAction)showSharedFlyers:(id)sender;
 - (IBAction)showHashTagFlyers:(id)sender;
--(void)checkUserPurchases;
 
 -(NSMutableArray *)getFlyersPaths;
 

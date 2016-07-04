@@ -171,10 +171,10 @@
     //if not cancel and Restore button presses
     if(rowIndex >= 0 || rowIndex <= 5) {
         
-        //Checking if the user is valid or anonymus
-        if ([[PFUser currentUser] sessionToken].length != 0) {
+        // Checking if the user is valid or anonymus
+        if ([[PFUser currentUser] sessionToken].length != 0) { // UserType = REGISTERED for logged in user
             [[NSUserDefaults standardUserDefaults]setValue: REGISTERED forKey: @"UserType"];
-        } else {
+        } else { // UserType = REGISTERED for not logged in user
             [[NSUserDefaults standardUserDefaults]setValue: ANONYMOUS forKey: @"UserType"];
         }
         
@@ -239,10 +239,9 @@
     if (buttonIndex == 1) {
         
         //Checking if the user is valid or anonymus
-        if ([[PFUser currentUser] sessionToken].length != 0) {
+        if ([[PFUser currentUser] sessionToken].length != 0) { // UserType = REGISTERED for logged in user
             [[NSUserDefaults standardUserDefaults]setValue: REGISTERED forKey: @"UserType"];
-            
-        }else {
+        } else { // UserType = REGISTERED for not logged in user
             [[NSUserDefaults standardUserDefaults]setValue: ANONYMOUS forKey: @"UserType"];
         }
         
@@ -300,7 +299,7 @@
         
         if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
             NSMutableDictionary *userPurchase;
-            if([[[NSUserDefaults standardUserDefaults] stringForKey:@"UserType"] isEqualToString: REGISTERED]){
+            if([[[NSUserDefaults standardUserDefaults] stringForKey:@"UserType"] isEqualToString: REGISTERED]) {
                 userPurchase = [[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults]valueForKey:@"InAppPurchases"]];
             } else {
                 userPurchase = [[NSMutableDictionary alloc] init];
@@ -315,7 +314,7 @@
             [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
             
         }
-        if([[[NSUserDefaults standardUserDefaults] stringForKey:@"UserType"] isEqualToString: REGISTERED]){
+        if([[[NSUserDefaults standardUserDefaults] stringForKey:@"UserType"] isEqualToString: REGISTERED]) { // Update parse only for logged in users
             //Saved in Parse Account
             [self updateParse];
             // Showing action sheet after succesfull sign in
