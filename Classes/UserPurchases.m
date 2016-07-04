@@ -1,4 +1,4 @@
-    //
+//
 //  UserPurchases.m
 //  Flyr
 //
@@ -55,6 +55,9 @@ static UserPurchases *sharedSingleton = nil;
 
 -(BOOL) hasAdsRemovalSubscription:(NSString * )productId {
     NSString *productId_ = [productId stringByReplacingOccurrencesOfString:@"." withString:@""];
+    oldPurchases = [[NSMutableDictionary alloc]
+                    initWithDictionary:[[NSUserDefaults standardUserDefaults]
+                                        valueForKey:@"InAppPurchases"]];
     if ( [productId_ isEqualToString: IN_APP_ID_AD_REMOVAL] && [oldPurchases objectForKey:productId_] ) {
         return YES;
     } else {

@@ -417,9 +417,18 @@
     
     [FlyerUser mergeAnonymousUser];
     
+    // Update parse when Anonymous user logs in
+    if([[[NSUserDefaults standardUserDefaults] stringForKey:@"UserType"] isEqualToString: ANONYMOUS]) {
+        InAppViewController *controller = [[InAppViewController alloc] init];
+        [controller updateParse];
+        [[NSUserDefaults standardUserDefaults]setValue: REGISTERED forKey: @"UserType"];
+    }
+    
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     userPurchases_.delegate = launchController;
     [userPurchases_ setUserPurcahsesFromParse];
+    
+   
     
     if (signInCompletion) {
         signInCompletion();

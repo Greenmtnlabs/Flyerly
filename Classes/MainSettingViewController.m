@@ -562,6 +562,8 @@
     [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
     [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"InAppPurchases"];
     
+    [[NSUserDefaults standardUserDefaults]setValue: nil forKey:@"InAppPurchases"];
+    
     // Log out from parse.
     [PFUser logOut];
 }
