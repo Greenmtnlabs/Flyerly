@@ -440,7 +440,6 @@
             NSLog(@"Products loaded");
             
             requestedProducts = products;
-            bool disablePurchase = ([[PFUser currentUser] sessionToken].length == 0);
             
             productArray = [[NSMutableArray alloc] init];
             
