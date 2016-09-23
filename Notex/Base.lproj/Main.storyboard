@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Rs7-ug-2Dp">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Comfortaa-Light.ttf">
+            <string>Comfortaa-Light</string>
+            <string>Comfortaa-Light</string>
+            <string>Comfortaa-Light</string>
+            <string>Comfortaa-Light</string>
+            <string>Comfortaa-Light</string>
+            <string>Comfortaa-Light</string>
+            <string>Comfortaa-Light</string>
+        </mutableArray>
+    </customFonts>
+    <scenes>
+        <!--Notes List-->
+        <scene sceneID="dB9-7v-ICc">
+            <objects>
+                <viewController storyboardIdentifier="NotesList" id="Rs7-ug-2Dp" customClass="NotesList" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="J3r-dt-daY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="G6d-h4-PaR" userLabel="topView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOTEX" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jX4-v8-gw3">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Comfortaa-Light" family="Comfortaa" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" id="6ZA-Af-OOY" userLabel="addNoteButt">
+                                        <rect key="frame" x="268" y="0.0" width="44" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="34"/>
+                                        <state key="normal" backgroundImage="addIcon">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="1Fw-9L-sQa" kind="modal" identifier="AddNoteSegue" modalTransitionStyle="crossDissolve" id="4em-ci-xx3"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.32096321402857836" green="0.86465607541899447" blue="0.53700132682684409" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search by title" id="fJw-q1-ZRj">
+                                <rect key="frame" x="0.0" y="44" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Rs7-ug-2Dp" id="ZGU-7N-Gvn"/>
+                                </connections>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="68" sectionHeaderHeight="22" sectionFooterHeight="22" id="za6-Mi-382">
+                                <rect key="frame" x="0.0" y="88" width="320" height="342"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="BCl-WT-SKx" detailTextLabel="7Cq-gv-3Mm" imageView="DZi-gT-h4O" rowHeight="54" style="IBUITableViewCellStyleSubtitle" id="Zco-aD-XbE">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Zco-aD-XbE" id="AL8-g6-fa9">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="53"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BCl-WT-SKx">
+                                                    <rect key="frame" x="70" y="11" width="37" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" name="Comfortaa-Light" family="Comfortaa" pointSize="17"/>
+                                                    <color key="textColor" red="0.1824207165" green="0.2145885287" blue="0.25577965559999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7Cq-gv-3Mm">
+                                                    <rect key="frame" x="70" y="29" width="44" height="13"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" name="Comfortaa-Light" family="Comfortaa" pointSize="12"/>
+                                                    <color key="textColor" red="0.25314745921714388" green="0.29708701797921466" blue="0.3533519553072626" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="logo" id="DZi-gT-h4O">
+                                                    <rect key="frame" x="15" y="6" width="40" height="40"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="1Fw-9L-sQa" kind="modal" identifier="EditNoteSegue" modalTransitionStyle="crossDissolve" id="9P2-XR-JUi"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Rs7-ug-2Dp" id="hV5-tm-piy"/>
+                                    <outlet property="delegate" destination="Rs7-ug-2Dp" id="WdM-c3-3lT"/>
+                                </connections>
+                            </tableView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notex - © FV iMAGINATION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tfy-bm-Nxn" userLabel="copyrightLabel">
+                                <rect key="frame" x="0.0" y="430" width="320" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.9309313897" green="0.9309313897" blue="0.9309313897" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Comfortaa-Light" family="Comfortaa" pointSize="13"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="copyrightLabel" destination="tfy-bm-Nxn" id="JMm-oI-quJ"/>
+                        <outlet property="searchDisplayController" destination="JI2-BB-bwy" id="ifY-4M-ne9"/>
+                        <outlet property="tableView" destination="za6-Mi-382" id="hXl-aA-hSO"/>
+                        <outlet property="titleLabel" destination="jX4-v8-gw3" id="H6H-nl-4ZJ"/>
+                        <outlet property="topView" destination="G6d-h4-PaR" id="zv7-FM-KgL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6c5-gI-r95" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="JI2-BB-bwy">
+                    <connections>
+                        <outlet property="delegate" destination="Rs7-ug-2Dp" id="DWZ-vX-HuL"/>
+                        <outlet property="searchBar" destination="fJw-q1-ZRj" id="mXT-3f-GnQ"/>
+                        <outlet property="searchContentsController" destination="Rs7-ug-2Dp" id="28b-rL-GQX"/>
+                        <outlet property="searchResultsDataSource" destination="Rs7-ug-2Dp" id="FaX-yk-kaA"/>
+                        <outlet property="searchResultsDelegate" destination="Rs7-ug-2Dp" id="yjh-HJ-24D"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="54" y="19"/>
+        </scene>
+        <!--Note Editor-->
+        <scene sceneID="WLQ-4M-vYN">
+            <objects>
+                <viewController storyboardIdentifier="NoteEditor" id="1Fw-9L-sQa" customClass="NoteEditor" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Pi6-AR-4Xc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="uZH-9r-DOZ">
+                                <rect key="frame" x="0.0" y="44" width="320" height="385"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="textColor" red="0.1824207165" green="0.2145885287" blue="0.25577965559999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Comfortaa-Light" family="Comfortaa" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                <connections>
+                                    <outlet property="delegate" destination="1Fw-9L-sQa" id="siG-3g-6K3"/>
+                                </connections>
+                            </textView>
+                            <view contentMode="scaleToFill" id="RhR-ib-4x7" userLabel="topView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" id="ZeV-98-LAo" userLabel="backButt">
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="26"/>
+                                        <state key="normal" backgroundImage="backButt">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="Rs7-ug-2Dp" kind="modal" identifier="BackSegue" modalTransitionStyle="crossDissolve" id="e32-CF-3iE"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Set Title" textAlignment="center" minimumFontSize="8" clearButtonMode="whileEditing" id="AYg-qQ-yrO" userLabel="noteTitleTxt">
+                                        <rect key="frame" x="61" y="7" width="199" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="Comfortaa-Light" family="Comfortaa" pointSize="15"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="1Fw-9L-sQa" id="GNY-xr-h22"/>
+                                        </connections>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" red="0.320963214" green="0.8646560754" blue="0.53700132680000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notex - © FV iMAGINATION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Zjs-ZW-oT5" userLabel="copyrightLabel">
+                                <rect key="frame" x="0.0" y="430" width="320" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.93093138966480449" green="0.93093138966480449" blue="0.93093138966480449" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Comfortaa-Light" family="Comfortaa" pointSize="13"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="noteTextView" destination="uZH-9r-DOZ" id="Fau-cV-aj7"/>
+                        <outlet property="noteTitleTxt" destination="AYg-qQ-yrO" id="1OQ-Nf-9ul"/>
+                        <outlet property="topView" destination="RhR-ib-4x7" id="TvR-5Y-EDY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bQx-Dt-td7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="420" y="19"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="addIcon" width="44" height="44"/>
+        <image name="backButt" width="44" height="44"/>
+        <image name="logo" width="40" height="40"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="4em-ci-xx3"/>
+    </inferredMetricsTieBreakers>
+</document>
