@@ -1,0 +1,147 @@
+/* 
+  Localizable.strings
+  EverCam
+  
+  - ITALIAN -
+*/
+
+
+
+/* HOME VC */
+"Take a Picture" = "Scatta una foto";
+"Choose from Library" = "Scegli dalla Libreria";
+"Background image" = "Immagine di sfondo";
+
+
+/* SHARING VC */
+"Photo Library" = "Libreria foto";
+"Share Your Picture" = "Condividi la tua foto";
+"Mail" = "Email";
+"Hi there!" = "Ciao!";
+"Check out my picture, I've made it with #ProShot!" = "Guarda questa foto, l'ho fatta con #ProShot!";
+"Your Picture has been saved into Photo Library!" = "La tua foto è stata salvata nella Libreria!";
+"You picture has been saved into " = "La tua foto è stata salvata in ";
+" Album" = " Album";
+"Please go to Settings and link your Facebook account to this device!" = "Devi loggarti su Facebook dalle Impostazioni del tuo dispositivo!";
+"Please go to Settings and link your Twitter account to this device!" = "Devi loggarti su Twitter dalle Impostazioni del tuo dispositivo!";
+"Sharing Cancelled!" = "Condivisione annullata!";
+"Your picture is on Facebook!" = "La tua foto è su Facebook!";
+"Your picture is on Twitter!" = "La tua foto è su Twitter!";
+"Email Cancelled!" = "Email annullata";
+"Email Saved!" = "Email salvata!";
+"Email Sent!" = "Email inviata!";
+"Email error, try again!" = "Errore nell'invio, prova ancora";
+"Instagram not found" = "Instagram non trovato";
+"Please install Instagram on your device!" = "Installa Instagram sul tuo dispositivo!";
+"PIQUK not found" = "PIQUK non trovato";
+"Please install PIQUK on your device!" = "Installa PIQUK sul tuo dispositivo";
+"WhatsApp not found" = "WhatsApp non trovato";
+"Please install WhatsApp on your device!" = "Installa WhatsApp sul tuo dispositivo!";
+
+/* IAP CONTROLLER */
+"EverCam Premium" = "EverCam Premium";
+"Get Premium Now" = "Sblocca Premium";
+"OK" = "Ok";
+"iTunes Store connection failed, try again!" = "La connessione ad iTunes Store è fallita. Riprova più tardi";
+"There are no valid products available, try again!" = "Non ci sono prodotti validi. Riprova più tardi";
+"Purchase successful!" = "Il tuo acquisto è andato a buon fine!";
+"Enjoy EverCam Premium!" = "Divertiti con EverCam Premium!";
+"Purchase has failed, sorry. Try again later!" = "Il tuo acquisto è fallito. Riprova più tardi";
+
+
+/* SETTINGS VC */
+"Settings" = "Impostazioni";
+"Save Original Photo" = "Salva Photo originale";
+"Save to EverCam Album" = "Salva in EverCam Album";
+"Rate Us" = "Votaci";
+"Tell A Friend" = "Dillo ad un amico";
+"Send feedback" = "Inviaci un feedback";
+"About" = "Informazioni";
+"Like Us on Facebook" = "Like su Facebook";
+"Awesome new photo app" = "Splendida nuova app fotografica";
+"I really enjoy this app. It makes me feel like a professional photographer, I think you may love it! Check it out: " = "Questa app mi diverte un sacco. Mi fa sentire come un fotografo professionale, penso che ti potrebbe piacere! Guarda qui: ";
+"Please describe  your issues/suggestions below:" = "Descrivi problemi e/o suggerimenti qui sotto:";
+
+
+/* CAMERA CONTROLLER */
+"RETAKE" = "ANNULLA";
+"NEXT" = "AVANTI";
+
+
+/* IMAGE EDITOR */
+"ImageEditor_OKBtnTitle" = "Ok";
+"ImageEditor_BackBtnTitle" = "Annulla";
+
+
+/* IMAGE TOOLS */
+"BrightnessTool" = "Luminosità";
+"ExposureTool" = "Esposizione";
+"ContrastTool" = "Contrasto";
+"SaturationTool" = "Saturazione";
+"FilterTool" = "Filtri";
+"FramesTool" = "Bordi";
+"ClippingTool" = "Ritaglia";
+"ToneCurveTool" = "Curve";
+"StickerTool" = "Adesivi";
+"BordersTool" = "Sfondi";
+"TexturesTool" = "Texture";
+"DrawingTool" = "Disegno";
+"SplashTool" = "Splash";
+
+"BlurEffect_MenuItemNormal" = "Normale";
+"BlurEffect_MenuItemCircle" = "Cerchio";
+"BlurEffect_MenuItemBand" = "Banda";
+
+
+
+// TextTool
+"TextTool" = "Testo";
+"TextTool_MenuItemNew" = "Aggiungi";
+"TextTool_MenuItemColor" = "Colore";
+"TextTool_MenuItemFont" = "Font";
+"TextTool_MenuItemAlignLeft" = "Sinistra";
+"TextTool_MenuItemAlignCenter" = "Centro";
+"TextTool_MenuItemAlignRight" = "Destra";
+
+// FilterTool
+"EmptyFilter" = "Originale";
+"LinearFilter" = "Lineare";
+"VignetteFilter" = "Vignetta";
+"InstantFilter" = "Istantaneo";
+"ProcessFilter" = "Processo";
+"TransferFilter" = "Transfer";
+"SepiaFilter" = "Seppia";
+"ChromeFilter" = "Cromato";
+"FadeFilter" = "Fade";
+"CurveFilter" = "Curve";
+"TonalFilter" = "Tono";
+"NoirFilter" = "Noir";
+"MonoFilter" = "Mono";
+"InvertFilter" = "Inverti";
+"DottedFilter" = "Punti";
+"PurpleizedFilter" = "Viola";
+"LusterFilter" = "Lusso";
+"SharpenFilter" = "Brillante";
+
+// ColorizeTool
+"ColorizeEmptyFilter" = "Originale";
+
+
+// EffectTool
+"BloomEffect" = "Bloom";
+"BlurTool" = "Sfoca";
+"ColorizeTool" = "Colora";
+"EffectTool" = "Effetti";
+"EffectBase" = "Originale";
+"SpotEffect" = "Spot";
+"HueEffect" = "Ricolora";
+"HighlightSadowEffect" = "Lucentezza";
+"BloomEffect" = "Sboccia";
+"GloomEffect" = "Buio";
+"PosterizeEffect" = "Poster";
+"PixellateEffect" = "Pixel";
+"BumpEffect" = "Rilievo";
+"SplashEffect" = "Splash";
+"PinchEffect" = "Stringi";
+
+
