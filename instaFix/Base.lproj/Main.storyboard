@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="1ud-ts-efx">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Mf Delicate Little Flower.ttf">
+            <string>MfDelicateLittleFlower</string>
+            <string>MfDelicateLittleFlower</string>
+            <string>MfDelicateLittleFlower</string>
+            <string>MfDelicateLittleFlower</string>
+            <string>MfDelicateLittleFlower</string>
+        </mutableArray>
+        <mutableArray key="WHATRG__.ttf">
+            <string>Whattimeisit</string>
+            <string>Whattimeisit</string>
+            <string>Whattimeisit</string>
+        </mutableArray>
+    </customFonts>
+    <scenes>
+        <!--Image Editor-->
+        <scene sceneID="Vqn-ri-2ew">
+            <objects>
+                <viewController storyboardIdentifier="ImageEditor" id="a5S-cX-DfT" customClass="ImageEditor" customModule="instaFixx" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WOO-FQ-Jsi">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="Bib-vr-pvX" userLabel="backButt">
+                                <rect key="frame" x="8" y="2" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" backgroundImage="backButt">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButt:" destination="a5S-cX-DfT" eventType="touchUpInside" id="ofF-X6-CVd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="CRy-A3-Jil" userLabel="saveToLibraryButt">
+                                <rect key="frame" x="220" y="2" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                <state key="normal" backgroundImage="shareButt">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="shareButt:" destination="a5S-cX-DfT" eventType="touchUpInside" id="sxW-e0-Pv7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="JTB-WP-Mpe" userLabel="instagramButt">
+                                <rect key="frame" x="268" y="2" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                <state key="normal" backgroundImage="instagramButt">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="instagramButt:" destination="a5S-cX-DfT" eventType="touchUpInside" id="q1A-UB-XzS"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="instaFixx" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rpx-2M-G5q" userLabel="instaFixx">
+                                <rect key="frame" x="111" y="0.0" width="98" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="MfDelicateLittleFlower" family="Mf Delicate Little Flower" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" id="4bZ-kI-0YU" userLabel="containerView">
+                                <rect key="frame" x="0.0" y="44" width="320" height="320"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1.png" id="ze2-lU-DeP" userLabel="borderImage">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sample.png" id="fWB-5t-pTC" userLabel="originalImage">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="dAm-TN-drq" userLabel="filteredImageView">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" id="bcO-QP-Rfu" userLabel="filteredImageScrollView">
+                                <rect key="frame" x="0.0" y="44" width="320" height="320"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="a5S-cX-DfT" id="d5u-2S-Shb"/>
+                                </connections>
+                            </scrollView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" defersCurrentPageDisplay="YES" numberOfPages="3" id="dlh-kk-saj" userLabel="pageFilter">
+                                <rect key="frame" x="135" y="336" width="50" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="pageIndicatorTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="currentPageIndicatorTintColor" red="1" green="0.97762814080000005" blue="0.2457176086" alpha="1" colorSpace="calibratedRGB"/>
+                            </pageControl>
+                            <view contentMode="scaleToFill" id="q9H-MS-FwC" userLabel="toolbarView">
+                                <rect key="frame" x="0.0" y="366" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QnL-NQ-peP">
+                                        <rect key="frame" x="8" y="2" width="40" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Whattimeisit" family="What time is it?" pointSize="11"/>
+                                        <size key="titleShadowOffset" width="1" height="1"/>
+                                        <state key="normal" title="COLOR" backgroundImage="filterPack1Butt">
+                                            <color key="titleShadowColor" red="0.064729324490000004" green="0.064729324490000004" blue="0.064729324490000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="filterPackButt1:" destination="a5S-cX-DfT" eventType="touchUpInside" id="Ufc-OZ-vLH"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ztb-2k-yTR">
+                                        <rect key="frame" x="60" y="2" width="40" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Whattimeisit" family="What time is it?" pointSize="11"/>
+                                        <size key="titleShadowOffset" width="1" height="1"/>
+                                        <state key="normal" title="CLASSIC" backgroundImage="filterPack2Butt">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" red="0.064729324490000004" green="0.064729324490000004" blue="0.064729324490000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="filterPackButt2:" destination="a5S-cX-DfT" eventType="touchUpInside" id="m4N-ec-2sT"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TJA-iY-Yps">
+                                        <rect key="frame" x="112" y="2" width="40" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Whattimeisit" family="What time is it?" pointSize="11"/>
+                                        <size key="titleShadowOffset" width="1" height="1"/>
+                                        <state key="normal" title="B&amp;W" backgroundImage="filterPack3Butt">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" red="0.064729324490000004" green="0.064729324490000004" blue="0.064729324490000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="filterPackButt3:" destination="a5S-cX-DfT" eventType="touchUpInside" id="nx5-MS-Irt"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="o3X-Dd-Stw" userLabel="bordersButt">
+                                        <rect key="frame" x="268" y="0.0" width="44" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" backgroundImage="bordersButt">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="bordersButt:" destination="a5S-cX-DfT" eventType="touchUpInside" id="IdM-RA-4Pv"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mvO-RX-vL9" userLabel="moveScaleButt">
+                                        <rect key="frame" x="216" y="0.0" width="44" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" backgroundImage="moveScaleButt">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="moveScaleButt:" destination="a5S-cX-DfT" eventType="touchUpInside" id="FFo-wn-Gob"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </view>
+                            <view contentMode="scaleToFill" id="G2d-Wa-p88" userLabel="bordersContainerView">
+                                <rect key="frame" x="320" y="366" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="bKY-Xf-qVv" userLabel="bordersScrollView">
+                                        <rect key="frame" x="0.0" y="0.0" width="256" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </scrollView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="HYO-N0-g3u" userLabel="closeBordersButt">
+                                        <rect key="frame" x="268" y="0.0" width="44" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" backgroundImage="closeBordersButt">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="closeBordersButt:" destination="a5S-cX-DfT" eventType="touchUpInside" id="OGF-Xf-6p9"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.12972621149999999" green="0.1517211342" blue="0.1812372622" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.064729324490000004" green="0.064729324490000004" blue="0.064729324490000004" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="borderImage" destination="ze2-lU-DeP" id="749-zV-Dqn"/>
+                        <outlet property="bordersContainerView" destination="G2d-Wa-p88" id="mYY-o0-xAW"/>
+                        <outlet property="bordersScrollView" destination="bKY-Xf-qVv" id="sNI-mI-hnI"/>
+                        <outlet property="containerView" destination="4bZ-kI-0YU" id="Top-hP-plj"/>
+                        <outlet property="filterPackOut1" destination="QnL-NQ-peP" id="n9w-94-DvU"/>
+                        <outlet property="filterPackOut2" destination="ztb-2k-yTR" id="ctb-HD-rco"/>
+                        <outlet property="filterPackOut3" destination="TJA-iY-Yps" id="2z6-ss-6iG"/>
+                        <outlet property="filteredImage" destination="dAm-TN-drq" id="CM2-az-HZH"/>
+                        <outlet property="filteredImagesScrollView" destination="bcO-QP-Rfu" id="WMh-se-INx"/>
+                        <outlet property="moveScaleOutlet" destination="mvO-RX-vL9" id="6DM-g6-UWc"/>
+                        <outlet property="originalImage" destination="fWB-5t-pTC" id="fUu-ay-eOL"/>
+                        <outlet property="pageFilter" destination="dlh-kk-saj" id="veo-3X-XZI"/>
+                        <outlet property="toolbarView" destination="q9H-MS-FwC" id="miG-dx-tso"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3md-kX-qHr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="280" y="528"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="uho-7M-ZRC">
+            <objects>
+                <viewController storyboardIdentifier="MainScreen" id="CJC-K1-4qV" customClass="Home" customModule="instaFixx" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NJE-cY-7EY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkg0" id="ylh-d2-HHf" userLabel="bkg">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" id="BtV-eI-8uZ">
+                                <rect key="frame" x="110" y="62" width="100" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="instaFixx" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="F7k-hz-pAp">
+                                <rect key="frame" x="58" y="169" width="204" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="MfDelicateLittleFlower" family="Mf Delicate Little Flower" pointSize="41"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="87L-lX-9eU" userLabel="myImage">
+                                <rect key="frame" x="0.0" y="450" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yzq-ry-jCs" userLabel="cameraButt">
+                                <rect key="frame" x="30" y="285" width="260" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.064729324494949503" green="0.064729324494949503" blue="0.064729324494949503" alpha="0.83855046452702697" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="MfDelicateLittleFlower" family="Mf Delicate Little Flower" pointSize="20"/>
+                                <state key="normal" title="Take a Picture">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cameraButt:" destination="CJC-K1-4qV" eventType="touchUpInside" id="ePK-y6-fVU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="fZy-gd-MJ0" userLabel="photoLibraryButt">
+                                <rect key="frame" x="30" y="343" width="260" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.064729324494949503" green="0.064729324494949503" blue="0.064729324494949503" alpha="0.83855046452702697" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="MfDelicateLittleFlower" family="Mf Delicate Little Flower" pointSize="20"/>
+                                <state key="normal" title="Photo Library">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="libraryButt:" destination="CJC-K1-4qV" eventType="touchUpInside" id="29h-jw-c18"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" text="You're a tap away from getting your pictures ready for Instargram" textAlignment="center" selectable="NO" id="Dpb-Y8-j4m">
+                                <rect key="frame" x="40" y="220" width="240" height="55"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="MfDelicateLittleFlower" family="Mf Delicate Little Flower" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="4G7-0B-pLI"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="bkgImage" destination="ylh-d2-HHf" id="xAA-ff-5UK"/>
+                        <outlet property="camOutlet" destination="yzq-ry-jCs" id="t7x-2G-WMl"/>
+                        <outlet property="libraryOutlet" destination="fZy-gd-MJ0" id="XbK-YL-XoQ"/>
+                        <outlet property="logoImage" destination="BtV-eI-8uZ" id="ZJx-vt-PK7"/>
+                        <outlet property="myImage" destination="87L-lX-9eU" id="etm-FR-2Jg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mlL-y6-CQD" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-71" y="528"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="s3H-vo-3ZT">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="1ud-ts-efx" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PVA-QI-DhF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="CJC-K1-4qV" kind="relationship" relationship="rootViewController" id="yuu-Ky-sQj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qD8-TF-h2B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-71" y="-3"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="1.png" width="640" height="640"/>
+        <image name="backButt" width="44" height="44"/>
+        <image name="bkg0" width="375" height="667"/>
+        <image name="bordersButt" width="44" height="44"/>
+        <image name="closeBordersButt" width="44" height="44"/>
+        <image name="filterPack1Butt" width="44" height="44"/>
+        <image name="filterPack2Butt" width="44" height="44"/>
+        <image name="filterPack3Butt" width="44" height="44"/>
+        <image name="instagramButt" width="44" height="44"/>
+        <image name="logo" width="100" height="100"/>
+        <image name="moveScaleButt" width="44" height="44"/>
+        <image name="sample.png" width="640" height="640"/>
+        <image name="shareButt" width="44" height="44"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>
