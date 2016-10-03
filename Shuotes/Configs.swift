@@ -37,15 +37,15 @@ var filtersArray = [
 
 
 // HUD View (Customizable)
-let hudView = UIView(frame: CGRectMake(0, 0, 80, 80))
-let indicatorView = UIActivityIndicatorView(frame: CGRectMake(0, 0, 80, 80))
+let hudView = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+let indicatorView = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
 extension UIView {
     func showHUD(view: UIView) {
         hudView.center = CGPointMake(view.frame.size.width/2, view.frame.size.height/2)
         hudView.backgroundColor = UIColor.darkGrayColor()
         hudView.alpha = 0.9
         hudView.layer.cornerRadius = hudView.bounds.size.width/2
-        
+
         indicatorView.center = CGPointMake(hudView.frame.size.width/2, hudView.frame.size.height/2)
         indicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.White
         hudView.addSubview(indicatorView)
@@ -58,7 +58,7 @@ extension UIView {
 
 
 /* VARIABLES TO BE EDITED */
-let ADMOB_BANNER_UNIT_ID = "ca-app-pub-9733347540588953/7377738021"
+let ADMOB_BANNER_UNIT_ID = "ca-app-pub-3218409375181552/9266736629"
 
 
 // Edit the red string below accordinglu to the new name you'll give to this app before publishing it to the App Store
@@ -78,11 +78,3 @@ let aqua = UIColor(red: 35.0/255.0, green: 160.0/255.0, blue: 241.0/255.0, alpha
 
 // SHARING MESSAGE (Edit the red string below as you wish)
 let SHARING_MESSAGE = "Hey, check out my picture | made with #\(APP_NAME)"
-
-
-
-
-
-
-
-
