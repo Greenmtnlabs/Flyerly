@@ -822,7 +822,7 @@ func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
 // MARK: - AdMob BANNERS
     func initAdMobBanner() {
         adMobBannerView.adSize =  GADAdSizeFromCGSize(CGSizeMake(320, 50))
-        adMobBannerView.frame = CGRectMake(0, view.frame.size.height, 320, 50)
+        adMobBannerView.frame = CGRectMake(0, view.frame.size.height, view.frame.size.width, 50)
         adMobBannerView.adUnitID = ADMOB_UNIT_ID
         adMobBannerView.rootViewController = self
         adMobBannerView.delegate = self
