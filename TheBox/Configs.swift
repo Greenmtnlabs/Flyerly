@@ -18,7 +18,7 @@ import AVFoundation
 let APP_NAME = "The Box"
 
 
-let ADMOB_UNIT_ID = "ca-app-pub-9733347540588953/8497036821"
+let ADMOB_UNIT_ID = "ca-app-pub-3218409375181552/7929604228"
 
 
 var audioPlayer = AVAudioPlayer()
