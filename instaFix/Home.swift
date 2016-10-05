@@ -11,7 +11,7 @@ import UIKit
 
 /* GLOBAL VARIABLES */
 var cameraPic = Bool()
-let ADMOB_UNIT_ID = "ca-app-pub-9733347540588953/6145924825"
+let ADMOB_UNIT_ID = "ca-app-pub-3218409375181552/4113023427"
 
 
 
