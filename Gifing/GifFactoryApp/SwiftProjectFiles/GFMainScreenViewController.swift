@@ -76,9 +76,9 @@ class GFMainScreenViewController: UIViewController, GFBackgroundAlertDismissing 
 //  private let kInterstitialAdUnitId = "ca-app-pub-3940256099942544/4411468910"
     
     
-    private let kBannerAdUnitId = "ca-app-pub-5395321550360079/8815856743"
+    private let kBannerAdUnitId = "ca-app-pub-3218409375181552/3080602226"
     /// The AdMob interstitial ad unit id.
-    private let kInterstitialAdUnitId = "ca-app-pub-5395321550360079/1292589942"
+    private let kInterstitialAdUnitId = "ca-app-pub-3218409375181552/3080602226"
 
     
     
