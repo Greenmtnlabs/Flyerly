@@ -1,0 +1,6 @@
+framework module VideoTrimmerView {
+  umbrella header "VideoTrimmerView-umbrella.h"
+
+  export *
+  module * { export * }
+}

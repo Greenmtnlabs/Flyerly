@@ -1,0 +1,11 @@
+output: api-docs
+clean: Yes
+xcodebuild_arguments: [-workspace,GifFactoryApp.xcworkspace,-scheme,GifFactoryApp,-destination,'platform=iOS Simulator,name=iPhone 6s Plus']
+swift_version: 2.2
+author: Storix
+author_url: 'http://codecanyon.net/user/storix'
+module: GifFactoryApp
+module_version: 1.0
+copyright: Created by Storix. Copyright © 2016 Storix. All rights reserved.
+min_acl: private
+skip_undocumented: Yes

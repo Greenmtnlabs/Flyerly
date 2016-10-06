@@ -1,0 +1,59 @@
+## Gif Factory App
+
+Gif Factory App is an iOS application that makes it possible to create animated GIFs with just a few taps. If you have some photos and/or videos that you want to turn into the GIF sequence, then try this app. It was specifically designed to make this process quick and easy.
+
+## Features
+
+* Create GIFs from saved Photos and Videos or combine the existing GIFs into the new ones;* Rearrange the frames of your GIFs;* Control the animation parameters such as: dimensions, frame delay, loop count, content mode etc;* Preview GIFs from the Photos App Library;* Save the resulting GIFs to the App Documents folder or directly to the Photos App Library;* Share the GIF using any app extensions installed on your device (such as Facebook or Twitter);* Share your GIF files via email, MMS, and Clipboard;* Lazy GIF loading to reduce the device memory usage;* Support iOS 8 & 9, iPhone & iPad.
+
+## Compilation/Installation
+
+ The main file you use to open the project in Xcode is GifFactoryApp.xcworkspace. 
+
+Gif Factory App comprises different pods that can be installed through the CocoaPods dependency manager before compilation using the following commands:
+
+```bash
+cd /GifFactoryApp/Root/Folder
+pod install
+```
+By default, all the necessary pods are pre-installed for you convenience. Typically, you will use the `pod` command in cases when you want to update some pod to the newer version.
+
+It also includes the privately developed pod named `VideoTrimmerView`. The source code of this pod is available in the VideoTrimmerView folder. To integrate it with the Gif Factory App you should firstly create your own Specs repository and include the reference to it in Podfile which is located in the Gif Factory App root folder. More info about this process you can find at this link  [Private Pods](https://guides.cocoapods.org/making/private-cocoapods.html).
+
+## Customization
+
+The main customization code is located in GFGifFactoryAppDelegate.swift file in `application(_:,didFinishLaunchingWithOptions:)` method. You can customize different UI elements using the appropriate `UIAppearance` proxy object. For example, here is how the `UINavigationBar` can be customized: 
+
+```swift
+UINavigationBar.appearance().backIndicatorImage = backButtonImage
+    UINavigationBar.appearance().backIndicatorTransitionMaskImage = backButtonImage
+    UINavigationBar.appearance().barStyle = .Black
+    UINavigationBar.appearance().barTintColor = kGlobalTintColor
+    UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+```
+For your convenience the struct with 140 color names supported by the all modern browsers is provided in `Colors.swift` file. 
+
+Also you can find some useful properties declared in `Constants.swift`file. 
+
+## Logging
+
+This project uses the XCGLogger to provide the advanced logging features. The logger parameter are configured in XCGLoggerHelper.swift. 
+
+There are several predefined log levels that can be activated as per your preference. For example, if you pass .Debug to `log.setup` method the `Verbose` messages won't be shown and `Info`, `Warning`, `Error`, `Severe` messages will be enabled.
+
+## Requirements
+
+Gif Factory App requires the iOS 8.1+, Swift 2.2+, Xcode 7.3.1+, CocoaPods 1.0.1+. 
+
+## Author
+
+Stan Mots (Storix), stuffokator@gmail.com
+
+## Credits
+
+- Dave Wood for [XCGLogger Library](https://github.com/DaveWoodCom/XCGLogger);
+- Yaoyuan for [YYWebImage Library](https://github.com/ibireme/YYWebImage);
+- Ryo Aoyama for [RAReorderableLayout](https://github.com/ra1028/RAReorderableLayout);
+- Clement T for [CTAssetsPickerController](https://github.com/chiunam/CTAssetsPickerController);
+- [Sam Vermette](http://samvermette.com), [Tobias Tiemerding](http://tiemerding.com) and [contributors](https://github.com/SVProgressHUD/SVProgressHUD/contributors) to [SVProgressHUD](https://github.com/SVProgressHUD/SVProgressHUD);
+

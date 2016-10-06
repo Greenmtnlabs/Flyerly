@@ -1,0 +1,105 @@
+## VideoTrimmerView - flexible and highly customizable video trimming tool
+
+VideoTrimmerView is a `UIView` subclass that provides controls by means of which it is easy to select the time range for the video file trimming. It is possible to change the scale of the video timeline to make the selection process more comfortable for the large video files. On rotation the video trimmer timeline frames are reloaded to better fit the new available screen space.
+
+It is implemented as a separate module so that it can be easily integrated into the any existing project.
+
+
+## Features
+
+* Double-sided slider to simplify the time range selection;
+* Automatically updated time range labels;
+* The video timeline can be scaled to provide better experience for different video durations;
+* Offscreen timeline frames cache management;
+* Portrait and landscape modes are supported;
+* Highly customizable;
+* Written in Swift 2.2.
+
+## Installation
+
+VideoTrimmerView is available through [CocoaPods](http://cocoapods.org). To install
+it, simply add the following line to your Podfile:
+
+```ruby
+pod "VideoTrimmerView"
+```
+
+## Demo
+
+To run the Demo project, clone the repo, and run `pod install` from the Demo directory first. Then double-click on VideoTrimmerView.xcworkspace.
+
+## Usage
+
+VideoTrimmerView can be instantiated either programatically or with the help of storyboard. By default, the left and right trimmer sliders are disabled so that you cannot drag them. At this point only the timeline scale mode can be changed preserving the choice for the future video file.
+
+As an example, consider VideoTrimmerVie should be configured programatically. You can achieve this in the following way:
+
+```swift
+// Don't forget to import the VideoTrimmerView module
+import VideoTrimmerView
+
+// Creare an instance of VideoTrimmerView
+let trimmerView = VideoTrimmerView(frame: CGRectMake(0, 0, 200, 200))
+
+// Set the maximum allowed duration to trim the video
+trimmerView.maxTime = 40.0
+
+// Set the closure that will be called on timeline taps
+trimmerView.timelineTapHandler = {
+      [weak self] collectionView, indexPath in
+      // Provide your implementation here...
+    }
+
+// Set the desired timeline scale
+trimmerView.maxTime.timelineZoomScale = TrimmerZoomScale.Zoom32x
+
+// Set the visible frames count (on rotation the frames will be resized but the count will remain the same)
+trimmerView.visibleFramesCount = 4
+
+// Set the delegate to get notified about the trimming time changes
+trimmerView.delegate = self
+
+// Set the appropriate `AVPlayerItem` that must be in `ReadyToPlay` state.
+trimmerView.playerItem = selectedPlayerItem
+```
+
+The VideoTrimmerViewDelegate can be implemented like this:
+
+```swift
+extension YourClass: VideoTrimmerViewDelegate {
+	func trimmerView(trimmerView: VideoTrimmerView, didChangeStartTime newStartTime: CGFloat, andEndTime newEndTime: CGFloat) {
+	// Your implementation here...
+  }
+}
+```
+
+## Customization
+
+VideoTrimmerView has a lot of customization options. You can access them through a `trimmerAppearance` static property. For example, some appearance related properties can be modified as depicted in the following code snippet:
+
+```swift
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        // Override point for customization after application launch.
+        VideoTrimmerView.trimmerAppearance.setTrimmerSlidersWidth(40.0)
+        VideoTrimmerView.trimmerAppearance.setTrimmerSlidersHeightOffset(20.0)
+        VideoTrimmerView.trimmerAppearance.setTrimmerSlidersBackgroundColor(UIColor.greenColor())
+        VideoTrimmerView.trimmerAppearance.setTrimmerSlidersTintColor(UIColor.redColor())
+        VideoTrimmerView.trimmerAppearance.setDashboardBorderColor(UIColor.orangeColor())
+        return true
+    }
+```
+
+After changing appearance properties they will be preserved for all the next VideoTrimmerView instantiated objects.
+
+## Requirements
+
+VideoTrimmerView requires the iOS 8.0 and above and Xcode 7+. 
+
+## Author
+
+Stan Mots (Storix), stuffokator@gmail.com
+
+## License
+
+VideoTrimmerView is available under the MIT license. See the LICENSE file for more info.
+

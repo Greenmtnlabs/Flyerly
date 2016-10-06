@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>GFEmbeddedAnimationSettingsTableViewController Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/GFEmbeddedAnimationSettingsTableViewController" class="dashAnchor"></a>
+    <a title="GFEmbeddedAnimationSettingsTableViewController Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">GifFactoryApp Docs</a> (54% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">GifFactoryApp Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        GFEmbeddedAnimationSettingsTableViewController Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/GFAnimationPreviewViewController.html">GFAnimationPreviewViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFAnimationSettingsManager.html">GFAnimationSettingsManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFAnimationSettingsViewController.html">GFAnimationSettingsViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFCollectionViewBaseCell.html">GFCollectionViewBaseCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:C13GifFactoryApp12GFEditorCell">GFEditorCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFEditorViewController.html">GFEditorViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFEmbeddedAnimationSettingsTableViewController.html">GFEmbeddedAnimationSettingsTableViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFFoldAnimationController.html">GFFoldAnimationController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFFramesExtractorViewController.html">GFFramesExtractorViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFGifAsset.html">GFGifAsset</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFGifFrame.html">GFGifFrame</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFGifPreviewCell.html">GFGifPreviewCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFGifRequestInfo.html">GFGifRequestInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFHorizontalSwipeInteractionController.html">GFHorizontalSwipeInteractionController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFInsetsLabel.html">GFInsetsLabel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFMainScreenCell.html">GFMainScreenCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFMainScreenViewController.html">GFMainScreenViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFPlayerView.html">GFPlayerView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFResizablePresentationController.html">GFResizablePresentationController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFSettingsControllerTransitioningDelegate.html">GFSettingsControllerTransitioningDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFSlideAnimationController.html">GFSlideAnimationController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFVerticalSwipeInteractionController.html">GFVerticalSwipeInteractionController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFVideoAsset.html">GFVideoAsset</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Global Variables.html">Global Variables</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryApp34GFDiskReadTaskFinishedNotificationSS">GFDiskReadTaskFinishedNotification</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryApp40GFGifWasRemovedFromDocumentsNotificationSS">GFGifWasRemovedFromDocumentsNotification</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryApp36GFGifWasSavedToDocumentsNotificationSS">GFGifWasSavedToDocumentsNotification</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryAppP33_3A83AAA380232B96BD834A131C1E821426currentReadingFromDiskURLsGVs3SetSS_">currentReadingFromDiskURLs</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryAppP33_2473A987EA2E56BDD3F266EF1BA7893D13dateFormatterCSo15NSDateFormatter">dateFormatter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryAppP33_A49B512BA6A785A3683AE1555C35BC0E35framesExtractorControllerKVOContextSi">framesExtractorControllerKVOContext</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryAppP33_947AB853F2E6F18F697991A433C6B8A825kConvertFramesErrorDomainSS">kConvertFramesErrorDomain</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryAppP33_947AB853F2E6F18F697991A433C6B8A832kCriticalSectionSerialQueueLabelSS">kCriticalSectionSerialQueueLabel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryApp18kGFGifAssetInfoKeySS">kGFGifAssetInfoKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryApp20kGFGifRequestInfoKeySS">kGFGifRequestInfoKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryApp16kGlobalTintColorCSo7UIColor">kGlobalTintColor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryAppP33_3A83AAA380232B96BD834A131C1E821433kIncrementallyReadFileErrorDomainSS">kIncrementallyReadFileErrorDomain</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryApp17kMaximumGifHeightSi">kMaximumGifHeight</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryApp16kMaximumGifWidthSi">kMaximumGifWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryAppP33_3A83AAA380232B96BD834A131C1E821437kRequestAnimationFromCacheErrorDomainSS">kRequestAnimationFromCacheErrorDomain</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryAppP33_3A83AAA380232B96BD834A131C1E821434kRequestImagesFromCacheErrorDomainSS">kRequestImagesFromCacheErrorDomain</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryAppP33_3A83AAA380232B96BD834A131C1E821429kRequestIndexPathsErrorDomainSS">kRequestIndexPathsErrorDomain</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryAppP33_C480F7087836B648C4F196388E5C8D5127kSetImageInCacheErrorDomainSS">kSetImageInCacheErrorDomain</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryApp38kSettingsControllerCompactContentWidthV12CoreGraphics7CGFloat">kSettingsControllerCompactContentWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryApp39kSettingsControllerRegulartContentWidthV12CoreGraphics7CGFloat">kSettingsControllerRegulartContentWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryApp3logC9XCGLogger9XCGLogger">log</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryAppP33_E718EF16DEE77553432E0449501125FE15mainCellContextSi">mainCellContext</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryAppP33_F060E4990F468A5AFE9B6D158CC60FF218previewCellContextSi">previewCellContext</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryAppP33_A49B512BA6A785A3683AE1555C35BC0E15progressMessageSS">progressMessage</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/GFCacheRequestState.html">GFCacheRequestState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/GFGifFrameSourceType.html">GFGifFrameSourceType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/GFInteractionOperation.html">GFInteractionOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums.html#/s:O13GifFactoryApp18GFTableViewCellTag">GFTableViewCellTag</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums.html#/s:O13GifFactoryApp14GFTextFieldTag">GFTextFieldTag</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums.html#/s:O13GifFactoryApp13GFURLDateType">GFURLDateType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/CALayer.html">CALayer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Double.html">Double</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/GADBannerView.html">GADBannerView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UICollectionView.html">UICollectionView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIImage.html">UIImage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIToolbar.html">UIToolbar</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/YYImageCache.html">YYImageCache</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/GFAnimationControllerReversible.html">GFAnimationControllerReversible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/GFAnimationPreviewDelegate.html">GFAnimationPreviewDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/GFBackgroundAlertDismissing.html">GFBackgroundAlertDismissing</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/GFInteractionControllerWireable.html">GFInteractionControllerWireable</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:V13GifFactoryApp6Colors">Colors</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>GFEmbeddedAnimationSettingsTableViewController</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">class</span> <span class="kt">GFEmbeddedAnimationSettingsTableViewController</span><span class="p">:</span> <span class="kt">UITableViewController</span><span class="p">,</span> <span class="kt">GFBackgroundAlertDismissing</span></code></pre>
+
+                </div>
+              </div>
+            <p>The table view controller that is embedded in the main animation settings controller. It manages the animation settings the user can set and store as defaults.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Properties"></a>
+                <a name="//apple_ref/swift/Section/Properties" class="dashAnchor"></a>
+                <a href="#/Properties">
+                  <h3 class="section-name">Properties</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController27gf_presentingViewControllerGSqCS_33GFAnimationSettingsViewController_"></a>
+                    <a name="//apple_ref/swift/Property/gf_presentingViewController" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController27gf_presentingViewControllerGSqCS_33GFAnimationSettingsViewController_">gf_presentingViewController</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The view controller that presented this view controller.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">gf_presentingViewController</span><span class="p">:</span> <span class="kt">GFAnimationSettingsViewController</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController14isDisappearingSb"></a>
+                    <a name="//apple_ref/swift/Property/isDisappearing" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController14isDisappearingSb">isDisappearing</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Indicates whether the view is being dismissed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">isDisappearing</span> <span class="o">=</span> <span class="kc">false</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/IBActions"></a>
+                <a name="//apple_ref/swift/Section/IBActions" class="dashAnchor"></a>
+                <a href="#/IBActions">
+                  <h3 class="section-name">IBActions</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController23widthSliderValueChangedFPs9AnyObject_T_"></a>
+                    <a name="//apple_ref/swift/Method/widthSliderValueChanged(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController23widthSliderValueChangedFPs9AnyObject_T_">widthSliderValueChanged(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>It is called when the slider value which determines the GIF width has been changed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@IBAction</span> <span class="kd">func</span> <span class="nf">widthSliderValueChanged</span><span class="p">(</span><span class="nv">sender</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController25widthSliderDidEndDraggingFPs9AnyObject_T_"></a>
+                    <a name="//apple_ref/swift/Method/widthSliderDidEndDragging(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController25widthSliderDidEndDraggingFPs9AnyObject_T_">widthSliderDidEndDragging(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>It is called when the user has stopped dragging the slider that controls the GIF width value.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@IBAction</span> <span class="kd">func</span> <span class="nf">widthSliderDidEndDragging</span><span class="p">(</span><span class="nv">sender</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController24heightSliderValueChangedFPs9AnyObject_T_"></a>
+                    <a name="//apple_ref/swift/Method/heightSliderValueChanged(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController24heightSliderValueChangedFPs9AnyObject_T_">heightSliderValueChanged(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>It is called when the slider value which determines the GIF height has been changed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@IBAction</span> <span class="kd">func</span> <span class="nf">heightSliderValueChanged</span><span class="p">(</span><span class="nv">sender</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController26heightSliderDidEndDraggingFPs9AnyObject_T_"></a>
+                    <a name="//apple_ref/swift/Method/heightSliderDidEndDragging(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController26heightSliderDidEndDraggingFPs9AnyObject_T_">heightSliderDidEndDragging(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>It is called when the user has stopped dragging the slider that controls the GIF height value.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@IBAction</span> <span class="kd">func</span> <span class="nf">heightSliderDidEndDragging</span><span class="p">(</span><span class="nv">sender</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController29frameDelayStepperValueChangedFPs9AnyObject_T_"></a>
+                    <a name="//apple_ref/swift/Method/frameDelayStepperValueChanged(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController29frameDelayStepperValueChangedFPs9AnyObject_T_">frameDelayStepperValueChanged(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>It is called when the stepper value which determines the GIF frame delay time has been changed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@IBAction</span> <span class="kd">func</span> <span class="nf">frameDelayStepperValueChanged</span><span class="p">(</span><span class="nv">sender</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController28loopCountStepperValueChangedFPs9AnyObject_T_"></a>
+                    <a name="//apple_ref/swift/Method/loopCountStepperValueChanged(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController28loopCountStepperValueChangedFPs9AnyObject_T_">loopCountStepperValueChanged(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>It is called when the stepper value which determines the GIF loop count has been changed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@IBAction</span> <span class="kd">func</span> <span class="nf">loopCountStepperValueChanged</span><span class="p">(</span><span class="nv">sender</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController33preserveTransparencySwitchPressedFPs9AnyObject_T_"></a>
+                    <a name="//apple_ref/swift/Method/preserveTransparencySwitchPressed(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController33preserveTransparencySwitchPressedFPs9AnyObject_T_">preserveTransparencySwitchPressed(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>It is called when the switch controlling the GIF frame transparency setting has been pressed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@IBAction</span> <span class="kd">func</span> <span class="nf">preserveTransparencySwitchPressed</span><span class="p">(</span><span class="nv">sender</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController27croppingStepperValueChangedFPs9AnyObject_T_"></a>
+                    <a name="//apple_ref/swift/Method/croppingStepperValueChanged(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController27croppingStepperValueChangedFPs9AnyObject_T_">croppingStepperValueChanged(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>It is called when the stepper value which determines the cropping level has been changed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@IBAction</span> <span class="kd">func</span> <span class="nf">croppingStepperValueChanged</span><span class="p">(</span><span class="nv">sender</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Instance%20Methods"></a>
+                <a name="//apple_ref/swift/Section/Instance Methods" class="dashAnchor"></a>
+                <a href="#/Instance%20Methods">
+                  <h3 class="section-name">Instance Methods</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController15restoreSettingsFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/restoreSettings()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController15restoreSettingsFT_T_">restoreSettings()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Retrives the animation settings from the persistent storage.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">restoreSettings</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController19selectTableViewCellFT15withContentModeOSC18PHImageContentMode_T_"></a>
+                    <a name="//apple_ref/swift/Method/selectTableViewCell(withContentMode:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController19selectTableViewCellFT15withContentModeOSC18PHImageContentMode_T_">selectTableViewCell(withContentMode:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Selects the specified table view cell.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">selectTableViewCell</span><span class="p">(</span><span class="n">withContentMode</span> <span class="nv">contentMode</span><span class="p">:</span> <span class="kt">PHImageContentMode</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>contentMode</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Content mode that defines how GIF frames will be resized.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController23finalizeSettingsEditingFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/finalizeSettingsEditing()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController23finalizeSettingsEditingFT_T_">finalizeSettingsEditing()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Implements additional clean-up code to run after the animation settings were changed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">finalizeSettingsEditing</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController10checkInputFTSS9withRegexSS_Sb"></a>
+                    <a name="//apple_ref/swift/Method/checkInput(_:withRegex:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController10checkInputFTSS9withRegexSS_Sb">checkInput(_:withRegex:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Checks input digits for correctness.
+- parameter input: The input string for regular expression searching.
+- parameter regex: The regular expression that is used to check the string.
+- returns: Bool value indicating whether the given regex was found.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">checkInput</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">withRegex</span> <span class="nv">regex</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>input</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The input string for regular expression searching.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>regex</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The regular expression that is used to check the string.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Bool value indicating whether the given regex was found.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController24shouldChangeCurrentInputFTSS8toStringSS21withIntegralPartRegexSS19fractionalPartRegexSS23andResultingNumberRegexSS19replacementPositionSi25fractionDependsOnIntegralSb22decimalNumberSeparatorSS_Sb"></a>
+                    <a name="//apple_ref/swift/Method/shouldChangeCurrentInput(_:toString:withIntegralPartRegex:fractionalPartRegex:andResultingNumberRegex:replacementPosition:fractionDependsOnIntegral:decimalNumberSeparator:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController24shouldChangeCurrentInputFTSS8toStringSS21withIntegralPartRegexSS19fractionalPartRegexSS23andResultingNumberRegexSS19replacementPositionSi25fractionDependsOnIntegralSb22decimalNumberSeparatorSS_Sb">shouldChangeCurrentInput(_:toString:withIntegralPartRegex:fractionalPartRegex:andResultingNumberRegex:replacementPosition:fractionDependsOnIntegral:decimalNumberSeparator:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Indicateds whether the specified input value should be changed. The input value is considered to be a decimal number.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">shouldChangeCurrentInput</span><span class="p">(</span><span class="nv">currentInput</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">toString</span> <span class="nv">string</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">withIntegralPartRegex</span> <span class="nv">integralPartRegex</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">fractionalPartRegex</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">andResultingNumberRegex</span> <span class="nv">resultingNumberRegex</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">replacementPosition</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">fractionDependsOnIntegral</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="n">decimalNumberSeparator</span> <span class="nv">separator</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"."</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>currentInput</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The input string before inserting new characters.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>string</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The resulting string after replacement.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>integralPartRegex</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The regular expression that is used to check the integral part of the input decimal number.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fractionalPartRegex</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The regular expression that is used to check the fractional part of the input decimal number.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>resultingNumberRegex</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The regular expression that is used to check the resulting input value.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>replacementPosition</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A position where the new characters will be inserted.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>separator</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A symbol used to separate the integer part from the fractional part of a number written in decimal form..</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fractionDependsOnIntegral</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Indicates whether fractionalParteRegex or resultingNumberRegex should be applied to the resulting string.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Bool value indicating whether a text field should accept current replacement string.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController9tableViewFTCSo11UITableView15willDisplayCellCSo15UITableViewCell17forRowAtIndexPathCSo11NSIndexPath_T_"></a>
+                    <a name="//apple_ref/swift/Method/tableView(_:willDisplayCell:forRowAtIndexPath:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp46GFEmbeddedAnimationSettingsTableViewController9tableViewFTCSo11UITableView15willDisplayCellCSo15UITableViewCell17forRowAtIndexPathCSo11NSIndexPath_T_">tableView(_:willDisplayCell:forRowAtIndexPath:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Correctly configures properties of the static cells.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">,</span> <span class="n">willDisplayCell</span> <span class="nv">cell</span><span class="p">:</span> <span class="kt">UITableViewCell</span><span class="p">,</span>
+                          <span class="n">forRowAtIndexPath</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">NSIndexPath</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>Created by Storix. Copyright © 2016 Storix. All rights reserved.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.6.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

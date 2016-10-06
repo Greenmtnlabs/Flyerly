@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+	<title>Gif Factory App - iOS full application</title>
+ 	<meta name="description" content="Gif Factory App is an iOS application that helps in creating the high quality animated GIF images with a lot of customization options. Its functionality includes the ability to create GIFs by combining the static images (such as .png, jpg etc.), convert the video to the animated sequence in accordance with the selected time range, edit and mix the existing GIFs, preview GIFs from the Photos Library and other useful features. It was designed to make the process of turning your favorite photos/videos into the GIFs quick and easy.
+
+This App uses the CocoaPods  dependency manager, so some parts of it (such as the VideoTrimmerView pod) can be easily integrated with your existing projects.
+
+Thank you for purchasing the App. If you have any questions that are beyond the scope of this documentation, please feel free to email me at   &#115;&#116;&#117;&#102;&#102;&#111;&#107;&#97;&#116;&#111;&#114;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;.">
+	<meta name="author" content="Stan Mots (Storix)">
+	<meta name="copyright" content="Stan Mots (Storix)">
+	<meta name="generator" content="Documenter v2.0 http://rxa.li/documenter">
+	<meta name="date" content="2016-07-02T00:00:00+02:00">
+	
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/js/google-code-prettify/prettify.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="assets/css/documenter_style.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+	
+	<style>
+		html, body{background-color:#EEEEEE;color:#383838;}
+		h1,h2,h3,h4,h5,h6{color:#383838;}
+		section table{background-color:#EEEEEE;}
+		::-moz-selection{background:#333636;color:#00DFFC;}
+		::selection{background:#333636;color:#00DFFC;}
+		a.brand{background-image:url(assets/img/Logo.png);}
+		a, a:hover, a:active{color:#008C9E;}
+		hr{border-top:1px solid #D4D4D4;border-bottom:1px solid #969696;}
+		div.navbar-inner, .navbar .nav li ul{background:#343838;color:#FFFFFF;}
+		a.btn-navbar{background:#343838;color:#FFFFFF;}
+		.navbar .nav li a{color:#FFFFFF;text-shadow:1px 1px 0px #494F4F;}
+		.navbar .nav li a:hover, .navbar .nav li.active a{text-shadow:none;}
+		div.navbar-inner ul{}
+		.marketing-byline{color:#969696;}
+		.navbar .nav > li a{color:#FFFFFF;}
+		.navbar .nav > li a:hover, a.btn-navbar:hover{background:#333636;color:#00DFFC;}
+		.navbar .nav .active > a, .navbar .nav .active > a:hover, a.btn-navbar:active{background-color:#333636;color:#00DFFC;}
+		.navbar .nav li ul li a:hover{background:#333636;color:#00DFFC;}
+		.navbar .nav li ul li a:active{background:#333636;color:#00DFFC;}
+		.btn-primary {
+			  background-image: -moz-linear-gradient(top, #008C9E, #006673);
+			  background-image: -ms-linear-gradient(top, #008C9E, #006673);
+			  background-image: -webkit-gradient(linear, 0 0, 0 008C9E%, from(#343838), to(#006673));
+			  background-image: -webkit-linear-gradient(top, #008C9E, #006673);
+			  background-image: -o-linear-gradient(top, #008C9E, #006673);
+			  background-image: linear-gradient(top, #008C9E, #006673);
+			  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#008C9E', endColorstr='#006673', GradientType=0);
+			  border-color: #006673 #006673 #bfbfbf;
+			  color:#FFFFFF;
+		}
+		.btn-primary:hover,
+		.btn-primary:active,
+		.btn-primary.active,
+		.btn-primary.disabled,
+		.btn-primary[disabled] {
+		  background-color: #006673;
+		}
+		#documenter_copyright{display:block !important;visibility:visible !important;}
+	</style>
+	
+	
+	
+    </head>
+    
+<body class="documenter-project-gif-factory-app" data-spy="scroll" id="top">
+
+<!-- Documentation Navbar -->
+
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container"> 
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> 
+			<a class="brand" href="#">Gif Factory App - iOS full application</a>
+			<div class="nav-collapse">
+			<ul class="nav">
+					
+			<li><a href="#features" title="Features">Features</a></li>
+			<li><a href="#project_structure" title="Project Structure">Project Structure</a></li>
+			<li><a href="#compilation_installation" title="Compilation/Installation">Compilation/Installation</a></li>
+            <li><a href="#admob" title="AdMob">AdMob</a></li>
+			<li><a href="#api_docs_generation" title="Api Docs Generation">Api Docs Generation</a></li>
+			<li><a href="#customisation" title="Customisation">Customisation</a></li>
+			<li><a href="#logging" title="Logging">Logging</a></li>
+			<li><a href="#changelog" title="Changelog">Changelog</a></li>
+			<li><a href="#requirements" title="Requirements">Requirements</a></li>
+            <li><a href="#troubleshooting" title="Troubleshooting">Troubleshooting</a></li>
+			<li><a href="#source_credits" title="Source & Credits">Source & Credits</a></li>
+			<li><a href="#what_else" title="What else">What else</a></li>
+
+			</ul>
+			</div>
+		</div>
+	</div>
+</div> <!-- End of Navbar -->
+
+<!-- Main Container Beginning -->			
+			
+<div class="container" id="documenter_content">
+    
+	<div id="documenter-cover">
+	<div class="masthead">
+	    <h1>Gif Factory App - iOS full application</h1>
+	    <p>Gif Factory App is an iOS application that helps in creating the high quality animated GIF images with a lot of customization options. Its functionality includes the ability to create GIFs by combining the static images (such as .png, jpg etc.), convert the video to the animated sequence in accordance with the selected time range, edit and mix the existing GIFs, preview GIFs from the Photos Library and other useful features. It was designed to make the process of turning your favorite photos/videos into the GIFs quick and easy.
+
+<p>This App uses the <a href="https://cocoapods.org/about">CocoaPods</a>  dependency manager, so some parts of it (such as the <em>VideoTrimmerView</em> pod) can be easily integrated with your existing projects.</p>
+
+<p>Thank you for purchasing the App. If you have any questions that are beyond the scope of this documentation, please feel free to email me at  <a href="mailto:&#115;&#116;&#117;&#102;&#102;&#111;&#107;&#97;&#116;&#111;&#114;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;?Subject=Hello%20again" target="_top"> &#115;&#116;&#117;&#102;&#102;&#111;&#107;&#97;&#116;&#111;&#114;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a>.</p></p>
+	    <ul class="marketing-byline">
+			<li>created: 03/01/2016</li>
+			<li>latest update: 07/02/2016</li>
+			<li>by: Stan Mots (Storix)</li>
+			
+		</ul>
+	    <p class="download-info">
+			<a href="http://codecanyon.net/user/storix" class="btn btn-primary btn-large">My Envato Profile</a> <a href="https://twitter.com/iStorix" class="btn btn-large">Follow Me</a> 
+		</p>
+		
+	</div> <!-- masthead -->
+	
+   <div id="intro">
+    <p class="highlight hero-unit">This documentation was made by Storix with the help of <a href="http://rxa.li/documenter">the Documenter tool</a>. 2016. All rights reserved.</p>
+   </div> <!-- intro -->
+   
+	</div>
+      
+  <section id="features">
+	<div class="page-header"><h3>Features</h3><hr class="notop"></div>
+<div class="alert alert-info">
+	App Features</div>
+<ul>
+	<li>
+		Create GIFs from saved Photos and Videos or combine the existing GIFs into the new ones;</li>
+	<li>
+		Rearrange the frames of your GIFs;</li>
+	<li>
+		Control the animation parameters such as: dimensions, frame delay, loop count, content mode etc;</li>
+	<li>
+		Preview GIFs from the Photos App Library;</li>
+	<li>
+		Save the resulting GIFs to the App Documents folder or directly to the Photos App Library;</li>
+	<li>
+		Share the GIF using any app extensions installed on your device (such as Facebook or Twitter);</li>
+	<li>
+		Share your GIF files via email or Clipboard;</li>
+</ul>
+<div class="alert alert-info">
+	Programming related features</div>
+<ul>
+	<li>
+		Project files are compatible with the Xcode version 7 and above;</li>
+	<li>
+		It was written using the official release of the Swift programming language, version 2.2;</li>
+	<li>
+		Lazy GIF loading to reduce the device memory usage;</li>
+	<li>
+		Use Auto Layout and Size Classes to simplify building the UI for any iOS device;</li>
+	<li>
+		Use Storyboards to allow you customize the interface of this App easily and quickly;</li>
+	<li>
+		<div>
+			Landscape &amp; portrait modes: specially coded to support any device orientation;</div>
+	</li>
+	<li>
+		<div>
+			Fully-documented code with comments for the most important parts;</div>
+	</li>
+	<li>
+		<div>
+			Website with Api Documentation in Apple style was generated for your convenience;</div>
+	</li>
+	<li>
+		<div>
+			Can be easily translated into any language (all the displayable strings are provided through the <em>NSLocalizedString</em> context);</div>
+	</li>
+	<li>
+		<div>
+			Support iOS 8 &amp; 9, iPhone &amp; iPad.</div>
+	</li>
+</ul>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+</section>
+<section id="project_structure">
+	<div class="page-header"><h3>Project Structure</h3><hr class="notop"></div>
+<p>
+	After extracting the downloaded <em>GifFactoryApp.zip</em> archive you will be presented with the following direcotry structure:</p>
+<p>
+	&nbsp;</p>
+<div class="alert alert-info" cols="50" id="out" rows="20" style="text-rendering: optimizeLegibility; margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(0, 0, 0); line-height: normal;">
+	GifFactoryApp</div>
+<div class="alert alert-info" cols="50" rows="20" style="text-rendering: optimizeLegibility; margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(0, 0, 0); line-height: normal;">
+	&nbsp; |-- api-docs<br>
+	&nbsp; |-- build<br>
+	&nbsp; |-- Documentation<br>
+	&nbsp; |-- GifFactoryApp<br>
+	&nbsp; |-- GifFactoryAppTests<br>
+	&nbsp; |-- Pods<br>
+	&nbsp; |-- Private Pods Sources<br>
+	&nbsp; |-- Resources</div>
+<p>
+	&nbsp;</p>
+<p>
+	The root&nbsp;<em>GIfFactoryApp (</em>don&#39;t confuse it with the <em>GifFactoryApp</em> subfolder)&nbsp;folder containts the main project files and resources. This is the place where you can open the project &nbsp;in Xcode using the&nbsp;<em>GifFactoryApp.xcworkspace&nbsp;</em>file, check out the documentation of the project API (located in the&nbsp;<em>api-docs&nbsp;</em>subfolder), find used in the project fonts and images (in the&nbsp;<em>Resources</em>&nbsp;subfolder), check out the source code of all installed pods (in the&nbsp;<em>Pods</em>&nbsp;subfolder) and edit the specifications of the project dependencies in the&nbsp;<em>podfile&nbsp;</em>(more info about the podfiles you can find at this&nbsp;<a href="https://guides.cocoapods.org/syntax/podfile.html">link</a>).</p>
+<p>
+	In the <em>Documentation </em>folder you will find the generated website containing the Gif Factory project documentation. Double-click an <em>index.html</em>&nbsp;to open it in your favorite browser. This is the first place your should check out if you feel that you don&#39;t understand how the basic things (such as the project compilation/installation) work.</p>
+<p>
+	The <em>Private</em>&nbsp;<em>Pods Sources</em> folder contains the sources of the privately developed pods. Currently it includes the VideoTrimmerView pod that helps the users to quickly select the video time range and convert it to the animated GIF. It provides the scalable timeline which can be configured depending on the video clip length.&nbsp;</p>
+<p>
+	By default, the private pods are pre-installed for your convinience. However, if you want to extend its functinality according to your needs you should follow the next basic steps:</p>
+<ul>
+	<li>
+		Create a private <a href="https://guides.cocoapods.org/making/specs-and-specs-repo.html">Spec</a> repository on your server;</li>
+	<li>
+		Add the private repo to your <a href="https://guides.cocoapods.org/using/getting-started.html">CocoaPods Installation</a>;</li>
+	<li>
+		Add the <em>PrivatePodName.podspec </em>to the private repo (for example, the podspec file of the <em>VideoTrimmeView</em> pod is called <em>VideoTrimmerView.podspec</em>);</li>
+	<li>
+		Update the source reference in the podfile that is located in the GifFactoryApp folder (it should look like this: <em>source &#39;URL_TO_YOUR_REPOSITORY&#39;</em>.</li>
+</ul>
+<p>
+	After completing the above steps you will be able to install the updated private pod by running the following command from the terminal:</p>
+<pre class="prettyprint lang-js linenums">
+cd GifFactoryApp
+pod update</pre>
+<p>
+	More info about the private pods you can find at the <a href="https://guides.cocoapods.org/making/private-cocoapods.html">link</a>.</p>
+</section>
+<section id="compilation_installation">
+	<div class="page-header"><h3>Compilation/Installation</h3><hr class="notop"></div>
+<div>
+	This project uses the <a href="https://cocoapods.org/">CocoaPods</a> dependency manager that&rsquo;s why the main file you use to open the project in Xcode is <em>GifFactoryApp.xcworkspace</em> (<strong><u>NOT</u> </strong><em>GifFactoryApp.xcodeproj</em> !!). Generally, it can be useful to clean code before building using the Xcode <em>Clean</em> command from the <em>Product</em> menu.</div>
+<div>
+	&nbsp;</div>
+<div>
+	To install and run the app on an iOS Simulator just select one of the available in the system simulators and press <strong>Command-R</strong>.</div>
+<div>
+	&nbsp;</div>
+<div>
+	To build and run the app on your iOS Device you should be a member of the Apple Developer Program. If you don&rsquo;t want to join the Apple Developer Program, you can still build and run your app on a Device using a valid Apple Id (which is free). But in this case the capabilities available to the app will be restricted. Check out <a href="https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/SupportedCapabilities/SupportedCapabilities.html#//apple_ref/doc/uid/TP40012582-CH38-SW1">this page</a> to know more about the capabilities dependencies.</div>
+<div>
+	&nbsp;</div>
+<div>
+	Use <a href="https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/ManagingAccounts/ManagingAccounts.html#//apple_ref/doc/uid/TP40012582-CH24-SW2">the Apple&rsquo;s official guide</a> to know how to configure Xcode with your Apple Id.</div>
+<div>
+	&nbsp;</div>
+<div>
+	The general information about preparing and configuring an app to launch on devices is available at this <a href="https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/LaunchingYourApponDevices/LaunchingYourApponDevices.html#//apple_ref/doc/uid/TP40012582-CH27-SW3">link</a>.</div>
+<div>
+	&nbsp;</div>
+<div>
+	For your convenience here are the basic steps to getting the app onto your iOS device using your Apple Id:</div>
+<div>
+	&nbsp;</div>
+<ul>
+	<li>
+		Choose Xcode &gt; Preferences;</li>
+	<li>
+		At the top of the window, click <em>Accounts</em>;</li>
+	<li>
+		In the lower-left corner, click the <em>Add</em> button;</li>
+	<li>
+		Choose Add Apple Id from the pop-up menu;</li>
+	<li>
+		<div>
+			In the dialog that appears, enter your Apple ID and password, and click Sign In;</div>
+	</li>
+	<li>
+		<div>
+			In the project navigator, select the project and target to display the project editor;</div>
+	</li>
+	<li>
+		<div>
+			Click General and choose your name from the Team pop-up menu;</div>
+	</li>
+	<li>
+		<div>
+			Connect the device to your Mac and choose your device from the Scheme toolbar menu;</div>
+	</li>
+	<li>
+		<div>
+			Below the Team pop-up menu, click Fix Issue.</div>
+	</li>
+	<li>
+		<div>
+			Click the Run button.</div>
+	</li>
+</ul>
+<p>
+	&nbsp;</p>
+</section>
+
+<section id="admob">
+  <div class="page-header"><h3>AdMob</h3><hr class="notop"></div>
+  <p>Currenlty the following ads from the <strong>AdMob SDK</strong> are integrated into this app:</p>
+  
+  <ul>
+    <li>
+      <strong>Smart Banner Ads</strong> - these ads are displayed at the bottom of the main screen. The banner size is automatically updated in accordance with the device orientation. The border is added to the banner's top side to prevent AdMob policy violation (check out this  <a href="https://support.google.com/admob/answer/6275335?hl=en&ref_topic=2745287">link</a>);</li>
+
+        <li><strong>Interstitial Ads</strong> - these ads are presented each time the new GIF is saved;</li>
+
+  </ul>
+  
+  <div class="alert alert-info" style="text-rendering: optimizeLegibility; margin-top: 10px; margin-bottom: 10px; padding: 0px; color: rgb(0, 0, 0); line-height: normal;">
+    <p><strong>Important!</strong>
+    
+    <p>During development and testing, use test ads. If you do need to render live ads before launch, avoid clicking on them.</p>
+    
+    <p>If you click on live ads, your AdMob account may be suspended. </p></p>
+    </p></div>
+  
+  <br>
+  <p>To configure ads in accordance with your AdMob account settings perform the next steps: </p>
+  <ul>
+    <li>
+      Replace the <strong>GoogleService-Info.plist</strong> with the file obtained from the <a href="https://console.firebase.google.com/">Firebase Console</a>;</li>
+    
+    <li> Create ad unit IDs for the banner and intersitial using <a href="https://support.google.com/admob/answer/3052638">official tutorial</a>;</li>
+    <li> Set the appropriate unit ids using the following properties (located in the <em>GFMainScreenViewController.swift</em>):</li><p></p>
+<pre class="prettyprint lang-js linenums">
+/// The AdMob banner ad unit id.
+private let kBannerAdUnitId = "ca-app-pub-3940256099942544/2934735716"
+/// The AdMob interstitial ad unit id.
+private let kInterstitialAdUnitId = "ca-app-pub-3940256099942544/4411468910"
+</pre>
+  </ul>
+  
+  <p>The more info about AdMob configuration you can find <a href="https://support.google.com/admob#topic=6162738">here</a>.</p>
+</secion>
+  
+  <section id="api_docs_generation">
+	<div class="page-header"><h3>Api Docs Generation</h3><hr class="notop"></div>
+<p>
+	If you have extended the existing Api of this project and want to update the website that is located in the <em>api-docs</em> folder you must have the <a href="https://github.com/realm/jazzy">Jazzy</a> tool installed on your system.</p>
+<p>
+	When the installation is done run the following commands using the <em>Terminal</em>:</p>
+<pre class="prettyprint lang-js linenums">
+cd GifFactoryApp/
+jazzy</pre>
+<p>
+	&nbsp;</p>
+<p>
+	The <em>jazzy</em> command will use the&nbsp;<em>.jazzy.yaml</em> configuration file during the generation process. Feel free to edit it as you wish. In accordance with the <em>Jazzy</em> documentaion, for a detailed explanation and an exhaustive list of all available options, run this:</p>
+<pre class="prettyprint lang-js linenums">
+jazzy --help config.</pre>
+</section>
+<section id="customisation">
+	<div class="page-header"><h3>Customisation</h3><hr class="notop"></div>
+<p>
+	This App can be fully customized in accordance with your preferences.&nbsp;</p>
+<p>
+	<strong style="font-size: 1.2em;">Global customization</strong></p>
+<p>
+	The main customization place is located in&nbsp;<em>GFGifFactoryAppDelegate.swift</em> file, in&nbsp;<em>application(_:, didFinishLaunchingWithOptions:)</em> function. Here with the help of the appropriate &nbsp;<em>UIAppearance</em> proxy object you can customized properties of the most UI elements used in the project. Instead of having to customise the appearance of each UIKit control directly the proxy object allows you to customise the appearance of a whole class of the required control.</p>
+<p>
+	For example, consider you want to change the <em>UINavigationBar</em> backgournd color so that it will be used globally by the all instances of this class. It&#39;s possible to achieve that using the next code snippet:</p>
+<p>
+	&nbsp;</p>
+<pre class="prettyprint lang-js linenums">
+// Replace kGlobalTintColor with any color you want.
+<span class="s1">UINavigationBar</span><span class="s2">.</span><span class="s1">appearance</span><span class="s2">().</span><span class="s1">barTintColor</span><span class="s2"> = </span><span class="s3">kGlobalTintColor</span></pre>
+<p>
+	&nbsp;</p>
+<p>
+	The navigation bar title font can be changed in the following way:</p>
+<p>
+	&nbsp;</p>
+<pre class="prettyprint lang-js linenums">
+<span class="s2">if</span><span class="s1"> </span><span class="s2">let</span><span class="s1"> titleFont = </span><span class="s3">UIFont</span><span class="s1">(name: </span><span class="s4">kFontName</span><span class="s1">, size: </span><span class="s5">17</span><span class="s1">) {
+<span class="s1" style="font-family: Arial, Verdana, sans-serif;">    let</span><span class="s2" style="font-family: Arial, Verdana, sans-serif;"> navigationBarTitleAttributes: [</span><span class="s3" style="font-family: Arial, Verdana, sans-serif;">String</span><span class="s2" style="font-family: Arial, Verdana, sans-serif;"> : </span><span class="s3" style="font-family: Arial, Verdana, sans-serif;">NSObject</span><span class="s2" style="font-family: Arial, Verdana, sans-serif;">] = </span><span class="s1" style="font-family: Arial, Verdana, sans-serif;"> </span><span class="s1" style="font-family: Arial, Verdana, sans-serif;">[</span><span style="font-family: Arial, Verdana, sans-serif;">NSFontAttributeName</span><span class="s1" style="font-family: Arial, Verdana, sans-serif;">: </span><span style="font-family: Arial, Verdana, sans-serif;">titleFont</span><span style="font-family: Arial, Verdana, sans-serif;">]</span>
+</span><span class="s1"><span class="s1" style="font-family: Arial, Verdana, sans-serif;">    UINavigationBar</span><span class="s6" style="font-family: Arial, Verdana, sans-serif;">.</span><span class="s1" style="font-family: Arial, Verdana, sans-serif;">appearance</span><span class="s6" style="font-family: Arial, Verdana, sans-serif;">().</span><span class="s1" style="font-family: Arial, Verdana, sans-serif;">titleTextAttributes</span><span class="s6" style="font-family: Arial, Verdana, sans-serif;"> = navigationBarTitleAttributes
+</span></span><span class="s1">}</span></pre>
+<p>
+	<strong>Note:&nbsp;</strong>Replace&nbsp;<span style="line-height: 19px;">kFontName with the name of your&nbsp;</span>preferable<span style="line-height: 19px;">&nbsp;font. You should have previously intigrated font with the project. To know more about this process refer to this <a href="http://codewithchris.com/common-mistakes-with-adding-custom-fonts-to-your-ios-app/">link</a>.</span></p>
+<p>
+	<span style="line-height: 19px;">The other UI elements can be configured in the similar way.</span></p>
+<p>
+	For your convenience the struct with 140 color names supported by the all modern browsers is provided in <em>Colors.swift </em>file. You can use it to easily set colors in any place of the project like this:</p>
+<pre class="prettyprint lang-js linenums">
+<span class="s1">let</span><span class="s2"> kGlobalTintColor = </span><span class="s3">UIColor</span><span class="s2">.</span><span class="s4">sh_colorFromHexCode</span><span class="s2">(</span><span class="s4">Colors</span><span class="s2">.CRIMSON)</span></pre>
+<p>
+	<strong>Note:&nbsp;</strong><em><span style="line-height: 19px;">kGlobalTintColor </span></em><span style="line-height: 19px;">is declared</span><em><span style="line-height: 19px;">&nbsp;</span></em><span style="line-height: 19px;">in the <em>Constants.swift</em> file. You can find there the other useful variables.</span></p>
+<p>
+	&nbsp;</p>
+<p>
+	<strong style="font-size: 1.2em;">Per-element customization</strong></p>
+<p>
+	The settings view controller can be customized in the following ways:</p>
+<ul>
+	<li>
+		Change <em>kSettingsControllerCompactContentWidth</em> and <em>kSettingsControllerRegulartContentWidth</em> properties (declared&nbsp;<span style="line-height: 19px;">in the&nbsp;</span><em style="line-height: 19px;">Constants.swift</em><span style="line-height: 19px;">&nbsp;file)</span>&nbsp;to customize the settings controller size in accordance with your preferences. The changes will be applied respecting the appropriate size class automatically.</li>
+</ul>
+<ul>
+	<li>
+		There are two predefined transition animations: a <em>paper-fold</em> and <em>slide from the edge</em>. The animation type can be changed in the&nbsp;<em>GFEditorViewController.swift</em> file, in <em>viewDidLoad()</em> method like this:</li>
+</ul>
+<pre class="prettyprint lang-js linenums">
+// Set the interacton controller to enable the user interactions during the animation.
+<span class="s2">settingsTransitionDelegate</span><span class="s1">.</span><span class="s2">interactionController</span><span class="s1"> = </span><span class="s2">GFHorizontalSwipeInteractionController</span><span class="s1">()</span>
+// Set the preferable animation type.
+<span class="s2">settingsTransitionDelegate</span><span class="s1">.</span><span class="s2">animationController</span><span class="s1"> = </span><span class="s2">GFSlideAnimationController</span><span class="s1">()</span></pre>
+<p>
+	<strong>Note:&nbsp;</strong>To apply the <em>paper-fold</em> animation change the&nbsp;<em><span style="line-height: 19px;">GFSlideAnimationController </span></em><span style="line-height: 19px;">to the&nbsp;</span><em>GFFoldAnimationController</em>.</p>
+<p>
+	To simpify the configuration of the <em>UICollectionView</em> objects&nbsp;UICollectionViewHelper extenstion was created. For instance, to change the number of the collection view columns in accordance with the different size classes you can use the following method:</p>
+<pre class="prettyprint lang-js linenums">
+// MARK: - UICollectionViewDelegateFlowLayout
+extension GFMainScreenViewController: UICollectionViewDelegateFlowLayout {
+  func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -&gt; CGSize {
+    let currentItemSize = UICollectionViewFlowLayout.sh_itemSizeForTraitCollection(traitCollection, contentSize: collectionView.bounds.size, fixedSpacing: kGFMainScreenCollectionViewFixedSpacing, numberOfColumnsForCompactClass: 2, numberOfColumnsForRegularClass: 3)
+ 
+    return currentItemSize
+  }
+}</pre>
+<p>
+	<strong>Note: </strong>Don&#39;t set too high values of the&nbsp;<em><span style="line-height: 19px;">numberOfColumnsForCompactClass </span></em><span style="line-height: 19px;">and</span><em><span style="line-height: 19px;">&nbsp;numberOfColumnsForRegularClass parameters to reduce the memory usage.</span></em></p>
+<div>
+	There is a set of the different helper extensions in the <em>Helpers</em> Xcode group. Hope you&#39;ll find them useful for your own projects.</div>
+<div>
+	&nbsp;</div>
+<div>
+	Basically, it should be relatively easy to configure the most UI elements individual parameters in the <em>Main.storyboard</em> file.&nbsp;You can also find some UI-related properties in the Identity Inspector pane, in the User Defined Runtime Attributes area.</div>
+<div>
+	&nbsp;</div>
+<div>
+	&nbsp;</div>
+<p>
+	<strong style="font-size: 1.2em;">Image assets customization</strong></p>
+<p>
+	To change App Icon or other image assets follow <a href="https://developer.apple.com/library/ios/documentation/ToolsLanguages/Conceptual/Xcode_Overview/AddingImages.html">the official Apple&rsquo;s guide</a> regarding working with the assets catalog (named <em>Assets.xcassets</em>).</p>
+<p>
+	&nbsp;</p>
+</section>
+<section id="logging">
+	<div class="page-header"><h3>Logging</h3><hr class="notop"></div>
+<div>
+	This project uses the <a href="https://github.com/DaveWoodCom/XCGLogger">XCGLogger</a> to provide the advanced logging features. The logger parameters are configured in <em>XCGLoggerHelper.swift</em>.&nbsp;</div>
+<div>
+	&nbsp;</div>
+<div>
+	There are several predefined log levels that can be activated as per your preference. For example, if you pass .Debug to <em>log.setup</em> method the <em>Verbose</em> messages won&#39;t be shown and <em>Info, Warning, Error, Severe</em> messages will be enabled.</div>
+<div>
+	&nbsp;</div>
+<div>
+	You can change the other logger parameters as depicted in the following code snippet:</div>
+<div>
+	&nbsp;</div>
+<div>
+	<pre class="prettyprint lang-js linenums">
+<span class="s2">log</span><span class="s1">.</span><span class="s2">setup</span><span class="s1">(.</span><span class="s2">Debug</span><span class="s1">, showLogIdentifier: </span><span class="s3">false</span><span class="s1">, showFunctionName: </span><span class="s3">true</span><span class="s1">, showThreadName: </span><span class="s3">false</span><span class="s1">, showLogLevel: </span><span class="s3">true</span><span class="s1">, showFileNames: </span><span class="s3">true</span><span class="s1">, showLineNumbers: </span><span class="s3">true</span><span class="s1">, showDate: </span><span class="s3">true</span><span class="s1">, writeToFile: </span><span class="s3">nil</span><span class="s1">, fileLogLevel: </span><span class="s3">nil</span><span class="s1">)</span></pre>
+</div>
+<p>
+	&nbsp;</p>
+<p>
+	<strong>Note:&nbsp;</strong>It is possible to set the different logger levels depending on the current build type with the help of the preprocessor macro <em>#if DEBUG</em>.</p>
+</section>
+<section id="changelog">
+	<div class="page-header"><h3>Changelog</h3><hr class="notop"></div>
+    <h4 id="changelog_version_100_07_02_2016_">Version 1.2.0 (16/07/2016)</h4>
+    <ul>
+      <li>
+        AdMob integration (smart banner and interstitial);</li>
+      <li>
+        Reduce memory usage during the video frames extraction stage;</li>
+      <li>
+        Apply preferred transform value to video asset to obtain a correct frames rotation;</li>
+      <li>
+        Pinterest-style transition animation from the main screen to GIF preview;</li>
+      <li>
+        Documentation improvements;</li>
+      <li>
+        Small bug fixing (prevent navigation bar disappearance if the preview cell was in fullscreen mode).</li>
+    </ul>
+    <h4 id="changelog_version_100_07_02_2016_">Version 1.0.1 (15/07/2016)</h4>
+  <ul>
+    <li>
+      Bug fixing;</li>
+    <li>
+      Performance improvements;</li>
+  </ul>
+  
+    <h4 id="changelog_version_100_07_02_2016_">Version 1.0.0 (04/07/2016)</h4>
+  <ul>
+      <li>
+        Initial Release</li>
+  </ul>
+</section>
+<section id="requirements">
+	<div class="page-header"><h3>Requirements</h3><hr class="notop"></div>
+<p>
+	Gif Factory App requires the iOS 8.1+, Swift 2.2+, Xcode 7.3.1+, CocoaPods 1.0.1+.&nbsp;</p>
+</section>
+<section id="troubleshooting">
+  <div class="page-header"><h3>Troubleshooting</h3><hr class="notop"></div>
+
+<ul>
+  <li>
+    <strong style="font-size: 1.2em;">Problem: </strong>
+    <p>The code cannot be compiled because of the following errors:</p>
+    
+    <div class="alert alert-info" style="text-rendering: optimizeLegibility; margin-top: 10px; margin-bottom: 10px; padding: 0px; color: rgb(255, 255, 255); background-color: rgb(178, 34, 34); line-height: normal;">
+        <p> &nbsp; Include of non-modular header inside framework</p>
+        <p> &nbsp; Error: unable to read module map contents from 'Target Support Files`</p>
+        <p> &nbsp; No such module...</p></div>
+      
+  </li>
+  
+  <p></p>
+  
+  <li>
+    <strong style="font-size: 1.2em;">Solution: </strong>
+    <p>First of all, check the <a href="https://cocoapods.org/about">CocoaPods</a> version that is installed on your system using the following command:</p>
+    
+<pre class="prettyprint lang-js linenums">pod --version</pre>
+
+<p>It should print the version number that is equal or bigger than 1.0.1. If you have the older CocoaPods version you must upgrade it using the instructions from this <a href="https://guides.cocoapods.org/using/getting-started.html#updating-cocoapods">link.</a></p>
+
+<p>
+If after CocoaPods upgrade you are still getting the errors try to perform the following steps:
+
+<pre class="prettyprint lang-sh linenums">
+First of all, run <em>`pod install`</em> from the terminal.
+Open project in Xcode, click `Window` then `Projects`, select `GifFactoryApp` (in the right column) and click `Delete` button that is opposite to the line with the title `Derived Data`;
+In the Xcode `Product` menu click `Clean`;
+Build project. The contents of `DerivedData` will be recreated when the build phase finishes.
+</pre>
+</p>
+   <p>That's it. Hope you have no problems with compilation!</p>
+    
+  </li>
+</ul>
+
+
+</section>
+<section id="source_credits">
+	<div class="page-header"><h3>Source & Credits</h3><hr class="notop"></div>
+<p>
+	Thanks so much to</p>
+<ul>
+	<li>
+		Dave Wood for <a href="https://github.com/DaveWoodCom/XCGLogger">XCGLogger Library</a>;</li>
+	<li>
+		Yaoyuan for <a href="https://github.com/ibireme/YYWebImage">YYWebImage Library</a>;</li>
+	<li>
+		Ryo Aoyama for <a href="https://github.com/ra1028/RAReorderableLayout">RAReorderableLayout</a>;</li>
+	<li>
+		Clement T for <a href="https://github.com/chiunam/CTAssetsPickerController">CTAssetsPickerController</a>;</li>
+	<li>
+		<a href="http://samvermette.com">Sam Vermette</a>, <a href="http://tiemerding.com">Tobias Tiemerding</a> and <a href="https://github.com/SVProgressHUD/SVProgressHUD/contributors">contributors</a>&nbsp;to <a href="https://github.com/SVProgressHUD/SVProgressHUD">SVProgressHUD</a>;</li>
+</ul>
+<p>
+	&nbsp;</p>
+</section>
+<section id="what_else">
+	<div class="page-header"><h3>What else</h3><hr class="notop"></div>
+<p>
+	<span style="font-family: &quot;Helvetica Neue&quot;, Arial, Helvetica, sans-serif; font-size: 12.8px; line-height: 21.12px;">Once again, thank you so much for purchasing this App. As I said at the beginning, I&#39;d be glad to help you if you have any questions relating to this project. No guarantees, but I&#39;ll do my best to assist. If you have a more general question relating to the iOS Development on CodeCanyon, you might consider visiting the forums and asking your question in the &quot;Item Discussion&quot; section.</span></p>
+<hr>
+<p>
+	Hope you enjoy the App!</p>
+</section>
+
+
+
+    <hr />
+
+<footer>
+    <p>Copyright Stan Mots (Storix) 2016 made with the <a href="http://rxa.li/documenter">Documenter v2.0</a></p>
+</footer>
+
+</div><!-- /container --> 
+
+<!-- Le javascript
+    ================================================== --> 
+<!-- Placed at the end of the document so the pages load faster --> 
+<script>document.createElement('section');var duration='450',easing='easeOutExpo';</script>
+<script src="assets/js/jquery.js"></script> 
+<script src="assets/js/jquery.scrollTo.js"></script>
+<script src="assets/js/jquery.easing.js"></script>
+<script src="assets/js/scripts.js"></script> 
+<script src="assets/js/google-code-prettify/prettify.js"></script> 
+<script src="assets/js/bootstrap-min.js"></script> 
+</body>
+</html>

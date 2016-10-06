@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>GFEditorViewController Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/GFEditorViewController" class="dashAnchor"></a>
+    <a title="GFEditorViewController Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">GifFactoryApp Docs</a> (54% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">GifFactoryApp Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        GFEditorViewController Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/GFAnimationPreviewViewController.html">GFAnimationPreviewViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFAnimationSettingsManager.html">GFAnimationSettingsManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFAnimationSettingsViewController.html">GFAnimationSettingsViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFCollectionViewBaseCell.html">GFCollectionViewBaseCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:C13GifFactoryApp12GFEditorCell">GFEditorCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFEditorViewController.html">GFEditorViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFEmbeddedAnimationSettingsTableViewController.html">GFEmbeddedAnimationSettingsTableViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFFoldAnimationController.html">GFFoldAnimationController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFFramesExtractorViewController.html">GFFramesExtractorViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFGifAsset.html">GFGifAsset</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFGifFrame.html">GFGifFrame</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFGifPreviewCell.html">GFGifPreviewCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFGifRequestInfo.html">GFGifRequestInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFHorizontalSwipeInteractionController.html">GFHorizontalSwipeInteractionController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFInsetsLabel.html">GFInsetsLabel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFMainScreenCell.html">GFMainScreenCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFMainScreenViewController.html">GFMainScreenViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFPlayerView.html">GFPlayerView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFResizablePresentationController.html">GFResizablePresentationController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFSettingsControllerTransitioningDelegate.html">GFSettingsControllerTransitioningDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFSlideAnimationController.html">GFSlideAnimationController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFVerticalSwipeInteractionController.html">GFVerticalSwipeInteractionController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GFVideoAsset.html">GFVideoAsset</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Global Variables.html">Global Variables</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryApp34GFDiskReadTaskFinishedNotificationSS">GFDiskReadTaskFinishedNotification</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryApp40GFGifWasRemovedFromDocumentsNotificationSS">GFGifWasRemovedFromDocumentsNotification</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryApp36GFGifWasSavedToDocumentsNotificationSS">GFGifWasSavedToDocumentsNotification</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryAppP33_3A83AAA380232B96BD834A131C1E821426currentReadingFromDiskURLsGVs3SetSS_">currentReadingFromDiskURLs</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryAppP33_2473A987EA2E56BDD3F266EF1BA7893D13dateFormatterCSo15NSDateFormatter">dateFormatter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryAppP33_A49B512BA6A785A3683AE1555C35BC0E35framesExtractorControllerKVOContextSi">framesExtractorControllerKVOContext</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryAppP33_947AB853F2E6F18F697991A433C6B8A825kConvertFramesErrorDomainSS">kConvertFramesErrorDomain</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryAppP33_947AB853F2E6F18F697991A433C6B8A832kCriticalSectionSerialQueueLabelSS">kCriticalSectionSerialQueueLabel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryApp18kGFGifAssetInfoKeySS">kGFGifAssetInfoKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryApp20kGFGifRequestInfoKeySS">kGFGifRequestInfoKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryApp16kGlobalTintColorCSo7UIColor">kGlobalTintColor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryAppP33_3A83AAA380232B96BD834A131C1E821433kIncrementallyReadFileErrorDomainSS">kIncrementallyReadFileErrorDomain</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryApp17kMaximumGifHeightSi">kMaximumGifHeight</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryApp16kMaximumGifWidthSi">kMaximumGifWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryAppP33_3A83AAA380232B96BD834A131C1E821437kRequestAnimationFromCacheErrorDomainSS">kRequestAnimationFromCacheErrorDomain</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryAppP33_3A83AAA380232B96BD834A131C1E821434kRequestImagesFromCacheErrorDomainSS">kRequestImagesFromCacheErrorDomain</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryAppP33_3A83AAA380232B96BD834A131C1E821429kRequestIndexPathsErrorDomainSS">kRequestIndexPathsErrorDomain</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryAppP33_C480F7087836B648C4F196388E5C8D5127kSetImageInCacheErrorDomainSS">kSetImageInCacheErrorDomain</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryApp38kSettingsControllerCompactContentWidthV12CoreGraphics7CGFloat">kSettingsControllerCompactContentWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryApp39kSettingsControllerRegulartContentWidthV12CoreGraphics7CGFloat">kSettingsControllerRegulartContentWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryApp3logC9XCGLogger9XCGLogger">log</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryAppP33_E718EF16DEE77553432E0449501125FE15mainCellContextSi">mainCellContext</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryAppP33_F060E4990F468A5AFE9B6D158CC60FF218previewCellContextSi">previewCellContext</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v13GifFactoryAppP33_A49B512BA6A785A3683AE1555C35BC0E15progressMessageSS">progressMessage</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/GFCacheRequestState.html">GFCacheRequestState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/GFGifFrameSourceType.html">GFGifFrameSourceType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/GFInteractionOperation.html">GFInteractionOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums.html#/s:O13GifFactoryApp18GFTableViewCellTag">GFTableViewCellTag</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums.html#/s:O13GifFactoryApp14GFTextFieldTag">GFTextFieldTag</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums.html#/s:O13GifFactoryApp13GFURLDateType">GFURLDateType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/CALayer.html">CALayer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Double.html">Double</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/GADBannerView.html">GADBannerView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UICollectionView.html">UICollectionView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIImage.html">UIImage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIToolbar.html">UIToolbar</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/YYImageCache.html">YYImageCache</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/GFAnimationControllerReversible.html">GFAnimationControllerReversible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/GFAnimationPreviewDelegate.html">GFAnimationPreviewDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/GFBackgroundAlertDismissing.html">GFBackgroundAlertDismissing</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/GFInteractionControllerWireable.html">GFInteractionControllerWireable</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:V13GifFactoryApp6Colors">Colors</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>GFEditorViewController</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">class</span> <span class="kt">GFEditorViewController</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="kt">GFBackgroundAlertDismissing</span></code></pre>
+
+                </div>
+              </div>
+            <p>View controller that presents a screen where you can review and edit your GIF&rsquo;s frames.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Properties"></a>
+                <a name="//apple_ref/swift/Section/Properties" class="dashAnchor"></a>
+                <a href="#/Properties">
+                  <h3 class="section-name">Properties</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp22GFEditorViewController16kFramesPerSecondSi"></a>
+                    <a name="//apple_ref/swift/Property/kFramesPerSecond" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp22GFEditorViewController16kFramesPerSecondSi">kFramesPerSecond</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Defines the number of frames per second which will be extracted from the video file.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">let</span> <span class="nv">kFramesPerSecond</span> <span class="o">=</span> <span class="mi">10</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp22GFEditorViewController9gifFramesGSaCS_10GFGifFrame_"></a>
+                    <a name="//apple_ref/swift/Property/gifFrames" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp22GFEditorViewController9gifFramesGSaCS_10GFGifFrame_">gifFrames</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The array with the items that describe image properties for each GIF frame.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">gifFrames</span> <span class="o">=</span> <span class="p">[</span><span class="kt">GFGifFrame</span><span class="p">]()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp22GFEditorViewController12photosAssetsGSqGSaCSo7PHAsset__"></a>
+                    <a name="//apple_ref/swift/Property/photosAssets" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp22GFEditorViewController12photosAssetsGSqGSaCSo7PHAsset__">photosAssets</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Selected images in Photo Library.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">photosAssets</span><span class="p">:</span> <span class="p">[</span><span class="kt">PHAsset</span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp22GFEditorViewController10videoAssetGSqCS_12GFVideoAsset_"></a>
+                    <a name="//apple_ref/swift/Property/videoAsset" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp22GFEditorViewController10videoAssetGSqCS_12GFVideoAsset_">videoAsset</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The video asset the images for GIF creation will be extracted from.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">videoAsset</span><span class="p">:</span> <span class="kt">GFVideoAsset</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF512cacheManagerCSo12YYImageCache"></a>
+                    <a name="//apple_ref/swift/Property/cacheManager" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF512cacheManagerCSo12YYImageCache">cacheManager</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The cache manager that is used to cache the frames of the edited GIF.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">cacheManager</span><span class="p">:</span> <span class="kt">YYImageCache</span> <span class="o">=</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF512imageManagerCSo21PHCachingImageManager"></a>
+                    <a name="//apple_ref/swift/Property/imageManager" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF512imageManagerCSo21PHCachingImageManager">imageManager</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Image manager that is used to cache animation frames.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="k">let</span> <span class="nv">imageManager</span> <span class="o">=</span> <span class="kt">PHCachingImageManager</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF515settingsManagerCS_26GFAnimationSettingsManager"></a>
+                    <a name="//apple_ref/swift/Property/settingsManager" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF515settingsManagerCS_26GFAnimationSettingsManager">settingsManager</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Settings manager that is used to store/retrieve the animation parameters.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="k">let</span> <span class="nv">settingsManager</span><span class="p">:</span> <span class="kt">GFAnimationSettingsManager</span> <span class="o">=</span> <span class="kt">GFAnimationSettingsManager</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF510requestIdsGSaVs5Int32_"></a>
+                    <a name="//apple_ref/swift/Property/requestIds" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF510requestIdsGSaVs5Int32_">requestIds</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The array with the request Ids which are used to cancel images downloading.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">requestIds</span> <span class="o">=</span> <span class="p">[</span><span class="kt">PHImageRequestID</span><span class="p">]()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF514imageGeneratorGSqCSo21AVAssetImageGenerator_"></a>
+                    <a name="//apple_ref/swift/Property/imageGenerator" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF514imageGeneratorGSqCSo21AVAssetImageGenerator_">imageGenerator</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Image generator that is used to extract frames from th video.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">imageGenerator</span><span class="p">:</span> <span class="kt">AVAssetImageGenerator</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF526settingsTransitionDelegateCS_41GFSettingsControllerTransitioningDelegate"></a>
+                    <a name="//apple_ref/swift/Property/settingsTransitionDelegate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF526settingsTransitionDelegateCS_41GFSettingsControllerTransitioningDelegate">settingsTransitionDelegate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The delegate that is used to create custom transition to the animation settings controller.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">settingsTransitionDelegate</span> <span class="o">=</span> <span class="kt">GFSettingsControllerTransitioningDelegate</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF519previousPreheatAreaVSC6CGRect"></a>
+                    <a name="//apple_ref/swift/Property/previousPreheatArea" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF519previousPreheatAreaVSC6CGRect">previousPreheatArea</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The previous rectangle that contains cached animation frames.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">previousPreheatArea</span><span class="p">:</span> <span class="kt">CGRect</span> <span class="o">=</span> <span class="kt">CGRectZero</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF532frameNumberLabelRestorationColorCSo7UIColor"></a>
+                    <a name="//apple_ref/swift/Property/frameNumberLabelRestorationColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF532frameNumberLabelRestorationColorCSo7UIColor">frameNumberLabelRestorationColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Color that is used to restore the collection view cell label&rsquo;s background color.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">frameNumberLabelRestorationColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="o">=</span> <span class="kt">UIColor</span><span class="o">.</span><span class="nf">clearColor</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF529kAnimationFrameCellIdentifierSS"></a>
+                    <a name="//apple_ref/swift/Property/kAnimationFrameCellIdentifier" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF529kAnimationFrameCellIdentifierSS">kAnimationFrameCellIdentifier</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The reuse identifier by means of which the collection view identifies and queues the views for the animation frame cells.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="k">let</span> <span class="nv">kAnimationFrameCellIdentifier</span> <span class="o">=</span> <span class="s">"AnimationFrameCell"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF537kShowAnimationSettingsSegueIdentifierSS"></a>
+                    <a name="//apple_ref/swift/Property/kShowAnimationSettingsSegueIdentifier" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF537kShowAnimationSettingsSegueIdentifierSS">kShowAnimationSettingsSegueIdentifier</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The identifier that is used to detect the segue to the animation settings controller.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="k">let</span> <span class="nv">kShowAnimationSettingsSegueIdentifier</span> <span class="o">=</span> <span class="s">"ShowAnimationSettingsSegue"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF532kAnimationPreviewSegueIdentifierSS"></a>
+                    <a name="//apple_ref/swift/Property/kAnimationPreviewSegueIdentifier" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF532kAnimationPreviewSegueIdentifierSS">kAnimationPreviewSegueIdentifier</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The identifier that is used to detect the segue to the animation preview controller.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="k">let</span> <span class="nv">kAnimationPreviewSegueIdentifier</span> <span class="o">=</span> <span class="s">"AnimationPreviewSegue"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF532kPrepareCacheForFrameErrorDomainSS"></a>
+                    <a name="//apple_ref/swift/Property/kPrepareCacheForFrameErrorDomain" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF532kPrepareCacheForFrameErrorDomainSS">kPrepareCacheForFrameErrorDomain</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A string containing the error domain that defines the errors context for the <code>prepareCacheForFrame</code> method.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="k">let</span> <span class="nv">kPrepareCacheForFrameErrorDomain</span> <span class="o">=</span> <span class="s">"com.gfeditorviewcontroller.preparecacheforframe"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF521kBaseFullSizeImageKeySS"></a>
+                    <a name="//apple_ref/swift/Property/kBaseFullSizeImageKey" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF521kBaseFullSizeImageKeySS">kBaseFullSizeImageKey</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The base part of the key that defines the fullsized image in the cache.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="k">let</span> <span class="nv">kBaseFullSizeImageKey</span> <span class="o">=</span> <span class="s">"FullSizedImageKey"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF513kBaseThumbKeySS"></a>
+                    <a name="//apple_ref/swift/Property/kBaseThumbKey" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF513kBaseThumbKeySS">kBaseThumbKey</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The base part of the key that defines the thumbnail image in the cache.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="k">let</span> <span class="nv">kBaseThumbKey</span> <span class="o">=</span> <span class="s">"ThumbnailImageKey"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF535kGFEditorCollectionViewFixedSpacingV12CoreGraphics7CGFloat"></a>
+                    <a name="//apple_ref/swift/Property/kGFEditorCollectionViewFixedSpacing" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF535kGFEditorCollectionViewFixedSpacingV12CoreGraphics7CGFloat">kGFEditorCollectionViewFixedSpacing</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Defines the fixed space value for the editor controller collection view.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="k">let</span> <span class="nv">kGFEditorCollectionViewFixedSpacing</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mf">5.0</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF523thumbnailRequestOptionsCSo21PHImageRequestOptions"></a>
+                    <a name="//apple_ref/swift/Property/thumbnailRequestOptions" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF523thumbnailRequestOptionsCSo21PHImageRequestOptions">thumbnailRequestOptions</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The options for requesting reduced-size versions of animation frames.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="k">let</span> <span class="nv">thumbnailRequestOptions</span><span class="p">:</span> <span class="kt">PHImageRequestOptions</span> <span class="o">=</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/IBOutlets"></a>
+                <a name="//apple_ref/swift/Section/IBOutlets" class="dashAnchor"></a>
+                <a href="#/IBOutlets">
+                  <h3 class="section-name">IBOutlets</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp22GFEditorViewController21cancelEditorBarButtonGSQCSo15UIBarButtonItem_"></a>
+                    <a name="//apple_ref/swift/Property/cancelEditorBarButton" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp22GFEditorViewController21cancelEditorBarButtonGSQCSo15UIBarButtonItem_">cancelEditorBarButton</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Bar button that is used to cancel GIF Editor controller.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@IBOutlet</span> <span class="k">var</span> <span class="nv">cancelEditorBarButton</span><span class="p">:</span> <span class="kt">UIBarButtonItem</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp22GFEditorViewController23addImagesToGifBarButtonGSQCSo15UIBarButtonItem_"></a>
+                    <a name="//apple_ref/swift/Property/addImagesToGifBarButton" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp22GFEditorViewController23addImagesToGifBarButtonGSQCSo15UIBarButtonItem_">addImagesToGifBarButton</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Bar button that is used to add images to the GIF being edited.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@IBOutlet</span> <span class="k">var</span> <span class="nv">addImagesToGifBarButton</span><span class="p">:</span> <span class="kt">UIBarButtonItem</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp22GFEditorViewController29animationFramesCollectionViewGSQCSo16UICollectionView_"></a>
+                    <a name="//apple_ref/swift/Property/animationFramesCollectionView" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp22GFEditorViewController29animationFramesCollectionViewGSQCSo16UICollectionView_">animationFramesCollectionView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Collection view that holds all selected animation frames.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@IBOutlet</span> <span class="k">var</span> <span class="nv">animationFramesCollectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp22GFEditorViewController17settingsBarButtonGSQCSo15UIBarButtonItem_"></a>
+                    <a name="//apple_ref/swift/Property/settingsBarButton" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp22GFEditorViewController17settingsBarButtonGSQCSo15UIBarButtonItem_">settingsBarButton</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Bar button used to open the settings controller.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@IBOutlet</span> <span class="k">var</span> <span class="nv">settingsBarButton</span><span class="p">:</span> <span class="kt">UIBarButtonItem</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13GifFactoryApp22GFEditorViewController16previewBarButtonGSQCSo15UIBarButtonItem_"></a>
+                    <a name="//apple_ref/swift/Property/previewBarButton" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13GifFactoryApp22GFEditorViewController16previewBarButtonGSQCSo15UIBarButtonItem_">previewBarButton</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Bar button used to open the preview controller.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@IBOutlet</span> <span class="k">var</span> <span class="nv">previewBarButton</span><span class="p">:</span> <span class="kt">UIBarButtonItem</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/IBActions"></a>
+                <a name="//apple_ref/swift/Section/IBActions" class="dashAnchor"></a>
+                <a href="#/IBActions">
+                  <h3 class="section-name">IBActions</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp22GFEditorViewController21cancelAnimationEditorFPs9AnyObject_T_"></a>
+                    <a name="//apple_ref/swift/Method/cancelAnimationEditor(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp22GFEditorViewController21cancelAnimationEditorFPs9AnyObject_T_">cancelAnimationEditor(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Cancels animation editor view controller.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@IBAction</span> <span class="kd">func</span> <span class="nf">cancelAnimationEditor</span><span class="p">(</span><span class="nv">sender</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Button that is used to cancel the controller.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp22GFEditorViewController14addImagesToGifFPs9AnyObject_T_"></a>
+                    <a name="//apple_ref/swift/Method/addImagesToGif(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp22GFEditorViewController14addImagesToGifFPs9AnyObject_T_">addImagesToGif(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>It is called when the <code>Add</code> button has been clicked.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@IBAction</span> <span class="kd">func</span> <span class="nf">addImagesToGif</span><span class="p">(</span><span class="nv">sender</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Button that is used to add images to GIF.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Assets%20Management"></a>
+                <a name="//apple_ref/swift/Section/Assets Management" class="dashAnchor"></a>
+                <a href="#/Assets%20Management">
+                  <h3 class="section-name">Assets Management</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp22GFEditorViewController17resetCachedAssetsFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/resetCachedAssets()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp22GFEditorViewController17resetCachedAssetsFT_T_">resetCachedAssets()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Stops caching and clears preheat area.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">resetCachedAssets</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp22GFEditorViewController22clearCacheForGifFramesFGSaCS_10GFGifFrame_T_"></a>
+                    <a name="//apple_ref/swift/Method/clearCacheForGifFrames(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp22GFEditorViewController22clearCacheForGifFramesFGSaCS_10GFGifFrame_T_">clearCacheForGifFrames(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Removes all the cached images both from disk and memory.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">clearCacheForGifFrames</span><span class="p">(</span><span class="nv">removedGifFrames</span><span class="p">:</span> <span class="p">[</span><span class="kt">GFGifFrame</span><span class="p">])</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>removedGifFrames</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The array of GFGifFrame objects the cache must be cleared for.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp22GFEditorViewController21resetCachedThumbnailsFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/resetCachedThumbnails()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp22GFEditorViewController21resetCachedThumbnailsFT_T_">resetCachedThumbnails()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Removes all the cached thumbnails of the extracted video frames.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">resetCachedThumbnails</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp22GFEditorViewController27updateVideoFramesThumbnailsFT17atAddedIndexPathsGSaCSo11NSIndexPath_21withRemovedIndexPathsGSaS1__31needsRemoveThumbnailsFromMemorySb_T_"></a>
+                    <a name="//apple_ref/swift/Method/updateVideoFramesThumbnails(atAddedIndexPaths:withRemovedIndexPaths:needsRemoveThumbnailsFromMemory:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp22GFEditorViewController27updateVideoFramesThumbnailsFT17atAddedIndexPathsGSaCSo11NSIndexPath_21withRemovedIndexPathsGSaS1__31needsRemoveThumbnailsFromMemorySb_T_">updateVideoFramesThumbnails(atAddedIndexPaths:withRemovedIndexPaths:needsRemoveThumbnailsFromMemory:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Updates thumbnails cache of the generated images from the video asset.
+- parameter addedIndexPaths: The array of NSIndexPath objects that represent the indices of the gif frames that must be added to the memory cache.
+- parameter removedIndexPaths: The array of NSIndexPath objects that represent the inices of the gif frames that must be removed from the memory cache.
+- parameter needsRemoveThumbnailsFromMemory: Indicates whether the thumbnails must be removed in accordance with the removedIndexPaths.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">updateVideoFramesThumbnails</span><span class="p">(</span><span class="n">atAddedIndexPaths</span> <span class="nv">addedIndexPaths</span><span class="p">:</span> <span class="p">[</span><span class="kt">NSIndexPath</span><span class="p">],</span> <span class="n">withRemovedIndexPaths</span> <span class="nv">removedIndexPaths</span><span class="p">:</span> <span class="p">[</span><span class="kt">NSIndexPath</span><span class="p">],</span> <span class="nv">needsRemoveThumbnailsFromMemory</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>addedIndexPaths</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The array of NSIndexPath objects that represent the indices of the gif frames that must be added to the memory cache.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>removedIndexPaths</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The array of NSIndexPath objects that represent the inices of the gif frames that must be removed from the memory cache.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>needsRemoveThumbnailsFromMemory</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Indicates whether the thumbnails must be removed in accordance with the removedIndexPaths.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp22GFEditorViewController18updateCachedFramesFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/updateCachedFrames()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp22GFEditorViewController18updateCachedFramesFT_T_">updateCachedFrames()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Updates the cached gif frames in accordance with the scrolled area.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">updateCachedFrames</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp22GFEditorViewController18assetsAtIndexPathsFGSaCSo11NSIndexPath_GSqGSaCSo7PHAsset__"></a>
+                    <a name="//apple_ref/swift/Method/assetsAtIndexPaths(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp22GFEditorViewController18assetsAtIndexPathsFGSaCSo11NSIndexPath_GSqGSaCSo7PHAsset__">assetsAtIndexPaths(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns an array with PHAssets in accordance with the given indexPaths.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">assetsAtIndexPaths</span><span class="p">(</span><span class="nv">indexPaths</span><span class="p">:</span> <span class="p">[</span><span class="kt">NSIndexPath</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">PHAsset</span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>indexPaths</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>NSIndexPath objects representing the cached assets that should be updated.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An array filled with PHAsset objects. It can be nil if no asset is associated with the given index.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Instance%20Methods"></a>
+                <a name="//apple_ref/swift/Section/Instance Methods" class="dashAnchor"></a>
+                <a href="#/Instance%20Methods">
+                  <h3 class="section-name">Instance Methods</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF521prepareGifFramesArrayFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/prepareGifFramesArray()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF521prepareGifFramesArrayFT_T_">prepareGifFramesArray()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Fills the gif frames array according to the given assets (video and photos).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="kd">func</span> <span class="nf">prepareGifFramesArray</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF526prepareVideoFramesForAssetFCS_12GFVideoAssetT_"></a>
+                    <a name="//apple_ref/swift/Method/prepareVideoFramesForAsset(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF526prepareVideoFramesForAssetFCS_12GFVideoAssetT_">prepareVideoFramesForAsset(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Prepares the images extracting them from the video file. </p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="kd">func</span> <span class="nf">prepareVideoFramesForAsset</span><span class="p">(</span><span class="nv">videoAsset</span><span class="p">:</span> <span class="kt">GFVideoAsset</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>videoAsset</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The asset that represents the video file.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF519preparePhotosAssetsFGSaCSo7PHAsset_T_"></a>
+                    <a name="//apple_ref/swift/Method/preparePhotosAssets(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF519preparePhotosAssetsFGSaCSo7PHAsset_T_">preparePhotosAssets(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Prepares the images extracting them from the Photos Library. If the GIF type has been detected all the GIF frames will be extracted too.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="kd">func</span> <span class="nf">preparePhotosAssets</span><span class="p">(</span><span class="nv">photosAssets</span><span class="p">:</span> <span class="p">[</span><span class="kt">PHAsset</span><span class="p">])</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>photosAssets</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The assets in the Photos Library that the user has selected.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF521finalizeFramesLoadingFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/finalizeFramesLoading()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp22GFEditorViewControllerP33_A59C2CEE7D3171C3DEC77D6150991CF521finalizeFramesLoadingFT_T_">finalizeFramesLoading()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Configures the views after the gif frames have been loaded.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">private</span> <span class="kd">func</span> <span class="nf">finalizeFramesLoading</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp22GFEditorViewController14collectionViewFTCSo16UICollectionView20allowMoveAtIndexPathCSo11NSIndexPath_Sb"></a>
+                    <a name="//apple_ref/swift/Method/collectionView(_:allowMoveAtIndexPath:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp22GFEditorViewController14collectionViewFTCSo16UICollectionView20allowMoveAtIndexPathCSo11NSIndexPath_Sb">collectionView(_:allowMoveAtIndexPath:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Prevents drag&#39;n&#39;drop capabilities for specific items.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">collectionView</span><span class="p">(</span><span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="p">,</span> <span class="n">allowMoveAtIndexPath</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">NSIndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp22GFEditorViewController14collectionViewFTCSo16UICollectionView28reorderingItemAlphaInSectionSi_V12CoreGraphics7CGFloat"></a>
+                    <a name="//apple_ref/swift/Method/collectionView(_:reorderingItemAlphaInSection:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp22GFEditorViewController14collectionViewFTCSo16UICollectionView28reorderingItemAlphaInSectionSi_V12CoreGraphics7CGFloat">collectionView(_:reorderingItemAlphaInSection:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the opacity value of the cell&rsquo;s placeholder, specified as a value from 0.0 to 1.0.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">collectionView</span><span class="p">(</span><span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="p">,</span> <span class="n">reorderingItemAlphaInSection</span> <span class="nv">section</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CGFloat</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13GifFactoryApp22GFEditorViewController38scrollTrigerEdgeInsetsInCollectionViewFCSo16UICollectionViewVSC12UIEdgeInsets"></a>
+                    <a name="//apple_ref/swift/Method/scrollTrigerEdgeInsetsInCollectionView(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13GifFactoryApp22GFEditorViewController38scrollTrigerEdgeInsetsInCollectionViewFCSo16UICollectionViewVSC12UIEdgeInsets">scrollTrigerEdgeInsetsInCollectionView(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Specifies insets from the dragged cell that trigger scrolling.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">scrollTrigerEdgeInsetsInCollectionView</span><span class="p">(</span><span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UIEdgeInsets</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>Created by Storix. Copyright © 2016 Storix. All rights reserved.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.6.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

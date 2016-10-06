@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "DEC9655C86DFC86C6614A589537F2216949D72AF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "DEC9655C86DFC86C6614A589537F2216949D72AF" : 0,
+    "F21D94E1D4EEA596BF566067A500B2735C03D3D2" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "0DC4BC38-F7C3-4CDE-94CF-C9824EA44138",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "DEC9655C86DFC86C6614A589537F2216949D72AF" : "GifFactoryApp\/",
+    "F21D94E1D4EEA596BF566067A500B2735C03D3D2" : "GifFactoryApp\/Private%20Pods%20Sources\/VideoTrimmerView\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "GifFactoryApp",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "GifFactoryApp.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "bitbucket.org:Storix\/giffactoryapp.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DEC9655C86DFC86C6614A589537F2216949D72AF"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "bitbucket.org:Storix\/videotrimmerview.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F21D94E1D4EEA596BF566067A500B2735C03D3D2"
+    }
+  ]
+}

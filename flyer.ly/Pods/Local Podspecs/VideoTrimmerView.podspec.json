@@ -1,0 +1,43 @@
+{
+  "name": "VideoTrimmerView",
+  "version": "0.1.7",
+  "summary": "The custom `UIView` that provides the scalable timeline to trim the video files.",
+  "description": "VideoTrimmerView is a `UIView` subclass that provides controls by means of which it is easy to select the time range for the video file trimming. It is possible to change the scale of the video timeline to make the selection process more comfortable for the large video files. It is highly customizable and configurable. The portrait and landscape modes are supported.",
+  "homepage": "https://bitbucket.org/Storix/videotrimmerview",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Stan Mots (Storix)": "stuffokator@gmail.com"
+  },
+  "source": {
+    "git": "https://Storix@bitbucket.org/Storix/videotrimmerview.git",
+    "tag": "v0.1.7"
+  },
+  "social_media_url": "https://twitter.com/iStorix",
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "VideoTrimmerView/Classes/**/*.{swift}",
+  "resource_bundles": {
+    "VideoTrimmerView": [
+      "VideoTrimmerView/Assets/**/*.{storyboard,xib,xcassets,json,imageset,png}"
+    ]
+  },
+  "frameworks": [
+    "UIKit",
+    "AVFoundation"
+  ],
+  "dependencies": {
+    "XCGLogger": [
+      "~> 3.3"
+    ],
+    "YYWebImage": [
+
+    ]
+  },
+  "pod_target_xcconfig": {
+    "ENABLE_TESTABILITY": "YES"
+  }
+}

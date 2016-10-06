@@ -1,0 +1,37 @@
+platform :ios, '8.0'
+use_frameworks!
+
+source 'https://github.com/CocoaPods/Specs.git'
+
+# Use your own Specs repository.
+#source 'https://Storix@bitbucket.org/Storix/specs.git'
+
+def common_pods
+    pod 'XCGLogger', '~> 3.3'
+    pod "RAReorderableLayout", '~> 0.4'
+    pod 'SVProgressHUD', '~> 2.0'
+    pod 'YYWebImage', '~> 1.0'
+
+    # firebase
+    pod 'Firebase/Core'
+    pod 'Firebase/AdMob'
+
+    # forked repos
+    pod 'CTAssetsPickerController', :git => 'git@github.com:storix/CTAssetsPickerController.git', :branch => 'production'
+    pod 'CTAssetsPickerController/GIF', :git => 'git@github.com:storix/CTAssetsPickerController.git', :branch => 'production'
+    pod 'RMPZoomTransitionAnimator', :git => 'git@github.com:storix/RMPZoomTransitionAnimator.git', :branch => 'master'
+
+    # private pods
+    pod 'VideoTrimmerView', :path => './Private Pods Sources/VideoTrimmerView'
+end
+
+target 'GifFactoryApp' do
+    common_pods
+end
+
+target 'GifFactoryAppTests' do
+    common_pods
+    pod 'Quick', '~> 0.9'
+    pod 'Nimble', '~> 4.0'
+end
+
