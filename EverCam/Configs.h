@@ -42,7 +42,7 @@
 
 
 // YOUR INSTAGRAM PAGE URL =====================================
-#define FACEBOOK_PAGE_LINK @"https://www.facebook.com/pages/Green-Mtn-Labs/161927103963336"
+#define FACEBOOK_PAGE_LINK @"http://facebook.com/GreenMtnLabs"
 //-----------------------------------------------------------------------------
 
 
