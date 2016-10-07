@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<game GSCVersion="0.10.1" PGFVersion="0.19" title="iFireplaces"><tags>DBA, DeepbueApps, Templates, particles, effects</tags><resolutionIndependence>0</resolutionIndependence><instructions>Review the actors to see how the Particles were created.
+</instructions><resolution>0</resolution><longDescription>FIRE EFFECT PARTICLE KIT
+Advanced DBA Particles effects Kit.
+By Deep Blue Apps
+www.deepblueapps.com	</longDescription><prototypes><actor id="id256579"/><actor id="id856812"/><actor id="id912102"/><actor id="id464291"/><actor id="id577751"/><actor id="id965719"/><actor id="id866831"/><actor id="id482993"/><actor id="id354900"/><actor id="id855059"/><actor id="id199027"/><actor id="id530709"/><actor id="id230380"/></prototypes><plugins><attributes id="playhaven"/><attributes id="qqgamecenter"><boolean id="enabled">false</boolean></attributes></plugins><scenes><scene id="id269551"/></scenes><attributes><text id="name">default name</text><real id="time">0</real><size id="displaySize"><real id="width">480</real><real id="height">320</real></size><text id="actorTags"></text><boolean name="InfoMenu" id="id688132">false</boolean><index name="FireplaceNr" id="id350444">1</index></attributes></game>
