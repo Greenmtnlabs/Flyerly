@@ -19,7 +19,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"saveOriginalPhoto"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"saveToCustomAlbum"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    
+    [GADMobileAds configureWithApplicationID:ADMOB_ID];
     return true;
 }
 

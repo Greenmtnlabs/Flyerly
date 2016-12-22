@@ -27,7 +27,9 @@
     _sendFeedbackLabel.text = NSLocalizedString(@"Send feedback", @"");
     _aboutLabel.text = NSLocalizedString(@"About", @"");
     _likeUsonFBLabel.text = NSLocalizedString(@"Like Us on Facebook", @"");
-    
+    self.bannerView.adUnitID = ADMOB_BANNER_ID;
+    self.bannerView.rootViewController = self;
+    [self.bannerView loadRequest:[self request]];
     
     // Set the swtches accordingly to saved choices
     saveOriginalPhoto = [[NSUserDefaults standardUserDefaults] boolForKey:@"saveOriginalPhoto"];
@@ -39,7 +41,20 @@
     } else {  [_customAlbumSwitch setOn:false];  }
 }
 
-
+- (GADRequest *)request {
+    GADRequest *request = [GADRequest request];
+    
+    // Make the request for a test ad. Put in an identifier for the simulator as well as any devices
+    // you want to receive test ads.
+    request.testDevices = @[
+                            // TODO: Add your device/simulator test identifiers here. Your device identifier is printed to
+                            // the console when the app is launched.
+                            //NSString *udid = [UIDevice currentDevice].uniqueIdentifier;
+                            @"Simulator",
+                            @"da40d7ada5c1c5994184c744d0a21b81"
+                            ];
+    return request;
+}
 - (IBAction)saveOriginalChanged:(UISwitch *)sender {
     if (sender.isOn) {
         saveOriginalPhoto = true;

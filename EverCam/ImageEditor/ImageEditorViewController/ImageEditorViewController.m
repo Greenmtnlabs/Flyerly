@@ -21,6 +21,7 @@ ImageToolProtocol
 @property (nonatomic, strong) ImageToolBase *currentTool;
 @property (nonatomic, strong, readwrite) ImageToolInfo *toolInfo;
 @property (nonatomic, strong) UIImageView *targetImageView;
+@property (weak, nonatomic) IBOutlet GADBannerView *bannerView;
 @end
 
 
@@ -129,10 +130,28 @@ ImageToolProtocol
         _imageView = [UIImageView new];
         [_scrollView addSubview:_imageView];
     }
+    
+    self.bannerView.adUnitID = ADMOB_BANNER_ID;
+    
+    self.bannerView.rootViewController = self;
+    [self.bannerView loadRequest:[self request]];
 }
 
 
-
+- (GADRequest *)request {
+    GADRequest *request = [GADRequest request];
+    
+    // Make the request for a test ad. Put in an identifier for the simulator as well as any devices
+    // you want to receive test ads.
+    request.testDevices = @[
+                            // TODO: Add your device/simulator test identifiers here. Your device identifier is printed to
+                            // the console when the app is launched.
+                            //NSString *udid = [UIDevice currentDevice].uniqueIdentifier;
+                            @"Simulator",
+                            @"da40d7ada5c1c5994184c744d0a21b81"
+                            ];
+    return request;
+}
 
 #pragma mark- View transition
 

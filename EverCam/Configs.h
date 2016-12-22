@@ -13,13 +13,13 @@
 #define APP_NAME @"EverCam"
 
 // Replace "XXXXXXX" with your own App ID, you can find it by clicking on "More -> About This App" button in iTunes Connect, copy the Apple ID and paste it here
-#define RATE_US_LINK @"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=XXXXXXX"
+#define RATE_US_LINK @"https://itunes.apple.com/us/app/evercam-photo-edit-filters/id1093877555?ls=1&mt=8"
 
 // Replace the link below with the one of your app
-#define ITUNES_STORE_LINK @"https://itunes.apple.com/US/app/id979522202?mt=8"
+#define ITUNES_STORE_LINK @"https://itunes.apple.com/us/app/evercam-photo-edit-filters/id1093877555?ls=1&mt=8"
 
 
-#define FEEDBACK_EMAIL_ADDRESS @"mywebsite@domain.com"
+#define FEEDBACK_EMAIL_ADDRESS @"evercam@greenmtnlabs.com"
 //-----------------------------------------------------------------------------
 
 
@@ -67,6 +67,9 @@
 //-----------------------------------------------------------------------------
 
 
-
+// Add MOB ID ===================
+#define ADMOB_ID @"ca-app-pub-3218409375181552~6526150229"
+#define ADMOB_BANNER_ID @"ca-app-pub-3218409375181552/8002883428"
+#define ADMOB_INTER_ID @"ca-app-pub-3218409375181552/1956349826"
 
 #endif

@@ -36,7 +36,7 @@ MFMailComposeViewControllerDelegate
 @property (strong, nonatomic) IBOutlet UILabel *sendFeedbackLabel;
 @property (strong, nonatomic) IBOutlet UILabel *aboutLabel;
 @property (strong, nonatomic) IBOutlet UILabel *likeUsonFBLabel;
-
+@property (weak, nonatomic) IBOutlet GADBannerView *bannerView;
 
 
 

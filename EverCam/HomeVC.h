@@ -13,7 +13,7 @@
 #import "PreviewVC.h"
 #import "IAPController.h"
 #import "Configs.h"
-
+@import GoogleMobileAds;
 
 @interface HomeVC : UIViewController <
 UIImagePickerControllerDelegate,
@@ -28,6 +28,7 @@ UINavigationControllerDelegate
 @property (weak, nonatomic) IBOutlet UIButton *cameraOutlet;
 @property (weak, nonatomic) IBOutlet UIButton *libraryOutlet;
 
+@property (weak, nonatomic) IBOutlet GADBannerView *bannerView;
 
 // LABELS
 @property (weak, nonatomic) IBOutlet UILabel *takeApicLabel;

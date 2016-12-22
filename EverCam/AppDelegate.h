@@ -18,5 +18,4 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) IntroScreen *introScreen;
 @property (strong, nonatomic) InfoScreen *infoScreen;
-
 @end
