@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		209193EA1E03D924003A8408 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 209193E91E03D924003A8408 /* GoogleMobileAds.framework */; };
+		209193F11E03D936003A8408 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 209193EB1E03D936003A8408 /* FirebaseAnalytics.framework */; };
+		209193F21E03D936003A8408 /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 209193EC1E03D936003A8408 /* FirebaseCore.framework */; };
+		209193F31E03D936003A8408 /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 209193ED1E03D936003A8408 /* FirebaseInstanceID.framework */; };
+		209193F41E03D936003A8408 /* GoogleInterchangeUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 209193EE1E03D936003A8408 /* GoogleInterchangeUtilities.framework */; };
+		209193F51E03D936003A8408 /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 209193EF1E03D936003A8408 /* GoogleSymbolUtilities.framework */; };
+		209193F61E03D936003A8408 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 209193F01E03D936003A8408 /* GoogleToolboxForMac.framework */; };
+		209193FB1E03FEEC003A8408 /* icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 209193F71E03FEEC003A8408 /* icon-60.png */; };
+		209193FC1E03FEEC003A8408 /* icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 209193F81E03FEEC003A8408 /* icon-120.png */; };
+		209193FD1E03FEEC003A8408 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 209193F91E03FEEC003A8408 /* icon.png */; };
+		209193FE1E03FEEC003A8408 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 209193FA1E03FEEC003A8408 /* icon@2x.png */; };
 		7213FB60198A7F9100F9AA6B /* Comfortaa-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7213FB5F198A7F9100F9AA6B /* Comfortaa-Light.ttf */; };
 		722165C61995F8A5008C1C0B /* ImageEditor.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7221653A1995F8A5008C1C0B /* ImageEditor.bundle */; };
 		722165C71995F8A5008C1C0B /* ImageEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7221653C1995F8A5008C1C0B /* ImageEditor.m */; };
@@ -134,6 +145,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		209193E91E03D924003A8408 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
+		209193EB1E03D936003A8408 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseAnalytics.framework; sourceTree = "<group>"; };
+		209193EC1E03D936003A8408 /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = "<group>"; };
+		209193ED1E03D936003A8408 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseInstanceID.framework; sourceTree = "<group>"; };
+		209193EE1E03D936003A8408 /* GoogleInterchangeUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleInterchangeUtilities.framework; sourceTree = "<group>"; };
+		209193EF1E03D936003A8408 /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
+		209193F01E03D936003A8408 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleToolboxForMac.framework; sourceTree = "<group>"; };
+		209193F71E03FEEC003A8408 /* icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-60.png"; sourceTree = "<group>"; };
+		209193F81E03FEEC003A8408 /* icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-120.png"; sourceTree = "<group>"; };
+		209193F91E03FEEC003A8408 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		209193FA1E03FEEC003A8408 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		7213FB5F198A7F9100F9AA6B /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Light.ttf"; sourceTree = "<group>"; };
 		7221653A1995F8A5008C1C0B /* ImageEditor.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ImageEditor.bundle; sourceTree = "<group>"; };
 		7221653B1995F8A5008C1C0B /* ImageEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageEditor.h; sourceTree = "<group>"; };
@@ -340,11 +362,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				209193F61E03D936003A8408 /* GoogleToolboxForMac.framework in Frameworks */,
+				209193F11E03D936003A8408 /* FirebaseAnalytics.framework in Frameworks */,
 				B00FAEC719387C4B00D7C12D /* Foundation.framework in Frameworks */,
+				209193F21E03D936003A8408 /* FirebaseCore.framework in Frameworks */,
 				B08397BC1945D8FC009CB2BA /* QuartzCore.framework in Frameworks */,
 				B0713F5E1938AF0E00B56CA3 /* Social.framework in Frameworks */,
 				725DB4B31AFC9EF400864F23 /* StoreKit.framework in Frameworks */,
+				209193F51E03D936003A8408 /* GoogleSymbolUtilities.framework in Frameworks */,
 				B00FAEC919387C4B00D7C12D /* CoreGraphics.framework in Frameworks */,
+				209193F41E03D936003A8408 /* GoogleInterchangeUtilities.framework in Frameworks */,
+				209193F31E03D936003A8408 /* FirebaseInstanceID.framework in Frameworks */,
+				209193EA1E03D924003A8408 /* GoogleMobileAds.framework in Frameworks */,
 				B00FAECB19387C4B00D7C12D /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -738,6 +767,13 @@
 		B00FAEC519387C4B00D7C12D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				209193EB1E03D936003A8408 /* FirebaseAnalytics.framework */,
+				209193EC1E03D936003A8408 /* FirebaseCore.framework */,
+				209193ED1E03D936003A8408 /* FirebaseInstanceID.framework */,
+				209193EE1E03D936003A8408 /* GoogleInterchangeUtilities.framework */,
+				209193EF1E03D936003A8408 /* GoogleSymbolUtilities.framework */,
+				209193F01E03D936003A8408 /* GoogleToolboxForMac.framework */,
+				209193E91E03D924003A8408 /* GoogleMobileAds.framework */,
 				725DB4B21AFC9EF400864F23 /* StoreKit.framework */,
 				72CC74751AFBA0B800AB9D75 /* DropboxSDK.framework */,
 				B08397BB1945D8FC009CB2BA /* QuartzCore.framework */,
@@ -782,6 +818,10 @@
 		B00FAECD19387C4B00D7C12D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				209193F71E03FEEC003A8408 /* icon-60.png */,
+				209193F81E03FEEC003A8408 /* icon-120.png */,
+				209193F91E03FEEC003A8408 /* icon.png */,
+				209193FA1E03FEEC003A8408 /* icon@2x.png */,
 				729A88BF1C99B6600004E676 /* Titillium Font */,
 				7252E35319F63C8D007E8918 /* Localizable.strings */,
 				B00FAFF519387D5600D7C12D /* Fonts */,
@@ -925,9 +965,11 @@
 				B00FB01519387D5600D7C12D /* AdineKirnberg-Script.ttf in Resources */,
 				B00FB02619387D5600D7C12D /* Geotica_2012.otf in Resources */,
 				B00FB02119387D5600D7C12D /* Boutiques of Merauke.otf in Resources */,
+				209193FB1E03FEEC003A8408 /* icon-60.png in Resources */,
 				B00FB01E19387D5600D7C12D /* Blackout Sunrise.ttf in Resources */,
 				729A88DB1C99B6600004E676 /* Titillium-SemiboldItalic.otf in Resources */,
 				729A88D51C99B6600004E676 /* Titillium-LightItalic.otf in Resources */,
+				209193FD1E03FEEC003A8408 /* icon.png in Resources */,
 				7252E35519F63C8D007E8918 /* Localizable.strings in Resources */,
 				B00FAEDF19387C4B00D7C12D /* Images.xcassets in Resources */,
 				B00FB02319387D5600D7C12D /* Dancing Script.ttf in Resources */,
@@ -936,7 +978,9 @@
 				B00FB02A19387D5600D7C12D /* Metropolis 1920.otf in Resources */,
 				729A88DD1C99B6600004E676 /* Titillium-Thin.otf in Resources */,
 				B00FB02919387D5600D7C12D /* Lobster 1.4.otf in Resources */,
+				209193FC1E03FEEC003A8408 /* icon-120.png in Resources */,
 				B00FB01619387D5600D7C12D /* Alpha54.ttf in Resources */,
+				209193FE1E03FEEC003A8408 /* icon@2x.png in Resources */,
 				729A88D81C99B6600004E676 /* Titillium-RegularItalic.otf in Resources */,
 				B00FB02F19387D5600D7C12D /* SigmarOne.otf in Resources */,
 				722165C61995F8A5008C1C0B /* ImageEditor.bundle in Resources */,
@@ -1130,7 +1174,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/EverCam",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EverCam/EverCam-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/EverCam/EverCam-Info.plist";
@@ -1150,7 +1197,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/EverCam",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EverCam/EverCam-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/EverCam/EverCam-Info.plist";

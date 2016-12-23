@@ -16,7 +16,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "ALAssetsLibrary+CustomPhotoAlbum.h"
 #import <Social/Social.h>
-
+@import GoogleMobileAds;
 // Photo library
 ALAssetsLibrary *library;
 
@@ -37,21 +37,28 @@ UIImage *imageToBeShared;
 @interface SharingVC : UIViewController
 <
 UIDocumentInteractionControllerDelegate,
-MFMailComposeViewControllerDelegate
+MFMailComposeViewControllerDelegate,
+UIAlertViewDelegate,
+GADInterstitialDelegate
 >
 
 // Labels
 @property (weak, nonatomic) IBOutlet UILabel *sharingOptionsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *photoLibraryLabel;
 @property (weak, nonatomic) IBOutlet UILabel *mailLabel;
+@property(nonatomic, strong) GADInterstitial *interstitial;
 
-
+@property (weak, nonatomic) IBOutlet GADBannerView *bannerView;
 // Preview Image
 @property (weak, nonatomic) IBOutlet UIImageView *previewImage;
 
 // Container ScrollView
 @property (strong, nonatomic) IBOutlet UIScrollView *containerScrollView;
 
-
-
+@property (nonatomic) BOOL isForFacebook;
+@property (nonatomic) BOOL isForInstagram;
+@property (nonatomic) BOOL isForTwitter;
+@property (nonatomic) BOOL isForWhatsApp;
+@property (nonatomic) BOOL isForMail;
+@property (nonatomic) BOOL isForPhotoLibrary;
 @end

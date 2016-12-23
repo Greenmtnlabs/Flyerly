@@ -62,8 +62,25 @@
     _libraryOutlet.layer.cornerRadius = 20;
     _cameraOutlet.layer.cornerRadius = 20;
     _logoImage.layer.cornerRadius = 30;
+    self.bannerView.adUnitID = ADMOB_BANNER_ID;
+    self.bannerView.rootViewController = self;
+    [self.bannerView loadRequest:[self request]];
 }
 
+- (GADRequest *)request {
+    GADRequest *request = [GADRequest request];
+    
+    // Make the request for a test ad. Put in an identifier for the simulator as well as any devices
+    // you want to receive test ads.
+    request.testDevices = @[
+                            // TODO: Add your device/simulator test identifiers here. Your device identifier is printed to
+                            // the console when the app is launched.
+                            //NSString *udid = [UIDevice currentDevice].uniqueIdentifier;
+                            @"Simulator",
+                            @"da40d7ada5c1c5994184c744d0a21b81"
+                            ];
+    return request;
+}
 
 - (IBAction)cameraButt:(id)sender {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -133,7 +150,22 @@
 
 
 
+#pragma mark - Flyerly BUTTON
+- (IBAction)flyerlyButt:(id)sender {
+    [self openITunes:@"socialflyr-free/flyerly-add-creativity-to/id344130515?mt=8"];
+}
 
+/*
+ * This method opens iTune
+ * @params:
+ *      appID: NSString
+ * @return:
+ *      void
+ */
+-(void) openITunes : (NSString *) appID{
+    NSString *urlString = [NSString stringWithFormat:@"http://itunes.apple.com/app/%@",appID];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
