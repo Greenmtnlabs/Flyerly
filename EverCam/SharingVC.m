@@ -59,12 +59,8 @@
     _sharingOptionsLabel.text = NSLocalizedString(@"Share Your Picture", @"");
     _mailLabel.text = NSLocalizedString(@"Mail", @"");
     
-    self.isForMail = NO;
-    self.isForFacebook = NO;
-    self.isForTwitter = NO;
-    self.isForInstagram = NO;
     self.isForWhatsApp = NO;
-    self.isForPhotoLibrary = NO;
+    self.isForInstagram = NO;
     // Resize container scrollView
     _containerScrollView.contentSize = CGSizeMake(_containerScrollView.frame.size.width, 578);
     self.interstitial = [self createAndLoadInterstitial];
@@ -106,91 +102,60 @@
 
 - (void)interstitialDidDismissScreen:(GADInterstitial *)ad{
     self.interstitial = [self createAndLoadInterstitial];
-    
-    if (self.isForPhotoLibrary) {
-        [self photoLibraryAction];
-    } else if (self.isForMail) {
-        [self mailAction];
-    } else if (self.isForFacebook) {
-        [self facebookAction];
-    } else if (self.isForInstagram) {
+    if (self.isForInstagram) {
+        self.isForInstagram = NO;
         [self instagramAction];
     } else if (self.isForWhatsApp) {
+        self.isForWhatsApp = NO;
         [self whatsappAction];
-    } else if (self.isForTwitter) {
-        [self twitterAction];
     }
-    
-    self.isForMail = NO;
-    self.isForFacebook = NO;
-    self.isForTwitter = NO;
-    self.isForInstagram = NO;
-    self.isForWhatsApp = NO;
-    self.isForPhotoLibrary = NO;
 }
 
 #pragma mark - SAVE IMAGE TO PHOTO LIBRARY ========================
 - (IBAction)photoLibButt:(id)sender {
-    
-    self.isForMail = NO;
-    self.isForFacebook = NO;
-    self.isForTwitter = NO;
-    self.isForInstagram = NO;
-    self.isForWhatsApp = NO;
-    self.isForPhotoLibrary = YES;
-    
-    if ([self.interstitial isReady]) {
-        [self.interstitial presentFromRootViewController:self];
-    }
+    [self photoLibraryAction];
 }
 
 
 #pragma mark - FACEBOOK SHARING ========================
 - (IBAction)facebookButt:(id)sender {
-    
-    self.isForMail = NO;
-    self.isForFacebook = YES;
-    self.isForTwitter = NO;
-    self.isForInstagram = NO;
-    self.isForWhatsApp = NO;
-    self.isForPhotoLibrary = NO;
-    
-    if ([self.interstitial isReady]) {
-        [self.interstitial presentFromRootViewController:self];
-    }
+    [self facebookAction];
 }
-
-
-
 
 
 #pragma mark - TWITTER SHARING ========================
 - (IBAction)twitterButt:(id)sender {
-    
-    self.isForMail = NO;
-    self.isForFacebook = NO;
-    self.isForTwitter = YES;
-    self.isForInstagram = NO;
+    [self twitterAction];
+}
+
+
+#pragma mark - EMAIL SHARING ==============================
+- (IBAction)mailButt:(id)sender {
+    [self mailAction];
+}
+
+#pragma mark - INSTAGRAM SHARING =====================
+- (IBAction)instagramButt:(id)sender {
+    /* =================
+     NOTE: The following methods work only on real device, not iOS Simulator, and you should have Instagram already installed into your device!
+     ================= */
+    self.isForInstagram = YES;
     self.isForWhatsApp = NO;
-    self.isForPhotoLibrary = NO;
-    
     if ([self.interstitial isReady]) {
         [self.interstitial presentFromRootViewController:self];
     }
 }
 
-
-
-#pragma mark - EMAIL SHARING ==============================
-- (IBAction)mailButt:(id)sender {
-    
-    self.isForMail = YES;
-    self.isForFacebook = NO;
-    self.isForTwitter = NO;
+#pragma mark - SEND IMAGE VIA WHATSAPP =====================
+- (IBAction)whatsappButt:(id)sender {
+    self.isForWhatsApp = YES;
     self.isForInstagram = NO;
-    self.isForWhatsApp = NO;
-    self.isForPhotoLibrary = NO;
-    
+    if ([self.interstitial isReady]) {
+        [self.interstitial presentFromRootViewController:self];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
     if ([self.interstitial isReady]) {
         [self.interstitial presentFromRootViewController:self];
     }
@@ -201,14 +166,14 @@
     switch (results) {
         case MFMailComposeResultCancelled: {
             UIAlertView *myAlert = [[UIAlertView alloc]initWithTitle: NSLocalizedString(@"Email Cancelled!", @"")
-            message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [myAlert show];
         }
             break;
             
         case MFMailComposeResultSaved:{
             UIAlertView *myAlert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Email Saved!", @"")
-            message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [myAlert show];
         }
             break;
@@ -222,7 +187,7 @@
             
         case MFMailComposeResultFailed:{
             UIAlertView *myAlert = [[UIAlertView alloc]initWithTitle: NSLocalizedString(@"Email error, try again!", @"")
-                message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [myAlert show];
         }
             break;
@@ -233,29 +198,6 @@
     // Dismiss the Email View Controller
     [self dismissViewControllerAnimated:true completion: nil];
 }
-
-
-
-
-#pragma mark - INSTAGRAM SHARING =====================
-- (IBAction)instagramButt:(id)sender {
-    /* =================
-     NOTE: The following methods work only on real device, not iOS Simulator, and you should have Instagram already installed into your device!
-     ================= */
-    self.isForMail = NO;
-    self.isForFacebook = NO;
-    self.isForTwitter = NO;
-    self.isForInstagram = YES;
-    self.isForWhatsApp = NO;
-    self.isForPhotoLibrary = NO;
-    
-    if ([self.interstitial isReady]) {
-        [self.interstitial presentFromRootViewController:self];
-    }
-    
-}
-
-
 
 
 #pragma mark - PIQUK SHARING =====================
@@ -298,25 +240,6 @@
         [alert show];
     }
 }
-
-
-
-
-#pragma mark - SEND IMAGE VIA WHATSAPP =====================
-- (IBAction)whatsappButt:(id)sender {
-    
-    self.isForMail = NO;
-    self.isForFacebook = NO;
-    self.isForTwitter = NO;
-    self.isForInstagram = NO;
-    self.isForWhatsApp = YES;
-    self.isForPhotoLibrary = NO;
-    
-    if ([self.interstitial isReady]) {
-        [self.interstitial presentFromRootViewController:self];
-    }
-}
-
 
 
 #pragma  mark - Sharing Actions =========================
@@ -384,7 +307,7 @@
         
         NSString *message = NSLocalizedString(FACEBOOK_LOGIN_ALERT, @"");
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle: APP_NAME
-                                                            message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                                            message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
     }
     
@@ -401,8 +324,15 @@
             default: break;
         }
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Facebook"
-                                                        message:output delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert;
+        if ([output rangeOfString:@"Your picture is on Facebook"].location == NSNotFound) {
+            alert = [[UIAlertView alloc] initWithTitle:@"Facebook"
+                                               message:output delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        } else {
+            alert = [[UIAlertView alloc] initWithTitle:@"Facebook"
+                                               message:output delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        }
+        
         [alert show];
         
     }];

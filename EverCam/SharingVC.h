@@ -55,10 +55,6 @@ GADInterstitialDelegate
 // Container ScrollView
 @property (strong, nonatomic) IBOutlet UIScrollView *containerScrollView;
 
-@property (nonatomic) BOOL isForFacebook;
 @property (nonatomic) BOOL isForInstagram;
-@property (nonatomic) BOOL isForTwitter;
 @property (nonatomic) BOOL isForWhatsApp;
-@property (nonatomic) BOOL isForMail;
-@property (nonatomic) BOOL isForPhotoLibrary;
 @end
