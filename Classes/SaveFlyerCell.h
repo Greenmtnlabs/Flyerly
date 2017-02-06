@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Parse/Parse.h>
+//#import <Parse/Parse.h>
 #import "Flyer.h"
 @interface SaveFlyerCell : UITableViewCell
 

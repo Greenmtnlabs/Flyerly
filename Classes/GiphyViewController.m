@@ -110,64 +110,64 @@
     
     [self deleteSubviewsFromView:giphyBgsView];
 
-    //send request to giphy api
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        reqGiphyApiInProccess = NO;
-        [self hideLoadingIndicator];
-        giphyData = responseObject[@"data"];
-        
-        if( giphyData != nil && giphyData.count > 0 ){
-            int heightHandlerForMainView = 0;
-            int i=0, row = 0, column = 0;
-            int showInRow = 2, defX = 16, defY = 16 , defW = 182, defH = 182;//414 full width
-            
-            if( IS_IPHONE_4 ){
-                showInRow = 2, defX = 13, defY = 13 , defW = 141, defH = 141;//320 full width
-            } else if(IS_IPHONE_5 ){
-                showInRow = 2, defX = 13, defY = 13 , defW = 141, defH = 141;//320 full width
-            } else if( IS_IPHONE_6 ){
-                showInRow = 2, defX = 17, defY = 17 , defW = 162, defH = 162;//375 full width
-            }
-            
-            int x = 0, y = 0;
-            for(NSDictionary *gif in giphyData ){
-                column = i % showInRow;
-                row = floor( i / showInRow );
-                x = defX*column+defX + defW*column;
-                y = defY*row+defY + defH*row;
-
-                UIView *viewForGiphy = [[UIView alloc]initWithFrame:CGRectMake(x-4, y-4, defW+4, defH+4)];
-                UIWebView *webview=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, defW+4, defH+4)];
-                webview.userInteractionEnabled = NO;
-                webview.scrollView.scrollEnabled = NO;
-                
-                NSString *giphyUrlStr = [[gif[@"images"] objectForKey:@"original"] objectForKey:@"url"];
-                NSString *spinnerImagePath = [[NSBundle mainBundle] pathForResource:@"spinner" ofType:@"gif"];
-                NSString* htmlContent = [NSString stringWithFormat:@"<html><head><title></title></head><body style='margin:0px; padding:0px;'><img src='%@' style='border:1px solid black; width:%ipx; height:%ipx; background:url(%@) no-repeat center center; '></body></html>",giphyUrlStr,defW,defH,spinnerImagePath];
-                [webview loadHTMLString:htmlContent baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
-
-                viewForGiphy.tag = i++;
-                UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectGiphy:)];
-                [viewForGiphy addGestureRecognizer:tapGesture];
-                [viewForGiphy addSubview:webview];
-                [giphyBgsView addSubview:viewForGiphy];
-                
-            }
-            
-            //GiphyBgsView will get height dynamically
-            int gbvH = y+defH+defY+heightHandlerForMainView;
-            int gbvW = layerScrollView.frame.size.width;
-            giphyBgsView.frame = CGRectMake(giphyBgsView.frame.origin.x, giphyBgsView.frame.origin.y, gbvW, gbvH);
-            
-            [layerScrollView addSubview:giphyBgsView];
-            [layerScrollView setContentSize:CGSizeMake(giphyBgsView.frame.size.width,giphyBgsView.frame.size.height)];
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];
+//    //send request to giphy api
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        
+//        reqGiphyApiInProccess = NO;
+//        [self hideLoadingIndicator];
+//        giphyData = responseObject[@"data"];
+//        
+//        if( giphyData != nil && giphyData.count > 0 ){
+//            int heightHandlerForMainView = 0;
+//            int i=0, row = 0, column = 0;
+//            int showInRow = 2, defX = 16, defY = 16 , defW = 182, defH = 182;//414 full width
+//            
+//            if( IS_IPHONE_4 ){
+//                showInRow = 2, defX = 13, defY = 13 , defW = 141, defH = 141;//320 full width
+//            } else if(IS_IPHONE_5 ){
+//                showInRow = 2, defX = 13, defY = 13 , defW = 141, defH = 141;//320 full width
+//            } else if( IS_IPHONE_6 ){
+//                showInRow = 2, defX = 17, defY = 17 , defW = 162, defH = 162;//375 full width
+//            }
+//            
+//            int x = 0, y = 0;
+//            for(NSDictionary *gif in giphyData ){
+//                column = i % showInRow;
+//                row = floor( i / showInRow );
+//                x = defX*column+defX + defW*column;
+//                y = defY*row+defY + defH*row;
+//
+//                UIView *viewForGiphy = [[UIView alloc]initWithFrame:CGRectMake(x-4, y-4, defW+4, defH+4)];
+//                UIWebView *webview=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, defW+4, defH+4)];
+//                webview.userInteractionEnabled = NO;
+//                webview.scrollView.scrollEnabled = NO;
+//                
+//                NSString *giphyUrlStr = [[gif[@"images"] objectForKey:@"original"] objectForKey:@"url"];
+//                NSString *spinnerImagePath = [[NSBundle mainBundle] pathForResource:@"spinner" ofType:@"gif"];
+//                NSString* htmlContent = [NSString stringWithFormat:@"<html><head><title></title></head><body style='margin:0px; padding:0px;'><img src='%@' style='border:1px solid black; width:%ipx; height:%ipx; background:url(%@) no-repeat center center; '></body></html>",giphyUrlStr,defW,defH,spinnerImagePath];
+//                [webview loadHTMLString:htmlContent baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
+//
+//                viewForGiphy.tag = i++;
+//                UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectGiphy:)];
+//                [viewForGiphy addGestureRecognizer:tapGesture];
+//                [viewForGiphy addSubview:webview];
+//                [giphyBgsView addSubview:viewForGiphy];
+//                
+//            }
+//            
+//            //GiphyBgsView will get height dynamically
+//            int gbvH = y+defH+defY+heightHandlerForMainView;
+//            int gbvW = layerScrollView.frame.size.width;
+//            giphyBgsView.frame = CGRectMake(giphyBgsView.frame.origin.x, giphyBgsView.frame.origin.y, gbvW, gbvH);
+//            
+//            [layerScrollView addSubview:giphyBgsView];
+//            [layerScrollView setContentSize:CGSizeMake(giphyBgsView.frame.size.width,giphyBgsView.frame.size.height)];
+//        }
+//        
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"Error: %@", error);
+//    }];
 }
 
 

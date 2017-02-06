@@ -12,7 +12,7 @@
 #import "SHKYouTube.h"
 #import "GTLYouTube.h"
 #import "GTLUtilities.h"
-#import "GTMHTTPUploadFetcher.h"
+//#import "GTMHTTPUploadFetcher.h"
 #import "GTMOAuth2ViewControllerTouch.h"
 
 @interface YouTubeSubClass : SHKYouTube

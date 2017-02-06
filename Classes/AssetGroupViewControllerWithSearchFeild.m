@@ -10,7 +10,7 @@
 #import "Common.h"
 #import "ImageLoader.h"
 #import "InAppViewController.h"
-#import "AFHTTPRequestOperation.h"
+//#import "AFHTTPRequestOperation.h"
 #import "CropViewController.h"
 #include <CommonCrypto/CommonDigest.h>
 
@@ -287,21 +287,21 @@ shouldReloadTableForSearchString:(NSString *)searchString
             NSURL *purchaseImageUrl = [[NSURL alloc] initWithString:purchaseImageUrlString];
             NSURLRequest *purchaseImageUrlRequest = [[NSURLRequest alloc] initWithURL:purchaseImageUrl];
             
-            AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:purchaseImageUrlRequest];
-            requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
-            [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-                
-                
-                UIImage *thumbnail = (UIImage *) responseObject;
-                
-                NSData* data = UIImagePNGRepresentation(thumbnail);
-                
-                [self saveInGallery:data];
-                
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"Image error: %@", error);
-            }];
-            [requestOperation start];
+//            AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:purchaseImageUrlRequest];
+//            requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
+//            [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                
+//                
+//                UIImage *thumbnail = (UIImage *) responseObject;
+//                
+//                NSData* data = UIImagePNGRepresentation(thumbnail);
+//                
+//                [self saveInGallery:data];
+//                
+//            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                NSLog(@"Image error: %@", error);
+//            }];
+//            [requestOperation start];
             
         }
         
@@ -427,13 +427,13 @@ shouldReloadTableForSearchString:(NSString *)searchString
             if (cancelRequest) return ;
             
             //NSArray *requestedProducts = products;
-            bool disablePurchase = ([[PFUser currentUser] sessionToken].length == 0);
+            //bool disablePurchase = ([[PFUser currentUser] sessionToken].length == 0);
             
             NSString *sheetTitle = @"Choose Product";
             
-            if (disablePurchase) {
-                sheetTitle = @"This feature requires Sign In";
-            }
+            //if (disablePurchase) {
+            //    sheetTitle = @"This feature requires Sign In";
+            //}
             
             NSMutableArray *productArray = [[NSMutableArray alloc] init];
             for(SKProduct *product in products)
@@ -484,22 +484,22 @@ shouldReloadTableForSearchString:(NSString *)searchString
     
     [self showLoadingIndicator];
     
-    //Checking if the user is valid or anonymus
-    if ([[PFUser currentUser] sessionToken].length != 0) {
-        
-        [self purchaseProduct];
-        imageID_ = [imagesIDs objectAtIndex:sender.tag];
-        
-        
-    }else {
-        UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"Please sign in first"
-                                                            message: @"To purchase any product, you need to sign in first."
-                                                           delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
-        
-        [someError show];
-        
-        [self hideLoadingIndicator];
-    }
+//    //Checking if the user is valid or anonymus
+//    if ([[PFUser currentUser] sessionToken].length != 0) {
+//        
+//        [self purchaseProduct];
+//        imageID_ = [imagesIDs objectAtIndex:sender.tag];
+//        
+//        
+//    }else {
+//        UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"Please sign in first"
+//                                                            message: @"To purchase any product, you need to sign in first."
+//                                                           delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
+//        
+//        [someError show];
+//        
+//        [self hideLoadingIndicator];
+//    }
     
 }
 

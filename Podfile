@@ -1,4 +1,5 @@
-source 'https://github.com/google/gtm-http-fetcher.git'
+#source 'https://github.com/google/gtm-http-fetcher.git'
+source 'https://github.com/google/gtm-session-fetcher.git'
 source 'https://github.com/CocoaPods/Specs.git'
 
 platform :ios, '9.3'
@@ -30,8 +31,10 @@ platform :ios, '9.3'
     pod 'FBSDKShareKit', '~> 4.6'
     pod 'FBSDKMessengerShareKit', '~> 1.3.2'
     pod 'CrittercismSDK'
-pod 'GTMHTTPFetcher'
-    pod 'GTMSessionFetcher'
+#pod 'GTMHTTPFetcher'
+#pod 'gtm-http-fetcher'
+#pod 'GTMSessionFetcher'
+#pod 'gtm-session-fetcher'
     pod 'GTMOAuth2'
 
     post_install do |installer_representation|

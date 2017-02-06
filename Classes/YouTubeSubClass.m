@@ -78,7 +78,7 @@
     // Start the upload
     self.uploadTicket = [self.youTubeService executeQuery:query completionHandler:uploadComplete];
     self.uploadTicket.uploadProgressBlock = uploadProgress;
-    ((GTMHTTPUploadFetcher *)self.uploadTicket.objectFetcher).locationChangeBlock = locationChangeBlock;
+    //((GTMHTTPUploadFetcher *)self.uploadTicket.objectFetcher).locationChangeBlock = locationChangeBlock;
     
     // TODO: Monitor application going to background/foreground to pause and resume uploads. Possibly tie into offline upload, as we may go offline mid upload
 }

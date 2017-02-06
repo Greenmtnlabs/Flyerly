@@ -8,8 +8,8 @@
 
 #import <FacebookSDK/FacebookSDK.h>
 
-#import <Parse/PFConstants.h>
-#import <Parse/PFUser.h>
+//#import <Parse/PFConstants.h>
+//#import <Parse/PFUser.h>
 
 @class BFTask;
 
@@ -38,7 +38,7 @@
 
  @deprecated Please use `[PFFacebookUtils initializeFacebook]` instead.
  */
-+ (void)initializeWithApplicationId:(NSString *)appId PARSE_DEPRECATED("Use [PFFacebookUtils initializeFacebook] instead.");
+//+ (void)initializeWithApplicationId:(NSString *)appId PARSE_DEPRECATED("Use [PFFacebookUtils initializeFacebook] instead.");
 
 /*!
  @abstract Initializes the Facebook singleton.
@@ -50,8 +50,8 @@
 
  @deprecated Please use `[PFFacebookUtils initializeFacebookWithUrlShemeSuffix:]` instead.
  */
-+ (void)initializeWithApplicationId:(NSString *)appId
-                    urlSchemeSuffix:(NSString *)urlSchemeSuffix PARSE_DEPRECATED("Use [PFFacebookUtils initializeFacebookWithUrlShemeSuffix:] instead.");
+//+ (void)initializeWithApplicationId:(NSString *)appId
+//                    urlSchemeSuffix:(NSString *)urlSchemeSuffix PARSE_DEPRECATED("Use [PFFacebookUtils initializeFacebookWithUrlShemeSuffix:] instead.");
 
 /*!
  @abstract Initializes the Facebook singleton.
@@ -111,7 +111,7 @@
  @param block The block to execute.
  It should have the following argument signature: `^(PFUser *user, NSError *error)`.
  */
-+ (void)logInWithPermissions:(NSArray *)permissions block:(PFUserResultBlock)block;
+//+ (void)logInWithPermissions:(NSArray *)permissions block:(PFUserResultBlock)block;
 
 /*!
  @abstract Logs in a user using Facebook *asynchronously*.
@@ -155,10 +155,10 @@
  @param block The block to execute.
  It should have the following argument signature: `^(PFUser *user, NSError *error)`.
  */
-+ (void)logInWithFacebookId:(NSString *)facebookId
-                accessToken:(NSString *)accessToken
-             expirationDate:(NSDate *)expirationDate
-                      block:(PFUserResultBlock)block;
+//+ (void)logInWithFacebookId:(NSString *)facebookId
+//                accessToken:(NSString *)accessToken
+//             expirationDate:(NSDate *)expirationDate
+//                      block:(PFUserResultBlock)block;
 
 /*!
  @abstract Logs in a user using Facebook *asynchronously*.
@@ -195,7 +195,7 @@
 
  @deprecated Please use `[PFFacebookUtils linkUserInBackground:permissions:]` instead.
  */
-+ (void)linkUser:(PFUser *)user permissions:(NSArray *)permissions PARSE_DEPRECATED("Please use `[PFFacebookUtils linkUserInBackground:permissions:]` instead.");
+//+ (void)linkUser:(PFUser *)user permissions:(NSArray *)permissions PARSE_DEPRECATED("Please use `[PFFacebookUtils linkUserInBackground:permissions:]` instead.");
 
 /*!
  @abstract Links Facebook to an existing <PFUser> *asynchronously*.
@@ -223,7 +223,7 @@
  @param block The block to execute.
  It should have the following argument signature: `^(BOOL *success, NSError *error)`.
  */
-+ (void)linkUser:(PFUser *)user permissions:(NSArray *)permissions block:(PFBooleanResultBlock)block;
+//+ (void)linkUser:(PFUser *)user permissions:(NSArray *)permissions block:(PFBooleanResultBlock)block;
 
 /*!
  @abstract Links Facebook to an existing <PFUser> *asynchronously*.
@@ -271,11 +271,11 @@
  @param block The block to execute.
  It should have the following argument signature: `^(BOOL success, NSError *error)`.
  */
-+ (void)linkUser:(PFUser *)user
-      facebookId:(NSString *)facebookId
-     accessToken:(NSString *)accessToken
-  expirationDate:(NSDate *)expirationDate
-           block:(PFBooleanResultBlock)block;
+//+ (void)linkUser:(PFUser *)user
+//      facebookId:(NSString *)facebookId
+//     accessToken:(NSString *)accessToken
+//  expirationDate:(NSDate *)expirationDate
+//           block:(PFBooleanResultBlock)block;
 
 /*!
  @abstract Links Facebook to an existing <PFUser> *asynchronously*.
@@ -336,7 +336,7 @@
  @param block The block to execute.
  It should have the following argument signature: `^(BOOL succeeded, NSError *error)`.
  */
-+ (void)unlinkUserInBackground:(PFUser *)user block:(PFBooleanResultBlock)block;
+//+ (void)unlinkUserInBackground:(PFUser *)user block:(PFBooleanResultBlock)block;
 
 /*!
  @abstract Unlinks the <PFUser> from a Facebook account *asynchronously*.
@@ -382,10 +382,10 @@
  @param block The block to execute.
  It should have the following argument signature: `^(BOOL succeeded, NSError *error)`.
  */
-+ (void)reauthorizeUser:(PFUser *)user
- withPublishPermissions:(NSArray *)permissions
-               audience:(FBSessionDefaultAudience)audience
-                  block:(PFBooleanResultBlock)block;
+//+ (void)reauthorizeUser:(PFUser *)user
+// withPublishPermissions:(NSArray *)permissions
+//               audience:(FBSessionDefaultAudience)audience
+//                  block:(PFBooleanResultBlock)block;
 
 /*!
  @abstract Requests new Facebook publish permissions for the given user *asynchronously*.
@@ -423,6 +423,6 @@
  sourceApplication:sourceApplication
  withSession:[PFFacebookUtils session]];` instead.
  */
-+ (BOOL)handleOpenURL:(NSURL *)url PARSE_DEPRECATED("Use [FBAppCall handleOpenURL:sourceApplication:withSession:] instead.");
+//+ (BOOL)handleOpenURL:(NSURL *)url PARSE_DEPRECATED("Use [FBAppCall handleOpenURL:sourceApplication:withSession:] instead.");
 
 @end

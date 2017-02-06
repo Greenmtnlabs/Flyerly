@@ -139,35 +139,35 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
 
 -(void)signUp:(BOOL)validationDone username:(NSString *)userName password:(NSString *)pwd{
     
-    // Check username already exists
-    PFQuery *query = [PFUser query];
-    [query whereKey:@"username" equalTo:userName];
-    
-    //query on parse
-    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
-        
-        NSString *dbUsername = object[@"username"];
-        
-        if( dbUsername ){
-            
-            username.text = userName;
-            password.text = pwd;
-            
-            //Saving User Info for again Login
-            [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];
-            [[NSUserDefaults standardUserDefaults]  setBool:YES forKey:@"FlyerlyUser"];
-            
-            warningAlert = [[UIAlertView  alloc]initWithTitle:@"Account already exists using this account." message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Sign In",nil];
-            
-            [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
-            [self showLoader:NO];
-
-        } else {
-            
-            [self createUser:userName password:pwd];
-            
-        }
-    }];
+//    // Check username already exists
+//    PFQuery *query = [PFUser query];
+//    [query whereKey:@"username" equalTo:userName];
+//    
+//    //query on parse
+//    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
+//        
+//        NSString *dbUsername = object[@"username"];
+//        
+//        if( dbUsername ){
+//            
+//            username.text = userName;
+//            password.text = pwd;
+//            
+//            //Saving User Info for again Login
+//            [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];
+//            [[NSUserDefaults standardUserDefaults]  setBool:YES forKey:@"FlyerlyUser"];
+//            
+//            warningAlert = [[UIAlertView  alloc]initWithTitle:@"Account already exists using this account." message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Sign In",nil];
+//            
+//            [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
+//            [self showLoader:NO];
+//
+//        } else {
+//            
+//            [self createUser:userName password:pwd];
+//            
+//        }
+//    }];
     
 }
 
@@ -185,76 +185,76 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
         NSArray *permissionsArray = @[ @"email", @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
         
         // Login PFUser using Facebook
-        [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
-            [self showLoader:NO]; // Hide loading indicator
-            
-            if ( !user ) {
-                
-                
-                if (!error) {
-                    NSLog(@"Uh oh. The user cancelled the Facebook login.");
-                } else {
-                    NSLog(@"Uh oh. An error occurred: %@", error);
-                    NSDictionary *errorDict = [[NSDictionary alloc] initWithDictionary:error.userInfo];
-                    NSString *error = [errorDict objectForKey:@"NSLocalizedFailureReason"];
-                    if ( [error isEqualToString:@"com.facebook.sdk:SystemLoginDisallowedWithoutError"] ) {
-                        // handle error here, for example by showing an alert to the user
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not login with Facebook"
-                                                                        message:@"Facebook login failed. Please check your Facebook settings on your phone."
-                                                                       delegate:nil
-                                                              cancelButtonTitle:@"OK"
-                                                              otherButtonTitles:nil];
-                    
-                        [alert show];
-                    }
-                    
-                }
-                
-            } else {
-
-                //Saving User Info for again login
-                [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
-
-                if (user.isNew) {
-                
-                NSLog(@"User with facebook signed up and logged in!");
-                
-                // Login success Move to Flyerly
-                launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
-                
-                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-                appDelegate.lauchController = launchController;
-                
-                // For Parse New User Merge to old Facebook User
-                
-                [appDelegate fbChangeforNewVersion];
-                
-                [self onRegistrationSuccess];
-                
-                
-            } else {
-                
-                NSLog(@"User with facebook logged in!");
-                
-                // Login success Move to Flyerly
-                launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
-                
-                // Temp on for Testing here
-                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-                
-                /*
-                UserPurchases *userPurchases_ = [UserPurchases getInstance];
-                
-                //GET UPDATED USER PUCHASES INFO
-                [userPurchases_ setUserPurcahsesFromParse];
-                */
-                
-                appDelegate.lauchController = launchController;
-                
-                [self onRegistrationSuccess];
-            }
-            }
-        }];
+//        [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
+//            [self showLoader:NO]; // Hide loading indicator
+//            
+//            if ( !user ) {
+//                
+//                
+//                if (!error) {
+//                    NSLog(@"Uh oh. The user cancelled the Facebook login.");
+//                } else {
+//                    NSLog(@"Uh oh. An error occurred: %@", error);
+//                    NSDictionary *errorDict = [[NSDictionary alloc] initWithDictionary:error.userInfo];
+//                    NSString *error = [errorDict objectForKey:@"NSLocalizedFailureReason"];
+//                    if ( [error isEqualToString:@"com.facebook.sdk:SystemLoginDisallowedWithoutError"] ) {
+//                        // handle error here, for example by showing an alert to the user
+//                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not login with Facebook"
+//                                                                        message:@"Facebook login failed. Please check your Facebook settings on your phone."
+//                                                                       delegate:nil
+//                                                              cancelButtonTitle:@"OK"
+//                                                              otherButtonTitles:nil];
+//                    
+//                        [alert show];
+//                    }
+//                    
+//                }
+//                
+//            } else {
+//
+//                //Saving User Info for again login
+//                [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
+//
+//                if (user.isNew) {
+//                
+//                NSLog(@"User with facebook signed up and logged in!");
+//                
+//                // Login success Move to Flyerly
+//                launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
+//                
+//                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+//                appDelegate.lauchController = launchController;
+//                
+//                // For Parse New User Merge to old Facebook User
+//                
+//                [appDelegate fbChangeforNewVersion];
+//                
+//                [self onRegistrationSuccess];
+//                
+//                
+//            } else {
+//                
+//                NSLog(@"User with facebook logged in!");
+//                
+//                // Login success Move to Flyerly
+//                launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
+//                
+//                // Temp on for Testing here
+//                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+//                
+//                /*
+//                UserPurchases *userPurchases_ = [UserPurchases getInstance];
+//                
+//                //GET UPDATED USER PUCHASES INFO
+//                [userPurchases_ setUserPurcahsesFromParse];
+//                */
+//                
+//                appDelegate.lauchController = launchController;
+//                
+//                [self onRegistrationSuccess];
+//            }
+//            }
+//        }];
 
     }else {
         [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
@@ -287,69 +287,69 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
         
         [self showLoader:YES];
 
-        [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
-            
-            [self showLoader:NO];
-            BOOL canSave = NO;
-            
-            if ( !user ) {
-                NSLog(@"Uh oh. The user cancelled the Twitter login.");
-                return;
-
-            } else {
-
-                NSString *twitterUsername = [PFTwitterUtils twitter].screenName;
-                
-                if(![twitterUsername isEqualToString:@""]) {
-                    if(user.isNew || (user.username == nil || [user.username isEqualToString:@""]) ){
-                        canSave = YES;
-                        user.username = twitterUsername;
-                        [[PFUser currentUser] setObject:twitterUsername forKey:@"username"];
-                    }
-                    
-                    if(user.isNew || (user[@"name"] == nil || [user[@"name"] isEqualToString:@""]) ){
-                        canSave = YES;
-                        user[@"name"] = twitterUsername;
-                        [[PFUser currentUser] setObject:twitterUsername forKey:@"name"];
-                    }
-                }
-                
-                if (user.isNew) {
-                    
-                    canSave = YES;
-                    [[PFUser currentUser] setObject:APP_NAME forKey:@"appName"];
-                    [[PFUser currentUser] saveInBackground];
-                    
-                    // We keep an instance of navigation contrller since the completion block might pop us out of the navigation controller
-                    UINavigationController* navigationController = self.navigationController;
-                    
-                    [navigationController popViewControllerAnimated:NO];
-                    
-                    [self onRegistrationSuccess];
-                    
-                    
-                    //Saving User Info for again login
-                    [[NSUserDefaults standardUserDefaults]  setObject:[twitterUsername lowercaseString] forKey:@"User"];
-                    
-                    // For Parse New User Merge to old Twitter User
-                    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-                    [appDelegate twitterChangeforNewVersion:twitterUsername];
-                    
-                } else {
-                    
-                    NSLog(@"User logged in with Twitter!");
-                    
-                    //Saving User Info for again login
-                    [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
-                    
-                    [self onRegistrationSuccess];
-                }
-                
-                if(canSave) {
-                    [[PFUser currentUser] saveInBackground];
-                }
-            }
-        }];
+//        [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
+//            
+//            [self showLoader:NO];
+//            BOOL canSave = NO;
+//            
+//            if ( !user ) {
+//                NSLog(@"Uh oh. The user cancelled the Twitter login.");
+//                return;
+//
+//            } else {
+//
+//                NSString *twitterUsername = [PFTwitterUtils twitter].screenName;
+//                
+//                if(![twitterUsername isEqualToString:@""]) {
+//                    if(user.isNew || (user.username == nil || [user.username isEqualToString:@""]) ){
+//                        canSave = YES;
+//                        user.username = twitterUsername;
+//                        [[PFUser currentUser] setObject:twitterUsername forKey:@"username"];
+//                    }
+//                    
+//                    if(user.isNew || (user[@"name"] == nil || [user[@"name"] isEqualToString:@""]) ){
+//                        canSave = YES;
+//                        user[@"name"] = twitterUsername;
+//                        [[PFUser currentUser] setObject:twitterUsername forKey:@"name"];
+//                    }
+//                }
+//                
+//                if (user.isNew) {
+//                    
+//                    canSave = YES;
+//                    [[PFUser currentUser] setObject:APP_NAME forKey:@"appName"];
+//                    [[PFUser currentUser] saveInBackground];
+//                    
+//                    // We keep an instance of navigation contrller since the completion block might pop us out of the navigation controller
+//                    UINavigationController* navigationController = self.navigationController;
+//                    
+//                    [navigationController popViewControllerAnimated:NO];
+//                    
+//                    [self onRegistrationSuccess];
+//                    
+//                    
+//                    //Saving User Info for again login
+//                    [[NSUserDefaults standardUserDefaults]  setObject:[twitterUsername lowercaseString] forKey:@"User"];
+//                    
+//                    // For Parse New User Merge to old Twitter User
+//                    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+//                    [appDelegate twitterChangeforNewVersion:twitterUsername];
+//                    
+//                } else {
+//                    
+//                    NSLog(@"User logged in with Twitter!");
+//                    
+//                    //Saving User Info for again login
+//                    [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
+//                    
+//                    [self onRegistrationSuccess];
+//                }
+//                
+//                if(canSave) {
+//                    [[PFUser currentUser] saveInBackground];
+//                }
+//            }
+//        }];
         
         
     } else {
@@ -406,39 +406,39 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
 
 -(void)createUser:(NSString *)userName password:(NSString *)pwd{
     
-    // username and password
-    PFUser *user = [PFUser user];
-    user.username = [userName lowercaseString];
-    user.password = pwd;
-    user.email = email.text;
-    if (name.text != nil)
-        user[@"name"] = name.text;
-    if (phno.text != nil)
-        user[@"contact"] = phno.text;
-
-    // When new user signup using username & password
-    user[@"appName"] = APP_NAME;
-    
-    //Saving User Info for again login
-    [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];
-    [[NSUserDefaults standardUserDefaults]  setBool:YES forKey:@"FlyerlyUser"];
-
-    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (error) {
-                NSString *errorValue = (error.userInfo)[@"error"];
-                [self showAlert:@"Warning!" message:errorValue];
-                [self showLoader:NO];
-
-            } else {
-
-                [PFUser logInWithUsername:userName password:pwd];
-                [self onRegistrationSuccess];
-            }
-        });
-        
-        
-    }];
+//    // username and password
+//    PFUser *user = [PFUser user];
+//    user.username = [userName lowercaseString];
+//    user.password = pwd;
+//    user.email = email.text;
+//    if (name.text != nil)
+//        user[@"name"] = name.text;
+//    if (phno.text != nil)
+//        user[@"contact"] = phno.text;
+//
+//    // When new user signup using username & password
+//    user[@"appName"] = APP_NAME;
+//    
+//    //Saving User Info for again login
+//    [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];
+//    [[NSUserDefaults standardUserDefaults]  setBool:YES forKey:@"FlyerlyUser"];
+//
+//    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            if (error) {
+//                NSString *errorValue = (error.userInfo)[@"error"];
+//                [self showAlert:@"Warning!" message:errorValue];
+//                [self showLoader:NO];
+//
+//            } else {
+//
+//                [PFUser logInWithUsername:userName password:pwd];
+//                [self onRegistrationSuccess];
+//            }
+//        });
+//        
+//        
+//    }];
 }
 
 -(void)onRegistrationSuccess {
@@ -497,20 +497,20 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
     
     if( username.text != nil ){
         
-        PFQuery *query = [PFUser  query];
-        [query whereKey:@"username" equalTo:[username.text lowercaseString]];
-        
-        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
-            if (error) {
-                [usrExist setHidden:NO];
-                [usrExist setText:@"available"];
-                [usrExist setTextColor:[UIColor greenColor]];
-            }else{
-                [usrExist setHidden:NO];
-                [usrExist setText:@"taken"];
-                [usrExist setTextColor:[UIColor redColor]];
-            }
-        }];
+//        PFQuery *query = [PFUser  query];
+//        [query whereKey:@"username" equalTo:[username.text lowercaseString]];
+//        
+//        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
+//            if (error) {
+//                [usrExist setHidden:NO];
+//                [usrExist setText:@"available"];
+//                [usrExist setTextColor:[UIColor greenColor]];
+//            }else{
+//                [usrExist setHidden:NO];
+//                [usrExist setText:@"taken"];
+//                [usrExist setTextColor:[UIColor redColor]];
+//            }
+//        }];
     }
     
 }

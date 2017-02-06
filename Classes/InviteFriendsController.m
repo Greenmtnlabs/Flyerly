@@ -76,99 +76,99 @@ const int CONTACTS_TAB = 0;
     [self.uiTableView  setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
     [searchTextField setReturnKeyType:UIReturnKeyDone];
     
-    if ([[PFUser currentUser] sessionToken].length != 0) {
-        
-        PFQuery *query = [PFUser query];
-        [query whereKey:@"username" equalTo:[[PFUser currentUser] objectForKey:@"username"]];
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
-         {
-             if (!error)
-             {
-                 if (objects.count)
-                 {
-                     for (PFObject *object in objects)
-                     {
-                         NSLog(@"ParseUser unique object ID: %@", object.objectId);
-                         
-                         PFQuery *query = [PFUser  query];
-                         [query whereKey:@"objectId" equalTo:object.objectId];
-                         [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error)
-                          {
-                              if (!error)
-                              {
-                                  NSMutableDictionary *counterDictionary = [object valueForKey:@"estimatedData"];
-                                  int refrelCounter = [[counterDictionary objectForKey:@"inviteCounter"] intValue];
-                                  
-                                  if ( refrelCounter >= 20 )
-                                  {
-                                      //Setting the feature name,feature description values for cell view using plist
-                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"You have sucessfully unlocked Design Bundle feature by referring friends. Enjoy!"];
-                                      
-                                  }else if ( refrelCounter <= 0 ){
-                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to %@ and unlock Design Bundle feature for FREE!", APP_NAME];
-                                  }
-                                  else if ( refrelCounter > 0 && refrelCounter < 20 )
-                                  {
-                                      int moreToInvite = 20 - refrelCounter;
-                                    
-                                      //Setting the feature name,feature description values for cell view using plist
-                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite %d more people to %@ and unlock Design Bundle feature for FREE!",  moreToInvite, APP_NAME];
-                                  }
-                                  
-                                  [refrelText setText:cellDescriptionForRefrelFeature];
-                            }
-                          }];
-                     }
-                 }
-             }
-         }];
-    }else {
-        cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to %@ and unlock Design Bundle feature for FREE!", APP_NAME];;
-
-    }
+//    if ([[PFUser currentUser] sessionToken].length != 0) {
+//        
+//        PFQuery *query = [PFUser query];
+//        [query whereKey:@"username" equalTo:[[PFUser currentUser] objectForKey:@"username"]];
+//        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+//         {
+//             if (!error)
+//             {
+//                 if (objects.count)
+//                 {
+//                     for (PFObject *object in objects)
+//                     {
+//                         NSLog(@"ParseUser unique object ID: %@", object.objectId);
+//                         
+//                         PFQuery *query = [PFUser  query];
+//                         [query whereKey:@"objectId" equalTo:object.objectId];
+//                         [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error)
+//                          {
+//                              if (!error)
+//                              {
+//                                  NSMutableDictionary *counterDictionary = [object valueForKey:@"estimatedData"];
+//                                  int refrelCounter = [[counterDictionary objectForKey:@"inviteCounter"] intValue];
+//                                  
+//                                  if ( refrelCounter >= 20 )
+//                                  {
+//                                      //Setting the feature name,feature description values for cell view using plist
+//                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"You have sucessfully unlocked Design Bundle feature by referring friends. Enjoy!"];
+//                                      
+//                                  }else if ( refrelCounter <= 0 ){
+//                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to %@ and unlock Design Bundle feature for FREE!", APP_NAME];
+//                                  }
+//                                  else if ( refrelCounter > 0 && refrelCounter < 20 )
+//                                  {
+//                                      int moreToInvite = 20 - refrelCounter;
+//                                    
+//                                      //Setting the feature name,feature description values for cell view using plist
+//                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite %d more people to %@ and unlock Design Bundle feature for FREE!",  moreToInvite, APP_NAME];
+//                                  }
+//                                  
+//                                  [refrelText setText:cellDescriptionForRefrelFeature];
+//                            }
+//                          }];
+//                     }
+//                 }
+//             }
+//         }];
+//    }else {
+//        cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to %@ and unlock Design Bundle feature for FREE!", APP_NAME];;
+//
+//    }
     
     
     
-    if ( [[PFUser currentUser] sessionToken].length != 0 )
-    {
-        
-        PFQuery *query = [PFUser query];
-        [query whereKey:@"username" equalTo:[[PFUser currentUser] objectForKey:@"username"]];
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            if (!error) {
-                if (objects.count) {
-                    for (PFObject *object in objects){
-                        NSLog(@"Object ID: %@", object.objectId);
-                        userUniqueObjectId = object.objectId;
-                        
-                        
-                    }
-                }
-            }
-        }];
-    }
+//    if ( [[PFUser currentUser] sessionToken].length != 0 )
+//    {
+//        
+//        PFQuery *query = [PFUser query];
+//        [query whereKey:@"username" equalTo:[[PFUser currentUser] objectForKey:@"username"]];
+//        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//            if (!error) {
+//                if (objects.count) {
+//                    for (PFObject *object in objects){
+//                        NSLog(@"Object ID: %@", object.objectId);
+//                        userUniqueObjectId = object.objectId;
+//                        
+//                        
+//                    }
+//                }
+//            }
+//        }];
+//    }
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     flyerConfigurator = appDelegate.flyerConfigurator;
     
     //HERE WE GET ALREADY INVITED FRIENDS
-    PFUser *user = [PFUser currentUser];
+    //PFUser *user = [PFUser currentUser];
     
     self.iPhoneinvited = [[NSMutableArray alloc] init];
     self.fbinvited = [[NSMutableArray alloc] init];
     self.twitterInvited = [[NSMutableArray alloc] init];
     self.emailInvited = [[NSMutableArray alloc] init];
     
-    if (user[@"iphoneinvited"])
-        self.iPhoneinvited  = user[@"iphoneinvited"];
-
-    if (user[@"fbinvited"])
-        self.fbinvited  = user[@"fbinvited"];
-
-    if (user[@"tweetinvited"])
-        twitterInvited = user[@"tweetinvited"];
-    if(user [@"emailinvited"])
-        self.emailInvited = user[@"emailinvited"];
+//    if (user[@"iphoneinvited"])
+//        self.iPhoneinvited  = user[@"iphoneinvited"];
+//
+//    if (user[@"fbinvited"])
+//        self.fbinvited  = user[@"fbinvited"];
+//
+//    if (user[@"tweetinvited"])
+//        twitterInvited = user[@"tweetinvited"];
+//    if(user [@"emailinvited"])
+//        self.emailInvited = user[@"emailinvited"];
    
     // Load device contacts
     [self loadLocalContacts:self.contactsButton];
@@ -1237,7 +1237,7 @@ const int CONTACTS_TAB = 0;
         return;
     }
     
-    PFUser *user = [PFUser currentUser];
+    //PFUser *user = [PFUser currentUser];
     
     // Here we Check Sharer for
     // Update PARSE
@@ -1246,26 +1246,26 @@ const int CONTACTS_TAB = 0;
         
         // HERE WE GET AND SET SELECTED FOLLOWER
         [twitterInvited  addObjectsFromArray:selectedIdentifiers];
-        user[@"tweetinvited"] = twitterInvited;
+        //user[@"tweetinvited"] = twitterInvited;
         [self friendsInvited];
  
     } else if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
         
         // HERE WE GET AND SET SELECTED CONTACT LIST
         [iPhoneinvited  addObjectsFromArray:selectedIdentifiers];
-        user[@"iphoneinvited"] = iPhoneinvited;
+        //user[@"iphoneinvited"] = iPhoneinvited;
         [self friendsInvited];
 
     } else if ([sharer isKindOfClass:[SHKMail class]] == YES){
         // HERE WE GET AND SET SELECTED EMAIL LIST
         [emailInvited  addObjectsFromArray:selectedIdentifiers];
-        user[@"emailinvited"] = emailInvited;
+        //user[@"emailinvited"] = emailInvited;
         [self friendsInvited];
     }
 
 
     // HERE WE UPDATE PARSE ACCOUNT FOR REMEMBER INVITED FRIENDS LIST
-    [user saveInBackground];
+    //[user saveInBackground];
     
     [self showAlert:@"Invitation Sent!" message:[NSString stringWithFormat:@"You have successfully invited your friends to join %@.", APP_NAME]];
     [selectedIdentifiers   removeAllObjects];

@@ -7,7 +7,7 @@
 //
 
 #import "ImageLoader.h"
-#import "AFHTTPRequestOperation.h"
+//#import "AFHTTPRequestOperation.h"
 #import "NBUImageLoader.h"
 #import "NBUImagePickerPrivate.h"
 
@@ -48,16 +48,16 @@ static NBUImageLoader * _sharedLoader;
         NSURL *imageUrl = [[NSURL alloc] initWithString:imageUrlString];
         NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:imageUrl];
         
-        AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
-        requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
-        [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-            
-            resultBlock(responseObject,nil);
-            
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Image error: %@", error);
-        }];
-        [requestOperation start];
+//         *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
+//        rAFHTTPRequestOperationequestOperation.responseSerializer = [AFImageResponseSerializer serializer];
+//        [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+//            
+//            resultBlock(responseObject,nil);
+//            
+//        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//            NSLog(@"Image error: %@", error);
+//        }];
+//        [requestOperation start];
         
     }
     

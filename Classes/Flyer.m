@@ -1223,21 +1223,22 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  */
 +(NSString *)newFlyerPath{
     
-    PFUser *user = [PFUser currentUser];
+    //PFUser *user = [PFUser currentUser];
     NSError *error;
     
     //Getting Home Directory
 	NSString *homeDirectoryPath = NSHomeDirectory();
-	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr",[user objectForKey:@"username"]]];
+	//NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr",[user objectForKey:@"username"]]];
     
     
-    if ([[NSFileManager defaultManager] fileExistsAtPath:usernamePath isDirectory:NULL])
-            [[NSFileManager defaultManager] createDirectoryAtPath:usernamePath withIntermediateDirectories:YES attributes:nil error:&error];
-        
-    NSString *uniqueId = [Flyer getUniqueId];
-    NSString *flyerPath = [usernamePath stringByAppendingString:[NSString stringWithFormat:@"/%@", uniqueId]];
-        
-    return flyerPath;
+//    if ([[NSFileManager defaultManager] fileExistsAtPath:usernamePath isDirectory:NULL])
+//            [[NSFileManager defaultManager] createDirectoryAtPath:usernamePath withIntermediateDirectories:YES attributes:nil error:&error];
+//        
+//    NSString *uniqueId = [Flyer getUniqueId];
+//    NSString *flyerPath = [usernamePath stringByAppendingString:[NSString stringWithFormat:@"/%@", uniqueId]];
+    
+//    return flyerPath;
+    return @"";
 
 }
 
@@ -1248,40 +1249,41 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  */
 + (NSMutableArray *)recentFlyerPreview:(NSInteger)flyCount{
 
-    PFUser *user = [PFUser currentUser];
-    
-    //Getting Home Directory
-	NSString *homeDirectoryPath = NSHomeDirectory();
-	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr",[user objectForKey:@"username"]]];
-    
-     NSArray *flyersList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:usernamePath error:nil];
-    
-    NSArray *sortedFlyersList = [flyersList sortedArrayUsingFunction:compareDesc context:NULL];
-    
-    NSString *lastFileName;
-    NSMutableArray *recentFlyers = [[NSMutableArray alloc] init];
-    
-        
-    for(int i = 0 ; i < sortedFlyersList.count ;i++)
-    {
-        lastFileName = sortedFlyersList[i];
-            
-        //Checking For Integer Dir Names Only
-        if ([[NSScanner scannerWithString:lastFileName] scanInt:nil]) {
-              
-            NSString *recentflyPath = [NSString stringWithFormat:@"%@/%@/flyer.%@",usernamePath,lastFileName,IMAGETYPE];
-            [recentFlyers addObject:recentflyPath];
-            
-            // Only get the number of previews that we need.
-            if ( flyCount != 0 && flyCount == i - 1 ) {
-                break;
-            }
-
-        }
-
-    }
-    
-    return recentFlyers;
+//    PFUser *user = [PFUser currentUser];
+//    
+//    //Getting Home Directory
+//	NSString *homeDirectoryPath = NSHomeDirectory();
+//	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr",[user objectForKey:@"username"]]];
+//    
+//    NSArray *flyersList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:usernamePath error:nil];
+//    
+//    NSArray *sortedFlyersList = [flyersList sortedArrayUsingFunction:compareDesc context:NULL];
+//    
+//    NSString *lastFileName;
+//    NSMutableArray *recentFlyers = [[NSMutableArray alloc] init];
+//    
+//        
+//    for(int i = 0 ; i < sortedFlyersList.count ;i++)
+//    {
+//        lastFileName = sortedFlyersList[i];
+//            
+//        //Checking For Integer Dir Names Only
+//        if ([[NSScanner scannerWithString:lastFileName] scanInt:nil]) {
+//              
+//            NSString *recentflyPath = [NSString stringWithFormat:@"%@/%@/flyer.%@",usernamePath,lastFileName,IMAGETYPE];
+//            [recentFlyers addObject:recentflyPath];
+//            
+//            // Only get the number of previews that we need.
+//            if ( flyCount != 0 && flyCount == i - 1 ) {
+//                break;
+//            }
+//
+//        }
+//
+//    }
+//    
+//    return recentFlyers;
+    return 0;
 }
 
 

@@ -9,7 +9,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "YouTubeUploadVideo.h"
 
-#import <Parse/Parse.h>
+//#import <Parse/Parse.h>
 #import "ShareKit.h"
 #import "SHK.h"
 #import "SHKSharer.h"

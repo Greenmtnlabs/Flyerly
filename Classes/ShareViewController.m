@@ -1221,9 +1221,9 @@ UIAlertView *saveCurrentFlyerAlert;
         [star5 setSelected:YES];
     }
     
-    PFUser *user = [PFUser currentUser];
-    user[@"appStarRate"] = starValue;
-    [user saveInBackground];
+//    PFUser *user = [PFUser currentUser];
+//    user[@"appStarRate"] = starValue;
+//    [user saveInBackground];
 
     // check if the user rated from 1 star to 3 star
     if( sender == star1 || sender == star2 || sender == star3)

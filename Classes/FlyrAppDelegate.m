@@ -8,7 +8,7 @@
 
 #import "FlyrAppDelegate.h"
 #import "PaypalMobile.h"
-#import <ParseFacebookUtils/PFFacebookUtils.h>
+//#import <ParseFacebookUtils/PFFacebookUtils.h>
 
 NSString *kCheckTokenStep1 = @"kCheckTokenStep";
 NSString *FlickrSharingSuccessNotification = @"FlickrSharingSuccessNotification";
@@ -125,10 +125,10 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-    [currentInstallation setDeviceTokenFromData:deviceToken];
-    currentInstallation.channels = @[@"global"];
-    [currentInstallation saveInBackground];
+//    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+//    [currentInstallation setDeviceTokenFromData:deviceToken];
+//    currentInstallation.channels = @[@"global"];
+//    [currentInstallation saveInBackground];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
@@ -141,7 +141,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [PFPush handlePush:userInfo];
+    //[PFPush handlePush:userInfo];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication
@@ -152,13 +152,13 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         return [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
     }
     
-    if ([[url absoluteString] hasPrefix:[NSString stringWithFormat:@"fb%@", SHKCONFIG(facebookAppId)]]) {
-        
-       //return One of the handled URL
-        return [FBAppCall handleOpenURL:url
-                      sourceApplication:sourceApplication
-                            withSession:[PFFacebookUtils session]] || [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
-    }
+//    if ([[url absoluteString] hasPrefix:[NSString stringWithFormat:@"fb%@", SHKCONFIG(facebookAppId)]]) {
+//        
+//       //return One of the handled URL
+//        return [FBAppCall handleOpenURL:url
+//                      sourceApplication:sourceApplication
+//                            withSession:[PFFacebookUtils session]] || [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+//    }
     
     if([[url absoluteString] hasPrefix:kCallbackURLBaseStringPrefix]){
         return YES;
@@ -217,8 +217,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 #ifdef DEBUG
     
     // Setup parse Offline ozair's account
-    [Parse setApplicationId:[flyerConfigurator parseOfflineAppId]
-                  clientKey:[flyerConfigurator parseOfflineClientKey]];
+    //[Parse setApplicationId:[flyerConfigurator parseOfflineAppId]
+                 //clientKey:[flyerConfigurator parseOfflineClientKey]];
 #else
     
     // Setup parse Online
@@ -231,10 +231,10 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     [Flurry startSession:[flyerConfigurator flurrySessionId]];
 
     // Facebook initialization
-    [PFFacebookUtils initializeFacebook];
+    //[PFFacebookUtils initializeFacebook];
     
     // Twitter Initialization
-    [PFTwitterUtils initializeWithConsumerKey:[flyerConfigurator twitterConsumerKey] consumerSecret:[flyerConfigurator twitterSecret]];
+    //[PFTwitterUtils initializeWithConsumerKey:[flyerConfigurator twitterConsumerKey] consumerSecret:[flyerConfigurator twitterSecret]];
     
     // Bitly configuration
     [[BitlyConfig sharedBitlyConfig] setBitlyLogin:[flyerConfigurator bitLyLogin] bitlyAPIKey:[flyerConfigurator bitLyKey]];
@@ -254,7 +254,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     }
 
     // We allow anonymous Parse users, so a new user doesn't necessarily have to signup/signin
-    [PFUser enableAutomaticUser];
+    //[PFUser enableAutomaticUser];
     
     // Then we create a directory for anonymous users data
     NSString *homeDirectoryPath = NSHomeDirectory();
@@ -281,7 +281,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     // If the Documents folder has only one directory named anonymous then this is an anonymous user (hasn't signed up yet)
     if(contentOfDirectory.count  > 0 && [[contentOfDirectory objectAtIndex:indexForAnon] isEqual:@"anonymous"]){
         // This is an anonymous user
-        [PFUser currentUser].username = @"anonymous";
+        //[PFUser currentUser].username = @"anonymous";
         [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"UpdatedVersion"];
         
         lauchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
@@ -379,27 +379,27 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 */
 -(void)twitterChangeforNewVersion:(NSString *)olduser{
 
-    [lauchController showLoadingIndicator];
+//    [lauchController showLoadingIndicator];
 
-    if ([PFUser currentUser] != nil) {
-    //Checking user Exist in Parse
-    PFQuery *query = [PFUser  query];
-    [query whereKey:@"username" equalTo:[olduser lowercaseString]];
-    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
-        
-        if (error) {
-            [lauchController hideLoadingIndicator];
-            
-        }else{
-            
-            // Migrate Account For 3.0 Version
-            [FlyerUser migrateUserto3dot0:object];
-            
-            [lauchController hideLoadingIndicator];
-            
-        }
-    }];
-    }
+//    if ([PFUser currentUser] != nil) {
+//    //Checking user Exist in Parse
+//    PFQuery *query = [PFUser  query];
+//    [query whereKey:@"username" equalTo:[olduser lowercaseString]];
+//    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
+//        
+//        if (error) {
+//            [lauchController hideLoadingIndicator];
+//            
+//        }else{
+//            
+//            // Migrate Account For 3.0 Version
+//            //[FlyerUser migrateUserto3dot0:object];
+//            
+//            [lauchController hideLoadingIndicator];
+//            
+//        }
+//    }];
+//    }
 
 
 }
@@ -427,56 +427,56 @@ if it exist then we call Merging Process
             NSString *name = userData[@"name"];
 
             BOOL canSave = false;
-            BOOL isNew = [[PFUser currentUser] isNew];
-            PFUser *currentUser = [PFUser currentUser];
-
-            // when new user signup via facebook, then push appName to server
-            if (isNew) {
-                [[PFUser currentUser] setObject:APP_NAME forKey:@"appName"];
-                canSave = true;
-            }
-
-            // Store the current user's Facebook ID on the user
-            if ( email != nil && (isNew || currentUser.email == nil || [currentUser.email isEqualToString:@""])) {
-                [[PFUser currentUser] setObject:email forKey:@"email"];
-                canSave = true;
-            }
-
-            if (name != nil ){
-                if(isNew || currentUser.username == nil || [currentUser.username isEqualToString:@""]) {
-                    [[NSUserDefaults standardUserDefaults]  setObject:[name lowercaseString] forKey:@"User"];
-                    [[PFUser currentUser] setObject:name forKey:@"username"];
-                    canSave = true;
-                }
-
-                if(isNew || currentUser[@"name"] == nil || [currentUser[@"name"] isEqualToString:@""]) {
-                    [[PFUser currentUser] setObject:name forKey:@"name"];
-                    canSave = true;
-                }
-            }
+//            BOOL isNew = [[PFUser currentUser] isNew];
+//            PFUser *currentUser = [PFUser currentUser];
+//
+//            // when new user signup via facebook, then push appName to server
+//            if (isNew) {
+//                [[PFUser currentUser] setObject:APP_NAME forKey:@"appName"];
+//                canSave = true;
+//            }
+//
+//            // Store the current user's Facebook ID on the user
+//            if ( email != nil && (isNew || currentUser.email == nil || [currentUser.email isEqualToString:@""])) {
+//                [[PFUser currentUser] setObject:email forKey:@"email"];
+//                canSave = true;
+//            }
+//
+//            if (name != nil ){
+//                if(isNew || currentUser.username == nil || [currentUser.username isEqualToString:@""]) {
+//                    [[NSUserDefaults standardUserDefaults]  setObject:[name lowercaseString] forKey:@"User"];
+//                    [[PFUser currentUser] setObject:name forKey:@"username"];
+//                    canSave = true;
+//                }
+//
+//                if(isNew || currentUser[@"name"] == nil || [currentUser[@"name"] isEqualToString:@""]) {
+//                    [[PFUser currentUser] setObject:name forKey:@"name"];
+//                    canSave = true;
+//                }
+//            }
             
             if ( email != nil ){
                 //Checking Email Exist in Parse
-                PFQuery *query = [PFUser  query];
-                [query whereKey:@"email" equalTo:email];
-                [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
-
-                    if (error) {
-                        [lauchController hideLoadingIndicator];
-                    }else{
-                        // Migrate Account For 3.0 Version
-                        [FlyerUser migrateUserto3dot0:object];
-                        
-                        [lauchController hideLoadingIndicator];
-                        
-                    }
-                }];
+//                PFQuery *query = [PFUser  query];
+//                [query whereKey:@"email" equalTo:email];
+//                [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
+//
+//                    if (error) {
+//                        [lauchController hideLoadingIndicator];
+//                    }else{
+//                        // Migrate Account For 3.0 Version
+//                        //[FlyerUser migrateUserto3dot0:object];
+//                        
+//                        [lauchController hideLoadingIndicator];
+//                        
+//                    }
+//                }];
             } else {
                 [lauchController hideLoadingIndicator];
             }
             
             if (canSave){
-                [[PFUser currentUser] saveInBackground];
+                //[[PFUser currentUser] saveInBackground];
             }
         }
         else {

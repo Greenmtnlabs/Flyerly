@@ -87,13 +87,13 @@
     [searchTextField setReturnKeyType:UIReturnKeyDone];
     
     
-    //HERE WE GET ALREADY INVITED FRIENDS
-    PFUser *user = [PFUser currentUser];
-    
-    self.iPhoneinvited = [[NSMutableArray alloc] init];
-    
-    if (user[@"iphoneinvited"])
-        self.iPhoneinvited  = user[@"iphoneinvited"];
+//    //HERE WE GET ALREADY INVITED FRIENDS
+//    PFUser *user = [PFUser currentUser];
+//    
+//    self.iPhoneinvited = [[NSMutableArray alloc] init];
+//    
+//    if (user[@"iphoneinvited"])
+//        self.iPhoneinvited  = user[@"iphoneinvited"];
     
     // Load device contacts
     [self loadLocalContacts];
@@ -541,7 +541,7 @@
 - (void)sharerFinishedSending:(SHKSharer *)sharer
 {
 
-    PFUser *user = [PFUser currentUser];
+    //PFUser *user = [PFUser currentUser];
     
     // Here we Check Sharer for
     // Update PARSE
@@ -549,14 +549,14 @@
         
         // HERE WE GET AND SET SELECTED CONTACT LIST
         [iPhoneinvited  addObjectsFromArray:selectedIdentifiers];
-        user[@"iphoneinvited"] = iPhoneinvited;
+        //user[@"iphoneinvited"] = iPhoneinvited;
         [self friendsInvited];
         
         
     }
     
     // HERE WE UPDATE PARSE ACCOUNT FOR REMEMBER INVITED FRIENDS LIST
-    [user saveInBackground];
+    //[user saveInBackground];
     
     [self showAlert:@"Invitation Sent!" message:[NSString stringWithFormat: @"You have successfully invited your friends to join %@.", APP_NAME]];
     [selectedIdentifiers   removeAllObjects];

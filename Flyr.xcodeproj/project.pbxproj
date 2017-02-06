@@ -4143,8 +4143,6 @@
 		248A3636193F26280005FCAD /* bg_tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_tab@2x.png"; sourceTree = "<group>"; };
 		248A3637193F26280005FCAD /* image_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image_icon@2x.png"; sourceTree = "<group>"; };
 		249464DE1A0CFEFE00C1247D /* Backgrounds-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Backgrounds-iPhone6.xib"; sourceTree = "<group>"; };
-		2498965D1A1B773A0001BF81 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = ExternalFrameworks/Parse/ParseFacebookUtils.framework; sourceTree = "<group>"; };
-		2498965F1A1B77580001BF81 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = ExternalFrameworks/Parse/ParseUI.framework; sourceTree = "<group>"; };
 		249F1F5F193F55D50072835E /* 07_camera_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07_camera_selected@2x.png"; sourceTree = "<group>"; };
 		249F1F60193F55D50072835E /* 07_camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07_camera@2x.png"; sourceTree = "<group>"; };
 		249F1F61193F55D50072835E /* 07_height_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07_height_selected@2x.png"; sourceTree = "<group>"; };
@@ -4325,7 +4323,6 @@
 		4986857318B500BB002113E4 /* AssetsGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetsGroupViewController.m; sourceTree = "<group>"; };
 		4986857518B50657002113E4 /* CustomAssetsGroupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomAssetsGroupView.xib; sourceTree = "<group>"; };
 		4986857618B50657002113E4 /* CustomAssetThumbnailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomAssetThumbnailView.xib; sourceTree = "<group>"; };
-		498BAB6B1885B21800221DFB /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ExternalFrameworks/Parse/Parse.framework; sourceTree = "<group>"; };
 		49997FF517DF786400CF1038 /* ParentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParentViewController.h; sourceTree = "<group>"; };
 		49997FF617DF786400CF1038 /* ParentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParentViewController.m; sourceTree = "<group>"; };
 		49997FF917E07FA100CF1038 /* SKProduct+LocalPrice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKProduct+LocalPrice.h"; sourceTree = "<group>"; };
@@ -6600,13 +6597,10 @@
 			isa = PBXGroup;
 			children = (
 				24A81AC71B32D92E00B6328D /* Photos.framework */,
-				2498965F1A1B77580001BF81 /* ParseUI.framework */,
-				2498965D1A1B773A0001BF81 /* ParseFacebookUtils.framework */,
 				243AA72519DE842F004A5613 /* EventKitUI.framework */,
 				243AA72319DE8428004A5613 /* EventKit.framework */,
 				243AA72119DE8302004A5613 /* AdSupport.framework */,
 				2099498C196E78DB0081B1BD /* CoreTelephony.framework */,
-				498BAB6B1885B21800221DFB /* Parse.framework */,
 				2025FAB8186074F300CC9188 /* CoreMotion.framework */,
 				2025FAB6186074D100CC9188 /* CoreText.framework */,
 				2025FAB41860742700CC9188 /* CoreMedia.framework */,
@@ -10423,12 +10417,15 @@
 		0DEE02C2108F097600967DA5 /* Ad Hoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -10842,13 +10839,16 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -10875,13 +10875,16 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
