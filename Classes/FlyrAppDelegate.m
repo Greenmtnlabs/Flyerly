@@ -183,7 +183,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     */
     
     // Configurator initialization
-//    flyerConfigurator = [[FlyerlyConfigurator alloc] init];
+    flyerConfigurator = [[FlyerlyConfigurator alloc] init];
 //    DefaultSHKConfigurator  *configurator = flyerConfigurator;
 //    
 //    [SHKConfiguration sharedInstanceWithConfigurator:configurator];
