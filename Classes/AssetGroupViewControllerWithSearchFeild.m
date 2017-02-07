@@ -13,6 +13,7 @@
 #import "AFHTTPRequestOperation.h"
 #import "CropViewController.h"
 #include <CommonCrypto/CommonDigest.h>
+#import "AFNetworking/AFNetworking.h"
 
 @interface AssetGroupViewControllerWithSearchFeild () {
     NSMutableArray *imagesIDs;
@@ -286,7 +287,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
             
             NSURL *purchaseImageUrl = [[NSURL alloc] initWithString:purchaseImageUrlString];
             NSURLRequest *purchaseImageUrlRequest = [[NSURLRequest alloc] initWithURL:purchaseImageUrl];
-            
+// OLD
 //            AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:purchaseImageUrlRequest];
 //            requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
 //            [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -297,11 +298,23 @@ shouldReloadTableForSearchString:(NSString *)searchString
 //                NSData* data = UIImagePNGRepresentation(thumbnail);
 //                
 //                [self saveInGallery:data];
-//                
+//
 //            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 //                NSLog(@"Image error: %@", error);
 //            }];
 //            [requestOperation start];
+            
+// NEW
+            NSURL *URL = purchaseImageUrl;
+            AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+            [manager GET:URL.absoluteString parameters: nil success:^(NSURLSessionDataTask *task, id responseObject) {
+                UIImage *thumbnail = (UIImage *) responseObject;
+                NSData* data = UIImagePNGRepresentation(thumbnail);
+                [self saveInGallery:data];
+                NSLog(@"JSON: %@", responseObject);
+            } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                NSLog(@"Error: %@", error);
+            }];
             
         }
         
