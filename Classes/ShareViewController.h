@@ -4,24 +4,24 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GTLYouTube.h"
+//#import "GTLYouTube.h"
 #import "VideoData.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "YouTubeUploadVideo.h"
 
 //#import <Parse/Parse.h>
-#import "ShareKit.h"
-#import "SHK.h"
-#import "SHKSharer.h"
-#import "SHKMail.h"
-#import "SHKFacebook.h"
-#import "SHKiOSFacebook.h"
-#import <SHKTwitter.h>
-#import <SHKiOSTwitter.h>
-#import "SHKTextMessage.h"
-#import "SHKInstagram.h"
-#import "SHKFlickr.h"
-#import "SHKTumblr.h"
+//#import "ShareKit.h"
+//#import "SHK.h"
+//#import "SHKSharer.h"
+//#import "SHKMail.h"
+//#import "SHKFacebook.h"
+//#import "SHKiOSFacebook.h"
+//#import <SHKTwitter.h>
+//#import <SHKiOSTwitter.h>
+//#import "SHKTextMessage.h"
+//#import "SHKInstagram.h"
+//#import "SHKFlickr.h"
+//#import "SHKTumblr.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <Twitter/Twitter.h>
 #import <MessageUI/MessageUI.h>
@@ -33,7 +33,7 @@
 #import "Flurry.h"
 #import "HelpController.h"
 #import "Flyer.h"
-#import "SHKActivityIndicator.h"
+//#import "SHKActivityIndicator.h"
 #import "UIPlaceHolderTextView.h"
 #import "YouTubeSubClass.h"
 #import "CreateFlyerController.h"
@@ -47,7 +47,7 @@
 @class SHKSharer;
 @class SHKActivityIndicator;
 
-@interface ShareViewController : UIViewController<FBSDKSharingDelegate, UIWebViewDelegate,UIDocumentInteractionControllerDelegate,UITextViewDelegate,UITextFieldDelegate, SHKSharerDelegate,MFMailComposeViewControllerDelegate,YouTubeUploadVideoDelegate, UITextFieldDelegate> {
+@interface ShareViewController : UIViewController<FBSDKSharingDelegate, UIWebViewDelegate,UIDocumentInteractionControllerDelegate,UITextViewDelegate,UITextFieldDelegate, MFMailComposeViewControllerDelegate,YouTubeUploadVideoDelegate, UITextFieldDelegate> { //SHKSharerDelegate,
 
     FlyerlySingleton *globle;
     NSArray *arrayOfAccounts;
@@ -56,7 +56,7 @@
 
 }
 
-@property (nonatomic, retain) GTLServiceYouTube *youtubeService;
+//@property (nonatomic, retain) GTLServiceYouTube *youtubeService;
 @property(nonatomic, strong) YouTubeUploadVideo *uploadVideo;
 
 @property(nonatomic,strong) IBOutlet UIPlaceHolderTextView *descriptionView;
@@ -98,7 +98,7 @@
 @property (nonatomic,weak) CreateFlyerController *cfController;
 @property (strong, nonatomic) SHKActivityIndicator *activityIndicator;
 @property (nonatomic,strong) Flyer *flyer;
-@property (weak, nonatomic) id<SHKSharerDelegate> delegate;
+//@property (weak, nonatomic) id<SHKSharerDelegate> delegate;
 @property (nonatomic, assign) BOOL saveToGallaryReqBeforeSharing;
 
 @property (strong, nonatomic) NSTimer *timer;

@@ -1,5 +1,6 @@
 #source 'https://github.com/google/gtm-http-fetcher.git'
 source 'https://github.com/google/gtm-session-fetcher.git'
+#source 'https://github.com/google/gtm-http-fetcher.git'
 source 'https://github.com/CocoaPods/Specs.git'
 
 platform :ios, '9.3'
@@ -9,7 +10,7 @@ platform :ios, '9.3'
     pod 'PayPal-iOS-SDK', '~> 2.14.0'
 
     #pod 'ShareKit', '~> 4.0.4'
-    pod 'ShareKit', :podspec => "Podspecs/ShareKit.podspec"
+#pod 'ShareKit', :podspec => "Podspecs/ShareKit.podspec"
     pod 'GoogleAPIClient'
 
     pod 'Facebook-iOS-SDK', '~> 3.23.2'
@@ -33,7 +34,7 @@ platform :ios, '9.3'
     pod 'CrittercismSDK'
 #pod 'GTMHTTPFetcher'
 #pod 'gtm-http-fetcher'
-#pod 'GTMSessionFetcher'
+    pod 'GTMSessionFetcher'
 #pod 'gtm-session-fetcher'
     pod 'GTMOAuth2'
 

@@ -14,7 +14,7 @@
 #import "HelpController.h"
 #import "Flurry.h"
 #import "UserVoice.h"
-#import "SHKSharer.h"
+//#import "SHKSharer.h"
 #import "Common.h"
 
 @implementation InviteFriendsController {
@@ -375,7 +375,7 @@ const int CONTACTS_TAB = 0;
 
 -(IBAction)invite{
     
-    SHKItem *item;
+    //SHKItem *item;
     NSMutableArray *identifiers = [[NSMutableArray alloc] init];
     identifiers = selectedIdentifiers;
     
@@ -385,49 +385,49 @@ const int CONTACTS_TAB = 0;
         
         // Send invitations
         if(selectedTab == 0){ // for SMS
-            globle.accounts = [[NSMutableArray alloc] initWithArray:selectedIdentifiers];
-            
-            item = [SHKItem text:sharingText];
-            item.textMessageToRecipients = selectedIdentifiers;
-            
-            iosSharer = [[ SHKSharer alloc] init];
-            iosSharer = [SHKTextMessage shareItem:item];
-            iosSharer.shareDelegate = self;
+//            globle.accounts = [[NSMutableArray alloc] initWithArray:selectedIdentifiers];
+//            
+//            item = [SHKItem text:sharingText];
+//            item.textMessageToRecipients = selectedIdentifiers;
+//            
+//            iosSharer = [[ SHKSharer alloc] init];
+//            iosSharer = [SHKTextMessage shareItem:item];
+//            iosSharer.shareDelegate = self;
    
         }else if(selectedTab == 1){ // for Facebook
             
-            item = [SHKItem text:sharingText];
-            
-            NSArray *shareFormFields = [SHKFacebookCommon shareFormFieldsForItem:item];
-            SHKFormController *rootView = [[SHKCONFIG(SHKFormControllerSubclass) alloc] initWithStyle:UITableViewStyleGrouped
-                                                                                                title:nil
-                                                                                     rightButtonTitle:SHKLocalizedString(@"Send to Facebook")
-                                           ];
-            
-            [rootView addSection:shareFormFields header:nil footer:item.URL!=nil?item.URL.absoluteString:nil];
-            
-            rootView.validateBlock = ^(SHKFormController *form) {
-                
-                // default does no checking and proceeds to share
-                [form saveForm];
-                
-            };
-        
-            rootView.saveBlock = ^(SHKFormController *form) {
-                [self updateItemWithForm:form];
-            };
-            
-            rootView.cancelBlock = ^(SHKFormController *form) {
-            };
-            
-            [[SHK currentHelper] showViewController:rootView];
+//            item = [SHKItem text:sharingText];
+//            
+//            NSArray *shareFormFields = [SHKFacebookCommon shareFormFieldsForItem:item];
+//            SHKFormController *rootView = [[SHKCONFIG(SHKFormControllerSubclass) alloc] initWithStyle:UITableViewStyleGrouped
+//                                                                                                title:nil
+//                                                                                     rightButtonTitle:SHKLocalizedString(@"Send to Facebook")
+//                                           ];
+//            
+//            [rootView addSection:shareFormFields header:nil footer:item.URL!=nil?item.URL.absoluteString:nil];
+//            
+//            rootView.validateBlock = ^(SHKFormController *form) {
+//                
+//                // default does no checking and proceeds to share
+//                [form saveForm];
+//                
+//            };
+//        
+//            rootView.saveBlock = ^(SHKFormController *form) {
+//                [self updateItemWithForm:form];
+//            };
+//            
+//            rootView.cancelBlock = ^(SHKFormController *form) {
+//            };
+//            
+//            [[SHK currentHelper] showViewController:rootView];
         } else if (selectedTab == 3) { // for Email
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",flyerConfigurator.referralURL, userUniqueObjectId]];
-            item = [SHKItem URL:url title:@"Invite Friends" contentType:SHKURLContentTypeUndefined];
-            [item setMailToRecipients:identifiers];
-            item.text = [NSString stringWithFormat:@"I'm using the %@ app to create and share flyers on the go! Want to give it a try?", APP_NAME];
-            // Share the item with my custom class
-            [SHKMail shareItem:item];
+//            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",flyerConfigurator.referralURL, userUniqueObjectId]];
+//            item = [SHKItem URL:url title:@"Invite Friends" contentType:SHKURLContentTypeUndefined];
+//            [item setMailToRecipients:identifiers];
+//            item.text = [NSString stringWithFormat:@"I'm using the %@ app to create and share flyers on the go! Want to give it a try?", APP_NAME];
+//            // Share the item with my custom class
+//            [SHKMail shareItem:item];
         }
     } else {
         [self showAlert:@"Please select any contact to invite !" message:@""];
@@ -681,7 +681,7 @@ const int CONTACTS_TAB = 0;
 }
 
 -(void) shareViaIOSFacebook:( BOOL ) withAccount {
-    SHKItem *item;
+    //SHKItem *item;
     
     // text to be share.
     NSString *sharingText = [NSString stringWithFormat:@"I'm using the %@ app to create and share flyers on the go! Want to give it a try? %@%@", APP_NAME, flyerConfigurator.referralURL, userUniqueObjectId];;
@@ -690,30 +690,30 @@ const int CONTACTS_TAB = 0;
     NSString *urlToShare = [NSString stringWithFormat:@"%@%@", flyerConfigurator.referralURL, userUniqueObjectId];
     
     //item to be share
-    item = [SHKItem URL:[NSURL URLWithString:urlToShare] title:sharingText contentType:SHKShareTypeURL];
+    //item = [SHKItem URL:[NSURL URLWithString:urlToShare] title:sharingText contentType:SHKShareTypeURL];
     
     if( withAccount ) {
         // we got a facebook account, share it via shkiOSFacebook
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            iosSharer = [[SHKiOSFacebook alloc] init];
-            [iosSharer loadItem:item];
-            iosSharer.shareDelegate = self;
-            [iosSharer share];
-
-        });
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            
+//            iosSharer = [[SHKiOSFacebook alloc] init];
+//            [iosSharer loadItem:item];
+//            iosSharer.shareDelegate = self;
+//            [iosSharer share];
+//
+//        });
         
     } else {
         //we didn't have facebook app or account, then we have to use legendary SHKFacebook sharer.
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            iosSharer = [[SHKFacebook alloc] init];
-            [iosSharer loadItem:item];
-            iosSharer.shareDelegate = self;
-            [iosSharer share];
-        });
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            
+//            iosSharer = [[SHKFacebook alloc] init];
+//            [iosSharer loadItem:item];
+//            iosSharer.shareDelegate = self;
+//            [iosSharer share];
+//        });
     }
 }
 
@@ -764,18 +764,18 @@ const int CONTACTS_TAB = 0;
 /*
  * Here we Get Text from SHKFormController
  */
-- (void)updateItemWithForm:(SHKFormController *)form
-{
-	// Update item with new values from form
-    NSDictionary *formValues = [form formValues];
-	for(NSString *key in formValues)
-	{
-		
-		if ([key isEqualToString:@"text"]){
-            fbText = [formValues objectForKey:key];
-        }
-    }
-}
+//- (void)updateItemWithForm:(SHKFormController *)form
+//{
+//	// Update item with new values from form
+//    NSDictionary *formValues = [form formValues];
+//	for(NSString *key in formValues)
+//	{
+//		
+//		if ([key isEqualToString:@"text"]){
+//            fbText = [formValues objectForKey:key];
+//        }
+//    }
+//}
 
 
 #pragma mark  TWITTER CONTACTS
@@ -860,16 +860,16 @@ const int CONTACTS_TAB = 0;
             
             // Current Item For Sharing
             //here we are not set Any Share Type for Override sendStatus Method of SHKTwitter
-            SHKItem *item = [[SHKItem alloc] init];
-            
-            if( sAccount ) {
-                [item setCustomValue:sAccount forKey:@"selectedAccount"];
-            }
-            
-            // Create controller and set share options
-            iosSharer = [FlyerlyTwitterFriends shareItem:item];
-            
-            iosSharer.shareDelegate = self;
+//            SHKItem *item = [[SHKItem alloc] init];
+//            
+//            if( sAccount ) {
+//                [item setCustomValue:sAccount forKey:@"selectedAccount"];
+//            }
+//            
+//            // Create controller and set share options
+//            iosSharer = [FlyerlyTwitterFriends shareItem:item];
+//            
+//            iosSharer.shareDelegate = self;
             
         }else {
             
@@ -1112,21 +1112,21 @@ const int CONTACTS_TAB = 0;
             
             [selectedIdentifiers addObject:model.description];
             
-            //Calling ShareKit for Sharing
-            iosSharer = [[ SHKiOSTwitter alloc] init];
-            NSString *tweet = [NSString stringWithFormat:@"%@ @%@ %@",sharingText,model.description, hashTag];
-            SHKItem *item;
-            
-            item = [SHKItem text:tweet];
-            [selectedIdentifiers addObject:model.description];
-            
-            if ( availableAccounts.count > 0 ) {
-                iosSharer = [SHKiOSTwitter shareItem:item];
-            } else {
-                iosSharer = [SHKTwitter shareItem:item];
-            }
-            
-            iosSharer.shareDelegate = self;
+//            //Calling ShareKit for Sharing
+//            iosSharer = [[ SHKiOSTwitter alloc] init];
+//            NSString *tweet = [NSString stringWithFormat:@"%@ @%@ %@",sharingText,model.description, hashTag];
+//            SHKItem *item;
+//            
+//            item = [SHKItem text:tweet];
+//            [selectedIdentifiers addObject:model.description];
+//            
+//            if ( availableAccounts.count > 0 ) {
+//                iosSharer = [SHKiOSTwitter shareItem:item];
+//            } else {
+//                iosSharer = [SHKTwitter shareItem:item];
+//            }
+//            
+//            iosSharer.shareDelegate = self;
         
         }else if (model.status == 1) {
             
@@ -1215,53 +1215,53 @@ const int CONTACTS_TAB = 0;
 - (void)sharerStartedSending:(SHKSharer *)sharer
 {
     
-	if (!sharer.quiet)
-		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(@"Saving to %@", [[sharer class] sharerTitle]) forSharer:sharer];
+//	if (!sharer.quiet)
+//		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(@"Saving to %@", [[sharer class] sharerTitle]) forSharer:sharer];
 }
 
 - (void)sharerFinishedSending:(SHKSharer *)sharer
 {
     
-    // Here we Get Friend List which sended from FlyerlyFacbookFriends
-    if ( [sharer isKindOfClass:[FlyerlyTwitterFriends class]] == YES ) {
-        
-        FlyerlyTwitterFriends *twitter = (FlyerlyTwitterFriends*) sharer;
-        
-        // HERE WE MAKE ARRAY FOR SHOW DATA IN TABLEVIEW
-        [self makeTwitterArray:twitter.friendsList ];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-           [self.uiTableView reloadData]; 
-        });
-        
-        return;
-    }
+//    // Here we Get Friend List which sended from FlyerlyFacbookFriends
+//    if ( [sharer isKindOfClass:[FlyerlyTwitterFriends class]] == YES ) {
+//        
+//        FlyerlyTwitterFriends *twitter = (FlyerlyTwitterFriends*) sharer;
+//        
+//        // HERE WE MAKE ARRAY FOR SHOW DATA IN TABLEVIEW
+//        [self makeTwitterArray:twitter.friendsList ];
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//           [self.uiTableView reloadData]; 
+//        });
+//        
+//        return;
+//    }
     
     //PFUser *user = [PFUser currentUser];
     
     // Here we Check Sharer for
     // Update PARSE
-    if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ||
-        [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
-        
-        // HERE WE GET AND SET SELECTED FOLLOWER
-        [twitterInvited  addObjectsFromArray:selectedIdentifiers];
-        //user[@"tweetinvited"] = twitterInvited;
-        [self friendsInvited];
- 
-    } else if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
-        
-        // HERE WE GET AND SET SELECTED CONTACT LIST
-        [iPhoneinvited  addObjectsFromArray:selectedIdentifiers];
-        //user[@"iphoneinvited"] = iPhoneinvited;
-        [self friendsInvited];
-
-    } else if ([sharer isKindOfClass:[SHKMail class]] == YES){
-        // HERE WE GET AND SET SELECTED EMAIL LIST
-        [emailInvited  addObjectsFromArray:selectedIdentifiers];
-        //user[@"emailinvited"] = emailInvited;
-        [self friendsInvited];
-    }
+//    if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ||
+//        [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
+//        
+//        // HERE WE GET AND SET SELECTED FOLLOWER
+//        [twitterInvited  addObjectsFromArray:selectedIdentifiers];
+//        //user[@"tweetinvited"] = twitterInvited;
+//        [self friendsInvited];
+// 
+//    } else if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
+//        
+//        // HERE WE GET AND SET SELECTED CONTACT LIST
+//        [iPhoneinvited  addObjectsFromArray:selectedIdentifiers];
+//        //user[@"iphoneinvited"] = iPhoneinvited;
+//        [self friendsInvited];
+//
+//    } else if ([sharer isKindOfClass:[SHKMail class]] == YES){
+//        // HERE WE GET AND SET SELECTED EMAIL LIST
+//        [emailInvited  addObjectsFromArray:selectedIdentifiers];
+//        //user[@"emailinvited"] = emailInvited;
+//        [self friendsInvited];
+//    }
 
 
     // HERE WE UPDATE PARSE ACCOUNT FOR REMEMBER INVITED FRIENDS LIST
@@ -1272,76 +1272,76 @@ const int CONTACTS_TAB = 0;
     [self.uiTableView reloadData ];
     
     
-    if (!sharer.quiet)
-		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!") forSharer:sharer];
+//    if (!sharer.quiet)
+//		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!") forSharer:sharer];
 }
 
-- (void)sharer:(SHKSharer *)sharer failedWithError:(NSError *)error shouldRelogin:(BOOL)shouldRelogin
-{
-    
-    [[SHKActivityIndicator currentIndicator] hideForSharer:sharer];
-	NSLog(@"Sharing Error");
-}
-
-- (void)sharerCancelledSending:(SHKSharer *)sharer
-{
-    
-    if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ||
-        [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
-        [selectedIdentifiers   removeAllObjects];
-    }
-
-    [self.uiTableView reloadData ];
-    if (!sharer.quiet)
-        [[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Cancelled!") forSharer:sharer];
-    
-}
-
-- (void)sharerShowBadCredentialsAlert:(SHKSharer *)sharer
-{
-    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ did not accept your credentials. Please try again.", [[sharer class] sharerTitle]);
-    
-    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
-                                message:errorMessage
-                               delegate:nil
-                      cancelButtonTitle:SHKLocalizedString(@"Close")
-                      otherButtonTitles:nil] show];
-}
-
-- (void)sharerShowOtherAuthorizationErrorAlert:(SHKSharer *)sharer
-{
-    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ encountered an error. Please try again.", [[sharer class] sharerTitle]);
-    
-    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
-                                message:errorMessage
-                               delegate:nil
-                      cancelButtonTitle:SHKLocalizedString(@"Close")
-                      otherButtonTitles:nil] show];
-}
-
-- (void)hideActivityIndicatorForSharer:(SHKSharer *)sharer {
-    
-    [[SHKActivityIndicator currentIndicator]  hideForSharer:sharer];
-}
-
-- (void)displayActivity:(NSString *)activityDescription forSharer:(SHKSharer *)sharer {
-    
-    if (sharer.quiet) return;
-    
-    [[SHKActivityIndicator currentIndicator]  displayActivity:activityDescription forSharer:sharer];
-}
-
-- (void)displayCompleted:(NSString *)completionText forSharer:(SHKSharer *)sharer {
-    
-    if (sharer.quiet) return;
-    [[SHKActivityIndicator currentIndicator]  displayCompleted:completionText forSharer:sharer];
-}
-
-- (void)showProgress:(CGFloat)progress forSharer:(SHKSharer *)sharer {
-    
-    if (sharer.quiet) return;
-    [[SHKActivityIndicator currentIndicator]  showProgress:progress forSharer:sharer];
-}
+//- (void)sharer:(SHKSharer *)sharer failedWithError:(NSError *)error shouldRelogin:(BOOL)shouldRelogin
+//{
+//    
+////    [[SHKActivityIndicator currentIndicator] hideForSharer:sharer];
+//	NSLog(@"Sharing Error");
+//}
+//
+//- (void)sharerCancelledSending:(SHKSharer *)sharer
+//{
+//    
+//    if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ||
+//        [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
+//        [selectedIdentifiers   removeAllObjects];
+//    }
+//
+//    [self.uiTableView reloadData ];
+//    if (!sharer.quiet)
+//        [[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Cancelled!") forSharer:sharer];
+//    
+//}
+//
+//- (void)sharerShowBadCredentialsAlert:(SHKSharer *)sharer
+//{
+//    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ did not accept your credentials. Please try again.", [[sharer class] sharerTitle]);
+//    
+//    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
+//                                message:errorMessage
+//                               delegate:nil
+//                      cancelButtonTitle:SHKLocalizedString(@"Close")
+//                      otherButtonTitles:nil] show];
+//}
+//
+//- (void)sharerShowOtherAuthorizationErrorAlert:(SHKSharer *)sharer
+//{
+//    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ encountered an error. Please try again.", [[sharer class] sharerTitle]);
+//    
+//    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
+//                                message:errorMessage
+//                               delegate:nil
+//                      cancelButtonTitle:SHKLocalizedString(@"Close")
+//                      otherButtonTitles:nil] show];
+//}
+//
+//- (void)hideActivityIndicatorForSharer:(SHKSharer *)sharer {
+//    
+//    [[SHKActivityIndicator currentIndicator]  hideForSharer:sharer];
+//}
+//
+//- (void)displayActivity:(NSString *)activityDescription forSharer:(SHKSharer *)sharer {
+//    
+//    if (sharer.quiet) return;
+//    
+//    [[SHKActivityIndicator currentIndicator]  displayActivity:activityDescription forSharer:sharer];
+//}
+//
+//- (void)displayCompleted:(NSString *)completionText forSharer:(SHKSharer *)sharer {
+//    
+//    if (sharer.quiet) return;
+//    [[SHKActivityIndicator currentIndicator]  displayCompleted:completionText forSharer:sharer];
+//}
+//
+//- (void)showProgress:(CGFloat)progress forSharer:(SHKSharer *)sharer {
+//    
+//    if (sharer.quiet) return;
+//    [[SHKActivityIndicator currentIndicator]  showProgress:progress forSharer:sharer];
+//}
 
 #pragma mark - UI Alert View Delegate Methods
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {

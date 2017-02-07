@@ -112,7 +112,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    [SHKFacebook handleDidBecomeActive];
+    //[SHKFacebook handleDidBecomeActive];
     [FBSDKAppEvents activateApp];
 }
 
@@ -121,7 +121,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Save data if appropriate
-    [SHKFacebook handleWillTerminate];
+    //[SHKFacebook handleWillTerminate];
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
@@ -148,9 +148,9 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
          annotation:(id)annotation {
     NSLog(@"[url absoluteString] = %@", [url absoluteString]);
     
-    if ([[url absoluteString] hasPrefix:[NSString stringWithFormat:@"fb%@://bridge/share",SHKCONFIG(facebookAppId)]]) {
+    //if ([[url absoluteString] hasPrefix:[NSString stringWithFormat:@"fb%@://bridge/share",SHKCONFIG(facebookAppId)]]) {
         return [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
-    }
+    //}
     
 //    if ([[url absoluteString] hasPrefix:[NSString stringWithFormat:@"fb%@", SHKCONFIG(facebookAppId)]]) {
 //        
@@ -183,20 +183,20 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     */
     
     // Configurator initialization
-    flyerConfigurator = [[FlyerlyConfigurator alloc] init];
-    DefaultSHKConfigurator  *configurator = flyerConfigurator;
-    
-    [SHKConfiguration sharedInstanceWithConfigurator:configurator];
+//    flyerConfigurator = [[FlyerlyConfigurator alloc] init];
+//    DefaultSHKConfigurator  *configurator = flyerConfigurator;
+//    
+//    [SHKConfiguration sharedInstanceWithConfigurator:configurator];
 
     // Crittercism for crash reports.
     [Crittercism enableWithAppID:[flyerConfigurator crittercismAppId]];
     
-    // Setup paypal
-    [PayPalMobile initializeWithClientIdsForEnvironments:
-     @{[flyerConfigurator paypalEnvironment] : [flyerConfigurator paypalEnvironmentId]}];
-    
-    [PayPalMobile preconnectWithEnvironment:[flyerConfigurator paypalEnvironment]];
-    
+//    // Setup paypal
+//    [PayPalMobile initializeWithClientIdsForEnvironments:
+//     @{[flyerConfigurator paypalEnvironment] : [flyerConfigurator paypalEnvironmentId]}];
+//    
+//    [PayPalMobile preconnectWithEnvironment:[flyerConfigurator paypalEnvironment]];
+//    
     //[LobRequest initWithAPIKey:[flyerConfigurator lobAppId]];
     
     //-- Set Notification

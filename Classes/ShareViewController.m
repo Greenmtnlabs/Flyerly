@@ -18,8 +18,8 @@
     FlyerlyConfigurator *flyerConfigurator;
     NSString *hashTag;
 }
-@synthesize youtubeService;
-@synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,saveButton,printFlyerButton,facebookButton,twitterButton,instagramButton,messengerButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,tempTxtArea,saveToGallaryReqBeforeSharing, fmController;
+//@synthesize youtubeService;
+@synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,saveButton,printFlyerButton,facebookButton,twitterButton,instagramButton,messengerButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,activityIndicator,youTubeButton,tempTxtArea,saveToGallaryReqBeforeSharing, fmController; //delegate,
 
 @synthesize flyerShareType,star1,star2,star3,star4,star5;
 @synthesize descriptionView, titlePlaceHolderImg, titleView, descTextAreaImg, indexRow;
@@ -499,11 +499,11 @@ UIAlertView *saveCurrentFlyerAlert;
 #pragma mark Social Network
 -(void)initYoutubeService {
     // Initialize the youtube service & load existing credentials from the keychain if available
-    self.youtubeService = [[GTLServiceYouTube alloc] init];
-    self.youtubeService.authorizer =
-    [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:flyerConfigurator.appName
-                                                          clientID:flyerConfigurator.youTubeSecret
-                                                      clientSecret:flyerConfigurator.youTubeConsumerKey];
+//    self.youtubeService = [[GTLServiceYouTube alloc] init];
+//    self.youtubeService.authorizer =
+//    [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:flyerConfigurator.appName
+//                                                          clientID:flyerConfigurator.youTubeSecret
+//                                                      clientSecret:flyerConfigurator.youTubeConsumerKey];
     
     
     _uploadVideo = [[YouTubeUploadVideo alloc] init];
@@ -544,17 +544,17 @@ UIAlertView *saveCurrentFlyerAlert;
         description = [NSString stringWithFormat:@"Uploaded from %@", flyerConfigurator.appName ];
     }
     
-    [self.uploadVideo uploadYouTubeVideoWithService:self.youtubeService
-                                           fileData:fileData
-                                              title:title
-                                        description:description
-                                      privacyStatus: ( ([[flyer getShareType]  isEqual: @"Private"]) ? @"private" : @"public")
-                                        tags:[NSArray arrayWithObjects:hashTag, nil]];
+//    [self.uploadVideo uploadYouTubeVideoWithService:self.youtubeService
+//                                           fileData:fileData
+//                                              title:title
+//                                        description:description
+//                                      privacyStatus: ( ([[flyer getShareType]  isEqual: @"Private"]) ? @"private" : @"public")
+//                                        tags:[NSArray arrayWithObjects:hashTag, nil]];
 }
 
 // Helper to check if user is authorized
 - (BOOL)isAuthorized {
-    return [((GTMOAuth2Authentication *)self.youtubeService.authorizer) canAuthorize];
+    return YES; //[((GTMOAuth2Authentication *)self.youtubeService.authorizer) canAuthorize];
 }
 
 // Creates the auth controller for authorizing access to YouTube.
@@ -562,12 +562,12 @@ UIAlertView *saveCurrentFlyerAlert;
 {
     GTMOAuth2ViewControllerTouch *authController;
     
-    authController = [[GTMOAuth2ViewControllerTouch alloc] initWithScope:kGTLAuthScopeYouTube
-                                                                clientID:flyerConfigurator.youTubeConsumerKey
-                                                            clientSecret:flyerConfigurator.youTubeSecret
-                                                        keychainItemName:flyerConfigurator.appName
-                                                                delegate:self
-                                                        finishedSelector:@selector(viewController:finishedWithAuth:error:)];
+//    authController = [[GTMOAuth2ViewControllerTouch alloc] initWithScope:kGTLAuthScopeYouTube
+//                                                                clientID:flyerConfigurator.youTubeConsumerKey
+//                                                            clientSecret:flyerConfigurator.youTubeSecret
+//                                                        keychainItemName:flyerConfigurator.appName
+//                                                                delegate:self
+//                                                        finishedSelector:@selector(viewController:finishedWithAuth:error:)];
     return authController;
 }
 
@@ -578,9 +578,9 @@ UIAlertView *saveCurrentFlyerAlert;
                  error:(NSError *)error {
     if (error != nil) {
         [Utils showAlert:@"Authentication Error" message:error.localizedDescription];
-        self.youtubeService.authorizer = nil;
+        //self.youtubeService.authorizer = nil;
     } else {
-        self.youtubeService.authorizer = authResult;
+        //self.youtubeService.authorizer = authResult;
         //after successfull login on google reStart uploading process
         [self uploadYTDL];
     }
@@ -589,26 +589,26 @@ UIAlertView *saveCurrentFlyerAlert;
 - (IBAction)startOAuthFlow:(id)sender {
     GTMOAuth2ViewControllerTouch *viewController;
     
-    viewController = [[GTMOAuth2ViewControllerTouch alloc]
-                      initWithScope:kGTLAuthScopeYouTube
-                      clientID:flyerConfigurator.youTubeConsumerKey
-                      clientSecret:flyerConfigurator.youTubeSecret
-                      keychainItemName:flyerConfigurator.appName
-                      delegate:self
-                      finishedSelector:@selector(viewController:finishedWithAuth:error:)];
+//    viewController = [[GTMOAuth2ViewControllerTouch alloc]
+//                      initWithScope:kGTLAuthScopeYouTube
+//                      clientID:flyerConfigurator.youTubeConsumerKey
+//                      clientSecret:flyerConfigurator.youTubeSecret
+//                      keychainItemName:flyerConfigurator.appName
+//                      delegate:self
+//                      finishedSelector:@selector(viewController:finishedWithAuth:error:)];
     
     [self.cfController.navigationController pushViewController:viewController animated:YES];
 }
 
-- (void)uploadYouTubeVideo:(YouTubeUploadVideo *)uploadVideo
-      didFinishWithResults:(GTLYouTubeVideo *)video {
-    
-    NSString *videoUrl = [NSString stringWithFormat:@"https://www.youtube.com/watch?v=%@",video.identifier];
-    [self onYoutubeSFShare:videoUrl];
-    [self setSocialStatus];
-    
-    [Utils showAlert:@"Alert" message:@"Video uploaded successfully."];
-}
+//- (void)uploadYouTubeVideo:(YouTubeUploadVideo *)uploadVideo
+//      didFinishWithResults:(GTLYouTubeVideo *)video {
+//    
+//    NSString *videoUrl = [NSString stringWithFormat:@"https://www.youtube.com/watch?v=%@",video.identifier];
+//    [self onYoutubeSFShare:videoUrl];
+//    [self setSocialStatus];
+//    
+//    [Utils showAlert:@"Alert" message:@"Video uploaded successfully."];
+//}
 
 /*
  * Called when Youtube button is pressed\
@@ -618,14 +618,14 @@ UIAlertView *saveCurrentFlyerAlert;
     [self updateDescription];
 
     if ([FlyerlySingleton connected]) {
-        SHKItem *item = [SHKItem filePath:[self.flyer getSharingVideoPath] title:titleView.text];
-        
-        item.tags =[NSArray arrayWithObjects: hashTag, nil];
-        item.text = selectedFlyerDescription;
-        
-        iosSharer = [YouTubeSubClass shareItem:item];
-        
-        iosSharer.shareDelegate = self;
+//        SHKItem *item = [SHKItem filePath:[self.flyer getSharingVideoPath] title:titleView.text];
+//        
+//        item.tags =[NSArray arrayWithObjects: hashTag, nil];
+//        item.text = selectedFlyerDescription;
+//        
+//        iosSharer = [YouTubeSubClass shareItem:item];
+//        
+//        iosSharer.shareDelegate = self;
     } else {
         [FlyerlySingleton showNotConnectedAlert];
     }
@@ -641,18 +641,18 @@ UIAlertView *saveCurrentFlyerAlert;
     [self updateDescription];
     
     // Declare Item to be share
-    SHKItem *item;
+    //SHKItem *item;
     
     //check whether item is video or just an image
     if ([self.flyer isVideoFlyer]) {
         
         // Current Video Link For Sharing
-        item = [SHKItem text: [NSString stringWithFormat:@"%@ %@ %@",[self.flyer getYoutubeLink], selectedFlyerDescription, hashTag ]];
+        //item = [SHKItem text: [NSString stringWithFormat:@"%@ %@ %@",[self.flyer getYoutubeLink], selectedFlyerDescription, hashTag ]];
         
     }else {
         
         // Current Image For Sharing
-        item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@", selectedFlyerDescription, hashTag ]];
+        //item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@", selectedFlyerDescription, hashTag ]];
     }
 
     // get the twitter accounts from the phone
@@ -671,10 +671,10 @@ UIAlertView *saveCurrentFlyerAlert;
                    
                    dispatch_async(dispatch_get_main_queue(), ^{
                        //Calling ShareKit for Sharing via SHKiOSTwitter
-                       iosSharer = [SHKiOSTwitter shareItem:item];
-                       // after sharing we have to call sharing delegates
-                       iosSharer.shareDelegate = self;
-                       [iosSharer share];
+//                       iosSharer = [SHKiOSTwitter shareItem:item];
+//                       // after sharing we have to call sharing delegates
+//                       iosSharer.shareDelegate = self;
+//                       [iosSharer share];
                    });
                    
                    
@@ -682,21 +682,21 @@ UIAlertView *saveCurrentFlyerAlert;
                    
                    dispatch_async(dispatch_get_main_queue(), ^{
                        //Calling ShareKit for Sharing via SHKTWitter
-                       iosSharer = [SHKTwitter shareItem:item];
-                       // after sharing we have to call sharing delegates
-                       iosSharer.shareDelegate = self;
-                       [iosSharer share];
+//                       iosSharer = [SHKTwitter shareItem:item];
+//                       // after sharing we have to call sharing delegates
+//                       iosSharer.shareDelegate = self;
+//                       [iosSharer share];
                    });
                    
                }
                
            } else {
                
-               //Calling ShareKit for Sharing via SHKTWitter
-               iosSharer = [SHKTwitter shareItem:item];
-               // after sharing we have to call sharing delegates
-               iosSharer.shareDelegate = self;
-               [iosSharer share];
+//               //Calling ShareKit for Sharing via SHKTWitter
+//               iosSharer = [SHKTwitter shareItem:item];
+//               // after sharing we have to call sharing delegates
+//               iosSharer.shareDelegate = self;
+//               [iosSharer share];
            }
     }];
 
@@ -765,24 +765,24 @@ UIAlertView *saveCurrentFlyerAlert;
  */
 -(IBAction)onClickEmailButton{
     
-    // Current Item For Sharing
-    SHKItem *item;
-    if ([self.flyer isVideoFlyer]) {
-        
-        // Current Video Link For Sharing
-        //        item = [SHKItem text: [NSString stringWithFormat:@"%@ Created & sent from Flyer.ly",[self.flyer getYoutubeLink]]];
-        
-        item = [SHKItem URL:[NSURL URLWithString:[self.flyer getYoutubeLink]] title:[NSString stringWithFormat:@"%@ for you!", flyerConfigurator.appName ] contentType:SHKURLContentTypeVideo];
-    }else {
-        
-        item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ for you!", flyerConfigurator.appName ]];
-        item.text = @"Created & sent from Flyer.ly";
-    }
-    
-    //Calling ShareKit for Sharing
-    iosSharer = [[ SHKSharer alloc] init];
-    iosSharer = [SHKMail shareItem:item];
-    iosSharer.shareDelegate = self;
+//    // Current Item For Sharing
+//    SHKItem *item;
+//    if ([self.flyer isVideoFlyer]) {
+//        
+//        // Current Video Link For Sharing
+//        //        item = [SHKItem text: [NSString stringWithFormat:@"%@ Created & sent from Flyer.ly",[self.flyer getYoutubeLink]]];
+//        
+//        item = [SHKItem URL:[NSURL URLWithString:[self.flyer getYoutubeLink]] title:[NSString stringWithFormat:@"%@ for you!", flyerConfigurator.appName ] contentType:SHKURLContentTypeVideo];
+//    }else {
+//        
+//        item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ for you!", flyerConfigurator.appName ]];
+//        item.text = @"Created & sent from Flyer.ly";
+//    }
+//    
+//    //Calling ShareKit for Sharing
+//    iosSharer = [[ SHKSharer alloc] init];
+//    iosSharer = [SHKMail shareItem:item];
+//    iosSharer.shareDelegate = self;
     
     iosSharer = nil;
     
@@ -796,22 +796,22 @@ UIAlertView *saveCurrentFlyerAlert;
     if([MFMessageComposeViewController canSendAttachments])
     {
         
-        if ([self.flyer isVideoFlyer]) {
-            
-            // Current Video Link For Sharing
-            SHKItem *item = [SHKItem text: [NSString stringWithFormat:@"%@ Created & sent from Flyer.ly",[self.flyer getYoutubeLink] ]];
-            
-            iosSharer = [SHKTextMessage shareItem:item];
-            iosSharer.shareDelegate = self;
-        }else {
-
-            NSData *exportData = UIImageJPEGRepresentation(selectedFlyerImage ,1.0);
-            
-            iosSharer = [[ SHKSharer alloc] init];
-            iosSharer = [SHKTextMessage shareFileData:exportData filename:imageFileName title:@"Created & sent from Flyer.ly"];
-            iosSharer.shareDelegate = self;
-            
-        }
+//        if ([self.flyer isVideoFlyer]) {
+//            
+//            // Current Video Link For Sharing
+//            SHKItem *item = [SHKItem text: [NSString stringWithFormat:@"%@ Created & sent from Flyer.ly",[self.flyer getYoutubeLink] ]];
+//            
+//            iosSharer = [SHKTextMessage shareItem:item];
+//            iosSharer.shareDelegate = self;
+//        }else {
+//
+//            NSData *exportData = UIImageJPEGRepresentation(selectedFlyerImage ,1.0);
+//            
+//            iosSharer = [[ SHKSharer alloc] init];
+//            iosSharer = [SHKTextMessage shareFileData:exportData filename:imageFileName title:@"Created & sent from Flyer.ly"];
+//            iosSharer.shareDelegate = self;
+//            
+//        }
     }
 }
 
@@ -977,90 +977,90 @@ UIAlertView *saveCurrentFlyerAlert;
 {
     [self.cfController enableHome:NO];
     
-    // Update Flyer Share Info in Social File
-    if ( [sharer isKindOfClass:[SHKiOSFacebook class]] == YES  ||
-        [sharer isKindOfClass:[SHKFacebook class]] == YES ) {
-        
-        facebookButton.enabled = NO;
-        
-    } else if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ||
-               [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
-        
-        twitterButton.enabled = NO;
-        
-    } else if ( [sharer isKindOfClass:[SHKTumblr class]] == YES ) {
-        
-    } else if ( [sharer isKindOfClass:[SHKFlickr class]] == YES ) {
-        
-        
-    } else if ( [sharer isKindOfClass:[SHKMail class]] == YES ) {
-        
-        emailButton.enabled = NO;
-        
-    } else if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
-        
-        smsButton.enabled = NO;
-    } else if ( [sharer isKindOfClass:[YouTubeSubClass class]] == YES ) {
+//    // Update Flyer Share Info in Social File
+//    if ( [sharer isKindOfClass:[SHKiOSFacebook class]] == YES  ||
+//        [sharer isKindOfClass:[SHKFacebook class]] == YES ) {
+//        
+//        facebookButton.enabled = NO;
+//        
+//    } else if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ||
+//               [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
+//        
+//        twitterButton.enabled = NO;
+//        
+//    } else if ( [sharer isKindOfClass:[SHKTumblr class]] == YES ) {
+//        
+//    } else if ( [sharer isKindOfClass:[SHKFlickr class]] == YES ) {
+//        
+//        
+//    } else if ( [sharer isKindOfClass:[SHKMail class]] == YES ) {
+//        
+//        emailButton.enabled = NO;
+//        
+//    } else if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
+//        
+//        smsButton.enabled = NO;
+//    } else if ( [sharer isKindOfClass:[YouTubeSubClass class]] == YES ) {
+//    
+//        youTubeButton.enabled = NO;
+//    }
     
-        youTubeButton.enabled = NO;
-    }
     
-    
-	if (!sharer.quiet)
-		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(@"Sharing to %@", [[sharer class] sharerTitle]) forSharer:sharer];
+//	if (!sharer.quiet)
+//		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(@"Sharing to %@", [[sharer class] sharerTitle]) forSharer:sharer];
     
 }
 
 - (void)sharerFinishedSending:(SHKSharer *)sharer
 {
 
-    // Here we Check Sharer for
-    // Update Flyer Share Info in Social File
-    if ( [sharer isKindOfClass:[SHKiOSFacebook class]] == YES ||
-        [sharer isKindOfClass:[SHKFacebook class]] == YES) {
-        
-        facebookButton.enabled = YES;
-        [self.flyer setFacebookStatus:1];
-        [Flurry logEvent:@"Shared Facebook"];
-
-        
-    } else if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ||
-               [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
-        
-        twitterButton.enabled = YES;
-        [self.flyer setTwitterStatus:1];
-        [Flurry logEvent:@"Shared Twitter"];
-
-        
-    } else if ( [sharer isKindOfClass:[SHKTumblr class]] == YES ) {
-        
-        [Flurry logEvent:@"Shared on Tumblr"];
-       
-    } else if ( [sharer isKindOfClass:[SHKFlickr class]] == YES ) {
-       
-        [Flurry logEvent:@"Shared on Flickr"];
-        
-    } else if ( [sharer isKindOfClass:[SHKMail class]] == YES ) {
-        
-        emailButton.enabled = YES;
-        [self.flyer setEmailStatus:1];
-        [Flurry logEvent:@"Shared Email"];
-
-    } else if ([sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
-        
-        smsButton.enabled = YES;
-        [self.flyer setSmsStatus:1];
-        [Flurry logEvent:@"Shared SMS"];
-
-    } else if ( [sharer isKindOfClass:[YouTubeSubClass class]] == YES ) {
-        YouTubeSubClass *youtube = (YouTubeSubClass *) sharer;
-        [self onYoutubeSFShare:youtube.youTubeVideoURL];
-    }
-    
-    [self actionAfterSharing];
-    
-    if (!sharer.quiet)
-        [[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Flyer Posted!") forSharer:sharer];
+//    // Here we Check Sharer for
+//    // Update Flyer Share Info in Social File
+//    if ( [sharer isKindOfClass:[SHKiOSFacebook class]] == YES ||
+//        [sharer isKindOfClass:[SHKFacebook class]] == YES) {
+//        
+//        facebookButton.enabled = YES;
+//        [self.flyer setFacebookStatus:1];
+//        [Flurry logEvent:@"Shared Facebook"];
+//
+//        
+//    } else if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ||
+//               [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
+//        
+//        twitterButton.enabled = YES;
+//        [self.flyer setTwitterStatus:1];
+//        [Flurry logEvent:@"Shared Twitter"];
+//
+//        
+//    } else if ( [sharer isKindOfClass:[SHKTumblr class]] == YES ) {
+//        
+//        [Flurry logEvent:@"Shared on Tumblr"];
+//       
+//    } else if ( [sharer isKindOfClass:[SHKFlickr class]] == YES ) {
+//       
+//        [Flurry logEvent:@"Shared on Flickr"];
+//        
+//    } else if ( [sharer isKindOfClass:[SHKMail class]] == YES ) {
+//        
+//        emailButton.enabled = YES;
+//        [self.flyer setEmailStatus:1];
+//        [Flurry logEvent:@"Shared Email"];
+//
+//    } else if ([sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
+//        
+//        smsButton.enabled = YES;
+//        [self.flyer setSmsStatus:1];
+//        [Flurry logEvent:@"Shared SMS"];
+//
+//    } else if ( [sharer isKindOfClass:[YouTubeSubClass class]] == YES ) {
+//        YouTubeSubClass *youtube = (YouTubeSubClass *) sharer;
+//        [self onYoutubeSFShare:youtube.youTubeVideoURL];
+//    }
+//    
+//    [self actionAfterSharing];
+//    
+//    if (!sharer.quiet)
+//        [[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Flyer Posted!") forSharer:sharer];
     
 }
 
@@ -1070,7 +1070,7 @@ UIAlertView *saveCurrentFlyerAlert;
     
 
     
-    iosSharer.shareDelegate = nil;
+    //iosSharer.shareDelegate = nil;
     iosSharer = nil;
     
     [self saveInGallaryIfNeeded];
@@ -1097,16 +1097,16 @@ UIAlertView *saveCurrentFlyerAlert;
 - (void)sharer:(SHKSharer *)sharer failedWithError:(NSError *)error shouldRelogin:(BOOL)shouldRelogin
 {
     
-    [[SHKActivityIndicator currentIndicator] hideForSharer:sharer];
-    UIAlertView *sharingFailedAlert = [[UIAlertView alloc] initWithTitle:@"Sharing Failed"
-                                             message:@"Failed to share Flyer. Please check internet connection and try again."
-                                            delegate:self
-                                   cancelButtonTitle:@"Ok"
-                                   otherButtonTitles:nil];
+//    [[SHKActivityIndicator currentIndicator] hideForSharer:sharer];
+//    UIAlertView *sharingFailedAlert = [[UIAlertView alloc] initWithTitle:@"Sharing Failed"
+//                                             message:@"Failed to share Flyer. Please check internet connection and try again."
+//                                            delegate:self
+//                                   cancelButtonTitle:@"Ok"
+//                                   otherButtonTitles:nil];
     
-    [sharingFailedAlert show];
+    //[sharingFailedAlert show];
     
-    iosSharer.shareDelegate = nil;
+    //iosSharer.shareDelegate = nil;
 	NSLog(@"Sharing Error");
     
     [self saveInGallaryIfNeeded];
@@ -1117,10 +1117,10 @@ UIAlertView *saveCurrentFlyerAlert;
 
 - (void)sharerCancelledSending:(SHKSharer *)sharer
 {
-    [[SHKActivityIndicator currentIndicator] hideForSharer:sharer];
-    iosSharer.shareDelegate = nil;
-    iosSharer = nil;
-    NSLog(@"Sending cancelled");
+//    [[SHKActivityIndicator currentIndicator] hideForSharer:sharer];
+//    iosSharer.shareDelegate = nil;
+//    iosSharer = nil;
+//    NSLog(@"Sending cancelled");
     
     [self saveInGallaryIfNeeded];
     [self.cfController enableHome:YES];
@@ -1128,52 +1128,52 @@ UIAlertView *saveCurrentFlyerAlert;
 
 - (void)sharerShowBadCredentialsAlert:(SHKSharer *)sharer
 {
-    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ did not accept your credentials. Please try again.", [[sharer class] sharerTitle]);
-    
-    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
-                                message:errorMessage
-                               delegate:nil
-                      cancelButtonTitle:SHKLocalizedString(@"Close")
-                      otherButtonTitles:nil] show];
-    iosSharer.shareDelegate = nil;
-    iosSharer = nil;
+//    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ did not accept your credentials. Please try again.", [[sharer class] sharerTitle]);
+//    
+//    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
+//                                message:errorMessage
+//                               delegate:nil
+//                      cancelButtonTitle:SHKLocalizedString(@"Close")
+//                      otherButtonTitles:nil] show];
+//    iosSharer.shareDelegate = nil;
+//    iosSharer = nil;
 }
 
 - (void)sharerShowOtherAuthorizationErrorAlert:(SHKSharer *)sharer
 {
-    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ encountered an error. Please try again.", [[sharer class] sharerTitle]);
-    
-    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
-                                message:errorMessage
-                               delegate:nil
-                      cancelButtonTitle:SHKLocalizedString(@"Close")
-                      otherButtonTitles:nil] show];
-     iosSharer.shareDelegate = nil;
-    iosSharer = nil;
+//    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ encountered an error. Please try again.", [[sharer class] sharerTitle]);
+//    
+//    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
+//                                message:errorMessage
+//                               delegate:nil
+//                      cancelButtonTitle:SHKLocalizedString(@"Close")
+//                      otherButtonTitles:nil] show];
+//     iosSharer.shareDelegate = nil;
+//    iosSharer = nil;
 }
 
 - (void)hideActivityIndicatorForSharer:(SHKSharer *)sharer {
     
-    [[SHKActivityIndicator currentIndicator]  hideForSharer:sharer];
+    //[[SHKActivityIndicator currentIndicator]  hideForSharer:sharer];
 }
 
 - (void)displayActivity:(NSString *)activityDescription forSharer:(SHKSharer *)sharer {
     
-    if (sharer.quiet) return;
-    
-    [[SHKActivityIndicator currentIndicator]  displayActivity:activityDescription forSharer:sharer];
+//    if (sharer.quiet) return;
+//    
+//    [[SHKActivityIndicator currentIndicator]  displayActivity:activityDescription forSharer:sharer];
 }
 
 - (void)displayCompleted:(NSString *)completionText forSharer:(SHKSharer *)sharer {
     
-    if (sharer.quiet) return;
-    [[SHKActivityIndicator currentIndicator]  displayCompleted:completionText forSharer:sharer];
+//    if (sharer.quiet) return;
+//    [[SHKActivityIndicator currentIndicator]  displayCompleted:completionText forSharer:sharer];
 }
 
 - (void)showProgress:(CGFloat)progress forSharer:(SHKSharer *)sharer {
     
-    if (sharer.quiet) return;
-    [[SHKActivityIndicator currentIndicator]  showProgress:progress forSharer:sharer];
+//    if (sharer.quiet) return;
+//    [[SHKActivityIndicator currentIndicator]  showProgress:progress forSharer:sharer];
 }
 
 

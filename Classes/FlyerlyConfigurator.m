@@ -7,7 +7,7 @@
 //
 
 #import "FlyerlyConfigurator.h"
-#import "SHKFile.h"
+//#import "SHKFile.h"
 #import "PaypalMobile.h"
 #import <Social/Social.h>
 #import "Common.h"
@@ -682,21 +682,21 @@
 
 //ShareKit will remember last used sharers for each particular mime type.
 
-- (NSArray *)defaultFavoriteSharersForFile:(SHKFile *)file {
-    
-    NSMutableArray *result = [NSMutableArray arrayWithObjects:@"SHKMail",@"SHKEvernote", nil];
-    if ([file.mimeType hasPrefix:@"video/"] || [file.mimeType hasPrefix:@"audio/"] || [file.mimeType hasPrefix:@"image/"]) {
-        [result addObject:@"SHKTumblr"];
-    }
-    return result;
-}
+//- (NSArray *)defaultFavoriteSharersForFile:(SHKFile *)file {
+//    
+//    NSMutableArray *result = [NSMutableArray arrayWithObjects:@"SHKMail",@"SHKEvernote", nil];
+//    if ([file.mimeType hasPrefix:@"video/"] || [file.mimeType hasPrefix:@"audio/"] || [file.mimeType hasPrefix:@"image/"]) {
+//        [result addObject:@"SHKTumblr"];
+//    }
+//    return result;
+//}
 
 - (NSArray*)defaultFavoriteSharersForMimeType:(NSString *)mimeType {
-    return [self defaultFavoriteSharersForFile:nil];
+    return nil; //[self defaultFavoriteSharersForFile:nil];
 }
 
 - (NSArray *)defaultFavoriteFileSharers {
-    return [self defaultFavoriteSharersForFile:nil];
+    return nil; //[self defaultFavoriteSharersForFile:nil];
 }
 
 //by default, user can see last used sharer on top of the SHKActionSheet. You can switch this off here, so that user is always presented the same sharers for each SHKShareType.
