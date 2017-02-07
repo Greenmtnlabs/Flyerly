@@ -6,6 +6,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.3'
 
 #pod 'AFNetworking', '~> 2.5.4'
+    pod 'AFNetworking', '~> 3.1'
     pod 'uservoice-iphone-sdk', '~> 3.2.3'
     pod 'PayPal-iOS-SDK', '~> 2.14.0'
 

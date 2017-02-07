@@ -10,7 +10,7 @@
 #import "Common.h"
 #import "ImageLoader.h"
 #import "InAppViewController.h"
-//#import "AFHTTPRequestOperation.h"
+#import "AFHTTPRequestOperation.h"
 #import "CropViewController.h"
 #include <CommonCrypto/CommonDigest.h>
 
