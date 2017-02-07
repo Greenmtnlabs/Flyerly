@@ -182,5 +182,10 @@
 	</array>
     <key>CFBundleExecutable</key>
     <string>${EXECUTABLE_NAME}</string>
-</dict>
+
+	<key>NSPhotoLibraryUsageDescription</key>
+		<string>This app requires access to the photo library.</string>
+	<key>NSCameraUsageDescription</key>
+		<string>This app requires access to the camera.</string>
+	</dict>
 </plist>
