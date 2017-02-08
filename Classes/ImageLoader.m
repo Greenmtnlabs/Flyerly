@@ -7,10 +7,10 @@
 //
 
 #import "ImageLoader.h"
-//#import "AFHTTPRequestOperation.h"
+#import "AFHTTPRequestOperation.h"
 #import "NBUImageLoader.h"
 #import "NBUImagePickerPrivate.h"
-
+#import "AFNetworking.h"
 
 static NBUImageLoader * _sharedLoader;
 
@@ -48,8 +48,8 @@ static NBUImageLoader * _sharedLoader;
         NSURL *imageUrl = [[NSURL alloc] initWithString:imageUrlString];
         NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:imageUrl];
         
-//         *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
-//        rAFHTTPRequestOperationequestOperation.responseSerializer = [AFImageResponseSerializer serializer];
+//        AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
+//        requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
 //        [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
 //            
 //            resultBlock(responseObject,nil);
@@ -58,6 +58,19 @@ static NBUImageLoader * _sharedLoader;
 //            NSLog(@"Image error: %@", error);
 //        }];
 //        [requestOperation start];
+        
+        
+        NSURL *URL = [NSURL URLWithString: imageUrlString];
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        //manager.responseSerializer = [AFHTTPResponseSerializer responseSerializer];
+        [manager GET: URL.absoluteString parameters: nil success:^(NSURLSessionDataTask *task, id responseObject) {
+            resultBlock(responseObject,nil);
+            NSLog(@"JSON: %@", responseObject);
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            NSLog(@"Error: %@", error);
+        }];
+        
+        
         
     }
     
