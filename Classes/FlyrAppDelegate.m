@@ -9,6 +9,7 @@
 #import "FlyrAppDelegate.h"
 #import "PaypalMobile.h"
 //#import <ParseFacebookUtils/PFFacebookUtils.h>
+#import "BuddySDK/Buddy.h"
 
 NSString *kCheckTokenStep1 = @"kCheckTokenStep";
 NSString *FlickrSharingSuccessNotification = @"FlickrSharingSuccessNotification";
@@ -219,11 +220,13 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     // Setup parse Offline ozair's account
     //[Parse setApplicationId:[flyerConfigurator parseOfflineAppId]
                  //clientKey:[flyerConfigurator parseOfflineClientKey]];
+    [Buddy init:@"YOUR_APP_ID" appKey:@"YOUR_APP_KEY"];
 #else
     
     // Setup parse Online
-    [Parse setApplicationId:[flyerConfigurator parseOnlineAppId]
-                  clientKey:[flyerConfigurator parseOnlineClientKey]];
+//    [Parse setApplicationId:[flyerConfigurator parseOnlineAppId]
+//                  clientKey:[flyerConfigurator parseOnlineClientKey]];
+    [Buddy init:@"YOUR_APP_ID" appKey:@"YOUR_APP_KEY"];
     
 #endif
   
