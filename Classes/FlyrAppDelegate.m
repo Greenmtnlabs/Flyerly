@@ -9,7 +9,9 @@
 #import "FlyrAppDelegate.h"
 #import "PaypalMobile.h"
 //#import <ParseFacebookUtils/PFFacebookUtils.h>
-#import "BuddySDK/Buddy.h"
+//#import "BuddySDK/Buddy.h"
+//#import "Parse.h"
+
 
 NSString *kCheckTokenStep1 = @"kCheckTokenStep";
 NSString *FlickrSharingSuccessNotification = @"FlickrSharingSuccessNotification";
@@ -160,13 +162,14 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 //                      sourceApplication:sourceApplication
 //                            withSession:[PFFacebookUtils session]] || [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
 //    }
+//    
+//    if([[url absoluteString] hasPrefix:kCallbackURLBaseStringPrefix]){
+//        return YES;
+//    } else {
+//  
+//        return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+//    }
     
-    if([[url absoluteString] hasPrefix:kCallbackURLBaseStringPrefix]){
-        return YES;
-    } else {
-  
-        return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
-    }
 }
 
 /**
@@ -218,15 +221,24 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 #ifdef DEBUG
     
     // Setup parse Offline ozair's account
-    //[Parse setApplicationId:[flyerConfigurator parseOfflineAppId]
-                 //clientKey:[flyerConfigurator parseOfflineClientKey]];
-    [Buddy init:@"YOUR_APP_ID" appKey:@"YOUR_APP_KEY"];
+//    [Parse setApplicationId:[flyerConfigurator parseOfflineAppId]
+//                 clientKey:[flyerConfigurator parseOfflineClientKey]];
+    //[Buddy init:@"20eaa2f1-f36d-4187-8613-82851a490f05" appKey:@"gThiRyKWsxaBiBfvmMUKu6GgjQKI5m2g"];
+    
+    [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+        configuration.applicationId = @"20eaa2f1-f36d-4187-8613-82851a490f05";
+        configuration.clientKey = @"gThiRyKWsxaBiBfvmMUKu6GgjQKI5m2g";
+        configuration.server = @"https://api.parse.buddy.com/parse/";
+    }]];
+    
+    
 #else
     
     // Setup parse Online
-//    [Parse setApplicationId:[flyerConfigurator parseOnlineAppId]
-//                  clientKey:[flyerConfigurator parseOnlineClientKey]];
-    [Buddy init:@"YOUR_APP_ID" appKey:@"YOUR_APP_KEY"];
+    [Parse setApplicationId:[flyerConfigurator parseOnlineAppId]
+                  clientKey:[flyerConfigurator parseOnlineClientKey]];
+    //[Buddy init:@"20eaa2f1-f36d-4187-8613-82851a490f05" appKey:@"gThiRyKWsxaBiBfvmMUKu6GgjQKI5m2g"];
+    
     
 #endif
   

@@ -22,7 +22,7 @@
 //#import "SHKInstagram.h"
 //#import "SHKFlickr.h"
 //#import "SHKTumblr.h"
-#import <FacebookSDK/FacebookSDK.h>
+//#import <FacebookSDK/FacebookSDK.h>
 #import <Twitter/Twitter.h>
 #import <MessageUI/MessageUI.h>
 #import <QuartzCore/QuartzCore.h>

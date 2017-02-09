@@ -118,7 +118,7 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
 
 
 -(void)onSignUp{
-    
+    [self signUp:YES username:username.text password:password.text];
     //Internet Connectivity Check
     if([FlyerlySingleton connected]){
         [self showLoader:YES];
@@ -166,6 +166,26 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
 //            
 //            [self createUser:userName password:pwd];
 //            
+//        }
+//    }];
+    
+    
+//    [Buddy createUser: @"arqam" //userName
+//             password: @"arqam" //pwd
+//            firstName: @"Arqam Owais" //self.username.text
+//             lastName: @""
+//                email: @"muhammad.arqam+1@riksof.com" //self.email.text
+//          dateOfBirth: nil
+//               gender: nil
+//                  tag: nil
+//             callback:^(id newBuddyObject, NSError *error)
+//    {
+//        if (!error)
+//        {
+//            NSLog(@"Greet the user");
+//            // Greet the user
+//        } else {
+//            NSLog(@"%@", error);
 //        }
 //    }];
     

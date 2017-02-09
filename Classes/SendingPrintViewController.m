@@ -11,7 +11,7 @@
 #import "Common.h"
 #import <QuartzCore/QuartzCore.h>
 #import "FlyrAppDelegate.h"
-#import <FacebookSDK/FacebookSDK.h>
+//#import <FacebookSDK/FacebookSDK.h>
 #import "CreateFlyerController.h"
 #import "HelpController.h"
 #import "Flurry.h"

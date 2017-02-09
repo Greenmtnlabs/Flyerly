@@ -25,6 +25,10 @@
 #import "RMStore.h"
 #import "UserPurchases.h"
 #import "RMStoreKeychainPersistence.h"
+#import <Parse/Parse.h>
+#import <Parse/ParseClientConfiguration.h>
+
+
 
 extern NSString *FacebookDidLoginNotification;
 

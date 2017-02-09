@@ -6,7 +6,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.3'
 
 #pod 'AFNetworking', '~> 2.5.4'
-    pod 'AFNetworking', '~> 3.1'
+    
     pod 'uservoice-iphone-sdk', '~> 3.2.3'
     pod 'PayPal-iOS-SDK', '~> 2.14.0'
 
@@ -14,7 +14,8 @@ platform :ios, '9.3'
 #pod 'ShareKit', :podspec => "Podspecs/ShareKit.podspec"
     pod 'GoogleAPIClient'
 
-    pod 'Facebook-iOS-SDK', '~> 3.23.2'
+#pod 'Facebook-iOS-SDK', '~> 3.23.2'
+    #pod 'Facebook-iOS-SDK', '~> 4.1'
 
     # Pre-release versions:
     # Recommended to keep GPUImage up-to-date
@@ -24,14 +25,20 @@ platform :ios, '9.3'
 
     #pod 'Parse', '~> 1.7.3'
     #pod 'ParseFacebookUtils', '~> 1.7.4'
-    pod 'BuddySDK'
+    #pod 'BuddySDK'
 
+    
     # Open SSL
     pod 'OpenSSL', '~> 1.0'
 
     pod 'FBSDKCoreKit', '~> 4.6'
     pod 'FBSDKShareKit', '~> 4.6'
     pod 'FBSDKMessengerShareKit', '~> 1.3.2'
+
+#pod 'Parse'
+
+    pod 'AFNetworking', '~> 3.1'
+
     pod 'CrittercismSDK'
 #pod 'GTMHTTPFetcher'
 #pod 'gtm-http-fetcher'

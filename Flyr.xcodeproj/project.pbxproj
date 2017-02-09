@@ -1746,6 +1746,10 @@
 		204635651895F90000A94C42 /* FlyerImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 204635641895F90000A94C42 /* FlyerImageView.m */; };
 		20473E181BD0D8F300433A7F /* settingsButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20473E161BD0D8F300433A7F /* settingsButton@2x.png */; };
 		20473E191BD0D8F300433A7F /* settingsButton@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20473E171BD0D8F300433A7F /* settingsButton@3x.png */; };
+		204B02AA1E4C986700C915AE /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 204B02A91E4C986700C915AE /* Parse.framework */; };
+		204B02AD1E4CA8E400C915AE /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 204B02AC1E4CA8E400C915AE /* Bolts.framework */; };
+		204B02AF1E4CA8FC00C915AE /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 204B02AC1E4CA8E400C915AE /* Bolts.framework */; };
+		204B02B01E4CA8FC00C915AE /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 204B02A91E4C986700C915AE /* Parse.framework */; };
 		204BC2DE1A10E67700FEB946 /* DrawingPatterns-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204BC2DD1A10E67700FEB946 /* DrawingPatterns-iPhone6-Plus.xib */; };
 		204BC2E01A10E87700FEB946 /* Fonts-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204BC2DF1A10E87700FEB946 /* Fonts-iPhone6-Plus.xib */; };
 		204BC2E21A10E99800FEB946 /* Sizes-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204BC2E11A10E99800FEB946 /* Sizes-iPhone6-Plus.xib */; };
@@ -3354,6 +3358,8 @@
 		204635641895F90000A94C42 /* FlyerImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyerImageView.m; sourceTree = "<group>"; };
 		20473E161BD0D8F300433A7F /* settingsButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settingsButton@2x.png"; sourceTree = "<group>"; };
 		20473E171BD0D8F300433A7F /* settingsButton@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settingsButton@3x.png"; sourceTree = "<group>"; };
+		204B02A91E4C986700C915AE /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ExternalFrameworks/Parse/Parse.framework; sourceTree = "<group>"; };
+		204B02AC1E4CA8E400C915AE /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ExternalFrameworks/Parse/Bolts.framework; sourceTree = "<group>"; };
 		204BC2DD1A10E67700FEB946 /* DrawingPatterns-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DrawingPatterns-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		204BC2DF1A10E87700FEB946 /* Fonts-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Fonts-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		204BC2E11A10E99800FEB946 /* Sizes-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Sizes-iPhone6-Plus.xib"; sourceTree = "<group>"; };
@@ -4759,6 +4765,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				204B02AF1E4CA8FC00C915AE /* Bolts.framework in Frameworks */,
+				204B02B01E4CA8FC00C915AE /* Parse.framework in Frameworks */,
 				10C526271CB7C07E00A5805C /* Photos.framework in Frameworks */,
 				10C526281CB7C07E00A5805C /* liblob-ios.a in Frameworks */,
 				10C526291CB7C07E00A5805C /* libGoogleAdMobAds.a in Frameworks */,
@@ -4801,6 +4809,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				204B02AD1E4CA8E400C915AE /* Bolts.framework in Frameworks */,
+				204B02AA1E4C986700C915AE /* Parse.framework in Frameworks */,
 				24A81AC81B32D92E00B6328D /* Photos.framework in Frameworks */,
 				C3A30DA61AB7F8BD00B0F1CF /* liblob-ios.a in Frameworks */,
 				245FED0519DE8966009140B4 /* libGoogleAdMobAds.a in Frameworks */,
@@ -6596,6 +6606,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				204B02AC1E4CA8E400C915AE /* Bolts.framework */,
+				204B02A91E4C986700C915AE /* Parse.framework */,
 				24A81AC71B32D92E00B6328D /* Photos.framework */,
 				243AA72519DE842F004A5613 /* EventKitUI.framework */,
 				243AA72319DE8428004A5613 /* EventKit.framework */,
@@ -10425,7 +10437,14 @@
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/ExternalFrameworks/Parse/**",
+					"$(PROJECT_DIR)/ExternalFrameworks/Parse",
+					"${PODS_ROOT}/Headers/Parse/**",
+					"${PODS_ROOT}/Headers/**",
+				);
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -10444,7 +10463,7 @@
 				PROVISIONING_PROFILE = "de33eb4a-a716-486a-a973-981b110c9201";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "de33eb4a-a716-486a-a973-981b110c9201";
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "armv7 armv7s arm64 x86_64";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = "Ad Hoc";
 		};
@@ -10463,10 +10482,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				COPY_PHASE_STRIP = YES;
 				DEVELOPMENT_TEAM = 4MGKP9P5WH;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/ExternalFrameworks/Parse/",
+					"$(SRCROOT)/ExternalFrameworks/Parse",
 					"$(PROJECT_DIR)/ExternalFrameworks/Parse",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -10721,10 +10740,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = 4MGKP9P5WH;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/ExternalFrameworks/Parse/",
+					"$(SRCROOT)/ExternalFrameworks/Parse",
 					"$(PROJECT_DIR)/ExternalFrameworks/Parse",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -10790,10 +10809,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				COPY_PHASE_STRIP = YES;
 				DEVELOPMENT_TEAM = 4MGKP9P5WH;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/ExternalFrameworks/Parse/",
+					"$(SRCROOT)/ExternalFrameworks/Parse",
 					"$(PROJECT_DIR)/ExternalFrameworks/Parse",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -10854,8 +10873,15 @@
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/ExternalFrameworks/Parse/**",
+					"$(PROJECT_DIR)/ExternalFrameworks/Parse",
+					"${PODS_ROOT}/Headers/Parse/**",
+					"${PODS_ROOT}/Headers/**",
+				);
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -10874,7 +10900,7 @@
 				PROVISIONING_PROFILE = "65a6eb30-5ef3-4c37-a6e8-2d6c37ccc5bc";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "65a6eb30-5ef3-4c37-a6e8-2d6c37ccc5bc";
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "armv7 armv7s arm64 x86_64";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
 		};
@@ -10890,7 +10916,14 @@
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/ExternalFrameworks/Parse/**",
+					"$(PROJECT_DIR)/ExternalFrameworks/Parse",
+					"${PODS_ROOT}/Headers/Parse/**",
+					"${PODS_ROOT}/Headers/**",
+				);
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -10909,7 +10942,7 @@
 				PROVISIONING_PROFILE = "97bf5434-078b-4eb6-b558-2cb64dd5662d";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "97bf5434-078b-4eb6-b558-2cb64dd5662d";
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "armv7 armv7s arm64 x86_64";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
 		};
