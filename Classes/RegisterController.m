@@ -139,35 +139,35 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
 
 -(void)signUp:(BOOL)validationDone username:(NSString *)userName password:(NSString *)pwd{
     
-//    // Check username already exists
-//    PFQuery *query = [PFUser query];
-//    [query whereKey:@"username" equalTo:userName];
-//    
-//    //query on parse
-//    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
-//        
-//        NSString *dbUsername = object[@"username"];
-//        
-//        if( dbUsername ){
-//            
-//            username.text = userName;
-//            password.text = pwd;
-//            
-//            //Saving User Info for again Login
-//            [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];
-//            [[NSUserDefaults standardUserDefaults]  setBool:YES forKey:@"FlyerlyUser"];
-//            
-//            warningAlert = [[UIAlertView  alloc]initWithTitle:@"Account already exists using this account." message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Sign In",nil];
-//            
-//            [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
-//            [self showLoader:NO];
-//
-//        } else {
-//            
-//            [self createUser:userName password:pwd];
-//            
-//        }
-//    }];
+    // Check username already exists
+    PFQuery *query = [PFUser query];
+    [query whereKey:@"username" equalTo:userName];
+    
+    //query on parse
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
+        
+        NSString *dbUsername = object[@"username"];
+        
+        if( dbUsername ){
+            
+            username.text = userName;
+            password.text = pwd;
+            
+            //Saving User Info for again Login
+            [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];
+            [[NSUserDefaults standardUserDefaults]  setBool:YES forKey:@"FlyerlyUser"];
+            
+            warningAlert = [[UIAlertView  alloc]initWithTitle:@"Account already exists using this account." message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Sign In",nil];
+            
+            [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
+            [self showLoader:NO];
+
+        } else {
+            
+            [self createUser:userName password:pwd];
+            
+        }
+    }];
     
     
 //    [Buddy createUser: @"arqam" //userName
@@ -426,39 +426,39 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
 
 -(void)createUser:(NSString *)userName password:(NSString *)pwd{
     
-//    // username and password
-//    PFUser *user = [PFUser user];
-//    user.username = [userName lowercaseString];
-//    user.password = pwd;
-//    user.email = email.text;
-//    if (name.text != nil)
-//        user[@"name"] = name.text;
-//    if (phno.text != nil)
-//        user[@"contact"] = phno.text;
-//
-//    // When new user signup using username & password
-//    user[@"appName"] = APP_NAME;
-//    
-//    //Saving User Info for again login
-//    [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];
-//    [[NSUserDefaults standardUserDefaults]  setBool:YES forKey:@"FlyerlyUser"];
-//
-//    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            if (error) {
-//                NSString *errorValue = (error.userInfo)[@"error"];
-//                [self showAlert:@"Warning!" message:errorValue];
-//                [self showLoader:NO];
-//
-//            } else {
-//
-//                [PFUser logInWithUsername:userName password:pwd];
-//                [self onRegistrationSuccess];
-//            }
-//        });
-//        
-//        
-//    }];
+    // username and password
+    PFUser *user = [PFUser user];
+    user.username = [userName lowercaseString];
+    user.password = pwd;
+    user.email = email.text;
+    if (name.text != nil)
+        user[@"name"] = name.text;
+    if (phno.text != nil)
+        user[@"contact"] = phno.text;
+
+    // When new user signup using username & password
+    user[@"appName"] = APP_NAME;
+    
+    //Saving User Info for again login
+    [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];
+    [[NSUserDefaults standardUserDefaults]  setBool:YES forKey:@"FlyerlyUser"];
+
+    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (error) {
+                NSString *errorValue = (error.userInfo)[@"error"];
+                [self showAlert:@"Warning!" message:errorValue];
+                [self showLoader:NO];
+
+            } else {
+
+                [PFUser logInWithUsername:userName password:pwd];
+                [self onRegistrationSuccess];
+            }
+        });
+        
+        
+    }];
 }
 
 -(void)onRegistrationSuccess {

@@ -12,7 +12,7 @@
 #import "FlyerlySingleton.h"
 #import "ParentViewController.h"
 #import "FlyerUser.h"
-//#import <Parse/Parse.h>
+#import <Parse/Parse.h>
 #import "SigninController.h"
 #import "Common.h"
 #import "FlyrAppDelegate.h"

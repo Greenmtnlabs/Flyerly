@@ -9,8 +9,7 @@
 #import "FlyrAppDelegate.h"
 #import "PaypalMobile.h"
 //#import <ParseFacebookUtils/PFFacebookUtils.h>
-//#import "BuddySDK/Buddy.h"
-//#import "Parse.h"
+#import <Parse/Parse.h>
 
 
 NSString *kCheckTokenStep1 = @"kCheckTokenStep";
@@ -232,12 +231,21 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     }]];
     
     
+    
+    
+    
 #else
     
     // Setup parse Online
-    [Parse setApplicationId:[flyerConfigurator parseOnlineAppId]
-                  clientKey:[flyerConfigurator parseOnlineClientKey]];
+//    [Parse setApplicationId:[flyerConfigurator parseOnlineAppId]
+//                  clientKey:[flyerConfigurator parseOnlineClientKey]];
     //[Buddy init:@"20eaa2f1-f36d-4187-8613-82851a490f05" appKey:@"gThiRyKWsxaBiBfvmMUKu6GgjQKI5m2g"];
+    
+    [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+        configuration.applicationId = @"20eaa2f1-f36d-4187-8613-82851a490f05";
+        configuration.clientKey = @"gThiRyKWsxaBiBfvmMUKu6GgjQKI5m2g";
+        configuration.server = @"https://api.parse.buddy.com/parse/";
+    }]];
     
     
 #endif

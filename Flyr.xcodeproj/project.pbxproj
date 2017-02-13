@@ -1609,6 +1609,9 @@
 		2025FAB51860742700CC9188 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2025FAB41860742700CC9188 /* CoreMedia.framework */; };
 		2025FAB7186074D100CC9188 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2025FAB6186074D100CC9188 /* CoreText.framework */; };
 		2025FAB9186074F300CC9188 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2025FAB8186074F300CC9188 /* CoreMotion.framework */; };
+		20262CCC1E518E9600C3D8AF /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20262CC91E518E9600C3D8AF /* FBSDKCoreKit.framework */; };
+		20262CCD1E518E9600C3D8AF /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20262CCA1E518E9600C3D8AF /* FBSDKMessengerShareKit.framework */; };
+		20262CCE1E518E9600C3D8AF /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20262CCB1E518E9600C3D8AF /* FBSDKShareKit.framework */; };
 		2026992B18CED6B000945218 /* RMStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2026992A18CED6B000945218 /* RMStore.m */; };
 		2026992E18CF200F00945218 /* blue_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2026992C18CF200F00945218 /* blue_arrow.png */; };
 		2029786B1B4CFBE700F35E40 /* emoticon184-adore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202978261B4CFBE500F35E40 /* emoticon184-adore@2x.png */; };
@@ -1746,10 +1749,6 @@
 		204635651895F90000A94C42 /* FlyerImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 204635641895F90000A94C42 /* FlyerImageView.m */; };
 		20473E181BD0D8F300433A7F /* settingsButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20473E161BD0D8F300433A7F /* settingsButton@2x.png */; };
 		20473E191BD0D8F300433A7F /* settingsButton@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20473E171BD0D8F300433A7F /* settingsButton@3x.png */; };
-		204B02AA1E4C986700C915AE /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 204B02A91E4C986700C915AE /* Parse.framework */; };
-		204B02AD1E4CA8E400C915AE /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 204B02AC1E4CA8E400C915AE /* Bolts.framework */; };
-		204B02AF1E4CA8FC00C915AE /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 204B02AC1E4CA8E400C915AE /* Bolts.framework */; };
-		204B02B01E4CA8FC00C915AE /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 204B02A91E4C986700C915AE /* Parse.framework */; };
 		204BC2DE1A10E67700FEB946 /* DrawingPatterns-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204BC2DD1A10E67700FEB946 /* DrawingPatterns-iPhone6-Plus.xib */; };
 		204BC2E01A10E87700FEB946 /* Fonts-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204BC2DF1A10E87700FEB946 /* Fonts-iPhone6-Plus.xib */; };
 		204BC2E21A10E99800FEB946 /* Sizes-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204BC2E11A10E99800FEB946 /* Sizes-iPhone6-Plus.xib */; };
@@ -3195,6 +3194,9 @@
 		2025FAB41860742700CC9188 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		2025FAB6186074D100CC9188 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		2025FAB8186074F300CC9188 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		20262CC91E518E9600C3D8AF /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ExternalFrameworks/FacebookSDKs/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		20262CCA1E518E9600C3D8AF /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKMessengerShareKit.framework; path = ExternalFrameworks/FacebookSDKs/FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
+		20262CCB1E518E9600C3D8AF /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ExternalFrameworks/FacebookSDKs/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		2026992918CED6B000945218 /* RMStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStore.h; sourceTree = "<group>"; };
 		2026992A18CED6B000945218 /* RMStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStore.m; sourceTree = "<group>"; };
 		2026992C18CF200F00945218 /* blue_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blue_arrow.png; path = ../Classes/blue_arrow.png; sourceTree = "<group>"; };
@@ -3390,6 +3392,8 @@
 		20714DF5187F2105000D6838 /* cancelcamera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cancelcamera.png; path = ../Classes/cancelcamera.png; sourceTree = "<group>"; };
 		20714DF8187F25E1000D6838 /* settingsrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settingsrow.png; path = ../Classes/settingsrow.png; sourceTree = "<group>"; };
 		207AB32A18ED473400945924 /* ShareKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ShareKit.podspec; sourceTree = "<group>"; };
+		207BC40D1E4DE89600C639A6 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = ExternalFrameworks/Parse/ParseFacebookUtils.framework; sourceTree = "<group>"; };
+		207BC40E1E4DE89600C639A6 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = ExternalFrameworks/Parse/ParseUI.framework; sourceTree = "<group>"; };
 		20824B361908DFDA00AC0CB5 /* signin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signin@2x.png"; sourceTree = "<group>"; };
 		2087B6BD17C73B40007A6A90 /* ResetPWViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPWViewController.h; sourceTree = "<group>"; };
 		2087B6BE17C73B40007A6A90 /* ResetPWViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPWViewController.m; sourceTree = "<group>"; };
@@ -4765,8 +4769,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				204B02AF1E4CA8FC00C915AE /* Bolts.framework in Frameworks */,
-				204B02B01E4CA8FC00C915AE /* Parse.framework in Frameworks */,
 				10C526271CB7C07E00A5805C /* Photos.framework in Frameworks */,
 				10C526281CB7C07E00A5805C /* liblob-ios.a in Frameworks */,
 				10C526291CB7C07E00A5805C /* libGoogleAdMobAds.a in Frameworks */,
@@ -4809,8 +4811,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				204B02AD1E4CA8E400C915AE /* Bolts.framework in Frameworks */,
-				204B02AA1E4C986700C915AE /* Parse.framework in Frameworks */,
+				20262CCC1E518E9600C3D8AF /* FBSDKCoreKit.framework in Frameworks */,
+				20262CCD1E518E9600C3D8AF /* FBSDKMessengerShareKit.framework in Frameworks */,
+				20262CCE1E518E9600C3D8AF /* FBSDKShareKit.framework in Frameworks */,
 				24A81AC81B32D92E00B6328D /* Photos.framework in Frameworks */,
 				C3A30DA61AB7F8BD00B0F1CF /* liblob-ios.a in Frameworks */,
 				245FED0519DE8966009140B4 /* libGoogleAdMobAds.a in Frameworks */,
@@ -6606,6 +6609,11 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				20262CC91E518E9600C3D8AF /* FBSDKCoreKit.framework */,
+				20262CCA1E518E9600C3D8AF /* FBSDKMessengerShareKit.framework */,
+				20262CCB1E518E9600C3D8AF /* FBSDKShareKit.framework */,
+				207BC40D1E4DE89600C639A6 /* ParseFacebookUtils.framework */,
+				207BC40E1E4DE89600C639A6 /* ParseUI.framework */,
 				204B02AC1E4CA8E400C915AE /* Bolts.framework */,
 				204B02A91E4C986700C915AE /* Parse.framework */,
 				24A81AC71B32D92E00B6328D /* Photos.framework */,
@@ -10437,7 +10445,7 @@
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/ExternalFrameworks/Parse/**",
@@ -10452,6 +10460,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -10482,11 +10491,12 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				COPY_PHASE_STRIP = YES;
 				DEVELOPMENT_TEAM = 4MGKP9P5WH;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/ExternalFrameworks/Parse",
 					"$(PROJECT_DIR)/ExternalFrameworks/Parse",
+					"$(PROJECT_DIR)/ExternalFrameworks/FacebookSDKs",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Flyr_Prefix.pch;
@@ -10740,11 +10750,12 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = 4MGKP9P5WH;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/ExternalFrameworks/Parse",
 					"$(PROJECT_DIR)/ExternalFrameworks/Parse",
+					"$(PROJECT_DIR)/ExternalFrameworks/FacebookSDKs",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -10809,11 +10820,12 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				COPY_PHASE_STRIP = YES;
 				DEVELOPMENT_TEAM = 4MGKP9P5WH;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/ExternalFrameworks/Parse",
 					"$(PROJECT_DIR)/ExternalFrameworks/Parse",
+					"$(PROJECT_DIR)/ExternalFrameworks/FacebookSDKs",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Flyr_Prefix.pch;
@@ -10873,7 +10885,7 @@
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -10889,6 +10901,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -10916,7 +10929,7 @@
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/ExternalFrameworks/Parse/**",
@@ -10931,6 +10944,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
