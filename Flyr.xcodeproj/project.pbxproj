@@ -1612,6 +1612,9 @@
 		20262CCC1E518E9600C3D8AF /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20262CC91E518E9600C3D8AF /* FBSDKCoreKit.framework */; };
 		20262CCD1E518E9600C3D8AF /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20262CCA1E518E9600C3D8AF /* FBSDKMessengerShareKit.framework */; };
 		20262CCE1E518E9600C3D8AF /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20262CCB1E518E9600C3D8AF /* FBSDKShareKit.framework */; };
+		20262CD21E519D4900C3D8AF /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20262CC91E518E9600C3D8AF /* FBSDKCoreKit.framework */; };
+		20262CD31E519D4900C3D8AF /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20262CCA1E518E9600C3D8AF /* FBSDKMessengerShareKit.framework */; };
+		20262CD41E519D4900C3D8AF /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20262CCB1E518E9600C3D8AF /* FBSDKShareKit.framework */; };
 		2026992B18CED6B000945218 /* RMStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2026992A18CED6B000945218 /* RMStore.m */; };
 		2026992E18CF200F00945218 /* blue_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2026992C18CF200F00945218 /* blue_arrow.png */; };
 		2029786B1B4CFBE700F35E40 /* emoticon184-adore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202978261B4CFBE500F35E40 /* emoticon184-adore@2x.png */; };
@@ -4769,6 +4772,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20262CD21E519D4900C3D8AF /* FBSDKCoreKit.framework in Frameworks */,
+				20262CD31E519D4900C3D8AF /* FBSDKMessengerShareKit.framework in Frameworks */,
+				20262CD41E519D4900C3D8AF /* FBSDKShareKit.framework in Frameworks */,
 				10C526271CB7C07E00A5805C /* Photos.framework in Frameworks */,
 				10C526281CB7C07E00A5805C /* liblob-ios.a in Frameworks */,
 				10C526291CB7C07E00A5805C /* libGoogleAdMobAds.a in Frameworks */,
@@ -10561,6 +10567,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/ExternalFrameworks/Parse/",
 					"$(PROJECT_DIR)/ExternalFrameworks/Parse",
+					"$(PROJECT_DIR)/ExternalFrameworks/FacebookSDKs",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -10626,6 +10633,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/ExternalFrameworks/Parse/",
 					"$(PROJECT_DIR)/ExternalFrameworks/Parse",
+					"$(PROJECT_DIR)/ExternalFrameworks/FacebookSDKs",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Flyr_Prefix.pch;
@@ -10689,6 +10697,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/ExternalFrameworks/Parse/",
 					"$(PROJECT_DIR)/ExternalFrameworks/Parse",
+					"$(PROJECT_DIR)/ExternalFrameworks/FacebookSDKs",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Flyr_Prefix.pch;
