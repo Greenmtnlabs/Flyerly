@@ -1582,7 +1582,6 @@
 		20014AD71E52E45200724F62 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20014AD31E52E45200724F62 /* FBSDKShareKit.framework */; };
 		20014AD81E52E47A00724F62 /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20014AD21E52E45200724F62 /* FBSDKMessengerShareKit.framework */; };
 		20014AD91E52E47A00724F62 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20014AD31E52E45200724F62 /* FBSDKShareKit.framework */; };
-		20014ADF1E52EC0600724F62 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20014ADB1E52EBAB00724F62 /* FBSDKCoreKit.framework */; };
 		2002C89618888CD4005B18C9 /* SaveFlyerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2002C89418888CD4005B18C9 /* SaveFlyerCell.m */; };
 		2002C89718888CD4005B18C9 /* SaveFlyerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2002C89518888CD4005B18C9 /* SaveFlyerCell.xib */; };
 		2004C83F1913AA5F00E4BBFB /* InAppPurchaseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2004C83E1913AA5F00E4BBFB /* InAppPurchaseCell.xib */; };
@@ -4771,7 +4770,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20014ADF1E52EC0600724F62 /* FBSDKCoreKit.framework in Frameworks */,
 				10C526271CB7C07E00A5805C /* Photos.framework in Frameworks */,
 				20014AD71E52E45200724F62 /* FBSDKShareKit.framework in Frameworks */,
 				10C526281CB7C07E00A5805C /* liblob-ios.a in Frameworks */,

@@ -168,34 +168,13 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
             
         }
     }];
-    
-    
-//    [Buddy createUser: @"arqam" //userName
-//             password: @"arqam" //pwd
-//            firstName: @"Arqam Owais" //self.username.text
-//             lastName: @""
-//                email: @"muhammad.arqam+1@riksof.com" //self.email.text
-//          dateOfBirth: nil
-//               gender: nil
-//                  tag: nil
-//             callback:^(id newBuddyObject, NSError *error)
-//    {
-//        if (!error)
-//        {
-//            NSLog(@"Greet the user");
-//            // Greet the user
-//        } else {
-//            NSLog(@"%@", error);
-//        }
-//    }];
-    
 }
 
 /*
  * Here we Using Parse Utility for Loign by Facebook
  */
 -(IBAction)onSignUpFacebook{
-    
+    NSLog(@"Testing.");
     //Internet Connectivity Check
     if([FlyerlySingleton connected]){
         
@@ -307,69 +286,69 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
         
         [self showLoader:YES];
 
-//        [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
-//            
-//            [self showLoader:NO];
-//            BOOL canSave = NO;
-//            
-//            if ( !user ) {
-//                NSLog(@"Uh oh. The user cancelled the Twitter login.");
-//                return;
-//
-//            } else {
-//
-//                NSString *twitterUsername = [PFTwitterUtils twitter].screenName;
-//                
-//                if(![twitterUsername isEqualToString:@""]) {
-//                    if(user.isNew || (user.username == nil || [user.username isEqualToString:@""]) ){
-//                        canSave = YES;
-//                        user.username = twitterUsername;
-//                        [[PFUser currentUser] setObject:twitterUsername forKey:@"username"];
-//                    }
-//                    
-//                    if(user.isNew || (user[@"name"] == nil || [user[@"name"] isEqualToString:@""]) ){
-//                        canSave = YES;
-//                        user[@"name"] = twitterUsername;
-//                        [[PFUser currentUser] setObject:twitterUsername forKey:@"name"];
-//                    }
-//                }
-//                
-//                if (user.isNew) {
-//                    
-//                    canSave = YES;
-//                    [[PFUser currentUser] setObject:APP_NAME forKey:@"appName"];
-//                    [[PFUser currentUser] saveInBackground];
-//                    
-//                    // We keep an instance of navigation contrller since the completion block might pop us out of the navigation controller
-//                    UINavigationController* navigationController = self.navigationController;
-//                    
-//                    [navigationController popViewControllerAnimated:NO];
-//                    
-//                    [self onRegistrationSuccess];
-//                    
-//                    
-//                    //Saving User Info for again login
-//                    [[NSUserDefaults standardUserDefaults]  setObject:[twitterUsername lowercaseString] forKey:@"User"];
-//                    
-//                    // For Parse New User Merge to old Twitter User
-//                    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-//                    [appDelegate twitterChangeforNewVersion:twitterUsername];
-//                    
-//                } else {
-//                    
-//                    NSLog(@"User logged in with Twitter!");
-//                    
-//                    //Saving User Info for again login
-//                    [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
-//                    
-//                    [self onRegistrationSuccess];
-//                }
-//                
-//                if(canSave) {
-//                    [[PFUser currentUser] saveInBackground];
-//                }
-//            }
-//        }];
+        [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
+            
+            [self showLoader:NO];
+            BOOL canSave = NO;
+            
+            if ( !user ) {
+                NSLog(@"Uh oh. The user cancelled the Twitter login.");
+                return;
+
+            } else {
+
+                NSString *twitterUsername = @"marqamowais"; //[PFTwitterUtils twitter].screenName;
+                
+                if(![twitterUsername isEqualToString:@""]) {
+                    if(user.isNew || (user.username == nil || [user.username isEqualToString:@""]) ){
+                        canSave = YES;
+                        user.username = twitterUsername;
+                        [[PFUser currentUser] setObject:twitterUsername forKey:@"username"];
+                    }
+                    
+                    if(user.isNew || (user[@"name"] == nil || [user[@"name"] isEqualToString:@""]) ){
+                        canSave = YES;
+                        user[@"name"] = twitterUsername;
+                        [[PFUser currentUser] setObject:twitterUsername forKey:@"name"];
+                    }
+                }
+                
+                if (user.isNew) {
+                    
+                    canSave = YES;
+                    [[PFUser currentUser] setObject:APP_NAME forKey:@"appName"];
+                    [[PFUser currentUser] saveInBackground];
+                    
+                    // We keep an instance of navigation contrller since the completion block might pop us out of the navigation controller
+                    UINavigationController* navigationController = self.navigationController;
+                    
+                    [navigationController popViewControllerAnimated:NO];
+                    
+                    [self onRegistrationSuccess];
+                    
+                    
+                    //Saving User Info for again login
+                    [[NSUserDefaults standardUserDefaults]  setObject:[twitterUsername lowercaseString] forKey:@"User"];
+                    
+                    // For Parse New User Merge to old Twitter User
+                    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+                    [appDelegate twitterChangeforNewVersion:twitterUsername];
+                    
+                } else {
+                    
+                    NSLog(@"User logged in with Twitter!");
+                    
+                    //Saving User Info for again login
+                    [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
+                    
+                    [self onRegistrationSuccess];
+                }
+                
+                if(canSave) {
+                    [[PFUser currentUser] saveInBackground];
+                }
+            }
+        }];
         
         
     } else {
