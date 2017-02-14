@@ -126,10 +126,10 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-//    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-//    [currentInstallation setDeviceTokenFromData:deviceToken];
-//    currentInstallation.channels = @[@"global"];
-//    [currentInstallation saveInBackground];
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    currentInstallation.channels = @[@"global"];
+    [currentInstallation saveInBackground];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
@@ -218,34 +218,19 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     
 #ifdef DEBUG
     
-    // Setup parse Offline ozair's account
-//    [Parse setApplicationId:[flyerConfigurator parseOfflineAppId]
-//                 clientKey:[flyerConfigurator parseOfflineClientKey]];
-    //[Buddy init:@"20eaa2f1-f36d-4187-8613-82851a490f05" appKey:@"gThiRyKWsxaBiBfvmMUKu6GgjQKI5m2g"];
-    
     [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
         configuration.applicationId = @"20eaa2f1-f36d-4187-8613-82851a490f05";
         configuration.clientKey = @"gThiRyKWsxaBiBfvmMUKu6GgjQKI5m2g";
         configuration.server = @"https://api.parse.buddy.com/parse/";
     }]];
-    
-    
-    
-    
     
 #else
-    
-    // Setup parse Online
-//    [Parse setApplicationId:[flyerConfigurator parseOnlineAppId]
-//                  clientKey:[flyerConfigurator parseOnlineClientKey]];
-    //[Buddy init:@"20eaa2f1-f36d-4187-8613-82851a490f05" appKey:@"gThiRyKWsxaBiBfvmMUKu6GgjQKI5m2g"];
-    
+
     [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
         configuration.applicationId = @"20eaa2f1-f36d-4187-8613-82851a490f05";
         configuration.clientKey = @"gThiRyKWsxaBiBfvmMUKu6GgjQKI5m2g";
         configuration.server = @"https://api.parse.buddy.com/parse/";
     }]];
-    
     
 #endif
   
@@ -256,7 +241,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     //[PFFacebookUtils initializeFacebook];
     
     // Twitter Initialization
-    //[PFTwitterUtils initializeWithConsumerKey:[flyerConfigurator twitterConsumerKey] consumerSecret:[flyerConfigurator twitterSecret]];
+    [PFTwitterUtils initializeWithConsumerKey:[flyerConfigurator twitterConsumerKey] consumerSecret:[flyerConfigurator twitterSecret]];
     
     // Bitly configuration
     [[BitlyConfig sharedBitlyConfig] setBitlyLogin:[flyerConfigurator bitLyLogin] bitlyAPIKey:[flyerConfigurator bitLyKey]];
@@ -401,29 +386,27 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 */
 -(void)twitterChangeforNewVersion:(NSString *)olduser{
 
-//    [lauchController showLoadingIndicator];
+    [lauchController showLoadingIndicator];
 
-//    if ([PFUser currentUser] != nil) {
-//    //Checking user Exist in Parse
-//    PFQuery *query = [PFUser  query];
-//    [query whereKey:@"username" equalTo:[olduser lowercaseString]];
-//    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
-//        
-//        if (error) {
-//            [lauchController hideLoadingIndicator];
-//            
-//        }else{
-//            
-//            // Migrate Account For 3.0 Version
-//            //[FlyerUser migrateUserto3dot0:object];
-//            
-//            [lauchController hideLoadingIndicator];
-//            
-//        }
-//    }];
-//    }
-
-
+    if ([PFUser currentUser] != nil) {
+    //Checking user Exist in Parse
+    PFQuery *query = [PFUser  query];
+    [query whereKey:@"username" equalTo:[olduser lowercaseString]];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
+        
+        if (error) {
+            [lauchController hideLoadingIndicator];
+            
+        }else{
+            
+            // Migrate Account For 3.0 Version
+            //[FlyerUser migrateUserto3dot0:object];
+            
+            [lauchController hideLoadingIndicator];
+            
+        }
+    }];
+    }
 }
 
 

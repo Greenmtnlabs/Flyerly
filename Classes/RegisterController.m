@@ -291,6 +291,8 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
             [self showLoader:NO];
             BOOL canSave = NO;
             
+            NSLog(@"%@", error);
+            
             if ( !user ) {
                 NSLog(@"Uh oh. The user cancelled the Twitter login.");
                 return;
