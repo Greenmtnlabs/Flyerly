@@ -32,6 +32,7 @@
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
+#import <FBSDKShareKit/FBSDKAppInviteDialog.h>
 
 #import "GADInterstitialDelegate.h"
 #import "GADBannerView.h"

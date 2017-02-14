@@ -13,6 +13,7 @@
 #import "ParentViewController.h"
 #import "FlyerUser.h"
 #import <Parse/Parse.h>
+#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 #import "SigninController.h"
 #import "Common.h"
 #import "FlyrAppDelegate.h"

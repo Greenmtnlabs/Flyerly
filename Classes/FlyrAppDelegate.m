@@ -8,7 +8,7 @@
 
 #import "FlyrAppDelegate.h"
 #import "PaypalMobile.h"
-//#import <ParseFacebookUtils/PFFacebookUtils.h>
+#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 #import <Parse/Parse.h>
 
 
@@ -18,7 +18,6 @@ NSString *FlickrSharingFailureNotification = @"FlickrSharingFailureNotification"
 NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 #define TIME 10
-
 @implementation FlyrAppDelegate {
     UIApplication *app;
     UIBackgroundTaskIdentifier bgTask;

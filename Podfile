@@ -1,20 +1,14 @@
 #source 'https://github.com/google/gtm-http-fetcher.git'
 source 'https://github.com/google/gtm-session-fetcher.git'
-#source 'https://github.com/google/gtm-http-fetcher.git'
 source 'https://github.com/CocoaPods/Specs.git'
 
 platform :ios, '9.3'
 
-#pod 'AFNetworking', '~> 2.5.4'
-    
     pod 'uservoice-iphone-sdk', '~> 3.2.3'
     pod 'PayPal-iOS-SDK', '~> 2.14.0'
 
     #pod 'ShareKit', :podspec => "Podspecs/ShareKit.podspec"
     pod 'GoogleAPIClient'
-
-    #pod 'Facebook-iOS-SDK', '~> 3.23.2'
-    #pod 'Facebook-iOS-SDK', '~> 4.1'
 
     # Pre-release versions:
     # Recommended to keep GPUImage up-to-date
@@ -27,9 +21,10 @@ platform :ios, '9.3'
     # Open SSL
     pod 'OpenSSL', '~> 1.0'
 
-#pod 'FBSDKCoreKit', '~> 4.6'
-#pod 'FBSDKShareKit', '~> 4.6'
-#pod 'FBSDKMessengerShareKit', '~> 1.3.2'
+
+    pod 'ParseFacebookUtilsV4'
+    pod 'ParseTwitterUtils'
+    pod 'ParseUI'
     pod 'Parse'
 
     pod 'AFNetworking', '~> 3.1'
@@ -55,4 +50,4 @@ platform :ios, '9.3'
     end
 
     target 'FlyerlyBiz' do
-    end
+    end

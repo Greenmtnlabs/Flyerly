@@ -1578,6 +1578,11 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		20014AD51E52E45200724F62 /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20014AD21E52E45200724F62 /* FBSDKMessengerShareKit.framework */; };
+		20014AD71E52E45200724F62 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20014AD31E52E45200724F62 /* FBSDKShareKit.framework */; };
+		20014AD81E52E47A00724F62 /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20014AD21E52E45200724F62 /* FBSDKMessengerShareKit.framework */; };
+		20014AD91E52E47A00724F62 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20014AD31E52E45200724F62 /* FBSDKShareKit.framework */; };
+		20014ADF1E52EC0600724F62 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20014ADB1E52EBAB00724F62 /* FBSDKCoreKit.framework */; };
 		2002C89618888CD4005B18C9 /* SaveFlyerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2002C89418888CD4005B18C9 /* SaveFlyerCell.m */; };
 		2002C89718888CD4005B18C9 /* SaveFlyerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2002C89518888CD4005B18C9 /* SaveFlyerCell.xib */; };
 		2004C83F1913AA5F00E4BBFB /* InAppPurchaseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2004C83E1913AA5F00E4BBFB /* InAppPurchaseCell.xib */; };
@@ -1609,12 +1614,6 @@
 		2025FAB51860742700CC9188 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2025FAB41860742700CC9188 /* CoreMedia.framework */; };
 		2025FAB7186074D100CC9188 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2025FAB6186074D100CC9188 /* CoreText.framework */; };
 		2025FAB9186074F300CC9188 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2025FAB8186074F300CC9188 /* CoreMotion.framework */; };
-		20262CCC1E518E9600C3D8AF /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20262CC91E518E9600C3D8AF /* FBSDKCoreKit.framework */; };
-		20262CCD1E518E9600C3D8AF /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20262CCA1E518E9600C3D8AF /* FBSDKMessengerShareKit.framework */; };
-		20262CCE1E518E9600C3D8AF /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20262CCB1E518E9600C3D8AF /* FBSDKShareKit.framework */; };
-		20262CD21E519D4900C3D8AF /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20262CC91E518E9600C3D8AF /* FBSDKCoreKit.framework */; };
-		20262CD31E519D4900C3D8AF /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20262CCA1E518E9600C3D8AF /* FBSDKMessengerShareKit.framework */; };
-		20262CD41E519D4900C3D8AF /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20262CCB1E518E9600C3D8AF /* FBSDKShareKit.framework */; };
 		2026992B18CED6B000945218 /* RMStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2026992A18CED6B000945218 /* RMStore.m */; };
 		2026992E18CF200F00945218 /* blue_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2026992C18CF200F00945218 /* blue_arrow.png */; };
 		2029786B1B4CFBE700F35E40 /* emoticon184-adore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202978261B4CFBE500F35E40 /* emoticon184-adore@2x.png */; };
@@ -3159,6 +3158,13 @@
 		1D3623250D0F684500981E51 /* FlyrAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FlyrAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		1D6058910D05DD3D006BFB54 /* Flyr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flyr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		20014AB01E52DEEF00724F62 /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKMessengerShareKit.framework; path = ExternalFrameworks/FacebookSDKs/FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
+		20014AB11E52DEEF00724F62 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ExternalFrameworks/FacebookSDKs/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		20014ABC1E52E00F00724F62 /* libParseFacebookUtilsV4.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libParseFacebookUtilsV4.a; path = "../../Library/Developer/Xcode/DerivedData/Flyr-eewqndxlcbuoljaeofoaqxkowqhy/Build/Products/Debug-iphonesimulator/ParseFacebookUtilsV4/libParseFacebookUtilsV4.a"; sourceTree = "<group>"; };
+		20014AD21E52E45200724F62 /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKMessengerShareKit.framework; path = FacebookSDKs/FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
+		20014AD31E52E45200724F62 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = FacebookSDKs/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		20014ADB1E52EBAB00724F62 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = FacebookSDKs/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		20014AE01E52ED7300724F62 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ExternalFrameworks/FacebookSDKs/Bolts.framework; sourceTree = "<group>"; };
 		2002C89318888CD4005B18C9 /* SaveFlyerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveFlyerCell.h; sourceTree = "<group>"; };
 		2002C89418888CD4005B18C9 /* SaveFlyerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveFlyerCell.m; sourceTree = "<group>"; };
 		2002C89518888CD4005B18C9 /* SaveFlyerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SaveFlyerCell.xib; sourceTree = "<group>"; };
@@ -3197,9 +3203,6 @@
 		2025FAB41860742700CC9188 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		2025FAB6186074D100CC9188 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		2025FAB8186074F300CC9188 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		20262CC91E518E9600C3D8AF /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ExternalFrameworks/FacebookSDKs/FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		20262CCA1E518E9600C3D8AF /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKMessengerShareKit.framework; path = ExternalFrameworks/FacebookSDKs/FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
-		20262CCB1E518E9600C3D8AF /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ExternalFrameworks/FacebookSDKs/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		2026992918CED6B000945218 /* RMStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStore.h; sourceTree = "<group>"; };
 		2026992A18CED6B000945218 /* RMStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStore.m; sourceTree = "<group>"; };
 		2026992C18CF200F00945218 /* blue_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blue_arrow.png; path = ../Classes/blue_arrow.png; sourceTree = "<group>"; };
@@ -3363,8 +3366,6 @@
 		204635641895F90000A94C42 /* FlyerImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyerImageView.m; sourceTree = "<group>"; };
 		20473E161BD0D8F300433A7F /* settingsButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settingsButton@2x.png"; sourceTree = "<group>"; };
 		20473E171BD0D8F300433A7F /* settingsButton@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settingsButton@3x.png"; sourceTree = "<group>"; };
-		204B02A91E4C986700C915AE /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ExternalFrameworks/Parse/Parse.framework; sourceTree = "<group>"; };
-		204B02AC1E4CA8E400C915AE /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ExternalFrameworks/Parse/Bolts.framework; sourceTree = "<group>"; };
 		204BC2DD1A10E67700FEB946 /* DrawingPatterns-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DrawingPatterns-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		204BC2DF1A10E87700FEB946 /* Fonts-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Fonts-iPhone6-Plus.xib"; sourceTree = "<group>"; };
 		204BC2E11A10E99800FEB946 /* Sizes-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Sizes-iPhone6-Plus.xib"; sourceTree = "<group>"; };
@@ -3395,8 +3396,6 @@
 		20714DF5187F2105000D6838 /* cancelcamera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cancelcamera.png; path = ../Classes/cancelcamera.png; sourceTree = "<group>"; };
 		20714DF8187F25E1000D6838 /* settingsrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settingsrow.png; path = ../Classes/settingsrow.png; sourceTree = "<group>"; };
 		207AB32A18ED473400945924 /* ShareKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ShareKit.podspec; sourceTree = "<group>"; };
-		207BC40D1E4DE89600C639A6 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = ExternalFrameworks/Parse/ParseFacebookUtils.framework; sourceTree = "<group>"; };
-		207BC40E1E4DE89600C639A6 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = ExternalFrameworks/Parse/ParseUI.framework; sourceTree = "<group>"; };
 		20824B361908DFDA00AC0CB5 /* signin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signin@2x.png"; sourceTree = "<group>"; };
 		2087B6BD17C73B40007A6A90 /* ResetPWViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPWViewController.h; sourceTree = "<group>"; };
 		2087B6BE17C73B40007A6A90 /* ResetPWViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPWViewController.m; sourceTree = "<group>"; };
@@ -4772,13 +4771,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20262CD21E519D4900C3D8AF /* FBSDKCoreKit.framework in Frameworks */,
-				20262CD31E519D4900C3D8AF /* FBSDKMessengerShareKit.framework in Frameworks */,
-				20262CD41E519D4900C3D8AF /* FBSDKShareKit.framework in Frameworks */,
+				20014ADF1E52EC0600724F62 /* FBSDKCoreKit.framework in Frameworks */,
 				10C526271CB7C07E00A5805C /* Photos.framework in Frameworks */,
+				20014AD71E52E45200724F62 /* FBSDKShareKit.framework in Frameworks */,
 				10C526281CB7C07E00A5805C /* liblob-ios.a in Frameworks */,
 				10C526291CB7C07E00A5805C /* libGoogleAdMobAds.a in Frameworks */,
 				10C5262A1CB7C07E00A5805C /* SystemConfiguration.framework in Frameworks */,
+				20014AD51E52E45200724F62 /* FBSDKMessengerShareKit.framework in Frameworks */,
 				10C5262B1CB7C07E00A5805C /* StoreKit.framework in Frameworks */,
 				10C5262C1CB7C07E00A5805C /* MessageUI.framework in Frameworks */,
 				10C5262D1CB7C07E00A5805C /* EventKitUI.framework in Frameworks */,
@@ -4817,9 +4816,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20262CCC1E518E9600C3D8AF /* FBSDKCoreKit.framework in Frameworks */,
-				20262CCD1E518E9600C3D8AF /* FBSDKMessengerShareKit.framework in Frameworks */,
-				20262CCE1E518E9600C3D8AF /* FBSDKShareKit.framework in Frameworks */,
+				20014AD81E52E47A00724F62 /* FBSDKMessengerShareKit.framework in Frameworks */,
+				20014AD91E52E47A00724F62 /* FBSDKShareKit.framework in Frameworks */,
 				24A81AC81B32D92E00B6328D /* Photos.framework in Frameworks */,
 				C3A30DA61AB7F8BD00B0F1CF /* liblob-ios.a in Frameworks */,
 				245FED0519DE8966009140B4 /* libGoogleAdMobAds.a in Frameworks */,
@@ -4894,6 +4892,7 @@
 		0DF3A2D7108DF27200D6C887 /* ExternalFrameworks */ = {
 			isa = PBXGroup;
 			children = (
+				20014AB71E52DFB800724F62 /* FacebookSDKs */,
 				243AA6FD19DE8136004A5613 /* GoogleMobileAdsSdkiOS-6.12.0 */,
 				201D647018C4832300F0D7D8 /* Flurry */,
 				49B88982188652A2003766AD /* FacebookLikeView */,
@@ -5452,6 +5451,16 @@
 				10C526501CB7C07E00A5805C /* FlyerlyBiz.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		20014AB71E52DFB800724F62 /* FacebookSDKs */ = {
+			isa = PBXGroup;
+			children = (
+				20014ADB1E52EBAB00724F62 /* FBSDKCoreKit.framework */,
+				20014AD21E52E45200724F62 /* FBSDKMessengerShareKit.framework */,
+				20014AD31E52E45200724F62 /* FBSDKShareKit.framework */,
+			);
+			name = FacebookSDKs;
 			sourceTree = "<group>";
 		};
 		2002C89218888A98005B18C9 /* SavedFlyers */ = {
@@ -6615,13 +6624,10 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				20262CC91E518E9600C3D8AF /* FBSDKCoreKit.framework */,
-				20262CCA1E518E9600C3D8AF /* FBSDKMessengerShareKit.framework */,
-				20262CCB1E518E9600C3D8AF /* FBSDKShareKit.framework */,
-				207BC40D1E4DE89600C639A6 /* ParseFacebookUtils.framework */,
-				207BC40E1E4DE89600C639A6 /* ParseUI.framework */,
-				204B02AC1E4CA8E400C915AE /* Bolts.framework */,
-				204B02A91E4C986700C915AE /* Parse.framework */,
+				20014AE01E52ED7300724F62 /* Bolts.framework */,
+				20014ABC1E52E00F00724F62 /* libParseFacebookUtilsV4.a */,
+				20014AB01E52DEEF00724F62 /* FBSDKMessengerShareKit.framework */,
+				20014AB11E52DEEF00724F62 /* FBSDKShareKit.framework */,
 				24A81AC71B32D92E00B6328D /* Photos.framework */,
 				243AA72519DE842F004A5613 /* EventKitUI.framework */,
 				243AA72319DE8428004A5613 /* EventKit.framework */,
@@ -10458,6 +10464,7 @@
 					"$(PROJECT_DIR)/ExternalFrameworks/Parse",
 					"${PODS_ROOT}/Headers/Parse/**",
 					"${PODS_ROOT}/Headers/**",
+					"$(PROJECT_DIR)/ExternalFrameworks/FacebookSDKs",
 				);
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -10478,7 +10485,7 @@
 				PROVISIONING_PROFILE = "de33eb4a-a716-486a-a973-981b110c9201";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "de33eb4a-a716-486a-a973-981b110c9201";
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "armv7 armv7s arm64";
+				VALID_ARCHS = "armv7 armv7s arm64 x86_64";
 			};
 			name = "Ad Hoc";
 		};
@@ -10489,6 +10496,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = NO;
@@ -10503,6 +10511,7 @@
 					"$(SRCROOT)/ExternalFrameworks/Parse",
 					"$(PROJECT_DIR)/ExternalFrameworks/Parse",
 					"$(PROJECT_DIR)/ExternalFrameworks/FacebookSDKs",
+					"$(PROJECT_DIR)/ExternalFrameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Flyr_Prefix.pch;
@@ -10546,7 +10555,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "Flyrerly AdHoc Distribution";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/**";
-				VALID_ARCHS = "armv7 armv7s arm64";
+				VALID_ARCHS = "armv7 armv7s arm64 x86_64";
 			};
 			name = "Ad Hoc";
 		};
@@ -10557,6 +10566,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_FlyerlyBiz;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
@@ -10568,6 +10578,7 @@
 					"$(SRCROOT)/ExternalFrameworks/Parse/",
 					"$(PROJECT_DIR)/ExternalFrameworks/Parse",
 					"$(PROJECT_DIR)/ExternalFrameworks/FacebookSDKs",
+					"$(PROJECT_DIR)/ExternalFrameworks",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -10613,7 +10624,7 @@
 				PROVISIONING_PROFILE = "5cfb1fe9-3734-4739-997d-2c18552ab367";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/**";
-				VALID_ARCHS = "armv7 armv7s arm64";
+				VALID_ARCHS = "armv7 armv7s arm64 x86_64";
 			};
 			name = Debug;
 		};
@@ -10624,6 +10635,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_FlyerlyBiz;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
@@ -10634,6 +10646,7 @@
 					"$(SRCROOT)/ExternalFrameworks/Parse/",
 					"$(PROJECT_DIR)/ExternalFrameworks/Parse",
 					"$(PROJECT_DIR)/ExternalFrameworks/FacebookSDKs",
+					"$(PROJECT_DIR)/ExternalFrameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Flyr_Prefix.pch;
@@ -10676,7 +10689,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "547467d5-2714-4ca5-a5d9-7622afdf3208";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/**";
-				VALID_ARCHS = "armv7 armv7s arm64";
+				VALID_ARCHS = "armv7 armv7s arm64 x86_64";
 			};
 			name = Release;
 		};
@@ -10687,6 +10700,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_FlyerlyBiz;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
@@ -10698,6 +10712,7 @@
 					"$(SRCROOT)/ExternalFrameworks/Parse/",
 					"$(PROJECT_DIR)/ExternalFrameworks/Parse",
 					"$(PROJECT_DIR)/ExternalFrameworks/FacebookSDKs",
+					"$(PROJECT_DIR)/ExternalFrameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Flyr_Prefix.pch;
@@ -10740,7 +10755,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "c14aff95-0d8f-40f6-83aa-600e3bdff6a6";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/**";
-				VALID_ARCHS = "armv7 armv7s arm64";
+				VALID_ARCHS = "armv7 armv7s arm64 x86_64";
 			};
 			name = "Ad Hoc";
 		};
@@ -10751,6 +10766,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = NO;
@@ -10765,6 +10781,7 @@
 					"$(SRCROOT)/ExternalFrameworks/Parse",
 					"$(PROJECT_DIR)/ExternalFrameworks/Parse",
 					"$(PROJECT_DIR)/ExternalFrameworks/FacebookSDKs",
+					"$(PROJECT_DIR)/ExternalFrameworks",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -10811,7 +10828,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "Flyerly Development";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/**";
-				VALID_ARCHS = "armv7 armv7s arm64";
+				VALID_ARCHS = "armv7 armv7s arm64 x86_64";
 			};
 			name = Debug;
 		};
@@ -10822,6 +10839,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = NO;
@@ -10835,6 +10853,7 @@
 					"$(SRCROOT)/ExternalFrameworks/Parse",
 					"$(PROJECT_DIR)/ExternalFrameworks/Parse",
 					"$(PROJECT_DIR)/ExternalFrameworks/FacebookSDKs",
+					"$(PROJECT_DIR)/ExternalFrameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Flyr_Prefix.pch;
@@ -10878,7 +10897,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "Flyrerly App Store";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/**";
-				VALID_ARCHS = "armv7 armv7s arm64";
+				VALID_ARCHS = "armv7 armv7s arm64 x86_64";
 			};
 			name = Release;
 		};
@@ -10902,6 +10921,7 @@
 					"$(PROJECT_DIR)/ExternalFrameworks/Parse",
 					"${PODS_ROOT}/Headers/Parse/**",
 					"${PODS_ROOT}/Headers/**",
+					"$(PROJECT_DIR)/ExternalFrameworks/FacebookSDKs",
 				);
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -10922,7 +10942,7 @@
 				PROVISIONING_PROFILE = "65a6eb30-5ef3-4c37-a6e8-2d6c37ccc5bc";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "65a6eb30-5ef3-4c37-a6e8-2d6c37ccc5bc";
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "armv7 armv7s arm64";
+				VALID_ARCHS = "armv7 armv7s arm64 x86_64";
 			};
 			name = Debug;
 		};
@@ -10945,6 +10965,7 @@
 					"$(PROJECT_DIR)/ExternalFrameworks/Parse",
 					"${PODS_ROOT}/Headers/Parse/**",
 					"${PODS_ROOT}/Headers/**",
+					"$(PROJECT_DIR)/ExternalFrameworks/FacebookSDKs",
 				);
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -10965,7 +10986,7 @@
 				PROVISIONING_PROFILE = "97bf5434-078b-4eb6-b558-2cb64dd5662d";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "97bf5434-078b-4eb6-b558-2cb64dd5662d";
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "armv7 armv7s arm64";
+				VALID_ARCHS = "armv7 armv7s arm64 x86_64";
 			};
 			name = Release;
 		};

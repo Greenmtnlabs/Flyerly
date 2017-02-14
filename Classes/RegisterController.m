@@ -205,76 +205,76 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
         NSArray *permissionsArray = @[ @"email", @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
         
         // Login PFUser using Facebook
-//        [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
-//            [self showLoader:NO]; // Hide loading indicator
-//            
-//            if ( !user ) {
-//                
-//                
-//                if (!error) {
-//                    NSLog(@"Uh oh. The user cancelled the Facebook login.");
-//                } else {
-//                    NSLog(@"Uh oh. An error occurred: %@", error);
-//                    NSDictionary *errorDict = [[NSDictionary alloc] initWithDictionary:error.userInfo];
-//                    NSString *error = [errorDict objectForKey:@"NSLocalizedFailureReason"];
-//                    if ( [error isEqualToString:@"com.facebook.sdk:SystemLoginDisallowedWithoutError"] ) {
-//                        // handle error here, for example by showing an alert to the user
-//                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not login with Facebook"
-//                                                                        message:@"Facebook login failed. Please check your Facebook settings on your phone."
-//                                                                       delegate:nil
-//                                                              cancelButtonTitle:@"OK"
-//                                                              otherButtonTitles:nil];
-//                    
-//                        [alert show];
-//                    }
-//                    
-//                }
-//                
-//            } else {
-//
-//                //Saving User Info for again login
-//                [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
-//
-//                if (user.isNew) {
-//                
-//                NSLog(@"User with facebook signed up and logged in!");
-//                
-//                // Login success Move to Flyerly
-//                launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
-//                
-//                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-//                appDelegate.lauchController = launchController;
-//                
-//                // For Parse New User Merge to old Facebook User
-//                
-//                [appDelegate fbChangeforNewVersion];
-//                
-//                [self onRegistrationSuccess];
-//                
-//                
-//            } else {
-//                
-//                NSLog(@"User with facebook logged in!");
-//                
-//                // Login success Move to Flyerly
-//                launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
-//                
-//                // Temp on for Testing here
-//                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-//                
-//                /*
-//                UserPurchases *userPurchases_ = [UserPurchases getInstance];
-//                
-//                //GET UPDATED USER PUCHASES INFO
-//                [userPurchases_ setUserPurcahsesFromParse];
-//                */
-//                
-//                appDelegate.lauchController = launchController;
-//                
-//                [self onRegistrationSuccess];
-//            }
-//            }
-//        }];
+        [PFFacebookUtils logInInBackgroundWithReadPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
+            [self showLoader:NO]; // Hide loading indicator
+            
+            if ( !user ) {
+                
+                
+                if (!error) {
+                    NSLog(@"Uh oh. The user cancelled the Facebook login.");
+                } else {
+                    NSLog(@"Uh oh. An error occurred: %@", error);
+                    NSDictionary *errorDict = [[NSDictionary alloc] initWithDictionary:error.userInfo];
+                    NSString *error = [errorDict objectForKey:@"NSLocalizedFailureReason"];
+                    if ( [error isEqualToString:@"com.facebook.sdk:SystemLoginDisallowedWithoutError"] ) {
+                        // handle error here, for example by showing an alert to the user
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not login with Facebook"
+                                                                        message:@"Facebook login failed. Please check your Facebook settings on your phone."
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                    
+                        [alert show];
+                    }
+                    
+                }
+                
+            } else {
+
+                //Saving User Info for again login
+                [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
+
+                if (user.isNew) {
+                
+                NSLog(@"User with facebook signed up and logged in!");
+                
+                // Login success Move to Flyerly
+                launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
+                
+                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+                appDelegate.lauchController = launchController;
+                
+                // For Parse New User Merge to old Facebook User
+                
+                [appDelegate fbChangeforNewVersion];
+                
+                [self onRegistrationSuccess];
+                
+                
+            } else {
+                
+                NSLog(@"User with facebook logged in!");
+                
+                // Login success Move to Flyerly
+                launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
+                
+                // Temp on for Testing here
+                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+                
+                /*
+                UserPurchases *userPurchases_ = [UserPurchases getInstance];
+                
+                //GET UPDATED USER PUCHASES INFO
+                [userPurchases_ setUserPurcahsesFromParse];
+                */
+                
+                appDelegate.lauchController = launchController;
+                
+                [self onRegistrationSuccess];
+            }
+            }
+        }];
 
     }else {
         [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
