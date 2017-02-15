@@ -165,7 +165,7 @@
 
 //return flag is login
 - (BOOL)isLogin{
-    //return ([[PFUser currentUser] sessionToken].length != 0);
+    return ([[PFUser currentUser] sessionToken].length != 0);
 }
 
 #pragma TableView Events
@@ -256,11 +256,11 @@
     }
     else if (indexPath.row == 3){
         //Checking if the user is valid or anonymus
-//        if ([[PFUser currentUser] sessionToken].length != 0) {
-//            //account setting row clicked
-//            imgname = @"account_settings";
-//            [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SettingcellBack"]]];
-//        }
+        if ([[PFUser currentUser] sessionToken].length != 0) {
+            //account setting row clicked
+            imgname = @"account_settings";
+            [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SettingcellBack"]]];
+        }
     }
     
     if ( [self isLogin] ) {
@@ -565,7 +565,7 @@
     [[NSUserDefaults standardUserDefaults]setValue: nil forKey:@"InAppPurchases"];
     
     // Log out from parse.
-    //[PFUser logOut];
+    [PFUser logOut];
 }
 
 

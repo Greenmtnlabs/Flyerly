@@ -53,20 +53,18 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
     
     globle = [FlyerlySingleton RetrieveSingleton];
-//    PFUser *user = [PFUser currentUser];
-//    email.text = user.email;
-//    name.text = user[@"name"];
-//    phno.text = user[@"contact"];
+    PFUser *user = [PFUser currentUser];
+    email.text = user.email;
+    name.text = user[@"name"];
+    phno.text = user[@"contact"];
 
-//    Dont remove this log it will help us while debuging
-//    NSLog(@"email=%@ - Email=%@ - name=%@ - contact=%@", user.email, user[@"email"], user[@"name"], user[@"contact"]);
+    //Dont remove this log it will help us while debuging
+    NSLog(@"email=%@ - Email=%@ - name=%@ - contact=%@", user.email, user[@"email"], user[@"name"], user[@"contact"]);
 
     // HERE WE HIDE USER FIELD IF USER LOGIN WITH FACBOOK OR TWITTER
     if([[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyUser"]){
-
-        //username.text = user.username;
+        username.text = user.username;
     } else {
-
         username.hidden = YES;
         backimgUsername.hidden = YES;
     }
@@ -86,16 +84,16 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     if([FlyerlySingleton connected]){
         
         if([self Uservalidate]){
-//            PFUser *user = [PFUser currentUser];
-//            
-//            if (phno.text != nil)
-//                user[@"contact"] = phno.text;
-//            if (name.text != nil)
-//                user[@"name"] = name.text;
-//            if (name.text != nil)
-//                user[@"email"] = email.text;
-//            
-//            [user saveInBackground];
+            PFUser *user = [PFUser currentUser];
+            
+            if (phno.text != nil)
+                user[@"contact"] = phno.text;
+            if (name.text != nil)
+                user[@"name"] = name.text;
+            if (name.text != nil)
+                user[@"email"] = email.text;
+            
+            [user saveInBackground];
             [self showAlert:@"Profile Updated Successfully" message:@""];
         }
     }else{
@@ -104,12 +102,12 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
    }
 -(IBAction)changePW{
     
-//    [PFUser requestPasswordResetForEmailInBackground:email.text block:^(BOOL succeeded, NSError *error){
-//        if (error) {
-//              [self showAlert:@"No account exists with email" message:@""];
-//        } else {
-//            [self showAlert:@"Reset password email has been sent." message:@""];
-//        }}];
+    [PFUser requestPasswordResetForEmailInBackground:email.text block:^(BOOL succeeded, NSError *error){
+        if (error) {
+              [self showAlert:@"No account exists with email" message:@""];
+        } else {
+            [self showAlert:@"Reset password email has been sent." message:@""];
+        }}];
 
 }
 

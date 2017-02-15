@@ -118,7 +118,7 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
 
 
 -(void)onSignUp{
-    [self signUp:YES username:username.text password:password.text];
+    
     //Internet Connectivity Check
     if([FlyerlySingleton connected]){
         [self showLoader:YES];
@@ -174,7 +174,7 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
  * Here we Using Parse Utility for Loign by Facebook
  */
 -(IBAction)onSignUpFacebook{
-    NSLog(@"Testing.");
+    
     //Internet Connectivity Check
     if([FlyerlySingleton connected]){
         
@@ -497,20 +497,20 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
     
     if( username.text != nil ){
         
-//        PFQuery *query = [PFUser  query];
-//        [query whereKey:@"username" equalTo:[username.text lowercaseString]];
-//        
-//        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
-//            if (error) {
-//                [usrExist setHidden:NO];
-//                [usrExist setText:@"available"];
-//                [usrExist setTextColor:[UIColor greenColor]];
-//            }else{
-//                [usrExist setHidden:NO];
-//                [usrExist setText:@"taken"];
-//                [usrExist setTextColor:[UIColor redColor]];
-//            }
-//        }];
+        PFQuery *query = [PFUser  query];
+        [query whereKey:@"username" equalTo:[username.text lowercaseString]];
+        
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
+            if (error) {
+                [usrExist setHidden:NO];
+                [usrExist setText:@"available"];
+                [usrExist setTextColor:[UIColor greenColor]];
+            }else{
+                [usrExist setHidden:NO];
+                [usrExist setText:@"taken"];
+                [usrExist setTextColor:[UIColor redColor]];
+            }
+        }];
     }
     
 }

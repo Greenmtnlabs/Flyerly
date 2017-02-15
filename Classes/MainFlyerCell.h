@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import <Parse/Parse.h>
 #import "Flyer.h"
+
 @interface MainFlyerCell : UITableViewCell
 
 @property(nonatomic, strong)IBOutlet UIImageView *cellImage;

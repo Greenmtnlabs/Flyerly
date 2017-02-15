@@ -8,12 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "Common.h"
-//#import <Parse/PFQuery.h>
 #import "FlyrAppDelegate.h"
 #import "FlyerlySingleton.h"
 #import "ProfileViewController.h"
 #import <ParseUI/PFLoginViewController.h>
-//#import <Parse/PFQuery.h>
+#import <Parse/PFQuery.h>
 #import "ParentViewController.h"
 
 @interface ResetPWViewController : ParentViewController {

@@ -1098,13 +1098,13 @@ UIAlertView *saveCurrentFlyerAlert;
 {
     
 //    [[SHKActivityIndicator currentIndicator] hideForSharer:sharer];
-//    UIAlertView *sharingFailedAlert = [[UIAlertView alloc] initWithTitle:@"Sharing Failed"
-//                                             message:@"Failed to share Flyer. Please check internet connection and try again."
-//                                            delegate:self
-//                                   cancelButtonTitle:@"Ok"
-//                                   otherButtonTitles:nil];
+    UIAlertView *sharingFailedAlert = [[UIAlertView alloc] initWithTitle:@"Sharing Failed"
+                                             message:@"Failed to share Flyer. Please check internet connection and try again."
+                                            delegate:self
+                                   cancelButtonTitle:@"Ok"
+                                   otherButtonTitles:nil];
     
-    //[sharingFailedAlert show];
+    [sharingFailedAlert show];
     
     //iosSharer.shareDelegate = nil;
 	NSLog(@"Sharing Error");
@@ -1221,9 +1221,9 @@ UIAlertView *saveCurrentFlyerAlert;
         [star5 setSelected:YES];
     }
     
-//    PFUser *user = [PFUser currentUser];
-//    user[@"appStarRate"] = starValue;
-//    [user saveInBackground];
+    PFUser *user = [PFUser currentUser];
+    user[@"appStarRate"] = starValue;
+    [user saveInBackground];
 
     // check if the user rated from 1 star to 3 star
     if( sender == star1 || sender == star2 || sender == star3)

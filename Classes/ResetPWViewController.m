@@ -72,50 +72,50 @@
     
     NSString *string = username.text;
     
-//    //Checking For User Enter Username or Email Address
-//    if ( [string rangeOfString:@"@"].location == NSNotFound ) {
-//        
-//        
-//        //Getting Account Info with Username
-//        PFQuery *query = [PFUser query];
-//        [query whereKey:@"username" equalTo:[username.text lowercaseString]];
-//        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
-//            
-//            dbUsername = object[@"email"];
-//            NSLog(@"%@",dbUsername);
-//            
-//            if( dbUsername ){
-//                
-//                //Requesting for Send Email to User
-//                [PFUser requestPasswordResetForEmailInBackground:dbUsername block:^(BOOL succeeded, NSError *error){
-//                    if (error) {
-//                        [self removeLoadingView];
-//                         [self showAlert:@"No account exists with username" message:@""];
-//                    } else {
-//                        
-//                        [self removeLoadingView];
-//                        [self showAlert:@"Reset password email has been sent." message:@""];
-//                    }}];
-//
-//            } else {
-//
-//                [self removeLoadingView];
-//                [self showAlert:@"No account exists with username" message:@""];
-//            }  }];
-//        
-//    } else {
-//        
-//        //Requesting for Send Email to User by email Address
-//        [PFUser requestPasswordResetForEmailInBackground:username.text block:^(BOOL succeeded, NSError *error){
-//            if (error) {
-//                [self removeLoadingView];
-//                [self showAlert:@"No account exists with email address." message:@""];
-//            } else {
-//                
-//                [self removeLoadingView];
-//                [self showAlert:@"Reset password email has been sent." message:@""];
-//            }}];
-//    }
+    //Checking For User Enter Username or Email Address
+    if ( [string rangeOfString:@"@"].location == NSNotFound ) {
+        
+        
+        //Getting Account Info with Username
+        PFQuery *query = [PFUser query];
+        [query whereKey:@"username" equalTo:[username.text lowercaseString]];
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
+            
+            dbUsername = object[@"email"];
+            NSLog(@"%@",dbUsername);
+            
+            if( dbUsername ){
+                
+                //Requesting for Send Email to User
+                [PFUser requestPasswordResetForEmailInBackground:dbUsername block:^(BOOL succeeded, NSError *error){
+                    if (error) {
+                        [self removeLoadingView];
+                         [self showAlert:@"No account exists with username" message:@""];
+                    } else {
+                        
+                        [self removeLoadingView];
+                        [self showAlert:@"Reset password email has been sent." message:@""];
+                    }}];
+
+            } else {
+
+                [self removeLoadingView];
+                [self showAlert:@"No account exists with username" message:@""];
+            }  }];
+        
+    } else {
+        
+        //Requesting for Send Email to User by email Address
+        [PFUser requestPasswordResetForEmailInBackground:username.text block:^(BOOL succeeded, NSError *error){
+            if (error) {
+                [self removeLoadingView];
+                [self showAlert:@"No account exists with email address." message:@""];
+            } else {
+                
+                [self removeLoadingView];
+                [self showAlert:@"Reset password email has been sent." message:@""];
+            }}];
+    }
 
 }
 
