@@ -189,7 +189,6 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
             
             if ( !user ) {
                 
-                
                 if (!error) {
                     NSLog(@"Uh oh. The user cancelled the Facebook login.");
                 } else {
@@ -299,7 +298,7 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
 
             } else {
 
-                NSString *twitterUsername = @"marqamowais"; //[PFTwitterUtils twitter].screenName;
+                NSString *twitterUsername = @"@MArqamOwais"; //[PFTwitterUtils twitter].screenName;
                 
                 if(![twitterUsername isEqualToString:@""]) {
                     if(user.isNew || (user.username == nil || [user.username isEqualToString:@""]) ){

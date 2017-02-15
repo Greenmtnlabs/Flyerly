@@ -10,7 +10,8 @@
 #import "PaypalMobile.h"
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 #import <Parse/Parse.h>
-
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 NSString *kCheckTokenStep1 = @"kCheckTokenStep";
 NSString *FlickrSharingSuccessNotification = @"FlickrSharingSuccessNotification";
@@ -238,7 +239,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     [Flurry startSession:[flyerConfigurator flurrySessionId]];
 
     // Facebook initialization
-    //[PFFacebookUtils initializeFacebook];
+    [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions: launchOptions];
     
     // Twitter Initialization
     [PFTwitterUtils initializeWithConsumerKey:[flyerConfigurator twitterConsumerKey] consumerSecret:[flyerConfigurator twitterSecret]];
