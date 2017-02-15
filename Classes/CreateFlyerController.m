@@ -4419,7 +4419,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
  */
 -(void)openPanel {
     
-    if(YES){ //if ( [[PFUser currentUser] sessionToken] ) {
+    if ( [[PFUser currentUser] sessionToken] ) {
         sharePanel.hidden = NO;
         [sharePanel removeFromSuperview];
         
@@ -4496,11 +4496,11 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [shareviewcontroller.descriptionView setReturnKeyType:UIReturnKeyDone];
         shareviewcontroller.Yvalue = [NSString stringWithFormat:@"%f",self.view.frame.size.height];
         
-//        PFUser *user = [PFUser currentUser];
-//        if (user[@"appStarRate"])
-//            [shareviewcontroller setStarsofShareScreen:user[@"appStarRate"]];
-//        
-//        [user saveInBackground];
+        PFUser *user = [PFUser currentUser];
+        if (user[@"appStarRate"])
+            [shareviewcontroller setStarsofShareScreen:user[@"appStarRate"]];
+        
+        [user saveInBackground];
         [shareviewcontroller setSocialStatus];
         
         //Create Animation Here
@@ -6461,12 +6461,12 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         userPurchases = [UserPurchases getInstance];
         userPurchases.delegate = self;
-        //if ([[PFUser currentUser] sessionToken].length != 0) {
+        if ([[PFUser currentUser] sessionToken].length != 0) {
             //can move water mark layer when have valid subscription / IN_APP_ID_ALL_DESIGN
             if ( [userPurchases isSubscriptionValid] || [userPurchases haveProduct:IN_APP_ID_ALL_DESIGN] ) {
                 canPerformAct = YES;
             }
-        //}
+        }
     }
     
     if( [tempLayerType isEqualToString:FLYER_LAYER_WATER_MARK]  && canPerformAct == NO ){

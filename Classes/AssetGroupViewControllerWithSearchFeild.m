@@ -55,12 +55,6 @@
         thumbSize = CGSizeMake(132,120.0);
     }
     
-    
-    
-    
-    
-    
-    
     self.thumbnailSize = thumbSize;
     
     // Configure the selection behaviour
@@ -287,24 +281,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
             
             NSURL *purchaseImageUrl = [[NSURL alloc] initWithString:purchaseImageUrlString];
             NSURLRequest *purchaseImageUrlRequest = [[NSURLRequest alloc] initWithURL:purchaseImageUrl];
-// OLD
-//            AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:purchaseImageUrlRequest];
-//            requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
-//            [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-//                
-//                
-//                UIImage *thumbnail = (UIImage *) responseObject;
-//                
-//                NSData* data = UIImagePNGRepresentation(thumbnail);
-//                
-//                [self saveInGallery:data];
-//
-//            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//                NSLog(@"Image error: %@", error);
-//            }];
-//            [requestOperation start];
-            
-// NEW
+
             NSURL *URL = purchaseImageUrl;
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
             [manager GET:URL.absoluteString parameters: nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -315,7 +292,6 @@ shouldReloadTableForSearchString:(NSString *)searchString
             } failure:^(NSURLSessionDataTask *task, NSError *error) {
                 NSLog(@"Error: %@", error);
             }];
-            
         }
         
     } else{
@@ -439,14 +415,14 @@ shouldReloadTableForSearchString:(NSString *)searchString
             
             if (cancelRequest) return ;
             
-            //NSArray *requestedProducts = products;
-            //bool disablePurchase = ([[PFUser currentUser] sessionToken].length == 0);
+            NSArray *requestedProducts = products;
+            bool disablePurchase = ([[PFUser currentUser] sessionToken].length == 0);
             
             NSString *sheetTitle = @"Choose Product";
             
-            //if (disablePurchase) {
-            //    sheetTitle = @"This feature requires Sign In";
-            //}
+            if (disablePurchase) {
+                sheetTitle = @"This feature requires Sign In";
+            }
             
             NSMutableArray *productArray = [[NSMutableArray alloc] init];
             for(SKProduct *product in products)
@@ -497,22 +473,22 @@ shouldReloadTableForSearchString:(NSString *)searchString
     
     [self showLoadingIndicator];
     
-//    //Checking if the user is valid or anonymus
-//    if ([[PFUser currentUser] sessionToken].length != 0) {
-//        
-//        [self purchaseProduct];
-//        imageID_ = [imagesIDs objectAtIndex:sender.tag];
-//        
-//        
-//    }else {
-//        UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"Please sign in first"
-//                                                            message: @"To purchase any product, you need to sign in first."
-//                                                           delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
-//        
-//        [someError show];
-//        
-//        [self hideLoadingIndicator];
-//    }
+    //Checking if the user is valid or anonymus
+    if ([[PFUser currentUser] sessionToken].length != 0) {
+        
+        [self purchaseProduct];
+        imageID_ = [imagesIDs objectAtIndex:sender.tag];
+        
+        
+    }else {
+        UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"Please sign in first"
+                                                            message: @"To purchase any product, you need to sign in first."
+                                                           delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
+        
+        [someError show];
+        
+        [self hideLoadingIndicator];
+    }
     
 }
 

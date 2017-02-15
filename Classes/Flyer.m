@@ -1223,14 +1223,12 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  */
 +(NSString *)newFlyerPath{
     
-    //PFUser *user = [PFUser currentUser];
+    PFUser *user = [PFUser currentUser];
     NSError *error;
     
     //Getting Home Directory
 	NSString *homeDirectoryPath = NSHomeDirectory();
-//	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr",[user objectForKey:@"username"]]];
-
-    NSString *usernamePath = [homeDirectoryPath stringByAppendingString: @"/Documents/TestUser/Flyr"];
+	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr",[user objectForKey:@"username"]]];
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:usernamePath isDirectory:NULL])
             [[NSFileManager defaultManager] createDirectoryAtPath:usernamePath withIntermediateDirectories:YES attributes:nil error:&error];

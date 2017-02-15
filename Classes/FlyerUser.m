@@ -455,16 +455,15 @@
     NSString *homeDirectoryPath = NSHomeDirectory();
     NSString *anonymousUserPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/anonymous"]];
     
-//    PFUser *user = [PFUser currentUser];
-//    
-//    NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@", user.username]];
+    PFUser *user = [PFUser currentUser];
     
+    NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@", user.username]];
     
-//    if ([[NSFileManager defaultManager] fileExistsAtPath:anonymousUserPath]) {
-//        
-//        NSError* error;
-//        [[NSFileManager defaultManager]moveItemAtPath:anonymousUserPath toPath:usernamePath error:&error];
-//    }
+    if ([[NSFileManager defaultManager] fileExistsAtPath:anonymousUserPath]) {
+        
+        NSError* error;
+        [[NSFileManager defaultManager]moveItemAtPath:anonymousUserPath toPath:usernamePath error:&error];
+    }
 
 }
 

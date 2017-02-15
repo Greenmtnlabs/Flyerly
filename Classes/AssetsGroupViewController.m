@@ -170,7 +170,7 @@
         
         UserPurchases *userPurchases_ = [UserPurchases getInstance];
         
-        if(YES){ //if ([[PFUser currentUser] sessionToken].length != 0) {
+        if ([[PFUser currentUser] sessionToken].length != 0) {
             
             if ( [userPurchases_ canCreateVideoFlyer] ) {
                 

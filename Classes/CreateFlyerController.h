@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <NBUKit/NBUKit.h>
 #import <UIKit/UIKit.h>
-//#import <Parse/Parse.h>
+#import <Parse/Parse.h>
 #import "CustomLabel.h"
 #import "ParentViewController.h"
 #import "CameraViewController.h"
