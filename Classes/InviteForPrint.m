@@ -10,7 +10,6 @@
 #import "Common.h"
 #import <QuartzCore/QuartzCore.h>
 #import "FlyrAppDelegate.h"
-//#import <FacebookSDK/FacebookSDK.h>
 #import "CreateFlyerController.h"
 #import "HelpController.h"
 #import "Flurry.h"
@@ -87,13 +86,13 @@
     [searchTextField setReturnKeyType:UIReturnKeyDone];
     
     
-//    //HERE WE GET ALREADY INVITED FRIENDS
-//    PFUser *user = [PFUser currentUser];
-//    
-//    self.iPhoneinvited = [[NSMutableArray alloc] init];
-//    
-//    if (user[@"iphoneinvited"])
-//        self.iPhoneinvited  = user[@"iphoneinvited"];
+    //HERE WE GET ALREADY INVITED FRIENDS
+    PFUser *user = [PFUser currentUser];
+    
+    self.iPhoneinvited = [[NSMutableArray alloc] init];
+    
+    if (user[@"iphoneinvited"])
+        self.iPhoneinvited  = user[@"iphoneinvited"];
     
     // Load device contacts
     [self loadLocalContacts];
@@ -154,7 +153,7 @@
     NSLog(@"%@",identifiers);
     NSLog(@"%lu",(unsigned long)contactsArray.count);
     
-    //if([identifiers count] > 0) {
+    if([identifiers count] > 0) {
         
         [Flurry logEvent:@"Friends Invited"];
         
@@ -163,9 +162,9 @@
         sendingControoler.contactsArray = self.selectedIdentifiers;
         [self.navigationController pushViewController:sendingControoler animated:YES];
         
-   // } else {
-   //     [self showAlert:@"Please select any contact to invite !" message:@""];
-//    }
+    } else {
+        [self showAlert:@"Please select any contact to invite !" message:@""];
+    }
     
 }
 
@@ -541,7 +540,7 @@
 - (void)sharerFinishedSending:(SHKSharer *)sharer
 {
 
-    //PFUser *user = [PFUser currentUser];
+    PFUser *user = [PFUser currentUser];
     
     // Here we Check Sharer for
     // Update PARSE
@@ -549,7 +548,7 @@
         
         // HERE WE GET AND SET SELECTED CONTACT LIST
         [iPhoneinvited  addObjectsFromArray:selectedIdentifiers];
-        //user[@"iphoneinvited"] = iPhoneinvited;
+        user[@"iphoneinvited"] = iPhoneinvited;
         [self friendsInvited];
         
         

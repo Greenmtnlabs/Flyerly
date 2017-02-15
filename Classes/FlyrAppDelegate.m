@@ -289,7 +289,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     // If the Documents folder has only one directory named anonymous then this is an anonymous user (hasn't signed up yet)
     if(contentOfDirectory.count  > 0 && [[contentOfDirectory objectAtIndex:indexForAnon] isEqual:@"anonymous"]){
         // This is an anonymous user
-        //[PFUser currentUser].username = @"anonymous";
+        [PFUser currentUser].username = @"anonymous";
         [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"UpdatedVersion"];
         
         lauchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];

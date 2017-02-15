@@ -57,9 +57,9 @@
     
     _btnSignIn.enabled = NO;
     //Remove signin button if user already logged in
-//    if ([[PFUser currentUser] sessionToken].length != 0) {
-//        [_btnSignIn removeFromSuperview];
-//    }
+    if ([[PFUser currentUser] sessionToken].length != 0) {
+        [_btnSignIn removeFromSuperview];
+    }
     
 }
 

@@ -48,18 +48,6 @@ static NBUImageLoader * _sharedLoader;
         NSURL *imageUrl = [[NSURL alloc] initWithString:imageUrlString];
         NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:imageUrl];
         
-//        AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
-//        requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
-//        [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-//            
-//            resultBlock(responseObject,nil);
-//            
-//        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//            NSLog(@"Image error: %@", error);
-//        }];
-//        [requestOperation start];
-        
-        
         NSURL *URL = [NSURL URLWithString: imageUrlString];
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
         //manager.responseSerializer = [AFHTTPResponseSerializer responseSerializer];
@@ -69,9 +57,6 @@ static NBUImageLoader * _sharedLoader;
         } failure:^(NSURLSessionDataTask *task, NSError *error) {
             NSLog(@"Error: %@", error);
         }];
-        
-        
-        
     }
     
     // Give up

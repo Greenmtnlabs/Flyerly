@@ -960,7 +960,7 @@ id lastShareBtnSender;
         flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:row] setDirectory:NO];
     }
 
-    if(YES){ //if ( [[PFUser currentUser] sessionToken] ) {
+    if ( [[PFUser currentUser] sessionToken] ) {
         [self enableBtns:NO];
         sharePanel.hidden = NO;
         [sharePanel removeFromSuperview];
@@ -1037,11 +1037,11 @@ id lastShareBtnSender;
         [shareviewcontroller.descriptionView setReturnKeyType:UIReturnKeyDone];
         shareviewcontroller.Yvalue = [NSString stringWithFormat:@"%f",self.view.frame.size.height];
         
-//        PFUser *user = [PFUser currentUser];
-//        if (user[@"appStarRate"])
-//            [shareviewcontroller setStarsofShareScreen:user[@"appStarRate"]];
-//        
-//        [user saveInBackground];
+        PFUser *user = [PFUser currentUser];
+        if (user[@"appStarRate"])
+            [shareviewcontroller setStarsofShareScreen:user[@"appStarRate"]];
+        
+        [user saveInBackground];
         
         [shareviewcontroller setSocialStatus];
         

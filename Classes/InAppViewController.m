@@ -61,54 +61,54 @@
     [loginButton setTitle:(@"Restore Purchases")];
     loginButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     
-//    if ([[PFUser currentUser] sessionToken].length != 0) {
-//        
-//    PFQuery *query = [PFUser query];
-//    [query whereKey:@"username" equalTo:[[PFUser currentUser] objectForKey:@"username"]];
-//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
-//     {
-//         if (!error)
-//         {
-//             if (objects.count)
-//             {
-//                 for (PFObject *object in objects)
-//                 {
-//                     NSLog(@"ParseUser unique object ID: %@", object.objectId);
-//                     
-//                     PFQuery *query = [PFUser  query];
-//                     [query whereKey:@"objectId" equalTo:object.objectId];
-//                     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error)
-//                      {
-//                          if (!error)
-//                          {
-//                              NSMutableDictionary *counterDictionary = [object valueForKey:@"estimatedData"];
-//                              int refrelCounter = [[counterDictionary objectForKey:@"inviteCounter"] intValue];
-//                              
-//                              if ( refrelCounter >= 20 )
-//                              {
-//                                  //Setting the feature name,feature description values for cell view using plist
-//                                  cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"You have sucessfully unlocked Design Bundle feature by refreing friends.Enjoy!"];
-//                                  
-//                              }else if ( refrelCounter <= 0 ){
-//                                  
-//                                  cellDescriptionForRefrelFeature = [NSString stringWithFormat: @"Invite 20 people to %@ and unlock Design Bundle feature for FREE!", APP_NAME ] ;
-//                              }
-//                              else if ( refrelCounter > 0 && refrelCounter < 20 )
-//                              {
-//                                 int moreToInvite = 20 - refrelCounter;
-//                                 cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite %d more people to %@ and unlock Design Bundle feature for FREE!", moreToInvite, APP_NAME];
-//                              }
-//                              
-//                              [freeFeaturesTview reloadData];
-//                          }
-//                      }];
-//                 }
-//             }
-//         }
-//     }];
-//    }else {
-//       cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 more people to %@ and unlock Design Bundle feature for FREE!", APP_NAME];
-//    }
+    if ([[PFUser currentUser] sessionToken].length != 0) {
+        
+    PFQuery *query = [PFUser query];
+    [query whereKey:@"username" equalTo:[[PFUser currentUser] objectForKey:@"username"]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+     {
+         if (!error)
+         {
+             if (objects.count)
+             {
+                 for (PFObject *object in objects)
+                 {
+                     NSLog(@"ParseUser unique object ID: %@", object.objectId);
+                     
+                     PFQuery *query = [PFUser  query];
+                     [query whereKey:@"objectId" equalTo:object.objectId];
+                     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error)
+                      {
+                          if (!error)
+                          {
+                              NSMutableDictionary *counterDictionary = [object valueForKey:@"estimatedData"];
+                              int refrelCounter = [[counterDictionary objectForKey:@"inviteCounter"] intValue];
+                              
+                              if ( refrelCounter >= 20 )
+                              {
+                                  //Setting the feature name,feature description values for cell view using plist
+                                  cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"You have sucessfully unlocked Design Bundle feature by refreing friends.Enjoy!"];
+                                  
+                              }else if ( refrelCounter <= 0 ){
+                                  
+                                  cellDescriptionForRefrelFeature = [NSString stringWithFormat: @"Invite 20 people to %@ and unlock Design Bundle feature for FREE!", APP_NAME ] ;
+                              }
+                              else if ( refrelCounter > 0 && refrelCounter < 20 )
+                              {
+                                 int moreToInvite = 20 - refrelCounter;
+                                 cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite %d more people to %@ and unlock Design Bundle feature for FREE!", moreToInvite, APP_NAME];
+                              }
+                              
+                              [freeFeaturesTview reloadData];
+                          }
+                      }];
+                 }
+             }
+         }
+     }];
+    }else {
+       cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 more people to %@ and unlock Design Bundle feature for FREE!", APP_NAME];
+    }
 }
 
 /*
@@ -166,12 +166,12 @@
     //if not cancel and Restore button presses
     if(rowIndex >= 0 || rowIndex <= 5) {
         
-//        // Checking if the user is valid or anonymus
-//        if ([[PFUser currentUser] sessionToken].length != 0) { // UserType = REGISTERED for logged in user
-//            [[NSUserDefaults standardUserDefaults]setValue: REGISTERED forKey: @"UserType"];
-//        } else { // UserType = ANONYMOUS for not logged in user
-//            [[NSUserDefaults standardUserDefaults]setValue: ANONYMOUS forKey: @"UserType"];
-//        }
+        // Checking if the user is valid or anonymus
+        if ([[PFUser currentUser] sessionToken].length != 0) { // UserType = REGISTERED for logged in user
+            [[NSUserDefaults standardUserDefaults]setValue: REGISTERED forKey: @"UserType"];
+        } else { // UserType = ANONYMOUS for not logged in user
+            [[NSUserDefaults standardUserDefaults]setValue: ANONYMOUS forKey: @"UserType"];
+        }
         
         //Getting Selected Product
         NSDictionary *product = [productArray objectAtIndex:rowIndex];
@@ -233,12 +233,12 @@
     
     if (buttonIndex == 1) {
         
-//        //Checking if the user is valid or anonymus
-//        if ([[PFUser currentUser] sessionToken].length != 0) { // UserType = REGISTERED for logged in user
-//            [[NSUserDefaults standardUserDefaults]setValue: REGISTERED forKey: @"UserType"];
-//        } else { // UserType = ANONYMOUS for not logged in user
-//            [[NSUserDefaults standardUserDefaults]setValue: ANONYMOUS forKey: @"UserType"];
-//        }
+        //Checking if the user is valid or anonymus
+        if ([[PFUser currentUser] sessionToken].length != 0) { // UserType = REGISTERED for logged in user
+            [[NSUserDefaults standardUserDefaults]setValue: REGISTERED forKey: @"UserType"];
+        } else { // UserType = ANONYMOUS for not logged in user
+            [[NSUserDefaults standardUserDefaults]setValue: ANONYMOUS forKey: @"UserType"];
+        }
         
         //Getting Selected Product
         NSDictionary *product = [productArray objectAtIndex:4];
@@ -332,20 +332,20 @@
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-//    //HERE WE UPDATE PARSE ACCOUNT
-//    PFUser *user = [PFUser currentUser];
-//    
-//    PFObject *inApp = [[PFObject alloc] initWithClassName:@"InApp"];
-//    [inApp setObject:user forKey:@"user"];
-//    if([[NSUserDefaults standardUserDefaults]objectForKey:@"InAppPurchases"]) {
-//        inApp[@"json"] = [[NSUserDefaults standardUserDefaults]objectForKey:@"InAppPurchases"];
-//    }
-//    [inApp saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//        
-//        if( succeeded ) {
-//            [userPurchases_ setUserPurcahsesFromParse];
-//        }
-//    }];
+    //HERE WE UPDATE PARSE ACCOUNT
+    PFUser *user = [PFUser currentUser];
+    
+    PFObject *inApp = [[PFObject alloc] initWithClassName:@"InApp"];
+    [inApp setObject:user forKey:@"user"];
+    if([[NSUserDefaults standardUserDefaults]objectForKey:@"InAppPurchases"]) {
+        inApp[@"json"] = [[NSUserDefaults standardUserDefaults]objectForKey:@"InAppPurchases"];
+    }
+    [inApp saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        
+        if( succeeded ) {
+            [userPurchases_ setUserPurcahsesFromParse];
+        }
+    }];
     
     [[RMStore defaultStore] removeStoreObserver:self];
     
