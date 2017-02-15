@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-//#import <Parse/Parse.h>
+#import <Parse/Parse.h>
 #import "Common.h"
 
 @interface FlyerUser : NSObject
 
-//+(void)migrateUserto3dot0:(PFObject *)oldUserobj;
++(void)migrateUserto3dot0:(PFObject *)oldUserobj;
 
 +(void)updateFolderStructure:(NSString *)usr;
 

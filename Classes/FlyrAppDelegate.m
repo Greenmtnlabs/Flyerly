@@ -262,7 +262,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     }
 
     // We allow anonymous Parse users, so a new user doesn't necessarily have to signup/signin
-    //[PFUser enableAutomaticUser];
+    [PFUser enableAutomaticUser];
     
     // Then we create a directory for anonymous users data
     NSString *homeDirectoryPath = NSHomeDirectory();
@@ -401,7 +401,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         }else{
             
             // Migrate Account For 3.0 Version
-            //[FlyerUser migrateUserto3dot0:object];
+            [FlyerUser migrateUserto3dot0:object];
             
             [lauchController hideLoadingIndicator];
             
@@ -433,56 +433,56 @@ if it exist then we call Merging Process
             NSString *name = userData[@"name"];
 
             BOOL canSave = false;
-//            BOOL isNew = [[PFUser currentUser] isNew];
-//            PFUser *currentUser = [PFUser currentUser];
-//
-//            // when new user signup via facebook, then push appName to server
-//            if (isNew) {
-//                [[PFUser currentUser] setObject:APP_NAME forKey:@"appName"];
-//                canSave = true;
-//            }
-//
-//            // Store the current user's Facebook ID on the user
-//            if ( email != nil && (isNew || currentUser.email == nil || [currentUser.email isEqualToString:@""])) {
-//                [[PFUser currentUser] setObject:email forKey:@"email"];
-//                canSave = true;
-//            }
-//
-//            if (name != nil ){
-//                if(isNew || currentUser.username == nil || [currentUser.username isEqualToString:@""]) {
-//                    [[NSUserDefaults standardUserDefaults]  setObject:[name lowercaseString] forKey:@"User"];
-//                    [[PFUser currentUser] setObject:name forKey:@"username"];
-//                    canSave = true;
-//                }
-//
-//                if(isNew || currentUser[@"name"] == nil || [currentUser[@"name"] isEqualToString:@""]) {
-//                    [[PFUser currentUser] setObject:name forKey:@"name"];
-//                    canSave = true;
-//                }
-//            }
+            BOOL isNew = [[PFUser currentUser] isNew];
+            PFUser *currentUser = [PFUser currentUser];
+
+            // when new user signup via facebook, then push appName to server
+            if (isNew) {
+                [[PFUser currentUser] setObject:APP_NAME forKey:@"appName"];
+                canSave = true;
+            }
+
+            // Store the current user's Facebook ID on the user
+            if ( email != nil && (isNew || currentUser.email == nil || [currentUser.email isEqualToString:@""])) {
+                [[PFUser currentUser] setObject:email forKey:@"email"];
+                canSave = true;
+            }
+
+            if (name != nil ){
+                if(isNew || currentUser.username == nil || [currentUser.username isEqualToString:@""]) {
+                    [[NSUserDefaults standardUserDefaults]  setObject:[name lowercaseString] forKey:@"User"];
+                    [[PFUser currentUser] setObject:name forKey:@"username"];
+                    canSave = true;
+                }
+
+                if(isNew || currentUser[@"name"] == nil || [currentUser[@"name"] isEqualToString:@""]) {
+                    [[PFUser currentUser] setObject:name forKey:@"name"];
+                    canSave = true;
+                }
+            }
             
             if ( email != nil ){
                 //Checking Email Exist in Parse
-//                PFQuery *query = [PFUser  query];
-//                [query whereKey:@"email" equalTo:email];
-//                [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
-//
-//                    if (error) {
-//                        [lauchController hideLoadingIndicator];
-//                    }else{
-//                        // Migrate Account For 3.0 Version
-//                        //[FlyerUser migrateUserto3dot0:object];
-//                        
-//                        [lauchController hideLoadingIndicator];
-//                        
-//                    }
-//                }];
+                PFQuery *query = [PFUser  query];
+                [query whereKey:@"email" equalTo:email];
+                [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
+
+                    if (error) {
+                        [lauchController hideLoadingIndicator];
+                    }else{
+                        // Migrate Account For 3.0 Version
+                        [FlyerUser migrateUserto3dot0:object];
+                        
+                        [lauchController hideLoadingIndicator];
+                        
+                    }
+                }];
             } else {
                 [lauchController hideLoadingIndicator];
             }
             
             if (canSave){
-                //[[PFUser currentUser] saveInBackground];
+                [[PFUser currentUser] saveInBackground];
             }
         }
         else {
@@ -530,7 +530,7 @@ if it exist then we call Merging Process
         //Create Directory!
         [fileManager createDirectoryAtPath:documentDBFolderPath withIntermediateDirectories:NO attributes:nil error:&error];
     } else {
-        //NSLog(@"Directory exists! %@", documentDBFolderPath);
+        NSLog(@"Directory exists! %@", documentDBFolderPath);
     }
     
     NSArray *fileList = [fileManager contentsOfDirectoryAtPath:resourceDBFolderPath error:&error];
@@ -546,7 +546,7 @@ if it exist then we call Merging Process
             [fileManager copyItemAtPath:oldFilePath toPath:newFilePath error:&error];
             
         } else {
-            //NSLog(@"File exists: %@", newFilePath);
+            NSLog(@"File exists: %@", newFilePath);
         }
     }
     

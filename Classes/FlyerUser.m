@@ -375,74 +375,74 @@
 /*
  * This will Fixed Old Purchases and Old Flyer Issue
  */
-//+(void)migrateUserto3dot0:(PFObject *)oldUserobj{
-//    
-//    
-//    //Update fields of newly created user from old user
-//    PFUser *user = [PFUser currentUser];
-//    
-//    if ([oldUserobj objectForKey:@"name"])
-//        user[@"name"] = [oldUserobj objectForKey:@"name"];
-//
-//    if ([oldUserobj objectForKey:@"contact"])
-//        user[@"contact"] = [oldUserobj objectForKey:@"contact"];
-//    
-//    if ([oldUserobj objectForKey:@"fbinvited"])
-//        user[@"fbinvited"] = [oldUserobj objectForKey:@"fbinvited"];
-//   
-//    if ([oldUserobj objectForKey:@"tweetinvited"])
-//        user[@"tweetinvited"] = [oldUserobj objectForKey:@"tweetinvited"];
-//    
-//    if ([oldUserobj objectForKey:@"iphoneinvited"])
-//        user[@"iphoneinvited"] = [oldUserobj objectForKey:@"iphoneinvited"];
-//    
-//    [user saveInBackground];
-//    
-//    //Rename Old directory Name from New Username on device
-//	NSString *homeDirectoryPath = NSHomeDirectory();
-//    NSString *NewUIDFolderName = [user objectForKey:@"username"];
-//	NSString *OldUIDPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@",[oldUserobj objectForKey:@"username"]]];
-//    
-//    
-//    if (![[NSFileManager defaultManager] fileExistsAtPath:OldUIDPath isDirectory:NULL]) {
-//        
-//	}else{
-//        
-//        NSString *newDirectoryName = NewUIDFolderName;
-//        NSString *oldPath = OldUIDPath;
-//        
-//        //Here we Rename the Directory Name
-//        NSString *newPath = [[oldPath stringByDeletingLastPathComponent] stringByAppendingPathComponent:newDirectoryName];
-//        NSError *error = nil;
-//        [[NSFileManager defaultManager] moveItemAtPath:oldPath toPath:newPath error:&error];
-//        
-//        if (error) {
-//            NSLog(@"%@",error.localizedDescription);
-//        }
-//    }
-//    
-//    // For Merging User info on Parse .Parse not allow here update Other User Info
-//    // So Now we run Server side script from here and passing user names
-//    // For transfer Purchases and Old Flyers Info
-//    NSString  *NewUID = user.objectId;
-//    NSString  *OldUID = oldUserobj.objectId;
-//    NSString *username = [user objectForKey:@"username"];
-//    if(NewUID != nil) {
-//        [PFCloud callFunctionInBackground:@"mergeUser"
-//                           withParameters:@{@"oldUser":OldUID,@"newUser":NewUID}
-//                                    block:^(NSString *result, NSError *error) {
-//                                        if (!error) {
-//                                            NSLog(@"Cloud Success");
-//                                        }
-//                                    }];
-//    }
-//
-//    if(username != nil) {
-//        //Also Check for New folder Structure
-//        [self updateFolderStructure:username];
-//    }
-//
-//}
++(void)migrateUserto3dot0:(PFObject *)oldUserobj{
+    
+    
+    //Update fields of newly created user from old user
+    PFUser *user = [PFUser currentUser];
+    
+    if ([oldUserobj objectForKey:@"name"])
+        user[@"name"] = [oldUserobj objectForKey:@"name"];
+
+    if ([oldUserobj objectForKey:@"contact"])
+        user[@"contact"] = [oldUserobj objectForKey:@"contact"];
+    
+    if ([oldUserobj objectForKey:@"fbinvited"])
+        user[@"fbinvited"] = [oldUserobj objectForKey:@"fbinvited"];
+   
+    if ([oldUserobj objectForKey:@"tweetinvited"])
+        user[@"tweetinvited"] = [oldUserobj objectForKey:@"tweetinvited"];
+    
+    if ([oldUserobj objectForKey:@"iphoneinvited"])
+        user[@"iphoneinvited"] = [oldUserobj objectForKey:@"iphoneinvited"];
+    
+    [user saveInBackground];
+    
+    //Rename Old directory Name from New Username on device
+	NSString *homeDirectoryPath = NSHomeDirectory();
+    NSString *NewUIDFolderName = [user objectForKey:@"username"];
+	NSString *OldUIDPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@",[oldUserobj objectForKey:@"username"]]];
+    
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:OldUIDPath isDirectory:NULL]) {
+        
+	}else{
+        
+        NSString *newDirectoryName = NewUIDFolderName;
+        NSString *oldPath = OldUIDPath;
+        
+        //Here we Rename the Directory Name
+        NSString *newPath = [[oldPath stringByDeletingLastPathComponent] stringByAppendingPathComponent:newDirectoryName];
+        NSError *error = nil;
+        [[NSFileManager defaultManager] moveItemAtPath:oldPath toPath:newPath error:&error];
+        
+        if (error) {
+            NSLog(@"%@",error.localizedDescription);
+        }
+    }
+    
+    // For Merging User info on Parse .Parse not allow here update Other User Info
+    // So Now we run Server side script from here and passing user names
+    // For transfer Purchases and Old Flyers Info
+    NSString  *NewUID = user.objectId;
+    NSString  *OldUID = oldUserobj.objectId;
+    NSString *username = [user objectForKey:@"username"];
+    if(NewUID != nil) {
+        [PFCloud callFunctionInBackground:@"mergeUser"
+                           withParameters:@{@"oldUser":OldUID,@"newUser":NewUID}
+                                    block:^(NSString *result, NSError *error) {
+                                        if (!error) {
+                                            NSLog(@"Cloud Success");
+                                        }
+                                    }];
+    }
+
+    if(username != nil) {
+        //Also Check for New folder Structure
+        [self updateFolderStructure:username];
+    }
+
+}
 
 
 
