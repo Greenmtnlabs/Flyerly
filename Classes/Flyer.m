@@ -1246,12 +1246,11 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  */
 + (NSMutableArray *)recentFlyerPreview:(NSInteger)flyCount{
 
-    //PFUser *user = [PFUser currentUser];
+    PFUser *user = [PFUser currentUser];
     
     //Getting Home Directory
 	NSString *homeDirectoryPath = NSHomeDirectory();
-	//NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr",[user objectForKey:@"username"]]];
-    NSString *usernamePath = [homeDirectoryPath stringByAppendingString: @"/Documents/TestUser/Flyr"];
+	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr", [user objectForKey:@"username"]]];
     
     NSArray *flyersList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:usernamePath error:nil];
     
