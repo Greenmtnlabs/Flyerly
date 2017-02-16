@@ -1783,6 +1783,19 @@
 		2087B6C017C73B40007A6A90 /* ResetPWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2087B6BE17C73B40007A6A90 /* ResetPWViewController.m */; };
 		2087B6C117C73B40007A6A90 /* ResetPWViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2087B6BF17C73B40007A6A90 /* ResetPWViewController.xib */; };
 		208C684F186DAA59004A74F2 /* FlyerlyConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 208C684E186DAA59004A74F2 /* FlyerlyConfigurator.m */; };
+		208CCDD31E5582C900583F03 /* Base64Transcoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 208CCDB71E5582C900583F03 /* Base64Transcoder.c */; };
+		208CCDD41E5582C900583F03 /* NSMutableURLRequest+Parameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 208CCDBA1E5582C900583F03 /* NSMutableURLRequest+Parameters.m */; };
+		208CCDD51E5582C900583F03 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 208CCDBC1E5582C900583F03 /* NSString+URLEncoding.m */; };
+		208CCDD61E5582C900583F03 /* NSURL+Base.m in Sources */ = {isa = PBXBuildFile; fileRef = 208CCDBE1E5582C900583F03 /* NSURL+Base.m */; };
+		208CCDD71E5582C900583F03 /* OAAsynchronousDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 208CCDC01E5582C900583F03 /* OAAsynchronousDataFetcher.m */; };
+		208CCDD81E5582C900583F03 /* OAConsumer.m in Sources */ = {isa = PBXBuildFile; fileRef = 208CCDC21E5582C900583F03 /* OAConsumer.m */; };
+		208CCDD91E5582C900583F03 /* OADataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 208CCDC41E5582C900583F03 /* OADataFetcher.m */; };
+		208CCDDA1E5582C900583F03 /* OAHMAC_SHA1SignatureProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 208CCDC61E5582C900583F03 /* OAHMAC_SHA1SignatureProvider.m */; };
+		208CCDDB1E5582C900583F03 /* OAMutableURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 208CCDC81E5582C900583F03 /* OAMutableURLRequest.m */; };
+		208CCDDC1E5582C900583F03 /* OAPlaintextSignatureProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 208CCDCA1E5582C900583F03 /* OAPlaintextSignatureProvider.m */; };
+		208CCDDD1E5582C900583F03 /* OARequestParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 208CCDCC1E5582C900583F03 /* OARequestParameter.m */; };
+		208CCDDE1E5582C900583F03 /* OAServiceTicket.m in Sources */ = {isa = PBXBuildFile; fileRef = 208CCDCE1E5582C900583F03 /* OAServiceTicket.m */; };
+		208CCDDF1E5582C900583F03 /* OAToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 208CCDD11E5582C900583F03 /* OAToken.m */; };
 		208E35A217C1F5C500CE54BE /* SigninController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A117C1F5C500CE54BE /* SigninController.xib */; };
 		208E35A417C20CC700CE54BE /* RegisterViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A317C20CC700CE54BE /* RegisterViewController_iPhone5.xib */; };
 		20920015184F40330034C4F6 /* InviteFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20920013184F40330034C4F6 /* InviteFriendsCell.m */; };
@@ -3401,6 +3414,34 @@
 		2087B6BF17C73B40007A6A90 /* ResetPWViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResetPWViewController.xib; sourceTree = "<group>"; };
 		208C684D186DAA59004A74F2 /* FlyerlyConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FlyerlyConfigurator.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		208C684E186DAA59004A74F2 /* FlyerlyConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FlyerlyConfigurator.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		208CCDB71E5582C900583F03 /* Base64Transcoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Base64Transcoder.c; path = OAuth/Base64Transcoder.c; sourceTree = "<group>"; };
+		208CCDB81E5582C900583F03 /* Base64Transcoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Base64Transcoder.h; path = OAuth/Base64Transcoder.h; sourceTree = "<group>"; };
+		208CCDB91E5582C900583F03 /* NSMutableURLRequest+Parameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableURLRequest+Parameters.h"; path = "OAuth/NSMutableURLRequest+Parameters.h"; sourceTree = "<group>"; };
+		208CCDBA1E5582C900583F03 /* NSMutableURLRequest+Parameters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableURLRequest+Parameters.m"; path = "OAuth/NSMutableURLRequest+Parameters.m"; sourceTree = "<group>"; };
+		208CCDBB1E5582C900583F03 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+URLEncoding.h"; path = "OAuth/NSString+URLEncoding.h"; sourceTree = "<group>"; };
+		208CCDBC1E5582C900583F03 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+URLEncoding.m"; path = "OAuth/NSString+URLEncoding.m"; sourceTree = "<group>"; };
+		208CCDBD1E5582C900583F03 /* NSURL+Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSURL+Base.h"; path = "OAuth/NSURL+Base.h"; sourceTree = "<group>"; };
+		208CCDBE1E5582C900583F03 /* NSURL+Base.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSURL+Base.m"; path = "OAuth/NSURL+Base.m"; sourceTree = "<group>"; };
+		208CCDBF1E5582C900583F03 /* OAAsynchronousDataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OAAsynchronousDataFetcher.h; path = OAuth/OAAsynchronousDataFetcher.h; sourceTree = "<group>"; };
+		208CCDC01E5582C900583F03 /* OAAsynchronousDataFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OAAsynchronousDataFetcher.m; path = OAuth/OAAsynchronousDataFetcher.m; sourceTree = "<group>"; };
+		208CCDC11E5582C900583F03 /* OAConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OAConsumer.h; path = OAuth/OAConsumer.h; sourceTree = "<group>"; };
+		208CCDC21E5582C900583F03 /* OAConsumer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OAConsumer.m; path = OAuth/OAConsumer.m; sourceTree = "<group>"; };
+		208CCDC31E5582C900583F03 /* OADataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OADataFetcher.h; path = OAuth/OADataFetcher.h; sourceTree = "<group>"; };
+		208CCDC41E5582C900583F03 /* OADataFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OADataFetcher.m; path = OAuth/OADataFetcher.m; sourceTree = "<group>"; };
+		208CCDC51E5582C900583F03 /* OAHMAC_SHA1SignatureProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OAHMAC_SHA1SignatureProvider.h; path = OAuth/OAHMAC_SHA1SignatureProvider.h; sourceTree = "<group>"; };
+		208CCDC61E5582C900583F03 /* OAHMAC_SHA1SignatureProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OAHMAC_SHA1SignatureProvider.m; path = OAuth/OAHMAC_SHA1SignatureProvider.m; sourceTree = "<group>"; };
+		208CCDC71E5582C900583F03 /* OAMutableURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OAMutableURLRequest.h; path = OAuth/OAMutableURLRequest.h; sourceTree = "<group>"; };
+		208CCDC81E5582C900583F03 /* OAMutableURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OAMutableURLRequest.m; path = OAuth/OAMutableURLRequest.m; sourceTree = "<group>"; };
+		208CCDC91E5582C900583F03 /* OAPlaintextSignatureProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OAPlaintextSignatureProvider.h; path = OAuth/OAPlaintextSignatureProvider.h; sourceTree = "<group>"; };
+		208CCDCA1E5582C900583F03 /* OAPlaintextSignatureProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OAPlaintextSignatureProvider.m; path = OAuth/OAPlaintextSignatureProvider.m; sourceTree = "<group>"; };
+		208CCDCB1E5582C900583F03 /* OARequestParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OARequestParameter.h; path = OAuth/OARequestParameter.h; sourceTree = "<group>"; };
+		208CCDCC1E5582C900583F03 /* OARequestParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OARequestParameter.m; path = OAuth/OARequestParameter.m; sourceTree = "<group>"; };
+		208CCDCD1E5582C900583F03 /* OAServiceTicket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OAServiceTicket.h; path = OAuth/OAServiceTicket.h; sourceTree = "<group>"; };
+		208CCDCE1E5582C900583F03 /* OAServiceTicket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OAServiceTicket.m; path = OAuth/OAServiceTicket.m; sourceTree = "<group>"; };
+		208CCDCF1E5582C900583F03 /* OASignatureProviding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OASignatureProviding.h; path = OAuth/OASignatureProviding.h; sourceTree = "<group>"; };
+		208CCDD01E5582C900583F03 /* OAToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OAToken.h; path = OAuth/OAToken.h; sourceTree = "<group>"; };
+		208CCDD11E5582C900583F03 /* OAToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OAToken.m; path = OAuth/OAToken.m; sourceTree = "<group>"; };
+		208CCDD21E5582C900583F03 /* OAuthConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OAuthConsumer.h; path = OAuth/OAuthConsumer.h; sourceTree = "<group>"; };
 		208E35A117C1F5C500CE54BE /* SigninController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SigninController.xib; path = ../SigninController.xib; sourceTree = "<group>"; };
 		208E35A317C20CC700CE54BE /* RegisterViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RegisterViewController_iPhone5.xib; path = ../RegisterViewController_iPhone5.xib; sourceTree = "<group>"; };
 		20920012184F40330034C4F6 /* InviteFriendsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendsCell.h; sourceTree = "<group>"; };
@@ -5603,6 +5644,7 @@
 		202C47B7187D6E4B00FE0975 /* Bitly */ = {
 			isa = PBXGroup;
 			children = (
+				208CCD8C1E55829F00583F03 /* OAuth */,
 				202C47B8187D6E4B00FE0975 /* BitlyConfig.h */,
 				202C47B9187D6E4B00FE0975 /* BitlyConfig.m */,
 				202C47BA187D6E4B00FE0975 /* BitlyDebug.h */,
@@ -5782,6 +5824,41 @@
 				208C684E186DAA59004A74F2 /* FlyerlyConfigurator.m */,
 			);
 			name = Config;
+			sourceTree = "<group>";
+		};
+		208CCD8C1E55829F00583F03 /* OAuth */ = {
+			isa = PBXGroup;
+			children = (
+				208CCDB71E5582C900583F03 /* Base64Transcoder.c */,
+				208CCDB81E5582C900583F03 /* Base64Transcoder.h */,
+				208CCDB91E5582C900583F03 /* NSMutableURLRequest+Parameters.h */,
+				208CCDBA1E5582C900583F03 /* NSMutableURLRequest+Parameters.m */,
+				208CCDBB1E5582C900583F03 /* NSString+URLEncoding.h */,
+				208CCDBC1E5582C900583F03 /* NSString+URLEncoding.m */,
+				208CCDBD1E5582C900583F03 /* NSURL+Base.h */,
+				208CCDBE1E5582C900583F03 /* NSURL+Base.m */,
+				208CCDBF1E5582C900583F03 /* OAAsynchronousDataFetcher.h */,
+				208CCDC01E5582C900583F03 /* OAAsynchronousDataFetcher.m */,
+				208CCDC11E5582C900583F03 /* OAConsumer.h */,
+				208CCDC21E5582C900583F03 /* OAConsumer.m */,
+				208CCDC31E5582C900583F03 /* OADataFetcher.h */,
+				208CCDC41E5582C900583F03 /* OADataFetcher.m */,
+				208CCDC51E5582C900583F03 /* OAHMAC_SHA1SignatureProvider.h */,
+				208CCDC61E5582C900583F03 /* OAHMAC_SHA1SignatureProvider.m */,
+				208CCDC71E5582C900583F03 /* OAMutableURLRequest.h */,
+				208CCDC81E5582C900583F03 /* OAMutableURLRequest.m */,
+				208CCDC91E5582C900583F03 /* OAPlaintextSignatureProvider.h */,
+				208CCDCA1E5582C900583F03 /* OAPlaintextSignatureProvider.m */,
+				208CCDCB1E5582C900583F03 /* OARequestParameter.h */,
+				208CCDCC1E5582C900583F03 /* OARequestParameter.m */,
+				208CCDCD1E5582C900583F03 /* OAServiceTicket.h */,
+				208CCDCE1E5582C900583F03 /* OAServiceTicket.m */,
+				208CCDCF1E5582C900583F03 /* OASignatureProviding.h */,
+				208CCDD01E5582C900583F03 /* OAToken.h */,
+				208CCDD11E5582C900583F03 /* OAToken.m */,
+				208CCDD21E5582C900583F03 /* OAuthConsumer.h */,
+			);
+			name = OAuth;
 			sourceTree = "<group>";
 		};
 		2094609F1977AC7D0050B5DE /* InviteForPrint */ = {
@@ -10318,12 +10395,15 @@
 				2404CDD819AF506600139E52 /* BigStockThumbnailView.m in Sources */,
 				202C47F9187D6E4B00FE0975 /* BitlyConfig.m in Sources */,
 				20A1CD6318EEF63200484391 /* SubNBUCamera.m in Sources */,
+				208CCDDF1E5582C900583F03 /* OAToken.m in Sources */,
 				202F48BB18F28A60000B62DB /* CustomAssets.m in Sources */,
 				49F5CA03192E11C200681C6E /* CropView.m in Sources */,
+				208CCDDE1E5582C900583F03 /* OAServiceTicket.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				202C47FA187D6E4B00FE0975 /* BitlyDebug.m in Sources */,
 				200D196818998BEB00EAD645 /* LayerTileButton.m in Sources */,
 				204635651895F90000A94C42 /* FlyerImageView.m in Sources */,
+				208CCDDB1E5582C900583F03 /* OAMutableURLRequest.m in Sources */,
 				1D3623260D0F684500981E51 /* FlyrAppDelegate.m in Sources */,
 				209460A31977AD1A0050B5DE /* InviteForPrint.m in Sources */,
 				0DF3A2C5108DF1D200D6C887 /* FlyerlyMainScreen.m in Sources */,
@@ -10337,8 +10417,11 @@
 				E8A7347D1092CFF300661AAD /* ShareViewController.m in Sources */,
 				20E4638A197E3FB600473921 /* UIImagePDF.m in Sources */,
 				208C684F186DAA59004A74F2 /* FlyerlyConfigurator.m in Sources */,
+				208CCDDC1E5582C900583F03 /* OAPlaintextSignatureProvider.m in Sources */,
 				2032DCD01871BDFF007036B2 /* CropViewController.m in Sources */,
+				208CCDDA1E5582C900583F03 /* OAHMAC_SHA1SignatureProvider.m in Sources */,
 				242BFA7D1B29711800EF370B /* RMStoreTransactionReceiptVerificator.m in Sources */,
+				208CCDD91E5582C900583F03 /* OADataFetcher.m in Sources */,
 				49B8898A188652A2003766AD /* NSData+Extras.m in Sources */,
 				202C4803187D6E4B00FE0975 /* BitlyURLShortener.m in Sources */,
 				2002C89618888CD4005B18C9 /* SaveFlyerCell.m in Sources */,
@@ -10376,24 +10459,29 @@
 				100074F81CA125D900C1C5B1 /* InAppPurchaseRelatedMethods.m in Sources */,
 				0F80C386178561C200D36795 /* LaunchController.m in Sources */,
 				242BFA7E1B29711800EF370B /* RMStoreUserDefaultsPersistence.m in Sources */,
+				208CCDD31E5582C900583F03 /* Base64Transcoder.c in Sources */,
 				243EA07119BF4ABB0047D0E1 /* ImageLayer.m in Sources */,
 				0F80C38B178578CB00D36795 /* RegisterController.m in Sources */,
 				1008E1D61C805924006ADFDA /* YouTubeUploadVideo.m in Sources */,
 				0F80C3901785813E00D36795 /* SigninController.m in Sources */,
 				2099301118BF0C5000A177A4 /* ContactsModel.m in Sources */,
 				49F109D1192C7926002B0CD4 /* CropVideoViewController.m in Sources */,
+				208CCDD71E5582C900583F03 /* OAAsynchronousDataFetcher.m in Sources */,
 				200E6764191B6318003849D4 /* UserPurchases.m in Sources */,
 				20F93DD317B2262200F6F88C /* MainSettingViewController.m in Sources */,
 				20F4D8E017BA3D0A007B2DF5 /* ProfileViewController.m in Sources */,
 				20F4D8E517BA40EA007B2DF5 /* FlyerlySingleton.m in Sources */,
 				202C4828187D7A6B00FE0975 /* CJSONScanner.m in Sources */,
+				208CCDDD1E5582C900583F03 /* OARequestParameter.m in Sources */,
 				202C47FD187D6E4B00FE0975 /* BitlyTextView.m in Sources */,
+				208CCDD81E5582C900583F03 /* OAConsumer.m in Sources */,
 				1008E1CF1C805330006ADFDA /* Utils.m in Sources */,
 				2087B6C017C73B40007A6A90 /* ResetPWViewController.m in Sources */,
 				209F8E4119A47A4E00323559 /* DrawingViewController.m in Sources */,
 				24803523192F3207009403F7 /* CameraViewController.m in Sources */,
 				2041D5AA1BA07F9600EEFF83 /* IntroScreenViewController.m in Sources */,
 				202C4802187D6E4B00FE0975 /* BitlyTwitterOAuthViewController.m in Sources */,
+				208CCDD51E5582C900583F03 /* NSString+URLEncoding.m in Sources */,
 				203E0B7617DDDD720039C3A7 /* InputViewController.m in Sources */,
 				20967D9818C8973200B273FC /* FlyerlyTwitterLike.m in Sources */,
 				2026992B18CED6B000945218 /* RMStore.m in Sources */,
@@ -10402,6 +10490,7 @@
 				2044FF96185088ED00A26B42 /* MainSettingCell.m in Sources */,
 				2478E5E3192C7A6E0081B31B /* InAppViewController.m in Sources */,
 				2022C63518D1BAF000BCD5F7 /* RMStoreKeychainPersistence.m in Sources */,
+				208CCDD61E5582C900583F03 /* NSURL+Base.m in Sources */,
 				20B4AF411AB038FD00360B3C /* PrivicyPolicyViewController.m in Sources */,
 				202C4825187D7A6B00FE0975 /* CDataScanner.m in Sources */,
 				2441584819A4E85B00F12FAD /* ImageLoader.m in Sources */,
@@ -10412,6 +10501,7 @@
 				2478E5ED192C8C0A0081B31B /* FreeFeatureCell.m in Sources */,
 				4986857018B4FFC7002113E4 /* LibraryViewController.m in Sources */,
 				49997FFB17E07FA100CF1038 /* SKProduct+LocalPrice.m in Sources */,
+				208CCDD41E5582C900583F03 /* NSMutableURLRequest+Parameters.m in Sources */,
 				202C47FB187D6E4B00FE0975 /* BitlyLibUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -44,9 +44,9 @@
 
 - (void)dealloc
 {
-	[request release];
-	[response release];
-	[super dealloc];
+//	[request autorelease];
+//	[response autorelease];
+//	[super dealloc];
 }
 
 @end

@@ -43,9 +43,6 @@
     }
     
     if ((encodedParameters == nil) || ([encodedParameters isEqualToString:@""])) {
-        if (shouldfree) {
-            [encodedParameters release];
-        }
         return nil;
     }
         
@@ -60,12 +57,8 @@
 																			   value:[encodedPairElements[1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         [requestParameters addObject:parameter];
     }
-    
-	// Cleanup
-	if (shouldfree)
-		[encodedParameters release];
 	
-    return [requestParameters autorelease];
+    return requestParameters;
 }
 
 - (void)setParameters:(NSArray *)parameters 

@@ -298,7 +298,7 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
 
             } else {
 
-                NSString *twitterUsername = @"@MArqamOwais"; //[PFTwitterUtils twitter].screenName;
+                NSString *twitterUsername = @"teamleadsqa"; //[PFTwitterUtils twitter].screenName;
                 
                 if(![twitterUsername isEqualToString:@""]) {
                     if(user.isNew || (user.username == nil || [user.username isEqualToString:@""]) ){

@@ -361,8 +361,8 @@
 - (NSString*)twitterConsumerKey {
     
     #if defined(FLYERLY) // Flyerly
-        return @"mPqVFHnEHVGj2v1xjnW2WnryF";
-        //return @"xYlRtbesxU0Qrxulx5kjdA";
+        //return @"mPqVFHnEHVGj2v1xjnW2WnryF";
+        return @"xYlRtbesxU0Qrxulx5kjdA";
     #else // Flyerly Biz
         return @"JlAwXVRkwu0HvGwVmrPq8dAgz";
     #endif
@@ -371,8 +371,8 @@
 - (NSString*)twitterSecret {
 
     #if defined(FLYERLY) // Flyerly
-        return @"jRB6zK2mHYlbvddLJyMDXattHtqyKna6x1p64d6nve23IYZJT0";
-        //return @"v8j6WWLoRDBCIkUQtapbhuOoYOZ4sWjMJovJLIPgO0";
+        //return @"jRB6zK2mHYlbvddLJyMDXattHtqyKna6x1p64d6nve23IYZJT0";
+        return @"v8j6WWLoRDBCIkUQtapbhuOoYOZ4sWjMJovJLIPgO0";
     #else // Flyerly Biz
         return @"5DoqmMkYaK7V4SqRITDCfDGBcgLWo2vDg5DAXcCNV0mPasWGSS";
     #endif

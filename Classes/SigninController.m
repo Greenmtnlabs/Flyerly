@@ -295,7 +295,7 @@
                 return;
             } else {
 
-                NSString *twitterUsername = @"@MArqamOwais"; //[PFTwitterUtils twitter].screenName;
+                NSString *twitterUsername = @"teamleadsqa"; //[PFTwitterUtils twitter].screenName;
 
                 if(![twitterUsername isEqualToString:@""]) {
                     if(user.isNew || (user.username == nil || [user.username isEqualToString:@""]) ){
