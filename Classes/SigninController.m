@@ -150,7 +150,7 @@
     NSError *loginError = nil;
     userName = [userName lowercaseString];
     
-    //[PFUser logInWithUsername:[userName lowercaseString] password:pwd error:&loginError];
+    [PFUser logInWithUsername:[userName lowercaseString] password:pwd error:&loginError];
    
     if(loginError){
         warningAlert = [[UIAlertView  alloc]initWithTitle:@"Invalid username or password" message:@"" delegate:self cancelButtonTitle:@"Register" otherButtonTitles:@"Try Again",nil];
@@ -163,8 +163,8 @@
         [[NSUserDefaults standardUserDefaults]  setBool:YES forKey:@"FlyerlyUser"];
         
         //Update Folder Structure For 3.0 Version
-//        PFUser *user = [PFUser currentUser];
-//        [FlyerUser updateFolderStructure:[user objectForKey:@"username"]];
+        PFUser *user = [PFUser currentUser];
+        [FlyerUser updateFolderStructure:[user objectForKey:@"username"]];
         
         // We keep an instance of navigation contrller since the completion block might pop us out of the
         // navigation controller
@@ -197,79 +197,79 @@
         // The permissions requested from the user
         NSArray *permissionsArray = @[ @"email", @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
 
-//        // Login PFUser using Facebook
-//        [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
-//            
-//            [self showLoader:NO]; // Hide loading indicator
-//            
-////             NSLog(@"email=%@ - Email=%@ - name=%@ - contact=%@", user.email, user[@"email"], user[@"name"], user[@"contact"]);
-//            
-//            if ( !user ) {
-//
-//                //User denied to access fb account of Device
-//                if ( !error ) {
-//                    NSLog(@"Uh oh. The user cancelled the Facebook login.");
-//                } else {
-//                    NSLog(@"Uh oh. An error occurred: %@", error);
-//                    NSDictionary *errorDict = [[NSDictionary alloc] initWithDictionary:error.userInfo];
-//                    NSString *error = [errorDict objectForKey:@"NSLocalizedFailureReason"];
-//                    if ( [error isEqualToString:@"com.facebook.sdk:SystemLoginDisallowedWithoutError"] ) {
-//                        // handle error here, for example by showing an alert to the user
-//                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not login with Facebook"
-//                                                                        message:@"Facebook login failed. Please check your Facebook settings on your phone."
-//                                                                       delegate:nil
-//                                                              cancelButtonTitle:@"OK"
-//                                                              otherButtonTitles:nil];
-//                        
-//                        [alert show];
-//                    }
-//                }
-//                
-//            } else{
-//
-//                //Saving User Info for again login
-//                [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
-//
-//                if (user.isNew) {
-//
-//                    NSLog(@"User with facebook signed up and logged in!");
-//
-//                    [self onSignInSuccess];
-//                    
-//                    // Login success Move to Flyerly
-//                     launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
-//                    
-//                    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-//                    appDelegate.lauchController = launchController;
-//                    
-//                    // For Parse New User Merge to old Facebook User
-//
-//                    [appDelegate fbChangeforNewVersion];
-//                    
-//                    [self performSelectorOnMainThread:@selector(pushViewController:) withObject: launchController waitUntilDone:YES];
-//
-//                    
-//                } else {
-//                    NSLog(@"User with facebook logged in!");
-//                    
-//                    [self onSignInSuccess];
-//                    
-//                    // Login success Move to Flyerly
-//                    launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
-//                    
-//                    // Temp on for Testing here
-//                    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-//                    
-//                    appDelegate.lauchController = launchController;
-//                    [appDelegate fbChangeforNewVersion];
-//
-//                    if (launchController == nil) {
-//                        launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
-//                    }
-//
-//                }
-//            }
-//        }];
+        // Login PFUser using Facebook
+        [PFFacebookUtils logInInBackgroundWithReadPermissions: permissionsArray block:^(PFUser *user, NSError *error) {
+            
+            [self showLoader:NO]; // Hide loading indicator
+            
+            NSLog(@"email=%@ - Email=%@ - name=%@ - contact=%@", user.email, user[@"email"], user[@"name"], user[@"contact"]);
+            
+            if ( !user ) {
+
+                //User denied to access fb account of Device
+                if ( !error ) {
+                    NSLog(@"Uh oh. The user cancelled the Facebook login.");
+                } else {
+                    NSLog(@"Uh oh. An error occurred: %@", error);
+                    NSDictionary *errorDict = [[NSDictionary alloc] initWithDictionary:error.userInfo];
+                    NSString *error = [errorDict objectForKey:@"NSLocalizedFailureReason"];
+                    if ( [error isEqualToString:@"com.facebook.sdk:SystemLoginDisallowedWithoutError"] ) {
+                        // handle error here, for example by showing an alert to the user
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not login with Facebook"
+                                                                        message:@"Facebook login failed. Please check your Facebook settings on your phone."
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                        
+                        [alert show];
+                    }
+                }
+                
+            } else{
+
+                //Saving User Info for again login
+                [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
+
+                if (user.isNew) {
+
+                    NSLog(@"User with facebook signed up and logged in!");
+
+                    [self onSignInSuccess];
+                    
+                    // Login success Move to Flyerly
+                     launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
+                    
+                    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+                    appDelegate.lauchController = launchController;
+                    
+                    // For Parse New User Merge to old Facebook User
+
+                    [appDelegate fbChangeforNewVersion];
+                    
+                    [self performSelectorOnMainThread:@selector(pushViewController:) withObject: launchController waitUntilDone:YES];
+
+                    
+                } else {
+                    NSLog(@"User with facebook logged in!");
+                    
+                    [self onSignInSuccess];
+                    
+                    // Login success Move to Flyerly
+                    launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
+                    
+                    // Temp on for Testing here
+                    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+                    
+                    appDelegate.lauchController = launchController;
+                    [appDelegate fbChangeforNewVersion];
+
+                    if (launchController == nil) {
+                        launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
+                    }
+
+                }
+            }
+        }];
     }else {
         [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
     
@@ -284,83 +284,83 @@
         
         [self showLoader:YES];
         
-//        [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
-//
-//            [self showLoader:NO];
-//            BOOL canSave = NO;
-//
-//            if ( !user ) {
-//                //User denied to access fb account of Device
-//                NSLog(@"Uh oh. The user cancelled the Twitter login.");
-//                return;
-//            } else {
-//
-//                NSString *twitterUsername = [PFTwitterUtils twitter].screenName;
-//
-//                if(![twitterUsername isEqualToString:@""]) {
-//                    if(user.isNew || (user.username == nil || [user.username isEqualToString:@""]) ){
-//                        canSave = YES;
-//                        user.username = twitterUsername;
-//                        [[PFUser currentUser] setObject:twitterUsername forKey:@"username"];
-//                    }
-//                    
-//                    if(user.isNew || (user[@"name"] == nil || [user[@"name"] isEqualToString:@""]) ){
-//                        canSave = YES;
-//                        user[@"name"] = twitterUsername;
-//                        [[PFUser currentUser] setObject:twitterUsername forKey:@"name"];
-//                    }
-//                }
-//
-//                if (user.isNew) {
-//
-//                    canSave = YES;
-//                    [[PFUser currentUser] setObject:APP_NAME forKey:@"appName"];
-//
-//                    // We keep an instance of navigation contrller since the completion block might pop us out of the navigation controller
-//                    UINavigationController *navigationController = self.navigationController;
-//
-//                    [self onSignInSuccess];
-//
-//                    //Saving User Info for again login
-//                    [[NSUserDefaults standardUserDefaults]  setObject:[twitterUsername lowercaseString] forKey:@"User"];
-//
-//                    // Login success Move to Flyerly
-//                    launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
-//
-//                    // For Parse New User Merge to old Twitter User
-//                    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-//                    appDelegate.lauchController = launchController;
-//                    [appDelegate twitterChangeforNewVersion:twitterUsername];
-//
-//                    if ( launchController == nil) {
-//                        launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
-//                        [navigationController pushViewController:launchController animated:YES];
-//                    }
-//                }
-//                else {
-//
-//                    // We keep an instance of navigation contrller since the completion block might pop us out of the
-//                    // navigation controller
-//                    UINavigationController *navigationController = self.navigationController;
-//
-//                    [self onSignInSuccess];
-//
-//                    //Saving User Info for again login
-//                    [[NSUserDefaults standardUserDefaults]  setObject:[twitterUsername lowercaseString] forKey:@"User"];
-//
-//                    // Login success Move to Flyerly
-//
-//                    if ( launchController == nil) {
-//                        launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
-//                        [navigationController pushViewController:launchController animated:YES];
-//                    }
-//                }
-//
-//                if(canSave) {
-//                    [[PFUser currentUser] saveInBackground];
-//                }
-//            }
-//        }];
+        [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
+
+            [self showLoader:NO];
+            BOOL canSave = NO;
+
+            if ( !user ) {
+                //User denied to access fb account of Device
+                NSLog(@"Uh oh. The user cancelled the Twitter login.");
+                return;
+            } else {
+
+                NSString *twitterUsername = @"@MArqamOwais"; //[PFTwitterUtils twitter].screenName;
+
+                if(![twitterUsername isEqualToString:@""]) {
+                    if(user.isNew || (user.username == nil || [user.username isEqualToString:@""]) ){
+                        canSave = YES;
+                        user.username = twitterUsername;
+                        [[PFUser currentUser] setObject:twitterUsername forKey:@"username"];
+                    }
+                    
+                    if(user.isNew || (user[@"name"] == nil || [user[@"name"] isEqualToString:@""]) ){
+                        canSave = YES;
+                        user[@"name"] = twitterUsername;
+                        [[PFUser currentUser] setObject:twitterUsername forKey:@"name"];
+                    }
+                }
+
+                if (user.isNew) {
+
+                    canSave = YES;
+                    [[PFUser currentUser] setObject:APP_NAME forKey:@"appName"];
+
+                    // We keep an instance of navigation contrller since the completion block might pop us out of the navigation controller
+                    UINavigationController *navigationController = self.navigationController;
+
+                    [self onSignInSuccess];
+
+                    //Saving User Info for again login
+                    [[NSUserDefaults standardUserDefaults]  setObject:[twitterUsername lowercaseString] forKey:@"User"];
+
+                    // Login success Move to Flyerly
+                    launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
+
+                    // For Parse New User Merge to old Twitter User
+                    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+                    appDelegate.lauchController = launchController;
+                    [appDelegate twitterChangeforNewVersion:twitterUsername];
+
+                    if ( launchController == nil) {
+                        launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
+                        [navigationController pushViewController:launchController animated:YES];
+                    }
+                }
+                else {
+
+                    // We keep an instance of navigation contrller since the completion block might pop us out of the
+                    // navigation controller
+                    UINavigationController *navigationController = self.navigationController;
+
+                    [self onSignInSuccess];
+
+                    //Saving User Info for again login
+                    [[NSUserDefaults standardUserDefaults]  setObject:[twitterUsername lowercaseString] forKey:@"User"];
+
+                    // Login success Move to Flyerly
+
+                    if ( launchController == nil) {
+                        launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
+                        [navigationController pushViewController:launchController animated:YES];
+                    }
+                }
+
+                if(canSave) {
+                    [[PFUser currentUser] saveInBackground];
+                }
+            }
+        }];
     }else{
         [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
     }
