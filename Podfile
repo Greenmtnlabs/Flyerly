@@ -7,7 +7,7 @@ platform :ios, '9.3'
     pod 'uservoice-iphone-sdk', '~> 3.2.3'
     pod 'PayPal-iOS-SDK', '~> 2.14.0'
 
-    #pod 'ShareKit', :podspec => "Podspecs/ShareKit.podspec"
+#pod 'ShareKit', :podspec => "Podspecs/ShareKit.podspec"
     pod 'GoogleAPIClient'
 
     # Pre-release versions:
@@ -15,8 +15,6 @@ platform :ios, '9.3'
     pod 'GPUImage'
     pod 'NBUKit', '~> 2.4.1'
     pod 'NBUImagePicker', '~> 1.5.3'
-
-    #pod 'ParseFacebookUtils', '~> 1.7.4'
 
     # Open SSL
     pod 'OpenSSL', '~> 1.0'
@@ -50,4 +48,8 @@ platform :ios, '9.3'
     end
 
     target 'FlyerlyBiz' do
-    end
+    end
+
+
+
+

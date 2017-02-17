@@ -194,12 +194,12 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     // Crittercism for crash reports.
     [Crittercism enableWithAppID:[flyerConfigurator crittercismAppId]];
     
-//    // Setup paypal
-//    [PayPalMobile initializeWithClientIdsForEnvironments:
-//     @{[flyerConfigurator paypalEnvironment] : [flyerConfigurator paypalEnvironmentId]}];
-//    
-//    [PayPalMobile preconnectWithEnvironment:[flyerConfigurator paypalEnvironment]];
-//    
+    // Setup paypal
+    [PayPalMobile initializeWithClientIdsForEnvironments:
+     @{[flyerConfigurator paypalEnvironment] : [flyerConfigurator paypalEnvironmentId]}];
+    
+    [PayPalMobile preconnectWithEnvironment:[flyerConfigurator paypalEnvironment]];
+
     //[LobRequest initWithAPIKey:[flyerConfigurator lobAppId]];
     
     //-- Set Notification
