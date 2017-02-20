@@ -7,6 +7,7 @@
 //
 
 #import "InputViewController.h"
+#import "SHKActivityIndicator.h"
 
 @interface InputViewController (){
     
@@ -99,13 +100,13 @@
             [self showAlert:@"Please Enter Comments" message:@""];
         }else{
         
-//            // Current Item For Sharing
-//            SHKItem *item = [SHKItem text:[NSString stringWithFormat:@"%@ %@",txtfield.text, userName]];
-//            
-//            //Calling ShareKit for Sharing
-//            iosSharer = [[ SHKSharer alloc] init];
-//            iosSharer = [SHKTwitter shareItem:item];
-//            iosSharer.shareDelegate = self;
+            // Current Item For Sharing
+            SHKItem *item = [SHKItem text:[NSString stringWithFormat:@"%@ %@",txtfield.text, userName]];
+            
+            //Calling ShareKit for Sharing
+            iosSharer = [[ SHKSharer alloc] init];
+            iosSharer = [SHKTwitter shareItem:item];
+            iosSharer.shareDelegate = self;
         }
     }
 }
@@ -129,84 +130,84 @@
 
 #pragma mark - All Shared Response
 
-//// These are used if you do not provide your own custom UI and delegate
-//- (void)sharerStartedSending:(SHKSharer *)sharer
-//{
-//    
-//	if (!sharer.quiet)
-//		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(@"Saving to %@", [[sharer class] sharerTitle]) forSharer:sharer];
-//}
-//
-//- (void)sharerFinishedSending:(SHKSharer *)sharer
-//{
-//    
-//    NSString *msg;
-//   
-//    
-//    // Here we show Messege after Sending
-//    [self showAlert:[NSString stringWithFormat:@"Thank you. Your feedback has been sent to %@ on Twitter.", userName] message:@""];
-//
-//    if (!sharer.quiet)
-//		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!") forSharer:sharer];
-//}
-//
-//- (void)sharer:(SHKSharer *)sharer failedWithError:(NSError *)error shouldRelogin:(BOOL)shouldRelogin
-//{
-//    
-//    [[SHKActivityIndicator currentIndicator] hideForSharer:sharer];
-//	NSLog(@"Sharing Error");
-//}
-//
-//- (void)sharerCancelledSending:(SHKSharer *)sharer
-//{
-//    NSLog(@"Sending cancelled.");
-//}
-//
-//- (void)sharerShowBadCredentialsAlert:(SHKSharer *)sharer
-//{
-//    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ did not accept your credentials. Please try again.", [[sharer class] sharerTitle]);
-//    
-//    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
-//                                message:errorMessage
-//                               delegate:nil
-//                      cancelButtonTitle:SHKLocalizedString(@"Close")
-//                      otherButtonTitles:nil] show];
-//}
-//
-//- (void)sharerShowOtherAuthorizationErrorAlert:(SHKSharer *)sharer
-//{
-//    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ encountered an error. Please try again.", [[sharer class] sharerTitle]);
-//    
-//    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
-//                                message:errorMessage
-//                               delegate:nil
-//                      cancelButtonTitle:SHKLocalizedString(@"Close")
-//                      otherButtonTitles:nil] show];
-//}
-//
-//- (void)hideActivityIndicatorForSharer:(SHKSharer *)sharer {
-//    
-//    [[SHKActivityIndicator currentIndicator]  hideForSharer:sharer];
-//}
-//
-//- (void)displayActivity:(NSString *)activityDescription forSharer:(SHKSharer *)sharer {
-//    
-//    if (sharer.quiet) return;
-//    
-//    [[SHKActivityIndicator currentIndicator]  displayActivity:activityDescription forSharer:sharer];
-//}
-//
-//- (void)displayCompleted:(NSString *)completionText forSharer:(SHKSharer *)sharer {
-//    
-//    if (sharer.quiet) return;
-//    [[SHKActivityIndicator currentIndicator]  displayCompleted:completionText forSharer:sharer];
-//}
-//
-//- (void)showProgress:(CGFloat)progress forSharer:(SHKSharer *)sharer {
-//    
-//    if (sharer.quiet) return;
-//    [[SHKActivityIndicator currentIndicator]  showProgress:progress forSharer:sharer];
-//}
+// These are used if you do not provide your own custom UI and delegate
+- (void)sharerStartedSending:(SHKSharer *)sharer
+{
+    
+	if (!sharer.quiet)
+		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(@"Saving to %@", [[sharer class] sharerTitle]) forSharer:sharer];
+}
+
+- (void)sharerFinishedSending:(SHKSharer *)sharer
+{
+    
+    NSString *msg;
+   
+    
+    // Here we show Messege after Sending
+    [self showAlert:[NSString stringWithFormat:@"Thank you. Your feedback has been sent to %@ on Twitter.", userName] message:@""];
+
+    if (!sharer.quiet)
+		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!") forSharer:sharer];
+}
+
+- (void)sharer:(SHKSharer *)sharer failedWithError:(NSError *)error shouldRelogin:(BOOL)shouldRelogin
+{
+    
+    [[SHKActivityIndicator currentIndicator] hideForSharer:sharer];
+	NSLog(@"Sharing Error");
+}
+
+- (void)sharerCancelledSending:(SHKSharer *)sharer
+{
+    NSLog(@"Sending cancelled.");
+}
+
+- (void)sharerShowBadCredentialsAlert:(SHKSharer *)sharer
+{
+    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ did not accept your credentials. Please try again.", [[sharer class] sharerTitle]);
+    
+    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
+                                message:errorMessage
+                               delegate:nil
+                      cancelButtonTitle:SHKLocalizedString(@"Close")
+                      otherButtonTitles:nil] show];
+}
+
+- (void)sharerShowOtherAuthorizationErrorAlert:(SHKSharer *)sharer
+{
+    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ encountered an error. Please try again.", [[sharer class] sharerTitle]);
+    
+    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
+                                message:errorMessage
+                               delegate:nil
+                      cancelButtonTitle:SHKLocalizedString(@"Close")
+                      otherButtonTitles:nil] show];
+}
+
+- (void)hideActivityIndicatorForSharer:(SHKSharer *)sharer {
+    
+    [[SHKActivityIndicator currentIndicator]  hideForSharer:sharer];
+}
+
+- (void)displayActivity:(NSString *)activityDescription forSharer:(SHKSharer *)sharer {
+    
+    if (sharer.quiet) return;
+    
+    [[SHKActivityIndicator currentIndicator]  displayActivity:activityDescription forSharer:sharer];
+}
+
+- (void)displayCompleted:(NSString *)completionText forSharer:(SHKSharer *)sharer {
+    
+    if (sharer.quiet) return;
+    [[SHKActivityIndicator currentIndicator]  displayCompleted:completionText forSharer:sharer];
+}
+
+- (void)showProgress:(CGFloat)progress forSharer:(SHKSharer *)sharer {
+    
+    if (sharer.quiet) return;
+    [[SHKActivityIndicator currentIndicator]  showProgress:progress forSharer:sharer];
+}
 
 
 @end

@@ -10,13 +10,13 @@
 #import "Common.h"
 #import "FlyerlySingleton.h"
 #import "LaunchController.h"
-//#import <SHKTwitter.h>
+#import <SHKTwitter.h>
 
 @class FlyerlySingleton;
-@interface InputViewController : UIViewController {//<SHKSharerDelegate>{
+@interface InputViewController : UIViewController <SHKSharerDelegate>{
     
     FlyerlySingleton *globle ;    
-    //SHKSharer *iosSharer;
+    SHKSharer *iosSharer;
 
 }
 @property (weak, nonatomic) IBOutlet UILabel *lblTweetMsg;

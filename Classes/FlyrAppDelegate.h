@@ -17,7 +17,7 @@
 #import "LaunchController.h"
 #import "ShareViewController.h"
 #import "Flurry.h"
-//#import "SHKConfiguration.h"
+#import "SHKConfiguration.h"
 #import "FlyerlyConfigurator.h"
 #import "MainSettingViewController.h"
 #import "BitlyConfig.h"

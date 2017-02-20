@@ -6,9 +6,9 @@
 //
 //
 
-//#import "DefaultSHKConfigurator.h"
+#import "DefaultSHKConfigurator.h"
 
-@interface FlyerlyConfigurator: NSObject //: DefaultSHKConfigurator
+@interface FlyerlyConfigurator: DefaultSHKConfigurator
 
 
 - (NSString*)appName;
@@ -21,7 +21,7 @@
 - (NSArray*)defaultFavoriteTextSharers;
 - (NSArray*)defaultFavoriteFileSharers __attribute__((deprecated("use defaultFavoriteSharersForFile: instead")));
 - (NSArray*)defaultFavoriteSharersForMimeType:(NSString *)mimeType __attribute__((deprecated("use defaultFavoriteSharersForFile: instead")));
-//- (NSArray*)defaultFavoriteSharersForFile:(SHKFile *)file;
+- (NSArray*)defaultFavoriteSharersForFile:(SHKFile *)file;
 
 - (NSString*)crittercismAppId;
 - (NSString*)parseOnlineAppId;

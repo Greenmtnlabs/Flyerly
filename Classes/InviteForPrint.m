@@ -16,6 +16,9 @@
 #import "UIImagePDF.h"
 #import "UserVoice.h"
 #import "SendingPrintViewController.h"
+#import "SHKActivityIndicator.h"
+#import "ShareKit.h"
+#import "SHKTextMessage.h"
 
 
 @interface InviteForPrint ()
@@ -533,8 +536,8 @@
 - (void)sharerStartedSending:(SHKSharer *)sharer
 {
     
-//	if (!sharer.quiet)
-//		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(@"Saving to %@", [[sharer class] sharerTitle]) forSharer:sharer];
+	if (!sharer.quiet)
+		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(@"Saving to %@", [[sharer class] sharerTitle]) forSharer:sharer];
 }
 
 - (void)sharerFinishedSending:(SHKSharer *)sharer
@@ -544,7 +547,7 @@
     
     // Here we Check Sharer for
     // Update PARSE
-    //if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
+    if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
         
         // HERE WE GET AND SET SELECTED CONTACT LIST
         [iPhoneinvited  addObjectsFromArray:selectedIdentifiers];
@@ -552,80 +555,80 @@
         [self friendsInvited];
         
         
-    //}
+    }
     
     // HERE WE UPDATE PARSE ACCOUNT FOR REMEMBER INVITED FRIENDS LIST
-    //[user saveInBackground];
+    [user saveInBackground];
     
     [self showAlert:@"Invitation Sent!" message:[NSString stringWithFormat: @"You have successfully invited your friends to join %@.", APP_NAME]];
     [selectedIdentifiers   removeAllObjects];
     [self.uiTableView reloadData ];
     
     
-//    if (!sharer.quiet)
-//		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!") forSharer:sharer];
+    if (!sharer.quiet)
+		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!") forSharer:sharer];
 }
 
 - (void)sharer:(SHKSharer *)sharer failedWithError:(NSError *)error shouldRelogin:(BOOL)shouldRelogin
 {
     
-    //[[SHKActivityIndicator currentIndicator] hideForSharer:sharer];
+    [[SHKActivityIndicator currentIndicator] hideForSharer:sharer];
 	NSLog(@"Sharing Error");
 }
 
 - (void)sharerCancelledSending:(SHKSharer *)sharer
 {
     
-    //if ( [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
+    if ( [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
         [selectedIdentifiers   removeAllObjects];
-    //}
+    }
     [self.uiTableView reloadData ];
 }
 
 - (void)sharerShowBadCredentialsAlert:(SHKSharer *)sharer
 {
-//    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ did not accept your credentials. Please try again.", [[sharer class] sharerTitle]);
-//    
-//    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
-//                                message:errorMessage
-//                               delegate:nil
-//                      cancelButtonTitle:SHKLocalizedString(@"Close")
-//                      otherButtonTitles:nil] show];
+    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ did not accept your credentials. Please try again.", [[sharer class] sharerTitle]);
+    
+    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
+                                message:errorMessage
+                               delegate:nil
+                      cancelButtonTitle:SHKLocalizedString(@"Close")
+                      otherButtonTitles:nil] show];
 }
 
 - (void)sharerShowOtherAuthorizationErrorAlert:(SHKSharer *)sharer
 {
-//    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ encountered an error. Please try again.", [[sharer class] sharerTitle]);
-//    
-//    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
-//                                message:errorMessage
-//                               delegate:nil
-//                      cancelButtonTitle:SHKLocalizedString(@"Close")
-//                      otherButtonTitles:nil] show];
+    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ encountered an error. Please try again.", [[sharer class] sharerTitle]);
+    
+    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
+                                message:errorMessage
+                               delegate:nil
+                      cancelButtonTitle:SHKLocalizedString(@"Close")
+                      otherButtonTitles:nil] show];
 }
 
 - (void)hideActivityIndicatorForSharer:(SHKSharer *)sharer {
     
-    //[[SHKActivityIndicator currentIndicator]  hideForSharer:sharer];
+    [[SHKActivityIndicator currentIndicator]  hideForSharer:sharer];
 }
 
 - (void)displayActivity:(NSString *)activityDescription forSharer:(SHKSharer *)sharer {
     
-    //if (sharer.quiet) return;
+    if (sharer.quiet) return;
     
-    //[[SHKActivityIndicator currentIndicator]  displayActivity:activityDescription forSharer:sharer];
+    [[SHKActivityIndicator currentIndicator]  displayActivity:activityDescription forSharer:sharer];
 }
 
 - (void)displayCompleted:(NSString *)completionText forSharer:(SHKSharer *)sharer {
     
-//    if (sharer.quiet) return;
-//    [[SHKActivityIndicator currentIndicator]  displayCompleted:completionText forSharer:sharer];
+    if (sharer.quiet) return;
+    [[SHKActivityIndicator currentIndicator]  displayCompleted:completionText forSharer:sharer];
 }
 
 - (void)showProgress:(CGFloat)progress forSharer:(SHKSharer *)sharer {
     
-//    if (sharer.quiet) return;
-//    [[SHKActivityIndicator currentIndicator]  showProgress:progress forSharer:sharer];
+    if (sharer.quiet) return;
+    [[SHKActivityIndicator currentIndicator]  showProgress:progress forSharer:sharer];
 }
 
 #pragma mark Flurry Methods

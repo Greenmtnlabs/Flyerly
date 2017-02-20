@@ -187,9 +187,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     
     // Configurator initialization
     flyerConfigurator = [[FlyerlyConfigurator alloc] init];
-//    DefaultSHKConfigurator  *configurator = flyerConfigurator;
-//    
-//    [SHKConfiguration sharedInstanceWithConfigurator:configurator];
+    DefaultSHKConfigurator  *configurator = flyerConfigurator;
+    [SHKConfiguration sharedInstanceWithConfigurator:configurator];
 
     // Crittercism for crash reports.
     [Crittercism enableWithAppID:[flyerConfigurator crittercismAppId]];
