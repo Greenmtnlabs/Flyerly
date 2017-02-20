@@ -10,6 +10,7 @@
 #import "UserVoice.h"
 #import "IntroScreenViewController.h"
 #import "Common.h"
+#import "SHKActivityIndicator.h"
 
 @interface MainSettingViewController () {
     
@@ -625,12 +626,12 @@
         #else
             str = @"@flyerlybiz";
         #endif
-//        SHKItem *item = [SHKItem text:str];
-//        
-//            //Calling ShareKit for Sharing
-//            iosSharer = [[ SHKSharer alloc] init];
-//            iosSharer = [SHKTwitter shareItem:item];
-//            iosSharer.shareDelegate = self;
+        SHKItem *item = [SHKItem text:str];
+        
+            //Calling ShareKit for Sharing
+            iosSharer = [[ SHKSharer alloc] init];
+            iosSharer = [SHKTwitter shareItem:item];
+            iosSharer.shareDelegate = self;
         //}
     }
     
@@ -731,10 +732,10 @@
     
     if ([FlyerlySingleton connected]) {
         // Current Item For Sharing
-//        SHKItem *item = [[SHKItem alloc] init];
-//    
-//        iosSharer = [[ SHKSharer alloc] init];
-//        iosSharer = [FlyerlyTwitterLike shareItem:item];
+        SHKItem *item = [[SHKItem alloc] init];
+    
+        iosSharer = [[ SHKSharer alloc] init];
+        iosSharer = [FlyerlyTwitterLike shareItem:item];
     }else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         
@@ -818,86 +819,86 @@
 
 
 // These are used if you do not provide your own custom UI and delegate
-//- (void)sharerStartedSending:(SHKSharer *)sharer
-//{
-//    
-//	if (!sharer.quiet)
-//		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(@"Saving to %@", [[sharer class] sharerTitle]) forSharer:sharer];
-//}
-//
-//- (void)sharerFinishedSending:(SHKSharer *)sharer
-//{
-//    NSString *strAlert;
-//    
-//    #if defined(FLYERLY)
-//        strAlert =@"Thank you. Your feedback has been sent to @flyerlyapp on Twitter.";
-//    #else
-//        strAlert = @"Thank you. Your feedback has been sent to @flyerlybiz on Twitter.";
-//    #endif
-//    // Here we show Messege after Sending
-//    [self showAlert:strAlert message:@""];
-//    
-//    if (!sharer.quiet)
-//		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!") forSharer:sharer];
-//}
-//
-//- (void)sharer:(SHKSharer *)sharer failedWithError:(NSError *)error shouldRelogin:(BOOL)shouldRelogin
-//{
-//    
-//    [[SHKActivityIndicator currentIndicator] hideForSharer:sharer];
-//	NSLog(@"Sharing Error");
-//}
-//
-//- (void)sharerCancelledSending:(SHKSharer *)sharer
-//{
-//    NSLog(@"Sending cancelled.");
-//}
-//
-//- (void)sharerShowBadCredentialsAlert:(SHKSharer *)sharer
-//{
-//    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ did not accept your credentials. Please try again.", [[sharer class] sharerTitle]);
-//    
-//    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
-//                                message:errorMessage
-//                               delegate:nil
-//                      cancelButtonTitle:SHKLocalizedString(@"Close")
-//                      otherButtonTitles:nil] show];
-//}
-//
-//- (void)sharerShowOtherAuthorizationErrorAlert:(SHKSharer *)sharer
-//{
-//    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ encountered an error. Please try again.", [[sharer class] sharerTitle]);
-//    
-//    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
-//                                message:errorMessage
-//                               delegate:nil
-//                      cancelButtonTitle:SHKLocalizedString(@"Close")
-//                      otherButtonTitles:nil] show];
-//}
-//
-//- (void)hideActivityIndicatorForSharer:(SHKSharer *)sharer {
-//    
-//    [[SHKActivityIndicator currentIndicator]  hideForSharer:sharer];
-//}
-//
-//- (void)displayActivity:(NSString *)activityDescription forSharer:(SHKSharer *)sharer {
-//    
-//    if (sharer.quiet) return;
-//    
-//    [[SHKActivityIndicator currentIndicator]  displayActivity:activityDescription forSharer:sharer];
-//}
-//
-//- (void)displayCompleted:(NSString *)completionText forSharer:(SHKSharer *)sharer {
-//    
-//    if (sharer.quiet) return;
-//    [[SHKActivityIndicator currentIndicator]  displayCompleted:completionText forSharer:sharer];
-//}
-//
-//- (void)showProgress:(CGFloat)progress forSharer:(SHKSharer *)sharer {
-//    
-//    if (sharer.quiet) return;
-//    [[SHKActivityIndicator currentIndicator]  showProgress:progress forSharer:sharer];
-//}
+- (void)sharerStartedSending:(SHKSharer *)sharer
+{
+    
+	if (!sharer.quiet)
+		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(@"Saving to %@", [[sharer class] sharerTitle]) forSharer:sharer];
+}
+
+- (void)sharerFinishedSending:(SHKSharer *)sharer
+{
+    NSString *strAlert;
+    
+    #if defined(FLYERLY)
+        strAlert =@"Thank you. Your feedback has been sent to @flyerlyapp on Twitter.";
+    #else
+        strAlert = @"Thank you. Your feedback has been sent to @flyerlybiz on Twitter.";
+    #endif
+    // Here we show Messege after Sending
+    [self showAlert:strAlert message:@""];
+    
+    if (!sharer.quiet)
+		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!") forSharer:sharer];
+}
+
+- (void)sharer:(SHKSharer *)sharer failedWithError:(NSError *)error shouldRelogin:(BOOL)shouldRelogin
+{
+    
+    [[SHKActivityIndicator currentIndicator] hideForSharer:sharer];
+	NSLog(@"Sharing Error");
+}
+
+- (void)sharerCancelledSending:(SHKSharer *)sharer
+{
+    NSLog(@"Sending cancelled.");
+}
+
+- (void)sharerShowBadCredentialsAlert:(SHKSharer *)sharer
+{
+    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ did not accept your credentials. Please try again.", [[sharer class] sharerTitle]);
+    
+    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
+                                message:errorMessage
+                               delegate:nil
+                      cancelButtonTitle:SHKLocalizedString(@"Close")
+                      otherButtonTitles:nil] show];
+}
+
+- (void)sharerShowOtherAuthorizationErrorAlert:(SHKSharer *)sharer
+{
+    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ encountered an error. Please try again.", [[sharer class] sharerTitle]);
+    
+    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
+                                message:errorMessage
+                               delegate:nil
+                      cancelButtonTitle:SHKLocalizedString(@"Close")
+                      otherButtonTitles:nil] show];
+}
+
+- (void)hideActivityIndicatorForSharer:(SHKSharer *)sharer {
+    
+    [[SHKActivityIndicator currentIndicator]  hideForSharer:sharer];
+}
+
+- (void)displayActivity:(NSString *)activityDescription forSharer:(SHKSharer *)sharer {
+    
+    if (sharer.quiet) return;
+    
+    [[SHKActivityIndicator currentIndicator]  displayActivity:activityDescription forSharer:sharer];
+}
+
+- (void)displayCompleted:(NSString *)completionText forSharer:(SHKSharer *)sharer {
+    
+    if (sharer.quiet) return;
+    [[SHKActivityIndicator currentIndicator]  displayCompleted:completionText forSharer:sharer];
+}
+
+- (void)showProgress:(CGFloat)progress forSharer:(SHKSharer *)sharer {
+    
+    if (sharer.quiet) return;
+    [[SHKActivityIndicator currentIndicator]  showProgress:progress forSharer:sharer];
+}
 
 #pragma Ads
 -(void) loadInterstitialAdd{

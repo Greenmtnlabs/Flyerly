@@ -18,7 +18,7 @@
 #import "FlyerlySingleton.h"
 #import "MainSettingCell.h"
 #import "UserPurchases.h"
-//#import <ShareKit.h>
+#import <ShareKit.h>
 #import "FlyerlyTwitterLike.h"
 #import "RMStoreKeychainPersistence.h"
 #import "PrivicyPolicyViewController.h"
@@ -27,7 +27,7 @@
 
 @class InputViewController,FlyerlySingleton ;
 @class LaunchController,HelpController,ProfileViewController,TermsOfServiceViewController,PrivicyPolicyViewController,InAppViewController;
-@interface MainSettingViewController : UIViewController <UITableViewDelegate, MFMailComposeViewControllerDelegate,InAppPurchasePanelButtonProtocol,UserPurchasesDelegate, GADInterstitialDelegate, GADBannerViewDelegate>{ //SHKSharerDelegate,
+@interface MainSettingViewController : UIViewController <UITableViewDelegate, MFMailComposeViewControllerDelegate,InAppPurchasePanelButtonProtocol,UserPurchasesDelegate, GADInterstitialDelegate, GADBannerViewDelegate, SHKSharerDelegate>{
 
     NSMutableArray *category;
     NSMutableArray *groupCtg;

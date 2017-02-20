@@ -160,7 +160,7 @@ static UserPurchases *sharedSingleton = nil;
             [delegate userPurchasesLoaded];
         }
         
-    } if(YES){ //else if ([[PFUser currentUser] sessionToken].length != 0) {
+    } else if ([[PFUser currentUser] sessionToken].length != 0) {
         
         //Getting Current User
         PFUser *user = [PFUser currentUser];
