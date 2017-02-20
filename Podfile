@@ -18,7 +18,11 @@ platform :ios, '9.3'
 
     # Open SSL
     pod 'OpenSSL', '~> 1.0'
+    pod 'SAMKeychain', '~> 1.5'
 
+    pod 'GooglePlusUtilities'
+
+    pod 'SDWebImage', '~> 4.0'
 
     pod 'ParseFacebookUtilsV4'
     pod 'ParseTwitterUtils'

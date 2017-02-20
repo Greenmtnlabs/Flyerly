@@ -6,11 +6,11 @@
 //
 //
 
-//#import "SHKTwitter.h"
+#import "SHKTwitter.h"
 #import <Twitter/Twitter.h>
-//#import "ShareKit.h"
+#import "ShareKit.h"
 
-@interface FlyerlyTwitterFriends { //SHKTwitter {
+@interface FlyerlyTwitterFriends : SHKTwitter {
 
     NSDecimalNumber  *nextCursor;
 }
