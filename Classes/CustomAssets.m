@@ -28,7 +28,7 @@
         videoIcon.alpha = 1;
         
         UserPurchases *userPurchases_ = [UserPurchases getInstance];
-        //if ([[PFUser currentUser] sessionToken].length != 0) {
+        if ([[PFUser currentUser] sessionToken].length != 0) {
             
             if ( [userPurchases_ canCreateVideoFlyer] ) {
                 
@@ -36,7 +36,7 @@
                 videoIcon.image = image;
             }
             
-        //}
+        }
     }else {
         videoIcon.alpha = 0;
     }
