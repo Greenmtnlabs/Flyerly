@@ -11673,9 +11673,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.socialflyr.paid;
 				PRODUCT_NAME = Flyr;
-				PROVISIONING_PROFILE = "97bf5434-078b-4eb6-b558-2cb64dd5662d";
+				PROVISIONING_PROFILE = "de33eb4a-a716-486a-a973-981b110c9201";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "97bf5434-078b-4eb6-b558-2cb64dd5662d";
-				PROVISIONING_PROFILE_SPECIFIER = "Flyrerly App Store";
+				PROVISIONING_PROFILE_SPECIFIER = "Flyrerly AdHoc Distribution";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/** $(PROJECT_DIR)/Submodules/";
 				VALID_ARCHS = "armv7 armv7s arm64 x86_64";
