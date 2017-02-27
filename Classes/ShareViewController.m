@@ -698,7 +698,9 @@ UIAlertView *saveCurrentFlyerAlert;
          if (result == SLComposeViewControllerResultCancelled) {
              NSLog(@"Cancelled");
          } else if (result == SLComposeViewControllerResultDone) {
-             NSLog(@"Shared");
+             [self.flyer setTwitterStatus:1];
+             [Flurry logEvent:@"Shared Twitter"];
+             [self actionAfterSharing];
          }
      }];
     [self presentViewController:controller animated:YES completion:Nil];
