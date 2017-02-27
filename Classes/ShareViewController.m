@@ -18,6 +18,7 @@
     NSString *fbShareType; // 4 possible values to assign: fb-photo-wall | fb-photo-messenger | fb-video-wall | fb-video-messenger
     FlyerlyConfigurator *flyerConfigurator;
     NSString *hashTag;
+    BOOL shareOnEmail;
 }
 //@synthesize youtubeService;
 @synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,saveButton,printFlyerButton,facebookButton,twitterButton,instagramButton,messengerButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,activityIndicator,youTubeButton,tempTxtArea,saveToGallaryReqBeforeSharing, fmController, delegate;
@@ -767,27 +768,37 @@ UIAlertView *saveCurrentFlyerAlert;
  * Called when email button is pressed
  */
 -(IBAction)onClickEmailButton{
+    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
     
-    // Current Item For Sharing
-    SHKItem *item;
-    if ([self.flyer isVideoFlyer]) {
-        
-        // Current Video Link For Sharing
-        item = [SHKItem text: [NSString stringWithFormat:@"%@ Created & sent from Flyer.ly",[self.flyer getYoutubeLink]]];
-        
-        item = [SHKItem URL:[NSURL URLWithString:[self.flyer getYoutubeLink]] title:[NSString stringWithFormat:@"%@ for you!", flyerConfigurator.appName ] contentType:SHKURLContentTypeVideo];
-    }else {
-        
-        item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ for you!", flyerConfigurator.appName ]];
-        item.text = @"Created & sent from Flyer.ly";
+    if([MFMailComposeViewController canSendMail]){
+        NSString *bodyText = @"";
+        NSString *title = [NSString stringWithFormat:@"%@ for you!", flyerConfigurator.appName];
+        // Current Item For Sharing
+        SHKItem *item;
+        if ([self.flyer isVideoFlyer]) {
+            // Current Video Link For Sharing
+            item = [SHKItem text: [NSString stringWithFormat:@"%@ Created & sent from Flyer.ly",[self.flyer getYoutubeLink]]];
+            item = [SHKItem URL:[NSURL URLWithString:[self.flyer getYoutubeLink]] title:[NSString stringWithFormat:@"%@ for you!", flyerConfigurator.appName ] contentType:SHKURLContentTypeVideo];
+
+            bodyText = [NSString stringWithFormat:@"%@ Created & sent from Flyer.ly",[self.flyer getYoutubeLink]];
+
+        }else {
+            item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ for you!", flyerConfigurator.appName ]];
+            item.text = @"Created & sent from Flyer.ly";
+            bodyText = @"Created & sent from Flyer.ly";
+        }
+
+        picker.mailComposeDelegate = self;
+        [picker setSubject:title];
+
+        NSData *imageData = UIImagePNGRepresentation(selectedFlyerImage);
+        [picker addAttachmentData:imageData mimeType:@"image/png" fileName:@"MyImageName"];
+        [picker setSubject:title];
+        [picker setMessageBody:bodyText isHTML:NO];
+
+        shareOnEmail = YES;
+        [self.view.window.rootViewController presentViewController:picker animated:YES completion:nil];
     }
-    
-    //Calling ShareKit for Sharing
-    iosSharer = [[ SHKSharer alloc] init];
-    iosSharer = [SHKMail shareItem:item];
-    iosSharer.shareDelegate = self;
-    
-    iosSharer = nil;
     
 }
 
@@ -818,7 +829,6 @@ UIAlertView *saveCurrentFlyerAlert;
         [Flurry logEvent:@"Shared SMS"];
         [self actionAfterSharing];
     }
-    
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -1308,16 +1318,13 @@ UIAlertView *saveCurrentFlyerAlert;
 }
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
-	switch (result) {
-		case MFMailComposeResultCancelled:
-			break;
-		case MFMailComposeResultSaved:
-			break;
-		case MFMailComposeResultSent:
-			break;
-		case MFMailComposeResultFailed:
-			break;
-	}
+    if(shareOnEmail && result == MessageComposeResultSent){
+        smsButton.enabled = YES;
+        [self.flyer setEmailStatus:1];
+        [Flurry logEvent:@"Shared Email"];
+        [self actionAfterSharing];
+    }
+    shareOnEmail = NO;
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
 /*
