@@ -12,9 +12,7 @@
 #import "VideoData.h"
 #import "Utils.h"
 #import "FlyerlyConfigurator.h"
-
 #import <Social/Social.h>
-#import <MobileCoreServices/MobileCoreServices.h>
 
 @implementation ShareViewController{
     NSString *fbShareType; // 4 possible values to assign: fb-photo-wall | fb-photo-messenger | fb-video-wall | fb-video-messenger
@@ -800,24 +798,28 @@ UIAlertView *saveCurrentFlyerAlert;
     
     if([MFMessageComposeViewController canSendAttachments])
     {
-        
+        MFMessageComposeViewController* messageComposer = [MFMessageComposeViewController new];
+        messageComposer.messageComposeDelegate = self;
         if ([self.flyer isVideoFlyer]) {
-            
-            // Current Video Link For Sharing
-            SHKItem *item = [SHKItem text: [NSString stringWithFormat:@"%@ Created & sent from Flyer.ly",[self.flyer getYoutubeLink] ]];
-            
-            iosSharer = [SHKTextMessage shareItem:item];
-            iosSharer.shareDelegate = self;
-        }else {
-
+            [messageComposer setBody:[NSString stringWithFormat:@"%@ Created & sent from Flyer.ly",[self.flyer getYoutubeLink] ]];
+        } else {
+            [messageComposer setBody:@"Created & sent from Flyer.ly"];
             NSData *exportData = UIImageJPEGRepresentation(selectedFlyerImage ,1.0);
-            
-            iosSharer = [[ SHKSharer alloc] init];
-            iosSharer = [SHKTextMessage shareFileData:exportData filename:imageFileName title:@"Created & sent from Flyer.ly"];
-            iosSharer.shareDelegate = self;
-            
+            [messageComposer addAttachmentData:exportData typeIdentifier:@"image/png" filename:imageFileName];
         }
+        [self.view.window.rootViewController presentViewController:messageComposer animated:YES completion:nil];
     }
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
+    if(result == MessageComposeResultSent){
+        smsButton.enabled = YES;
+        [self.flyer setSmsStatus:1];
+        [Flurry logEvent:@"Shared SMS"];
+        [self actionAfterSharing];
+    }
+    
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 

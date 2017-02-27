@@ -36,12 +36,14 @@
 
 #import "CreateFlyerController.h"
 #import "FlyerlyMainScreen.h"
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
 @class FlyrViewController,FlyerlySingleton, CreateFlyerController, FlyerlyMainScreen;
 @class SHKSharer;
 @class SHKActivityIndicator;
 
-@interface ShareViewController : UIViewController<FBSDKSharingDelegate, UIWebViewDelegate,UIDocumentInteractionControllerDelegate,UITextViewDelegate,UITextFieldDelegate, MFMailComposeViewControllerDelegate,YouTubeUploadVideoDelegate, UITextFieldDelegate, SHKSharerDelegate> {
+@interface ShareViewController : UIViewController<FBSDKSharingDelegate, UIWebViewDelegate,UIDocumentInteractionControllerDelegate,UITextViewDelegate,UITextFieldDelegate, MFMailComposeViewControllerDelegate,YouTubeUploadVideoDelegate, UITextFieldDelegate, SHKSharerDelegate, MFMessageComposeViewControllerDelegate> {
 
     FlyerlySingleton *globle;
     NSArray *arrayOfAccounts;
