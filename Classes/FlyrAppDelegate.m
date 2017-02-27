@@ -337,7 +337,12 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound];
 
 	[window makeKeyAndVisible];
-    
+
+    [Parse setLogLevel:PFLogLevelDebug];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveWillSendURLRequestNotification:) name:PFNetworkWillSendURLRequestNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveDidReceiveURLResponseNotification:) name:PFNetworkDidReceiveURLResponseNotification object:nil];
+
     //return YES;
     return [ [FBSDKApplicationDelegate sharedInstance] application :application
                                       didFinishLaunchingWithOptions:launchOptions];
@@ -551,7 +556,23 @@ if it exist then we call Merging Process
     
 }
 
+- (void)receiveWillSendURLRequestNotification:(NSNotification *) notification {
+    NSURLRequest *request = notification.userInfo[PFNetworkNotificationURLRequestUserInfoKey];
+    NSLog(@"URL : %@", request.URL.absoluteString);
+    NSLog(@"Method : %@", request.HTTPMethod);
+    NSLog(@"Headers : %@", request.allHTTPHeaderFields);
+    NSLog(@"Request Body : %@", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
+}
 
+- (void)receiveDidReceiveURLResponseNotification:(NSNotification *) notification {
+    NSURLRequest *request = notification.userInfo[PFNetworkNotificationURLRequestUserInfoKey];
+    NSHTTPURLResponse *response = notification.userInfo[PFNetworkNotificationURLResponseUserInfoKey];
+    NSString *responseBody = notification.userInfo[PFNetworkNotificationURLResponseBodyUserInfoKey];
+    NSLog(@"URL : %@", response.URL.absoluteString);
+    NSLog(@"Status Code : %ld", (long)response.statusCode);
+    NSLog(@"Headers : %@", response.allHeaderFields);
+    NSLog(@"Response Body : %@", responseBody);
+}
 
 @end
 
