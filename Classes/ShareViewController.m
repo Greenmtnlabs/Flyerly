@@ -13,6 +13,9 @@
 #import "Utils.h"
 #import "FlyerlyConfigurator.h"
 
+#import <Social/Social.h>
+#import <MobileCoreServices/MobileCoreServices.h>
+
 @implementation ShareViewController{
     NSString *fbShareType; // 4 possible values to assign: fb-photo-wall | fb-photo-messenger | fb-video-wall | fb-video-messenger
     FlyerlyConfigurator *flyerConfigurator;
@@ -639,20 +642,16 @@ UIAlertView *saveCurrentFlyerAlert;
     
     // update description on onClick Twitter Sharing Button
     [self updateDescription];
-    
-    // Declare Item to be share
-    SHKItem *item;
-    
+    NSString *sharingText = @"";
     //check whether item is video or just an image
     if ([self.flyer isVideoFlyer]) {
-        
+
         // Current Video Link For Sharing
-        item = [SHKItem text: [NSString stringWithFormat:@"%@ %@ %@",[self.flyer getYoutubeLink], selectedFlyerDescription, hashTag ]];
-        
+        sharingText = [NSString stringWithFormat:@"%@ %@ %@",[self.flyer getYoutubeLink], selectedFlyerDescription, hashTag];
+
     }else {
-        
         // Current Image For Sharing
-        item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@", selectedFlyerDescription, hashTag ]];
+        sharingText = [NSString stringWithFormat:@"%@ %@", selectedFlyerDescription, hashTag];
     }
 
     // get the twitter accounts from the phone
@@ -670,36 +669,40 @@ UIAlertView *saveCurrentFlyerAlert;
                if ([availableAccounts count] > 0) {
                    
                    dispatch_async(dispatch_get_main_queue(), ^{
-                       //Calling ShareKit for Sharing via SHKiOSTwitter
-                       iosSharer = [SHKiOSTwitter shareItem:item];
-                       // after sharing we have to call sharing delegates
-                       iosSharer.shareDelegate = self;
-                       [iosSharer share];
+                       [self shareOnTwitter:sharingText shareType:SLServiceTypeTwitter];
                    });
-                   
                    
                } else {
                    
                    dispatch_async(dispatch_get_main_queue(), ^{
-                       //Calling ShareKit for Sharing via SHKTWitter
-                       iosSharer = [SHKTwitter shareItem:item];
-                       // after sharing we have to call sharing delegates
-                       iosSharer.shareDelegate = self;
-                       [iosSharer share];
+                       [self shareOnTwitter:sharingText shareType:SLServiceTypeTwitter];
                    });
-                   
                }
                
            } else {
-               
-               //Calling ShareKit for Sharing via SHKTWitter
-               iosSharer = [SHKTwitter shareItem:item];
-               // after sharing we have to call sharing delegates
-               iosSharer.shareDelegate = self;
-               [iosSharer share];
+               [self shareOnTwitter:sharingText shareType:SLServiceTypeTwitter];
            }
     }];
 
+}
+
+// share on twitter
+-(void)shareOnTwitter:(NSString *)sharingText shareType:(NSString *)shareType{
+    SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:shareType];
+    [controller setInitialText:sharingText];
+    if ([self.flyer isVideoFlyer] == NO) {
+        [controller addImage:selectedFlyerImage];
+    }
+    [controller setCompletionHandler:^(SLComposeViewControllerResult result)
+     {
+         if (result == SLComposeViewControllerResultCancelled) {
+             NSLog(@"Cancelled");
+         } else if (result == SLComposeViewControllerResultDone) {
+             NSLog(@"Shared");
+         }
+     }];
+    [self presentViewController:controller animated:YES completion:Nil];
+    
 }
 
 
