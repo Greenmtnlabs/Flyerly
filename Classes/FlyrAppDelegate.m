@@ -338,8 +338,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 	[window makeKeyAndVisible];
 
+    // parse twitter was not working, these debugers will help in finding issue
     [Parse setLogLevel:PFLogLevelDebug];
-
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveWillSendURLRequestNotification:) name:PFNetworkWillSendURLRequestNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveDidReceiveURLResponseNotification:) name:PFNetworkDidReceiveURLResponseNotification object:nil];
 
@@ -555,7 +555,7 @@ if it exist then we call Merging Process
     }
     
 }
-
+// parse twitter was not working, these debugers will help in finding issue
 - (void)receiveWillSendURLRequestNotification:(NSNotification *) notification {
     NSURLRequest *request = notification.userInfo[PFNetworkNotificationURLRequestUserInfoKey];
     NSLog(@"URL : %@", request.URL.absoluteString);
@@ -564,6 +564,7 @@ if it exist then we call Merging Process
     NSLog(@"Request Body : %@", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
 }
 
+// parse twitter was not working, these debugers will help in finding issue
 - (void)receiveDidReceiveURLResponseNotification:(NSNotification *) notification {
     NSURLRequest *request = notification.userInfo[PFNetworkNotificationURLRequestUserInfoKey];
     NSHTTPURLResponse *response = notification.userInfo[PFNetworkNotificationURLResponseUserInfoKey];
