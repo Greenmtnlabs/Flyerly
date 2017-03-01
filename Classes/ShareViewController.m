@@ -1312,9 +1312,9 @@ UIAlertView *saveCurrentFlyerAlert;
         #endif
 
         [picker setToRecipients:toRecipients];
-      
+        [self.view.window.rootViewController presentViewController:picker animated:YES completion:nil];
     }
-      [self.view.window.rootViewController presentViewController:picker animated:YES completion:nil];
+    
 }
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {

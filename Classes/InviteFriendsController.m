@@ -376,8 +376,7 @@ const int CONTACTS_TAB = 0;
 }
 
 -(IBAction)invite{
-    
-    SHKItem *item;
+
     NSMutableArray *identifiers = [[NSMutableArray alloc] init];
     identifiers = selectedIdentifiers;
     
@@ -387,49 +386,32 @@ const int CONTACTS_TAB = 0;
         
         // Send invitations
         if(selectedTab == 0){ // for SMS
-            globle.accounts = [[NSMutableArray alloc] initWithArray:selectedIdentifiers];
-
-            item = [SHKItem text:sharingText];
-            item.textMessageToRecipients = selectedIdentifiers;
-            
-            iosSharer = [[ SHKSharer alloc] init];
-            iosSharer = [SHKTextMessage shareItem:item];
-            iosSharer.shareDelegate = self;
+            if([MFMessageComposeViewController canSendText])
+            {
+                MFMessageComposeViewController* messageComposer = [MFMessageComposeViewController new];
+                messageComposer.messageComposeDelegate = self;
+                [messageComposer setBody:sharingText];
+                [messageComposer setRecipients:selectedIdentifiers];
+                [self.view.window.rootViewController presentViewController:messageComposer animated:YES completion:nil];
+            }
    
         }else if(selectedTab == 1){ // for Facebook
             
-//            item = [SHKItem text:sharingText];
-//            
-//            NSArray *shareFormFields = [SHKFacebookCommon shareFormFieldsForItem:item];
-//            SHKFormController *rootView = [[SHKCONFIG(SHKFormControllerSubclass) alloc] initWithStyle:UITableViewStyleGrouped
-//                                                                                                title:nil
-//                                                                                     rightButtonTitle:SHKLocalizedString(@"Send to Facebook")
-//                                           ];
-//            
-//            [rootView addSection:shareFormFields header:nil footer:item.URL!=nil?item.URL.absoluteString:nil];
-//            
-//            rootView.validateBlock = ^(SHKFormController *form) {
-//                
-//                // default does no checking and proceeds to share
-//                [form saveForm];
-//                
-//            };
-//        
-//            rootView.saveBlock = ^(SHKFormController *form) {
-//                [self updateItemWithForm:form];
-//            };
-//            
-//            rootView.cancelBlock = ^(SHKFormController *form) {
-//            };
-//            
-//            [[SHK currentHelper] showViewController:rootView];
         } else if (selectedTab == 3) { // for Email
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",flyerConfigurator.referralURL, userUniqueObjectId]];
-            item = [SHKItem URL:url title:@"Invite Friends" contentType:SHKURLContentTypeUndefined];
-            [item setMailToRecipients:identifiers];
-            item.text = [NSString stringWithFormat:@"I'm using the %@ app to create and share flyers on the go! Want to give it a try?", APP_NAME];
-            // Share the item with my custom class
-            [SHKMail shareItem:item];
+            MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+            
+            if([MFMailComposeViewController canSendMail]){
+                
+                picker.mailComposeDelegate = self;
+                [picker setSubject:[NSString stringWithFormat:@"Invite Friends"]];
+                NSString *body = [NSString stringWithFormat:@"I'm using the %@ app to create and share flyers on the go! Want to give it a try? \n \n %@%@", APP_NAME,flyerConfigurator.referralURL, userUniqueObjectId];
+                [picker setMessageBody:body isHTML:NO];
+                
+                // Set up recipients
+                [picker setToRecipients:identifiers];
+                [self.view.window.rootViewController presentViewController:picker animated:YES completion:nil];
+            }
+            
         }
     } else {
         [self showAlert:@"Please select any contact to invite !" message:@""];
@@ -438,7 +420,16 @@ const int CONTACTS_TAB = 0;
     [Flurry logEvent:@"Friends Invited"];
 }
 
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
+    if(result == MessageComposeResultSent){
+        
+    }
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
 
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
 
 #pragma mark  Device Contact List
 
