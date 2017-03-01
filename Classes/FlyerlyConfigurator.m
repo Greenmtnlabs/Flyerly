@@ -36,7 +36,7 @@
 - (NSString*)referralURL{
     
     #if defined(FLYERLY) // Flyerly
-        return @"http://app.flyerly.com/cs?i=";
+        return @"http://54.86.179.252/cs?i=";
     #else // Flyerly Biz
         return @"http://biz.flyerly.com/cs?i=";
     #endif
@@ -45,7 +45,7 @@
 - (NSString*)appLinkURL{
     
     #if defined(FLYERLY) // Flyerly
-        return @"http://app.flyerly.com/cs";
+        return @"http://54.86.179.252/cs";
     #else // Flyerly Biz
         return @"http://flyerly.com/biz/";
     #endif
