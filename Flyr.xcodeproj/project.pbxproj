@@ -11331,8 +11331,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.socialflyr.paid;
 				PRODUCT_NAME = Flyr;
-				PROVISIONING_PROFILE = "de33eb4a-a716-486a-a973-981b110c9201";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "de33eb4a-a716-486a-a973-981b110c9201";
+				PROVISIONING_PROFILE = "8dcd3e0b-7e81-4d3a-bc14-922f9e18419e";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8dcd3e0b-7e81-4d3a-bc14-922f9e18419e";
 				PROVISIONING_PROFILE_SPECIFIER = "Flyrerly AdHoc Distribution";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/** $(PROJECT_DIR)/Submodules/";
@@ -11605,7 +11605,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.socialflyr.paid;
 				PRODUCT_NAME = Flyr;
-				PROVISIONING_PROFILE = "65a6eb30-5ef3-4c37-a6e8-2d6c37ccc5bc";
+				PROVISIONING_PROFILE = "955f651f-804c-4e0b-9215-e5e493450578";
 				PROVISIONING_PROFILE_SPECIFIER = "Flyerly Development";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/** $(PROJECT_DIR)/Submodules/";
@@ -11673,8 +11673,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.socialflyr.paid;
 				PRODUCT_NAME = Flyr;
-				PROVISIONING_PROFILE = "de33eb4a-a716-486a-a973-981b110c9201";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "97bf5434-078b-4eb6-b558-2cb64dd5662d";
+				PROVISIONING_PROFILE = "ff0b3c3b-872b-4df9-a245-dfaf517a48ff";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ff0b3c3b-872b-4df9-a245-dfaf517a48ff";
 				PROVISIONING_PROFILE_SPECIFIER = "Flyrerly AdHoc Distribution";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/** $(PROJECT_DIR)/Submodules/";
