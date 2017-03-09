@@ -5036,6 +5036,7 @@
 		C3F98D921BA065D000CBADCC /* MainFlyerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainFlyerCell.m; sourceTree = "<group>"; };
 		C3F98D931BA065D000CBADCC /* MainFlyerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainFlyerCell.xib; sourceTree = "<group>"; };
 		C77A56F0853B5D206189BCC3 /* Pods-Flyr.ad hoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flyr.ad hoc.xcconfig"; path = "Pods/Target Support Files/Pods-Flyr/Pods-Flyr.ad hoc.xcconfig"; sourceTree = "<group>"; };
+		DB895EDD1E715001000370C2 /* Flyr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Flyr.entitlements; path = Flyr/Flyr.entitlements; sourceTree = "<group>"; };
 		E28A4E3CDB90C26C1A175BFE /* Pods-FlyerlyBiz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlyerlyBiz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlyerlyBiz/Pods-FlyerlyBiz.debug.xcconfig"; sourceTree = "<group>"; };
 		E8A7347A1092CFF300661AAD /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		E8A7347B1092CFF300661AAD /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
@@ -7242,6 +7243,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				DB895EDD1E715001000370C2 /* Flyr.entitlements */,
 				103FB48F1C75F2CB0072CEFC /* ios-files */,
 				C30043241AB6ED9300866385 /* lob-ios.xcodeproj */,
 				20B996D2180450CC007B616D /* iTunesArtwork */,
@@ -7916,6 +7918,11 @@
 					};
 					1D6058900D05DD3D006BFB54 = {
 						DevelopmentTeam = 4MGKP9P5WH;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -11263,8 +11270,8 @@
 					"-all_load",
 				);
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "de33eb4a-a716-486a-a973-981b110c9201";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "de33eb4a-a716-486a-a973-981b110c9201";
+				PROVISIONING_PROFILE = "8dcd3e0b-7e81-4d3a-bc14-922f9e18419e";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8dcd3e0b-7e81-4d3a-bc14-922f9e18419e";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s arm64 x86_64";
 			};
@@ -11281,7 +11288,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = NO;
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = Flyr/Flyr.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				COPY_PHASE_STRIP = YES;
@@ -11551,7 +11558,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = NO;
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = Flyr/Flyr.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
 				COPY_PHASE_STRIP = NO;
@@ -11624,6 +11631,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = Flyr/Flyr.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				COPY_PHASE_STRIP = YES;
@@ -11720,8 +11728,8 @@
 					"-all_load",
 				);
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "65a6eb30-5ef3-4c37-a6e8-2d6c37ccc5bc";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "65a6eb30-5ef3-4c37-a6e8-2d6c37ccc5bc";
+				PROVISIONING_PROFILE = "955f651f-804c-4e0b-9215-e5e493450578";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "955f651f-804c-4e0b-9215-e5e493450578";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s arm64 x86_64";
 			};
@@ -11764,8 +11772,8 @@
 					"-all_load",
 				);
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "97bf5434-078b-4eb6-b558-2cb64dd5662d";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "97bf5434-078b-4eb6-b558-2cb64dd5662d";
+				PROVISIONING_PROFILE = "ff0b3c3b-872b-4df9-a245-dfaf517a48ff";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ff0b3c3b-872b-4df9-a245-dfaf517a48ff";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s arm64 x86_64";
 			};

@@ -48,7 +48,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>FacebookAppID</key>
 	<string>136691489852349</string>
 	<key>FacebookDisplayName</key>
@@ -66,17 +66,33 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>yourserver.com</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSTemporaryExceptionMinimumTLSVersion</key>
+				<string>TLSv1.1</string>
+			</dict>
+		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>This app requires access to the camera.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>This app requires contacts access to function properly.</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app requires access to the photo library.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Need microphone access for uploading videos</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app requires access to the photo library.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Advertisement would like to create a calendar event.</string>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>HelveticaRoundedLTStd-BdCn_0.otf</string>
@@ -186,27 +202,5 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>NSContactsUsageDescription</key>
-    <string>This app requires contacts access to function properly.</string>
-
-    <key>NSAppTransportSecurity</key>
-<dict>
-  <key>NSExceptionDomains</key>
-  <dict>
-    <key>yourserver.com</key>
-    <dict>
-      <!--Include to allow subdomains-->
-      <key>NSIncludesSubdomains</key>
-      <true/>
-      <!--Include to allow HTTP requests-->
-      <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-      <true/>
-      <!--Include to specify minimum TLS version-->
-      <key>NSTemporaryExceptionMinimumTLSVersion</key>
-      <string>TLSv1.1</string>
-    </dict>
-  </dict>
-</dict>
-
 </dict>
 </plist>
