@@ -284,6 +284,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
 
             NSURL *URL = purchaseImageUrl;
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+            manager.responseSerializer = [AFImageResponseSerializer serializer];
             [manager GET:URL.absoluteString parameters: nil success:^(NSURLSessionDataTask *task, id responseObject) {
                 UIImage *thumbnail = (UIImage *) responseObject;
                 NSData* data = UIImagePNGRepresentation(thumbnail);
