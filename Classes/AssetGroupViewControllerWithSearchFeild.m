@@ -375,7 +375,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
     //This line pop up login screen if user not exist
     [[RMStore defaultStore] addStoreObserver:self];
     
-    NSString* productIdentifier= @"com.flyerly.SelectedSymbol";
+    NSString* productIdentifier= PRODUCT_ICON_SELETED;
     
     //Purchasing the product on the basis of product identifier
     [self purchaseProductID:productIdentifier];
@@ -409,7 +409,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
         cancelRequest = NO;
         
         //These are over Products on App Store
-        NSSet *productIdentifiers = [NSSet setWithArray:@[BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION, BUNDLE_IDENTIFIER_ALL_DESIGN, BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION, BUNDLE_IDENTIFIER_UNLOCK_VIDEO,  BUNDLE_IDENTIFIER_AD_REMOVAL]];
+        NSSet *productIdentifiers = [NSSet setWithArray:@[BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION, BUNDLE_IDENTIFIER_ALL_DESIGN, BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION, BUNDLE_IDENTIFIER_UNLOCK_VIDEO,  BUNDLE_IDENTIFIER_AD_REMOVAL, PRODUCT_ICON_SELETED]];
         
         [[RMStore defaultStore] requestProducts:productIdentifiers success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
             
