@@ -51,6 +51,8 @@ static NBUImageLoader * _sharedLoader;
         NSURL *URL = [NSURL URLWithString: imageUrlString];
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
         //manager.responseSerializer = [AFHTTPResponseSerializer responseSerializer];
+        manager.responseSerializer = [AFImageResponseSerializer serializer]; // you only have to do this once
+
         [manager GET: URL.absoluteString parameters: nil success:^(NSURLSessionDataTask *task, id responseObject) {
             resultBlock(responseObject,nil);
             NSLog(@"JSON: %@", responseObject);
