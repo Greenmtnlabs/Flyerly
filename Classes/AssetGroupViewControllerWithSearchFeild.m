@@ -145,7 +145,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
 - (void) apiRequestWithSearchingKeyWord: (NSString *)keyword {
 
     //string for the URL request
-    NSString *myUrlString = [NSString stringWithFormat:@"http://api.bigstockphoto.com/2/%@/search/?q=%@/&response_detail=all", [flyerConfigurator bigstockAccountId], keyword];
+    NSString *myUrlString = [NSString stringWithFormat:@"https://api.bigstockphoto.com/2/%@/search/?q=%@/&response_detail=all", [flyerConfigurator bigstockAccountId], keyword];
     
     //create a NSURL object from the string data
     NSURL *myUrl = [NSURL URLWithString:myUrlString];

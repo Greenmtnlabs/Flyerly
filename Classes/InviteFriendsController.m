@@ -60,6 +60,8 @@ const int CONTACTS_TAB = 0;
     bannerAdClosed = NO;
     bannerShowed = NO;
     
+    [twitterButton setEnabled:NO]; // TODO: remove this line after twitter fix
+    
     UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
     [UserVoice initialize:config];
     

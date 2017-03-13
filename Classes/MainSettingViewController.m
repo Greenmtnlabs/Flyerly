@@ -735,7 +735,7 @@
         SHKItem *item = [[SHKItem alloc] init];
     
         iosSharer = [[ SHKSharer alloc] init];
-        iosSharer = [FlyerlyTwitterLike shareItem:item];
+        //iosSharer = [FlyerlyTwitterLike shareItem:item];
     }else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         
