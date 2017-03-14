@@ -417,7 +417,7 @@ UIAlertView *saveCurrentFlyerAlert;
     [instagramButton setEnabled:enable];
     [messengerButton setEnabled:enable];
     [facebookButton setEnabled:enable];
-    [youTubeButton setEnabled:enable];
+    //[youTubeButton setEnabled:enable];
 
 }
 #pragma mark  Text Field Delegate
