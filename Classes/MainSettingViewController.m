@@ -11,6 +11,7 @@
 #import "IntroScreenViewController.h"
 #import "Common.h"
 #import "SHKActivityIndicator.h"
+#import <Social/Social.h>
 
 @interface MainSettingViewController () {
     
@@ -613,12 +614,7 @@
         [self showAlert:@"No internet available,please connect to the internet first" message:@""];
     } else {
         NSLog(@"There IS internet connection");
-        
-        /*if ([txtfield.text isEqualToString:@""]) {
-            [self showAlert:@"Please Enter Comments" message:@""];
-        }else{*/
-            
-            // Current Item For Sharing
+       // Current Item For Sharing
         NSString *str;
         
         #if defined(FLYERLY)
@@ -626,20 +622,27 @@
         #else
             str = @"@flyerlybiz";
         #endif
-        SHKItem *item = [SHKItem text:str];
-        
-            //Calling ShareKit for Sharing
-            iosSharer = [[ SHKSharer alloc] init];
-            iosSharer = [SHKTwitter shareItem:item];
-            iosSharer.shareDelegate = self;
-        //}
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self shareOnTwitter:str shareType:SLServiceTypeTwitter];
+        });
     }
-    
-    /*InputViewController  *inputcontroller = [[InputViewController alloc]initWithNibName:@"InputViewController" bundle:nil];
-    [self.navigationController presentViewController:inputcontroller animated:YES completion:nil];*/
-    
 }
 
+// share on twitter
+-(void)shareOnTwitter:(NSString *)sharingText shareType:(NSString *)shareType{
+    SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:shareType];
+    [controller setInitialText:sharingText];
+    [controller setCompletionHandler:^(SLComposeViewControllerResult result)
+     {
+         if (result == SLComposeViewControllerResultCancelled) {
+             NSLog(@"Cancelled");
+         } else if (result == SLComposeViewControllerResultDone) {
+             
+         }
+     }];
+    [self presentViewController:controller animated:YES completion:Nil];
+    
+}
 
 
 -(IBAction)goemail:(id)sender{

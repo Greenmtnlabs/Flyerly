@@ -69,10 +69,12 @@
                         <action selector="rateApp:" destination="-1" eventType="touchUpInside" id="d92-HJ-8ox"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="358">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="358">
                     <rect key="frame" x="187" y="611" width="94" height="56"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="Twitter"/>
+                    <accessibility key="accessibilityConfiguration" label="Twitter">
+                        <bool key="isElement" value="YES"/>
+                    </accessibility>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <color key="tintColor" red="1" green="0.99997437000274658" blue="0.99999129772186279" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <state key="normal" backgroundImage="t_setting_button.png">
