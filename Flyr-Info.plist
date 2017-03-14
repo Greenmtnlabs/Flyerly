@@ -67,7 +67,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
-	<dict>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
 		<key>NSExceptionDomains</key>
 		<dict>
 			<key>bigstockphoto.com</key>
