@@ -734,16 +734,21 @@
 -(void)likeTwitter {
     
     if ([FlyerlySingleton connected]) {
-        // Current Item For Sharing
-        SHKItem *item = [[SHKItem alloc] init];
-    
-        iosSharer = [[ SHKSharer alloc] init];
-        //iosSharer = [FlyerlyTwitterLike shareItem:item];
+        NSString *url_str;
+
+        #if defined(FLYERLY)
+            url_str = @"https://twitter.com/FlyerlyApp";
+        #else
+            url_str = @"https://twitter.com/Flyerlybiz";
+        #endif
+
+        //Open the url as usual
+        NSURL *url = [NSURL URLWithString:url_str];
+        [[UIApplication sharedApplication] openURL:url];
     }else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         
         [alert show];
-    
     }
 }
 
