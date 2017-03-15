@@ -418,6 +418,8 @@ UIAlertView *saveCurrentFlyerAlert;
     [messengerButton setEnabled:enable];
     [facebookButton setEnabled:enable];
     //[youTubeButton setEnabled:enable];
+    [emailButton setEnabled:enable];
+    [smsButton setEnabled:enable];
 
 }
 #pragma mark  Text Field Delegate
@@ -517,15 +519,61 @@ UIAlertView *saveCurrentFlyerAlert;
 -(IBAction)uploadOnYoutube:(id)sender {
     [self updateDescription];
     
-    if ([FlyerlySingleton connected]) {
+//    if ([FlyerlySingleton connected]) {
 //        if (![self isAuthorized]) { //always ask for auth
             // Not yet authorized, request authorization and push the login UI onto the navigation stack.
-            [self.cfController.navigationController pushViewController:[self createAuthController] animated:YES];
+//            [self.cfController.navigationController pushViewController:[self createAuthController] animated:YES];
 //        } else {
 //            [self uploadYTDL];
 //        }
-    } else {
-        [FlyerlySingleton showNotConnectedAlert];
+//    } else {
+//        [FlyerlySingleton showNotConnectedAlert];
+//    }
+}
+
+-(void)openActivitySheetForShareVideo{
+    NSArray *activityItems = [NSArray arrayWithObjects:[NSURL fileURLWithPath:[self.flyer getSharingVideoPath]], nil];
+    
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    [self presentViewController:activityViewController animated:YES completion:nil];
+}
+
+-(void)sendVideoInMail
+{
+    if ([MFMailComposeViewController canSendMail])
+    {
+        MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
+        mail.mailComposeDelegate = self;
+        NSString *getSharingVideoPath = [NSString stringWithFormat:@"file://%@",[self.flyer getSharingVideoPath]];
+        NSURL *videoUrl =  [NSURL URLWithString:getSharingVideoPath];
+        NSData *fileData = [NSData dataWithContentsOfURL:videoUrl];
+        
+        [mail addAttachmentData:fileData mimeType:@"video/MOV" fileName:@"Flyer.mov"];
+        //[mail setSubject:@""];
+//        [mail setMessageBody:@"" isHTML:YES];
+        //[mail setToRecipients:[NSArray arrayWithObject:@"abdul.rauf@riksof.com"]];
+        [self.view.window.rootViewController presentViewController:mail animated:YES completion:nil];
+    }else {
+        NSLog(@"Device is unable to send the request in its current state.");
+    }
+}
+
+-(void)sendVideoInMsg
+{
+    if ([MFMessageComposeViewController canSendText])
+    {
+        NSString *getSharingVideoPath = [NSString stringWithFormat:@"file://%@",[self.flyer getSharingVideoPath]];
+        NSURL *videoUrl =  [NSURL URLWithString:getSharingVideoPath];
+        NSData *fileData = [NSData dataWithContentsOfURL:videoUrl];
+        
+        MFMessageComposeViewController* messageComposer = [MFMessageComposeViewController new];
+        messageComposer.messageComposeDelegate = self;
+        //[messageComposer setBody:message];
+        //[messageComposer setRecipients:recipients];colorForUsage:SC_THEME_MAIN];
+        [messageComposer addAttachmentData:fileData typeIdentifier:@"video/MOV" filename:@"Flyer.mov"];
+        [self.view.window.rootViewController presentViewController:messageComposer animated:YES completion:nil];
+    }else {
+        NSLog(@"Device is unable to send the request in its current state.");
     }
 }
 
@@ -768,9 +816,11 @@ UIAlertView *saveCurrentFlyerAlert;
  * Called when email button is pressed
  */
 -(IBAction)onClickEmailButton{
-    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
-    
-    if([MFMailComposeViewController canSendMail]){
+    if ([self.flyer isVideoFlyer]) {
+        [self sendVideoInMail];
+    }
+    else if([MFMailComposeViewController canSendMail]){
+        MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
         NSString *bodyText = @"";
         NSString *title = [NSString stringWithFormat:@"%@ for you!", flyerConfigurator.appName];
         // Current Item For Sharing
@@ -806,8 +856,10 @@ UIAlertView *saveCurrentFlyerAlert;
  * Called when sms button is pressed
  */
 -(IBAction)onClickSMSButton{
-    
-    if([MFMessageComposeViewController canSendAttachments])
+    if ([self.flyer isVideoFlyer]) {
+        [self sendVideoInMsg];
+    }
+    else if([MFMessageComposeViewController canSendAttachments])
     {
         MFMessageComposeViewController* messageComposer = [MFMessageComposeViewController new];
         messageComposer.messageComposeDelegate = self;
@@ -892,7 +944,6 @@ UIAlertView *saveCurrentFlyerAlert;
     [self updateDescription];
     
     if([self.flyer isVideoFlyer]){
-    
         fbShareType = @"fb-video-wall";
         NSURL *videoURL = [NSURL URLWithString:[self.flyer getVideoAssetURL]];
         FBSDKShareVideo *video = [[FBSDKShareVideo alloc] init];
