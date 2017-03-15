@@ -549,9 +549,8 @@ UIAlertView *saveCurrentFlyerAlert;
         NSData *fileData = [NSData dataWithContentsOfURL:videoUrl];
         
         [mail addAttachmentData:fileData mimeType:@"video/MOV" fileName:@"Flyer.mov"];
-        //[mail setSubject:@""];
-//        [mail setMessageBody:@"" isHTML:YES];
-        //[mail setToRecipients:[NSArray arrayWithObject:@"abdul.rauf@riksof.com"]];
+        [mail setSubject:@"Flyer for you!"];
+        [mail setMessageBody:[NSString stringWithFormat:@"Created & sent from %@", flyerConfigurator.appName] isHTML:YES];
         [self.view.window.rootViewController presentViewController:mail animated:YES completion:nil];
     }else {
         NSLog(@"Device is unable to send the request in its current state.");
@@ -568,7 +567,7 @@ UIAlertView *saveCurrentFlyerAlert;
         
         MFMessageComposeViewController* messageComposer = [MFMessageComposeViewController new];
         messageComposer.messageComposeDelegate = self;
-        //[messageComposer setBody:message];
+        [messageComposer setBody:[NSString stringWithFormat:@"Created & sent from %@", flyerConfigurator.appName]];
         //[messageComposer setRecipients:recipients];colorForUsage:SC_THEME_MAIN];
         [messageComposer addAttachmentData:fileData typeIdentifier:@"video/MOV" filename:@"Flyer.mov"];
         [self.view.window.rootViewController presentViewController:messageComposer animated:YES completion:nil];
