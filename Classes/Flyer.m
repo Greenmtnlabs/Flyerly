@@ -1230,15 +1230,13 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 	NSString *homeDirectoryPath = NSHomeDirectory();
 	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr",[user objectForKey:@"username"]]];
     
-    
     if ([[NSFileManager defaultManager] fileExistsAtPath:usernamePath isDirectory:NULL])
             [[NSFileManager defaultManager] createDirectoryAtPath:usernamePath withIntermediateDirectories:YES attributes:nil error:&error];
         
     NSString *uniqueId = [Flyer getUniqueId];
     NSString *flyerPath = [usernamePath stringByAppendingString:[NSString stringWithFormat:@"/%@", uniqueId]];
-        
+    
     return flyerPath;
-
 }
 
 /*
@@ -1252,9 +1250,9 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     //Getting Home Directory
 	NSString *homeDirectoryPath = NSHomeDirectory();
-	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr",[user objectForKey:@"username"]]];
+	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr", [user objectForKey:@"username"]]];
     
-     NSArray *flyersList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:usernamePath error:nil];
+    NSArray *flyersList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:usernamePath error:nil];
     
     NSArray *sortedFlyersList = [flyersList sortedArrayUsingFunction:compareDesc context:NULL];
     

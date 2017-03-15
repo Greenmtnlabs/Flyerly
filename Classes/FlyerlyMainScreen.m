@@ -155,7 +155,7 @@ id lastShareBtnSender;
 
 -(void)checkUserPurchases{
     //Checking if the user is valid or anonymus
-    if ([[PFUser currentUser] sessionToken]) {
+   if ([[PFUser currentUser] sessionToken]) {
         
         UserPurchases *userPurchases_ = [UserPurchases getInstance];
         userPurchases_.delegate = nil;

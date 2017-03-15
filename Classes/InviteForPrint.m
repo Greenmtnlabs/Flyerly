@@ -10,13 +10,15 @@
 #import "Common.h"
 #import <QuartzCore/QuartzCore.h>
 #import "FlyrAppDelegate.h"
-#import <FacebookSDK/FacebookSDK.h>
 #import "CreateFlyerController.h"
 #import "HelpController.h"
 #import "Flurry.h"
 #import "UIImagePDF.h"
 #import "UserVoice.h"
 #import "SendingPrintViewController.h"
+#import "SHKActivityIndicator.h"
+#import "ShareKit.h"
+#import "SHKTextMessage.h"
 
 
 @interface InviteForPrint ()
@@ -154,7 +156,7 @@
     NSLog(@"%@",identifiers);
     NSLog(@"%lu",(unsigned long)contactsArray.count);
     
-    //if([identifiers count] > 0) {
+    if([identifiers count] > 0) {
         
         [Flurry logEvent:@"Friends Invited"];
         
@@ -163,9 +165,9 @@
         sendingControoler.contactsArray = self.selectedIdentifiers;
         [self.navigationController pushViewController:sendingControoler animated:YES];
         
-   // } else {
-   //     [self showAlert:@"Please select any contact to invite !" message:@""];
-//    }
+    } else {
+        [self showAlert:@"Please select any contact to invite !" message:@""];
+    }
     
 }
 

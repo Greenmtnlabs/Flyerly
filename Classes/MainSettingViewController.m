@@ -10,6 +10,8 @@
 #import "UserVoice.h"
 #import "IntroScreenViewController.h"
 #import "Common.h"
+#import "SHKActivityIndicator.h"
+#import <Social/Social.h>
 
 @interface MainSettingViewController () {
     
@@ -612,12 +614,7 @@
         [self showAlert:@"No internet available,please connect to the internet first" message:@""];
     } else {
         NSLog(@"There IS internet connection");
-        
-        /*if ([txtfield.text isEqualToString:@""]) {
-            [self showAlert:@"Please Enter Comments" message:@""];
-        }else{*/
-            
-            // Current Item For Sharing
+       // Current Item For Sharing
         NSString *str;
         
         #if defined(FLYERLY)
@@ -625,20 +622,27 @@
         #else
             str = @"@flyerlybiz";
         #endif
-        SHKItem *item = [SHKItem text:str];
-        
-            //Calling ShareKit for Sharing
-            iosSharer = [[ SHKSharer alloc] init];
-            iosSharer = [SHKTwitter shareItem:item];
-            iosSharer.shareDelegate = self;
-        //}
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self shareOnTwitter:str shareType:SLServiceTypeTwitter];
+        });
     }
-    
-    /*InputViewController  *inputcontroller = [[InputViewController alloc]initWithNibName:@"InputViewController" bundle:nil];
-    [self.navigationController presentViewController:inputcontroller animated:YES completion:nil];*/
-    
 }
 
+// share on twitter
+-(void)shareOnTwitter:(NSString *)sharingText shareType:(NSString *)shareType{
+    SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:shareType];
+    [controller setInitialText:sharingText];
+    [controller setCompletionHandler:^(SLComposeViewControllerResult result)
+     {
+         if (result == SLComposeViewControllerResultCancelled) {
+             NSLog(@"Cancelled");
+         } else if (result == SLComposeViewControllerResultDone) {
+             
+         }
+     }];
+    [self presentViewController:controller animated:YES completion:Nil];
+    
+}
 
 
 -(IBAction)goemail:(id)sender{
@@ -730,16 +734,21 @@
 -(void)likeTwitter {
     
     if ([FlyerlySingleton connected]) {
-        // Current Item For Sharing
-        SHKItem *item = [[SHKItem alloc] init];
-    
-        iosSharer = [[ SHKSharer alloc] init];
-        iosSharer = [FlyerlyTwitterLike shareItem:item];
+        NSString *url_str;
+
+        #if defined(FLYERLY)
+            url_str = @"https://twitter.com/FlyerlyApp";
+        #else
+            url_str = @"https://twitter.com/Flyerlybiz";
+        #endif
+
+        //Open the url as usual
+        NSURL *url = [NSURL URLWithString:url_str];
+        [[UIApplication sharedApplication] openURL:url];
     }else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         
         [alert show];
-    
     }
 }
 

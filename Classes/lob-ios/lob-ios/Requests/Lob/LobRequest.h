@@ -92,8 +92,8 @@
 
 - (void)listObjectsWithResponse:(void(^) (NSArray *objects, NSError *error))response;
 
-- (void)createObjectWithModel:(LobObjectModel *)object
-                 withResponse:(void(^) (LobObjectModel *object, NSError *error))response;
+//- (void)createObjectWithModel:(LobObjectModel *)object
+//                 withResponse:(void(^) (LobObjectModel *object, NSError *error))response;
 
 - (void)retrieveObjectWithId:(NSString *)objectId
                 withResponse:(void(^) (LobObjectModel *object, NSError *error))response;

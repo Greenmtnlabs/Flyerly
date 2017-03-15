@@ -27,7 +27,7 @@
 
 @class InputViewController,FlyerlySingleton ;
 @class LaunchController,HelpController,ProfileViewController,TermsOfServiceViewController,PrivicyPolicyViewController,InAppViewController;
-@interface MainSettingViewController : UIViewController <UITableViewDelegate, MFMailComposeViewControllerDelegate,InAppPurchasePanelButtonProtocol,UserPurchasesDelegate,SHKSharerDelegate, GADInterstitialDelegate, GADBannerViewDelegate>{
+@interface MainSettingViewController : UIViewController <UITableViewDelegate, MFMailComposeViewControllerDelegate,InAppPurchasePanelButtonProtocol,UserPurchasesDelegate, GADInterstitialDelegate, GADBannerViewDelegate, SHKSharerDelegate>{
 
     NSMutableArray *category;
     NSMutableArray *groupCtg;

@@ -44,14 +44,13 @@
     _mode.hidden = !_videoAllow;
     _mode.selected = YES;
     
-    //UserPurchases *userPurchases = [UserPurchases getInstance];
+    UserPurchases *userPurchases = [UserPurchases getInstance];
    
     if ([[PFUser currentUser] sessionToken].length != 0) {
         
         if ( [userPurchases canCreateVideoFlyer] ) {
             [_mode setImage:[UIImage imageNamed:@"ModeVideo.png"] forState:UIControlStateNormal];
         }
-        
     }
     
     self.cameraView.targetResolution = CGSizeMake( 1024, 1024 ); // The minimum resolution we want

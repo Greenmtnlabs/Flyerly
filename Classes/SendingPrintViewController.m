@@ -11,7 +11,6 @@
 #import "Common.h"
 #import <QuartzCore/QuartzCore.h>
 #import "FlyrAppDelegate.h"
-#import <FacebookSDK/FacebookSDK.h>
 #import "CreateFlyerController.h"
 #import "HelpController.h"
 #import "Flurry.h"
@@ -724,33 +723,33 @@ https://lob.com/docs#postcards
         objectModel.localFilePath = YES;
     }
     
-    [request createObjectWithModel:objectModel
-                      withResponse:^(LobObjectModel *object, NSError *error)
-     {
-         NSLog(@"*** Object Create Local Response *** %ld", (long)request.statusCode);
-         
-         if ( error == nil && request.statusCode == 200){
-             
-             
-             if( testingNotUploadFile ){
-                 [self sendPostCard: @"https://www.lob.com/postcardfront.pdf"];
-             }
-             else {
-                 urlFrontStr = [NSString stringWithFormat:@"http://assets.lob.com/%@.pdf",object.objectId];
-                 [self sendPostCard : urlFrontStr];
-             }
-
-         }
-         else {
-             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failed to upload postcard" message:@"Your postcard could not be uploaded for print"  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-             
-             [alert show];
-             
-             [self showLoading:NO];
-         }
-         
-         dispatch_semaphore_signal(sem);
-     }];
+//    [request createObjectWithModel:objectModel
+//                      withResponse:^(LobObjectModel *object, NSError *error)
+//     {
+//         NSLog(@"*** Object Create Local Response *** %ld", (long)request.statusCode);
+//         
+//         if ( error == nil && request.statusCode == 200){
+//             
+//             
+//             if( testingNotUploadFile ){
+//                 [self sendPostCard: @"https://www.lob.com/postcardfront.pdf"];
+//             }
+//             else {
+//                 urlFrontStr = [NSString stringWithFormat:@"http://assets.lob.com/%@.pdf",object.objectId];
+//                 [self sendPostCard : urlFrontStr];
+//             }
+//
+//         }
+//         else {
+//             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failed to upload postcard" message:@"Your postcard could not be uploaded for print"  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//             
+//             [alert show];
+//             
+//             [self showLoading:NO];
+//         }
+//         
+//         dispatch_semaphore_signal(sem);
+//     }];
         //----//
     
 

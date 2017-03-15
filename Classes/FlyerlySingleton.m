@@ -40,6 +40,7 @@ static FlyerlySingleton *sharedSingleton = nil;
     NetworkStatus networkStatus = [reachability currentReachabilityStatus];
     return !(networkStatus == NotReachable);
 }
+
 + (void)showNotConnectedAlert {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect & try again." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     

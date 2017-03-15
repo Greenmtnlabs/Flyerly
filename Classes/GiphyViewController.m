@@ -110,10 +110,10 @@
     
     [self deleteSubviewsFromView:giphyBgsView];
 
-    //send request to giphy api
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
+    // Send request to giphy API
+    NSURL *URL = [NSURL URLWithString: urlStr];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager GET: URL.absoluteString parameters: nil success:^(NSURLSessionDataTask *task, id responseObject) {
         reqGiphyApiInProccess = NO;
         [self hideLoadingIndicator];
         giphyData = responseObject[@"data"];
@@ -137,7 +137,7 @@
                 row = floor( i / showInRow );
                 x = defX*column+defX + defW*column;
                 y = defY*row+defY + defH*row;
-
+                
                 UIView *viewForGiphy = [[UIView alloc]initWithFrame:CGRectMake(x-4, y-4, defW+4, defH+4)];
                 UIWebView *webview=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, defW+4, defH+4)];
                 webview.userInteractionEnabled = NO;
@@ -147,7 +147,7 @@
                 NSString *spinnerImagePath = [[NSBundle mainBundle] pathForResource:@"spinner" ofType:@"gif"];
                 NSString* htmlContent = [NSString stringWithFormat:@"<html><head><title></title></head><body style='margin:0px; padding:0px;'><img src='%@' style='border:1px solid black; width:%ipx; height:%ipx; background:url(%@) no-repeat center center; '></body></html>",giphyUrlStr,defW,defH,spinnerImagePath];
                 [webview loadHTMLString:htmlContent baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
-
+                
                 viewForGiphy.tag = i++;
                 UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectGiphy:)];
                 [viewForGiphy addGestureRecognizer:tapGesture];
@@ -164,10 +164,12 @@
             [layerScrollView addSubview:giphyBgsView];
             [layerScrollView setContentSize:CGSizeMake(giphyBgsView.frame.size.width,giphyBgsView.frame.size.height)];
         }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+
+        NSLog(@"JSON: %@", responseObject);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
+
 }
 
 

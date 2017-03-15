@@ -34,17 +34,17 @@
 		   didFinishSelector:(SEL)finishSelector 
 			 didFailSelector:(SEL)failSelector 
 {
-    request = [aRequest retain];
+    request = aRequest;
     delegate = aDelegate;
     didFinishSelector = finishSelector;
     didFailSelector = failSelector;
     
     [request prepare];
     
-    responseData = [NSURLConnection sendSynchronousRequest:request
-                                         returningResponse:&response
-                                                     error:&error];
-	
+//    responseData = [NSURLConnection sendSynchronousRequest:request
+//                                         returningResponse:&response
+//                                                     error:&error];
+	///Users/khurram/Documents/Flyerly/ExternalFrameworks/Bitly/OAuth/OADataFetcher.m:46:60: Passing address of non-local object to __autoreleasing parameter for write-back
     if (response == nil || responseData == nil || error != nil) {
         OAServiceTicket *ticket= [[OAServiceTicket alloc] initWithRequest:request
                                                                  response:response
@@ -53,7 +53,6 @@
                        withObject:ticket
                        withObject:error];
         
-        [ticket release];
     } else {
         OAServiceTicket *ticket = [[OAServiceTicket alloc] initWithRequest:request
                                                                   response:response
@@ -62,8 +61,7 @@
                        withObject:ticket
                        withObject:responseData];
         
-        [ticket release];
-    } 
+    }
 }
 
 @end

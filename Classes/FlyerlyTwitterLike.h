@@ -8,6 +8,6 @@
 
 #import "SHKTwitter.h"
 
-@interface FlyerlyTwitterLike : SHKTwitter
+@interface FlyerlyTwitterLike: SHKTwitter
 
 @end

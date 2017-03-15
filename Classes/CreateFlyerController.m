@@ -4501,7 +4501,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             [shareviewcontroller setStarsofShareScreen:user[@"appStarRate"]];
         
         [user saveInBackground];
-        [shareviewcontroller setSocialStatus];        
+        [shareviewcontroller setSocialStatus];
         
         //Create Animation Here
         [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,475 )];

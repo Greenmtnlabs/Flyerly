@@ -10,7 +10,7 @@
 #import "AFHTTPRequestOperation.h"
 #import "NBUImageLoader.h"
 #import "NBUImagePickerPrivate.h"
-
+#import "AFNetworking.h"
 
 static NBUImageLoader * _sharedLoader;
 
@@ -48,17 +48,17 @@ static NBUImageLoader * _sharedLoader;
         NSURL *imageUrl = [[NSURL alloc] initWithString:imageUrlString];
         NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:imageUrl];
         
-        AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
-        requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
-        [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-            
+        NSURL *URL = [NSURL URLWithString: imageUrlString];
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        //manager.responseSerializer = [AFHTTPResponseSerializer responseSerializer];
+        manager.responseSerializer = [AFImageResponseSerializer serializer]; // you only have to do this once
+
+        [manager GET: URL.absoluteString parameters: nil success:^(NSURLSessionDataTask *task, id responseObject) {
             resultBlock(responseObject,nil);
-            
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Image error: %@", error);
+            NSLog(@"JSON: %@", responseObject);
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            NSLog(@"Error: %@", error);
         }];
-        [requestOperation start];
-        
     }
     
     // Give up

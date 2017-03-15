@@ -16,6 +16,10 @@
 #import "UserVoice.h"
 #import "SHKSharer.h"
 #import "Common.h"
+#import "SHKTextMessage.h"
+#import "SHKActivityIndicator.h"
+#import "ShareKit.h"
+#import "SHKMail.h"
 
 @implementation InviteFriendsController {
 
@@ -55,6 +59,8 @@ const int CONTACTS_TAB = 0;
     
     bannerAdClosed = NO;
     bannerShowed = NO;
+    
+    [twitterButton setEnabled:NO]; // TODO: remove this line after twitter fix
     
     UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
     [UserVoice initialize:config];
@@ -128,9 +134,7 @@ const int CONTACTS_TAB = 0;
     }
     
     
-    
-    if ( [[PFUser currentUser] sessionToken].length != 0 )
-    {
+    if ( [[PFUser currentUser] sessionToken].length != 0 ) {
         
         PFQuery *query = [PFUser query];
         [query whereKey:@"username" equalTo:[[PFUser currentUser] objectForKey:@"username"]];
@@ -374,8 +378,7 @@ const int CONTACTS_TAB = 0;
 }
 
 -(IBAction)invite{
-    
-    SHKItem *item;
+
     NSMutableArray *identifiers = [[NSMutableArray alloc] init];
     identifiers = selectedIdentifiers;
     
@@ -385,49 +388,32 @@ const int CONTACTS_TAB = 0;
         
         // Send invitations
         if(selectedTab == 0){ // for SMS
-            globle.accounts = [[NSMutableArray alloc] initWithArray:selectedIdentifiers];
-            
-            item = [SHKItem text:sharingText];
-            item.textMessageToRecipients = selectedIdentifiers;
-            
-            iosSharer = [[ SHKSharer alloc] init];
-            iosSharer = [SHKTextMessage shareItem:item];
-            iosSharer.shareDelegate = self;
+            if([MFMessageComposeViewController canSendText])
+            {
+                MFMessageComposeViewController* messageComposer = [MFMessageComposeViewController new];
+                messageComposer.messageComposeDelegate = self;
+                [messageComposer setBody:sharingText];
+                [messageComposer setRecipients:selectedIdentifiers];
+                [self.view.window.rootViewController presentViewController:messageComposer animated:YES completion:nil];
+            }
    
         }else if(selectedTab == 1){ // for Facebook
             
-            item = [SHKItem text:sharingText];
-            
-            NSArray *shareFormFields = [SHKFacebookCommon shareFormFieldsForItem:item];
-            SHKFormController *rootView = [[SHKCONFIG(SHKFormControllerSubclass) alloc] initWithStyle:UITableViewStyleGrouped
-                                                                                                title:nil
-                                                                                     rightButtonTitle:SHKLocalizedString(@"Send to Facebook")
-                                           ];
-            
-            [rootView addSection:shareFormFields header:nil footer:item.URL!=nil?item.URL.absoluteString:nil];
-            
-            rootView.validateBlock = ^(SHKFormController *form) {
-                
-                // default does no checking and proceeds to share
-                [form saveForm];
-                
-            };
-        
-            rootView.saveBlock = ^(SHKFormController *form) {
-                [self updateItemWithForm:form];
-            };
-            
-            rootView.cancelBlock = ^(SHKFormController *form) {
-            };
-            
-            [[SHK currentHelper] showViewController:rootView];
         } else if (selectedTab == 3) { // for Email
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",flyerConfigurator.referralURL, userUniqueObjectId]];
-            item = [SHKItem URL:url title:@"Invite Friends" contentType:SHKURLContentTypeUndefined];
-            [item setMailToRecipients:identifiers];
-            item.text = [NSString stringWithFormat:@"I'm using the %@ app to create and share flyers on the go! Want to give it a try?", APP_NAME];
-            // Share the item with my custom class
-            [SHKMail shareItem:item];
+            MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+            
+            if([MFMailComposeViewController canSendMail]){
+                
+                picker.mailComposeDelegate = self;
+                [picker setSubject:[NSString stringWithFormat:@"Invite Friends"]];
+                NSString *body = [NSString stringWithFormat:@"I'm using the %@ app to create and share flyers on the go! Want to give it a try? \n \n %@%@", APP_NAME,flyerConfigurator.referralURL, userUniqueObjectId];
+                [picker setMessageBody:body isHTML:NO];
+                
+                // Set up recipients
+                [picker setToRecipients:identifiers];
+                [self.view.window.rootViewController presentViewController:picker animated:YES completion:nil];
+            }
+            
         }
     } else {
         [self showAlert:@"Please select any contact to invite !" message:@""];
@@ -436,7 +422,16 @@ const int CONTACTS_TAB = 0;
     [Flurry logEvent:@"Friends Invited"];
 }
 
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
+    if(result == MessageComposeResultSent){
+        
+    }
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
 
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
 
 #pragma mark  Device Contact List
 
@@ -679,87 +674,6 @@ const int CONTACTS_TAB = 0;
 -(void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didFailWithError:(NSError *)error {
     NSLog(@"app invite dialog did fail");
 }
-
--(void) shareViaIOSFacebook:( BOOL ) withAccount {
-    SHKItem *item;
-    
-    // text to be share.
-    NSString *sharingText = [NSString stringWithFormat:@"I'm using the %@ app to create and share flyers on the go! Want to give it a try? %@%@", APP_NAME, flyerConfigurator.referralURL, userUniqueObjectId];;
-    
-    // app URL with user id.
-    NSString *urlToShare = [NSString stringWithFormat:@"%@%@", flyerConfigurator.referralURL, userUniqueObjectId];
-    
-    //item to be share
-    item = [SHKItem URL:[NSURL URLWithString:urlToShare] title:sharingText contentType:SHKShareTypeURL];
-    
-    if( withAccount ) {
-        // we got a facebook account, share it via shkiOSFacebook
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            iosSharer = [[SHKiOSFacebook alloc] init];
-            [iosSharer loadItem:item];
-            iosSharer.shareDelegate = self;
-            [iosSharer share];
-
-        });
-        
-    } else {
-        //we didn't have facebook app or account, then we have to use legendary SHKFacebook sharer.
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            iosSharer = [[SHKFacebook alloc] init];
-            [iosSharer loadItem:item];
-            iosSharer.shareDelegate = self;
-            [iosSharer share];
-        });
-    }
-}
-
-/* HERE WE CREATE ARRAY LIST FOR UITABLEVIEW WHICH RECIVED FROM FACEBOOK REQUEST
- *@PARAM
- *  followers DICTIONARY
- */
--(void)makeFacebookArray :(NSDictionary *)result{
-    
-    for (NSDictionary *friendData in result[@"data"]) {
-        
-        NSString *imageURL = friendData[@"picture"][@"data"][@"url"];
-        
-        // Here we will get the facebook contacts
-        ContactsModel *model = [[ContactsModel   alloc]init];
-        
-        model.name = friendData[@"name"];
-        model.description = friendData[@"id"];
-        if (friendData[@"gender"]) {
-            model.others = friendData[@"gender"];
-        }
-        if(imageURL){
-            model.img = nil;
-            model.imageUrl = imageURL;
-        }
-        
-        [self.facebookBackupArray addObject:model];
-        
-    }
-    
-    self.facebookArray = [[NSMutableArray alloc] init];
-    facebookArray = facebookBackupArray ;
-
-
-    
-    // Filter contacts on new tab selection
-    [self onSearchClick:nil];
-    
-    [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-    {
-        
-        [self hideLoadingIndicator];
-        
-    }
-}
-
 
 /*
  * Here we Get Text from SHKFormController
@@ -1113,15 +1027,15 @@ const int CONTACTS_TAB = 0;
             [selectedIdentifiers addObject:model.description];
             
             //Calling ShareKit for Sharing
-            iosSharer = [[ SHKiOSTwitter alloc] init];
+            iosSharer = [[ SHKTwitter alloc] init];
             NSString *tweet = [NSString stringWithFormat:@"%@ @%@ %@",sharingText,model.description, hashTag];
             SHKItem *item;
             
             item = [SHKItem text:tweet];
             [selectedIdentifiers addObject:model.description];
-            
+
             if ( availableAccounts.count > 0 ) {
-                iosSharer = [SHKiOSTwitter shareItem:item];
+                iosSharer = [SHKTwitter shareItem:item];
             } else {
                 iosSharer = [SHKTwitter shareItem:item];
             }
@@ -1241,25 +1155,25 @@ const int CONTACTS_TAB = 0;
     
     // Here we Check Sharer for
     // Update PARSE
-    if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ||
+    if ( [sharer isKindOfClass:[SHKTwitter class]] == YES ||
         [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
         
         // HERE WE GET AND SET SELECTED FOLLOWER
         [twitterInvited  addObjectsFromArray:selectedIdentifiers];
-        user[@"tweetinvited"] = twitterInvited;
+        //user[@"tweetinvited"] = twitterInvited;
         [self friendsInvited];
  
     } else if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
         
         // HERE WE GET AND SET SELECTED CONTACT LIST
         [iPhoneinvited  addObjectsFromArray:selectedIdentifiers];
-        user[@"iphoneinvited"] = iPhoneinvited;
+        //user[@"iphoneinvited"] = iPhoneinvited;
         [self friendsInvited];
 
     } else if ([sharer isKindOfClass:[SHKMail class]] == YES){
         // HERE WE GET AND SET SELECTED EMAIL LIST
         [emailInvited  addObjectsFromArray:selectedIdentifiers];
-        user[@"emailinvited"] = emailInvited;
+        //user[@"emailinvited"] = emailInvited;
         [self friendsInvited];
     }
 
@@ -1286,7 +1200,7 @@ const int CONTACTS_TAB = 0;
 - (void)sharerCancelledSending:(SHKSharer *)sharer
 {
     
-    if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ||
+    if ( [sharer isKindOfClass:[SHKTwitter class]] == YES ||
         [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
         [selectedIdentifiers   removeAllObjects];
     }

@@ -7,10 +7,10 @@
 //
 
 #import "BitlyTwitterOAuthViewController.h"
-#import "OAConsumer.h"
-#import "OAMutableURLRequest.h"
-#import "OADataFetcher.h"
-#import "OAPlaintextSignatureProvider.h"
+//#import "OAConsumer.h"
+//#import "OAMutableURLRequest.h"
+//#import "OADataFetcher.h"
+//#import "OAPlaintextSignatureProvider.h"
 #import "BitlyTwitterOAuthManager.h"
 #import "BitlyDebug.h"
 #import "BitlyConfig.h"
@@ -30,14 +30,14 @@
 @synthesize url;
 @synthesize webView;
 @synthesize activityIndicator;
-@synthesize requestToken;
+//@synthesize requestToken;
 @synthesize delegate;
 
 - (void)dealloc
 {
     self.delegate = nil;
     
-    [requestToken release], requestToken = nil;
+    //[requestToken release], requestToken = nil;
     [url release], url = nil;
     [webView stopLoading], webView.delegate = nil, [webView release], webView = nil;
     [activityIndicator release], activityIndicator = nil;
