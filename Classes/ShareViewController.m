@@ -291,15 +291,14 @@ UIAlertView *saveCurrentFlyerAlert;
         // Set Sms Sharing Status From Social File
         if([MFMessageComposeViewController canSendAttachments])
         {
-            if (![self.flyer isVideoFlyer]) {
-               
-                status = [flyer getSmsStatus];
-                if([status isEqualToString:@"1"]){
-                    [smsButton setSelected:YES];
-                }else {
-                    [smsButton setSelected:NO];
-                }
+            
+            status = [flyer getSmsStatus];
+            if([status isEqualToString:@"1"]){
+                [smsButton setSelected:YES];
+            }else {
+                [smsButton setSelected:NO];
             }
+            
         }
     }
     
@@ -552,6 +551,7 @@ UIAlertView *saveCurrentFlyerAlert;
         [mail setSubject:@"Flyer for you!"];
         [mail setMessageBody:[NSString stringWithFormat:@"Created & sent from %@", flyerConfigurator.appName] isHTML:YES];
         [self.view.window.rootViewController presentViewController:mail animated:YES completion:nil];
+        shareOnEmail = YES;
     }else {
         NSLog(@"Device is unable to send the request in its current state.");
     }
@@ -877,6 +877,7 @@ UIAlertView *saveCurrentFlyerAlert;
     if(result == MessageComposeResultSent){
         smsButton.enabled = YES;
         [self.flyer setSmsStatus:1];
+        [smsButton setSelected:YES];
         [Flurry logEvent:@"Shared SMS"];
         [self actionAfterSharing];
     }
@@ -1056,14 +1057,15 @@ UIAlertView *saveCurrentFlyerAlert;
         
         twitterButton.enabled = NO;
         
-    } else if ( [sharer isKindOfClass:[SHKMail class]] == YES ) {
-        
-        emailButton.enabled = NO;
-        
-    } else if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
-        
-        smsButton.enabled = NO;
     }
+//    else if ( [sharer isKindOfClass:[SHKMail class]] == YES ) {
+//        
+//        emailButton.enabled = NO;
+//        
+//    } else if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
+//        
+//        smsButton.enabled = NO;
+//    }
 //    else if ( [sharer isKindOfClass:[YouTubeSubClass class]] == YES ) {
 //    
 //        youTubeButton.enabled = NO;
@@ -1368,8 +1370,9 @@ UIAlertView *saveCurrentFlyerAlert;
 }
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
-    if(shareOnEmail && result == MessageComposeResultSent){
-        smsButton.enabled = YES;
+    if(shareOnEmail == YES && result == MFMailComposeResultSent){
+        emailButton.enabled = YES;
+        [emailButton setSelected:YES];
         [self.flyer setEmailStatus:1];
         [Flurry logEvent:@"Shared Email"];
         [self actionAfterSharing];
