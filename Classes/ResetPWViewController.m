@@ -11,7 +11,8 @@
 
 @implementation ResetPWViewController
 
-@synthesize username;
+@synthesize username, lblRecoverAccount;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -43,7 +44,8 @@
      backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
-
+    
+    lblRecoverAccount.text = [NSString stringWithFormat:@"Recover Your %@ Account", APP_NAME] ;
 }
 
 - (void)didReceiveMemoryWarning

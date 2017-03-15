@@ -22,6 +22,8 @@
 #define MAX_VIDEO_LENGTH 30
 #define FLYER_ALBUM_NAME @"Flyerly"
 #define FLYER_PURCHASED_ALBUM_NAME @"Flyerly Purchases"
+#define FLYERLY_BIZ_ALBUM_NAME @"FlyerlyBiz"
+#define FLYERLY_BIZ_PURCHASED_ALBUM_NAME @"FlyerlyBiz Purchases"
 
 
 #define RADIANS(degrees) ((degrees * M_PI) / 180.0)
@@ -166,6 +168,59 @@ nil]
 [UIFont fontWithName:@"ArialUnicodeMS" size:16],\
 [UIFont fontWithName:@"HiraKakuProN-W6" size:16],\
 nil]
+
+
+#define REGISTERED @"Registered"
+#define ANONYMOUS @"Anonymous"
+
+#define NOT_FOUND_IN_APP @"NOT_FOUND_IN_APP"
+
+#if defined(FLYERLY)
+
+    #define TARGET_NAME @"FLYERLY"
+    #define APP_NAME @"Flyerly"
+
+    //Packages for purchase
+    #define BUNDLE_IDENTIFIER_ALL_DESIGN @"com.flyerly.AllDesignBundle"
+    #define BUNDLE_IDENTIFIER_UNLOCK_VIDEO @"com.flyerly.UnlockCreateVideoFlyerOption"
+    #define BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION @"com.flyerly.MonthlyGold"
+    #define BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION @"com.flyerly.YearlyPlatinum1"
+    #define BUNDLE_IDENTIFIER_AD_REMOVAL @"com.flyerly.AdRemovalMonthly"
+
+    //purchased bundles
+    #define IN_APP_ID_ALL_DESIGN @"comflyerlyAllDesignBundle"
+    #define IN_APP_ID_UNLOCK_VIDEO @"comflyerlyUnlockCreateVideoFlyerOption"
+    #define IN_APP_ID_MONTHLY_SUBSCRIPTION @"comflyerlyMonthlyGold"
+    #define IN_APP_ID_YEARLY_SUBSCRIPTION @"comflyerlyYearlyPlatinum1"
+    #define IN_APP_ID_AD_REMOVAL @"comflyerlyAdRemovalMonthly"
+
+    #define IN_APP_ID_SAVED_FLYERS @"comflyerlyUnlockSavedFlyers"
+    #define IN_APP_ID_ICON_BUNDLE @"comflyerlyIconsBundle"
+
+#else
+
+    #define TARGET_NAME @"FLYERLY_BIZ"
+    #define APP_NAME @"FlyerlyBiz"
+
+    //Packages for purchase
+    #define BUNDLE_IDENTIFIER_ALL_DESIGN @"com.flyerlybiz.AllDesignBundle"
+    #define BUNDLE_IDENTIFIER_UNLOCK_VIDEO @"com.flyerlybiz.VideoFlyers"
+    #define BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION @"com.flyerlybiz.MonthlyGold"
+    #define BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION @"com.flyerlybiz.YearlyPlatinum1"
+    #define BUNDLE_IDENTIFIER_AD_REMOVAL @"com.flyerlybiz.AdsRemoval"
+
+    //purchased bundles
+    #define IN_APP_ID_ALL_DESIGN @"comflyerlybizAllDesignBundle"
+    #define IN_APP_ID_UNLOCK_VIDEO @"comflyerlybizVideoFlyers"
+    #define IN_APP_ID_MONTHLY_SUBSCRIPTION @"comflyerlybizMonthlyGold"
+    #define IN_APP_ID_YEARLY_SUBSCRIPTION @"comflyerlybizYearlyPlatinum1"
+    #define IN_APP_ID_AD_REMOVAL @"comflyerlybizAdsRemoval"
+
+    #define IN_APP_ID_SAVED_FLYERS NOT_FOUND_IN_APP
+    #define IN_APP_ID_ICON_BUNDLE NOT_FOUND_IN_APP
+
+#endif
+
 
 #define SIZE_ARRAY [NSArray arrayWithObjects: @"10", @"11" ,@"12",@"14",@"16",@"18",@"20",@"22",@"24",  @"26", @"28", @"30",@"36",@"42",@"48",@"52",@"60",@"72",@"74",@"80",@"90",nil]
 

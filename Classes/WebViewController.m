@@ -12,6 +12,8 @@
 @interface WebViewController (){
     BOOL haveValidSubscription;
     UserPurchases *userPurchases;
+    NSString *url_twitter, *url_instagram;
+    NSString *logoImageName;
 }
 
 @end
@@ -25,6 +27,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    #if defined(FLYERLY)
+        logoImageName = @"flyerlyLogo";
+        url_twitter = @"https://twitter.com/hashtag/flyerly";
+        url_instagram = @"https://instagram.com/explore/tags/flyerly/";
+    #else
+        logoImageName = @"flyerlyBizLogo";
+        url_twitter = @"https://twitter.com/hashtag/FlyerlyBiz";
+        url_instagram = @"https://www.instagram.com/explore/tags/FlyerlyBiz/";
+    #endif
+    
     // Setting navigation bar
     [self setNavigation];
     
@@ -33,7 +45,7 @@
     self.segmentedButton.selectedSegmentIndex = 0;
     
     // Setting default URL
-    [self openWebView:@"https://twitter.com/hashtag/flyerly"];
+    [self openWebView:url_twitter];
 }
 
 #pragma mark Navigation/UI Related Methods
@@ -49,8 +61,8 @@
 
     // for Navigation Bar logo
     UIImageView *logo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 102, 38)];
+    [logo setImage:[UIImage imageNamed:logoImageName]];
     
-    [logo setImage:[UIImage imageNamed:@"flyerlylogo"]];
     self.navigationItem.titleView = logo;
     
      // Home Button
@@ -101,9 +113,10 @@
 - (void)goBack {
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
-    haveValidSubscription = [userPurchases isSubscriptionValid];
-    
-    self.shouldShowAdd ( @"", haveValidSubscription );
+    haveValidSubscription = !([userPurchases canShowAd]);
+    if ( self.shouldShowAdd != NULL ) {
+        self.shouldShowAdd ( @"", haveValidSubscription );
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -139,15 +152,12 @@
  */
 - (IBAction)segmentedControlAction:(id)sender {
     
-    NSString *urlAddress;
-    
     if (segmentedButton.selectedSegmentIndex == 0) {
-        urlAddress  = @"https://twitter.com/hashtag/flyerly";
+        [self openWebView:url_twitter];
     }
     else if(segmentedButton.selectedSegmentIndex == 1){
-        urlAddress  = @"https://instagram.com/explore/tags/flyerly/";
+        [self openWebView:url_instagram];
     }
-    [self openWebView:urlAddress];
 }
 
 /*
@@ -200,8 +210,7 @@
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     userPurchases_.delegate = nil;
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS] ) {
         [inAppViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
 }
@@ -221,8 +230,7 @@
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     userPurchases_.delegate = nil;
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS] ) {
         [inAppViewController.paidFeaturesTview reloadData];
     }else {
         

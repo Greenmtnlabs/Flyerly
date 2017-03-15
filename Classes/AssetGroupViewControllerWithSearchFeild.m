@@ -302,7 +302,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
                 NSLog(@"Image error: %@", error);
             }];
             [requestOperation start];
-            NSLog(@"");
+            
         }
         
     } else{
@@ -420,7 +420,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
         cancelRequest = NO;
         
         //These are over Products on App Store
-        NSSet *productIdentifiers = [NSSet setWithArray:@[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.IconsBundle",@"com.flyerly.SelectedSymbol"]];
+        NSSet *productIdentifiers = [NSSet setWithArray:@[BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION, BUNDLE_IDENTIFIER_ALL_DESIGN, BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION, BUNDLE_IDENTIFIER_UNLOCK_VIDEO,  BUNDLE_IDENTIFIER_AD_REMOVAL]];
         
         [[RMStore defaultStore] requestProducts:productIdentifiers success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
             
@@ -573,6 +573,13 @@ shouldReloadTableForSearchString:(NSString *)searchString
  */
 -(void)createFlyerlyPurchasedAlbum  {
     
+    NSString *albumName;
+    
+    #if defined(FLYERLY)
+        albumName = FLYER_PURCHASED_ALBUM_NAME;
+    #else
+        albumName = FLYERLY_BIZ_PURCHASED_ALBUM_NAME;
+    #endif
     
     if ( _library == nil ) {
         _library = [[ALAssetsLibrary alloc] init];
@@ -581,7 +588,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
     __weak ALAssetsLibrary* library = _library;
     
     //HERE WE SEN REQUEST FOR CREATE ALBUM
-    [_library addAssetsGroupAlbumWithName:FLYER_PURCHASED_ALBUM_NAME
+    [_library addAssetsGroupAlbumWithName:albumName
                               resultBlock:^(ALAssetsGroup *group) {
                                   
                                   //CHECKING ALBUM FOUND IN LIBRARY
@@ -592,7 +599,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
                                           
                                           NSString *existAlbumName = [group valueForProperty: ALAssetsGroupPropertyName];
                                           
-                                          if ([existAlbumName isEqualToString:FLYER_PURCHASED_ALBUM_NAME]) {
+                                          if ([existAlbumName isEqualToString:albumName]) {
                                               *stop = YES;
                                               
                                               // GETTING CREATED URL OF ALBUM

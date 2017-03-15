@@ -9,13 +9,13 @@
 #import "MainSettingViewController.h"
 #import "UserVoice.h"
 #import "IntroScreenViewController.h"
+#import "Common.h"
 
 @interface MainSettingViewController () {
     
     SHKSharer *iosSharer;
     FlyerlyConfigurator *flyerConfigurator;
-    UIButton *btnBannerAdsDismiss;
-    BOOL hasValidSubscription;
+    BOOL canShowAd;
     UserPurchases *userPurchases;
     NSString *productIdentifier;
 }
@@ -25,7 +25,7 @@
 
 @implementation MainSettingViewController
 @synthesize tableView,_persistence;
-@synthesize bannerAdsView;
+@synthesize bannerAdsView, btnBannerAdsDismiss;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -41,12 +41,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     flyerConfigurator = appDelegate.flyerConfigurator;
     
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
-    hasValidSubscription = [userPurchases isSubscriptionValid];
+    canShowAd = [userPurchases canShowAd];
 
     
     bannerAdClosed = NO;
@@ -120,17 +121,21 @@
     [category addObject:@"Partner Apps"];//10,9 --
     [category addObject:@"Untech"];//11,10
     [category addObject:@"eyeSPOT"];//12,11
-    [category addObject:@"Flyerly Biz"];
+    
+    #if defined(FLYERLY)
+        [category addObject:@"FlyerlyBiz"];
+    #else
+        [category addObject:@"Flyerly"];
+    #endif
+    
 
     // will remove in production build, this row must be in the end of table view
     if ( IS_LOGIN && [flyerConfigurator currentDebugMood] ){
         [category addObject:@"Clear Purchases"];//13
     }
     
-    self.bannerAdsView.alpha = 0.0;
-    
     if([FlyerlySingleton connected]){
-        if( hasValidSubscription == NO ) {
+        if( canShowAd ) {
             [self loadInterstitialAdd];
         }
     }
@@ -141,33 +146,21 @@
         
         if( IS_IPHONE_4 || IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
             
-            // Initialize the banner at the bottom of the screen.
-            CGPoint origin;
-            origin = CGPointMake(0.0,0.0);
-            
-            GADAdSize customAdSize = GADAdSizeFromCGSize(CGSizeMake(320, 50));
-            if ( IS_IPHONE_6 ){
-                customAdSize = GADAdSizeFromCGSize(CGSizeMake(420, 50));
-            }else if ( IS_IPHONE_6_PLUS ){
-                customAdSize = GADAdSizeFromCGSize(CGSizeMake(520, 50));
-            }else{
-                customAdSize = GADAdSizeFromCGSize(CGSizeMake(320, 50));
-            }
-            
-            if( hasValidSubscription == NO ) {
-                // Use predefined GADAdSize constants to define the GADBannerView.
-                self.bannerAds = [[GADBannerView alloc] initWithAdSize:customAdSize origin:origin];
-                
-                // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID before compiling.
-                self.bannerAds.adUnitID = [flyerConfigurator bannerAdID];
-                self.bannerAds.delegate = self;
-                self.bannerAds.rootViewController = self;
-                [self.bannerAds loadRequest:[self request]];
+            if( canShowAd ) {
+                self.bannerAdsView.adUnitID = [flyerConfigurator bannerAdID];
+                self.bannerAdsView.delegate = self;
+                self.bannerAdsView.rootViewController = self;
+                [self.bannerAdsView loadRequest:[self request]];
             }
         }
     });
-    
-    
+   
+}
+
+
+- (void)viewWillAppear:(BOOL)animated{
+    btnBannerAdsDismiss.alpha = 0.0;
+    bannerAdsView.alpha = 0.0;
 }
 
 //return flag is login
@@ -291,7 +284,13 @@
         }
         if (indexPath.row == 11)imgname = @"icon_untech";//untech
         if (indexPath.row == 12)imgname = @"icon_eyespot";//eyespot
-        if (indexPath.row == 13)imgname = @"icon_flyerly-biz"; // flyerly biz
+        if (indexPath.row == 13){
+            #if defined(FLYERLY)
+                imgname = @"icon_flyerly_biz"; // flyerly biz icon
+            #else
+                imgname = @"icon_flyerly"; // flyerly icon
+            #endif
+        }
         
     } else {
         if (indexPath.row == 3)imgname = @"fb_Like";
@@ -306,7 +305,6 @@
             // Create Labels for text
             cell.description = [[UILabel alloc]initWithFrame:CGRectMake(5, 17, 250, 21)];
             [cell.description setBackgroundColor:[UIColor clearColor]];
-            //[cell.description setTextColor:[UIColor darkGrayColor]];
             [cell.description setTextColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
             [cell.description setFont:[UIFont fontWithName:@"AvenirNext-Bold" size:16]];
             [cell.description setTextAlignment:NSTextAlignmentLeft];
@@ -315,7 +313,13 @@
         }
         if (indexPath.row == 10)imgname = @"icon_untech";//untech
         if (indexPath.row == 11)imgname = @"icon_eyespot";//eyespot
-        if (indexPath.row == 12)imgname = @"icon_flyerly-biz"; // flyerly biz
+        if (indexPath.row == 12){
+            #if defined(FLYERLY)
+                imgname = @"icon_flyerly_biz"; // flyerly biz icon
+            #else
+                imgname = @"icon_flyerly"; // flyerly icon
+            #endif
+        }
     }
     
     // Set cell Values
@@ -428,7 +432,12 @@
            [self openITunes:@"eyespot/id611525338?mt=8"]; //eyeSPOT
         }
         else if (indexPath.row == 13){
-            [self openITunes:@"socialflyr-free/id344139192?mt=8"]; //Flyerly Biz
+            
+            #if defined(FLYERLY)
+                [self openITunes:@"socialflyr-free/id344139192?mt=8"]; //Flyerly Biz
+            #else
+                [self openITunes:@"socialflyr-free/flyerly-add-creativity-to/id344130515?mt=8"]; //Flyerly
+            #endif
         }
         else if(indexPath.row == 14){//clear purchasis
             _persistence = [[RMStoreKeychainPersistence alloc] init];
@@ -494,7 +503,11 @@
         } else if (indexPath.row == 11){
             [self openITunes:@"eyespot/id611525338?mt=8"]; //eyeSPOT
         } else if (indexPath.row == 12){
-            [self openITunes:@"socialflyr-free/id344139192?mt=8"]; //Flyerly Biz
+            #if defined(FLYERLY)
+                [self openITunes:@"socialflyr-free/id344139192?mt=8"]; //Flyerly Biz
+            #else
+                [self openITunes:@"socialflyr-free/flyerly-add-creativity-to/id344130515?mt=8"]; //Flyerly
+            #endif
         }
     }
 }
@@ -549,6 +562,8 @@
     [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
     [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"InAppPurchases"];
     
+    [[NSUserDefaults standardUserDefaults]setValue: nil forKey:@"InAppPurchases"];
+    
     // Log out from parse.
     [PFUser logOut];
 }
@@ -568,9 +583,12 @@
 
 
 -(IBAction)rateApp:(id)sender{
-     NSString *url = @"itms-apps://itunes.apple.com/app/id344130515";
-    //url = [NSString stringWithFormat: @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@", @"344130515"];
-    [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
+    
+    #if defined(FLYERLY)
+        [self openITunes:@"socialflyr-free/flyerly-add-creativity-to/id344130515?mt=8"]; //Flyerly
+    #else
+        [self openITunes:@"socialflyr-free/id344139192?mt=8"]; //Flyerly Biz
+    #endif
     
 }
 
@@ -600,9 +618,15 @@
         }else{*/
             
             // Current Item For Sharing
-            //SHKItem *item = [SHKItem text:[NSString stringWithFormat:@"%@ @flyerlyapp",@" "]];
-            SHKItem *item = [SHKItem text:[NSString stringWithFormat:@"@flyerlyapp "]];
-            
+        NSString *str;
+        
+        #if defined(FLYERLY)
+            str = @"@flyerlyapp";
+        #else
+            str = @"@flyerlybiz";
+        #endif
+        SHKItem *item = [SHKItem text:str];
+        
             //Calling ShareKit for Sharing
             iosSharer = [[ SHKSharer alloc] init];
             iosSharer = [SHKTwitter shareItem:item];
@@ -623,7 +647,7 @@
     if([MFMailComposeViewController canSendMail]){
         
         picker.mailComposeDelegate = self;
-        [picker setSubject:@"Flyerly Email Feedback..."];
+        [picker setSubject: [NSString stringWithFormat:@"%@ Email Feedback...", APP_NAME]];
         
         // Set up recipients
         NSMutableArray *toRecipients = [[NSMutableArray alloc]init];
@@ -633,6 +657,12 @@
         [self presentViewController:picker animated:YES completion:nil];
     }
 
+}
+
+- (IBAction)onClickBtnDismissBannerAds:(id)sender {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self dismissBannerAds:YES];
+    });
 }
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
@@ -674,8 +704,16 @@
             [[UIApplication sharedApplication] openURL:url];
         }
         else {
+            NSString *url_str;
+            
+            #if defined(FLYERLY)
+                url_str = @"https://www.facebook.com/flyerlyapp";
+            #else
+                url_str = @"https://www.facebook.com/flyerlybiz";
+            #endif
+            
             //Open the url as usual
-            url = [NSURL URLWithString:@"https://www.facebook.com/flyerlyapp"];
+            url = [NSURL URLWithString:url_str];
             [[UIApplication sharedApplication] openURL:url];
         }
     }else {
@@ -708,14 +746,15 @@
 - ( void )productSuccesfullyPurchased: (NSString *)productId {
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
+    canShowAd = [userPurchases_ canShowAd];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS] ) {
         
         [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
     
-    if ( [productId isEqualToString:@"com.flyerly.AdRemovalMonthly"]) {
+    //when purchased bundle is of ad removal or check can we remove banner add
+    if ( [productId isEqualToString: BUNDLE_IDENTIFIER_AD_REMOVAL] || canShowAd == NO) {
         [self removeBAnnerAdd:YES];
     }
 }
@@ -765,13 +804,12 @@
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
-         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS] ) {
         
         [inappviewcontroller.paidFeaturesTview reloadData];
     }else {
         
-        if([productIdentifier length] == 0){
+        if([productIdentifier length] == 0 && inappviewcontroller != nil){
             [self presentViewController:inappviewcontroller animated:YES completion:nil];
         }
     }
@@ -789,9 +827,15 @@
 
 - (void)sharerFinishedSending:(SHKSharer *)sharer
 {
+    NSString *strAlert;
     
+    #if defined(FLYERLY)
+        strAlert =@"Thank you. Your feedback has been sent to @flyerlyapp on Twitter.";
+    #else
+        strAlert = @"Thank you. Your feedback has been sent to @flyerlybiz on Twitter.";
+    #endif
     // Here we show Messege after Sending
-    [self showAlert:@"Thank you. Your feedback has been sent to @flyerlyapp on Twitter." message:@""];
+    [self showAlert:strAlert message:@""];
     
     if (!sharer.quiet)
 		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!") forSharer:sharer];
@@ -892,53 +936,20 @@
 
 // We've received a Banner ad successfully.
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
-    
     if ( bannerAdClosed == NO && bannerShowed == NO ) {
         bannerShowed = YES;//keep bolean we have rendered banner or not ?
-        
-        // Device Check Maintain Size of ScrollView Because Scroll Indicator will show.
-        if ( btnBannerAdsDismiss == nil ){
-            if(IS_IPHONE_4 || IS_IPHONE_5) {
-                btnBannerAdsDismiss = [[UIButton alloc] initWithFrame:CGRectMake(270, 0, 52, 52)];
-            } else if (IS_IPHONE_6){
-                btnBannerAdsDismiss = [[UIButton alloc] initWithFrame:CGRectMake(320, 0, 52, 52)];
-            }else if(IS_IPHONE_6_PLUS){
-                btnBannerAdsDismiss = [[UIButton alloc] initWithFrame:CGRectMake(360, 0, 52, 52)];
-            }else {
-                btnBannerAdsDismiss = [[UIButton alloc] initWithFrame:CGRectMake(270, 0, 52, 52)];
-            }
-        }
-    
-        self.bannerAdsView.alpha = 1.0;
-        self.bannerAdsView.backgroundColor = [UIColor clearColor];
-        
-        [btnBannerAdsDismiss addTarget:self action:@selector(dismissBannerAdsOnTap) forControlEvents:UIControlEventTouchUpInside];
-        
-        [btnBannerAdsDismiss setImage:[UIImage imageNamed:@"closeAd.png"] forState:UIControlStateNormal];
-        
-        btnBannerAdsDismiss.tag = 999;
-        
+        bannerAdsView.alpha = 1.0;
+        btnBannerAdsDismiss.alpha = 1.0;
         [self.bannerAdsView addSubview:btnBannerAdsDismiss];
-        
-        //Adding ad in custom view
-        [self.bannerAdsView addSubview:adView];
-        //Making dismiss button visible,and bring it to front
-        [self.bannerAdsView bringSubviewToFront:btnBannerAdsDismiss];
-        return;
     }
 }
 
--(void)dismissBannerAdsOnTap{
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self dismissBannerAds:YES];
-    });
-}
+
 
 // Dismiss action for banner ad
 -(void)dismissBannerAds:(BOOL)valForBannerClose{
     
-    productIdentifier = @"com.flyerly.AdRemovalMonthly";
+    productIdentifier = BUNDLE_IDENTIFIER_AD_REMOVAL; // Ad Removal Subscription
     inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
     inappviewcontroller.buttondelegate = self;
     [inappviewcontroller requestProduct];

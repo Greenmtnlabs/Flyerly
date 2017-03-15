@@ -15,6 +15,7 @@
 #import "Flurry.h"
 #import "UserVoice.h"
 #import "SHKSharer.h"
+#import "Common.h"
 
 @implementation InviteFriendsController {
 
@@ -25,7 +26,6 @@
     NSArray *availableAccounts;
     ACAccount *selectedAccount;
     
-    UIButton *btnBannerAdsDismiss;
     BOOL haveValidSubscription;
     UserPurchases *userPurchases;
     NSString *productIdentifier;
@@ -36,6 +36,7 @@
 @synthesize fbText;
 @synthesize bannerAdsView;
 @synthesize shouldShowAdd;
+@synthesize btnBannerAdsDismiss;
 
 const int EMAIL_TAB = 3;
 const int TWITTER_TAB = 2;
@@ -50,7 +51,7 @@ const int CONTACTS_TAB = 0;
     
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
-    haveValidSubscription = [userPurchases isSubscriptionValid];
+    haveValidSubscription = !([userPurchases canShowAd]);
     
     bannerAdClosed = NO;
     bannerShowed = NO;
@@ -104,14 +105,14 @@ const int CONTACTS_TAB = 0;
                                       cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"You have sucessfully unlocked Design Bundle feature by referring friends. Enjoy!"];
                                       
                                   }else if ( refrelCounter <= 0 ){
-                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to flyerly and unlock Design Bundle feature for FREE!"];
+                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to %@ and unlock Design Bundle feature for FREE!", APP_NAME];
                                   }
                                   else if ( refrelCounter > 0 && refrelCounter < 20 )
                                   {
                                       int moreToInvite = 20 - refrelCounter;
+                                    
                                       //Setting the feature name,feature description values for cell view using plist
-                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite %d more people to flyerly and unlock Design Bundle feature for FREE!",moreToInvite];
-                                      
+                                      cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite %d more people to %@ and unlock Design Bundle feature for FREE!",  moreToInvite, APP_NAME];
                                   }
                                   
                                   [refrelText setText:cellDescriptionForRefrelFeature];
@@ -122,8 +123,8 @@ const int CONTACTS_TAB = 0;
              }
          }];
     }else {
-        
-        cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to flyerly and unlock Design Bundle feature for FREE!"];
+        cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to %@ and unlock Design Bundle feature for FREE!", APP_NAME];;
+
     }
     
     
@@ -172,7 +173,7 @@ const int CONTACTS_TAB = 0;
     // Load device contacts
     [self loadLocalContacts:self.contactsButton];
     
-    self.bannerAdsView.alpha = 0.0;
+    
     
     if([FlyerlySingleton connected]){
         if( haveValidSubscription == NO ) {
@@ -185,28 +186,12 @@ const int CONTACTS_TAB = 0;
         
         if( IS_IPHONE_4 || IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
             
-            // Initialize the banner at the bottom of the screen.
-            CGPoint origin;
-            origin = CGPointMake(0.0,0.0);
-            
-            GADAdSize customAdSize = GADAdSizeFromCGSize(CGSizeMake(320, 50));
-            if ( IS_IPHONE_6 ){
-                customAdSize = GADAdSizeFromCGSize(CGSizeMake(420, 50));
-            }else if ( IS_IPHONE_6_PLUS ){
-                customAdSize = GADAdSizeFromCGSize(CGSizeMake(520, 50));
-            }else{
-                customAdSize = GADAdSizeFromCGSize(CGSizeMake(320, 50));
-            }
-            
             if( haveValidSubscription == NO ) {
-                // Use predefined GADAdSize constants to define the GADBannerView.
-                self.bannerAds = [[GADBannerView alloc] initWithAdSize:customAdSize origin:origin];
                 
-                // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID before compiling.
-                self.bannerAds.adUnitID = [flyerConfigurator bannerAdID];
-                self.bannerAds.delegate = self;
-                self.bannerAds.rootViewController = self;
-                [self.bannerAds loadRequest:[self request]];
+                self.bannerAdsView.adUnitID = [flyerConfigurator bannerAdID];
+                self.bannerAdsView.delegate = self;
+                self.bannerAdsView.rootViewController = self;
+                [self.bannerAdsView loadRequest:[self request]];
             }
         }
     });
@@ -258,7 +243,8 @@ const int CONTACTS_TAB = 0;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    
+    self.btnBannerAdsDismiss.alpha = 0.0;
+    self.bannerAdsView.alpha = 0.0;
     self.navigationItem.leftItemsSupplementBackButton = YES;
 }
 
@@ -288,8 +274,9 @@ const int CONTACTS_TAB = 0;
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     userPurchases_.delegate = nil;
-    
-    if ( [productId isEqualToString:@"com.flyerly.AdRemovalMonthly"]) {
+    inAppViewController.buttondelegate = self;
+    haveValidSubscription = !([userPurchases canShowAd]);
+    if ( haveValidSubscription ) {
         [self removeBAnnerAdd:YES];
     }
 }
@@ -309,8 +296,8 @@ const int CONTACTS_TAB = 0;
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     userPurchases_.delegate = nil;
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION]  ||
+        [userPurchases_ checkKeyExistsInPurchases: BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION] ) {
         [inAppViewController.paidFeaturesTview reloadData];
     } else {
         [self removeAdsBanner:YES];
@@ -341,8 +328,9 @@ const int CONTACTS_TAB = 0;
 }
 
 -(IBAction)goBack{
-    
-    self.shouldShowAdd ( @"", haveValidSubscription );
+    if ( self.shouldShowAdd != NULL ) {
+        self.shouldShowAdd( @"", haveValidSubscription );
+    }
     [self.navigationController popViewControllerAnimated:YES];
     
 }
@@ -390,9 +378,8 @@ const int CONTACTS_TAB = 0;
     SHKItem *item;
     NSMutableArray *identifiers = [[NSMutableArray alloc] init];
     identifiers = selectedIdentifiers;
-    NSLog(@"identifiers = %@,  selectedTab = %i",identifiers, selectedTab);
-
-    NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
+    
+    NSString *sharingText = [NSString stringWithFormat:@"I'm using the %@ app to create and share flyers on the go! Want to give it a try? %@%@", APP_NAME, flyerConfigurator.referralURL, userUniqueObjectId];
     
     if([identifiers count] > 0){
         
@@ -438,7 +425,7 @@ const int CONTACTS_TAB = 0;
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",flyerConfigurator.referralURL, userUniqueObjectId]];
             item = [SHKItem URL:url title:@"Invite Friends" contentType:SHKURLContentTypeUndefined];
             [item setMailToRecipients:identifiers];
-            item.text = @"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try?";
+            item.text = [NSString stringWithFormat:@"I'm using the %@ app to create and share flyers on the go! Want to give it a try?", APP_NAME];
             // Share the item with my custom class
             [SHKMail shareItem:item];
         }
@@ -659,8 +646,11 @@ const int CONTACTS_TAB = 0;
     emailBackupArray = nil;
     emailBackupArray = emailsArray;
     
-    [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-    [self hideLoadingIndicator];
+    // Do in the main UI thread.
+    dispatch_async( dispatch_get_main_queue(), ^{
+        [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+        [self hideLoadingIndicator];
+    });
     
 }
 
@@ -694,7 +684,7 @@ const int CONTACTS_TAB = 0;
     SHKItem *item;
     
     // text to be share.
-    NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
+    NSString *sharingText = [NSString stringWithFormat:@"I'm using the %@ app to create and share flyers on the go! Want to give it a try? %@%@", APP_NAME, flyerConfigurator.referralURL, userUniqueObjectId];;
     
     // app URL with user id.
     NSString *urlToShare = [NSString stringWithFormat:@"%@%@", flyerConfigurator.referralURL, userUniqueObjectId];
@@ -1104,9 +1094,17 @@ const int CONTACTS_TAB = 0;
     // HERE WE WORK FOR TWITTER
     if (selectedTab == 2) {
         
-        ContactsModel *model = [self getArrayOfSelectedTab][(indexPath.row)];
+        NSString *hashTag;
+        NSString *sharingText;
+        #if defined(FLYERLY)
+            hashTag  = @"#flyerly";
+        #else
+            hashTag  = @"#FlyerlyBiz";
+        #endif
         
-        NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
+        sharingText = [NSString stringWithFormat:@"I'm using the %@ app to create and share flyers on the go! %@%@", APP_NAME, flyerConfigurator.referralURL, userUniqueObjectId];
+        
+        ContactsModel *model = [self getArrayOfSelectedTab][(indexPath.row)];
         
         //CHECK FOR ALREADY SELECTED
         if (model.status == 0) {
@@ -1116,7 +1114,7 @@ const int CONTACTS_TAB = 0;
             
             //Calling ShareKit for Sharing
             iosSharer = [[ SHKiOSTwitter alloc] init];
-            NSString *tweet = [NSString stringWithFormat:@"%@ @%@ #flyerly",sharingText,model.description];
+            NSString *tweet = [NSString stringWithFormat:@"%@ @%@ %@",sharingText,model.description, hashTag];
             SHKItem *item;
             
             item = [SHKItem text:tweet];
@@ -1138,10 +1136,7 @@ const int CONTACTS_TAB = 0;
             [selectedIdentifiers removeObject:model.description];
             
         }
-        
     }
-    
-    
 }
 
 - (IBAction)onSearchClick:(UIButton *)sender{
@@ -1272,7 +1267,7 @@ const int CONTACTS_TAB = 0;
     // HERE WE UPDATE PARSE ACCOUNT FOR REMEMBER INVITED FRIENDS LIST
     [user saveInBackground];
     
-    [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
+    [self showAlert:@"Invitation Sent!" message:[NSString stringWithFormat:@"You have successfully invited your friends to join %@.", APP_NAME]];
     [selectedIdentifiers   removeAllObjects];
     [self.uiTableView reloadData ];
     
@@ -1413,54 +1408,18 @@ const int CONTACTS_TAB = 0;
     
     if ( bannerAdClosed == NO && bannerShowed == NO ) {
         bannerShowed = YES;//keep bolean we have rendered banner or not ?
-        
-        // Device Check Maintain Size of ScrollView Because Scroll Indicator will show.
-        if ( btnBannerAdsDismiss == nil ){
-            if(IS_IPHONE_4 || IS_IPHONE_5) {
-                btnBannerAdsDismiss = [[UIButton alloc] initWithFrame:CGRectMake(270, 0, 52, 52)];
-            } else if (IS_IPHONE_6){
-                btnBannerAdsDismiss = [[UIButton alloc] initWithFrame:CGRectMake(320, 0, 52, 52)];
-            }else if(IS_IPHONE_6_PLUS){
-                btnBannerAdsDismiss = [[UIButton alloc] initWithFrame:CGRectMake(360, 0, 52, 52)];
-            }else {
-                btnBannerAdsDismiss = [[UIButton alloc] initWithFrame:CGRectMake(270, 0, 52, 52)];
-            }
-        }
-        
         self.bannerAdsView.alpha = 1.0;
-        
-        self.bannerAdsView.backgroundColor = [UIColor clearColor];
-        
-        [btnBannerAdsDismiss addTarget:self action:@selector(dismissBannerAdsOnTap) forControlEvents:UIControlEventTouchUpInside];
-        
-        [btnBannerAdsDismiss setImage:[UIImage imageNamed:@"closeAd.png"] forState:UIControlStateNormal];
-        
-        btnBannerAdsDismiss.tag = 999;
-        
+        self.btnBannerAdsDismiss.alpha = 1.0;
         [self.bannerAdsView addSubview:btnBannerAdsDismiss];
-        
-        //Adding ad in custom view
-        [self.bannerAdsView addSubview:adView];
-        //Making dismiss button visible,and bring it to front
-        [self.bannerAdsView bringSubviewToFront:btnBannerAdsDismiss];
-        return;
     }
-}
-
-
-
--(void)dismissBannerAdsOnTap{
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self dismissBannerAds:YES];
-    });
 }
 
 // Dismiss action for banner ad
 -(void)dismissBannerAds:(BOOL)valForBannerClose{
     
-    productIdentifier = @"com.flyerly.AdRemovalMonthly";
+    productIdentifier = BUNDLE_IDENTIFIER_AD_REMOVAL;
     inAppViewController = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
+    inAppViewController.buttondelegate = self;
     [inAppViewController requestProduct];
     [inAppViewController purchaseProductByID:productIdentifier];
 }
@@ -1480,4 +1439,9 @@ const int CONTACTS_TAB = 0;
     bannerAdClosed = valForBannerClose;
 }
 
+- (IBAction)onClickBtnBannerAdsDismiss:(id)sender {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self dismissBannerAds:YES];
+    });
+}
 @end

@@ -426,17 +426,21 @@
     // For transfer Purchases and Old Flyers Info
     NSString  *NewUID = user.objectId;
     NSString  *OldUID = oldUserobj.objectId;
-    
-    [PFCloud callFunctionInBackground:@"mergeUser"
-                       withParameters:@{@"oldUser":OldUID,@"newUser":NewUID}
-                                block:^(NSString *result, NSError *error) {
-                                    if (!error) {
-                                        NSLog(@"Cloud Success");
-                                    }
-                                }];
+    NSString *username = [user objectForKey:@"username"];
+    if(NewUID != nil) {
+        [PFCloud callFunctionInBackground:@"mergeUser"
+                           withParameters:@{@"oldUser":OldUID,@"newUser":NewUID}
+                                    block:^(NSString *result, NSError *error) {
+                                        if (!error) {
+                                            NSLog(@"Cloud Success");
+                                        }
+                                    }];
+    }
 
-    //Also Check for New folder Structure
-    [self updateFolderStructure:[user objectForKey:@"username"]];
+    if(username != nil) {
+        //Also Check for New folder Structure
+        [self updateFolderStructure:username];
+    }
 
 }
 

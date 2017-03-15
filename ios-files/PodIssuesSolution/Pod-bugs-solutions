@@ -13,4 +13,6 @@ replace line#296 of Pods/Pods/NBUImagePicker/Filters/NBUCoreImageFilterProvider.
 NSArray * autoFilters = [ciImage autoAdjustmentFiltersWithOptions:nil];
 
 
-3
+3-bug-solution:
+remove it from errors 
+fromViewController:nil 

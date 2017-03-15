@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment version="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <deployment version="2048" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateFlyerController">
@@ -17,6 +17,7 @@
                 <outlet property="backgroundTabButton" destination="zoh-mW-4K3" id="jKZ-37-kHq"/>
                 <outlet property="backtemplates" destination="WvZ-dV-5Fn" id="5XB-pz-W0O"/>
                 <outlet property="bannerAdsView" destination="HqN-xE-zHB" id="FBd-9e-8or"/>
+                <outlet property="btnBannerAdsDismiss" destination="uIg-oU-faY" id="SXZ-RS-1Yo"/>
                 <outlet property="cameraRoll" destination="t0N-7F-yOw" id="jXi-au-Q5l"/>
                 <outlet property="cameraTabButton" destination="iEv-dA-2If" id="MFy-NX-MwQ"/>
                 <outlet property="cameraTakePhoto" destination="TUU-ew-jcU" id="4sp-iH-P0R"/>
@@ -126,11 +127,21 @@
                             <rect key="frame" x="103" y="20" width="130" height="130"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <view contentMode="scaleToFill" id="HqN-xE-zHB">
-                            <rect key="frame" x="0.0" y="125" width="376" height="50"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" id="HqN-xE-zHB" customClass="GADBannerView">
+                    <rect key="frame" x="0.0" y="564" width="376" height="50"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uIg-oU-faY">
+                            <rect key="frame" x="326" y="0.0" width="50" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="closeAd.png"/>
+                            <connections>
+                                <action selector="onClickBtnBannerAdsDismiss:" destination="-1" eventType="touchUpInside" id="dwQ-AK-Lab"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
@@ -620,7 +631,7 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="342" y="788.5"/>
+            <point key="canvasLocation" x="342" y="605.5"/>
         </view>
         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" id="AH5-Xr-weS">
             <rect key="frame" x="0.0" y="0.0" width="37" height="37"/>
@@ -656,6 +667,7 @@
         <image name="blue_bar.png" width="320" height="45"/>
         <image name="clipart_tab.png" width="64" height="45"/>
         <image name="clipart_tab_selected.png" width="64" height="45"/>
+        <image name="closeAd.png" width="72" height="72"/>
         <image name="color_button.png" width="64" height="45"/>
         <image name="color_button_selected.png" width="64" height="45"/>
         <image name="color_tab.png" width="64" height="45"/>

@@ -9,7 +9,9 @@
 #import "RegisterController.h"
 #import "InviteFriendsController.h"
 
-@interface RegisterController ()
+@interface RegisterController () {
+    UIBarButtonItem *leftBarButton, *righBarButton;
+}
 
 @end
 
@@ -75,7 +77,7 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
     backButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItem:leftBarButton];
 
     //Done Bar button
@@ -83,35 +85,43 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
     [doneButton addTarget:self action:@selector(onSignUp) forControlEvents:UIControlEventTouchUpInside];
     [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
     doneButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+    righBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
 
-    [self.navigationItem setRightBarButtonItem:rightBarButton];
- 
+    [self.navigationItem setRightBarButtonItem:righBarButton];
 
 }
 
 -(void)goBack{
-    
 	[self.navigationController popViewControllerAnimated:YES];
-    
 }
 
 
--(void)showLoadingView {
-    [self showLoadingIndicator];
+// Show Hide loader
+-(void)showLoader:(BOOL)show {
+    if(show) {
+        [self showLoadingIndicator];
+        [self enableLinks:NO];
+    } else {
+        [self hideLoadingIndicator];
+        [self enableLinks:YES];
+    }
 }
 
+// Enable / Disable link on screen
+-(void)enableLinks:(BOOL)enable {
 
--(void)removeLoadingView{
-    [self hideLoadingIndicator];
+    righBarButton.enabled = enable;
+    leftBarButton.enabled = enable;
+    self.view.userInteractionEnabled = enable;
 }
+
 
 
 -(void)onSignUp{
     
     //Internet Connectivity Check
     if([FlyerlySingleton connected]){
-        [self showLoadingView];
+        [self showLoader:YES];
         
         //Validations
         if( [self validate] ){
@@ -150,7 +160,7 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
             warningAlert = [[UIAlertView  alloc]initWithTitle:@"Account already exists using this account." message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Sign In",nil];
             
             [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
-            [self removeLoadingView];
+            [self showLoader:NO];
 
         } else {
             
@@ -169,14 +179,14 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
     //Internet Connectivity Check
     if([FlyerlySingleton connected]){
         
-        [self showLoadingView];
+        [self showLoader:YES];
         
         // The permissions requested from the user
-        NSArray *permissionsArray = @[ @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
+        NSArray *permissionsArray = @[ @"email", @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
         
         // Login PFUser using Facebook
         [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
-            [self hideLoadingIndicator]; // Hide loading indicator
+            [self showLoader:NO]; // Hide loading indicator
             
             if ( !user ) {
                 
@@ -200,12 +210,14 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
                     
                 }
                 
-            } else if (user.isNew) {
-                
-                NSLog(@"User with facebook signed up and logged in!");
-                
+            } else {
+
                 //Saving User Info for again login
                 [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
+
+                if (user.isNew) {
+                
+                NSLog(@"User with facebook signed up and logged in!");
                 
                 // Login success Move to Flyerly
                 launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
@@ -224,9 +236,6 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
                 
                 NSLog(@"User with facebook logged in!");
                 
-                //Saving User Info for again login
-                [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
-                
                 // Login success Move to Flyerly
                 launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
                 
@@ -243,6 +252,7 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
                 appDelegate.lauchController = launchController;
                 
                 [self onRegistrationSuccess];
+            }
             }
         }];
 
@@ -275,44 +285,69 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
     //Connectivity Check
     if([FlyerlySingleton connected]){
         
-        [self showLoadingView];
+        [self showLoader:YES];
 
         [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
             
-            [self hideLoadingIndicator];
+            [self showLoader:NO];
+            BOOL canSave = NO;
             
             if ( !user ) {
-                
                 NSLog(@"Uh oh. The user cancelled the Twitter login.");
                 return;
-                
-            } else if (user.isNew) {
-                
-                NSLog(@"User signed up and logged in with Twitter!");
-                
-                UINavigationController* navigationController = self.navigationController;
-                
-                [navigationController popViewControllerAnimated:NO];
-                
-                [self onRegistrationSuccess];
-                
-                NSString *twitterUsername = [PFTwitterUtils twitter].userId;
-                
-                //Saving User Info for again login
-                [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
-                
-                // For Parse New User Merge to old Twitter User
-                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-                [appDelegate twitterChangeforNewVersion:twitterUsername];
-                
+
             } else {
+
+                NSString *twitterUsername = [PFTwitterUtils twitter].screenName;
                 
-                NSLog(@"User logged in with Twitter!");
+                if(![twitterUsername isEqualToString:@""]) {
+                    if(user.isNew || (user.username == nil || [user.username isEqualToString:@""]) ){
+                        canSave = YES;
+                        user.username = twitterUsername;
+                        [[PFUser currentUser] setObject:twitterUsername forKey:@"username"];
+                    }
+                    
+                    if(user.isNew || (user[@"name"] == nil || [user[@"name"] isEqualToString:@""]) ){
+                        canSave = YES;
+                        user[@"name"] = twitterUsername;
+                        [[PFUser currentUser] setObject:twitterUsername forKey:@"name"];
+                    }
+                }
                 
-                //Saving User Info for again login
-                [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
+                if (user.isNew) {
+                    
+                    canSave = YES;
+                    [[PFUser currentUser] setObject:APP_NAME forKey:@"appName"];
+                    [[PFUser currentUser] saveInBackground];
+                    
+                    // We keep an instance of navigation contrller since the completion block might pop us out of the navigation controller
+                    UINavigationController* navigationController = self.navigationController;
+                    
+                    [navigationController popViewControllerAnimated:NO];
+                    
+                    [self onRegistrationSuccess];
+                    
+                    
+                    //Saving User Info for again login
+                    [[NSUserDefaults standardUserDefaults]  setObject:[twitterUsername lowercaseString] forKey:@"User"];
+                    
+                    // For Parse New User Merge to old Twitter User
+                    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+                    [appDelegate twitterChangeforNewVersion:twitterUsername];
+                    
+                } else {
+                    
+                    NSLog(@"User logged in with Twitter!");
+                    
+                    //Saving User Info for again login
+                    [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
+                    
+                    [self onRegistrationSuccess];
+                }
                 
-                [self onRegistrationSuccess];
+                if(canSave) {
+                    [[PFUser currentUser] saveInBackground];
+                }
             }
         }];
         
@@ -320,7 +355,7 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
     } else {
         
         [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
-        [self removeLoadingView];
+        [self showLoader:NO];
         
     }
 
@@ -333,7 +368,7 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
     if(username.text == nil || [username.text isEqualToString:@""]){
         
         [self showAlert:@"Please complete all required fields" message:@""];
-        [self removeLoadingView];
+        [self showLoader:NO];
         return NO;
     }
     
@@ -341,7 +376,7 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
        !confirmPassword || [confirmPassword.text isEqualToString:@""]){
         
         [self showAlert:@"Please complete all required fields." message:@""];
-        [self removeLoadingView];
+        [self showLoader:NO];
         return NO;
     }
     
@@ -350,19 +385,19 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
     if(![password.text isEqualToString:confirmPassword.text]){
         
         [self showAlert:@"Passwords do not match." message:@""];
-        [self removeLoadingView];
+        [self showLoader:NO];
         return NO;
     }
 
     
     if([email.text length] == 0 ){
         [self showAlert:@"Warning!" message:@"Email Address Must Required"];
-        [self removeLoadingView];
+        [self showLoader:NO];
         return NO;
     }
     if([usrExist.text isEqualToString:@"taken"] ){
         [self showAlert:@"Username already taken" message:@""];
-        [self removeLoadingView];
+        [self showLoader:NO];
         return NO;
     }
     
@@ -380,25 +415,27 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
         user[@"name"] = name.text;
     if (phno.text != nil)
         user[@"contact"] = phno.text;
+
+    // When new user signup using username & password
+    user[@"appName"] = APP_NAME;
     
     //Saving User Info for again login
     [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];
     [[NSUserDefaults standardUserDefaults]  setBool:YES forKey:@"FlyerlyUser"];
 
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        
-        if (error) {
-            
-            NSString *errorValue = (error.userInfo)[@"error"];
-            [self showAlert:@"Warning!" message:errorValue];
-            [self removeLoadingView];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (error) {
+                NSString *errorValue = (error.userInfo)[@"error"];
+                [self showAlert:@"Warning!" message:errorValue];
+                [self showLoader:NO];
 
-        } else {
-            
-            [PFUser logInWithUsername:userName password:pwd];
-            [self onRegistrationSuccess];
-            
-        }
+            } else {
+
+                [PFUser logInWithUsername:userName password:pwd];
+                [self onRegistrationSuccess];
+            }
+        });
         
         
     }];
@@ -418,7 +455,7 @@ static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
     //GET UPDATED USER PUCHASES INFO
     [userPurchases_ setUserPurcahsesFromParse];
     
-    if( appDelegate.lauchController != nil ) {
+    if( appDelegate.lauchController != nil || (appDelegate.lauchController == nil && self.signInController.launchController == nil) ) {
         launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
         [navigationController setRootViewController:launchController];
         

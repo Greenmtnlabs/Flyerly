@@ -24,6 +24,7 @@
 #import "FlyerlySingleton.h"
 #import "CropViewController.h"
 #import "CropVideoViewController.h"
+#import "Common.h"
 
 @implementation AssetsGroupViewController
 
@@ -43,12 +44,11 @@
     // Configure the grid view
     self.gridView.margin = CGSizeMake(5.0, 5.0);
     //self.gridView.sizeToFit;
+
     
-    if( IS_IPHONE_4){
+    if( IS_IPHONE_4 || IS_IPHONE_5){
         self.gridView.nibNameForViews = @"CustomAssetThumbnailView";
-    } else if ( IS_IPHONE_5) {
-        self.gridView.nibNameForViews = @"CustomAssetThumbnailView";
-    }else if ( IS_IPHONE_6){
+     }else if ( IS_IPHONE_6){
         self.gridView.nibNameForViews = @"CustomAssetThumbnailView-iPhone6";
     }else if ( IS_IPHONE_6_PLUS){
         self.gridView.nibNameForViews = @"CustomAssetThumbnailView-iPhone6-Plus"; //Files are in NBU/Gallery/
@@ -172,8 +172,7 @@
         
         if ([[PFUser currentUser] sessionToken].length != 0) {
             
-            if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-                 [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+            if ( [userPurchases_ canCreateVideoFlyer] ) {
                 
                 NSError *error = nil;
                 NSString *homeDirectoryPath = NSHomeDirectory();
@@ -189,9 +188,7 @@
                 
                 //Background Thread
                 CropVideoViewController *cropVideo;
-                if( IS_IPHONE_4){
-                    cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
-                } else if ( IS_IPHONE_5) {
+                if( IS_IPHONE_4 || IS_IPHONE_5){
                     cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
                 }else if ( IS_IPHONE_6){
                     cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController-iPhone6" bundle:nil];
@@ -228,9 +225,7 @@
         
         CropViewController *nbuCrop;
         
-        if( IS_IPHONE_4){
-            nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
-        } else if ( IS_IPHONE_5) {
+        if( IS_IPHONE_4 || IS_IPHONE_5){
             nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
         }else if ( IS_IPHONE_6){
             nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController-iPhone6" bundle:nil];
@@ -253,21 +248,11 @@
     }
 }
 
-- ( void )inAppPurchasePanelContent {
-    
+- ( void )inAppPurchasePanelContent {    
     [inappviewcontroller inAppDataLoaded];
 }
 
 - ( void )productSuccesfullyPurchased: (NSString *)productId {
-    
-    UserPurchases *userPurchases_ = [UserPurchases getInstance];
-    
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
-        
-        //UIImage *buttonImage = [UIImage imageNamed:@"ModeVideo.png"];
-        //[mode setImage:buttonImage forState:UIControlStateNormal];
-    }
     
 }
 
@@ -276,13 +261,12 @@
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
-         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
-        
+    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS] ) {
         [inappviewcontroller.paidFeaturesTview reloadData];
-    }else {
         
+    }else {
         [self presentViewController:inappviewcontroller animated:YES completion:nil];
+        
     }
     
 }

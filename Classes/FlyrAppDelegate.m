@@ -173,6 +173,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
  */
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    NSLog(@"Selected Target = %@", APP_NAME);
+    
     _persistence = [[RMStoreKeychainPersistence alloc] init];
     [RMStore defaultStore].transactionPersistor = _persistence;
     
@@ -413,33 +415,72 @@ if it exist then we call Merging Process
     [lauchController showLoadingIndicator];
 
     // Create request for user's Facebook data
-    FBRequest *request = [FBRequest requestForMe];
-    
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    [parameters setValue:@"id,email,name" forKey:@"fields"];
     // Send request to Facebook
-    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+    [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:parameters] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
         if (!error) {
             
             // result is a dictionary with the user's Facebook data
             NSDictionary *userData = (NSDictionary *)result;
             NSString *email = userData[@"email"];
+            NSString *name = userData[@"name"];
 
-            //Checking Email Exist in Parse
-            PFQuery *query = [PFUser  query];
-            [query whereKey:@"email" equalTo:email];
-            [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
-                if (error) {
-                    
-                    [lauchController hideLoadingIndicator];
+            BOOL canSave = false;
+            BOOL isNew = [[PFUser currentUser] isNew];
+            PFUser *currentUser = [PFUser currentUser];
 
-                }else{
-                    
-                    // Migrate Account For 3.0 Version
-                    [FlyerUser migrateUserto3dot0:object];
-                    
-                    [lauchController hideLoadingIndicator];
-                    
+            // when new user signup via facebook, then push appName to server
+            if (isNew) {
+                [[PFUser currentUser] setObject:APP_NAME forKey:@"appName"];
+                canSave = true;
+            }
+
+            // Store the current user's Facebook ID on the user
+            if ( email != nil && (isNew || currentUser.email == nil || [currentUser.email isEqualToString:@""])) {
+                [[PFUser currentUser] setObject:email forKey:@"email"];
+                canSave = true;
+            }
+
+            if (name != nil ){
+                if(isNew || currentUser.username == nil || [currentUser.username isEqualToString:@""]) {
+                    [[NSUserDefaults standardUserDefaults]  setObject:[name lowercaseString] forKey:@"User"];
+                    [[PFUser currentUser] setObject:name forKey:@"username"];
+                    canSave = true;
                 }
-            }];
+
+                if(isNew || currentUser[@"name"] == nil || [currentUser[@"name"] isEqualToString:@""]) {
+                    [[PFUser currentUser] setObject:name forKey:@"name"];
+                    canSave = true;
+                }
+            }
+            
+            if ( email != nil ){
+                //Checking Email Exist in Parse
+                PFQuery *query = [PFUser  query];
+                [query whereKey:@"email" equalTo:email];
+                [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
+
+                    if (error) {
+                        [lauchController hideLoadingIndicator];
+                    }else{
+                        // Migrate Account For 3.0 Version
+                        [FlyerUser migrateUserto3dot0:object];
+                        
+                        [lauchController hideLoadingIndicator];
+                        
+                    }
+                }];
+            } else {
+                [lauchController hideLoadingIndicator];
+            }
+            
+            if (canSave){
+                [[PFUser currentUser] saveInBackground];
+            }
+        }
+        else {
+            [lauchController hideLoadingIndicator];
         }
     }];
 }

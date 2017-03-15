@@ -13,7 +13,8 @@
 @end
 
 @implementation TermsOfServiceViewController
-@synthesize terms,scrollViewTerms,textViewTerms;- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+@synthesize terms,scrollViewTerms, textViewTerms, txtViewTermsForFlyerlyBiz;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -54,6 +55,15 @@
     CGRect newFrame = textViewTerms.frame;
     newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
     textViewTerms.frame = newFrame;
+    txtViewTermsForFlyerlyBiz.frame = newFrame;
+    
+    #if defined(FLYERLY)
+        textViewTerms.hidden = NO;
+        txtViewTermsForFlyerlyBiz.hidden = YES;
+    #else
+        textViewTerms.hidden = YES;
+        txtViewTermsForFlyerlyBiz.hidden = NO;
+    #endif
 }
 
 -(void)goBack{

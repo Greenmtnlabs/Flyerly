@@ -18,7 +18,7 @@
     int adsCount;
     int adsLoaded;
     CGRect sizeRectForAdd;
-    BOOL haveValidSubscription;
+    BOOL hideAd;
     UserPurchases *userPurchases;
 }
 @end
@@ -46,7 +46,7 @@ id lastShareBtnSender;
     
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
-    haveValidSubscription = [userPurchases isSubscriptionValid];
+    hideAd = !([userPurchases canShowAd]);
     
     lastShareBtnSender = nil;
     
@@ -488,9 +488,9 @@ id lastShareBtnSender;
         
     }];
 
-    [createFlyer setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSubscription) {
+    [createFlyer setShouldShowAdd:^(NSString *flyPath,BOOL haveValidSub) {
         dispatch_async( dispatch_get_main_queue(), ^{
-            if (haveValidSubscription == NO && ([weakSelf.interstitial isReady] && ![weakSelf.interstitial hasBeenUsed]) ){
+            if (haveValidSub == NO && ([weakSelf.interstitial isReady] && ![weakSelf.interstitial hasBeenUsed]) ){
                 [weakSelf.interstitial presentFromRootViewController:weakSelf];
             }  else{
                 [weakSelf saveAndRelease];
@@ -505,9 +505,10 @@ id lastShareBtnSender;
     
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
-    haveValidSubscription = [userPurchases isSubscriptionValid];
-    
-    self.shouldShowAdd ( @"", haveValidSubscription );
+    hideAd = !([userPurchases canShowAd]);
+    if ( self.shouldShowAdd != NULL ) {
+        self.shouldShowAdd ( @"", hideAd );
+    }
   	[self.navigationController popViewControllerAnimated:YES];
     cancelRequest = YES;
 }
@@ -628,11 +629,11 @@ id lastShareBtnSender;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     // If searching, the number of rows may be different
-    if(haveValidSubscription && isSearching){ // search flyers with no ads
+    if(hideAd && isSearching){ // search flyers with no ads
         return searchFlyerPaths.count;
-    }else if (!haveValidSubscription && isSearching){ // search flyers with ads
+    }else if (!hideAd && isSearching){ // search flyers with ads
         return [self getRowsCountWithAdsInSeleceted];
-    }else if(!haveValidSubscription){ // all flyers with ads
+    }else if(!hideAd){ // all flyers with ads
         return [self getRowsCountWithAds];
     }else{ // all flyers with no ads
         return flyerPaths.count;
@@ -660,7 +661,7 @@ id lastShareBtnSender;
         cell = (SaveFlyerCell *)[nib objectAtIndex:0];
     }
     
-    if( !haveValidSubscription && [self isAddvertiseRow:rowNumber] ){ // Shows ads
+    if( !hideAd && [self isAddvertiseRow:rowNumber] ){ // Shows ads
         
         cell.createLabel.alpha = 0.0;
         cell.updatedLabel.alpha = 0.0;
@@ -709,7 +710,7 @@ id lastShareBtnSender;
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 int flyerRow = rowNumber;
-                if(!haveValidSubscription){
+                if(!hideAd){
                     flyerRow = [self getIndexOfSelectedFlyer:rowNumber];
                 }
                 flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:flyerRow] setDirectory:NO];
@@ -725,7 +726,7 @@ id lastShareBtnSender;
             dispatch_async(dispatch_get_main_queue(), ^{
                 // Load the flyers again so that flyer can be loaded if user logs in from here
                 int flyerRow = rowNumber;
-                if(!haveValidSubscription){
+                if(!hideAd){
                     flyerRow = [self getIndexOfFlyer:rowNumber];
                 }
                 flyerPaths = [self getFlyersPaths];
@@ -746,7 +747,7 @@ id lastShareBtnSender;
     int rowNumber = (int)indexPath.row;
     int rowNumberSelectedFlyer = (int)indexPath.row;
     
-    if(!haveValidSubscription && [self isAddvertiseRow:rowNumber] == NO ) {
+    if(!hideAd && [self isAddvertiseRow:rowNumber] == NO ) {
         rowNumber = [self getIndexOfFlyer:rowNumber];
         rowNumberSelectedFlyer = [self getIndexOfSelectedFlyer:rowNumberSelectedFlyer];
         
@@ -914,8 +915,7 @@ id lastShareBtnSender;
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS] ) {
         
         lockFlyer = NO;
         [self.tView reloadData];
@@ -1152,8 +1152,7 @@ id lastShareBtnSender;
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
-         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS] ) {
 
         lockFlyer = NO;
         [self.tView reloadData];

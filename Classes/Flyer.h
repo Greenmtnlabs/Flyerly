@@ -15,6 +15,7 @@
 
 @interface Flyer : NSObject{
     
+    NSString *curFlyerPath; // This variable is used to store path of video. Because from home screen, sometimes app fails to get path   
     NSString *piecesFile;
     NSString *textFile;
     NSString *socialFile;

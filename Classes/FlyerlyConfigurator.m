@@ -10,6 +10,7 @@
 #import "SHKFile.h"
 #import "PaypalMobile.h"
 #import <Social/Social.h>
+#import "Common.h"
 
 @implementation FlyerlyConfigurator
 
@@ -19,22 +20,42 @@
  These values are used by any service that shows 'shared from XYZ'
  */
 - (NSString*)appName {
-	return @"Flyerly";
+	
+    return APP_NAME;
 }
 
 - (NSString*)appURL {
-	return @"http://www.flyer.ly";
+	
+    #if defined(FLYERLY) // Flyerly
+        return @"http://www.flyer.ly";
+    #else // Flyerly Biz
+        return @"http://www.flyerly.com/biz";
+    #endif
 }
 
 - (NSString*)referralURL{
-    return @"http://app.flyerly.com/cs?i=";
+    
+    #if defined(FLYERLY) // Flyerly
+        return @"http://app.flyerly.com/cs?i=";
+    #else // Flyerly Biz
+        return @"http://biz.flyerly.com/cs?i=";
+    #endif
 }
 
 - (NSString*)appLinkURL{
-    return @"http://app.flyerly.com/cs";
+    
+    #if defined(FLYERLY) // Flyerly
+        return @"http://app.flyerly.com/cs";
+    #else // Flyerly Biz
+        return @"http://flyerly.com/biz/";
+    #endif
 }
 - (NSString*)appInvitePreviewImageURL{
-    return @"http://greenmtnlabs.com/flyerly/images/phones.png";
+    #if defined(FLYERLY) // Flyerly
+        return @"http://greenmtnlabs.com/flyerly/images/phones.png";
+    #else // Flyerly Biz
+        return @"http://greenmtnlabs.com/images/bizphone.png";
+    #endif
 }
 
 
@@ -78,15 +99,17 @@
     
     //ozair's account
 	//return @"ca-app-pub-5409664730066465/8030978831";
-
+    
     //Rehan's a/c
     return @"ca-app-pub-1703558915514520/6691113092";
     
 #else
-    
     //Live Jen'account
-    return @"ca-app-pub-3218409375181552/2458746629";
-    
+    #if defined(FLYERLY) // Flyerly
+        return @"ca-app-pub-3218409375181552/2458746629";
+    #else // Flyerly Biz
+        return @"ca-app-pub-3218409375181552/2750207422";
+    #endif
 #endif
 
 }
@@ -98,14 +121,17 @@
     
     //ozair's account
 	//return @"ca-app-pub-5409664730066465/9926514430";
+    
     //Rehan's a/c
     return @"ca-app-pub-1703558915514520/8955078699";
     
 #else
-    
     //Live Jen'account
-    return @"ca-app-pub-3218409375181552/5412213028";
-    
+    #if defined(FLYERLY) // Flyerly
+        return @"ca-app-pub-3218409375181552/5412213028";
+    #else // Flyerly Biz
+        return @"ca-app-pub-3218409375181552/7180407024";
+    #endif
 #endif
     
 }
@@ -193,7 +219,12 @@
 
 //Crittercism ApiKey
 - (NSString*)crittercismAppId {
-	return @"519a14f897c8f27969000019";
+    #if defined(FLYERLY) // Flyerly
+        return @"519a14f897c8f27969000019";
+    #else // Flyerly Biz
+        return @"3a4fc035429242a383c9be5d7c032bdd00555300";
+    #endif
+	
 }
 
 //Parse Online Keys
@@ -206,18 +237,20 @@
 
 //Parse Offline Keys
 - (NSString*)parseOfflineAppId{
-    return @"1zE9CnuScHj4l7dGFbT8NG15uTNb8VazMpsdoCis";
-    //---oziar's account---//q9bK4kuAV7se1SPuNJ4wvffTSVU5k4MLDnVgJpbI
+    return @"1zE9CnuScHj4l7dGFbT8NG15uTNb8VazMpsdoCis"; //zohaib bhai test a/c
 }
 
 - (NSString*)parseOfflineClientKey{
-    return @"rFdNdJfzWt8YIf66G7twr0D5zp9uVsWuAkMEnkpc";
-    //----//fXPKQXaId9M2qz3Xd74iUo7LDt8gHEbMVJUM2dYt
+    return @"rFdNdJfzWt8YIf66G7twr0D5zp9uVsWuAkMEnkpc"; //zohaib bhai test a/c
 }
 
 //Flurry SessionKey
 - (NSString*)flurrySessionId{
-    return @"ZWXZFGSQZ4GMYZBVZYN3";
+    #if defined(FLYERLY) // Flyerly
+        return @"ZWXZFGSQZ4GMYZBVZYN3";
+    #else // Flyerly Biz
+        return @"CFNHH68Y7DF4RVG8VVS5";
+    #endif
 }
 
 
@@ -238,7 +271,12 @@
 //
 //    Your CFBundleURLSchemes entry: fb555lite
 - (NSString*)facebookAppId {
-	return @"136691489852349";
+    
+    #if defined(FLYERLY) // Flyerly
+        return @"136691489852349";
+    #else // Flyerly Biz
+        return @"1755119231374505";
+    #endif
 }
 
 - (NSString*)facebookLocalAppId {
@@ -279,6 +317,7 @@
  register the bundle ID of your application.
  */
 - (NSString*)googlePlusClientId {
+    
     return @"144370279359-lsst3ttqhr7nrj1krv21hk3urfsou6ic.apps.googleusercontent.com";
 }
 
@@ -320,12 +359,22 @@
  */
 
 - (NSString*)twitterConsumerKey {
-    return @"xYlRtbesxU0Qrxulx5kjdA";
     
+    #if defined(FLYERLY) // Flyerly
+        return @"xYlRtbesxU0Qrxulx5kjdA";
+    #else // Flyerly Biz
+        return @"JlAwXVRkwu0HvGwVmrPq8dAgz";
+    #endif
 }
 
 - (NSString*)twitterSecret {
-	return @"v8j6WWLoRDBCIkUQtapbhuOoYOZ4sWjMJovJLIPgO0";
+
+    #if defined(FLYERLY) // Flyerly
+        return @"v8j6WWLoRDBCIkUQtapbhuOoYOZ4sWjMJovJLIPgO0";
+    #else // Flyerly Biz
+        return @"5DoqmMkYaK7V4SqRITDCfDGBcgLWo2vDg5DAXcCNV0mPasWGSS";
+    #endif
+	
 }
 // You need to set this if using OAuth, see note above (xAuth users can skip it)
 - (NSString*)twitterCallbackUrl {
@@ -337,7 +386,12 @@
 }
 // Enter your app's twitter account if you'd like to ask the user to follow it when logging in. (Only for xAuth)
 - (NSString*)twitterUsername {
-	return @"flyerlyapp";
+    
+    #if defined(FLYERLY)
+        return @"flyerlyapp";
+    #else
+        return @"flyerlybiz";
+    #endif
 }
 
 // Evernote - http://www.evernote.com/about/developer/api/
@@ -387,7 +441,7 @@
 
 // Bit.ly for shortening URLs, used by some sharers (e.g. Buffer). http://bit.ly/account/register - after signup: http://bit.ly/a/your_api_key If you do not enter bit.ly credentials, URL will be shared unshortened.
 - (NSString*)bitLyLogin {
-	return @"flyerly";
+    return @"flyerly";
 }
 
 - (NSString*)bitLyKey {
@@ -494,12 +548,21 @@
 //clientid
 // YouTube - https://developers.google.com/youtube/v3/guides/authentication#OAuth2_Register
 - (NSString*)youTubeConsumerKey {
-    return @"688107532507-7nm1v37klc2vtfgcaer206k338ub9jqs.apps.googleusercontent.com";
+    #if defined(FLYERLY) // Flyerly
+        return @"688107532507-7nm1v37klc2vtfgcaer206k338ub9jqs.apps.googleusercontent.com";
+    #else // Flyerly Biz
+        return @"487252497579-jptpajrrht0lfaq0ig7h7mkkvfrh5eku.apps.googleusercontent.com"; // using id: abdulrauf618@gmail.com
+    #endif
 }
 
 //API key
 - (NSString*)youTubeSecret {
-	return @"lSn4qPwH3FOytNsqMkeZNYTP";
+	
+    #if defined(FLYERLY)
+        return @"lSn4qPwH3FOytNsqMkeZNYTP";
+    #else
+        return @"wZCbdJC0fyonfizeoB_aNv_6"; // using id: abdulrauf618@gmail.com
+    #endif
 }
 
 // Dropbox - https://www.dropbox.com/developers/apps

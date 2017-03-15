@@ -13,7 +13,7 @@
 @end
 
 @implementation PrivicyPolicyViewController
-@synthesize mylabel,textViewPrivicy,scrollViewPrivicy;
+@synthesize mylabel, textViewPrivicy, scrollViewPrivicy, txtViewPrivacyForFlyerlyBiz;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -54,6 +54,16 @@
     CGRect newFrame = textViewPrivicy.frame;
     newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
     textViewPrivicy.frame = newFrame;
+    txtViewPrivacyForFlyerlyBiz.frame = newFrame;
+
+    #if defined(FLYERLY)
+        textViewPrivicy.hidden = NO;
+        txtViewPrivacyForFlyerlyBiz.hidden = YES;
+    #else
+        textViewPrivicy.hidden = YES;
+        txtViewPrivacyForFlyerlyBiz.hidden = NO;
+    #endif
+    
 
 }
 

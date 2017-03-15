@@ -95,17 +95,18 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
  * Set up the paths.
  */
 - (void)setupPaths:(NSString *)flyPath {
+    curFlyerPath = flyPath;
     //set Pieces Dictionary File for Update
-    piecesFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.pieces"]];
+    piecesFile = [curFlyerPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.pieces"]];
     
     //set Text File for Update
-    textFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.txt"]];
+    textFile = [curFlyerPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.txt"]];
     
     //set Share Status File for Update
-    socialFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/Social/flyer.soc"]];
+    socialFile = [curFlyerPath stringByAppendingString:[NSString stringWithFormat:@"/Social/flyer.soc"]];
     
     //set Flyer Image for Future Update
-    flyerImageFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE]];
+    flyerImageFile = [curFlyerPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE]];
 }
 
 
@@ -292,8 +293,13 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
 }
 
 -(void)showAllowSaveInGallerySettingAlert{
+    
+    NSString *msg;
+    
+    msg = [NSString  stringWithFormat:@"Please allow %@ to add photo in gallery( Settings -> Privacy -> Photos)", APP_NAME] ;
+
     UIAlertView *permAlert = [[UIAlertView alloc] initWithTitle:@"Settings"
-                                                        message:@"Please allow flyerly to add photo in gallery( Settings -> Privacy -> Photos)"
+                                                        message:msg
                                                        delegate:nil
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil, nil];
@@ -1311,6 +1317,14 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  */
 -(void)createFlyerlyAlbum {
     
+    NSString *albumName;
+    
+    #if defined(FLYERLY)
+        albumName = FLYER_ALBUM_NAME;
+    #else
+        albumName = FLYERLY_BIZ_ALBUM_NAME;
+    #endif
+    
     if ( _library == nil ) {
         _library = [[ALAssetsLibrary alloc] init];
     }
@@ -1318,7 +1332,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     __weak ALAssetsLibrary* library = _library;
     
     //HERE WE SEN REQUEST FOR CREATE ALBUM
-    [_library addAssetsGroupAlbumWithName:FLYER_ALBUM_NAME
+    [_library addAssetsGroupAlbumWithName:albumName
                              resultBlock:^(ALAssetsGroup *group) {
                                  
                                  //CHECKING ALBUM FOUND IN LIBRARY
@@ -1329,7 +1343,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
                                          
                                         NSString *existAlbumName = [group valueForProperty: ALAssetsGroupPropertyName];
                                          
-                                         if ([existAlbumName isEqualToString:FLYER_ALBUM_NAME]) {
+                                         if ([existAlbumName isEqualToString:albumName]) {
                                              *stop = YES;
                                              
                                              // GETTING CREATED URL OF ALBUM
@@ -1368,6 +1382,14 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  */
 -(void)createFlyerlyAlbum :(NSData *)imgdata {
     
+    NSString *albumName;
+    
+    #if defined(FLYERLY)
+        albumName = FLYER_ALBUM_NAME;
+    #else
+        albumName = FLYERLY_BIZ_ALBUM_NAME;
+    #endif
+    
     if ( _library == nil ) {
         _library = [[ALAssetsLibrary alloc] init];
     }
@@ -1375,7 +1397,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     
     //HERE WE SEN REQUEST FOR CREATE ALBUM
-    [_library addAssetsGroupAlbumWithName:FLYER_ALBUM_NAME
+    [_library addAssetsGroupAlbumWithName:albumName
                              resultBlock:^(ALAssetsGroup *group) {
                                  
                                  // GETTING CREATED URL OF ALBUM
@@ -1739,6 +1761,9 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  */
 -(NSString *)getSharingVideoPath{
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    if ([currentpath isEqualToString:@"/"]) {
+        currentpath = [NSString stringWithFormat:@"/private%@",curFlyerPath];
+    }
     NSString *destination = [NSString stringWithFormat:@"%@/FlyerlyMovie.mov",currentpath];
     return destination;
 }

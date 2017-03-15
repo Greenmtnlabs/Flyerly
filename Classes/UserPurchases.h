@@ -23,6 +23,9 @@
 + (id) getInstance;
 - (void) setUserPurcahsesFromParse;
 - (BOOL) checkKeyExistsInPurchases : (NSString *)productId;
+- (BOOL) canCreateVideoFlyer;
+- (BOOL) haveProduct : (NSString *)productId;
 - (BOOL) isSubscriptionValid;
+- (BOOL) canShowAd;
 @end
 

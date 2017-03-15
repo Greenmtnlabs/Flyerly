@@ -558,7 +558,7 @@
     // HERE WE UPDATE PARSE ACCOUNT FOR REMEMBER INVITED FRIENDS LIST
     [user saveInBackground];
     
-    [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
+    [self showAlert:@"Invitation Sent!" message:[NSString stringWithFormat: @"You have successfully invited your friends to join %@.", APP_NAME]];
     [selectedIdentifiers   removeAllObjects];
     [self.uiTableView reloadData ];
     

@@ -25,9 +25,8 @@
     BOOL isSearch;
     UIImageView *noAdsImage;
     NSString *imageName;
-    bool showAds;
+    bool hideAd;
     BOOL isComingFromCreateFlyer;
-    
 }
 
 @end
@@ -124,7 +123,7 @@ id lastShareBtnSender;
     
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
-    showAds = [userPurchases isSubscriptionValid];
+    hideAd = !([userPurchases canShowAd]);
     
     [self.tView reloadData];
     [self checkUserPurchases];
@@ -531,11 +530,11 @@ id lastShareBtnSender;
     
     // If searching, the number of rows may be different
     
-    if(showAds && isSearch){ // search flyers with no ads
+    if(hideAd && isSearch){ // search flyers with no ads
         return searchFlyerPaths.count;
-    }else if (!showAds && isSearch){ // search flyers with ads
+    }else if (!hideAd && isSearch){ // search flyers with ads
         return  [self getRowsCountWithAdsInSeleceted];
-    }else if(!showAds){ // all flyers with ads
+    }else if(!hideAd){ // all flyers with ads
         return [self getRowsCountWithAds];
     } else{ // all flyers with no ads
          return flyerPaths.count;
@@ -559,7 +558,7 @@ id lastShareBtnSender;
     }
     [cell setAccessoryType:UITableViewCellAccessoryNone];
     
-    if( !showAds && [self isAddvertiseRow:rowNumber] ){ // Shows ads
+    if( !hideAd && [self isAddvertiseRow:rowNumber] ){ // Shows ads
         
         cell.cellImage.alpha = 0.0;
         cell.sideView.alpha = 0.0;
@@ -595,7 +594,7 @@ id lastShareBtnSender;
         if( isSearch ){
             dispatch_async(dispatch_get_main_queue(), ^{
                 int flyerRow = rowNumber;
-                if(!showAds){
+                if(!hideAd){
                     flyerRow = [self getIndexOfSelectedFlyer:rowNumber];
                 }
                 
@@ -617,7 +616,7 @@ id lastShareBtnSender;
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
                 int flyerRow = rowNumber;
-                if(!showAds){
+                if(!hideAd){
                     flyerRow = [self getIndexOfFlyer:rowNumber];
                 }
                 
@@ -646,7 +645,7 @@ id lastShareBtnSender;
     int rowNumber = (int)indexPath.row;
     int rowNumberSelectedFlyer = (int)indexPath.row;
     
-    if(!showAds && [self isAddvertiseRow:rowNumber] == NO ) {
+    if(!hideAd && [self isAddvertiseRow:rowNumber] == NO ) {
         rowNumber = [self getIndexOfFlyer:rowNumber];
         rowNumberSelectedFlyer = [self getIndexOfSelectedFlyer:rowNumberSelectedFlyer];
         
@@ -862,8 +861,7 @@ id lastShareBtnSender;
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     userPurchases_.delegate = nil;
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS] ) {
         
         [self.tView reloadData];
         [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
@@ -929,10 +927,15 @@ id lastShareBtnSender;
     // for Navigation Bar logo
     UIImageView *logo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 102, 38)];
     
-    [logo setImage:[UIImage imageNamed:@"flyerlylogo"]];
+    #if defined(FLYERLY)
+        [logo setImage:[UIImage imageNamed:@"flyerlyLogo"]];
+    #else
+        [logo setImage:[UIImage imageNamed:@"flyerlyBizLogo"]];
+    #endif
+    
     self.navigationItem.titleView = logo;
     
-    // to apply gesture recognizer on image(flyerlylogo)
+    // to apply gesture recognizer on image(flyerlyLogo)
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
     singleTap.numberOfTapsRequired = 1;
     [logo setUserInteractionEnabled:YES];
@@ -1206,8 +1209,7 @@ id lastShareBtnSender;
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     userPurchases_.delegate = nil;
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
-         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS] ) {
 
         [self.tView reloadData];
         [inappviewcontroller.paidFeaturesTview reloadData];

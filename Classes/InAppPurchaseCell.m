@@ -7,6 +7,7 @@
 //
 
 #import "InAppPurchaseCell.h"
+#import "Common.h"
 
 @implementation InAppPurchaseCell
 
@@ -20,16 +21,17 @@
 }
 
 -(void)setCellValueswithProductTitle :(NSString *)productIdentifier Title:(NSString *)title ProductPrice:(NSString *)price ProductDescription: (NSString *)description{
-    
-    if ( ![title isEqualToString:@"Complete Bundle"] ){
+
+      //dont show discount view
+//    if ( ![title isEqualToString:@"Complete Bundle"] ){
         [discount removeFromSuperview];
-    }
+//    }
     
     if ( ![title isEqualToString:@"Monthly Subscription"] ){
         [star removeFromSuperview];
     }
     
-    if([productIdentifier isEqualToString:@"com.flyerly.MonthlyGold"]){
+    if([productIdentifier isEqualToString:BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION ]){ // Monthly Subscription
         packageName.textColor = [UIColor redColor];
         packagePrice.textColor = [UIColor redColor];
         packageDescription.textColor = [UIColor redColor];

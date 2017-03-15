@@ -1,4 +1,4 @@
-    //
+//
 //  UserPurchases.m
 //  Flyr
 //
@@ -9,6 +9,7 @@
 #import "UserPurchases.h"
 #import "FlyerUser.h"
 #import "RMAppReceipt.h"
+#import "Common.h"
 
 @implementation UserPurchases
 
@@ -34,21 +35,113 @@ static UserPurchases *sharedSingleton = nil;
     return sharedSingleton;
 }
 
-- (BOOL) checkKeyExistsInPurchases : (NSString *)productId {
-    
-    if ( [oldPurchases objectForKey:@"comflyerlyAllDesignBundle"] && [self isSubscriptionValid] ) {
-        
+//check old purchase have this product id and this id should not belonge from any kind of subscriptions
+-(BOOL) haveProduct:(NSString * )productId{
+    NSString *productId_ = [productId stringByReplacingOccurrencesOfString:@"." withString:@""];
+    if ( !([productId_ isEqualToString: IN_APP_ID_MONTHLY_SUBSCRIPTION] || [productId_ isEqualToString: IN_APP_ID_YEARLY_SUBSCRIPTION]) && [oldPurchases objectForKey:productId_] ) {
         return YES;
-        
     } else {
-        
-        NSString *productId_ = [productId stringByReplacingOccurrencesOfString:@"." withString:@""];
-        
-        if ( !([productId_ isEqualToString:@"comflyerlyMonthlySubscription"] || [productId_ isEqualToString:@"comflyerlyYearlySubscription1"]) && [oldPurchases objectForKey:productId_] ) {
-            return YES;
-        }
+        return NO;
     }
-    return NO;
+}
+
+/*
+ * Checks Ads Removal Subscription (for FlyerlyBiz)
+ * @params:
+ *      productId: NSString
+ * @return:
+ *      BOOL
+ */
+
+-(BOOL) hasAdsRemovalSubscription:(NSString * )productId {
+    NSString *productId_ = [productId stringByReplacingOccurrencesOfString:@"." withString:@""];
+    oldPurchases = [[NSMutableDictionary alloc]
+                    initWithDictionary:[[NSUserDefaults standardUserDefaults]
+                                        valueForKey:@"InAppPurchases"]];
+    if ( [productId_ isEqualToString: IN_APP_ID_AD_REMOVAL] && [oldPurchases objectForKey:productId_] ) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+//checkKeyExistsInPurchases
+- (BOOL) checkKeyExistsInPurchases : (NSString *)productId {
+    if ( [self isSubscriptionValid] ) {
+        return YES;
+    } else if ( [oldPurchases objectForKey: IN_APP_ID_ALL_DESIGN]  ) {
+        return YES;
+    } else {
+        return [self haveProduct:productId];
+    }
+}
+
+/**
+ * Purpose: check we can create video flyer ?
+ * @parm:void 
+ * @return:BOOL
+ */
+- (BOOL)canCreateVideoFlyer {
+    if ( [self isSubscriptionValid] ) {
+        return YES;
+    } else if ( [oldPurchases objectForKey: IN_APP_ID_ALL_DESIGN]  ) {
+        return YES;
+    } else {
+        return [self haveProduct:IN_APP_ID_UNLOCK_VIDEO];
+    }
+}
+
+//return flag we can show ad or not
+-(BOOL)canShowAd{
+    BOOL showAdd = YES;
+    
+    RMAppReceipt* appReceipt = [RMAppReceipt bundleReceipt];
+    
+    // get monthly subscription validity
+    NSString *isMonthlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION forDate:[NSDate date]]]; // Monthly Subscription
+    
+    // get Yearly subscription validity
+    NSString *isYearlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION forDate:[NSDate date]]]; // Yearly Subscription
+    
+    
+    // check add removal validity
+    NSString *isAdRemovalSubValid;
+    
+    #if defined(FLYERLY)
+        // check add removal validity
+        isAdRemovalSubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_AD_REMOVAL forDate:[NSDate date]]]; // Ad Removal Subscription
+    #else
+        isAdRemovalSubValid = [self hasAdsRemovalSubscription:IN_APP_ID_AD_REMOVAL] ? @"1" : @"0";
+    #endif
+    
+    //check have video bundle then don't show ad too
+    BOOL haveVideoProduct = [self haveProduct:IN_APP_ID_UNLOCK_VIDEO];
+    
+    // check whether one of 'em is valid or not..
+    if( [isMonthlySubValid isEqual:@"1"] || [isYearlySubValid isEqualToString:@"1"] || [isAdRemovalSubValid isEqualToString:@"1"] || haveVideoProduct ){
+        showAdd = NO;
+    }
+    
+    return showAdd;
+}
+
+//Return if monthly/yearly subscription is valid
+-(BOOL)isSubscriptionValid{
+    
+    RMAppReceipt* appReceipt = [RMAppReceipt bundleReceipt];
+    
+    // get monthly subscription validity
+    NSString *isMonthlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION forDate:[NSDate date]]]; // Monthly Subscription
+    
+    // get Yearly subscription validity
+    NSString *isYearlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION forDate:[NSDate date]]]; // Yearly Subscription
+    
+    // check whether one of 'em is valid or not..
+    if( [isMonthlySubValid isEqual:@"1"] || [isYearlySubValid isEqualToString:@"1"] ){
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 /*
@@ -107,32 +200,5 @@ static UserPurchases *sharedSingleton = nil;
     } else {
         oldPurchases = nil;
     }
-    
 }
-
-/**
- Check if monthly subscription is valid or not
- **/
--(BOOL)isSubscriptionValid{
-    
-    RMAppReceipt* appReceipt = [RMAppReceipt bundleReceipt];
-    
-    // get monthly subscription validity
-    NSString *isMonthlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:@"com.flyerly.MonthlyGold" forDate:[NSDate date]]];
-    
-    // get Yearly subscription validity
-    NSString *isYearlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:@"com.flyerly.YearlyPlatinum1" forDate:[NSDate date]]];
-    
-    // get Yearly subscription validity
-    NSString *isAdRemovalSubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:@"com.flyerly.AdRemovalMonthly" forDate:[NSDate date]]];
-    
-    // check whether one of 'em is valid or not..
-    if( [isMonthlySubValid isEqual:@"1"] || [isYearlySubValid isEqualToString:@"1"] || [isAdRemovalSubValid isEqualToString:@"1"] ){
-        return YES;
-    } else {
-        return NO;
-    }
-}
-
 @end
-

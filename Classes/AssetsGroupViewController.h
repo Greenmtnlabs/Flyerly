@@ -29,6 +29,7 @@
     UserPurchases *userPurchases;
     SigninController *signInController;
     BOOL productPurchased;
+    
 }
 
 @property CGSize desiredImageSize;
