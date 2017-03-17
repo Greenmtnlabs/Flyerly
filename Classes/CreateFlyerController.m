@@ -871,7 +871,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     self.onFlyerBack( @"" );
                 });
             }
-            
+
             [Flurry logEvent:@"Saved Flyer"];
             
         } else {
