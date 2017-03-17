@@ -1549,7 +1549,6 @@
 		10C526351CB7C07E00A5805C /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2025FAB6186074D100CC9188 /* CoreText.framework */; };
 		10C526361CB7C07E00A5805C /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2025FAB41860742700CC9188 /* CoreMedia.framework */; };
 		10C526371CB7C07E00A5805C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DEE01A1108ED97400967DA5 /* Security.framework */; };
-		10C526381CB7C07E00A5805C /* libFlurry_5.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24549B7F19FE8371002566D9 /* libFlurry_5.4.0.a */; };
 		10C526391CB7C07E00A5805C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF3A53B108E0E5C00D6C887 /* CoreLocation.framework */; };
 		10C5263A1CB7C07E00A5805C /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD78053177B3BEC00DF5060 /* libz.1.1.3.dylib */; };
 		10C5263B1CB7C07E00A5805C /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B303FA171ED8C8006632E3 /* Accounts.framework */; };
@@ -2179,7 +2178,6 @@
 		244F8DCE1A1F804000545D35 /* ShareVideoViewController-iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244F8DCD1A1F804000545D35 /* ShareVideoViewController-iPhone6.xib */; };
 		2453E39F19AC5E0300CB2958 /* buy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2453E39E19AC5E0300CB2958 /* buy@2x.png */; };
 		24546C781A03709000DBF11C /* CropViewController-iPhone6-Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24546C771A03709000DBF11C /* CropViewController-iPhone6-Plus.xib */; };
-		24549B8019FE8371002566D9 /* libFlurry_5.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24549B7F19FE8371002566D9 /* libFlurry_5.4.0.a */; };
 		24556D8119EE7E2E005FCDFE /* more.png in Resources */ = {isa = PBXBuildFile; fileRef = 24556D7E19EE7E2E005FCDFE /* more.png */; };
 		24556D8319EE7E2E005FCDFE /* more@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24556D8019EE7E2E005FCDFE /* more@3x.png */; };
 		24556D8519EE7E65005FCDFE /* more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24556D8419EE7E65005FCDFE /* more@2x.png */; };
@@ -3298,7 +3296,6 @@
 		2012ECBA19261D0B00D5EA58 /* Colours-iPhone4s.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Colours-iPhone4s.xib"; sourceTree = "<group>"; };
 		20142EDD18F437E10069FBDE /* flyerbundle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = flyerbundle; sourceTree = "<group>"; };
 		2018AF8E195AF14C00188F8E /* image_icon_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image_icon_selected@2x.png"; sourceTree = "<group>"; };
-		201D647118C4832300F0D7D8 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		201F7A0A1C1FFDDF00520E7C /* icon_eyespot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_eyespot.png; sourceTree = "<group>"; };
 		201F7A0B1C1FFDDF00520E7C /* icon_untech.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_untech.png; sourceTree = "<group>"; };
 		201F7A331C20238300520E7C /* introScreen1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = introScreen1.jpg; sourceTree = "<group>"; };
@@ -4028,7 +4025,6 @@
 		244F8DCD1A1F804000545D35 /* ShareVideoViewController-iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ShareVideoViewController-iPhone6.xib"; sourceTree = "<group>"; };
 		2453E39E19AC5E0300CB2958 /* buy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buy@2x.png"; sourceTree = "<group>"; };
 		24546C771A03709000DBF11C /* CropViewController-iPhone6-Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CropViewController-iPhone6-Plus.xib"; sourceTree = "<group>"; };
-		24549B7F19FE8371002566D9 /* libFlurry_5.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_5.4.0.a; sourceTree = "<group>"; };
 		24549B8119FE8559002566D9 /* libCrittercism_v5_0_4.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCrittercism_v5_0_4.a; path = Crittercism/libCrittercism_v5_0_4.a; sourceTree = "<group>"; };
 		24556D7E19EE7E2E005FCDFE /* more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more.png; sourceTree = "<group>"; };
 		24556D8019EE7E2E005FCDFE /* more@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more@3x.png"; sourceTree = "<group>"; };
@@ -5068,7 +5064,6 @@
 				10C526351CB7C07E00A5805C /* CoreText.framework in Frameworks */,
 				10C526361CB7C07E00A5805C /* CoreMedia.framework in Frameworks */,
 				10C526371CB7C07E00A5805C /* Security.framework in Frameworks */,
-				10C526381CB7C07E00A5805C /* libFlurry_5.4.0.a in Frameworks */,
 				10C526391CB7C07E00A5805C /* CoreLocation.framework in Frameworks */,
 				10C5263A1CB7C07E00A5805C /* libz.1.1.3.dylib in Frameworks */,
 				10C5263B1CB7C07E00A5805C /* Accounts.framework in Frameworks */,
@@ -5113,7 +5108,6 @@
 				2025FAB7186074D100CC9188 /* CoreText.framework in Frameworks */,
 				2025FAB51860742700CC9188 /* CoreMedia.framework in Frameworks */,
 				0DEE01A2108ED97400967DA5 /* Security.framework in Frameworks */,
-				24549B8019FE8371002566D9 /* libFlurry_5.4.0.a in Frameworks */,
 				0DF3A53C108E0E5C00D6C887 /* CoreLocation.framework in Frameworks */,
 				0FD78054177B3BEC00DF5060 /* libz.1.1.3.dylib in Frameworks */,
 				0F734B5617427B790084A2F4 /* Accounts.framework in Frameworks */,
@@ -5817,8 +5811,6 @@
 		201D647018C4832300F0D7D8 /* Flurry */ = {
 			isa = PBXGroup;
 			children = (
-				24549B7F19FE8371002566D9 /* libFlurry_5.4.0.a */,
-				201D647118C4832300F0D7D8 /* Flurry.h */,
 			);
 			path = Flurry;
 			sourceTree = "<group>";
@@ -11320,12 +11312,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/ExternalFrameworks/Crittercism/",
-					"$(SRCROOT)/ExternalFrameworks/Flurry/",
 					"$(SRCROOT)/ExternalFrameworks/Bitly/",
 					"$(PROJECT_DIR)/ExternalFrameworks/Crittercism",
 					"$(PROJECT_DIR)/ExternalFrameworks/UserVoiceSDK-3.0.0",
 					"$(PROJECT_DIR)/ExternalFrameworks/GoogleMobileAdsSdkiOS-6.12.0",
-					"$(PROJECT_DIR)/ExternalFrameworks/Flurry",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 					"$(PROJECT_DIR)/Classes/openssl-1.0.1e/lib",
 				);
@@ -11594,12 +11584,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/ExternalFrameworks/Crittercism/",
-					"$(SRCROOT)/ExternalFrameworks/Flurry/",
 					"$(SRCROOT)/ExternalFrameworks/Bitly/",
 					"$(PROJECT_DIR)/ExternalFrameworks/Crittercism",
 					"$(PROJECT_DIR)/ExternalFrameworks/UserVoiceSDK-3.0.0",
 					"$(PROJECT_DIR)/ExternalFrameworks/GoogleMobileAdsSdkiOS-6.12.0",
-					"$(PROJECT_DIR)/ExternalFrameworks/Flurry",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 					"$(PROJECT_DIR)/Classes/openssl-1.0.1e/lib",
 				);
@@ -11663,12 +11651,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/ExternalFrameworks/Crittercism/",
-					"$(SRCROOT)/ExternalFrameworks/Flurry/",
 					"$(SRCROOT)/ExternalFrameworks/Bitly/",
 					"$(PROJECT_DIR)/ExternalFrameworks/Crittercism",
 					"$(PROJECT_DIR)/ExternalFrameworks/UserVoiceSDK-3.0.0",
 					"$(PROJECT_DIR)/ExternalFrameworks/GoogleMobileAdsSdkiOS-6.12.0",
-					"$(PROJECT_DIR)/ExternalFrameworks/Flurry",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 					"$(PROJECT_DIR)/Classes/openssl-1.0.1e/lib",
 				);

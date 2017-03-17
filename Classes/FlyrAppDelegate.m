@@ -235,8 +235,15 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 #endif
   
     // Flurry stats
-    [Flurry startSession:[flyerConfigurator flurrySessionId]];
-
+    NSString *buildVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey];
+    FlurrySessionBuilder* builder = [[[[[FlurrySessionBuilder new]
+                                        withLogLevel:FlurryLogLevelAll]
+                                       withCrashReporting:YES]
+                                      withSessionContinueSeconds:10]
+                                     withAppVersion:buildVersion];
+    
+    [Flurry startSession:[flyerConfigurator flurrySessionId] withSessionBuilder:builder];
+    
     // Facebook initialization
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions: launchOptions];
     

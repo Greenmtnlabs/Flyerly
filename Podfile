@@ -37,6 +37,7 @@ platform :ios, '9.3'
 #pod 'gtm-session-fetcher'
     pod 'GTMSessionFetcher'
     pod 'GTMOAuth2'
+    pod 'Flurry-iOS-SDK/FlurrySDK' #Analytics Pod #last build was working with version 7.9.2
 
     post_install do |installer_representation|
         installer_representation.pods_project.targets.each do |target|
