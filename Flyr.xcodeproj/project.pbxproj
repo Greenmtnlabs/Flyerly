@@ -11726,7 +11726,7 @@
 					"COCOAPODS=1",
 					"DEBUG=1",
 					"COCOAPODS_POD_AVAILABLE_NBUImagePicker_Filters=1",
-					"FlyerlyBiz=1",
+					"FLYERLY_BIZ=1",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/FlyerlyBiz-Info.plist";
@@ -11793,7 +11793,7 @@
 					"$(inherited)",
 					"COCOAPODS=1",
 					"COCOAPODS_POD_AVAILABLE_NBUImagePicker_Filters=1",
-					"FlyerlyBiz=1",
+					"FLYERLY_BIZ=1",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/FlyerlyBiz-Info.plist";
@@ -11861,7 +11861,7 @@
 					"$(inherited)",
 					"COCOAPODS=1",
 					"COCOAPODS_POD_AVAILABLE_NBUImagePicker_Filters=1",
-					"FlyerlyBiz=1",
+					"FLYERLY_BIZ=1",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/FlyerlyBiz-Info.plist";
