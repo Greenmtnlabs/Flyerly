@@ -3213,6 +3213,10 @@
 		DB0CB3631E8D2BA600A93476 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D33511E109ABB6A0082810A /* CFNetwork.framework */; };
 		DB0CB3641E8D2BA600A93476 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30D58E3410FB260200E0C7E8 /* MediaPlayer.framework */; };
 		DB0CB3651E8D2BA600A93476 /* libPods-Flyr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F30BA05813D06F7B3FEC02D0 /* libPods-Flyr.a */; };
+		DB0CB3761E8D4E1A00A93476 /* flyerlyBizLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 100B59291CBE4A3700003FBE /* flyerlyBizLogo@2x.png */; };
+		DB0CB3771E8D4E1A00A93476 /* flyerlyBizLogo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 100B592A1CBE4A3700003FBE /* flyerlyBizLogo@3x.png */; };
+		DB0CB3791E8D4F0A00A93476 /* flyerlyBizLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 100B59291CBE4A3700003FBE /* flyerlyBizLogo@2x.png */; };
+		DB0CB37A1E8D4F0A00A93476 /* flyerlyBizLogo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 100B592A1CBE4A3700003FBE /* flyerlyBizLogo@3x.png */; };
 		E8A7347D1092CFF300661AAD /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A7347B1092CFF300661AAD /* ShareViewController.m */; };
 		E8A7347E1092CFF300661AAD /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8A7347C1092CFF300661AAD /* ShareViewController.xib */; };
 /* End PBXBuildFile section */
@@ -8066,6 +8070,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB0CB3791E8D4F0A00A93476 /* flyerlyBizLogo@2x.png in Resources */,
+				DB0CB37A1E8D4F0A00A93476 /* flyerlyBizLogo@3x.png in Resources */,
 				24861F1D19F9147100670F6D /* invite_twitter@3x.png in Resources */,
 				0D4903BC1091893B00855C30 /* FlyrViewController.xib in Resources */,
 				E8A7347E1092CFF300661AAD /* ShareViewController.xib in Resources */,
@@ -9465,6 +9471,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB0CB3761E8D4E1A00A93476 /* flyerlyBizLogo@2x.png in Resources */,
+				DB0CB3771E8D4E1A00A93476 /* flyerlyBizLogo@3x.png in Resources */,
 				DB0CAD1F1E8D2BA600A93476 /* invite_twitter@3x.png in Resources */,
 				DB0CAD201E8D2BA600A93476 /* FlyrViewController.xib in Resources */,
 				DB0CAD211E8D2BA600A93476 /* ShareViewController.xib in Resources */,
