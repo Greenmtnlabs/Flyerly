@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TermsOfServiceViewController">
@@ -14,18 +18,18 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="pAt-1v-qG2">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" id="pAt-1v-qG2">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" id="nAS-yM-gbX">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="10000"/>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" usesAttributedText="YES" selectable="NO" id="nAS-yM-gbX">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="10000"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <attributedString key="attributedText">
                                 <fragment content="Welcome to Flyerly! ">
                                     <attributes>
@@ -90,14 +94,14 @@
                                 </fragment>
                                 <fragment content="Privacy Policy">
                                     <attributes>
-                                        <color key="NSColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="NSColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <font key="NSFont" size="12" name="Times-Bold"/>
                                         <url key="NSLink" string="http://flyerly.com/privacy.html"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
                                             <tabStops/>
                                         </paragraphStyle>
                                         <integer key="NSUnderline" value="1"/>
-                                        <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </attributes>
                                 </fragment>
                                 <fragment content=", located at http://flyerly.com/privacy. All such terms are hereby incorporated by reference into these Terms of Service.">
@@ -2216,7 +2220,7 @@ Cg
                                 </fragment>
                                 <fragment content="Privacy Policy">
                                     <attributes>
-                                        <color key="NSColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="NSColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <font key="NSFont" size="12" name="Times-Roman"/>
                                         <url key="NSLink" string="http://flyerly.com/privacy"/>
                                         <font key="NSOriginalFont" size="12" name="Times-Roman"/>
@@ -2224,7 +2228,7 @@ Cg
                                             <tabStops/>
                                         </paragraphStyle>
                                         <integer key="NSUnderline" value="1"/>
-                                        <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </attributes>
                                 </fragment>
                                 <fragment>
@@ -2329,7 +2333,28 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content="Last updated on March 25, 2015.">
+                                <fragment>
+                                    <string key="content">Auto Renewal Subscription
+</string>
+                                    <attributes>
+                                        <font key="NSFont" size="16" name="Times-Bold"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                            <tabStops/>
+                                        </paragraphStyle>
+                                    </attributes>
+                                </fragment>
+                                <fragment>
+                                    <string key="content">- Flyerly has an auto-renewable subscription feature to give users access to content or services from within Flyerly on an ongoing basis. At the end of each subscription duration, the subscription will automatically renew until user chooses to cancel it before 24 hours the expiry date.
+- Monthly or Annual Subscriptions are auto-renewable options available
+</string>
+                                    <attributes>
+                                        <font key="NSFont" size="12" name="Times-Roman"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                            <tabStops/>
+                                        </paragraphStyle>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="Last updated on April 4, 2017.">
                                     <attributes>
                                         <font key="NSFont" size="11" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -2354,10 +2379,10 @@ Cg
                                 <outlet property="delegate" destination="-1" id="t1j-rb-Zji"/>
                             </connections>
                         </textView>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" id="FNs-Zd-6nv">
-                            <rect key="frame" x="0.0" y="-4716" width="320" height="10000"/>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" usesAttributedText="YES" selectable="NO" id="FNs-Zd-6nv">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="10000"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <attributedString key="attributedText">
                                 <fragment content="Welcome to FlyerlyBiz! ">
                                     <attributes>
@@ -2422,14 +2447,14 @@ Cg
                                 </fragment>
                                 <fragment content="Privacy Policy">
                                     <attributes>
-                                        <color key="NSColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="NSColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <font key="NSFont" size="12" name="Times-Bold"/>
                                         <url key="NSLink" string="http://flyerly.com/privacy.html"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
                                             <tabStops/>
                                         </paragraphStyle>
                                         <integer key="NSUnderline" value="1"/>
-                                        <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </attributes>
                                 </fragment>
                                 <fragment content=", located at http://flyerly.com/privacy. All such terms are hereby incorporated by reference into these Terms of Service.">
@@ -5932,7 +5957,7 @@ Cg
                                 </fragment>
                                 <fragment content="Privacy Policy">
                                     <attributes>
-                                        <color key="NSColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="NSColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <font key="NSFont" size="12" name="Times-Roman"/>
                                         <url key="NSLink" string="http://flyerly.com/privacy"/>
                                         <font key="NSOriginalFont" size="12" name="Times-Roman"/>
@@ -5940,7 +5965,7 @@ Cg
                                             <tabStops/>
                                         </paragraphStyle>
                                         <integer key="NSUnderline" value="1"/>
-                                        <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </attributes>
                                 </fragment>
                                 <fragment>
@@ -6045,10 +6070,49 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content="Last updated on May 5, 2016.">
+                                <fragment content="Auto Renewal Subscription">
+                                    <attributes>
+                                        <font key="NSFont" size="16" name="Times-Bold"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                            <tabStops/>
+                                        </paragraphStyle>
+                                    </attributes>
+                                </fragment>
+                                <fragment>
+                                    <string key="content" base64-UTF8="YES">
+Cg
+</string>
                                     <attributes>
                                         <font key="NSFont" size="11" name="Times-Bold"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                            <tabStops/>
+                                        </paragraphStyle>
+                                    </attributes>
+                                </fragment>
+                                <fragment>
+                                    <string key="content">- Flyerly Biz has an auto-renewable subscription feature to give users access to content or services from within Flyerly Biz on an ongoing basis. At the end of each subscription duration, the subscription will automatically renew until user chooses to cancel it before 24 hours the expiry date.
+</string>
+                                    <attributes>
+                                        <font key="NSFont" size="12" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
+                                            <tabStops/>
+                                        </paragraphStyle>
+                                    </attributes>
+                                </fragment>
+                                <fragment>
+                                    <string key="content">- Monthly or Annual Subscriptions are auto-renewable options available
+</string>
+                                    <attributes>
+                                        <font key="NSFont" size="12" name="Times-Roman"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                            <tabStops/>
+                                        </paragraphStyle>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="Last updated on April 4, 2017.">
+                                    <attributes>
+                                        <font key="NSFont" size="11" name="Times-Bold"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
                                             <tabStops/>
                                         </paragraphStyle>
                                     </attributes>
@@ -6059,7 +6123,7 @@ Cg
 </string>
                                     <attributes>
                                         <font key="NSFont" size="12" name="Times-Roman"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
+                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
                                             <tabStops/>
                                         </paragraphStyle>
                                     </attributes>
@@ -6076,9 +6140,13 @@ Cg
                     </connections>
                 </scrollView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <point key="canvasLocation" x="386" y="206"/>
         </view>
     </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
 </document>
