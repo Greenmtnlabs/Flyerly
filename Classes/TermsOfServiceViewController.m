@@ -45,7 +45,7 @@
     if(IS_IPHONE_6_PLUS){
         scrollViewTerms.contentSize=CGSizeMake(300, 8450);
     }else if(IS_IPHONE_5){
-        scrollViewTerms.contentSize=CGSizeMake(300, 10350);
+        scrollViewTerms.contentSize=CGSizeMake(300, 7800);
     }else{
         scrollViewTerms.contentSize=CGSizeMake(300, 9200);
     }
