@@ -43,11 +43,11 @@
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
     if(IS_IPHONE_6_PLUS){
-        scrollViewTerms.contentSize=CGSizeMake(300, 8300);
+        scrollViewTerms.contentSize=CGSizeMake(300, 8450);
     }else if(IS_IPHONE_5){
-        scrollViewTerms.contentSize=CGSizeMake(300, 10200);
+        scrollViewTerms.contentSize=CGSizeMake(300, 7800);
     }else{
-        scrollViewTerms.contentSize=CGSizeMake(300, 9050);
+        scrollViewTerms.contentSize=CGSizeMake(300, 9200);
     }
     
     CGFloat fixedWidth = textViewTerms.frame.size.width;
