@@ -129,6 +129,13 @@
     [self.buttondelegate inAppPanelDismissed];
 }
 
+-(IBAction)goToTermsAndServiceScreen {
+    [self hideMe];
+    UIViewController *cont = (UIViewController *)self.buttondelegate;
+    UINavigationController *navigationController = cont.navigationController;
+    [navigationController pushViewController:[[TermsOfServiceViewController alloc] initWithNibName:@"TermsOfServiceViewController" bundle:nil] animated:YES];    
+}
+
 /*
  * Here we
  */
