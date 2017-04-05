@@ -46,6 +46,7 @@
 @property(nonatomic,strong) IBOutlet UIActivityIndicatorView *loadingIndicator;
 
 -(IBAction)hideMe;
+-(IBAction)goToTermsAndServiceScreen;
 -(IBAction)purchaseCompleteBundle;
 -(void) requestProduct;
 -(void) inAppDataLoaded;
