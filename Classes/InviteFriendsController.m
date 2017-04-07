@@ -299,9 +299,8 @@ const int CONTACTS_TAB = 0;
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     userPurchases_.delegate = nil;
-    
-    if ( [userPurchases_ checkKeyExistsInPurchases: BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION]  ||
-        [userPurchases_ checkKeyExistsInPurchases: BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION] ) {
+
+    if ( [userPurchases_ checkKeysExistsInPurchases:@[BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION, BUNDLE_IDENTIFIER_OLD_MONTHLY_SUBSCRIPTION, BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION, BUNDLE_IDENTIFIER_OLD_YEARLY_SUBSCRIPTION]] ) {
         [inAppViewController.paidFeaturesTview reloadData];
     } else {
         [self removeAdsBanner:YES];

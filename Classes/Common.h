@@ -187,6 +187,14 @@ nil]
     #define BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION @"com.flyerly.YearlyPlatinum1"
     #define BUNDLE_IDENTIFIER_AD_REMOVAL @"com.flyerly.AdRemovalMonthly"
 
+    // bundle ids was expired by apple, thats why we need to check first user have product with old name ?
+    #define BUNDLE_IDENTIFIER_OLD_ALL_DESIGN @"com.flyerly.AllDesignBundle"
+    #define BUNDLE_IDENTIFIER_OLD_UNLOCK_VIDEO @"com.flyerly.UnlockCreateVideoFlyerOption"
+    #define BUNDLE_IDENTIFIER_OLD_MONTHLY_SUBSCRIPTION @"com.flyerly.MonthlyGold"
+    #define BUNDLE_IDENTIFIER_OLD_YEARLY_SUBSCRIPTION @"com.flyerly.YearlyPlatinum1"
+    #define BUNDLE_IDENTIFIER_OLD_AD_REMOVAL @"com.flyerly.AdRemovalMonthly"
+
+
     //purchased bundles
     #define IN_APP_ID_ALL_DESIGN @"comflyerlyAllDesignBundle"
     #define IN_APP_ID_UNLOCK_VIDEO @"comflyerlyUnlockCreateVideoFlyerOption"
@@ -208,6 +216,13 @@ nil]
     #define BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION @"com.flyerlybiz.MonthlyGold"
     #define BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION @"com.flyerlybiz.YearlyPlatinum1"
     #define BUNDLE_IDENTIFIER_AD_REMOVAL @"com.flyerlybiz.AdsRemoval"
+
+    // bundle ids was expired by apple, thats why we need to check first user have product with old name ?
+    #define BUNDLE_IDENTIFIER_OLD_ALL_DESIGN @"com.flyerlybiz.AllDesignBundle"
+    #define BUNDLE_IDENTIFIER_OLD_UNLOCK_VIDEO @"com.flyerlybiz.VideoFlyers"
+    #define BUNDLE_IDENTIFIER_OLD_MONTHLY_SUBSCRIPTION @"com.flyerlybiz.MonthlyGold"
+    #define BUNDLE_IDENTIFIER_OLD_YEARLY_SUBSCRIPTION @"com.flyerlybiz.YearlyPlatinum1"
+    #define BUNDLE_IDENTIFIER_OLD_AD_REMOVAL @"com.flyerlybiz.AdsRemoval"
 
     //purchased bundles
     #define IN_APP_ID_ALL_DESIGN @"comflyerlybizAllDesignBundle"

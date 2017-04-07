@@ -416,7 +416,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
             
             if (cancelRequest) return ;
             
-            NSArray *requestedProducts = products;
+            //NSArray *requestedProducts = products;
             bool disablePurchase = ([[PFUser currentUser] sessionToken].length == 0);
             
             NSString *sheetTitle = @"Choose Product";

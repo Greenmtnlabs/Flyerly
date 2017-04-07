@@ -76,6 +76,18 @@ static UserPurchases *sharedSingleton = nil;
     }
 }
 
+- (BOOL) checkKeysExistsInPurchases : (NSArray *)productIds {
+    BOOL exist = NO;
+    for(int i=0; i<productIds.count; i++){
+        exist = [self checkKeyExistsInPurchases:productIds[i]];
+        
+        if(exist){
+            break;
+        }
+    }
+    return exist;
+}
+
 /**
  * Purpose: check we can create video flyer ?
  * @parm:void 
@@ -98,10 +110,10 @@ static UserPurchases *sharedSingleton = nil;
     RMAppReceipt* appReceipt = [RMAppReceipt bundleReceipt];
     
     // get monthly subscription validity
-    NSString *isMonthlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION forDate:[NSDate date]]]; // Monthly Subscription
+    NSString *isMonthlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifiers:@[BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION, BUNDLE_IDENTIFIER_OLD_MONTHLY_SUBSCRIPTION] forDate:[NSDate date]]]; // Monthly Subscription
     
     // get Yearly subscription validity
-    NSString *isYearlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION forDate:[NSDate date]]]; // Yearly Subscription
+    NSString *isYearlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifiers:@[BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION, BUNDLE_IDENTIFIER_OLD_YEARLY_SUBSCRIPTION] forDate:[NSDate date]]]; // Yearly Subscription
     
     
     // check add removal validity
@@ -109,7 +121,7 @@ static UserPurchases *sharedSingleton = nil;
     
     #if defined(FLYERLY)
         // check add removal validity
-        isAdRemovalSubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_AD_REMOVAL forDate:[NSDate date]]]; // Ad Removal Subscription
+        isAdRemovalSubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifiers:@[BUNDLE_IDENTIFIER_AD_REMOVAL, BUNDLE_IDENTIFIER_OLD_AD_REMOVAL] forDate:[NSDate date]]]; // Ad Removal Subscription
     #else
         isAdRemovalSubValid = [self hasAdsRemovalSubscription:IN_APP_ID_AD_REMOVAL] ? @"1" : @"0";
     #endif
@@ -131,10 +143,10 @@ static UserPurchases *sharedSingleton = nil;
     RMAppReceipt* appReceipt = [RMAppReceipt bundleReceipt];
     
     // get monthly subscription validity
-    NSString *isMonthlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION forDate:[NSDate date]]]; // Monthly Subscription
+    NSString *isMonthlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifiers:@[BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION, BUNDLE_IDENTIFIER_OLD_MONTHLY_SUBSCRIPTION] forDate:[NSDate date]]]; // Monthly Subscription
     
     // get Yearly subscription validity
-    NSString *isYearlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifier:BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION forDate:[NSDate date]]]; // Yearly Subscription
+    NSString *isYearlySubValid =[NSString stringWithFormat:@"%i", [appReceipt containsActiveAutoRenewableSubscriptionOfProductIdentifiers:@[BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION, BUNDLE_IDENTIFIER_OLD_YEARLY_SUBSCRIPTION] forDate:[NSDate date]]]; // Yearly Subscription
     
     // check whether one of 'em is valid or not..
     if( [isMonthlySubValid isEqual:@"1"] || [isYearlySubValid isEqualToString:@"1"] ){
