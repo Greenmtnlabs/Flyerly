@@ -160,6 +160,19 @@ static NSURL *_appleRootCertificateURL = nil;
     return NO;
 }
 
+// custom function
+- (BOOL)containsActiveAutoRenewableSubscriptionOfProductIdentifiers:(NSArray *)productIdentifiers forDate:(NSDate *)date {
+    BOOL exist = NO;
+    for(int i=0; i<productIdentifiers.count; i++){
+        exist = [self containsActiveAutoRenewableSubscriptionOfProductIdentifier:productIdentifiers[i] forDate:(NSDate *)date];
+        
+        if(exist){
+            break;
+        }
+    }
+    return exist;
+}
+
 -(BOOL)containsActiveAutoRenewableSubscriptionOfProductIdentifier:(NSString *)productIdentifier forDate:(NSDate *)date
 {
     RMAppReceiptIAP *lastTransaction = nil;

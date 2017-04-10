@@ -415,8 +415,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
         [[RMStore defaultStore] requestProducts:productIdentifiers success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
             
             if (cancelRequest) return ;
-            
-            NSArray *requestedProducts = products;
+
             bool disablePurchase = ([[PFUser currentUser] sessionToken].length == 0);
             
             NSString *sheetTitle = @"Choose Product";
