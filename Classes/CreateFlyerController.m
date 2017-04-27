@@ -5099,11 +5099,11 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     }
     else if(selectedButton == cameraTakePhoto) {
         
-        [self openCustomCamera:YES];
-        _videoLabel.alpha = 1;
+        [self openCustomCamera:NO];
+        _videoLabel.alpha = 0;
         
         _addMoreLayerOrSaveFlyerLabel.alpha = 0;
-        _takeOrAddPhotoLabel.alpha = 0;
+        _takeOrAddPhotoLabel.alpha = 1;
 
     }
     else if(selectedButton == cameraRoll) {
