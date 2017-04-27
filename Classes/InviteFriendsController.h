@@ -24,7 +24,7 @@
 #import "ParentViewController.h"
 #import "SHKSharer.h"
 #import <SHKFormController.h>
-#import "SHKFacebookCommon.h"
+//#import "SHKFacebookCommon.h"
 #import "ContactsModel.h"
 #import "FlyerlyTwitterFriends.h"
 #import "Flurry.h"
@@ -32,6 +32,7 @@
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
+#import <FBSDKShareKit/FBSDKAppInviteDialog.h>
 
 #import "GADInterstitialDelegate.h"
 #import "GADBannerView.h"
@@ -41,7 +42,7 @@
 
 @class FlyerlySingleton, SHKSharer;
 
-@interface InviteFriendsController : ParentViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate, SHKSharerDelegate, FBSDKAppInviteDialogDelegate, UserPurchasesDelegate, GADInterstitialDelegate, GADBannerViewDelegate, InAppPurchasePanelButtonProtocol>{
+@interface InviteFriendsController : ParentViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate, FBSDKAppInviteDialogDelegate, UserPurchasesDelegate, GADInterstitialDelegate, GADBannerViewDelegate, InAppPurchasePanelButtonProtocol,SHKSharerDelegate, MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate>{
     
     FlyerlySingleton *globle;
     IBOutlet AsyncImageView *aview;

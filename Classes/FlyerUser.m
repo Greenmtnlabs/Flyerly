@@ -459,7 +459,6 @@
     
     NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@", user.username]];
     
-    
     if ([[NSFileManager defaultManager] fileExistsAtPath:anonymousUserPath]) {
         
         NSError* error;

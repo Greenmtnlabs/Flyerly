@@ -44,9 +44,7 @@
 
 - (void)dealloc
 {
-	[key release];
-	[secret release];
-	[super dealloc];
+
 }
 
 @end

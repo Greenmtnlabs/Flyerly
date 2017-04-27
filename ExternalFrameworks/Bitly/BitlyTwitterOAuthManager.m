@@ -8,8 +8,8 @@
 
 #import "BitlyTwitterOAuthManager.h"
 #import "BitlyLibUtil.h"
-#import "OAuthConsumer.h"
-#import "OAMutableURLRequest.h"
+#import "OAuth/OAuthConsumer.h"
+#import "OAuth/OAMutableURLRequest.h"
 #import "BitlyDebug.h"
 #import "BitlyConfig.h"
 

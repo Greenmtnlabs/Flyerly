@@ -7,6 +7,7 @@
 //
 
 #import "InputViewController.h"
+#import "SHKActivityIndicator.h"
 
 @interface InputViewController (){
     

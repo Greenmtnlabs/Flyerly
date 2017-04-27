@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TermsOfServiceViewController">
@@ -14,20 +18,21 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="pAt-1v-qG2">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" id="pAt-1v-qG2">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" id="nAS-yM-gbX">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="10000"/>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" usesAttributedText="YES" selectable="NO" id="nAS-yM-gbX">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="10000"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <attributedString key="attributedText">
-                                <fragment content="Welcome to Flyerly! ">
+                                <fragment content="Welcome to Flyerly!
+">
                                     <attributes>
                                         <font key="NSFont" size="14" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -44,7 +49,8 @@
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -62,7 +68,8 @@
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -90,14 +97,14 @@
                                 </fragment>
                                 <fragment content="Privacy Policy">
                                     <attributes>
-                                        <color key="NSColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="NSColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <font key="NSFont" size="12" name="Times-Bold"/>
                                         <url key="NSLink" string="http://flyerly.com/privacy.html"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
                                             <tabStops/>
                                         </paragraphStyle>
                                         <integer key="NSUnderline" value="1"/>
-                                        <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </attributes>
                                 </fragment>
                                 <fragment content=", located at http://flyerly.com/privacy. All such terms are hereby incorporated by reference into these Terms of Service.">
@@ -332,7 +339,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="18" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -350,7 +358,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -772,7 +781,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -810,7 +820,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="18" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -1183,7 +1194,9 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content="feedback@flyerly.com P.O. Box 1687 Wilmington, VT 05363">
+                                <fragment content="feedback@flyerly.com
+P.O. Box 1687
+Wilmington, VT 05363">
                                     <attributes>
                                         <font key="NSFont" size="12" name="Times-Roman"/>
                                         <font key="NSOriginalFont" size="12" name="Times-Roman"/>
@@ -1234,7 +1247,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="18" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -1251,7 +1265,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -1269,7 +1284,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -1287,7 +1303,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -1305,7 +1322,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -1323,7 +1341,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -1341,7 +1360,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -1359,7 +1379,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -1377,7 +1398,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -1385,7 +1407,9 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content="Green Mtn Labs, Inc. P.O. Box 1687 Wilmington, VT 05363">
+                                <fragment content="Green Mtn Labs, Inc.
+P.O. Box 1687
+Wilmington, VT 05363">
                                     <attributes>
                                         <font key="NSFont" size="12" name="Times-Roman"/>
                                         <font key="NSOriginalFont" size="12" name="Times-Roman"/>
@@ -1609,7 +1633,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -1647,7 +1672,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="18" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -1684,7 +1710,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="18" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -1722,7 +1749,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="18" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -1759,7 +1787,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="18" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -1777,7 +1806,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -1795,7 +1825,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -1832,7 +1863,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="18" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -1870,7 +1902,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="18" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -1887,7 +1920,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -1923,7 +1957,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="18" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -1940,7 +1975,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -1976,7 +2012,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="18" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -2013,7 +2050,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="18" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -2216,7 +2254,7 @@ Cg
                                 </fragment>
                                 <fragment content="Privacy Policy">
                                     <attributes>
-                                        <color key="NSColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="NSColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <font key="NSFont" size="12" name="Times-Roman"/>
                                         <url key="NSLink" string="http://flyerly.com/privacy"/>
                                         <font key="NSOriginalFont" size="12" name="Times-Roman"/>
@@ -2224,7 +2262,7 @@ Cg
                                             <tabStops/>
                                         </paragraphStyle>
                                         <integer key="NSUnderline" value="1"/>
-                                        <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </attributes>
                                 </fragment>
                                 <fragment>
@@ -2329,7 +2367,29 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content="Last updated on March 25, 2015.">
+                                <fragment>
+                                    <string key="content">Billing, Plan Modifications and Payments
+</string>
+                                    <attributes>
+                                        <font key="NSFont" size="16" name="Times-Bold"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                            <tabStops/>
+                                        </paragraphStyle>
+                                    </attributes>
+                                </fragment>
+                                <fragment>
+                                    <string key="content">General. The Service is made available on a pay-as-you-go basis and is charged at the start of Your elected subscription term (generally monthly or annually).
+Auto renew. Your subscription will renew automatically based on Your plan’s renewal cycle. All subscriptions will automatically renew at the end of Your subscription period until cancelled by You. You will not receive further notice of auto-renewal.
+Billing. Flyerly uses a third-party intermediary to manage payment information (Apple AppStore).  For more information or questions about billing specific to iTunes please contact Apple.  Regardless of Your billing cycle, there are no refunds or credits for partial months of service, plan downgrades, or refunds for unused time if You close Your account before the end of Your subscription period. No exceptions will be made in order to treat everyone equally and keep our administrative costs low for the ultimate benefit of our customer base. Downgrading Your plan level may cause the loss of content, features, or capacity of Your account and Flyerly does not accept any liability for such loss. Flyerly reserves the right to contact you regarding your service and as a way to ensure customers are receiving proper service and attention
+</string>
+                                    <attributes>
+                                        <font key="NSFont" size="12" name="Times-Roman"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                            <tabStops/>
+                                        </paragraphStyle>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="Last updated on April 4, 2017.">
                                     <attributes>
                                         <font key="NSFont" size="11" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -2354,12 +2414,13 @@ Cg
                                 <outlet property="delegate" destination="-1" id="t1j-rb-Zji"/>
                             </connections>
                         </textView>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" id="FNs-Zd-6nv">
-                            <rect key="frame" x="0.0" y="-4716" width="320" height="10000"/>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" usesAttributedText="YES" selectable="NO" id="FNs-Zd-6nv">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="10000"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <attributedString key="attributedText">
-                                <fragment content="Welcome to FlyerlyBiz! ">
+                                <fragment content="Welcome to FlyerlyBiz!
+">
                                     <attributes>
                                         <font key="NSFont" size="14" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -2376,7 +2437,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -2394,7 +2456,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -2422,14 +2485,14 @@ Cg
                                 </fragment>
                                 <fragment content="Privacy Policy">
                                     <attributes>
-                                        <color key="NSColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="NSColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <font key="NSFont" size="12" name="Times-Bold"/>
                                         <url key="NSLink" string="http://flyerly.com/privacy.html"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
                                             <tabStops/>
                                         </paragraphStyle>
                                         <integer key="NSUnderline" value="1"/>
-                                        <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </attributes>
                                 </fragment>
                                 <fragment content=", located at http://flyerly.com/privacy. All such terms are hereby incorporated by reference into these Terms of Service.">
@@ -2769,7 +2832,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="18" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -2839,7 +2903,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -3296,7 +3361,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -3334,7 +3400,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="18" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -3876,7 +3943,9 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content="feedback@flyerly.com P.O. Box 1687 Wilmington, VT 05363">
+                                <fragment content="feedback@flyerly.com
+P.O. Box 1687
+Wilmington, VT 05363">
                                     <attributes>
                                         <font key="NSFont" size="12" name="Times-Roman"/>
                                         <font key="NSOriginalFont" size="12" name="Times-Roman"/>
@@ -3944,7 +4013,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="18" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -3978,7 +4048,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -4049,7 +4120,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -4188,7 +4260,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -4293,7 +4366,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -4329,7 +4403,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -4418,7 +4493,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -4470,7 +4546,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -4522,7 +4599,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -4530,7 +4608,9 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content="Green Mtn Labs, Inc. P.O. Box 1687 Wilmington, VT 05363">
+                                <fragment content="Green Mtn Labs, Inc.
+P.O. Box 1687
+Wilmington, VT 05363">
                                     <attributes>
                                         <font key="NSFont" size="12" name="Times-Roman"/>
                                         <font key="NSOriginalFont" size="12" name="Times-Roman"/>
@@ -4771,7 +4851,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -4860,7 +4941,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="18" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -4931,7 +5013,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="18" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -5004,7 +5087,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="18" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -5110,7 +5194,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="18" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -5128,7 +5213,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -5199,7 +5285,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -5289,7 +5376,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="18" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -5344,7 +5432,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="18" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -5361,7 +5450,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -5397,7 +5487,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="18" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -5414,7 +5505,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="13.5" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -5450,7 +5542,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="18" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -5504,7 +5597,8 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content=" ">
+                                <fragment content="
+">
                                     <attributes>
                                         <font key="NSFont" size="18" name="Times-Bold"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
@@ -5932,7 +6026,7 @@ Cg
                                 </fragment>
                                 <fragment content="Privacy Policy">
                                     <attributes>
-                                        <color key="NSColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="NSColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <font key="NSFont" size="12" name="Times-Roman"/>
                                         <url key="NSLink" string="http://flyerly.com/privacy"/>
                                         <font key="NSOriginalFont" size="12" name="Times-Roman"/>
@@ -5940,7 +6034,7 @@ Cg
                                             <tabStops/>
                                         </paragraphStyle>
                                         <integer key="NSUnderline" value="1"/>
-                                        <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </attributes>
                                 </fragment>
                                 <fragment>
@@ -6045,10 +6139,41 @@ Cg
                                         </paragraphStyle>
                                     </attributes>
                                 </fragment>
-                                <fragment content="Last updated on May 5, 2016.">
+                                <fragment content="Billing, Plan Modifications and Payments">
+                                    <attributes>
+                                        <font key="NSFont" size="16" name="Times-Bold"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                            <tabStops/>
+                                        </paragraphStyle>
+                                    </attributes>
+                                </fragment>
+                                <fragment>
+                                    <string key="content" base64-UTF8="YES">
+Cg
+</string>
                                     <attributes>
                                         <font key="NSFont" size="11" name="Times-Bold"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                            <tabStops/>
+                                        </paragraphStyle>
+                                    </attributes>
+                                </fragment>
+                                <fragment>
+                                    <string key="content">General. The Service is made available on a pay-as-you-go basis and is charged at the start of Your elected subscription term (generally monthly or annually).
+Auto renew. Your subscription will renew automatically based on Your plan’s renewal cycle. All subscriptions will automatically renew at the end of Your subscription period until cancelled by You. You will not receive further notice of auto-renewal.
+Billing. Flyerly Biz uses a third-party intermediary to manage payment information (Apple AppStore).  For more information or questions about billing specific to iTunes please contact Apple.  Regardless of Your billing cycle, there are no refunds or credits for partial months of service, plan downgrades, or refunds for unused time if You close Your account before the end of Your subscription period. No exceptions will be made in order to treat everyone equally and keep our administrative costs low for the ultimate benefit of our customer base. Downgrading Your plan level may cause the loss of content, features, or capacity of Your account and Flyerly does not accept any liability for such loss. Flyerly Biz reserves the right to contact you regarding your service and as a way to ensure customers are receiving proper service and attention
+</string>
+                                    <attributes>
+                                        <font key="NSFont" size="12" name="Times-Roman"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
+                                            <tabStops/>
+                                        </paragraphStyle>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="Last updated on April 4, 2017.">
+                                    <attributes>
+                                        <font key="NSFont" size="11" name="Times-Bold"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
                                             <tabStops/>
                                         </paragraphStyle>
                                     </attributes>
@@ -6059,7 +6184,7 @@ Cg
 </string>
                                     <attributes>
                                         <font key="NSFont" size="12" name="Times-Roman"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36">
+                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14" paragraphSpacingBefore="14" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
                                             <tabStops/>
                                         </paragraphStyle>
                                     </attributes>
@@ -6076,9 +6201,14 @@ Cg
                     </connections>
                 </scrollView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="386" y="206"/>
         </view>
     </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
 </document>

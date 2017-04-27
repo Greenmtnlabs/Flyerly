@@ -13,6 +13,7 @@
 #import "AFHTTPRequestOperation.h"
 #import "CropViewController.h"
 #include <CommonCrypto/CommonDigest.h>
+#import "AFNetworking/AFNetworking.h"
 
 @interface AssetGroupViewControllerWithSearchFeild () {
     NSMutableArray *imagesIDs;
@@ -53,12 +54,6 @@
     }else if ( IS_IPHONE_6_PLUS){
         thumbSize = CGSizeMake(132,120.0);
     }
-    
-    
-    
-    
-    
-    
     
     self.thumbnailSize = thumbSize;
     
@@ -286,23 +281,18 @@ shouldReloadTableForSearchString:(NSString *)searchString
             
             NSURL *purchaseImageUrl = [[NSURL alloc] initWithString:purchaseImageUrlString];
             NSURLRequest *purchaseImageUrlRequest = [[NSURLRequest alloc] initWithURL:purchaseImageUrl];
-            
-            AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:purchaseImageUrlRequest];
-            requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
-            [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-                
-                
+
+            NSURL *URL = purchaseImageUrl;
+            AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+            manager.responseSerializer = [AFImageResponseSerializer serializer];
+            [manager GET:URL.absoluteString parameters: nil success:^(NSURLSessionDataTask *task, id responseObject) {
                 UIImage *thumbnail = (UIImage *) responseObject;
-                
                 NSData* data = UIImagePNGRepresentation(thumbnail);
-                
                 [self saveInGallery:data];
-                
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"Image error: %@", error);
+                NSLog(@"JSON: %@", responseObject);
+            } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                NSLog(@"Error: %@", error);
             }];
-            [requestOperation start];
-            
         }
         
     } else{
@@ -386,7 +376,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
     //This line pop up login screen if user not exist
     [[RMStore defaultStore] addStoreObserver:self];
     
-    NSString* productIdentifier= @"com.flyerly.SelectedSymbol";
+    NSString* productIdentifier= PRODUCT_ICON_SELETED;
     
     //Purchasing the product on the basis of product identifier
     [self purchaseProductID:productIdentifier];
@@ -420,13 +410,12 @@ shouldReloadTableForSearchString:(NSString *)searchString
         cancelRequest = NO;
         
         //These are over Products on App Store
-        NSSet *productIdentifiers = [NSSet setWithArray:@[BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION, BUNDLE_IDENTIFIER_ALL_DESIGN, BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION, BUNDLE_IDENTIFIER_UNLOCK_VIDEO,  BUNDLE_IDENTIFIER_AD_REMOVAL]];
+        NSSet *productIdentifiers = [NSSet setWithArray:@[BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION, BUNDLE_IDENTIFIER_ALL_DESIGN, BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION, BUNDLE_IDENTIFIER_UNLOCK_VIDEO,  BUNDLE_IDENTIFIER_AD_REMOVAL, PRODUCT_ICON_SELETED]];
         
         [[RMStore defaultStore] requestProducts:productIdentifiers success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
             
             if (cancelRequest) return ;
-            
-            //NSArray *requestedProducts = products;
+
             bool disablePurchase = ([[PFUser currentUser] sessionToken].length == 0);
             
             NSString *sheetTitle = @"Choose Product";

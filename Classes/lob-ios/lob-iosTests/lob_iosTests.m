@@ -383,8 +383,8 @@ static NSString *testApiKey = @"test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc";
                                  @"file" : @"https://www.lob.com/goblue.pdf"};
     
     LobObjectModel *objectModel = [LobObjectModel initWithDictionary:objectDict];
-    [request createObjectWithModel:objectModel
-                      withResponse:^(LobObjectModel *object, NSError *error)
+//    [request createObjectWithModel:objectModel
+//                      withResponse:^(LobObjectModel *object, NSError *error)
     {
         NSLog(@"*** Object Create Response ***");
 
@@ -415,8 +415,8 @@ static NSString *testApiKey = @"test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc";
     LobObjectModel *objectModel = [LobObjectModel initWithDictionary:objectDict];
     objectModel.localFilePath = YES;
     
-    [request createObjectWithModel:objectModel
-                      withResponse:^(LobObjectModel *object, NSError *error)
+//    [request createObjectWithModel:objectModel
+//                      withResponse:^(LobObjectModel *object, NSError *error)
      {
          NSLog(@"*** Object Create Local Response ***");
          

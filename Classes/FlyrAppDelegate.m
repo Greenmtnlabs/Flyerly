@@ -8,7 +8,10 @@
 
 #import "FlyrAppDelegate.h"
 #import "PaypalMobile.h"
-#import <ParseFacebookUtils/PFFacebookUtils.h>
+#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
+#import <Parse/Parse.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 NSString *kCheckTokenStep1 = @"kCheckTokenStep";
 NSString *FlickrSharingSuccessNotification = @"FlickrSharingSuccessNotification";
@@ -16,7 +19,6 @@ NSString *FlickrSharingFailureNotification = @"FlickrSharingFailureNotification"
 NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 #define TIME 10
-
 @implementation FlyrAppDelegate {
     UIApplication *app;
     UIBackgroundTaskIdentifier bgTask;
@@ -112,7 +114,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    [SHKFacebook handleDidBecomeActive];
+    //[SHKFacebook handleDidBecomeActive];
     [FBSDKAppEvents activateApp];
 }
 
@@ -121,7 +123,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Save data if appropriate
-    [SHKFacebook handleWillTerminate];
+    //[SHKFacebook handleWillTerminate];
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
@@ -148,24 +150,25 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
          annotation:(id)annotation {
     NSLog(@"[url absoluteString] = %@", [url absoluteString]);
     
-    if ([[url absoluteString] hasPrefix:[NSString stringWithFormat:@"fb%@://bridge/share",SHKCONFIG(facebookAppId)]]) {
+    //if ([[url absoluteString] hasPrefix:[NSString stringWithFormat:@"fb%@://bridge/share",SHKCONFIG(facebookAppId)]]) {
         return [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
-    }
+    //}
     
-    if ([[url absoluteString] hasPrefix:[NSString stringWithFormat:@"fb%@", SHKCONFIG(facebookAppId)]]) {
-        
-       //return One of the handled URL
-        return [FBAppCall handleOpenURL:url
-                      sourceApplication:sourceApplication
-                            withSession:[PFFacebookUtils session]] || [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
-    }
+//    if ([[url absoluteString] hasPrefix:[NSString stringWithFormat:@"fb%@", SHKCONFIG(facebookAppId)]]) {
+//        
+//       //return One of the handled URL
+//        return [FBAppCall handleOpenURL:url
+//                      sourceApplication:sourceApplication
+//                            withSession:[PFFacebookUtils session]] || [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+//    }
+//    
+//    if([[url absoluteString] hasPrefix:kCallbackURLBaseStringPrefix]){
+//        return YES;
+//    } else {
+//  
+//        return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+//    }
     
-    if([[url absoluteString] hasPrefix:kCallbackURLBaseStringPrefix]){
-        return YES;
-    } else {
-  
-        return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
-    }
 }
 
 /**
@@ -185,7 +188,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     // Configurator initialization
     flyerConfigurator = [[FlyerlyConfigurator alloc] init];
     DefaultSHKConfigurator  *configurator = flyerConfigurator;
-    
     [SHKConfiguration sharedInstanceWithConfigurator:configurator];
 
     // Crittercism for crash reports.
@@ -196,7 +198,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
      @{[flyerConfigurator paypalEnvironment] : [flyerConfigurator paypalEnvironmentId]}];
     
     [PayPalMobile preconnectWithEnvironment:[flyerConfigurator paypalEnvironment]];
-    
+
     //[LobRequest initWithAPIKey:[flyerConfigurator lobAppId]];
     
     //-- Set Notification
@@ -216,22 +218,34 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     
 #ifdef DEBUG
     
-    // Setup parse Offline ozair's account
-    [Parse setApplicationId:[flyerConfigurator parseOfflineAppId]
-                  clientKey:[flyerConfigurator parseOfflineClientKey]];
-#else
+    [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+        configuration.applicationId = @"20eaa2f1-f36d-4187-8613-82851a490f05";
+        configuration.clientKey = @"gThiRyKWsxaBiBfvmMUKu6GgjQKI5m2g";
+        configuration.server = @"https://api.parse.buddy.com/parse/";
+    }]];
     
-    // Setup parse Online
-    [Parse setApplicationId:[flyerConfigurator parseOnlineAppId]
-                  clientKey:[flyerConfigurator parseOnlineClientKey]];
+#else
+
+    [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+        configuration.applicationId = @"20eaa2f1-f36d-4187-8613-82851a490f05";
+        configuration.clientKey = @"gThiRyKWsxaBiBfvmMUKu6GgjQKI5m2g";
+        configuration.server = @"https://api.parse.buddy.com/parse/";
+    }]];
     
 #endif
   
     // Flurry stats
-    [Flurry startSession:[flyerConfigurator flurrySessionId]];
-
+    NSString *buildVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey];
+    FlurrySessionBuilder* builder = [[[[[FlurrySessionBuilder new]
+                                        withLogLevel:FlurryLogLevelAll]
+                                       withCrashReporting:YES]
+                                      withSessionContinueSeconds:10]
+                                     withAppVersion:buildVersion];
+    
+    [Flurry startSession:[flyerConfigurator flurrySessionId] withSessionBuilder:builder];
+    
     // Facebook initialization
-    [PFFacebookUtils initializeFacebook];
+    [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions: launchOptions];
     
     // Twitter Initialization
     [PFTwitterUtils initializeWithConsumerKey:[flyerConfigurator twitterConsumerKey] consumerSecret:[flyerConfigurator twitterSecret]];
@@ -330,7 +344,12 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound];
 
 	[window makeKeyAndVisible];
-    
+
+    // parse twitter was not working, these debugers will help in finding issue
+    [Parse setLogLevel:PFLogLevelDebug];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveWillSendURLRequestNotification:) name:PFNetworkWillSendURLRequestNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveDidReceiveURLResponseNotification:) name:PFNetworkDidReceiveURLResponseNotification object:nil];
+
     //return YES;
     return [ [FBSDKApplicationDelegate sharedInstance] application :application
                                       didFinishLaunchingWithOptions:launchOptions];
@@ -400,8 +419,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         }
     }];
     }
-
-
 }
 
 
@@ -524,7 +541,7 @@ if it exist then we call Merging Process
         //Create Directory!
         [fileManager createDirectoryAtPath:documentDBFolderPath withIntermediateDirectories:NO attributes:nil error:&error];
     } else {
-        //NSLog(@"Directory exists! %@", documentDBFolderPath);
+        NSLog(@"Directory exists! %@", documentDBFolderPath);
     }
     
     NSArray *fileList = [fileManager contentsOfDirectoryAtPath:resourceDBFolderPath error:&error];
@@ -540,13 +557,30 @@ if it exist then we call Merging Process
             [fileManager copyItemAtPath:oldFilePath toPath:newFilePath error:&error];
             
         } else {
-            //NSLog(@"File exists: %@", newFilePath);
+            NSLog(@"File exists: %@", newFilePath);
         }
     }
     
 }
+// parse twitter was not working, these debugers will help in finding issue
+- (void)receiveWillSendURLRequestNotification:(NSNotification *) notification {
+    NSURLRequest *request = notification.userInfo[PFNetworkNotificationURLRequestUserInfoKey];
+    NSLog(@"URL : %@", request.URL.absoluteString);
+    NSLog(@"Method : %@", request.HTTPMethod);
+    NSLog(@"Headers : %@", request.allHTTPHeaderFields);
+    NSLog(@"Request Body : %@", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
+}
 
-
+// parse twitter was not working, these debugers will help in finding issue
+- (void)receiveDidReceiveURLResponseNotification:(NSNotification *) notification {
+    NSURLRequest *request = notification.userInfo[PFNetworkNotificationURLRequestUserInfoKey];
+    NSHTTPURLResponse *response = notification.userInfo[PFNetworkNotificationURLResponseUserInfoKey];
+    NSString *responseBody = notification.userInfo[PFNetworkNotificationURLResponseBodyUserInfoKey];
+    NSLog(@"URL : %@", response.URL.absoluteString);
+    NSLog(@"Status Code : %ld", (long)response.statusCode);
+    NSLog(@"Headers : %@", response.allHeaderFields);
+    NSLog(@"Response Body : %@", responseBody);
+}
 
 @end
 

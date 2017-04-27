@@ -871,7 +871,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     self.onFlyerBack( @"" );
                 });
             }
-            
+
             [Flurry logEvent:@"Saved Flyer"];
             
         } else {
@@ -4501,7 +4501,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             [shareviewcontroller setStarsofShareScreen:user[@"appStarRate"]];
         
         [user saveInBackground];
-        [shareviewcontroller setSocialStatus];        
+        [shareviewcontroller setSocialStatus];
         
         //Create Animation Here
         [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,475 )];
@@ -5684,7 +5684,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
 
-    if( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ALL_DESIGN] ){
+    if( [userPurchases checkKeysExistsInPurchases:@[IN_APP_ID_ALL_DESIGN, IN_APP_OLD_ID_ALL_DESIGN]] ){
 
         [self premiumBtnHideAfterCheck:@"ALL"];
         [inappviewcontroller.paidFeaturesTview reloadData];
@@ -6463,7 +6463,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         userPurchases.delegate = self;
         if ([[PFUser currentUser] sessionToken].length != 0) {
             //can move water mark layer when have valid subscription / IN_APP_ID_ALL_DESIGN
-            if ( [userPurchases isSubscriptionValid] || [userPurchases haveProduct:IN_APP_ID_ALL_DESIGN] ) {
+            if ( [userPurchases isSubscriptionValid] || [userPurchases haveProduct:IN_APP_ID_ALL_DESIGN] || [userPurchases haveProduct:IN_APP_OLD_ID_ALL_DESIGN] ) {
                 canPerformAct = YES;
             }
         }
@@ -6545,7 +6545,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     if( againAddInSubViews ){
         //When user have complete design bundle or any subscription dont show the premium button
-        if( [userPurchases haveProduct:IN_APP_ID_ALL_DESIGN] || [userPurchases isSubscriptionValid] ){
+        if( [userPurchases haveProduct:IN_APP_ID_ALL_DESIGN] || [userPurchases haveProduct:IN_APP_OLD_ID_ALL_DESIGN] || [userPurchases isSubscriptionValid] ){
             [self premiumBtnHideAfterCheck:@"ALL"];
         }else if([userPurchases haveProduct: IN_APP_ID_ICON_BUNDLE] ) {
             [self premiumBtnHideAfterCheck: IN_APP_ID_ICON_BUNDLE];

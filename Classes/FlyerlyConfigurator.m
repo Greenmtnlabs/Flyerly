@@ -36,16 +36,16 @@
 - (NSString*)referralURL{
     
     #if defined(FLYERLY) // Flyerly
-        return @"http://app.flyerly.com/cs?i=";
+        return @"http://greenmtnlabs.com/flyerly/index.html?i=";
     #else // Flyerly Biz
-        return @"http://biz.flyerly.com/cs?i=";
+        return @"http://flyerly.com/biz?i=";
     #endif
 }
 
 - (NSString*)appLinkURL{
     
     #if defined(FLYERLY) // Flyerly
-        return @"http://app.flyerly.com/cs";
+        return @"http://greenmtnlabs.com/flyerly/index.html";
     #else // Flyerly Biz
         return @"http://flyerly.com/biz/";
     #endif
@@ -361,6 +361,7 @@
 - (NSString*)twitterConsumerKey {
     
     #if defined(FLYERLY) // Flyerly
+        //return @"mPqVFHnEHVGj2v1xjnW2WnryF";
         return @"xYlRtbesxU0Qrxulx5kjdA";
     #else // Flyerly Biz
         return @"JlAwXVRkwu0HvGwVmrPq8dAgz";
@@ -370,6 +371,7 @@
 - (NSString*)twitterSecret {
 
     #if defined(FLYERLY) // Flyerly
+        //return @"jRB6zK2mHYlbvddLJyMDXattHtqyKna6x1p64d6nve23IYZJT0";
         return @"v8j6WWLoRDBCIkUQtapbhuOoYOZ4sWjMJovJLIPgO0";
     #else // Flyerly Biz
         return @"5DoqmMkYaK7V4SqRITDCfDGBcgLWo2vDg5DAXcCNV0mPasWGSS";

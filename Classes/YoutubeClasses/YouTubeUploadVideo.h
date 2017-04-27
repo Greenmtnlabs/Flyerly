@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GTLYouTube.h"
+//#import "GTLYouTube.h"
 
 @protocol YouTubeUploadVideoDelegate;
 
@@ -17,12 +17,12 @@
 
 // Performs a G+ image search with the given query, will return
 // by calling googlePlusImageSearch:didFinishWithResults: when completed.
-- (void)uploadYouTubeVideoWithService:(GTLServiceYouTube *)service
-                             fileData:(NSData*)fileData
-                                title:(NSString*)title
-                          description:(NSString*)description
-                        privacyStatus:(NSString *)privacyStatus
-                                 tags:(NSArray *)tags;
+//- (void)uploadYouTubeVideoWithService:(GTLServiceYouTube *)service
+//                             fileData:(NSData*)fileData
+//                                title:(NSString*)title
+//                          description:(NSString*)description
+//                        privacyStatus:(NSString *)privacyStatus
+//                                 tags:(NSArray *)tags;
 
 @end
 
@@ -33,8 +33,8 @@
 // Called when an image search completes. |results| will contain
 // an array of NSDictionary containing keys for @"fullImage", @"thumbnail",
 // @"author" and @"title".
-- (void)uploadYouTubeVideo:(YouTubeUploadVideo *)uploadVideo
-     didFinishWithResults:(GTLYouTubeVideo *)video;
+//- (void)uploadYouTubeVideo:(YouTubeUploadVideo *)uploadVideo
+//     didFinishWithResults:(GTLYouTubeVideo *)video;
 
 @end
 

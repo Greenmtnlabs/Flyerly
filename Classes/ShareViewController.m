@@ -12,14 +12,16 @@
 #import "VideoData.h"
 #import "Utils.h"
 #import "FlyerlyConfigurator.h"
+#import <Social/Social.h>
 
 @implementation ShareViewController{
     NSString *fbShareType; // 4 possible values to assign: fb-photo-wall | fb-photo-messenger | fb-video-wall | fb-video-messenger
     FlyerlyConfigurator *flyerConfigurator;
     NSString *hashTag;
+    BOOL shareOnEmail;
 }
-@synthesize youtubeService;
-@synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,saveButton,printFlyerButton,facebookButton,twitterButton,instagramButton,messengerButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,tempTxtArea,saveToGallaryReqBeforeSharing, fmController;
+//@synthesize youtubeService;
+@synthesize Yvalue,rightUndoBarButton,shareButton,backButton,helpButton,selectedFlyerImage,fvController,cfController,selectedFlyerDescription,  imageFileName,saveButton,printFlyerButton,facebookButton,twitterButton,instagramButton,messengerButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,activityIndicator,youTubeButton,tempTxtArea,saveToGallaryReqBeforeSharing, fmController, delegate;
 
 @synthesize flyerShareType,star1,star2,star3,star4,star5;
 @synthesize descriptionView, titlePlaceHolderImg, titleView, descTextAreaImg, indexRow;
@@ -289,15 +291,14 @@ UIAlertView *saveCurrentFlyerAlert;
         // Set Sms Sharing Status From Social File
         if([MFMessageComposeViewController canSendAttachments])
         {
-            //if (![self.flyer isVideoFlyer]) {
-               
-                status = [flyer getSmsStatus];
-                if([status isEqualToString:@"1"]){
-                    [smsButton setSelected:YES];
-                }else {
-                    [smsButton setSelected:NO];
-                }
-            //}
+            
+            status = [flyer getSmsStatus];
+            if([status isEqualToString:@"1"]){
+                [smsButton setSelected:YES];
+            }else {
+                [smsButton setSelected:NO];
+            }
+            
         }
     }
     
@@ -415,7 +416,9 @@ UIAlertView *saveCurrentFlyerAlert;
     [instagramButton setEnabled:enable];
     [messengerButton setEnabled:enable];
     [facebookButton setEnabled:enable];
-    [youTubeButton setEnabled:enable];
+    //[youTubeButton setEnabled:enable];
+    [emailButton setEnabled:enable];
+    [smsButton setEnabled:enable];
 
 }
 #pragma mark  Text Field Delegate
@@ -499,11 +502,11 @@ UIAlertView *saveCurrentFlyerAlert;
 #pragma mark Social Network
 -(void)initYoutubeService {
     // Initialize the youtube service & load existing credentials from the keychain if available
-    self.youtubeService = [[GTLServiceYouTube alloc] init];
-    self.youtubeService.authorizer =
-    [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:flyerConfigurator.appName
-                                                          clientID:flyerConfigurator.youTubeSecret
-                                                      clientSecret:flyerConfigurator.youTubeConsumerKey];
+//    self.youtubeService = [[GTLServiceYouTube alloc] init];
+//    self.youtubeService.authorizer =
+//    [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:flyerConfigurator.appName
+//                                                          clientID:flyerConfigurator.youTubeSecret
+//                                                      clientSecret:flyerConfigurator.youTubeConsumerKey];
     
     
     _uploadVideo = [[YouTubeUploadVideo alloc] init];
@@ -515,15 +518,61 @@ UIAlertView *saveCurrentFlyerAlert;
 -(IBAction)uploadOnYoutube:(id)sender {
     [self updateDescription];
     
-    if ([FlyerlySingleton connected]) {
+//    if ([FlyerlySingleton connected]) {
 //        if (![self isAuthorized]) { //always ask for auth
             // Not yet authorized, request authorization and push the login UI onto the navigation stack.
-            [self.cfController.navigationController pushViewController:[self createAuthController] animated:YES];
+//            [self.cfController.navigationController pushViewController:[self createAuthController] animated:YES];
 //        } else {
 //            [self uploadYTDL];
 //        }
-    } else {
-        [FlyerlySingleton showNotConnectedAlert];
+//    } else {
+//        [FlyerlySingleton showNotConnectedAlert];
+//    }
+}
+
+-(void)openActivitySheetForShareVideo{
+    NSArray *activityItems = [NSArray arrayWithObjects:[NSURL fileURLWithPath:[self.flyer getSharingVideoPath]], nil];
+    
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    [self presentViewController:activityViewController animated:YES completion:nil];
+}
+
+-(void)sendVideoInMail
+{
+    if ([MFMailComposeViewController canSendMail])
+    {
+        MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
+        mail.mailComposeDelegate = self;
+        NSString *getSharingVideoPath = [NSString stringWithFormat:@"file://%@",[self.flyer getSharingVideoPath]];
+        NSURL *videoUrl =  [NSURL URLWithString:getSharingVideoPath];
+        NSData *fileData = [NSData dataWithContentsOfURL:videoUrl];
+        
+        [mail addAttachmentData:fileData mimeType:@"video/MOV" fileName:@"Flyer.mov"];
+        [mail setSubject:@"Flyer for you!"];
+        [mail setMessageBody:[NSString stringWithFormat:@"Created & sent from %@", flyerConfigurator.appName] isHTML:YES];
+        [self.view.window.rootViewController presentViewController:mail animated:YES completion:nil];
+        shareOnEmail = YES;
+    }else {
+        NSLog(@"Device is unable to send the request in its current state.");
+    }
+}
+
+-(void)sendVideoInMsg
+{
+    if ([MFMessageComposeViewController canSendText])
+    {
+        NSString *getSharingVideoPath = [NSString stringWithFormat:@"file://%@",[self.flyer getSharingVideoPath]];
+        NSURL *videoUrl =  [NSURL URLWithString:getSharingVideoPath];
+        NSData *fileData = [NSData dataWithContentsOfURL:videoUrl];
+        
+        MFMessageComposeViewController* messageComposer = [MFMessageComposeViewController new];
+        messageComposer.messageComposeDelegate = self;
+        [messageComposer setBody:[NSString stringWithFormat:@"Created & sent from %@", flyerConfigurator.appName]];
+        //[messageComposer setRecipients:recipients];colorForUsage:SC_THEME_MAIN];
+        [messageComposer addAttachmentData:fileData typeIdentifier:@"video/MOV" filename:@"Flyer.mov"];
+        [self.view.window.rootViewController presentViewController:messageComposer animated:YES completion:nil];
+    }else {
+        NSLog(@"Device is unable to send the request in its current state.");
     }
 }
 
@@ -544,17 +593,17 @@ UIAlertView *saveCurrentFlyerAlert;
         description = [NSString stringWithFormat:@"Uploaded from %@", flyerConfigurator.appName ];
     }
     
-    [self.uploadVideo uploadYouTubeVideoWithService:self.youtubeService
-                                           fileData:fileData
-                                              title:title
-                                        description:description
-                                      privacyStatus: ( ([[flyer getShareType]  isEqual: @"Private"]) ? @"private" : @"public")
-                                        tags:[NSArray arrayWithObjects:hashTag, nil]];
+//    [self.uploadVideo uploadYouTubeVideoWithService:self.youtubeService
+//                                           fileData:fileData
+//                                              title:title
+//                                        description:description
+//                                      privacyStatus: ( ([[flyer getShareType]  isEqual: @"Private"]) ? @"private" : @"public")
+//                                        tags:[NSArray arrayWithObjects:hashTag, nil]];
 }
 
 // Helper to check if user is authorized
 - (BOOL)isAuthorized {
-    return [((GTMOAuth2Authentication *)self.youtubeService.authorizer) canAuthorize];
+    return YES; //[((GTMOAuth2Authentication *)self.youtubeService.authorizer) canAuthorize];
 }
 
 // Creates the auth controller for authorizing access to YouTube.
@@ -562,12 +611,12 @@ UIAlertView *saveCurrentFlyerAlert;
 {
     GTMOAuth2ViewControllerTouch *authController;
     
-    authController = [[GTMOAuth2ViewControllerTouch alloc] initWithScope:kGTLAuthScopeYouTube
-                                                                clientID:flyerConfigurator.youTubeConsumerKey
-                                                            clientSecret:flyerConfigurator.youTubeSecret
-                                                        keychainItemName:flyerConfigurator.appName
-                                                                delegate:self
-                                                        finishedSelector:@selector(viewController:finishedWithAuth:error:)];
+//    authController = [[GTMOAuth2ViewControllerTouch alloc] initWithScope:kGTLAuthScopeYouTube
+//                                                                clientID:flyerConfigurator.youTubeConsumerKey
+//                                                            clientSecret:flyerConfigurator.youTubeSecret
+//                                                        keychainItemName:flyerConfigurator.appName
+//                                                                delegate:self
+//                                                        finishedSelector:@selector(viewController:finishedWithAuth:error:)];
     return authController;
 }
 
@@ -578,9 +627,9 @@ UIAlertView *saveCurrentFlyerAlert;
                  error:(NSError *)error {
     if (error != nil) {
         [Utils showAlert:@"Authentication Error" message:error.localizedDescription];
-        self.youtubeService.authorizer = nil;
+        //self.youtubeService.authorizer = nil;
     } else {
-        self.youtubeService.authorizer = authResult;
+        //self.youtubeService.authorizer = authResult;
         //after successfull login on google reStart uploading process
         [self uploadYTDL];
     }
@@ -589,26 +638,26 @@ UIAlertView *saveCurrentFlyerAlert;
 - (IBAction)startOAuthFlow:(id)sender {
     GTMOAuth2ViewControllerTouch *viewController;
     
-    viewController = [[GTMOAuth2ViewControllerTouch alloc]
-                      initWithScope:kGTLAuthScopeYouTube
-                      clientID:flyerConfigurator.youTubeConsumerKey
-                      clientSecret:flyerConfigurator.youTubeSecret
-                      keychainItemName:flyerConfigurator.appName
-                      delegate:self
-                      finishedSelector:@selector(viewController:finishedWithAuth:error:)];
+//    viewController = [[GTMOAuth2ViewControllerTouch alloc]
+//                      initWithScope:kGTLAuthScopeYouTube
+//                      clientID:flyerConfigurator.youTubeConsumerKey
+//                      clientSecret:flyerConfigurator.youTubeSecret
+//                      keychainItemName:flyerConfigurator.appName
+//                      delegate:self
+//                      finishedSelector:@selector(viewController:finishedWithAuth:error:)];
     
     [self.cfController.navigationController pushViewController:viewController animated:YES];
 }
 
-- (void)uploadYouTubeVideo:(YouTubeUploadVideo *)uploadVideo
-      didFinishWithResults:(GTLYouTubeVideo *)video {
-    
-    NSString *videoUrl = [NSString stringWithFormat:@"https://www.youtube.com/watch?v=%@",video.identifier];
-    [self onYoutubeSFShare:videoUrl];
-    [self setSocialStatus];
-    
-    [Utils showAlert:@"Alert" message:@"Video uploaded successfully."];
-}
+//- (void)uploadYouTubeVideo:(YouTubeUploadVideo *)uploadVideo
+//      didFinishWithResults:(GTLYouTubeVideo *)video {
+//    
+//    NSString *videoUrl = [NSString stringWithFormat:@"https://www.youtube.com/watch?v=%@",video.identifier];
+//    [self onYoutubeSFShare:videoUrl];
+//    [self setSocialStatus];
+//    
+//    [Utils showAlert:@"Alert" message:@"Video uploaded successfully."];
+//}
 
 /*
  * Called when Youtube button is pressed\
@@ -618,14 +667,14 @@ UIAlertView *saveCurrentFlyerAlert;
     [self updateDescription];
 
     if ([FlyerlySingleton connected]) {
-        SHKItem *item = [SHKItem filePath:[self.flyer getSharingVideoPath] title:titleView.text];
-        
-        item.tags =[NSArray arrayWithObjects: hashTag, nil];
-        item.text = selectedFlyerDescription;
-        
-        iosSharer = [YouTubeSubClass shareItem:item];
-        
-        iosSharer.shareDelegate = self;
+//        SHKItem *item = [SHKItem filePath:[self.flyer getSharingVideoPath] title:titleView.text];
+//        
+//        item.tags =[NSArray arrayWithObjects: hashTag, nil];
+//        item.text = selectedFlyerDescription;
+//        
+//        iosSharer = [YouTubeSubClass shareItem:item];
+//        
+//        iosSharer.shareDelegate = self;
     } else {
         [FlyerlySingleton showNotConnectedAlert];
     }
@@ -639,20 +688,16 @@ UIAlertView *saveCurrentFlyerAlert;
     
     // update description on onClick Twitter Sharing Button
     [self updateDescription];
-    
-    // Declare Item to be share
-    SHKItem *item;
-    
+    NSString *sharingText = @"";
     //check whether item is video or just an image
     if ([self.flyer isVideoFlyer]) {
-        
+
         // Current Video Link For Sharing
-        item = [SHKItem text: [NSString stringWithFormat:@"%@ %@ %@",[self.flyer getYoutubeLink], selectedFlyerDescription, hashTag ]];
-        
+        sharingText = [NSString stringWithFormat:@"%@ %@ %@",[self.flyer getYoutubeLink], selectedFlyerDescription, hashTag];
+
     }else {
-        
         // Current Image For Sharing
-        item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@", selectedFlyerDescription, hashTag ]];
+        sharingText = [NSString stringWithFormat:@"%@ %@", selectedFlyerDescription, hashTag];
     }
 
     // get the twitter accounts from the phone
@@ -670,36 +715,42 @@ UIAlertView *saveCurrentFlyerAlert;
                if ([availableAccounts count] > 0) {
                    
                    dispatch_async(dispatch_get_main_queue(), ^{
-                       //Calling ShareKit for Sharing via SHKiOSTwitter
-                       iosSharer = [SHKiOSTwitter shareItem:item];
-                       // after sharing we have to call sharing delegates
-                       iosSharer.shareDelegate = self;
-                       [iosSharer share];
+                       [self shareOnTwitter:sharingText shareType:SLServiceTypeTwitter];
                    });
-                   
                    
                } else {
                    
                    dispatch_async(dispatch_get_main_queue(), ^{
-                       //Calling ShareKit for Sharing via SHKTWitter
-                       iosSharer = [SHKTwitter shareItem:item];
-                       // after sharing we have to call sharing delegates
-                       iosSharer.shareDelegate = self;
-                       [iosSharer share];
+                       [self shareOnTwitter:sharingText shareType:SLServiceTypeTwitter];
                    });
-                   
                }
                
            } else {
-               
-               //Calling ShareKit for Sharing via SHKTWitter
-               iosSharer = [SHKTwitter shareItem:item];
-               // after sharing we have to call sharing delegates
-               iosSharer.shareDelegate = self;
-               [iosSharer share];
+               [self shareOnTwitter:sharingText shareType:SLServiceTypeTwitter];
            }
     }];
 
+}
+
+// share on twitter
+-(void)shareOnTwitter:(NSString *)sharingText shareType:(NSString *)shareType{
+    SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:shareType];
+    [controller setInitialText:sharingText];
+    if ([self.flyer isVideoFlyer] == NO) {
+        [controller addImage:selectedFlyerImage];
+    }
+    [controller setCompletionHandler:^(SLComposeViewControllerResult result)
+     {
+         if (result == SLComposeViewControllerResultCancelled) {
+             NSLog(@"Cancelled");
+         } else if (result == SLComposeViewControllerResultDone) {
+             [self.flyer setTwitterStatus:1];
+             [Flurry logEvent:@"Shared Twitter"];
+             [self actionAfterSharing];
+         }
+     }];
+    [self presentViewController:controller animated:YES completion:Nil];
+    
 }
 
 
@@ -764,27 +815,39 @@ UIAlertView *saveCurrentFlyerAlert;
  * Called when email button is pressed
  */
 -(IBAction)onClickEmailButton{
-    
-    // Current Item For Sharing
-    SHKItem *item;
     if ([self.flyer isVideoFlyer]) {
-        
-        // Current Video Link For Sharing
-        //        item = [SHKItem text: [NSString stringWithFormat:@"%@ Created & sent from Flyer.ly",[self.flyer getYoutubeLink]]];
-        
-        item = [SHKItem URL:[NSURL URLWithString:[self.flyer getYoutubeLink]] title:[NSString stringWithFormat:@"%@ for you!", flyerConfigurator.appName ] contentType:SHKURLContentTypeVideo];
-    }else {
-        
-        item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ for you!", flyerConfigurator.appName ]];
-        item.text = @"Created & sent from Flyer.ly";
+        [self sendVideoInMail];
     }
-    
-    //Calling ShareKit for Sharing
-    iosSharer = [[ SHKSharer alloc] init];
-    iosSharer = [SHKMail shareItem:item];
-    iosSharer.shareDelegate = self;
-    
-    iosSharer = nil;
+    else if([MFMailComposeViewController canSendMail]){
+        MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+        NSString *bodyText = @"";
+        NSString *title = [NSString stringWithFormat:@"%@ for you!", flyerConfigurator.appName];
+        // Current Item For Sharing
+        SHKItem *item;
+        if ([self.flyer isVideoFlyer]) {
+            // Current Video Link For Sharing
+            item = [SHKItem text: [NSString stringWithFormat:@"%@ Created & sent from Flyer.ly",[self.flyer getYoutubeLink]]];
+            item = [SHKItem URL:[NSURL URLWithString:[self.flyer getYoutubeLink]] title:[NSString stringWithFormat:@"%@ for you!", flyerConfigurator.appName ] contentType:SHKURLContentTypeVideo];
+
+            bodyText = [NSString stringWithFormat:@"%@ Created & sent from Flyer.ly",[self.flyer getYoutubeLink]];
+
+        }else {
+            item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ for you!", flyerConfigurator.appName ]];
+            item.text = @"Created & sent from Flyer.ly";
+            bodyText = @"Created & sent from Flyer.ly";
+        }
+
+        picker.mailComposeDelegate = self;
+        [picker setSubject:title];
+
+        NSData *imageData = UIImagePNGRepresentation(selectedFlyerImage);
+        [picker addAttachmentData:imageData mimeType:@"image/png" fileName:@"MyImageName"];
+        [picker setSubject:title];
+        [picker setMessageBody:bodyText isHTML:NO];
+
+        shareOnEmail = YES;
+        [self.view.window.rootViewController presentViewController:picker animated:YES completion:nil];
+    }
     
 }
 
@@ -792,27 +855,33 @@ UIAlertView *saveCurrentFlyerAlert;
  * Called when sms button is pressed
  */
 -(IBAction)onClickSMSButton{
-    
-    if([MFMessageComposeViewController canSendAttachments])
-    {
-        
-        if ([self.flyer isVideoFlyer]) {
-            
-            // Current Video Link For Sharing
-            SHKItem *item = [SHKItem text: [NSString stringWithFormat:@"%@ Created & sent from Flyer.ly",[self.flyer getYoutubeLink] ]];
-            
-            iosSharer = [SHKTextMessage shareItem:item];
-            iosSharer.shareDelegate = self;
-        }else {
-
-            NSData *exportData = UIImageJPEGRepresentation(selectedFlyerImage ,1.0);
-            
-            iosSharer = [[ SHKSharer alloc] init];
-            iosSharer = [SHKTextMessage shareFileData:exportData filename:imageFileName title:@"Created & sent from Flyer.ly"];
-            iosSharer.shareDelegate = self;
-            
-        }
+    if ([self.flyer isVideoFlyer]) {
+        [self sendVideoInMsg];
     }
+    else if([MFMessageComposeViewController canSendAttachments])
+    {
+        MFMessageComposeViewController* messageComposer = [MFMessageComposeViewController new];
+        messageComposer.messageComposeDelegate = self;
+        if ([self.flyer isVideoFlyer]) {
+            [messageComposer setBody:[NSString stringWithFormat:@"%@ Created & sent from Flyer.ly",[self.flyer getYoutubeLink] ]];
+        } else {
+            [messageComposer setBody:@"Created & sent from Flyer.ly"];
+            NSData *exportData = UIImageJPEGRepresentation(selectedFlyerImage ,1.0);
+            [messageComposer addAttachmentData:exportData typeIdentifier:@"image/png" filename:imageFileName];
+        }
+        [self.view.window.rootViewController presentViewController:messageComposer animated:YES completion:nil];
+    }
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
+    if(result == MessageComposeResultSent){
+        smsButton.enabled = YES;
+        [self.flyer setSmsStatus:1];
+        [smsButton setSelected:YES];
+        [Flurry logEvent:@"Shared SMS"];
+        [self actionAfterSharing];
+    }
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 
@@ -875,7 +944,6 @@ UIAlertView *saveCurrentFlyerAlert;
     [self updateDescription];
     
     if([self.flyer isVideoFlyer]){
-    
         fbShareType = @"fb-video-wall";
         NSURL *videoURL = [NSURL URLWithString:[self.flyer getVideoAssetURL]];
         FBSDKShareVideo *video = [[FBSDKShareVideo alloc] init];
@@ -978,32 +1046,30 @@ UIAlertView *saveCurrentFlyerAlert;
     [self.cfController enableHome:NO];
     
     // Update Flyer Share Info in Social File
-    if ( [sharer isKindOfClass:[SHKiOSFacebook class]] == YES  ||
-        [sharer isKindOfClass:[SHKFacebook class]] == YES ) {
-        
-        facebookButton.enabled = NO;
-        
-    } else if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ||
+//    if ( [sharer isKindOfClass:[SHKiOSFacebook class]] == YES  ||
+//        [sharer isKindOfClass:[SHKFacebook class]] == YES ) {
+//        
+//        facebookButton.enabled = NO;
+//        
+//    } else
+    if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ||
                [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
         
         twitterButton.enabled = NO;
         
-    } else if ( [sharer isKindOfClass:[SHKTumblr class]] == YES ) {
-        
-    } else if ( [sharer isKindOfClass:[SHKFlickr class]] == YES ) {
-        
-        
-    } else if ( [sharer isKindOfClass:[SHKMail class]] == YES ) {
-        
-        emailButton.enabled = NO;
-        
-    } else if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
-        
-        smsButton.enabled = NO;
-    } else if ( [sharer isKindOfClass:[YouTubeSubClass class]] == YES ) {
-    
-        youTubeButton.enabled = NO;
     }
+//    else if ( [sharer isKindOfClass:[SHKMail class]] == YES ) {
+//        
+//        emailButton.enabled = NO;
+//        
+//    } else if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
+//        
+//        smsButton.enabled = NO;
+//    }
+//    else if ( [sharer isKindOfClass:[YouTubeSubClass class]] == YES ) {
+//    
+//        youTubeButton.enabled = NO;
+//    }
     
     
 	if (!sharer.quiet)
@@ -1016,30 +1082,22 @@ UIAlertView *saveCurrentFlyerAlert;
 
     // Here we Check Sharer for
     // Update Flyer Share Info in Social File
-    if ( [sharer isKindOfClass:[SHKiOSFacebook class]] == YES ||
-        [sharer isKindOfClass:[SHKFacebook class]] == YES) {
-        
-        facebookButton.enabled = YES;
-        [self.flyer setFacebookStatus:1];
-        [Flurry logEvent:@"Shared Facebook"];
-
-        
-    } else if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ||
+//    if ( [sharer isKindOfClass:[SHKiOSFacebook class]] == YES ||
+//        [sharer isKindOfClass:[SHKFacebook class]] == YES) {
+//        
+//        facebookButton.enabled = YES;
+//        [self.flyer setFacebookStatus:1];
+//        [Flurry logEvent:@"Shared Facebook"];
+//
+//        
+//    } else
+    if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ||
                [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
         
         twitterButton.enabled = YES;
         [self.flyer setTwitterStatus:1];
         [Flurry logEvent:@"Shared Twitter"];
-
-        
-    } else if ( [sharer isKindOfClass:[SHKTumblr class]] == YES ) {
-        
-        [Flurry logEvent:@"Shared on Tumblr"];
-       
-    } else if ( [sharer isKindOfClass:[SHKFlickr class]] == YES ) {
-       
-        [Flurry logEvent:@"Shared on Flickr"];
-        
+     
     } else if ( [sharer isKindOfClass:[SHKMail class]] == YES ) {
         
         emailButton.enabled = YES;
@@ -1052,10 +1110,11 @@ UIAlertView *saveCurrentFlyerAlert;
         [self.flyer setSmsStatus:1];
         [Flurry logEvent:@"Shared SMS"];
 
-    } else if ( [sharer isKindOfClass:[YouTubeSubClass class]] == YES ) {
-        YouTubeSubClass *youtube = (YouTubeSubClass *) sharer;
-        [self onYoutubeSFShare:youtube.youTubeVideoURL];
     }
+//    else if ( [sharer isKindOfClass:[YouTubeSubClass class]] == YES ) {
+//        YouTubeSubClass *youtube = (YouTubeSubClass *) sharer;
+//        [self onYoutubeSFShare:youtube.youTubeVideoURL];
+//    }
     
     [self actionAfterSharing];
     
@@ -1067,8 +1126,6 @@ UIAlertView *saveCurrentFlyerAlert;
 -(void)actionAfterSharing{
     //Here we set the set selected state of buttons.
     [self setSocialStatus];
-    
-
     
     iosSharer.shareDelegate = nil;
     iosSharer = nil;
@@ -1160,7 +1217,6 @@ UIAlertView *saveCurrentFlyerAlert;
 - (void)displayActivity:(NSString *)activityDescription forSharer:(SHKSharer *)sharer {
     
     if (sharer.quiet) return;
-    
     [[SHKActivityIndicator currentIndicator]  displayActivity:activityDescription forSharer:sharer];
 }
 
@@ -1171,7 +1227,6 @@ UIAlertView *saveCurrentFlyerAlert;
 }
 
 - (void)showProgress:(CGFloat)progress forSharer:(SHKSharer *)sharer {
-    
     if (sharer.quiet) return;
     [[SHKActivityIndicator currentIndicator]  showProgress:progress forSharer:sharer];
 }
@@ -1309,22 +1364,20 @@ UIAlertView *saveCurrentFlyerAlert;
         #endif
 
         [picker setToRecipients:toRecipients];
-      
+        [self.view.window.rootViewController presentViewController:picker animated:YES completion:nil];
     }
-      [self.view.window.rootViewController presentViewController:picker animated:YES completion:nil];
+    
 }
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
-	switch (result) {
-		case MFMailComposeResultCancelled:
-			break;
-		case MFMailComposeResultSaved:
-			break;
-		case MFMailComposeResultSent:
-			break;
-		case MFMailComposeResultFailed:
-			break;
-	}
+    if(shareOnEmail == YES && result == MFMailComposeResultSent){
+        emailButton.enabled = YES;
+        [emailButton setSelected:YES];
+        [self.flyer setEmailStatus:1];
+        [Flurry logEvent:@"Shared Email"];
+        [self actionAfterSharing];
+    }
+    shareOnEmail = NO;
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
 /*
