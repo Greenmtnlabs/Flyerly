@@ -7981,6 +7981,11 @@
 					};
 					DB0CAD1A1E8D2BA600A93476 = {
 						DevelopmentTeam = 4MGKP9P5WH;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -11706,7 +11711,6 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = NO;
-				CODE_SIGN_ENTITLEMENTS = Flyr/Flyr.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
 				COPY_PHASE_STRIP = NO;
@@ -11758,8 +11762,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.socialflyr.flyrfree;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "955f651f-804c-4e0b-9215-e5e493450578";
-				PROVISIONING_PROFILE_SPECIFIER = "Flyerly Development";
+				PROVISIONING_PROFILE = "f5ea730e-5d2e-4ab9-91cc-3e80b7674b6b";
+				PROVISIONING_PROFILE_SPECIFIER = "Flyerly Biz Development";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/** $(PROJECT_DIR)/Submodules/";
 				VALID_ARCHS = "armv7 armv7s arm64 x86_64";
@@ -11777,7 +11781,6 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = NO;
-				CODE_SIGN_ENTITLEMENTS = Flyr/Flyr.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				COPY_PHASE_STRIP = YES;
@@ -11825,9 +11828,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.socialflyr.flyrfree;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ff0b3c3b-872b-4df9-a245-dfaf517a48ff";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ff0b3c3b-872b-4df9-a245-dfaf517a48ff";
-				PROVISIONING_PROFILE_SPECIFIER = "Flyrerly AdHoc Distribution";
+				PROVISIONING_PROFILE = "c0be0730-5ba1-4fd5-b7c7-47711c2237e8";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "c0be0730-5ba1-4fd5-b7c7-47711c2237e8";
+				PROVISIONING_PROFILE_SPECIFIER = "Flyerly Biz App Store";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/** $(PROJECT_DIR)/Submodules/";
 				VALID_ARCHS = "armv7 armv7s arm64 x86_64";
@@ -11845,7 +11848,6 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = NO;
-				CODE_SIGN_ENTITLEMENTS = Flyr/Flyr.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				COPY_PHASE_STRIP = YES;
@@ -11893,9 +11895,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.socialflyr.flyrfree;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8dcd3e0b-7e81-4d3a-bc14-922f9e18419e";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8dcd3e0b-7e81-4d3a-bc14-922f9e18419e";
-				PROVISIONING_PROFILE_SPECIFIER = "Flyrerly AdHoc Distribution";
+				PROVISIONING_PROFILE = "84869687-bf1e-4b24-a1cc-d93b3d5befd8";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "84869687-bf1e-4b24-a1cc-d93b3d5befd8";
+				PROVISIONING_PROFILE_SPECIFIER = "Flyery Biz Ad Hoc";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/Classes/lob-ios/lob-ios $(PROJECT_DIR)/Classes/lob-ios/lob-ios/** $(PROJECT_DIR)/Submodules/";
 				VALID_ARCHS = "armv7 armv7s arm64 x86_64";
