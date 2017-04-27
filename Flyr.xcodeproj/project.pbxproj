@@ -5097,6 +5097,7 @@
 		C77A56F0853B5D206189BCC3 /* Pods-Flyr.ad hoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flyr.ad hoc.xcconfig"; path = "Pods/Target Support Files/Pods-Flyr/Pods-Flyr.ad hoc.xcconfig"; sourceTree = "<group>"; };
 		DB0CB36C1E8D2BA600A93476 /* FlyerlyBiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlyerlyBiz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB0CB36D1E8D2BA700A93476 /* FlyerlyBiz-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "FlyerlyBiz-Info.plist"; path = "/Users/riksof/Documents/flyerly/flyerly/FlyerlyBiz-Info.plist"; sourceTree = "<absolute>"; };
+		DB75D54D1EB2394900318011 /* FlyerlyBiz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FlyerlyBiz.entitlements; sourceTree = "<group>"; };
 		DB895EDD1E715001000370C2 /* Flyr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Flyr.entitlements; path = Flyr/Flyr.entitlements; sourceTree = "<group>"; };
 		E28A4E3CDB90C26C1A175BFE /* Pods-FlyerlyBiz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlyerlyBiz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlyerlyBiz/Pods-FlyerlyBiz.debug.xcconfig"; sourceTree = "<group>"; };
 		E8A7347A1092CFF300661AAD /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
@@ -7301,6 +7302,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				DB75D54D1EB2394900318011 /* FlyerlyBiz.entitlements */,
 				DB895EDD1E715001000370C2 /* Flyr.entitlements */,
 				103FB48F1C75F2CB0072CEFC /* ios-files */,
 				C30043241AB6ED9300866385 /* lob-ios.xcodeproj */,
@@ -7983,7 +7985,7 @@
 						DevelopmentTeam = 4MGKP9P5WH;
 						SystemCapabilities = {
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -11711,6 +11713,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = FlyerlyBiz.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
 				COPY_PHASE_STRIP = NO;
@@ -11781,6 +11784,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = FlyerlyBiz.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				COPY_PHASE_STRIP = YES;
@@ -11848,6 +11852,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = FlyerlyBiz.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				COPY_PHASE_STRIP = YES;
