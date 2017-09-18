@@ -455,6 +455,7 @@
 				PRODUCT_NAME = instaFixx;
 				PROVISIONING_PROFILE = "14bd925d-dc73-4634-bb78-13c70145dc49";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -481,6 +482,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.fvimagination.instafixx;
 				PRODUCT_NAME = instaFixx;
 				PROVISIONING_PROFILE = "03533508-799f-4251-9489-5718dec8d164";
+				SWIFT_VERSION = 2.3;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
