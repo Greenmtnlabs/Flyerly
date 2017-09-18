@@ -1,6 +1,6 @@
 //
 //  ImageEditor.swift
-//  instaFixx
+//  PhotoFixx
 //
 //  Created by FV iMAGINATION on 24/03/16.
 //  Copyright © 2016 FV iMAGINATION. All rights reserved.
@@ -346,7 +346,7 @@ func applyFilter1() {
     let filteredImageData = filter!.valueForKey(kCIOutputImageKey) as! CIImage
     let filteredImageRef = ciContext.createCGImage(filteredImageData, fromRect: filteredImageData.extent)
     
-    if (filterNr >= 1) { filteredImage.image = UIImage(CGImage: filteredImageRef) }
+    if (filterNr >= 1) { filteredImage.image = UIImage(CGImage: filteredImageRef!) }
     
 }
     
@@ -455,7 +455,7 @@ func applyFilter2() {
     let filteredImageData = filter.valueForKey(kCIOutputImageKey) as! CIImage
     let filteredImageRef = ciContext.createCGImage(filteredImageData, fromRect: filteredImageData.extent)
     
-    if filterNr >= 1 { filteredImage.image = UIImage(CGImage: filteredImageRef) }
+    if filterNr >= 1 { filteredImage.image = UIImage(CGImage: filteredImageRef!) }
 }
     
     
@@ -583,7 +583,7 @@ func applyFilter3()  {
     let filteredImageData = filter.valueForKey(kCIOutputImageKey) as! CIImage
     let filteredImageRef = ciContext.createCGImage(filteredImageData, fromRect: filteredImageData.extent)
     
-    if filterNr >= 1 { filteredImage.image = UIImage(CGImage: filteredImageRef) }
+    if filterNr >= 1 { filteredImage.image = UIImage(CGImage: filteredImageRef!) }
     
 }
     
@@ -720,11 +720,11 @@ func imageDidRotate(recognizer:UIRotationGestureRecognizer) {
     let rect = containerView.bounds
     UIGraphicsBeginImageContextWithOptions(rect.size, true, 0)
     containerView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
-    combinedImage = UIGraphicsGetImageFromCurrentImageContext()
+    combinedImage = UIGraphicsGetImageFromCurrentImageContext()!
     UIGraphicsEndImageContext()
     
     
-    let messageStr = "Picture edited with #instaFixx - https://itunes.apple.com/us/app/instafixx/id903396250?l=it&ls=1&mt=8";
+    let messageStr = "Picture edited with #PhotoFixx - https://itunes.apple.com/us/app/instafixx/id903396250?l=it&ls=1&mt=8";
     let shareItems = [combinedImage , messageStr]
     
     let activityViewController:UIActivityViewController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
@@ -749,7 +749,7 @@ func imageDidRotate(recognizer:UIRotationGestureRecognizer) {
     let rect = containerView.bounds
     UIGraphicsBeginImageContextWithOptions(rect.size, true, 0)
     containerView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
-    combinedImage = UIGraphicsGetImageFromCurrentImageContext()
+    combinedImage = UIGraphicsGetImageFromCurrentImageContext()!
     UIGraphicsEndImageContext()
     
     // Call function
@@ -779,7 +779,7 @@ func shareToInstagram() {
             docIntController.presentOpenInMenuFromRect(CGRectZero, inView: self.view, animated: true)
             
     } else {
-        let alert = UIAlertView(title: "instaFixx",
+        let alert = UIAlertView(title: "PhotoFixx",
         message: "Instagram not found, please download it on the App Store",
         delegate: nil,
         cancelButtonTitle: "OK")
@@ -804,7 +804,7 @@ func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
     
 // MARK: - BACK BUTTON
 @IBAction func backButt(sender: AnyObject) {
-    UIAlertView(title: "instFixx",
+    UIAlertView(title: "PhotoFixx",
         message: "Are you sure you want to exit?",
         delegate: self,
         cancelButtonTitle: "Cancel",

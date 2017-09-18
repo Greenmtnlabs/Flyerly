@@ -1,6 +1,6 @@
 //
 //  Home.swift
-//  instaFixx
+//  PhotoFixx
 //
 //  Created by FV iMAGINATION on 24/03/16.
 //  Copyright © 2016 FV iMAGINATION. All rights reserved.
