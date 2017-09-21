@@ -47,10 +47,10 @@ UIAlertViewDelegate
     /* Variables */
     var imagePassed = UIImage()
     
-    var filtersArray = []
-    var filterTitleArray = []
-    var filterTitleArray2 = []
-    var filterTitleArray3 = []
+    var filtersArray : NSArray = []
+    var filterTitleArray : NSArray = []
+    var filterTitleArray2 : NSArray = []
+    var filterTitleArray3 : NSArray = []
     var posX = CGFloat()
     let titleLabel2 = UILabel()
     
@@ -78,7 +78,7 @@ UIAlertViewDelegate
     
     
     
-override func prefersStatusBarHidden() -> Bool {
+override var prefersStatusBarHidden : Bool {
     return true
 }
     
@@ -97,11 +97,11 @@ override func viewDidLoad() {
     
     
     // Resize Container View accordingly to the device used
-    containerView.frame = CGRectMake(0, 44, view.frame.size.width, view.frame.size.width)
-    filteredImagesScrollView.frame = CGRectMake(0, 44, view.frame.size.width, view.frame.size.width)
-    toolbarView.frame = CGRectMake(0, containerView.frame.size.height+44, view.frame.size.width, 44)
-    bordersContainerView.frame = CGRectMake(view.frame.size.width, containerView.frame.size.height+44, view.frame.size.width, 44);
-    pageFilter.center = CGPointMake(containerView.frame.size.width/2, view.frame.size.width+37)
+    containerView.frame = CGRect(x: 0, y: 44, width: view.frame.size.width, height: view.frame.size.width)
+    filteredImagesScrollView.frame = CGRect(x: 0, y: 44, width: view.frame.size.width, height: view.frame.size.width)
+    toolbarView.frame = CGRect(x: 0, y: containerView.frame.size.height+44, width: view.frame.size.width, height: 44)
+    bordersContainerView.frame = CGRect(x: view.frame.size.width, y: containerView.frame.size.height+44, width: view.frame.size.width, height: 44);
+    pageFilter.center = CGPoint(x: containerView.frame.size.width/2, y: view.frame.size.width+37)
         
     
     
@@ -123,9 +123,9 @@ override func viewDidLoad() {
         }
     }
     
-    let rect = CGRectMake(0.0, 0.0, CGFloat(actualWidth), CGFloat(actualHeight))
+    let rect = CGRect(x: 0.0, y: 0.0, width: CGFloat(actualWidth), height: CGFloat(actualHeight))
     UIGraphicsBeginImageContext(rect.size)
-    originalImage.image?.drawInRect(rect)
+    originalImage.image?.draw(in: rect)
     let img = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
     
@@ -179,18 +179,18 @@ override func viewDidLoad() {
     pageFilter.numberOfPages = filterTitleArray.count+1
     
     // Set the color of the 1st FilterPack button (since it's active)
-    filterPackOut1.setTitleColor(UIColor(red: 201.0/255.20, green: 91.0/255.0, blue: 96.0/255.0, alpha: 1), forState: .Normal)
+    filterPackOut1.setTitleColor(UIColor(red: 201.0/255.20, green: 91.0/255.0, blue: 96.0/255.0, alpha: 1), for: UIControlState())
     
     
     // Setup FilterPack Buttons
     filterPackOut1.layer.cornerRadius = 5
-    filterPackOut1.layer.borderColor = UIColor.whiteColor().CGColor
+    filterPackOut1.layer.borderColor = UIColor.white.cgColor
     filterPackOut1.layer.borderWidth = 1
     filterPackOut2.layer.cornerRadius = 5
-    filterPackOut2.layer.borderColor = UIColor.whiteColor().CGColor
+    filterPackOut2.layer.borderColor = UIColor.white.cgColor
     filterPackOut2.layer.borderWidth = 1
     filterPackOut3.layer.cornerRadius = 5
-    filterPackOut3.layer.borderColor = UIColor.whiteColor().CGColor
+    filterPackOut3.layer.borderColor = UIColor.white.cgColor
     filterPackOut3.layer.borderWidth = 1
     
     
@@ -202,14 +202,14 @@ override func viewDidLoad() {
     
     
 // MARK: - FILTERS SCROLLVIEW METHODS
-func scrollViewDidScroll(scrollView: UIScrollView) {
+func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
     let pageWidth = filteredImagesScrollView.frame.size.width
     filterNr = Int(floor((filteredImagesScrollView.contentOffset.x * 2 + pageWidth) / (pageWidth * 2)))
     pageFilter.currentPage = filterNr
 }
   
-func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     if filterPackNr == 1 { applyFilter1()
     } else if filterPackNr == 2 { applyFilter2()
     } else if filterPackNr == 3 { applyFilter3() }
@@ -222,9 +222,9 @@ func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
 func initFilters1() {
     posX = 0
     
-    filteredImagesScrollView.contentOffset = CGPointMake(0, 0)
+    filteredImagesScrollView.contentOffset = CGPoint(x: 0, y: 0)
     filteredImage.image = originalImage.image
-    originalImage.hidden = true
+    originalImage.isHidden = true
     
     for subview in filteredImagesScrollView.subviews {
         subview.removeFromSuperview()
@@ -236,30 +236,30 @@ func initFilters1() {
         posX = posX + view.frame.size.width
     
         let titleLabel1 = UILabel()
-        titleLabel1.frame = CGRectMake(0, 270, view.frame.size.width, 30)
+        titleLabel1.frame = CGRect(x: 0, y: 270, width: view.frame.size.width, height: 30)
         titleLabel1.font = UIFont(name: "Mf Delicate Little Flower", size: 24)
-        titleLabel1.textColor = UIColor.whiteColor()
-        titleLabel1.shadowColor = UIColor.darkGrayColor()
-        titleLabel1.shadowOffset = CGSizeMake(1, 1)
-        titleLabel1.textAlignment = .Center
+        titleLabel1.textColor = UIColor.white
+        titleLabel1.shadowColor = UIColor.darkGray
+        titleLabel1.shadowOffset = CGSize(width: 1, height: 1)
+        titleLabel1.textAlignment = .center
     	titleLabel1.text = "Original"
         filteredImagesScrollView.addSubview(titleLabel1)
     
     
         // Add a Label that shows the filter's name ===========
         let titleLabel2 = UILabel()
-        titleLabel2.frame = CGRectMake(posX, 270, view.frame.size.width, 30)
+        titleLabel2.frame = CGRect(x: posX, y: 270, width: view.frame.size.width, height: 30)
         titleLabel2.font = UIFont(name: "Mf Delicate Little Flower", size: 24)
-        titleLabel2.textColor = UIColor.whiteColor()
-        titleLabel2.shadowColor = UIColor.darkGrayColor()
-        titleLabel2.shadowOffset = CGSizeMake(1, 1)
-        titleLabel2.textAlignment = .Center
+        titleLabel2.textColor = UIColor.white
+        titleLabel2.shadowColor = UIColor.darkGray
+        titleLabel2.shadowOffset = CGSize(width: 1, height: 1)
+        titleLabel2.textAlignment = .center
         titleLabel2.text = "\(filterTitleArray[i])"
         filteredImagesScrollView.addSubview(titleLabel2)
     }
     
     // Populate the ScrollView with all the filteres images
-    filteredImagesScrollView.contentSize = CGSizeMake(filteredImagesScrollView.frame.size.width * (CGFloat(filterTitleArray.count + 1) ), 320)
+    filteredImagesScrollView.contentSize = CGSize(width: filteredImagesScrollView.frame.size.width * (CGFloat(filterTitleArray.count + 1) ), height: 320)
 }
     
 // MARK: - APPLY FILTER1
@@ -283,7 +283,7 @@ func applyFilter1() {
     // NO Filter
     case 0:
         filteredImage.image = originalImage.image
-        originalImage.hidden = true
+        originalImage.isHidden = true
     
     // 1st FILTER
     case 1:
@@ -293,7 +293,7 @@ func applyFilter1() {
     b = 128
     intensity = 0.5
     filter!.setValue(CIColor(red:r/255.0, green:g/255.0, blue:b/255.0), forKey: kCIInputColorKey)
-    filter!.setValue(NSNumber(float: intensity), forKey:kCIInputIntensityKey)
+    filter!.setValue(NSNumber(value: intensity as Float), forKey:kCIInputIntensityKey)
     
     
     // 2nd FILTER ================
@@ -304,7 +304,7 @@ func applyFilter1() {
     b = 236
     intensity = 0.5
     filter!.setValue(CIColor(red:r/255.0, green:g/255.0, blue:b/255.0), forKey: kCIInputColorKey)
-    filter!.setValue(NSNumber(float: intensity), forKey:kCIInputIntensityKey)
+    filter!.setValue(NSNumber(value: intensity as Float), forKey:kCIInputIntensityKey)
     
     
     // 3rd FILTER =================
@@ -315,7 +315,7 @@ func applyFilter1() {
     b = 255
     intensity = 0.5
     filter!.setValue(CIColor(red:r/255.0, green:g/255.0, blue:b/255.0), forKey: kCIInputColorKey)
-    filter!.setValue(NSNumber(float: intensity), forKey:kCIInputIntensityKey)
+    filter!.setValue(NSNumber(value: intensity as Float), forKey:kCIInputIntensityKey)
     
     
     // 4th FILTER =================
@@ -326,7 +326,7 @@ func applyFilter1() {
     b = 137
     intensity = 0.5
     filter!.setValue(CIColor(red:r/255.0, green:g/255.0, blue:b/255.0), forKey: kCIInputColorKey)
-    filter!.setValue(NSNumber(float: intensity), forKey:kCIInputIntensityKey)
+    filter!.setValue(NSNumber(value: intensity as Float), forKey:kCIInputIntensityKey)
     
     
     // 5th FILTER =================
@@ -337,16 +337,16 @@ func applyFilter1() {
     b = 128
     intensity = 0.5
     filter!.setValue(CIColor(red:r/255.0, green:g/255.0, blue:b/255.0), forKey: kCIInputColorKey)
-    filter!.setValue(NSNumber(float: intensity), forKey:kCIInputIntensityKey)
+    filter!.setValue(NSNumber(value: intensity as Float), forKey:kCIInputIntensityKey)
     
     default: break }
     
     
     filter!.setValue(coreImage, forKey: kCIInputImageKey)
-    let filteredImageData = filter!.valueForKey(kCIOutputImageKey) as! CIImage
-    let filteredImageRef = ciContext.createCGImage(filteredImageData, fromRect: filteredImageData.extent)
+    let filteredImageData = filter!.value(forKey: kCIOutputImageKey) as! CIImage
+    let filteredImageRef = ciContext.createCGImage(filteredImageData, from: filteredImageData.extent)
     
-    if (filterNr >= 1) { filteredImage.image = UIImage(CGImage: filteredImageRef!) }
+    if (filterNr >= 1) { filteredImage.image = UIImage(cgImage: filteredImageRef!) }
     
 }
     
@@ -355,9 +355,9 @@ func applyFilter1() {
 // MARK: - INIT 2nd FILTERS PACK
 func initFilters2() {
     posX = 0
-    filteredImagesScrollView.contentOffset = CGPointMake(0, 0)
+    filteredImagesScrollView.contentOffset = CGPoint(x: 0, y: 0)
     filteredImage.image = originalImage.image
-    originalImage.hidden = true
+    originalImage.isHidden = true
     
     
     for subview in filteredImagesScrollView.subviews {
@@ -371,30 +371,30 @@ func initFilters2() {
         posX = posX + view.frame.size.width
         
         let titleLabel1 = UILabel()
-        titleLabel1.frame = CGRectMake(0, 270, view.frame.size.width, 30)
+        titleLabel1.frame = CGRect(x: 0, y: 270, width: view.frame.size.width, height: 30)
         titleLabel1.font = UIFont(name: "Mf Delicate Little Flower", size: 24)
-        titleLabel1.textColor = UIColor.whiteColor()
-        titleLabel1.shadowColor = UIColor.darkGrayColor()
-        titleLabel1.shadowOffset = CGSizeMake(1, 1)
-        titleLabel1.textAlignment = .Center
+        titleLabel1.textColor = UIColor.white
+        titleLabel1.shadowColor = UIColor.darkGray
+        titleLabel1.shadowOffset = CGSize(width: 1, height: 1)
+        titleLabel1.textAlignment = .center
         titleLabel1.text = "Original"
         filteredImagesScrollView.addSubview(titleLabel1)
         
         
         // Add a Label that shows the filter's name ===========
         let titleLabel2 = UILabel()
-        titleLabel2.frame = CGRectMake(posX, 270, view.frame.size.width, 30)
+        titleLabel2.frame = CGRect(x: posX, y: 270, width: view.frame.size.width, height: 30)
         titleLabel2.font = UIFont(name: "Mf Delicate Little Flower", size: 24)
-        titleLabel2.textColor = UIColor.whiteColor()
-        titleLabel2.shadowColor = UIColor.darkGrayColor()
-        titleLabel2.shadowOffset = CGSizeMake(1, 1)
-        titleLabel2.textAlignment = .Center
+        titleLabel2.textColor = UIColor.white
+        titleLabel2.shadowColor = UIColor.darkGray
+        titleLabel2.shadowOffset = CGSize(width: 1, height: 1)
+        titleLabel2.textAlignment = .center
         titleLabel2.text = "\(filterTitleArray2[i])"
         filteredImagesScrollView.addSubview(titleLabel2)
     }
 
     // Populate the ScrollView with all the filteres images
-    filteredImagesScrollView.contentSize = CGSizeMake(filteredImagesScrollView.frame.size.width * (CGFloat(filterTitleArray2.count + 1) ), 320)
+    filteredImagesScrollView.contentSize = CGSize(width: filteredImagesScrollView.frame.size.width * (CGFloat(filterTitleArray2.count + 1) ), height: 320)
 }
     
 
@@ -413,7 +413,7 @@ func applyFilter2() {
     // NO Filter
     case 0:
         filteredImage.image = originalImage.image
-        originalImage.hidden = true
+        originalImage.isHidden = true
     
     
     
@@ -452,10 +452,10 @@ func applyFilter2() {
     
     
     filter.setValue(coreImage, forKey: kCIInputImageKey)
-    let filteredImageData = filter.valueForKey(kCIOutputImageKey) as! CIImage
-    let filteredImageRef = ciContext.createCGImage(filteredImageData, fromRect: filteredImageData.extent)
+    let filteredImageData = filter.value(forKey: kCIOutputImageKey) as! CIImage
+    let filteredImageRef = ciContext.createCGImage(filteredImageData, from: filteredImageData.extent)
     
-    if filterNr >= 1 { filteredImage.image = UIImage(CGImage: filteredImageRef!) }
+    if filterNr >= 1 { filteredImage.image = UIImage(cgImage: filteredImageRef!) }
 }
     
     
@@ -464,9 +464,9 @@ func applyFilter2() {
 // MARK: - INIT 3rd FILTERS PACK
 func initFilters3() {
     posX = 0
-    filteredImagesScrollView.contentOffset = CGPointMake(0, 0)
+    filteredImagesScrollView.contentOffset = CGPoint(x: 0, y: 0)
     filteredImage.image = originalImage.image
-    originalImage.hidden = true
+    originalImage.isHidden = true
     
     for subview in filteredImagesScrollView.subviews {
         subview.removeFromSuperview()
@@ -479,30 +479,30 @@ func initFilters3() {
         posX = posX + view.frame.size.width
         
         let titleLabel1 = UILabel()
-        titleLabel1.frame = CGRectMake(0, 270, view.frame.size.width, 30)
+        titleLabel1.frame = CGRect(x: 0, y: 270, width: view.frame.size.width, height: 30)
         titleLabel1.font = UIFont(name: "Mf Delicate Little Flower", size: 24)
-        titleLabel1.textColor = UIColor.whiteColor()
-        titleLabel1.shadowColor = UIColor.darkGrayColor()
-        titleLabel1.shadowOffset = CGSizeMake(1, 1)
-        titleLabel1.textAlignment = .Center
+        titleLabel1.textColor = UIColor.white
+        titleLabel1.shadowColor = UIColor.darkGray
+        titleLabel1.shadowOffset = CGSize(width: 1, height: 1)
+        titleLabel1.textAlignment = .center
         titleLabel1.text = "Original"
         filteredImagesScrollView.addSubview(titleLabel1)
         
         
         // Add a Label that shows the filter's name ===========
         let titleLabel2 = UILabel()
-        titleLabel2.frame = CGRectMake(posX, 270, view.frame.size.width, 30)
+        titleLabel2.frame = CGRect(x: posX, y: 270, width: view.frame.size.width, height: 30)
         titleLabel2.font = UIFont(name: "Mf Delicate Little Flower", size: 24)
-        titleLabel2.textColor = UIColor.whiteColor()
-        titleLabel2.shadowColor = UIColor.darkGrayColor()
-        titleLabel2.shadowOffset = CGSizeMake(1, 1)
-        titleLabel2.textAlignment = .Center
+        titleLabel2.textColor = UIColor.white
+        titleLabel2.shadowColor = UIColor.darkGray
+        titleLabel2.shadowOffset = CGSize(width: 1, height: 1)
+        titleLabel2.textAlignment = .center
         titleLabel2.text = "\(filterTitleArray[i])"
         filteredImagesScrollView.addSubview(titleLabel2)
     }
     
     // Populate the ScrollView with all the filteres images
-    filteredImagesScrollView.contentSize = CGSizeMake(filteredImagesScrollView.frame.size.width * (CGFloat(filterTitleArray.count + 1) ), 320)
+    filteredImagesScrollView.contentSize = CGSize(width: filteredImagesScrollView.frame.size.width * (CGFloat(filterTitleArray.count + 1) ), height: 320)
     
 }
 
@@ -522,7 +522,7 @@ func applyFilter3()  {
     // NO Filter
     case 0:
         filteredImage.image = originalImage.image
-        originalImage.hidden = true
+        originalImage.isHidden = true
     
     
     // 1st FILTER =============
@@ -546,9 +546,9 @@ func applyFilter3()  {
     filter.setDefaults()
     let vct = CIVector(x: filteredImage.image!.size.width/2, y:filteredImage.image!.size.height/2)
     filter.setValue(vct, forKey: kCIInputCenterKey)
-    filter.setValue(NSNumber(float: 5), forKey: kCIInputWidthKey)
-    filter.setValue(NSNumber(float: 5), forKey: kCIInputAngleKey)
-    filter.setValue(NSNumber(float: 0.7), forKey: kCIInputSharpnessKey)
+    filter.setValue(NSNumber(value: 5 as Float), forKey: kCIInputWidthKey)
+    filter.setValue(NSNumber(value: 5 as Float), forKey: kCIInputAngleKey)
+    filter.setValue(NSNumber(value: 0.7 as Float), forKey: kCIInputSharpnessKey)
     
     
     case 4:
@@ -561,7 +561,7 @@ func applyFilter3()  {
     let intensity:Float = 1.0
     
     filter.setValue(CIColor(red: r/255.0, green: g/255.0, blue:b/255.0), forKey: kCIInputColorKey)
-    filter.setValue(NSNumber(float: intensity), forKey: kCIInputIntensityKey)
+    filter.setValue(NSNumber(value: intensity as Float), forKey: kCIInputIntensityKey)
 
     
     case 5:
@@ -574,16 +574,16 @@ func applyFilter3()  {
     let intensity:Float = 0.9
     
     filter.setValue(CIColor(red: r/255.0, green:g/255.0, blue:b/255.0), forKey: kCIInputColorKey)
-    filter.setValue(NSNumber(float: intensity), forKey: kCIInputIntensityKey)
+    filter.setValue(NSNumber(value: intensity as Float), forKey: kCIInputIntensityKey)
     
     default: break}
     
     
     filter.setValue(coreImage, forKey: kCIInputImageKey)
-    let filteredImageData = filter.valueForKey(kCIOutputImageKey) as! CIImage
-    let filteredImageRef = ciContext.createCGImage(filteredImageData, fromRect: filteredImageData.extent)
+    let filteredImageData = filter.value(forKey: kCIOutputImageKey) as! CIImage
+    let filteredImageRef = ciContext.createCGImage(filteredImageData, from: filteredImageData.extent)
     
-    if filterNr >= 1 { filteredImage.image = UIImage(CGImage: filteredImageRef!) }
+    if filterNr >= 1 { filteredImage.image = UIImage(cgImage: filteredImageRef!) }
     
 }
     
@@ -606,40 +606,40 @@ func setupBordersToolbar() {
         buttonTag += 1
         let imageStr = "\(i)"
     
-        let borderButton = UIButton(type: .Custom)
-        borderButton.frame = CGRectMake(xCoord, yCoord, buttonWidth,buttonHeight);
+        let borderButton = UIButton(type: .custom)
+        borderButton.frame = CGRect(x: xCoord, y: yCoord, width: buttonWidth,height: buttonHeight);
         borderButton.tag = buttonTag
-        borderButton.setBackgroundImage(UIImage(named: imageStr), forState: .Normal)
-        borderButton.addTarget(self, action: #selector(bordersButtTapped(_:)), forControlEvents: .TouchUpInside)
+        borderButton.setBackgroundImage(UIImage(named: imageStr), for: UIControlState())
+        borderButton.addTarget(self, action: #selector(bordersButtTapped(_:)), for: .touchUpInside)
         bordersScrollView.addSubview(borderButton)
     
         xCoord += buttonWidth + gapBetweenButtons
     }
     
-    bordersScrollView.contentSize = CGSizeMake(buttonWidth * (CGFloat(buttonsQty)), yCoord)
+    bordersScrollView.contentSize = CGSize(width: buttonWidth * (CGFloat(buttonsQty)), height: yCoord)
 }
 
     
-func bordersButtTapped(sender:UIButton) {
+func bordersButtTapped(_ sender:UIButton) {
     let butt = sender
     borderImage.image = UIImage(named: "\(butt.tag).png")
 }
     
     
 // MARK: - GESTURE RECOGNIZERS
-func imageDidPinch(sender: UIPinchGestureRecognizer) {
-    sender.view!.transform = CGAffineTransformScale(sender.view!.transform, sender.scale, sender.scale)
+func imageDidPinch(_ sender: UIPinchGestureRecognizer) {
+    sender.view!.transform = sender.view!.transform.scaledBy(x: sender.scale, y: sender.scale)
     sender.scale = 1
 }
  
-func imageDidPan(recognizer: UIPanGestureRecognizer) {
-    let translation = recognizer.translationInView(view)
-    recognizer.view!.center = CGPointMake(recognizer.view!.center.x + translation.x, recognizer.view!.center.y + translation.y)
-    recognizer.setTranslation(CGPointMake(0, 0), inView: view)
+func imageDidPan(_ recognizer: UIPanGestureRecognizer) {
+    let translation = recognizer.translation(in: view)
+    recognizer.view!.center = CGPoint(x: recognizer.view!.center.x + translation.x, y: recognizer.view!.center.y + translation.y)
+    recognizer.setTranslation(CGPoint(x: 0, y: 0), in: view)
 }
     
-func imageDidRotate(recognizer:UIRotationGestureRecognizer) {
-    recognizer.view!.transform = CGAffineTransformRotate(recognizer.view!.transform, recognizer.rotation)
+func imageDidRotate(_ recognizer:UIRotationGestureRecognizer) {
+    recognizer.view!.transform = recognizer.view!.transform.rotated(by: recognizer.rotation)
     recognizer.rotation = 0
 }
     
@@ -649,48 +649,48 @@ func imageDidRotate(recognizer:UIRotationGestureRecognizer) {
     
     
 // MARK: - FILTER PACK BUTTONS
-@IBAction func filterPackButt1(sender: AnyObject) {
+@IBAction func filterPackButt1(_ sender: AnyObject) {
     filterPackNr = 1
     initFilters1()
     
-    filterPackOut1.setTitleColor(UIColor.blackColor(), forState: .Normal)
-    filterPackOut2.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-    filterPackOut3.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+    filterPackOut1.setTitleColor(UIColor.black, for: UIControlState())
+    filterPackOut2.setTitleColor(UIColor.white, for: UIControlState())
+    filterPackOut3.setTitleColor(UIColor.white, for: UIControlState())
 }
     
-@IBAction func filterPackButt2(sender: AnyObject) {
+@IBAction func filterPackButt2(_ sender: AnyObject) {
     filterPackNr = 2
     initFilters2()
    
-    filterPackOut1.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-    filterPackOut2.setTitleColor(UIColor.blackColor(), forState: .Normal)
-    filterPackOut3.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+    filterPackOut1.setTitleColor(UIColor.white, for: UIControlState())
+    filterPackOut2.setTitleColor(UIColor.black, for: UIControlState())
+    filterPackOut3.setTitleColor(UIColor.white, for: UIControlState())
 }
     
-@IBAction func filterPackButt3(sender: AnyObject) {
+@IBAction func filterPackButt3(_ sender: AnyObject) {
     filterPackNr = 3
     initFilters3()
         
-    filterPackOut1.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-    filterPackOut2.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-    filterPackOut3.setTitleColor(UIColor.blackColor(), forState: .Normal)
+    filterPackOut1.setTitleColor(UIColor.white, for: UIControlState())
+    filterPackOut2.setTitleColor(UIColor.white, for: UIControlState())
+    filterPackOut3.setTitleColor(UIColor.black, for: UIControlState())
 }
     
     
     
     
 // MARK: - OPEN BORDERS TOOLBAR
-@IBAction func bordersButt(sender: AnyObject) {
-    UIView.animateWithDuration(0.1, delay: 0.0, options: .CurveLinear, animations: {
-        self.bordersContainerView.frame = CGRectMake(0, self.containerView.frame.size.height + 44, self.view.frame.size.width, 44)
+@IBAction func bordersButt(_ sender: AnyObject) {
+    UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveLinear, animations: {
+        self.bordersContainerView.frame = CGRect(x: 0, y: self.containerView.frame.size.height + 44, width: self.view.frame.size.width, height: 44)
     }, completion: { (finished: Bool) in })
     
 }
 
 // MARK: - CLOSE BORDERS BUTTON
-@IBAction func closeBordersButt(sender: AnyObject) {
-    UIView.animateWithDuration(0.1, delay: 0.0, options: .CurveLinear, animations: {
-        self.bordersContainerView.frame = CGRectMake(self.view.frame.size.width, self.containerView.frame.size.height + 44, self.view.frame.size.width, 44)
+@IBAction func closeBordersButt(_ sender: AnyObject) {
+    UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveLinear, animations: {
+        self.bordersContainerView.frame = CGRect(x: self.view.frame.size.width, y: self.containerView.frame.size.height + 44, width: self.view.frame.size.width, height: 44)
     }, completion: { (finished: Bool) in })
 }
     
@@ -698,15 +698,15 @@ func imageDidRotate(recognizer:UIRotationGestureRecognizer) {
     
     
 // MARK: - MOVE & SCALE BUTTON
-@IBAction func moveScaleButt(sender: AnyObject) {
+@IBAction func moveScaleButt(_ sender: AnyObject) {
     moveScaleON = !moveScaleON;
     
     if moveScaleON {
-        filteredImagesScrollView.hidden = true
-        moveScaleOutlet.setBackgroundImage(UIImage(named:"moveScaleButtON"), forState: .Normal)
+        filteredImagesScrollView.isHidden = true
+        moveScaleOutlet.setBackgroundImage(UIImage(named:"moveScaleButtON"), for: UIControlState())
     } else {
-        filteredImagesScrollView.hidden = false
-        moveScaleOutlet.setBackgroundImage(UIImage(named:"moveScaleButt"), forState: .Normal)
+        filteredImagesScrollView.isHidden = false
+        moveScaleOutlet.setBackgroundImage(UIImage(named:"moveScaleButt"), for: UIControlState())
     }
 }
     
@@ -715,28 +715,28 @@ func imageDidRotate(recognizer:UIRotationGestureRecognizer) {
     
     
 // MARK: - SHARE IMAGE BUTTON
-@IBAction func shareButt(sender: AnyObject) {
+@IBAction func shareButt(_ sender: AnyObject) {
     // Crop a Combined Image from the edited picture
     let rect = containerView.bounds
     UIGraphicsBeginImageContextWithOptions(rect.size, true, 0)
-    containerView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+    containerView.layer.render(in: UIGraphicsGetCurrentContext()!)
     combinedImage = UIGraphicsGetImageFromCurrentImageContext()!
     UIGraphicsEndImageContext()
     
     
     let messageStr = "Picture edited with #PhotoFixx - https://itunes.apple.com/us/app/instafixx/id903396250?l=it&ls=1&mt=8";
-    let shareItems = [combinedImage , messageStr]
+    let shareItems = [combinedImage , messageStr] as [Any]
     
     let activityViewController:UIActivityViewController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
-    activityViewController.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypePostToWeibo, UIActivityTypeCopyToPasteboard, UIActivityTypeAddToReadingList, UIActivityTypePostToVimeo]
+    activityViewController.excludedActivityTypes = [UIActivityType.print, UIActivityType.postToWeibo, UIActivityType.copyToPasteboard, UIActivityType.addToReadingList, UIActivityType.postToVimeo]
     
-    if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+    if UIDevice.current.userInterfaceIdiom == .pad {
         // iPad
         let popOver = UIPopoverController(contentViewController: activityViewController)
-        popOver.presentPopoverFromRect(CGRectZero, inView: self.view, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
+        popOver.present(from: CGRect.zero, in: self.view, permittedArrowDirections: UIPopoverArrowDirection.any, animated: true)
     } else {
         // iPhone
-        presentViewController(activityViewController, animated: true, completion: nil)
+        present(activityViewController, animated: true, completion: nil)
     }
 }
     
@@ -744,11 +744,11 @@ func imageDidRotate(recognizer:UIRotationGestureRecognizer) {
    
     
 // MARK: - INSTAGRAM BUTTON
-@IBAction func instagramButt(sender: AnyObject) {
+@IBAction func instagramButt(_ sender: AnyObject) {
     // Crop a Combined Image from the edited picture
     let rect = containerView.bounds
     UIGraphicsBeginImageContextWithOptions(rect.size, true, 0)
-    containerView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+    containerView.layer.render(in: UIGraphicsGetCurrentContext()!)
     combinedImage = UIGraphicsGetImageFromCurrentImageContext()!
     UIGraphicsEndImageContext()
     
@@ -759,24 +759,24 @@ func imageDidRotate(recognizer:UIRotationGestureRecognizer) {
     
 var docIntController: UIDocumentInteractionController!
 func shareToInstagram() {
-    let instagramURL = NSURL(string: "instagram://app")!
-    if UIApplication.sharedApplication().canOpenURL(instagramURL) {
+    let instagramURL = URL(string: "instagram://app")!
+    if UIApplication.shared.canOpenURL(instagramURL) {
             
             //Save the Image to default device Directory
-            let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-            let savedImagePath:String = paths.stringByAppendingString("/image.igo")
-            let imageData: NSData = UIImageJPEGRepresentation(combinedImage, 1.0)!
-            imageData.writeToFile(savedImagePath, atomically: false)
+            let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+            let savedImagePath:String = paths + "/image.igo"
+            let imageData: Data = UIImageJPEGRepresentation(combinedImage, 1.0)!
+            try? imageData.write(to: URL(fileURLWithPath: savedImagePath), options: [])
             
             //Load the Image Path
-            let getImagePath = paths.stringByAppendingString("/image.igo")
-            let fileURL: NSURL = NSURL.fileURLWithPath(getImagePath)
+            let getImagePath = paths + "/image.igo"
+            let fileURL: URL = URL(fileURLWithPath: getImagePath)
             
             
-            docIntController = UIDocumentInteractionController(URL: fileURL)
-            docIntController.UTI = "com.instagram.exclusivegram"
+            docIntController = UIDocumentInteractionController(url: fileURL)
+            docIntController.uti = "com.instagram.exclusivegram"
             docIntController.delegate = self
-            docIntController.presentOpenInMenuFromRect(CGRectZero, inView: self.view, animated: true)
+            docIntController.presentOpenInMenu(from: CGRect.zero, in: self.view, animated: true)
             
     } else {
         let alert = UIAlertView(title: "PhotoFixx",
@@ -790,12 +790,12 @@ func shareToInstagram() {
 
     
 // MARK: - ALERT VIEW DELEGATE
-func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
-    if alertView.buttonTitleAtIndex(buttonIndex) == "Exit" {
+func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
+    if alertView.buttonTitle(at: buttonIndex) == "Exit" {
         filtersArray = []
         imagePassed = UIImage()
     
-        navigationController?.popViewControllerAnimated(true)
+        navigationController?.popViewController(animated: true)
     }
 }
     
@@ -803,7 +803,7 @@ func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
     
     
 // MARK: - BACK BUTTON
-@IBAction func backButt(sender: AnyObject) {
+@IBAction func backButt(_ sender: AnyObject) {
     UIAlertView(title: "PhotoFixx",
         message: "Are you sure you want to exit?",
         delegate: self,
@@ -821,40 +821,40 @@ func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
     
 // MARK: - AdMob BANNERS
     func initAdMobBanner() {
-        adMobBannerView.adSize =  GADAdSizeFromCGSize(CGSizeMake(320, 50))
-        adMobBannerView.frame = CGRectMake(0, view.frame.size.height, view.frame.size.width, 50)
+        adMobBannerView.adSize =  GADAdSizeFromCGSize(CGSize(width: 320, height: 50))
+        adMobBannerView.frame = CGRect(x: 0, y: view.frame.size.height, width: view.frame.size.width, height: 50)
         adMobBannerView.adUnitID = ADMOB_UNIT_ID
         adMobBannerView.rootViewController = self
         adMobBannerView.delegate = self
         view.addSubview(adMobBannerView)
         
         let request = GADRequest()
-        adMobBannerView.loadRequest(request)
+        adMobBannerView.load(request)
     }
     
     // Hide the banner
-    func hideBanner(banner: UIView) {
+    func hideBanner(_ banner: UIView) {
         UIView.beginAnimations("hideBanner", context: nil)
-        banner.frame = CGRectMake(view.frame.size.width/2 - banner.frame.size.width/2, view.frame.size.height - banner.frame.size.height, banner.frame.size.width, banner.frame.size.height)
+        banner.frame = CGRect(x: view.frame.size.width/2 - banner.frame.size.width/2, y: view.frame.size.height - banner.frame.size.height, width: banner.frame.size.width, height: banner.frame.size.height)
         UIView.commitAnimations()
-        banner.hidden = true
+        banner.isHidden = true
     }
     
     // Show the banner
-    func showBanner(banner: UIView) {
+    func showBanner(_ banner: UIView) {
         UIView.beginAnimations("showBanner", context: nil)
-        banner.frame = CGRectMake(view.frame.size.width/2 - banner.frame.size.width/2, view.frame.size.height - banner.frame.size.height, banner.frame.size.width, banner.frame.size.height)
+        banner.frame = CGRect(x: view.frame.size.width/2 - banner.frame.size.width/2, y: view.frame.size.height - banner.frame.size.height, width: banner.frame.size.width, height: banner.frame.size.height)
         UIView.commitAnimations()
-        banner.hidden = false
+        banner.isHidden = false
     }
     
     // AdMob banner available
-    func adViewDidReceiveAd(view: GADBannerView!) {
+    func adViewDidReceiveAd(_ view: GADBannerView!) {
         showBanner(adMobBannerView)
     }
     
     // NO AdMob banner available
-    func adView(view: GADBannerView!, didFailToReceiveAdWithError error: GADRequestError!) {
+    func adView(_ view: GADBannerView!, didFailToReceiveAdWithError error: GADRequestError!) {
         hideBanner(adMobBannerView)
     }
     

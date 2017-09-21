@@ -31,12 +31,12 @@ UINavigationControllerDelegate
     
     
     
-override func prefersStatusBarHidden() -> Bool {
+override var prefersStatusBarHidden : Bool {
     return true
 }
 // Prevent the StatusBar from showing up after picking an image
-func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
-    UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
+func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+    UIApplication.shared.setStatusBarHidden(true, with: .fade)
 }
     
 override func viewDidLoad() {
@@ -57,38 +57,38 @@ override func viewDidLoad() {
     
 
    
-@IBAction func cameraButt(sender: AnyObject) {
+@IBAction func cameraButt(_ sender: AnyObject) {
     cameraPic = true;
     
-    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
     {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
+        imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
         imagePicker.allowsEditing = false
-        presentViewController(imagePicker, animated: true, completion: nil)
+        present(imagePicker, animated: true, completion: nil)
     }
 
 }
     
     
-@IBAction func libraryButt(sender: AnyObject) {
+@IBAction func libraryButt(_ sender: AnyObject) {
     cameraPic = false;
     
-    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)
+    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary)
     {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+        imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary;
         imagePicker.allowsEditing = false
-        presentViewController(imagePicker, animated: true, completion: nil)
+        present(imagePicker, animated: true, completion: nil)
     }
 
 }
     
-func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
     myImage.image = image
-    dismissViewControllerAnimated(true, completion: nil)
+    dismiss(animated: true, completion: nil)
     
     openImageEditor()
 }
@@ -97,7 +97,7 @@ func imagePickerController(picker: UIImagePickerController, didFinishPickingImag
 
 // MARK: - OPEN IKMAGE EDITOR the image Editor screen
 func openImageEditor() {
-    let myVC = storyboard?.instantiateViewControllerWithIdentifier("ImageEditor") as! ImageEditor
+    let myVC = storyboard?.instantiateViewController(withIdentifier: "ImageEditor") as! ImageEditor
     myVC.imagePassed = myImage.image!
     navigationController?.pushViewController(myVC, animated: true)
 }
