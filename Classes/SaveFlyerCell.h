@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Parse/Parse.h>
 #import "Flyer.h"
+
 @interface SaveFlyerCell : UITableViewCell
 
 @property(nonatomic, strong)IBOutlet UILabel *createLabel;
@@ -21,11 +21,12 @@
 @property(nonatomic, strong)IBOutlet UIImageView *cellImage;
 @property(nonatomic, strong)IBOutlet UIImageView *backgroundImage;
 @property(nonatomic, strong) NSString *filePath;
-@property(nonatomic, strong)IBOutlet UIImageView *lockImage;
 
 @property ( nonatomic, strong ) IBOutletCollection(UIImageView) NSArray *socialStatus;
 @property(nonatomic, strong)IBOutlet UIButton *flyerLock;
+@property(nonatomic, strong)IBOutlet UIButton *shareBtn;
 
+@property (weak, nonatomic) IBOutlet UIButton *btnEdit;
 
 
 - (void)renderCell :(Flyer *)flyer LockStatus:(BOOL )status;

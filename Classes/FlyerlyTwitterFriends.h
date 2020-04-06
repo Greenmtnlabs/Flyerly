@@ -10,11 +10,10 @@
 #import <Twitter/Twitter.h>
 #import "ShareKit.h"
 
-@interface FlyerlyTwitterFriends : SHKTwitter {
+@interface FlyerlyTwitterFriends: SHKTwitter {
 
     NSDecimalNumber  *nextCursor;
 }
-
 
 @property (nonatomic,strong)NSMutableDictionary *friendsList;
 @end

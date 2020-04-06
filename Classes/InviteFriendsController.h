@@ -21,21 +21,31 @@
 #import "AsyncImageView.h"
 #import "FlyerlySingleton.h"
 #import "InviteFriendsCell.h"
-#import "FlyerlyFacebookFriends.h"
 #import "ParentViewController.h"
 #import "SHKSharer.h"
 #import <SHKFormController.h>
-#import "SHKFacebookCommon.h"
+//#import "SHKFacebookCommon.h"
 #import "ContactsModel.h"
-#import "FlyerlyFacebookFriends.h"
-#import "FlyerlyFacebookInvite.h"
 #import "FlyerlyTwitterFriends.h"
 #import "Flurry.h"
+#import "SHKSharerDelegate.h"
 
-@class FlyerlySingleton,SHKSharer;
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
+//#import <FBSDKShareKit/FBSDKAppInviteDialog.h>
 
-@interface InviteFriendsController : ParentViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate, SHKSharerDelegate>{
-    
+#import "GADInterstitialDelegate.h"
+#import "GADBannerView.h"
+
+#import "UserPurchases.h"
+#import "InAppPurchaseRelatedMethods.h"
+
+
+@class FlyerlySingleton, SHKSharer;
+
+//FBSDKAppInviteDialogDelegate
+
+@interface InviteFriendsController : ParentViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate, UserPurchasesDelegate, GADInterstitialDelegate, GADBannerViewDelegate, InAppPurchasePanelButtonProtocol,SHKSharerDelegate, MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate>{
     
     FlyerlySingleton *globle;
     IBOutlet AsyncImageView *aview;
@@ -43,20 +53,29 @@
     int selectedTab;
     ACAccount *account;    
     SHKSharer *iosSharer;
+    
+    BOOL bannerAdClosed;
+    BOOL bannerShowed;
+    
+    InAppViewController *inAppViewController;
+    
 }
 
 @property(nonatomic,strong) IBOutlet UILabel *refrelText;
 
+@property (strong, nonatomic) IBOutlet UIButton *emailButton;
 @property(nonatomic,strong) IBOutlet UIButton *contactsButton;
 @property(nonatomic,strong) IBOutlet UIButton *facebookButton;
 @property(nonatomic,strong) IBOutlet UIButton *twitterButton;
 @property(nonatomic,strong) IBOutlet UITextField *searchTextField;
 
 @property(nonatomic,strong) IBOutlet UITableView *uiTableView;
+@property(nonatomic,strong) NSMutableArray *emailsArray;
 @property(nonatomic,strong) NSMutableArray *contactsArray;
 @property(nonatomic,strong) NSMutableArray *facebookArray;
 @property(nonatomic,strong) NSMutableArray *twitterArray;
 
+@property(nonatomic,strong) NSMutableArray *emailBackupArray;
 @property(nonatomic,strong) NSMutableArray *contactBackupArray;
 @property(nonatomic,strong) NSMutableArray *facebookBackupArray;
 @property(nonatomic,strong) NSMutableArray *twitterBackupArray;
@@ -64,12 +83,11 @@
 @property(nonatomic,strong) NSMutableArray *fbinvited;
 @property(nonatomic,strong) NSMutableArray *twitterInvited;
 @property(nonatomic,strong) NSMutableArray *iPhoneinvited;
+@property(nonatomic,strong) NSMutableArray *emailInvited;
 
 @property(nonatomic,strong)NSString  *fbText;
-- (void)fbSend;
-- (void)fbCancel;
 
-
+@property (nonatomic, copy) void (^shouldShowAdd)(NSString *,BOOL);
 - (IBAction)loadLocalContacts:(UIButton *)sender;
 - (IBAction)loadFacebookContacts:(UIButton *)sender;
 - (IBAction)loadTwitterContacts:(UIButton *)sender;
@@ -77,5 +95,13 @@
 -(IBAction)goBack;
 -(IBAction)invite;
 - (BOOL)ckeckExistContact:(NSString *)identifier;
+
+//-(void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didCompleteWithResults:(NSDictionary *)results;
+//-(void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didFailWithError:(NSError *)error;
+
+@property(nonatomic, strong) GADInterstitial *interstitialAds;
+@property (weak, nonatomic) IBOutlet GADBannerView *bannerAdsView;
+@property (weak, nonatomic) IBOutlet UIButton *btnBannerAdsDismiss;
+- (IBAction)onClickBtnBannerAdsDismiss:(id)sender;
 
 @end

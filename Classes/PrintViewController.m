@@ -79,7 +79,7 @@
             nib = [[NSBundle mainBundle] loadNibNamed:@"FreeFeatureCell" owner:self options:nil];
             }
             
-            if ( IS_IPHONE_6 ){
+            if ( IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XR || IS_IPHONE_XS){
                 nib = [[NSBundle mainBundle] loadNibNamed:@"FreeFeatureCell-iPhone6" owner:self options:nil];
             }
             freeFeatureCell = (FreeFeatureCell *)[nib objectAtIndex:0];
@@ -105,7 +105,7 @@
                 nib = [[NSBundle mainBundle] loadNibNamed:@"FreeFeatureCell" owner:self options:nil];
             }
             
-            if ( IS_IPHONE_6 ){
+            if ( IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XR || IS_IPHONE_XS){
                 nib = [[NSBundle mainBundle] loadNibNamed:@"FreeFeatureCell-iPhone6" owner:self options:nil];
             }
             freeFeatureCell = (FreeFeatureCell *)[nib objectAtIndex:0];

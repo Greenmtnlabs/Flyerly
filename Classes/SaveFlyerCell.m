@@ -14,7 +14,7 @@
 
 @implementation SaveFlyerCell
 @synthesize nameLabel, description, dateLabel, createLabel,cellImage,backgroundImage;
-@synthesize flyerLock,lockImage,updatedDateLabel,updatedLabel;
+@synthesize shareBtn,flyerLock,updatedDateLabel,updatedLabel;
 
 
 /*
@@ -22,23 +22,27 @@
  */
 - (void)renderCell :(Flyer *)flyer LockStatus:(BOOL )status {
     
-
     //HERE WE LOCK FLYER CELL
     if (status) {
         flyerLock.hidden = NO;
-        [lockImage setImage:[UIImage imageNamed:@"lock_icon"]];
     }
     
     // HERE WE SET FLYER INFORMATION FORM .TXT FILE
     [self.nameLabel setText: [flyer getFlyerTitle]];
     [self.description setText:[flyer getFlyerDescription]];
-    [self.dateLabel setText:[flyer getFlyerDate]];
+    
+    [self.dateLabel setText: [flyer dateFormatter:[flyer getFlyerDate]]];
+    
     NSString *updatedDate = [flyer getFlyerUpdateDate];
-    if ([updatedDate isEqualToString:@""]) {
+   
+
+    if (![updatedDate isEqualToString:@""]) {
+        // To format date
+    self.updatedDateLabel.text = [flyer dateFormatter:[flyer getFlyerUpdateDate]];
+    
+    }else {
         self.updatedLabel.hidden = YES ;
         self.updatedDateLabel.hidden = YES;
-    }else {
-        self.updatedDateLabel.text = updatedDate;
     }
     
     
@@ -76,14 +80,20 @@
     }
     
     iconImage = [_socialStatus objectAtIndex:sharingCount];
-    if ( [[flyer getFlickerStatus] isEqualToString:@"1"] ) {
-        iconImage.image = [UIImage imageNamed:@"flickr_share_saved"];
+    if ( [[flyer getMessengerStatus] isEqualToString:@"1"] ) {
+        iconImage.image = [UIImage imageNamed:@"messenger_share_saved"];
         sharingCount++;
     }
     
     iconImage = [_socialStatus objectAtIndex:sharingCount];
-    if ( [[flyer getThumblerStatus] isEqualToString:@"1"] ) {
-        iconImage.image = [UIImage imageNamed:@"tumblr_share_saved"];
+    if ( [[flyer getYouTubeStatus] isEqualToString:@"1"] ) {
+        iconImage.image = [UIImage imageNamed:@"youtube_share_saved"];
+        sharingCount++;
+    }
+    
+    iconImage = [_socialStatus objectAtIndex:sharingCount];
+    if ( [[flyer getSmsStatus] isEqualToString:@"1"] ) {
+        iconImage.image = [UIImage imageNamed:@"sms_share_saved"];
         sharingCount++;
     }
 }

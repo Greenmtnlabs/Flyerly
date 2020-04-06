@@ -20,11 +20,12 @@
 #import "SHKConfiguration.h"
 #import "FlyerlyConfigurator.h"
 #import "MainSettingViewController.h"
-#import "BitlyConfig.h"
+#import <BitlySDK/BitlySDK.h>
 #import "FlyerUser.h"
 #import "RMStore.h"
 #import "UserPurchases.h"
 #import "RMStoreKeychainPersistence.h"
+
 
 extern NSString *FacebookDidLoginNotification;
 
@@ -49,6 +50,8 @@ extern NSString *FacebookDidLoginNotification;
 -(void)fbChangeforNewVersion;
 -(void)twitterChangeforNewVersion:(NSString *)olduser;
 -(void)copyUsersDataForTesting;
+
+-(void)endAppBgTask;
 
 @end
 

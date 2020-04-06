@@ -17,6 +17,8 @@
 #import "PrintViewController.h"
 #import "InviteForPrint.h"
 #import "ImageLayer.h"
+#import "GiphyViewController.h"
+#import <UserReportSDK/UserReportSDK-Swift.h>
 
 #define IMAGEPICKER_TEMPLATE 1
 #define IMAGEPICKER_PHOTO 2
@@ -29,7 +31,6 @@
 
 @interface CreateFlyerController () {
     CameraViewController *nbuCamera;
-    UIButton *backButton;
     ResourcesView *emoticonsView,*clipartsView,*fontsView,*textBordersView,*drawingView;
     NSString *fontsViewResourcePath,*clipartsViewResourcePath,*emoticonsViewResourcePath,*drawingViewResourcePath;
     NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
@@ -37,35 +38,75 @@
     int selectedAddMoreLayerTab;
     FlyerlyConfigurator *flyerConfigurator;
     UserPurchases *userPurchases;
-    UIButton *bannerAdDismissBtn;
     
     BOOL isNewText;
+    //Fix for: 162-create-flyer-screen-when-user-close-the-inapp-tabs-are-active-and-extra-layer-showing-when-it-comes-from-clipart
+    BOOL appearingViewAfterInAppHide;
+    BOOL saveToGallaryReqBeforeSharing;
+    BOOL isNewFlyer;
+    BOOL firstTimeInViewDidAppear;
+    NSString *productIdentifier;
+    NSString *create_flyer_default_image;
+    int bannerHeight;
 }
 
 @end
 
 @implementation CreateFlyerController
 
+@synthesize sharingPannelIsHidden,tasksAfterGiphySelect;
 
 //Outlets form zoom
 @synthesize zoomScrollView,zoomScreenShot,zoomMagnifyingGlass,zoomScreenShotForVideo;
 
 //Drawing required files
 @synthesize mainImage;
-@synthesize tempDrawImage;
+@synthesize tempDrawImage,enableRenderFlyer;
 
 @synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,
 fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sharePanel,clipArtTabButton,emoticonsTabButton,artsColorTabButton,artsSizeTabButton, drawingColorTabButton,drawingPatternTabButton, drawingSizeTabButton,drawingEraserTabButton,drawingEraserMsg;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert,signInAlert,waterMarkPurchasingAlert,spaceUnavailableAlert;
 @synthesize imgPickerFlag,layerScrollView,flyerPath;
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton,drawingMenueButton;
-@synthesize libText,libBackground,libArts,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder,libDrawing;
+@synthesize libText,libBackground,libArts,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder,giphyBgBtn,libDrawing;
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider,tempelateView;
 @synthesize durationLabel,durationChange,onFlyerBack,shouldShowAdd;
-@synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAddView,drawingPatternsView,drawingEraserMsgView;
+@synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAdsView,drawingPatternsView,drawingEraserMsgView;
+
+@synthesize premiumBtnBg, premiumBtnBgBorder, premiumBtnEmoticons, premiumBtnCliparts, premiumBtnFonts;
+@synthesize premiumImgBg, premiumImgBgBorder, premiumImgEmoticons, premiumImgCliparts, premiumImgFonts;
+@synthesize btnBannerAdsDismiss;
+
 
 #pragma mark -  View Appear Methods
 - (void)viewWillAppear:(BOOL)animated{
+    
+    bannerHeight = 0;
+    if( [userPurchases canShowAd] )
+    {
+        if(IS_IPHONE_4)
+        {
+        
+        }
+        else
+        {
+            bannerHeight = bannerAdsView.frame.size.height;
+        }
+        
+        self.bannerAdsView.adUnitID = [flyerConfigurator bannerAdID];
+        self.bannerAdsView.delegate = self;
+        self.bannerAdsView.rootViewController = self;
+        [self.bannerAdsView loadRequest:[self request]];
+    }
+    
+    btnBannerAdsDismiss.alpha = 0.0;
+    bannerAdsView.alpha = 0.0;
+    [self setFramesOfBtns];
+    
+    saveToGallaryReqBeforeSharing = NO;
+}
+
+-(void) setFramesOfBtns{
     
     CGRect newFrame = CGRectMake( 0, 0,
                                  libraryContextView.frame.size.width,
@@ -77,45 +118,66 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [libText setFrame:newFrame];
     [libPhoto setFrame:newFrame];
     [libDrawing setFrame:newFrame];
-    
-    //Set Context Tabs
-    //[self addBottomTabs:libFlyer];
 }
 
 /**
  * Set position of WaterMark according to Device.
  * Note: This function will only run when flyer is opening first time
  */
--(void)setWaterMarkLayerPosition {
-    
-    if ( IS_IPHONE_4 ||  IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
+-(void)setWaterMarkLayerPosition
+{
+    if (isNewFlyer && (IS_IPHONE_4 ||  IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XR || IS_IPHONE_XS) )
+    {
         NSArray *sortedLayers = [flyer allKeys];
-        if ( sortedLayers.count == 2 ){
+        if ( sortedLayers.count >= 2 ){
             
             NSMutableDictionary *dic = [flyer getLayerFromMaster:sortedLayers[1]];
             
+            double device_width = 0;
+            
+            #if defined(FLYERLY_BIZ)
+                dic[@"image"] = @"Photo/watermark_FlyerlyBiz.png";
+                dic[@"height"] = @"25";
+                dic[@"width"] = @"101";
+            #endif
+            
             if( [[dic objectForKey:@"type"] isEqualToString:FLYER_LAYER_WATER_MARK] ){
                 
-                if ( [[dic objectForKey:@"flyerOpenTime"] isEqualToString:@"0"] ) {
-                    if( IS_IPHONE_4 ) {
-                        [dic setObject:@"230" forKey:@"tx"];
-                        [dic setObject:@"270" forKey:@"ty"];
+                if ( [[dic objectForKey:@"flyerOpenTime"] isEqualToString:@"0"] )
+                {
+                    if( IS_IPHONE_4 || IS_IPHONE_5 )
+                    {
+                        device_width = 320;
                     }
-                    else if( IS_IPHONE_6 ) {
-                        [dic setObject:@"280.0" forKey:@"tx"];
-                        [dic setObject:@"330.0" forKey:@"ty"];
+                    else if( IS_IPHONE_6|| IS_IPHONE_XR )
+                    {
+                        device_width = 375;
                     }
-                    else if( IS_IPHONE_6_PLUS ) {
-                        [dic setObject:@"310.0" forKey:@"tx"];
-                        [dic setObject:@"375.0" forKey:@"ty"];
+                    else if( IS_IPHONE_6_PLUS )
+                    {
+                        device_width = 414;
                     }
                     
+                    NSString *x = [NSString stringWithFormat:@"%f", (device_width - [dic[@"width"] doubleValue] - 29.25)];
+                    NSString *y = [NSString stringWithFormat:@"%f", (device_width - [dic[@"height"] doubleValue] - 24.25)];
+                    
+                    [dic setObject:x forKey:@"tx"];
+                    [dic setObject:y forKey:@"ty"];
+                    
                     [dic setObject:@"1" forKey:@"flyerOpenTime"];
+                    
+                    //[flyer saveDic];
+                    // Save flyer to disk
+                    [flyer saveFlyer];
+                    
+                    // Make a history entry if needed.
+                    [flyer addToHistory];
                 }
             }
         }
     }
 }
+
 
 /**
  * Update the view once it appears.
@@ -124,12 +186,25 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     [super viewDidAppear:animated];
     
+    [self setFramesOfBtns];
+    if ( firstTimeInViewDidAppear )
+    {
+        firstTimeInViewDidAppear = false;
+        //Set Context Tabs
+        [self addBottomTabs:libFlyer];
+    }
+    
+    if( appearingViewAfterInAppHide == YES ){
+        appearingViewAfterInAppHide = NO;
+        return;
+    }
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     
-    [self setWaterMarkLayerPosition];
-    
     //Render Flyer
+    if( enableRenderFlyer == YES )
     [self renderFlyer];
+    
+    enableRenderFlyer = YES;
     
     self.flyimgView.addUiImgForDrawingLayer = NO;//must set:NO after renderFlyer all layers first time
     
@@ -141,26 +216,51 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     if ( ![title isEqualToString:@""] ) {
         titleLabel.text = title;
     } else {
-        titleLabel.text = @"Flyer";
+        titleLabel.text = @"Untitled";
+    }
+    // to add click event on Label to open share panel
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(share)];
+    tapGestureRecognizer.numberOfTapsRequired = 1;
+    [titleLabel addGestureRecognizer:tapGestureRecognizer];
+    titleLabel.userInteractionEnabled = YES;
+    
+    //245-feature-in-create-screen-when-user-is-creating-brand-new-flyer-have-the-background-button-selected-for-them-initially
+    if( isNewFlyer ){
+        create_flyer_default_image = @"create_flyer_default_image.png";
+        self.flyimgView.image = [UIImage imageNamed:create_flyer_default_image];
+        [self setAddMoreLayerTabAction:backgroundTabButton];
+        isNewFlyer = NO;
+    }
+    
+    if( tasksAfterGiphySelect != nil ){
+        [self callAddMoreLayers];
+        if ([tasksAfterGiphySelect isEqual:@"play"] && player != nil ) {
+            [self videoPlay:YES repeat:YES];
+        }
+        tasksAfterGiphySelect = nil;
     }
 }
 
-- (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
-    
+-(void) loadInterstitialAdd{
     self.interstitialAdd.delegate = nil;
     
-    // Prepare next interstitial.
+    // Create a new GADInterstitial each time. A GADInterstitial will only show one request in its
+    // lifetime. The property will release the old one and set the new one.
     self.interstitialAdd = [[GADInterstitial alloc] init];
-    self.interstitialAdd.adUnitID = [flyerConfigurator interstitialAdID];
     self.interstitialAdd.delegate = self;
+    
+    // Note: Edit SampleConstants.h to update kSampleAdUnitId with your interstitial ad unit id.
+    self.interstitialAdd.adUnitID = [flyerConfigurator interstitialAdID];
+    
     [self.interstitialAdd loadRequest:[self request]];
+
+}
+- (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
+    
+    [self loadInterstitialAdd];
     
     //Here we remove Borders from layer if user touch any layer
     [self.flyimgView layerStoppedEditing:currentLayer];
-    
-    //Here we take Snap shot of Flyer and
-    //Flyer Add to Gallery if user allow to Access there photos
-    [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
     
     dispatch_async( dispatch_get_main_queue(), ^{
         //Here we Open Share Panel for Share Flyer
@@ -198,114 +298,71 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 // We've received an Banner ad successfully.
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
     
-    UserPurchases *userPurchases_ = [UserPurchases getInstance];
-    if ( bannerAddClosed == NO && ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
-
+    if ( bannerAddClosed == NO && bannerShowed == NO ) {
+        bannerShowed = YES;//keep bolean we have rendered banner or not ?
     
-    
-        // Device Check Maintain Size of ScrollView Because Scroll Indicator will show.
-        if ( IS_IPHONE_4 ) {
-            self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 384.3, 310, 50)];
-            
-            if ( bannerAdDismissBtn == nil ){
-                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(296, 5, 23, 23)];
-            }
-        }
-        else if ( IS_IPHONE_5 ) {
-            self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 473, 320, 50)];
-            
-            if ( bannerAdDismissBtn == nil ){
-                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(296, 5, 23, 23)];
-            }
-        } else if ( IS_IPHONE_6 ){
-            
-            self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 564, 620, 50)];
-            
-            if ( bannerAdDismissBtn == nil ){
-            bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(350, 0, 23, 23)];
-            }
-        }else if ( IS_IPHONE_6_PLUS ){
-            
-            self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 628, 620, 50)];
-            
-            if ( bannerAdDismissBtn == nil ){
-            bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(395, 0, 23, 23)];
-            }
-        }else {
-            self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 310, 320, 50)];
-            
-            if ( bannerAdDismissBtn == nil ){
-                bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(296, 5, 23, 23)];
-            }
-        }
-    
-        self.bannerAddView.backgroundColor = [UIColor whiteColor];
-    
-        [bannerAdDismissBtn addTarget:self action:@selector(dissmisBannerAddOnTap) forControlEvents:UIControlEventTouchUpInside];
+        btnBannerAdsDismiss.alpha = 1.0;
+        [self.bannerAdsView addSubview:btnBannerAdsDismiss];
         
-        [bannerAdDismissBtn setImage:[UIImage imageNamed:@"closeAd.png"] forState:UIControlStateNormal];
-    
-        bannerAdDismissBtn.tag = 999;
-    
-        [self.bannerAddView addSubview:bannerAdDismissBtn];
-        
-        //Adding ad in custom view
-        [self.bannerAddView addSubview:adView];
-        //Making dismiss button visible,and bring it to front
-        //bannerAdDismissBtn.alpha = 1.0;
-        [self.bannerAddView bringSubviewToFront:bannerAdDismissBtn];
-    
         if ( sharePanel.hidden ){
-            [self.view addSubview:self.bannerAddView];
+            bannerAdsView.alpha = 1.0;
+            [self.view addSubview:self.bannerAdsView];
         }
     
         return;
     }
-    
-    //[self dissmisBannerAdd:bannerAddClosed];
 }
--(void)dissmisBannerAddOnTap{
-    
+
+- (IBAction)onClickBtnBannerAdsDismiss:(id)sender {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self dissmisBannerAdd:YES];
     });
-    
 }
+
 // Dismiss action for banner ad
 -(void)dissmisBannerAdd:(BOOL)valForBannerClose{
     
-    self.bannerAddView.backgroundColor = [UIColor clearColor];
-    
-    UIView *viewToRemove = [bannerAddView viewWithTag:999];
-    [viewToRemove removeFromSuperview];
-    //[bannerAdDismissBtn removeFromSuperview];
-    [self.bannerAddView removeFromSuperview];
-    bannerAdDismissBtn = nil;
-    self.bannerAddView = nil;
+    productIdentifier = BUNDLE_IDENTIFIER_AD_REMOVAL; // Ad Removal Subscription
+    inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
+    inappviewcontroller.buttondelegate = self;
+    [inappviewcontroller requestProduct];
+    [inappviewcontroller purchaseProductByID:productIdentifier];
+}
 
+// Dismiss action for banner ad
+-(void)removeBAnnerAdd:(BOOL)valForBannerClose{
+    
+    self.bannerAdsView.backgroundColor = [UIColor clearColor];
+    
+    UIView *viewToRemove = [bannerAdsView viewWithTag:999];
+    [viewToRemove removeFromSuperview];
+    [self.bannerAdsView removeFromSuperview];
+    self.btnBannerAdsDismiss  = nil;
+    self.bannerAdsView = nil;
+    
     bannerAddClosed = valForBannerClose;
 }
 
--(void)testingFn{
-    NSLog(@"layerScrollView(%f,%f,%f,%f)",layerScrollView.frame.origin.x,layerScrollView.frame.origin.y,layerScrollView.frame.size.width,layerScrollView.frame.size.height);
-    NSLog(@"self.contextView(%f,%f,%f,%f)",self.contextView.frame.origin.x,self.contextView.frame.origin.y,self.contextView.frame.size.width,self.contextView.frame.size.height);
-    
-}
+
 
 /**
  * View setup. This is done once per instance.
  */
 -(void)viewDidLoad{
     
-
+    [self setWaterMarkLayerPosition];
     
     if( IS_IPHONE_4 ){
         [[NSBundle mainBundle] loadNibNamed:@"CreateFlyerController-iPhone4" owner:self options:nil];
     }
-    
+
+    firstTimeInViewDidAppear = YES;
+    enableRenderFlyer = YES;
+    sharingPannelIsHidden = YES;
+    appearingViewAfterInAppHide = NO;
     isNewText   =   NO;
     bannerAddClosed = NO;
-    
+    bannerShowed = NO;
     selectedAddMoreLayerTab = -1;
     
     //DrawingClass required vars
@@ -325,24 +382,21 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     flyerConfigurator = appDelegate.flyerConfigurator;
     
-    // Create a new GADInterstitial each time. A GADInterstitial will only show one request in its
-    // lifetime. The property will release the old one and set the new one.
-    self.interstitialAdd = [[GADInterstitial alloc] init];
-    self.interstitialAdd.delegate = self;
-    
-    // Note: Edit SampleConstants.h to update kSampleAdUnitId with your interstitial ad unit id.
-    self.interstitialAdd.adUnitID = [flyerConfigurator interstitialAdID];
-    
-    [self.interstitialAdd loadRequest:[self request]];
+    userPurchases = [UserPurchases getInstance];
+    userPurchases.delegate = self;
+    //when have valid subscription or have ad removal bundle then dont show ad
+    if( [userPurchases canShowAd] ) {
+        [self loadInterstitialAdd];
+    }
     
     // If 50mb space not availble then go to Back
     [self isDiskSpaceAvailable];
     
-    UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
-    [UserVoice initialize:config];
+//    UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
+//    [UserVoice initialize:config];
     
     // Here we Set Top Bar Item
-    titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+    titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 50)];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.font = [UIFont fontWithName:TITLE_FONT size:18];
     titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -351,18 +405,23 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     self.navigationItem.titleView = titleLabel;
     CGRect lsvRec = CGRectMake(0, 0,320,60); //iPhone4
     // Device Check Maintain Size of ScrollView Because Scroll Indicator will show.
-    if ( IS_IPHONE_5 ) {
+    if ( IS_IPHONE_5 )
+    {
         lsvRec = CGRectMake(lsvRec.origin.x, lsvRec.origin.y, self.contextView.frame.size.width,self.contextView.frame.size.height);//CGRectMake(0, 0,320,150);
-    } else if ( IS_IPHONE_6 ){
+    }
+    else if ( IS_IPHONE_6 )
+    {
         lsvRec = CGRectMake(0, 0,420,180);
-    }else if ( IS_IPHONE_6_PLUS ){
+    }
+    else //if ( IS_IPHONE_6_PLUS )
+    {
+        self.contextView.size = CGSizeMake(self.contextView.frame.size.width, self.contextView.frame.size.height+10);
         lsvRec = CGRectMake(0, 0,420,189);
     }
     layerScrollView = [[UIScrollView alloc]initWithFrame:lsvRec];
-    [self testingFn];
-    layerScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(lsvRec.origin.x, lsvRec.origin.y, self.contextView.frame.size.width,self.contextView.frame.size.height)];
-    [self testingFn];
     
+    layerScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(lsvRec.origin.x, lsvRec.origin.y, self.contextView.frame.size.width,self.contextView.frame.size.height)];
+
     layerScrollView.autoresizesSubviews = YES;
     layerScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     layerScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -389,12 +448,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     // Left BackButton
     backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-	[backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     
     // HERE WE SET BACK BUTTON IMAGE AS REQUIRED
     NSArray * arrayOfControllers =  self.navigationController.viewControllers;
-    int idx = [arrayOfControllers count] -2 ;
+    int idx = (int)[arrayOfControllers count] -2 ;
     id previous = [arrayOfControllers objectAtIndex:idx];
     if ([previous isKindOfClass:[FlyrViewController class]])
     {
@@ -493,6 +551,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                          [UIColor magentaColor],
                          [UIColor colorWithRed:38.0/255.0 green:72.0/255.0 blue:18.0/255.0 alpha:1],
                          [UIColor colorWithRed:73.0/255.0 green:69.0/255.0 blue:215.0/255.0 alpha:1],
+                         @"b1.png",@"b2.png",@"b3.png",@"b4.png",@"b5.png",@"b6.png",@"b7.png",@"b8.png",@"b9.png",@"b10.png",
+                         @"b11.png",@"b12.png",@"b13.png",@"b14.png",@"b15.png",@"b16.png",@"b17.png",@"b18.png",@"b19.png",@"b20.png",@"b21.png",
                          nil];
         
         // HERE WE CREATE FLYERLY ALBUM ON DEVICE
@@ -502,77 +562,43 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
         // Setup the share panel.
         sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,200 )];
-        /* //No need to pree load ShareViewController
-        if ( IS_IPHONE_5 || IS_IPHONE_4) {
-            shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
-        }else if ( IS_IPHONE_6 ){
-            shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController-iPhone6" bundle:nil];
-        }
-        shareviewcontroller.cfController = self;
-        sharePanel = shareviewcontroller.view;
-         */
         sharePanel.hidden = YES;
         [self.view addSubview:sharePanel];
 
-        
         //Set Undo Bar Status
         [self setUndoStatus];
         
-        //Set Context Tabs
-        [self addBottomTabs:libFlyer];
+        
+        //Show paid xid for all with yellow overly ( open in app on tap ), we will hide it after user checking user purchases
+        fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts-paid" ofType:@"plist"];
+        clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts-paid" ofType:@"plist"];
+        emoticonsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Emoticons-paid" ofType:@"plist"];
         
         // Execute the rest of the stuff, a little delayed to speed up loading.
         dispatch_async( dispatch_get_main_queue(), ^{
+            BOOL canCheckPurchases = ( ![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"] );
             
-            //HERE WE GET USER PURCHASES INFO FROM PARSE
-            if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
-                
-                [self loadXibsAfterInAppCheck:NO againAddInSubViews:NO];
-                
-            }
             
-            if( IS_IPHONE_4 || IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
-                
-                // Initialize the banner at the bottom of the screen.
-                CGPoint origin;
-                origin = CGPointMake(0.0,0.0);
-                
-                GADAdSize customAdSize;
-                if ( IS_IPHONE_4 ) {
-                    customAdSize = GADAdSizeFromCGSize(CGSizeMake(320, 50));
-                } else if ( IS_IPHONE_5 ) {
-                    customAdSize = GADAdSizeFromCGSize(CGSizeMake(320, 50));
-                }else if ( IS_IPHONE_6 ){
-                    customAdSize = GADAdSizeFromCGSize(CGSizeMake(420, 50));
-                }else if ( IS_IPHONE_6_PLUS ){
-                    customAdSize = GADAdSizeFromCGSize(CGSizeMake(520, 50));
-                } else{
-                    customAdSize = GADAdSizeFromCGSize(CGSizeMake(320, 50));
-                }
-                
-                
-                // Use predefined GADAdSize constants to define the GADBannerView.
-                self.bannerAdd = [[GADBannerView alloc] initWithAdSize:customAdSize origin:origin];
-                
-                // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID before compiling.
-                self.bannerAdd.adUnitID = [flyerConfigurator bannerAdID];
-                self.bannerAdd.delegate = self;
-                self.bannerAdd.rootViewController = self;
-                
-                [self.bannerAdd loadRequest:[self request]];
+            if( IS_IPHONE_4 || IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR)
+            {
                 
                 NSArray *flyerbackgroundsViewArray;
                 if ( IS_IPHONE_4) {
                      flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds-iPhone4" owner:self options:nil];
                 }else if ( IS_IPHONE_5 ) {
                     flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds" owner:self options:nil];
-                }else if ( IS_IPHONE_6){
+                }else if ( IS_IPHONE_6 || IS_IPHONE_XS){
                     flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds-iPhone6" owner:self options:nil];
-                }else if ( IS_IPHONE_6_PLUS){
-                    flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds-iPhone6-Plus" owner:self options:nil];
-                } else {
-                    flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds" owner:self options:nil];
                 }
+                else if ( IS_IPHONE_6_PLUS)
+                {
+                    flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds-iPhone6-Plus" owner:self options:nil];
+                }
+                else
+                {
+                    flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds-iPhone6-Plus" owner:self options:nil];
+                }
+                
                 backgroundsView = [flyerbackgroundsViewArray objectAtIndex:0];
                 
                 NSArray *flyerBordersViewArray;
@@ -599,7 +625,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                      fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours" owner:self options:nil];
                 }else if ( IS_IPHONE_6){
                     fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours-iPhone6" owner:self options:nil];
-                }else if ( IS_IPHONE_6_PLUS){
+                }else if ( IS_IPHONE_6_PLUS || IS_IPHONE_XR){
                     fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours-iPhone6-Plus" owner:self options:nil];
                 } else {
                     fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours" owner:self options:nil];
@@ -612,9 +638,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns-iPhone4" owner:self options:nil];
                 }else if ( IS_IPHONE_5 ) {
                    drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns" owner:self options:nil];
-                }else if ( IS_IPHONE_6){
+                }else if ( IS_IPHONE_6 || IS_IPHONE_XS ){
                     drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns-iPhone6" owner:self options:nil];
-                }else if ( IS_IPHONE_6_PLUS){
+                }else if ( IS_IPHONE_6_PLUS || IS_IPHONE_XR){
                     drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns-iPhone6-Plus" owner:self options:nil];
                 } else {
                     drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns" owner:self options:nil];
@@ -626,7 +652,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     drawingEraserMsgViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingEraserMsg-iPhone4" owner:self options:nil];
                 } else if ( IS_IPHONE_5 ) {
                     drawingEraserMsgViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingEraserMsg" owner:self options:nil];
-                }else if ( IS_IPHONE_6){
+                }else if ( IS_IPHONE_6 ){
                     drawingEraserMsgViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingEraserMsg-iPhone6" owner:self options:nil];
                 }else if ( IS_IPHONE_6_PLUS){
                     drawingEraserMsgViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingEraserMsg-iPhone6" owner:self options:nil];
@@ -642,9 +668,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes-iPhone4" owner:self options:nil];
                 } else if ( IS_IPHONE_5 ) {
                      fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes" owner:self options:nil];
-                }else if ( IS_IPHONE_6){
+                }else if ( IS_IPHONE_6 || IS_IPHONE_XR || IS_IPHONE_XS ){
                     fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes-iPhone6" owner:self options:nil];
-                }else if ( IS_IPHONE_6_PLUS){
+                }else if ( IS_IPHONE_6_PLUS)
+                {
                     fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes-iPhone6-Plus" owner:self options:nil];
                 } else {
                     fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes-iPhone4" owner:self options:nil];
@@ -657,9 +684,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders-iPhone4" owner:self options:nil];
                 }else if ( IS_IPHONE_5 ) {
                      textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders" owner:self options:nil];
-                }else if ( IS_IPHONE_6){
+                }else if ( IS_IPHONE_6 ){
                     textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders-iPhone6" owner:self options:nil];
-                }else if ( IS_IPHONE_6_PLUS){
+                }else if ( IS_IPHONE_6_PLUS || IS_IPHONE_XR)
+                {
                     textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders-iPhone6-Plus" owner:self options:nil];
                 } else {
                     textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders" owner:self options:nil];
@@ -710,8 +738,25 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [self addEmoticonsInSubView];
                 
             }
-        });
-    });
+            
+            premiumImgBg = [[UIImageView alloc] initWithFrame:[self getSizeOfPremium:premiumBtnBg.frame.origin.x y:premiumBtnBg.frame.origin.y]];
+            premiumImgBg.image = [UIImage imageNamed:@"premiumImg.png"];
+            [backgroundsView addSubview:premiumImgBg];
+
+            premiumImgBgBorder = [[UIImageView alloc] initWithFrame:[self getSizeOfPremium:premiumBtnBgBorder.frame.origin.x y:premiumBtnBgBorder.frame.origin.y]];
+            premiumImgBgBorder.image = [UIImage imageNamed:@"premiumImg.png"];
+            [flyerBordersView addSubview:premiumImgBgBorder];
+            
+            [premiumBtnBg setBackgroundColor:[self getPremiumBgColor]];
+            [premiumBtnBgBorder setBackgroundColor:[self getPremiumBgColor]];
+            
+            if( canCheckPurchases )
+            {
+                [self loadXibsAfterInAppCheck:NO againAddInSubViews:YES];
+            }
+
+        }); //main queue2
+    });//main queue1
     
     [self zoomInit];
 }
@@ -760,6 +805,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         rightUndoBarButton.enabled = YES;
         shareButton.enabled = YES;
+        
+        backButton.enabled = YES;
         helpButton.enabled = YES;
         return;
     }
@@ -794,33 +841,52 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     userPurchases.delegate = nil;
     
+    [self videoPlay:NO repeat:NO];
+    
     // This work will be done in the background to prevent the UI from being
     // stuck.
     dispatch_async( dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         
-        isPlaying = NO;
-        [player pause];
-        
-        // Save flyer to disk
-        [flyer saveFlyer];
-        
-        // Make a history entry if needed.
-        [flyer addToHistory];
-        
-        // If this is a video flyer, then merge the video.
-        if ( [flyer isVideoFlyer] ) {
+        if( [flyer isSaveRequired] == YES ) {
             
-            // Here Compare Current Flyer with history Flyer
-            if ( [self.flyer isVideoMergeProcessRequired] ) {
+            // Save flyer to disk
+            [flyer saveFlyer]; //
+            
+            // Make a history entry if needed.
+            [flyer addToHistory]; //
+            
+            //here we keep the merging vido path
+            [flyer isVideoMergeProcessRequired];
+        
+            // If this is a video flyer, then merge the video.
+            if ( [flyer isVideoFlyer] ) {
                 
-                self.shouldShowAdd ( @"" );
+                // Set all share options status to 0
+                [flyer resetAllButtonStatus];
+                
+                // Set all button selected state
+                [shareviewcontroller setAllButtonSelected:NO];
+                
+                [shareviewcontroller enableShareOptions:NO];
+                [shareviewcontroller haveVideoLinkEnableAllShareOptions:NO];
+                
+                // Set saveButton status to 1, i.e. this flyer's been saved
+                [flyer setSaveButtonStatus:1];
+                // Set SaveButton visual state selected
+                [shareviewcontroller.saveButton setSelected:YES]; 
                 
                 panelWillOpen = NO;
-                
-                // Here we Merge All Layers in Video File
-                [self videoMergeProcess];
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    // Here we Merge All Layers in Video File
+                    [self videoMergeProcess];
+                });
+               
                 
             } else {
+                // Here we take Snap shot of Flyer and
+                // Flyer Add to Gallery if user allow to Access there photos
+                [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
+                
                 // Go to the main thread and let the home screen know that flyer is
                 // updated.
                 dispatch_async( dispatch_get_main_queue(), ^{
@@ -829,29 +895,32 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     self.onFlyerBack( @"" );
                 });
             }
+
+            [Flurry logEvent:@"Saved Flyer"];
             
         } else {
-            // Here we take Snap shot of Flyer and
-            // Flyer Add to Gallery if user allow to Access there photos
-            [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
-            
-            // Go to the main thread and let the home screen know that flyer is
-            // updated.
             dispatch_async( dispatch_get_main_queue(), ^{
-                
+                if( self.flyer.saveInGallaryRequired == 0 ) {
+                    self.flyer.saveInGallaryAfterNumberOfTasks = -1;//when we have no need to saveInGallary on back
+                }
                 // Here we call Block for update Main UI
                 self.onFlyerBack( @"" );
             });
         }
-        
-        
-        [Flurry logEvent:@"Saved Flyer"];
     });
+    
+    if ( self.shouldShowAdd != NULL ) {
+        if ( [self.flyer isVideoFlyer] ) {
+            self.shouldShowAdd ( @"", YES ); // in order not to show full screen ads
+        }
+    }
     
     [self.navigationController popViewControllerAnimated:YES];
     
     // Remove observers
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    layerScrollView = nil;
 }
 
 #pragma mark -  Add Content In ScrollViews
@@ -873,17 +942,14 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         //Delete SubViews From ScrollView
         [self deleteSubviewsFromScrollView];
         
-        if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
-            
+        if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR)
+        {
             [layerScrollView addSubview:backgroundsView];
-            
-            [layerScrollView setContentSize:CGSizeMake(backgroundsView.frame.size.width, backgroundsView.frame.size.height)];
+            [layerScrollView setContentSize:CGSizeMake(backgroundsView.frame.size.width, backgroundsView.frame.size.height + bannerHeight)];
             
         } else {
-            
             [layerScrollView addSubview:backgroundsView];
-            [layerScrollView setContentSize:CGSizeMake(backgroundsView.frame.size.width, [layerScrollView bounds].size.height)];
-            
+            [layerScrollView setContentSize:CGSizeMake(backgroundsView.frame.size.width, [layerScrollView bounds].size.height + bannerHeight)];
         }
         
         for (UIView *sub in backgroundsView.subviews) {
@@ -902,6 +968,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  */
 -(void)addFlyerBorderInSubView {
     
+    
     //Delete Subviews From ScrollView
     [self deleteSubviewsFromScrollView];
     
@@ -909,7 +976,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     CGFloat curYLoc = 5;
     int increment = 5;
     
-    if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+    if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR){
         curXLoc = 13;
         curYLoc = 10;
         increment = 8;
@@ -927,13 +994,14 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     // Load sizes xib asynchronously
     dispatch_async( dispatch_get_main_queue(), ^{
         
-        if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+        if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR){
             
-            if( IS_IPHONE_6_PLUS ){
-                flyerBordersView.frame = CGRectMake((layerScrollView.frame.origin.x+22), (layerScrollView.frame.origin.y+7), flyerBordersView.frame.size.width, flyerBordersView.frame.size.height);
+            if( IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR )
+            {
+                flyerBordersView.frame = CGRectMake((layerScrollView.frame.origin.x+22), (layerScrollView.frame.origin.y), flyerBordersView.frame.size.width, flyerBordersView.frame.size.height);
             }
             [layerScrollView addSubview:flyerBordersView];
-            [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+            [layerScrollView setContentSize:CGSizeMake(320, flyerBordersView.frame.size.height + bannerHeight)];
             
         } else {
             
@@ -942,40 +1010,64 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }
         
         NSArray *bodersArray = flyerBordersView.subviews;
-        int count = (bodersArray.count)/3;
-        
-        int i=1;
-        for (int index = 0; index < count; index++ )
+        int borderArrayCount =  (int)borderArray.count;
+        int i =0;
+
+        for (int index = 0; index < bodersArray.count; index += 3 )
         {
-            
-            UIColor *colorName = borderArray[(i-1)];
+            if( i >= borderArrayCount )
+            break;
             
             //Here we Highlight Last Color Selected
             if (textColor != nil) {
-                
-                NSString *tcolor;
-                NSString *twhite;
-                CGFloat r = 0.0, g = 0.0, b = 0.0, a = 0.0,wht = 0.0;
-                
-                UILabel *labelToStore = [[UILabel alloc]init];
-                labelToStore.textColor = colorName;
-                
-                //Getting RGB Color Code
-                [labelToStore.textColor getRed:&r green:&g blue:&b alpha:&a];
-                
-                tcolor = [NSString stringWithFormat:@"%f, %f, %f", r, g, b];
-                
-                [labelToStore.textColor getWhite:&wht alpha:&a];
-                twhite = [NSString stringWithFormat:@"%f, %f", wht, a];
-                
-                if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
-                    // Add border to selected layer thumbnail
-                    //color.backgroundColor = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
+                id colorName = borderArray[i];
+
+                if ([textColor rangeOfString:@".png"].location != NSNotFound ) {
+                    if ( [colorName isKindOfClass:[NSString class]] ) {
+                        UIButton *curBtn =  bodersArray[index+1];//image is in second button
+                        NSString *currentBackgroundImage = curBtn.currentTitle;
+                        if( [currentBackgroundImage isEqual:textColor] ){
+                            [self highlightAndScrollRect:curBtn.tag inView:flyerBordersView];
+                            break;
+                        }
+                    }
                 }
-                
-                i++;
+                else if( [colorName isKindOfClass:[UIColor class]] ){
+                    colorName  = (UIColor *)colorName;
+                    NSString *tcolor;
+                    NSString *twhite;
+                    CGFloat r = 0.0, g = 0.0, b = 0.0, a = 0.0,wht = 0.0;
+                    
+                    UILabel *labelToStore = [[UILabel alloc]init];
+                    labelToStore.textColor = colorName;
+                    
+                    //Getting RGB Color Code
+                    [labelToStore.textColor getRed:&r green:&g blue:&b alpha:&a];
+                    
+                    tcolor = [NSString stringWithFormat:@"%f, %f, %f", r, g, b];
+                    if ( r == 0 && g == 0 && b ==0) {
+                        [labelToStore.textColor getWhite:&wht alpha:&a];
+                    }
+                    
+                    twhite = [NSString stringWithFormat:@"%f, %f", wht, a];
+                    
+                    if( [textColor isEqual:tcolor] && [textWhiteColor isEqual:twhite]  ){
+                        UIButton *curBtn =  bodersArray[index+2];//color is on second button
+                        [self highlightAndScrollRect:curBtn.tag inView:flyerBordersView];
+                        break;
+                    }
+                }
             }
+            else{
+                //When we have no border, focus on first btn
+                UIButton *fb =  bodersArray[index+2];
+                [layerScrollView scrollRectToVisible:CGRectMake(0, 0, fb.frame.size.width, fb.frame.size.height) animated:YES];
+                break;
+            }
+          i++;
         }// Loop
+
+
     });
 }
 
@@ -1009,21 +1101,35 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             CGFloat curYLoc = 5;
             int increment = 5;
     
-            if(IS_IPHONE_5 ){
-                curXLoc = 13;
-                curYLoc = 10;
-                increment = 8;
-            }else if ( IS_IPHONE_6) {
-                curXLoc = 13;
-                curYLoc = 10;
-                increment = 8;
-            }
-            else if ( IS_IPHONE_6_PLUS ) {
+            if(IS_IPHONE_5 )
+            {
                 curXLoc = 13;
                 curYLoc = 10;
                 increment = 8;
             }
-    
+            else if ( IS_IPHONE_6)
+            {
+                curXLoc = 13;
+                curYLoc = 10;
+                increment = 8;
+            }
+            else if (IS_IPHONE_XS)
+            {
+                curXLoc = 13;
+                curYLoc = 10;
+                increment = 8;
+            }
+            else if ( IS_IPHONE_6_PLUS || IS_IPHONE_XR)
+            {
+                curXLoc = 13;
+                curYLoc = 10;
+                increment = 8;
+            }
+            
+            int initialX = curXLoc;
+            int initialY = curYLoc;
+            int fOPrem[6] = {initialX,initialY,0,0};
+            
             NSMutableDictionary *textLayer;
             NSString *textFamily;
     
@@ -1032,8 +1138,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 textLayer = [flyer getLayerFromMaster:currentLayer];
                 textFamily = [textLayer objectForKey:@"fontname"];
             }
-    
-            for (int i = 1; i <=[fontsArray count] ; i++) {
+            int fontsArrayCount = (int)[fontsArray count];
+            for (int i = 1; i <=fontsArrayCount ; i++)
+            {
                 UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
                 font.frame = CGRectMake(0, 0, widthValue, heightValue);
                 [font addTarget:self action:@selector(selectFont:) forControlEvents:UIControlEventTouchUpInside];
@@ -1048,16 +1155,53 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 CGRect frame = font.frame;
                 frame.origin = CGPointMake(curXLoc, curYLoc);
                 font.frame = frame;
+                
+                
+                //We have 21 free fonts, so start yellow overly after it ( from new row)
+                if( i >= 22 && (fOPrem[0] == initialX && fOPrem[1] == initialY) && (curXLoc == initialX || curYLoc == initialY )){
+                    fOPrem[0] = curXLoc;
+                    fOPrem[1] = curYLoc;
+                } else if ( i == fontsArrayCount ){
+                    if(curYLoc == fOPrem[1] ){ //iPhone4 landscap views
+                        fOPrem[2] = (curXLoc + widthValue  ) - fOPrem[0];
+                        fOPrem[3] = (int)heightValue;
+                    } else{ //square views
+                        fOPrem[3] = ( curYLoc + heightValue) - fOPrem[1];
+                    }
+                }
+                
+                
                 curXLoc = curXLoc + widthValue + increment ;
                 
-                if( i != 0 ) {
-                    if(IS_IPHONE_5 && curXLoc >= 300 ){
+                if( i != 0 )
+                {
+                    if(IS_IPHONE_5 && curXLoc >= 300 )
+                    {
+                        fOPrem[4] = 0; fOPrem[5] = 320;
                         curXLoc = 13;
                         curYLoc = curYLoc + heightValue + 7;
-                    } else if ( IS_IPHONE_6 && curXLoc >= 350 ){
+                    }
+                    else if ( IS_IPHONE_6 && curXLoc >= 350 )
+                    {
+                        fOPrem[4] = 0; fOPrem[5] = 380;
                         curXLoc = 13;
                         curYLoc = curYLoc + heightValue + 7;
-                    } else if( IS_IPHONE_6_PLUS && ( i%9 == 0 ) ){ //iphon6+ screen can show 8 font type icons
+                    }
+                    else if(IS_IPHONE_XS && ( i%8 == 0 ) )
+                    { //iphon6+ screen can show 8 font type icons
+                        fOPrem[4] = 0; fOPrem[5] = 584;
+                        curXLoc = 13;
+                        curYLoc = curYLoc + heightValue + 6;
+                    }
+                    else if(IS_IPHONE_6_PLUS && ( i%9 == 0 ))
+                    { //iphon6+ screen can show 8 font type icons
+                        fOPrem[4] = 0; fOPrem[5] = 584;
+                        curXLoc = 13;
+                        curYLoc = curYLoc + heightValue + 6;
+                    }
+                    else if(IS_IPHONE_XR && ( i%9 == 0 ) )
+                    { //iphon6+ screen can show 8 font type icons
+                        fOPrem[4] = 0; fOPrem[5] = 584;
                         curXLoc = 13;
                         curYLoc = curYLoc + heightValue + 7;
                     }
@@ -1069,99 +1213,68 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             userPurchases = [UserPurchases getInstance];
             userPurchases.delegate = self;
             
-    
-            //fontsView.backgroundColor = [UIColor yellowColor];
-            //layerScrollView.backgroundColor= [UIColor purpleColor];
+            if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR){
+                fOPrem[0] = fOPrem[4]; fOPrem[2] = fOPrem[5];
+            }
             
-            BOOL comflyerlyAllDesignBundle =  [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"];
-            BOOL comflyerlyIconsBundle =  [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"];
-            
-            
-              //Checking if user valid purchases
-            if (  !(comflyerlyAllDesignBundle || comflyerlyIconsBundle)  ) {
-            
-                //More button---{--
-                UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
+              //if user has not subscription for fonts then show premium view
+            if ( [userPurchases checkKeyExistsInPurchases:IN_APP_ID_ICON_BUNDLE] == NO ) {
+                premiumBtnFonts = [UIButton buttonWithType:UIButtonTypeCustom];
+                premiumBtnFonts.frame = CGRectMake(fOPrem[0], fOPrem[1], fOPrem[2], fOPrem[3]);
                 
-                if ( IS_IPHONE_5 ) {
-                    font.frame = CGRectMake(curXLoc, curYLoc, 300, heightValue);
-                } else if ( IS_IPHONE_6 ) {
-                    font.frame = CGRectMake(13, curYLoc + 40, 335, heightValue);
-                } else if( IS_IPHONE_6_PLUS ){
-                   font.frame = CGRectMake(13, curYLoc + 40, 380, heightValue);
-                }else {
-                    font.frame = CGRectMake(curXLoc, curYLoc, 150, heightValue);
-                }
-
-                //font.backgroundColor = [UIColor blueColor];
-                
-                [font addTarget:self action:@selector(openPanel:) forControlEvents:UIControlEventTouchUpInside];
-                
-                [font setTitle:@"More" forState:UIControlStateNormal];
+                [premiumBtnFonts addTarget:self action:@selector(openPanel:) forControlEvents:UIControlEventTouchUpInside];
                 
                 UIFont *fontname = [UIFont fontWithName:@"Helvetica" size:15.0];
-                [font.titleLabel setFont: fontname];
-                [font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                
-                [font setBackgroundImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
+                [premiumBtnFonts.titleLabel setFont: fontname];
+                [premiumBtnFonts setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                [premiumBtnFonts setBackgroundColor:[self getPremiumBgColor]];
 
-                [fontsView addSubview:font];
-                //More button---}--
+                [fontsView addSubview:premiumBtnFonts];
                 
-                
-                if ( IS_IPHONE_5 ) {
-                    
-                    fontsView.size = CGSizeMake(320, curYLoc + heightValue + 50);
-                    [layerScrollView setContentSize:CGSizeMake(fontsView.frame.size.width, fontsView.frame.size.height)];
-                }
-                else if ( IS_IPHONE_6 ) {
-                    
-                    fontsView.size = CGSizeMake(380, curYLoc + heightValue + 50);
-                    [layerScrollView setContentSize:CGSizeMake(fontsView.frame.size.width, fontsView.frame.size.height)];
-                
-                } else if ( IS_IPHONE_6_PLUS ) {
-                    fontsView.size = CGSizeMake(584, (curYLoc + heightValue + 50) );
-                    [layerScrollView setContentSize:CGSizeMake(fontsView.frame.size.width, fontsView.frame.size.height)];
-                    
-                     fontsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), layerScrollView.frame.origin.y, fontsView.frame.size.width, fontsView.frame.size.height);
-                }
-                else {
-                    fontsView.size = CGSizeMake(curXLoc + 185 , heightValue);
-                    [layerScrollView setContentSize:CGSizeMake(fontsView.frame.size.width, fontsView.frame.size.height)];
-                    
-                    fontsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), (layerScrollView.frame.origin.y+5), fontsView.frame.size.width, fontsView.frame.size.height);
-
-                }
+                premiumImgFonts = [[UIImageView alloc] initWithFrame:[self getSizeOfPremium:fOPrem[0] y:fOPrem[1] ] ];
+                premiumImgFonts.image = [UIImage imageNamed:@"premiumImg.png"];
+                [fontsView addSubview:premiumImgFonts];
             }
-            else {
+            
+                //fontsView.backgroundColor = [UIColor redColor];
                 
                 if ( IS_IPHONE_5 ) {
                     
-                    fontsView.size = CGSizeMake(320, curYLoc + heightValue + 50);
-                    [layerScrollView setContentSize:CGSizeMake(fontsView.frame.size.width, fontsView.frame.size.height)];
+                    fontsView.size = CGSizeMake(320, curYLoc + heightValue);
+                    [layerScrollView setContentSize:CGSizeMake(fontsView.frame.size.width, fontsView.frame.size.height + bannerHeight)];
+                    fontsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), (layerScrollView.frame.origin.y+5), fontsView.frame.size.width, fontsView.frame.size.height);
                     
                 } else if ( IS_IPHONE_6 ){
                     
-                    fontsView.size = CGSizeMake(380, curYLoc + heightValue + 30);
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+                    fontsView.size = CGSizeMake(380, curYLoc + heightValue + 10);
+                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + bannerHeight)];
+                    fontsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), (layerScrollView.frame.origin.y+5), fontsView.frame.size.width, fontsView.frame.size.height);
                     
-                } else if ( IS_IPHONE_6_PLUS ){
-                    fontsView.size = CGSizeMake(584, curYLoc + heightValue + 5);
-                    [layerScrollView setContentSize:CGSizeMake(584, curYLoc + heightValue)];
+                }
+                else if ( IS_IPHONE_6_PLUS || IS_IPHONE_XR)
+                {
+                    fontsView.size = CGSizeMake(584, curYLoc + heightValue);
+                    [layerScrollView setContentSize:CGSizeMake(584, curYLoc + bannerHeight)];
                     
                     fontsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), layerScrollView.frame.origin.y, fontsView.frame.size.width, fontsView.frame.size.height);
                     
-                } else {
+                }
+                else if (IS_IPHONE_XS)
+                {
+                    fontsView.size = CGSizeMake(584, curYLoc + heightValue);
+                    [layerScrollView setContentSize:CGSizeMake(584, curYLoc + bannerHeight)];
+     
+                    fontsView.frame = CGRectMake((layerScrollView.frame.origin.x + 5), layerScrollView.frame.origin.y, fontsView.frame.size.width, fontsView.frame.size.height);
+                    
+                }
+                else
+                {
                     fontsView.size = CGSizeMake((curXLoc+10) , heightValue);
-                    [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , heightValue)];
+                    [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , heightValue + bannerHeight)];
                     
                     fontsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), (layerScrollView.frame.origin.y+5), fontsView.frame.size.width, fontsView.frame.size.height);
                     
                 }
-            }
-            
-            
-            
             
             //Handling Select Unselect
             [self setSelectedItem:[flyer getLayerType:currentLayer] inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
@@ -1186,7 +1299,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         curXLoc = 13;
         curYLoc = 10;
         increment = 8;
-    } else if( IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+    } else if( IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR){
         curXLoc = 13;
         curYLoc = 13;
         increment = 13;
@@ -1211,22 +1324,22 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     // Load sizes xib asynchronously
     dispatch_async( dispatch_get_main_queue(), ^{
         
-        if(IS_IPHONE_5 || IS_IPHONE_6 ){
+        if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR){
+            
+            if( IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR)
+            {
+                colorsView.frame = CGRectMake((layerScrollView.frame.origin.x+22), (layerScrollView.frame.origin.y), colorsView.frame.size.width, colorsView.frame.size.height);
+            }
             
             [layerScrollView addSubview:colorsView];
-            [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+            [layerScrollView setContentSize:CGSizeMake(320, colorsView.frame.size.height + bannerHeight)];
             
-        } else if( IS_IPHONE_6_PLUS ){
-            colorsView.frame = CGRectMake((layerScrollView.frame.origin.x+20), (layerScrollView.frame.origin.y+5), colorsView.frame.size.width, colorsView.frame.size.height);
-            
-            [layerScrollView addSubview:colorsView];
-            [layerScrollView setContentSize:colorsView.size];
-        
         } else {
             
             [layerScrollView addSubview:colorsView];
             [layerScrollView setContentSize:CGSizeMake(colorsView.frame.size.width, [layerScrollView bounds].size.height)];
         }
+
         
         coloursArray = colorsView.subviews;
         
@@ -1277,7 +1390,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     CGFloat curYLoc = 5;
     int increment = 5;
     
-    if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+    if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR){
         curXLoc = 13;
         curYLoc = 10;
         increment = 8;
@@ -1294,24 +1407,33 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     // Load sizes xib asynchronously
     dispatch_async( dispatch_get_main_queue(), ^{
-        //For testing
-        //sizesView.backgroundColor = [UIColor greenColor];
         
-        if(IS_IPHONE_5 || IS_IPHONE_6 ){
+        if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR)
+        {
+            
+            if( IS_IPHONE_6_PLUS)
+            {
+                sizesView.frame = CGRectMake((layerScrollView.frame.origin.x+22), (layerScrollView.frame.origin.y), sizesView.frame.size.width, sizesView.frame.size.height);
+            }
+            else if (IS_IPHONE_XS)
+            {
+                sizesView.frame = CGRectMake((layerScrollView.frame.origin.x), (layerScrollView.frame.origin.y), sizesView.frame.size.width, sizesView.frame.size.height);
+            }
+            else if (IS_IPHONE_XR)
+            {
+                sizesView.frame = CGRectMake((layerScrollView.frame.origin.x + 17), (layerScrollView.frame.origin.y), sizesView.frame.size.width, sizesView.frame.size.height);
+            }
             
             [layerScrollView addSubview:sizesView];
-            [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
-        }
-        else if( IS_IPHONE_6_PLUS ){
-            sizesView.frame = CGRectMake((layerScrollView.frame.origin.x+19), (layerScrollView.frame.origin.y+5), sizesView.frame.size.width, sizesView.frame.size.height);
+            [layerScrollView setContentSize:CGSizeMake(320, sizesView.frame.size.height + bannerHeight)];
             
-            [layerScrollView addSubview:sizesView];
-            [layerScrollView setContentSize:sizesView.size];
         }
-        else {
+        else
+        {
             [layerScrollView addSubview:sizesView];
             [layerScrollView setContentSize:CGSizeMake(sizesView.frame.size.width, [layerScrollView bounds].size.height)];
         }
+        
         
         NSMutableDictionary *layerDic = [flyer getLayerFromMaster:currentLayer];
         
@@ -1321,7 +1443,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
             textSize = [NSString stringWithFormat:@"%f", ([textSize floatValue]/3.0)];
             
-        }else if ( [type isEqualToString:FLYER_LAYER_EMOTICON] ) {
+        }else if ( [type isEqualToString:FLYER_LAYER_EMOTICON] )
+        {
             
             CGRect lastFrame = [flyer getImageFrame:currentLayer];
             textSize = [NSString stringWithFormat:@"%f", (lastFrame.size.height/1.5)];
@@ -1366,7 +1489,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         curXLoc = 13;
         curYLoc = 10;
         increment = 8;
-    } else if( IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+    } else if( IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR){
         curXLoc = 13;
         curYLoc = 13;
         increment = 13;
@@ -1385,28 +1508,22 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     // Load sizes xib asynchronously
     dispatch_async( dispatch_get_main_queue(), ^{
-         //textBordersView.backgroundColor = [UIColor redColor];
+        
         if(IS_IPHONE_5 || IS_IPHONE_6 ){
+            textBordersView.frame = CGRectMake((layerScrollView.frame.origin.x), (layerScrollView.frame.origin.y), textBordersView.frame.size.width, textBordersView.frame.size.height + bannerHeight);
             
-            [layerScrollView addSubview:textBordersView];
-            [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
-            
-        } else if( IS_IPHONE_6_PLUS ){
-
-            textBordersView.frame = CGRectMake((layerScrollView.frame.origin.x+20), (layerScrollView.frame.origin.y+5), textBordersView.frame.size.width, textBordersView.frame.size.height);
-            
-            [layerScrollView addSubview:textBordersView];
-            [layerScrollView setContentSize:textBordersView.size];
+        } else if( IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR ){
+            textBordersView.frame = CGRectMake((layerScrollView.frame.origin.x+20), (layerScrollView.frame.origin.y+5), textBordersView.frame.size.width, textBordersView.frame.size.height + bannerHeight);
             
         } else {
-            
-            [layerScrollView addSubview:textBordersView];
-            [layerScrollView setContentSize:CGSizeMake(textBordersView.frame.size.width, [layerScrollView bounds].size.height)];
+            textBordersView.frame = CGRectMake((layerScrollView.frame.origin.x), (layerScrollView.frame.origin.y), textBordersView.frame.size.width, textBordersView.frame.size.height + bannerHeight);
         }
+        
+        [layerScrollView addSubview:textBordersView];
         
         
         NSArray *bodersArray = textBordersView.subviews;
-        int count = (bodersArray.count)/3;
+        int count = (int)(bodersArray.count)/3;
         
         int i=1;
         for (int index = 0; index < count; index++ )
@@ -1464,17 +1581,30 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             CGFloat curYLoc = 5;
             int increment = 5;
     
-            if(IS_IPHONE_5 || IS_IPHONE_6_PLUS){
+            if(IS_IPHONE_5 || IS_IPHONE_XR)
+            {
                 curXLoc = 13;
                 curYLoc = 10;
                 increment = 8;
             }
             
-            if ( IS_IPHONE_6 ) {
+            if(IS_IPHONE_6_PLUS)
+            {
+                curXLoc = 18;
+                curYLoc = 10;
+                increment = 9;
+            }
+            
+            if ( IS_IPHONE_6 || IS_IPHONE_XS)
+            {
                 curXLoc = 18;
                 curYLoc = 10;
                 increment = 8;
             }
+            
+            int initialX = curXLoc;
+            int initialY = curYLoc;
+            int fOPrem[6] = {initialX,initialY,0,0};
     
             NSMutableDictionary *textLayer;
             NSString *textFamily;
@@ -1484,8 +1614,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 textLayer = [flyer getLayerFromMaster:currentLayer];
                 textFamily = [textLayer objectForKey:@"fontname"];
             }
-    
-            for (int i = 1; i <=[clipartsArray count] ; i++) {
+            int clipartsArrayCount = (int)[clipartsArray count];
+            for (int i = 1; i <=clipartsArrayCount ; i++) {
             
                 UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
                 font.frame = CGRectMake(0, 0, widthValue, heightValue);
@@ -1501,111 +1631,123 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 CGRect frame = font.frame;
                 frame.origin = CGPointMake(curXLoc, curYLoc);
                 font.frame = frame;
+                
+                
+                //We have 42 free cliparts, so start yellow overly after it ( from new row)
+                if( i >= 43 && (fOPrem[0] == initialX && fOPrem[1] == initialY) && (curXLoc == initialX || curYLoc == initialY ))
+                {
+                    fOPrem[0] = curXLoc;
+                    fOPrem[1] = curYLoc;
+                }
+                else if ( i == clipartsArrayCount )
+                {
+                    if(curYLoc == fOPrem[1] ){ //iPhone4 landscap views
+                        fOPrem[2] = (curXLoc + widthValue  ) - fOPrem[0];
+                        fOPrem[3] = (int)heightValue;
+                    } else{ //square views
+                        fOPrem[3] = ( curYLoc + heightValue) - fOPrem[1];
+                    }
+                }
+
+                
                 curXLoc += (widthValue)+increment;
         
-                if(IS_IPHONE_5){
+                if(IS_IPHONE_5)
+                {
+                    fOPrem[4] = 0; fOPrem[5] = 320;
                     if(curXLoc >= 300){
                         curXLoc = 13;
                         curYLoc = curYLoc + widthValue + 7;
                     }
                 }
                 
-                if(IS_IPHONE_6){
-                    if(curXLoc >= 350){
+                if(IS_IPHONE_6 || IS_IPHONE_XS)
+                {
+                    fOPrem[4] = 0; fOPrem[5] = 380;
+                    
+                    if(curXLoc >= 350)
+                    {
                         curXLoc = 18;
-                        curYLoc = curYLoc + widthValue + 7;
+                        curYLoc = curYLoc + widthValue;
                     }
                 }
                 
-                if(IS_IPHONE_6_PLUS && i%9==0){
+                if(IS_IPHONE_6_PLUS && i%9==0)
+                {
+                    fOPrem[4] = 0; fOPrem[5] = 584;
+                    //if(curXLoc >= 300){
+                        curXLoc = 18;
+                        curYLoc = curYLoc + widthValue;
+                    //}
+                }
+                
+                if(IS_IPHONE_XR && i%9==0)
+                {
+                    fOPrem[4] = 0; fOPrem[5] = 584;
                     //if(curXLoc >= 300){
                         curXLoc = 13;
-                        curYLoc = curYLoc + widthValue + 7;
+                        curYLoc = curYLoc + widthValue;
                     //}
                 }
                    
                 [clipartsView addSubview:font];
             }//end for loop
             
-            //clipartsView.backgroundColor = [UIColor redColor];
-            //layerScrollView.backgroundColor = [UIColor greenColor];
-            
-            
             userPurchases = [UserPurchases getInstance];
             userPurchases.delegate = self;
 
-            BOOL comflyerlyAllDesignBundle =  [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"];
-            BOOL comflyerlyIconsBundle =  [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"];
-            
-            
-            //Checking if user valid purchases
-            if (  !(comflyerlyAllDesignBundle || comflyerlyIconsBundle)  ) {
+            if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR)
+            {
+                fOPrem[0] = fOPrem[4]; fOPrem[2] = fOPrem[5];
+            }
 
+            
+            //if user has not subscription for clip art then show premium view
+            if ( [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE] == NO  )
+            {
                 //More button
-                UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
-                if ( IS_IPHONE_5 ) {
-                    font.frame = CGRectMake(curXLoc, curYLoc , 300, heightValue);
-                } else if ( IS_IPHONE_6 ){
-                    font.frame = CGRectMake(18, curYLoc + 40, 335, heightValue);
-                }else if ( IS_IPHONE_6_PLUS ){
-                    font.frame = CGRectMake(13, curYLoc + 40, 380, heightValue);
-                }else {
-                    font.frame = CGRectMake(curXLoc, curYLoc, 150, heightValue);
-                }
-
+                premiumBtnCliparts = [UIButton buttonWithType:UIButtonTypeCustom];
+                premiumBtnCliparts.frame = CGRectMake(fOPrem[0], fOPrem[1], fOPrem[2], fOPrem[3]);
                 
-                [font addTarget:self action:@selector(openPanel:) forControlEvents:UIControlEventTouchUpInside];
-                [font setTitle:@"More" forState:UIControlStateNormal];
+                [premiumBtnCliparts addTarget:self action:@selector(openPanel:) forControlEvents:UIControlEventTouchUpInside];
                 
                 UIFont *fontname = [UIFont fontWithName:@"Helvetica" size:15.0];
-                [font.titleLabel setFont: fontname];
-                [font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                [premiumBtnCliparts.titleLabel setFont: fontname];
+                [premiumBtnCliparts setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                [premiumBtnCliparts setBackgroundColor:[self getPremiumBgColor]];
                 
-                [font setBackgroundImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
-
+                [clipartsView addSubview:premiumBtnCliparts];
                 
-                [clipartsView addSubview:font];
-                
-                if ( IS_IPHONE_5 ) {
-                    clipartsView.size = CGSizeMake(320, curYLoc + heightValue + 55);
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
-                } else if ( IS_IPHONE_6 ) {
-                    clipartsView.size = CGSizeMake(380, curYLoc + heightValue + 55);
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue + 55)];
-                    
-                }else if ( IS_IPHONE_6_PLUS ) {
-                    clipartsView.size = CGSizeMake(584, curYLoc + heightValue + 50);
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue+50)];
-                    
-                    clipartsView.frame = CGRectMake((layerScrollView.frame.origin.x+1), clipartsView.frame.origin.y, layerScrollView.size.width, clipartsView.size.height);
-                }else {
-                    clipartsView.size = CGSizeMake(curXLoc + 190 , heightValue + 5);
-                    [layerScrollView setContentSize:CGSizeMake(clipartsView.size.width , heightValue)];
-
-                    clipartsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), (layerScrollView.frame.origin.y+5), clipartsView.frame.size.width, clipartsView.frame.size.height);
-                }
-            }
-            else{
-                if( IS_IPHONE_5 ){
-                    clipartsView.size = CGSizeMake(320, curYLoc + 85 );//(heightValue + 7) );
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + 50)];//  heightValue)];
-                    
-                }else if ( IS_IPHONE_6 ){
-                    clipartsView.size = CGSizeMake(380, curYLoc + 85 );//(heightValue + 7) );
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + 50)];//  heightValue)];
-                } else if ( IS_IPHONE_6_PLUS ){
-                    clipartsView.size = CGSizeMake(584, curYLoc + 85 );//(heightValue + 7) );
-                    [layerScrollView setContentSize:CGSizeMake(584, curYLoc + 50)];//  heightValue)];
-                    clipartsView.frame = CGRectMake((layerScrollView.frame.origin.x+4), clipartsView.frame.origin.y, layerScrollView.size.width, clipartsView.size.height);
-                } else {
-                    clipartsView.size = CGSizeMake(curXLoc + widthValue + 5 , heightValue + 5);
-                    [layerScrollView setContentSize:CGSizeMake(clipartsView.size.width , heightValue)];
-                    
-                    clipartsView.frame = CGRectMake((layerScrollView.frame.origin.x+1), clipartsView.frame.origin.y, layerScrollView.size.width, clipartsView.size.height);
-                }
-
+                premiumImgCliparts = [[UIImageView alloc] initWithFrame:[self getSizeOfPremium:fOPrem[0] y:fOPrem[1]] ];
+                premiumImgCliparts.image = [UIImage imageNamed:@"premiumImg.png"];
+                [clipartsView addSubview:premiumImgCliparts];
             }
             
+            if ( IS_IPHONE_5 )
+            {
+                clipartsView.size = CGSizeMake(320, curYLoc);
+                [layerScrollView setContentSize:CGSizeMake(320, curYLoc + bannerHeight + 10)];
+            }
+            else if ( IS_IPHONE_6 || IS_IPHONE_XS)
+            {
+                clipartsView.size = CGSizeMake(380, curYLoc);
+                [layerScrollView setContentSize:CGSizeMake(320, curYLoc + bannerHeight)];
+                
+            }
+            else if ( IS_IPHONE_XR || IS_IPHONE_6_PLUS)
+            {
+                clipartsView.size = CGSizeMake(584, curYLoc);
+                [layerScrollView setContentSize:CGSizeMake(320, curYLoc + bannerHeight)];
+                
+                clipartsView.frame = CGRectMake((layerScrollView.frame.origin.x+1), clipartsView.frame.origin.y, layerScrollView.size.width, clipartsView.size.height - 20);
+            }
+            else
+            {
+                clipartsView.size = CGSizeMake(curXLoc+ widthValue + 5 , heightValue + 5);
+                [layerScrollView setContentSize:CGSizeMake(clipartsView.size.width , heightValue)];
+
+                clipartsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), (layerScrollView.frame.origin.y+5), clipartsView.frame.size.width, clipartsView.frame.size.height);
+            }
             
         });
     });
@@ -1626,15 +1768,27 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         emoticonsArray = [[NSMutableArray alloc] initWithContentsOfFile:emoticonsViewResourcePath];
     
+      dispatch_async(dispatch_get_main_queue(), ^{
+
         NSInteger symbolScrollWidth = 60;
         NSInteger symbolScrollHeight = 60;
-    
-        __block CGFloat curXLoc = 0;
-        __block CGFloat curYLoc = 5;
-    
-        dispatch_async(dispatch_get_main_queue(), ^{
+
+        int initialX = 0;
+        int initialY = 5;
+          
+        if(IS_IPHONE_XS)
+        {
+            initialX = 30;
+        }
+       
+  
+        CGFloat curXLoc = initialX;
+        CGFloat curYLoc = initialY;
             
-        for( int i=1 ; i<= emoticonsArray.count ; i++ ) {
+        int fOPrem[6] = {initialX,initialY,0,0};
+
+        int emoticonsArrayCount = (int)emoticonsArray.count;
+        for( int i=1 ; i<=emoticonsArrayCount; i++ ) {
         
             NSString* symbolName = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@",[emoticonsArray objectAtIndex:(i-1)]] ofType:@"png"];
             UIImage *symbolImg = [UIImage imageWithContentsOfFile:symbolName];
@@ -1651,112 +1805,131 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 CGRect frame = symbolButton.frame;
                 frame.origin = CGPointMake(curXLoc, curYLoc);
                 symbolButton.frame = frame;
-                curXLoc += (symbolScrollWidth)+5;
-                if( IS_IPHONE_6 ){
-                    curXLoc +=  - 2;
+            
+            
+                //We have 98 free emoticon, so start yellow overly after it ( from new row)
+                if( i >= 99 && (fOPrem[0] == initialX && fOPrem[1] == initialY) && (curXLoc == initialX || curYLoc == initialY ))
+                {
+                    fOPrem[0] = curXLoc - 50;
+                    fOPrem[1] = curYLoc;
+                }
+                else if ( i == emoticonsArrayCount )
+                {
+                    if(curYLoc == fOPrem[1] )
+                    {
+                        //iPhone4 landscap views
+                        fOPrem[2] = (curXLoc + symbolScrollWidth  ) - fOPrem[0];
+                        fOPrem[3] = (int)symbolScrollHeight;
+                    } else
+                    { //square views
+                        fOPrem[3] = ( curYLoc + symbolScrollHeight) - fOPrem[1];
+                    }
                 }
             
+                curXLoc += (symbolScrollWidth)+5;
             
-                if(IS_IPHONE_5){
-                    if(curXLoc >= 320){
-                        curXLoc = 0;
+                if(IS_IPHONE_5 || IS_IPHONE_XR)
+                {
+                    fOPrem[4] = 0; fOPrem[5] = 380;
+                    
+                    curXLoc +=  - 2;
+                    
+                    if(curXLoc >= 320)
+                    {
+                        curXLoc = initialX;
                         curYLoc = curYLoc + symbolScrollHeight + 7;
                     }
-                }else if(IS_IPHONE_6){
+                }
+                else if(IS_IPHONE_6)
+                {
+                    fOPrem[4] = 0; fOPrem[5] = 380;
+                    curXLoc +=  - 2;
                     if(curXLoc >= 400){
-                        curXLoc = 0;
-                        curYLoc = curYLoc + symbolScrollHeight + 7;
+                        curXLoc = initialX;
+                        curYLoc = curYLoc + symbolScrollHeight + 6;
                     }
-                }else if (IS_IPHONE_6_PLUS && i%6 == 0 ){
+                }
+                else if(IS_IPHONE_6_PLUS && i%6 == 0)
+                {
+                    fOPrem[4] = 0; fOPrem[5] = 550;
+                    curXLoc +=  - 2;
                     //if(curXLoc >= 320){
-                        curXLoc = 0;
+                        curXLoc = initialX;
+                        curYLoc = curYLoc + symbolScrollHeight + 8;
+                    //}
+                }
+                else if (IS_IPHONE_XS && i%5 == 0 )
+                {
+                    fOPrem[4] = 0; fOPrem[5] = 584;
+
+                    //if(curXLoc >= 320){
+                        curXLoc = initialX;
                         curYLoc = curYLoc + symbolScrollHeight + 7;
                     //}
                 }
                 
                 [emoticonsView addSubview:symbolButton];
             
-            
-            
         } // Loop
-            
-            //emoticonsView.backgroundColor = [UIColor redColor];
-            //layerScrollView.backgroundColor = [UIColor greenColor];
             
             userPurchases = [UserPurchases getInstance];
             userPurchases.delegate = self;
-            
-            BOOL comflyerlyAllDesignBundle =  [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"];
-            BOOL comflyerlyIconsBundle =  [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"];
-            
-            
-            //Checking if user valid purchases
-            if (  !(comflyerlyAllDesignBundle || comflyerlyIconsBundle)  ) {
-                //More button
-                UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
-                if ( IS_IPHONE_5 ) {
-                    font.frame = CGRectMake(10, curYLoc + 70, 300, heightValue);
-                } else if ( IS_IPHONE_6 ){
-                    font.frame = CGRectMake(10, curYLoc + 10, 335, heightValue);
-                }else if ( IS_IPHONE_6_PLUS ){
-                    font.frame = CGRectMake(10, curYLoc + symbolScrollHeight+7, 380, heightValue);
-                }else {
-                    font.frame = CGRectMake(curXLoc, curYLoc+10, 100, heightValue);
-                }
 
-                [font addTarget:self action:@selector(openPanel:) forControlEvents:UIControlEventTouchUpInside];
-                [font setTitle:@"More" forState:UIControlStateNormal];
+          if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR)
+          {
+              fOPrem[0] = fOPrem[4]; fOPrem[2] = fOPrem[5];
+          }
+
+          
+            //if user has not subscription for icons then show premium view
+            if (  [userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE] == NO  ) {
+                
+                //More button
+                premiumBtnEmoticons = [UIButton buttonWithType:UIButtonTypeCustom];
+                premiumBtnEmoticons.frame = CGRectMake(fOPrem[0], fOPrem[1], fOPrem[2], fOPrem[3]);
+                
+                [premiumBtnEmoticons addTarget:self action:@selector(openPanel:) forControlEvents:UIControlEventTouchUpInside];
                 
                 UIFont *fontname = [UIFont fontWithName:@"Helvetica" size:15.0];
-                [font.titleLabel setFont: fontname];
-                [font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                
-                [font setBackgroundImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
-                
-                [emoticonsView addSubview:font];
-                
-                if ( IS_IPHONE_5  ) {
-                    emoticonsView.size = CGSizeMake(320, curYLoc + heightValue + 125);
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
-                } else if ( IS_IPHONE_6 ){
-                    emoticonsView.size = CGSizeMake(380, curYLoc + heightValue + 75);
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
-                } else if ( IS_IPHONE_6_PLUS ) {
-                    emoticonsView.size = CGSizeMake(584, curYLoc + symbolScrollHeight + 50);
-                    [layerScrollView setContentSize:CGSizeMake(emoticonsView.size.width, emoticonsView.size.height)];
-                    
-                    emoticonsView.frame = CGRectMake((layerScrollView.frame.origin.x+13), emoticonsView.frame.origin.y, emoticonsView.size.width, emoticonsView.size.height);
-                } else {
-                    emoticonsView.size = CGSizeMake(curXLoc + 155 , heightValue + 5);
-                    [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , heightValue)];
-                    
-                    emoticonsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), (layerScrollView.frame.origin.y-5), emoticonsView.frame.size.width, emoticonsView.frame.size.height);
-                }
-            }
-            else{
-                
-                if(IS_IPHONE_5 ){
-                    emoticonsView.size = CGSizeMake(320, curYLoc + symbolScrollHeight + 75);
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + symbolScrollHeight)];
-                } else if ( IS_IPHONE_6 ){
-                    emoticonsView.size = CGSizeMake(380, curYLoc + symbolScrollHeight + 75);
-                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + symbolScrollHeight)];
-                } else if( IS_IPHONE_6_PLUS ){
+                [premiumBtnEmoticons.titleLabel setFont: fontname];
+                [premiumBtnEmoticons setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                [premiumBtnEmoticons setBackgroundColor:[self getPremiumBgColor]];
 
-                    emoticonsView.size = CGSizeMake(584, curYLoc + symbolScrollHeight + 75);
-                    [layerScrollView setContentSize:CGSizeMake(emoticonsView.size.width, curYLoc + symbolScrollHeight)];
+                
+                [emoticonsView addSubview:premiumBtnEmoticons];
+                
+                premiumImgEmoticons = [[UIImageView alloc] initWithFrame:[self getSizeOfPremium:fOPrem[0] y:fOPrem[1]] ];
+                premiumImgEmoticons.image = [UIImage imageNamed:@"premiumImg.png"];
+                [emoticonsView addSubview:premiumImgEmoticons];
+            }
+          
+                //emoticonsView.backgroundColor = [UIColor redColor];
+          
+                if(IS_IPHONE_5 )
+                {
+                    emoticonsView.size = CGSizeMake(320, curYLoc + symbolScrollHeight );
+                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + symbolScrollHeight + bannerHeight)];
+                }
+                else if ( IS_IPHONE_6 || IS_IPHONE_XS)
+                {
+                    emoticonsView.size = CGSizeMake(370, curYLoc + symbolScrollHeight);
+                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + symbolScrollHeight + bannerHeight)];
+                }
+                else if( IS_IPHONE_6_PLUS || IS_IPHONE_XR)
+                {
+
+                    emoticonsView.size = CGSizeMake(584, curYLoc + symbolScrollHeight);
+                    [layerScrollView setContentSize:CGSizeMake(emoticonsView.size.width, curYLoc + symbolScrollHeight + bannerHeight)];
                     
                     emoticonsView.frame = CGRectMake((layerScrollView.frame.origin.x+13), emoticonsView.frame.origin.y, emoticonsView.size.width, emoticonsView.size.height);
-                } else {
-                    emoticonsView.size = CGSizeMake(curXLoc + symbolScrollWidth + 60 , symbolScrollHeight + 5);
-                    [layerScrollView setContentSize:CGSizeMake(emoticonsView.size.width , symbolScrollHeight)];
+                }
+                else
+                {
+                    emoticonsView.size = CGSizeMake(curXLoc + symbolScrollWidth, symbolScrollHeight + 5);
+                    [layerScrollView setContentSize:CGSizeMake(emoticonsView.size.width , symbolScrollHeight + bannerHeight)];
                     
                     emoticonsView.frame = CGRectMake((layerScrollView.frame.origin.x+5), (layerScrollView.frame.origin.y-5), emoticonsView.frame.size.width, emoticonsView.frame.size.height);
                 }
-                
-            }
-            
-        
             });
     });
 }
@@ -1841,14 +2014,14 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     CGFloat curXLoc = 0;
     CGFloat curYLoc = 5;
     
-    if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+    if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR){
         curXLoc = 70;
         curYLoc = 10;
     }
     
 
     //--Add zoom button as first layer button----start
-    if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ) {
+    if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR) {
         [self zoomAddLayerButtonsIntoScrollView:@"addAllLayersIntoScrollView"];
     }
     //--Add zoom button as first layer button----end
@@ -1945,7 +2118,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             layerButton.frame = frame;
             curXLoc += (layerScrollWidth)+5;
             
-            if(IS_IPHONE_5 || IS_IPHONE_6_PLUS){
+            if(IS_IPHONE_5 || IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR){
                 if(curXLoc >= 300){
                     curXLoc = 10;
                     curYLoc = curYLoc + layerScrollHeight + 7;
@@ -1965,15 +2138,14 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     }//Loop
     
     if(IS_IPHONE_5 || IS_IPHONE_6){
-        [layerScrollView setContentSize:CGSizeMake(300, curYLoc + layerScrollHeight)];
+        [layerScrollView setContentSize:CGSizeMake(300, curYLoc + layerScrollHeight + bannerHeight)];
     }
-    else if( IS_IPHONE_6_PLUS ){
-        [layerScrollView setContentSize:CGSizeMake(300, curYLoc + layerScrollHeight)];
+    else if( IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR){
+        [layerScrollView setContentSize:CGSizeMake(300, curYLoc + layerScrollHeight + bannerHeight)];
     }
     else {
-        [layerScrollView setContentSize:CGSizeMake(([layers count]*(layerScrollWidth+5)), [layerScrollView bounds].size.height)];
+        [layerScrollView setContentSize:CGSizeMake(([layers count]*(layerScrollWidth+5)), [layerScrollView bounds].size.height + bannerHeight)];
     }
-    
     
     [self addScrollView:layerScrollView];
 }
@@ -2059,23 +2231,17 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     [self setDrawingRGB:selectedColor updateDic:YES];
                     //Handling Select Unselect
                     [self setSelectedItem:FLYER_LAYER_DRAWING inView:colorsView ofLayerAttribute:LAYER_ATTRIBUTE_COLOR];
-                    
                 }
                 else {
                 
                     [flyer setFlyerTextColor:currentLayer RGBColor:selectedColor];
                     
                     //Here we call Render Layer on View
-                    //[flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
                     [flyimgView configureLabelColor :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
                     
-                    
-                    
                     if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
-                        
                         //Handling Select Unselect
                         [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:colorsView ofLayerAttribute:LAYER_ATTRIBUTE_COLOR];
-                        
                     }
                     else {
                         //Handling Select Unselect
@@ -2084,7 +2250,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 }
                 break;
             }
-            
             i++;
         }//UIIMAGEVIEW CHECK
         
@@ -2111,7 +2276,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 NSString *flyerImg = [flyer getImageName:currentLayer];
                 NSString *type = [flyer getLayerType:currentLayer];
                 
-                if ( flyerImg == nil ) {
+                if ( flyerImg == nil ) { //Label[text]/clipart
                     
                     NSString *sizeStr = SIZE_ARRAY[i-1];
                     selectedSize = [sizeStr intValue];
@@ -2122,19 +2287,22 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     }
                     
                     selectedFont = [selectedFont fontWithSize:selectedSize];
-                    
+
+                    //Set size in dictionary
                     [flyer setFlyerTextSize:currentLayer Size:selectedFont];
                     
-                    //Here we call Render Layer on View
-                    [flyimgView configureLabelSize:currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
                     
+                    //Rendering related task  ------- starts ------
+                    //Here we call Render Layer on View
+                    NSMutableDictionary *layerDic =  [flyer getLayerFromMaster:currentLayer];
+                    //i call this function 2 time due to a reason.
+                    [flyimgView configureLabelSize:currentLayer labelDictionary:layerDic];
+                    [flyimgView configureLabelSize:currentLayer labelDictionary:layerDic];
+
                     if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
-                        
                         //Handling Select Unselect
                         [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:sizesView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
-                    }
-                    else {
-                        
+                    } else {
                         //Handling Select Unselect
                         [self setSelectedItem:FLYER_LAYER_TEXT inView:sizesView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
                     }
@@ -2149,7 +2317,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     //Handling Select Unselect
                     [self setSelectedItem:FLYER_LAYER_DRAWING inView:sizesView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
                 }
-                else {
+                else { //image,emoticon...etc
     
                     NSString *sizeStr = SIZE_ARRAY[i-1];
                     
@@ -2221,6 +2389,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 {
 	UIButton *view = sender;
     
+    if( view.tag < 0 )
+    return;
+    
     //Handling Select Unselect
     for(UIView *tempView  in [backgroundsView subviews])
     {
@@ -2244,17 +2415,16 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             if (lstTag != view.tag || view.tag == 0) {
                 
                 //Here we Set Flyer Type
-                [flyer setFlyerTypeImage];
+                [self setFlyerTypeImage];
                 
                 //Getting Image Path
-                NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"Template%d",view.tag]];
+                NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"Template%d",(int)view.tag]];
                 
-                //set template Image
+                //set template Image on view
                 [self.flyimgView setTemplate:imgPath];
                 
-                //Set Image Tag
-                [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",view.tag]];
-                
+                //Set Image Tag in dictionary
+                [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",(int)view.tag]];
             }
             
             // Add border to selected layer thumbnail
@@ -2335,7 +2505,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     // Getting info of selected layer
     UIView *layerView = [flyimgView.layers objectForKey:currentLayer];
     if ( layerView != nil ) {
-        //if (![currentLayer isEqualToString:@""]) {
         
         if ( ![previousLayerType isEqualToString:FLYER_LAYER_EMOTICON] ) {
             
@@ -2349,13 +2518,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
             // Now apply the previous transform again
             layerView.transform = tempTransform;
-            
-        }else {
-            
-            // Get size of current clipart and set it for new clipart
-            //NSDictionary* textLayer = [flyer getLayerFromMaster:currentLayer];
-            //fontType = [UIFont fontWithName:[clipartsArray[i] objectForKey:@"fontType"] size:[[textLayer objectForKey:@"fontsize"] floatValue]];
-            
         }
         
         // If no layer is selected then have the emoticon of default size
@@ -2380,7 +2542,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         [flyer setImagePath:currentLayer ImgPath:imgPath];
         
         //Set Image Tag
-        [flyer setImageTag:currentLayer Tag:[NSString stringWithFormat:@"%d",view.tag]];
+        [flyer setImageTag:currentLayer Tag:[NSString stringWithFormat:@"%ld",(long)view.tag]];
         
         [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
         
@@ -2416,8 +2578,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     // Getting info of selected layer
     UIView *layerView = [flyimgView.layers objectForKey:currentLayer];
     if ( layerView != nil ) {
-        //if (![currentLayer isEqualToString:@""]) {
-        
+
         if ( ![previousLayerType isEqualToString:FLYER_LAYER_CLIP_ART] ) {
             
             // Keep existing layer's transform
@@ -2435,20 +2596,15 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             // Now apply the previous transform again
             layerView.transform = tempTransform;
             
-            
         } else {
-            
             // Get size of current clipart and set it for new clipart
             NSDictionary* textLayer = [flyer getLayerFromMaster:currentLayer];
             fontType = [UIFont fontWithName:[clipartsArray[i] objectForKey:@"fontType"] size:[[textLayer objectForKey:@"fontsize"] floatValue]];
-            
         }
         
     } else {
-        
         //Set default icon (entypo) size
         fontType = [UIFont fontWithName:[clipartsArray[i] objectForKey:@"fontType"] size:(60 * 3.0)];
-        
     }
     
     NSUInteger index = [[clipartsView subviews] indexOfObject:view];
@@ -2470,12 +2626,15 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [flyer setFlyerTextFont:currentLayer FontName:[clipartsArray[index] objectForKey:@"fontType"]];
                 [flyer setFlyerTextSize:currentLayer Size:selectedFont];
                 
+                NSMutableDictionary *layDic = [flyer getLayerFromMaster:currentLayer];
+                
                 //Here we call Render Layer on View
-                [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
-                //[flyimgView configureClipartFont :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
-                //[flyimgView configureClipartDimensions :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
+                [flyimgView renderLayer:currentLayer layerDictionary:layDic];
                 
-                
+                if ([layDic objectForKey:@"type"] != nil && [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_CLIP_ART]){
+                    [flyimgView configureLabelSize:currentLayer labelDictionary:layDic];
+                    [flyimgView configureLabelSize:currentLayer labelDictionary:layDic];
+                }
                 
                 [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:clipartsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
             }
@@ -2502,10 +2661,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             [flyer setFlyerTextBorderColor:currentLayer Color:borderColor];
             
             //Here we call Render Layer on View
-            //[flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
-            //[flyimgView configureLabelColor :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
             [self.flyimgView configureLabelBorder:currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
-            
             
             //Handling Select Unselect
             [self setSelectedItem:FLYER_LAYER_TEXT inView:textBordersView ofLayerAttribute:LAYER_ATTRIBUTE_BORDER];
@@ -2519,25 +2675,21 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 /*
  * When any Flyer border is selected
  */
--(IBAction)selectBorder:(id)sender
-{
+-(IBAction)selectBorder:(id)sender {
     
     NSArray *bodersArray = flyerBordersView.subviews;
-    int count = (bodersArray.count);
+    int count = (int)(bodersArray.count);
     
     UIView *tempView;
-    
     int  i=1;
 	UIButton *view = sender;
     
-	for (int index = 0; index < count; index++ )
-    {
+	for (int index = 0; index < count; index++ ) {
         tempView  = [bodersArray objectAtIndex:index];
         
-        if ( (index % 3) == 0)
-        {
-            tempView  = [bodersArray objectAtIndex:index];
+        if ( (index % 3) == 0) {
             
+            tempView  = [bodersArray objectAtIndex:index];
             // Add border to Un-select layer thumbnail
             CALayer * l = [tempView layer];
             [l setBorderWidth:1];
@@ -2545,16 +2697,16 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             UIColor * c = [UIColor clearColor];
             [l setBorderColor:c.CGColor];
             i++;
-            
         }
         
-        if(tempView == view)
-        {
-            UIColor *borderColor = borderArray[i-2];
+        if(tempView == view) {
+            id borderColor = borderArray[i-2];
             currentLayer = @"Template";
+
+            //Save in dictionary
             [flyer setFlyerBorder:currentLayer RGBColor:borderColor];
             
-            //Here we call Render Layer on View
+            //Reflect on view / Here we call Render Layer on View
             [flyimgView setTemplateBorder:[flyer getLayerFromMaster:currentLayer]];
             
             // Add border to selected layer thumbnail
@@ -2565,12 +2717,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
             [l setBorderColor:c.CGColor];
         }
-        
 	}//LOOP
 }
 
 #pragma mark -  Progress Indicator
-
 -(void)showLoadingView:(NSString *)message{
     [self showLoadingIndicator];
 }
@@ -2579,8 +2729,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [self hideLoadingIndicator];
 }
 
--(CGSize)setSizeForCropView: (CGSize)imageSize
-{
+-(CGSize)setSizeForCropView: (CGSize)imageSize {
     if ( IS_IPHONE_5 ){
         if( imageSize.width > 320.0 ){
             imageSize.width = 320;
@@ -2595,7 +2744,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         if ( imageSize.height > 320.0 ){
             imageSize.height = 320.0;
         }
-    } else if ( IS_IPHONE_6_PLUS ){
+    } else if ( IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR){
         if( imageSize.width > 320.0 ){
             imageSize.width = 320.0;
         }
@@ -2625,14 +2774,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     nbuGallary.videoAllow = videoAllow;
     
     if ( imgPickerFlag == IMAGEPICKER_PHOTO ) {
-        //NSDictionary *dict = [flyer getLayerFromMaster:currentLayer];
-        
         UIImageView *currentImage = [self.flyimgView.layers objectForKey:currentLayer];
-        
         nbuGallary.desiredImageSize = [self setSizeForCropView:currentImage.frame.size];
-        
     } else {
         nbuGallary.desiredImageSize = [self setSizeForCropView:CGSizeMake( flyerlyWidth, flyerlyHeight )];
+        nbuGallary.desiredVideoSize = CGSizeMake( flyerlyWidth, flyerlyHeight );
     }
     
     __weak CreateFlyerController *weakSelf = self;
@@ -2666,13 +2812,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [weakSelf.flyimgView layerStoppedEditing:weakSelf.currentLayer];
                 
                 weakSelf.imgPickerFlag = IMAGEPICKER_TEMPLATE;
-            
-                //Render Flyer
-                //[self renderFlyer];
+
             }else{
                 
                 //Here we Set Flyer Type
-                [weakSelf.flyer setFlyerTypeImage];
+                [weakSelf setFlyerTypeImage];
                 
                 //Create Copy of Image
                 [weakSelf copyImageToTemplate:img];
@@ -2680,21 +2824,21 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 //set template Image
                 [weakSelf.flyimgView setTemplate:[NSString stringWithFormat:@"Template/template.%@",IMAGETYPE] ];
                 [Flurry logEvent:@"Custom Background"];
-                
             }
         });
     }];
     
     
     [nbuGallary setOnVideoFinished:^(NSURL *recvUrl, CGRect cropRect, CGFloat scale ) {
+        weakSelf.enableRenderFlyer = NO;
+        [weakSelf stopUiBusy];
+        [weakSelf.flyimgView addSubview:[weakSelf getUiBusyIndication:[weakSelf getCenterOfView:weakSelf.flyimgView w:20 h:20]] ];
+        [weakSelf enableNavigation:NO];
         
-        [uiBusy stopAnimating];
-        [uiBusy removeFromSuperview];
         
-        NSLog(@"%@",recvUrl);
         NSError *error = nil;
         
-        [weakSelf.flyer setFlyerTypeVideo];
+        [weakSelf setFlyerTypeVideo];
         
         // HERE WE MOVE SOURCE FILE INTO FLYER FOLDER
         NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
@@ -2711,19 +2855,20 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         // Make sure the video is scaled and cropped as required.
         [weakSelf modifyVideo:recvUrl destination:movieURL crop:cropRect scale:scale overlay:nil completion:^(NSInteger status, NSError *error) {
+            dispatch_async( dispatch_get_main_queue(), ^{
+                [weakSelf stopUiBusy];
+                [weakSelf enableNavigation:YES];
+            });
             switch ( status ) {
                 case AVAssetExportSessionStatusFailed:
                     NSLog (@"FAIL = %@", error );
                     break;
                     
                 case AVAssetExportSessionStatusCompleted:
-                    
                     // Main Thread
                     dispatch_async( dispatch_get_main_queue(), ^{
-                        
                         // Render the movie player.
-                        [weakSelf.flyimgView renderLayer:@"Template" layerDictionary:[self.flyer getLayerFromMaster:@"Template"]];
-                        
+                        [weakSelf.flyimgView renderLayer:@"Template" layerDictionary:[weakSelf.flyer getLayerFromMaster:@"Template"]];
                     });
                     break;
             }
@@ -2742,6 +2887,23 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [Flurry logEvent:@"Custom Background"];
 }
 
+-(UIActivityIndicatorView *)getUiBusyIndication:(CGRect)rect{
+    uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [uiBusy setFrame:rect];
+    [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
+    uiBusy.hidesWhenStopped = YES;
+    [uiBusy startAnimating];
+    return uiBusy;
+}
+-(void)stopUiBusy{
+    [uiBusy stopAnimating];
+    [uiBusy removeFromSuperview];
+}
+
+-(CGRect)getCenterOfView:(UIImageView *)tempImgView w:(int)w h:(int)h{
+    CGRect imageViewCenterRect = CGRectMake( (tempImgView.size.width/2-w/2), (tempImgView.size.height/2-h/2), w, h);
+    return imageViewCenterRect;
+}
 
 #pragma mark - Add Video
 /*
@@ -2749,22 +2911,15 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  */
 -(void)openCustomCamera:(BOOL)forVideo {
     
-    uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    [uiBusy setFrame:CGRectMake(280, 5, 20, 20)];
-    [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
-    uiBusy.hidesWhenStopped = YES;
-    [uiBusy startAnimating];
-    [self.view addSubview:uiBusy];
+    [self.view addSubview:[self getUiBusyIndication:CGRectMake(280, 5, 20, 20)] ];
     
     nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
     
     nbuCamera.videoAllow = forVideo;
     
-    if ( imgPickerFlag == IMAGEPICKER_PHOTO ) {
-        NSDictionary *dict = [flyer getLayerFromMaster:currentLayer];
-        
+    if ( imgPickerFlag == IMAGEPICKER_PHOTO )
+    {
         UIImageView *currentImage = [self.flyimgView.layers objectForKey:currentLayer];
-        
         CGRect imgRect = currentImage.frame;
         
         if ( IS_IPHONE_5 ){
@@ -2798,8 +2953,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     // Callback once image is selected.
     [nbuCamera setOnImageTaken:^(UIImage *img) {
         
-        [uiBusy stopAnimating];
-        [uiBusy removeFromSuperview];
+        [weakSelf stopUiBusy];
         
         // If there is no image, do no further processing.
         if ( img == nil ) {
@@ -2807,7 +2961,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }
         
         //Remove tag of selected background
-        [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
+        [weakSelf.flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
         
         dispatch_async( dispatch_get_main_queue(), ^{
             
@@ -2827,7 +2981,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             } else {
                 
                 //Here we Set Flyer Type
-                [weakSelf.flyer setFlyerTypeImage];
+                [weakSelf setFlyerTypeImage];
                 
                 //Create Copy of Image
                 [weakSelf copyImageToTemplate:img];
@@ -2843,18 +2997,18 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     // Call back for when video is selected.
     [nbuCamera setOnVideoFinished:^(NSURL *recvUrl, CGRect cropRect, CGFloat scale ) {
-        
+         weakSelf.enableRenderFlyer = NO;
+        [weakSelf stopUiBusy];
+        [weakSelf.flyimgView addSubview:[weakSelf getUiBusyIndication:[weakSelf getCenterOfView:weakSelf.flyimgView w:20 h:20]] ];
+        [weakSelf enableNavigation:NO];
         
         //Remove tag of selected background
-        [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
-        
-        [uiBusy stopAnimating];
-        [uiBusy removeFromSuperview];
+        [weakSelf.flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
         
         NSError *error = nil;
         
-        [weakSelf.view addSubview:flyimgView];
-        [weakSelf.flyer setFlyerTypeVideo];
+        [weakSelf.view addSubview:weakSelf.flyimgView];
+        [weakSelf setFlyerTypeVideo];
         
         // Move video in to the sour flyer.
         NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
@@ -2871,19 +3025,20 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         // Make sure the video is scaled and cropped as required.
         [weakSelf modifyVideo:recvUrl destination:movieURL crop:cropRect scale:scale overlay:nil completion:^(NSInteger status, NSError *error) {
+            dispatch_async( dispatch_get_main_queue(), ^{
+                [weakSelf stopUiBusy];
+                [weakSelf enableNavigation:YES];
+            });
             switch ( status ) {
                 case AVAssetExportSessionStatusFailed:
                     NSLog (@"FAIL = %@", error );
                     break;
                     
                 case AVAssetExportSessionStatusCompleted:
-                    
                     // Main Thread
                     dispatch_async( dispatch_get_main_queue(), ^{
-                        
                         // Render the movie player.
-                        [weakSelf.flyimgView renderLayer:@"Template" layerDictionary:[self.flyer getLayerFromMaster:@"Template"]];
-                        
+                        [weakSelf.flyimgView renderLayer:@"Template" layerDictionary:[weakSelf.flyer getLayerFromMaster:@"Template"]];
                     });
                     break;
             }
@@ -2893,15 +3048,14 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     [nbuCamera setOnVideoCancel:^() {
         dispatch_async( dispatch_get_main_queue(), ^{
-            [weakSelf.view addSubview:flyimgView];
+            [weakSelf.view addSubview:weakSelf.flyimgView];
             [uiBusy stopAnimating];
             [uiBusy removeFromSuperview];
         });
     }];
     
     if ( [[weakSelf.flyer getFlyerTypeVideo]isEqualToString:@"video"] ){
-        
-        //nbuCamera.isVideoFlyer = YES;
+
         if ( [[flyer getLayerType:currentLayer]isEqualToString:FLYER_LAYER_IMAGE] ) {
             nbuCamera.isVideoFlyer = YES;
         }
@@ -2916,41 +3070,41 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  * Here we Configure Player and Load File in Player
  */
 -(void)loadPlayerWithURL :(NSURL *)movieURL {
-    
+
+
+    BOOL playerIsNil = YES;
     if ( player != nil ) {
         [player.view removeFromSuperview];
+        playerIsNil = NO;
     }
     
-    NSLog(@"Video URL = %@",movieURL);
     player =[[MPMoviePlayerController alloc] initWithContentURL:movieURL];
+    
     [player.view setFrame:self.playerView.bounds];
     
-    
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(movieFinishedCallback:)
-     name:MPMoviePlayerPlaybackDidFinishNotification
-     object:player];
-    
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(movieStateChangeCallback:)
-     name:MPMoviePlayerPlaybackStateDidChangeNotification
-     object:player];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MPMoviePlayerThumbnailImageRequestDidFinishNotification::) name:MPMoviePlayerThumbnailImageRequestDidFinishNotification object:player];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(MPMoviePlayerLoadStateDidChange:)
-                                                 name:MPMoviePlayerLoadStateDidChangeNotification
-                                               object:nil];
+    if( playerIsNil ){
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self selector:@selector(movieFinishedCallback:)
+         name:MPMoviePlayerPlaybackDidFinishNotification
+         object:player];
+        
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self selector:@selector(movieStateChangeCallback:)
+         name:MPMoviePlayerPlaybackStateDidChangeNotification
+         object:player];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MPMoviePlayerThumbnailImageRequestDidFinishNotification::) name:MPMoviePlayerThumbnailImageRequestDidFinishNotification object:player];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(MPMoviePlayerLoadStateDidChange:)
+                                                     name:MPMoviePlayerLoadStateDidChangeNotification
+                                                   object:nil];
+    }
     
     self.flyimgView.image = nil;
     
     [self.playerView addSubview:player.view];
-    
-    [playerToolBar setFrame:CGRectMake(0, self.playerView.frame.size.height - 40, 306, 40)];
-    if ( IS_IPHONE_6 ) {
-        [playerToolBar setFrame:CGRectMake(0, self.playerView.frame.size.height - 40, 360, 40)];
-    }
+    [playerToolBar setFrame:CGRectMake(0, self.playerView.frame.size.height - 40, self.playerView.frame.size.width, 40)];
     [self.flyimgView addSubview:playerToolBar];
     
     player.accessibilityElementsHidden = YES;
@@ -2961,37 +3115,60 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     player.scalingMode = MPMovieScalingModeAspectFill;
     player.backgroundView.backgroundColor = [UIColor whiteColor];
     [player prepareToPlay];
+    
+    NSString *videoSoure = [[flyer getLayerFromMaster:@"Template"] objectForKey:@"videoSoure"];
+    if( videoSoure != nil && [videoSoure isEqualToString:@"giphy"] ){
+        [self videoPlay:YES repeat:YES];
+    }
 }
 
 
 -(IBAction)play:(id)sender {
+    BOOL playOrStop = ([playButton isSelected] == NO);
+    [self videoPlay:playOrStop repeat:NO changeAlph:NO];
+}
+
+-(void)videoPlay:(BOOL)playOrStop repeat:(BOOL)repeat{
+        [self videoPlay:playOrStop repeat:repeat changeAlph:YES];
+}
+-(void)videoPlay:(BOOL)playOrStop repeat:(BOOL)repeat  changeAlph:(BOOL)changeAlph{
     
-    if ([playButton isSelected] == YES) {
+    if ( playOrStop ) {
+        if(player != nil ){
+            [playButton setSelected:YES];
+            isPlaying = YES;
+            [player play];
+            player.repeatMode = repeat;
+            player.currentPlaybackTime = playerSlider.value;
+            [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTime:) userInfo:nil repeats:NO];
+            
+            if( changeAlph ){
+                playerToolBar.alpha = 1;
+                [playerToolBar setHidden:NO];
+            }
+        }
+        
+    } else{
+        if(player != nil ){
+            isPlaying = NO;
+            [player pause];
+            player.repeatMode = repeat;            
+        }
         [playButton setSelected:NO];
-        isPlaying = NO;
-        [player pause];
         
-    }else {
-        [playButton setSelected:YES];
-        isPlaying = YES;
-        player.currentPlaybackTime = playerSlider.value;
-        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTime:) userInfo:nil repeats:NO];
-        [player play];
-        
+        if( changeAlph ){
+            playerToolBar.alpha = 0;
+           [playerToolBar setHidden:YES];
+        }
     }
 }
 
 -(IBAction)slide:(id)sender {
-    
-    NSLog(@"%f",playerSlider.value);
     player.currentPlaybackTime = playerSlider.value;
     durationChange.text =[self stringFromTimeInterval:playerSlider.value];
-    
 }
 
 - (void)updateTime:(NSTimer *)timer {
-    
-    NSLog(@"%f",player.currentPlaybackTime);
     playerSlider.value = player.currentPlaybackTime;
     durationChange.text =[self stringFromTimeInterval:player.currentPlaybackTime];
     
@@ -3000,20 +3177,23 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     }
 }
 
-
 #pragma mark -  Movie Player Delegate
-
-
 /*
  * Here we Set Slider
  */
-- (void)MPMoviePlayerLoadStateDidChange:(NSNotification *)notification
-{
-    if ((player.loadState & MPMovieLoadStatePlaythroughOK) == MPMovieLoadStatePlaythroughOK)
-    {
+- (void)MPMoviePlayerLoadStateDidChange:(NSNotification *)notification {
+
+    if ((player.loadState & MPMovieLoadStatePlaythroughOK) == MPMovieLoadStatePlaythroughOK) {
         
-        videolastImage = [player thumbnailImageAtTime:player.duration /2
-                                           timeOption:MPMovieTimeOptionNearestKeyFrame];
+        //videolastImage = [player thumbnailImageAtTime:player.duration /2 timeOption:MPMovieTimeOptionNearestKeyFrame];
+        
+        AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:[NSURL URLWithString:[flyer getVideoAssetURL]] options:nil];
+        AVAssetImageGenerator *gen =  [AVAssetImageGenerator assetImageGeneratorWithAsset:asset];
+        gen.appliesPreferredTrackTransform = YES;
+        CMTime time = CMTimeMakeWithSeconds(player.duration/2, 2);
+        NSError *error = nil;
+        CGImageRef image = [gen copyCGImageAtTime:time actualTime:NULL error:&error];
+        videolastImage = [[UIImage alloc] initWithCGImage:image];
         
         playerSlider.maximumValue = player.duration;
         NSTimeInterval duration = player.duration;
@@ -3024,7 +3204,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         videoDuration = duration - minutes * 60;
         playerSlider.value = 0.0;
     } else {
-        NSLog(@"Unknown load state: %u", player.loadState);
+        NSLog(@"Unknown load state: %lu", (unsigned long)player.loadState);
     }
 }
 
@@ -3039,8 +3219,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  * Here we Get Player Button Press Info
  */
 - (void) movieStateChangeCallback:(NSNotification*) aNotification {
-    
-    
     //User Press Pause or Stop we Disable Player Access and Enable Flyer for Others Layers
     if (player.playbackState == MPMoviePlaybackStatePaused || player.playbackState == MPMoviePlaybackStateStopped ) {
         [self performSelectorOnMainThread:@selector(toggleImageViewInteraction) withObject:nil waitUntilDone:NO ];
@@ -3048,17 +3226,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 }
 
 - (void) movieFinishedCallback:(NSNotification*) aNotification {
-    
     playerSlider.value = 0.0;
     isPlaying = NO;
     [playButton setSelected:NO];
     player.currentPlaybackTime = playerSlider.value;
-    
 }
 
-
 #pragma mark - UIAlertView delegate
-
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     if(alertView == deleteAlert && buttonIndex == 1) {
@@ -3073,24 +3247,23 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         [Flurry logEvent:@"Layer Deleted"];
         
 	}else if(alertView == spaceUnavailableAlert && buttonIndex == 0) {
-        
         [self goBack];
-        
     }
     else if(alertView == signInAlert && buttonIndex == 0) {
-        
         // Enable  Buttons
+        backButton.enabled = YES;
+        helpButton.enabled = YES;
+        
         rightUndoBarButton.enabled = YES;
         shareButton.enabled = YES;
-        helpButton.enabled = YES;
         
         [self hideLoadingIndicator];
         
-    }else if (alertView == waterMarkPurchasingAlert && buttonIndex == 1) {
+    }else if (alertView == waterMarkPurchasingAlert && buttonIndex == 1)
+    {
         [self openInAppPanel];
     }else if(alertView == signInAlert && buttonIndex == 1) {
-        
-        NSLog(@"Sign In was selected.");
+
         signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
         
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
@@ -3101,8 +3274,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         UserPurchases *userPurchases_ = [UserPurchases getInstance];
         userPurchases_.delegate = self;
         
-        //__weak CreateFlyerController *weakCreateFlyerController = signInController;
-        
         signInController.signInCompletion = ^void(void) {
             NSLog(@"Sign In via Share");
             
@@ -3111,26 +3282,21 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             [userPurchases_ setUserPurcahsesFromParse];
             
             [weakSelf openPanel];
-            
             [weakSelf hideLoadingIndicator];
         };
-        
         [self.navigationController pushViewController:signInController animated:YES];
     }
 }
 
-
 #pragma mark - Custom Methods
-
 /*
  * Load Help Screen
  */
-
--(void)loadHelpController{
-    
-    [UserVoice presentUserVoiceInterfaceForParentViewController:self];
+-(void)loadHelpController
+{
+   // [UserVoice presentUserVoiceInterfaceForParentViewController:self];
+    [UserReport tryInvite];
 }
-
 
 /*
  * Here we Create Text Box for Getting Text And
@@ -3156,6 +3322,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItem:backBarButton];
     //--- Set navigation ----------- } --
+    
+    // disable user interaction of Home and Help button when editing
+    backButton.enabled = NO;
+    helpButton.enabled = NO;
     
     //Add Context Library
     [self addBottomTabs:libText];
@@ -3215,8 +3385,14 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 -(void)addButtonsInRightNavigation:(NSString *)callFrom {
     
-    NSMutableArray  *barItems   =   [NSMutableArray arrayWithObjects:nil];
+    NSMutableArray  *barItems;
+    
+    // enable user interaction of Home and Help button in every condition
+    backButton.enabled = YES;
+    helpButton.enabled = YES;
+    
     if( [callFrom isEqualToString:@"callWrite"] ){
+        
         UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
         [nextButton addTarget:self action:@selector(nextForFont) forControlEvents:UIControlEventTouchUpInside];
         [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
@@ -3225,6 +3401,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         barItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
     }
     if( [callFrom isEqualToString:@"viewDidLoad"] ){
+        
         //Right ShareButton
         shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
         shareButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
@@ -3348,7 +3525,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     NSMutableDictionary *textDetailDictionary = [flyer getLayerFromMaster:currentLayer];
     
-    if( isNewText == YES ) {
+    if( isNewText == YES || textDetailDictionary[@"tx"] == nil ) {
         float newX = 0.0, newY = 0.0;
         CGSize txtSize = [lastTextView.text sizeWithAttributes: @{NSFontAttributeName:lastTextView.font}];
         
@@ -3358,8 +3535,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             textDetailDictionary[@"x"]  =    [NSString stringWithFormat:@"%f",newX];
             textDetailDictionary[@"y"]  =    [NSString stringWithFormat:@"%f",newY];
         }
-//        NSLog(@"txtSize:(w:%f,h:%f), lastTxtViewSize.frame.origin(x:%f,y:%f,w:%f,h:%f)",txtSize.width,txtSize.height, lastTextView.frame.origin.x,lastTextView.frame.origin.y,lastTextView.size.width,lastTextView.size.height);
-        
     }
 
 
@@ -3369,11 +3544,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
         [flyer.masterLayers setValue:textDetailDictionary forKey:currentLayer];
     //Update Dictionaries-----------------}---
-
-    
-    
-    NSLog(@"textDetailDictionary2 after update:%@ ",textDetailDictionary);
-    
     
     //Here we call Render Layer on View
     [flyimgView renderLayer:currentLayer layerDictionary:textDetailDictionary];
@@ -3382,17 +3552,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [self.flyimgView layerIsBeingEdited:currentLayer];
     
 
-//    [self loadXibsAfterInAppCheck:NO againAddInSubViews:YES];
-
-    
-    
     // SET BOTTOM BAR
     [self setStyleTabAction:fontTabButton];
     
     if( isNewText == YES ) {
          isNewText = NO;
     }
-
     
 	[lastTextView resignFirstResponder];
 	[lastTextView removeFromSuperview];
@@ -3412,6 +3577,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 }
 
 -(void)deSelectPreviousLayer {
+    
     // Remove Border if Any Layer Selected check the entire layers in a flyer
     for ( NSString* key in self.flyimgView.layers ) {
         [self.flyimgView layerStoppedEditing:key];
@@ -3455,18 +3621,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 }
 
 -(void)deleteLayer:(UIButton *)crossButton{
-    
-    
     deleteAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"Delete this layer?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK" ,nil];
     [deleteAlert show];
 }
 
 -(void) callDeleteLayer{
-    
     deleteAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"Delete this layer?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK" ,nil];
     [deleteAlert show];
-    
-    
 }
 
 
@@ -3497,17 +3658,21 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     // Remove previously added scrollviews.
     [self removeAllScrolviews];
     
-    [self testingFn];
-    
     //Add ScrollViews
     [self.contextView addSubview:obj];
+    
+    if( [userPurchases canShowAd] ){
+        if ( sharePanel.hidden ){
+            bannerAdsView.alpha = bannerAdsView.alpha ? 1.0 : 0.0;
+            [self.view addSubview:self.bannerAdsView];
+        }
+    }
 }
 
 /*
  * For Adding Bottom Button On runtime
  */
 -(void)addBottomTabs:(id)obj{
-    
     // Remove previously added scrollviews.
     [self removeAllScrolviews];
     
@@ -3528,7 +3693,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         if ([child isKindOfClass:[LayerTileButton class]] || [child isKindOfClass:[UIButton class]] || [child isKindOfClass:[UILabel class]] || [child isKindOfClass:[UIView class]] ) {
             [child removeFromSuperview];
         }
-        
     }
     
     // Hide the labels.
@@ -3540,21 +3704,19 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 #pragma mark - Screenshot funcs
 //Here we Getting Snap Shot of Flyer Image View Context
 -(UIImage *)getFlyerSnapShot {
-    
-    
-    dispatch_queue_t concurrentQueue =
-    dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    
-    // Declare your local data outside the block.
-    // `__block` specifies that the variable can be modified from within the block.
-    __block UIImage *uiImage = nil;
-    
-    dispatch_sync(concurrentQueue, ^{
-        // Do something with `localData`...
-        uiImage = [self getFlyerSnapshotWithSize:self.flyimgView.size];
-    });
+    UIImage *uiImage = [self getFlyerSnapshotWithSize:self.flyimgView.size];
+    CGSize size = [self.flyer getSizeOfFlyer];
+    uiImage = [self updateImageSize:uiImage scaledToSize:size];//CGSizeMake(uiImage.size.width*2, uiImage.size.height*2)];
     
     return uiImage;
+}
+
+- (UIImage *)updateImageSize:(UIImage *)image scaledToSize:(CGSize)newSize {
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 //Here we Getting Snap Shot of Flyer Image View Context for desired size
@@ -3608,8 +3770,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     }
     [self bringNotEditableLayersToFront:@"call from renderFlyer"];
 }
-
-
 
 /**
  * Rotate frames to ensure they are in their correct orientation. This method returns and instraction that we
@@ -3690,6 +3850,14 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
               scale:(CGFloat)scale overlay:(UIImage *)image
          completion:(void (^)(NSInteger, NSError *))callback {
     
+    BOOL isVideo = false;
+    
+    // If it is video
+    if ( !([self.flyer getLayerFromMaster:FLYER_LAYER_GIPHY_LOGO] != nil)) {
+        isVideo = true;
+    }
+    
+    
     // Get a pointer to the asset
     AVURLAsset* firstAsset = [AVURLAsset URLAssetWithURL:src options:nil];
     
@@ -3700,7 +3868,10 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     AVMutableCompositionTrack *videoTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
     
     // Audio track
-    AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+    AVMutableCompositionTrack *audioTrack;
+    if ( isVideo ) {
+        audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+    }
     
     // Image video is always 30 seconds. So we use that unless the background video is smaller.
     CMTime inTime = CMTimeMake( MAX_VIDEO_LENGTH * VIDEOFRAME, VIDEOFRAME );
@@ -3717,14 +3888,23 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         transform = track.preferredTransform;
         videoTrack.preferredTransform = transform;
     }
-    
-    // Add the audio track.
-    NSArray *audios = [firstAsset tracksWithMediaType:AVMediaTypeAudio];
-    if ( audios.count > 0 ) {
-        [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:[audios objectAtIndex:0] atTime:kCMTimeZero error:nil];
+    if(isVideo){
+        // Add the audio track.
+        NSArray *audios = [firstAsset tracksWithMediaType:AVMediaTypeAudio];
+        if ( audios.count > 0 ) {
+            [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:[audios objectAtIndex:0] atTime:kCMTimeZero error:nil];
+        }
     }
     
     NSLog(@"Natural size: %.2f x %.2f", videoTrack.naturalSize.width, videoTrack.naturalSize.height);
+    
+    // if we have negative dimensions
+    if(crop.size.width < 0){
+        crop.size.width = -1 * crop.size.width;
+    }
+    if(crop.size.height < 0){
+        crop.size.height = -1 * crop.size.height;
+    }
     
     // Set the mix composition size.
     mixComposition.naturalSize = crop.size;
@@ -3732,6 +3912,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     // Set up the composition parameters.
     AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
     videoComposition.frameDuration = CMTimeMake(1, VIDEOFRAME );
+    
     videoComposition.renderSize = crop.size;
     videoComposition.renderScale = 1.0;
     
@@ -3742,16 +3923,19 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     // Layer instructions
     AVMutableVideoCompositionLayerInstruction *passThroughLayer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:videoTrack];
     
-    // Set the transform to maintain orientation
-    if ( scale != 1.0 ) {
-        CGAffineTransform scaleTransform = CGAffineTransformMakeScale( scale, scale);
-        CGAffineTransform translateTransform = CGAffineTransformTranslate( CGAffineTransformIdentity,
-                                                                          -crop.origin.x,
-                                                                          -crop.origin.y);
-        transform = CGAffineTransformConcat( transform, scaleTransform );
-        transform = CGAffineTransformConcat( transform, translateTransform);
+    if(isVideo){
+        // Set the transform to maintain orientation
+        if ( scale != 1.0 ) {
+            CGAffineTransform scaleTransform = CGAffineTransformMakeScale( scale, scale);
+            CGAffineTransform translateTransform = CGAffineTransformTranslate( CGAffineTransformIdentity,
+                                                                              -crop.origin.x,
+                                                                              -crop.origin.y);
+            transform = CGAffineTransformConcat( transform, scaleTransform );
+            transform = CGAffineTransformConcat( transform, translateTransform);
+        }
     }
     
+
     [passThroughLayer setTransform:transform atTime:kCMTimeZero];
     
     passThroughInstruction.layerInstructions = @[ passThroughLayer ];
@@ -3780,7 +3964,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         // Setup the animation tool
         videoComposition.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
     }
-    
+
     // Now export the movie
     AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
     exportSession.videoComposition = videoComposition;
@@ -3793,18 +3977,13 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         callback( exportSession.status, exportSession.error );
     }];
 }
--(void)hidePlayerControlls:(BOOL)showHide {
-    // Make sure we hide the play bar.
-    [playerToolBar setHidden:showHide];
-
-}
 
 /*
  * Here we Merge Video
  */
 -(void)videoMergeProcess {
     
-    [self hidePlayerControlls:YES];
+    [self videoPlay:NO repeat:NO];
     
     // CREATING PATH FOR FLYER OVERLAY VIDEO
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
@@ -3826,7 +4005,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
  */
 -(void)mergeVideoWithOverlay:(NSURL *)firstURL image:(UIImage *)image {
     
-    // Export path
+    // Sharing Video( merged video ) path
     NSString *destination = [self.flyer getSharingVideoPath];
     
     // Delete Old File if they exist
@@ -3837,11 +4016,16 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     // Export the URL
     NSURL *exportURL = [NSURL fileURLWithPath:destination];
+    CGSize size = [self.flyer getSizeOfFlyer];
+    int vWidth = size.width;
+    int vHeight = size.height;
     
-    [self modifyVideo:firstURL destination:exportURL crop:CGRectMake(0, 0, flyerlyWidth, flyerlyHeight ) scale:1 overlay:image completion:^(NSInteger status, NSError *error) {
+    self.flyer.saveInGallaryRequired = -1;//video merging starts now
+    [self modifyVideo:firstURL destination:exportURL crop:CGRectMake(0, 0, vWidth, vHeight ) scale:1 overlay:image completion:^(NSInteger status, NSError *error) {
         switch ( status ) {
             case AVAssetExportSessionStatusFailed:{
                 NSLog (@"FAIL = %@", error );
+                [self tasksAfterVideoMerging:0];
                 break;
             }
             case AVAssetExportSessionStatusCompleted: {
@@ -3857,29 +4041,30 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                     
                     // Main Thread
                     dispatch_async( dispatch_get_main_queue(), ^{
-                        
                         //Here we Open Share Panel for Share Flyer
                         [self openPanel];
-                        
                     });
                 }else {
-                    
-                    // Main Thread
-                    dispatch_async( dispatch_get_main_queue(), ^{
-                        
-                        //Here we Open Share Panel for Share Flyer
-                        self.onFlyerBack(@"");
-                        
-                    });
+                    [self tasksAfterVideoMerging:1];
                 }
-                
-                // Here we Add Video In Flyerly Album
-                [self.flyer addToGallery:nil];
             }
         };
+        
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        [appDelegate endAppBgTask];
     }];
 }
 
+-(void)tasksAfterVideoMerging:(int)sigr{
+    // Main Thread
+    dispatch_async( dispatch_get_main_queue(), ^{
+        if( self.sharingPannelIsHidden == YES ){
+            self.onFlyerBack(@"");
+        } else {
+            self.flyer.saveInGallaryRequired = sigr;
+        }
+    });
+}
 
 #pragma mark - Flyer Modified
 
@@ -3896,8 +4081,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     [self deSelectPreviousLayer];
     
     [self.flyimgView layerIsBeingEdited:currentLayer];
-    
-
     
     if ( [type isEqualToString:FLYER_LAYER_TEXT] ) {
         
@@ -3952,7 +4135,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         [self editCurrentLayer];
     }
-    
     [self bringThisLayerToFront:editButton.uid];
 }
 /*
@@ -3967,7 +4149,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         //Delete From View
         [flyimgView deleteLayer:layerButton.uid];
         
-        NSLog(@"Delete Layer Tag: %d", layerButton.tag);
+        NSLog(@"Delete Layer Tag: %ld", (long)layerButton.tag);
         
         //Set Main View On Screen
         [self callAddMoreLayers];
@@ -3979,7 +4161,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [playerToolBar setHidden:YES];
         
         //Here we Set Flyer Type
-        [flyer setFlyerTypeImage];
+        [self setFlyerTypeImage];
         
         // Get path of current flyer background and remove it
         NSString *currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
@@ -4001,7 +4183,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         if (error) {
             NSLog(@"%@", error.debugDescription);
         }
-        
         //Remove tag of selected background
         [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
         
@@ -4010,7 +4191,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         // Render flyer
         [self renderFlyer];
-        
     }
 }
 
@@ -4023,13 +4203,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
  *  Transformation changed for layer, let the model know.
  */
 - (void)layerTransformedforKey:(NSString *)uid :(CGAffineTransform *) transform {
-   
     //Update Dictionary
     [flyer setImageTransform:uid :transform];
-    
-    //Update Controller
-    //[self.flyimgView renderLayer:uid layerDictionary:[flyer getLayerFromMaster:uid]];
-
 }
 
 /**
@@ -4038,25 +4213,10 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 - (void)frameChangedForLayer:(NSString *)uid frame:(CGRect)frame {
     
     if ([widthTabButton isSelected]) {
-        
         self.flyimgView.widthIsSelected = YES;
         
-        /*CGRect lastFrame = [flyer getImageFrame:uid];
-        
-        lastFrame.origin.x = frame.origin.x;
-        lastFrame.size.width = frame.size.width;
-        frame = lastFrame;*/
-        
     } else if ([heightTabButton isSelected]) {
-        
         self.flyimgView.heightIsSelected = YES;
-
-        /*CGRect lastFrame = [flyer getImageFrame:uid];
-        
-        lastFrame.origin.y = frame.origin.y;
-        lastFrame.size.height = frame.size.height;
-        frame = lastFrame;*/
-        
     }
     
     //Update Dictionary
@@ -4079,30 +4239,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
  * Rotation Angle changed for layer, let the model know.
  */
 - (void)rotationAngleChangedForLayer:(NSString *)uid rotationAngle:(CGFloat)rotationAngle {
-    
-    /*if ([widthTabButton isSelected]) {
-     
-     CGRect lastFrame = [flyer getImageFrame:uid];
-     
-     lastFrame.origin.x = frame.origin.x;
-     lastFrame.size.width = frame.size.width;
-     frame = lastFrame;
-     
-     } else if ([heightTabButton isSelected]) {
-     
-     CGRect lastFrame = [flyer getImageFrame:uid];
-     
-     lastFrame.origin.y = frame.origin.y;
-     lastFrame.size.height = frame.size.height;
-     frame = lastFrame;
-     
-     }*/
-    
     //Update Dictionary
     [flyer addImageRotationAngle:uid :rotationAngle];
-    
-    //Update Controller
-    //[self.flyimgView renderLayer:uid layerDictionary:[flyer getLayerFromMaster:uid]];
 }
 
 
@@ -4111,8 +4249,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
  * Frame changed for layer, let the model know.
  */
 - (void)sendLayerToEditMode:(NSString *)uid  {
-    // Set the given layer as current. If it is not
-    // already set.
+    // Set the given layer as current. If it is not already set.
     if ( ![self.currentLayer isEqualToString:uid] ) {
         
         // Make sure we hide the keyboard.
@@ -4197,12 +4334,11 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
  */
 -(void)bringNotEditableLayersToFront:(NSString *)callFrom{
 
-    NSLog(@"bringNotEditableLayersToFront callFrom = %@",callFrom);
     
     NSArray *flyerPiecesKeys = [flyer allKeys];
     
     // we need to loop layers in revers order because first non editable layer should be on top
-    int i = flyerPiecesKeys.count;
+    int i = (int)flyerPiecesKeys.count;
     while ( i > 0) {
         i--;
         //Getting Layers Detail from Master Dictionary
@@ -4245,12 +4381,13 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
         self.flyer = [[Flyer alloc]initWithPath:currentPath setDirectory:YES];
 
-
-        
         // Remove all sub views
         [self.flyimgView removeAllLayers];
         
         self.flyimgView.addUiImgForDrawingLayer = YES; //AFTER removing all layer set it yes for drawing layers
+        
+        [self setWaterMarkLayerPosition];
+        
         //Here we Render Flyer
         [self renderFlyer];
         self.flyimgView.addUiImgForDrawingLayer = NO; // After rendering all layers set it no
@@ -4276,12 +4413,10 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     NSArray *fileList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:historyDestinationpath error:nil];
     
-    if (fileList.count >= 1) {
-        
+    if ( fileList.count >= 2 ) {
         [rightUndoBarButton setEnabled:YES];
         
     } else {
-        
         [rightUndoBarButton setEnabled:NO];
     }
     
@@ -4289,8 +4424,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 
 //When user pressed done button
 -(void)callAddMoreLayers {
-    
-    //NSString *type = [flyer getLayerType:currentLayer];
+
     [self deleteEmptyTextCliptartEmoticonDrawingLayer];
     
     //Empty Layer Delete
@@ -4305,24 +4439,19 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     NSString *title = [flyer getFlyerTitle];
     
     if ( [title isEqualToString:@""] ) {
-        label.text = @"Flyerly";
+        label.text = APP_NAME;
     } else {
         label.text = title;
     }
     self.navigationItem.titleView = label;
     
-    
     [self addButtonsInRightNavigation:@"callAddMoreLayers"];
-    
     
     [self addBottomTabs:libFlyer];
     
     //Set here Un-Selected State of HIGHT & WIDTH Buttons IF selected
     [widthTabButton setSelected:NO];
     [heightTabButton setSelected:NO];
-
-    
-    
     
     //Save OnBack
     //Here we remove Borders from layer if user touch any layer
@@ -4349,87 +4478,82 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     [self bringNotEditableLayersToFront:@"call from callAddMoreLayers"];
 }
 
-
-
 #pragma mark -  Share Flyer
-
-
 /*
  * HERE WE SHARE FLYER TO SOCIAL NETWORKS
  */
 -(void)share {
     
+    sharingPannelIsHidden = NO;
+    
     // Disable  Buttons
     rightUndoBarButton.enabled = NO;
     shareButton.enabled = NO;
+    
+    backButton.enabled = NO;
     helpButton.enabled = NO;
     
     [self showLoadingIndicator];
+
+    //Here we remove Borders from layer if user touch any layer
+    [self.flyimgView layerStoppedEditing:currentLayer];
     
-    //Here we Merge Video for Sharing
-    if ([flyer isVideoFlyer]) {
+    if( [flyer isSaveRequired] == YES ) {
+        saveToGallaryReqBeforeSharing = YES;
         
-        //Here Compare Current Flyer with history Flyer
-        if ([self.flyer isVideoMergeProcessRequired]) {
-            
-            userPurchases = [UserPurchases getInstance];
-            userPurchases.delegate = self;
-            
-            //if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ) {
-                if ( [self.interstitialAdd isReady]  && ![self.interstitialAdd hasBeenUsed] ) {
-                    [self.interstitialAdd presentFromRootViewController:self];
-                }
-            //}
+        // Save flyer to disk //
+        [flyer saveFlyer]; //
         
-            
+        // Make a history entry if needed.
+        [flyer addToHistory];
+        
+        //here we keep the merging vido path
+        [flyer isVideoMergeProcessRequired];
+        
+        //Here we Merge Video for Sharing
+        if ([flyer isVideoFlyer]) {
+
+            // Set all share options status to 0, i.e. this flyer never shared
+            [flyer resetAllButtonStatus];
+            // Set saveButton status to 0, i.e. this flyer not saved
+            [flyer setSaveButtonStatus:0];
+
             //Background Thread
-            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-                
-                //panelWillOpen = YES;
-                
+//            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+            dispatch_async( dispatch_get_main_queue(), ^{
                 //Here we Merge All Layers in Video File
                 [self videoMergeProcess];
-                
             });
-        }else {
-            
-            //Here we Open Share Panel for Share Flyer
-            [self openPanel];
-        }
-    }else {
-        
-        //Background Thread
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            
-            if ( [[PFUser currentUser] sessionToken] ) {
-                //UserPurchases *userPurchases_ = [UserPurchases getInstance];
-                
-                //if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ) {
-                    if ( [self.interstitialAdd isReady]  && ![self.interstitialAdd hasBeenUsed] ) {
-                        
-                        dispatch_async( dispatch_get_main_queue(), ^{
-                            [self.interstitialAdd presentFromRootViewController:self];
-                        });
-                        return;
-                    }
-                
-                //}
-            }
-            
-            //Here we remove Borders from layer if user touch any layer
-            [self.flyimgView layerStoppedEditing:currentLayer];
-            
+
+        } else{
             //Here we take Snap shot of Flyer and
             //Flyer Add to Gallery if user allow to Access there photos
             [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
-            
-            dispatch_async( dispatch_get_main_queue(), ^{
-                //Here we Open Share Panel for Share Flyer
-                [self openPanel];
-            });
-            
-        });
+            self.flyer.saveInGallaryRequired = 1;
+        }
     }
+    
+    //Background Thread
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        
+        /* // Remove full screen add when user going to share
+         if ( [[PFUser currentUser] sessionToken] ) {
+            if ( [self.interstitialAdd isReady]  && ![self.interstitialAdd hasBeenUsed] ) {
+                
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    [self.interstitialAdd presentFromRootViewController:self];
+                });
+                return;
+            }
+        }
+         */
+        
+        //If pennel didn't open [ and return-ed ] then open the sharing pannel
+        dispatch_async( dispatch_get_main_queue(), ^{
+            //Here we Open Share Panel for Share Flyer
+            [self openPanel];
+        });
+    });
 }
 
 /*
@@ -4437,7 +4561,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
  */
 -(void)openInAppPanel {
     
-    if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
+    if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR){
         inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
     }else {
         inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
@@ -4445,7 +4569,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     [self presentViewController:inappviewcontroller animated:YES completion:nil];
     [inappviewcontroller requestProduct];
     inappviewcontroller.buttondelegate = self;
-    
 }
 
 
@@ -4461,15 +4584,15 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         if ([flyer isVideoFlyer]) {
             if ( IS_IPHONE_5 || IS_IPHONE_4) {
             shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareVideoViewController" bundle:nil];
-            }else if ( IS_IPHONE_6 || IS_IPHONE_6_PLUS ) {
+            }else if ( IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR) {
                 shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareVideoViewController-iPhone6" bundle:nil];
             }
             
         } else {
-            
+            saveToGallaryReqBeforeSharing = NO;
             if ( IS_IPHONE_5 || IS_IPHONE_4) {
                 shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
-            }else if ( IS_IPHONE_6  || IS_IPHONE_6_PLUS ) {
+            }else if ( IS_IPHONE_6  || IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR) {
                 shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController-iPhone6" bundle:nil];
             }
             
@@ -4479,7 +4602,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
         if ( IS_IPHONE_6) {
             sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 340,350 )];
-        }else if ( IS_IPHONE_6_PLUS){
+        }else if ( IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR){
             sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 400,600 )];
         }
         
@@ -4490,17 +4613,18 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         sharePanel = shareviewcontroller.view;
         NSString *shareImagePath = [flyer getFlyerImage];
-        UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
+        UIImage *shareImage =  [self getFlyerSnapShot];
         
         //Here we Pass Param to Share Screen Which use for Sharing
-        [shareviewcontroller.titleView becomeFirstResponder];
         shareviewcontroller.selectedFlyerImage = shareImage;
         shareviewcontroller.flyer = self.flyer;
         shareviewcontroller.imageFileName = shareImagePath;
         shareviewcontroller.rightUndoBarButton = rightUndoBarButton;
         shareviewcontroller.shareButton = shareButton;
         shareviewcontroller.helpButton = helpButton;
-        if( [shareviewcontroller.titleView.text isEqualToString:@"Flyer"] ) {
+        shareviewcontroller.backButton = backButton;
+        shareviewcontroller.saveToGallaryReqBeforeSharing = saveToGallaryReqBeforeSharing;
+        if( [shareviewcontroller.titleView.text isEqualToString:@"Untitled"] ) {
             shareviewcontroller.titleView.text = [flyer getFlyerTitle];
         }
         
@@ -4532,26 +4656,16 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         PFUser *user = [PFUser currentUser];
         if (user[@"appStarRate"])
-            [self setStarsofShareScreen:user[@"appStarRate"]];
+            [shareviewcontroller setStarsofShareScreen:user[@"appStarRate"]];
         
         [user saveInBackground];
-        
         [shareviewcontroller setSocialStatus];
-        
-        //Here we Get youtube Link
-        NSString *isAnyVideoUploadOnYoutube = [self.flyer getYoutubeLink];
-        
-        // Any Uploaded Video Link Available of Youtube
-        // then we Enable Other Sharing Options
-        if (![isAnyVideoUploadOnYoutube isEqualToString:@""]) {
-            [shareviewcontroller enableAllShareOptions];
-        }
         
         //Create Animation Here
         [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,475 )];
         if ( IS_IPHONE_6) {
             [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 375,350 )];
-        }else if ( IS_IPHONE_6_PLUS){
+        }else if ( IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR){
             [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 375,550 )];
         }
         [UIView beginAnimations:nil context:NULL];
@@ -4559,7 +4673,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height - 450, 320,505 )];
         if ( IS_IPHONE_6) {
             [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height - 450, 375,450 )];
-        }else if ( IS_IPHONE_6_PLUS){
+        }else if ( IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR){
             [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height-550, 420,550 )];
         }
         [UIView commitAnimations];
@@ -4574,42 +4688,10 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                                        cancelButtonTitle:@"Later"
                                        otherButtonTitles:@"Sign In",nil];
         
-        
         if ( !self.interstitialAdd.hasBeenUsed )
             [signInAlert show];
     }
     
-}
-/*
- *Here we Set Stars
- */
--(void)setStarsofShareScreen :(NSString *)rate {
-    
-    if ([rate isEqualToString:@"1"]) {
-        [shareviewcontroller.star1 setSelected:YES];
-        
-    }else if ([rate isEqualToString:@"2"]) {
-        [shareviewcontroller.star1 setSelected:YES];
-        [shareviewcontroller.star2 setSelected:YES];
-        
-    }else if ([rate isEqualToString:@"3"]) {
-        [shareviewcontroller.star1 setSelected:YES];
-        [shareviewcontroller.star2 setSelected:YES];
-        [shareviewcontroller.star3 setSelected:YES];
-        
-    }else if ([rate isEqualToString:@"4"]) {
-        [shareviewcontroller.star1 setSelected:YES];
-        [shareviewcontroller.star2 setSelected:YES];
-        [shareviewcontroller.star3 setSelected:YES];
-        [shareviewcontroller.star4 setSelected:YES];
-        
-    }else if ([rate isEqualToString:@"5"]) {
-        [shareviewcontroller.star1 setSelected:YES];
-        [shareviewcontroller.star2 setSelected:YES];
-        [shareviewcontroller.star3 setSelected:YES];
-        [shareviewcontroller.star4 setSelected:YES];
-        [shareviewcontroller.star5 setSelected:YES];
-    }
 }
 
 -(NSString *) getTagForText:(NSString*)clipart {
@@ -4623,11 +4705,9 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             NSString *fontName = btn.titleLabel.font.familyName;
             
             if ( [textFamily isEqualToString:fontName] ) {
-                return [NSString stringWithFormat: @"%d", btn.tag];
-                
+                return [NSString stringWithFormat: @"%ld", (long)btn.tag];
             }
         }
-        
     }
     
     return [NSString stringWithFormat: @"%d", -1];
@@ -4639,13 +4719,10 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         if ([tempView isKindOfClass:[UIButton class]]) {
             UIButton *btn = (UIButton *) tempView;
             if ( [btn.currentTitle isEqualToString:clipart] ) {
-                return [NSString stringWithFormat: @"%d", btn.tag];
-                
+                return [NSString stringWithFormat: @"%ld", (long)btn.tag];
             }
         }
-        
     }
-    
     return [NSString stringWithFormat: @"%d", -1];
 }
 
@@ -4697,19 +4774,12 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             [labelToStore.textColor getWhite:&wht alpha:&alpha];
             twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
             
-            
-           // NSLog(@"%i=i, Ary-r,g,b,alpha(%f,%f,%f,%f) == Dic-r,g,b,alpha(%@,%@,%@,%f)",i,red,green,blue,alpha,RGB[0],RGB[1],RGB[2],1.0);
-            
-            
-            //if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] )
             if ( [Flyer compareColor:buttonColor withColor:fontColor] ) {
-                
-                tag = [NSString stringWithFormat: @"%d", color.tag];
+                tag = [NSString stringWithFormat: @"%ld", (long)color.tag];
                 break;
             }
         }
     }
-    
     return tag;
 }
 
@@ -4734,12 +4804,10 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     UIColor *borderColor = [UIColor colorWithRed:[RGB[0] floatValue] green:[RGB[1] floatValue] blue:[RGB[2] floatValue] alpha:1.0];
     
     NSArray *bodersArray = textBordersView.subviews;
-    int count = (bodersArray.count)/3;
+    int count = (int)(bodersArray.count)/3;
     
     int i=1,j=1;
-    for (int index = 0; index < count; index++ )
-    {
-        
+    for (int index = 0; index < count; index++ ) {
         
         UIButton *border;
         if ([bodersArray[j] isKindOfClass:[UIButton class]]) {
@@ -4750,14 +4818,10 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         UIColor* buttonColor = border.backgroundColor;
         
         if ( [Flyer compareColor:buttonColor withColor:borderColor] ) {
-            //if( [buttonColor isEqual:borderColor] ) {
-            tag = [NSString stringWithFormat: @"%d", ((border.tag) - 1)];
+            tag = [NSString stringWithFormat: @"%ld", ((border.tag) - 1)];
             break;
-            
         }
-        
         i++;
-        
     }// Loop
     
     return tag;
@@ -4782,7 +4846,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             lineBtn = (UIButton *) drawingPatternsArrayInSV[i-1];
             
             if ( [DRAWING_PATTERNS_ARRAY[i-1] isEqualToString:line_type] ){
-                tag = [NSString stringWithFormat: @"%d", lineBtn.tag];
+                tag = [NSString stringWithFormat: @"%ld", (long)lineBtn.tag];
                 break;
             }
         }
@@ -4811,24 +4875,22 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     }
     
     if( [layerType isEqualToString:FLYER_LAYER_CLIP_ART] ){
-        
-        textSize = [NSString stringWithFormat:@"%f", ([textSize floatValue]/3.0)];
+        CustomLabel *lbl = [flyimgView.layers objectForKey:currentLayer];
+        textSize = [NSString stringWithFormat:@"%f", roundf(([lbl newSize].width)/3.0)];
         
     } else if ( [layerType isEqualToString:FLYER_LAYER_EMOTICON] ) {
         
         ImageLayer *img = [flyimgView.layers objectForKey:currentLayer];
         // Because emoticons are always sized squrely, we are just considering width here, assuming height is the same
         textSize = [NSString stringWithFormat:@"%f", roundf(([img newSize].width)/1.5)];
-
         
-    }else if ( [layerType isEqualToString:FLYER_LAYER_TEXT] ) {
+    } else if ( [layerType isEqualToString:FLYER_LAYER_TEXT] ) {
         
         
     }
 
     NSArray *sizesArray = sizesView.subviews;
-    for (int i = 1; i <=  [sizesArray count] ; i++)
-    {
+    for (int i = 1; i <=  [sizesArray count] ; i++) {
         
         UIButton *size;
         if ([sizesArray[i-1] isKindOfClass:[UIButton class]]) {
@@ -4839,11 +4901,10 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         if ( [btnTitleToBeHighlighted isEqualToString:textSize] ){
             
-            tag = [NSString stringWithFormat: @"%d", size.tag];
+            tag = [NSString stringWithFormat: @"%ld", (long)size.tag];
             break;
         }
     }
-    
     return tag;
 }
 
@@ -4891,12 +4952,11 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         } else if ( [layerAttribute isEqualToString:LAYER_ATTRIBUTE_DRAWING_PATTERN] ) {
             tag = [self getTagForDrawingPattern:layerType ofView:view];
         }
-        
     }
-    
     return tag;
 }
 
+//show selected blue border around select size/border/color....etc
 -(void) setSelectedItem:(NSString*)layerType inView:(ResourcesView*)view ofLayerAttribute:(NSString *)layerAttribute {
     
     NSString* tag = [self getCurrentLayerTag:layerAttribute inView:view];
@@ -4905,11 +4965,9 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     if ( tag != nil && ![tag isEqualToString:@""] && (![currentLayer isEqualToString:@""]) && ([[flyer getLayerType:currentLayer] isEqualToString:layerType]) ) {
         
         if ( [tag intValue] ) {
-            
             // Highlight selected resource
             [view highlightResource:[tag intValue]];
             [layerScrollView scrollRectToVisible:[view getHighlightedResource].frame animated:NO];
-            
         }
         
     } else {
@@ -4938,19 +4996,18 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     //currently pressed button
     UIButton *selectedButton = (UIButton*)sender;
     
-    if(selectedButton == clipArtTabButton)
-	{
+    if(selectedButton == clipArtTabButton) {
         
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
                          animations:^{
                              //Create ScrollView
-                             if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+                             if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR){
                                  
                                  // Delete SubViews from ScrollView and add Emoticons view
                                  [self deleteSubviewsFromScrollView];
                                  [layerScrollView addSubview:clipartsView];
-                                 [layerScrollView setContentSize:CGSizeMake(320, clipartsView.size.height)];
+                                 [layerScrollView setContentSize:CGSizeMake(320, clipartsView.size.height + 50 + bannerHeight)];
                                  
                                  [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:clipartsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
                                  
@@ -4959,10 +5016,9 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                                  // Delete SubViews from ScrollView and add Emoticons view
                                  [self deleteSubviewsFromScrollView];
                                  [layerScrollView addSubview:clipartsView];
-                                 [layerScrollView setContentSize:CGSizeMake(clipartsView.size.width , clipartsView.size.height)];
+                                 [layerScrollView setContentSize:CGSizeMake(clipartsView.size.width , clipartsView.size.height + 50 + bannerHeight)];
                                  
                                  [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:clipartsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
-                                 //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
                              }
                          }
                          completion:^(BOOL finished){
@@ -4975,44 +5031,39 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
 		[clipArtTabButton setSelected:YES];
 	}
-    else if(selectedButton == emoticonsTabButton)
-	{
+    else if(selectedButton == emoticonsTabButton) {
         
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
                          animations:^{
                              
-                             if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+                             if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR) {
                                  // Delete SubViews from ScrollView and add Emoticons view
                                  [self deleteSubviewsFromScrollView];
                                  [layerScrollView addSubview:emoticonsView];
-                                 [layerScrollView setContentSize:CGSizeMake(320, emoticonsView.size.height)];
+                                 [layerScrollView setContentSize:CGSizeMake(320, emoticonsView.size.height + bannerHeight)];
                                  
                                  [self setSelectedItem:FLYER_LAYER_EMOTICON inView:emoticonsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
                                  
                              } else {
                                  
-                                 
                                  // Delete SubViews from ScrollView and add Emoticons view
                                  [self deleteSubviewsFromScrollView];
                                  [layerScrollView addSubview:emoticonsView];
-                                 [layerScrollView setContentSize:CGSizeMake(emoticonsView.size.width , emoticonsView.size.height)];
+                                 [layerScrollView setContentSize:CGSizeMake(emoticonsView.size.width , emoticonsView.size.height + bannerHeight)];
                                  
                                  [self setSelectedItem:FLYER_LAYER_EMOTICON inView:emoticonsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
-                                 //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
                              }
                          }
                          completion:^(BOOL finished){
                              [layerScrollView flashScrollIndicators];
                          }];
         //END ANIMATION
-        
         //Add ContextView
         [self addScrollView:layerScrollView];
         [emoticonsTabButton setSelected:YES];
-	}
-    else if(selectedButton == artsColorTabButton)
-	{
+        
+	} else if(selectedButton == artsColorTabButton) {
         // Set the type
         if ( [[flyer getLayerType:currentLayer] isEqualToString:FLYER_LAYER_EMOTICON] ) {
             
@@ -5025,6 +5076,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                              animations:^{
                                  //Create ScrollView
                                  [self addColorsInSubView];
+                                 [layerScrollView setContentSize:CGSizeMake(colorsView.size.width , colorsView.size.height + bannerHeight)];
                              }
                              completion:^(BOOL finished){
                                  [layerScrollView flashScrollIndicators];
@@ -5045,6 +5097,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                              //Create ScrollView
                              // [self addArtsSizesInSubView];
                              [self addSizeInSubView];
+                             [layerScrollView setContentSize:CGSizeMake(sizesView.size.width , sizesView.size.height + bannerHeight)];
                          }
                          completion:^(BOOL finished){
                              [layerScrollView flashScrollIndicators];
@@ -5059,7 +5112,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     else if(selectedButton == drawingMenueButton ){
         //for drawing we are doing all(add/edit) work in setAddMoreLayerTabAction
     }
-    
 }
 
 #pragma mark -  Bottom Tabs Context
@@ -5067,8 +5119,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
  * When we click on Text Tab
  * This Method Manage Text SubTabs
  */
--(IBAction)setStyleTabAction:(id) sender
-{
+-(IBAction)setStyleTabAction:(id) sender {
     
     [self addBottomTabs:libText];
     
@@ -5080,18 +5131,17 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     UIButton *selectedButton = (UIButton*)sender;
 	
-    if(selectedButton == fontTabButton)
-	{
+    if(selectedButton == fontTabButton) {
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
                          animations:^{
                              //Create ScrollView
-                             if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+                             if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR){
                                  
                                  //Delete SubViews from ScrollView
                                  [self deleteSubviewsFromScrollView];
                                  [layerScrollView addSubview:fontsView];
-                                 [layerScrollView setContentSize:CGSizeMake(320, fontsView.size.height)];
+                                 [layerScrollView setContentSize:CGSizeMake(320, fontsView.size.height + bannerHeight)];
                                  
                                  [self setSelectedItem:FLYER_LAYER_TEXT inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
                                  
@@ -5103,7 +5153,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                                  [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , fontsView.size.height)];
                                  
                                  [self setSelectedItem:FLYER_LAYER_TEXT inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
-                                 //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
                              }
                              
                          }
@@ -5117,12 +5166,12 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
 		[fontTabButton setSelected:YES];
 	}
-	else if(selectedButton == colorTabButton)
-	{
+	else if(selectedButton == colorTabButton) {
         
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
                          animations:^{
+                             
                              //Create ScrollView
                              [self addColorsInSubView];
                          }
@@ -5136,8 +5185,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [colorTabButton setSelected:YES];
         
 	}
-	else if(selectedButton == sizeTabButton)
-	{
+	else if(selectedButton == sizeTabButton) {
         
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
@@ -5155,8 +5203,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
 		[sizeTabButton setSelected:YES];
 	}
-	else if(selectedButton == fontBorderTabButton)
-	{
+	else if(selectedButton == fontBorderTabButton) {
         
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
@@ -5174,31 +5221,25 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
 		[fontBorderTabButton setSelected:YES];
 	}
-    else if(selectedButton == fontEditButton)
-	{
+    else if(selectedButton == fontEditButton) {
         [fontEditButton setSelected:YES];
         [self callWrite];
 	}
-    
 }
 
 /*
  * When we click on Background Tab
  * This Method Manage Background SubTabs
  */
--(IBAction)setlibBackgroundTabAction:(id)sender{
+-(IBAction)setlibBackgroundTabAction:(id)sender {
     UIButton *selectedButton = (UIButton*)sender;
     
     //Un Selected State of Buttons
     [backtemplates setSelected:NO];
     [flyerBorder setSelected:NO];
+    [giphyBgBtn setSelected:NO];
     
-    
-    if( selectedButton == backtemplates )
-	{
-        [backtemplates setBackgroundImage:[UIImage imageNamed:@"addbg_library_selected"] forState:UIControlStateNormal];
-        
-        
+    if( selectedButton == backtemplates ) {
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
                          animations:^{
@@ -5214,29 +5255,28 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [self addScrollView:layerScrollView];
         [backtemplates setSelected:YES];
     }
-    else if(selectedButton == cameraTakePhoto)
-    {
+    else if(selectedButton == cameraTakePhoto) {
         
-        [self openCustomCamera:YES];
-        _videoLabel.alpha = 1;
+        [self openCustomCamera:NO];
+        _videoLabel.alpha = 0;
         
         _addMoreLayerOrSaveFlyerLabel.alpha = 0;
-        _takeOrAddPhotoLabel.alpha = 0;
-        
+        _takeOrAddPhotoLabel.alpha = 1;
+
     }
-    else if(selectedButton == cameraRoll)
-    {
+    else if(selectedButton == cameraRoll) {
         
         //HERE WE CHECK USER DID ALLOWED TO ACCESS PHOTO library
         if ([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusRestricted || [ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusDenied) {
             
-            UIAlertView *photoAlert = [[UIAlertView alloc ] initWithTitle:@"" message:@"Flyerly does not access to your photo album.To enable access goto the Setting app >> Privacy >> Photos and enable Flyerly" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            NSString *msg;
+            msg = [NSString stringWithFormat:@"%@ does not access to your photo album. To enable access goto the Setting app >> Privacy >> Photos and enable %@", APP_NAME, APP_NAME] ;
+            UIAlertView *photoAlert = [[UIAlertView alloc ] initWithTitle:@"" message: msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [photoAlert show];
             return;
-            
         }
         
-        [self loadCustomPhotoLibrary:YES];
+        [self loadCustomPhotoLibrary:NO];
         
         //Add ContextView
         _videoLabel.alpha = 1;
@@ -5245,9 +5285,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         _takeOrAddPhotoLabel.alpha = 0;
         
     }
-    else if(selectedButton == flyerBorder)
-    {
-        [flyerBorder setSelected:YES];
+    else if(selectedButton == flyerBorder) {
         
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
@@ -5263,8 +5301,41 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         //Add ContextView
         [self addScrollView:layerScrollView];
         
+        [flyerBorder setSelected:YES];
     }
+    else if(selectedButton == giphyBgBtn) {
+        
+        Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+        NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+        if (networkStatus == NotReachable) {
+            [self showAlert:@"No internet available,please connect to the internet first" message:@""];
+        } else {
+            [self goToGiphyScreen];
+        }
+    }
+}
+
+// show message in alert
+-(void)showAlert:(NSString *)title message:(NSString *)message{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
+// Go to Giphy screen
+-(void)goToGiphyScreen{
+    NSMutableDictionary *templateDictionary = [flyer getLayerFromMaster:@"Template"];
+    [backgroundsView setHighlightedResourceTag:[[templateDictionary objectForKey:@"imageTag"] intValue]];
+    [backgroundsView dehighlightResource];
     
+    tasksAfterGiphySelect = @"goingToGiphy";
+    GiphyViewController *giphyViewController = [[GiphyViewController alloc]initWithNibName:@"GiphyViewController" bundle:nil];
+    giphyViewController.flyer = flyer;
+    giphyViewController.tasksAfterGiphySelect = tasksAfterGiphySelect;
+    [self.navigationController pushViewController:giphyViewController animated:YES];
 }
 
 /*
@@ -5276,20 +5347,20 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     UIButton *selectedButton = (UIButton*)sender;
     
     
-    if( selectedButton == cameraTabButton )
-	{
+    if( selectedButton == cameraTabButton ) {
         imgPickerFlag = IMAGEPICKER_PHOTO;
         [self openCustomCamera:NO];
         
     }
-    else if( selectedButton == photoTabButton )
-	{
+    else if( selectedButton == photoTabButton ) {
         imgPickerFlag = IMAGEPICKER_PHOTO;
         
         //HERE WE CHECK USER DID ALLOWED TO ACESS PHOTO library
         if ([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusRestricted || [ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusDenied) {
             
-            UIAlertView *photoAlert = [[UIAlertView alloc ] initWithTitle:@"" message:@"Flyerly does not access to your photo album.To enable access goto the Setting app >> Privacy >> Photos and enable Flyerly" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            NSString *msg;
+            msg = [NSString stringWithFormat:@"%@ does not access to your photo album. To enable access goto the Setting app >> Privacy >> Photos and enable %@", APP_NAME, APP_NAME] ;
+            UIAlertView *photoAlert = [[UIAlertView alloc ] initWithTitle:@"" message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [photoAlert show];
             return;
             
@@ -5297,8 +5368,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         [self loadCustomPhotoLibrary:NO];
     }
-    else if( selectedButton == widthTabButton )
-	{
+    else if( selectedButton == widthTabButton ) {
         if (widthTabButton.isSelected == YES) {
             
             //Set here Un-Selected
@@ -5315,8 +5385,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         self.flyimgView.heightIsSelected = NO;
         
     }
-    else if( selectedButton == heightTabButton )
-	{
+    else if( selectedButton == heightTabButton ) {
         
         if (heightTabButton.isSelected == YES) {
             
@@ -5327,7 +5396,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             //FOR PINCH
             [heightTabButton  setSelected:YES];
             [widthTabButton setSelected:NO];
-            
         }
         
         self.flyimgView.widthIsSelected = NO;
@@ -5354,10 +5422,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     [addVideoTabButton setSelected:NO];
     [backgroundTabButton setSelected:NO];
     
-    
-    
-	if(selectedButton == addMoreFontTabButton)
-	{
+	if(selectedButton == addMoreFontTabButton) {
         
         selectedAddMoreLayerTab = ADD_MORE_TEXTTAB;
         
@@ -5371,10 +5436,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [self callWrite];
 
 	}
-    else if(selectedButton == addMorePhotoTabButton)
-	{
+    else if(selectedButton == addMorePhotoTabButton) {
         selectedAddMoreLayerTab = ADD_MORE_PHOTOTAB;
-        
         
         if ([currentLayer isEqualToString:@""]) {
             currentLayer = [flyer addImage];
@@ -5384,13 +5447,12 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                 imageFrame = CGRectMake(55,10,200,200);
             }else if ( IS_IPHONE_6){
                 imageFrame = CGRectMake(90,10,200,200);
-            }else if ( IS_IPHONE_6_PLUS){
+            }else if ( IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR){
                 imageFrame = CGRectMake(100,10,200,200);
             }
             [flyer setImageFrame:currentLayer :imageFrame];
             NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
             [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
-            
         }
         
         //Here we Highlight The ImageView
@@ -5415,7 +5477,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         if ([currentLayer isEqualToString:@""]) {
             
             currentLayer = [flyer addClipArt];
-            
             editButtonGlobal.uid = currentLayer;
         }
         
@@ -5433,8 +5494,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                              [layerScrollView flashScrollIndicators];
                          }];
         
-        
-        
         [clipArtTabButton setSelected:YES];
         //Add right Bar button
         [self addDonetoRightBarBotton];
@@ -5449,45 +5508,35 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [self setArtsTabAction:clipArtTabButton];
         
 	}
-	else if(selectedButton == addVideoTabButton)
-	{
+	else if(selectedButton == addVideoTabButton) {
+        
         userPurchases = [UserPurchases getInstance];
         userPurchases.delegate = self;
         
-        if ([[PFUser currentUser] sessionToken].length != 0) {
-            if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-                [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
-                
-                [self openCustomCamera:YES];
-                _videoLabel.alpha = 1;
-                
-                _addMoreLayerOrSaveFlyerLabel.alpha = 0;
-                _takeOrAddPhotoLabel.alpha = 0;
-                
-                nbuCamera.isVideoFlyer = YES;
-            }else {
-                [self openInAppPanel];
-            }
+        if ( [userPurchases canCreateVideoFlyer] ) {
             
-        }else {
+            [self openCustomCamera:YES];
+            _videoLabel.alpha = 1;
+            
+            _addMoreLayerOrSaveFlyerLabel.alpha = 0;
+            _takeOrAddPhotoLabel.alpha = 0;
+            
+            nbuCamera.isVideoFlyer = YES;
+        }
+        else
+        {
             [self openInAppPanel];
         }
-	}
-    else if(selectedButton == backgroundTabButton)
-	{
+        
+  	} else if (selectedButton == backgroundTabButton) {
         currentLayer = nil;
         
         NSMutableDictionary *templateDictionary = [flyer getLayerFromMaster:@"Template"];
         NSInteger *backgroundImageTag = [[templateDictionary objectForKey:@"imageTag"] intValue];
         
-        [layerScrollView setContentSize:CGSizeMake(backgroundsView.frame.size.width, backgroundsView.frame.size.height)];
+        [layerScrollView setContentSize:CGSizeMake(backgroundsView.frame.size.width, backgroundsView.frame.size.height + bannerHeight)];
         
-        if ( backgroundImageTag ) {
-            [backgroundsView highlightResource:backgroundImageTag];
-            UIButton *highLight = [backgroundsView getHighlightedResource];
-            
-            [layerScrollView scrollRectToVisible:highLight.frame animated:YES];
-        }
+        [self highlightAndScrollRect:backgroundImageTag inView:backgroundsView];
         
         [backgroundTabButton setSelected:YES];
         //Add right Bar button
@@ -5499,8 +5548,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [self setlibBackgroundTabAction:backtemplates];
         
     }
-    else if( selectedButton == drawingMenueButton)
-    {
+    else if( selectedButton == drawingMenueButton)  {
         [drawingMenueButton setSelected:YES];
         
         NSMutableDictionary *dic;
@@ -5517,7 +5565,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             dw_isOldLayer   =   NO;
         }
         // editDrawing layer case
-        else{
+        else {
             dic = [flyer getLayerFromMaster:currentLayer];
             dw_layer_save   =   YES;
             dw_isOldLayer   =   YES;
@@ -5560,10 +5608,19 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [self drawingSetStyleTabAction:drawingPatternTabButton];
         
 	}
-    
 }
 
-
+/**
+ * Hightlight a button and scroll to it in view
+ */
+-(void)highlightAndScrollRect:(NSInteger *)btnTag inView:(ResourcesView *)viewForHighlight {
+    if ( btnTag ) {
+        [viewForHighlight highlightResource:btnTag];
+        UIButton *highLight = [viewForHighlight getHighlightedResource];
+        
+        [layerScrollView scrollRectToVisible:highLight.frame animated:YES];
+    }
+}
 
 #pragma mark - Flurry Methods
 
@@ -5736,7 +5793,12 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 }
 
 - ( void )productSuccesfullyPurchased: (NSString *)productId {
+    appearingViewAfterInAppHide = YES;
     [self loadXibsAfterInAppCheck:YES againAddInSubViews:YES];
+    if ( [userPurchases canShowAd] == NO ) {
+        bannerHeight = 0;
+        [self removeBAnnerAdd:YES];
+    }
 }
 
 - ( void )inAppPurchasePanelContent {
@@ -5744,7 +5806,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 }
 
 
-- (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle {
+- (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle
+{
     
     __weak InAppViewController *inappviewcontroller_ = inappviewcontroller;
     if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Sign In")]) {
@@ -5770,9 +5833,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         [self.navigationController pushViewController:signInController animated:YES];
         
-    }else if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Restore Purchases")]){
-        
-        
+    }else if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Restore Purchases")])
+    {
         [inappviewcontroller_ restorePurchase];
     }
 }
@@ -5781,31 +5843,34 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
+
+    if( [userPurchases checkKeysExistsInPurchases:@[IN_APP_ID_ALL_DESIGN, IN_APP_OLD_ID_ALL_DESIGN]] )
+    {
+        [self premiumBtnHideAfterCheck:@"ALL"];
+        [inappviewcontroller.paidFeaturesTview reloadData];
+    }
+    else
+    {
+        //check for videos
+        if ( [userPurchases canCreateVideoFlyer] )
+        {
+            [self premiumBtnHideAfterCheck: IN_APP_ID_UNLOCK_VIDEO];
+            [inappviewcontroller.paidFeaturesTview reloadData];
+        }
+        
+        //check for icons
+        if([userPurchases checkKeyExistsInPurchases: IN_APP_ID_ICON_BUNDLE] )
+        {
+                [self premiumBtnHideAfterCheck: IN_APP_ID_ICON_BUNDLE];
+        }
+        
+        [inappviewcontroller.paidFeaturesTview reloadData];
+    }
     
-    if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
-        [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
-        
-        
-        UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
-        [addVideoTabButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
-        [inappviewcontroller.paidFeaturesTview reloadData];
-        
-        //Checking if user valid purchases
-    } else if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-               [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    )     {
-        
-        fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts-paid" ofType:@"plist"];
-        clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts-paid" ofType:@"plist"];
-        emoticonsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Emoticons-paid" ofType:@"plist"];
-        [self addEmoticonsInSubView];
-        [self addClipArtsInSubView];
-        [self addFontsInSubView];
-        [inappviewcontroller.paidFeaturesTview reloadData];
-        
-    }else {
-        
-        if ( [sharePanel isHidden] && inappviewcontroller != nil &&
-            ![[self presentedViewController] isKindOfClass:[InAppViewController class]])
+    if ( [sharePanel isHidden] && inappviewcontroller != nil &&
+        ![[self presentedViewController] isKindOfClass:[InAppViewController class]])
+    {
+        if([productIdentifier length] == 0)
         {
             [self presentViewController:inappviewcontroller animated:YES completion:nil];
         }
@@ -5813,11 +5878,19 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
 }
 
--(void)enableHome:(BOOL)enable{
-    
-    [backButton setEnabled:enable];
-    
+-(void)enableHome:(BOOL)enable
+{
+    sharePanel.hidden = enable;
+    sharingPannelIsHidden = enable;
+    [self enableNavigation:enable];
 }
+-(void)enableNavigation:(BOOL)enable{
+    [backButton setEnabled:enable];
+    [helpButton setEnabled:enable];
+    [shareButton setEnabled:enable];
+    [rightUndoBarButton setEnabled:enable];
+}
+
 
 //return free space in in mb
 -(unsigned long long)getFreeDiskspace {
@@ -5835,7 +5908,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         NSLog(@"Memory Capacity of %llu MiB with %llu MiB Free memory available.",totalSpace , totalFreeSpace);
     } else {
-        NSLog(@"Error Obtaining System Memory Info: Domain = %@, Code = %u", [error domain], [error code]);
+        NSLog(@"Error Obtaining System Memory Info: Domain = %@, Code = %ld", [error domain], (long)[error code]);
     }
     
     return totalFreeSpace;
@@ -5859,7 +5932,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 
 - (void)printFlyer {
     
-    if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+    if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR){
         printViewController = [[PrintViewController alloc] initWithNibName:@"PrintViewController" bundle:nil];
     }else {
         printViewController = [[PrintViewController alloc] initWithNibName:@"PrintViewController-iPhone4" bundle:nil];
@@ -5889,8 +5962,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 	int  i=1;
 	UIButton *view = sender;
     
-	for(UIView *tempView  in [drawingPatternsView subviews])
-	{
+	for(UIView *tempView  in [drawingPatternsView subviews]) {
         //CHECK UIIMAGEVIEW BECAUSE SCROLL VIEW HAVE ADDITIONAL
         //SUBVIEWS OF UIIMAGEVIEW FOR FLASH INDICATORS
         if (![tempView isKindOfClass:[UIImageView class]]) {
@@ -5899,12 +5971,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             {
                 //Here we set line
                 [self setDrawingLine:DRAWING_PATTERNS_ARRAY[i-1] updateDic:YES];
-                
-                //Here we set Font
-                //[flyer setFlyerTextFont:currentLayer FontName:[NSString stringWithFormat:@"%@",[selectedFont familyName]]];
-                
-                //Here we call Render Layer on View
-                //[flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
                 
                 //Handling Select Unselect
                 [self setSelectedItem:FLYER_LAYER_DRAWING inView:drawingPatternsView ofLayerAttribute:LAYER_ATTRIBUTE_DRAWING_PATTERN];
@@ -5920,7 +5986,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     [self deleteSubviewsFromScrollView];
 
     [layerScrollView addSubview:drawingPatternsView];
-    [layerScrollView setContentSize:CGSizeMake(drawingPatternsView.frame.size.width, [drawingPatternsView bounds].size.height)];
+    [layerScrollView setContentSize:CGSizeMake(drawingPatternsView.frame.size.width, [drawingPatternsView bounds].size.height + bannerHeight)];
     [self setSelectedItem:FLYER_LAYER_DRAWING inView:drawingPatternsView ofLayerAttribute:LAYER_ATTRIBUTE_DRAWING_PATTERN];
 }
 
@@ -5932,7 +5998,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                 drawingEraserMsg    =   (UITextView *) tempView;
             }
         }
-        
     }
 }
 -(void)addEraserMsgInSubViewFor:msgFor {
@@ -5946,9 +6011,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         drawingEraserMsg.text   = @"COLORS CANNOT BE APPLIED ON ERASER";
         
         [layerScrollView addSubview:drawingEraserMsgView];
-        [layerScrollView setContentSize:CGSizeMake(drawingEraserMsgView.frame.size.width, [drawingEraserMsgView bounds].size.height)];
+        [layerScrollView setContentSize:CGSizeMake(drawingEraserMsgView.frame.size.width, [drawingEraserMsgView bounds].size.height + bannerHeight)];
     }
-    
 }
 
 
@@ -5964,7 +6028,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     CGFloat curYLoc = 5;
     int increment = 5;
     
-    if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+    if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR){
         curXLoc = 13;
         curYLoc = 10;
         increment = 8;
@@ -5975,25 +6039,25 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     // Load sizes xib asynchronously
     dispatch_async( dispatch_get_main_queue(), ^{
         
-        if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
-            if( IS_IPHONE_6_PLUS ){
+        if(IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XS || IS_IPHONE_XR)
+        {
+            if( IS_IPHONE_6_PLUS || IS_IPHONE_XR || IS_IPHONE_XS)
+            {
                 drawingView.frame = CGRectMake((layerScrollView.frame.origin.x+18), layerScrollView.frame.origin.y, drawingView.size.width, drawingView.size.height);
             }
-            [layerScrollView addSubview:drawingView];
-            [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
-            
-        } else {
             
             [layerScrollView addSubview:drawingView];
-            [layerScrollView setContentSize:CGSizeMake(drawingView.frame.size.width, [layerScrollView bounds].size.height)];
+            [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue + bannerHeight)];
             
         }
-        
-        
+        else
+        {
+            [layerScrollView addSubview:drawingView];
+            [layerScrollView setContentSize:CGSizeMake(drawingView.frame.size.width, [layerScrollView bounds].size.height + bannerHeight)];
+        }
         
         NSArray *sizesArray = drawingView.subviews;
-        for (int i = 1; i <=  3 ; i++)
-        {
+        for (int i = 1; i <=  3 ; i++) {
             
             UIButton *size;
             if ([sizesArray[i-1] isKindOfClass:[UIButton class]]) {
@@ -6003,11 +6067,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             NSString *sizeValue =SIZE_ARRAY[(i-1)];
             [size setTitle:sizeValue forState:UIControlStateNormal];
         }
-        
     });
 }
-
-
 
 -(IBAction)addDrawingLayer:(id) sender {
     
@@ -6024,6 +6085,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     //show drawing layer menu
     [self setAddMoreLayerTabAction:drawingMenueButton];
 }
+
 #pragma mark -  DRAWING FUNCTIONS
 /*
  * When we click on Drawing Tab
@@ -6042,8 +6104,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     UIButton *selectedButton = (UIButton*)sender;
 	
-    if(selectedButton == drawingPatternTabButton)
-	{
+    if(selectedButton == drawingPatternTabButton) {
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
                          animations:^{
@@ -6065,8 +6126,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 		[drawingPatternTabButton setSelected:YES];
 
 	}
-	else if(selectedButton == drawingColorTabButton)
-	{
+	else if(selectedButton == drawingColorTabButton) {
         if( [dw_drawingLayerMode  isEqual: DRAWING_LAYER_MODE_ERASER]){
             //HERE WE SET ANIMATION
             [UIView animateWithDuration:0.4f
@@ -6101,8 +6161,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [drawingColorTabButton setSelected:YES];
         
 	}
-	else if(selectedButton == drawingSizeTabButton)
-	{
+	else if(selectedButton == drawingSizeTabButton) {
         if( [dw_drawingLayerMode  isEqual: DRAWING_LAYER_MODE_ERASER]){
             
         } else {
@@ -6128,8 +6187,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 		[drawingSizeTabButton setSelected:YES];
 
 	}
-    else if(selectedButton == drawingEraserTabButton)
-	{
+    else if(selectedButton == drawingEraserTabButton) {
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
                          animations:^{
@@ -6151,8 +6209,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 }
 
 //Assign dic values(pattern,color,size) to class level variables
-- (void)setDrawingTools:(NSMutableDictionary *)dic callFrom:(NSString *)callFrom
-{
+- (void)setDrawingTools:(NSMutableDictionary *)dic callFrom:(NSString *)callFrom {
     dw_drawingLayerMode = callFrom;
     
     //Get color(r,g,b) from dic, then assign them to class level red,green,blue
@@ -6166,8 +6223,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 }
 
 // Set value of rgb of drawing tool
-- (void)setDrawingRGB:(UIColor *) color updateDic:(BOOL)updateDic
-{
+- (void)setDrawingRGB:(UIColor *) color updateDic:(BOOL)updateDic {
     CGFloat alpha;
     //Getting RGB Color Code
     [color getRed:&dw_red green:&dw_green blue:&dw_blue alpha:&alpha];
@@ -6181,8 +6237,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 }
 
 // Set value brush radius
-- (void)setDrawingBrushRadius:(NSInteger)brushRadiusSize  updateDic:(BOOL)updateDic
-{
+- (void)setDrawingBrushRadius:(NSInteger)brushRadiusSize  updateDic:(BOOL)updateDic {
     dw_brush = (CGFloat)brushRadiusSize;
     
     if( updateDic ) {
@@ -6193,8 +6248,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 }
 
 // Set value of
-- (void)setDrawingLine:(NSString *)lineType updateDic:(BOOL)updateDic
-{
+- (void)setDrawingLine:(NSString *)lineType updateDic:(BOOL)updateDic {
     dw_brushType   =  lineType;
     
     if( updateDic ) {
@@ -6204,7 +6258,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     }
 }
 
--(CGFloat) distanceBtwPoints:(CGPoint)p1 p2:(CGPoint)p2{
+-(CGFloat) distanceBtwPoints:(CGPoint)p1 p2:(CGPoint)p2 {
     CGFloat xDist = (p2.x - p1.x);
     CGFloat yDist = (p2.y - p1.y);
     return sqrt((xDist * xDist) + (yDist * yDist));
@@ -6393,7 +6447,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(zoomScrollViewOnPinch:)];
         [zoomScrollView addGestureRecognizer:pinchGesture];
         
-        [zoomScrollView setContentSize:CGSizeMake(zoomScrollView.contentSize.width, zoomScrollView.frame.size.height)];
+        [zoomScrollView setContentSize:CGSizeMake(zoomScrollView.contentSize.width, zoomScrollView.frame.size.height + bannerHeight)];
     }
 }
 
@@ -6424,10 +6478,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     [zoomScrollView setZoomScale:FLYER_ZOOM_SET_SCALE];
 
     //FOR TESTING SHOW RED RECT AROUND CURSOR
-    //[zoomMagnifyingGlass.layer setBorderColor: [[UIColor redColor] CGColor]];
-    //[zoomMagnifyingGlass.layer setBorderWidth: 2.0];
-    
-    [zoomScrollView setContentSize:CGSizeMake(flyimgView.frame.size.width, flyimgView.frame.size.height)];
+    [zoomScrollView setContentSize:CGSizeMake(flyimgView.frame.size.width, flyimgView.frame.size.height + bannerHeight)];
 
     // set buttons in right nav
     [self zoomAddLayerButtonsIntoScrollView:@"zoomStart"];
@@ -6441,7 +6492,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         CGFloat height = size.height;
         
         if ( [flyer isVideoFlyer] ){
-            [self hidePlayerControlls:YES];
+            [self videoPlay:NO repeat:NO];
             
             UIImage *videoImg = [flyer getVideoWithoutMergeSnapshot]; //get a framof video
             zoomScreenShot.image = [self getVideoWithMergeSnapshot:size videoFramImg:videoImg];
@@ -6512,8 +6563,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     int x2 = floor( (x*100)/zoomScreenShot.size.width );
     int y2 = floor( (y*100)/zoomScreenShot.size.height);
     
-    //NSLog(@"x,y(%i,%i) x2,y2(%i,%i)",x,y, x2,y2);
-    
     //CHANGE ZOOM SCOLLVIEW
     CGFloat xSv = x2, ySv = y2;
     if( ySv < 11)
@@ -6561,57 +6610,34 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 #pragma mark -  Watermark funcs
 //Tasks after create new flyer
 -(void)tasksOnCreateNewFlyer{
-    //we have updated the flyer.pieces and flyer.txt, so whitebg and watermark layer work will be in default bundle.
-    /*
-    //------- set white bg --- Start ----
-    //Here we Set Flyer Type
-    [flyer setFlyerTypeImage];
-    
-    int viewTag = 74;// white bg tag number
-    
-    //Getting Image Path
-    NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"Template%d",viewTag]];
-    
-    //set template Image
-    [self.flyimgView setTemplate:imgPath];
-    
-    //Set Image Tag
-    [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",viewTag]];
-    //------- set white bg --- End ----
-    
-    //------- Add water mark layer --- start ---
-    [flyer addWatermark];
-    //------- Add water mark layer --- end ---
-    */
-    
+    isNewFlyer = YES;
 }
 
 - (void)inAppPanelDismissed {
-
+    appearingViewAfterInAppHide = YES;
 }
 
 //When user perform action on watermark layer and has no complete design bundle then show in app panel
 - (BOOL)wmCanPerformAction:(NSString *)uid{
     BOOL canPerformAct = YES;
-    BOOL isInAppPanelAlreadyOpen = NO;
     
     NSMutableDictionary *dic = [flyer getLayerFromMaster:uid];
-    
-    if( [[dic objectForKey:@"type"] isEqualToString:FLYER_LAYER_WATER_MARK] ){
-
+    NSString* tempLayerType = [dic objectForKey:@"type"];
+    if( [tempLayerType isEqualToString:FLYER_LAYER_WATER_MARK] ){
+        //if layer type is watermark, then first check have permission of changing
+        canPerformAct = NO;
+        
         userPurchases = [UserPurchases getInstance];
         userPurchases.delegate = self;
-        
         if ([[PFUser currentUser] sessionToken].length != 0) {
-            if ( ![userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ) {
-                canPerformAct = NO;
+            //can move water mark layer when have valid subscription / IN_APP_ID_ALL_DESIGN
+            if ( [userPurchases isSubscriptionValid] || [userPurchases haveProduct:IN_APP_ID_ALL_DESIGN] || [userPurchases haveProduct:IN_APP_OLD_ID_ALL_DESIGN] ) {
+                canPerformAct = YES;
             }
-        } else{
-           canPerformAct = NO;
         }
     }
     
-    if( !canPerformAct && !isInAppPanelAlreadyOpen ){
+    if( [tempLayerType isEqualToString:FLYER_LAYER_WATER_MARK]  && canPerformAct == NO ){
         currentLayer = @"";
         [self deSelectPreviousLayer];
         
@@ -6650,7 +6676,9 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     else if ( IS_IPHONE_6 ){
         width = 363;
         height = 371;
-    } else if ( IS_IPHONE_6_PLUS ){
+    }
+    else //if ( IS_IPHONE_6_PLUS )
+    {
         width = 401;
         height = 414;
     }
@@ -6673,44 +6701,102 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     userPurchases = [UserPurchases getInstance];
     userPurchases.delegate = self;
     
-    if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-        [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
-        
+    if ( [userPurchases canCreateVideoFlyer] )
+    {
         UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
         [addVideoTabButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
         
-        if( checkAndCloseInAppPanel ){
-            [inappviewcontroller.paidFeaturesTview reloadData];
+        if(checkAndCloseInAppPanel)
+        {
             [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
         }
     }
+    else if( checkAndCloseInAppPanel )
+    {
+        [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
     
-    //Checking if user valid purchases
-    if ( ([userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-        [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"])    ) {
-        
-        fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts-paid" ofType:@"plist"];
-        clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts-paid" ofType:@"plist"];
-        emoticonsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Emoticons-paid" ofType:@"plist"];
-        
-        if( checkAndCloseInAppPanel ) {
-            [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    if( againAddInSubViews )
+    {
+        //When user have complete design bundle or any subscription dont show the premium button
+        if( [userPurchases haveProduct:IN_APP_ID_ALL_DESIGN] || [userPurchases haveProduct:IN_APP_OLD_ID_ALL_DESIGN] || [userPurchases isSubscriptionValid] )
+        {
+            [self premiumBtnHideAfterCheck:@"ALL"];
+        }else if([userPurchases haveProduct: IN_APP_ID_ICON_BUNDLE] ) {
+            [self premiumBtnHideAfterCheck: IN_APP_ID_ICON_BUNDLE];
         }
-        
-    } else {
-        
-        fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts" ofType:@"plist"];
-        clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts" ofType:@"plist"];
-        emoticonsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Emoticons" ofType:@"plist"];
-        
     }
-    
-    if( againAddInSubViews ) {
-        [self addEmoticonsInSubView];
-        [self addClipArtsInSubView];
-        [self addFontsInSubView];
-    }
+}
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+//Hide premium button from view when have purchases
+-(void)premiumBtnHideAfterCheck:(NSString *)from{
+    
+    if ( [from isEqualToString:NOT_FOUND_IN_APP] ){
+        return; //don go further when bundle is NOT_FOUND_IN_APP
+    }
+    
+    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString: IN_APP_ID_UNLOCK_VIDEO]){
+        UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
+        [addVideoTabButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
+    }
+    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString:@"BACKGROUND"]){
+        [premiumBtnBg removeFromSuperview];
+        [premiumImgBg removeFromSuperview];
+    }
+    if( [from isEqualToString:@"ALL"] ||  [from isEqualToString:@"BACKGROUND_BORDER"] ){
+        [premiumBtnBgBorder removeFromSuperview];
+        [premiumImgBgBorder removeFromSuperview];
+    }
+    
+    if( [from isEqualToString:@"ALL"] || [from isEqualToString: IN_APP_ID_ICON_BUNDLE] ){
+        if(premiumBtnEmoticons != nil ){
+            [premiumBtnEmoticons removeFromSuperview];
+            [premiumImgEmoticons removeFromSuperview];
+        }
+        
+        if(premiumBtnCliparts != nil ){
+            [premiumBtnCliparts  removeFromSuperview];
+            [premiumImgCliparts removeFromSuperview];
+        }
+        
+        if(premiumBtnFonts != nil ){
+            [premiumBtnFonts  removeFromSuperview];
+            [premiumImgFonts removeFromSuperview];
+        }
+    }
+}
+
+-(CGRect)getSizeOfPremium:(int)x y:(int)y
+{
+    CGRect recT = CGRectMake(x,y,200,150);
+    if( IS_IPHONE_4 )
+    {
+        recT = CGRectMake(x,y,70,50);
+    }
+   
+    return recT;
+}
+
+-(UIColor *) getPremiumBgColor{
+    return [UIColor colorWithRed:0 green:0 blue:255 alpha:0.5];
+}
+
+-(void)setFlyerTypeVideo{
+    [flyer setFlyerTypeVideo];
+    [flyimgView deleteLayer:FLYER_LAYER_GIPHY_LOGO];
+    playerToolBar.alpha = 1;
+}
+
+-(void)setFlyerTypeImage{
+    [flyer setFlyerTypeImage];
+    [flyimgView deleteLayer:FLYER_LAYER_GIPHY_LOGO];
+    [self videoPlay:NO repeat:NO];
 }
 
 @end

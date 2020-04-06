@@ -1,24 +1,30 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainSettingViewController">
             <connections>
+                <outlet property="bannerAdsView" destination="Ybr-XB-Nps" id="fq4-2D-007"/>
+                <outlet property="btnBannerAdsDismiss" destination="bLJ-LT-lJV" id="yBZ-OQ-OWI"/>
                 <outlet property="tableView" destination="211" id="216"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="1">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" id="211">
-                    <rect key="frame" x="0.0" y="64" width="320" height="456"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="211">
+                    <rect key="frame" x="0.0" y="64" width="375" height="547"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="1"/>
                     <connections>
@@ -26,93 +32,155 @@
                         <outlet property="delegate" destination="-1" id="218"/>
                     </connections>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="356">
-                    <rect key="frame" x="0.0" y="521" width="80" height="47"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
-                    <accessibility key="accessibilityConfiguration" label="SettingsEmail"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
-                    <state key="normal" backgroundImage="t_email_button.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="selected" backgroundImage="t_email_button.png"/>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="goemail:" destination="-1" eventType="touchUpInside" id="360"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="357">
-                    <rect key="frame" x="80" y="521" width="80" height="47"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="AppReview"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
-                    <state key="normal" backgroundImage="app_store.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="selected" backgroundImage="app_store_selected.png"/>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="rateApp:" destination="-1" eventType="touchUpInside" id="z8n-q7-VxR"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="358">
-                    <rect key="frame" x="160" y="521" width="80" height="47"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="Twitter"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
-                    <state key="normal" backgroundImage="t_setting_button.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="gotwitter:" destination="-1" eventType="touchUpInside" id="362"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="359">
-                    <rect key="frame" x="240" y="521" width="80" height="47"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="Help"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
-                    <state key="normal" backgroundImage="h_setting_button.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="gohelp" destination="-1" eventType="touchUpInside" id="363"/>
-                    </connections>
-                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ybr-XB-Nps" customClass="GADBannerView">
+                    <rect key="frame" x="0.0" y="561" width="375" height="50"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bLJ-LT-lJV">
+                            <rect key="frame" x="325" y="0.0" width="50" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="7Ar-O5-wdS"/>
+                            </constraints>
+                            <state key="normal" image="closeAd.png"/>
+                            <connections>
+                                <action selector="onClickBtnDismissBannerAds:" destination="-1" eventType="touchUpInside" id="vay-J7-skh"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="bLJ-LT-lJV" firstAttribute="top" secondItem="Ybr-XB-Nps" secondAttribute="top" id="GRC-gN-FJK"/>
+                        <constraint firstAttribute="trailing" secondItem="bLJ-LT-lJV" secondAttribute="trailing" id="SiC-eG-jjS"/>
+                        <constraint firstAttribute="bottom" secondItem="bLJ-LT-lJV" secondAttribute="bottom" id="uwZ-4c-ioF"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dog-hV-IPd">
+                    <rect key="frame" x="0.0" y="611" width="375" height="56"/>
+                    <color key="backgroundColor" red="0.010674920864403248" green="0.60929429531097412" blue="0.8801085352897644" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </view>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="UNx-6y-0bd">
+                    <rect key="frame" x="0.0" y="611" width="375" height="56"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="356">
+                            <rect key="frame" x="0.0" y="0.0" width="94" height="56"/>
+                            <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <accessibility key="accessibilityConfiguration" label="SettingsEmail"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <color key="tintColor" red="1" green="0.99997437000274658" blue="0.99999129772186279" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal" backgroundImage="t_email_button.png">
+                                <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="selected" backgroundImage="t_email_button.png"/>
+                            <state key="highlighted">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="goemail:" destination="-1" eventType="touchUpInside" id="360"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YqA-6x-gUl">
+                            <rect key="frame" x="94" y="0.0" width="93.5" height="56"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            <accessibility key="accessibilityConfiguration" label="SettingsEmail"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <color key="tintColor" red="1" green="0.99997437000274658" blue="0.99999129772186279" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal" backgroundImage="review_appStore.png">
+                                <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="selected" backgroundImage="t_email_button.png"/>
+                            <state key="highlighted">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="rateApp:" destination="-1" eventType="touchUpInside" id="d92-HJ-8ox"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="358">
+                            <rect key="frame" x="187.5" y="0.0" width="94" height="56"/>
+                            <accessibility key="accessibilityConfiguration" label="Twitter">
+                                <bool key="isElement" value="YES"/>
+                            </accessibility>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <color key="tintColor" red="1" green="0.99997437000274658" blue="0.99999129772186279" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal" backgroundImage="t_setting_button.png">
+                                <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="highlighted">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="gotwitter:" destination="-1" eventType="touchUpInside" id="362"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="359">
+                            <rect key="frame" x="281.5" y="0.0" width="93.5" height="56"/>
+                            <accessibility key="accessibilityConfiguration" label="Help"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <color key="tintColor" red="1" green="0.99997437000274658" blue="0.99999129772186279" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal" backgroundImage="h_setting_button.png">
+                                <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="highlighted">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="gohelp" destination="-1" eventType="touchUpInside" id="363"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="1Qo-x3-ytU"/>
+                        <constraint firstItem="YqA-6x-gUl" firstAttribute="leading" secondItem="356" secondAttribute="trailing" id="53X-Oo-Wls"/>
+                        <constraint firstItem="358" firstAttribute="top" secondItem="UNx-6y-0bd" secondAttribute="top" id="7q9-LX-5dE"/>
+                        <constraint firstItem="359" firstAttribute="width" secondItem="358" secondAttribute="width" id="A8D-Kq-qmQ"/>
+                        <constraint firstItem="356" firstAttribute="top" secondItem="UNx-6y-0bd" secondAttribute="top" id="ECe-pz-q7o"/>
+                        <constraint firstItem="358" firstAttribute="leading" secondItem="YqA-6x-gUl" secondAttribute="trailing" id="Trb-pN-ULo"/>
+                        <constraint firstItem="359" firstAttribute="top" secondItem="UNx-6y-0bd" secondAttribute="top" id="XM8-eM-TX8"/>
+                        <constraint firstItem="YqA-6x-gUl" firstAttribute="top" secondItem="UNx-6y-0bd" secondAttribute="top" id="Yn7-as-fpN"/>
+                        <constraint firstItem="359" firstAttribute="leading" secondItem="358" secondAttribute="trailing" id="YrL-3P-Me8"/>
+                        <constraint firstAttribute="trailing" secondItem="359" secondAttribute="trailing" id="Z5e-Tj-IgY"/>
+                        <constraint firstItem="356" firstAttribute="leading" secondItem="UNx-6y-0bd" secondAttribute="leading" id="aVV-2u-qkf"/>
+                        <constraint firstItem="356" firstAttribute="width" secondItem="YqA-6x-gUl" secondAttribute="width" id="cYc-87-bqJ"/>
+                        <constraint firstAttribute="bottom" secondItem="359" secondAttribute="bottom" id="gzJ-4q-XhF"/>
+                        <constraint firstAttribute="bottom" secondItem="356" secondAttribute="bottom" id="hBQ-zr-42g"/>
+                        <constraint firstItem="358" firstAttribute="width" secondItem="YqA-6x-gUl" secondAttribute="width" id="o4r-EP-71e"/>
+                        <constraint firstItem="358" firstAttribute="leading" secondItem="YqA-6x-gUl" secondAttribute="trailing" id="u3j-e1-LM9"/>
+                        <constraint firstAttribute="bottom" secondItem="YqA-6x-gUl" secondAttribute="bottom" id="v3k-NY-4cO"/>
+                        <constraint firstAttribute="bottom" secondItem="358" secondAttribute="bottom" id="vRg-lh-bYm"/>
+                    </constraints>
+                </stackView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Dog-hV-IPd" secondAttribute="bottom" id="1W7-oY-ucX"/>
+                <constraint firstItem="Dog-hV-IPd" firstAttribute="top" secondItem="Ybr-XB-Nps" secondAttribute="bottom" id="1lm-no-jzR"/>
+                <constraint firstItem="UNx-6y-0bd" firstAttribute="top" secondItem="211" secondAttribute="bottom" id="41t-hR-SCJ"/>
+                <constraint firstItem="UNx-6y-0bd" firstAttribute="bottom" secondItem="G4X-IS-Jb5" secondAttribute="bottom" id="7Bf-2W-jtL"/>
+                <constraint firstItem="Ybr-XB-Nps" firstAttribute="top" secondItem="1" secondAttribute="top" constant="561" id="E5Y-Jk-3Fi"/>
+                <constraint firstAttribute="bottom" secondItem="Ybr-XB-Nps" secondAttribute="bottom" constant="56" id="JL9-ht-MlW"/>
+                <constraint firstAttribute="trailing" secondItem="211" secondAttribute="trailing" id="K1w-E2-MXn"/>
+                <constraint firstItem="211" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="NGN-DT-cdx"/>
+                <constraint firstItem="Ybr-XB-Nps" firstAttribute="trailing" secondItem="G4X-IS-Jb5" secondAttribute="trailing" id="Qgm-cv-6n8"/>
+                <constraint firstItem="UNx-6y-0bd" firstAttribute="trailing" secondItem="G4X-IS-Jb5" secondAttribute="trailing" id="Squ-G6-Kl4"/>
+                <constraint firstItem="211" firstAttribute="leading" secondItem="Ybr-XB-Nps" secondAttribute="leading" id="obq-Ev-8OQ"/>
+                <constraint firstItem="Dog-hV-IPd" firstAttribute="leading" secondItem="G4X-IS-Jb5" secondAttribute="leading" id="qgV-EK-Y2M"/>
+                <constraint firstItem="UNx-6y-0bd" firstAttribute="leading" secondItem="G4X-IS-Jb5" secondAttribute="leading" id="v5F-Q4-f6g"/>
+                <constraint firstItem="Dog-hV-IPd" firstAttribute="trailing" secondItem="G4X-IS-Jb5" secondAttribute="trailing" id="xpP-yF-Oi0"/>
+                <constraint firstItem="211" firstAttribute="top" secondItem="1" secondAttribute="topMargin" id="yn9-RS-haa"/>
+            </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <viewLayoutGuide key="safeArea" id="G4X-IS-Jb5"/>
+            <point key="canvasLocation" x="53.600000000000001" y="48.125937031484263"/>
         </view>
     </objects>
     <resources>
-        <image name="app_store.png" width="80" height="45"/>
-        <image name="app_store_selected.png" width="80" height="45"/>
-        <image name="h_setting_button.png" width="80" height="45"/>
-        <image name="t_email_button.png" width="80" height="45"/>
-        <image name="t_setting_button.png" width="80" height="45"/>
+        <image name="closeAd.png" width="72" height="72"/>
+        <image name="h_setting_button.png" width="34.909091949462891" height="19.636363983154297"/>
+        <image name="review_appStore.png" width="34.909091949462891" height="19.636363983154297"/>
+        <image name="t_email_button.png" width="34.909091949462891" height="19.636363983154297"/>
+        <image name="t_setting_button.png" width="34.909091949462891" height="19.636363983154297"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

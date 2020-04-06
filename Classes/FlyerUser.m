@@ -365,19 +365,13 @@
         NSLog(@"Update Folder Process Complete...");
         
 	}
-
-
 }
-
-
-
 
 /*
  * This will Fixed Old Purchases and Old Flyer Issue
  */
-+(void)migrateUserto3dot0:(PFObject *)oldUserobj{
-    
-    
++(void)migrateUserto3dot0:(PFObject *)oldUserobj
+{
     //Update fields of newly created user from old user
     PFUser *user = [PFUser currentUser];
     
@@ -402,8 +396,7 @@
 	NSString *homeDirectoryPath = NSHomeDirectory();
     NSString *NewUIDFolderName = [user objectForKey:@"username"];
 	NSString *OldUIDPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@",[oldUserobj objectForKey:@"username"]]];
-    
-    
+
     if (![[NSFileManager defaultManager] fileExistsAtPath:OldUIDPath isDirectory:NULL]) {
         
 	}else{
@@ -426,17 +419,21 @@
     // For transfer Purchases and Old Flyers Info
     NSString  *NewUID = user.objectId;
     NSString  *OldUID = oldUserobj.objectId;
-    
-    [PFCloud callFunctionInBackground:@"mergeUser"
-                       withParameters:@{@"oldUser":OldUID,@"newUser":NewUID}
-                                block:^(NSString *result, NSError *error) {
-                                    if (!error) {
-                                        NSLog(@"Cloud Success");
-                                    }
-                                }];
+    NSString *username = [user objectForKey:@"username"];
+    if(NewUID != nil) {
+        [PFCloud callFunctionInBackground:@"mergeUser"
+                           withParameters:@{@"oldUser":OldUID,@"newUser":NewUID}
+                                    block:^(NSString *result, NSError *error) {
+                                        if (!error) {
+                                            NSLog(@"Cloud Success");
+                                        }
+                                    }];
+    }
 
-    //Also Check for New folder Structure
-    [self updateFolderStructure:[user objectForKey:@"username"]];
+    if(username != nil) {
+        //Also Check for New folder Structure
+        [self updateFolderStructure:username];
+    }
 
 }
 
@@ -454,7 +451,6 @@
     PFUser *user = [PFUser currentUser];
     
     NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@", user.username]];
-    
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:anonymousUserPath]) {
         

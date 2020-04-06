@@ -8,11 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "Common.h"
-#import <Parse/PFQuery.h>
 #import "FlyrAppDelegate.h"
 #import "FlyerlySingleton.h"
 #import "ProfileViewController.h"
-#import <ParseUI/PFLoginViewController.h>
+//#import <ParseUI/PFLoginViewController.h>
 #import <Parse/PFQuery.h>
 #import "ParentViewController.h"
 
@@ -25,6 +24,7 @@
 
 -(IBAction)SearchBotton:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UILabel *lblRecoverAccount;
 -(void)removeLoadingView;
 -(void)showAlert:(NSString *)title message:(NSString *)message;
 @end

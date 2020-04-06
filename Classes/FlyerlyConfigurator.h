@@ -8,12 +8,14 @@
 
 #import "DefaultSHKConfigurator.h"
 
-@interface FlyerlyConfigurator : DefaultSHKConfigurator
+@interface FlyerlyConfigurator: DefaultSHKConfigurator
 
 
 - (NSString*)appName;
 - (NSString*)appURL;
 - (NSString*)referralURL;
+- (NSString*)appLinkURL;
+- (NSString*)appInvitePreviewImageURL;
 - (NSArray*)defaultFavoriteURLSharers;
 - (NSArray*)defaultFavoriteImageSharers;
 - (NSArray*)defaultFavoriteTextSharers;
@@ -123,4 +125,5 @@
 -(NSNumber *)dropboxShouldOverwriteExistedFile;
 //SHKBuffer
 - (NSNumber *)bufferShouldShortenURLS;
+- (NSString*)giphyApiKey;
 @end

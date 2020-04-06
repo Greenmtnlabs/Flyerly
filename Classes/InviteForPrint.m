@@ -10,28 +10,25 @@
 #import "Common.h"
 #import <QuartzCore/QuartzCore.h>
 #import "FlyrAppDelegate.h"
-#import <FacebookSDK/FacebookSDK.h>
 #import "CreateFlyerController.h"
 #import "HelpController.h"
 #import "Flurry.h"
 #import "UIImagePDF.h"
 #import "UserVoice.h"
 #import "SendingPrintViewController.h"
-#import "LobPostcardModel.h"
-#import "LobAddressModel.h"
-#import "LobRequest.h"
-#import "LobObjectModel.h"
-#import "PayPalPaymentViewController.h"
-
+#import "SHKActivityIndicator.h"
+#import "ShareKit.h"
+#import "SHKTextMessage.h"
+#import <UserReportSDK/UserReportSDK-Swift.h>
 
 @interface InviteForPrint ()
 
-@property (nonatomic, strong, readwrite) PayPalConfiguration *payPalConfiguration;
+
 
 @end
 
 @implementation InviteForPrint
-@synthesize uiTableView, contactsArray, selectedIdentifiers, searchTextField, iPhoneinvited,flyer;
+@synthesize uiTableView, contactsArray, selectedIdentifiers, searchTextField, iPhoneinvited,flyer, msgTextView;
 @synthesize contactBackupArray;
 
 
@@ -41,9 +38,9 @@
     
     [super viewDidLoad];
     
-    UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
-    [UserVoice initialize:config];
-    
+//    UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
+//    [UserVoice initialize:config];
+    msgTextView.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
     self.selectedIdentifiers = [[NSMutableArray alloc] init];
     globle = [FlyerlySingleton RetrieveSingleton];
     self.navigationItem.hidesBackButton = YES;
@@ -70,26 +67,17 @@
     
     
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"home_button"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,leftBarButton,nil]];
-    
-    
+
     // INVITE BAR BUTTON
     UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-	
-    //if YES then Skip paypal payment for testing
-    if( NO )
-    [inviteButton addTarget:self action:@selector(sendPdfFlyer) forControlEvents:UIControlEventTouchUpInside];
-    else
-    [inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    
-    [inviteButton setBackgroundImage:[UIImage imageNamed:@"post"] forState:UIControlStateNormal];
+    [inviteButton addTarget:self action:@selector(goToSendPV) forControlEvents:UIControlEventTouchUpInside];
+   
+    [inviteButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
     inviteButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
@@ -129,7 +117,8 @@
 
 -(void)loadHelpController{
     
-    [UserVoice presentUserVoiceInterfaceForParentViewController:self];
+    //[UserVoice presentUserVoiceInterfaceForParentViewController:self];
+    [UserReport tryInvite];
 }
 
 -(IBAction)goBack{
@@ -156,25 +145,31 @@
     return NO;
 }
 
-
--(IBAction)invite{
+//Go to screen where user enters his address
+- (void) goToSendPV {
     
     NSMutableArray *identifiers = [[NSMutableArray alloc] init];
     identifiers = selectedIdentifiers;
+    
     NSLog(@"%@",identifiers);
-    
     NSLog(@"%lu",(unsigned long)contactsArray.count);
-    if([identifiers count] > 0) {
     
-        [self openBuyPanel:selectedIdentifiers.count];
-
-    } else {
+    if([identifiers count] > 0) {
+        
+        [Flurry logEvent:@"Friends Invited"];
+        
+        SendingPrintViewController *sendingControoler = [[SendingPrintViewController alloc]initWithNibName:@"SendingPrintViewController" bundle:nil];
+        sendingControoler.flyer = self.flyer;
+        sendingControoler.contactsArray = self.selectedIdentifiers;
+        [self.navigationController pushViewController:sendingControoler animated:YES];
+        
+    }
+    else
+    {
         [self showAlert:@"Please select any contact to invite !" message:@""];
     }
     
-    [Flurry logEvent:@"Friends Invited"];
 }
-
 
 
 #pragma mark  Device Contact List
@@ -186,15 +181,6 @@
     
     [selectedIdentifiers removeAllObjects];
     
-    // INVITE BAR BUTTON
-    /*UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
-    [inviteButton setBackgroundImage:[UIImage imageNamed:@"invite_friend"] forState:UIControlStateNormal];
-    inviteButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];*/
-    //return;
-    
     [self showLoadingIndicator];
     
     self.selectedIdentifiers = nil;
@@ -202,7 +188,8 @@
 
     [self.uiTableView reloadData];
     // init contact array
-    if( contactBackupArray ){
+    if( contactBackupArray )
+    {
         
         // Reload table data after all the contacts get loaded
         contactsArray = nil;
@@ -217,41 +204,156 @@
     } else {
         
         contactsArray = [[NSMutableArray alloc] init];
-        ABAddressBookRef m_addressbook = ABAddressBookCreateWithOptions(NULL, NULL);
+        
         searchTextField.text = @"";
         
-        if (m_addressbook == NULL) {
-            m_addressbook = ABAddressBookCreateWithOptions(NULL, NULL);
-        }
+        [self getAllContacts];
         
-        if (m_addressbook) {
-            // ABAddressBookRequestAccessWithCompletion is iOS 6 and up.
-            if (&ABAddressBookRequestAccessWithCompletion) {
-                ABAddressBookRequestAccessWithCompletion(m_addressbook,
-                                                         ^(bool granted, CFErrorRef error) {
-                                                             if (granted) {
-                                                                 // constructInThread: will CFRelease ab.
-                                                                 [NSThread detachNewThreadSelector:@selector(constructInThread:)
-                                                                                          toTarget:self
-                                                                                        withObject:(__bridge id)(m_addressbook)];
-                                                             } else {
-                                                                 CFRelease(m_addressbook);
-                                                                 // Ignore the error
-                                                             }
-                                                         });
-            } else {
-                // constructInThread: will CFRelease ab.
-                [NSThread detachNewThreadSelector:@selector(constructInThread:)
-                                         toTarget:self
-                                       withObject:(__bridge id)(m_addressbook)];
-            }
-        }
+//        if (m_addressbook == NULL) {
+//            m_addressbook = ABAddressBookCreateWithOptions(NULL, NULL);
+//        }
+//
+//        if (m_addressbook) {
+//            // ABAddressBookRequestAccessWithCompletion is iOS 6 and up.
+//            if (&ABAddressBookRequestAccessWithCompletion) {
+//                ABAddressBookRequestAccessWithCompletion(m_addressbook,
+//                                                         ^(bool granted, CFErrorRef error) {
+//                                                             if (granted) {
+//                                                                 // constructInThread: will CFRelease ab.
+//                                                                 [NSThread detachNewThreadSelector:@selector(constructInThread:)
+//                                                                                          toTarget:self
+//                                                                                        withObject:(__bridge id)(m_addressbook)];
+//                                                             } else {
+//                                                                 CFRelease(m_addressbook);
+//                                                                 // Ignore the error
+//                                                             }
+//                                                         });
+//            } else {
+//                // constructInThread: will CFRelease ab.
+//                [NSThread detachNewThreadSelector:@selector(constructInThread:)
+//                                         toTarget:self
+//                                       withObject:(__bridge id)(m_addressbook)];
+//            }
+//        }
     }
 }
 
 /*
  * Mehod called to get contacts
  */
+
+-(void) getAllContacts
+{
+    NSArray *countryCodes = [NSLocale ISOCountryCodes];
+    NSMutableArray *countries = [NSMutableArray arrayWithCapacity:[countryCodes count]];
+    
+    for (NSString *countryCode in countryCodes)
+    {
+        NSString *identifier = [NSLocale localeIdentifierFromComponents: [NSDictionary dictionaryWithObject: countryCode forKey: NSLocaleCountryCode]];
+        NSString *country_ = [[[NSLocale alloc] initWithLocaleIdentifier:@"en_UK"] displayNameForKey: NSLocaleIdentifier value: identifier];
+        [countries addObject: country_];
+    }
+    
+    NSDictionary *codeForCountryDictionary = [[NSDictionary alloc] initWithObjects:countryCodes forKeys:countries];
+    
+    
+    CNContactStore *store = [[CNContactStore alloc] init];
+    [store requestAccessForEntityType:CNEntityTypeContacts completionHandler:^(BOOL granted, NSError * _Nullable error)
+    {
+        if (granted == YES)
+        {
+            //keys with fetching properties
+            NSArray *keys = @[CNContactFamilyNameKey, CNContactGivenNameKey, CNContactPhoneNumbersKey, CNContactImageDataKey,CNContactPostalAddressesKey];
+            NSString *containerId = store.defaultContainerIdentifier;
+            NSPredicate *predicate = [CNContact predicateForContactsInContainerWithIdentifier:containerId];
+            NSError *error;
+            NSArray *cnContacts = [store unifiedContactsMatchingPredicate:predicate keysToFetch:keys error:&error];
+            if (error) {
+                NSLog(@"error fetching contacts %@", error);
+            } else
+            {
+                for (CNContact *contact in cnContacts)
+                {
+                    // copy data to my custom Contacts class.
+                    ContactsModel *model = [[ContactsModel alloc] init];
+                    model.others = @"";
+
+                    NSMutableDictionary *contactInfoDict = [[NSMutableDictionary alloc]
+                                                            initWithObjects:@[@"", @"", @"", @"", @""]
+                                                            forKeys:@[@"streetAddress",@"city",@"state",@"zip",@"country"]];
+                    
+                    if(contact.postalAddresses.count > 0)
+                    {
+                        CNLabeledValue *lblAddress = contact.postalAddresses[0];
+                        CNPostalAddress *address = lblAddress.value;
+                        [contactInfoDict setObject:address.street forKey:@"streetAddress"];
+                        [contactInfoDict setObject:address.city forKey:@"city"];
+                        [contactInfoDict setObject:address.state forKey:@"state"];
+                        [contactInfoDict setObject:address.postalCode forKey:@"zip"];
+                        [contactInfoDict setObject:address.ISOCountryCode forKey:@"country"];
+                    }
+                    
+                    if ( ![[contactInfoDict objectForKey:@"streetAddress"] isEqualToString:@""] &&
+                        ![[contactInfoDict objectForKey:@"state"] isEqualToString:@""] &&
+                        ![[contactInfoDict objectForKey:@"city"] isEqualToString:@""] &&
+                        ![[contactInfoDict objectForKey:@"country"] isEqualToString:@""] &&
+                        ![[contactInfoDict objectForKey:@"zip"] isEqualToString:@""])
+                    {
+                        
+                        model.streetAddress = [contactInfoDict objectForKey:@"streetAddress"];
+                        model.state = [contactInfoDict objectForKey:@"state"];
+                        model.city = [contactInfoDict objectForKey:@"city"];
+                        NSString *countryCode = [contactInfoDict objectForKey:@"country"];
+                        model.country = countryCode.uppercaseString;
+                        model.zip = [contactInfoDict objectForKey:@"zip"];
+                        
+                        //For username and surname
+                        CFStringRef firstName, lastName;
+                        firstName = CFBridgingRetain(contact.givenName);
+                        lastName  = CFBridgingRetain(contact.familyName);
+                        
+                        if(!firstName)
+                            firstName = (CFStringRef) @"";
+                        if(!lastName)
+                            lastName = (CFStringRef) @"";
+                        
+                        model.name = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+                        
+                        
+                        // For contact picture
+                        if(contact.imageData != nil)
+                        {
+                            UIImage *contactPicture = [UIImage imageWithData:contact.imageData];
+                            model.img = contactPicture;
+                        }
+                        
+//                        for (CNLabeledValue *label in contact.phoneNumbers) {
+//                            NSString *phone = [label.value stringValue];
+//                            if ([phone length] > 0) {
+//                                [contact.phones addObject:phone];
+//                            }
+//                        }
+
+                        if ( [model.country isEqualToString:@"US"] )
+                        {
+                            [contactsArray addObject:model];
+                        }
+                    }
+                }
+                
+                // Reload table data after all the contacts get loaded
+                contactBackupArray = nil;
+                contactBackupArray = contactsArray;
+                [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self hideLoadingIndicator];
+                });
+                
+            }
+        }
+    }];
+}
+
 -(void)constructInThread:(ABAddressBookRef)m_addressbook{
     
     if (!m_addressbook) {
@@ -277,7 +379,8 @@
     
     
     
-    for (int i=0;i < nPeople;i++) {
+    for (int i=0;i < nPeople;i++)
+    {
         ContactsModel *model = [[ContactsModel alloc] init];
         
         model.others = @"";
@@ -326,7 +429,6 @@
             model.zip = [contactInfoDict objectForKey:@"zip"];
         
             //For username and surname
-            ABMultiValueRef phones =(__bridge ABMultiValueRef)((NSString*)CFBridgingRelease(ABRecordCopyValue(ref, kABPersonPhoneProperty)));
             CFStringRef firstName, lastName;
             firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
             lastName  = ABRecordCopyValue(ref, kABPersonLastNameProperty);
@@ -353,40 +455,10 @@
                 }
             }
             
-            if ( [model.country isEqualToString:@"US"] ) {
-                
+            if ( [model.country isEqualToString:@"US"] )
+            {
                 [contactsArray addObject:model];
-                
             }
-            
-            //For Phone number
-            /*NSString* mobileLabel;
-            for(CFIndex i = 0; i < ABMultiValueGetCount(phones); i++) {
-                
-                mobileLabel = (NSString*)CFBridgingRelease(ABMultiValueCopyLabelAtIndex(phones, i));
-                if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
-                {
-                    model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                    [contactsArray addObject:model];
-                    break ;
-                }
-                else if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel])
-                {
-                    model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                    [contactsArray addObject:model];
-                    break ;
-                }else if ([mobileLabel isEqualToString:(NSString*)kABHomeLabel])
-                {
-                    model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                    [contactsArray addObject:model];
-                    break ;
-                }else if ([mobileLabel isEqualToString:(NSString*)kABWorkLabel])
-                {
-                    model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                    [contactsArray addObject:model];
-                    break ;
-                }
-            }*/
         }
     }
     
@@ -394,7 +466,9 @@
     contactBackupArray = nil;
     contactBackupArray = contactsArray;
     [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-    [self hideLoadingIndicator];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self hideLoadingIndicator];
+    });
     
 }
 
@@ -417,7 +491,7 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    int count = ([[self getArrayOfSelectedTab] count]);
+    int count = (int) ([[self getArrayOfSelectedTab] count]);
     return  count;
 }
 
@@ -434,7 +508,7 @@
     } else if ( IS_IPHONE_6 ){
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InviteFreindsCell-iPhone6" owner:self options:nil];
         cell = (InviteFriendsCell *)[nib objectAtIndex:0];
-    } else if ( IS_IPHONE_6_PLUS ) {
+    } else if ( IS_IPHONE_6_PLUS || IS_IPHONE_XR || IS_IPHONE_XS) {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InviteFreindsCell-iPhone6-Plus" owner:self options:nil];
         cell = (InviteFriendsCell *)[nib objectAtIndex:0];
     } else {
@@ -511,7 +585,8 @@
             [model setInvitedStatus:0];
             
             //REMOVE FROM SENDING LIST
-            [selectedIdentifiers removeObject:model.streetAddress];
+            
+            [selectedIdentifiers removeObject:model];
             
         }
 }
@@ -601,7 +676,7 @@
     // HERE WE UPDATE PARSE ACCOUNT FOR REMEMBER INVITED FRIENDS LIST
     [user saveInBackground];
     
-    [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
+    [self showAlert:@"Invitation Sent!" message:[NSString stringWithFormat: @"You have successfully invited your friends to join %@.", APP_NAME]];
     [selectedIdentifiers   removeAllObjects];
     [self.uiTableView reloadData ];
     
@@ -678,66 +753,6 @@
     [Flurry logEvent:@"Friends Invited"];
 }
 
-
-/*
- * Here we Open Buy Panel
- */
--(void)openBuyPanel : (int) totalContactsToSendPrint {
-    // Create a PayPalPayment
-    PayPalPayment *payment = [[PayPalPayment alloc] init];
-    
-    // Amount, currency, and description
-    NSDecimalNumber *totalAmount = [[NSDecimalNumber alloc] initWithInt:(2 * totalContactsToSendPrint)];
-    payment.amount = totalAmount;
-    payment.currencyCode = @"USD";
-    payment.shortDescription = @"Printing Flyer PostCard";
-    
-    // Use the intent property to indicate that this is a "sale" payment,
-    // meaning combined Authorization + Capture. To perform Authorization only,
-    // and defer Capture to your server, use PayPalPaymentIntentAuthorize.
-    payment.intent = PayPalPaymentIntentSale;
-    
-    // Check whether payment is processable.
-    if ( payment.processable ) {
-        // If, for example, the amount was negative or the shortDescription was empty, then
-        // this payment would not be processable. You would want to handle that here.
-        PayPalPaymentViewController *paymentViewController;
-        paymentViewController = [[PayPalPaymentViewController alloc] initWithPayment:payment
-                                                                       configuration:self.payPalConfiguration
-                                                                            delegate:self];
-        
-        // Present the PayPalPaymentViewController.
-        [self presentViewController:paymentViewController animated:YES completion:nil];
-    }
-}
-
-#pragma mark - Paypal delegate
-
-- (void)payPalPaymentViewController:(PayPalPaymentViewController *)paymentViewController
-                 didCompletePayment:(PayPalPayment *)completedPayment {
-    
-
-    // Dismiss the PayPalPaymentViewController.
-    [self dismissViewControllerAnimated:YES completion:^{
-        NSLog(@"Successfully logged in.");
-        [self sendPdfFlyer];
-    }];
-    
-}
-
-- (void)payPalPaymentDidCancel:(PayPalPaymentViewController *)paymentViewController {
-    // The payment was canceled; dismiss the PayPalPaymentViewController.
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void) sendPdfFlyer {
-    
-    SendingPrintViewController *sendingControoler = [[SendingPrintViewController alloc]initWithNibName:@"SendingPrintViewController" bundle:nil];
-    sendingControoler.flyer = self.flyer;
-    sendingControoler.contactsArray = self.selectedIdentifiers;
-	[self.navigationController pushViewController:sendingControoler animated:YES];
-
-}
 
 #pragma mark - Message UI Delegate
 

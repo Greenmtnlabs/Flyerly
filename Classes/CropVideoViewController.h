@@ -26,5 +26,6 @@
 
 @property (nonatomic, strong) IBOutlet UIView *playerView;
 @property (nonatomic, strong) IBOutlet CropView *cropView;
+@property (nonatomic, strong) NSMutableDictionary *giphyDic;
 
 @end

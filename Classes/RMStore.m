@@ -474,9 +474,11 @@ typedef void (^RMStoreSuccessBlock)();
 
 - (RMAddPaymentParameters*)popAddPaymentParametersForIdentifier:(NSString*)identifier
 {
-    RMAddPaymentParameters *parameters = [_addPaymentParameters objectForKey:identifier];
-    [_addPaymentParameters removeObjectForKey:identifier];
-    return parameters;
+    if(identifier != nil){
+        RMAddPaymentParameters *parameters = [_addPaymentParameters objectForKey:identifier];
+        [_addPaymentParameters removeObjectForKey:identifier];
+        return parameters;
+    }
 }
 
 #pragma mark SKRequestDelegate

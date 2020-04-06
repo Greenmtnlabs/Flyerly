@@ -15,6 +15,7 @@
 
 @interface Flyer : NSObject{
     
+    NSString *curFlyerPath; // This variable is used to store path of video. Because from home screen, sometimes app fails to get path   
     NSString *piecesFile;
     NSString *textFile;
     NSString *socialFile;
@@ -31,10 +32,9 @@
 
 -(void)setUpdatedSnapshotWithImage :(UIImage *)snapShot;
 
--(void)saveInGallery :(NSData *)imgData;
+-(void)saveIntoGallery;
 
 -(void)addToHistory;
--(void)addToGallery :(NSData *)snapShotData;
 
 -(void)replaceFromHistory;
 
@@ -51,7 +51,7 @@
 
 -(NSString *)addText;
 -(NSString *)addImage;
--(NSString *)addWatermark;
+-(void)addGiphyWatermark;
 -(NSString *)addDrawingImage:(BOOL) isMainLayer;
 -(NSString *)addClipArt;
 
@@ -82,6 +82,7 @@
 -(void)setFlyerBorder :(NSString *)uid RGBColor:(id)rgb;
 
 -(void)setFlyerTypeVideo;
+-(void)setFlyerTypeVideoWithSize:(int)width height:(int)height videoSoure:(NSString *)videoSoure;
 -(NSString *)getFlyerTypeVideo;
 -(void)setFlyerTypeImage;
 
@@ -107,8 +108,10 @@
 -(void)setFacebookStatus :(int)status;
 -(void)setTwitterStatus :(int)status;
 -(void)setInstagaramStatus :(int)status;
--(void)setFlickerStatus :(int)status;
--(void)setThumblerStatus :(int)status;
+
+// Sets status of saveButton
+-(void)setSaveButtonStatus :(int)status;
+-(void)setMessengerStatus :(int)status;
 -(void)setEmailStatus :(int)status;
 -(void)setSmsStatus :(int)status;
 -(void)setClipboardStatus :(int)status;
@@ -121,8 +124,10 @@
 -(NSString *)getFacebookStatus;
 -(NSString *)getTwitterStatus;
 -(NSString *)getInstagaramStatus;
--(NSString *)getFlickerStatus;
--(NSString *)getThumblerStatus;
+
+// Method to return saveButton Status
+-(NSString *)getSaveButtonStatus;
+-(NSString *)getMessengerStatus;
 -(NSString *)getEmailStatus;
 -(NSString *)getSmsStatus;
 -(NSString *)getClipboardStatus;
@@ -141,6 +146,7 @@
 
 -(NSString *)getShareType;
 -(NSString *)getFlyerUpdateDate;
+-(NSString *)getFlyerUpdateDateInAgoFormat;
 -(NSString *)getVideoAssetURL;
 -(NSString *)getYoutubeLink;
 -(NSString *)getVideoMergeAddress;
@@ -158,6 +164,7 @@
 -(float)getWidth :(NSString *)uid;
 -(float)getHight :(NSString *)uid;
 -(NSString *)getFlyerImage;
+-(BOOL)isSaveRequired;
 -(BOOL)isVideoMergeProcessRequired;
 +(NSString *)getUniqueId;
 
@@ -167,10 +174,24 @@
 
 -(CGFloat)getTvDefPosX;
 -(CGFloat)getTvDefPosY;
+-(CGSize)getSizeOfFlyer;
+-(BOOL)saveAfterCheck;
 
 @property (strong, readonly) NSMutableDictionary *masterLayers;
 @property (strong, nonatomic) NSMutableArray *socialArray;
 @property (strong, nonatomic) NSMutableArray *textFileArray;
 @property (strong, nonatomic) ALAssetsLibrary *library;
 
+//On back save in gallary, after number of tasks
+@property (assign) int saveInGallaryAfterNumberOfTasks;
+
+//Tap on share button, merge video, dont save in gallary because it prompts delete dialoag
+//so this flag will help when sharing pannel gone hide, we check if its ture we call the saveInGallary at that time
+@property (assign) int saveInGallaryRequired; //0 not required, 1 required, -1 video mergin is in progress
+-(BOOL)canSaveInGallary;
+-(void)showAllowSaveInGallerySettingAlert;
+
+-(void)resetAllButtonStatus;
+
+-(NSString *)dateFormatter: (NSString *) dateString;
 @end

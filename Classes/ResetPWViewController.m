@@ -11,7 +11,8 @@
 
 @implementation ResetPWViewController
 
-@synthesize username;
+@synthesize username, lblRecoverAccount;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -43,7 +44,8 @@
      backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
-
+    
+    lblRecoverAccount.text = [NSString stringWithFormat:@"Recover Your %@ Account", APP_NAME] ;
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,8 +53,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 
 /*
  * Here we Check User Exist on Parse or not
@@ -82,14 +82,16 @@
             dbUsername = object[@"email"];
             NSLog(@"%@",dbUsername);
             
-            if( dbUsername ){
-                
+            if( dbUsername )
+            {
                 //Requesting for Send Email to User
                 [PFUser requestPasswordResetForEmailInBackground:dbUsername block:^(BOOL succeeded, NSError *error){
                     if (error) {
                         [self removeLoadingView];
                          [self showAlert:@"No account exists with username" message:@""];
-                    } else {
+                    }
+                    else
+                    {
                         
                         [self removeLoadingView];
                         [self showAlert:@"Reset password email has been sent." message:@""];

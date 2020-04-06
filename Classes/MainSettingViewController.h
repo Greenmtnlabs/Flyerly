@@ -21,11 +21,13 @@
 #import <ShareKit.h>
 #import "FlyerlyTwitterLike.h"
 #import "RMStoreKeychainPersistence.h"
+#import "PrivicyPolicyViewController.h"
+#import "TermsOfServiceViewController.h"
 
 
 @class InputViewController,FlyerlySingleton ;
-@class LaunchController,HelpController,ProfileViewController,InAppViewController;
-@interface MainSettingViewController : UIViewController <UITableViewDelegate, MFMailComposeViewControllerDelegate,InAppPurchasePanelButtonProtocol,UserPurchasesDelegate,SHKSharerDelegate>{
+@class LaunchController,HelpController,ProfileViewController,TermsOfServiceViewController,PrivicyPolicyViewController,InAppViewController;
+@interface MainSettingViewController : UIViewController <UITableViewDelegate, MFMailComposeViewControllerDelegate,InAppPurchasePanelButtonProtocol,UserPurchasesDelegate, GADInterstitialDelegate, GADBannerViewDelegate, SHKSharerDelegate>{
 
     NSMutableArray *category;
     NSMutableArray *groupCtg;
@@ -35,6 +37,10 @@
     RegisterController *registerController;
     FlyerlySingleton *globle;
     InAppViewController *inappviewcontroller;
+    PrivicyPolicyViewController * privicyPolicyView;
+    TermsOfServiceViewController * termOfServiceView;
+    BOOL bannerAdClosed;
+    BOOL bannerShowed; 
 
 }
 @property (strong, nonatomic)IBOutlet UITableView *tableView;
@@ -48,6 +54,12 @@
 -(IBAction)rateApp:(id)sender;
 -(IBAction)gotwitter:(id)sender;
 -(IBAction)goemail:(id)sender;
+- (IBAction)onClickBtnDismissBannerAds:(id)sender;
+
+@property(nonatomic, strong) GADInterstitial *interstitialAds;
+//@property(nonatomic, strong) GADBannerView *bannerAds;
+@property (weak, nonatomic) IBOutlet GADBannerView *bannerAdsView;
+@property (weak, nonatomic) IBOutlet UIButton *btnBannerAdsDismiss;
 
 
 @end

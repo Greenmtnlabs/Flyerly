@@ -44,12 +44,18 @@
 @property(nonatomic,strong) IBOutlet UIButton *loginButton;
 @property(nonatomic,strong) IBOutlet UIButton *completeDesignBundleButton;
 @property(nonatomic,strong) IBOutlet UIActivityIndicatorView *loadingIndicator;
+@property BOOL isFromStockPhoto;
+
+@property CGSize desiredImageSize;
+@property (nonatomic, copy) void (^onImageTaken)(UIImage *);
 
 -(IBAction)hideMe;
+-(IBAction)goToTermsAndServiceScreen;
 -(IBAction)purchaseCompleteBundle;
 -(void) requestProduct;
 -(void) inAppDataLoaded;
 -(void) restorePurchase;
 -(void) updateParse;
+-(void) purchaseProductByID:(NSString *) identifier;
 
 @end

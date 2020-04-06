@@ -9,23 +9,30 @@
 
 #import "InAppViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "Common.h"
+#import "AssetGroupViewControllerWithSearchFeild.h"
 
 @interface InAppViewController () {
     NSMutableArray *productArray;
     NSArray *freeFeaturesArray;
     NSString *cellDescriptionForRefrelFeature;
+    NSString *productIdentifier;
+    NSMutableArray *productIdentifiers;
 }
 
 @end
 
 @implementation InAppViewController 
 
-@synthesize freeFeaturesTview,paidFeaturesTview,loginButton,completeDesignBundleButton,loadingIndicator;
+@synthesize freeFeaturesTview,paidFeaturesTview,loginButton,completeDesignBundleButton,loadingIndicator,isFromStockPhoto;
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if([productIdentifier length] > 0){
+        return;
+    }
     [loginButton addTarget:self action:@selector(inAppPurchasePanelButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     paidFeaturesTview.dataSource = self;
 	paidFeaturesTview.delegate = self;
@@ -42,19 +49,18 @@
     loginButton.layer.borderWidth=1.0f;
     [loginButton.layer setCornerRadius:3.0];
     loginButton.layer.borderColor=[[UIColor whiteColor] CGColor];
-
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    //Checking if the user is valid or anonymus
-    if ([[PFUser currentUser] sessionToken].length != 0) {
-        [loginButton setTitle:(@"Restore Purchases")];
-        loginButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    }else {
-        [loginButton setTitle:(@"Sign In")];
+    if([productIdentifier length] > 0){
+        return;
     }
+    
+    [loginButton setTitle:(@"Restore Purchases")];
+    loginButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     
     if ([[PFUser currentUser] sessionToken].length != 0) {
         
@@ -82,18 +88,16 @@
                               if ( refrelCounter >= 20 )
                               {
                                   //Setting the feature name,feature description values for cell view using plist
-                                  cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"You have sucessfully unlocked saved flyers feature by refreing friends.Enjoy!"];
-                                  
+                                  cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"You have sucessfully unlocked Design Bundle feature by refreing friends.Enjoy!"];
                                   
                               }else if ( refrelCounter <= 0 ){
-                                  cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to flyerly and unlock saved flyers feature for FREE!"];
+                                  
+                                  cellDescriptionForRefrelFeature = [NSString stringWithFormat: @"Invite 20 people to %@ and unlock Design Bundle feature for FREE!", APP_NAME ] ;
                               }
                               else if ( refrelCounter > 0 && refrelCounter < 20 )
                               {
-                                  int moreToInvite = 20 - refrelCounter;
-                                  //Setting the feature name,feature description values for cell view using plist
-                                  cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite %d more people to flyerly and unlock saved flyers feature for FREE!",moreToInvite];
-                                  
+                                 int moreToInvite = 20 - refrelCounter;
+                                 cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite %d more people to %@ and unlock Design Bundle feature for FREE!", moreToInvite, APP_NAME];
                               }
                               
                               [freeFeaturesTview reloadData];
@@ -104,9 +108,17 @@
          }
      }];
     }else {
-        
-        cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 people to flyerly and unlock saved flyers feature for FREE!"];
+       cellDescriptionForRefrelFeature = [NSString stringWithFormat:@"Invite 20 more people to %@ and unlock Design Bundle feature for FREE!", APP_NAME];
     }
+}
+
+/*
+ * Reloads Array of In-App Purchase IDs
+ */
+
+-(void)reloadInAppProductIDsArray{
+
+    productIdentifiers = [[NSMutableArray alloc] initWithObjects:BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION,BUNDLE_IDENTIFIER_ALL_DESIGN, BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION, BUNDLE_IDENTIFIER_UNLOCK_VIDEO, BUNDLE_IDENTIFIER_AD_REMOVAL,PRODUCT_ICON_SELETED, nil];
 }
 
 
@@ -118,13 +130,20 @@
     [self.buttondelegate inAppPanelDismissed];
 }
 
+-(IBAction)goToTermsAndServiceScreen
+{
+    [self hideMe];
+    UIViewController *cont = (UIViewController *)self.buttondelegate;
+    UINavigationController *navigationController = cont.navigationController;
+    [navigationController pushViewController:[[TermsOfServiceViewController alloc] initWithNibName:@"TermsOfServiceViewController" bundle:nil] animated:YES];    
+}
+
 /*
  * Here we
  */
--(IBAction)purchaseCompleteBundle {
-    
+-(IBAction)purchaseCompleteBundle
+{
     [self purchaseProductAtIndex:0];
-
 }
 
 // Customize the number of rows in the table view.
@@ -153,52 +172,126 @@
     int rowIndex = (int) indexPath.row;
     
     //if not cancel and Restore button presses
-    if(rowIndex == 0 || rowIndex == 1 || rowIndex == 2 || rowIndex == 3) {
+    if(rowIndex >= 0 || rowIndex <= 5) {
         
-        //Checking if the user is valid or anonymus
-        if ([[PFUser currentUser] sessionToken].length != 0) {
-            
-            //Getting Selected Product
-            NSDictionary *product = [productArray objectAtIndex:rowIndex];
-            NSString* productIdentifier= product[@"productidentifier"];
-            
-            if ( [userPurchases checkKeyExistsInPurchases:productIdentifier] ) {
-                
-                UIAlertView *alradyPurchasedAlert = [[UIAlertView alloc] initWithTitle: @"Product already purchased"
-                                                                    message: @"You have already purchased this item."
-                                                                   delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
-                
-                [alradyPurchasedAlert show];
-                
-            }else {
-                
-                [self purchaseProductAtIndex:rowIndex];
-            }
-            
-        }else {
-            UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"Please sign in first"
-                                                                message: @"To purchase any product, you need to sign in first."
-                                                               delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
-            
-            [someError show];
+        // Checking if the user is valid or anonymus
+        if ([[PFUser currentUser] sessionToken].length != 0) { // UserType = REGISTERED for logged in user
+            [[NSUserDefaults standardUserDefaults]setValue: REGISTERED forKey: @"UserType"];
+        } else { // UserType = ANONYMOUS for not logged in user
+            [[NSUserDefaults standardUserDefaults]setValue: ANONYMOUS forKey: @"UserType"];
         }
+        
+        //Getting Selected Product
+        NSDictionary *product = [productArray objectAtIndex:rowIndex];
+        NSString* prodIdentifier = product[@"productidentifier"];
+        
+        if ( ! ([prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION] // Monthly Subscription
+                || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION] // Yearly Subscription
+                || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_AD_REMOVAL] // Ad Removal Subscription
+                ) &&
+            [userPurchases checkKeyExistsInPurchases:productIdentifier] )
+        {
+            
+            // show alert that item has already been purchased
+            [self showAlreadyPurchasedAlert];
+            
+        } else if( ([prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION] // Monthly Subscription
+                    || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION] // Yearly Subscription
+                    || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_AD_REMOVAL] // Ad Removal Subscription
+                    ) &&
+                  [userPurchases isSubscriptionValid]) {
+            
+            // show alert that item has already been purchased
+            [self showAlreadyPurchasedAlert];
+            
+        }
+        else if([prodIdentifier isEqualToString: PRODUCT_ICON_SELETED] && !isFromStockPhoto)
+        {
+            AssetGroupViewControllerWithSearchFeild *buyImagesController= [[AssetGroupViewControllerWithSearchFeild alloc]initWithNibName:@"AssetGroupViewControllerWithSearchFeild" bundle:nil];
+            buyImagesController.onImageTaken = self.onImageTaken;
+            buyImagesController.desiredImageSize = self.desiredImageSize;
+            buyImagesController.isFromInApp = true;
+            [self hideMe];
+            UIViewController *cont = (UIViewController *)self.buttondelegate;
+            UINavigationController *navigationController = cont.navigationController;
+            [navigationController pushViewController:buyImagesController animated:YES];
+        }
+        else
+        {
+            
+            [self purchaseProductAtIndex:rowIndex];
+            
+        }
+
     }
     
     [self performSelector:@selector(deselect) withObject:nil afterDelay:0.2f];
 }
 
-
-- (void) purchaseProductAtIndex:(int) index {
+- (void) purchaseProductAtIndex:(int) index{
     
     //This line pop up login screen if user not exist
     [[RMStore defaultStore] addStoreObserver:self];
     
     //Getting Selected Product
     NSDictionary *product = [productArray objectAtIndex:index];
-    NSString* productIdentifier= product[@"productidentifier"];
+    NSString* prodIdentifier= product[@"productidentifier"];
     
     //Purchasing the product on the basis of product identifier
-    [self purchaseProductID:productIdentifier];
+    [self purchaseProductID:prodIdentifier];
+}
+
+-(void) purchaseProductByID:(NSString *) identifier{
+    
+    
+    productIdentifier = identifier;
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Would you like to buy Ad Removal in app for $4.99?" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    
+    [alert show];
+
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex == 1) {
+        
+        //Checking if the user is valid or anonymus
+        if ([[PFUser currentUser] sessionToken].length != 0) { // UserType = REGISTERED for logged in user
+            [[NSUserDefaults standardUserDefaults]setValue: REGISTERED forKey: @"UserType"];
+        }
+        else
+        { // UserType = ANONYMOUS for not logged in user
+            [[NSUserDefaults standardUserDefaults]setValue: ANONYMOUS forKey: @"UserType"];
+        }
+        
+        //Getting Selected Product
+        NSDictionary *product = [productArray objectAtIndex:4];
+        NSString* prodIdentifier = product[@"productidentifier"];
+        
+        if ( ! ([prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION ] // Monthly Subscription
+                || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION] // Yearly Subscription
+                || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_AD_REMOVAL] // Ad Removal Subscription
+                ) &&
+            [userPurchases checkKeyExistsInPurchases:productIdentifier] )  {
+            
+            // show alert that item has already been purchased
+            [self showAlreadyPurchasedAlert];
+            
+        } else if(! ([prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION] // Monthly Subscription
+                    || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION] // Yearly Subscription
+                    || [prodIdentifier isEqualToString: BUNDLE_IDENTIFIER_AD_REMOVAL] // Ad Removal Subscription
+                    ) &&
+                  [userPurchases isSubscriptionValid]) {
+            
+            // show alert that item has already been purchased
+            [self showAlreadyPurchasedAlert];
+            
+        } else
+        {
+            [self purchaseProductID:productIdentifier];
+        }
+
+    }
 }
 
 /* HERE WE SHOWING DESELECT ANIMATION ON TABLEVIEW CELL
@@ -214,39 +307,50 @@
  HERE WE PURCHASE PRODUCT FROM APP STORE
  When user tap on product for purchase
  */
--(void)purchaseProductID:(NSString *)pid{
-    
+-(void)purchaseProductID:(NSString *)pid
+{
         [[RMStore defaultStore] addPayment:pid success:^(SKPaymentTransaction *transaction) {
         
         NSLog(@"Product purchased");
         
         NSString *strWithOutDot = [pid stringByReplacingOccurrencesOfString:@"." withString:@""];
         
-        if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
-            
-            NSMutableDictionary *userPurchase =[[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults]valueForKey:@"InAppPurchases"]];
+        if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"])
+        {
+            NSMutableDictionary *userPurchase;
+//            if([[[NSUserDefaults standardUserDefaults] stringForKey:@"UserType"] isEqualToString: REGISTERED])
+//            {
+                userPurchase = [[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults]valueForKey:@"InAppPurchases"]];
+//            }
+//            else
+//            {
+//                userPurchase = [[NSMutableDictionary alloc] init];
+//            }
             
             [userPurchase setValue:@"1" forKey:strWithOutDot];
             [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
             
-        }else {
+        }
+        else
+        {
             NSMutableDictionary *userPurchase =[[NSMutableDictionary alloc] init];
             [userPurchase setValue:@"1" forKey:strWithOutDot];
             [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
             
         }
-        
-        //Saved in Parse Account
-        [self updateParse];
-        // Showing action sheet after succesfull sign in
-        [userPurchases setUserPurcahsesFromParse];
+//        if([[[NSUserDefaults standardUserDefaults] stringForKey:@"UserType"] isEqualToString: REGISTERED])
+//        { // Update parse only for logged in users
+            //Saved in Parse Account
+            [self updateParse];
+            // Showing action sheet after succesfull sign in
+            [userPurchases setUserPurcahsesFromParse];
+       // }
         [self.buttondelegate productSuccesfullyPurchased:pid];
         
             
-    } failure:^(SKPaymentTransaction *transaction, NSError *error) {
-        
+    } failure:^(SKPaymentTransaction *transaction, NSError *error)
+    {
         NSLog(@"Something went wrong");
-        
     }];
 }
 
@@ -262,23 +366,25 @@
     
     PFObject *inApp = [[PFObject alloc] initWithClassName:@"InApp"];
     [inApp setObject:user forKey:@"user"];
-    inApp[@"json"] = [[NSUserDefaults standardUserDefaults]objectForKey:@"InAppPurchases"];
-    [inApp saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        
-        if( succeeded ) {
+    if([[NSUserDefaults standardUserDefaults]objectForKey:@"InAppPurchases"]) {
+        inApp[@"json"] = [[NSUserDefaults standardUserDefaults]objectForKey:@"InAppPurchases"];
+    }
+//    [inApp saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+//    {
+//        if(succeeded)
+//        {
             [userPurchases_ setUserPurcahsesFromParse];
-        }
-    }];
+//        }
+//    }];
     
     [[RMStore defaultStore] removeStoreObserver:self];
     
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
-    if ( [tableView isEqual:self.paidFeaturesTview] ){
-        
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([tableView isEqual:self.paidFeaturesTview] )
+    {
         static NSString *cellId = @"InAppPurchaseCell";
         InAppPurchaseCell *inAppCell = (InAppPurchaseCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
         
@@ -287,7 +393,7 @@
         if (inAppCell == nil) {
             if ( IS_IPHONE_5 || IS_IPHONE_4) {
                 nib = [[NSBundle mainBundle] loadNibNamed:@"InAppPurchaseCell" owner:self options:nil];
-            }else if ( IS_IPHONE_6 || IS_IPHONE_6_PLUS ) {
+            }else if ( IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XR || IS_IPHONE_XS) {
                 nib = [[NSBundle mainBundle] loadNibNamed:@"InAppPurchaseCell-iPhone6" owner:self options:nil];
             }
             inAppCell = (InAppPurchaseCell *)[nib objectAtIndex:0];
@@ -296,12 +402,14 @@
         // Getting the product against tapped/selected cell
         NSDictionary *product = [productArray objectAtIndex:indexPath.row];
         
-        if([[product objectForKey:@"productidentifier"] isEqualToString:@"com.flyerly.AllDesignBundle"]) {
-            [completeDesignBundleButton setTitle:@"Help us grow Flyerly!"];
+        if([[product objectForKey:@"productidentifier"] isEqualToString: BUNDLE_IDENTIFIER_ALL_DESIGN]) { // All Design Subscription
+            [completeDesignBundleButton setTitle: [NSString stringWithFormat:@"Help us grow %@!", APP_NAME]];
             [completeDesignBundleButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
+        } else if([[product objectForKey:@"productidentifier"] isEqualToString: BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION]) { // Yearly Subscription
+            inAppCell.backgroundColor = [UIColor grayColor];//heighlight the Yearly subscription cell
         }
         //Setting the packagename,packageprice,packagedesciption values for cell view
-        [inAppCell setCellValueswithProductTitle:[product objectForKey:@"packagename"] ProductPrice:[product objectForKey:@"packageprice"] ProductDescription:[product objectForKey:@"packagedesciption"]];
+        [inAppCell setCellValueswithProductTitle: [product objectForKey:@"productidentifier"] Title:[product objectForKey:@"packagename"] ProductPrice:[product objectForKey:@"packageprice"] ProductDescription:[product objectForKey:@"packagedesciption"]];
         
         [loadingIndicator stopAnimating];
         return inAppCell;
@@ -316,7 +424,7 @@
             if (IS_IPHONE_5 || IS_IPHONE_4)
             {
                 nib = [[NSBundle mainBundle] loadNibNamed:@"FreeFeatureCell" owner:self options:nil];
-            }else if ( IS_IPHONE_6 || IS_IPHONE_6_PLUS ) {
+            }else if ( IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XR || IS_IPHONE_XS) {
                 nib = [[NSBundle mainBundle] loadNibNamed:@"FreeFeatureCell-iPhone6" owner:self options:nil];
             }
             freeFeatureCell = (FreeFeatureCell *)[nib objectAtIndex:0];
@@ -333,7 +441,6 @@
                 //Setting the feature name,feature description values for cell view using plist
                 [freeFeatureCell setCellValueswithProductTitle:freeFeatures[0] ProductDescription:[freeFeatuersDictionary objectForKey:freeFeatures[0]]];
             }
-            
         }
         return freeFeatureCell;
     }
@@ -344,41 +451,41 @@
 /* Open in app panel with request product details */
 -(void)requestProduct {
     
-    if ([FlyerlySingleton connected]) {
+    if ([FlyerlySingleton connected])
+    {
+        // reloads array of in-app purchase IDs
+        [self reloadInAppProductIDsArray];
         
         //Check For Crash Maintain
         cancelRequest = NO;
         
         //These are over Products on App Store
-        NSSet *productIdentifiers = [NSSet setWithArray:@[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.IconsBundle"]];
+        NSSet *productIdentifiersSet = [NSSet setWithArray:productIdentifiers];
         
-        [[RMStore defaultStore] requestProducts:productIdentifiers success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
+        [[RMStore defaultStore] requestProducts:productIdentifiersSet success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
             
             if (cancelRequest) return ;
             
             NSLog(@"Products loaded");
             
             requestedProducts = products;
-            bool disablePurchase = ([[PFUser currentUser] sessionToken].length == 0);
-            
-            NSString *sheetTitle = @"Choose Product";
-            
-            if (disablePurchase) {
-                sheetTitle = @"This feature requires Sign In";
-            }
             
             productArray = [[NSMutableArray alloc] init];
-            for(SKProduct *product in products)
-            {
-                
-                NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                      product.localizedTitle,@"packagename",
-                                      product.priceAsString,@"packageprice" ,
-                                      product.localizedDescription,@"packagedesciption",
-                                      product.productIdentifier,@"productidentifier" , nil];
-                
-                
-                [productArray addObject:dict];
+            
+            for(NSString *identifier in productIdentifiers){
+                    for(SKProduct *product in products)
+                    {
+                        if( [identifier isEqualToString:product.productIdentifier]){
+                            NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                  product.localizedTitle,@"packagename",
+                                                  product.priceAsString,@"packageprice" ,
+                                                  product.localizedDescription,@"packagedesciption",
+                                                  product.productIdentifier,@"productidentifier" , nil];
+           
+                            [productArray addObject:dict];
+                            break;
+                        }
+                    }
             }
             
             [self.buttondelegate inAppPurchasePanelContent];
@@ -403,35 +510,47 @@
     
     [[RMStore defaultStore] restoreTransactionsOnSuccess:^{
         
+        // reloads array of in-app purchase IDs
+        [self reloadInAppProductIDsArray];
+        
         //HERE WE GET SHARED INTANCE OF _persistence WHICH WE LINKED IN FlyrAppDelegate
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        NSArray *productIdentifiers = @[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption",@"ccom.flyerly.IconsBundle"];
         
-        if (productIdentifiers.count >= 1) {
-            
+        if (productIdentifiers.count >= 1)
+        {
             [self showLoadingIndicator];
             
             NSMutableDictionary *userPurchase;
-            if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
+            
+            if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"])
+            {
                 userPurchase =[[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults]valueForKey:@"InAppPurchases"]];
-            }else {
+            }
+            else
+            {
                 userPurchase =[[NSMutableDictionary alloc] init];
             }
             
-            for (int i = 0; i < productIdentifiers.count; i++) {
-                
-                if( [appDelegate._persistence isPurchasedProductOfIdentifier:[productIdentifiers objectAtIndex:i] ]) {
+            for (int i = 0; i < productIdentifiers.count; i++)
+            {
+                if( [appDelegate._persistence isPurchasedProductOfIdentifier:[productIdentifiers objectAtIndex:i] ])
+                {
                     NSString *strWithOutDot = [[productIdentifiers objectAtIndex:i] stringByReplacingOccurrencesOfString:@"." withString:@""];
                     [userPurchase setValue:@"1" forKey:strWithOutDot];
                 }
             }
             
             [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
-            [self updateParse];
+//            if([[[NSUserDefaults standardUserDefaults] stringForKey:@"UserType"] isEqualToString: REGISTERED])
+//            {
+                [self updateParse];
+                [self dismissViewControllerAnimated:YES completion:nil];
+            //}
         }
         
         NSLog(@"Transactions restored");
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error)
+    {
         NSLog(@"Something went wrong");
     }];
 }
@@ -450,6 +569,15 @@
     
     [self.paidFeaturesTview flashScrollIndicators];
     [self.freeFeaturesTview flashScrollIndicators];
+}
+
+-(void)showAlreadyPurchasedAlert{
+    UIAlertView *alradyPurchasedAlert = [[UIAlertView alloc] initWithTitle: @"Product already purchased"
+                                                                   message: @"You have already purchased this item."
+                                                                  delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
+    
+    [alradyPurchasedAlert show];
+
 }
 
 @end

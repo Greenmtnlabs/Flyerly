@@ -55,7 +55,10 @@ CGAffineTransform previuosTransform;
         [view removeFromSuperview];
         
         // Also remove from dictionary.
-        [layers removeObjectForKey:uid];
+        
+        if( uid != nil ){
+            [layers removeObjectForKey:uid];
+        }
     }
 }
 
@@ -93,6 +96,7 @@ CGAffineTransform previuosTransform;
         return;
     }
     
+    
     // Checking for Label(text) or ImageView
     if ([layDic objectForKey:@"image"] == nil) {
         
@@ -106,40 +110,47 @@ CGAffineTransform previuosTransform;
         }
         
         //Check Layer Exist in Master Layers
-        if ( lastControl == nil) {
+        if ( lastControl == nil) { //this work when we created new one
             //----
             CustomLabel *lble = [[CustomLabel alloc] init];
             lble.tag = layers.count;
             lble.backgroundColor = [UIColor clearColor];
-            // Get the type of layer
-            //NSString *type = [flyer getLayerType:currentLayer];
-            //if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
-
-            lble.textAlignment = NSTextAlignmentCenter;//    UITextAlignmentCenter;
-            //}
+            lble.textAlignment = NSTextAlignmentCenter;
             lble.adjustsFontSizeToFitWidth = YES;
             lble.lineBreakMode = NSLineBreakByWordWrapping;
             lble.numberOfLines = 80;
+            
+            //Apply view related tasks
             [self configureLabel:lble labelDictionary:layDic ];
             [self applyTransformOnLabel:lble CustomLableDictionary:layDic];
+            
+            //Add into view
             [self addSubview:lble];
+            
             [layers setValue:lble forKey:uid];
             
             view = lble;
             
             //----
-        } else {
+        }
+        else { //this else works when we try to edit old one
 
             if ([lastControl isKindOfClass:[CustomLabel class]]) {
                 
                 //here we Update Label
                 CustomLabel *lble = [layers objectForKey:uid];
+                
                 //[self configureLabel:lble labelDictionary:layDic ];
+                
                 if( [[layDic valueForKey:@"type"] isEqualToString:FLYER_LAYER_CLIP_ART] ){
                     NSLog(@"its clipart");
                     [self configureLabelFont:uid labelDictionary:layDic];
+                    [self applyTransformOnLabel:lble CustomLableDictionary:layDic];
                 }
-                [self applyTransformOnLabel:lble CustomLableDictionary:layDic];
+                else{
+                    [self applyTransformOnLabel:lble CustomLableDictionary:layDic];
+                }
+                
                 [layers setValue:lble forKey:uid];
             
             } else {
@@ -150,6 +161,7 @@ CGAffineTransform previuosTransform;
                 [layers setValue:img forKey:uid];
             }
         }
+        
     }
     else if ([layDic objectForKey:@"type"] != nil && [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_DRAWING]) {
         
@@ -196,22 +208,34 @@ CGAffineTransform previuosTransform;
         }
     }
     
-    if ([layDic objectForKey:@"type"] != nil && [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_DRAWING]) {
-        //we hooked the events(Gesture) of drawing in createFlyerController.h in function: drawingLayerMoved
-        if( self.addUiImgForDrawingLayer ){
+    BOOL hookGuestures = YES;
+    //Dont Apply Gestures[move/resize...etc]
+    if ([layDic objectForKey:@"type"] != nil) {
+        if( [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_DRAWING] ){
+            hookGuestures = NO;
+            //we hooked the events(Gesture) of drawing in createFlyerController.h in function: drawingLayerMoved
+            if( self.addUiImgForDrawingLayer ){
+            }
+        } else if( [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_GIPHY_LOGO] ){
+            hookGuestures = NO;
         }
     }
+    
+    
+    //Apply Gestures[move/resize...etc]
     // Do the generic stuff that needs to happen for all views. For now,
     // we add support for drag.
-    else if ( view != nil ) {
+    if ( hookGuestures && view != nil ) {
         view.userInteractionEnabled = YES;
 
         // Gesture for moving layers
         UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(layerMoved:)];
         [view addGestureRecognizer:panGesture];
         
+        BOOL isClipArtLayer = ([layDic objectForKey:@"type"] != nil && [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_CLIP_ART]);
+        
         // We are only going to allow pinch gesture on non text/clipart layers
-        if ( [layDic valueForKey:@"image"] ) {
+        if ( [layDic valueForKey:@"image"] || isClipArtLayer ) {
             // Gesture for resizing layers
             UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(layerResized:)];
             [view addGestureRecognizer:pinchGesture];
@@ -229,6 +253,7 @@ CGAffineTransform previuosTransform;
         //[rotationRecognizer setDelegate:self];
         [view addGestureRecognizer:rotationRecognizer];        
     }
+    
 }
 
 -(void)configureImageViewSize :(NSString *)uid {
@@ -367,7 +392,6 @@ CGAffineTransform previuosTransform;
     lbl.frame = fr;
 }
 
-
 /*
  *Here we set color Properties of uiLabel
  */
@@ -396,12 +420,6 @@ CGAffineTransform previuosTransform;
     
     CustomLabel *lbl = [layers objectForKey:uid];
     
-    //SetFrame
-    //[lbl setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
-    
-    // Remember originalsize
-    //lbl.originalSize = lbl.frame.size;
-    
     //set Label Text
     [lbl setText:[detail valueForKey:@"text"]];
     
@@ -410,27 +428,55 @@ CGAffineTransform previuosTransform;
     
     // Make sure we are vertically aligned to the top and centerally aligned.
     if( [[detail valueForKey:@"type"] isEqualToString:FLYER_LAYER_CLIP_ART] ){
+     
+        // Because emoticons are always sized squarely, we are just considering width here, assuming height is the same
+        CGFloat currentSize = [lbl newSize].width; //lbl.frame.size.width;
         
-        // Keep existing layer's transform
-        CGAffineTransform tempTransform = lbl.transform;
+        CGFloat newSize = [[detail valueForKey:@"fontsize"] floatValue];
         
-        // Now apply the identity transform
-        lbl.transform = CGAffineTransformIdentity;
+        NSLog(@"newSize:%f, currentSize:%f",newSize/3,currentSize/3);
         
-        lbl.textAlignment = NSTextAlignmentCenter;
-        [lbl setNumberOfLines:0];
-    
-        CGRect fr = lbl.frame;
-        fr.size.width = 150;
-        lbl.frame = fr;
+        CGFloat scale = newSize / currentSize;
+        
+        CGAffineTransform currentTransform = lbl.transform;
+        
+        lbl.layer.anchorPoint = CGPointMake( 0.5, 0.5 );
+        
+        CGAffineTransform tr =
+        CGAffineTransformConcat(
+                                CGAffineTransformMakeScale(scale, scale),
+                                currentTransform);
+        
+        lbl.transform = tr;
 
-        [lbl sizeToFit];
+         // Keep existing layer's transform
+         CGAffineTransform tempTransform = lbl.transform;
+         
+         // Now apply the identity transform
+         lbl.transform = CGAffineTransformIdentity;
+         
+         lbl.textAlignment = NSTextAlignmentCenter;
+         [lbl setNumberOfLines:0];
+         
+         CGRect fr = lbl.frame;
+         fr.size.width = 150;
+         lbl.frame = fr;
+         
+         [lbl sizeToFit];
+         
+         // Now apply the previous transform again
+         lbl.transform = tempTransform;
+
+        //update dictionary
+        [self.delegate layerTransformedforKey:uid :&tempTransform];
         
-        // Now apply the previous transform again
-        lbl.transform = tempTransform;
-        
-    } else{
-       
+        /*
+            currentSize = [lbl newSize].width; //lbl.frame.size.width;
+            newSize = [[detail valueForKey:@"fontsize"] floatValue];
+            NSLog(@"b-- newSize:%f, currentSize:%f", newSize/3, currentSize/3);
+        */
+    }
+    else{ //Text
         
         // Keep existing layer's transform
         CGAffineTransform tempTransform = lbl.transform;
@@ -455,7 +501,6 @@ CGAffineTransform previuosTransform;
         lbl.transform = tempTransform;
     }
 }
-
 
 /*
  *Here we set font of UILabel
@@ -608,24 +653,39 @@ CGAffineTransform previuosTransform;
  */
 -(void)setTemplateBorder :(NSMutableDictionary *)layDic {
     
-    UIColor *borderColor;
-    if ([[layDic valueForKey:@"bordercolor"] isEqualToString:@"0.000000, 0.000000, 0.000000"]) {
-        
-        if ([layDic valueForKey:@"bordercolorWhite"] != nil) {
-            NSArray *rgbBorder = [[layDic valueForKey:@"bordercolorWhite"] componentsSeparatedByString:@","];
+    UIColor *borderColor =     borderColor = [UIColor clearColor];
+    [self deleteLayer:@"TemplateBorder"];
+    NSString *flyerTyp = [layDic objectForKey:@"FlyerType"];
+    //when type is not video
+    if ( !(flyerTyp != nil && [flyerTyp isEqualToString:@"video"]) ) {
+
+        if ([[layDic valueForKey:@"bordercolor"] isEqualToString:@"0.000000, 0.000000, 0.000000"]) {
+            if ([layDic valueForKey:@"bordercolorWhite"] != nil) {
+
+                NSArray *rgbBorder = [[layDic valueForKey:@"bordercolorWhite"] componentsSeparatedByString:@","];
+                borderColor = [UIColor colorWithWhite:[rgbBorder[0] floatValue] alpha:[rgbBorder[1] floatValue]];
+            }
+        }else {
+            [self deleteLayer:@"TemplateBorder"];
+            borderColor = [UIColor clearColor];
             
-            borderColor = [UIColor colorWithWhite:[rgbBorder[0] floatValue] alpha:[rgbBorder[1] floatValue]];
-            
+            //When picture flyer border
+            if ([[layDic valueForKey:@"bordercolor"] rangeOfString:@".png"].location != NSNotFound) {
+                // Here We Write Code for Image
+                ImageLayer *img = [[ImageLayer alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+                img.image = [UIImage imageNamed:[layDic valueForKey:@"bordercolor"]];
+                [self addSubview:img];
+                [layers setValue:img forKey:@"TemplateBorder"];
+            }
+            //Colored flyer border
+            else{
+                NSArray *rgbBorder = [[layDic valueForKey:@"bordercolor"] componentsSeparatedByString:@","];
+                
+                borderColor = [UIColor colorWithRed:[rgbBorder[0] floatValue] green:[rgbBorder[1] floatValue] blue:[rgbBorder[2] floatValue] alpha:1];
+            }
         }
-        
-    }else{
-        
-        NSArray *rgbBorder = [[layDic valueForKey:@"bordercolor"] componentsSeparatedByString:@","];
-        
-        borderColor = [UIColor colorWithRed:[rgbBorder[0] floatValue] green:[rgbBorder[1] floatValue] blue:[rgbBorder[2] floatValue] alpha:1];
     }
-
-
+    
     self.layer.borderColor = borderColor.CGColor;
     self.layer.borderWidth = 3.0;
 }
@@ -920,7 +980,9 @@ CGAffineTransform previuosTransform;
             
             // Update the layer dictionary with new key
             id l = [layers objectForKey:key];
-            [layers removeObjectForKey:key];
+            if( key != nil ){
+                [layers removeObjectForKey:key];
+            }
             [layers setObject:l forKey:newKey];
             
             [self.delegate bringLayerToFrontCf:key new:newKey updateSv:updateSv];

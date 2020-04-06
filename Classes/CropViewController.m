@@ -67,14 +67,14 @@
     self.cropGuideSize = desiredImageSize;
     
     // Get only the core image filters.
-    NSArray *filterTypes = [NBUCoreImageFilterProvider availableFilterTypes];
+    NSArray *filterTypes = [NBUFilterProvider availableFilters];
     
     NSMutableArray * filters = [NSMutableArray array];
     NBUFilter * filter;
     
-    for (NSString * type in filterTypes) {
-        filter = [NBUCoreImageFilterProvider filterWithName:nil
-                    type:type
+    for (NBUFilter * nbuFilter in filterTypes) {
+        filter = [NBUFilterProvider filterWithName:nbuFilter.name
+                    type:nbuFilter.type
                     values:nil];
         [filters addObject:filter];
     }
@@ -83,7 +83,7 @@
 
     // Configure crop view. We may get big pixels with this factor!
     self.maximumScaleFactor = 10.0;
-    self.cropView.allowAspectFit = YES;
+    self.cropView.allowAspectFit = NO;
     
     // Use the image from filters for cropping.
     [self.filterView setImage:self.image];
