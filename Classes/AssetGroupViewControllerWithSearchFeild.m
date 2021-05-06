@@ -13,6 +13,9 @@
 #import "AFHTTPRequestOperation.h"
 #import "CropViewController.h"
 #include <CommonCrypto/CommonDigest.h>
+#import "AFNetworking/AFNetworking.h"
+#import "NBUGalleryThumbnailView.h"
+#import "NBUAssets.h"
 
 @interface AssetGroupViewControllerWithSearchFeild () {
     NSMutableArray *imagesIDs;
@@ -44,21 +47,13 @@
     CGSize thumbSize = CGSizeMake(100.0,120.0);
     
     // Configure the grid view
-    if( IS_IPHONE_4){
-        
-    } else if ( IS_IPHONE_5) {
-        
-    }else if ( IS_IPHONE_6){
+    if ( IS_IPHONE_6 || IS_IPHONE_X)
+    {
         thumbSize = CGSizeMake(119.0,120.0);
-    }else if ( IS_IPHONE_6_PLUS){
+    }
+    else if ( IS_IPHONE_6_PLUS || IS_IPHONE_XR || IS_IPHONE_XS){
         thumbSize = CGSizeMake(132,120.0);
     }
-    
-    
-    
-    
-    
-    
     
     self.thumbnailSize = thumbSize;
     
@@ -101,8 +96,7 @@
     
 }
 
--(BOOL)searchDisplayController:(UISearchDisplayController *)controller
-shouldReloadTableForSearchString:(NSString *)searchString
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
     return YES;
 }
@@ -110,23 +104,30 @@ shouldReloadTableForSearchString:(NSString *)searchString
 /**
  * Override parent method.
  */
-- (void)adjustThumbnailsView {
-    
+- (void)adjustThumbnailsView
+{
     // Calculate bar height
     CGFloat topInset = 0.0;
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+//    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+//    {
+//#if XCODE_VERSION_MAJOR >= 0500
+//        topInset = self.topLayoutGuide.length;
+//#endif
+//    }
+//    else
+//    {
+//        topInset = self.navigationController.navigationBar.translucent ? self.navigationController.navigationBar.frame.size.height : 0.0;
+//    }
+    
+    if(IS_IPHONE_X || IS_IPHONE_XR || IS_IPHONE_XS)
     {
-#if XCODE_VERSION_MAJOR >= 0500
-        topInset = self.topLayoutGuide.length;
-#endif
+        topInset += CGRectGetMaxY(self.searchTextField.frame) + self.searchTextField.size.height + 50;
     }
     else
     {
-        topInset = self.navigationController.navigationBar.translucent ? self.navigationController.navigationBar.frame.size.height : 0.0;
+        topInset += CGRectGetMaxY(self.searchTextField.frame) + self.searchTextField.size.height + 20;
     }
-    
-    topInset += 44.0;
-    
+
 	self.thumbnailsGridView.frame = self.view.bounds;
     self.view.backgroundColor = [UIColor whiteColor];
     self.thumbnailsGridView.contentInset = UIEdgeInsetsMake(topInset,
@@ -172,7 +173,8 @@ shouldReloadTableForSearchString:(NSString *)searchString
      completionHandler:^(NSURLResponse *response,
                          NSData *data,
                          NSError *error) {
-         if ([data length] >0 && error == nil){
+         if ([data length] >0 && error == nil)
+         {
              //process the JSON response
              //use the main queue so that we can interact with the screen
              dispatch_async(dispatch_get_main_queue(), ^{
@@ -275,7 +277,8 @@ shouldReloadTableForSearchString:(NSString *)searchString
         //NSMutableArray *imagesPreview = [[NSMutableArray alloc]init];
         imagesIDs = [[NSMutableArray alloc]init];
         
-        if( status == 200 ){
+        if( status == 200 )
+        {
             NSDictionary *tableData = [jsonObject objectForKey:@"data"];
             
             NSArray *purchasedImageDownloadID = [tableData objectForKey:@"download_id"];
@@ -286,33 +289,27 @@ shouldReloadTableForSearchString:(NSString *)searchString
             
             NSURL *purchaseImageUrl = [[NSURL alloc] initWithString:purchaseImageUrlString];
             NSURLRequest *purchaseImageUrlRequest = [[NSURLRequest alloc] initWithURL:purchaseImageUrl];
-            
-            AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:purchaseImageUrlRequest];
-            requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
-            [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-                
-                
+
+            NSURL *URL = purchaseImageUrl;
+            AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+            manager.responseSerializer = [AFImageResponseSerializer serializer];
+            [manager GET:URL.absoluteString parameters: nil success:^(NSURLSessionDataTask *task, id responseObject) {
                 UIImage *thumbnail = (UIImage *) responseObject;
-                
                 NSData* data = UIImagePNGRepresentation(thumbnail);
-                
                 [self saveInGallery:data];
-                
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"Image error: %@", error);
+                NSLog(@"JSON: %@", responseObject);
+            } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                NSLog(@"Error: %@", error);
             }];
-            [requestOperation start];
-            NSLog(@"");
         }
         
-    } else{
-        NSLog(@"Json parsin may error aya hy, error=%@", error);
-        //lbl_status.text = @"Json parsin may error aya hy";
+    }
+    else
+    {
+        NSLog(@"Error while trying to parse JSON. Error : %@", error);
     }
     
 }
-
-
 
 // Here we got response from api, parsing json response
 - (void) parseSearchResponse:(NSData *) data {
@@ -345,7 +342,6 @@ shouldReloadTableForSearchString:(NSString *)searchString
                 NSString *imageId = [imageObject objectForKey:@"id"];
                 [imagesPreview addObject :[thumbDetails objectForKey:@"url"]];
                 [imagesIDs addObject:imageId];
-                
             }
             
             ImageLoader *obj = [[ImageLoader alloc]init];
@@ -382,12 +378,12 @@ shouldReloadTableForSearchString:(NSString *)searchString
 }
 
 
-- (void) purchaseProduct {
-    
+- (void) purchaseProduct
+{
     //This line pop up login screen if user not exist
     [[RMStore defaultStore] addStoreObserver:self];
     
-    NSString* productIdentifier= @"com.flyerly.SelectedSymbol";
+    NSString* productIdentifier= PRODUCT_ICON_SELETED;
     
     //Purchasing the product on the basis of product identifier
     [self purchaseProductID:productIdentifier];
@@ -397,11 +393,12 @@ shouldReloadTableForSearchString:(NSString *)searchString
  */
 -(void)purchaseProductID:(NSString *)pid{
     
-    [[RMStore defaultStore] addPayment:pid success:^(SKPaymentTransaction *transaction) {
-    
+    [[RMStore defaultStore] addPayment:pid success:^(SKPaymentTransaction *transaction)
+    {
         [self productSuccesfullyPurchased];
         
-    } failure:^(SKPaymentTransaction *transaction, NSError *error) {
+    } failure:^(SKPaymentTransaction *transaction, NSError *error)
+    {
         
         NSLog(@"Something went wrong");
         
@@ -415,24 +412,24 @@ shouldReloadTableForSearchString:(NSString *)searchString
 
 -(void)requestProduct {
     
-    if ([FlyerlySingleton connected]) {
-        
+    if ([FlyerlySingleton connected])
+    {
         //Check For Crash Maintain
         cancelRequest = NO;
         
         //These are over Products on App Store
-        NSSet *productIdentifiers = [NSSet setWithArray:@[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.IconsBundle",@"com.flyerly.SelectedSymbol"]];
+        NSSet *productIdentifiers = [NSSet setWithArray:@[BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION, BUNDLE_IDENTIFIER_ALL_DESIGN, BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION, BUNDLE_IDENTIFIER_UNLOCK_VIDEO,  BUNDLE_IDENTIFIER_AD_REMOVAL, PRODUCT_ICON_SELETED]];
         
-        [[RMStore defaultStore] requestProducts:productIdentifiers success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
-            
+        [[RMStore defaultStore] requestProducts:productIdentifiers success:^(NSArray *products, NSArray *invalidProductIdentifiers)
+        {
             if (cancelRequest) return ;
-            
-            //NSArray *requestedProducts = products;
+
             bool disablePurchase = ([[PFUser currentUser] sessionToken].length == 0);
             
             NSString *sheetTitle = @"Choose Product";
             
-            if (disablePurchase) {
+            if (disablePurchase)
+            {
                 sheetTitle = @"This feature requires Sign In";
             }
             
@@ -445,8 +442,6 @@ shouldReloadTableForSearchString:(NSString *)searchString
                                       product.priceAsString,@"packageprice" ,
                                       product.localizedDescription,@"packagedesciption",
                                       product.productIdentifier,@"productidentifier" , nil];
-                
-                
                 [productArray addObject:dict];
             }
             
@@ -461,21 +456,22 @@ shouldReloadTableForSearchString:(NSString *)searchString
             
             [self hideLoadingIndicator];
         }];
-    } else {
+    }
+    else
+    {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         
         [alert show];
-        
-        
     }
 }
 
 
-- ( void )productSuccesfullyPurchased{
+- ( void )productSuccesfullyPurchased
+{
+    [self.thumbnailsGridView setUserInteractionEnabled:YES];
     
     //Download request for purchsed image
     [self apiRequestForPurchasingImage:imageID_];
-    
 }
 
 
@@ -486,24 +482,107 @@ shouldReloadTableForSearchString:(NSString *)searchString
     [self showLoadingIndicator];
     
     //Checking if the user is valid or anonymus
-    if ([[PFUser currentUser] sessionToken].length != 0) {
-        
+    
+    if (self.isFromInApp) //[[PFUser currentUser] sessionToken].length != 0
+    {
         [self purchaseProduct];
         imageID_ = [imagesIDs objectAtIndex:sender.tag];
-        
-        
-    }else {
-        UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"Please sign in first"
-                                                            message: @"To purchase any product, you need to sign in first."
-                                                           delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
-        
-        [someError show];
-        
-        [self hideLoadingIndicator];
+    }
+    else
+    {
+//        UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"Please sign in first"
+//                                                            message: @"To purchase any product, you need to sign in first."
+//                                                           delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
+//
+//        [someError show];
+       [self openPanel];
+       imageID_ = [imagesIDs objectAtIndex:sender.tag];
+       [self hideLoadingIndicator];
     }
     
 }
 
+
+-(void)openPanel
+{
+    if( IS_IPHONE_4 )
+    {
+        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
+    } else if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XR || IS_IPHONE_XS){
+        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
+    }else {
+        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
+    }
+    
+    inappviewcontroller.isFromStockPhoto = true;
+    [self presentViewController:inappviewcontroller animated:YES completion:nil];
+    
+    [inappviewcontroller requestProduct];
+    inappviewcontroller.buttondelegate = self;
+}
+
+- ( void )inAppPurchasePanelContent
+{
+    [inappviewcontroller inAppDataLoaded];
+}
+
+- (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle
+{
+    __weak InAppViewController *inappviewcontroller_ = inappviewcontroller;
+    if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Sign In")])
+    {
+        
+        // Put code here for button's intended action.
+        signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+        
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        signInController.launchController = appDelegate.lauchController;
+        
+        __weak AssetGroupViewControllerWithSearchFeild *assetGroupViewController = self;
+        UserPurchases *userPurchases_ = [UserPurchases getInstance];
+        
+        userPurchases_.delegate = self;
+        
+        [inappviewcontroller_.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        
+        signInController.signInCompletion = ^void(void) {
+            
+            UINavigationController* navigationController = assetGroupViewController.navigationController;
+            [navigationController popViewControllerAnimated:NO];
+            [userPurchases_ setUserPurcahsesFromParse];
+        };
+        
+        [self.navigationController pushViewController:signInController animated:YES];
+    }
+    else if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Restore Purchases")])
+    {
+        [inappviewcontroller_ restorePurchase];
+    }
+}
+
+- (void)inAppPanelDismissed
+{
+    [self.thumbnailsGridView setUserInteractionEnabled:YES];
+}
+
+- ( void )productSuccesfullyPurchased: (NSString *)productId
+{
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
+    
+//    if ([userPurchases_ canCreateVideoFlyer])
+//    {
+//        [self apiRequestForPurchasingImage:imageID_];
+////        UIImage *buttonImage = [UIImage imageNamed:@"MqodeVideo.png"];
+////        [_mode setImage:buttonImage forState:UIControlStateNormal];
+//        [self dismissViewControllerAnimated:NO completion:nil];
+//    }
+//    else
+//    {
+        [self apiRequestForPurchasingImage:imageID_];
+        [self dismissViewControllerAnimated:NO completion:nil];
+   // }
+    
+}
 
 #pragma mark - Button Handlers
 
@@ -562,7 +641,6 @@ shouldReloadTableForSearchString:(NSString *)searchString
             [self createImageToFlyerlyPurchasedAlbum:groupUrl ImageData:imgData];
             
         }
-        
     }
              failureBlock:^(NSError *error) {
              }];
@@ -572,8 +650,15 @@ shouldReloadTableForSearchString:(NSString *)searchString
 /* APPLY OVER LOADING HERE
  * THIS METHOD CREATE ALBUM ON DEVICE AFTER IT SAVING IMAGE IN LIBRARY
  */
--(void)createFlyerlyPurchasedAlbum  {
+-(void)createFlyerlyPurchasedAlbum
+{
+    NSString *albumName;
     
+    #if defined(FLYERLY)
+        albumName = FLYER_PURCHASED_ALBUM_NAME;
+    #else
+        albumName = FLYERLY_BIZ_PURCHASED_ALBUM_NAME;
+    #endif
     
     if ( _library == nil ) {
         _library = [[ALAssetsLibrary alloc] init];
@@ -582,7 +667,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
     __weak ALAssetsLibrary* library = _library;
     
     //HERE WE SEN REQUEST FOR CREATE ALBUM
-    [_library addAssetsGroupAlbumWithName:FLYER_PURCHASED_ALBUM_NAME
+    [_library addAssetsGroupAlbumWithName:albumName
                               resultBlock:^(ALAssetsGroup *group) {
                                   
                                   //CHECKING ALBUM FOUND IN LIBRARY
@@ -593,16 +678,14 @@ shouldReloadTableForSearchString:(NSString *)searchString
                                           
                                           NSString *existAlbumName = [group valueForProperty: ALAssetsGroupPropertyName];
                                           
-                                          if ([existAlbumName isEqualToString:FLYER_PURCHASED_ALBUM_NAME]) {
+                                          if ([existAlbumName isEqualToString:albumName]) {
                                               *stop = YES;
                                               
                                               // GETTING CREATED URL OF ALBUM
                                               NSURL *groupURL = [group valueForProperty:ALAssetsGroupPropertyURL];
                                               
                                               //SAVING IN PREFERENCES .PLIST FOR FUTURE USE
-                                              [[NSUserDefaults standardUserDefaults]   setObject:groupURL.absoluteString forKey:@"FlyerlyPurchasedAlbum"];
-                                              
-                                              
+                                              [[NSUserDefaults standardUserDefaults] setObject:groupURL.absoluteString forKey:@"FlyerlyPurchasedAlbum"];
                                           }
                                           
                                       } failureBlock:^(NSError *error) {
@@ -616,7 +699,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
                                       NSURL *groupURL = [group valueForProperty:ALAssetsGroupPropertyURL];
                                       
                                       //SAVING IN PREFERENCES .PLIST FOR FUTURE USE
-                                      [[NSUserDefaults standardUserDefaults]   setObject:groupURL.absoluteString forKey:@"FlyerlyPuchasedAlbum"];
+                                      [[NSUserDefaults standardUserDefaults] setObject:groupURL.absoluteString forKey:@"FlyerlyPuchasedAlbum"];
                                   }
                               }
      
@@ -664,7 +747,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
                     nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
                 }else if ( IS_IPHONE_6){
                     nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController-iPhone6" bundle:nil];
-                }else if ( IS_IPHONE_6_PLUS){
+                }else if ( IS_IPHONE_6_PLUS || IS_IPHONE_XR || IS_IPHONE_XS){
                     nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController-iPhone6-Plus" bundle:nil];
                 }else { 
                     nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
@@ -679,11 +762,23 @@ shouldReloadTableForSearchString:(NSString *)searchString
                 [viewControllers removeLastObject];
                 [viewControllers removeLastObject];
                 [viewControllers addObject:nbuCrop];
-                [[self navigationController] setViewControllers:viewControllers animated:YES];
                 
+                if(self.onImageTaken != NULL)
+                {
+                    [[self navigationController] setViewControllers:viewControllers animated:YES];
+                }
+                else
+                {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You can use purchased photo from Gallery -> Flyerly Purchases" message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    [alert show];
+                    
+                   [self goBack];
+                }
+
                 //[self goBack];
                 
-            } failureBlock:^(NSError *error) {
+            } failureBlock:^(NSError *error)
+            {
                 NSLog( @"Image not linked: %@", error.localizedDescription );
             }];
             
@@ -717,6 +812,5 @@ shouldReloadTableForSearchString:(NSString *)searchString
 - (void)hideLoadingIndicator {
     [self.navigationItem setRightBarButtonItem:rightBarButtonItem animated:NO];
 }
-
 
 @end

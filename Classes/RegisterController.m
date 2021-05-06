@@ -7,18 +7,22 @@
 //
 
 #import "RegisterController.h"
-
-@interface RegisterController ()
+#import "InviteFriendsController.h"
+#import <Parse/PFFacebookUtils.h>
+#import <Parse/PFTwitterUtils.h>
+@interface RegisterController () {
+    UIBarButtonItem *leftBarButton, *righBarButton;
+}
 
 @end
 
 @implementation RegisterController
-@synthesize username,password,confirmPassword,signUp,signUpFacebook,signUpTwitter,email,name,phno,usrExist,scrollView;
+@synthesize username,password,confirmPassword,signUp,signUpFacebook,signUpTwitter,email,name,phno,usrExist,scrollView,btnCheckTerms,btnTerms;
 static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
-static const CGFloat MINIMUM_SCROLL_FRACTION = 0.2;
-static const CGFloat MAXIMUM_SCROLL_FRACTION = 0.8;
-static const CGFloat PORTRAIT_KEYBOARD_HEIGHT = 216;
-static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
+//static const CGFloat MINIMUM_SCROLL_FRACTION = 0.2;
+//static const CGFloat MAXIMUM_SCROLL_FRACTION = 0.8;
+//static const CGFloat PORTRAIT_KEYBOARD_HEIGHT = 216;
+//static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -30,15 +34,17 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     return self;
 }
 
-- (void)viewDidLoad {
-    
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
     globle = [FlyerlySingleton RetrieveSingleton];
     
+     btnCheckTerms.selected = true;
+    
     //Setting up the Scroll size
-    [scrollView setContentSize:CGSizeMake(320, 660)];
+    [scrollView setContentSize:CGSizeMake(320, [[UIScreen mainScreen] bounds].size.height)];
     //Setting the initial position for scroll view
     scrollView.contentOffset = CGPointMake(0,60);
     
@@ -74,7 +80,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
     backButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItem:leftBarButton];
 
     //Done Bar button
@@ -82,35 +88,71 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [doneButton addTarget:self action:@selector(onSignUp) forControlEvents:UIControlEventTouchUpInside];
     [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
     doneButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+    righBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+    
+    NSDictionary *aDictFontAgree = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Helvetica Neue" size:14.0],NSFontAttributeName,[UIColor lightGrayColor],NSForegroundColorAttributeName, nil];
+    NSMutableAttributedString *aAttStrAgree = [[NSMutableAttributedString alloc] initWithString:@"Yes, I agree with" attributes: aDictFontAgree];
+    
+    NSDictionary *aDictFontPrivacyPolicy = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Helvetica Neue" size:12.0],NSFontAttributeName,[UIColor blackColor],NSForegroundColorAttributeName, nil];
+    NSMutableAttributedString *aAttStrPrivacyPolicty = [[NSMutableAttributedString alloc]initWithString: @" Terms & Conditions" attributes:aDictFontPrivacyPolicy];
+    
+    [aAttStrAgree appendAttributedString:aAttStrPrivacyPolicty];
+    
+    [btnTerms setAttributedTitle:aAttStrAgree forState:UIControlStateNormal];
 
-    [self.navigationItem setRightBarButtonItem:rightBarButton];
- 
+    [self.navigationItem setRightBarButtonItem:righBarButton];
 
 }
 
 -(void)goBack{
-    
 	[self.navigationController popViewControllerAnimated:YES];
-    
 }
 
-
--(void)showLoadingView {
-    [self showLoadingIndicator];
+- (IBAction)btnTermsClicked:(id)sender
+{
+   // UIViewController *cont = (UIViewController *)self.buttondelegate;
+    //UINavigationController *navigationController = cont.navigationController;
+    [self.navigationController pushViewController:[[TermsOfServiceViewController alloc] initWithNibName:@"TermsOfServiceViewController" bundle:nil] animated:YES];
 }
 
-
--(void)removeLoadingView{
-    [self hideLoadingIndicator];
+- (IBAction)btnCheckTermsClicked:(id)sender
+{
+    if (btnCheckTerms.selected)
+    {
+        [btnCheckTerms setImage:[UIImage imageNamed:@"icon-check"] forState:UIControlStateSelected];
+        btnCheckTerms.selected = FALSE;
+    }
+    else
+    {
+        [btnCheckTerms setImage:[UIImage imageNamed:@"icon-uncheck"] forState:UIControlStateNormal];
+        btnCheckTerms.selected = TRUE;
+    }
 }
 
+// Show Hide loader
+-(void)showLoader:(BOOL)show {
+    if(show) {
+        [self showLoadingIndicator];
+        [self enableLinks:NO];
+    } else {
+        [self hideLoadingIndicator];
+        [self enableLinks:YES];
+    }
+}
+
+// Enable / Disable link on screen
+-(void)enableLinks:(BOOL)enable {
+
+    righBarButton.enabled = enable;
+    leftBarButton.enabled = enable;
+    self.view.userInteractionEnabled = enable;
+}
 
 -(void)onSignUp{
     
     //Internet Connectivity Check
     if([FlyerlySingleton connected]){
-        [self showLoadingView];
+        [self showLoader:YES];
         
         //Validations
         if( [self validate] ){
@@ -149,7 +191,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
             warningAlert = [[UIAlertView  alloc]initWithTitle:@"Account already exists using this account." message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Sign In",nil];
             
             [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
-            [self removeLoadingView];
+            [self showLoader:NO];
 
         } else {
             
@@ -157,7 +199,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
             
         }
     }];
-    
 }
 
 /*
@@ -168,17 +209,16 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     //Internet Connectivity Check
     if([FlyerlySingleton connected]){
         
-        [self showLoadingView];
+        [self showLoader:YES];
         
         // The permissions requested from the user
-        NSArray *permissionsArray = @[ @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
+        NSArray *permissionsArray = @[ @"email", @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
         
         // Login PFUser using Facebook
-        [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
-            [self hideLoadingIndicator]; // Hide loading indicator
+        [PFFacebookUtils logInInBackgroundWithReadPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
+            [self showLoader:NO]; // Hide loading indicator
             
             if ( !user ) {
-                
                 
                 if (!error) {
                     NSLog(@"Uh oh. The user cancelled the Facebook login.");
@@ -199,12 +239,14 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                     
                 }
                 
-            } else if (user.isNew) {
-                
-                NSLog(@"User with facebook signed up and logged in!");
-                
+            } else {
+
                 //Saving User Info for again login
                 [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
+
+                if (user.isNew) {
+                
+                NSLog(@"User with facebook signed up and logged in!");
                 
                 // Login success Move to Flyerly
                 launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
@@ -223,9 +265,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                 
                 NSLog(@"User with facebook logged in!");
                 
-                //Saving User Info for again login
-                [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
-                
                 // Login success Move to Flyerly
                 launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
                 
@@ -242,6 +281,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                 appDelegate.lauchController = launchController;
                 
                 [self onRegistrationSuccess];
+            }
             }
         }];
 
@@ -269,61 +309,88 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 }
 
 
--(IBAction)onSignUpTwitter{
-    
-    //Connectivity Check
-    if([FlyerlySingleton connected]){
-        
-        [self showLoadingView];
-
-        [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
-            
-            [self hideLoadingIndicator];
-            
-            if ( !user ) {
-                
-                NSLog(@"Uh oh. The user cancelled the Twitter login.");
-                return;
-                
-            } else if (user.isNew) {
-                
-                NSLog(@"User signed up and logged in with Twitter!");
-                
-                UINavigationController* navigationController = self.navigationController;
-                
-                [navigationController popViewControllerAnimated:NO];
-                
-                [self onRegistrationSuccess];
-                
-                NSString *twitterUsername = [PFTwitterUtils twitter].userId;
-                
-                //Saving User Info for again login
-                [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
-                
-                // For Parse New User Merge to old Twitter User
-                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-                [appDelegate twitterChangeforNewVersion:twitterUsername];
-                
-            } else {
-                
-                NSLog(@"User logged in with Twitter!");
-                
-                //Saving User Info for again login
-                [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
-                
-                [self onRegistrationSuccess];
-            }
-        }];
-        
-        
-    } else {
-        
-        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
-        [self removeLoadingView];
-        
-    }
-
-}
+//-(IBAction)onSignUpTwitter{
+//    
+//    //Connectivity Check
+//    if([FlyerlySingleton connected]){
+//        
+//        [self showLoader:YES];
+//
+//        [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
+//            
+//            [self showLoader:NO];
+//            BOOL canSave = NO;
+//            
+//            NSLog(@"%@", error);
+//            
+//            if ( !user ) {
+//                NSLog(@"Uh oh. The user cancelled the Twitter login.");
+//                return;
+//
+//            } else {
+//
+//                NSString *twitterUsername = @"teamleadsqa"; //[PFTwitterUtils twitter].screenName;
+//                
+//                if(![twitterUsername isEqualToString:@""]) {
+//                    if(user.isNew || (user.username == nil || [user.username isEqualToString:@""]) ){
+//                        canSave = YES;
+//                        user.username = twitterUsername;
+//                        [[PFUser currentUser] setObject:twitterUsername forKey:@"username"];
+//                    }
+//                    
+//                    if(user.isNew || (user[@"name"] == nil || [user[@"name"] isEqualToString:@""]) ){
+//                        canSave = YES;
+//                        user[@"name"] = twitterUsername;
+//                        [[PFUser currentUser] setObject:twitterUsername forKey:@"name"];
+//                    }
+//                }
+//                
+//                if (user.isNew) {
+//                    
+//                    canSave = YES;
+//                    [[PFUser currentUser] setObject:APP_NAME forKey:@"appName"];
+//                    [[PFUser currentUser] saveInBackground];
+//                    
+//                    // We keep an instance of navigation contrller since the completion block might pop us out of the navigation controller
+//                    UINavigationController* navigationController = self.navigationController;
+//                    
+//                    [navigationController popViewControllerAnimated:NO];
+//                    
+//                    [self onRegistrationSuccess];
+//                    
+//                    
+//                    //Saving User Info for again login
+//                    [[NSUserDefaults standardUserDefaults]  setObject:[twitterUsername lowercaseString] forKey:@"User"];
+//                    
+//                    // For Parse New User Merge to old Twitter User
+//                    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+//                    [appDelegate twitterChangeforNewVersion:twitterUsername];
+//                    
+//                } else {
+//                    
+//                    NSLog(@"User logged in with Twitter!");
+//                    
+//                    //Saving User Info for again login
+//                    [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
+//                    
+//                    [self onRegistrationSuccess];
+//                }
+//                
+//                if(canSave) {
+//                    [[PFUser currentUser] saveInBackground];
+//                }
+//            }
+//        }];
+//        
+//        
+//    } else {
+//        
+//        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
+//        [self showLoader:NO];
+//        
+//    }
+//
+//}
 
 
 -(BOOL)validate{
@@ -332,7 +399,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     if(username.text == nil || [username.text isEqualToString:@""]){
         
         [self showAlert:@"Please complete all required fields" message:@""];
-        [self removeLoadingView];
+        [self showLoader:NO];
         return NO;
     }
     
@@ -340,7 +407,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
        !confirmPassword || [confirmPassword.text isEqualToString:@""]){
         
         [self showAlert:@"Please complete all required fields." message:@""];
-        [self removeLoadingView];
+        [self showLoader:NO];
         return NO;
     }
     
@@ -349,19 +416,27 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     if(![password.text isEqualToString:confirmPassword.text]){
         
         [self showAlert:@"Passwords do not match." message:@""];
-        [self removeLoadingView];
+        [self showLoader:NO];
         return NO;
     }
 
     
-    if([email.text length] == 0 ){
+    if([email.text length] == 0 )
+    {
         [self showAlert:@"Warning!" message:@"Email Address Must Required"];
-        [self removeLoadingView];
+        [self showLoader:NO];
         return NO;
     }
     if([usrExist.text isEqualToString:@"taken"] ){
         [self showAlert:@"Username already taken" message:@""];
-        [self removeLoadingView];
+        [self showLoader:NO];
+        return NO;
+    }
+    
+    if (btnCheckTerms.selected == FALSE)
+    {
+        [self showAlert:@"Please accept Terms & Conditions." message:@""];
+        [self showLoader:NO];
         return NO;
     }
     
@@ -379,31 +454,33 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         user[@"name"] = name.text;
     if (phno.text != nil)
         user[@"contact"] = phno.text;
+
+    // When new user signup using username & password
+    user[@"appName"] = APP_NAME;
     
     //Saving User Info for again login
     [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];
     [[NSUserDefaults standardUserDefaults]  setBool:YES forKey:@"FlyerlyUser"];
 
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        
-        if (error) {
-            
-            NSString *errorValue = (error.userInfo)[@"error"];
-            [self showAlert:@"Warning!" message:errorValue];
-            [self removeLoadingView];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (error) {
+                NSString *errorValue = (error.userInfo)[@"error"];
+                [self showAlert:@"Warning!" message:errorValue];
+                [self showLoader:NO];
 
-        } else {
-            
-            [PFUser logInWithUsername:userName password:pwd];
-            [self onRegistrationSuccess];
-            
-        }
+            } else {
+
+                [PFUser logInWithUsername:userName password:pwd];
+                [self onRegistrationSuccess];
+            }
+        });
         
         
     }];
 }
 
--(void) onRegistrationSuccess {
+-(void)onRegistrationSuccess {
 
     [FlyerUser mergeAnonymousUser];
     
@@ -417,15 +494,17 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     //GET UPDATED USER PUCHASES INFO
     [userPurchases_ setUserPurcahsesFromParse];
     
-    if( appDelegate.lauchController != nil ) {
+    if( appDelegate.lauchController != nil || (appDelegate.lauchController == nil && self.signInController.launchController == nil) ) {
         launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
-        [navigationController pushViewController:launchController animated:YES];
+        [navigationController setRootViewController:launchController];
+        
+        InviteFriendsController *inviteFriendsController = [[InviteFriendsController alloc]initWithNibName:@"InviteFriendsController" bundle:nil];
+        [navigationController pushViewController:inviteFriendsController animated:YES];
     }
-    
 }
 
-
--(void)showAlert:(NSString *)title message:(NSString *)message{
+-(void)showAlert:(NSString *)title message:(NSString *)message
+{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
                                                     message:message
                                                    delegate:nil
@@ -479,6 +558,8 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    [scrollView setContentSize:CGSizeMake(320, [[UIScreen mainScreen] bounds].size.height * 1.2)];
+    
     /*CGRect textFieldRect =
     [self.view.window convertRect:textField.bounds fromView:textField];
     CGRect viewRect =
@@ -545,6 +626,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [textField resignFirstResponder];
     // Reseting the scrollview position
     [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    [scrollView setContentSize:CGSizeMake(320, [[UIScreen mainScreen] bounds].size.height)];
     return YES;
 }
 

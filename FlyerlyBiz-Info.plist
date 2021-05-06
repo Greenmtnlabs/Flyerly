@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleDisplayName</key>
+	<string>FlyerlyBiz</string>
+	<key>CFBundleExecutable</key>
+	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string>icon@2x.png</string>
+		<string>icon.png</string>
+		<string>icon-120.png</string>
+	</array>
+	<key>CFBundleIcons</key>
+	<dict/>
+	<key>CFBundleIcons~ipad</key>
+	<dict/>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>${PRODUCT_NAME}</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>2.0.2</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.socialflyr.flyrfree</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1755119231374505</string>
+				<string>oatransdemo</string>
+				<string>FlyerlyBiz</string>
+				<string>fsqapi</string>
+				<string>FlyerlyBiz</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>FacebookAppID</key>
+	<string>1755119231374505</string>
+	<key>FacebookDisplayName</key>
+	<string>FlyerlyBiz</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+		<string>instagram</string>
+		<string>twitter</string>
+		<string>fb</string>
+	</array>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>bigstockphoto.com</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<false/>
+			</dict>
+		</dict>
+	</dict>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Advertisement would like to create a calendar event.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app requires access to the camera to create a flyer by taking picture.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>This app requires contacts access to function properly.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app requires access to location to attach location with flyer.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app requires access to location to attach location with flyer.</string>
+	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Need microphone access for uploading videos</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app requires access to the photo library to create a flyer by selecting picture.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>HelveticaRoundedLTStd-BdCn_0.otf</string>
+		<string>Swiss_721_Black_Extended_BT.ttf</string>
+		<string>Anjelika Rose.ttf</string>
+		<string>segoeui.ttf</string>
+		<string>ITC Avant Garde CE Gothic Book.ttf</string>
+		<string>Monoton-Regular.ttf</string>
+		<string>BlueNoon.ttf</string>
+		<string>BankGothic-Regular DB.ttf</string>
+		<string>LHANDW.TTF</string>
+		<string>Helvetica Inserat Cyrillic Upright.ttf</string>
+		<string>ALGER.TTF</string>
+		<string>Comfortaa_Bold.ttf</string>
+		<string>black_jack.ttf</string>
+		<string>StMarie-Thin.otf</string>
+		<string>Quicksand_Bold.otf</string>
+		<string>Nexa Bold.otf</string>
+		<string>Molot.otf</string>
+		<string>Kankin.ttf</string>
+		<string>GrandHotel-Regular.otf</string>
+		<string>GoodDog.otf</string>
+		<string>Signika-Bold.otf</string>
+		<string>Signika-Light.otf</string>
+		<string>Signika-Regular.otf</string>
+		<string>Signika-Semibold.otf</string>
+		<string>Entypo.otf</string>
+		<string>Entypo-Social.otf</string>
+		<string>Aleo-Regular.otf</string>
+		<string>AlexBrush-Regular.ttf</string>
+		<string>Aller-Regular.ttf</string>
+		<string>Amble-Regular.ttf</string>
+		<string>AMBROSIA_DEMO-Regular.ttf</string>
+		<string>Anson-Regular.otf</string>
+		<string>Aurora-Regular.ttf</string>
+		<string>Balham-Regular.otf</string>
+		<string>Bellota-Regular.otf</string>
+		<string>Canter Light.otf</string>
+		<string>CaviarDreams-Regular.ttf</string>
+		<string>circula-medium.otf</string>
+		<string>CODE Light-Regular.otf</string>
+		<string>Exo-Regular.otf</string>
+		<string>FlexDisplay-Thin-Regular.otf</string>
+		<string>Foresee-Regular.ttf</string>
+		<string>Gent-Regular.otf</string>
+		<string>Gnuolane-Regular.ttf</string>
+		<string>Gutsy-Regular.ttf</string>
+		<string>Hightide-Regular.ttf</string>
+		<string>Homestead-Regular.ttf</string>
+		<string>Homizio-Regular.ttf</string>
+		<string>Jalane_light-Regular.ttf</string>
+		<string>Journal-Regular.ttf</string>
+		<string>Junction.ttf</string>
+		<string>K†nkin∏ FREE FONT-Regular.ttf</string>
+		<string>Kaiju-Regular.ttf</string>
+		<string>KlinicSlabMedium.otf</string>
+		<string>Komoda-Regular.otf</string>
+		<string>Lato-Regular.ttf</string>
+		<string>Lavanderia-Regular.otf</string>
+		<string>LilyScriptOne-Regular.ttf</string>
+		<string>LinLibertine-Regular.ttf</string>
+		<string>Lobster-Regular.otf</string>
+		<string>Manteka-Regular.ttf</string>
+		<string>Market_Deco-Regular.ttf</string>
+		<string>Mohave-Regular.otf</string>
+		<string>Montserrat-Regular.ttf</string>
+		<string>Moonhouse-Regular.ttf</string>
+		<string>Myra 4F Caps-Regular.ttf</string>
+		<string>Homestead-Regular.ttf</string>
+		<string>Homestead-Regular.ttf</string>
+		<string>ONRAMP-Regular.ttf</string>
+		<string>OpenSans-Regular.ttf</string>
+		<string>OSP-DIN-Regular.ttf</string>
+		<string>PaihuenMapuche-Regular.ttf</string>
+		<string>Pinstripe Limo-Regular.ttf</string>
+		<string>QuattrocentoSans-Regular.otf</string>
+		<string>Quicksand-Regular.otf</string>
+		<string>Raleway-Regular.otf</string>
+		<string>RBNo2Light-Regular.otf</string>
+		<string>Roboto-Regular.ttf</string>
+		<string>Seagle-Regular.otf</string>
+		<string>Sintony-Regular.otf</string>
+		<string>Sofia-Regular.otf</string>
+		<string>SourceSansPro-Regular.otf</string>
+		<string>telegrafico-Regular.ttf</string>
+		<string>Track-Regular.ttf</string>
+		<string>Oswald-Regular.ttf</string>
+		<string>CutiveMono-Regular.ttf</string>
+		<string>Lora-Italic.ttf</string>
+		<string>Monoton-Regular.ttf</string>
+		<string>Raleway-Light.ttf</string>
+		<string>Sancreek-Regular.ttf</string>
+		<string>YanoneKaffeesatz-Light.ttf</string>
+		<string>MontserratAlternates-Regular.ttf</string>
+		<string>Lobster.ttf</string>
+		<string>icomoon.ttf</string>
+	</array>
+	<key>UIPrerenderedIcon</key>
+	<true/>
+	<key>UIRequiresFullScreen</key>
+	<true/>
+	<key>UIStatusBarHidden</key>
+	<true/>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleDefault</string>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
+</dict>
+</plist>

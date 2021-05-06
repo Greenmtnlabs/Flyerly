@@ -8,6 +8,7 @@
 
 #import "Flyer.h"
 #import "Common.h"
+#import <Photos/Photos.h>
 
 NSString * const TEXT = @"";
 NSString * const TEXTFONTNAME = @".HelveticaNeueInterface-M3";
@@ -21,8 +22,8 @@ NSString * const TEXTBORDERCOLOR = @"0.000000, 0.000000, 0.000000";
 NSString * TEXTxPOS = @"15.000000";
 NSString * TEXTyPOS = @"15.000000";
 
-NSString * const TEXTWIDTH = @"280.000000";
-NSString * const TEXTHEIGHT = @"280.000000";
+NSString * TEXTWIDTH = @"280.000000";
+NSString * TEXTHEIGHT = @"280.000000";
 
 NSString * const CLIPARTFONTSIZE = @"60.000000";
 NSString * const CLIPARTxPOS = @"5.000000";
@@ -37,6 +38,7 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
 @synthesize masterLayers;
 @synthesize textFileArray;
 @synthesize socialArray;
+@synthesize saveInGallaryAfterNumberOfTasks,saveInGallaryRequired;
 
 /*
  * This method will be used to initiate the Flyer class
@@ -45,10 +47,16 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
  */
 -(id)initWithPath:(NSString *)flyPath setDirectory:(BOOL)setDirectory {
     
-    if (IS_IPHONE_6) {
-        TEXTxPOS = @"45.000000";
-    } else if (IS_IPHONE_6_PLUS) {
-        TEXTxPOS = @"50.000000";
+    //Change size and position of textview
+    if ( IS_IPHONE_6 ){
+        TEXTxPOS = @"10.000000";
+        TEXTWIDTH = @"345.000000";
+        TEXTHEIGHT = @"315.000000";
+        
+    } else if ( IS_IPHONE_6_PLUS || IS_IPHONE_XR || IS_IPHONE_XS){
+        TEXTxPOS = @"5.000000";
+        TEXTWIDTH = @"390.000000";
+        TEXTHEIGHT = @"360.000000";
     }
     
     self = [super init];
@@ -78,7 +86,8 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     
     //Load flyer
     [self loadFlyer:flyPath];
-    
+    [self resetSaveGallaryTasks];
+
     return self;
 }
 
@@ -86,17 +95,18 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
  * Set up the paths.
  */
 - (void)setupPaths:(NSString *)flyPath {
+    curFlyerPath = flyPath;
     //set Pieces Dictionary File for Update
-    piecesFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.pieces"]];
+    piecesFile = [curFlyerPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.pieces"]];
     
     //set Text File for Update
-    textFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.txt"]];
+    textFile = [curFlyerPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.txt"]];
     
     //set Share Status File for Update
-    socialFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/Social/flyer.soc"]];
+    socialFile = [curFlyerPath stringByAppendingString:[NSString stringWithFormat:@"/Social/flyer.soc"]];
     
     //set Flyer Image for Future Update
-    flyerImageFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE]];
+    flyerImageFile = [curFlyerPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE]];
 }
 
 
@@ -112,10 +122,7 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     textFileArray = [[NSMutableArray alloc] initWithContentsOfFile:textFile];
 
     socialArray = [[NSMutableArray alloc] initWithContentsOfFile:socialFile];
-    
-
 }
-
 
 /*
  * Here we Update Current Flyer Snapshot
@@ -134,27 +141,10 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     
     //Here we Update Flyer File from Current Snapshot
     [snapShotData writeToFile:flyerImageFile atomically:YES];
-    
-    //Here we Add Image in Flyerly Album
-    [self addToGallery:snapShotData];
 
 }
 
 
-/*
- * HERE WE SAVE CONTENT IN USER GALLERY
- */
--(void)addToGallery :(NSData *)snapShotData {
-    
-    // HERE WE CHECK USER ALLOWED TO SAVE IN GALLERY FROM SETTING
-    if([[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"]){
-        
-        //USER ALLOWED
-        //HERE WE WRITE IMAGE OR VIDEO IN GALLERY
-        [self saveInGallery:snapShotData];
-    }
-
-}
 
 /*
  * Here we save the dictionary to .peices files
@@ -166,9 +156,11 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     
     //Here we Update Flyer Date in Text File
     NSDate *date = [NSDate date];
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc]init];
-    [dateFormat setDateFormat:@"MM/dd/YYYY"];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"];
     NSString *dateString = [dateFormat stringFromDate:date];
+    
+//    NSDate *startDate = [dateFormat dateFromString:dateString];
 
     NSString *createdDate = [self getFlyerDate];
 
@@ -177,8 +169,42 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     }else {
         [self setFlyerUpdatedDate:dateString];
     }
-    
 }
+
+/**
+ * Get flyer updated date in ago format: 3Mi ( 3minutes ) or 3Y
+ */
+-(NSString *)getFlyerUpdateDateInAgoFormat{
+   NSString *updatedDate = [self getFlyerUpdateDate];
+    if ([updatedDate isEqualToString:@""] == NO) {
+        
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        if( [updatedDate rangeOfString:@":"].location != NSNotFound )
+            [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"]; //this is we are using new format
+        else
+            [dateFormat setDateFormat:@"MM/dd/yyyy"]; //for old flyer
+        
+        NSDate *startDate = [dateFormat dateFromString:updatedDate];
+        
+        NSDate *endDate = [NSDate date];
+        NSTimeInterval secondsBetween = [endDate timeIntervalSinceDate:startDate];
+        int minute  = floor(secondsBetween/(60));
+        int hour  = secondsBetween/(60*60);
+
+        if( hour > 23 ){
+            NSDateFormatter *dateformate=[[NSDateFormatter alloc]init];
+            [dateformate setDateFormat:@"yyyy-MM-dd"];
+            NSString *date = [dateformate stringFromDate:startDate];
+            updatedDate = [NSString stringWithFormat:@"%@",date];
+        } else if( hour > 0 ){
+            updatedDate = [NSString stringWithFormat:@"%ih",hour];
+        } else {
+            updatedDate = [NSString stringWithFormat:@"%im",minute];
+        }
+    }
+    return updatedDate;
+}
+
 
 /*
  * Here we Update Image for Video Overlay Image
@@ -195,11 +221,94 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     [snapShotData writeToFile:flyerImageFile atomically:YES];
 }
 
+/**
+ * Here we check following tasks before save
+ * if its video flyer then add in gallary after interstiall add hide and merging done
+ */
+-(BOOL)saveAfterCheck{
+    BOOL saved = NO;
+    saveInGallaryAfterNumberOfTasks++;
+    
+    if( saveInGallaryAfterNumberOfTasks > 0 ){
+        if ( [self isVideoFlyer] ){
+            if( saveInGallaryAfterNumberOfTasks > 1 ){
+                [self resetSaveGallaryTasks];
+                [self saveIntoGallery];
+                saved = YES;
+            }
+        } else{
+                [self resetSaveGallaryTasks];
+                [self saveIntoGallery];
+                saved = YES;
+        }
+    }
+    return saved;
+}
+/**
+ * Save in gallary after checking userdefaults, without data
+ */
+-(void)saveIntoGallery{
+    
+    
+    /*
+     * These lines of code are commented because it is a requirement of client.
+     * Now every flyer (Public/Private) will be saved in Photos
+     */
+    // If a flyer is Private, it will not be saved in Camera Roll
+    //    if ([[self getShareType] isEqualToString:@"Private"]){
+    //        return;
+    //    }
+    
+    // HERE WE CHECK USER ALLOWED TO SAVE IN GALLERY FROM SETTING
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"]){
+        
+        if ( [self isVideoFlyer] ){
+            [self saveIntoGalleryWithData:nil];
+        }else {
+            UIImage *snapShot = [UIImage imageWithContentsOfFile:[self getFlyerImage]];
+            //Getting Current Path
+            NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+            
+            //set Flyer Image for Future Update
+            flyerImageFile = [currentPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE]];
+            
+            
+            //Convert Imgae into Data
+            NSData *snapShotData = UIImagePNGRepresentation(snapShot);
+            
+            //Here we Update Flyer File from Current Snapshot
+            [snapShotData writeToFile:flyerImageFile atomically:YES];
+            [self saveIntoGalleryWithData:snapShotData];
+        }
+    }
+}
+
+
+//HERE WE CHECK USER DID ALLOWED TO ACESS PHOTO library
+-(BOOL)canSaveInGallary {
+    return !([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusRestricted || [ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusDenied);
+}
+
+-(void)showAllowSaveInGallerySettingAlert{
+    
+    NSString *msg;
+    
+    msg = [NSString  stringWithFormat:@"Please allow %@ to add photo in gallery( Settings -> Privacy -> Photos)", APP_NAME] ;
+
+    UIAlertView *permAlert = [[UIAlertView alloc] initWithTitle:@"Settings"
+                                                        message:msg
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil, nil];
+    
+    [permAlert show];
+}
+
 /*** HERE WE SAVE IMAGE INTO GALLERY
  * AND LINK WITH FLYERLY ALBUM
- *
+ * Data is required
  */
--(void)saveInGallery :(NSData *)imgData {
+-(void)saveIntoGalleryWithData :(NSData *)imgData {
     
 
     // CREATE LIBRARY OBJECT FIRST
@@ -214,16 +323,17 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
         return;
     }
 
-    //HERE WE CHECK USER DID ALLOWED TO ACESS PHOTO library
     //if not allow so ignore Flyer saving in Gallery
-    if ([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusRestricted || [ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusDenied) {
+    if ( [self canSaveInGallary ] == NO ) {
+        [self showAllowSaveInGallerySettingAlert];
         return;
     }
+
 
     
     // HERE WE GET FLYERLY ALBUM URL
      NSURL *groupUrl  = [[NSURL alloc] initWithString:[[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyAlbum"]];
-
+    
     
     // HERE WE GET GROUP OF IMAGE IN GALLERY
     [_library groupForURL:groupUrl resultBlock:^(ALAssetsGroup *group) {
@@ -245,6 +355,14 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
             }else {
                 currentUrl = [self getFlyerURL];
             }
+
+            [self resetSaveGallaryTasks];
+            
+            if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.3 ) {
+                // delete any previous saved flyer
+                [self deleteAssetWithURL:currentUrl];
+            }
+
             
             // CHECKING CRITERIA CREATE OR MODIFY
             if ( [currentUrl isEqualToString:@""]) {
@@ -256,7 +374,7 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
                 }
             
             } else { // URL FOUND WE USE EXISTING URL FOR REPLACE IMAGE
-
+                
                 // CONVERT STRING TO URL
                 NSURL *imageUrl = [[NSURL alloc] initWithString:currentUrl];
             
@@ -277,22 +395,46 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
                             [self createImageToFlyerlyAlbum:groupUrl ImageData:imgData];
                         }
                     } else {
+                        
+                        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.3 ) {
+                            
+                            
+                            if ( [self isVideoFlyer] ){
+                                
+                                //For Video
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    [self createVideoToFlyerlyAlbum:groupUrl VideoData:[NSURL fileURLWithPath:[self getSharingVideoPath]]];
+                                });
+                                
+                            }else {
+                                
+                                //For Image
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    [self createImageToFlyerlyAlbum:groupUrl ImageData:imgData];
+                                });
+                                
+                            }
 
+                        } else {
+                            
+                            if ( [self isVideoFlyer] ){
+                                
+                                //Update Video
+                                [asset setVideoAtPath:[NSURL fileURLWithPath:[self getSharingVideoPath]] completionBlock:^(NSURL *assetURL, NSError *error) {
+                                }];
+                                
+                            }else {
+                                
+                                //Update Image
+                                [asset setImageData:imgData metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {
+                                }];
+                            }
+
+                        }
+                        
                         // URL Exist and Image Found
                         //HERE WE UPDATE Content WITH LATEST UPDATE
-                        
-                      if ( [self isVideoFlyer] ){
-                          
-                            //Update Video
-                            [asset setVideoAtPath:[NSURL fileURLWithPath:[self getSharingVideoPath]] completionBlock:^(NSURL *assetURL, NSError *error) {
-                            }];
-                      }else {
-                          
-                          //Update Image
-                            [asset setImageData:imgData metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {
-                            }];
-                      }
-                    }
+                                            }
                 
                 } failureBlock:^(NSError *error) {
                 }];
@@ -304,11 +446,47 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     }
     failureBlock:^(NSError *error) {
     }];
-    
-    
-    
+}
 
+/**
+ * Reset vars who helps while saving in gallary
+ */
+-(void)resetSaveGallaryTasks{
+    //Reset gallary saving conditions
+    saveInGallaryRequired = 0;
+    saveInGallaryAfterNumberOfTasks = 0;
+}
 
+/**
+ Delete Previous Flyer From the Photos
+**/
+-(void)deleteAssetWithURL:(NSString*)assetURLString
+{
+    NSURL *assetURL = [NSURL URLWithString:assetURLString];
+    if (assetURL == nil)
+    {
+        return;
+    }
+    
+    PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[assetURL] options:nil];
+    if (result.count > 0)
+    {
+        PHAsset *phAsset = result.firstObject;
+        if ((phAsset != nil) && ([phAsset canPerformEditOperation:PHAssetEditOperationDelete]))
+        {
+            [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^
+             {
+                 [PHAssetChangeRequest deleteAssets:@[phAsset]];
+             }
+                                              completionHandler:^(BOOL success, NSError *error)
+             {
+                 if ((!success) && (error != nil))
+                 {
+                     NSLog(@"Error deleting asset: %@", [error description]);
+                 }
+             }];
+        }
+    }
 }
 
 
@@ -421,6 +599,17 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
     return imagePath;
 }
 
+/*
+ * Here we check, we need to save flyer in history or not
+ */
+-(BOOL)isSaveRequired {
+    NSMutableDictionary *oldMasterLayers = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
+    BOOL canSave = ( [oldMasterLayers isEqualToDictionary:masterLayers]) ? NO : YES;
+    if( canSave == NO ){
+        canSave = [self isVideoMergeProcessRequired];
+    }
+    return  canSave;
+}
 
 /*
  * Here we Matching Current Layers File with Last history Layers File
@@ -658,8 +847,9 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
 -(void)deleteLayer :(NSString *)uid{
     NSLog(@"Deleting layer");
     //Delete From Dictionary
-    [masterLayers removeObjectForKey:uid];
-
+    if( uid != nil ){
+        [masterLayers removeObjectForKey:uid];
+    }
 }
 
 /**
@@ -796,31 +986,49 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [masterLayers setValue:imageDetailDictionary forKey:uniqueId];
     return uniqueId;
 }
--(NSString *)addWatermark{
+
+-(void)deleteGiphyWatermarkLayerIfExist{
+    //Add giphy water mark only if we haven't giphyWatermark layer
+    if( [self getLayerFromMaster:FLYER_LAYER_GIPHY_LOGO] != nil ){
+        [self deleteLayer:FLYER_LAYER_GIPHY_LOGO];
+    }
+}
+
+-(void)addGiphyWatermark{
     
-    NSString *uniqueId = [Flyer getUniqueId];
+    [self deleteGiphyWatermarkLayerIfExist];
     
     //Create Dictionary for Symbol
     NSMutableDictionary *imageDetailDictionary = [[NSMutableDictionary alloc] init];
-    imageDetailDictionary[@"isEditable"] = @"NO";
-    imageDetailDictionary[@"image"] = @"Photo/watermark.png";
-    imageDetailDictionary[@"imageTag"] = @"";
-    imageDetailDictionary[@"x"] = @"10";
-    imageDetailDictionary[@"y"] = @"10";
-    imageDetailDictionary[@"width"] = @"102";
-    imageDetailDictionary[@"height"] = @"38";
 
-    
-    imageDetailDictionary[@"type"] = FLYER_LAYER_WATER_MARK;
-    imageDetailDictionary[@"tx"] = @"193.75";
-    imageDetailDictionary[@"ty"] = @"256.50";
+    NSString *uniqueId = FLYER_LAYER_GIPHY_LOGO;
+    imageDetailDictionary[@"type"] = FLYER_LAYER_GIPHY_LOGO;
+    imageDetailDictionary[@"isEditable"] = @"NO";
+    imageDetailDictionary[@"image"] = @"Photo/powerdByGiphyLogo.png";
+    imageDetailDictionary[@"imageTag"] = @"";
+    imageDetailDictionary[@"x"] = @"5";
+    imageDetailDictionary[@"y"] = @"10";
+    imageDetailDictionary[@"width"] = @"50";
+    imageDetailDictionary[@"height"] = @"18";
+
+    if( IS_IPHONE_4 || IS_IPHONE_5 ) {
+        [imageDetailDictionary setObject:@"0" forKey:@"tx"];
+        [imageDetailDictionary setObject:@"282.5" forKey:@"ty"];
+    }
+    else if( IS_IPHONE_6 ) {
+        [imageDetailDictionary setObject:@"0.0" forKey:@"tx"];
+        [imageDetailDictionary setObject:@"337.5" forKey:@"ty"];
+    }
+    else if( IS_IPHONE_6_PLUS || IS_IPHONE_XR || IS_IPHONE_XS) {
+        [imageDetailDictionary setObject:@"0.0" forKey:@"tx"];
+        [imageDetailDictionary setObject:@"376.5" forKey:@"ty"];
+    }
     imageDetailDictionary[@"a"] = @"1.00";
     imageDetailDictionary[@"b"] = @"0.00";
     imageDetailDictionary[@"c"] = @"0.00";
     imageDetailDictionary[@"d"] = @"1.00";
     
     [masterLayers setValue:imageDetailDictionary forKey:uniqueId];
-    return uniqueId;
 }
 
 /*
@@ -925,9 +1133,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     // Set to Master Dictionary
     [masterLayers setValue:imageDetailDictionary forKey:uid];
-
 }
-
 
 /*
  * Return Image Tag
@@ -1021,15 +1227,13 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 	NSString *homeDirectoryPath = NSHomeDirectory();
 	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr",[user objectForKey:@"username"]]];
     
-    
     if ([[NSFileManager defaultManager] fileExistsAtPath:usernamePath isDirectory:NULL])
             [[NSFileManager defaultManager] createDirectoryAtPath:usernamePath withIntermediateDirectories:YES attributes:nil error:&error];
         
     NSString *uniqueId = [Flyer getUniqueId];
     NSString *flyerPath = [usernamePath stringByAppendingString:[NSString stringWithFormat:@"/%@", uniqueId]];
-        
+    
     return flyerPath;
-
 }
 
 /*
@@ -1043,9 +1247,9 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     //Getting Home Directory
 	NSString *homeDirectoryPath = NSHomeDirectory();
-	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr",[user objectForKey:@"username"]]];
+	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr", [user objectForKey:@"username"]]];
     
-     NSArray *flyersList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:usernamePath error:nil];
+    NSArray *flyersList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:usernamePath error:nil];
     
     NSArray *sortedFlyersList = [flyersList sortedArrayUsingFunction:compareDesc context:NULL];
     
@@ -1082,7 +1286,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  * Here We Change Flyer Directory Name to Current Time Stamp
  */
 -(void)setRecentFlyer {
-
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     
     NSString *uniqueId = [Flyer getUniqueId];
@@ -1109,6 +1312,14 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  */
 -(void)createFlyerlyAlbum {
     
+    NSString *albumName;
+    
+    #if defined(FLYERLY)
+        albumName = FLYER_ALBUM_NAME;
+    #else
+        albumName = FLYERLY_BIZ_ALBUM_NAME;
+    #endif
+    
     if ( _library == nil ) {
         _library = [[ALAssetsLibrary alloc] init];
     }
@@ -1116,7 +1327,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     __weak ALAssetsLibrary* library = _library;
     
     //HERE WE SEN REQUEST FOR CREATE ALBUM
-    [_library addAssetsGroupAlbumWithName:FLYER_ALBUM_NAME
+    [_library addAssetsGroupAlbumWithName:albumName
                              resultBlock:^(ALAssetsGroup *group) {
                                  
                                  //CHECKING ALBUM FOUND IN LIBRARY
@@ -1127,7 +1338,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
                                          
                                         NSString *existAlbumName = [group valueForProperty: ALAssetsGroupPropertyName];
                                          
-                                         if ([existAlbumName isEqualToString:FLYER_ALBUM_NAME]) {
+                                         if ([existAlbumName isEqualToString:albumName]) {
                                              *stop = YES;
                                              
                                              // GETTING CREATED URL OF ALBUM
@@ -1166,6 +1377,14 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  */
 -(void)createFlyerlyAlbum :(NSData *)imgdata {
     
+    NSString *albumName;
+    
+    #if defined(FLYERLY)
+        albumName = FLYER_ALBUM_NAME;
+    #else
+        albumName = FLYERLY_BIZ_ALBUM_NAME;
+    #endif
+    
     if ( _library == nil ) {
         _library = [[ALAssetsLibrary alloc] init];
     }
@@ -1173,7 +1392,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     
     //HERE WE SEN REQUEST FOR CREATE ALBUM
-    [_library addAssetsGroupAlbumWithName:FLYER_ALBUM_NAME
+    [_library addAssetsGroupAlbumWithName:albumName
                              resultBlock:^(ALAssetsGroup *group) {
                                  
                                  // GETTING CREATED URL OF ALBUM
@@ -1327,7 +1546,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 }
 
 /*
- * Here we Set Text Size
+ * Here we Set Text Sizein dictionary
  */
 -(void)setFlyerTextSize :(NSString *)uid Size:(UIFont *)sz{
     
@@ -1380,20 +1599,27 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 -(void)setFlyerBorder :(NSString *)uid RGBColor:(id)rgb{
     
     NSMutableDictionary *templateDictionary = [self getLayerFromMaster:uid];
-    
     CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0,wht = 0.0;
-    
-    UILabel *labelToStore = [[UILabel alloc]init];
-    labelToStore.textColor = rgb;
-    
-    //Getting RGB Color Code
-    [labelToStore.textColor getRed:&red green:&green blue:&blue alpha:&alpha];
-    
-    if (red == 0 && green == 0 && blue ==0) {
-        [labelToStore.textColor getWhite:&wht alpha:&alpha];
+
+    //When picture flyer border
+    if( [rgb isKindOfClass:[NSString class]] ){
+        [templateDictionary setValue:rgb forKey:@"bordercolor"];
+    }
+    //Colored flyer border
+    else{
+        UILabel *labelToStore = [[UILabel alloc]init];
+        labelToStore.textColor = rgb;
+        
+        //Getting RGB Color Code
+        [labelToStore.textColor getRed:&red green:&green blue:&blue alpha:&alpha];
+        
+        if (red == 0 && green == 0 && blue ==0) {
+            [labelToStore.textColor getWhite:&wht alpha:&alpha];
+        }
+        
+        [templateDictionary setValue:[NSString stringWithFormat:@"%f, %f, %f", red, green, blue] forKey:@"bordercolor"];
     }
     
-    [templateDictionary setValue:[NSString stringWithFormat:@"%f, %f, %f", red, green, blue] forKey:@"bordercolor"];
     [templateDictionary setValue:[NSString stringWithFormat:@"%f, %f", wht, alpha] forKey:@"bordercolorWhite"];
     
     // Set to Master Dictionary
@@ -1406,10 +1632,26 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  * Here we Set Flyer Type to Video Flyer
  */
 -(void)setFlyerTypeVideo {
+    [self deleteGiphyWatermarkLayerIfExist];
+    [self setFlyerTypeVideoWithSize:flyerlyWidth height:flyerlyHeight videoSoure:@"flyerly"];
+}
+/*
+ * Here we Set Flyer Type to Video Flyer with size
+  @return: void
+  @parms:
+   @width: integer value
+   @height: integer value
+   @videoSoure: String type ( Possible values would be @"giphy" / @"flyerly"
+ */
+-(void)setFlyerTypeVideoWithSize:(int)width height:(int)height videoSoure:(NSString *)videoSoure {
 
     NSMutableDictionary *templateDictionary = [self getLayerFromMaster:@"Template"];
     
     [templateDictionary setValue:@"video" forKey:@"FlyerType"];
+    [templateDictionary setValue:[NSString stringWithFormat:@"%i",width] forKey:@"videoWidth"];
+    [templateDictionary setValue:[NSString stringWithFormat:@"%i",height] forKey:@"videoHeight"];
+    [templateDictionary setValue:videoSoure forKey:@"videoSoure"];
+    
     
     // Set timeStamp
     [templateDictionary setValue:[Flyer getUniqueId] forKey:@"Timestamp"];
@@ -1418,6 +1660,29 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [masterLayers setValue:templateDictionary forKey:@"Template"];
     
 }
+
+/**
+ * Basically this is the supportive function for old video flyers, new flyers have double size(1240x1240)
+ */
+-(CGSize)getSizeOfFlyer {
+    CGSize size = CGSizeMake(OldFlyerlyWidth, OldFlyerlyHeight);
+    
+    NSMutableDictionary *templateDictionary = [self getLayerFromMaster:@"Template"];
+    BOOL flyerTypeIsVide = ([[templateDictionary objectForKey:@"FlyerType"] isEqualToString:@"video"]);
+    
+    if( flyerTypeIsVide == NO ){
+        size = CGSizeMake(flyerlyWidth, flyerlyHeight);
+    }
+    else if( flyerTypeIsVide && [templateDictionary objectForKey:@"videoWidth"] != nil ){
+        int videoWidth = [[templateDictionary objectForKey:@"videoWidth"] intValue];
+        int videoHeight = [[templateDictionary objectForKey:@"videoHeight"] intValue];
+        size = CGSizeMake(videoWidth, videoHeight);
+    }
+    
+    return size;
+}
+
+
 
 /*
  * Here we Get Flyer Type for Video Flyer
@@ -1433,6 +1698,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  * Here we Set Flyer Type to Image Flyer
  */
 -(void)setFlyerTypeImage {
+   [self deleteGiphyWatermarkLayerIfExist];
     NSMutableDictionary *templateDictionary = [self getLayerFromMaster:@"Template"];
     
     [templateDictionary setValue:@"image" forKey:@"FlyerType"];
@@ -1486,20 +1752,23 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
 
 /*
- * Here we Return Sharing Video Path
+ * Here we Return Sharing Video( merged video ) Path
  */
 -(NSString *)getSharingVideoPath{
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    if ([currentpath isEqualToString:@"/"]) {
+        currentpath = [NSString stringWithFormat:@"/private%@",curFlyerPath];
+    }
     NSString *destination = [NSString stringWithFormat:@"%@/FlyerlyMovie.mov",currentpath];
     return destination;
 }
 
 /*
- * Here we Return Over generated Video Snap Shot For Main screen
+ * Here we Return Over merged Video Snap Shot For Main screen
  */
 -(UIImage *)getSharingVideoCover {
 
-    NSString* filePath = [self getSharingVideoPath];
+    NSString* filePath = [self getSharingVideoPath];//merged video
    return [self getSnapShotOfVideoPath:filePath];
 }
 
@@ -1512,6 +1781,9 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     return [self getSnapShotOfVideoPath:filePath];
 }
 
+/**
+ * Get first frame from the video
+ */
 -(UIImage *)getSnapShotOfVideoPath:(NSString *) filePath {
     UIImage *img;
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:NULL]) {
@@ -1535,7 +1807,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     } else {
         NSLog( @"Video cover not found" );
     }
-    NSLog(@"getSnapShotOfVideoPath = width = %f, height = %f", img.size.width, img.size.height);
 
     return img;
 }
@@ -1543,20 +1814,14 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 - (UIImage*)mergeImages:(UIImage*)firstImage withImage:(UIImage*)secondImage width:(CGFloat)width height:(CGFloat)height {
     
     
-        NSLog(@"firstImage= width = %f, height = %f", firstImage.size.width, firstImage.size.height);
-        NSLog(@"secondImage= width = %f, height = %f", secondImage.size.width, secondImage.size.height);
-    
         UIImage *mergedImg = nil;
-        
-        //CGSize newImageSize = CGSizeMake(MAX(firstImage.size.width, secondImage.size.width), MAX(firstImage.size.height, secondImage.size.height));
+
         CGSize newImageSize = CGSizeMake(width, height);
-        if (UIGraphicsBeginImageContextWithOptions != NULL) {
+        if (&UIGraphicsBeginImageContextWithOptions != NULL) {
             UIGraphicsBeginImageContextWithOptions(newImageSize, NO, [[UIScreen mainScreen] scale]);
         } else {
             UIGraphicsBeginImageContext(newImageSize);
         }
-        //[firstImage drawAtPoint:CGPointMake(0,0)];
-        //[secondImage drawAtPoint:CGPointMake(0,0)];
         [firstImage drawInRect:CGRectMake(0, 0, width, height)];
         [secondImage drawInRect:CGRectMake(0, 0, width, height)];
     
@@ -1564,7 +1829,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         mergedImg = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
 
-        NSLog(@"merged image= width = %f, height = %f", mergedImg.size.width, mergedImg.size.height);
         return mergedImg;
     }
     
@@ -1573,19 +1837,31 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  */
 -(UIImage *)getImageForVideo {
     
-    UIImage *bottomImage = [self  getSharingVideoCover];
+    UIImage *bottomImage = [self  getSharingVideoCover];//this is merged video first frame
     
-    UIImage *image = [UIImage imageNamed:@"play_icon"];
+    UIImage *imgPlayIcon = [UIImage imageNamed:@"play_icon"];
+
+    CGSize size = [self getSizeOfFlyer];
+    int vWidth = size.width;
+    int vHeight = size.height;
     
-    CGSize newSize = CGSizeMake( flyerlyWidth, flyerlyHeight );
+    // play icon width and height
+    CGFloat playIconWidth = floor(vWidth/3.5); //in 620 flyer height of expected height for icon 177
+    CGFloat playIconHeight = floor(vWidth/3.5); //in 1240 flyer height of expected height for icon 354
+    
+    CGSize newSize = CGSizeMake( vWidth, vHeight );
     UIGraphicsBeginImageContext( newSize );
+    
+    // setting play icon coordinates
+    CGFloat x_playIcon = (vWidth/2)-(playIconWidth/2);
+    CGFloat y_playIcon = (vHeight/2)-(playIconHeight/2);
     
     // Use existing opacity as is
     [bottomImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
     
     // Apply supplied opacity
 
-    [image drawInRect:CGRectMake( 480, -15, 180, 180 ) blendMode:kCGBlendModeNormal alpha:1];
+    [imgPlayIcon drawInRect:CGRectMake( x_playIcon, y_playIcon , playIconWidth, playIconHeight ) blendMode:kCGBlendModeNormal alpha:1];
     
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     
@@ -1603,9 +1879,11 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     NSString *typ = [templateDictionary valueForKey:@"FlyerType"];
     
-    if ([typ isEqualToString:@"video"]) {
+    if ([typ isEqualToString:@"video"])
+    {
         return YES;
     }
+    
     return NO;
 }
 
@@ -1678,8 +1956,8 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
 }
 
--(void)setThumblerStatus :(int)status {
-    
+-(void)setMessengerStatus :(int)status
+{
     [socialArray replaceObjectAtIndex:3 withObject:[NSString stringWithFormat:@"%d",status]];
     
     //Here we write the Array of Text files .txt
@@ -1687,9 +1965,15 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
 }
 
-
--(void)setFlickerStatus :(int)status {
-    
+/*
+ * This method sets status of saveButton (used in ShareViewController)
+ * @params:
+ *      status: int
+ * @return:
+ *      void
+ */
+-(void)setSaveButtonStatus :(int)status
+{
     [socialArray replaceObjectAtIndex:4 withObject:[NSString stringWithFormat:@"%d",status]];
     
     //Here we write the Array of Text files .txt
@@ -1698,8 +1982,8 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 }
 
 
--(void)setInstagaramStatus :(int)status {
-    
+-(void)setInstagaramStatus :(int)status
+{
     [socialArray replaceObjectAtIndex:5 withObject:[NSString stringWithFormat:@"%d",status]];
     
     //Here we write the Array of Text files .txt
@@ -1770,15 +2054,19 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 /*
  * Here we Return Thumbler Share Status of Flyer
  */
--(NSString *)getThumblerStatus {
+-(NSString *)getMessengerStatus {
     return [socialArray objectAtIndex:3];
     
 }
 
 /*
- * Here we Return Flicker Share Status of Flyer
+ * This method tells if the flyer saved or not
+ * @params:
+ *      void
+ * @return:
+ *      NSString containing status (0 or 1)
  */
--(NSString *)getFlickerStatus {
+-(NSString *)getSaveButtonStatus {
     return [socialArray objectAtIndex:4];
     
 }
@@ -1939,6 +2227,37 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     }
 
 }
+
+#pragma mark Date Formating Methods
+
+/*
+ * Formats Date
+ * @params:
+ *      dateString: NSString
+ * @return:
+ *      date: NString
+ */
+
+
+-(NSString *)dateFormatter: (NSString *) dateString{
+
+    NSDateFormatter* dateFormatter, *formatter;
+    NSDate *newDate;
+    NSString *date;
+    // To format date
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"];
+    newDate = [dateFormatter dateFromString:dateString];
+    
+    formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    date = [formatter stringFromDate:newDate];
+    return date;
+}
+
+
+
+
 
 #pragma mark  Flyer Text File SET
 
@@ -2133,6 +2452,21 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 -(CGFloat)getTvDefPosX { return [TEXTxPOS floatValue]; }
 -(CGFloat)getTvDefPosY { return [TEXTyPOS floatValue]; }
 
+
+/*
+ * When video is edited
+ * set as unselected
+ */
+-(void)resetAllButtonStatus{
+    
+    [self setFacebookStatus:0];
+    [self setYouTubeStatus:0];
+    [self setMessengerStatus:0];
+    [self setEmailStatus:0];
+    [self setSmsStatus:0];
+    [self setTwitterStatus:0];
+    [self setClipboardStatus:0];
+}
 
 @end
 

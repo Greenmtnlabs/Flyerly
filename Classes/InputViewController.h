@@ -19,6 +19,7 @@
     SHKSharer *iosSharer;
 
 }
+@property (weak, nonatomic) IBOutlet UILabel *lblTweetMsg;
 @property(nonatomic, strong) IBOutlet UITextView *txtfield;
 -(IBAction)cancel;
 -(IBAction)post;

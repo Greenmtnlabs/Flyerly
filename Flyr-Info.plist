@@ -8,11 +8,12 @@
 	<string>Flyerly</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>icon@2x.png</string>
 		<string>icon.png</string>
-		<string>icon-60.png</string>
 		<string>icon-120.png</string>
 	</array>
 	<key>CFBundleIcons</key>
@@ -28,7 +29,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>4.3.2</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -40,26 +41,68 @@
 			<string>com.flyerly.greenmtnlabs</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>fb136691489852349</string>
 				<string>oatransdemo</string>
 				<string>Flyerly</string>
-				<string>fb136691489852349</string>
 				<string>fsqapi</string>
 				<string>flyerlyapp</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>499</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FacebookAppID</key>
 	<string>136691489852349</string>
 	<key>FacebookDisplayName</key>
 	<string>Flyerly</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+		<string>instagram</string>
+		<string>twitter</string>
+		<string>fb</string>
+		<string>sms</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>bigstockphoto.com</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<false/>
+			</dict>
+		</dict>
+	</dict>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Advertisement would like to create a calendar event.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app requires access to the camera to create a flyer by taking picture.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>This app requires contacts access to share flyer.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app requires access to location to attach location with flyer.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app requires access to location to attach location with flyer.</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app requires microphone access for uploading videos</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app requires access to the photo library to create a flyer by selecting picture.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>HelveticaRoundedLTStd-BdCn_0.otf</string>
@@ -159,11 +202,17 @@
 	</array>
 	<key>UIPrerenderedIcon</key>
 	<true/>
+	<key>UIRequiresFullScreen</key>
+	<true/>
+	<key>UIStatusBarHidden</key>
+	<true/>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleDefault</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 </dict>
 </plist>

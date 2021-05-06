@@ -26,12 +26,22 @@
     if (( self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil] )) {
     
         // Done Button
-        UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 42)];
-        [nextButton addTarget:self action:@selector(onDone) forControlEvents:UIControlEventTouchUpInside];
-        [nextButton setBackgroundImage:[UIImage imageNamed:@"done_with_3"] forState:UIControlStateNormal];
-        UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+//        UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 42)];
+//        [nextButton addTarget:self action:@selector(onDone) forControlEvents:UIControlEventTouchUpInside];
+//       // [nextButton setBackgroundImage:[UIImage imageNamed:@"done_with_3"] forState:UIControlStateNormal];
+//        UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
     
-        [self.navigationItem setRightBarButtonItem:doneBarButton];
+        UIImageView *imgDone =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 42)];
+        imgDone.image=[UIImage imageNamed:@"done_with_3"];
+        [imgDone setContentMode:UIViewContentModeScaleAspectFit];
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onDone)];
+        singleTap.numberOfTapsRequired = 1;
+        [imgDone setUserInteractionEnabled:YES];
+        [imgDone addGestureRecognizer:singleTap];
+        UIBarButtonItem *doneBarImage = [[UIBarButtonItem alloc] initWithCustomView:imgDone];
+
+        //NSMutableArray  *barItems  = [NSMutableArray arrayWithObjects:doneBarImage,nil];
+        [self.navigationItem setRightBarButtonItem:doneBarImage];
     
         // BackButton
         UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
@@ -67,14 +77,14 @@
     self.cropGuideSize = desiredImageSize;
     
     // Get only the core image filters.
-    NSArray *filterTypes = [NBUCoreImageFilterProvider availableFilterTypes];
+    NSArray *filterTypes = [NBUFilterProvider availableFilters];
     
     NSMutableArray * filters = [NSMutableArray array];
     NBUFilter * filter;
     
-    for (NSString * type in filterTypes) {
-        filter = [NBUCoreImageFilterProvider filterWithName:nil
-                    type:type
+    for (NBUFilter * nbuFilter in filterTypes) {
+        filter = [NBUFilterProvider filterWithName:nbuFilter.name
+                    type:nbuFilter.type
                     values:nil];
         [filters addObject:filter];
     }
@@ -83,7 +93,7 @@
 
     // Configure crop view. We may get big pixels with this factor!
     self.maximumScaleFactor = 10.0;
-    self.cropView.allowAspectFit = YES;
+    self.cropView.allowAspectFit = NO;
     
     // Use the image from filters for cropping.
     [self.filterView setImage:self.image];
@@ -124,7 +134,8 @@
 /**
  * We are done, use the cropped and filtered image.
  */
--(void)onDone {
+-(void)onDone
+{
     // Go back to the last screen.
     [self.navigationController popViewControllerAnimated:YES];
     

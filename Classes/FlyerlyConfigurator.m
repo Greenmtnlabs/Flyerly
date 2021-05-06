@@ -9,6 +9,8 @@
 #import "FlyerlyConfigurator.h"
 #import "SHKFile.h"
 #import "PaypalMobile.h"
+#import <Social/Social.h>
+#import "Common.h"
 
 @implementation FlyerlyConfigurator
 
@@ -18,15 +20,42 @@
  These values are used by any service that shows 'shared from XYZ'
  */
 - (NSString*)appName {
-	return @"Flyerly";
+	
+    return APP_NAME;
 }
 
 - (NSString*)appURL {
-	return @"http://www.flyer.ly";
+	
+    #if defined(FLYERLY) // Flyerly
+        return @"http://www.flyer.ly";
+    #else // Flyerly Biz
+        return @"http://www.flyerly.com/biz";
+    #endif
 }
 
 - (NSString*)referralURL{
-    return @"http://app.flyerly.com/cs?i=";
+    
+    #if defined(FLYERLY) // Flyerly
+        return @"http://greenmtnlabs.com/flyerly/index.html?i=";
+    #else // Flyerly Biz
+        return @"http://flyerly.com/biz?i=";
+    #endif
+}
+
+- (NSString*)appLinkURL{
+    
+    #if defined(FLYERLY) // Flyerly
+        return @"http://greenmtnlabs.com/flyerly/index.html";
+    #else // Flyerly Biz
+        return @"http://flyerly.com/biz/";
+    #endif
+}
+- (NSString*)appInvitePreviewImageURL{
+    #if defined(FLYERLY) // Flyerly
+        return @"http://greenmtnlabs.com/flyerly/images/phones.png";
+    #else // Flyerly Biz
+        return @"http://greenmtnlabs.com/images/bizphone.png";
+    #endif
 }
 
 
@@ -70,15 +99,17 @@
     
     //ozair's account
 	//return @"ca-app-pub-5409664730066465/8030978831";
-
+    
     //Rehan's a/c
     return @"ca-app-pub-1703558915514520/6691113092";
     
 #else
-    
     //Live Jen'account
-    return @"ca-app-pub-3218409375181552/2458746629";
-    
+    #if defined(FLYERLY) // Flyerly
+        return @"ca-app-pub-3218409375181552/2458746629";
+    #else // Flyerly Biz
+        return @"ca-app-pub-3218409375181552/2750207422";
+    #endif
 #endif
 
 }
@@ -90,34 +121,21 @@
     
     //ozair's account
 	//return @"ca-app-pub-5409664730066465/9926514430";
+    
     //Rehan's a/c
     return @"ca-app-pub-1703558915514520/8955078699";
     
 #else
-    
     //Live Jen'account
-    return @"ca-app-pub-3218409375181552/5412213028";
-    
+    #if defined(FLYERLY) // Flyerly
+        return @"ca-app-pub-3218409375181552/5412213028";
+    #else // Flyerly Biz
+        return @"ca-app-pub-3218409375181552/7180407024";
+    #endif
 #endif
     
 }
 
-//Lob ApiKey
-- (NSString*)lobAppId {
-
-#ifdef DEBUG
-
-	//return @"test_b5d690f19a73468edc528b5a4c63f9875c8"; //preston a/c test details
-    //Key extracted from [https://dashboard.lob.com/account] using [ ozair.nazir@riksof.com] a/c test details
-    return @"test_13fb536c2d9e23b0e25657d9f923261b03b";
-
-#else
-    
-    return @"live_889eeb7a75372e642ceaece3aa9d2ac0dfc"; //greenmtnlabs@gmail.com a/c live details
-
-#endif
-
-}
 
 - (NSString*)bigstockAccountId {
 
@@ -152,7 +170,7 @@
     
 #ifdef DEBUG
     
-    return PayPalEnvironmentSandbox;
+    return PayPalEnvironmentSandbox;//testing send box
     
 #else
     /*
@@ -160,13 +178,30 @@
     //only for rehan's testing MUST enable after RELEASING on app store, other wise preston a/c will be sucked...
     return PayPalEnvironmentSandbox;
     */
-    
-    return PayPalEnvironmentProduction;
-
+    return PayPalEnvironmentProduction; //live paypal a/c
     
 #endif
     
 }
+
+
+//Lob ApiKey
+- (NSString*)lobAppId {
+    
+#ifdef DEBUG
+    
+    //return @"test_b5d690f19a73468edc528b5a4c63f9875c8"; //preston a/c test details
+    //Key extracted from [https://dashboard.lob.com/account] using [ ozair.nazir@riksof.com] a/c test details
+    //return @"test_13fb536c2d9e23b0e25657d9f923261b03b";//test a/c [ ozair.nazir@riksof.com ]
+    return @"test_964f662f2e4739cf7e485d85cf3b143052e";//test a/c of [ abdul.rauf@riksof.com ]
+    
+#else
+    return @"live_889eeb7a75372e642ceaece3aa9d2ac0dfc"; //greenmtnlabs@gmail.com a/c live details
+    
+#endif
+    
+}
+
 
 - (NSString*)paypalEnvironmentId {
     
@@ -184,7 +219,12 @@
 
 //Crittercism ApiKey
 - (NSString*)crittercismAppId {
-	return @"519a14f897c8f27969000019";
+    #if defined(FLYERLY) // Flyerly
+        return @"519a14f897c8f27969000019";
+    #else // Flyerly Biz
+        return @"3a4fc035429242a383c9be5d7c032bdd00555300";
+    #endif
+	
 }
 
 //Parse Online Keys
@@ -197,18 +237,20 @@
 
 //Parse Offline Keys
 - (NSString*)parseOfflineAppId{
-    return @"1zE9CnuScHj4l7dGFbT8NG15uTNb8VazMpsdoCis";
-    //---oziar's account---//q9bK4kuAV7se1SPuNJ4wvffTSVU5k4MLDnVgJpbI
+    return @"1zE9CnuScHj4l7dGFbT8NG15uTNb8VazMpsdoCis"; //zohaib bhai test a/c
 }
 
 - (NSString*)parseOfflineClientKey{
-    return @"rFdNdJfzWt8YIf66G7twr0D5zp9uVsWuAkMEnkpc";
-    //----//fXPKQXaId9M2qz3Xd74iUo7LDt8gHEbMVJUM2dYt
+    return @"rFdNdJfzWt8YIf66G7twr0D5zp9uVsWuAkMEnkpc"; //zohaib bhai test a/c
 }
 
 //Flurry SessionKey
 - (NSString*)flurrySessionId{
-    return @"ZWXZFGSQZ4GMYZBVZYN3";
+    #if defined(FLYERLY) // Flyerly
+        return @"ZWXZFGSQZ4GMYZBVZYN3";
+    #else // Flyerly Biz
+        return @"CFNHH68Y7DF4RVG8VVS5";
+    #endif
 }
 
 
@@ -228,12 +270,17 @@
 //    SHKFacebookLocalAppID = lite
 //
 //    Your CFBundleURLSchemes entry: fb555lite
-- (NSString*)facebookAppId {
-	return @"136691489852349";
+- (NSString*)facebookAppId
+{
+    #if defined(FLYERLY) // Flyerly
+        return @"136691489852349";
+    #else // Flyerly Biz
+        return @"1755119231374505";
+    #endif
 }
 
 - (NSString*)facebookLocalAppId {
-	return @"fb136691489852349";
+	return nil;
 }
 
 //Change if your app needs some special Facebook permissions only. In most cases you can leave it as it is.
@@ -253,7 +300,14 @@
  on the auth path. It will try to use native auth if availible.
  */
 - (NSNumber*)forcePreIOS6FacebookPosting {
-	return [NSNumber numberWithBool:false];
+    
+    BOOL result = NO;
+    //if they have an account on their device, then use it, but don't force a device level login
+    if (NSClassFromString(@"SLComposeViewController")) {
+        result = ![SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook];
+    }
+    return [NSNumber numberWithBool:result];
+
 }
 
 /*
@@ -263,6 +317,7 @@
  register the bundle ID of your application.
  */
 - (NSString*)googlePlusClientId {
+    
     return @"144370279359-lsst3ttqhr7nrj1krv21hk3urfsou6ic.apps.googleusercontent.com";
 }
 
@@ -304,12 +359,24 @@
  */
 
 - (NSString*)twitterConsumerKey {
-    return @"xYlRtbesxU0Qrxulx5kjdA";
     
+    #if defined(FLYERLY) // Flyerly
+        //return @"mPqVFHnEHVGj2v1xjnW2WnryF";
+        return @"xYlRtbesxU0Qrxulx5kjdA";
+    #else // Flyerly Biz
+        return @"JlAwXVRkwu0HvGwVmrPq8dAgz";
+    #endif
 }
 
 - (NSString*)twitterSecret {
-	return @"v8j6WWLoRDBCIkUQtapbhuOoYOZ4sWjMJovJLIPgO0";
+
+    #if defined(FLYERLY) // Flyerly
+        //return @"jRB6zK2mHYlbvddLJyMDXattHtqyKna6x1p64d6nve23IYZJT0";
+        return @"v8j6WWLoRDBCIkUQtapbhuOoYOZ4sWjMJovJLIPgO0";
+    #else // Flyerly Biz
+        return @"5DoqmMkYaK7V4SqRITDCfDGBcgLWo2vDg5DAXcCNV0mPasWGSS";
+    #endif
+	
 }
 // You need to set this if using OAuth, see note above (xAuth users can skip it)
 - (NSString*)twitterCallbackUrl {
@@ -321,7 +388,12 @@
 }
 // Enter your app's twitter account if you'd like to ask the user to follow it when logging in. (Only for xAuth)
 - (NSString*)twitterUsername {
-	return @"flyerlyapp";
+    
+    #if defined(FLYERLY)
+        return @"flyerlyapp";
+    #else
+        return @"flyerlybiz";
+    #endif
 }
 
 // Evernote - http://www.evernote.com/about/developer/api/
@@ -371,7 +443,7 @@
 
 // Bit.ly for shortening URLs, used by some sharers (e.g. Buffer). http://bit.ly/account/register - after signup: http://bit.ly/a/your_api_key If you do not enter bit.ly credentials, URL will be shared unshortened.
 - (NSString*)bitLyLogin {
-	return @"flyerly";
+    return @"flyerly";
 }
 
 - (NSString*)bitLyKey {
@@ -475,13 +547,24 @@
     return [NSNumber numberWithBool:YES];
 }
 
+//clientid
 // YouTube - https://developers.google.com/youtube/v3/guides/authentication#OAuth2_Register
 - (NSString*)youTubeConsumerKey {
-	return @"144370279359-lsst3ttqhr7nrj1krv21hk3urfsou6ic.apps.googleusercontent.com";
+    #if defined(FLYERLY) // Flyerly
+        return @"688107532507-7nm1v37klc2vtfgcaer206k338ub9jqs.apps.googleusercontent.com";
+    #else // Flyerly Biz
+        return @"487252497579-jptpajrrht0lfaq0ig7h7mkkvfrh5eku.apps.googleusercontent.com"; // using id: abdulrauf618@gmail.com
+    #endif
 }
 
+//API key
 - (NSString*)youTubeSecret {
-	return @"tSn0qB7etxqNv59PZE10oU5d";
+	
+    #if defined(FLYERLY)
+        return @"lSn4qPwH3FOytNsqMkeZNYTP";
+    #else
+        return @"wZCbdJC0fyonfizeoB_aNv_6"; // using id: abdulrauf618@gmail.com
+    #endif
 }
 
 // Dropbox - https://www.dropbox.com/developers/apps
@@ -549,11 +632,13 @@
 }
 
 // Forms
-- (UIColor *)formFontColor {
+- (UIColor *)formFontColor
+{
     return nil;
 }
 
-- (UIColor*)formBackgroundColor {
+- (UIColor*)formBackgroundColor
+{
     return nil;
 }
 
@@ -730,4 +815,14 @@
     return NSStringFromCGRect(CGRectZero);
 }
 
+
+//Giphy Api Key
+- (NSString*)giphyApiKey{    
+#ifdef DEBUG
+    return @"dc6zaTOxFJmzC"; //testing key
+    
+#else
+    return @"PPOlBY3exNJQI"; //live key
+#endif
+}
 @end

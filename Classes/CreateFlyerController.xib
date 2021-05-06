@@ -1,9 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment version="784" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <deployment version="2304" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue-Bold</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateFlyerController">
             <connections>
@@ -16,6 +24,8 @@
                 <outlet property="artsSizeTabButton" destination="5Cl-rC-EDu" id="I6i-9N-PRr"/>
                 <outlet property="backgroundTabButton" destination="zoh-mW-4K3" id="jKZ-37-kHq"/>
                 <outlet property="backtemplates" destination="WvZ-dV-5Fn" id="5XB-pz-W0O"/>
+                <outlet property="bannerAdsView" destination="HqN-xE-zHB" id="FBd-9e-8or"/>
+                <outlet property="btnBannerAdsDismiss" destination="uIg-oU-faY" id="SXZ-RS-1Yo"/>
                 <outlet property="cameraRoll" destination="t0N-7F-yOw" id="jXi-au-Q5l"/>
                 <outlet property="cameraTabButton" destination="iEv-dA-2If" id="MFy-NX-MwQ"/>
                 <outlet property="cameraTakePhoto" destination="TUU-ew-jcU" id="4sp-iH-P0R"/>
@@ -35,6 +45,7 @@
                 <outlet property="fontBorderTabButton" destination="E2L-Wc-n71" id="qIM-iL-HJk"/>
                 <outlet property="fontEditButton" destination="Rgs-rs-7a8" id="E8j-if-9v8"/>
                 <outlet property="fontTabButton" destination="zu1-aU-CE3" id="4N8-mM-vZ8"/>
+                <outlet property="giphyBgBtn" destination="ofn-R7-Qk5" id="S2n-rn-s6Y"/>
                 <outlet property="heightTabButton" destination="5Ya-yN-kTr" id="RhP-af-MbU"/>
                 <outlet property="libArts" destination="weP-Ld-FsM" id="x98-Xu-7Y9"/>
                 <outlet property="libBackground" destination="wtn-Zi-MKo" id="Lbb-GH-gzo"/>
@@ -61,271 +72,299 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="1" userLabel="View - Full App view">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="a9C-ON-Lpo" userLabel="zoomScreenShotForVideo">
-                    <rect key="frame" x="6" y="65" width="401" height="414"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a9C-ON-Lpo" userLabel="zoomScreenShotForVideo">
+                    <rect key="frame" x="5" y="65" width="401" height="512"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <view clipsSubviews="YES" contentMode="scaleToFill" id="Foo-mb-HJb" userLabel="playerView">
-                    <rect key="frame" x="9" y="65" width="396" height="408"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Foo-mb-HJb" userLabel="playerView">
+                    <rect key="frame" x="5" y="65" width="401" height="512"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" id="OgZ-hl-Uai" userLabel="zoomScrollView">
-                    <rect key="frame" x="6" y="65" width="401" height="414"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OgZ-hl-Uai" userLabel="zoomScrollView">
+                    <rect key="frame" x="5" y="65" width="401" height="512"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <inset key="contentInset" minX="0.0" minY="5" maxX="0.0" maxY="65"/>
                 </scrollView>
-                <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Xaq-YE-kc7" userLabel="flyimgView" customClass="FlyerImageView">
-                    <rect key="frame" x="6" y="65" width="401" height="414"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xaq-YE-kc7" userLabel="flyimgView" customClass="FlyerImageView">
+                    <rect key="frame" x="6" y="88" width="401" height="489"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="1Hx-Xl-UIu"/>
                     </connections>
                 </imageView>
-                <view contentMode="scaleToFill" id="rbq-e2-wbO" userLabel="contextView">
-                    <rect key="frame" x="0.0" y="487" width="415" height="189"/>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rbq-e2-wbO" userLabel="contextView">
+                    <rect key="frame" x="0.0" y="592" width="415" height="234"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TAKE OR ADD PHOTO &amp; RESIZE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8pC-ir-3f6" userLabel="takeOrAddPhotoLabel">
-                            <rect key="frame" x="0.0" y="7" width="404" height="43"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TAKE OR ADD PHOTO &amp; RESIZE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pC-ir-3f6" userLabel="takeOrAddPhotoLabel">
+                            <rect key="frame" x="0.0" y="8" width="404" height="43"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                            <color key="textColor" white="0.4997148723" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="0.49971488118171692" green="0.49971488118171692" blue="0.49971488118171692" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SET PHOTO OR VIDEO AS BACKGROUND" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZrQ-EX-OBl" userLabel="videoLabel">
-                            <rect key="frame" x="0.0" y="7" width="310" height="43"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SET PHOTO OR VIDEO AS BACKGROUND" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZrQ-EX-OBl" userLabel="videoLabel">
+                            <rect key="frame" x="98" y="8" width="310" height="43"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                            <color key="textColor" white="0.4997148723" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="0.49971488118171692" green="0.49971488118171692" blue="0.49971488118171692" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CREATE YOUR FLYER WITH THE FEATURES BELOW THEN SHARE WITH THE WORLD!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hHc-sJ-Fbt" userLabel="addMoreLayerOrSaveFlyerLabel">
-                            <rect key="frame" x="0.0" y="8" width="310" height="63"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CREATE YOUR FLYER WITH THE FEATURES BELOW THEN SHARE WITH THE WORLD!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHc-sJ-Fbt" userLabel="addMoreLayerOrSaveFlyerLabel">
+                            <rect key="frame" x="52" y="10" width="310" height="63"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                            <color key="textColor" white="0.49971487226277378" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="0.49971488118171692" green="0.49971488118171692" blue="0.49971488118171692" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingGlass.png" id="e7R-ga-ZuC" userLabel="MagnifyingGlassImg">
-                            <rect key="frame" x="150" y="63" width="64" height="64"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="magnifyingGlass.png" translatesAutoresizingMaskIntoConstraints="NO" id="e7R-ga-ZuC" userLabel="MagnifyingGlassImg">
+                            <rect key="frame" x="149" y="88" width="64" height="64"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="koI-LW-qvU" userLabel="ScreenShotForZoom">
-                            <rect key="frame" x="119" y="26" width="130" height="130"/>
+                        <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="koI-LW-qvU" userLabel="ScreenShotForZoom">
+                            <rect key="frame" x="119" y="47" width="130" height="130"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
-                <view contentMode="scaleToFill" id="hm4-bV-Hep" userLabel="libraryContextView">
-                    <rect key="frame" x="0.0" y="678" width="414" height="58"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.3575665864" green="0.76047690010000002" blue="0.97315449620000005" alpha="1" colorSpace="calibratedRGB"/>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HqN-xE-zHB" customClass="GADBannerView">
+                    <rect key="frame" x="0.0" y="773" width="415" height="50"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIg-oU-faY">
+                            <rect key="frame" x="365" y="0.0" width="50" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="closeAd.png"/>
+                            <connections>
+                                <action selector="onClickBtnBannerAdsDismiss:" destination="-1" eventType="touchUpInside" id="dwQ-AK-Lab"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hm4-bV-Hep" userLabel="libraryContextView">
+                    <rect key="frame" x="0.0" y="824" width="414" height="72"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" red="0.3575665864" green="0.76047690010000002" blue="0.97315449620000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <viewLayoutGuide key="safeArea" id="k5A-7Q-q7g"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.96078431372549022" green="0.94509803921568625" blue="0.87058823529411766" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.96078431372549022" green="0.94509803921568625" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
-            <point key="canvasLocation" x="-146" y="208"/>
+            <viewLayoutGuide key="safeArea" id="M7z-6b-caB"/>
+            <point key="canvasLocation" x="-213.04347826086959" y="138.61607142857142"/>
         </view>
         <view contentMode="scaleToFill" id="P8i-Fw-Gci" userLabel="View - Main menu buttons">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="zoh-mW-4K3">
-                    <rect key="frame" x="0.0" y="0.0" width="64" height="45"/>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zoh-mW-4K3">
+                    <rect key="frame" x="0.0" y="0.0" width="64" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Background"/>
                     <state key="normal" backgroundImage="bg_tab.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="setAddMoreLayerTabAction:" destination="-1" eventType="touchUpInside" id="AgZ-fy-AkO"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="10001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="rb6-j8-Siq">
-                    <rect key="frame" x="64" y="0.0" width="64" height="45"/>
+                <button opaque="NO" tag="10001" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rb6-j8-Siq">
+                    <rect key="frame" x="64" y="0.0" width="64" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Text"/>
                     <state key="normal" backgroundImage="text_icon.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="setAddMoreLayerTabAction:" destination="-1" eventType="touchUpInside" id="EX5-f9-DFo"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="10002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="fcG-xw-IqZ">
-                    <rect key="frame" x="128" y="0.0" width="64" height="45"/>
+                <button opaque="NO" tag="10002" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fcG-xw-IqZ">
+                    <rect key="frame" x="128" y="0.0" width="64" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Photo"/>
                     <state key="normal" backgroundImage="image_icon.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="highlighted" backgroundImage="image_icon_selected"/>
                     <connections>
                         <action selector="setAddMoreLayerTabAction:" destination="-1" eventType="touchUpInside" id="0t5-f8-cbw"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="10003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="fpi-NX-k5V">
-                    <rect key="frame" x="192" y="0.0" width="64" height="45"/>
+                <button opaque="NO" tag="10003" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fpi-NX-k5V">
+                    <rect key="frame" x="192" y="0.0" width="64" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.0" green="1" blue="0.99607849120000003" alpha="1" colorSpace="deviceRGB"/>
+                    <color key="backgroundColor" red="0.12932276725769043" green="1" blue="0.99411451816558838" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <accessibility key="accessibilityConfiguration" label="Symbols"/>
                     <state key="normal" backgroundImage="video_tab_lock.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="selected" image="video_tab_selected.png"/>
                     <connections>
                         <action selector="setAddMoreLayerTabAction:" destination="-1" eventType="touchUpInside" id="CED-OA-X9Z"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="10004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="a4z-OF-QiI">
-                    <rect key="frame" x="256" y="0.0" width="64" height="45"/>
+                <button opaque="NO" tag="10004" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a4z-OF-QiI">
+                    <rect key="frame" x="256" y="0.0" width="64" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.96862751250000001" green="0.0039215688589999999" blue="0.09803922474" alpha="1" colorSpace="deviceRGB"/>
+                    <color key="backgroundColor" red="0.94704389572143555" green="0.0" blue="0.082689568400382996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <accessibility key="accessibilityConfiguration" label="Clipart"/>
                     <state key="normal" backgroundImage="art_tab.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="setAddMoreLayerTabAction:" destination="-1" eventType="touchUpInside" id="a7u-gC-Jvt"/>
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="342" y="688.5"/>
+            <viewLayoutGuide key="safeArea" id="Hlo-6p-Sg4"/>
+            <point key="canvasLocation" x="496" y="384"/>
         </view>
         <view contentMode="scaleToFill" id="wtn-Zi-MKo" userLabel="View - libBackground - FlyerBackground">
             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="WvZ-dV-5Fn">
-                    <rect key="frame" x="0.0" y="0.0" width="80" height="45"/>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WvZ-dV-5Fn">
+                    <rect key="frame" x="0.0" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Library"/>
-                    <state key="normal" backgroundImage="addbg_library.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    <state key="normal" backgroundImage="5tab_1_library.png">
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
-                    <state key="disabled" image="addbg_library_selected.png"/>
-                    <state key="selected" backgroundImage="addbg_library_selected.png"/>
+                    <state key="selected" backgroundImage="5tab_1_library_selected@3x.png"/>
                     <connections>
                         <action selector="setlibBackgroundTabAction:" destination="-1" eventType="touchUpInside" id="9Ej-0F-waq"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="TUU-ew-jcU">
-                    <rect key="frame" x="80" y="0.0" width="80" height="45"/>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUU-ew-jcU">
+                    <rect key="frame" x="64" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="TakePhoto"/>
-                    <state key="normal" backgroundImage="07_camera.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    <state key="normal" backgroundImage="5tab_2_camera.png">
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
-                    <state key="selected" backgroundImage="addbg_takephoto_selected.png"/>
+                    <state key="selected" backgroundImage="5tab_2_camera_selected@3x.png"/>
                     <connections>
                         <action selector="setlibBackgroundTabAction:" destination="-1" eventType="touchUpInside" id="C5c-5U-w3S"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="t0N-7F-yOw">
-                    <rect key="frame" x="160" y="0.0" width="80" height="45"/>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofn-R7-Qk5">
+                    <rect key="frame" x="128" y="0.0" width="64" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="Library"/>
+                    <state key="normal" backgroundImage="5tab_3_giphy.png">
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <state key="selected" backgroundImage="5tab_3_giphy_selected@3x.png"/>
+                    <connections>
+                        <action selector="setlibBackgroundTabAction:" destination="-1" eventType="touchUpInside" id="6f7-b5-v6O"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t0N-7F-yOw">
+                    <rect key="frame" x="192" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="CameraRoll"/>
-                    <state key="normal" backgroundImage="07_roll.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    <state key="normal" backgroundImage="5tab_4_gallery.png">
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
-                    <state key="selected" backgroundImage="addbg_cameraroll_selected.png"/>
+                    <state key="selected" backgroundImage="5tab_4_gallery_selected@3x.png"/>
                     <connections>
                         <action selector="setlibBackgroundTabAction:" destination="-1" eventType="touchUpInside" id="523-Qy-Wyn"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="rR0-dC-sak">
-                    <rect key="frame" x="240" y="0.0" width="80" height="45"/>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rR0-dC-sak">
+                    <rect key="frame" x="256" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Border"/>
-                    <state key="normal" backgroundImage="addbg_border.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    <state key="normal" backgroundImage="5tab_5_border.png">
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
-                    <state key="selected" backgroundImage="addbg_border_selected.png"/>
+                    <state key="selected" backgroundImage="5tab_5_border_selected@3x.png"/>
                     <connections>
                         <action selector="setlibBackgroundTabAction:" destination="-1" eventType="touchUpInside" id="fcs-Ef-1pq"/>
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="342" y="1159.5"/>
+            <viewLayoutGuide key="safeArea" id="H6c-8c-YUz"/>
+            <point key="canvasLocation" x="495.6521739130435" y="540.06696428571422"/>
         </view>
         <view contentMode="scaleToFill" id="8Ew-aX-Xah" userLabel="View - Font sub menu">
             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button opaque="NO" tag="10001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="zu1-aU-CE3">
+                <button opaque="NO" tag="10001" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zu1-aU-CE3">
                     <rect key="frame" x="0.0" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Font"/>
                     <state key="normal" backgroundImage="font_button.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="selected" backgroundImage="font_button_selected.png"/>
                     <connections>
                         <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="noa-Nb-ksd"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="10002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RCh-PH-bvk">
+                <button opaque="NO" tag="10002" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RCh-PH-bvk">
                     <rect key="frame" x="64" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Color"/>
                     <state key="normal" backgroundImage="color_button.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="selected" backgroundImage="color_button_selected.png"/>
                     <connections>
                         <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="hQh-kx-2nZ"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="10003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="Ybf-LY-Z1e">
+                <button opaque="NO" tag="10003" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ybf-LY-Z1e">
                     <rect key="frame" x="128" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Size"/>
                     <state key="normal" backgroundImage="size_button.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="selected" backgroundImage="size_button_selected.png"/>
                     <connections>
                         <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="ns9-VQ-jo0"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="10004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="E2L-Wc-n71">
+                <button opaque="NO" tag="10004" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E2L-Wc-n71">
                     <rect key="frame" x="192" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="TextBorder"/>
                     <state key="normal" backgroundImage="outline_button.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="selected" backgroundImage="outline_button_selected.png"/>
                     <connections>
                         <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="CcZ-Vh-DvB"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="Rgs-rs-7a8">
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rgs-rs-7a8">
                     <rect key="frame" x="256" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Edit"/>
                     <state key="normal" backgroundImage="text_edit.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="selected" backgroundImage="text_edit_selected.png"/>
                     <connections>
@@ -333,60 +372,61 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <accessibility key="accessibilityConfiguration" label=""/>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="342" y="878.5"/>
+            <viewLayoutGuide key="safeArea" id="voc-jo-zfY"/>
+            <point key="canvasLocation" x="495.6521739130435" y="588.28125"/>
         </view>
         <view contentMode="scaleToFill" id="d9d-07-lCf" userLabel="View - Drawing sub menu">
             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button opaque="NO" tag="10001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="wAe-vw-k4U">
+                <button opaque="NO" tag="10001" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wAe-vw-k4U">
                     <rect key="frame" x="0.0" y="0.0" width="80" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Font"/>
                     <state key="normal" backgroundImage="drawing_tab_pencil.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="selected" backgroundImage="drawing_tab_pencil_selected.png"/>
                     <connections>
                         <action selector="drawingSetStyleTabAction:" destination="-1" eventType="touchUpInside" id="ARj-EH-E7W"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="10002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TK4-Zc-FSy">
+                <button opaque="NO" tag="10002" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TK4-Zc-FSy">
                     <rect key="frame" x="80" y="0.0" width="80" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Color"/>
                     <state key="normal" backgroundImage="drawing_tab_color.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="selected" backgroundImage="drawing_tab_color_selected.png"/>
                     <connections>
                         <action selector="drawingSetStyleTabAction:" destination="-1" eventType="touchUpInside" id="iXd-eQ-G0s"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="10003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="eQC-yK-NOb">
+                <button opaque="NO" tag="10003" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eQC-yK-NOb">
                     <rect key="frame" x="160" y="0.0" width="80" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Size"/>
                     <state key="normal" backgroundImage="drawing_tab_size.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="selected" backgroundImage="drawing_tab_size_selected.png"/>
                     <connections>
                         <action selector="drawingSetStyleTabAction:" destination="-1" eventType="touchUpInside" id="Llr-z7-SsT"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="10003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="Xly-Pv-JvX">
+                <button opaque="NO" tag="10003" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xly-Pv-JvX">
                     <rect key="frame" x="240" y="0.0" width="80" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Size"/>
                     <state key="normal" backgroundImage="drawing_tab_eraser.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="selected" backgroundImage="drawing_tab_eraser_selected.png"/>
                     <connections>
@@ -394,60 +434,61 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <accessibility key="accessibilityConfiguration" label=""/>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="342" y="967.5"/>
+            <viewLayoutGuide key="safeArea" id="12H-LR-ckl"/>
+            <point key="canvasLocation" x="495.6521739130435" y="647.87946428571422"/>
         </view>
         <view contentMode="scaleToFill" id="qGs-4G-Rgw" userLabel="View - Photo sub menu">
             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button opaque="NO" tag="10002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="O6L-IG-J9j">
+                <button opaque="NO" tag="10002" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O6L-IG-J9j">
                     <rect key="frame" x="80" y="0.0" width="80" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Gallery"/>
                     <state key="normal" backgroundImage="07_roll.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="selected" backgroundImage="07_roll_selected.png"/>
                     <connections>
                         <action selector="setlibPhotoTabAction:" destination="-1" eventType="touchUpInside" id="UDA-7G-dAh"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="10003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="IOq-dI-vvl">
+                <button opaque="NO" tag="10003" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IOq-dI-vvl">
                     <rect key="frame" x="160" y="0.0" width="80" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Width"/>
                     <state key="normal" backgroundImage="07_width.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="selected" backgroundImage="07_width_selected.png"/>
                     <connections>
                         <action selector="setlibPhotoTabAction:" destination="-1" eventType="touchUpInside" id="nWu-Zc-LaM"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="10004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="5Ya-yN-kTr">
+                <button opaque="NO" tag="10004" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ya-yN-kTr">
                     <rect key="frame" x="240" y="0.0" width="80" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Height"/>
                     <state key="normal" backgroundImage="07_height.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="selected" backgroundImage="07_height_selected.png"/>
                     <connections>
                         <action selector="setlibPhotoTabAction:" destination="-1" eventType="touchUpInside" id="yDo-rU-RqL"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="10001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="iEv-dA-2If">
+                <button opaque="NO" tag="10001" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEv-dA-2If">
                     <rect key="frame" x="0.0" y="0.0" width="80" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Camera"/>
                     <state key="normal" backgroundImage="07_camera.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="selected" backgroundImage="07_camera_selected.png"/>
                     <connections>
@@ -455,140 +496,143 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <accessibility key="accessibilityConfiguration" label=""/>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="342" y="1055.5"/>
+            <viewLayoutGuide key="safeArea" id="p0S-Ur-ih0"/>
+            <point key="canvasLocation" x="495.6521739130435" y="706.80803571428567"/>
         </view>
         <view contentMode="scaleToFill" id="suF-K7-Eeb">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue_bar.png" id="QNp-yt-17q">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="blue_bar.png" translatesAutoresizingMaskIntoConstraints="NO" id="QNp-yt-17q">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="342" y="1249.5"/>
+            <viewLayoutGuide key="safeArea" id="oPK-9Z-ewr"/>
+            <point key="canvasLocation" x="495.6521739130435" y="836.71875"/>
         </view>
         <view hidden="YES" contentMode="scaleToFill" id="cip-7j-KrI" userLabel="View - Video tools">
             <rect key="frame" x="0.0" y="0.0" width="306" height="40"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view alpha="0.59999999999999998" contentMode="scaleToFill" id="Nhc-S1-8Bh">
+                <view alpha="0.59999999999999998" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nhc-S1-8Bh">
                     <rect key="frame" x="0.0" y="0.0" width="306" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.3333333432674408" green="0.3333333432674408" blue="0.3333333432674408" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gqJ-fV-ZCI">
-                    <rect key="frame" x="263.99999986588955" y="10" width="36" height="21"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gqJ-fV-ZCI">
+                    <rect key="frame" x="264" y="10" width="36" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tOL-PL-xlu">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tOL-PL-xlu">
                     <rect key="frame" x="42" y="10" width="41" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="D6r-Rt-cPZ">
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D6r-Rt-cPZ">
                     <rect key="frame" x="2" y="0.0" width="40" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
-                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <state key="normal" image="play_icon.png">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="selected" image="pause_icon.png"/>
                     <connections>
                         <action selector="play:" destination="-1" eventType="touchUpInside" id="Y6Z-gK-efT"/>
                     </connections>
                 </button>
-                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" id="Mes-fj-ojE">
+                <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Mes-fj-ojE">
                     <rect key="frame" x="79" y="4" width="177" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="minimumTrackTintColor" red="0.2807829288" green="0.75192376110000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="maximumTrackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="thumbTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="minimumTrackTintColor" red="0.2807829288" green="0.75192376110000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="maximumTrackTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="thumbTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <action selector="slide:" destination="-1" eventType="valueChanged" id="JeO-gG-pMV"/>
                     </connections>
                 </slider>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="163" y="-125"/>
+            <viewLayoutGuide key="safeArea" id="vbH-UE-cwc"/>
+            <point key="canvasLocation" x="236.23188405797103" y="-83.705357142857139"/>
         </view>
         <view contentMode="scaleToFill" id="weP-Ld-FsM" userLabel="View - Clip Arts sub menu">
             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button opaque="NO" tag="10001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="LPQ-8t-r0c">
+                <button opaque="NO" tag="10001" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LPQ-8t-r0c">
                     <rect key="frame" x="0.0" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Font"/>
                     <state key="normal" backgroundImage="clipart_tab.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="selected" backgroundImage="clipart_tab_selected.png"/>
                     <connections>
                         <action selector="setArtsTabAction:" destination="-1" eventType="touchUpInside" id="L5P-AP-wZ3"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="10001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="jfO-Kb-CHA" userLabel="Button - drawingTabButton">
+                <button opaque="NO" tag="10001" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jfO-Kb-CHA" userLabel="Button - drawingTabButton">
                     <rect key="frame" x="128" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Font"/>
                     <state key="normal" backgroundImage="drawing_tab.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="selected" backgroundImage="drawing_tab_selected.png"/>
                     <connections>
                         <action selector="addDrawingLayer:" destination="-1" eventType="touchUpInside" id="H0h-ii-zYp"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="10002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gde-ht-Yew">
+                <button opaque="NO" tag="10002" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gde-ht-Yew">
                     <rect key="frame" x="64" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Color"/>
                     <state key="normal" backgroundImage="emoticons_tab.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="selected" backgroundImage="emoticons_tab_selected.png"/>
                     <connections>
                         <action selector="setArtsTabAction:" destination="-1" eventType="touchUpInside" id="Ln7-Ue-WMS"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="10004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="5Cl-rC-EDu">
+                <button opaque="NO" tag="10004" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Cl-rC-EDu">
                     <rect key="frame" x="256" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="TextBorder"/>
                     <state key="normal" backgroundImage="size_tab.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="selected" backgroundImage="size_tab_selected.png"/>
                     <connections>
                         <action selector="setArtsTabAction:" destination="-1" eventType="touchUpInside" id="td5-d2-L8u"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="10003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="Dde-Nb-nED">
+                <button opaque="NO" tag="10003" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dde-Nb-nED">
                     <rect key="frame" x="192" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Size"/>
                     <state key="normal" backgroundImage="color_tab.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="selected" backgroundImage="color_tab_selected.png"/>
                     <connections>
@@ -596,82 +640,86 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <accessibility key="accessibilityConfiguration" label=""/>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="342" y="788.5"/>
+            <viewLayoutGuide key="safeArea" id="mN4-ZY-S1t"/>
+            <point key="canvasLocation" x="516" y="312"/>
         </view>
         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" id="AH5-Xr-weS">
             <rect key="frame" x="0.0" y="0.0" width="37" height="37"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <point key="canvasLocation" x="899.5" y="370.5"/>
+            <viewLayoutGuide key="safeArea" id="73k-me-qBq"/>
+            <point key="canvasLocation" x="1303.6231884057972" y="248.10267857142856"/>
         </activityIndicatorView>
         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="jZc-OB-33h">
-            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <rect key="frame" x="0.0" y="0.0" width="240" height="134"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+            <viewLayoutGuide key="safeArea" id="hoG-5n-kzJ"/>
+            <point key="canvasLocation" x="137.68115942028987" y="131.91964285714286"/>
         </imageView>
     </objects>
     <resources>
-        <image name="07_camera.png" width="80" height="45"/>
-        <image name="07_camera_selected.png" width="80" height="45"/>
-        <image name="07_height.png" width="80" height="45"/>
-        <image name="07_height_selected.png" width="80" height="45"/>
-        <image name="07_roll.png" width="80" height="45"/>
-        <image name="07_roll_selected.png" width="80" height="45"/>
-        <image name="07_width.png" width="80" height="45"/>
-        <image name="07_width_selected.png" width="80" height="45"/>
-        <image name="addbg_border.png" width="80" height="45"/>
-        <image name="addbg_border_selected.png" width="80" height="45"/>
-        <image name="addbg_cameraroll_selected.png" width="80" height="45"/>
-        <image name="addbg_library.png" width="80" height="45"/>
-        <image name="addbg_library_selected.png" width="80" height="45"/>
-        <image name="addbg_takephoto_selected.png" width="80" height="45"/>
-        <image name="art_tab.png" width="64" height="45"/>
-        <image name="bg_tab.png" width="64" height="45"/>
-        <image name="blue_bar.png" width="320" height="45"/>
-        <image name="clipart_tab.png" width="64" height="45"/>
-        <image name="clipart_tab_selected.png" width="64" height="45"/>
-        <image name="color_button.png" width="64" height="45"/>
-        <image name="color_button_selected.png" width="64" height="45"/>
-        <image name="color_tab.png" width="64" height="45"/>
-        <image name="color_tab_selected.png" width="64" height="45"/>
-        <image name="drawing_tab.png" width="64" height="45"/>
-        <image name="drawing_tab_color.png" width="80" height="45"/>
-        <image name="drawing_tab_color_selected.png" width="80" height="45"/>
-        <image name="drawing_tab_eraser.png" width="80" height="45"/>
-        <image name="drawing_tab_eraser_selected.png" width="80" height="45"/>
-        <image name="drawing_tab_pencil.png" width="80" height="45"/>
-        <image name="drawing_tab_pencil_selected.png" width="80" height="45"/>
-        <image name="drawing_tab_selected.png" width="64" height="45"/>
-        <image name="drawing_tab_size.png" width="80" height="45"/>
-        <image name="drawing_tab_size_selected.png" width="80" height="45"/>
-        <image name="emoticons_tab.png" width="64" height="45"/>
-        <image name="emoticons_tab_selected.png" width="64" height="45"/>
-        <image name="font_button.png" width="64" height="45"/>
-        <image name="font_button_selected.png" width="64" height="45"/>
-        <image name="image_icon.png" width="64" height="45"/>
+        <image name="07_camera.png" width="34.909091949462891" height="19.636363983154297"/>
+        <image name="07_camera_selected.png" width="34.909091949462891" height="19.636363983154297"/>
+        <image name="07_height.png" width="34.909091949462891" height="19.636363983154297"/>
+        <image name="07_height_selected.png" width="34.909091949462891" height="19.636363983154297"/>
+        <image name="07_roll.png" width="34.909091949462891" height="19.636363983154297"/>
+        <image name="07_roll_selected.png" width="34.909091949462891" height="19.636363983154297"/>
+        <image name="07_width.png" width="34.909091949462891" height="19.636363983154297"/>
+        <image name="07_width_selected.png" width="34.909091949462891" height="19.636363983154297"/>
+        <image name="5tab_1_library.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="5tab_1_library_selected@3x.png" width="192" height="135"/>
+        <image name="5tab_2_camera.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="5tab_2_camera_selected@3x.png" width="192" height="135"/>
+        <image name="5tab_3_giphy.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="5tab_3_giphy_selected@3x.png" width="192" height="135"/>
+        <image name="5tab_4_gallery.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="5tab_4_gallery_selected@3x.png" width="192" height="135"/>
+        <image name="5tab_5_border.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="5tab_5_border_selected@3x.png" width="192" height="135"/>
+        <image name="art_tab.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="bg_tab.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="blue_bar.png" width="139.63636779785156" height="19.854545593261719"/>
+        <image name="clipart_tab.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="clipart_tab_selected.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="closeAd.png" width="72" height="72"/>
+        <image name="color_button.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="color_button_selected.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="color_tab.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="color_tab_selected.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="drawing_tab.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="drawing_tab_color.png" width="34.909091949462891" height="19.636363983154297"/>
+        <image name="drawing_tab_color_selected.png" width="34.909091949462891" height="19.636363983154297"/>
+        <image name="drawing_tab_eraser.png" width="34.909091949462891" height="19.636363983154297"/>
+        <image name="drawing_tab_eraser_selected.png" width="34.909091949462891" height="19.636363983154297"/>
+        <image name="drawing_tab_pencil.png" width="34.909091949462891" height="19.636363983154297"/>
+        <image name="drawing_tab_pencil_selected.png" width="34.909091949462891" height="19.636363983154297"/>
+        <image name="drawing_tab_selected.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="drawing_tab_size.png" width="34.909091949462891" height="19.636363983154297"/>
+        <image name="drawing_tab_size_selected.png" width="34.909091949462891" height="19.636363983154297"/>
+        <image name="emoticons_tab.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="emoticons_tab_selected.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="font_button.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="font_button_selected.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="image_icon.png" width="27.927272796630859" height="19.636363983154297"/>
         <image name="image_icon_selected" width="612" height="612"/>
         <image name="magnifyingGlass.png" width="64" height="64"/>
-        <image name="outline_button.png" width="64" height="45"/>
-        <image name="outline_button_selected.png" width="64" height="45"/>
-        <image name="pause_icon.png" width="40" height="40"/>
-        <image name="play_icon.png" width="40" height="40"/>
-        <image name="size_button.png" width="64" height="45"/>
-        <image name="size_button_selected.png" width="64" height="45"/>
-        <image name="size_tab.png" width="64" height="45"/>
-        <image name="size_tab_selected.png" width="64" height="45"/>
-        <image name="text_edit.png" width="64" height="45"/>
-        <image name="text_edit_selected.png" width="64" height="45"/>
-        <image name="text_icon.png" width="64" height="45"/>
-        <image name="video_tab_lock.png" width="64" height="45"/>
-        <image name="video_tab_selected.png" width="64" height="45"/>
+        <image name="outline_button.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="outline_button_selected.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="pause_icon.png" width="19.200000762939453" height="19.200000762939453"/>
+        <image name="play_icon.png" width="19.200000762939453" height="19.200000762939453"/>
+        <image name="size_button.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="size_button_selected.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="size_tab.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="size_tab_selected.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="text_edit.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="text_edit_selected.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="text_icon.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="video_tab_lock.png" width="27.927272796630859" height="19.636363983154297"/>
+        <image name="video_tab_selected.png" width="27.927272796630859" height="19.636363983154297"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

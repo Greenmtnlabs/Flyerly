@@ -147,7 +147,6 @@
     CGContextStrokePath(UIGraphicsGetCurrentContext());
     self.opacityPreview.image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    
 }
 
 @end

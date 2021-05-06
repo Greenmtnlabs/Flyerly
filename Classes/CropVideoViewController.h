@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import "CropView.h"
+#import <AVKit/AVKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface CropVideoViewController : UIViewController {
-    MPMoviePlayerController     *player;
+    AVPlayer                    *player;
+    AVPlayerViewController      *avPlayerController;
     CGFloat                     aspectRatio;
     CGFloat                     scaleRatio;
     CGRect                     originalConceptualFrame;
@@ -26,5 +29,6 @@
 
 @property (nonatomic, strong) IBOutlet UIView *playerView;
 @property (nonatomic, strong) IBOutlet CropView *cropView;
+@property (nonatomic, strong) NSMutableDictionary *giphyDic;
 
 @end

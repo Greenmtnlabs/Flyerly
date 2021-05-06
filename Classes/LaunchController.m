@@ -16,6 +16,7 @@
 
 @implementation LaunchController
 @synthesize registerButton, signinButton;
+@synthesize imgBackground;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,7 +30,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    // Do any additional setup after loading the view.
+    
+#if defined(FLYERLY) //Flyerly
+        [imgBackground setImage:[UIImage imageNamed: @"flyerly_welcomescreen_bg.jpg"]];
+    #else // Flyerly Biz
+        [imgBackground setImage:[UIImage imageNamed: @"flyerly_biz_welcomescreen_bg.jpg"]];
+    #endif
+    
     globle = [FlyerlySingleton RetrieveSingleton];
 
 }
@@ -44,7 +52,7 @@
     
     globle.twitterUser = nil;
     
-      if( IS_IPHONE_5 || IS_IPHONE_6 ){
+      if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XR || IS_IPHONE_XS){
           
        registerController = [[RegisterController alloc] initWithNibName:@"RegisterViewController_iPhone5" bundle:nil];
           

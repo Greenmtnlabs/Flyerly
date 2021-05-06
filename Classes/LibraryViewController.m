@@ -48,7 +48,7 @@
         self.objectTableView.nibNameForViews = @"CustomAssetsGroupView";
     }else if ( IS_IPHONE_6){
         self.objectTableView.nibNameForViews = @"CustomAssetsGroupView-iPhone6";
-    }else if ( IS_IPHONE_6_PLUS){
+    }else if ( IS_IPHONE_6_PLUS || IS_IPHONE_XR || IS_IPHONE_XS){
         self.objectTableView.nibNameForViews = @"CustomAssetsGroupView-iPhone6-Plus";
     } else {
         self.objectTableView.nibNameForViews = @"CustomAssetsGroupView";
@@ -84,6 +84,7 @@
     [buyImagesButton addTarget:self action:@selector(buyImages) forControlEvents:UIControlEventTouchUpInside];
     [buyImagesButton setBackgroundImage:[UIImage imageNamed:@"buy"] forState:UIControlStateNormal];
     buyImagesButton.showsTouchWhenHighlighted = YES;
+    [buyImagesButton setHidden:YES];
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:buyImagesButton];
     [self.navigationItem setRightBarButtonItem:rightBarButton];
     
@@ -150,6 +151,7 @@
     AssetGroupViewControllerWithSearchFeild *buyImagesController= [[AssetGroupViewControllerWithSearchFeild alloc]initWithNibName:@"AssetGroupViewControllerWithSearchFeild" bundle:nil];
     buyImagesController.onImageTaken = self.onImageTaken;
     buyImagesController.desiredImageSize = self.desiredImageSize;
+    buyImagesController.isFromInApp = false;
 	[self.navigationController pushViewController:buyImagesController animated:YES];
 }
 

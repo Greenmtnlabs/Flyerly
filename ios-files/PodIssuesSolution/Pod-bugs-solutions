@@ -1,0 +1,18 @@
+Pod Issues
+--------------
+
+1-bug-solution:
+for fixing bug 1, replace 
+Pods/Pods/FBSDKCoreKit/arc/FBSDKMacros.h 
+with file
+ios-files/FBSDKMacros.h 
+
+
+2-bug-solution:
+replace line#296 of Pods/Pods/NBUImagePicker/Filters/NBUCoreImageFilterProvider.m with
+NSArray * autoFilters = [ciImage autoAdjustmentFiltersWithOptions:nil];
+
+
+3-bug-solution:
+remove it from errors 
+fromViewController:nil 

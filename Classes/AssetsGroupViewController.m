@@ -24,8 +24,12 @@
 #import "FlyerlySingleton.h"
 #import "CropViewController.h"
 #import "CropVideoViewController.h"
+#import "Common.h"
 
 @implementation AssetsGroupViewController
+
+@dynamic gridView, groupNameLabel, assetsCountLabel, loading, assets, selectedAssetsURLs, reverseOrder, loadSize;
+
 
 @synthesize inAppPurchasePanel;
 
@@ -40,14 +44,13 @@
     // Configure the grid view
     self.gridView.margin = CGSizeMake(5.0, 5.0);
     //self.gridView.sizeToFit;
+
     
-    if( IS_IPHONE_4){
+    if( IS_IPHONE_4 || IS_IPHONE_5){
         self.gridView.nibNameForViews = @"CustomAssetThumbnailView";
-    } else if ( IS_IPHONE_5) {
-        self.gridView.nibNameForViews = @"CustomAssetThumbnailView";
-    }else if ( IS_IPHONE_6){
+     }else if ( IS_IPHONE_6){
         self.gridView.nibNameForViews = @"CustomAssetThumbnailView-iPhone6";
-    }else if ( IS_IPHONE_6_PLUS){
+    }else if ( IS_IPHONE_6_PLUS || IS_IPHONE_XR || IS_IPHONE_XS){
         self.gridView.nibNameForViews = @"CustomAssetThumbnailView-iPhone6-Plus"; //Files are in NBU/Gallery/
     } else{
         self.gridView.nibNameForViews = @"CustomAssetThumbnailView";
@@ -169,8 +172,7 @@
         
         if ([[PFUser currentUser] sessionToken].length != 0) {
             
-            if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-                 [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+            if ( [userPurchases_ canCreateVideoFlyer] ) {
                 
                 NSError *error = nil;
                 NSString *homeDirectoryPath = NSHomeDirectory();
@@ -186,13 +188,11 @@
                 
                 //Background Thread
                 CropVideoViewController *cropVideo;
-                if( IS_IPHONE_4){
-                    cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
-                } else if ( IS_IPHONE_5) {
+                if( IS_IPHONE_4 || IS_IPHONE_5){
                     cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
                 }else if ( IS_IPHONE_6){
                     cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController-iPhone6" bundle:nil];
-                }else if ( IS_IPHONE_6_PLUS){
+                }else if ( IS_IPHONE_6_PLUS || IS_IPHONE_XR || IS_IPHONE_XS){
                     cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController-iPhone6-Plus" bundle:nil];
                 } else {
                     cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
@@ -225,13 +225,11 @@
         
         CropViewController *nbuCrop;
         
-        if( IS_IPHONE_4){
-            nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
-        } else if ( IS_IPHONE_5) {
+        if( IS_IPHONE_4 || IS_IPHONE_5){
             nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
         }else if ( IS_IPHONE_6){
             nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController-iPhone6" bundle:nil];
-        }else if ( IS_IPHONE_6_PLUS){
+        }else if ( IS_IPHONE_6_PLUS || IS_IPHONE_XR || IS_IPHONE_XS){
             nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController-iPhone6-Plus" bundle:nil];
         } else {
             nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
@@ -250,21 +248,11 @@
     }
 }
 
-- ( void )inAppPurchasePanelContent {
-    
+- ( void )inAppPurchasePanelContent {    
     [inappviewcontroller inAppDataLoaded];
 }
 
 - ( void )productSuccesfullyPurchased: (NSString *)productId {
-    
-    UserPurchases *userPurchases_ = [UserPurchases getInstance];
-    
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
-        
-        //UIImage *buttonImage = [UIImage imageNamed:@"ModeVideo.png"];
-        //[mode setImage:buttonImage forState:UIControlStateNormal];
-    }
     
 }
 
@@ -273,13 +261,12 @@
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
-         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
-        
+    if ( [userPurchases_ checkKeyExistsInPurchases: IN_APP_ID_SAVED_FLYERS] ) {
         [inappviewcontroller.paidFeaturesTview reloadData];
-    }else {
         
+    }else {
         [self presentViewController:inappviewcontroller animated:YES completion:nil];
+        
     }
     
 }
@@ -322,7 +309,7 @@
  */
 -(void)openPanel {
     
-    if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
+    if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XR || IS_IPHONE_XS){
         inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
     }else {
         inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
@@ -362,7 +349,7 @@
    
     // Here we Check Selection For Photo or Background
     if ( _videoAllow ) {
-        totalCount = self.assetsGroup.assetsCount;
+        totalCount = self.assetsGroup.videoAssetsCount;
     } else {
         totalCount = self.assetsGroup.imageAssetsCount;
     }
@@ -401,7 +388,7 @@
     }
     
     // Load assets
-    NBULogInfo(@"Loading %d images for group %@...", totalCount, self.assetsGroup.name);
+    NBULogInfo(@"Loading %lu images for group %@...", (unsigned long)totalCount, self.assetsGroup.name);
     dispatch_async(dispatch_get_main_queue(), ^
                    {
                        self.loading = YES;
@@ -413,7 +400,7 @@
 
         // Here we Check Selection For Photo or Background
         if ( _videoAllow ) {
-            contentType = NBUAssetTypeAny;
+            contentType = NBUAssetTypeVideo;
         } else {
             contentType = NBUAssetTypeImage;
         }
@@ -435,7 +422,7 @@
                      assets.count == 400 ||
                      assets.count == totalCount)
                  {
-                     NBULogVerbose(@"...%d images loaded", assets.count);
+                     NBULogVerbose(@"...%lu images loaded", (unsigned long)assets.count);
                      
                      
                      // Stop loading?

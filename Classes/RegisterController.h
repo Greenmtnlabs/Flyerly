@@ -13,6 +13,8 @@
 #import "ParentViewController.h"
 #import "FlyerUser.h"
 #import <Parse/Parse.h>
+//#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
+//#import <ParseTwitterUtils/PFTwitterUtils.h>
 #import "SigninController.h"
 #import "Common.h"
 #import "FlyrAppDelegate.h"
@@ -39,6 +41,9 @@
 @property(nonatomic, strong) IBOutlet UIButton *signUpFacebook;
 @property(nonatomic, strong) IBOutlet UIButton *signUpTwitter;
 @property(nonatomic, strong) IBOutlet UILabel *usrExist;
+@property (weak, nonatomic) IBOutlet UIButton *btnCheckTerms;
+@property (weak, nonatomic) IBOutlet UIButton *btnTerms;
+
 
 @property(nonatomic, weak) SigninController *signInController;
 

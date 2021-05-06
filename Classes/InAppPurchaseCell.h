@@ -15,9 +15,11 @@
 @property(nonatomic, retain)IBOutlet UILabel *packageDescription;
 
 @property(nonatomic, retain)IBOutlet UIImageView *discount;
+@property (strong, nonatomic) IBOutlet UIImageView *star;
 
 
--(void)setCellValueswithProductTitle :(NSString *)title ProductPrice:(NSString *)price ProductDescription: (NSString *)description;
+
+-(void)setCellValueswithProductTitle :(NSString *)productIdentifier Title:(NSString *)title ProductPrice:(NSString *)price ProductDescription: (NSString *)description;
 
 
 @end

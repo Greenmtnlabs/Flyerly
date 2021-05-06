@@ -16,28 +16,6 @@
 
 @synthesize imgview,description;
 
-- (id)initWithFrame:(CGRect)frame{
-    
-    if (self = [super initWithFrame:frame ]) {
-        // Initialization code
-    }
-	
-    // Create Imageview for image
-    self.imgview = [[UIImageView alloc]init];
-    [self.imgview setFrame:CGRectMake(15, 7, 25, 25)];
-    [self.contentView addSubview:self.imgview];
-    
-    // Create Labels for text
-    self.description = [[UILabel alloc]initWithFrame:CGRectMake(55, 7, 198, 21)];
-    [self.description setBackgroundColor:[UIColor clearColor]];
-    [self.description setTextColor:[UIColor darkGrayColor]];
-	[self.description setFont:[UIFont fontWithName:@"AvenirNext-Bold" size:14]];
-	[self.description setTextAlignment:NSTextAlignmentLeft];
-    [self.contentView addSubview:self.description];
-    
-    return self;
-}
-
 
 /*
  * Set CellObjects

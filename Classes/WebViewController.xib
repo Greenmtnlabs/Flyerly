@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WebViewController">
+            <connections>
+                <outlet property="segmentedButton" destination="H68-CY-bM0" id="3Di-Z3-oBr"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="vwSegment" destination="Z0b-5y-rBS" id="p83-Tq-Xb1"/>
+                <outlet property="webView" destination="mmB-fQ-3Ez" id="E08-xh-ziy"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mmB-fQ-3Ez">
+                    <rect key="frame" x="0.0" y="115" width="414" height="621"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </webView>
+                <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z0b-5y-rBS">
+                    <rect key="frame" x="0.0" y="64" width="414" height="50"/>
+                    <subviews>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="H68-CY-bM0">
+                            <rect key="frame" x="8" y="11" width="394" height="29"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="28" id="ZN9-XA-edk"/>
+                                <constraint firstAttribute="height" constant="28" id="l7t-Vy-sIG"/>
+                            </constraints>
+                            <segments>
+                                <segment title="Twitter"/>
+                                <segment title="Instagram"/>
+                            </segments>
+                            <connections>
+                                <action selector="segmentedControlAction:" destination="-1" eventType="valueChanged" id="UR9-nC-ZBe"/>
+                            </connections>
+                        </segmentedControl>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="H68-CY-bM0" firstAttribute="leading" secondItem="Z0b-5y-rBS" secondAttribute="leading" constant="8" id="0Nc-Uu-5Xw"/>
+                        <constraint firstItem="H68-CY-bM0" firstAttribute="top" secondItem="Z0b-5y-rBS" secondAttribute="top" constant="11" id="2mU-F3-EbI"/>
+                        <constraint firstAttribute="trailing" secondItem="H68-CY-bM0" secondAttribute="trailing" constant="12" id="7LE-6p-vJ5"/>
+                        <constraint firstAttribute="height" constant="50" id="xSE-uz-DA4"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="mmB-fQ-3Ez" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="3Zg-hS-p2t"/>
+                <constraint firstItem="Z0b-5y-rBS" firstAttribute="trailing" secondItem="z0k-3w-jRb" secondAttribute="trailing" id="GSs-mE-kbh"/>
+                <constraint firstItem="Z0b-5y-rBS" firstAttribute="leading" secondItem="z0k-3w-jRb" secondAttribute="leading" id="Ir0-gD-9qv"/>
+                <constraint firstItem="mmB-fQ-3Ez" firstAttribute="bottom" secondItem="z0k-3w-jRb" secondAttribute="bottom" id="JMS-oe-ecC"/>
+                <constraint firstItem="mmB-fQ-3Ez" firstAttribute="top" secondItem="Z0b-5y-rBS" secondAttribute="bottom" constant="1" id="dKa-Sk-Pe1"/>
+                <constraint firstItem="Z0b-5y-rBS" firstAttribute="top" secondItem="z0k-3w-jRb" secondAttribute="top" id="v5d-EB-aOX"/>
+                <constraint firstAttribute="trailing" secondItem="mmB-fQ-3Ez" secondAttribute="trailing" id="xnn-cc-UN9"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <viewLayoutGuide key="safeArea" id="z0k-3w-jRb"/>
+            <point key="canvasLocation" x="47.826086956521742" y="43.206521739130437"/>
+        </view>
+    </objects>
+</document>

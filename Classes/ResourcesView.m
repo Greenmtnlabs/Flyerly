@@ -10,11 +10,10 @@
 
 @implementation ResourcesView
 
-- (id) init {
-
+- (id) init
+{
     highlightedResourceTag = -1;
     return [super init];
-    
 }
 
 - (void) highlightResource:(NSInteger) tag {
@@ -59,7 +58,10 @@
         [deselectResource.layer setCornerRadius:0];
         highlightedResourceTag = -1;
     }
+}
 
+-(void)setHighlightedResourceTag:(NSInteger) tag{
+    highlightedResourceTag = tag;
 }
 
 @end

@@ -11,8 +11,10 @@
 #define ALPHA1 1
 #define IMAGETYPE @"png"
 #define YOUTUBEPREFIX @"https://youtube.com/watch?v="
-#define flyerlyWidth 620
-#define flyerlyHeight 620
+#define OldFlyerlyWidth 620
+#define OldFlyerlyHeight 620
+#define flyerlyWidth 1240
+#define flyerlyHeight 1240
 #define FLYER_ZOOM_MIN_SCALE 1.0
 #define FLYER_ZOOM_SET_SCALE 2.0 //THIS MUST BE IN RANGE OF MIN AND MAX
 #define FLYER_ZOOM_MAX_SCALE 5.0
@@ -20,6 +22,8 @@
 #define MAX_VIDEO_LENGTH 30
 #define FLYER_ALBUM_NAME @"Flyerly"
 #define FLYER_PURCHASED_ALBUM_NAME @"Flyerly Purchases"
+#define FLYERLY_BIZ_ALBUM_NAME @"FlyerlyBiz"
+#define FLYERLY_BIZ_PURCHASED_ALBUM_NAME @"FlyerlyBiz Purchases"
 
 
 #define RADIANS(degrees) ((degrees * M_PI) / 180.0)
@@ -165,6 +169,81 @@ nil]
 [UIFont fontWithName:@"HiraKakuProN-W6" size:16],\
 nil]
 
+
+#define REGISTERED @"Registered"
+#define ANONYMOUS @"Anonymous"
+
+#define NOT_FOUND_IN_APP @"NOT_FOUND_IN_APP"
+
+#if defined(FLYERLY)
+
+    #define TARGET_NAME @"FLYERLY"
+    #define APP_NAME @"Flyerly"
+
+    //Packages for purchase
+    #define BUNDLE_IDENTIFIER_ALL_DESIGN @"com.flyerly.CompleteBundle1"
+    #define BUNDLE_IDENTIFIER_UNLOCK_VIDEO @"com.flyerly.UnlockCreateVideoFlyerOption"
+    #define BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION @"com.flyerly.MonthlyBundle"
+    #define BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION @"com.flyerly.YearlyBundle"
+    #define BUNDLE_IDENTIFIER_AD_REMOVAL @"com.flyelry.AdsRemovalMonthly"
+
+    //purchased bundles
+    #define IN_APP_ID_ALL_DESIGN @"comflyerlyCompleteBundle1"
+    #define IN_APP_ID_UNLOCK_VIDEO @"comflyerlyUnlockCreateVideoFlyerOption"
+    #define IN_APP_ID_MONTHLY_SUBSCRIPTION @"comflyerlyMonthlyBundle"
+    #define IN_APP_ID_YEARLY_SUBSCRIPTION @"comflyerlyYearlyBundle"
+    #define IN_APP_ID_AD_REMOVAL @"comflyelryAdsRemovalMonthly"
+
+    // bundle ids was expired by apple, thats why we need to check first user have product with old name ?
+    #define BUNDLE_IDENTIFIER_OLD_ALL_DESIGN @"com.flyerly.AllDesignBundle"
+    #define BUNDLE_IDENTIFIER_OLD_MONTHLY_SUBSCRIPTION @"com.flyerly.MonthlyGold"
+    #define BUNDLE_IDENTIFIER_OLD_YEARLY_SUBSCRIPTION @"com.flyerly.YearlyPlatinum1"
+    #define BUNDLE_IDENTIFIER_OLD_AD_REMOVAL @"com.flyerly.AdRemovalMonthly"
+
+    #define IN_APP_OLD_ID_ALL_DESIGN @"comflyerlyAllDesignBundle"
+    #define IN_APP_OLD_ID_MONTHLY_SUBSCRIPTION @"comflyerlyMonthlyGold"
+    #define IN_APP_OLD_ID_YEARLY_SUBSCRIPTION @"comflyerlyYearlyPlatinum1"
+    #define IN_APP_OLD_ID_AD_REMOVAL @"comflyerlyAdRemovalMonthly"
+
+    #define IN_APP_ID_SAVED_FLYERS @"comflyerlyUnlockSavedFlyers"
+    #define IN_APP_ID_ICON_BUNDLE @"comflyerlyIconsBundle"
+
+#else
+
+    #define TARGET_NAME @"FLYERLY_BIZ"
+    #define APP_NAME @"FlyerlyBiz"
+
+    //Packages for purchase
+    #define BUNDLE_IDENTIFIER_ALL_DESIGN @"com.flyerlybiz.AllDesignBundle"
+    #define BUNDLE_IDENTIFIER_UNLOCK_VIDEO @"com.flyerlybiz.VideoFlyers"
+    #define BUNDLE_IDENTIFIER_MONTHLY_SUBSCRIPTION @"com.flyerlybiz.MonthlyGold"
+    #define BUNDLE_IDENTIFIER_YEARLY_SUBSCRIPTION @"com.flyerlybiz.YearlyPlatinum1"
+    #define BUNDLE_IDENTIFIER_AD_REMOVAL @"com.flyerlybiz.AdsRemoval"
+
+    //purchased bundles
+    #define IN_APP_ID_ALL_DESIGN @"comflyerlybizAllDesignBundle"
+    #define IN_APP_ID_UNLOCK_VIDEO @"comflyerlybizVideoFlyers"
+    #define IN_APP_ID_MONTHLY_SUBSCRIPTION @"comflyerlybizMonthlyGold"
+    #define IN_APP_ID_YEARLY_SUBSCRIPTION @"comflyerlybizYearlyPlatinum1"
+    #define IN_APP_ID_AD_REMOVAL @"comflyerlybizAdsRemoval"
+
+    // bundle ids was expired by apple, thats why we need to check first user have product with old name ?
+    #define BUNDLE_IDENTIFIER_OLD_ALL_DESIGN @"com.flyerlybiz.AllDesignBundle"
+    #define BUNDLE_IDENTIFIER_OLD_MONTHLY_SUBSCRIPTION @"com.flyerlybiz.MonthlyGold"
+    #define BUNDLE_IDENTIFIER_OLD_YEARLY_SUBSCRIPTION @"com.flyerlybiz.YearlyPlatinum1"
+    #define BUNDLE_IDENTIFIER_OLD_AD_REMOVAL @"com.flyerlybiz.AdsRemoval"
+
+    #define IN_APP_OLD_ID_ALL_DESIGN NOT_FOUND_IN_APP
+    #define IN_APP_OLD_ID_MONTHLY_SUBSCRIPTION NOT_FOUND_IN_APP
+    #define IN_APP_OLD_ID_YEARLY_SUBSCRIPTION NOT_FOUND_IN_APP
+    #define IN_APP_OLD_ID_AD_REMOVAL NOT_FOUND_IN_APP
+
+    #define IN_APP_ID_SAVED_FLYERS NOT_FOUND_IN_APP
+    #define IN_APP_ID_ICON_BUNDLE NOT_FOUND_IN_APP
+
+#endif
+
+
 #define SIZE_ARRAY [NSArray arrayWithObjects: @"10", @"11" ,@"12",@"14",@"16",@"18",@"20",@"22",@"24",  @"26", @"28", @"30",@"36",@"42",@"48",@"52",@"60",@"72",@"74",@"80",@"90",nil]
 
 #define DRAWING_PATTERNS_ARRAY [NSArray arrayWithObjects: DRAWING_PLANE_LINE, DRAWING_DASHED_LINE ,DRAWING_DOTTED_LINE,nil]
@@ -178,6 +257,9 @@ nil]
 #define IS_IPHONE_5 (fabs((double)[[UIScreen mainScreen]bounds].size.height - (double)568) < DBL_EPSILON)
 #define IS_IPHONE_6 (fabs((double)[[UIScreen mainScreen]bounds].size.height - (double)667) < DBL_EPSILON)
 #define IS_IPHONE_6_PLUS (fabs((double)[[UIScreen mainScreen]bounds].size.height - (double)736) < DBL_EPSILON)
+#define IS_IPHONE_XS (fabs((double)[[UIScreen mainScreen]bounds].size.height - (double)812) < DBL_EPSILON)
+#define IS_IPHONE_XR (fabs((double)[[UIScreen mainScreen]bounds].size.height - (double)896) < DBL_EPSILON)
+#define IS_IPHONE_X (fabs((double)[[UIScreen mainScreen]bounds].size.height - (double)812) < DBL_EPSILON)
 
 #define LAYER_ATTRIBUTE_SIZE @"Size"
 #define LAYER_ATTRIBUTE_COLOR @"Color"
@@ -271,6 +353,7 @@ nil]
 #define FLYER_LAYER_EMOTICON  @"3"
 #define FLYER_LAYER_DRAWING  @"DrawingImgLayer"
 #define FLYER_LAYER_WATER_MARK  @"WATER_MARK"
+#define FLYER_LAYER_GIPHY_LOGO  @"GIPHY_LOGO"
 #define DRAWING_LAYER_H  612
 #define DRAWING_LAYER_W  612
 #define DRAWING_PLANE_LINE @"line_plane"
@@ -281,3 +364,6 @@ nil]
 #define DRAWING_LAYER_MODE_ERASER @"DRAWING_LAYER_MODE_ERASER"
 
 
+#define WARNING @"WARNING"
+#define PLEASE_CREATE_M_T_3_VIDEO @"Please create more then 3 seconds video"
+#define Ok @"Ok"

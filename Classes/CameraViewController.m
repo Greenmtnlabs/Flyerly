@@ -9,6 +9,7 @@
 #import "CropViewController.h"
 #import "LibraryViewController.h"
 #import "CropVideoViewController.h"
+#import "Common.h"
 
 @implementation CameraViewController
 
@@ -43,17 +44,13 @@
     _mode.hidden = !_videoAllow;
     _mode.selected = YES;
     
-    //UserPurchases *userPurchases = [UserPurchases getInstance];
+    UserPurchases *userPurchases = [UserPurchases getInstance];
    
     if ([[PFUser currentUser] sessionToken].length != 0) {
         
-        if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-             [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
-            
-            [_mode setImage:[UIImage imageNamed:@"ModeVideo.png"]
-                                forState:UIControlStateNormal];
+        if ( [userPurchases canCreateVideoFlyer] ) {
+            [_mode setImage:[UIImage imageNamed:@"ModeVideo.png"] forState:UIControlStateNormal];
         }
-        
     }
     
     self.cameraView.targetResolution = CGSizeMake( 1024, 1024 ); // The minimum resolution we want
@@ -114,7 +111,7 @@
 -(void)openPanel {
     if( IS_IPHONE_4 ) {
         inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
-    } else if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS){
+    } else if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS || IS_IPHONE_XR || IS_IPHONE_XS){
         inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
     }else {
         inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
@@ -133,19 +130,15 @@
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     
     CropViewController *nbuCrop;
-    if( IS_IPHONE_4 ) {
-        nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
-    } else if ( IS_IPHONE_5) {
+    if( IS_IPHONE_4 || IS_IPHONE_5) {
         nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
     }else if ( IS_IPHONE_6){
         nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController-iPhone6" bundle:nil];
-    } else if ( IS_IPHONE_6_PLUS){
+    } else if ( IS_IPHONE_6_PLUS || IS_IPHONE_XR || IS_IPHONE_XS){
         nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController-iPhone6-Plus" bundle:nil];
     } else{
         nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
     }
-    
-    
     
     nbuCrop.desiredImageSize = _desiredImageSize;
     /*if ( IS_IPHONE_6 ){
@@ -170,13 +163,11 @@
     
     //Background Thread
     CropVideoViewController *cropVideo;
-    if( IS_IPHONE_4 ) {
-        cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
-    } else if ( IS_IPHONE_5) {
+    if( IS_IPHONE_4 || IS_IPHONE_5) {
         cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
     }else if ( IS_IPHONE_6){
         cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController-iPhone6" bundle:nil];
-    }else if ( IS_IPHONE_6_PLUS){
+    }else if ( IS_IPHONE_6_PLUS || IS_IPHONE_XR || IS_IPHONE_XS){
         cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController-iPhone6-Plus" bundle:nil];
     } else{
         cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
@@ -225,7 +216,9 @@
     //HERE WE CHECK USER DID ALLOWED TO ACESS PHOTO library
     if ([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusRestricted || [ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusDenied) {
         
-        UIAlertView *photoAlert = [[UIAlertView alloc ] initWithTitle:@"" message:@"Flyerly does not access to your photo album.To enable access go to the Settings app >> Privacy >> Photos and enable Flyerly" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        NSString *msg = [NSString stringWithFormat:@"%@ does not access to your photo album. To enable access go to the Settings app >> Privacy >> Photos and enable Flyerly",  APP_NAME];
+        
+        UIAlertView *photoAlert = [[UIAlertView alloc ] initWithTitle:@"" message: msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [photoAlert show];
         return;
         
@@ -248,8 +241,8 @@
     [[self navigationController] setViewControllers:viewControllers animated:YES];
 }
 
-- ( void )inAppPurchasePanelContent {
-    
+- ( void )inAppPurchasePanelContent
+{
     [inappviewcontroller inAppDataLoaded];
 }
 
@@ -275,47 +268,31 @@
     if ( self.isVideoFlyer && _videoAllow)
         _mode.selected = NO;
     
-    if ([[PFUser currentUser] sessionToken].length != 0) {
-        if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-             [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
-            
-            if ( [_mode isSelected] == YES ) {
-                
-                //Enable Camera Mode
-                [_mode setSelected:NO];
-                [shoot setImage:[UIImage imageNamed:@"camera_button"] forState:UIControlStateNormal];
-                [shoot setImage:[UIImage imageNamed:@"camera_button"] forState:UIControlStateSelected];
-                [flash setHidden:NO];
-                tapAndHoldLabel.alpha = 0;
-                _progressView.hidden = YES;
-            }else {
-                
-                //Enable Video Mode
-                [_mode setSelected:YES];
-                [shoot setImage:[UIImage imageNamed:@"recording_button"] forState:UIControlStateNormal];
-                [shoot setImage:[UIImage imageNamed:@"stop_button"] forState:UIControlStateSelected];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [flash setHidden:YES];//works
-                });
-                
-                tapAndHoldLabel.alpha = 1;
-                _progressView.hidden = NO;
-            }
-        }else {
-            if ( [_mode isSelected] == NO) {
-                [self openPanel];
-            }
-            
-            //Enable Camera Mode
+    if ( [userPurchases_ canCreateVideoFlyer] ) {
+    
+        if ( [_mode isSelected] == YES ) {
+            // Enable Camera Mode
             [_mode setSelected:NO];
             [shoot setImage:[UIImage imageNamed:@"camera_button"] forState:UIControlStateNormal];
             [shoot setImage:[UIImage imageNamed:@"camera_button"] forState:UIControlStateSelected];
             [flash setHidden:NO];
+            tapAndHoldLabel.alpha = 0;
             _progressView.hidden = YES;
+        }else {
+            // Enable Video Mode
+            [_mode setSelected:YES];
+            [shoot setImage:[UIImage imageNamed:@"recording_button"] forState:UIControlStateNormal];
+            [shoot setImage:[UIImage imageNamed:@"stop_button"] forState:UIControlStateSelected];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [flash setHidden:YES];//works
+            });
+                
+            tapAndHoldLabel.alpha = 1;
+            _progressView.hidden = NO;
         }
     
     }else {
-       
+    
         if ( [_mode isSelected] == NO) {
             [self openPanel];
         }
@@ -352,12 +329,7 @@
         [self.cameraView takePicture:nil];
     
     }
-
-
 }
-
-
-
 
 - (IBAction)tapAndHold:(id)sender {
     UIButton *shoot = (UIButton *)  self.cameraView.shootButton;
@@ -401,11 +373,12 @@
     [self.cameraView startStopRecording:nil];
 }
 
-- (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle {
+- (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle
+{
     
     __weak InAppViewController *inappviewcontroller_ = inappviewcontroller;
-    if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Sign In")]) {
-        
+    if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Sign In")])
+    {
         // Put code here for button's intended action.
         signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
         
@@ -427,57 +400,57 @@
         };
         
         [self.navigationController pushViewController:signInController animated:YES];
-    }else if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Restore Purchases")]){
+    }
+    else if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Restore Purchases")]){
         [inappviewcontroller_ restorePurchase];
     }
 }
 
-- (void) userPurchasesLoaded {
-    
+- (void) userPurchasesLoaded
+{
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
-         [userPurchases_ checkKeyExistsInPurchases:@"com.flyerly.UnlockCreateVideoFlyerOption"] ) {
-        
+    if ( [userPurchases_ canCreateVideoFlyer] )
+    {
         [_mode setImage:[UIImage imageNamed:@"ModeVideo.png"] forState:UIControlStateNormal];
         [inappviewcontroller.paidFeaturesTview reloadData];
-    }else {
+    }
+    else
+    {
         
         [self presentViewController:inappviewcontroller animated:YES completion:nil];
     }
-    
 }
 
-- ( void )productSuccesfullyPurchased: (NSString *)productId {
-    
+- ( void )productSuccesfullyPurchased: (NSString *)productId
+{
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-         [userPurchases_ checkKeyExistsInPurchases:@"com.flyerly.UnlockCreateVideoFlyerOption"] ) {
-        
+    if ( [userPurchases_ canCreateVideoFlyer] )
+    {
         UIImage *buttonImage = [UIImage imageNamed:@"ModeVideo.png"];
         [_mode setImage:buttonImage forState:UIControlStateNormal];
         [self dismissViewControllerAnimated:NO completion:nil];
     }
-    
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"Camerabottom"] forBarMetrics:UIBarMetricsDefault];
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-        [userPurchases_ checkKeyExistsInPurchases:@"com.flyerly.UnlockCreateVideoFlyerOption"] ) {
-        
+    if ( [userPurchases_ canCreateVideoFlyer] )
+    {
         UIImage *buttonImage = [UIImage imageNamed:@"ModeVideo.png"];
         [_mode setImage:buttonImage forState:UIControlStateNormal];
     }
 }
 
-- (void)inAppPanelDismissed {
+- (void)inAppPanelDismissed
+{
 
 }
 

@@ -33,6 +33,11 @@
 #import "GADInterstitialDelegate.h"
 #import "GADBannerView.h"
 
+
+#import <AVKit/AVKit.h>
+#import <AVFoundation/AVFoundation.h>
+#import <Photos/Photos.h>
+
 //Drawing required files
 //#import "DrawingView.h"
 
@@ -42,7 +47,7 @@
 
 
 @class FlyerlySingleton, Flyer, FlyerImageView, ShareViewController, SigninController,InAppViewController,PrintViewController;
-@interface CreateFlyerController :ParentViewController<UIScrollViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate,UIGestureRecognizerDelegate,InAppPurchasePanelButtonProtocol, UserPurchasesDelegate, GADInterstitialDelegate, GADBannerViewDelegate>
+@interface CreateFlyerController :ParentViewController<UITextFieldDelegate,UIScrollViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate,UIGestureRecognizerDelegate,InAppPurchasePanelButtonProtocol, UserPurchasesDelegate, GADInterstitialDelegate, GADBannerViewDelegate>
 
 {
     PrintViewController *printViewController;
@@ -66,6 +71,8 @@
     LayerTileButton *editButtonGlobal;
     UIBarButtonItem *rightUndoBarButton;
     UIButton *shareButton;
+
+    UIButton *backButton;
     UIButton *helpButton;
     
     UITextView *lastTextView;
@@ -99,11 +106,10 @@
     BOOL dw_isOldLayer;
     
     BOOL bannerAddClosed;
+    BOOL bannerShowed; //keep bolean we have rendered banner or not ?
 }
 
 @property(nonatomic, strong) GADInterstitial *interstitialAdd;
-@property(nonatomic, strong) GADBannerView *bannerAdd;
-@property (nonatomic, strong) UIView *bannerAddView;
 
 //-----
 @property (nonatomic, strong) ResourcesView *backgroundsView;
@@ -133,6 +139,10 @@
 @property (nonatomic, strong) NSString *flyerPath;
 @property (nonatomic, strong) IBOutlet FlyerImageView *flyimgView;
 @property (nonatomic, strong) UIView *sharePanel;
+
+@property (weak, nonatomic) IBOutlet GADBannerView *bannerAdsView;
+
+@property (nonatomic, retain) UIDocumentInteractionController *dicController;
 
 // These are ContextViews Library
 @property(nonatomic, strong) IBOutlet UIView *contextView;
@@ -164,6 +174,7 @@
 @property (nonatomic, strong)IBOutlet UIButton *cameraTakePhoto;
 @property (nonatomic, strong)IBOutlet UIButton *cameraRoll;
 @property (nonatomic, strong)IBOutlet UIButton *flyerBorder;
+@property (nonatomic, strong)IBOutlet UIButton *giphyBgBtn;
 
 //These are LibText
 @property (nonatomic, strong)IBOutlet UIButton *fontTabButton;
@@ -199,19 +210,27 @@
 @property (nonatomic,strong)IBOutlet UILabel *durationLabel;
 @property (nonatomic,strong)IBOutlet UILabel *durationChange;
 
+- (IBAction)onClickBtnBannerAdsDismiss:(id)sender;
+
 //Outlets form zoom
 @property (strong, nonatomic) IBOutlet UIScrollView *zoomScrollView;
 @property (strong, nonatomic) IBOutlet UIImageView *zoomScreenShot;
 @property (strong, nonatomic) IBOutlet UIImageView *zoomMagnifyingGlass;
 @property (strong, nonatomic) IBOutlet UIImageView *zoomScreenShotForVideo;
+@property (weak, nonatomic) IBOutlet UIButton *btnBannerAdsDismiss;
 
 
-@property (nonatomic,strong)MPMoviePlayerController *player;
+@property (assign) BOOL sharingPannelIsHidden;
+
+
+@property (nonatomic,strong)AVPlayerViewController *player;
+@property (nonatomic,strong) AVPlayer *avPlayer;
 @property (nonatomic,strong) Flyer *flyer;
+@property (nonatomic,strong) NSString *tasksAfterGiphySelect;
 @property(strong,nonatomic) NSString *currentLayer;
 @property(strong,nonatomic) NSMutableDictionary *layersDic;
 @property (nonatomic, copy) void (^onFlyerBack)(NSString *);
-@property (nonatomic, copy) void (^shouldShowAdd)(NSString *);
+@property (nonatomic, copy) void (^shouldShowAdd)(NSString *,BOOL);
 
 -(void) callDeleteLayer;
 -(void) choosePhoto;
@@ -269,14 +288,25 @@
 @property (weak, nonatomic) IBOutlet UIImageView *tempDrawImage;
 
 //DrawingClass required functions
-- (IBAction)pencilPressed:(id)sender;
-- (IBAction)eraserPressed:(id)sender;
-- (IBAction)reset:(id)sender;
-- (IBAction)settings:(id)sender;
-- (IBAction)save:(id)sender;
+//- (IBAction)pencilPressed:(id)sender;
+//- (IBAction)eraserPressed:(id)sender;
+//- (IBAction)reset:(id)sender;
+//- (IBAction)settings:(id)sender;
+//- (IBAction)save:(id)sender;
 
 - (IBAction)zoom:(id)sender;
 
 
 -(void)tasksOnCreateNewFlyer;
+
+-(IBAction)openPanel:(id)sender;
+//premium button for premium backgrounds / borders / clipart / Emoticons / fonts
+@property (nonatomic,strong)IBOutlet UIButton *premiumBtnBg, *premiumBtnBgBorder, *premiumBtnEmoticons, *premiumBtnCliparts, *premiumBtnFonts;
+@property (nonatomic,strong)IBOutlet UIImageView *premiumImgBg, *premiumImgBgBorder, *premiumImgEmoticons, *premiumImgCliparts, *premiumImgFonts;
+
+//This variable was needed because When comming from cropview render flyer relaocating video flyer
+@property (assign) BOOL enableRenderFlyer;
+-(void)enableNavigation:(BOOL)enable;
+//-(void)selectGiphy:(id)sender;
+
 @end

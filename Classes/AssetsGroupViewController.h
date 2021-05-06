@@ -29,6 +29,7 @@
     UserPurchases *userPurchases;
     SigninController *signInController;
     BOOL productPurchased;
+    
 }
 
 @property CGSize desiredImageSize;
@@ -50,15 +51,15 @@
 /// An optional UILabel that will be updated automatically with the assets count.
 @property (weak, nonatomic) IBOutlet UILabel * assetsCountLabel;
 /// Whether or not the controller is loading assets (KVO compliant).
-@property (nonatomic, assign, getter=isLoading)   BOOL loading;
+@property (nonatomic, assign, getter=isLoading) BOOL loading;
 /// The currently retrieved NBUAsset objects.
-@property (strong, nonatomic, readonly)             NSArray * assets;
+@property (strong, nonatomic, readonly) NSArray * assets;
 @property (strong, nonatomic)  NSArray * selectedAssetsURLs;
 /// Whether to present reverse the assets' order (newest assets on top). Default `NO`.
-@property (nonatomic)                               BOOL reverseOrder;
+@property (nonatomic) BOOL reverseOrder;
 
 /// The number of assets to be incrementally loaded. Default `100`, set to `0` to load all at once;
-@property (nonatomic)                               NSUInteger loadSize;
+@property (nonatomic) NSUInteger loadSize;
 
 
 @end

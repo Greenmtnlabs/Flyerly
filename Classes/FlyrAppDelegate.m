@@ -8,8 +8,14 @@
 
 #import "FlyrAppDelegate.h"
 #import "PaypalMobile.h"
-#import "LobRequest.h"
-#import <ParseFacebookUtils/PFFacebookUtils.h>
+//#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
+#import <Parse/Parse.h>
+#import <Parse/PFFacebookUtils.h>
+#import <Parse/PFTwitterUtils.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <UserNotifications/UserNotifications.h>
+#import <UserReportSDK/UserReportSDK-Swift.h>
 
 NSString *kCheckTokenStep1 = @"kCheckTokenStep";
 NSString *FlickrSharingSuccessNotification = @"FlickrSharingSuccessNotification";
@@ -17,8 +23,10 @@ NSString *FlickrSharingFailureNotification = @"FlickrSharingFailureNotification"
 NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 #define TIME 10
-
-@implementation FlyrAppDelegate
+@implementation FlyrAppDelegate {
+    UIApplication *app;
+    UIBackgroundTaskIdentifier bgTask;
+}
 
 @synthesize window;
 @synthesize navigationController;
@@ -27,71 +35,95 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 
 #pragma mark Application lifecycle
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    app = application;
+    bgTask = [app beginBackgroundTaskWithName:@"MyTask" expirationHandler:^{
+        // Clean up any unfinished task business by marking where you
+        // stopped or ending the task outright.
+        
+        [application endBackgroundTask:bgTask];
+        bgTask = UIBackgroundTaskInvalid;
+    }];
+    
+    [self registerForRemoteNotifications];
+    
+    // Start the long-running task and return immediately.
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+         [self goingToBg];
+    });
+    
+    NSLog(@"backgroundTimeRemaining: %f", [[UIApplication sharedApplication] backgroundTimeRemaining]);
+}
 
+- (void)registerForRemoteNotifications
+{
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge |     UNAuthorizationOptionCarPlay) completionHandler:^(BOOL granted, NSError * _Nullable error){
+        if(!error){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[UIApplication sharedApplication] registerForRemoteNotifications];
+            });
+        }else{
+            NSLog(@"%@",error.description);
+        }
+    }];
+}
 
+-(void)endAppBgTask
+{
+    [app endBackgroundTask:bgTask];
+    bgTask = UIBackgroundTaskInvalid;
+}
 
-- (void)applicationWillResignActive:(UIApplication *)application {
-
+/**
+ * Perform task when app going to background
+ */
+-(void)goingToBg {
+    
     if ([[self.navigationController topViewController] isKindOfClass:[CreateFlyerController class]]) {
         
         //Here we Save Data for Future Error Handling
         NSArray *views = [self.navigationController viewControllers];
         CreateFlyerController *createView;
-
+        
         for (int i =0 ; i <views.count; i++) {
-
+            
             if ([[views objectAtIndex:i] isKindOfClass:[CreateFlyerController class]]) {
                 createView = [views objectAtIndex:i];
             }
         }
-        
-        //Save On background Mode
-        // Here we Save Flyer Info
-        [createView.flyer saveFlyer];
-        
-        //Here we Create One History BackUp for Future Undo Request
-        [createView.flyer addToHistory];
-        
-        //Here we Merge Video for Sharing
-        if ([createView.flyer isVideoFlyer]) {
-            
-            //Here Compare Current Flyer with history Flyer
-            if ([createView.flyer isVideoMergeProcessRequired]) {
+
+        //When flyer is picture flyer
+        if ([createView.flyer isVideoFlyer] == NO) {
+            if( [createView.flyer isSaveRequired] == YES ) {
+
+                // Here we Save Flyer Info
+                [createView.flyer saveFlyer];
                 
-                // Main Thread
-                dispatch_async( dispatch_get_main_queue(), ^{
-                    
-                    //Here we Merge All Layers in Video File
-                    [createView videoMergeProcess];
-                    
-                });
+                //Here we Create One History BackUp for Future Undo Request
+                [createView.flyer addToHistory];
                 
-            }
-            
-        }else {
-            
-            //Background Thread
-            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+                [createView.flyer isVideoMergeProcessRequired];
                 
                 //Here we remove Borders from layer if user touch any layer
                 [createView.flyimgView layerStoppedEditing:createView.currentLayer];
                 
                 //Here we take Snap shot of Flyer and
                 //Flyer Add to Gallery if user allow to Access there photos
-                //[createView.flyer setUpdatedSnapshotWithImage:[createView getFlyerSnapShot]];
-                
-            });
-            
-        }
+                [createView.flyer setUpdatedSnapshotWithImage:[createView getFlyerSnapShot]];
 
-        
+                [createView.flyer saveIntoGallery];
+            }
+        }
     }
-    
 }
 
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
     // handler code here
-    if (!url) {
+    if (!url)
+    {
         return NO;
     }
     
@@ -101,25 +133,31 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     return YES;
 }
 
-
+ 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    [SHKFacebook handleDidBecomeActive];
+    //[SHKFacebook handleDidBecomeActive];
+    [FBSDKAppEvents activateApp];
 }
-
-
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Save data if appropriate
-    [SHKFacebook handleWillTerminate];
+    //[SHKFacebook handleWillTerminate];
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
     currentInstallation.channels = @[@"global"];
-    [currentInstallation saveInBackground];
+    //[currentInstallation saveInBackground];
+    [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+            NSLog(@"installation saved!!!");
+        }else{
+            NSLog(@"installation save failed %@",error.debugDescription);
+        }
+    }];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
@@ -137,28 +175,34 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
+    NSLog(@"[url absoluteString] = %@", [url absoluteString]);
     
-    return [PFFacebookUtils handleOpenURL:url];
+    //if ([[url absoluteString] hasPrefix:[NSString stringWithFormat:@"fb%@://bridge/share",SHKCONFIG(facebookAppId)]]) {
+        return [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+    //}
     
-    if ([[url absoluteString] hasPrefix:[NSString stringWithFormat:@"fb%@", SHKCONFIG(facebookAppId)]]) {
-        [SHKFacebook handleOpenURL:url];
-        [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
-        return YES;
-    }
-    
-    if([[url absoluteString] hasPrefix:kCallbackURLBaseStringPrefix]){
-        return YES;
-    } else {
-  
-        return nil;
-        
-    }
+//    if ([[url absoluteString] hasPrefix:[NSString stringWithFormat:@"fb%@", SHKCONFIG(facebookAppId)]]) {
+//        
+//       //return One of the handled URL
+//        return [FBAppCall handleOpenURL:url
+//                      sourceApplication:sourceApplication
+//                            withSession:[PFFacebookUtils session]] || [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+//    }
+//    
+//    if([[url absoluteString] hasPrefix:kCallbackURLBaseStringPrefix]){
+//        return YES;
+//    } else {
+//  
+//        return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+//    }
 }
 
 /**
  * Application bring up.
  */
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    NSLog(@"Selected Target = %@", APP_NAME);
     
     _persistence = [[RMStoreKeychainPersistence alloc] init];
     [RMStore defaultStore].transactionPersistor = _persistence;
@@ -170,7 +214,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     // Configurator initialization
     flyerConfigurator = [[FlyerlyConfigurator alloc] init];
     DefaultSHKConfigurator  *configurator = flyerConfigurator;
-    
     [SHKConfiguration sharedInstanceWithConfigurator:configurator];
 
     // Crittercism for crash reports.
@@ -181,15 +224,23 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
      @{[flyerConfigurator paypalEnvironment] : [flyerConfigurator paypalEnvironmentId]}];
     
     [PayPalMobile preconnectWithEnvironment:[flyerConfigurator paypalEnvironment]];
+
+    //[LobRequest initWithAPIKey:[flyerConfigurator lobAppId]];
     
-    [LobRequest initWithAPIKey:[flyerConfigurator lobAppId]];
+    // Setup UserReport
+    
+    UserReportUser *user = [[UserReportUser alloc] init];
+    [user setEmail:@"preston@greenmtnlabs.com"];
+    [UserReport  configureWithSakId:@"ios-playground" mediaId:@"f4658e10-0f85-4fa8-930e-27c2712388c5" user:user settings:nil];
+
+    UserReport.testMode = YES;
+    UserReport.displayMode = DisplayModeAlert;
     
     //-- Set Notification
     if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)])
     {
         // iOS 8 Notifications
         [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
-        
         [application registerForRemoteNotifications];
     }
     else
@@ -201,29 +252,50 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     
 #ifdef DEBUG
     
-    // Setup parse Offline ozair's account
-    [Parse setApplicationId:[flyerConfigurator parseOfflineAppId]
-                  clientKey:[flyerConfigurator parseOfflineClientKey]];
+//    [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+//        configuration.applicationId = @"SFUGUv2sss1RfFG20rYO6dPgncckv76CKAvijEBP";//"20eaa2f1-f36d-4187-8613-82851a490f05";
+//        configuration.clientKey = @"JFuhUCtwhVc6GMNR4gyLXyx2Z0AMujJCBf6SiWR2";//@"gThiRyKWsxaBiBfvmMUKu6GgjQKI5m2g";
+//        configuration.server = @"https://parseapi.back4app.com/";//"https://api.parse.buddy.com/parse/";
+//    }]];
+    
+    [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+        configuration.applicationId = @"GneudZalNjY5S1SAt7zlsUo51N2sjpzywgQ1Ivg3";//"20eaa2f1-f36d-4187-8613-82851a490f05";
+        configuration.clientKey = @"udRYenxEHjTbiE0IvugZd6WIzwjtHhk17JeMiNlJ";//@"gThiRyKWsxaBiBfvmMUKu6GgjQKI5m2g";
+        configuration.server = @"https://parseapi.back4app.com/";//"https://api.parse.buddy.com/parse/";
+    }]];
+    
 #else
     
-    // Setup parse Online
-    [Parse setApplicationId:[flyerConfigurator parseOnlineAppId]
-                  clientKey:[flyerConfigurator parseOnlineClientKey]];
+    [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+        configuration.applicationId = @"SFUGUv2sss1RfFG20rYO6dPgncckv76CKAvijEBP";//"20eaa2f1-f36d-4187-8613-82851a490f05";
+        configuration.clientKey = @"JFuhUCtwhVc6GMNR4gyLXyx2Z0AMujJCBf6SiWR2";//"gThiRyKWsxaBiBfvmMUKu6GgjQKI5m2g";
+        configuration.server = @"https://parseapi.back4app.com/";//"https://api.parse.buddy.com/parse/";
+    }]];
     
 #endif
   
     // Flurry stats
+    NSString *buildVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey];
+//    FlurrySessionBuilder* builder = [[[[[FlurrySessionBuilder new]
+//                                        withLogLevel:FlurryLogLevelAll]
+//                                       withCrashReporting:YES]
+//                                      withSessionContinueSeconds:10]
+//                                     withAppVersion:buildVersion];
+//
+//    [Flurry startSession:[flyerConfigurator flurrySessionId] withSessionBuilder:builder];
+    
     [Flurry startSession:[flyerConfigurator flurrySessionId]];
-
+    
     // Facebook initialization
-    [PFFacebookUtils initializeFacebook];
+    [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions: launchOptions];
     
     // Twitter Initialization
     [PFTwitterUtils initializeWithConsumerKey:[flyerConfigurator twitterConsumerKey] consumerSecret:[flyerConfigurator twitterSecret]];
     
     // Bitly configuration
-    [[BitlyConfig sharedBitlyConfig] setBitlyLogin:[flyerConfigurator bitLyLogin] bitlyAPIKey:[flyerConfigurator bitLyKey]];
-
+//    [[BitlyConfig sharedBitlyConfig] setBitlyLogin:[flyerConfigurator bitLyLogin] bitlyAPIKey:[flyerConfigurator bitLyKey]];
+    [Bitly initialize:[flyerConfigurator bitLyKey]];
+    
     //This is For remove Notification
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     
@@ -246,17 +318,25 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     NSString *anonymousUserPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents"]];
     NSArray *contentOfDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:anonymousUserPath error:NULL];
     
+    // get the number of folders in current directory.
+    NSArray *arrayOfValues = [self checkNumberOfFolders:contentOfDirectory path:anonymousUserPath];
+    int numberOfFolders = [[arrayOfValues objectAtIndex:0] intValue];
+    //int indexForAnon  = [[arrayOfValues objectAtIndex:1] intValue];
+    
     NSError *error;
-    if ( contentOfDirectory.count == 0 ) {
+    // if there is no directory then create one for anonymous.
+    if ( numberOfFolders == 0 ) {
         [[NSFileManager defaultManager] createDirectoryAtPath:[anonymousUserPath stringByAppendingString:@"/anonymous"] withIntermediateDirectories:YES attributes:nil error:&error];
         
         // Now check contents of document directory again
         contentOfDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:anonymousUserPath error:NULL];
     }
-
+    // get the number of folders in current directory.
+    NSArray *arrayOfValuess = [self checkNumberOfFolders:contentOfDirectory path:anonymousUserPath];
+    int indexForAnon  = [[arrayOfValuess objectAtIndex:1] intValue];
+    
     // If the Documents folder has only one directory named anonymous then this is an anonymous user (hasn't signed up yet)
-    if(contentOfDirectory.count  > 0 && [[contentOfDirectory objectAtIndex:0] isEqual:@"anonymous"]){
-        
+    if(contentOfDirectory.count  > 0 && [[contentOfDirectory objectAtIndex:indexForAnon] isEqual:@"anonymous"]){
         // This is an anonymous user
         [PFUser currentUser].username = @"anonymous";
         [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"UpdatedVersion"];
@@ -265,10 +345,9 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         [navigationController setRootViewController:lauchController];
         
     // Otherwise we have an already logged in user
-    } else if ([[NSUserDefaults standardUserDefaults] stringForKey:@"User"] != nil ){
-        
-        
-        
+    }
+    else if ([[NSUserDefaults standardUserDefaults] stringForKey:@"User"] != nil )
+    {
         // If user has already updated to 4.0, the flow is normal
         if([[NSUserDefaults standardUserDefaults] stringForKey:@"UpdatedVersion"]){
             
@@ -276,8 +355,9 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
             [navigationController setRootViewController:lauchController];
         
         // Otherwise this is the first time user has updated to 4.0
-        } else {
-         
+        }
+        else
+        {
             // Log out User.
             [MainSettingViewController signOut];
             
@@ -285,16 +365,14 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
             [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"UpdatedVersion"];
             accountController = [[LaunchController alloc]initWithNibName:@"LaunchController" bundle:nil];
             [navigationController setRootViewController:accountController];
-
-            
         }
     // A use signed up on this device but is currently not logged in
-    } else if (contentOfDirectory.count > 0
-               && !([[contentOfDirectory objectAtIndex:0] isEqual:@"anonymous"])) {
-        
+    }
+    else if (contentOfDirectory.count > 0
+               && !([[contentOfDirectory objectAtIndex:0] isEqual:@"anonymous"]))
+    {
         accountController = [[LaunchController alloc]initWithNibName:@"LaunchController" bundle:nil];
         [navigationController setRootViewController:accountController];
-        
     }
            
     // HERE WE SET ALL FLYER ARE PUBLIC DEFUALT
@@ -307,8 +385,52 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound];
 
 	[window makeKeyAndVisible];
+
+    // parse twitter was not working, these debugers will help in finding issue
+    [Parse setLogLevel:PFLogLevelDebug];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveWillSendURLRequestNotification:) name:PFNetworkWillSendURLRequestNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveDidReceiveURLResponseNotification:) name:PFNetworkDidReceiveURLResponseNotification object:nil];
+
+    //return YES;
+    return [ [FBSDKApplicationDelegate sharedInstance] application :application
+                                      didFinishLaunchingWithOptions:launchOptions];
+}
+
+/**
+ A method that will check the number of folders at specified given path,
+ will return the count of folders.
+ **/
+-(NSArray *)checkNumberOfFolders:(NSArray * )contentOfFolders path:(NSString *) path {
+
+    NSFileManager *filemgr;
+    NSDictionary *attribs;
     
-    return YES;
+    filemgr = [NSFileManager defaultManager];
+    
+    // initializing count
+    int count = 0;
+    
+    //remember the index of the anon user
+    int indexForAnon = 0;
+    
+    for( int i = 0; i < contentOfFolders.count; i++ ) {
+        
+        NSString *thisFilePath = [NSString stringWithFormat:@"%@/%@",path,contentOfFolders[i]];
+        attribs = [filemgr attributesOfItemAtPath:thisFilePath error: NULL];
+        if( [[attribs objectForKey: @"NSFileType"] isEqualToString:NSFileTypeDirectory]  ){
+            count++;
+            
+        }
+        // check where anonymous folder index is
+        if( [thisFilePath containsString:@"anonymous"] ) {
+            indexForAnon = i;
+        }
+    }
+    
+    // array that holds count of number of directories at path and the index where aonymous folder lies.
+    // at 0th index we'll save count of directories and at 1st index we'll save index of anonymous folder
+    NSArray *returnArray = [NSArray arrayWithObjects:[NSNumber numberWithInt:count], [NSNumber numberWithInt:indexForAnon], nil];
+    return returnArray;
 }
 
 /*
@@ -333,18 +455,11 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
             // Migrate Account For 3.0 Version
             [FlyerUser migrateUserto3dot0:object];
             
-            //Getting Recent Flyers
-            lauchController.recentFlyers = [Flyer recentFlyerPreview:4];
-            
-            //Set Recent Flyers
-            [lauchController updateRecentFlyer:lauchController.recentFlyers];
             [lauchController hideLoadingIndicator];
             
         }
     }];
     }
-
-
 }
 
 
@@ -358,39 +473,72 @@ if it exist then we call Merging Process
     [lauchController showLoadingIndicator];
 
     // Create request for user's Facebook data
-    FBRequest *request = [FBRequest requestForMe];
-    
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    [parameters setValue:@"id,email,name" forKey:@"fields"];
     // Send request to Facebook
-    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+    [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:parameters] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
         if (!error) {
             
             // result is a dictionary with the user's Facebook data
             NSDictionary *userData = (NSDictionary *)result;
             NSString *email = userData[@"email"];
+            NSString *name = userData[@"name"];
 
-            //Checking Email Exist in Parse
-            PFQuery *query = [PFUser  query];
-            [query whereKey:@"email" equalTo:email];
-            [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
-                if (error) {
-                    
-                    [lauchController hideLoadingIndicator];
+            BOOL canSave = false;
+            BOOL isNew = [[PFUser currentUser] isNew];
+            PFUser *currentUser = [PFUser currentUser];
 
-                }else{
-                    
-                    // Migrate Account For 3.0 Version
-                    [FlyerUser migrateUserto3dot0:object];
-                    
-                    //Getting Recent Flyers
-                    
-                    lauchController.recentFlyers = [Flyer recentFlyerPreview:4];
-                    
-                    //Set Recent Flyers
-                    [lauchController updateRecentFlyer:lauchController.recentFlyers];
-                    [lauchController hideLoadingIndicator];
-                    
+            // when new user signup via facebook, then push appName to server
+            if (isNew) {
+                [[PFUser currentUser] setObject:APP_NAME forKey:@"appName"];
+                canSave = true;
+            }
+
+            // Store the current user's Facebook ID on the user
+            if ( email != nil && (isNew || currentUser.email == nil || [currentUser.email isEqualToString:@""])) {
+                [[PFUser currentUser] setObject:email forKey:@"email"];
+                canSave = true;
+            }
+
+            if (name != nil ){
+                if(isNew || currentUser.username == nil || [currentUser.username isEqualToString:@""]) {
+                    [[NSUserDefaults standardUserDefaults]  setObject:[name lowercaseString] forKey:@"User"];
+                    [[PFUser currentUser] setObject:name forKey:@"username"];
+                    canSave = true;
                 }
-            }];
+
+                if(isNew || currentUser[@"name"] == nil || [currentUser[@"name"] isEqualToString:@""]) {
+                    [[PFUser currentUser] setObject:name forKey:@"name"];
+                    canSave = true;
+                }
+            }
+            
+            if ( email != nil ){
+                //Checking Email Exist in Parse
+                PFQuery *query = [PFUser  query];
+                [query whereKey:@"email" equalTo:email];
+                [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
+
+                    if (error) {
+                        [lauchController hideLoadingIndicator];
+                    }else{
+                        // Migrate Account For 3.0 Version
+                        [FlyerUser migrateUserto3dot0:object];
+                        
+                        [lauchController hideLoadingIndicator];
+                        
+                    }
+                }];
+            } else {
+                [lauchController hideLoadingIndicator];
+            }
+            
+            if (canSave){
+                [[PFUser currentUser] saveInBackground];
+            }
+        }
+        else {
+            [lauchController hideLoadingIndicator];
         }
     }];
 }
@@ -434,7 +582,7 @@ if it exist then we call Merging Process
         //Create Directory!
         [fileManager createDirectoryAtPath:documentDBFolderPath withIntermediateDirectories:NO attributes:nil error:&error];
     } else {
-        //NSLog(@"Directory exists! %@", documentDBFolderPath);
+        NSLog(@"Directory exists! %@", documentDBFolderPath);
     }
     
     NSArray *fileList = [fileManager contentsOfDirectoryAtPath:resourceDBFolderPath error:&error];
@@ -450,13 +598,30 @@ if it exist then we call Merging Process
             [fileManager copyItemAtPath:oldFilePath toPath:newFilePath error:&error];
             
         } else {
-            //NSLog(@"File exists: %@", newFilePath);
+            NSLog(@"File exists: %@", newFilePath);
         }
     }
     
 }
+// parse twitter was not working, these debugers will help in finding issue
+- (void)receiveWillSendURLRequestNotification:(NSNotification *) notification {
+    NSURLRequest *request = notification.userInfo[PFNetworkNotificationURLRequestUserInfoKey];
+    NSLog(@"URL : %@", request.URL.absoluteString);
+    NSLog(@"Method : %@", request.HTTPMethod);
+    NSLog(@"Headers : %@", request.allHTTPHeaderFields);
+    NSLog(@"Request Body : %@", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
+}
 
-
+// parse twitter was not working, these debugers will help in finding issue
+- (void)receiveDidReceiveURLResponseNotification:(NSNotification *) notification {
+    NSURLRequest *request = notification.userInfo[PFNetworkNotificationURLRequestUserInfoKey];
+    NSHTTPURLResponse *response = notification.userInfo[PFNetworkNotificationURLResponseUserInfoKey];
+    NSString *responseBody = notification.userInfo[PFNetworkNotificationURLResponseBodyUserInfoKey];
+    NSLog(@"URL : %@", response.URL.absoluteString);
+    NSLog(@"Status Code : %ld", (long)response.statusCode);
+    NSLog(@"Headers : %@", response.allHeaderFields);
+    NSLog(@"Response Body : %@", responseBody);
+}
 
 @end
 

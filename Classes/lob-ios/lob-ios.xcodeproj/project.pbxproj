@@ -1,0 +1,734 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CE41427F1881D18E00E5DB04 /* LobAbstractModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE41427E1881D18E00E5DB04 /* LobAbstractModel.m */; };
+		CE4142801881E8CC00E5DB04 /* LobAbstractModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE41427E1881D18E00E5DB04 /* LobAbstractModel.m */; };
+		CE4142811881E8CF00E5DB04 /* AbstractBlockRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F686B187739B7006590CC /* AbstractBlockRequest.m */; };
+		CE4142821881E8D100E5DB04 /* LobRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F686E187739C0006590CC /* LobRequest.m */; };
+		CE4142831881E8DB00E5DB04 /* LobAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F68431877377A006590CC /* LobAddressModel.m */; };
+		CE4142841881E8DE00E5DB04 /* LobBankAccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F686418773833006590CC /* LobBankAccountModel.m */; };
+		CE4142851881E8E100E5DB04 /* LobCheckModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F686118773829006590CC /* LobCheckModel.m */; };
+		CE4142861881E8E300E5DB04 /* LobCountryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F685E18773821006590CC /* LobCountryModel.m */; };
+		CE4142871881E8E600E5DB04 /* LobJobModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F685B18773816006590CC /* LobJobModel.m */; };
+		CE4142881881E8EF00E5DB04 /* LobObjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F68581877380C006590CC /* LobObjectModel.m */; };
+		CE4142891881E8F100E5DB04 /* LobPackagingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F685518773801006590CC /* LobPackagingModel.m */; };
+		CE41428A1881E8F800E5DB04 /* LobPostcardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F6852187737F5006590CC /* LobPostcardModel.m */; };
+		CE41428B1881E8FC00E5DB04 /* LobServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F684F187737EB006590CC /* LobServiceModel.m */; };
+		CE41428C1881E8FE00E5DB04 /* LobSettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F684C187737E2006590CC /* LobSettingModel.m */; };
+		CE41428D1881E90200E5DB04 /* LobStateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F6849187737D9006590CC /* LobStateModel.m */; };
+		CE41428E1881E90500E5DB04 /* LobVerifyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F6846187737CF006590CC /* LobVerifyModel.m */; };
+		CE65BB2518B6D00A000F8CDB /* zalogo.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE65BB2418B6D00A000F8CDB /* zalogo.pdf */; };
+		CE9F680218773086006590CC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9F680118773086006590CC /* Foundation.framework */; };
+		CE9F681018773086006590CC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9F680F18773086006590CC /* XCTest.framework */; };
+		CE9F681118773086006590CC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9F680118773086006590CC /* Foundation.framework */; };
+		CE9F681318773086006590CC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9F681218773086006590CC /* UIKit.framework */; };
+		CE9F681C18773086006590CC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE9F681A18773086006590CC /* InfoPlist.strings */; };
+		CE9F681E18773086006590CC /* lob_iosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F681D18773086006590CC /* lob_iosTests.m */; };
+		CE9F68441877377A006590CC /* LobAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F68431877377A006590CC /* LobAddressModel.m */; };
+		CE9F6847187737CF006590CC /* LobVerifyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F6846187737CF006590CC /* LobVerifyModel.m */; };
+		CE9F684A187737D9006590CC /* LobStateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F6849187737D9006590CC /* LobStateModel.m */; };
+		CE9F684D187737E2006590CC /* LobSettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F684C187737E2006590CC /* LobSettingModel.m */; };
+		CE9F6850187737EB006590CC /* LobServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F684F187737EB006590CC /* LobServiceModel.m */; };
+		CE9F6853187737F5006590CC /* LobPostcardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F6852187737F5006590CC /* LobPostcardModel.m */; };
+		CE9F685618773801006590CC /* LobPackagingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F685518773801006590CC /* LobPackagingModel.m */; };
+		CE9F68591877380C006590CC /* LobObjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F68581877380C006590CC /* LobObjectModel.m */; };
+		CE9F685C18773816006590CC /* LobJobModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F685B18773816006590CC /* LobJobModel.m */; };
+		CE9F685F18773821006590CC /* LobCountryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F685E18773821006590CC /* LobCountryModel.m */; };
+		CE9F686218773829006590CC /* LobCheckModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F686118773829006590CC /* LobCheckModel.m */; };
+		CE9F686518773833006590CC /* LobBankAccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F686418773833006590CC /* LobBankAccountModel.m */; };
+		CE9F686C187739B7006590CC /* AbstractBlockRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F686B187739B7006590CC /* AbstractBlockRequest.m */; };
+		CE9F686F187739C0006590CC /* LobRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F686E187739C0006590CC /* LobRequest.m */; };
+		FA172BBB19C22CC60036E7C5 /* LobErrorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA172BBA19C22CC60036E7C5 /* LobErrorModel.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CE9F681418773086006590CC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE9F67F618773086006590CC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE9F67FD18773086006590CC;
+			remoteInfo = "lob-ios";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CE9F67FC18773086006590CC /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		C3A30DA71AB80DBB00B0F1CF /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = Requests/AFHTTP/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
+		C3A30DA81AB80DD600B0F1CF /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperationManager.h; path = Requests/AFHTTP/AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
+		C3A30DA91AB80DD600B0F1CF /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPSessionManager.h; path = Requests/AFHTTP/AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		C3A30DAA1AB80DD600B0F1CF /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFNetworking.h; path = Requests/AFHTTP/AFNetworking.h; sourceTree = "<group>"; };
+		C3A30DAB1AB80DD600B0F1CF /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFNetworkReachabilityManager.h; path = Requests/AFHTTP/AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		C3A30DAC1AB80DD600B0F1CF /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFSecurityPolicy.h; path = Requests/AFHTTP/AFSecurityPolicy.h; sourceTree = "<group>"; };
+		C3A30DAD1AB80DD600B0F1CF /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLConnectionOperation.h; path = Requests/AFHTTP/AFURLConnectionOperation.h; sourceTree = "<group>"; };
+		C3A30DAE1AB80DD600B0F1CF /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLRequestSerialization.h; path = Requests/AFHTTP/AFURLRequestSerialization.h; sourceTree = "<group>"; };
+		C3A30DAF1AB80DD600B0F1CF /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLResponseSerialization.h; path = Requests/AFHTTP/AFURLResponseSerialization.h; sourceTree = "<group>"; };
+		C3A30DB01AB80DD600B0F1CF /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLSessionManager.h; path = Requests/AFHTTP/AFURLSessionManager.h; sourceTree = "<group>"; };
+		CE41427D1881D18E00E5DB04 /* LobAbstractModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LobAbstractModel.h; path = Models/Abstract/LobAbstractModel.h; sourceTree = "<group>"; };
+		CE41427E1881D18E00E5DB04 /* LobAbstractModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LobAbstractModel.m; path = Models/Abstract/LobAbstractModel.m; sourceTree = "<group>"; };
+		CE65BB2418B6D00A000F8CDB /* zalogo.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = zalogo.pdf; path = "lob-ios/zalogo.pdf"; sourceTree = SOURCE_ROOT; };
+		CE9F67FE18773086006590CC /* liblob-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "liblob-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE9F680118773086006590CC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CE9F680518773086006590CC /* lob-ios-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "lob-ios-Prefix.pch"; sourceTree = "<group>"; };
+		CE9F680E18773086006590CC /* lob-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "lob-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE9F680F18773086006590CC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		CE9F681218773086006590CC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		CE9F681918773086006590CC /* lob-iosTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "lob-iosTests-Info.plist"; sourceTree = "<group>"; };
+		CE9F681B18773086006590CC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CE9F681D18773086006590CC /* lob_iosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = lob_iosTests.m; sourceTree = "<group>"; };
+		CE9F682D18773117006590CC /* LobProjectConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LobProjectConstants.h; path = Constants/LobProjectConstants.h; sourceTree = "<group>"; };
+		CE9F68421877377A006590CC /* LobAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LobAddressModel.h; path = Models/Address/LobAddressModel.h; sourceTree = "<group>"; };
+		CE9F68431877377A006590CC /* LobAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LobAddressModel.m; path = Models/Address/LobAddressModel.m; sourceTree = "<group>"; };
+		CE9F6845187737CF006590CC /* LobVerifyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LobVerifyModel.h; path = Models/Verify/LobVerifyModel.h; sourceTree = "<group>"; };
+		CE9F6846187737CF006590CC /* LobVerifyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LobVerifyModel.m; path = Models/Verify/LobVerifyModel.m; sourceTree = "<group>"; };
+		CE9F6848187737D9006590CC /* LobStateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LobStateModel.h; path = Models/State/LobStateModel.h; sourceTree = "<group>"; };
+		CE9F6849187737D9006590CC /* LobStateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LobStateModel.m; path = Models/State/LobStateModel.m; sourceTree = "<group>"; };
+		CE9F684B187737E2006590CC /* LobSettingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LobSettingModel.h; path = Models/Setting/LobSettingModel.h; sourceTree = "<group>"; };
+		CE9F684C187737E2006590CC /* LobSettingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LobSettingModel.m; path = Models/Setting/LobSettingModel.m; sourceTree = "<group>"; };
+		CE9F684E187737EB006590CC /* LobServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LobServiceModel.h; path = Models/Service/LobServiceModel.h; sourceTree = "<group>"; };
+		CE9F684F187737EB006590CC /* LobServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LobServiceModel.m; path = Models/Service/LobServiceModel.m; sourceTree = "<group>"; };
+		CE9F6851187737F5006590CC /* LobPostcardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LobPostcardModel.h; path = Models/Postcard/LobPostcardModel.h; sourceTree = "<group>"; };
+		CE9F6852187737F5006590CC /* LobPostcardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LobPostcardModel.m; path = Models/Postcard/LobPostcardModel.m; sourceTree = "<group>"; };
+		CE9F685418773801006590CC /* LobPackagingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LobPackagingModel.h; path = Models/Packaging/LobPackagingModel.h; sourceTree = "<group>"; };
+		CE9F685518773801006590CC /* LobPackagingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LobPackagingModel.m; path = Models/Packaging/LobPackagingModel.m; sourceTree = "<group>"; };
+		CE9F68571877380C006590CC /* LobObjectModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LobObjectModel.h; path = Models/Object/LobObjectModel.h; sourceTree = "<group>"; };
+		CE9F68581877380C006590CC /* LobObjectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LobObjectModel.m; path = Models/Object/LobObjectModel.m; sourceTree = "<group>"; };
+		CE9F685A18773816006590CC /* LobJobModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LobJobModel.h; path = Models/Job/LobJobModel.h; sourceTree = "<group>"; };
+		CE9F685B18773816006590CC /* LobJobModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LobJobModel.m; path = Models/Job/LobJobModel.m; sourceTree = "<group>"; };
+		CE9F685D18773821006590CC /* LobCountryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LobCountryModel.h; path = Models/Country/LobCountryModel.h; sourceTree = "<group>"; };
+		CE9F685E18773821006590CC /* LobCountryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LobCountryModel.m; path = Models/Country/LobCountryModel.m; sourceTree = "<group>"; };
+		CE9F686018773829006590CC /* LobCheckModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LobCheckModel.h; path = Models/Check/LobCheckModel.h; sourceTree = "<group>"; };
+		CE9F686118773829006590CC /* LobCheckModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LobCheckModel.m; path = Models/Check/LobCheckModel.m; sourceTree = "<group>"; };
+		CE9F686318773833006590CC /* LobBankAccountModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LobBankAccountModel.h; path = Models/BankAccount/LobBankAccountModel.h; sourceTree = "<group>"; };
+		CE9F686418773833006590CC /* LobBankAccountModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LobBankAccountModel.m; path = Models/BankAccount/LobBankAccountModel.m; sourceTree = "<group>"; };
+		CE9F6866187738FE006590CC /* LobLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LobLibrary.h; path = Constants/LobLibrary.h; sourceTree = "<group>"; };
+		CE9F686A187739B7006590CC /* AbstractBlockRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AbstractBlockRequest.h; path = Requests/AbstractRequest/AbstractBlockRequest.h; sourceTree = "<group>"; };
+		CE9F686B187739B7006590CC /* AbstractBlockRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AbstractBlockRequest.m; path = Requests/AbstractRequest/AbstractBlockRequest.m; sourceTree = "<group>"; };
+		CE9F686D187739C0006590CC /* LobRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LobRequest.h; path = Requests/Lob/LobRequest.h; sourceTree = "<group>"; };
+		CE9F686E187739C0006590CC /* LobRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LobRequest.m; path = Requests/Lob/LobRequest.m; sourceTree = "<group>"; };
+		FA172BB919C22CC60036E7C5 /* LobErrorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobErrorModel.h; sourceTree = "<group>"; };
+		FA172BBA19C22CC60036E7C5 /* LobErrorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobErrorModel.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CE9F67FB18773086006590CC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE9F680218773086006590CC /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE9F680B18773086006590CC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE9F681018773086006590CC /* XCTest.framework in Frameworks */,
+				CE9F681318773086006590CC /* UIKit.framework in Frameworks */,
+				CE9F681118773086006590CC /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CE067DA018A33573009430A4 /* AFHTTP */ = {
+			isa = PBXGroup;
+			children = (
+				C3A30DA81AB80DD600B0F1CF /* AFHTTPRequestOperationManager.h */,
+				C3A30DA91AB80DD600B0F1CF /* AFHTTPSessionManager.h */,
+				C3A30DAA1AB80DD600B0F1CF /* AFNetworking.h */,
+				C3A30DAB1AB80DD600B0F1CF /* AFNetworkReachabilityManager.h */,
+				C3A30DAC1AB80DD600B0F1CF /* AFSecurityPolicy.h */,
+				C3A30DAD1AB80DD600B0F1CF /* AFURLConnectionOperation.h */,
+				C3A30DAE1AB80DD600B0F1CF /* AFURLRequestSerialization.h */,
+				C3A30DAF1AB80DD600B0F1CF /* AFURLResponseSerialization.h */,
+				C3A30DB01AB80DD600B0F1CF /* AFURLSessionManager.h */,
+				C3A30DA71AB80DBB00B0F1CF /* AFHTTPRequestOperation.h */,
+			);
+			name = AFHTTP;
+			sourceTree = "<group>";
+		};
+		CE41427C1881D17F00E5DB04 /* Abstract */ = {
+			isa = PBXGroup;
+			children = (
+				CE41427D1881D18E00E5DB04 /* LobAbstractModel.h */,
+				CE41427E1881D18E00E5DB04 /* LobAbstractModel.m */,
+			);
+			name = Abstract;
+			sourceTree = "<group>";
+		};
+		CE9F67F518773086006590CC = {
+			isa = PBXGroup;
+			children = (
+				CE9F680318773086006590CC /* lob-ios */,
+				CE9F681718773086006590CC /* lob-iosTests */,
+				CE9F680018773086006590CC /* Frameworks */,
+				CE9F67FF18773086006590CC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CE9F67FF18773086006590CC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE9F67FE18773086006590CC /* liblob-ios.a */,
+				CE9F680E18773086006590CC /* lob-iosTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CE9F680018773086006590CC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CE9F680118773086006590CC /* Foundation.framework */,
+				CE9F680F18773086006590CC /* XCTest.framework */,
+				CE9F681218773086006590CC /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE9F680318773086006590CC /* lob-ios */ = {
+			isa = PBXGroup;
+			children = (
+				CE9F682C187730FC006590CC /* Constants */,
+				CE9F68301877312D006590CC /* Models */,
+				CE9F682B187730F9006590CC /* Requests */,
+				CE9F680418773086006590CC /* Supporting Files */,
+			);
+			path = "lob-ios";
+			sourceTree = "<group>";
+		};
+		CE9F680418773086006590CC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CE9F680518773086006590CC /* lob-ios-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CE9F681718773086006590CC /* lob-iosTests */ = {
+			isa = PBXGroup;
+			children = (
+				CE65BB2418B6D00A000F8CDB /* zalogo.pdf */,
+				CE9F681D18773086006590CC /* lob_iosTests.m */,
+				CE9F681818773086006590CC /* Supporting Files */,
+			);
+			path = "lob-iosTests";
+			sourceTree = "<group>";
+		};
+		CE9F681818773086006590CC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CE9F681918773086006590CC /* lob-iosTests-Info.plist */,
+				CE9F681A18773086006590CC /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CE9F682718773093006590CC /* AbstractRequest */ = {
+			isa = PBXGroup;
+			children = (
+				CE9F686A187739B7006590CC /* AbstractBlockRequest.h */,
+				CE9F686B187739B7006590CC /* AbstractBlockRequest.m */,
+			);
+			name = AbstractRequest;
+			sourceTree = "<group>";
+		};
+		CE9F682B187730F9006590CC /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				CE067DA018A33573009430A4 /* AFHTTP */,
+				CE9F682718773093006590CC /* AbstractRequest */,
+				CE9F6869187739A2006590CC /* Lob */,
+			);
+			name = Requests;
+			sourceTree = "<group>";
+		};
+		CE9F682C187730FC006590CC /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				CE9F6866187738FE006590CC /* LobLibrary.h */,
+				CE9F682D18773117006590CC /* LobProjectConstants.h */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
+		CE9F68301877312D006590CC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CE41427C1881D17F00E5DB04 /* Abstract */,
+				CE9F6841187735C4006590CC /* Address */,
+				CE9F6840187735C2006590CC /* BankAccount */,
+				CE9F683F187735C0006590CC /* Check */,
+				CE9F683E187735BA006590CC /* Country */,
+				FA172BB819C22CC60036E7C5 /* Error */,
+				CE9F683D187735B8006590CC /* Job */,
+				CE9F683C187735B6006590CC /* Object */,
+				CE9F683B187735B4006590CC /* Packaging */,
+				CE9F683A187735B2006590CC /* Postcard */,
+				CE9F6839187735B1006590CC /* Service */,
+				CE9F6838187735AF006590CC /* Setting */,
+				CE9F6837187735AD006590CC /* State */,
+				CE9F6836187735AB006590CC /* Verify */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		CE9F6836187735AB006590CC /* Verify */ = {
+			isa = PBXGroup;
+			children = (
+				CE9F6845187737CF006590CC /* LobVerifyModel.h */,
+				CE9F6846187737CF006590CC /* LobVerifyModel.m */,
+			);
+			name = Verify;
+			sourceTree = "<group>";
+		};
+		CE9F6837187735AD006590CC /* State */ = {
+			isa = PBXGroup;
+			children = (
+				CE9F6848187737D9006590CC /* LobStateModel.h */,
+				CE9F6849187737D9006590CC /* LobStateModel.m */,
+			);
+			name = State;
+			sourceTree = "<group>";
+		};
+		CE9F6838187735AF006590CC /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				CE9F684B187737E2006590CC /* LobSettingModel.h */,
+				CE9F684C187737E2006590CC /* LobSettingModel.m */,
+			);
+			name = Setting;
+			sourceTree = "<group>";
+		};
+		CE9F6839187735B1006590CC /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				CE9F684E187737EB006590CC /* LobServiceModel.h */,
+				CE9F684F187737EB006590CC /* LobServiceModel.m */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
+		CE9F683A187735B2006590CC /* Postcard */ = {
+			isa = PBXGroup;
+			children = (
+				CE9F6851187737F5006590CC /* LobPostcardModel.h */,
+				CE9F6852187737F5006590CC /* LobPostcardModel.m */,
+			);
+			name = Postcard;
+			sourceTree = "<group>";
+		};
+		CE9F683B187735B4006590CC /* Packaging */ = {
+			isa = PBXGroup;
+			children = (
+				CE9F685418773801006590CC /* LobPackagingModel.h */,
+				CE9F685518773801006590CC /* LobPackagingModel.m */,
+			);
+			name = Packaging;
+			sourceTree = "<group>";
+		};
+		CE9F683C187735B6006590CC /* Object */ = {
+			isa = PBXGroup;
+			children = (
+				CE9F68571877380C006590CC /* LobObjectModel.h */,
+				CE9F68581877380C006590CC /* LobObjectModel.m */,
+			);
+			name = Object;
+			sourceTree = "<group>";
+		};
+		CE9F683D187735B8006590CC /* Job */ = {
+			isa = PBXGroup;
+			children = (
+				CE9F685A18773816006590CC /* LobJobModel.h */,
+				CE9F685B18773816006590CC /* LobJobModel.m */,
+			);
+			name = Job;
+			sourceTree = "<group>";
+		};
+		CE9F683E187735BA006590CC /* Country */ = {
+			isa = PBXGroup;
+			children = (
+				CE9F685D18773821006590CC /* LobCountryModel.h */,
+				CE9F685E18773821006590CC /* LobCountryModel.m */,
+			);
+			name = Country;
+			sourceTree = "<group>";
+		};
+		CE9F683F187735C0006590CC /* Check */ = {
+			isa = PBXGroup;
+			children = (
+				CE9F686018773829006590CC /* LobCheckModel.h */,
+				CE9F686118773829006590CC /* LobCheckModel.m */,
+			);
+			name = Check;
+			sourceTree = "<group>";
+		};
+		CE9F6840187735C2006590CC /* BankAccount */ = {
+			isa = PBXGroup;
+			children = (
+				CE9F686318773833006590CC /* LobBankAccountModel.h */,
+				CE9F686418773833006590CC /* LobBankAccountModel.m */,
+			);
+			name = BankAccount;
+			sourceTree = "<group>";
+		};
+		CE9F6841187735C4006590CC /* Address */ = {
+			isa = PBXGroup;
+			children = (
+				CE9F68421877377A006590CC /* LobAddressModel.h */,
+				CE9F68431877377A006590CC /* LobAddressModel.m */,
+			);
+			name = Address;
+			sourceTree = "<group>";
+		};
+		CE9F6869187739A2006590CC /* Lob */ = {
+			isa = PBXGroup;
+			children = (
+				CE9F686D187739C0006590CC /* LobRequest.h */,
+				CE9F686E187739C0006590CC /* LobRequest.m */,
+			);
+			name = Lob;
+			sourceTree = "<group>";
+		};
+		FA172BB819C22CC60036E7C5 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				FA172BB919C22CC60036E7C5 /* LobErrorModel.h */,
+				FA172BBA19C22CC60036E7C5 /* LobErrorModel.m */,
+			);
+			name = Error;
+			path = Models/Error;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CE9F67FD18773086006590CC /* lob-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE9F682118773086006590CC /* Build configuration list for PBXNativeTarget "lob-ios" */;
+			buildPhases = (
+				CE9F67FA18773086006590CC /* Sources */,
+				CE9F67FB18773086006590CC /* Frameworks */,
+				CE9F67FC18773086006590CC /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "lob-ios";
+			productName = "lob-ios";
+			productReference = CE9F67FE18773086006590CC /* liblob-ios.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		CE9F680D18773086006590CC /* lob-iosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE9F682418773086006590CC /* Build configuration list for PBXNativeTarget "lob-iosTests" */;
+			buildPhases = (
+				CE9F680A18773086006590CC /* Sources */,
+				CE9F680B18773086006590CC /* Frameworks */,
+				CE9F680C18773086006590CC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CE9F681518773086006590CC /* PBXTargetDependency */,
+			);
+			name = "lob-iosTests";
+			productName = "lob-iosTests";
+			productReference = CE9F680E18773086006590CC /* lob-iosTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CE9F67F618773086006590CC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = Lob;
+			};
+			buildConfigurationList = CE9F67F918773086006590CC /* Build configuration list for PBXProject "lob-ios" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CE9F67F518773086006590CC;
+			productRefGroup = CE9F67FF18773086006590CC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CE9F67FD18773086006590CC /* lob-ios */,
+				CE9F680D18773086006590CC /* lob-iosTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CE9F680C18773086006590CC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE65BB2518B6D00A000F8CDB /* zalogo.pdf in Resources */,
+				CE9F681C18773086006590CC /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CE9F67FA18773086006590CC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE9F685618773801006590CC /* LobPackagingModel.m in Sources */,
+				CE9F685C18773816006590CC /* LobJobModel.m in Sources */,
+				CE9F686218773829006590CC /* LobCheckModel.m in Sources */,
+				CE9F6850187737EB006590CC /* LobServiceModel.m in Sources */,
+				CE9F68591877380C006590CC /* LobObjectModel.m in Sources */,
+				FA172BBB19C22CC60036E7C5 /* LobErrorModel.m in Sources */,
+				CE9F686518773833006590CC /* LobBankAccountModel.m in Sources */,
+				CE41427F1881D18E00E5DB04 /* LobAbstractModel.m in Sources */,
+				CE9F6853187737F5006590CC /* LobPostcardModel.m in Sources */,
+				CE9F684D187737E2006590CC /* LobSettingModel.m in Sources */,
+				CE9F686C187739B7006590CC /* AbstractBlockRequest.m in Sources */,
+				CE9F684A187737D9006590CC /* LobStateModel.m in Sources */,
+				CE9F6847187737CF006590CC /* LobVerifyModel.m in Sources */,
+				CE9F686F187739C0006590CC /* LobRequest.m in Sources */,
+				CE9F685F18773821006590CC /* LobCountryModel.m in Sources */,
+				CE9F68441877377A006590CC /* LobAddressModel.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE9F680A18773086006590CC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE9F681E18773086006590CC /* lob_iosTests.m in Sources */,
+				CE4142801881E8CC00E5DB04 /* LobAbstractModel.m in Sources */,
+				CE4142831881E8DB00E5DB04 /* LobAddressModel.m in Sources */,
+				CE4142841881E8DE00E5DB04 /* LobBankAccountModel.m in Sources */,
+				CE4142851881E8E100E5DB04 /* LobCheckModel.m in Sources */,
+				CE4142861881E8E300E5DB04 /* LobCountryModel.m in Sources */,
+				CE4142871881E8E600E5DB04 /* LobJobModel.m in Sources */,
+				CE4142881881E8EF00E5DB04 /* LobObjectModel.m in Sources */,
+				CE4142891881E8F100E5DB04 /* LobPackagingModel.m in Sources */,
+				CE41428A1881E8F800E5DB04 /* LobPostcardModel.m in Sources */,
+				CE41428B1881E8FC00E5DB04 /* LobServiceModel.m in Sources */,
+				CE41428C1881E8FE00E5DB04 /* LobSettingModel.m in Sources */,
+				CE41428D1881E90200E5DB04 /* LobStateModel.m in Sources */,
+				CE41428E1881E90500E5DB04 /* LobVerifyModel.m in Sources */,
+				CE4142811881E8CF00E5DB04 /* AbstractBlockRequest.m in Sources */,
+				CE4142821881E8D100E5DB04 /* LobRequest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CE9F681518773086006590CC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE9F67FD18773086006590CC /* lob-ios */;
+			targetProxy = CE9F681418773086006590CC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CE9F681A18773086006590CC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE9F681B18773086006590CC /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CE9F681F18773086006590CC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CE9F682018773086006590CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CE9F682218773086006590CC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/lob_ios.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "lob-ios/lob-ios-Prefix.pch";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s i386";
+			};
+			name = Debug;
+		};
+		CE9F682318773086006590CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/lob_ios.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "lob-ios/lob-ios-Prefix.pch";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s i386";
+			};
+			name = Release;
+		};
+		CE9F682518773086006590CC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "lob-ios/lob-ios-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "lob-iosTests/lob-iosTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lob.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		CE9F682618773086006590CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "lob-ios/lob-ios-Prefix.pch";
+				INFOPLIST_FILE = "lob-iosTests/lob-iosTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lob.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CE9F67F918773086006590CC /* Build configuration list for PBXProject "lob-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE9F681F18773086006590CC /* Debug */,
+				CE9F682018773086006590CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE9F682118773086006590CC /* Build configuration list for PBXNativeTarget "lob-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE9F682218773086006590CC /* Debug */,
+				CE9F682318773086006590CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE9F682418773086006590CC /* Build configuration list for PBXNativeTarget "lob-iosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE9F682518773086006590CC /* Debug */,
+				CE9F682618773086006590CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CE9F67F618773086006590CC /* Project object */;
+}
